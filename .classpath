@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="tests"/>
+	<classpathentry kind="lib" path="dist/lib/twitternews.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/javaee-api-5.0-2.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/twitter4j-core-4.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/twitter4j-stream-4.0.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.3.5.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/httpasyncclient-4.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-nio-4.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/guava-17.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/aws-java-sdk-1.8.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="lib/json-20140107.jar"/>
+	<classpathentry kind="output" path="build"/>
+</classpath>
