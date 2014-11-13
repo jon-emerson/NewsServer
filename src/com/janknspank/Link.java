@@ -122,7 +122,7 @@ public class Link {
     return o;
   }
 
-  public static void put(String originId, String destinationId) {
+  public static void put(String originId, String destinationId, Date now) {
     try {
       // See if updating the last found time updates any rows.  If it does,
       // we know we've already discovered this link before.
@@ -135,9 +135,9 @@ public class Link {
         // OK, so we didn't update anything.  Let's go ahead and insert.
         Link newLink = new Link.Builder()
             .setOriginId(originId)
-            .setDestinationId(GuidFactory.generate())
-            .setDiscoveryTime(new Date())
-            .setLastFoundTime(new Date())
+            .setDestinationId(destinationId)
+            .setDiscoveryTime(now)
+            .setLastFoundTime(now)
             .build();
         newLink.insert();
       }

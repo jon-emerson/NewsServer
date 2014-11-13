@@ -29,7 +29,6 @@ public class NewsSiteWhitelist {
     WHITELIST.add("examiner.com");
     WHITELIST.add("forbes.com");
     WHITELIST.add("foxnews.com");
-    WHITELIST.add("ft.com");
     WHITELIST.add("guardian.co.uk");
     WHITELIST.add("haaretz.com");
     WHITELIST.add("hindustantimes.com");
@@ -63,10 +62,16 @@ public class NewsSiteWhitelist {
   private static final HashSet<String> BLACKLIST = new HashSet<String>();
   static {
     BLACKLIST.add("classifieds.latimes.com");
+    BLACKLIST.add("dating.telegraph.co.uk");
     BLACKLIST.add("digitalservices.latimes.com");
+    BLACKLIST.add("dj.wsj.com");
     BLACKLIST.add("forums.abcnews.go.com");
     BLACKLIST.add("framework.latimes.com");
     BLACKLIST.add("games.latimes.com");
+    BLACKLIST.add("gardenshop.telegraph.co.uk");
+    BLACKLIST.add("jp.wsj.com");
+    BLACKLIST.add("mexico.cnn.com");
+    BLACKLIST.add("shop.telegraph.co.uk");
   }
 
   public static boolean isOkay(String url) {

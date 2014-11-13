@@ -65,10 +65,11 @@ public class TwitterCrawler implements twitter4j.StatusListener {
                 }
 
                 System.err.println("News URL found: " + longUrl);
-                String twitterUrl = "https://twitter.com/" + status.getUser().getScreenName() + "/status/" + status.getId();
-                DiscoveredUrl discoveredTwitterUrl = DiscoveredUrl.put(twitterUrl);
-                DiscoveredUrl newsUrl = DiscoveredUrl.put(longUrl);
-                Link.put(discoveredTwitterUrl.getId(), newsUrl.getId());
+                String twitterUrl = "https://twitter.com/" +
+                    status.getUser().getScreenName() + "/status/" + status.getId();
+                DiscoveredUrl discoveredTwitterUrl = DiscoveredUrl.put(twitterUrl, false);
+                DiscoveredUrl newsUrl = DiscoveredUrl.put(longUrl, true);
+                Link.put(discoveredTwitterUrl.getId(), newsUrl.getId(), newsUrl.getDiscoveryTime());
               }
             }
           });

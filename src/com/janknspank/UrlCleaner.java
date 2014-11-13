@@ -62,6 +62,12 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".msnbc.com") || url.getHost().equals("msnbc.com")) {
       queryParameters.remove("CID");
     }
+    if (url.getHost().equals("news.yahoo.com")) {
+      queryParameters.remove(".intl");
+      queryParameters.remove(".lang");
+      queryParameters.remove(".pg");
+      queryParameters.remove(".to");
+    }
     if (url.getHost().endsWith(".nytimes.com") || url.getHost().equals("nytimes.com")) {
       queryParameters.remove("_r");
       queryParameters.remove("emc");

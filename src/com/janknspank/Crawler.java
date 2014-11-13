@@ -7,17 +7,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.ccil.cowan.tagsoup.jaxp.SAXParserImpl;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import org.joda.time.DateTime;
-import org.joda.time.format.*;
 
 public class Crawler {
   public static final String ISO_8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
@@ -82,7 +87,9 @@ public class Crawler {
         throws SAXException {
       if ("a".equalsIgnoreCase(localName)) {
         String href = attrs.getValue("href");
-        if (href != null && (href.startsWith("http://") || href.startsWith("https://"))) {
+        if (href != null &&
+            !"nofollow".equalsIgnoreCase(attrs.getValue("rel")) &&
+            (href.startsWith("http://") || href.startsWith("https://"))) {
           try {
             Crawler.this.callback.foundUrl(new URL(baseUrl, href).toString());
           } catch (MalformedURLException e) {
@@ -121,16 +128,42 @@ public class Crawler {
 
         String itemprop = attrs.getValue("itemprop");
         if ("datePublished".equalsIgnoreCase(itemprop)) {
-          DateTime dateTime =
-              ISO_DATE_TIME_FORMAT.parseDateTime(attrs.getValue("content"));
-          dataBuilder.setPublishedTime(dateTime.toDate());
+          dataBuilder.setPublishedTime(parseDateTime(attrs.getValue("content")));
         }
         if ("dateModified".equalsIgnoreCase(itemprop)) {
-          DateTime dateTime =
-              ISO_DATE_TIME_FORMAT.parseDateTime(attrs.getValue("content"));
-          dataBuilder.setModifiedTime(dateTime.toDate());
+          dataBuilder.setModifiedTime(parseDateTime(attrs.getValue("content")));
         }
       }
+    }
+
+    private Date parseDateTime(String dateStr) {
+      Date date;
+      try {
+        // This is the most common date format.
+        date = ISO_DATE_TIME_FORMAT.parseDateTime(dateStr).toDate();
+      } catch (IllegalArgumentException e) {
+        // NYTimes sometimes uses this date format.
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+          date = format.parse(dateStr);
+        } catch (ParseException e2) {
+          // CBS News uses this date format.
+          SimpleDateFormat format2 = new SimpleDateFormat("MMMM dd, yyyy, hh:mm a");
+          try {
+            date = format2.parse(dateStr);
+          } catch (ParseException e3) {
+            // Chicago Tribune uses this format.
+            SimpleDateFormat format3 = new SimpleDateFormat("MMMM dd, yyyy");
+            try {
+              date = format3.parse(dateStr);
+            } catch (ParseException e4) {
+              e4.printStackTrace();
+              return null;
+            }
+          }
+        }
+      }
+      return date;
     }
   }
 
@@ -141,9 +174,25 @@ public class Crawler {
   public void crawl(DiscoveredUrl url) {
     try {
       HttpGet httpget = new HttpGet(url.getUrl());
-      CloseableHttpClient httpclient = HttpClients.createDefault();
 
-      CloseableHttpResponse response = httpclient.execute(httpget);
+      // Don't pick up cookies.
+      RequestConfig config = RequestConfig.custom()
+          .setCookieSpec(CookieSpecs.IGNORE_COOKIES)
+          .build();
+      CloseableHttpClient httpclient = HttpClients.custom()
+          .setDefaultRequestConfig(config)
+          .build();
+
+      // Avoid bugs in Apache Http Client from crashing our process.  E.g.
+      // https://issues.apache.org/jira/browse/HTTPCLIENT-1544
+      CloseableHttpResponse response;
+      try {
+        response = httpclient.execute(httpget);
+      } catch (NullPointerException e) {
+        e.printStackTrace();
+        return;
+      }
+
       File file = writeToFile(url.getId() + ".html", response.getEntity().getContent());
       SAXParserImpl.newInstance(null).parse(new FileInputStream(file), new SaxParser(url));
 

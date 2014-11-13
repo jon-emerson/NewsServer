@@ -7,7 +7,7 @@ import com.janknspank.Crawler.CrawlerCallback;
 public class TheMachine {
   public void start() {
     String originUrl = "http://www.latimes.com/about/la-sitemap-htmlstory.html";
-    DiscoveredUrl.put(originUrl);
+    DiscoveredUrl.put(originUrl, false);
 
     DiscoveredUrl startUrl = DiscoveredUrl.getNextUrlToCrawl();
     while (startUrl != null) {
@@ -30,8 +30,8 @@ public class TheMachine {
           }
 
           if (NewsSiteWhitelist.isOkay(url)) {
-            DiscoveredUrl destination = DiscoveredUrl.put(url);
-            Link.put(startUrlId, destination.getId());
+            DiscoveredUrl destination = DiscoveredUrl.put(url, false);
+            Link.put(startUrlId, destination.getId(), destination.getDiscoveryTime());
           }
         }
 
