@@ -2,6 +2,7 @@
 .settings
 
 /build
+/data
 /dist
 /lib
 /target

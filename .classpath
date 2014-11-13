@@ -19,5 +19,7 @@
 	<classpathentry kind="lib" path="lib/aws-java-sdk-1.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
 	<classpathentry kind="lib" path="lib/json-20140107.jar"/>
+	<classpathentry kind="lib" path="lib/tagsoup-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-2.5.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
