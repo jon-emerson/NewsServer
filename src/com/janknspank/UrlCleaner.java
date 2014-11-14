@@ -107,8 +107,8 @@ public class UrlCleaner {
       queryParameters.remove("replytocom");
       queryParameters.remove("track");
     }
-    if (url.getHost().endsWith(".msnbc.com") || url.getHost().equals("msnbc.com")) {
-      queryParameters.remove("CID");
+    if (url.getHost().endsWith(".mashable.com") || url.getHost().equals("mashable.com")) {
+      queryParameters.remove("utm_cid");
     }
     if (url.getHost().endsWith(".msnbc.com") || url.getHost().equals("msnbc.com")) {
       queryParameters.remove("CID");
@@ -160,6 +160,9 @@ public class UrlCleaner {
       queryParameters.remove("feedName");
       queryParameters.remove("feedType");
       queryParameters.remove("rpc");
+    }
+    if (url.getHost().endsWith(".sfgate.com") || url.getHost().equals("sfgate.com")) {
+      queryParameters.remove("cmpid");
     }
     if (url.getHost().endsWith(".theguardian.com") || url.getHost().equals("theguardian.com")) {
       queryParameters.remove("CMP");

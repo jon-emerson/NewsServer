@@ -227,7 +227,8 @@ public class NewsSiteWhitelist {
           path.endsWith(".mp3") ||
           path.endsWith(".mp4") ||
           path.endsWith(".mpeg") ||
-          path.endsWith(".pdf")) {
+          path.endsWith(".pdf") ||
+          path.endsWith(".png")) {
         return false;
       }
 
