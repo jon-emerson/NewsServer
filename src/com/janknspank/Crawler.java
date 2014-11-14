@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +29,12 @@ public class Crawler {
   public static final String ISO_8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
   private static final DateTimeFormatter ISO_DATE_TIME_FORMAT =
       DateTimeFormat.forPattern(ISO_8601_DATE_FORMAT).withOffsetParsed();
+  private static final DateFormat[] KNOWN_DATE_FORMATS = {
+      new SimpleDateFormat("MMMM dd, yyyy, hh:mm a"), // CBS News.
+      new SimpleDateFormat("MMMM dd, yyyy"), // Chicago Tribune.
+      new SimpleDateFormat("yyyy-MM-dd"), // New York Times.
+      new SimpleDateFormat("yyyyMMdd") // Washington Post.
+  };
   private final CrawlerCallback callback;
 
   public interface CrawlerCallback {
@@ -137,33 +144,23 @@ public class Crawler {
     }
 
     private Date parseDateTime(String dateStr) {
-      Date date;
+      if (dateStr == null) {
+        return null;
+      }
       try {
         // This is the most common date format.
-        date = ISO_DATE_TIME_FORMAT.parseDateTime(dateStr).toDate();
+        return ISO_DATE_TIME_FORMAT.parseDateTime(dateStr).toDate();
       } catch (IllegalArgumentException e) {
-        // NYTimes sometimes uses this date format.
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-          date = format.parse(dateStr);
-        } catch (ParseException e2) {
-          // CBS News uses this date format.
-          SimpleDateFormat format2 = new SimpleDateFormat("MMMM dd, yyyy, hh:mm a");
+        for (DateFormat format : KNOWN_DATE_FORMATS) {
           try {
-            date = format2.parse(dateStr);
-          } catch (ParseException e3) {
-            // Chicago Tribune uses this format.
-            SimpleDateFormat format3 = new SimpleDateFormat("MMMM dd, yyyy");
-            try {
-              date = format3.parse(dateStr);
-            } catch (ParseException e4) {
-              e4.printStackTrace();
-              return null;
-            }
+            return format.parse(dateStr);
+          } catch (ParseException e2) {
+            // This is OK - we just don't match.  Try the next one.
           }
         }
       }
-      return date;
+      System.err.println("COULD NOT PARSE DATE: " + dateStr);
+      return null;
     }
   }
 
@@ -193,10 +190,14 @@ public class Crawler {
         return;
       }
 
-      File file = writeToFile(url.getId() + ".html", response.getEntity().getContent());
-      SAXParserImpl.newInstance(null).parse(new FileInputStream(file), new SaxParser(url));
+      // TODO(jonemerson): Should we update the database if we were
+      // redirected, so that it now points at the canonical URL?
+      if (response.getStatusLine().getStatusCode() == 200) {
+        File file = writeToFile(url.getId() + ".html", response.getEntity().getContent());
+        SAXParserImpl.newInstance(null).parse(new FileInputStream(file), new SaxParser(url));
+      }
 
-    } catch (SAXException | IOException e) {
+    } catch (SAXException | IOException | IllegalArgumentException e) {
       e.printStackTrace();
     }
   }

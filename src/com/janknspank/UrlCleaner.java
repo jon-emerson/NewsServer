@@ -36,43 +36,107 @@ public class UrlCleaner {
     queryParameters.remove("utm_hp_ref");
     queryParameters.remove("utm_term");
     queryParameters.remove("utm_source");
+    if (url.getHost().endsWith(".abc.net.au") || url.getHost().equals("abc.net.au")) {
+      queryParameters.remove("pfm");
+    }
     if (url.getHost().endsWith(".abcnews.go.com") || url.getHost().equals("abcnews.go.com")) {
       if (queryParameters.containsKey("page") && queryParameters.get("page").equals("1")) {
         queryParameters.remove("page");
       }
+    }
+    if (url.getHost().endsWith(".bloomberg.com") || url.getHost().equals("bloomberg.com")) {
+      queryParameters.remove("hootPostID");
+    }
+    if (url.getHost().endsWith(".boston.com") || url.getHost().equals("boston.com")) {
+      queryParameters.remove("p1");
+    }
+    if (url.getHost().endsWith(".businessweek.com") || url.getHost().equals("businessweek.com")) {
+      queryParameters.remove("hootPostID");
     }
     if (url.getHost().endsWith(".cnn.com") || url.getHost().equals("cnn.com")) {
       queryParameters.remove("eref");
       queryParameters.remove("hpt");
       queryParameters.remove("iid");
       queryParameters.remove("iref");
+      queryParameters.remove("nbd");
+      queryParameters.remove("npt");
       queryParameters.remove("sr");
+      queryParameters.remove("source");
+      queryParameters.remove("_s");
+    }
+    if (url.getHost().endsWith(".chicagotribune.com") || url.getHost().equals("chicagotribune.com")) {
+      queryParameters.remove("cid");
+    }
+    if (url.getHost().endsWith(".economist.com") || url.getHost().equals("economist.com")) {
+      queryParameters.remove("fsrc");
     }
     if (url.getHost().endsWith(".forbes.com") || url.getHost().equals("forbes.com")) {
+      queryParameters.remove("commentId");
+      queryParameters.remove("feed");
       queryParameters.remove("linkId");
     }
+    if (url.getHost().endsWith(".foxnews.com") || url.getHost().equals("foxnews.com")) {
+      queryParameters.remove("cmpid");
+      queryParameters.remove("intcmp");
+    }
+    if (url.getHost().endsWith(".guardian.co.uk") || url.getHost().equals("guardian.co.uk")) {
+      queryParameters.remove("intcmp");
+      queryParameters.remove("INTCMP");
+    }
     if (url.getHost().endsWith(".huffingtonpost.com") || url.getHost().equals("huffingtonpost.com")) {
+      // "ir" might be bad to remove.  It controls which header people see on the top of the page.
+      // But I'm removing it because it's better to consolidate the same articles.
+      queryParameters.remove("ir"); 
+
+      queryParameters.remove("m");
       queryParameters.remove("ncid");
     }
     if (url.getHost().endsWith(".latimes.com") || url.getHost().equals("latimes.com")) {
       queryParameters.remove("akst_action");
+      queryParameters.remove("dlvrit");
       queryParameters.remove("replytocom");
       queryParameters.remove("track");
     }
     if (url.getHost().endsWith(".msnbc.com") || url.getHost().equals("msnbc.com")) {
       queryParameters.remove("CID");
     }
-    if (url.getHost().equals("news.yahoo.com")) {
+    if (url.getHost().endsWith(".msnbc.com") || url.getHost().equals("msnbc.com")) {
+      queryParameters.remove("CID");
+    }
+    if (url.getHost().endsWith(".nationalgeographic.com") ||
+        url.getHost().equals("nationalgeographic.com")) {
+      queryParameters.remove("now");
+    }
+    if (url.getHost().endsWith(".news.yahoo.com") || url.getHost().equals("news.yahoo.com")) {
+      queryParameters.remove(".b");
+      queryParameters.remove(".h");
       queryParameters.remove(".intl");
       queryParameters.remove(".lang");
-      queryParameters.remove(".pg");
+      queryParameters.remove(".nx");
       queryParameters.remove(".to");
+      queryParameters.remove(".show_comments");
+      queryParameters.remove("_esi");
+      queryParameters.remove("_intl");
+      queryParameters.remove("_lang");
+      queryParameters.remove("_lf");
+      queryParameters.remove("_orig");
+      queryParameters.remove("soc_src");
+      queryParameters.remove("soc_trk");
     }
     if (url.getHost().endsWith(".nytimes.com") || url.getHost().equals("nytimes.com")) {
       queryParameters.remove("_r");
+      queryParameters.remove("WT_nav");
+      queryParameters.remove("action");
       queryParameters.remove("emc");
+      queryParameters.remove("hp");
+      queryParameters.remove("inline");
+      queryParameters.remove("module");
+      queryParameters.remove("nl"); // Found on http://learning.blogs.nytimes.com/.
+      queryParameters.remove("nlid"); // Found on http://learning.blogs.nytimes.com/.
       queryParameters.remove("pagewanted");
       queryParameters.remove("partner");
+      queryParameters.remove("pgtype");
+      queryParameters.remove("region");
       queryParameters.remove("scp");
       queryParameters.remove("smid");
       queryParameters.remove("sq");
@@ -91,8 +155,14 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".thehindu.com") || url.getHost().equals("thehindu.com")) {
       queryParameters.remove("homepage");
     }
+    if (url.getHost().endsWith(".washingtonpost.com") ||
+        url.getHost().equals("washingtonpost.com")) {
+      queryParameters.remove("tid");
+    }
     if (url.getHost().endsWith(".wsj.com") || url.getHost().equals("wjs.com")) {
       queryParameters.remove("mg");
+      queryParameters.remove("mod");
+      queryParameters.remove("tesla");
     }
 
     // Recreate the URL with alphabetized query parameters, lowercased scheme
