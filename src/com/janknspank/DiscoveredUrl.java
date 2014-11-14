@@ -40,7 +40,8 @@ public class DiscoveredUrl {
   private static final String SELECT_BY_ID_COMMAND =
       "SELECT * FROM " + TABLE_NAME_STR + " WHERE " + URL_STR + " =?";
   private static final String SELECT_NEXT_URL_TO_CRAWL =
-      "SELECT * FROM " + TABLE_NAME_STR + " WHERE " + LAST_CRAWL_TIME_STR + " IS NULL " +
+      "SELECT * FROM " + TABLE_NAME_STR + " WHERE " + LAST_CRAWL_TIME_STR + " IS NULL AND " +
+      "NOT " + URL_STR + " LIKE \"https://twitter.com/%\" " +
       "ORDER BY " + TWEET_COUNT_STR + " DESC, " + DISCOVERY_TIME_STR + " DESC LIMIT 1";
   private static final String UPDATE_LAST_CRAWL_TIME_COMMAND =
       "UPDATE " + TABLE_NAME_STR + " SET " + LAST_CRAWL_TIME_STR + " =? " +
@@ -48,6 +49,8 @@ public class DiscoveredUrl {
   private static final String INCREMENT_TWEET_COUNT_COMMAND =
       "UPDATE " + TABLE_NAME_STR + " SET " + TWEET_COUNT_STR + "=" +
       TWEET_COUNT_STR + "+1 WHERE " + ID_STR + "=?";
+  private static final String DELETE_COMMAND =
+      "DELETE FROM " + TABLE_NAME_STR + " WHERE " + ID_STR + " =?";
 
   private String url;
   private String id;
@@ -180,6 +183,16 @@ public class DiscoveredUrl {
       statement.setString(1, this.id);
       statement.executeUpdate();
       this.tweetCount += 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void delete() {
+    try {
+      PreparedStatement statement = MysqlHelper.getInstance().prepareStatement(DELETE_COMMAND);
+      statement.setString(1, this.id);
+      statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }

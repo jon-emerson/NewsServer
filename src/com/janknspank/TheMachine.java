@@ -9,12 +9,19 @@ public class TheMachine {
     String originUrl = "http://www.latimes.com/about/la-sitemap-htmlstory.html";
     DiscoveredUrl.put(originUrl, false);
 
-    DiscoveredUrl startUrl = DiscoveredUrl.getNextUrlToCrawl();
-    while (startUrl != null) {
+    while (true) {
+      final DiscoveredUrl startUrl = DiscoveredUrl.getNextUrlToCrawl();
+
+      if (!NewsSiteWhitelist.isOkay(startUrl.getUrl())) {
+        System.err.println("Removing now-blacklisted site: " + startUrl.getUrl());
+        Link.deleteId(startUrl.getId());
+        startUrl.delete();
+        continue;
+      }
+
       System.err.println("Crawling: " + startUrl.getUrl());
       if (!startUrl.markAsCrawled()) {
         // Some other thread has likely claimed this URL - Go get another.
-        startUrl = DiscoveredUrl.getNextUrlToCrawl();
         continue;
       }
 
@@ -40,9 +47,6 @@ public class TheMachine {
           data.insert();
         }
       }).crawl(startUrl);
-
-      // Get the next URL.
-      startUrl = DiscoveredUrl.getNextUrlToCrawl();
     }
   }
 

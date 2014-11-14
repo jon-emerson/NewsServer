@@ -37,12 +37,19 @@ public class UrlCleaner {
     queryParameters.remove("utm_term");
     queryParameters.remove("utm_source");
     if (url.getHost().endsWith(".abc.net.au") || url.getHost().equals("abc.net.au")) {
+      queryParameters.remove("cid");
       queryParameters.remove("pfm");
     }
     if (url.getHost().endsWith(".abcnews.go.com") || url.getHost().equals("abcnews.go.com")) {
       if (queryParameters.containsKey("page") && queryParameters.get("page").equals("1")) {
         queryParameters.remove("page");
       }
+    }
+    if (url.getHost().endsWith(".arstechnica.com") || url.getHost().equals("arstechnica.com")) {
+      queryParameters.remove("comments");
+      queryParameters.remove("post");
+      queryParameters.remove("theme");
+      queryParameters.remove("view");
     }
     if (url.getHost().endsWith(".bloomberg.com") || url.getHost().equals("bloomberg.com")) {
       queryParameters.remove("hootPostID");
@@ -52,6 +59,9 @@ public class UrlCleaner {
     }
     if (url.getHost().endsWith(".businessweek.com") || url.getHost().equals("businessweek.com")) {
       queryParameters.remove("hootPostID");
+    }
+    if (url.getHost().endsWith(".chron.com") || url.getHost().equals("chron.com")) {
+      queryParameters.remove("cmpid");
     }
     if (url.getHost().endsWith(".cnn.com") || url.getHost().equals("cnn.com")) {
       queryParameters.remove("eref");
@@ -108,6 +118,9 @@ public class UrlCleaner {
       queryParameters.remove("now");
     }
     if (url.getHost().endsWith(".news.yahoo.com") || url.getHost().equals("news.yahoo.com")) {
+      if (queryParameters.containsKey(".pg") && queryParameters.get(".pg").equals("1")) {
+        queryParameters.remove(".pg");
+      }
       queryParameters.remove(".b");
       queryParameters.remove(".h");
       queryParameters.remove(".intl");

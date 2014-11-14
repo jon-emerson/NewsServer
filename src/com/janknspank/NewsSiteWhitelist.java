@@ -169,6 +169,9 @@ public class NewsSiteWhitelist {
       if (domain.endsWith("abcnews.go.com") && path.startsWith("/meta/")) {
         return false;
       }
+      if (domain.endsWith("arstechnica.com") && path.startsWith("/civis/")) {
+        return false;
+      }
       if (domain.endsWith("bbc.co.uk") && path.startsWith("/mpapps/pagetools/")) {
         return false;
       }

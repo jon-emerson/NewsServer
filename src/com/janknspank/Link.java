@@ -40,9 +40,13 @@ public class Link {
       "    " + DESTINATION_ID_STR + ", " +
       "    " + DISCOVERY_TIME_STR + ", " +
       "    " + LAST_FOUND_TIME_STR + ") VALUES (?, ?, ?, ?)";
-  private static final String UPDATE_LAST_FOUND_TIME =
+  private static final String UPDATE_LAST_FOUND_TIME_COMMAND =
       "UPDATE " + TABLE_NAME_STR + " SET " + LAST_FOUND_TIME_STR + " =? WHERE " +
       "    " + ORIGIN_ID_STR + " =? AND" +
+      "    " + DESTINATION_ID_STR + " =?";
+  private static final String DELETE_COMMAND =
+      "DELETE FROM " + TABLE_NAME_STR + " WHERE " +
+      "    " + ORIGIN_ID_STR + " =? OR" +
       "    " + DESTINATION_ID_STR + " =?";
 
   private String originId;
@@ -127,7 +131,7 @@ public class Link {
       // See if updating the last found time updates any rows.  If it does,
       // we know we've already discovered this link before.
       PreparedStatement statement =
-          MysqlHelper.getInstance().prepareStatement(UPDATE_LAST_FOUND_TIME);
+          MysqlHelper.getInstance().prepareStatement(UPDATE_LAST_FOUND_TIME_COMMAND);
       statement.setDate(1, new java.sql.Date(System.currentTimeMillis()));
       statement.setString(2, originId);
       statement.setString(3, destinationId);
@@ -142,6 +146,21 @@ public class Link {
         newLink.insert();
       }
     } catch (ValidationException | SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Deletes any links coming to or from the passed discovered URL ID.
+   */
+  public static void deleteId(String id) {
+    try {
+      PreparedStatement statement =
+          MysqlHelper.getInstance().prepareStatement(DELETE_COMMAND);
+      statement.setString(1, id);
+      statement.setString(2, id);
+      statement.executeUpdate();
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }
