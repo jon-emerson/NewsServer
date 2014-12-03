@@ -207,6 +207,9 @@ public class NewsSiteWhitelist {
       if (domain.endsWith(".nj.com") && path.endsWith("/print.html")) {
         return false;
       }
+      if (domain.endsWith("telegraph.co.uk") && path.startsWith("/sponsored/")) {
+        return false;
+      }
       if (domain.endsWith("usatoday.com") && path.startsWith("/marketing/rss/")) {
         return false;
       }
