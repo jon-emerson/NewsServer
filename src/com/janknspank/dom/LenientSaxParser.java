@@ -9,14 +9,15 @@ import org.xml.sax.DTDHandler;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
+import org.xml.sax.Parser;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
 
+@SuppressWarnings("deprecation")
 public class LenientSaxParser extends SAXParser {
 
-  @SuppressWarnings("deprecation")
   @Override
   public Parser getParser() throws SAXException {
     return null;
