@@ -26,7 +26,7 @@ public class Engine {
 
     CloseableHttpResponse response = httpclient.execute(httpget);
     if (response.getStatusLine().getStatusCode() == 200) {
-      return new SaxParser(response.getEntity().getContent()).getDocumentNode();
+      return new HtmlHandler(response.getEntity().getContent()).getDocumentNode();
     }
     throw new IOException("Bad response, status code = " +
         response.getStatusLine().getStatusCode());

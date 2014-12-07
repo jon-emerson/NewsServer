@@ -11,11 +11,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class SaxParser extends DefaultHandler {
+public class HtmlHandler extends DefaultHandler {
   private DocumentNode documentNode;
   private Node currentNode = documentNode;
 
-  public SaxParser(InputStream inputStream) {
+  public HtmlHandler(InputStream inputStream) {
     reset();
     SAXParserFactory spf = SAXParserFactory.newInstance();
     spf.setValidating(false);
