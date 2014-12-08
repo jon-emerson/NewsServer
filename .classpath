@@ -22,5 +22,10 @@
 	<classpathentry kind="lib" path="lib/tagsoup-1.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/joda-time-2.5.jar"/>
 	<classpathentry kind="lib" path="lib/opennlp-tools-1.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-server-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-servlet-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-servlets-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-util-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-webapp-9.2.1.v20140609.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
