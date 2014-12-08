@@ -2,30 +2,36 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="tests"/>
-	<classpathentry kind="lib" path="dist/lib/twitternews.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/javaee-api-5.0-2.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/twitter4j-core-4.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/twitter4j-stream-4.0.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/httpclient-4.3.5.jar"/>
-	<classpathentry kind="lib" path="lib/httpcore-4.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/httpasyncclient-4.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/httpcore-nio-4.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/guava-17.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/aws-java-sdk-1.8.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="lib/json-20140107.jar"/>
-	<classpathentry kind="lib" path="lib/tagsoup-1.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/joda-time-2.5.jar"/>
-	<classpathentry kind="lib" path="lib/opennlp-tools-1.5.3.jar"/>
-	<classpathentry kind="lib" path="lib/jetty-server-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="lib/jetty-servlet-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="lib/jetty-servlets-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="lib/jetty-util-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="lib/jetty-webapp-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="target/dependency/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="target/dependency/guava-17.0.jar"/>
+	<classpathentry kind="lib" path="target/dependency/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="target/dependency/httpasyncclient-4.0.2.jar"/>
+	<classpathentry kind="lib" path="target/dependency/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="target/dependency/httpcore-4.3.2.jar"/>
+	<classpathentry kind="lib" path="target/dependency/httpcore-nio-4.3.2.jar"/>
+	<classpathentry kind="lib" path="target/dependency/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-continuation-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-http-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-io-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-security-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-server-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-servlet-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-servlets-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-util-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-webapp-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-xml-9.2.1.v20140609.jar"/>
+	<classpathentry kind="lib" path="target/dependency/joda-time-2.5.jar"/>
+	<classpathentry kind="lib" path="target/dependency/json-20140107.jar"/>
+	<classpathentry kind="lib" path="target/dependency/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jwnl-1.3.3.jar"/>
+	<classpathentry kind="lib" path="target/dependency/mysql-connector-java-5.1.34.jar"/>
+	<classpathentry kind="lib" path="target/dependency/opennlp-maxent-3.0.3.jar"/>
+	<classpathentry kind="lib" path="target/dependency/opennlp-tools-1.5.3.jar"/>
+	<classpathentry kind="lib" path="target/dependency/tagsoup-1.2.1.jar"/>
+	<classpathentry kind="lib" path="target/dependency/twitter4j-core-4.0.2.jar"/>
+	<classpathentry kind="lib" path="target/dependency/twitter4j-stream-4.0.2.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
