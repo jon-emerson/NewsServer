@@ -8,7 +8,7 @@ public class NewsServer {
     int port = (System.getenv("PORT") == null) ? 5000 : Integer.valueOf(System.getenv("PORT"));
     Server server = new Server(port);
 
-    // Use web.xml as the definition for this server's endpoints.
+    // Use web.xml as the definition for this server's end points.
     WebAppContext root = new WebAppContext();
     root.setDescriptor("WEB-INF/web.xml");
     root.setResourceBase("");
