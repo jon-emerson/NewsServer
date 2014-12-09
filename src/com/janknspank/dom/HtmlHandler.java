@@ -3,10 +3,6 @@ package com.janknspank.dom;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.ccil.cowan.tagsoup.jaxp.SAXParserImpl;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -14,23 +10,14 @@ import org.xml.sax.helpers.DefaultHandler;
 public class HtmlHandler extends DefaultHandler {
   private DocumentNode documentNode;
   private Node currentNode = documentNode;
+  private int depth = 0;
 
   public HtmlHandler(InputStream inputStream) {
     reset();
-    SAXParserFactory spf = SAXParserFactory.newInstance();
-    spf.setValidating(false);
-    spf.setNamespaceAware(true);
     try {
-      spf.newSAXParser().parse(inputStream, this);
-    } catch (SAXException | IOException | ParserConfigurationException e) {
-      System.err.println("BAD HTML - FALLING BACK TO TAGSOUP!");
-      e.printStackTrace();
-      try {
-        reset();
-        SAXParserImpl.newInstance(null).parse(inputStream, this);
-      } catch (SAXException | IOException e2) {
-        throw new RuntimeException(e2);
-      }
+      new LenientSaxParser().parse(inputStream, this);
+    } catch (SAXException | IOException e) {
+      throw new RuntimeException(e);
     }
   }
 
@@ -45,8 +32,12 @@ public class HtmlHandler extends DefaultHandler {
 
   @Override
   public void characters(char[] ch, int start, int length) throws SAXException {
-    System.out.println("TEXT: " + String.copyValueOf(ch, start, length));
-    currentNode.addChildText(String.copyValueOf(ch, start, length));
+    String s = String.copyValueOf(ch, start, length);
+    if (s.trim().length() > 0) {
+      printSpaces();
+      System.out.println("TEXT: " + s.trim());
+    }
+    currentNode.addChildText(s);
   }
 
   @Override
@@ -60,13 +51,15 @@ public class HtmlHandler extends DefaultHandler {
   public void endElement(String namespaceURI,
       String localName,
       String qName) throws SAXException {
-    System.out.println("END: " + localName + ", " + qName);
+    --depth;
+    printSpaces();
+    System.out.println("</" + qName + ">");
 
     // Clean up text nodes.
     currentNode.condenseTextChildren();
 
     while (!(currentNode instanceof DocumentNode) &&
-        !currentNode.getTagName().equalsIgnoreCase(localName)) {
+        !currentNode.getTagName().equalsIgnoreCase(qName)) {
       currentNode = currentNode.getParent();
     }
     if (!(currentNode instanceof DocumentNode)) {
@@ -80,12 +73,20 @@ public class HtmlHandler extends DefaultHandler {
       String qName,
       Attributes attrs)
       throws SAXException {
-    System.out.println("START: " + localName + ", " + qName);
+    printSpaces();
+    System.out.println("<" + qName + ">");
+    ++depth;
 
-    currentNode = new Node(currentNode, localName);
+    currentNode = new Node(currentNode, qName);
     currentNode.getParent().addChildNode(currentNode);
     for (int i = 0; i < attrs.getLength(); i++) {
-      currentNode.addAttribute(attrs.getLocalName(i), attrs.getValue(i));
+      currentNode.addAttribute(attrs.getQName(i), attrs.getValue(i));
+    }
+  }
+  
+  private void printSpaces() {
+    for (int i = 0; i < depth; i++) {
+      System.out.print("  ");
     }
   }
 }

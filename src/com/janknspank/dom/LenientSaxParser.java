@@ -3,6 +3,7 @@ package com.janknspank.dom;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -292,15 +293,74 @@ public class LenientSaxParser extends SAXParser {
               // Append the > now, so it's included in our call to handleElement.
               currentBlock.append(c);
               append = false;
-              handleElement(currentBlock.toString());
+              String tagName = handleElement(currentBlock.toString());
               currentBlock.setLength(0);
               state = ParserState.DEFAULT;
+
+              // In the case of <script> tags, due the the allowed complexity
+              // within their bodies, we must look explicitly for </script>
+              // before we continue processing the document.
+              if ("script".equalsIgnoreCase(tagName)) {
+                StringBuilder scriptBuilder = new StringBuilder();
+                characterInt = reader.read();
+                char[] scriptEndTrigger = ("</" + tagName).toCharArray();
+                char[] scriptEndHelperBuffer = new char[scriptEndTrigger.length];
+                while (characterInt >= 0) {
+                  scriptBuilder.append((char) characterInt);
+                  scriptBuilder.getChars(
+                      /* srcBegin */ Math.max(0, scriptBuilder.length() - scriptEndHelperBuffer.length),
+                      /* srcEnd */ scriptBuilder.length(),
+                      /* dst */ scriptEndHelperBuffer,
+                      /* dstBegin */ 0);
+                  if (Arrays.equals(scriptEndTrigger, scriptEndHelperBuffer)) {
+                    // We're at the end.  Remove "</script", send everything we got to
+                    // characters(), send an endElement() for the script, and move the
+                    // reader's cursor past the > from the </script>.
+                    scriptBuilder.replace(scriptBuilder.length() - scriptEndHelperBuffer.length,
+                        scriptBuilder.length(), "");
+                    char[] characters = new char[scriptBuilder.length()];
+                    scriptBuilder.getChars(0, characters.length, characters, 0);
+                    handler.characters(characters, 0, characters.length);
+                    handler.endElement("", "", tagName);
+                    while (characterInt >= 0 && ((char) characterInt) != '>') {
+                      characterInt = reader.read();
+                    }
+                    break;
+                  }
+                  characterInt = reader.read();
+                }
+              }
             }
             break;
         }
         if (append) {
           currentBlock.append(c);
         }
+
+        // Handle XML <!-- comments -->!
+        if (state == ParserState.INSIDE_ELEMENT &&
+            currentBlock.length() == 4 &&
+            "<!--".equals(currentBlock.toString())) {
+          // Iterate until we find the end of comment.  Since the end-of-comment
+          // specifier has 3 characters, it's difficult to do in this per-
+          // character state machine without resorting to 3 states.
+          StringBuilder seeker = new StringBuilder();
+          characterInt = reader.read();
+          while (characterInt >= 0) {
+            if (seeker.length() > 2) {
+              seeker.replace(0, 1, "");
+            }
+            seeker.append((char) characterInt);
+            if ("-->".equals(seeker.toString())) {
+              break;
+            }
+            characterInt = reader.read();
+          }
+          currentBlock.setLength(0);
+          state = ParserState.DEFAULT;
+        }
+
+        // Let's go again!
         characterInt = reader.read();
       }
 
@@ -310,8 +370,9 @@ public class LenientSaxParser extends SAXParser {
     /**
      * Takes an element of the form "<?foo?>", "<foo>", "<foo/>", or "</foo>"
      * and calls the appropriate method on the Handler for it.
+     * @return the name of the tag that was handled
      */
-    private void handleElement(String text) throws SAXException {
+    private String handleElement(String text) throws SAXException {
       if (text.startsWith("<?")) {
         if (text.endsWith("?>")) {
           int spaceIndex = text.indexOf(' ');
@@ -324,6 +385,12 @@ public class LenientSaxParser extends SAXParser {
         } else {
           handler.processingInstruction(text.substring(2,  text.length() - 1), null);
         }
+      } else if (text.startsWith("<!")) {
+        if (text.startsWith("<!--")) {
+          throw new IllegalStateException(
+              "Handle element should only be called for elements, not comments.");
+        }
+        // Ignore this.  It's most likely a !DOCTYPE declaration, and we don't care.
       } else if (text.startsWith("</")) {
         int spaceIndex = text.indexOf(" ");
         if (spaceIndex > 0) {
@@ -341,7 +408,9 @@ public class LenientSaxParser extends SAXParser {
         if (interpreter.isSelfClosing()) {
           handler.endElement("", "", interpreter.getTag());
         }
+        return interpreter.getTag();
       }
+      return null;
     }
 
     @Override

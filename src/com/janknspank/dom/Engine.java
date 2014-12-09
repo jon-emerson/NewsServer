@@ -1,6 +1,7 @@
 package com.janknspank.dom;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.config.RequestConfig;
@@ -55,14 +56,16 @@ public class Engine {
   }
 
   public static void main(String args[]) throws Exception {
-    DocumentNode node = crawl("http://www.nytimes.com/2014/02/23/opinion/sunday/" +
-        "friedman-how-to-get-a-job-at-google.html");
-    //DocumentNode node = crawl("http://www.nytimes.com/2014/09/25/technology/" +
-    //    "exposing-hidden-biases-at-google-to-improve-diversity.html");
-    printNode(node, 0);
+//    DocumentNode node = crawl("http://www.nytimes.com/2014/02/23/opinion/sunday/" +
+ //       "friedman-how-to-get-a-job-at-google.html");
+    DocumentNode node = crawl("http://www.nytimes.com/2014/09/25/technology/" +
+        "exposing-hidden-biases-at-google-to-improve-diversity.html");
 //    DocumentNode node = crawl("http://www.nytimes.com/2014/12/04/us/politics/" +
 //        "roy-h-beck-quietly-leads-a-grass-roots-army.html");
-    List<Node> paragraphs = node.findAll("article > p");
+    printNode(node, 0);
+    List<Node> paragraphs = new ArrayList<>();
+    paragraphs.addAll(node.findAll("article > p"));
+    paragraphs.addAll(node.findAll("article > div > p"));
 
     SortedMultiset<String> names = TreeMultiset.create();
     SortedMultiset<String> organizations = TreeMultiset.create();
