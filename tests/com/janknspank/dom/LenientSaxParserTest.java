@@ -53,9 +53,18 @@ public class LenientSaxParserTest {
   public void testLenientSaxParser() throws Exception {
     // This would be much better as a Mockito test...
 
-    String html = "  <?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r" +
-        "<html><head><title>Hello!</title></head>" +
+    String html = "<!DOCTYPE html>" +
+        "  <?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r" +
+        "<html><head><title>Hello!</title>" +
+        "<script type=\"text/javascript\">" +
+        "  if (5<Number.MAX_VALUE && 2 > 3) alert('yup');" +
+        "</script >" +
+        "<STYLE type=\"text/css\">" +
+        "  .let's let random < crap > be here for safety !!<<<" +
+        "</STYLE>" +
+        "</head>" +
         "<body onload='alert(\"moose!\")'>Get <b>ready</b>..." +
+        "<!-- any comments and <tag>s inside should be ignored! --->" +
         "<img src='image.jpg' width=500 height=600 title=\"Monster!\"/>" +
         "</body></html>";
     LenientSaxParser parser = new LenientSaxParser();
@@ -63,6 +72,8 @@ public class LenientSaxParserTest {
     stringsToFind.add("  ");
     stringsToFind.add("\r");
     stringsToFind.add("Hello!");
+    stringsToFind.add("  if (5<Number.MAX_VALUE && 2 > 3) alert('yup');");
+    stringsToFind.add("  .let's let random < crap > be here for safety !!<<<");
     stringsToFind.add("Get ");
     stringsToFind.add("ready");
     stringsToFind.add("...");
@@ -71,12 +82,16 @@ public class LenientSaxParserTest {
     tagsToFind.add("html");
     tagsToFind.add("head");
     tagsToFind.add("title");
+    tagsToFind.add("script");
+    tagsToFind.add("STYLE");
     tagsToFind.add("body");
     tagsToFind.add("b");
     tagsToFind.add("img");
 
     final Set<String> endTagsToFind = new HashSet<String>();
     endTagsToFind.add("title");
+    endTagsToFind.add("script");
+    endTagsToFind.add("STYLE");
     endTagsToFind.add("head");
     endTagsToFind.add("b");
     endTagsToFind.add("img");

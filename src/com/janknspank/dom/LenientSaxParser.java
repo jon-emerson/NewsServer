@@ -42,11 +42,37 @@ public class LenientSaxParser extends SAXParser {
     private Attributes2Impl attributes = new Attributes2Impl();
 
     private enum InterpreterState {
+      /**
+       * We're still gathering characters for the tag name.
+       */
       TAG,
+
+      /**
+       * We're after the tag, but we're not sure if we'll end up in an attribute
+       * name or find a > next.
+       */
       ENIGMATIC_VOID,
+
+      /**
+       * We're collecting an attribute's name.
+       */
       ATTRIBUTE_NAME,
+
+      /**
+       * We're collecting an attribute's value, but haven't yet seen any quotes.
+       */
       ATTRIBUTE_VALUE,
+
+      /**
+       * We're collecting an attribute's value, and it's wrapped in a single
+       * quote (so it'll be terminated with a single quote).
+       */
       ATTRIBUTE_VALUE_INSIDE_SINGLE_QUOTE,
+
+      /**
+       * We're collecting an attribute's value, and it's wrapped in a double
+       * quote (so it'll be terminated with a double quote).
+       */
       ATTRIBUTE_VALUE_INSIDE_DOUBLE_QUOTE;
     }
 
@@ -297,10 +323,10 @@ public class LenientSaxParser extends SAXParser {
               currentBlock.setLength(0);
               state = ParserState.DEFAULT;
 
-              // In the case of <script> tags, due the the allowed complexity
-              // within their bodies, we must look explicitly for </script>
-              // before we continue processing the document.
-              if ("script".equalsIgnoreCase(tagName)) {
+              // In the case of <script> and <style> tags, due the the allowed
+              // complexity within their bodies, we must look explicitly for
+              // </script> before we continue processing the document.
+              if ("script".equalsIgnoreCase(tagName) || "style".equalsIgnoreCase(tagName)) {
                 StringBuilder scriptBuilder = new StringBuilder();
                 characterInt = reader.read();
                 char[] scriptEndTrigger = ("</" + tagName).toCharArray();
@@ -308,7 +334,8 @@ public class LenientSaxParser extends SAXParser {
                 while (characterInt >= 0) {
                   scriptBuilder.append((char) characterInt);
                   scriptBuilder.getChars(
-                      /* srcBegin */ Math.max(0, scriptBuilder.length() - scriptEndHelperBuffer.length),
+                      /* srcBegin */ Math.max(
+                          0, scriptBuilder.length() -scriptEndHelperBuffer.length),
                       /* srcEnd */ scriptBuilder.length(),
                       /* dst */ scriptEndHelperBuffer,
                       /* dstBegin */ 0);
