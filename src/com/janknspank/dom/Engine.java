@@ -55,13 +55,35 @@ public class Engine {
     System.out.println("TEXT: \"" + text + "\"");
   }
 
+  private static final String[] urls = {
+    "http://www.nytimes.com/2014/02/23/opinion/sunday/friedman-how-to-get-a-job-at-google.html",
+    "http://www.nytimes.com/2014/12/09/technology/esports-colleges-breeding-grounds-professional-gaming.html",
+    "http://www.nytimes.com/2014/12/04/us/politics/roy-h-beck-quietly-leads-a-grass-roots-army.html",
+    "http://www.nytimes.com/2014/09/25/technology/exposing-hidden-biases-at-google-to-improve-diversity.html",
+    "http://www.nytimes.com/2014/12/08/business/obamas-net-neutrality-bid-divides-civil-rights-groups.html",
+    "http://bits.blogs.nytimes.com/2014/12/08/ipod-lawsuit-continues-with-plaintiffs-status-still-in-doubt/",
+    "http://dealbook.nytimes.com/2014/12/08/tech-figures-join-to-fund-change-org-petition-site/",
+    "http://bits.blogs.nytimes.com/2014/12/08/european-privacy-debate-on-display-in-paris/",
+    "http://www.nytimes.com/2014/12/09/world/asia/new-delhi-bans-uber-after-driver-is-accused-of-rape.html",
+    "http://bits.blogs.nytimes.com/2014/12/08/a-trip-to-california-for-chinas-internet-czar/",
+    "http://www.nytimes.com/2014/12/08/technology/grappling-with-the-culture-of-free-in-napsters-aftermath.html",
+    "http://www.nytimes.com/2014/12/08/business/north-korea-denies-hacking-sony-but-calls-attack-a-righteous-deed.html",
+    "http://www.nytimes.com/2014/12/08/business/ralph-h-baer-dies-inventor-of-odyssey-first-system-for-home-video-games.html",
+    "http://bits.blogs.nytimes.com/2014/12/07/how-i-made-26-cents-with-the-latest-in-sharing-economy-apps/",
+    "http://www.nytimes.com/2014/12/07/upshot/how-technology-could-help-fight-income-inequality.html",
+    "http://bits.blogs.nytimes.com/2014/12/05/uber-to-portland-were-here-deal-with-it/",
+    "http://www.nytimes.com/2014/12/08/business/international/nurturing-start-up-culture-in-the-lower-cost-balkans.html",
+    "http://www.nytimes.com/2014/12/07/jobs/how-ibm-brings-ideas-forward-from-its-teams.html",
+    "http://bits.blogs.nytimes.com/2014/12/05/in-suit-cisco-accuses-arista-of-copying-work/",
+    "http://dealbook.nytimes.com/2014/12/05/senate-to-hold-hearing-on-cyberattacks-against-finance/",
+    "http://www.nytimes.com/2014/12/06/your-money/some-drawbacks-in-tapping-the-phone-to-deposit-a-check.html",
+    "http://dealbook.nytimes.com/2014/12/08/with-bank-of-america-order-s-e-c-breaks-the-mold/",
+    "http://dealbook.nytimes.com/2014/12/08/merck-agrees-to-acquire-drug-maker-cubist-for-9-5-billion/",
+    "http://www.nytimes.com/2014/12/09/business/hotels-let-guests-borrow-items-or-leave-them.html",
+    "http://www.nytimes.com/2014/12/09/business/media/madison-avenue-sees-rough-times-ahead-tempered-by-growth.html"
+  };
   public static void main(String args[]) throws Exception {
-//    DocumentNode node = crawl("http://www.nytimes.com/2014/02/23/opinion/sunday/" +
- //       "friedman-how-to-get-a-job-at-google.html");
-    DocumentNode node = crawl("http://www.nytimes.com/2014/09/25/technology/" +
-        "exposing-hidden-biases-at-google-to-improve-diversity.html");
-//    DocumentNode node = crawl("http://www.nytimes.com/2014/12/04/us/politics/" +
-//        "roy-h-beck-quietly-leads-a-grass-roots-army.html");
+    DocumentNode node = crawl(urls[6]);
     printNode(node, 0);
     List<Node> paragraphs = new ArrayList<>();
     paragraphs.addAll(node.findAll("article > p"));
