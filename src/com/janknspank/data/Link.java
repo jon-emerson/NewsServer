@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.data;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -6,6 +6,10 @@ import java.sql.Statement;
 import java.util.Date;
 
 import org.json.JSONObject;
+
+import com.janknspank.Asserts;
+import com.janknspank.Constants;
+import com.janknspank.ValidationException;
 
 /**
  * Tracks a link from one URL's content to another's.  The primary key is a
@@ -131,7 +135,7 @@ public class Link {
       // See if updating the last found time updates any rows.  If it does,
       // we know we've already discovered this link before.
       PreparedStatement statement =
-          MysqlHelper.getInstance().prepareStatement(UPDATE_LAST_FOUND_TIME_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(UPDATE_LAST_FOUND_TIME_COMMAND);
       statement.setDate(1, new java.sql.Date(System.currentTimeMillis()));
       statement.setString(2, originId);
       statement.setString(3, destinationId);
@@ -156,7 +160,7 @@ public class Link {
   public static void deleteId(String id) {
     try {
       PreparedStatement statement =
-          MysqlHelper.getInstance().prepareStatement(DELETE_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(DELETE_COMMAND);
       statement.setString(1, id);
       statement.setString(2, id);
       statement.executeUpdate();
@@ -167,7 +171,7 @@ public class Link {
 
   private void insert() throws SQLException {
     PreparedStatement statement =
-        MysqlHelper.getInstance().prepareStatement(INSERT_COMMAND);
+        MysqlHelper.getConnection().prepareStatement(INSERT_COMMAND);
     statement.setString(1, this.originId);
     statement.setString(2, this.destinationId);
     statement.setTimestamp(3, new java.sql.Timestamp(this.discoveryTime.getTime()));
@@ -178,7 +182,7 @@ public class Link {
   /** Helper method for creating the Link table. */
   public static void main(String args[]) {
     try {
-      Statement statement = MysqlHelper.getInstance().getStatement();
+      Statement statement = MysqlHelper.getConnection().createStatement();
       statement.executeUpdate(CREATE_TABLE_COMMAND);
       statement.executeUpdate(CREATE_ORIGIN_ID_INDEX_COMMAND);
       statement.executeUpdate(CREATE_DESTINATION_ID_INDEX_COMMAND);

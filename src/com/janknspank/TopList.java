@@ -8,6 +8,22 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Generic utility class for collecting many strings with associated integer
+ * values and retaining only the N with the highest values.  Basically, this
+ * is an semi-efficient way to implement a "top 10" list.  Usage:
+ *
+ * <code>
+ *   TopList t = new TopList(3);
+ *   t.add("ten", 10);
+ *   t.add("eleven", 11);
+ *   t.add("twelve", 12);
+ *   t.add("two", 2);
+ *   for (String topThree : t.getKeys()) {
+ *     // Print out "twelve", "eleven", "ten".
+ *   }
+ * </code>
+ */
 public class TopList {
   private final int maxSize;
   private int smallestValue = Integer.MIN_VALUE;

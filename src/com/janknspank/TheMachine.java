@@ -3,6 +3,9 @@ package com.janknspank;
 import java.net.MalformedURLException;
 
 import com.janknspank.Crawler.CrawlerCallback;
+import com.janknspank.data.CrawlData;
+import com.janknspank.data.DiscoveredUrl;
+import com.janknspank.data.Link;
 
 public class TheMachine {
   public void start() {

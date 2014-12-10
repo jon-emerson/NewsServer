@@ -25,6 +25,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.janknspank.data.CrawlData;
+import com.janknspank.data.DiscoveredUrl;
+
 public class Crawler {
   public static final String ISO_8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
   private static final DateTimeFormatter ISO_DATE_TIME_FORMAT =

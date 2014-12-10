@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.data;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -6,6 +6,10 @@ import java.sql.Statement;
 import java.util.Date;
 
 import org.json.JSONObject;
+
+import com.janknspank.Asserts;
+import com.janknspank.Constants;
+import com.janknspank.ValidationException;
 
 /**
  * Primary metadata about a crawled URL.
@@ -210,7 +214,7 @@ public class CrawlData {
     try {
       Date now = new Date();
       PreparedStatement statement =
-          MysqlHelper.getInstance().prepareStatement(INSERT_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(INSERT_COMMAND);
       statement.setString(1, this.id);
       statement.setString(2, this.title.substring(0, Math.min(this.title.length(), 256)));
       statement.setString(3, this.type);
@@ -233,7 +237,7 @@ public class CrawlData {
   /** Helper method for creating the Link table. */
   public static void main(String args[]) {
     try {
-      Statement statement = MysqlHelper.getInstance().getStatement();
+      Statement statement = MysqlHelper.getConnection().createStatement();
       statement.executeUpdate(CREATE_TABLE_COMMAND);
     } catch (SQLException e) {
       e.printStackTrace();

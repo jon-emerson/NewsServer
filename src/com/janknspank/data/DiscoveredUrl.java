@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.data;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +7,10 @@ import java.sql.Statement;
 import java.util.Date;
 
 import org.json.JSONObject;
+
+import com.janknspank.Asserts;
+import com.janknspank.Constants;
+import com.janknspank.ValidationException;
 
 /**
  * Row in the MySQL database: DiscoveredUrl.  Represents a URL we discovered.
@@ -168,7 +172,7 @@ public class DiscoveredUrl {
 
   private void insert() throws SQLException {
     PreparedStatement statement =
-        MysqlHelper.getInstance().prepareStatement(INSERT_COMMAND);
+        MysqlHelper.getConnection().prepareStatement(INSERT_COMMAND);
     statement.setString(1, this.url);
     statement.setString(2, this.id);
     statement.setInt(3, this.tweetCount);
@@ -179,7 +183,7 @@ public class DiscoveredUrl {
   public void incrementTweetCount() {
     try {
       PreparedStatement statement =
-          MysqlHelper.getInstance().prepareStatement(INCREMENT_TWEET_COUNT_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(INCREMENT_TWEET_COUNT_COMMAND);
       statement.setString(1, this.id);
       statement.executeUpdate();
       this.tweetCount += 1;
@@ -190,7 +194,7 @@ public class DiscoveredUrl {
 
   public void delete() {
     try {
-      PreparedStatement statement = MysqlHelper.getInstance().prepareStatement(DELETE_COMMAND);
+      PreparedStatement statement = MysqlHelper.getConnection().prepareStatement(DELETE_COMMAND);
       statement.setString(1, this.id);
       statement.executeUpdate();
     } catch (SQLException e) {
@@ -208,7 +212,7 @@ public class DiscoveredUrl {
     try {
       Date now = new Date();
       PreparedStatement statement =
-          MysqlHelper.getInstance().prepareStatement(UPDATE_LAST_CRAWL_TIME_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(UPDATE_LAST_CRAWL_TIME_COMMAND);
       statement.setTimestamp(1, new java.sql.Timestamp(now.getTime()));
       statement.setString(2, this.id);
       return statement.executeUpdate() == 1;
@@ -219,7 +223,7 @@ public class DiscoveredUrl {
 
   public static DiscoveredUrl getNextUrlToCrawl() {
     try {
-      Statement stmt = MysqlHelper.getInstance().getStatement();
+      Statement stmt = MysqlHelper.getConnection().createStatement();
       return createFromResultSet(stmt.executeQuery(SELECT_NEXT_URL_TO_CRAWL));
     } catch (SQLException e) {
       e.printStackTrace();
@@ -253,7 +257,7 @@ public class DiscoveredUrl {
   public static DiscoveredUrl get(String url) {
     try {
       PreparedStatement statement =
-          MysqlHelper.getInstance().prepareStatement(SELECT_BY_ID_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(SELECT_BY_ID_COMMAND);
       statement.setString(1, url);
       return createFromResultSet(statement.executeQuery());
 
@@ -266,7 +270,7 @@ public class DiscoveredUrl {
   /** Helper method for creating the discovered-url table. */
   public static void main(String args[]) {
     try {
-      Statement statement = MysqlHelper.getInstance().getStatement();
+      Statement statement = MysqlHelper.getConnection().createStatement();
       statement.executeUpdate(CREATE_TABLE_COMMAND);
       statement.executeUpdate(CREATE_ID_INDEX_COMMAND);
     } catch (SQLException e) {

@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.data;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;

@@ -13,6 +13,8 @@ import twitter4j.URLEntity;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
+import com.janknspank.data.DiscoveredUrl;
+import com.janknspank.data.Link;
 
 public class TwitterCrawler implements twitter4j.StatusListener {
   private final URLResolver resolver = URLResolver.getInstance();
