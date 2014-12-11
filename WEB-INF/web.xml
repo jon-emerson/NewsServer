@@ -24,6 +24,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>DeleteUserServlet</servlet-name>
+    <servlet-class>com.janknspank.server.DeleteUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUserServlet</servlet-name>
+    <url-pattern>/deleteUser</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.janknspank.server.LoginServlet</servlet-class>
   </servlet>
