@@ -1,6 +1,7 @@
 package com.janknspank.data;
 
 import org.apache.commons.codec.binary.Base64;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
@@ -71,7 +72,8 @@ public class Session {
   private static final String CREATE_TABLE_COMMAND =
       "CREATE TABLE " + TABLE_NAME_STR + " ( " +
       "    " + SESSION_KEY_STR + " VARCHAR(128) NOT NULL PRIMARY KEY, " +
-      "    " + USER_ID_STR + " VARCHAR(24) )";
+      "    " + USER_ID_STR + " VARCHAR(24) NOT NULL, " +
+      "    " + CREATE_TIME_STR + " DATETIME NOT NULL )";
   private static final String SELECT_BY_SESSION_KEY_COMMAND =
       "SELECT * FROM " + TABLE_NAME_STR + " WHERE " + SESSION_KEY_STR + " =?";
   private static final String CREATE_SESSION_COMMAND =
@@ -135,6 +137,17 @@ public class Session {
     Asserts.assertNonEmpty(sessionKey, SESSION_KEY_STR);
     Asserts.assertNonEmpty(userId, USER_ID_STR);
     Asserts.assertNotNull(createTime, CREATE_TIME_STR);
+  }
+
+  /**
+   * Returns the fields from this object that should be publicly available.
+   */
+  public JSONObject toJSONObject() {
+    JSONObject o = new JSONObject();
+    o.put(SESSION_KEY_STR, sessionKey);
+    o.put(USER_ID_STR, userId);
+    o.put(CREATE_TIME_STR, createTime);
+    return o;
   }
 
   private static Session createFromResultSet(ResultSet result) throws SQLException {
@@ -207,7 +220,7 @@ public class Session {
       statement.setTimestamp(3, createTime);
       statement.execute();
     } catch (SQLException e) {
-      throw new DataRequestException("Error creating session", e);
+      throw new DataRequestException("Error creating session: " + e.getMessage(), e);
     }
 
     // Return the session we just created.

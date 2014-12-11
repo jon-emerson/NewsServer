@@ -2,6 +2,7 @@ package com.janknspank.data;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.json.JSONObject;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import com.janknspank.Asserts;
+import com.janknspank.Constants;
 
 /**
  * Tracks a link from one URL's content to another's.  The primary key is a
@@ -36,15 +38,17 @@ public class User {
       "    " + EMAIL_STR + " VARCHAR(100) NOT NULL, " +
       "    " + LINKEDIN_ID_STR + " VARCHAR(24), " +
       "    " + FACEBOOK_ID_STR + " VARCHAR(24), " +
-      "    " + PASSWORD_SHA256_STR + " VARCHAR(24) NOT NULL, " +
+      "    " + PASSWORD_SHA256_STR + " VARCHAR(50) NOT NULL, " +
       "    " + CREATE_TIME_STR + " DATETIME NOT NULL, " +
-      "    " + LAST_LOGIN_TIME_STR + " DATETIME NOT NULL )";
+      "    " + LAST_LOGIN_TIME_STR + " DATETIME )";
   private static final String CREATE_EMAIL_INDEX_COMMAND =
       "CREATE UNIQUE INDEX " + EMAIL_STR + "_index " +
       "    ON " + TABLE_NAME_STR +
       "    (" + EMAIL_STR + ") USING HASH";
-  private static final String SELECT_BY_ID_COMMAND =
-      "SELECT * FROM " + TABLE_NAME_STR + " WHERE " + ID_STR + " =?";
+  private static final String SELECT_BY_EMAIL_AND_PASSWORD_COMMAND =
+      "SELECT * FROM " + TABLE_NAME_STR + " WHERE " +
+      "    " + EMAIL_STR + " =? AND " +
+      "    " + PASSWORD_SHA256_STR + " =?";
   private static final String CREATE_USER_COMMAND =
       "INSERT INTO " + TABLE_NAME_STR + " ( " +
       "    " + ID_STR + ", " +
@@ -177,6 +181,32 @@ public class User {
     Asserts.assertNotNull(createTime, CREATE_TIME_STR);
   }
 
+  /**
+   * Returns the fields from this object that should be publicly available.
+   * We are deliberately not returning the hashed password.
+   */
+  public JSONObject toJSONObject() {
+    JSONObject o = new JSONObject();
+    o.put(ID_STR, id);
+    o.put(EMAIL_STR, email);
+    if (name != null) {
+      o.put(NAME_STR, name);
+    }
+    if (linkedinId != null) {
+      o.put(LINKEDIN_ID_STR, linkedinId);
+    }
+    if (facebookId != null) {
+      o.put(FACEBOOK_ID_STR, facebookId);
+    }
+    if (createTime != null) {
+      o.put(CREATE_TIME_STR, Constants.DATE_TIME_FORMATTER.format(createTime));
+    }
+    if (lastLoginTime != null) {
+      o.put(LAST_LOGIN_TIME_STR, Constants.DATE_TIME_FORMATTER.format(lastLoginTime));
+    }
+    return o;
+  }
+
   private static User createFromResultSet(ResultSet result) throws SQLException {
     if (result.next()) {
       User.Builder builder = new User.Builder();
@@ -209,11 +239,12 @@ public class User {
    * This is currently private because its uses should be only internal.
    * When we implement login, that should be through a different method that
    * additionally updates the last login time.
+   * TODO(jonemerson): Make this private again.
    */
-  private static User get(String email, String password) {
+  public static User get(String email, String password) {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(SELECT_BY_ID_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(SELECT_BY_EMAIL_AND_PASSWORD_COMMAND);
       statement.setString(1, email);
       statement.setString(2, getPasswordSha256(password));
       return createFromResultSet(statement.executeQuery());
@@ -246,7 +277,7 @@ public class User {
       statement.setTimestamp(4, createTime);
       statement.execute();
     } catch (SQLException e) {
-      throw new DataRequestException("Error creating user", e);
+      throw new DataRequestException("Error creating user: " + e.getMessage(), e);
     }
 
     // Return the user we just created.

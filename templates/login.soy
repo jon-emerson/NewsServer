@@ -1,0 +1,18 @@
+{namespace news.login autoescape="strict"}
+
+/**
+ * Renders the login page.
+ */
+{template .main}
+  <h1>Login</h1>
+
+  <form method="POST" action="login">
+    Email address:<br>
+    <input type="text" name="email"><br>
+    <br>
+    Password:<br>
+    <input type="password" name="password"><br>
+    <br>
+    <input type="submit" value="Login"><br>
+  </form>
+{/template}

@@ -18,6 +18,11 @@
       <version>17.0</version>
     </dependency>
     <dependency>
+      <groupId>com.google.template</groupId>
+      <artifactId>soy</artifactId>
+      <version>2012-12-21</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpasyncclient</artifactId>
       <version>4.0.2</version>
