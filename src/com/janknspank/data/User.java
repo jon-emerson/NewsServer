@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import com.janknspank.Asserts;
@@ -262,14 +263,16 @@ public class User {
   }
 
   /**
-   * Officially sanctioned method for logging in a user.
+   * Marks a user as logged in and returns the affected User.
+   * @see Session#create(String, String) to create a session
    */
   public static User login(String email, String password) throws DataRequestException {
     try {
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(UPDATE_LAST_LOGIN_TIME_COMMAND);
-      statement.setString(1, email);
-      statement.setString(2, getPasswordSha256(password));
+      statement.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+      statement.setString(2, email);
+      statement.setString(3, getPasswordSha256(password));
       if (statement.executeUpdate() > 0) {
         return get(email, password);
       } else {
@@ -279,7 +282,6 @@ public class User {
       throw new DataRequestException("Could not update last login time", e);
     }
   }
-
 
   /**
    * Updates the database so that the user with the passed userId has the
