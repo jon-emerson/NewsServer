@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import com.janknspank.Asserts;
 import com.janknspank.Constants;
-import com.janknspank.ValidationException;
 
 /**
  * Tracks a link from one URL's content to another's.  The primary key is a

@@ -27,6 +27,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.janknspank.data.CrawlData;
 import com.janknspank.data.DiscoveredUrl;
+import com.janknspank.data.ValidationException;
 
 public class Crawler {
   public static final String ISO_8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";

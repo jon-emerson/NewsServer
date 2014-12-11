@@ -10,7 +10,6 @@ import org.json.JSONObject;
 
 import com.janknspank.Asserts;
 import com.janknspank.Constants;
-import com.janknspank.ValidationException;
 
 /**
  * Row in the MySQL database: DiscoveredUrl.  Represents a URL we discovered.
@@ -41,7 +40,7 @@ public class DiscoveredUrl {
       "    " + ID_STR + ", " +
       "    " + TWEET_COUNT_STR + ", " +
       "    " + DISCOVERY_TIME_STR + ") VALUES (?, ?, ?, ?)";
-  private static final String SELECT_BY_ID_COMMAND =
+  private static final String SELECT_BY_URL_COMMAND =
       "SELECT * FROM " + TABLE_NAME_STR + " WHERE " + URL_STR + " =?";
   private static final String SELECT_NEXT_URL_TO_CRAWL =
       "SELECT * FROM " + TABLE_NAME_STR + " WHERE " + LAST_CRAWL_TIME_STR + " IS NULL AND " +
@@ -210,10 +209,9 @@ public class DiscoveredUrl {
    */
   public boolean markAsCrawled() {
     try {
-      Date now = new Date();
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(UPDATE_LAST_CRAWL_TIME_COMMAND);
-      statement.setTimestamp(1, new java.sql.Timestamp(now.getTime()));
+      statement.setTimestamp(1, new java.sql.Timestamp(System.currentTimeMillis()));
       statement.setString(2, this.id);
       return statement.executeUpdate() == 1;
     } catch (SQLException e) {
@@ -257,7 +255,7 @@ public class DiscoveredUrl {
   public static DiscoveredUrl get(String url) {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(SELECT_BY_ID_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(SELECT_BY_URL_COMMAND);
       statement.setString(1, url);
       return createFromResultSet(statement.executeQuery());
 
@@ -266,7 +264,7 @@ public class DiscoveredUrl {
     }
     return null;
   }
-  
+
   /** Helper method for creating the discovered-url table. */
   public static void main(String args[]) {
     try {

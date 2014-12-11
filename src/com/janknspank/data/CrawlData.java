@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import com.janknspank.Asserts;
 import com.janknspank.Constants;
-import com.janknspank.ValidationException;
 
 /**
  * Primary metadata about a crawled URL.

@@ -8,7 +8,7 @@ public class MysqlHelper {
   // JDBC driver name and database URL
   private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
   private static final String DB_URL =
-      "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com/newsserver";
+      "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver";
   static {
     try {
       // Make sure the MySQL JDBC driver is loaded.

@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.data;
 
 public class ValidationException extends Exception {
   public ValidationException(String message) {

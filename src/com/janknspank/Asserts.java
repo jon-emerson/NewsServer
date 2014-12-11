@@ -1,5 +1,7 @@
 package com.janknspank;
 
+import com.janknspank.data.ValidationException;
+
 public class Asserts {
   public static void assertNotNull(Object o, String desc) throws ValidationException {
     if (o == null) {
