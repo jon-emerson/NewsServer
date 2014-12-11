@@ -35,6 +35,7 @@ public class LoginServlet extends NewsServlet {
       session = Session.create(email, password);
       user = User.get(email, password);
     } catch (DataRequestException e) {
+      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       writeJson(resp, getErrorJson(e.getMessage()));
       return;
     }
