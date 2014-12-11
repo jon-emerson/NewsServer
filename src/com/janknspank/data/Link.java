@@ -124,8 +124,8 @@ public class Link {
     JSONObject o = new JSONObject();
     o.put(ORIGIN_ID_STR, originId);
     o.put(DESTINATION_ID_STR, destinationId);
-    o.put(DISCOVERY_TIME_STR, Constants.DATE_TIME_FORMATTER.format(discoveryTime));
-    o.put(LAST_FOUND_TIME_STR, Constants.DATE_TIME_FORMATTER.format(lastFoundTime));
+    o.put(DISCOVERY_TIME_STR, Constants.formatDate(discoveryTime));
+    o.put(LAST_FOUND_TIME_STR, Constants.formatDate(lastFoundTime));
     return o;
   }
 

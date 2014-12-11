@@ -42,6 +42,7 @@ public class CreateUserServlet extends NewsServlet {
 
     // Write response.
     JSONObject response = new JSONObject();
+    response.put("success", true);
     response.put("user", user.toJSONObject());
     response.put("session", session.toJSONObject());
     writeJson(resp, response);

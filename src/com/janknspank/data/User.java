@@ -45,10 +45,9 @@ public class User {
       "CREATE UNIQUE INDEX " + EMAIL_STR + "_index " +
       "    ON " + TABLE_NAME_STR +
       "    (" + EMAIL_STR + ") USING HASH";
-  private static final String SELECT_BY_EMAIL_AND_PASSWORD_COMMAND =
+  private static final String SELECT_BY_EMAIL_COMMAND =
       "SELECT * FROM " + TABLE_NAME_STR + " WHERE " +
-      "    " + EMAIL_STR + " =? AND " +
-      "    " + PASSWORD_SHA256_STR + " =?";
+      "    " + EMAIL_STR + " =?";
   private static final String CREATE_USER_COMMAND =
       "INSERT INTO " + TABLE_NAME_STR + " ( " +
       "    " + ID_STR + ", " +
@@ -199,10 +198,10 @@ public class User {
       o.put(FACEBOOK_ID_STR, facebookId);
     }
     if (createTime != null) {
-      o.put(CREATE_TIME_STR, Constants.DATE_TIME_FORMATTER.format(createTime));
+      o.put(CREATE_TIME_STR, Constants.formatDate(createTime));
     }
     if (lastLoginTime != null) {
-      o.put(LAST_LOGIN_TIME_STR, Constants.DATE_TIME_FORMATTER.format(lastLoginTime));
+      o.put(LAST_LOGIN_TIME_STR, Constants.formatDate(lastLoginTime));
     }
     return o;
   }
@@ -241,12 +240,11 @@ public class User {
    * additionally updates the last login time.
    * TODO(jonemerson): Make this private again.
    */
-  public static User get(String email, String password) {
+  public static User get(String email) {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(SELECT_BY_EMAIL_AND_PASSWORD_COMMAND);
+          MysqlHelper.getConnection().prepareStatement(SELECT_BY_EMAIL_COMMAND);
       statement.setString(1, email);
-      statement.setString(2, getPasswordSha256(password));
       return createFromResultSet(statement.executeQuery());
 
     } catch (SQLException e) {
@@ -257,7 +255,7 @@ public class User {
 
   public static User create(String email, String password) throws DataRequestException {
     // Make sure we don't already have a user with this email.
-    if (get(email, password) != null) {
+    if (get(email) != null) {
       throw new DataRequestException("User with this email already exists.");
     }
 
@@ -305,7 +303,7 @@ public class User {
       statement.setString(2, email);
       statement.setString(3, getPasswordSha256(password));
       if (statement.executeUpdate() > 0) {
-        return get(email, password);
+        return get(email);
       } else {
         throw new DataRequestException("User not found - Perhaps the password is wrong?");
       }

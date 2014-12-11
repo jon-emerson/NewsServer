@@ -203,9 +203,9 @@ public class CrawlData {
     o.put(COPYRIGHT_STR, copyright);
     o.put(DESCRIPTION_STR, description);
     o.put(IMAGE_URL_STR, imageUrl);
-    o.put(PUBLISHED_TIME_STR, Constants.DATE_TIME_FORMATTER.format(publishedTime));
-    o.put(MODIFIED_TIME_STR, Constants.DATE_TIME_FORMATTER.format(modifiedTime));
-    o.put(LAST_UPDATED_TIME_STR, Constants.DATE_TIME_FORMATTER.format(lastUpdatedTime));
+    o.put(PUBLISHED_TIME_STR, Constants.formatDate(publishedTime));
+    o.put(MODIFIED_TIME_STR, Constants.formatDate(modifiedTime));
+    o.put(LAST_UPDATED_TIME_STR, Constants.formatDate(lastUpdatedTime));
     return o;
   }
 

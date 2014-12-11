@@ -140,9 +140,8 @@ public class DiscoveredUrl {
     o.put(URL_STR, url);
     o.put(ID_STR, id);
     o.put(TWEET_COUNT_STR, tweetCount);
-    o.put(DISCOVERY_TIME_STR, Constants.DATE_TIME_FORMATTER.format(discoveryTime));
-    o.put(LAST_CRAWL_TIME_STR,
-        Constants.DATE_TIME_FORMATTER.format(lastCrawlTime));
+    o.put(DISCOVERY_TIME_STR, Constants.formatDate(discoveryTime));
+    o.put(LAST_CRAWL_TIME_STR, Constants.formatDate(lastCrawlTime));
     return o;
   }
 

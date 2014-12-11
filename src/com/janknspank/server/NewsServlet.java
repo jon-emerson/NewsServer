@@ -76,7 +76,7 @@ public class NewsServlet extends HttpServlet {
     Session session;
     try {
       String sessionKey = getParameter(request, "sessionKey");
-      if (sessionKey == null) {
+      if (Strings.isNullOrEmpty(sessionKey)) {
         session = getSessionFromCookies(request);
       } else {
         session = Session.get(sessionKey);

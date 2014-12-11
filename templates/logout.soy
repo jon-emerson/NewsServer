@@ -1,0 +1,19 @@
+{namespace news.logout autoescape="strict"}
+
+/**
+ * Renders the logout page.
+ */
+{template .main}
+  <h1>Log out</h1>
+  <h3>Please fill in <b>exactly one</b> field.</h3>
+
+  <form method="POST" action="logout">
+    Session key:<br>
+    <input type="text" name="sessionKey"><br>
+    <br>
+    Completely logout all session for email address:<br>
+    <input type="text" name="email"><br>
+    <br>
+    <input type="submit" value="Log out"><br>
+  </form>
+{/template}

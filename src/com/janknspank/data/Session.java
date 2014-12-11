@@ -83,6 +83,8 @@ public class Session {
       "    " + CREATE_TIME_STR + ") VALUES (?, ?, ?)";
   private static final String DELETE_COMMAND =
       "DELETE FROM " + TABLE_NAME_STR + " WHERE " + SESSION_KEY_STR + " =?";
+  private static final String DELETE_BY_USER_ID_COMMAND =
+      "DELETE FROM " + TABLE_NAME_STR + " WHERE " + USER_ID_STR + " =?";
 
   private String sessionKey;
   private String userId;
@@ -275,6 +277,22 @@ public class Session {
           MysqlHelper.getConnection().prepareStatement(DELETE_COMMAND);
       statement.setString(1, sessionKey);
       return statement.executeUpdate() > 0;
+    } catch (SQLException e) {
+      throw new DataRequestException("Could not delete session", e);
+    }
+  }
+
+  /**
+   * We probably want to delete this before we launch, but it's useful for
+   * testing to let people clear out their sessions.
+   * @return number of rows deleted
+   */
+  public static int deleteAllFromUser(User user) throws DataRequestException {
+    try {
+      PreparedStatement statement =
+          MysqlHelper.getConnection().prepareStatement(DELETE_BY_USER_ID_COMMAND);
+      statement.setString(1, user.getId());
+      return statement.executeUpdate();
     } catch (SQLException e) {
       throw new DataRequestException("Could not delete session", e);
     }

@@ -20,7 +20,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CreateUserServlet</servlet-name>
-    <url-pattern>/createuser</url-pattern>
+    <url-pattern>/createUser</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -30,5 +30,14 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.janknspank.server.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
   </servlet-mapping>
 </web-app>
