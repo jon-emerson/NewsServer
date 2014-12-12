@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.janknspank.data.DataRequestException;
+import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Session;
 import com.janknspank.data.User;
 
@@ -37,8 +37,8 @@ public class DeleteUserServlet extends NewsServlet {
       }
       Session.deleteAllFromUser(user);
       User.deleteId(user.getId());
-    } catch (DataRequestException e) {
-      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    } catch (DataInternalException e) {
+      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       writeJson(resp, getErrorJson(e.getMessage()));
       return;
     }

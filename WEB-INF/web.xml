@@ -49,4 +49,13 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SetLinkedInDataServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetLinkedInDataServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetLinkedInDataServlet</servlet-name>
+    <url-pattern>/setLinkedInData</url-pattern>
+  </servlet-mapping>
 </web-app>

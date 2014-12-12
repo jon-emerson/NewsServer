@@ -135,7 +135,7 @@ public class Link {
       // we know we've already discovered this link before.
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(UPDATE_LAST_FOUND_TIME_COMMAND);
-      statement.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+      statement.setTimestamp(1, new java.sql.Timestamp(System.currentTimeMillis()));
       statement.setString(2, originId);
       statement.setString(3, destinationId);
       if (statement.executeUpdate() == 0) {

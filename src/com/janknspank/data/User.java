@@ -206,7 +206,7 @@ public class User {
     return o;
   }
 
-  private static User createFromResultSet(ResultSet result) throws SQLException {
+  private static User createFromResultSet(ResultSet result) throws SQLException, DataInternalException {
     if (result.next()) {
       User.Builder builder = new User.Builder();
       builder.setId(result.getString(ID_STR));
@@ -220,7 +220,7 @@ public class User {
       try {
         return builder.build();
       } catch (ValidationException e) {
-        e.printStackTrace();
+        throw new DataInternalException("Could not construct user: " + e.getMessage(), e);
       }
     }
     return null;
@@ -240,7 +240,7 @@ public class User {
    * additionally updates the last login time.
    * TODO(jonemerson): Make this private again.
    */
-  public static User get(String email) {
+  public static User get(String email) throws DataInternalException {
     try {
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(SELECT_BY_EMAIL_COMMAND);
@@ -248,12 +248,12 @@ public class User {
       return createFromResultSet(statement.executeQuery());
 
     } catch (SQLException e) {
-      e.printStackTrace();
+      throw new DataInternalException("Could not select user: " + e.getMessage(), e);
     }
-    return null;
   }
 
-  public static User create(String email, String password) throws DataRequestException {
+  public static User create(String email, String password)
+      throws DataRequestException, DataInternalException {
     // Make sure we don't already have a user with this email.
     if (get(email) != null) {
       throw new DataRequestException("User with this email already exists.");
@@ -275,7 +275,7 @@ public class User {
       statement.setTimestamp(4, createTime);
       statement.execute();
     } catch (SQLException e) {
-      throw new DataRequestException("Error creating user: " + e.getMessage(), e);
+      throw new DataInternalException("Error creating user: " + e.getMessage(), e);
     }
 
     // Return the user we just created.
@@ -287,7 +287,7 @@ public class User {
           .setCreateTime(createTime)
           .build();
     } catch (ValidationException e) {
-      throw new DataRequestException("Could not construct user object", e);
+      throw new DataInternalException("Could not construct user object", e);
     }
   }
 
@@ -295,7 +295,8 @@ public class User {
    * Marks a user as logged in and returns the affected User.
    * @see Session#create(String, String) to create a session
    */
-  public static User login(String email, String password) throws DataRequestException {
+  public static User login(String email, String password)
+      throws DataInternalException, DataRequestException {
     try {
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(UPDATE_LAST_LOGIN_TIME_COMMAND);
@@ -308,7 +309,7 @@ public class User {
         throw new DataRequestException("User not found - Perhaps the password is wrong?");
       }
     } catch (SQLException e) {
-      throw new DataRequestException("Could not update last login time", e);
+      throw new DataInternalException("Could not update last login time", e);
     }
   }
 
@@ -316,7 +317,8 @@ public class User {
    * Updates the database so that the user with the passed userId has the
    * passed LinkedIn user ID associated with his account.
    */
-  public static void setLinkedinId(String userId, String linkedinId) throws DataRequestException {
+  public static void setLinkedinId(String userId, String linkedinId)
+      throws DataRequestException, DataInternalException {
     try {
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(SET_LINKEDIN_ID_COMMAND);
@@ -326,7 +328,7 @@ public class User {
         throw new DataRequestException("User not found");
       }
     } catch (SQLException e) {
-      throw new DataRequestException("Could not update last login time", e);
+      throw new DataInternalException("Could not update last login time", e);
     }
   }
 
@@ -334,14 +336,14 @@ public class User {
    * Deletes the user with the passed ID.
    * @return true, if any users were deleted
    */
-  public static boolean deleteId(String id) throws DataRequestException {
+  public static boolean deleteId(String id) throws DataInternalException {
     try {
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(DELETE_COMMAND);
       statement.setString(1, id);
       return statement.executeUpdate() > 0;
     } catch (SQLException e) {
-      throw new DataRequestException("Could not delete user", e);
+      throw new DataInternalException("Could not delete user: " + e.getMessage(), e);
     }
   }
 

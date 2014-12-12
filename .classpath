@@ -34,5 +34,6 @@
 	<classpathentry kind="lib" path="target/dependency/twitter4j-core-4.0.2.jar"/>
 	<classpathentry kind="lib" path="target/dependency/twitter4j-stream-4.0.2.jar"/>
 	<classpathentry kind="lib" path="target/dependency/soy-2012-12-21.jar"/>
+	<classpathentry kind="lib" path="target/dependency/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
 import com.janknspank.data.Session;
 import com.janknspank.data.User;
@@ -34,8 +35,9 @@ public class CreateUserServlet extends NewsServlet {
     try {
       user = User.create(email, password);
       session = Session.create(email, password);
-    } catch (DataRequestException e) {
-      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    } catch (DataRequestException|DataInternalException e) {
+      resp.setStatus(e instanceof DataInternalException ?
+          HttpServletResponse.SC_INTERNAL_SERVER_ERROR : HttpServletResponse.SC_BAD_REQUEST);
       writeJson(resp, getErrorJson(e.getMessage()));
       return;
     }

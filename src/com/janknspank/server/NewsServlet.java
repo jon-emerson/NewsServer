@@ -2,7 +2,6 @@ package com.janknspank.server;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -20,6 +19,7 @@ import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
+import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
 import com.janknspank.data.Session;
 
@@ -81,14 +81,14 @@ public class NewsServlet extends HttpServlet {
       } else {
         session = Session.get(sessionKey);
       }
-    } catch (DataRequestException e) {
+    } catch (DataRequestException|DataInternalException e) {
       // This only happens for illegal session IDs that don't represent
       // real people.  Be harsh here: Reject any such requests.
       handleAuthenticationError(request, response, e.getMessage());
       return;
     }
     if (isAuthRequired && session == null) {
-      sendToLogin(request, response);
+      handleAuthenticationError(request, response, "Authentication required");
       return;
     }
     request.setAttribute(SESSION_ATTRIBUTE_KEY, session);
@@ -110,7 +110,7 @@ public class NewsServlet extends HttpServlet {
         if (cookieName.equals(cookie.getName())) {
           try {
             return Session.get(cookie.getValue());
-          } catch (DataRequestException e) {
+          } catch (DataInternalException|DataRequestException e) {
             System.err.println("Bad cookie found, ignoring: " + e.getMessage());
           }
         }
@@ -127,30 +127,30 @@ public class NewsServlet extends HttpServlet {
     response.getWriter().print(getErrorJson(message).toString());
   }
 
-  /**
-   * Sends the user to a login page, with a redirect back to this
-   * page when the user's finished authenticating.
-   */
-  private void sendToLogin(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    // Reconstruct original requesting URL (path only - no scheme/server/port).
-    StringBuffer url =  new StringBuffer();
-    url.append(request.getContextPath()).append(request.getServletPath());
-    String pathInfo = request.getPathInfo();
-    if (pathInfo != null) {
-      url.append(pathInfo);
-    }
-    String queryString = request.getQueryString();
-    if (queryString != null) {
-      url.append("?").append(queryString);
-    }
-
-    // Redirect the user to the login page with a next URL to this
-    // page.
-    response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-    response.setHeader("Location",
-        "/login?nextUrl=" + URLEncoder.encode(url.toString(), "UTF-8")); 
-  }
+//  /**
+//   * Sends the user to a login page, with a redirect back to this
+//   * page when the user's finished authenticating.
+//   */
+//  private void sendToLogin(HttpServletRequest request, HttpServletResponse response)
+//      throws ServletException, IOException {
+//    // Reconstruct original requesting URL (path only - no scheme/server/port).
+//    StringBuffer url =  new StringBuffer();
+//    url.append(request.getContextPath()).append(request.getServletPath());
+//    String pathInfo = request.getPathInfo();
+//    if (pathInfo != null) {
+//      url.append(pathInfo);
+//    }
+//    String queryString = request.getQueryString();
+//    if (queryString != null) {
+//      url.append("?").append(queryString);
+//    }
+//
+//    // Redirect the user to the login page with a next URL to this
+//    // page.
+//    response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+//    response.setHeader("Location",
+//        "/login?nextUrl=" + URLEncoder.encode(url.toString(), "UTF-8")); 
+//  }
 
   /**
    * Returns the request body, whether it came from query parameters or POST

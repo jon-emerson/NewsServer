@@ -152,7 +152,8 @@ public class Session {
     return o;
   }
 
-  private static Session createFromResultSet(ResultSet result) throws SQLException {
+  private static Session createFromResultSet(ResultSet result)
+      throws SQLException, DataInternalException {
     if (result.next()) {
       Session.Builder builder = new Session.Builder();
       builder.setSessionKey(result.getString(SESSION_KEY_STR));
@@ -161,7 +162,7 @@ public class Session {
       try {
         return builder.build();
       } catch (ValidationException e) {
-        e.printStackTrace();
+        throw new DataInternalException("Could not create session object: " + e.getMessage(), e);
       }
     }
     return null;
@@ -171,12 +172,12 @@ public class Session {
    * Encrypts the passed-in string and returns a base64 representation of the
    * encrypted value.  The base64 is web safe.
    */
-  private static String toEncryptedBase64(String rawStr) {
+  private static String toEncryptedBase64(String rawStr) throws DataInternalException {
     try {
       byte[] encryptedBytes = ENCRYPT_CIPHER.doFinal(rawStr.getBytes("UTF-8"));
       return Base64.encodeBase64URLSafeString(encryptedBytes).replaceAll("=", "");
     } catch (UnsupportedEncodingException|IllegalBlockSizeException|BadPaddingException e) {
-      throw new RuntimeException(e.getMessage(), e);
+      throw new DataInternalException("Could not encrypt session key: " + e.getMessage(), e);
     }
   }
 
@@ -206,7 +207,8 @@ public class Session {
    * Officially sanctioned method for creating a user session from email +
    * password credentials.
    */
-  public static Session create(String email, String password) throws DataRequestException {
+  public static Session create(String email, String password)
+      throws DataRequestException, DataInternalException {
     // Calculate the values we'll be storing, so we can return them
     // later in a new User object.
     User user = User.login(email, password);
@@ -222,7 +224,7 @@ public class Session {
       statement.setTimestamp(3, createTime);
       statement.execute();
     } catch (SQLException e) {
-      throw new DataRequestException("Error creating session: " + e.getMessage(), e);
+      throw new DataInternalException("Error creating session: " + e.getMessage(), e);
     }
 
     // Return the session we just created.
@@ -233,7 +235,7 @@ public class Session {
           .setCreateTime(createTime)
           .build();
     } catch (ValidationException e) {
-      throw new DataRequestException("Could not construct session object", e);
+      throw new DataInternalException("Could not construct session object", e);
     }
   }
 
@@ -241,7 +243,8 @@ public class Session {
    * Officially sanctioned method for getting a user session from a logged-in
    * session key.
    */
-  public static Session get(String sessionKey) throws DataRequestException {
+  public static Session get(String sessionKey)
+      throws DataRequestException, DataInternalException {
     try {
       // Make sure that the session key can be decrypted.
       String userId = decrypt(sessionKey);
@@ -263,7 +266,7 @@ public class Session {
       }
       return session;
     } catch (SQLException e) {
-      throw new DataRequestException("Could not update last login time", e);
+      throw new DataInternalException("Could not update last login time", e);
     }
   }
 
@@ -271,14 +274,14 @@ public class Session {
    * Deletes the session key, preventing future access using that key.
    * @return true, if any users were deleted
    */
-  public static boolean deleteSessionKey(String sessionKey) throws DataRequestException {
+  public static boolean deleteSessionKey(String sessionKey) throws DataInternalException {
     try {
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(DELETE_COMMAND);
       statement.setString(1, sessionKey);
       return statement.executeUpdate() > 0;
     } catch (SQLException e) {
-      throw new DataRequestException("Could not delete session", e);
+      throw new DataInternalException("Could not delete session: " + e.getMessage(), e);
     }
   }
 
@@ -287,14 +290,14 @@ public class Session {
    * testing to let people clear out their sessions.
    * @return number of rows deleted
    */
-  public static int deleteAllFromUser(User user) throws DataRequestException {
+  public static int deleteAllFromUser(User user) throws DataInternalException {
     try {
       PreparedStatement statement =
           MysqlHelper.getConnection().prepareStatement(DELETE_BY_USER_ID_COMMAND);
       statement.setString(1, user.getId());
       return statement.executeUpdate();
     } catch (SQLException e) {
-      throw new DataRequestException("Could not delete session", e);
+      throw new DataInternalException("Could not delete session: " + e.getMessage(), e);
     }
   }
 

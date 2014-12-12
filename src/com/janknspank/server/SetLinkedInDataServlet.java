@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.google.common.base.Strings;
 import com.janknspank.data.DataInternalException;
+import com.janknspank.data.LinkedInData;
 import com.janknspank.data.Session;
-import com.janknspank.data.User;
 
-public class LogoutServlet extends NewsServlet {
+@AuthenticationRequired(requestMethod = "POST")
+public class SetLinkedInDataServlet extends NewsServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -24,26 +24,16 @@ public class LogoutServlet extends NewsServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     // Read parameters.
-    String email = getParameter(req, "email");
-    String sessionKey = getParameter(req, "sessionKey");
+    String linkedInJson = getParameter(req, "linkedInJson");
+    Session session = this.getSession(req);
 
-    // Parameter validation.
-    if (!(Strings.isNullOrEmpty(email) ^ Strings.isNullOrEmpty(sessionKey))) {
-      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-      writeJson(resp, getErrorJson("You must only specify email or sessionKey, not both"));
-      return;
-    }
+    // TODO(jonemerson): Add parameter validation.
 
     // Business logic.
-    int rowsAffected;
     try {
-      if (!Strings.isNullOrEmpty(email)) {
-        rowsAffected = Session.deleteAllFromUser(User.get(email));
-      } else {
-        rowsAffected = Session.deleteSessionKey(sessionKey) ? 1 : 0;
-      }
+      LinkedInData.put(session.getUserId(), linkedInJson);
     } catch (DataInternalException e) {
-      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       writeJson(resp, getErrorJson(e.getMessage()));
       return;
     }
@@ -51,7 +41,6 @@ public class LogoutServlet extends NewsServlet {
     // Write response.
     JSONObject response = new JSONObject();
     response.put("success", true);
-    response.put("rowsAffected", rowsAffected);
     writeJson(resp, response);
   }
 }
