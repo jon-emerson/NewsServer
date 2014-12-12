@@ -1,0 +1,56 @@
+When you walk into a meeting , there’s always someone who thinks he or she is the smartest person in the room .
+A meeting room is often the “Breakfast Club ” of the working world .
+You’ve got the extrovert , the introvert , the know-it-all and the ambitious steamroller .
+No matter what the mix , there’s always someone who dominates the discussion , and others who defer to that person out of frustration — or worse , complacency .
+But getting the best work out of a team is n’t about silencing the loudest person .
+It’s about getting everyone involved to explore every angle , bring all ideas to the surface and collaborate on a path forward .
+Two years ago , I was asked to lead the transformation of product design at IBM .
+My challenge is n’t simply to add designers .
+It’s to create agile , multidisciplinary teams that include designers , developers and product managers .
+Designing around the user experience , part of what’s known as “design thinking , ” has become crucial to the success of business software .
+It’s not simply because people expect consumer-type experiences at work , but also because the information we receive and the speed with which we’re expected to deal with it have exploded in just a few years .
+Work tools must be redesigned for this new complexity .
+I’ve seen that team members are pretty good at organizing themselves when they have established relationships .
+When people know one another and have developed empathy and trust , the issue of getting everyone’s ideas on the table does n’t come up much .
+Over time you learn about each other , come to respect those who can contribute and just figure out how to work together .
+I’ve seen this happen more often than not .
+But when your organization is in the midst of transformation — whether it is a three-person start-up hiring a fourth employee or a big global company leading major shifts in technology — you are faced with teams of people who don’t necessarily have the shared experiences that enable them to behave well together .
+Team dynamics can easily get in the way of good ideas , and the loudest voice often wins .
+I used to lead start-ups and have found that the same basic meeting practices can be used no matter what the size of a company .
+These strategies are effective with design thinking because they not only unleash everyone’s creativity but also give voice to every idea .
+It has been my experience that the biggest impediment to getting people to think about what’s possible — instead of what’s not possible — is the difficulty in exposing everyone’s ideas to the broader team .
+So we focus on two things : getting everyone to contribute and letting everyone’s contribution be heard .
+That does n’t come naturally .
+Sometimes organizational hierarchy might prevent a good idea from being considered because it was n’t shared .
+So at IBM , we intentionally assemble teams that span skills , levels of experience and points of view .
+And then ?
+It starts with a sticky note and a pen .
+We did this for our new business email tool , IBM Verse , which helps workers prioritize tasks and find the right people and information quickly .
+We began not by declaring that we wanted to transform enterprise email , but by asking the team to think about what people dislike about email .
+In cases like this , we begin by holding workshops where teams are given minimal instructions , and pen and paper .
+After the team leader presents a challenge , the room goes silent .
+Everyone spends 10 minutes writing their thoughts on sticky notes .
+One idea per note .
+No talking allowed .
+Then , idea by idea , people post their sticky notes on a big whiteboard .
+There’s still no talking , no judging yourself or others .
+It’s total mindfulness about the user’s experience .
+There’s no battling over the best ideas or who owns what .
+Just get your thoughts out of your brain and on the wall .
+The group keeps posting sticky notes until they slow to a dribble .
+When the members are done , everyone steps back .
+We call this popcorning .
+You don’t want to give people too much time .
+The point is to get everyone involved quickly .
+Then , the team leader groups the sticky notes into overlapping and logical areas .
+People take it all in , reflect , and then they disappear .
+They are free to leave the room — or the building — to brainstorm with colleagues face to face , on the phone or via a group texting tool .
+This opens up the playing field to less-vocal members of the team who are more apt to speak up online .
+After this freestyle brainstorming , the group returns to the room , sometimes after minutes but it could be hours or even days .
+Invariably they bring at least a couple dozen new ideas .
+Those go up on the board .
+Getting every idea in front of the team is important because it ’s very difficult to quash a good idea if it ’s shared .
+Once you know something , you can’t unknow it — you have to act .
+None of this is rocket science , but it ’s powerful if applied consistently .
+It makes for better teams and it leads to better outcomes .
+When you give voice to more people , the best ideas win , not the loudest ones .

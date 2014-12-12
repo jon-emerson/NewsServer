@@ -1,5 +1,6 @@
 package com.janknspank.dom;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.xml.sax.SAXException;
-
-import com.google.common.collect.SortedMultiset;
-import com.google.common.collect.TreeMultiset;
 
 public class Engine {
   public static DocumentNode crawl(String url) throws SAXException, IOException {
@@ -83,41 +81,67 @@ public class Engine {
     "http://www.nytimes.com/2014/12/09/business/media/madison-avenue-sees-rough-times-ahead-tempered-by-growth.html"
   };
   public static void main(String args[]) throws Exception {
-    DocumentNode node = crawl(urls[6]);
-    printNode(node, 0);
-    List<Node> paragraphs = new ArrayList<>();
-    paragraphs.addAll(node.findAll("article > p"));
-    paragraphs.addAll(node.findAll("article > div > p"));
+    for (String url : urls) {
+      // Open a file for writing all the paragraphs and sentences.
+      String filename = url;
+      if (filename.endsWith("/")) {
+        filename = url.substring(0, filename.length() - "/".length());
+      } if (filename.endsWith(".html")) {
+        filename = url.substring(0, filename.length() - ".html".length());
+      }
+      filename = filename.substring(filename.lastIndexOf("/") + 1);
+      FileOutputStream fos = new FileOutputStream("trainingdata/" + filename + ".txt");
+      System.err.println("Writing to " + filename + ".txt ...");
 
-    SortedMultiset<String> names = TreeMultiset.create();
-    SortedMultiset<String> organizations = TreeMultiset.create();
-    SortedMultiset<String> locations = TreeMultiset.create();
+      // Get all the paragraphs.
+      DocumentNode node = crawl(url);
+      List<Node> paragraphs = new ArrayList<>();
+      paragraphs.addAll(node.findAll("article > p"));
+      paragraphs.addAll(node.findAll("article > div > p"));
 
-    for (Node paragraph : paragraphs) {
-      String paragraphText = paragraph.getFlattenedText();
-      for (String sentence : Tokenizer.getSentences(paragraphText)) {
-        System.out.println(sentence);
+//      SortedMultiset<String> names = TreeMultiset.create();
+//      SortedMultiset<String> organizations = TreeMultiset.create();
+//      SortedMultiset<String> locations = TreeMultiset.create();
+//
+      for (Node paragraph : paragraphs) {
+        String paragraphText = paragraph.getFlattenedText();
+        for (String sentence : Tokenizer.getSentences(paragraphText)) {
+          boolean first = true;
+          for (String token : Tokenizer.getTokens(sentence)) {
+            if (first) {
+              first = false;
+            } else {
+              fos.write(" ".getBytes());
+            }
+            fos.write(token.getBytes());
+          }
+          fos.write("\n".getBytes());
+        }
       }
-      for (String name : Tokenizer.getNames(paragraphText)) {
-        names.add(name);
-      }
-      for (String organization : Tokenizer.getOrganizations(paragraphText)) {
-        organizations.add(organization);
-      }
-      for (String location : Tokenizer.getLocations(paragraphText)) {
-        locations.add(location);
-      }
-    }
-    for (String name : names.descendingMultiset()) {
-      System.out.println("NAME: " + name + " (" + names.count(name) + " occurrences)");
-    }
-    for (String organization : organizations.descendingMultiset()) {
-      System.out.println("ORG: " + organization + " (" + organizations.count(organization) +
-          " occurrences)");
-    }
-    for (String location : locations.descendingMultiset()) {
-      System.out.println("LOCATION: " + location + " (" + locations.count(location) +
-          " occurrences)");
+      fos.close();
+
+//        for (String name : Tokenizer.getNames(paragraphText)) {
+//          names.add(name);
+//        }
+//        for (String organization : Tokenizer.getOrganizations(paragraphText)) {
+//          organizations.add(organization);
+//        }
+//        for (String location : Tokenizer.getLocations(paragraphText)) {
+//          locations.add(location);
+//        }
+//      }
+//      for (String name : names.descendingMultiset()) {
+//        System.out.println("NAME: " + name + " (" + names.count(name) + " occurrences)");
+//      }
+//      for (String organization : organizations.descendingMultiset()) {
+//        System.out.println("ORG: " + organization + " (" + organizations.count(organization) +
+//            " occurrences)");
+//      }
+//      for (String location : locations.descendingMultiset()) {
+//        System.out.println("LOCATION: " + location + " (" + locations.count(location) +
+//            " occurrences)");
+//      }
+
     }
   }
 }

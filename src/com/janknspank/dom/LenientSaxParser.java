@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.xml.parsers.SAXParser;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
@@ -292,7 +293,8 @@ public class LenientSaxParser extends SAXParser {
           case '<':
             if (state == ParserState.DEFAULT) {
               if (currentBlock.length() > 0) {
-                String currentBlockString = currentBlock.toString();
+                String currentBlockString =
+                    StringEscapeUtils.unescapeHtml4(currentBlock.toString());
                 handler.characters(currentBlockString.toCharArray(), 0,
                     currentBlockString.length());
                 currentBlock.setLength(0);

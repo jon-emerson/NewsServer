@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class HtmlHandler extends DefaultHandler {
+  private static final boolean VERBOSE = false;
   private DocumentNode documentNode;
   private Node currentNode = documentNode;
   private int depth = 0;
@@ -30,10 +31,11 @@ public class HtmlHandler extends DefaultHandler {
     return documentNode;
   }
 
+  @SuppressWarnings("unused")
   @Override
   public void characters(char[] ch, int start, int length) throws SAXException {
     String s = String.copyValueOf(ch, start, length);
-    if (s.trim().length() > 0) {
+    if (VERBOSE && s.trim().length() > 0) {
       printSpaces();
       System.out.println("TEXT: " + s.trim());
     }
@@ -52,8 +54,10 @@ public class HtmlHandler extends DefaultHandler {
       String localName,
       String qName) throws SAXException {
     --depth;
-    printSpaces();
-    System.out.println("</" + qName + ">");
+    if (VERBOSE) {
+      printSpaces();
+      System.out.println("</" + qName + ">");
+    }
 
     // Clean up text nodes.
     currentNode.condenseTextChildren();
@@ -73,8 +77,10 @@ public class HtmlHandler extends DefaultHandler {
       String qName,
       Attributes attrs)
       throws SAXException {
-    printSpaces();
-    System.out.println("<" + qName + ">");
+    if (VERBOSE) {
+      printSpaces();
+      System.out.println("<" + qName + ">");
+    }
     ++depth;
 
     currentNode = new Node(currentNode, qName);
@@ -83,7 +89,7 @@ public class HtmlHandler extends DefaultHandler {
       currentNode.addAttribute(attrs.getQName(i), attrs.getValue(i));
     }
   }
-  
+
   private void printSpaces() {
     for (int i = 0; i < depth; i++) {
       System.out.print("  ");

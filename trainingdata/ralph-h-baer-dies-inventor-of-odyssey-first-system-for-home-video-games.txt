@@ -1,0 +1,86 @@
+Ralph H. Baer , who turned television sets into electronic fantasy lands by inventing and patenting the first home video game system , died on Saturday at his home in Manchester , N.H.
+He was 92 .
+His death was confirmed by his family .
+Video games have become more than just a ubiquitous pastime and a gigantic market ( by some estimates , total worldwide sales of console hardware and software and online , mobile and computer games exceeded $ 90 billion in 2013 ) .
+They are also an engine that has driven scientists and engineers to multiply computer speed , memory and visualization to today’s staggering capabilities .
+Flash back to the sultry late summer of 1966 : Mr. Baer is sitting on a step outside the Port Authority Bus Terminal in Manhattan waiting for a colleague .
+By profession , he is an engineer overseeing 500 employees at a military contractor .
+Today , a vision has gripped him , and he begins scribbling furiously on a yellow legal pad with a No. 2 pencil .
+The result was a detailed four-page outline for a “game box ” that would allow people to play board , action , sports and other games on almost any American television set .
+An intrigued boss gave him $ 2,000 for research and $ 500 for materials and assigned two men to work with him .
+For all three , as they plowed through prototype after prototype in a secret workshop , the project became an obsession .
+In March 1971 , Mr. Baer and his employer , Sanders Associates in Nashua , N.H. , filed for the first video game patent , which was granted in April 1973 as Patent No. 3,728,480 .
+It made an extraordinarily large claim to a legal monopoly for any product that included a domestic television with circuits capable of producing and controlling dots on a screen .
+Sanders Associates licensed its system to Magnavox , which began selling it as Odyssey in the summer of 1972 as the first home video game console .
+It sold 130,000 units the first year .
+Odyssey consisted of a master control unit containing all the electronic gear , two player control units that directed players on the TV screen , and a set of electronic program cards , each of which supported a different game .
+Plastic overlays that clung to the screen to supply color were included .
+To supplement the electronic action , a deck of playing cards , poker chips and a pair of dice were included .
+But the guts of the device were what mattered : 40 transistors and 40 diodes .
+That hardware ran everything .
+Odyssey , often called the first home computing device , had no software .
+Several months after Odyssey hit the market , Atari came out with the first arcade video game , Pong .
+Though Pong became better known than Odyssey and was in some ways more agile , Sanders and Magnavox immediately saw it as an infringement on their patent .
+They sued Atari in 1974 for usurping their rights .
+Atari settled with them by paying $ 700,000 to become Odyssey’s second licensee .
+Over the next 20 years , Magnavox went on to sue dozens more companies , winning more than $ 100 million .
+Mr. Baer often testified .
+“Magnavox is n’t in the business of making video games , ” Howard Lincoln , Nintendo’s vice president and senior counsel , groused in an interview with Newsday in 1989 .
+“They’re just in the business of suing people . ”
+( Nintendo , like all the game makers Magnavox challenged , lost . )
+Mr. Baer’s contraption represented the beginnings of a change in man’s relationship with machines .
+Harold Goldberg , in his book “All Your Base Are Belong to Us : How Fifty Years of Videogames Conquered Pop Culture ” ( 2011 ) , said Mr. Baer made television “an extension of you , the player . ”
+“It would let you interact with a square on a black-and-white screen , and if you had even the lamest imagination , it made you believe you were volleying at tennis , aiming carefully as a brave marksman , even playing the innocent as you saved lives , ” Mr. Goldberg wrote .
+The roots of video games go back to universities and research laboratories .
+Some experts cite William A. Higinbotham’s Tennis for Two , invented in 1958 at Brookhaven National Laboratory , as the first interactive computer game .
+“ When technology is ready for something novel , when the components needed to build something new become affordable , it is going to be done by someone and more likely by several people , ” wrote Mr. Baer , who said he had never seen Tennis for Two .
+From Mr. Baer’s modestly named “brown box ” have sprung PlayStation , Xbox and Wii , all products of the ceaseless revolution in microprocessing .
+Two technical paths merged to power this revolution .
+One was computer science ; the other was Mr. Baer’s field of expertise , television engineering .
+Mr. Baer had more than 150 United States and foreign patents , and his contributions ranged from talking doormats and greeting cards to submarine tracking systems .
+In 2006 , President George W. Bush awarded him the National Medal of Technology .
+In 2010 , he was admitted to the National Inventors Hall of Fame .
+Along with Howard Morrison , he invented the electronic game Simon , which was introduced at Studio 54 in Manhattan in 1978 and became a pop culture phenomenon in the 1980s .
+A saucer-shaped plastic toy with four colored buttons , it lit up and emitted tones in a sequence that the player then had to reproduce .
+It is still being sold .
+“Coming up with novel ideas and converting them into real products has always been as natural as breathing for me , ” Mr. Baer wrote in his 2005 autobiography , “Videogames : In the Beginning . ”
+Ralph Henry Baer was born on March 8 , 1922 , into a Jewish family in Pirmasens , Germany , where his father worked in a shoe factory .
+His family emigrated to New York in 1938 to escape Hitler and settled in the Bronx .
+Within a week , Mr. Baer , then 16 , was working from 8 a.m. to 6 p.m. in a factory that made leather cases for manicure kits .
+He soon invented a machine to speed the process by stitching five or six at once .
+One day on the subway he noticed an advertisement in a magazine somebody else was reading .
+“Make big money in radio and television servicing , ” it said .
+So Mr. Baer spent a quarter of his $ 12 in wages every week on a correspondence course .
+He finished in a few months , then took the advanced course .
+He quit the factory after two years and fixed radios .
+He was drafted into the Army in 1943 and became an intelligence officer .
+He served in Europe during World War II , and in his spare time studied algebra and made radios from German mine detectors so his friends could listen to music .
+Trained to be an expert in small arms , he collected 18 tons of German weapons , which were exhibited at military museums in the United States .
+After the war , Mr. Baer attended the American Television Institute of Technology in Chicago , where he earned one of the first bachelor’s degrees in television engineering .
+He then worked for a company that made surgical cutting machines , before joining Loral Electronics in the Bronx as a senior engineer .
+Assigned to design a state-of-the art television set in 1951 , he suggested adding a game-playing feature .
+“Forget it , ” he recalled his boss saying .
+“ Just build the damn TV set ; you’re behind schedule as it is . ”
+In 1956 Mr. Baer joined Sanders , where he advanced to division manager .
+As he pursued military projects like electronic devices to teach weapons aiming , his mind returned to the idea of a TV set with a game feature .
+Those musings led to his eureka moment at the New York bus station .
+Still , he said in 2007 , the common reaction of most Sanders executives was , “Are you still screwing around with that stuff ? ”
+One top boss , however , saw potential in Mr. Baer’s idea .
+He assigned two engineers , Bill Harrison and Bill Rusch , to work with him , and gave the three $ 2,500 to spend .
+In a tiny room Mr. Baer described as an attic , they worked in secret , building seven prototypes .
+Sanders first tried to license it to pay-TV companies , the forerunners of today’s cable systems , but found no takers .
+Television manufacturers were also lukewarm .
+RCA expressed interest but backed out .
+Magnavox then signed on .
+The Odyssey had sold some 330,000 units by 1975 , but Mr. Baer thought it could have sold many more .
+He blamed Magnavox for limiting sales to its own dealers , giving the false impression that the system worked only on Magnavox sets .
+He also criticized the company for pricing it at $ 100 , rather than the $ 19.95 he recommended .
+Odyssey nonetheless represented a critical point .
+Along with Atari’s Pong , which had more advanced electronics and sound , it moved games into a faster , more complex realm , to the delight of an eager new audience .
+The accomplishment , Mr. Baer wrote , would amount to far more than just fun and games .
+“If it weren’t for video game enthusiasts and the absolute commercial need to keep them happy with ever-better graphics requiring ever-higher processor speeds , complex computer graphics would still be found only in the high-priced domains of the business and science world , ” he said .
+In an interview , Keith Feinstein , a video game historian , called Mr. Baer’s invention “the beginning of a revolution in thought . ”
+Mr. Baer retired from Sanders in 1987 and started his own consulting business .
+Mr. Baer is survived by two sons , James and Mark ; a daughter , Nancy Baer ; and four grandchildren .
+His wife of 53 years , the former Dena Whinston , died in 2006 .
+Mr. Baer donated his collection of early game hardware to several museums , including the Smithsonian Institution .

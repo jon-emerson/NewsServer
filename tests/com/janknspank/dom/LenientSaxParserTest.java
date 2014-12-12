@@ -63,7 +63,7 @@ public class LenientSaxParserTest {
         "  .let's let random < crap > be here for safety !!<<<" +
         "</STYLE>" +
         "</head>" +
-        "<body onload='alert(\"moose!\")'>Get <b>ready</b>..." +
+        "<body onload='alert(\"moose!\")'>Let&#8217;s get <b>ready</b>..." +
         "<!-- any comments and <tag>s inside should be ignored! --->" +
         "<img src='image.jpg' width=500 height=600 title=\"Monster!\"/>" +
         "</body></html>";
@@ -74,7 +74,7 @@ public class LenientSaxParserTest {
     stringsToFind.add("Hello!");
     stringsToFind.add("  if (5<Number.MAX_VALUE && 2 > 3) alert('yup');");
     stringsToFind.add("  .let's let random < crap > be here for safety !!<<<");
-    stringsToFind.add("Get ");
+    stringsToFind.add("Let’s get ");
     stringsToFind.add("ready");
     stringsToFind.add("...");
 
