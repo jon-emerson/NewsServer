@@ -1,85 +1,85 @@
-One summer day two years ago , Ivan Vesic , a software engineer who lives in the southern Serbian city of Nis , rushed to a local veterinary clinic .
-A car had hit his rescue cat , Damian , badly damaging his leg and tail .
-The vet , Mirza Sejdinovic , had to amputate the cat’s tail but managed to save his leg .
-Mr. Vesic sighed with relief ; Damian was going to be fine .
-The two men began to chat and Mr. Sejdinovic complained about the software at his clinic .
-Mr. Vesic looked at the computer screen and quickly concluded there must be a better way to manage a veterinary practice .
-In the following weeks Mr. Vesic and Mr. Sejdinovic realized they could do something much more ambitious — create user-friendly software to be used by vet practices all over the world .
-“We decided that we should actually quit our jobs and start building a start-up , ” Mr. Vesic said , adding that the team was joined by a third partner , Milan Djordjevic , a programmer .
-Their company , VetCloud , was born .
-More than two years later , after extensive testing in the Balkans and Britain , its practice management software was introduced in London in November .
-Mr. Vesic , 28 , Mr. Sejdinovic , 30 , and Mr. Djordjevic , 36 , are among hundreds of entrepreneurs in the Balkans who have launched tech start-ups that they hope to take global , at the same time transforming this ex-communist , relatively poor corner of Europe — known best abroad as war-torn , corrupt and unstable — into a hub for technology and innovation .
-“ I believe it ’s only a matter of time before we have a Skype-level success from the region , ” said Lyuben Belov , managing partner at Launchub , a seed fund based in the Bulgarian capital , Sofia , which invests in digital start-ups in southeast Europe .
-“Someone will make it big on the global market , ” he added , predicting that a Balkan company would be traded on the Nasdaq in New York one day .
-Some Balkan start-ups , like Emailio , a company co-founded by a Bulgarian high school student working on a mobile app to de-clutter inboxes , have moved to Silicon Valley .
-Flipps , an app that lets users stream video from mobile devices to a television , has also swapped Bulgaria for the Bay Area .
-In another fillip for the region’s start-ups , Facebook announced in July that it was buying LiveRail , a video ad company co-founded by two Romanians , for a reported $ 400 million to $ 500 million .
-In October , Progress Software , based in Bedford , Mass. , said it planned to acquire Telerik , a Bulgarian software company , for $ 262.5 million .
+One summer day two years ago , <START:person> Ivan Vesic <END> , a software engineer who lives in the southern Serbian city of <START:location> Nis <END> , rushed to a local veterinary clinic .
+A car had hit his rescue cat , <START:person> Damian <END> , badly damaging his leg and tail .
+The vet , <START:person> Mirza Sejdinovic <END> , had to amputate the cat’s tail but managed to save his leg .
+<START:person> Mr. Vesic <END> sighed with relief ; Damian was going to be fine .
+The two men began to chat and <START:person> Mr. Sejdinovic <END> complained about the software at his clinic .
+<START:person> Mr. Vesic <END> looked at the computer screen and quickly concluded there must be a better way to manage a veterinary practice .
+In the following weeks <START:person> Mr. Vesic <END> and <START:person> Mr. Sejdinovic <END> realized they could do something much more ambitious — create user-friendly software to be used by vet practices all over the world .
+“We decided that we should actually quit our jobs and start building a start-up , ” <START:person> Mr. Vesic <END> said , adding that the team was joined by a third partner , <START:person> Milan Djordjevic <END> , a programmer .
+Their company , <START:organization> VetCloud <END> , was born .
+More than two years later , after extensive testing in the <START:location> Balkans <END> and <START:location> Britain <END> , its practice management software was introduced in <START:location> London <END> in November .
+<START:person> Mr. Vesic <END> , 28 , <START:person> Mr. Sejdinovic <END> , 30 , and <START:person> Mr. Djordjevic <END> , 36 , are among hundreds of entrepreneurs in the <START:location> Balkans <END> who have launched tech start-ups that they hope to take global , at the same time transforming this ex-communist , relatively poor corner of <START:location> Europe <END> — known best abroad as war-torn , corrupt and unstable — into a hub for technology and innovation .
+“ I believe it ’s only a matter of time before we have a Skype-level success from the region , ” said <START:person> Lyuben Belov <END> , managing partner at <START:organization> Launchub <END> , a seed fund based in the Bulgarian capital , <START:location> Sofia <END> , which invests in digital start-ups in southeast <START:location> Europe <END> .
+“Someone will make it big on the global market , ” he added , predicting that a Balkan company would be traded on the <START:organization> Nasdaq <END> in <START:location> New York <END> one day .
+Some Balkan start-ups , like <START:organization> Emailio <END> , a company co-founded by a Bulgarian high school student working on a mobile app to de-clutter inboxes , have moved to <START:location> Silicon Valley <END> .
+<START:organization> Flipps <END> , an app that lets users stream video from mobile devices to a television , has also swapped <START:location> Bulgaria <END> for the <START:location> Bay Area <END> .
+In another fillip for the region’s start-ups , <START:organization> Facebook <END> announced in July that it was buying <START:organization> LiveRail <END> , a video ad company co-founded by two Romanians , for a reported $ 400 million to $ 500 million .
+In October , <START:organization> Progress Software <END> , based in <START:location> Bedford , Mass. <END> , said it planned to acquire <START:organization> Telerik <END> , a Bulgarian software company , for $ 262.5 million .
 For years , big international companies have outsourced information technology work to Eastern Europe .
 They have been attracted by relatively cheap labor , low rent and a pool of qualified software developers , whose skills reflect a tradition of strong math and engineering education that goes back to communist times .
-Low business taxes help — Bulgaria , for example , offers a flat rate of 10 percent .
+Low business taxes help — <START:location> Bulgaria <END> , for example , offers a flat rate of 10 percent .
 Now , those very same reasons are encouraging Balkan entrepreneurs to start their own businesses .
-But the Balkans are up against tough competition from Europe’s top start-up destinations , like London , Berlin , Helsinki and Stockholm , where access to venture capital is easier and the start-up scene is much more advanced .
+But the <START:location> Balkans <END> are up against tough competition from <START:location> Europe’s <END> top start-up destinations , like <START:location> London <END> , <START:location> Berlin <END> , <START:location> Helsinki <END> and <START:location> Stockholm <END> , where access to venture capital is easier and the start-up scene is much more advanced .
 While Balkan entrepreneurs are blessed with ambition , tech know-how and enthusiasm , these would-be billionaires also face red tape , a dearth of government incentives and their own lack of business experience .
 Balkan governments are slowly getting more involved in the sector .
-Serbia has an Innovation Fund financed by the European Union , which has awarded 53 grants , amounting to €6 million so far .
-Sofia is building a €50 million technology park — also with funding from Brussels — to link local businesses and universities and foster innovation .
-President Rosen Plevneliev of Bulgaria declared at a groundbreaking ceremony in July that it would be “the heart of start-up culture ” in the country .
-Back in Nis , VetCloud’s team has been developing a cloud-based software for vets , which stores medical records , handles appointments and sends alerts when new supplies of medicine are needed .
-To win investment for their company , they did not go to Belgrade , the Serbian capital , but to Sofia , where more tech money resides .
-“ While there was a community in Belgrade , there was already an ecosystem in Sofia , ” said Mr. Vesic , the company ’s chief executive .
-The firm has received €200,000 from Eleven , an accelerator fund that offers a training and mentorship program in return for a stake in the companies it supports .
-The VetCloud team spent three months in Bulgaria , learning the nuts and bolts of starting and running a tech company .
-“We got the money and advice we needed , ” Mr. Vesic said .
-Launchub and Eleven manage a total of €21 million as part of a European Union-sponsored initiative to support small and midsize businesses , named Jeremie .
+Serbia has an Innovation Fund financed by the <START:organization> European Union <END> , which has awarded 53 grants , amounting to €6 million so far .
+Sofia is building a €50 million technology park — also with funding from <START:location> Brussels <END> — to link local businesses and universities and foster innovation .
+President <START:person> Rosen Plevneliev <END> of <START:location> Bulgaria <END> declared at a groundbreaking ceremony in July that it would be “the heart of start-up culture ” in the country .
+Back in <START:location> Nis <END> , VetCloud’s team has been developing a cloud-based software for vets , which stores medical records , handles appointments and sends alerts when new supplies of medicine are needed .
+To win investment for their company , they did not go to <START:location> Belgrade <END> , the Serbian capital , but to <START:location> Sofia <END> , where more tech money resides .
+“ While there was a community in <START:location> Belgrade <END> , there was already an ecosystem in <START:location> Sofia <END> , ” said <START:person> Mr. Vesic <END> , the company ’s chief executive .
+The firm has received €200,000 from <START:organization> Eleven <END> , an accelerator fund that offers a training and mentorship program in return for a stake in the companies it supports .
+The <START:organization> VetCloud <END> team spent three months in <START:location> Bulgaria <END> , learning the nuts and bolts of starting and running a tech company .
+“We got the money and advice we needed , ” <START:person> Mr. Vesic <END> said .
+<START:organization> Launchub <END> and <START:organization> Eleven <END> manage a total of €21 million as part of a European Union-sponsored initiative to support small and midsize businesses , named <START:organization> Jeremie <END> .
 They have distributed €9 million among 120 start-ups from the region in the past two years and plan to fund around 200 firms by 2015 .
-In comparison , German and international venture capitalists in Berlin invested €133 million in start-ups in 2012 , according to a McKinsey study from last year .
-But a small amount of funding goes a long way in the Balkans , where costs for starting a business are much lower than those in Berlin or London .
+In comparison , German and international venture capitalists in <START:location> Berlin <END> invested €133 million in start-ups in 2012 , according to a <START:organization> McKinsey <END> study from last year .
+But a small amount of funding goes a long way in the <START:location> Balkans <END> , where costs for starting a business are much lower than those in <START:location> Berlin <END> or <START:location> London <END> .
 Entrepreneurs have had to overcome the long tradition of outsourcing in the Balkans to want to work for themselves and come up with the next must-have app or big e-business success .
-Milos Milic , a 25-year-old Serbian IT developer , is part of the new generation .
-Last December , he and his business partner , Srdjan Stupar , quit their jobs to start Farmia , an online exchange for livestock .
-Mr. Milic described the change as the best thing that has ever happened to him .
+<START:person> Milos Milic <END> , a 25-year-old Serbian IT developer , is part of the new generation .
+Last December , he and his business partner , <START:person> Srdjan Stupar <END> , quit their jobs to start <START:organization> Farmia <END> , an online exchange for livestock .
+<START:person> Mr. Milic <END> described the change as the best thing that has ever happened to him .
 “We have smaller salaries now , but we have a chance to build our own company , ” he said .
 Until recently , Serbian start-ups had to look abroad for financing .
-But funds like StartLabs , launched last year , aim to fill this gap , offering funding of up to $ 50,000 and connecting firms with mentors and foreign investors .
-“This is the best time to start something like this , ” said Nebojsa Lazic , the StartLabs ’ general partner .
+But funds like <START:organization> StartLabs <END> , launched last year , aim to fill this gap , offering funding of up to $ 50,000 and connecting firms with mentors and foreign investors .
+“This is the best time to start something like this , ” said <START:person> Nebojsa Lazic <END> , the <START:organization> StartLabs <END> ’ general partner .
 Things have changed , he added , since the days when entrepreneurs were half-jokingly called “superheroes with suicidal tendencies” .
-Unlike Silicon Valley companies , which have access to hundreds of millions of consumers in the United States alone , Balkan firms are based in a region fragmented into small markets .
-But Dilyan Dimitrov , one of Eleven’s founders , says this can be a plus as it forces regional start-ups to develop ideas with broader appeal .
+Unlike <START:location> Silicon Valley <END> companies , which have access to hundreds of millions of consumers in the <START:location> United States <END> alone , Balkan firms are based in a region fragmented into small markets .
+But <START:person> Dilyan Dimitrov <END> , one of <START:organization> Eleven’s <END> founders , says this can be a plus as it forces regional start-ups to develop ideas with broader appeal .
 “Everyone who is starting a tech product is very much aware that they have to make a global-scalable product , ” he said .
-Playground Energy , based in Sofia , is trying to do exactly that .
+<START:organization> Playground Energy <END> , based in <START:location> Sofia <END> , is trying to do exactly that .
 The company makes playground equipment that generates electricity from children’s play .
 The electricity powers lights , sounds and other effects to encourage the children to play longer .
-The company ’s co-founder , Hristo Alexiev , says that being based in Bulgaria gives the company significant advantages .
+The company ’s co-founder , <START:person> Hristo Alexiev <END> , says that being based in <START:locatiojn> Bulgaria <END> gives the company significant advantages .
 It can pursue a strategy of global growth while using local designers and developers .
 That keeps costs low , making the most of the €200,000 it has secured in investment .
-“If we moved to America , we’d have spent half of the money just on the move , rent , lawyers , ” said Mr. Alexiev , who , at 44 , talks about Playground Energy , his sixth start-up , with the enthusiasm of a 17-year-old launching his first business .
-But others have chosen a different path , moving to London or Berlin , where they believe they can grow faster .
-Unioncy , an online platform designed to let people keep track of their purchases and store their warranties , bills , insurance and manuals all in one place , moved from Sofia to London , where they found more investment opportunities .
-But Unioncy’s fate shows that moving to a big tech hub is no guarantee of success .
+“If we moved to <START:location> America <END> , we’d have spent half of the money just on the move , rent , lawyers , ” said <START:person> Mr. Alexiev <END> , who , at 44 , talks about <START:organization> Playground Energy <END> , his sixth start-up , with the enthusiasm of a 17-year-old launching his first business .
+But others have chosen a different path , moving to <START:location> London <END> or <START:location> Berlin <END> , where they believe they can grow faster .
+<START:organization> Unioncy <END> , an online platform designed to let people keep track of their purchases and store their warranties , bills , insurance and manuals all in one place , moved from <START:location> Sofia <END> to <START:location> London <END> , where they found more investment opportunities .
+But <START:organization> Unioncy’s <END> fate shows that moving to a big tech hub is no guarantee of success .
 The business quickly went from start-up to shutdown , announcing its demise at the end of October due to “larger than anticipated technical challenges . ”
-VetCloud , the Serbian start-up , also established a presence in London after receiving financing and mentoring from the British office of TechStars , an international fund .
-“We decided to move where our market is , ” said Mr. Vesic .
-While start-ups in the Balkans hope for a big breakthrough , one nearby ex-communist country has already scored a string of international successes .
-Hungary was the launch pad for companies including Prezi , the popular cloud-based presentation software ; Ustream , a live video-streaming platform ; and LogMeIn , which gives users remote access to their computers .
-Prezi was created in 2009 as an alternative to Microsoft’s ubiquitous PowerPoint .
+<START:organization> VetCloud <END> , the Serbian start-up , also established a presence in <START:location> London <END> after receiving financing and mentoring from the British office of <START:organization> TechStars <END> , an international fund .
+“We decided to move where our market is , ” said <START:person> Mr. Vesic <END> .
+While start-ups in the <START:location> Balkans <END> hope for a big breakthrough , one nearby ex-communist country has already scored a string of international successes .
+<START:location> Hungary <END> was the launch pad for companies including <START:organization> Prezi <END> , the popular cloud-based presentation software ; Ustream , a live video-streaming platform ; and <START:organization> LogMeIn <END> , which gives users remote access to their computers .
+<START:organization> Prezi <END> was created in 2009 as an alternative to <START:organization> Microsoft’s <END> ubiquitous <START:organization> PowerPoint <END> .
 Five years later , it has 45 million users around the world .
-For a co-founder , Peter Halacsy , the key to start-up success is “not the money , it ’s not the infrastructure , not the legal system ” but changing the way people think — getting away from a stuffy , risk-averse , communist-era mentality .
-Along with Ustream and LogMeIn , Prezi created a nongovernmental organization called Bridge Budapest that aims to help and inspire a new generation of Hungarian entrepreneurs .
+For a co-founder , <START:person> Peter Halacsy <END> , the key to start-up success is “not the money , it ’s not the infrastructure , not the legal system ” but changing the way people think — getting away from a stuffy , risk-averse , communist-era mentality .
+Along with <START:organization> Ustream <END> and <START:organization> LogMeIn <END> , <START:organization> Prezi <END> created a nongovernmental organization called <START:organization> Bridge Budapest <END> that aims to help and inspire a new generation of Hungarian entrepreneurs .
 “ Here , parents tell their kids : ‘Don’t try , it ’s risky .
-Go work in a bank , that would be better for you , " ’ said Veronika Pistyur , the organization’s chief executive .
+Go work in a bank , that would be better for you , " ’ said <START:person> Veronika Pistyur <END> , the organization’s chief executive .
 “Now I can see that more and more people are willing to try . ”
-But , so far , newer Hungarian start-ups have not managed to reach the same level of success as Prezi and the other established stars of Budapest’s tech scene .
-Back in the Balkans , investors are under no illusions that the region will become another Silicon Valley , but some say it could still play a worthwhile role in the international tech scene .
-“ What can develop here is a kind of incubator for talents — places that yield people with interesting ideas , ” said Maxim Gurvits , a partner at Sofia-based Teres Capital , which plans to start a venture capital fund to invest in startups in Central and Eastern Europe .
-“So , the next time you want to create a company , you go to Sofia , not New York , because it ’s very expensive there . ”
-While the Balkans may have plenty of coders , investors say the shortage of people with business experience is a serious disadvantage .
-For Mr. Belov , from Launchub , “the only way to have a big success is to have the developers here but the sales and marketing outsourced to places where those skills are developed to perfection , like London and Silicon Valley . ”
+But , so far , newer Hungarian start-ups have not managed to reach the same level of success as <START:organization> Prezi <END> and the other established stars of <START:location> Budapest’s <END> tech scene .
+Back in the <START:location> Balkans <END> , investors are under no illusions that the region will become another <START:location> Silicon Valley <END> , but some say it could still play a worthwhile role in the international tech scene .
+“ What can develop here is a kind of incubator for talents — places that yield people with interesting ideas , ” said <START:person> Maxim Gurvits <END> , a partner at Sofia-based <START:organization> Teres Capital <END> , which plans to start a venture capital fund to invest in startups in Central and Eastern <START:location> Europe <END> .
+“So , the next time you want to create a company , you go to <START:location> Sofia <END> , not <START:location> New York <END> , because it ’s very expensive there . ”
+While the <START:location> Balkans <END> may have plenty of coders , investors say the shortage of people with business experience is a serious disadvantage .
+For <START:person> Mr. Belov <END> , from <START:organization> Launchub <END> , “the only way to have a big success is to have the developers here but the sales and marketing outsourced to places where those skills are developed to perfection , like <START:location> London <END> and <START:location> Silicon Valley <END> . ”
 Some tech entrepreneurs also want more immediate and practical help .
 Some point to the example of the British government , which offers big tax breaks to investors in start-ups and the companies themselves .
-“All start-ups need tax benefits and a more relaxed tax system during the first year or two , ” said Danica Radisic , a Belgrade-based entrepreneur .
+“All start-ups need tax benefits and a more relaxed tax system during the first year or two , ” said <START:person> Danica Radisic <END> , a Belgrade-based entrepreneur .
 Despite current obstacles , the coders keep working on their big ideas .
-In addition to its launch in Britain , VetCloud has been negotiating partnerships with distributors in the United States .
-Mr. Vesic dreams big .
-“If you use Dropbox to sync your files , if you use Google to search the Internet , you’ll use VetCloud to manage vets ’ medical records , ” he said .
-This article was produced as part of the Balkan Fellowship for Journalistic Excellence , supported by the ERSTE Foundation and Open Society Foundations , in cooperation with the Balkan Investigative Reporting Network .
+In addition to its launch in <START:location> Britain <END> , <START:organization> VetCloud <END> has been negotiating partnerships with distributors in the <START:location> United States <END> .
+<START:person> Mr. Vesic <END> dreams big .
+“If you use <START:organization> Dropbox <END> to sync your files , if you use <START:organization> Google <END> to search the Internet , you’ll use <START:organization> VetCloud <END> to manage vets ’ medical records , ” he said .
+This article was produced as part of the <START:organization> Balkan Fellowship for Journalistic Excellence <END> , supported by the <START:organization> ERSTE Foundation <END> and <START:organization> Open Society Foundations <END> , in cooperation with the <START:organization> Balkan Investigative Reporting Network <END> .

@@ -8,7 +8,7 @@ The judge , however , disagreed with <START:organization> Apple’s <END> argume
 She ordered the plaintiff lawyers to find one by Tuesday morning .
 The judge appeared annoyed about the discrepancies with <START:person> Ms. Rosen’s <END> iPods and scolded the plaintiff lawyers for failing to do their homework .
 Another plaintiff in the case dropped out last week .
-“You’ve certainly created a problem on the plaintiffs ’ side , ” Judge <START:person> Gonzalez Rogers <END> said before reaching her decision .
+“You’ve certainly created a problem on the plaintiffs ’ side , ” <START:person> Judge Gonzalez Rogers <END> said before reaching her decision .
 The lawsuit , filed a decade ago , involves older iPods , which played only songs sold in the iTunes Store , or those downloaded from CDs — not music from competing stores .
 The plaintiff lawyers represent consumers who say <START:organizationn> Apple <END> violated antitrust law because to keep their music , people had to stay with the iPod and buy higher-priced ones rather than cheaper , alternative music players .
 For this , the plaintiff lawyers want <START:organization> Apple <END> to pay consumers at least $ 350 million in damages .
