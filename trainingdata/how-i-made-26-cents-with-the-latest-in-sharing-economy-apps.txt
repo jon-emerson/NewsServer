@@ -1,38 +1,38 @@
-SEATTLE – Last week , I had a few minutes to kill so rather than blow it on Facebook or Twitter , I made a little cash .
-I installed an app called Spare5 on my iPhone and , moments later , was using it to describe women’s shoes for the Internet retailer Zulily .
+<START:location> SEATTLE <END> – Last week , I had a few minutes to kill so rather than blow it on <START:organization> Facebook <END> or <START:organization> Twitter <END> , I made a little cash .
+I installed an app called <START:organization> Spare5 <END> on my <START:organization> iPhone <END> and , moments later , was using it to describe women’s shoes for the Internet retailer <START:organization> Zulily <END> .
 After 12 minutes of tagging photos with words like “sandal” and “flats ” – and realizing how meager my insights into women’s footwear are – I prepared to see my earnings .
 My payout : 26 cents or , if I had continued at that pace , $ 1.30 an hour .
 Internet companies have figured out ways to help people make money by sharing their cars , renting out their apartments and performing mundane tasks like standing in line .
-Now they want to give them a way monetize downtime , the brief interludes in most people’s day when they’re waiting for a latte at Starbucks , sitting in a waiting room or riding the bus home .
+Now they want to give them a way monetize downtime , the brief interludes in most people’s day when they’re waiting for a latte at <START:organization> Starbucks <END> , sitting in a waiting room or riding the bus home .
 It’s the next logical step in the sharing economy .
-The first generation of companies in the field – TaskRabbit , Lyft , Airbnb and Fiverr – turned people into microentrepreneurs , giving them online marketplaces to profit from their skills and property and , if they hustled enough , providing real income .
-Spare5 turns them into something else – call them nanoentrepreneurs .
+The first generation of companies in the field – <START:organization> TaskRabbit <END> , <START:organization> Lyft <END> , <START:organization> Airbnb <END> and <START:organization> Fiverr <END> – turned people into microentrepreneurs , giving them online marketplaces to profit from their skills and property and , if they hustled enough , providing real income .
+<START:organization> Spare5 <END> turns them into something else – call them nanoentrepreneurs .
 It is n’t a substitute for a job .
-It’s a substitute for playing Candy Crush and liking pictures of your friends ’ schnauzer on Facebook .
+It’s a substitute for playing <START:organization> Candy Crush <END> and liking pictures of your friends ’ schnauzer on <START:organization> Facebook <END> .
 Rather than spending a dollar to receive fake gold coins in a game , you can use the app to earn actual coins .
-“We all have this Pavlovian response , if you’re in an elevator or have a few minutes , we all pull out our phones and do something , ” said Matt Bencke , the chief executive of Spare5 , which plans to announce on Monday that it has raised $ 3.25 million in funding from Madrona Venture Group , New Enterprise Associates and the Foundry Group .
-The idea behind Spare5 , which was formed inside Madrona by a start-up studio at the firm , is to use that time more productively .
-“You get a push notification , open it up and two minutes later , you made a buck , ” Mr. Bencke said .
+“We all have this Pavlovian response , if you’re in an elevator or have a few minutes , we all pull out our phones and do something , ” said <START:person> Matt Bencke <END> , the chief executive of <START:organization> Spare5 <END> , which plans to announce on Monday that it has raised $ 3.25 million in funding from <START:organization> Madrona Venture Group <END> , <START:organization> New Enterprise Associates <END> and the <START:organization> Foundry Group <END> .
+The idea behind <START:organization> Spare5 <END> , which was formed inside <START:organization> Madrona <END> by a start-up studio at the firm , is to use that time more productively .
+“You get a push notification , open it up and two minutes later , you made a buck , ” <START:person> Mr. Bencke <END> said .
 “We’re very much trying to harness the attention deficit generation . ”
 “We’re definitely not trying to be a job , ” he added .
-Yet Spare5 is a form of work , even if it ’s not remunerative .
-Mr. Bencke calls the app an “on-demand work platform that breaks large , corporate , operational problems into tiny , bite-sized tasks . ”
+Yet <START:organization> Spare5 <END> is a form of work , even if it ’s not remunerative .
+<START:person> Mr. Bencke <END> calls the app an “on-demand work platform that breaks large , corporate , operational problems into tiny , bite-sized tasks . ”
 In its initial form , the company ’s corporate clients are harnessing the masses to help with a problem that has no great solution today : describing big libraries of photographs so that they are more easily discoverable to people through Internet search .
 Having accurate , detailed tags on photographs – also known as metadata – is becoming increasingly important to e-commerce , helping people find the right piece of apparel , a home with the appropriate décor and a hotel room with the perfect view .
 Having employees do the tagging is tough when a vast number of images is involved , and it ’s notoriously difficult for computers to accurately describe the contents of photos on their own .
-Getty Images , the big creator and distributor of photographs , is starting a pilot program with Spare5 to help improve the quality of metadata on its photographs so that the most relevant images pop up first when its customers search for them .
-Steve Heck , Getty’s chief technology officer , says the app can help with “disambiguation ” of existing metadata on photos ; clarifying , for example , whether a picture tagged “Chicago ” shows the musical , the city or the band .
-The other option for companies like Getty is to farm out their image tagging to low-wage countries like India .
-Mr. Heck said Getty had done that , but it was challenging to train outsourcers to do the work well and then retain their workers .
-Getty has also considered using an online marketplace run by Amazon called Mechanical Turk , but he said the service did not give him much control over who was working on Getty’s tagging projects .
-An appealing part of Spare5’s pitch , he said , is that it will use people who are qualified to do so to tag his images , based on their interests and expertise .
+<START:organization> Getty Images <END> , the big creator and distributor of photographs , is starting a pilot program with <START:organization> Spare5 <END> to help improve the quality of metadata on its photographs so that the most relevant images pop up first when its customers search for them .
+<START:person> Steve Heck <END> , <START:organization> Getty’s <END> chief technology officer , says the app can help with “disambiguation ” of existing metadata on photos ; clarifying , for example , whether a picture tagged “Chicago ” shows the musical , the city or the band .
+The other option for companies like <START:organization> Getty <END> is to farm out their image tagging to low-wage countries like India .
+<START:organization> Mr. Heck <END> said <START:organization> Getty <END> had done that , but it was challenging to train outsourcers to do the work well and then retain their workers .
+<START:organization> Getty <END> has also considered using an online marketplace run by <START:organization> Amazon <END> called <START:organization> Mechanical Turk <END> , but he said the service did not give him much control over who was working on <START:organization> Getty’s <END> tagging projects .
+An appealing part of <START:organization> Spare5’s <END> pitch , he said , is that it will use people who are qualified to do so to tag his images , based on their interests and expertise .
 ( Users of the app complete a questionnaire and provide links to their social media pages . )
-About 12,000 people have downloaded the app , a quarter of whom actively use it , Spare5 said .
-One of them is Courtney Dale , a designer at an architecture firm in Metairie , La. , who has made about $ 126 each of the last two weeks by using the app two to three hours a day , which qualifies her as an unusually industrious user of Spare5 .
+About 12,000 people have downloaded the app , a quarter of whom actively use it , <START:organization> Spare5 <END> said .
+One of them is <START:person> Courtney Dale <END> , a designer at an architecture firm in <START:location> Metairie , La. <END> , who has made about $ 126 each of the last two weeks by using the app two to three hours a day , which qualifies her as an unusually industrious user of <START:organization> Spare5 <END> .
 “It does make you look at what you do when you’re just sitting around doing nothing , ” Ms. Dale , 25 , said .
-“How did I feel comfortable just wasting time playing Angry Birds ? ”
+“How did I feel comfortable just wasting time playing <START:organization> Angry Birds <END> ? ”
 There is something concerning , though , about the idea that unpaid spare time is time squandered .
-Arun Sundararajan , a professor at New York University’s Stern School of Business , says that services like Spare5 can be empowering to people who want more control over when and how they work , even if it ’s for peanuts .
+<START:person> Arun Sundararajan <END> , a professor at <START:organization> New York University’s <END> <START:organization> Stern School of Business <END> , says that services like <START:organization> Spare5 <END> can be empowering to people who want more control over when and how they work , even if it ’s for peanuts .
 But he says that can be taken too far .
 “Spare time is a good thing to have , ” he said .
 “You don’t want to spend every minute making money . ”

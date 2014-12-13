@@ -4,7 +4,7 @@ You’ve got the extrovert , the introvert , the know-it-all and the ambitious s
 No matter what the mix , there’s always someone who dominates the discussion , and others who defer to that person out of frustration — or worse , complacency .
 But getting the best work out of a team is n’t about silencing the loudest person .
 It’s about getting everyone involved to explore every angle , bring all ideas to the surface and collaborate on a path forward .
-Two years ago , I was asked to lead the transformation of product design at IBM .
+Two years ago , I was asked to lead the transformation of product design at <START:organization> IBM <END> .
 My challenge is n’t simply to add designers .
 It’s to create agile , multidisciplinary teams that include designers , developers and product managers .
 Designing around the user experience , part of what’s known as “design thinking , ” has become crucial to the success of business software .
@@ -25,7 +25,7 @@ Sometimes organizational hierarchy might prevent a good idea from being consider
 So at IBM , we intentionally assemble teams that span skills , levels of experience and points of view .
 And then ?
 It starts with a sticky note and a pen .
-We did this for our new business email tool , IBM Verse , which helps workers prioritize tasks and find the right people and information quickly .
+We did this for our new business email tool , <START:organization> IBM Verse <END> , which helps workers prioritize tasks and find the right people and information quickly .
 We began not by declaring that we wanted to transform enterprise email , but by asking the team to think about what people dislike about email .
 In cases like this , we begin by holding workshops where teams are given minimal instructions , and pen and paper .
 After the team leader presents a challenge , the room goes silent .

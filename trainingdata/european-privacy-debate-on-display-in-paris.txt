@@ -1,20 +1,20 @@
-PARIS — Europe wants to cash in on its tough data protection rules .
-European Union policy makers are demanding greater controls over how companies like Google and Facebook use personal information .
+<START:location> PARIS <END> — Europe wants to cash in on its tough data protection rules .
+<START:organization> European Union <END> policy makers are demanding greater controls over how companies like <START:organization> Google <END> and <START:organization> Facebook <END> use personal information .
 At the same time , others would like to use those same laws to help European companies compete against their American rivals as a way to jump-start a sluggish economy .
 That debate over how best to leverage the regulations was on show during a meeting here on Monday , as local privacy regulators gathered to discuss the growing public outcry over how governments and tech giants gather and use people’s data .
-That outcry has resulted from disclosures by Edward J. Snowden , the former National Security Agency contractor , about the activities of the American and British intelligence services , as well as the expanding use of people’s information by Internet companies like Microsoft and Amazon .
-‘‘ We feel we are losing control over our data , ’’ said Isabelle Falque-Pierrotin , who heads the French data protection authority .
+That outcry has resulted from disclosures by <START:person> Edward J. Snowden <END> , the former <START:organization> National Security Agency <END> contractor , about the activities of the American and British intelligence services , as well as the expanding use of people’s information by Internet companies like <START:organization> Microsoft <END> and <START:organization> Amazon <END> .
+‘‘ We feel we are losing control over our data , ’’ said <START:person> Isabelle Falque-Pierrotin <END> , who heads the French data protection authority .
 ‘‘Data protection is at a crossroads , and it ’s important that Europe speaks with one voice .’’
 Europe is now completing a new round of privacy rules , expected to be made final next year , that will give greater power to individuals over who has access to their data and how it is used .
 European policy makers are also considering fines of up to 5 percent of a company ’s annual revenue , or $ 125 million , whichever is greater , when the strict privacy rules are breached .
 While regulators are pressing ahead with even tougher data protection rules , some of Europe’s lawmakers are eager to allow homegrown companies to use the rules governing the growing amount of personal information online as a defense against the American tech giants that currently dominate the region’s Internet economy .
-In Germany , for example , policy makers and tech companies have created made-in-Germany email and cloud services — which allow people to store information on the Internet instead of on their own hard drives — that comply with the country ’s tough data protection rules .
-And companies in Finland and France are pushing their own rival services , which are based on Europe’s stricter privacy rules , in the hope of enticing users to switch from American Internet giants to local competitors .
-‘‘Europe must turn data protection into a competitive advantage , ’’ Manuel Valls , the French prime minister , said at the meeting here on Monday .
+In <START:location> Germany <END> , for example , policy makers and tech companies have created made-in-Germany email and cloud services — which allow people to store information on the Internet instead of on their own hard drives — that comply with the country ’s tough data protection rules .
+And companies in <START:location> Finland <END> and <START:location> France <END> are pushing their own rival services , which are based on <START:location> Europe’s <END> stricter privacy rules , in the hope of enticing users to switch from American Internet giants to local competitors .
+‘‘ <START:location> Europe <END> must turn data protection into a competitive advantage , ’’ <START:person> Manuel Valls <END> , the French prime minister , said at the meeting here on Monday .
 ‘‘It’s difficult to accept that European citizens have their data siphoned off by other countries without their knowledge .’’
-Critics warn , however , that Europe must also beef up its oversight of all technology companies as they are increasingly scraping individual data for commercial use .
-Currently , each of the European Union’s 28 members has a separate data protection authority that oversees the activities of companies in its jurisdiction .
+Critics warn , however , that <START:location> Europe <END> must also beef up its oversight of all technology companies as they are increasingly scraping individual data for commercial use .
+Currently , each of the <START:organization> European Union’s <END> 28 members has a separate data protection authority that oversees the activities of companies in its jurisdiction .
 Campaigners say that these domestic regulators have yet to assess hefty fines on Internet companies for the potential abuse of people’s online data , and that the system must be revamped to keep up with how companies , either European or those from outside the union , are using online information .
-‘‘The system we have now is n’t working , ’’ said Max Schrems , an Austrian lawyer who has brought a class-action lawsuit against Facebook that accuses the company of misusing personal data .
+‘‘The system we have now is n’t working , ’’ said <START:person> Max Schrems <END> , an Austrian lawyer who has brought a class-action lawsuit against <START:organization> Facebook <END> that accuses the company of misusing personal data .
 ‘‘If you park in the wrong place , you get a parking ticket .
 But if a company violates the privacy rights of millions of people , nothing happens .’’

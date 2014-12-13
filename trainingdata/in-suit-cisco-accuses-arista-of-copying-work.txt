@@ -1,22 +1,22 @@
-Cisco Systems on Friday filed a suit against Arista Networks , a networking switch company and fast-moving competitor , accusing it of copying large amounts of Cisco’s work .
-Cisco contends that Arista violated 14 Cisco patents , some of which were based on work by Andreas Bechtolsheim and David Cheriton , Arista’s founders , when they were at Cisco .
-The two men , well-respected engineers , sold a company , Granite Systems , to Cisco in 1996 .
-They are also both billionaires , thanks in part to being the first two significant outside investors in Google .
-The case , filed in the Federal District Court in Northern California , will probably go on for at least months .
-Cisco is seeking Arista to withdraw essentially all of its crucial products from the market .
-Cisco is also likely to seek damages , said Mark Chandler , the company ’s general counsel .
-“We are not a litigious company , ” said Mr. Chandler .
+<START:organization> Cisco Systems <END> on Friday filed a suit against <START:organization> Arista Networks <END> , a networking switch company and fast-moving competitor , accusing it of copying large amounts of <START:organization> Cisco’s <END> work .
+<START:organization> Cisco <END> contends that <START:organization> Arista <END> violated 14 <START:organization> Cisco <END> patents , some of which were based on work by <START:person> Andreas Bechtolsheim <END> and <START:person> David Cheriton <END>, <START:organization> Arista’s <END> founders , when they were at <START:organization> Cisco <END> .
+The two men , well-respected engineers , sold a company , <START:organization> Granite Systems <END> , to <START:organization> Cisco <END> in 1996 .
+They are also both billionaires , thanks in part to being the first two significant outside investors in <START:organization> Google <END> .
+The case , filed in the <START:organization> Federal District Court <END> in <START:location> Northern California <END> , will probably go on for at least months .
+<START:organization> Cisco <END> is seeking <START:organization> Arista <END> to withdraw essentially all of its crucial products from the market .
+<START:organization> Cisco <END> is also likely to seek damages , said <START:person> Mark Chandler <END> , the company ’s general counsel .
+“We are not a litigious company , ” said <START:person> Mr. Chandler <END> .
 “This was so blatant . ”
-Cisco was filing suit , he said , because otherwise competing companies might also try to make use of Cisco products .
-“ I am disappointed at Cisco’s tactics , ” said Jayshree Ullal , Arista’s chief executive , in a statement .
-Ms. Ullal , also a Cisco veteran .
-added , “it’s not the Cisco I knew . ”
-Though the two companies have in the past consulted over various matters , persons familiar with the suit said Arista was unaware Cisco was planning the action .
-Besides technical patents , Cisco says that Arista’s command line interface , a way of operating its switch , includes more than 500 of the commands used in Cisco gear .
-Arista did this , Cisco says , in order to easily win over Cisco customers .
-The suit quotes Kenneth Duda , another founder of Arista , along with Ms. Ullal , saying in interviews how much Arista resembles Cisco .
-“They said it is comfortable for customers ” to use the same commands , Mr. Chandler said .
+<START:organization> Cisco <END> was filing suit , he said , because otherwise competing companies might also try to make use of <START:organization> Cisco <END> products .
+“ I am disappointed at <START:organization> Cisco’s <END> tactics , ” said <START:person> Jayshree Ullal <END> , <START:organization> Arista’s <END> chief executive , in a statement .
+<START:person> Ms. Ullal <END> , also a <START:organization> Cisco <END> veteran .
+added , “it’s not the <START:organization> Cisco <END> I knew . ”
+Though the two companies have in the past consulted over various matters , persons familiar with the suit said <START:organization> Arista <END> was unaware <START:organization> Cisco <END> was planning the action .
+Besides technical patents , <START:organization> Cisco <END> says that <START:organization> Arista’s <END> command line interface , a way of operating its switch , includes more than 500 of the commands used in <START:organization> Cisco <END> gear .
+<START:organization> Arista <END> did this , <START:organization> Cisco <END> says , in order to easily win over <START:organization> Cisco <END> customers .
+The suit quotes <START:person> Kenneth Duda <END> , another founder of <START:organization> Arista <END> , along with Ms. Ullal , saying in interviews how much <START:organization> Arista <END> resembles <START:organization> Cisco <END> .
+“They said it is comfortable for customers ” to use the same commands , <START:person> Mr. Chandler <END> said .
 “They did it intentionally . ”
-Cisco also included as evidence grammatical errors in Cisco user manuals that were identical in Arista manuals .
-More than a decade ago , Cisco used similar documentation in a copying suit against the Chinese networking gear maker , Huawei .
+<START:organization> Cisco <END> also included as evidence grammatical errors in <START:organization> Cisco <END> user manuals that were identical in <START:organization> Arista <END> manuals .
+More than a decade ago , <START:organization> Cisco <END> used similar documentation in a copying suit against the Chinese networking gear maker , <START:organization> Huawei <END> .
 That suit was eventually settled .

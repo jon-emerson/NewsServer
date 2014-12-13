@@ -1,51 +1,51 @@
-Google , like many tech companies , is a man’s world .
+<START:organization> Google <END> , like many tech companies , is a man’s world .
 Started by a pair of men , its executive team is overwhelmingly male , and its work force is dominated by men .
-Over all , seven out of 10 people who work at Google are male .
-Men make up 83 percent of Google’s engineering employees and 79 percent of its managers .
-In a report to the Equal Employment Opportunity Commission last year , Google said that of its 36 executives and top-ranking managers , just three are women .
-Google’s leaders say they are unhappy about the firm’s poor gender diversity , and about the severe underrepresentation of blacks and Hispanics among its work force .
-And so they are undertaking a long-term effort to improve these numbers , the centerpiece of which is a series of workshops aimed at making Google’s culture more accepting of diversity .
+Over all , seven out of 10 people who work at <START:organization> Google <END> are male .
+Men make up 83 percent of <START:organization> Google’s <END> engineering employees and 79 percent of its managers .
+In a report to the <START:organization> Equal Employment Opportunity Commission <END> last year , <START:organization> Google <END> said that of its 36 executives and top-ranking managers , just three are women .
+<START:organization> Google’s <END> leaders say they are unhappy about the firm’s poor gender diversity , and about the severe underrepresentation of blacks and Hispanics among its work force .
+And so they are undertaking a long-term effort to improve these numbers , the centerpiece of which is a series of workshops aimed at making <START:organization> Google <END> ’s culture more accepting of diversity .
 There’s just one problem : The company has no solid evidence that the workshops , or many of its other efforts to improve diversity , are actually working .
-In some ways Google’s plan to fix its diversity issues resembles many of its most ambitious product ideas , from self-driving cars to wiring the country for superfast Internet .
+In some ways <START:organization> Google’s <END> plan to fix its diversity issues resembles many of its most ambitious product ideas , from self-driving cars to wiring the country for superfast Internet .
 As in those efforts , it has set a high goal in this case : to fight deep-set cultural biases and an insidious frat-house attitude that pervades the tech business .
 Tech luminaries make sexist comments so often that it has ceased to be news when they do .
-Google is attacking the problem with its considerable resources and creativity .
+<START:organization> Google <END> is attacking the problem with its considerable resources and creativity .
 But it does not have a timeline for when the company ’s work force might become representative of the population , or whether it will ever get there .
-“ I think it ’s terrific that they’re doing this , ” said Freada Kapor Klein , an entrepreneur who has long studied workplace diversity , and who is the co-chairwoman of the Kapor Center for Social Impact .
-“ But it ’s going to be important that Google not just give a lecture about the science , but that there be active strategies on how to mitigate bias .
+“ I think it ’s terrific that they’re doing this , ” said <START:person> Freada Kapor Klein <END> , an entrepreneur who has long studied workplace diversity , and who is the co-chairwoman of the <START:organization> Kapor Center for Social Impact <END> .
+“ But it ’s going to be important that <START:organization> Google <END> not just give a lecture about the science , but that there be active strategies on how to mitigate bias .
 A one-shot intervention against a lifetime of biased messages is unlikely to be successful . ”
 Google says its plan is n’t one-shot .
 It points out that it has been trying to improve its diversity for years by sponsoring programs to increase the number of women and minorities who go into tech , and meticulously studying the way it hires people in an effort to reduce bias .
-In May after pressure from civil rights leaders , the company published a report documenting the sex and race of its employees “to be candid about the issues , ” Laszlo Bock , Google’s executive in charge of human resources , wrote at the time .
-Google’s disclosure prompted a wave of similar reports across the industry , with Facebook , Apple , Yahoo and other tech giants issuing similarly dismal numbers about their work forces .
-Google’s diversity training workshops , which began last year and which more than half of Google’s nearly 49,000 employees have attended , are based on an emerging field of research in social psychology known as unconscious bias .
+In May after pressure from civil rights leaders , the company published a report documenting the sex and race of its employees “to be candid about the issues , ” <START:person> Laszlo Bock <END> , <START:organization> Google’s <END> executive in charge of human resources , wrote at the time .
+<START:organization> Google’s <END> disclosure prompted a wave of similar reports across the industry , with <START:organization> Facebook <END> , <START:organization> Apple <END> , <START:organization> Yahoo <END> and other tech giants issuing similarly dismal numbers about their work forces .
+<START:organization> Google’s <END> diversity training workshops , which began last year and which more than half of <START:organization> Google <END> ’s nearly 49,000 employees have attended , are based on an emerging field of research in social psychology known as unconscious bias .
 These are the hidden , reflexive preferences that shape most people’s worldviews , and that can profoundly affect how welcoming and open a workplace is to different people and ideas .
-Google’s interest in hidden biases was sparked in 2012 , when Mr. Bock read an article in The New York Times about a study that showed systematic discrimination against female applicants for scientific jobs in academia .
+<START:organization> Google’s <END> interest in hidden biases was sparked in 2012 , when <START:person> Mr. Bock <END> read an article in <START:organization> The New York Times <END> about a study that showed systematic discrimination against female applicants for scientific jobs in academia .
 The effect was so pervasive that researchers theorized the discrimination must be governed by unconscious cultural biases rather than overt sexism .
-Mr. Bock wondered how such unconscious biases were playing out at Google .
+<START:person> Mr. Bock <END> wondered how such unconscious biases were playing out at <START:organization> Google <END> .
 “This is a pretty genteel environment , and you don’t usually see outright manifestations of bias , ” he said .
 “Occasionally you’ll have some idiot do something stupid and hurtful , and I like to fire those people . ”
-But Mr. Bock suspected that the more pernicious bias was most likely pervasive and hidden , a deep-set part of the culture rather than the work of a few loudmouth sexists .
-Improving diversity was n’t just a feel-good goal for Google .
-Citing research that shows diverse teams can be more creative than homogeneous ones , Mr. Bock argued that a diverse work force could be good for Google’s business .
-Could Google investigate how biases were affecting people’s work — and , more important , could it change its own culture ?
+But <START:person> Mr. Bock <END> suspected that the more pernicious bias was most likely pervasive and hidden , a deep-set part of the culture rather than the work of a few loudmouth sexists .
+Improving diversity was n’t just a feel-good goal for <START:organization> Google <END> .
+Citing research that shows diverse teams can be more creative than homogeneous ones , <START:person> Mr. Bock <END> argued that a diverse work force could be good for <START:organization> Google’s <END> business .
+Could <START:organization> Google <END> investigate how biases were affecting people’s work — and , more important , could it change its own culture ?
 Google’s human resources group , which goes by the name People Operations , functions like a graduate school research lab , with staff scientists who are constantly analyzing the company ’s internal operations .
-Mr. Bock asked one of these researchers , Brian Welle , to begin a project on hidden biases .
-After a few months , Dr. Welle came up with a 90-minute lecture targeted specifically at a skeptical , scientifically minded Google employee .
+<START:person> Mr. Bock <END> asked one of these researchers , <START:person> Brian Welle <END> , to begin a project on hidden biases .
+After a few months , <START:person> Dr. Welle <END> came up with a 90-minute lecture targeted specifically at a skeptical , scientifically minded <START:organization> Google <END> employee .
 The lecture begins with a dismal fact : Everyone is a little bit racist or sexist .
 If you think you’re immune , take the Implicit Association Test , which empirically measures people’s biases .
-Dr. Welle goes on to explain that some of the most damaging bias is unconscious ; people do the worst stuff without meaning to , or even recognizing that they’re being influenced by their preferences .
-The effect of bias is powerful , and it is n’t softened by Silicon Valley’s supposedly meritocratic culture .
-In the lecture , Dr. Welle shows a computer simulation of how a systematic 1 percent bias against women in performance evaluation scores can trickle up through the ranks , leading to a severe underrepresentation of women in management .
-Finally , Dr. Welle points to research showing that we aren’t slaves to our hidden biases .
+<START:person> Dr. Welle <END> goes on to explain that some of the most damaging bias is unconscious ; people do the worst stuff without meaning to , or even recognizing that they’re being influenced by their preferences .
+The effect of bias is powerful , and it is n’t softened by <START:location> Silicon Valley’s <END> supposedly meritocratic culture .
+In the lecture , <START:person> Dr. Welle <END> shows a computer simulation of how a systematic 1 percent bias against women in performance evaluation scores can trickle up through the ranks , leading to a severe underrepresentation of women in management .
+Finally , <START:person> Dr. Welle <END> points to research showing that we aren’t slaves to our hidden biases .
 The more we make ourselves aware of the role our unconscious plays in our decision-making , and the more we try to force others to confront their biases , the greater the chance we have of overcoming our hidden preferences .
-Google offered several anecdotes that seem to indicate a less biased culture as a result of the training .
+<START:organization> Google <END> offered several anecdotes that seem to indicate a less biased culture as a result of the training .
 Not long ago the company opened a new building , and someone spotted the fact that all the conference rooms were named after male scientists ; in the past , that might have gone unmentioned , but this time the names were changed .
 During one recent promotion meeting in which a group of male managers were deciding the fate of a female engineer , a senior manager who had been through the bias training cautioned his colleagues to remember that they were all men — and thus might not be able to fully appreciate the different roles women perform in engineering groups .
-“ Just raising the awareness was enough for people to think about it , ” Mr. Bock said .
+“ Just raising the awareness was enough for people to think about it , ” <START:person> Mr. Bock <END> said .
 The woman was promoted .
 Another time , in an all-company presentation , an interviewer asked a male and female manager who had recently begun sharing an office , “ Which one of you does the dishes ? ”
 The strange , sexist undertone of the question was immediately seized upon by a senior executive in the crowd , who yelled , “ Unconscious bias ! ”
-Mr. Bock saw all of these actions as evidence that the training was working .
+<START:person> Mr. Bock <END> saw all of these actions as evidence that the training was working .
 “Suddenly you go from being completely oblivious to going , ‘Oh my god , it ’s everywhere , ’ ” he said .
-But whether that will lead to a long-term change at Google and , in turn , the rest of the tech industry , remains an open question .
+But whether that will lead to a long-term change at <START:organization> Google <END> and , in turn , the rest of the tech industry , remains an open question .

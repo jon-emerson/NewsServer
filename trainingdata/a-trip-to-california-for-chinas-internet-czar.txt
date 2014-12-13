@@ -1,36 +1,36 @@
-HONG KONG — At least one thing caught the eye of China ’s Internet czar during his trip to the United States last week : a book written by and about the president of China on the desk of Mark Zuckerberg .
-Mr. Zuckerberg , the chief executive of Facebook , pointed to the book , “ Xi Jinping : The Governance of China ” last week while giving a tour of the company ’s office to Lu Wei , the de facto head of Internet policy in China .
-Mr. Lu laughed when he saw the book , an anthology of speeches and comments by President Xi .
-He then asked to sit down at Mr. Zuckerberg’s desk to have a closer look , according to an account published on a Chinese state-run website .
+<START:location> HONG KONG <END> — At least one thing caught the eye of <START:location> China’s <END> Internet czar during his trip to the <START:location> United States <END> last week : a book written by and about the president of <START:location> China <END> on the desk of <START:person> Mark Zuckerberg <END> .
+<START:person> Mr. Zuckerberg <END> , the chief executive of <START:organization> Facebook <END> , pointed to the book , “ <START:person> Xi Jinping <END> : The Governance of <START:organization> China <END> ” last week while giving a tour of the company ’s office to <START:person> Lu Wei <END> , the de facto head of Internet policy in <START:location> China <END> .
+<START:person> Mr. Lu <END> laughed when he saw the book , an anthology of speeches and comments by <START:person> President Xi <END> .
+He then asked to sit down at <START:person> Mr. Zuckerberg’s <END> desk to have a closer look , according to an account published on a Chinese state-run website .
 The interaction was confirmed by a person close to the traveling group who asked not to be identified because the meeting was private .
-Facebook is typically blocked in China .
-Mr. Lu , as China ’s new Internet czar , holds the key for American Internet companies to the enormous Chinese market .
-He is also the ambassador of an assertive new policy in which China claims the right to block websites , censor content and track users within its borders .
-One photo taken of the Facebook visit and posted on a site associated with China ’s State Council Information office shows Mr. Lu smiling as he looks down at the book .
-Sporting a white cover with a painted image of Mr. Xi’s bust reminiscent of the famed portrait of Mao Zedong that hangs in Tiananmen Square , the text offered Mr. Lu , a longtime propagandist who rose through the ranks of China ’s state-run Xinhua News Agency , an easy conversation piece .
+<START:organization> Facebook <END> is typically blocked in <START:location> China <END>  .
+<START:person> Mr. Lu <END> , as <START:location> China’s <END> new Internet czar , holds the key for American Internet companies to the enormous Chinese market .
+He is also the ambassador of an assertive new policy in which <START:location> China <END> claims the right to block websites , censor content and track users within its borders .
+One photo taken of the <START:organization> Facebook <END> visit and posted on a site associated with <START:location> China’s <END> <START:organization> State Council Information office <END> shows <START:person> Mr. Lu <END> smiling as he looks down at the book .
+Sporting a white cover with a painted image of <START:person> Mr. Xi’s <END> bust reminiscent of the famed portrait of <START:person> Mao Zedong <END> that hangs in <START:location> Tiananmen Square <END> , the text offered <START:person> Mr. Lu <END>, a longtime propagandist who rose through the ranks of <START:location> China’s <END> state-run <START:organization> Xinhua News Agency <END> , an easy conversation piece .
 The book runs to 515 pages in English .
-With the exception of a generous number of photos depicting Mr. Xi throughout his life , it might make tough reading , even for Communist Party stalwarts .
-Mr. Zuckerberg said he had bought the book for himself and co-workers to ensure that they “understood socialism with Chinese characteristics . ”
-The book might give some Facebook users pause , since the text includes a speech by Mr. Xi in which he says Beijing should “use Internet communication rules to advocate things wholesome and positive , and disseminate and put into practice the core socialist values , ” and “should properly handle timing , extent and efficiency to make our cyberspace wholesome and clean . ”
+With the exception of a generous number of photos depicting Mr. Xi throughout his life , it might make tough reading , even for <START:organization> Communist Party <END> stalwarts .
+<START:person> Mr. Zuckerberg <END> said he had bought the book for himself and co-workers to ensure that they “understood socialism with Chinese characteristics . ”
+The book might give some <START:organization> Facebook <END> users pause , since the text includes a speech by <START:person> Mr. Xi <END> in which he says <START:location> Beijing <END> should “use Internet communication rules to advocate things wholesome and positive , and disseminate and put into practice the core socialist values , ” and “should properly handle timing , extent and efficiency to make our cyberspace wholesome and clean . ”
 He also says , “It is a long-term task to ensure that online public opinion is healthy and sound . ”
-The visit to Facebook was part of a whirlwind tour in the United States for Mr. Lu , a trip that offered the contrast of coasts .
-In Washington , Mr. Lu faced strong criticism from American officials over Chinese hacking attacks and skepticism about his vision for Internet governance .
-On the West Coast , though , he received a warmer welcome from technology executives , including Jeff Bezos , chief executive of Amazon , and Timothy D. Cook , the head of Apple .
-Mr. Lu’s trip was followed closely in the Chinese news media ; in one broadcast on the Hong Kong-based Phoenix Television , eBay’s chief executive , John Donahoe , was shown discussing how crucial Chinese merchants were to the company .
-Responding to reports of Mr. Zuckerberg’s meeting and his reference to Mr. Xi’s book , Hu Jia , a Chinese activist , said on Monday in a Twitter post that Facebook was “risking repeating the mistakes of Yahoo” by becoming too close to the Chinese government .
-In 2004 , the Chinese journalist Shi Tao was arrested by Chinese officials after Yahoo provided information about his account to the government .
-The episode prompted Yahoo’s co-founder , Jerry Yang , to apologize to Mr. Shi’s family .
-Mr. Shi served a prison sentence from 2005 to 2013 .
-Facebook did not respond to an email seeking comment on Mr. Lu’s visit to the company .
+The visit to <START:organization> Facebook <END> was part of a whirlwind tour in the <START:location> United States <END> for <START:person> Mr. Lu <END> , a trip that offered the contrast of coasts .
+In <START:location> Washington <END> , <START:person> Mr. Lu <END> faced strong criticism from American officials over Chinese hacking attacks and skepticism about his vision for Internet governance .
+On the <START:location> West Coast <END> , though , he received a warmer welcome from technology executives , including <START:person> Jeff Bezos <END> , chief executive of <START:organization> Amazon <END> , and <START:person> Timothy D. Cook <END> , the head of <START:organization> Apple <END>.
+<START:person> Mr. Lu’s <END> trip was followed closely in the Chinese news media ; in one broadcast on the <START:location> Hong Kong <END> -based <START:organization> Phoenix Television <END> , <START:organization> eBay’s <END> chief executive , <START:person> John Donahoe <END> , was shown discussing how crucial Chinese merchants were to the company .
+Responding to reports of <START:person> Mr. Zuckerberg’s <END> meeting and his reference to <START:person> Mr. Xi’s <END> book , <START:person> Hu Jia <END> , a Chinese activist , said on Monday in a <START:organization> Twitter <END> post that <START:organization> Facebook <END> was “ risking repeating the mistakes of <START:organization> Yahoo <END> ” by becoming too close to the <START:organization> Chinese government <END> .
+In 2004 , the Chinese journalist <START:person> Shi Tao <END> was arrested by Chinese officials after <START:organization> Yahoo <END> provided information about his account to the government .
+The episode prompted <START:organization> Yahoo's <END> co-founder , <START:person> Jerry Yang <END> , to apologize to <START:person> Mr. Shi’s <END> family .
+<START:person> Mr. Shi <END> served a prison sentence from 2005 to 2013 .
+<START:organization> Facebook <END> did not respond to an email seeking comment on <START:person> Mr. Lu’s <END> visit to the company .
 The Chinese Internet market is huge .
-A recent report by the research company IDC projected that with more than 680 million people expected to be online in China next year , its market will account for 43 percent of worldwide growth in the technology sector .
+A recent report by the research company <START:organization> IDC <END> projected that with more than 680 million people expected to be online in <START:location> China <END> next year , its market will account for 43 percent of worldwide growth in the technology sector .
 That makes it an increasingly important place to be for American companies .
-But strict barriers and regulations in China keep many of them at arm’s length .
-Linked In , the professional social network , has decided to censor some content on its Chinese site .
-Apple has agreed to host some data within China ’s borders , where Chinese officials could potentially gain access to it , and this year it put out a job advertisement for a head of law enforcement in the country .
-The job posting read in part : “The role will be directly responsible for the management , handling and issuance of appropriate responses to requests from law enforcement authorities , public prosecutors and courts etc . throughout China . ”
-During Mr. Lu’s visit in Washington , he met with members of the National Security Council , who criticized continuing hackings against American companies and China ’s top-down , government-led approach to managing the Internet , according to a senior American administration official who spoke on the condition that he not be named because the meetings were confidential .
-The disagreement between the United States and China on such critical issues may provide one answer to why Mr. Lu gave equal emphasis to the East Coast and West Coast on his trip to the United States .
-Meeting with United States technology companies provided Mr. Lu with ample photo opportunities to show off back home .
-It also demonstrated that he could easily find eager partners in Silicon Valley , even as officials in Washington seek to play hardball .
-Jane Perlez contributed reporting .
+But strict barriers and regulations in <START:location> China <END>  keep many of them at arm’s length .
+<START:organization> Linked In <END> , the professional social network , has decided to censor some content on its Chinese site .
+<START:organization> Apple <END> has agreed to host some data within <START:location> China’s <END> borders , where Chinese officials could potentially gain access to it , and this year it put out a job advertisement for a head of law enforcement in the country .
+The job posting read in part : “The role will be directly responsible for the management , handling and issuance of appropriate responses to requests from law enforcement authorities , public prosecutors and courts etc . throughout <START:location> China <END> . ”
+During <START:person> Mr. Lu’s <END> visit in <START:location> Washington <END> , he met with members of the <START:organization> National Security Council <END> , who criticized continuing hackings against American companies and <START:location> China’s <END> top-down , government-led approach to managing the Internet , according to a senior American administration official who spoke on the condition that he not be named because the meetings were confidential .
+The disagreement between the United States and <START:location> China <END> on such critical issues may provide one answer to why Mr. Lu gave equal emphasis to the <START:location> East Coast <END> and <START:location> West Coast <END> on his trip to the <START:location> United States <END>.
+Meeting with <START:location> United States <END> technology companies provided <START:person> Mr. Lu <END> with ample photo opportunities to show off back home .
+It also demonstrated that he could easily find eager partners in <START:location> Silicon Valley <END> , even as officials in <START:location> Washington <END> seek to play hardball .
+<START:person> Jane Perlez <END> contributed reporting .

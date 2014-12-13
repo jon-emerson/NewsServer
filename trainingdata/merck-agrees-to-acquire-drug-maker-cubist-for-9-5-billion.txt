@@ -1,54 +1,54 @@
 Updated , 8:47 p.m. | Deal making in the health care industry has been booming all year , with medical technology companies and cosmetic drug makers changing hands at rich premiums .
 Now a different part of the industry — antibiotics — is at the center of the mergers and acquisitions frenzy .
-Merck & Company said on Monday that it had agreed to acquire Cubist Pharmaceuticals for $ 8.4 billion , plus the assumption of $ 1.1 billion in debt .
-The deal will give Merck , the second-largest American drug maker after Pfizer , control of the largest antibiotics company , and deepen its ties with hospitals .
-The deal fits into Merck’s strategy of buying midsize drug makers that complement its existing products .
-Merck will pay $ 102 a share in cash for Cubist , a 35 percent premium above Cubist’s average share price for the five most recent trading days .
-Cubist , based in Lexington , Mass. , makes drugs to treat dangerous bacteria and superbugs , including diseases that can cause pandemics .
-Its biggest seller , Cubicin , fits nicely into Merck’s hospital division , one of four areas that executives recently identified as priorities for the company .
-Sales in Merck’s hospital acute care division were 10 percent higher in the first three quarters of this year than in the same period last year .
-Drug makers are showing renewed interest in antibiotics now that the Food and Drug Administration is offering incentives to manufacturers to invest in new products .
+<START:organization> Merck & Company <END> said on Monday that it had agreed to acquire <START:organization> Cubist Pharmaceuticals <END> for $ 8.4 billion , plus the assumption of $ 1.1 billion in debt .
+The deal will give <START:organization> Merck <END> , the second-largest American drug maker after <START:organization> Pfizer <END> , control of the largest antibiotics company , and deepen its ties with hospitals .
+The deal fits into <START:organization> Merck’s <END> strategy of buying midsize drug makers that complement its existing products .
+<START:organization> Merck <END> will pay $ 102 a share in cash for <START:organization> Cubist <END> , a 35 percent premium above <START:organization> Cubist’s <END> average share price for the five most recent trading days .
+<START:organization> Cubist <END> , based in <START:location> Lexington , Mass. <END> , makes drugs to treat dangerous bacteria and superbugs , including diseases that can cause pandemics .
+Its biggest seller , <START:organization> Cubicin <END> , fits nicely into <START:organization> Merck’s <END> hospital division , one of four areas that executives recently identified as priorities for the company .
+Sales in <START:organization> Merck’s <END> hospital acute care division were 10 percent higher in the first three quarters of this year than in the same period last year .
+Drug makers are showing renewed interest in antibiotics now that the <START:organization> Food and Drug Administration <END> is offering incentives to manufacturers to invest in new products .
 Until recently , drug makers had shied away from developing new antibiotics because there was little financial motivation to do so .
-“Large pharma had evacuated the space about a decade ago , ” said Liisa Bayko , an analyst at JMP Securities .
-“There were a number of regulatory hurdles with the F.D.A. that were getting very onerous . ”
+“Large pharma had evacuated the space about a decade ago , ” said <START:person> Liisa Bayko <END> , an analyst at <START:organization> JMP Securities <END> .
+“There were a number of regulatory hurdles with the <START:organization> F.D.A. <END> that were getting very onerous . ”
 But now , companies that develop antibiotics can qualify for speedier approvals and can sell their products exclusively for longer periods as part of an effort to combat the growing problem of antibiotic-resistant diseases .
-And last year , the federal government announced an agreement to pay GlaxoSmithKline $ 40 million to help it develop drugs that could fight antibiotic resistance and biological agents that terrorists might use .
-Merck said the deal with Cubist was about expanding revenue , rather than looking for cost savings .
-“The rationale for this deal is revenue growth , ” Kenneth C. Frazier , Merck’s chief executive , said in a telephone interview on Monday .
+And last year , the federal government announced an agreement to pay <START:organization> GlaxoSmithKline <END> $ 40 million to help it develop drugs that could fight antibiotic resistance and biological agents that terrorists might use .
+<START:organization> Merck <END> said the deal with <START:organization> Cubist <END> was about expanding revenue , rather than looking for cost savings .
+“The rationale for this deal is revenue growth , ” <START:person> Kenneth C. Frazier <END> , <START:organization> Merck’s <END> chief executive , said in a telephone interview on Monday .
 “Our ability to take these products and take them , for example , globally where we have strength around the world is a great opportunity to grow . ”
-Cubist has promising drugs in the pipeline , including those it obtained through two corporate acquisitions of its own .
-Cubist bought Optimer and Trius last year , paying about $ 800 million for each .
-For Merck , buying Cubist allowed it to instantly bolster its presence in antibiotics .
-Cubist is alone among companies of its size in having a robust portfolio of antibiotics .
-“This is the only company that has multiple antibiotics , ” Ms. Bayko said .
+<START:organization> Cubist <END> has promising drugs in the pipeline , including those it obtained through two corporate acquisitions of its own .
+<START:organization> Cubist <END> bought <START:organization> Optimer <END> and <START:organization> Trius <END> last year , paying about $ 800 million for each .
+For <START:organization> Merck <END> , buying <START:organization> Cubist <END> allowed it to instantly bolster its presence in antibiotics .
+<START:organization> Cubist <END> is alone among companies of its size in having a robust portfolio of antibiotics .
+“This is the only company that has multiple antibiotics , ” <START:person> Ms. Bayko <END> said .
 “If you wanted to get in in a big way , this is the only way to do it . ”
-By selling to Merck , Cubist will be able to expand internationally at a faster clip .
-Cubist antibiotics are sold only in the United States and Canada , though the company was working on expanding to Western Europe .
-“With Merck taking over we have access to this Class A infrastructure around the world , ” said Michael Bonney , Cubist’s chief executive .
-Merck also said it saw opportunity in expanding sales of Cubist’s products around the world .
-International sales of Cubist’s products made up just 6 percent of the company ’s revenues in the first nine months of this year .
-Mr. Frazier said that Merck would continue to buy smaller companies such as Cubist , rather than focus on a megamerger like the $ 66 billion takeover of the Botox maker Allergan by Actavis .
+By selling to <START:organization> Merck <END> , <START:organization> Cubist <END> will be able to expand internationally at a faster clip .
+<START:organization> Cubist <END> antibiotics are sold only in the United States and Canada , though the company was working on expanding to Western Europe .
+“With <START:organization> Merck <END> taking over we have access to this Class A infrastructure around the world , ” said <START:person> Michael Bonney <END> , <START:organization> Cubist’s <END> chief executive .
+<START:organization> Merck <END> also said it saw opportunity in expanding sales of <START:organization> Cubist’s <END> products around the world .
+International sales of <START:organization> Cubist’s <END> products made up just 6 percent of the company ’s revenues in the first nine months of this year .
+<START:person> Mr. Frazier <END> said that <START:organization> Merck <END> would continue to buy smaller companies such as <START:organization> Cubist <END> , rather than focus on a megamerger like the $ 66 billion takeover of the Botox maker <START:organization> Allergan <END> by <START:organization> Actavis <END> .
 “We’re an innovation-focused company , ” he said .
 “We will use business development and M&A to get access to the best science that we can .
 We’re not as interested in doing a large consolidation merger that is driven by cost synergies .
 A large consolidation transaction to us would be a distraction . ”
-Merck approached Cubist about a deal earlier this year , Mr. Bonney said in an interview .
-“As we worked with them , the board decided to do a very thorough market check , ” Mr. Bonney said .
-“We did have multiple interested parties , but Merck offered the best price and was the best fit . ”
+<START:organization> Merck <END> approached <START:organization> Cubist <END> about a deal earlier this year , <START:person> Mr. Bonney <END> said in an interview .
+“As we worked with them , the board decided to do a very thorough market check , ” <START:person> Mr. Bonney <END> said .
+“We did have multiple interested parties , but <START:organization> Merck <END> offered the best price and was the best fit . ”
 The $ 8.4 billion price has been approved unanimously by the boards of both companies and includes the assumption of about $ 1.1 billion in debt , bringing the enterprise value of the deal to $ 9.5 billion .
-Merck , through a subsidiary , will begin a tender offer to investors to acquire all of Cubist’s outstanding shares .
-Shares of Cubist jumped 35 percent on Monday , to about $ 100.60 .
-Merck shares closed 0.6 percent higher , at $ 61.88 .
-“We’re certainly satisfied with the price we got for shareholders , ” Mr. Bonney said .
+<START:organization> Merck <END> , through a subsidiary , will begin a tender offer to investors to acquire all of <START:organization> Cubist’s <END> outstanding shares .
+Shares of <START:organization> Cubist <END> jumped 35 percent on Monday , to about $ 100.60 .
+<START:organization> Merck <END> shares closed 0.6 percent higher , at $ 61.88 .
+“We’re certainly satisfied with the price we got for shareholders , ” <START:person> Mr. Bonney <END> said .
 The deal , which is subject to approval by regulators , is expected to close in the first quarter .
-DealBook reported that a deal was in the works after the market closed on Friday .
-Last month , Cubist posted third-quarter sales of $ 309 million , a 16 percent increase from the period a year earlier .
-Merck makes vaccines , prescription products and oncology treatments .
+<START:organization> DealBook <END> reported that a deal was in the works after the market closed on Friday .
+Last month , <START:organization> Cubist <END> posted third-quarter sales of $ 309 million , a 16 percent increase from the period a year earlier .
+<START:organization> Merck <END> makes vaccines , prescription products and oncology treatments .
 It posted revenue of about $ 10.6 billion in the third quarter .
-It said Cubist would add more than $ 1 billion to its expected 2015 revenues .
-The deal is the latest bolt-on acquisition for Merck , which has been looking to bolster its portfolio of drugs even as it faces increased competition from generic drug producers .
-It agreed in June , for example , to a $ 3.85 billion deal for Idenix Pharmaceuticals , a maker of treatments for hepatitis C.
-But Merck has also shed noncore businesses .
+It said <START:organization> Cubist <END> would add more than $ 1 billion to its expected 2015 revenues .
+The deal is the latest bolt-on acquisition for <START:organization> Merck <END> , which has been looking to bolster its portfolio of drugs even as it faces increased competition from generic drug producers .
+It agreed in June , for example , to a $ 3.85 billion deal for <START:organization> Idenix Pharmaceuticals <END> , a maker of treatments for hepatitis C.
+But <START:organization> Merck <END> has also shed noncore businesses .
 Earlier this year , it sold its consumer business to Bayer for $ 14.2 billion .
-JPMorgan Chase , Deutsche Bank and the law firms Hughes Hubbard & Reed and Baker & McKenzie advised Merck , while Morgan Stanley , Goldman Sachs and the law firm Ropes & Gray advised Cubist .
-Katie Thomas and Chad Bray contributed reporting .
+<START:organization> JPMorgan Chase <END> , <START:organization> Deutsche Bank <END> and the law firms <START:organization> Hughes Hubbard & Reed <END> and <START:organization> Baker & McKenzie <END> advised <START:organization> Merck <END> , while <START:organization> Morgan Stanley <END> , <START:organization> Goldman Sachs <END> and the law firm <START:organization> Ropes & Gray <END> advised <START:organization> Cubist <END> .
+<START:person> Katie Thomas <END> and <START:person> Chad Bray <END> contributed reporting .

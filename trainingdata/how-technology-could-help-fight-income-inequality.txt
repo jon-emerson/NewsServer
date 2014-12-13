@@ -21,23 +21,23 @@ That too could raise the returns to many relatively unskilled workers .
 A more universal expertise with information technology also might reverse some of the income inequalities that stem from finance .
 For instance , the returns from high-frequency trading were higher a few years ago , in part because few firms used it ; now many firms can trade at very high speeds .
 It remains to be seen whether similar developments will lower hedge fund returns , but again it is possible to imagine a future in which many of the best investment and trading techniques are very widely copied and thus cease to be especially profitable .
-A final set of forces to reverse growing inequality stem from the emerging economies , most of all China .
-Perhaps we are living in a temporary intermediate period when America and many other developed nations bear a lot of the costs of Chinese economic development without yet getting many of the potential benefits .
-For instance , China and other emerging nations are already rich enough to bid up commodity prices and large enough to drive down the wages of a lot of American middle-class workers , especially in manufacturing .
-Yet while these emerging economies are keeping down the costs of manufactured goods for American consumers , they are not yet innovative enough to send us many fantastic new products , the way that the United States sends a stream of new products to British or French consumers , to their benefit .
+A final set of forces to reverse growing inequality stem from the emerging economies , most of all <START:location> China <END> .
+Perhaps we are living in a temporary intermediate period when <START:location> America <END> and many other developed nations bear a lot of the costs of Chinese economic development without yet getting many of the potential benefits .
+For instance , <START:location> China <END> and other emerging nations are already rich enough to bid up commodity prices and large enough to drive down the wages of a lot of American middle-class workers , especially in manufacturing .
+Yet while these emerging economies are keeping down the costs of manufactured goods for American consumers , they are not yet innovative enough to send us many fantastic new products , the way that the <START:location> United States <END> sends a stream of new products to British or French consumers , to their benefit .
 That state of affairs will probably end .
-Over the next few decades , we can expect China , India and other emerging nations to supply more innovations to the global economy , including to the United States .
+Over the next few decades , we can expect <START:location> China <END> , <START:location> India <END> and other emerging nations to supply more innovations to the global economy , including to the <START:location> United States <END> .
 This should n’t be a cause for alarm .
 It will lead to many good things .
 Since the emerging economies are relatively poor , many of these innovations may benefit relatively low-income Americans .
-India has already pioneered techniques for cheap , high-quality heart surgery and other medical procedures , and over time such techniques may achieve a foothold in the United States .
-Imagine a future China producing cheaper and safer cars , a cure for some kinds of cancer , and workable battery storage for solar energy .
+<START:location> India <END> has already pioneered techniques for cheap , high-quality heart surgery and other medical procedures , and over time such techniques may achieve a foothold in the <START:location> United States <END> .
+Imagine a future <START:location> China <END> producing cheaper and safer cars , a cure for some kinds of cancer , and workable battery storage for solar energy .
 Ordinary Americans could be much better off , and without having to work for those gains .
 To be clear , these are speculations and should not be taken as reasons to avoid improving our economy right now ; furthermore , other trends may push in less positive directions .
 Still , these possibilities reframe the inequality problem .
-In the popular model developed by the economist Thomas Piketty , inequality is fundamentally about capital versus labor .
+In the popular model developed by the economist <START:person> Thomas Piketty <END> , inequality is fundamentally about capital versus labor .
 In his view , capital has opened up an ever-widening lead because of the relatively high rates of return on savings and investment .
-The natural response to reverse this trend , according to Mr. Piketty , would be a direct attack on the return to capital , such as through a global wealth tax .
+The natural response to reverse this trend , according to <START:person> Mr. Piketty <END> , would be a direct attack on the return to capital , such as through a global wealth tax .
 In the scenarios outlined here , though , growing inequality is highly contingent on particular technologies and the global conditions of the moment .
 Movements toward greater inequality often set countervailing forces in motion , even if those forces take a long time to come to fruition .
 From this perspective , rather than seeking to beat down capital , our attention should be directed to leaving open the future possibilities for innovation , change and dynamism .
