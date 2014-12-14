@@ -28,15 +28,15 @@ Over the next 20 years , <START:organization> Magnavox <END> went on to sue doze
 “<START:organization> Magnavox <END> is n’t in the business of making video games , ” <START:person> Howard Lincoln <END> , <START:organization> Nintendo’s <END> vice president and senior counsel , groused in an interview with <START:organization> Newsday <END> in 1989 .
 “They’re just in the business of suing people . ”
 ( <START:organization> Nintendo <END> , like all the game makers <START:organization> Magnavox <END> challenged , lost . )
-<START:person> Mr. Baer <END>’s contraption represented the beginnings of a change in man’s relationship with machines .
+<START:person> Mr. Baer’s <END> contraption represented the beginnings of a change in man’s relationship with machines .
 <START:person> Harold Goldberg <END> , in his book “All Your Base Are Belong to Us : How Fifty Years of Videogames Conquered Pop Culture ” ( 2011 ) , said <START:person> Mr. Baer <END> made television “an extension of you , the player . ”
 “It would let you interact with a square on a black-and-white screen , and if you had even the lamest imagination , it made you believe you were volleying at tennis , aiming carefully as a brave marksman , even playing the innocent as you saved lives , ” <START:person> Mr. Goldberg <END> wrote .
 The roots of video games go back to universities and research laboratories .
 Some experts cite <START:person> William A. Higinbotham’s <END> <START:organization> Tennis for Two <END> , invented in 1958 at <START:organization> Brookhaven National Laboratory <END> , as the first interactive computer game .
 “ When technology is ready for something novel , when the components needed to build something new become affordable , it is going to be done by someone and more likely by several people , ” wrote <START:person> Mr. Baer <END> , who said he had never seen <START:organization> Tennis for Two <END> .
-From <START:person> Mr. Baer <END>’s modestly named “brown box ” have sprung <START:organization> PlayStation <END> , <START:organization> Xbox <END> and <START:organization> Wii <END> , all products of the ceaseless revolution in microprocessing .
+From <START:person> Mr. Baer’s <END> modestly named “brown box ” have sprung <START:organization> PlayStation <END> , <START:organization> Xbox <END> and <START:organization> Wii <END> , all products of the ceaseless revolution in microprocessing .
 Two technical paths merged to power this revolution .
-One was computer science ; the other was <START:person> Mr. Baer <END>’s field of expertise , television engineering .
+One was computer science ; the other was <START:person> Mr. Baer’s <END> field of expertise , television engineering .
 <START:person> Mr. Baer <END> had more than 150 <START:location> United States <END> and foreign patents , and his contributions ranged from talking doormats and greeting cards to submarine tracking systems .
 In 2006 , <START:person> President George W. Bush <END> awarded him the National Medal of Technology .
 In 2010 , he was admitted to the <START:organization> National Inventors Hall of Fame <END> .
@@ -65,7 +65,7 @@ In 1956 <START:person> Mr. Baer <END> joined <START:organization> Sanders <END> 
 As he pursued military projects like electronic devices to teach weapons aiming , his mind returned to the idea of a TV set with a game feature .
 Those musings led to his eureka moment at the <START:location> New York <END> bus station .
 Still , he said in 2007 , the common reaction of most <START:organization> Sanders <END> executives was , “Are you still screwing around with that stuff ? ”
-One top boss , however , saw potential in <START:person> Mr. Baer <END>’s idea .
+One top boss , however , saw potential in <START:person> Mr. Baer’s <END> idea .
 He assigned two engineers , <START:person> Bill Harrison <END> and <START:person> Bill Rusch <END> , to work with him , and gave the three $ 2,500 to spend .
 In a tiny room <START:person> Mr. Baer <END> described as an attic , they worked in secret , building seven prototypes .
 <START:organization> Sanders <END> first tried to license it to pay-TV companies , the forerunners of today’s cable systems , but found no takers .
@@ -79,7 +79,7 @@ He also criticized the company for pricing it at $ 100 , rather than the $ 19.95
 Along with <START:organization> Atari’s <END> <START:organization> Pong <END>, which had more advanced electronics and sound , it moved games into a faster , more complex realm , to the delight of an eager new audience .
 The accomplishment , <START:person> Mr. Baer <END> wrote , would amount to far more than just fun and games .
 “If it weren’t for video game enthusiasts and the absolute commercial need to keep them happy with ever-better graphics requiring ever-higher processor speeds , complex computer graphics would still be found only in the high-priced domains of the business and science world , ” he said .
-In an interview , <START:person> Keith Feinstein <END> , a video game historian , called <START:person> Mr. Baer <END>’s invention “the beginning of a revolution in thought . ”
+In an interview , <START:person> Keith Feinstein <END> , a video game historian , called <START:person> Mr. Baer’s <END> invention “the beginning of a revolution in thought . ”
 <START:person> Mr. Baer <END> retired from <START:organization> Sanders <END> in 1987 and started his own consulting business .
 <START:person> Mr. Baer <END> is survived by two sons , <START:person> James <END> and <START:person> Mark <END> ; a daughter , <START:person> Nancy Baer <END> ; and four grandchildren .
 His wife of 53 years , the former <START:person> Dena Whinston <END> , died in 2006 .

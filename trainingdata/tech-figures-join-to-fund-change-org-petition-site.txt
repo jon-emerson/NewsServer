@@ -1,54 +1,54 @@
-In a twist on how Silicon Valley companies are financed , several technology luminaries have banded together to effectively do the work of a traditional venture capital firm .
-The Microsoft co-founder Bill Gates , Yahoo co-founder Jerry Yang , Twitter co-founder Evan Williams and others have invested $ 25 million in Change .org , the petitions website , to help it expand .
-Others in the group include prominent business leaders like the billionaire Richard Branson , eBay founder Pierre M. Omidyar and LinkedIn co-founder Reid Hoffman .
+In a twist on how <START:location> Silicon Valley <END> companies are financed , several technology luminaries have banded together to effectively do the work of a traditional venture capital firm .
+The <START:organization> Microsoft <END> co-founder <START:person> Bill Gates <END> , <START:organization> Yahoo <END> co-founder <START:person> Jerry Yang <END> , <START:organization> Twitter <END> co-founder <START:person> Evan Williams <END> and others have invested $ 25 million in <START:organization> Change .org <END> , the petitions website , to help it expand .
+Others in the group include prominent business leaders like the billionaire <START:person> Richard Branson <END> , <START:organization> eBay <END> founder <START:person> Pierre M. Omidyar <END> and <START:organization> LinkedIn <END> co-founder <START:person> Reid Hoffman <END> .
 In all , two dozen investors are contributing $ 250,000 to a few million dollars each .
-“It would have been a lot more straightforward to raise money from a single institution , ” said Ben Rattray , Change .org’s
+“It would have been a lot more straightforward to raise money from a single institution , ” said <START:person> Ben Rattray <END> , <START:organization> Change .org’s <END>
 chief executive .
 “ But we had a group of people who are passionate about our mission and who had experience building global enterprises , who we can turn to for advice . ”
-Change .org lets users create online petitions that call on governments and companies to act on specific issues .
-One recent campaign , begun after Michael Brown ’s death , calls for police in St . Louis County , the city of St . Louis and Ferguson , Mo. , where Mr. Brown was killed , to wear body cameras .
+<START:organization> Change .org <END> lets users create online petitions that call on governments and companies to act on specific issues .
+One recent campaign , begun after <START:location> Michael Brown <END> ’s death , calls for police in <START:location> St . Louis County <END> , the city of <START:location> St . Louis <END> and <START:location> Ferguson , Mo. <END> , where <START:person> Mr. Brown <END> was killed , to wear body cameras .
 It quickly received more than 130,000 signatures .
-Another campaign , started after Unilever sued a start-up food company that makes a mayonnaise alternative , called for big companies to “stop bullying sustainable food companies . ”
+Another campaign , started after <START:organization> Unilever <END> sued a start-up food company that makes a mayonnaise alternative , called for big companies to “stop bullying sustainable food companies . ”
 It garnered more than 100,000 supporters in less than a month .
-Change .org had already raised nearly $ 20 million , most of it in a $ 15 million fund-raising round last year .
+<START:organization> Change .org <END> had already raised nearly $ 20 million , most of it in a $ 15 million fund-raising round last year .
 The new infusion of $ 25 million will be used to expand the company ’s engineering team , invest in mobile development and expand a tool that allows the businesses and politicians who are the targets of petitions to engage with users .
-“We want a world where elected representatives can openly and authentically connect with their constituents at scale , ” Mr. Rattray said .
-Among Silicon Valley start-ups , Change .org
+“We want a world where elected representatives can openly and authentically connect with their constituents at scale , ” <START:person> Mr. Rattray <END> said .
+Among <START:location> Silicon Valley <END> start-ups , <START:organization> Change .org <END>
 has a reputation for being a progressive , mission-driven company .
 Despite having a dot-org web suffix , it is a for-profit company .
 But it is a benefit , or B , corporation , a distinction that allows it to make decisions based on what is good for society , not just what is good for its shareholders .
-This year , for example , Change .org announced a generous new parental leave policy for its employees .
-“B corps are different than traditional corporations in that they have higher standards of social and environmental performance , accountability and transparency , ” said Andrew Kassoy , a co-founder of B Lab , which certifies such companies .
-Other start-ups including Etsy and Kickstarter are B corporations .
-And divisions of some big public companies , like Ben & Jerry’s , which is owned by Unilever , have received the certification .
-Change .org did not say how much investors estimated the company was worth with this latest round of financing .
-Though many prominent start-ups have been pegged as being worth tens of billions of dollars , Mr. Rattray played down the importance of Silicon Valley companies chasing higher valuations .
+This year , for example , <START:organization> Change .org <END> announced a generous new parental leave policy for its employees .
+“B corps are different than traditional corporations in that they have higher standards of social and environmental performance , accountability and transparency , ” said <START:person> Andrew Kassoy <END> , a co-founder of <START:organization> B Lab <END> , which certifies such companies .
+Other start-ups including <START:organization> Etsy <END> and <START:organization> Kickstarter <END> are B corporations .
+And divisions of some big public companies , like <START:organization> Ben & Jerry’s <END> , which is owned by <START:organization> Unilever <END> , have received the certification .
+<START:organization> Change .org <END> did not say how much investors estimated the company was worth with this latest round of financing .
+Though many prominent start-ups have been pegged as being worth tens of billions of dollars , <START:person> Mr. Rattray <END> played down the importance of Silicon Valley companies chasing higher valuations .
 “Some C.E.O.s become overly focused on building the valuation , instead of building the company , ” he said .
 “We want the proxy for our success to be the victories of our campaigns . ”
 More than 80 million people worldwide are using the site .
 A majority of new users are from abroad .
 This year , a petition to spare a Christian Sudanese woman from being executed attracted more than a million supporters .
-The woman , Meriam Yehya Ibrahim , was freed this summer with help from the Italian and American governments .
-The pooling of so many investors in Change .org’s
+The woman , <START:person> Meriam Yehya Ibrahim <END> , was freed this summer with help from the Italian and American governments .
+The pooling of so many investors in <START:organization> Change .org’s <END>
 latest round recalls the angel investing model , in which investors typically put in much smaller amounts to finance fledgling companies , at a much large scale .
 But it is unusual for a group of investors to commit so much money that funds from a traditional venture capital firm are unnecessary .
-Last month , ZenPayroll , a San Francisco start-up , was among the few companies to do something similar , with more than 50 individual investors participating in its latest $ 20 million fund-raising round .
-Mr. Rattray said having this prominent group of investors support Change .org would give him access to a network of advisers who could help guide the company as it continues to grow .
+Last month , <START:organization> ZenPayroll <END> , a <START:location> San Francisco <END> start-up , was among the few companies to do something similar , with more than 50 individual investors participating in its latest $ 20 million fund-raising round .
+<START:person> Mr. Rattray <END> said having this prominent group of investors support <START:organization> Change .org <END> would give him access to a network of advisers who could help guide the company as it continues to grow .
 “These are people who recognize the power of the Internet , ” he said .
-Others in the group include Sam Altman , the president of Y Combinator , the tech incubator company , and Michael Birch , co-founder of Bebo , a former social media site .
-Because the money comes from individuals , not a venture capital firm with a specific time frame for getting a return on its investment , Change .org
-will not be under pressure to go public or sell quickly , Mr. Rattray said .
+Others in the group include <START:person> Sam Altman <END> , the president of <START:organization> Y Combinator <END> , the tech incubator company , and <START:person> Michael Birch <END> , co-founder of <START:organization> Bebo <END> , a former social media site .
+Because the money comes from individuals , not a venture capital firm with a specific time frame for getting a return on its investment , <START:organization> Change .org <END>
+will not be under pressure to go public or sell quickly , <START:person> Mr. Rattray <END> said .
 “The reason we want mission aligned investors with long-term horizons is so we can focus on the product , ” he said .
-Mr. Yang , the Yahoo co-founder , said he was not looking for a quick flip .
+<START:person> Mr. Yang <END> , the <START:organization> Yahoo <END> co-founder , said he was not looking for a quick flip .
 “Investing as an individual allows for a different time frame for an investment to mature , ” he wrote by email .
-“For me , Change .org is a long-term investment that is aligned with the company ’s mission and its vision for continued growth as an independent business . ”
-One repeat investor in the round is Omidyar Network , which represents Mr. Omidyar .
-It had invested in Change .org ,
+“For me , <START:organization> Change .org <END> is a long-term investment that is aligned with the company ’s mission and its vision for continued growth as an independent business . ”
+One repeat investor in the round is <START:organization> Omidyar Network <END> , which represents <START:person> Mr. Omidyar <END> .
+It had invested in <START:organization> Change .org <END> ,
 and supported the unique fund-raising approach .
-“We wanted to see the organization broaden out its sponsorship and sources of capital ” with “individuals who look like institutions and can write meaningful checks , ” said Chris Bishko , an investment partner at Omidyar Network .
-Mr. Bishko called Change .org “a global platform that is giving ordinary people a stronger voice on how things operate . ”
+“We wanted to see the organization broaden out its sponsorship and sources of capital ” with “individuals who look like institutions and can write meaningful checks , ” said <START:person> Chris Bishko <END> , an investment partner at <START:organization> Omidyar Network <END> .
+<START:person> Mr. Bishko <END> called <START:organization> Change .org <END> “a global platform that is giving ordinary people a stronger voice on how things operate . ”
 “This is an incredible innovation , and we’re just at the tip of the iceberg , ” he said .
-But petitions are not all that Change .org
+But petitions are not all that <START:organization> Change .org <END>
 aspires to organize .
-Mr. Rattray said he hoped it would also become a platform for organizing voting , fund-raising and more .
-“Petitions are to Change .org as books were to Amazon , ” he said .
+<START:person> Mr. Rattray <END> said he hoped it would also become a platform for organizing voting , fund-raising and more .
+“Petitions are to <START:organization> Change .org <END> as books were to <START:organization> Amazon <END> , ” he said .

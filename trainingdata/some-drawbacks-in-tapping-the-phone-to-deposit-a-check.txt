@@ -1,32 +1,32 @@
 SINCE the feature first became available five years ago , the ability to deposit a check with a few taps on a smartphone has become one of the most popular features of mobile banking .
 While the systems generally run smoothly , some possible drawbacks are becoming evident as use of the service grows .
-Last year , the Federal Deposit Insurance Corporation reported , about three-quarters of the largest banks offered mobile check deposit — known as “remote deposit capture ” in banking lingo .
-The service , which lets customers use a mobile app to snap a photo of checks with their phones or tablets and deposit the money in their bank accounts , was used by about 11 percent of consumers a year ago , up from 2 percent in 2011 , according to a new report from the Pew Charitable Trusts .
-As the service catches on , it becomes increasingly important for customers to compare the terms of mobile deposit services that different banks offer — but that comparison is n’t always easy to do , since disclosures by banks vary and are sometimes vague or incomplete , according to the Pew report .
-“Consumers can’t readily comparison-shop based on terms and conditions , ” said Susan Weinstock , director of Pew’s consumer banking project .
+Last year , the <START:organization> Federal Deposit Insurance Corporation <END> reported , about three-quarters of the largest banks offered mobile check deposit — known as “remote deposit capture ” in banking lingo .
+The service , which lets customers use a mobile app to snap a photo of checks with their phones or tablets and deposit the money in their bank accounts , was used by about 11 percent of consumers a year ago , up from 2 percent in 2011 , according to a new report from the <START:organization> Pew Charitable Trusts <END> .
+As the service catches on , it becomes increasingly important for customers to compare the terms of mobile deposit services that different banks offer — but that comparison is n’t always easy to do , since disclosures by banks vary and are sometimes vague or incomplete , according to the <START:organization> Pew <END> report .
+“Consumers can’t readily comparison-shop based on terms and conditions , ” said <START:person> Susan Weinstock <END> , director of <START:organization> Pew’s <END> consumer banking project .
 Some banks , for instance , don’t offer immediate availability of funds deposited by smartphone , as a way to control fraud .
 Banks also impose limits on the amounts that can be deposited using mobile phones , also to protect against fraud .
-But it can be difficult to find that information ; some banks put such information online , rather than within the app that customers use to deposit the checks , Pew found .
+But it can be difficult to find that information ; some banks put such information online , rather than within the app that customers use to deposit the checks , <START:organization> Pew <END> found .
 While it ’s so far been relatively limited , fraud can occur with mobile check deposit , partly because unlike with traditional check deposits , the customer retains the original paper check , which can be redeposited — either by accident or intentionally .
-A study by Celent of more than 200 banks found an uptick in fraud related to remote deposits as use of the service grows .
+A study by <START:organization> Celent <END> of more than 200 banks found an uptick in fraud related to remote deposits as use of the service grows .
 Each year from 2010 through 2012 , nearly 90 percent of banks said they had no losses attributable to remote deposit , but that proportion dropped to more than three-quarters of banks in 2013 .
-So far , however , banks generally consider the losses that occur with mobile deposits to be “manageable , ” Bob Meara , a senior banking analyst at Celent , said .
+So far , however , banks generally consider the losses that occur with mobile deposits to be “manageable , ” <START:person> Bob Meara <END> , a senior banking analyst at <START:organization> Celent <END> , said .
 That’s not to say that some consumers have n’t run into problems .
-Katherine Kostreva , a marketing and public relations consultant in New York , said she had encountered problems with mobile check deposits at Bank of America this year — first for $ 1,400 and then for $ 1,200 .
+<START:person> Katherine Kostreva <END> , a marketing and public relations consultant in <START:location> New York <END> , said she had encountered problems with mobile check deposits at <START:organization> Bank of America <END> this year — first for $ 1,400 and then for $ 1,200 .
 In both cases , the bank concluded that the checks deposited with her mobile app were later deposited or cashed a second time at different banks .
-As a result , Bank of America withdrew the funds that had been deposited in her account .
+As a result , <START:organization> Bank of America <END> withdrew the funds that had been deposited in her account .
 She said that she had been a victim of fraud , and that the paper checks deposited at the other banks were stolen from her .
 She has been talking with the bank about the return of the money .
 Here are some questions about mobile check deposit :
 ■ How should I sign my check when using mobile deposit ?
 Check with your bank for its specific requirements .
-In general , adding the phrase “for mobile deposit only ” is a good idea , said James DeBello , chief of Mitek , which provides the systems that process mobile check deposits at many banks .
+In general , adding the phrase “for mobile deposit only ” is a good idea , said <START:person> James DeBello <END> , chief of <START:organization> Mitek <END> , which provides the systems that process mobile check deposits at many banks .
 That helps reduce the chance that someone could — intentionally or by accident — try to cash or redeposit the check .
-Mitek now offers banks the ability to scan checks for the presence of such “restrictive endorsements , ” to reduce the risk of multiple deposits , Mr. DeBello said .
+<START:organization> Mitek <END> now offers banks the ability to scan checks for the presence of such “restrictive endorsements , ” to reduce the risk of multiple deposits , <START:person> Mr. DeBello <END> said .
 ■ How long should I keep a paper check after I’ve deposited it using my phone ?
-Each bank has its own rules , which may vary widely , the Pew report found .
+Each bank has its own rules , which may vary widely , the <START:organization> Pew <END> report found .
 Some banks require that the customer destroy the check as soon as the funds appear in the account ; other banks require checks to be held for up to 90 days , and at least one implies that checks should be held “indefinitely . ”
 You should follow your bank’s rules , and keep the check in a safe place after you deposit it .
-Al Pascual of Javelin Strategy & Research said that after depositing checks with mobile apps , consumers should treat them “like cash ” until their bank’s required holding period expires .
+<START:person> Al Pascual <END> of <START:organization> Javelin Strategy & Research <END> said that after depositing checks with mobile apps , consumers should treat them “like cash ” until their bank’s required holding period expires .
 ■ How soon after I deposit a check using my phone are funds available to me ?
-The rules for availability of funds from mobile deposits may vary from those for checks deposited by traditional means , the Pew report found ; some banks offer immediate access to funds , but may charge a fee for the service .
+The rules for availability of funds from mobile deposits may vary from those for checks deposited by traditional means , the <START:organization> Pew <END> report found ; some banks offer immediate access to funds , but may charge a fee for the service .
