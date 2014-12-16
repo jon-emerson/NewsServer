@@ -1,12 +1,12 @@
 http://techcrunch.com/2014/12/15/hbo-go-finally-comes-to-amazon-fire-tv/
-Amazon just made good on its promise .
-HBO GO is now available on the Amazon Fire TV and will hit the Fire TV Stick this coming spring .
-Best yet , the app fully supports Amazon’s impressive voice search that let’s users find content with a button built into the Fire TV remote .
-When the Fire TV launched , Amazon CEO Jeff Bezos promised that the streamer would get HBO GO by the end of the year .
-And with just two weeks go in 2014 , Amazon just made the cut .
-“Since launch we’ve increased the number of services available on Amazon Fire TV by more than 4x , ” said Peter Larsen , Vice President Amazon Devices , said in a released statement .
-“We’re thrilled to add HBO GO , the most requested service , to Fire TV in time for the holidays .
-HBO has produced some of the most groundbreaking and award-winning TV shows and movies , and we are excited to bring this amazing content to our customers , all of which is accessible via voice search on your Fire TV remote . ”
-Amazon had previously cut a deal with HBO that brought a large chunk of HBO’s back catalog to Amazon Prime Instant Video and the Fire TV devices .
-Yet new content from new series like Game of Thrones , The Newsroom and Girls were missing .
-The addition of this app sort of solves that problem ; an HBO subscription is still required to view the content .
+<START:organization> Amazon <END> just made good on its promise .
+<START:organization> HBO GO <END> is now available on the <START:organization> Amazon Fire TV <END> and will hit the Fire TV Stick this coming spring .
+Best yet , the app fully supports <START:organization> Amazon’s  <END>impressive voice search that let’s users find content with a button built into the Fire TV remote .
+When the <START:organization> Fire TV <END> launched , <START:organization> Amazon <END> CEO <START:person> Jeff Bezos <END> promised that the streamer would get <START:organization> HBO GO <END> by the end of the year .
+And with just two weeks go in 2014 , <START:organization> Amazon <END> just made the cut .
+“Since launch we’ve increased the number of services available on <START:organization> Amazon Fire TV <END> by more than 4x , ” said <START:person> Peter Larsen <END> , Vice President <START:organization> Amazon Devices <END> , said in a released statement .
+“We’re thrilled to add <START:organization> HBO GO <END> , the most requested service , to <START:organization> Fire TV <END> in time for the holidays .
+<START:organization> HBO <END> has produced some of the most groundbreaking and award-winning TV shows and movies , and we are excited to bring this amazing content to our customers , all of which is accessible via voice search on your <START:organization> Fire TV <END> remote . ”
+<START:organization> Amazon <END> had previously cut a deal with HBO that brought a large chunk of <START:organization> HBO’s <END> back catalog to <START:organization> Amazon Prime Instant Video <END> and the Fire TV devices .
+Yet new content from new series like <START:organization> Game of Thrones <END> , <START:organization> The Newsroom <END> and <START:organization> Girls <END> were missing .
+The addition of this app sort of solves that problem ; an <START:organization> HBO <END> subscription is still required to view the content .

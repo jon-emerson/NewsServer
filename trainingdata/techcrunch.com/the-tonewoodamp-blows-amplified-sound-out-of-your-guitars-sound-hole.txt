@@ -1,7 +1,7 @@
 http://techcrunch.com/2014/12/15/the-tonewoodamp-blows-amplified-sound-out-of-your-guitars-sound-hole/
 Are you ready to amp up your acoustic guitar to the MAXXXX ?
-The ToneWoodAmp has got you covered .
-This surprisingly cool Kickstarter project is essentially a speaker that takes the sound coming in from your acoustic guitar , modifies it , and then reproduces it automatically so you can hear it out of the guitar body .
+The <START:organization> ToneWoodAmp <END> has got you covered .
+This surprisingly cool <START:organization> Kickstarter <END> project is essentially a speaker that takes the sound coming in from your acoustic guitar , modifies it , and then reproduces it automatically so you can hear it out of the guitar body .
 It’s great for folks who might not have access to effects pedals or a PA system and for buskers or live players who are looking for an interesting way to modify a standard guitar .
 The amp connects to the back of your guitar and the sound reverberates through the body .
 It has a number of inbuilt effects including tremolo an reverb and you can even run the sound through an iOS device to use software filters and effects .
@@ -10,5 +10,5 @@ The team has working prototypes so far and it looks like it ’s going to ship i
 While most guitarists already have a bank of pedals and effects they use , having this attached to an acoustic guitar seems like an interesting solution for gear heads .
 The kit connects to your guitar using magnetic rails that are mounted inside the guitar .
 This means it can be removed as necessary and won’t destroy the outside of your guitar .
-As TechCrunch’s resident SHRED MAETERXXXTOTHEMAXXX I’m actually curious how this sounds and how it works outdoors .
-Who knows , the next busker you meet may be able to truly SHRED a little Stairway next to the Cold Stone using electronic effects and an old Fender .
+As <START:organization> TechCrunch’s <END> resident SHRED MAETERXXXTOTHEMAXXX I’m actually curious how this sounds and how it works outdoors .
+Who knows , the next busker you meet may be able to truly SHRED a little Stairway next to the <START:organization> Cold Stone <END> using electronic effects and an old <START:organization> Fender <END> .

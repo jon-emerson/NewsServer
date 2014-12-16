@@ -1,19 +1,19 @@
 http://techcrunch.com/2014/12/15/how-to-speak-startup/
 Hang with startup kids long enough , and you’ll notice that they have their own language .
 No, bro , it ’s a SaaS play in the on-demand food space .
-Think of it as the Uber for gluten-free Whole Foods delivery , ok ?
+Think of it as the <START:organization> Uber <END> for gluten-free <START:organization> Whole Foods <END> delivery , ok ?
 It never ends : We’re actively raising , but really want to make sure that we hit investor-board fit before product-market sync , you know ?
 This can be confusing .
-However , TechCrunch is here to demystify startup lingo into a more common lingua franca .
+However , <START:organization> TechCrunch <END> is here to demystify startup lingo into a more common lingua franca .
 The startup kids , after all , are worth trying to understand .
 One or two of them might even build something usable .
 So , without further ado , I give you How To Speak Startup :
-Acqui-hire – A strategy for acquiring talent pioneered by Google in the mid-2000s that happens when a bigger company thinks your team is good but your idea is hilariously bad .
+Acqui-hire – A strategy for acquiring talent pioneered by <START:organization> Google <END> in the mid-2000s that happens when a bigger company thinks your team is good but your idea is hilariously bad .
 Also called a “signing bonus . ”
 Failure – A bad thing that the Silly Valley has recently put on a pedestal as something to be celebrated .
 Cashflow Positive – Someone gave us a dollar .
 Pivot – What happens when a company realizes their course of action is not living up to expectations .
-The classic historic example is The Point , which became Groupon after the company posted a coupon to a pizza place in The Point’s building in Chicago .
+The classic historic example is <START:organization> The Point <END> , which became <START:organization> Groupon <END> after the company posted a coupon to a pizza place in <START:organization> The Point’s <END> building in <START:location> Chicago <END> .
 ( See also , Failure . )
 SaaS — It loses money .
 Pre-Money Valuation – A number you made up .
@@ -35,7 +35,7 @@ VC – 1 ) Venture capitalists raise money from wealthy individuals and institut
 Opium – OPM , or “other people’s money” , is an incredibly addictive substance to entrepreneurs that ’s rarely respected or missed until it dries up .
 “We’re doing great . ”
 – We are not doing great .
-SF / The Valley – A place that VC’s and tech luminaries talk up as the greatest place on Earth that you must move to if you’re from anywhere that is n’t SF or The Valley .
+SF / The Valley – A place that VC’s and tech luminaries talk up as the greatest place on Earth that you must move to if you’re from anywhere that is n’t <START:location> SF <END> or <START:location> The Valley <END> .
 “We’re growing 500 percent week-over-week ” — Last week we had one user , today we have six .
 “We’re not currently raising . ”
 — We’re currently raising .
@@ -47,7 +47,7 @@ Non-GAAP Profitable — What companies that are very unprofitable like to claim 
 The idea that non-cash costs don’t count is usually the sort of sickness you see here .
 “I’m the business guy . ”
 – ( See : Free-rider problem , Growth Hacker . )
-Gravity — We don’t have that in Silicon Valley .
+Gravity — We don’t have that in <START:location> Silicon Valley <END> .
 $ 32 Million Series A Round – Something that is doomed to failure .
 Growth Hacking – Sales , marketing and associated activities , but with a label that incorporates the word “hacking , ” because nontechnical people want to call themselves “hackers ” too .
 “We’re seeing great gross margins , and so are investing in growth given our strong , SaaS unit-economics . ”
@@ -55,5 +55,5 @@ Growth Hacking – Sales , marketing and associated activities , but with a labe
 “We’re stomping on the gas pedal , given our strong SaaS unit-economics , and are actively seeking additional capital to power our sector-leading growth . ”
 — We have lost all our money and need some of yours , please .
 “We’re Crushing It ! ” – Your dreams and investors ’ dollars are probably being crushed .
-First rule of Fight Club , bro .
+First rule of <START:organization> Fight Club <END> , bro .
 We hope this helps .

@@ -1,16 +1,16 @@
 http://techcrunch.com/2014/12/15/the-nest-thermostat-can-now-be-controlled-by-voice/
 Your house is cold , but your thermostat is way over there .
 You could walk over to your thermostat and crank the heat , but pfft , walking .
-If you have a Nest , you could open up the app and control it that way , but , pfft , opening apps by hand .
+If you have a <START:organization> Nest <END> , you could open up the app and control it that way , but , pfft , opening apps by hand .
 What is this , 2007 ? !
-As of this morning , you can now control a Nest with your voice .
-Making use of that $ 3.2 billion acquisition it made earlier this year , Google is integrating Nest functionality into Google Now .
+As of this morning , you can now control a <START:organization> Nest <END> with your voice .
+Making use of that $ 3.2 billion acquisition it made earlier this year , <START:organization> Google <END> is integrating <START:organization> Nest <END> functionality into <START:organization> Google Now <END> .
 Want to make it warmer ?
-Just say “Ok Google , change temperature to 75 degrees . ”
+Just say “Ok <START:organization> Google <END> , change temperature to 75 degrees . ”
 to your phone .
-Meanwhile , Google Now will also throw up a card whenever Nest’s automated control settings kick in .
+Meanwhile , <START:organization> Google Now <END> will also throw up a card whenever <START:organization> Nest’s <END> automated control settings kick in .
 If it decides to bump the temperature up on its own to prep for your arrival from work , for example , it’ll show up as a Now card .
 A few things to note :
-Okay , Google .
+Okay , <START:organization> Google <END> .
 Now teach my house to respond to “Tea , Earl Grey , Hot . ”
-[via AndroidPolice ]
+[via <START:organization> AndroidPolice <END> ]

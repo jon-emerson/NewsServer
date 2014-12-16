@@ -1,11 +1,11 @@
 http://techcrunch.com/2014/12/15/hiptic-games-launches-its-gamethrive-push-notification-service/
-Hiptic Games , a Y Combinator alum that ’s been operating in stealth since the summer 2011 batch , has launched GameThrive , a push notification service that aims to help developers engage players when they’re least likely to be annoyed .
+<START:organization> Hiptic Games <END> , a <START:organization> Y Combinator <END> alum that ’s been operating in stealth since the summer 2011 batch , has launched <START:organization> GameThrive <END> , a push notification service that aims to help developers engage players when they’re least likely to be annoyed .
 Originally built for the team’s own needs , the service combines push-notification delivery automation with analytics tools to avoid overwhelming users to the point where they delete an app .
 Looking at things like playing habits and response rates to different notifications , the service schedules messages for in-game deals or events at times when players will be mostly likely to engage with them and come back to the game .
-GameThrive is available as a native SDK for iOS , Android , and Windows Phone , but most developers will probably find it easier to build into games using SDKs for popular engines .
-With the exception of Unreal , there are kits available for most major mobile engines including Unity and Cocos2d-x .
-Corona and Marmalade have actually partnered with Hiptic to make it available directly to developers who download their engines without requiring a separate add-on .
-Hiptic CEO George Deglin says that most of the 900 developers using the service have been grandfathered in on special beta pricing plans and don’t have to pay until they’re delivering notifications to 8 million devices .
+<START:organization> GameThrive <END> is available as a native SDK for <START:organization> iOS <END> , <START:organization> Android <END> , and <START:organization> Windows Phone <END> , but most developers will probably find it easier to build into games using SDKs for popular engines .
+With the exception of Unreal , there are kits available for most major mobile engines including <START:organization> Unity <END> and <START:organization> Cocos2d-x <END> .
+<START:organization> Corona <END> and <START:organization> Marmalade <END> have actually partnered with <START:organization> Hiptic <END> to make it available directly to developers who download their engines without requiring a separate add-on .
+<START:organization> Hiptic <END> CEO <START:person> George Deglin <END> says that most of the 900 developers using the service have been grandfathered in on special beta pricing plans and don’t have to pay until they’re delivering notifications to 8 million devices .
 Those signing up now won’t pay if they’re reaching fewer than 1 million devices , with plans starting at $ 49 per month for user bases bigger than that .
-As mentioned in the blog post announcing the service’s launch , Hiptic hopes to bring over developers who rely on Urban Airship’s free notification tier , which ends at the end of this month .
+As mentioned in the blog post announcing the service’s launch , <START:organization> Hiptic <END> hopes to bring over developers who rely on <START:organization> Urban Airship’s <END> free notification tier , which ends at the end of this month .
 They’ve built a tool that automates migrating over from that service using just your credentials .
