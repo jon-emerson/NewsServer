@@ -1,3 +1,4 @@
+http://dealbook.nytimes.com/2014/12/08/tech-figures-join-to-fund-change-org-petition-site/
 In a twist on how <START:location> Silicon Valley <END> companies are financed , several technology luminaries have banded together to effectively do the work of a traditional venture capital firm .
 The <START:organization> Microsoft <END> co-founder <START:person> Bill Gates <END> , <START:organization> Yahoo <END> co-founder <START:person> Jerry Yang <END> , <START:organization> Twitter <END> co-founder <START:person> Evan Williams <END> and others have invested $ 25 million in <START:organization> Change .org <END> , the petitions website , to help it expand .
 Others in the group include prominent business leaders like the billionaire <START:person> Richard Branson <END> , <START:organization> eBay <END> founder <START:person> Pierre M. Omidyar <END> and <START:organization> LinkedIn <END> co-founder <START:person> Reid Hoffman <END> .

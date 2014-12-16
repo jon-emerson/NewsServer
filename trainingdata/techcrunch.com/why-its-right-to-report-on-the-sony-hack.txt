@@ -1,0 +1,60 @@
+http://techcrunch.com/2014/12/15/why-its-right-to-report-on-the-sony-hack/
+“No one’s private life can totally withstand public scrutiny , ” reads an NYT op-ed penned by screenwriter and playwright Aaron Sorkin , angrily blasting the media for reporting the private details revealed through the recent hack of Sony Pictures Entertainment , in what’s shaping up to be one of the largest corporate data breaches to date .
+“…Every news outlet that did the bidding of the [hacking group ] Guardians of Peace is morally treasonous and spectacularly dishonorable , ” he adds .
+Meanwhile , Sony Pictures – blithely ignoring the First Amendment ( and the Streisand effect ) – has threatened legal action against journalists reporting on the findings from the stolen documents .
+Sorkin and Sony are both wrong .
+Sony may be a victim , but there is data in the breach that ’s worth reporting to the public – even if one of the largest takeaways is for other corporations to react to Sony ’s cautionary tale and beef up its own servers and security infrastructure .
+Sony Tries Silencing Reporters
+One thing the world needs to understand immediately is that all information is public by default , and the only real privacy protection is that its exposure has yet to be targeted by determined hackers .
+Over the past several years , hackers have stolen consumers ’ personal information and credit card numbers from some of the largest retailers .
+They’ve pulled nude photos off celebrity’s phones and from “private” messaging app Snapchat .
+Large companies like Adobe and eBay have seen emails and other personal account information stolen .
+And whistleblowers like Snowden have revealed the most private and devastating aspects of government spying agendas .
+There is literally nothing that is above being exposed publicly if the right people are focused on a specific agenda .
+The Sony hack was carried out by a group referring to itself as the “Guardians of Peace . ”
+The group has demanded that Sony pull its upcoming movie “The Interview , ” starring Seth Rogen and James Franco , which was based on a fictional plot to assassinate North Korean leader Kim Jong Un .
+The group has leaked a number of Sony movies online including the yet-to-be released remake of “Annie , ” plus “Mr.
+Turner , ” “Still Alice , ” and “To Write Love on Her Arms , ” alongside large data dumps from inside Sony ’s corporate network .
+The reaction , however , of hacking victims like Sony should not include tantrums like those now demonstrated by Sorkin and the studio itself .
+They should only offer apologies , if they say anything at all .
+Apologies for making the hack just so damned easy , keeping some of the company ’s most private information on its operations , its employees ( and their families ) in unencrypted Excel and Word files and carelessly shared emails .
+That’s not to blame the victims themselves , though – individuals make mistakes , but corporate IT policies are meant to protect those mistakes from becoming publicly shared data .
+Sony Pictures , one of the U.S. ’s largest studios , has now , somewhat ridiculously , asked journalists to destroy the stolen documents , and warned that those who did n’t comply will face further action , the company threatened via letters sent to a number of online and print publishers .
+“Sony Pictures Entertainment will have no choice but to hold you responsible for any damage or loss arising from such use or dissemination by you , ” the letter states .
+News media has reported on a number of these leaked emails , which have included private jabs , jokes and commentary , including a director referring to Hollywood star Angelina Jolie as a “spoiled brat , ” Sony ’s botching of the Steve Jobs movie , and racist riffs between studio co-chairman Amy Pascal and producer Scott Rudin about what President Obama’s favorite movies might be .
+One could argue that those sorts of details , as Sorkin claims , were exploited for pageviews more so than public good .
+But that ’s not looking at the bigger picture related to the media’s coverage of the hack .
+Beyond providing fodder for gossip blogs , the Sony hack has also revealed serious information that ’s arguably more serving of the “public interest . ”
+( Hint : that ’s what journalists are supposed to cover – a topic , incidentally , that Sorkin’s own show HBO’s “The Newsroom” has grappled with recently , when its reporters for a fictional news network resembling CNN landed a treasure trove of stolen Department of Defense documents . )
+Worth Revealing ?
+The Sony hack has displayed a lot about the failing of our modern , wired corporate culture .
+Like just how casual internal company HR employees treat email communication , for example .
+Email is not private ; as a former IT worker , I could have accessed any inbox on my domain ( and often did , though not for reading emails , but for legitimate reasons like backup , archiving , or transfer to a new hire ) .
+But more importantly , employees dealing with sensitive information seem not to understand that email is not a place where an HR employee needs to be detailing a child’s medical treatment , where that treatment is taking place , the child’s name , how the child was doing in treatment , and more .
+Sony , and likely other organizations that are currently fortunate enough to not have their poor security policies exposed , also does not seem to understand that if you’re choosing to record Social Security numbers , birth dates and salaries in Excel spreadsheets , you should protect them with at least a minimum amount of security , by way of encryption .
+Or hell , even a password .
+( That’s not to say the files could n’t have still been hacked , but it would have made it that much harder . )
+In addition , while the hackers may have accessed the files in question illegally , there are insights the files reveal that are worth sharing more broadly .
+It’s worth informing the public that the studio’s upper management is 94 percent male , and 88 percent white ( as Fusion reports ) – making them less diverse than the much-lambasted tech companies whose recent barrage of diversity reports have revealed their tendencies toward monoculture , for instance .
+Image credit , above : Fusion .net
+Another key item that was revealed by journalists reporting on the Sony leak was that of Hollywood’s war against Google , which was code-named “Project Goliath ” in email threads .
+As detailed by The Verge , lawyers from the MPAA and half a dozen major studios refer to “Goliath ” as their biggest enemy in their battle with online piracy , and the Sony emails discuss a variety of tactics to fight “Goliath , ” including site blocking , legal action involving state attorneys general , political lobbying , and more .
+Sony ’s Emails Could Be Your Emails
+Sorkin ( and Sony ) are fine to criticize reporters ’ editorial choices .
+But Sorkin , in a nutshell , is wrong to say that reporting on the leaks is “spectacularly dishonorable ” as a whole .
+And neither is he correct in thinking that the right to report should be shut down .
+These leaks have contained thousands of Social Security numbers , personnel files containing employee salaries and severance costs , personal information on employees and execs including birth dates , and even health records for dozens of employees , their spouses and their children .
+The press is not generally pointing to the actual files in question , hosting them on their own sites in full , or revealing details like which employees had high medical bills , or which child’s medical claims were being denied .
+The media has reported , however , that is the kind of information these documents contain .
+And it ’s worth doing so : Sony ’s emails could be your emails .
+They could be your company ’s emails .
+Those could be your kids .
+If an organization of Sony ’s size is susceptible to hacking , anyone is .
+In the aftermath , Sony has now hired FireEye Inc. ’s Mandiant forensics unit to clean up this massive cyber attack , as the FBI investigates the incident .
+But the immediate damage has been done and the damage may continue for some time .
+Only a small number of documents have been revealed so far – the hackers reportedly captured over 100 terabytes of data .
+Headlines about Hollywood actors or ego-damaging asides may draw pageviews ( and may be in poor taste ) , but what’s not up for debate is whether journalists can report on illegally obtained files – they can , thanks to First Amendment protections .
+Is there anything in the files that “can help , inform or protect anyone ? , ” asks Sorkin , mid-tirade .
+Yes , as our above examples show .
+But also , more generally , that this happened , that this level of private data can be revealed , and that it can be revealed with ease can help us all .
+Let it serve as a warning to everyone from corporate IT to everyday consumers to protect ourselves…or risk becoming the next Sony .

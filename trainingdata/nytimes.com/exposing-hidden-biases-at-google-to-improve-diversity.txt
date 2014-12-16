@@ -1,3 +1,4 @@
+http://www.nytimes.com/2014/09/25/technology/exposing-hidden-biases-at-google-to-improve-diversity.html
 <START:organization> Google <END> , like many tech companies , is a man’s world .
 Started by a pair of men , its executive team is overwhelmingly male , and its work force is dominated by men .
 Over all , seven out of 10 people who work at <START:organization> Google <END> are male .

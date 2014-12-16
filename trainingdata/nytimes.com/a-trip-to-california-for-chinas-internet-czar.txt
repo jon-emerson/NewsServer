@@ -1,3 +1,4 @@
+http://bits.blogs.nytimes.com/2014/12/08/a-trip-to-california-for-chinas-internet-czar/
 <START:location> HONG KONG <END> — At least one thing caught the eye of <START:location> China’s <END> Internet czar during his trip to the <START:location> United States <END> last week : a book written by and about the president of <START:location> China <END> on the desk of <START:person> Mark Zuckerberg <END> .
 <START:person> Mr. Zuckerberg <END> , the chief executive of <START:organization> Facebook <END> , pointed to the book , “ <START:person> Xi Jinping <END> : The Governance of <START:organization> China <END> ” last week while giving a tour of the company ’s office to <START:person> Lu Wei <END> , the de facto head of Internet policy in <START:location> China <END> .
 <START:person> Mr. Lu <END> laughed when he saw the book , an anthology of speeches and comments by <START:person> President Xi <END> .

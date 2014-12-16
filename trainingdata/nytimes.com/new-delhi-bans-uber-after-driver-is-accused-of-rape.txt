@@ -1,3 +1,4 @@
+http://www.nytimes.com/2014/12/09/world/asia/new-delhi-bans-uber-after-driver-is-accused-of-rape.html
 <START:location> NEW DELHI <END> — The Delhi region on Monday banned <START:organization> Uber <END> , the popular hail-a-ride service , after one of its drivers appeared in court on suspicion of raping a passenger who dozed off during a ride home only to discover that the driver had taken her to a secluded spot and climbed into the back of the vehicle .
 Criticism of <START:organization> Uber’s <END> licensing and screening procedures was heightened when it emerged that the driver , <START:person> Shiv Kumar Yadav <END> , had been detained for seven months on suspicion of raping another female passenger three years ago .
 That case was ultimately closed and <START:person> Mr. Yadav <END> was acquitted , said <START:person> Madhur Verma <END> , the deputy commissioner of the police for the northern district of <START:location> New Delhi <END> .

@@ -18,6 +18,7 @@ import org.xml.sax.DTDHandler;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
+import org.xml.sax.Locator;
 import org.xml.sax.Parser;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
@@ -189,6 +190,8 @@ public class LenientSaxParser extends SAXParser {
 
   private static class LenientXMLReader implements XMLReader {
     private ContentHandler handler = null;
+    private CountingReader reader = null;
+    private LenientLocator locator = new LenientLocator();
     private ErrorHandler errorHandler = null;
     private EntityResolver entityResolver = null;
     private DTDHandler dtdHandler = null;
@@ -244,8 +247,85 @@ public class LenientSaxParser extends SAXParser {
     }
 
     @Override
-    public void setContentHandler(ContentHandler handler) {
-      this.handler = handler;
+    public void setContentHandler(final ContentHandler newHandler) {
+      // Wrap the given ContentHandler in an anonymous handler that updates the
+      // SAX Locator with the current parsing position before calling the
+      // caller's Handler.  This makes it so that the caller's Handler can
+      // know when tags start and end.
+      this.handler = new ContentHandler() {
+        private void updateLocator() {
+          LenientXMLReader.this.locator.setColumnNumber(
+              LenientXMLReader.this.reader.getColumnNumber());
+          LenientXMLReader.this.locator.setLineNumber(
+              LenientXMLReader.this.reader.getLineNumber());
+        }
+
+        @Override
+        public void setDocumentLocator(Locator locator) {
+          newHandler.setDocumentLocator(locator);
+        }
+
+        @Override
+        public void startDocument() throws SAXException {
+          updateLocator();
+          newHandler.startDocument();
+        }
+
+        @Override
+        public void endDocument() throws SAXException {
+          updateLocator();
+          newHandler.endDocument();
+        }
+
+        @Override
+        public void startPrefixMapping(String prefix, String uri) throws SAXException {
+          updateLocator();
+          newHandler.startPrefixMapping(prefix, uri);
+        }
+
+        @Override
+        public void endPrefixMapping(String prefix) throws SAXException {
+          updateLocator();
+          newHandler.endPrefixMapping(prefix);
+        }
+
+        @Override
+        public void startElement(String uri, String localName, String qName, Attributes atts)
+            throws SAXException {
+          updateLocator();
+          newHandler.startElement(uri, localName, qName, atts);
+        }
+
+        @Override
+        public void endElement(String uri, String localName, String qName) throws SAXException {
+          updateLocator();
+          newHandler.endElement(uri, localName, qName);
+        }
+
+        @Override
+        public void characters(char[] ch, int start, int length) throws SAXException {
+          updateLocator();
+          newHandler.characters(ch, start, length);
+        }
+
+        @Override
+        public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
+          updateLocator();
+          newHandler.ignorableWhitespace(ch, start, length);
+        }
+
+        @Override
+        public void processingInstruction(String target, String data) throws SAXException {
+          updateLocator();
+          newHandler.processingInstruction(target, data);
+        }
+
+        @Override
+        public void skippedEntity(String name) throws SAXException {
+          updateLocator();
+          newHandler.skippedEntity(name);
+        }
+      };
     }
 
     @Override
@@ -272,17 +352,20 @@ public class LenientSaxParser extends SAXParser {
 
     @Override
     public void parse(InputSource input) throws IOException, SAXException {
-      handler.startDocument();
-
       // We could be passed either a character stream Reader or an InputStream,
       // so handle both.
-      BufferedReader reader;
       if (input.getCharacterStream() != null) {
-        reader = new BufferedReader(input.getCharacterStream());
+        reader = new CountingReader(new BufferedReader(input.getCharacterStream()));
       } else {
-        reader = new BufferedReader(new InputStreamReader(input.getByteStream(), "UTF-8"));
+        reader = new CountingReader(
+            new BufferedReader(new InputStreamReader(input.getByteStream(), "UTF-8")));
       }
 
+      // Let the handler know we've started.
+      handler.setDocumentLocator(locator);
+      handler.startDocument();
+
+      // And let's go, finite state machine!  Go!
       ParserState state = ParserState.DEFAULT;
       int characterInt = reader.read();
       StringBuilder currentBlock = new StringBuilder();
@@ -299,6 +382,7 @@ public class LenientSaxParser extends SAXParser {
                     currentBlockString.length());
                 currentBlock.setLength(0);
               }
+              locator.setStartingOffset(reader.getOffset());
               state = ParserState.INSIDE_ELEMENT;
             }
             break;

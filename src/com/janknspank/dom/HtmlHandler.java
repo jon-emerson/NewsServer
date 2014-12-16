@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.xml.sax.Attributes;
+import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class HtmlHandler extends DefaultHandler {
   private static final boolean VERBOSE = false;
+  private LenientLocator locator = null;
   private DocumentNode documentNode;
   private Node currentNode = documentNode;
   private int depth = 0;
@@ -20,6 +22,11 @@ public class HtmlHandler extends DefaultHandler {
     } catch (SAXException | IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  @Override
+  public void setDocumentLocator(Locator locator) {
+    this.locator = (LenientLocator) locator;
   }
 
   private void reset() {
@@ -83,7 +90,7 @@ public class HtmlHandler extends DefaultHandler {
     }
     ++depth;
 
-    currentNode = new Node(currentNode, qName);
+    currentNode = new Node(currentNode, qName, locator.getStartingOffset());
     currentNode.getParent().addChildNode(currentNode);
     for (int i = 0; i < attrs.getLength(); i++) {
       currentNode.addAttribute(attrs.getQName(i), attrs.getValue(i));

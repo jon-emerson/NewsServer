@@ -1,3 +1,4 @@
+http://www.nytimes.com/2014/02/23/opinion/sunday/friedman-how-to-get-a-job-at-google.html
 <START:location> MOUNTAIN VIEW , Calif <END> .
 — LAST June , in an interview with Adam Bryant of The Times , <START:person> Laszlo Bock <END> , the senior vice president of people operations for <START:organization> Google <END> — i .e . , the guy in charge of hiring for one of the world’s most successful companies — noted that <START:organization> Google <END> had determined that “G.P.A.’s are worthless as a criteria for hiring , and test scores are worthless .
 ... We found that they don’t predict anything . ”

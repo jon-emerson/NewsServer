@@ -1,11 +1,14 @@
 package com.janknspank.dom;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Node {
@@ -14,13 +17,24 @@ public class Node {
   private final Multimap<String, String> attributes = ArrayListMultimap.create();
   private final String tagName;
 
-  public Node(Node parent, String tagName) {
+  /**
+   * The character offset this element began at in the document.
+   * E.g. if a page starts with <HTML>, offset would be 0.
+   */
+  private final long startingOffset;
+
+  public Node(Node parent, String tagName, long startingOffset) {
     this.parent = parent;
     this.tagName = tagName;
+    this.startingOffset = startingOffset;
   }
 
   public Node getParent() {
     return parent;
+  }
+
+  public long getStartingOffset() {
+    return startingOffset;
   }
 
   public boolean isChildTextNode(int index) {
@@ -110,16 +124,49 @@ public class Node {
   }
 
   /**
-   * Finds all Nodes that match a CSS-like specifier.  Currently only works
-   * for tag names.
-   * TODO(jonemerson): Support IDs and class names.
+   * Returns a collection of all the CSS classes that this node has.
+   */
+  private Iterable<String> getClasses() {
+    String rawClasses = getAttributeValue("class");
+    if (rawClasses == null) {
+      return Collections.emptyList();
+    }
+    return Splitter.on(" ").split(rawClasses);
+  }
+
+  /**
+   * Returns true if this Node matches the passed search string.  E.g. if
+   * this node is a div, and the search string is "div", this returns true.
+   * Also, if this node has class "hello", and the search string is ".hello",
+   * this also returns true.  Lastly, "#foo" matches id="foo".
+   */
+  private boolean matchesSearchStr(String searchStr) {
+    // Make sure parsing happened before this and we're only comparing one
+    // attribute against this node.
+    if (searchStr.contains(" ")) {
+      throw new RuntimeException("Search string may only be a single delimiter");
+    }
+
+    if (searchStr.startsWith(".")) {
+      return Iterables.contains(getClasses(), searchStr.substring(1));
+    } else if (searchStr.startsWith("#")) {
+      return searchStr.substring(1).equals(getAttributeValue("id"));
+    } else {
+      // NOTE(jonemerson): Maybe some day be strict about case here.
+      return tagName.equalsIgnoreCase(searchStr);
+    }
+  }
+
+  /**
+   * Finds all Nodes that match a CSS-like specifier.  Currently works for tag
+   * names, classes, and IDs.
    */
   private List<Node> findAll(String searchStr, boolean directDescendant) {
     List<Node> result = new ArrayList<Node>();
     String[] searchStrArray = searchStr.split(" ");
     for (int i = 0; i < getChildCount(); i++) {
       if (!isChildTextNode(i)) {
-        if (searchStrArray[0].equalsIgnoreCase(getChildNode(i).getTagName())) {
+        if (getChildNode(i).matchesSearchStr(searchStrArray[0])) {
           if (searchStrArray.length == 1) {
             result.add(getChildNode(i));
           } else {

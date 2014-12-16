@@ -1,3 +1,4 @@
+http://www.nytimes.com/2014/12/09/business/hotels-let-guests-borrow-items-or-leave-them.html
 Until last year , when she became a planning consultant for a college in <START:location> Florida <END> , <START:person> Alison Barlow <END> traveled almost full time for an information technology company .
 She was away as long as three weeks a month , making it home on weekends about half the time .
 When a hotel stay at a <START:organization> Hampton Inn <END> in suburban <START:location> Omaha <END> was punctuated by a bout of flu , the staff made drugstore runs and brought her tea and crackers .

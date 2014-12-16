@@ -1,3 +1,4 @@
+http://bits.blogs.nytimes.com/2014/12/08/european-privacy-debate-on-display-in-paris/
 <START:location> PARIS <END> — Europe wants to cash in on its tough data protection rules .
 <START:organization> European Union <END> policy makers are demanding greater controls over how companies like <START:organization> Google <END> and <START:organization> Facebook <END> use personal information .
 At the same time , others would like to use those same laws to help European companies compete against their American rivals as a way to jump-start a sluggish economy .

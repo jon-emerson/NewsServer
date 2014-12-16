@@ -1,3 +1,4 @@
+http://www.nytimes.com/2014/12/09/technology/esports-colleges-breeding-grounds-professional-gaming.html
 <START:person> Loc Tran <END> is a big man on campus at <START:organization> San Jose State University <END> in <START:location> Northern California <END> .
 “A lot of people stop me when I’m walking , ” said <START:person> Mr. Tran <END> , a 19-year-old sophomore , who speaks in quick and confident bursts .
 “They congratulate me . ”

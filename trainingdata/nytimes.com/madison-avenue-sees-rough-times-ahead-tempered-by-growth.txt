@@ -1,3 +1,4 @@
+http://www.nytimes.com/2014/12/09/business/media/madison-avenue-sees-rough-times-ahead-tempered-by-growth.html
 AN old Viennese saying to the effect that " the situation is hopeless but not serious " seems to sum up what several <START:location> Madison Avenue <END> thought leaders believe lies in store for the industry next year .
 The senior executives , in presentations on Monday at an annual media conference , predicted that the rough times the advertising business has endured for the last several years would continue into 2015 .
 Still , there will be steady growth in worldwide advertising spending of 4.8 to 5 percent compared with this year , according to their forecasts , as a result of factors that include gains in digital ad sales and improving economic conditions in markets like <START:location> India <END> and the <START:location> United States <END> .

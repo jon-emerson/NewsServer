@@ -5,6 +5,6 @@ package com.janknspank.dom;
  */
 public class DocumentNode extends Node {
   public DocumentNode() {
-    super(null, null);
+    super(null, null, 0);
   }
 }

@@ -1,3 +1,4 @@
+http://www.nytimes.com/2014/12/08/business/international/nurturing-start-up-culture-in-the-lower-cost-balkans.html
 One summer day two years ago , <START:person> Ivan Vesic <END> , a software engineer who lives in the southern Serbian city of <START:location> Nis <END> , rushed to a local veterinary clinic .
 A car had hit his rescue cat , <START:person> Damian <END> , badly damaging his leg and tail .
 The vet , <START:person> Mirza Sejdinovic <END> , had to amputate the cat’s tail but managed to save his leg .
@@ -15,7 +16,7 @@ Some Balkan start-ups , like <START:organization> Emailio <END> , a company co-f
 <START:organization> Flipps <END> , an app that lets users stream video from mobile devices to a television , has also swapped <START:location> Bulgaria <END> for the <START:location> Bay Area <END> .
 In another fillip for the region’s start-ups , <START:organization> Facebook <END> announced in July that it was buying <START:organization> LiveRail <END> , a video ad company co-founded by two Romanians , for a reported $ 400 million to $ 500 million .
 In October , <START:organization> Progress Software <END> , based in <START:location> Bedford , Mass. <END> , said it planned to acquire <START:organization> Telerik <END> , a Bulgarian software company , for $ 262.5 million .
-For years , big international companies have outsourced information technology work to Eastern Europe .
+For years , big international companies have outsourced information technology work to <START:location> Eastern Europe <END> .
 They have been attracted by relatively cheap labor , low rent and a pool of qualified software developers , whose skills reflect a tradition of strong math and engineering education that goes back to communist times .
 Low business taxes help — <START:location> Bulgaria <END> , for example , offers a flat rate of 10 percent .
 Now , those very same reasons are encouraging Balkan entrepreneurs to start their own businesses .
@@ -25,7 +26,7 @@ Balkan governments are slowly getting more involved in the sector .
 Serbia has an Innovation Fund financed by the <START:organization> European Union <END> , which has awarded 53 grants , amounting to €6 million so far .
 Sofia is building a €50 million technology park — also with funding from <START:location> Brussels <END> — to link local businesses and universities and foster innovation .
 President <START:person> Rosen Plevneliev <END> of <START:location> Bulgaria <END> declared at a groundbreaking ceremony in July that it would be “the heart of start-up culture ” in the country .
-Back in <START:location> Nis <END> , VetCloud’s team has been developing a cloud-based software for vets , which stores medical records , handles appointments and sends alerts when new supplies of medicine are needed .
+Back in <START:location> Nis <END> , <START:organization> VetCloud’s <END> team has been developing a cloud-based software for vets , which stores medical records , handles appointments and sends alerts when new supplies of medicine are needed .
 To win investment for their company , they did not go to <START:location> Belgrade <END> , the Serbian capital , but to <START:location> Sofia <END> , where more tech money resides .
 “ While there was a community in <START:location> Belgrade <END> , there was already an ecosystem in <START:location> Sofia <END> , ” said <START:person> Mr. Vesic <END> , the company ’s chief executive .
 The firm has received €200,000 from <START:organization> Eleven <END> , an accelerator fund that offers a training and mentorship program in return for a stake in the companies it supports .
