@@ -21,7 +21,8 @@ public class SiteParser {
       Maps.newHashMap();
   static {
     DOMAIN_TO_DOM_ADDRESSES.put("curbed.com", new String[] {
-        ".post-body > p"});
+        ".post-body > p",
+        ".post-body > .post-more > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("default", new String[] {
         "article > p",
         "article > div > p"});

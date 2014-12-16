@@ -28,26 +28,26 @@ public class Engine {
   }
 
   private static final String[] urls = {
-    "http://techcrunch.com/2014/12/15/why-its-right-to-report-on-the-sony-hack/",
-    "http://techcrunch.com/2014/12/15/crowdsolve-wants-to-give-serials-legion-of-armchair-detectives-a-crime-solving-platform/",
-    "http://techcrunch.com/2014/12/15/mark-zuckerbergs-facebook-profile-under-attack-from-brazilian-trolls/",
-    "http://techcrunch.com/2014/12/15/these-australian-social-media-reactions-to-the-sydneysiege-are-perfect/",
-    "http://techcrunch.com/2014/12/15/homejoy-le-pause/",
-    "http://techcrunch.com/2014/12/15/hiptic-games-launches-its-gamethrive-push-notification-service/",
-    "http://techcrunch.com/2014/12/15/how-to-speak-startup/",
-    "http://techcrunch.com/2014/12/15/hbo-go-finally-comes-to-amazon-fire-tv/",
-    "http://techcrunch.com/2014/12/15/the-tonewoodamp-blows-amplified-sound-out-of-your-guitars-sound-hole/",
-    "http://techcrunch.com/2014/12/15/the-nest-thermostat-can-now-be-controlled-by-voice/",
+//    "http://techcrunch.com/2014/12/15/why-its-right-to-report-on-the-sony-hack/",
+//    "http://techcrunch.com/2014/12/15/crowdsolve-wants-to-give-serials-legion-of-armchair-detectives-a-crime-solving-platform/",
+//    "http://techcrunch.com/2014/12/15/mark-zuckerbergs-facebook-profile-under-attack-from-brazilian-trolls/",
+//    "http://techcrunch.com/2014/12/15/these-australian-social-media-reactions-to-the-sydneysiege-are-perfect/",
+//    "http://techcrunch.com/2014/12/15/homejoy-le-pause/",
+//    "http://techcrunch.com/2014/12/15/hiptic-games-launches-its-gamethrive-push-notification-service/",
+//    "http://techcrunch.com/2014/12/15/how-to-speak-startup/",
+//    "http://techcrunch.com/2014/12/15/hbo-go-finally-comes-to-amazon-fire-tv/",
+//    "http://techcrunch.com/2014/12/15/the-tonewoodamp-blows-amplified-sound-out-of-your-guitars-sound-hole/",
+//    "http://techcrunch.com/2014/12/15/the-nest-thermostat-can-now-be-controlled-by-voice/",
     "http://curbed.com/archives/2014/12/15/winn-wittman-soaring-wings-austin-for-sale.php",
     "http://curbed.com/archives/2014/12/15/le-palais-royale-florida-photos.php",
     "http://curbed.com/archives/2014/12/12/mint-hill-north-carolina-home-for-sale.php",
     "http://curbed.com/archives/2014/12/15/la-shed-architecture-de-gaspe-renovation.php",
     "http://curbed.com/archives/2014/12/15/minimalist-holiday-decorating.php",
-    "http://curbed.com/archives/2014/12/15/winn-wittman-soaring-wings-austin-for-sale.php",
     "http://curbed.com/archives/2014/12/15/brutalism-the-game-bbc-tv-show.php",
-    "http://curbed.com/archives/2014/12/15/le-palais-royale-florida-photos.php",
+    "http://sf.curbed.com/archives/2014/08/06/how_a_san_francisco_architect_reframes_design_for_the_blind.php",
     "http://curbed.com/archives/2014/12/15/masculine-feminine-design-decor-writing.php",
-    "http://curbed.com/archives/2014/12/15/nyc-american-museum-of-natural-history-jeanne-gang.php"
+    "http://curbed.com/archives/2014/12/15/nyc-american-museum-of-natural-history-jeanne-gang.php",
+    "http://sf.curbed.com/archives/2014/12/12/a_look_inside_brewcade_2015_zagat_results_state_bird_sequel_almost_here_more.php",
   };
   public static void main(String args[]) throws Exception {
     SiteParser siteParser = new SiteParser();

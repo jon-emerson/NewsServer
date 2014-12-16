@@ -200,7 +200,15 @@ public class Node {
       if (isChildTextNode(i)) {
         texts.add(getChildText(i));
       } else {
-        String flattenedText = getChildNode(i).getFlattenedText();
+        Node child = getChildNode(i);
+
+        // Ignore scripts and styles - We only want text for humans.
+        if (child.getTagName().equalsIgnoreCase("script") ||
+            child.getTagName().equalsIgnoreCase("style")) {
+          continue;
+        }
+
+        String flattenedText = child.getFlattenedText();
         if (flattenedText.length() > 0) {
           texts.add(flattenedText);
         }
