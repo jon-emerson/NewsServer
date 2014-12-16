@@ -1,0 +1,31 @@
+http://america.aljazeera.com/articles/2014/12/16/russia-raises-keyinterestrateto17percent.html
+The <START:organization> Bank of Russia <END> has raised its key interest rate to 17 percent from 10.5 percent in a move to boost its currency and rescue its troubled economy .
+The action announced Tuesday in <START:location> Moscow <END> comes after the ruble 's value has fallen roughly 50 percent since January , battered by Western sanctions imposed over the conflict in <START:location> Ukraine <END> and plunging worldwide oil prices .
+The falling ruble threatens to escalate <START:location> Russia <END> 's inflation to dangerous levels and paralyze the economy .
+The central bank 's move illustrated the perils confronting <START:location> Russia <END> .
+It reflected fears that the ruble 's decline could trigger consumer panic , incite a run on banks and deepen <START:location> Russia <END> 's economic problems .
+By raising interest rates , the bank hopes investors will find it more financially appealing to keep their money in <START:location> Russia <END> .
+" They did it as a lure to encourage people to keep their rubles at home rather than continue to flee the currency and the country , " said <START:person> Barry Eichengreen <END> , an economist at the <START:organization> University of California , Berkeley <END> .
+" It 's a way of buying time .
+It does n't solve any of the underlying issues that the Russian economy has " — falling energy prices , Western sanctions and widespread corruption .
+Such challenges are especially difficult because <START:location> Russia <END> 's economy relies so heavily on petroleum revenue and lacks the diversification to withstand severe economic downturns .
+That tends to leave the economy at the mercy of global financial markets , where oil is priced in dollars .
+The average price of a barrel of oil has dropped below $ 56 from a summer high of $ 107 .
+The Russian government recently downgraded its growth forecast for next year , predicting that the economy will sink into recession .
+Still , the <START:organization> Bank of Russia <END> 's latest action carries dangers of its own .
+By jacking up rates to try to contain inflation , it risks inflicting further economic damage , <START:person> Eichengreen <END> noted .
+Though high interest rates can attract investor money , they can also stifle growth by making it harder for consumers and businesses to borrow and spend .
+The announcement in <START:location> Moscow <END> came after <START:location> U.S. <END> and European markets had closed Monday .
+Stocks have suffered in recent days amid the steady drop in global oil prices .
+The sell-off could continue if investors view the <START:organization> Bank of Russia <END> 's move as ineffective .
+The central bank has gradually raised the rate from 5.5 percent early this year .
+Last Thursday , it tried unsuccessfully to stem the ruble 's slide by boosting its key rate by 1 percentage point to 10.5 percent .
+It cited a surge in consumer prices and a " significant inflation risk . "
+The <START:organization> Bank of Russia <END> said then that it expected prices to rise 10 percent for 2014 and climb further in the first quarter of 2015 .
+But the ruble plunged further Monday , dropping from 55 rubles to the dollar Thursday to about 65 rubles to the dollar .
+A falling currency increases the cost of imports , thereby stoking inflationary pressures .
+At the same time , plummeting oil prices give the government less money to combat a downturn and can force it to borrow more .
+The sanctions imposed by the <START:location> West <END> have magnified <START:location> Russia <END> 's economic turmoil .
+In September , the <START:location> United States <END> and the <START:location> European Union <END> announced a new round of sanctions over <START:location> Moscow <END> 's involvement in <START:location> Ukraine <END> , which included blocking Western financial markets to key Russian companies and limiting imports of some technologies .
+The additional sanctions were expected to cause enough pain to put <START:location> Russia <END> into recession for one or two years , predicted economist <START:person> Alexei Kudrin <END> , who served as finance minister under <START:person> President Vladimir Putin <END> for 11 years until 2011 .
+The potential for a prolonged downturn caused investors to pull their money from the country , causing the ruble to further lose value .

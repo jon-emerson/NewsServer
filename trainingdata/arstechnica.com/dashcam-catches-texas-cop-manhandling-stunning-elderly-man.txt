@@ -1,0 +1,18 @@
+http://arstechnica.com/tech-policy/2014/12/dashcam-catches-texas-cop-manhandling-stunning-elderly-man/
+A local <START:location> Texas <END> police department has placed an officer on administrative duty following a Thursday scuffle with a 76-year-old man pulled over for allegedly displaying expired tags .
+The motorist , <START:person> Pete Vasquez <END> , was stopped at an auto dealership—where he worked and had just pulled into .
+He is seen exiting the vehicle—owned by the lot—to show the officer that the car has dealer plates .
+He also tried to get the dealership manager 's attention .
+The brutality by the 23-year-old officer , <START:person> Nathanial Robinson <END> , then ensues .
+The officer is seen grabbing the man 's arm and wrestling him to the ground in a <START:person> Nelson <END> hold .
+The two disappear from the dashcam 's site , and the officer then appears standing , having drawn his stun gun .
+In the background is <START:person> Drake <END> 's " Under Ground Kings " blaring from the patrol car 's stereo , making it difficult to decipher the officer 's words in front of the vehicle .
+The incident is one of many showing how dashcams , bodycams , and phone cameras are exposing alleged police brutality , especially in the wake of calls — from <START:person> President Barack Obama <END> on down —to outfit the nation 's police forces with body cameras in an effort to bring more public accountability to policing .
+Immediately following the <START:location> Texas <END> brouhaha , an unnamed sergeant is overheard interviewing <START:person> Vasquez <END> .
+<START:person> J.J. Craig <END> , the <START:organization> Victoria Police Department <END> chief , told local media that the footage "raises some concerns " and that he opened an investigation into the incident after reviewing the tape .
+The chief confirmed to the <START:organization> Victoria Advocate <END> that <START:person> Vasquez <END> was , indeed , driving a vehicle with dealer tags , meaning the vehicle was exempt from being pulled over for expired tags .
+The car lot 's sales manager told the <START:organization> Victoria Advocate <END> that , during the incident , he said to the officer : " ' What in the hell are you doing ?
+This gentleman is 76 years old , '" <START:person> Larry Urich <END> said .
+" The cop told me to stand back , but I did n't shut up .
+I told him he was a goddamned Nazi Stormtrooper . "
+The victim , who was not charged with any crime , was briefly hospitalized and said he had some body aches .

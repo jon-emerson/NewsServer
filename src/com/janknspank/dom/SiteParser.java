@@ -50,6 +50,24 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("washingtonpost.com", new String[] {
         ".row p",
         "article > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
+        ".article > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
+        "#storyText > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
+        ".text > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
+        ".article-content > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("bdnews24.com", new String[] {
+        ".body > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
+        ".article_body > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
+        ".content-text > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("breitbart.com", new String[] {
+        "article > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("buffalonews.com", new String[] {
+        ".articleP > p"});
   }
 
   public static DocumentNode crawl(String url) throws ParseException {

@@ -1,0 +1,36 @@
+http://www.boston.com/business/technology/2014/12/11/free-apps-you-need-for-local-holiday-shopping-deals/eL9q6O9h6RDCBDq6S7l6uL/pictures.html
+Holiday shopping is all about the deals and discounts .
+For some shoppers , that means sitting on the couch with a cup of hot chocolate and browsing through <START:organization> Amazon <END> sales .
+For those still willing to brave the dropping temperatures , there are so many ways to save money on presents while also finding the perfect gift in the city .
+Here are 8 apps that can save you money and also help the community .
+Next
+1 . <START:organization> Main and Me <END>
+Described as the “ Pinterest-meets-Main-Street solution , ” <START:organization> Main and Me <END> helps connect shoppers with local stores around the city .
+Just look up an item in the search bar and you’ll find a ton of pictures of the gift , with information about where to find it in your area .
+The late <START:person> Mayor Thomas Menino <END> partnered with this app last winter to help bring customers to <START:location> Boston <END> ’s commercial locations .
+Next
+2. <START:organization> Howler <END>
+While you’re strolling around the city , <START:organization> Howler <END> sends notifications when there’s a store nearby with a deal or promotion .
+Based in <START:location> Boston <END> , the <START:organization> Howler <END> team works closely with small businesses to help attract customers .
+Next
+3. <START:organization> GoodShop <END>
+Find some deals while also helping out those in need .
+Every time you make a purchase , <START:organization> GoodShop <END> donates a percentage of the earnings to a charity of your choice .
+They also offer a ton of coupons to your favorite stores .
+Next
+4 . <START:organization> GoodGuide <END>
+Scientists from <START:organization> GoodGuide <END> give ratings to products based on their impact on health , environment , and society .
+Search for products or scan the barcode to find out the grade .
+Next
+5 . <START:organization> Social Impact <END>
+<START:organization> Social Impact <END> helps users find businesses making efforts to improve the community .
+The businesses are rated on ways they serve the“common good ” by helping human and environmental well-being .
+Next
+6 . <START:organization> ShopKick <END>
+Known as the “ <START:organization> Foursquare <END> for shopping , ” <START:organization> ShopKick <END> is a rewards app where customers can earn points just by walking in stores .
+With roots in <START:location> Boston <END> , <START:organization> ShopKick <END> encourages customers to buy local .
+Next
+8. <START:organization> Swirl <END>
+Boston-based , <START:organization> Swirl <END> , allows users to pinpoint special promotions or deals inside a store .
+<START:organization> Swirl <END> works with small businesses to help attract customers and keep them coming back to shop .
+Back to the beginning

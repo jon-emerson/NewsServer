@@ -1,5 +1,5 @@
 http://www.latimes.com/world/afghanistan-pakistan/la-fg-pakistan-taliban-attack-20141216-story.html
-Pakistani Taliban militants stormed an army-run school on Tuesday and killed at least 104 people , including 84 children , shooting some in the head , while hundreds of teachers and students were trapped inside the building , officials said .
+Pakistani <START:organization> Taliban <END> militants stormed an army-run school on Tuesday and killed at least 104 people , including 84 children , shooting some in the head , while hundreds of teachers and students were trapped inside the building , officials said .
 Pakistani security forces mounted a rescue operation at the school in <START:location> Peshawar <END> , the capital of northeastern <START:location> Pakistan’s <END> <START:location> Khyber Pakhtunkhwa <END> province .
 Chief executive <START:person> Pervez Khattak <END> said that 104 people were killed , including the 84 students , all of whom were believed to be younger than 14 .
 Teachers and one member of the security forces were also reported killed .

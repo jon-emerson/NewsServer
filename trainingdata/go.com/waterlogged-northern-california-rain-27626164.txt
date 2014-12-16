@@ -1,0 +1,17 @@
+http://abcnews.go.com/US/wireStory/waterlogged-northern-california-rain-27626164
+A new storm dumped more rain on already waterlogged parts of <START:location> Northern California <END> causing minor road flooding , scattered power outages and airport delays .
+The storm dropped an average of between an inch and 2 inches of rain throughout the day in the <START:location> Bay Area <END> and <START:location> Sacramento <END> regions before heading to <START:location> Southern California <END> overnight , the <START:organization> National Weather Service <END> said .
+The rain came down hard in the <START:location> San Francisco Bay Area <END> Monday morning , making for a treacherous commute .
+A landslide closed both directions of a highway in <START:location> Fremont <END> .
+At <START:organization> San Francisco International Airport <END> , the <START:organization> Federal Aviation Administration <END> reported arrival delays of almost two hours .
+In <START:location> Butte County <END> , a 4-mile section of <START:location> Highway 162 <END> shut down after getting flooded by swollen creeks and drainage channels .
+There is no estimated date to reopen due to continued rain , authorities said .
+<START:location> Yosemite National Park <END> officials said the <START:location> Tioga <END> and <START:location> Glacier Point <END> Roads have closed for the season because of deep snow and icy conditions .
+A series of storms in the last few weeks have left up to 2 feet of snow in the higher part of the park , including <START:location> Tuolumne Meadows <END> and <START:location> Glacier Point <END> .
+Still , Monday 's storm and another weather system expected later in the week wo n't be nearly as powerful as the blast that dumped as much as 8 inches of rain in parts of Northern California last week and up to 6 feet of snow in the high elevations of the <START:location> Sierra Nevada <END> .
+That storm caused widespread flooding and power outages , including in downtown <START:location> San Francisco <END> .
+And while the storms help , much more rain is needed to pull the state out of its severe drought , forecasters say .
+The <START:location> Sierra Nevada <END> is expected to receive a few inches of snow by Monday morning at elevations above about 5,000 feet , a height that includes most ski resorts , said <START:person> Eric Kurth <END> , a meteorologist in the weather service 's <START:location> Sacramento <END> office .
+The second weather front is expected to dump yet more rain Wednesday in the <START:location> Bay Area <END> , forecaster <START:person> Bob Benjamin <END> said .
+In <START:location> Southern California <END> , a cold front is expected to bring rain and mountain snow Tuesday and Wednesday .
+Thursday will be dry , then showers will return Friday and Saturday , the weather service said .

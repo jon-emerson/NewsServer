@@ -14,13 +14,16 @@ import java.util.List;
 public class GrabTrainingData {
   private static final String[] URLS = {
     // Put URLs here...
-    "http://www.latimes.com/world/afghanistan-pakistan/la-fg-pakistan-taliban-attack-20141216-story.html",
-    "http://www.washingtonpost.com/sf/national/2014/12/15/nasas-349-million-monument-to-its-drift/",
-    "http://www.bbc.com/news/magazine-30483762",
-    "http://www.sfgate.com/news/world/article/Korean-Air-to-be-sanctioned-for-nut-rage-cover-up-5959120.php",
-    "http://www.sfexaminer.com/sanfrancisco/light-art-to-contribute-to-long-envisioned-market-street-transformation/Content?oid=2914438",
-    "http://www.mercurynews.com/entertainment/ci_27140258/taylor-swift-tour-dates",
-    "http://www.siliconbeat.com/2014/12/15/spain-regrets-google-news-shutdown/",
+    "http://www.abc.net.au/news/2014-12-16/sydney-siegesocial-media-a-liability-says-expert/5971622",
+    "http://abcnews.go.com/US/wireStory/waterlogged-northern-california-rain-27626164",
+    "http://america.aljazeera.com/articles/2014/12/16/russia-raises-keyinterestrateto17percent.html",
+    "http://hosted.ap.org/dynamic/stories/U/US_GOOGLE_TOP_SEARCHES_OF_2014",
+    "http://arstechnica.com/tech-policy/2014/12/dashcam-catches-texas-cop-manhandling-stunning-elderly-man/",
+    "http://bdnews24.com/business/2014/12/03/malaysia-also-keen-to-cut-trade-deficit-with-bangladesh",
+    "http://www.bloomberg.com/news/2014-12-16/european-index-futures-signal-equities-rebound-from-six-day-drop.html",
+    "http://www.boston.com/business/technology/2014/12/11/free-apps-you-need-for-local-holiday-shopping-deals/eL9q6O9h6RDCBDq6S7l6uL/pictures.html",
+    "http://www.breitbart.com/Big-Journalism/2014/12/13/Berkeley-Hecklers-Expose-Free-Speech-Movement-Fraud",
+    "http://www.buffalonews.com/city-region/development/a-forgotten-road-now-turning-heads-and-opening-up-opportunities-20141215"
   };
 
   public static void printNode(Node node, int depth) {
