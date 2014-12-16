@@ -21,6 +21,8 @@ public class Tokenizer {
   private static final NameFinderME locationFinder;
   static {
     try {
+      String modelType = "newsserver"; // Use "ner" for built-in models.
+
       InputStream sentenceModelInputStream = new FileInputStream("opennlp/en-sent.bin");
       SentenceModel sentenceModel = new SentenceModel(sentenceModelInputStream);
       sentenceDetector = new SentenceDetectorME(sentenceModel);
@@ -29,15 +31,18 @@ public class Tokenizer {
       TokenizerModel tokenizerModel = new TokenizerModel(tokenizerModelInputStream);
       tokenizer = new TokenizerME(tokenizerModel);
 
-      InputStream personModelInputStream = new FileInputStream("opennlp/en-ner-person.bin");
+      InputStream personModelInputStream =
+          new FileInputStream("opennlp/en-" + modelType + "-person.bin");
       TokenNameFinderModel personModel = new TokenNameFinderModel(personModelInputStream);
       nameFinder = new NameFinderME(personModel);
 
-      InputStream organizationModelInputStream = new FileInputStream("opennlp/en-ner-organization.bin");
+      InputStream organizationModelInputStream =
+          new FileInputStream("opennlp/en-" + modelType + "-organization.bin");
       TokenNameFinderModel organizationModel = new TokenNameFinderModel(organizationModelInputStream);
       organizationFinder = new NameFinderME(organizationModel);
 
-      InputStream locationModelInputStream = new FileInputStream("opennlp/en-ner-location.bin");
+      InputStream locationModelInputStream =
+          new FileInputStream("opennlp/en-" + modelType + "-location.bin");
       TokenNameFinderModel locationModel = new TokenNameFinderModel(locationModelInputStream);
       locationFinder = new NameFinderME(locationModel);
 
