@@ -1,7 +1,7 @@
 http://techcrunch.com/2014/12/15/hbo-go-finally-comes-to-amazon-fire-tv/
 <START:organization> Amazon <END> just made good on its promise .
 <START:organization> HBO GO <END> is now available on the <START:organization> Amazon Fire TV <END> and will hit the Fire TV Stick this coming spring .
-Best yet , the app fully supports <START:organization> Amazon’s  <END>impressive voice search that let’s users find content with a button built into the Fire TV remote .
+Best yet , the app fully supports <START:organization> Amazon’s <END> impressive voice search that let’s users find content with a button built into the Fire TV remote .
 When the <START:organization> Fire TV <END> launched , <START:organization> Amazon <END> CEO <START:person> Jeff Bezos <END> promised that the streamer would get <START:organization> HBO GO <END> by the end of the year .
 And with just two weeks go in 2014 , <START:organization> Amazon <END> just made the cut .
 “Since launch we’ve increased the number of services available on <START:organization> Amazon Fire TV <END> by more than 4x , ” said <START:person> Peter Larsen <END> , Vice President <START:organization> Amazon Devices <END> , said in a released statement .

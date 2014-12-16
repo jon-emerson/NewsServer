@@ -42,7 +42,7 @@ The least important attribute they look for is “expertise . ”
 Said <START:person> Bock <END> : “If you take somebody who has high cognitive ability , is innately curious , willing to learn and has emergent leadership skills , and you hire them as an H.R. person or finance person , and they have no content knowledge , and you compare them with someone who’s been doing just one thing and is a world expert , the expert will go : ‘I’ve seen this 100 times before ; here ’s what you do . ’ ” Most of the time the nonexpert will come up with the same answer , added <START:person> Bock <END> , “because most of the time it ’s not that hard . ”
 Sure , once in a while they will mess it up , he said , but once in a while they’ll also come up with an answer that is totally new .
 And there is huge value in that .
-To sum up <START:person> Bock <END>’s approach to hiring : Talent can come in so many different forms and be built in so many nontraditional ways today , hiring officers have to be alive to every one — besides brand-name colleges .
+To sum up <START:person> Bock’s <END> approach to hiring : Talent can come in so many different forms and be built in so many nontraditional ways today , hiring officers have to be alive to every one — besides brand-name colleges .
 Because “when you look at people who don’t go to school and make their way in the world , those are exceptional human beings .
 And we should do everything we can to find those people . ”
 Too many colleges , he added , “don’t deliver on what they promise .

@@ -32,7 +32,7 @@ Last year , <START:organization> Azubu <END> , a games media company , sponsored
 Last February , <START:organization> Riot Games <END> hosted its first North American Collegiate Championship , something like the Final Four for <START:organization> League of Legends <END> , <START:organization> Riot’s <END> popular online battle game .
 A team of five students from the <START:organization> University of Washington <END> won in front of a roaring audience at an e-sports studio that <START:organization> Riot <END> operates in <START:location> Manhattan Beach , Calif. <END> , with 169,000 more people watching online at the tournament’s peak .
 The prize was $ 7,500 in scholarship money for each team member .
-Riot recently announced that first-place winnings at the next championship , to be held in the spring , would rise to $ 30,000 , enough to pay for about three years of in-state tuition at the <START:organization> University of Washington <END>.
+Riot recently announced that first-place winnings at the next championship , to be held in the spring , would rise to $ 30,000 , enough to pay for about three years of in-state tuition at the <START:organization> University of Washington. <END>
 “A lot more people than I expected came forward and said , ‘I’d like to try out for the team , ’ ” said <START:person> Jackson Brown <END> , the manager of the <START:organization> University of Washington’s <END> team , the <START:organization> Purple Caster Minions <END> .
 The growth of competitive gaming at colleges mirrors the broader rise of e-sports as entertainment .
 A thriving international professional e-sports circuit routinely draws tens of thousands of spectators to stadiums for competitions , with millions more viewers online .
@@ -43,7 +43,7 @@ The organization is now active at 450 schools , up from 260 last year , accordin
 Many of those players also participate in matches organized by another collegiate league , <START:organization> IvyLoL <END> .
 Large <START:location> West Coast <END> schools like the <START:organization> University of Washington <END> and <START:organization> University of British Columbia <END> tend to dominate the competitions .
 The money that game companies are pouring into the college scene has persuaded many students to become much more serious about e-sports .
-College scholarships from corporations , including <START:organization> Coca-Cola <END>, <START:organization> Ford <END> and <START:organization> Google <END> , have been around for decades , usually to encourage students to enter a particular field , like engineering .
+College scholarships from corporations , including <START:organization> Coca-Cola, <END> <START:organization> Ford <END> and <START:organization> Google <END> , have been around for decades , usually to encourage students to enter a particular field , like engineering .
 The money that game companies are giving to students , in contrast , is meant to deepen the companies ’ relationship with a whole generation of players , one that is inseparable from their products .
 Today , most professional players skip or delay college , because the college-age years are considered the prime period for players in the big leagues .
 Playing at the professional level requires far too much time for practice and travel to tournaments to allow them to also attend school .

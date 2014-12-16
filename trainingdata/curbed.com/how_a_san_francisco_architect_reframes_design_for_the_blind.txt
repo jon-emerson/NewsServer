@@ -184,7 +184,7 @@ Straight out of the box , the sticks are long and thin , like rigid threads of l
 But he only learned of their application as a drawing tool in 2009 , the year after he lost his sight .
 That summer he served as a mentor for blind high schoolers in an introductory architecture course put on by the <START:organization> National Federation of the Blind <END> .
 Architecture professors from the <START:organization> University of Maryland , College Park <END> , had the students applying wax sticks to paper to create drawings and three-dimensional forms .
-The sticks warm to the touch and bend easily ; they can make precise angles , and—crucially for <START:person> Downey <END>—their tackiness makes them stick to paper .
+The sticks warm to the touch and bend easily ; they can make precise angles , and—crucially for Downey—their tackiness makes them stick to paper .
 " Once I realized that , I thought , ' Oh , I could use that to draw on top of an embossed drawing . '"
 Suddenly , he had a way not just to read , but to make .
 <START:person> Downey <END> uses the wax sticks as an informal tool for sketching on top of working plans .
@@ -211,7 +211,7 @@ On the last Saturday of July , the new <START:organization> Independent Living R
 With yellow walls and polished concrete floors , it 's lighter and brighter than the old space .
 ( <START:person> Downey <END> recused himself from the color discussion , enlisting Rosa <START:person> Downey <END> to handle the color palette . )
 The receptionist , who is blind , greets everyone who walks in , so that visitors who have visual impairments have an audible target to approach .
-With an office of this size and floor plan—a very legible progression of boxes—<START:person> Downey <END> did n't need to build in the kinds of wayfinding cues , such as changes in the floor texture , that would be necessary in a larger building .
+With an office of this size and floor plan—a very legible progression of boxes—Downey did n't need to build in the kinds of wayfinding cues , such as changes in the floor texture , that would be necessary in a larger building .
 " Not that I 'd be so bold as to say no one will ever get confused in there , " <START:person> Downey <END> says , " but it 's a pretty straightforward floor plan , and where it 's not there 's somebody there to intercede . "
 When <START:person> Downey <END> walks through the center , he conjures a mental image of the space he designed .
 But compared with a crisp memory from his sighted days , the <START:organization> ILRC <END> will always have the hazy edges of an approximation .

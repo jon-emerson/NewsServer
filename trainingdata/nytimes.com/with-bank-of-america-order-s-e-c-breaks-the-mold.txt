@@ -5,7 +5,7 @@ The <START:organization> Securities and Exchange Commission <END> has recently t
 In August , <START:organization> Bank of America <END> reached a $ 16.65 billion settlement with the <START:organization> Justice Department <END> over accusations that it duped investors into buying troubled residential mortgage-backed securities .
 As part of that settlement , the <START:organization> S.E.C. <END> resolved charges of securities fraud .
 That case was fairly small , requiring the bank to pay about $ 135 million for selling a security that resulted in heavy losses to investors .
-But getting the settlement approved was held up until late last month because the <START:organization> S.E.C. <END>’s commissioners could not agree on granting the bank a waiver from rules that could prevent it from selling certain investments .
+But getting the settlement approved was held up until late last month because the <START:organization> S.E.C.’s <END> commissioners could not agree on granting the bank a waiver from rules that could prevent it from selling certain investments .
 That would have had a significant effect on its <START:organization> Merrill Lynch <END> subsidiary by cutting off access to certain types of hedge fund investments , a lucrative segment of the market that would probably cost it clients .
 <START:organization> S.E.C. <END> Rule 506 permits sales of an unlimited amount of securities to “accredited investors , ” generally defined as those with the financial wherewithal to fend for themselves that do not need the protections provided by the disclosure requirements in the law .
 This avenue is used annually to sell hundreds of billions of dollars in investments to large investors , like hedge funds and pension plans , and is a significant avenue for raising capital .
@@ -35,7 +35,7 @@ A Republican commissioner , <START:person> Daniel M. Gallagher <END> , issued a 
 “We must have a robust waiver program to appropriately distinguish between cases when disqualification is and is not justified , ” he said .
 In a speech on Dec. 4 , <START:person> Ms. Stein <END> celebrated the aggressive approach taken with <START:organization> Bank of America <END> , stating that “we should be flexible and nuanced in our approach to these waivers , so that we make the most of this powerful tool . ”
 She described the <START:organization> Bank of America <END> order as “a breakthrough in the commission’s method of handling waivers , and I hope to see more of this and other thoughtful approaches in the future . ”
-The terms of <START:organization> Bank of America <END>’s waiver that require appointment of a monitor are not particularly onerous .
+The terms of <START:organization> Bank of America’s <END> waiver that require appointment of a monitor are not particularly onerous .
 But they are a change from the days when granting such requests was almost a matter of routine .
 No agency wants to be known as going soft on the companies it regulates , and the bad actor rules had become like sending a child to the time-out chair at home — a mild threat that was easily discarded once the appropriate apology was made .
 The <START:organization> S.E.C. <END> is likely to take a tougher stance in agreeing to waivers of the bad actor prohibition , which means defense lawyers will have to consider the waiver issue right from the start rather than assuming the agency will rubber-stamp requests .

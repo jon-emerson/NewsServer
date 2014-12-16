@@ -1,6 +1,6 @@
 http://bits.blogs.nytimes.com/2014/12/05/in-suit-cisco-accuses-arista-of-copying-work/
 <START:organization> Cisco Systems <END> on Friday filed a suit against <START:organization> Arista Networks <END> , a networking switch company and fast-moving competitor , accusing it of copying large amounts of <START:organization> Cisco’s <END> work .
-<START:organization> Cisco <END> contends that <START:organization> Arista <END> violated 14 <START:organization> Cisco <END> patents , some of which were based on work by <START:person> Andreas Bechtolsheim <END> and <START:person> David Cheriton <END>, <START:organization> Arista’s <END> founders , when they were at <START:organization> Cisco <END> .
+<START:organization> Cisco <END> contends that <START:organization> Arista <END> violated 14 <START:organization> Cisco <END> patents , some of which were based on work by <START:person> Andreas Bechtolsheim <END> and <START:person> David Cheriton, <END> <START:organization> Arista’s <END> founders , when they were at <START:organization> Cisco <END> .
 The two men , well-respected engineers , sold a company , <START:organization> Granite Systems <END> , to <START:organization> Cisco <END> in 1996 .
 They are also both billionaires , thanks in part to being the first two significant outside investors in <START:organization> Google <END> .
 The case , filed in the <START:organization> Federal District Court <END> in <START:location> Northern California <END> , will probably go on for at least months .

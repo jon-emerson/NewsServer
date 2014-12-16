@@ -26,7 +26,7 @@ They sued <START:organization> Atari <END> in 1974 for usurping their rights .
 <START:organization> Atari <END> settled with them by paying $ 700,000 to become <START:organization> Odyssey’s <END> second licensee .
 Over the next 20 years , <START:organization> Magnavox <END> went on to sue dozens more companies , winning more than $ 100 million .
 <START:person> Mr. Baer <END> often testified .
-“<START:organization> Magnavox <END> is n’t in the business of making video games , ” <START:person> Howard Lincoln <END> , <START:organization> Nintendo’s <END> vice president and senior counsel , groused in an interview with <START:organization> Newsday <END> in 1989 .
+<START:organization> “Magnavox <END> is n’t in the business of making video games , ” <START:person> Howard Lincoln <END> , <START:organization> Nintendo’s <END> vice president and senior counsel , groused in an interview with <START:organization> Newsday <END> in 1989 .
 “They’re just in the business of suing people . ”
 ( <START:organization> Nintendo <END> , like all the game makers <START:organization> Magnavox <END> challenged , lost . )
 <START:person> Mr. Baer’s <END> contraption represented the beginnings of a change in man’s relationship with machines .
@@ -77,7 +77,7 @@ The <START:organization> Odyssey <END> had sold some 330,000 units by 1975 , but
 He blamed <START:organization> Magnavox <END> for limiting sales to its own dealers , giving the false impression that the system worked only on <START:organization> Magnavox <END> sets .
 He also criticized the company for pricing it at $ 100 , rather than the $ 19.95 he recommended .
 <START:organization> Odyssey <END> nonetheless represented a critical point .
-Along with <START:organization> Atari’s <END> <START:organization> Pong <END>, which had more advanced electronics and sound , it moved games into a faster , more complex realm , to the delight of an eager new audience .
+Along with <START:organization> Atari’s <END> <START:organization> Pong, <END> which had more advanced electronics and sound , it moved games into a faster , more complex realm , to the delight of an eager new audience .
 The accomplishment , <START:person> Mr. Baer <END> wrote , would amount to far more than just fun and games .
 “If it weren’t for video game enthusiasts and the absolute commercial need to keep them happy with ever-better graphics requiring ever-higher processor speeds , complex computer graphics would still be found only in the high-priced domains of the business and science world , ” he said .
 In an interview , <START:person> Keith Feinstein <END> , a video game historian , called <START:person> Mr. Baer’s <END> invention “the beginning of a revolution in thought . ”

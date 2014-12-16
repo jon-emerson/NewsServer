@@ -7,7 +7,7 @@ Since its launch last December , <START:organization> Uber <END> had gained a la
 But the new service — which uses a smartphone app to link customers with available drivers — ran afoul of well-established taxi firms and with government regulators , who saw so-called aggregators as ducking legal and safety obligations shouldered by ordinary city cabs .
 <START:organization> Uber <END> is running into similar problems in cities in other countries .
 A Dutch court on Monday prohibited the <START:organization> UberPop <END> service , which links clients with drivers who do not have professional licenses , from operating in the Netherlands .
-The <START:organization> Uber <END>Pop service has been banned in the German cities of <START:location> Berlin <END> and <START:location> Hamburg <END> , and <START:person> London <END> ’s main taxi association has brought lawsuits against <START:organization> Uber <END> and a number of its drivers .
+The <START:organization> UberPop <END> service has been banned in the German cities of <START:location> Berlin <END> and <START:location> Hamburg <END> , and <START:person> London <END> ’s main taxi association has brought lawsuits against <START:organization> Uber <END> and a number of its drivers .
 Lawmakers in <START:location> Thailand <END> and <START:location> Vietnam <END> have banned the service , and the city government in <START:location> Seoul <END> has said it plans to do the same .
 None of these cases were as dramatic , though , as the one unfolding here .
 <START:location> Delhi <END> has yet to recover from a brutal rape that took place two years ago , when a woman returning home after seeing a movie boarded a private bus with a male companion and was gang-raped so brutally that she later died of her injuries .
@@ -23,7 +23,7 @@ Women here are severely constrained by the difficulty of finding safe transporta
 In an essay published Monday , one high-ranking news executive recalled working late on a story early in her career and being mortified when her father called to berate her editor for exposing her to danger , “reducing me to a helpless little girl in front of my boss . ”
 <START:organization> Uber <END> attracted business swiftly , in part because its marketing material focused so squarely on safety .
 Much of the reaction to the reported rape has had a tinge of betrayal .
-“<START:organization> Uber <END> was the one thing that gave me the confidence to feel independent in <START:location> Delhi <END> , which you don’t feel here , ” said <START:person> Neha Sinha <END> , 28 , who said she had used the service regularly for the last six months .
+<START:organization> “Uber <END> was the one thing that gave me the confidence to feel independent in <START:location> Delhi <END> , which you don’t feel here , ” said <START:person> Neha Sinha <END> , 28 , who said she had used the service regularly for the last six months .
 “Now I’m back to square one . ”
 <START:person> Ayesha Perera <END> , in a commentary on the news website <START:organization> Firstpost <END> , said she had become equally relaxed about late-night cab rides , and could sympathize with the reported victim .
 “It is likely that she was sufficiently relaxed to nod off precisely because she believed she was safe in an <START:organization> Uber <END> , ” she wrote .
