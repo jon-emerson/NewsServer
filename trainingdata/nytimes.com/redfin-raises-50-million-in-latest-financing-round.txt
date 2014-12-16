@@ -15,7 +15,7 @@ In <START:organization> Redfin’s <END> early days , executives had a hard time
 The company has grown significantly since its founding .
 It is expected to be report positive earnings before interest , taxes , depreciation and amortization , as well as annual revenue growth of more than 50 percent .
 Now with the additional financing , <START:organization> Redfin <END> plans to invest more in technology development , potentially even at a pace that outstrips revenue growth .
-And with the public markets welcoming technology darlings like Twitter , a public offering could be in the company ’s future .
+And with the public markets welcoming technology darlings like <START:organization> Twitter <END> , a public offering could be in the company ’s future .
 During the fund-raising process for the most recent round , an investor asked <START:person> Mr. Kelman <END>  who would potentially buy <START:organization> Redfin <END> .
 According to <START:person> James Slavet <END> of <START:organization> Greylock <END> , <START:person> Mr. Kelman <END> smiled and said “Nobody . ”
 “There aren’t natural kinds of buyers , ” <START:person> Mr. Slavet <END> added .

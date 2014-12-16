@@ -1,0 +1,20 @@
+http://www.sfexaminer.com/sanfrancisco/light-art-to-contribute-to-long-envisioned-market-street-transformation/Content?oid=2914438
+For years , <START:location> San Francisco <END> civic leaders have attempted to transform <START:location> Market Street <END> into a more vibrant and visitor-friendly corridor .
+An ambitious LED light art project may now give that effort a big boost .
+The thoroughfare is already undergoing much change as the technology industry has revitalized the local economy , decreasing commercial real estate vacancy rates .
+The <START:location> mid-Market <END> area in particular has seen an infusion of investment attracted by the so-called <START:organization> Twitter <END> tax break .
+But an ambitious plan to string 124,000 LED lights , reflecting the movement of underground trains , overhead the 2.1 miles of <START:location> Market Street <END> from <START:location> The Embarcadero <END> to <START:location> Van Ness Avenue <END> may bring a different sort of transformation .
+" <START:location> Market Street <END> already has its own form of momentum going , which is very much economic momentum right now , " said <START:person> Ben Davis <END> , founder of <START:organization> Illuminate the Arts <END> , the art nonprofit proposing the project .
+" I am really excited to bring this common thread of creativity and a reminder that this is not just a place of commerce , this is a place of community and a place of creativity and a place of culture . "
+<START:person> Davis <END> added that the LightRail project would "help transform it from a place of hurried passage , in the evenings particularly , to a place of lingering destination . "
+The lights will hang above the street and will track the passing <START:organization> Muni <END> vehicles below ground .
+The project has the support of the <START:organization> Board of Supervisors <END> , which is expected to approve it today .
+On Monday , the board 's land use committee supported the initiative .
+<START:person> Supervisor Scott Wiener <END> , who called the project " the first of its kind in the world , " said <START:location> Market Street <END> deserves "improved treatment " and said the lights will build awareness about the ongoing <START:organization> A Better Market Street <END> plan underway by city planners to overhaul the corridor .
+" <START:location> Market Street <END> is a civic , cultural and transportation spine of <START:location> San Francisco <END> and is one of our most important streets , " <START:person> Wiener <END> said .
+During an average weekday , more than 200,000 people walk along <START:location> Market Street <END> , where bicycles outnumber vehicles "at various times during the day , " according to the plan .
+<START:organization> Illuminate the Arts <END> was the group behind the $ 8 million <START:organization> Bay Lights <END> project , which strung diode lights on the western span of the <START:location> Bay Bridge <END> .
+The group recently received approval to make the artwork permanent if it is able to raise the $ 4 million to fund reinstallation of specially designed lights .
+<START:person> Davis <END> said he intends to launch the LightRail artwork by the summer and will begin raising the multimillions of dollars it will require from private investors in January .
+The timing may coincide with the <START:organization> San Francisco Municipal Transportation Authority <END> 's plan to possibly ban or restrict private vehicles along <START:location> Market Street <END> after experimenting with temporary restrictions this year .
+Transit agency chief <START:person> Ed Reiskin <END> said at a Dec. 2 meeting that a traffic change proposal is expected to come in the spring for a summer implementation .

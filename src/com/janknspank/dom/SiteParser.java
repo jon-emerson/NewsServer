@@ -18,24 +18,38 @@ import org.apache.http.impl.client.HttpClients;
 import com.google.common.collect.Maps;
 
 public class SiteParser {
-  private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES =
-      Maps.newHashMap();
+  private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES = Maps.newHashMap();
   static {
+    DOMAIN_TO_DOM_ADDRESSES.put("bbc.com", new String[] {
+        ".story-body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("curbed.com", new String[] {
         ".post-body > p",
         ".post-body > .post-more > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("default", new String[] {
         "article > p",
         "article > div > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("latimes.com", new String[] {
+        ".trb_article_page > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("mercurynews.com", new String[] {
+        ".articleBody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("nytimes.com", new String[] {
         ".articleBody > p",
         "article > p",
         "article > div > p",
         "nyt_text > p",
         "p.story-body-text"});
+    DOMAIN_TO_DOM_ADDRESSES.put("sfexaminer.com", new String[] {
+        "#storyBody > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("sfgate.com", new String[] {
+        ".article-body > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("siliconbeat.com", new String[] {
+        ".post-content > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("techcrunch.com", new String[] {
         ".article-entry > p",
         ".article-entry > h2"});
+    DOMAIN_TO_DOM_ADDRESSES.put("washingtonpost.com", new String[] {
+        ".row p",
+        "article > p"});
   }
 
   public static DocumentNode crawl(String url) throws ParseException {

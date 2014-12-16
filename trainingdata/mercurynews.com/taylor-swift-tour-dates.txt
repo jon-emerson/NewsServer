@@ -1,0 +1,12 @@
+http://www.mercurynews.com/entertainment/ci_27140258/taylor-swift-tour-dates
+Promoters have added a second <START:person> Taylor Swift <END> show at <START:location> Levi 's Stadium <END> in <START:location> Santa Clara <END> .
+The date is Aug. 14 .
+Tickets go on sale at 10 a.m.
+Jan . 23 , www.ticketmaster.com .
+There are also presale opportunities for American Express card members and members of TaylorSwift.com
+, running 10 a.m.
+Jan . 16 to 10 p.m. Jan . 22 .
+Tickets for <START:person> Swift <END> 's Aug. 15 show sold out mere minutes after they went on sale .
+<START:person> Swift <END> 's 1989 World Tour kicks off May 20 in <START:location> Louisiana <END> .
+It supports the singer-songwriter 's fifth studio album , " 1989 ."
+

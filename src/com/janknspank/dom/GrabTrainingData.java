@@ -1,6 +1,7 @@
 package com.janknspank.dom;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -9,17 +10,17 @@ import java.util.List;
 /**
  * Grabs content from all the URLs in "URLS", then writes their tokenized
  * versions to the /trainingdata folder under their appropriate subdirectories.
- * CAREFUL: THIS WILL OVERWRITE LOCAL COPIES YOU MAY HAVE ALREADY ANNOTATED.
  */
 public class GrabTrainingData {
   private static final String[] URLS = {
     // Put URLs here...
-    "http://dealbook.nytimes.com/2013/11/13/redfin-raises-50-million-in-latest-financing-round",
-    "http://www.nytimes.com/2013/08/25/business/be-yourself-redfins-glenn-kelman-says-even-if-youre-a-little-goofy.html",
-    "http://dealbook.nytimes.com/2014/07/28/zillow-to-buy-trulia-for-3-5-billion/",
-    "http://www.nytimes.com/2006/09/03/business/yourmoney/03real.html",
-    "http://www.nytimes.com/2014/08/21/fashion/at-burning-man-the-tech-elite-one-up-one-another.html",
-    "http://bits.blogs.nytimes.com/2014/08/31/san-francisco-exhales-during-burning-man-exodus/",
+    "http://www.latimes.com/world/afghanistan-pakistan/la-fg-pakistan-taliban-attack-20141216-story.html",
+    "http://www.washingtonpost.com/sf/national/2014/12/15/nasas-349-million-monument-to-its-drift/",
+    "http://www.bbc.com/news/magazine-30483762",
+    "http://www.sfgate.com/news/world/article/Korean-Air-to-be-sanctioned-for-nut-rage-cover-up-5959120.php",
+    "http://www.sfexaminer.com/sanfrancisco/light-art-to-contribute-to-long-envisioned-market-street-transformation/Content?oid=2914438",
+    "http://www.mercurynews.com/entertainment/ci_27140258/taylor-swift-tour-dates",
+    "http://www.siliconbeat.com/2014/12/15/spain-regrets-google-news-shutdown/",
   };
 
   public static void printNode(Node node, int depth) {
@@ -77,10 +78,20 @@ public class GrabTrainingData {
         filename = url.substring(0, filename.length() - ".php".length());
       }
       filename = filename.substring(filename.lastIndexOf("/") + 1);
+      filename = filename.replaceAll("[\\?\\=]", "-");
       String path = getPathForUrl(url);
+
+      // Open the writer, creating a new directory if necessary.
+      File directory = new File("trainingdata/" + path);
+      if (!directory.exists()) {
+        directory.mkdir();
+      }
+      File file = new File(directory, filename + ".txt");
+//      if (file.exists()) {
+//        throw new RuntimeException("File already exists! " + file.getAbsolutePath());
+//      }
       System.err.println("Writing to " + path + "/" + filename + ".txt ...");
-      BufferedWriter writer = new BufferedWriter(
-          new FileWriter("trainingdata/" + path + "/" + filename + ".txt"));
+      BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
       // Write the original URL first, for tracking purposes.
       writer.write(url);

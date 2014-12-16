@@ -1,0 +1,268 @@
+http://www.washingtonpost.com/sf/national/2014/12/15/nasas-349-million-monument-to-its-drift/
+<START:location> GULFPORT , Miss <END> .
+— In June , <START:organization> NASA <END> finished work on a huge construction project here in <START:location> Mississippi <END> : a $ 349 million laboratory tower , designed to test a new rocket engine in a chamber that mimicked the vacuum of space .
+Then , <START:organization> NASA <END> did something odd .
+As soon as the work was done , it shut the tower down .
+The project was officially “mothballed ” — closed up and left empty — without ever being used .
+Sixth in a series examining the failures at the heart of troubled federal systems .
+Above : The A-3 test stand , shown under construction at <START:organization> NASA’s <END> <START:organization> Stennis Space Center <END> in <START:location> Mississippi <END> , was built for a rocket program that was canceled .
+( <START:organization> NASA <END> )
+“You lock the door , so nobody gets in and hurts themselves , ” said <START:person> Daniel Dumbacher <END> , a former <START:organization> NASA <END> official who oversaw the project .
+The reason for the shutdown : The new tower — called the A-3 test stand — was useless .
+Just as expected .
+The rocket program it was designed for had been canceled in 2010 .
+But , at first , cautious <START:organization> NASA <END> bureaucrats did n’t want to stop the construction on their own authority .
+And then Congress — at the urging of a senator from <START:location> Mississippi <END> — swooped in and ordered the agency to finish the tower , no matter what .
+The result was that <START:organization> NASA <END> spent four more years building something it did n’t need .
+Now , the agency will spend about $ 700,000 a year to maintain it in disuse .
+The empty tower in <START:location> Mississippi <END> is evidence of a breakdown at <START:organization> NASA <END> , which used to be a glorious symbol of what an American bureaucracy could achieve .
+In the Space Race days of the 1960s , the agency was given a clear , galvanizing mission : reach the moon within the decade .
+In less than seven , <START:organization> NASA <END> got it done .
+Now , <START:organization> NASA <END> has become a symbol of something else : what happens to a big bureaucracy after its sense of mission starts to fade .
+In the past few years , presidents have repeatedly scrubbed and rewritten <START:organization> NASA’s <END> goals .
+The moon was in .
+The moon was out .
+Mars was in .
+Now , Mars looks like a stretch .
+Today , the first goal is to visit an asteroid .
+Jerked from one mission to another , <START:organization> NASA <END> lost its sense that any mission was truly urgent .
+It began to absorb the vices of less-glamorous bureaucracies : Officials tended to let projects run over time and budget .
+Its congressional overseers tended to view <START:organization> NASA <END> first as a means to deliver pork back home , and second as a means to deliver Americans into space .
+In <START:location> Mississippi <END> , <START:organization> NASA <END> built a monument to its own institutional drift .
+The useless tower was repeatedly approved by people who , in essence , argued that the American space program had nothing better to do .
+“ What the hell are they doing ?
+I mean , that ’s a lot of people’s hard-earned money , ” said <START:person> David Forshee <END> , who spent 18 months as the general foreman for the pipefitters who helped build the tower .
+Like other workmen , he had taken pride in this massive , complicated project — only to learn that it was in mothballs .
+“It’s heartbreaking to know that , you know , you thought you’d done something good , ” <START:person> Forshee <END> said .
+“And all you ’ve done is go around in a damn circle , like a dog chasing his tail . ”
+“It’s heartbreaking to know that ... you thought you’d done something good , ” said <START:person> David Forshee <END> , who spent 18 months as the general foreman for the pipefitters who helped build the tower .
+“And all you ’ve done is go around in a damn circle , like a dog chasing his tail . ”
+( <START:person> William Widmer <END> for <START:location> The Washington Post <END> )
+Seven years ago , when the tower still seemed like a useful idea , the governor came to the groundbreaking .
+So did a congressman .
+Two senators .
+On a hot morning in August 2007 , next to a canal full of alligators , somebody laid down AstroTurf and clean dirt over the sandy <START:location> Mississippi <END> soil .
+The dignitaries stood on the fake grass .
+They stuck gold-painted shovels into the fake earth .
+They said they were starting one of the greatest journeys in human history .
+Right here — at a 30-story tower rising out of the woods — <START:organization> NASA <END> would test the rockets that would take Americans back to the moon .
+And then even farther , on to Mars .
+“You who live in <START:location> Mississippi <END> and who work at this space center will see that frontier opening , ” said <START:person> Shana Dale <END> , who was then <START:organization> NASA’s <END> second-in-command .
+“You’ll hear it , too : the rumble of moon-bound rockets being tested here .
+The thunder of possibility ; the roar of freedom . ”
+This tower was intended to test a rocket engine called the J-2X .
+The plan was for a spacecraft to carry this engine , un-lit , up out of the Earth’s atmosphere .
+Then the engine would ignite and propel the spacecraft toward the moon .
+But , before <START:organization> NASA <END> stuck an astronaut on top of that idea , it wanted to test the engine .
+In the near-vacuum at the edge of space , would the whole thing vibrate , crack or blow apart ?
+There was only one way to know .
+“You have to fake the vacuum , ” said <START:person> Dumbacher <END> , the former <START:organization> NASA <END> official .
+To do that , <START:organization> NASA <END> had to create a giant pressure cooker on stilts .
+Workers would build a sealed metal container , big enough to hold a school bus .
+Then they would install it in the middle of a 300-foot-tall steel tower , reinforced to resist 1 million pounds of upward thrust from a rocket .
+Then , they would put the rocket engine in the container .
+Seal the door .
+Suck out the air .
+And light the fire .
+At the very beginning , <START:organization> NASA <END> projected that the tower would cost $ 119 million .
+It was supposed to be finished by late 2010 .
+Back in <START:location> Washington <END> , it was n’t long after the groundbreaking that <START:organization> NASA <END> officials began to hear about problems with the project .
+For one thing , the estimated cost increased to $ 163 million .
+To $ 185 million .
+Then beyond that .
+<START:organization> NASA’s <END> inspector general said the main contractor , <START:organization> Jacobs Engineering Group <END> , blamed changes in the design , plus unforeseen increases in the cost of labor and steel .
+<START:organization> NASA <END> paid the higher price .
+The builders kept building .
+“ I don’t think the contractors were attempting a scam .
+I think , in all honesty , that they did not understand the magnitude of the job , ” said one former senior <START:organization> NASA <END> official who was familiar with the project .
+“ I know people involved as human beings .
+I do not think they were trying to take advantage ” of <START:organization> NASA <END> , the former official said .
+<START:person> Jacobs <END> declined to comment .
+At <START:organization> NASA <END> , as at other large government agencies , this was an old institutional vice : making a big purchase , then letting the cost get bigger and bigger .
+Studies had found that when <START:organization> NASA <END> projects ran way late or way over budget , the agency rarely took the hard step of killing them .
+Earlier this year , the Post examined five other cases where old , stubborn problems were causing federal bureaucracies to waste time and money .
+Here 's what happened at those places after the Post wrote about their breaking points .
+“The [ International ] Space Station was sold as an $ 8 billion program .
+It ended up costing $ 100 billion .
+The <START:organization> Webb <END> telescope was sold as a $ 1 billion program .
+It’s now up to $ 8 billion , ” said <START:person> Lori Garver <END> , who served as the number two official at <START:organization> NASA <END> from 2009 until last year .
+“It usually works out for them , ” she said , meaning the contractors get paid , even when they raise the price .
+Decision-making about <START:organization> NASA <END> was twisted , she said , because of a mismatch between its huge funding and its muddled sense of purpose .
+“There’s no ‘why ’ ” in <START:organization> NASA <END> anymore , <START:person> Garver <END> said .
+Instead , she said , there was only a “how , ” a sense that something big still needed to be done .
+“And the ‘how ’ is all about the [construction ] contracts and the members of <START:organization> Congress <END> . ”
+At the same time that the test stand was busting its budget , <START:organization> NASA <END> had a much bigger problem to deal with .
+The whole effort to return to the moon — a suite of projects called <START:organization> “Constellation <END> , ” which included the A-3 tower and the engines it was meant to test — was falling deeply behind .
+That program had begun in 2004 , with a call from <START:person> President George W. Bush <END> .
+“We will undertake extended human missions to the moon as early as 2015 ,” Bush said then .
+But its funding never matched its ambitions .
+The nation’s ETA on the moon was repeatedly pushed back .
+By 2009 , a study commissioned by <START:person> President Obama <END> found that — at its current budget — <START:organization> NASA <END> might not get a man back to the moon until the 2030s .
+“They were trying to do more work than they had money to do .
+And they tried to make it up by slipping ” the due date further and further into the future , said <START:person> Norman R. Augustine <END> , a former chief executive of <START:organization> Lockheed Martin <END> , who led the study .
+What was left was a choice , he said .
+“We have to decide in this country whether we want a jobs program , ” he said , “or a space program . ”
+Finally , in early 2010 , <START:person> Obama <END> made a stunning announcement .
+He wanted to give up on the moon .
+In fact , he wanted to scrap the entire <START:organization> Constellation <END> program , including the rocket engines that the <START:location> Mississippi <END> tower was meant to test .
+At that point , <START:organization> NASA <END> officials said , about $ 200 million in federal money had been committed to the <START:location> Mississippi <END> project .
+But the thing was still nowhere near done .
+In fact , officials said , it might need another year and a half of work .
+What was left was a choice .
+“If it did n’t look like we were going to use it again , I would have stopped it right there .
+Just to save the money , ” said <START:person> Douglas Cooke <END> , the <START:organization> NASA <END> official who was tasked with making that decision .
+He was a lifer , 35 years in .
+In the spring of 2010 , <START:person> Cooke <END> was not ready to kill the tower .
+After all , <START:person> Obama <END> had only proposed killing the <START:organization> Constellation <END> program .
+<START:organization> Congress <END> had n’t signed off .
+In fact , lawmakers already were howling , outraged that home-district projects might be cut .
+So what if lawmakers decided to save that rocket engine that fired in space after all ?
+Just to be safe , <START:person> Cooke <END> kept it going .
+“If we just stopped work on it , in the middle , it was going to be a pretty high recovery cost , to go back and restart it , ” he said .
+“So we just decided to go ahead . ”
+In <START:location> Mississippi <END> , construction continued without a break .
+To the workers on the ground , the test stand was looking like a major achievement — a demonstration of what <START:organization> NASA <END> and <START:location> America <END> and they were capable of .
+Steam billows from the A-3 test stand during a preliminary test of one system at <START:organization> NASA’s <END> <START:organization> Stennis Space Center <END> in <START:location> Mississippi <END> .
+First , they put up the steel .
+There was 4 million pounds of it , with holes for 450,000 bolts — a thicket of metal so dense that workers joked about a “bird test . ”
+Any bird that tried to fly straight through it would conk into a beam .
+For workers , the job was hard because the structure was naked .
+No ladders .
+No railings .
+No floors .
+To build it , they had to stand on the bare skeleton itself , high enough in the air that the swinging steel blended in with the passing clouds .
+“You’re standing on a steel beam 100 feet in the air , ” said <START:person> James Blackburn <END> , whose company , then called <START:organization> Lafayette Steel Erector <END> , worked on this phase of the project .
+“The crane is swinging , one of these large steel members is coming toward you . . . .
+As the clouds are moving by , this piece is moving at you , your brain easily gets confused . ”
+After the steel went up , the workers attached the sealed metal container .
+The hardest part to build was the 120,000-pound door .
+It had to swing open to let the rocket engine in , then swing shut and hold up under 40 pounds per square inch of pressure from the atmosphere outside .
+“You stop and realize 40 psi is — what’s 40 times 144 ? ” <START:person> Jasper Reaves <END> asked aloud at <START:organization> American Tank & Vessel <END> , in the basement of a grand mansion in <START:person> Mobile , Ala <END> .
+“Five thousand two hundred sixty pounds ” per square inch , said <START:person> William Cutts <END> , the company ’s chief executive , working the calculator .
+“ . . . per square foot , ” <START:person> Reaves <END> , the chief engineer , finished the sentence .
+“That’s a hell of a lot of pressure on this thing . ”
+<START:person> Reaves <END> gestured toward a photo of the door , crosshatched with a grid of steel bars .
+It looked like the door to a super-villain’s jail cell .
+“So that ’s all to make the door keep its shape . ”
+Just the paint job was enormous .
+It took two days for a man hanging in a “spider basket ” to paint one wide stripe from bottom to top .
+Then he moved over a few feet , and started at the bottom of another section .
+But the payoff would be enormous , too .
+Years later , they would have touched the thing that touched the thing that put humans on another planet .
+“ I mean , you talk about something neat , ” said <START:person> Brent Anthony <END> , who spent days inspecting the stand , hanging in a basket that swung unnervingly in the breeze .
+“You’re talking about building something that ’s going to help us go to Mars . ”
+In the final years of the project , however , word began to filter out on the jobsite .
+The thing they were working on might not be needed after all .
+Not for Mars .
+Not for anything .
+“Yeah , yeah .
+It was a pretty strange feeling .
+To know that we were working on a project that , you know , seemed like that was just the local politician’s pet project but did n’t necessarily fit into the national scheme .
+Well , I don’t think the rank and file really had a morale issue with that .
+You know , to them , it was another construction project , ” said <START:person> Joel Ellis <END> , a contractor who helped install the pipes on the stand .
+For <START:person> Ellis <END> personally , the key was to take pride in the work , even if the work was n’t ever used .
+“There’s no sense in dwelling on it , ” he said .
+In the summer of 2010 , Congress saved the tower in <START:location> Mississippi <END> for good .
+It happened without anybody mentioning the project’s name aloud .
+“This is a big day for America , ” said then-Sen <START:person> Kay Bailey Hutchison <END> (R-Tex. ) , as it was about to happen .
+<START:person> Hutchison <END> was speaking in July 2010 at a meeting of the <START:organization> Senate Commerce , Science and Transportation Committee <END> .
+“We’re doing the right thing for <START:location> America <END> .
+For our economy .
+For our creativity , ” she said .
+“For our science .
+And for our security . ”
+<START:person> Hutchison <END> was announcing a new compromise with the <START:organization> White House <END> , which would finally settle the fight over <START:organization> Constellation <END> .
+<START:organization> Constellation <END> was dead .
+Instead , the senators were telling <START:organization> NASA <END> to build something that they had just made up : a “Space Launch System ” ( jokers at <START:organization> NASA <END> call it the “Senate Launch System” ) .
+The new plan for <START:organization> NASA <END> was , as usual , long on “how ” and short on “why . ”
+The senators were clear about what they wanted <START:organization> NASA <END> to do : keep some Constellation-era projects going , with all their salaries and spending , and try to integrate them into a new system .
+But what was the goal of all that ?
+The moon was off the table .
+Instead , <START:organization> NASA <END> is now focused on a less impressive rock : an asteroid .
+Sometime in the 2020s , <START:organization> NASA <END> wants to capture one about the size of a house , and then have astronauts zoom up and examine it .
+This was not a mission chosen to captivate the world’s imagination .
+It was a mission chosen to use the leftovers that Congress had told <START:organization> NASA <END> to reheat .
+( Mars still remains a distant goal : At the earliest , <START:organization> NASA <END> might get there in the 2030s . )
+At first , the <START:organization> Senate’s <END> new plan looked bad for the tower in <START:location> Mississippi <END> .
+At best , it now would be a project built on spec : erected in the hope that someday <START:organization> NASA <END> might return to the idea of a giant rocket engine that fired in a vacuum .
+But , in the committee room , <START:person> Hutchison <END> was still talking .
+“ I move that the following amendments to the <START:organization> NASA <END> reauthorization bill be adopted , ” she was saying .
+<START:person> “Wicker <END> Two , as modified .
+<START:person> Wicker <END> Three , . .
+.and
+<START:person> Wicker <END> Four , ” <START:person> Hutchison <END> said .
+“All those in favor ? ” said <START:person> Sen. John D. Rockefeller IV <END> (D-W.Va. ) , the committee chairman .
+Everybody said aye .
+“Opposed ? ”
+Nobody said anything .
+“It does appear to the chair that the ayes have it , ” <START:person> Rockefeller <END> said .
+“Sherlock Holmes , you are , ” <START:person> Hutchison <END> said .
+And that was it .
+<START:person> “Wicker <END> Three ” was an amendment sponsored by <START:person> Sen. Roger Wicker <END> (R-Miss . ) .
+His amendment said <START:organization> NASA <END> “shall complete construction and activation of the A-3 test stand with a completion goal of September 30 , 2013.”
+That language was included in the bill that passed the committee .
+Then the <START:organization> Senate <END> , then the <START:organization> House <END> .
+In October 2010 , <START:person> Obama <END> signed it into law .
+“Administrations come and go .
+I think it makes sense not to leave a partially constructed asset sitting there , ” <START:person> Wicker <END> said this month , in an interview in a hall outside the <START:organization> Senate <END> chamber .
+“ I do believe , a decade from now , we’ll look back and see that it has been used in a very positive way . ”
+He did not name a specific <START:organization> NASA <END> program that he believed would use it .
+In a separate interview this year , <START:person> Hutchison <END> — who is now retired — had said she could n’t remember how <START:person> Wicker <END> managed to get his amendment included in that compromise .
+So how did he do it ?
+In the <START:location> Capitol <END> hall , the senator burst out laughing .
+“ Just talented legislating , ” he said , and then walked away .
+<START:person> William Cutts <END> , left , chief executive of <START:organization> American Tank & Vessel <END> in <START:location> Mobile , Ala. <END> , and <START:person> Jasper Reaves <END> , the company ’s chief engineer , look at photographs of the A-3 test stand .
+( <START:person> William Widmer <END> for <START:organization> The Washington Post <END> )
+Work on the tower finally concluded this past summer .
+By then , the project had cost $ 349 million , which was nearly three times the original <START:organization> NASA <END> estimate .
+It had lasted almost seven years , which was 3 1 /2 years longer than first expected .
+But at last , the A-3 test stand was done .
+Or , mostly done .
+“A-3 could not be used for testing right now , if we wanted to , ” said <START:person> Dumbacher <END> , the <START:organization> NASA <END> official , who left in July to become a professor at <START:organization> Purdue University <END> .
+He said instruments still needed to be installed , and the pressure vessel needed to be tested to see if it would hold a vacuum .
+How much work would it take to get it ready ?
+“Probably another two to three years , I would guess , ” <START:person> Dumbacher <END> said .
+( A current <START:organization> NASA <END> spokesman gave a slightly shorter time frame , saying that “probably less than two years would be required .” )
+But , he said , <START:organization> Congress <END> had assured <START:organization> NASA <END> behind the scenes that this stage of completion would be enough to satisfy them .
+So construction work ended on June 27 , and workers began the job of mothballing the stand .
+The dignitaries did not come back to see that .
+“There was no ceremony , ” a <START:organization> NASA <END> spokesman said .
+The revelation that the tower was going to be mothballed was revealed in an inspector general’s report in January .
+For now , the stand does not seem likely to be needed anytime soon .
+<START:organization> NASA <END> says it has no rockets , even in development , that would require the kind of test this tower does .
+So the tower stand has taken its place on <START:organization> NASA’s <END> long list of living dead .
+Last year , the agency’s inspector general found six other test stands that were either in “mothball ” status , or about to be .
+Some had n’t been used since the 1990s .
+Together , those seven cost <START:organization> NASA <END> more than $ 100,000 a year to maintain .
+<START:person> Forshee <END> , the pipefitting foreman , had no idea .
+He had left the tower job years ago , had gone to work in <START:location> Montana <END> , and then had come back to <START:location> Mississippi <END> to build a firehouse .
+But he had kept a jacket with the <START:organization> NASA <END> logo , which he had been given on the tower project .
+He savored the idea that his kids might one day see an American walk on Mars , and know their father helped make it possible .
+Then , in July , <START:person> Forshee <END> got an odd job offer .
+Could he come to <START:organization> Stennis Space Center <END> to work on a new rocket test stand ?
+<START:person> Forshee <END> was confused .
+Did n’t he just build one of those ?
+“They told me , “ Hey , you know , they mothballed A-3.’
+I said , ‘ What ? ’
+” he said , in an interview at the bar at a <START:organization> Hooters <END> restaurant in this industrial city of <START:location> Gulfport <END> .
+“And they said , ‘Yeah , they’re gonna do this one ’ ” instead , he said .
+It turned out that the engines required for the new <START:organization> Space Launch System <END> needed a new test stand , with no vacuum involved .
+So <START:organization> NASA <END> is renovating another stand just a short distance away from the A-3 , called the B-2 .
+That project is supposed to cost $ 134 million .
+<START:person> Forshee <END> is a tea party supporter , somebody who hates for government money to be misspent .
+And here , he sees , it was misspent on him .
+After his interview at <START:organization> Hooters <END> , he called a reporter back to be sure he had it right .
+“They’re just saying they spent $ 350 million for no reason ? ” he asked .
+Yes , he was told .
+“Well , ” he said .
+“Nice . ”
+( He took the job at the new test stand anyway , to be sure the work stayed with his union local : “If we don’t do this work , then they’re going to give it to Local 60 out of <START:location> New Orleans <END> .” )
+<START:organization> NASA <END> would not allow a reporter to visit the disused tower up close .
+The only way to see it at all was to pay $ 10 at the visitor center and take the official <START:organization> Stennis Space Center <END> bus tour .
+On the tour , the guide drove by several test stands left over from the glory days of the 1960s , and recounted how exhaust billowed , and the earth shook .
+The bus drove by the B-2 stand , now under construction .
+Then the bus passed a skeletal , white-painted tower , alone in the distance .
+“The one to the left there is called the A-3 ,” the guide said .
+So what does that one do ?
+“It actually does not have a customer , ” the guide said .
+“So it ’s just kind of hanging out right now . ”

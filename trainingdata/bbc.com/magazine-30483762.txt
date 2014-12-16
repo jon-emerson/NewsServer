@@ -1,0 +1,51 @@
+http://www.bbc.com/news/magazine-30483762
+For the first time in more than 140 years , the <START:location> US <END> has lost the title of the world 's largest economy - it has been stolen by <START:location> China <END> , according to the <START:organization> IMF. <END>
+But how reliable are the statistics underpinning this claim ?
+The <START:organization> BBC <END> 's economics editor , <START:person> Robert Peston <END> , explains lower down why <START:location> China <END> matters to all of us .
+The Chinese economy is now worth $ 17.6tn , slightly higher than the $ 17.4tn the International Monetary Fund ( <START:organization> IMF) <END> estimates for the <START:location> US <END> .
+So for the first time since 1872 , when it overtook the UK, the <START:location> US <END> has been knocked off the top spot .
+The <START:organization> IMF <END> calculated these figures by using purchasing power parity ( PPP ) which enables you to compare how much you can buy for your money in different countries .
+As money goes further in <START:location> China <END> than in the <START:location> US <END> , the figure for <START:location> China <END> is adjusted upwards .
+Without the PPP adjustment , the <START:organization> IMF <END> estimates that <START:location> China <END> 's economy is worth far less - $ 10.3tn .
+But how much faith can be placed in the accuracy of GDP figures supplied by <START:location> China <END> when even the current premier , <START:person> Li Keqiang <END> has doubted their validity in the past ?
+A declassified <START:location> US <END> diplomatic cable revealed that in 2007 , <START:person> Li <END> , who was then secretary general of <START:location> Liaoning Province <END> , had told the <START:location> US <END> ambassador that Chinese GDP statistics were "man-made " and " for reference only " .
+But with a population of 1.36 billion people , <START:location> China <END> really should be the world 's largest economy , argues <START:person> Matthew Crabbe <END> , author of Myth-Busting <START:location> China <END> 's Numbers .
+He 's spent more than 20 years looking at the country 's figures and the facts behind them .
+His reaction to <START:location> China <END> 's new title : " So what ? "
+He points out that if you look at per capita spending power - the value of all goods and services produced within a nation in a given year divided by the average population for the same year - then , even adjusted for PPP , <START:location> China <END> ( $ 11,868 ) is still lagging a long way behind not only the <START:location> United States <END> ( $ 53,001 ) but also the likes of <START:location> Turkmenistan <END> ( $ 12,863 ) and <START:location> Suriname <END> ( $ 16,080 ) .
+So how easy is it to accurately measure the size of the Chinese economy or even just parts of it ?
+Not very , says <START:person> Crabbe <END> .
+" One of the key things that has to be understood is that distortions that happen at the village and provincial levels become amplified as they go out the statistical gathering chain .
+" Year on year the GDP figures for each province grew faster than the national total , which logically and mathematically could not be . "
+He attributes part of this discrepancy to corruption but also says that inaccuracies became exacerbated by the sheer size of the country and the rate at which it was growing .
+Inaccurate GDP figures can have serious consequences for companies that base investment decisions on them .
+<START:person> Crabbe <END> has a cautionary tale .
+In 2005 the Chinese government readjusted its GDP figures and the statistics on which they were based , including retail sales .
+The consensus in the retail community at the time was that nobody really understood the true size of the retail market in <START:location> China <END> .
+" I went through each of the sectors to see what the real size of each of those would be , how fast they were growing and therefore what the real size of the retail market was .
+" My conclusion was that the real retail market at that time was half the value of the official government figure , " he says .
+<START:person> Crabbe <END> discovered there were problems with definitions of what retail goods actually were .
+The government figures included wholesale sales of consumer goods , some government procurement , and some business to business sales - so not everything that had been included was strictly retail .
+It 's difficult to gauge whether the accuracy of definitions and the data have really improved in recent years .
+But the <START:organization> IMF <END> forecasts growth of 7.4 % in <START:location> China <END> for 2014 and 7.1 % in 2015 , compared to <START:location> US <END> growth of 2.2 % this year and 3.1 % next year .
+This means that the Chinese are unlikely to relinquish their number one status soon .
+In fact the <START:organization> IMF <END> predicts that by the end of this decade the Chinese economy will be worth $ 26.98tn - 20 % bigger than the <START:location> US <END> at $ 22.3tn .
+But while the <START:location> US <END> held the top spot for 142 years , <START:location> China <END> may not be able to match that record - long term financial forecasts from the <START:organization> IMF <END> and others indicate that by 2100 <START:location> India <END> could overtake them both .
+The most important number in the world , for the past 30 years and next five years , is <START:location> China <END> 's growth rate .
+For 30 years its economy grew at a mind-boggling rate - roughly 10 % a year but that stopped when the global economy hit problems in 2008 and it fell very sharply .
+Then the Chinese government did something remarkable and persuaded its banks to lend as if there was no tomorrow .
+They lent for investment and investment went up from an already extremely high 40 % or so of GDP , to about 50 % and the growth rate picked up again .
+There 's been nothing like it in the history of capitalism .
+It 's astonishing .
+The Chinese have worked out that this new way of growing through debt funded investment rather than exports ca n't go on forever and is actually potentially quite dangerous .
+So they are trying to reconstruct the economy but it 's not going desperately well and growth is now around 7 % .
+I 'm not sure whether we can trust these numbers to be honest though .
+I think most of us would say that if we 're slightly uneasy about most government statistics , then we 're profoundly uneasy about <START:location> China <END> 's statistics .
+We do know that <START:location> China <END> is slowing down and there is a big debate about how fast that should be happening .
+But the big story that has influenced all our lives in the last 30 years has been the economic revolution in <START:location> China <END> .
+For years it improved our living standards by making the things we buy cheaper and cheaper .
+It gulled central banks everywhere into thinking they had inflation under control so they kept interest rates way too low for too long .
+<START:location> China <END> generated these enormous surpluses , which it then lent to the <START:location> US <END> to finance its colossal deficit .
+<START:location> China <END> was the big economic force in the world - and it still is - but it 's moving in the opposite direction and the speed at which it slows down and the way that it slows down influences all our lives .
+We should be under no illusion that the really big thing in the world , which will have an impact on our living standards is what happens in <START:location> China <END> .
+Nothing else really matters in comparison .
