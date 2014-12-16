@@ -1,8 +1,8 @@
 http://curbed.com/archives/2014/12/15/la-shed-architecture-de-gaspe-renovation.php
-Photo by Maxime Brouillet via Dwell
-In the hands of Canadian firm La SHED Architecture , a dreary , well-worn duplex in Montreal is now completely unrecognizable .
+Photo by <START:person> Maxime Brouillet <END> via <START:organization> Dwell <END>
+In the hands of Canadian firm <START:organization> La SHED Architecture <END> , a dreary , well-worn duplex in <START:location> Montreal <END> is now completely unrecognizable .
 Gone are the odd wallpaper and aged furnishings : after a massive renovation last year , the 2,700-square-foot home is all about bright lighting , vibrant colors , and versatile spaces .
-As Dwell notes , the architects only preserved the building 's "overall shape and footprint . "
+As <START:organization> Dwell <END> notes , the architects only preserved the building 's "overall shape and footprint . "
 Otherwise , the changes are drastic .
 A new open-plan area for the kitchen and double-height living room has been opened up , with a home office hovering on the mezzanine above .
 The kitchen has been recast in white lacquer and outfitted with stainless-steel countertops .
@@ -11,15 +11,15 @@ Other transformations include the master bath , where a larger skylight showers 
 Of course , with a budget of $ 400K , which is what was reported on the project page , this sort of extreme makeover is to be expected .
 Here are some before-and-afters of the house 's kitchen , master bath , and rear .
 Before :
-Photo by La Shed Architecture via Facebook
+Photo by <START:organization> La Shed Architecture <END> via <START:organization> Facebook <END>
 After :
-Photo by Maxime Brouillet via Dwell
+Photo by <START:person> Maxime Brouillet <END> via <START:organization> Dwell <END>
 Before :
-Photo by La Shed Architecture via Facebook
+Photo by <START:organization> La Shed Architecture <END> via <START:organization> Facebook <END>
 After :
-Photo by Maxime Brouillet via Dwell
+Photo by <START:person> Maxime Brouillet <END> via <START:organization> Dwell <END>
 Before :
-Photo by La Shed Architecture via Facebook
+Photo by <START:organization> La Shed Architecture <END> via <START:organization> Facebook <END>
 After :
-Photo by Maxime Brouillet via Dwell
-· A Concrete and Glass Home Frames Epic Views of San Diego [Dwell ] · All La Shed Architecture posts [Curbed National ] · All Renovations posts [Curbed National ] · All Extreme Makeovers posts [Curbed National ]
+Photo by <START:person> Maxime Brouillet <END> via <START:organization> Dwell <END>
+· A Concrete and Glass Home Frames Epic Views of <START:location> San Diego <END> <START:organization> [Dwell <END> ] · All <START:organization> La Shed Architecture <END> posts <START:organization> [Curbed National <END> ] · All Renovations posts <START:organization> [Curbed National <END> ] · All Extreme Makeovers posts <START:organization> [Curbed National <END> ]

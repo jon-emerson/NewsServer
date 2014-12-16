@@ -1,232 +1,232 @@
 http://sf.curbed.com/archives/2014/08/06/how_a_san_francisco_architect_reframes_design_for_the_blind.php
-[Graphics by Suze Myers . ]
-Architect Chris Downey is standing next to a pile of Sheetrock , balancing a white cane in the air like a tightrope walker 's pole .
-The week before , construction had begun on a new office for the Independent Living Resource Center of San Francisco , or ILRC , a nonprofit community center for people with disabilities .
-Downey holds the cane up to approximate for the center 's executive director , Jessie Lorenz , how the reception desk will jut out at an angle from a concrete column .
-Lorenz takes a step , and a pile of pipes on the floor clatters .
-" I do n't know what 's over there , " says Downey .
-Lorenz giggles .
+[Graphics by <START:person> Suze Myers <END> . ]
+<START:person> Architect Chris Downey <END> is standing next to a pile of Sheetrock , balancing a white cane in the air like a tightrope walker 's pole .
+The week before , construction had begun on a new office for the <START:organization> Independent Living Resource Center <END> of <START:location> San Francisco <END> , or <START:organization> ILRC <END> , a nonprofit community center for people with disabilities .
+<START:person> Downey <END> holds the cane up to approximate for the center 's executive director , <START:person> Jessie Lorenz <END> , how the reception desk will jut out at an angle from a concrete column .
+<START:person> Lorenz <END> takes a step , and a pile of pipes on the floor clatters .
+" I do n't know what 's over there , " says <START:person> Downey <END> .
+<START:person> Lorenz <END> giggles .
 " I hope I did n't break anything , " she says .
-Lorenz regains her footing and touches the cane .
+<START:person> Lorenz <END> regains her footing and touches the cane .
 " That makes sense , " she says .
 " It 's almost like we 're funneling people into this part . "
-Even though Lorenz , who , like Downey , is blind , ca n't see the space before her , she knows exactly what to expect .
-On her desk at the ILRC 's current office on Mission Street , she keeps a tactile floor plan that Downey printed for her .
+Even though <START:person> Lorenz <END> , who , like <START:person> Downey <END> , is blind , ca n't see the space before her , she knows exactly what to expect .
+On her desk at the <START:organization> ILRC <END> 's current office on Mission Street , she keeps a tactile floor plan that <START:person> Downey <END> printed for her .
 The plan 's fine web of raised lines looks like an elaborate decorative pattern , suggesting a leaf of handmade stationery or a large sheet from which doilies are about to be cut .
-Though Downey has consulted on other architects ' projects since going blind six years ago , this one marks a turning point for him .
+Though <START:person> Downey <END> has consulted on other architects ' projects since going blind six years ago , this one marks a turning point for him .
 The community center is the first space he 's designed since losing his sight .
-The center recently opened its doors to the public with a celebration to inaugurate the new space , located on Howard Street in the city 's Yerba Buena district , just down the block from the Moscone convention center .
+The center recently opened its doors to the public with a celebration to inaugurate the new space , located on <START:location> Howard Street <END> in the city 's <START:location> Yerba Buena <END> district , just down the block from the <START:location> Moscone convention center <END> .
 But on this May afternoon , the walls are just beginning to go up .
-[ Chris Downey at the new ILRC.
-Photos by Patricia Chang . ]
-Lorenz and her guide dog , a German shepherd named Phoenix , head deeper into the building to check out the storage room , and Downey makes his way to the storefront , where the conference room looks out onto Howard .
+[ <START:person> Chris Downey <END> at the new <START:organization> ILRC <END> .
+Photos by <START:person> Patricia Chang <END> . ]
+<START:person> Lorenz <END> and her guide dog , a German shepherd named <START:person> Phoenix <END> , head deeper into the building to check out the storage room , and <START:person> Downey <END> makes his way to the storefront , where the conference room looks out onto <START:location> Howard <END> .
 Other than a few scant rays of afternoon sunlight slanting in through the window , it 's dark .
-The floor is scattered with the guts of the future office—cables , pipes , and more Sheetrock—obstacles Downey weaves around with his cane .
+The floor is scattered with the guts of the future office—cables , pipes , and more Sheetrock—obstacles <START:person> Downey <END> weaves around with his cane .
 There 's sort of a ropes-course , trust-fall quality to touring a dimly lit construction site with someone who ca n't see .
 He tells me where we are , and I tell him where not to step .
-Downey makes his way to the open office area , where cubicles will eventually go .
+<START:person> Downey <END> makes his way to the open office area , where cubicles will eventually go .
 At 51 , he is tall , trim , and nearly bald , with a light fuzz of whitening hair just above his ears and intensely blue eyes .
-Downey gave up his daily bike commute when he lost his sight , but he still moves with the assurance of someone who could hop on a bicycle and take off at any moment .
+<START:person> Downey <END> gave up his daily bike commute when he lost his sight , but he still moves with the assurance of someone who could hop on a bicycle and take off at any moment .
 He pauses , listens , and makes a few exploratory taps on the floor with his cane .
 " I was trying to see if they had framed up the wall between the conference room and the" —more tapping —" Yeah , this is it , " he says as he finds the wall with his cane .
 " The windows will sit here .
 It 's a pretty good-size opening to get that light and view into the general office . "
-Downey is gesturing at the street and making eye contact as he says this , and for a moment this feels like any other construction tour .
-Then the front door swings open and Dwight Ashdown , principal of the San Francisco firm Ashdown Architecture and Downey 's partner on the project , strides in .
+<START:person> Downey <END> is gesturing at the street and making eye contact as he says this , and for a moment this feels like any other construction tour .
+Then the front door swings open and <START:person> Dwight Ashdown <END> , principal of the <START:location> San Francisco <END> firm <START:organization> Ashdown Architecture <END> and <START:person> Downey <END> 's partner on the project , strides in .
 He reaches around the side of an unfinished wall and flips a switch .
 Light floods the space as the overhead lights flicker to life .
 No one had thought to turn them on .
-For most of his life , Chris Downey could see .
+For most of his life , <START:person> Chris Downey <END> could see .
 Seven years ago , he started to notice blind spots in his vision .
-At the time , he was managing the architectural practice of a green modular-housing firm in Oakland and cycling 100 miles a week .
-He began to have trouble following the ball during baseball games with his son , Renzo .
+At the time , he was managing the architectural practice of a green modular-housing firm in <START:location> Oakland <END> and cycling 100 miles a week .
+He began to have trouble following the ball during baseball games with his son , <START:person> Renzo <END> .
 After new glasses did n't fix the problem , an MRI revealed a benign tumor pressing on his optic nerve .
-His own father , a physician , had died of complications from a brain tumor at the age of 36 , when Downey was seven .
-On St . Patrick 's Day , 2008 , Downey checked into the hospital .
+His own father , a physician , had died of complications from a brain tumor at the age of 36 , when <START:person> Downey <END> was seven .
+On St . Patrick 's Day , 2008 , <START:person> Downey <END> checked into the hospital .
 It took the doctors nine and a half hours to remove the tumor .
 When he woke up , the world was blurry .
-He could distinguish Renzo and his wife , Rosa , as colors and shapes but could not make out the details of their faces .
+He could distinguish <START:person> Renzo <END> and his wife , <START:person> Rosa <END> , as colors and shapes but could not make out the details of their faces .
 At first , this was a sign of normal recovery .
-But the next day , the bottom half of Downey 's visual field was dark , as though he were partly submerged in ink .
+But the next day , the bottom half of <START:person> Downey <END> 's visual field was dark , as though he were partly submerged in ink .
 The day after , even the blurred vision was gone , replaced by changing sensations of light and dark .
 By the fifth day , everything had gone black .
 After the doctors told him there was nothing more they could do , a social worker came by his hospital room to talk about the future .
-" One of the first things she commented on was that I was an architect , and we could talk about career 'alternatives ' —that was her word , " Downey recalls .
+" One of the first things she commented on was that I was an architect , and we could talk about career 'alternatives ' —that was her word , " <START:person> Downey <END> recalls .
 " After that I did n't hear much else . "
-[ Downey and Lorenz adjust floorplans . ]
+[ <START:person> Downey <END> and <START:person> Lorenz <END> adjust floorplans . ]
 Even though leaving architecture felt wrong , staying seemed equally preposterous .
-" I questioned it initially , like—how ? " says Downey .
+" I questioned it initially , like—how ? " says <START:person> Downey <END> .
 No sooner had he asked the question than he began to think of answers .
 Quite a few of his job duties were supervisory—managing relationships , helping his staff think through design problems—and he could handle those without being able to see .
-Downey approached his bosses .
+<START:person> Downey <END> approached his bosses .
 " When I pitched the idea , ' Can I come back ? ' they were quick to say yes , " he says .
 " They were absolutely sure that I 'd be able to figure it out ."
 Within a month , he was back at the firm part-time .
-Rosa Downey , who is also an architect ( the couple met as junior designers at the Boston firm Schwartz/Silver Architects in 1987 ) , drove him to work every day .
-Since he did n't have command of a cane yet , Downey spent his days either in his chair or being led around the office by colleagues .
+Rosa <START:person> Downey <END> , who is also an architect ( the couple met as junior designers at the <START:location> Boston <END> firm <START:organization> Schwartz/Silver Architects <END> in 1987 ) , drove him to work every day .
+Since he did n't have command of a cane yet , <START:person> Downey <END> spent his days either in his chair or being led around the office by colleagues .
 That fall , a technology trainer he was working with found him an embossing printer —a specialty technology normally used in educational settings to print braille and tactile graphics .
-With a good bit of tinkering , Downey and his trainer got it to print floor plans from PDFs .
+With a good bit of tinkering , <START:person> Downey <END> and his trainer got it to print floor plans from PDFs .
 It was a lucky fluke .
 The PDF format is common currency in the architecture profession , and having a piece of technology that could read it meant he could participate without asking anyone to adopt another technology .
-But Downey still had no way of getting his own ideas onto paper .
+But <START:person> Downey <END> still had no way of getting his own ideas onto paper .
 The language of the industry he had worked in for 20 years was trapped on inscrutably flat pieces of paper or locked away in electrons on a screen .
-Lorenz , who first learned of Downey through a mutual friend , recalls talking with him after he lost his sight .
+<START:person> Lorenz <END> , who first learned of <START:person> Downey <END> through a mutual friend , recalls talking with him after he lost his sight .
 " There are a lot of people that would 've just been like , 'OK , this is an opportunity to change career paths , '" she says .
 " It was clear to me early on that packing up shop was n't on his list of options for himself . "
-Downey saw his blindness as a particularly gnarly design problem—a high-stakes version of the intentionally mindboggling assignments from his graduate student days at the University of California , Berkeley 's College of Environmental Design .
-" You get that incredible challenge in school , where you 're scratching your head , like , ' Oh my God , where 's this going to take me ? ' says Downey .
+<START:person> Downey <END> saw his blindness as a particularly gnarly design problem—a high-stakes version of the intentionally mindboggling assignments from his graduate student days at the <START:organization> University of California , Berkeley <END> 's <START:organization> College of Environmental Design <END> .
+" You get that incredible challenge in school , where you 're scratching your head , like , ' Oh my God , where 's this going to take me ? ' says <START:person> Downey <END> .
 " That can be incredibly terrifying . "
 But he does n't sound like a person shaped by terror .
 Instead , the thought of being asked to do something ridiculously hard seems to make him giddy .
-A few months after going back to work , Downey picked up the phone and called the California Architects Board , the state licensing authority .
+A few months after going back to work , <START:person> Downey <END> picked up the phone and called the California Architects Board , the state licensing authority .
 " I said , ' Uh , I 've got a friend who 's an architect , and he 's licensed ; he lost his sight .
 Can he , ah , keep his license ? ' "
-Downey recalls .
+<START:person> Downey <END> recalls .
 " They were like , ' He 's passed his exam , he 's got his license ? ' "
-Downey said yes . " They said , ' He 's got it for life .
+<START:person> Downey <END> said yes . " They said , ' He 's got it for life .
 As long as he pays his fees . '"
 We think of architecture as a visual discipline , but vision is just one of our spatial senses .
 Close your eyes , after all , and the room around you is still there .
-When Downey lost his sight , his curiosity about the way environments are constructed did n't go away ; it simply shifted to his other senses .
-When he could see , Downey often sketched as a way of sorting out architectural details he found puzzling .
+When <START:person> Downey <END> lost his sight , his curiosity about the way environments are constructed did n't go away ; it simply shifted to his other senses .
+When he could see , <START:person> Downey <END> often sketched as a way of sorting out architectural details he found puzzling .
 Now he taps his cane to get a sense of the volume of the space he 's in , or he 'll touch a wall or a transition point in the building to figure out how it 's put together .
 He does n't use a guide dog , because he would lose that intimate contact with the landscape .
 " I 'm often trying to understand as much of the architectural space and form as I can , " he says .
 The listening skills required practice , but the tactile ones did n't .
 " As kids we learn through touch , before our visual system is fully developed , " he explains .
-Downey 's years of cycling also gave him a feel for the modulations of the streets , down to the dips and crests of the roads around his Piedmont home .
-Whenever people ask his wife for directions , Downey invariably answers .
-[Jessie Lorenz and Phoenix . ]
-When he 's pressed for time , or just trying to travel efficiently from place to place , Downey does n't bother with trying to create that mental model of his surroundings .
+<START:person> Downey <END> 's years of cycling also gave him a feel for the modulations of the streets , down to the dips and crests of the roads around his <START:location> Piedmont <END> home .
+Whenever people ask his wife for directions , <START:person> Downey <END> invariably answers .
+<START:person> [Jessie Lorenz <END> and <START:person> Phoenix <END> . ]
+When he 's pressed for time , or just trying to travel efficiently from place to place , <START:person> Downey <END> does n't bother with trying to create that mental model of his surroundings .
 " I 'm just connecting points , " he says , " to find , ' This is the flow that works through here . '"
 In those instances , he experiences space as essentially bland .
 " You could think of it like a really monotonous environment that is sort of frustrating or confusing because everything 's the same , " he says .
 " Like a convention center or airport . "
-( One exception : Chicago O'Hare , Downey 's favorite airport , because the concourse 's terrazzo floors and vaulted glass skylight bounce sound in a legible way , leaving a kind of sonic breadcrumb trail . )
+( One exception : <START:location> Chicago O'Hare <END> , <START:person> Downey <END> 's favorite airport , because the concourse 's terrazzo floors and vaulted glass skylight bounce sound in a legible way , leaving a kind of sonic breadcrumb trail . )
 For the most part , places that tend to be dull for the sighted world also do little for people who ca n't see : think low , undifferentiated ceilings and vast swaths of carpet tile .
 Carpet dampens sound , and the unchanging ceiling , when sounds bounce off it , gives no indication of which direction is which .
 Think of being trapped in the world 's largest DMV .
-After he lost his sight , Downey found that buildings he appreciated in his prior life offered him new multisensory riches .
-When he visited Louis Kahn 's Kimbell Art Museum in Fort Worth , Texas , he was surprised to find that he could intuit the layout of the galleries through the floor texture .
+After he lost his sight , <START:person> Downey <END> found that buildings he appreciated in his prior life offered him new multisensory riches .
+When he visited <START:person> Louis Kahn <END> 's <START:organization> Kimbell Art Museum <END> in <START:location> Fort Worth , Texas <END> , he was surprised to find that he could intuit the layout of the galleries through the floor texture .
 Bands of travertine trace the path of the structural grid , interspersed with intervals of wood .
 " Having those bands begins to modulate the space , " he says .
 " Kahn would 've done that for a visual modulation , " but the architect might have been thinking texturally as well .
-" I 've since learned that he was getting pretty blind by the time he did that building , " says Downey .
+" I 've since learned that he was getting pretty blind by the time he did that building , " says <START:person> Downey <END> .
 " He almost had to have his face right on the drawings to be able to see them . "
-Downey remained at the modular-housing firm through the end of 2008 .
+<START:person> Downey <END> remained at the modular-housing firm through the end of 2008 .
 The recession had deepened , and banks had all but quit underwriting loans in the niche market of unconventional prefab homes .
-Downey survived several rounds of cuts that fall , but just before the holidays , he was laid off .
+<START:person> Downey <END> survived several rounds of cuts that fall , but just before the holidays , he was laid off .
 With the building industry at a near standstill , prospects were grim even for architects who could see .
-In early 2009 , Downey got in touch with a business adviser , who connected him with the Oakland firm Design Partnership .
-As it happened , that firm was collaborating with SmithGroup on a new polytrauma and blind rehabilitation center for the Palo Alto veterans ' hospital .
+In early 2009 , <START:person> Downey <END> got in touch with a business adviser , who connected him with the <START:location> Oakland <END> firm <START:organization> Design Partnership <END> .
+As it happened , that firm was collaborating with SmithGroup on a new polytrauma and blind rehabilitation center for the <START:location> Palo Alto <END> veterans ' hospital .
 SmithGroup hired him to consult on the project .
-Far from being unemployable , Downey found himself in possession of a rare combination of skills .
+Far from being unemployable , <START:person> Downey <END> found himself in possession of a rare combination of skills .
 Here were two groups that had little in common : blind people and the hypervisual architects who design spaces .
-In the Venn diagram linking them , Downey was a set of one .
+In the Venn diagram linking them , <START:person> Downey <END> was a set of one .
 ( In the US , at least .
-In Portugal , the architect Carlos Mourão Pereira has maintained a practice since losing his sight in 2006 .
-The two met in 2009 in a New York Starbucks , in what they dubbed the first-ever International Blind Architects Conference . )
-Since landing that initial consulting job on the veterans ' rehabilitation center , Downey has carved out a niche helping a visual industry locate its blind spots .
-His portfolio has swelled with health-care projects , including the Duke Eye Center in Durham , North Carolina , and transportation work has picked up , too .
-In 2012 Pelli Clarke Pelli , the architect working on San Francisco 's 1.5-million-square-foot Transbay Transit Center , asked Downey to help chart a legible path for visually impaired passengers along what will be a four-block-long bus depot .
-Downey 's copy of the floor plan , which he printed on his embossing printer , measures more than 16 feet long .
+In <START:location> Portugal <END> , the architect <START:person> Carlos Mourão Pereira <END> has maintained a practice since losing his sight in 2006 .
+The two met in 2009 in a <START:location> New York <END> <START:organization> Starbucks <END> , in what they dubbed the first-ever <START:organization> International Blind Architects Conference <END> . )
+Since landing that initial consulting job on the veterans ' rehabilitation center , <START:person> Downey <END> has carved out a niche helping a visual industry locate its blind spots .
+His portfolio has swelled with health-care projects , including the <START:organization> Duke Eye Center <END> in <START:location> Durham <END> , North Carolina , and transportation work has picked up , too .
+In 2012 <START:person> Pelli Clarke Pelli <END> , the architect working on <START:location> San Francisco <END> 's 1.5-million-square-foot Transbay Transit Center , asked <START:person> Downey <END> to help chart a legible path for visually impaired passengers along what will be a four-block-long bus depot .
+<START:person> Downey <END> 's copy of the floor plan , which he printed on his embossing printer , measures more than 16 feet long .
 The Americans with Disabilities Act ( ADA ) includes requirements for the visually impaired , not all of them attentively enforced .
 Measures like braille signage and tactile paving ( those bumpy strips that signal a transition from sidewalk to street ) are universal .
-But Downey has found that design teams often overlook rules governing protruding objects like diagonal braces or wall sconces , which are too high to detect with a cane but not high enough to ensure that no one will walk into them .
-" A lot of architects I 've talked with , it 's not willful —they do n't know it 's an issue , " says Downey .
+But <START:person> Downey <END> has found that design teams often overlook rules governing protruding objects like diagonal braces or wall sconces , which are too high to detect with a cane but not high enough to ensure that no one will walk into them .
+" A lot of architects I 've talked with , it 's not willful —they do n't know it 's an issue , " says <START:person> Downey <END> .
 " You can see when somebody ca n't roll up stairs or reach from a wheelchair to get something .
 " It 's hard to visualize what it 's like to see from behind somebody else 's eyes . "
 Even when followed to the letter , the ADA rules do n't address how someone with poor eyesight experiences a place .
 Without sight , curving paths are particularly vexing , especially if the path is texturally identical to everything around it .
-" You have to have something tactile to work around that curvature , " says Downey .
+" You have to have something tactile to work around that curvature , " says <START:person> Downey <END> .
 " How do you know what the radius is ?
 Even if you knew , how would you calibrate that into your mind to walk the radius ? "
 For the same reason , round furniture is problematic ; there 's no way to walk away and know for certain where you 're going .
-Downey recently toured a blind rehab center in Southern California where all the reception desks are round .
+<START:person> Downey <END> recently toured a blind rehab center in Southern California where all the reception desks are round .
 To give patients a way to orient themselves , the center added rubber tabs under the countertops to line up with particular corridors—the equivalent of a sign hidden under a table .
-For more than a decade , the ILRC has been tucked away on the third floor of a brick mid-rise on Mission Street .
+For more than a decade , the ILRC has been tucked away on the third floor of a brick mid-rise on <START:location> Mission Street <END> .
 When the elevator breaks—which is often—the ILRC employees who use wheelchairs ca n't go to work , and would-be visitors in wheelchairs are out of luck .
-" We have a youth group that meets on Wednesdays after hours , " says Lorenz .
+" We have a youth group that meets on Wednesdays after hours , " says <START:person> Lorenz <END> .
 " There 'll be , like , 10 minors in there , being young and crazy and having fun , and I 'm sitting in this office deep-breathing , thinking , ' Oh my gosh , if that elevator breaks and these kids are up here . '"
-Two years ago Lorenz visited the ground-floor space on Howard Street , and she 's been fundraising for the move ever since .
+Two years ago <START:person> Lorenz <END> visited the ground-floor space on <START:location> Howard Street <END> , and she 's been fundraising for the move ever since .
 Beyond the obvious boon to safety , having a street presence will raise the center 's profile .
-" Our work is about keeping people who have a disability involved , engaged , and employed , " says Lorenz .
+" Our work is about keeping people who have a disability involved , engaged , and employed , " says <START:person> Lorenz <END> .
 Joining the public realm is an important part of that .
 " We need a place where we can be an actual community center . "
-When Lorenz issued a call for architects in January , she needed to move quickly .
+When <START:person> Lorenz <END> issued a call for architects in January , she needed to move quickly .
 The center had to open in its new space in six months , and she had parted ways with the initial architect .
-Downey had just wrapped up a semester guest-lecturing at Berkeley 's School of Architecture , where he teaches an introductory class on the ADA and universal design .
-He was consulting on some transportation projects , including the bus terminal at the Transbay Transit Center , and looking ahead to another year of piecework .
-When he got an email from Lorenz inviting him to bid on her project , "it was out of the blue , " recalls Downey .
+<START:person> Downey <END> had just wrapped up a semester guest-lecturing at <START:organization> Berkeley <END> 's <START:organization> School of Architecture <END> , where he teaches an introductory class on the ADA and universal design .
+He was consulting on some transportation projects , including the bus terminal at the <START:location> Transbay Transit Center <END> , and looking ahead to another year of piecework .
+When he got an email from <START:person> Lorenz <END> inviting him to bid on her project , "it was out of the blue , " recalls <START:person> Downey <END> .
 At first he assumed that she wanted him to bid as part of a team with another architect .
 But as he examined the email more closely , he realized he was the only one on it .
 " I was like , ' Wait a minute , '" he recalls , " 'it 's addressed to me ! ' "
-As a consultant , Downey did n't have a full-services architecture firm behind him , and there was n't time to start one .
-He called Ashdown , an old colleague at the San Francisco firm Holt Henshaw , where he had worked in the '90s .
-For a few years in the 2000s , they ran a firm together , Ashdown Downey Architecture and Design .
-They formed a team , with Downey as the lead architect .
-Ashdown , the architect of record , would handle the construction documentation and sign off on the drawings .
-Lorenz and her staff interviewed three teams .
-" Chris and Dwight charmed everyone , " she says .
-When Downey and Ashdown won the project , they inherited the prior architect 's floor plan .
+As a consultant , <START:person> Downey <END> did n't have a full-services architecture firm behind him , and there was n't time to start one .
+He called <START:person> Ashdown <END> , an old colleague at the <START:location> San Francisco <END> firm <START:organization> Holt Henshaw <END> , where he had worked in the '90s .
+For a few years in the 2000s , they ran a firm together , <START:organization> Ashdown Downey Architecture and Design <END> .
+They formed a team , with <START:person> Downey <END> as the lead architect .
+<START:person> Ashdown <END> , the architect of record , would handle the construction documentation and sign off on the drawings .
+<START:person> Lorenz <END> and her staff interviewed three teams .
+" <START:person> Chris <END> and <START:person> Dwight <END> charmed everyone , " she says .
+When <START:person> Downey <END> and <START:person> Ashdown <END> won the project , they inherited the prior architect 's floor plan .
 The conference room and reception area sat side by side in the storefront ; in the back , an open office area was ringed by private offices .
 That layout set the center up to profit from its location next to Moscone—they plan to rent out the conference room for meetings—but it also meant that most of the center 's daily activities would stay hidden from the street .
 Passersby who happened to look in would see , most of the time , an empty conference room and a reception area staffed by one or two people .
 Not much daylight would reach the workstations in the rear .
-" I was really obsessed with finding a way to get light and views back into the office , " says Downey .
-He 's sitting at a large table at the office space he rents on Annie Alley in downtown San Francisco .
+" I was really obsessed with finding a way to get light and views back into the office , " says <START:person> Downey <END> .
+He 's sitting at a large table at the office space he rents on <START:location> Annie Alley <END> in downtown <START:location> San Francisco <END> .
 When he works on his laptop , he keeps one earbud in to listen to his computer 's audible interface .
 The interface works with anything text-based—email , word processing , PowerPoint—but it ca n't help him draw in CAD programs .
-Downey needed something tactile to work with , and he found it in a kids ' toy .
-Spread out before him on the table are stacks of embossed plans like the one in Lorenz 's office , but these are marked up with brightly colored wax sticks .
+<START:person> Downey <END> needed something tactile to work with , and he found it in a kids ' toy .
+Spread out before him on the table are stacks of embossed plans like the one in <START:person> Lorenz <END> 's office , but these are marked up with brightly colored wax sticks .
 Straight out of the box , the sticks are long and thin , like rigid threads of licorice .
-Downey had run across them in his former life , when a waitress handed a packet to his son in lieu of crayons .
+<START:person> Downey <END> had run across them in his former life , when a waitress handed a packet to his son in lieu of crayons .
 But he only learned of their application as a drawing tool in 2009 , the year after he lost his sight .
-That summer he served as a mentor for blind high schoolers in an introductory architecture course put on by the National Federation of the Blind .
-Architecture professors from the University of Maryland , College Park , had the students applying wax sticks to paper to create drawings and three-dimensional forms .
-The sticks warm to the touch and bend easily ; they can make precise angles , and—crucially for Downey—their tackiness makes them stick to paper .
+That summer he served as a mentor for blind high schoolers in an introductory architecture course put on by the <START:organization> National Federation of the Blind <END> .
+Architecture professors from the <START:organization> University of Maryland , College Park <END> , had the students applying wax sticks to paper to create drawings and three-dimensional forms .
+The sticks warm to the touch and bend easily ; they can make precise angles , and—crucially for <START:person> Downey <END>—their tackiness makes them stick to paper .
 " Once I realized that , I thought , ' Oh , I could use that to draw on top of an embossed drawing . '"
 Suddenly , he had a way not just to read , but to make .
-Downey uses the wax sticks as an informal tool for sketching on top of working plans .
-Once he has something he wants to bring to Lorenz , he snaps a photo with his phone—the shot is always a guess , but often there 's someone on hand to frame it up —and emails it to Ashdown .
-Ashdown edits the computer file , which Downey can then print with the embosser .
+<START:person> Downey <END> uses the wax sticks as an informal tool for sketching on top of working plans .
+Once he has something he wants to bring to <START:person> Lorenz <END> , he snaps a photo with his phone—the shot is always a guess , but often there 's someone on hand to frame it up —and emails it to <START:person> Ashdown <END> .
+<START:person> Ashdown <END> edits the computer file , which <START:person> Downey <END> can then print with the embosser .
 The drawing in front of him indicates the reception desk with a red and yellow chevron .
-It also reflects the change Downey made to get light and views into the back of the ILRC office .
+It also reflects the change <START:person> Downey <END> made to get light and views into the back of the <START:organization> ILRC <END> office .
 He rejiggered the floor plan so that the open office area in the rear backs straight up onto the conference room .
 He added a big window between the two , and brought the sill low enough that people moving around the office in wheelchairs could see out—and also be seen from the street .
 " To me it was important that you see people with disabilities working inside , " he says .
-Lorenz and Downey found themselves in the ironic situation of making visual decisions that everyone but them would be able to see .
-For Lorenz , who has been blind since birth , ceilings were hard to wrap her mind around .
+<START:person> Lorenz <END> and <START:person> Downey <END> found themselves in the ironic situation of making visual decisions that everyone but them would be able to see .
+For <START:person> Lorenz <END> , who has been blind since birth , ceilings were hard to wrap her mind around .
 " Honestly , if you 've never seen a ceiling , it 's not really something people go around describing to you , " she says .
-Downey made Lorenz a tactile drawing to illustrate the different ceiling finishes and changing heights , which follow the logic of the office layout .
+<START:person> Downey <END> made <START:person> Lorenz <END> a tactile drawing to illustrate the different ceiling finishes and changing heights , which follow the logic of the office layout .
 A low wood-slat ceiling at the entrance fans into the reception area at a rakish angle , offering a warm ( and higher-dollar ) flourish where it counts .
 Then the ceiling lifts and opens up to the mechanical conduits—which are painted white—to make the most of the available volume .
 In the back , the perimeter offices have drop ceilings , and the ceiling over the staff workstations is open .
-Downey brought Lorenz samples of the wood slat ceiling to feel .
-" I felt like a ceiling expert , " says Lorenz .
-" Chris was able to break it down for me in a way that was really understandable .
+<START:person> Downey <END> brought <START:person> Lorenz <END> samples of the wood slat ceiling to feel .
+" I felt like a ceiling expert , " says <START:person> Lorenz <END> .
+" <START:person> Chris <END> was able to break it down for me in a way that was really understandable .
 I do n't want to make a decision that I do n't understand .
 I 'm way too type A for that . "
-On the last Saturday of July , the new Independent Living Resource Center opened its doors .
+On the last Saturday of July , the new <START:organization> Independent Living Resource Center <END> opened its doors .
 With yellow walls and polished concrete floors , it 's lighter and brighter than the old space .
-( Downey recused himself from the color discussion , enlisting Rosa Downey to handle the color palette . )
+( <START:person> Downey <END> recused himself from the color discussion , enlisting Rosa <START:person> Downey <END> to handle the color palette . )
 The receptionist , who is blind , greets everyone who walks in , so that visitors who have visual impairments have an audible target to approach .
-With an office of this size and floor plan—a very legible progression of boxes—Downey did n't need to build in the kinds of wayfinding cues , such as changes in the floor texture , that would be necessary in a larger building .
-" Not that I 'd be so bold as to say no one will ever get confused in there , " Downey says , " but it 's a pretty straightforward floor plan , and where it 's not there 's somebody there to intercede . "
-When Downey walks through the center , he conjures a mental image of the space he designed .
-But compared with a crisp memory from his sighted days , the ILRC will always have the hazy edges of an approximation .
+With an office of this size and floor plan—a very legible progression of boxes—<START:person> Downey <END> did n't need to build in the kinds of wayfinding cues , such as changes in the floor texture , that would be necessary in a larger building .
+" Not that I 'd be so bold as to say no one will ever get confused in there , " <START:person> Downey <END> says , " but it 's a pretty straightforward floor plan , and where it 's not there 's somebody there to intercede . "
+When <START:person> Downey <END> walks through the center , he conjures a mental image of the space he designed .
+But compared with a crisp memory from his sighted days , the <START:organization> ILRC <END> will always have the hazy edges of an approximation .
 " I recognize it as my perception of the space , and it 's been confirmed by my experience feeling the space , but I do n't have that visual confirmation , " he says .
 " It 's hard for me to put it together with the same degree of clarity and absoluteness with all the colors and things in my mind .
 With it comes some degree of a question . "
-For now , Downey 's ability to do his job rests on the whims of the adaptive technology industry .
+For now , <START:person> Downey <END> 's ability to do his job rests on the whims of the adaptive technology industry .
 The manufacturer of his embossing printer , ViewPlus , recently discontinued the product .
-" I'll have to go on eBay and buy up all the printers I can find , " says Downey .
+" I'll have to go on eBay and buy up all the printers I can find , " says <START:person> Downey <END> .
 " There are n't too many of them out there . "
 But the profession as a whole is acquiring new tools for visual accessibility .
-In June , Downey flew to Minneapolis to join researchers working on rendering software that will simulate the effects of poor vision .
-The project , called Designing Visually Accessible Spaces ( DEVA ) , aims to create a filter that would allow architects to " see " what their designs would look like from behind different sets of eyes .
+In June , <START:person> Downey <END> flew to Minneapolis to join researchers working on rendering software that will simulate the effects of poor vision .
+The project , called <START:organization> Designing Visually Accessible Spaces <END> ( DEVA ) , aims to create a filter that would allow architects to " see " what their designs would look like from behind different sets of eyes .
 With that kind of knowledge , design teams could evaluate lighting and color schemes for potential hazards .
-The initiative , led by University of Minnesota psychology professor Gordon Legge , is in its early stages , but the team recently received a second round of funding from the National Institutes of Health .
-DEVA could ultimately create a bridge between scientific research into visual impairment and the architects who can make use of that research in the real world , Downey says .
+The initiative , led by University of Minnesota psychology professor <START:person> Gordon Legge <END> , is in its early stages , but the team recently received a second round of funding from the <START:organization> National Institutes of Health <END> .
+<START:organization> DEVA <END> could ultimately create a bridge between scientific research into visual impairment and the architects who can make use of that research in the real world , <START:person> Downey <END> says .
 " It 's a tool where people who can make a difference could make a difference . "
 · Curbed Features archive [Curbed ]

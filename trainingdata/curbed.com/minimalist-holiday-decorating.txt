@@ -22,4 +22,4 @@ Here now , 10 examples of minimalist holiday decor ideas that took a turn for th
 [ link ]
 ↑ Heartbreaking .
 [ link ]
-· All Holiday Trimmings posts [Curbed National ]
+· All Holiday Trimmings posts <START:organization> [Curbed National <END> ]

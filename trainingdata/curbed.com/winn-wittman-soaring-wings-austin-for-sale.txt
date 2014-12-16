@@ -1,14 +1,14 @@
 http://curbed.com/archives/2014/12/15/winn-wittman-soaring-wings-austin-for-sale.php
 Have a nomination for a jaw-dropping listing that would make a mighty fine House of the Day ? Get thee to the tipline and send us your suggestions .
 We 'd love to see what you 've got .
-Location : West Lake Hills , Texas Price : $ 6,500,000 The Skinny : Architect Winn Wittman once called the 6,100-square-foot Soaring Wings house of West Lake Hills , Texas , the project that "literally almost killed me . "
+Location : <START:location> West Lake Hills , Texas <END> Price : $ 6,500,000 The Skinny : Architect <START:person> Winn Wittman <END> once called the 6,100-square-foot <START:location> Soaring Wings <END> house of <START:location> West Lake Hills , Texas <END> , the project that "literally almost killed me . "
 While managing the four-year construction of the home , which wrapped up in 2007 , he fell off a rock wall and broke his back .
-Wittman made a full recovery , and his work payed off pretty quickly , when the house sold just three months after completion .
-" Our plan was to build our own home , " one of the buyers told Architectural Record , " but when I walked in this one I felt spiritually connected to it instantly .
+<START:person> Wittman <END> made a full recovery , and his work payed off pretty quickly , when the house sold just three months after completion .
+" Our plan was to build our own home , " one of the buyers told <START:organization> Architectural Record <END> , " but when I walked in this one I felt spiritually connected to it instantly .
 The quality and the craftsmanship are so high , and so specific , it seemed absurd that it was a spec house . "
-Located just a short drive from downtown Austin , the home is connected to the locale by 45,000 pounds of red iron and 17,000 pounds of locally quarried shellstone .
-( Other materials include pink Arizona sandstone , ipe wood , hand-seamed copper panels , and a " special concrete mixed with orange slice candy and gummi bears . " )
+Located just a short drive from downtown <START:location> Austin <END> , the home is connected to the locale by 45,000 pounds of red iron and 17,000 pounds of locally quarried shellstone .
+( Other materials include pink <START:location> Arizona <END> sandstone , ipe wood , hand-seamed copper panels , and a " special concrete mixed with orange slice candy and gummi bears . " )
 A two-story glass-and-steel bridge connects the four-bedroom private volume to the public one , which contains living , dining , and entertaining spaces .
 Listed for $ 6.5M , it also comes with a saltwater pool , a long list of energy-saving features , a wine cellar , and a 3,200 pound granite bath tub .
-Also , according to the listing , part of Terrance Malick 's upcoming film Knight of Cups was shot inside .
-· 202 Red Bud Trail [ Keller Williams ]
+Also , according to the listing , part of <START:person> Terrance Malick <END> 's upcoming film <START:organization> Knight of Cups <END> was shot inside .
+· <START:location> 202 Red Bud Trail <END> [ <START:organization> Keller Williams <END> ]
