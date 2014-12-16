@@ -1,0 +1,27 @@
+http://dealbook.nytimes.com/2013/11/13/redfin-raises-50-million-in-latest-financing-round
+While the online home information space may be crowded , investors seem to believe that <START:organization> Redfin <END> has a good chance of standing out .
+<START:organization> Redfin <END> , an online real estate brokerage , has raised $ 50 million in a new round of mezzanine capital , led by <START:organization> Tiger Global Management <END> and <START:organization> T. Rowe Price <END> .
+Five existing investors , including <START:organization> Greylock Partners <END> and <START:organization> DFJ Venture Capital <END> , also participated .
+It is the latest bet that <START:organization> Redfin <END> , which combines home listings data with its own army of brokers , can shake up the traditional business of buying and selling property .
+The company ’s approach differs from more prominent competitors like <START:organization> Zillow <END> and <START:organization> Trulia <END> , which focus more on being repositories of real estate information .
+<START:organization> Redfin <END> , which is 11 years old , now operates in 22 markets throughout the country , including <START:location> Boston <END> , <START:location> New York <END> , <START:location> Chicago <END> , <START:location> Miami <END> and its hometown of <START:location> Seattle <END> .
+The chief executive of the company , <START:person> Glenn Kelman <END> , said in an interview that its approach was closer to that of the car service <START:organization> Uber <END> or the home rental network <START:organization> Airbnb <END> : connecting customers to tangible goods through Internet-based technology .
+( By his own admission , the business is “very bizarre ” in that it is both a software company and a real estate brokerage . )
+“It’s the idea that software companies can go into the real world and reinvent it , ” he said .
+It’s an approach that took some time to build up steam .
+In <START:organization> Redfin’s <END> early days , executives had a hard time persuading would-be investors to take the risk of backing the company , <START:person> Mr. Kelman <END>  said .
+“The business takes time to scale , which made early-stage investors wary , ” <START:person> Mr. Kelman <END>  said .
+“ But <START:organization> Tiger <END> and <START:organization> T. Rowe <END> could see great scale here . ”
+The company has grown significantly since its founding .
+It is expected to be report positive earnings before interest , taxes , depreciation and amortization , as well as annual revenue growth of more than 50 percent .
+Now with the additional financing , <START:organization> Redfin <END> plans to invest more in technology development , potentially even at a pace that outstrips revenue growth .
+And with the public markets welcoming technology darlings like Twitter , a public offering could be in the company ’s future .
+During the fund-raising process for the most recent round , an investor asked <START:person> Mr. Kelman <END>  who would potentially buy <START:organization> Redfin <END> .
+According to <START:person> James Slavet <END> of <START:organization> Greylock <END> , <START:person> Mr. Kelman <END> smiled and said “Nobody . ”
+“There aren’t natural kinds of buyers , ” <START:person> Mr. Slavet <END> added .
+“ I think ultimately <START:organization> Redfin <END> can be a public company . ”
+But <START:person> Mr. Kelman <END>  added that there was no pressure to go public soon , even as stock markets are soaring , pushing up company valuations .
+Both <START:organization> Tiger <END> and <START:organization> T. Rowe <END> have indicated that they are not looking for an offering anytime soon , instead asking what <START:organization> Redfin <END> plans to do to improve its customer service .
+“ I don’t feel the pressure , ” he said .
+“I’m not going to sell my shares in the company when the lockup ends .
+It makes me less focused on the timing . ”

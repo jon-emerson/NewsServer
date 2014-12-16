@@ -1,0 +1,63 @@
+http://www.nytimes.com/2014/08/21/fashion/at-burning-man-the-tech-elite-one-up-one-another.html
+There are two disciplines in which <START:location> Silicon Valley <END> entrepreneurs excel above almost everyone else .
+The first is making exorbitant amounts of money .
+The second is pretending they don’t care about that money .
+To understand this , let’s enter into evidence Exhibit A: the annual <START:organization> Burning Man <END> festival in <START:location> Black Rock City , Nev. <END>
+If you have never been to <START:organization> Burning Man <END> , your perception is likely this : a white-hot desert filled with 50,000 stoned , half-naked hippies doing sun salutations while techno music thumps through the air .
+A few years ago , this assumption would have been mostly correct .
+But now things are a little different .
+Over the last two years , <START:organization> Burning Man <END> , which this year runs from Aug. 25 to Sept. 1 , has been the annual getaway for a new crop of millionaire and billionaire technology moguls , many of whom are one-upping one another in a secret game of I-can-spend-more-money-than-you-can and , some say , ruining it for everyone else .
+Some of the biggest names in technology have been making the pilgrimage to the desert for years , happily blending in unnoticed .
+These include <START:person> Larry Page <END> and <START:person> Sergey Brin <END> , the <START:organization> Google <END> founders , and <START:person> Jeff Bezos <END> , chief executive of <START:organization> Amazon <END> .
+But now a new set of younger rich techies are heading east , including <START:person> Mark Zuckerberg <END> of <START:organization> Facebook <END> , employees from <START:organization> Twitter <END> , <START:organization> Zynga <END> and <START:organization> Uber <END> , and a slew of khaki-wearing venture capitalists .
+Before I explain just how ridiculous the spending habits of these baby billionaires have become , let’s go over the rules of <START:organization> Burning Man <END> : You bring your own place to sleep ( often a tent ) , food to eat ( often ramen noodles ) and the strangest clothing possible for the week ( often not much ) .
+There is no Internet or cell reception .
+While drugs are technically illegal , they are easier to find than candy on Halloween .
+And as for money , with the exception of coffee and ice , you cannot buy anything at the festival .
+Selling things to people is also a strict no-no .
+Instead , Burners ( as they are called ) simply give things away .
+What’s yours is mine .
+And that often means everything from a meal to saliva .
+In recent years , the competition for who in the tech world could outdo who evolved from a need for more luxurious sleeping quarters .
+People went from spending the night in tents , to renting R.V.s , to building actual structures .
+“We used to have R.V.s and precooked meals , ” said a man who attends <START:organization> Burning Man <END> with a group of <START:location> Silicon Valley <END> entrepreneurs .
+( He asked not to be named so as not to jeopardize those relationships . )
+“Now , we have the craziest chefs in the world and people who build yurts for us that have beds and air-conditioning . ”
+He added with a sense of amazement , “Yes , air-conditioning in the middle of the desert ! ”
+His camp includes about 100 people from the <START:location> Valley <END> and <START:location> Hollywood <END> start-ups , as well as several venture capital firms .
+And while dues for most non-tech camps run about $ 300 a person , he said his camp’s fees this year were $ 25,000 a person .
+A few people , mostly female models flown in from <START:location> New York <END> , get to go free , but when all is told , the weekend accommodations will collectively cost the partygoers over $ 2 million .
+This is drastically different from the way most people experience the event .
+When I attended <START:organization> Burning Man <END> a few years ago , we slept in tents and a <START:organization> U-Haul <END> moving van .
+We lived on cereal and beef jerky for a week .
+And while <START:organization> Burning Man <END> was one of the best experiences of my life , using the public <START:organization> Porta-Potty <END> toilets was certainly one of the most revolting experiences thus far .
+But that ’s what makes <START:organization> Burning Man <END> so great : at least you’re all experiencing those gross toilets together .
+That is , until recently .
+Now the rich are spending thousands of dollars to get their own luxury restroom trailers , just like those used on movie sets .
+“Anyone who has been going to <START:organization> Burning Man <END> for the last five years is now seeing things on a level of expense or flash that did n’t exist before , ” said <START:person> Brian Doherty <END> , author of the book “ This Is <START:organization> Burning Man <END> . ”
+“It does have this feeling that , ‘ Oh , look , the rich people have moved into my neighborhood . ’
+It’s gentrifying . ”
+For those with even more money to squander , there are camps that come with “Sherpas , ” who are essentially paid help .
+<START:person> Tyler Hanson <END> , who started going to <START:organization> Burning Man <END> in 1995 , decided a couple of years ago to try working as a paid Sherpa at one of these luxury camps .
+He described the experience this way : Lavish R.V.s are driven in and connected together to create a private forted area , ensuring that no outsiders can get in .
+The rich are flown in on private planes , then picked up at the <START:organization> Burning Man <END> airport , driven to their camp and served like kings and queens for a week .
+( Their meals are prepared by teams of chefs , which can include sushi , lobster boils and steak tartare — yes , in the middle of 110-degree heat . )
+“Your food , your drugs , your costumes are all handled for you , so all you have to do is show up , ” <START:person> Mr. Hanson <END> said .
+“ In the camp where I was working , there were about 30 Sherpas for 12 attendees . ”
+<START:person> Mr. Hanson <END> said he won’t be going back to <START:organization> Burning Man <END> anytime soon .
+The Sherpas , the money , the blockaded camps and the tech elite were too much for him .
+“The tech start-ups now go to <START:organization> Burning Man <END> and eat drugs in search of the next greatest app , ” he said .
+<START:organization> “Burning Man <END> is no longer a counterculture revolution .
+It’s now become a mirror of society . ”
+Strangely , the tech elite won’t disagree with <START:person> Mr. Hanson <END> about it being a reflection of society .
+This year at the premiere of the <START:organization> HBO <END> show “Silicon Valley , ” <START:person> Elon Musk <END> , an entrepreneur who was a founder of PayPal , complained that Mike Judge , the show’s creator , did n’t get the tech world because — wait for it — he had not attended the annual party in the desert .
+“ I really feel like <START:person> Mike Judge <END> has never been to <START:organization> Burning Man <END> , which is <START:location> Silicon Valley <END> , ” <START:person> Mr. Musk <END> said to a <START:organization> Re/Code <END> reporter , while using a number of expletives to describe the festival .
+“If you have n’t been , you just don’t get it . ”
+Non-tech Burners who have been may “get it ” but don’t like all this excess , and are starting to push back .
+This month , the <START:organization> Key Group <END> , a Swiss luxury concierge service , announced that it would be offering a <START:organization> Burning Man Concierge Service <END> that seemed more like a cruise liner vacation than a week in the dusty desert .
+( The company did not respond to a request for comment . )
+Among the dozens of options offered by the <START:organization> Key <END> , there is the “establishment of a camp with electricity , water and satellite Internet Wi-Fi connection , ” “cooks and fresh buffets for every meal” and — not a small task by any means given the distance from the real world — the “possibility of ordering goods and products from outside <START:location> Black Rock City <END> every day . ”
+When the website <START:organization> Burners .me <END> , which blogs about the festival , posted a link to the <START:organization> Key’s <END> site , the <START:organization> Burning Man <END> community seemed generally confused as to whether such extravagance was actually real or if someone was playing a joke .
+When it turned out to be quite real , people railed against the service , and the <START:organization> Key <END> removed the <START:organization> Burning Man <END> concierge option from its site .
+Of course , you won’t likely see pictures on <START:organization> Instagram <END> or <START:organization> Facebook <END> of the $ 2 million camps , chef-cooked meals , the Sherpa helpers and concierge services , or private and pristine toilets .
+That would mean that the tech elite actually cared about money — which would just go against the entire <START:organization> Burning Man <END> spirit .

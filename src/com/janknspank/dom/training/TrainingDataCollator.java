@@ -89,6 +89,10 @@ public class TrainingDataCollator {
         relevantTokens.add(token);
       }
     }
+    if (depth != 0) {
+      throw new ValidationException("<START> has no <END> to match!\n" +
+          "Line: " + line + "\n" + "In file: " + getFilePath(file));
+    }
     return Joiner.on(" ").join(relevantTokens);
   }
 

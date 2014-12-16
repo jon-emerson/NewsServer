@@ -1,0 +1,36 @@
+http://www.nytimes.com/2013/05/08/business/energy-environment/kewaunee-nuclear-power-plant-shuts-down.html
+<START:location> WASHINGTON <END> — The <START:organization> Kewaunee <END> nuclear power plant in <START:location> Wisconsin <END> shut down for the last time on Tuesday , but it is preparing to break new ground for the American nuclear industry .
+It may go to sleep , Snow White-style , for 50 years , to be awakened when its radioactivity has subsided .
+Or it may be dismantled in the next decade or so .
+In either case , the responsibility and the expense , probably near $ 1 billion , will be borne for the first time by a for-profit company , not a regulated utility .
+The <START:organization> Kewaunee <END> plant , which opened in 1974 , was sold in 2005 to <START:organization> Dominion <END> , based in <START:location> Richmond , Va. <END> , by its owners , the <START:organization> Wisconsin Public Service Corporation <END> and <START:organization> Wisconsin Power and Light <END> .
+In the past , the lengthy decommissioning process that nuclear power requires was in the hands of local companies , which have had the option to go to a public service commission and ask for a rate increase to pay for the job if it proved unexpectedly difficult .
+But <START:organization> Kewaunee <END> was a “merchant ” plant , a sort of free agent on the grid , selling its electricity on contract , at a price set by the market , not by the government .
+<START:organization> Dominion <END> says it has reserved enough money to do the job , and a big enough bank account if the reserve fund does not suffice .
+So far , the <START:organization> Nuclear Regulatory Commission <END> agrees , although a commission expert said the actual budget was open to question .
+But “when you try to do any of these calculations beyond seven years , I’ll be frank with you , ” said <START:person> Michael Dusaniwskyj <END> , an economist with the commission .
+“It’s a shot in the dark . ”
+The variables for <START:organization> Kewaunee <END> , which is about 35 miles southeast of <START:location> Green Bay <END> , include the amount it can win in a legal dispute with the Energy Department , which was supposed to start taking away the spent fuel more than a decade ago but will not begin doing so for many years to come .
+Other factors are the scrap value of the tons of steel and copper in its equipment and structure , and the rate of return it can earn , above inflation , on the $ 578 million reserve Dominion has set aside .
+Three <START:location> Wisconsin <END> state agencies said they had had no jurisdiction since the public service commission approved the sale of <START:organization> Kewaunee <END> eight years ago .
+That does not mean that no one is concerned .
+“It’s a strange situation for sure , for <START:location> Wisconsin <END> , which has very little to do with a decision made by another entity , and it ’s going to be around for another 60 years , ” said <START:person> Charles Higley <END> , the director of the <START:organization> Citizens Utility Board <END> , a nonprofit agency that seeks to represent residential consumers , farmers and small businesses before the public service commission .
+But the chief nuclear officer of <START:organization> Dominion <END> , <START:person> David A. Heacock <END> , said his company projected that the money on hand would be enough , even before recovering money from the <START:organization> Energy Department <END> , which it estimates could amount to $ 350 million , or the income from the sale of scrap metal .
+Still , the retirement comes at a time of rapid cost inflation .
+Last month , <START:person> Mr. Dusaniwskyj <END> told stock analysts in a conference call organized by UBS Investment Research that the utilities ’ estimate of the cost of decommissioning was rising 8 to 9 percent a year , pushed by the cost of burying the lightly contaminated concrete and steel .
+That cost could change markedly in coming years , depending on whether more low-level radioactive waste dumps open .
+Representative <START:person> Edward J. Markey <END> , a <START:location> Massachusetts <END> Democrat , said in a letter sent to the <START:organization> Nuclear Regulatory Commission <END> on Monday that several reactor owners had recently filed documents with the <START:organization> Securities and Exchange Commission <END> .
+Those documents indicated that their plants were worth far less than previously assumed , since the market price of the electricity they produced had dropped sharply because of low natural gas prices .
+( That is what made <START:organization> Kewaunee <END> unprofitable . )
+Earlier this year , he pointed out , the owners of the <START:organization> Crystal River 3 <END> plant in <START:location> Florida <END> decided to retire it rather than repair its containment structure , because of unfavorable economics .
+Industry experts say that several reactors are operating at a loss while their owners wait for the glut of natural gas to disappear .
+How long that will be , and how many will last , is not clear .
+“Once these old nuclear reactors shut down — as we’re seeing now — it will take 60 years and hundreds of millions of dollars to decontaminate them , ” <START:person> Mr. Markey <END> said in a statement .
+“ Taxpayers should have assurances that these nuclear relics don’t outlive their corporate owners and their ability to fund nuclear cleanup costs , leaving ordinary Americans to foot the bill . ”
+The concern is relatively new because in the past , reactors were locally owned , so their economic benefits — or their costs — accrued for a population that a utility could appeal to for money if it ran short .
+<START:person> Mr. Heacock <END> noted , however , that this was never assured .
+A public service commission might tell such a utility , “you collected the money already , you figure out how to make it work , or go to your shareholders for the difference , ” he said .
+<START:organization> Dominion <END> filed plans in February to shut down the reactor .
+<START:person> Mr. Heacock <END> said that the experience of another company , <START:organization> Energy Solutions <END> , which is decommissioning <START:organization> Commonwealth Edison’s <END> old Zion reactors north of <START:location> Chicago <END> , was that it might be cheaper to do the job in the next decade or so .
+Decommissioning <START:organization> Kewaunee <END> will require equipment that is available now , and also human skills , including the intimate knowledge gained by workers who have been at the site for years .
+“After 10 years , people knowledgeable about the plant were no longer around , ” he said of the Zion reactors .

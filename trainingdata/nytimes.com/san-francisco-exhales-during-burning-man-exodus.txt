@@ -1,0 +1,36 @@
+http://bits.blogs.nytimes.com/2014/08/31/san-francisco-exhales-during-burning-man-exodus/
+<START:location> SAN FRANCISCO <END> — As the annual <START:organization> Burning Man <END> festival wrapped up over the holiday weekend , thousands of weary festivalgoers were somewhere in <START:location> Nevada <END> packing up yurts , washing off body paint and dreading their eventual re-entry to the real world .
+Here , particularly in the city ’s rapidly gentrifying <START:location> Mission District <END> , their neighbors were dreading something else : the moment the “Burners ” come home .
+Over the last few years , <START:organization> Burning Man <END> — the mass camping trip/rave that participants have deemed indescribable to anyone who has n’t attended – - has become a veritable staycation for San Franciscans who don’t attend .
+They say restaurants have more tables , parking spots are plentiful and yoga classes are extra chill .
+Wednesday afternoon , the No. 1 story on <START:organization> Eater SF <END> , a website about the local culinary scene , was titled “ <START:location> SF <END> Tables Worth Snagging During the <START:organization> Burning Man <END> Exodus . ”
+<START:person> Allie Pape <END> , the story ’s author , said the site did the same feature last year as well .
+“My co-editor and I were joking about this is probably the week we should go to these ( restaurants ) .
+And we were like ‘If we’re going to do this , why don’t we make a list ? ’
+I have no scientific proof that reservations go down , but it ’s pop wisdom in <START:location> San Francisco <END> that anything is easier this week : The bars are less crowded , it ’s easier to park . ”
+Sadly , it ’s not clear if there actually is scientific proof to support the <START:organization> Burning Man <END> exodus .
+The event is big – - it has attracted as many as 70,000 people – - but even if half of those came from <START:location> San Francisco <END> ( which seems unlikely ) , that would be a tiny portion of the city ’s 837,000 residents .
+At <START:organization> The New York Times <END> ’s request , data scientists from the reservation service OpenTable played with reams of <START:location> San Francisco <END> reservation data to see if there was a <START:organization> Burning Man <END> lull , but could n’t find much .
+But people in the <START:location> Mission <END> swear their neighborhood cleared out for the week .
+The <START:location> Mission <END> is heavily populated with young tech workers .
+On weekday mornings , fleets of private tech buses makes non-tech residents feel as if they live next to a high-end <START:organization> Greyhound <END> station .
+At 5 p.m. on Monday , <START:person> Ben Thorne <END> , owner of <START:organization> Sneaky’s BBQ <END> , a catering service that does weekly ‘pop-ups ’ around <START:location> San Francisco <END> , parked right in front of the bar where he was serving his food that evening — a rare parking find that any Manhattanite could appreciate .
+He spent the rest of the night dishing up Carolina-style pulled pork , ribs and chicken wings to an underwhelming number of people .
+<START:person> Jed Kolko <END> , the chief economist for <START:organization> Trulia <END> , a real estate site that is in the process of being acquired by <START:organization> Zillow <END> , had just that kind of crowd in mind when he dropped by .
+“A barbecue popup in a hip bar : I figured it would be empty this week , ” said <START:person> Mr. Kolko <END> .
+“No wait for some of the best chicken wings I’ve ever had . ”
+Business has also been slow at the <START:organization> Monk’s Kettle <END> , a small but always-packed restaurant that specializes in craft beers .
+It’s the sort of place that does n’t serve <START:organization> Budweiser <END> but does serve a $ 15 burger that comes with “onion jam . ”
+In normal times , even on weekdays , it routinely takes an hour to get a table at the <START:organization> Monk’s Kettle <END> .
+And seven nights a week , locals continue to drink hoppy , high-powered beers until bartenders cut them off and start flicking the lights .
+But not last week .
+The regular crowd of beer aficionados were gone , and in their place were tourists and newbies who were usually deterred by crowds .
+“With <START:organization> Burning Man <END> we kind of see a mass exodus of a lot of regulars from the <START:location> Mission <END> area and we’ll get a little bit of a lull , but then all of a sudden we have these people we’ve never seen .
+Almost half the business we’ve had this week are people who have never been in before , ” said <START:person> Adam Dulye <END> , the chef/owner of the <START:organization> Monk’s Kettle <END> and the nearby <START:organization> Abbot’s Cellar <END> .
+“People will walk into the bar and order a martini or a Manhattan and it ’s like ‘Uhh , we have beer . '”
+Also unlike the regulars , they leave before the bar’s 2 a.m.
+closing time .
+“After 12:30 last night , the only two people in the restaurant were the people in the kitchen , the bartender , and the manager .
+There was no one drinking a beer at 12:45 last night , ” said <START:person> Mr. Dulye <END> on Wednesday .
+“We should do like a <START:organization> Burning Man <END> beer that ’s not at <START:organization> Burning Man <END> , just to drive business .
+‘Did n’t go to <START:organization> Burning Man <END> ? Come get this beer . ’”

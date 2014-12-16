@@ -138,7 +138,8 @@ public class Node {
    * Returns true if this Node matches the passed search string.  E.g. if
    * this node is a div, and the search string is "div", this returns true.
    * Also, if this node has class "hello", and the search string is ".hello",
-   * this also returns true.  Lastly, "#foo" matches id="foo".
+   * this also returns true.  Lastly, "#foo" matches id="foo", and "p.foo"
+   * matches paragraphs with class="foo".
    */
   private boolean matchesSearchStr(String searchStr) {
     // Make sure parsing happened before this and we're only comparing one
@@ -151,6 +152,11 @@ public class Node {
       return Iterables.contains(getClasses(), searchStr.substring(1));
     } else if (searchStr.startsWith("#")) {
       return searchStr.substring(1).equals(getAttributeValue("id"));
+    } if (searchStr.contains(".")) {
+      String searchTag = searchStr.substring(0, searchStr.indexOf("."));
+      String searchClassName = searchStr.substring(searchStr.indexOf(".") + 1);
+      return tagName.equalsIgnoreCase(searchTag) &&
+          Iterables.contains(getClasses(), searchClassName);
     } else {
       // NOTE(jonemerson): Maybe some day be strict about case here.
       return tagName.equalsIgnoreCase(searchStr);

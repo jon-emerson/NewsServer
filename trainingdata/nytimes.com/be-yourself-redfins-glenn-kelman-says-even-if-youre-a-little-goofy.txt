@@ -1,0 +1,74 @@
+http://www.nytimes.com/2013/08/25/business/be-yourself-redfins-glenn-kelman-says-even-if-youre-a-little-goofy.html
+This interview with <START:person> Glenn Kelman <END> , chief executive of <START:organization> Redfin <END> , the online real estate site , was conducted and condensed by <START:person> Adam Bryant <END> .
+Q . What were some important early lessons for you ?
+A. Two things influenced me the most .
+I’m an identical twin , and I felt that with my twin brother , we sort of formed this unassailable force and it gave me the confidence to be different .
+Even if I was a goofball , my twin brother was a goofball with me , so I did n’t have to worry about fitting in as much .
+I was able to march to my own drummer .
+My parents were a big influence , too .
+My mother was a nurse , and my father was an engineer , but I just think they did n’t know how to fit in .
+Here’s just one example : We moved into this ritzy neighborhood in suburban <START:location> Seattle <END> for a little while .
+We were the only renters , and somebody came by to tell us that we had to mow the lawn , that there were these rules about how short the grass had to be .
+My dad decided that he was n’t ever going to mow the lawn .
+I just felt like we really did n’t fit in in a lot of different ways , and I was constantly in embarrassing situations because of things they did .
+At one point , my dad used a machete to mow or really just hack back our lawn .
+Eventually , I just decided that you could n’t die of shame and that I could do whatever I wanted to .
+It made me less risk-averse , and gave me this confidence that I could be myself .
+I think the corporate world is pretty starved for personality .
+The reason you have comic strips like <START:organization> “Dilbert <END> ” and sitcoms like <START:organization> “The Office <END> ” is that people just can’t be genuine human beings in a corporate environment .
+So if you can really be your own self , even if it ’s a little bit different , I think people are really drawn to that .
+Q . Did you always want to go into business ?
+A. I was sort of lost , because I wanted to study everything .
+At different points , I applied to graduate school .
+I got into medical school .
+I thought about being a writer .
+I thought about being an investment banker .
+I just did n’t know what I wanted to do with myself .
+I think the thing that best suits me about being a C.E.O. is that you get to exercise many different talents and wear many different hats .
+Q .
+So how did you get into the world of tech ?
+A. When I was trying to write a novel , I ran out of money , and I was delivering packages on a bicycle .
+And I finally connected with these guys who started a software company , and almost serendipitously fell into that .
+I felt like they were goofy guys and that I was a goofy guy .
+It was just a really interesting , harrowing environment .
+Q . How so ?
+A. I could hear them arguing in the conference room about whether I should be fired , and the C.E.O. would come out and tell me that a chain is only as strong as its weakest link , and God help you if you’re that link .
+I went home every night just convinced that I was the worst employee they had ever seen .
+It was a weird place , but it taught me to be tough , it taught me to be resourceful .
+I loved that job .
+Q .
+You were one of the founders of <START:organization> Plumtree Software <END> before you joined <START:organization> Redfin <END> .
+How did that happen ?
+A. I met these V.C.’s and connected with <START:organization> Redfin <END> , an early-stage company that had hit hard times .
+It was three guys in an apartment who put listings on a Web site .
+I was just the fourth guy in the apartment .
+I loved it .
+Q .
+You now have 800 employees .
+Tell me about your approach to leadership today .
+A. The main anxiety I have as an executive is making the shift as a start-up person to becoming an executive at a larger company .
+You worry that you need to change your behavior to match the new scale at the company , but you also worry that you don’t know what’s really going on , and that people are muttering , “Does <START:person> Kelman <END> have any idea how messed up this is ? ”
+The way you find out is to have lunch with people , or go on a long car ride with them or join the running club with them .
+But the most important thing you can do as an executive is to just ask the most basic question , which is , “ What should <START:organization> Redfin <END> be doing better ? ”
+People will say , “ I think it ’s great . ”
+But if you say to them , “Think about it , ” and then follow up with them , you’ll hear , “ Well , actually , this is really screwed up , and I think you need to fix it . ”
+Q . What else about your culture ?
+A. The main project I have at <START:organization> Redfin <END> is to unite two separate cultures — real estate agents and software engineers .
+One of the ways we do it is by having people do “A Day in the Life ” talks during our all-hands meetings , and they talk for 10 minutes about a typical day .
+Then you hear other people saying things like , “ I had no idea how hard it is to be a real estate agent . ”
+Q . How do you hire ?
+What are you looking for ?
+What questions do you ask ?
+A. Mostly what I’ve learned about it is , you can’t judge a book by its cover .
+It’s very hard in an interview when someone talks about their work to judge them .
+What you want is to have them do the work .
+So when I interview engineers , I give them a coding problem and I ask them to work through it .
+When I interview a marketing person , I say , “Write a press release , ” or , if you’re in P.R. , “Write a pitch . ”
+I want to see the actual quality of their work .
+The other thing that I look for is people who are beasts .
+I was a dishwasher once and I kept falling behind with all the dishes , and this guy in the kitchen yelled at me to get me going — “You’re an animal .
+You’re a beast . ”
+And I was just a very intellectual , effete kid — I was probably reading Proust at that point in my life — and that experience made me a lot grittier and tougher .
+If I have n’t found evidence that someone’s ever done anything hard in their lives , then I just don’t believe they’re suddenly going to be able to jump into a phone booth , come out wearing a cape and learn how to be tough on this job .
+I want to know about anything you ’ve done that ’s hard , really hard .
+So I tend to focus on that .

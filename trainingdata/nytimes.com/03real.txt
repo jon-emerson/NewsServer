@@ -1,0 +1,38 @@
+http://www.nytimes.com/2006/09/03/business/yourmoney/03real.html
+Seattle
+WHEN <START:person> David and Annette Wolf <END> decided that their family was outgrowing its <START:location> Seattle <END> area home , they also decided that they did not need much help finding a new one .
+They combed Internet listings of homes for sale until they spotted a four-bedroom house on a cul-de-sac with a three-car garage and 2.5 acres .
+But the seller’s agent refused to show it to them .
+Why would she turn away an eager buyer ?
+Not because of the <START:person> Wolfs <END> ’ race , creed or color .
+Instead , <START:person> Mr. Wolf <END> , a software engineering manager at the online directory <START:organization> InfoSpace <END> , said he and his wife were shunned once the agent learned they used an online broker called <START:organization> Redfin <END> .
+<START:person> Mr. Wolf <END> said they turned to <START:organization> Redfin <END> because it gives two-thirds of its sales commission ( which is usually 3 percent of the sale price ) to its customers .
+“ I did n’t want to pay 3 percent for the opening of a door , ” he said .
+But customers like <START:person> Mr. Wolf <END> — affluent and comfortable with the Internet — are a frightening prospect for real estate agents who , as a group , reap at least $ 60 billion a year in commission income .
+<START:organization> Redfin <END> and other innovators , including <START:organization> ZipRealty <END> and <START:organization> BuySideInc.com <END> , are using technology to reduce costs and to save time for their brokers .
+Agents don’t find and recommend homes — customers do that on their own , using Internet listings — and that enables agents to charge less for the services they do provide , chiefly handling the paperwork and negotiations .
+The Internet has radically changed the way consumers buy books and airline tickets , trade stock and learn news .
+But the real estate industry has resisted change — and protected its commission structure — by controlling the information on its <START:organization> Multiple Listing Service <END> database of properties for sale .
+“You can find out more on the Internet about an <START:organization> eBay <END> Beanie Baby than you can about a $ 1 million house , ” said Glenn Kelman , chief executive of <START:organization> Redfin <END> , a licensed broker in <START:location> Washington State <END> and <START:person> California <END> .
+The <START:organization> M.L.S. <END> is the only place that contains nearly all the homes for sale in a community .
+Only brokers can post there , but agents can also display selected information about a listing on their own Web sites and on Realtor.com , a site that works with the <START:organization> National Association of Realtors <END> .
+Traditional agents still firmly control the <START:organization> M.L.S. <END> , which allows all participating brokers , including <START:organization> Redfin <END> , to view almost every home for sale in a particular area , even those being offered through competitors ’ agencies .
+But the typical 6 percent commission , paid out of the seller’s proceeds and split between the seller’s and buyer’s agents , is under attack because , as economists note , it does not serve consumers well .
+Economists who have studied the current system say that it also does little for most agents — except for a few stars , whose impressive earnings give hope to the large majority of less-successful agents and thus encourage them to protect the status quo .
+Rivals on the Internet say they do this by refusing to cooperate with buyers using Web-based brokers and by denying <START:organization> M.L.S. <END> information to some online firms .
+THEY have not , as yet , fought back by reducing their commissions .
+And <START:person> Paul B. Goodrich <END> , the managing director of the <START:organization> Madrona Venture Group <END> in <START:location> Seattle <END> , an investor in <START:organization> Redfin <END> , says he thinks that they are unlikely ever to do so .
+“It will be hard for the real estate industry to change the way it compensates its agents , ” he said .
+“If <START:organization> Coldwell Banker <END> announced it was paying 1 percent commission to its agents , there would be a mass exodus . ”
+As it turned out , the <START:person> Wolfs <END> ’ offer was the highest of five bids made for the house they wanted , and they were able to buy it despite the balky broker .
+( They toured the house with a friend who is an agent . )
+They also received a $ 16,300 commission rebate from <START:organization> Redfin <END> and became firm believers in online real estate brokers .
+But as the couple’s story shows , people who want to use Web-based brokers often have to fight to do so .
+Many are , and there are growing signs that they are succeeding .
+<START:organization> BuySideInc.com <END> , an online buyer’s broker in <START:location> Chicago <END> that offers a 75 percent commission rebate , said that at one point 12 percent of its customers reported that traditional agents had refused to show houses to them .
+The rate is now down to about 6 percent , perhaps because of responses like this : One client who was denied a showing made an offer anyway that was contingent on getting a tour — a move intended to alert the seller to the refusing agent’s actions .
+“I’d like to have been the fly on the wall for the conversation between that seller and his agent , ” said <START:person> Joseph J. Fox <END> , chief executive of <START:organization> BuySide <END> and a founder of one of the earliest online stock brokerage firms , <START:organization> WebStreet <END> .
+“The amazing thing , ” he added , “is that the selling agent still got paid and made $ 15,000 to $ 20,000 .”
+In many cities , real estate agents have tried to restrict access to <START:organization> M.L.S. <END> information or to limit its use on the database .
+Some have asked state legislatures to pass laws forcing brokers to offer certain levels of service , a move that <START:person> Mr. Kelman <END> sees as intended to squeeze out discount brokers .
+“It’s a thousand tiny shackles on innovation , ” he said .

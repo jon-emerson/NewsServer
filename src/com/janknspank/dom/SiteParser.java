@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +28,17 @@ public class SiteParser {
         "article > p",
         "article > div > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("nytimes.com", new String[] {
+        ".articleBody > p",
         "article > p",
-        "article > div > p"});
+        "article > div > p",
+        "nyt_text > p",
+        "p.story-body-text"});
     DOMAIN_TO_DOM_ADDRESSES.put("techcrunch.com", new String[] {
         ".article-entry > p",
         ".article-entry > h2"});
   }
 
-  public static DocumentNode crawl(String url) throws IOException {
+  public static DocumentNode crawl(String url) throws ParseException {
     HttpGet httpget = new HttpGet(url);
 
     RequestConfig config = RequestConfig.custom()
@@ -44,12 +48,16 @@ public class SiteParser {
         .setDefaultRequestConfig(config)
         .build();
 
-    CloseableHttpResponse response = httpclient.execute(httpget);
-    if (response.getStatusLine().getStatusCode() == 200) {
-      return new HtmlHandler(response.getEntity().getContent()).getDocumentNode();
+    try {
+      CloseableHttpResponse response = httpclient.execute(httpget);
+      if (response.getStatusLine().getStatusCode() == 200) {
+        return new HtmlHandler(response.getEntity().getContent()).getDocumentNode();
+      }
+      throw new ParseException("Bad response, status code = " +
+          response.getStatusLine().getStatusCode());
+    } catch (IOException e) {
+      throw new ParseException("Could not read web site", e);
     }
-    throw new IOException("Bad response, status code = " +
-        response.getStatusLine().getStatusCode());
   }
 
   /**
@@ -77,16 +85,33 @@ public class SiteParser {
   }
 
   /**
+   * Given a list of paragraphs, sorts them and removes all duplicates.
+   * Modifications are made in-place on the passed List.
+   */
+  private void sortAndDedupe(List<Node> paragraphs) {
+    Collections.sort(paragraphs, new NodeOffsetComparator());
+    Iterator<Node> i = paragraphs.iterator();
+    long lastOffset = -1;
+    while (i.hasNext()) {
+      Node node = i.next();
+      if (node.getStartingOffset() == lastOffset) {
+        i.remove();
+      }
+      lastOffset = node.getStartingOffset();
+    }
+  }
+
+  /**
    * Returns Nodes for all the paragraph / header / quote / etc content within
    * an article's web page.
    */
-  public List<Node> getParagraphNodes(String url) throws IOException {
+  public List<Node> getParagraphNodes(String url) throws ParseException {
     DocumentNode documentNode = crawl(url);
     List<Node> paragraphs = new ArrayList<>();
     for (String domAddress : getDomAddressesForUrl(url)) {
       paragraphs.addAll(documentNode.findAll(domAddress));
     }
-    Collections.sort(paragraphs, new NodeOffsetComparator());
+    sortAndDedupe(paragraphs);
     return paragraphs;
   }
 }

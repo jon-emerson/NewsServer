@@ -1,0 +1,57 @@
+http://www.nytimes.com/2014/12/14/us/even-before-long-winter-begins-energy-bills-send-shivers-in-new-england.html
+<START:location> SALEM , N.H. <END> — <START:person> John York <END> , who owns a small printing business here , nearly fell out of his chair the other day when he opened his electric bill .
+For October , he had paid $ 376 .
+For November , with virtually no change in his volume of work and without having turned up the thermostat in his two-room shop , his bill came to $ 788 , a staggering increase of 110 percent .
+“This is insane , ” he said , shaking his head .
+“We can’t go on like this . ”
+For months , utility companies across <START:location> New England <END> have been warning customers to expect sharp price increases , for which the companies blame the continuing shortage of pipeline capacity to bring natural gas to the region .
+Now that the higher bills are starting to arrive , many stunned customers are finding the sticker shock much worse than they imagined .
+<START:person> Mr. York <END> said he would have to reduce his hours , avoid hiring any new employees , cut other expenses and ultimately pass the cost on to his customers .
+Like turning back the clocks and putting on snow tires , bracing for high energy bills has become an annual rite of the season in <START:location> New England <END> .
+Because the region’s six states — <START:location> Connecticut <END> , <START:location> Maine <END> , <START:location> Massachusetts <END> , <START:location> New Hampshire <END> , <START:location> Rhode Island <END> and <START:location> Vermont <END> — have an integrated electrical grid , they all share the misery .
+These latest increases are salt in the wound .
+<START:location> New England <END> already pays the highest electricity rates of any region in the 48 contiguous states because it has no fossil fuels of its own and has to import all of its oil , gas and coal .
+In September , residential customers in New England paid an average retail price of 17.67 cents per kilowatt-hour ; the national average was 12.94 cents .
+Beyond that , the increases confound common sense , given that global oil prices have dropped to their lowest levels in years , and natural gas is cheap and plentiful from the vast underground shale reserves in nearby <START:location> Pennsylvania <END> .
+But the benefits are not being felt here .
+<START:location> Connecticut’s <END> rate of 19.74 cents per kilowatt-hour for September was the highest in the continental <START:location> United States <END> and twice that of energy-rich states like <START:location> West Virginia <END> and <START:location> Louisiana <END> .
+The lowest rate , 8.95 cents , was in <START:location> Washington State <END> , where the <START:location> Columbia River <END> is the nation’s largest producer of hydropower .
+For the coming winter , <START:organization> National Grid <END> , the largest utility in <START:location> Massachusetts <END> , expects prices to rise to 24.24 cents , a record high .
+The average customer will pay $ 121.20 a month , a 37 percent increase from $ 88.25 last winter .
+The utilities argue that they are hamstrung unless they can increase the pipeline capacity for natural gas , which powers more than half of <START:location> New England <END> .
+That would not only lower costs for consumers , they say , but also create thousands of construction jobs and millions of dollars in tax revenue .
+The region has five pipeline systems now .
+Seven new projects have been proposed .
+But several of them — including a major gas pipeline through western <START:location> Massachusetts <END> and southern <START:location> New Hampshire <END> , and a transmission line in <START:location> New Hampshire <END> carrying hydropower from <START:location> Quebec <END> — have stalled because of ferocious opposition .
+The concerns go beyond fears about blighting the countryside and losing property to eminent domain .
+Environmentalists say it makes no sense to perpetuate the region’s dependence on fossil fuels while it is trying to mitigate the effects of climate change , and many do not want to support the gas-extraction process known as hydraulic fracturing , or fracking , that has made the cheap gas from <START:location> Pennsylvania <END> available .
+Consumers have been left in the middle , as baffled as they are angry .
+Utilities across the region are holding workshops and town meetings to try to address their concerns and offer tips on energy conservation .
+About 100 people showed up this month for a meeting at <START:organization> Salem High School <END> here that included a presentation by <START:organization> Liberty Utilities <END> , the largest natural gas distributor in <START:location> New Hampshire <END> .
+<START:person> John Shore <END> , a company spokesman , told the audience that in times of peak demand , the available natural gas went first to residential and business customers .
+Some power plants that normally rely on gas then turn to more expensive fuels like oil , although not all plants have the ability to switch fuels .
+In some cases , electric generating plants go offline , and more expensive generators are used to make up the capacity .
+Prices are also up this winter because they are based in part on last winter’s high prices .
+Arctic blasts from the polar vortex drove up the cost of wholesale power in <START:location> New England <END> to $ 5.05 billion for the three months from December 2013 through February 2014 alone — almost the same as the cost for the entire year of 2012 .
+<START:person> Patricia Richardson <END> , 78 , a <START:location> Salem <END> retiree in the audience , said she had already had an energy audit on her 100-year-old house , installed triple-pane thermal windows , bought a new boiler , had insulation blown in and put weather stripping around leaks .
+She could not understand why her bill had still increased , even after pressing <START:person> Mr. Shore <END> .
+<START:person> Ms. Richardson <END> said after the meeting that his explanation had been confusing .
+“ I wanted to know in my heart that he was giving it to me square , ” she said .
+“ But I did n’t get that feeling . ”
+Many utilities provide rebates when customers buy high-efficiency appliances , and offer free energy audits , savings plans and guidance on limiting energy use .
+Government programs and nonprofit organizations are stretching to help those who cannot pay the utility bills necessary to make it through this cold , dark season .
+But even if these stopgap measures help some households in the short term , the outlook for the long term appears gloomy .
+A year ago , the governors of the six <START:location> New England <END> states agreed to pursue a coordinated regional strategy , including more pipelines and at least one major transmission line for hydropower .
+The plan called for electricity customers in all six states to subsidize the projects , on the theory that they would make up that money in lower utility bills .
+But in August , the <START:organization> Massachusetts Legislature <END> rejected the plan , saying in part that cheap energy would flood the market and thwart attempts to advance wind and solar projects .
+That halted the whole effort .
+“The impasse just kicks the can down the road , and I see no reason why this dynamic is n’t going to be repeated during the heating season for years to come , ” said <START:person> John Howat <END> , a senior policy analyst at the <START:organization> National Consumer Law Center <END> , a Boston-based nonprofit advocacy group for low-income residents .
+“ I think we need to be more aggressive in pursuing renewables and energy efficiency , ” <START:person> Mr. Howat <END> said .
+“ But I doubt we can implement those solutions quickly enough and at a sufficient scale to relieve the economic burden in the short term on those 30 percent of households that don’t have sufficient income to pay these bills . ”
+The problem may be getting worse , not only because of pipeline constraints but because old coal and oil power plants are being retired .
+The <START:organization> Vermont Yankee <END> nuclear plant , which supplies nearly one-third of <START:location> Vermont’s <END> electricity , is also scheduled to go offline this month .
+<START:organization> ISO New England <END> , the independent system operator that oversees the region’s energy market , said it expected there to be “sufficient resources ” this winter to meet demand .
+But in a November assessment , it called the pipeline constraints severe and said the reliability of the system would “continue to be threatened ” until the region expanded its pipeline capacity or invested in other energy sources .
+Figuring out how much new pipeline might be enough is not an easy calculation .
+<START:location> Massachusetts <END> , for one , is analyzing its needs now for a report due at the end of the month .
+It is a complex process , said <START:person> Mark Sylvia <END> , the state’s undersecretary for energy , because it must take into account the state’s desires to avoid dependence on one type of fuel , reduce greenhouse gas emissions and ensure reliability “so the lights stay on . ”

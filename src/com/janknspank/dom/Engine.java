@@ -33,7 +33,7 @@ public class Engine {
   public static void main(String args[]) throws Exception {
     SiteParser siteParser = new SiteParser();
     String[] urls = {
-        "http://www.nytimes.com/2014/12/16/upshot/as-robots-grow-smarter-american-workers-struggle-to-keep-up.html"
+        "http://bits.blogs.nytimes.com/2010/01/07/google-applies-to-become-power-marketer/"
     };
     for (String url : urls) {
       // Get all the paragraphs.

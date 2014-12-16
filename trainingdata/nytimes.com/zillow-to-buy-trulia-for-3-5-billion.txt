@@ -1,0 +1,34 @@
+http://dealbook.nytimes.com/2014/07/28/zillow-to-buy-trulia-for-3-5-billion/
+Updated , 8:05 p.m. | For much of the last nine years , <START:organization> Zillow <END> and <START:organization> Trulia <END> have competed in the online real estate listings market they helped create .
+But after a speedy six-week courtship , the two are set to combine forces .
+<START:organization> Zillow <END> agreed on Monday to buy <START:organization> Trulia <END> for about $ 3.5 billion in stock , creating a giant online repository of real estate listings and home values .
+Under the terms of the deal , <START:organization> Zillow <END> will pay 0.444 of one of its shares for each share of <START:organization> Trulia <END> .
+Based on Friday ’s closing prices , the takeover bid is worth $ 70.53 a <START:organization> Trulia <END> share , a premium of roughly 25 percent .
+Together , the two will dominate the traffic for online home listings .
+Last month , <START:organization> Zillow <END> reported 83 million users , while <START:organization> Trulia <END> reported 54 million — a combined 61 percent of total Internet users for the category , according to the research firm <START:organization> comScore <END> .
+“The companies know each other very well , ” <START:person> Spencer Rascoff <END> , <START:organization> Zillow’s <END> chief executive , said in a telephone interview .
+“We’ve been competitors and rivals for nine years , but I’ve always had respect for them . ”
+<START:organization> Zillow <END> has already become one of the best-known players in the market through its widely quoted “Zestimates ” of how much a property is worth , a feature particularly popular among homeowners .
+<START:organization> Trulia <END> , on the other hand , has tools that tend to draw more potential sellers and buyers .
+According to <START:person> Mr. Rascoff <END> , that has meant relatively little overlap , with about half of <START:organization> Trulia’s <END> web users not visiting <START:organization> Zillow <END> .
+<START:person> Mr. Rascoff <END> said he first approached <START:organization> Trulia <END> about a potential acquisition about six weeks ago .
+The initial response was not dismissive — though <START:organization> Trulia <END> said that it had not intended to put itself up for sale — and management asked what <START:organization> Zillow <END> had in mind .
+“Both companies are coming at this from a lot of strength and momentum , ” <START:person> Mr. Rascoff <END> said .
+“ When we approached them , I think they were both very open-minded about it . ”
+<START:organization> Trulia’s <END> management team , led by <START:person> Pete Flint <END> , ultimately proved willing to negotiate , but requested that it be an all-stock deal to give <START:organization> Trulia’s <END> shareholders a chance to benefit from the merger .
+( In the interest of keeping negotiations secret , both sides used code names : <START:organization> Zillow <END> was “Zebra , ” while <START:organization> Trulia <END> was “Tiger . ”
+The password to access the electronic data room was “jungle .” )
+Existing <START:organization> Trulia <END> shareholders will own about a third of the combined company .
+<START:person> Mr. Flint <END> will stay on and report to <START:person> Mr. Rascoff <END> , and he and another <START:organization> Trulia <END> director will join <START:organization> Zillow’s <END> board .
+Together , the two companies expect to realize about $ 100 million in cost savings by 2016 .
+The newly enlarged <START:organization> Zillow <END> will offer more options for advertisers and for sellers and real estate agents to list home offerings , while combining the two companies ’ nascent rental search services .
+<START:person> Mr. Rascoff <END> said he did not expect the merger to face opposition from antitrust regulators .
+The revenue of the merged company — $ 341.2 million based on last year’s data — represents only a small part of the $ 12 billion he estimates the real estate industry spends on marketing each year .
+Moreover , he argues , the real estate industry is highly fragmented , with scores of local sites for each city .
+Both <START:organization> Zillow <END> and <START:organization> Trulia <END> have sought to combat that by making other acquisitions .
+In the last year , <START:organization> Zillow <END> bought both the New York-focused <START:organization> StreetEasy <END> and the apartment search site <START:organization> HotPads <END> , while <START:organization> Trulia <END> bought <START:organization> Market Leader <END> last spring for $ 310 million .
+<START:organization> Zillow <END> and <START:organization> Trulia <END> will continue to compete until the deal closes , which is expected to happen sometime next year .
+<START:organization> Zillow <END> was advised by <START:organization> Goldman Sachs <END> and the law firms <START:organization> Shearman & Sterling <END> and <START:organization> Perkins Coie <END> .
+<START:organization> Trulia <END> was advised by <START:organization> JPMorgan Chase <END> and <START:organization> Qatalyst Partners <END> — the investment bank co-founded by <START:person> Frank Quattrone <END> — as well as the law firms <START:organization> Goodwin Procter <END> and <START:organization> Wilson Sonsini Goodrich & Rosati <END> .
+<START:organization> Zillow’s <END> stock closed on Monday at $ 160.32 , up less than 1 percent .
+<START:organization> Trulia <END> shares closed at $ 65.04 , up 15.4 percent .

@@ -1,6 +1,9 @@
 package com.janknspank.dom;
 
-import java.io.FileOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -11,6 +14,12 @@ import java.util.List;
 public class GrabTrainingData {
   private static final String[] URLS = {
     // Put URLs here...
+    "http://dealbook.nytimes.com/2013/11/13/redfin-raises-50-million-in-latest-financing-round",
+    "http://www.nytimes.com/2013/08/25/business/be-yourself-redfins-glenn-kelman-says-even-if-youre-a-little-goofy.html",
+    "http://dealbook.nytimes.com/2014/07/28/zillow-to-buy-trulia-for-3-5-billion/",
+    "http://www.nytimes.com/2006/09/03/business/yourmoney/03real.html",
+    "http://www.nytimes.com/2014/08/21/fashion/at-burning-man-the-tech-elite-one-up-one-another.html",
+    "http://bits.blogs.nytimes.com/2014/08/31/san-francisco-exhales-during-burning-man-exodus/",
   };
 
   public static void printNode(Node node, int depth) {
@@ -35,6 +44,23 @@ public class GrabTrainingData {
     System.out.println("TEXT: \"" + text + "\"");
   }
 
+  /**
+   * Return what trainingdata/ subdirectory to use for the passed url.
+   * E.g. a NYTimes article will go into "nytimes.com".
+   */
+  public static String getPathForUrl(String url) {
+    try {
+      URL bigUrl = new URL(url);
+      String domain = bigUrl.getHost();
+      while (domain.lastIndexOf(".") != domain.indexOf(".")) {
+        domain = domain.substring(domain.indexOf(".") + 1);
+      }
+      return domain;
+    } catch (MalformedURLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public static void main(String args[]) throws Exception {
     SiteParser siteParser = new SiteParser();
     for (String url : URLS) {
@@ -51,13 +77,14 @@ public class GrabTrainingData {
         filename = url.substring(0, filename.length() - ".php".length());
       }
       filename = filename.substring(filename.lastIndexOf("/") + 1);
-      String path = url.contains("curbed.com/") ? "curbed.com" : "techcrunch.com";
-      FileOutputStream fos = new FileOutputStream("trainingdata/" + path + "/" + filename + ".txt");
-      System.err.println("Writing to " + filename + ".txt ...");
+      String path = getPathForUrl(url);
+      System.err.println("Writing to " + path + "/" + filename + ".txt ...");
+      BufferedWriter writer = new BufferedWriter(
+          new FileWriter("trainingdata/" + path + "/" + filename + ".txt"));
 
       // Write the original URL first, for tracking purposes.
-      fos.write(url.getBytes());
-      fos.write("\n".getBytes());
+      writer.write(url);
+      writer.newLine();
 
       // Write out all the sentences, tokenized.
       for (Node paragraph : paragraphs) {
@@ -68,14 +95,14 @@ public class GrabTrainingData {
             if (first) {
               first = false;
             } else {
-              fos.write(" ".getBytes());
+              writer.write(" ");
             }
-            fos.write(token.getBytes());
+            writer.write(token);
           }
-          fos.write("\n".getBytes());
+          writer.newLine();
         }
       }
-      fos.close();
+      writer.close();
     }
   }
 }
