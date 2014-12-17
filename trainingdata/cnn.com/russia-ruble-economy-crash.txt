@@ -1,0 +1,26 @@
+http://money.cnn.com/2014/12/15/investing/russia-ruble-economy-crash/index.html
+The ruble plunged by about 12 % Monday , meaning it 's lost nearly 50 % against the dollar this year .
+Early Tuesday in <START:location> Russia <END> , the central bank hiked its key interest rate for a sixth time this year to 17 % from 10.5 % .
+A double-whammy of collapsing oil prices and Western sanctions is driving up inflation .
+Cash is flooding out of the country and the risk that some Russian companies may default is increasing .
+<START:location> Russia <END> 's central bank has not only been raising interest rates , but has spent nearly $ 90 billion trying to defend the ruble and prevent prices spiraling out of control .
+But investors are growing increasingly alarmed about the prospects for the Russian economy .
+The <START:organization> Bank of Russia <END> said Monday that the country could sink into a deep recession next year if oil prices remain at $ 60 a barrel .
+GDP could contract by as much as 4.7 % in 2015 , and then by a further 1.1 % in 2016 unless oil prices pick up .
+Related : <START:location> Wall Street <END> bets on <START:location> Russia <END> and <START:location> Venezuela <END> defaults
+The falling ruble makes it harder for Russian companies and banks to repay their foreign creditors .
+<START:location> Russia <END> has relatively low government debt and hefty international reserves of about $ 430 billion .
+Yet <START:location> Wall Street <END> has pushed up the yield on Russian government debt , betting on greater risk .
+The cost of insuring <START:location> Russia <END> 's five-year bonds have also risen , to their highest levels since 2009 .
+A collapse in oil income takes a bite out of government revenue , meaning it has less to spend .
+<START:person> President Vladimir Putin <END> has already ordered government departments to cut their budgets by 5 % , and more cuts could follow .
+Defense and national security has so far been spared the ax -- <START:location> Russia <END> is pumping trillions of rubles into modernizing its military .
+Related : Could Russian economic turmoil lead to <START:person> Putin <END> 's downfall ?
+Ordinary Russians are feeling the squeeze instead .
+Consumer price inflation is expected to hit 10 % by the end of the year , in part due to the weakness of the ruble , but also due to a ban on imports of most food products from the <START:location> West <END> .
+That was retaliation for <START:location> U.S. <END> and European sanctions imposed over <START:location> Russia <END> 's actions in <START:location> Ukraine <END> .
+Even the price of bread is rising , prompting some Russians to begin hoarding staples .
+<START:person> Putin <END> 's approval rating remains high but Russians are losing confidence in the future .
+Some opposition politicians say the economic storm will eventually sweep <START:person> Putin <END> from office .
+" In three years the situation will change , " <START:person> Dmitry Stepanov <END> of the liberal <START:organization> RPR-PARNAS Party <END> said at an opposition conference in <START:location> Moscow <END> this week .
+" The country is in economic crisis and no one in the government knows how to solve that . "

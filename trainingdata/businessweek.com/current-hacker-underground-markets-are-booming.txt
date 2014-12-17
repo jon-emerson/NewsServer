@@ -1,0 +1,24 @@
+http://www.businessweek.com/articles/2014-12-15/current-hacker-underground-markets-are-booming
+Faced with the dilemma of what to get loved ones for Christmas , we now turn to <START:organization> Dell SecureWorks <END> ’ just-published 2014 Underground Hacking Markets Report , a handy shopping guide for cybercriminals .
+<START:organization> SecureWorks <END> researchers <START:person> Joe Stewart <END> and <START:person> David Shear <END> examined dozens of underground hacker markets for their second annual survey and found that business is booming .
+Prices have gone down for many items , and the offerings have expanded .
+As the report puts it : “ Underground hackers are monetizing every piece of data they can steal or buy and are continually adding services so other scammers can successfully carry out online and in-person fraud . ”
+For the newbie hacker , a new offering this year : online tutorials on topics such as “Basic Carding ” and “How to do ATM Hacks and Get Much More Money than you Withdraw ” can be had for as little as $ 1 a pop .
+A manual covering a broader range of skills runs about $ 30.
+How about a new identity for the New Year ?
+For $ 250 , you can buy a scan of a working Social Security card and the name and address of the card holder ; for another $ 100 , you’ll also get a scan of a utility bill for extra authenticity .
+A driver’s license to match costs $ 100 to $ 150 .
+Armed with that information , a hacker can apply for government assistance programs , bank accounts , and credit cards .
+The cost for Remote Access Trojans , a type of malicious software that gives cybercriminals control of computers , has dropped considerably from last year because there are so many free ones now available online .
+The price tags range from $ 20 to $ 50 , down from $ 50 to $ 250 last year , according to the report .
+And , <START:organization> SecureWorks <END> reports , the going price if you want someone to hack into a website for you is $ 100 to $ 200 , compared with $ 100 to $ 300 last year .
+Not everything is cheaper .
+The price of access to infected networks of computers , called botnets—they’re handy in all sorts of nefarious pursuits , including sending spam and malicious software —has gone up .
+Last year , it cost about $ 90 to rent a botnet of 5,000 computers .
+This year , the market has gotten more segmented and a bit pricier .
+Specify a location for where you want your infected computers to be and pay accordingly .
+For 5,000 bots in the <START:location> U.S. <END> , you’ll pay $ 600 to $ 1,000 ; for the same number in the <START:location> U.K. <END> , it ’s $ 400 to $ 500 .
+The price difference can be explained , in part , by the fact that any credit card data found on U.K.-based bots is likely more secure and harder to use , <START:person> Stewart <END> and <START:person> Shear <END> explain .
+The other takeaway from this year’s survey is a focus on the customer .
+Fine purveyors of cybercrime services know that one way to distinguish themselves in a crowded market is good customer service .
+The underground is awash in premium credit cards , after a bumper crop of massive breaches this year , and numerous sellers now advertise “Satisfaction Guaranteed ” on the data they’re selling .

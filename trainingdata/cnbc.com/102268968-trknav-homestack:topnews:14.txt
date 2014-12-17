@@ -1,0 +1,17 @@
+http://www.cnbc.com/id/102268968?trknav=homestack:topnews:14
+Tech companies primed to go public next year saw a surge in mega funding rounds in 2014 , as the number of $ 100 million or more financing deals more than doubled to 50 this year , according to the analytics firm <START:organization> CB Insights <END> .
+And as mega rounds soar , so do billion-dollar valuations for venture-backed tech companies .
+The number of private <START:location> U.S. <END> tech companies valued at $ 1 billion or more in the IPO pipeline has grown more than 50 percent since last year , said <START:organization> CB Insights <END> .
+Currently , 40 companies in the 2015 tech IPO pipeline have raised a venture capital financing round at a real or rumored valuation of $ 1 billion .
+That 's up from 25 a year ago .
+Some of these include <START:organization> Vice <END> , <START:organization> Gilt <END> , <START:organization> Palantir <END> , <START:organization> Pinterest <END> , <START:organization> Square <END> and <START:organization> SnapChat <END> .
+" The amount of money going into the private markets and the big valuations in the private market , the magnitude of it is larger than even we expected , " said <START:person> Anand Sanwal <END> , co-founder and CEO of <START:organization> CB Insights <END> .
+There are 588 venture and private equity-backed tech companies in the 2015 tech IPO pipeline , according to a <START:organization> CB Insights <END> report .
+These companies all boast a real or rumored valuation of more than $ 100 million .
+To date , these tech firms have raised a whopping $ 64 billion across more than 2,700 deals .
+The tech IPO market looks like it will keep its momentum in 2015 , <START:person> Sanwal <END> said .
+" December has been a fairly strong month for tech IPOs , so we are ending the year strong which is likely a good thing for how 2015 is going to look .
+Of course with the public markets , if sentiment shifts drastically that can all change , but for the time being now things look very promising and favorable , " he said .
+" If there is one thing that may suppress IPO activity it 's just that there is so much money available in private market that there is not that much pressure for these companies to go public , necessarily . "
+The venture firm with the most companies in its portfolio that are in <START:organization> CB Insight <END> 's tech IPO pipeline is <START:organization> Kleiner Perkins <END> .
+However , <START:organization> Sequoia Capital <END> has backed the most companies with billion dollar plus valuations .

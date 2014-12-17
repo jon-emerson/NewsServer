@@ -7,4 +7,9 @@ public class DocumentNode extends Node {
   public DocumentNode() {
     super(null, null, 0);
   }
+
+  @Override
+  public String toString() {
+    return "DOCUMENT";
+  }
 }

@@ -1,0 +1,6 @@
+http://www.chron.com/business/article/ADM-to-sell-cocoa-business-to-Olam-for-1-3B-5958951.php
+<START:location> CHICAGO <END> ( AP ) — <START:organization> Archer Daniels Midland <END> says it has agreed to sell its global cocoa business to <START:organization> Olam International <END> for $ 1.3 billion .
+The agribusiness company says the deal would let it invest in less volatile businesses or distribute money to shareholders , or both .
+<START:organization> ADM <END> 's cocoa unit includes facilities in several countries , including <START:location> Brazil <END> , <START:location> Canada <END> , <START:location> Germany <END> , <START:location> Ghana <END> and <START:location> Singapore <END> .
+The Chicago-based company said Monday that a majority of the roughly 1,550 employees in the cocoa business will transfer to <START:organization> Olam <END> , an agribusiness company headquartered in <START:location> Singapore <END> .
+The proposed transaction is expected to close in the second quarter and does not affect the pending sale of <START:organization> ADM <END> 's chocolate business to <START:organization> Cargill <END> .

@@ -1,0 +1,21 @@
+http://www.cbc.ca/news/business/talisman-agrees-to-15-1b-cdn-takeover-by-spain-s-repsol-1.2874486
+Spanish company <START:organization> Repsol <END> was rumoured to be the frontrunner to take over <START:organization> Talisman <END> , <START:location> Canada <END> 's fifth-largest independent oil producer .
+<START:organization> Talisman Energy Inc. <END> based in <START:location> Calgary <END> says it has agreed to be purchased by Spanish energy giant <START:organization> Repsol <END> in a transaction worth about $ 15.1 billion Cdn ( $ 13 billion US) .
+Under the agreement confirmed early Tuesday by <START:organization> Talisman <END> , <START:organization> Repsol <END> will acquire all outstanding common shares of <START:organization> Talisman <END> at $ 9.33 Cdn ( $ 8 US) each .
+<START:organization> Repsol <END> will also take on about $ 5.48 billion Cdn ( $ 4.7 billion US) of debt .
+<START:organization> Talisman <END> shares had closed at $ 5.97 Cdn on the <START:organization> Toronto Stock Exchange <END> , up 93 cents or more than 18 per cent .
+The purchase price , which includes <START:organization> Talisman <END> 's debt , represents a 75 per cent premium to the seven-day volume weighted average share price .
+Also under the deal , <START:organization> Talisman <END> will pay aggregate cash dividends of 18 cents per common share prior to closing .
+The <START:organization> Talisman <END> board is recommending shareholders accept the deal at a special meeting to be held in mid-February 2015 .
+Completion of the transaction , which is targeted to close in the second quarter of 2015 , is subject to customary closing conditions , including court approval .
+" This deal creates significant and immediate value for <START:organization> Talisman <END> stakeholders , " said board chairman <START:person> Chuck Williamson <END> .
+" <START:organization> Repsol <END> is a world-class operator with a solid track record and the financial capability to continue the development of these assets within their international portfolio . "
+<START:organization> Talisman <END> has strong operational capability , a highly skilled work force and we look forward to leveraging their expertise as we partner to create a stronger , more profitable and competitive organization , " said <START:organization> Repsol <END> chairman <START:person> Antonio Brufau <END> .
+<START:organization> Repsol <END> is an oil and gas giant with a presence in more than 30 countries , employing more than 24,000 people .
+The combined company will be among the 15 largest privately-owned oil and gas companies with activity in more than 50 countries and more than 27,000 employees .
+<START:organization> Repsol <END> said <START:organization> Talisman <END> 's incorporation will increase <START:organization> Repsol <END> 's output by 76 per cent to 680,000 barrels of oil equivalent per day , and boost reserves by 55 per cent .
+According to a <START:organization> Bloomberg <END> report , the <START:organization> Canada Pension Plan Investment Board <END> was also said to be weighing a bid for <START:organization> Talisman <END> .
+Analysts have predicted the pace of mergers and acquisition in the oil patch will pick up as low oil prices put pressure on some names , especially those with high debt loads .
+<START:location> U.S. <END> benchmark crude for January delivery dropped below $ 56 US on Monday , down more than 47 per cent over the past six months .
+<START:organization> Talisman <END> , which over the past few years has been striving to better focus its global portfolio , has long been the subject of takeover speculation .
+While its offshore assets in <START:location> Southeast Asia <END> and its position in several North American shale regions are seen to be attractive to potential bidders , its holdings in the <START:location> U.K. North Sea <END> have been cited as a hindrance to any potential deals as they 've been prone to unplanned outages and have struggled to meet targets .

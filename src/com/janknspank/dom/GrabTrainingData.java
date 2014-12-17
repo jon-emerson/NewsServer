@@ -14,39 +14,7 @@ import java.util.List;
 public class GrabTrainingData {
   private static final String[] URLS = {
     // Put URLs here...
-    "http://www.abc.net.au/news/2014-12-16/sydney-siegesocial-media-a-liability-says-expert/5971622",
-    "http://abcnews.go.com/US/wireStory/waterlogged-northern-california-rain-27626164",
-    "http://america.aljazeera.com/articles/2014/12/16/russia-raises-keyinterestrateto17percent.html",
-    "http://hosted.ap.org/dynamic/stories/U/US_GOOGLE_TOP_SEARCHES_OF_2014",
-    "http://arstechnica.com/tech-policy/2014/12/dashcam-catches-texas-cop-manhandling-stunning-elderly-man/",
-    "http://bdnews24.com/business/2014/12/03/malaysia-also-keen-to-cut-trade-deficit-with-bangladesh",
-    "http://www.bloomberg.com/news/2014-12-16/european-index-futures-signal-equities-rebound-from-six-day-drop.html",
-    "http://www.boston.com/business/technology/2014/12/11/free-apps-you-need-for-local-holiday-shopping-deals/eL9q6O9h6RDCBDq6S7l6uL/pictures.html",
-    "http://www.breitbart.com/Big-Journalism/2014/12/13/Berkeley-Hecklers-Expose-Free-Speech-Movement-Fraud",
-    "http://www.buffalonews.com/city-region/development/a-forgotten-road-now-turning-heads-and-opening-up-opportunities-20141215"
   };
-
-  public static void printNode(Node node, int depth) {
-    for (int i = 0; i < depth; i ++) {
-      System.out.print("  ");
-    }
-    System.out.println(
-        node instanceof DocumentNode ? "DOCUMENT" : node.getTagName().toLowerCase());
-    for (int i = 0; i < node.getChildCount(); i++) {
-      if (node.isChildTextNode(i)) {
-        printText(node.getChildText(i), depth + 1);
-      } else {
-        printNode(node.getChildNode(i), depth + 1);
-      }
-    }
-  }
-
-  public static void printText(String text, int depth) {
-    for (int i = 0; i < depth; i ++) {
-      System.out.print("  ");
-    }
-    System.out.println("TEXT: \"" + text + "\"");
-  }
 
   /**
    * Return what trainingdata/ subdirectory to use for the passed url.
@@ -75,10 +43,15 @@ public class GrabTrainingData {
       String filename = url;
       if (filename.endsWith("/")) {
         filename = url.substring(0, filename.length() - "/".length());
-      } if (filename.endsWith(".html")) {
+      }
+      if (filename.endsWith(".html")) {
         filename = url.substring(0, filename.length() - ".html".length());
-      } if (filename.endsWith(".php")) {
+      }
+      if (filename.endsWith(".php")) {
         filename = url.substring(0, filename.length() - ".php".length());
+      }
+      if (filename.endsWith("/index")) {
+        filename = url.substring(0, filename.length() - "/index".length());
       }
       filename = filename.substring(filename.lastIndexOf("/") + 1);
       filename = filename.replaceAll("[\\?\\=]", "-");

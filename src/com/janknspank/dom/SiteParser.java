@@ -20,8 +20,42 @@ import com.google.common.collect.Maps;
 public class SiteParser {
   private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES = Maps.newHashMap();
   static {
+    DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
+        ".article > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
+        "#storyText > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
+        ".text > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
+        ".article-content > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bbc.com", new String[] {
         ".story-body > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("bdnews24.com", new String[] {
+        ".body > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
+        ".article_body > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
+        ".content-text > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("breitbart.com", new String[] {
+        "article > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("buffalonews.com", new String[] {
+        ".articleP > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("businessweek.com", new String[] {
+        "#article_body p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("cbc.ca", new String[] {
+        ".story-content p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("cbsnews.com", new String[] {
+        "#article-entry p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("channelnewsasia.com", new String[] {
+        ".news_detail p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("chron.com", new String[] {
+        ".article-body p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("cleveland.com", new String[] {
+        ".entry-content p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("cnbc.com", new String[] {
+        "#article_body p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("cnn.com", new String[] {
+        ".cnn_storyarea p"});
     DOMAIN_TO_DOM_ADDRESSES.put("curbed.com", new String[] {
         ".post-body > p",
         ".post-body > .post-more > p"});
@@ -30,8 +64,12 @@ public class SiteParser {
         "article > div > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("latimes.com", new String[] {
         ".trb_article_page > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("markets.cbsnews.com", new String[] {
+        ".news-story p"});
     DOMAIN_TO_DOM_ADDRESSES.put("mercurynews.com", new String[] {
         ".articleBody > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("money.cnn.com", new String[] {
+        "div#storytext p"});
     DOMAIN_TO_DOM_ADDRESSES.put("nytimes.com", new String[] {
         ".articleBody > p",
         "article > p",
@@ -50,24 +88,6 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("washingtonpost.com", new String[] {
         ".row p",
         "article > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
-        ".article > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
-        "#storyText > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
-        ".text > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
-        ".article-content > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("bdnews24.com", new String[] {
-        ".body > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
-        ".article_body > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
-        ".content-text > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("breitbart.com", new String[] {
-        "article > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("buffalonews.com", new String[] {
-        ".articleP > p"});
   }
 
   public static DocumentNode crawl(String url) throws ParseException {
@@ -133,12 +153,41 @@ public class SiteParser {
     }
   }
 
+  private static void printSpacePrefix(int depth) {
+    for (int i = 0; i < depth; i ++) {
+      System.out.print("  ");
+    }
+  }
+
+  /**
+   * Helper function for pretty printing a site's DOM to System.out.
+   */
+  private static void printNode(Node node, int depth) {
+    // Print {@code node}.
+    printSpacePrefix(depth);
+    System.out.println(node.toString());
+
+    // Iterate {@code node}'s children, unless they're <script> or <style> text.
+    if (!"script".equalsIgnoreCase(node.getTagName()) &&
+        !"style".equalsIgnoreCase(node.getTagName())) {
+      for (int i = 0; i < node.getChildCount(); i++) {
+        if (node.isChildTextNode(i)) {
+          printSpacePrefix(depth + 1);
+          System.out.println("TEXT: \"" + node.getChildText(i) + "\"");
+        } else {
+          printNode(node.getChildNode(i), depth + 1);
+        }
+      }
+    }
+  }
+
   /**
    * Returns Nodes for all the paragraph / header / quote / etc content within
    * an article's web page.
    */
   public List<Node> getParagraphNodes(String url) throws ParseException {
     DocumentNode documentNode = crawl(url);
+    printNode(documentNode, 0);
     List<Node> paragraphs = new ArrayList<>();
     for (String domAddress : getDomAddressesForUrl(url)) {
       paragraphs.addAll(documentNode.findAll(domAddress));

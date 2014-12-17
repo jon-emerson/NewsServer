@@ -1,0 +1,11 @@
+http://www.cleveland.com/akron/index.ssf/2014/12/philanthropists_donate_2_milli.html
+<START:location> AKRON , Ohio <END> -- Philanthropists <START:person> Vincent <END> and wife <START:person> Nancy DiGirolamo <END> dropped a $ 2 million holiday surprise at the door of <START:organization> Summa Health System <END> last week .
+The money will join the <START:organization> Vincent and Nancy DiGirolamo Endowed Chair in Oncology <END> at <START:organization> Summa Health <END> , which was established in the family 's name in 2007 to advance cancer research .
+The $ 2 million donation is the single largest contribution to date ; the family has contributed over $ 4 million to <START:organization> Summa Health <END> .
+" <START:organization> Summa <END> and especially the <START:organization> Summa Cancer Institute <END> have been held close to our hearts for many years , " <START:person> Vincent DiGirolamo <END> said in a release .
+" We feel this gift is an investment in their future so that many others may also benefit from the outstanding care that <START:organization> Summa <END> provides . "
+<START:person> Vincent DiGirolamo <END> is a former board chairman and 27-year member on a number of <START:organization> Summa Health Boards <END> .
+<START:person> Nancy DiGirolamo <END> spent 30 years on <START:organization> Summa Health 's Women 's Board <END> .
+<START:person> Nancy DiGirolamo <END> is herself a cancer survivor .
+The <START:organization> Akron Beacon Journal <END> reported on her recent fight with blood cancer and lymphoma at <START:organization> Summa <END> .
+For the past eight years the family has also hosted the <START:organization> DiGirolamo Cancer Symposium <END> , which attracts more than 1,000 medical professionals and researchers to <START:location> Akron <END> every year .

@@ -138,8 +138,9 @@ public class Node {
    * Returns true if this Node matches the passed search string.  E.g. if
    * this node is a div, and the search string is "div", this returns true.
    * Also, if this node has class "hello", and the search string is ".hello",
-   * this also returns true.  Lastly, "#foo" matches id="foo", and "p.foo"
-   * matches paragraphs with class="foo".
+   * this also returns true.  Lastly, "#foo" matches id="foo", "p.foo"
+   * matches paragraphs with class="foo", and "p#foo" matches paragraphs with
+   * id="foo".
    */
   private boolean matchesSearchStr(String searchStr) {
     // Make sure parsing happened before this and we're only comparing one
@@ -147,16 +148,24 @@ public class Node {
     if (searchStr.contains(" ")) {
       throw new RuntimeException("Search string may only be a single delimiter");
     }
+    if (searchStr.contains("#") && searchStr.contains(".")) {
+      // TODO(jonemerson): Implement this! :)
+      throw new RuntimeException("Can't specify both class and ID yet");
+    }
 
     if (searchStr.startsWith(".")) {
       return Iterables.contains(getClasses(), searchStr.substring(1));
     } else if (searchStr.startsWith("#")) {
-      return searchStr.substring(1).equals(getAttributeValue("id"));
-    } if (searchStr.contains(".")) {
+      return searchStr.substring(1).equals(getId());
+    } else if (searchStr.contains(".")) {
       String searchTag = searchStr.substring(0, searchStr.indexOf("."));
       String searchClassName = searchStr.substring(searchStr.indexOf(".") + 1);
       return tagName.equalsIgnoreCase(searchTag) &&
           Iterables.contains(getClasses(), searchClassName);
+    } else if (searchStr.contains("#")) {
+      String searchTag = searchStr.substring(0, searchStr.indexOf("#"));
+      String searchId = searchStr.substring(searchStr.indexOf("#") + 1);
+      return tagName.equalsIgnoreCase(searchTag) && searchId.equals(getId());
     } else {
       // NOTE(jonemerson): Maybe some day be strict about case here.
       return tagName.equalsIgnoreCase(searchStr);
@@ -221,5 +230,27 @@ public class Node {
       }
     }
     return Joiner.on(" ").join(texts);
+  }
+
+  public String getId() {
+    return this.getAttributeValue("id");
+  }
+
+  /**
+   * Returns a String of this Node's attributes, such as its tag name,
+   * classes, and ID.
+   */
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(this.getTagName());
+    for (String className : this.getClasses()) {
+      sb.append("." + className);
+    }
+    String id = this.getId();
+    if (id != null) {
+      sb.append("#" + id);
+    }
+    return sb.toString();
   }
 }
