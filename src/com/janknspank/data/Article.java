@@ -1,9 +1,12 @@
 package com.janknspank.data;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.json.JSONObject;
 
@@ -11,9 +14,9 @@ import com.janknspank.Asserts;
 import com.janknspank.Constants;
 
 /**
- * Primary metadata about a crawled URL.
+ * Metadata about a news article.
  */
-public class CrawlData {
+public class Article {
   public static final String TABLE_NAME_STR = "CrawlData";
   public static final String ID_STR = "id";
   public static final String TITLE_STR = "title";
@@ -22,6 +25,7 @@ public class CrawlData {
   public static final String COPYRIGHT_STR = "copyright";
   public static final String DESCRIPTION_STR = "description";
   public static final String IMAGE_URL_STR = "image_url";
+  public static final String ARTICLE_BODY_STR = "article_body";
   public static final String PUBLISHED_TIME_STR = "published_time";
   public static final String MODIFIED_TIME_STR = "modified_time";
   public static final String LAST_UPDATED_TIME_STR = "last_updated_time";
@@ -35,6 +39,7 @@ public class CrawlData {
       "    " + COPYRIGHT_STR + " VARCHAR(100), " +
       "    " + DESCRIPTION_STR + " BLOB, " +
       "    " + IMAGE_URL_STR + " BLOB, " +
+      "    " + ARTICLE_BODY_STR + " BLOB, " +
       "    " + PUBLISHED_TIME_STR + " DATETIME, " +
       "    " + MODIFIED_TIME_STR + " DATETIME, " +
       "    " + LAST_UPDATED_TIME_STR + " DATETIME NOT NULL)";
@@ -47,9 +52,12 @@ public class CrawlData {
       "    " + COPYRIGHT_STR + ", " +
       "    " + DESCRIPTION_STR + ", " +
       "    " + IMAGE_URL_STR + ", " +
+      "    " + ARTICLE_BODY_STR + ", " +
       "    " + PUBLISHED_TIME_STR + ", " +
       "    " + MODIFIED_TIME_STR + ", " +
-      "    " + LAST_UPDATED_TIME_STR + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "    " + LAST_UPDATED_TIME_STR + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  private static final String SELECT_ALL_COMMAND =
+      "SELECT * FROM " + TABLE_NAME_STR + " LIMIT 50";
 
   private String id;
   private String title;
@@ -58,6 +66,7 @@ public class CrawlData {
   private String copyright;
   private String description;
   private String imageUrl;
+  private String articleBody;
   private Date publishedTime;
   private Date modifiedTime;
   private Date lastUpdatedTime;
@@ -90,6 +99,10 @@ public class CrawlData {
     return imageUrl;
   }
 
+  public String getArticleBody() {
+    return articleBody;
+  }
+
   public Date getPublishedTime() {
     return publishedTime;
   }
@@ -110,6 +123,7 @@ public class CrawlData {
     private String copyright;
     private String description;
     private String imageUrl;
+    private String articleBody;
     private Date publishedTime;
     private Date modifiedTime;
     private Date lastUpdatedTime;
@@ -156,6 +170,11 @@ public class CrawlData {
       return this;
     }
 
+    public Builder setArticleBody(String articleBody) {
+      this.articleBody = articleBody;
+      return this;
+    }
+
     public Builder setPublishedTime(Date publishedTime) {
       this.publishedTime = publishedTime;
       return this;
@@ -171,8 +190,8 @@ public class CrawlData {
       return this;
     }
 
-    public CrawlData build() throws ValidationException {
-      CrawlData data = new CrawlData();
+    public Article build() throws ValidationException {
+      Article data = new Article();
       data.id = id;
       data.title = title;
       data.type = type;
@@ -180,6 +199,7 @@ public class CrawlData {
       data.copyright = copyright;
       data.description = description;
       data.imageUrl = imageUrl;
+      data.articleBody = articleBody;
       data.publishedTime = publishedTime;
       data.modifiedTime = modifiedTime;
       data.lastUpdatedTime = (lastUpdatedTime == null) ? new Date() : lastUpdatedTime;
@@ -191,20 +211,38 @@ public class CrawlData {
   private void assertValid() throws ValidationException {
     Asserts.assertNonEmpty(id, ID_STR);
     Asserts.assertNonEmpty(title, TITLE_STR);
+    Asserts.assertNonEmpty(articleBody, ARTICLE_BODY_STR);
     Asserts.assertNotNull(lastUpdatedTime, LAST_UPDATED_TIME_STR);
   }
 
   public JSONObject toJSONObject() {
+    // Deliberately omitting articleBody since it's really big and the client
+    // doesn't actually need it.
+
     JSONObject o = new JSONObject();
     o.put(ID_STR, id);
     o.put(TITLE_STR, title);
-    o.put(TYPE_STR, type);
-    o.put(AUTHOR_STR, author);
-    o.put(COPYRIGHT_STR, copyright);
-    o.put(DESCRIPTION_STR, description);
-    o.put(IMAGE_URL_STR, imageUrl);
-    o.put(PUBLISHED_TIME_STR, Constants.formatDate(publishedTime));
-    o.put(MODIFIED_TIME_STR, Constants.formatDate(modifiedTime));
+    if (type != null) {
+      o.put(TYPE_STR, type);
+    }
+    if (author != null) {
+      o.put(AUTHOR_STR, author);
+    }
+    if (copyright != null) {
+      o.put(COPYRIGHT_STR, copyright);
+    }
+    if (description != null) {
+      o.put(DESCRIPTION_STR, description);
+    }
+    if (imageUrl != null) {
+      o.put(IMAGE_URL_STR, imageUrl);
+    }
+    if (publishedTime != null) {
+      o.put(PUBLISHED_TIME_STR, Constants.formatDate(publishedTime));
+    }
+    if (modifiedTime != null) {
+      o.put(MODIFIED_TIME_STR, Constants.formatDate(modifiedTime));
+    }
     o.put(LAST_UPDATED_TIME_STR, Constants.formatDate(lastUpdatedTime));
     return o;
   }
@@ -221,15 +259,62 @@ public class CrawlData {
       statement.setString(5, this.copyright);
       statement.setString(6, this.description);
       statement.setString(7, this.imageUrl);
-      statement.setTimestamp(8, this.publishedTime == null ? null :
+      statement.setString(8, this.articleBody);
+      statement.setTimestamp(9, this.publishedTime == null ? null :
           new java.sql.Timestamp(this.publishedTime.getTime()));
-      statement.setTimestamp(9, this.modifiedTime == null ? null :
+      statement.setTimestamp(10, this.modifiedTime == null ? null :
           new java.sql.Timestamp(this.modifiedTime.getTime()));
-      statement.setTimestamp(10, new java.sql.Timestamp(now.getTime()));
+      statement.setTimestamp(11, new java.sql.Timestamp(now.getTime()));
       statement.execute();
       this.lastUpdatedTime = now;
     } catch (SQLException e) {
       e.printStackTrace();
+    }
+  }
+
+  private static Article createFromResultSet(ResultSet result)
+      throws SQLException, DataInternalException {
+    if (result.next()) {
+      Article.Builder builder = new Article.Builder();
+      builder.setId(result.getString(ID_STR));
+      builder.setTitle(result.getString(TITLE_STR));
+      builder.setType(result.getString(TYPE_STR));
+      builder.setAuthor(result.getString(AUTHOR_STR));
+      builder.setCopyright(result.getString(COPYRIGHT_STR));
+      builder.setDescription(result.getString(DESCRIPTION_STR));
+      builder.setImageUrl(result.getString(IMAGE_URL_STR));
+      builder.setArticleBody(result.getString(ARTICLE_BODY_STR));
+      builder.setPublishedTime(result.getDate(PUBLISHED_TIME_STR));
+      builder.setModifiedTime(result.getDate(MODIFIED_TIME_STR));
+      builder.setLastUpdatedTime(result.getDate(LAST_UPDATED_TIME_STR));
+      try {
+        return builder.build();
+      } catch (ValidationException e) {
+        throw new DataInternalException("Could not create article object: " + e.getMessage(), e);
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Officially sanctioned method for getting a user session from a logged-in
+   * session key.
+   */
+  public static List<Article> getArticles()
+      throws DataRequestException, DataInternalException {
+    try {
+      ArrayList<Article> articles = new ArrayList<Article>();
+      PreparedStatement statement =
+          MysqlHelper.getConnection().prepareStatement(SELECT_ALL_COMMAND);
+      ResultSet resultSet = statement.executeQuery();
+      Article article = createFromResultSet(resultSet);
+      while (article != null) {
+        articles.add(article);
+        article = createFromResultSet(resultSet);
+      }
+      return articles;
+    } catch (SQLException e) {
+      throw new DataInternalException("Could not retrieve articles", e);
     }
   }
 

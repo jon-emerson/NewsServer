@@ -1,6 +1,6 @@
 package com.janknspank.dom;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -8,12 +8,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
 import com.google.common.collect.Maps;
 
@@ -90,28 +84,6 @@ public class SiteParser {
         "article > p"});
   }
 
-  public static DocumentNode crawl(String url) throws ParseException {
-    HttpGet httpget = new HttpGet(url);
-
-    RequestConfig config = RequestConfig.custom()
-//        .setCookieSpec(CookieSpecs.IGNORE_COOKIES) // Don't pick up cookies.
-        .build();
-    CloseableHttpClient httpclient = HttpClients.custom()
-        .setDefaultRequestConfig(config)
-        .build();
-
-    try {
-      CloseableHttpResponse response = httpclient.execute(httpget);
-      if (response.getStatusLine().getStatusCode() == 200) {
-        return new HtmlHandler(response.getEntity().getContent()).getDocumentNode();
-      }
-      throw new ParseException("Bad response, status code = " +
-          response.getStatusLine().getStatusCode());
-    } catch (IOException e) {
-      throw new ParseException("Could not read web site", e);
-    }
-  }
-
   /**
    * Returns the best set of DOM addresses we currently know about for the given
    * domain (or subdomain, if one is so configured).  Looks in
@@ -185,9 +157,9 @@ public class SiteParser {
    * Returns Nodes for all the paragraph / header / quote / etc content within
    * an article's web page.
    */
-  public List<Node> getParagraphNodes(String url) throws ParseException {
-    DocumentNode documentNode = crawl(url);
-    printNode(documentNode, 0);
+  public List<Node> getParagraphNodes(InputStream inputStream, String url) throws ParseException {
+    DocumentNode documentNode = new HtmlHandler(inputStream).getDocumentNode();
+    // printNode(documentNode, 0);
     List<Node> paragraphs = new ArrayList<>();
     for (String domAddress : getDomAddressesForUrl(url)) {
       paragraphs.addAll(documentNode.findAll(domAddress));

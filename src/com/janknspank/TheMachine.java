@@ -2,14 +2,14 @@ package com.janknspank;
 
 import java.net.MalformedURLException;
 
-import com.janknspank.Crawler.CrawlerCallback;
-import com.janknspank.data.CrawlData;
+import com.janknspank.ArticleHandler.ArticleCallback;
+import com.janknspank.data.Article;
 import com.janknspank.data.DiscoveredUrl;
 import com.janknspank.data.Link;
 
 public class TheMachine {
   public void start() {
-    String originUrl = "http://www.latimes.com/about/la-sitemap-htmlstory.html";
+    String originUrl = "http://www.nytimes.com/";
     DiscoveredUrl.put(originUrl, false);
 
     while (true) {
@@ -29,7 +29,7 @@ public class TheMachine {
       }
 
       final String startUrlId = startUrl.getId();
-      new Crawler(new CrawlerCallback() {
+      new Crawler(new ArticleCallback() {
         @Override
         public void foundUrl(String url) {
           try {
@@ -46,7 +46,7 @@ public class TheMachine {
         }
 
         @Override
-        public void foundCrawlData(CrawlData data) {
+        public void foundArticle(Article data) {
           data.insert();
         }
       }).crawl(startUrl);

@@ -536,7 +536,7 @@ public class LenientSaxParser extends SAXParser {
     }
   }
 
-  protected LenientSaxParser() {
+  public LenientSaxParser() {
     super();
     this.xmlReader = new LenientXMLReader();
   }

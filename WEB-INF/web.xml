@@ -33,6 +33,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>GetArticlesServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetArticlesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetArticlesServlet</servlet-name>
+    <url-pattern>/getArticles</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.janknspank.server.LoginServlet</servlet-class>
   </servlet>
