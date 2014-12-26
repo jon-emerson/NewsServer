@@ -51,6 +51,10 @@ public class UrlCleaner {
       queryParameters.remove("theme");
       queryParameters.remove("view");
     }
+    if (url.getHost().endsWith(".bbc.co.uk") || url.getHost().equals("bbc.co.uk") ||
+        url.getHost().endsWith(".bbc.com") || url.getHost().equals("bbc.com")) {
+      queryParameters.remove("filter");
+    }
     if (url.getHost().endsWith(".bloomberg.com") || url.getHost().equals("bloomberg.com")) {
       queryParameters.remove("hootPostID");
     }
@@ -139,7 +143,12 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".nytimes.com") || url.getHost().equals("nytimes.com")) {
       queryParameters.remove("_r");
       queryParameters.remove("WT_nav");
+      queryParameters.remove("WT.mc_id");
+      queryParameters.remove("WT.mc_ev");
+      queryParameters.remove("WT.mc_c");
+      queryParameters.remove("WT.nav");
       queryParameters.remove("action");
+      queryParameters.remove("contentCollection");
       queryParameters.remove("emc");
       queryParameters.remove("hp");
       queryParameters.remove("inline");
@@ -149,12 +158,16 @@ public class UrlCleaner {
       queryParameters.remove("pagewanted");
       queryParameters.remove("partner");
       queryParameters.remove("pgtype");
+      queryParameters.remove("ref");
       queryParameters.remove("region");
+      queryParameters.remove("ribbon-ad-idx");
+      queryParameters.remove("rref");
       queryParameters.remove("scp");
       queryParameters.remove("smid");
       queryParameters.remove("sq");
       queryParameters.remove("src");
       queryParameters.remove("st");
+      queryParameters.remove("version");
     }
     if (url.getHost().endsWith(".reuters.com") || url.getHost().equals("reuters.com")) {
       queryParameters.remove("feedName");

@@ -22,8 +22,12 @@ public class SiteParser {
         ".text > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
         ".article-content > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("bbc.co.uk", new String[] {
+        ".story-body > p",
+        ".map-body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bbc.com", new String[] {
-        ".story-body > p"});
+        ".story-body > p",
+        ".map-body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bdnews24.com", new String[] {
         ".body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
@@ -69,7 +73,9 @@ public class SiteParser {
         "article > p",
         "article > div > p",
         "nyt_text > p",
-        "p.story-body-text"});
+        "p.story-body-text",
+        "#mod-a-body-first-para > p",
+        "#mod-a-body-after-first-para > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfexaminer.com", new String[] {
         "#storyBody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfgate.com", new String[] {
@@ -159,7 +165,7 @@ public class SiteParser {
    */
   public List<Node> getParagraphNodes(InputStream inputStream, String url) throws ParseException {
     DocumentNode documentNode = new HtmlHandler(inputStream).getDocumentNode();
-    // printNode(documentNode, 0);
+  //  printNode(documentNode, 0);
     List<Node> paragraphs = new ArrayList<>();
     for (String domAddress : getDomAddressesForUrl(url)) {
       paragraphs.addAll(documentNode.findAll(domAddress));

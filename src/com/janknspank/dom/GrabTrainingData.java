@@ -21,7 +21,7 @@ import org.apache.http.impl.client.HttpClients;
  */
 public class GrabTrainingData {
   private static final String[] URLS = {
-    // Put URLs here...
+    "http://www.nytimes.com/2014/12/27/world/asia/pakistan-militants-drone.html"
   };
 
   /**

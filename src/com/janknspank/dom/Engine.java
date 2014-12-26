@@ -56,7 +56,7 @@ public class Engine {
 
   public static void main(String args[]) throws Exception {
     String[] urls = {
-        "http://bits.blogs.nytimes.com/2010/01/07/google-applies-to-become-power-marketer/"
+        "http://www.bbc.com/news/uk-30584699"
     };
     for (String url : urls) {
       InterpretedData interpretedData = new Interpreter(getPage(url), url).getInterpretedData();

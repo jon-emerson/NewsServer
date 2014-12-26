@@ -78,7 +78,7 @@ public class ArticleHandler extends DefaultHandler {
   public void endElement(String namespaceURI,
       String localName,
       String qName) throws SAXException {
-    if (!articleBuilder.hasTitle() && "title".equalsIgnoreCase(localName)) {
+    if (!articleBuilder.hasTitle() && "title".equalsIgnoreCase(qName)) {
       articleBuilder.setTitle(lastCharacters);
     }
   }
@@ -112,8 +112,14 @@ public class ArticleHandler extends DefaultHandler {
       if ("description".equalsIgnoreCase(name)) {
         articleBuilder.setDescription(attrs.getValue("content"));
       }
-      if ("fb_title".equalsIgnoreCase(name)) {
+      if ("fb_title".equalsIgnoreCase(name) ||
+          "hdl".equalsIgnoreCase(name) ||
+          "Headline".equalsIgnoreCase(name)) {
         articleBuilder.setTitle(attrs.getValue("content"));
+      }
+      if ("thumbnail".equalsIgnoreCase(name) ||
+          "THUMBNAIL_URL".equalsIgnoreCase(name)) {
+        articleBuilder.setImageUrl(attrs.getValue("content"));
       }
 
       String property = attrs.getValue("property");
@@ -126,7 +132,7 @@ public class ArticleHandler extends DefaultHandler {
       if ("og:image".equalsIgnoreCase(property)) {
         articleBuilder.setImageUrl(attrs.getValue("content"));
       }
-      if ("og:description".equalsIgnoreCase(property)) {
+      if ("og:description".equalsIgnoreCase(property) ) {
         articleBuilder.setDescription(attrs.getValue("content"));
       }
 
@@ -136,6 +142,12 @@ public class ArticleHandler extends DefaultHandler {
       }
       if ("dateModified".equalsIgnoreCase(itemprop)) {
         articleBuilder.setModifiedTime(parseDateTime(attrs.getValue("content")));
+      }
+      if ("alternativeHeadline".equalsIgnoreCase(itemprop)) {
+        articleBuilder.setTitle(attrs.getValue("content"));
+      }
+      if ("thumbnailUrl".equalsIgnoreCase(itemprop)) {
+        articleBuilder.setImageUrl(attrs.getValue("content"));
       }
     }
   }

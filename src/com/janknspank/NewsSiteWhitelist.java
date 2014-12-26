@@ -3,6 +3,9 @@ package com.janknspank;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.regex.Pattern;
+
+import com.google.common.base.Joiner;
 
 public class NewsSiteWhitelist {
   private static final HashSet<String> WHITELIST = new HashSet<String>();
@@ -100,6 +103,33 @@ public class NewsSiteWhitelist {
     // WHITELIST.add("zdnet.com");
   }
 
+  /**
+   * Makes sure that BBC News URLs start with a path in the joined whitelist and
+   * end with an article number somewhere in the path after the final slash.
+   * (Article numbers are usually 8 digits.)
+   */
+  private static final Pattern BBC_NEWS_ARTICLE_PATH = Pattern.compile(
+      "^\\/(" + Joiner.on("|").join(new String[] {
+          "news",
+          "future\\/story",
+          "culture\\/story",
+          "earth\\/story",
+          "capital\\/story",
+          "autos\\/story"
+      }) + ")\\/.*[0-9]{6,10}[^\\/]*$");
+
+  /**
+   * URL validation regex's for NYTimes articles.
+   */
+  private static final Pattern NYTIMES_ARTICLE_DOMAIN = Pattern.compile(
+      "^(" + Joiner.on("|").join(new String[] {
+          "nytimes\\.com",
+          "www\\.nytimes\\.com",
+          "dealbook\\.nytimes\\.com"
+      }) + ")$");
+  private static final Pattern NYTIMES_ARTICLE_PATH = Pattern.compile(
+      "^\\/(1|2)[0-9]{3}\\/[0-9]{2}\\/[0-9]{2}\\/.*(\\/|\\.html)$");
+
   private static final HashSet<String> BLACKLIST = new HashSet<String>();
   static {
     BLACKLIST.add("account.washingtonpost.com");
@@ -135,10 +165,8 @@ public class NewsSiteWhitelist {
     BLACKLIST.add("mexico.cnn.com");
     BLACKLIST.add("mobile-phones.smh.com.au");
     BLACKLIST.add("myaccount.dallasnews.com");
-    BLACKLIST.add("myaccount.nytimes.com");
     BLACKLIST.add("placeanad.chicagotribune.com");
     BLACKLIST.add("profile.theguardian.com");
-    BLACKLIST.add("query.nytimes.com");
     BLACKLIST.add("radio.foxnews.com");
     BLACKLIST.add("rssfeeds.usatoday.com");
     BLACKLIST.add("search.bloomberg.com");
@@ -170,8 +198,10 @@ public class NewsSiteWhitelist {
       if (domain.endsWith("arstechnica.com") && path.startsWith("/civis/")) {
         return false;
       }
-      if (domain.endsWith("bbc.co.uk") && path.startsWith("/mpapps/pagetools/")) {
-        return false;
+      if (domain.endsWith("bbc.co.uk") || domain.endsWith("bbc.com")) {
+        if (!BBC_NEWS_ARTICLE_PATH.matcher(path).matches()) {
+          return false;
+        }
       }
       if (domain.endsWith(".bloomberg.com") && path.endsWith("/_/slideshow/")) {
         return false;
@@ -204,6 +234,12 @@ public class NewsSiteWhitelist {
       }
       if (domain.endsWith(".nj.com") && path.endsWith("/print.html")) {
         return false;
+      }
+      if (domain.endsWith("nytimes.com")) {
+        if (!NYTIMES_ARTICLE_DOMAIN.matcher(domain).matches() ||
+            !NYTIMES_ARTICLE_PATH.matcher(path).matches()) {
+          return false;
+        }
       }
       if (domain.endsWith("telegraph.co.uk") && path.startsWith("/sponsored/")) {
         return false;

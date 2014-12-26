@@ -23,7 +23,7 @@ import opennlp.tools.util.Span;
 public class Interpreter {
   private static final SentenceDetectorME SENTENCE_DETECTOR_ME;
   private static final opennlp.tools.tokenize.Tokenizer TOKENIZER;
-  private static final NameFinderME NAME_FINDER_ME;
+  private static final NameFinderME PERSON_FINDER_ME;
   private static final NameFinderME ORGANIZATION_FINDER_ME;
   private static final NameFinderME LOCATION_FINDER_ME;
   static {
@@ -41,7 +41,7 @@ public class Interpreter {
       InputStream personModelInputStream =
           new FileInputStream("opennlp/en-" + modelType + "-person.bin");
       TokenNameFinderModel personModel = new TokenNameFinderModel(personModelInputStream);
-      NAME_FINDER_ME = new NameFinderME(personModel);
+      PERSON_FINDER_ME = new NameFinderME(personModel);
 
       InputStream organizationModelInputStream =
           new FileInputStream("opennlp/en-" + modelType + "-organization.bin");
@@ -84,12 +84,12 @@ public class Interpreter {
     for (String paragraph : paragraphs) {
       for (String sentence : SENTENCE_DETECTOR_ME.sentDetect(paragraph)) {
         String[] tokens = TOKENIZER.tokenize(sentence);
-        parseNames(interpretedDataBuilder, tokens);
+        parsePeople(interpretedDataBuilder, tokens);
         parseOrganizations(interpretedDataBuilder, tokens);
         parseLocations(interpretedDataBuilder, tokens);
       }
     }
-    NAME_FINDER_ME.clearAdaptiveData();
+    PERSON_FINDER_ME.clearAdaptiveData();
     ORGANIZATION_FINDER_ME.clearAdaptiveData();
     LOCATION_FINDER_ME.clearAdaptiveData();
     interpretedData = interpretedDataBuilder.build();
@@ -120,9 +120,9 @@ public class Interpreter {
     return dirtyString;
   }
 
-  private void parseNames(InterpretedData.Builder interpretedDataBuilder, String[] tokens) {
-    Span nameSpans[] = NAME_FINDER_ME.find(tokens);
-    for (String person : Span.spansToStrings(nameSpans, tokens)) {
+  private void parsePeople(InterpretedData.Builder interpretedDataBuilder, String[] tokens) {
+    Span personSpans[] = PERSON_FINDER_ME.find(tokens);
+    for (String person : Span.spansToStrings(personSpans, tokens)) {
       interpretedDataBuilder.addPerson(cleanString(person));
     }
   }

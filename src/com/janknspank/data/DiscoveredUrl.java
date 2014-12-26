@@ -264,6 +264,16 @@ public class DiscoveredUrl {
     return null;
   }
 
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("url=");
+    sb.append(url);
+    sb.append(", id=");
+    sb.append(id);
+    return sb.toString();
+  }
+
   /** Helper method for creating the discovered-url table. */
   public static void main(String args[]) {
     try {

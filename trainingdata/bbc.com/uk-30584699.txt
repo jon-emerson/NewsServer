@@ -1,0 +1,13 @@
+http://www.bbc.com/news/uk-30584699
+Almost 60 % of small firms do not have plans in place for extreme weather - despite two thirds having been affected by snow , drought or floods in the last three years - a survey suggests .
+The <START:organization> Federation of Small Businesses <END> , which commissioned the research , said firms "need to get better prepared " .
+The survey also found 29 % of small firms did not have insurance for loss of income or damage caused by flooding .
+A total of 1,199 federation members took part in the survey .
+It found 59 % of small businesses had " no resilience plans to combat extreme weather " .
+The federation said damage caused by widespread flooding last year cost firms in affected areas an average of £1,531 .
+<START:person> Mike Cherry <END> , the federation 's national policy chairman , said : " Last year was the wettest winter on record and 3,200 commercial properties were flooded in the <START:location> UK. <END>
+" With such extreme weather events on the increase , small businesses need all the help they can get to make sure they can stay open whatever the weather . "
+He said he was " concerned " that small businesses would not be included in the government 's <START:organization> Flood Re-agreement <END> - a fund being set up to ensure people living in areas with a high risk of flooding can get affordable home insurance .
+" Firms need to be reassured that affordable flood insurance will be available in the future , " <START:person> Mr Cherry <END> added .
+Of the businesses in the survey which said they had been affected by extreme weather , 46 % said they experienced disruption to staff and customers , while 32 % said suppliers , utilities or transport arrangements were disrupted .
+The federation advised firms to check <START:organization> Environment Agency <END> guidance on preparing for flooding .

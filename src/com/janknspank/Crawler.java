@@ -53,6 +53,7 @@ public class Crawler {
       // TODO(jonemerson): Should we update the database if we were
       // redirected, so that it now points at the canonical URL?
       if (response.getStatusLine().getStatusCode() == 200) {
+        System.err.println("Crawling: " + url.getUrl());
         File file = writeToFile(url.getId() + ".html", response.getEntity().getContent());
         ArticleHandler handler = new ArticleHandler(callback, url);
         InterpretedData interpretedData =
