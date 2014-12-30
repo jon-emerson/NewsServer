@@ -14,6 +14,11 @@ public class Serializer {
   public static JSONObject toJSON(Message message) {
     JSONObject o = new JSONObject();
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
+      // Omit unset fields.
+      if (!message.hasField(fieldDescriptor)) {
+        continue;
+      }
+
       ClientSerialization serialization =
           fieldDescriptor.getOptions().getExtension(Core.clientSerialization);
       if (serialization == ClientSerialization.INCLUDE ||

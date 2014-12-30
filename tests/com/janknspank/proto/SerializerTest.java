@@ -9,7 +9,6 @@ import org.junit.Test;
 import com.janknspank.proto.Core.Article;
 
 public class SerializerTest {
-  private static final String AUTHOR = "author";
   private static final String ARTICLE_BODY = "article body";
   private static final String COPYRIGHT = "copyright";
   private static final String DESCRIPTION = "description";
@@ -24,7 +23,7 @@ public class SerializerTest {
   @Test
   public void testSerializer() throws Exception {
     Article.Builder builder = Article.newBuilder();
-    builder.setAuthor(AUTHOR);
+    builder.clearAuthor(); // Make sure this does NOT get serialized.
     builder.setArticleBody(ARTICLE_BODY);
     builder.setCopyright(COPYRIGHT);
     builder.setDescription(DESCRIPTION);
@@ -39,7 +38,7 @@ public class SerializerTest {
     Validator.assertValid(article);
 
     JSONObject o = Serializer.toJSON(article);
-    assertEquals(AUTHOR, o.getString("author"));
+    assertFalse(o.has("author"));
     assertEquals(COPYRIGHT, o.getString("copyright"));
     assertEquals(DESCRIPTION, o.getString("description"));
     assertEquals(ID, o.getString("id"));
