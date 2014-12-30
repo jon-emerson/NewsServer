@@ -162,6 +162,7 @@ public class NewsSiteWhitelist {
     BLACKLIST.add("guides.latimes.com");
     BLACKLIST.add("tamil.thehindu.com");
     BLACKLIST.add("id.theguardian.com");
+    BLACKLIST.add("ilivehere.latimes.com");
     BLACKLIST.add("iplayerhelp.external.bbc.co.uk");
     BLACKLIST.add("jobsearch.bloomberg.com");
     BLACKLIST.add("jobsearch.money.cnn.com");

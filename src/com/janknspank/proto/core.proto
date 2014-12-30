@@ -116,7 +116,8 @@ message ArticleKeyword {
   optional string article_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 24
+    (string_length) = 24,
+    (client_serialization) = EXCLUDE
   ];
 
   // the literal English keyword

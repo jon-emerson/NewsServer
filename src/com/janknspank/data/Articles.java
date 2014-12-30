@@ -40,8 +40,7 @@ public class Articles {
    * Officially sanctioned method for getting a user session from a logged-in
    * session key.
    */
-  public static List<Article> getArticles()
-      throws DataRequestException, DataInternalException {
+  public static List<Article> getArticles() throws DataInternalException {
     ArrayList<Article> articles = new ArrayList<Article>();
 
     try {
