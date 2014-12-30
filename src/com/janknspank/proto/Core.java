@@ -6045,6 +6045,714 @@ public final class Core {
     // @@protoc_insertion_point(class_scope:Session)
   }
 
+  public interface LinkedInDataOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string user_id = 1;
+    /**
+     * <code>optional string user_id = 1;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional string user_id = 1;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>optional string user_id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    // optional string raw_data = 2;
+    /**
+     * <code>optional string raw_data = 2;</code>
+     */
+    boolean hasRawData();
+    /**
+     * <code>optional string raw_data = 2;</code>
+     */
+    java.lang.String getRawData();
+    /**
+     * <code>optional string raw_data = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getRawDataBytes();
+
+    // optional int64 create_time = 3;
+    /**
+     * <code>optional int64 create_time = 3;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 create_time = 3;</code>
+     */
+    long getCreateTime();
+  }
+  /**
+   * Protobuf type {@code LinkedInData}
+   */
+  public static final class LinkedInData extends
+      com.google.protobuf.GeneratedMessage
+      implements LinkedInDataOrBuilder {
+    // Use LinkedInData.newBuilder() to construct.
+    private LinkedInData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private LinkedInData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final LinkedInData defaultInstance;
+    public static LinkedInData getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public LinkedInData getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LinkedInData(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              rawData_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              createTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.Core.internal_static_LinkedInData_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.Core.internal_static_LinkedInData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.Core.LinkedInData.class, com.janknspank.proto.Core.LinkedInData.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<LinkedInData> PARSER =
+        new com.google.protobuf.AbstractParser<LinkedInData>() {
+      public LinkedInData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LinkedInData(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LinkedInData> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string user_id = 1;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private java.lang.Object userId_;
+    /**
+     * <code>optional string user_id = 1;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string user_id = 1;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string user_id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string raw_data = 2;
+    public static final int RAW_DATA_FIELD_NUMBER = 2;
+    private java.lang.Object rawData_;
+    /**
+     * <code>optional string raw_data = 2;</code>
+     */
+    public boolean hasRawData() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string raw_data = 2;</code>
+     */
+    public java.lang.String getRawData() {
+      java.lang.Object ref = rawData_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          rawData_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string raw_data = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRawDataBytes() {
+      java.lang.Object ref = rawData_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        rawData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 create_time = 3;
+    public static final int CREATE_TIME_FIELD_NUMBER = 3;
+    private long createTime_;
+    /**
+     * <code>optional int64 create_time = 3;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 create_time = 3;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    private void initFields() {
+      userId_ = "";
+      rawData_ = "";
+      createTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getRawDataBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, createTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getRawDataBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, createTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.Core.LinkedInData prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code LinkedInData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.Core.LinkedInDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.Core.internal_static_LinkedInData_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.Core.internal_static_LinkedInData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.Core.LinkedInData.class, com.janknspank.proto.Core.LinkedInData.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.Core.LinkedInData.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        rawData_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.Core.internal_static_LinkedInData_descriptor;
+      }
+
+      public com.janknspank.proto.Core.LinkedInData getDefaultInstanceForType() {
+        return com.janknspank.proto.Core.LinkedInData.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.Core.LinkedInData build() {
+        com.janknspank.proto.Core.LinkedInData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.Core.LinkedInData buildPartial() {
+        com.janknspank.proto.Core.LinkedInData result = new com.janknspank.proto.Core.LinkedInData(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.rawData_ = rawData_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.createTime_ = createTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.Core.LinkedInData) {
+          return mergeFrom((com.janknspank.proto.Core.LinkedInData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.Core.LinkedInData other) {
+        if (other == com.janknspank.proto.Core.LinkedInData.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000001;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasRawData()) {
+          bitField0_ |= 0x00000002;
+          rawData_ = other.rawData_;
+          onChanged();
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.Core.LinkedInData parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.Core.LinkedInData) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string user_id = 1;
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>optional string user_id = 1;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string user_id = 1;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 1;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 1;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 1;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string raw_data = 2;
+      private java.lang.Object rawData_ = "";
+      /**
+       * <code>optional string raw_data = 2;</code>
+       */
+      public boolean hasRawData() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string raw_data = 2;</code>
+       */
+      public java.lang.String getRawData() {
+        java.lang.Object ref = rawData_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          rawData_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string raw_data = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRawDataBytes() {
+        java.lang.Object ref = rawData_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          rawData_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string raw_data = 2;</code>
+       */
+      public Builder setRawData(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        rawData_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string raw_data = 2;</code>
+       */
+      public Builder clearRawData() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        rawData_ = getDefaultInstance().getRawData();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string raw_data = 2;</code>
+       */
+      public Builder setRawDataBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        rawData_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 create_time = 3;
+      private long createTime_ ;
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000004;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:LinkedInData)
+    }
+
+    static {
+      defaultInstance = new LinkedInData(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:LinkedInData)
+  }
+
   public static final int REQUIRED_FIELD_NUMBER = 60001;
   /**
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
@@ -6114,6 +6822,11 @@ public final class Core {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Session_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_LinkedInData_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_LinkedInData_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6148,20 +6861,22 @@ public final class Core {
       "\017last_login_time\030\010 \001(\003\"g\n\007Session\022\"\n\013ses" +
       "sion_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022\035\n\007user_id" +
       "\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013create_time\030\003 \001(" +
-      "\003B\004\210\246\035\001*\033\n\010Required\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\r" +
-      "StorageMethod\022\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002" +
-      "\022\t\n\005INDEX\020\003\022\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OU" +
-      "T\020\005*F\n\023ClientSerialization\022\013\n\007INCLUDE\020\001\022" +
-      "\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010r",
-      "equired\022\035.google.protobuf.FieldOptions\030\341" +
-      "\324\003 \001(\0162\t.Required:\002NO:M\n\016storage_method\022" +
-      "\035.google.protobuf.FieldOptions\030\342\324\003 \001(\0162\016" +
-      ".StorageMethod:\004BLOB::\n\rstring_length\022\035." +
-      "google.protobuf.FieldOptions\030\343\324\003 \001(\005:\002-1" +
-      ":\\\n\024client_serialization\022\035.google.protob" +
-      "uf.FieldOptions\030\344\324\003 \001(\0162\024.ClientSerializ" +
-      "ation:\007INCLUDEB\037\n\024com.janknspank.proto\200\001" +
-      "\000\210\001\000\220\001\000"
+      "\003B\004\210\246\035\001\"f\n\014LinkedInData\022\035\n\007user_id\030\001 \001(\t" +
+      "B\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 \001(\tB\n\210\246\035\001\230\246" +
+      "\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001*\033\n\010Requi" +
+      "red\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\rStorageMethod\022\010\n" +
+      "\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022\020\n\014U",
+      "NIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005*F\n\023ClientSer" +
+      "ialization\022\013\n\007INCLUDE\020\001\022\025\n\021INCLUDE_AS_NU" +
+      "MBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010required\022\035.google" +
+      ".protobuf.FieldOptions\030\341\324\003 \001(\0162\t.Require" +
+      "d:\002NO:M\n\016storage_method\022\035.google.protobu" +
+      "f.FieldOptions\030\342\324\003 \001(\0162\016.StorageMethod:\004" +
+      "BLOB::\n\rstring_length\022\035.google.protobuf." +
+      "FieldOptions\030\343\324\003 \001(\005:\002-1:\\\n\024client_seria" +
+      "lization\022\035.google.protobuf.FieldOptions\030" +
+      "\344\324\003 \001(\0162\024.ClientSerialization:\007INCLUDEB\037",
+      "\n\024com.janknspank.proto\200\001\000\210\001\000\220\001\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6198,6 +6913,12 @@ public final class Core {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Session_descriptor,
               new java.lang.String[] { "SessionKey", "UserId", "CreateTime", });
+          internal_static_LinkedInData_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_LinkedInData_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_LinkedInData_descriptor,
+              new java.lang.String[] { "UserId", "RawData", "CreateTime", });
           required.internalInit(descriptor.getExtensions().get(0));
           storageMethod.internalInit(descriptor.getExtensions().get(1));
           stringLength.internalInit(descriptor.getExtensions().get(2));
@@ -6258,6 +6979,12 @@ public final class Core {
           registry.add(com.janknspank.proto.Core.stringLength);
           registry.add(com.janknspank.proto.Core.required);
           registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
           registry.add(com.janknspank.proto.Core.stringLength);
           registry.add(com.janknspank.proto.Core.required);
           return registry;

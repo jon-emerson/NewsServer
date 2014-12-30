@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.janknspank.data.DataInternalException;
-import com.janknspank.data.LinkedInData;
+import com.janknspank.data.Database;
+import com.janknspank.data.ValidationException;
+import com.janknspank.proto.Core.LinkedInData;
 import com.janknspank.proto.Core.Session;
 
 @AuthenticationRequired(requestMethod = "POST")
@@ -31,9 +33,18 @@ public class SetLinkedInDataServlet extends NewsServlet {
 
     // Business logic.
     try {
-      LinkedInData.put(session.getUserId(), linkedInJson);
+      LinkedInData data = LinkedInData.newBuilder()
+          .setUserId(session.getUserId())
+          .setRawData(linkedInJson)
+          .setCreateTime(System.currentTimeMillis())
+          .build();
+      Database.upsert(data);
     } catch (DataInternalException e) {
       resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      writeJson(resp, getErrorJson(e.getMessage()));
+      return;
+    } catch (ValidationException e) {
+      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       writeJson(resp, getErrorJson(e.getMessage()));
       return;
     }

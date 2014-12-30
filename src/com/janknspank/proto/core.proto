@@ -217,3 +217,19 @@ message Session {
   ];
 }
 
+message LinkedInData {
+  optional string user_id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24
+  ];
+
+  optional string raw_data = 2 [
+    (required) = YES,
+    (string_length) = 102400
+  ];
+
+  optional int64 create_time = 3 [
+    (required) = YES
+  ];
+}

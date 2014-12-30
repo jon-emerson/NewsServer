@@ -306,6 +306,19 @@ public class Database {
   }
 
   /**
+   * Either updates the message in the database, or inserts it if it doesn't
+   * exist.
+   * NOTE(jonemerson): This implementation might not be amazingly efficient
+   * against MySQL, but I'm still providing this API in case we switch to a
+   * backend that handles upserts better.
+   */
+  public static void upsert(Message message) throws ValidationException, DataInternalException {
+    if (!update(message)) {
+      insert(message);
+    }
+  }
+
+  /**
    * Returns the value of the passed {@code Message}'s primary key.
    */
   private static String getPrimaryKey(Message message) {
