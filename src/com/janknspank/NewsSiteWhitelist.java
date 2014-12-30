@@ -170,6 +170,7 @@ public class NewsSiteWhitelist {
     BLACKLIST.add("radio.foxnews.com");
     BLACKLIST.add("rssfeeds.usatoday.com");
     BLACKLIST.add("search.bloomberg.com");
+    BLACKLIST.add("search.boston.com");
     BLACKLIST.add("shop.telegraph.co.uk");
     BLACKLIST.add("shopping.nj.com");
     BLACKLIST.add("ssl.bbc.co.uk");
@@ -192,7 +193,10 @@ public class NewsSiteWhitelist {
       if (path.startsWith("/cgi-bin/")) {
         return false;
       }
-      if (domain.endsWith("abcnews.go.com") && path.startsWith("/meta/")) {
+      if (domain.endsWith("abcnews.go.com") &&
+          (path.startsWith("/blogs/") ||
+           path.startsWith("/meta/") ||
+           path.startsWith("/xmldata/"))) {
         return false;
       }
       if (domain.endsWith("arstechnica.com") && path.startsWith("/civis/")) {
@@ -206,10 +210,16 @@ public class NewsSiteWhitelist {
       if (domain.endsWith(".bloomberg.com") && path.endsWith("/_/slideshow/")) {
         return false;
       }
-      if (domain.endsWith("boston.com") && path.startsWith("/boston/action/rssfeed")) {
+      if (domain.endsWith("boston.com") &&
+          (path.startsWith("/boston/action/rssfeed") ||
+           path.startsWith("/sports/blogs/") ||
+           path.startsWith("/radio"))) {
         return false;
       }
       if (domain.endsWith(".chicagotribune.com") && path.endsWith("/comments/atom.xml")) {
+        return false;
+      }
+      if (domain.endsWith(".cnn.com") && path.startsWith("/interactive/")) {
         return false;
       }
       if (domain.endsWith("forbes.com") && path.startsWith("/account/")) {

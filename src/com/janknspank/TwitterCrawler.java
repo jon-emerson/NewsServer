@@ -13,8 +13,12 @@ import twitter4j.URLEntity;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
-import com.janknspank.data.DiscoveredUrl;
-import com.janknspank.data.Link;
+import com.janknspank.data.DataInternalException;
+import com.janknspank.data.Database;
+import com.janknspank.data.Urls;
+import com.janknspank.data.ValidationException;
+import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.Core.Link;
 
 public class TwitterCrawler implements twitter4j.StatusListener {
   private final URLResolver resolver = URLResolver.getInstance();
@@ -69,9 +73,19 @@ public class TwitterCrawler implements twitter4j.StatusListener {
                 System.err.println("News URL found: " + longUrl);
                 String twitterUrl = "https://twitter.com/" +
                     status.getUser().getScreenName() + "/status/" + status.getId();
-                DiscoveredUrl discoveredTwitterUrl = DiscoveredUrl.put(twitterUrl, false);
-                DiscoveredUrl newsUrl = DiscoveredUrl.put(longUrl, true);
-                Link.put(discoveredTwitterUrl.getId(), newsUrl.getId(), newsUrl.getDiscoveryTime());
+
+                try {
+                  Url discoveredTwitterUrl = Urls.put(twitterUrl, /* isTweet */ false);
+                  Url newsUrl = Urls.put(longUrl, /* isTweet */ true);
+                  Database.insert(Link.newBuilder()
+                      .setOriginId(discoveredTwitterUrl.getId())
+                      .setDestinationId(newsUrl.getId())
+                      .setDiscoveryTime(newsUrl.getDiscoveryTime())
+                      .setLastFoundTime(newsUrl.getDiscoveryTime())
+                      .build());
+                } catch (ValidationException|DataInternalException e) {
+                  e.printStackTrace();
+                }
               }
             }
           });

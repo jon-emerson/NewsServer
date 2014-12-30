@@ -1,0 +1,43 @@
+http://www.bbc.co.uk/news/uk-30625945
+A <START:organization> Virgin Atlantic <END> passenger plane has landed safely at <START:location> London <END> 's <START:location> Gatwick Airport <END> after discovering a problem with part of its main landing gear .
+<START:organization> Virgin <END> flight VS43 with 447 passengers and 15 crew was travelling from <START:location> Gatwick <END> to <START:location> Las Vegas <END> when it had to return .
+The <START:organization> Boeing <END> 747 circled over southern <START:location> England <END> for several hours dumping fuel before making a bumpy but safe landing just before 16 :00 GMT.
+<START:location> Gatwick <END> 's runway reopened at 19:03 GMT after being closed by the emergency .
+Budget airline <START:organization> Easyjet <END> said 12 of its flights due to land at <START:location> Gatwick <END> on Monday had been diverted and 32 due to depart from the airport had been cancelled .
+In a statement , <START:location> Gatwick Airport <END> said : " The airport is now facilitating inbound and outbound flights but it will take some time for normal service to resume .
+" We advise passengers to check with their airlines on the status of their flight .
+Updates will also be posted on the <START:location> Gatwick <END> website and on <START:organization> Twitter <END> . "
+The statement said the airport was working with its airline partners to provide food , drink and welfare facilities to those affected by the delays and cancellations and volunteers were helping provide advice .
+Arriving flights had been diverted to other <START:location> London <END> airports , while departing aircraft were severely delayed while the Virgin jet was being assessed on the runway .
+The 13-year-old aircraft had left <START:location> Gatwick <END> for the US at 11:30 GMT on Monday .
+After detecting the problem , the aircraft needed to fly holding patterns over <START:location> Devon <END> and then <START:location> Sussex <END> to dump fuel in order to be light enough to land .
+Before the successful conclusion to the incident , <START:organization> Virgin <END> announced the plane would be carrying out a "non-standard landing procedure " at <START:location> Gatwick <END> airport .
+Pictures posted on <START:organization> Twitter <END> of the aircraft circling over East and <START:location> West Sussex <END> showed part of the main landing gear had not fully extended .
+Eyewitnesses reported the jet was flying at relatively low altitude and the pilot appeared to be trying to " shake " the landing gear down .
+<START:person> Nick Hughes <END> , who was on board , said the crew made several attempts to try to free the landing gear .
+" They put the thrust on quite heavily and then dipped down , I think , to try and loosen the gears but obviously nothing kind of worked .
+" They gave it every opportunity before they tried the emergency landing .
+All credit due to the crew and the staff and of course the pilots because the landing was probably one of the softest landings I 've ever had . "
+Another passenger , <START:person> Hardeek Desai <END> , said : " The staff were trying to keep everyone calm but a few passengers were a bit panicky .
+One of the crew came out to the seating area to reassure everyone everything was going to be OK .
+" The staff were giving out thing like drinks and water to everyone to make sure everyone 's OK .
+Generally , the mood was pretty good at this point until we hit the brace position . "
+Describing the mood on the plane as it was circling , passenger <START:person> Dan Crane <END> , 24 , from <START:location> Bromsgrove , Worcestershire <END> , said it was "anxious , a lot were worried , some crying .
+The mood was quiet , just waiting for the captain 's next announcement . "
+<START:person> Mr Crane <END> , who is with family and friends , said the crew kept everyone informed , adding : " They said it was an emergency landing and we had to brace on impact . "
+<START:person> Sunjay Patel <END> told the <START:organization> BBC <END> : " It 's been a rollercoaster .
+Yesterday I found out that I was going to <START:location> Vegas <END> for my 30th birthday , and not going to <START:location> Vegas <END> today it 's been quite a crazy 24 hours .
+I ca n't wait to get to <START:location> Vegas <END> to enjoy it now . "
+He said the passengers had been taken to a hotel but they did not know when there would be a replacement flight .
+Another passenger , <START:person> Mike Kaufman <END> , said : " This was one of the greatest emergency landings in history .
+It was very smooth . "
+He praised the pilots and the cabin crew , saying the landing had been "textbook" .
+<START:organization> Virgin Atlantic <END> chief executive <START:person> Craig Kreeger <END> said : " I am very pleased to confirm that all customers and crew have now disembarked the VS43 flight to <START:location> Las Vegas <END> , which returned to <START:location> Gatwick <END> airport this afternoon following a problem with one of the landing gear .
+" I understand that this will have been a very upsetting situation for the customers involved , and for their friends and family , and will have significantly disrupted people 's holiday plans .
+" We will make sure they are well looked after this evening , and will be operating a special flight tomorrow for everyone who would like to continue their journey . "
+<START:organization> Virgin Atlantic <END> president <START:person> Sir Richard Branson <END> tweeted : " Well done @VirginAtlantic pilots & team for safe & skilful landing of #VS43 .
+Thoughts with passengers & crew , thanks for support & patience . "
+A spokesman for British pilots ' organisation <START:organization> Balpa <END> said : " Pilots train hard for exactly this kind of situation .
+It goes to show that well-trained pilots are vital . "
+Are you , or is someone you know , affected by this story ?
+Are you in the <START:location> Gatwick <END> area ?

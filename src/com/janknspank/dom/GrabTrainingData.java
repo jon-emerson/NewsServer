@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.http.client.config.RequestConfig;
@@ -15,13 +16,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+import com.google.common.base.Joiner;
+
 /**
  * Grabs content from all the URLs in "URLS", then writes their tokenized
  * versions to the /trainingdata folder under their appropriate subdirectories.
  */
 public class GrabTrainingData {
   private static final String[] URLS = {
-    "http://www.nytimes.com/2014/12/27/world/asia/pakistan-militants-drone.html"
+    "http://www.bbc.co.uk/news/uk-30625945"
   };
 
   /**
@@ -32,10 +35,13 @@ public class GrabTrainingData {
     try {
       URL bigUrl = new URL(url);
       String domain = bigUrl.getHost();
-      while (domain.lastIndexOf(".") != domain.indexOf(".")) {
-        domain = domain.substring(domain.indexOf(".") + 1);
-      }
-      return domain;
+      List<String> components = Arrays.asList(domain.split("\\."));
+      int count = components.size();
+      String tld = components.get(count - 1);
+      return Joiner.on(".").join(
+          "uk".equals(tld) || "au".equals(tld) || "nz".equals(tld) ?
+          components.subList(Math.max(0, count - 3), count) :
+          components.subList(Math.max(0, count - 2), count));
     } catch (MalformedURLException e) {
       throw new RuntimeException(e);
     }

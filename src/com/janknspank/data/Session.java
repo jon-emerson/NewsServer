@@ -218,7 +218,7 @@ public class Session {
     // Commit the new user.
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(CREATE_SESSION_COMMAND);
+          Database.getConnection().prepareStatement(CREATE_SESSION_COMMAND);
       statement.setString(1, sessionKey);
       statement.setString(2, user.getId());
       statement.setTimestamp(3, createTime);
@@ -251,7 +251,7 @@ public class Session {
 
       // Make sure the session key is in the database.
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(SELECT_BY_SESSION_KEY_COMMAND);
+          Database.getConnection().prepareStatement(SELECT_BY_SESSION_KEY_COMMAND);
       statement.setString(1, sessionKey);
       Session session = createFromResultSet(statement.executeQuery());
       if (session == null) {
@@ -277,7 +277,7 @@ public class Session {
   public static boolean deleteSessionKey(String sessionKey) throws DataInternalException {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(DELETE_COMMAND);
+          Database.getConnection().prepareStatement(DELETE_COMMAND);
       statement.setString(1, sessionKey);
       return statement.executeUpdate() > 0;
     } catch (SQLException e) {
@@ -293,7 +293,7 @@ public class Session {
   public static int deleteAllFromUser(User user) throws DataInternalException {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(DELETE_BY_USER_ID_COMMAND);
+          Database.getConnection().prepareStatement(DELETE_BY_USER_ID_COMMAND);
       statement.setString(1, user.getId());
       return statement.executeUpdate();
     } catch (SQLException e) {
@@ -304,7 +304,7 @@ public class Session {
   /** Helper method for creating the Session table. */
   public static void main(String args[]) {
     try {
-      Statement statement = MysqlHelper.getConnection().createStatement();
+      Statement statement = Database.getConnection().createStatement();
       statement.executeUpdate(CREATE_TABLE_COMMAND);
     } catch (SQLException e) {
       e.printStackTrace();

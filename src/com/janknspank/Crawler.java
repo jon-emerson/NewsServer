@@ -15,11 +15,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.xml.sax.SAXException;
 
 import com.janknspank.ArticleHandler.ArticleCallback;
-import com.janknspank.data.DiscoveredUrl;
 import com.janknspank.dom.InterpretedData;
 import com.janknspank.dom.Interpreter;
 import com.janknspank.dom.LenientSaxParser;
 import com.janknspank.dom.ParseException;
+import com.janknspank.proto.Core.Url;
 
 public class Crawler {
   private final ArticleCallback callback;
@@ -28,7 +28,7 @@ public class Crawler {
     this.callback = callback;
   }
 
-  public void crawl(DiscoveredUrl url) {
+  public void crawl(Url url) {
     try {
       HttpGet httpget = new HttpGet(url.getUrl());
 
@@ -58,7 +58,7 @@ public class Crawler {
         ArticleHandler handler = new ArticleHandler(callback, url);
         InterpretedData interpretedData =
             new Interpreter(new FileInputStream(file), url.getUrl()).getInterpretedData();
-        handler.setArticleBody(interpretedData.getArticleBody());
+        handler.setArticle(interpretedData.getArticleBody());
         new LenientSaxParser().parse(new FileInputStream(file), handler);
       }
 

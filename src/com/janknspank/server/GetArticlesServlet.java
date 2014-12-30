@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.janknspank.data.Article;
+import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
+import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.Serializer;
 
 public class GetArticlesServlet extends NewsServlet {
   @Override
@@ -22,8 +24,8 @@ public class GetArticlesServlet extends NewsServlet {
 
     JSONArray articles = new JSONArray();
     try {
-      for (Article article : Article.getArticles()) {
-        articles.put(article.toJSONObject());
+      for (Article article : Articles.getArticles()) {
+        articles.put(Serializer.toJSON(article));
       }
       response.put("articles", articles);
       response.put("success", true);

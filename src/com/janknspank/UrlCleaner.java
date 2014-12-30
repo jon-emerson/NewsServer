@@ -54,6 +54,11 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".bbc.co.uk") || url.getHost().equals("bbc.co.uk") ||
         url.getHost().endsWith(".bbc.com") || url.getHost().equals("bbc.com")) {
       queryParameters.remove("filter");
+      queryParameters.remove("ns_campaign");
+      queryParameters.remove("ns_linkname");
+      queryParameters.remove("ns_mchannel");
+      queryParameters.remove("ns_source");
+      queryParameters.remove("postId");
     }
     if (url.getHost().endsWith(".bloomberg.com") || url.getHost().equals("bloomberg.com")) {
       queryParameters.remove("hootPostID");

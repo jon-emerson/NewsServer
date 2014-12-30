@@ -163,7 +163,7 @@ public class LinkedInData {
   public static LinkedInData get(String userId) throws DataInternalException {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(SELECT_COMMAND);
+          Database.getConnection().prepareStatement(SELECT_COMMAND);
       statement.setString(1, userId);
       return createFromResultSet(statement.executeQuery());
     } catch (SQLException e) {
@@ -177,7 +177,7 @@ public class LinkedInData {
       // we know we've already discovered this link before.
       java.sql.Timestamp now = new java.sql.Timestamp(System.currentTimeMillis());
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(UPDATE_COMMAND);
+          Database.getConnection().prepareStatement(UPDATE_COMMAND);
       statement.setBlob(1, IOUtils.toInputStream(rawData, Charsets.UTF_8));
       statement.setTimestamp(2, now);
       statement.setString(3, userId);
@@ -202,7 +202,7 @@ public class LinkedInData {
   public static void delete(String userId) {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(DELETE_COMMAND);
+          Database.getConnection().prepareStatement(DELETE_COMMAND);
       statement.setString(1, userId);
       statement.executeUpdate();
     } catch (SQLException e) {
@@ -212,7 +212,7 @@ public class LinkedInData {
 
   private void insert() throws SQLException {
     PreparedStatement statement =
-        MysqlHelper.getConnection().prepareStatement(INSERT_COMMAND);
+        Database.getConnection().prepareStatement(INSERT_COMMAND);
     statement.setString(1, this.userId);
     statement.setBlob(2, IOUtils.toInputStream(this.rawData, Charsets.UTF_8));
     statement.setTimestamp(3, new java.sql.Timestamp(this.createTime.getTime()));
@@ -223,7 +223,7 @@ public class LinkedInData {
   /** Helper method for creating the Link table. */
   public static void main(String args[]) {
     try {
-      Statement statement = MysqlHelper.getConnection().createStatement();
+      Statement statement = Database.getConnection().createStatement();
       statement.executeUpdate(CREATE_TABLE_COMMAND);
     } catch (SQLException e) {
       e.printStackTrace();

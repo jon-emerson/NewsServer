@@ -5,7 +5,8 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -13,44 +14,71 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.janknspank.data.Article;
-import com.janknspank.data.DiscoveredUrl;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Strings;
+import com.janknspank.data.Articles;
 import com.janknspank.data.ValidationException;
+import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.Validator;
 
 public class ArticleHandler extends DefaultHandler {
   public static final String ISO_8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
   private static final DateTimeFormatter ISO_DATE_TIME_FORMAT =
       DateTimeFormat.forPattern(ISO_8601_DATE_FORMAT).withOffsetParsed();
+  private static final Pattern DATE_IN_URL_PATTERN =
+      Pattern.compile("\\/[0-9]{4}\\/[0-9]{2}\\/[0-9]{2}\\/");
   private static final DateFormat[] KNOWN_DATE_FORMATS = {
       new SimpleDateFormat("MMMM dd, yyyy, hh:mm a"), // CBS News.
       new SimpleDateFormat("MMMM dd, yyyy"), // Chicago Tribune.
       new SimpleDateFormat("yyyy-MM-dd"), // New York Times.
-      new SimpleDateFormat("yyyyMMdd") // Washington Post.
+      new SimpleDateFormat("yyyyMMdd"), // Washington Post.
+      new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"), // BBC.
+      new SimpleDateFormat("EEE, dd MMM yyyy HH:mm z"), // Boston.com.
+      new SimpleDateFormat("/yyyy/MM/dd/") // In URL.
   };
 
-  private final URL baseUrl;
-  private final Article.Builder articleBuilder = new Article.Builder();
   private String lastCharacters;
   private final ArticleCallback callback;
 
+  @VisibleForTesting
+  final Article.Builder articleBuilder;
+
   public interface ArticleCallback {
     public void foundUrl(String url);
-    public void foundArticle(Article data);
+    public void foundArticle(Article article);
   }
 
-  public ArticleHandler(ArticleCallback callback, DiscoveredUrl startUrl) {
+  public ArticleHandler(ArticleCallback callback, Url startUrl) {
     this.callback = callback;
 
-    try {
-      this.baseUrl = new URL(startUrl.getUrl());
-    } catch (MalformedURLException e) {
-      throw new RuntimeException(e);
-    }
+    this.articleBuilder = Article.newBuilder();
     articleBuilder.setId(startUrl.getId());
+    articleBuilder.setUrl(startUrl.getUrl());
+
+    // See if we can parse a date out of the URL.
+    Matcher dateInUrlMatcher = DATE_IN_URL_PATTERN.matcher(startUrl.getUrl());
+    System.out.println("Trying to find date in URL: " + startUrl.getUrl());
+    if (dateInUrlMatcher.find()) {
+      System.out.println("FOUND: " + dateInUrlMatcher.group());
+      System.out.println("Parsed as: " + parseDateTime(dateInUrlMatcher.group()));
+      articleBuilder.setPublishedTime(parseDateTime(dateInUrlMatcher.group()));
+    }
   }
 
-  public void setArticleBody(String articleBody) {
-    articleBuilder.setArticleBody(articleBody);
+  /**
+   * Resolves a relative URL to its base based on the URL of this article.
+   */
+  private String resolveUrl(String relativeUrl) throws MalformedURLException {
+    return new URL(new URL(articleBuilder.getUrl()), relativeUrl).toString();
+  }
+
+  public void setArticle(String articleBody) {
+    if (articleBody.length() > Articles.MAX_ARTICLE_LENGTH) {
+      articleBuilder.setArticleBody(articleBody.substring(0, Articles.MAX_ARTICLE_LENGTH));
+    } else {
+      articleBuilder.setArticleBody(articleBody);
+    }
   }
 
   @Override
@@ -66,10 +94,10 @@ public class ArticleHandler extends DefaultHandler {
   @Override
   public void endDocument() {
     try {
-      callback.foundArticle(articleBuilder.build());
+      callback.foundArticle((Article) Validator.assertValid(articleBuilder.build()));
     } catch (ValidationException e) {
       // This is OK - Some documents just don't have enough data.
-      System.err.println("Bad crawl data for URL: " + baseUrl.toString());
+      System.err.println("Bad crawl data for URL: " + articleBuilder.getUrl());
       e.printStackTrace();
     }
   }
@@ -95,9 +123,10 @@ public class ArticleHandler extends DefaultHandler {
           !"nofollow".equalsIgnoreCase(attrs.getValue("rel")) &&
           (href.startsWith("http://") || href.startsWith("https://"))) {
         try {
-          callback.foundUrl(new URL(baseUrl, href).toString());
+          callback.foundUrl(resolveUrl(href));
         } catch (MalformedURLException e) {
-          e.printStackTrace();
+          System.out.println("Ignoring malformed URL: " + href + " on page " +
+              articleBuilder.getUrl());
         }
       }
     }
@@ -121,19 +150,31 @@ public class ArticleHandler extends DefaultHandler {
           "THUMBNAIL_URL".equalsIgnoreCase(name)) {
         articleBuilder.setImageUrl(attrs.getValue("content"));
       }
+      if ("OriginalPublicationDate".equalsIgnoreCase(name) ||
+          "publish-date".equalsIgnoreCase(name)) {
+        articleBuilder.setPublishedTime(parseDateTime(attrs.getValue("content")));
+      }
 
       String property = attrs.getValue("property");
-      if ("og:title".equalsIgnoreCase(property)) {
+      if ("og:title".equalsIgnoreCase(property) ||
+          "rnews:headline".equalsIgnoreCase(property)) {
         articleBuilder.setTitle(attrs.getValue("content"));
+      }
+      if ("rnews:description".equalsIgnoreCase(property)) {
+        articleBuilder.setDescription(attrs.getValue("content"));
       }
       if ("og:type".equalsIgnoreCase(property)) {
         articleBuilder.setType(attrs.getValue("content"));
       }
-      if ("og:image".equalsIgnoreCase(property)) {
+      if ("og:image".equalsIgnoreCase(property) ||
+          "rnews:thumbnailUrl".equalsIgnoreCase(property)) {
         articleBuilder.setImageUrl(attrs.getValue("content"));
       }
       if ("og:description".equalsIgnoreCase(property) ) {
         articleBuilder.setDescription(attrs.getValue("content"));
+      }
+      if ("rnews:datePublished".equalsIgnoreCase(property)) {
+        articleBuilder.setPublishedTime(parseDateTime(attrs.getValue("content")));
       }
 
       String itemprop = attrs.getValue("itemprop");
@@ -152,23 +193,25 @@ public class ArticleHandler extends DefaultHandler {
     }
   }
 
-  private Date parseDateTime(String dateStr) {
-    if (dateStr == null) {
-      return null;
+  // TODO(jonemerson): It seems like this is returning long's that have been
+  // adjusted for PDT.  E.g. they're bigger than they should be by 7-8 hours.
+  private long parseDateTime(String dateStr) {
+    if (Strings.isNullOrEmpty(dateStr)) {
+      return 0;
     }
     try {
       // This is the most common date format.
-      return ISO_DATE_TIME_FORMAT.parseDateTime(dateStr).toDate();
+      return ISO_DATE_TIME_FORMAT.parseDateTime(dateStr).getMillis();
     } catch (IllegalArgumentException e) {
       for (DateFormat format : KNOWN_DATE_FORMATS) {
         try {
-          return format.parse(dateStr);
+          return format.parse(dateStr).getTime();
         } catch (ParseException e2) {
           // This is OK - we just don't match.  Try the next one.
         }
       }
     }
     System.err.println("COULD NOT PARSE DATE: " + dateStr);
-    return null;
+    return 0;
   }
 }

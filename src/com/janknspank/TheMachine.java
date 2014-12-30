@@ -3,31 +3,35 @@ package com.janknspank;
 import java.net.MalformedURLException;
 
 import com.janknspank.ArticleHandler.ArticleCallback;
-import com.janknspank.data.Article;
-import com.janknspank.data.DiscoveredUrl;
-import com.janknspank.data.Link;
+import com.janknspank.data.DataInternalException;
+import com.janknspank.data.Urls;
+import com.janknspank.data.Links;
+import com.janknspank.data.Database;
+import com.janknspank.data.ValidationException;
+import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.Core.Link;
 
 public class TheMachine {
-  public void start() {
+  public void start() throws DataInternalException {
     String originUrl = "http://www.nytimes.com/";
-    DiscoveredUrl.put(originUrl, false);
+    Urls.put(originUrl, false);
 
     while (true) {
-      final DiscoveredUrl startUrl = DiscoveredUrl.getNextUrlToCrawl();
-
-      if (!NewsSiteWhitelist.isOkay(startUrl.getUrl())) {
-        System.err.println("Removing now-blacklisted site: " + startUrl.getUrl());
-        Link.deleteId(startUrl.getId());
-        startUrl.delete();
-        continue;
-      }
-
-      System.err.println("Crawling: " + startUrl.getUrl());
-      if (!startUrl.markAsCrawled()) {
+      final Url startUrl = Urls.markAsCrawled(Urls.getNextUrlToCrawl());
+      if (startUrl == null) {
         // Some other thread has likely claimed this URL - Go get another.
         continue;
       }
 
+      if (!NewsSiteWhitelist.isOkay(startUrl.getUrl())) {
+        System.err.println("Removing now-blacklisted site: " + startUrl.getUrl());
+        Links.deleteId(startUrl.getId());
+        Database.delete(startUrl);
+        continue;
+      }
+
+      System.err.println("Crawling: " + startUrl.getUrl());
       final String startUrlId = startUrl.getId();
       new Crawler(new ArticleCallback() {
         @Override
@@ -40,20 +44,33 @@ public class TheMachine {
           }
 
           if (NewsSiteWhitelist.isOkay(url)) {
-            DiscoveredUrl destination = DiscoveredUrl.put(url, false);
-            Link.put(startUrlId, destination.getId(), destination.getDiscoveryTime());
+            try {
+              Url destination = Urls.put(url, /* isTweet */ false);
+              Database.insert(Link.newBuilder()
+                  .setOriginId(startUrlId)
+                  .setDestinationId(destination.getId())
+                  .setDiscoveryTime(destination.getDiscoveryTime())
+                  .setLastFoundTime(destination.getDiscoveryTime())
+                  .build());
+            } catch (ValidationException|DataInternalException e) {
+              e.printStackTrace();
+            }
           }
         }
 
         @Override
-        public void foundArticle(Article data) {
-          data.insert();
+        public void foundArticle(Article article) {
+          try {
+            Database.insert(article);
+          } catch (ValidationException|DataInternalException e) {
+            e.printStackTrace();
+          }
         }
       }).crawl(startUrl);
     }
   }
 
-  public static void main(String args[]) {
+  public static void main(String args[]) throws Exception {
     new TheMachine().start();
   }
 }

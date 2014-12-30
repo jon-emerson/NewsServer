@@ -243,7 +243,7 @@ public class User {
   public static User get(String email) throws DataInternalException {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(SELECT_BY_EMAIL_COMMAND);
+          Database.getConnection().prepareStatement(SELECT_BY_EMAIL_COMMAND);
       statement.setString(1, email);
       return createFromResultSet(statement.executeQuery());
 
@@ -268,7 +268,7 @@ public class User {
     // Commit the new user.
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(CREATE_USER_COMMAND);
+          Database.getConnection().prepareStatement(CREATE_USER_COMMAND);
       statement.setString(1, userId);
       statement.setString(2, email);
       statement.setString(3, passwordSha256);
@@ -299,7 +299,7 @@ public class User {
       throws DataInternalException, DataRequestException {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(UPDATE_LAST_LOGIN_TIME_COMMAND);
+          Database.getConnection().prepareStatement(UPDATE_LAST_LOGIN_TIME_COMMAND);
       statement.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
       statement.setString(2, email);
       statement.setString(3, getPasswordSha256(password));
@@ -321,7 +321,7 @@ public class User {
       throws DataRequestException, DataInternalException {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(SET_LINKEDIN_ID_COMMAND);
+          Database.getConnection().prepareStatement(SET_LINKEDIN_ID_COMMAND);
       statement.setString(1, linkedinId);
       statement.setString(2, userId);
       if (statement.executeUpdate() == 0) {
@@ -339,7 +339,7 @@ public class User {
   public static boolean deleteId(String id) throws DataInternalException {
     try {
       PreparedStatement statement =
-          MysqlHelper.getConnection().prepareStatement(DELETE_COMMAND);
+          Database.getConnection().prepareStatement(DELETE_COMMAND);
       statement.setString(1, id);
       return statement.executeUpdate() > 0;
     } catch (SQLException e) {
@@ -350,7 +350,7 @@ public class User {
   /** Helper method for creating the User table. */
   public static void main(String args[]) {
     try {
-      Statement statement = MysqlHelper.getConnection().createStatement();
+      Statement statement = Database.getConnection().createStatement();
       statement.executeUpdate(CREATE_TABLE_COMMAND);
       statement.executeUpdate(CREATE_EMAIL_INDEX_COMMAND);
     } catch (SQLException e) {
