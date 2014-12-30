@@ -58,7 +58,7 @@ public class Crawler {
         ArticleHandler handler = new ArticleHandler(callback, url);
         InterpretedData interpretedData =
             new Interpreter(new FileInputStream(file), url.getUrl()).getInterpretedData();
-        handler.setArticle(interpretedData.getArticleBody());
+        handler.setInterpretedData(interpretedData);
         new LenientSaxParser().parse(new FileInputStream(file), handler);
       }
 

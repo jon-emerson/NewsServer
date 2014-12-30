@@ -105,7 +105,7 @@ public class HtmlHandler extends DefaultHandler {
   @Override
   public void endDocument() {
     if (!(currentNode instanceof DocumentNode)) {
-      throw new IllegalStateException("Document ended without closing its body");
+      System.out.println("WARNING: Document ended without closing its body");
     }
   }
 

@@ -112,6 +112,33 @@ message Article {
   optional int64 modified_time = 11;
 }
 
+message ArticleKeyword {
+  optional string article_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24
+  ];
+
+  // the literal English keyword
+  optional string keyword = 2 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 50
+  ];
+
+  // number of occurences + other factors.
+  optional int32 strength = 3 [
+    (required) = YES
+  ];
+
+  // 'o' for organization, 'p' for person, 'l' for location.
+  optional string type = 4 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 20
+  ];
+}
+
 message Link {
   optional string origin_id = 1 [
     (required) = YES,

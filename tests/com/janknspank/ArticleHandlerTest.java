@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.janknspank.dom.InterpretedData;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 
@@ -23,7 +24,7 @@ public class ArticleHandlerTest {
     }
 
     @Override
-    public void foundArticle(Article article) {
+    public void foundArticle(Article article, InterpretedData interpretedData) {
       foundArticles.add(article);
     }
   }

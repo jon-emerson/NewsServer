@@ -137,15 +137,19 @@ public class NewsSiteWhitelist {
     BLACKLIST.add("alerts.uk.reuters.com");
     BLACKLIST.add("apps.chicagotribune.com");
     BLACKLIST.add("autos.nj.com");
+    BLACKLIST.add("bdn-ak.bloomberg.com");
     BLACKLIST.add("binaryapi.ap.org");
     BLACKLIST.add("cars.irishtimes.com");
     BLACKLIST.add("classifieds.latimes.com");
     BLACKLIST.add("classifieds.nj.com");
     BLACKLIST.add("customers.reuters.com");
     BLACKLIST.add("dating.telegraph.co.uk");
+    BLACKLIST.add("dailydeals.latimes.com");
     BLACKLIST.add("digitalservices.latimes.com");
     BLACKLIST.add("discussion.theguardian.com");
+    BLACKLIST.add("discussions.latimes.com");
     BLACKLIST.add("dj.wsj.com");
+    BLACKLIST.add("documents.latimes.com");
     BLACKLIST.add("faq.external.bbc.co.uk");
     BLACKLIST.add("feeds.washingtonpost.com");
     BLACKLIST.add("findnsave.dallasnews.com");
@@ -154,10 +158,14 @@ public class NewsSiteWhitelist {
     BLACKLIST.add("games.cnn.com");
     BLACKLIST.add("games.latimes.com");
     BLACKLIST.add("gardenshop.telegraph.co.uk");
+    BLACKLIST.add("graphics.latimes.com");
+    BLACKLIST.add("guides.latimes.com");
     BLACKLIST.add("tamil.thehindu.com");
     BLACKLIST.add("id.theguardian.com");
     BLACKLIST.add("iplayerhelp.external.bbc.co.uk");
     BLACKLIST.add("jobsearch.bloomberg.com");
+    BLACKLIST.add("jobsearch.money.cnn.com");
+    BLACKLIST.add("jp.techcrunch.com");
     BLACKLIST.add("jp.wsj.com");
     BLACKLIST.add("khabar.ndtv.com");
     BLACKLIST.add("media.bloomberg.com");
@@ -207,7 +215,9 @@ public class NewsSiteWhitelist {
           return false;
         }
       }
-      if (domain.endsWith(".bloomberg.com") && path.endsWith("/_/slideshow/")) {
+      if (domain.endsWith(".bloomberg.com") &&
+          (path.startsWith("/video/") ||
+           path.endsWith("/_/slideshow/"))) {
         return false;
       }
       if (domain.endsWith("boston.com") &&
@@ -230,6 +240,9 @@ public class NewsSiteWhitelist {
         return false;
       }
       if (domain.endsWith("latimes.com")) {
+        if (path.startsWith("/shopping/")) {
+          return false;
+        }
         // Don't geek out on the historical articles.  If they're linked from other
         // places, great, but we don't need to dig through all of them.
         if (path.matches("^\\/[12][0-9]{3}\\/.*")) {
@@ -239,7 +252,11 @@ public class NewsSiteWhitelist {
       if (domain.endsWith("money.usnews.com") && path.startsWith("/529s/")) {
         return false;
       }
-      if (domain.endsWith("money.cnn.com") && path.startsWith("/quote/")) {
+      if (domain.endsWith("money.cnn.com") &&
+          (path.startsWith("/data/") ||
+           path.startsWith("/quote/") ||
+           path.startsWith("/tag/") ||
+           path.startsWith("/video/"))) {
         return false;
       }
       if (domain.endsWith(".nj.com") && path.endsWith("/print.html")) {
@@ -250,6 +267,11 @@ public class NewsSiteWhitelist {
             !NYTIMES_ARTICLE_PATH.matcher(path).matches()) {
           return false;
         }
+      }
+      if (domain.endsWith("techcrunch.com") &&
+          (path.startsWith("/rss/") ||
+           path.startsWith("/video/"))) {
+        return false;
       }
       if (domain.endsWith("telegraph.co.uk") && path.startsWith("/sponsored/")) {
         return false;

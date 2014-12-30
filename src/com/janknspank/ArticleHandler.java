@@ -18,20 +18,19 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import com.janknspank.data.Articles;
 import com.janknspank.data.ValidationException;
+import com.janknspank.dom.InterpretedData;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Validator;
 
 public class ArticleHandler extends DefaultHandler {
-  public static final String ISO_8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
-  private static final DateTimeFormatter ISO_DATE_TIME_FORMAT =
-      DateTimeFormat.forPattern(ISO_8601_DATE_FORMAT).withOffsetParsed();
   private static final Pattern DATE_IN_URL_PATTERN =
       Pattern.compile("\\/[0-9]{4}\\/[0-9]{2}\\/[0-9]{2}\\/");
   private static final DateFormat[] KNOWN_DATE_FORMATS = {
+      new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX"), // ISO 8601, BusinessWeek.
       new SimpleDateFormat("MMMM dd, yyyy, hh:mm a"), // CBS News.
       new SimpleDateFormat("MMMM dd, yyyy"), // Chicago Tribune.
-      new SimpleDateFormat("yyyy-MM-dd"), // New York Times.
+      new SimpleDateFormat("yyyy-MM-dd"), // New York Times and LA Times.
       new SimpleDateFormat("yyyyMMdd"), // Washington Post.
       new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"), // BBC.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm z"), // Boston.com.
@@ -39,6 +38,7 @@ public class ArticleHandler extends DefaultHandler {
   };
 
   private String lastCharacters;
+  private InterpretedData lastInterpretedData;
   private final ArticleCallback callback;
 
   @VisibleForTesting
@@ -46,7 +46,7 @@ public class ArticleHandler extends DefaultHandler {
 
   public interface ArticleCallback {
     public void foundUrl(String url);
-    public void foundArticle(Article article);
+    public void foundArticle(Article article, InterpretedData interpretedData);
   }
 
   public ArticleHandler(ArticleCallback callback, Url startUrl) {
@@ -58,10 +58,7 @@ public class ArticleHandler extends DefaultHandler {
 
     // See if we can parse a date out of the URL.
     Matcher dateInUrlMatcher = DATE_IN_URL_PATTERN.matcher(startUrl.getUrl());
-    System.out.println("Trying to find date in URL: " + startUrl.getUrl());
     if (dateInUrlMatcher.find()) {
-      System.out.println("FOUND: " + dateInUrlMatcher.group());
-      System.out.println("Parsed as: " + parseDateTime(dateInUrlMatcher.group()));
       articleBuilder.setPublishedTime(parseDateTime(dateInUrlMatcher.group()));
     }
   }
@@ -73,7 +70,11 @@ public class ArticleHandler extends DefaultHandler {
     return new URL(new URL(articleBuilder.getUrl()), relativeUrl).toString();
   }
 
-  public void setArticle(String articleBody) {
+  public void setInterpretedData(InterpretedData interpretedData) {
+    this.lastInterpretedData = interpretedData;
+
+    // Save the article body.
+    String articleBody = interpretedData.getArticleBody();
     if (articleBody.length() > Articles.MAX_ARTICLE_LENGTH) {
       articleBuilder.setArticleBody(articleBody.substring(0, Articles.MAX_ARTICLE_LENGTH));
     } else {
@@ -94,7 +95,9 @@ public class ArticleHandler extends DefaultHandler {
   @Override
   public void endDocument() {
     try {
-      callback.foundArticle((Article) Validator.assertValid(articleBuilder.build()));
+      callback.foundArticle(
+          (Article) Validator.assertValid(articleBuilder.build()),
+          lastInterpretedData);
     } catch (ValidationException e) {
       // This is OK - Some documents just don't have enough data.
       System.err.println("Bad crawl data for URL: " + articleBuilder.getUrl());
@@ -150,8 +153,10 @@ public class ArticleHandler extends DefaultHandler {
           "THUMBNAIL_URL".equalsIgnoreCase(name)) {
         articleBuilder.setImageUrl(attrs.getValue("content"));
       }
-      if ("OriginalPublicationDate".equalsIgnoreCase(name) ||
-          "publish-date".equalsIgnoreCase(name)) {
+      if ("date".equalsIgnoreCase(name) ||
+          "publish-date".equalsIgnoreCase(name) ||
+          "pub_date".equalsIgnoreCase(name) ||
+          "OriginalPublicationDate".equalsIgnoreCase(name)) {
         articleBuilder.setPublishedTime(parseDateTime(attrs.getValue("content")));
       }
 
@@ -199,16 +204,11 @@ public class ArticleHandler extends DefaultHandler {
     if (Strings.isNullOrEmpty(dateStr)) {
       return 0;
     }
-    try {
-      // This is the most common date format.
-      return ISO_DATE_TIME_FORMAT.parseDateTime(dateStr).getMillis();
-    } catch (IllegalArgumentException e) {
-      for (DateFormat format : KNOWN_DATE_FORMATS) {
-        try {
-          return format.parse(dateStr).getTime();
-        } catch (ParseException e2) {
-          // This is OK - we just don't match.  Try the next one.
-        }
+    for (DateFormat format : KNOWN_DATE_FORMATS) {
+      try {
+        return format.parse(dateStr).getTime();
+      } catch (ParseException e2) {
+        // This is OK - we just don't match.  Try the next one.
       }
     }
     System.err.println("COULD NOT PARSE DATE: " + dateStr);

@@ -105,7 +105,10 @@ public class Interpreter {
     if (dirtyString.startsWith("“") || dirtyString.startsWith("\"")) {
       dirtyString = dirtyString.substring("“".length());
     }
-    if (dirtyString.endsWith("”") || dirtyString.endsWith("\"")) {
+    if (dirtyString.endsWith("”") ||
+        dirtyString.endsWith("\"") ||
+        dirtyString.endsWith(",") ||
+        dirtyString.endsWith(".")) {
       return dirtyString.substring(0, dirtyString.length() - "”".length());
     }
 

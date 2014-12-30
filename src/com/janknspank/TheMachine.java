@@ -1,13 +1,18 @@
 package com.janknspank;
 
 import java.net.MalformedURLException;
+import java.util.List;
 
+import com.google.common.collect.Lists;
+import com.google.protobuf.Message;
 import com.janknspank.ArticleHandler.ArticleCallback;
+import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Urls;
 import com.janknspank.data.Links;
 import com.janknspank.data.Database;
 import com.janknspank.data.ValidationException;
+import com.janknspank.dom.InterpretedData;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Core.Link;
@@ -34,6 +39,8 @@ public class TheMachine {
       System.err.println("Crawling: " + startUrl.getUrl());
       final String startUrlId = startUrl.getId();
       new Crawler(new ArticleCallback() {
+        List<Message> linkList = Lists.newArrayList();
+
         @Override
         public void foundUrl(String url) {
           try {
@@ -46,22 +53,28 @@ public class TheMachine {
           if (NewsSiteWhitelist.isOkay(url)) {
             try {
               Url destination = Urls.put(url, /* isTweet */ false);
-              Database.insert(Link.newBuilder()
+              linkList.add(Link.newBuilder()
                   .setOriginId(startUrlId)
                   .setDestinationId(destination.getId())
                   .setDiscoveryTime(destination.getDiscoveryTime())
                   .setLastFoundTime(destination.getDiscoveryTime())
                   .build());
-            } catch (ValidationException|DataInternalException e) {
+            } catch (DataInternalException e) {
               e.printStackTrace();
             }
           }
         }
 
         @Override
-        public void foundArticle(Article article) {
+        public void foundArticle(Article article, InterpretedData interpretedData) {
           try {
+            // Flush any Links we've found lately.
+            Database.insert(linkList);
+            linkList.clear();
+
+            // Save this article and its keywords.
             Database.insert(article);
+            ArticleKeywords.add(article, interpretedData);
           } catch (ValidationException|DataInternalException e) {
             e.printStackTrace();
           }

@@ -17,6 +17,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
+import com.janknspank.Asserts;
 import com.janknspank.proto.Core;
 import com.janknspank.proto.Core.Required;
 import com.janknspank.proto.Core.StorageMethod;
@@ -300,6 +301,37 @@ public class Database {
 
     try {
       Database.getInsertStatement(message).execute();
+    } catch (SQLException e) {
+      throw new DataInternalException("Could not insert article", e);
+    }
+  }
+
+ /**
+   * Inserts the passed messages into the database.  All messages passed must be
+   * of the same type.
+   */
+  public static void insert(List<Message> messageList)
+      throws ValidationException, DataInternalException {
+    if (messageList.size() == 0) {
+      return;
+    }
+
+    Message firstMessage = messageList.get(0);
+    Validator.assertValid(firstMessage);
+    for (int i = 1; i < messageList.size(); i++) {
+      Message message = messageList.get(i);
+      Validator.assertValid(message);
+      Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
+          "Types do not match");
+    }
+
+    try {
+      PreparedStatement stmt = Database.getInsertStatement(firstMessage);
+      for (int i = 1; i < messageList.size(); i++) {
+        stmt.addBatch();
+        prepareInsertOrUpdateStatement(stmt, messageList.get(i));
+      }
+      stmt.execute();
     } catch (SQLException e) {
       throw new DataInternalException("Could not insert article", e);
     }
