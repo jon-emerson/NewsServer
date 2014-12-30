@@ -5,17 +5,18 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
+import com.google.common.collect.Sets;
 import com.janknspank.data.Articles;
 import com.janknspank.data.ValidationException;
 import com.janknspank.dom.InterpretedData;
@@ -24,21 +25,28 @@ import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Validator;
 
 public class ArticleHandler extends DefaultHandler {
-  private static final Pattern DATE_IN_URL_PATTERN =
-      Pattern.compile("\\/[0-9]{4}\\/[0-9]{2}\\/[0-9]{2}\\/");
+  private static final Pattern[] DATE_IN_URL_PATTERNS = {
+      Pattern.compile("\\/[0-9]{4}\\/[0-9]{2}\\/[0-9]{2}\\/"),
+      Pattern.compile("\\/[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}\\/"),
+      Pattern.compile("\\/20[0-9]{6}\\/")
+  };
   private static final DateFormat[] KNOWN_DATE_FORMATS = {
-      new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX"), // ISO 8601, BusinessWeek.
+      new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX"), // ISO 8601, BusinessWeek, CNBC.
       new SimpleDateFormat("MMMM dd, yyyy, hh:mm a"), // CBS News.
       new SimpleDateFormat("MMMM dd, yyyy"), // Chicago Tribune.
       new SimpleDateFormat("yyyy-MM-dd"), // New York Times and LA Times.
+      new SimpleDateFormat("yyyyMMddHHmmss"), // New York Times 'pdate'.
       new SimpleDateFormat("yyyyMMdd"), // Washington Post.
       new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"), // BBC.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm z"), // Boston.com.
-      new SimpleDateFormat("/yyyy/MM/dd/") // In URL.
+      new SimpleDateFormat("/yyyy/MM/dd/"), // In URL.
+      new SimpleDateFormat("/yyyy-MM-dd/"), // In URL.
+      new SimpleDateFormat("/yyyyMMdd/") // In URL.
   };
 
   private String lastCharacters;
   private InterpretedData lastInterpretedData;
+  private final Set<String> lastKeywords = Sets.newHashSet();
   private final ArticleCallback callback;
 
   @VisibleForTesting
@@ -46,7 +54,7 @@ public class ArticleHandler extends DefaultHandler {
 
   public interface ArticleCallback {
     public void foundUrl(String url);
-    public void foundArticle(Article article, InterpretedData interpretedData);
+    public void foundArticle(Article article, InterpretedData interpretedData, Set<String> keywords);
   }
 
   public ArticleHandler(ArticleCallback callback, Url startUrl) {
@@ -57,9 +65,13 @@ public class ArticleHandler extends DefaultHandler {
     articleBuilder.setUrl(startUrl.getUrl());
 
     // See if we can parse a date out of the URL.
-    Matcher dateInUrlMatcher = DATE_IN_URL_PATTERN.matcher(startUrl.getUrl());
-    if (dateInUrlMatcher.find()) {
-      articleBuilder.setPublishedTime(parseDateTime(dateInUrlMatcher.group()));
+    for (Pattern dateInUrlPattern : DATE_IN_URL_PATTERNS) {
+      Matcher dateInUrlMatcher = dateInUrlPattern.matcher(startUrl.getUrl());
+      if (dateInUrlMatcher.find()) {
+        System.out.println("Found date in URL: " + parseDateTime(dateInUrlMatcher.group()));
+        articleBuilder.setPublishedTime(parseDateTime(dateInUrlMatcher.group()));
+        break;
+      }
     }
   }
 
@@ -93,11 +105,17 @@ public class ArticleHandler extends DefaultHandler {
   }
 
   @Override
+  public void startDocument() {
+    lastKeywords.clear();
+  }
+
+  @Override
   public void endDocument() {
     try {
       callback.foundArticle(
           (Article) Validator.assertValid(articleBuilder.build()),
-          lastInterpretedData);
+          lastInterpretedData,
+          lastKeywords);
     } catch (ValidationException e) {
       // This is OK - Some documents just don't have enough data.
       System.err.println("Bad crawl data for URL: " + articleBuilder.getUrl());
@@ -142,7 +160,8 @@ public class ArticleHandler extends DefaultHandler {
         articleBuilder.setCopyright(attrs.getValue("content"));
       }
       if ("description".equalsIgnoreCase(name)) {
-        articleBuilder.setDescription(attrs.getValue("content"));
+        articleBuilder.setDescription(
+            StringUtils.substring(attrs.getValue("content"), 0, Articles.MAX_DESCRIPTION_LENGTH));
       }
       if ("fb_title".equalsIgnoreCase(name) ||
           "hdl".equalsIgnoreCase(name) ||
@@ -154,10 +173,18 @@ public class ArticleHandler extends DefaultHandler {
         articleBuilder.setImageUrl(attrs.getValue("content"));
       }
       if ("date".equalsIgnoreCase(name) ||
+          "OriginalPublicationDate".equalsIgnoreCase(name) ||
+          "ptime".equalsIgnoreCase(name) ||
           "publish-date".equalsIgnoreCase(name) ||
-          "pub_date".equalsIgnoreCase(name) ||
-          "OriginalPublicationDate".equalsIgnoreCase(name)) {
+          "pub_date".equalsIgnoreCase(name)) {
         articleBuilder.setPublishedTime(parseDateTime(attrs.getValue("content")));
+      }
+      if ("utime".equalsIgnoreCase(name)) {
+        articleBuilder.setModifiedTime(parseDateTime(attrs.getValue("content")));
+      }
+      if ("keywords".equalsIgnoreCase(name) ||
+          "news_keywords".equalsIgnoreCase(name)) {
+        handleKeywords(attrs.getValue("content"));
       }
 
       String property = attrs.getValue("property");
@@ -166,7 +193,8 @@ public class ArticleHandler extends DefaultHandler {
         articleBuilder.setTitle(attrs.getValue("content"));
       }
       if ("rnews:description".equalsIgnoreCase(property)) {
-        articleBuilder.setDescription(attrs.getValue("content"));
+        articleBuilder.setDescription(
+            StringUtils.substring(attrs.getValue("content"), 0, Articles.MAX_DESCRIPTION_LENGTH));
       }
       if ("og:type".equalsIgnoreCase(property)) {
         articleBuilder.setType(attrs.getValue("content"));
@@ -176,14 +204,23 @@ public class ArticleHandler extends DefaultHandler {
         articleBuilder.setImageUrl(attrs.getValue("content"));
       }
       if ("og:description".equalsIgnoreCase(property) ) {
-        articleBuilder.setDescription(attrs.getValue("content"));
+        articleBuilder.setDescription(
+            StringUtils.substring(attrs.getValue("content"), 0, Articles.MAX_DESCRIPTION_LENGTH));
       }
-      if ("rnews:datePublished".equalsIgnoreCase(property)) {
+      if ("article:published_time".equalsIgnoreCase(property) ||
+          "rnews:datePublished".equalsIgnoreCase(property)) {
         articleBuilder.setPublishedTime(parseDateTime(attrs.getValue("content")));
+      }
+      if ("article:modified_time".equalsIgnoreCase(property)) {
+        articleBuilder.setModifiedTime(parseDateTime(attrs.getValue("content")));
+      }
+      if ("article:tag".equalsIgnoreCase(property)) {
+        lastKeywords.add(attrs.getValue("content"));
       }
 
       String itemprop = attrs.getValue("itemprop");
-      if ("datePublished".equalsIgnoreCase(itemprop)) {
+      if ("dateCreated".equalsIgnoreCase(itemprop) ||
+          "datePublished".equalsIgnoreCase(itemprop)) {
         articleBuilder.setPublishedTime(parseDateTime(attrs.getValue("content")));
       }
       if ("dateModified".equalsIgnoreCase(itemprop)) {
@@ -213,5 +250,18 @@ public class ArticleHandler extends DefaultHandler {
     }
     System.err.println("COULD NOT PARSE DATE: " + dateStr);
     return 0;
+  }
+  
+  private void handleKeywords(String rawKeywords) {
+    String[] keywords;
+    // Some sites use semicolons, others use commas.  Split based on whichever is more prevalent.
+    if (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";")) {
+      keywords = rawKeywords.split(",");
+    } else {
+      keywords = rawKeywords.split(";");
+    }
+    for (String keyword : keywords) {
+      lastKeywords.add(keyword.trim().toLowerCase());
+    }
   }
 }

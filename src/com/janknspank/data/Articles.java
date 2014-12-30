@@ -20,20 +20,24 @@ public class Articles {
       "SELECT * FROM " + Database.getTableName(Article.class) + " LIMIT 50";
 
   public static final int MAX_ARTICLE_LENGTH;
+  public static final int MAX_DESCRIPTION_LENGTH;
   static {
-    int length = 0;
+    int articleLength = 0;
+    int descriptionLength = 0;
     for (FieldDescriptor field : Article.getDefaultInstance().getDescriptorForType().getFields()) {
-      if (JavaType.STRING == field.getJavaType() &&
-          "article_body".equals(field.getName())) {
-        length = field.getOptions().getExtension(Core.stringLength);
-        break;
+      if (JavaType.STRING == field.getJavaType()) {
+        if ("article_body".equals(field.getName())) {
+          articleLength = field.getOptions().getExtension(Core.stringLength);
+        } else if ("description".equals(field.getName())) {
+          descriptionLength = field.getOptions().getExtension(Core.stringLength);
+        }
       }
     }
-    if (length > 0) {
-      MAX_ARTICLE_LENGTH = length;
-    } else {
-      throw new Error("No string length defined for article_body");
+    if (articleLength == 0 || descriptionLength == 0) {
+      throw new IllegalStateException("Could not find length of article or description");
     }
+    MAX_ARTICLE_LENGTH = articleLength;
+    MAX_DESCRIPTION_LENGTH = articleLength;
   }
 
   /**

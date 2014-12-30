@@ -132,59 +132,71 @@ public class NewsSiteWhitelist {
 
   private static final HashSet<String> BLACKLIST = new HashSet<String>();
   static {
-    BLACKLIST.add("account.washingtonpost.com");
-    BLACKLIST.add("advertising.chicagotribune.com");
-    BLACKLIST.add("alerts.uk.reuters.com");
-    BLACKLIST.add("apps.chicagotribune.com");
-    BLACKLIST.add("autos.nj.com");
-    BLACKLIST.add("bdn-ak.bloomberg.com");
-    BLACKLIST.add("binaryapi.ap.org");
-    BLACKLIST.add("cars.irishtimes.com");
-    BLACKLIST.add("classifieds.latimes.com");
-    BLACKLIST.add("classifieds.nj.com");
-    BLACKLIST.add("customers.reuters.com");
-    BLACKLIST.add("dating.telegraph.co.uk");
-    BLACKLIST.add("dailydeals.latimes.com");
-    BLACKLIST.add("digitalservices.latimes.com");
-    BLACKLIST.add("discussion.theguardian.com");
-    BLACKLIST.add("discussions.latimes.com");
-    BLACKLIST.add("dj.wsj.com");
-    BLACKLIST.add("documents.latimes.com");
-    BLACKLIST.add("faq.external.bbc.co.uk");
-    BLACKLIST.add("feeds.washingtonpost.com");
-    BLACKLIST.add("findnsave.dallasnews.com");
-    BLACKLIST.add("forums.abcnews.go.com");
-    BLACKLIST.add("framework.latimes.com");
-    BLACKLIST.add("games.cnn.com");
-    BLACKLIST.add("games.latimes.com");
-    BLACKLIST.add("gardenshop.telegraph.co.uk");
-    BLACKLIST.add("graphics.latimes.com");
-    BLACKLIST.add("guides.latimes.com");
-    BLACKLIST.add("tamil.thehindu.com");
-    BLACKLIST.add("id.theguardian.com");
-    BLACKLIST.add("ilivehere.latimes.com");
-    BLACKLIST.add("iplayerhelp.external.bbc.co.uk");
-    BLACKLIST.add("jobsearch.bloomberg.com");
-    BLACKLIST.add("jobsearch.money.cnn.com");
-    BLACKLIST.add("jp.techcrunch.com");
-    BLACKLIST.add("jp.wsj.com");
-    BLACKLIST.add("khabar.ndtv.com");
-    BLACKLIST.add("media.bloomberg.com");
-    BLACKLIST.add("members.chicagotribune.com");
-    BLACKLIST.add("mexico.cnn.com");
-    BLACKLIST.add("mobile-phones.smh.com.au");
-    BLACKLIST.add("myaccount.dallasnews.com");
-    BLACKLIST.add("placeanad.chicagotribune.com");
-    BLACKLIST.add("profile.theguardian.com");
-    BLACKLIST.add("radio.foxnews.com");
-    BLACKLIST.add("rssfeeds.usatoday.com");
-    BLACKLIST.add("search.bloomberg.com");
-    BLACKLIST.add("search.boston.com");
-    BLACKLIST.add("shop.telegraph.co.uk");
-    BLACKLIST.add("shopping.nj.com");
-    BLACKLIST.add("ssl.bbc.co.uk");
-    BLACKLIST.add("static.reuters.com");
-    BLACKLIST.add("www2b.abc.net.au");
+    for (String blacklistDomain : new String[] {
+        "account.washingtonpost.com",
+        "advertising.chicagotribune.com",
+        "alerts.uk.reuters.com",
+        "apps.chicagotribune.com",
+        "autos.nj.com",
+        "bdn-ak.bloomberg.com",
+        "binaryapi.ap.org",
+        "blogs.cnn.com",
+        "cars.irishtimes.com",
+        "classifieds.latimes.com",
+        "classifieds.nj.com",
+        "connect.bloomberg.com",
+        "customers.reuters.com",
+        "data.cnbc.com",
+        "dating.telegraph.co.uk",
+        "dailydeals.latimes.com",
+        "digitalservices.latimes.com",
+        "discussion.theguardian.com",
+        "discussions.latimes.com",
+        "dj.wsj.com",
+        "documents.latimes.com",
+        "faq.external.bbc.co.uk",
+        "feeds.washingtonpost.com",
+        "findnsave.dallasnews.com",
+        "forums.abcnews.go.com",
+        "framework.latimes.com",
+        "games.cnn.com",
+        "games.latimes.com",
+        "gardenshop.telegraph.co.uk",
+        "graphics.latimes.com",
+        "guides.latimes.com",
+        "tamil.thehindu.com",
+        "id.theguardian.com",
+        "ilivehere.latimes.com",
+        "images.businessweek.com",
+        "iplayerhelp.external.bbc.co.uk",
+        "jobs.businessweek.com",
+        "jobsearch.bloomberg.com",
+        "jobsearch.money.cnn.com",
+        "jp.techcrunch.com",
+        "jp.wsj.com",
+        "khabar.ndtv.com",
+        "login.bloomberg.com",
+        "m.bloomberg.com",
+        "media.bloomberg.com",
+        "members.chicagotribune.com",
+        "mexico.cnn.com",
+        "mobile-phones.smh.com.au",
+        "myaccount.dallasnews.com",
+        "placeanad.chicagotribune.com",
+        "profile.theguardian.com",
+        "radio.foxnews.com",
+        "rssfeeds.usatoday.com",
+        "search.bloomberg.com",
+        "search.boston.com",
+        "shop.telegraph.co.uk",
+        "shopping.nj.com",
+        "ssl.bbc.co.uk",
+        "static.reuters.com",
+        "video.cnbc.com",
+        "www2b.abc.net.au"}) {
+      BLACKLIST.add(blacklistDomain);
+    }
+
   }
 
   public static boolean isOkay(String url) {
@@ -217,7 +229,9 @@ public class NewsSiteWhitelist {
         }
       }
       if (domain.endsWith(".bloomberg.com") &&
-          (path.startsWith("/video/") ||
+          (path.startsWith("/podcasts/") ||
+           path.startsWith("/quote/") ||
+           path.startsWith("/video/") ||
            path.endsWith("/_/slideshow/"))) {
         return false;
       }

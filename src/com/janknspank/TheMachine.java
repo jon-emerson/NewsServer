@@ -2,6 +2,7 @@ package com.janknspank;
 
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.protobuf.Message;
@@ -30,7 +31,7 @@ public class TheMachine {
       }
 
       if (!NewsSiteWhitelist.isOkay(startUrl.getUrl())) {
-        System.err.println("Removing now-blacklisted site: " + startUrl.getUrl());
+        System.err.println("Removing now-blacklisted page: " + startUrl.getUrl());
         Links.deleteId(startUrl.getId());
         Database.delete(startUrl);
         continue;
@@ -66,7 +67,9 @@ public class TheMachine {
         }
 
         @Override
-        public void foundArticle(Article article, InterpretedData interpretedData) {
+        public void foundArticle(Article article,
+            InterpretedData interpretedData,
+            Set<String> keywords) {
           try {
             // Flush any Links we've found lately.
             Database.insert(linkList);
@@ -75,6 +78,7 @@ public class TheMachine {
             // Save this article and its keywords.
             Database.insert(article);
             ArticleKeywords.add(article, interpretedData);
+            ArticleKeywords.add(article, keywords);
           } catch (ValidationException|DataInternalException e) {
             e.printStackTrace();
           }

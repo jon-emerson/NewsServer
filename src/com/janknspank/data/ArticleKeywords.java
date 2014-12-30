@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.protobuf.Message;
@@ -17,11 +18,28 @@ import com.janknspank.proto.Core.ArticleKeyword;
  * associated with which articles.
  */
 public class ArticleKeywords {
+  /**
+   * Adds keywords found from the <meta> tags in an article's HTML.
+   */
+  public static void add(Article article, Set<String> keywords)
+      throws DataInternalException, ValidationException {
+    List<Message> articleKeywordList = Lists.newArrayList();
+    for (String keyword : keywords) {
+      articleKeywordList.add(ArticleKeyword.newBuilder()
+          .setArticleId(article.getId())
+          .setKeyword(keyword)
+          .setStrength(1)
+          .setType("k")
+          .build());
+    }
+    Database.insert(articleKeywordList);
+  }
+
   public static void add(Article article, InterpretedData interpretedData)
       throws DataInternalException, ValidationException {
-    List<Message> keywords = Lists.newArrayList();
+    List<Message> articleKeywordList = Lists.newArrayList();
     for (String location : interpretedData.getLocations()) {
-      keywords.add(ArticleKeyword.newBuilder()
+      articleKeywordList.add(ArticleKeyword.newBuilder()
           .setArticleId(article.getId())
           .setKeyword(location)
           .setStrength(interpretedData.getLocationCount(location))
@@ -29,7 +47,7 @@ public class ArticleKeywords {
           .build());
     }
     for (String person : interpretedData.getPeople()) {
-      keywords.add(ArticleKeyword.newBuilder()
+      articleKeywordList.add(ArticleKeyword.newBuilder()
           .setArticleId(article.getId())
           .setKeyword(person)
           .setStrength(interpretedData.getPersonCount(person))
@@ -37,14 +55,14 @@ public class ArticleKeywords {
           .build());
     }
     for (String organization : interpretedData.getOrganizations()) {
-      keywords.add(ArticleKeyword.newBuilder()
+      articleKeywordList.add(ArticleKeyword.newBuilder()
           .setArticleId(article.getId())
           .setKeyword(organization)
           .setStrength(interpretedData.getOrganizationCount(organization))
           .setType("o")
           .build());
     }
-    Database.insert(keywords);
+    Database.insert(articleKeywordList);
   }
 
   /**

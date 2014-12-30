@@ -132,7 +132,8 @@ message ArticleKeyword {
     (required) = YES
   ];
 
-  // 'o' for organization, 'p' for person, 'l' for location.
+  // 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+  // found in the article's meta tags.
   optional string type = 4 [
     (required) = YES,
     (storage_method) = PULL_OUT,
