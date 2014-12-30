@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.LinkedInData;
-import com.janknspank.data.Session;
+import com.janknspank.proto.Core.Session;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class SetLinkedInDataServlet extends NewsServlet {

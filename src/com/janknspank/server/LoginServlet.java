@@ -10,8 +10,11 @@ import org.json.JSONObject;
 
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
-import com.janknspank.data.Session;
-import com.janknspank.data.User;
+import com.janknspank.data.Sessions;
+import com.janknspank.data.Users;
+import com.janknspank.proto.Serializer;
+import com.janknspank.proto.Core.Session;
+import com.janknspank.proto.Core.User;
 
 public class LoginServlet extends NewsServlet {
   @Override
@@ -33,8 +36,8 @@ public class LoginServlet extends NewsServlet {
     Session session;
     User user;
     try {
-      session = Session.create(email, password);
-      user = User.get(email);
+      session = Sessions.create(email, password);
+      user = Users.getByEmail(email);
     } catch (DataRequestException|DataInternalException e) {
       resp.setStatus(e instanceof DataInternalException ?
           HttpServletResponse.SC_INTERNAL_SERVER_ERROR : HttpServletResponse.SC_BAD_REQUEST);
@@ -45,8 +48,8 @@ public class LoginServlet extends NewsServlet {
     // Write response.
     JSONObject response = new JSONObject();
     response.put("success", true);
-    response.put("session", session.toJSONObject());
-    response.put("user", user.toJSONObject());
+    response.put("session", Serializer.toJSON(session));
+    response.put("user", Serializer.toJSON(user));
     writeJson(resp, response);
   }
 }

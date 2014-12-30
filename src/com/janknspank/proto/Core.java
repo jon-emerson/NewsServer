@@ -3924,6 +3924,2127 @@ public final class Core {
     // @@protoc_insertion_point(class_scope:Url)
   }
 
+  public interface UserOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string id = 1;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional string name = 2;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    // optional string email = 3;
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    boolean hasEmail();
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    java.lang.String getEmail();
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getEmailBytes();
+
+    // optional string linked_in_id = 4;
+    /**
+     * <code>optional string linked_in_id = 4;</code>
+     */
+    boolean hasLinkedInId();
+    /**
+     * <code>optional string linked_in_id = 4;</code>
+     */
+    java.lang.String getLinkedInId();
+    /**
+     * <code>optional string linked_in_id = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getLinkedInIdBytes();
+
+    // optional string facebook_id = 5;
+    /**
+     * <code>optional string facebook_id = 5;</code>
+     */
+    boolean hasFacebookId();
+    /**
+     * <code>optional string facebook_id = 5;</code>
+     */
+    java.lang.String getFacebookId();
+    /**
+     * <code>optional string facebook_id = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getFacebookIdBytes();
+
+    // optional string password_sha256 = 6;
+    /**
+     * <code>optional string password_sha256 = 6;</code>
+     */
+    boolean hasPasswordSha256();
+    /**
+     * <code>optional string password_sha256 = 6;</code>
+     */
+    java.lang.String getPasswordSha256();
+    /**
+     * <code>optional string password_sha256 = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getPasswordSha256Bytes();
+
+    // optional int64 create_time = 7;
+    /**
+     * <code>optional int64 create_time = 7;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 create_time = 7;</code>
+     */
+    long getCreateTime();
+
+    // optional int64 last_login_time = 8;
+    /**
+     * <code>optional int64 last_login_time = 8;</code>
+     */
+    boolean hasLastLoginTime();
+    /**
+     * <code>optional int64 last_login_time = 8;</code>
+     */
+    long getLastLoginTime();
+  }
+  /**
+   * Protobuf type {@code User}
+   */
+  public static final class User extends
+      com.google.protobuf.GeneratedMessage
+      implements UserOrBuilder {
+    // Use User.newBuilder() to construct.
+    private User(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private User(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final User defaultInstance;
+    public static User getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public User getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private User(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              name_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              email_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              linkedInId_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              facebookId_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              passwordSha256_ = input.readBytes();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              createTime_ = input.readInt64();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              lastLoginTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.Core.internal_static_User_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.Core.internal_static_User_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.Core.User.class, com.janknspank.proto.Core.User.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<User> PARSER =
+        new com.google.protobuf.AbstractParser<User>() {
+      public User parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new User(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<User> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string name = 2;
+    public static final int NAME_FIELD_NUMBER = 2;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string email = 3;
+    public static final int EMAIL_FIELD_NUMBER = 3;
+    private java.lang.Object email_;
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public boolean hasEmail() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          email_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEmailBytes() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        email_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string linked_in_id = 4;
+    public static final int LINKED_IN_ID_FIELD_NUMBER = 4;
+    private java.lang.Object linkedInId_;
+    /**
+     * <code>optional string linked_in_id = 4;</code>
+     */
+    public boolean hasLinkedInId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string linked_in_id = 4;</code>
+     */
+    public java.lang.String getLinkedInId() {
+      java.lang.Object ref = linkedInId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          linkedInId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string linked_in_id = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLinkedInIdBytes() {
+      java.lang.Object ref = linkedInId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        linkedInId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string facebook_id = 5;
+    public static final int FACEBOOK_ID_FIELD_NUMBER = 5;
+    private java.lang.Object facebookId_;
+    /**
+     * <code>optional string facebook_id = 5;</code>
+     */
+    public boolean hasFacebookId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string facebook_id = 5;</code>
+     */
+    public java.lang.String getFacebookId() {
+      java.lang.Object ref = facebookId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          facebookId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string facebook_id = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFacebookIdBytes() {
+      java.lang.Object ref = facebookId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        facebookId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string password_sha256 = 6;
+    public static final int PASSWORD_SHA256_FIELD_NUMBER = 6;
+    private java.lang.Object passwordSha256_;
+    /**
+     * <code>optional string password_sha256 = 6;</code>
+     */
+    public boolean hasPasswordSha256() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string password_sha256 = 6;</code>
+     */
+    public java.lang.String getPasswordSha256() {
+      java.lang.Object ref = passwordSha256_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          passwordSha256_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string password_sha256 = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPasswordSha256Bytes() {
+      java.lang.Object ref = passwordSha256_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        passwordSha256_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 create_time = 7;
+    public static final int CREATE_TIME_FIELD_NUMBER = 7;
+    private long createTime_;
+    /**
+     * <code>optional int64 create_time = 7;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int64 create_time = 7;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    // optional int64 last_login_time = 8;
+    public static final int LAST_LOGIN_TIME_FIELD_NUMBER = 8;
+    private long lastLoginTime_;
+    /**
+     * <code>optional int64 last_login_time = 8;</code>
+     */
+    public boolean hasLastLoginTime() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int64 last_login_time = 8;</code>
+     */
+    public long getLastLoginTime() {
+      return lastLoginTime_;
+    }
+
+    private void initFields() {
+      id_ = "";
+      name_ = "";
+      email_ = "";
+      linkedInId_ = "";
+      facebookId_ = "";
+      passwordSha256_ = "";
+      createTime_ = 0L;
+      lastLoginTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getEmailBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLinkedInIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getFacebookIdBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getPasswordSha256Bytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(7, createTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt64(8, lastLoginTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getEmailBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getLinkedInIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getFacebookIdBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getPasswordSha256Bytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, createTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(8, lastLoginTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.Core.User parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.User parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.User parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.User parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.User parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.User parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.User parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.Core.User parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.User parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.User parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.Core.User prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code User}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.Core.UserOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.Core.internal_static_User_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.Core.internal_static_User_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.Core.User.class, com.janknspank.proto.Core.User.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.Core.User.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        email_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        linkedInId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        facebookId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        passwordSha256_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        lastLoginTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.Core.internal_static_User_descriptor;
+      }
+
+      public com.janknspank.proto.Core.User getDefaultInstanceForType() {
+        return com.janknspank.proto.Core.User.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.Core.User build() {
+        com.janknspank.proto.Core.User result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.Core.User buildPartial() {
+        com.janknspank.proto.Core.User result = new com.janknspank.proto.Core.User(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.email_ = email_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.linkedInId_ = linkedInId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.facebookId_ = facebookId_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.passwordSha256_ = passwordSha256_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.createTime_ = createTime_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.lastLoginTime_ = lastLoginTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.Core.User) {
+          return mergeFrom((com.janknspank.proto.Core.User)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.Core.User other) {
+        if (other == com.janknspank.proto.Core.User.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasEmail()) {
+          bitField0_ |= 0x00000004;
+          email_ = other.email_;
+          onChanged();
+        }
+        if (other.hasLinkedInId()) {
+          bitField0_ |= 0x00000008;
+          linkedInId_ = other.linkedInId_;
+          onChanged();
+        }
+        if (other.hasFacebookId()) {
+          bitField0_ |= 0x00000010;
+          facebookId_ = other.facebookId_;
+          onChanged();
+        }
+        if (other.hasPasswordSha256()) {
+          bitField0_ |= 0x00000020;
+          passwordSha256_ = other.passwordSha256_;
+          onChanged();
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
+        }
+        if (other.hasLastLoginTime()) {
+          setLastLoginTime(other.getLastLoginTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.Core.User parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.Core.User) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string name = 2;
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string email = 3;
+      private java.lang.Object email_ = "";
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public boolean hasEmail() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public java.lang.String getEmail() {
+        java.lang.Object ref = email_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          email_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEmailBytes() {
+        java.lang.Object ref = email_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          email_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public Builder setEmail(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        email_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public Builder clearEmail() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        email_ = getDefaultInstance().getEmail();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public Builder setEmailBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        email_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string linked_in_id = 4;
+      private java.lang.Object linkedInId_ = "";
+      /**
+       * <code>optional string linked_in_id = 4;</code>
+       */
+      public boolean hasLinkedInId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string linked_in_id = 4;</code>
+       */
+      public java.lang.String getLinkedInId() {
+        java.lang.Object ref = linkedInId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          linkedInId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string linked_in_id = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getLinkedInIdBytes() {
+        java.lang.Object ref = linkedInId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          linkedInId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string linked_in_id = 4;</code>
+       */
+      public Builder setLinkedInId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        linkedInId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string linked_in_id = 4;</code>
+       */
+      public Builder clearLinkedInId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        linkedInId_ = getDefaultInstance().getLinkedInId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string linked_in_id = 4;</code>
+       */
+      public Builder setLinkedInIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        linkedInId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string facebook_id = 5;
+      private java.lang.Object facebookId_ = "";
+      /**
+       * <code>optional string facebook_id = 5;</code>
+       */
+      public boolean hasFacebookId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string facebook_id = 5;</code>
+       */
+      public java.lang.String getFacebookId() {
+        java.lang.Object ref = facebookId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          facebookId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string facebook_id = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFacebookIdBytes() {
+        java.lang.Object ref = facebookId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          facebookId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string facebook_id = 5;</code>
+       */
+      public Builder setFacebookId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        facebookId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string facebook_id = 5;</code>
+       */
+      public Builder clearFacebookId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        facebookId_ = getDefaultInstance().getFacebookId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string facebook_id = 5;</code>
+       */
+      public Builder setFacebookIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        facebookId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string password_sha256 = 6;
+      private java.lang.Object passwordSha256_ = "";
+      /**
+       * <code>optional string password_sha256 = 6;</code>
+       */
+      public boolean hasPasswordSha256() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string password_sha256 = 6;</code>
+       */
+      public java.lang.String getPasswordSha256() {
+        java.lang.Object ref = passwordSha256_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          passwordSha256_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string password_sha256 = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPasswordSha256Bytes() {
+        java.lang.Object ref = passwordSha256_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          passwordSha256_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string password_sha256 = 6;</code>
+       */
+      public Builder setPasswordSha256(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        passwordSha256_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string password_sha256 = 6;</code>
+       */
+      public Builder clearPasswordSha256() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        passwordSha256_ = getDefaultInstance().getPasswordSha256();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string password_sha256 = 6;</code>
+       */
+      public Builder setPasswordSha256Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        passwordSha256_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 create_time = 7;
+      private long createTime_ ;
+      /**
+       * <code>optional int64 create_time = 7;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int64 create_time = 7;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 create_time = 7;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000040;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 create_time = 7;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 last_login_time = 8;
+      private long lastLoginTime_ ;
+      /**
+       * <code>optional int64 last_login_time = 8;</code>
+       */
+      public boolean hasLastLoginTime() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int64 last_login_time = 8;</code>
+       */
+      public long getLastLoginTime() {
+        return lastLoginTime_;
+      }
+      /**
+       * <code>optional int64 last_login_time = 8;</code>
+       */
+      public Builder setLastLoginTime(long value) {
+        bitField0_ |= 0x00000080;
+        lastLoginTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 last_login_time = 8;</code>
+       */
+      public Builder clearLastLoginTime() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        lastLoginTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:User)
+    }
+
+    static {
+      defaultInstance = new User(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:User)
+  }
+
+  public interface SessionOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string session_key = 1;
+    /**
+     * <code>optional string session_key = 1;</code>
+     */
+    boolean hasSessionKey();
+    /**
+     * <code>optional string session_key = 1;</code>
+     */
+    java.lang.String getSessionKey();
+    /**
+     * <code>optional string session_key = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getSessionKeyBytes();
+
+    // optional string user_id = 2;
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    // optional int64 create_time = 3;
+    /**
+     * <code>optional int64 create_time = 3;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 create_time = 3;</code>
+     */
+    long getCreateTime();
+  }
+  /**
+   * Protobuf type {@code Session}
+   */
+  public static final class Session extends
+      com.google.protobuf.GeneratedMessage
+      implements SessionOrBuilder {
+    // Use Session.newBuilder() to construct.
+    private Session(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Session(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Session defaultInstance;
+    public static Session getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Session getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Session(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              sessionKey_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              createTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.Core.internal_static_Session_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.Core.internal_static_Session_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.Core.Session.class, com.janknspank.proto.Core.Session.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Session> PARSER =
+        new com.google.protobuf.AbstractParser<Session>() {
+      public Session parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Session(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Session> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string session_key = 1;
+    public static final int SESSION_KEY_FIELD_NUMBER = 1;
+    private java.lang.Object sessionKey_;
+    /**
+     * <code>optional string session_key = 1;</code>
+     */
+    public boolean hasSessionKey() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string session_key = 1;</code>
+     */
+    public java.lang.String getSessionKey() {
+      java.lang.Object ref = sessionKey_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sessionKey_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string session_key = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSessionKeyBytes() {
+      java.lang.Object ref = sessionKey_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sessionKey_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string user_id = 2;
+    public static final int USER_ID_FIELD_NUMBER = 2;
+    private java.lang.Object userId_;
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 create_time = 3;
+    public static final int CREATE_TIME_FIELD_NUMBER = 3;
+    private long createTime_;
+    /**
+     * <code>optional int64 create_time = 3;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 create_time = 3;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    private void initFields() {
+      sessionKey_ = "";
+      userId_ = "";
+      createTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getSessionKeyBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, createTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getSessionKeyBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, createTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.Core.Session parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.Session parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.Session parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.Session parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.Session parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.Session parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.Session parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.Core.Session parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.Session parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.Session parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.Core.Session prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Session}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.Core.SessionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.Core.internal_static_Session_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.Core.internal_static_Session_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.Core.Session.class, com.janknspank.proto.Core.Session.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.Core.Session.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        sessionKey_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.Core.internal_static_Session_descriptor;
+      }
+
+      public com.janknspank.proto.Core.Session getDefaultInstanceForType() {
+        return com.janknspank.proto.Core.Session.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.Core.Session build() {
+        com.janknspank.proto.Core.Session result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.Core.Session buildPartial() {
+        com.janknspank.proto.Core.Session result = new com.janknspank.proto.Core.Session(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.sessionKey_ = sessionKey_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.createTime_ = createTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.Core.Session) {
+          return mergeFrom((com.janknspank.proto.Core.Session)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.Core.Session other) {
+        if (other == com.janknspank.proto.Core.Session.getDefaultInstance()) return this;
+        if (other.hasSessionKey()) {
+          bitField0_ |= 0x00000001;
+          sessionKey_ = other.sessionKey_;
+          onChanged();
+        }
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000002;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.Core.Session parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.Core.Session) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string session_key = 1;
+      private java.lang.Object sessionKey_ = "";
+      /**
+       * <code>optional string session_key = 1;</code>
+       */
+      public boolean hasSessionKey() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string session_key = 1;</code>
+       */
+      public java.lang.String getSessionKey() {
+        java.lang.Object ref = sessionKey_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sessionKey_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string session_key = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSessionKeyBytes() {
+        java.lang.Object ref = sessionKey_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sessionKey_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string session_key = 1;</code>
+       */
+      public Builder setSessionKey(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        sessionKey_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string session_key = 1;</code>
+       */
+      public Builder clearSessionKey() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        sessionKey_ = getDefaultInstance().getSessionKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string session_key = 1;</code>
+       */
+      public Builder setSessionKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        sessionKey_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string user_id = 2;
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 create_time = 3;
+      private long createTime_ ;
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000004;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:Session)
+    }
+
+    static {
+      defaultInstance = new Session(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:Session)
+  }
+
   public static final int REQUIRED_FIELD_NUMBER = 60001;
   /**
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
@@ -3983,6 +6104,16 @@ public final class Core {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Url_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_User_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_User_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_Session_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Session_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4008,20 +6139,29 @@ public final class Core {
       "\001\n\003Url\022\032\n\003url\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id" +
       "\030\002 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(" +
       "\003B\004\210\246\035\001\022\034\n\016discovery_time\030\004 \001(\003B\004\210\246\035\001\022\035\n" +
-      "\017last_crawl_time\030\005 \001(\003B\004\220\246\035\003*\033\n\010Required" +
-      "\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\rStorageMethod\022\010\n\004BL" +
-      "OB\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022\020\n\014UNIQ" +
-      "UE_INDEX\020\004\022\014\n\010PULL_OUT\020\005*F\n\023ClientSerial",
-      "ization\022\013\n\007INCLUDE\020\001\022\025\n\021INCLUDE_AS_NUMBE" +
-      "R\020\002\022\013\n\007EXCLUDE\020\003:@\n\010required\022\035.google.pr" +
-      "otobuf.FieldOptions\030\341\324\003 \001(\0162\t.Required:\002" +
-      "NO:M\n\016storage_method\022\035.google.protobuf.F" +
-      "ieldOptions\030\342\324\003 \001(\0162\016.StorageMethod:\004BLO" +
-      "B::\n\rstring_length\022\035.google.protobuf.Fie" +
-      "ldOptions\030\343\324\003 \001(\005:\002-1:\\\n\024client_serializ" +
-      "ation\022\035.google.protobuf.FieldOptions\030\344\324\003" +
-      " \001(\0162\024.ClientSerialization:\007INCLUDEB\037\n\024c" +
-      "om.janknspank.proto\200\001\000\210\001\000\220\001\000"
+      "\017last_crawl_time\030\005 \001(\003B\004\220\246\035\003\"\347\001\n\004User\022\030\n" +
+      "\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\022\n\004name\030\002 \001(\tB\004\230" +
+      "\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n\014link" +
+      "ed_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013facebook_id\030\005 \001(",
+      "\tB\004\230\246\035\030\022)\n\017password_sha256\030\006 \001(\tB\020\210\246\035\001\220\246" +
+      "\035\005\230\246\0352\240\246\035\003\022\031\n\013create_time\030\007 \001(\003B\004\210\246\035\001\022\027\n" +
+      "\017last_login_time\030\010 \001(\003\"g\n\007Session\022\"\n\013ses" +
+      "sion_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022\035\n\007user_id" +
+      "\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013create_time\030\003 \001(" +
+      "\003B\004\210\246\035\001*\033\n\010Required\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\r" +
+      "StorageMethod\022\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002" +
+      "\022\t\n\005INDEX\020\003\022\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OU" +
+      "T\020\005*F\n\023ClientSerialization\022\013\n\007INCLUDE\020\001\022" +
+      "\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010r",
+      "equired\022\035.google.protobuf.FieldOptions\030\341" +
+      "\324\003 \001(\0162\t.Required:\002NO:M\n\016storage_method\022" +
+      "\035.google.protobuf.FieldOptions\030\342\324\003 \001(\0162\016" +
+      ".StorageMethod:\004BLOB::\n\rstring_length\022\035." +
+      "google.protobuf.FieldOptions\030\343\324\003 \001(\005:\002-1" +
+      ":\\\n\024client_serialization\022\035.google.protob" +
+      "uf.FieldOptions\030\344\324\003 \001(\0162\024.ClientSerializ" +
+      "ation:\007INCLUDEB\037\n\024com.janknspank.proto\200\001" +
+      "\000\210\001\000\220\001\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4046,6 +6186,18 @@ public final class Core {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Url_descriptor,
               new java.lang.String[] { "Url", "Id", "TweetCount", "DiscoveryTime", "LastCrawlTime", });
+          internal_static_User_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_User_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_User_descriptor,
+              new java.lang.String[] { "Id", "Name", "Email", "LinkedInId", "FacebookId", "PasswordSha256", "CreateTime", "LastLoginTime", });
+          internal_static_Session_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_Session_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_Session_descriptor,
+              new java.lang.String[] { "SessionKey", "UserId", "CreateTime", });
           required.internalInit(descriptor.getExtensions().get(0));
           storageMethod.internalInit(descriptor.getExtensions().get(1));
           stringLength.internalInit(descriptor.getExtensions().get(2));
@@ -4087,6 +6239,27 @@ public final class Core {
           registry.add(com.janknspank.proto.Core.required);
           registry.add(com.janknspank.proto.Core.required);
           registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.clientSerialization);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
           return registry;
         }
       };

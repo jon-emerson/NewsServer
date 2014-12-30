@@ -425,16 +425,18 @@ public class Database {
   }
 
   /**
-   * Deletes the passed object from the database.
-   * @throws DataInternalException if the object could not be deleted
+   * Deletes the object with the specified primary key from the table specified
+   * by the passed-in class.
+   * @throws DataInternalException if the object could not be deleted, including
+   *     if it could not be found
    */
-  public static void delete(Message message) throws DataInternalException {
-    String primaryKey = getPrimaryKey(message);
+  public static <T extends Message> void deletePrimaryKey(String primaryKey, Class<T> clazz)
+      throws DataInternalException {
     PreparedStatement stmt;
     try {
       stmt = getConnection().prepareStatement(
-          "DELETE FROM " + getTableName(message.getClass()) +
-          " WHERE " + getPrimaryKeyField(message.getClass()) + " =? LIMIT 1");
+          "DELETE FROM " + getTableName(clazz) +
+          " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
       stmt.setString(1, primaryKey);
       if (stmt.executeUpdate() != 1) {
         throw new DataInternalException("Could not find object to delete, primary key = " +
@@ -443,5 +445,14 @@ public class Database {
     } catch (SQLException e) {
       throw new DataInternalException("Error executing delete, primary key = " + primaryKey, e);
     }
+  }
+
+  /**
+   * Deletes the passed object from the database.
+   * @throws DataInternalException if the object could not be deleted, including
+   *     if it could not be found
+   */
+  public static void delete(Message message) throws DataInternalException {
+    deletePrimaryKey(getPrimaryKey(message), message.getClass());
   }
 }

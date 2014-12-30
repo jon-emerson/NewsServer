@@ -10,8 +10,10 @@ import org.json.JSONObject;
 
 import com.google.common.base.Strings;
 import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Session;
-import com.janknspank.data.User;
+import com.janknspank.data.Database;
+import com.janknspank.data.Sessions;
+import com.janknspank.data.Users;
+import com.janknspank.proto.Core.Session;
 
 public class LogoutServlet extends NewsServlet {
   @Override
@@ -35,12 +37,13 @@ public class LogoutServlet extends NewsServlet {
     }
 
     // Business logic.
-    int rowsAffected;
+    int rowsAffected = 0;
     try {
       if (!Strings.isNullOrEmpty(email)) {
-        rowsAffected = Session.deleteAllFromUser(User.get(email));
+        rowsAffected = Sessions.deleteAllFromUser(Users.getByEmail(email));
       } else {
-        rowsAffected = Session.deleteSessionKey(sessionKey) ? 1 : 0;
+        Database.deletePrimaryKey(sessionKey, Session.class);
+        rowsAffected++;
       }
     } catch (DataInternalException e) {
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

@@ -21,7 +21,8 @@ import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
-import com.janknspank.data.Session;
+import com.janknspank.data.Sessions;
+import com.janknspank.proto.Core.Session;
 
 public class NewsServlet extends HttpServlet {
   protected static final String SESSION_ID_PARAM = "sessionKey";
@@ -79,7 +80,7 @@ public class NewsServlet extends HttpServlet {
       if (Strings.isNullOrEmpty(sessionKey)) {
         session = getSessionFromCookies(request);
       } else {
-        session = Session.get(sessionKey);
+        session = Sessions.get(sessionKey);
       }
     } catch (DataRequestException|DataInternalException e) {
       // This only happens for illegal session IDs that don't represent
@@ -109,7 +110,7 @@ public class NewsServlet extends HttpServlet {
         Cookie cookie = cookies[i];
         if (cookieName.equals(cookie.getName())) {
           try {
-            return Session.get(cookie.getValue());
+            return Sessions.get(cookie.getValue());
           } catch (DataInternalException|DataRequestException e) {
             System.err.println("Bad cookie found, ignoring: " + e.getMessage());
           }
