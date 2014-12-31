@@ -192,7 +192,6 @@ public class NewsSiteWhitelist {
         "shopping.nj.com",
         "ssl.bbc.co.uk",
         "static.reuters.com",
-        "video.cnbc.com",
         "www2b.abc.net.au"}) {
       BLACKLIST.add(blacklistDomain);
     }
@@ -211,7 +210,11 @@ public class NewsSiteWhitelist {
       // Path exclusions.
       String domain = bigUrl.getHost();
       String path = bigUrl.getPath();
-      if (path.startsWith("/cgi-bin/")) {
+      if (domain.contains("video.") ||
+          domain.contains("videos.") ||
+          path.startsWith("/cgi-bin/") ||
+          path.contains("/video/") ||
+          path.contains("/videos/")) {
         return false;
       }
       if (domain.endsWith("abcnews.go.com") &&
@@ -231,7 +234,6 @@ public class NewsSiteWhitelist {
       if (domain.endsWith(".bloomberg.com") &&
           (path.startsWith("/podcasts/") ||
            path.startsWith("/quote/") ||
-           path.startsWith("/video/") ||
            path.endsWith("/_/slideshow/"))) {
         return false;
       }
@@ -239,6 +241,10 @@ public class NewsSiteWhitelist {
           (path.startsWith("/boston/action/rssfeed") ||
            path.startsWith("/sports/blogs/") ||
            path.startsWith("/radio"))) {
+        return false;
+      }
+      if (domain.endsWith("businessweek.com") &&
+          path.startsWith("/bschools/")) {
         return false;
       }
       if (domain.endsWith(".chicagotribune.com") && path.endsWith("/comments/atom.xml")) {
@@ -270,8 +276,7 @@ public class NewsSiteWhitelist {
       if (domain.endsWith("money.cnn.com") &&
           (path.startsWith("/data/") ||
            path.startsWith("/quote/") ||
-           path.startsWith("/tag/") ||
-           path.startsWith("/video/"))) {
+           path.startsWith("/tag/"))) {
         return false;
       }
       if (domain.endsWith(".nj.com") && path.endsWith("/print.html")) {
@@ -284,8 +289,7 @@ public class NewsSiteWhitelist {
         }
       }
       if (domain.endsWith("techcrunch.com") &&
-          (path.startsWith("/rss/") ||
-           path.startsWith("/video/"))) {
+          (path.startsWith("/rss/"))) {
         return false;
       }
       if (domain.endsWith("telegraph.co.uk") && path.startsWith("/sponsored/")) {

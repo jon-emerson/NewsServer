@@ -165,25 +165,29 @@ public class ArticleHandler extends DefaultHandler {
       }
       if ("fb_title".equalsIgnoreCase(name) ||
           "hdl".equalsIgnoreCase(name) ||
-          "Headline".equalsIgnoreCase(name)) {
+          "Headline".equalsIgnoreCase(name) ||
+          "sailthru.title".equalsIgnoreCase(name)) {
         articleBuilder.setTitle(attrs.getValue("content"));
       }
       if ("thumbnail".equalsIgnoreCase(name) ||
-          "THUMBNAIL_URL".equalsIgnoreCase(name)) {
+          "THUMBNAIL_URL".equalsIgnoreCase(name) ||
+          "sailthru.image.full".equalsIgnoreCase(name)) {
         articleBuilder.setImageUrl(attrs.getValue("content"));
       }
       if ("date".equalsIgnoreCase(name) ||
           "OriginalPublicationDate".equalsIgnoreCase(name) ||
           "ptime".equalsIgnoreCase(name) ||
           "publish-date".equalsIgnoreCase(name) ||
-          "pub_date".equalsIgnoreCase(name)) {
+          "pub_date".equalsIgnoreCase(name) ||
+          "sailthru.date".equalsIgnoreCase(name)) {
         articleBuilder.setPublishedTime(parseDateTime(attrs.getValue("content")));
       }
       if ("utime".equalsIgnoreCase(name)) {
         articleBuilder.setModifiedTime(parseDateTime(attrs.getValue("content")));
       }
       if ("keywords".equalsIgnoreCase(name) ||
-          "news_keywords".equalsIgnoreCase(name)) {
+          "news_keywords".equalsIgnoreCase(name) ||
+          "sailthru.tags".equalsIgnoreCase(name)) {
         handleKeywords(attrs.getValue("content"));
       }
 
@@ -261,7 +265,7 @@ public class ArticleHandler extends DefaultHandler {
       keywords = rawKeywords.split(";");
     }
     for (String keyword : keywords) {
-      lastKeywords.add(keyword.trim().toLowerCase());
+      lastKeywords.add(keyword.trim());
     }
   }
 }

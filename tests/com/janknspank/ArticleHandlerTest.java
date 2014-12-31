@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -24,7 +25,9 @@ public class ArticleHandlerTest {
     }
 
     @Override
-    public void foundArticle(Article article, InterpretedData interpretedData) {
+    public void foundArticle(Article article,
+        InterpretedData interpretedData,
+        Set<String> keywords) {
       foundArticles.add(article);
     }
   }
