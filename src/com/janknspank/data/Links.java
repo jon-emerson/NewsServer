@@ -24,12 +24,10 @@ public class Links {
     try {
       PreparedStatement statement =
           Database.getConnection().prepareStatement(DELETE_COMMAND);
-      statement.setString(1, ids.get(0));
-      statement.setString(2, ids.get(0));
       for (int i = 0; i < ids.size(); i++) {
-        statement.addBatch();
         statement.setString(1, ids.get(i));
         statement.setString(2, ids.get(i));
+        statement.addBatch();
       }
       int numModified = 0;
       for (int modCount : statement.executeBatch()) {

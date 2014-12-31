@@ -143,6 +143,7 @@ public class NewsSiteWhitelist {
   private static final HashSet<String> BLACKLIST = new HashSet<String>();
   static {
     for (String blacklistDomain : new String[] {
+        "about.abc.net.au",
         "account.washingtonpost.com",
         "advertise.latimes.com",
         "advertising.chicagotribune.com",
@@ -155,9 +156,13 @@ public class NewsSiteWhitelist {
         "autos.cleveland.com",
         "autos.nj.com",
         "bdn-ak.bloomberg.com",
+        "bdns.bloomberg.com",
         "binaryapi.ap.org",
+        "blog.cleveland.com",
+        "blogcabin.boston.com",
         "blogs.cnn.com",
         "businessfinder.cleveland.com",
+        "bwso.businessweek.com",
         "calendar.boston.com",
         "cars.irishtimes.com",
         "cars.sfgate.com",
@@ -185,6 +190,7 @@ public class NewsSiteWhitelist {
         "ee.latimes.com",
         "episteme.arstechnica.com",
         "events.sfgate.com",
+        "extras.sfgate.com",
         "faq.external.bbc.co.uk",
         "fanshop.sfgate.com",
         "feeds.arstechnica.com",
@@ -195,6 +201,7 @@ public class NewsSiteWhitelist {
         "finds.boston.com",
         "foreclosures.cleveland.com",
         "forums.abcnews.go.com",
+        "forums.businessweek.com",
         "framework.latimes.com",
         "futuresnow.cnbc.com",
         "games.cnn.com",
@@ -203,6 +210,7 @@ public class NewsSiteWhitelist {
         "gardenshop.telegraph.co.uk",
         "graphics.latimes.com",
         "guides.latimes.com",
+        "healthguide.boston.com",
         "highschoolsports.cleveland.com",
         "homeguides.sfgate.com",
         "id.theguardian.com",
@@ -230,8 +238,10 @@ public class NewsSiteWhitelist {
         "m.washingtonpost.com",
         "marketplace.latimes.com",
         "marketplaceads.latimes.com",
+        "markets.sfgate.com",
         "media.bloomberg.com",
         "mediakit.latimes.com",
+        "members.boston.com",
         "members.chicagotribune.com",
         "membership.latimes.com",
         "mexico.cnn.com",
@@ -239,13 +249,19 @@ public class NewsSiteWhitelist {
         "mobile.bloomberg.com",
         "mobile.businessweek.com",
         "mobilejobs.cleveland.com",
+        "mobileobits.cleveland.com",
         "mobile-phones.smh.com.au",
+        "music.cbc.ca",
         "myaccount.dallasnews.com",
+        "myaccount2.latimes.com",
         "nie.washingtonpost.com",
+        "open.bloomberg.com",
         "partners.cnn.com",
+        "photos.cleveland.com",
         "placeanad.chicagotribune.com",
         "placeanad.latimes.com",
         "portfolio.cnbc.com",
+        "portfolio.money.cnn.com",
         "pro.cnbc.com",
         "profile.theguardian.com",
         "projects.latimes.com",
@@ -279,16 +295,20 @@ public class NewsSiteWhitelist {
         "subscribe.businessweek.com",
         "subscribe.washingtonpost.com",
         "syndication.boston.com",
+        "syndication.washingtonpost.com",
         "tamil.thehindu.com",
         "tickets.boston.com",
         "transcripts.cnn.com",
         "update.cleveland.com",
+        "videoreprints.cnbc.com",
+        "washpost.bloomberg.com",
         "watchlist.cnbc.com",
+        "weather.cnn.com",
         "webcast.cnbc.com",
-        "www2b.abc.net.au"}) {
+        "www2b.abc.net.au",
+        "yellowpages.washingtonpost.com"}) {
       BLACKLIST.add(blacklistDomain);
     }
-
   }
 
   public static boolean isOkay(String url) {
@@ -320,12 +340,23 @@ public class NewsSiteWhitelist {
         return false;
       }
       if (domain.endsWith("arstechnica.com") &&
-          (path.startsWith("/civis/") ||
+          (path.startsWith("/articles/paedia/") ||
+           path.startsWith("/civis/") ||
+           path.startsWith("/cpu/") ||
+           path.startsWith("/etc/") ||
+           path.startsWith("/features/") ||
            path.startsWith("/forum/") ||
            path.startsWith("/guide/") ||
            path.startsWith("/guides/") ||
+           path.startsWith("/mt-static/") ||
+           path.startsWith("/old/") ||
+           path.startsWith("/paedia/") ||
+           path.startsWith("/reviews/") ||
+           path.startsWith("/site/") ||
            path.startsWith("/sponsored/") ||
-           path.startsWith("/subscriptions/"))) {
+           path.startsWith("/subscriptions/") ||
+           path.startsWith("/tweak/") ||
+           path.startsWith("/wankerdesk/"))) {
         return false;
       }
       if (domain.endsWith("bbc.co.uk") || domain.endsWith("bbc.com")) {
@@ -334,7 +365,11 @@ public class NewsSiteWhitelist {
         }
       }
       if (domain.endsWith(".bloomberg.com") &&
-          (path.startsWith("/podcasts/") ||
+          (path.startsWith("/ad-section/") ||
+           path.startsWith("/apps/") ||
+           path.startsWith("/graphics/") ||
+           path.startsWith("/infographics/") ||
+           path.startsWith("/podcasts/") ||
            path.startsWith("/quote/") ||
            path.startsWith("/slideshow/") ||
            path.startsWith("/visual-data/") ||
@@ -344,7 +379,10 @@ public class NewsSiteWhitelist {
       if (domain.endsWith("boston.com") &&
           (path.startsWith("/boston/action/rssfeed") ||
            path.startsWith("/cars/") ||
+           path.startsWith("/eom/") ||
            path.startsWith("/help/") ||
+           // /jobs/ is OK!!!
+           path.startsWith("/news/traffic/") ||
            path.startsWith("/radio") ||
            path.startsWith("/sports/blogs/"))) {
         return false;
@@ -365,19 +403,28 @@ public class NewsSiteWhitelist {
            path.startsWith("/printer/") ||
            path.startsWith("/quiz/") ||
            path.startsWith("/reports/") ||
-           path.startsWith("/slideshows/") ||
+           path.startsWith("/slideshows/") || path.equals("/slideshows") ||
            path.startsWith("/small-business/") ||
-           path.startsWith("/technology/"))) {
+           path.startsWith("/technology/") ||
+           path.startsWith("/videos/") || path.equals("/videos"))) {
         return false;
       }
       if (domain.endsWith("cbc.ca") &&
-          (path.startsWith("/mediacentre/") ||
+          (path.startsWith("/connects/") ||
+           path.startsWith("/mediacentre/") ||
            path.startsWith("/player/") ||
            path.startsWith("/shop/"))) {
         return false;
       }
+      if (domain.endsWith("cbsnews.com") &&
+          path.startsWith("/media/")) {
+        return false;
+      }
       if (domain.endsWith("cleveland.com") &&
-          (path.endsWith("/print.html"))) {
+          (path.startsWith("/events/") || path.equals("/events") ||
+           path.startsWith("/forums/") || path.equals("/forums") ||
+           path.startsWith("/jobs/") || path.equals("/jobs") ||
+           path.endsWith("/print.html"))) {
         return false;
       }
       if (domain.endsWith("cnbc.com") &&
@@ -386,6 +433,8 @@ public class NewsSiteWhitelist {
       }
       if (domain.endsWith("cnn.com") &&
           (path.startsWith("/CNN/") ||
+           path.startsWith("/CNNI/") ||
+           path.startsWith("/linkto/") ||
            path.startsWith("/services/"))) {
         return false;
       }
@@ -400,6 +449,9 @@ public class NewsSiteWhitelist {
            path.startsWith("/quizzes/"))) {
         return false;
       }
+      if (domain.endsWith("finance.boston.com") && path.endsWith("/quote")) {
+        return false;
+      }
       if (domain.endsWith("forbes.com") && path.startsWith("/account/")) {
         return false;
       }
@@ -408,7 +460,8 @@ public class NewsSiteWhitelist {
         return false;
       }
       if (domain.endsWith("latimes.com")) {
-        if (path.startsWith("/shopping/")) {
+        if (path.startsWith("/classified/") ||
+            path.startsWith("/shopping/")) {
           return false;
         }
         // Don't geek out on the historical articles.  If they're linked from other
@@ -422,8 +475,12 @@ public class NewsSiteWhitelist {
       }
       if (domain.endsWith("money.cnn.com") &&
           (path.startsWith("/data/") ||
+           path.startsWith("/galleries/") ||
+           path.startsWith("/gallery/") ||
            path.startsWith("/quote/") ||
-           path.startsWith("/tag/"))) {
+           path.startsWith("/magazines/") ||
+           path.startsWith("/tag/") ||
+           path.startsWith("/tools/"))) {
         return false;
       }
       if (domain.endsWith(".nj.com") && path.endsWith("/print.html")) {
@@ -440,7 +497,9 @@ public class NewsSiteWhitelist {
         return false;
       }
       if (domain.endsWith("techcrunch.com") &&
-          (path.startsWith("/events/") ||
+          (path.startsWith("/event-type/") ||
+           path.startsWith("/events/") ||
+           path.startsWith("/gallery/") ||
            path.startsWith("/rss/"))) {
         return false;
       }
@@ -451,7 +510,10 @@ public class NewsSiteWhitelist {
         return false;
       }
       if (domain.endsWith("washingtonpost.com") &&
-          (path.contains("/wp-dyn/") ||
+          (path.startsWith("/capitalweathergang/") ||
+           path.contains("/wp-dyn/") ||
+           path.contains("/wp-srv/") ||
+           path.endsWith("/wp-dyn") ||
            path.endsWith("_category.html"))) {
         return false;
       }

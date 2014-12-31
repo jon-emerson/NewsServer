@@ -328,9 +328,9 @@ public class Database {
 
     try {
       PreparedStatement stmt = Database.getInsertStatement(firstMessage);
-      for (int i = 1; i < messageList.size(); i++) {
-        stmt.addBatch();
+      for (int i = 0; i < messageList.size(); i++) {
         prepareInsertOrUpdateStatement(stmt, messageList.get(i));
+        stmt.addBatch();
       }
       stmt.executeBatch();
     } catch (SQLException e) {
@@ -495,10 +495,9 @@ public class Database {
       stmt = getConnection().prepareStatement(
           "DELETE FROM " + getTableName(clazz) +
           " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
-      stmt.setString(1, primaryKeyList.get(0));
       for (int i = 0; i < primaryKeyList.size(); i++) {
-        stmt.addBatch();
         stmt.setString(1, primaryKeyList.get(i));
+        stmt.addBatch();
       }
       int numModified = 0;
       for (int modCount : stmt.executeBatch()) {

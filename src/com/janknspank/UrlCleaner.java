@@ -39,6 +39,7 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".abc.net.au") || url.getHost().equals("abc.net.au")) {
       queryParameters.remove("cid");
       queryParameters.remove("pfm");
+      queryParameters.remove("section");
     }
     if (url.getHost().endsWith(".abcnews.go.com") || url.getHost().equals("abcnews.go.com")) {
       if (queryParameters.containsKey("page") && queryParameters.get("page").equals("1")) {
@@ -62,9 +63,12 @@ public class UrlCleaner {
       queryParameters.remove("postId");
     }
     if (url.getHost().endsWith(".bloomberg.com") || url.getHost().equals("bloomberg.com")) {
+      queryParameters.remove("cmpid");
       queryParameters.remove("hootPostID");
     }
     if (url.getHost().endsWith(".boston.com") || url.getHost().equals("boston.com")) {
+      queryParameters.remove("comments");
+      queryParameters.remove("mastheadLogo");
       queryParameters.remove("p1");
       queryParameters.remove("rss_id");
     }
@@ -74,6 +78,10 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".chron.com") || url.getHost().equals("chron.com")) {
       queryParameters.remove("cmpid");
     }
+    if (url.getHost().endsWith(".channelnewsasia.com") ||
+        url.getHost().equals("channelnewsasia.com")) {
+      queryParameters.remove("cid");
+    }
     if (url.getHost().endsWith(".chicagotribune.com") || url.getHost().equals("chicagotribune.com")) {
       queryParameters.remove("cid");
     }
@@ -82,6 +90,7 @@ public class UrlCleaner {
       queryParameters.remove("__source");
     }
     if (url.getHost().endsWith(".cnn.com") || url.getHost().equals("cnn.com")) {
+      queryParameters.remove("cnn");
       queryParameters.remove("eref");
       queryParameters.remove("hpt");
       queryParameters.remove("iid");
@@ -92,6 +101,7 @@ public class UrlCleaner {
       queryParameters.remove("sr");
       queryParameters.remove("source");
       queryParameters.remove("switchEdition");
+      queryParameters.remove("xid");
       queryParameters.remove("_s");
     }
     if (url.getHost().endsWith(".economist.com") || url.getHost().equals("economist.com")) {
@@ -200,7 +210,9 @@ public class UrlCleaner {
     }
     if (url.getHost().endsWith(".washingtonpost.com") ||
         url.getHost().equals("washingtonpost.com")) {
+      queryParameters.remove("hpid");
       queryParameters.remove("nav");
+      queryParameters.remove("nid");
       queryParameters.remove("resType");
       queryParameters.remove("tid");
     }
