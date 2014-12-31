@@ -14,6 +14,8 @@ public class ArticleKeywordsTest {
     assertFalse(ArticleKeywords.isValidKeyword("moo@bloomberg"));
     assertFalse(ArticleKeywords.isValidKeyword("celebrity news"));
     assertFalse(ArticleKeywords.isValidKeyword("19-year-old Software Bug"));
+    assertFalse(ArticleKeywords.isValidKeyword("Best of Tech"));
+    assertFalse(ArticleKeywords.isValidKeyword("Best Actors of 2014"));
     assertTrue(ArticleKeywords.isValidKeyword("The New York Times"));
     assertTrue(ArticleKeywords.isValidKeyword("US"));
     assertTrue(ArticleKeywords.isValidKeyword("Larry Page"));

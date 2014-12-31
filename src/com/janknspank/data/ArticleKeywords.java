@@ -46,6 +46,7 @@ public class ArticleKeywords {
 
   private static final Pattern NUMBER_PATTERN_1 = Pattern.compile("^[0-9]+$");
   private static final Pattern NUMBER_PATTERN_2 = Pattern.compile("^[0-9]+\\-");
+  private static final Pattern BEST_OF_PATTERN = Pattern.compile("^best( [a-z]+)? of ");
   private static final Set<String> BLACKLIST = Sets.newHashSet();
   static {
     for (String keyword : new String[] {
@@ -56,6 +57,7 @@ public class ArticleKeywords {
         "bw business schools page",
         "capitals",
         "ceo",
+        "committee",
         "commodities",
         "company",
         "corrections",
@@ -76,7 +78,9 @@ public class ArticleKeywords {
         "markets",
         "media",
         "mobile",
+        "my",
         "news",
+        "opinion",
         "party",
         "pm",
         "profile",
@@ -85,6 +89,7 @@ public class ArticleKeywords {
         "retailing",
         "shopping",
         "show",
+        "son",
         "sports",
         "stocks",
         "stock market",
@@ -97,7 +102,11 @@ public class ArticleKeywords {
         "their",
         "there",
         "they",
+        "times",
         "top business schools worldwide",
+        "trial",
+        "trials",
+        "try",
         "university",
         "up",
         "video",
@@ -115,8 +124,10 @@ public class ArticleKeywords {
     if (keyword.length() < 2 ||
         NUMBER_PATTERN_1.matcher(keyword).find() ||
         NUMBER_PATTERN_2.matcher(keyword).find() ||
+        BEST_OF_PATTERN.matcher(keyword).find() ||
         keyword.contains("…") ||
         keyword.startsWith("#") ||
+        keyword.startsWith("@") ||
         keyword.startsWith("bloomberg ") ||
         keyword.startsWith("mba ") ||
         keyword.endsWith("@bloomberg") ||
@@ -135,6 +146,10 @@ public class ArticleKeywords {
   @VisibleForTesting
   static String cleanKeyword(String keyword) {
     keyword = keyword.trim();
+    if (keyword.startsWith("‘") || keyword.startsWith("'") ||
+        keyword.startsWith("“") || keyword.startsWith("\"")) {
+      keyword = keyword.substring(1);
+    }
     if (keyword.endsWith(",") || keyword.endsWith(";") || keyword.endsWith("-")) {
       keyword = keyword.substring(0, keyword.length() - 1);
     }

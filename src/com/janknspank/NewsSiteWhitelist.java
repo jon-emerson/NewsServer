@@ -2,10 +2,20 @@ package com.janknspank;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.janknspank.data.Database;
+import com.janknspank.data.Links;
+import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.Core.Url;
 
 public class NewsSiteWhitelist {
   private static final HashSet<String> WHITELIST = new HashSet<String>();
@@ -134,64 +144,147 @@ public class NewsSiteWhitelist {
   static {
     for (String blacklistDomain : new String[] {
         "account.washingtonpost.com",
+        "advertise.latimes.com",
         "advertising.chicagotribune.com",
+        "advertising.washingtonpost.com",
         "alerts.uk.reuters.com",
         "apps.chicagotribune.com",
+        "apps.washingtonpost.com",
+        "arabic.cnn.com",
+        "audience.cnn.com",
+        "autos.cleveland.com",
         "autos.nj.com",
         "bdn-ak.bloomberg.com",
         "binaryapi.ap.org",
         "blogs.cnn.com",
+        "businessfinder.cleveland.com",
+        "calendar.boston.com",
         "cars.irishtimes.com",
+        "cars.sfgate.com",
+        "cgi.money.cnn.com",
+        "cinesport.cleveland.com",
+        "circulars.boston.com",
+        "classifieds.cleveland.com",
         "classifieds.latimes.com",
         "classifieds.nj.com",
+        "cnnespanol.cnn.com",
         "connect.bloomberg.com",
+        "connect.cleveland.com",
         "customers.reuters.com",
         "data.cnbc.com",
+        "datadesk.latimes.com",
         "dating.telegraph.co.uk",
         "dailydeals.latimes.com",
+        "demiurge.arstechnica.com",
         "digitalservices.latimes.com",
         "discussion.theguardian.com",
         "discussions.latimes.com",
+        "disrupt.techcrunch.com",
         "dj.wsj.com",
         "documents.latimes.com",
+        "ee.latimes.com",
+        "episteme.arstechnica.com",
+        "events.sfgate.com",
         "faq.external.bbc.co.uk",
+        "fanshop.sfgate.com",
+        "feeds.arstechnica.com",
         "feeds.washingtonpost.com",
+        "findnsave.cleveland.com",
         "findnsave.dallasnews.com",
+        "findnsave.washingtonpost.com",
+        "finds.boston.com",
+        "foreclosures.cleveland.com",
         "forums.abcnews.go.com",
         "framework.latimes.com",
+        "futuresnow.cnbc.com",
         "games.cnn.com",
         "games.latimes.com",
+        "games.washingtonpost.com",
         "gardenshop.telegraph.co.uk",
         "graphics.latimes.com",
         "guides.latimes.com",
-        "tamil.thehindu.com",
+        "highschoolsports.cleveland.com",
+        "homeguides.sfgate.com",
         "id.theguardian.com",
         "ilivehere.latimes.com",
         "images.businessweek.com",
+        "inhealth.cnn.com",
         "iplayerhelp.external.bbc.co.uk",
+        "ireport.cnn.com",
+        "iview.abc.net.au",
+        "jobs.bloomberg.com",
         "jobs.businessweek.com",
+        "jobs.cleveland.com",
         "jobsearch.bloomberg.com",
         "jobsearch.money.cnn.com",
         "jp.techcrunch.com",
         "jp.wsj.com",
+        "js.washingtonpost.com",
         "khabar.ndtv.com",
+        "listings.boston.com",
+        "localdeals.latimes.com",
         "login.bloomberg.com",
+        "m.bbc.com",
         "m.bloomberg.com",
+        "m.cleveland.com",
+        "m.washingtonpost.com",
+        "marketplace.latimes.com",
+        "marketplaceads.latimes.com",
         "media.bloomberg.com",
+        "mediakit.latimes.com",
         "members.chicagotribune.com",
+        "membership.latimes.com",
         "mexico.cnn.com",
+        "mobile.abc.net.au",
+        "mobile.bloomberg.com",
+        "mobile.businessweek.com",
+        "mobilejobs.cleveland.com",
         "mobile-phones.smh.com.au",
         "myaccount.dallasnews.com",
+        "nie.washingtonpost.com",
+        "partners.cnn.com",
         "placeanad.chicagotribune.com",
+        "placeanad.latimes.com",
+        "portfolio.cnbc.com",
+        "pro.cnbc.com",
         "profile.theguardian.com",
+        "projects.latimes.com",
         "radio.foxnews.com",
+        "realestate.boston.com",
+        "realestate.cleveland.com",
+        "realestate.money.cnn.com",
+        "realestate.washingtonpost.com",
+        "recipes.latimes.com",
+        "rss.cnn.com",
         "rssfeeds.usatoday.com",
+        "scene.boston.com",
+        "schools.latimes.com",
+        "search.abc.net.au",
         "search.bloomberg.com",
         "search.boston.com",
+        "search.cleveland.com",
+        "secure.businessweek.com",
+        "service.bloomberg.com",
+        "shop.abc.net.au",
         "shop.telegraph.co.uk",
         "shopping.nj.com",
+        "signup.cleveland.com",
+        "spiderbites.boston.com",
         "ssl.bbc.co.uk",
+        "ssl.washingtonpost.com",
         "static.reuters.com",
+        "stats.boston.com",
+        "stats.cleveland.com",
+        "store.latimes.com",
+        "subscribe.businessweek.com",
+        "subscribe.washingtonpost.com",
+        "syndication.boston.com",
+        "tamil.thehindu.com",
+        "tickets.boston.com",
+        "transcripts.cnn.com",
+        "update.cleveland.com",
+        "watchlist.cnbc.com",
+        "webcast.cnbc.com",
         "www2b.abc.net.au"}) {
       BLACKLIST.add(blacklistDomain);
     }
@@ -220,10 +313,19 @@ public class NewsSiteWhitelist {
       if (domain.endsWith("abcnews.go.com") &&
           (path.startsWith("/blogs/") ||
            path.startsWith("/meta/") ||
-           path.startsWith("/xmldata/"))) {
+           path.startsWith("/xmldata/") ||
+           path.contains("/photos/") ||
+           path.contains("/videos/") ||
+           path.endsWith("/video"))) {
         return false;
       }
-      if (domain.endsWith("arstechnica.com") && path.startsWith("/civis/")) {
+      if (domain.endsWith("arstechnica.com") &&
+          (path.startsWith("/civis/") ||
+           path.startsWith("/forum/") ||
+           path.startsWith("/guide/") ||
+           path.startsWith("/guides/") ||
+           path.startsWith("/sponsored/") ||
+           path.startsWith("/subscriptions/"))) {
         return false;
       }
       if (domain.endsWith("bbc.co.uk") || domain.endsWith("bbc.com")) {
@@ -234,24 +336,68 @@ public class NewsSiteWhitelist {
       if (domain.endsWith(".bloomberg.com") &&
           (path.startsWith("/podcasts/") ||
            path.startsWith("/quote/") ||
+           path.startsWith("/slideshow/") ||
            path.startsWith("/visual-data/") ||
            path.endsWith("/_/slideshow/"))) {
         return false;
       }
       if (domain.endsWith("boston.com") &&
           (path.startsWith("/boston/action/rssfeed") ||
-           path.startsWith("/sports/blogs/") ||
-           path.startsWith("/radio"))) {
+           path.startsWith("/cars/") ||
+           path.startsWith("/help/") ||
+           path.startsWith("/radio") ||
+           path.startsWith("/sports/blogs/"))) {
         return false;
       }
       if (domain.endsWith("businessweek.com") &&
-          path.startsWith("/bschools/")) {
+          (path.startsWith("/adsections/") ||
+           path.startsWith("/bschools/") ||
+           path.startsWith("/business-schools/") ||
+           path.startsWith("/companies-and-industries/") ||
+           path.startsWith("/global-economics/") ||
+           path.startsWith("/innovation-and-design/") ||
+           path.startsWith("/innovation/") ||
+           path.startsWith("/interactive/") ||
+           path.startsWith("/lifestyle/") ||
+           path.startsWith("/markets-and-finance/") ||
+           path.startsWith("/photos/") ||
+           path.startsWith("/politics-and-policy/") ||
+           path.startsWith("/printer/") ||
+           path.startsWith("/quiz/") ||
+           path.startsWith("/reports/") ||
+           path.startsWith("/slideshows/") ||
+           path.startsWith("/small-business/") ||
+           path.startsWith("/technology/"))) {
+        return false;
+      }
+      if (domain.endsWith("cbc.ca") &&
+          (path.startsWith("/mediacentre/") ||
+           path.startsWith("/player/") ||
+           path.startsWith("/shop/"))) {
+        return false;
+      }
+      if (domain.endsWith("cleveland.com") &&
+          (path.endsWith("/print.html"))) {
+        return false;
+      }
+      if (domain.endsWith("cnbc.com") &&
+          path.startsWith("/live-tv/")) {
+        return false;
+      }
+      if (domain.endsWith("cnn.com") &&
+          (path.startsWith("/CNN/") ||
+           path.startsWith("/services/"))) {
         return false;
       }
       if (domain.endsWith(".chicagotribune.com") && path.endsWith("/comments/atom.xml")) {
         return false;
       }
-      if (domain.endsWith(".cnn.com") && path.startsWith("/interactive/")) {
+      if (domain.endsWith(".cnn.com") &&
+          (path.startsWith("/calculator/") ||
+           path.startsWith("/data/") ||
+           path.startsWith("/infographic/") ||
+           path.startsWith("/interactive/") ||
+           path.startsWith("/quizzes/"))) {
         return false;
       }
       if (domain.endsWith("forbes.com") && path.startsWith("/account/")) {
@@ -289,14 +435,24 @@ public class NewsSiteWhitelist {
           return false;
         }
       }
+      if (domain.endsWith("sfgate.com") &&
+          path.startsWith("/merge/")) {
+        return false;
+      }
       if (domain.endsWith("techcrunch.com") &&
-          (path.startsWith("/rss/"))) {
+          (path.startsWith("/events/") ||
+           path.startsWith("/rss/"))) {
         return false;
       }
       if (domain.endsWith("telegraph.co.uk") && path.startsWith("/sponsored/")) {
         return false;
       }
       if (domain.endsWith("usatoday.com") && path.startsWith("/marketing/rss/")) {
+        return false;
+      }
+      if (domain.endsWith("washingtonpost.com") &&
+          (path.contains("/wp-dyn/") ||
+           path.endsWith("_category.html"))) {
         return false;
       }
       if (domain.endsWith("westword.com") &&
@@ -334,6 +490,43 @@ public class NewsSiteWhitelist {
       return false;
     } catch (MalformedURLException e) {
       return false;
+    }
+  }
+
+  /**
+   * Cleans up the database by deleting any URLs and related metadata (crawl
+   * data, links, etc) for articles that are now blacklisted or whose query
+   * parameters are now more restrictive.
+   * NOTE(jonemerson): We delete URLs with now-obsolete query parameters,
+   * rather than update them, because it's generally difficult to canonicalize
+   * two URLs and we can always find the cleaned URL again later, if necessary.
+   */
+  public static void main(String args[]) throws Exception {
+    PreparedStatement stmt = Database.getConnection().prepareStatement(
+        "SELECT * FROM " + Database.getTableName(Url.class) + " WHERE url NOT LIKE '%//twitter.com/%'");
+    ResultSet result = stmt.executeQuery();
+    Map<String, String> urlsToDelete = Maps.newHashMap();
+    while (!result.isAfterLast()) {
+      Url url = Database.createFromResultSet(result, Url.class);
+      if (url != null) {
+        String urlStr = url.getUrl();
+        if ((!isOkay(urlStr) || !urlStr.equals(UrlCleaner.clean(urlStr)))) {
+          urlsToDelete.put(urlStr, url.getId());
+        }
+      }
+      if (urlsToDelete.size() == 100 || url == null) {
+        List<String> urls = Lists.newArrayList();
+        List<String> ids = Lists.newArrayList();
+        for (String urlStr : urlsToDelete.keySet()) {
+          System.out.println("Deleting url: " + urlStr);
+          urls.add(urlStr);
+          ids.add(urlsToDelete.get(urlStr));
+        }
+        System.out.println("Deleted " + Database.deletePrimaryKeys(urls, Url.class) + " urls");
+        System.out.println("Deleted " + Database.deletePrimaryKeys(ids, Article.class) + " articles");
+        System.out.println("Deleted " + Links.deleteIds(ids) + " links");
+        urlsToDelete.clear();
+      }
     }
   }
 }

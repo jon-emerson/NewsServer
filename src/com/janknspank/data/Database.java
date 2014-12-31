@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.protobuf.Descriptors.FieldDescriptor;
@@ -331,7 +332,7 @@ public class Database {
         stmt.addBatch();
         prepareInsertOrUpdateStatement(stmt, messageList.get(i));
       }
-      stmt.execute();
+      stmt.executeBatch();
     } catch (SQLException e) {
       throw new DataInternalException("Could not insert article", e);
     }
@@ -477,18 +478,36 @@ public class Database {
    */
   public static <T extends Message> void deletePrimaryKey(String primaryKey, Class<T> clazz)
       throws DataInternalException {
+    if (deletePrimaryKeys(ImmutableList.of(primaryKey), clazz) != 1) {
+      throw new DataInternalException("Could not find object to delete, primary key = " +
+          primaryKey);
+    }
+  }
+
+  /**
+   * Deletes objects with the specified primary keys from the table specified
+   * by the passed-in class.
+   */
+  public static <T extends Message> int deletePrimaryKeys(
+      List<String> primaryKeyList, Class<T> clazz) throws DataInternalException {
     PreparedStatement stmt;
     try {
       stmt = getConnection().prepareStatement(
           "DELETE FROM " + getTableName(clazz) +
           " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
-      stmt.setString(1, primaryKey);
-      if (stmt.executeUpdate() != 1) {
-        throw new DataInternalException("Could not find object to delete, primary key = " +
-            primaryKey);
+      stmt.setString(1, primaryKeyList.get(0));
+      for (int i = 0; i < primaryKeyList.size(); i++) {
+        stmt.addBatch();
+        stmt.setString(1, primaryKeyList.get(i));
       }
+      int numModified = 0;
+      for (int modCount : stmt.executeBatch()) {
+        numModified += modCount;
+      }
+      return numModified;
+
     } catch (SQLException e) {
-      throw new DataInternalException("Error executing delete, primary key = " + primaryKey, e);
+      throw new DataInternalException("Error executing delete: " + e.getMessage(), e);
     }
   }
 

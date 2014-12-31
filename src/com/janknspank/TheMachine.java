@@ -4,7 +4,9 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.protobuf.Message;
 import com.janknspank.ArticleHandler.ArticleCallback;
 import com.janknspank.data.ArticleKeywords;
@@ -32,13 +34,14 @@ public class TheMachine {
 
       if (!NewsSiteWhitelist.isOkay(startUrl.getUrl())) {
         System.err.println("Removing now-blacklisted page: " + startUrl.getUrl());
-        Links.deleteId(startUrl.getId());
+        Links.deleteIds(ImmutableList.of(startUrl.getId()));
         Database.delete(startUrl);
         continue;
       }
 
       System.err.println("Crawling: " + startUrl.getUrl());
       final String startUrlId = startUrl.getId();
+      final Set<String> foundUrls = Sets.newHashSet();
       new Crawler(new ArticleCallback() {
         List<Message> linkList = Lists.newArrayList();
 
@@ -51,18 +54,22 @@ public class TheMachine {
             return;
           }
 
-          if (NewsSiteWhitelist.isOkay(url)) {
-            try {
-              Url destination = Urls.put(url, /* isTweet */ false);
-              linkList.add(Link.newBuilder()
-                  .setOriginId(startUrlId)
-                  .setDestinationId(destination.getId())
-                  .setDiscoveryTime(destination.getDiscoveryTime())
-                  .setLastFoundTime(destination.getDiscoveryTime())
-                  .build());
-            } catch (DataInternalException e) {
-              e.printStackTrace();
-            }
+          // Skip non-whitelisted URLs and URLs we've already seen on this page.
+          if (!NewsSiteWhitelist.isOkay(url) || foundUrls.contains(url)) {
+            return;
+          }
+          foundUrls.add(url);
+
+          try {
+            Url destination = Urls.put(url, /* isTweet */ false);
+            linkList.add(Link.newBuilder()
+                .setOriginId(startUrlId)
+                .setDestinationId(destination.getId())
+                .setDiscoveryTime(destination.getDiscoveryTime())
+                .setLastFoundTime(destination.getDiscoveryTime())
+                .build());
+          } catch (DataInternalException e) {
+            e.printStackTrace();
           }
         }
 

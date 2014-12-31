@@ -3,6 +3,7 @@ package com.janknspank.data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.janknspank.proto.Core.Link;
 
@@ -19,15 +20,25 @@ public class Links {
   /**
    * Deletes any links coming to or from the passed discovered URL ID.
    */
-  public static void deleteId(String id) {
+  public static int deleteIds(List<String> ids) throws DataInternalException {
     try {
       PreparedStatement statement =
           Database.getConnection().prepareStatement(DELETE_COMMAND);
-      statement.setString(1, id);
-      statement.setString(2, id);
-      statement.executeUpdate();
+      statement.setString(1, ids.get(0));
+      statement.setString(2, ids.get(0));
+      for (int i = 0; i < ids.size(); i++) {
+        statement.addBatch();
+        statement.setString(1, ids.get(i));
+        statement.setString(2, ids.get(i));
+      }
+      int numModified = 0;
+      for (int modCount : statement.executeBatch()) {
+        numModified += modCount;
+      }
+      return numModified;
+
     } catch (SQLException e) {
-      e.printStackTrace();
+      throw new DataInternalException("Could not delete links: " + e.getMessage(), e);
     }
   }
 

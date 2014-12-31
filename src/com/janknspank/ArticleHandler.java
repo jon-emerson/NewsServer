@@ -39,6 +39,8 @@ public class ArticleHandler extends DefaultHandler {
       new SimpleDateFormat("yyyyMMdd"), // Washington Post.
       new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"), // BBC.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm z"), // Boston.com.
+      new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z"), // Boston.com.
+      new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss"), // Boston.com
       new SimpleDateFormat("/yyyy/MM/dd/"), // In URL.
       new SimpleDateFormat("/yyyy-MM-dd/"), // In URL.
       new SimpleDateFormat("/yyyyMMdd/") // In URL.

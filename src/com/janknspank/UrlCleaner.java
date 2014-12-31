@@ -46,6 +46,7 @@ public class UrlCleaner {
       }
     }
     if (url.getHost().endsWith(".arstechnica.com") || url.getHost().equals("arstechnica.com")) {
+      queryParameters.remove("amp");
       queryParameters.remove("comments");
       queryParameters.remove("post");
       queryParameters.remove("theme");
@@ -65,6 +66,7 @@ public class UrlCleaner {
     }
     if (url.getHost().endsWith(".boston.com") || url.getHost().equals("boston.com")) {
       queryParameters.remove("p1");
+      queryParameters.remove("rss_id");
     }
     if (url.getHost().endsWith(".businessweek.com") || url.getHost().equals("businessweek.com")) {
       queryParameters.remove("hootPostID");
@@ -72,19 +74,25 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".chron.com") || url.getHost().equals("chron.com")) {
       queryParameters.remove("cmpid");
     }
+    if (url.getHost().endsWith(".chicagotribune.com") || url.getHost().equals("chicagotribune.com")) {
+      queryParameters.remove("cid");
+    }
+    if (url.getHost().endsWith(".cnbc.com") || url.getHost().equals("cnbc.com")) {
+      queryParameters.remove("trknav");
+      queryParameters.remove("__source");
+    }
     if (url.getHost().endsWith(".cnn.com") || url.getHost().equals("cnn.com")) {
       queryParameters.remove("eref");
       queryParameters.remove("hpt");
       queryParameters.remove("iid");
+      queryParameters.remove("imw");
       queryParameters.remove("iref");
       queryParameters.remove("nbd");
       queryParameters.remove("npt");
       queryParameters.remove("sr");
       queryParameters.remove("source");
+      queryParameters.remove("switchEdition");
       queryParameters.remove("_s");
-    }
-    if (url.getHost().endsWith(".chicagotribune.com") || url.getHost().equals("chicagotribune.com")) {
-      queryParameters.remove("cid");
     }
     if (url.getHost().endsWith(".economist.com") || url.getHost().equals("economist.com")) {
       queryParameters.remove("fsrc");
@@ -153,6 +161,7 @@ public class UrlCleaner {
       queryParameters.remove("WT.mc_c");
       queryParameters.remove("WT.nav");
       queryParameters.remove("action");
+      queryParameters.remove("amp");
       queryParameters.remove("contentCollection");
       queryParameters.remove("emc");
       queryParameters.remove("hp");
@@ -191,6 +200,8 @@ public class UrlCleaner {
     }
     if (url.getHost().endsWith(".washingtonpost.com") ||
         url.getHost().equals("washingtonpost.com")) {
+      queryParameters.remove("nav");
+      queryParameters.remove("resType");
       queryParameters.remove("tid");
     }
     if (url.getHost().endsWith(".wsj.com") || url.getHost().equals("wjs.com")) {
