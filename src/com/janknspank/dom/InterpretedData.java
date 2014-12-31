@@ -34,20 +34,24 @@ public class InterpretedData {
       organizations = TreeMultiset.create();
     }
 
-    public void setArticleBody(String articleBody) {
+    public Builder setArticleBody(String articleBody) {
       this.articleBody = articleBody;
+      return this;
     }
 
-    public void addLocation(String location) {
+    public Builder addLocation(String location) {
       locations.add(location);
+      return this;
     }
 
-    public void addPerson(String person) {
+    public Builder addPerson(String person) {
       people.add(person);
+      return this;
     }
 
-    public void addOrganization(String organization) {
+    public Builder addOrganization(String organization) {
       organizations.add(organization);
+      return this;
     }
 
     public InterpretedData build() {

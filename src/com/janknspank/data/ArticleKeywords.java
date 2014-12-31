@@ -88,6 +88,7 @@ public class ArticleKeywords {
         "sports",
         "stocks",
         "stock market",
+        "story-video",
         "teams",
         "tech",
         "technology",
