@@ -234,6 +234,7 @@ public class NewsSiteWhitelist {
       if (domain.endsWith(".bloomberg.com") &&
           (path.startsWith("/podcasts/") ||
            path.startsWith("/quote/") ||
+           path.startsWith("/visual-data/") ||
            path.endsWith("/_/slideshow/"))) {
         return false;
       }

@@ -2,10 +2,12 @@ package com.janknspank.dom;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
@@ -23,13 +25,11 @@ import opennlp.tools.util.Span;
 public class Interpreter {
   private static final SentenceDetectorME SENTENCE_DETECTOR_ME;
   private static final opennlp.tools.tokenize.Tokenizer TOKENIZER;
-  private static final NameFinderME PERSON_FINDER_ME;
-  private static final NameFinderME ORGANIZATION_FINDER_ME;
-  private static final NameFinderME LOCATION_FINDER_ME;
+  private static final List<NameFinderME> PERSON_FINDER_LIST = Lists.newArrayList();
+  private static final List<NameFinderME> ORGANIZATION_FINDER_LIST = Lists.newArrayList();
+  private static final List<NameFinderME> LOCATION_FINDER_LIST = Lists.newArrayList();
   static {
     try {
-      String modelType = "newsserver"; // Use "ner" for built-in models.
-
       InputStream sentenceModelInputStream = new FileInputStream("opennlp/en-sent.bin");
       SentenceModel sentenceModel = new SentenceModel(sentenceModelInputStream);
       SENTENCE_DETECTOR_ME = new SentenceDetectorME(sentenceModel);
@@ -38,21 +38,22 @@ public class Interpreter {
       TokenizerModel tokenizerModel = new TokenizerModel(tokenizerModelInputStream);
       TOKENIZER = new TokenizerME(tokenizerModel);
 
-      InputStream personModelInputStream =
-          new FileInputStream("opennlp/en-" + modelType + "-person.bin");
-      TokenNameFinderModel personModel = new TokenNameFinderModel(personModelInputStream);
-      PERSON_FINDER_ME = new NameFinderME(personModel);
+      for (String model : new String[] { "newsserver", "ner" }) {
+        InputStream personModelInputStream =
+            new FileInputStream("opennlp/en-" + model + "-person.bin");
+        TokenNameFinderModel personModel = new TokenNameFinderModel(personModelInputStream);
+        PERSON_FINDER_LIST.add(new NameFinderME(personModel));
 
-      InputStream organizationModelInputStream =
-          new FileInputStream("opennlp/en-" + modelType + "-organization.bin");
-      TokenNameFinderModel organizationModel = new TokenNameFinderModel(organizationModelInputStream);
-      ORGANIZATION_FINDER_ME = new NameFinderME(organizationModel);
+        InputStream organizationModelInputStream =
+            new FileInputStream("opennlp/en-" + model + "-organization.bin");
+        TokenNameFinderModel organizationModel = new TokenNameFinderModel(organizationModelInputStream);
+        ORGANIZATION_FINDER_LIST.add(new NameFinderME(organizationModel));
 
-      InputStream locationModelInputStream =
-          new FileInputStream("opennlp/en-" + modelType + "-location.bin");
-      TokenNameFinderModel locationModel = new TokenNameFinderModel(locationModelInputStream);
-      LOCATION_FINDER_ME = new NameFinderME(locationModel);
-
+        InputStream locationModelInputStream =
+            new FileInputStream("opennlp/en-" + model + "-location.bin");
+        TokenNameFinderModel locationModel = new TokenNameFinderModel(locationModelInputStream);
+        LOCATION_FINDER_LIST.add(new NameFinderME(locationModel));
+      }
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -89,9 +90,15 @@ public class Interpreter {
         parseLocations(interpretedDataBuilder, tokens);
       }
     }
-    PERSON_FINDER_ME.clearAdaptiveData();
-    ORGANIZATION_FINDER_ME.clearAdaptiveData();
-    LOCATION_FINDER_ME.clearAdaptiveData();
+    for (NameFinderME personFinderMe : PERSON_FINDER_LIST) {
+      personFinderMe.clearAdaptiveData();
+    }
+    for (NameFinderME organizationFinderMe : ORGANIZATION_FINDER_LIST) {
+      organizationFinderMe.clearAdaptiveData();
+    }
+    for (NameFinderME locationFinderMe : LOCATION_FINDER_LIST) {
+      locationFinderMe.clearAdaptiveData();
+    }
     interpretedData = interpretedDataBuilder.build();
   }
 
@@ -124,23 +131,29 @@ public class Interpreter {
   }
 
   private void parsePeople(InterpretedData.Builder interpretedDataBuilder, String[] tokens) {
-    Span personSpans[] = PERSON_FINDER_ME.find(tokens);
-    for (String person : Span.spansToStrings(personSpans, tokens)) {
-      interpretedDataBuilder.addPerson(cleanString(person));
+    for (NameFinderME personFinderMe : PERSON_FINDER_LIST) {
+      Span personSpans[] = personFinderMe.find(tokens);
+      for (String person : Span.spansToStrings(personSpans, tokens)) {
+        interpretedDataBuilder.addPerson(cleanString(person));
+      }
     }
   }
 
   private void parseOrganizations(InterpretedData.Builder interpretedDataBuilder, String[] tokens) {
-    Span organizationSpans[] = ORGANIZATION_FINDER_ME.find(tokens);
-    for (String organization : Span.spansToStrings(organizationSpans, tokens)) {
-      interpretedDataBuilder.addOrganization(cleanString(organization));
+    for (NameFinderME organizationFinderMe : ORGANIZATION_FINDER_LIST) {
+      Span organizationSpans[] = organizationFinderMe.find(tokens);
+      for (String organization : Span.spansToStrings(organizationSpans, tokens)) {
+        interpretedDataBuilder.addOrganization(cleanString(organization));
+      }
     }
   }
 
   private void parseLocations(InterpretedData.Builder interpretedDataBuilder, String[] tokens) {
-    Span locationSpans[] = LOCATION_FINDER_ME.find(tokens);
-    for (String location : Span.spansToStrings(locationSpans, tokens)) {
-      interpretedDataBuilder.addLocation(cleanString(location));
+    for (NameFinderME locationFinderMe : LOCATION_FINDER_LIST) {
+      Span locationSpans[] = locationFinderMe.find(tokens);
+      for (String location : Span.spansToStrings(locationSpans, tokens)) {
+        interpretedDataBuilder.addLocation(cleanString(location));
+      }
     }
   }
 

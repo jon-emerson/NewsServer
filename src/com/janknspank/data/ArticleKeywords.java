@@ -45,15 +45,34 @@ public class ArticleKeywords {
   }
 
   private static final Pattern NUMBER_PATTERN_1 = Pattern.compile("^[0-9]+$");
-  private static final Pattern NUMBER_PATTERN_2 = Pattern.compile("^[0-9]+-");
+  private static final Pattern NUMBER_PATTERN_2 = Pattern.compile("^[0-9]+\\-");
   private static final Set<String> BLACKLIST = Sets.newHashSet();
   static {
     for (String keyword : new String[] {
         "and",
+        "apartments",
         "business school",
+        "business schools",
         "bw business schools page",
+        "capitals",
+        "ceo",
+        "commodities",
+        "company",
+        "corrections",
+        "economy",
+        "economic",
+        "education",
+        "financial calculator",
+        "financial calculators",
         "graduate reviews",
+        "hedge funds",
+        "internet",
+        "inequality",
+        "insurance",
         "jobs",
+        "leadership",
+        "lifestyle",
+        "litigation",
         "markets",
         "media",
         "mobile",
@@ -61,19 +80,30 @@ public class ArticleKeywords {
         "party",
         "pm",
         "profile",
+        "restaurants",
+        "retail",
+        "retailing",
+        "shopping",
         "show",
         "sports",
         "stocks",
         "stock market",
+        "teams",
         "tech",
         "technology",
+        "that",
         "the",
+        "their",
+        "there",
+        "they",
         "top business schools worldwide",
         "university",
+        "up",
         "video",
         "web",
         "why",
-        "with"}) {
+        "with",
+        "yet"}) {
       BLACKLIST.add(keyword.toLowerCase());
     }
   }
@@ -82,16 +112,18 @@ public class ArticleKeywords {
   static boolean isValidKeyword(String keyword) {
     keyword = keyword.trim().toLowerCase();
     if (keyword.length() < 2 ||
-        NUMBER_PATTERN_1.matcher(keyword).matches() ||
-        NUMBER_PATTERN_2.matcher(keyword).matches() ||
+        NUMBER_PATTERN_1.matcher(keyword).find() ||
+        NUMBER_PATTERN_2.matcher(keyword).find() ||
         keyword.contains("…") ||
         keyword.startsWith("#") ||
-        keyword.startsWith("Bloomberg ") ||
-        keyword.startsWith("MBA ") ||
+        keyword.startsWith("bloomberg ") ||
+        keyword.startsWith("mba ") ||
         keyword.endsWith("@bloomberg") ||
         keyword.endsWith(" jobs") ||
         keyword.endsWith(" news") ||
         keyword.endsWith(" profile") ||
+        keyword.endsWith(" restaurants") ||
+        keyword.endsWith(" trends") ||
         (keyword.contains("&") && keyword.contains(";")) || // XML entities.
         keyword.length() > MAX_KEYWORD_LENGTH) {
       return false;
@@ -125,7 +157,12 @@ public class ArticleKeywords {
 
     if (!Character.isUpperCase(keyword.charAt(0))) {
       keyword = WordUtils.capitalizeFully(keyword);
+      keyword = keyword.replaceAll("Aol", "AOL");
       keyword = keyword.replaceAll("Ios", "iOS");
+      keyword = keyword.replaceAll("Ipad", "iPad");
+      keyword = keyword.replaceAll("Iphone", "iPhone");
+      keyword = keyword.replaceAll("Iwatch", "iWatch");
+      keyword = keyword.replaceAll("Ipod", "iPod");
     }
 
     return keyword;
@@ -150,6 +187,13 @@ public class ArticleKeywords {
     Database.insert(articleKeywordList);
   }
 
+  /**
+   * Adds keywords that were actually found by our NLP processor to the database
+   * for the passed article.  The strengths given to these keywords are 5 times
+   * their number of occurrences, capped at 20, so that they're significantly
+   * stronger than <meta> keywords that were promoted (perhaps nefariously)
+   * by the publisher.
+   */
   public static void add(Article article, InterpretedData interpretedData)
       throws DataInternalException, ValidationException {
     List<Message> articleKeywordList = Lists.newArrayList();
@@ -158,7 +202,8 @@ public class ArticleKeywords {
         articleKeywordList.add(ArticleKeyword.newBuilder()
             .setArticleId(article.getId())
             .setKeyword(cleanKeyword(location))
-            .setStrength(interpretedData.getLocationCount(location))
+            .setStrength(Math.max(20,
+                interpretedData.getLocationCount(location) * 5))
             .setType("l")
             .build());
       }
@@ -168,7 +213,8 @@ public class ArticleKeywords {
         articleKeywordList.add(ArticleKeyword.newBuilder()
             .setArticleId(article.getId())
             .setKeyword(cleanKeyword(person))
-            .setStrength(interpretedData.getPersonCount(person))
+            .setStrength(Math.max(20,
+                interpretedData.getPersonCount(person) * 5))
             .setType("p")
             .build());
       }
@@ -178,7 +224,8 @@ public class ArticleKeywords {
         articleKeywordList.add(ArticleKeyword.newBuilder()
             .setArticleId(article.getId())
             .setKeyword(cleanKeyword(organization))
-            .setStrength(interpretedData.getOrganizationCount(organization))
+            .setStrength(Math.max(20,
+                interpretedData.getOrganizationCount(organization) * 5))
             .setType("o")
             .build());
       }
