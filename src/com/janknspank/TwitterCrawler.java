@@ -78,8 +78,8 @@ public class TwitterCrawler implements twitter4j.StatusListener {
                   Url discoveredTwitterUrl = Urls.put(twitterUrl, /* isTweet */ false);
                   Url newsUrl = Urls.put(longUrl, /* isTweet */ true);
                   Database.insert(Link.newBuilder()
-                      .setOriginId(discoveredTwitterUrl.getId())
-                      .setDestinationId(newsUrl.getId())
+                      .setOriginUrlId(discoveredTwitterUrl.getId())
+                      .setDestinationUrlId(newsUrl.getId())
                       .setDiscoveryTime(newsUrl.getDiscoveryTime())
                       .setLastFoundTime(newsUrl.getDiscoveryTime())
                       .build());

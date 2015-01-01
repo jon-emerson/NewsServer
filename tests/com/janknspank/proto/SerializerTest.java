@@ -12,7 +12,7 @@ public class SerializerTest {
   private static final String ARTICLE_BODY = "article body";
   private static final String COPYRIGHT = "copyright";
   private static final String DESCRIPTION = "description";
-  private static final String ID = "id";
+  private static final String URL_ID = "id";
   private static final String IMAGE_URL = "http://path.com/to/image.jpg";
   private static final long MODIFIED_TIME = 200000000L;
   private static final long PUBLISHED_TIME = 300000000L;
@@ -27,13 +27,13 @@ public class SerializerTest {
     builder.setArticleBody(ARTICLE_BODY);
     builder.setCopyright(COPYRIGHT);
     builder.setDescription(DESCRIPTION);
-    builder.setId(ID);
     builder.setImageUrl(IMAGE_URL);
     builder.setModifiedTime(MODIFIED_TIME);
     builder.setPublishedTime(PUBLISHED_TIME);
     builder.setTitle(TITLE);
     builder.setType(TYPE);
     builder.setUrl(URL);
+    builder.setUrlId(URL_ID);
     Article article = builder.build();
     Validator.assertValid(article);
 
@@ -41,13 +41,13 @@ public class SerializerTest {
     assertFalse(o.has("author"));
     assertEquals(COPYRIGHT, o.getString("copyright"));
     assertEquals(DESCRIPTION, o.getString("description"));
-    assertEquals(ID, o.getString("id"));
     assertEquals(IMAGE_URL, o.getString("image_url"));
     assertEquals(MODIFIED_TIME, o.getLong("modified_time"));
     assertEquals(PUBLISHED_TIME, o.getLong("published_time"));
     assertEquals(TITLE, o.getString("title"));
     assertEquals(TYPE, o.getString("type"));
     assertEquals(URL, o.getString("url"));
+    assertEquals(URL_ID, o.getString("url_id"));
 
     // These fields should not exist - They were explicitly marked as server-
     // only.

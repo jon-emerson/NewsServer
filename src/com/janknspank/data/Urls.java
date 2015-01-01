@@ -145,7 +145,7 @@ public class Urls {
     while (!result.isAfterLast()) {
       Article article = Database.createFromResultSet(result, Article.class);
       if (article != null) {
-        crawledArticleIds.add(article.getId());
+        crawledArticleIds.add(article.getUrlId());
       }
     }
 

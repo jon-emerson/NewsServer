@@ -63,8 +63,8 @@ public class TheMachine {
           try {
             Url destination = Urls.put(url, /* isTweet */ false);
             linkList.add(Link.newBuilder()
-                .setOriginId(startUrlId)
-                .setDestinationId(destination.getId())
+                .setOriginUrlId(startUrlId)
+                .setDestinationUrlId(destination.getId())
                 .setDiscoveryTime(destination.getDiscoveryTime())
                 .setLastFoundTime(destination.getDiscoveryTime())
                 .build());

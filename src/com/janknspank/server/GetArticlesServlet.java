@@ -62,7 +62,7 @@ public class GetArticlesServlet extends NewsServlet {
     // Serialize the articles and add their keywords in.
     JSONArray jsonArticles = new JSONArray();
     for (Article article : articleList) {
-      String articleId = article.getId();
+      String articleId = article.getUrlId();
       JSONObject jsonArticle = Serializer.toJSON(article);
       if (articleKeywordJsonMap.containsKey(articleId)) {
         jsonArticle.put("keywords", articleKeywordJsonMap.get(articleId));

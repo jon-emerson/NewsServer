@@ -387,20 +387,20 @@ public final class Core {
   public interface ArticleOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional string id = 1;
+    // optional string url_id = 1;
     /**
-     * <code>optional string id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
-    boolean hasId();
+    boolean hasUrlId();
     /**
-     * <code>optional string id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
-    java.lang.String getId();
+    java.lang.String getUrlId();
     /**
-     * <code>optional string id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
     com.google.protobuf.ByteString
-        getIdBytes();
+        getUrlIdBytes();
 
     // optional string url = 2;
     /**
@@ -595,7 +595,7 @@ public final class Core {
             }
             case 10: {
               bitField0_ |= 0x00000001;
-              id_ = input.readBytes();
+              urlId_ = input.readBytes();
               break;
             }
             case 18: {
@@ -688,20 +688,20 @@ public final class Core {
     }
 
     private int bitField0_;
-    // optional string id = 1;
-    public static final int ID_FIELD_NUMBER = 1;
-    private java.lang.Object id_;
+    // optional string url_id = 1;
+    public static final int URL_ID_FIELD_NUMBER = 1;
+    private java.lang.Object urlId_;
     /**
-     * <code>optional string id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
-    public boolean hasId() {
+    public boolean hasUrlId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
+    public java.lang.String getUrlId() {
+      java.lang.Object ref = urlId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -709,22 +709,22 @@ public final class Core {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          id_ = s;
+          urlId_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
+        getUrlIdBytes() {
+      java.lang.Object ref = urlId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        id_ = b;
+        urlId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1108,7 +1108,7 @@ public final class Core {
     }
 
     private void initFields() {
-      id_ = "";
+      urlId_ = "";
       url_ = "";
       title_ = "";
       type_ = "";
@@ -1133,7 +1133,7 @@ public final class Core {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getIdBytes());
+        output.writeBytes(1, getUrlIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getUrlBytes());
@@ -1176,7 +1176,7 @@ public final class Core {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getIdBytes());
+          .computeBytesSize(1, getUrlIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1334,7 +1334,7 @@ public final class Core {
 
       public Builder clear() {
         super.clear();
-        id_ = "";
+        urlId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         url_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1387,7 +1387,7 @@ public final class Core {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.id_ = id_;
+        result.urlId_ = urlId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -1444,9 +1444,9 @@ public final class Core {
 
       public Builder mergeFrom(com.janknspank.proto.Core.Article other) {
         if (other == com.janknspank.proto.Core.Article.getDefaultInstance()) return this;
-        if (other.hasId()) {
+        if (other.hasUrlId()) {
           bitField0_ |= 0x00000001;
-          id_ = other.id_;
+          urlId_ = other.urlId_;
           onChanged();
         }
         if (other.hasUrl()) {
@@ -1522,76 +1522,76 @@ public final class Core {
       }
       private int bitField0_;
 
-      // optional string id = 1;
-      private java.lang.Object id_ = "";
+      // optional string url_id = 1;
+      private java.lang.Object urlId_ = "";
       /**
-       * <code>optional string id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public boolean hasId() {
+      public boolean hasUrlId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
+      public java.lang.String getUrlId() {
+        java.lang.Object ref = urlId_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          id_ = s;
+          urlId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
+          getUrlIdBytes() {
+        java.lang.Object ref = urlId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          id_ = b;
+          urlId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public Builder setId(
+      public Builder setUrlId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        id_ = value;
+        urlId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public Builder clearId() {
+      public Builder clearUrlId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = getDefaultInstance().getId();
+        urlId_ = getDefaultInstance().getUrlId();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public Builder setIdBytes(
+      public Builder setUrlIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        id_ = value;
+        urlId_ = value;
         onChanged();
         return this;
       }
@@ -3272,35 +3272,35 @@ public final class Core {
   public interface LinkOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional string origin_id = 1;
+    // optional string origin_url_id = 1;
     /**
-     * <code>optional string origin_id = 1;</code>
+     * <code>optional string origin_url_id = 1;</code>
      */
-    boolean hasOriginId();
+    boolean hasOriginUrlId();
     /**
-     * <code>optional string origin_id = 1;</code>
+     * <code>optional string origin_url_id = 1;</code>
      */
-    java.lang.String getOriginId();
+    java.lang.String getOriginUrlId();
     /**
-     * <code>optional string origin_id = 1;</code>
+     * <code>optional string origin_url_id = 1;</code>
      */
     com.google.protobuf.ByteString
-        getOriginIdBytes();
+        getOriginUrlIdBytes();
 
-    // optional string destination_id = 2;
+    // optional string destination_url_id = 2;
     /**
-     * <code>optional string destination_id = 2;</code>
+     * <code>optional string destination_url_id = 2;</code>
      */
-    boolean hasDestinationId();
+    boolean hasDestinationUrlId();
     /**
-     * <code>optional string destination_id = 2;</code>
+     * <code>optional string destination_url_id = 2;</code>
      */
-    java.lang.String getDestinationId();
+    java.lang.String getDestinationUrlId();
     /**
-     * <code>optional string destination_id = 2;</code>
+     * <code>optional string destination_url_id = 2;</code>
      */
     com.google.protobuf.ByteString
-        getDestinationIdBytes();
+        getDestinationUrlIdBytes();
 
     // optional int64 discovery_time = 3;
     /**
@@ -3375,12 +3375,12 @@ public final class Core {
             }
             case 10: {
               bitField0_ |= 0x00000001;
-              originId_ = input.readBytes();
+              originUrlId_ = input.readBytes();
               break;
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              destinationId_ = input.readBytes();
+              destinationUrlId_ = input.readBytes();
               break;
             }
             case 24: {
@@ -3433,20 +3433,20 @@ public final class Core {
     }
 
     private int bitField0_;
-    // optional string origin_id = 1;
-    public static final int ORIGIN_ID_FIELD_NUMBER = 1;
-    private java.lang.Object originId_;
+    // optional string origin_url_id = 1;
+    public static final int ORIGIN_URL_ID_FIELD_NUMBER = 1;
+    private java.lang.Object originUrlId_;
     /**
-     * <code>optional string origin_id = 1;</code>
+     * <code>optional string origin_url_id = 1;</code>
      */
-    public boolean hasOriginId() {
+    public boolean hasOriginUrlId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string origin_id = 1;</code>
+     * <code>optional string origin_url_id = 1;</code>
      */
-    public java.lang.String getOriginId() {
-      java.lang.Object ref = originId_;
+    public java.lang.String getOriginUrlId() {
+      java.lang.Object ref = originUrlId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -3454,42 +3454,42 @@ public final class Core {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          originId_ = s;
+          originUrlId_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string origin_id = 1;</code>
+     * <code>optional string origin_url_id = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getOriginIdBytes() {
-      java.lang.Object ref = originId_;
+        getOriginUrlIdBytes() {
+      java.lang.Object ref = originUrlId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        originId_ = b;
+        originUrlId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    // optional string destination_id = 2;
-    public static final int DESTINATION_ID_FIELD_NUMBER = 2;
-    private java.lang.Object destinationId_;
+    // optional string destination_url_id = 2;
+    public static final int DESTINATION_URL_ID_FIELD_NUMBER = 2;
+    private java.lang.Object destinationUrlId_;
     /**
-     * <code>optional string destination_id = 2;</code>
+     * <code>optional string destination_url_id = 2;</code>
      */
-    public boolean hasDestinationId() {
+    public boolean hasDestinationUrlId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string destination_id = 2;</code>
+     * <code>optional string destination_url_id = 2;</code>
      */
-    public java.lang.String getDestinationId() {
-      java.lang.Object ref = destinationId_;
+    public java.lang.String getDestinationUrlId() {
+      java.lang.Object ref = destinationUrlId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -3497,22 +3497,22 @@ public final class Core {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          destinationId_ = s;
+          destinationUrlId_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string destination_id = 2;</code>
+     * <code>optional string destination_url_id = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getDestinationIdBytes() {
-      java.lang.Object ref = destinationId_;
+        getDestinationUrlIdBytes() {
+      java.lang.Object ref = destinationUrlId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        destinationId_ = b;
+        destinationUrlId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -3552,8 +3552,8 @@ public final class Core {
     }
 
     private void initFields() {
-      originId_ = "";
-      destinationId_ = "";
+      originUrlId_ = "";
+      destinationUrlId_ = "";
       discoveryTime_ = 0L;
       lastFoundTime_ = 0L;
     }
@@ -3570,10 +3570,10 @@ public final class Core {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getOriginIdBytes());
+        output.writeBytes(1, getOriginUrlIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getDestinationIdBytes());
+        output.writeBytes(2, getDestinationUrlIdBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, discoveryTime_);
@@ -3592,11 +3592,11 @@ public final class Core {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getOriginIdBytes());
+          .computeBytesSize(1, getOriginUrlIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getDestinationIdBytes());
+          .computeBytesSize(2, getDestinationUrlIdBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3722,9 +3722,9 @@ public final class Core {
 
       public Builder clear() {
         super.clear();
-        originId_ = "";
+        originUrlId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        destinationId_ = "";
+        destinationUrlId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         discoveryTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -3761,11 +3761,11 @@ public final class Core {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.originId_ = originId_;
+        result.originUrlId_ = originUrlId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.destinationId_ = destinationId_;
+        result.destinationUrlId_ = destinationUrlId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -3790,14 +3790,14 @@ public final class Core {
 
       public Builder mergeFrom(com.janknspank.proto.Core.Link other) {
         if (other == com.janknspank.proto.Core.Link.getDefaultInstance()) return this;
-        if (other.hasOriginId()) {
+        if (other.hasOriginUrlId()) {
           bitField0_ |= 0x00000001;
-          originId_ = other.originId_;
+          originUrlId_ = other.originUrlId_;
           onChanged();
         }
-        if (other.hasDestinationId()) {
+        if (other.hasDestinationUrlId()) {
           bitField0_ |= 0x00000002;
-          destinationId_ = other.destinationId_;
+          destinationUrlId_ = other.destinationUrlId_;
           onChanged();
         }
         if (other.hasDiscoveryTime()) {
@@ -3833,150 +3833,150 @@ public final class Core {
       }
       private int bitField0_;
 
-      // optional string origin_id = 1;
-      private java.lang.Object originId_ = "";
+      // optional string origin_url_id = 1;
+      private java.lang.Object originUrlId_ = "";
       /**
-       * <code>optional string origin_id = 1;</code>
+       * <code>optional string origin_url_id = 1;</code>
        */
-      public boolean hasOriginId() {
+      public boolean hasOriginUrlId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string origin_id = 1;</code>
+       * <code>optional string origin_url_id = 1;</code>
        */
-      public java.lang.String getOriginId() {
-        java.lang.Object ref = originId_;
+      public java.lang.String getOriginUrlId() {
+        java.lang.Object ref = originUrlId_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          originId_ = s;
+          originUrlId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string origin_id = 1;</code>
+       * <code>optional string origin_url_id = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getOriginIdBytes() {
-        java.lang.Object ref = originId_;
+          getOriginUrlIdBytes() {
+        java.lang.Object ref = originUrlId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          originId_ = b;
+          originUrlId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string origin_id = 1;</code>
+       * <code>optional string origin_url_id = 1;</code>
        */
-      public Builder setOriginId(
+      public Builder setOriginUrlId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        originId_ = value;
+        originUrlId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string origin_id = 1;</code>
+       * <code>optional string origin_url_id = 1;</code>
        */
-      public Builder clearOriginId() {
+      public Builder clearOriginUrlId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        originId_ = getDefaultInstance().getOriginId();
+        originUrlId_ = getDefaultInstance().getOriginUrlId();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string origin_id = 1;</code>
+       * <code>optional string origin_url_id = 1;</code>
        */
-      public Builder setOriginIdBytes(
+      public Builder setOriginUrlIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        originId_ = value;
+        originUrlId_ = value;
         onChanged();
         return this;
       }
 
-      // optional string destination_id = 2;
-      private java.lang.Object destinationId_ = "";
+      // optional string destination_url_id = 2;
+      private java.lang.Object destinationUrlId_ = "";
       /**
-       * <code>optional string destination_id = 2;</code>
+       * <code>optional string destination_url_id = 2;</code>
        */
-      public boolean hasDestinationId() {
+      public boolean hasDestinationUrlId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string destination_id = 2;</code>
+       * <code>optional string destination_url_id = 2;</code>
        */
-      public java.lang.String getDestinationId() {
-        java.lang.Object ref = destinationId_;
+      public java.lang.String getDestinationUrlId() {
+        java.lang.Object ref = destinationUrlId_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          destinationId_ = s;
+          destinationUrlId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string destination_id = 2;</code>
+       * <code>optional string destination_url_id = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getDestinationIdBytes() {
-        java.lang.Object ref = destinationId_;
+          getDestinationUrlIdBytes() {
+        java.lang.Object ref = destinationUrlId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          destinationId_ = b;
+          destinationUrlId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string destination_id = 2;</code>
+       * <code>optional string destination_url_id = 2;</code>
        */
-      public Builder setDestinationId(
+      public Builder setDestinationUrlId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        destinationId_ = value;
+        destinationUrlId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string destination_id = 2;</code>
+       * <code>optional string destination_url_id = 2;</code>
        */
-      public Builder clearDestinationId() {
+      public Builder clearDestinationUrlId() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        destinationId_ = getDefaultInstance().getDestinationId();
+        destinationUrlId_ = getDefaultInstance().getDestinationUrlId();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string destination_id = 2;</code>
+       * <code>optional string destination_url_id = 2;</code>
        */
-      public Builder setDestinationIdBytes(
+      public Builder setDestinationUrlIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        destinationId_ = value;
+        destinationUrlId_ = value;
         onChanged();
         return this;
       }
@@ -8007,50 +8007,51 @@ public final class Core {
   static {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/core.proto\032 googl" +
-      "e/protobuf/descriptor.proto\"\263\002\n\007Article\022" +
-      "\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\026\n\003url\030\002 \001(\tB\t" +
-      "\210\246\035\001\230\246\035\377\005\022\030\n\005title\030\003 \001(\tB\t\210\246\035\001\230\246\035\200\002\022\022\n\004t" +
-      "ype\030\004 \001(\tB\004\230\246\035\030\022\025\n\006author\030\005 \001(\tB\005\230\246\035\200\002\022\030" +
-      "\n\tcopyright\030\006 \001(\tB\005\230\246\035\200\002\022\036\n\013description\030" +
-      "\007 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\timage_url\030\010 \001(\tB\005\230\246\035" +
-      "\377\005\022$\n\014article_body\030\t \001(\tB\016\210\246\035\001\240\246\035\003\230\246\035\200\240\006" +
-      "\022 \n\016published_time\030\n \001(\003B\010\210\246\035\001\220\246\035\003\022\025\n\rmo" +
-      "dified_time\030\013 \001(\003\"\211\001\n\016ArticleKeyword\022$\n\n",
-      "article_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\240\246\035\003\022\035\n\007ke" +
-      "yword\030\002 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\0352\022\026\n\010strength\030\003 " +
-      "\001(\005B\004\210\246\035\001\022\032\n\004type\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\024\"\212\001" +
-      "\n\004Link\022\037\n\torigin_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022" +
-      "$\n\016destination_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n" +
-      "\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022\035\n\017last_foun" +
-      "d_time\030\004 \001(\003B\004\210\246\035\001\"\253\001\n\003Url\022\032\n\003url\030\001 \001(\tB" +
-      "\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030\002 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035\030" +
-      "\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246\035\001\022\034\n\016discovery" +
-      "_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017last_crawl_time\030\005 \001",
-      "(\003\022\034\n\016crawl_priority\030\006 \001(\003B\004\220\246\035\003\"\347\001\n\004Use" +
-      "r\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\022\n\004name\030\002 \001(" +
-      "\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n\014" +
-      "linked_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013facebook_id\030" +
-      "\005 \001(\tB\004\230\246\035\030\022)\n\017password_sha256\030\006 \001(\tB\020\210\246" +
-      "\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013create_time\030\007 \001(\003B\004\210\246\035" +
-      "\001\022\027\n\017last_login_time\030\010 \001(\003\"g\n\007Session\022\"\n" +
-      "\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022\035\n\007use" +
-      "r_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013create_time\030" +
-      "\003 \001(\003B\004\210\246\035\001\"f\n\014LinkedInData\022\035\n\007user_id\030\001",
-      " \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 \001(\tB\n\210\246" +
-      "\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001*\033\n\010R" +
-      "equired\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\rStorageMetho" +
-      "d\022\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022" +
-      "\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005*F\n\023Clien" +
-      "tSerialization\022\013\n\007INCLUDE\020\001\022\025\n\021INCLUDE_A" +
-      "S_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010required\022\035.go" +
-      "ogle.protobuf.FieldOptions\030\341\324\003 \001(\0162\t.Req" +
-      "uired:\002NO:M\n\016storage_method\022\035.google.pro" +
-      "tobuf.FieldOptions\030\342\324\003 \001(\0162\016.StorageMeth",
-      "od:\004BLOB::\n\rstring_length\022\035.google.proto" +
-      "buf.FieldOptions\030\343\324\003 \001(\005:\002-1:\\\n\024client_s" +
-      "erialization\022\035.google.protobuf.FieldOpti" +
-      "ons\030\344\324\003 \001(\0162\024.ClientSerialization:\007INCLU" +
-      "DEB\037\n\024com.janknspank.proto\200\001\000\210\001\000\220\001\000"
+      "e/protobuf/descriptor.proto\"\267\002\n\007Article\022" +
+      "\034\n\006url_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\026\n\003url\030\002 \001" +
+      "(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\005title\030\003 \001(\tB\t\210\246\035\001\230\246\035\200\002\022" +
+      "\022\n\004type\030\004 \001(\tB\004\230\246\035\030\022\025\n\006author\030\005 \001(\tB\005\230\246\035" +
+      "\200\002\022\030\n\tcopyright\030\006 \001(\tB\005\230\246\035\200\002\022\036\n\013descript" +
+      "ion\030\007 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\timage_url\030\010 \001(\tB" +
+      "\005\230\246\035\377\005\022$\n\014article_body\030\t \001(\tB\016\210\246\035\001\240\246\035\003\230\246" +
+      "\035\200\240\006\022 \n\016published_time\030\n \001(\003B\010\210\246\035\001\220\246\035\003\022\025" +
+      "\n\rmodified_time\030\013 \001(\003\"\211\001\n\016ArticleKeyword",
+      "\022$\n\narticle_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\240\246\035\003\022\035" +
+      "\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\0352\022\026\n\010strengt" +
+      "h\030\003 \001(\005B\004\210\246\035\001\022\032\n\004type\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035" +
+      "\024\"\222\001\n\004Link\022#\n\rorigin_url_id\030\001 \001(\tB\014\210\246\035\001\220" +
+      "\246\035\003\230\246\035\030\022(\n\022destination_url_id\030\002 \001(\tB\014\210\246\035" +
+      "\001\220\246\035\003\230\246\035\030\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022" +
+      "\035\n\017last_found_time\030\004 \001(\003B\004\210\246\035\001\"\253\001\n\003Url\022\032" +
+      "\n\003url\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030\002 \001(\tB\014" +
+      "\210\246\035\001\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246\035\001\022" +
+      "\034\n\016discovery_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017last_cr",
+      "awl_time\030\005 \001(\003\022\034\n\016crawl_priority\030\006 \001(\003B\004" +
+      "\220\246\035\003\"\347\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022" +
+      "\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001" +
+      "\220\246\035\004\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013" +
+      "facebook_id\030\005 \001(\tB\004\230\246\035\030\022)\n\017password_sha2" +
+      "56\030\006 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013create_tim" +
+      "e\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001(\003\"g" +
+      "\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002" +
+      "\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013" +
+      "create_time\030\003 \001(\003B\004\210\246\035\001\"f\n\014LinkedInData\022",
+      "\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_da" +
+      "ta\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(" +
+      "\003B\004\210\246\035\001*\033\n\010Required\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\r" +
+      "StorageMethod\022\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002" +
+      "\022\t\n\005INDEX\020\003\022\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OU" +
+      "T\020\005*F\n\023ClientSerialization\022\013\n\007INCLUDE\020\001\022" +
+      "\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010r" +
+      "equired\022\035.google.protobuf.FieldOptions\030\341" +
+      "\324\003 \001(\0162\t.Required:\002NO:M\n\016storage_method\022" +
+      "\035.google.protobuf.FieldOptions\030\342\324\003 \001(\0162\016",
+      ".StorageMethod:\004BLOB::\n\rstring_length\022\035." +
+      "google.protobuf.FieldOptions\030\343\324\003 \001(\005:\002-1" +
+      ":\\\n\024client_serialization\022\035.google.protob" +
+      "uf.FieldOptions\030\344\324\003 \001(\0162\024.ClientSerializ" +
+      "ation:\007INCLUDEB\037\n\024com.janknspank.proto\200\001" +
+      "\000\210\001\000\220\001\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8062,7 +8063,7 @@ public final class Core {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "Id", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "ArticleBody", "PublishedTime", "ModifiedTime", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "ArticleBody", "PublishedTime", "ModifiedTime", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -8074,7 +8075,7 @@ public final class Core {
           internal_static_Link_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Link_descriptor,
-              new java.lang.String[] { "OriginId", "DestinationId", "DiscoveryTime", "LastFoundTime", });
+              new java.lang.String[] { "OriginUrlId", "DestinationUrlId", "DiscoveryTime", "LastFoundTime", });
           internal_static_Url_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_Url_fieldAccessorTable = new

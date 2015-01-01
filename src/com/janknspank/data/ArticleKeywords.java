@@ -193,7 +193,7 @@ public class ArticleKeywords {
     for (String keyword : keywords) {
       if (isValidKeyword(keyword)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setArticleId(article.getId())
+            .setArticleId(article.getUrlId())
             .setKeyword(cleanKeyword(keyword))
             .setStrength(1)
             .setType("k")
@@ -216,7 +216,7 @@ public class ArticleKeywords {
     for (String location : interpretedData.getLocations()) {
       if (isValidKeyword(location)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setArticleId(article.getId())
+            .setArticleId(article.getUrlId())
             .setKeyword(cleanKeyword(location))
             .setStrength(Math.max(20,
                 interpretedData.getLocationCount(location) * 5))
@@ -227,7 +227,7 @@ public class ArticleKeywords {
     for (String person : interpretedData.getPeople()) {
       if (isValidKeyword(person)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setArticleId(article.getId())
+            .setArticleId(article.getUrlId())
             .setKeyword(cleanKeyword(person))
             .setStrength(Math.max(20,
                 interpretedData.getPersonCount(person) * 5))
@@ -238,7 +238,7 @@ public class ArticleKeywords {
     for (String organization : interpretedData.getOrganizations()) {
       if (isValidKeyword(organization)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setArticleId(article.getId())
+            .setArticleId(article.getUrlId())
             .setKeyword(cleanKeyword(organization))
             .setStrength(Math.max(20,
                 interpretedData.getOrganizationCount(organization) * 5))
@@ -266,7 +266,7 @@ public class ArticleKeywords {
     try {
       PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
       for (int i = 0; i < articleList.size(); i++) {
-        stmt.setString(i + 1, articleList.get(i).getId());
+        stmt.setString(i + 1, articleList.get(i).getUrlId());
       }
       ResultSet result = stmt.executeQuery();
       List<ArticleKeyword> keywordList = Lists.newArrayList();

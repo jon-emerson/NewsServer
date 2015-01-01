@@ -37,7 +37,7 @@ public class ArticleHandler extends DefaultHandler {
     this.callback = callback;
 
     this.articleBuilder = Article.newBuilder();
-    articleBuilder.setId(startUrl.getId());
+    articleBuilder.setUrlId(startUrl.getId());
     articleBuilder.setUrl(startUrl.getUrl());
 
     // See if we can parse a date out of the URL.

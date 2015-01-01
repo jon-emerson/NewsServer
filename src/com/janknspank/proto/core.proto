@@ -61,7 +61,7 @@ extend google.protobuf.FieldOptions {
 }
 
 message Article {
-  optional string id = 1 [
+  optional string url_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
     (string_length) = 24
@@ -142,13 +142,13 @@ message ArticleKeyword {
 }
 
 message Link {
-  optional string origin_id = 1 [
+  optional string origin_url_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
     (string_length) = 24
   ];
 
-  optional string destination_id = 2 [
+  optional string destination_url_id = 2 [
     (required) = YES,
     (storage_method) = INDEX,
     (string_length) = 24
