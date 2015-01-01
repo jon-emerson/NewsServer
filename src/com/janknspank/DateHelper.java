@@ -14,6 +14,8 @@ public class DateHelper {
       Pattern.compile("\\/[0-9]{4}\\-[01][0-9]\\-[0-3][0-9][\\/\\-]"),
       Pattern.compile("\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/")
   };
+  private static final Pattern MONTH_IN_URL_PATTERN =
+      Pattern.compile("\\/20[0-9]{2}\\/(0[0-9]|1[012])\\/");
   private static final DateFormat[] KNOWN_DATE_FORMATS = {
       new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX"), // ISO 8601, BusinessWeek, CNBC.
       new SimpleDateFormat("MMMM dd, yyyy, hh:mm a"), // CBS News.
@@ -30,12 +32,32 @@ public class DateHelper {
       new SimpleDateFormat("/yyyy-MM-dd-"), // In URL.
       new SimpleDateFormat("/yyyyMMdd/") // In URL.
   };
+  private static final DateFormat MONTH_IN_URL_DATE_FORMAT =
+      new SimpleDateFormat("/yyyy/MM/");
 
-  public static Long getDateFromUrl(String url) {
+  /**
+   * Returns the number of milliseconds since 1970 when the passed article was
+   * published, if we can arrive at such a conclusion.
+   * @param url the url to inspect
+   * @param allowMonth Whether we should look for year+month pairs in the URL.
+   *     The default is to only look for complete year+month+day tuples.
+   * @return number of milliseconds, or null if a date couldn't be determined
+   */
+  public static Long getDateFromUrl(String url, boolean allowMonth) {
     for (Pattern dateInUrlPattern : DATE_IN_URL_PATTERNS) {
       Matcher dateInUrlMatcher = dateInUrlPattern.matcher(url);
       if (dateInUrlMatcher.find()) {
         return parseDateTime(dateInUrlMatcher.group());
+      }
+    }
+    if (allowMonth) {
+      Matcher dateInUrlMatcher = MONTH_IN_URL_PATTERN.matcher(url);
+      if (dateInUrlMatcher.find()) {
+        try {
+          return MONTH_IN_URL_DATE_FORMAT.parse(dateInUrlMatcher.group()).getTime();
+        } catch (ParseException e) {
+          // This is OK - we just don't match.
+        }
       }
     }
     return null;

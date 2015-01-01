@@ -255,7 +255,7 @@ public class Database {
    * Returns an INSERT INTO statement for inserting the given protocol buffer
    * message into its respective MySQL table.
    */
-  public static PreparedStatement getInsertStatement(Message message) throws SQLException {
+  public static PreparedStatement getRawInsertStatement(Message message) throws SQLException {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
 
     // Start creating the SQL statement.
@@ -277,6 +277,7 @@ public class Database {
     sql.append(PROTO_COLUMN_NAME + ") VALUES (");
 
     // Add prepared statement fill-in marks (whatever these are called).
+    // Add an extra one for the proto serialization.
     for (int i = 0; i < pulledOutFieldCount + 1; i++) {
       sql.append("?");
       if (i != pulledOutFieldCount) {
@@ -288,10 +289,10 @@ public class Database {
     System.out.println(sql.toString());
 
     // Prepare the statement!
-    PreparedStatement statement = getConnection().prepareStatement(sql.toString());
-    prepareInsertOrUpdateStatement(statement, message);
+    return getConnection().prepareStatement(sql.toString());
+    //prepareInsertOrUpdateStatement(statement, message);
 
-    return statement;
+    //return statement;
   }
 
   /**
@@ -301,7 +302,9 @@ public class Database {
     Validator.assertValid(message);
 
     try {
-      Database.getInsertStatement(message).execute();
+      PreparedStatement stmt = Database.getRawInsertStatement(message);
+      prepareInsertOrUpdateStatement(stmt, message);
+      stmt.execute();
     } catch (SQLException e) {
       throw new DataInternalException("Could not insert article", e);
     }
@@ -311,30 +314,27 @@ public class Database {
    * Inserts the passed messages into the database.  All messages passed must be
    * of the same type.
    */
-  public static void insert(List<Message> messageList)
+  public static int insert(List<Message> messageList)
       throws ValidationException, DataInternalException {
     if (messageList.size() == 0) {
-      return;
+      return 0;
     }
 
-    Message firstMessage = messageList.get(0);
-    Validator.assertValid(firstMessage);
-    for (int i = 1; i < messageList.size(); i++) {
-      Message message = messageList.get(i);
-      Validator.assertValid(message);
-      Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
-          "Types do not match");
-    }
-
+    Message firstMessage = Validator.assertValid(messageList.get(0));
     try {
-      PreparedStatement stmt = Database.getInsertStatement(firstMessage);
-      for (int i = 0; i < messageList.size(); i++) {
-        prepareInsertOrUpdateStatement(stmt, messageList.get(i));
+      PreparedStatement stmt = Database.getRawInsertStatement(firstMessage);
+      for (int i = 1; i < messageList.size(); i++) {
+        Message message = Validator.assertValid(messageList.get(i));
+        Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
+            "Types do not match");
+        prepareInsertOrUpdateStatement(stmt, message);
         stmt.addBatch();
       }
-      stmt.executeBatch();
+      return Database.sumIntArray(stmt.executeBatch());
+
     } catch (SQLException e) {
-      throw new DataInternalException("Could not insert article", e);
+      throw new DataInternalException(
+          "Could not insert " + getTableName(firstMessage.getClass()), e);
     }
   }
 
@@ -366,10 +366,32 @@ public class Database {
   }
 
   /**
+   * Returns the number of columns in the table this passed proto message
+   * class is stored in.
+   */
+  private static <T extends Message> int getColumnCount(Class<T> clazz) {
+    // Start with 2, since there's always 'proto' and 'timestamp', regardless
+    // of the schema.
+    int columnCount = 2;
+
+    Map<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(clazz);
+    for (FieldDescriptor field : fieldMap.keySet()) {
+      StorageMethod storageMethod = fieldMap.get(field);
+      if (storageMethod == StorageMethod.PRIMARY_KEY ||
+          storageMethod == StorageMethod.INDEX ||
+          storageMethod == StorageMethod.UNIQUE_INDEX ||
+          storageMethod == StorageMethod.PULL_OUT) {
+        ++columnCount;
+      }
+    }
+    return columnCount;
+  }
+
+  /**
    * Returns an UPDATE statement for updating the given protocol buffer message
    * in its respective MySQL table.
    */
-  public static PreparedStatement getUpdateStatement(Message message) throws SQLException {
+  public static PreparedStatement getRawUpdateStatement(Message message) throws SQLException {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
 
     // Start creating the SQL statement.
@@ -377,14 +399,12 @@ public class Database {
     sql.append("UPDATE " + getTableName(message.getClass()) + " SET ");
 
     // Add fields.
-    int pulledOutFieldCount = 0;
     for (FieldDescriptor field : fieldMap.keySet()) {
       StorageMethod storageMethod = fieldMap.get(field);
       if (storageMethod == StorageMethod.PRIMARY_KEY ||
           storageMethod == StorageMethod.INDEX ||
           storageMethod == StorageMethod.UNIQUE_INDEX ||
           storageMethod == StorageMethod.PULL_OUT) {
-        ++pulledOutFieldCount;
         sql.append(field.getName() + "=?, ");
       }
     }
@@ -393,26 +413,46 @@ public class Database {
 
     System.out.println(sql.toString());
 
-    // Prepare the statement!
-    PreparedStatement statement = getConnection().prepareStatement(sql.toString());
-    prepareInsertOrUpdateStatement(statement, message);
-    statement.setString(pulledOutFieldCount + 2, getPrimaryKey(message));
-
-    return statement;
+    return getConnection().prepareStatement(sql.toString());
   }
 
   /**
    * Updates the instance of the passed message using the values in {@code
    * message}, overwriting whatever was stored in the database before.  Returns
-   * false if no object was updated (since it didn't yet exist).
+   * false if no object was updated (since it doesn't yet exist).
    */
   public static boolean update(Message message) throws ValidationException, DataInternalException {
-    Validator.assertValid(message);
+    return update(ImmutableList.of(message)) == 1;
+  }
 
+  /**
+   * Updates the passed messages, overwriting whatever was stored in the
+   * database before.  Returns the number of modified objects.
+   */
+  public static int update(List<Message> messageList)
+      throws ValidationException, DataInternalException {
+    if (messageList.size() == 0) {
+      return 0;
+    }
+
+    Message firstMessage = messageList.get(0);
+    int columnCount = getColumnCount(firstMessage.getClass());
     try {
-      return Database.getUpdateStatement(message).executeUpdate() == 1;
+      PreparedStatement stmt = Database.getRawUpdateStatement(firstMessage);
+      for (int i = 0; i < messageList.size(); i++) {
+        Message message = messageList.get(i);
+        Validator.assertValid(message);
+        Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
+            "Types do not match");
+        prepareInsertOrUpdateStatement(stmt, message);
+        stmt.setString(columnCount, getPrimaryKey(message));
+        stmt.addBatch();
+      }
+      return Database.sumIntArray(stmt.executeBatch());
+
     } catch (SQLException e) {
-      throw new DataInternalException("Could not insert article", e);
+      throw new DataInternalException(
+          "Could not insert " + getTableName(firstMessage.getClass()), e);
     }
   }
 
@@ -517,5 +557,17 @@ public class Database {
    */
   public static void delete(Message message) throws DataInternalException {
     deletePrimaryKey(getPrimaryKey(message), message.getClass());
+  }
+
+  /**
+   * Returns the sum of all the integers in the passed array.  Useful for
+   * collating # of rows modified by batch statements.
+   */
+  public static int sumIntArray(int[] array) {
+    int sum = 0;
+    for (int i = 0; i < array.length; i++) {
+      sum += array[i];
+    }
+    return sum;
   }
 }

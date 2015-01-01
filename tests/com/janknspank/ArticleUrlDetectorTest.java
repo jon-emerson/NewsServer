@@ -3,6 +3,8 @@ package com.janknspank;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 public class ArticleUrlDetectorTest {
@@ -84,6 +86,7 @@ public class ArticleUrlDetectorTest {
       "http://www.boston.com/2012/03/16/dating/nkfeF9xitUXoWteAwWX1QI/story.html",
       "http://www.boston.com/ae/blogs/mediaremix/2014/03/oprah_teases_lindsay_lohans_re.html",
       "http://www.boston.com/blogs/ae/restaurants/the-restaurant-hub/2014/05/boston-mexican-cantina-cinco-.html",
+      "http://www.boston.com/business/innovation/state-of-play/2014/03/inside_demiurge_albert_reed_ce.html",
       "http://www.boston.com/jobs/news/2014/05/03/nomination-letters-amedisys-home-healthcare/9lKICo47FRLGHGIKR4kSJN/story.html",
       "http://www.boston.com/lifestyle/relationships/blogs/blissfullyinspired/2014/02/so_who_got_engaged_on_valentin.html",
       "http://www.breitbart.com/big-government/2014/12/28/anti-police-protesters-plan-to-disrupt-new-years-eve-celebrations/",

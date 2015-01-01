@@ -184,7 +184,17 @@ message Url {
     (required) = YES
   ];
 
-  optional int64 last_crawl_time = 5 [
+  optional int64 last_crawl_time = 5;
+
+  // Score between 0 to 200, where 200 means "we really should crawl this
+  // ASAP", and 0 means we might not even bother.
+  // General guidelines:
+  // 2000 - A news article from today
+  // 100 - A news article from a year ago
+  // 10 - A page that's not a news article
+  // 0 - Something we've crawled recently
+  optional int64 crawl_priority = 6 [
+    // (required) = YES,
     (storage_method) = INDEX
   ];
 }

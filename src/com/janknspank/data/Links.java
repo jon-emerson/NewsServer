@@ -29,11 +29,7 @@ public class Links {
         statement.setString(2, ids.get(i));
         statement.addBatch();
       }
-      int numModified = 0;
-      for (int modCount : statement.executeBatch()) {
-        numModified += modCount;
-      }
-      return numModified;
+      return Database.sumIntArray(statement.executeBatch());
 
     } catch (SQLException e) {
       throw new DataInternalException("Could not delete links: " + e.getMessage(), e);

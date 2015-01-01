@@ -340,7 +340,8 @@ public class NewsSiteWhitelist {
         return false;
       }
       if (domain.endsWith("arstechnica.com") &&
-          (path.startsWith("/articles/paedia/") ||
+          (path.startsWith("/archive/") ||
+           path.startsWith("/articles/paedia/") ||
            path.startsWith("/civis/") ||
            path.startsWith("/cpu/") ||
            path.startsWith("/etc/") ||

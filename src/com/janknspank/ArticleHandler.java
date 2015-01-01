@@ -41,7 +41,7 @@ public class ArticleHandler extends DefaultHandler {
     articleBuilder.setUrl(startUrl.getUrl());
 
     // See if we can parse a date out of the URL.
-    Long dateFromUrl = DateHelper.getDateFromUrl(startUrl.getUrl());
+    Long dateFromUrl = DateHelper.getDateFromUrl(startUrl.getUrl(), true /* allowMonth */);
     if (dateFromUrl != null) {
       System.out.println("Found date in URL: " + dateFromUrl);
       articleBuilder.setPublishedTime(dateFromUrl);

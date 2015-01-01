@@ -2333,7 +2333,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+     * found in the article's meta tags.
      * </pre>
      */
     boolean hasType();
@@ -2341,7 +2342,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+     * found in the article's meta tags.
      * </pre>
      */
     java.lang.String getType();
@@ -2349,7 +2351,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+     * found in the article's meta tags.
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -2595,7 +2598,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+     * found in the article's meta tags.
      * </pre>
      */
     public boolean hasType() {
@@ -2605,7 +2609,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+     * found in the article's meta tags.
      * </pre>
      */
     public java.lang.String getType() {
@@ -2626,7 +2631,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+     * found in the article's meta tags.
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -3154,7 +3160,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+       * found in the article's meta tags.
        * </pre>
        */
       public boolean hasType() {
@@ -3164,7 +3171,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+       * found in the article's meta tags.
        * </pre>
        */
       public java.lang.String getType() {
@@ -3182,7 +3190,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+       * found in the article's meta tags.
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -3202,7 +3211,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+       * found in the article's meta tags.
        * </pre>
        */
       public Builder setType(
@@ -3219,7 +3229,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+       * found in the article's meta tags.
        * </pre>
        */
       public Builder clearType() {
@@ -3232,7 +3243,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
+       * found in the article's meta tags.
        * </pre>
        */
       public Builder setTypeBytes(
@@ -4108,6 +4120,36 @@ public final class Core {
      * <code>optional int64 last_crawl_time = 5;</code>
      */
     long getLastCrawlTime();
+
+    // optional int64 crawl_priority = 6;
+    /**
+     * <code>optional int64 crawl_priority = 6;</code>
+     *
+     * <pre>
+     * Score between 0 to 200, where 200 means "we really should crawl this
+     * ASAP", and 0 means we might not even bother.
+     * General guidelines:
+     * 2000 - A news article from today
+     * 100 - A news article from a year ago
+     * 10 - A page that's not a news article
+     * 0 - Something we've crawled recently
+     * </pre>
+     */
+    boolean hasCrawlPriority();
+    /**
+     * <code>optional int64 crawl_priority = 6;</code>
+     *
+     * <pre>
+     * Score between 0 to 200, where 200 means "we really should crawl this
+     * ASAP", and 0 means we might not even bother.
+     * General guidelines:
+     * 2000 - A news article from today
+     * 100 - A news article from a year ago
+     * 10 - A page that's not a news article
+     * 0 - Something we've crawled recently
+     * </pre>
+     */
+    long getCrawlPriority();
   }
   /**
    * Protobuf type {@code Url}
@@ -4183,6 +4225,11 @@ public final class Core {
             case 40: {
               bitField0_ |= 0x00000010;
               lastCrawlTime_ = input.readInt64();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              crawlPriority_ = input.readInt64();
               break;
             }
           }
@@ -4359,12 +4406,49 @@ public final class Core {
       return lastCrawlTime_;
     }
 
+    // optional int64 crawl_priority = 6;
+    public static final int CRAWL_PRIORITY_FIELD_NUMBER = 6;
+    private long crawlPriority_;
+    /**
+     * <code>optional int64 crawl_priority = 6;</code>
+     *
+     * <pre>
+     * Score between 0 to 200, where 200 means "we really should crawl this
+     * ASAP", and 0 means we might not even bother.
+     * General guidelines:
+     * 2000 - A news article from today
+     * 100 - A news article from a year ago
+     * 10 - A page that's not a news article
+     * 0 - Something we've crawled recently
+     * </pre>
+     */
+    public boolean hasCrawlPriority() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int64 crawl_priority = 6;</code>
+     *
+     * <pre>
+     * Score between 0 to 200, where 200 means "we really should crawl this
+     * ASAP", and 0 means we might not even bother.
+     * General guidelines:
+     * 2000 - A news article from today
+     * 100 - A news article from a year ago
+     * 10 - A page that's not a news article
+     * 0 - Something we've crawled recently
+     * </pre>
+     */
+    public long getCrawlPriority() {
+      return crawlPriority_;
+    }
+
     private void initFields() {
       url_ = "";
       id_ = "";
       tweetCount_ = 0L;
       discoveryTime_ = 0L;
       lastCrawlTime_ = 0L;
+      crawlPriority_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4392,6 +4476,9 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(5, lastCrawlTime_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, crawlPriority_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4421,6 +4508,10 @@ public final class Core {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, lastCrawlTime_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, crawlPriority_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4548,6 +4639,8 @@ public final class Core {
         bitField0_ = (bitField0_ & ~0x00000008);
         lastCrawlTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
+        crawlPriority_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -4596,6 +4689,10 @@ public final class Core {
           to_bitField0_ |= 0x00000010;
         }
         result.lastCrawlTime_ = lastCrawlTime_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.crawlPriority_ = crawlPriority_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4630,6 +4727,9 @@ public final class Core {
         }
         if (other.hasLastCrawlTime()) {
           setLastCrawlTime(other.getLastCrawlTime());
+        }
+        if (other.hasCrawlPriority()) {
+          setCrawlPriority(other.getCrawlPriority());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4901,6 +5001,79 @@ public final class Core {
       public Builder clearLastCrawlTime() {
         bitField0_ = (bitField0_ & ~0x00000010);
         lastCrawlTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 crawl_priority = 6;
+      private long crawlPriority_ ;
+      /**
+       * <code>optional int64 crawl_priority = 6;</code>
+       *
+       * <pre>
+       * Score between 0 to 200, where 200 means "we really should crawl this
+       * ASAP", and 0 means we might not even bother.
+       * General guidelines:
+       * 2000 - A news article from today
+       * 100 - A news article from a year ago
+       * 10 - A page that's not a news article
+       * 0 - Something we've crawled recently
+       * </pre>
+       */
+      public boolean hasCrawlPriority() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int64 crawl_priority = 6;</code>
+       *
+       * <pre>
+       * Score between 0 to 200, where 200 means "we really should crawl this
+       * ASAP", and 0 means we might not even bother.
+       * General guidelines:
+       * 2000 - A news article from today
+       * 100 - A news article from a year ago
+       * 10 - A page that's not a news article
+       * 0 - Something we've crawled recently
+       * </pre>
+       */
+      public long getCrawlPriority() {
+        return crawlPriority_;
+      }
+      /**
+       * <code>optional int64 crawl_priority = 6;</code>
+       *
+       * <pre>
+       * Score between 0 to 200, where 200 means "we really should crawl this
+       * ASAP", and 0 means we might not even bother.
+       * General guidelines:
+       * 2000 - A news article from today
+       * 100 - A news article from a year ago
+       * 10 - A page that's not a news article
+       * 0 - Something we've crawled recently
+       * </pre>
+       */
+      public Builder setCrawlPriority(long value) {
+        bitField0_ |= 0x00000020;
+        crawlPriority_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 crawl_priority = 6;</code>
+       *
+       * <pre>
+       * Score between 0 to 200, where 200 means "we really should crawl this
+       * ASAP", and 0 means we might not even bother.
+       * General guidelines:
+       * 2000 - A news article from today
+       * 100 - A news article from a year ago
+       * 10 - A page that's not a news article
+       * 0 - Something we've crawled recently
+       * </pre>
+       */
+      public Builder clearCrawlPriority() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        crawlPriority_ = 0L;
         onChanged();
         return this;
       }
@@ -7849,35 +8022,35 @@ public final class Core {
       "\n\004Link\022\037\n\torigin_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022" +
       "$\n\016destination_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n" +
       "\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022\035\n\017last_foun" +
-      "d_time\030\004 \001(\003B\004\210\246\035\001\"\223\001\n\003Url\022\032\n\003url\030\001 \001(\tB" +
+      "d_time\030\004 \001(\003B\004\210\246\035\001\"\253\001\n\003Url\022\032\n\003url\030\001 \001(\tB" +
       "\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030\002 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035\030" +
       "\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246\035\001\022\034\n\016discovery" +
-      "_time\030\004 \001(\003B\004\210\246\035\001\022\035\n\017last_crawl_time\030\005 \001",
-      "(\003B\004\220\246\035\003\"\347\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230" +
-      "\246\035\030\022\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014" +
-      "\210\246\035\001\220\246\035\004\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\030" +
-      "\022\031\n\013facebook_id\030\005 \001(\tB\004\230\246\035\030\022)\n\017password_" +
-      "sha256\030\006 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013create" +
-      "_time\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001" +
-      "(\003\"g\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001" +
-      "\220\246\035\002\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030" +
-      "\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"f\n\014LinkedInD" +
-      "ata\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010ra",
-      "w_data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030" +
-      "\003 \001(\003B\004\210\246\035\001*\033\n\010Required\022\007\n\003YES\020\001\022\006\n\002NO\020\002" +
-      "*U\n\rStorageMethod\022\010\n\004BLOB\020\001\022\017\n\013PRIMARY_K" +
-      "EY\020\002\022\t\n\005INDEX\020\003\022\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PUL" +
-      "L_OUT\020\005*F\n\023ClientSerialization\022\013\n\007INCLUD" +
-      "E\020\001\022\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:" +
-      "@\n\010required\022\035.google.protobuf.FieldOptio" +
-      "ns\030\341\324\003 \001(\0162\t.Required:\002NO:M\n\016storage_met" +
-      "hod\022\035.google.protobuf.FieldOptions\030\342\324\003 \001" +
-      "(\0162\016.StorageMethod:\004BLOB::\n\rstring_lengt",
-      "h\022\035.google.protobuf.FieldOptions\030\343\324\003 \001(\005" +
-      ":\002-1:\\\n\024client_serialization\022\035.google.pr" +
-      "otobuf.FieldOptions\030\344\324\003 \001(\0162\024.ClientSeri" +
-      "alization:\007INCLUDEB\037\n\024com.janknspank.pro" +
-      "to\200\001\000\210\001\000\220\001\000"
+      "_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017last_crawl_time\030\005 \001",
+      "(\003\022\034\n\016crawl_priority\030\006 \001(\003B\004\220\246\035\003\"\347\001\n\004Use" +
+      "r\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\022\n\004name\030\002 \001(" +
+      "\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n\014" +
+      "linked_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013facebook_id\030" +
+      "\005 \001(\tB\004\230\246\035\030\022)\n\017password_sha256\030\006 \001(\tB\020\210\246" +
+      "\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013create_time\030\007 \001(\003B\004\210\246\035" +
+      "\001\022\027\n\017last_login_time\030\010 \001(\003\"g\n\007Session\022\"\n" +
+      "\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022\035\n\007use" +
+      "r_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013create_time\030" +
+      "\003 \001(\003B\004\210\246\035\001\"f\n\014LinkedInData\022\035\n\007user_id\030\001",
+      " \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 \001(\tB\n\210\246" +
+      "\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001*\033\n\010R" +
+      "equired\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\rStorageMetho" +
+      "d\022\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022" +
+      "\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005*F\n\023Clien" +
+      "tSerialization\022\013\n\007INCLUDE\020\001\022\025\n\021INCLUDE_A" +
+      "S_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010required\022\035.go" +
+      "ogle.protobuf.FieldOptions\030\341\324\003 \001(\0162\t.Req" +
+      "uired:\002NO:M\n\016storage_method\022\035.google.pro" +
+      "tobuf.FieldOptions\030\342\324\003 \001(\0162\016.StorageMeth",
+      "od:\004BLOB::\n\rstring_length\022\035.google.proto" +
+      "buf.FieldOptions\030\343\324\003 \001(\005:\002-1:\\\n\024client_s" +
+      "erialization\022\035.google.protobuf.FieldOpti" +
+      "ons\030\344\324\003 \001(\0162\024.ClientSerialization:\007INCLU" +
+      "DEB\037\n\024com.janknspank.proto\200\001\000\210\001\000\220\001\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7907,7 +8080,7 @@ public final class Core {
           internal_static_Url_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Url_descriptor,
-              new java.lang.String[] { "Url", "Id", "TweetCount", "DiscoveryTime", "LastCrawlTime", });
+              new java.lang.String[] { "Url", "Id", "TweetCount", "DiscoveryTime", "LastCrawlTime", "CrawlPriority", });
           internal_static_User_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_User_fieldAccessorTable = new
