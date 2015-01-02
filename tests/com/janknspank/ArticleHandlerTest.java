@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.janknspank.dom.InterpretedData;
-import com.janknspank.dom.LenientSaxParser;
+import com.janknspank.dom.parser.LenientSaxParser;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 

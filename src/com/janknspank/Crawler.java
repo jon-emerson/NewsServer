@@ -15,10 +15,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.xml.sax.SAXException;
 
 import com.janknspank.ArticleHandler.ArticleCallback;
+import com.janknspank.dom.DomException;
 import com.janknspank.dom.InterpretedData;
 import com.janknspank.dom.Interpreter;
-import com.janknspank.dom.LenientSaxParser;
-import com.janknspank.dom.ParseException;
+import com.janknspank.dom.parser.LenientSaxParser;
 import com.janknspank.proto.Core.Url;
 
 public class Crawler {
@@ -62,7 +62,7 @@ public class Crawler {
         new LenientSaxParser().parse(new FileInputStream(file), handler);
       }
 
-    } catch (SAXException | IOException | IllegalArgumentException | ParseException e) {
+    } catch (SAXException | IOException | IllegalArgumentException | DomException e) {
       e.printStackTrace();
     }
   }

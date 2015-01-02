@@ -5,11 +5,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
+import com.janknspank.dom.parser.DocumentNode;
+import com.janknspank.dom.parser.DomBuilder;
+import com.janknspank.dom.parser.Node;
+import com.janknspank.dom.parser.ParserException;
 
 public class SiteParser {
   private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES = Maps.newHashMap();
@@ -96,7 +101,7 @@ public class SiteParser {
    * DOMAIN_TO_DOM_ADDRESSES hierarchically through each subdomain until a match
    * is found, or a default set is returned instead.
    */
-  private String[] getDomAddressesForUrl(String url) {
+  private static String[] getDomAddressesForUrl(String url) {
     String domain;
     try {
       domain = new URL(url).getHost();
@@ -118,8 +123,17 @@ public class SiteParser {
    * Given a list of paragraphs, sorts them and removes all duplicates.
    * Modifications are made in-place on the passed List.
    */
-  private void sortAndDedupe(List<Node> paragraphs) {
-    Collections.sort(paragraphs, new NodeOffsetComparator());
+  private static void sortAndDedupe(List<Node> paragraphs) {
+    // Sort all the nodes by when they first appeared in the document.
+    Collections.sort(paragraphs, new Comparator<Node>() {
+      @Override
+      public int compare(Node o1, Node o2) {
+        return (int) (o1.getStartingOffset() - o2.getStartingOffset());
+      }
+    });
+
+    // Now that they're all in order, it's easy to remove duplicates - they'd
+    // be right next to each other!
     Iterator<Node> i = paragraphs.iterator();
     long lastOffset = -1;
     while (i.hasNext()) {
@@ -140,6 +154,7 @@ public class SiteParser {
   /**
    * Helper function for pretty printing a site's DOM to System.out.
    */
+  @SuppressWarnings("unused")
   private static void printNode(Node node, int depth) {
     // Print {@code node}.
     printSpacePrefix(depth);
@@ -163,9 +178,15 @@ public class SiteParser {
    * Returns Nodes for all the paragraph / header / quote / etc content within
    * an article's web page.
    */
-  public List<Node> getParagraphNodes(InputStream inputStream, String url) throws ParseException {
-    DocumentNode documentNode = new HtmlHandler(inputStream).getDocumentNode();
-  //  printNode(documentNode, 0);
+  public List<Node> getParagraphNodes(InputStream inputStream, String url) throws DomException {
+    DocumentNode documentNode;
+    try {
+      documentNode = new DomBuilder(inputStream).getDocumentNode();
+      // printNode(documentNode, 0);
+    } catch (ParserException e) {
+      throw new DomException("Could not build DOM for URL " + url + ": " + e.getMessage(), e);
+    }
+
     List<Node> paragraphs = new ArrayList<>();
     for (String domAddress : getDomAddressesForUrl(url)) {
       paragraphs.addAll(documentNode.findAll(domAddress));

@@ -1,4 +1,5 @@
-package com.janknspank.dom;
+package com.janknspank.dom.parser;
+
 
 /**
  * Represents the top-most node in a Document tree.

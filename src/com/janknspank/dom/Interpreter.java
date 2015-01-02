@@ -8,6 +8,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.janknspank.dom.parser.Node;
 
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
@@ -69,7 +70,7 @@ public class Interpreter {
 
   private final InterpretedData interpretedData;
 
-  public Interpreter(InputStream inputStream, String url) throws ParseException {
+  public Interpreter(InputStream inputStream, String url) throws DomException {
     this(Iterables.transform(
         new SiteParser().getParagraphNodes(inputStream, url), new Function<Node, String>() {
           @Override

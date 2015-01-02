@@ -1,4 +1,4 @@
-package com.janknspank.dom;
+package com.janknspank.dom.parser;
 
 import org.xml.sax.helpers.LocatorImpl;
 

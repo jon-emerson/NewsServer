@@ -1,4 +1,4 @@
-package com.janknspank.dom;
+package com.janknspank.dom.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
-import com.janknspank.dom.LenientSaxParser.LenientElementInterpreter;
+import com.janknspank.dom.parser.LenientSaxParser;
 
 /**
  * Tests for the lenient SAX parser.

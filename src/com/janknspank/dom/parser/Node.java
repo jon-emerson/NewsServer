@@ -1,4 +1,4 @@
-package com.janknspank.dom;
+package com.janknspank.dom.parser;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;

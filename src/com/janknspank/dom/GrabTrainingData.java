@@ -17,6 +17,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import com.google.common.base.Joiner;
+import com.janknspank.dom.parser.Node;
+import com.janknspank.dom.parser.ParserException;
 
 /**
  * Grabs content from all the URLs in "URLS", then writes their tokenized
@@ -47,7 +49,7 @@ public class GrabTrainingData {
     }
   }
 
-  private static InputStream getPage(String url) throws ParseException {
+  private static InputStream getPage(String url) throws ParserException {
     HttpGet httpget = new HttpGet(url);
 
     RequestConfig config = RequestConfig.custom()
@@ -62,10 +64,10 @@ public class GrabTrainingData {
       if (response.getStatusLine().getStatusCode() == 200) {
         return response.getEntity().getContent();
       }
-      throw new ParseException("Bad response, status code = " +
+      throw new ParserException("Bad response, status code = " +
           response.getStatusLine().getStatusCode());
     } catch (IOException e) {
-      throw new ParseException("Could not read web site", e);
+      throw new ParserException("Could not read web site", e);
     }
   }
 

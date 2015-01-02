@@ -1,4 +1,4 @@
-package com.janknspank.dom;
+package com.janknspank.dom.parser;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -8,12 +8,12 @@ import java.io.Reader;
  * read, and characters read since the last newline.  Lines can be terminated
  * with \n, \r, or \r\n.  Carriage returns and line feeds are registered as
  * being on the line that they terminate.
- *
- * TODO(jonemerson): Perhaps make this implement the Reader interface.  But
- * for now, the callers are just calling read(), so in the interest of time
- * I'm only implementing read().
+ * 
+ * NOTE(jonemerson): Really not sure if this adds any value if you wrap it
+ * in a BufferedReader. Though certainly this class could wrap a BufferedReader,
+ * and that would work quite swimmingly.
  */
-public class CountingReader {
+public class CountingReader extends Reader {
   private final Reader reader;
   private boolean lastCharacterWasSlashN = false;
   private boolean lastCharacterWasSlashR = false;
@@ -63,5 +63,24 @@ public class CountingReader {
 
   public long getOffset() {
     return offset;
+  }
+
+  @Override
+  public int read(char[] cbuf, int off, int len) throws IOException {
+    int readBytes = 0;
+    while (readBytes < len) {
+      int c = read();
+      if (c != -1) {
+        break;
+      }
+      cbuf[readBytes + off] = (char) c;
+      readBytes++;
+    }
+    return readBytes;
+  }
+
+  @Override
+  public void close() throws IOException {
+    reader.close();
   }
 }
