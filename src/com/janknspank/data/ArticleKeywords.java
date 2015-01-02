@@ -79,6 +79,7 @@ public class ArticleKeywords {
         "insurance",
         "jobs",
         "kids",
+        "kidz",
         "leadership",
         "lifestyle",
         "litigation",

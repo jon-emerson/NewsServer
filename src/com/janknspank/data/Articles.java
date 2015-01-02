@@ -17,7 +17,8 @@ import com.janknspank.proto.Core.Article;
  */
 public class Articles {
   private static final String SELECT_ALL_COMMAND =
-      "SELECT * FROM " + Database.getTableName(Article.class) + " LIMIT 50";
+      "SELECT * FROM " + Database.getTableName(Article.class) +
+      " ORDER BY published_time DESC LIMIT 50";
 
   public static final int MAX_ARTICLE_LENGTH;
   public static final int MAX_DESCRIPTION_LENGTH;
@@ -64,6 +65,9 @@ public class Articles {
   public static void main(String args[]) throws Exception {
     Connection connection = Database.getConnection();
     connection.prepareStatement(Database.getCreateTableStatement(Article.class)).execute();
+    for (String statement : Database.getCreateIndexesStatement(Article.class)) {
+      connection.prepareStatement(statement).execute();
+    }
 
 //    Article.Builder builder = Article.newBuilder();
 //    String id = "id" + System.currentTimeMillis();
