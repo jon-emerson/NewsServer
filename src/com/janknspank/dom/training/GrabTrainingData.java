@@ -1,4 +1,4 @@
-package com.janknspank.dom;
+package com.janknspank.dom.training;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,6 +17,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import com.google.common.base.Joiner;
+import com.janknspank.dom.Interpreter;
+import com.janknspank.dom.SiteParser;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
 
