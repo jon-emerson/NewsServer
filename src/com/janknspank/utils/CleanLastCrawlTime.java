@@ -34,13 +34,14 @@ public class CleanLastCrawlTime {
 
     stmt = Database.getConnection().prepareStatement(
         "SELECT * FROM " + Database.getTableName(Url.class) + " " +
-        "WHERE crawl_priority=0");
+        "WHERE crawl_priority=0 AND url NOT LIKE \"%//twitter.com/%\"");
     result = stmt.executeQuery();
     List<Message> urlsToUpdate = Lists.newArrayList();
     while (!result.isAfterLast()) {
       Url url = Database.createFromResultSet(result, Url.class);
       if (url != null) {
         if (!crawledArticleIds.contains(url.getId())) {
+          System.out.println("Fixin " + url.getUrl());
           urlsToUpdate.add(url.toBuilder()
               .clearLastCrawlTime()
               .setCrawlPriority(Urls.getCrawlPriority(url.getUrl(), null))

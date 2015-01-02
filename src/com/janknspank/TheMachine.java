@@ -26,13 +26,14 @@ public class TheMachine {
     Urls.put(originUrl, false);
 
     while (true) {
-    //  final Url startUrl = Urls.markAsCrawled(Urls.getNextUrlToCrawl());
-      Url startUrl = Url.newBuilder()
-          .setId("pYZDE7M36zxQNxbFTUVFCQ")
-          .setUrl("http://www.nytimes.com/2015/01/04/nyregion/chocolate-factory-in-brooklyn-asks-what-us-gentrifiers.html")
-          .setTweetCount(0)
-          .setDiscoveryTime(System.currentTimeMillis())
-          .build();
+      final Url startUrl = Urls.markAsCrawled(Urls.getNextUrlToCrawl());
+//      Url startUrl = Url.newBuilder()
+//          .setId("pYZDE7M36zxQNxbFTUVFCQ")
+//          .setUrl("http://www.nytimes.com/2015/01/04/nyregion/chocolate-" +
+//              "factory-in-brooklyn-asks-what-us-gentrifiers.html")
+//          .setTweetCount(0)
+//          .setDiscoveryTime(System.currentTimeMillis())
+//          .build();
       if (startUrl == null) {
         // Some other thread has likely claimed this URL - Go get another.
         continue;
@@ -97,8 +98,6 @@ public class TheMachine {
           }
         }
       }).crawl(startUrl);
-      
-      break; // todo: remove
     }
   }
 
