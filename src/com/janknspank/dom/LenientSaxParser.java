@@ -114,7 +114,7 @@ public class LenientSaxParser extends SAXParser {
                   /* localName */ "",
                   /* qName */ currentAttributeName,
                   /* type */ "",
-                  /* value */ b.toString());
+                  /* value */ StringEscapeUtils.unescapeHtml4(b.toString()));
               currentAttributeName = null;
               b.setLength(0);
               state = InterpreterState.ENIGMATIC_VOID;
@@ -137,7 +137,7 @@ public class LenientSaxParser extends SAXParser {
               /* localName */ "",
               /* qName */ currentAttributeName,
               /* type */ "",
-              /* value */ b.toString());
+              /* value */ StringEscapeUtils.unescapeHtml4(b.toString()));
           currentAttributeName = null;
           b.setLength(0);
           state = InterpreterState.ENIGMATIC_VOID;
@@ -149,7 +149,7 @@ public class LenientSaxParser extends SAXParser {
               /* localName */ "",
               /* qName */ currentAttributeName,
               /* type */ "",
-              /* value */ b.toString());
+              /* value */ StringEscapeUtils.unescapeHtml4(b.toString()));
           currentAttributeName = null;
           b.setLength(0);
           state = InterpreterState.ENIGMATIC_VOID;

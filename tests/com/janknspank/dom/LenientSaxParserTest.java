@@ -32,13 +32,13 @@ public class LenientSaxParserTest {
     assertFalse(interpreter.isSelfClosing());
 
     interpreter = new LenientElementInterpreter(
-        "<img src='image.jpg' width=500 height=600 title=\"Monster!\"/>");
+        "<img src='image.jpg' width=500 height=600 title=\"Monster! S&amp;P\"/>");
     assertEquals("img", interpreter.getTag());
     assertEquals(4, interpreter.getAttributes().getLength());
     assertEquals("image.jpg", interpreter.getAttributes().getValue("src"));
     assertEquals("500", interpreter.getAttributes().getValue("width"));
     assertEquals("600", interpreter.getAttributes().getValue("height"));
-    assertEquals("Monster!", interpreter.getAttributes().getValue("title"));
+    assertEquals("Monster! S&P", interpreter.getAttributes().getValue("title"));
     assertTrue(interpreter.isSelfClosing());
 
     // This is a weird case... Let's just make sure we do something reasonable.

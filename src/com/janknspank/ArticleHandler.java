@@ -2,16 +2,23 @@ package com.janknspank;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.protobuf.Message;
 import com.janknspank.data.Articles;
+import com.janknspank.data.Database;
 import com.janknspank.data.ValidationException;
 import com.janknspank.dom.InterpretedData;
 import com.janknspank.proto.Core.Article;
@@ -19,7 +26,6 @@ import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Validator;
 
 public class ArticleHandler extends DefaultHandler {
-
   private String lastCharacters;
   private InterpretedData lastInterpretedData;
   private final Set<String> lastKeywords = Sets.newHashSet();
@@ -85,6 +91,30 @@ public class ArticleHandler extends DefaultHandler {
   @Override
   public void endDocument() {
     try {
+      // Since many sites double-escape their HTML entities (why anyone would
+      // do this is beyond me), do another escape pass on everything before we
+      // start telling people about this article.
+      if (articleBuilder.hasDescription()) {
+        articleBuilder.setDescription(
+            StringEscapeUtils.unescapeHtml4(articleBuilder.getDescription()));
+      }
+      if (articleBuilder.hasAuthor()) {
+        articleBuilder.setAuthor(
+            StringEscapeUtils.unescapeHtml4(articleBuilder.getAuthor()));
+      }
+      if (articleBuilder.hasCopyright()) {
+        articleBuilder.setCopyright(
+            StringEscapeUtils.unescapeHtml4(articleBuilder.getCopyright()));
+      }
+      if (articleBuilder.hasTitle()) {
+        articleBuilder.setTitle(
+            StringEscapeUtils.unescapeHtml4(articleBuilder.getTitle()));
+      }
+      if (articleBuilder.hasImageUrl()) {
+        articleBuilder.setImageUrl(
+            StringEscapeUtils.unescapeHtml4(articleBuilder.getImageUrl()));
+      }
+
       callback.foundArticle(
           (Article) Validator.assertValid(articleBuilder.build()),
           lastInterpretedData,
@@ -213,6 +243,7 @@ public class ArticleHandler extends DefaultHandler {
   }
 
   private void handleKeywords(String rawKeywords) {
+    rawKeywords = StringEscapeUtils.unescapeHtml4(rawKeywords);
     String[] keywords;
     // Some sites use semicolons, others use commas.  Split based on whichever is more prevalent.
     if (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";")) {
@@ -222,6 +253,57 @@ public class ArticleHandler extends DefaultHandler {
     }
     for (String keyword : keywords) {
       lastKeywords.add(keyword.trim());
+    }
+  }
+
+  /**
+   * Cleans any HTML entities that were stored in article metadata before we
+   * started cleaning up at parse time.
+   */
+  public static void main(String args[]) throws Exception {
+    // Figure out what articles we've crawled already.
+    List<Message> articlesToUpdate = Lists.newArrayList();
+    PreparedStatement stmt = Database.getConnection().prepareStatement(
+        "SELECT * FROM " + Database.getTableName(Article.class));
+    ResultSet result = stmt.executeQuery();
+    while (!result.isAfterLast()) {
+      Article article = Database.createFromResultSet(result, Article.class);
+      if (article != null) {
+        Article.Builder articleBuilder = article.toBuilder();
+        if (articleBuilder.hasDescription()) {
+          articleBuilder.setDescription(
+              StringEscapeUtils.unescapeHtml4(articleBuilder.getDescription()));
+        }
+        if (articleBuilder.hasAuthor()) {
+          articleBuilder.setAuthor(
+              StringEscapeUtils.unescapeHtml4(articleBuilder.getAuthor()));
+        }
+        if (articleBuilder.hasCopyright()) {
+          articleBuilder.setCopyright(
+              StringEscapeUtils.unescapeHtml4(articleBuilder.getCopyright()));
+        }
+        if (articleBuilder.hasTitle()) {
+          articleBuilder.setTitle(
+              StringEscapeUtils.unescapeHtml4(articleBuilder.getTitle()));
+        }
+        if (articleBuilder.hasImageUrl()) {
+          articleBuilder.setImageUrl(
+              StringEscapeUtils.unescapeHtml4(articleBuilder.getImageUrl()));
+        }
+        if (!StringUtils.equals(articleBuilder.getDescription(), article.getDescription()) ||
+            !StringUtils.equals(articleBuilder.getAuthor(), article.getAuthor()) ||
+            !StringUtils.equals(articleBuilder.getCopyright(), article.getCopyright()) ||
+            !StringUtils.equals(articleBuilder.getTitle(), article.getTitle()) ||
+            !StringUtils.equals(articleBuilder.getImageUrl(), article.getImageUrl())) {
+          System.out.println("Updating " + article.getUrl() + ". Before=" +
+              article.toString() + " After=" + articleBuilder.build().toString());
+          articlesToUpdate.add(articleBuilder.build());
+        }
+      }
+      if (articlesToUpdate.size() == 100 || article == null) {
+        System.out.println(Database.update(articlesToUpdate) + " rows updated");
+        articlesToUpdate.clear();
+      }
     }
   }
 }

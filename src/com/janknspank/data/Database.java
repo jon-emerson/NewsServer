@@ -28,7 +28,8 @@ public class Database {
   // JDBC driver name and database URL
   private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
   private static final String DB_URL =
-      "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver?useTimezone=true";
+      "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver?" +
+      "useTimezone=true&rewriteBatchedStatements=true";
 //      "jdbc:mysql://localhost/test?useTimezone=true";
   private static final String PROTO_COLUMN_NAME = "proto";
   static {
