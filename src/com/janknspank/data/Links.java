@@ -15,7 +15,7 @@ import com.janknspank.proto.Core.Link;
 public class Links {
   private static final String DELETE_COMMAND =
       "DELETE FROM " + Database.getTableName(Link.class) +
-      "    WHERE origin_id =? OR destination_id =?";
+      "    WHERE origin_url_id =? OR destination_url_id =?";
 
   /**
    * Deletes any links coming to or from the passed discovered URL ID.
