@@ -52,32 +52,40 @@ public class ArticleKeywords {
     for (String keyword : new String[] {
         "and",
         "apartments",
+        "blog",
         "business school",
         "business schools",
         "bw business schools page",
         "capitals",
         "ceo",
+        "cinema",
         "committee",
         "commodities",
         "company",
         "corrections",
+        "dialogue",
         "economy",
         "economic",
         "education",
+        "films",
         "financial calculator",
         "financial calculators",
+        "first",
         "graduate reviews",
         "hedge funds",
+        "hello",
         "internet",
         "inequality",
         "insurance",
         "jobs",
+        "kids",
         "leadership",
         "lifestyle",
         "litigation",
         "markets",
         "media",
         "mobile",
+        "movies",
         "my",
         "news",
         "opinion",
@@ -218,8 +226,8 @@ public class ArticleKeywords {
         articleKeywordList.add(ArticleKeyword.newBuilder()
             .setArticleId(article.getUrlId())
             .setKeyword(cleanKeyword(location))
-            .setStrength(Math.max(20,
-                interpretedData.getLocationCount(location) * 5))
+            .setStrength(Math.max(15,
+                interpretedData.getLocationCount(location) * 2))
             .setType("l")
             .build());
       }
