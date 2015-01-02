@@ -154,6 +154,10 @@ public class ArticleHandler extends DefaultHandler {
         }
       }
     }
+    String tag = qName;
+    for (int i = 0; i < attrs.getLength(); i++) {
+      tag += " " + attrs.getQName(i) + "=\"" + attrs.getValue(i) + "\"";
+    }
     if ("meta".equalsIgnoreCase(qName)) {
       String name = attrs.getValue("name");
       if ("author".equalsIgnoreCase(name)) {
@@ -162,7 +166,8 @@ public class ArticleHandler extends DefaultHandler {
       if ("copyright".equalsIgnoreCase(name)) {
         articleBuilder.setCopyright(attrs.getValue("content"));
       }
-      if ("description".equalsIgnoreCase(name)) {
+      if ("description".equalsIgnoreCase(name) ||
+          "lp".equalsIgnoreCase(name)) {
         articleBuilder.setDescription(
             StringUtils.substring(attrs.getValue("content"), 0, Articles.MAX_DESCRIPTION_LENGTH));
       }

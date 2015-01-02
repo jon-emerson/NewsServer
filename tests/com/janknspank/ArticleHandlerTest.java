@@ -3,17 +3,21 @@ package com.janknspank;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.ByteArrayInputStream;
+import java.io.FileReader;
+import java.io.StringReader;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 
 import com.google.common.collect.Lists;
 import com.janknspank.dom.InterpretedData;
-import com.janknspank.dom.parser.LenientSaxParser;
+import com.janknspank.dom.parser.LenientXMLReader;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 
@@ -29,6 +33,8 @@ public class ArticleHandlerTest {
         .setTweetCount(0)
         .setDiscoveryTime(500L)
         .build();
+  private TestArticleCallback callback;
+  private ArticleHandler handler;
 
   private static class TestArticleCallback implements ArticleHandler.ArticleCallback {
     List<String> foundUrls = Lists.newArrayList();
@@ -48,6 +54,12 @@ public class ArticleHandlerTest {
       foundArticles.add(article);
       this.keywords = keywords;
     }
+  }
+
+  @Before
+  public void setUp() {
+    callback = new TestArticleCallback();
+    handler = new ArticleHandler(callback, URL);
   }
 
   /**
@@ -70,8 +82,6 @@ public class ArticleHandlerTest {
    */
   @Test
   public void testHandleMetaTags() throws Exception {
-    TestArticleCallback callback = new TestArticleCallback();
-    ArticleHandler handler = new ArticleHandler(callback, URL);
     handler.setInterpretedData(
         new InterpretedData.Builder().setArticleBody(ARTICLE_BODY).build());
     String htmlPage =
@@ -84,8 +94,9 @@ public class ArticleHandlerTest {
         "<a class=\"clazzzzzz moo\" href=\"" + LINK_URL_2 + "\">" +
         "<a id=\"hello\" href=\"" + LINK_URL_3 + "\">" +
         "</body</html>";
-    ByteArrayInputStream bais = new ByteArrayInputStream(htmlPage.getBytes());
-    new LenientSaxParser().parse(bais, handler);
+    XMLReader reader = new LenientXMLReader();
+    reader.setContentHandler(handler);
+    reader.parse(new InputSource(new StringReader(htmlPage)));
 
     assertTrue(callback.keywords.contains("BBC"));
     assertTrue(callback.keywords.contains("Capital"));
@@ -93,11 +104,34 @@ public class ArticleHandlerTest {
     assertTrue(callback.keywords.contains("STORY-VIDEO"));
     assertTrue(callback.keywords.contains("Office Space"));
     assertEquals(1, callback.foundArticles.size());
-    assertEquals(ARTICLE_BODY, callback.foundArticles.get(0).getArticleBody());
-    assertEquals(DESCRIPTION, callback.foundArticles.get(0).getDescription());
+
+    Article article = callback.foundArticles.get(0);
+    assertEquals(ARTICLE_BODY, article.getArticleBody());
+    assertEquals(DESCRIPTION, article.getDescription());
     assertEquals(3, callback.foundUrls.size());
     assertEquals(LINK_URL_1, callback.foundUrls.get(0));
     assertEquals(LINK_URL_2, callback.foundUrls.get(1));
     assertEquals(LINK_URL_3, callback.foundUrls.get(2));
+  }
+
+  @Test
+  public void handleMetaTagsNytimes() throws Exception {
+    handler.setInterpretedData(
+        new InterpretedData.Builder().setArticleBody(ARTICLE_BODY).build());
+
+    XMLReader reader = new LenientXMLReader();
+    reader.setContentHandler(handler);
+    reader.parse(new InputSource(new FileReader(
+        "testdata/year-of-the-condo-in-new-york-city.html")));
+
+    assertEquals(1, callback.foundArticles.size());
+
+    Article article = callback.foundArticles.get(0);
+    assertEquals(ARTICLE_BODY, article.getArticleBody());
+    assertEquals("Twice as many new condominium units will hit the Manhattan " +
+        "market this year as in 2014.", article.getDescription());
+    assertEquals("Year of the Condo in New York City", article.getTitle());
+    assertEquals("http://static01.nyt.com/images/2015/01/04/realestate/" +
+        "04COV4/04COV4-thumbStandard-v2.jpg", article.getImageUrl());
   }
 }

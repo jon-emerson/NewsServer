@@ -151,9 +151,7 @@ public class Urls {
     }
 
     stmt = Database.getConnection().prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Url.class)
-         + " WHERE url > \""
-         + "http://www.bloomberg.com/news/2014-11-27/hohn-s-wife-to-receive-530-million-in-london-divorce-case.html\"");
+        "SELECT * FROM " + Database.getTableName(Url.class));
     result = stmt.executeQuery();
     List<Message> urlsToUpdate = Lists.newArrayList();
     while (!result.isAfterLast()) {

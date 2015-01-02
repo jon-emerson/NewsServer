@@ -38,7 +38,7 @@ public class Articles {
       throw new IllegalStateException("Could not find length of article or description");
     }
     MAX_ARTICLE_LENGTH = articleLength;
-    MAX_DESCRIPTION_LENGTH = articleLength;
+    MAX_DESCRIPTION_LENGTH = descriptionLength;
   }
 
   /**

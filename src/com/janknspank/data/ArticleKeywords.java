@@ -63,6 +63,7 @@ public class ArticleKeywords {
         "commodities",
         "company",
         "corrections",
+        "department",
         "dialogue",
         "economy",
         "economic",

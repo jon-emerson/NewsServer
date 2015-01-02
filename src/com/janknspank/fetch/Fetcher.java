@@ -2,8 +2,6 @@ package com.janknspank.fetch;
 
 import java.io.IOException;
 
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -13,19 +11,13 @@ import org.apache.http.impl.client.HttpClients;
  * TODO(jonemerson): This class should enforce robots.txt.
  */
 public class Fetcher {
+  private CloseableHttpClient httpclient = HttpClients.createDefault();
+
   public Fetcher() {
   }
 
   public FetchResponse fetch(String url) throws FetchException {
     HttpGet httpget = new HttpGet(url);
-
-    // Don't pick up cookies.
-    RequestConfig config = RequestConfig.custom()
-        .setCookieSpec(CookieSpecs.IGNORE_COOKIES)
-        .build();
-    CloseableHttpClient httpclient = HttpClients.custom()
-        .setDefaultRequestConfig(config)
-        .build();
 
     try {
       return new FetchResponse(httpclient.execute(httpget));

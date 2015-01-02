@@ -6,12 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -40,33 +34,13 @@ public class Crawler {
 
   public void crawl(Url url) {
     try {
-      HttpGet httpget = new HttpGet(url.getUrl());
-
-      // Don't pick up cookies.
-      RequestConfig config = RequestConfig.custom()
-          .setCookieSpec(CookieSpecs.IGNORE_COOKIES)
-          .build();
-      CloseableHttpClient httpclient = HttpClients.custom()
-          .setDefaultRequestConfig(config)
-          .build();
-
-      // Avoid bugs in Apache Http Client from crashing our process.  E.g.
-      // https://issues.apache.org/jira/browse/HTTPCLIENT-1544
-      CloseableHttpResponse response;
-      try {
-        response = httpclient.execute(httpget);
-      } catch (NullPointerException e) {
-        e.printStackTrace();
-        return;
-      }
+      System.err.println("Crawling: " + url.getUrl());
+      FetchResponse response = fetcher.fetch(url.getUrl());
 
       // TODO(jonemerson): Should we update the database if we were
       // redirected, so that it now points at the canonical URL?
-      if (response.getStatusLine().getStatusCode() == 200) {
-        // Fetch the file and write it to disk.
-        System.err.println("Crawling: " + url.getUrl());
-        FetchResponse fetchResponse = fetcher.fetch(url.getUrl());
-        File file = writeToFile(url.getId() + ".html", fetchResponse.getReader());
+      if (response.getStatusCode() == 200) {
+        File file = writeToFile(url.getId() + ".html", response.getReader());
 
         // This guy is our top-level class for handling interpreted data and
         // a second-pass over the XML.
