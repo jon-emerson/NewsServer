@@ -10,8 +10,8 @@ import com.google.common.base.Strings;
 
 public class DateHelper {
   private static final Pattern[] DATE_IN_URL_PATTERNS = {
-      Pattern.compile("\\/[0-9]{4}\\/[01][0-9]\\/[0-3][0-9]\\/"),
-      Pattern.compile("\\/[0-9]{4}\\-[01][0-9]\\-[0-3][0-9][\\/\\-]"),
+      Pattern.compile("\\/[0-9]{4}\\/[01]?[0-9]\\/[0-3]?[0-9]\\/"),
+      Pattern.compile("\\/[0-9]{4}\\-[01]?[0-9]\\-[0-3]?[0-9][\\/\\-]"),
       Pattern.compile("\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/")
   };
   private static final Pattern MONTH_IN_URL_PATTERN =
@@ -24,6 +24,7 @@ public class DateHelper {
       new SimpleDateFormat("yyyyMMddHHmmss"), // New York Times 'pdate'.
       new SimpleDateFormat("yyyyMMdd"), // Washington Post.
       new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"), // BBC.
+      new SimpleDateFormat("yyyy/MM/dd"), // CBC.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss"), // Boston.com

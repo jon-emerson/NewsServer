@@ -117,25 +117,32 @@ public class NewsSiteWhitelist {
    * Makes sure that BBC News URLs start with a path in the joined whitelist and
    * end with an article number somewhere in the path after the final slash.
    * (Article numbers are usually 8 digits.)
+   * TODO(jonemerson): Make this a lot more lenient.  This was made tight
+   * initially to address the "we're crawling too much crap" issue - Now that
+   * issue's addressed by ArticleUrlDetector and URL crawl priority.
    */
   private static final Pattern BBC_NEWS_ARTICLE_PATH = Pattern.compile(
       "^\\/(" + Joiner.on("|").join(new String[] {
-          "news",
-          "future\\/story",
+          "autos\\/story",
+          "capital\\/story",
           "culture\\/story",
           "earth\\/story",
-          "capital\\/story",
-          "autos\\/story"
+          "future\\/story",
+          "news"
+          // TODO: add democracylive (which has a different url pattern)
       }) + ")\\/.*[0-9]{6,10}[^\\/]*$");
 
   /**
    * URL validation regex's for NYTimes articles.
+   * TODO(jonemerson): Make this a lot more lenient.  This was made tight
+   * initially to address the "we're crawling too much crap" issue - Now that
+   * issue's addressed by ArticleUrlDetector and URL crawl priority.
    */
   private static final Pattern NYTIMES_ARTICLE_DOMAIN = Pattern.compile(
       "^(" + Joiner.on("|").join(new String[] {
+          "dealbook\\.nytimes\\.com",
           "nytimes\\.com",
-          "www\\.nytimes\\.com",
-          "dealbook\\.nytimes\\.com"
+          "www\\.nytimes\\.com"
       }) + ")$");
   private static final Pattern NYTIMES_ARTICLE_PATH = Pattern.compile(
       "^\\/(1|2)[0-9]{3}\\/[0-9]{2}\\/[0-9]{2}\\/.*(\\/|\\.html)$");
@@ -331,8 +338,7 @@ public class NewsSiteWhitelist {
         return false;
       }
       if (domain.endsWith("abcnews.go.com") &&
-          (path.startsWith("/blogs/") ||
-           path.startsWith("/meta/") ||
+          (path.startsWith("/meta/") ||
            path.startsWith("/xmldata/") ||
            path.contains("/photos/") ||
            path.contains("/videos/") ||
@@ -361,7 +367,8 @@ public class NewsSiteWhitelist {
         return false;
       }
       if (domain.endsWith("bbc.co.uk") || domain.endsWith("bbc.com")) {
-        if (!BBC_NEWS_ARTICLE_PATH.matcher(path).matches()) {
+        if (!path.startsWith("/newsbeat/") &&
+            !BBC_NEWS_ARTICLE_PATH.matcher(path).matches()) {
           return false;
         }
       }
@@ -436,7 +443,8 @@ public class NewsSiteWhitelist {
           (path.startsWith("/CNN/") ||
            path.startsWith("/CNNI/") ||
            path.startsWith("/linkto/") ||
-           path.startsWith("/services/"))) {
+           path.startsWith("/services/") ||
+           path.contains("/gallery/"))) {
         return false;
       }
       if (domain.endsWith(".chicagotribune.com") && path.endsWith("/comments/atom.xml")) {

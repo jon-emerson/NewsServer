@@ -1,7 +1,7 @@
 package com.janknspank.dom.parser;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -15,28 +15,21 @@ import org.xml.sax.helpers.DefaultHandler;
  * returned DocumentNode, you can then dig into the website or find nodes using
  * {@code Node#findAll(String)}.
  */
-public class DomBuilder {
-  private DocumentNode documentNode;
-  private DomContentHandler domContentHandler = new DomContentHandler();
-
-  public DomBuilder(InputStream inputStream) throws ParserException {
-    reset();
+public class DocumentBuilder {
+  public static DocumentNode build(Reader reader) throws ParserException {
     try {
-      new LenientSaxParser().parse(
-          new InputSource(new CharsetDetectingReader(inputStream)), domContentHandler);
+      DomContentHandler domContentHandler = new DomContentHandler();
+      new LenientSaxParser().parse(new InputSource(reader), domContentHandler);
+      return domContentHandler.documentNode;
     } catch (SAXException | IOException e) {
       throw new ParserException(e.getMessage(), e);
     }
   }
 
-  private class DomContentHandler extends DefaultHandler {
+  private static class DomContentHandler extends DefaultHandler {
+    private DocumentNode documentNode;
     private LenientLocator locator = null;
-    private Node currentNode = documentNode;
-
-    private void reset() {
-      locator = null;
-      currentNode = null;
-    }
+    private Node currentNode;
 
     @Override
     public void setDocumentLocator(Locator locator) {
@@ -47,6 +40,12 @@ public class DomBuilder {
     public void characters(char[] ch, int start, int length) throws SAXException {
       String s = String.copyValueOf(ch, start, length);
       currentNode.addChildText(s);
+    }
+
+    @Override
+    public void startDocument() {
+      documentNode = new DocumentNode();
+      currentNode = documentNode;
     }
 
     @Override
@@ -71,7 +70,7 @@ public class DomBuilder {
         currentNode = currentNode.getParent();
       }
     }
-  
+
     @Override
     public void startElement(String namespaceURI,
         String localName,
@@ -84,15 +83,5 @@ public class DomBuilder {
         currentNode.addAttribute(attrs.getQName(i), attrs.getValue(i));
       }
     }
-  }
-
-  private void reset() {
-    documentNode = new DocumentNode();
-    domContentHandler = new DomContentHandler();
-    domContentHandler.reset();
-  }
-
-  public DocumentNode getDocumentNode() {
-    return documentNode;
   }
 }

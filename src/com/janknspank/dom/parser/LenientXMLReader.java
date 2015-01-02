@@ -22,7 +22,7 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
 
-class LenientXMLReader implements XMLReader {
+public class LenientXMLReader implements XMLReader {
   private ContentHandler handler = null;
   private CountingReader reader = null;
   private LenientLocator locator = new LenientLocator();
@@ -286,9 +286,9 @@ class LenientXMLReader implements XMLReader {
         currentBlock.append(c);
       }
 
-      // Handle XML <!-- comments -->!
+      // Handle XML <!-- comments -->.
       if (state == ParserState.INSIDE_ELEMENT &&
-          currentBlock.length() == 4 &&
+          currentBlock.length() == "<!--".length() &&
           "<!--".equals(currentBlock.toString())) {
         // Iterate until we find the end of comment.  Since the end-of-comment
         // specifier has 3 characters, it's difficult to do in this per-
@@ -305,6 +305,29 @@ class LenientXMLReader implements XMLReader {
           }
           characterInt = reader.read();
         }
+        currentBlock.setLength(0);
+        state = ParserState.DEFAULT;
+      }
+
+      // Handle XML <!CDATA[ ... ]]> blocks.  Just take whatever's inside of the
+      // inner [] and call characters() with it.
+      if (state == ParserState.INSIDE_ELEMENT &&
+          currentBlock.length() == "<![CDATA[".length() &&
+          "<![CDATA[".equals(currentBlock.toString())) {
+        StringBuilder cdata = new StringBuilder();
+        characterInt = reader.read();
+        while (characterInt >= 0) {
+          cdata.append((char) characterInt);
+          if (cdata.length() >= "]]>".length() &&
+              "]]>".equals(cdata.substring(cdata.length() - "]]>".length()))) {
+            break;
+          }
+          characterInt = reader.read();
+        }
+        char[] characters = new char[cdata.length() - "]]>".length()];
+        cdata.substring(0, cdata.length() - "]]>".length())
+            .getChars(0, characters.length, characters, 0);
+        handler.characters(characters, 0, characters.length);
         currentBlock.setLength(0);
         state = ParserState.DEFAULT;
       }

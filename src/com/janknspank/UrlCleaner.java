@@ -137,6 +137,9 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".mashable.com") || url.getHost().equals("mashable.com")) {
       queryParameters.remove("utm_cid");
     }
+    if (url.getHost().endsWith(".mercurynews.com") || url.getHost().equals("mercurynews.com")) {
+      queryParameters.remove("source");
+    }
     if (url.getHost().endsWith(".msnbc.com") || url.getHost().equals("msnbc.com")) {
       queryParameters.remove("CID");
     }

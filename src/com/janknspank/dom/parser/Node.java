@@ -6,6 +6,8 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -237,20 +239,41 @@ public class Node {
   }
 
   /**
-   * Returns a String of this Node's attributes, such as its tag name,
-   * classes, and ID.
+   * Returns an HTML/XML interpretation of this node, including its children.
    */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(this.getTagName());
-    for (String className : this.getClasses()) {
-      sb.append("." + className);
+    sb.append("<");
+    sb.append(tagName);
+    for (String attributeName : attributes.keySet()) {
+      for (String attributeValue : attributes.get(attributeName)) {
+        sb.append(" ");
+        sb.append(attributeName);
+        sb.append("=\"");
+        sb.append(StringEscapeUtils.escapeHtml4(attributeValue));
+        sb.append("\"");
+      }
     }
-    String id = this.getId();
-    if (id != null) {
-      sb.append("#" + id);
+
+    if (children.size() == 0) {
+      sb.append("/>");
+      return sb.toString();
     }
+
+
+    sb.append(">");
+    for (Object child : children) {
+      if (child instanceof String) {
+        sb.append((String) child);
+      } else {
+        sb.append(((Node) child).toString());
+      }
+    }
+
+    sb.append("</");
+    sb.append(tagName);
+    sb.append(">");
     return sb.toString();
   }
 }

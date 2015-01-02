@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.protobuf.Message;
@@ -43,11 +42,13 @@ public class Urls {
    * 
    * TODO(jonemerson): For news sites that use incrementing article numbers,
    * try to generate a priority based on them.
+   * @param url the url to get the crawl priority of
+   * @param millis the date the article was published, in milliseconds, if known
    */
-  @VisibleForTesting
-  static int getCrawlPriority(String url) {
+  public static int getCrawlPriority(String url, Long millis) {
     if (ArticleUrlDetector.isArticle(url)) {
-      Long millis = DateHelper.getDateFromUrl(url, true /* allowMonth */);
+      millis = (millis == null) ?
+          DateHelper.getDateFromUrl(url, true /* allowMonth */) : millis;
       if (millis != null) {
         long millisAgo = System.currentTimeMillis() - millis;
         return (int) Math.max(100, 2000 - (millisAgo / (1000 * 60 * 60)));
@@ -86,7 +87,7 @@ public class Urls {
           .setId(GuidFactory.generate())
           .setTweetCount(isTweet ? 1 : 0)
           .setDiscoveryTime(System.currentTimeMillis())
-          .setCrawlPriority(getCrawlPriority(url))
+          .setCrawlPriority(getCrawlPriority(url, null))
           .build();
       Database.insert(newUrl);
       return newUrl;
@@ -159,7 +160,7 @@ public class Urls {
       Url url = Database.createFromResultSet(result, Url.class);
       if (url != null) {
         int crawlPriority = crawledArticleIds.contains(url.getId()) ?
-            0 : getCrawlPriority(url.getUrl());
+            0 : getCrawlPriority(url.getUrl(), null);
         if (Math.abs(url.getCrawlPriority() - crawlPriority) > 5) {
           System.out.println("pri=" + crawlPriority + " for " + url.getUrl());
           urlsToUpdate.add(url.toBuilder()

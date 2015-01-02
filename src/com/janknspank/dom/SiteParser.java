@@ -1,6 +1,5 @@
 package com.janknspank.dom;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,9 +11,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.DomBuilder;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.dom.parser.ParserException;
 
 public class SiteParser {
   private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES = Maps.newHashMap();
@@ -22,7 +19,8 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
         ".article > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
-        "#storyText > p"});
+        "#storyText > p",
+        "#innerbody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
         ".text > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
@@ -178,15 +176,7 @@ public class SiteParser {
    * Returns Nodes for all the paragraph / header / quote / etc content within
    * an article's web page.
    */
-  public List<Node> getParagraphNodes(InputStream inputStream, String url) throws DomException {
-    DocumentNode documentNode;
-    try {
-      documentNode = new DomBuilder(inputStream).getDocumentNode();
-      // printNode(documentNode, 0);
-    } catch (ParserException e) {
-      throw new DomException("Could not build DOM for URL " + url + ": " + e.getMessage(), e);
-    }
-
+  public List<Node> getParagraphNodes(DocumentNode documentNode, String url) throws DomException {
     List<Node> paragraphs = new ArrayList<>();
     for (String domAddress : getDomAddressesForUrl(url)) {
       paragraphs.addAll(documentNode.findAll(domAddress));

@@ -1,4 +1,4 @@
-package com.janknspank.dom.parser;
+package com.janknspank.fetch;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,7 +21,7 @@ import com.google.common.base.Charsets;
  * that FAILED to detect Windows CP1252 on a fairly trivial document.
  * Mozilla's implementation works flawlessly, though.
  */
-public class CharsetDetectingReader extends Reader {
+class CharsetDetectingReader extends Reader {
   private final InputStreamReader internalReader;
 
   public CharsetDetectingReader(InputStream inputStream) throws IOException {

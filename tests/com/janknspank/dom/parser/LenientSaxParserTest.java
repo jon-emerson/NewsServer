@@ -66,6 +66,7 @@ public class LenientSaxParserTest {
         "<body onload='alert(\"moose!\")'>Let&#8217;s get <b>ready</b>..." +
         "<!-- any comments and <tag>s inside should be ignored! --->" +
         "<img src='image.jpg' width=500 height=600 title=\"Monster!\"/>" +
+        "<![CDATA[In CDATA, &amp; entities should not be unencoded]]>" +
         "</body></html>";
     LenientSaxParser parser = new LenientSaxParser();
     final Set<String> stringsToFind = new HashSet<String>();
@@ -77,6 +78,7 @@ public class LenientSaxParserTest {
     stringsToFind.add("Let’s get ");
     stringsToFind.add("ready");
     stringsToFind.add("...");
+    stringsToFind.add("In CDATA, &amp; entities should not be unencoded");
 
     final Set<String> tagsToFind = new HashSet<String>();
     tagsToFind.add("html");

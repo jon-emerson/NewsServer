@@ -22,6 +22,8 @@ import com.google.common.collect.Maps;
 public class ArticleUrlDetector {
   private static final Pattern ABC_NET_AU_PATH = Pattern.compile("\\/[0-9]{6,10}.htm$");
   private static final Pattern ABC_NEWS_ID_PARAM = Pattern.compile("^[0-9]{5,10}$");
+  private static final Pattern ABC_NEWS_BLOG_PATH =
+      Pattern.compile("^\\/blogs\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$$");
   private static final Pattern ARS_TECHNICA_PATH_1 =
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$");
   private static final Pattern ARS_TECHNICA_PATH_2 =
@@ -30,8 +32,10 @@ public class ArticleUrlDetector {
       Pattern.compile("^\\/(archive|news)\\/.*[0-9]{5,12}\\.html$");
   private static final Pattern ARS_TECHNICA_PATH_4 =
       Pattern.compile("\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-[0-9]{3,10}\\.html$");
-  private static final Pattern BBC_CO_UK_PATH =
+  private static final Pattern BBC_CO_UK_PATH_1 =
       Pattern.compile("\\/story\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-");
+  private static final Pattern BBC_CO_UK_PATH_2 =
+      Pattern.compile("\\/newsbeat\\/[0-9]{7,10}$");
   private static final Pattern BLOOMBERG_ARCHIVE_PATH =
       Pattern.compile("^\\/bb\\/newsarchive\\/[a-zA-Z0-9_]{5,15}\\.html$");
   private static final Pattern BOSTON_COM_PATH_1 =
@@ -40,6 +44,8 @@ public class ArticleUrlDetector {
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$");
   private static final Pattern BOSTON_FINANCE_COM_PATH =
       Pattern.compile("\\/read\\/[0-9]{6,10}\\/[^\\/]+\\/$");
+  private static final Pattern BUFFALO_NEWS_PATH =
+      Pattern.compile("\\-20[0-9]{6}$");
   private static final Pattern CBC_PATH =
       Pattern.compile("\\/news\\/.*\\-1\\.[0-9]{6,10}$");
   private static final Pattern CBS_NEWS_PATH_1 =
@@ -62,6 +68,8 @@ public class ArticleUrlDetector {
       Pattern.compile("\\/SPECIALS\\/.*\\/index.html?$");
   private static final Pattern CNN_TRAVEL_PATH =
       Pattern.compile("\\-[0-9]{5,8}$");
+  private static final Pattern CURBED_PATH =
+      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9](\\/[0-3][0-9])?\\/[^\\/\\.]+\\.php$");
   private static final Pattern LATIMES_PATH_1 =
       Pattern.compile("20[0-9]{2}[01][0-9][0-3][0-9]\\-" +
           "(column|htmlstory|story|storygallery)\\.html$");
@@ -108,6 +116,7 @@ public class ArticleUrlDetector {
     }
     if (host.endsWith("abcnews.go.com")) {
       return ABC_NEWS_ID_PARAM.matcher(Strings.nullToEmpty(parameters.get("id"))).find() ||
+          ABC_NEWS_BLOG_PATH.matcher(path).find() ||
           (path.contains("/wireStory/") && PATH_ENDS_WITH_DASH_NUMBER.matcher(path).find());
     }
     if (host.endsWith("aljazeera.com")) {
@@ -121,7 +130,8 @@ public class ArticleUrlDetector {
     }
     if (host.endsWith("bbc.co.uk") || host.endsWith("bbc.com")) {
       return PATH_ENDS_WITH_DASH_NUMBER.matcher(path).find() ||
-          BBC_CO_UK_PATH.matcher(path).find();
+          BBC_CO_UK_PATH_1.matcher(path).find() ||
+          BBC_CO_UK_PATH_2.matcher(path).find();
     }
     if (host.endsWith("bloomberg.com")) {
       return BLOOMBERG_ARCHIVE_PATH.matcher(path).find() ||
@@ -134,6 +144,9 @@ public class ArticleUrlDetector {
       return BOSTON_COM_PATH_1.matcher(path).find() ||
           BOSTON_COM_PATH_2.matcher(path).find() ||
           YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
+    }
+    if (host.endsWith("buffalonews.com")) {
+      return BUFFALO_NEWS_PATH.matcher(path).find();
     }
     if (host.endsWith("businessweek.com")) {
       return YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find() ||
@@ -172,6 +185,9 @@ public class ArticleUrlDetector {
       return CNN_PATH_1.matcher(path).find() ||
           CNN_PATH_2.matcher(path).find();
     }
+    if (host.endsWith("curbed.com")) {
+      return CURBED_PATH.matcher(path).find();
+    }
     if (host.endsWith("latimes.com")) {
       return LATIMES_PATH_1.matcher(path).find() ||
           LATIMES_PATH_2.matcher(path).find();
@@ -182,14 +198,14 @@ public class ArticleUrlDetector {
     if (host.endsWith("mercurynews.com")) {
       return MERCURY_NEWS_PATH.matcher(path).find();
     }
+    if (host.endsWith("sfgate.com")) {
+      return SFGATE_PATH.matcher(path).find() ||
+          DateHelper.getDateFromUrl(urlString, false) != null;
+    }
     if (host.endsWith("washingtonpost.com")) {
       return WASHINGTON_POST_PATH_1.matcher(path).find() ||
           WASHINGTON_POST_PATH_2.matcher(path).find() ||
           YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
-    }
-    if (host.endsWith("sfgate.com")) {
-      return SFGATE_PATH.matcher(path).find() ||
-          DateHelper.getDateFromUrl(urlString, false) != null;
     }
 
     return DateHelper.getDateFromUrl(urlString, false) != null;
