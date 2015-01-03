@@ -17,7 +17,7 @@ public class SetLinkedInDataServlet extends StandardServlet {
   protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException {
     // Read parameters.
-    String linkedInJson = getRequiredParameter(req, "linkedInJson");
+    String linkedInJson = getRequiredParameter(req, "data");
     Session session = this.getSession(req);
 
     // Business logic.
