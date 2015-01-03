@@ -15,7 +15,7 @@ import com.janknspank.proto.Core.Session;
 @AuthenticationRequired(requestMethod = "POST")
 public class DeleteUserUrlRatingServlet extends StandardServlet {
   @Override
-  protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, DataRequestException, ValidationException, NotFoundException {
     Session session = this.getSession(req);
 

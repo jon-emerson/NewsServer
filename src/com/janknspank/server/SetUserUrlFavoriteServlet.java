@@ -17,7 +17,7 @@ import com.janknspank.proto.Serializer;
 @AuthenticationRequired(requestMethod = "POST")
 public class SetUserUrlFavoriteServlet extends StandardServlet {
   @Override
-  protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException {
     // Read parameters.
     String urlId = getRequiredParameter(req, "urlId");

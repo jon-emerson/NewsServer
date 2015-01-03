@@ -15,7 +15,7 @@ import com.janknspank.proto.Core.Session;
 
 public class LogoutServlet extends StandardServlet {
   @Override
-  protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException {
     // Read parameters.
     String email = getParameter(req, "email");

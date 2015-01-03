@@ -15,7 +15,7 @@ import com.janknspank.proto.Core.User;
 
 public class DeleteUserServlet extends StandardServlet {
   @Override
-  protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, DataRequestException, ValidationException {
     // Read parameters.
     String email = getRequiredParameter(req, "email");

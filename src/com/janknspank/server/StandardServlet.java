@@ -21,14 +21,14 @@ public abstract class StandardServlet extends NewsServlet {
     writeSoyTemplate(resp, ".main", null);
   }
 
-  protected abstract JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+  protected abstract JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException, DataRequestException, NotFoundException;
 
   @Override
   protected final void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     try {
-      JSONObject response = doWork(req, resp);
+      JSONObject response = doPostInternal(req, resp);
       Asserts.assertTrue(response.getBoolean("success"), "success in response");
       writeJson(resp, response);
     } catch (NotFoundException e) {

@@ -14,7 +14,7 @@ import com.janknspank.proto.Core.Session;
 @AuthenticationRequired(requestMethod = "POST")
 public class SetAddressBookDataServlet extends StandardServlet {
   @Override
-  protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException {
     // Read parameters.
     String linkedInJson = getRequiredParameter(req, "data");

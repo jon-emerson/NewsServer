@@ -19,7 +19,7 @@ import com.janknspank.proto.Serializer;
 
 public class GetArticlesServlet extends StandardServlet {
   @Override
-  protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException {
     JSONObject response = createSuccessResponse();
     response.put("articles", getArticles());

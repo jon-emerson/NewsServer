@@ -28,7 +28,7 @@ import com.janknspank.proto.Serializer;
 @AuthenticationRequired
 public class GetUserServlet extends StandardServlet {
   @Override
-  protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException {
     Session session = getSession(req);
     User user = Database.get(session.getUserId(), User.class);
