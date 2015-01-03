@@ -1,4 +1,4 @@
-{namespace news.setlinkedinconnectionsdata autoescape="strict"}
+{namespace news.setlinkedinconnections autoescape="strict"}
 
 /**
  * Renders the connect linked in connections data page.
@@ -6,12 +6,12 @@
 {template .main}
   <h1>Set LinkedIn Connections Data</h1>
 
-  <form method="POST" action="setLinkedInConnectionsData">
+  <form method="POST" action="setLinkedInConnections">
     Session key:<br>
     <input type="text" name="sessionKey"><br>
     <br>
     LinkedIn Connections JSON:<br>
-    <textarea rows="4" cols="50" name="linkedInConnectionsJson"></textarea><br>
+    <textarea rows="4" cols="50" name="data"></textarea><br>
     <br>
     <input type="submit" value="Set"><br>
   </form>

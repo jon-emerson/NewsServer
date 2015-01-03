@@ -1,5 +1,6 @@
 package com.janknspank.server;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,13 +18,17 @@ import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Serializer;
 
-public class GetArticlesServlet extends StandardServlet {
+public class GetArticlesServlet extends NewsServlet {
   @Override
-  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException {
-    JSONObject response = createSuccessResponse();
-    response.put("articles", getArticles());
-    return response;
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    try {
+      JSONObject response = createSuccessResponse();
+      response.put("articles", getArticles());
+      writeJson(resp, response);
+    } catch (DataInternalException e) {
+      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      writeJson(resp, getErrorJson(e.getMessage()));
+    }
   }
 
   /**

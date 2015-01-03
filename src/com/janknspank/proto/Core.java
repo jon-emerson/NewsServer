@@ -7210,7 +7210,7 @@ public final class Core {
     // @@protoc_insertion_point(class_scope:Session)
   }
 
-  public interface LinkedInDataOrBuilder
+  public interface LinkedInProfileOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // optional string user_id = 1;
@@ -7254,24 +7254,24 @@ public final class Core {
     long getCreateTime();
   }
   /**
-   * Protobuf type {@code LinkedInData}
+   * Protobuf type {@code LinkedInProfile}
    */
-  public static final class LinkedInData extends
+  public static final class LinkedInProfile extends
       com.google.protobuf.GeneratedMessage
-      implements LinkedInDataOrBuilder {
-    // Use LinkedInData.newBuilder() to construct.
-    private LinkedInData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements LinkedInProfileOrBuilder {
+    // Use LinkedInProfile.newBuilder() to construct.
+    private LinkedInProfile(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private LinkedInData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private LinkedInProfile(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final LinkedInData defaultInstance;
-    public static LinkedInData getDefaultInstance() {
+    private static final LinkedInProfile defaultInstance;
+    public static LinkedInProfile getDefaultInstance() {
       return defaultInstance;
     }
 
-    public LinkedInData getDefaultInstanceForType() {
+    public LinkedInProfile getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -7281,7 +7281,7 @@ public final class Core {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private LinkedInData(
+    private LinkedInProfile(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7333,28 +7333,28 @@ public final class Core {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.janknspank.proto.Core.internal_static_LinkedInData_descriptor;
+      return com.janknspank.proto.Core.internal_static_LinkedInProfile_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.janknspank.proto.Core.internal_static_LinkedInData_fieldAccessorTable
+      return com.janknspank.proto.Core.internal_static_LinkedInProfile_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.Core.LinkedInData.class, com.janknspank.proto.Core.LinkedInData.Builder.class);
+              com.janknspank.proto.Core.LinkedInProfile.class, com.janknspank.proto.Core.LinkedInProfile.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<LinkedInData> PARSER =
-        new com.google.protobuf.AbstractParser<LinkedInData>() {
-      public LinkedInData parsePartialFrom(
+    public static com.google.protobuf.Parser<LinkedInProfile> PARSER =
+        new com.google.protobuf.AbstractParser<LinkedInProfile>() {
+      public LinkedInProfile parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new LinkedInData(input, extensionRegistry);
+        return new LinkedInProfile(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<LinkedInData> getParserForType() {
+    public com.google.protobuf.Parser<LinkedInProfile> getParserForType() {
       return PARSER;
     }
 
@@ -7520,53 +7520,53 @@ public final class Core {
       return super.writeReplace();
     }
 
-    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInProfile parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInProfile parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseFrom(byte[] data)
+    public static com.janknspank.proto.Core.LinkedInProfile parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInProfile parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseFrom(java.io.InputStream input)
+    public static com.janknspank.proto.Core.LinkedInProfile parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInProfile parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseDelimitedFrom(java.io.InputStream input)
+    public static com.janknspank.proto.Core.LinkedInProfile parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseDelimitedFrom(
+    public static com.janknspank.proto.Core.LinkedInProfile parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInProfile parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Core.LinkedInData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInProfile parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -7575,7 +7575,7 @@ public final class Core {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.Core.LinkedInData prototype) {
+    public static Builder newBuilder(com.janknspank.proto.Core.LinkedInProfile prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -7587,24 +7587,24 @@ public final class Core {
       return builder;
     }
     /**
-     * Protobuf type {@code LinkedInData}
+     * Protobuf type {@code LinkedInProfile}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.Core.LinkedInDataOrBuilder {
+       implements com.janknspank.proto.Core.LinkedInProfileOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.Core.internal_static_LinkedInData_descriptor;
+        return com.janknspank.proto.Core.internal_static_LinkedInProfile_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.Core.internal_static_LinkedInData_fieldAccessorTable
+        return com.janknspank.proto.Core.internal_static_LinkedInProfile_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.Core.LinkedInData.class, com.janknspank.proto.Core.LinkedInData.Builder.class);
+                com.janknspank.proto.Core.LinkedInProfile.class, com.janknspank.proto.Core.LinkedInProfile.Builder.class);
       }
 
-      // Construct using com.janknspank.proto.Core.LinkedInData.newBuilder()
+      // Construct using com.janknspank.proto.Core.LinkedInProfile.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -7639,23 +7639,23 @@ public final class Core {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.janknspank.proto.Core.internal_static_LinkedInData_descriptor;
+        return com.janknspank.proto.Core.internal_static_LinkedInProfile_descriptor;
       }
 
-      public com.janknspank.proto.Core.LinkedInData getDefaultInstanceForType() {
-        return com.janknspank.proto.Core.LinkedInData.getDefaultInstance();
+      public com.janknspank.proto.Core.LinkedInProfile getDefaultInstanceForType() {
+        return com.janknspank.proto.Core.LinkedInProfile.getDefaultInstance();
       }
 
-      public com.janknspank.proto.Core.LinkedInData build() {
-        com.janknspank.proto.Core.LinkedInData result = buildPartial();
+      public com.janknspank.proto.Core.LinkedInProfile build() {
+        com.janknspank.proto.Core.LinkedInProfile result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.janknspank.proto.Core.LinkedInData buildPartial() {
-        com.janknspank.proto.Core.LinkedInData result = new com.janknspank.proto.Core.LinkedInData(this);
+      public com.janknspank.proto.Core.LinkedInProfile buildPartial() {
+        com.janknspank.proto.Core.LinkedInProfile result = new com.janknspank.proto.Core.LinkedInProfile(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -7676,16 +7676,16 @@ public final class Core {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.Core.LinkedInData) {
-          return mergeFrom((com.janknspank.proto.Core.LinkedInData)other);
+        if (other instanceof com.janknspank.proto.Core.LinkedInProfile) {
+          return mergeFrom((com.janknspank.proto.Core.LinkedInProfile)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.janknspank.proto.Core.LinkedInData other) {
-        if (other == com.janknspank.proto.Core.LinkedInData.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.janknspank.proto.Core.LinkedInProfile other) {
+        if (other == com.janknspank.proto.Core.LinkedInProfile.getDefaultInstance()) return this;
         if (other.hasUserId()) {
           bitField0_ |= 0x00000001;
           userId_ = other.userId_;
@@ -7711,11 +7711,11 @@ public final class Core {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.janknspank.proto.Core.LinkedInData parsedMessage = null;
+        com.janknspank.proto.Core.LinkedInProfile parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.Core.LinkedInData) e.getUnfinishedMessage();
+          parsedMessage = (com.janknspank.proto.Core.LinkedInProfile) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -7907,18 +7907,18 @@ public final class Core {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:LinkedInData)
+      // @@protoc_insertion_point(builder_scope:LinkedInProfile)
     }
 
     static {
-      defaultInstance = new LinkedInData(true);
+      defaultInstance = new LinkedInProfile(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:LinkedInData)
+    // @@protoc_insertion_point(class_scope:LinkedInProfile)
   }
 
-  public interface LinkedInConnectionsDataOrBuilder
+  public interface LinkedInConnectionsOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // optional string user_id = 1;
@@ -7962,24 +7962,24 @@ public final class Core {
     long getCreateTime();
   }
   /**
-   * Protobuf type {@code LinkedInConnectionsData}
+   * Protobuf type {@code LinkedInConnections}
    */
-  public static final class LinkedInConnectionsData extends
+  public static final class LinkedInConnections extends
       com.google.protobuf.GeneratedMessage
-      implements LinkedInConnectionsDataOrBuilder {
-    // Use LinkedInConnectionsData.newBuilder() to construct.
-    private LinkedInConnectionsData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements LinkedInConnectionsOrBuilder {
+    // Use LinkedInConnections.newBuilder() to construct.
+    private LinkedInConnections(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private LinkedInConnectionsData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private LinkedInConnections(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final LinkedInConnectionsData defaultInstance;
-    public static LinkedInConnectionsData getDefaultInstance() {
+    private static final LinkedInConnections defaultInstance;
+    public static LinkedInConnections getDefaultInstance() {
       return defaultInstance;
     }
 
-    public LinkedInConnectionsData getDefaultInstanceForType() {
+    public LinkedInConnections getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -7989,7 +7989,7 @@ public final class Core {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private LinkedInConnectionsData(
+    private LinkedInConnections(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -8041,28 +8041,28 @@ public final class Core {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.janknspank.proto.Core.internal_static_LinkedInConnectionsData_descriptor;
+      return com.janknspank.proto.Core.internal_static_LinkedInConnections_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.janknspank.proto.Core.internal_static_LinkedInConnectionsData_fieldAccessorTable
+      return com.janknspank.proto.Core.internal_static_LinkedInConnections_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.Core.LinkedInConnectionsData.class, com.janknspank.proto.Core.LinkedInConnectionsData.Builder.class);
+              com.janknspank.proto.Core.LinkedInConnections.class, com.janknspank.proto.Core.LinkedInConnections.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<LinkedInConnectionsData> PARSER =
-        new com.google.protobuf.AbstractParser<LinkedInConnectionsData>() {
-      public LinkedInConnectionsData parsePartialFrom(
+    public static com.google.protobuf.Parser<LinkedInConnections> PARSER =
+        new com.google.protobuf.AbstractParser<LinkedInConnections>() {
+      public LinkedInConnections parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new LinkedInConnectionsData(input, extensionRegistry);
+        return new LinkedInConnections(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<LinkedInConnectionsData> getParserForType() {
+    public com.google.protobuf.Parser<LinkedInConnections> getParserForType() {
       return PARSER;
     }
 
@@ -8228,53 +8228,53 @@ public final class Core {
       return super.writeReplace();
     }
 
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInConnections parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInConnections parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseFrom(byte[] data)
+    public static com.janknspank.proto.Core.LinkedInConnections parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInConnections parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseFrom(java.io.InputStream input)
+    public static com.janknspank.proto.Core.LinkedInConnections parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInConnections parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseDelimitedFrom(java.io.InputStream input)
+    public static com.janknspank.proto.Core.LinkedInConnections parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseDelimitedFrom(
+    public static com.janknspank.proto.Core.LinkedInConnections parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInConnections parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Core.LinkedInConnectionsData parseFrom(
+    public static com.janknspank.proto.Core.LinkedInConnections parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8283,7 +8283,7 @@ public final class Core {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.Core.LinkedInConnectionsData prototype) {
+    public static Builder newBuilder(com.janknspank.proto.Core.LinkedInConnections prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -8295,24 +8295,24 @@ public final class Core {
       return builder;
     }
     /**
-     * Protobuf type {@code LinkedInConnectionsData}
+     * Protobuf type {@code LinkedInConnections}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.Core.LinkedInConnectionsDataOrBuilder {
+       implements com.janknspank.proto.Core.LinkedInConnectionsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.Core.internal_static_LinkedInConnectionsData_descriptor;
+        return com.janknspank.proto.Core.internal_static_LinkedInConnections_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.Core.internal_static_LinkedInConnectionsData_fieldAccessorTable
+        return com.janknspank.proto.Core.internal_static_LinkedInConnections_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.Core.LinkedInConnectionsData.class, com.janknspank.proto.Core.LinkedInConnectionsData.Builder.class);
+                com.janknspank.proto.Core.LinkedInConnections.class, com.janknspank.proto.Core.LinkedInConnections.Builder.class);
       }
 
-      // Construct using com.janknspank.proto.Core.LinkedInConnectionsData.newBuilder()
+      // Construct using com.janknspank.proto.Core.LinkedInConnections.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -8347,23 +8347,23 @@ public final class Core {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.janknspank.proto.Core.internal_static_LinkedInConnectionsData_descriptor;
+        return com.janknspank.proto.Core.internal_static_LinkedInConnections_descriptor;
       }
 
-      public com.janknspank.proto.Core.LinkedInConnectionsData getDefaultInstanceForType() {
-        return com.janknspank.proto.Core.LinkedInConnectionsData.getDefaultInstance();
+      public com.janknspank.proto.Core.LinkedInConnections getDefaultInstanceForType() {
+        return com.janknspank.proto.Core.LinkedInConnections.getDefaultInstance();
       }
 
-      public com.janknspank.proto.Core.LinkedInConnectionsData build() {
-        com.janknspank.proto.Core.LinkedInConnectionsData result = buildPartial();
+      public com.janknspank.proto.Core.LinkedInConnections build() {
+        com.janknspank.proto.Core.LinkedInConnections result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.janknspank.proto.Core.LinkedInConnectionsData buildPartial() {
-        com.janknspank.proto.Core.LinkedInConnectionsData result = new com.janknspank.proto.Core.LinkedInConnectionsData(this);
+      public com.janknspank.proto.Core.LinkedInConnections buildPartial() {
+        com.janknspank.proto.Core.LinkedInConnections result = new com.janknspank.proto.Core.LinkedInConnections(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -8384,16 +8384,16 @@ public final class Core {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.Core.LinkedInConnectionsData) {
-          return mergeFrom((com.janknspank.proto.Core.LinkedInConnectionsData)other);
+        if (other instanceof com.janknspank.proto.Core.LinkedInConnections) {
+          return mergeFrom((com.janknspank.proto.Core.LinkedInConnections)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.janknspank.proto.Core.LinkedInConnectionsData other) {
-        if (other == com.janknspank.proto.Core.LinkedInConnectionsData.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.janknspank.proto.Core.LinkedInConnections other) {
+        if (other == com.janknspank.proto.Core.LinkedInConnections.getDefaultInstance()) return this;
         if (other.hasUserId()) {
           bitField0_ |= 0x00000001;
           userId_ = other.userId_;
@@ -8419,11 +8419,11 @@ public final class Core {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.janknspank.proto.Core.LinkedInConnectionsData parsedMessage = null;
+        com.janknspank.proto.Core.LinkedInConnections parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.Core.LinkedInConnectionsData) e.getUnfinishedMessage();
+          parsedMessage = (com.janknspank.proto.Core.LinkedInConnections) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -8615,18 +8615,18 @@ public final class Core {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:LinkedInConnectionsData)
+      // @@protoc_insertion_point(builder_scope:LinkedInConnections)
     }
 
     static {
-      defaultInstance = new LinkedInConnectionsData(true);
+      defaultInstance = new LinkedInConnections(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:LinkedInConnectionsData)
+    // @@protoc_insertion_point(class_scope:LinkedInConnections)
   }
 
-  public interface AddressBookDataOrBuilder
+  public interface AddressBookOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // optional string user_id = 1;
@@ -8670,24 +8670,24 @@ public final class Core {
     long getCreateTime();
   }
   /**
-   * Protobuf type {@code AddressBookData}
+   * Protobuf type {@code AddressBook}
    */
-  public static final class AddressBookData extends
+  public static final class AddressBook extends
       com.google.protobuf.GeneratedMessage
-      implements AddressBookDataOrBuilder {
-    // Use AddressBookData.newBuilder() to construct.
-    private AddressBookData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements AddressBookOrBuilder {
+    // Use AddressBook.newBuilder() to construct.
+    private AddressBook(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private AddressBookData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private AddressBook(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final AddressBookData defaultInstance;
-    public static AddressBookData getDefaultInstance() {
+    private static final AddressBook defaultInstance;
+    public static AddressBook getDefaultInstance() {
       return defaultInstance;
     }
 
-    public AddressBookData getDefaultInstanceForType() {
+    public AddressBook getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -8697,7 +8697,7 @@ public final class Core {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private AddressBookData(
+    private AddressBook(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -8749,28 +8749,28 @@ public final class Core {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.janknspank.proto.Core.internal_static_AddressBookData_descriptor;
+      return com.janknspank.proto.Core.internal_static_AddressBook_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.janknspank.proto.Core.internal_static_AddressBookData_fieldAccessorTable
+      return com.janknspank.proto.Core.internal_static_AddressBook_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.Core.AddressBookData.class, com.janknspank.proto.Core.AddressBookData.Builder.class);
+              com.janknspank.proto.Core.AddressBook.class, com.janknspank.proto.Core.AddressBook.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<AddressBookData> PARSER =
-        new com.google.protobuf.AbstractParser<AddressBookData>() {
-      public AddressBookData parsePartialFrom(
+    public static com.google.protobuf.Parser<AddressBook> PARSER =
+        new com.google.protobuf.AbstractParser<AddressBook>() {
+      public AddressBook parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AddressBookData(input, extensionRegistry);
+        return new AddressBook(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<AddressBookData> getParserForType() {
+    public com.google.protobuf.Parser<AddressBook> getParserForType() {
       return PARSER;
     }
 
@@ -8936,53 +8936,53 @@ public final class Core {
       return super.writeReplace();
     }
 
-    public static com.janknspank.proto.Core.AddressBookData parseFrom(
+    public static com.janknspank.proto.Core.AddressBook parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseFrom(
+    public static com.janknspank.proto.Core.AddressBook parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseFrom(byte[] data)
+    public static com.janknspank.proto.Core.AddressBook parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseFrom(
+    public static com.janknspank.proto.Core.AddressBook parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseFrom(java.io.InputStream input)
+    public static com.janknspank.proto.Core.AddressBook parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseFrom(
+    public static com.janknspank.proto.Core.AddressBook parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseDelimitedFrom(java.io.InputStream input)
+    public static com.janknspank.proto.Core.AddressBook parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseDelimitedFrom(
+    public static com.janknspank.proto.Core.AddressBook parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseFrom(
+    public static com.janknspank.proto.Core.AddressBook parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Core.AddressBookData parseFrom(
+    public static com.janknspank.proto.Core.AddressBook parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8991,7 +8991,7 @@ public final class Core {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.Core.AddressBookData prototype) {
+    public static Builder newBuilder(com.janknspank.proto.Core.AddressBook prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -9003,24 +9003,24 @@ public final class Core {
       return builder;
     }
     /**
-     * Protobuf type {@code AddressBookData}
+     * Protobuf type {@code AddressBook}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.Core.AddressBookDataOrBuilder {
+       implements com.janknspank.proto.Core.AddressBookOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.Core.internal_static_AddressBookData_descriptor;
+        return com.janknspank.proto.Core.internal_static_AddressBook_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.Core.internal_static_AddressBookData_fieldAccessorTable
+        return com.janknspank.proto.Core.internal_static_AddressBook_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.Core.AddressBookData.class, com.janknspank.proto.Core.AddressBookData.Builder.class);
+                com.janknspank.proto.Core.AddressBook.class, com.janknspank.proto.Core.AddressBook.Builder.class);
       }
 
-      // Construct using com.janknspank.proto.Core.AddressBookData.newBuilder()
+      // Construct using com.janknspank.proto.Core.AddressBook.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -9055,23 +9055,23 @@ public final class Core {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.janknspank.proto.Core.internal_static_AddressBookData_descriptor;
+        return com.janknspank.proto.Core.internal_static_AddressBook_descriptor;
       }
 
-      public com.janknspank.proto.Core.AddressBookData getDefaultInstanceForType() {
-        return com.janknspank.proto.Core.AddressBookData.getDefaultInstance();
+      public com.janknspank.proto.Core.AddressBook getDefaultInstanceForType() {
+        return com.janknspank.proto.Core.AddressBook.getDefaultInstance();
       }
 
-      public com.janknspank.proto.Core.AddressBookData build() {
-        com.janknspank.proto.Core.AddressBookData result = buildPartial();
+      public com.janknspank.proto.Core.AddressBook build() {
+        com.janknspank.proto.Core.AddressBook result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.janknspank.proto.Core.AddressBookData buildPartial() {
-        com.janknspank.proto.Core.AddressBookData result = new com.janknspank.proto.Core.AddressBookData(this);
+      public com.janknspank.proto.Core.AddressBook buildPartial() {
+        com.janknspank.proto.Core.AddressBook result = new com.janknspank.proto.Core.AddressBook(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -9092,16 +9092,16 @@ public final class Core {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.Core.AddressBookData) {
-          return mergeFrom((com.janknspank.proto.Core.AddressBookData)other);
+        if (other instanceof com.janknspank.proto.Core.AddressBook) {
+          return mergeFrom((com.janknspank.proto.Core.AddressBook)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.janknspank.proto.Core.AddressBookData other) {
-        if (other == com.janknspank.proto.Core.AddressBookData.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.janknspank.proto.Core.AddressBook other) {
+        if (other == com.janknspank.proto.Core.AddressBook.getDefaultInstance()) return this;
         if (other.hasUserId()) {
           bitField0_ |= 0x00000001;
           userId_ = other.userId_;
@@ -9127,11 +9127,11 @@ public final class Core {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.janknspank.proto.Core.AddressBookData parsedMessage = null;
+        com.janknspank.proto.Core.AddressBook parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.Core.AddressBookData) e.getUnfinishedMessage();
+          parsedMessage = (com.janknspank.proto.Core.AddressBook) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -9323,15 +9323,15 @@ public final class Core {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:AddressBookData)
+      // @@protoc_insertion_point(builder_scope:AddressBook)
     }
 
     static {
-      defaultInstance = new AddressBookData(true);
+      defaultInstance = new AddressBook(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:AddressBookData)
+    // @@protoc_insertion_point(class_scope:AddressBook)
   }
 
   public interface UserUrlRatingOrBuilder
@@ -10906,20 +10906,20 @@ public final class Core {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Session_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_LinkedInData_descriptor;
+    internal_static_LinkedInProfile_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_LinkedInData_fieldAccessorTable;
+      internal_static_LinkedInProfile_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_LinkedInConnectionsData_descriptor;
+    internal_static_LinkedInConnections_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_LinkedInConnectionsData_fieldAccessorTable;
+      internal_static_LinkedInConnections_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_AddressBookData_descriptor;
+    internal_static_AddressBook_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_AddressBookData_fieldAccessorTable;
+      internal_static_AddressBook_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_UserUrlRating_descriptor;
   private static
@@ -10968,34 +10968,34 @@ public final class Core {
       "e\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001(\003\"g" +
       "\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002" +
       "\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013" +
-      "create_time\030\003 \001(\003B\004\210\246\035\001\"f\n\014LinkedInData\022",
-      "\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_da" +
-      "ta\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(" +
-      "\003B\004\210\246\035\001\"q\n\027LinkedInConnectionsData\022\035\n\007us" +
-      "er_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 " +
-      "\001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246" +
-      "\035\001\"i\n\017AddressBookData\022\035\n\007user_id\030\001 \001(\tB\014" +
-      "\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200" +
-      "\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrl" +
-      "Rating\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n" +
-      "\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 ",
-      "\001(\005B\004\210\246\035\001\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"i\n\017" +
-      "UserUrlFavorite\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246" +
-      "\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013" +
-      "create_time\030\003 \001(\003B\004\210\246\035\001*\033\n\010Required\022\007\n\003Y" +
-      "ES\020\001\022\006\n\002NO\020\002*U\n\rStorageMethod\022\010\n\004BLOB\020\001\022" +
-      "\017\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022\020\n\014UNIQUE_IN" +
-      "DEX\020\004\022\014\n\010PULL_OUT\020\005*F\n\023ClientSerializati" +
-      "on\022\013\n\007INCLUDE\020\001\022\025\n\021INCLUDE_AS_NUMBER\020\002\022\013" +
-      "\n\007EXCLUDE\020\003:@\n\010required\022\035.google.protobu" +
-      "f.FieldOptions\030\341\324\003 \001(\0162\t.Required:\002NO:M\n",
-      "\016storage_method\022\035.google.protobuf.FieldO" +
-      "ptions\030\342\324\003 \001(\0162\016.StorageMethod:\004BLOB::\n\r" +
-      "string_length\022\035.google.protobuf.FieldOpt" +
-      "ions\030\343\324\003 \001(\005:\002-1:\\\n\024client_serialization" +
-      "\022\035.google.protobuf.FieldOptions\030\344\324\003 \001(\0162" +
-      "\024.ClientSerialization:\007INCLUDEB\037\n\024com.ja" +
-      "nknspank.proto\200\001\000\210\001\000\220\001\000"
+      "create_time\030\003 \001(\003B\004\210\246\035\001\"i\n\017LinkedInProfi",
+      "le\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw" +
+      "_data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003" +
+      " \001(\003B\004\210\246\035\001\"m\n\023LinkedInConnections\022\035\n\007use" +
+      "r_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 \001" +
+      "(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035" +
+      "\001\"e\n\013AddressBook\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220" +
+      "\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n" +
+      "\013create_time\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrlRatin" +
+      "g\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_" +
+      "id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 \001(\005B\004",
+      "\210\246\035\001\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"m\n\017UserU" +
+      "rlFavorite\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035" +
+      "\030\022\034\n\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013creat" +
+      "e_time\030\003 \001(\003B\010\220\246\035\005\210\246\035\001*\033\n\010Required\022\007\n\003YE" +
+      "S\020\001\022\006\n\002NO\020\002*U\n\rStorageMethod\022\010\n\004BLOB\020\001\022\017" +
+      "\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022\020\n\014UNIQUE_IND" +
+      "EX\020\004\022\014\n\010PULL_OUT\020\005*F\n\023ClientSerializatio" +
+      "n\022\013\n\007INCLUDE\020\001\022\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n" +
+      "\007EXCLUDE\020\003:@\n\010required\022\035.google.protobuf" +
+      ".FieldOptions\030\341\324\003 \001(\0162\t.Required:\002NO:M\n\016",
+      "storage_method\022\035.google.protobuf.FieldOp" +
+      "tions\030\342\324\003 \001(\0162\016.StorageMethod:\004BLOB::\n\rs" +
+      "tring_length\022\035.google.protobuf.FieldOpti" +
+      "ons\030\343\324\003 \001(\005:\002-1:\\\n\024client_serialization\022" +
+      "\035.google.protobuf.FieldOptions\030\344\324\003 \001(\0162\024" +
+      ".ClientSerialization:\007INCLUDEB\037\n\024com.jan" +
+      "knspank.proto\200\001\000\210\001\000\220\001\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11038,23 +11038,23 @@ public final class Core {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Session_descriptor,
               new java.lang.String[] { "SessionKey", "UserId", "CreateTime", });
-          internal_static_LinkedInData_descriptor =
+          internal_static_LinkedInProfile_descriptor =
             getDescriptor().getMessageTypes().get(6);
-          internal_static_LinkedInData_fieldAccessorTable = new
+          internal_static_LinkedInProfile_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_LinkedInData_descriptor,
+              internal_static_LinkedInProfile_descriptor,
               new java.lang.String[] { "UserId", "RawData", "CreateTime", });
-          internal_static_LinkedInConnectionsData_descriptor =
+          internal_static_LinkedInConnections_descriptor =
             getDescriptor().getMessageTypes().get(7);
-          internal_static_LinkedInConnectionsData_fieldAccessorTable = new
+          internal_static_LinkedInConnections_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_LinkedInConnectionsData_descriptor,
+              internal_static_LinkedInConnections_descriptor,
               new java.lang.String[] { "UserId", "RawData", "CreateTime", });
-          internal_static_AddressBookData_descriptor =
+          internal_static_AddressBook_descriptor =
             getDescriptor().getMessageTypes().get(8);
-          internal_static_AddressBookData_fieldAccessorTable = new
+          internal_static_AddressBook_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_AddressBookData_descriptor,
+              internal_static_AddressBook_descriptor,
               new java.lang.String[] { "UserId", "RawData", "CreateTime", });
           internal_static_UserUrlRating_descriptor =
             getDescriptor().getMessageTypes().get(9);
@@ -11174,6 +11174,7 @@ public final class Core {
           registry.add(com.janknspank.proto.Core.storageMethod);
           registry.add(com.janknspank.proto.Core.stringLength);
           registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
           return registry;
         }
       };

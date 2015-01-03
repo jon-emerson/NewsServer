@@ -8,11 +8,11 @@ import org.json.JSONObject;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
 import com.janknspank.data.ValidationException;
-import com.janknspank.proto.Core.LinkedInData;
+import com.janknspank.proto.Core.AddressBook;
 import com.janknspank.proto.Core.Session;
 
 @AuthenticationRequired(requestMethod = "POST")
-public class SetLinkedInDataServlet extends StandardServlet {
+public class SetAddressBookServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException {
@@ -21,7 +21,7 @@ public class SetLinkedInDataServlet extends StandardServlet {
     Session session = this.getSession(req);
 
     // Business logic.
-    LinkedInData data = LinkedInData.newBuilder()
+    AddressBook data = AddressBook.newBuilder()
         .setUserId(session.getUserId())
         .setRawData(linkedInJson)
         .setCreateTime(System.currentTimeMillis())

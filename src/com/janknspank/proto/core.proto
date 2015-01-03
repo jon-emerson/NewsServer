@@ -256,7 +256,7 @@ message Session {
   ];
 }
 
-message LinkedInData {
+message LinkedInProfile {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
@@ -273,7 +273,7 @@ message LinkedInData {
   ];
 }
 
-message LinkedInConnectionsData {
+message LinkedInConnections {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
@@ -290,7 +290,7 @@ message LinkedInConnectionsData {
   ];
 }
 
-message AddressBookData {
+message AddressBook {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
@@ -343,6 +343,7 @@ message UserUrlFavorite {
   ];
 
   optional int64 create_time = 3 [
+    (storage_method) = PULL_OUT,
     (required) = YES
   ];
 }

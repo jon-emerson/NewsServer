@@ -2,15 +2,15 @@ package com.janknspank.data;
 
 import java.sql.Connection;
 
-import com.janknspank.proto.Core.LinkedInConnectionsData;
+import com.janknspank.proto.Core.LinkedInConnections;
 
-public class LinkedInConnectionsDatas {
+public class LinkedInConnectionss {
   /** Helper method for creating the LinkedInConnectionsData table. */
   public static void main(String args[]) throws Exception {
     Connection connection = Database.getConnection();
     connection.prepareStatement(Database.getCreateTableStatement(
-        LinkedInConnectionsData.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(LinkedInConnectionsData.class)) {
+        LinkedInConnections.class)).execute();
+    for (String statement : Database.getCreateIndexesStatement(LinkedInConnections.class)) {
       connection.prepareStatement(statement).execute();
     }
   }

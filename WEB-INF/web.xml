@@ -87,30 +87,30 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>SetAddressBookDataServlet</servlet-name>
-    <servlet-class>com.janknspank.server.SetAddressBookDataServlet</servlet-class>
+    <servlet-name>SetAddressBookServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetAddressBookServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SetAddressBookDataServlet</servlet-name>
-    <url-pattern>/setAddressBookData</url-pattern>
+    <servlet-name>SetAddressBookServlet</servlet-name>
+    <url-pattern>/setAddressBook</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>SetLinkedInDataServlet</servlet-name>
-    <servlet-class>com.janknspank.server.SetLinkedInDataServlet</servlet-class>
+    <servlet-name>SetLinkedInProfileServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetLinkedInProfileServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SetLinkedInDataServlet</servlet-name>
-    <url-pattern>/setLinkedInData</url-pattern>
+    <servlet-name>SetLinkedInProfileServlet</servlet-name>
+    <url-pattern>/setLinkedInProfile</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>SetLinkedInConnectionsDataServlet</servlet-name>
-    <servlet-class>com.janknspank.server.SetLinkedInConnectionsDataServlet</servlet-class>
+    <servlet-name>SetLinkedInConnectionsServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetLinkedInConnectionsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SetLinkedInConnectionsDataServlet</servlet-name>
-    <url-pattern>/setLinkedInConnectionsData</url-pattern>
+    <servlet-name>SetLinkedInConnectionsServlet</servlet-name>
+    <url-pattern>/setLinkedInConnections</url-pattern>
   </servlet-mapping>
 
   <servlet>

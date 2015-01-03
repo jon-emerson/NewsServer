@@ -18,6 +18,7 @@ public class LogoutServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException {
     // Read parameters.
+    // TODO(jonemerson): Remove 'email' before launch.
     String email = getParameter(req, "email");
     String sessionKey = getParameter(req, "sessionKey");
 

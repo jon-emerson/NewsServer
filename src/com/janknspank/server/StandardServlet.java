@@ -42,10 +42,4 @@ public abstract class StandardServlet extends NewsServlet {
       writeJson(resp, getErrorJson(e.getMessage()));
     }
   }
-
-  protected final JSONObject createSuccessResponse() {
-    JSONObject response = new JSONObject();
-    response.put("success", true);
-    return response;
-  }
 }

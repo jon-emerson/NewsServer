@@ -240,4 +240,10 @@ public class NewsServlet extends HttpServlet {
     resp.setContentType("application/json");
     resp.getOutputStream().write(o.toString().getBytes());
   }
+
+  protected final JSONObject createSuccessResponse() {
+    JSONObject response = new JSONObject();
+    response.put("success", true);
+    return response;
+  }
 }
