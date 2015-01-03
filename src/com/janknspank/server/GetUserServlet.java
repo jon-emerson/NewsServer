@@ -1,6 +1,7 @@
 package com.janknspank.server;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,9 @@ import com.janknspank.proto.Serializer;
 
 @AuthenticationRequired
 public class GetUserServlet extends StandardServlet {
+
   @Override
-  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
+  protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException {
     Session session = getSession(req);
     User user = Database.get(session.getUserId(), User.class);
@@ -39,13 +41,14 @@ public class GetUserServlet extends StandardServlet {
     for (UserUrlRating rating : UserUrlRatings.get(user.getId())) {
       urlIdToRating.put(rating.getUrlId(), rating.getRating());
     }
-    List<String> favoriteUrlIds = Lists.newArrayList();
+    final Map<String, Long> favoriteUrlIdToCreateDate = Maps.newHashMap();
     for (UserUrlFavorite favorite : UserUrlFavorites.get(user.getId())) {
-      favoriteUrlIds.add(favorite.getUrlId());
+      favoriteUrlIdToCreateDate.put(favorite.getUrlId(), favorite.getCreateTime());
     }
 
     // Create a map of the articles.
-    Iterable<String> articleIds = Iterables.concat(urlIdToRating.keySet(), favoriteUrlIds);
+    Iterable<String> articleIds = Iterables.concat(
+        urlIdToRating.keySet(), favoriteUrlIdToCreateDate.keySet());
     final Map<String, Article> articles = Maps.uniqueIndex(
         Iterables.isEmpty(articleIds) ?
             Collections.<Article>emptyList() :
@@ -70,13 +73,21 @@ public class GetUserServlet extends StandardServlet {
     userJson.put("ratings", ratingsJsonArray);
 
     // Put in favorites.
-    JSONArray favoritesJsonArray = new JSONArray();
-    for (String urlId : favoriteUrlIds) {
+    List<Article> favoriteArticles = Lists.newArrayList();
+    for (String urlId : favoriteUrlIdToCreateDate.keySet()) {
       if (articles.containsKey(urlId)) {
-        favoritesJsonArray.put(Serializer.toJSON(articles.get(urlId)));
+        favoriteArticles.add(articles.get(urlId));
       }
     }
-    userJson.put("favorites", favoritesJsonArray);
+    Collections.sort(favoriteArticles, new Comparator<Article>() {
+      @Override
+      public int compare(Article o1, Article o2) {
+        // Newest articles first, sorted by when they were favorited.
+        return Long.compare(favoriteUrlIdToCreateDate.get(o2.getUrlId()),
+            favoriteUrlIdToCreateDate.get(o1.getUrlId()));
+      }
+    });
+    userJson.put("favorites", Serializer.toJSON(favoriteArticles));
 
     // Create response.
     JSONObject response = createSuccessResponse();

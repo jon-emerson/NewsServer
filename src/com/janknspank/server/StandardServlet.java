@@ -15,14 +15,38 @@ import com.janknspank.data.ValidationException;
 
 @AuthenticationRequired(requestMethod = "POST")
 public abstract class StandardServlet extends NewsServlet {
+  protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
+      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+    return null;
+  }
+
   @Override
   protected final void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    writeSoyTemplate(resp, ".main", null);
+    try {
+      JSONObject response = doGetInternal(req, resp);
+      if (response == null) {
+        writeSoyTemplate(resp, ".main", null);
+      } else {
+        Asserts.assertTrue(response.getBoolean("success"), "success in response");
+        writeJson(resp, response);
+      }
+    } catch (NotFoundException e) {
+      resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+      writeJson(resp, getErrorJson(e.getMessage()));
+    } catch (DataInternalException | ValidationException e) {
+      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      writeJson(resp, getErrorJson(e.getMessage()));
+    } catch (DataRequestException e) {
+      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      writeJson(resp, getErrorJson(e.getMessage()));
+    }
   }
 
-  protected abstract JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException, ValidationException, DataRequestException, NotFoundException;
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
+      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+    throw new UnsupportedOperationException();
+  }
 
   @Override
   protected final void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -31,6 +55,9 @@ public abstract class StandardServlet extends NewsServlet {
       JSONObject response = doPostInternal(req, resp);
       Asserts.assertTrue(response.getBoolean("success"), "success in response");
       writeJson(resp, response);
+    } catch (UnsupportedOperationException e) {
+      resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
+      writeJson(resp, getErrorJson(e.getMessage()));
     } catch (NotFoundException e) {
       resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
       writeJson(resp, getErrorJson(e.getMessage()));
