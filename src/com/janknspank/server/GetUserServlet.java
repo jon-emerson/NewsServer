@@ -87,7 +87,13 @@ public class GetUserServlet extends StandardServlet {
             favoriteUrlIdToCreateDate.get(o1.getUrlId()));
       }
     });
-    userJson.put("favorites", Serializer.toJSON(favoriteArticles));
+    JSONArray favoritesJsonArray = new JSONArray();
+    for (Article favoriteArticle : favoriteArticles) {
+      JSONObject favoriteJson = Serializer.toJSON(favoriteArticle);
+      favoriteJson.put("favorited_time", favoriteUrlIdToCreateDate.get(favoriteArticle.getUrlId()));
+      favoritesJsonArray.put(favoriteJson);
+    }
+    userJson.put("favorites", favoritesJsonArray);
 
     // Create response.
     JSONObject response = createSuccessResponse();
