@@ -1,8 +1,5 @@
 package com.janknspank.server;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,47 +7,30 @@ import org.json.JSONObject;
 
 import com.google.common.collect.ImmutableList;
 import com.janknspank.data.DataInternalException;
+import com.janknspank.data.DataRequestException;
 import com.janknspank.data.UserUrlFavorites;
+import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Session;
 
 @AuthenticationRequired(requestMethod = "POST")
-public class DeleteUserUrlFavoriteServlet extends NewsServlet {
+public class DeleteUserUrlFavoriteServlet extends StandardServlet {
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    writeSoyTemplate(resp, ".main", null);
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+  protected JSONObject doWork(HttpServletRequest req, HttpServletResponse resp)
+      throws DataInternalException, DataRequestException, ValidationException, NotFoundException {
     Session session = this.getSession(req);
 
-    // Request validation.
-    String urlId = getParameter(req, "urlId");
-    if (urlId == null) {
-      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-      writeJson(resp, getErrorJson("urlId required"));
-      return;
-    }
+    // Get parameters.
+    String urlId = getRequiredParameter(req, "urlId");
 
     // Business logic.
-    try {
-      int numDeleted = UserUrlFavorites.deleteIds(session.getUserId(), ImmutableList.of(urlId));
-      if (numDeleted == 0) {
-        resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        writeJson(resp, getErrorJson("Favorite not found"));
-        return;
-      }
-    } catch (DataInternalException e) {
-      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-      writeJson(resp, getErrorJson(e.getMessage()));
-      return;
+    int numDeleted = UserUrlFavorites.deleteIds(session.getUserId(), ImmutableList.of(urlId));
+    if (numDeleted == 0) {
+      throw new NotFoundException("Favorite not found");
     }
 
     // Write response.
-    JSONObject response = new JSONObject();
-    response.put("success", true);
-    writeJson(resp, response);
+    JSONObject response = createSuccessResponse();
+    response.put("url_id", urlId);
+    return response;
   }
 }

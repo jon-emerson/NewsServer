@@ -19,9 +19,11 @@ import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
+import com.janknspank.Asserts;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
 import com.janknspank.data.Sessions;
+import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Session;
 
 public class NewsServlet extends HttpServlet {
@@ -44,6 +46,14 @@ public class NewsServlet extends HttpServlet {
       return ((MultiMap<String>) request.getAttribute(PARAMS_ATTRIBUTE_KEY)).
           getString(key);
     }
+  }
+
+  /**
+   * Gets a parameter, or throws a ValidationException.
+   */
+  public String getRequiredParameter(HttpServletRequest request, String key)
+      throws ValidationException {
+    return Asserts.assertNonEmpty(getParameter(request, key), key);
   }
 
   public Session getSession(HttpServletRequest request) {

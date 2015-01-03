@@ -92,7 +92,7 @@ public class Database {
       return (Message) clazz.getMethod("getDefaultInstance").invoke(null);
     } catch (IllegalAccessException | IllegalArgumentException
         | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-      throw new IllegalStateException("Could not reflect on Message type", e);
+      throw new IllegalStateException("Could not reflect on Message type: " + e.getMessage(), e);
     }
   }
 
@@ -309,7 +309,7 @@ public class Database {
       prepareInsertOrUpdateStatement(stmt, message);
       stmt.execute();
     } catch (SQLException e) {
-      throw new DataInternalException("Could not insert article", e);
+      throw new DataInternalException("Could not insert article: " + e.getMessage(), e);
     }
   }
 
@@ -337,7 +337,7 @@ public class Database {
 
     } catch (SQLException e) {
       throw new DataInternalException(
-          "Could not insert " + getTableName(firstMessage.getClass()), e);
+          "Could not insert " + getTableName(firstMessage.getClass()) + ": " + e.getMessage(), e);
     }
   }
 
@@ -455,7 +455,7 @@ public class Database {
 
     } catch (SQLException e) {
       throw new DataInternalException(
-          "Could not insert " + getTableName(firstMessage.getClass()), e);
+          "Could not insert " + getTableName(firstMessage.getClass()) + ": " + e.getMessage(), e);
     }
   }
 
@@ -504,7 +504,8 @@ public class Database {
       }
       return createListFromResultSet(stmt.executeQuery(), clazz);
     } catch (SQLException e) {
-      throw new DataInternalException("Could not execute get: " + e.getMessage(), e);
+      throw new DataInternalException("Could not execute get: " + e.getMessage() +
+          ": " + e.getMessage(), e);
     }
   }
 
@@ -544,7 +545,7 @@ public class Database {
         messages.add(message);
       }
     } catch (SQLException e) {
-      throw new DataInternalException("Error fetching favorites", e);
+      throw new DataInternalException("Error fetching favorites: " + e.getMessage(), e);
     }
     return messages;
   }

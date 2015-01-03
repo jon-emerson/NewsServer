@@ -1,0 +1,18 @@
+{namespace news.setaddressbookdata autoescape="strict"}
+
+/**
+ * Renders the connect address book data page.
+ */
+{template .main}
+  <h1>Set Address Book Data</h1>
+
+  <form method="POST" action="setAddressBookData">
+    Session key:<br>
+    <input type="text" name="sessionKey"><br>
+    <br>
+    Address Book JSON:<br>
+    <textarea rows="4" cols="50" name="addressBookJson"></textarea><br>
+    <br>
+    <input type="submit" value="Set"><br>
+  </form>
+{/template}

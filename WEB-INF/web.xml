@@ -87,12 +87,30 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>SetAddressBookDataServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetAddressBookDataServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetAddressBookDataServlet</servlet-name>
+    <url-pattern>/setAddressBookData</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>SetLinkedInDataServlet</servlet-name>
     <servlet-class>com.janknspank.server.SetLinkedInDataServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SetLinkedInDataServlet</servlet-name>
     <url-pattern>/setLinkedInData</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SetLinkedInConnectionsDataServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetLinkedInConnectionsDataServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetLinkedInConnectionsDataServlet</servlet-name>
+    <url-pattern>/setLinkedInConnectionsData</url-pattern>
   </servlet-mapping>
 
   <servlet>
