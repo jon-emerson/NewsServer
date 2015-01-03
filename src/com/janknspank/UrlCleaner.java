@@ -75,6 +75,9 @@ public class UrlCleaner {
     if (url.getHost().endsWith(".businessweek.com") || url.getHost().equals("businessweek.com")) {
       queryParameters.remove("hootPostID");
     }
+    if (url.getHost().endsWith(".cbc.ca") || url.getHost().equals("cbc.ca")) {
+      queryParameters.remove("cmp");
+    }
     if (url.getHost().endsWith(".chron.com") || url.getHost().equals("chron.com")) {
       queryParameters.remove("cmpid");
     }

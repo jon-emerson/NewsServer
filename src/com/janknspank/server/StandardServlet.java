@@ -34,10 +34,10 @@ public abstract class StandardServlet extends NewsServlet {
     } catch (NotFoundException e) {
       resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
       writeJson(resp, getErrorJson(e.getMessage()));
-    } catch (DataInternalException | ValidationException e) {
+    } catch (DataInternalException e) {
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       writeJson(resp, getErrorJson(e.getMessage()));
-    } catch (DataRequestException e) {
+    } catch (DataRequestException | ValidationException e) {
       resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       writeJson(resp, getErrorJson(e.getMessage()));
     }
