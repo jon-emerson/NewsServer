@@ -15,14 +15,18 @@ import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.janknspank.dom.InterpretedData;
+import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.LenientXMLReader;
+import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 
 public class ArticleHandlerTest {
-  private static final String ARTICLE_BODY = "Hello world!";
+  private static final List<Node> ARTICLE_NODES = ImmutableList.of(
+      new Node(new DocumentNode(), "html", 0));
   private static final String DESCRIPTION = "Hello there boys and girls";
   private static final String LINK_URL_1 = "http://www.cnn.com/foo1?query=true&utm_campaign=bar";
   private static final String LINK_URL_2 = "http://nyti.ms/asda35qwas";
@@ -83,7 +87,7 @@ public class ArticleHandlerTest {
   @Test
   public void testHandleMetaTags() throws Exception {
     handler.setInterpretedData(
-        new InterpretedData.Builder().setArticleBody(ARTICLE_BODY).build());
+        new InterpretedData.Builder().setArticleNodes(ARTICLE_NODES).build());
     String htmlPage =
         "<html><head>" +
         "<meta name=\"keywords\" content=\"BBC, Capital,story,STORY-VIDEO,Office Space\">" +
@@ -106,7 +110,6 @@ public class ArticleHandlerTest {
     assertEquals(1, callback.foundArticles.size());
 
     Article article = callback.foundArticles.get(0);
-    assertEquals(ARTICLE_BODY, article.getArticleBody());
     assertEquals(DESCRIPTION, article.getDescription());
     assertEquals(3, callback.foundUrls.size());
     assertEquals(LINK_URL_1, callback.foundUrls.get(0));
@@ -117,7 +120,7 @@ public class ArticleHandlerTest {
   @Test
   public void handleMetaTagsNytimes() throws Exception {
     handler.setInterpretedData(
-        new InterpretedData.Builder().setArticleBody(ARTICLE_BODY).build());
+        new InterpretedData.Builder().setArticleNodes(ARTICLE_NODES).build());
 
     XMLReader reader = new LenientXMLReader();
     reader.setContentHandler(handler);
@@ -127,7 +130,6 @@ public class ArticleHandlerTest {
     assertEquals(1, callback.foundArticles.size());
 
     Article article = callback.foundArticles.get(0);
-    assertEquals(ARTICLE_BODY, article.getArticleBody());
     assertEquals("Twice as many new condominium units will hit the Manhattan " +
         "market this year as in 2014.", article.getDescription());
     assertEquals("Year of the Condo in New York City", article.getTitle());

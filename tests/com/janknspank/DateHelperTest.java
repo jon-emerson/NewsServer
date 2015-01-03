@@ -32,5 +32,6 @@ public class DateHelperTest {
     assertSameTime("20150101154425", "Thu, 01 Jan 2015 23:44:25 GMT"); // Nytimes.com RSS.
     assertSameTime("20150101075748", "Thu, 1 Jan 2015 07:57:48 PST"); // MercuryNews.com RSS.
     assertSameTime("20140325122146", "Tue, 25 Mar 2014 15:21:46 -0400"); // ABCNews.com RSS.
+    assertSameTime("20150102232200", "2015-01-03T07:22Z"); // Channelnewsasia.com.
   }
 }

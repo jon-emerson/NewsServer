@@ -1,9 +1,10 @@
 package com.janknspank.proto;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.protobuf.Message;
 import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.Message;
 import com.janknspank.proto.Core.ClientSerialization;
 
 /**
@@ -11,6 +12,14 @@ import com.janknspank.proto.Core.ClientSerialization;
  * instructions embedded in the .proto definition's extensions.
  */
 public class Serializer {
+  public static <T extends Message> JSONArray toJSON(Iterable<T> messages) {
+    JSONArray a = new JSONArray();
+    for (Message message : messages) {
+      a.put(toJSON(message));
+    }
+    return a;
+  }
+
   public static JSONObject toJSON(Message message) {
     JSONObject o = new JSONObject();
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {

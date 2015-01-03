@@ -33,12 +33,39 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>DeleteUserUrlFavoriteServlet</servlet-name>
+    <servlet-class>com.janknspank.server.DeleteUserUrlFavoriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUserUrlFavoriteServlet</servlet-name>
+    <url-pattern>/deleteUserUrlFavorite</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteUserUrlRatingServlet</servlet-name>
+    <servlet-class>com.janknspank.server.DeleteUserUrlRatingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUserUrlRatingServlet</servlet-name>
+    <url-pattern>/deleteUserUrlRating</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>GetArticlesServlet</servlet-name>
     <servlet-class>com.janknspank.server.GetArticlesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>GetArticlesServlet</servlet-name>
     <url-pattern>/getArticles</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetUserServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUserServlet</servlet-name>
+    <url-pattern>/getUser</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -66,5 +93,23 @@
   <servlet-mapping>
     <servlet-name>SetLinkedInDataServlet</servlet-name>
     <url-pattern>/setLinkedInData</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SetUserUrlFavoriteServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetUserUrlFavoriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetUserUrlFavoriteServlet</servlet-name>
+    <url-pattern>/setUserUrlFavorite</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SetUserUrlRatingServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetUserUrlRatingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetUserUrlRatingServlet</servlet-name>
+    <url-pattern>/setUserUrlRating</url-pattern>
   </servlet-mapping>
 </web-app>

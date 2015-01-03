@@ -4,13 +4,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
-
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
 import opennlp.tools.sentdetect.SentenceDetectorME;
@@ -18,6 +11,10 @@ import opennlp.tools.sentdetect.SentenceModel;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.util.Span;
+
+import com.google.common.collect.Lists;
+import com.janknspank.dom.parser.DocumentNode;
+import com.janknspank.dom.parser.Node;
 
 /**
  * Built off the power of SiteParser, this class further interprets a web page
@@ -72,20 +69,14 @@ public class Interpreter {
   private final InterpretedData interpretedData;
 
   public Interpreter(DocumentNode node, String url) throws DomException {
-    this(Iterables.transform(
-        new SiteParser().getParagraphNodes(node, url), new Function<Node, String>() {
-          @Override
-          public String apply(Node paragraphNode) {
-            return paragraphNode.getFlattenedText();
-          }
-        }));
+    this(new SiteParser().getParagraphNodes(node, url));
   }
 
-  public Interpreter(Iterable<String> paragraphs) {
+  public Interpreter(List<Node> articleNodes) {
     InterpretedData.Builder interpretedDataBuilder = new InterpretedData.Builder();
-    interpretedDataBuilder.setArticleBody(Joiner.on("\n").join(paragraphs));
-    for (String paragraph : paragraphs) {
-      for (String sentence : SENTENCE_DETECTOR_ME.sentDetect(paragraph)) {
+    interpretedDataBuilder.setArticleNodes(articleNodes);
+    for (Node articleNode : articleNodes) {
+      for (String sentence : SENTENCE_DETECTOR_ME.sentDetect(articleNode.getFlattenedText())) {
         String[] tokens = TOKENIZER.tokenize(sentence);
         parsePeople(interpretedDataBuilder, tokens);
         parseOrganizations(interpretedDataBuilder, tokens);

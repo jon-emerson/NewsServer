@@ -272,3 +272,43 @@ message LinkedInData {
     (required) = YES
   ];
 }
+
+message UserUrlRating {
+  optional string user_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24
+  ];
+
+  optional string url_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24
+  ];
+
+  optional int32 rating = 3 [
+    (required) = YES
+  ];
+
+  optional int64 create_time = 4 [
+    (required) = YES
+  ];
+}
+
+message UserUrlFavorite {
+  optional string user_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24
+  ];
+
+  optional string url_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24
+  ];
+
+  optional int64 create_time = 3 [
+    (required) = YES
+  ];
+}

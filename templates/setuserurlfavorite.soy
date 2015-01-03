@@ -1,0 +1,18 @@
+{namespace news.setuserurlfavorite autoescape="strict"}
+
+/**
+ * Renders the set favorite URL page.
+ */
+{template .main}
+  <h1>Set a favorite URL</h1>
+
+  <form method="POST" action="setUserUrlFavorite">
+    Session key:<br>
+    <input type="text" name="sessionKey"><br>
+    <br>
+    URL ID:<br>
+    <input type="text" name="urlId"><br>
+    <br>
+    <input type="submit" value="Set"><br>
+  </form>
+{/template}

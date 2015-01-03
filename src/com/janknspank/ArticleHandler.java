@@ -14,6 +14,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.protobuf.Message;
@@ -21,6 +25,7 @@ import com.janknspank.data.Articles;
 import com.janknspank.data.Database;
 import com.janknspank.data.ValidationException;
 import com.janknspank.dom.InterpretedData;
+import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Validator;
@@ -49,7 +54,6 @@ public class ArticleHandler extends DefaultHandler {
     // See if we can parse a date out of the URL.
     Long dateFromUrl = DateHelper.getDateFromUrl(startUrl.getUrl(), true /* allowMonth */);
     if (dateFromUrl != null) {
-      System.out.println("Found date in URL: " + dateFromUrl);
       articleBuilder.setPublishedTime(dateFromUrl);
     }
   }
@@ -62,10 +66,24 @@ public class ArticleHandler extends DefaultHandler {
   }
 
   public void setInterpretedData(InterpretedData interpretedData) {
+    if (interpretedData.getArticleNodes().size() == 0) {
+      Preconditions.checkArgument(interpretedData.getArticleNodes().size() > 0,
+          "Article nodes must be present");
+    }
     this.lastInterpretedData = interpretedData;
 
     // Save the article body.
-    String articleBody = interpretedData.getArticleBody();
+    String articleBody = Joiner.on("\n").join(Iterables.transform(
+        interpretedData.getArticleNodes(),
+        new Function<Node, String>() {
+          @Override
+          public String apply(Node paragraphNode) {
+            return paragraphNode.getFlattenedText();
+          }
+        }));
+    articleBuilder.setDescription(
+        StringUtils.substring(interpretedData.getArticleNodes().get(0).getFlattenedText(), 0,
+            Articles.MAX_DESCRIPTION_LENGTH));
     if (articleBody.length() > Articles.MAX_ARTICLE_LENGTH) {
       articleBuilder.setArticleBody(articleBody.substring(0, Articles.MAX_ARTICLE_LENGTH));
     } else {
@@ -154,10 +172,6 @@ public class ArticleHandler extends DefaultHandler {
         }
       }
     }
-    String tag = qName;
-    for (int i = 0; i < attrs.getLength(); i++) {
-      tag += " " + attrs.getQName(i) + "=\"" + attrs.getValue(i) + "\"";
-    }
     if ("meta".equalsIgnoreCase(qName)) {
       String name = attrs.getValue("name");
       if ("author".equalsIgnoreCase(name)) {
@@ -182,7 +196,9 @@ public class ArticleHandler extends DefaultHandler {
           "sailthru.image.full".equalsIgnoreCase(name)) {
         articleBuilder.setImageUrl(attrs.getValue("content"));
       }
-      if ("date".equalsIgnoreCase(name) ||
+      if ("cXenseParse:recs:publishtime".equalsIgnoreCase(name) ||
+          "date".equalsIgnoreCase(name) ||
+          "date.release".equalsIgnoreCase(name) || // chron.com
           "OriginalPublicationDate".equalsIgnoreCase(name) ||
           "ptime".equalsIgnoreCase(name) ||
           "publish-date".equalsIgnoreCase(name) ||

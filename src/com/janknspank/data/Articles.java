@@ -1,9 +1,8 @@
 package com.janknspank.data;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.protobuf.Descriptors.FieldDescriptor;
@@ -46,19 +45,13 @@ public class Articles {
    * session key.
    */
   public static List<Article> getArticles() throws DataInternalException {
-    ArrayList<Article> articles = new ArrayList<Article>();
-
+    PreparedStatement selectAllStmt;
     try {
-      ResultSet resultSet =
-          Database.getConnection().prepareStatement(SELECT_ALL_COMMAND).executeQuery();
-      do {
-        articles.add(Database.createFromResultSet(resultSet, Article.class));
-      } while (!resultSet.isLast());
+      selectAllStmt = Database.getConnection().prepareStatement(SELECT_ALL_COMMAND);
+      return Database.createListFromResultSet(selectAllStmt.executeQuery(), Article.class);
     } catch (SQLException e) {
-      throw new DataInternalException("Could not retrieve articles", e);
+      throw new DataInternalException("Error fetching articles", e);
     }
-
-    return articles;
   }
 
   /** Helper method for creating the Article table. */

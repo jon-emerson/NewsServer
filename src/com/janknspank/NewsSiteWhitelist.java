@@ -375,6 +375,7 @@ public class NewsSiteWhitelist {
       if (domain.endsWith(".bloomberg.com") &&
           (path.startsWith("/ad-section/") ||
            path.startsWith("/apps/") ||
+           path.startsWith("/billionaires/") ||
            path.startsWith("/graphics/") ||
            path.startsWith("/infographics/") ||
            path.startsWith("/podcasts/") ||

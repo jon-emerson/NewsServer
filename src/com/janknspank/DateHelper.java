@@ -20,11 +20,12 @@ public class DateHelper {
       new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX"), // ISO 8601, BusinessWeek, CNBC.
       new SimpleDateFormat("MMMM dd, yyyy, hh:mm a"), // CBS News.
       new SimpleDateFormat("MMMM dd, yyyy"), // Chicago Tribune.
+      new SimpleDateFormat("yyyy-MM-dd'T'HH:mmX"), // Channelnewsasia.com.
       new SimpleDateFormat("yyyy-MM-dd"), // New York Times and LA Times.
       new SimpleDateFormat("yyyyMMddHHmmss"), // New York Times 'pdate'.
       new SimpleDateFormat("yyyyMMdd"), // Washington Post.
       new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"), // BBC.
-      new SimpleDateFormat("yyyy/MM/dd"), // CBC.
+      new SimpleDateFormat("yyyy/MM/dd"), // CBC, Chron.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss"), // Boston.com

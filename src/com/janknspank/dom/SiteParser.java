@@ -19,8 +19,8 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
         ".article > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
-        "#storyText > p",
-        "#innerbody > p"});
+        "#storyText p",
+        "#innerbody p"});
     DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
         ".text > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
@@ -36,6 +36,7 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
         ".article_body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
+        "article > p",
         ".content-text > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("breitbart.com", new String[] {
         "article > p"});
@@ -50,16 +51,19 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("channelnewsasia.com", new String[] {
         ".news_detail p"});
     DOMAIN_TO_DOM_ADDRESSES.put("chron.com", new String[] {
-        ".article-body p"});
+        ".article-body p",
+        ".entry p"});
     DOMAIN_TO_DOM_ADDRESSES.put("cleveland.com", new String[] {
         ".entry-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("cnbc.com", new String[] {
         "#article_body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("cnn.com", new String[] {
-        ".cnn_storyarea p"});
+        ".cnn_storyarea p",
+        "p.cnn_storypgraphtxt"});
     DOMAIN_TO_DOM_ADDRESSES.put("curbed.com", new String[] {
         ".post-body > p",
-        ".post-body > .post-more > p"});
+        ".post-body > .post-more > p",
+        ".post-body > .quicklink-body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("default", new String[] {
         "article > p",
         "article > div > p"});
@@ -82,7 +86,9 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("sfexaminer.com", new String[] {
         "#storyBody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfgate.com", new String[] {
-        ".article-body > p"});
+        ".article-body > p",
+        ".entry > p",
+        ".post-contents > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("siliconbeat.com", new String[] {
         ".post-content > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("techcrunch.com", new String[] {

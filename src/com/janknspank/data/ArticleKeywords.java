@@ -2,7 +2,6 @@ package com.janknspank.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
@@ -14,9 +13,9 @@ import org.apache.commons.lang3.text.WordUtils;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.protobuf.Message;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
+import com.google.protobuf.Message;
 import com.janknspank.dom.InterpretedData;
 import com.janknspank.proto.Core;
 import com.janknspank.proto.Core.Article;
@@ -181,7 +180,7 @@ public class ArticleKeywords {
       keyword = keyword.substring(0, keyword.indexOf("'"));
     }
 
-    if (!Character.isUpperCase(keyword.charAt(0))) {
+    if (keyword.length() > 0 && !Character.isUpperCase(keyword.charAt(0))) {
       keyword = WordUtils.capitalizeFully(keyword);
       keyword = keyword.replaceAll("Aol", "AOL");
       keyword = keyword.replaceAll("Ios", "iOS");
@@ -224,10 +223,11 @@ public class ArticleKeywords {
       throws DataInternalException, ValidationException {
     List<Message> articleKeywordList = Lists.newArrayList();
     for (String location : interpretedData.getLocations()) {
+      location = cleanKeyword(location);
       if (isValidKeyword(location)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
             .setArticleId(article.getUrlId())
-            .setKeyword(cleanKeyword(location))
+            .setKeyword(location)
             .setStrength(Math.max(15,
                 interpretedData.getLocationCount(location) * 2))
             .setType("l")
@@ -235,10 +235,11 @@ public class ArticleKeywords {
       }
     }
     for (String person : interpretedData.getPeople()) {
+      person = cleanKeyword(person);
       if (isValidKeyword(person)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
             .setArticleId(article.getUrlId())
-            .setKeyword(cleanKeyword(person))
+            .setKeyword(person)
             .setStrength(Math.max(20,
                 interpretedData.getPersonCount(person) * 5))
             .setType("p")
@@ -246,10 +247,11 @@ public class ArticleKeywords {
       }
     }
     for (String organization : interpretedData.getOrganizations()) {
+      organization = cleanKeyword(organization);
       if (isValidKeyword(organization)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
             .setArticleId(article.getUrlId())
-            .setKeyword(cleanKeyword(organization))
+            .setKeyword(organization)
             .setStrength(Math.max(20,
                 interpretedData.getOrganizationCount(organization) * 5))
             .setType("o")
@@ -278,14 +280,8 @@ public class ArticleKeywords {
       for (int i = 0; i < articleList.size(); i++) {
         stmt.setString(i + 1, articleList.get(i).getUrlId());
       }
-      ResultSet result = stmt.executeQuery();
-      List<ArticleKeyword> keywordList = Lists.newArrayList();
-      while (!result.isAfterLast()) {
-        ArticleKeyword keyword = Database.createFromResultSet(result, ArticleKeyword.class);
-        if (keyword != null) {
-          keywordList.add(keyword);
-        }
-      }
+      List<ArticleKeyword> keywordList =
+          Database.createListFromResultSet(stmt.executeQuery(), ArticleKeyword.class);
       return keywordList;
     } catch (SQLException e) {
       throw new DataInternalException("Could not read article keywords: " + e.getMessage(), e);

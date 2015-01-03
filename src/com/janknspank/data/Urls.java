@@ -22,6 +22,8 @@ import com.janknspank.proto.Validator;
  * used as a foreign key in other tables.
  */
 public class Urls {
+  private static final String SELECT_BY_ID_COMMAND =
+      "SELECT * FROM " + Database.getTableName(Url.class) + " WHERE id=?";
   private static final String SELECT_NEXT_URL_TO_CRAWL =
       "SELECT * FROM " + Database.getTableName(Url.class) + " " +
       "WHERE crawl_priority > 0 AND " +
@@ -170,6 +172,22 @@ public class Urls {
         System.out.println(Database.update(urlsToUpdate) + " rows updated");
         urlsToUpdate.clear();
       }
+    }
+  }
+
+  /**
+   * Gets a URL by its ID (since the primary keys for URLs are the URLs
+   * themselves).
+   */
+  public static Url getById(String email) throws DataInternalException {
+    try {
+      PreparedStatement statement =
+          Database.getConnection().prepareStatement(SELECT_BY_ID_COMMAND);
+      statement.setString(1, email);
+      return Database.createFromResultSet(statement.executeQuery(), Url.class);
+
+    } catch (SQLException e) {
+      throw new DataInternalException("Could not select url: " + e.getMessage(), e);
     }
   }
 }

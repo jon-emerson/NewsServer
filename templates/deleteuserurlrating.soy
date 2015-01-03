@@ -1,0 +1,18 @@
+{namespace news.deleteuserurlrating autoescape="strict"}
+
+/**
+ * Renders the delete rating URL page.
+ */
+{template .main}
+  <h1>Delete a URL's rating</h1>
+
+  <form method="POST" action="deleteUserUrlRating">
+    Session key:<br>
+    <input type="text" name="sessionKey"><br>
+    <br>
+    URL ID:<br>
+    <input type="text" name="urlId"><br>
+    <br>
+    <input type="submit" value="Delete"><br>
+  </form>
+{/template}

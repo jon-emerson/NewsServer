@@ -1,29 +1,31 @@
 package com.janknspank.dom;
 
+import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Multisets;
 import com.google.common.collect.SortedMultiset;
 import com.google.common.collect.TreeMultiset;
+import com.janknspank.dom.parser.Node;
 
 public class InterpretedData {
-  private final String articleBody;
+  private final List<Node> articleNodes;
   private final SortedMultiset<String> locations;
   private final SortedMultiset<String> people;
   private final SortedMultiset<String> organizations;
 
-  private InterpretedData(String articleBody,
+  private InterpretedData(List<Node> articleNodes,
       SortedMultiset<String> locations,
       SortedMultiset<String> people,
       SortedMultiset<String> organizations) {
-    this.articleBody = articleBody;
+    this.articleNodes = articleNodes;
     this.locations = locations;
     this.people = people;
     this.organizations = organizations;
   }
 
   public static class Builder {
-    private String articleBody;
+    private List<Node> articleNodes;
     private final SortedMultiset<String> locations;
     private final SortedMultiset<String> people;
     private final SortedMultiset<String> organizations;
@@ -34,8 +36,8 @@ public class InterpretedData {
       organizations = TreeMultiset.create();
     }
 
-    public Builder setArticleBody(String articleBody) {
-      this.articleBody = articleBody;
+    public Builder setArticleNodes(List<Node> articleNodes) {
+      this.articleNodes = articleNodes;
       return this;
     }
 
@@ -55,12 +57,12 @@ public class InterpretedData {
     }
 
     public InterpretedData build() {
-      return new InterpretedData(articleBody, locations, people, organizations);
+      return new InterpretedData(articleNodes, locations, people, organizations);
     }
   }
 
-  public String getArticleBody() {
-    return articleBody;
+  public List<Node> getArticleNodes() {
+    return articleNodes;
   }
 
   public Set<String> getLocations() {

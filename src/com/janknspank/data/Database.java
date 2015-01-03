@@ -13,7 +13,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.protobuf.Descriptors.FieldDescriptor;
@@ -409,7 +411,7 @@ public class Database {
         sql.append(field.getName() + "=?, ");
       }
     }
-    sql.append(PROTO_COLUMN_NAME + " =? ");
+    sql.append(PROTO_COLUMN_NAME + "=? ");
     sql.append(" WHERE " + getPrimaryKeyField(message.getClass()) + " =? ");
 
     System.out.println(sql.toString());
@@ -476,14 +478,33 @@ public class Database {
    */
   public static <T extends Message> T get(String primaryKey, Class<T> clazz)
       throws DataInternalException {
+    List<T> messages = get(ImmutableList.of(primaryKey), clazz);
+    return (messages.size() == 0) ? null : messages.get(0);
+  }
+
+  /**
+   * Gets Messages with the specified class {@code clazz} and the given
+   * primary keys {@code primaryKeys}, if they exist.
+   */
+  public static <T extends Message> List<T> get(Iterable<String> primaryKeys, Class<T> clazz)
+      throws DataInternalException {
+
     try {
+      String questionMarks = Joiner.on(",").join(
+          Iterables.limit(Iterables.cycle("?"), Iterables.size(primaryKeys)));
       PreparedStatement stmt = getConnection().prepareStatement(
           "SELECT * FROM " + getTableName(clazz) + " WHERE " + getPrimaryKeyField(clazz) +
-          " =? LIMIT 1");
-      stmt.setString(1, primaryKey);
-      return createFromResultSet(stmt.executeQuery(), clazz);
+          " IN (" + questionMarks + ")");
+      int i = 0;
+      for (String primaryKey : primaryKeys) {
+        stmt.setString(++i, primaryKey);
+      }
+      if (i == 0) {
+        throw new DataInternalException("No primary keys given to fetch");
+      }
+      return createListFromResultSet(stmt.executeQuery(), clazz);
     } catch (SQLException e) {
-      throw new DataInternalException("Could not execute get", e);
+      throw new DataInternalException("Could not execute get: " + e.getMessage(), e);
     }
   }
 
@@ -511,6 +532,23 @@ public class Database {
     return null;
   }
 
+  public static <T extends Message> List<T> createListFromResultSet(
+      ResultSet result, Class<T> clazz) throws DataInternalException {
+    List<T> messages = Lists.newArrayList();
+    try {
+      while (!result.isAfterLast()) {
+        T message = Database.createFromResultSet(result, clazz);
+        if (message == null) {
+          break;
+        }
+        messages.add(message);
+      }
+    } catch (SQLException e) {
+      throw new DataInternalException("Error fetching favorites", e);
+    }
+    return messages;
+  }
+
   /**
    * Deletes the object with the specified primary key from the table specified
    * by the passed-in class.
@@ -530,14 +568,15 @@ public class Database {
    * by the passed-in class.
    */
   public static <T extends Message> int deletePrimaryKeys(
-      List<String> primaryKeyList, Class<T> clazz) throws DataInternalException {
+      Iterable<String> primaryKeys, Class<T> clazz) throws DataInternalException {
     PreparedStatement stmt;
     try {
       stmt = getConnection().prepareStatement(
           "DELETE FROM " + getTableName(clazz) +
           " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
-      for (int i = 0; i < primaryKeyList.size(); i++) {
-        stmt.setString(1, primaryKeyList.get(i));
+      int offset = 0;
+      for (String primaryKey : primaryKeys) {
+        stmt.setString(++offset, primaryKey);
         stmt.addBatch();
       }
       int numModified = 0;
