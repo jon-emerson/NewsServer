@@ -29,6 +29,7 @@ public class DateHelper {
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss"), // Boston.com
+      new SimpleDateFormat("EEE, d MMM yyyy"), // LATimes.com RSS.
       new SimpleDateFormat("/yyyy/MM/dd/"), // In URL.
       new SimpleDateFormat("/yyyy-MM-dd/"), // In URL.
       new SimpleDateFormat("/yyyy-MM-dd-"), // In URL.
