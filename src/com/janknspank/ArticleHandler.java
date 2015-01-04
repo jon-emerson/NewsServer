@@ -17,6 +17,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -31,6 +32,8 @@ import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Validator;
 
 public class ArticleHandler extends DefaultHandler {
+  private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
+      "http://www.chron.com/img/pages/article/opengraph_default.jpg");
   private String lastCharacters;
   private InterpretedData lastInterpretedData;
   private final Set<String> lastKeywords = Sets.newHashSet();
@@ -194,7 +197,7 @@ public class ArticleHandler extends DefaultHandler {
       if ("thumbnail".equalsIgnoreCase(name) ||
           "THUMBNAIL_URL".equalsIgnoreCase(name) ||
           "sailthru.image.full".equalsIgnoreCase(name)) {
-        articleBuilder.setImageUrl(attrs.getValue("content"));
+        handleImageUrl(attrs.getValue("content"));
       }
       if ("cXenseParse:recs:publishtime".equalsIgnoreCase(name) ||
           "date".equalsIgnoreCase(name) ||
@@ -229,7 +232,7 @@ public class ArticleHandler extends DefaultHandler {
       }
       if ("og:image".equalsIgnoreCase(property) ||
           "rnews:thumbnailUrl".equalsIgnoreCase(property)) {
-        articleBuilder.setImageUrl(attrs.getValue("content"));
+        handleImageUrl(attrs.getValue("content"));
       }
       if ("og:description".equalsIgnoreCase(property) ) {
         articleBuilder.setDescription(
@@ -258,7 +261,18 @@ public class ArticleHandler extends DefaultHandler {
         articleBuilder.setTitle(attrs.getValue("content"));
       }
       if ("thumbnailUrl".equalsIgnoreCase(itemprop)) {
-        articleBuilder.setImageUrl(attrs.getValue("content"));
+        handleImageUrl(attrs.getValue("content"));
+      }
+    }
+  }
+
+  private void handleImageUrl(String imageUrl) {
+    if (!IMAGE_URL_BLACKLIST.contains(imageUrl)) {
+      // Collect the longest URL we find, since longer URLs are more likely to
+      // be specific to the current article (actually I'm totally guessing).
+      if (!articleBuilder.hasImageUrl() ||
+          (imageUrl.length() > articleBuilder.getImageUrl().length())) {
+        articleBuilder.setImageUrl(imageUrl);
       }
     }
   }
