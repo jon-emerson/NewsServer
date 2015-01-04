@@ -7,28 +7,29 @@ import org.json.JSONObject;
 
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
+import com.janknspank.data.UserInterests;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.AddressBook;
-import com.janknspank.proto.Core.Session;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class SetAddressBookServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException {
-    // Read parameters.
-    String linkedInJson = getRequiredParameter(req, "data");
-    Session session = this.getSession(req);
-
-    // Business logic.
-    AddressBook data = AddressBook.newBuilder()
-        .setUserId(session.getUserId())
-        .setRawData(linkedInJson)
+    String userId = this.getSession(req).getUserId();
+    AddressBook addressBook = AddressBook.newBuilder()
+        .setUserId(userId)
+        .setData(getRequiredParameter(req, "data"))
         .setCreateTime(System.currentTimeMillis())
         .build();
-    Database.upsert(data);
-
-    // Response.
+    Database.upsert(addressBook);
+    UserInterests.updateInterests(userId, addressBook);
     return createSuccessResponse();
+  }
+
+  public static void main(String args[]) throws Exception {
+    String userId = "vWxNTAAKB-KYAEofUGJL4A ";
+    AddressBook addressBook = Database.get(userId, AddressBook.class);
+    UserInterests.updateInterests(userId, addressBook);
   }
 }

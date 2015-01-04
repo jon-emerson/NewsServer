@@ -4,11 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.janknspank.proto.Core;
 import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.Core.ArticleKeyword;
+import com.janknspank.proto.Core.UserInterest;
 
 /**
  * Helper class that manages storing and retrieving Article objects from the
@@ -41,8 +47,7 @@ public class Articles {
   }
 
   /**
-   * Officially sanctioned method for getting a user session from a logged-in
-   * session key.
+   * Gets a generic list of articles.
    */
   public static List<Article> getArticles() throws DataInternalException {
     PreparedStatement selectAllStmt;
@@ -51,6 +56,59 @@ public class Articles {
       return Database.createListFromResultSet(selectAllStmt.executeQuery(), Article.class);
     } catch (SQLException e) {
       throw new DataInternalException("Error fetching articles", e);
+    }
+  }
+
+  private static List<ArticleKeyword> getArticleKeywords(List<UserInterest> interests)
+      throws DataInternalException {
+    StringBuilder sql = new StringBuilder();
+    sql.append("SELECT * FROM ")
+        .append(Database.getTableName(ArticleKeyword.class))
+        .append(" WHERE keyword IN (")
+        .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), interests.size())))
+        .append(") LIMIT 500");
+
+    try {
+      PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
+      int i = 0;
+      for (UserInterest interest : interests) {
+        stmt.setString(++i, interest.getKeyword());
+      }
+      return Database.createListFromResultSet(stmt.executeQuery(), ArticleKeyword.class);
+    } catch (SQLException e) {
+      throw new DataInternalException("Error fetching article keywords: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Gets a list of articles tailored specifically to the current user's
+   * interests.
+   */
+  public static List<Article> getArticles(List<UserInterest> interests)
+      throws DataInternalException {
+    List<ArticleKeyword> articleKeywords = getArticleKeywords(interests);
+
+    Set<String> articleIds = Sets.newHashSet();
+    for (ArticleKeyword articleKeyword : articleKeywords) {
+      articleIds.add(articleKeyword.getUrlId());
+    }
+
+    StringBuilder sql = new StringBuilder();
+    sql.append("SELECT * FROM ")
+        .append(Database.getTableName(Article.class))
+        .append(" WHERE url_id IN (")
+        .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), articleIds.size())))
+        .append(") ORDER BY published_time LIMIT 50");
+
+    try {
+      PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
+      int i = 0;
+      for (String articleId : articleIds) {
+        stmt.setString(++i, articleId);
+      }
+      return Database.createListFromResultSet(stmt.executeQuery(), Article.class);
+    } catch (SQLException e) {
+      throw new DataInternalException("Error fetching articles: " + e.getMessage(), e);
     }
   }
 

@@ -35,5 +35,7 @@
 	<classpathentry kind="lib" path="target/dependency/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="target/dependency/commons-lang3-3.3.2.jar"/>
 	<classpathentry kind="lib" path="target/dependency/juniversalchardet-1.0.3.jar"/>
+	<classpathentry kind="lib" path="target/dependency/libphonenumber-7.0.1.jar"/>
+	<classpathentry kind="lib" path="target/dependency/geocoder-2.18.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

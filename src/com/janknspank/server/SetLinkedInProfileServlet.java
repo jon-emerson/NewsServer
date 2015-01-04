@@ -9,26 +9,18 @@ import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.LinkedInProfile;
-import com.janknspank.proto.Core.Session;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class SetLinkedInProfileServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException {
-    // Read parameters.
-    String linkedInJson = getRequiredParameter(req, "data");
-    Session session = this.getSession(req);
-
-    // Business logic.
-    LinkedInProfile data = LinkedInProfile.newBuilder()
-        .setUserId(session.getUserId())
-        .setRawData(linkedInJson)
+    LinkedInProfile linkedInProfile = LinkedInProfile.newBuilder()
+        .setUserId(this.getSession(req).getUserId())
+        .setData(getRequiredParameter(req, "data"))
         .setCreateTime(System.currentTimeMillis())
         .build();
-    Database.upsert(data);
-
-    // Response.
+    Database.upsert(linkedInProfile);
     return createSuccessResponse();
   }
 }

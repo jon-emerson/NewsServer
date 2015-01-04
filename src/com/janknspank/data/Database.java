@@ -317,17 +317,17 @@ public class Database {
    * Inserts the passed messages into the database.  All messages passed must be
    * of the same type.
    */
-  public static int insert(List<Message> messageList)
+  public static <T extends Message> int insert(Iterable<T> messages)
       throws ValidationException, DataInternalException {
-    if (messageList.size() == 0) {
+    if (Iterables.isEmpty(messages)) {
       return 0;
     }
 
-    Message firstMessage = Validator.assertValid(messageList.get(0));
+    Message firstMessage = Iterables.getFirst(messages, null);
     try {
       PreparedStatement stmt = Database.getRawInsertStatement(firstMessage);
-      for (int i = 1; i < messageList.size(); i++) {
-        Message message = Validator.assertValid(messageList.get(i));
+      for (T message : messages) {
+        Validator.assertValid(message);
         Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
             "Types do not match");
         prepareInsertOrUpdateStatement(stmt, message);
@@ -366,6 +366,21 @@ public class Database {
     }
     throw new IllegalStateException(
         "Class " + message.getClass().getName() + " has no primary key");
+  }
+
+  /**
+   * Returns the value of the passed {@code Message}'s primary key.
+   */
+  private static <T extends Message> Iterable<String> getPrimaryKeys(Iterable<T> messages)
+      throws ValidationException {
+    List<String> primaryKeys = Lists.newArrayList();
+    T firstMessage = Iterables.getFirst(messages, null);
+    for (T message : messages) {
+      Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
+          "Types do not match");
+      primaryKeys.add(getPrimaryKey(message));
+    }
+    return primaryKeys;
   }
 
   /**
@@ -432,18 +447,17 @@ public class Database {
    * Updates the passed messages, overwriting whatever was stored in the
    * database before.  Returns the number of modified objects.
    */
-  public static int update(List<Message> messageList)
+  public static <T extends Message> int update(Iterable<T> messages)
       throws ValidationException, DataInternalException {
-    if (messageList.size() == 0) {
+    if (Iterables.isEmpty(messages)) {
       return 0;
     }
 
-    Message firstMessage = messageList.get(0);
+    T firstMessage = Iterables.getFirst(messages, null);
     int columnCount = getColumnCount(firstMessage.getClass());
     try {
       PreparedStatement stmt = Database.getRawUpdateStatement(firstMessage);
-      for (int i = 0; i < messageList.size(); i++) {
-        Message message = messageList.get(i);
+      for (T message : messages) {
         Validator.assertValid(message);
         Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
             "Types do not match");
@@ -478,8 +492,7 @@ public class Database {
    */
   public static <T extends Message> T get(String primaryKey, Class<T> clazz)
       throws DataInternalException {
-    List<T> messages = get(ImmutableList.of(primaryKey), clazz);
-    return (messages.size() == 0) ? null : messages.get(0);
+    return Iterables.getFirst(get(ImmutableList.of(primaryKey), clazz), null);
   }
 
   /**
@@ -598,6 +611,21 @@ public class Database {
    */
   public static void delete(Message message) throws DataInternalException {
     deletePrimaryKey(getPrimaryKey(message), message.getClass());
+  }
+
+  /**
+   * Deletes the passed object from the database.
+   * @throws DataInternalException if the object could not be deleted, including
+   *     if it could not be found
+   */
+  public static <T extends Message> void delete(Iterable<T> messages) throws DataInternalException {
+    if (!Iterables.isEmpty(messages)) {
+      try {
+        deletePrimaryKeys(getPrimaryKeys(messages), Iterables.getFirst(messages, null).getClass());
+      } catch (ValidationException e) {
+        throw new DataInternalException("Internal error: " + e.getMessage(), e);
+      }
+    }
   }
 
   /**

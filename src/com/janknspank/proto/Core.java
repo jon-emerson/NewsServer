@@ -2268,27 +2268,27 @@ public final class Core {
   public interface ArticleKeywordOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional string article_id = 1;
+    // optional string url_id = 1;
     /**
-     * <code>optional string article_id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
-    boolean hasArticleId();
+    boolean hasUrlId();
     /**
-     * <code>optional string article_id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
-    java.lang.String getArticleId();
+    java.lang.String getUrlId();
     /**
-     * <code>optional string article_id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
     com.google.protobuf.ByteString
-        getArticleIdBytes();
+        getUrlIdBytes();
 
     // optional string keyword = 2;
     /**
      * <code>optional string keyword = 2;</code>
      *
      * <pre>
-     * the literal English keyword
+     * The literal English keyword.
      * </pre>
      */
     boolean hasKeyword();
@@ -2296,7 +2296,7 @@ public final class Core {
      * <code>optional string keyword = 2;</code>
      *
      * <pre>
-     * the literal English keyword
+     * The literal English keyword.
      * </pre>
      */
     java.lang.String getKeyword();
@@ -2304,7 +2304,7 @@ public final class Core {
      * <code>optional string keyword = 2;</code>
      *
      * <pre>
-     * the literal English keyword
+     * The literal English keyword.
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -2315,7 +2315,7 @@ public final class Core {
      * <code>optional int32 strength = 3;</code>
      *
      * <pre>
-     * number of occurences + other factors.
+     * Number of occurences + other factors.
      * </pre>
      */
     boolean hasStrength();
@@ -2323,7 +2323,7 @@ public final class Core {
      * <code>optional int32 strength = 3;</code>
      *
      * <pre>
-     * number of occurences + other factors.
+     * Number of occurences + other factors.
      * </pre>
      */
     int getStrength();
@@ -2411,7 +2411,7 @@ public final class Core {
             }
             case 10: {
               bitField0_ |= 0x00000001;
-              articleId_ = input.readBytes();
+              urlId_ = input.readBytes();
               break;
             }
             case 18: {
@@ -2469,20 +2469,20 @@ public final class Core {
     }
 
     private int bitField0_;
-    // optional string article_id = 1;
-    public static final int ARTICLE_ID_FIELD_NUMBER = 1;
-    private java.lang.Object articleId_;
+    // optional string url_id = 1;
+    public static final int URL_ID_FIELD_NUMBER = 1;
+    private java.lang.Object urlId_;
     /**
-     * <code>optional string article_id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
-    public boolean hasArticleId() {
+    public boolean hasUrlId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string article_id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
-    public java.lang.String getArticleId() {
-      java.lang.Object ref = articleId_;
+    public java.lang.String getUrlId() {
+      java.lang.Object ref = urlId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -2490,22 +2490,22 @@ public final class Core {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          articleId_ = s;
+          urlId_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string article_id = 1;</code>
+     * <code>optional string url_id = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getArticleIdBytes() {
-      java.lang.Object ref = articleId_;
+        getUrlIdBytes() {
+      java.lang.Object ref = urlId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        articleId_ = b;
+        urlId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -2519,7 +2519,7 @@ public final class Core {
      * <code>optional string keyword = 2;</code>
      *
      * <pre>
-     * the literal English keyword
+     * The literal English keyword.
      * </pre>
      */
     public boolean hasKeyword() {
@@ -2529,7 +2529,7 @@ public final class Core {
      * <code>optional string keyword = 2;</code>
      *
      * <pre>
-     * the literal English keyword
+     * The literal English keyword.
      * </pre>
      */
     public java.lang.String getKeyword() {
@@ -2550,7 +2550,7 @@ public final class Core {
      * <code>optional string keyword = 2;</code>
      *
      * <pre>
-     * the literal English keyword
+     * The literal English keyword.
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -2574,7 +2574,7 @@ public final class Core {
      * <code>optional int32 strength = 3;</code>
      *
      * <pre>
-     * number of occurences + other factors.
+     * Number of occurences + other factors.
      * </pre>
      */
     public boolean hasStrength() {
@@ -2584,7 +2584,7 @@ public final class Core {
      * <code>optional int32 strength = 3;</code>
      *
      * <pre>
-     * number of occurences + other factors.
+     * Number of occurences + other factors.
      * </pre>
      */
     public int getStrength() {
@@ -2650,7 +2650,7 @@ public final class Core {
     }
 
     private void initFields() {
-      articleId_ = "";
+      urlId_ = "";
       keyword_ = "";
       strength_ = 0;
       type_ = "";
@@ -2668,7 +2668,7 @@ public final class Core {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getArticleIdBytes());
+        output.writeBytes(1, getUrlIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getKeywordBytes());
@@ -2690,7 +2690,7 @@ public final class Core {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getArticleIdBytes());
+          .computeBytesSize(1, getUrlIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2820,7 +2820,7 @@ public final class Core {
 
       public Builder clear() {
         super.clear();
-        articleId_ = "";
+        urlId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         keyword_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2859,7 +2859,7 @@ public final class Core {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.articleId_ = articleId_;
+        result.urlId_ = urlId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -2888,9 +2888,9 @@ public final class Core {
 
       public Builder mergeFrom(com.janknspank.proto.Core.ArticleKeyword other) {
         if (other == com.janknspank.proto.Core.ArticleKeyword.getDefaultInstance()) return this;
-        if (other.hasArticleId()) {
+        if (other.hasUrlId()) {
           bitField0_ |= 0x00000001;
-          articleId_ = other.articleId_;
+          urlId_ = other.urlId_;
           onChanged();
         }
         if (other.hasKeyword()) {
@@ -2933,76 +2933,76 @@ public final class Core {
       }
       private int bitField0_;
 
-      // optional string article_id = 1;
-      private java.lang.Object articleId_ = "";
+      // optional string url_id = 1;
+      private java.lang.Object urlId_ = "";
       /**
-       * <code>optional string article_id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public boolean hasArticleId() {
+      public boolean hasUrlId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string article_id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public java.lang.String getArticleId() {
-        java.lang.Object ref = articleId_;
+      public java.lang.String getUrlId() {
+        java.lang.Object ref = urlId_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          articleId_ = s;
+          urlId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string article_id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getArticleIdBytes() {
-        java.lang.Object ref = articleId_;
+          getUrlIdBytes() {
+        java.lang.Object ref = urlId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          articleId_ = b;
+          urlId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string article_id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public Builder setArticleId(
+      public Builder setUrlId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        articleId_ = value;
+        urlId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string article_id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public Builder clearArticleId() {
+      public Builder clearUrlId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        articleId_ = getDefaultInstance().getArticleId();
+        urlId_ = getDefaultInstance().getUrlId();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string article_id = 1;</code>
+       * <code>optional string url_id = 1;</code>
        */
-      public Builder setArticleIdBytes(
+      public Builder setUrlIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        articleId_ = value;
+        urlId_ = value;
         onChanged();
         return this;
       }
@@ -3013,7 +3013,7 @@ public final class Core {
        * <code>optional string keyword = 2;</code>
        *
        * <pre>
-       * the literal English keyword
+       * The literal English keyword.
        * </pre>
        */
       public boolean hasKeyword() {
@@ -3023,7 +3023,7 @@ public final class Core {
        * <code>optional string keyword = 2;</code>
        *
        * <pre>
-       * the literal English keyword
+       * The literal English keyword.
        * </pre>
        */
       public java.lang.String getKeyword() {
@@ -3041,7 +3041,7 @@ public final class Core {
        * <code>optional string keyword = 2;</code>
        *
        * <pre>
-       * the literal English keyword
+       * The literal English keyword.
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -3061,7 +3061,7 @@ public final class Core {
        * <code>optional string keyword = 2;</code>
        *
        * <pre>
-       * the literal English keyword
+       * The literal English keyword.
        * </pre>
        */
       public Builder setKeyword(
@@ -3078,7 +3078,7 @@ public final class Core {
        * <code>optional string keyword = 2;</code>
        *
        * <pre>
-       * the literal English keyword
+       * The literal English keyword.
        * </pre>
        */
       public Builder clearKeyword() {
@@ -3091,7 +3091,7 @@ public final class Core {
        * <code>optional string keyword = 2;</code>
        *
        * <pre>
-       * the literal English keyword
+       * The literal English keyword.
        * </pre>
        */
       public Builder setKeywordBytes(
@@ -3111,7 +3111,7 @@ public final class Core {
        * <code>optional int32 strength = 3;</code>
        *
        * <pre>
-       * number of occurences + other factors.
+       * Number of occurences + other factors.
        * </pre>
        */
       public boolean hasStrength() {
@@ -3121,7 +3121,7 @@ public final class Core {
        * <code>optional int32 strength = 3;</code>
        *
        * <pre>
-       * number of occurences + other factors.
+       * Number of occurences + other factors.
        * </pre>
        */
       public int getStrength() {
@@ -3131,7 +3131,7 @@ public final class Core {
        * <code>optional int32 strength = 3;</code>
        *
        * <pre>
-       * number of occurences + other factors.
+       * Number of occurences + other factors.
        * </pre>
        */
       public Builder setStrength(int value) {
@@ -3144,7 +3144,7 @@ public final class Core {
        * <code>optional int32 strength = 3;</code>
        *
        * <pre>
-       * number of occurences + other factors.
+       * Number of occurences + other factors.
        * </pre>
        */
       public Builder clearStrength() {
@@ -7228,20 +7228,20 @@ public final class Core {
     com.google.protobuf.ByteString
         getUserIdBytes();
 
-    // optional string raw_data = 2;
+    // optional string data = 2;
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    boolean hasRawData();
+    boolean hasData();
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    java.lang.String getRawData();
+    java.lang.String getData();
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
     com.google.protobuf.ByteString
-        getRawDataBytes();
+        getDataBytes();
 
     // optional int64 create_time = 3;
     /**
@@ -7311,7 +7311,7 @@ public final class Core {
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              rawData_ = input.readBytes();
+              data_ = input.readBytes();
               break;
             }
             case 24: {
@@ -7402,20 +7402,20 @@ public final class Core {
       }
     }
 
-    // optional string raw_data = 2;
-    public static final int RAW_DATA_FIELD_NUMBER = 2;
-    private java.lang.Object rawData_;
+    // optional string data = 2;
+    public static final int DATA_FIELD_NUMBER = 2;
+    private java.lang.Object data_;
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    public boolean hasRawData() {
+    public boolean hasData() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    public java.lang.String getRawData() {
-      java.lang.Object ref = rawData_;
+    public java.lang.String getData() {
+      java.lang.Object ref = data_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -7423,22 +7423,22 @@ public final class Core {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          rawData_ = s;
+          data_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getRawDataBytes() {
-      java.lang.Object ref = rawData_;
+        getDataBytes() {
+      java.lang.Object ref = data_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        rawData_ = b;
+        data_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -7463,7 +7463,7 @@ public final class Core {
 
     private void initFields() {
       userId_ = "";
-      rawData_ = "";
+      data_ = "";
       createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -7482,7 +7482,7 @@ public final class Core {
         output.writeBytes(1, getUserIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getRawDataBytes());
+        output.writeBytes(2, getDataBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, createTime_);
@@ -7502,7 +7502,7 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getRawDataBytes());
+          .computeBytesSize(2, getDataBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -7626,7 +7626,7 @@ public final class Core {
         super.clear();
         userId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        rawData_ = "";
+        data_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         createTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -7665,7 +7665,7 @@ public final class Core {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.rawData_ = rawData_;
+        result.data_ = data_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -7691,9 +7691,9 @@ public final class Core {
           userId_ = other.userId_;
           onChanged();
         }
-        if (other.hasRawData()) {
+        if (other.hasData()) {
           bitField0_ |= 0x00000002;
-          rawData_ = other.rawData_;
+          data_ = other.data_;
           onChanged();
         }
         if (other.hasCreateTime()) {
@@ -7800,76 +7800,76 @@ public final class Core {
         return this;
       }
 
-      // optional string raw_data = 2;
-      private java.lang.Object rawData_ = "";
+      // optional string data = 2;
+      private java.lang.Object data_ = "";
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public boolean hasRawData() {
+      public boolean hasData() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public java.lang.String getRawData() {
-        java.lang.Object ref = rawData_;
+      public java.lang.String getData() {
+        java.lang.Object ref = data_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          rawData_ = s;
+          data_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getRawDataBytes() {
-        java.lang.Object ref = rawData_;
+          getDataBytes() {
+        java.lang.Object ref = data_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          rawData_ = b;
+          data_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder setRawData(
+      public Builder setData(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        rawData_ = value;
+        data_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder clearRawData() {
+      public Builder clearData() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        rawData_ = getDefaultInstance().getRawData();
+        data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder setRawDataBytes(
+      public Builder setDataBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        rawData_ = value;
+        data_ = value;
         onChanged();
         return this;
       }
@@ -7936,20 +7936,20 @@ public final class Core {
     com.google.protobuf.ByteString
         getUserIdBytes();
 
-    // optional string raw_data = 2;
+    // optional string data = 2;
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    boolean hasRawData();
+    boolean hasData();
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    java.lang.String getRawData();
+    java.lang.String getData();
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
     com.google.protobuf.ByteString
-        getRawDataBytes();
+        getDataBytes();
 
     // optional int64 create_time = 3;
     /**
@@ -8019,7 +8019,7 @@ public final class Core {
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              rawData_ = input.readBytes();
+              data_ = input.readBytes();
               break;
             }
             case 24: {
@@ -8110,20 +8110,20 @@ public final class Core {
       }
     }
 
-    // optional string raw_data = 2;
-    public static final int RAW_DATA_FIELD_NUMBER = 2;
-    private java.lang.Object rawData_;
+    // optional string data = 2;
+    public static final int DATA_FIELD_NUMBER = 2;
+    private java.lang.Object data_;
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    public boolean hasRawData() {
+    public boolean hasData() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    public java.lang.String getRawData() {
-      java.lang.Object ref = rawData_;
+    public java.lang.String getData() {
+      java.lang.Object ref = data_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -8131,22 +8131,22 @@ public final class Core {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          rawData_ = s;
+          data_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getRawDataBytes() {
-      java.lang.Object ref = rawData_;
+        getDataBytes() {
+      java.lang.Object ref = data_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        rawData_ = b;
+        data_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -8171,7 +8171,7 @@ public final class Core {
 
     private void initFields() {
       userId_ = "";
-      rawData_ = "";
+      data_ = "";
       createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -8190,7 +8190,7 @@ public final class Core {
         output.writeBytes(1, getUserIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getRawDataBytes());
+        output.writeBytes(2, getDataBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, createTime_);
@@ -8210,7 +8210,7 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getRawDataBytes());
+          .computeBytesSize(2, getDataBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -8334,7 +8334,7 @@ public final class Core {
         super.clear();
         userId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        rawData_ = "";
+        data_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         createTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -8373,7 +8373,7 @@ public final class Core {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.rawData_ = rawData_;
+        result.data_ = data_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -8399,9 +8399,9 @@ public final class Core {
           userId_ = other.userId_;
           onChanged();
         }
-        if (other.hasRawData()) {
+        if (other.hasData()) {
           bitField0_ |= 0x00000002;
-          rawData_ = other.rawData_;
+          data_ = other.data_;
           onChanged();
         }
         if (other.hasCreateTime()) {
@@ -8508,76 +8508,76 @@ public final class Core {
         return this;
       }
 
-      // optional string raw_data = 2;
-      private java.lang.Object rawData_ = "";
+      // optional string data = 2;
+      private java.lang.Object data_ = "";
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public boolean hasRawData() {
+      public boolean hasData() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public java.lang.String getRawData() {
-        java.lang.Object ref = rawData_;
+      public java.lang.String getData() {
+        java.lang.Object ref = data_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          rawData_ = s;
+          data_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getRawDataBytes() {
-        java.lang.Object ref = rawData_;
+          getDataBytes() {
+        java.lang.Object ref = data_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          rawData_ = b;
+          data_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder setRawData(
+      public Builder setData(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        rawData_ = value;
+        data_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder clearRawData() {
+      public Builder clearData() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        rawData_ = getDefaultInstance().getRawData();
+        data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder setRawDataBytes(
+      public Builder setDataBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        rawData_ = value;
+        data_ = value;
         onChanged();
         return this;
       }
@@ -8644,20 +8644,20 @@ public final class Core {
     com.google.protobuf.ByteString
         getUserIdBytes();
 
-    // optional string raw_data = 2;
+    // optional string data = 2;
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    boolean hasRawData();
+    boolean hasData();
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    java.lang.String getRawData();
+    java.lang.String getData();
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
     com.google.protobuf.ByteString
-        getRawDataBytes();
+        getDataBytes();
 
     // optional int64 create_time = 3;
     /**
@@ -8727,7 +8727,7 @@ public final class Core {
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              rawData_ = input.readBytes();
+              data_ = input.readBytes();
               break;
             }
             case 24: {
@@ -8818,20 +8818,20 @@ public final class Core {
       }
     }
 
-    // optional string raw_data = 2;
-    public static final int RAW_DATA_FIELD_NUMBER = 2;
-    private java.lang.Object rawData_;
+    // optional string data = 2;
+    public static final int DATA_FIELD_NUMBER = 2;
+    private java.lang.Object data_;
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    public boolean hasRawData() {
+    public boolean hasData() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
-    public java.lang.String getRawData() {
-      java.lang.Object ref = rawData_;
+    public java.lang.String getData() {
+      java.lang.Object ref = data_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -8839,22 +8839,22 @@ public final class Core {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          rawData_ = s;
+          data_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string raw_data = 2;</code>
+     * <code>optional string data = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getRawDataBytes() {
-      java.lang.Object ref = rawData_;
+        getDataBytes() {
+      java.lang.Object ref = data_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        rawData_ = b;
+        data_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -8879,7 +8879,7 @@ public final class Core {
 
     private void initFields() {
       userId_ = "";
-      rawData_ = "";
+      data_ = "";
       createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -8898,7 +8898,7 @@ public final class Core {
         output.writeBytes(1, getUserIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getRawDataBytes());
+        output.writeBytes(2, getDataBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, createTime_);
@@ -8918,7 +8918,7 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getRawDataBytes());
+          .computeBytesSize(2, getDataBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -9042,7 +9042,7 @@ public final class Core {
         super.clear();
         userId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        rawData_ = "";
+        data_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         createTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -9081,7 +9081,7 @@ public final class Core {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.rawData_ = rawData_;
+        result.data_ = data_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -9107,9 +9107,9 @@ public final class Core {
           userId_ = other.userId_;
           onChanged();
         }
-        if (other.hasRawData()) {
+        if (other.hasData()) {
           bitField0_ |= 0x00000002;
-          rawData_ = other.rawData_;
+          data_ = other.data_;
           onChanged();
         }
         if (other.hasCreateTime()) {
@@ -9216,76 +9216,76 @@ public final class Core {
         return this;
       }
 
-      // optional string raw_data = 2;
-      private java.lang.Object rawData_ = "";
+      // optional string data = 2;
+      private java.lang.Object data_ = "";
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public boolean hasRawData() {
+      public boolean hasData() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public java.lang.String getRawData() {
-        java.lang.Object ref = rawData_;
+      public java.lang.String getData() {
+        java.lang.Object ref = data_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          rawData_ = s;
+          data_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getRawDataBytes() {
-        java.lang.Object ref = rawData_;
+          getDataBytes() {
+        java.lang.Object ref = data_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          rawData_ = b;
+          data_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder setRawData(
+      public Builder setData(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        rawData_ = value;
+        data_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder clearRawData() {
+      public Builder clearData() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        rawData_ = getDefaultInstance().getRawData();
+        data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string raw_data = 2;</code>
+       * <code>optional string data = 2;</code>
        */
-      public Builder setRawDataBytes(
+      public Builder setDataBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        rawData_ = value;
+        data_ = value;
         onChanged();
         return this;
       }
@@ -10831,6 +10831,1257 @@ public final class Core {
     // @@protoc_insertion_point(class_scope:UserUrlFavorite)
   }
 
+  public interface UserInterestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string id = 1;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional string user_id = 2;
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    // optional string keyword = 3;
+    /**
+     * <code>optional string keyword = 3;</code>
+     */
+    boolean hasKeyword();
+    /**
+     * <code>optional string keyword = 3;</code>
+     */
+    java.lang.String getKeyword();
+    /**
+     * <code>optional string keyword = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeywordBytes();
+
+    // optional string source = 4;
+    /**
+     * <code>optional string source = 4;</code>
+     *
+     * <pre>
+     * Where did we get this interest from?
+     * 'ab' = address book
+     * 'lp' = linkedin profile
+     * 'lc' = linkedin contacts
+     * 'u' = from the user himself, explicitly
+     * </pre>
+     */
+    boolean hasSource();
+    /**
+     * <code>optional string source = 4;</code>
+     *
+     * <pre>
+     * Where did we get this interest from?
+     * 'ab' = address book
+     * 'lp' = linkedin profile
+     * 'lc' = linkedin contacts
+     * 'u' = from the user himself, explicitly
+     * </pre>
+     */
+    java.lang.String getSource();
+    /**
+     * <code>optional string source = 4;</code>
+     *
+     * <pre>
+     * Where did we get this interest from?
+     * 'ab' = address book
+     * 'lp' = linkedin profile
+     * 'lc' = linkedin contacts
+     * 'u' = from the user himself, explicitly
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getSourceBytes();
+
+    // optional string type = 5;
+    /**
+     * <code>optional string type = 5;</code>
+     *
+     * <pre>
+     * 'o' for organization, 'p' for person, 'l' for location.
+     * If not known, NULL.
+     * </pre>
+     */
+    boolean hasType();
+    /**
+     * <code>optional string type = 5;</code>
+     *
+     * <pre>
+     * 'o' for organization, 'p' for person, 'l' for location.
+     * If not known, NULL.
+     * </pre>
+     */
+    java.lang.String getType();
+    /**
+     * <code>optional string type = 5;</code>
+     *
+     * <pre>
+     * 'o' for organization, 'p' for person, 'l' for location.
+     * If not known, NULL.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTypeBytes();
+  }
+  /**
+   * Protobuf type {@code UserInterest}
+   */
+  public static final class UserInterest extends
+      com.google.protobuf.GeneratedMessage
+      implements UserInterestOrBuilder {
+    // Use UserInterest.newBuilder() to construct.
+    private UserInterest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserInterest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserInterest defaultInstance;
+    public static UserInterest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserInterest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserInterest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              keyword_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              source_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              type_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.Core.internal_static_UserInterest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.Core.internal_static_UserInterest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.Core.UserInterest.class, com.janknspank.proto.Core.UserInterest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserInterest> PARSER =
+        new com.google.protobuf.AbstractParser<UserInterest>() {
+      public UserInterest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserInterest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserInterest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string user_id = 2;
+    public static final int USER_ID_FIELD_NUMBER = 2;
+    private java.lang.Object userId_;
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string keyword = 3;
+    public static final int KEYWORD_FIELD_NUMBER = 3;
+    private java.lang.Object keyword_;
+    /**
+     * <code>optional string keyword = 3;</code>
+     */
+    public boolean hasKeyword() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string keyword = 3;</code>
+     */
+    public java.lang.String getKeyword() {
+      java.lang.Object ref = keyword_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          keyword_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string keyword = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeywordBytes() {
+      java.lang.Object ref = keyword_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        keyword_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string source = 4;
+    public static final int SOURCE_FIELD_NUMBER = 4;
+    private java.lang.Object source_;
+    /**
+     * <code>optional string source = 4;</code>
+     *
+     * <pre>
+     * Where did we get this interest from?
+     * 'ab' = address book
+     * 'lp' = linkedin profile
+     * 'lc' = linkedin contacts
+     * 'u' = from the user himself, explicitly
+     * </pre>
+     */
+    public boolean hasSource() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string source = 4;</code>
+     *
+     * <pre>
+     * Where did we get this interest from?
+     * 'ab' = address book
+     * 'lp' = linkedin profile
+     * 'lc' = linkedin contacts
+     * 'u' = from the user himself, explicitly
+     * </pre>
+     */
+    public java.lang.String getSource() {
+      java.lang.Object ref = source_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          source_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string source = 4;</code>
+     *
+     * <pre>
+     * Where did we get this interest from?
+     * 'ab' = address book
+     * 'lp' = linkedin profile
+     * 'lc' = linkedin contacts
+     * 'u' = from the user himself, explicitly
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getSourceBytes() {
+      java.lang.Object ref = source_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        source_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string type = 5;
+    public static final int TYPE_FIELD_NUMBER = 5;
+    private java.lang.Object type_;
+    /**
+     * <code>optional string type = 5;</code>
+     *
+     * <pre>
+     * 'o' for organization, 'p' for person, 'l' for location.
+     * If not known, NULL.
+     * </pre>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string type = 5;</code>
+     *
+     * <pre>
+     * 'o' for organization, 'p' for person, 'l' for location.
+     * If not known, NULL.
+     * </pre>
+     */
+    public java.lang.String getType() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          type_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string type = 5;</code>
+     *
+     * <pre>
+     * 'o' for organization, 'p' for person, 'l' for location.
+     * If not known, NULL.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTypeBytes() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        type_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      id_ = "";
+      userId_ = "";
+      keyword_ = "";
+      source_ = "";
+      type_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getKeywordBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getSourceBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getTypeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getKeywordBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getSourceBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getTypeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.Core.UserInterest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.UserInterest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.Core.UserInterest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code UserInterest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.Core.UserInterestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.Core.internal_static_UserInterest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.Core.internal_static_UserInterest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.Core.UserInterest.class, com.janknspank.proto.Core.UserInterest.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.Core.UserInterest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        keyword_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        source_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        type_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.Core.internal_static_UserInterest_descriptor;
+      }
+
+      public com.janknspank.proto.Core.UserInterest getDefaultInstanceForType() {
+        return com.janknspank.proto.Core.UserInterest.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.Core.UserInterest build() {
+        com.janknspank.proto.Core.UserInterest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.Core.UserInterest buildPartial() {
+        com.janknspank.proto.Core.UserInterest result = new com.janknspank.proto.Core.UserInterest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.keyword_ = keyword_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.source_ = source_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.type_ = type_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.Core.UserInterest) {
+          return mergeFrom((com.janknspank.proto.Core.UserInterest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.Core.UserInterest other) {
+        if (other == com.janknspank.proto.Core.UserInterest.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000002;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasKeyword()) {
+          bitField0_ |= 0x00000004;
+          keyword_ = other.keyword_;
+          onChanged();
+        }
+        if (other.hasSource()) {
+          bitField0_ |= 0x00000008;
+          source_ = other.source_;
+          onChanged();
+        }
+        if (other.hasType()) {
+          bitField0_ |= 0x00000010;
+          type_ = other.type_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.Core.UserInterest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.Core.UserInterest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string user_id = 2;
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string keyword = 3;
+      private java.lang.Object keyword_ = "";
+      /**
+       * <code>optional string keyword = 3;</code>
+       */
+      public boolean hasKeyword() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string keyword = 3;</code>
+       */
+      public java.lang.String getKeyword() {
+        java.lang.Object ref = keyword_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          keyword_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string keyword = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeywordBytes() {
+        java.lang.Object ref = keyword_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          keyword_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string keyword = 3;</code>
+       */
+      public Builder setKeyword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        keyword_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string keyword = 3;</code>
+       */
+      public Builder clearKeyword() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        keyword_ = getDefaultInstance().getKeyword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string keyword = 3;</code>
+       */
+      public Builder setKeywordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        keyword_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string source = 4;
+      private java.lang.Object source_ = "";
+      /**
+       * <code>optional string source = 4;</code>
+       *
+       * <pre>
+       * Where did we get this interest from?
+       * 'ab' = address book
+       * 'lp' = linkedin profile
+       * 'lc' = linkedin contacts
+       * 'u' = from the user himself, explicitly
+       * </pre>
+       */
+      public boolean hasSource() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string source = 4;</code>
+       *
+       * <pre>
+       * Where did we get this interest from?
+       * 'ab' = address book
+       * 'lp' = linkedin profile
+       * 'lc' = linkedin contacts
+       * 'u' = from the user himself, explicitly
+       * </pre>
+       */
+      public java.lang.String getSource() {
+        java.lang.Object ref = source_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          source_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string source = 4;</code>
+       *
+       * <pre>
+       * Where did we get this interest from?
+       * 'ab' = address book
+       * 'lp' = linkedin profile
+       * 'lc' = linkedin contacts
+       * 'u' = from the user himself, explicitly
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getSourceBytes() {
+        java.lang.Object ref = source_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          source_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string source = 4;</code>
+       *
+       * <pre>
+       * Where did we get this interest from?
+       * 'ab' = address book
+       * 'lp' = linkedin profile
+       * 'lc' = linkedin contacts
+       * 'u' = from the user himself, explicitly
+       * </pre>
+       */
+      public Builder setSource(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        source_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string source = 4;</code>
+       *
+       * <pre>
+       * Where did we get this interest from?
+       * 'ab' = address book
+       * 'lp' = linkedin profile
+       * 'lc' = linkedin contacts
+       * 'u' = from the user himself, explicitly
+       * </pre>
+       */
+      public Builder clearSource() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        source_ = getDefaultInstance().getSource();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string source = 4;</code>
+       *
+       * <pre>
+       * Where did we get this interest from?
+       * 'ab' = address book
+       * 'lp' = linkedin profile
+       * 'lc' = linkedin contacts
+       * 'u' = from the user himself, explicitly
+       * </pre>
+       */
+      public Builder setSourceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        source_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string type = 5;
+      private java.lang.Object type_ = "";
+      /**
+       * <code>optional string type = 5;</code>
+       *
+       * <pre>
+       * 'o' for organization, 'p' for person, 'l' for location.
+       * If not known, NULL.
+       * </pre>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string type = 5;</code>
+       *
+       * <pre>
+       * 'o' for organization, 'p' for person, 'l' for location.
+       * If not known, NULL.
+       * </pre>
+       */
+      public java.lang.String getType() {
+        java.lang.Object ref = type_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          type_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string type = 5;</code>
+       *
+       * <pre>
+       * 'o' for organization, 'p' for person, 'l' for location.
+       * If not known, NULL.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTypeBytes() {
+        java.lang.Object ref = type_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          type_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string type = 5;</code>
+       *
+       * <pre>
+       * 'o' for organization, 'p' for person, 'l' for location.
+       * If not known, NULL.
+       * </pre>
+       */
+      public Builder setType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string type = 5;</code>
+       *
+       * <pre>
+       * 'o' for organization, 'p' for person, 'l' for location.
+       * If not known, NULL.
+       * </pre>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        type_ = getDefaultInstance().getType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string type = 5;</code>
+       *
+       * <pre>
+       * 'o' for organization, 'p' for person, 'l' for location.
+       * If not known, NULL.
+       * </pre>
+       */
+      public Builder setTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:UserInterest)
+    }
+
+    static {
+      defaultInstance = new UserInterest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:UserInterest)
+  }
+
   public static final int REQUIRED_FIELD_NUMBER = 60001;
   /**
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
@@ -10930,6 +12181,11 @@ public final class Core {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_UserUrlFavorite_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_UserInterest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_UserInterest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10948,54 +12204,58 @@ public final class Core {
       "ion\030\007 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\timage_url\030\010 \001(\tB" +
       "\005\230\246\035\377\005\022$\n\014article_body\030\t \001(\tB\016\210\246\035\001\240\246\035\003\230\246" +
       "\035\200\240\006\022 \n\016published_time\030\n \001(\003B\010\210\246\035\001\220\246\035\003\022\025" +
-      "\n\rmodified_time\030\013 \001(\003\"\211\001\n\016ArticleKeyword",
-      "\022$\n\narticle_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\240\246\035\003\022\035" +
-      "\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\0352\022\026\n\010strengt" +
-      "h\030\003 \001(\005B\004\210\246\035\001\022\032\n\004type\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035" +
-      "\024\"\222\001\n\004Link\022#\n\rorigin_url_id\030\001 \001(\tB\014\210\246\035\001\220" +
-      "\246\035\003\230\246\035\030\022(\n\022destination_url_id\030\002 \001(\tB\014\210\246\035" +
-      "\001\220\246\035\003\230\246\035\030\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022" +
-      "\035\n\017last_found_time\030\004 \001(\003B\004\210\246\035\001\"\253\001\n\003Url\022\032" +
-      "\n\003url\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030\002 \001(\tB\014" +
-      "\210\246\035\001\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246\035\001\022" +
-      "\034\n\016discovery_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017last_cr",
-      "awl_time\030\005 \001(\003\022\034\n\016crawl_priority\030\006 \001(\003B\004" +
-      "\220\246\035\003\"\347\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022" +
-      "\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001" +
-      "\220\246\035\004\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013" +
-      "facebook_id\030\005 \001(\tB\004\230\246\035\030\022)\n\017password_sha2" +
-      "56\030\006 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013create_tim" +
-      "e\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001(\003\"g" +
-      "\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002" +
-      "\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013" +
-      "create_time\030\003 \001(\003B\004\210\246\035\001\"i\n\017LinkedInProfi",
-      "le\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw" +
-      "_data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003" +
-      " \001(\003B\004\210\246\035\001\"m\n\023LinkedInConnections\022\035\n\007use" +
-      "r_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 \001" +
-      "(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035" +
-      "\001\"e\n\013AddressBook\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220" +
-      "\246\035\002\230\246\035\030\022\034\n\010raw_data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n" +
-      "\013create_time\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrlRatin" +
-      "g\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_" +
-      "id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 \001(\005B\004",
-      "\210\246\035\001\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"m\n\017UserU" +
-      "rlFavorite\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035" +
-      "\030\022\034\n\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013creat" +
-      "e_time\030\003 \001(\003B\010\220\246\035\005\210\246\035\001*\033\n\010Required\022\007\n\003YE" +
-      "S\020\001\022\006\n\002NO\020\002*U\n\rStorageMethod\022\010\n\004BLOB\020\001\022\017" +
-      "\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022\020\n\014UNIQUE_IND" +
-      "EX\020\004\022\014\n\010PULL_OUT\020\005*F\n\023ClientSerializatio" +
-      "n\022\013\n\007INCLUDE\020\001\022\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n" +
-      "\007EXCLUDE\020\003:@\n\010required\022\035.google.protobuf" +
-      ".FieldOptions\030\341\324\003 \001(\0162\t.Required:\002NO:M\n\016",
-      "storage_method\022\035.google.protobuf.FieldOp" +
-      "tions\030\342\324\003 \001(\0162\016.StorageMethod:\004BLOB::\n\rs" +
-      "tring_length\022\035.google.protobuf.FieldOpti" +
-      "ons\030\343\324\003 \001(\005:\002-1:\\\n\024client_serialization\022" +
-      "\035.google.protobuf.FieldOptions\030\344\324\003 \001(\0162\024" +
-      ".ClientSerialization:\007INCLUDEB\037\n\024com.jan" +
-      "knspank.proto\200\001\000\210\001\000\220\001\000"
+      "\n\rmodified_time\030\013 \001(\003\"\205\001\n\016ArticleKeyword",
+      "\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\240\246\035\003\022\035\n\007ke" +
+      "yword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\003 " +
+      "\001(\005B\004\210\246\035\001\022\032\n\004type\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\001\"\222\001" +
+      "\n\004Link\022#\n\rorigin_url_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230" +
+      "\246\035\030\022(\n\022destination_url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035" +
+      "\003\230\246\035\030\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022\035\n\017l" +
+      "ast_found_time\030\004 \001(\003B\004\210\246\035\001\"\253\001\n\003Url\022\032\n\003ur" +
+      "l\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030\002 \001(\tB\014\210\246\035\001" +
+      "\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246\035\001\022\034\n\016d" +
+      "iscovery_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017last_crawl_",
+      "time\030\005 \001(\003\022\034\n\016crawl_priority\030\006 \001(\003B\004\220\246\035\003" +
+      "\"\347\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\022\n\004n" +
+      "ame\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004" +
+      "\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013face" +
+      "book_id\030\005 \001(\tB\004\230\246\035\030\022)\n\017password_sha256\030\006" +
+      " \001(\tB\020\210\246\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013create_time\030\007 " +
+      "\001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001(\003\"g\n\007Se" +
+      "ssion\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200" +
+      "\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013crea" +
+      "te_time\030\003 \001(\003B\004\210\246\035\001\"e\n\017LinkedInProfile\022\035",
+      "\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 " +
+      "\001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246" +
+      "\035\001\"i\n\023LinkedInConnections\022\035\n\007user_id\030\001 \001" +
+      "(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200" +
+      "\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"a\n\013Address" +
+      "Book\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004d" +
+      "ata\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001" +
+      "(\003B\004\210\246\035\001\"}\n\rUserUrlRating\022\035\n\007user_id\030\001 \001" +
+      "(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246" +
+      "\035\003\230\246\035\030\022\024\n\006rating\030\003 \001(\005B\004\210\246\035\001\022\031\n\013create_t",
+      "ime\030\004 \001(\003B\004\210\246\035\001\"m\n\017UserUrlFavorite\022\035\n\007us" +
+      "er_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(" +
+      "\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013create_time\030\003 \001(\003B\010\220\246" +
+      "\035\005\210\246\035\001\"\230\001\n\014UserInterest\022\030\n\002id\030\001 \001(\tB\014\210\246\035" +
+      "\001\220\246\035\002\230\246\035\030\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030" +
+      "\022\035\n\007keyword\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\034\n\006sourc" +
+      "e\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\022\n\004type\030\005 \001(\tB\004\230\246\035" +
+      "\001*\033\n\010Required\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\rStorag" +
+      "eMethod\022\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005IN" +
+      "DEX\020\003\022\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005*F\n",
+      "\023ClientSerialization\022\013\n\007INCLUDE\020\001\022\025\n\021INC" +
+      "LUDE_AS_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010require" +
+      "d\022\035.google.protobuf.FieldOptions\030\341\324\003 \001(\016" +
+      "2\t.Required:\002NO:M\n\016storage_method\022\035.goog" +
+      "le.protobuf.FieldOptions\030\342\324\003 \001(\0162\016.Stora" +
+      "geMethod:\004BLOB::\n\rstring_length\022\035.google" +
+      ".protobuf.FieldOptions\030\343\324\003 \001(\005:\002-1:\\\n\024cl" +
+      "ient_serialization\022\035.google.protobuf.Fie" +
+      "ldOptions\030\344\324\003 \001(\0162\024.ClientSerialization:" +
+      "\007INCLUDEB\037\n\024com.janknspank.proto\200\001\000\210\001\000\220\001",
+      "\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11013,7 +12273,7 @@ public final class Core {
           internal_static_ArticleKeyword_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleKeyword_descriptor,
-              new java.lang.String[] { "ArticleId", "Keyword", "Strength", "Type", });
+              new java.lang.String[] { "UrlId", "Keyword", "Strength", "Type", });
           internal_static_Link_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_Link_fieldAccessorTable = new
@@ -11043,19 +12303,19 @@ public final class Core {
           internal_static_LinkedInProfile_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LinkedInProfile_descriptor,
-              new java.lang.String[] { "UserId", "RawData", "CreateTime", });
+              new java.lang.String[] { "UserId", "Data", "CreateTime", });
           internal_static_LinkedInConnections_descriptor =
             getDescriptor().getMessageTypes().get(7);
           internal_static_LinkedInConnections_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LinkedInConnections_descriptor,
-              new java.lang.String[] { "UserId", "RawData", "CreateTime", });
+              new java.lang.String[] { "UserId", "Data", "CreateTime", });
           internal_static_AddressBook_descriptor =
             getDescriptor().getMessageTypes().get(8);
           internal_static_AddressBook_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_AddressBook_descriptor,
-              new java.lang.String[] { "UserId", "RawData", "CreateTime", });
+              new java.lang.String[] { "UserId", "Data", "CreateTime", });
           internal_static_UserUrlRating_descriptor =
             getDescriptor().getMessageTypes().get(9);
           internal_static_UserUrlRating_fieldAccessorTable = new
@@ -11068,6 +12328,12 @@ public final class Core {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UserUrlFavorite_descriptor,
               new java.lang.String[] { "UserId", "UrlId", "CreateTime", });
+          internal_static_UserInterest_descriptor =
+            getDescriptor().getMessageTypes().get(11);
+          internal_static_UserInterest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_UserInterest_descriptor,
+              new java.lang.String[] { "Id", "UserId", "Keyword", "Source", "Type", });
           required.internalInit(descriptor.getExtensions().get(0));
           storageMethod.internalInit(descriptor.getExtensions().get(1));
           stringLength.internalInit(descriptor.getExtensions().get(2));
@@ -11175,6 +12441,19 @@ public final class Core {
           registry.add(com.janknspank.proto.Core.stringLength);
           registry.add(com.janknspank.proto.Core.required);
           registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.required);
+          registry.add(com.janknspank.proto.Core.storageMethod);
+          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Core.stringLength);
           return registry;
         }
       };

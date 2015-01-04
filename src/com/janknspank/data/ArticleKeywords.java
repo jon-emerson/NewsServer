@@ -202,7 +202,7 @@ public class ArticleKeywords {
     for (String keyword : keywords) {
       if (isValidKeyword(keyword)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setArticleId(article.getUrlId())
+            .setUrlId(article.getUrlId())
             .setKeyword(cleanKeyword(keyword))
             .setStrength(1)
             .setType("k")
@@ -226,7 +226,7 @@ public class ArticleKeywords {
       location = cleanKeyword(location);
       if (isValidKeyword(location)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setArticleId(article.getUrlId())
+            .setUrlId(article.getUrlId())
             .setKeyword(location)
             .setStrength(Math.max(15,
                 interpretedData.getLocationCount(location) * 2))
@@ -238,7 +238,7 @@ public class ArticleKeywords {
       person = cleanKeyword(person);
       if (isValidKeyword(person)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setArticleId(article.getUrlId())
+            .setUrlId(article.getUrlId())
             .setKeyword(person)
             .setStrength(Math.max(20,
                 interpretedData.getPersonCount(person) * 5))
@@ -250,7 +250,7 @@ public class ArticleKeywords {
       organization = cleanKeyword(organization);
       if (isValidKeyword(organization)) {
         articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setArticleId(article.getUrlId())
+            .setUrlId(article.getUrlId())
             .setKeyword(organization)
             .setStrength(Math.max(20,
                 interpretedData.getOrganizationCount(organization) * 5))
@@ -292,5 +292,8 @@ public class ArticleKeywords {
   public static void main(String args[]) throws Exception {
     Connection connection = Database.getConnection();
     connection.prepareStatement(Database.getCreateTableStatement(ArticleKeyword.class)).execute();
+    for (String statement : Database.getCreateIndexesStatement(ArticleKeyword.class)) {
+      connection.prepareStatement(statement).execute();
+    }
   }
 }

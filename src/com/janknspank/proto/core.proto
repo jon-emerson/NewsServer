@@ -113,21 +113,21 @@ message Article {
 }
 
 message ArticleKeyword {
-  optional string article_id = 1 [
+  optional string url_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
     (string_length) = 24,
     (client_serialization) = EXCLUDE
   ];
 
-  // the literal English keyword
+  // The literal English keyword.
   optional string keyword = 2 [
     (required) = YES,
-    (storage_method) = PULL_OUT,
+    (storage_method) = INDEX,
     (string_length) = 50
   ];
 
-  // number of occurences + other factors.
+  // Number of occurrences + other factors.
   optional int32 strength = 3 [
     (required) = YES
   ];
@@ -137,7 +137,7 @@ message ArticleKeyword {
   optional string type = 4 [
     (required) = YES,
     (storage_method) = PULL_OUT,
-    (string_length) = 20
+    (string_length) = 1
   ];
 }
 
@@ -263,7 +263,7 @@ message LinkedInProfile {
     (string_length) = 24
   ];
 
-  optional string raw_data = 2 [
+  optional string data = 2 [
     (required) = YES,
     (string_length) = 102400
   ];
@@ -280,7 +280,7 @@ message LinkedInConnections {
     (string_length) = 24
   ];
 
-  optional string raw_data = 2 [
+  optional string data = 2 [
     (required) = YES,
     (string_length) = 102400
   ];
@@ -297,7 +297,7 @@ message AddressBook {
     (string_length) = 24
   ];
 
-  optional string raw_data = 2 [
+  optional string data = 2 [
     (required) = YES,
     (string_length) = 102400
   ];
@@ -345,5 +345,42 @@ message UserUrlFavorite {
   optional int64 create_time = 3 [
     (storage_method) = PULL_OUT,
     (required) = YES
+  ];
+}
+
+message UserInterest {
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24
+  ];
+
+  optional string user_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24
+  ];
+
+  optional string keyword = 3 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 100
+  ];
+
+  // Where did we get this interest from?
+  // 'ab' = address book
+  // 'lp' = linkedin profile
+  // 'lc' = linkedin contacts
+  // 'u' = from the user himself, explicitly
+  optional string source = 4 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 2
+  ];
+
+  // 'o' for organization, 'p' for person, 'l' for location.
+  // If not known, NULL.
+  optional string type = 5 [
+    (string_length) = 1
   ];
 }

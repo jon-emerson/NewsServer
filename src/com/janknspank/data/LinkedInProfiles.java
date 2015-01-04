@@ -5,7 +5,7 @@ import java.sql.Connection;
 import com.janknspank.proto.Core.LinkedInProfile;
 
 public class LinkedInProfiles {
-  /** Helper method for creating the LinkedInData table. */
+  /** Helper method for creating the LinkedInProfile table. */
   public static void main(String args[]) throws Exception {
     Connection connection = Database.getConnection();
     connection.prepareStatement(Database.getCreateTableStatement(LinkedInProfile.class)).execute();

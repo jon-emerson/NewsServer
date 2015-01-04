@@ -134,6 +134,6 @@ public class ArticleHandlerTest {
         "market this year as in 2014.", article.getDescription());
     assertEquals("Year of the Condo in New York City", article.getTitle());
     assertEquals("http://static01.nyt.com/images/2015/01/04/realestate/" +
-        "04COV4/04COV4-thumbStandard-v2.jpg", article.getImageUrl());
+        "04COV4/04COV4-facebookJumbo-v2.jpg", article.getImageUrl());
   }
 }
