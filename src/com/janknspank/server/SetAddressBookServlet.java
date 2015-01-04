@@ -28,8 +28,11 @@ public class SetAddressBookServlet extends StandardServlet {
   }
 
   public static void main(String args[]) throws Exception {
-    String userId = "vWxNTAAKB-KYAEofUGJL4A ";
-    AddressBook addressBook = Database.get(userId, AddressBook.class);
-    UserInterests.updateInterests(userId, addressBook);
+    for (String userId : new String[] {
+        "vWxNTAAKB-KYAEofUGJL4A",
+        "o0Sr9HzgxZMUVcUi09NIhg"}) {
+      AddressBook addressBook = Database.get(userId, AddressBook.class);
+      UserInterests.updateInterests(userId, addressBook);
+    }
   }
 }

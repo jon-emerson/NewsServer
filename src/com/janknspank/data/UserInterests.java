@@ -3,6 +3,7 @@ package com.janknspank.data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -22,6 +23,7 @@ import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 import com.janknspank.TopList;
 import com.janknspank.proto.Core.AddressBook;
+import com.janknspank.proto.Core.LinkedInProfile;
 import com.janknspank.proto.Core.UserInterest;
 
 public class UserInterests {
@@ -69,6 +71,42 @@ public class UserInterests {
    * Returns a list of implied interests derived from the user's passed-in
    * address book.
    */
+  private static List<UserInterest> calculateInterests(String userId, LinkedInProfile profile) {
+    JSONObject profileJson = new JSONObject(profile.getData());
+    if (!profileJson.has("positions")) {
+      return Collections.emptyList();
+    }
+
+    JSONObject positionsJson = profileJson.getJSONObject("positions");
+    if (!positionsJson.has("values")) {
+      return Collections.emptyList();
+    }
+
+    List<UserInterest> interests = Lists.newArrayList();
+    JSONArray positionsJsonArray = positionsJson.getJSONArray("values");
+    for (int i = 0; i < positionsJsonArray.length(); i++) {
+      JSONObject positionJson = positionsJsonArray.getJSONObject(i);
+      if (positionJson.has("company")) {
+        JSONObject companyJson = positionJson.getJSONObject("company");
+        if (companyJson.has("name")) {
+          interests.add(UserInterest.newBuilder()
+              .setId(GuidFactory.generate())
+              .setUserId(userId)
+              .setKeyword(companyJson.getString("name"))
+              .setSource(UserInterests.SOURCE_LINKEDIN_PROFILE)
+              .setType(UserInterests.TYPE_ORGANIZATION)
+              .build());
+        }
+      }
+    }
+
+    return interests;
+  }
+
+  /**
+   * Returns a list of implied interests derived from the user's passed-in
+   * address book.
+   */
   private static List<UserInterest> calculateInterests(String userId, AddressBook addressBook) {
     List<UserInterest> interests = Lists.newArrayList();
     Multiset<String> locations = HashMultiset.create();
@@ -86,7 +124,7 @@ public class UserInterests {
       } else if (personJson.has("lastName")) {
         name = personJson.getString("lastName");
       }
-      if (name != null) {
+      if (name != null && name.contains(" ")) {
         interests.add(UserInterest.newBuilder()
             .setId(GuidFactory.generate())
             .setUserId(userId)
@@ -131,44 +169,46 @@ public class UserInterests {
 
   public static void updateInterests(String userId, AddressBook addressBook)
       throws DataInternalException {
-    List<UserInterest> interests = calculateInterests(userId, addressBook);
+    updateInterests(userId, calculateInterests(userId, addressBook), SOURCE_ADDRESS_BOOK);
+  }
 
+  public static void updateInterests(String userId, LinkedInProfile linkedInProfile)
+      throws DataInternalException {
+    updateInterests(userId, calculateInterests(userId, linkedInProfile), SOURCE_LINKEDIN_PROFILE);
+  }
+
+  private static void updateInterests(String userId, List<UserInterest> interests, String type)
+      throws DataInternalException {
     // Find what interests we already have, so that we can keep ones that the
     // address book still contains, and we can delete ones it doesn't.
-    Map<String, UserInterest> peopleInterestsFromAddressBook = Maps.newHashMap();
-    Map<String, UserInterest> locationInterestsFromAddressBook = Maps.newHashMap();
+    Map<String, Map<String, UserInterest>> interestsByTypeAndKeyword = Maps.newHashMap();
     for (UserInterest interest : getInterests(userId)) {
-      if (SOURCE_ADDRESS_BOOK.equals(interest.getSource())) {
-        if (TYPE_PERSON.equals(interest.getType())) {
-          peopleInterestsFromAddressBook.put(interest.getKeyword(), interest);
-        } else if (TYPE_LOCATION.equals(interest.getType())) {
-          locationInterestsFromAddressBook.put(interest.getKeyword(), interest);
+      if (type.equals(interest.getSource())) {
+        Map<String, UserInterest> keywordMap =
+            interestsByTypeAndKeyword.get(interest.getType());
+        if (keywordMap == null) {
+          keywordMap = Maps.newHashMap();
+          interestsByTypeAndKeyword.put(interest.getType(), keywordMap);
         }
+        keywordMap.put(interest.getKeyword(), interest);
       }
     }
 
     // Figure out which interests we should delete and which we should insert.
     Set<UserInterest> interestsToDelete = Sets.newHashSet();
     List<UserInterest> interestsToInsert = Lists.newArrayList();
-    interestsToDelete.addAll(peopleInterestsFromAddressBook.values());
-    interestsToDelete.addAll(locationInterestsFromAddressBook.values());
+    for (Map<String, UserInterest> keywordMap : interestsByTypeAndKeyword.values()) {
+      interestsToDelete.addAll(keywordMap.values());
+    }
     for (UserInterest interest : interests) {
-      if (TYPE_PERSON.equals(interest.getType())) {
-        UserInterest existingInterest =
-            peopleInterestsFromAddressBook.get(interest.getKeyword());
-        if (existingInterest != null) {
-          interestsToDelete.remove(existingInterest);
-        } else {
-          interestsToInsert.add(interest);
-        }
-      } else if (TYPE_LOCATION.equals(interest.getType())) {
-        UserInterest existingInterest =
-            locationInterestsFromAddressBook.get(interest.getKeyword());
-        if (existingInterest != null) {
-          interestsToDelete.remove(existingInterest);
-        } else {
-          interestsToInsert.add(interest);
-        }
+      UserInterest existingInterest =
+          interestsByTypeAndKeyword.containsKey(interest.getType()) ?
+              interestsByTypeAndKeyword.get(interest.getType()).get(interest.getKeyword()) :
+              null;
+      if (existingInterest != null) {
+        interestsToDelete.remove(existingInterest);
+      } else {
+        interestsToInsert.add(interest);
       }
     }
 

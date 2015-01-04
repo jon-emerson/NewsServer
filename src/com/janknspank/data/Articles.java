@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.protobuf.Descriptors.FieldDescriptor;
@@ -59,13 +60,22 @@ public class Articles {
     }
   }
 
-  private static List<ArticleKeyword> getArticleKeywords(List<UserInterest> interests)
+  private static List<ArticleKeyword> getArticleKeywords(Iterable<UserInterest> interests)
       throws DataInternalException {
+    // Filter out location interests for now, until we can better prioritize them.
+    interests = Iterables.filter(interests, new Predicate<UserInterest>() {
+      @Override
+      public boolean apply(UserInterest userInterest) {
+        return !UserInterests.TYPE_LOCATION.equals(userInterest.getType());
+      }
+    });
+
     StringBuilder sql = new StringBuilder();
     sql.append("SELECT * FROM ")
         .append(Database.getTableName(ArticleKeyword.class))
         .append(" WHERE keyword IN (")
-        .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), interests.size())))
+        .append(Joiner.on(",").join(
+            Iterables.limit(Iterables.cycle("?"), Iterables.size(interests))))
         .append(") LIMIT 500");
 
     try {

@@ -588,9 +588,8 @@ public class Database {
       stmt = getConnection().prepareStatement(
           "DELETE FROM " + getTableName(clazz) +
           " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
-      int offset = 0;
       for (String primaryKey : primaryKeys) {
-        stmt.setString(++offset, primaryKey);
+        stmt.setString(1, primaryKey);
         stmt.addBatch();
       }
       int numModified = 0;
