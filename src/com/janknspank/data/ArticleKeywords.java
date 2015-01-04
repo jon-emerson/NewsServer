@@ -269,7 +269,7 @@ public class ArticleKeywords {
       throws DataInternalException {
     StringBuilder sql = new StringBuilder();
     sql.append("SELECT * FROM " + Database.getTableName(ArticleKeyword.class) +
-        " WHERE article_id IN (");
+        " WHERE url_id IN (");
     for (int i = 0; i < articleList.size(); i++) {
       sql.append(i == articleList.size() - 1 ? "?" : "?, ");
     }
