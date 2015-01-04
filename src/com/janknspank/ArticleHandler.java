@@ -33,7 +33,8 @@ import com.janknspank.proto.Validator;
 
 public class ArticleHandler extends DefaultHandler {
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
-      "http://www.chron.com/img/pages/article/opengraph_default.jpg");
+      "http://www.chron.com/img/pages/article/opengraph_default.jpg",
+      "http://media.cleveland.com/design/alpha/img/logo_cleve.gif");
   private String lastCharacters;
   private InterpretedData lastInterpretedData;
   private final Set<String> lastKeywords = Sets.newHashSet();

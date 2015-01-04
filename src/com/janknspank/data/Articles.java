@@ -98,7 +98,7 @@ public class Articles {
         .append(Database.getTableName(Article.class))
         .append(" WHERE url_id IN (")
         .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), articleIds.size())))
-        .append(") ORDER BY published_time LIMIT 50");
+        .append(") ORDER BY published_time DESC LIMIT 50");
 
     try {
       PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
