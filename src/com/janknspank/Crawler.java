@@ -34,7 +34,6 @@ public class Crawler {
 
   public void crawl(Url url) {
     try {
-      System.err.println("Crawling: " + url.getUrl());
       FetchResponse response = fetcher.fetch(url.getUrl());
 
       // TODO(jonemerson): Should we update the database if we were

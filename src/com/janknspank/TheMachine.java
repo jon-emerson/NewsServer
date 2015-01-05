@@ -27,10 +27,10 @@ public class TheMachine {
 
     while (true) {
       final Url startUrl = Urls.markAsCrawled(Urls.getNextUrlToCrawl());
-//      Url startUrl = Url.newBuilder()
+//      final Url startUrl = Url.newBuilder()
 //          .setId("pYZDE7M36zxQNxbFTUVFCQ")
-//          .setUrl("http://www.nytimes.com/2015/01/04/nyregion/chocolate-" +
-//              "factory-in-brooklyn-asks-what-us-gentrifiers.html")
+//          .setUrl("http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-"
+//              + "future-of-finance/")
 //          .setTweetCount(0)
 //          .setDiscoveryTime(System.currentTimeMillis())
 //          .build();

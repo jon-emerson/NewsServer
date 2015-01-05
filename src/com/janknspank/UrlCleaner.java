@@ -3,8 +3,11 @@ package com.janknspank;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.codec.Charsets;
@@ -12,11 +15,28 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.google.common.collect.Lists;
+
 /**
  * Utility class for cleaning up news site URLs, so they can be reduced to their
  * canonical forms.
  */
 public class UrlCleaner {
+  /**
+   * Cleans the passed query parameter map, allowing only strings from the
+   * passed allowed keys.  The Map is modified in place.
+   */
+  private static void allowOnlyQueryParameters(
+      TreeMap<String, String> queryParameters, String... allowedKeys) {
+    Set<String> allowedKeySet = new HashSet<String>();
+    allowedKeySet.addAll(Arrays.asList(allowedKeys));
+    for (String key : Lists.newArrayList(queryParameters.keySet())) {
+      if (!allowedKeySet.contains(key)) {
+        queryParameters.remove(key);
+      }
+    }
+  }
+
   public static String clean(String dirtyUrl) throws MalformedURLException {
     URL url = new URL(dirtyUrl);
     TreeMap<String, String> queryParameters = new TreeMap<>(new Comparator<String>() {
@@ -29,70 +49,88 @@ public class UrlCleaner {
       queryParameters.put(nameValue.getName(), nameValue.getValue());
     }
 
+    // These are pretty prevalent on all web sites.
     queryParameters.remove("utm_medium");
     queryParameters.remove("utm_campaign");
     queryParameters.remove("utm_channel");
+    queryParameters.remove("utm_cid");
     queryParameters.remove("utm_content");
     queryParameters.remove("utm_hp_ref");
     queryParameters.remove("utm_term");
     queryParameters.remove("utm_source");
-    if (url.getHost().endsWith(".abc.net.au") || url.getHost().equals("abc.net.au")) {
+
+    // Do website-specific query parameter filtering and URL canonicalization.
+    String host = url.getHost();
+    String path = url.getPath();
+    if (host.endsWith(".abc.net.au") || host.equals("abc.net.au")) {
       queryParameters.remove("cid");
       queryParameters.remove("pfm");
+      queryParameters.remove("ref");
       queryParameters.remove("section");
+      queryParameters.remove("site");
     }
-    if (url.getHost().endsWith(".abcnews.go.com") || url.getHost().equals("abcnews.go.com")) {
-      if (queryParameters.containsKey("page") && queryParameters.get("page").equals("1")) {
-        queryParameters.remove("page");
-      }
+    if (host.endsWith(".abcnews.go.com") || host.equals("abcnews.go.com")) {
+      queryParameters.remove("page");
+      queryParameters.remove("singlePage");
     }
-    if (url.getHost().endsWith(".arstechnica.com") || url.getHost().equals("arstechnica.com")) {
+    if (host.endsWith(".arstechnica.com") || host.equals("arstechnica.com")) {
       queryParameters.remove("amp");
       queryParameters.remove("comments");
       queryParameters.remove("post");
       queryParameters.remove("theme");
       queryParameters.remove("view");
     }
-    if (url.getHost().endsWith(".bbc.co.uk") || url.getHost().equals("bbc.co.uk") ||
-        url.getHost().endsWith(".bbc.com") || url.getHost().equals("bbc.com")) {
+    if (host.endsWith(".bbc.co.uk") || host.equals("bbc.co.uk") ||
+        host.endsWith(".bbc.com") || host.equals("bbc.com")) {
       queryParameters.remove("filter");
       queryParameters.remove("ns_campaign");
       queryParameters.remove("ns_linkname");
       queryParameters.remove("ns_mchannel");
       queryParameters.remove("ns_source");
       queryParameters.remove("postId");
+      queryParameters.remove("sortBy");
+      queryParameters.remove("sortOrder");
     }
-    if (url.getHost().endsWith(".bloomberg.com") || url.getHost().equals("bloomberg.com")) {
+    if (host.endsWith(".bloomberg.com") || host.equals("bloomberg.com")) {
+      queryParameters.remove("bgref");
       queryParameters.remove("cmpid");
       queryParameters.remove("hootPostID");
+      queryParameters.remove("terminal");
     }
-    if (url.getHost().endsWith(".boston.com") || url.getHost().equals("boston.com")) {
+    if (host.endsWith(".boston.com") || host.equals("boston.com")) {
+      queryParameters.remove("Technology_subheadline_hp");
       queryParameters.remove("comments");
       queryParameters.remove("mastheadLogo");
       queryParameters.remove("p1");
+      queryParameters.remove("page");
+      queryParameters.remove("pg");
       queryParameters.remove("rss_id");
     }
-    if (url.getHost().endsWith(".businessweek.com") || url.getHost().equals("businessweek.com")) {
+    if (host.endsWith(".buffalonews.com") || host.equals("buffalonews.com")) {
+      queryParameters.remove("ref");
+    }
+    if (host.endsWith(".businessweek.com") || host.equals("businessweek.com")) {
       queryParameters.remove("hootPostID");
     }
-    if (url.getHost().endsWith(".cbc.ca") || url.getHost().equals("cbc.ca")) {
+    if (host.endsWith(".cbc.ca") || host.equals("cbc.ca")) {
       queryParameters.remove("cmp");
     }
-    if (url.getHost().endsWith(".chron.com") || url.getHost().equals("chron.com")) {
-      queryParameters.remove("cmpid");
+    if (host.endsWith(".cbc.ca") || host.equals("cbc.ca")) {
+      queryParameters.remove("cmp");
     }
-    if (url.getHost().endsWith(".channelnewsasia.com") ||
-        url.getHost().equals("channelnewsasia.com")) {
+    if (host.endsWith(".channelnewsasia.com") ||
+        host.equals("channelnewsasia.com")) {
       queryParameters.remove("cid");
     }
-    if (url.getHost().endsWith(".chicagotribune.com") || url.getHost().equals("chicagotribune.com")) {
+    if (host.endsWith(".chicagotribune.com") || host.equals("chicagotribune.com")) {
       queryParameters.remove("cid");
     }
-    if (url.getHost().endsWith(".cnbc.com") || url.getHost().equals("cnbc.com")) {
+    if (host.endsWith(".cnbc.com") || host.equals("cnbc.com")) {
       queryParameters.remove("trknav");
       queryParameters.remove("__source");
     }
-    if (url.getHost().endsWith(".cnn.com") || url.getHost().equals("cnn.com")) {
+    if (host.endsWith(".cnn.com") || host.equals("cnn.com")) {
+      queryParameters.remove("Page");
       queryParameters.remove("cnn");
       queryParameters.remove("eref");
       queryParameters.remove("hpt");
@@ -107,23 +145,23 @@ public class UrlCleaner {
       queryParameters.remove("xid");
       queryParameters.remove("_s");
     }
-    if (url.getHost().endsWith(".economist.com") || url.getHost().equals("economist.com")) {
+    if (host.endsWith(".economist.com") || host.equals("economist.com")) {
       queryParameters.remove("fsrc");
     }
-    if (url.getHost().endsWith(".forbes.com") || url.getHost().equals("forbes.com")) {
+    if (host.endsWith(".forbes.com") || host.equals("forbes.com")) {
       queryParameters.remove("commentId");
       queryParameters.remove("feed");
       queryParameters.remove("linkId");
     }
-    if (url.getHost().endsWith(".foxnews.com") || url.getHost().equals("foxnews.com")) {
+    if (host.endsWith(".foxnews.com") || host.equals("foxnews.com")) {
       queryParameters.remove("cmpid");
       queryParameters.remove("intcmp");
     }
-    if (url.getHost().endsWith(".guardian.co.uk") || url.getHost().equals("guardian.co.uk")) {
+    if (host.endsWith(".guardian.co.uk") || host.equals("guardian.co.uk")) {
       queryParameters.remove("intcmp");
       queryParameters.remove("INTCMP");
     }
-    if (url.getHost().endsWith(".huffingtonpost.com") || url.getHost().equals("huffingtonpost.com")) {
+    if (host.endsWith(".huffingtonpost.com") || host.equals("huffingtonpost.com")) {
       // "ir" might be bad to remove.  It controls which header people see on the top of the page.
       // But I'm removing it because it's better to consolidate the same articles.
       queryParameters.remove("ir"); 
@@ -131,26 +169,23 @@ public class UrlCleaner {
       queryParameters.remove("m");
       queryParameters.remove("ncid");
     }
-    if (url.getHost().endsWith(".latimes.com") || url.getHost().equals("latimes.com")) {
+    if (host.endsWith(".latimes.com") || host.equals("latimes.com")) {
       queryParameters.remove("akst_action");
       queryParameters.remove("dlvrit");
       queryParameters.remove("replytocom");
       queryParameters.remove("track");
     }
-    if (url.getHost().endsWith(".mashable.com") || url.getHost().equals("mashable.com")) {
-      queryParameters.remove("utm_cid");
-    }
-    if (url.getHost().endsWith(".mercurynews.com") || url.getHost().equals("mercurynews.com")) {
+    if (host.endsWith(".mercurynews.com") || host.equals("mercurynews.com")) {
       queryParameters.remove("source");
     }
-    if (url.getHost().endsWith(".msnbc.com") || url.getHost().equals("msnbc.com")) {
+    if (host.endsWith(".msnbc.com") || host.equals("msnbc.com")) {
       queryParameters.remove("CID");
     }
-    if (url.getHost().endsWith(".nationalgeographic.com") ||
-        url.getHost().equals("nationalgeographic.com")) {
+    if (host.endsWith(".nationalgeographic.com") ||
+        host.equals("nationalgeographic.com")) {
       queryParameters.remove("now");
     }
-    if (url.getHost().endsWith(".news.yahoo.com") || url.getHost().equals("news.yahoo.com")) {
+    if (host.endsWith(".news.yahoo.com") || host.equals("news.yahoo.com")) {
       if (queryParameters.containsKey(".pg") && queryParameters.get(".pg").equals("1")) {
         queryParameters.remove(".pg");
       }
@@ -169,60 +204,38 @@ public class UrlCleaner {
       queryParameters.remove("soc_src");
       queryParameters.remove("soc_trk");
     }
-    if (url.getHost().endsWith(".nytimes.com") || url.getHost().equals("nytimes.com")) {
-      queryParameters.remove("_r");
-      queryParameters.remove("WT_nav");
-      queryParameters.remove("WT.mc_id");
-      queryParameters.remove("WT.mc_ev");
-      queryParameters.remove("WT.mc_c");
-      queryParameters.remove("WT.nav");
-      queryParameters.remove("action");
-      queryParameters.remove("amp");
-      queryParameters.remove("contentCollection");
-      queryParameters.remove("emc");
-      queryParameters.remove("hp");
-      queryParameters.remove("inline");
-      queryParameters.remove("module");
-      queryParameters.remove("nl"); // Found on http://learning.blogs.nytimes.com/.
-      queryParameters.remove("nlid"); // Found on http://learning.blogs.nytimes.com/.
-      queryParameters.remove("pagewanted");
-      queryParameters.remove("partner");
-      queryParameters.remove("pgtype");
-      queryParameters.remove("ref");
-      queryParameters.remove("region");
-      queryParameters.remove("ribbon-ad-idx");
-      queryParameters.remove("rref");
-      queryParameters.remove("scp");
-      queryParameters.remove("smid");
-      queryParameters.remove("sq");
-      queryParameters.remove("src");
-      queryParameters.remove("st");
-      queryParameters.remove("version");
+    if (host.endsWith(".nytimes.com") || host.equals("nytimes.com")) {
+      // Seriously, they're all worthless.  And I found 30+ of them.
+      queryParameters.clear();
     }
-    if (url.getHost().endsWith(".reuters.com") || url.getHost().equals("reuters.com")) {
+    if (host.endsWith(".reuters.com") || host.equals("reuters.com")) {
       queryParameters.remove("feedName");
       queryParameters.remove("feedType");
       queryParameters.remove("rpc");
     }
-    if (url.getHost().endsWith(".sfgate.com") || url.getHost().equals("sfgate.com")) {
+    if (host.endsWith(".sfgate.com") || host.equals("sfgate.com")) {
       queryParameters.remove("cmpid");
     }
-    if (url.getHost().endsWith(".theguardian.com") || url.getHost().equals("theguardian.com")) {
+    if (host.endsWith(".techcrunch.com") || host.equals("techcrunch.com")) {
+      queryParameters.remove("ncid");
+    }
+    if (host.endsWith(".theguardian.com") || host.equals("theguardian.com")) {
       queryParameters.remove("CMP");
       queryParameters.remove("TrackID");
     }
-    if (url.getHost().endsWith(".thehindu.com") || url.getHost().equals("thehindu.com")) {
+    if (host.endsWith(".thehindu.com") || host.equals("thehindu.com")) {
       queryParameters.remove("homepage");
     }
-    if (url.getHost().endsWith(".washingtonpost.com") ||
-        url.getHost().equals("washingtonpost.com")) {
-      queryParameters.remove("hpid");
-      queryParameters.remove("nav");
-      queryParameters.remove("nid");
-      queryParameters.remove("resType");
-      queryParameters.remove("tid");
+    if (host.endsWith(".washingtonpost.com") ||
+        host.equals("washingtonpost.com")) {
+      // All worthless except 'p'.
+      allowOnlyQueryParameters(queryParameters, "p");
+
+      if (path.startsWith("/pb/")) {
+        path = path.substring("/pb".length());
+      }
     }
-    if (url.getHost().endsWith(".wsj.com") || url.getHost().equals("wjs.com")) {
+    if (host.endsWith(".wsj.com") || host.equals("wjs.com")) {
       queryParameters.remove("mg");
       queryParameters.remove("mod");
       queryParameters.remove("tesla");
@@ -233,14 +246,14 @@ public class UrlCleaner {
     StringBuilder b = new StringBuilder();
     b.append(url.getProtocol().toLowerCase());
     b.append("://");
-    b.append(url.getHost().toLowerCase());
+    b.append(host.toLowerCase());
     if (url.getPort() != -1 &&
         ("http".equalsIgnoreCase(url.getProtocol()) && url.getPort() != 80 ||
          "https".equalsIgnoreCase(url.getProtocol()) && url.getPort() != 443)) {
       b.append(":" + url.getPort());
     }
-    if (url.getPath().length() > 1) {
-      b.append(url.getPath());
+    if (path.length() > 1) {
+      b.append(path);
     }
     if (queryParameters.size() > 0) {
       List<NameValuePair> nameValuePairList = new ArrayList<>();

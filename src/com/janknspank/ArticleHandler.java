@@ -110,6 +110,20 @@ public class ArticleHandler extends DefaultHandler {
     lastKeywords.clear();
   }
 
+  /**
+   * Unescapes the passed string, including &apos;, which was added in XHTML 1.0
+   * but for some reason isn't handled by Apache's StringEscapeUtils.  Also,
+   * &nbsp; is converted to a standard space, since we don't want to worry about
+   * that.
+   */
+  private static String unescape(String escaped) {
+    return StringEscapeUtils
+        .unescapeHtml4(escaped
+            .replaceAll("&nbsp;", " "))
+        .replaceAll("&apos;", "'")
+        .replaceAll("\u00A0", " ");
+  }
+
   @Override
   public void endDocument() {
     try {
@@ -117,24 +131,19 @@ public class ArticleHandler extends DefaultHandler {
       // do this is beyond me), do another escape pass on everything before we
       // start telling people about this article.
       if (articleBuilder.hasDescription()) {
-        articleBuilder.setDescription(
-            StringEscapeUtils.unescapeHtml4(articleBuilder.getDescription()));
+        articleBuilder.setDescription(unescape(articleBuilder.getDescription()));
       }
       if (articleBuilder.hasAuthor()) {
-        articleBuilder.setAuthor(
-            StringEscapeUtils.unescapeHtml4(articleBuilder.getAuthor()));
+        articleBuilder.setAuthor(unescape(articleBuilder.getAuthor()));
       }
       if (articleBuilder.hasCopyright()) {
-        articleBuilder.setCopyright(
-            StringEscapeUtils.unescapeHtml4(articleBuilder.getCopyright()));
+        articleBuilder.setCopyright(unescape(articleBuilder.getCopyright()));
       }
       if (articleBuilder.hasTitle()) {
-        articleBuilder.setTitle(
-            StringEscapeUtils.unescapeHtml4(articleBuilder.getTitle()));
+        articleBuilder.setTitle(unescape(articleBuilder.getTitle()));
       }
       if (articleBuilder.hasImageUrl()) {
-        articleBuilder.setImageUrl(
-            StringEscapeUtils.unescapeHtml4(articleBuilder.getImageUrl()));
+        articleBuilder.setImageUrl(unescape(articleBuilder.getImageUrl()));
       }
 
       callback.foundArticle(
@@ -279,7 +288,7 @@ public class ArticleHandler extends DefaultHandler {
   }
 
   private void handleKeywords(String rawKeywords) {
-    rawKeywords = StringEscapeUtils.unescapeHtml4(rawKeywords);
+    rawKeywords = unescape(rawKeywords);
     String[] keywords;
     // Some sites use semicolons, others use commas.  Split based on whichever is more prevalent.
     if (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";")) {
@@ -307,24 +316,19 @@ public class ArticleHandler extends DefaultHandler {
       if (article != null) {
         Article.Builder articleBuilder = article.toBuilder();
         if (articleBuilder.hasDescription()) {
-          articleBuilder.setDescription(
-              StringEscapeUtils.unescapeHtml4(articleBuilder.getDescription()));
+          articleBuilder.setDescription(unescape(articleBuilder.getDescription()));
         }
         if (articleBuilder.hasAuthor()) {
-          articleBuilder.setAuthor(
-              StringEscapeUtils.unescapeHtml4(articleBuilder.getAuthor()));
+          articleBuilder.setAuthor(unescape(articleBuilder.getAuthor()));
         }
         if (articleBuilder.hasCopyright()) {
-          articleBuilder.setCopyright(
-              StringEscapeUtils.unescapeHtml4(articleBuilder.getCopyright()));
+          articleBuilder.setCopyright(unescape(articleBuilder.getCopyright()));
         }
         if (articleBuilder.hasTitle()) {
-          articleBuilder.setTitle(
-              StringEscapeUtils.unescapeHtml4(articleBuilder.getTitle()));
+          articleBuilder.setTitle(unescape(articleBuilder.getTitle()));
         }
         if (articleBuilder.hasImageUrl()) {
-          articleBuilder.setImageUrl(
-              StringEscapeUtils.unescapeHtml4(articleBuilder.getImageUrl()));
+          articleBuilder.setImageUrl(unescape(articleBuilder.getImageUrl()));
         }
         if (!StringUtils.equals(articleBuilder.getDescription(), article.getDescription()) ||
             !StringUtils.equals(articleBuilder.getAuthor(), article.getAuthor()) ||

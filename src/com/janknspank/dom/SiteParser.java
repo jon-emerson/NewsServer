@@ -59,7 +59,8 @@ public class SiteParser {
         "#article_body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("cnn.com", new String[] {
         ".cnn_storyarea p",
-        "p.cnn_storypgraphtxt"});
+        "p.cnn_storypgraphtxt",
+        "p.zn-body__paragraph"});
     DOMAIN_TO_DOM_ADDRESSES.put("curbed.com", new String[] {
         ".post-body > p",
         ".post-body > .post-more > p",
