@@ -368,10 +368,11 @@ message UserInterest {
   ];
 
   // Where did we get this interest from?
-  // 'ab' = address book
-  // 'lp' = linkedin profile
-  // 'lc' = linkedin contacts
-  // 'u' = from the user himself, explicitly
+  // 'ab' = Address book.
+  // 'lp' = LinkedIn profile.
+  // 'lc' = LinkedIn contacts.
+  // 'u' = From the user himself, explicitly.
+  // 't' = Tombstone, represents an interest the user explicitly DELETED.
   optional string source = 4 [
     (required) = YES,
     (storage_method) = PULL_OUT,

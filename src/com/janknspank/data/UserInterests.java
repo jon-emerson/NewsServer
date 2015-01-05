@@ -27,20 +27,21 @@ import com.janknspank.proto.Core.LinkedInProfile;
 import com.janknspank.proto.Core.UserInterest;
 
 public class UserInterests {
+  public static final String TYPE_LOCATION = "l";
+  public static final String TYPE_PERSON = "p";
+  public static final String TYPE_ORGANIZATION = "o";
+  public static final String SOURCE_ADDRESS_BOOK = "ab";
+  public static final String SOURCE_LINKEDIN_CONNECTIONS = "lc";
+  public static final String SOURCE_LINKEDIN_PROFILE = "lp";
+  public static final String SOURCE_USER = "u";
+  public static final String SOURCE_TOMBSTONE = "t";
+
   private final static PhoneNumberUtil PHONE_NUMBER_UTIL = PhoneNumberUtil.getInstance();
   private final static PhoneNumberOfflineGeocoder GEOCODER =
       PhoneNumberOfflineGeocoder.getInstance();
   private static final String SELECT_FOR_USER_COMMAND =
       "SELECT * FROM " + Database.getTableName(UserInterest.class) +
-      "    WHERE user_id=?";
-
-  public static final String TYPE_PERSON = "p";
-  public static final String TYPE_ORGANIZATION = "o";
-  public static final String TYPE_LOCATION = "l";
-  public static final String SOURCE_ADDRESS_BOOK = "ab";
-  public static final String SOURCE_USER = "u";
-  public static final String SOURCE_LINKEDIN_PROFILE = "lp";
-  public static final String SOURCE_LINKEDIN_CONNECTIONS = "lc";
+      "    WHERE user_id=? AND source != \"" + SOURCE_TOMBSTONE + "\"";
 
   /** Helper method for creating the UserInterestData table. */
   public static void main(String args[]) throws Exception {
@@ -53,9 +54,7 @@ public class UserInterests {
   }
 
   /**
-   * Returns a complete list of the specified user's interests, both implicit
-   * and explicit.  NOTE(jonemerson): We do not want to send the implicit ones
-   * to the client.
+   * Returns a complete list of the specified user's interests.
    */
   public static List<UserInterest> getInterests(String userId) throws DataInternalException {
     try {
@@ -63,7 +62,7 @@ public class UserInterests {
       stmt.setString(1, userId);
       return Database.createListFromResultSet(stmt.executeQuery(), UserInterest.class);
     } catch (SQLException e) {
-      throw new DataInternalException("Error fetching favorites", e);
+      throw new DataInternalException("Error fetching interests: " + e.getMessage(), e);
     }
   }
 
