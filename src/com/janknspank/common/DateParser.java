@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.common;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,7 +8,11 @@ import java.util.regex.Pattern;
 
 import com.google.common.base.Strings;
 
-public class DateHelper {
+/**
+ * Utility class for parsing dates.  Supports all sorts of RSS date formats,
+ * date formats in <meta> tags, as well as pulling dates from URLs.
+ */
+public class DateParser {
   private static final Pattern[] DATE_IN_URL_PATTERNS = {
       Pattern.compile("\\/[0-9]{4}\\/[01]?[0-9]\\/[0-3]?[0-9]\\/"),
       Pattern.compile("\\/[0-9]{4}\\-[01]?[0-9]\\-[0-3]?[0-9][\\/\\-]"),
@@ -46,7 +50,7 @@ public class DateHelper {
    *     The default is to only look for complete year+month+day tuples.
    * @return number of milliseconds, or null if a date couldn't be determined
    */
-  public static Long getDateFromUrl(String url, boolean allowMonth) {
+  public static Long parseDateFromUrl(String url, boolean allowMonth) {
     for (Pattern dateInUrlPattern : DATE_IN_URL_PATTERNS) {
       Matcher dateInUrlMatcher = dateInUrlPattern.matcher(url);
       if (dateInUrlMatcher.find()) {

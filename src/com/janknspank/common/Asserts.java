@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.common;
 
 import com.janknspank.data.ValidationException;
 

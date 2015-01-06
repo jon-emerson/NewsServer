@@ -1,9 +1,12 @@
-package com.janknspank;
+package com.janknspank.common;
 
 import org.junit.Test;
+
+import com.janknspank.common.DateParser;
+
 import static org.junit.Assert.*;
 
-public class DateHelperTest {
+public class DateParserTest {
   /**
    * Tests that two dates parse to be equal.
    * @param testDateStr a string we're using in the test to represent what the
@@ -11,8 +14,8 @@ public class DateHelperTest {
    * @param wildDateStr a date we've seen in the wild
    */
   private void assertSameTime(String testDateStr, String wildDateStr) {
-    Long testDate = DateHelper.parseDateTime(testDateStr);
-    Long wildDate = DateHelper.parseDateTime(wildDateStr);
+    Long testDate = DateParser.parseDateTime(testDateStr);
+    Long wildDate = DateParser.parseDateTime(wildDateStr);
     assertNotNull(testDate);
     assertNotNull(wildDate);
     assertEquals(testDate, wildDate);
@@ -21,9 +24,9 @@ public class DateHelperTest {
   @Test
   public void test() {
     // Sanity check that the parser's not just returning 0 for everything.
-    assertTrue(DateHelper.parseDateTime("20141231220000") > 500000);
-    assertNotEquals(DateHelper.parseDateTime("20141231220000"),
-        DateHelper.parseDateTime("20141231220001"));
+    assertTrue(DateParser.parseDateTime("20141231220000") > 500000);
+    assertNotEquals(DateParser.parseDateTime("20141231220000"),
+        DateParser.parseDateTime("20141231220001"));
 
     // OK, start testing dates we've seen in the wild.
     // NOTE(jonemerson): It smells like these tests are gonna break when day

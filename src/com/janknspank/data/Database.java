@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
-import com.janknspank.Asserts;
+import com.janknspank.common.Asserts;
 import com.janknspank.proto.Core;
 import com.janknspank.proto.Core.Required;
 import com.janknspank.proto.Core.StorageMethod;

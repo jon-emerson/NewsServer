@@ -1,16 +1,15 @@
 package com.janknspank.rss;
 
 import java.net.MalformedURLException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.collect.Iterables;
-import com.janknspank.ArticleUrlDetector;
-import com.janknspank.DateHelper;
-import com.janknspank.NewsSiteWhitelist;
-import com.janknspank.UrlCleaner;
+import com.janknspank.common.ArticleUrlDetector;
+import com.janknspank.common.DateParser;
+import com.janknspank.common.UrlCleaner;
+import com.janknspank.common.UrlWhitelist;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
 import com.janknspank.data.GuidFactory;
@@ -131,7 +130,7 @@ public class RssCrawler {
           }
         }
       }
-      if (NewsSiteWhitelist.isOkay(articleUrl)) {
+      if (UrlWhitelist.isOkay(articleUrl)) {
         return UrlCleaner.clean(articleUrl);
       }
     } catch (MalformedURLException e) {
@@ -141,11 +140,11 @@ public class RssCrawler {
   }
 
   private Long getArticleDate(Node itemNode) {
-    Long millis = DateHelper.getDateFromUrl(getArticleUrl(itemNode), true /* allowMonth */);
+    Long millis = DateParser.parseDateFromUrl(getArticleUrl(itemNode), true /* allowMonth */);
     List<Node> dateNodes = itemNode.findAll("pubDate");
     dateNodes.addAll(itemNode.findAll("published"));
     if (dateNodes.size() > 0) {
-      Long rssDate = DateHelper.parseDateTime(dateNodes.get(0).getFlattenedText());
+      Long rssDate = DateParser.parseDateTime(dateNodes.get(0).getFlattenedText());
       millis = (rssDate == null) ? millis : rssDate;
     }
     return millis;

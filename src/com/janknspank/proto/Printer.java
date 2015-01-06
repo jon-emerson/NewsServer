@@ -6,7 +6,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.protobuf.Message;
 import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.janknspank.Asserts;
+import com.janknspank.common.Asserts;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.ClientSerialization;
 import com.janknspank.proto.Core.Required;

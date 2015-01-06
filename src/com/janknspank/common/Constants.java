@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.common;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

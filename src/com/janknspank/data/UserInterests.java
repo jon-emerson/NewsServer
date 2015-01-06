@@ -21,7 +21,7 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
-import com.janknspank.TopList;
+import com.janknspank.common.TopList;
 import com.janknspank.proto.Core.AddressBook;
 import com.janknspank.proto.Core.LinkedInProfile;
 import com.janknspank.proto.Core.UserInterest;

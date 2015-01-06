@@ -9,6 +9,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.protobuf.Message;
 import com.janknspank.ArticleHandler.ArticleCallback;
+import com.janknspank.common.UrlCleaner;
+import com.janknspank.common.UrlWhitelist;
 import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Urls;
@@ -39,7 +41,7 @@ public class TheMachine {
         continue;
       }
 
-      if (!NewsSiteWhitelist.isOkay(startUrl.getUrl())) {
+      if (!UrlWhitelist.isOkay(startUrl.getUrl())) {
         System.err.println("Removing now-blacklisted page: " + startUrl.getUrl());
         Links.deleteIds(ImmutableList.of(startUrl.getId()));
         Database.delete(startUrl);
@@ -62,7 +64,7 @@ public class TheMachine {
           }
 
           // Skip non-whitelisted URLs and URLs we've already seen on this page.
-          if (!NewsSiteWhitelist.isOkay(url) || foundUrls.contains(url)) {
+          if (!UrlWhitelist.isOkay(url) || foundUrls.contains(url)) {
             return;
           }
           foundUrls.add(url);

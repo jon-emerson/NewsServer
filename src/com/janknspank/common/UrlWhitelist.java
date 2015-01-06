@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.common;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,7 +22,7 @@ import com.janknspank.data.Links;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 
-public class NewsSiteWhitelist {
+public class UrlWhitelist {
   private static final HashSet<String> WHITELIST = new HashSet<String>();
   static {
     WHITELIST.add("abc.net.au");

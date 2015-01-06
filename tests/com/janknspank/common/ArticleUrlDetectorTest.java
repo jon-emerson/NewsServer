@@ -1,9 +1,11 @@
-package com.janknspank;
+package com.janknspank.common;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import com.janknspank.common.ArticleUrlDetector;
 
 public class ArticleUrlDetectorTest {
   private static final String[] POSITIVES = {

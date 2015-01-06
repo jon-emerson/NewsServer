@@ -10,8 +10,8 @@ import java.util.Set;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.protobuf.Message;
-import com.janknspank.ArticleUrlDetector;
-import com.janknspank.DateHelper;
+import com.janknspank.common.ArticleUrlDetector;
+import com.janknspank.common.DateParser;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Validator;
@@ -50,7 +50,7 @@ public class Urls {
   public static int getCrawlPriority(String url, Long millis) {
     if (ArticleUrlDetector.isArticle(url)) {
       millis = (millis == null) ?
-          DateHelper.getDateFromUrl(url, true /* allowMonth */) : millis;
+          DateParser.parseDateFromUrl(url, true /* allowMonth */) : millis;
       if (millis != null) {
         long millisAgo = System.currentTimeMillis() - millis;
         return (int) Math.max(100, 2000 - (millisAgo / (1000 * 60 * 60)));

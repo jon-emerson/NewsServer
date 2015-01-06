@@ -2,7 +2,7 @@ package com.janknspank.proto;
 
 import com.google.protobuf.Message;
 import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.janknspank.Asserts;
+import com.janknspank.common.Asserts;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Required;

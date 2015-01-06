@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.common;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -112,7 +112,7 @@ public class ArticleUrlDetector {
     String path = url.getPath();
     if (host.endsWith("abc.net.au")) {
       return ABC_NET_AU_PATH.matcher(path).find() ||
-          DateHelper.getDateFromUrl(urlString, false) != null;
+          DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("abcnews.go.com")) {
       return ABC_NEWS_ID_PARAM.matcher(Strings.nullToEmpty(parameters.get("id"))).find() ||
@@ -120,7 +120,7 @@ public class ArticleUrlDetector {
           (path.contains("/wireStory/") && PATH_ENDS_WITH_DASH_NUMBER.matcher(path).find());
     }
     if (host.endsWith("aljazeera.com")) {
-      return DateHelper.getDateFromUrl(urlString, false) != null;
+      return DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("arstechnica.com")) {
       return ARS_TECHNICA_PATH_1.matcher(path).find() ||
@@ -135,7 +135,7 @@ public class ArticleUrlDetector {
     }
     if (host.endsWith("bloomberg.com")) {
       return BLOOMBERG_ARCHIVE_PATH.matcher(path).find() ||
-          DateHelper.getDateFromUrl(urlString, false) != null;
+          DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("boston.com")) {
       if (host.equals("finance.boston.com")) {
@@ -150,7 +150,7 @@ public class ArticleUrlDetector {
     }
     if (host.endsWith("businessweek.com")) {
       return YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find() ||
-          DateHelper.getDateFromUrl(urlString, false) != null;
+          DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("cbc.ca")) {
       return CBC_PATH.matcher(path).find() ||
@@ -160,11 +160,11 @@ public class ArticleUrlDetector {
       return CBS_NEWS_PATH_1.matcher(path).find() ||
           CBS_NEWS_PATH_2.matcher(path).find() ||
           CBS_NEWS_PATH_3.matcher(path).find() ||
-          DateHelper.getDateFromUrl(urlString, false) != null;
+          DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("channelnewsasia.com")) {
       return CHANNEL_NEWS_ASIA_PATH.matcher(path).find() ||
-          path.startsWith("/premier/") && DateHelper.getDateFromUrl(urlString, false) != null;
+          path.startsWith("/premier/") && DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("chron.com")) {
       if (host.equals("blog.chron.com") && CHRON_BLOG_PATH.matcher(path).find()) {
@@ -200,7 +200,7 @@ public class ArticleUrlDetector {
     }
     if (host.endsWith("sfgate.com")) {
       return SFGATE_PATH.matcher(path).find() ||
-          DateHelper.getDateFromUrl(urlString, false) != null;
+          DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("washingtonpost.com")) {
       return WASHINGTON_POST_PATH_1.matcher(path).find() ||
@@ -208,6 +208,6 @@ public class ArticleUrlDetector {
           YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
     }
 
-    return DateHelper.getDateFromUrl(urlString, false) != null;
+    return DateParser.parseDateFromUrl(urlString, false) != null;
   }
 }

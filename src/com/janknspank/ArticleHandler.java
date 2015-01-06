@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.protobuf.Message;
+import com.janknspank.common.DateParser;
 import com.janknspank.data.Articles;
 import com.janknspank.data.Database;
 import com.janknspank.data.ValidationException;
@@ -56,7 +57,7 @@ public class ArticleHandler extends DefaultHandler {
     articleBuilder.setUrl(startUrl.getUrl());
 
     // See if we can parse a date out of the URL.
-    Long dateFromUrl = DateHelper.getDateFromUrl(startUrl.getUrl(), true /* allowMonth */);
+    Long dateFromUrl = DateParser.parseDateFromUrl(startUrl.getUrl(), true /* allowMonth */);
     if (dateFromUrl != null) {
       articleBuilder.setPublishedTime(dateFromUrl);
     }
@@ -217,10 +218,10 @@ public class ArticleHandler extends DefaultHandler {
           "publish-date".equalsIgnoreCase(name) ||
           "pub_date".equalsIgnoreCase(name) ||
           "sailthru.date".equalsIgnoreCase(name)) {
-        articleBuilder.setPublishedTime(DateHelper.parseDateTime(attrs.getValue("content")));
+        articleBuilder.setPublishedTime(DateParser.parseDateTime(attrs.getValue("content")));
       }
       if ("utime".equalsIgnoreCase(name)) {
-        articleBuilder.setModifiedTime(DateHelper.parseDateTime(attrs.getValue("content")));
+        articleBuilder.setModifiedTime(DateParser.parseDateTime(attrs.getValue("content")));
       }
       if ("keywords".equalsIgnoreCase(name) ||
           "news_keywords".equalsIgnoreCase(name) ||
@@ -250,10 +251,10 @@ public class ArticleHandler extends DefaultHandler {
       }
       if ("article:published_time".equalsIgnoreCase(property) ||
           "rnews:datePublished".equalsIgnoreCase(property)) {
-        articleBuilder.setPublishedTime(DateHelper.parseDateTime(attrs.getValue("content")));
+        articleBuilder.setPublishedTime(DateParser.parseDateTime(attrs.getValue("content")));
       }
       if ("article:modified_time".equalsIgnoreCase(property)) {
-        articleBuilder.setModifiedTime(DateHelper.parseDateTime(attrs.getValue("content")));
+        articleBuilder.setModifiedTime(DateParser.parseDateTime(attrs.getValue("content")));
       }
       if ("article:tag".equalsIgnoreCase(property)) {
         lastKeywords.add(attrs.getValue("content"));
@@ -262,10 +263,10 @@ public class ArticleHandler extends DefaultHandler {
       String itemprop = attrs.getValue("itemprop");
       if ("dateCreated".equalsIgnoreCase(itemprop) ||
           "datePublished".equalsIgnoreCase(itemprop)) {
-        articleBuilder.setPublishedTime(DateHelper.parseDateTime(attrs.getValue("content")));
+        articleBuilder.setPublishedTime(DateParser.parseDateTime(attrs.getValue("content")));
       }
       if ("dateModified".equalsIgnoreCase(itemprop)) {
-        articleBuilder.setModifiedTime(DateHelper.parseDateTime(attrs.getValue("content")));
+        articleBuilder.setModifiedTime(DateParser.parseDateTime(attrs.getValue("content")));
       }
       if ("alternativeHeadline".equalsIgnoreCase(itemprop)) {
         articleBuilder.setTitle(attrs.getValue("content"));

@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.common;
 
 import static org.junit.Assert.assertEquals;
 

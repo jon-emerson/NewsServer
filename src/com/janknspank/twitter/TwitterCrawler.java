@@ -13,8 +13,8 @@ import twitter4j.URLEntity;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
-import com.janknspank.NewsSiteWhitelist;
-import com.janknspank.UrlCleaner;
+import com.janknspank.common.UrlCleaner;
+import com.janknspank.common.UrlWhitelist;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
 import com.janknspank.data.Urls;
@@ -65,7 +65,7 @@ public class TwitterCrawler implements twitter4j.StatusListener {
 
             @Override
             public void onSuccess(String longUrl) {
-              if (NewsSiteWhitelist.isOkay(longUrl)) {
+              if (UrlWhitelist.isOkay(longUrl)) {
                 try {
                   longUrl = UrlCleaner.clean(longUrl);
                 } catch (MalformedURLException e) {
