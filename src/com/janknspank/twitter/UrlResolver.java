@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.twitter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,8 +23,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 /**
  * Class that converts short URLs to long URLs.
  */
-public class URLResolver {
-  private static final URLResolver SINGLETON = new URLResolver();
+public class UrlResolver {
+  private static final UrlResolver SINGLETON = new UrlResolver();
 
   // Never redirect automatically.  We will handle the redirects.
   CloseableHttpAsyncClient httpClient = HttpAsyncClients.custom()
@@ -42,11 +42,11 @@ public class URLResolver {
         }
       }).build();
 
-  private URLResolver() {
+  private UrlResolver() {
     httpClient.start();
   }
 
-  public static URLResolver getInstance() {
+  public static UrlResolver getInstance() {
     return SINGLETON;
   }
 
@@ -83,7 +83,7 @@ public class URLResolver {
               // didn't change, oftentimes the response only contains the
               // relative path.
               URL url = new URL(new URL(shortUrl), response.getFirstHeader("Location").getValue());
-              return URLResolver.this.resolve(url.toString(), depth + 1);
+              return UrlResolver.this.resolve(url.toString(), depth + 1);
             }
             return Futures.immediateFuture(shortUrl);
           }

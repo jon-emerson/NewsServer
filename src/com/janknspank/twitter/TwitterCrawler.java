@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.twitter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,6 +13,8 @@ import twitter4j.URLEntity;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
+import com.janknspank.NewsSiteWhitelist;
+import com.janknspank.UrlCleaner;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
 import com.janknspank.data.Urls;
@@ -21,7 +23,7 @@ import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Core.Link;
 
 public class TwitterCrawler implements twitter4j.StatusListener {
-  private final URLResolver resolver = URLResolver.getInstance();
+  private final UrlResolver resolver = UrlResolver.getInstance();
 
   @SuppressWarnings("unused")
   private static void print(long id, String shortUrl, String longUrl) {
