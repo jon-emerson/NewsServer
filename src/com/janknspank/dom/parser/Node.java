@@ -1,17 +1,19 @@
 package com.janknspank.dom.parser;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 public class Node {
   private final Node parent;
@@ -86,6 +88,10 @@ public class Node {
     attributes.put(name, value);
   }
 
+  public Set<String> getAttributeNames() {
+    return attributes.keySet();
+  }
+
   public String getAttributeValue(String name) {
     Collection<String> values = attributes.get(name);
     if (values.size() > 0) {
@@ -93,6 +99,10 @@ public class Node {
     } else {
       return null;
     }
+  }
+
+  public Collection<String> getAttributeValues(String name) {
+    return attributes.get(name);
   }
 
   /**
@@ -128,7 +138,7 @@ public class Node {
   /**
    * Returns a collection of all the CSS classes that this node has.
    */
-  private Iterable<String> getClasses() {
+  public Iterable<String> getClasses() {
     String rawClasses = getAttributeValue("class");
     if (rawClasses == null) {
       return Collections.emptyList();
@@ -137,74 +147,62 @@ public class Node {
   }
 
   /**
-   * Returns true if this Node matches the passed search string.  E.g. if
-   * this node is a div, and the search string is "div", this returns true.
-   * Also, if this node has class "hello", and the search string is ".hello",
-   * this also returns true.  Lastly, "#foo" matches id="foo", "p.foo"
-   * matches paragraphs with class="foo", and "p#foo" matches paragraphs with
-   * id="foo".
-   */
-  private boolean matchesSearchStr(String searchStr) {
-    // Make sure parsing happened before this and we're only comparing one
-    // attribute against this node.
-    if (searchStr.contains(" ")) {
-      throw new RuntimeException("Search string may only be a single delimiter");
-    }
-    if (searchStr.contains("#") && searchStr.contains(".")) {
-      // TODO(jonemerson): Implement this! :)
-      throw new RuntimeException("Can't specify both class and ID yet");
-    }
-
-    if (searchStr.startsWith(".")) {
-      return Iterables.contains(getClasses(), searchStr.substring(1));
-    } else if (searchStr.startsWith("#")) {
-      return searchStr.substring(1).equals(getId());
-    } else if (searchStr.contains(".")) {
-      String searchTag = searchStr.substring(0, searchStr.indexOf("."));
-      String searchClassName = searchStr.substring(searchStr.indexOf(".") + 1);
-      return tagName.equalsIgnoreCase(searchTag) &&
-          Iterables.contains(getClasses(), searchClassName);
-    } else if (searchStr.contains("#")) {
-      String searchTag = searchStr.substring(0, searchStr.indexOf("#"));
-      String searchId = searchStr.substring(searchStr.indexOf("#") + 1);
-      return tagName.equalsIgnoreCase(searchTag) && searchId.equals(getId());
-    } else {
-      // NOTE(jonemerson): Maybe some day be strict about case here.
-      return tagName.equalsIgnoreCase(searchStr);
-    }
-  }
-
-  /**
    * Finds all Nodes that match a CSS-like specifier.  Currently works for tag
    * names, classes, and IDs.
+   * @param maxNodeCount the maximum number of nodes to return (performance
+   *     optimization)
    */
-  private List<Node> findAll(String searchStr, boolean directDescendant) {
+  private List<Node> find(List<Selector> selectors, int maxNodeCount) {
     List<Node> result = new ArrayList<Node>();
-    String[] searchStrArray = searchStr.split(" ");
-    for (int i = 0; i < getChildCount(); i++) {
+    for (int i = 0; i < getChildCount() && result.size() < maxNodeCount; i++) {
       if (!isChildTextNode(i)) {
-        if (getChildNode(i).matchesSearchStr(searchStrArray[0])) {
-          if (searchStrArray.length == 1) {
+        if (selectors.get(0).matches(getChildNode(i))) {
+          if (selectors.size() == 1) {
             result.add(getChildNode(i));
           } else {
-            if (searchStrArray.length > 2 && ">".equals(searchStrArray[1])) {
-              result.addAll(getChildNode(i).findAll(
-                  searchStr.substring(searchStr.indexOf(">") + 2), true));
-            } else {
-              result.addAll(getChildNode(i).findAll(
-                  searchStr.substring(searchStr.indexOf(" ") + 1), false));
-            }
+            result.addAll(getChildNode(i).find(
+                selectors.subList(1, selectors.size()),
+                maxNodeCount - result.size()));
           }
-        } else if (!directDescendant) {
-          result.addAll(getChildNode(i).findAll(searchStr));
+        }
+
+        // Keep digging - Even if this was a match!
+        // E.g. selector="p" matches <p><p/></p> twice!
+        if (!selectors.get(0).isDirectDescendant()) {
+          result.addAll(getChildNode(i).find(selectors, maxNodeCount - result.size()));
         }
       }
     }
     return result;
   }
 
-  public List<Node> findAll(String searchStr) {
-    return findAll(searchStr, false);
+  public Node findFirst(String searchStr) {
+    return Iterables.getFirst(find(Selector.parseSelectors(searchStr), 1), null);
+  }
+
+  /**
+   * Returns the first node that matches any of the passed selector definitions.
+   */
+  public Node findFirst(Iterable<String> selectorDefinitionList) {
+    for (String selectorDefinition : selectorDefinitionList) {
+      Node node = findFirst(selectorDefinition);
+      if (node != null) {
+        return node;
+      }
+    }
+    return null;
+  }
+
+  public List<Node> findAll(String selectorDefinition) {
+    return find(Selector.parseSelectors(selectorDefinition), Integer.MAX_VALUE);
+  }
+
+  public List<Node> findAll(Iterable<String> selectorDefinitionList) {
+    List<Node> nodes = Lists.newArrayList();
+    for (String selectorDefinition : selectorDefinitionList) {
+      nodes.addAll(findAll(selectorDefinition));
+    }
+    return nodes;
   }
 
   /**

@@ -1,0 +1,61 @@
+// Protocol buffer extensions for NewsServer.
+
+import "google/protobuf/descriptor.proto";
+
+option java_package = "com.janknspank.proto";
+
+// For legacy reasons, these default to true. However, as of version 2.3.0
+// (January 2010), it is considered preferable for RPC implementations to
+// provide code generator plugins to generate code more specific to each
+// system, rather than rely on the "abstract" services.
+option cc_generic_services = false;
+option java_generic_services = false;
+option py_generic_services = false;
+
+enum Required {
+  // This field must be set for its parent message to be valid.
+  YES = 1;
+
+  // This field is optional.
+  NO = 2;
+};
+
+enum StorageMethod {
+  // Default: Just throw this field into an opaque unindexed blob that will
+  // be deserialized once we read it on the Java side.
+  BLOB = 1;
+
+  // Use this field as the primary key.
+  PRIMARY_KEY = 2;
+
+  // Pull out this field into its own row and put an index on it.
+  INDEX = 3;
+
+  // Pull out this field into its own row and put an unique index on it (that
+  // is, all values in this column will be unique).
+  UNIQUE_INDEX = 4;
+
+  // Pull out this field into its own row in the MySQL schema, but do not
+  // index it.
+  PULL_OUT = 5;
+};
+
+enum ClientSerialization {
+  // Include this field in responses to the client, serialized with default
+  // handling.
+  INCLUDE = 1;
+
+  // Include this field in responses to the client, serializing it as a
+  // number even if precision / bits may be lost.
+  INCLUDE_AS_NUMBER = 2;
+
+  // Do not include this field in responses to the client.
+  EXCLUDE = 3;
+};
+
+extend google.protobuf.FieldOptions {
+  optional Required required = 60001 [default = NO];
+  optional StorageMethod storage_method = 60002 [default = BLOB];
+  optional int32 string_length = 60003 [default = -1];
+  optional ClientSerialization client_serialization = 60004 [default = INCLUDE];
+}

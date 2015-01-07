@@ -12,10 +12,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
-import com.janknspank.proto.Core;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.UserInterest;
+import com.janknspank.proto.Extensions;
 
 /**
  * Helper class that manages storing and retrieving Article objects from the
@@ -26,24 +26,24 @@ public class Articles {
       "SELECT * FROM " + Database.getTableName(Article.class) +
       " ORDER BY published_time DESC LIMIT 50";
 
-  public static final int MAX_ARTICLE_LENGTH;
+  public static final int MAX_PARAGRAPH_LENGTH;
   public static final int MAX_DESCRIPTION_LENGTH;
   static {
-    int articleLength = 0;
+    int paragraphLength = 0;
     int descriptionLength = 0;
     for (FieldDescriptor field : Article.getDefaultInstance().getDescriptorForType().getFields()) {
       if (JavaType.STRING == field.getJavaType()) {
-        if ("article_body".equals(field.getName())) {
-          articleLength = field.getOptions().getExtension(Core.stringLength);
+        if ("paragraph".equals(field.getName())) {
+          paragraphLength = field.getOptions().getExtension(Extensions.stringLength);
         } else if ("description".equals(field.getName())) {
-          descriptionLength = field.getOptions().getExtension(Core.stringLength);
+          descriptionLength = field.getOptions().getExtension(Extensions.stringLength);
         }
       }
     }
-    if (articleLength == 0 || descriptionLength == 0) {
-      throw new IllegalStateException("Could not find length of article or description");
+    if (paragraphLength == 0 || descriptionLength == 0) {
+      throw new IllegalStateException("Could not find length of paragraph or description");
     }
-    MAX_ARTICLE_LENGTH = articleLength;
+    MAX_PARAGRAPH_LENGTH = paragraphLength;
     MAX_DESCRIPTION_LENGTH = descriptionLength;
   }
 

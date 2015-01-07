@@ -5,6 +5,8 @@
 
 protoc \
   src/com/janknspank/proto/core.proto \
+  src/com/janknspank/proto/extensions.proto \
+  src/com/janknspank/proto/interpreter.proto \
   -Isrc/ \
   -Isupport/ \
   --java_out=src/

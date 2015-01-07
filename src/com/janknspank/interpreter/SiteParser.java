@@ -1,4 +1,4 @@
-package com.janknspank.dom;
+package com.janknspank.interpreter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,12 +8,24 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Throwables;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Maps;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 
-public class SiteParser {
+public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
+  private static LoadingCache<DocumentNode, List<Node>> CACHE =
+      CacheBuilder.newBuilder()
+          .maximumSize(10)
+          .expireAfterWrite(10, TimeUnit.MINUTES)
+          .build(new SiteParser());
+
   private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES = Maps.newHashMap();
   static {
     DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
@@ -26,8 +38,8 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
         ".article-content > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bbc.co.uk", new String[] {
-        ".story-body > p",
-        ".map-body > p"});
+        ".story-body p",
+        ".map-body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bbc.com", new String[] {
         ".story-body > p",
         ".map-body > p"});
@@ -41,7 +53,8 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("breitbart.com", new String[] {
         "article > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("buffalonews.com", new String[] {
-        ".articleP > p"});
+        ".articleP p",
+        ".entry-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("businessweek.com", new String[] {
         "#article_body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("cbc.ca", new String[] {
@@ -87,9 +100,9 @@ public class SiteParser {
     DOMAIN_TO_DOM_ADDRESSES.put("sfexaminer.com", new String[] {
         "#storyBody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfgate.com", new String[] {
-        ".article-body > p",
-        ".entry > p",
-        ".post-contents > p"});
+        ".article-body p",
+        ".entry p",
+        ".post-contents p"});
     DOMAIN_TO_DOM_ADDRESSES.put("siliconbeat.com", new String[] {
         ".post-content > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("techcrunch.com", new String[] {
@@ -99,6 +112,8 @@ public class SiteParser {
         ".row p",
         "article > p"});
   }
+
+  private SiteParser() {}
 
   /**
    * Returns the best set of DOM addresses we currently know about for the given
@@ -183,9 +198,23 @@ public class SiteParser {
    * Returns Nodes for all the paragraph / header / quote / etc content within
    * an article's web page.
    */
-  public List<Node> getParagraphNodes(DocumentNode documentNode, String url) throws DomException {
+  public static List<Node> getParagraphNodes(DocumentNode documentNode) {
+    try {
+      return CACHE.get(documentNode);
+    } catch (ExecutionException e) {
+      Throwables.propagateIfPossible(e.getCause());
+      throw new RuntimeException("Could not parse paragraphs: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * DO NOT CALL THIS DIRECTLY.
+   * @see #getParagraphNodes(DocumentNode)
+   */
+  @Override
+  public List<Node> load(DocumentNode documentNode) {
     List<Node> paragraphs = new ArrayList<>();
-    for (String domAddress : getDomAddressesForUrl(url)) {
+    for (String domAddress : getDomAddressesForUrl(documentNode.getUrl())) {
       paragraphs.addAll(documentNode.findAll(domAddress));
     }
     sortAndDedupe(paragraphs);

@@ -4,28 +4,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
-import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
-
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
-import com.google.protobuf.Message;
-import com.janknspank.dom.InterpretedData;
-import com.janknspank.proto.Core;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
+import com.janknspank.proto.Extensions;
 
 /**
  * Helper class that manages storing and retrieving which keywords are
  * associated with which articles.
  */
 public class ArticleKeywords {
+  public static final String TYPE_LOCATION = "l";
+  public static final String TYPE_META_TAG = "m";
+  public static final String TYPE_PERSON = "p";
+  public static final String TYPE_ORGANIZATION = "o";
+
   public static final int MAX_KEYWORD_LENGTH;
   static {
     int keywordLength = 0;
@@ -33,7 +28,7 @@ public class ArticleKeywords {
         ArticleKeyword.getDefaultInstance().getDescriptorForType().getFields()) {
       if (JavaType.STRING == field.getJavaType()) {
         if ("keyword".equals(field.getName())) {
-          keywordLength = field.getOptions().getExtension(Core.stringLength);
+          keywordLength = field.getOptions().getExtension(Extensions.stringLength);
         }
       }
     }
@@ -41,224 +36,6 @@ public class ArticleKeywords {
       throw new IllegalStateException("Could not find length of keyword field");
     }
     MAX_KEYWORD_LENGTH = keywordLength;
-  }
-
-  private static final Pattern NUMBER_PATTERN_1 = Pattern.compile("^[0-9]+$");
-  private static final Pattern NUMBER_PATTERN_2 = Pattern.compile("^[0-9]+\\-");
-  private static final Pattern BEST_OF_PATTERN = Pattern.compile("^best( [a-z]+)? of ");
-  private static final Set<String> BLACKLIST = Sets.newHashSet();
-  static {
-    for (String keyword : new String[] {
-        "and",
-        "apartments",
-        "blog",
-        "business school",
-        "business schools",
-        "bw business schools page",
-        "capitals",
-        "ceo",
-        "cinema",
-        "committee",
-        "commodities",
-        "company",
-        "corrections",
-        "department",
-        "dialogue",
-        "economy",
-        "economic",
-        "education",
-        "films",
-        "financial calculator",
-        "financial calculators",
-        "first",
-        "graduate reviews",
-        "hedge funds",
-        "hello",
-        "internet",
-        "inequality",
-        "insurance",
-        "jobs",
-        "kids",
-        "kidz",
-        "leadership",
-        "lifestyle",
-        "litigation",
-        "markets",
-        "media",
-        "mobile",
-        "movies",
-        "my",
-        "news",
-        "opinion",
-        "party",
-        "pm",
-        "profile",
-        "restaurants",
-        "retail",
-        "retailing",
-        "shopping",
-        "show",
-        "son",
-        "sports",
-        "stocks",
-        "stock market",
-        "story-video",
-        "teams",
-        "tech",
-        "technology",
-        "that",
-        "the",
-        "their",
-        "there",
-        "they",
-        "times",
-        "top business schools worldwide",
-        "trial",
-        "trials",
-        "try",
-        "university",
-        "up",
-        "video",
-        "web",
-        "why",
-        "with",
-        "yet"}) {
-      BLACKLIST.add(keyword.toLowerCase());
-    }
-  }
-
-  @VisibleForTesting
-  static boolean isValidKeyword(String keyword) {
-    keyword = keyword.trim().toLowerCase();
-    if (keyword.length() < 2 ||
-        NUMBER_PATTERN_1.matcher(keyword).find() ||
-        NUMBER_PATTERN_2.matcher(keyword).find() ||
-        BEST_OF_PATTERN.matcher(keyword).find() ||
-        keyword.contains("…") ||
-        keyword.startsWith("#") ||
-        keyword.startsWith("@") ||
-        keyword.startsWith("bloomberg ") ||
-        keyword.startsWith("mba ") ||
-        keyword.endsWith("@bloomberg") ||
-        keyword.endsWith(" jobs") ||
-        keyword.endsWith(" news") ||
-        keyword.endsWith(" profile") ||
-        keyword.endsWith(" restaurants") ||
-        keyword.endsWith(" trends") ||
-        (keyword.contains("&") && keyword.contains(";")) || // XML entities.
-        keyword.length() > MAX_KEYWORD_LENGTH) {
-      return false;
-    }
-    return !BLACKLIST.contains(keyword);
-  }
-
-  @VisibleForTesting
-  static String cleanKeyword(String keyword) {
-    keyword = keyword.trim();
-    if (keyword.startsWith("‘") || keyword.startsWith("'") ||
-        keyword.startsWith("“") || keyword.startsWith("\"")) {
-      keyword = keyword.substring(1);
-    }
-    if (keyword.endsWith(",") || keyword.endsWith(";") || keyword.endsWith("-")) {
-      keyword = keyword.substring(0, keyword.length() - 1);
-    }
-    if (keyword.endsWith(".") && StringUtils.countMatches(keyword, ".") == 1) {
-      keyword = keyword.substring(0, keyword.length() - 1);
-    }
-    if (keyword.endsWith("-based")) {
-      keyword = keyword.substring(0, keyword.length() - "-based".length());
-    }
-
-    // Since we want to canonicalize as much as we can, and have nice short
-    // keywords, for now convert possessive objects to only their posessive
-    // part, dropping the rest.  This does mean we lose significant information
-    // about the keyword, but perhaps(?) the canonicalization is worth it.
-    if (keyword.contains("’")) {
-      keyword = keyword.substring(0, keyword.indexOf("’"));
-    }
-    if (keyword.contains("'")) {
-      keyword = keyword.substring(0, keyword.indexOf("'"));
-    }
-
-    if (keyword.length() > 0 && !Character.isUpperCase(keyword.charAt(0))) {
-      keyword = WordUtils.capitalizeFully(keyword);
-      keyword = keyword.replaceAll("Aol", "AOL");
-      keyword = keyword.replaceAll("Ios", "iOS");
-      keyword = keyword.replaceAll("Ipad", "iPad");
-      keyword = keyword.replaceAll("Iphone", "iPhone");
-      keyword = keyword.replaceAll("Iwatch", "iWatch");
-      keyword = keyword.replaceAll("Ipod", "iPod");
-    }
-
-    return keyword;
-  }
-
-  /**
-   * Adds keywords found from the <meta> tags in an article's HTML.
-   */
-  public static void add(Article article, Set<String> keywords)
-      throws DataInternalException, ValidationException {
-    List<Message> articleKeywordList = Lists.newArrayList();
-    for (String keyword : keywords) {
-      if (isValidKeyword(keyword)) {
-        articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setUrlId(article.getUrlId())
-            .setKeyword(cleanKeyword(keyword))
-            .setStrength(1)
-            .setType("k")
-            .build());
-      }
-    }
-    Database.insert(articleKeywordList);
-  }
-
-  /**
-   * Adds keywords that were actually found by our NLP processor to the database
-   * for the passed article.  The strengths given to these keywords are 5 times
-   * their number of occurrences, capped at 20, so that they're significantly
-   * stronger than <meta> keywords that were promoted (perhaps nefariously)
-   * by the publisher.
-   */
-  public static void add(Article article, InterpretedData interpretedData)
-      throws DataInternalException, ValidationException {
-    List<Message> articleKeywordList = Lists.newArrayList();
-    for (String location : interpretedData.getLocations()) {
-      location = cleanKeyword(location);
-      if (isValidKeyword(location)) {
-        articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setUrlId(article.getUrlId())
-            .setKeyword(location)
-            .setStrength(Math.max(15,
-                interpretedData.getLocationCount(location) * 2))
-            .setType("l")
-            .build());
-      }
-    }
-    for (String person : interpretedData.getPeople()) {
-      person = cleanKeyword(person);
-      if (isValidKeyword(person)) {
-        articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setUrlId(article.getUrlId())
-            .setKeyword(person)
-            .setStrength(Math.max(20,
-                interpretedData.getPersonCount(person) * 5))
-            .setType("p")
-            .build());
-      }
-    }
-    for (String organization : interpretedData.getOrganizations()) {
-      organization = cleanKeyword(organization);
-      if (isValidKeyword(organization)) {
-        articleKeywordList.add(ArticleKeyword.newBuilder()
-            .setUrlId(article.getUrlId())
-            .setKeyword(organization)
-            .setStrength(Math.max(20,
-                interpretedData.getOrganizationCount(organization) * 5))
-            .setType("o")
-            .build());
-      }
-    }
-    Database.insert(articleKeywordList);
   }
 
   /**

@@ -1,4 +1,4 @@
-package com.janknspank.dom.training;
+package com.janknspank.opennlp;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,15 +11,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.base.Joiner;
-import com.janknspank.dom.Interpreter;
-import com.janknspank.dom.SiteParser;
-import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.DocumentBuilder;
+import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
+import com.janknspank.interpreter.KeywordFinder;
+import com.janknspank.interpreter.SiteParser;
 
 /**
  * Grabs content from all the URLs in "URLS", then writes their tokenized
@@ -56,7 +56,7 @@ public class GrabTrainingData {
     FetchResponse fetchResponse = fetcher.fetch(url);
     if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
       try {
-        return DocumentBuilder.build(fetchResponse.getReader());
+        return DocumentBuilder.build(url, fetchResponse.getReader());
       } catch (ParserException e) {
         throw new FetchException("Could not read web site: " + e.getMessage(), e);
       }
@@ -67,12 +67,10 @@ public class GrabTrainingData {
 
   public static void main(String args[]) throws Exception {
     GrabTrainingData grabTrainingData = new GrabTrainingData();
-    SiteParser siteParser = new SiteParser();
 
     for (String url : URLS) {
       // Get all the paragraphs.
-      List<Node> paragraphs = siteParser.getParagraphNodes(
-          grabTrainingData.getDocumentNode(url), url);
+      List<Node> paragraphs = SiteParser.getParagraphNodes(grabTrainingData.getDocumentNode(url));
 
       // Open a file for writing all the paragraphs and sentences.
       String filename = url;
@@ -98,9 +96,6 @@ public class GrabTrainingData {
         directory.mkdir();
       }
       File file = new File(directory, filename + ".txt");
-//      if (file.exists()) {
-//        throw new RuntimeException("File already exists! " + file.getAbsolutePath());
-//      }
       System.err.println("Writing to " + path + "/" + filename + ".txt ...");
       BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
@@ -111,9 +106,9 @@ public class GrabTrainingData {
       // Write out all the sentences, tokenized.
       for (Node paragraph : paragraphs) {
         String paragraphText = paragraph.getFlattenedText();
-        for (String sentence : Interpreter.getSentences(paragraphText)) {
+        for (String sentence : KeywordFinder.getSentences(paragraphText)) {
           boolean first = true;
-          for (String token : Interpreter.getTokens(sentence)) {
+          for (String token : KeywordFinder.getTokens(sentence)) {
             if (first) {
               first = false;
             } else {

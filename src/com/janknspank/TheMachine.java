@@ -1,26 +1,22 @@
 package com.janknspank;
 
-import java.net.MalformedURLException;
-import java.util.List;
-import java.util.Set;
+import java.util.Collection;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.protobuf.Message;
-import com.janknspank.ArticleHandler.ArticleCallback;
+import com.google.common.collect.Iterables;
 import com.janknspank.common.UrlCleaner;
 import com.janknspank.common.UrlWhitelist;
-import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Urls;
-import com.janknspank.data.Links;
 import com.janknspank.data.Database;
+import com.janknspank.data.Links;
+import com.janknspank.data.Urls;
 import com.janknspank.data.ValidationException;
-import com.janknspank.dom.InterpretedData;
-import com.janknspank.proto.Core.Article;
+import com.janknspank.dom.parser.ParserException;
+import com.janknspank.fetch.FetchException;
+import com.janknspank.interpreter.Interpreter;
+import com.janknspank.interpreter.RequiredFieldException;
 import com.janknspank.proto.Core.Url;
-import com.janknspank.proto.Core.Link;
+import com.janknspank.proto.Interpreter.InterpretedData;
 
 public class TheMachine {
   public void start() throws DataInternalException {
@@ -49,57 +45,28 @@ public class TheMachine {
       }
 
       System.err.println("Crawling: " + startUrl.getUrl());
-      final String startUrlId = startUrl.getId();
-      final Set<String> foundUrls = Sets.newHashSet();
-      new Crawler(new ArticleCallback() {
-        List<Message> linkList = Lists.newArrayList();
 
-        @Override
-        public void foundUrl(String url) {
-          try {
-            url = UrlCleaner.clean(url);
-          } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return;
-          }
+      // Save this article and its keywords.
+      try {
+        InterpretedData interpretedData = Interpreter.interpret(startUrl);
+        Database.insert(interpretedData.getArticle());
+        Database.insert(interpretedData.getKeywordList());
 
-          // Skip non-whitelisted URLs and URLs we've already seen on this page.
-          if (!UrlWhitelist.isOkay(url) || foundUrls.contains(url)) {
-            return;
-          }
-          foundUrls.add(url);
+        // Make sure to filter and clean the URLs - only store the ones we want to crawl!
+        Collection<Url> destinationUrls = Urls.put(
+            Iterables.transform(
+                Iterables.filter(interpretedData.getUrlList(), UrlWhitelist.PREDICATE),
+                UrlCleaner.TRANSFORM_FUNCTION),
+            false /* isTweet */);
+        Links.put(startUrl, destinationUrls);
 
-          try {
-            Url destination = Urls.put(url, /* isTweet */ false);
-            linkList.add(Link.newBuilder()
-                .setOriginUrlId(startUrlId)
-                .setDestinationUrlId(destination.getId())
-                .setDiscoveryTime(destination.getDiscoveryTime())
-                .setLastFoundTime(destination.getDiscoveryTime())
-                .build());
-          } catch (DataInternalException e) {
-            e.printStackTrace();
-          }
-        }
-
-        @Override
-        public void foundArticle(Article article,
-            InterpretedData interpretedData,
-            Set<String> keywords) {
-          try {
-            // Flush any Links we've found lately.
-            Database.insert(linkList);
-            linkList.clear();
-
-            // Save this article and its keywords.
-            Database.insert(article);
-            ArticleKeywords.add(article, interpretedData);
-            ArticleKeywords.add(article, keywords);
-          } catch (ValidationException|DataInternalException e) {
-            e.printStackTrace();
-          }
-        }
-      }).crawl(startUrl);
+      } catch (ValidationException e) {
+        // Internal error (bug in our code).
+        e.printStackTrace();
+      } catch (FetchException|ParserException|RequiredFieldException e) {
+        // Bad article.
+        e.printStackTrace();
+      }
     }
   }
 

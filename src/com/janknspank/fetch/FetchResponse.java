@@ -1,31 +1,21 @@
 package com.janknspank.fetch;
 
-import java.io.IOException;
 import java.io.Reader;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-
 public class FetchResponse {
-  private final CloseableHttpResponse closeableHttpResponse;
-  private CharsetDetectingReader reader = null;
+  private final int statusCode;
+  private final Reader reader;
 
-  FetchResponse(CloseableHttpResponse closeableHttpResponse) {
-    this.closeableHttpResponse = closeableHttpResponse;
+  FetchResponse(int statusCode, Reader reader) {
+    this.statusCode = statusCode;
+    this.reader = reader;
   }
 
   public int getStatusCode() {
-    return closeableHttpResponse.getStatusLine().getStatusCode();
+    return statusCode;
   }
 
-  public Reader getReader() throws FetchException {
-    if (reader != null) {
-      throw new FetchException("Reader already fetched");
-    }
-    try {
-      reader = new CharsetDetectingReader(closeableHttpResponse.getEntity().getContent());
-    } catch (IOException e) {
-      throw new FetchException("Could not read stream: " + e.getMessage(), e);
-    }
+  public Reader getReader() {
     return reader;
   }
 }

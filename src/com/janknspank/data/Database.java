@@ -21,9 +21,9 @@ import com.google.common.collect.Maps;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
-import com.janknspank.proto.Core;
-import com.janknspank.proto.Core.Required;
-import com.janknspank.proto.Core.StorageMethod;
+import com.janknspank.proto.Extensions;
+import com.janknspank.proto.Extensions.Required;
+import com.janknspank.proto.Extensions.StorageMethod;
 import com.janknspank.proto.Validator;
 
 public class Database {
@@ -32,7 +32,7 @@ public class Database {
   private static final String DB_URL =
       "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver?" +
       "useTimezone=true&rewriteBatchedStatements=true";
-//      "jdbc:mysql://localhost/test?useTimezone=true";
+//      "jdbc:mysql://localhost/test?useTimezone=true&rewriteBatchedStatements=true";
   private static final String PROTO_COLUMN_NAME = "proto";
   static {
     try {
@@ -69,7 +69,7 @@ public class Database {
   private static String getSqlTypeForField(FieldDescriptor fieldDescriptor) {
     switch (fieldDescriptor.getJavaType()) {
       case STRING:
-        int stringLength = fieldDescriptor.getOptions().getExtension(Core.stringLength);
+        int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
         if (stringLength == -1) {
           throw new IllegalStateException("String length undefined for " +
               fieldDescriptor.getName());
@@ -107,7 +107,7 @@ public class Database {
     int primaryKeyCount = 0;
     Message message = getDefaultInstance(clazz);
     for (FieldDescriptor field : message.getDescriptorForType().getFields()) {
-      StorageMethod storageMethod = field.getOptions().getExtension(Core.storageMethod);
+      StorageMethod storageMethod = field.getOptions().getExtension(Extensions.storageMethod);
       switch (storageMethod) {
         case PRIMARY_KEY:
           primaryKeyCount++;
@@ -164,7 +164,7 @@ public class Database {
         if (storageMethod == StorageMethod.PRIMARY_KEY) {
           sql.append(" PRIMARY KEY");
         }
-        if (Required.YES == field.getOptions().getExtension(Core.required)) {
+        if (Required.YES == field.getOptions().getExtension(Extensions.required)) {
           sql.append(" NOT NULL");
         }
         sql.append(", ");

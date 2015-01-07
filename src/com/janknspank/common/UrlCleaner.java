@@ -15,6 +15,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 /**
@@ -22,6 +23,18 @@ import com.google.common.collect.Lists;
  * canonical forms.
  */
 public class UrlCleaner {
+  public static final Function<String, String> TRANSFORM_FUNCTION =
+      new Function<String, String>() {
+        @Override
+        public String apply(String dirtyUrl) {
+          try {
+            return clean(dirtyUrl);
+          } catch (MalformedURLException e) {
+            throw new RuntimeException("Could not clean url: " + e.getMessage(), e);
+          }
+        }
+      };
+
   /**
    * Cleans the passed query parameter map, allowing only strings from the
    * passed allowed keys.  The Map is modified in place.

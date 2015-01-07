@@ -1,18 +1,19 @@
 package com.janknspank.data;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.protobuf.Message;
+import com.google.common.collect.Maps;
 import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.DateParser;
-import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Validator;
 
@@ -60,39 +61,68 @@ public class Urls {
     return url.contains("//twitter.com/") ? 0 : 10;
   }
 
+  private static Url create(String url, boolean isTweet) {
+    return Url.newBuilder()
+        .setUrl(url)
+        .setId(GuidFactory.generate())
+        .setTweetCount(isTweet ? 1 : 0)
+        .setDiscoveryTime(System.currentTimeMillis())
+        .setCrawlPriority(getCrawlPriority(url, null))
+        .build();
+  }
+
   /**
-   * Makes sure the passed-in URL is stored in our database.  If it already
-   * exists, its tweet count is incremented accordingly, and its crawl priority
-   * is increased.
+   * Makes sure the passed-in URL is stored in our database.  If it exists
+   * already, its tweet_count and priority will be updated accordingly.
+   * The returned Url is either an updated version of the existing field or
+   * a new Url, as necessary.
    */
-  public static Url put(String url, boolean isTweet) throws DataInternalException {
-    Url existing = Database.get(url, Url.class);
-    if (existing != null) {
+  public static Url put(String urlString, boolean isTweet)
+      throws DataInternalException {
+    return Iterables.getFirst(put(ImmutableList.of(urlString), isTweet), null);
+  }
+
+  /**
+   * Makes sure the passed-in URLs are stored in our database.  Existing URLs
+   * have their tweet_count and priority updated accordingly, if isTweet is
+   * true.  The return Url objects are in the same order as the URL strings.
+   */
+  public static Collection<Url> put(Iterable<String> urlStrings, boolean isTweet)
+      throws DataInternalException {
+    // Create a LinkedHashMap for the return values.  (Doing this now preseves
+    // the order of our return values, so they match the order of urlStrings.
+    LinkedHashMap<String, Url> urls = Maps.newLinkedHashMap();
+    for (String urlString : urlStrings) {
+      urls.put(urlString, null);
+    }
+
+    List<Url> urlsToUpdate = Lists.newArrayList(); // To increment tweet_count.
+    for (Url existingUrl : Database.get(urlStrings, Url.class)) {
+      urls.put(existingUrl.getUrl(), existingUrl);
+
       if (isTweet) {
-        Url.Builder updatedUrl = existing.toBuilder();
-        updatedUrl.setTweetCount(existing.getTweetCount() + 1);
-        if (!existing.hasLastCrawlTime() && existing.getTweetCount() < 500) {
-          updatedUrl.setCrawlPriority(existing.getCrawlPriority() + 10);
+        Url.Builder updatedUrlBuilder = existingUrl.toBuilder();
+        updatedUrlBuilder.setTweetCount(existingUrl.getTweetCount() + 1);
+        if (!existingUrl.hasLastCrawlTime() && existingUrl.getTweetCount() < 500) {
+          updatedUrlBuilder.setCrawlPriority(existingUrl.getCrawlPriority() + 10);
         }
-        try {
-          Database.update(updatedUrl.build());
-        } catch (ValidationException e) {
-          throw new DataInternalException("Could not update discovered URL", e);
-        }
+        urlsToUpdate.add(updatedUrlBuilder.build());
       }
-      return existing;
+    }
+
+    List<Url> urlsToCreate = Lists.newArrayList();
+    for (String urlString : urlStrings) {
+      if (urls.get(urlString) == null) {
+        Url newUrl = create(urlString, isTweet);
+        urlsToCreate.add(newUrl);
+        urls.put(urlString, newUrl);
+      }
     }
 
     try {
-      Url newUrl = Url.newBuilder()
-          .setUrl(url)
-          .setId(GuidFactory.generate())
-          .setTweetCount(isTweet ? 1 : 0)
-          .setDiscoveryTime(System.currentTimeMillis())
-          .setCrawlPriority(getCrawlPriority(url, null))
-          .build();
-      Database.insert(newUrl);
-      return newUrl;
+      Database.insert(urlsToCreate);
+      Database.update(urlsToUpdate);
+      return urls.values();
     } catch (ValidationException e) {
       throw new DataInternalException("Could not insert new discovered URL", e);
     }
@@ -134,44 +164,10 @@ public class Urls {
 
   /** Helper method for creating the discovered-url table. */
   public static void main(String args[]) throws Exception {
-//    Connection connection = Database.getConnection();
-//    connection.prepareStatement(Database.getCreateTableStatement(Url.class)).execute();
-//    for (String statement : Database.getCreateIndexesStatement(Url.class)) {
-//      connection.prepareStatement(statement).execute();
-//    }
-
-    // Figure out what articles we've crawled already.
-    Set<String> crawledArticleIds = Sets.newHashSet();
-    PreparedStatement stmt = Database.getConnection().prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Article.class));
-    ResultSet result = stmt.executeQuery();
-    while (!result.isAfterLast()) {
-      Article article = Database.createFromResultSet(result, Article.class);
-      if (article != null) {
-        crawledArticleIds.add(article.getUrlId());
-      }
-    }
-
-    stmt = Database.getConnection().prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Url.class));
-    result = stmt.executeQuery();
-    List<Message> urlsToUpdate = Lists.newArrayList();
-    while (!result.isAfterLast()) {
-      Url url = Database.createFromResultSet(result, Url.class);
-      if (url != null) {
-        int crawlPriority = crawledArticleIds.contains(url.getId()) ?
-            0 : getCrawlPriority(url.getUrl(), null);
-        if (Math.abs(url.getCrawlPriority() - crawlPriority) > 5) {
-          System.out.println("pri=" + crawlPriority + " for " + url.getUrl());
-          urlsToUpdate.add(url.toBuilder()
-              .setCrawlPriority(crawlPriority)
-              .build());
-        }
-      }
-      if (urlsToUpdate.size() == 100 || url == null) {
-        System.out.println(Database.update(urlsToUpdate) + " rows updated");
-        urlsToUpdate.clear();
-      }
+    Connection connection = Database.getConnection();
+    connection.prepareStatement(Database.getCreateTableStatement(Url.class)).execute();
+    for (String statement : Database.getCreateIndexesStatement(Url.class)) {
+      connection.prepareStatement(statement).execute();
     }
   }
 

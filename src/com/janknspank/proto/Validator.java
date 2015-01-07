@@ -1,12 +1,10 @@
 package com.janknspank.proto;
 
-import com.google.protobuf.Message;
 import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
 import com.janknspank.data.ValidationException;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.Required;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.Extensions.Required;
 
 /**
  * Validates a protocol buffer object by using the Required instructions
@@ -16,42 +14,50 @@ public class Validator {
   public static Message assertValid(Message message) throws ValidationException {
     Asserts.assertNotNull(message, "Message cannot be null");
 
-    // HACK(jonemerson): Let's figure out who's not cleaning their URLs.
-    if (message instanceof Article) {
-      if (((Article) message).getUrl().contains("?") &&
-          (((Article) message).getUrl().contains("ns_campaign") ||
-              ((Article) message).getUrl().contains("utm_"))) {
-        throw new ValidationException("Article.url contains bad query parameter - " +
-            "is this intentional? " + ((Article) message).getUrl());
-      }
-    }
-    if (message instanceof Url) {
-      if (((Url) message).getUrl().contains("?") &&
-          (((Url) message).getUrl().contains("ns_campaign") ||
-              ((Url) message).getUrl().contains("utm_"))) {
-        throw new ValidationException("Url.url contains bad query parameter - " +
-            "is this intentional? " + ((Url) message).getUrl());
-      }
-    }
-
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
-      if (fieldDescriptor.getOptions().getExtension(Core.required) == Required.YES) {
-        Asserts.assertTrue(message.hasField(fieldDescriptor),
-            fieldDescriptor.getName() + " cannot be null");
-        switch (fieldDescriptor.getJavaType()) {
-          case STRING:
+      String fieldName = message.getClass().getSimpleName() + "." + fieldDescriptor.getName();
+
+      // Verify required fields are all set, and required repeateds are non-empty.
+      if (fieldDescriptor.getOptions().getExtension(Extensions.required) == Required.YES) {
+        if (fieldDescriptor.isRepeated()) {
+          Asserts.assertTrue(message.getRepeatedFieldCount(fieldDescriptor) > 0,
+              "Required repeated field " + fieldName + " must be non-empty");
+        } else {
+          Asserts.assertTrue(message.hasField(fieldDescriptor),
+              fieldName + " cannot be null");
+        }
+      }
+
+      // Verify we support all the specified types, and that strings are within
+      // their length limits.
+      switch (fieldDescriptor.getJavaType()) {
+        case STRING:
+          Integer maxLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
+          if (maxLength == null) {
+            throw new IllegalStateException(
+                "String field " + fieldName + " must have string_length annotation");
+          }
+          if (fieldDescriptor.isRepeated()) {
+            for (int i = 0; i < message.getRepeatedFieldCount(fieldDescriptor); i++) {
+              int stringLength = ((String) message.getRepeatedField(fieldDescriptor, i)).length();
+              if (stringLength > maxLength) {
+                throw new ValidationException("Field " + fieldName + " can have a " +
+                    "maximum length of " + maxLength + ". Actual length is " + stringLength + ".");
+              }
+            }
+          } else {
             int stringLength = ((String) message.getField(fieldDescriptor)).length();
-            int maxLength = fieldDescriptor.getOptions().getExtension(Core.stringLength);
             if (stringLength > maxLength) {
-              throw new ValidationException("Field " + fieldDescriptor.getName() + " can have a " +
+              throw new ValidationException("Field " + fieldName + " can have a " +
                   "maximum length of " + maxLength + ". Actual length is " + stringLength + ".");
             }
-          case LONG:
-          case INT:
-            break;
-          default:
-            throw new RuntimeException("Unsupported type: " + fieldDescriptor.getJavaType().name());
-        }
+          }
+          break;
+        case LONG:
+        case INT:
+          break;
+        default:
+          throw new RuntimeException("Unsupported type: " + fieldDescriptor.getJavaType().name());
       }
     }
     return message;

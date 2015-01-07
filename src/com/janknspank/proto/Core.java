@@ -7,385 +7,10 @@ public final class Core {
   private Core() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
-    registry.add(com.janknspank.proto.Core.required);
-    registry.add(com.janknspank.proto.Core.storageMethod);
-    registry.add(com.janknspank.proto.Core.stringLength);
-    registry.add(com.janknspank.proto.Core.clientSerialization);
   }
-  /**
-   * Protobuf enum {@code Required}
-   */
-  public enum Required
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>YES = 1;</code>
-     *
-     * <pre>
-     * This field must be set for its parent message to be valid.
-     * </pre>
-     */
-    YES(0, 1),
-    /**
-     * <code>NO = 2;</code>
-     *
-     * <pre>
-     * This field is optional.
-     * </pre>
-     */
-    NO(1, 2),
-    ;
-
-    /**
-     * <code>YES = 1;</code>
-     *
-     * <pre>
-     * This field must be set for its parent message to be valid.
-     * </pre>
-     */
-    public static final int YES_VALUE = 1;
-    /**
-     * <code>NO = 2;</code>
-     *
-     * <pre>
-     * This field is optional.
-     * </pre>
-     */
-    public static final int NO_VALUE = 2;
-
-
-    public final int getNumber() { return value; }
-
-    public static Required valueOf(int value) {
-      switch (value) {
-        case 1: return YES;
-        case 2: return NO;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<Required>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<Required>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Required>() {
-            public Required findValueByNumber(int number) {
-              return Required.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.janknspank.proto.Core.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final Required[] VALUES = values();
-
-    public static Required valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private Required(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:Required)
-  }
-
-  /**
-   * Protobuf enum {@code StorageMethod}
-   */
-  public enum StorageMethod
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>BLOB = 1;</code>
-     *
-     * <pre>
-     * Default: Just throw this field into an opaque unindexed blob that will
-     * be deserialized once we read it on the Java side.
-     * </pre>
-     */
-    BLOB(0, 1),
-    /**
-     * <code>PRIMARY_KEY = 2;</code>
-     *
-     * <pre>
-     * Use this field as the primary key.
-     * </pre>
-     */
-    PRIMARY_KEY(1, 2),
-    /**
-     * <code>INDEX = 3;</code>
-     *
-     * <pre>
-     * Pull out this field into its own row and put an index on it.
-     * </pre>
-     */
-    INDEX(2, 3),
-    /**
-     * <code>UNIQUE_INDEX = 4;</code>
-     *
-     * <pre>
-     * Pull out this field into its own row and put an unique index on it (that
-     * is, all values in this column will be unique).
-     * </pre>
-     */
-    UNIQUE_INDEX(3, 4),
-    /**
-     * <code>PULL_OUT = 5;</code>
-     *
-     * <pre>
-     * Pull out this field into its own row in the MySQL schema, but do not
-     * index it.
-     * </pre>
-     */
-    PULL_OUT(4, 5),
-    ;
-
-    /**
-     * <code>BLOB = 1;</code>
-     *
-     * <pre>
-     * Default: Just throw this field into an opaque unindexed blob that will
-     * be deserialized once we read it on the Java side.
-     * </pre>
-     */
-    public static final int BLOB_VALUE = 1;
-    /**
-     * <code>PRIMARY_KEY = 2;</code>
-     *
-     * <pre>
-     * Use this field as the primary key.
-     * </pre>
-     */
-    public static final int PRIMARY_KEY_VALUE = 2;
-    /**
-     * <code>INDEX = 3;</code>
-     *
-     * <pre>
-     * Pull out this field into its own row and put an index on it.
-     * </pre>
-     */
-    public static final int INDEX_VALUE = 3;
-    /**
-     * <code>UNIQUE_INDEX = 4;</code>
-     *
-     * <pre>
-     * Pull out this field into its own row and put an unique index on it (that
-     * is, all values in this column will be unique).
-     * </pre>
-     */
-    public static final int UNIQUE_INDEX_VALUE = 4;
-    /**
-     * <code>PULL_OUT = 5;</code>
-     *
-     * <pre>
-     * Pull out this field into its own row in the MySQL schema, but do not
-     * index it.
-     * </pre>
-     */
-    public static final int PULL_OUT_VALUE = 5;
-
-
-    public final int getNumber() { return value; }
-
-    public static StorageMethod valueOf(int value) {
-      switch (value) {
-        case 1: return BLOB;
-        case 2: return PRIMARY_KEY;
-        case 3: return INDEX;
-        case 4: return UNIQUE_INDEX;
-        case 5: return PULL_OUT;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<StorageMethod>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<StorageMethod>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<StorageMethod>() {
-            public StorageMethod findValueByNumber(int number) {
-              return StorageMethod.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.janknspank.proto.Core.getDescriptor().getEnumTypes().get(1);
-    }
-
-    private static final StorageMethod[] VALUES = values();
-
-    public static StorageMethod valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private StorageMethod(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:StorageMethod)
-  }
-
-  /**
-   * Protobuf enum {@code ClientSerialization}
-   */
-  public enum ClientSerialization
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>INCLUDE = 1;</code>
-     *
-     * <pre>
-     * Include this field in responses to the client, serialized with default
-     * handling.
-     * </pre>
-     */
-    INCLUDE(0, 1),
-    /**
-     * <code>INCLUDE_AS_NUMBER = 2;</code>
-     *
-     * <pre>
-     * Include this field in responses to the client, serializing it as a
-     * number even if precision / bits may be lost.
-     * </pre>
-     */
-    INCLUDE_AS_NUMBER(1, 2),
-    /**
-     * <code>EXCLUDE = 3;</code>
-     *
-     * <pre>
-     * Do not include this field in responses to the client.
-     * </pre>
-     */
-    EXCLUDE(2, 3),
-    ;
-
-    /**
-     * <code>INCLUDE = 1;</code>
-     *
-     * <pre>
-     * Include this field in responses to the client, serialized with default
-     * handling.
-     * </pre>
-     */
-    public static final int INCLUDE_VALUE = 1;
-    /**
-     * <code>INCLUDE_AS_NUMBER = 2;</code>
-     *
-     * <pre>
-     * Include this field in responses to the client, serializing it as a
-     * number even if precision / bits may be lost.
-     * </pre>
-     */
-    public static final int INCLUDE_AS_NUMBER_VALUE = 2;
-    /**
-     * <code>EXCLUDE = 3;</code>
-     *
-     * <pre>
-     * Do not include this field in responses to the client.
-     * </pre>
-     */
-    public static final int EXCLUDE_VALUE = 3;
-
-
-    public final int getNumber() { return value; }
-
-    public static ClientSerialization valueOf(int value) {
-      switch (value) {
-        case 1: return INCLUDE;
-        case 2: return INCLUDE_AS_NUMBER;
-        case 3: return EXCLUDE;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<ClientSerialization>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<ClientSerialization>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<ClientSerialization>() {
-            public ClientSerialization findValueByNumber(int number) {
-              return ClientSerialization.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.janknspank.proto.Core.getDescriptor().getEnumTypes().get(2);
-    }
-
-    private static final ClientSerialization[] VALUES = values();
-
-    public static ClientSerialization valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private ClientSerialization(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:ClientSerialization)
-  }
-
-  public interface ArticleOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ArticleOrBuilder extends
+      com.google.protobuf.GeneratedMessage.
+          ExtendableMessageOrBuilder<Article> {
 
     // optional string url_id = 1;
     /**
@@ -507,20 +132,25 @@ public final class Core {
     com.google.protobuf.ByteString
         getImageUrlBytes();
 
-    // optional string article_body = 9;
+    // repeated string paragraph = 13;
     /**
-     * <code>optional string article_body = 9;</code>
+     * <code>repeated string paragraph = 13;</code>
      */
-    boolean hasArticleBody();
+    java.util.List<java.lang.String>
+    getParagraphList();
     /**
-     * <code>optional string article_body = 9;</code>
+     * <code>repeated string paragraph = 13;</code>
      */
-    java.lang.String getArticleBody();
+    int getParagraphCount();
     /**
-     * <code>optional string article_body = 9;</code>
+     * <code>repeated string paragraph = 13;</code>
+     */
+    java.lang.String getParagraph(int index);
+    /**
+     * <code>repeated string paragraph = 13;</code>
      */
     com.google.protobuf.ByteString
-        getArticleBodyBytes();
+        getParagraphBytes(int index);
 
     // optional int64 published_time = 10;
     /**
@@ -546,10 +176,10 @@ public final class Core {
    * Protobuf type {@code Article}
    */
   public static final class Article extends
-      com.google.protobuf.GeneratedMessage
-      implements ArticleOrBuilder {
+      com.google.protobuf.GeneratedMessage.ExtendableMessage<
+        Article> implements ArticleOrBuilder {
     // Use Article.newBuilder() to construct.
-    private Article(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private Article(com.google.protobuf.GeneratedMessage.ExtendableBuilder<com.janknspank.proto.Core.Article, ?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
@@ -633,19 +263,22 @@ public final class Core {
               imageUrl_ = input.readBytes();
               break;
             }
-            case 74: {
-              bitField0_ |= 0x00000100;
-              articleBody_ = input.readBytes();
-              break;
-            }
             case 80: {
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000100;
               publishedTime_ = input.readInt64();
               break;
             }
             case 88: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000200;
               modifiedTime_ = input.readInt64();
+              break;
+            }
+            case 106: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                paragraph_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              paragraph_.add(input.readBytes());
               break;
             }
           }
@@ -656,6 +289,9 @@ public final class Core {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          paragraph_ = new com.google.protobuf.UnmodifiableLazyStringList(paragraph_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -1032,47 +668,34 @@ public final class Core {
       }
     }
 
-    // optional string article_body = 9;
-    public static final int ARTICLE_BODY_FIELD_NUMBER = 9;
-    private java.lang.Object articleBody_;
+    // repeated string paragraph = 13;
+    public static final int PARAGRAPH_FIELD_NUMBER = 13;
+    private com.google.protobuf.LazyStringList paragraph_;
     /**
-     * <code>optional string article_body = 9;</code>
+     * <code>repeated string paragraph = 13;</code>
      */
-    public boolean hasArticleBody() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+    public java.util.List<java.lang.String>
+        getParagraphList() {
+      return paragraph_;
     }
     /**
-     * <code>optional string article_body = 9;</code>
+     * <code>repeated string paragraph = 13;</code>
      */
-    public java.lang.String getArticleBody() {
-      java.lang.Object ref = articleBody_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          articleBody_ = s;
-        }
-        return s;
-      }
+    public int getParagraphCount() {
+      return paragraph_.size();
     }
     /**
-     * <code>optional string article_body = 9;</code>
+     * <code>repeated string paragraph = 13;</code>
+     */
+    public java.lang.String getParagraph(int index) {
+      return paragraph_.get(index);
+    }
+    /**
+     * <code>repeated string paragraph = 13;</code>
      */
     public com.google.protobuf.ByteString
-        getArticleBodyBytes() {
-      java.lang.Object ref = articleBody_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        articleBody_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getParagraphBytes(int index) {
+      return paragraph_.getByteString(index);
     }
 
     // optional int64 published_time = 10;
@@ -1082,7 +705,7 @@ public final class Core {
      * <code>optional int64 published_time = 10;</code>
      */
     public boolean hasPublishedTime() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional int64 published_time = 10;</code>
@@ -1098,7 +721,7 @@ public final class Core {
      * <code>optional int64 modified_time = 11;</code>
      */
     public boolean hasModifiedTime() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional int64 modified_time = 11;</code>
@@ -1116,7 +739,7 @@ public final class Core {
       copyright_ = "";
       description_ = "";
       imageUrl_ = "";
-      articleBody_ = "";
+      paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       publishedTime_ = 0L;
       modifiedTime_ = 0L;
     }
@@ -1125,6 +748,10 @@ public final class Core {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!extensionsAreInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1132,6 +759,9 @@ public final class Core {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      com.google.protobuf.GeneratedMessage
+        .ExtendableMessage<com.janknspank.proto.Core.Article>.ExtensionWriter extensionWriter =
+          newExtensionWriter();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getUrlIdBytes());
       }
@@ -1156,14 +786,15 @@ public final class Core {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(8, getImageUrlBytes());
       }
+      extensionWriter.writeUntil(10, output);
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(9, getArticleBodyBytes());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt64(10, publishedTime_);
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt64(11, modifiedTime_);
+      }
+      for (int i = 0; i < paragraph_.size(); i++) {
+        output.writeBytes(13, paragraph_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1208,16 +839,22 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, getArticleBodyBytes());
+          .computeInt64Size(10, publishedTime_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(10, publishedTime_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(11, modifiedTime_);
       }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < paragraph_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(paragraph_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getParagraphList().size();
+      }
+      size += extensionsSerializedSize();
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -1300,8 +937,8 @@ public final class Core {
      * Protobuf type {@code Article}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.Core.ArticleOrBuilder {
+        com.google.protobuf.GeneratedMessage.ExtendableBuilder<
+          com.janknspank.proto.Core.Article, Builder> implements com.janknspank.proto.Core.ArticleOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.janknspank.proto.Core.internal_static_Article_descriptor;
@@ -1350,7 +987,7 @@ public final class Core {
         bitField0_ = (bitField0_ & ~0x00000040);
         imageUrl_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
-        articleBody_ = "";
+        paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000100);
         publishedTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000200);
@@ -1416,16 +1053,18 @@ public final class Core {
           to_bitField0_ |= 0x00000080;
         }
         result.imageUrl_ = imageUrl_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          paragraph_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              paragraph_);
+          bitField0_ = (bitField0_ & ~0x00000100);
         }
-        result.articleBody_ = articleBody_;
+        result.paragraph_ = paragraph_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
+          to_bitField0_ |= 0x00000100;
         }
         result.publishedTime_ = publishedTime_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
+          to_bitField0_ |= 0x00000200;
         }
         result.modifiedTime_ = modifiedTime_;
         result.bitField0_ = to_bitField0_;
@@ -1484,9 +1123,14 @@ public final class Core {
           imageUrl_ = other.imageUrl_;
           onChanged();
         }
-        if (other.hasArticleBody()) {
-          bitField0_ |= 0x00000100;
-          articleBody_ = other.articleBody_;
+        if (!other.paragraph_.isEmpty()) {
+          if (paragraph_.isEmpty()) {
+            paragraph_ = other.paragraph_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+          } else {
+            ensureParagraphIsMutable();
+            paragraph_.addAll(other.paragraph_);
+          }
           onChanged();
         }
         if (other.hasPublishedTime()) {
@@ -1495,11 +1139,16 @@ public final class Core {
         if (other.hasModifiedTime()) {
           setModifiedTime(other.getModifiedTime());
         }
+        this.mergeExtensionFields(other);
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!extensionsAreInitialized()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -2114,76 +1763,95 @@ public final class Core {
         return this;
       }
 
-      // optional string article_body = 9;
-      private java.lang.Object articleBody_ = "";
-      /**
-       * <code>optional string article_body = 9;</code>
-       */
-      public boolean hasArticleBody() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+      // repeated string paragraph = 13;
+      private com.google.protobuf.LazyStringList paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureParagraphIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          paragraph_ = new com.google.protobuf.LazyStringArrayList(paragraph_);
+          bitField0_ |= 0x00000100;
+         }
       }
       /**
-       * <code>optional string article_body = 9;</code>
+       * <code>repeated string paragraph = 13;</code>
        */
-      public java.lang.String getArticleBody() {
-        java.lang.Object ref = articleBody_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          articleBody_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public java.util.List<java.lang.String>
+          getParagraphList() {
+        return java.util.Collections.unmodifiableList(paragraph_);
       }
       /**
-       * <code>optional string article_body = 9;</code>
+       * <code>repeated string paragraph = 13;</code>
+       */
+      public int getParagraphCount() {
+        return paragraph_.size();
+      }
+      /**
+       * <code>repeated string paragraph = 13;</code>
+       */
+      public java.lang.String getParagraph(int index) {
+        return paragraph_.get(index);
+      }
+      /**
+       * <code>repeated string paragraph = 13;</code>
        */
       public com.google.protobuf.ByteString
-          getArticleBodyBytes() {
-        java.lang.Object ref = articleBody_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          articleBody_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+          getParagraphBytes(int index) {
+        return paragraph_.getByteString(index);
       }
       /**
-       * <code>optional string article_body = 9;</code>
+       * <code>repeated string paragraph = 13;</code>
        */
-      public Builder setArticleBody(
+      public Builder setParagraph(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureParagraphIsMutable();
+        paragraph_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paragraph = 13;</code>
+       */
+      public Builder addParagraph(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
-        articleBody_ = value;
+  ensureParagraphIsMutable();
+        paragraph_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>optional string article_body = 9;</code>
+       * <code>repeated string paragraph = 13;</code>
        */
-      public Builder clearArticleBody() {
+      public Builder addAllParagraph(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureParagraphIsMutable();
+        super.addAll(values, paragraph_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paragraph = 13;</code>
+       */
+      public Builder clearParagraph() {
+        paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000100);
-        articleBody_ = getDefaultInstance().getArticleBody();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string article_body = 9;</code>
+       * <code>repeated string paragraph = 13;</code>
        */
-      public Builder setArticleBodyBytes(
+      public Builder addParagraphBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
-        articleBody_ = value;
+  ensureParagraphIsMutable();
+        paragraph_.add(value);
         onChanged();
         return this;
       }
@@ -2315,7 +1983,7 @@ public final class Core {
      * <code>optional int32 strength = 3;</code>
      *
      * <pre>
-     * Number of occurences + other factors.
+     * Number of occurrences + other factors.
      * </pre>
      */
     boolean hasStrength();
@@ -2323,7 +1991,7 @@ public final class Core {
      * <code>optional int32 strength = 3;</code>
      *
      * <pre>
-     * Number of occurences + other factors.
+     * Number of occurrences + other factors.
      * </pre>
      */
     int getStrength();
@@ -2574,7 +2242,7 @@ public final class Core {
      * <code>optional int32 strength = 3;</code>
      *
      * <pre>
-     * Number of occurences + other factors.
+     * Number of occurrences + other factors.
      * </pre>
      */
     public boolean hasStrength() {
@@ -2584,7 +2252,7 @@ public final class Core {
      * <code>optional int32 strength = 3;</code>
      *
      * <pre>
-     * Number of occurences + other factors.
+     * Number of occurrences + other factors.
      * </pre>
      */
     public int getStrength() {
@@ -3111,7 +2779,7 @@ public final class Core {
        * <code>optional int32 strength = 3;</code>
        *
        * <pre>
-       * Number of occurences + other factors.
+       * Number of occurrences + other factors.
        * </pre>
        */
       public boolean hasStrength() {
@@ -3121,7 +2789,7 @@ public final class Core {
        * <code>optional int32 strength = 3;</code>
        *
        * <pre>
-       * Number of occurences + other factors.
+       * Number of occurrences + other factors.
        * </pre>
        */
       public int getStrength() {
@@ -3131,7 +2799,7 @@ public final class Core {
        * <code>optional int32 strength = 3;</code>
        *
        * <pre>
-       * Number of occurences + other factors.
+       * Number of occurrences + other factors.
        * </pre>
        */
       public Builder setStrength(int value) {
@@ -3144,7 +2812,7 @@ public final class Core {
        * <code>optional int32 strength = 3;</code>
        *
        * <pre>
-       * Number of occurences + other factors.
+       * Number of occurrences + other factors.
        * </pre>
        */
       public Builder clearStrength() {
@@ -10885,10 +10553,11 @@ public final class Core {
      *
      * <pre>
      * Where did we get this interest from?
-     * 'ab' = address book
-     * 'lp' = linkedin profile
-     * 'lc' = linkedin contacts
-     * 'u' = from the user himself, explicitly
+     * 'ab' = Address book.
+     * 'lp' = LinkedIn profile.
+     * 'lc' = LinkedIn contacts.
+     * 'u' = From the user himself, explicitly.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
      * </pre>
      */
     boolean hasSource();
@@ -10897,10 +10566,11 @@ public final class Core {
      *
      * <pre>
      * Where did we get this interest from?
-     * 'ab' = address book
-     * 'lp' = linkedin profile
-     * 'lc' = linkedin contacts
-     * 'u' = from the user himself, explicitly
+     * 'ab' = Address book.
+     * 'lp' = LinkedIn profile.
+     * 'lc' = LinkedIn contacts.
+     * 'u' = From the user himself, explicitly.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
      * </pre>
      */
     java.lang.String getSource();
@@ -10909,10 +10579,11 @@ public final class Core {
      *
      * <pre>
      * Where did we get this interest from?
-     * 'ab' = address book
-     * 'lp' = linkedin profile
-     * 'lc' = linkedin contacts
-     * 'u' = from the user himself, explicitly
+     * 'ab' = Address book.
+     * 'lp' = LinkedIn profile.
+     * 'lc' = LinkedIn contacts.
+     * 'u' = From the user himself, explicitly.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -11201,10 +10872,11 @@ public final class Core {
      *
      * <pre>
      * Where did we get this interest from?
-     * 'ab' = address book
-     * 'lp' = linkedin profile
-     * 'lc' = linkedin contacts
-     * 'u' = from the user himself, explicitly
+     * 'ab' = Address book.
+     * 'lp' = LinkedIn profile.
+     * 'lc' = LinkedIn contacts.
+     * 'u' = From the user himself, explicitly.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
      * </pre>
      */
     public boolean hasSource() {
@@ -11215,10 +10887,11 @@ public final class Core {
      *
      * <pre>
      * Where did we get this interest from?
-     * 'ab' = address book
-     * 'lp' = linkedin profile
-     * 'lc' = linkedin contacts
-     * 'u' = from the user himself, explicitly
+     * 'ab' = Address book.
+     * 'lp' = LinkedIn profile.
+     * 'lc' = LinkedIn contacts.
+     * 'u' = From the user himself, explicitly.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
      * </pre>
      */
     public java.lang.String getSource() {
@@ -11240,10 +10913,11 @@ public final class Core {
      *
      * <pre>
      * Where did we get this interest from?
-     * 'ab' = address book
-     * 'lp' = linkedin profile
-     * 'lc' = linkedin contacts
-     * 'u' = from the user himself, explicitly
+     * 'ab' = Address book.
+     * 'lp' = LinkedIn profile.
+     * 'lc' = LinkedIn contacts.
+     * 'u' = From the user himself, explicitly.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -11852,10 +11526,11 @@ public final class Core {
        *
        * <pre>
        * Where did we get this interest from?
-       * 'ab' = address book
-       * 'lp' = linkedin profile
-       * 'lc' = linkedin contacts
-       * 'u' = from the user himself, explicitly
+       * 'ab' = Address book.
+       * 'lp' = LinkedIn profile.
+       * 'lc' = LinkedIn contacts.
+       * 'u' = From the user himself, explicitly.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
        * </pre>
        */
       public boolean hasSource() {
@@ -11866,10 +11541,11 @@ public final class Core {
        *
        * <pre>
        * Where did we get this interest from?
-       * 'ab' = address book
-       * 'lp' = linkedin profile
-       * 'lc' = linkedin contacts
-       * 'u' = from the user himself, explicitly
+       * 'ab' = Address book.
+       * 'lp' = LinkedIn profile.
+       * 'lc' = LinkedIn contacts.
+       * 'u' = From the user himself, explicitly.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
        * </pre>
        */
       public java.lang.String getSource() {
@@ -11888,10 +11564,11 @@ public final class Core {
        *
        * <pre>
        * Where did we get this interest from?
-       * 'ab' = address book
-       * 'lp' = linkedin profile
-       * 'lc' = linkedin contacts
-       * 'u' = from the user himself, explicitly
+       * 'ab' = Address book.
+       * 'lp' = LinkedIn profile.
+       * 'lc' = LinkedIn contacts.
+       * 'u' = From the user himself, explicitly.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -11912,10 +11589,11 @@ public final class Core {
        *
        * <pre>
        * Where did we get this interest from?
-       * 'ab' = address book
-       * 'lp' = linkedin profile
-       * 'lc' = linkedin contacts
-       * 'u' = from the user himself, explicitly
+       * 'ab' = Address book.
+       * 'lp' = LinkedIn profile.
+       * 'lc' = LinkedIn contacts.
+       * 'u' = From the user himself, explicitly.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
        * </pre>
        */
       public Builder setSource(
@@ -11933,10 +11611,11 @@ public final class Core {
        *
        * <pre>
        * Where did we get this interest from?
-       * 'ab' = address book
-       * 'lp' = linkedin profile
-       * 'lc' = linkedin contacts
-       * 'u' = from the user himself, explicitly
+       * 'ab' = Address book.
+       * 'lp' = LinkedIn profile.
+       * 'lc' = LinkedIn contacts.
+       * 'u' = From the user himself, explicitly.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
        * </pre>
        */
       public Builder clearSource() {
@@ -11950,10 +11629,11 @@ public final class Core {
        *
        * <pre>
        * Where did we get this interest from?
-       * 'ab' = address book
-       * 'lp' = linkedin profile
-       * 'lc' = linkedin contacts
-       * 'u' = from the user himself, explicitly
+       * 'ab' = Address book.
+       * 'lp' = LinkedIn profile.
+       * 'lc' = LinkedIn contacts.
+       * 'u' = From the user himself, explicitly.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
        * </pre>
        */
       public Builder setSourceBytes(
@@ -12082,50 +11762,6 @@ public final class Core {
     // @@protoc_insertion_point(class_scope:UserInterest)
   }
 
-  public static final int REQUIRED_FIELD_NUMBER = 60001;
-  /**
-   * <code>extend .google.protobuf.FieldOptions { ... }</code>
-   */
-  public static final
-    com.google.protobuf.GeneratedMessage.GeneratedExtension<
-      com.google.protobuf.DescriptorProtos.FieldOptions,
-      com.janknspank.proto.Core.Required> required = com.google.protobuf.GeneratedMessage
-          .newFileScopedGeneratedExtension(
-        com.janknspank.proto.Core.Required.class,
-        null);
-  public static final int STORAGE_METHOD_FIELD_NUMBER = 60002;
-  /**
-   * <code>extend .google.protobuf.FieldOptions { ... }</code>
-   */
-  public static final
-    com.google.protobuf.GeneratedMessage.GeneratedExtension<
-      com.google.protobuf.DescriptorProtos.FieldOptions,
-      com.janknspank.proto.Core.StorageMethod> storageMethod = com.google.protobuf.GeneratedMessage
-          .newFileScopedGeneratedExtension(
-        com.janknspank.proto.Core.StorageMethod.class,
-        null);
-  public static final int STRING_LENGTH_FIELD_NUMBER = 60003;
-  /**
-   * <code>extend .google.protobuf.FieldOptions { ... }</code>
-   */
-  public static final
-    com.google.protobuf.GeneratedMessage.GeneratedExtension<
-      com.google.protobuf.DescriptorProtos.FieldOptions,
-      java.lang.Integer> stringLength = com.google.protobuf.GeneratedMessage
-          .newFileScopedGeneratedExtension(
-        java.lang.Integer.class,
-        null);
-  public static final int CLIENT_SERIALIZATION_FIELD_NUMBER = 60004;
-  /**
-   * <code>extend .google.protobuf.FieldOptions { ... }</code>
-   */
-  public static final
-    com.google.protobuf.GeneratedMessage.GeneratedExtension<
-      com.google.protobuf.DescriptorProtos.FieldOptions,
-      com.janknspank.proto.Core.ClientSerialization> clientSerialization = com.google.protobuf.GeneratedMessage
-          .newFileScopedGeneratedExtension(
-        com.janknspank.proto.Core.ClientSerialization.class,
-        null);
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Article_descriptor;
   private static
@@ -12195,67 +11831,54 @@ public final class Core {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\037com/janknspank/proto/core.proto\032 googl" +
-      "e/protobuf/descriptor.proto\"\267\002\n\007Article\022" +
-      "\034\n\006url_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\026\n\003url\030\002 \001" +
-      "(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\005title\030\003 \001(\tB\t\210\246\035\001\230\246\035\200\002\022" +
-      "\022\n\004type\030\004 \001(\tB\004\230\246\035\030\022\025\n\006author\030\005 \001(\tB\005\230\246\035" +
-      "\200\002\022\030\n\tcopyright\030\006 \001(\tB\005\230\246\035\200\002\022\036\n\013descript" +
-      "ion\030\007 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\timage_url\030\010 \001(\tB" +
-      "\005\230\246\035\377\005\022$\n\014article_body\030\t \001(\tB\016\210\246\035\001\240\246\035\003\230\246" +
-      "\035\200\240\006\022 \n\016published_time\030\n \001(\003B\010\210\246\035\001\220\246\035\003\022\025" +
-      "\n\rmodified_time\030\013 \001(\003\"\205\001\n\016ArticleKeyword",
-      "\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\240\246\035\003\022\035\n\007ke" +
-      "yword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\003 " +
-      "\001(\005B\004\210\246\035\001\022\032\n\004type\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\001\"\222\001" +
-      "\n\004Link\022#\n\rorigin_url_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230" +
-      "\246\035\030\022(\n\022destination_url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035" +
-      "\003\230\246\035\030\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022\035\n\017l" +
-      "ast_found_time\030\004 \001(\003B\004\210\246\035\001\"\253\001\n\003Url\022\032\n\003ur" +
-      "l\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030\002 \001(\tB\014\210\246\035\001" +
-      "\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246\035\001\022\034\n\016d" +
-      "iscovery_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017last_crawl_",
-      "time\030\005 \001(\003\022\034\n\016crawl_priority\030\006 \001(\003B\004\220\246\035\003" +
-      "\"\347\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\022\n\004n" +
-      "ame\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004" +
-      "\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013face" +
-      "book_id\030\005 \001(\tB\004\230\246\035\030\022)\n\017password_sha256\030\006" +
-      " \001(\tB\020\210\246\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013create_time\030\007 " +
-      "\001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001(\003\"g\n\007Se" +
-      "ssion\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200" +
-      "\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013crea" +
-      "te_time\030\003 \001(\003B\004\210\246\035\001\"e\n\017LinkedInProfile\022\035",
-      "\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 " +
-      "\001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246" +
-      "\035\001\"i\n\023LinkedInConnections\022\035\n\007user_id\030\001 \001" +
-      "(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200" +
-      "\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"a\n\013Address" +
-      "Book\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004d" +
-      "ata\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001" +
-      "(\003B\004\210\246\035\001\"}\n\rUserUrlRating\022\035\n\007user_id\030\001 \001" +
-      "(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246" +
-      "\035\003\230\246\035\030\022\024\n\006rating\030\003 \001(\005B\004\210\246\035\001\022\031\n\013create_t",
-      "ime\030\004 \001(\003B\004\210\246\035\001\"m\n\017UserUrlFavorite\022\035\n\007us" +
-      "er_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(" +
-      "\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013create_time\030\003 \001(\003B\010\220\246" +
-      "\035\005\210\246\035\001\"\230\001\n\014UserInterest\022\030\n\002id\030\001 \001(\tB\014\210\246\035" +
-      "\001\220\246\035\002\230\246\035\030\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030" +
-      "\022\035\n\007keyword\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\034\n\006sourc" +
-      "e\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\022\n\004type\030\005 \001(\tB\004\230\246\035" +
-      "\001*\033\n\010Required\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\rStorag" +
-      "eMethod\022\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005IN" +
-      "DEX\020\003\022\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005*F\n",
-      "\023ClientSerialization\022\013\n\007INCLUDE\020\001\022\025\n\021INC" +
-      "LUDE_AS_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010require" +
-      "d\022\035.google.protobuf.FieldOptions\030\341\324\003 \001(\016" +
-      "2\t.Required:\002NO:M\n\016storage_method\022\035.goog" +
-      "le.protobuf.FieldOptions\030\342\324\003 \001(\0162\016.Stora" +
-      "geMethod:\004BLOB::\n\rstring_length\022\035.google" +
-      ".protobuf.FieldOptions\030\343\324\003 \001(\005:\002-1:\\\n\024cl" +
-      "ient_serialization\022\035.google.protobuf.Fie" +
-      "ldOptions\030\344\324\003 \001(\0162\024.ClientSerialization:" +
-      "\007INCLUDEB\037\n\024com.janknspank.proto\200\001\000\210\001\000\220\001",
-      "\000"
+      "\n\037com/janknspank/proto/core.proto\032%com/j" +
+      "anknspank/proto/extensions.proto\"\275\002\n\007Art" +
+      "icle\022\034\n\006url_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\026\n\003ur" +
+      "l\030\002 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\034\n\005title\030\003 \001(\tB\r\210\246\035\001\220" +
+      "\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\030\022\025\n\006author\030\005" +
+      " \001(\tB\005\230\246\035\200\002\022\030\n\tcopyright\030\006 \001(\tB\005\230\246\035\200\002\022\036\n" +
+      "\013description\030\007 \001(\tB\t\210\246\035\001\230\246\035\200\020\022\030\n\timage_u" +
+      "rl\030\010 \001(\tB\005\230\246\035\377\005\022 \n\tparagraph\030\r \003(\tB\r\210\246\035\001" +
+      "\240\246\035\003\230\246\035\200P\022 \n\016published_time\030\n \001(\003B\010\210\246\035\001\220" +
+      "\246\035\003\022\025\n\rmodified_time\030\013 \001(\003*\004\010\t\020\n\"\205\001\n\016Art",
+      "icleKeyword\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035" +
+      "\030\240\246\035\003\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010" +
+      "strength\030\003 \001(\005B\004\210\246\035\001\022\032\n\004type\030\004 \001(\tB\014\210\246\035\001" +
+      "\220\246\035\005\230\246\035\001\"\222\001\n\004Link\022#\n\rorigin_url_id\030\001 \001(\t" +
+      "B\014\210\246\035\001\220\246\035\003\230\246\035\030\022(\n\022destination_url_id\030\002 \001" +
+      "(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\016discovery_time\030\003 \001(\003" +
+      "B\004\210\246\035\001\022\035\n\017last_found_time\030\004 \001(\003B\004\210\246\035\001\"\253\001" +
+      "\n\003Url\022\032\n\003url\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030" +
+      "\002 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(\003" +
+      "B\004\210\246\035\001\022\034\n\016discovery_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017",
+      "last_crawl_time\030\005 \001(\003\022\034\n\016crawl_priority\030" +
+      "\006 \001(\003B\004\220\246\035\003\"\347\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246" +
+      "\035\002\230\246\035\030\022\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(" +
+      "\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230" +
+      "\246\035\030\022\031\n\013facebook_id\030\005 \001(\tB\004\230\246\035\030\022)\n\017passwo" +
+      "rd_sha256\030\006 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013cre" +
+      "ate_time\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030" +
+      "\010 \001(\003\"g\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210" +
+      "\246\035\001\220\246\035\002\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230" +
+      "\246\035\030\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"e\n\017Linked",
+      "InProfile\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030" +
+      "\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_tim" +
+      "e\030\003 \001(\003B\004\210\246\035\001\"i\n\023LinkedInConnections\022\035\n\007" +
+      "user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(" +
+      "\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001" +
+      "\"a\n\013AddressBook\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246" +
+      "\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013crea" +
+      "te_time\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrlRating\022\035\n\007" +
+      "user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_id\030\002 " +
+      "\001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 \001(\005B\004\210\246\035\001\022",
+      "\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"m\n\017UserUrlFav" +
+      "orite\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006" +
+      "url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013create_tim" +
+      "e\030\003 \001(\003B\010\220\246\035\005\210\246\035\001\"\230\001\n\014UserInterest\022\030\n\002id" +
+      "\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\035\n\007user_id\030\002 \001(\tB\014\210" +
+      "\246\035\001\220\246\035\003\230\246\035\030\022\035\n\007keyword\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246" +
+      "\035d\022\034\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\022\n\004type" +
+      "\030\005 \001(\tB\004\230\246\035\001B\026\n\024com.janknspank.proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12267,7 +11890,7 @@ public final class Core {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "ArticleBody", "PublishedTime", "ModifiedTime", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -12334,133 +11957,130 @@ public final class Core {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UserInterest_descriptor,
               new java.lang.String[] { "Id", "UserId", "Keyword", "Source", "Type", });
-          required.internalInit(descriptor.getExtensions().get(0));
-          storageMethod.internalInit(descriptor.getExtensions().get(1));
-          stringLength.internalInit(descriptor.getExtensions().get(2));
-          clientSerialization.internalInit(descriptor.getExtensions().get(3));
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.clientSerialization);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.clientSerialization);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.clientSerialization);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.required);
-          registry.add(com.janknspank.proto.Core.storageMethod);
-          registry.add(com.janknspank.proto.Core.stringLength);
-          registry.add(com.janknspank.proto.Core.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.clientSerialization);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.clientSerialization);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.clientSerialization);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
           return registry;
         }
       };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.google.protobuf.DescriptorProtos.getDescriptor(),
+          com.janknspank.proto.Extensions.getDescriptor(),
         }, assigner);
   }
 

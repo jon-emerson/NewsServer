@@ -3,13 +3,16 @@ package com.janknspank.proto;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.util.List;
+
 import org.json.JSONObject;
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableList;
 import com.janknspank.proto.Core.Article;
 
 public class SerializerTest {
-  private static final String ARTICLE_BODY = "article body";
+  private static final List<String> PARAGRAPHS = ImmutableList.of("paragraph1", "p2");
   private static final String COPYRIGHT = "copyright";
   private static final String DESCRIPTION = "description";
   private static final String URL_ID = "id";
@@ -24,7 +27,7 @@ public class SerializerTest {
   public void testSerializer() throws Exception {
     Article.Builder builder = Article.newBuilder();
     builder.clearAuthor(); // Make sure this does NOT get serialized.
-    builder.setArticleBody(ARTICLE_BODY);
+    builder.addAllParagraph(PARAGRAPHS);
     builder.setCopyright(COPYRIGHT);
     builder.setDescription(DESCRIPTION);
     builder.setImageUrl(IMAGE_URL);

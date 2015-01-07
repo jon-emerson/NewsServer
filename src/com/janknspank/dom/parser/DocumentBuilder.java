@@ -16,9 +16,9 @@ import org.xml.sax.helpers.DefaultHandler;
  * {@code Node#findAll(String)}.
  */
 public class DocumentBuilder {
-  public static DocumentNode build(Reader reader) throws ParserException {
+  public static DocumentNode build(String url, Reader reader) throws ParserException {
     try {
-      DomContentHandler domContentHandler = new DomContentHandler();
+      DomContentHandler domContentHandler = new DomContentHandler(url);
       new LenientSaxParser().parse(new InputSource(reader), domContentHandler);
       return domContentHandler.documentNode;
     } catch (SAXException | IOException e) {
@@ -27,9 +27,14 @@ public class DocumentBuilder {
   }
 
   private static class DomContentHandler extends DefaultHandler {
+    private String url;
     private DocumentNode documentNode;
     private LenientLocator locator = null;
     private Node currentNode;
+
+    public DomContentHandler(String url) {
+      this.url = url;
+    }
 
     @Override
     public void setDocumentLocator(Locator locator) {
@@ -44,7 +49,7 @@ public class DocumentBuilder {
 
     @Override
     public void startDocument() {
-      documentNode = new DocumentNode();
+      documentNode = new DocumentNode(url);
       currentNode = documentNode;
     }
 

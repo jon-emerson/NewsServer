@@ -1,4 +1,4 @@
-package com.janknspank.dom.training;
+package com.janknspank.opennlp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

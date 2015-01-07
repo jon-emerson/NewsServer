@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
+import com.janknspank.interpreter.SiteParser;
 
 /**
  * Tests for the site parser.
@@ -17,11 +18,10 @@ import com.janknspank.dom.parser.Node;
 public class SiteParserTest {
   @Test
   public void testGetParagraphNodes() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(new FileReader(
-        "testdata/abcnews-sunday-on-this-week.html"));
-    SiteParser siteParser = new SiteParser();
-    List<Node> paragraphNodes = siteParser.getParagraphNodes(documentNode,
-        "http://abcnews.go.com/blogs/politics/2015/01/sunday-on-this-week/");
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://abcnews.go.com/blogs/politics/2015/01/sunday-on-this-week/",
+        new FileReader("testdata/abcnews-sunday-on-this-week.html"));
+    List<Node> paragraphNodes = SiteParser.getParagraphNodes(documentNode);
 
     // Yea, you're right, the first two paragraphs shouldn't be here.  But we're
     // basically checking for regressions in parsing here, not absolute

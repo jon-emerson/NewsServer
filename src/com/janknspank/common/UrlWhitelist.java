@@ -15,6 +15,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.data.Database;
@@ -23,6 +24,13 @@ import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 
 public class UrlWhitelist {
+  public static final Predicate<String> PREDICATE = new Predicate<String>() {
+    @Override
+    public boolean apply(String url) {
+      return UrlWhitelist.isOkay(url);
+    }
+  };
+
   private static final HashSet<String> WHITELIST = new HashSet<String>();
   static {
     WHITELIST.add("abc.net.au");

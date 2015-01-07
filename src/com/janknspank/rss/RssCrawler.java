@@ -174,7 +174,7 @@ public class RssCrawler {
     try {
       fetchResponse = fetcher.fetch(rssUrl);
       if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
-        DocumentNode documentNode = DocumentBuilder.build(fetchResponse.getReader());
+        DocumentNode documentNode = DocumentBuilder.build(rssUrl, fetchResponse.getReader());
         for (Node itemNode : Iterables.concat(
             documentNode.findAll("item"),
             documentNode.findAll("entry"))) {

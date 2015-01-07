@@ -8,9 +8,9 @@ import com.google.protobuf.Message;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.janknspank.common.Asserts;
 import com.janknspank.data.ValidationException;
-import com.janknspank.proto.Core.ClientSerialization;
-import com.janknspank.proto.Core.Required;
-import com.janknspank.proto.Core.StorageMethod;
+import com.janknspank.proto.Extensions.ClientSerialization;
+import com.janknspank.proto.Extensions.Required;
+import com.janknspank.proto.Extensions.StorageMethod;
 
 /**
  * Prints a protocol buffer's values.
@@ -39,14 +39,15 @@ public class Printer {
       }
 
       List<String> decorations = Lists.newArrayList();
-      if (fieldDescriptor.getOptions().getExtension(Core.required) == Required.YES) {
+      if (fieldDescriptor.getOptions().getExtension(Extensions.required) == Required.YES) {
         decorations.add("required");
       }
-      StorageMethod storageMethod = fieldDescriptor.getOptions().getExtension(Core.storageMethod);
+      StorageMethod storageMethod =
+          fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
       if (storageMethod != StorageMethod.BLOB) {
         decorations.add(storageMethod.name().toLowerCase());
       }
-      if (fieldDescriptor.getOptions().getExtension(Core.clientSerialization) ==
+      if (fieldDescriptor.getOptions().getExtension(Extensions.clientSerialization) ==
           ClientSerialization.EXCLUDE) {
         decorations.add("exclude_from_client");
       }

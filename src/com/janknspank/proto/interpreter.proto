@@ -1,0 +1,13 @@
+// Object definitions for NewsServer's article interpreter.
+
+import "com/janknspank/proto/core.proto";
+
+option java_package = "com.janknspank.proto";
+
+message InterpretedData {
+  optional Article article = 1;
+  repeated string url = 3;
+
+  // TODO(jonemerson): This will become a list if Entities.
+  repeated ArticleKeyword keyword = 2;
+}
