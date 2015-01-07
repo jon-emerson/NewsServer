@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
-
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
 import opennlp.tools.sentdetect.SentenceDetectorME;
@@ -16,6 +13,9 @@ import opennlp.tools.sentdetect.SentenceModel;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.util.Span;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -74,6 +74,10 @@ public class KeywordFinder {
     }
   }
 
+  /**
+   * Top level method: Finds all the keywords in an article, whether they be
+   * in the article body, meta tags, wherever!
+   */
   public static List<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode) {
     List<ArticleKeyword> keywords = Lists.newArrayList();
 
@@ -166,6 +170,54 @@ public class KeywordFinder {
         15 /* maxStrength */);
   }
 
+  /**
+   * Returns a LOWERCASED Set of all the words in the specified article.
+   */
+  private static Set<String> getWordsInArticle(DocumentNode documentNode) {
+    Set<String> wordsInArticle = Sets.newHashSet();
+    for (Node paragraphNode : SiteParser.getParagraphNodes(documentNode)) {
+      for (String word : getTokens(paragraphNode.getFlattenedText())) {
+        wordsInArticle.add(KeywordUtils.cleanKeyword(word).toLowerCase());
+      }
+    }
+    return wordsInArticle;
+  }
+
+  /**
+   * Returns true if any of the words in the passed keyword exist in the
+   * article.
+   */
+  private static boolean isMetaKeywordRelevant(Set<String> wordsInArticle, String keyword) {
+    for (String keywordPart : getTokens(keyword)) {
+      if (wordsInArticle.contains(KeywordUtils.cleanKeyword(keywordPart).toLowerCase())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static Multiset<String> getKeywordsFromMetaContent(
+      DocumentNode documentNode, Node metaNode) {
+    Set<String> wordsInArticle = getWordsInArticle(documentNode);
+
+    // Find the best delimiter to split on based on which is more prevalent.
+    // E.g. some sites use semicolons, others use commas.
+    String rawKeywords = ArticleCreator.unescape(metaNode.getAttributeValue("content"));
+    String delimiter =
+        (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";"))
+            ? "," : ";";
+
+    Multiset<String> keywords = HashMultiset.create();
+    for (String keywordStr : rawKeywords.split(delimiter)) {
+      keywordStr = KeywordUtils.cleanKeyword(keywordStr);
+      if (KeywordUtils.isValidKeyword(keywordStr) &&
+          isMetaKeywordRelevant(wordsInArticle, keywordStr)) {
+        keywords.add(keywordStr);
+      }
+    }
+    return keywords;
+  }
+
   private static Iterable<ArticleKeyword> findKeywordsInMetaTags(
       final String urlId, DocumentNode documentNode) {
     final Multiset<String> keywords = HashMultiset.create();
@@ -174,7 +226,7 @@ public class KeywordFinder {
         "html > head > meta[name=\"news_keywords\"]",
         "html > head > meta[name=\"sailthru.tags\"]",
         "html > head > meta[property=\"article:tag\"]"))) {
-      keywords.addAll(getKeywordsFromMetaContent(metaNode.getAttributeValue("content")));
+      keywords.addAll(getKeywordsFromMetaContent(documentNode, metaNode));
     }
     return Iterables.transform(Multisets.copyHighestCountFirst(keywords).elementSet(),
         new Function<String, ArticleKeyword>() {
@@ -243,22 +295,6 @@ public class KeywordFinder {
               .build();
           }
         });
-  }
-
-  private static Multiset<String> getKeywordsFromMetaContent(String rawKeywords) {
-    Multiset<String> keywords = HashMultiset.create();
-    rawKeywords = ArticleCreator.unescape(rawKeywords);
-    // Some sites use semicolons, others use commas.  Split based on whichever is more prevalent.
-    String delimiter =
-        (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";"))
-            ? "," : ";";
-    for (String keywordStr : rawKeywords.split(delimiter)) {
-      keywordStr = KeywordUtils.cleanKeyword(keywordStr);
-      if (KeywordUtils.isValidKeyword(keywordStr)) {
-        keywords.add(keywordStr);
-      }
-    }
-    return keywords;
   }
 
   public static String[] getSentences(String paragraph) {

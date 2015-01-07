@@ -3,11 +3,17 @@ package com.janknspank.interpreter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.common.base.Function;
+import com.google.common.base.Throwables;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -17,7 +23,12 @@ import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.Core.Article;
 
-class ArticleCreator {
+class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
+  private static LoadingCache<DocumentNode, Iterable<String>> PARAGRAPH_CACHE =
+      CacheBuilder.newBuilder()
+          .maximumSize(10)
+          .expireAfterWrite(10, TimeUnit.MINUTES)
+          .build(new ArticleCreator());
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.chron.com/img/pages/article/opengraph_default.jpg",
@@ -224,24 +235,12 @@ class ArticleCreator {
 
   public static Iterable<String> getParagraphs(final DocumentNode documentNode)
       throws RequiredFieldException {
-    Iterable<String> paragraphs = Iterables.transform(
-        SiteParser.getParagraphNodes(documentNode),
-        new Function<Node, String>() {
-          @Override
-          public String apply(Node paragraphNode) {
-            String text = paragraphNode.getFlattenedText();
-            if (text.length() > Articles.MAX_PARAGRAPH_LENGTH) {
-              System.out.println("Warning: Trimming paragraph text on " +
-                  documentNode.getUrl());
-              text = text.substring(0, Articles.MAX_PARAGRAPH_LENGTH);
-            }
-            return text;
-          }
-    });
-    if (Iterables.isEmpty(paragraphs)) {
-      throw new RequiredFieldException("No paragraphs found");
+    try {
+      return PARAGRAPH_CACHE.get(documentNode);
+    } catch (ExecutionException e) {
+      Throwables.propagateIfPossible(e.getCause());
+      throw new RuntimeException("Could not get paragraphs: " + e.getMessage(), e);
     }
-    return paragraphs;
   }
 
   public static long getPublishedTime(DocumentNode documentNode) throws RequiredFieldException {
@@ -310,5 +309,31 @@ class ArticleCreator {
             .replaceAll("&nbsp;", " "))
         .replaceAll("&apos;", "'")
         .replaceAll("\u00A0", " ");
+  }
+
+  /**
+   * DO NOT CALL THIS DIRECTLY.
+   * @see #getParagraphs(DocumentNode)
+   */
+  @Override
+  public Iterable<String> load(final DocumentNode documentNode) throws Exception {
+    Iterable<String> paragraphs = Iterables.transform(
+        SiteParser.getParagraphNodes(documentNode),
+        new Function<Node, String>() {
+          @Override
+          public String apply(Node paragraphNode) {
+            String text = paragraphNode.getFlattenedText();
+            if (text.length() > Articles.MAX_PARAGRAPH_LENGTH) {
+              System.out.println("Warning: Trimming paragraph text on " +
+                  documentNode.getUrl());
+              text = text.substring(0, Articles.MAX_PARAGRAPH_LENGTH);
+            }
+            return text;
+          }
+    });
+    if (Iterables.isEmpty(paragraphs)) {
+      throw new RequiredFieldException("No paragraphs found");
+    }
+    return paragraphs;
   }
 }

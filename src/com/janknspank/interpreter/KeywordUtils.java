@@ -70,6 +70,7 @@ public class KeywordUtils {
         "sports",
         "stocks",
         "stock market",
+        "story",
         "story-video",
         "teams",
         "tech",
