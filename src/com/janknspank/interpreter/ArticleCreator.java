@@ -218,8 +218,8 @@ class ArticleCreator {
         "html > head meta[itemprop=\"modificationDate\"]",
         "html > head meta[property=\"article:modified_time\"]",
         "html > head meta[itemprop=\"dateModified\"]"));
-    return (metaNode != null) ?
-        DateParser.parseDateTime(metaNode.getAttributeValue("content")) : null;
+    return (metaNode != null)
+        ? DateParser.parseDateTime(metaNode.getAttributeValue("content")) : null;
   }
 
   public static Iterable<String> getParagraphs(final DocumentNode documentNode)

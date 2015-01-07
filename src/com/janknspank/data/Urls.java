@@ -26,14 +26,14 @@ public class Urls {
   private static final String SELECT_BY_ID_COMMAND =
       "SELECT * FROM " + Database.getTableName(Url.class) + " WHERE id=?";
   private static final String SELECT_NEXT_URL_TO_CRAWL =
-      "SELECT * FROM " + Database.getTableName(Url.class) + " " +
-      "WHERE crawl_priority > 0 AND " +
-      "NOT url LIKE \"https://twitter.com/%\" " +
-      "ORDER BY crawl_priority DESC LIMIT 1";
+      "SELECT * FROM " + Database.getTableName(Url.class) + " "
+      + "WHERE crawl_priority > 0 AND "
+      + "NOT url LIKE \"https://twitter.com/%\" "
+      + "ORDER BY crawl_priority DESC LIMIT 1";
   private static final String UPDATE_CRAWL_PRIORITY_COMMAND =
-      "UPDATE " + Database.getTableName(Url.class) + " " +
-      "SET crawl_priority=0, proto=? " +
-      "WHERE id=? AND crawl_priority > 0";
+      "UPDATE " + Database.getTableName(Url.class) + " "
+      + "SET crawl_priority=0, proto=? "
+      + "WHERE id=? AND crawl_priority > 0";
 
   /**
    * Returns the crawl priority for the URL, assuming that we don't know
@@ -50,8 +50,8 @@ public class Urls {
    */
   public static int getCrawlPriority(String url, Long millis) {
     if (ArticleUrlDetector.isArticle(url)) {
-      millis = (millis == null) ?
-          DateParser.parseDateFromUrl(url, true /* allowMonth */) : millis;
+      millis = (millis == null)
+          ? DateParser.parseDateFromUrl(url, true /* allowMonth */) : millis;
       if (millis != null) {
         long millisAgo = System.currentTimeMillis() - millis;
         return (int) Math.max(100, 2000 - (millisAgo / (1000 * 60 * 60)));

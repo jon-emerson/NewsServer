@@ -46,8 +46,8 @@ public class ArticleKeywords {
   public static List<ArticleKeyword> get(List<Article> articleList)
       throws DataInternalException {
     StringBuilder sql = new StringBuilder();
-    sql.append("SELECT * FROM " + Database.getTableName(ArticleKeyword.class) +
-        " WHERE url_id IN (");
+    sql.append("SELECT * FROM " + Database.getTableName(ArticleKeyword.class)
+        + " WHERE url_id IN (");
     for (int i = 0; i < articleList.size(); i++) {
       sql.append(i == articleList.size() - 1 ? "?" : "?, ");
     }

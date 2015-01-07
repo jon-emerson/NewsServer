@@ -44,9 +44,9 @@ public class GrabTrainingData {
       int count = components.size();
       String tld = components.get(count - 1);
       return Joiner.on(".").join(
-          "uk".equals(tld) || "au".equals(tld) || "nz".equals(tld) ?
-          components.subList(Math.max(0, count - 3), count) :
-          components.subList(Math.max(0, count - 2), count));
+          ("uk".equals(tld) || "au".equals(tld) || "nz".equals(tld))
+          ? components.subList(Math.max(0, count - 3), count)
+          : components.subList(Math.max(0, count - 2), count));
     } catch (MalformedURLException e) {
       throw new RuntimeException(e);
     }

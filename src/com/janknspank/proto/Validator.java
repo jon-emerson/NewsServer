@@ -41,15 +41,15 @@ public class Validator {
             for (int i = 0; i < message.getRepeatedFieldCount(fieldDescriptor); i++) {
               int stringLength = ((String) message.getRepeatedField(fieldDescriptor, i)).length();
               if (stringLength > maxLength) {
-                throw new ValidationException("Field " + fieldName + " can have a " +
-                    "maximum length of " + maxLength + ". Actual length is " + stringLength + ".");
+                throw new ValidationException("Field " + fieldName + " can have a maximum "
+                    + "length of " + maxLength + ". Actual length is " + stringLength + ".");
               }
             }
           } else {
             int stringLength = ((String) message.getField(fieldDescriptor)).length();
             if (stringLength > maxLength) {
-              throw new ValidationException("Field " + fieldName + " can have a " +
-                  "maximum length of " + maxLength + ". Actual length is " + stringLength + ".");
+              throw new ValidationException("Field " + fieldName + " can have a maximum "
+                  + "length of " + maxLength + ". Actual length is " + stringLength + ".");
             }
           }
           break;

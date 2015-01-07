@@ -12,11 +12,11 @@ import com.janknspank.proto.Core.UserUrlRating;
  */
 public class UserUrlRatings {
   private static final String SELECT_COMMAND =
-      "SELECT * FROM " + Database.getTableName(UserUrlRating.class) +
-      "    WHERE user_id=?";
+      "SELECT * FROM " + Database.getTableName(UserUrlRating.class) + " "
+      + "WHERE user_id=?";
   private static final String DELETE_COMMAND =
-      "DELETE FROM " + Database.getTableName(UserUrlRating.class) +
-      "    WHERE user_id=? AND url_id=?";
+      "DELETE FROM " + Database.getTableName(UserUrlRating.class) + " "
+      + "WHERE user_id=? AND url_id=?";
 
   public static List<UserUrlRating> get(String userId) throws DataInternalException {
     try {

@@ -99,7 +99,7 @@ public class Sessions {
   }
 
   /**
-   * Officially sanctioned method for creating a new session from email +
+   * Officially sanctioned method for creating a new session from email
    * password credentials.
    */
   public static Session create(String email, String password)
@@ -110,8 +110,8 @@ public class Sessions {
     // Insert a new Session object and return it.
     try {
       Session session = Session.newBuilder()
-          .setSessionKey(toEncryptedBase64("v1_" + System.currentTimeMillis() +
-              "_" + user.getId()))
+          .setSessionKey(toEncryptedBase64("v1_" + System.currentTimeMillis()
+              + "_" + user.getId()))
           .setUserId(user.getId())
           .setCreateTime(System.currentTimeMillis())
           .build();

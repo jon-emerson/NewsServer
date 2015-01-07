@@ -30,8 +30,8 @@ public class Database {
   // JDBC driver name and database URL
   private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
   private static final String DB_URL =
-      "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver?" +
-      "useTimezone=true&rewriteBatchedStatements=true";
+      "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver?"
+      + "useTimezone=true&rewriteBatchedStatements=true";
 //      "jdbc:mysql://localhost/test?useTimezone=true&rewriteBatchedStatements=true";
   private static final String PROTO_COLUMN_NAME = "proto";
   static {
@@ -71,11 +71,11 @@ public class Database {
       case STRING:
         int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
         if (stringLength == -1) {
-          throw new IllegalStateException("String length undefined for " +
-              fieldDescriptor.getName());
+          throw new IllegalStateException("String length undefined for "
+              + fieldDescriptor.getName());
         } else if (stringLength <= 0) {
-          throw new IllegalStateException("Unsupported string length " + stringLength + " on " +
-              fieldDescriptor.getName());
+          throw new IllegalStateException("Unsupported string length " + stringLength + " on "
+              + fieldDescriptor.getName());
         }
         return (stringLength > 767) ? "BLOB" : "VARCHAR(" + stringLength + ")";
       case LONG:
@@ -506,8 +506,8 @@ public class Database {
       String questionMarks = Joiner.on(",").join(
           Iterables.limit(Iterables.cycle("?"), Iterables.size(primaryKeys)));
       PreparedStatement stmt = getConnection().prepareStatement(
-          "SELECT * FROM " + getTableName(clazz) + " WHERE " + getPrimaryKeyField(clazz) +
-          " IN (" + questionMarks + ")");
+          "SELECT * FROM " + getTableName(clazz) + " WHERE " + getPrimaryKeyField(clazz)
+          + " IN (" + questionMarks + ")");
       int i = 0;
       for (String primaryKey : primaryKeys) {
         stmt.setString(++i, primaryKey);
@@ -517,8 +517,8 @@ public class Database {
       }
       return createListFromResultSet(stmt.executeQuery(), clazz);
     } catch (SQLException e) {
-      throw new DataInternalException("Could not execute get: " + e.getMessage() +
-          ": " + e.getMessage(), e);
+      throw new DataInternalException("Could not execute get: " + e.getMessage()
+          + ": " + e.getMessage(), e);
     }
   }
 
@@ -572,8 +572,8 @@ public class Database {
   public static <T extends Message> void deletePrimaryKey(String primaryKey, Class<T> clazz)
       throws DataInternalException {
     if (deletePrimaryKeys(ImmutableList.of(primaryKey), clazz) != 1) {
-      throw new DataInternalException("Could not find object to delete, primary key = " +
-          primaryKey);
+      throw new DataInternalException("Could not find object to delete, primary key = "
+          + primaryKey);
     }
   }
 
@@ -586,8 +586,8 @@ public class Database {
     PreparedStatement stmt;
     try {
       stmt = getConnection().prepareStatement(
-          "DELETE FROM " + getTableName(clazz) +
-          " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
+          "DELETE FROM " + getTableName(clazz)
+          + " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
       for (String primaryKey : primaryKeys) {
         stmt.setString(1, primaryKey);
         stmt.addBatch();

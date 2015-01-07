@@ -40,8 +40,8 @@ public class UserInterests {
   private final static PhoneNumberOfflineGeocoder GEOCODER =
       PhoneNumberOfflineGeocoder.getInstance();
   private static final String SELECT_FOR_USER_COMMAND =
-      "SELECT * FROM " + Database.getTableName(UserInterest.class) +
-      "    WHERE user_id=? AND source != \"" + SOURCE_TOMBSTONE + "\"";
+      "SELECT * FROM " + Database.getTableName(UserInterest.class) + " "
+      + "WHERE user_id=? AND source != \"" + SOURCE_TOMBSTONE + "\"";
 
   /** Helper method for creating the UserInterestData table. */
   public static void main(String args[]) throws Exception {
@@ -201,9 +201,9 @@ public class UserInterests {
     }
     for (UserInterest interest : interests) {
       UserInterest existingInterest =
-          interestsByTypeAndKeyword.containsKey(interest.getType()) ?
-              interestsByTypeAndKeyword.get(interest.getType()).get(interest.getKeyword()) :
-              null;
+          interestsByTypeAndKeyword.containsKey(interest.getType())
+              ? interestsByTypeAndKeyword.get(interest.getType()).get(interest.getKeyword())
+              : null;
       if (existingInterest != null) {
         interestsToDelete.remove(existingInterest);
       } else {

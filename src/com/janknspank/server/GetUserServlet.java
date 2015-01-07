@@ -49,9 +49,9 @@ public class GetUserServlet extends StandardServlet {
   private Map<String, Article> getArticleMap(Iterable<String> articleIds)
       throws DataInternalException {
     return Maps.uniqueIndex(
-        Iterables.isEmpty(articleIds) ?
-            Collections.<Article>emptyList() :
-            Database.get(articleIds, Article.class),
+        Iterables.isEmpty(articleIds)
+            ? Collections.<Article>emptyList()
+            : Database.get(articleIds, Article.class),
         new Function<Article, String>() {
           @Override
           public String apply(Article article) {

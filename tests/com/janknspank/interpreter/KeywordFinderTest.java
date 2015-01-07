@@ -30,17 +30,17 @@ public class KeywordFinderTest {
   public void testFindKeywords() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.cnn.com/2015/01/08/foo.html",
-        new StringReader("<html><head>" +
-            "<meta name=\"keywords\" content=\"BBC, Capital,story,STORY-VIDEO,Office Space\"/>" +
-            "<title>Article title</title>" +
-            "</head><body>" +
-            "<div class=\"cnn_storyarea\"><p>" +
-            "Brangelina (also called Bradgelina) is a celebrity supercouple " +
-            "consisting of American actors " +
-            "<a href=\"http://en.wikipedia.org/wiki/Brad_Pitt\">Brad Pitt</a> and " +
-            "<a href=\"http://en.wikipedia.org/wiki/Angelina_Jolie\">Angelina Jolie</a>." +
-            "</p></div>" +
-            "</body</html>"));
+        new StringReader("<html><head>"
+            + "<meta name=\"keywords\" content=\"BBC, Capital,story,STORY-VIDEO,Office Space\"/>"
+            + "<title>Article title</title>"
+            + "</head><body>"
+            + "<div class=\"cnn_storyarea\"><p>"
+            + "Brangelina (also called Bradgelina) is a celebrity supercouple "
+            + "consisting of American actors "
+            + "<a href=\"http://en.wikipedia.org/wiki/Brad_Pitt\">Brad Pitt</a> and "
+            + "<a href=\"http://en.wikipedia.org/wiki/Angelina_Jolie\">Angelina Jolie</a>."
+            + "</p></div>"
+            + "</body</html>"));
     List<ArticleKeyword> keywords = KeywordFinder.findKeywords("urlId", documentNode);
     assertContainsKeyword("BBC", ArticleKeywords.TYPE_META_TAG, keywords);
     assertContainsKeyword("Capital", ArticleKeywords.TYPE_META_TAG, keywords);

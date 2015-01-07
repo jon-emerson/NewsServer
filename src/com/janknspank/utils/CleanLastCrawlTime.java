@@ -33,8 +33,8 @@ public class CleanLastCrawlTime {
     }
 
     stmt = Database.getConnection().prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Url.class) + " " +
-        "WHERE crawl_priority=0 AND url NOT LIKE \"%//twitter.com/%\"");
+        "SELECT * FROM " + Database.getTableName(Url.class) + " "
+        + "WHERE crawl_priority=0 AND url NOT LIKE \"%//twitter.com/%\"");
     result = stmt.executeQuery();
     List<Message> urlsToUpdate = Lists.newArrayList();
     while (!result.isAfterLast()) {

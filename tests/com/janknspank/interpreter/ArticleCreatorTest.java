@@ -34,13 +34,13 @@ public class ArticleCreatorTest {
   public void testCreate() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         URL.getUrl(),
-        new StringReader("<html><head>" +
-            "<meta name=\"keywords\" content=\"BBC, Capital,story,STORY-VIDEO,Office Space\"/>" +
-            "<meta name=\"description\" content=\"" + DESCRIPTION + "\"/>" +
-            "<title>" + TITLE + "</title>" +
-            "</head><body>" +
-            "<div class=\"cnn_storyarea\"><p>Super article man!!!</p></div>" +
-            "</body</html>"));
+        new StringReader("<html><head>"
+            + "<meta name=\"keywords\" content=\"BBC, Capital,story,STORY-VIDEO,Office Space\"/>"
+            + "<meta name=\"description\" content=\"" + DESCRIPTION + "\"/>"
+            + "<title>" + TITLE + "</title>"
+            + "</head><body>"
+            + "<div class=\"cnn_storyarea\"><p>Super article man!!!</p></div>"
+            + "</body</html>"));
     Article article = ArticleCreator.create(URL.getUrl(), documentNode);
     assertEquals(TITLE, article.getTitle());
     assertEquals(DESCRIPTION, article.getDescription());
@@ -59,11 +59,11 @@ public class ArticleCreatorTest {
         "http://www.nytimes.com/2015/01/04/realestate/year-of-the-condo-in-new-york-city.html",
         new FileReader("testdata/year-of-the-condo-in-new-york-city.html"));
     Article article = ArticleCreator.create("urlId", documentNode);
-    assertEquals("Twice as many new condominium units will hit the Manhattan " +
-        "market this year as in 2014.", article.getDescription());
+    assertEquals("Twice as many new condominium units will hit the Manhattan "
+        + "market this year as in 2014.", article.getDescription());
     assertEquals("Year of the Condo in New York City", article.getTitle());
-    assertEquals("http://static01.nyt.com/images/2015/01/04/realestate/" +
-        "04COV4/04COV4-facebookJumbo-v2.jpg", article.getImageUrl());
+    assertEquals("http://static01.nyt.com/images/2015/01/04/realestate/"
+        + "04COV4/04COV4-facebookJumbo-v2.jpg", article.getImageUrl());
   }
 
   @Test
@@ -72,11 +72,11 @@ public class ArticleCreatorTest {
         "http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-future-of-finance/",
         new FileReader("testdata/techcrunch-the-sharing-economy-and-the-future-of-finance.html"));
     Article article = ArticleCreator.create("urlId", documentNode);
-    assertEquals("Banking has gone from somewhere you go to something you " +
-        "do. If we are to believe that the sharing economy will shape our " +
-        "future, banking and all financial services will become something " +
-        "that merely exists in the background, similar to other basic " +
-        "utilities.", article.getDescription());
+    assertEquals("Banking has gone from somewhere you go to something you "
+        + "do. If we are to believe that the sharing economy will shape our "
+        + "future, banking and all financial services will become something "
+        + "that merely exists in the background, similar to other basic "
+        + "utilities.", article.getDescription());
     assertEquals("The Sharing Economy And The Future Of Finance", article.getTitle());
     assertEquals("http://tctechcrunch2011.files.wordpress.com/2015/01/shared.jpg",
         article.getImageUrl());
@@ -85,14 +85,14 @@ public class ArticleCreatorTest {
   @Test
   public void testSfgateArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
-        "http://www.sfgate.com/nation/article/" +
-            "News-of-the-day-from-across-the-nation-Jan-7-5997832.php",
+        "http://www.sfgate.com/nation/article/"
+        + "News-of-the-day-from-across-the-nation-Jan-7-5997832.php",
         new FileReader("testdata/sfgate-news-of-the-day-jan-7.html"));
     Article article = ArticleCreator.create("urlId", documentNode);
-    assertTrue(article.getDescription().startsWith("The launch countdown of " +
-        "a rocket carrying equipment and supplies for the International Space " +
-        "Station was called off just minutes before it was to lift off from " +
-        "Cape Canaveral on Tuesday."));
+    assertTrue(article.getDescription().startsWith("The launch countdown of "
+        + "a rocket carrying equipment and supplies for the International Space "
+        + "Station was called off just minutes before it was to lift off from "
+        + "Cape Canaveral on Tuesday."));
     assertEquals("News of the day from across the nation, Jan. 7", article.getTitle());
     assertFalse(article.hasImageUrl()); // No decent images.
     assertEquals(6, article.getParagraphCount());
@@ -106,8 +106,8 @@ public class ArticleCreatorTest {
         new FileReader("testdata/chron-hubble-celebrates-25-years.html"));
     Article article = ArticleCreator.create("urlId", documentNode);
     assertEquals(
-        "This year makes 25 years since the Hubble telescope was " +
-            "sent into outer space to explore the unknown.",
+        "This year makes 25 years since the Hubble telescope was "
+        + "sent into outer space to explore the unknown.",
         article.getDescription());
     assertEquals("Hubble celebrates 25 years in space", article.getTitle());
     assertEquals("http://ww1.hdnux.com/photos/34/03/54/7355140/6/rawImage.jpg",

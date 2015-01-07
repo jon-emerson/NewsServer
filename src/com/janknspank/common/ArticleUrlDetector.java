@@ -71,8 +71,8 @@ public class ArticleUrlDetector {
   private static final Pattern CURBED_PATH =
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9](\\/[0-3][0-9])?\\/[^\\/\\.]+\\.php$");
   private static final Pattern LATIMES_PATH_1 =
-      Pattern.compile("20[0-9]{2}[01][0-9][0-3][0-9]\\-" +
-          "(column|htmlstory|story|storygallery)\\.html$");
+      Pattern.compile("20[0-9]{2}[01][0-9][0-3][0-9]\\-"
+          + "(column|htmlstory|story|storygallery)\\.html$");
   private static final Pattern LATIMES_PATH_2 =
       Pattern.compile(",[0-9]{6,10}\\.(column|htmlstory|story|storygallery)$");
   private static final Pattern MARKETS_CBSNEWS_PATH =

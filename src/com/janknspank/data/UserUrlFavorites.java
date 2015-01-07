@@ -12,14 +12,14 @@ import com.janknspank.proto.Core.UserUrlFavorite;
  */
 public class UserUrlFavorites {
   private static final String SELECT_FOR_USER_COMMAND =
-      "SELECT * FROM " + Database.getTableName(UserUrlFavorite.class) +
-      "    WHERE user_id=?";
+      "SELECT * FROM " + Database.getTableName(UserUrlFavorite.class) + " "
+      + "WHERE user_id=?";
   private static final String SELECT_COMMAND =
-      "SELECT * FROM " + Database.getTableName(UserUrlFavorite.class) +
-      "    WHERE user_id=? AND url_id=?";
+      "SELECT * FROM " + Database.getTableName(UserUrlFavorite.class) + " "
+      + "WHERE user_id=? AND url_id=?";
   private static final String DELETE_COMMAND =
-      "DELETE FROM " + Database.getTableName(UserUrlFavorite.class) +
-      "    WHERE user_id=? AND url_id=?";
+      "DELETE FROM " + Database.getTableName(UserUrlFavorite.class) + " "
+      + "WHERE user_id=? AND url_id=?";
 
   public static List<UserUrlFavorite> get(String userId) throws DataInternalException {
     try {

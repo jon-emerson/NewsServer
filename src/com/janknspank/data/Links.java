@@ -17,8 +17,8 @@ import com.janknspank.proto.Core.Url;
  */
 public class Links {
   private static final String DELETE_COMMAND =
-      "DELETE FROM " + Database.getTableName(Link.class) +
-      "    WHERE origin_url_id =? OR destination_url_id =?";
+      "DELETE FROM " + Database.getTableName(Link.class)
+      + "    WHERE origin_url_id =? OR destination_url_id =?";
 
   /**
    * Records that there's a link from {@code sourceUrl} to each of the passed

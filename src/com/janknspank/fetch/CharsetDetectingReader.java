@@ -44,8 +44,8 @@ class CharsetDetectingReader extends Reader {
     detector.dataEnd();
 
     // Get out detected encoding, falling back to UTF-8.
-    String charset = (detector.getDetectedCharset() == null) ?
-        Charsets.UTF_8.name() : detector.getDetectedCharset();
+    String charset = (detector.getDetectedCharset() == null)
+        ? Charsets.UTF_8.name() : detector.getDetectedCharset();
 
     // Return a Reader for the detected Charset, using the combined data from
     // what we read to detect the charset and what we haven't yet read.

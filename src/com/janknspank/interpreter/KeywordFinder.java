@@ -250,8 +250,8 @@ public class KeywordFinder {
     rawKeywords = ArticleCreator.unescape(rawKeywords);
     // Some sites use semicolons, others use commas.  Split based on whichever is more prevalent.
     String delimiter =
-        (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";")) ?
-            "," : ";";
+        (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";"))
+            ? "," : ";";
     for (String keywordStr : rawKeywords.split(delimiter)) {
       keywordStr = KeywordUtils.cleanKeyword(keywordStr);
       if (KeywordUtils.isValidKeyword(keywordStr)) {

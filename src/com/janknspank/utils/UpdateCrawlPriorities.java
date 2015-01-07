@@ -40,8 +40,8 @@ public class UpdateCrawlPriorities {
     while (!result.isAfterLast()) {
       Url url = Database.createFromResultSet(result, Url.class);
       if (url != null) {
-        int crawlPriority = crawledArticleIds.contains(url.getId()) ?
-            0 : Urls.getCrawlPriority(url.getUrl(), null);
+        int crawlPriority = crawledArticleIds.contains(url.getId())
+            ? 0 : Urls.getCrawlPriority(url.getUrl(), null);
         if (Math.abs(url.getCrawlPriority() - crawlPriority) > 5) {
           System.out.println("pri=" + crawlPriority + " for " + url.getUrl());
           urlsToUpdate.add(url.toBuilder()
