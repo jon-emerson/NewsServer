@@ -203,11 +203,11 @@ public class Selector {
 
   /**
    * Returns true if the passed in Node satisfies ALL the requirements
-   * dictated by tagName, id, classes, etc.  Does not attempt to verify
+   * dictated by tagName, id, classes, etc.  Does not attempt to enforce
    * {@code directDescendant} - since we don't know the larger context.
    */
   public boolean matches(Node node) {
-    if (tagName != null && !tagName.equals(node.getTagName())) {
+    if (tagName != null && !tagName.equals(node.getTagName()) && !"*".equals(tagName)) {
       return false;
     }
     if (!classes.isEmpty()) {

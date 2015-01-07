@@ -16,6 +16,7 @@ import com.janknspank.proto.Extensions;
  * associated with which articles.
  */
 public class ArticleKeywords {
+  public static final String TYPE_HYPERLINK = "h";
   public static final String TYPE_LOCATION = "l";
   public static final String TYPE_META_TAG = "m";
   public static final String TYPE_PERSON = "p";

@@ -10,9 +10,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import com.janknspank.proto.Core.User;
 
 /**
- * Tracks a link from one URL's content to another's.  The primary key is a
- * composite of the origin and destination URL IDs, as defined in the
- * DiscoveredUrl table.
+ * Tracks a link from one URL's content to another's.
  */
 public class Users {
   private static final String SALT = "2s3knlk3lx3";

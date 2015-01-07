@@ -26,7 +26,7 @@ public class NodeTest {
               + "<body><div class=\"article-body\">"
               + "<p>Hello World</p>"
               + "<p>Paragraph 2</p>"
-              + "<div class=\"nested\"><p>Nested Paragraph</p><div>"
+              + "<div class=\"nested\"><p>Nested Paragraph</p></div>"
               + "</div></body>"
               + "</html>"));
     } catch (ParserException e) {
@@ -78,6 +78,14 @@ public class NodeTest {
     assertEquals(2, directParagraphNodes.size());
     assertEquals("Hello World", directParagraphNodes.get(0).getFlattenedText());
     assertEquals("Paragraph 2", directParagraphNodes.get(1).getFlattenedText());
+
+    // Find all elements underneath the .article-body div.
+    List<Node> articleBodyNodes = DOCUMENT_NODE.findAll(".article-body *");
+    assertEquals(4, articleBodyNodes.size());
+    assertEquals("p", articleBodyNodes.get(0).getTagName());
+    assertEquals("p", articleBodyNodes.get(1).getTagName());
+    assertEquals("div", articleBodyNodes.get(2).getTagName());
+    assertEquals("p", articleBodyNodes.get(3).getTagName());
   }
 
   @Test

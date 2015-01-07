@@ -23,12 +23,13 @@ public class SelectorTest {
     assertEquals(1, tokens.size());
     assertEquals("div[href=\" .moo#hello[].class#id", tokens.get(0));
 
-    tokens = Selector.tokenizeDefinitionStack("div#id  a.class[href][target = \"#he' llo\"]>b");
-    assertEquals(4, tokens.size());
+    tokens = Selector.tokenizeDefinitionStack("div#id  * a.class[href][target = \"#he' llo\"]>b");
+    assertEquals(5, tokens.size());
     assertEquals("div#id", tokens.get(0));
-    assertEquals("a.class[href][target = \"#he' llo\"]", tokens.get(1));
-    assertEquals(">", tokens.get(2));
-    assertEquals("b", tokens.get(3));
+    assertEquals("*", tokens.get(1));
+    assertEquals("a.class[href][target = \"#he' llo\"]", tokens.get(2));
+    assertEquals(">", tokens.get(3));
+    assertEquals("b", tokens.get(4));
 
     tokens = Selector.tokenizeDefinitionStack("a >[x=y] [z=\" .yes\"][ t = 'f' ] .b> #c  [href] [z1 ][ z2]");
     assertEquals(9, tokens.size());
@@ -64,6 +65,14 @@ public class SelectorTest {
 
     // a
     assertEquals("a", selectors.get(0).tagName);
+    assertTrue(selectors.get(0).classes.isEmpty());
+    assertNull(selectors.get(0).id);
+    assertTrue(selectors.get(0).attributes.isEmpty());
+    assertTrue(selectors.get(0).attributeValues.isEmpty());
+    assertFalse(selectors.get(0).isDirectDescendant());
+
+    // *
+    assertEquals("*", selectors.get(0).tagName);
     assertTrue(selectors.get(0).classes.isEmpty());
     assertNull(selectors.get(0).id);
     assertTrue(selectors.get(0).attributes.isEmpty());

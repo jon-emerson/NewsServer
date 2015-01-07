@@ -72,6 +72,15 @@ public class Node {
     return children.size();
   }
 
+  public boolean hasChildNodes() {
+    for (int i = 0; i < children.size(); i++) {
+      if (!isChildTextNode(i)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public String getTagName() {
     return tagName;
   }

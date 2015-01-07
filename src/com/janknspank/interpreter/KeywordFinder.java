@@ -4,8 +4,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
@@ -16,6 +18,7 @@ import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.util.Span;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -23,6 +26,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
+import com.google.common.collect.Sets;
 import com.janknspank.data.ArticleKeywords;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -75,6 +79,7 @@ public class KeywordFinder {
 
     List<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
     Iterables.addAll(keywords, findKeywordsInMetaTags(urlId, documentNode));
+    Iterables.addAll(keywords, findKeywordsFromHypertext(urlId, documentNode));
     for (Node articleNode : articleNodes) {
       for (String sentence : SENTENCE_DETECTOR_ME.sentDetect(articleNode.getFlattenedText())) {
         String[] tokens = TOKENIZER.tokenize(sentence);
@@ -180,6 +185,61 @@ public class KeywordFinder {
               .setKeyword(keyword)
               .setStrength(Math.min(3, keywords.count(keyword)))
               .setType(ArticleKeywords.TYPE_META_TAG)
+              .build();
+          }
+        });
+  }
+
+  /**
+   * Uses the structure of the hypertext to try to figure out proper nouns and
+   * other keywords in the article's paragraphs.  E.g. often times sites link
+   * people names and companies to other web pages - use this to find entities!
+   */
+  private static Iterable<ArticleKeyword> findKeywordsFromHypertext(
+      final String urlId, DocumentNode documentNode) {
+    // Find all the Nodes inside paragraphs that do not have any children.
+    // E.g. if we had <p><a href="#">Michael Douglass</a> is awesome</p>,
+    // this method would return the <a> node only.
+    Iterable<Node> childlessChildNodes = Iterables.concat(
+        Iterables.transform(
+            SiteParser.getParagraphNodes(documentNode),
+            new Function<Node, Iterable<Node>>() {
+              @Override
+              public Iterable<Node> apply(Node paragraph) {
+                return Iterables.filter(paragraph.findAll("*"),
+                    new Predicate<Node>() {
+                      @Override
+                      public boolean apply(Node child) {
+                        return !child.hasChildNodes();
+                      }
+                    });
+              }
+            }));
+
+    // Find text that looks like keywords in all the childless nodes.
+    Set<String> keywords = Sets.newHashSet();
+    for (Node childlessChildNode : childlessChildNodes) {
+      String possibleKeyword = childlessChildNode.getFlattenedText();
+
+      // This text is capitalized like a proper noun, and has 5 or fewer
+      // words in it - let's consider it a keyword!
+      if (possibleKeyword.equals(WordUtils.capitalizeFully(possibleKeyword)) &&
+          !possibleKeyword.equals(possibleKeyword.toUpperCase()) &&
+          StringUtils.countMatches(possibleKeyword, " ") < 5) {
+        keywords.add(possibleKeyword);
+      }
+    }
+
+    // Create a bunch of objects for the keywords we found.
+    return Iterables.transform(keywords,
+        new Function<String, ArticleKeyword>() {
+          @Override
+          public ArticleKeyword apply(String keyword) {
+            return ArticleKeyword.newBuilder()
+              .setUrlId(urlId)
+              .setKeyword(keyword)
+              .setStrength(4)
+              .setType(ArticleKeywords.TYPE_HYPERLINK)
               .build();
           }
         });
