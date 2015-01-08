@@ -3,6 +3,7 @@ package com.janknspank.server;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
@@ -63,6 +64,7 @@ public class LoginServlet extends StandardServlet {
 
   private byte[] getProfileResponseBytes(String linkedInAccessToken)
       throws DataInternalException, DataRequestException {
+    InputStream profileResponseInputStream = null;
     try {
       HttpGet get = new HttpGet(PROFILE_URL);
       get.setHeader("Authorization", "Bearer " + linkedInAccessToken);
@@ -72,10 +74,17 @@ public class LoginServlet extends StandardServlet {
       }
 
       ByteArrayOutputStream profileResponseBaos = new ByteArrayOutputStream();
-      ByteStreams.copy(response.getEntity().getContent(), profileResponseBaos);
+      profileResponseInputStream = response.getEntity().getContent();
+      ByteStreams.copy(profileResponseInputStream, profileResponseBaos);
       return profileResponseBaos.toByteArray();
     } catch (IOException e) {
       throw new DataInternalException("Error reading from LinkedIn: " + e.getMessage(), e);
+    } finally {
+      if (profileResponseInputStream != null) {
+        try {
+          profileResponseInputStream.close();
+        } catch (IOException e) {}
+      }
     }
   }
 
