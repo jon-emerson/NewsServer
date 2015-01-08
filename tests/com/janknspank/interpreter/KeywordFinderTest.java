@@ -1,12 +1,13 @@
 package com.janknspank.interpreter;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.StringReader;
-import java.util.List;
 
 import org.junit.Test;
 
+import com.google.common.collect.Iterables;
 import com.janknspank.data.ArticleKeywords;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
@@ -14,7 +15,7 @@ import com.janknspank.proto.Core.ArticleKeyword;
 
 public class KeywordFinderTest {
   private void assertNotContainsKeyword(
-      String keywordStr, List<ArticleKeyword> keywords) {
+      String keywordStr, Iterable<ArticleKeyword> keywords) {
     for (ArticleKeyword keyword : keywords) {
       if (keywordStr.equals(keyword.getKeyword())) {
         fail("Forbidden keyword found: " + keywordStr);
@@ -23,7 +24,7 @@ public class KeywordFinderTest {
   }
 
   private void assertContainsKeyword(
-      String keywordStr, String type, List<ArticleKeyword> keywords) {
+      String keywordStr, String type, Iterable<ArticleKeyword> keywords) {
     for (ArticleKeyword keyword : keywords) {
       if (keywordStr.equals(keyword.getKeyword()) && type.equals(keyword.getType())) {
         return;
@@ -41,7 +42,7 @@ public class KeywordFinderTest {
         "http://www.cnn.com/2015/01/08/foo.html",
         new StringReader("<html><head>"
             + "<meta name=\"keywords\" "
-            + "    content=\"BBC, Capital,story,Wikipedia,Brangelina,  Brad Pitt\"/>"
+            + "    content=\"BBC, Capital,story,Wikipedia,Brangelina,  brad pitt\"/>"
             + "<title>Article title</title>"
             + "</head><body>"
             + "<div class=\"cnn_storyarea\"><p>"
@@ -49,10 +50,11 @@ public class KeywordFinderTest {
             + "consisting of American actors "
             + "<a href=\"http://en.wikipedia.org/wiki/Brad_Pitt\">Brad Pitt</a> and "
             + "<a href=\"http://en.wikipedia.org/wiki/Angelina_Jolie\">Angelina Jolie</a>. "
-            + "The full story is availble on wikipedia."
+            + "Mr. Pitt and Mrs. Jolie love their combined name. The full story is availble "
+            + "on wikipedia."
             + "</p></div>"
             + "</body</html>"));
-    List<ArticleKeyword> keywords = KeywordFinder.findKeywords("urlId", documentNode);
+    Iterable<ArticleKeyword> keywords = KeywordFinder.findKeywords("urlId", documentNode);
 
     // While these are in the <meta> tag, they do not exist in the document,
     // so we filter them.
@@ -64,10 +66,10 @@ public class KeywordFinderTest {
     assertNotContainsKeyword("story", keywords);
 
     // These are the good ones!
+    assertEquals(4, Iterables.size(keywords));
     assertContainsKeyword("Brangelina", ArticleKeywords.TYPE_META_TAG, keywords);
-    assertContainsKeyword("Brad Pitt", ArticleKeywords.TYPE_META_TAG, keywords);
     assertContainsKeyword("Wikipedia", ArticleKeywords.TYPE_META_TAG, keywords);
-    assertContainsKeyword("Brad Pitt", ArticleKeywords.TYPE_HYPERLINK, keywords);
+    assertContainsKeyword("Brad Pitt", ArticleKeywords.TYPE_PERSON, keywords);
     assertContainsKeyword("Angelina Jolie", ArticleKeywords.TYPE_HYPERLINK, keywords);
   }
 }

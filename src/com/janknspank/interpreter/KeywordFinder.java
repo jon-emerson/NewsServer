@@ -78,7 +78,7 @@ public class KeywordFinder {
    * Top level method: Finds all the keywords in an article, whether they be
    * in the article body, meta tags, wherever!
    */
-  public static List<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode) {
+  public static Iterable<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode) {
     List<ArticleKeyword> keywords = Lists.newArrayList();
 
     List<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
@@ -102,7 +102,7 @@ public class KeywordFinder {
       locationFinderMe.clearAdaptiveData();
     }
 
-    return keywords;
+    return KeywordCanonicalizer.canonicalize(keywords);
   }
 
   private static Iterable<ArticleKeyword> findKeywords(
