@@ -38,6 +38,9 @@ enum StorageMethod {
   // Pull out this field into its own row in the MySQL schema, but do not
   // index it.
   PULL_OUT = 5;
+
+  // Do not store this field - it's transient data for memory only.
+  DO_NOT_STORE = 6;
 };
 
 enum ClientSerialization {

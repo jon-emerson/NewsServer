@@ -3,7 +3,6 @@ package com.janknspank.data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -22,8 +21,9 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 import com.janknspank.common.TopList;
+import com.janknspank.dom.parser.DocumentNode;
+import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.Core.AddressBook;
-import com.janknspank.proto.Core.LinkedInProfile;
 import com.janknspank.proto.Core.UserInterest;
 
 public class UserInterests {
@@ -67,39 +67,22 @@ public class UserInterests {
   }
 
   /**
-   * Returns a list of implied interests derived from the user's passed-in
-   * address book.
+   * Returns a list of interests derived from the user's passed-in LinkedIn
+   * profile.
    */
-  private static List<UserInterest> calculateInterests(String userId, LinkedInProfile profile) {
-    JSONObject profileJson = new JSONObject(profile.getData());
-    if (!profileJson.has("positions")) {
-      return Collections.emptyList();
-    }
-
-    JSONObject positionsJson = profileJson.getJSONObject("positions");
-    if (!positionsJson.has("values")) {
-      return Collections.emptyList();
-    }
-
+  public static List<UserInterest> updateInterests(String userId, DocumentNode profileDocumentNode)
+      throws DataInternalException {
     List<UserInterest> interests = Lists.newArrayList();
-    JSONArray positionsJsonArray = positionsJson.getJSONArray("values");
-    for (int i = 0; i < positionsJsonArray.length(); i++) {
-      JSONObject positionJson = positionsJsonArray.getJSONObject(i);
-      if (positionJson.has("company")) {
-        JSONObject companyJson = positionJson.getJSONObject("company");
-        if (companyJson.has("name")) {
-          interests.add(UserInterest.newBuilder()
-              .setId(GuidFactory.generate())
-              .setUserId(userId)
-              .setKeyword(companyJson.getString("name"))
-              .setSource(UserInterests.SOURCE_LINKEDIN_PROFILE)
-              .setType(UserInterests.TYPE_ORGANIZATION)
-              .build());
-        }
-      }
+    for (Node companyNameNode : profileDocumentNode.findAll("position > company > name")) {
+      interests.add(UserInterest.newBuilder()
+          .setId(GuidFactory.generate())
+          .setUserId(userId)
+          .setKeyword(companyNameNode.getFlattenedText())
+          .setSource(UserInterests.SOURCE_LINKEDIN_PROFILE)
+          .setType(UserInterests.TYPE_ORGANIZATION)
+          .build());
     }
-
-    return interests;
+    return updateInterests(userId, interests, SOURCE_LINKEDIN_PROFILE);
   }
 
   /**
@@ -166,18 +149,17 @@ public class UserInterests {
     return interests;
   }
 
-  public static void updateInterests(String userId, AddressBook addressBook)
+  public static List<UserInterest> updateInterests(String userId, AddressBook addressBook)
       throws DataInternalException {
-    updateInterests(userId, calculateInterests(userId, addressBook), SOURCE_ADDRESS_BOOK);
+    return updateInterests(userId, calculateInterests(userId, addressBook), SOURCE_ADDRESS_BOOK);
   }
 
-  public static void updateInterests(String userId, LinkedInProfile linkedInProfile)
-      throws DataInternalException {
-    updateInterests(userId, calculateInterests(userId, linkedInProfile), SOURCE_LINKEDIN_PROFILE);
-  }
+  private static List<UserInterest> updateInterests(String userId, List<UserInterest> interests,
+      String type) throws DataInternalException {
+    // Collect all the final interests, so we can return them in the end.
+    List<UserInterest> allInterests = Lists.newArrayList();
+    allInterests.addAll(interests);
 
-  private static void updateInterests(String userId, List<UserInterest> interests, String type)
-      throws DataInternalException {
     // Find what interests we already have, so that we can keep ones that the
     // address book still contains, and we can delete ones it doesn't.
     Map<String, Map<String, UserInterest>> interestsByTypeAndKeyword = Maps.newHashMap();
@@ -190,6 +172,8 @@ public class UserInterests {
           interestsByTypeAndKeyword.put(interest.getType(), keywordMap);
         }
         keywordMap.put(interest.getKeyword(), interest);
+      } else {
+        allInterests.add(interest);
       }
     }
 
@@ -218,5 +202,8 @@ public class UserInterests {
       throw new DataInternalException("Error inserting interests: " + e.getMessage(), e);
     }
     Database.delete(interestsToDelete);
+
+    // Return the latest and greatest interests, regardless of type.
+    return allInterests;
   }
 }

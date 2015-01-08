@@ -158,6 +158,14 @@ public final class Extensions {
      * </pre>
      */
     PULL_OUT(4, 5),
+    /**
+     * <code>DO_NOT_STORE = 6;</code>
+     *
+     * <pre>
+     * Do not store this field - it's transient data for memory only.
+     * </pre>
+     */
+    DO_NOT_STORE(5, 6),
     ;
 
     /**
@@ -203,6 +211,14 @@ public final class Extensions {
      * </pre>
      */
     public static final int PULL_OUT_VALUE = 5;
+    /**
+     * <code>DO_NOT_STORE = 6;</code>
+     *
+     * <pre>
+     * Do not store this field - it's transient data for memory only.
+     * </pre>
+     */
+    public static final int DO_NOT_STORE_VALUE = 6;
 
 
     public final int getNumber() { return value; }
@@ -214,6 +230,7 @@ public final class Extensions {
         case 3: return INDEX;
         case 4: return UNIQUE_INDEX;
         case 5: return PULL_OUT;
+        case 6: return DO_NOT_STORE;
         default: return null;
       }
     }
@@ -439,19 +456,20 @@ public final class Extensions {
     java.lang.String[] descriptorData = {
       "\n%com/janknspank/proto/extensions.proto\032" +
       " google/protobuf/descriptor.proto*\033\n\010Req" +
-      "uired\022\007\n\003YES\020\001\022\006\n\002NO\020\002*U\n\rStorageMethod\022" +
+      "uired\022\007\n\003YES\020\001\022\006\n\002NO\020\002*g\n\rStorageMethod\022" +
       "\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022\020\n" +
-      "\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005*F\n\023ClientS" +
-      "erialization\022\013\n\007INCLUDE\020\001\022\025\n\021INCLUDE_AS_" +
-      "NUMBER\020\002\022\013\n\007EXCLUDE\020\003:@\n\010required\022\035.goog" +
-      "le.protobuf.FieldOptions\030\341\324\003 \001(\0162\t.Requi" +
-      "red:\002NO:M\n\016storage_method\022\035.google.proto" +
-      "buf.FieldOptions\030\342\324\003 \001(\0162\016.StorageMethod",
-      ":\004BLOB::\n\rstring_length\022\035.google.protobu" +
-      "f.FieldOptions\030\343\324\003 \001(\005:\002-1:\\\n\024client_ser" +
-      "ialization\022\035.google.protobuf.FieldOption" +
-      "s\030\344\324\003 \001(\0162\024.ClientSerialization:\007INCLUDE" +
-      "B\037\n\024com.janknspank.proto\200\001\000\210\001\000\220\001\000"
+      "\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005\022\020\n\014DO_NOT_" +
+      "STORE\020\006*F\n\023ClientSerialization\022\013\n\007INCLUD" +
+      "E\020\001\022\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:" +
+      "@\n\010required\022\035.google.protobuf.FieldOptio" +
+      "ns\030\341\324\003 \001(\0162\t.Required:\002NO:M\n\016storage_met" +
+      "hod\022\035.google.protobuf.FieldOptions\030\342\324\003 \001",
+      "(\0162\016.StorageMethod:\004BLOB::\n\rstring_lengt" +
+      "h\022\035.google.protobuf.FieldOptions\030\343\324\003 \001(\005" +
+      ":\002-1:\\\n\024client_serialization\022\035.google.pr" +
+      "otobuf.FieldOptions\030\344\324\003 \001(\0162\024.ClientSeri" +
+      "alization:\007INCLUDEB\037\n\024com.janknspank.pro" +
+      "to\200\001\000\210\001\000\220\001\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

@@ -251,7 +251,16 @@ public class Database {
         }
       }
     }
-    statement.setBytes(offset + 1, message.toByteArray());
+
+    // Clear out any DO_NOT_STORE fields.
+    Message.Builder messageBuilder = message.toBuilder();
+    for (FieldDescriptor field : fieldMap.keySet()) {
+      StorageMethod storageMethod = fieldMap.get(field);
+      if (storageMethod == StorageMethod.DO_NOT_STORE) {
+        messageBuilder.clearField(field);
+      }
+    }
+    statement.setBytes(offset + 1, messageBuilder.build().toByteArray());
   }
 
   /**
@@ -309,7 +318,7 @@ public class Database {
       prepareInsertOrUpdateStatement(stmt, message);
       stmt.execute();
     } catch (SQLException e) {
-      throw new DataInternalException("Could not insert article: " + e.getMessage(), e);
+      throw new DataInternalException("Insert failed: " + e.getMessage(), e);
     }
   }
 

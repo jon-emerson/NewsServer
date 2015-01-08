@@ -20,6 +20,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.janknspank.dom.parser.DocumentNode;
+import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.Core.Session;
 import com.janknspank.proto.Core.User;
 
@@ -55,7 +57,7 @@ public class Sessions {
 
     } catch (NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException |
         UnsupportedEncodingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
-        throw new Error("Could not intialize session key", e);
+      throw new Error("Could not intialize session key", e);
     }
   }
 
@@ -99,13 +101,17 @@ public class Sessions {
   }
 
   /**
-   * Officially sanctioned method for creating a new session from email
-   * password credentials.
+   * Officially sanctioned method for getting a user session from a LinkedIn
+   * profile response.
    */
-  public static Session create(String email, String password)
+  public static Session createFromLinkedProfile(
+      DocumentNode linkedInProfileDocument, User user)
       throws DataRequestException, DataInternalException {
-    // This will throw if the user has invalid credentials.
-    User user = Users.login(email, password);
+    // Validate the data looks decent.
+    Node emailNode = linkedInProfileDocument.findFirst("email-address");
+    if (emailNode == null) {
+      throw new DataRequestException("Could not get email from LinkedIn profile");
+    }
 
     // Insert a new Session object and return it.
     try {

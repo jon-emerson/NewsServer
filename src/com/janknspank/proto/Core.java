@@ -4757,8 +4757,9 @@ public final class Core {
     // @@protoc_insertion_point(class_scope:Url)
   }
 
-  public interface UserOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UserOrBuilder extends
+      com.google.protobuf.GeneratedMessage.
+          ExtendableMessageOrBuilder<User> {
 
     // optional string id = 1;
     /**
@@ -4835,21 +4836,6 @@ public final class Core {
     com.google.protobuf.ByteString
         getFacebookIdBytes();
 
-    // optional string password_sha256 = 6;
-    /**
-     * <code>optional string password_sha256 = 6;</code>
-     */
-    boolean hasPasswordSha256();
-    /**
-     * <code>optional string password_sha256 = 6;</code>
-     */
-    java.lang.String getPasswordSha256();
-    /**
-     * <code>optional string password_sha256 = 6;</code>
-     */
-    com.google.protobuf.ByteString
-        getPasswordSha256Bytes();
-
     // optional int64 create_time = 7;
     /**
      * <code>optional int64 create_time = 7;</code>
@@ -4869,15 +4855,30 @@ public final class Core {
      * <code>optional int64 last_login_time = 8;</code>
      */
     long getLastLoginTime();
+
+    // optional string linked_in_access_token = 9;
+    /**
+     * <code>optional string linked_in_access_token = 9;</code>
+     */
+    boolean hasLinkedInAccessToken();
+    /**
+     * <code>optional string linked_in_access_token = 9;</code>
+     */
+    java.lang.String getLinkedInAccessToken();
+    /**
+     * <code>optional string linked_in_access_token = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getLinkedInAccessTokenBytes();
   }
   /**
    * Protobuf type {@code User}
    */
   public static final class User extends
-      com.google.protobuf.GeneratedMessage
-      implements UserOrBuilder {
+      com.google.protobuf.GeneratedMessage.ExtendableMessage<
+        User> implements UserOrBuilder {
     // Use User.newBuilder() to construct.
-    private User(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private User(com.google.protobuf.GeneratedMessage.ExtendableBuilder<com.janknspank.proto.Core.User, ?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
@@ -4946,19 +4947,19 @@ public final class Core {
               facebookId_ = input.readBytes();
               break;
             }
-            case 50: {
-              bitField0_ |= 0x00000020;
-              passwordSha256_ = input.readBytes();
-              break;
-            }
             case 56: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000020;
               createTime_ = input.readInt64();
               break;
             }
             case 64: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000040;
               lastLoginTime_ = input.readInt64();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000080;
+              linkedInAccessToken_ = input.readBytes();
               break;
             }
           }
@@ -5216,49 +5217,6 @@ public final class Core {
       }
     }
 
-    // optional string password_sha256 = 6;
-    public static final int PASSWORD_SHA256_FIELD_NUMBER = 6;
-    private java.lang.Object passwordSha256_;
-    /**
-     * <code>optional string password_sha256 = 6;</code>
-     */
-    public boolean hasPasswordSha256() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional string password_sha256 = 6;</code>
-     */
-    public java.lang.String getPasswordSha256() {
-      java.lang.Object ref = passwordSha256_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          passwordSha256_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string password_sha256 = 6;</code>
-     */
-    public com.google.protobuf.ByteString
-        getPasswordSha256Bytes() {
-      java.lang.Object ref = passwordSha256_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        passwordSha256_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     // optional int64 create_time = 7;
     public static final int CREATE_TIME_FIELD_NUMBER = 7;
     private long createTime_;
@@ -5266,7 +5224,7 @@ public final class Core {
      * <code>optional int64 create_time = 7;</code>
      */
     public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional int64 create_time = 7;</code>
@@ -5282,7 +5240,7 @@ public final class Core {
      * <code>optional int64 last_login_time = 8;</code>
      */
     public boolean hasLastLoginTime() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional int64 last_login_time = 8;</code>
@@ -5291,21 +5249,68 @@ public final class Core {
       return lastLoginTime_;
     }
 
+    // optional string linked_in_access_token = 9;
+    public static final int LINKED_IN_ACCESS_TOKEN_FIELD_NUMBER = 9;
+    private java.lang.Object linkedInAccessToken_;
+    /**
+     * <code>optional string linked_in_access_token = 9;</code>
+     */
+    public boolean hasLinkedInAccessToken() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string linked_in_access_token = 9;</code>
+     */
+    public java.lang.String getLinkedInAccessToken() {
+      java.lang.Object ref = linkedInAccessToken_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          linkedInAccessToken_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string linked_in_access_token = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLinkedInAccessTokenBytes() {
+      java.lang.Object ref = linkedInAccessToken_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        linkedInAccessToken_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       id_ = "";
       name_ = "";
       email_ = "";
       linkedInId_ = "";
       facebookId_ = "";
-      passwordSha256_ = "";
       createTime_ = 0L;
       lastLoginTime_ = 0L;
+      linkedInAccessToken_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!extensionsAreInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -5313,6 +5318,9 @@ public final class Core {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      com.google.protobuf.GeneratedMessage
+        .ExtendableMessage<com.janknspank.proto.Core.User>.ExtensionWriter extensionWriter =
+          newExtensionWriter();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getIdBytes());
       }
@@ -5328,14 +5336,15 @@ public final class Core {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getFacebookIdBytes());
       }
+      extensionWriter.writeUntil(7, output);
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, getPasswordSha256Bytes());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(7, createTime_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(8, lastLoginTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(9, getLinkedInAccessTokenBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -5368,16 +5377,17 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, getPasswordSha256Bytes());
+          .computeInt64Size(7, createTime_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, createTime_);
+          .computeInt64Size(8, lastLoginTime_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(8, lastLoginTime_);
+          .computeBytesSize(9, getLinkedInAccessTokenBytes());
       }
+      size += extensionsSerializedSize();
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -5460,8 +5470,8 @@ public final class Core {
      * Protobuf type {@code User}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.Core.UserOrBuilder {
+        com.google.protobuf.GeneratedMessage.ExtendableBuilder<
+          com.janknspank.proto.Core.User, Builder> implements com.janknspank.proto.Core.UserOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.janknspank.proto.Core.internal_static_User_descriptor;
@@ -5504,11 +5514,11 @@ public final class Core {
         bitField0_ = (bitField0_ & ~0x00000008);
         facebookId_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        passwordSha256_ = "";
-        bitField0_ = (bitField0_ & ~0x00000020);
         createTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         lastLoginTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        linkedInAccessToken_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
@@ -5561,15 +5571,15 @@ public final class Core {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.passwordSha256_ = passwordSha256_;
+        result.createTime_ = createTime_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.createTime_ = createTime_;
+        result.lastLoginTime_ = lastLoginTime_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.lastLoginTime_ = lastLoginTime_;
+        result.linkedInAccessToken_ = linkedInAccessToken_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5611,22 +5621,27 @@ public final class Core {
           facebookId_ = other.facebookId_;
           onChanged();
         }
-        if (other.hasPasswordSha256()) {
-          bitField0_ |= 0x00000020;
-          passwordSha256_ = other.passwordSha256_;
-          onChanged();
-        }
         if (other.hasCreateTime()) {
           setCreateTime(other.getCreateTime());
         }
         if (other.hasLastLoginTime()) {
           setLastLoginTime(other.getLastLoginTime());
         }
+        if (other.hasLinkedInAccessToken()) {
+          bitField0_ |= 0x00000080;
+          linkedInAccessToken_ = other.linkedInAccessToken_;
+          onChanged();
+        }
+        this.mergeExtensionFields(other);
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!extensionsAreInitialized()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -6019,87 +6034,13 @@ public final class Core {
         return this;
       }
 
-      // optional string password_sha256 = 6;
-      private java.lang.Object passwordSha256_ = "";
-      /**
-       * <code>optional string password_sha256 = 6;</code>
-       */
-      public boolean hasPasswordSha256() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional string password_sha256 = 6;</code>
-       */
-      public java.lang.String getPasswordSha256() {
-        java.lang.Object ref = passwordSha256_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          passwordSha256_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string password_sha256 = 6;</code>
-       */
-      public com.google.protobuf.ByteString
-          getPasswordSha256Bytes() {
-        java.lang.Object ref = passwordSha256_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          passwordSha256_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string password_sha256 = 6;</code>
-       */
-      public Builder setPasswordSha256(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        passwordSha256_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string password_sha256 = 6;</code>
-       */
-      public Builder clearPasswordSha256() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        passwordSha256_ = getDefaultInstance().getPasswordSha256();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string password_sha256 = 6;</code>
-       */
-      public Builder setPasswordSha256Bytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        passwordSha256_ = value;
-        onChanged();
-        return this;
-      }
-
       // optional int64 create_time = 7;
       private long createTime_ ;
       /**
        * <code>optional int64 create_time = 7;</code>
        */
       public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional int64 create_time = 7;</code>
@@ -6111,7 +6052,7 @@ public final class Core {
        * <code>optional int64 create_time = 7;</code>
        */
       public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         createTime_ = value;
         onChanged();
         return this;
@@ -6120,7 +6061,7 @@ public final class Core {
        * <code>optional int64 create_time = 7;</code>
        */
       public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         createTime_ = 0L;
         onChanged();
         return this;
@@ -6132,7 +6073,7 @@ public final class Core {
        * <code>optional int64 last_login_time = 8;</code>
        */
       public boolean hasLastLoginTime() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional int64 last_login_time = 8;</code>
@@ -6144,7 +6085,7 @@ public final class Core {
        * <code>optional int64 last_login_time = 8;</code>
        */
       public Builder setLastLoginTime(long value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         lastLoginTime_ = value;
         onChanged();
         return this;
@@ -6153,8 +6094,82 @@ public final class Core {
        * <code>optional int64 last_login_time = 8;</code>
        */
       public Builder clearLastLoginTime() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         lastLoginTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional string linked_in_access_token = 9;
+      private java.lang.Object linkedInAccessToken_ = "";
+      /**
+       * <code>optional string linked_in_access_token = 9;</code>
+       */
+      public boolean hasLinkedInAccessToken() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string linked_in_access_token = 9;</code>
+       */
+      public java.lang.String getLinkedInAccessToken() {
+        java.lang.Object ref = linkedInAccessToken_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          linkedInAccessToken_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string linked_in_access_token = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getLinkedInAccessTokenBytes() {
+        java.lang.Object ref = linkedInAccessToken_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          linkedInAccessToken_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string linked_in_access_token = 9;</code>
+       */
+      public Builder setLinkedInAccessToken(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        linkedInAccessToken_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string linked_in_access_token = 9;</code>
+       */
+      public Builder clearLinkedInAccessToken() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        linkedInAccessToken_ = getDefaultInstance().getLinkedInAccessToken();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string linked_in_access_token = 9;</code>
+       */
+      public Builder setLinkedInAccessTokenBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        linkedInAccessToken_ = value;
         onChanged();
         return this;
       }
@@ -11852,33 +11867,34 @@ public final class Core {
       "\tB\014\210\246\035\001\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246" +
       "\035\001\022\034\n\016discovery_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017last",
       "_crawl_time\030\005 \001(\003\022\034\n\016crawl_priority\030\006 \001(" +
-      "\003B\004\220\246\035\003\"\347\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246" +
+      "\003B\004\220\246\035\003\"\365\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246" +
       "\035\030\022\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210" +
       "\246\035\001\220\246\035\004\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\030\022" +
-      "\031\n\013facebook_id\030\005 \001(\tB\004\230\246\035\030\022)\n\017password_s" +
-      "ha256\030\006 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\0352\240\246\035\003\022\031\n\013create_" +
-      "time\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001(" +
-      "\003\"g\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220" +
-      "\246\035\002\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022" +
-      "\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"e\n\017LinkedInPr",
-      "ofile\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004" +
-      "data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 " +
-      "\001(\003B\004\210\246\035\001\"i\n\023LinkedInConnections\022\035\n\007user" +
-      "_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210" +
-      "\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"a\n\013" +
-      "AddressBook\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246" +
-      "\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_t" +
-      "ime\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrlRating\022\035\n\007user" +
-      "_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(\tB" +
-      "\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 \001(\005B\004\210\246\035\001\022\031\n\013c",
-      "reate_time\030\004 \001(\003B\004\210\246\035\001\"m\n\017UserUrlFavorit" +
-      "e\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_" +
-      "id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013create_time\030\003 " +
-      "\001(\003B\010\220\246\035\005\210\246\035\001\"\230\001\n\014UserInterest\022\030\n\002id\030\001 \001" +
-      "(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220" +
-      "\246\035\003\230\246\035\030\022\035\n\007keyword\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\034" +
-      "\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\022\n\004type\030\005 \001" +
-      "(\tB\004\230\246\035\001B\026\n\024com.janknspank.proto"
+      "\031\n\013facebook_id\030\005 \001(\tB\004\230\246\035\030\022\031\n\013create_tim" +
+      "e\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001(\003\0221" +
+      "\n\026linked_in_access_token\030\t \001(\tB\021\210\246\035\001\220\246\035\005" +
+      "\230\246\035\364\003\240\246\035\003*\004\010\006\020\007\"g\n\007Session\022\"\n\013session_ke" +
+      "y\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB" +
+      "\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001",
+      "\"e\n\017LinkedInProfile\022\035\n\007user_id\030\001 \001(\tB\014\210\246" +
+      "\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013" +
+      "create_time\030\003 \001(\003B\004\210\246\035\001\"i\n\023LinkedInConne" +
+      "ctions\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n" +
+      "\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003" +
+      " \001(\003B\004\210\246\035\001\"a\n\013AddressBook\022\035\n\007user_id\030\001 \001" +
+      "(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200" +
+      "\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrl" +
+      "Rating\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n" +
+      "\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 ",
+      "\001(\005B\004\210\246\035\001\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"m\n\017" +
+      "UserUrlFavorite\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246" +
+      "\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013" +
+      "create_time\030\003 \001(\003B\010\220\246\035\005\210\246\035\001\"\230\001\n\014UserInte" +
+      "rest\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\035\n\007user_i" +
+      "d\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\007keyword\030\003 \001(\tB\014" +
+      "\210\246\035\001\220\246\035\003\230\246\035d\022\034\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246" +
+      "\035\002\022\022\n\004type\030\005 \001(\tB\004\230\246\035\001B\026\n\024com.janknspank" +
+      ".proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11914,7 +11930,7 @@ public final class Core {
           internal_static_User_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_User_descriptor,
-              new java.lang.String[] { "Id", "Name", "Email", "LinkedInId", "FacebookId", "PasswordSha256", "CreateTime", "LastLoginTime", });
+              new java.lang.String[] { "Id", "Name", "Email", "LinkedInId", "FacebookId", "CreateTime", "LastLoginTime", "LinkedInAccessToken", });
           internal_static_Session_descriptor =
             getDescriptor().getMessageTypes().get(5);
           internal_static_Session_fieldAccessorTable = new
@@ -12015,10 +12031,10 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.clientSerialization);
-          registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);

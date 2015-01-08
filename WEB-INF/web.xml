@@ -15,15 +15,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>CreateUserServlet</servlet-name>
-    <servlet-class>com.janknspank.server.CreateUserServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CreateUserServlet</servlet-name>
-    <url-pattern>/createUser</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>DeleteUserServlet</servlet-name>
     <servlet-class>com.janknspank.server.DeleteUserServlet</servlet-class>
   </servlet>
@@ -93,15 +84,6 @@
   <servlet-mapping>
     <servlet-name>SetAddressBookServlet</servlet-name>
     <url-pattern>/setAddressBook</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>SetLinkedInProfileServlet</servlet-name>
-    <servlet-class>com.janknspank.server.SetLinkedInProfileServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SetLinkedInProfileServlet</servlet-name>
-    <url-pattern>/setLinkedInProfile</url-pattern>
   </servlet-mapping>
 
   <servlet>

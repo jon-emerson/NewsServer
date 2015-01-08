@@ -147,6 +147,8 @@ message Url {
 }
 
 message User {
+  extensions 6; // Old fields.
+
   optional string id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
@@ -171,18 +173,18 @@ message User {
     (string_length) = 24
   ];
 
-  optional string password_sha256 = 6 [
-    (required) = YES,
-    (storage_method) = PULL_OUT,
-    (string_length) = 50,
-    (client_serialization) = EXCLUDE
-  ];
-
   optional int64 create_time = 7 [
     (required) = YES
   ];
 
   optional int64 last_login_time = 8;
+
+  optional string linked_in_access_token = 9 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 500,
+    (client_serialization) = EXCLUDE
+  ];
 }
 
 message Session {

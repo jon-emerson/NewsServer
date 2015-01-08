@@ -9,22 +9,15 @@ import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
 import com.janknspank.data.Database;
 import com.janknspank.data.Sessions;
-import com.janknspank.data.Users;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.User;
 
+@AuthenticationRequired(requestMethod = "POST")
 public class DeleteUserServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, DataRequestException, ValidationException {
-    // Read parameters.
-    String email = getRequiredParameter(req, "email");
-
-    // Business logic.
-    User user = Users.getByEmail(email);
-    if (user == null) {
-      throw new DataRequestException("User not found");
-    }
+    User user = Database.get(getSession(req).getUserId(), User.class);
     Sessions.deleteAllFromUser(user);
     Database.delete(user);
 
