@@ -122,4 +122,9 @@ public class LoginServlet extends StandardServlet {
     response.put("session", Serializer.toJSON(session));
     return response;
   }
+
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
+      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+    return doGetInternal(req, resp);
+  }
 }
