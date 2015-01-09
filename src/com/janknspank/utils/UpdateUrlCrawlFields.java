@@ -18,6 +18,9 @@ import com.janknspank.proto.Core.Url;
  * articles we have URLs for but we haven't actually stored any Article data for.
  * This basically fixes up the DB after we've had exceptions parsing specific
  * articles, or we've decided to purge certain Articles and re-crawl them.
+ * 
+ * DO NOT RUN THIS WHILE A CRAWL IS GOING - IT WILL MARK ARTICLES AS UNCRAWLED
+ * IF THEY WERE CRAWLED WHILE THIS PROCESS STARTED RUNNING.
  */
 public class UpdateUrlCrawlFields {
   public static void main(String args[]) throws Exception {

@@ -306,7 +306,6 @@ public class Database {
 
     // Prepare the statement!
     return getConnection().prepareStatement(sql.toString());
-    //prepareInsertOrUpdateStatement(statement, message);
 
     //return statement;
   }
@@ -315,15 +314,7 @@ public class Database {
    * Inserts the passed message into the database.
    */
   public static void insert(Message message) throws ValidationException, DataInternalException {
-    Validator.assertValid(message);
-
-    try {
-      PreparedStatement stmt = Database.getRawInsertStatement(message);
-      prepareInsertOrUpdateStatement(stmt, message);
-      stmt.execute();
-    } catch (SQLException e) {
-      throw new DataInternalException("Insert failed: " + e.getMessage(), e);
-    }
+    insert(ImmutableList.of(message));
   }
 
  /**

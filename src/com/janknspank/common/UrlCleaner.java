@@ -228,10 +228,10 @@ public class UrlCleaner {
     }
     if (host.endsWith(".sfgate.com") || host.equals("sfgate.com")) {
       queryParameters.remove("cmpid");
-      queryParameters.remove("share");
     }
     if (host.endsWith(".siliconbeat.com") || host.equals("siliconbeat.com")) {
-      queryParameters.remove("share");
+      queryParameters.remove("msg");
+      queryParameters.remove("shared");
     }
     if (host.endsWith(".techcrunch.com") || host.equals("techcrunch.com")) {
       queryParameters.remove("ncid");

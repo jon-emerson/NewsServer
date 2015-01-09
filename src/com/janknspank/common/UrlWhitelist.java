@@ -18,6 +18,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.Database;
 import com.janknspank.data.Links;
 import com.janknspank.proto.Core.Article;
@@ -561,7 +562,12 @@ public class UrlWhitelist {
         }
       }
       if (domain.endsWith("sfgate.com") &&
-          path.startsWith("/merge/")) {
+          (path.startsWith("/merge/") ||
+              queryParameters.containsKey("share"))) {
+        return false;
+      }
+      if (domain.endsWith("siliconbeat.com") &&
+          queryParameters.containsKey("share")) {
         return false;
       }
       if (domain.endsWith("sports.chron.com") &&
@@ -658,9 +664,10 @@ public class UrlWhitelist {
           urls.add(urlStr);
           ids.add(urlsToDelete.get(urlStr));
         }
-        System.out.println("Deleted " + Database.deletePrimaryKeys(urls, Url.class) + " urls");
         System.out.println("Deleted " + Database.deletePrimaryKeys(ids, Article.class) + " articles");
+        System.out.println("Deleted " + ArticleKeywords.deleteForUrlIds(ids) + " article keywords");
         System.out.println("Deleted " + Links.deleteIds(ids) + " links");
+        System.out.println("Deleted " + Database.deletePrimaryKeys(urls, Url.class) + " urls");
         urlsToDelete.clear();
       }
     }

@@ -46,6 +46,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("bdnews24.com", new String[] {
         ".body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
+        ".article_body > p",    // See "Lawsky Said to Probe Medley Hedge Fund ...".
         ".article-body > p"});  // See "... Joins the NYPD Funeral Protest Backlash".
     DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
         "article > p",

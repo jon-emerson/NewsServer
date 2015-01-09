@@ -19,13 +19,13 @@ public class DateParserTest {
 
   public static void assertSameTime(String testDateStr, Long wildDate) {
     Long testDate = DateParser.parseDateTime(testDateStr);
-    assertNotNull(testDate);
-    assertNotNull(wildDate);
+    assertNotNull("Test date cannot be null", testDate);
+    assertNotNull("Wild date cannot be null", wildDate);
     assertEquals(testDate, wildDate);
   }
 
   @Test
-  public void test() {
+  public void testParseDateTime() {
     // Sanity check that the parser's not just returning 0 for everything.
     assertTrue(DateParser.parseDateTime("20141231220000") > 500000);
     assertNotEquals(DateParser.parseDateTime("20141231220000"),
@@ -41,5 +41,38 @@ public class DateParserTest {
     assertSameTime("20150102232200", "2015-01-03T07:22Z"); // Channelnewsasia.com.
     assertSameTime("20150104000000", "Sun, 4 Jan 2015"); // LATimes.com RSS.
     assertSameTime("20150106224300", "January 6, 2015, 10:43 PM"); // Cbsnews.com.
+  }
+
+  @Test
+  public void testParseDateFromUrl() {
+    assertSameTime("20150109000000", DateParser.parseDateFromUrl(
+        "http://money.cnn.com/2015/01/09/technology/uber-price/index.html", false));
+    assertSameTime("20150110000000", DateParser.parseDateFromUrl(
+        "http://www.abc.net.au/news/2015-01-10/asian-cup-2015/6009842", false));
+    assertSameTime("20150109000000", DateParser.parseDateFromUrl(
+        "http://www.buffalonews.com/news-wire-services/french-police-storm-terror-"
+        + "sites-in-paris-20150109", false));
+    assertSameTime("20120328000000", DateParser.parseDateFromUrl(
+        "http://go.bloomberg.com/tech-blog/2012-03-28-facebook-gets-a-new-"
+        + "game-not-made-by-zynga-will-it-score/", false));
+    assertSameTime("19920108000000", DateParser.parseDateFromUrl(
+        "http://articles.latimes.com/1992-01-08/local/me-1330_1_middle-class", false));
+
+    // Months.
+    assertNull(DateParser.parseDateFromUrl("http://arstechnica.com/apple/2005/05/305/", false));
+    assertSameTime("20050501000000", DateParser.parseDateFromUrl(
+        "http://arstechnica.com/apple/2005/05/305/", true));
+    assertNull(DateParser.parseDateFromUrl(
+        "http://abcnews.go.com/blogs/business/2014/12/2014-its-been-a-brilliant-"
+        + "year-for-investors/", false));
+    assertSameTime("20141201000000", DateParser.parseDateFromUrl(
+        "http://abcnews.go.com/blogs/business/2014/12/2014-its-been-a-brilliant-"
+        + "year-for-investors/", true));
+    assertNull(DateParser.parseDateFromUrl(
+        "http://abcnews.go.com/blogs/politics/2014/10/5-simple-questions-about-the-"
+        + "midterm-elections-answered/", false));
+    assertSameTime("20141001000000", DateParser.parseDateFromUrl(
+        "http://abcnews.go.com/blogs/politics/2014/10/5-simple-questions-about-the-"
+        + "midterm-elections-answered/", true));
   }
 }

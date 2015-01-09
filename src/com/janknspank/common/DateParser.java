@@ -14,9 +14,10 @@ import com.google.common.base.Strings;
  */
 public class DateParser {
   private static final Pattern[] DATE_IN_URL_PATTERNS = {
-      Pattern.compile("\\/[0-9]{4}\\/[01]?[0-9]\\/[0-3]?[0-9]\\/"),
-      Pattern.compile("\\/[0-9]{4}\\-[01]?[0-9]\\-[0-3]?[0-9][\\/\\-]"),
-      Pattern.compile("\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/")
+      Pattern.compile("\\/((18|19|20)[0-9]{2}\\/[01]?[0-9]\\/[0-3]?[0-9])\\/"),
+      Pattern.compile("\\/((18|19|20)[0-9]{2}\\-[01]?[0-9]\\-[0-3]?[0-9])[\\/\\-]"),
+      Pattern.compile("\\/((18|19|20)[0-9]{2}[01][0-9][0-3][0-9])\\/"),
+      Pattern.compile("\\-((18|19|20)[0-9]{2}[01][0-9][0-3][0-9])$") // buffalonews.com wire stories.
   };
   private static final Pattern MONTH_IN_URL_PATTERN =
       Pattern.compile("\\/20[0-9]{2}\\/(0[0-9]|1[012])\\/");
@@ -33,11 +34,7 @@ public class DateParser {
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss"), // Boston.com
-      new SimpleDateFormat("EEE, d MMM yyyy"), // LATimes.com RSS.
-      new SimpleDateFormat("/yyyy/MM/dd/"), // In URL.
-      new SimpleDateFormat("/yyyy-MM-dd/"), // In URL.
-      new SimpleDateFormat("/yyyy-MM-dd-"), // In URL.
-      new SimpleDateFormat("/yyyyMMdd/") // In URL.
+      new SimpleDateFormat("EEE, d MMM yyyy") // LATimes.com RSS.
   };
   private static final DateFormat MONTH_IN_URL_DATE_FORMAT =
       new SimpleDateFormat("/yyyy/MM/");
@@ -54,7 +51,7 @@ public class DateParser {
     for (Pattern dateInUrlPattern : DATE_IN_URL_PATTERNS) {
       Matcher dateInUrlMatcher = dateInUrlPattern.matcher(url);
       if (dateInUrlMatcher.find()) {
-        return parseDateTime(dateInUrlMatcher.group());
+        return parseDateTime(dateInUrlMatcher.group(1));
       }
     }
     if (allowMonth) {
