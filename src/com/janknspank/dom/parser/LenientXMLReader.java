@@ -186,6 +186,19 @@ public class LenientXMLReader implements XMLReader {
     INSIDE_ELEMENT_INSIDE_DOUBLE_QUOTE;
   }
 
+  /**
+   * Returns true if the end of this string builder is an equals sign, ignoring
+   * any spaces.
+   */
+  private boolean isLastNonSpaceCharacterAnEqualsSign(StringBuilder sb) {
+    for (int i = sb.length() - 1; i >= 0; i--) {
+      if (!Character.isWhitespace(sb.charAt(i))) {
+        return sb.charAt(i) == '=';
+      }
+    }
+    return false;
+  }
+
   @Override
   public void parse(InputSource input) throws IOException, SAXException {
     // We could be passed either a character stream Reader or an InputStream,
@@ -224,14 +237,23 @@ public class LenientXMLReader implements XMLReader {
           break;
         case '"':
           if (state == ParserState.INSIDE_ELEMENT) {
-            state = ParserState.INSIDE_ELEMENT_INSIDE_DOUBLE_QUOTE;
+            // In the world of wild HTML, sometimes there's extra quotes.  It's
+            // important that we ignore them so that we don't go thinking the
+            // whole rest of the web page is inside an attribute value.  My naive
+            // approach here is to ignore any quotes unless the preceding non-
+            // space character was an equals sign ("=").  Seems generally OK.
+            if (isLastNonSpaceCharacterAnEqualsSign(currentBlock)) {
+              state = ParserState.INSIDE_ELEMENT_INSIDE_DOUBLE_QUOTE;
+            }
           } else if (state == ParserState.INSIDE_ELEMENT_INSIDE_DOUBLE_QUOTE) {
             state = ParserState.INSIDE_ELEMENT;
           }
           break;
         case '\'':
           if (state == ParserState.INSIDE_ELEMENT) {
-            state = ParserState.INSIDE_ELEMENT_INSIDE_SINGLE_QUOTE;
+            if (isLastNonSpaceCharacterAnEqualsSign(currentBlock)) {
+              state = ParserState.INSIDE_ELEMENT_INSIDE_SINGLE_QUOTE;
+            }
           } else if (state == ParserState.INSIDE_ELEMENT_INSIDE_SINGLE_QUOTE) {
             state = ParserState.INSIDE_ELEMENT;
           }

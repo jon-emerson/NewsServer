@@ -24,31 +24,31 @@ public class TheMachine {
     Urls.put(originUrl, false);
 
     while (true) {
-      final Url startUrl = Urls.markAsCrawled(Urls.getNextUrlToCrawl());
-//      final Url startUrl = Url.newBuilder()
+      final Url url = Urls.markCrawlStart(Urls.getNextUrlToCrawl());
+//      final Url url = Url.newBuilder()
 //          .setId("pYZDE7M36zxQNxbFTUVFCQ")
 //          .setUrl("http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-"
 //              + "future-of-finance/")
 //          .setTweetCount(0)
 //          .setDiscoveryTime(System.currentTimeMillis())
 //          .build();
-      if (startUrl == null) {
+      if (url == null) {
         // Some other thread has likely claimed this URL - Go get another.
         continue;
       }
 
-      if (!UrlWhitelist.isOkay(startUrl.getUrl())) {
-        System.err.println("Removing now-blacklisted page: " + startUrl.getUrl());
-        Links.deleteIds(ImmutableList.of(startUrl.getId()));
-        Database.delete(startUrl);
+      if (!UrlWhitelist.isOkay(url.getUrl())) {
+        System.err.println("Removing now-blacklisted page: " + url.getUrl());
+        Links.deleteIds(ImmutableList.of(url.getId()));
+        Database.delete(url);
         continue;
       }
 
-      System.err.println("Crawling: " + startUrl.getUrl());
+      System.err.println("Crawling: " + url.getUrl());
 
       // Save this article and its keywords.
       try {
-        InterpretedData interpretedData = Interpreter.interpret(startUrl);
+        InterpretedData interpretedData = Interpreter.interpret(url);
         Database.insert(interpretedData.getArticle());
         Database.insert(interpretedData.getKeywordList());
 
@@ -58,7 +58,8 @@ public class TheMachine {
                 Iterables.filter(interpretedData.getUrlList(), UrlWhitelist.PREDICATE),
                 UrlCleaner.TRANSFORM_FUNCTION),
             false /* isTweet */);
-        Links.put(startUrl, destinationUrls);
+        Links.put(url, destinationUrls);
+        Urls.markCrawlFinish(url);
 
       } catch (ValidationException e) {
         // Internal error (bug in our code).

@@ -40,6 +40,7 @@ public class UrlWhitelistTest {
     assertFalse(UrlWhitelist.isOkay("http://www.bbc.com/programmes/articles/s790szKLSc1l3n9Fqwxl9F/6-musics-albums-of-the-year-2014"));
     assertFalse(UrlWhitelist.isOkay("http://www.bbc.com/portuguese/noticias/2014/12/141226_brasileira_tailandia_tsunami_gerardo_rw"));
     assertFalse(UrlWhitelist.isOkay("http://www.bbc.com/mundo/noticias/2014/12/141119_cosas_sorprendentes_finde2014_yv"));
+    assertFalse(UrlWhitelist.isOkay("http://eatocracy.cnn.com/2010/06/18/are-you-still-working-on-that/comment-page-9/"));
   }
 
   @Test

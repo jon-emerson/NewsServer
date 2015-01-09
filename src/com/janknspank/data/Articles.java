@@ -26,23 +26,28 @@ public class Articles {
       "SELECT * FROM " + Database.getTableName(Article.class)
       + " ORDER BY published_time DESC LIMIT 50";
 
+  public static final int MAX_TITLE_LENGTH;
   public static final int MAX_PARAGRAPH_LENGTH;
   public static final int MAX_DESCRIPTION_LENGTH;
   static {
+    int titleLength = 0;
     int paragraphLength = 0;
     int descriptionLength = 0;
     for (FieldDescriptor field : Article.getDefaultInstance().getDescriptorForType().getFields()) {
       if (JavaType.STRING == field.getJavaType()) {
-        if ("paragraph".equals(field.getName())) {
+        if ("title".equals(field.getName())) {
+          titleLength = field.getOptions().getExtension(Extensions.stringLength);
+        } else if ("paragraph".equals(field.getName())) {
           paragraphLength = field.getOptions().getExtension(Extensions.stringLength);
         } else if ("description".equals(field.getName())) {
           descriptionLength = field.getOptions().getExtension(Extensions.stringLength);
         }
       }
     }
-    if (paragraphLength == 0 || descriptionLength == 0) {
-      throw new IllegalStateException("Could not find length of paragraph or description");
+    if (titleLength == 0 || paragraphLength == 0 || descriptionLength == 0) {
+      throw new IllegalStateException("Could not find length of title, paragraph or description");
     }
+    MAX_TITLE_LENGTH = titleLength;
     MAX_PARAGRAPH_LENGTH = paragraphLength;
     MAX_DESCRIPTION_LENGTH = descriptionLength;
   }

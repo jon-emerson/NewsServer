@@ -19,6 +19,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
 import com.janknspank.proto.Extensions;
@@ -162,6 +163,9 @@ public class Database {
           storageMethod == StorageMethod.PULL_OUT) {
         sql.append(field.getName() + " " + getSqlTypeForField(field));
         if (storageMethod == StorageMethod.PRIMARY_KEY) {
+          if (JavaType.STRING == field.getJavaType()) {
+            sql.append(" CHARACTER SET latin1 COLLATE latin1_bin");
+          }
           sql.append(" PRIMARY KEY");
         }
         if (Required.YES == field.getOptions().getExtension(Extensions.required)) {
@@ -578,12 +582,9 @@ public class Database {
    * @throws DataInternalException if the object could not be deleted, including
    *     if it could not be found
    */
-  public static <T extends Message> void deletePrimaryKey(String primaryKey, Class<T> clazz)
+  public static <T extends Message> boolean deletePrimaryKey(String primaryKey, Class<T> clazz)
       throws DataInternalException {
-    if (deletePrimaryKeys(ImmutableList.of(primaryKey), clazz) != 1) {
-      throw new DataInternalException("Could not find object to delete, primary key = "
-          + primaryKey);
-    }
+    return (deletePrimaryKeys(ImmutableList.of(primaryKey), clazz) == 1);
   }
 
   /**

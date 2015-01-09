@@ -14,7 +14,7 @@ public class DocumentNode extends Node {
 
   @Override
   public String toString() {
-    return "DOCUMENT";
+    return "Document: " + url;
   }
 
   @Override

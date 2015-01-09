@@ -3779,19 +3779,29 @@ public final class Core {
      */
     long getDiscoveryTime();
 
-    // optional int64 last_crawl_time = 5;
+    // optional int64 last_crawl_start_time = 5;
     /**
-     * <code>optional int64 last_crawl_time = 5;</code>
+     * <code>optional int64 last_crawl_start_time = 5;</code>
      */
-    boolean hasLastCrawlTime();
+    boolean hasLastCrawlStartTime();
     /**
-     * <code>optional int64 last_crawl_time = 5;</code>
+     * <code>optional int64 last_crawl_start_time = 5;</code>
      */
-    long getLastCrawlTime();
+    long getLastCrawlStartTime();
 
-    // optional int64 crawl_priority = 6;
+    // optional int64 last_crawl_finish_time = 6;
     /**
-     * <code>optional int64 crawl_priority = 6;</code>
+     * <code>optional int64 last_crawl_finish_time = 6;</code>
+     */
+    boolean hasLastCrawlFinishTime();
+    /**
+     * <code>optional int64 last_crawl_finish_time = 6;</code>
+     */
+    long getLastCrawlFinishTime();
+
+    // optional int64 crawl_priority = 7;
+    /**
+     * <code>optional int64 crawl_priority = 7;</code>
      *
      * <pre>
      * Score between 0 to 200, where 200 means "we really should crawl this
@@ -3805,7 +3815,7 @@ public final class Core {
      */
     boolean hasCrawlPriority();
     /**
-     * <code>optional int64 crawl_priority = 6;</code>
+     * <code>optional int64 crawl_priority = 7;</code>
      *
      * <pre>
      * Score between 0 to 200, where 200 means "we really should crawl this
@@ -3892,11 +3902,16 @@ public final class Core {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              lastCrawlTime_ = input.readInt64();
+              lastCrawlStartTime_ = input.readInt64();
               break;
             }
             case 48: {
               bitField0_ |= 0x00000020;
+              lastCrawlFinishTime_ = input.readInt64();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
               crawlPriority_ = input.readInt64();
               break;
             }
@@ -4058,27 +4073,43 @@ public final class Core {
       return discoveryTime_;
     }
 
-    // optional int64 last_crawl_time = 5;
-    public static final int LAST_CRAWL_TIME_FIELD_NUMBER = 5;
-    private long lastCrawlTime_;
+    // optional int64 last_crawl_start_time = 5;
+    public static final int LAST_CRAWL_START_TIME_FIELD_NUMBER = 5;
+    private long lastCrawlStartTime_;
     /**
-     * <code>optional int64 last_crawl_time = 5;</code>
+     * <code>optional int64 last_crawl_start_time = 5;</code>
      */
-    public boolean hasLastCrawlTime() {
+    public boolean hasLastCrawlStartTime() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int64 last_crawl_time = 5;</code>
+     * <code>optional int64 last_crawl_start_time = 5;</code>
      */
-    public long getLastCrawlTime() {
-      return lastCrawlTime_;
+    public long getLastCrawlStartTime() {
+      return lastCrawlStartTime_;
     }
 
-    // optional int64 crawl_priority = 6;
-    public static final int CRAWL_PRIORITY_FIELD_NUMBER = 6;
+    // optional int64 last_crawl_finish_time = 6;
+    public static final int LAST_CRAWL_FINISH_TIME_FIELD_NUMBER = 6;
+    private long lastCrawlFinishTime_;
+    /**
+     * <code>optional int64 last_crawl_finish_time = 6;</code>
+     */
+    public boolean hasLastCrawlFinishTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int64 last_crawl_finish_time = 6;</code>
+     */
+    public long getLastCrawlFinishTime() {
+      return lastCrawlFinishTime_;
+    }
+
+    // optional int64 crawl_priority = 7;
+    public static final int CRAWL_PRIORITY_FIELD_NUMBER = 7;
     private long crawlPriority_;
     /**
-     * <code>optional int64 crawl_priority = 6;</code>
+     * <code>optional int64 crawl_priority = 7;</code>
      *
      * <pre>
      * Score between 0 to 200, where 200 means "we really should crawl this
@@ -4091,10 +4122,10 @@ public final class Core {
      * </pre>
      */
     public boolean hasCrawlPriority() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>optional int64 crawl_priority = 6;</code>
+     * <code>optional int64 crawl_priority = 7;</code>
      *
      * <pre>
      * Score between 0 to 200, where 200 means "we really should crawl this
@@ -4115,7 +4146,8 @@ public final class Core {
       id_ = "";
       tweetCount_ = 0L;
       discoveryTime_ = 0L;
-      lastCrawlTime_ = 0L;
+      lastCrawlStartTime_ = 0L;
+      lastCrawlFinishTime_ = 0L;
       crawlPriority_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -4143,10 +4175,13 @@ public final class Core {
         output.writeInt64(4, discoveryTime_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, lastCrawlTime_);
+        output.writeInt64(5, lastCrawlStartTime_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt64(6, crawlPriority_);
+        output.writeInt64(6, lastCrawlFinishTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(7, crawlPriority_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4175,11 +4210,15 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, lastCrawlTime_);
+          .computeInt64Size(5, lastCrawlStartTime_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, crawlPriority_);
+          .computeInt64Size(6, lastCrawlFinishTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, crawlPriority_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4305,10 +4344,12 @@ public final class Core {
         bitField0_ = (bitField0_ & ~0x00000004);
         discoveryTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
-        lastCrawlTime_ = 0L;
+        lastCrawlStartTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
-        crawlPriority_ = 0L;
+        lastCrawlFinishTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
+        crawlPriority_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -4356,9 +4397,13 @@ public final class Core {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.lastCrawlTime_ = lastCrawlTime_;
+        result.lastCrawlStartTime_ = lastCrawlStartTime_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
+        }
+        result.lastCrawlFinishTime_ = lastCrawlFinishTime_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
         }
         result.crawlPriority_ = crawlPriority_;
         result.bitField0_ = to_bitField0_;
@@ -4393,8 +4438,11 @@ public final class Core {
         if (other.hasDiscoveryTime()) {
           setDiscoveryTime(other.getDiscoveryTime());
         }
-        if (other.hasLastCrawlTime()) {
-          setLastCrawlTime(other.getLastCrawlTime());
+        if (other.hasLastCrawlStartTime()) {
+          setLastCrawlStartTime(other.getLastCrawlStartTime());
+        }
+        if (other.hasLastCrawlFinishTime()) {
+          setLastCrawlFinishTime(other.getLastCrawlFinishTime());
         }
         if (other.hasCrawlPriority()) {
           setCrawlPriority(other.getCrawlPriority());
@@ -4640,43 +4688,76 @@ public final class Core {
         return this;
       }
 
-      // optional int64 last_crawl_time = 5;
-      private long lastCrawlTime_ ;
+      // optional int64 last_crawl_start_time = 5;
+      private long lastCrawlStartTime_ ;
       /**
-       * <code>optional int64 last_crawl_time = 5;</code>
+       * <code>optional int64 last_crawl_start_time = 5;</code>
        */
-      public boolean hasLastCrawlTime() {
+      public boolean hasLastCrawlStartTime() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int64 last_crawl_time = 5;</code>
+       * <code>optional int64 last_crawl_start_time = 5;</code>
        */
-      public long getLastCrawlTime() {
-        return lastCrawlTime_;
+      public long getLastCrawlStartTime() {
+        return lastCrawlStartTime_;
       }
       /**
-       * <code>optional int64 last_crawl_time = 5;</code>
+       * <code>optional int64 last_crawl_start_time = 5;</code>
        */
-      public Builder setLastCrawlTime(long value) {
+      public Builder setLastCrawlStartTime(long value) {
         bitField0_ |= 0x00000010;
-        lastCrawlTime_ = value;
+        lastCrawlStartTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 last_crawl_time = 5;</code>
+       * <code>optional int64 last_crawl_start_time = 5;</code>
        */
-      public Builder clearLastCrawlTime() {
+      public Builder clearLastCrawlStartTime() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        lastCrawlTime_ = 0L;
+        lastCrawlStartTime_ = 0L;
         onChanged();
         return this;
       }
 
-      // optional int64 crawl_priority = 6;
+      // optional int64 last_crawl_finish_time = 6;
+      private long lastCrawlFinishTime_ ;
+      /**
+       * <code>optional int64 last_crawl_finish_time = 6;</code>
+       */
+      public boolean hasLastCrawlFinishTime() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int64 last_crawl_finish_time = 6;</code>
+       */
+      public long getLastCrawlFinishTime() {
+        return lastCrawlFinishTime_;
+      }
+      /**
+       * <code>optional int64 last_crawl_finish_time = 6;</code>
+       */
+      public Builder setLastCrawlFinishTime(long value) {
+        bitField0_ |= 0x00000020;
+        lastCrawlFinishTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 last_crawl_finish_time = 6;</code>
+       */
+      public Builder clearLastCrawlFinishTime() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        lastCrawlFinishTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 crawl_priority = 7;
       private long crawlPriority_ ;
       /**
-       * <code>optional int64 crawl_priority = 6;</code>
+       * <code>optional int64 crawl_priority = 7;</code>
        *
        * <pre>
        * Score between 0 to 200, where 200 means "we really should crawl this
@@ -4689,10 +4770,10 @@ public final class Core {
        * </pre>
        */
       public boolean hasCrawlPriority() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional int64 crawl_priority = 6;</code>
+       * <code>optional int64 crawl_priority = 7;</code>
        *
        * <pre>
        * Score between 0 to 200, where 200 means "we really should crawl this
@@ -4708,7 +4789,7 @@ public final class Core {
         return crawlPriority_;
       }
       /**
-       * <code>optional int64 crawl_priority = 6;</code>
+       * <code>optional int64 crawl_priority = 7;</code>
        *
        * <pre>
        * Score between 0 to 200, where 200 means "we really should crawl this
@@ -4721,13 +4802,13 @@ public final class Core {
        * </pre>
        */
       public Builder setCrawlPriority(long value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         crawlPriority_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 crawl_priority = 6;</code>
+       * <code>optional int64 crawl_priority = 7;</code>
        *
        * <pre>
        * Score between 0 to 200, where 200 means "we really should crawl this
@@ -4740,7 +4821,7 @@ public final class Core {
        * </pre>
        */
       public Builder clearCrawlPriority() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         crawlPriority_ = 0L;
         onChanged();
         return this;
@@ -11862,39 +11943,40 @@ public final class Core {
       "\230\246\035\001\"\222\001\n\004Link\022#\n\rorigin_url_id\030\001 \001(\tB\014\210\246" +
       "\035\001\220\246\035\003\230\246\035\030\022(\n\022destination_url_id\030\002 \001(\tB\014" +
       "\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246" +
-      "\035\001\022\035\n\017last_found_time\030\004 \001(\003B\004\210\246\035\001\"\253\001\n\003Ur" +
+      "\035\001\022\035\n\017last_found_time\030\004 \001(\003B\004\210\246\035\001\"\355\001\n\003Ur" +
       "l\022\032\n\003url\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030\002 \001(" +
       "\tB\014\210\246\035\001\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246" +
-      "\035\001\022\034\n\016discovery_time\030\004 \001(\003B\004\210\246\035\001\022\027\n\017last",
-      "_crawl_time\030\005 \001(\003\022\034\n\016crawl_priority\030\006 \001(" +
-      "\003B\004\220\246\035\003\"\365\001\n\004User\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246" +
-      "\035\030\022\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210" +
-      "\246\035\001\220\246\035\004\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\030\022" +
-      "\031\n\013facebook_id\030\005 \001(\tB\004\230\246\035\030\022\031\n\013create_tim" +
-      "e\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010 \001(\003\0221" +
-      "\n\026linked_in_access_token\030\t \001(\tB\021\210\246\035\001\220\246\035\005" +
-      "\230\246\035\364\003\240\246\035\003*\004\010\006\020\007\"g\n\007Session\022\"\n\013session_ke" +
-      "y\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB" +
-      "\014\210\246\035\001\220\246\035\003\230\246\035\030\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001",
-      "\"e\n\017LinkedInProfile\022\035\n\007user_id\030\001 \001(\tB\014\210\246" +
-      "\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013" +
-      "create_time\030\003 \001(\003B\004\210\246\035\001\"i\n\023LinkedInConne" +
-      "ctions\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n" +
-      "\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003" +
-      " \001(\003B\004\210\246\035\001\"a\n\013AddressBook\022\035\n\007user_id\030\001 \001" +
-      "(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200" +
-      "\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrl" +
-      "Rating\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n" +
-      "\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 ",
-      "\001(\005B\004\210\246\035\001\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"m\n\017" +
-      "UserUrlFavorite\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246" +
-      "\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013" +
-      "create_time\030\003 \001(\003B\010\220\246\035\005\210\246\035\001\"\230\001\n\014UserInte" +
-      "rest\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\035\n\007user_i" +
-      "d\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\007keyword\030\003 \001(\tB\014" +
-      "\210\246\035\001\220\246\035\003\230\246\035d\022\034\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246" +
-      "\035\002\022\022\n\004type\030\005 \001(\tB\004\230\246\035\001B\026\n\024com.janknspank" +
-      ".proto"
+      "\035\001\022 \n\016discovery_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025",
+      "last_crawl_start_time\030\005 \001(\003B\010\220\246\035\005\240\246\035\003\022(\n" +
+      "\026last_crawl_finish_time\030\006 \001(\003B\010\220\246\035\005\240\246\035\003\022" +
+      " \n\016crawl_priority\030\007 \001(\003B\010\220\246\035\003\240\246\035\003\"\365\001\n\004Us" +
+      "er\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\022\n\004name\030\002 \001" +
+      "(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n" +
+      "\014linked_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013facebook_id" +
+      "\030\005 \001(\tB\004\230\246\035\030\022\031\n\013create_time\030\007 \001(\003B\004\210\246\035\001\022" +
+      "\027\n\017last_login_time\030\010 \001(\003\0221\n\026linked_in_ac" +
+      "cess_token\030\t \001(\tB\021\210\246\035\001\220\246\035\005\230\246\035\364\003\240\246\035\003*\004\010\006\020" +
+      "\007\"g\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220",
+      "\246\035\002\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022" +
+      "\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"e\n\017LinkedInPr" +
+      "ofile\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004" +
+      "data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 " +
+      "\001(\003B\004\210\246\035\001\"i\n\023LinkedInConnections\022\035\n\007user" +
+      "_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210" +
+      "\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"a\n\013" +
+      "AddressBook\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246" +
+      "\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_t" +
+      "ime\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrlRating\022\035\n\007user",
+      "_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(\tB" +
+      "\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 \001(\005B\004\210\246\035\001\022\031\n\013c" +
+      "reate_time\030\004 \001(\003B\004\210\246\035\001\"m\n\017UserUrlFavorit" +
+      "e\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_" +
+      "id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013create_time\030\003 " +
+      "\001(\003B\010\220\246\035\005\210\246\035\001\"\230\001\n\014UserInterest\022\030\n\002id\030\001 \001" +
+      "(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220" +
+      "\246\035\003\230\246\035\030\022\035\n\007keyword\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\034" +
+      "\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\022\n\004type\030\005 \001" +
+      "(\tB\004\230\246\035\001B\026\n\024com.janknspank.proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11924,7 +12006,7 @@ public final class Core {
           internal_static_Url_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Url_descriptor,
-              new java.lang.String[] { "Url", "Id", "TweetCount", "DiscoveryTime", "LastCrawlTime", "CrawlPriority", });
+              new java.lang.String[] { "Url", "Id", "TweetCount", "DiscoveryTime", "LastCrawlStartTime", "LastCrawlFinishTime", "CrawlPriority", });
           internal_static_User_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_User_fieldAccessorTable = new
@@ -12020,7 +12102,13 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.clientSerialization);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.clientSerialization);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.clientSerialization);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.clientSerialization);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);

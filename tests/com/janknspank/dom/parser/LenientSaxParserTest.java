@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Sets;
 import com.janknspank.dom.parser.LenientSaxParser;
 
 /**
@@ -47,6 +49,44 @@ public class LenientSaxParserTest {
     assertEquals(1, interpreter.getAttributes().getLength());
     assertEquals("clas", interpreter.getAttributes().getValue("clas"));
     assertTrue(interpreter.isSelfClosing());
+  }
+
+  @Test
+  public void testInvalidXml() throws Exception {
+    // Handle invalid quotes (this example is from bbc.co.uk).
+    String invalidHtml =
+        "<h5><a href=\"http://www.bbc.com/news/health-23449795\" class=\"track\"\">"
+        + "Why we have chocolate cravings<span/></a></h5>";
+    LenientSaxParser parser = new LenientSaxParser();
+    final Set<String> openTags = Sets.newHashSet();
+    final Set<String> closeTags = Sets.newHashSet();
+    parser.parse(new ByteArrayInputStream(invalidHtml.getBytes()), new DefaultHandler() {
+      @Override
+      public void characters(char[] c, int start, int length) {
+        assertEquals("Why we have chocolate cravings", new String(c, start, length));
+      }
+
+      @Override
+      public void startElement(String uri, String localName, String qName,
+          Attributes attributes) {
+        openTags.add(qName);
+      }
+
+      @Override
+      public void endElement(String uri, String localName, String qName) {
+        assertTrue("Close tag doesn't close an open tag: " + qName,
+            openTags.contains(qName));
+        closeTags.add(qName);
+      }
+    });
+
+    assertTrue(
+        "Open tags (" + Joiner.on(",").join(openTags) + ") should equal "
+        + "close tags (" + Joiner.on(",").join(closeTags) + ")",
+        openTags.equals(closeTags));
+    for (String tag : new String[] { "h5", "a", "span" }) {
+      assertTrue("Should have seen " + tag + " tag", openTags.contains(tag));
+    }
   }
 
   @Test

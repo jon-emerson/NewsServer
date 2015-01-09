@@ -1,10 +1,10 @@
 package com.janknspank.interpreter;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.CharMatcher;
+import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -100,7 +100,15 @@ public class KeywordCanonicalizer {
    * would return only "Jorge Smith" and "I.B.M.", with the strengths adjusted
    * accordingly.
    */
-  public static Iterable<ArticleKeyword> canonicalize(List<ArticleKeyword> keywords) {
+  public static Iterable<ArticleKeyword> canonicalize(Iterable<ArticleKeyword> keywords) {
+    // Filter illegal keywords.
+    keywords = Iterables.filter(keywords, new Predicate<ArticleKeyword>() {
+      @Override
+      public boolean apply(ArticleKeyword keyword) {
+        return KeywordUtils.isValidKeyword(keyword.getKeyword());
+      }
+    });
+
     // Create a map of unique keyword names, merging any dupes as we find them.
     Map<String, ArticleKeyword> keywordMap = Maps.newHashMap();
     for (ArticleKeyword keyword : keywords) {

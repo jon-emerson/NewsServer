@@ -39,6 +39,9 @@ public class ArticleKeywords {
     MAX_KEYWORD_LENGTH = keywordLength;
   }
 
+  private static final String DELETE_BY_URL_ID_COMMAND =
+      "DELETE FROM " + Database.getTableName(ArticleKeyword.class) + " WHERE url_id=?";
+
   /**
    * Returns all of the ArticleKeywords associated with any of the passed-in
    * articles.
@@ -63,6 +66,20 @@ public class ArticleKeywords {
       return keywordList;
     } catch (SQLException e) {
       throw new DataInternalException("Could not read article keywords: " + e.getMessage(), e);
+    }
+  }
+
+  public static int deleteForUrlIds(Iterable<String> urlIds) throws DataInternalException {
+    try {
+      PreparedStatement statement =
+          Database.getConnection().prepareStatement(DELETE_BY_URL_ID_COMMAND);
+      for (String urlId : urlIds) {
+        statement.setString(1, urlId);
+        statement.addBatch();
+      }
+      return Database.sumIntArray(statement.executeBatch());
+    } catch (SQLException e) {
+      throw new DataInternalException("Could not delete url IDs: " + e.getMessage(), e);
     }
   }
 

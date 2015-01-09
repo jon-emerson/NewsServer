@@ -128,10 +128,19 @@ message Url {
   ];
 
   optional int64 discovery_time = 4 [
-    (required) = YES
+    (required) = YES,
+    (client_serialization) = EXCLUDE
   ];
 
-  optional int64 last_crawl_time = 5;
+  optional int64 last_crawl_start_time = 5 [
+    (storage_method) = PULL_OUT,
+    (client_serialization) = EXCLUDE
+  ];
+
+  optional int64 last_crawl_finish_time = 6 [
+    (storage_method) = PULL_OUT,
+    (client_serialization) = EXCLUDE
+  ];
 
   // Score between 0 to 200, where 200 means "we really should crawl this
   // ASAP", and 0 means we might not even bother.
@@ -140,9 +149,10 @@ message Url {
   // 100 - A news article from a year ago
   // 10 - A page that's not a news article
   // 0 - Something we've crawled recently
-  optional int64 crawl_priority = 6 [
+  optional int64 crawl_priority = 7 [
     // (required) = YES,
-    (storage_method) = INDEX
+    (storage_method) = INDEX,
+    (client_serialization) = EXCLUDE
   ];
 }
 

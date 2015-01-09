@@ -14,11 +14,12 @@ import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 
 /**
- * Marks last_crawl_time as NULL and re-instates crawl_priority for articles
- * we've parsed but not actually stored any Article data for (because we
- * had an exception / error while trying to create it).
+ * Updates crawl_priority, last_crawl_start_time, and last_crawl_finish_time for
+ * articles we have URLs for but we haven't actually stored any Article data for.
+ * This basically fixes up the DB after we've had exceptions parsing specific
+ * articles, or we've decided to purge certain Articles and re-crawl them.
  */
-public class CleanLastCrawlTime {
+public class UpdateUrlCrawlFields {
   public static void main(String args[]) throws Exception {
     // Figure out what articles we've crawled already.
     Set<String> crawledArticleIds = Sets.newHashSet();
@@ -27,9 +28,10 @@ public class CleanLastCrawlTime {
     ResultSet result = stmt.executeQuery();
     while (!result.isAfterLast()) {
       Article article = Database.createFromResultSet(result, Article.class);
-      if (article != null) {
-        crawledArticleIds.add(article.getUrlId());
+      if (article == null) {
+        break;
       }
+      crawledArticleIds.add(article.getUrlId());
     }
 
     stmt = Database.getConnection().prepareStatement(
@@ -43,12 +45,13 @@ public class CleanLastCrawlTime {
         if (!crawledArticleIds.contains(url.getId())) {
           System.out.println("Fixin " + url.getUrl());
           urlsToUpdate.add(url.toBuilder()
-              .clearLastCrawlTime()
+              .clearLastCrawlStartTime()
+              .clearLastCrawlFinishTime()
               .setCrawlPriority(Urls.getCrawlPriority(url.getUrl(), null))
               .build());
         }
       }
-      if (urlsToUpdate.size() == 100 || url == null) {
+      if (urlsToUpdate.size() == 250 || url == null) {
         System.out.println(Database.update(urlsToUpdate) + " rows updated");
         urlsToUpdate.clear();
       }

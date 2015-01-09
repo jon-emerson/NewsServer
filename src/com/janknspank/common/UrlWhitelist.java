@@ -510,7 +510,8 @@ public class UrlWhitelist {
            path.startsWith("/data/") ||
            path.startsWith("/infographic/") ||
            path.startsWith("/interactive/") ||
-           path.startsWith("/quizzes/"))) {
+           path.startsWith("/quizzes/") ||
+           path.contains("/comment-page-"))) { // E.g. /comment-page-9/
         return false;
       }
       if (domain.endsWith("curbed.com") && path.equals("/search.php")) {

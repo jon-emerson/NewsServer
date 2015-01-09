@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.common.base.Function;
-import com.google.common.base.Throwables;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -143,7 +142,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
 
     if (description.length() > Articles.MAX_DESCRIPTION_LENGTH) {
       System.out.println("Warning: Trimming description for url " + documentNode.getUrl());
-      description = description.substring(0, Articles.MAX_DESCRIPTION_LENGTH);
+      description = description.substring(0, Articles.MAX_DESCRIPTION_LENGTH - 1) + "\u2026";
     }
 
     return description;
@@ -238,8 +237,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     try {
       return PARAGRAPH_CACHE.get(documentNode);
     } catch (ExecutionException e) {
-      Throwables.propagateIfPossible(e.getCause());
-      throw new RuntimeException("Could not get paragraphs: " + e.getMessage(), e);
+      throw new RequiredFieldException("Could not get paragraphs: " + e.getMessage(), e);
     }
   }
 
@@ -287,7 +285,12 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     }
     Node titleNode = documentNode.findFirst("title");
     if (titleNode != null) {
-      return titleNode.getFlattenedText();
+      String fullTitle = titleNode.getFlattenedText();
+      if (fullTitle.length() > Articles.MAX_TITLE_LENGTH) {
+        return fullTitle.substring(0, Articles.MAX_TITLE_LENGTH - 1) + "\u2026";
+      } else {
+        return fullTitle;
+      }
     }
     throw new RequiredFieldException("Could not find required field: title");
   }
@@ -326,7 +329,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
             if (text.length() > Articles.MAX_PARAGRAPH_LENGTH) {
               System.out.println("Warning: Trimming paragraph text on " +
                   documentNode.getUrl());
-              text = text.substring(0, Articles.MAX_PARAGRAPH_LENGTH);
+              text = text.substring(0, Articles.MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
             }
             return text;
           }

@@ -7,11 +7,13 @@ import java.sql.Statement;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.DateParser;
 import com.janknspank.proto.Core.Url;
@@ -25,15 +27,15 @@ import com.janknspank.proto.Validator;
 public class Urls {
   private static final String SELECT_BY_ID_COMMAND =
       "SELECT * FROM " + Database.getTableName(Url.class) + " WHERE id=?";
-  private static final String SELECT_NEXT_URL_TO_CRAWL =
+  private static final String SELECT_NEXT_URL_TO_CRAWL_COMMAND =
       "SELECT * FROM " + Database.getTableName(Url.class) + " "
-      + "WHERE crawl_priority > 0 AND "
+      + "WHERE crawl_priority > 0 AND last_crawl_start_time=NULL AND "
       + "NOT url LIKE \"https://twitter.com/%\" "
       + "ORDER BY crawl_priority DESC LIMIT 1";
-  private static final String UPDATE_CRAWL_PRIORITY_COMMAND =
+  private static final String UPDATE_CRAWL_START_COMMAND =
       "UPDATE " + Database.getTableName(Url.class) + " "
-      + "SET crawl_priority=0, proto=? "
-      + "WHERE id=? AND crawl_priority > 0";
+      + "SET last_crawl_start_time=?, proto=? "
+      + "WHERE id=? AND last_crawl_start_time IS NULL";
 
   /**
    * Returns the crawl priority for the URL, assuming that we don't know
@@ -85,10 +87,15 @@ public class Urls {
   /**
    * Makes sure the passed-in URLs are stored in our database.  Existing URLs
    * have their tweet_count and priority updated accordingly, if isTweet is
-   * true.  The return Url objects are in the same order as the URL strings.
+   * true.  The return Url objects are in the same order as the URL strings,
+   * though duplicates will be removed.
    */
   public static Collection<Url> put(Iterable<String> urlStrings, boolean isTweet)
       throws DataInternalException {
+    if (Iterables.isEmpty(urlStrings)) {
+      return ImmutableList.of();
+    }
+
     // Create a LinkedHashMap for the return values.  (Doing this now preseves
     // the order of our return values, so they match the order of urlStrings.
     LinkedHashMap<String, Url> urls = Maps.newLinkedHashMap();
@@ -96,14 +103,15 @@ public class Urls {
       urls.put(urlString, null);
     }
 
+    // Use urls.keySet() instead of urlStrings here as a way to dedupe.
     List<Url> urlsToUpdate = Lists.newArrayList(); // To increment tweet_count.
-    for (Url existingUrl : Database.get(urlStrings, Url.class)) {
+    for (Url existingUrl : Database.get(urls.keySet(), Url.class)) {
       urls.put(existingUrl.getUrl(), existingUrl);
 
       if (isTweet) {
         Url.Builder updatedUrlBuilder = existingUrl.toBuilder();
         updatedUrlBuilder.setTweetCount(existingUrl.getTweetCount() + 1);
-        if (!existingUrl.hasLastCrawlTime() && existingUrl.getTweetCount() < 500) {
+        if (!existingUrl.hasLastCrawlFinishTime() && existingUrl.getTweetCount() < 500) {
           updatedUrlBuilder.setCrawlPriority(existingUrl.getCrawlPriority() + 10);
         }
         urlsToUpdate.add(updatedUrlBuilder.build());
@@ -111,11 +119,16 @@ public class Urls {
     }
 
     List<Url> urlsToCreate = Lists.newArrayList();
+    Set<String> existingCreates = Sets.newHashSet();
     for (String urlString : urlStrings) {
-      if (urls.get(urlString) == null) {
+      // Use existingCreates to prevent the same URL being inserted twice.
+      // (Well, the database would actually prevent us, by crashing this whole
+      // method!!)
+      if (urls.get(urlString) == null && !existingCreates.contains(urlString)) {
         Url newUrl = create(urlString, isTweet);
         urlsToCreate.add(newUrl);
         urls.put(urlString, newUrl);
+        existingCreates.add(urlString);
       }
     }
 
@@ -129,33 +142,48 @@ public class Urls {
   }
 
   /**
-   * Marks this discovered URL as crawled by updating its last crawl time.
-   * Note that this is designed to be thread-safe, but it's not yet fault
-   * tolerant: If a crawl fails after markAsCrawled has been called, there's
-   * no way to realize it yet.
-   * @return Url object with an updated last crawl time, or null, if the
+   * Marks the passed URL as "has started being crawled".
+   * @return Url object with an updated last crawl start time, or null, if the
    *     given Url has already been crawled by another thread
    */
-  public static Url markAsCrawled(Url url) throws DataInternalException {
+  public static Url markCrawlStart(Url url) throws DataInternalException {
     try {
-      Url discoveredUrl = url.toBuilder()
-          .setLastCrawlTime(System.currentTimeMillis())
+      url = url.toBuilder()
+          .setLastCrawlStartTime(System.currentTimeMillis())
           .build();
-      Validator.assertValid(discoveredUrl);
+      Validator.assertValid(url);
       PreparedStatement statement =
-          Database.getConnection().prepareStatement(UPDATE_CRAWL_PRIORITY_COMMAND);
-      statement.setBytes(1, discoveredUrl.toByteArray());
-      statement.setString(2, discoveredUrl.getId());
-      return (statement.executeUpdate() == 1) ? discoveredUrl : null;
+          Database.getConnection().prepareStatement(UPDATE_CRAWL_START_COMMAND);
+      statement.setLong(1, System.currentTimeMillis());
+      statement.setBytes(2, url.toByteArray());
+      statement.setString(3, url.getId());
+      return (statement.executeUpdate() == 1) ? url : null;
     } catch (SQLException|ValidationException e) {
       throw new DataInternalException("Could not mark URL as crawled", e);
     }
   }
 
+  /**
+   * Marks the passed URL as "has finished being crawled".
+   * @return Url object with an updated last crawl finish time
+   */
+  public static Url markCrawlFinish(Url url) throws DataInternalException {
+    url = url.toBuilder()
+        .setLastCrawlFinishTime(System.currentTimeMillis())
+        .setCrawlPriority(0)
+        .build();
+    try {
+      Database.update(url);
+    } catch (ValidationException e) {
+      throw new DataInternalException("Could not update last crawl finish time", e);
+    }
+    return url;
+  }
+
   public static Url getNextUrlToCrawl() throws DataInternalException {
     try {
       Statement stmt = Database.getConnection().createStatement();
-      return Database.createFromResultSet(stmt.executeQuery(SELECT_NEXT_URL_TO_CRAWL),
+      return Database.createFromResultSet(stmt.executeQuery(SELECT_NEXT_URL_TO_CRAWL_COMMAND),
           Url.class);
     } catch (SQLException e) {
       throw new DataInternalException("Could not read next URL to crawl", e);
@@ -175,11 +203,11 @@ public class Urls {
    * Gets a URL by its ID (since the primary keys for URLs are the URLs
    * themselves).
    */
-  public static Url getById(String email) throws DataInternalException {
+  public static Url getById(String id) throws DataInternalException {
     try {
       PreparedStatement statement =
           Database.getConnection().prepareStatement(SELECT_BY_ID_COMMAND);
-      statement.setString(1, email);
+      statement.setString(1, id);
       return Database.createFromResultSet(statement.executeQuery(), Url.class);
 
     } catch (SQLException e) {

@@ -96,7 +96,8 @@ public class ArticleCreatorTest {
     assertEquals("News of the day from across the nation, Jan. 7", article.getTitle());
     assertFalse(article.hasImageUrl()); // No decent images.
     assertEquals(6, article.getParagraphCount());
-    assertTrue(article.getParagraph(0).contains("The launch countdown of a rocket carrying"));
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).contains("The launch countdown of a rocket carrying"));
   }
 
   @Test
@@ -113,7 +114,29 @@ public class ArticleCreatorTest {
     assertEquals("http://ww1.hdnux.com/photos/34/03/54/7355140/6/rawImage.jpg",
         article.getImageUrl());
     assertEquals(3, article.getParagraphCount());
-    assertTrue(article.getParagraph(0).startsWith("This year makes 25 years since"));
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith("This year makes 25 years since"));
     DateParserTest.assertSameTime("2015/06/01", article.getPublishedTime());
+  }
+
+  @Test
+  public void testBbcArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://www.bbc.com/future/story/20141219-why-does-guilt-increase-pleasure",
+        new FileReader("testdata/bbc-why-does-guilt-increase-pleasure.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals(
+        "Feelings of guilt can make a temptations feel even more seductive. "
+        + "So could we be healthier if we just embraced a little bit of vice, "
+        + "asks David Robson.",
+        article.getDescription());
+    assertEquals("Psychology: Why does guilt increase pleasure?", article.getTitle());
+    assertEquals("http://ichef.bbci.co.uk/wwfeatures/624_351/images/live/p0/2f/l8/p02fl8qx.jpg",
+        article.getImageUrl());
+    assertEquals(22, article.getParagraphCount());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "This year, my New Year’s Resolutions are going to take a somewhat different "
+            + "form to those of previous Januaries."));
   }
 }

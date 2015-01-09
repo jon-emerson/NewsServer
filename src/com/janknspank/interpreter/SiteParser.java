@@ -81,6 +81,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("default", new String[] {
         "article > p",
         "article > div > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("fortune.com", new String[] {
+        ".article-body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("latimes.com", new String[] {
         ".trb_article_page > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("markets.cbsnews.com", new String[] {

@@ -18,7 +18,9 @@ import com.janknspank.proto.Core.Url;
 public class Links {
   private static final String DELETE_COMMAND =
       "DELETE FROM " + Database.getTableName(Link.class)
-      + "    WHERE origin_url_id =? OR destination_url_id =?";
+      + "    WHERE origin_url_id=? OR destination_url_id=?";
+  private static final String DELETE_BY_ORIGIN_URL_ID_COMMAND =
+      "DELETE FROM " + Database.getTableName(Link.class) + " WHERE origin_url_id=?";
 
   /**
    * Records that there's a link from {@code sourceUrl} to each of the passed
@@ -58,6 +60,24 @@ public class Links {
       }
       return Database.sumIntArray(statement.executeBatch());
 
+    } catch (SQLException e) {
+      throw new DataInternalException("Could not delete links: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Deletes all recorded links from the passed URLs.  Useful for cleaning
+   * up old interpreted link data before a new interpretation / crawl.
+   */
+  public static int deleteFromOriginUrlId(Iterable<String> urlIds) throws DataInternalException {
+    try {
+      PreparedStatement statement =
+          Database.getConnection().prepareStatement(DELETE_BY_ORIGIN_URL_ID_COMMAND);
+      for (String urlId : urlIds) {
+        statement.setString(1, urlId);
+        statement.addBatch();
+      }
+      return Database.sumIntArray(statement.executeBatch());
     } catch (SQLException e) {
       throw new DataInternalException("Could not delete links: " + e.getMessage(), e);
     }

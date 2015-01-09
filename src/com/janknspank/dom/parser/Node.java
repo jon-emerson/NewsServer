@@ -250,37 +250,49 @@ public class Node {
    */
   @Override
   public String toString() {
+    return toString(0);
+  }
+
+  private String toString(int depth) {
     StringBuilder sb = new StringBuilder();
-    sb.append("<");
-    sb.append(tagName);
+    sb.append(Joiner.on("").join(Iterables.limit(Iterables.cycle("  "), depth)))
+        .append("<")
+        .append(tagName);
     for (String attributeName : attributes.keySet()) {
       for (String attributeValue : attributes.get(attributeName)) {
-        sb.append(" ");
-        sb.append(attributeName);
-        sb.append("=\"");
-        sb.append(StringEscapeUtils.escapeHtml4(attributeValue));
-        sb.append("\"");
+        sb.append(" ")
+            .append(attributeName)
+            .append("=\"")
+            .append(StringEscapeUtils.escapeHtml4(attributeValue))
+            .append("\"");
       }
     }
 
     if (children.size() == 0) {
-      sb.append("/>");
+      sb.append("/>\n");
       return sb.toString();
     }
 
-
-    sb.append(">");
+    sb.append(">\n");
     for (Object child : children) {
       if (child instanceof String) {
-        sb.append((String) child);
+        if ("script".equalsIgnoreCase(tagName) ||
+            "style".equalsIgnoreCase(tagName)) {
+          sb.append(Joiner.on("").join(Iterables.limit(Iterables.cycle("  "), depth + 1)));
+          sb.append("<!-- truncated -->\n");
+        } else if (!((String) child).trim().isEmpty()) {
+          sb.append(Joiner.on("").join(Iterables.limit(Iterables.cycle("  "), depth + 1)));
+          sb.append((String) child).append("\n");
+        }
       } else {
-        sb.append(((Node) child).toString());
+        sb.append(((Node) child).toString(depth + 1));
       }
     }
 
-    sb.append("</");
-    sb.append(tagName);
-    sb.append(">");
+    sb.append(Joiner.on("").join(Iterables.limit(Iterables.cycle("  "), depth)))
+        .append("</")
+        .append(tagName)
+        .append(">\n");
     return sb.toString();
   }
 }
