@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -32,6 +34,10 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.chron.com/img/pages/article/opengraph_default.jpg",
       "http://www.sfgate.com/img/pages/article/opengraph_default.png");
+  private static final Pattern TEXT_TO_REMOVE_FROM_TITLE_ENDS[] = new Pattern[] {
+      Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
+      Pattern.compile("\\s?(\\||\\-\\-|\\-)\\s+([A-Z][A-Za-z]+\\.com)$"),
+      Pattern.compile("\\s?(\\||\\-\\-|\\-)\\s+[A-Z][A-Za-z\\s'']{2,25}$")};
 
   public static Article create(String urlId, DocumentNode documentNode)
       throws RequiredFieldException {
@@ -95,9 +101,6 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     }
     if (articleBuilder.hasCopyright()) {
       articleBuilder.setCopyright(unescape(articleBuilder.getCopyright()));
-    }
-    if (articleBuilder.hasTitle()) {
-      articleBuilder.setTitle(unescape(articleBuilder.getTitle()));
     }
     if (articleBuilder.hasImageUrl()) {
       articleBuilder.setImageUrl(unescape(articleBuilder.getImageUrl()));
@@ -298,12 +301,20 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     }
     Node titleNode = documentNode.findFirst("title");
     if (titleNode != null) {
-      String fullTitle = titleNode.getFlattenedText();
-      if (fullTitle.length() > Articles.MAX_TITLE_LENGTH) {
-        return fullTitle.substring(0, Articles.MAX_TITLE_LENGTH - 1) + "\u2026";
-      } else {
-        return fullTitle;
+      String title = unescape(titleNode.getFlattenedText());
+
+      // Clean and truncate the title, if necessary.
+      for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLE_ENDS) {
+        Matcher matcher = pattern.matcher(title);
+        if (matcher.find()) {
+          title = title.substring(0, title.length() - matcher.group().length());
+        }
       }
+      if (title.length() > Articles.MAX_TITLE_LENGTH) {
+        title = title.substring(0, Articles.MAX_TITLE_LENGTH - 1) + "\u2026";
+      }
+
+      return title;
     }
     throw new RequiredFieldException("Could not find required field: title");
   }
@@ -322,9 +333,11 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   static String unescape(String escaped) {
     return StringEscapeUtils
         .unescapeHtml4(escaped
-            .replaceAll("&nbsp;", " "))
-        .replaceAll("&apos;", "'")
-        .replaceAll("\u00A0", " ");
+            .replaceAll("&nbsp;", " ")
+            .replaceAll("&#8203;", "")) // Zero-width space.
+        .replaceAll("&apos;", "’")
+        .replaceAll("\u00A0", " ") // Non-breaking space.
+        .replaceAll("\u200B", ""); // Zero-width space.
   }
 
   /**
