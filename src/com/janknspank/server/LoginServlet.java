@@ -123,7 +123,7 @@ public class LoginServlet extends StandardServlet {
     // Create the response.
     UserHelper userHelper = new UserHelper(user);
     JSONObject response = this.createSuccessResponse();
-    JSONObject userJson = new JSONObject();
+    JSONObject userJson = Serializer.toJSON(user);
     userJson.put("ratings", userHelper.getRatingsJsonArray());
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
     userJson.put("interests", Serializer.toJSON(interests));
