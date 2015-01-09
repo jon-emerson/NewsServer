@@ -218,7 +218,9 @@ public class Selector {
           return !clazz.trim().isEmpty();
         }
       });
-      return nodeClasses.containsAll(classes);
+      if (!nodeClasses.containsAll(classes)) {
+        return false;
+      }
     }
     if (id != null && !id.equals(node.getId())) {
       return false;

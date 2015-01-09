@@ -70,7 +70,10 @@ public class LoginServlet extends StandardServlet {
       get.setHeader("Authorization", "Bearer " + linkedInAccessToken);
       response = httpclient.execute(get);
       if (response.getStatusLine().getStatusCode() != HttpServletResponse.SC_OK) {
-        throw new DataRequestException("Bad access token");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ByteStreams.copy(response.getEntity().getContent(), baos);
+        throw new DataRequestException("Bad access token.  Response code = " +
+            response.getStatusLine().getStatusCode() + "\n" + new String(baos.toByteArray()));
       }
 
       ByteArrayOutputStream profileResponseBaos = new ByteArrayOutputStream();

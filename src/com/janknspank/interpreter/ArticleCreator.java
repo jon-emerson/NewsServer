@@ -39,6 +39,9 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     articleBuilder.setUrlId(urlId);
     articleBuilder.setUrl(documentNode.getUrl());
 
+    // Paragraphs (required).
+    articleBuilder.addAllParagraph(getParagraphs(documentNode));
+
     // Author.
     String author = getAuthor(documentNode);
     if (author != null) {
@@ -65,9 +68,6 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     if (modifiedTime != null) {
       articleBuilder.setModifiedTime(modifiedTime);
     }
-
-    // Paragraphs (required).
-    articleBuilder.addAllParagraph(getParagraphs(documentNode));
 
     // Published time (required).
     articleBuilder.setPublishedTime(getPublishedTime(documentNode));

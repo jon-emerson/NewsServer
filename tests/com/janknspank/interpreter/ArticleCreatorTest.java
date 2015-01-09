@@ -141,7 +141,7 @@ public class ArticleCreatorTest {
   }
 
   //@Test
-  public void XXtestBloombergArticle() throws Exception {
+  public void testBloombergArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.bloomberg.com/politics/articles/2014-12-30/the-new-york-times-joins-"
         + "the-nypd-funeral-protest-backlash",
