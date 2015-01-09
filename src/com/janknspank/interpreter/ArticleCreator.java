@@ -174,6 +174,16 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       return -1;
     }
 
+    // Disallow these URLs, e.g.
+    // http://cdn.gotraffic.net/politics/20150107201907/public/images/logos/
+    //     FB-Sharing.73b07052.png
+    // Which was found on http://www.bloomberg.com/politics/articles/2014-12-30/
+    //     the-new-york-times-joins-the-nypd-funeral-protest-backlash
+    // And is a text image.
+    if (imageUrl.contains("//cdn.gotraffic.net/") && imageUrl.contains("FB-Sharing")) {
+      return -1;
+    }
+
     String documentUrl = documentNode.getUrl();
     if (documentUrl.contains(".nytimes.com/")) {
       if (imageUrl.contains("-facebookJumbo-")) {

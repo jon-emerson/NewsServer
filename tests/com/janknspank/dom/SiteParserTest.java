@@ -27,14 +27,12 @@ public class SiteParserTest {
     // basically checking for regressions in parsing here, not absolute
     // correctness.
     assertTrue(paragraphNodes.get(0).getFlattenedText().startsWith(
-        "By ABC News"));
-    assertTrue(paragraphNodes.get(1).getFlattenedText().startsWith(
         "AP"));
-    assertTrue(paragraphNodes.get(2).getFlattenedText().startsWith(
+    assertTrue(paragraphNodes.get(1).getFlattenedText().startsWith(
         "The latest breaking details on the AirAsia Flight QZ 8501 disaster"));
-    assertTrue(paragraphNodes.get(3).getFlattenedText().startsWith(
+    assertTrue(paragraphNodes.get(2).getFlattenedText().startsWith(
         "Then, we talk to incoming members of Congress already"));
-    assertTrue(paragraphNodes.get(4).getFlattenedText().startsWith(
+    assertTrue(paragraphNodes.get(3).getFlattenedText().startsWith(
         "Plus, the powerhouse roundtable debates all the"));
   }
 }

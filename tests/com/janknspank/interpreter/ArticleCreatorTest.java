@@ -140,7 +140,7 @@ public class ArticleCreatorTest {
             + "form to those of previous Januaries."));
   }
 
-  //@Test
+  @Test
   public void testBloombergArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.bloomberg.com/politics/articles/2014-12-30/the-new-york-times-joins-"
@@ -148,17 +148,34 @@ public class ArticleCreatorTest {
         new FileReader("testdata/bloomberg-nypd-funeral-protest-backlash.html"));
     Article article = ArticleCreator.create("urlId", documentNode);
     assertEquals(
-        "Feelings of guilt can make a temptations feel even more seductive. "
-        + "So could we be healthier if we just embraced a little bit of vice, "
-        + "asks David Robson.",
+        "The editorial board criticized what it called one of several acts of "
+        + "“passive-aggressive contempt and self-pity.”",
         article.getDescription());
-    assertEquals("Psychology: Why does guilt increase pleasure?", article.getTitle());
-    assertEquals("http://ichef.bbci.co.uk/wwfeatures/624_351/images/live/p0/2f/l8/p02fl8qx.jpg",
+    assertEquals("The New York Times Joins the NYPD Funeral Protest Backlash", article.getTitle());
+    assertEquals("http://media.gotraffic.net/images/iqh7RbW8gmWo/v6/-1x-1.jpg",
         article.getImageUrl());
-    assertEquals(22, article.getParagraphCount());
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith(
-            "This year, my New Year’s Resolutions are going to take a somewhat different "
-            + "form to those of previous Januaries."));
+            "Before NYPD Officers Rafael Ramos and Wenjian Liu were ambushed while on "
+            + "patrol in Brooklyn, the Patrolmen’s Benevolent Association"));
+  }
+
+  @Test
+  public void testFortuneArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://fortune.com/2012/04/06/gm-sees-self-driving-cars-sooner-not-later/",
+        new FileReader("testdata/fortune-gm-sees-self-driving-cars-sooner-not-later.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals(
+        "An array of new sensors, warnings and automatic controls can already help drivers "
+        + "detect hazardous situations and avoid accidents. More advanced cars aren't that "
+        + "far away, the company says.",
+        article.getDescription());
+    assertEquals("GM sees self-driving cars sooner, not later", article.getTitle());
+    assertEquals("http://subscription-assets.timeinc.com/current/510_top1_150_thumb.jpg",
+        article.getImageUrl());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "FORTUNE — Self-driving cars may be closer than anybody realizes."));
   }
 }

@@ -46,7 +46,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("bdnews24.com", new String[] {
         ".body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
-        ".article_body > p"});
+        ".article-body > p"});  // See "... Joins the NYPD Funeral Protest Backlash".
     DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
         "article > p",
         ".content-text > p"});
@@ -82,7 +82,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         "article > p",
         "article > div > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("fortune.com", new String[] {
-        ".article-body p"});
+        ".article-body p",
+        ".entry-content p"}); // To work around Javascript-rendered pages.
     DOMAIN_TO_DOM_ADDRESSES.put("latimes.com", new String[] {
         ".trb_article_page > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("markets.cbsnews.com", new String[] {
@@ -219,6 +220,16 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     for (String domAddress : getDomAddressesForUrl(documentNode.getUrl())) {
       paragraphs.addAll(documentNode.findAll(domAddress));
     }
+
+    // HACK(jonemerson): We should find a more extensible way of removing
+    // By-lines and other crap we pick up. This may do for now.
+    if (paragraphs.size() > 0 &&
+        paragraphs.get(0).getFlattenedText().toLowerCase().startsWith("by ") &&
+        paragraphs.get(0).getFlattenedText().length() < 100) {
+      // Remove "By XXX from Washington Post" etc. crap text.
+      paragraphs.remove(0);
+    }
+
     sortAndDedupe(paragraphs);
     return paragraphs;
   }
