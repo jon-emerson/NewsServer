@@ -237,6 +237,9 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     try {
       return PARAGRAPH_CACHE.get(documentNode);
     } catch (ExecutionException e) {
+      if (e.getCause() instanceof RequiredFieldException) {
+        throw (RequiredFieldException) e.getCause();
+      }
       throw new RequiredFieldException("Could not get paragraphs: " + e.getMessage(), e);
     }
   }

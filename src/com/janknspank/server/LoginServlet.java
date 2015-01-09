@@ -64,25 +64,25 @@ public class LoginServlet extends StandardServlet {
 
   private byte[] getProfileResponseBytes(String linkedInAccessToken)
       throws DataInternalException, DataRequestException {
-    InputStream profileResponseInputStream = null;
+    CloseableHttpResponse response = null;
     try {
       HttpGet get = new HttpGet(PROFILE_URL);
       get.setHeader("Authorization", "Bearer " + linkedInAccessToken);
-      CloseableHttpResponse response = httpclient.execute(get);
+      response = httpclient.execute(get);
       if (response.getStatusLine().getStatusCode() != HttpServletResponse.SC_OK) {
         throw new DataRequestException("Bad access token");
       }
 
       ByteArrayOutputStream profileResponseBaos = new ByteArrayOutputStream();
-      profileResponseInputStream = response.getEntity().getContent();
+      InputStream profileResponseInputStream = response.getEntity().getContent();
       ByteStreams.copy(profileResponseInputStream, profileResponseBaos);
       return profileResponseBaos.toByteArray();
     } catch (IOException e) {
       throw new DataInternalException("Error reading from LinkedIn: " + e.getMessage(), e);
     } finally {
-      if (profileResponseInputStream != null) {
+      if (response != null) {
         try {
-          profileResponseInputStream.close();
+          response.close();
         } catch (IOException e) {}
       }
     }

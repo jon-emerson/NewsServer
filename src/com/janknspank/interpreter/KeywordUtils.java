@@ -66,6 +66,7 @@ public class KeywordUtils {
         "retailing",
         "shopping",
         "show",
+        "society",
         "son",
         "sports",
         "stocks",

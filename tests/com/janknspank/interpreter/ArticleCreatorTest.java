@@ -139,4 +139,26 @@ public class ArticleCreatorTest {
             "This year, my New Year’s Resolutions are going to take a somewhat different "
             + "form to those of previous Januaries."));
   }
+
+  //@Test
+  public void XXtestBloombergArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://www.bloomberg.com/politics/articles/2014-12-30/the-new-york-times-joins-"
+        + "the-nypd-funeral-protest-backlash",
+        new FileReader("testdata/bloomberg-nypd-funeral-protest-backlash.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals(
+        "Feelings of guilt can make a temptations feel even more seductive. "
+        + "So could we be healthier if we just embraced a little bit of vice, "
+        + "asks David Robson.",
+        article.getDescription());
+    assertEquals("Psychology: Why does guilt increase pleasure?", article.getTitle());
+    assertEquals("http://ichef.bbci.co.uk/wwfeatures/624_351/images/live/p0/2f/l8/p02fl8qx.jpg",
+        article.getImageUrl());
+    assertEquals(22, article.getParagraphCount());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "This year, my New Year’s Resolutions are going to take a somewhat different "
+            + "form to those of previous Januaries."));
+  }
 }

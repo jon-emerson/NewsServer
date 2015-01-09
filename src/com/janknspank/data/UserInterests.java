@@ -73,15 +73,23 @@ public class UserInterests {
   public static List<UserInterest> updateInterests(String userId, DocumentNode profileDocumentNode)
       throws DataInternalException {
     List<UserInterest> interests = Lists.newArrayList();
+
+    // Dedupe by using a set.
+    Set<String> companyNames = Sets.newHashSet();
     for (Node companyNameNode : profileDocumentNode.findAll("position > company > name")) {
+      companyNames.add(companyNameNode.getFlattenedText());
+    }
+
+    for (String companyName : companyNames) {
       interests.add(UserInterest.newBuilder()
           .setId(GuidFactory.generate())
           .setUserId(userId)
-          .setKeyword(companyNameNode.getFlattenedText())
+          .setKeyword(companyName)
           .setSource(UserInterests.SOURCE_LINKEDIN_PROFILE)
           .setType(UserInterests.TYPE_ORGANIZATION)
           .build());
     }
+
     return updateInterests(userId, interests, SOURCE_LINKEDIN_PROFILE);
   }
 
