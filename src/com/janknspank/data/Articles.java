@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.protobuf.Descriptors.FieldDescriptor;
@@ -52,17 +54,13 @@ public class Articles {
     MAX_DESCRIPTION_LENGTH = descriptionLength;
   }
 
-  /**
-   * Gets a generic list of articles.
-   */
-  public static List<Article> getArticles() throws DataInternalException {
-    PreparedStatement selectAllStmt;
-    try {
-      selectAllStmt = Database.getConnection().prepareStatement(SELECT_ALL_COMMAND);
-      return Database.createListFromResultSet(selectAllStmt.executeQuery(), Article.class);
-    } catch (SQLException e) {
-      throw new DataInternalException("Error fetching articles", e);
+  public static Iterable<Article> getArticlesOnTopic(String topic) throws DataInternalException {
+    List<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(ImmutableList.of(topic));
+    Set<String> articleIds = Sets.newHashSet();
+    for (ArticleKeyword articleKeyword : articleKeywords) {
+      articleIds.add(articleKeyword.getUrlId());
     }
+    return getArticles(articleIds);
   }
 
   private static List<ArticleKeyword> getArticleKeywords(Iterable<UserInterest> interests)
@@ -74,20 +72,30 @@ public class Articles {
         return !UserInterests.TYPE_LOCATION.equals(userInterest.getType());
       }
     });
+    return getArticleKeywordsForTopics(Iterables.transform(interests,
+        new Function<UserInterest, String>() {
+          @Override
+          public String apply(UserInterest interest) {
+            return interest.getKeyword();
+          }
+    }));
+  }
 
+  private static List<ArticleKeyword> getArticleKeywordsForTopics(Iterable<String> topics)
+      throws DataInternalException {
     StringBuilder sql = new StringBuilder();
     sql.append("SELECT * FROM ")
         .append(Database.getTableName(ArticleKeyword.class))
         .append(" WHERE keyword IN (")
         .append(Joiner.on(",").join(
-            Iterables.limit(Iterables.cycle("?"), Iterables.size(interests))))
+            Iterables.limit(Iterables.cycle("?"), Iterables.size(topics))))
         .append(") LIMIT 500");
 
     try {
       PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
       int i = 0;
-      for (UserInterest interest : interests) {
-        stmt.setString(++i, interest.getKeyword());
+      for (String topic : topics) {
+        stmt.setString(++i, topic);
       }
       return Database.createListFromResultSet(stmt.executeQuery(), ArticleKeyword.class);
     } catch (SQLException e) {
@@ -102,17 +110,25 @@ public class Articles {
   public static List<Article> getArticles(List<UserInterest> interests)
       throws DataInternalException {
     List<ArticleKeyword> articleKeywords = getArticleKeywords(interests);
-
     Set<String> articleIds = Sets.newHashSet();
     for (ArticleKeyword articleKeyword : articleKeywords) {
       articleIds.add(articleKeyword.getUrlId());
     }
+    return getArticles(articleIds);
+  }
 
+  /**
+   * Returns articles with the given IDs, ordered by publish time, if they
+   * exist. If they don't exist, no error is thrown.
+   */
+  public static List<Article> getArticles(Iterable<String> articleIds)
+      throws DataInternalException {
     StringBuilder sql = new StringBuilder();
     sql.append("SELECT * FROM ")
         .append(Database.getTableName(Article.class))
         .append(" WHERE url_id IN (")
-        .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), articleIds.size())))
+        .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"),
+            Iterables.size(articleIds))))
         .append(") ORDER BY published_time DESC LIMIT 50");
 
     try {

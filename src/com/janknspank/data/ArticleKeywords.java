@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.janknspank.proto.Core.Article;
@@ -46,20 +48,20 @@ public class ArticleKeywords {
    * Returns all of the ArticleKeywords associated with any of the passed-in
    * articles.
    */
-  public static List<ArticleKeyword> get(List<Article> articleList)
+  public static List<ArticleKeyword> get(Iterable<Article> articleList)
       throws DataInternalException {
     StringBuilder sql = new StringBuilder();
     sql.append("SELECT * FROM " + Database.getTableName(ArticleKeyword.class)
         + " WHERE url_id IN (");
-    for (int i = 0; i < articleList.size(); i++) {
-      sql.append(i == articleList.size() - 1 ? "?" : "?, ");
-    }
+    sql.append(Joiner.on(", ").join(
+        Iterables.limit(Iterables.cycle("?"), Iterables.size(articleList))));
     sql.append(")");
 
     try {
       PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
-      for (int i = 0; i < articleList.size(); i++) {
-        stmt.setString(i + 1, articleList.get(i).getUrlId());
+      int i = 0;
+      for (Article article : articleList) {
+        stmt.setString(++i, article.getUrlId());
       }
       List<ArticleKeyword> keywordList =
           Database.createListFromResultSet(stmt.executeQuery(), ArticleKeyword.class);
