@@ -18,7 +18,6 @@ import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 
 public class ArticleCreatorTest {
-  private static final String TITLE = "Article of the century";
   private static final String DESCRIPTION = "Hello there boys and girls";
   private static final Url URL = Url.newBuilder()
       .setUrl("http://www.cnn.com/2014/05/24/hello.html")
@@ -37,12 +36,12 @@ public class ArticleCreatorTest {
         new StringReader("<html><head>"
             + "<meta name=\"keywords\" content=\"BBC, Capital,story,STORY-VIDEO,Office Space\"/>"
             + "<meta name=\"description\" content=\"" + DESCRIPTION + "\"/>"
-            + "<title>" + TITLE + "</title>"
+            + "<title>&#8203;National Society of Film Critics goes for Godard - CBS News</title>"
             + "</head><body>"
             + "<div class=\"cnn_storyarea\"><p>Super article man!!!</p></div>"
             + "</body</html>"));
     Article article = ArticleCreator.create(URL.getUrl(), documentNode);
-    assertEquals(TITLE, article.getTitle());
+    assertEquals("National Society of Film Critics goes for Godard", article.getTitle());
     assertEquals(DESCRIPTION, article.getDescription());
 
     // Verify that we pull dates out of article URLs.
@@ -51,6 +50,107 @@ public class ArticleCreatorTest {
     assertEquals(2014, calendar.get(Calendar.YEAR));
     assertEquals(4, calendar.get(Calendar.MONTH)); // 0-based months.
     assertEquals(24, calendar.get(Calendar.DAY_OF_MONTH));
+  }
+
+  private DocumentNode getDocumentWithTitle(String title) throws Exception {
+    return DocumentBuilder.build("url",
+        new StringReader("<html><head><title>" + title + "</title></head></html>"));
+  }
+
+  @Test
+  public void testGetTitle() throws Exception {
+    assertEquals("National Society of Film Critics goes for Godard",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "&#8203;National Society of Film Critics goes for Godard - CBS News")));
+    assertEquals("Cops turn backs on deBlasio at officer's funeral",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Cops turn backs on deBlasio at officer's funeral | Al Jazeera America")));
+    assertEquals("Ten years on: Oxfam digests lessons from 2004 Indian Ocean tsunami",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Ten years on: Oxfam digests lessons from 2004 Indian Ocean tsunami - CNN.com")));
+    assertEquals("People don’t work as hard on hot days – or on a warming planet",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "People don’t work as hard on hot days – or on a warming planet")));
+    assertEquals("3-Bed, 2.5-Bath in Washington West Gets $50K Price Bump",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "3-Bed, 2.5-Bath in Washington West Gets $50K Price Bump")));
+    assertEquals("From the Funeral Home to East Boston, Parlor is Custom Skiing to the Core",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "From the Funeral Home to East Boston, Parlor is Custom Skiing to the "
+            + "Core - Eric Wilbur's Sports Blog - Boston.com")));
+    assertEquals("Happy New Year.",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Happy New Year. - Love Letters - Boston.com")));
+    assertEquals("Sydney hostage-taker called himself a cleric -- and had a criminal record",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Sydney hostage-taker called himself a cleric -- and had a criminal "
+            + "record - CNN.com")));
+    assertEquals("Good Times From Texas to North Dakota May Turn Bad on Oil-Price Drop",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Good Times From Texas to North Dakota May Turn Bad on Oil-Price Drop")));
+    assertEquals("Why didn’t Rolling Stone tell readers about U-Va. denial?",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Why didn’t Rolling Stone tell readers about U-Va. denial?")));
+    assertEquals("The gorgeously-situated weather radar that’s out of this world",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "The gorgeously-situated weather radar that’s out of this world (VIDEO)")));
+    assertEquals("Terry's Talkin' about Cleveland Browns, Justin Gilbert and the draft",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Terry's Talkin' about Cleveland Browns, Justin Gilbert and the "
+            + "draft -- Terry Pluto (video)")));
+    assertEquals("Bloomberg Best: From Our Bureaus Worldwide – August 14",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Bloomberg Best: From Our Bureaus Worldwide – August 14 (Audio)")));
+    assertEquals("Cleveland Browns' 2014: Mike Pettine's season was \"solid\"",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Cleveland Browns' 2014: Mike Pettine's season was "
+            + "\"solid\" -- Bud Shaw's Sports Spin (videos)")));
+    assertEquals("The legitimacy of Israel’s nation-state bill (II): diplomatic considerations",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "The legitimacy of Israel’s nation-state bill (II): diplomatic considerations")));
+    assertEquals("Gogo plane Wi-Fi blocks YouTube (and can read your email)",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Gogo plane Wi-Fi blocks YouTube (and can read your email)")));
+    assertEquals("Defenseman Mike Green (upper-body) missing Tampa Bay trip",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Defenseman Mike Green (upper-body) missing Tampa Bay trip")));
+    assertEquals("Why Brad Paisley’s self-deprecating ‘black-ish’/’white-ish’ joke at the "
+            + "CMAs was a bad idea. (But not racist.)",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Why Brad Paisley’s self-deprecating ‘black-ish’/’white-ish’ joke at the "
+            + "CMAs was a bad idea. (But not racist.)")));
+  }
+
+  @Test
+  public void testGetPublishedTime() throws Exception {
+    // From Cbc.ca.
+    DocumentNode documentNode = DocumentBuilder.build("url",
+        new StringReader("<html><head><title><meta name=\"date\" content=\"2015/01/07\" />"
+            + "</title></head></html>"));
+    DateParserTest.assertSameTime("20150107000000", ArticleCreator.getPublishedTime(documentNode));
+
+    // From Cbsnews.com.
+    documentNode = DocumentBuilder.build("url",
+        new StringReader("<html><head><title>"
+            + "<meta itemprop=\"datePublished\" content=\"January 9, 2015, 3:43 AM\">"
+            + "</title></head></html>"));
+    DateParserTest.assertSameTime("20150109034300", ArticleCreator.getPublishedTime(documentNode));
+
+    // From abc.net.au: Get the date from the URL.
+    documentNode = DocumentBuilder.build(
+        "http://www.abc.net.au/news/2015-01-01/victims-of-sydney-to-hobart-yacht-"
+        + "race-plane-crash/5995656",
+        new StringReader("<html><head></head></html>"));
+    DateParserTest.assertSameTime("20150101000000", ArticleCreator.getPublishedTime(documentNode));
+
+    // From http://advice.careerbuilder.com/: Get the date from the copyright notice.
+    documentNode = DocumentBuilder.build(
+        "http://advice.careerbuilder.com/posts/how-to-be-a-great-career-wingman",
+        new StringReader("<html><body><div id=\"post-content\">"
+            + "<div class=\"copyright\">© 2014 CareerBuilder, LLC. "
+            + "Original publish date: 12.26.2014</div>"
+            + "</body></html>"));
+    DateParserTest.assertSameTime("20141226000000", ArticleCreator.getPublishedTime(documentNode));
   }
 
   @Test
@@ -77,7 +177,7 @@ public class ArticleCreatorTest {
         + "future, banking and all financial services will become something "
         + "that merely exists in the background, similar to other basic "
         + "utilities.", article.getDescription());
-    assertEquals("The Sharing Economy And The Future Of Finance", article.getTitle());
+    assertEquals("The Sharing Economy And The Future Of Finance", article.getTitle());
     assertEquals("http://tctechcrunch2011.files.wordpress.com/2015/01/shared.jpg",
         article.getImageUrl());
   }
@@ -151,7 +251,7 @@ public class ArticleCreatorTest {
         "The editorial board criticized what it called one of several acts of "
         + "“passive-aggressive contempt and self-pity.”",
         article.getDescription());
-    assertEquals("The New York Times Joins the NYPD Funeral Protest Backlash", article.getTitle());
+    assertEquals("The New York Times Joins the NYPD Funeral Protest Backlash", article.getTitle());
     assertEquals("http://media.gotraffic.net/images/iqh7RbW8gmWo/v6/-1x-1.jpg",
         article.getImageUrl());
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
@@ -171,7 +271,7 @@ public class ArticleCreatorTest {
         + "detect hazardous situations and avoid accidents. More advanced cars aren't that "
         + "far away, the company says.",
         article.getDescription());
-    assertEquals("GM sees self-driving cars sooner, not later", article.getTitle());
+    assertEquals("GM sees self-driving cars sooner, not later", article.getTitle());
     assertEquals("http://subscription-assets.timeinc.com/current/510_top1_150_thumb.jpg",
         article.getImageUrl());
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),

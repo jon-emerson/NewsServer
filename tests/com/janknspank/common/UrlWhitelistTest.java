@@ -41,6 +41,8 @@ public class UrlWhitelistTest {
     assertFalse(UrlWhitelist.isOkay("http://www.bbc.com/portuguese/noticias/2014/12/141226_brasileira_tailandia_tsunami_gerardo_rw"));
     assertFalse(UrlWhitelist.isOkay("http://www.bbc.com/mundo/noticias/2014/12/141119_cosas_sorprendentes_finde2014_yv"));
     assertFalse(UrlWhitelist.isOkay("http://eatocracy.cnn.com/2010/06/18/are-you-still-working-on-that/comment-page-9/"));
+    assertFalse(UrlWhitelist.isOkay("http://www.abc.net.au/news/2015-01-08/image/6006554"));
+    assertFalse(UrlWhitelist.isOkay("http://www.forbes.com/sites/nickmorgan/2015/01/08/which-is-more-important-authenticity-or-charisma/2/"));
   }
 
   @Test

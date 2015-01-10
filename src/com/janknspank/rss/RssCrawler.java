@@ -51,6 +51,10 @@ public class RssCrawler {
     "http://feeds.mercurynews.com/mngi/rss/CustomRssServlet/568/200735.xml",
     "http://feeds.mercurynews.com/mngi/rss/CustomRssServlet/568/200737.xml",
     "http://feeds.washingtonpost.com/rss/business",
+    "http://www.forbes.com/business/feed/",
+    "http://www.forbes.com/most-popular/feed/",
+    "http://www.forbes.com/real-time/feed2/",
+    "http://www.forbes.com/technology/feed/",
     "http://la.curbed.com/atom.xml",
     "http://ny.curbed.com/atom.xml",
     "http://rss.cnn.com/rss/cnn_tech.rss",
@@ -98,7 +102,9 @@ public class RssCrawler {
     "http://www.nytimes.com/services/xml/rss/nyt/JobMarket.xml",
     "http://www.sfgate.com/default/feed/City-Insider-Blog-573.php",
     "http://www.sfgate.com/rss/feed/Page-One-News-593.php",
-    "http://www.sfgate.com/rss/feed/Tech-News-449.php"
+    "http://www.sfgate.com/rss/feed/Tech-News-449.php",
+    "http://www.theverge.com/mobile/rss/index.xml",
+    "http://www.theverge.com/rss/index.xml"
   };
 
   private String getArticleUrl(Node itemNode) {

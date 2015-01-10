@@ -2,6 +2,8 @@ package com.janknspank.interpreter;
 
 import java.io.Reader;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.ParserException;
@@ -10,6 +12,7 @@ import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Interpreter.InterpretedData;
+import com.janknspank.server.NotFoundException;
 
 /**
  * Built off the power of SiteParser, this class further interprets a web page
@@ -27,6 +30,9 @@ public class Interpreter {
       throws FetchException, ParserException, RequiredFieldException {
 
     FetchResponse response = FETCHER.fetch(url);
+    if (response.getStatusCode() != HttpServletResponse.SC_OK) {
+      throw new FetchException("URL not found (" + response.getStatusCode() + ")");
+    }
     return interpret(url, response.getReader());
   }
 

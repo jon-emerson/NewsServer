@@ -1,9 +1,11 @@
 package com.janknspank;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.UrlCleaner;
 import com.janknspank.common.UrlWhitelist;
 import com.janknspank.data.ArticleKeywords;
@@ -16,12 +18,20 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.interpreter.Interpreter;
 import com.janknspank.interpreter.RequiredFieldException;
+import com.janknspank.interpreter.UrlFinder;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Interpreter.InterpretedData;
 
 public class TheMachine {
   public void start() {
+    // Uncomment this to start the crawl at a specific page.
+//    try {
+//      Urls.put("http://www.theverge.com/", false);
+//    } catch (DataInternalException e1) {
+//      e1.printStackTrace();
+//    }
+
     while (true) {
       final Url url;
       try {
@@ -52,28 +62,34 @@ public class TheMachine {
 
         System.err.println("Crawling: " + url.getUrl());
 
-        InterpretedData interpretedData = Interpreter.interpret(url);
-        try {
-          Database.insert(interpretedData.getArticle());
-        } catch (DataInternalException e) {
-          // It could be that some other process decided to steal this article
-          // and process it first (mainly due to human error).  If so, delete
-          // everything and store it again.
-          System.out.println("Handling human error: " + url.getUrl());
-          Database.deletePrimaryKey(url.getId(), Article.class);
-          ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
-          Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
+        List<String> urls;
+        if (ArticleUrlDetector.isArticle(url.getUrl())) {
+          InterpretedData interpretedData = Interpreter.interpret(url);
+          try {
+            Database.insert(interpretedData.getArticle());
+          } catch (DataInternalException e) {
+            // It could be that some other process decided to steal this article
+            // and process it first (mainly due to human error).  If so, delete
+            // everything and store it again.
+            System.out.println("Handling human error: " + url.getUrl());
+            Database.deletePrimaryKey(url.getId(), Article.class);
+            ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
+            Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
 
-          // Try again!
-          Database.insert(interpretedData.getArticle());
+            // Try again!
+            Database.insert(interpretedData.getArticle());
+          }
+
+          Database.insert(interpretedData.getKeywordList());
+          urls = interpretedData.getUrlList();
+        } else {
+          urls = UrlFinder.findUrls(url);
         }
-
-        Database.insert(interpretedData.getKeywordList());
 
         // Make sure to filter and clean the URLs - only store the ones we want to crawl!
         Collection<Url> destinationUrls = Urls.put(
             Iterables.transform(
-                Iterables.filter(interpretedData.getUrlList(), UrlWhitelist.PREDICATE),
+                Iterables.filter(urls, UrlWhitelist.PREDICATE),
                 UrlCleaner.TRANSFORM_FUNCTION),
             false /* isTweet */);
         Links.put(url, destinationUrls);

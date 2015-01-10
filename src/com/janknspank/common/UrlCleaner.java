@@ -188,6 +188,9 @@ public class UrlCleaner {
       queryParameters.remove("replytocom");
       queryParameters.remove("track");
     }
+    if (host.endsWith(".mashable.com") || host.equals("mashable.com")) {
+      queryParameters.remove("geo");
+    }
     if (host.endsWith(".mercurynews.com") || host.equals("mercurynews.com")) {
       queryParameters.remove("source");
     }
@@ -242,6 +245,11 @@ public class UrlCleaner {
     }
     if (host.endsWith(".thehindu.com") || host.equals("thehindu.com")) {
       queryParameters.remove("homepage");
+    }
+    if (host.endsWith(".theverge.com") || host.equals("theverge.com")) {
+      if (path.matches(".*\\/in\\/[0-9]{6,9}")) {
+        path = path.substring(0, path.lastIndexOf("/in/"));
+      }
     }
     if (host.endsWith(".washingtonpost.com") ||
         host.equals("washingtonpost.com")) {

@@ -281,24 +281,43 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
 
     // See if we can parse a date out of the URL.
     Long date = DateParser.parseDateFromUrl(documentNode.getUrl(), true /* allowMonth */);
-    if (date == null) {
-      throw new RequiredFieldException("Could not find published_time");
+    if (date != null) {
+      return date;
     }
-    return date;
+
+    // See if we can derive the date from the article contents.
+    // NOTE(jonemerson): Maybe we can do this more heuristically.
+    for (Node copyrightNode : documentNode.findAll("body .copyright")) {
+      Matcher matcher = Pattern.compile("(0?[1-9]|1[012])\\.[0123]?[0-9]\\.20[0-9]{2}")
+          .matcher(copyrightNode.getFlattenedText());
+      if (matcher.find()) {
+        date = DateParser.parseDateTime(matcher.group());
+        if (date != null) {
+          return date;
+        }
+      }
+    }
+
+    throw new RequiredFieldException("Could not find published_time");
   }
 
   public static String getTitle(DocumentNode documentNode) throws RequiredFieldException {
-    Node metaNode = documentNode.findFirst(ImmutableList.of(
-        "html > head meta[name=\"fb_title\"]",
-        "html > head meta[name=\"hdl\"]",
-        "html > head meta[name=\"Headline\"]",
-        "html > head meta[name=\"sailthru.title\"]",
-        "html > head meta[property=\"og:title\"]",
-        "html > head meta[property=\"rnews:headline\"]",
-        "html > head meta[itemprop=\"alternativeHeadline\"]"));
-    if (metaNode != null) {
-      return metaNode.getAttributeValue("content");
+    // For most sites, we can get it from the meta keywords.
+    // For others, the meta keywords are crap, so we skip this step.
+    if (!documentNode.getUrl().contains("//advice.careerbuilder.com/")) {
+      Node metaNode = documentNode.findFirst(ImmutableList.of(
+          "html > head meta[name=\"fb_title\"]",
+          "html > head meta[name=\"hdl\"]",
+          "html > head meta[name=\"Headline\"]",
+          "html > head meta[name=\"sailthru.title\"]",
+          "html > head meta[property=\"og:title\"]",
+          "html > head meta[property=\"rnews:headline\"]",
+          "html > head meta[itemprop=\"alternativeHeadline\"]"));
+      if (metaNode != null) {
+        return metaNode.getAttributeValue("content");
+      }
     }
+
     Node titleNode = documentNode.findFirst("title");
     if (titleNode != null) {
       String title = unescape(titleNode.getFlattenedText());

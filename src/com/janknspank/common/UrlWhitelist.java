@@ -34,8 +34,16 @@ public class UrlWhitelist {
 
   private static final HashSet<String> WHITELIST = new HashSet<String>();
   static {
+
+    WHITELIST.add("gizmodo.com"); // **
+    WHITELIST.add("engadget.com"); // **
+    WHITELIST.add("thenextweb.com"); // **
+    WHITELIST.add("wired.com"); // **
+    WHITELIST.add("techmeme.com"); // **
+
     WHITELIST.add("abc.net.au");
     WHITELIST.add("abcnews.go.com");
+    WHITELIST.add("advice.careerbuilder.com");
     WHITELIST.add("america.aljazeera.com");
     WHITELIST.add("arstechnica.com");
     WHITELIST.add("bbc.co.uk");
@@ -60,16 +68,14 @@ public class UrlWhitelist {
     // WHITELIST.add("denverpost.com");
     // WHITELIST.add("drudgereport.com");
     // WHITELIST.add("dw.de");
-    // WHITELIST.add("economist.com"); **
-    // WHITELIST.add("engadget.com"); **
+    // WHITELIST.add("economist.com"); // DO NOT TURN ON - PAYWALL IS HORRIBLE.
     // WHITELIST.add("eonline.com");
     // WHITELIST.add("ew.com");
     // WHITELIST.add("examiner.com");
     // WHITELIST.add("extremetech.com");
-    // WHITELIST.add("forbes.com");
+    WHITELIST.add("forbes.com");
     // WHITELIST.add("foxnews.com");
     // WHITELIST.add("freep.com");
-    // WHITELIST.add("gizmodo.com");
     // WHITELIST.add("globalpost.com");
     // WHITELIST.add("guardian.co.uk");
     // WHITELIST.add("haaretz.com");
@@ -84,7 +90,7 @@ public class UrlWhitelist {
     WHITELIST.add("latimes.com");
     // WHITELIST.add("manchestereveningnews.co.uk");
     // WHITELIST.add("manoramaonline.com");
-    // WHITELIST.add("mashable.com"); **
+    WHITELIST.add("mashable.com");
     WHITELIST.add("mercurynews.com");
     // WHITELIST.add("mg.co.za");
     // WHITELIST.add("msnbc.com");
@@ -108,22 +114,19 @@ public class UrlWhitelist {
     // WHITELIST.add("statesman.com");
     // WHITELIST.add("straitstimes.com");
     WHITELIST.add("techcrunch.com");
-    // WHITELIST.add("techmeme.com");
     // WHITELIST.add("telegraph.co.uk");
     // WHITELIST.add("theatlantic.com"); **
     // WHITELIST.add("theglobeandmail.com");
     // WHITELIST.add("theguardian.com");
     // WHITELIST.add("thehindu.com");
-    // WHITELIST.add("thenextweb.com");
     // WHITELIST.add("theregister.co.uk");
-    // WHITELIST.add("theverge.com");
+    WHITELIST.add("theverge.com");
     // WHITELIST.add("tmz.com");
     // WHITELIST.add("usatoday.com");
     // WHITELIST.add("usnews.com");
     WHITELIST.add("washingtonpost.com");
     // WHITELIST.add("washingtontimes.com");
     // WHITELIST.add("westword.com");
-    // WHITELIST.add("wired.com");
     // WHITELIST.add("zdnet.com");
   }
 
@@ -183,6 +186,7 @@ public class UrlWhitelist {
         "blog.cleveland.com",
         "blogcabin.boston.com",
         "blogs.cnn.com",
+        "blogs.forbes.com", // This is their account management site.
         "businessfinder.cleveland.com",
         "bwso.businessweek.com",
         "calendar.boston.com",
@@ -213,6 +217,7 @@ public class UrlWhitelist {
         "documents.latimes.com",
         "ee.latimes.com",
         "episteme.arstechnica.com",
+        "events.mashable.com",
         "events.sfgate.com",
         "extras.sfgate.com",
         "fangear.chron.com",
@@ -220,6 +225,7 @@ public class UrlWhitelist {
         "faq.external.bbc.co.uk",
         "feeds.arstechnica.com",
         "feeds.washingtonpost.com",
+        "findjobs.mashable.com",
         "findnsave.cleveland.com",
         "findnsave.dallasnews.com",
         "findnsave.washingtonpost.com",
@@ -298,6 +304,7 @@ public class UrlWhitelist {
         "realestate.money.cnn.com",
         "realestate.washingtonpost.com",
         "recipes.latimes.com",
+        "related.forbes.com",
         "revive.bdnews24.com",
         "rss.cnn.com",
         "rssfeeds.usatoday.com",
@@ -354,9 +361,9 @@ public class UrlWhitelist {
         return false;
       }
 
-      TreeMap<String, String> queryParameters = new TreeMap<>();
+      TreeMap<String, String> parameters = new TreeMap<>();
       for (NameValuePair nameValue : URLEncodedUtils.parse(bigUrl.getQuery(), Charsets.UTF_8)) {
-        queryParameters.put(nameValue.getName(), nameValue.getValue());
+        parameters.put(nameValue.getName(), nameValue.getValue());
       }
 
       // Path exclusions.
@@ -372,7 +379,8 @@ public class UrlWhitelist {
       if (domain.endsWith("abc.net.au") &&
           path.startsWith("/radio/") ||
           (path.contains("/sport/") && path.contains("/scoreboard/")) ||
-          (path.contains("/sport/") && path.contains("/results/"))) {
+          (path.contains("/sport/") && path.contains("/results/")) ||
+          (path.contains("/image/"))) {
         return false;
       }
       if (domain.endsWith("abcnews.go.com") &&
@@ -413,8 +421,8 @@ public class UrlWhitelist {
         }
       }
       if (domain.endsWith("bdnews24.com")) {
-        if (!queryParameters.containsKey("getXmlFeed") ||
-            "rssfeed".equals(queryParameters.get("widgetName"))) {
+        if (!parameters.containsKey("getXmlFeed") ||
+            "rssfeed".equals(parameters.get("widgetName"))) {
           return false;
         }
       }
@@ -424,6 +432,7 @@ public class UrlWhitelist {
            path.startsWith("/billionaires/") ||
            path.startsWith("/graphics/") ||
            path.startsWith("/infographics/") ||
+           path.startsWith("/news/print/") ||
            path.startsWith("/podcasts/") ||
            path.startsWith("/quote/") ||
            path.startsWith("/slideshow/") ||
@@ -503,7 +512,9 @@ public class UrlWhitelist {
       if (domain.endsWith(".chicagotribune.com") && path.endsWith("/comments/atom.xml")) {
         return false;
       }
-      if (domain.endsWith(".chron.com") && path.endsWith("/feed")) {
+      if (domain.endsWith(".chron.com") &&
+          (path.endsWith("/feed") ||
+              parameters.containsKey("share"))) {
         return false;
       }
       if (domain.endsWith(".cnn.com") &&
@@ -521,7 +532,12 @@ public class UrlWhitelist {
       if (domain.endsWith("finance.boston.com") && path.endsWith("/quote")) {
         return false;
       }
-      if (domain.endsWith("forbes.com") && path.startsWith("/account/")) {
+      if (domain.endsWith("forbes.com") &&
+          (path.startsWith("/account/") ||
+           path.startsWith("/pictures/") ||
+           path.startsWith("/video/") ||
+           path.matches(".*\\/[0-9]{1,3}\\/$") ||  // Page 2, 3, etc.
+           path.endsWith("/print/"))) {
         return false;
       }
       if (domain.equals("investing.businessweek.com") &&
@@ -538,6 +554,13 @@ public class UrlWhitelist {
         if (path.matches("^\\/[12][0-9]{3}\\/.*")) {
           return false;
         }
+      }
+      if (domain.endsWith("mashable.com") &&
+          (path.startsWith("/login/") ||
+           path.startsWith("/search/") ||
+           path.startsWith("/sgs/") ||
+           path.startsWith("/media-summit/"))) {
+        return false;
       }
       if (domain.endsWith("money.usnews.com") && path.startsWith("/529s/")) {
         return false;
@@ -563,11 +586,11 @@ public class UrlWhitelist {
       }
       if (domain.endsWith("sfgate.com") &&
           (path.startsWith("/merge/") ||
-              queryParameters.containsKey("share"))) {
+              parameters.containsKey("share"))) {
         return false;
       }
       if (domain.endsWith("siliconbeat.com") &&
-          queryParameters.containsKey("share")) {
+          parameters.containsKey("share")) {
         return false;
       }
       if (domain.endsWith("sports.chron.com") &&
@@ -582,6 +605,13 @@ public class UrlWhitelist {
         return false;
       }
       if (domain.endsWith("telegraph.co.uk") && path.startsWith("/sponsored/")) {
+        return false;
+      }
+      if (domain.endsWith("theverge.com") &&
+          (path.startsWith("/forums/") ||
+           path.startsWith("/jobs") ||
+           path.startsWith("/search") ||
+           path.startsWith("/video/"))) {
         return false;
       }
       if (domain.endsWith("usatoday.com") && path.startsWith("/marketing/rss/")) {

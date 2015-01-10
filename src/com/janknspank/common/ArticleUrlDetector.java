@@ -119,6 +119,9 @@ public class ArticleUrlDetector {
           ABC_NEWS_BLOG_PATH.matcher(path).find() ||
           (path.contains("/wireStory/") && PATH_ENDS_WITH_DASH_NUMBER.matcher(path).find());
     }
+    if (host.equals("advice.careerbuilder.com")) {
+      return path.startsWith("/posts/");
+    }
     if (host.endsWith("aljazeera.com")) {
       return DateParser.parseDateFromUrl(urlString, false) != null;
     }

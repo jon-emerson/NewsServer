@@ -33,6 +33,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
         "#storyText p",
         "#innerbody p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("advice.careerbuilder.com", new String[] {
+        ".post-body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
         ".text > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
@@ -47,7 +49,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         ".body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
         ".article_body > p",    // See "Lawsky Said to Probe Medley Hedge Fund ...".
-        ".article-body > p"});  // See "... Joins the NYPD Funeral Protest Backlash".
+        ".article-body > p",    // See "... Joins the NYPD Funeral Protest Backlash".
+        "#story_content > p"}); // Printable pages.
     DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
         "article > p",
         ".content-text > p"});
@@ -82,6 +85,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("default", new String[] {
         "article > p",
         "article > div > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("forbes.com", new String[] {
+        ".article_body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("fortune.com", new String[] {
         ".article-body p",
         ".entry-content p"}); // To work around Javascript-rendered pages.
@@ -89,6 +94,9 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         ".trb_article_page > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("markets.cbsnews.com", new String[] {
         ".news-story p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("mashable.com", new String[] {
+        ".article-content p",
+        ".long-card p"});
     DOMAIN_TO_DOM_ADDRESSES.put("mercurynews.com", new String[] {
         ".articleBody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("money.cnn.com", new String[] {
@@ -109,6 +117,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         ".post-contents p"});
     DOMAIN_TO_DOM_ADDRESSES.put("siliconbeat.com", new String[] {
         ".post-content > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("theverge.com", new String[] {
+        "article p"});
     DOMAIN_TO_DOM_ADDRESSES.put("techcrunch.com", new String[] {
         ".article-entry > p",
         ".article-entry > h2"});
