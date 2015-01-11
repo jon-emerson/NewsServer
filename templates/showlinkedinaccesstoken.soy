@@ -1,0 +1,22 @@
+{namespace news.showlinkedinaccesstoken autoescape="strict"}
+
+/**
+ * Renders the show linked in access token page.
+ */
+{template .main}
+  <h1>Response from LinkedIn!!  (Here's your access token??)</h1>
+
+  {if $token}
+    Access token: {$token}
+  {/if}
+  {if $expiresIn}
+    Expires in: {$expiresIn}
+  {/if}
+  {if $error}
+    Error: {$error}
+  {/if}
+  {if $errorDescription}
+    Error description: {$errorDescription}
+  {/if}
+
+{/template}

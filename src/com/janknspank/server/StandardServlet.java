@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.google.template.soy.data.SoyMapData;
 import com.janknspank.common.Asserts;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
@@ -20,13 +21,26 @@ public abstract class StandardServlet extends NewsServlet {
     return null;
   }
 
+  /**
+   * Returns any Soy data necessary for rendering the .main template for this
+   * servlet's Soy page.
+   */
+  protected SoyMapData getSoyMapData(HttpServletRequest req)
+      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+    return null;
+  }
+
   @Override
   protected final void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     try {
       JSONObject response = doGetInternal(req, resp);
       if (response == null) {
-        writeSoyTemplate(resp, ".main", null);
+        if (resp.getStatus() == HttpServletResponse.SC_MOVED_TEMPORARILY) {
+          // Don't do anything, the internal chose to redirect.
+        } else {
+          writeSoyTemplate(resp, ".main", getSoyMapData(req));
+        }
       } else {
         Asserts.assertTrue(response.getBoolean("success"), "success in response");
         writeJson(resp, response);

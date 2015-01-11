@@ -79,6 +79,34 @@ public class Sessions {
   }
 
   /**
+   * Returns an expiring LinkedIn OAuth state parameter, that we can use to
+   * prevent XSRF attacks.  Contains the encrypted current time.
+   */
+  public static String getLinkedInOAuthState() throws DataInternalException {
+    return toEncryptedBase64(Long.toString(System.currentTimeMillis()));
+  }
+
+  /**
+   * Throws if the passed OAuthState is invalid or expired.
+   */
+  public static void verifyLinkedInOAuthState(String linkedInOAuthState)
+      throws DataRequestException {
+    try {
+      byte[] encryptedBytes = Base64.decodeBase64(linkedInOAuthState);
+      byte[] decryptedBytes = DECRYPT_CIPHER.doFinal(encryptedBytes);
+      long millis = Long.parseLong(new String(decryptedBytes));
+      if (millis <= System.currentTimeMillis() &&
+          (millis >= System.currentTimeMillis() * 60 * 60 * 1000)) {
+        throw new DataRequestException("State expired");
+      }
+    } catch (IllegalBlockSizeException e) {
+      throw new DataRequestException("Could not decrypt state", e);
+    } catch (BadPaddingException e) {
+      throw new DataRequestException("Could not decrypt state", e);
+    }
+  }
+
+  /**
    * Decrypts a session key and returns the user ID from inside it.
    */
   private static String decrypt(String sessionKey) throws DataRequestException {

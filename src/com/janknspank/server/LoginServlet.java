@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
@@ -37,6 +39,19 @@ import com.janknspank.proto.Core.UserInterest;
 import com.janknspank.proto.Serializer;
 
 public class LoginServlet extends StandardServlet {
+  static final String LINKED_IN_REDIRECT_URL;
+  static {
+    try {
+      LINKED_IN_REDIRECT_URL = new URIBuilder()
+          .setScheme("https")
+          .setHost("spotternews.com")
+          .setPath("showLinkedInAccessToken")
+          .build().toString();
+    } catch (URISyntaxException e) {
+      throw new Error(e);
+    }
+  }
+
   private static final String PROFILE_URL = "https://api.linkedin.com/v1/people/~:("
       + Joiner.on(",").join(ImmutableList.of("id", "first-name", "last-name", "industry",
           "headline", "siteStandardProfileRequest", "location", "num-connections", "summary",
@@ -49,8 +64,8 @@ public class LoginServlet extends StandardServlet {
       + ")"; // ?oauth2_access_token=%@&format=json
 
   private CloseableHttpClient httpclient = HttpClients.createDefault();
-  private static final String LINKED_IN_API_KEY;
-  private static final String LINKED_IN_SECRET_KEY;
+  static final String LINKED_IN_API_KEY;
+  static final String LINKED_IN_SECRET_KEY;
   static {
     LINKED_IN_API_KEY = System.getenv("LINKED_IN_API_KEY");
     if (LINKED_IN_API_KEY == null) {
@@ -94,6 +109,25 @@ public class LoginServlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+    resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+    try {
+      resp.setHeader("Location", new URIBuilder()
+          .setScheme("https")
+          .setHost("www.linkedin.com")
+          .setPath("/uas/oauth2/authorization")
+          .addParameter("client_id", LINKED_IN_API_KEY)
+          .addParameter("scope", "r_fullprofile r_emailaddress r_network")
+          .addParameter("state", Sessions.getLinkedInOAuthState())
+          .addParameter("redirect_uri", LINKED_IN_REDIRECT_URL)
+          .build().toString());
+    } catch (URISyntaxException e) {
+      throw new DataInternalException("Error creating LinkedIn OAuth URL", e);
+    }
+    return null;
+  }
+
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
+      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
     // Get parameters.
     String linkedInAccessToken = getRequiredParameter(req, "linkedInAccessToken");
     // String linkedInExpiresIn = getRequiredParameter(req, "linkedInExpiresIn");
@@ -133,10 +167,5 @@ public class LoginServlet extends StandardServlet {
     response.put("user", userJson);
     response.put("session", Serializer.toJSON(session));
     return response;
-  }
-
-  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
-    return doGetInternal(req, resp);
   }
 }
