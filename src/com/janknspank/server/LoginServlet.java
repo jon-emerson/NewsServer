@@ -45,7 +45,7 @@ public class LoginServlet extends StandardServlet {
       LINKED_IN_REDIRECT_URL = new URIBuilder()
           .setScheme("https")
           .setHost("spotternews.com")
-          .setPath("showLinkedInAccessToken")
+          .setPath("/showLinkedInAccessToken")
           .build().toString();
     } catch (URISyntaxException e) {
       throw new Error(e);
