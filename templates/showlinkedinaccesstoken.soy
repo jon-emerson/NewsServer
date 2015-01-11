@@ -2,26 +2,25 @@
 
 /**
  * Renders the show linked in access token page.
+ * @param? error Error type.
+ * @param? errorDescription A description of the error.
+ * @param? expiresIn On success, how long until the token expires.
+ * @param? token On success, the user's LinkedIn access token.
  */
 {template .main}
-  {@param? error: string}
-  {@param? errorDescription: string}
-  {@param? expiresIn: string}
-  {@param? token: string}
-
   <h1>Response from LinkedIn!!  (Here's your access token??)</h1>
 
   {if $token}
-    Access token: {$token}
+    Access token: <b>{$token}</b><br>
   {/if}
   {if $expiresIn}
-    Expires in: {$expiresIn}
+    Expires in: <b>{$expiresIn}</b><br>
   {/if}
   {if $error}
-    Error: {$error}
+    Error: <b>{$error}</b><br>
   {/if}
   {if $errorDescription}
-    Error description: {$errorDescription}
+    Error description: <b>{$errorDescription}</b><br>
   {/if}
 
 {/template}
