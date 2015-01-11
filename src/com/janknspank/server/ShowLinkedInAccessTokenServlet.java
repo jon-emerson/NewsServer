@@ -75,7 +75,7 @@ public class ShowLinkedInAccessTokenServlet extends StandardServlet {
     }
     JSONObject responseObj = new JSONObject(sw.toString());
     data.put("token", responseObj.getString("access_token"));
-    data.put("expiresIn", responseObj.getString("expires_in"));
+    data.put("expiresIn", Long.toString(responseObj.getLong("expires_in")));
 
     return data;
   }
