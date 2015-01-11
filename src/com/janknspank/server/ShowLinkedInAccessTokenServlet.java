@@ -40,20 +40,31 @@ public class ShowLinkedInAccessTokenServlet extends StandardServlet {
     // of LinkedIn's API.
     FetchResponse response;
     try {
-      response = fetcher.fetch(new URIBuilder()
+      String url = new URIBuilder()
           .setScheme("https")
           .setHost("www.linkedin.com")
           .setPath("/uas/oauth2/accessToken")
+          .addParameter("grant_type", "authorization_code")
           .addParameter("code", authorizationCode)
           .addParameter("redirect_uri", LoginServlet.LINKED_IN_REDIRECT_URL)
           .addParameter("client_id", LoginServlet.LINKED_IN_API_KEY)
           .addParameter("client_secret", LoginServlet.LINKED_IN_SECRET_KEY)
-          .build().toString());
+          .build().toString();
+      System.out.println("Fetching " + url);
+      response = fetcher.fetch(url);
     } catch (FetchException|URISyntaxException e) {
       throw new DataInternalException("Could not fetch access token");
     }
     if (response.getStatusCode() != HttpServletResponse.SC_OK) {
-      throw new DataRequestException("Access token exchange failed");
+      StringWriter sw = new StringWriter();
+      try {
+        CharStreams.copy(response.getReader(), sw);
+      } catch (IOException e) {
+        throw new DataInternalException("Could not read accessToken response");
+      }
+      System.out.println("Error: " + sw.toString());
+      throw new DataRequestException("Access token exchange failed ("
+          + response.getStatusCode() + ")");
     }
 
     StringWriter sw = new StringWriter();
