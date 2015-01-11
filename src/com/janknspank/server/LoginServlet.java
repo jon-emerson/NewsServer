@@ -43,7 +43,7 @@ public class LoginServlet extends StandardServlet {
   static {
     try {
       LINKED_IN_REDIRECT_URL = new URIBuilder()
-          .setScheme("https")
+          .setScheme("http")
           .setHost("spotternews.com")
           .setPath("/showLinkedInAccessToken")
           .build().toString();
@@ -115,6 +115,7 @@ public class LoginServlet extends StandardServlet {
           .setScheme("https")
           .setHost("www.linkedin.com")
           .setPath("/uas/oauth2/authorization")
+          .addParameter("response_type", "code")
           .addParameter("client_id", LINKED_IN_API_KEY)
           .addParameter("scope", "r_fullprofile r_emailaddress r_network")
           .addParameter("state", Sessions.getLinkedInOAuthState())

@@ -4,6 +4,11 @@
  * Renders the show linked in access token page.
  */
 {template .main}
+  {@param? error: string}
+  {@param? errorDescription: string}
+  {@param? expiresIn: string}
+  {@param? token: string}
+
   <h1>Response from LinkedIn!!  (Here's your access token??)</h1>
 
   {if $token}
