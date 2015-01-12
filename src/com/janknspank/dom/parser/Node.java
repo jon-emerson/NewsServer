@@ -253,7 +253,10 @@ public class Node {
     return toString(0);
   }
 
-  private String toString(int depth) {
+  /**
+   * Prints out all the attributes on this node, plus all this node's children.
+   */
+  protected String toString(int depth) {
     StringBuilder sb = new StringBuilder();
     sb.append(Joiner.on("").join(Iterables.limit(Iterables.cycle("  "), depth)))
         .append("<")

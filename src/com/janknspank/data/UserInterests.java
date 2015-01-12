@@ -70,16 +70,17 @@ public class UserInterests {
    * Returns a list of interests derived from the user's passed-in LinkedIn
    * profile.
    */
-  public static List<UserInterest> updateInterests(String userId, DocumentNode profileDocumentNode)
+  public static List<UserInterest> updateInterests(String userId, DocumentNode profileDocumentNode,
+      DocumentNode connectionsDocumentNode)
       throws DataInternalException {
     List<UserInterest> interests = Lists.newArrayList();
 
-    // Dedupe by using a set.
+    // Step 1: Update companies / organizations.
+    // Note: Dedupe by using a set.
     Set<String> companyNames = Sets.newHashSet();
     for (Node companyNameNode : profileDocumentNode.findAll("position > company > name")) {
       companyNames.add(companyNameNode.getFlattenedText());
     }
-
     for (String companyName : companyNames) {
       interests.add(UserInterest.newBuilder()
           .setId(GuidFactory.generate())
@@ -89,8 +90,37 @@ public class UserInterests {
           .setType(UserInterests.TYPE_ORGANIZATION)
           .build());
     }
+    interests = updateInterests(userId, interests, SOURCE_LINKEDIN_PROFILE);
 
-    return updateInterests(userId, interests, SOURCE_LINKEDIN_PROFILE);
+    // Step 2: Update people.
+    Set<String> peopleNames = Sets.newHashSet();
+    for (Node personNode : connectionsDocumentNode.findAll("person")) {
+      StringBuilder nameBuilder = new StringBuilder();
+      Node firstNameNode = personNode.findFirst("first-name");
+      if (firstNameNode != null) {
+        nameBuilder.append(firstNameNode.getFlattenedText());
+      }
+      Node lastNameNode = personNode.findFirst("last-name");
+      if (lastNameNode != null) {
+        if (firstNameNode != null) {
+          nameBuilder.append(" ");
+        }
+        nameBuilder.append(lastNameNode.getFlattenedText());
+      }
+      peopleNames.add(nameBuilder.toString());
+    }
+    for (String peopleName : peopleNames) {
+      interests.add(UserInterest.newBuilder()
+          .setId(GuidFactory.generate())
+          .setUserId(userId)
+          .setKeyword(peopleName)
+          .setSource(UserInterests.SOURCE_LINKEDIN_CONNECTIONS)
+          .setType(UserInterests.TYPE_PERSON)
+          .build());
+    }
+    interests = updateInterests(userId, interests, SOURCE_LINKEDIN_CONNECTIONS);
+
+    return interests;
   }
 
   /**

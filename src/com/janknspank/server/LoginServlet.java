@@ -1,9 +1,7 @@
 package com.janknspank.server;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
@@ -24,7 +22,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
-import com.google.protobuf.ByteString;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
 import com.janknspank.data.Database;
@@ -55,6 +52,7 @@ public class LoginServlet extends StandardServlet {
           "recommendations-received", "following", "job-bookmarks", "suggestions",
           "date-of-birth", "member-url-resources", "related-profile-views", "honors-awards"))
       + ")"; // ?oauth2_access_token=%@&format=json
+  private static final String CONNECTIONS_URL = "https://api.linkedin.com/v1/people/~/connections";
 
   private CloseableHttpClient httpclient = HttpClients.createDefault();
   private final Fetcher fetcher = new Fetcher();
@@ -84,11 +82,11 @@ public class LoginServlet extends StandardServlet {
     }
   }
 
-  private byte[] getProfileResponseBytes(String linkedInAccessToken)
-      throws DataInternalException, DataRequestException {
+  private DocumentNode getLinkedInResponse(String url, String linkedInAccessToken)
+      throws DataRequestException, DataInternalException, IllegalStateException, ParserException {
     CloseableHttpResponse response = null;
     try {
-      HttpGet get = new HttpGet(PROFILE_URL);
+      HttpGet get = new HttpGet(url);
       get.setHeader("Authorization", "Bearer " + linkedInAccessToken);
       response = httpclient.execute(get);
       if (response.getStatusLine().getStatusCode() != HttpServletResponse.SC_OK) {
@@ -97,11 +95,7 @@ public class LoginServlet extends StandardServlet {
         throw new DataRequestException("Bad access token.  Response code = " +
             response.getStatusLine().getStatusCode() + "\n" + new String(baos.toByteArray()));
       }
-
-      ByteArrayOutputStream profileResponseBaos = new ByteArrayOutputStream();
-      InputStream profileResponseInputStream = response.getEntity().getContent();
-      ByteStreams.copy(profileResponseInputStream, profileResponseBaos);
-      return profileResponseBaos.toByteArray();
+      return DocumentBuilder.build(url, new InputStreamReader(response.getEntity().getContent()));
     } catch (IOException e) {
       throw new DataInternalException("Error reading from LinkedIn: " + e.getMessage(), e);
     } finally {
@@ -162,9 +156,7 @@ public class LoginServlet extends StandardServlet {
     String state = getParameter(req, "state");
     if (!Strings.isNullOrEmpty(authorizationCode) && !Strings.isNullOrEmpty(state)) {
       String accessToken = getAccessTokenFromAuthorizationCode(req, authorizationCode, state);
-      JSONObject responseJson = loginFromLinkedIn(accessToken);
-      responseJson.put("linkedin_access_token", accessToken);
-      return responseJson;
+      return loginFromLinkedIn(accessToken);
     }
 
     resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
@@ -194,28 +186,33 @@ public class LoginServlet extends StandardServlet {
       throws DataInternalException, DataRequestException, ValidationException {
     // Read user's profile from LinkedIn.  If this succeeds, we know the access
     // token is good, and we can proceed to log the user in.
-    byte[] profileResponseBytes = getProfileResponseBytes(linkedInAccessToken);
     DocumentNode linkedInProfileDocument;
     try {
-      linkedInProfileDocument = DocumentBuilder.build(PROFILE_URL,
-          new InputStreamReader(new ByteArrayInputStream(profileResponseBytes)));
+      linkedInProfileDocument = getLinkedInResponse(PROFILE_URL, linkedInAccessToken);
     } catch (ParserException e) {
-      throw new DataInternalException("Error reading from LinkedIn: " + e.getMessage(), e);
+      throw new DataInternalException("Could not parse linked in profile: " + e.getMessage(), e);
     }
 
     // Get or create a User and Session object for this user.
     User user = Users.loginFromLinkedIn(linkedInProfileDocument, linkedInAccessToken);
     Session session = Sessions.createFromLinkedProfile(linkedInProfileDocument, user);
 
-    // Save the user's profile and update his interests.
-    LinkedInProfile linkedInProfile = LinkedInProfile.newBuilder()
-        .setUserId(user.getId())
-        .setDataBytes(ByteString.copyFrom(profileResponseBytes))
-        .setCreateTime(System.currentTimeMillis())
-        .build();
-    Database.upsert(linkedInProfile);
-    List<UserInterest> interests =
-        UserInterests.updateInterests(user.getId(), linkedInProfileDocument);
+    // Try to save the user's profile and update his interests.
+    List<UserInterest> interests;
+    try {
+     LinkedInProfile linkedInProfile = LinkedInProfile.newBuilder()
+          .setUserId(user.getId())
+          .setData(linkedInProfileDocument.toLiteralString())
+          .setCreateTime(System.currentTimeMillis())
+          .build();
+      Database.upsert(linkedInProfile);
+      interests = UserInterests.updateInterests(user.getId(), linkedInProfileDocument,
+          getLinkedInResponse(CONNECTIONS_URL, linkedInAccessToken));
+    } catch (ParserException e) {
+      System.out.println("Warning: Could not parse linked in profile: " + e.getMessage());
+      e.printStackTrace();
+      interests = UserInterests.getInterests(user.getId());
+    }
 
     // Create the response.
     UserHelper userHelper = new UserHelper(user);

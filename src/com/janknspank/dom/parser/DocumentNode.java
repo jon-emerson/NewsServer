@@ -25,4 +25,11 @@ public class DocumentNode extends Node {
   public String getUrl() {
     return url;
   }
+
+  /**
+   * Returns a printed version of this entire document.
+   */
+  public String toLiteralString() {
+    return super.toString();
+  }
 }
