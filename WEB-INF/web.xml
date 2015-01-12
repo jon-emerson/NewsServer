@@ -96,15 +96,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>SetLinkedInConnectionsServlet</servlet-name>
-    <servlet-class>com.janknspank.server.SetLinkedInConnectionsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SetLinkedInConnectionsServlet</servlet-name>
-    <url-pattern>/setLinkedInConnections</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>SetUserUrlFavoriteServlet</servlet-name>
     <servlet-class>com.janknspank.server.SetUserUrlFavoriteServlet</servlet-class>
   </servlet>

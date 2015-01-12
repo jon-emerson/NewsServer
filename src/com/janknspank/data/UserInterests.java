@@ -73,7 +73,6 @@ public class UserInterests {
   public static List<UserInterest> updateInterests(String userId, DocumentNode profileDocumentNode,
       DocumentNode connectionsDocumentNode)
       throws DataInternalException {
-    List<UserInterest> interests = Lists.newArrayList();
 
     // Step 1: Update companies / organizations.
     // Note: Dedupe by using a set.
@@ -81,8 +80,9 @@ public class UserInterests {
     for (Node companyNameNode : profileDocumentNode.findAll("position > company > name")) {
       companyNames.add(companyNameNode.getFlattenedText());
     }
+    List<UserInterest> companyInterests = Lists.newArrayList();
     for (String companyName : companyNames) {
-      interests.add(UserInterest.newBuilder()
+      companyInterests.add(UserInterest.newBuilder()
           .setId(GuidFactory.generate())
           .setUserId(userId)
           .setKeyword(companyName)
@@ -90,7 +90,7 @@ public class UserInterests {
           .setType(UserInterests.TYPE_ORGANIZATION)
           .build());
     }
-    interests = updateInterests(userId, interests, SOURCE_LINKEDIN_PROFILE);
+    updateInterests(userId, companyInterests, SOURCE_LINKEDIN_PROFILE);
 
     // Step 2: Update people.
     Set<String> peopleNames = Sets.newHashSet();
@@ -109,8 +109,9 @@ public class UserInterests {
       }
       peopleNames.add(nameBuilder.toString());
     }
+    List<UserInterest> personInterests = Lists.newArrayList();
     for (String peopleName : peopleNames) {
-      interests.add(UserInterest.newBuilder()
+      personInterests.add(UserInterest.newBuilder()
           .setId(GuidFactory.generate())
           .setUserId(userId)
           .setKeyword(peopleName)
@@ -118,9 +119,7 @@ public class UserInterests {
           .setType(UserInterests.TYPE_PERSON)
           .build());
     }
-    interests = updateInterests(userId, interests, SOURCE_LINKEDIN_CONNECTIONS);
-
-    return interests;
+    return updateInterests(userId, personInterests, SOURCE_LINKEDIN_CONNECTIONS);
   }
 
   /**
@@ -193,7 +192,7 @@ public class UserInterests {
   }
 
   private static List<UserInterest> updateInterests(String userId, List<UserInterest> interests,
-      String type) throws DataInternalException {
+      String source) throws DataInternalException {
     // Collect all the final interests, so we can return them in the end.
     List<UserInterest> allInterests = Lists.newArrayList();
     allInterests.addAll(interests);
@@ -202,7 +201,7 @@ public class UserInterests {
     // address book still contains, and we can delete ones it doesn't.
     Map<String, Map<String, UserInterest>> interestsByTypeAndKeyword = Maps.newHashMap();
     for (UserInterest interest : getInterests(userId)) {
-      if (type.equals(interest.getSource())) {
+      if (source.equals(interest.getSource())) {
         Map<String, UserInterest> keywordMap =
             interestsByTypeAndKeyword.get(interest.getType());
         if (keywordMap == null) {
@@ -222,6 +221,12 @@ public class UserInterests {
       interestsToDelete.addAll(keywordMap.values());
     }
     for (UserInterest interest : interests) {
+      if (!source.equals(interest.getSource())) {
+        // This method only supports updating one type at a time.
+        throw new DataInternalException("Cannot add UserInterest of source " + interest.getSource()
+            + " inside a call to update UserInterests of source " + source + ": "
+            + interest.toString());
+      }
       UserInterest existingInterest =
           interestsByTypeAndKeyword.containsKey(interest.getType())
               ? interestsByTypeAndKeyword.get(interest.getType()).get(interest.getKeyword())
@@ -230,6 +235,7 @@ public class UserInterests {
         interestsToDelete.remove(existingInterest);
       } else {
         interestsToInsert.add(interest);
+        allInterests.add(interest);
       }
     }
 
