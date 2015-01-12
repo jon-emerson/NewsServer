@@ -121,13 +121,4 @@
     <servlet-name>SetUserUrlRatingServlet</servlet-name>
     <url-pattern>/setUserUrlRating</url-pattern>
   </servlet-mapping>
-
-  <servlet>
-    <servlet-name>ShowLinkedInAccessTokenServlet</servlet-name>
-    <servlet-class>com.janknspank.server.ShowLinkedInAccessTokenServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShowLinkedInAccessTokenServlet</servlet-name>
-    <url-pattern>/showLinkedInAccessToken</url-pattern>
-  </servlet-mapping>
 </web-app>
