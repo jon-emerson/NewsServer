@@ -27,7 +27,7 @@ public class TheMachine {
   public void start() {
     // Uncomment this to start the crawl at a specific page.
 //    try {
-//      Urls.put("http://www.theverge.com/", false);
+//      Urls.put("http://recode.net/", false);
 //    } catch (DataInternalException e1) {
 //      e1.printStackTrace();
 //    }

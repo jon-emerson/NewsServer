@@ -34,13 +34,6 @@ public class UrlWhitelist {
 
   private static final HashSet<String> WHITELIST = new HashSet<String>();
   static {
-
-    WHITELIST.add("gizmodo.com"); // **
-    WHITELIST.add("engadget.com"); // **
-    WHITELIST.add("thenextweb.com"); // **
-    WHITELIST.add("wired.com"); // **
-    WHITELIST.add("techmeme.com"); // **
-
     WHITELIST.add("abc.net.au");
     WHITELIST.add("abcnews.go.com");
     WHITELIST.add("advice.careerbuilder.com");
@@ -69,6 +62,7 @@ public class UrlWhitelist {
     // WHITELIST.add("drudgereport.com");
     // WHITELIST.add("dw.de");
     // WHITELIST.add("economist.com"); // DO NOT TURN ON - PAYWALL IS HORRIBLE.
+    WHITELIST.add("engadget.com");
     // WHITELIST.add("eonline.com");
     // WHITELIST.add("ew.com");
     // WHITELIST.add("examiner.com");
@@ -76,6 +70,7 @@ public class UrlWhitelist {
     WHITELIST.add("forbes.com");
     // WHITELIST.add("foxnews.com");
     // WHITELIST.add("freep.com");
+    WHITELIST.add("gizmodo.com");
     // WHITELIST.add("globalpost.com");
     // WHITELIST.add("guardian.co.uk");
     // WHITELIST.add("haaretz.com");
@@ -102,6 +97,7 @@ public class UrlWhitelist {
     // WHITELIST.add("nypost.com");
     WHITELIST.add("nytimes.com");
     // WHITELIST.add("nzherald.co.nz");
+    WHITELIST.add("recode.net");
     // WHITELIST.add("reuters.com");
     // WHITELIST.add("scmp.com");
     // WHITELIST.add("scotsman.com");
@@ -114,11 +110,13 @@ public class UrlWhitelist {
     // WHITELIST.add("statesman.com");
     // WHITELIST.add("straitstimes.com");
     WHITELIST.add("techcrunch.com");
+    WHITELIST.add("techmeme.com");
     // WHITELIST.add("telegraph.co.uk");
     // WHITELIST.add("theatlantic.com"); **
     // WHITELIST.add("theglobeandmail.com");
     // WHITELIST.add("theguardian.com");
     // WHITELIST.add("thehindu.com");
+    WHITELIST.add("thenextweb.com");
     // WHITELIST.add("theregister.co.uk");
     WHITELIST.add("theverge.com");
     // WHITELIST.add("tmz.com");
@@ -127,6 +125,7 @@ public class UrlWhitelist {
     WHITELIST.add("washingtonpost.com");
     // WHITELIST.add("washingtontimes.com");
     // WHITELIST.add("westword.com");
+    WHITELIST.add("wired.com");
     // WHITELIST.add("zdnet.com");
   }
 
@@ -287,6 +286,7 @@ public class UrlWhitelist {
         "myaccount2.latimes.com",
         "nie.washingtonpost.com",
         "nucwed.aus.aunty.abc.net.au",
+        "on.recode.net",
         "open.bloomberg.com",
         "partners.cnn.com",
         "photos.cleveland.com",
@@ -584,9 +584,19 @@ public class UrlWhitelist {
           return false;
         }
       }
+      if (domain.endsWith("recode.net") &&
+          (path.startsWith("/events/") ||
+           path.startsWith("/follow-us/") ||
+           path.startsWith("/next/") ||
+           path.startsWith("/sponsored-content/") ||
+           path.startsWith("/video/") ||
+           path.startsWith("/wp-admin/") ||
+           parameters.containsKey("share"))) {
+        return false;
+      }
       if (domain.endsWith("sfgate.com") &&
           (path.startsWith("/merge/") ||
-              parameters.containsKey("share"))) {
+           parameters.containsKey("share"))) {
         return false;
       }
       if (domain.endsWith("siliconbeat.com") &&

@@ -109,6 +109,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         "p.story-body-text",
         "#mod-a-body-first-para > p",
         "#mod-a-body-after-first-para > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("recode.net", new String[] {
+        ".article p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfexaminer.com", new String[] {
         "#storyBody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfgate.com", new String[] {

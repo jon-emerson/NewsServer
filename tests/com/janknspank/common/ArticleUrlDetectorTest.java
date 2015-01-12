@@ -75,6 +75,8 @@ public class ArticleUrlDetectorTest {
       "http://mashable.com/2008/12/19/how-to-win-twitter-friends/",
       "http://money.cnn.com/2006/08/09/technology/webaroundtheworld.biz2/",
       "http://postcards.blogs.fortune.cnn.com/2011/10/20/buffett-rule/",
+      "http://recode.net/2015/01/12/sap-profit-holds-up-in-q4-as-cloud-shift-accelerates/",
+      "http://recode.net/2015/01/12/suhd-quantum-dots-and-nano-what-your-guide-to-tv-terms-for-2015/",
       "http://seattle.curbed.com/archives/2014/12/five-properties-worth-buying-along-metro-bus-route-355.php",
       "http://tech.fortune.cnn.com/2010/10/04/verizons-refund-is-just-the-start-of-a-shakeup-in-wireless/",
       "http://techcrunch.com/2006/10/31/2080/",

@@ -201,6 +201,9 @@ public class ArticleUrlDetector {
     if (host.endsWith("mercurynews.com")) {
       return MERCURY_NEWS_PATH.matcher(path).find();
     }
+    if (host.endsWith("recode.net")) {
+      return DateParser.parseDateFromUrl(urlString, false) != null;
+    }
     if (host.endsWith("sfgate.com")) {
       return SFGATE_PATH.matcher(path).find() ||
           DateParser.parseDateFromUrl(urlString, false) != null;

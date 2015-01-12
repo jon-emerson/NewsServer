@@ -51,12 +51,10 @@ public class RssCrawler {
     "http://feeds.mercurynews.com/mngi/rss/CustomRssServlet/568/200735.xml",
     "http://feeds.mercurynews.com/mngi/rss/CustomRssServlet/568/200737.xml",
     "http://feeds.washingtonpost.com/rss/business",
-    "http://www.forbes.com/business/feed/",
-    "http://www.forbes.com/most-popular/feed/",
-    "http://www.forbes.com/real-time/feed2/",
-    "http://www.forbes.com/technology/feed/",
     "http://la.curbed.com/atom.xml",
     "http://ny.curbed.com/atom.xml",
+    "http://recode.net/category/general/feed/",
+    "http://recode.net/feed/",
     "http://rss.cnn.com/rss/cnn_tech.rss",
     "http://rss.cnn.com/rss/cnn_topstories.rss",
     "http://rss.cnn.com/rss/cnn_world.rss",
@@ -93,6 +91,10 @@ public class RssCrawler {
     "http://www.cnbc.com/id/100003114/device/rss/rss.html", // Top.
     "http://www.cnbc.com/id/10001147/device/rss/rss.html", // Business.
     "http://www.cnbc.com/id/19854910/device/rss/rss.html", // Tech.
+    "http://www.forbes.com/business/feed/",
+    "http://www.forbes.com/most-popular/feed/",
+    "http://www.forbes.com/real-time/feed2/",
+    "http://www.forbes.com/technology/feed/",
     "http://www.latimes.com/business/rss2.0.xml",
     "http://www.latimes.com/business/technology/rss2.0.xml",
     "http://www.latimes.com/nation/rss2.0.xml",

@@ -30,7 +30,7 @@ public class Urls {
   private static final String SELECT_NEXT_URL_TO_CRAWL_COMMAND =
       "SELECT * FROM " + Database.getTableName(Url.class) + " "
       + "WHERE crawl_priority > 0 AND last_crawl_start_time IS NULL AND "
-      //+ "url LIKE \"http://www.theverge.com/%\" "
+      // + "url LIKE \"http://recode.net/%\" AND "
       + "NOT url LIKE \"https://twitter.com/%\" "
       + "ORDER BY crawl_priority DESC LIMIT 1";
   private static final String UPDATE_CRAWL_START_COMMAND =

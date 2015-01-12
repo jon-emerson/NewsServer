@@ -24,10 +24,6 @@ import com.janknspank.proto.Extensions;
  * database.
  */
 public class Articles {
-  private static final String SELECT_ALL_COMMAND =
-      "SELECT * FROM " + Database.getTableName(Article.class)
-      + " ORDER BY published_time DESC LIMIT 50";
-
   public static final int MAX_TITLE_LENGTH;
   public static final int MAX_PARAGRAPH_LENGTH;
   public static final int MAX_DESCRIPTION_LENGTH;
