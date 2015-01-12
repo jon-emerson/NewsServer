@@ -161,7 +161,10 @@ public class LoginServlet extends StandardServlet {
     String authorizationCode = getParameter(req, "code");
     String state = getParameter(req, "state");
     if (!Strings.isNullOrEmpty(authorizationCode) && !Strings.isNullOrEmpty(state)) {
-      return loginFromLinkedIn(getAccessTokenFromAuthorizationCode(req, authorizationCode, state));
+      String accessToken = getAccessTokenFromAuthorizationCode(req, authorizationCode, state);
+      JSONObject responseJson = loginFromLinkedIn(accessToken);
+      responseJson.put("linkedin_access_token", accessToken);
+      return responseJson;
     }
 
     resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
