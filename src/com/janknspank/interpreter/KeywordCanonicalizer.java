@@ -11,6 +11,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.data.ArticleKeywords;
+import com.janknspank.data.DataInternalException;
+import com.janknspank.data.Entities;
 import com.janknspank.proto.Core.ArticleKeyword;
 
 public class KeywordCanonicalizer {
@@ -131,13 +133,18 @@ public class KeywordCanonicalizer {
           continue;
         }
 
-        // Look for both straight substrings and substrings of people who have
-        // their honorary titles removed (e.g. Mr., Mrs.).
-        if (bigKey.contains(littleKey) ||
-            (keywordMap.get(littleKey).getType() == ArticleKeywords.TYPE_PERSON &&
-                bigKey.contains(removePersonTitle(littleKey)))) {
-          keywordMap.put(bigKey, merge(keywordMap.get(bigKey), keywordMap.get(littleKey)));
-          keywordMap.remove(littleKey);
+        // Remove honorary titles (e.g. Mr., Mrs.) for people.
+        String cleanLittleKey =
+            (keywordMap.get(littleKey).getType() == ArticleKeywords.TYPE_PERSON) ?
+                removePersonTitle(littleKey) : littleKey;
+        try {
+          if (bigKey.contains(cleanLittleKey) &&
+              Entities.getEntityByKeyword(cleanLittleKey) == null) {
+            keywordMap.put(bigKey, merge(keywordMap.get(bigKey), keywordMap.get(littleKey)));
+            keywordMap.remove(littleKey);
+          }
+        } catch (DataInternalException e) {
+          e.printStackTrace();
         }
       }
     }

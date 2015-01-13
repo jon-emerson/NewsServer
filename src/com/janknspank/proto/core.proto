@@ -344,3 +344,23 @@ message UserInterest {
     (string_length) = 1
   ];
 }
+
+message Entity {
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24
+  ];
+
+  optional string keyword = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 100
+  ];
+
+  optional string type = 3 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 5
+  ];
+}

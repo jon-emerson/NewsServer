@@ -12,7 +12,6 @@ import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Interpreter.InterpretedData;
-import com.janknspank.server.NotFoundException;
 
 /**
  * Built off the power of SiteParser, this class further interprets a web page

@@ -29,7 +29,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES = Maps.newHashMap();
   static {
     DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
-        ".article > p"});
+        ".article p",
+        "#story > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
         "#storyText p",
         "#innerbody p"});
@@ -86,6 +87,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         "article > p",
         "article > div > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("forbes.com", new String[] {
+        ".article_body p",
         ".article_body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("fortune.com", new String[] {
         ".article-body p",

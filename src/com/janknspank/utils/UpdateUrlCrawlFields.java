@@ -7,7 +7,6 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.protobuf.Message;
 import com.janknspank.data.Database;
 import com.janknspank.data.Urls;
 import com.janknspank.proto.Core.Article;
@@ -41,7 +40,7 @@ public class UpdateUrlCrawlFields {
         "SELECT * FROM " + Database.getTableName(Url.class) + " "
         + "WHERE crawl_priority=0 AND url NOT LIKE \"%//twitter.com/%\"");
     result = stmt.executeQuery();
-    List<Message> urlsToUpdate = Lists.newArrayList();
+    List<Url> urlsToUpdate = Lists.newArrayList();
     while (!result.isAfterLast()) {
       Url url = Database.createFromResultSet(result, Url.class);
       if (url != null) {
