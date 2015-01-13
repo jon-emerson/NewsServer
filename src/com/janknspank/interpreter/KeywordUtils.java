@@ -169,6 +169,9 @@ public class KeywordUtils {
       keyword = keyword.replaceAll("Iphone", "iPhone");
       keyword = keyword.replaceAll("Iwatch", "iWatch");
       keyword = keyword.replaceAll("Ipod", "iPod");
+    } if (keyword.length() > 4 && keyword.equals(keyword.toUpperCase())) {
+      // For non-abbreviations, don't let folks capitalize everything.
+      keyword = WordUtils.capitalizeFully(keyword.toLowerCase());
     }
 
     return keyword;
