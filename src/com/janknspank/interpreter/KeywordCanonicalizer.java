@@ -138,10 +138,21 @@ public class KeywordCanonicalizer {
             (keywordMap.get(littleKey).getType() == ArticleKeywords.TYPE_PERSON) ?
                 removePersonTitle(littleKey) : littleKey;
         try {
-          if (bigKey.contains(cleanLittleKey) &&
-              Entities.getEntityByKeyword(cleanLittleKey) == null) {
-            keywordMap.put(bigKey, merge(keywordMap.get(bigKey), keywordMap.get(littleKey)));
-            keywordMap.remove(littleKey);
+          if (bigKey.contains(cleanLittleKey)) {
+            if (Entities.getEntityByKeyword(cleanLittleKey) == null) {
+              keywordMap.put(bigKey, merge(keywordMap.get(bigKey), keywordMap.get(littleKey)));
+              keywordMap.remove(littleKey);
+            } else {
+              System.out.println("LITTLE KEY WINS!! " + littleKey);
+              // Little key already exists in Wikipedia: Reward it for doing so,
+              // and punish the bigger key.
+              ArticleKeyword big = keywordMap.get(bigKey);
+              keywordMap.put(bigKey,
+                  big.toBuilder().setStrength(Math.min(1, big.getStrength() - 1)).build());
+              ArticleKeyword little = keywordMap.get(littleKey);
+              keywordMap.put(littleKey,
+                  little.toBuilder().setStrength(little.getStrength() + 1).build());
+            }
           }
         } catch (DataInternalException e) {
           e.printStackTrace();

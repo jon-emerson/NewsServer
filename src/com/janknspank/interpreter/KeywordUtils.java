@@ -30,6 +30,7 @@ public class KeywordUtils {
         "commodities",
         "company",
         "corrections",
+        "crime",
         "department",
         "dialogue",
         "economy",

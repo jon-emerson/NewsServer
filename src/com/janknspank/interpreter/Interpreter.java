@@ -1,5 +1,6 @@
 package com.janknspank.interpreter;
 
+import java.io.IOException;
 import java.io.Reader;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,11 +29,22 @@ public class Interpreter {
   public static InterpretedData interpret(Url url)
       throws FetchException, ParserException, RequiredFieldException {
 
-    FetchResponse response = FETCHER.fetch(url);
-    if (response.getStatusCode() != HttpServletResponse.SC_OK) {
-      throw new FetchException("URL not found (" + response.getStatusCode() + ")");
+    FetchResponse response = null;
+    try {
+      response = FETCHER.fetch(url);
+      if (response.getStatusCode() != HttpServletResponse.SC_OK) {
+        throw new FetchException("URL not found (" + response.getStatusCode() + ")");
+      }
+      return interpret(url, response.getReader());
+    } finally {
+      try {
+        if (response != null) {
+          response.getReader().close();
+        }
+      } catch (IOException e) {
+        throw new FetchException("Could not close connection", e);
+      }
     }
-    return interpret(url, response.getReader());
   }
 
   /**
