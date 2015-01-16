@@ -44,7 +44,7 @@ public class Printer {
       }
       StorageMethod storageMethod =
           fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
-      if (storageMethod != StorageMethod.BLOB) {
+      if (storageMethod != StorageMethod.STANDARD) {
         decorations.add(storageMethod.name().toLowerCase());
       }
       if (fieldDescriptor.getOptions().getExtension(Extensions.clientSerialization) ==

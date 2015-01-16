@@ -2001,8 +2001,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-     * found in the article's meta tags.
+     * 'o' for organization, 'p' for person, 'l' for location
+     * @see com.janknspank.data.EntityType
      * </pre>
      */
     boolean hasType();
@@ -2010,8 +2010,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-     * found in the article's meta tags.
+     * 'o' for organization, 'p' for person, 'l' for location
+     * @see com.janknspank.data.EntityType
      * </pre>
      */
     java.lang.String getType();
@@ -2019,12 +2019,22 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-     * found in the article's meta tags.
+     * 'o' for organization, 'p' for person, 'l' for location
+     * @see com.janknspank.data.EntityType
      * </pre>
      */
     com.google.protobuf.ByteString
         getTypeBytes();
+
+    // optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];
+    /**
+     * <code>optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];</code>
+     */
+    boolean hasSource();
+    /**
+     * <code>optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];</code>
+     */
+    com.janknspank.proto.Core.ArticleKeyword.Source getSource();
   }
   /**
    * Protobuf type {@code ArticleKeyword}
@@ -2097,6 +2107,17 @@ public final class Core {
               type_ = input.readBytes();
               break;
             }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.Core.ArticleKeyword.Source value = com.janknspank.proto.Core.ArticleKeyword.Source.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(5, rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                source_ = value;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2134,6 +2155,106 @@ public final class Core {
     @java.lang.Override
     public com.google.protobuf.Parser<ArticleKeyword> getParserForType() {
       return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code ArticleKeyword.Source}
+     */
+    public enum Source
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>NLP = 1;</code>
+       */
+      NLP(1, 1),
+      /**
+       * <code>HYPERLINK = 2;</code>
+       */
+      HYPERLINK(2, 2),
+      /**
+       * <code>META_TAG = 3;</code>
+       */
+      META_TAG(3, 3),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>NLP = 1;</code>
+       */
+      public static final int NLP_VALUE = 1;
+      /**
+       * <code>HYPERLINK = 2;</code>
+       */
+      public static final int HYPERLINK_VALUE = 2;
+      /**
+       * <code>META_TAG = 3;</code>
+       */
+      public static final int META_TAG_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static Source valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return NLP;
+          case 2: return HYPERLINK;
+          case 3: return META_TAG;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Source>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Source>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Source>() {
+              public Source findValueByNumber(int number) {
+                return Source.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.Core.ArticleKeyword.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Source[] VALUES = values();
+
+      public static Source valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Source(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:ArticleKeyword.Source)
     }
 
     private int bitField0_;
@@ -2266,8 +2387,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-     * found in the article's meta tags.
+     * 'o' for organization, 'p' for person, 'l' for location
+     * @see com.janknspank.data.EntityType
      * </pre>
      */
     public boolean hasType() {
@@ -2277,8 +2398,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-     * found in the article's meta tags.
+     * 'o' for organization, 'p' for person, 'l' for location
+     * @see com.janknspank.data.EntityType
      * </pre>
      */
     public java.lang.String getType() {
@@ -2299,8 +2420,8 @@ public final class Core {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-     * found in the article's meta tags.
+     * 'o' for organization, 'p' for person, 'l' for location
+     * @see com.janknspank.data.EntityType
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -2317,11 +2438,28 @@ public final class Core {
       }
     }
 
+    // optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];
+    public static final int SOURCE_FIELD_NUMBER = 5;
+    private com.janknspank.proto.Core.ArticleKeyword.Source source_;
+    /**
+     * <code>optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];</code>
+     */
+    public boolean hasSource() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];</code>
+     */
+    public com.janknspank.proto.Core.ArticleKeyword.Source getSource() {
+      return source_;
+    }
+
     private void initFields() {
       urlId_ = "";
       keyword_ = "";
       strength_ = 0;
       type_ = "";
+      source_ = com.janknspank.proto.Core.ArticleKeyword.Source.UNKNOWN;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2347,6 +2485,9 @@ public final class Core {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getTypeBytes());
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeEnum(5, source_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2371,6 +2512,10 @@ public final class Core {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getTypeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, source_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2496,6 +2641,8 @@ public final class Core {
         bitField0_ = (bitField0_ & ~0x00000004);
         type_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        source_ = com.janknspank.proto.Core.ArticleKeyword.Source.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -2540,6 +2687,10 @@ public final class Core {
           to_bitField0_ |= 0x00000008;
         }
         result.type_ = type_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.source_ = source_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2573,6 +2724,9 @@ public final class Core {
           bitField0_ |= 0x00000008;
           type_ = other.type_;
           onChanged();
+        }
+        if (other.hasSource()) {
+          setSource(other.getSource());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2828,8 +2982,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-       * found in the article's meta tags.
+       * 'o' for organization, 'p' for person, 'l' for location
+       * @see com.janknspank.data.EntityType
        * </pre>
        */
       public boolean hasType() {
@@ -2839,8 +2993,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-       * found in the article's meta tags.
+       * 'o' for organization, 'p' for person, 'l' for location
+       * @see com.janknspank.data.EntityType
        * </pre>
        */
       public java.lang.String getType() {
@@ -2858,8 +3012,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-       * found in the article's meta tags.
+       * 'o' for organization, 'p' for person, 'l' for location
+       * @see com.janknspank.data.EntityType
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -2879,8 +3033,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-       * found in the article's meta tags.
+       * 'o' for organization, 'p' for person, 'l' for location
+       * @see com.janknspank.data.EntityType
        * </pre>
        */
       public Builder setType(
@@ -2897,8 +3051,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-       * found in the article's meta tags.
+       * 'o' for organization, 'p' for person, 'l' for location
+       * @see com.janknspank.data.EntityType
        * </pre>
        */
       public Builder clearType() {
@@ -2911,8 +3065,8 @@ public final class Core {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location, 'k' for keywords
-       * found in the article's meta tags.
+       * 'o' for organization, 'p' for person, 'l' for location
+       * @see com.janknspank.data.EntityType
        * </pre>
        */
       public Builder setTypeBytes(
@@ -2922,6 +3076,42 @@ public final class Core {
   }
   bitField0_ |= 0x00000008;
         type_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];
+      private com.janknspank.proto.Core.ArticleKeyword.Source source_ = com.janknspank.proto.Core.ArticleKeyword.Source.UNKNOWN;
+      /**
+       * <code>optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];</code>
+       */
+      public boolean hasSource() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];</code>
+       */
+      public com.janknspank.proto.Core.ArticleKeyword.Source getSource() {
+        return source_;
+      }
+      /**
+       * <code>optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];</code>
+       */
+      public Builder setSource(com.janknspank.proto.Core.ArticleKeyword.Source value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        source_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .ArticleKeyword.Source source = 5 [default = UNKNOWN];</code>
+       */
+      public Builder clearSource() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        source_ = com.janknspank.proto.Core.ArticleKeyword.Source.UNKNOWN;
         onChanged();
         return this;
       }
@@ -11905,6 +12095,80 @@ public final class Core {
      */
     com.google.protobuf.ByteString
         getTypeBytes();
+
+    // optional .Entity.Source source = 4;
+    /**
+     * <code>optional .Entity.Source source = 4;</code>
+     */
+    boolean hasSource();
+    /**
+     * <code>optional .Entity.Source source = 4;</code>
+     */
+    com.janknspank.proto.Core.Entity.Source getSource();
+
+    // optional string canonical_id = 5;
+    /**
+     * <code>optional string canonical_id = 5;</code>
+     *
+     * <pre>
+     * If this ID has been found to be semantically equivalent to another ID, this
+     * field points at the "canonical" version of this object.  E.g. if we find
+     * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+     * and would have canonical_id=NULL, while AngelList's Entity would have its
+     * canonical_id equal the Wikipedia Entity's id.
+     * </pre>
+     */
+    boolean hasCanonicalId();
+    /**
+     * <code>optional string canonical_id = 5;</code>
+     *
+     * <pre>
+     * If this ID has been found to be semantically equivalent to another ID, this
+     * field points at the "canonical" version of this object.  E.g. if we find
+     * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+     * and would have canonical_id=NULL, while AngelList's Entity would have its
+     * canonical_id equal the Wikipedia Entity's id.
+     * </pre>
+     */
+    java.lang.String getCanonicalId();
+    /**
+     * <code>optional string canonical_id = 5;</code>
+     *
+     * <pre>
+     * If this ID has been found to be semantically equivalent to another ID, this
+     * field points at the "canonical" version of this object.  E.g. if we find
+     * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+     * and would have canonical_id=NULL, while AngelList's Entity would have its
+     * canonical_id equal the Wikipedia Entity's id.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getCanonicalIdBytes();
+
+    // repeated .Entity.EntityTopic topic = 6;
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    java.util.List<com.janknspank.proto.Core.Entity.EntityTopic> 
+        getTopicList();
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    com.janknspank.proto.Core.Entity.EntityTopic getTopic(int index);
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    int getTopicCount();
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.Core.Entity.EntityTopicOrBuilder> 
+        getTopicOrBuilderList();
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    com.janknspank.proto.Core.Entity.EntityTopicOrBuilder getTopicOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code Entity}
@@ -11972,6 +12236,30 @@ public final class Core {
               type_ = input.readBytes();
               break;
             }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.Core.Entity.Source value = com.janknspank.proto.Core.Entity.Source.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                source_ = value;
+              }
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              canonicalId_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                topic_ = new java.util.ArrayList<com.janknspank.proto.Core.Entity.EntityTopic>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              topic_.add(input.readMessage(com.janknspank.proto.Core.Entity.EntityTopic.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -11980,6 +12268,9 @@ public final class Core {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          topic_ = java.util.Collections.unmodifiableList(topic_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -12009,6 +12300,1274 @@ public final class Core {
     @java.lang.Override
     public com.google.protobuf.Parser<Entity> getParserForType() {
       return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code Entity.Source}
+     */
+    public enum Source
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>DBPEDIA_INSTANCE_TYPE = 1;</code>
+       */
+      DBPEDIA_INSTANCE_TYPE(1, 1),
+      /**
+       * <code>DBPEDIA_LONG_ABSTRACT = 2;</code>
+       */
+      DBPEDIA_LONG_ABSTRACT(2, 2),
+      /**
+       * <code>ANGELLIST = 3;</code>
+       */
+      ANGELLIST(3, 3),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>DBPEDIA_INSTANCE_TYPE = 1;</code>
+       */
+      public static final int DBPEDIA_INSTANCE_TYPE_VALUE = 1;
+      /**
+       * <code>DBPEDIA_LONG_ABSTRACT = 2;</code>
+       */
+      public static final int DBPEDIA_LONG_ABSTRACT_VALUE = 2;
+      /**
+       * <code>ANGELLIST = 3;</code>
+       */
+      public static final int ANGELLIST_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static Source valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return DBPEDIA_INSTANCE_TYPE;
+          case 2: return DBPEDIA_LONG_ABSTRACT;
+          case 3: return ANGELLIST;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Source>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Source>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Source>() {
+              public Source findValueByNumber(int number) {
+                return Source.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.Core.Entity.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Source[] VALUES = values();
+
+      public static Source valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Source(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:Entity.Source)
+    }
+
+    public interface EntityTopicOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional string entity_id = 1;
+      /**
+       * <code>optional string entity_id = 1;</code>
+       */
+      boolean hasEntityId();
+      /**
+       * <code>optional string entity_id = 1;</code>
+       */
+      java.lang.String getEntityId();
+      /**
+       * <code>optional string entity_id = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getEntityIdBytes();
+
+      // optional string keyword = 2;
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      boolean hasKeyword();
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      java.lang.String getKeyword();
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getKeywordBytes();
+
+      // optional string type = 3;
+      /**
+       * <code>optional string type = 3;</code>
+       *
+       * <pre>
+       * same l/o/p types as Entities have
+       * </pre>
+       */
+      boolean hasType();
+      /**
+       * <code>optional string type = 3;</code>
+       *
+       * <pre>
+       * same l/o/p types as Entities have
+       * </pre>
+       */
+      java.lang.String getType();
+      /**
+       * <code>optional string type = 3;</code>
+       *
+       * <pre>
+       * same l/o/p types as Entities have
+       * </pre>
+       */
+      com.google.protobuf.ByteString
+          getTypeBytes();
+
+      // optional int32 strength = 4;
+      /**
+       * <code>optional int32 strength = 4;</code>
+       *
+       * <pre>
+       * Number of occurrences + other factors.
+       * </pre>
+       */
+      boolean hasStrength();
+      /**
+       * <code>optional int32 strength = 4;</code>
+       *
+       * <pre>
+       * Number of occurrences + other factors.
+       * </pre>
+       */
+      int getStrength();
+
+      // optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];
+      /**
+       * <code>optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];</code>
+       */
+      boolean hasContext();
+      /**
+       * <code>optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];</code>
+       */
+      com.janknspank.proto.Core.Entity.EntityTopic.Context getContext();
+    }
+    /**
+     * Protobuf type {@code Entity.EntityTopic}
+     *
+     * <pre>
+     * These are unique things about an Entity to disambiguate it from other
+     * Entities that might be expressed using the same string.  E.g. there are
+     * many Kevin Rose's in the world, but only one that started Digg and worked
+     * for Google Ventures.  The guy from Digg would have "Digg" and "Google
+     * Ventures" as high-strengthed topics in his Entity.
+     * </pre>
+     */
+    public static final class EntityTopic extends
+        com.google.protobuf.GeneratedMessage
+        implements EntityTopicOrBuilder {
+      // Use EntityTopic.newBuilder() to construct.
+      private EntityTopic(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private EntityTopic(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final EntityTopic defaultInstance;
+      public static EntityTopic getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public EntityTopic getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private EntityTopic(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                entityId_ = input.readBytes();
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000002;
+                keyword_ = input.readBytes();
+                break;
+              }
+              case 26: {
+                bitField0_ |= 0x00000004;
+                type_ = input.readBytes();
+                break;
+              }
+              case 32: {
+                bitField0_ |= 0x00000008;
+                strength_ = input.readInt32();
+                break;
+              }
+              case 40: {
+                int rawValue = input.readEnum();
+                com.janknspank.proto.Core.Entity.EntityTopic.Context value = com.janknspank.proto.Core.Entity.EntityTopic.Context.valueOf(rawValue);
+                if (value == null) {
+                  unknownFields.mergeVarintField(5, rawValue);
+                } else {
+                  bitField0_ |= 0x00000010;
+                  context_ = value;
+                }
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.Core.internal_static_Entity_EntityTopic_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.Core.internal_static_Entity_EntityTopic_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.Core.Entity.EntityTopic.class, com.janknspank.proto.Core.Entity.EntityTopic.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<EntityTopic> PARSER =
+          new com.google.protobuf.AbstractParser<EntityTopic>() {
+        public EntityTopic parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new EntityTopic(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<EntityTopic> getParserForType() {
+        return PARSER;
+      }
+
+      /**
+       * Protobuf enum {@code Entity.EntityTopic.Context}
+       */
+      public enum Context
+          implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>UNKNOWN = 0;</code>
+         */
+        UNKNOWN(0, 0),
+        /**
+         * <code>ANGELLIST_WORKED_AT = 1;</code>
+         */
+        ANGELLIST_WORKED_AT(1, 1),
+        /**
+         * <code>ANGELLIST_FOUNDED = 2;</code>
+         */
+        ANGELLIST_FOUNDED(2, 2),
+        /**
+         * <code>ANGELLIST_INVESTED_IN = 3;</code>
+         */
+        ANGELLIST_INVESTED_IN(3, 3),
+        /**
+         * <code>ANGELLIST_ADVISED = 4;</code>
+         */
+        ANGELLIST_ADVISED(4, 4),
+        /**
+         * <code>WIKIPEDIA_SUBTOPIC = 5;</code>
+         */
+        WIKIPEDIA_SUBTOPIC(5, 5),
+        ;
+
+        /**
+         * <code>UNKNOWN = 0;</code>
+         */
+        public static final int UNKNOWN_VALUE = 0;
+        /**
+         * <code>ANGELLIST_WORKED_AT = 1;</code>
+         */
+        public static final int ANGELLIST_WORKED_AT_VALUE = 1;
+        /**
+         * <code>ANGELLIST_FOUNDED = 2;</code>
+         */
+        public static final int ANGELLIST_FOUNDED_VALUE = 2;
+        /**
+         * <code>ANGELLIST_INVESTED_IN = 3;</code>
+         */
+        public static final int ANGELLIST_INVESTED_IN_VALUE = 3;
+        /**
+         * <code>ANGELLIST_ADVISED = 4;</code>
+         */
+        public static final int ANGELLIST_ADVISED_VALUE = 4;
+        /**
+         * <code>WIKIPEDIA_SUBTOPIC = 5;</code>
+         */
+        public static final int WIKIPEDIA_SUBTOPIC_VALUE = 5;
+
+
+        public final int getNumber() { return value; }
+
+        public static Context valueOf(int value) {
+          switch (value) {
+            case 0: return UNKNOWN;
+            case 1: return ANGELLIST_WORKED_AT;
+            case 2: return ANGELLIST_FOUNDED;
+            case 3: return ANGELLIST_INVESTED_IN;
+            case 4: return ANGELLIST_ADVISED;
+            case 5: return WIKIPEDIA_SUBTOPIC;
+            default: return null;
+          }
+        }
+
+        public static com.google.protobuf.Internal.EnumLiteMap<Context>
+            internalGetValueMap() {
+          return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<Context>
+            internalValueMap =
+              new com.google.protobuf.Internal.EnumLiteMap<Context>() {
+                public Context findValueByNumber(int number) {
+                  return Context.valueOf(number);
+                }
+              };
+
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
+            getValueDescriptor() {
+          return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
+            getDescriptorForType() {
+          return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
+            getDescriptor() {
+          return com.janknspank.proto.Core.Entity.EntityTopic.getDescriptor().getEnumTypes().get(0);
+        }
+
+        private static final Context[] VALUES = values();
+
+        public static Context valueOf(
+            com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+          if (desc.getType() != getDescriptor()) {
+            throw new java.lang.IllegalArgumentException(
+              "EnumValueDescriptor is not for this type.");
+          }
+          return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private Context(int index, int value) {
+          this.index = index;
+          this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:Entity.EntityTopic.Context)
+      }
+
+      private int bitField0_;
+      // optional string entity_id = 1;
+      public static final int ENTITY_ID_FIELD_NUMBER = 1;
+      private java.lang.Object entityId_;
+      /**
+       * <code>optional string entity_id = 1;</code>
+       */
+      public boolean hasEntityId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string entity_id = 1;</code>
+       */
+      public java.lang.String getEntityId() {
+        java.lang.Object ref = entityId_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            entityId_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string entity_id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEntityIdBytes() {
+        java.lang.Object ref = entityId_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          entityId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional string keyword = 2;
+      public static final int KEYWORD_FIELD_NUMBER = 2;
+      private java.lang.Object keyword_;
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public boolean hasKeyword() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public java.lang.String getKeyword() {
+        java.lang.Object ref = keyword_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            keyword_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeywordBytes() {
+        java.lang.Object ref = keyword_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          keyword_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional string type = 3;
+      public static final int TYPE_FIELD_NUMBER = 3;
+      private java.lang.Object type_;
+      /**
+       * <code>optional string type = 3;</code>
+       *
+       * <pre>
+       * same l/o/p types as Entities have
+       * </pre>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string type = 3;</code>
+       *
+       * <pre>
+       * same l/o/p types as Entities have
+       * </pre>
+       */
+      public java.lang.String getType() {
+        java.lang.Object ref = type_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            type_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string type = 3;</code>
+       *
+       * <pre>
+       * same l/o/p types as Entities have
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTypeBytes() {
+        java.lang.Object ref = type_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          type_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional int32 strength = 4;
+      public static final int STRENGTH_FIELD_NUMBER = 4;
+      private int strength_;
+      /**
+       * <code>optional int32 strength = 4;</code>
+       *
+       * <pre>
+       * Number of occurrences + other factors.
+       * </pre>
+       */
+      public boolean hasStrength() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 strength = 4;</code>
+       *
+       * <pre>
+       * Number of occurrences + other factors.
+       * </pre>
+       */
+      public int getStrength() {
+        return strength_;
+      }
+
+      // optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];
+      public static final int CONTEXT_FIELD_NUMBER = 5;
+      private com.janknspank.proto.Core.Entity.EntityTopic.Context context_;
+      /**
+       * <code>optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];</code>
+       */
+      public boolean hasContext() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];</code>
+       */
+      public com.janknspank.proto.Core.Entity.EntityTopic.Context getContext() {
+        return context_;
+      }
+
+      private void initFields() {
+        entityId_ = "";
+        keyword_ = "";
+        type_ = "";
+        strength_ = 0;
+        context_ = com.janknspank.proto.Core.Entity.EntityTopic.Context.UNKNOWN;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getEntityIdBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, getKeywordBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeBytes(3, getTypeBytes());
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeInt32(4, strength_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          output.writeEnum(5, context_.getNumber());
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getEntityIdBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, getKeywordBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(3, getTypeBytes());
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(4, strength_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeEnumSize(5, context_.getNumber());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.Core.Entity.EntityTopic parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.Core.Entity.EntityTopic prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code Entity.EntityTopic}
+       *
+       * <pre>
+       * These are unique things about an Entity to disambiguate it from other
+       * Entities that might be expressed using the same string.  E.g. there are
+       * many Kevin Rose's in the world, but only one that started Digg and worked
+       * for Google Ventures.  The guy from Digg would have "Digg" and "Google
+       * Ventures" as high-strengthed topics in his Entity.
+       * </pre>
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.Core.Entity.EntityTopicOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.Core.internal_static_Entity_EntityTopic_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.Core.internal_static_Entity_EntityTopic_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.Core.Entity.EntityTopic.class, com.janknspank.proto.Core.Entity.EntityTopic.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.Core.Entity.EntityTopic.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          entityId_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          keyword_ = "";
+          bitField0_ = (bitField0_ & ~0x00000002);
+          type_ = "";
+          bitField0_ = (bitField0_ & ~0x00000004);
+          strength_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000008);
+          context_ = com.janknspank.proto.Core.Entity.EntityTopic.Context.UNKNOWN;
+          bitField0_ = (bitField0_ & ~0x00000010);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.Core.internal_static_Entity_EntityTopic_descriptor;
+        }
+
+        public com.janknspank.proto.Core.Entity.EntityTopic getDefaultInstanceForType() {
+          return com.janknspank.proto.Core.Entity.EntityTopic.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.Core.Entity.EntityTopic build() {
+          com.janknspank.proto.Core.Entity.EntityTopic result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.Core.Entity.EntityTopic buildPartial() {
+          com.janknspank.proto.Core.Entity.EntityTopic result = new com.janknspank.proto.Core.Entity.EntityTopic(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.entityId_ = entityId_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.keyword_ = keyword_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.type_ = type_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.strength_ = strength_;
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          result.context_ = context_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.Core.Entity.EntityTopic) {
+            return mergeFrom((com.janknspank.proto.Core.Entity.EntityTopic)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.Core.Entity.EntityTopic other) {
+          if (other == com.janknspank.proto.Core.Entity.EntityTopic.getDefaultInstance()) return this;
+          if (other.hasEntityId()) {
+            bitField0_ |= 0x00000001;
+            entityId_ = other.entityId_;
+            onChanged();
+          }
+          if (other.hasKeyword()) {
+            bitField0_ |= 0x00000002;
+            keyword_ = other.keyword_;
+            onChanged();
+          }
+          if (other.hasType()) {
+            bitField0_ |= 0x00000004;
+            type_ = other.type_;
+            onChanged();
+          }
+          if (other.hasStrength()) {
+            setStrength(other.getStrength());
+          }
+          if (other.hasContext()) {
+            setContext(other.getContext());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.Core.Entity.EntityTopic parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.Core.Entity.EntityTopic) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional string entity_id = 1;
+        private java.lang.Object entityId_ = "";
+        /**
+         * <code>optional string entity_id = 1;</code>
+         */
+        public boolean hasEntityId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional string entity_id = 1;</code>
+         */
+        public java.lang.String getEntityId() {
+          java.lang.Object ref = entityId_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            entityId_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string entity_id = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getEntityIdBytes() {
+          java.lang.Object ref = entityId_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            entityId_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string entity_id = 1;</code>
+         */
+        public Builder setEntityId(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          entityId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string entity_id = 1;</code>
+         */
+        public Builder clearEntityId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          entityId_ = getDefaultInstance().getEntityId();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string entity_id = 1;</code>
+         */
+        public Builder setEntityIdBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          entityId_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional string keyword = 2;
+        private java.lang.Object keyword_ = "";
+        /**
+         * <code>optional string keyword = 2;</code>
+         */
+        public boolean hasKeyword() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional string keyword = 2;</code>
+         */
+        public java.lang.String getKeyword() {
+          java.lang.Object ref = keyword_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            keyword_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string keyword = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getKeywordBytes() {
+          java.lang.Object ref = keyword_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            keyword_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string keyword = 2;</code>
+         */
+        public Builder setKeyword(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          keyword_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string keyword = 2;</code>
+         */
+        public Builder clearKeyword() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          keyword_ = getDefaultInstance().getKeyword();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string keyword = 2;</code>
+         */
+        public Builder setKeywordBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          keyword_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional string type = 3;
+        private java.lang.Object type_ = "";
+        /**
+         * <code>optional string type = 3;</code>
+         *
+         * <pre>
+         * same l/o/p types as Entities have
+         * </pre>
+         */
+        public boolean hasType() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional string type = 3;</code>
+         *
+         * <pre>
+         * same l/o/p types as Entities have
+         * </pre>
+         */
+        public java.lang.String getType() {
+          java.lang.Object ref = type_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            type_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string type = 3;</code>
+         *
+         * <pre>
+         * same l/o/p types as Entities have
+         * </pre>
+         */
+        public com.google.protobuf.ByteString
+            getTypeBytes() {
+          java.lang.Object ref = type_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            type_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string type = 3;</code>
+         *
+         * <pre>
+         * same l/o/p types as Entities have
+         * </pre>
+         */
+        public Builder setType(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          type_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string type = 3;</code>
+         *
+         * <pre>
+         * same l/o/p types as Entities have
+         * </pre>
+         */
+        public Builder clearType() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          type_ = getDefaultInstance().getType();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string type = 3;</code>
+         *
+         * <pre>
+         * same l/o/p types as Entities have
+         * </pre>
+         */
+        public Builder setTypeBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          type_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 strength = 4;
+        private int strength_ ;
+        /**
+         * <code>optional int32 strength = 4;</code>
+         *
+         * <pre>
+         * Number of occurrences + other factors.
+         * </pre>
+         */
+        public boolean hasStrength() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        /**
+         * <code>optional int32 strength = 4;</code>
+         *
+         * <pre>
+         * Number of occurrences + other factors.
+         * </pre>
+         */
+        public int getStrength() {
+          return strength_;
+        }
+        /**
+         * <code>optional int32 strength = 4;</code>
+         *
+         * <pre>
+         * Number of occurrences + other factors.
+         * </pre>
+         */
+        public Builder setStrength(int value) {
+          bitField0_ |= 0x00000008;
+          strength_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 strength = 4;</code>
+         *
+         * <pre>
+         * Number of occurrences + other factors.
+         * </pre>
+         */
+        public Builder clearStrength() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          strength_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];
+        private com.janknspank.proto.Core.Entity.EntityTopic.Context context_ = com.janknspank.proto.Core.Entity.EntityTopic.Context.UNKNOWN;
+        /**
+         * <code>optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];</code>
+         */
+        public boolean hasContext() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];</code>
+         */
+        public com.janknspank.proto.Core.Entity.EntityTopic.Context getContext() {
+          return context_;
+        }
+        /**
+         * <code>optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];</code>
+         */
+        public Builder setContext(com.janknspank.proto.Core.Entity.EntityTopic.Context value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          bitField0_ |= 0x00000010;
+          context_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional .Entity.EntityTopic.Context context = 5 [default = UNKNOWN];</code>
+         */
+        public Builder clearContext() {
+          bitField0_ = (bitField0_ & ~0x00000010);
+          context_ = com.janknspank.proto.Core.Entity.EntityTopic.Context.UNKNOWN;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:Entity.EntityTopic)
+      }
+
+      static {
+        defaultInstance = new EntityTopic(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:Entity.EntityTopic)
     }
 
     private int bitField0_;
@@ -12141,10 +13700,132 @@ public final class Core {
       }
     }
 
+    // optional .Entity.Source source = 4;
+    public static final int SOURCE_FIELD_NUMBER = 4;
+    private com.janknspank.proto.Core.Entity.Source source_;
+    /**
+     * <code>optional .Entity.Source source = 4;</code>
+     */
+    public boolean hasSource() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .Entity.Source source = 4;</code>
+     */
+    public com.janknspank.proto.Core.Entity.Source getSource() {
+      return source_;
+    }
+
+    // optional string canonical_id = 5;
+    public static final int CANONICAL_ID_FIELD_NUMBER = 5;
+    private java.lang.Object canonicalId_;
+    /**
+     * <code>optional string canonical_id = 5;</code>
+     *
+     * <pre>
+     * If this ID has been found to be semantically equivalent to another ID, this
+     * field points at the "canonical" version of this object.  E.g. if we find
+     * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+     * and would have canonical_id=NULL, while AngelList's Entity would have its
+     * canonical_id equal the Wikipedia Entity's id.
+     * </pre>
+     */
+    public boolean hasCanonicalId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string canonical_id = 5;</code>
+     *
+     * <pre>
+     * If this ID has been found to be semantically equivalent to another ID, this
+     * field points at the "canonical" version of this object.  E.g. if we find
+     * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+     * and would have canonical_id=NULL, while AngelList's Entity would have its
+     * canonical_id equal the Wikipedia Entity's id.
+     * </pre>
+     */
+    public java.lang.String getCanonicalId() {
+      java.lang.Object ref = canonicalId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          canonicalId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string canonical_id = 5;</code>
+     *
+     * <pre>
+     * If this ID has been found to be semantically equivalent to another ID, this
+     * field points at the "canonical" version of this object.  E.g. if we find
+     * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+     * and would have canonical_id=NULL, while AngelList's Entity would have its
+     * canonical_id equal the Wikipedia Entity's id.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getCanonicalIdBytes() {
+      java.lang.Object ref = canonicalId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        canonicalId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // repeated .Entity.EntityTopic topic = 6;
+    public static final int TOPIC_FIELD_NUMBER = 6;
+    private java.util.List<com.janknspank.proto.Core.Entity.EntityTopic> topic_;
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    public java.util.List<com.janknspank.proto.Core.Entity.EntityTopic> getTopicList() {
+      return topic_;
+    }
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.Core.Entity.EntityTopicOrBuilder> 
+        getTopicOrBuilderList() {
+      return topic_;
+    }
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    public int getTopicCount() {
+      return topic_.size();
+    }
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    public com.janknspank.proto.Core.Entity.EntityTopic getTopic(int index) {
+      return topic_.get(index);
+    }
+    /**
+     * <code>repeated .Entity.EntityTopic topic = 6;</code>
+     */
+    public com.janknspank.proto.Core.Entity.EntityTopicOrBuilder getTopicOrBuilder(
+        int index) {
+      return topic_.get(index);
+    }
+
     private void initFields() {
       id_ = "";
       keyword_ = "";
       type_ = "";
+      source_ = com.janknspank.proto.Core.Entity.Source.UNKNOWN;
+      canonicalId_ = "";
+      topic_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -12167,6 +13848,15 @@ public final class Core {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getTypeBytes());
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, source_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getCanonicalIdBytes());
+      }
+      for (int i = 0; i < topic_.size(); i++) {
+        output.writeMessage(6, topic_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -12187,6 +13877,18 @@ public final class Core {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getTypeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, source_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getCanonicalIdBytes());
+      }
+      for (int i = 0; i < topic_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, topic_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -12296,6 +13998,7 @@ public final class Core {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getTopicFieldBuilder();
         }
       }
       private static Builder create() {
@@ -12310,6 +14013,16 @@ public final class Core {
         bitField0_ = (bitField0_ & ~0x00000002);
         type_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        source_ = com.janknspank.proto.Core.Entity.Source.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        canonicalId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        if (topicBuilder_ == null) {
+          topic_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          topicBuilder_.clear();
+        }
         return this;
       }
 
@@ -12350,6 +14063,23 @@ public final class Core {
           to_bitField0_ |= 0x00000004;
         }
         result.type_ = type_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.source_ = source_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.canonicalId_ = canonicalId_;
+        if (topicBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            topic_ = java.util.Collections.unmodifiableList(topic_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.topic_ = topic_;
+        } else {
+          result.topic_ = topicBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -12380,6 +14110,40 @@ public final class Core {
           bitField0_ |= 0x00000004;
           type_ = other.type_;
           onChanged();
+        }
+        if (other.hasSource()) {
+          setSource(other.getSource());
+        }
+        if (other.hasCanonicalId()) {
+          bitField0_ |= 0x00000010;
+          canonicalId_ = other.canonicalId_;
+          onChanged();
+        }
+        if (topicBuilder_ == null) {
+          if (!other.topic_.isEmpty()) {
+            if (topic_.isEmpty()) {
+              topic_ = other.topic_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureTopicIsMutable();
+              topic_.addAll(other.topic_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.topic_.isEmpty()) {
+            if (topicBuilder_.isEmpty()) {
+              topicBuilder_.dispose();
+              topicBuilder_ = null;
+              topic_ = other.topic_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              topicBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getTopicFieldBuilder() : null;
+            } else {
+              topicBuilder_.addAllMessages(other.topic_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -12630,6 +14394,404 @@ public final class Core {
         return this;
       }
 
+      // optional .Entity.Source source = 4;
+      private com.janknspank.proto.Core.Entity.Source source_ = com.janknspank.proto.Core.Entity.Source.UNKNOWN;
+      /**
+       * <code>optional .Entity.Source source = 4;</code>
+       */
+      public boolean hasSource() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .Entity.Source source = 4;</code>
+       */
+      public com.janknspank.proto.Core.Entity.Source getSource() {
+        return source_;
+      }
+      /**
+       * <code>optional .Entity.Source source = 4;</code>
+       */
+      public Builder setSource(com.janknspank.proto.Core.Entity.Source value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        source_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .Entity.Source source = 4;</code>
+       */
+      public Builder clearSource() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        source_ = com.janknspank.proto.Core.Entity.Source.UNKNOWN;
+        onChanged();
+        return this;
+      }
+
+      // optional string canonical_id = 5;
+      private java.lang.Object canonicalId_ = "";
+      /**
+       * <code>optional string canonical_id = 5;</code>
+       *
+       * <pre>
+       * If this ID has been found to be semantically equivalent to another ID, this
+       * field points at the "canonical" version of this object.  E.g. if we find
+       * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+       * and would have canonical_id=NULL, while AngelList's Entity would have its
+       * canonical_id equal the Wikipedia Entity's id.
+       * </pre>
+       */
+      public boolean hasCanonicalId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string canonical_id = 5;</code>
+       *
+       * <pre>
+       * If this ID has been found to be semantically equivalent to another ID, this
+       * field points at the "canonical" version of this object.  E.g. if we find
+       * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+       * and would have canonical_id=NULL, while AngelList's Entity would have its
+       * canonical_id equal the Wikipedia Entity's id.
+       * </pre>
+       */
+      public java.lang.String getCanonicalId() {
+        java.lang.Object ref = canonicalId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          canonicalId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string canonical_id = 5;</code>
+       *
+       * <pre>
+       * If this ID has been found to be semantically equivalent to another ID, this
+       * field points at the "canonical" version of this object.  E.g. if we find
+       * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+       * and would have canonical_id=NULL, while AngelList's Entity would have its
+       * canonical_id equal the Wikipedia Entity's id.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getCanonicalIdBytes() {
+        java.lang.Object ref = canonicalId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          canonicalId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string canonical_id = 5;</code>
+       *
+       * <pre>
+       * If this ID has been found to be semantically equivalent to another ID, this
+       * field points at the "canonical" version of this object.  E.g. if we find
+       * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+       * and would have canonical_id=NULL, while AngelList's Entity would have its
+       * canonical_id equal the Wikipedia Entity's id.
+       * </pre>
+       */
+      public Builder setCanonicalId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        canonicalId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string canonical_id = 5;</code>
+       *
+       * <pre>
+       * If this ID has been found to be semantically equivalent to another ID, this
+       * field points at the "canonical" version of this object.  E.g. if we find
+       * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+       * and would have canonical_id=NULL, while AngelList's Entity would have its
+       * canonical_id equal the Wikipedia Entity's id.
+       * </pre>
+       */
+      public Builder clearCanonicalId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        canonicalId_ = getDefaultInstance().getCanonicalId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string canonical_id = 5;</code>
+       *
+       * <pre>
+       * If this ID has been found to be semantically equivalent to another ID, this
+       * field points at the "canonical" version of this object.  E.g. if we find
+       * Google in Wikipedia and AngelList, the Wikipedia Entity would be canonical
+       * and would have canonical_id=NULL, while AngelList's Entity would have its
+       * canonical_id equal the Wikipedia Entity's id.
+       * </pre>
+       */
+      public Builder setCanonicalIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        canonicalId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // repeated .Entity.EntityTopic topic = 6;
+      private java.util.List<com.janknspank.proto.Core.Entity.EntityTopic> topic_ =
+        java.util.Collections.emptyList();
+      private void ensureTopicIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          topic_ = new java.util.ArrayList<com.janknspank.proto.Core.Entity.EntityTopic>(topic_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.Core.Entity.EntityTopic, com.janknspank.proto.Core.Entity.EntityTopic.Builder, com.janknspank.proto.Core.Entity.EntityTopicOrBuilder> topicBuilder_;
+
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public java.util.List<com.janknspank.proto.Core.Entity.EntityTopic> getTopicList() {
+        if (topicBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(topic_);
+        } else {
+          return topicBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public int getTopicCount() {
+        if (topicBuilder_ == null) {
+          return topic_.size();
+        } else {
+          return topicBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public com.janknspank.proto.Core.Entity.EntityTopic getTopic(int index) {
+        if (topicBuilder_ == null) {
+          return topic_.get(index);
+        } else {
+          return topicBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder setTopic(
+          int index, com.janknspank.proto.Core.Entity.EntityTopic value) {
+        if (topicBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTopicIsMutable();
+          topic_.set(index, value);
+          onChanged();
+        } else {
+          topicBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder setTopic(
+          int index, com.janknspank.proto.Core.Entity.EntityTopic.Builder builderForValue) {
+        if (topicBuilder_ == null) {
+          ensureTopicIsMutable();
+          topic_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          topicBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder addTopic(com.janknspank.proto.Core.Entity.EntityTopic value) {
+        if (topicBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTopicIsMutable();
+          topic_.add(value);
+          onChanged();
+        } else {
+          topicBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder addTopic(
+          int index, com.janknspank.proto.Core.Entity.EntityTopic value) {
+        if (topicBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTopicIsMutable();
+          topic_.add(index, value);
+          onChanged();
+        } else {
+          topicBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder addTopic(
+          com.janknspank.proto.Core.Entity.EntityTopic.Builder builderForValue) {
+        if (topicBuilder_ == null) {
+          ensureTopicIsMutable();
+          topic_.add(builderForValue.build());
+          onChanged();
+        } else {
+          topicBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder addTopic(
+          int index, com.janknspank.proto.Core.Entity.EntityTopic.Builder builderForValue) {
+        if (topicBuilder_ == null) {
+          ensureTopicIsMutable();
+          topic_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          topicBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder addAllTopic(
+          java.lang.Iterable<? extends com.janknspank.proto.Core.Entity.EntityTopic> values) {
+        if (topicBuilder_ == null) {
+          ensureTopicIsMutable();
+          super.addAll(values, topic_);
+          onChanged();
+        } else {
+          topicBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder clearTopic() {
+        if (topicBuilder_ == null) {
+          topic_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+        } else {
+          topicBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public Builder removeTopic(int index) {
+        if (topicBuilder_ == null) {
+          ensureTopicIsMutable();
+          topic_.remove(index);
+          onChanged();
+        } else {
+          topicBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public com.janknspank.proto.Core.Entity.EntityTopic.Builder getTopicBuilder(
+          int index) {
+        return getTopicFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public com.janknspank.proto.Core.Entity.EntityTopicOrBuilder getTopicOrBuilder(
+          int index) {
+        if (topicBuilder_ == null) {
+          return topic_.get(index);  } else {
+          return topicBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.Core.Entity.EntityTopicOrBuilder> 
+           getTopicOrBuilderList() {
+        if (topicBuilder_ != null) {
+          return topicBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(topic_);
+        }
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public com.janknspank.proto.Core.Entity.EntityTopic.Builder addTopicBuilder() {
+        return getTopicFieldBuilder().addBuilder(
+            com.janknspank.proto.Core.Entity.EntityTopic.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public com.janknspank.proto.Core.Entity.EntityTopic.Builder addTopicBuilder(
+          int index) {
+        return getTopicFieldBuilder().addBuilder(
+            index, com.janknspank.proto.Core.Entity.EntityTopic.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Entity.EntityTopic topic = 6;</code>
+       */
+      public java.util.List<com.janknspank.proto.Core.Entity.EntityTopic.Builder> 
+           getTopicBuilderList() {
+        return getTopicFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.Core.Entity.EntityTopic, com.janknspank.proto.Core.Entity.EntityTopic.Builder, com.janknspank.proto.Core.Entity.EntityTopicOrBuilder> 
+          getTopicFieldBuilder() {
+        if (topicBuilder_ == null) {
+          topicBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.Core.Entity.EntityTopic, com.janknspank.proto.Core.Entity.EntityTopic.Builder, com.janknspank.proto.Core.Entity.EntityTopicOrBuilder>(
+                  topic_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  getParentForChildren(),
+                  isClean());
+          topic_ = null;
+        }
+        return topicBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:Entity)
     }
 
@@ -12706,6 +14868,11 @@ public final class Core {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Entity_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_Entity_EntityTopic_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Entity_EntityTopic_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -12716,58 +14883,76 @@ public final class Core {
   static {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/core.proto\032%com/j" +
-      "anknspank/proto/extensions.proto\"\271\002\n\007Art" +
-      "icle\022\034\n\006url_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\026\n\003ur" +
-      "l\030\002 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\034\n\005title\030\003 \001(\tB\r\210\246\035\001\220" +
-      "\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\030\022\025\n\006author\030\005" +
-      " \001(\tB\005\230\246\035\200\002\022\030\n\tcopyright\030\006 \001(\tB\005\230\246\035\200\002\022\036\n" +
-      "\013description\030\007 \001(\tB\t\210\246\035\001\230\246\035\200\020\022\030\n\timage_u" +
-      "rl\030\010 \001(\tB\005\230\246\035\200\020\022\034\n\tparagraph\030\r \003(\tB\t\240\246\035\003" +
-      "\230\246\035\200P\022 \n\016published_time\030\n \001(\003B\010\210\246\035\001\220\246\035\003\022" +
-      "\025\n\rmodified_time\030\013 \001(\003*\004\010\t\020\n\"\205\001\n\016Article",
-      "Keyword\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\240\246\035" +
-      "\003\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010stre" +
-      "ngth\030\003 \001(\005B\004\210\246\035\001\022\032\n\004type\030\004 \001(\tB\014\210\246\035\001\220\246\035\005" +
-      "\230\246\035\001\"\222\001\n\004Link\022#\n\rorigin_url_id\030\001 \001(\tB\014\210\246" +
-      "\035\001\220\246\035\003\230\246\035\030\022(\n\022destination_url_id\030\002 \001(\tB\014" +
-      "\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246" +
-      "\035\001\022\035\n\017last_found_time\030\004 \001(\003B\004\210\246\035\001\"\355\001\n\003Ur" +
-      "l\022\032\n\003url\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377\005\022\030\n\002id\030\002 \001(" +
-      "\tB\014\210\246\035\001\220\246\035\004\230\246\035\030\022\031\n\013tweet_count\030\003 \001(\003B\004\210\246" +
-      "\035\001\022 \n\016discovery_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025",
-      "last_crawl_start_time\030\005 \001(\003B\010\220\246\035\005\240\246\035\003\022(\n" +
-      "\026last_crawl_finish_time\030\006 \001(\003B\010\220\246\035\005\240\246\035\003\022" +
-      " \n\016crawl_priority\030\007 \001(\003B\010\220\246\035\003\240\246\035\003\"\365\001\n\004Us" +
-      "er\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\022\n\004name\030\002 \001" +
-      "(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n" +
-      "\014linked_in_id\030\004 \001(\tB\004\230\246\035\030\022\031\n\013facebook_id" +
-      "\030\005 \001(\tB\004\230\246\035\030\022\031\n\013create_time\030\007 \001(\003B\004\210\246\035\001\022" +
-      "\027\n\017last_login_time\030\010 \001(\003\0221\n\026linked_in_ac" +
-      "cess_token\030\t \001(\tB\021\210\246\035\001\220\246\035\005\230\246\035\364\003\240\246\035\003*\004\010\006\020" +
-      "\007\"g\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220",
-      "\246\035\002\230\246\035\200\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022" +
-      "\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"e\n\017LinkedInPr" +
-      "ofile\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004" +
-      "data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 " +
-      "\001(\003B\004\210\246\035\001\"i\n\023LinkedInConnections\022\035\n\007user" +
-      "_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\030\n\004data\030\002 \001(\tB\n\210" +
-      "\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"a\n\013" +
-      "AddressBook\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246" +
-      "\035\030\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_t" +
-      "ime\030\003 \001(\003B\004\210\246\035\001\"}\n\rUserUrlRating\022\035\n\007user",
-      "_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_id\030\002 \001(\tB" +
-      "\014\210\246\035\001\220\246\035\003\230\246\035\030\022\024\n\006rating\030\003 \001(\005B\004\210\246\035\001\022\031\n\013c" +
-      "reate_time\030\004 \001(\003B\004\210\246\035\001\"m\n\017UserUrlFavorit" +
-      "e\022\035\n\007user_id\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\034\n\006url_" +
-      "id\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\030\022\035\n\013create_time\030\003 " +
-      "\001(\003B\010\220\246\035\005\210\246\035\001\"\230\001\n\014UserInterest\022\030\n\002id\030\001 \001" +
-      "(\tB\014\210\246\035\001\220\246\035\002\230\246\035\030\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\220" +
-      "\246\035\003\230\246\035\030\022\035\n\007keyword\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\034" +
-      "\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\022\n\004type\030\005 \001" +
-      "(\tB\004\230\246\035\001\"]\n\006Entity\022\030\n\002id\030\001 \001(\tB\014\210\246\035\001\220\246\035\002",
-      "\230\246\035\030\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\032\n\004t" +
-      "ype\030\003 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\005B\026\n\024com.janknspan" +
-      "k.proto"
+      "anknspank/proto/extensions.proto\"\275\002\n\007Art" +
+      "icle\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\026" +
+      "\n\003url\030\002 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\034\n\005title\030\003 \001(\tB\r\210" +
+      "\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\031\022\025\n\006auth" +
+      "or\030\005 \001(\tB\005\230\246\035\200\002\022\030\n\tcopyright\030\006 \001(\tB\005\230\246\035\200" +
+      "\002\022\036\n\013description\030\007 \001(\tB\t\210\246\035\001\230\246\035\200\020\022\030\n\tima" +
+      "ge_url\030\010 \001(\tB\005\230\246\035\200\020\022\034\n\tparagraph\030\r \003(\tB\t" +
+      "\240\246\035\003\230\246\035\200P\022 \n\016published_time\030\n \001(\003B\010\210\246\035\001\220" +
+      "\246\035\003\022\025\n\rmodified_time\030\013 \001(\003*\004\010\t\020\n\"\375\001\n\016Art",
+      "icleKeyword\022$\n\006url_id\030\001 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035" +
+      "\026\250\246\035\001\240\246\035\003\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352" +
+      "\022\026\n\010strength\030\003 \001(\005B\004\210\246\035\001\022\032\n\004type\030\004 \001(\tB\014" +
+      "\210\246\035\001\220\246\035\005\230\246\035\001\0225\n\006source\030\005 \001(\0162\026.ArticleKe" +
+      "yword.Source:\007UNKNOWNB\004\210\246\035\001\";\n\006Source\022\013\n" +
+      "\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010ME" +
+      "TA_TAG\020\003\"\232\001\n\004Link\022\'\n\rorigin_url_id\030\001 \001(\t" +
+      "B\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022,\n\022destination_url_id" +
+      "\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\034\n\016discovery_ti" +
+      "me\030\003 \001(\003B\004\210\246\035\001\022\035\n\017last_found_time\030\004 \001(\003B",
+      "\004\210\246\035\001\"\361\001\n\003Url\022\032\n\003url\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\377" +
+      "\005\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\004\230\246\035\026\250\246\035\001\022\031\n\013tweet" +
+      "_count\030\003 \001(\003B\004\210\246\035\001\022 \n\016discovery_time\030\004 \001" +
+      "(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025last_crawl_start_time\030\005 " +
+      "\001(\003B\010\220\246\035\005\240\246\035\003\022(\n\026last_crawl_finish_time\030" +
+      "\006 \001(\003B\010\220\246\035\005\240\246\035\003\022 \n\016crawl_priority\030\007 \001(\003B" +
+      "\010\220\246\035\003\240\246\035\003\"\371\001\n\004User\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002" +
+      "\230\246\035\026\250\246\035\001\022\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 " +
+      "\001(\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB" +
+      "\004\230\246\035\031\022\031\n\013facebook_id\030\005 \001(\tB\004\230\246\035\031\022\031\n\013crea",
+      "te_time\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_time\030\010" +
+      " \001(\003\0221\n\026linked_in_access_token\030\t \001(\tB\021\210\246" +
+      "\035\001\220\246\035\005\230\246\035\364\003\240\246\035\003*\004\010\006\020\007\"k\n\007Session\022\"\n\013sess" +
+      "ion_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022!\n\007user_id\030" +
+      "\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\031\n\013create_time\030\003" +
+      " \001(\003B\004\210\246\035\001\"i\n\017LinkedInProfile\022!\n\007user_id" +
+      "\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\030\n\004data\030\002 \001(\tB\n" +
+      "\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"m\n" +
+      "\023LinkedInConnections\022!\n\007user_id\030\001 \001(\tB\020\210" +
+      "\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240",
+      "\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"e\n\013AddressB" +
+      "ook\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\030" +
+      "\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030" +
+      "\003 \001(\003B\004\210\246\035\001\"\205\001\n\rUserUrlRating\022!\n\007user_id" +
+      "\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022 \n\006url_id\030\002 \001(\t" +
+      "B\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\024\n\006rating\030\003 \001(\005B\004\210\246\035\001" +
+      "\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"u\n\017UserUrlFa" +
+      "vorite\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035" +
+      "\001\022 \n\006url_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\035\n\013c" +
+      "reate_time\030\003 \001(\003B\010\220\246\035\005\210\246\035\001\"\244\001\n\014UserInter",
+      "est\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022!\n\007use" +
+      "r_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\035\n\007keyword\030" +
+      "\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\034\n\006source\030\004 \001(\tB\014\210\246\035" +
+      "\001\220\246\035\005\230\246\035\002\022\026\n\004type\030\005 \001(\tB\010\230\246\035\005\250\246\035\001\"\365\004\n\006En" +
+      "tity\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\035\n\007ke" +
+      "yword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB" +
+      "\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001(\0162\016.Enti" +
+      "ty.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014canonical_id\030\005 \001(" +
+      "\tB\014\220\246\035\005\230\246\035\026\250\246\035\001\022\"\n\005topic\030\006 \003(\0132\023.Entity." +
+      "EntityTopic\032\277\002\n\013EntityTopic\022\033\n\tentity_id",
+      "\030\001 \001(\tB\010\230\246\035\026\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230" +
+      "\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030" +
+      "\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033.Entity.En" +
+      "tityTopic.Context:\007UNKNOWN\"\220\001\n\007Context\022\013" +
+      "\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED_AT\020\001\022\025\n\021" +
+      "ANGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIST_INVESTE" +
+      "D_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026\n\022WIKIPED" +
+      "IA_SUBTOPIC\020\005\"Z\n\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025" +
+      "DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPEDIA_LONG_" +
+      "ABSTRACT\020\002\022\r\n\tANGELLIST\020\003B\026\n\024com.janknsp",
+      "ank.proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12785,7 +14970,7 @@ public final class Core {
           internal_static_ArticleKeyword_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleKeyword_descriptor,
-              new java.lang.String[] { "UrlId", "Keyword", "Strength", "Type", });
+              new java.lang.String[] { "UrlId", "Keyword", "Strength", "Type", "Source", });
           internal_static_Link_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_Link_fieldAccessorTable = new
@@ -12851,12 +15036,19 @@ public final class Core {
           internal_static_Entity_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Entity_descriptor,
-              new java.lang.String[] { "Id", "Keyword", "Type", });
+              new java.lang.String[] { "Id", "Keyword", "Type", "Source", "CanonicalId", "Topic", });
+          internal_static_Entity_EntityTopic_descriptor =
+            internal_static_Entity_descriptor.getNestedTypes().get(0);
+          internal_static_Entity_EntityTopic_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_Entity_EntityTopic_descriptor,
+              new java.lang.String[] { "EntityId", "Keyword", "Type", "Strength", "Context", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
@@ -12876,6 +15068,7 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.clientSerialization);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
@@ -12884,19 +15077,23 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.clientSerialization);
@@ -12909,6 +15106,7 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
@@ -12926,63 +15124,88 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
           return registry;
         }
       };

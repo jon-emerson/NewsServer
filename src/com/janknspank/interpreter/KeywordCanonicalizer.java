@@ -10,10 +10,12 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Entities;
+import com.janknspank.data.EntityType;
 import com.janknspank.proto.Core.ArticleKeyword;
+import com.janknspank.proto.Core.ArticleKeyword.Source;
+import com.janknspank.proto.Core.Entity;
 
 public class KeywordCanonicalizer {
   private static final Set<String> PERSON_TITLES = Sets.newHashSet(
@@ -22,18 +24,18 @@ public class KeywordCanonicalizer {
   /**
    * Returns a score for how much we like the passed keyword's type.
    */
-  private static int getTypeScore(ArticleKeyword keyword) {
-    switch (keyword.getType()) {
-      case ArticleKeywords.TYPE_HYPERLINK:
-        return 10;
-      case ArticleKeywords.TYPE_LOCATION:
+  private static int getArticleKeywordScore(ArticleKeyword keyword) {
+    EntityType type = EntityType.fromValue(keyword.getType());
+    if (type != null) {
+      if (type.isA(EntityType.PLACE)) {
         return 20;
-      case ArticleKeywords.TYPE_ORGANIZATION:
+      } else if (type.isA(EntityType.ORGANIZATION)) {
         return 30;
-      case ArticleKeywords.TYPE_PERSON:
+      } else if (type.isA(EntityType.PERSON)) {
         return 29;
+      }
     }
-    return 5;
+    return keyword.getSource() == Source.META_TAG ? 5 : 10;
   }
 
   /**
@@ -70,7 +72,7 @@ public class KeywordCanonicalizer {
    */
   private static ArticleKeyword merge(ArticleKeyword keyword1, ArticleKeyword keyword2) {
     ArticleKeyword.Builder keywordBuilder =
-        (getTypeScore(keyword1) > getTypeScore(keyword2))
+        (getArticleKeywordScore(keyword1) > getArticleKeywordScore(keyword2))
             ? keyword1.toBuilder() : keyword2.toBuilder();
     keywordBuilder.setKeyword(getBestKeywordStr(keyword1.getKeyword(), keyword2.getKeyword()));
     keywordBuilder.setStrength(
@@ -85,9 +87,9 @@ public class KeywordCanonicalizer {
     Iterable<String> components = Splitter.on(CharMatcher.WHITESPACE).limit(2).split(person);
     String first = Iterables.getFirst(components, " ");
     if (Iterables.size(components) > 1 &&
-        (PERSON_TITLES.contains(first) ||
+        (PERSON_TITLES.contains(first.toLowerCase()) ||
             first.endsWith(".") &&
-            PERSON_TITLES.contains(first.substring(0, first.length() - 1)))) {
+            PERSON_TITLES.contains(first.substring(0, first.length() - 1).toLowerCase()))) {
       return Iterables.getLast(components, null);
     }
     return person;
@@ -114,7 +116,7 @@ public class KeywordCanonicalizer {
     // Create a map of unique keyword names, merging any dupes as we find them.
     Map<String, ArticleKeyword> keywordMap = Maps.newHashMap();
     for (ArticleKeyword keyword : keywords) {
-      String keywordStr = keyword.getKeyword().trim().toLowerCase();
+      String keywordStr = keyword.getKeyword().trim();
       if (keywordMap.containsKey(keywordStr)) {
         keywordMap.put(keywordStr, merge(keyword, keywordMap.get(keywordStr)));
       } else {
@@ -135,11 +137,12 @@ public class KeywordCanonicalizer {
 
         // Remove honorary titles (e.g. Mr., Mrs.) for people.
         String cleanLittleKey =
-            (keywordMap.get(littleKey).getType() == ArticleKeywords.TYPE_PERSON) ?
+            EntityType.PERSON == EntityType.fromValue(keywordMap.get(littleKey).getType()) ?
                 removePersonTitle(littleKey) : littleKey;
         try {
           if (bigKey.contains(cleanLittleKey)) {
-            if (Entities.getEntityByKeyword(cleanLittleKey) == null) {
+            Entity entity = Entities.getEntityByKeyword(cleanLittleKey);
+            if (entity == null || entity.getType() != keywordMap.get(littleKey).getType()) {
               keywordMap.put(bigKey, merge(keywordMap.get(bigKey), keywordMap.get(littleKey)));
               keywordMap.remove(littleKey);
             } else {

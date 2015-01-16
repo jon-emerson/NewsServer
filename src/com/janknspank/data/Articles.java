@@ -12,43 +12,21 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.UserInterest;
-import com.janknspank.proto.Extensions;
 
 /**
  * Helper class that manages storing and retrieving Article objects from the
  * database.
  */
 public class Articles {
-  public static final int MAX_TITLE_LENGTH;
-  public static final int MAX_PARAGRAPH_LENGTH;
-  public static final int MAX_DESCRIPTION_LENGTH;
-  static {
-    int titleLength = 0;
-    int paragraphLength = 0;
-    int descriptionLength = 0;
-    for (FieldDescriptor field : Article.getDefaultInstance().getDescriptorForType().getFields()) {
-      if (JavaType.STRING == field.getJavaType()) {
-        if ("title".equals(field.getName())) {
-          titleLength = field.getOptions().getExtension(Extensions.stringLength);
-        } else if ("paragraph".equals(field.getName())) {
-          paragraphLength = field.getOptions().getExtension(Extensions.stringLength);
-        } else if ("description".equals(field.getName())) {
-          descriptionLength = field.getOptions().getExtension(Extensions.stringLength);
-        }
-      }
-    }
-    if (titleLength == 0 || paragraphLength == 0 || descriptionLength == 0) {
-      throw new IllegalStateException("Could not find length of title, paragraph or description");
-    }
-    MAX_TITLE_LENGTH = titleLength;
-    MAX_PARAGRAPH_LENGTH = paragraphLength;
-    MAX_DESCRIPTION_LENGTH = descriptionLength;
-  }
+  public static final int MAX_TITLE_LENGTH =
+      Database.getStringLength(Article.class, "title");
+  public static final int MAX_PARAGRAPH_LENGTH =
+      Database.getStringLength(Article.class, "paragraph");
+  public static final int MAX_DESCRIPTION_LENGTH =
+      Database.getStringLength(Article.class, "description");
 
   public static Iterable<Article> getArticlesOnTopic(String topic) throws DataInternalException {
     List<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(ImmutableList.of(topic));

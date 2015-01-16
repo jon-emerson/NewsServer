@@ -27,10 +27,11 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
-import com.janknspank.data.ArticleKeywords;
+import com.janknspank.data.EntityType;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.Core.ArticleKeyword;
+import com.janknspank.proto.Core.ArticleKeyword.Source;
 
 /**
  * Finds all the keywords in an article, by looking at meta tags, as well as
@@ -80,12 +81,24 @@ public class KeywordFinder {
    */
   public static Iterable<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode) {
     List<ArticleKeyword> keywords = Lists.newArrayList();
-
     List<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
     Iterables.addAll(keywords, findKeywordsInMetaTags(urlId, documentNode));
     Iterables.addAll(keywords, findKeywordsFromHypertext(urlId, documentNode));
-    for (Node articleNode : articleNodes) {
-      for (String sentence : SENTENCE_DETECTOR_ME.sentDetect(articleNode.getFlattenedText())) {
+    Iterables.addAll(keywords, findKeywords(urlId, Iterables.transform(articleNodes,
+        new Function<Node, String>() {
+          @Override
+          public String apply(Node articleNode) {
+            return articleNode.getFlattenedText();
+          }
+        })));
+    return KeywordCanonicalizer.canonicalize(keywords);
+  }
+
+  public static Iterable<ArticleKeyword> findKeywords(String urlId, Iterable<String> paragraphs) {
+    List<ArticleKeyword> keywords = Lists.newArrayList();
+
+    for (String paragraph : paragraphs) {
+      for (String sentence : SENTENCE_DETECTOR_ME.sentDetect(paragraph)) {
         String[] tokens = TOKENIZER.tokenize(sentence);
         Iterables.addAll(keywords, findPeople(urlId, tokens));
         Iterables.addAll(keywords, findOrganizations(urlId, tokens));
@@ -109,7 +122,7 @@ public class KeywordFinder {
       String urlId,
       String[] tokens,
       List<NameFinderME> finders,
-      String type,
+      EntityType type,
       int strengthMultiplier,
       int maxStrength) {
     Map<String, ArticleKeyword.Builder> keywordMap = Maps.newHashMap();
@@ -126,7 +139,8 @@ public class KeywordFinder {
                 .setUrlId(urlId)
                 .setKeyword(keywordStr)
                 .setStrength(strengthMultiplier)
-                .setType(type));
+                .setType(type.toString())
+                .setSource(Source.NLP));
           }
         }
       }
@@ -145,7 +159,7 @@ public class KeywordFinder {
         urlId,
         tokens,
         PERSON_FINDER_LIST,
-        ArticleKeywords.TYPE_PERSON,
+        EntityType.PERSON,
         5 /* strengthMultiplier */,
         20 /* maxStrength */);
   }
@@ -155,7 +169,7 @@ public class KeywordFinder {
         urlId,
         tokens,
         ORGANIZATION_FINDER_LIST,
-        ArticleKeywords.TYPE_ORGANIZATION,
+        EntityType.ORGANIZATION,
         5 /* strengthMultiplier */,
         20 /* maxStrength */);
   }
@@ -165,7 +179,7 @@ public class KeywordFinder {
         urlId,
         tokens,
         LOCATION_FINDER_LIST,
-        ArticleKeywords.TYPE_LOCATION,
+        EntityType.PLACE,
         3 /* strengthMultiplier */,
         15 /* maxStrength */);
   }
@@ -236,7 +250,7 @@ public class KeywordFinder {
               .setUrlId(urlId)
               .setKeyword(keyword)
               .setStrength(Math.min(3, keywords.count(keyword)))
-              .setType(ArticleKeywords.TYPE_META_TAG)
+              .setSource(Source.META_TAG)
               .build();
           }
         });
@@ -291,7 +305,7 @@ public class KeywordFinder {
               .setUrlId(urlId)
               .setKeyword(keyword)
               .setStrength(4)
-              .setType(ArticleKeywords.TYPE_HYPERLINK)
+              .setSource(Source.HYPERLINK)
               .build();
           }
         });

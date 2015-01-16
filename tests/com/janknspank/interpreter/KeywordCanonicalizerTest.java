@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import com.janknspank.data.ArticleKeywords;
+import com.janknspank.data.EntityType;
 import com.janknspank.proto.Core.ArticleKeyword;
 
 public class KeywordCanonicalizerTest {
@@ -22,31 +22,31 @@ public class KeywordCanonicalizerTest {
         ArticleKeyword.newBuilder()
             .setKeyword("Jackson Smith")
             .setStrength(1)
-            .setType(ArticleKeywords.TYPE_LOCATION) // Deliberately wrong.
+            .setType(EntityType.PLACE.toString()) // Deliberately wrong.
             .setUrlId(URL_ID)
             .build(),
         ArticleKeyword.newBuilder()
             .setKeyword("Smith")
             .setStrength(3) // This strength should fix the merged keyword type.
-            .setType(ArticleKeywords.TYPE_PERSON)
+            .setType(EntityType.PERSON.toString())
             .setUrlId(URL_ID)
             .build(),
         ArticleKeyword.newBuilder()
             .setKeyword("Mr. Smith")
             .setStrength(1)
-            .setType(ArticleKeywords.TYPE_PERSON)
+            .setType(EntityType.PERSON.toString())
             .setUrlId(URL_ID)
             .build(),
         ArticleKeyword.newBuilder()
             .setKeyword("Mr Smith")
             .setStrength(1)
-            .setType(ArticleKeywords.TYPE_PERSON)
+            .setType(EntityType.PERSON.toString())
             .setUrlId(URL_ID)
             .build(),
         ArticleKeyword.newBuilder()
             .setKeyword("IBM")
             .setStrength(1)
-            .setType(ArticleKeywords.TYPE_ORGANIZATION)
+            .setType(EntityType.ORGANIZATION.toString())
             .setUrlId(URL_ID)
             .build());
     Iterable<ArticleKeyword> canonicalizedKeywords = KeywordCanonicalizer.canonicalize(keywords);
@@ -57,9 +57,10 @@ public class KeywordCanonicalizerTest {
       keywordMap.put(keyword.getKeyword(), keyword);
     }
     assertEquals(6, keywordMap.get("Jackson Smith").getStrength());
-    assertEquals(ArticleKeywords.TYPE_PERSON, keywordMap.get("Jackson Smith").getType());
+    assertEquals(EntityType.PERSON,
+        EntityType.fromValue(keywordMap.get("Jackson Smith").getType()));
     assertEquals(1, keywordMap.get("IBM").getStrength());
-    assertEquals(ArticleKeywords.TYPE_ORGANIZATION, keywordMap.get("IBM").getType());
+    assertEquals(EntityType.ORGANIZATION,
+        EntityType.fromValue(keywordMap.get("IBM").getType()));
   }
-
 }
