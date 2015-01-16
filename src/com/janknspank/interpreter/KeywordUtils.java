@@ -11,9 +11,10 @@ import com.google.common.collect.Sets;
 import com.janknspank.data.ArticleKeywords;
 
 public class KeywordUtils {
-  private static final Pattern NUMBER_PATTERN_1 = Pattern.compile("^[0-9]+$");
-  private static final Pattern NUMBER_PATTERN_2 = Pattern.compile("^[0-9]+\\-");
+  // Matches: "5", "5) Topic.", "5. Example".
+  private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+([\\.\\)\\,\\-].*)?");
   private static final Pattern BEST_OF_PATTERN = Pattern.compile("^best( [a-z]+)? of ");
+  private static final Pattern ABBREVIATION_PATTERN = Pattern.compile("([A-Z]+\\.){2,10}");
   private static final Set<String> BLACKLIST = Sets.newHashSet();
   static {
     for (String keyword : new String[] {
@@ -100,27 +101,32 @@ public class KeywordUtils {
 
   @VisibleForTesting
   static boolean isValidKeyword(String keyword) {
-    keyword = keyword.trim().toLowerCase();
-    if (keyword.length() < 2 ||
-        NUMBER_PATTERN_1.matcher(keyword).find() ||
-        NUMBER_PATTERN_2.matcher(keyword).find() ||
-        BEST_OF_PATTERN.matcher(keyword).find() ||
-        keyword.contains("…") ||
-        keyword.startsWith("#") ||
-        keyword.startsWith("@") ||
-        keyword.startsWith("bloomberg ") ||
-        keyword.startsWith("mba ") ||
-        keyword.endsWith("@bloomberg") ||
-        keyword.endsWith(" jobs") ||
-        keyword.endsWith(" news") ||
-        keyword.endsWith(" profile") ||
-        keyword.endsWith(" restaurants") ||
-        keyword.endsWith(" trends") ||
-        (keyword.contains("&") && keyword.contains(";")) || // XML entities.
-        keyword.length() > ArticleKeywords.MAX_KEYWORD_LENGTH) {
+    keyword = keyword.trim();
+    if (!keyword.equals(cleanKeyword(keyword))) {
+      throw new RuntimeException(
+          "You should clean your keywords before calling this: \"" + keyword + "\"");
+    }
+    String lowercaseKeyword = keyword.toLowerCase();
+    if (lowercaseKeyword.length() < 2 ||
+        !Character.isAlphabetic(keyword.charAt(0)) ||
+        NUMBER_PATTERN.matcher(keyword).matches() ||
+        BEST_OF_PATTERN.matcher(lowercaseKeyword).find() ||
+        lowercaseKeyword.contains("…") ||
+        lowercaseKeyword.startsWith("#") ||
+        lowercaseKeyword.startsWith("@") ||
+        lowercaseKeyword.startsWith("bloomberg ") ||
+        lowercaseKeyword.startsWith("mba ") ||
+        lowercaseKeyword.endsWith("@bloomberg") ||
+        lowercaseKeyword.endsWith(" jobs") ||
+        lowercaseKeyword.endsWith(" news") ||
+        lowercaseKeyword.endsWith(" profile") ||
+        lowercaseKeyword.endsWith(" restaurants") ||
+        lowercaseKeyword.endsWith(" trends") ||
+        (lowercaseKeyword.contains("&") && lowercaseKeyword.contains(";")) || // XML entities.
+        lowercaseKeyword.length() > ArticleKeywords.MAX_KEYWORD_LENGTH) {
       return false;
     }
-    return !BLACKLIST.contains(keyword);
+    return !BLACKLIST.contains(lowercaseKeyword);
   }
 
   /**
@@ -130,24 +136,28 @@ public class KeywordUtils {
    */
   public static String cleanKeyword(String keyword) {
     keyword = keyword.trim();
-    if (keyword.startsWith("‘") || keyword.startsWith("'") ||
-        keyword.startsWith("“") || keyword.startsWith("\"")) {
-      keyword = keyword.substring(1);
+    while (keyword.startsWith("‘") || keyword.startsWith("'") ||
+        keyword.startsWith("“") || keyword.startsWith("\"") ||
+        keyword.startsWith("(") || keyword.startsWith(")") ||
+        keyword.startsWith("-") || keyword.startsWith(".") ||
+        keyword.startsWith("?") || keyword.startsWith(":") ||
+        keyword.startsWith("&") || keyword.startsWith(",")) {
+      keyword = keyword.substring(1).trim();
     }
     if (keyword.endsWith("’s") || keyword.endsWith("'s")) {
-      return keyword.substring(0, keyword.length() - "’s".length());
+      return keyword.substring(0, keyword.length() - "’s".length()).trim();
     }
-    if (keyword.endsWith("’") || keyword.endsWith("'") ||
+    while (keyword.endsWith("’") || keyword.endsWith("'") ||
         keyword.endsWith("”") || keyword.endsWith("\"") ||
         keyword.endsWith(",") || keyword.endsWith(";") ||
         keyword.endsWith("-") || keyword.endsWith("!")) {
-      keyword = keyword.substring(0, keyword.length() - 1);
+      keyword = keyword.substring(0, keyword.length() - 1).trim();
     }
     if (keyword.endsWith(".") && StringUtils.countMatches(keyword, ".") == 1) {
-      keyword = keyword.substring(0, keyword.length() - 1);
+      keyword = keyword.substring(0, keyword.length() - 1).trim();
     }
     if (keyword.endsWith("-based")) {
-      keyword = keyword.substring(0, keyword.length() - "-based".length());
+      keyword = keyword.substring(0, keyword.length() - "-based".length()).trim();
     }
 
     // Since we want to canonicalize as much as we can, and have nice short
@@ -155,13 +165,20 @@ public class KeywordUtils {
     // part, dropping the rest.  This does mean we lose significant information
     // about the keyword, but perhaps(?) the canonicalization is worth it.
     if (keyword.contains("’")) {
-      keyword = keyword.substring(0, keyword.indexOf("’"));
+      keyword = keyword.substring(0, keyword.indexOf("’")).trim();
     }
     if (keyword.contains("'")) {
-      keyword = keyword.substring(0, keyword.indexOf("'"));
+      keyword = keyword.substring(0, keyword.indexOf("'")).trim();
     }
 
-    if (keyword.length() > 0 && !Character.isUpperCase(keyword.charAt(0))) {
+    if (ABBREVIATION_PATTERN.matcher(keyword).matches()) {
+      // Get rid of the dots.
+      StringBuilder sb = new StringBuilder();
+      for (int i = 0; i < keyword.length(); i += 2) {
+        sb.append(keyword.charAt(i));
+      }
+      keyword = sb.toString();
+    } else if (keyword.length() > 0 && !Character.isUpperCase(keyword.charAt(0))) {
       keyword = WordUtils.capitalizeFully(keyword);
       keyword = keyword.replaceAll("Aol", "AOL");
       keyword = keyword.replaceAll("Ios", "iOS");
@@ -169,7 +186,7 @@ public class KeywordUtils {
       keyword = keyword.replaceAll("Iphone", "iPhone");
       keyword = keyword.replaceAll("Iwatch", "iWatch");
       keyword = keyword.replaceAll("Ipod", "iPod");
-    } if (keyword.length() > 4 && keyword.equals(keyword.toUpperCase())) {
+    } else if (keyword.length() > 4 && keyword.equals(keyword.toUpperCase())) {
       // For non-abbreviations, don't let folks capitalize everything.
       keyword = WordUtils.capitalizeFully(keyword.toLowerCase());
     }

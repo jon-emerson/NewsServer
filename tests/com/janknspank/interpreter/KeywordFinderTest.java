@@ -8,10 +8,10 @@ import java.io.StringReader;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
-import com.janknspank.data.ArticleKeywords;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.Core.ArticleKeyword;
+import com.janknspank.proto.Core.ArticleKeyword.Source;
 
 public class KeywordFinderTest {
   private void assertNotContainsKeyword(
@@ -24,13 +24,15 @@ public class KeywordFinderTest {
   }
 
   private void assertContainsKeyword(
-      String keywordStr, String type, Iterable<ArticleKeyword> keywords) {
+      String keywordStr, Source source, Iterable<ArticleKeyword> keywords) {
     for (ArticleKeyword keyword : keywords) {
-      if (keywordStr.equals(keyword.getKeyword()) && type.equals(keyword.getType())) {
+      if (keywordStr.equals(keyword.getKeyword())) {
+        assertEquals("Source for " + keyword.getKeyword() + " should be " + source.name(),
+            source, keyword.getSource());
         return;
       }
     }
-    fail("Keyword not found: " + keywordStr + " (type=" + type + ")");
+    fail("Keyword not found: " + keywordStr);
   }
 
   /**
@@ -67,9 +69,9 @@ public class KeywordFinderTest {
 
     // These are the good ones!
     assertEquals(4, Iterables.size(keywords));
-    assertContainsKeyword("Brangelina", ArticleKeywords.TYPE_META_TAG, keywords);
-    assertContainsKeyword("Wikipedia", ArticleKeywords.TYPE_META_TAG, keywords);
-    assertContainsKeyword("Brad Pitt", ArticleKeywords.TYPE_PERSON, keywords);
-    assertContainsKeyword("Angelina Jolie", ArticleKeywords.TYPE_HYPERLINK, keywords);
+    assertContainsKeyword("Brangelina", Source.META_TAG, keywords);
+    assertContainsKeyword("Wikipedia", Source.META_TAG, keywords);
+    assertContainsKeyword("Brad Pitt", Source.NLP, keywords);
+    assertContainsKeyword("Angelina Jolie", Source.HYPERLINK, keywords);
   }
 }

@@ -23,7 +23,7 @@ enum Required {
 enum StorageMethod {
   // Default: Just throw this field into an opaque unindexed blob that will
   // be deserialized once we read it on the Java side.
-  BLOB = 1;
+  STANDARD = 1;
 
   // Use this field as the primary key.
   PRIMARY_KEY = 2;
@@ -56,9 +56,18 @@ enum ClientSerialization {
   EXCLUDE = 3;
 };
 
+enum StringCharset {
+  // For IDs and other non-human text.
+  LATIN1 = 1;
+
+  // For human-readable text.
+  UTF8 = 2;
+};
+
 extend google.protobuf.FieldOptions {
   optional Required required = 60001 [default = NO];
-  optional StorageMethod storage_method = 60002 [default = BLOB];
+  optional StorageMethod storage_method = 60002 [default = STANDARD];
   optional int32 string_length = 60003 [default = -1];
   optional ClientSerialization client_serialization = 60004 [default = INCLUDE];
+  optional StringCharset string_charset = 60005 [default = UTF8];
 }

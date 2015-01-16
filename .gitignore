@@ -1,6 +1,7 @@
 .gradle
 .settings
 
+/angellist
 /build
 /data
 /dbpedia

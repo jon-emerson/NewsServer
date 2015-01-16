@@ -18,6 +18,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
@@ -25,15 +26,22 @@ import com.janknspank.common.Asserts;
 import com.janknspank.proto.Extensions;
 import com.janknspank.proto.Extensions.Required;
 import com.janknspank.proto.Extensions.StorageMethod;
+import com.janknspank.proto.Extensions.StringCharset;
 import com.janknspank.proto.Validator;
 
 public class Database {
   // JDBC driver name and database URL
   private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
   private static final String DB_URL =
+//      "jdbc:mysql://localhost/test?";
       "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver?"
-      + "useTimezone=true&rewriteBatchedStatements=true";
-//      "jdbc:mysql://localhost/test?useTimezone=true&rewriteBatchedStatements=true";
+          + Joiner.on("&").join(ImmutableList.of(
+              "useTimezone=true",
+              "rewriteBatchedStatements=true",
+              "useUnicode=true",
+              "characterEncoding=UTF-8",
+              "characterSetResults=utf8",
+              "connectionCollation=utf8_bin"));
   private static final String PROTO_COLUMN_NAME = "proto";
   static {
     try {
@@ -78,9 +86,18 @@ public class Database {
           throw new IllegalStateException("Unsupported string length " + stringLength + " on "
               + fieldDescriptor.getName());
         }
-        return (stringLength > 767) ? "BLOB" : "VARCHAR(" + stringLength + ")";
+        StringCharset charset = fieldDescriptor.getOptions().getExtension(Extensions.stringCharset);
+        String sqlType = (stringLength > 767)
+            ? "BLOB"
+            : "VARCHAR(" + (charset == StringCharset.UTF8 ? stringLength * 2 : stringLength) + ")";
+        if (charset == StringCharset.UTF8) {
+          return sqlType + " CHARACTER SET utf8 COLLATE utf8_bin";
+        } else {
+          return sqlType + " CHARACTER SET latin1 COLLATE latin1_bin";
+        }
       case LONG:
         return "BIGINT";
+      case ENUM:
       case INT:
         return "INT";
       default:
@@ -115,7 +132,7 @@ public class Database {
           fieldMap.put(field, storageMethod);
           break;
 
-        case BLOB:
+        case STANDARD:
         case INDEX:
         case UNIQUE_INDEX:
         case PULL_OUT:
@@ -163,9 +180,6 @@ public class Database {
           storageMethod == StorageMethod.PULL_OUT) {
         sql.append(field.getName() + " " + getSqlTypeForField(field));
         if (storageMethod == StorageMethod.PRIMARY_KEY) {
-          if (JavaType.STRING == field.getJavaType()) {
-            sql.append(" CHARACTER SET latin1 COLLATE latin1_bin");
-          }
           sql.append(" PRIMARY KEY");
         }
         if (Required.YES == field.getOptions().getExtension(Extensions.required)) {
@@ -228,43 +242,57 @@ public class Database {
           storageMethod == StorageMethod.UNIQUE_INDEX ||
           storageMethod == StorageMethod.PULL_OUT) {
         ++offset;
-        switch (field.getJavaType()) {
-          case STRING:
-            if (message.hasField(field)) {
+        if (!message.hasField(field)) {
+          statement.setNull(offset, Types.VARCHAR);
+        } else {
+          switch (field.getJavaType()) {
+            case STRING:
               statement.setString(offset, (String) message.getField(field));
-            } else {
-              statement.setNull(offset, Types.VARCHAR);
-            }
-            break;
-          case INT:
-            if (message.hasField(field)) {
+              break;
+            case INT:
               statement.setInt(offset, (int) message.getField(field));
-            } else {
-              statement.setNull(offset, Types.INTEGER);
-            }
-            break;
-          case LONG:
-            if (message.hasField(field)) {
+              break;
+            case LONG:
               statement.setLong(offset, (long) message.getField(field));
-            } else {
-              statement.setNull(offset, Types.BIGINT);
-            }
-            break;
-          default:
-            throw new IllegalStateException("Unsupported type: " + field.getJavaType().name());
+              break;
+            case ENUM:
+              EnumValueDescriptor v = (EnumValueDescriptor) message.getField(field);
+              statement.setInt(offset, v.getNumber());
+              break;
+            default:
+              throw new IllegalStateException("Unsupported type: " + field.getJavaType().name());
+          }
         }
       }
     }
 
-    // Clear out any DO_NOT_STORE fields.
+    statement.setBytes(offset + 1, cleanDoNotStoreFields(message).toByteArray());
+  }
+
+  /**
+   * Removes the values of any Message fields annotated with StorageMethod:
+   * DO_NOT_STORE.  This method should be called on Messages before writing them
+   * to the database.
+   */
+  private static Message cleanDoNotStoreFields(Message message) {
     Message.Builder messageBuilder = message.toBuilder();
-    for (FieldDescriptor field : fieldMap.keySet()) {
-      StorageMethod storageMethod = fieldMap.get(field);
+    for (FieldDescriptor field : message.getAllFields().keySet()) {
+      StorageMethod storageMethod = field.getOptions().getExtension(Extensions.storageMethod);
       if (storageMethod == StorageMethod.DO_NOT_STORE) {
         messageBuilder.clearField(field);
+      } else if (field.getJavaType() == JavaType.MESSAGE) {
+        if (field.isRepeated()) {
+          for (int i = 0; i < message.getRepeatedFieldCount(field); i++) {
+            messageBuilder.setRepeatedField(field, i, 
+                cleanDoNotStoreFields((Message) message.getRepeatedField(field, i)));
+          }
+        } else {
+          messageBuilder.setField(field,
+              cleanDoNotStoreFields((Message) message.getField(field)));
+        }
       }
     }
-    statement.setBytes(offset + 1, messageBuilder.build().toByteArray());
+    return messageBuilder.build();
   }
 
   /**
@@ -505,19 +533,28 @@ public class Database {
    */
   public static <T extends Message> List<T> get(Iterable<String> primaryKeys, Class<T> clazz)
       throws DataInternalException {
+    return get(getPrimaryKeyField(clazz), primaryKeys, clazz);
+  }
 
+  /**
+   * Gets Messages with the specified class {@code clazz} and the field values,
+   * if they exist.
+   */
+  public static <T extends Message> List<T> get(
+      String fieldName, Iterable<String> keys, Class<T> clazz)
+      throws DataInternalException {
+    if (Iterables.isEmpty(keys)) {
+      return ImmutableList.of();
+    }
     try {
       String questionMarks = Joiner.on(",").join(
-          Iterables.limit(Iterables.cycle("?"), Iterables.size(primaryKeys)));
+          Iterables.limit(Iterables.cycle("?"), Iterables.size(keys)));
       PreparedStatement stmt = getConnection().prepareStatement(
-          "SELECT * FROM " + getTableName(clazz) + " WHERE " + getPrimaryKeyField(clazz)
+          "SELECT * FROM " + getTableName(clazz) + " WHERE " + fieldName
           + " IN (" + questionMarks + ")");
       int i = 0;
-      for (String primaryKey : primaryKeys) {
-        stmt.setString(++i, primaryKey);
-      }
-      if (i == 0) {
-        throw new DataInternalException("No primary keys given to fetch");
+      for (String key : keys) {
+        stmt.setString(++i, key);
       }
       return createListFromResultSet(stmt.executeQuery(), clazz);
     } catch (SQLException e) {
@@ -544,7 +581,8 @@ public class Database {
         return message;
       } catch (ValidationException|NoSuchMethodException|IllegalAccessException
           |IllegalArgumentException|InvocationTargetException e) {
-        throw new DataInternalException("Could not create article object: " + e.getMessage(), e);
+        throw new DataInternalException(
+            "Could not create " + clazz.getSimpleName() + " object: " + e.getMessage(), e);
       }
     }
     return null;
@@ -638,5 +676,21 @@ public class Database {
       sum += array[i];
     }
     return sum;
+  }
+
+  /**
+   * Returns the maximum allowed string length for the specified field in the
+   * passed Message subclass.
+   */
+  public static <T extends Message> int getStringLength(Class<T> clazz, String fieldName) {
+    for (FieldDescriptor field : getDefaultInstance(clazz).getDescriptorForType().getFields()) {
+      if (JavaType.STRING == field.getJavaType()) {
+        if (fieldName.equals(field.getName())) {
+          return field.getOptions().getExtension(Extensions.stringLength);
+        }
+      }
+    }
+    throw new IllegalStateException("Could not find length of " + clazz.getSimpleName()
+        + "." + fieldName + " field");
   }
 }

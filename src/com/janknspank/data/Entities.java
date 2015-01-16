@@ -1,137 +1,61 @@
 package com.janknspank.data;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.net.URLDecoder;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.google.common.base.Predicates;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
+import com.google.common.collect.Maps;
 import com.janknspank.proto.Core.Entity;
-import com.janknspank.proto.Extensions;
+import com.janknspank.proto.Core.Entity.EntityTopic;
 
 public class Entities extends CacheLoader<String, Entity> {
+  public static final int MAX_KEYWORD_LENGTH =
+      Database.getStringLength(Entity.class, "keyword");
+  public static final int MAX_TOPIC_KEYWORD_LENGTH =
+      Database.getStringLength(EntityTopic.class, "keyword");
+
   private static LoadingCache<String, Entity> ENTITY_CACHE =
       CacheBuilder.newBuilder()
           .maximumSize(10000)
           .expireAfterAccess(5, TimeUnit.DAYS)
           .expireAfterWrite(0, TimeUnit.MINUTES)
           .build(new Entities());
-  public static final String TYPE_WORK = "w";
-  public static final String TYPE_EVENT = "ev";
-  public static final String TYPE_LOCATION = "l";
-  public static final String TYPE_ORGANIZATION = "o";
-  public static final String TYPE_PERSON = "p";
-
-  private static final Map<String, String> ONTOLOGY_TO_NEWS_TYPE =
-      ImmutableMap.<String, String>builder()
-          .put("http://dbpedia.org/ontology/Work", TYPE_WORK)
-          .put("http://dbpedia.org/ontology/Event", TYPE_EVENT)
-          .put("http://dbpedia.org/ontology/Place", TYPE_LOCATION)
-          .put("http://dbpedia.org/ontology/Organisation", TYPE_ORGANIZATION)
-          .put("http://dbpedia.org/ontology/Person", TYPE_PERSON)
-          .build();
   private static final String SELECT_BY_KEYWORD_COMMAND =
-      "SELECT * FROM " + Database.getTableName(Entity.class) + " WHERE keyword=?";
-  public static final int MAX_KEYWORD_LENGTH;
-  static {
-    int keywordLength = 0;
-    for (FieldDescriptor field :
-        Entity.getDefaultInstance().getDescriptorForType().getFields()) {
-      if (JavaType.STRING == field.getJavaType()) {
-        if ("keyword".equals(field.getName())) {
-          keywordLength = field.getOptions().getExtension(Extensions.stringLength);
-        }
-      }
-    }
-    if (keywordLength == 0) {
-      throw new IllegalStateException("Could not find length of keyword field");
-    }
-    MAX_KEYWORD_LENGTH = keywordLength;
-  }
-
-  /** Helper method for creating the Article table. */
-  public static void main(String args[]) throws Exception {
-    BufferedReader reader = null;
-    try {
-      // We can do n-triples or n-quads here... For some reason I downloaded quads.
-      reader = new BufferedReader(new FileReader("dbpedia/instance_types_en.nq"));
-      String line = reader.readLine();
-      List<Entity> entitiesToUpdate = Lists.newArrayList();
-      while (line != null) {
-        // Tokenize!
-        String[] tokens = line.trim().split(" ");
-        if (tokens.length < 3 || tokens.length > 5) {
-          System.out.println("Could not parse line: " + line);
-          line = reader.readLine();
-          continue;
-        }
-
-        // Find the topic.
-        String topic = tokens[0].substring(tokens[0].lastIndexOf("/") + 1, tokens[0].length() - 1);
-        if (topic.matches(".+\\_\\_[0-9]+$")) {
-          // Ignore versioned topics.  These are useless to us, they're just
-          // older versions of articles that exist in other forms.
-          line = reader.readLine();
-          continue;
-        }
-        topic = StringUtils.replace(topic, "\\'", "'");
-        topic = StringUtils.replace(topic, "_", " ");
-        topic = URLDecoder.decode(topic, "UTF-8");
-        String ontology = tokens[2].substring(1, tokens[2].length() - 1);
-        if (topic.matches(".+\\([^\\)]+\\)$")) {
-          // Ignore classified entities for now, since we have no way to store their
-          // classification, and therefore they will only serve to confuse us.
-          line = reader.readLine();
-          continue;
-        }
-
-        String type = ONTOLOGY_TO_NEWS_TYPE.get(ontology);
-        if (type != null && topic.length() <= MAX_KEYWORD_LENGTH) {
-          Entity entity = Entity.newBuilder()
-              .setId(GuidFactory.generate())
-              .setKeyword(topic)
-              .setType(type)
-              .build();
-          entitiesToUpdate.add(entity);
-        }
-        if (entitiesToUpdate.size() == 250) {
-          System.out.println(Database.insert(entitiesToUpdate) + " rows inserted");
-          entitiesToUpdate.clear();
-        }
-        line = reader.readLine();
-      }
-      System.out.println(Database.insert(entitiesToUpdate) + " rows inserted");
-    } finally {
-      if (reader != null) {
-        reader.close();
-      }
-    }
-  }
+      "SELECT * FROM " + Database.getTableName(Entity.class) + " WHERE keyword=? LIMIT 1";
 
   public static Entity getEntityByKeyword(String keyword) throws DataInternalException {
-    try {
-      Entity entity = ENTITY_CACHE.get(keyword);
-      return (entity == Entity.getDefaultInstance()) ? null : entity;
-    } catch (ExecutionException e) {
-      if (e.getCause() instanceof DataInternalException) {
-        throw (DataInternalException) e.getCause();
-      } else {
-        throw new DataInternalException("Execution exception: " + e.getMessage(), e);
+    return Iterables.getFirst(getEntitiesByKeyword(ImmutableList.of(keyword)), null);
+  }
+
+  public static Iterable<Entity> getEntitiesByKeyword(Iterable<String> keywords)
+      throws DataInternalException {
+    List<Entity> entities = Lists.newArrayList();
+    Map<String, Integer> keywordsToFetch = Maps.newHashMap();
+    for (String keyword : keywords) {
+      Entity entity = ENTITY_CACHE.getIfPresent(keyword);
+      entities.add(entity);
+      if (entity == null) {
+        keywordsToFetch.put(keyword, entities.size() - 1);
       }
     }
+    for (Entity entity : Database.get("keyword", keywordsToFetch.keySet(), Entity.class)) {
+      if (!keywordsToFetch.containsKey(entity.getKeyword())) {
+        System.out.println("GOT ENTITY W/ UNREQUESTED KEYWORD!! " + entity.getKeyword());
+        continue;
+      }
+      entities.set(keywordsToFetch.get(entity.getKeyword()), entity);
+    }
+    return Iterables.filter(entities, Predicates.not(Predicates.isNull()));
   }
 
   /**
@@ -151,7 +75,16 @@ public class Entities extends CacheLoader<String, Entity> {
       return entity == null ? Entity.getDefaultInstance() : entity;
 
     } catch (SQLException e) {
-      throw new DataInternalException("Could not select url: " + e.getMessage(), e);
+      throw new DataInternalException("Could not select entity: " + e.getMessage(), e);
+    }
+  }
+
+  /** Helper method for creating the Article table. */
+  public static void main(String args[]) throws Exception {
+    Connection connection = Database.getConnection();
+    connection.prepareStatement(Database.getCreateTableStatement(Entity.class)).execute();
+    for (String statement : Database.getCreateIndexesStatement(Entity.class)) {
+      connection.prepareStatement(statement).execute();
     }
   }
 }

@@ -7,40 +7,16 @@ import java.util.List;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
-import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
-import com.janknspank.proto.Extensions;
 
 /**
  * Helper class that manages storing and retrieving which keywords are
  * associated with which articles.
  */
 public class ArticleKeywords {
-  public static final String TYPE_HYPERLINK = "h";
-  public static final String TYPE_LOCATION = "l";
-  public static final String TYPE_META_TAG = "m";
-  public static final String TYPE_PERSON = "p";
-  public static final String TYPE_ORGANIZATION = "o";
-
-  public static final int MAX_KEYWORD_LENGTH;
-  static {
-    int keywordLength = 0;
-    for (FieldDescriptor field :
-        ArticleKeyword.getDefaultInstance().getDescriptorForType().getFields()) {
-      if (JavaType.STRING == field.getJavaType()) {
-        if ("keyword".equals(field.getName())) {
-          keywordLength = field.getOptions().getExtension(Extensions.stringLength);
-        }
-      }
-    }
-    if (keywordLength == 0) {
-      throw new IllegalStateException("Could not find length of keyword field");
-    }
-    MAX_KEYWORD_LENGTH = keywordLength;
-  }
-
+  public static final int MAX_KEYWORD_LENGTH =
+      Database.getStringLength(ArticleKeyword.class, "keyword");
   private static final String DELETE_BY_URL_ID_COMMAND =
       "DELETE FROM " + Database.getTableName(ArticleKeyword.class) + " WHERE url_id=?";
 

@@ -11,6 +11,7 @@ public final class Extensions {
     registry.add(com.janknspank.proto.Extensions.storageMethod);
     registry.add(com.janknspank.proto.Extensions.stringLength);
     registry.add(com.janknspank.proto.Extensions.clientSerialization);
+    registry.add(com.janknspank.proto.Extensions.stringCharset);
   }
   /**
    * Protobuf enum {@code Required}
@@ -116,14 +117,14 @@ public final class Extensions {
   public enum StorageMethod
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>BLOB = 1;</code>
+     * <code>STANDARD = 1;</code>
      *
      * <pre>
      * Default: Just throw this field into an opaque unindexed blob that will
      * be deserialized once we read it on the Java side.
      * </pre>
      */
-    BLOB(0, 1),
+    STANDARD(0, 1),
     /**
      * <code>PRIMARY_KEY = 2;</code>
      *
@@ -169,14 +170,14 @@ public final class Extensions {
     ;
 
     /**
-     * <code>BLOB = 1;</code>
+     * <code>STANDARD = 1;</code>
      *
      * <pre>
      * Default: Just throw this field into an opaque unindexed blob that will
      * be deserialized once we read it on the Java side.
      * </pre>
      */
-    public static final int BLOB_VALUE = 1;
+    public static final int STANDARD_VALUE = 1;
     /**
      * <code>PRIMARY_KEY = 2;</code>
      *
@@ -225,7 +226,7 @@ public final class Extensions {
 
     public static StorageMethod valueOf(int value) {
       switch (value) {
-        case 1: return BLOB;
+        case 1: return STANDARD;
         case 2: return PRIMARY_KEY;
         case 3: return INDEX;
         case 4: return UNIQUE_INDEX;
@@ -401,6 +402,104 @@ public final class Extensions {
     // @@protoc_insertion_point(enum_scope:ClientSerialization)
   }
 
+  /**
+   * Protobuf enum {@code StringCharset}
+   */
+  public enum StringCharset
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>LATIN1 = 1;</code>
+     *
+     * <pre>
+     * For IDs and other non-human text.
+     * </pre>
+     */
+    LATIN1(0, 1),
+    /**
+     * <code>UTF8 = 2;</code>
+     *
+     * <pre>
+     * For human-readable text.
+     * </pre>
+     */
+    UTF8(1, 2),
+    ;
+
+    /**
+     * <code>LATIN1 = 1;</code>
+     *
+     * <pre>
+     * For IDs and other non-human text.
+     * </pre>
+     */
+    public static final int LATIN1_VALUE = 1;
+    /**
+     * <code>UTF8 = 2;</code>
+     *
+     * <pre>
+     * For human-readable text.
+     * </pre>
+     */
+    public static final int UTF8_VALUE = 2;
+
+
+    public final int getNumber() { return value; }
+
+    public static StringCharset valueOf(int value) {
+      switch (value) {
+        case 1: return LATIN1;
+        case 2: return UTF8;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<StringCharset>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<StringCharset>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<StringCharset>() {
+            public StringCharset findValueByNumber(int number) {
+              return StringCharset.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.janknspank.proto.Extensions.getDescriptor().getEnumTypes().get(3);
+    }
+
+    private static final StringCharset[] VALUES = values();
+
+    public static StringCharset valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private StringCharset(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:StringCharset)
+  }
+
   public static final int REQUIRED_FIELD_NUMBER = 60001;
   /**
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
@@ -445,6 +544,17 @@ public final class Extensions {
           .newFileScopedGeneratedExtension(
         com.janknspank.proto.Extensions.ClientSerialization.class,
         null);
+  public static final int STRING_CHARSET_FIELD_NUMBER = 60005;
+  /**
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      com.janknspank.proto.Extensions.StringCharset> stringCharset = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        com.janknspank.proto.Extensions.StringCharset.class,
+        null);
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -456,20 +566,23 @@ public final class Extensions {
     java.lang.String[] descriptorData = {
       "\n%com/janknspank/proto/extensions.proto\032" +
       " google/protobuf/descriptor.proto*\033\n\010Req" +
-      "uired\022\007\n\003YES\020\001\022\006\n\002NO\020\002*g\n\rStorageMethod\022" +
-      "\010\n\004BLOB\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020\003\022\020\n" +
-      "\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005\022\020\n\014DO_NOT_" +
-      "STORE\020\006*F\n\023ClientSerialization\022\013\n\007INCLUD" +
-      "E\020\001\022\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n\007EXCLUDE\020\003:" +
-      "@\n\010required\022\035.google.protobuf.FieldOptio" +
-      "ns\030\341\324\003 \001(\0162\t.Required:\002NO:M\n\016storage_met" +
-      "hod\022\035.google.protobuf.FieldOptions\030\342\324\003 \001",
-      "(\0162\016.StorageMethod:\004BLOB::\n\rstring_lengt" +
-      "h\022\035.google.protobuf.FieldOptions\030\343\324\003 \001(\005" +
-      ":\002-1:\\\n\024client_serialization\022\035.google.pr" +
-      "otobuf.FieldOptions\030\344\324\003 \001(\0162\024.ClientSeri" +
-      "alization:\007INCLUDEB\037\n\024com.janknspank.pro" +
-      "to\200\001\000\210\001\000\220\001\000"
+      "uired\022\007\n\003YES\020\001\022\006\n\002NO\020\002*k\n\rStorageMethod\022" +
+      "\014\n\010STANDARD\020\001\022\017\n\013PRIMARY_KEY\020\002\022\t\n\005INDEX\020" +
+      "\003\022\020\n\014UNIQUE_INDEX\020\004\022\014\n\010PULL_OUT\020\005\022\020\n\014DO_" +
+      "NOT_STORE\020\006*F\n\023ClientSerialization\022\013\n\007IN" +
+      "CLUDE\020\001\022\025\n\021INCLUDE_AS_NUMBER\020\002\022\013\n\007EXCLUD" +
+      "E\020\003*%\n\rStringCharset\022\n\n\006LATIN1\020\001\022\010\n\004UTF8" +
+      "\020\002:@\n\010required\022\035.google.protobuf.FieldOp" +
+      "tions\030\341\324\003 \001(\0162\t.Required:\002NO:Q\n\016storage_",
+      "method\022\035.google.protobuf.FieldOptions\030\342\324" +
+      "\003 \001(\0162\016.StorageMethod:\010STANDARD::\n\rstrin" +
+      "g_length\022\035.google.protobuf.FieldOptions\030" +
+      "\343\324\003 \001(\005:\002-1:\\\n\024client_serialization\022\035.go" +
+      "ogle.protobuf.FieldOptions\030\344\324\003 \001(\0162\024.Cli" +
+      "entSerialization:\007INCLUDE:M\n\016string_char" +
+      "set\022\035.google.protobuf.FieldOptions\030\345\324\003 \001" +
+      "(\0162\016.StringCharset:\004UTF8B\037\n\024com.janknspa" +
+      "nk.proto\200\001\000\210\001\000\220\001\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -480,6 +593,7 @@ public final class Extensions {
           storageMethod.internalInit(descriptor.getExtensions().get(1));
           stringLength.internalInit(descriptor.getExtensions().get(2));
           clientSerialization.internalInit(descriptor.getExtensions().get(3));
+          stringCharset.internalInit(descriptor.getExtensions().get(4));
           return null;
         }
       };

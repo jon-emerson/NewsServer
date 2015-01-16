@@ -34,6 +34,7 @@ public class UrlWhitelist {
 
   private static final HashSet<String> WHITELIST = new HashSet<String>();
   static {
+    // Add: http://hbswk.hbs.edu/industries/
     WHITELIST.add("abc.net.au");
     WHITELIST.add("abcnews.go.com");
     WHITELIST.add("advice.careerbuilder.com");
