@@ -39,7 +39,7 @@ public class SetUserUrlFavoriteServlet extends StandardServlet {
           .setUrlId(urlId)
           .setCreateTime(System.currentTimeMillis())
           .build();
-      Database.insert(favorite);
+      Database.getInstance().insert(favorite);
     }
 
     // Write response.

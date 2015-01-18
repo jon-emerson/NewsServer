@@ -1,6 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -43,22 +42,12 @@ public class UserInterests {
       "SELECT * FROM " + Database.getTableName(UserInterest.class) + " "
       + "WHERE user_id=? AND source != \"" + SOURCE_TOMBSTONE + "\"";
 
-  /** Helper method for creating the UserInterestData table. */
-  public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(Database.getCreateTableStatement(
-        UserInterest.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(UserInterest.class)) {
-      connection.prepareStatement(statement).execute();
-    }
-  }
-
   /**
    * Returns a complete list of the specified user's interests.
    */
   public static List<UserInterest> getInterests(String userId) throws DataInternalException {
     try {
-      PreparedStatement stmt = Database.getConnection().prepareStatement(SELECT_FOR_USER_COMMAND);
+      PreparedStatement stmt = Database.getInstance().prepareStatement(SELECT_FOR_USER_COMMAND);
       stmt.setString(1, userId);
       return Database.createListFromResultSet(stmt.executeQuery(), UserInterest.class);
     } catch (SQLException e) {
@@ -240,14 +229,24 @@ public class UserInterests {
     }
 
     // Get 'er done.
+    Database database = Database.getInstance();
     try {
-      Database.insert(interestsToInsert);
+      database.insert(interestsToInsert);
     } catch (ValidationException e) {
       throw new DataInternalException("Error inserting interests: " + e.getMessage(), e);
     }
-    Database.delete(interestsToDelete);
+    database.delete(interestsToDelete);
 
     // Return the latest and greatest interests, regardless of type.
     return allInterests;
+  }
+
+  /** Helper method for creating the UserInterestData table. */
+  public static void main(String args[]) throws Exception {
+    Database database = Database.getInstance();
+    database.prepareStatement(database.getCreateTableStatement(UserInterest.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(UserInterest.class)) {
+      database.prepareStatement(statement).execute();
+    }
   }
 }

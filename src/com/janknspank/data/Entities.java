@@ -1,6 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -48,7 +47,8 @@ public class Entities extends CacheLoader<String, Entity> {
         keywordsToFetch.put(keyword, entities.size() - 1);
       }
     }
-    for (Entity entity : Database.get("keyword", keywordsToFetch.keySet(), Entity.class)) {
+    Database database = Database.getInstance();
+    for (Entity entity : database.get("keyword", keywordsToFetch.keySet(), Entity.class)) {
       if (!keywordsToFetch.containsKey(entity.getKeyword())) {
         System.out.println("GOT ENTITY W/ UNREQUESTED KEYWORD!! " + entity.getKeyword());
         continue;
@@ -66,7 +66,7 @@ public class Entities extends CacheLoader<String, Entity> {
   public Entity load(final String keyword) throws Exception {
     try {
       PreparedStatement statement =
-          Database.getConnection().prepareStatement(SELECT_BY_KEYWORD_COMMAND);
+          Database.getInstance().prepareStatement(SELECT_BY_KEYWORD_COMMAND);
       statement.setString(1, keyword);
       Entity entity = Database.createFromResultSet(statement.executeQuery(), Entity.class);
 
@@ -81,10 +81,10 @@ public class Entities extends CacheLoader<String, Entity> {
 
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(Database.getCreateTableStatement(Entity.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(Entity.class)) {
-      connection.prepareStatement(statement).execute();
+    Database database = Database.getInstance();
+    database.prepareStatement(database.getCreateTableStatement(Entity.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(Entity.class)) {
+      database.prepareStatement(statement).execute();
     }
   }
 }

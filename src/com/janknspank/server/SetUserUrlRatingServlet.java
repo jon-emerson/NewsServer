@@ -47,7 +47,7 @@ public class SetUserUrlRatingServlet extends StandardServlet {
         .setCreateTime(System.currentTimeMillis())
         .setRating(ratingScore)
         .build();
-    Database.insert(rating);
+    Database.getInstance().insert(rating);
 
     // Create response.
     JSONObject response = createSuccessResponse();

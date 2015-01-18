@@ -25,7 +25,8 @@ public class UpdateUrlCrawlFields {
   public static void main(String args[]) throws Exception {
     // Figure out what articles we've crawled already.
     Set<String> crawledArticleIds = Sets.newHashSet();
-    PreparedStatement stmt = Database.getConnection().prepareStatement(
+    Database database = Database.getInstance();
+    PreparedStatement stmt = database.prepareStatement(
         "SELECT * FROM " + Database.getTableName(Article.class));
     ResultSet result = stmt.executeQuery();
     while (!result.isAfterLast()) {
@@ -36,7 +37,7 @@ public class UpdateUrlCrawlFields {
       crawledArticleIds.add(article.getUrlId());
     }
 
-    stmt = Database.getConnection().prepareStatement(
+    stmt = database.prepareStatement(
         "SELECT * FROM " + Database.getTableName(Url.class) + " "
         + "WHERE crawl_priority=0 AND url NOT LIKE \"%//twitter.com/%\"");
     result = stmt.executeQuery();
@@ -54,7 +55,7 @@ public class UpdateUrlCrawlFields {
         }
       }
       if (urlsToUpdate.size() == 250 || url == null) {
-        System.out.println(Database.update(urlsToUpdate) + " rows updated");
+        System.out.println(database.update(urlsToUpdate) + " rows updated");
         urlsToUpdate.clear();
       }
     }

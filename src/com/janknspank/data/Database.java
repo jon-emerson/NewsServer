@@ -33,7 +33,6 @@ public class Database {
   // JDBC driver name and database URL
   private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
   private static final String DB_URL =
-//      "jdbc:mysql://localhost/test?";
       "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver?"
           + Joiner.on("&").join(ImmutableList.of(
               "useTimezone=true",
@@ -43,7 +42,17 @@ public class Database {
               "characterSetResults=utf8",
               "connectionCollation=utf8_bin"));
   private static final String PROTO_COLUMN_NAME = "proto";
+  private static final String MYSQL_USER;
+  private static final String MYSQL_PASSWORD;
   static {
+    MYSQL_USER = System.getenv("MYSQL_USER");
+    if (MYSQL_USER == null) {
+      throw new IllegalStateException("$MYSQL_USER is undefined");
+    }
+    MYSQL_PASSWORD = System.getenv("MYSQL_PASSWORD");
+    if (MYSQL_PASSWORD == null) {
+      throw new IllegalStateException("$MYSQL_PASSWORD is undefined");
+    }
     try {
       // Make sure the MySQL JDBC driver is loaded.
       Class.forName(JDBC_DRIVER);
@@ -53,29 +62,31 @@ public class Database {
   }
 
   // The connection this class wraps.
-  private static Connection conn = null;
+  protected final Connection connection;
+  private static Database instance = null;
 
-  public static synchronized Connection getConnection() throws SQLException {
-    if (conn == null || conn.isClosed()) {
-      System.out.println("Connecting to database...");
-
-      // Create a new connection.
-      String mysqlUser = System.getenv("MYSQL_USER");
-      if (mysqlUser == null) {
-        throw new IllegalStateException("$MYSQL_USER is undefined");
-      }
-      String mysqlPassword = System.getenv("MYSQL_PASSWORD");
-      if (mysqlPassword == null) {
-        throw new IllegalStateException("$MYSQL_PASSWORD is undefined");
-      }
-      conn = DriverManager.getConnection(DB_URL, mysqlUser, mysqlPassword); // "hello", "");
-
-      System.out.println("Connected database successfully.");
-    }
-    return conn;
+  protected Database(Connection connection) throws DataInternalException {
+    this.connection = connection;
   }
 
-  private static String getSqlTypeForField(FieldDescriptor fieldDescriptor) {
+  public static Database getInstance() throws DataInternalException {
+    if (instance == null) {
+      System.out.println("Connecting to remote database...");
+      try {
+        instance = new Database(DriverManager.getConnection(DB_URL, MYSQL_USER, MYSQL_PASSWORD));
+      } catch (SQLException e) {
+        throw new DataInternalException("Could not connect to database", e);
+      }
+      System.out.println("Connected to remote database successfully.");
+    }
+    return instance;
+  }
+
+  public PreparedStatement prepareStatement(String sql) throws SQLException {
+    return connection.prepareStatement(sql);
+  }
+
+  private String getSqlTypeForField(FieldDescriptor fieldDescriptor) {
     switch (fieldDescriptor.getJavaType()) {
       case STRING:
         int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
@@ -85,11 +96,13 @@ public class Database {
         } else if (stringLength <= 0) {
           throw new IllegalStateException("Unsupported string length " + stringLength + " on "
               + fieldDescriptor.getName());
+        } else if (stringLength > 65535) {
+          throw new IllegalStateException("MySQL only allows strings up to is 65535 chars long");
         }
         StringCharset charset = fieldDescriptor.getOptions().getExtension(Extensions.stringCharset);
         String sqlType = (stringLength > 767)
             ? "BLOB"
-            : "VARCHAR(" + (charset == StringCharset.UTF8 ? stringLength * 2 : stringLength) + ")";
+            : "VARCHAR(" + stringLength + ")";
         if (charset == StringCharset.UTF8) {
           return sqlType + " CHARACTER SET utf8 COLLATE utf8_bin";
         } else {
@@ -118,7 +131,7 @@ public class Database {
    * Returns a map of protocol buffer field descriptors to their StorageMethod
    * types, as defined in our protocol buffer extensions.
    */
-  private static <T extends Message> LinkedHashMap<FieldDescriptor, StorageMethod> getFieldMap(
+  private <T extends Message> LinkedHashMap<FieldDescriptor, StorageMethod> getFieldMap(
       Class<T> clazz) {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = Maps.newLinkedHashMap();
 
@@ -153,18 +166,10 @@ public class Database {
   }
 
   /**
-   * Returns the MySQL table name that Messages of the passed type should be
-   * stored in.
-   */
-  public static <T extends Message> String getTableName(Class<T> clazz) {
-    return clazz.getSimpleName();
-  }
-
-  /**
    * Given a protocol buffer message, returns the MySQL statement for creating
    * an appropriate table for storing it.
    */
-  public static <T extends Message> String getCreateTableStatement(Class<T> clazz) {
+  public <T extends Message> String getCreateTableStatement(Class<T> clazz) {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(clazz);
 
     // Start creating the SQL statement.
@@ -203,7 +208,7 @@ public class Database {
    * Given a protocol buffer message, returns a List of MySQL statements for
    * creating indexes on the requested fields.
    */
-  public static <T extends Message> List<String> getCreateIndexesStatement(Class<T> clazz) {
+  public <T extends Message> List<String> getCreateIndexesStatement(Class<T> clazz) {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(clazz);
 
     List<String> statements = Lists.newArrayList();
@@ -231,7 +236,7 @@ public class Database {
    * or pull-out column is updates in the order it exists in the proto
    * definition.
    */
-  private static void prepareInsertOrUpdateStatement(PreparedStatement statement, Message message)
+  private void prepareInsertOrUpdateStatement(PreparedStatement statement, Message message)
       throws SQLException {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
     int offset = 0;
@@ -274,7 +279,7 @@ public class Database {
    * DO_NOT_STORE.  This method should be called on Messages before writing them
    * to the database.
    */
-  private static Message cleanDoNotStoreFields(Message message) {
+  private Message cleanDoNotStoreFields(Message message) {
     Message.Builder messageBuilder = message.toBuilder();
     for (FieldDescriptor field : message.getAllFields().keySet()) {
       StorageMethod storageMethod = field.getOptions().getExtension(Extensions.storageMethod);
@@ -299,7 +304,7 @@ public class Database {
    * Returns an INSERT INTO statement for inserting the given protocol buffer
    * message into its respective MySQL table.
    */
-  public static PreparedStatement getRawInsertStatement(Message message) throws SQLException {
+  public PreparedStatement getRawInsertStatement(Message message) throws SQLException {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
 
     // Start creating the SQL statement.
@@ -333,7 +338,7 @@ public class Database {
     System.out.println(sql.toString());
 
     // Prepare the statement!
-    return getConnection().prepareStatement(sql.toString());
+    return connection.prepareStatement(sql.toString());
 
     //return statement;
   }
@@ -341,7 +346,7 @@ public class Database {
   /**
    * Inserts the passed message into the database.
    */
-  public static void insert(Message message) throws ValidationException, DataInternalException {
+  public void insert(Message message) throws ValidationException, DataInternalException {
     insert(ImmutableList.of(message));
   }
 
@@ -349,7 +354,7 @@ public class Database {
    * Inserts the passed messages into the database.  All messages passed must be
    * of the same type.
    */
-  public static <T extends Message> int insert(Iterable<T> messages)
+  public <T extends Message> int insert(Iterable<T> messages)
       throws ValidationException, DataInternalException {
     if (Iterables.isEmpty(messages)) {
       return 0;
@@ -357,7 +362,7 @@ public class Database {
 
     Message firstMessage = Iterables.getFirst(messages, null);
     try {
-      PreparedStatement stmt = Database.getRawInsertStatement(firstMessage);
+      PreparedStatement stmt = getRawInsertStatement(firstMessage);
       for (T message : messages) {
         Validator.assertValid(message);
         Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
@@ -380,7 +385,7 @@ public class Database {
    * against MySQL, but I'm still providing this API in case we switch to a
    * backend that handles upserts better.
    */
-  public static void upsert(Message message) throws ValidationException, DataInternalException {
+  public void upsert(Message message) throws ValidationException, DataInternalException {
     if (!update(message)) {
       insert(message);
     }
@@ -389,7 +394,7 @@ public class Database {
   /**
    * Returns the value of the passed {@code Message}'s primary key.
    */
-  private static String getPrimaryKey(Message message) {
+  private String getPrimaryKey(Message message) {
     Map<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
     for (FieldDescriptor field : fieldMap.keySet()) {
       if (fieldMap.get(field) == StorageMethod.PRIMARY_KEY) {
@@ -403,7 +408,7 @@ public class Database {
   /**
    * Returns the value of the passed {@code Message}'s primary key.
    */
-  private static <T extends Message> Iterable<String> getPrimaryKeys(Iterable<T> messages)
+  private <T extends Message> Iterable<String> getPrimaryKeys(Iterable<T> messages)
       throws ValidationException {
     List<String> primaryKeys = Lists.newArrayList();
     T firstMessage = Iterables.getFirst(messages, null);
@@ -419,7 +424,7 @@ public class Database {
    * Returns the number of columns in the table this passed proto message
    * class is stored in.
    */
-  private static <T extends Message> int getColumnCount(Class<T> clazz) {
+  private <T extends Message> int getColumnCount(Class<T> clazz) {
     // Start with 2, since there's always 'proto' and 'timestamp', regardless
     // of the schema.
     int columnCount = 2;
@@ -441,7 +446,7 @@ public class Database {
    * Returns an UPDATE statement for updating the given protocol buffer message
    * in its respective MySQL table.
    */
-  public static PreparedStatement getRawUpdateStatement(Message message) throws SQLException {
+  public PreparedStatement getRawUpdateStatement(Message message) throws SQLException {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
 
     // Start creating the SQL statement.
@@ -463,7 +468,7 @@ public class Database {
 
     System.out.println(sql.toString());
 
-    return getConnection().prepareStatement(sql.toString());
+    return connection.prepareStatement(sql.toString());
   }
 
   /**
@@ -471,7 +476,7 @@ public class Database {
    * message}, overwriting whatever was stored in the database before.  Returns
    * false if no object was updated (since it doesn't yet exist).
    */
-  public static boolean update(Message message) throws ValidationException, DataInternalException {
+  public boolean update(Message message) throws ValidationException, DataInternalException {
     return update(ImmutableList.of(message)) == 1;
   }
 
@@ -479,7 +484,7 @@ public class Database {
    * Updates the passed messages, overwriting whatever was stored in the
    * database before.  Returns the number of modified objects.
    */
-  public static <T extends Message> int update(Iterable<T> messages)
+  public <T extends Message> int update(Iterable<T> messages)
       throws ValidationException, DataInternalException {
     if (Iterables.isEmpty(messages)) {
       return 0;
@@ -488,7 +493,7 @@ public class Database {
     T firstMessage = Iterables.getFirst(messages, null);
     int columnCount = getColumnCount(firstMessage.getClass());
     try {
-      PreparedStatement stmt = Database.getRawUpdateStatement(firstMessage);
+      PreparedStatement stmt = getRawUpdateStatement(firstMessage);
       for (T message : messages) {
         Validator.assertValid(message);
         Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
@@ -508,7 +513,7 @@ public class Database {
   /**
    * Returns the column name of the primary key for the passed protocol buffer.
    */
-  private static <T extends Message> String getPrimaryKeyField(Class<T> clazz) {
+  private <T extends Message> String getPrimaryKeyField(Class<T> clazz) {
     Map<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(clazz);
     for (FieldDescriptor field : fieldMap.keySet()) {
       if (fieldMap.get(field) == StorageMethod.PRIMARY_KEY) {
@@ -522,7 +527,7 @@ public class Database {
    * Gets the Message with the specified class {@code clazz} and the given
    * primary key {@code primaryKey}, if one exists.
    */
-  public static <T extends Message> T get(String primaryKey, Class<T> clazz)
+  public <T extends Message> T get(String primaryKey, Class<T> clazz)
       throws DataInternalException {
     return Iterables.getFirst(get(ImmutableList.of(primaryKey), clazz), null);
   }
@@ -531,7 +536,7 @@ public class Database {
    * Gets Messages with the specified class {@code clazz} and the given
    * primary keys {@code primaryKeys}, if they exist.
    */
-  public static <T extends Message> List<T> get(Iterable<String> primaryKeys, Class<T> clazz)
+  public <T extends Message> List<T> get(Iterable<String> primaryKeys, Class<T> clazz)
       throws DataInternalException {
     return get(getPrimaryKeyField(clazz), primaryKeys, clazz);
   }
@@ -540,7 +545,7 @@ public class Database {
    * Gets Messages with the specified class {@code clazz} and the field values,
    * if they exist.
    */
-  public static <T extends Message> List<T> get(
+  public <T extends Message> List<T> get(
       String fieldName, Iterable<String> keys, Class<T> clazz)
       throws DataInternalException {
     if (Iterables.isEmpty(keys)) {
@@ -549,7 +554,7 @@ public class Database {
     try {
       String questionMarks = Joiner.on(",").join(
           Iterables.limit(Iterables.cycle("?"), Iterables.size(keys)));
-      PreparedStatement stmt = getConnection().prepareStatement(
+      PreparedStatement stmt = connection.prepareStatement(
           "SELECT * FROM " + getTableName(clazz) + " WHERE " + fieldName
           + " IN (" + questionMarks + ")");
       int i = 0;
@@ -561,6 +566,103 @@ public class Database {
       throw new DataInternalException("Could not execute get: " + e.getMessage()
           + ": " + e.getMessage(), e);
     }
+  }
+
+  /**
+   * Deletes the object with the specified primary key from the table specified
+   * by the passed-in class.
+   * @throws DataInternalException if the object could not be deleted, including
+   *     if it could not be found
+   */
+  public <T extends Message> boolean deletePrimaryKey(String primaryKey, Class<T> clazz)
+      throws DataInternalException {
+    return (deletePrimaryKeys(ImmutableList.of(primaryKey), clazz) == 1);
+  }
+
+  /**
+   * Deletes objects with the specified primary keys from the table specified
+   * by the passed-in class.
+   */
+  public <T extends Message> int deletePrimaryKeys(
+      Iterable<String> primaryKeys, Class<T> clazz) throws DataInternalException {
+    PreparedStatement stmt;
+    try {
+      stmt = connection.prepareStatement(
+          "DELETE FROM " + getTableName(clazz)
+          + " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
+      for (String primaryKey : primaryKeys) {
+        stmt.setString(1, primaryKey);
+        stmt.addBatch();
+      }
+      int numModified = 0;
+      for (int modCount : stmt.executeBatch()) {
+        numModified += modCount;
+      }
+      return numModified;
+
+    } catch (SQLException e) {
+      throw new DataInternalException("Error executing delete: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Deletes the passed object from the database.
+   * @throws DataInternalException if the object could not be deleted, including
+   *     if it could not be found
+   */
+  public void delete(Message message) throws DataInternalException {
+    deletePrimaryKey(getPrimaryKey(message), message.getClass());
+  }
+
+  /**
+   * Deletes the passed object from the database.
+   * @throws DataInternalException if the object could not be deleted, including
+   *     if it could not be found
+   */
+  public <T extends Message> void delete(Iterable<T> messages) throws DataInternalException {
+    if (!Iterables.isEmpty(messages)) {
+      try {
+        deletePrimaryKeys(getPrimaryKeys(messages), Iterables.getFirst(messages, null).getClass());
+      } catch (ValidationException e) {
+        throw new DataInternalException("Internal error: " + e.getMessage(), e);
+      }
+    }
+  }
+
+  /**
+   * Returns the sum of all the integers in the passed array.  Useful for
+   * collating # of rows modified by batch statements.
+   */
+  public static int sumIntArray(int[] array) {
+    int sum = 0;
+    for (int i = 0; i < array.length; i++) {
+      sum += array[i];
+    }
+    return sum;
+  }
+
+  /**
+   * Returns the MySQL table name that Messages of the passed type should be
+   * stored in.
+   */
+  public static <T extends Message> String getTableName(Class<T> clazz) {
+    return clazz.getSimpleName();
+  }
+
+  /**
+   * Returns the maximum allowed string length for the specified field in the
+   * passed Message subclass.
+   */
+  public static <T extends Message> int getStringLength(Class<T> clazz, String fieldName) {
+    for (FieldDescriptor field : getDefaultInstance(clazz).getDescriptorForType().getFields()) {
+      if (JavaType.STRING == field.getJavaType()) {
+        if (fieldName.equals(field.getName())) {
+          return field.getOptions().getExtension(Extensions.stringLength);
+        }
+      }
+    }
+    throw new IllegalStateException("Could not find length of " + clazz.getSimpleName()
+        + "." + fieldName + " field");
   }
 
   /**
@@ -593,104 +695,16 @@ public class Database {
     List<T> messages = Lists.newArrayList();
     try {
       while (!result.isAfterLast()) {
-        T message = Database.createFromResultSet(result, clazz);
+        T message = createFromResultSet(result, clazz);
         if (message == null) {
           break;
         }
         messages.add(message);
       }
     } catch (SQLException e) {
-      throw new DataInternalException("Error fetching favorites: " + e.getMessage(), e);
+      throw new DataInternalException("Error fetching " + clazz.getSimpleName() + " list: "
+          + e.getMessage(), e);
     }
     return messages;
-  }
-
-  /**
-   * Deletes the object with the specified primary key from the table specified
-   * by the passed-in class.
-   * @throws DataInternalException if the object could not be deleted, including
-   *     if it could not be found
-   */
-  public static <T extends Message> boolean deletePrimaryKey(String primaryKey, Class<T> clazz)
-      throws DataInternalException {
-    return (deletePrimaryKeys(ImmutableList.of(primaryKey), clazz) == 1);
-  }
-
-  /**
-   * Deletes objects with the specified primary keys from the table specified
-   * by the passed-in class.
-   */
-  public static <T extends Message> int deletePrimaryKeys(
-      Iterable<String> primaryKeys, Class<T> clazz) throws DataInternalException {
-    PreparedStatement stmt;
-    try {
-      stmt = getConnection().prepareStatement(
-          "DELETE FROM " + getTableName(clazz)
-          + " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
-      for (String primaryKey : primaryKeys) {
-        stmt.setString(1, primaryKey);
-        stmt.addBatch();
-      }
-      int numModified = 0;
-      for (int modCount : stmt.executeBatch()) {
-        numModified += modCount;
-      }
-      return numModified;
-
-    } catch (SQLException e) {
-      throw new DataInternalException("Error executing delete: " + e.getMessage(), e);
-    }
-  }
-
-  /**
-   * Deletes the passed object from the database.
-   * @throws DataInternalException if the object could not be deleted, including
-   *     if it could not be found
-   */
-  public static void delete(Message message) throws DataInternalException {
-    deletePrimaryKey(getPrimaryKey(message), message.getClass());
-  }
-
-  /**
-   * Deletes the passed object from the database.
-   * @throws DataInternalException if the object could not be deleted, including
-   *     if it could not be found
-   */
-  public static <T extends Message> void delete(Iterable<T> messages) throws DataInternalException {
-    if (!Iterables.isEmpty(messages)) {
-      try {
-        deletePrimaryKeys(getPrimaryKeys(messages), Iterables.getFirst(messages, null).getClass());
-      } catch (ValidationException e) {
-        throw new DataInternalException("Internal error: " + e.getMessage(), e);
-      }
-    }
-  }
-
-  /**
-   * Returns the sum of all the integers in the passed array.  Useful for
-   * collating # of rows modified by batch statements.
-   */
-  public static int sumIntArray(int[] array) {
-    int sum = 0;
-    for (int i = 0; i < array.length; i++) {
-      sum += array[i];
-    }
-    return sum;
-  }
-
-  /**
-   * Returns the maximum allowed string length for the specified field in the
-   * passed Message subclass.
-   */
-  public static <T extends Message> int getStringLength(Class<T> clazz, String fieldName) {
-    for (FieldDescriptor field : getDefaultInstance(clazz).getDescriptorForType().getFields()) {
-      if (JavaType.STRING == field.getJavaType()) {
-        if (fieldName.equals(field.getName())) {
-          return field.getOptions().getExtension(Extensions.stringLength);
-        }
-      }
-    }
-    throw new IllegalStateException("Could not find length of " + clazz.getSimpleName()
-        + "." + fieldName + " field");
   }
 }

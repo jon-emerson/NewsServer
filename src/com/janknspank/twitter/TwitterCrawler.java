@@ -32,6 +32,13 @@ public class TwitterCrawler implements twitter4j.StatusListener {
 
   @Override
   public void onStatus(final Status status) {
+    final Database database;
+    try {
+      database = Database.getInstance();
+    } catch (DataInternalException e) {
+      throw new Error(e);
+    }
+
     for (final URLEntity entity : status.getURLEntities()) {
       final URL shortUrl;
       try {
@@ -79,7 +86,7 @@ public class TwitterCrawler implements twitter4j.StatusListener {
                 try {
                   Url discoveredTwitterUrl = Urls.put(twitterUrl, /* isTweet */ false);
                   Url newsUrl = Urls.put(longUrl, /* isTweet */ true);
-                  Database.insert(Link.newBuilder()
+                  database.insert(Link.newBuilder()
                       .setOriginUrlId(discoveredTwitterUrl.getId())
                       .setDestinationUrlId(newsUrl.getId())
                       .setDiscoveryTime(newsUrl.getDiscoveryTime())

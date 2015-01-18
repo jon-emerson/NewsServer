@@ -1,0 +1,43 @@
+// Object definitions for the local (e.g. on my Laptop) database.
+// It'd be slow for these objects to live in the remote DB.
+
+import "com/janknspank/proto/core.proto";
+import "com/janknspank/proto/extensions.proto";
+
+option java_package = "com.janknspank.proto";
+
+message TokenToEntity {
+  optional string token = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 100
+  ];
+
+  optional string entity_keyword = 2 [
+    (required) = YES,
+    (string_length) = 100
+  ];
+
+  optional string entity_type = 3 [
+    (required) = YES,
+    (string_length) = 5
+  ];
+}
+
+message LongAbstract {
+  optional string article_name = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 120
+  ];
+
+  optional string topic = 2 [
+    (required) = YES,
+    (string_length) = 100
+  ];
+
+  optional string text = 3 [
+    (required) = YES,
+    (string_length) = 65535
+  ];
+}

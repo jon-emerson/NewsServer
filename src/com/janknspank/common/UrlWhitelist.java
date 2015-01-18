@@ -685,12 +685,14 @@ public class UrlWhitelist {
    * two URLs and we can always find the cleaned URL again later, if necessary.
    */
   public static void main(String args[]) throws Exception {
-    PreparedStatement stmt = Database.getConnection().prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Url.class) + " WHERE url NOT LIKE '%//twitter.com/%'");
+    Database database = Database.getInstance();
+    PreparedStatement stmt = database.prepareStatement(
+        "SELECT * FROM " + Database.getTableName(Url.class)
+        + " WHERE url NOT LIKE '%//twitter.com/%'");
     ResultSet result = stmt.executeQuery();
     Map<String, String> urlsToDelete = Maps.newHashMap();
     while (!result.isAfterLast()) {
-      Url url = Database.createFromResultSet(result, Url.class);
+      Url url = database.createFromResultSet(result, Url.class);
       if (url != null) {
         String urlStr = url.getUrl();
         if ((!isOkay(urlStr) || !urlStr.equals(UrlCleaner.clean(urlStr)))) {
@@ -705,10 +707,10 @@ public class UrlWhitelist {
           urls.add(urlStr);
           ids.add(urlsToDelete.get(urlStr));
         }
-        System.out.println("Deleted " + Database.deletePrimaryKeys(ids, Article.class) + " articles");
+        System.out.println("Deleted " + database.deletePrimaryKeys(ids, Article.class) + " articles");
         System.out.println("Deleted " + ArticleKeywords.deleteForUrlIds(ids) + " article keywords");
         System.out.println("Deleted " + Links.deleteIds(ids) + " links");
-        System.out.println("Deleted " + Database.deletePrimaryKeys(urls, Url.class) + " urls");
+        System.out.println("Deleted " + database.deletePrimaryKeys(urls, Url.class) + " urls");
         urlsToDelete.clear();
       }
     }

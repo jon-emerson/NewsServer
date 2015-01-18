@@ -1,6 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,7 +19,7 @@ public class UserUrlRatings {
 
   public static List<UserUrlRating> get(String userId) throws DataInternalException {
     try {
-      PreparedStatement stmt = Database.getConnection().prepareStatement(SELECT_COMMAND);
+      PreparedStatement stmt = Database.getInstance().prepareStatement(SELECT_COMMAND);
       stmt.setString(1, userId);
       return Database.createListFromResultSet(stmt.executeQuery(), UserUrlRating.class);
     } catch (SQLException e) {
@@ -33,8 +32,7 @@ public class UserUrlRatings {
    */
   public static int deleteIds(String userId, List<String> urlIds) throws DataInternalException {
     try {
-      PreparedStatement statement =
-          Database.getConnection().prepareStatement(DELETE_COMMAND);
+      PreparedStatement statement = Database.getInstance().prepareStatement(DELETE_COMMAND);
       for (int i = 0; i < urlIds.size(); i++) {
         statement.setString(1, userId);
         statement.setString(2, urlIds.get(i));
@@ -49,11 +47,11 @@ public class UserUrlRatings {
 
   /** Helper method for creating the UserUrlRating table. */
   public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(
-        Database.getCreateTableStatement(UserUrlRating.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(UserUrlRating.class)) {
-      connection.prepareStatement(statement).execute();
+    Database database = Database.getInstance();
+    database.prepareStatement(
+        database.getCreateTableStatement(UserUrlRating.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(UserUrlRating.class)) {
+      database.prepareStatement(statement).execute();
     }
   }
 }

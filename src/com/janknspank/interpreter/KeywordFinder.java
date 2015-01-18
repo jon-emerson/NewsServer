@@ -28,6 +28,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
 import com.janknspank.data.EntityType;
+import com.janknspank.data.ValidationException;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.Core.ArticleKeyword;
@@ -130,18 +131,22 @@ public class KeywordFinder {
       Span keywordSpans[] = nameFinderMe.find(tokens);
       for (String keywordStr : Span.spansToStrings(keywordSpans, tokens)) {
         keywordStr = KeywordUtils.cleanKeyword(keywordStr);
-        if (KeywordUtils.isValidKeyword(keywordStr)) {
-          if (keywordMap.containsKey(keywordStr)) {
-            keywordMap.get(keywordStr).setStrength(
-                Math.min(maxStrength, keywordMap.get(keywordStr).getStrength() + strengthMultiplier));
-          } else {
-            keywordMap.put(keywordStr, ArticleKeyword.newBuilder()
-                .setUrlId(urlId)
-                .setKeyword(keywordStr)
-                .setStrength(strengthMultiplier)
-                .setType(type.toString())
-                .setSource(Source.NLP));
+        try {
+          if (KeywordUtils.isValidKeyword(keywordStr)) {
+            if (keywordMap.containsKey(keywordStr)) {
+              keywordMap.get(keywordStr).setStrength(
+                  Math.min(maxStrength, keywordMap.get(keywordStr).getStrength() + strengthMultiplier));
+            } else {
+              keywordMap.put(keywordStr, ArticleKeyword.newBuilder()
+                  .setUrlId(urlId)
+                  .setKeyword(keywordStr)
+                  .setStrength(strengthMultiplier)
+                  .setType(type.toString())
+                  .setSource(Source.NLP));
+            }
           }
+        } catch (ValidationException e) {
+          e.printStackTrace();
         }
       }
     }
@@ -224,9 +229,13 @@ public class KeywordFinder {
     Multiset<String> keywords = HashMultiset.create();
     for (String keywordStr : rawKeywords.split(delimiter)) {
       keywordStr = KeywordUtils.cleanKeyword(keywordStr);
-      if (KeywordUtils.isValidKeyword(keywordStr) &&
-          isMetaKeywordRelevant(wordsInArticle, keywordStr)) {
-        keywords.add(keywordStr);
+      try {
+        if (KeywordUtils.isValidKeyword(keywordStr) &&
+            isMetaKeywordRelevant(wordsInArticle, keywordStr)) {
+          keywords.add(keywordStr);
+        }
+      } catch (ValidationException e) {
+        e.printStackTrace();
       }
     }
     return keywords;

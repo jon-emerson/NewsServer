@@ -53,10 +53,11 @@ public class TheMachine {
 
       // Save this article and its keywords.
       try {
+        Database database = Database.getInstance();
         if (!UrlWhitelist.isOkay(url.getUrl())) {
           System.err.println("Removing now-blacklisted page: " + url.getUrl());
           Links.deleteIds(ImmutableList.of(url.getId()));
-          Database.delete(url);
+          database.delete(url);
           continue;
         }
 
@@ -66,21 +67,21 @@ public class TheMachine {
         if (ArticleUrlDetector.isArticle(url.getUrl())) {
           InterpretedData interpretedData = Interpreter.interpret(url);
           try {
-            Database.insert(interpretedData.getArticle());
+            database.insert(interpretedData.getArticle());
           } catch (DataInternalException e) {
             // It could be that some other process decided to steal this article
             // and process it first (mainly due to human error).  If so, delete
             // everything and store it again.
             System.out.println("Handling human error: " + url.getUrl());
-            Database.deletePrimaryKey(url.getId(), Article.class);
+            database.deletePrimaryKey(url.getId(), Article.class);
             ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
             Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
 
             // Try again!
-            Database.insert(interpretedData.getArticle());
+            database.insert(interpretedData.getArticle());
           }
 
-          Database.insert(interpretedData.getKeywordList());
+          database.insert(interpretedData.getKeywordList());
           urls = interpretedData.getUrlList();
         } else {
           urls = UrlFinder.findUrls(url);

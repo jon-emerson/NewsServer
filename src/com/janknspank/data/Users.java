@@ -1,6 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -23,7 +22,7 @@ public class Users {
   private static User getByEmail(String email) throws DataInternalException {
     try {
       PreparedStatement statement =
-          Database.getConnection().prepareStatement(SELECT_BY_EMAIL_COMMAND);
+          Database.getInstance().prepareStatement(SELECT_BY_EMAIL_COMMAND);
       statement.setString(1, email);
       return Database.createFromResultSet(statement.executeQuery(), User.class);
 
@@ -50,7 +49,7 @@ public class Users {
           .setLastLoginTime(System.currentTimeMillis())
           .build();
       try {
-        Database.update(user);
+        Database.getInstance().update(user);
       } catch (ValidationException e) {
         throw new DataInternalException("Error marking user logged-in", e);
       }
@@ -66,7 +65,7 @@ public class Users {
         .setLastLoginTime(System.currentTimeMillis())
         .build();
     try {
-      Database.insert(user);
+      Database.getInstance().insert(user);
     } catch (ValidationException e) {
       throw new DataInternalException("Error creating user", e);
     }
@@ -75,10 +74,10 @@ public class Users {
 
   /** Helper method for creating the User table. */
   public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(Database.getCreateTableStatement(User.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(User.class)) {
-      connection.prepareStatement(statement).execute();
+    Database database = Database.getInstance();
+    database.prepareStatement(database.getCreateTableStatement(User.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(User.class)) {
+      database.prepareStatement(statement).execute();
     }
   }
 }

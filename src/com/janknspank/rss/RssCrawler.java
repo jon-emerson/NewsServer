@@ -161,9 +161,10 @@ public class RssCrawler {
   private void saveArticle(String url, Long date) {
     Url existing;
     try {
-      existing = Database.get(url, Url.class);
+      Database database = Database.getInstance();
+      existing = database.get(url, Url.class);
       if (existing == null) {
-        Database.insert(Url.newBuilder()
+        database.insert(Url.newBuilder()
           .setUrl(url)
           .setId(GuidFactory.generate())
           .setTweetCount(0)

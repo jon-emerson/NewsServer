@@ -9,6 +9,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import com.janknspank.data.ArticleKeywords;
+import com.janknspank.data.ValidationException;
 
 public class KeywordUtils {
   // Matches: "5", "5) Topic.", "5. Example".
@@ -100,10 +101,10 @@ public class KeywordUtils {
   }
 
   @VisibleForTesting
-  static boolean isValidKeyword(String keyword) {
+  static boolean isValidKeyword(String keyword) throws ValidationException {
     keyword = keyword.trim();
     if (!keyword.equals(cleanKeyword(keyword))) {
-      throw new RuntimeException(
+      throw new ValidationException(
           "You should clean your keywords before calling this: \"" + keyword + "\"");
     }
     String lowercaseKeyword = keyword.toLowerCase();

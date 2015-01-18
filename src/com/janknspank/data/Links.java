@@ -1,6 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,7 +28,7 @@ public class Links {
   public static void put(final Url sourceUrl, Iterable<Url> destinationUrls)
      throws DataInternalException{
     try {
-      Database.insert(Iterables.transform(destinationUrls,
+      Database.getInstance().insert(Iterables.transform(destinationUrls,
           new Function<Url, Link>() {
             @Override
             public Link apply(Url destinationUrl) {
@@ -52,7 +51,7 @@ public class Links {
   public static int deleteIds(List<String> ids) throws DataInternalException {
     try {
       PreparedStatement statement =
-          Database.getConnection().prepareStatement(DELETE_COMMAND);
+          Database.getInstance().prepareStatement(DELETE_COMMAND);
       for (int i = 0; i < ids.size(); i++) {
         statement.setString(1, ids.get(i));
         statement.setString(2, ids.get(i));
@@ -72,7 +71,7 @@ public class Links {
   public static int deleteFromOriginUrlId(Iterable<String> urlIds) throws DataInternalException {
     try {
       PreparedStatement statement =
-          Database.getConnection().prepareStatement(DELETE_BY_ORIGIN_URL_ID_COMMAND);
+          Database.getInstance().prepareStatement(DELETE_BY_ORIGIN_URL_ID_COMMAND);
       for (String urlId : urlIds) {
         statement.setString(1, urlId);
         statement.addBatch();
@@ -85,10 +84,10 @@ public class Links {
 
   /** Helper method for creating the Link table. */
   public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(Database.getCreateTableStatement(Link.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(Link.class)) {
-      connection.prepareStatement(statement).execute();
+    Database database = Database.getInstance();
+    database.prepareStatement(database.getCreateTableStatement(Link.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(Link.class)) {
+      database.prepareStatement(statement).execute();
     }
   }
 }

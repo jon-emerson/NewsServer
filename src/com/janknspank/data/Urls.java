@@ -1,9 +1,7 @@
 package com.janknspank.data;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -106,7 +104,7 @@ public class Urls {
 
     // Use urls.keySet() instead of urlStrings here as a way to dedupe.
     List<Url> urlsToUpdate = Lists.newArrayList(); // To increment tweet_count.
-    for (Url existingUrl : Database.get(urls.keySet(), Url.class)) {
+    for (Url existingUrl : Database.getInstance().get(urls.keySet(), Url.class)) {
       urls.put(existingUrl.getUrl(), existingUrl);
 
       if (isTweet) {
@@ -134,8 +132,9 @@ public class Urls {
     }
 
     try {
-      Database.insert(urlsToCreate);
-      Database.update(urlsToUpdate);
+      Database database = Database.getInstance();
+      database.insert(urlsToCreate);
+      database.update(urlsToUpdate);
       return urls.values();
     } catch (ValidationException e) {
       throw new DataInternalException("Could not insert new discovered URL", e);
@@ -154,7 +153,7 @@ public class Urls {
           .build();
       Validator.assertValid(url);
       PreparedStatement statement =
-          Database.getConnection().prepareStatement(UPDATE_CRAWL_START_COMMAND);
+          Database.getInstance().prepareStatement(UPDATE_CRAWL_START_COMMAND);
       statement.setLong(1, System.currentTimeMillis());
       statement.setBytes(2, url.toByteArray());
       statement.setString(3, url.getId());
@@ -174,7 +173,7 @@ public class Urls {
         .setCrawlPriority(0)
         .build();
     try {
-      Database.update(url);
+      Database.getInstance().update(url);
     } catch (ValidationException e) {
       throw new DataInternalException("Could not update last crawl finish time", e);
     }
@@ -183,20 +182,11 @@ public class Urls {
 
   public static Url getNextUrlToCrawl() throws DataInternalException {
     try {
-      Statement stmt = Database.getConnection().createStatement();
-      return Database.createFromResultSet(stmt.executeQuery(SELECT_NEXT_URL_TO_CRAWL_COMMAND),
-          Url.class);
+      PreparedStatement stmt =
+          Database.getInstance().prepareStatement(SELECT_NEXT_URL_TO_CRAWL_COMMAND);
+      return Database.createFromResultSet(stmt.executeQuery(), Url.class);
     } catch (SQLException e) {
       throw new DataInternalException("Could not read next URL to crawl", e);
-    }
-  }
-
-  /** Helper method for creating the discovered-url table. */
-  public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(Database.getCreateTableStatement(Url.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(Url.class)) {
-      connection.prepareStatement(statement).execute();
     }
   }
 
@@ -206,13 +196,21 @@ public class Urls {
    */
   public static Url getById(String id) throws DataInternalException {
     try {
-      PreparedStatement statement =
-          Database.getConnection().prepareStatement(SELECT_BY_ID_COMMAND);
+      PreparedStatement statement = Database.getInstance().prepareStatement(SELECT_BY_ID_COMMAND);
       statement.setString(1, id);
       return Database.createFromResultSet(statement.executeQuery(), Url.class);
 
     } catch (SQLException e) {
       throw new DataInternalException("Could not select url: " + e.getMessage(), e);
+    }
+  }
+
+  /** Helper method for creating the discovered-url table. */
+  public static void main(String args[]) throws Exception {
+    Database database = Database.getInstance();
+    database.prepareStatement(database.getCreateTableStatement(Url.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(Url.class)) {
+      database.prepareStatement(statement).execute();
     }
   }
 }

@@ -5,7 +5,6 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
@@ -149,7 +148,7 @@ public class Sessions {
           .setUserId(user.getId())
           .setCreateTime(System.currentTimeMillis())
           .build();
-      Database.insert(session);
+      Database.getInstance().insert(session);
       return session;
     } catch (ValidationException e) {
       throw new DataInternalException("Could not construct session object", e);
@@ -166,7 +165,7 @@ public class Sessions {
     String userId = decrypt(sessionKey);
 
     // Make sure the session key is in the database.
-    Session session = Database.get(sessionKey, Session.class);
+    Session session = Database.getInstance().get(sessionKey, Session.class);
     if (session == null) {
       throw new DataRequestException("Session not found in database.");
     }
@@ -188,7 +187,7 @@ public class Sessions {
   public static int deleteAllFromUser(User user) throws DataInternalException {
     try {
       PreparedStatement statement =
-          Database.getConnection().prepareStatement(DELETE_BY_USER_ID_COMMAND);
+          Database.getInstance().prepareStatement(DELETE_BY_USER_ID_COMMAND);
       statement.setString(1, user.getId());
       return statement.executeUpdate();
     } catch (SQLException e) {
@@ -198,10 +197,10 @@ public class Sessions {
 
   /** Helper method for creating the Session table. */
   public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(Database.getCreateTableStatement(Session.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(Session.class)) {
-      connection.prepareStatement(statement).execute();
+    Database database = Database.getInstance();
+    database.prepareStatement(database.getCreateTableStatement(Session.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(Session.class)) {
+      database.prepareStatement(statement).execute();
     }
   }
 }

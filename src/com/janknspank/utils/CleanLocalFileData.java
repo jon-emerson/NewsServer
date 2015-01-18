@@ -21,7 +21,7 @@ public class CleanLocalFileData {
   public static void main(String args[]) throws Exception {
     // Figure out what articles we've crawled already.
     Set<String> crawledArticleIds = Sets.newHashSet();
-    PreparedStatement stmt = Database.getConnection().prepareStatement(
+    PreparedStatement stmt = Database.getInstance().prepareStatement(
         "SELECT * FROM " + Database.getTableName(Article.class));
     ResultSet result = stmt.executeQuery();
     while (!result.isAfterLast()) {

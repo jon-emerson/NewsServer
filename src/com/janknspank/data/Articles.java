@@ -1,6 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -66,7 +65,7 @@ public class Articles {
         .append(") LIMIT 500");
 
     try {
-      PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
+      PreparedStatement stmt = Database.getInstance().prepareStatement(sql.toString());
       int i = 0;
       for (String topic : topics) {
         stmt.setString(++i, topic);
@@ -106,7 +105,7 @@ public class Articles {
         .append(") ORDER BY published_time DESC LIMIT 50");
 
     try {
-      PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
+      PreparedStatement stmt = Database.getInstance().prepareStatement(sql.toString());
       int i = 0;
       for (String articleId : articleIds) {
         stmt.setString(++i, articleId);
@@ -119,10 +118,10 @@ public class Articles {
 
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(Database.getCreateTableStatement(Article.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(Article.class)) {
-      connection.prepareStatement(statement).execute();
+    Database database = Database.getInstance();
+    database.prepareStatement(database.getCreateTableStatement(Article.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(Article.class)) {
+      database.prepareStatement(statement).execute();
     }
 
 //    Article.Builder builder = Article.newBuilder();

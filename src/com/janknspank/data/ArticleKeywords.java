@@ -1,6 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -34,7 +33,7 @@ public class ArticleKeywords {
     sql.append(")");
 
     try {
-      PreparedStatement stmt = Database.getConnection().prepareStatement(sql.toString());
+      PreparedStatement stmt = Database.getInstance().prepareStatement(sql.toString());
       int i = 0;
       for (Article article : articleList) {
         stmt.setString(++i, article.getUrlId());
@@ -49,8 +48,8 @@ public class ArticleKeywords {
 
   public static int deleteForUrlIds(Iterable<String> urlIds) throws DataInternalException {
     try {
-      PreparedStatement statement =
-          Database.getConnection().prepareStatement(DELETE_BY_URL_ID_COMMAND);
+      Database database = Database.getInstance();
+      PreparedStatement statement = database.prepareStatement(DELETE_BY_URL_ID_COMMAND);
       for (String urlId : urlIds) {
         statement.setString(1, urlId);
         statement.addBatch();
@@ -63,10 +62,10 @@ public class ArticleKeywords {
 
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Connection connection = Database.getConnection();
-    connection.prepareStatement(Database.getCreateTableStatement(ArticleKeyword.class)).execute();
-    for (String statement : Database.getCreateIndexesStatement(ArticleKeyword.class)) {
-      connection.prepareStatement(statement).execute();
+    Database database = Database.getInstance();
+    database.prepareStatement(database.getCreateTableStatement(ArticleKeyword.class)).execute();
+    for (String statement : database.getCreateIndexesStatement(ArticleKeyword.class)) {
+      database.prepareStatement(statement).execute();
     }
   }
 }

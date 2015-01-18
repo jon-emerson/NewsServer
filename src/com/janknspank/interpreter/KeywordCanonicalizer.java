@@ -13,6 +13,7 @@ import com.google.common.collect.Sets;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Entities;
 import com.janknspank.data.EntityType;
+import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.ArticleKeyword.Source;
 import com.janknspank.proto.Core.Entity;
@@ -109,7 +110,13 @@ public class KeywordCanonicalizer {
     keywords = Iterables.filter(keywords, new Predicate<ArticleKeyword>() {
       @Override
       public boolean apply(ArticleKeyword keyword) {
-        return KeywordUtils.isValidKeyword(keyword.getKeyword());
+        try {
+          return KeywordUtils.isValidKeyword(keyword.getKeyword());
+        } catch (ValidationException e) {
+          System.out.print("Error filtering invalid keywords: ");
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 

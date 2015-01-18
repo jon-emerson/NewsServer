@@ -16,7 +16,8 @@ public class LogoutServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws ValidationException, NotFoundException {
     try {
-      Database.deletePrimaryKey(getRequiredParameter(req, "sessionKey"), Session.class);
+      Database.getInstance().deletePrimaryKey(getRequiredParameter(req, "sessionKey"),
+          Session.class);
     } catch (DataInternalException e) {
       throw new NotFoundException("Session does not exist");
     }
