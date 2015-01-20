@@ -1,0 +1,49 @@
+{namespace news.training autoescape="strict"}
+
+/**
+ * Renders the article.
+ * @param title
+ * @param image_url
+ * @param paragraphs
+ */
+{template .articleViewer}
+  <img src="{$image_url}" alt="{$title}">
+  <h1>{$title}</h1>
+
+  {foreach $paragraph in $paragraphs}
+    <p>{$paragraph}</p>
+  {/foreach}
+
+
+{/template}
+
+/**
+ * List of checkboxes for relevant industries
+ * @param industries
+ */
+{template .industryPicker}
+  <form method="POST" action="train">
+  Quality Score<br>
+  
+    Related Industries<br>
+    {foreach $industry in $industries}
+    <input type="checkbox" name="industries" value="{$industry.id}" />{$industry.description}
+      <small>{$industry.group}</small><br>
+    {/foreach}
+    <br>
+    <input type="submit" value="Submit"><br>
+  </form>
+{/template}
+
+/**
+ * Main page layout.
+ */
+{template .main}
+<div style="width:100%;margin:0;">
+  <div style="float:left;width:70%;height:100%;overflow:scroll;">
+   {call .articleViewer data="all" /}
+  </div>
+  <div style="float:right;width:30%;height:100%;overflow:scroll;">
+    {call .industryPicker data="all" /}
+  </div>
+{/template}

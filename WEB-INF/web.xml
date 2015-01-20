@@ -112,4 +112,14 @@
     <servlet-name>SetUserUrlRatingServlet</servlet-name>
     <url-pattern>/setUserUrlRating</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>TrainingServlet</servlet-name>
+    <servlet-class>com.janknspank.server.TrainingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrainingServlet</servlet-name>
+    <url-pattern>/train</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
