@@ -8,14 +8,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -28,29 +23,15 @@ import com.janknspank.data.GuidFactory;
 import com.janknspank.data.LocalDatabase;
 import com.janknspank.data.ValidationException;
 import com.janknspank.interpreter.KeywordFinder;
-import com.janknspank.interpreter.KeywordUtils;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.Entity;
 import com.janknspank.proto.Core.Entity.EntityTopic;
 import com.janknspank.proto.Core.Entity.EntityTopic.Context;
 import com.janknspank.proto.Core.Entity.Source;
 import com.janknspank.proto.Local.LongAbstract;
-import com.janknspank.proto.Local.TokenToEntity;
 import com.janknspank.proto.Validator;
 
 public class GetKeywordsFromDbpediaAbstracts {
-  private static LoadingCache<String, Iterable<Entity>> LOCAL_ENTITY_CACHE =
-      CacheBuilder.newBuilder()
-          .maximumSize(10000)
-          .expireAfterAccess(5, TimeUnit.DAYS)
-          .expireAfterWrite(0, TimeUnit.MINUTES)
-          .build(new CacheLoader<String, Iterable<Entity>>() {
-             public Iterable<Entity> load(String key) throws Exception {
-               throw new Error("This cache does not support loads.");
-             }
-           });
-
-
   public static boolean isRelevantEntityType(EntityType type) {
     if (type == null) {
       return false;
@@ -71,50 +52,20 @@ public class GetKeywordsFromDbpediaAbstracts {
         !type.isA(EntityType.POPULATED_PLACE);
   }
 
-  /**
-   * Uses the local database to find a list of Entities that may match the
-   * passed text.
-   */
-  private static Iterable<Entity> getPartialMatches(String text) throws DataInternalException {
-    Set<String> tokens = Sets.newHashSet();
+  private static Iterable<Entity> getPartialMatches(Multimap<String, Entity> entityMap, String text)
+      throws DataInternalException {
+    Set<Entity> entities = Sets.newHashSet();
     for (String sentence : KeywordFinder.getSentences(text)) {
       for (String token : KeywordFinder.getTokens(sentence)) {
-        tokens.add(KeywordUtils.cleanKeyword(token));
+        entities.addAll(entityMap.get(token));
       }
-    }
-    List<Entity> entities = Lists.newArrayList();
-    Set<String> tokensToFetch = Sets.newHashSet();
-    for (String keyword : tokens) {
-      Iterable<Entity> tokenToEntities = LOCAL_ENTITY_CACHE.getIfPresent(keyword);
-      if (tokenToEntities != null) {
-        Iterables.addAll(entities, tokenToEntities);
-      } else {
-        tokensToFetch.add(keyword);
-      }
-    }
-    Database localDatabase = LocalDatabase.getInstance();
-    Multimap<String, Entity> newTokenToEntityMap = HashMultimap.create();
-    for (TokenToEntity tokenToEntity :
-        localDatabase.get("token", tokensToFetch, TokenToEntity.class)) {
-      if (!tokensToFetch.contains(tokenToEntity.getToken())) {
-        System.out.println("GOT ENTITY W/ UNREQUESTED KEYWORD!! " + tokenToEntity.getToken());
-        continue;
-      }
-      Entity entity = Entity.newBuilder()
-          .setKeyword(tokenToEntity.getEntityKeyword())
-          .setType(tokenToEntity.getEntityType())
-          .build();
-      entities.add(entity);
-      newTokenToEntityMap.put(tokenToEntity.getToken(), entity);
-    }
-    for (String token : newTokenToEntityMap.keySet()) {
-      LOCAL_ENTITY_CACHE.put(token, newTokenToEntityMap.get(token));
     }
     return entities;
   }
 
-  private static Iterable<Entity> getEntities(LongAbstract longAbstract, String text)
-          throws DataInternalException {
+  private static Iterable<Entity> getEntities(
+      Multimap<String, Entity> entityMap, LongAbstract longAbstract, String text)
+      throws DataInternalException {
     // Find words that look like keywords, using NLP.  This helps find entities
     // that might not be in Wikipedia - Which is probably quite a few!
     List<Entity> entities = Lists.newArrayList();
@@ -131,7 +82,7 @@ public class GetKeywordsFromDbpediaAbstracts {
 
     // Find Wikipedia keyword matches against the actual text.
     Set<Entity> wikipediaMatches = Sets.newHashSet();
-    for (Entity entity : getPartialMatches(text)) {
+    for (Entity entity : getPartialMatches(entityMap, text)) {
       if (text.contains(entity.getKeyword())) {
         for (EntityTopic entityTopic : entity.getTopicList()) {
           if (entityTopic.getContext() == Context.WIKIPEDIA_SUBTOPIC) {
@@ -169,20 +120,20 @@ public class GetKeywordsFromDbpediaAbstracts {
    */
   private static Iterable<Entity> canonicalize(LongAbstract longAbstract, List<Entity> entities)
       throws DataInternalException {
-    Map<String, Entity> entityMap = Maps.newHashMap();
+    Map<String, Entity> topicToEntityMap = Maps.newHashMap();
     for (Entity entity : entities) {
-      Entity existingEntity = entityMap.get(entity.getKeyword());
+      Entity existingEntity = topicToEntityMap.get(entity.getKeyword());
       if (existingEntity == null || existingEntity.getId() == null) {
-        entityMap.put(entity.getKeyword(), entity);
+        topicToEntityMap.put(entity.getKeyword(), entity);
       }
     }
-    for (Entity entity : Entities.getEntitiesByKeyword(entityMap.keySet())) {
+    topicToEntityMap.remove(longAbstract.getTopic());
+    for (Entity entity : Entities.getEntitiesByKeyword(topicToEntityMap.keySet())) {
       if (isRelevantEntityType(EntityType.fromValue(entity.getType()))) {
-        entityMap.put(entity.getKeyword(), entity);
+        topicToEntityMap.put(entity.getKeyword(), entity);
       }
     }
-    entityMap.remove(longAbstract.getTopic());
-    return entityMap.values();
+    return topicToEntityMap.values();
   }
 
   /**
@@ -209,7 +160,69 @@ public class GetKeywordsFromDbpediaAbstracts {
     }
   }
 
+  /**
+   * This is a map from every word in relevant entities to the Entities
+   * themselves.  This means that a consume can tokenize all their text into
+   * tokens, then use this map to find if there's any potential maps
+   * efficiently, before doing the less efficient verification of each token
+   * (but on a much smaller data set).
+   */
+  public static Multimap<String, Entity> getEntityMap() throws IOException {
+    Multimap<String, Entity> entityMap = HashMultimap.create();
+    BufferedReader reader = null;
+    try {
+      // We can do n-triples or n-quads here... For some reason I downloaded
+      // quads.
+      reader = new BufferedReader(new FileReader("dbpedia/instance_types_en.nt"));
+      String line = reader.readLine();
+      DbpediaInstanceType currentInstanceType = new DbpediaInstanceType();
+      while (line != null) {
+        if (line.startsWith("#")) {
+          line = reader.readLine();
+          continue;
+        }
+        DbpediaInstanceTypeLine instanceTypeLine = new DbpediaInstanceTypeLine(line);
+        if (instanceTypeLine.isValid()) {
+          if (!currentInstanceType.isLineRelevant(instanceTypeLine)) {
+            if (currentInstanceType.isValuableEntity()) {
+              String topicStr = currentInstanceType.getTopic();
+              EntityType type = currentInstanceType.getEntityType();
+              if (isRelevantEntityType(type) &&
+                  topicStr.length() <= Entities.MAX_KEYWORD_LENGTH) {
+                Entity entity = Entity.newBuilder()
+                    .setKeyword(topicStr)
+                    .setType(type.toString())
+                    .build();
+                for (String keywordToken : topicStr.split("\\s+")) {
+                  entityMap.put(keywordToken, entity);
+                }
+              }
+            }
+            currentInstanceType = new DbpediaInstanceType();
+          }
+          currentInstanceType.addLine(instanceTypeLine);
+        }
+        line = reader.readLine();
+      }
+      // There's an off-by-1 error here: We lose the last entity.
+    } finally {
+      if (reader != null) {
+        reader.close();
+      }
+    }
+    return entityMap;
+  }
+
   public static void main(String args[]) {
+    System.out.println("Reading entities...");
+    Multimap<String, Entity> entityMap;
+    try {
+      entityMap = getEntityMap();
+    } catch (IOException e) {
+      throw new Error(e);
+    }
+    System.out.println("Starting process...");
+
     BufferedReader reader = null;
     try {
       // We can do n-triples or n-quads here... For some reason I downloaded quads.
@@ -241,7 +254,7 @@ public class GetKeywordsFromDbpediaAbstracts {
           }
 
           Entity.Builder entityBuilder = entity.toBuilder();
-          for (Entity relatedEntity : getEntities(abs, abs.getText())) {
+          for (Entity relatedEntity : getEntities(entityMap, abs, abs.getText())) {
             // Give entities without an ID an ID, add them to entities to insert
             if (!relatedEntity.hasId()) {
               relatedEntity = relatedEntity.toBuilder()

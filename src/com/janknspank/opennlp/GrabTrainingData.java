@@ -26,7 +26,7 @@ import com.janknspank.interpreter.SiteParser;
  * versions to the /trainingdata folder under their appropriate subdirectories.
  */
 public class GrabTrainingData {
-  private final Fetcher fetcher = new Fetcher();
+  private final static Fetcher FETCHER = new Fetcher();
 
   private static final String[] URLS = {
     "http://www.bbc.co.uk/news/uk-30625945"
@@ -53,7 +53,7 @@ public class GrabTrainingData {
   }
 
   private DocumentNode getDocumentNode(String url) throws FetchException {
-    FetchResponse fetchResponse = fetcher.fetch(url);
+    FetchResponse fetchResponse = FETCHER.fetch(url);
     if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
       try {
         return DocumentBuilder.build(url, fetchResponse.getReader());

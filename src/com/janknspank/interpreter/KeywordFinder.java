@@ -76,6 +76,8 @@ public class KeywordFinder {
     }
   }
 
+  private KeywordFinder() {};
+
   /**
    * Top level method: Finds all the keywords in an article, whether they be
    * in the article body, meta tags, wherever!
