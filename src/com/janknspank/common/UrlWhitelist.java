@@ -692,7 +692,7 @@ public class UrlWhitelist {
     ResultSet result = stmt.executeQuery();
     Map<String, String> urlsToDelete = Maps.newHashMap();
     while (!result.isAfterLast()) {
-      Url url = database.createFromResultSet(result, Url.class);
+      Url url = Database.createFromResultSet(result, Url.class);
       if (url != null) {
         String urlStr = url.getUrl();
         if ((!isOkay(urlStr) || !urlStr.equals(UrlCleaner.clean(urlStr)))) {
