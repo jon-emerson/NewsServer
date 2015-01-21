@@ -501,3 +501,44 @@ message IndustryCode {
     (string_length) = 100
   ];
 }
+
+message TrainedArticleClassification {
+  optional string url_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 22,
+    (string_charset) = LATIN1
+  ];
+
+  optional string code = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 5
+  ];
+  
+  optional bool checked = 3 [
+    (required) = YES,
+    (storage_method) = INDEX
+  ];
+  
+  optional string trainer_user_id = 4 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 22,
+    (string_charset) = LATIN1
+  ];
+}
+
+message ArticleClassification {
+  optional string code = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 5
+  ];
+  
+  optional string description = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 100
+  ];
+}

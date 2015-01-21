@@ -113,6 +113,8 @@ public class Database {
       case ENUM:
       case INT:
         return "INT";
+      case BOOLEAN:
+        return "BOOLEAN";
       default:
         throw new IllegalStateException("Unsupported type: " + fieldDescriptor.getJavaType().name());
     }
@@ -263,6 +265,9 @@ public class Database {
             case ENUM:
               EnumValueDescriptor v = (EnumValueDescriptor) message.getField(field);
               statement.setInt(offset, v.getNumber());
+              break;
+            case BOOLEAN:
+              statement.setBoolean(offset, (boolean) message.getField(field));
               break;
             default:
               throw new IllegalStateException("Unsupported type: " + field.getJavaType().name());
