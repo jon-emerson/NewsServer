@@ -54,14 +54,14 @@ public class TrainingServlet extends StandardServlet {
         "paragraphs", new SoyListData(art.getParagraphList()),
         "image_url", art.getImageUrl(),
         "classifications", Iterables.transform(ArticleClassifications.ARTICLE_CLASSIFICATION_CODE_MAP.values(),
-          new Function<ArticleClassification, SoyMapData>() {
-            @Override
-            public SoyMapData apply(ArticleClassification articleClassification) {
-              return new SoyMapData(
-                  "code", articleClassification.getCode(),
-                  "description", articleClassification.getDescription());
-            }
-          }),
+            new Function<ArticleClassification, SoyMapData>() {
+              @Override
+              public SoyMapData apply(ArticleClassification articleClassification) {
+                return new SoyMapData(
+                    "code", articleClassification.getCode(),
+                    "description", articleClassification.getDescription());
+              }
+            }),
         "industries", Iterables.transform(IndustryCodes.INDUSTRY_CODE_MAP.values(),
             new Function<IndustryCode, SoyMapData>() {
               @Override
@@ -76,9 +76,10 @@ public class TrainingServlet extends StandardServlet {
   
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+    Session session = this.getSession(req);
+    
     // Read parameters.
     String urlId = getRequiredParameter(req, "urlId");
-    Session session = this.getSession(req);
     String[] industryIdsList = req.getParameterValues("industriesCheckboxes");
     //Only returns the selected checkboxes
     String[] articleClassificationCodesList = req.getParameterValues("classifications");
@@ -89,10 +90,10 @@ public class TrainingServlet extends StandardServlet {
       List<TrainedArticleIndustry> articleIndustries = new ArrayList<TrainedArticleIndustry>();
       for (String industryId: industryIdsList) {
         articleIndustries.add(TrainedArticleIndustry.newBuilder()
-          .setTrainerUserId(session.getUserId())
-          .setUrlId(urlId)
-          .setIndustryCodeId(Integer.parseInt(industryId))
-          .build());
+            .setTrainerUserId(session.getUserId())
+            .setUrlId(urlId)
+            .setIndustryCodeId(Integer.parseInt(industryId))
+            .build());
       }
       Database.getInstance().insert(articleIndustries);      
     }
@@ -114,15 +115,14 @@ public class TrainingServlet extends StandardServlet {
       String code = entry.getKey();
       Boolean state = entry.getValue();
       articleClassifications.add(TrainedArticleClassification.newBuilder()
-        .setTrainerUserId(session.getUserId())
-        .setUrlId(urlId)
-        .setCode(code)
-        .setChecked(state)
-        .build());
+          .setTrainerUserId(session.getUserId())
+          .setUrlId(urlId)
+          .setCode(code)
+          .setChecked(state)
+          .build());
     }
     Database.getInstance().insert(articleClassifications);
     
-    JSONObject response = this.createSuccessResponse();
-    return response;
+    return this.createSuccessResponse();
   }
 }

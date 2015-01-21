@@ -18060,14 +18060,14 @@ public final class Core {
       "\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035" +
       "\026\250\246\035\001\"\\\n\014IndustryCode\022\024\n\002id\030\001 \001(\005B\010\210\246\035\001\220" +
       "\246\035\002\022\027\n\005group\030\002 \001(\tB\010\210\246\035\001\230\246\0352\022\035\n\013descript" +
-      "ion\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\242\001\n\034TrainedArticleCl" +
+      "ion\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\246\001\n\034TrainedArticleCl" +
       "assification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246" +
-      "\035\026\250\246\035\001\022\032\n\004code\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\005\022\031\n\007ch" +
-      "ecked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id" +
-      "\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\"V\n\025ArticleClass",
-      "ification\022\032\n\004code\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035\005\022!\n" +
-      "\013description\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035dB\026\n\024com." +
-      "janknspank.proto"
+      "\035\026\250\246\035\001\022\036\n\004code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031" +
+      "\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_use" +
+      "r_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\"V\n\025ArticleC",
+      "lassification\022\032\n\004code\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035" +
+      "\005\022!\n\013description\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035dB\026\n\024" +
+      "com.janknspank.proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18368,6 +18368,7 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.required);

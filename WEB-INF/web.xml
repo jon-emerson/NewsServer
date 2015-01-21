@@ -133,7 +133,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>TrainingServlet</servlet-name>
-    <url-pattern>/train</url-pattern>
+    <url-pattern>/training</url-pattern>
   </servlet-mapping>
   
 </web-app>

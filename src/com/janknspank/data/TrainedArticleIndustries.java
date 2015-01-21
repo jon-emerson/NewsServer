@@ -40,7 +40,7 @@ public class TrainedArticleIndustries {
   }
   
   /** Helper method for creating the TrainedArticleIndustry table. */
-	  public static void main(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
 	    Database database = Database.getInstance();
 	    database.prepareStatement(database.getCreateTableStatement(TrainedArticleIndustry.class)).execute();
 	    for (String statement : database.getCreateIndexesStatement(TrainedArticleIndustry.class)) {

@@ -143,8 +143,7 @@ public class Articles {
     do {
       art = Articles.getRandomArticle();
       taggedIndustries = TrainedArticleIndustries.getFromArticle(art.getUrlId());
-    }
-    while (!taggedIndustries.isEmpty());
+    } while (!taggedIndustries.isEmpty());
     return art;
   }
   

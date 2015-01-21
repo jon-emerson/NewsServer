@@ -4,21 +4,22 @@
  * Main page layout.
  */
 {template .main}
-<head>
-<link rel="stylesheet" type="text/css" href="resources/train.css">
-<script src="resources/jquery-1.11.2.min.js"></script>
-<script src="resources/list.min.js"></script>
-</head>
-<body>
-<script src="resources/train.js"></script>
-<div style="width:100%;margin:0;">
-  <div class="leftColumn">
-   {call .articleViewer data="all" /}
-  </div>
-  <div class="rightColumn">
-    {call .industryPicker data="all" /}
-  </div>
-<body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="resources/train.css">
+    <script src="resources/jquery-1.11.2.min.js"></script>
+    <script src="resources/list.min.js"></script>
+  </head>
+  <body>
+    <script src="resources/train.js"></script>
+    <div style="width:100%;margin:0;">
+      <div class="leftColumn">
+       {call .articleViewer data="all" /}
+      </div>
+      <div class="rightColumn">
+        {call .industryPicker data="all" /}
+      </div>
+    </div>
+  <body>
 {/template}
 
 /**
@@ -47,30 +48,30 @@
  */
 {template .industryPicker}
   <form id="form" method="POST" action="train">
-  <input id="sessionKey" type="hidden" name="sessionKey" value="{$sessionKey}" />
-  <input type="hidden" name="urlId" value="{$urlId}" />
-  <h2 class="sectionHeader">Article Characteristics</h2>
-  {foreach $classification in $classifications}
-  <input type="checkbox" name="classifications" value="{$classification.code}" />
-    {$classification.description}<br>
-  {/foreach}
-  <h2 class="sectionHeader">Interest to me</h2>
-  <input type="range" name="qualityScore" id="qualityScore" min="0" max="100" 
-    onchange="updateRangeLabel(this.value);" value="50" />
-  <span id="qualityScoreLabel">50</span><br>
-  <div id="industries">
-    <h2 class="sectionHeader">Relevant to people in which industries:</h2>
-    <input class="search" placeholder="Search" />
-    <ul class="list">
-    {foreach $industry in $industries}
-      <li>
-        <input type="checkbox" name="industriesCheckboxes" value="{$industry.id}" />
-        <span class="industryDescription">{$industry.description}</span>
-        <span class="industryGroup">{$industry.group}</span><br>
-      </li>
+    <input id="sessionKey" type="hidden" name="sessionKey" value="{$sessionKey}" />
+    <input type="hidden" name="urlId" value="{$urlId}" />
+    <h2 class="sectionHeader">Article Characteristics</h2>
+    {foreach $classification in $classifications}
+      <input type="checkbox" name="classifications" value="{$classification.code}" />
+      {$classification.description}<br>
     {/foreach}
-    </ul>
-  </div>
+    <h2 class="sectionHeader">Interest to me</h2>
+    <input type="range" name="qualityScore" id="qualityScore" min="0" max="100" 
+      onchange="updateRangeLabel(this.value);" value="50" />
+    <span id="qualityScoreLabel">50</span><br>
+    <div id="industries">
+      <h2 class="sectionHeader">Relevant to people in which industries:</h2>
+      <input class="search" placeholder="Search" />
+      <ul class="list">
+      {foreach $industry in $industries}
+        <li>
+          <input type="checkbox" name="industriesCheckboxes" value="{$industry.id}" />
+          <span class="industryDescription">{$industry.description}</span>
+          <span class="industryGroup">{$industry.group}</span><br>
+        </li>
+      {/foreach}
+      </ul>
+    </div>
     <input type="submit" id="submit" value="Submit"><br>
   </form>
   <script type="text/javascript">
