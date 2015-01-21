@@ -45,14 +45,14 @@ public class TrainingServlet extends StandardServlet {
   @Override
   protected SoyMapData getSoyMapData(HttpServletRequest req)
       throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
-    Article art = Articles.getRandomUntrainedArticle();
+    Article article = Articles.getRandomUntrainedArticle();
     return new SoyMapData(
         "sessionKey", this.getSession(req).getSessionKey(),
-        "title", art.getTitle(),
-        "url", art.getUrl(),
-        "urlId", art.getUrlId(),
-        "paragraphs", new SoyListData(art.getParagraphList()),
-        "image_url", art.getImageUrl(),
+        "title", article.getTitle(),
+        "url", article.getUrl(),
+        "urlId", article.getUrlId(),
+        "paragraphs", new SoyListData(article.getParagraphList()),
+        "image_url", article.getImageUrl(),
         "classifications", Iterables.transform(ArticleClassifications.ARTICLE_CLASSIFICATION_CODE_MAP.values(),
             new Function<ArticleClassification, SoyMapData>() {
               @Override
