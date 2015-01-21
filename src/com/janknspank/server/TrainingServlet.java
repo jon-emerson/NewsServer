@@ -117,7 +117,7 @@ public class TrainingServlet extends StandardServlet {
       articleClassifications.add(TrainedArticleClassification.newBuilder()
           .setTrainerUserId(session.getUserId())
           .setUrlId(urlId)
-          .setCode(code)
+          .setArticleClassificationCode(code)
           .setChecked(state)
           .build());
     }
