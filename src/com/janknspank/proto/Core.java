@@ -16413,20 +16413,20 @@ public final class Core {
     com.google.protobuf.ByteString
         getUrlIdBytes();
 
-    // optional string code = 2;
+    // optional string article_classification_code = 2;
     /**
-     * <code>optional string code = 2;</code>
+     * <code>optional string article_classification_code = 2;</code>
      */
-    boolean hasCode();
+    boolean hasArticleClassificationCode();
     /**
-     * <code>optional string code = 2;</code>
+     * <code>optional string article_classification_code = 2;</code>
      */
-    java.lang.String getCode();
+    java.lang.String getArticleClassificationCode();
     /**
-     * <code>optional string code = 2;</code>
+     * <code>optional string article_classification_code = 2;</code>
      */
     com.google.protobuf.ByteString
-        getCodeBytes();
+        getArticleClassificationCodeBytes();
 
     // optional bool checked = 3;
     /**
@@ -16511,7 +16511,7 @@ public final class Core {
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              code_ = input.readBytes();
+              articleClassificationCode_ = input.readBytes();
               break;
             }
             case 24: {
@@ -16607,20 +16607,20 @@ public final class Core {
       }
     }
 
-    // optional string code = 2;
-    public static final int CODE_FIELD_NUMBER = 2;
-    private java.lang.Object code_;
+    // optional string article_classification_code = 2;
+    public static final int ARTICLE_CLASSIFICATION_CODE_FIELD_NUMBER = 2;
+    private java.lang.Object articleClassificationCode_;
     /**
-     * <code>optional string code = 2;</code>
+     * <code>optional string article_classification_code = 2;</code>
      */
-    public boolean hasCode() {
+    public boolean hasArticleClassificationCode() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string code = 2;</code>
+     * <code>optional string article_classification_code = 2;</code>
      */
-    public java.lang.String getCode() {
-      java.lang.Object ref = code_;
+    public java.lang.String getArticleClassificationCode() {
+      java.lang.Object ref = articleClassificationCode_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -16628,22 +16628,22 @@ public final class Core {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          code_ = s;
+          articleClassificationCode_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string code = 2;</code>
+     * <code>optional string article_classification_code = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getCodeBytes() {
-      java.lang.Object ref = code_;
+        getArticleClassificationCodeBytes() {
+      java.lang.Object ref = articleClassificationCode_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        code_ = b;
+        articleClassificationCode_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -16711,7 +16711,7 @@ public final class Core {
 
     private void initFields() {
       urlId_ = "";
-      code_ = "";
+      articleClassificationCode_ = "";
       checked_ = false;
       trainerUserId_ = "";
     }
@@ -16731,7 +16731,7 @@ public final class Core {
         output.writeBytes(1, getUrlIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getCodeBytes());
+        output.writeBytes(2, getArticleClassificationCodeBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(3, checked_);
@@ -16754,7 +16754,7 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getCodeBytes());
+          .computeBytesSize(2, getArticleClassificationCodeBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -16882,7 +16882,7 @@ public final class Core {
         super.clear();
         urlId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        code_ = "";
+        articleClassificationCode_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         checked_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -16923,7 +16923,7 @@ public final class Core {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.code_ = code_;
+        result.articleClassificationCode_ = articleClassificationCode_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -16953,9 +16953,9 @@ public final class Core {
           urlId_ = other.urlId_;
           onChanged();
         }
-        if (other.hasCode()) {
+        if (other.hasArticleClassificationCode()) {
           bitField0_ |= 0x00000002;
-          code_ = other.code_;
+          articleClassificationCode_ = other.articleClassificationCode_;
           onChanged();
         }
         if (other.hasChecked()) {
@@ -17067,76 +17067,76 @@ public final class Core {
         return this;
       }
 
-      // optional string code = 2;
-      private java.lang.Object code_ = "";
+      // optional string article_classification_code = 2;
+      private java.lang.Object articleClassificationCode_ = "";
       /**
-       * <code>optional string code = 2;</code>
+       * <code>optional string article_classification_code = 2;</code>
        */
-      public boolean hasCode() {
+      public boolean hasArticleClassificationCode() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string code = 2;</code>
+       * <code>optional string article_classification_code = 2;</code>
        */
-      public java.lang.String getCode() {
-        java.lang.Object ref = code_;
+      public java.lang.String getArticleClassificationCode() {
+        java.lang.Object ref = articleClassificationCode_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          code_ = s;
+          articleClassificationCode_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string code = 2;</code>
+       * <code>optional string article_classification_code = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getCodeBytes() {
-        java.lang.Object ref = code_;
+          getArticleClassificationCodeBytes() {
+        java.lang.Object ref = articleClassificationCode_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          code_ = b;
+          articleClassificationCode_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string code = 2;</code>
+       * <code>optional string article_classification_code = 2;</code>
        */
-      public Builder setCode(
+      public Builder setArticleClassificationCode(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        code_ = value;
+        articleClassificationCode_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string code = 2;</code>
+       * <code>optional string article_classification_code = 2;</code>
        */
-      public Builder clearCode() {
+      public Builder clearArticleClassificationCode() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        code_ = getDefaultInstance().getCode();
+        articleClassificationCode_ = getDefaultInstance().getArticleClassificationCode();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string code = 2;</code>
+       * <code>optional string article_classification_code = 2;</code>
        */
-      public Builder setCodeBytes(
+      public Builder setArticleClassificationCodeBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        code_ = value;
+        articleClassificationCode_ = value;
         onChanged();
         return this;
       }
@@ -18060,14 +18060,15 @@ public final class Core {
       "\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035" +
       "\026\250\246\035\001\"\\\n\014IndustryCode\022\024\n\002id\030\001 \001(\005B\010\210\246\035\001\220" +
       "\246\035\002\022\027\n\005group\030\002 \001(\tB\010\210\246\035\001\230\246\0352\022\035\n\013descript" +
-      "ion\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\246\001\n\034TrainedArticleCl" +
+      "ion\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\275\001\n\034TrainedArticleCl" +
       "assification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246" +
-      "\035\026\250\246\035\001\022\036\n\004code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031" +
-      "\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_use" +
-      "r_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\"V\n\025ArticleC",
-      "lassification\022\032\n\004code\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035" +
-      "\005\022!\n\013description\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035dB\026\n\024" +
-      "com.janknspank.proto"
+      "\035\026\250\246\035\001\0225\n\033article_classification_code\030\002 " +
+      "\001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010" +
+      "\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220",
+      "\246\035\003\230\246\035\026\250\246\035\001\"Z\n\025ArticleClassification\022\036\n\004" +
+      "code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022!\n\013descript" +
+      "ion\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035dB\026\n\024com.janknspan" +
+      "k.proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18175,7 +18176,7 @@ public final class Core {
           internal_static_TrainedArticleClassification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TrainedArticleClassification_descriptor,
-              new java.lang.String[] { "UrlId", "Code", "Checked", "TrainerUserId", });
+              new java.lang.String[] { "UrlId", "ArticleClassificationCode", "Checked", "TrainerUserId", });
           internal_static_ArticleClassification_descriptor =
             getDescriptor().getMessageTypes().get(16);
           internal_static_ArticleClassification_fieldAccessorTable = new
@@ -18378,6 +18379,7 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
