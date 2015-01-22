@@ -46,17 +46,17 @@ public class Database {
               "characterSetResults=utf8",
               "connectionCollation=utf8_bin"));
   private static final String PROTO_COLUMN_NAME = "proto";
-//  private static final String MYSQL_USER;
-//  private static final String MYSQL_PASSWORD;
+  private static final String MYSQL_USER;
+  private static final String MYSQL_PASSWORD;
   static {
-//    MYSQL_USER = System.getenv("MYSQL_USER");
-//    if (MYSQL_USER == null) {
-//      throw new IllegalStateException("$MYSQL_USER is undefined");
-//    }
-//    MYSQL_PASSWORD = System.getenv("MYSQL_PASSWORD");
-//    if (MYSQL_PASSWORD == null) {
-//      throw new IllegalStateException("$MYSQL_PASSWORD is undefined");
-//    }
+    MYSQL_USER = System.getenv("MYSQL_USER");
+    if (MYSQL_USER == null) {
+      throw new IllegalStateException("$MYSQL_USER is undefined");
+    }
+    MYSQL_PASSWORD = System.getenv("MYSQL_PASSWORD");
+    if (MYSQL_PASSWORD == null) {
+      throw new IllegalStateException("$MYSQL_PASSWORD is undefined");
+    }
     try {
       // Make sure the MySQL JDBC driver is loaded.
       Class.forName(JDBC_DRIVER);
@@ -74,17 +74,16 @@ public class Database {
   }
 
   public static Database getInstance() throws DataInternalException {
-//    if (instance == null) {
-//      System.out.println("Connecting to remote database...");
-//      try {
-//        instance = new Database(DriverManager.getConnection(DB_URL, MYSQL_USER, MYSQL_PASSWORD));
-//      } catch (SQLException e) {
-//        throw new DataInternalException("Could not connect to database", e);
-//      }
-//      System.out.println("Connected to remote database successfully.");
-//    }
-//    return instance;
-    return LocalDatabase.getInstance();
+    if (instance == null) {
+      System.out.println("Connecting to remote database...");
+      try {
+        instance = new Database(DriverManager.getConnection(DB_URL, MYSQL_USER, MYSQL_PASSWORD));
+      } catch (SQLException e) {
+        throw new DataInternalException("Could not connect to database", e);
+      }
+      System.out.println("Connected to remote database successfully.");
+    }
+    return instance;
   }
 
   // Please don't call this.  It won't work when we switch to MongoDB.
