@@ -3,6 +3,7 @@ package com.janknspank.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Reader;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,7 +53,7 @@ public class ReinterpretCachedData {
         url = Urls.markCrawlStart(url);
       } else {
         System.out.println("Cleaning old data for URL: " + url.getUrl());
-        database.deletePrimaryKey(url.getId(), Article.class);
+        database.delete(Article.class, url.getId());
         ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
         Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
       }
@@ -60,8 +61,10 @@ public class ReinterpretCachedData {
       System.out.println("Interpreting: " + url.getUrl());
 
       // Save this article and its keywords.
+      Reader fileReader = null;
       try {
-        InterpretedData interpretedData = Interpreter.interpret(url, new FileReader(dataFile));
+        fileReader = new FileReader(dataFile);
+        InterpretedData interpretedData = Interpreter.interpret(url, fileReader);
         database.insert(interpretedData.getArticle());
         database.insert(interpretedData.getKeywordList());
 
@@ -80,6 +83,10 @@ public class ReinterpretCachedData {
       } catch (FetchException|ParserException|RequiredFieldException e) {
         // Bad article.
         e.printStackTrace();
+      } finally {
+        if (fileReader != null) {
+          fileReader.close();
+        }
       }
     }
   }

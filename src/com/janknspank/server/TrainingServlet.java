@@ -12,19 +12,14 @@ import org.json.JSONObject;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.data.ArticleClassifications;
 import com.janknspank.data.Articles;
-import com.janknspank.data.IndustryCodes;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
 import com.janknspank.data.Database;
-import com.janknspank.data.TrainedArticleClassifications;
-import com.janknspank.data.TrainedArticleIndustries;
-import com.janknspank.data.Urls;
-import com.janknspank.data.UserUrlFavorites;
+import com.janknspank.data.IndustryCodes;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleClassification;
@@ -32,12 +27,9 @@ import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.Session;
 import com.janknspank.proto.Core.TrainedArticleClassification;
 import com.janknspank.proto.Core.TrainedArticleIndustry;
-import com.janknspank.proto.Core.UserUrlFavorite;
-import com.janknspank.proto.Serializer;
 
 @AuthenticationRequired
 public class TrainingServlet extends StandardServlet {
-
   /**
    * Returns any Soy data necessary for rendering the .main template for this
    * servlet's Soy page.

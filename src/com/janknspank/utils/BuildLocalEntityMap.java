@@ -34,11 +34,8 @@ public class BuildLocalEntityMap {
 
   /** Helper method for creating the TokenToEntity table. */
   public static void main(String args[]) throws Exception {
-    Database database = LocalDatabase.getInstance();
-    database.prepareStatement(database.getCreateTableStatement(TokenToEntity.class)).execute();
-    for (String statement : database.getCreateIndexesStatement(TokenToEntity.class)) {
-      database.prepareStatement(statement).execute();
-    }
+    Database localDatabase = LocalDatabase.getInstance();
+    localDatabase.createTable(TokenToEntity.class);
 
     BufferedReader reader = null;
     try {
@@ -78,14 +75,14 @@ public class BuildLocalEntityMap {
           currentInstanceType.addLine(instanceTypeLine);
 
           if (tokenToEntitiesToInsert.size() > 500) {
-            database.insert(tokenToEntitiesToInsert);
+            localDatabase.insert(tokenToEntitiesToInsert);
             tokenToEntitiesToInsert.clear();
           }
         }
         line = reader.readLine();
       }
 
-      database.insert(tokenToEntitiesToInsert);
+      localDatabase.insert(tokenToEntitiesToInsert);
 
       // There's an off-by-1 error here: We lose the last entity.
     } finally {

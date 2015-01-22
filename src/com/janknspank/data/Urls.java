@@ -1,7 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,7 +13,6 @@ import com.google.common.collect.Sets;
 import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.DateParser;
 import com.janknspank.proto.Core.Url;
-import com.janknspank.proto.Validator;
 
 /**
  * Row in the MySQL database: Url.  Represents a URL we discovered.
@@ -23,19 +20,6 @@ import com.janknspank.proto.Validator;
  * used as a foreign key in other tables.
  */
 public class Urls {
-  private static final String SELECT_BY_ID_COMMAND =
-      "SELECT * FROM " + Database.getTableName(Url.class) + " WHERE id=?";
-  private static final String SELECT_NEXT_URL_TO_CRAWL_COMMAND =
-      "SELECT * FROM " + Database.getTableName(Url.class) + " "
-      + "WHERE crawl_priority > 0 AND last_crawl_start_time IS NULL AND "
-      // + "url LIKE \"http://recode.net/%\" AND "
-      + "NOT url LIKE \"https://twitter.com/%\" "
-      + "ORDER BY crawl_priority DESC LIMIT 1";
-  private static final String UPDATE_CRAWL_START_COMMAND =
-      "UPDATE " + Database.getTableName(Url.class) + " "
-      + "SET last_crawl_start_time=?, proto=? "
-      + "WHERE id=? AND last_crawl_start_time IS NULL";
-
   /**
    * Returns the crawl priority for the URL, assuming that we don't know
    * anything about it yet (e.g. it hasn't been discovered before and we don't
@@ -104,7 +88,7 @@ public class Urls {
 
     // Use urls.keySet() instead of urlStrings here as a way to dedupe.
     List<Url> urlsToUpdate = Lists.newArrayList(); // To increment tweet_count.
-    for (Url existingUrl : Database.getInstance().get(urls.keySet(), Url.class)) {
+    for (Url existingUrl : Database.getInstance().get(Url.class, urls.keySet())) {
       urls.put(existingUrl.getUrl(), existingUrl);
 
       if (isTweet) {
@@ -147,19 +131,19 @@ public class Urls {
    *     given Url has already been crawled by another thread
    */
   public static Url markCrawlStart(Url url) throws DataInternalException {
+    url = url.toBuilder()
+        .setLastCrawlStartTime(System.currentTimeMillis())
+        .build();
     try {
-      url = url.toBuilder()
-          .setLastCrawlStartTime(System.currentTimeMillis())
-          .build();
-      Validator.assertValid(url);
-      PreparedStatement statement =
-          Database.getInstance().prepareStatement(UPDATE_CRAWL_START_COMMAND);
-      statement.setLong(1, System.currentTimeMillis());
-      statement.setBytes(2, url.toByteArray());
-      statement.setString(3, url.getId());
-      return (statement.executeUpdate() == 1) ? url : null;
-    } catch (SQLException|ValidationException e) {
-      throw new DataInternalException("Could not mark URL as crawled", e);
+      // Only update the URL if last_crawl_start_time hasn't yet been claimed
+      // by another crawling thread.
+      if (Database.getInstance().update(url, new QueryOption.WhereNull("last_crawl_start_time"))) {
+        return url;
+      } else {
+        return null;
+      }
+    } catch (ValidationException e) {
+      throw new DataInternalException("Error updating last crawl start time: " + e.getMessage(), e);
     }
   }
 
@@ -181,13 +165,11 @@ public class Urls {
   }
 
   public static Url getNextUrlToCrawl() throws DataInternalException {
-    try {
-      PreparedStatement stmt =
-          Database.getInstance().prepareStatement(SELECT_NEXT_URL_TO_CRAWL_COMMAND);
-      return Database.createFromResultSet(stmt.executeQuery(), Url.class);
-    } catch (SQLException e) {
-      throw new DataInternalException("Could not read next URL to crawl", e);
-    }
+    return Database.getInstance().getFirst(Url.class,
+        new QueryOption.WhereNull("last_crawl_start_time"),
+        new QueryOption.WhereNotEquals("crawl_priority", "0"),
+        new QueryOption.WhereNotLike("url", "https://twitter.com/%"),
+        new QueryOption.DescendingSort("crawl_priority"));
   }
 
   /**
@@ -195,22 +177,12 @@ public class Urls {
    * themselves).
    */
   public static Url getById(String id) throws DataInternalException {
-    try {
-      PreparedStatement statement = Database.getInstance().prepareStatement(SELECT_BY_ID_COMMAND);
-      statement.setString(1, id);
-      return Database.createFromResultSet(statement.executeQuery(), Url.class);
-
-    } catch (SQLException e) {
-      throw new DataInternalException("Could not select url: " + e.getMessage(), e);
-    }
+    return Database.getInstance().getFirst(Url.class,
+        new QueryOption.WhereEquals("id", id));
   }
 
   /** Helper method for creating the discovered-url table. */
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
-    database.prepareStatement(database.getCreateTableStatement(Url.class)).execute();
-    for (String statement : database.getCreateIndexesStatement(Url.class)) {
-      database.prepareStatement(statement).execute();
-    }
+    Database.getInstance().createTable(Url.class);
   }
 }

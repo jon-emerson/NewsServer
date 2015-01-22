@@ -1,8 +1,6 @@
 package com.janknspank.utils;
 
 import java.io.File;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,14 +19,8 @@ public class CleanLocalFileData {
   public static void main(String args[]) throws Exception {
     // Figure out what articles we've crawled already.
     Set<String> crawledArticleIds = Sets.newHashSet();
-    PreparedStatement stmt = Database.getInstance().prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Article.class));
-    ResultSet result = stmt.executeQuery();
-    while (!result.isAfterLast()) {
-      Article article = Database.createFromResultSet(result, Article.class);
-      if (article != null) {
-        crawledArticleIds.add(article.getUrlId());
-      }
+    for (Article article : Database.getInstance().get(Article.class)) {
+      crawledArticleIds.add(article.getUrlId());
     }
 
     File dataDirectory = new File("data/");

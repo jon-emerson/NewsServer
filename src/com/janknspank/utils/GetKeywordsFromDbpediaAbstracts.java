@@ -3,8 +3,6 @@ package com.janknspank.utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +19,7 @@ import com.janknspank.data.Entities;
 import com.janknspank.data.EntityType;
 import com.janknspank.data.GuidFactory;
 import com.janknspank.data.LocalDatabase;
+import com.janknspank.data.QueryOption;
 import com.janknspank.data.ValidationException;
 import com.janknspank.interpreter.KeywordFinder;
 import com.janknspank.proto.Core.ArticleKeyword;
@@ -70,7 +69,7 @@ public class GetKeywordsFromDbpediaAbstracts {
     // that might not be in Wikipedia - Which is probably quite a few!
     List<Entity> entities = Lists.newArrayList();
     for (ArticleKeyword articleKeyword :
-        KeywordFinder.findKeywords("" /* urlId */, ImmutableList.of(text))) {
+        KeywordFinder.findParagraphKeywords("" /* urlId */, ImmutableList.of(text))) {
       if (!articleKeyword.getKeyword().contains(".")) {
         entities.add(Entity.newBuilder()
             .setKeyword(articleKeyword.getKeyword())
@@ -149,15 +148,8 @@ public class GetKeywordsFromDbpediaAbstracts {
   }
 
   public static LongAbstract getNextLongAbstract() throws DataInternalException {
-    try {
-      int randomOffset = (int) (10000 * Math.random());
-      PreparedStatement stmt = LocalDatabase.getInstance().prepareStatement(
-          "SELECT * FROM " + Database.getTableName(LongAbstract.class) + " "
-          + "LIMIT " + randomOffset + ",1");
-      return LocalDatabase.createFromResultSet(stmt.executeQuery(), LongAbstract.class);
-    } catch (SQLException e) {
-      throw new DataInternalException("Could not read from database", e);
-    }
+    return LocalDatabase.getInstance().getFirst(LongAbstract.class,
+        new QueryOption.LimitWithOffset(1, (int) (10000 * Math.random())));
   }
 
   /**

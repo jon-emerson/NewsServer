@@ -16,7 +16,7 @@ public class GetUserServlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException {
-    User user = Database.getInstance().get(getSession(req).getUserId(), User.class);
+    User user = Database.getInstance().get(User.class, getSession(req).getUserId());
     JSONObject userJson = Serializer.toJSON(user);
 
     UserHelper userHelper = new UserHelper(user);

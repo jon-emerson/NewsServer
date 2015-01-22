@@ -2,8 +2,6 @@ package com.janknspank.common;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +19,7 @@ import com.google.common.collect.Maps;
 import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.Database;
 import com.janknspank.data.Links;
+import com.janknspank.data.QueryOption;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 
@@ -686,31 +685,25 @@ public class UrlWhitelist {
    */
   public static void main(String args[]) throws Exception {
     Database database = Database.getInstance();
-    PreparedStatement stmt = database.prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Url.class)
-        + " WHERE url NOT LIKE '%//twitter.com/%'");
-    ResultSet result = stmt.executeQuery();
     Map<String, String> urlsToDelete = Maps.newHashMap();
-    while (!result.isAfterLast()) {
-      Url url = Database.createFromResultSet(result, Url.class);
-      if (url != null) {
-        String urlStr = url.getUrl();
-        if ((!isOkay(urlStr) || !urlStr.equals(UrlCleaner.clean(urlStr)))) {
-          urlsToDelete.put(urlStr, url.getId());
-        }
+    for (Url url : database.get(Url.class,
+        new QueryOption.WhereNotLike("url", "%//twitter.com/%"))) {
+      String urlStr = url.getUrl();
+      if ((!isOkay(urlStr) || !urlStr.equals(UrlCleaner.clean(urlStr)))) {
+        urlsToDelete.put(urlStr, url.getId());
       }
       if (urlsToDelete.size() == 100 || url == null) {
         List<String> urls = Lists.newArrayList();
         List<String> ids = Lists.newArrayList();
-        for (String urlStr : urlsToDelete.keySet()) {
-          System.out.println("Deleting url: " + urlStr);
-          urls.add(urlStr);
-          ids.add(urlsToDelete.get(urlStr));
+        for (Map.Entry<String, String> urlToDelete : urlsToDelete.entrySet()) {
+          System.out.println("Deleting url: " + urlToDelete.getKey());
+          urls.add(urlToDelete.getKey());
+          ids.add(urlToDelete.getValue());
         }
-        System.out.println("Deleted " + database.deletePrimaryKeys(ids, Article.class) + " articles");
+        System.out.println("Deleted " + database.delete(Article.class, ids) + " articles");
         System.out.println("Deleted " + ArticleKeywords.deleteForUrlIds(ids) + " article keywords");
         System.out.println("Deleted " + Links.deleteIds(ids) + " links");
-        System.out.println("Deleted " + database.deletePrimaryKeys(urls, Url.class) + " urls");
+        System.out.println("Deleted " + database.delete(Url.class, urls) + " urls");
         urlsToDelete.clear();
       }
     }

@@ -1,7 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -38,21 +36,14 @@ public class UserInterests {
   private final static PhoneNumberUtil PHONE_NUMBER_UTIL = PhoneNumberUtil.getInstance();
   private final static PhoneNumberOfflineGeocoder GEOCODER =
       PhoneNumberOfflineGeocoder.getInstance();
-  private static final String SELECT_FOR_USER_COMMAND =
-      "SELECT * FROM " + Database.getTableName(UserInterest.class) + " "
-      + "WHERE user_id=? AND source != \"" + SOURCE_TOMBSTONE + "\"";
 
   /**
    * Returns a complete list of the specified user's interests.
    */
   public static List<UserInterest> getInterests(String userId) throws DataInternalException {
-    try {
-      PreparedStatement stmt = Database.getInstance().prepareStatement(SELECT_FOR_USER_COMMAND);
-      stmt.setString(1, userId);
-      return Database.createListFromResultSet(stmt.executeQuery(), UserInterest.class);
-    } catch (SQLException e) {
-      throw new DataInternalException("Error fetching interests: " + e.getMessage(), e);
-    }
+    return Database.getInstance().get(UserInterest.class,
+        new QueryOption.WhereEquals("user_id", userId),
+        new QueryOption.WhereNotEquals("source", SOURCE_TOMBSTONE));
   }
 
   /**
@@ -243,10 +234,6 @@ public class UserInterests {
 
   /** Helper method for creating the UserInterestData table. */
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
-    database.prepareStatement(database.getCreateTableStatement(UserInterest.class)).execute();
-    for (String statement : database.getCreateIndexesStatement(UserInterest.class)) {
-      database.prepareStatement(statement).execute();
-    }
+    Database.getInstance().createTable(UserInterest.class);
   }
 }

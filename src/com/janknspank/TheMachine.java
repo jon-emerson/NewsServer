@@ -26,11 +26,11 @@ import com.janknspank.proto.Interpreter.InterpretedData;
 public class TheMachine {
   public void start() {
     // Uncomment this to start the crawl at a specific page.
-//    try {
-//      Urls.put("http://recode.net/", false);
-//    } catch (DataInternalException e1) {
-//      e1.printStackTrace();
-//    }
+    try {
+      Urls.put("http://recode.net/", false);
+    } catch (DataInternalException e1) {
+      e1.printStackTrace();
+    }
 
     while (true) {
       final Url url;
@@ -73,7 +73,7 @@ public class TheMachine {
             // and process it first (mainly due to human error).  If so, delete
             // everything and store it again.
             System.out.println("Handling human error: " + url.getUrl());
-            database.deletePrimaryKey(url.getId(), Article.class);
+            database.delete(Article.class, url.getId());
             ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
             Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
 

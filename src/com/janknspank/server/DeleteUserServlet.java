@@ -18,7 +18,7 @@ public class DeleteUserServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DataInternalException, DataRequestException, ValidationException {
     Database database = Database.getInstance();
-    User user = database.get(getSession(req).getUserId(), User.class);
+    User user = database.get(User.class, getSession(req).getUserId());
     Sessions.deleteAllFromUser(user);
     database.delete(user);
 

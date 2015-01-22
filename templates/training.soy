@@ -5,13 +5,13 @@
  */
 {template .main}
   <head>
-    <link rel="stylesheet" type="text/css" href="resources/train.css">
+    <link rel="stylesheet" type="text/css" href="resources/training.css">
     <script src="resources/jquery-1.11.2.min.js"></script>
     <script src="resources/list.min.js"></script>
   </head>
   <body>
-    <script src="resources/train.js"></script>
-    <div style="width:100%;margin:0;">
+    <script src="resources/training.js"></script>
+    <div style="width:100%; margin:0;">
       <div class="leftColumn">
        {call .articleViewer data="all" /}
       </div>
@@ -75,11 +75,11 @@
     <input type="submit" id="submit" value="Submit"><br>
   </form>
   <script type="text/javascript">
-  {literal}
-    var options = {
-      valueNames: [ 'industryDescription', 'industryGroup' ]
-    };
-    var userList = new List('industries', options);
-  {/literal}
+    {literal}
+      var options = {
+        valueNames: [ 'industryDescription', 'industryGroup' ]
+      };
+      var userList = new List('industries', options);
+    {/literal}
   </script>
 {/template}

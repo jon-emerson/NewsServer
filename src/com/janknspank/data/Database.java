@@ -18,11 +18,15 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.ObjectArrays;
 import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
+import com.janknspank.data.QueryOption.WhereNotEquals;
+import com.janknspank.data.QueryOption.WhereNotLike;
+import com.janknspank.data.QueryOption.WhereNotNull;
 import com.janknspank.proto.Extensions;
 import com.janknspank.proto.Extensions.Required;
 import com.janknspank.proto.Extensions.StorageMethod;
@@ -82,8 +86,22 @@ public class Database {
     return instance;
   }
 
-  public PreparedStatement prepareStatement(String sql) throws SQLException {
+  // Please don't call this.  It won't work when we switch to MongoDB.
+  public PreparedStatement xXprepareStatement(String sql) throws SQLException {
     return connection.prepareStatement(sql);
+  }
+
+  public <T extends Message> void createTable(Class<T> clazz) throws DataInternalException {
+    try {
+      connection.prepareStatement(getCreateTableSql(clazz)).execute();
+      for (String statement : getCreateIndexesSql(clazz)) {
+        connection.prepareStatement(statement).execute();
+      }
+    } catch (SQLException e) {
+      throw new DataInternalException(
+          "Could not create table " + clazz.getSimpleName() + ": " + e.getMessage(), e);
+    }
+    System.out.println("Table created: " + getTableName(clazz));
   }
 
   private String getSqlTypeForField(FieldDescriptor fieldDescriptor) {
@@ -133,8 +151,8 @@ public class Database {
    * Returns a map of protocol buffer field descriptors to their StorageMethod
    * types, as defined in our protocol buffer extensions.
    */
-  private <T extends Message> LinkedHashMap<FieldDescriptor, StorageMethod> getFieldMap(
-      Class<T> clazz) {
+  private <T extends Message> LinkedHashMap<FieldDescriptor, StorageMethod>
+      getStorageMethodMap(Class<T> clazz) {
     LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = Maps.newLinkedHashMap();
 
     int primaryKeyCount = 0;
@@ -171,8 +189,8 @@ public class Database {
    * Given a protocol buffer message, returns the MySQL statement for creating
    * an appropriate table for storing it.
    */
-  public <T extends Message> String getCreateTableStatement(Class<T> clazz) {
-    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(clazz);
+  private <T extends Message> String getCreateTableSql(Class<T> clazz) {
+    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getStorageMethodMap(clazz);
 
     // Start creating the SQL statement.
     StringBuilder sql = new StringBuilder();
@@ -210,8 +228,8 @@ public class Database {
    * Given a protocol buffer message, returns a List of MySQL statements for
    * creating indexes on the requested fields.
    */
-  public <T extends Message> List<String> getCreateIndexesStatement(Class<T> clazz) {
-    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(clazz);
+  private <T extends Message> List<String> getCreateIndexesSql(Class<T> clazz) {
+    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getStorageMethodMap(clazz);
 
     List<String> statements = Lists.newArrayList();
     for (FieldDescriptor field : fieldMap.keySet()) {
@@ -240,7 +258,7 @@ public class Database {
    */
   private void prepareInsertOrUpdateStatement(PreparedStatement statement, Message message)
       throws SQLException {
-    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
+    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getStorageMethodMap(message.getClass());
     int offset = 0;
     for (FieldDescriptor field : fieldMap.keySet()) {
       StorageMethod storageMethod = fieldMap.get(field);
@@ -309,8 +327,8 @@ public class Database {
    * Returns an INSERT INTO statement for inserting the given protocol buffer
    * message into its respective MySQL table.
    */
-  public PreparedStatement getRawInsertStatement(Message message) throws SQLException {
-    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
+  private PreparedStatement getRawInsertStatement(Message message) throws SQLException {
+    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getStorageMethodMap(message.getClass());
 
     // Start creating the SQL statement.
     StringBuilder sql = new StringBuilder();
@@ -344,8 +362,6 @@ public class Database {
 
     // Prepare the statement!
     return connection.prepareStatement(sql.toString());
-
-    //return statement;
   }
 
   /**
@@ -366,20 +382,27 @@ public class Database {
     }
 
     Message firstMessage = Iterables.getFirst(messages, null);
+    PreparedStatement statement = null;
     try {
-      PreparedStatement stmt = getRawInsertStatement(firstMessage);
+      statement = getRawInsertStatement(firstMessage);
       for (T message : messages) {
         Validator.assertValid(message);
         Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
             "Types do not match");
-        prepareInsertOrUpdateStatement(stmt, message);
-        stmt.addBatch();
+        prepareInsertOrUpdateStatement(statement, message);
+        statement.addBatch();
       }
-      return Database.sumIntArray(stmt.executeBatch());
+      return Database.sumIntArray(statement.executeBatch());
 
     } catch (SQLException e) {
       throw new DataInternalException(
           "Could not insert " + getTableName(firstMessage.getClass()) + ": " + e.getMessage(), e);
+    } finally {
+      if (statement != null) {
+        try {
+          statement.close();
+        } catch (SQLException e) {}
+      }
     }
   }
 
@@ -400,7 +423,7 @@ public class Database {
    * Returns the value of the passed {@code Message}'s primary key.
    */
   private String getPrimaryKey(Message message) {
-    Map<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
+    Map<FieldDescriptor, StorageMethod> fieldMap = getStorageMethodMap(message.getClass());
     for (FieldDescriptor field : fieldMap.keySet()) {
       if (fieldMap.get(field) == StorageMethod.PRIMARY_KEY) {
         return (String) message.getField(field);
@@ -413,13 +436,13 @@ public class Database {
   /**
    * Returns the value of the passed {@code Message}'s primary key.
    */
-  private <T extends Message> Iterable<String> getPrimaryKeys(Iterable<T> messages)
-      throws ValidationException {
+  private <T extends Message> Iterable<String> getPrimaryKeys(Iterable<T> messages) {
     List<String> primaryKeys = Lists.newArrayList();
     T firstMessage = Iterables.getFirst(messages, null);
     for (T message : messages) {
-      Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
-          "Types do not match");
+      if (!firstMessage.getClass().equals(message.getClass())) {
+        throw new IllegalStateException("Types do not match");
+      }
       primaryKeys.add(getPrimaryKey(message));
     }
     return primaryKeys;
@@ -434,7 +457,7 @@ public class Database {
     // of the schema.
     int columnCount = 2;
 
-    Map<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(clazz);
+    Map<FieldDescriptor, StorageMethod> fieldMap = getStorageMethodMap(clazz);
     for (FieldDescriptor field : fieldMap.keySet()) {
       StorageMethod storageMethod = fieldMap.get(field);
       if (storageMethod == StorageMethod.PRIMARY_KEY ||
@@ -451,8 +474,9 @@ public class Database {
    * Returns an UPDATE statement for updating the given protocol buffer message
    * in its respective MySQL table.
    */
-  public PreparedStatement getRawUpdateStatement(Message message) throws SQLException {
-    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(message.getClass());
+  private PreparedStatement getRawUpdateStatement(
+      Message message, QueryOption.WhereOption... whereOptions) throws SQLException {
+    LinkedHashMap<FieldDescriptor, StorageMethod> fieldMap = getStorageMethodMap(message.getClass());
 
     // Start creating the SQL statement.
     StringBuilder sql = new StringBuilder();
@@ -468,8 +492,8 @@ public class Database {
         sql.append(field.getName() + "=?, ");
       }
     }
-    sql.append(PROTO_COLUMN_NAME + "=? ");
-    sql.append(" WHERE " + getPrimaryKeyField(message.getClass()) + " =? ");
+    sql.append(PROTO_COLUMN_NAME + "=?");
+    sql.append(getWhereClauseSql(whereOptions));
 
     System.out.println(sql.toString());
 
@@ -485,33 +509,61 @@ public class Database {
     return update(ImmutableList.of(message)) == 1;
   }
 
+  public boolean update(Message message, QueryOption.WhereOption... whereOptions)
+      throws ValidationException, DataInternalException {
+    return update(ImmutableList.of(message), whereOptions) == 1;
+  }
+
   /**
    * Updates the passed messages, overwriting whatever was stored in the
    * database before.  Returns the number of modified objects.
    */
-  public <T extends Message> int update(Iterable<T> messages)
+  public <T extends Message> int update(
+      Iterable<T> messages, QueryOption.WhereOption... whereOptions)
       throws ValidationException, DataInternalException {
     if (Iterables.isEmpty(messages)) {
       return 0;
     }
 
     T firstMessage = Iterables.getFirst(messages, null);
+    String primaryKeyFieldName = getPrimaryKeyField(firstMessage.getClass());
+    for (QueryOption.WhereOption whereOption : whereOptions) {
+      if (primaryKeyFieldName.equals(whereOption.getFieldName())) {
+        throw new IllegalStateException("Update WhereEquals options cannot put "
+            + "additional constraints on the primary key");
+      }
+    }
+    whereOptions = ObjectArrays.concat(
+        new QueryOption.WhereEquals(primaryKeyFieldName,
+            getPrimaryKey(firstMessage)),
+        whereOptions);
+
     int columnCount = getColumnCount(firstMessage.getClass());
+    PreparedStatement statement = null;
     try {
-      PreparedStatement stmt = getRawUpdateStatement(firstMessage);
+      statement = getRawUpdateStatement(firstMessage, whereOptions);
       for (T message : messages) {
         Validator.assertValid(message);
         Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
             "Types do not match");
-        prepareInsertOrUpdateStatement(stmt, message);
-        stmt.setString(columnCount, getPrimaryKey(message));
-        stmt.addBatch();
+        whereOptions[0] = new QueryOption.WhereEquals(primaryKeyFieldName,
+            getPrimaryKey(message));
+        prepareInsertOrUpdateStatement(statement, message);
+        int i = 0;
+        for (String whereValue : getWhereValues(whereOptions)) {
+          statement.setString(columnCount + (i++), whereValue);
+        }
+        statement.addBatch();
       }
-      return Database.sumIntArray(stmt.executeBatch());
+      return Database.sumIntArray(statement.executeBatch());
 
     } catch (SQLException e) {
       throw new DataInternalException(
           "Could not insert " + getTableName(firstMessage.getClass()) + ": " + e.getMessage(), e);
+    } finally {
+      try {
+        statement.close();
+      } catch (SQLException e) {}
     }
   }
 
@@ -519,7 +571,7 @@ public class Database {
    * Returns the column name of the primary key for the passed protocol buffer.
    */
   private <T extends Message> String getPrimaryKeyField(Class<T> clazz) {
-    Map<FieldDescriptor, StorageMethod> fieldMap = getFieldMap(clazz);
+    Map<FieldDescriptor, StorageMethod> fieldMap = getStorageMethodMap(clazz);
     for (FieldDescriptor field : fieldMap.keySet()) {
       if (fieldMap.get(field) == StorageMethod.PRIMARY_KEY) {
         return field.getName();
@@ -529,47 +581,151 @@ public class Database {
   }
 
   /**
-   * Gets the Message with the specified class {@code clazz} and the given
-   * primary key {@code primaryKey}, if one exists.
+   * Gets the message of the specified class {@code clazz} with the primary
+   * key equaling {@code primaryKey}.
    */
-  public <T extends Message> T get(String primaryKey, Class<T> clazz)
+  public <T extends Message> T get(Class<T> clazz, String primaryKey)
       throws DataInternalException {
-    return Iterables.getFirst(get(ImmutableList.of(primaryKey), clazz), null);
+    return Iterables.getFirst(get(clazz, ImmutableList.of(primaryKey)), null);
   }
 
   /**
    * Gets Messages with the specified class {@code clazz} and the given
    * primary keys {@code primaryKeys}, if they exist.
    */
-  public <T extends Message> List<T> get(Iterable<String> primaryKeys, Class<T> clazz)
+  public <T extends Message> List<T> get(Class<T> clazz, Iterable<String> primaryKeys)
       throws DataInternalException {
-    return get(getPrimaryKeyField(clazz), primaryKeys, clazz);
+    return get(clazz, new QueryOption.WhereEquals(getPrimaryKeyField(clazz), primaryKeys));
+  }
+
+  private String getLimitSql(QueryOption[] options) {
+    List<QueryOption.Limit> queryOptionList = QueryOption.getList(options, QueryOption.Limit.class);
+    if (queryOptionList.size() > 1) {
+      throw new IllegalStateException("Duplicate definitions of QueryOption.Limit not allowed");
+    }
+    if (queryOptionList.isEmpty()) {
+      return "";
+    }
+    QueryOption.Limit limitOption = (QueryOption.Limit) queryOptionList.get(0);
+    StringBuilder sql = new StringBuilder();
+    sql.append(" LIMIT ");
+    if (limitOption instanceof QueryOption.LimitWithOffset) {
+      sql.append(((QueryOption.LimitWithOffset) limitOption).getOffset()).append(", ");
+    }
+    sql.append(limitOption.getLimit());
+    return sql.toString();
+  }
+
+  private String getWhereClauseSql(QueryOption[] options) {
+    StringBuilder sql = new StringBuilder();
+    for (QueryOption.WhereEquals whereEquals :
+        QueryOption.getList(options, QueryOption.WhereEquals.class)) {
+      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+          .append(whereEquals.getFieldName())
+          .append(whereEquals instanceof WhereNotEquals ? " NOT" : "")
+          .append(" IN (")
+          .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"),
+              Iterables.size(whereEquals.getValues()))))
+          .append(")");
+    }
+    for (QueryOption.WhereLike whereLike :
+        QueryOption.getList(options, QueryOption.WhereLike.class)) {
+      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+          .append(whereLike.getFieldName())
+          .append(whereLike instanceof WhereNotLike ? " NOT" : "")
+          .append(" LIKE ?");
+    }
+    for (QueryOption.WhereNull whereNull :
+        QueryOption.getList(options, QueryOption.WhereNull.class)) {
+      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+          .append(whereNull.getFieldName())
+          .append(" IS")
+          .append(whereNull instanceof WhereNotNull ? " NOT" : "")
+          .append(" NULL");
+    }
+    return sql.toString();
+  }
+
+  private Iterable<String> getWhereValues(QueryOption[] options) {
+    List<Iterable<String>> iterableList = Lists.newArrayList();
+    for (QueryOption.WhereEquals whereEquals :
+        QueryOption.getList(options, QueryOption.WhereEquals.class)) {
+      iterableList.add(whereEquals.getValues());
+    }
+    for (QueryOption.WhereLike whereLike :
+      QueryOption.getList(options, QueryOption.WhereLike.class)) {
+      iterableList.add(ImmutableList.of(whereLike.getValue()));
+    }
+    return Iterables.concat(iterableList);
+  }
+
+  private String getOrderBySql(QueryOption[] options) {
+    StringBuilder sb = new StringBuilder();
+    for (QueryOption.Sort sort : QueryOption.getList(options, QueryOption.Sort.class)) {
+      sb.append((sb.length() == 0) ? " ORDER BY " : ", ");
+      sb.append(sort.getFieldName());
+      if (sort instanceof QueryOption.DescendingSort) {
+        sb.append(" DESC");
+      }
+    }
+    return sb.toString();
+  }
+
+  /**
+   * Returns the first message with the specified class {@code clazz} and the
+   * specified field options, if such a message exists.
+   */
+  public <T extends Message> T getFirst(Class<T> clazz, QueryOption... options)
+      throws DataInternalException {
+    // Make sure we only have one limit statement.  If we find another, capture
+    // its offset, so we don't lose it.
+    List<QueryOption> goodOptions = Lists.newArrayList();
+    Integer offset = null;
+    for (QueryOption option : options) {
+      if (option instanceof QueryOption.LimitWithOffset) {
+        offset = ((QueryOption.LimitWithOffset) option).getOffset();
+      } else if (!(option instanceof QueryOption.Limit)) {
+        goodOptions.add(option);
+      }
+    }
+    return Iterables.getFirst(
+        get(clazz, Iterables.toArray(
+            Iterables.concat(goodOptions, offset == null ?
+                ImmutableList.of(new QueryOption.Limit(1)) :
+                ImmutableList.of(new QueryOption.LimitWithOffset(1, offset))),
+            QueryOption.class)),
+        null);
   }
 
   /**
    * Gets Messages with the specified class {@code clazz} and the field values,
    * if they exist.
    */
-  public <T extends Message> List<T> get(
-      String fieldName, Iterable<String> keys, Class<T> clazz)
+  public <T extends Message> List<T> get(Class<T> clazz, QueryOption... options)
       throws DataInternalException {
-    if (Iterables.isEmpty(keys)) {
-      return ImmutableList.of();
-    }
+    StringBuilder sql = new StringBuilder();
+    sql.append("SELECT * FROM " + getTableName(clazz));
+    sql.append(getWhereClauseSql(options));
+    sql.append(getOrderBySql(options));
+    sql.append(getLimitSql(options));
+    
+    PreparedStatement statement = null;
     try {
-      String questionMarks = Joiner.on(",").join(
-          Iterables.limit(Iterables.cycle("?"), Iterables.size(keys)));
-      PreparedStatement stmt = connection.prepareStatement(
-          "SELECT * FROM " + getTableName(clazz) + " WHERE " + fieldName
-          + " IN (" + questionMarks + ")");
+      statement = connection.prepareStatement(sql.toString());
       int i = 0;
-      for (String key : keys) {
-        stmt.setString(++i, key);
+      for (String key : getWhereValues(options)) {
+        statement.setString(++i, key);
       }
-      return createListFromResultSet(stmt.executeQuery(), clazz);
+      return createListFromResultSet(statement.executeQuery(), clazz);
     } catch (SQLException e) {
       throw new DataInternalException("Could not execute get: " + e.getMessage()
           + ": " + e.getMessage(), e);
+    } finally {
+      if (statement != null) {
+        try {
+          statement.close();
+        } catch (SQLException e) {}
+      }
     }
   }
 
@@ -579,35 +735,50 @@ public class Database {
    * @throws DataInternalException if the object could not be deleted, including
    *     if it could not be found
    */
-  public <T extends Message> boolean deletePrimaryKey(String primaryKey, Class<T> clazz)
+  public <T extends Message> boolean delete(Class<T> clazz, String primaryKey)
       throws DataInternalException {
-    return (deletePrimaryKeys(ImmutableList.of(primaryKey), clazz) == 1);
+    return delete(clazz, ImmutableList.of(primaryKey)) == 1;
+  }
+
+  /**
+   * Deletes objects from the specified object {@code clazz} that match the
+   * given query options.
+   */
+  public <T extends Message> int delete(Class<T> clazz, QueryOption... options)
+      throws DataInternalException {
+    StringBuilder sql = new StringBuilder();
+    sql.append("DELETE FROM " + getTableName(clazz));
+    sql.append(getWhereClauseSql(options));
+    sql.append(getOrderBySql(options));
+    sql.append(getLimitSql(options));
+    
+    PreparedStatement statement = null;
+    try {
+      statement = connection.prepareStatement(sql.toString());
+      int i = 0;
+      for (String key : getWhereValues(options)) {
+        statement.setString(++i, key);
+      }
+      return statement.executeUpdate();
+    } catch (SQLException e) {
+      throw new DataInternalException("Could not execute get: " + e.getMessage()
+          + ": " + e.getMessage(), e);
+    } finally {
+      if (statement != null) {
+        try {
+          statement.close();
+        } catch (SQLException e) {}
+      }
+    }
   }
 
   /**
    * Deletes objects with the specified primary keys from the table specified
    * by the passed-in class.
    */
-  public <T extends Message> int deletePrimaryKeys(
-      Iterable<String> primaryKeys, Class<T> clazz) throws DataInternalException {
-    PreparedStatement stmt;
-    try {
-      stmt = connection.prepareStatement(
-          "DELETE FROM " + getTableName(clazz)
-          + " WHERE " + getPrimaryKeyField(clazz) + " =? LIMIT 1");
-      for (String primaryKey : primaryKeys) {
-        stmt.setString(1, primaryKey);
-        stmt.addBatch();
-      }
-      int numModified = 0;
-      for (int modCount : stmt.executeBatch()) {
-        numModified += modCount;
-      }
-      return numModified;
-
-    } catch (SQLException e) {
-      throw new DataInternalException("Error executing delete: " + e.getMessage(), e);
-    }
+  public <T extends Message> int delete(Class<T> clazz, Iterable<String> primaryKeys)
+      throws DataInternalException {
+    return delete(clazz, new QueryOption.WhereEquals(getPrimaryKeyField(clazz), primaryKeys));
   }
 
   /**
@@ -616,7 +787,7 @@ public class Database {
    *     if it could not be found
    */
   public void delete(Message message) throws DataInternalException {
-    deletePrimaryKey(getPrimaryKey(message), message.getClass());
+    delete(message.getClass(), getPrimaryKey(message));
   }
 
   /**
@@ -626,11 +797,7 @@ public class Database {
    */
   public <T extends Message> void delete(Iterable<T> messages) throws DataInternalException {
     if (!Iterables.isEmpty(messages)) {
-      try {
-        deletePrimaryKeys(getPrimaryKeys(messages), Iterables.getFirst(messages, null).getClass());
-      } catch (ValidationException e) {
-        throw new DataInternalException("Internal error: " + e.getMessage(), e);
-      }
+      delete(Iterables.getFirst(messages, null).getClass(), getPrimaryKeys(messages));
     }
   }
 
