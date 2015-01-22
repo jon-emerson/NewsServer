@@ -65,7 +65,7 @@ public class UserHelper {
     return Maps.uniqueIndex(
         Iterables.isEmpty(articleIds)
             ? Collections.<Article>emptyList()
-            : Database.getInstance().get(articleIds, Article.class),
+            : Database.getInstance().get(Article.class, articleIds),
         new Function<Article, String>() {
           @Override
           public String apply(Article article) {

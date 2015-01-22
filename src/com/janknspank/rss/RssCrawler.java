@@ -162,7 +162,7 @@ public class RssCrawler {
     Url existing;
     try {
       Database database = Database.getInstance();
-      existing = database.get(url, Url.class);
+      existing = database.get(Url.class, url);
       if (existing == null) {
         database.insert(Url.newBuilder()
           .setUrl(url)

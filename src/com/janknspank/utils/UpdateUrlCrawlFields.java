@@ -1,13 +1,12 @@
 package com.janknspank.utils;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.janknspank.data.Database;
+import com.janknspank.data.QueryOption;
 import com.janknspank.data.Urls;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
@@ -23,36 +22,25 @@ import com.janknspank.proto.Core.Url;
  */
 public class UpdateUrlCrawlFields {
   public static void main(String args[]) throws Exception {
+    Database database = Database.getInstance();
+
     // Figure out what articles we've crawled already.
     Set<String> crawledArticleIds = Sets.newHashSet();
-    Database database = Database.getInstance();
-    PreparedStatement stmt = database.prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Article.class));
-    ResultSet result = stmt.executeQuery();
-    while (!result.isAfterLast()) {
-      Article article = Database.createFromResultSet(result, Article.class);
-      if (article == null) {
-        break;
-      }
+    for (Article article : database.get(Article.class)) {
       crawledArticleIds.add(article.getUrlId());
     }
 
-    stmt = database.prepareStatement(
-        "SELECT * FROM " + Database.getTableName(Url.class) + " "
-        + "WHERE crawl_priority=0 AND url NOT LIKE \"%//twitter.com/%\"");
-    result = stmt.executeQuery();
     List<Url> urlsToUpdate = Lists.newArrayList();
-    while (!result.isAfterLast()) {
-      Url url = Database.createFromResultSet(result, Url.class);
-      if (url != null) {
-        if (!crawledArticleIds.contains(url.getId())) {
-          System.out.println("Fixin " + url.getUrl());
-          urlsToUpdate.add(url.toBuilder()
-              .clearLastCrawlStartTime()
-              .clearLastCrawlFinishTime()
-              .setCrawlPriority(Urls.getCrawlPriority(url.getUrl(), null))
-              .build());
-        }
+    for (Url url : database.get(Url.class,
+        new QueryOption.WhereEquals("crawl_priority", "0"),
+        new QueryOption.WhereNotLike("url", "%//twitter.com/%"))) {
+      if (!crawledArticleIds.contains(url.getId())) {
+        System.out.println("Fixin " + url.getUrl());
+        urlsToUpdate.add(url.toBuilder()
+            .clearLastCrawlStartTime()
+            .clearLastCrawlFinishTime()
+            .setCrawlPriority(Urls.getCrawlPriority(url.getUrl(), null))
+            .build());
       }
       if (urlsToUpdate.size() == 250 || url == null) {
         System.out.println(database.update(urlsToUpdate) + " rows updated");

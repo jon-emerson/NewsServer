@@ -37,5 +37,7 @@
 	<classpathentry kind="lib" path="target/dependency/juniversalchardet-1.0.3.jar"/>
 	<classpathentry kind="lib" path="target/dependency/libphonenumber-7.0.1.jar"/>
 	<classpathentry kind="lib" path="target/dependency/geocoder-2.18.jar"/>
+	<classpathentry kind="lib" path="target/dependency/mockito-all-1.10.19.jar"/>
+	<classpathentry kind="lib" path="target/dependency/prefixmapper-2.18.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

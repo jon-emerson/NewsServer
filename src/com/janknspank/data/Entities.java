@@ -1,7 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -29,8 +27,6 @@ public class Entities extends CacheLoader<String, Entity> {
           .expireAfterAccess(5, TimeUnit.DAYS)
           .expireAfterWrite(0, TimeUnit.MINUTES)
           .build(new Entities());
-  private static final String SELECT_BY_KEYWORD_COMMAND =
-      "SELECT * FROM " + Database.getTableName(Entity.class) + " WHERE keyword=? LIMIT 1";
 
   public static Entity getEntityByKeyword(String keyword) throws DataInternalException {
     return Iterables.getFirst(getEntitiesByKeyword(ImmutableList.of(keyword)), null);
@@ -48,7 +44,8 @@ public class Entities extends CacheLoader<String, Entity> {
       }
     }
     Database database = Database.getInstance();
-    for (Entity entity : database.get("keyword", keywordsToFetch.keySet(), Entity.class)) {
+    for (Entity entity : database.get(Entity.class,
+        new QueryOption.WhereEquals("keyword", keywordsToFetch.keySet()))) {
       if (!keywordsToFetch.containsKey(entity.getKeyword())) {
         System.out.println("GOT ENTITY W/ UNREQUESTED KEYWORD!! " + entity.getKeyword());
         continue;
@@ -64,27 +61,12 @@ public class Entities extends CacheLoader<String, Entity> {
    */
   @Override
   public Entity load(final String keyword) throws Exception {
-    try {
-      PreparedStatement statement =
-          Database.getInstance().prepareStatement(SELECT_BY_KEYWORD_COMMAND);
-      statement.setString(1, keyword);
-      Entity entity = Database.createFromResultSet(statement.executeQuery(), Entity.class);
-
-      // Unfortunately Guava's cache won't let us return null here, so we do
-      // heroics.
-      return entity == null ? Entity.getDefaultInstance() : entity;
-
-    } catch (SQLException e) {
-      throw new DataInternalException("Could not select entity: " + e.getMessage(), e);
-    }
+    return Database.getInstance().getFirst(Entity.class,
+        new QueryOption.WhereEquals("keyword", keyword));
   }
 
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
-    database.prepareStatement(database.getCreateTableStatement(Entity.class)).execute();
-    for (String statement : database.getCreateIndexesStatement(Entity.class)) {
-      database.prepareStatement(statement).execute();
-    }
+    Database.getInstance().createTable(Entity.class);
   }
 }

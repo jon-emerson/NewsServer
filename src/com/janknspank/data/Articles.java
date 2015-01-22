@@ -1,12 +1,9 @@
 package com.janknspank.data;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -56,24 +53,9 @@ public class Articles {
 
   private static List<ArticleKeyword> getArticleKeywordsForTopics(Iterable<String> topics)
       throws DataInternalException {
-    StringBuilder sql = new StringBuilder();
-    sql.append("SELECT * FROM ")
-        .append(Database.getTableName(ArticleKeyword.class))
-        .append(" WHERE keyword IN (")
-        .append(Joiner.on(",").join(
-            Iterables.limit(Iterables.cycle("?"), Iterables.size(topics))))
-        .append(") LIMIT 500");
-
-    try {
-      PreparedStatement stmt = Database.getInstance().prepareStatement(sql.toString());
-      int i = 0;
-      for (String topic : topics) {
-        stmt.setString(++i, topic);
-      }
-      return Database.createListFromResultSet(stmt.executeQuery(), ArticleKeyword.class);
-    } catch (SQLException e) {
-      throw new DataInternalException("Error fetching article keywords: " + e.getMessage(), e);
-    }
+    return Database.getInstance().get(ArticleKeyword.class,
+        new QueryOption.WhereEquals("keyword", topics),
+        new QueryOption.Limit(500));
   }
 
   /**
@@ -94,35 +76,16 @@ public class Articles {
    * Returns articles with the given IDs, ordered by publish time, if they
    * exist. If they don't exist, no error is thrown.
    */
-  public static List<Article> getArticles(Iterable<String> articleIds)
+  public static List<Article> getArticles(Iterable<String> urlIds)
       throws DataInternalException {
-    StringBuilder sql = new StringBuilder();
-    sql.append("SELECT * FROM ")
-        .append(Database.getTableName(Article.class))
-        .append(" WHERE url_id IN (")
-        .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"),
-            Iterables.size(articleIds))))
-        .append(") ORDER BY published_time DESC LIMIT 50");
-
-    try {
-      PreparedStatement stmt = Database.getInstance().prepareStatement(sql.toString());
-      int i = 0;
-      for (String articleId : articleIds) {
-        stmt.setString(++i, articleId);
-      }
-      return Database.createListFromResultSet(stmt.executeQuery(), Article.class);
-    } catch (SQLException e) {
-      throw new DataInternalException("Error fetching articles: " + e.getMessage(), e);
-    }
+    return Database.getInstance().get(Article.class,
+        new QueryOption.WhereEquals("url_id", urlIds),
+        new QueryOption.DescendingSort("published_time"));
   }
 
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
-    database.prepareStatement(database.getCreateTableStatement(Article.class)).execute();
-    for (String statement : database.getCreateIndexesStatement(Article.class)) {
-      database.prepareStatement(statement).execute();
-    }
+    Database.getInstance().createTable(Article.class);
 
 //    Article.Builder builder = Article.newBuilder();
 //    String id = "id" + System.currentTimeMillis();

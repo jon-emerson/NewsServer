@@ -42,7 +42,7 @@ public class SetAddressBookServlet extends StandardServlet {
     for (String userId : new String[] {
         "vWxNTAAKB-KYAEofUGJL4A",
         "o0Sr9HzgxZMUVcUi09NIhg"}) {
-      AddressBook addressBook = Database.getInstance().get(userId, AddressBook.class);
+      AddressBook addressBook = Database.getInstance().get(AddressBook.class, userId);
       UserInterests.updateInterests(userId, addressBook);
     }
   }

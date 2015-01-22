@@ -2,6 +2,7 @@ package com.janknspank.interpreter;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +32,7 @@ import com.janknspank.data.EntityType;
 import com.janknspank.data.ValidationException;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
+import com.janknspank.proto.Validator;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.ArticleKeyword.Source;
 
@@ -47,25 +49,30 @@ public class KeywordFinder {
   private static final List<NameFinderME> LOCATION_FINDER_LIST = Lists.newArrayList();
   static {
     try {
+      @SuppressWarnings("resource")
       InputStream sentenceModelInputStream = new FileInputStream("opennlp/en-sent.bin");
       SentenceModel sentenceModel = new SentenceModel(sentenceModelInputStream);
       SENTENCE_DETECTOR_ME = new SentenceDetectorME(sentenceModel);
 
+      @SuppressWarnings("resource")
       InputStream tokenizerModelInputStream = new FileInputStream("opennlp/en-token.bin");
       TokenizerModel tokenizerModel = new TokenizerModel(tokenizerModelInputStream);
       TOKENIZER = new TokenizerME(tokenizerModel);
 
       for (String model : new String[] { "newsserver", "ner" }) {
+        @SuppressWarnings("resource")
         InputStream personModelInputStream =
             new FileInputStream("opennlp/en-" + model + "-person.bin");
         TokenNameFinderModel personModel = new TokenNameFinderModel(personModelInputStream);
         PERSON_FINDER_LIST.add(new NameFinderME(personModel));
 
+        @SuppressWarnings("resource")
         InputStream organizationModelInputStream =
             new FileInputStream("opennlp/en-" + model + "-organization.bin");
         TokenNameFinderModel organizationModel = new TokenNameFinderModel(organizationModelInputStream);
         ORGANIZATION_FINDER_LIST.add(new NameFinderME(organizationModel));
 
+        @SuppressWarnings("resource")
         InputStream locationModelInputStream =
             new FileInputStream("opennlp/en-" + model + "-location.bin");
         TokenNameFinderModel locationModel = new TokenNameFinderModel(locationModelInputStream);
@@ -76,18 +83,27 @@ public class KeywordFinder {
     }
   }
 
-  private KeywordFinder() {};
+  private KeywordFinder() {}
 
   /**
    * Top level method: Finds all the keywords in an article, whether they be
    * in the article body, meta tags, wherever!
    */
   public static Iterable<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode) {
-    List<ArticleKeyword> keywords = Lists.newArrayList();
+    List<ArticleKeyword> keywords = new ArrayList<ArticleKeyword>() {
+      @Override
+      public boolean add(ArticleKeyword keyword) {
+        try {
+          return super.add((ArticleKeyword) Validator.assertValid(keyword));
+        } catch (ValidationException e) {
+          throw new IllegalArgumentException("Bad keyword: " + keyword.toString(), e);
+        }
+      }
+    };
     List<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
     Iterables.addAll(keywords, findKeywordsInMetaTags(urlId, documentNode));
     Iterables.addAll(keywords, findKeywordsFromHypertext(urlId, documentNode));
-    Iterables.addAll(keywords, findKeywords(urlId, Iterables.transform(articleNodes,
+    Iterables.addAll(keywords, findParagraphKeywords(urlId, Iterables.transform(articleNodes,
         new Function<Node, String>() {
           @Override
           public String apply(Node articleNode) {
@@ -97,7 +113,8 @@ public class KeywordFinder {
     return KeywordCanonicalizer.canonicalize(keywords);
   }
 
-  public static Iterable<ArticleKeyword> findKeywords(String urlId, Iterable<String> paragraphs) {
+  public static Iterable<ArticleKeyword> findParagraphKeywords(
+      String urlId, Iterable<String> paragraphs) {
     List<ArticleKeyword> keywords = Lists.newArrayList();
 
     for (String paragraph : paragraphs) {
@@ -262,6 +279,7 @@ public class KeywordFinder {
               .setKeyword(keyword)
               .setStrength(Math.min(3, keywords.count(keyword)))
               .setSource(Source.META_TAG)
+              .setType(EntityType.THING.toString())
               .build();
           }
         });
@@ -317,6 +335,7 @@ public class KeywordFinder {
               .setKeyword(keyword)
               .setStrength(4)
               .setSource(Source.HYPERLINK)
+              .setType(EntityType.THING.toString())
               .build();
           }
         });

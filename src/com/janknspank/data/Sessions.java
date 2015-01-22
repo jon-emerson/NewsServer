@@ -5,8 +5,6 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,10 +57,6 @@ public class Sessions {
       throw new Error("Could not intialize session key", e);
     }
   }
-
-  // Database operational commands.
-  private static final String DELETE_BY_USER_ID_COMMAND =
-      "DELETE FROM " + Database.getTableName(Session.class) + " WHERE user_id=?";
 
   /**
    * Encrypts the passed-in string and returns a base64 representation of the
@@ -165,7 +159,7 @@ public class Sessions {
     String userId = decrypt(sessionKey);
 
     // Make sure the session key is in the database.
-    Session session = Database.getInstance().get(sessionKey, Session.class);
+    Session session = Database.getInstance().get(Session.class, sessionKey);
     if (session == null) {
       throw new DataRequestException("Session not found in database.");
     }
@@ -185,22 +179,12 @@ public class Sessions {
    * @return number of rows deleted
    */
   public static int deleteAllFromUser(User user) throws DataInternalException {
-    try {
-      PreparedStatement statement =
-          Database.getInstance().prepareStatement(DELETE_BY_USER_ID_COMMAND);
-      statement.setString(1, user.getId());
-      return statement.executeUpdate();
-    } catch (SQLException e) {
-      throw new DataInternalException("Could not delete session: " + e.getMessage(), e);
-    }
+    return Database.getInstance().delete(Session.class,
+        new QueryOption.WhereEquals("user_id", user.getId()));
   }
 
   /** Helper method for creating the Session table. */
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
-    database.prepareStatement(database.getCreateTableStatement(Session.class)).execute();
-    for (String statement : database.getCreateIndexesStatement(Session.class)) {
-      database.prepareStatement(statement).execute();
-    }
+    Database.getInstance().createTable(Session.class);
   }
 }

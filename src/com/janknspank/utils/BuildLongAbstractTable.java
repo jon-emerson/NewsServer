@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -116,27 +117,31 @@ public class BuildLongAbstractTable {
   }
 
   public static Set<String> getExistingArticleNames() {
+    PreparedStatement stmt = null;
     try {
       Set<String> articleNames = Sets.newHashSet();
-      PreparedStatement stmt = LocalDatabase.getInstance().prepareStatement(
+      stmt = LocalDatabase.getInstance().xXprepareStatement(
           "SELECT article_name from " + Database.getTableName(LongAbstract.class));
       ResultSet result = stmt.executeQuery();
       while (result.next()) {
         articleNames.add(result.getString("article_name"));
       }
+      result.close();
       return articleNames;
     } catch (Exception e) {
       throw new Error(e);
+    } finally {
+      if (stmt != null) {
+        try {
+          stmt.close();
+        } catch (SQLException e) {}
+      }
     }
   }
 
   public static void main(String args[]) {
     try {
-      Database database = LocalDatabase.getInstance();
-      database.prepareStatement(database.getCreateTableStatement(LongAbstract.class)).execute();
-      for (String statement : database.getCreateIndexesStatement(LongAbstract.class)) {
-        database.prepareStatement(statement).execute();
-      }
+      LocalDatabase.getInstance().createTable(LongAbstract.class);
     } catch (Exception e) {
       throw new Error(e);
     }

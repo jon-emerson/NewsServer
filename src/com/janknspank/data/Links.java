@@ -1,7 +1,5 @@
 package com.janknspank.data;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -15,12 +13,6 @@ import com.janknspank.proto.Core.Url;
  * DiscoveredUrl table.
  */
 public class Links {
-  private static final String DELETE_COMMAND =
-      "DELETE FROM " + Database.getTableName(Link.class)
-      + "    WHERE origin_url_id=? OR destination_url_id=?";
-  private static final String DELETE_BY_ORIGIN_URL_ID_COMMAND =
-      "DELETE FROM " + Database.getTableName(Link.class) + " WHERE origin_url_id=?";
-
   /**
    * Records that there's a link from {@code sourceUrl} to each of the passed
    * {@code destinationUrls}.
@@ -49,19 +41,9 @@ public class Links {
    * Deletes any links coming to or from the passed discovered URL ID.
    */
   public static int deleteIds(List<String> ids) throws DataInternalException {
-    try {
-      PreparedStatement statement =
-          Database.getInstance().prepareStatement(DELETE_COMMAND);
-      for (int i = 0; i < ids.size(); i++) {
-        statement.setString(1, ids.get(i));
-        statement.setString(2, ids.get(i));
-        statement.addBatch();
-      }
-      return Database.sumIntArray(statement.executeBatch());
-
-    } catch (SQLException e) {
-      throw new DataInternalException("Could not delete links: " + e.getMessage(), e);
-    }
+    return Database.getInstance().delete(Link.class,
+        new QueryOption.WhereEquals("url_id", ids))
+        + deleteFromOriginUrlId(ids);
   }
 
   /**
@@ -69,25 +51,12 @@ public class Links {
    * up old interpreted link data before a new interpretation / crawl.
    */
   public static int deleteFromOriginUrlId(Iterable<String> urlIds) throws DataInternalException {
-    try {
-      PreparedStatement statement =
-          Database.getInstance().prepareStatement(DELETE_BY_ORIGIN_URL_ID_COMMAND);
-      for (String urlId : urlIds) {
-        statement.setString(1, urlId);
-        statement.addBatch();
-      }
-      return Database.sumIntArray(statement.executeBatch());
-    } catch (SQLException e) {
-      throw new DataInternalException("Could not delete links: " + e.getMessage(), e);
-    }
+    return Database.getInstance().delete(Link.class,
+        new QueryOption.WhereEquals("origin_url_id", urlIds));
   }
 
   /** Helper method for creating the Link table. */
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
-    database.prepareStatement(database.getCreateTableStatement(Link.class)).execute();
-    for (String statement : database.getCreateIndexesStatement(Link.class)) {
-      database.prepareStatement(statement).execute();
-    }
+    Database.getInstance().createTable(Link.class);
   }
 }

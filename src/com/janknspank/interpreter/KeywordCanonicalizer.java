@@ -78,6 +78,10 @@ public class KeywordCanonicalizer {
     keywordBuilder.setKeyword(getBestKeywordStr(keyword1.getKeyword(), keyword2.getKeyword()));
     keywordBuilder.setStrength(
         Math.max(keyword1.getStrength(), keyword2.getStrength()) + 1);
+    keywordBuilder.setType(
+        EntityType.fromValue(keyword1.getType()).getDepth()
+            > EntityType.fromValue(keyword2.getType()).getDepth()
+            ? keyword1.getType() : keyword2.getType());
     return keywordBuilder.build();
   }
 

@@ -16,7 +16,8 @@ message Article {
 
   optional string url = 2 [
     (required) = YES,
-    (string_length) = 767
+    (string_length) = 767,
+    (string_charset) = LATIN1
   ];
 
   optional string title = 3 [
@@ -86,7 +87,8 @@ message ArticleKeyword {
   optional string type = 4 [
     (required) = YES,
     (storage_method) = PULL_OUT,
-    (string_length) = 1
+    (string_length) = 5,
+    (string_charset) = LATIN1
   ];
 
   enum Source {
@@ -129,7 +131,8 @@ message Url {
   optional string url = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 767
+    (string_length) = 767,
+    (string_charset) = LATIN1
   ];
 
   optional string id = 2 [
