@@ -4,6 +4,20 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     version="2.5">
 
+  <!-- Resource files. -->
+  <servlet>
+    <servlet-name>ResourcesServlet</servlet-name>
+    <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
+    <init-param>
+      <param-name>dirAllowed</param-name>
+      <param-value>false</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResourcesServlet</servlet-name>
+    <url-pattern>resources/*</url-pattern>
+  </servlet-mapping>
+
   <!-- Application servlets. -->
   <servlet>
     <servlet-name>IndexServlet</servlet-name>
@@ -112,4 +126,14 @@
     <servlet-name>SetUserUrlRatingServlet</servlet-name>
     <url-pattern>/setUserUrlRating</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>TrainingServlet</servlet-name>
+    <servlet-class>com.janknspank.server.TrainingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrainingServlet</servlet-name>
+    <url-pattern>/training</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

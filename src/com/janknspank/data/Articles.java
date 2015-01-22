@@ -10,6 +10,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
+import com.janknspank.proto.Core.TrainedArticleIndustry;
 import com.janknspank.proto.Core.UserInterest;
 
 /**
@@ -83,6 +84,27 @@ public class Articles {
         new QueryOption.DescendingSort("published_time"));
   }
 
+  /**
+   * Returns a random article
+   */
+  public static Article getRandomArticle() throws DataInternalException {
+    return Database.getInstance().getFirst(Article.class,
+        new QueryOption.Sort("rand()"));
+  }
+  
+  /**
+   * Returns a random untrained article
+   */
+  public static Article getRandomUntrainedArticle() throws DataInternalException {
+    Article art;
+    List<TrainedArticleIndustry> taggedIndustries;
+    do {
+      art = Articles.getRandomArticle();
+      taggedIndustries = TrainedArticleIndustries.getFromArticle(art.getUrlId());
+    } while (!taggedIndustries.isEmpty());
+    return art;
+  }
+  
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
     Database.getInstance().createTable(Article.class);

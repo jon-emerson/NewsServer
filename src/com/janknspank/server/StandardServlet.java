@@ -39,6 +39,7 @@ public abstract class StandardServlet extends NewsServlet {
         if (resp.getStatus() == HttpServletResponse.SC_MOVED_TEMPORARILY) {
           // Don't do anything, the internal chose to redirect.
         } else {
+          resp.setHeader("Content-Type", "text/html; charset=utf-8");
           writeSoyTemplate(resp, ".main", getSoyMapData(req));
         }
       } else {

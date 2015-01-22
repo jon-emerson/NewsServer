@@ -460,3 +460,90 @@ message Entity {
   };
   repeated EntityTopic topic = 6;
 }
+
+message TrainedArticleIndustry {
+  optional string url_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 22,
+    (string_charset) = LATIN1
+  ];
+
+  // The LinkedIn industry code.
+  // https://developer.linkedin.com/documents/industry-codes
+  optional int32 industry_code_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX
+  ];
+  
+  optional string trainer_user_id = 3 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 22,
+    (string_charset) = LATIN1
+  ];
+}
+
+message IndustryCode {
+  // The LinkedIn industry code.
+  // https://developer.linkedin.com/documents/industry-codes
+  optional int32 id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY
+  ];
+
+  // The LinkedIn industry group.
+  optional string group = 2 [
+    (required) = YES,
+    (string_length) = 50
+  ];
+  
+  // The LinkedIn industry description.
+  optional string description = 3 [
+    (required) = YES,
+    (string_length) = 100
+  ];
+}
+
+message TrainedArticleClassification {
+  optional string url_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 22,
+    (string_charset) = LATIN1
+  ];
+
+  optional string article_classification_code = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 5,
+    (string_charset) = LATIN1
+  ];
+  
+  optional bool checked = 3 [
+    (required) = YES,
+    (storage_method) = INDEX
+  ];
+  
+  optional string trainer_user_id = 4 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 22,
+    (string_charset) = LATIN1
+  ];
+}
+
+message ArticleClassification {
+  optional string code = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 5,
+    (string_charset) = LATIN1
+  ];
+  
+  optional string description = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 100
+  ];
+}
