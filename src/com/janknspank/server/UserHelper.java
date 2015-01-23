@@ -17,11 +17,11 @@ import com.janknspank.data.Database;
 import com.janknspank.data.UserInterests;
 import com.janknspank.data.UserUrlFavorites;
 import com.janknspank.data.UserUrlRatings;
-import com.janknspank.proto.Serializer;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.User;
 import com.janknspank.proto.Core.UserUrlFavorite;
 import com.janknspank.proto.Core.UserUrlRating;
+import com.janknspank.proto.Serializer;
 
 /**
  * Helper class containing the user's favorite and rated articles.
@@ -65,7 +65,7 @@ public class UserHelper {
     return Maps.uniqueIndex(
         Iterables.isEmpty(articleIds)
             ? Collections.<Article>emptyList()
-            : Database.getInstance().get(Article.class, articleIds),
+            : Database.with(Article.class).get(articleIds),
         new Function<Article, String>() {
           @Override
           public String apply(Article article) {

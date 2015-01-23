@@ -5,6 +5,6 @@ import com.janknspank.proto.Core.LinkedInProfile;
 public class LinkedInProfiles {
   /** Helper method for creating the LinkedInProfile table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(LinkedInProfile.class);
+    Database.with(LinkedInProfile.class).createTable();
   }
 }

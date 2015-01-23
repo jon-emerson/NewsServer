@@ -18,7 +18,6 @@ import com.janknspank.data.Database;
 import com.janknspank.data.Entities;
 import com.janknspank.data.EntityType;
 import com.janknspank.data.GuidFactory;
-import com.janknspank.data.LocalDatabase;
 import com.janknspank.data.QueryOption;
 import com.janknspank.data.ValidationException;
 import com.janknspank.interpreter.KeywordFinder;
@@ -148,7 +147,7 @@ public class GetKeywordsFromDbpediaAbstracts {
   }
 
   public static LongAbstract getNextLongAbstract() throws DataInternalException {
-    return LocalDatabase.getInstance().getFirst(LongAbstract.class,
+    return Database.with(LongAbstract.class).getFirst(
         new QueryOption.LimitWithOffset(1, (int) (10000 * Math.random())));
   }
 
@@ -218,7 +217,6 @@ public class GetKeywordsFromDbpediaAbstracts {
     BufferedReader reader = null;
     try {
       // We can do n-triples or n-quads here... For some reason I downloaded quads.
-      Database database = Database.getInstance();
       List<Entity> entitiesToUpdate = Lists.newArrayList();
       List<Entity> entitiesToInsert = Lists.newArrayList();
       List<LongAbstract> longAbstractsToDelete = Lists.newArrayList();
@@ -276,11 +274,11 @@ public class GetKeywordsFromDbpediaAbstracts {
         // If we have enough entities to insert or update, do the deed.
         if (entitiesToInsert.size() > 100 || entitiesToUpdate.size() > 100) {
           System.out.println("Writing up through keyword: " + entitiesToUpdate.get(0).getKeyword());
-          database.insert(entitiesToInsert);
+          Database.insert(entitiesToInsert);
           entitiesToInsert.clear();
-          database.update(entitiesToUpdate);
+          Database.update(entitiesToUpdate);
           entitiesToUpdate.clear();
-          LocalDatabase.getInstance().delete(longAbstractsToDelete);
+          Database.delete(longAbstractsToDelete);
           longAbstractsToDelete.clear();
         }
 
@@ -288,8 +286,8 @@ public class GetKeywordsFromDbpediaAbstracts {
       }
 
       // Insert the remaining stragglers.
-      database.insert(entitiesToInsert);
-      database.insert(entitiesToUpdate);
+      Database.insert(entitiesToInsert);
+      Database.insert(entitiesToUpdate);
 
     } catch (IOException | ValidationException | DataInternalException e) {
       e.printStackTrace();

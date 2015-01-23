@@ -13,7 +13,7 @@ import com.janknspank.proto.Core.ArticleKeyword;
  */
 public class ArticleKeywords {
   public static final int MAX_KEYWORD_LENGTH =
-      Database.getStringLength(ArticleKeyword.class, "keyword");
+      Database.with(ArticleKeyword.class).getStringLength("keyword");
 
   /**
    * Returns all of the ArticleKeywords associated with any of the passed-in
@@ -21,8 +21,7 @@ public class ArticleKeywords {
    */
   public static List<ArticleKeyword> get(Iterable<Article> articleList)
       throws DataInternalException {
-    return Database.getInstance().get(
-        ArticleKeyword.class,
+    return Database.with(ArticleKeyword.class).get(
         new QueryOption.WhereEquals("url_id",
             Iterables.transform(articleList, new Function<Article, String>() {
               @Override
@@ -33,12 +32,12 @@ public class ArticleKeywords {
   }
 
   public static int deleteForUrlIds(Iterable<String> urlIds) throws DataInternalException {
-    return Database.getInstance().delete(ArticleKeyword.class,
+    return Database.with(ArticleKeyword.class).delete(
         new QueryOption.WhereEquals("url_id", urlIds));
   }
 
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(ArticleKeyword.class);
+    Database.with(ArticleKeyword.class).createTable();
   }
 }

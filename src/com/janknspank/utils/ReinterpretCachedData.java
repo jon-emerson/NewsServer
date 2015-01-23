@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
-import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +29,6 @@ public class ReinterpretCachedData {
       Pattern.compile("^([a-zA-Z\\-\\_0-9]{22})\\.html$");
 
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
     File dataDirectory = new File("data/");
     for (File dataFile : dataDirectory.listFiles()) {
       Matcher matcher = FILE_PATTERN.matcher(dataFile.getName());
@@ -53,7 +51,7 @@ public class ReinterpretCachedData {
         url = Urls.markCrawlStart(url);
       } else {
         System.out.println("Cleaning old data for URL: " + url.getUrl());
-        database.delete(Article.class, url.getId());
+        Database.with(Article.class).delete(url.getId());
         ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
         Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
       }
@@ -65,11 +63,11 @@ public class ReinterpretCachedData {
       try {
         fileReader = new FileReader(dataFile);
         InterpretedData interpretedData = Interpreter.interpret(url, fileReader);
-        database.insert(interpretedData.getArticle());
-        database.insert(interpretedData.getKeywordList());
+        Database.insert(interpretedData.getArticle());
+        Database.insert(interpretedData.getKeywordList());
 
         // Make sure to filter and clean the URLs - only store the ones we want to crawl!
-        Collection<Url> destinationUrls = Urls.put(
+        Iterable<Url> destinationUrls = Urls.put(
             Iterables.transform(
                 Iterables.filter(interpretedData.getUrlList(), UrlWhitelist.PREDICATE),
                 UrlCleaner.TRANSFORM_FUNCTION),

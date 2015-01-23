@@ -19,8 +19,8 @@ import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
 import com.janknspank.data.Urls;
 import com.janknspank.data.ValidationException;
-import com.janknspank.proto.Core.Url;
 import com.janknspank.proto.Core.Link;
+import com.janknspank.proto.Core.Url;
 
 public class TwitterCrawler implements twitter4j.StatusListener {
   private final UrlResolver resolver = UrlResolver.getInstance();
@@ -32,13 +32,6 @@ public class TwitterCrawler implements twitter4j.StatusListener {
 
   @Override
   public void onStatus(final Status status) {
-    final Database database;
-    try {
-      database = Database.getInstance();
-    } catch (DataInternalException e) {
-      throw new Error(e);
-    }
-
     for (final URLEntity entity : status.getURLEntities()) {
       final URL shortUrl;
       try {
@@ -86,7 +79,7 @@ public class TwitterCrawler implements twitter4j.StatusListener {
                 try {
                   Url discoveredTwitterUrl = Urls.put(twitterUrl, /* isTweet */ false);
                   Url newsUrl = Urls.put(longUrl, /* isTweet */ true);
-                  database.insert(Link.newBuilder()
+                  Database.insert(Link.newBuilder()
                       .setOriginUrlId(discoveredTwitterUrl.getId())
                       .setDestinationUrlId(newsUrl.getId())
                       .setDiscoveryTime(newsUrl.getDiscoveryTime())

@@ -87,9 +87,9 @@ public class TrainingServlet extends StandardServlet {
             .setIndustryCodeId(Integer.parseInt(industryId))
             .build());
       }
-      Database.getInstance().insert(articleIndustries);      
+      Database.insert(articleIndustries);      
     }
-    
+
     // Collect all checked and unchecked classification states
     Map<String, Boolean> classificationsHelper = new HashMap<String, Boolean>();
     for (String code : ArticleClassifications.ARTICLE_CLASSIFICATION_CODE_MAP.keySet()) {
@@ -113,7 +113,7 @@ public class TrainingServlet extends StandardServlet {
           .setChecked(state)
           .build());
     }
-    Database.getInstance().insert(articleClassifications);
+    Database.insert(articleClassifications);
     
     return this.createSuccessResponse();
   }

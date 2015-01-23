@@ -142,7 +142,7 @@ public class Sessions {
           .setUserId(user.getId())
           .setCreateTime(System.currentTimeMillis())
           .build();
-      Database.getInstance().insert(session);
+      Database.insert(session);
       return session;
     } catch (ValidationException e) {
       throw new DataInternalException("Could not construct session object", e);
@@ -159,7 +159,7 @@ public class Sessions {
     String userId = decrypt(sessionKey);
 
     // Make sure the session key is in the database.
-    Session session = Database.getInstance().get(Session.class, sessionKey);
+    Session session = Database.with(Session.class).get(sessionKey);
     if (session == null) {
       throw new DataRequestException("Session not found in database.");
     }
@@ -179,12 +179,12 @@ public class Sessions {
    * @return number of rows deleted
    */
   public static int deleteAllFromUser(User user) throws DataInternalException {
-    return Database.getInstance().delete(Session.class,
+    return Database.with(Session.class).delete(
         new QueryOption.WhereEquals("user_id", user.getId()));
   }
 
   /** Helper method for creating the Session table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(Session.class);
+    Database.with(Session.class).createTable();
   }
 }

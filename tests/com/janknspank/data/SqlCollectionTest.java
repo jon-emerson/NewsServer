@@ -1,43 +1,53 @@
 package com.janknspank.data;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import com.google.common.collect.ImmutableList;
-import com.google.protobuf.Message;
 import com.janknspank.proto.Core.Article;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+public class SqlCollectionTest {
+  private PreparedStatement preparedStatement;
+  private ArgumentCaptor<String> statementCaptor;
+  private Collection<Article> collection;
 
-@SuppressWarnings("resource")
-public class DatabaseTest {
-  @Test
-  public void testGetAll() throws Exception {
-    Connection connection = mock(Connection.class);
-    PreparedStatement preparedStatement = mock(PreparedStatement.class);
-    ArgumentCaptor<String> statementCaptor = ArgumentCaptor.forClass(String.class);
+  @Before
+  public void setUp() throws Exception {
+    final Connection connection = mock(Connection.class);
+    preparedStatement = mock(PreparedStatement.class);
+    statementCaptor = ArgumentCaptor.forClass(String.class);
     when(connection.prepareStatement(statementCaptor.capture())).thenReturn(preparedStatement);
     when(preparedStatement.executeQuery()).thenReturn(mock(ResultSet.class));
-    Database database = new Database(connection);
-    database.get(Article.class);
+    collection = new SqlCollection<Article>(Article.class) {
+      @Override
+      protected Connection getConnection() {
+        return connection;
+      }
+    };
+  }
+
+  @Test
+  public void testGetAll() throws Exception {
+    collection.get();
     assertEquals("SELECT * FROM Article", statementCaptor.getValue());
   }
 
   @Test
   public void testGetFirstWithOffset() throws Exception {
-    Connection connection = mock(Connection.class);
-    PreparedStatement preparedStatement = mock(PreparedStatement.class);
-    ArgumentCaptor<String> statementCaptor = ArgumentCaptor.forClass(String.class);
-    when(connection.prepareStatement(statementCaptor.capture())).thenReturn(preparedStatement);
-    when(preparedStatement.executeQuery()).thenReturn(mock(ResultSet.class));
-    Database database = new Database(connection);
-    database.getFirst(Article.class,
+    collection.getFirst(
         new QueryOption.WhereEquals("type", "cou"),
         new QueryOption.LimitWithOffset(10, 500));
     assertEquals("SELECT * FROM Article "
@@ -52,13 +62,7 @@ public class DatabaseTest {
 
   @Test
   public void testGetCrazy() throws Exception {
-    Connection connection = mock(Connection.class);
-    PreparedStatement preparedStatement = mock(PreparedStatement.class);
-    ArgumentCaptor<String> statementCaptor = ArgumentCaptor.forClass(String.class);
-    when(connection.prepareStatement(statementCaptor.capture())).thenReturn(preparedStatement);
-    when(preparedStatement.executeQuery()).thenReturn(mock(ResultSet.class));
-    Database database = new Database(connection);
-    database.get(Article.class,
+    collection.get(
         new QueryOption.WhereEquals("id", ImmutableList.of("X", "Y", "Z")),
         new QueryOption.WhereNotEquals("crawl_priority", "0"),
         new QueryOption.WhereNotLike("url", "%//twitter.com/%"),
@@ -83,20 +87,15 @@ public class DatabaseTest {
 
   @Test
   public void testMessageUpdate() throws Exception {
-    Message message = Article.newBuilder()
+    when(preparedStatement.executeBatch()).thenReturn(new int[] { 1 });
+    Article article = Article.newBuilder()
         .setDescription("Je ne connais pas")
         .setPublishedTime(32625L)
         .setTitle("Title de Article Amazement")
         .setUrl("http://www.nytimes.com/ouiouioui")
         .setUrlId("ID")
         .build();
-    Connection connection = mock(Connection.class);
-    PreparedStatement preparedStatement = mock(PreparedStatement.class);
-    ArgumentCaptor<String> statementCaptor = ArgumentCaptor.forClass(String.class);
-    when(connection.prepareStatement(statementCaptor.capture())).thenReturn(preparedStatement);
-    when(preparedStatement.executeBatch()).thenReturn(new int[] { 1 });
-    Database database = new Database(connection);
-    database.update(message);
+    collection.update(ImmutableList.of(article));
     assertEquals("UPDATE Article SET url_id=?, title=?, published_time=?, proto=? "
         + "WHERE url_id IN (?)", statementCaptor.getValue());
     ArgumentCaptor<String> stringCaptor = ArgumentCaptor.forClass(String.class);

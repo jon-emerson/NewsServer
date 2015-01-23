@@ -25,7 +25,7 @@ public class SetAddressBookServlet extends StandardServlet {
         .setData(getRequiredParameter(req, "data"))
         .setCreateTime(System.currentTimeMillis())
         .build();
-    Database.getInstance().upsert(addressBook);
+    Database.upsert(addressBook);
     List<UserInterest> interests = UserInterests.updateInterests(userId, addressBook);
 
     // Return the user's interests.
@@ -42,7 +42,7 @@ public class SetAddressBookServlet extends StandardServlet {
     for (String userId : new String[] {
         "vWxNTAAKB-KYAEofUGJL4A",
         "o0Sr9HzgxZMUVcUi09NIhg"}) {
-      AddressBook addressBook = Database.getInstance().get(AddressBook.class, userId);
+      AddressBook addressBook = Database.with(AddressBook.class).get(userId);
       UserInterests.updateInterests(userId, addressBook);
     }
   }

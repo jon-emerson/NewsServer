@@ -14,7 +14,6 @@ public class BuildEntityTable {
     BufferedReader reader = null;
     int entityCount = 0;
     try {
-      Database database = Database.getInstance();
       reader = new BufferedReader(new FileReader("dbpedia/instance_types_en.nt"));
       String line = reader.readLine();
       DbpediaInstanceType currentInstanceType = new DbpediaInstanceType();
@@ -39,7 +38,7 @@ public class BuildEntityTable {
           currentInstanceType.addLine(instanceTypeLine);
         }
         if (entitiesToInsert.size() == 250) {
-          System.out.println(database.insert(entitiesToInsert) + " rows inserted");
+          System.out.println(Database.insert(entitiesToInsert) + " rows inserted");
           entitiesToInsert.clear();
         }
         line = reader.readLine();
@@ -47,7 +46,7 @@ public class BuildEntityTable {
       if (currentInstanceType.isValuableEntity()) {
         entitiesToInsert.add(currentInstanceType.createEntity());
       }
-      System.out.println(database.insert(entitiesToInsert) + " rows inserted");
+      System.out.println(Database.insert(entitiesToInsert) + " rows inserted");
       System.out.println("Total row count: " + entityCount);
     } finally {
       if (reader != null) {

@@ -10,7 +10,6 @@ import com.google.common.collect.Lists;
 import com.janknspank.data.Database;
 import com.janknspank.data.Entities;
 import com.janknspank.data.EntityType;
-import com.janknspank.data.LocalDatabase;
 import com.janknspank.interpreter.KeywordUtils;
 import com.janknspank.proto.Local.TokenToEntity;
 
@@ -34,8 +33,7 @@ public class BuildLocalEntityMap {
 
   /** Helper method for creating the TokenToEntity table. */
   public static void main(String args[]) throws Exception {
-    Database localDatabase = LocalDatabase.getInstance();
-    localDatabase.createTable(TokenToEntity.class);
+    Database.with(TokenToEntity.class).createTable();
 
     BufferedReader reader = null;
     try {
@@ -75,14 +73,14 @@ public class BuildLocalEntityMap {
           currentInstanceType.addLine(instanceTypeLine);
 
           if (tokenToEntitiesToInsert.size() > 500) {
-            localDatabase.insert(tokenToEntitiesToInsert);
+            Database.insert(tokenToEntitiesToInsert);
             tokenToEntitiesToInsert.clear();
           }
         }
         line = reader.readLine();
       }
 
-      localDatabase.insert(tokenToEntitiesToInsert);
+      Database.insert(tokenToEntitiesToInsert);
 
       // There's an off-by-1 error here: We lose the last entity.
     } finally {

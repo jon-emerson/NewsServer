@@ -19,11 +19,11 @@ import com.janknspank.proto.Core.UserInterest;
  */
 public class Articles {
   public static final int MAX_TITLE_LENGTH =
-      Database.getStringLength(Article.class, "title");
+      Database.with(Article.class).getStringLength("title");
   public static final int MAX_PARAGRAPH_LENGTH =
-      Database.getStringLength(Article.class, "paragraph");
+      Database.with(Article.class).getStringLength("paragraph");
   public static final int MAX_DESCRIPTION_LENGTH =
-      Database.getStringLength(Article.class, "description");
+      Database.with(Article.class).getStringLength("description");
 
   public static Iterable<Article> getArticlesOnTopic(String topic) throws DataInternalException {
     List<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(ImmutableList.of(topic));
@@ -54,7 +54,7 @@ public class Articles {
 
   private static List<ArticleKeyword> getArticleKeywordsForTopics(Iterable<String> topics)
       throws DataInternalException {
-    return Database.getInstance().get(ArticleKeyword.class,
+    return Database.with(ArticleKeyword.class).get(
         new QueryOption.WhereEquals("keyword", topics),
         new QueryOption.Limit(500));
   }
@@ -79,7 +79,7 @@ public class Articles {
    */
   public static List<Article> getArticles(Iterable<String> urlIds)
       throws DataInternalException {
-    return Database.getInstance().get(Article.class,
+    return Database.with(Article.class).get(
         new QueryOption.WhereEquals("url_id", urlIds),
         new QueryOption.DescendingSort("published_time"));
   }
@@ -88,7 +88,7 @@ public class Articles {
    * Returns a random article
    */
   public static Article getRandomArticle() throws DataInternalException {
-    return Database.getInstance().getFirst(Article.class,
+    return Database.with(Article.class).getFirst(
         new QueryOption.Sort("rand()"));
   }
   
@@ -107,7 +107,7 @@ public class Articles {
   
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(Article.class);
+    Database.with(Article.class).createTable();
 
 //    Article.Builder builder = Article.newBuilder();
 //    String id = "id" + System.currentTimeMillis();

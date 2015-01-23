@@ -684,9 +684,8 @@ public class UrlWhitelist {
    * two URLs and we can always find the cleaned URL again later, if necessary.
    */
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
     Map<String, String> urlsToDelete = Maps.newHashMap();
-    for (Url url : database.get(Url.class,
+    for (Url url : Database.with(Url.class).get(
         new QueryOption.WhereNotLike("url", "%//twitter.com/%"))) {
       String urlStr = url.getUrl();
       if ((!isOkay(urlStr) || !urlStr.equals(UrlCleaner.clean(urlStr)))) {
@@ -700,10 +699,10 @@ public class UrlWhitelist {
           urls.add(urlToDelete.getKey());
           ids.add(urlToDelete.getValue());
         }
-        System.out.println("Deleted " + database.delete(Article.class, ids) + " articles");
+        System.out.println("Deleted " + Database.with(Article.class).delete(ids) + " articles");
         System.out.println("Deleted " + ArticleKeywords.deleteForUrlIds(ids) + " article keywords");
         System.out.println("Deleted " + Links.deleteIds(ids) + " links");
-        System.out.println("Deleted " + database.delete(Url.class, urls) + " urls");
+        System.out.println("Deleted " + Database.with(Url.class).delete(urls) + " urls");
         urlsToDelete.clear();
       }
     }

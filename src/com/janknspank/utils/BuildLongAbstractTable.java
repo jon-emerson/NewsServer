@@ -19,7 +19,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
-import com.janknspank.data.LocalDatabase;
+import com.janknspank.data.SqlConnection;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Local.LongAbstract;
 
@@ -120,8 +120,8 @@ public class BuildLongAbstractTable {
     PreparedStatement stmt = null;
     try {
       Set<String> articleNames = Sets.newHashSet();
-      stmt = LocalDatabase.getInstance().xXprepareStatement(
-          "SELECT article_name from " + Database.getTableName(LongAbstract.class));
+      stmt = SqlConnection.xXprepareStatement(
+          "SELECT article_name from " + Database.with(LongAbstract.class).getTableName());
       ResultSet result = stmt.executeQuery();
       while (result.next()) {
         articleNames.add(result.getString("article_name"));
@@ -141,7 +141,7 @@ public class BuildLongAbstractTable {
 
   public static void main(String args[]) {
     try {
-      LocalDatabase.getInstance().createTable(LongAbstract.class);
+      Database.with(LongAbstract.class).createTable();
     } catch (Exception e) {
       throw new Error(e);
     }
@@ -149,16 +149,18 @@ public class BuildLongAbstractTable {
     BufferedReader reader = null;
     try {
       // We can do n-triples or n-quads here... For some reason I downloaded quads.
-      Database localDatabase = LocalDatabase.getInstance();
       List<LongAbstract> longAbstractsToInsert = Lists.newArrayList();
       Set<String> previousArticleNames = Sets.newHashSet();
 
       reader = new BufferedReader(new FileReader("dbpedia/long_abstracts_en.nq"));
       String line = reader.readLine();
       final Set<String> existingArticleNames = getExistingArticleNames();
-      final int maxTopicLength = Database.getStringLength(LongAbstract.class, "topic");
-      final int maxArticleNameLength = Database.getStringLength(LongAbstract.class, "article_name");
-      final int maxTextLength = Database.getStringLength(LongAbstract.class, "text");
+      final int maxTopicLength =
+          Database.with(LongAbstract.class).getStringLength("topic");
+      final int maxArticleNameLength =
+          Database.with(LongAbstract.class).getStringLength("article_name");
+      final int maxTextLength =
+          Database.with(LongAbstract.class).getStringLength("text");
       while (line != null) {
         if (line.startsWith("#")) {
           line = reader.readLine();
@@ -190,7 +192,7 @@ public class BuildLongAbstractTable {
 
         // If we have enough entities to insert or update, do the deed.
         if (longAbstractsToInsert.size() > 500) {
-          localDatabase.insert(longAbstractsToInsert);
+          Database.insert(longAbstractsToInsert);
           longAbstractsToInsert.clear();
         }
 
@@ -198,7 +200,7 @@ public class BuildLongAbstractTable {
       }
 
       // Insert the remaining stragglers.
-      localDatabase.insert(longAbstractsToInsert);
+      Database.insert(longAbstractsToInsert);
 
     } catch (IOException | ValidationException | DataInternalException e) {
       e.printStackTrace();

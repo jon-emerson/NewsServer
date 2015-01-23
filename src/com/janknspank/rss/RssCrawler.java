@@ -161,16 +161,15 @@ public class RssCrawler {
   private void saveArticle(String url, Long date) {
     Url existing;
     try {
-      Database database = Database.getInstance();
-      existing = database.get(Url.class, url);
+      existing = Database.with(Url.class).get(url);
       if (existing == null) {
-        database.insert(Url.newBuilder()
-          .setUrl(url)
-          .setId(GuidFactory.generate())
-          .setTweetCount(0)
-          .setDiscoveryTime(System.currentTimeMillis())
-          .setCrawlPriority(Urls.getCrawlPriority(url, date))
-          .build());
+        Database.insert(Url.newBuilder()
+            .setUrl(url)
+            .setId(GuidFactory.generate())
+            .setTweetCount(0)
+            .setDiscoveryTime(System.currentTimeMillis())
+            .setCrawlPriority(Urls.getCrawlPriority(url, date))
+            .build());
       }
     } catch (DataInternalException|ValidationException e) {
       // Oh well, it's just RSS.  Print it out at least, so we can debug it.

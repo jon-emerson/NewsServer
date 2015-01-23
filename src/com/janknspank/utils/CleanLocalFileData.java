@@ -19,7 +19,7 @@ public class CleanLocalFileData {
   public static void main(String args[]) throws Exception {
     // Figure out what articles we've crawled already.
     Set<String> crawledArticleIds = Sets.newHashSet();
-    for (Article article : Database.getInstance().get(Article.class)) {
+    for (Article article : Database.with(Article.class).get()) {
       crawledArticleIds.add(article.getUrlId());
     }
 
