@@ -3,12 +3,22 @@ package com.janknspank.neuralnet;
 import java.io.StringReader;
 import java.util.List;
 
-import com.janknspank.data.*;
+import com.janknspank.data.DataInternalException;
+import com.janknspank.data.LinkedInProfiles;
+import com.janknspank.data.UserInterests;
+import com.janknspank.data.UserUrlFavorites;
+import com.janknspank.data.UserUrlRatings;
+import com.janknspank.data.Users;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
-import com.janknspank.proto.Core.*;
+import com.janknspank.proto.Core.LinkedInProfile;
+import com.janknspank.proto.Core.User;
+import com.janknspank.proto.Core.UserIndustry;
+import com.janknspank.proto.Core.UserInterest;
+import com.janknspank.proto.Core.UserUrlFavorite;
+import com.janknspank.proto.Core.UserUrlRating;
 
 /**
  * Convenience class that combines User

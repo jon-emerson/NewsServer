@@ -1,6 +1,8 @@
 package com.janknspank.neuralnet;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableList;
 import com.janknspank.data.ArticleKeywords;
@@ -56,25 +58,12 @@ public class CompleteArticle {
   }
   
   public static int countWords(String s){
-    int wordCount = 0;
-    boolean word = false;
-    int endOfLine = s.length() - 1;
-
-    for (int i = 0; i < s.length(); i++) {
-      // if the char is a letter, word = true.
-      if (Character.isLetter(s.charAt(i)) && i != endOfLine) {
-        word = true;
-        // if char isn't a letter and there have been letters before,
-        // counter goes up.
-      } else if (!Character.isLetter(s.charAt(i)) && word) {
-        wordCount++;
-        word = false;
-        // last word of String; if it doesn't end with a non letter, it
-        // wouldn't count without this.
-      } else if (Character.isLetter(s.charAt(i)) && i == endOfLine) {
-        wordCount++;
-      }
+    Pattern pattern = Pattern.compile("[\\s]+");
+    Matcher matcher = pattern.matcher(s);
+    int words = 0;
+    while (matcher.find()) {
+      words++;
     }
-    return wordCount;
+    return words + 1;
   }
 }

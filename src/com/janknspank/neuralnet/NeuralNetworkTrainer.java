@@ -63,6 +63,6 @@ public class NeuralNetworkTrainer {
   /** Helper method for triggering a train. */
   public static void main(String args[]) throws Exception {
     NeuralNetwork neuralNetwork = generateTrainedNetwork(generateTrainingDataSet());
-    neuralNetwork.save(NeuralNetworkDriver.defaultNNetFile);
+    neuralNetwork.save(NeuralNetworkDriver.defaultNeuralNetworkFile);
   }
 }

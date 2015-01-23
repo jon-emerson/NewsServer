@@ -9,7 +9,9 @@ import com.janknspank.proto.Core.User;
  */
 public class Users {
   /**
-   * Internal method - used by login
+   * This is currently private because its uses should be only internal.
+   * When we implement login, that should be through a different method that
+   * additionally updates the last login time.
    */
   private static User getByEmail(String email) throws DataInternalException {
     return Database.getInstance().getFirst(User.class,
@@ -17,8 +19,7 @@ public class Users {
   }
   
   public static User getByUserId(String userId) throws DataInternalException {
-    return Database.getInstance().getFirst(User.class,
-        new QueryOption.WhereEquals("id", userId));
+    return Database.getInstance().get(User.class, userId);
   }
 
   public static User loginFromLinkedIn(
