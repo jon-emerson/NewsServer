@@ -27,6 +27,7 @@ import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.Session;
 import com.janknspank.proto.Core.TrainedArticleClassification;
 import com.janknspank.proto.Core.TrainedArticleIndustry;
+import com.janknspank.proto.Core.UserUrlRating;
 
 @AuthenticationRequired
 public class TrainingServlet extends StandardServlet {
@@ -75,7 +76,8 @@ public class TrainingServlet extends StandardServlet {
     String[] industryIdsList = req.getParameterValues("industriesCheckboxes");
     //Only returns the selected checkboxes
     String[] articleClassificationCodesList = req.getParameterValues("classifications");
-
+    int rating100scale = Integer.parseInt(req.getParameter("qualityScore"));
+    
     // Business logic.
     // Save the tagged industries
     if (industryIdsList != null) {
@@ -89,6 +91,15 @@ public class TrainingServlet extends StandardServlet {
       }
       Database.getInstance().insert(articleIndustries);      
     }
+    
+    // Save the user relevance rating
+    UserUrlRating userRating = UserUrlRating.newBuilder()
+        .setUrlId(urlId)
+        .setUserId(session.getUserId())
+        .setRating(rating100scale)
+        .setCreateTime(System.currentTimeMillis())
+        .build();
+    Database.getInstance().insert(userRating);
     
     // Collect all checked and unchecked classification states
     Map<String, Boolean> classificationsHelper = new HashMap<String, Boolean>();

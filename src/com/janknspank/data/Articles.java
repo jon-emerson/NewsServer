@@ -1,13 +1,22 @@
 package com.janknspank.data;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
+import com.janknspank.dom.parser.ParserException;
+import com.janknspank.neuralnet.NeuralNetworkDriver;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.TrainedArticleIndustry;
@@ -24,7 +33,7 @@ public class Articles {
       Database.getStringLength(Article.class, "paragraph");
   public static final int MAX_DESCRIPTION_LENGTH =
       Database.getStringLength(Article.class, "description");
-
+  
   public static Iterable<Article> getArticlesOnTopic(String topic) throws DataInternalException {
     List<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(ImmutableList.of(topic));
     Set<String> articleIds = Sets.newHashSet();
@@ -72,6 +81,36 @@ public class Articles {
     }
     return getArticles(articleIds);
   }
+  
+  public static List<Article> getArticlesRankedByNeuralNetwork(String userId)
+      throws DataInternalException, ParserException {
+    NeuralNetworkDriver neuralNetworkDriver = NeuralNetworkDriver.getInstance();
+    neuralNetworkDriver.setUser(userId);
+    // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
+    List<Article> articles = getArticles(UserInterests.getInterests(userId));
+    Map<Article, Double> ranks = new HashMap<Article, Double>();
+    
+    // Sort the articles by rank
+    for (Article article : articles) {
+      ranks.put(article, neuralNetworkDriver.getRank(article.getUrlId()));
+    }
+    
+    PriorityQueue<Entry<Article, Double>> pq = new PriorityQueue<Map.Entry<Article,Double>>(
+        ranks.size(), new Comparator<Entry<Article, Double>>() {
+
+      @Override
+      public int compare(Entry<Article, Double> arg0, Entry<Article, Double> arg1) {
+          return arg0.getValue().compareTo(arg1.getValue()) * -1;
+      }
+    });
+    pq.addAll(ranks.entrySet());
+    
+    List<Article> sortedArticles = new ArrayList<Article>();
+    while (!pq.isEmpty()) {
+      sortedArticles.add(pq.poll().getKey());
+    }
+    return sortedArticles;
+  }
 
   /**
    * Returns articles with the given IDs, ordered by publish time, if they
@@ -82,6 +121,12 @@ public class Articles {
     return Database.getInstance().get(Article.class,
         new QueryOption.WhereEquals("url_id", urlIds),
         new QueryOption.DescendingSort("published_time"));
+  }
+  
+  public static Article getArticle(String urlId) 
+      throws DataInternalException {
+    return Database.getInstance().get(Article.class, 
+        new QueryOption.WhereEquals("url_id", urlId)).get(0);
   }
 
   /**

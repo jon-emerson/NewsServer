@@ -98,8 +98,8 @@ message ArticleKeyword {
     META_TAG = 3;
   }
   optional Source source = 5 [
-    default = UNKNOWN,
-    (required) = YES
+    default = UNKNOWN
+    // (required) = YES
   ];
 }
 
@@ -332,6 +332,24 @@ message UserUrlFavorite {
   optional int64 create_time = 3 [
     (storage_method) = PULL_OUT,
     (required) = YES
+  ];
+}
+
+message UserIndustry {
+  optional string user_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 22,
+    (string_charset) = LATIN1
+  ];
+
+  optional int32 industry_code_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX
+  ];
+
+  optional int64 joined_industry_time = 3 [
+    (storage_method) = PULL_OUT
   ];
 }
 
