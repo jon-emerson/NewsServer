@@ -32,6 +32,16 @@ public class CompleteArticle {
   
   public CompleteArticle(String urlId) throws DataInternalException {
     article = Articles.getArticle(urlId);
+    initForArticle(article);
+  }
+  
+  public CompleteArticle(Article article) throws DataInternalException {
+    this.article = article;
+    initForArticle(article);
+  }
+  
+  private void initForArticle(Article article) throws DataInternalException {
+    String urlId = article.getUrlId();
     keywords = ArticleKeywords.get(ImmutableList.of(article));
     classifications = TrainedArticleClassifications.getFromArticle(urlId);
     industries = TrainedArticleIndustries.getFromArticle(urlId);

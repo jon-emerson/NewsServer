@@ -2,8 +2,10 @@ package com.janknspank.neuralnet;
 
 import org.neuroph.core.NeuralNetwork;
 
+import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.dom.parser.ParserException;
+import com.janknspank.proto.Core.Article;
 
 public final class NeuralNetworkDriver {
   static final int inputNodesCount = 3;
@@ -56,10 +58,20 @@ public final class NeuralNetworkDriver {
     return getRank(urlId, user, neuralNetwork);
   }
   
+  public double getRank(Article article, CompleteUser user) throws DataInternalException {
+    return getRank(article, user, neuralNetwork);
+  }
+  
   private static double getRank(String urlId, CompleteUser user, NeuralNetwork neuralNetwork) 
       throws DataInternalException {
-    CompleteArticle article = new CompleteArticle(urlId);
-    neuralNetwork.setInput(generateInputNodes(user, article));
+    Article article = Articles.getArticle(urlId);
+    return getRank(article, user, neuralNetwork);
+  }
+  
+  private static double getRank(Article article, CompleteUser user, NeuralNetwork neuralNetwork) 
+      throws DataInternalException {
+    CompleteArticle completeArticle = new CompleteArticle(article);
+    neuralNetwork.setInput(generateInputNodes(user, completeArticle));
     neuralNetwork.calculate();
     return neuralNetwork.getOutput()[0];
   }

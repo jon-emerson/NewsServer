@@ -85,14 +85,14 @@ public class Articles {
   public static List<Article> getArticlesRankedByNeuralNetwork(String userId)
       throws DataInternalException, ParserException {
     NeuralNetworkDriver neuralNetworkDriver = NeuralNetworkDriver.getInstance();
-    CompleteUser completUser = new CompleteUser(userId);
+    CompleteUser completeUser = new CompleteUser(userId);
     // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
     List<Article> articles = getArticles(UserInterests.getInterests(userId));
-    Map<Article, Double> ranks = new HashMap<Article, Double>();
+    Map<Article, Double> ranks = new HashMap<>();
     
     // Sort the articles by rank
     for (Article article : articles) {
-      ranks.put(article, neuralNetworkDriver.getRank(article.getUrlId(), completUser));
+      ranks.put(article, neuralNetworkDriver.getRank(article, completeUser));
     }
     
     PriorityQueue<Entry<Article, Double>> pq = new PriorityQueue<Map.Entry<Article,Double>>(
@@ -125,8 +125,7 @@ public class Articles {
   
   public static Article getArticle(String urlId) 
       throws DataInternalException {
-    return Database.getInstance().get(Article.class, 
-        new QueryOption.WhereEquals("url_id", urlId)).get(0);
+    return Database.getInstance().get(Article.class, urlId);
   }
 
   /**
