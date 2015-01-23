@@ -15,7 +15,7 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.Core.UserUrlRating;
 
 public class NeuralNetworkTrainer {
-  public static NeuralNetwork generateTrainedNetwork(DataSet trainingSet) {
+  private static NeuralNetwork generateTrainedNetwork(DataSet trainingSet) {
     NeuralNetwork neuralNetwork = new MultiLayerPerceptron(
         NeuralNetworkDriver.inputNodesCount, 
         NeuralNetworkDriver.outputNodesCount);
@@ -24,7 +24,7 @@ public class NeuralNetworkTrainer {
   }
   
   // train with data from server
-  public static DataSet generateTrainingDataSet()
+  private static DataSet generateTrainingDataSet()
       throws DataInternalException, ParserException {
     List<UserUrlRating> allRatings = UserUrlRatings.getAll();
     CompleteUser user;
@@ -44,8 +44,7 @@ public class NeuralNetworkTrainer {
       userId = rating.getUserId();
       if (userCache.containsKey(userId)) {
         user = userCache.get(userId);
-      }
-      else {
+      } else {
         user = new CompleteUser(rating.getUserId());
         userCache.put(userId, user);
       }

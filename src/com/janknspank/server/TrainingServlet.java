@@ -14,6 +14,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
+import com.janknspank.common.Asserts;
 import com.janknspank.data.ArticleClassifications;
 import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
@@ -77,6 +78,7 @@ public class TrainingServlet extends StandardServlet {
     //Only returns the selected checkboxes
     String[] articleClassificationCodesList = req.getParameterValues("classifications");
     int rating100scale = Integer.parseInt(req.getParameter("qualityScore"));
+    Asserts.assertTrue(rating100scale > 0 && rating100scale < 100, "qualityScore must be between 0 - 100");
     
     // Business logic.
     // Save the tagged industries

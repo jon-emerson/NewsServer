@@ -134,9 +134,9 @@ public class Articles {
    */
   public static Article getRandomArticle() throws DataInternalException {
     return Database.getInstance().getFirst(Article.class,
-        new QueryOption.Sort("rand()"));
+        new QueryOption.LimitWithOffset(1, (int) (10000 * Math.random())));
   }
-  
+
   /**
    * Returns a random untrained article
    */
