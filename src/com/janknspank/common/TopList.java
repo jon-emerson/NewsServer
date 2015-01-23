@@ -14,7 +14,7 @@ import java.util.List;
  * is an semi-efficient way to implement a "top 10" list.  Usage:
  *
  * <code>
- *   TopList t = new TopList(3);
+ *   TopList<String, Integer> t = new TopList<>(3);
  *   t.add("ten", 10);
  *   t.add("eleven", 11);
  *   t.add("twelve", 12);
