@@ -149,7 +149,7 @@ public class UserInterests {
     }
 
     // Add the top 3 contact locations to the user's interests.
-    TopList topLocations = new TopList(3);
+    TopList<String, Integer> topLocations = new TopList<>(3);
     for (String location : locations.elementSet()) {
       topLocations.add(location, locations.count(location));
     }

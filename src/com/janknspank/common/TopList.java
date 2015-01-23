@@ -24,16 +24,17 @@ import java.util.List;
  *   }
  * </code>
  */
-public class TopList {
+public class TopList<T, U extends Number> {
   private final int maxSize;
-  private int smallestValue = Integer.MIN_VALUE;
-  private HashMap<String, Integer> values = Maps.newHashMap();
+  private U smallestValue = null;
+  private HashMap<T, U> values = Maps.newHashMap();
 
   public TopList(int maxSize) {
     this.maxSize = maxSize;
   }
 
-  public synchronized void add(String key, int value) {
+  @SuppressWarnings("unchecked")
+  public synchronized void add(T key, U value) {
     if (values.containsKey(key)) {
       values.put(key,  value);
       return;
@@ -41,12 +42,13 @@ public class TopList {
 
     // If we're already at capacity...
     if (values.size() == maxSize) {
-      if (value <= smallestValue) {
+      if (smallestValue == null ||
+          ((Comparable<U>) value).compareTo(smallestValue) <= 0) {
         // Do nothing if the new value isn't bigger than what we've got.
         return;
       }
       // Else, remove the smallest thing we've got.
-      for (String existingKey : values.keySet()) {
+      for (T existingKey : values.keySet()) {
         if (values.get(existingKey).equals(smallestValue)) {
           values.remove(existingKey);
           break;
@@ -54,13 +56,13 @@ public class TopList {
       }
       // And update our notion of what the smallest thing is.
       smallestValue = value;
-      for (Integer existingValue : values.values()) {
-        if (existingValue < smallestValue) {
+      for (U existingValue : values.values()) {
+        if (((Comparable<U>) existingValue).compareTo(smallestValue) < 0) {
           smallestValue = existingValue;
         }
       }
     } else {
-      if (values.size() == 0 || value < smallestValue) {
+      if (values.size() == 0 || ((Comparable<U>) value).compareTo(smallestValue) < 0) {
         smallestValue = value;
       }
     }
@@ -68,21 +70,22 @@ public class TopList {
   }
 
   /**
-   * Returns all the keys we're currently tracking, sorted by their underlying
-   * values.
+   * Returns all the keys we're currently tracking, sorted descendingly by
+   * their underlying values.
    */
-  public synchronized List<String> getKeys() {
-    List<String> keyList = Lists.newArrayList(values.keySet());
-    Collections.sort(keyList, new Comparator<String>() {
+  public synchronized List<T> getKeys() {
+    List<T> keyList = Lists.newArrayList(values.keySet());
+    Collections.sort(keyList, new Comparator<T>() {
+      @SuppressWarnings("unchecked")
       @Override
-      public int compare(String o1, String o2) {
-        return values.get(o2) - values.get(o1);
+      public int compare(T t1, T t2) {
+        return ((Comparable<U>) values.get(t2)).compareTo(values.get(t1));
       }
     });
     return keyList;
   }
 
-  public int getValue(String key) {
-    return values.containsKey(key) ? values.get(key) : 0;
+  public U getValue(String key) {
+    return values.containsKey(key) ? values.get(key) : null;
   }
 }
