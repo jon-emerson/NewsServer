@@ -19,6 +19,10 @@ public class ArticleClassifications {
               .setDescription("Announcement (e.g. product launch, acquisition, earnings release, funding granted)")
               .build(),
           ArticleClassification.newBuilder()
+              .setCode("strtp")
+              .setDescription("About startups")
+              .build(),
+          ArticleClassification.newBuilder()
               .setCode("pdata")
               .setDescription("Presents data (e.g. charts and numbers)")
               .build(),

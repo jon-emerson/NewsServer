@@ -14,6 +14,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
+import com.janknspank.common.Asserts;
 import com.janknspank.data.ArticleClassifications;
 import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
@@ -27,6 +28,7 @@ import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.Session;
 import com.janknspank.proto.Core.TrainedArticleClassification;
 import com.janknspank.proto.Core.TrainedArticleIndustry;
+import com.janknspank.proto.Core.UserUrlRating;
 
 @AuthenticationRequired
 public class TrainingServlet extends StandardServlet {
@@ -75,7 +77,9 @@ public class TrainingServlet extends StandardServlet {
     String[] industryIdsList = req.getParameterValues("industriesCheckboxes");
     //Only returns the selected checkboxes
     String[] articleClassificationCodesList = req.getParameterValues("classifications");
-
+    int rating100scale = Integer.parseInt(req.getParameter("qualityScore"));
+    Asserts.assertTrue(rating100scale > 0 && rating100scale < 100, "qualityScore must be between 0 - 100");
+    
     // Business logic.
     // Save the tagged industries
     if (industryIdsList != null) {
@@ -89,7 +93,16 @@ public class TrainingServlet extends StandardServlet {
       }
       Database.insert(articleIndustries);      
     }
-
+    
+    // Save the user relevance rating
+    UserUrlRating userRating = UserUrlRating.newBuilder()
+        .setUrlId(urlId)
+        .setUserId(session.getUserId())
+        .setRating(rating100scale)
+        .setCreateTime(System.currentTimeMillis())
+        .build();
+    Database.insert(userRating);
+    
     // Collect all checked and unchecked classification states
     Map<String, Boolean> classificationsHelper = new HashMap<String, Boolean>();
     for (String code : ArticleClassifications.ARTICLE_CLASSIFICATION_CODE_MAP.keySet()) {

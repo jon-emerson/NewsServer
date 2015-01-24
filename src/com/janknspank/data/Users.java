@@ -17,6 +17,10 @@ public class Users {
     return Database.with(User.class).getFirst(
         new QueryOption.WhereEquals("email", email));
   }
+  
+  public static User getByUserId(String userId) throws DataInternalException {
+    return Database.with(User.class).get(userId);
+  }
 
   public static User loginFromLinkedIn(
       DocumentNode linkedInProfileDocument, String linkedInAccessToken)
