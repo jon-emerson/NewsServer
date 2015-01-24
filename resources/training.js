@@ -17,23 +17,22 @@ function updateRangeLabel(newVal){
 $(document).ready(function() {
   updateRangeLabel(50);
   
-  // Your code here.
   $("#form").submit(function(event) {
     event.preventDefault();
     
     $("#submit").prop("disabled", true);
     
     var dataToPost = $("#form").serialize()
-    alert(dataToPost);
+    //alert(dataToPost);
     $.post('training', dataToPost, function(data) {
         if (data.success) {
           location.reload();
         }
       },
-      'json' // I expect a JSON response
-    ).fail(function() {
-      alert("Error submitting. Try again.");
-      $("#submit").prop("disabled",false);
+      'json'
+    ).fail( function(xhr, textStatus, errorThrown) {
+        alert(xhr.responseText);
+        $("#submit").prop("disabled",false);
     });
   });
 });

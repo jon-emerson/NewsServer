@@ -1,6 +1,5 @@
 package com.janknspank;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
@@ -53,11 +52,10 @@ public class TheMachine {
 
       // Save this article and its keywords.
       try {
-        Database database = Database.getInstance();
         if (!UrlWhitelist.isOkay(url.getUrl())) {
           System.err.println("Removing now-blacklisted page: " + url.getUrl());
           Links.deleteIds(ImmutableList.of(url.getId()));
-          database.delete(url);
+          Database.delete(url);
           continue;
         }
 
@@ -67,28 +65,28 @@ public class TheMachine {
         if (ArticleUrlDetector.isArticle(url.getUrl())) {
           InterpretedData interpretedData = Interpreter.interpret(url);
           try {
-            database.insert(interpretedData.getArticle());
+            Database.insert(interpretedData.getArticle());
           } catch (DataInternalException e) {
             // It could be that some other process decided to steal this article
             // and process it first (mainly due to human error).  If so, delete
             // everything and store it again.
             System.out.println("Handling human error: " + url.getUrl());
-            database.delete(Article.class, url.getId());
+            Database.with(Article.class).delete(url.getId());
             ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
             Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
 
             // Try again!
-            database.insert(interpretedData.getArticle());
+            Database.insert(interpretedData.getArticle());
           }
 
-          database.insert(interpretedData.getKeywordList());
+          Database.insert(interpretedData.getKeywordList());
           urls = interpretedData.getUrlList();
         } else {
           urls = UrlFinder.findUrls(url);
         }
 
         // Make sure to filter and clean the URLs - only store the ones we want to crawl!
-        Collection<Url> destinationUrls = Urls.put(
+        Iterable<Url> destinationUrls = Urls.put(
             Iterables.transform(
                 Iterables.filter(urls, UrlWhitelist.PREDICATE),
                 UrlCleaner.TRANSFORM_FUNCTION),

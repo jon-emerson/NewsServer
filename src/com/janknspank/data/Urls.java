@@ -1,6 +1,5 @@
 package com.janknspank.data;
 
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -73,7 +72,7 @@ public class Urls {
    * true.  The return Url objects are in the same order as the URL strings,
    * though duplicates will be removed.
    */
-  public static Collection<Url> put(Iterable<String> urlStrings, boolean isTweet)
+  public static Iterable<Url> put(Iterable<String> urlStrings, boolean isTweet)
       throws DataInternalException {
     if (Iterables.isEmpty(urlStrings)) {
       return ImmutableList.of();
@@ -88,7 +87,7 @@ public class Urls {
 
     // Use urls.keySet() instead of urlStrings here as a way to dedupe.
     List<Url> urlsToUpdate = Lists.newArrayList(); // To increment tweet_count.
-    for (Url existingUrl : Database.getInstance().get(Url.class, urls.keySet())) {
+    for (Url existingUrl : Database.with(Url.class).get(urls.keySet())) {
       urls.put(existingUrl.getUrl(), existingUrl);
 
       if (isTweet) {
@@ -116,9 +115,8 @@ public class Urls {
     }
 
     try {
-      Database database = Database.getInstance();
-      database.insert(urlsToCreate);
-      database.update(urlsToUpdate);
+      Database.insert(urlsToCreate);
+      Database.update(urlsToUpdate);
       return urls.values();
     } catch (ValidationException e) {
       throw new DataInternalException("Could not insert new discovered URL", e);
@@ -137,7 +135,7 @@ public class Urls {
     try {
       // Only update the URL if last_crawl_start_time hasn't yet been claimed
       // by another crawling thread.
-      if (Database.getInstance().update(url, new QueryOption.WhereNull("last_crawl_start_time"))) {
+      if (Database.update(url, new QueryOption.WhereNull("last_crawl_start_time"))) {
         return url;
       } else {
         return null;
@@ -157,7 +155,7 @@ public class Urls {
         .setCrawlPriority(0)
         .build();
     try {
-      Database.getInstance().update(url);
+      Database.update(url);
     } catch (ValidationException e) {
       throw new DataInternalException("Could not update last crawl finish time", e);
     }
@@ -165,7 +163,7 @@ public class Urls {
   }
 
   public static Url getNextUrlToCrawl() throws DataInternalException {
-    return Database.getInstance().getFirst(Url.class,
+    return Database.with(Url.class).getFirst(
         new QueryOption.WhereNull("last_crawl_start_time"),
         new QueryOption.WhereNotEquals("crawl_priority", "0"),
         new QueryOption.WhereNotLike("url", "https://twitter.com/%"),
@@ -177,12 +175,12 @@ public class Urls {
    * themselves).
    */
   public static Url getById(String id) throws DataInternalException {
-    return Database.getInstance().getFirst(Url.class,
+    return Database.with(Url.class).getFirst(
         new QueryOption.WhereEquals("id", id));
   }
 
   /** Helper method for creating the discovered-url table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(Url.class);
+    Database.with(Url.class).createTable();
   }
 }

@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.google.protobuf.Message;
 
-public class LocalDatabase extends Database {
-  private static LocalDatabase instance = null;
+class LocalSqlCollection<T extends Message> extends SqlCollection<T> {
   private static final String DB_URL =
       "jdbc:mysql://localhost/test?"
           + Joiner.on("&").join(ImmutableList.of(
@@ -18,21 +18,23 @@ public class LocalDatabase extends Database {
               "characterEncoding=UTF-8",
               "characterSetResults=utf8",
               "connectionCollation=utf8_bin"));
+  private static Connection connection;
 
-  protected LocalDatabase(Connection connection) throws DataInternalException {
-    super(connection);
+  public LocalSqlCollection(Class<T> clazz) {
+    super(clazz);
   }
 
-  public static LocalDatabase getInstance() throws DataInternalException {
-    if (instance == null) {
+  @Override
+  protected Connection getConnection() throws DataInternalException {
+    if (connection == null) {
       System.out.println("Connecting to local database...");
       try {
-        instance = new LocalDatabase(DriverManager.getConnection(DB_URL, "hello", ""));
+        connection = DriverManager.getConnection(DB_URL, "hello", "");
       } catch (SQLException e) {
         throw new DataInternalException("Could not connect to local database", e);
       }
       System.out.println("Connected to local database successfully.");
     }
-    return instance;
+    return connection;
   }
 }

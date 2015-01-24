@@ -20,7 +20,7 @@ public class Links {
   public static void put(final Url sourceUrl, Iterable<Url> destinationUrls)
      throws DataInternalException{
     try {
-      Database.getInstance().insert(Iterables.transform(destinationUrls,
+      Database.insert(Iterables.transform(destinationUrls,
           new Function<Url, Link>() {
             @Override
             public Link apply(Url destinationUrl) {
@@ -41,8 +41,7 @@ public class Links {
    * Deletes any links coming to or from the passed discovered URL ID.
    */
   public static int deleteIds(List<String> ids) throws DataInternalException {
-    return Database.getInstance().delete(Link.class,
-        new QueryOption.WhereEquals("url_id", ids))
+    return Database.with(Link.class).delete(new QueryOption.WhereEquals("url_id", ids))
         + deleteFromOriginUrlId(ids);
   }
 
@@ -51,12 +50,11 @@ public class Links {
    * up old interpreted link data before a new interpretation / crawl.
    */
   public static int deleteFromOriginUrlId(Iterable<String> urlIds) throws DataInternalException {
-    return Database.getInstance().delete(Link.class,
-        new QueryOption.WhereEquals("origin_url_id", urlIds));
+    return Database.with(Link.class).delete(new QueryOption.WhereEquals("origin_url_id", urlIds));
   }
 
   /** Helper method for creating the Link table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(Link.class);
+    Database.with(Link.class).createTable();
   }
 }

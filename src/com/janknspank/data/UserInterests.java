@@ -41,7 +41,7 @@ public class UserInterests {
    * Returns a complete list of the specified user's interests.
    */
   public static List<UserInterest> getInterests(String userId) throws DataInternalException {
-    return Database.getInstance().get(UserInterest.class,
+    return Database.with(UserInterest.class).get(
         new QueryOption.WhereEquals("user_id", userId),
         new QueryOption.WhereNotEquals("source", SOURCE_TOMBSTONE));
   }
@@ -149,7 +149,7 @@ public class UserInterests {
     }
 
     // Add the top 3 contact locations to the user's interests.
-    TopList topLocations = new TopList(3);
+    TopList<String, Integer> topLocations = new TopList<>(3);
     for (String location : locations.elementSet()) {
       topLocations.add(location, locations.count(location));
     }
@@ -220,13 +220,12 @@ public class UserInterests {
     }
 
     // Get 'er done.
-    Database database = Database.getInstance();
     try {
-      database.insert(interestsToInsert);
+      Database.insert(interestsToInsert);
     } catch (ValidationException e) {
       throw new DataInternalException("Error inserting interests: " + e.getMessage(), e);
     }
-    database.delete(interestsToDelete);
+    Database.delete(interestsToDelete);
 
     // Return the latest and greatest interests, regardless of type.
     return allInterests;
@@ -234,6 +233,6 @@ public class UserInterests {
 
   /** Helper method for creating the UserInterestData table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(UserInterest.class);
+    Database.with(UserInterest.class).createTable();
   }
 }

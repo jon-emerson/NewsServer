@@ -17,9 +17,9 @@ import com.janknspank.proto.Core.Entity.EntityTopic;
 
 public class Entities extends CacheLoader<String, Entity> {
   public static final int MAX_KEYWORD_LENGTH =
-      Database.getStringLength(Entity.class, "keyword");
+      Database.with(Entity.class).getStringLength("keyword");
   public static final int MAX_TOPIC_KEYWORD_LENGTH =
-      Database.getStringLength(EntityTopic.class, "keyword");
+      Database.with(EntityTopic.class).getStringLength("keyword");
 
   private static LoadingCache<String, Entity> ENTITY_CACHE =
       CacheBuilder.newBuilder()
@@ -43,8 +43,7 @@ public class Entities extends CacheLoader<String, Entity> {
         keywordsToFetch.put(keyword, entities.size() - 1);
       }
     }
-    Database database = Database.getInstance();
-    for (Entity entity : database.get(Entity.class,
+    for (Entity entity : Database.with(Entity.class).get(
         new QueryOption.WhereEquals("keyword", keywordsToFetch.keySet()))) {
       if (!keywordsToFetch.containsKey(entity.getKeyword())) {
         System.out.println("GOT ENTITY W/ UNREQUESTED KEYWORD!! " + entity.getKeyword());
@@ -61,12 +60,12 @@ public class Entities extends CacheLoader<String, Entity> {
    */
   @Override
   public Entity load(final String keyword) throws Exception {
-    return Database.getInstance().getFirst(Entity.class,
+    return Database.with(Entity.class).getFirst(
         new QueryOption.WhereEquals("keyword", keyword));
   }
 
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(Entity.class);
+    Database.with(Entity.class).createTable();
   }
 }

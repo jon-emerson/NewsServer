@@ -334,6 +334,24 @@ message UserUrlFavorite {
   ];
 }
 
+message UserIndustry {
+  optional string user_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 22,
+    (string_charset) = LATIN1
+  ];
+
+  optional int32 industry_code_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX
+  ];
+
+  optional int64 joined_industry_time = 3 [
+    (storage_method) = PULL_OUT
+  ];
+}
+
 message UserInterest {
   optional string id = 1 [
     (required) = YES,
@@ -359,6 +377,7 @@ message UserInterest {
   // 'ab' = Address book.
   // 'lp' = LinkedIn profile.
   // 'lc' = LinkedIn contacts.
+  // 'le' = LinkedIn current employer.
   // 'u' = From the user himself, explicitly.
   // 't' = Tombstone, represents an interest the user explicitly DELETED.
   optional string source = 4 [

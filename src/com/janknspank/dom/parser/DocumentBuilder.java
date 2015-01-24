@@ -13,7 +13,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * Constructs a DOM from an HTML or XML page.  The DOM is a hierarchy of {@code
  * Node} objects, the topmost of which is a {@code DocumentNode}.  Using the
  * returned DocumentNode, you can then dig into the website or find nodes using
- * {@code Node#findAll(String)}.
+ * {@code Node#findAll(String)} and {@code Node#findFirst(String)}.
  */
 public class DocumentBuilder {
   public static DocumentNode build(String url, Reader reader) throws ParserException {

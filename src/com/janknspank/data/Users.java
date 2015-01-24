@@ -14,8 +14,12 @@ public class Users {
    * additionally updates the last login time.
    */
   private static User getByEmail(String email) throws DataInternalException {
-    return Database.getInstance().getFirst(User.class,
+    return Database.with(User.class).getFirst(
         new QueryOption.WhereEquals("email", email));
+  }
+  
+  public static User getByUserId(String userId) throws DataInternalException {
+    return Database.with(User.class).get(userId);
   }
 
   public static User loginFromLinkedIn(
@@ -36,7 +40,7 @@ public class Users {
           .setLastLoginTime(System.currentTimeMillis())
           .build();
       try {
-        Database.getInstance().update(user);
+        Database.update(user);
       } catch (ValidationException e) {
         throw new DataInternalException("Error marking user logged-in", e);
       }
@@ -52,7 +56,7 @@ public class Users {
         .setLastLoginTime(System.currentTimeMillis())
         .build();
     try {
-      Database.getInstance().insert(user);
+      Database.insert(user);
     } catch (ValidationException e) {
       throw new DataInternalException("Error creating user", e);
     }
@@ -61,6 +65,6 @@ public class Users {
 
   /** Helper method for creating the User table. */
   public static void main(String args[]) throws Exception {
-    Database.getInstance().createTable(User.class);
+    Database.with(User.class).createTable();
   }
 }

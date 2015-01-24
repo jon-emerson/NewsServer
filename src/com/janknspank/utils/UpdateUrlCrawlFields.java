@@ -22,16 +22,14 @@ import com.janknspank.proto.Core.Url;
  */
 public class UpdateUrlCrawlFields {
   public static void main(String args[]) throws Exception {
-    Database database = Database.getInstance();
-
     // Figure out what articles we've crawled already.
     Set<String> crawledArticleIds = Sets.newHashSet();
-    for (Article article : database.get(Article.class)) {
+    for (Article article : Database.with(Article.class).get()) {
       crawledArticleIds.add(article.getUrlId());
     }
 
     List<Url> urlsToUpdate = Lists.newArrayList();
-    for (Url url : database.get(Url.class,
+    for (Url url : Database.with(Url.class).get(
         new QueryOption.WhereEquals("crawl_priority", "0"),
         new QueryOption.WhereNotLike("url", "%//twitter.com/%"))) {
       if (!crawledArticleIds.contains(url.getId())) {
@@ -43,7 +41,7 @@ public class UpdateUrlCrawlFields {
             .build());
       }
       if (urlsToUpdate.size() == 250 || url == null) {
-        System.out.println(database.update(urlsToUpdate) + " rows updated");
+        System.out.println(Database.update(urlsToUpdate) + " rows updated");
         urlsToUpdate.clear();
       }
     }

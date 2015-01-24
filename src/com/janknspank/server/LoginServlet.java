@@ -205,7 +205,7 @@ public class LoginServlet extends StandardServlet {
           .setData(linkedInProfileDocument.toLiteralString())
           .setCreateTime(System.currentTimeMillis())
           .build();
-      Database.getInstance().upsert(linkedInProfile);
+      Database.upsert(linkedInProfile);
       interests = UserInterests.updateInterests(user.getId(), linkedInProfileDocument,
           getLinkedInResponse(CONNECTIONS_URL, linkedInAccessToken));
     } catch (ParserException e) {
