@@ -708,7 +708,7 @@ public class Database {
     sql.append(getWhereClauseSql(options));
     sql.append(getOrderBySql(options));
     sql.append(getLimitSql(options));
-    
+
     PreparedStatement statement = null;
     try {
       statement = connection.prepareStatement(sql.toString());

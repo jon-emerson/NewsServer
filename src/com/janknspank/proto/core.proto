@@ -98,8 +98,7 @@ message ArticleKeyword {
     META_TAG = 3;
   }
   optional Source source = 5 [
-    default = UNKNOWN,
-    (required) = YES
+    default = UNKNOWN
   ];
 }
 
