@@ -653,19 +653,3 @@ message WordDocumentFrequency {
     (storage_method) = PULL_OUT
   ];
 }
-
-// Maps words to articles containing those words
-message WordArticleOccurrence {
-  optional string word = 1 [
-    (required) = YES,
-    (storage_method) = INDEX,
-    (string_length) = 200
-  ];
-  
-  optional string url_id = 2 [
-    (required) = YES,
-    (storage_method) = PULL_OUT,
-    (string_length) = 22,
-    (string_charset) = LATIN1
-  ];
-}

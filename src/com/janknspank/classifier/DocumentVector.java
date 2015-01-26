@@ -26,7 +26,7 @@ public class DocumentVector {
   
   static {
     try {
-      InputStream inputStream = 
+      InputStream inputStream =
           new FileInputStream("neuralnet/english_stopwords");
         String myString = IOUtils.toString(inputStream, "UTF-8");
       String words[] = myString.split("\\r?\\n");

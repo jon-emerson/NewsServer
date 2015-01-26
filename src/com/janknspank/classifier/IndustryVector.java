@@ -16,10 +16,8 @@ import java.util.Map;
 
 import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
-import com.janknspank.data.WordArticleOccurrences;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.IndustryCode;
-import com.janknspank.proto.Core.WordArticleOccurrence;
 
 public class IndustryVector {
   private Map<String, Double> tfIdfVector;
@@ -46,13 +44,6 @@ public class IndustryVector {
     List<String> words = getSeedWords(industryCode);
     
     // 2. Get all documents that contain the seed word
-    //List<WordArticleOccurrence> wordArticles = WordArticleOccurrences
-    //    .getContainingWords(words);
-//    List<String> urlIds = new ArrayList<>();
-//    for (WordArticleOccurrence wordArticle : wordArticles) {
-//      urlIds.add(wordArticle.getUrlId());
-//    }
-//    List<Article> articles = Articles.getArticles(urlIds);
     List<Article> articles = Articles.getArticlesForKeywords(words);
     
     // 3. Convert them into the industry vector
