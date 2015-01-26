@@ -1,4 +1,4 @@
-package com.janknspank.neuralnet;
+package com.janknspank.rank;
 
 import java.io.StringReader;
 import java.util.List;
@@ -46,14 +46,21 @@ public class CompleteUser {
     
     LinkedInProfile profile = LinkedInProfiles.getByUserId(userId);
     DocumentNode profileDocument = DocumentBuilder.build(null, new StringReader(profile.getData()));
-    List<Node> positions = profileDocument.findAll("positions");
+    List<Node> positions = profileDocument.findAll("position");
     for (Node position : positions) {
-      // TODO: extract current workplace
-      System.out.println(position.getFlattenedText());
+      // TODO: ask Jon how to do this correctly.
+      if (position.getChildNode(4).getFlattenedText().equals("true")) {
+        currentWorkplace = position.findFirst("company > name").getFlattenedText();
+        break;
+      }
     }
   }
   
   public List<UserInterest> getInterests() {
     return interests;
+  }
+  
+  public String getCurrentWorkplace() {
+    return currentWorkplace;
   }
 }

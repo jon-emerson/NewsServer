@@ -5,63 +5,63 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-import com.janknspank.proto.Core.ArticleClassification;
+import com.janknspank.proto.Core.ArticleTypeCode;
 
-public class ArticleClassifications {
-  public static final Map<String, ArticleClassification> ARTICLE_CLASSIFICATION_CODE_MAP = Maps.uniqueIndex(
+public class ArticleTypeCodes {
+  public static final Map<String, ArticleTypeCode> ARTICLE_CLASSIFICATION_CODE_MAP = Maps.uniqueIndex(
       ImmutableList.of(
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("prdct")
               .setDescription("Predicts the future")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("ancmt")
               .setDescription("Announcement (e.g. product launch, acquisition, earnings release, funding granted)")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("strtp")
               .setDescription("About startups")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("pdata")
               .setDescription("Presents data (e.g. charts and numbers)")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("teach")
               .setDescription("Teaches how to do something")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("story")
               .setDescription("Tells a story")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("prson")
               .setDescription("About a specific person")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("intrv")
               .setDescription("Interview")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("opnin")
               .setDescription("Opinion")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("humor")
               .setDescription("Humor")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("sappy")
               .setDescription("Sappy / romantic / exaggerated")
               .build(),
-          ArticleClassification.newBuilder()
+          ArticleTypeCode.newBuilder()
               .setCode("waste")
               .setDescription("Waste of time (no practical knowledge gained by reading)")
               .build()),
-      new Function<ArticleClassification, String>() {
+      new Function<ArticleTypeCode, String>() {
         @Override
-        public String apply(ArticleClassification articleClassification) {
-          return articleClassification.getCode();
+        public String apply(ArticleTypeCode ArticleTypeCode) {
+          return ArticleTypeCode.getCode();
         }
       });
   

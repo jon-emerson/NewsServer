@@ -136,4 +136,13 @@
     <url-pattern>/training</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>ViewFeedServlet</servlet-name>
+    <servlet-class>com.janknspank.server.ViewFeedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewFeedServlet</servlet-name>
+    <url-pattern>/viewfeed</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

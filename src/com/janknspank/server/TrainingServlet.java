@@ -15,7 +15,7 @@ import com.google.common.collect.Iterables;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.common.Asserts;
-import com.janknspank.data.ArticleClassifications;
+import com.janknspank.data.ArticleTypeCodes;
 import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
@@ -23,7 +23,7 @@ import com.janknspank.data.Database;
 import com.janknspank.data.IndustryCodes;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.ArticleClassification;
+import com.janknspank.proto.Core.ArticleTypeCode;
 import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.Session;
 import com.janknspank.proto.Core.TrainedArticleClassification;
@@ -47,10 +47,10 @@ public class TrainingServlet extends StandardServlet {
         "urlId", article.getUrlId(),
         "paragraphs", new SoyListData(article.getParagraphList()),
         "image_url", article.getImageUrl(),
-        "classifications", Iterables.transform(ArticleClassifications.ARTICLE_CLASSIFICATION_CODE_MAP.values(),
-            new Function<ArticleClassification, SoyMapData>() {
+        "classifications", Iterables.transform(ArticleTypeCodes.ARTICLE_CLASSIFICATION_CODE_MAP.values(),
+            new Function<ArticleTypeCode, SoyMapData>() {
               @Override
-              public SoyMapData apply(ArticleClassification articleClassification) {
+              public SoyMapData apply(ArticleTypeCode articleClassification) {
                 return new SoyMapData(
                     "code", articleClassification.getCode(),
                     "description", articleClassification.getDescription());
@@ -105,7 +105,7 @@ public class TrainingServlet extends StandardServlet {
     
     // Collect all checked and unchecked classification states
     Map<String, Boolean> classificationsHelper = new HashMap<String, Boolean>();
-    for (String code : ArticleClassifications.ARTICLE_CLASSIFICATION_CODE_MAP.keySet()) {
+    for (String code : ArticleTypeCodes.ARTICLE_CLASSIFICATION_CODE_MAP.keySet()) {
       classificationsHelper.put(code, false);
     }
     if (articleClassificationCodesList != null) {

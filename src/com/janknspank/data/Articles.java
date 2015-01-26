@@ -14,13 +14,14 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.janknspank.data.QueryOption.LimitWithOffset;
 import com.janknspank.dom.parser.ParserException;
-import com.janknspank.neuralnet.CompleteUser;
-import com.janknspank.neuralnet.NeuralNetworkDriver;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.TrainedArticleIndustry;
 import com.janknspank.proto.Core.UserInterest;
+import com.janknspank.rank.CompleteUser;
+import com.janknspank.rank.Scorer;
 
 /**
  * Helper class that manages storing and retrieving Article objects from the
@@ -67,6 +68,20 @@ public class Articles {
         new QueryOption.WhereEquals("keyword", topics),
         new QueryOption.Limit(500));
   }
+  
+  /**
+   * Gets articles that contain a set of keywords
+   * @throws DataInternalException 
+   */
+  public static List<Article> getArticlesForKeywords(Iterable<String> keywords) 
+      throws DataInternalException {
+    List<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(keywords);
+    Set<String> articleIds = Sets.newHashSet();
+    for (ArticleKeyword articleKeyword : articleKeywords) {
+      articleIds.add(articleKeyword.getUrlId());
+    }
+    return getArticles(articleIds);
+  }
 
   /**
    * Gets a list of articles tailored specifically to the current user's
@@ -82,19 +97,13 @@ public class Articles {
     return getArticles(articleIds);
   }
   
-  public static List<Article> getArticlesRankedByNeuralNetwork(String userId)
+  
+  
+  public static List<Article> getRankedArticles(String userId, Scorer scorer)
       throws DataInternalException, ParserException {
-    NeuralNetworkDriver neuralNetworkDriver = NeuralNetworkDriver.getInstance();
-    CompleteUser completeUser = new CompleteUser(userId);
-    // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
-    List<Article> articles = getArticles(UserInterests.getInterests(userId));
-    Map<Article, Double> ranks = new HashMap<>();
+    Map<Article, Double> ranks = getArticlesAndScores(userId, scorer);
     
     // Sort the articles by rank
-    for (Article article : articles) {
-      ranks.put(article, neuralNetworkDriver.getRank(article, completeUser));
-    }
-    
     PriorityQueue<Entry<Article, Double>> pq = new PriorityQueue<Map.Entry<Article,Double>>(
         ranks.size(), new Comparator<Entry<Article, Double>>() {
 
@@ -110,6 +119,21 @@ public class Articles {
       sortedArticles.add(pq.poll().getKey());
     }
     return sortedArticles;
+  }
+  
+  public static Map<Article, Double> getArticlesAndScores(String userId, Scorer scorer)
+      throws DataInternalException, ParserException {
+    //NeuralNetworkScorer neuralNetworkRank = NeuralNetworkScorer.getInstance();
+    CompleteUser completeUser = new CompleteUser(userId);
+    // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
+    List<Article> articles = getArticles(UserInterests.getInterests(userId));
+    Map<Article, Double> ranks = new HashMap<>();
+    
+    for (Article article : articles) {
+      ranks.put(article, scorer.getScore(article, completeUser));
+    }
+    
+    return ranks;
   }
 
   /**
@@ -128,6 +152,12 @@ public class Articles {
     return Database.with(Article.class).get(urlId);
   }
 
+  public static List<Article> getPageOfArticles(int limit, int offset) 
+      throws DataInternalException {
+    return Database.with(Article.class).get(
+        new LimitWithOffset(limit, offset));
+  }
+  
   /**
    * Returns a random article
    */
@@ -147,6 +177,12 @@ public class Articles {
       taggedIndustries = TrainedArticleIndustries.getFromArticle(article.getUrlId());
     } while (!taggedIndustries.isEmpty());
     return article;
+  }
+  
+  public static int getTotalCount() {
+    // TODO: Ask Jon how to implement SELECT COUNT(*) FROM article
+    System.out.println("TODO: implement Articles.getTotalCount");
+    return 29342;
   }
   
   /** Helper method for creating the Article table. */
