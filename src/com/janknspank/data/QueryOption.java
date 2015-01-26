@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 public class QueryOption {
@@ -14,7 +15,7 @@ public class QueryOption {
       Preconditions.checkArgument(limit > 0);
       this.limit = limit;
     }
-    
+
     public int getLimit() {
       return limit;
     }
@@ -27,7 +28,7 @@ public class QueryOption {
       super(limit);
       this.offset = offset;
     }
-    
+
     public int getOffset() {
       return offset;
     }
@@ -35,11 +36,11 @@ public class QueryOption {
 
   public abstract static class WhereOption extends QueryOption {
     private final String fieldName;
-    
+
     private WhereOption(String fieldName) {
       this.fieldName = fieldName;
     }
-    
+
     public String getFieldName() {
       return fieldName;
     }
@@ -110,7 +111,7 @@ public class QueryOption {
       super();
       this.fieldName = fieldName;
     }
-    
+
     public String getFieldName() {
       return fieldName;
     }
@@ -138,5 +139,19 @@ public class QueryOption {
       }
     }
     return queryOptions;
+  }
+
+  /**
+   * Returns true if we know the where clause could not possibly match any
+   * database rows.
+   */
+  static final boolean isWhereClauseEmpty(QueryOption[] options) {
+    for (QueryOption option : getList(options, WhereOption.class)) {
+      if (option instanceof WhereEquals
+          && Iterables.isEmpty(((WhereEquals) option).getValues())) {
+        return true;
+      }
+    }
+    return false;
   }
 }

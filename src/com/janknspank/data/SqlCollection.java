@@ -27,6 +27,7 @@ import com.janknspank.proto.Extensions.Required;
 import com.janknspank.proto.Extensions.StorageMethod;
 import com.janknspank.proto.Extensions.StringCharset;
 import com.janknspank.proto.Validator;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 public class SqlCollection<T extends Message> extends Collection<T> {
   private static final String PROTO_COLUMN_NAME = "proto";
@@ -397,12 +398,20 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     StringBuilder sql = new StringBuilder();
     for (QueryOption.WhereEquals whereEquals :
         QueryOption.getList(options, QueryOption.WhereEquals.class)) {
+      int size = Iterables.size(whereEquals.getValues());
+      if (size == 0) {
+        if (whereEquals instanceof WhereNotEquals) {
+          // OK, don't write anything - Everything doesn't equal nothing.
+          continue;
+        }
+        throw new IllegalStateException("Where clause contains no values - "
+            + "This should have been caught earlier.");
+      }
       sql.append(sql.length() == 0 ? " WHERE " : " AND ")
           .append(whereEquals.getFieldName())
           .append(whereEquals instanceof WhereNotEquals ? " NOT" : "")
           .append(" IN (")
-          .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"),
-              Iterables.size(whereEquals.getValues()))))
+          .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), size)))
           .append(")");
     }
     for (QueryOption.WhereLike whereLike :
@@ -454,12 +463,16 @@ public class SqlCollection<T extends Message> extends Collection<T> {
    */
   public List<T> get(QueryOption... options)
       throws DataInternalException {
+    if (QueryOption.isWhereClauseEmpty(options)) {
+      return ImmutableList.of();
+    }
+
     StringBuilder sql = new StringBuilder();
     sql.append("SELECT * FROM " + getTableName());
     sql.append(getWhereClauseSql(options));
     sql.append(getOrderBySql(options));
     sql.append(getLimitSql(options));
-    
+
     PreparedStatement statement = null;
     try {
       statement = getConnection().prepareStatement(sql.toString());
@@ -468,6 +481,8 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         statement.setString(++i, key);
       }
       return createListFromResultSet(statement.executeQuery());
+    } catch (MySQLSyntaxErrorException e) {
+      throw new DataInternalException("Invalid query: " + sql, e);
     } catch (SQLException e) {
       throw new DataInternalException("Could not execute get: " + e.getMessage()
           + ": " + e.getMessage(), e);
