@@ -40,7 +40,7 @@ public class UserInterests {
   /**
    * Returns a complete list of the specified user's interests.
    */
-  public static List<UserInterest> getInterests(String userId) throws DataInternalException {
+  public static Iterable<UserInterest> getInterests(String userId) throws DataInternalException {
     return Database.with(UserInterest.class).get(
         new QueryOption.WhereEquals("user_id", userId),
         new QueryOption.WhereNotEquals("source", SOURCE_TOMBSTONE));

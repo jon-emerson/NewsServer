@@ -476,7 +476,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
    * Gets Messages with the specified class {@code clazz} and the field values,
    * if they exist.
    */
-  public List<T> get(QueryOption... options)
+  public Iterable<T> get(QueryOption... options)
       throws DataInternalException {
     if (QueryOption.isWhereClauseEmpty(options)) {
       return ImmutableList.of();

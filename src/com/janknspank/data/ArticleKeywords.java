@@ -1,7 +1,5 @@
 package com.janknspank.data;
 
-import java.util.List;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.janknspank.proto.Core.Article;
@@ -19,7 +17,7 @@ public class ArticleKeywords {
    * Returns all of the ArticleKeywords associated with any of the passed-in
    * articles.
    */
-  public static List<ArticleKeyword> get(Iterable<Article> articleList)
+  public static Iterable<ArticleKeyword> get(Iterable<Article> articleList)
       throws DataInternalException {
     return Database.with(ArticleKeyword.class).get(
         new QueryOption.WhereEquals("url_id",

@@ -1,7 +1,6 @@
 package com.janknspank.neuralnet;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.neuroph.core.NeuralNetwork;
@@ -26,7 +25,7 @@ public class NeuralNetworkTrainer {
   // train with data from server
   private static DataSet generateTrainingDataSet()
       throws DataInternalException, ParserException {
-    List<UserUrlRating> allRatings = UserUrlRatings.getAll();
+    Iterable<UserUrlRating> allRatings = UserUrlRatings.getAll();
     CompleteUser user;
     CompleteArticle article;
     Map<String, CompleteUser> userCache = new HashMap<String, CompleteUser>();

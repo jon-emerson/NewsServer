@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -198,7 +197,7 @@ public class LoginServlet extends StandardServlet {
     Session session = Sessions.createFromLinkedProfile(linkedInProfileDocument, user);
 
     // Try to save the user's profile and update his interests.
-    List<UserInterest> interests;
+    Iterable<UserInterest> interests;
     try {
      LinkedInProfile linkedInProfile = LinkedInProfile.newBuilder()
           .setUserId(user.getId())

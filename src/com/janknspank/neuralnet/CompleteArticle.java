@@ -1,6 +1,5 @@
 package com.janknspank.neuralnet;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,9 +25,9 @@ import com.janknspank.proto.Core.UserInterest;
  */
 public class CompleteArticle {
   private Article article;
-  private List<ArticleKeyword> keywords;
-  private List<TrainedArticleClassification> classifications;
-  private List<TrainedArticleIndustry> industries;
+  private Iterable<ArticleKeyword> keywords;
+  private Iterable<TrainedArticleClassification> classifications;
+  private Iterable<TrainedArticleIndustry> industries;
   
   public CompleteArticle(String urlId) throws DataInternalException {
     article = Articles.getArticle(urlId);

@@ -9,10 +9,15 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 
 public class MongoConnection {
+  private static final String MONGO_HOST;
   private static final String MONGO_DATABASE = "newsserver";
   private static final String MONGO_USER;
   private static final String MONGO_PASSWORD;
   static {
+    MONGO_HOST = System.getenv("MONGO_HOST");
+    if (MONGO_HOST == null) {
+      throw new IllegalStateException("$MONGO_HOST is undefined");
+    }
     MONGO_USER = System.getenv("MONGO_USER");
     if (MONGO_USER == null) {
       throw new IllegalStateException("$MONGO_USER is undefined");
@@ -30,7 +35,7 @@ public class MongoConnection {
       try {
         MongoCredential credential = MongoCredential.createMongoCRCredential(
             MONGO_USER, MONGO_DATABASE, MONGO_PASSWORD.toCharArray());
-        CLIENT = new MongoClient(new ServerAddress(), Arrays.asList(credential));
+        CLIENT = new MongoClient(new ServerAddress(MONGO_HOST), Arrays.asList(credential));
       } catch (UnknownHostException e) {
         throw new DataInternalException("Could not connect to MongoDB: " + e.getMessage(), e);
       }

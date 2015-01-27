@@ -152,7 +152,7 @@ public abstract class Collection<T extends Message> {
    * Gets Messages with the specified class {@code clazz} and the given
    * primary keys {@code primaryKeys}, if they exist.
    */
-  public List<T> get(Iterable<String> primaryKeys)
+  public Iterable<T> get(Iterable<String> primaryKeys)
       throws DataInternalException {
     if (primaryKeyField == null) {
       throw new IllegalStateException(
@@ -191,7 +191,7 @@ public abstract class Collection<T extends Message> {
    * Gets Messages with the specified class {@code clazz} and the field values,
    * if they exist.
    */
-  public abstract List<T> get(QueryOption... options)
+  public abstract Iterable<T> get(QueryOption... options)
       throws DataInternalException;
 
   /**

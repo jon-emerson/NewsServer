@@ -30,12 +30,12 @@ import com.janknspank.proto.Core.UserUrlRating;
  */
 public class CompleteUser {
   private User user;
-  private List<UserUrlRating> ratings;
-  private List<UserInterest> interests;
-  private List<UserIndustry> industries;
-  private List<UserUrlFavorite> favorites;
+  private Iterable<UserUrlRating> ratings;
+  private Iterable<UserInterest> interests;
+  private Iterable<UserIndustry> industries;
+  private Iterable<UserUrlFavorite> favorites;
   private String currentWorkplace;
-  private List<String> skills;
+  private Iterable<String> skills;
   
   public CompleteUser(String userId) throws DataInternalException, 
       ParserException {
@@ -53,7 +53,7 @@ public class CompleteUser {
     }
   }
   
-  public List<UserInterest> getInterests() {
+  public Iterable<UserInterest> getInterests() {
     return interests;
   }
 }

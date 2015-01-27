@@ -18,6 +18,8 @@ import com.janknspank.proto.Extensions.Required;
 import com.janknspank.proto.Extensions.StorageMethod;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 
 /**
  * Converts protocol buffer objects to MongoDB documents, and vice versa.
@@ -28,6 +30,15 @@ public class Mongoizer {
     List<T> messageList = Lists.newArrayList();
     for (int i = 0; i < list.size(); i++) {
       messageList.add(fromDBObject((BasicBSONObject) list.get(i), clazz));
+    }
+    return messageList;
+  }
+
+  public static <T extends Message> List<T> fromCursor(DBCursor cursor, Class<T> clazz)
+      throws ValidationException {
+    List<T> messageList = Lists.newArrayList();
+    while (cursor.hasNext()) {
+      messageList.add(fromDBObject((BasicBSONObject) cursor.next(), clazz));
     }
     return messageList;
   }
@@ -135,9 +146,9 @@ public class Mongoizer {
     return (T) messageBuilder.build();
   }
   
-  public static <T extends Message> BasicDBList toDBList(Iterable<T> messages)
+  public static <T extends Message> List<DBObject> toDBObjectList(Iterable<T> messages)
       throws ValidationException {
-    BasicDBList list = new BasicDBList();
+    List<DBObject> list = Lists.newArrayList();
     for (Message message : messages) {
       list.add(toDBObject(message));
     }

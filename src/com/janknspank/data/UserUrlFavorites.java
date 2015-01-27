@@ -8,7 +8,7 @@ import com.janknspank.proto.Core.UserUrlFavorite;
  * Tracks which URLs the current user has pinned or favorited.
  */
 public class UserUrlFavorites {
-  public static List<UserUrlFavorite> get(String userId) throws DataInternalException {
+  public static Iterable<UserUrlFavorite> get(String userId) throws DataInternalException {
     return Database.with(UserUrlFavorite.class).get(
         new QueryOption.WhereEquals("user_id", userId));
   }
