@@ -86,8 +86,18 @@ public class QueryOption {
     public WhereNotEquals(String fieldName, String value) {
       super(fieldName, value);
     }
-    
+
     public WhereNotEquals(String fieldName, Iterable<String> values) {
+      super(fieldName, values);
+    }
+  }
+
+  public final static class WhereEqualsIgnoreCase extends WhereEquals {
+    public WhereEqualsIgnoreCase(String fieldName, String value) {
+      super(fieldName, value);
+    }
+
+    public WhereEqualsIgnoreCase(String fieldName, Iterable<String> values) {
       super(fieldName, values);
     }
   }
