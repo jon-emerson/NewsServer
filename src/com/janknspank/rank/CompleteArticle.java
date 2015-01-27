@@ -11,6 +11,7 @@ import com.janknspank.data.ArticleFacebookEngagements;
 import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
+import com.janknspank.data.IndustryCodes;
 import com.janknspank.data.TrainedArticleClassifications;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Article;
@@ -37,6 +38,7 @@ public class CompleteArticle {
   private List<ArticleFacebookEngagement> facebookEngagements;
   private double likeVelocity;
   private double shareVelocity;
+  private static final int MILLIS_PER_DAY = 86400000;
   
   public CompleteArticle(String urlId) 
       throws DataInternalException, IOException, ValidationException {
@@ -61,14 +63,13 @@ public class CompleteArticle {
     facebookEngagements = ArticleFacebookEngagements.getLatest(url, 2);
   }
   
-  // TODO: make getters for things as needed
   public List<ArticleFacebookEngagement> getFacebookEngagements() {
     return facebookEngagements;
   }
   
   public ArticleFacebookEngagement getLatestFacebookEngagement() {
-    // TODO: test to make sure this is the correct order
     if (facebookEngagements != null && facebookEngagements.size() > 0) {
+      // First index is the latest (biggest create_time)
       return facebookEngagements.get(0);      
     }
     else {
@@ -76,24 +77,37 @@ public class CompleteArticle {
     }
   }
   
+  //Likes / day
   public double getLikeVelocity() {
     System.out.println("TODO: finish CompleteArticle.getLikeVelocity()");
     if (facebookEngagements == null || facebookEngagements.isEmpty()) {
       return 0;
     }
     else if (facebookEngagements.size() == 1) {
-      //TODO: use the published data to get the velocity
-      return 0;
-      
+      // Use the published date to get the velocity
+      ArticleFacebookEngagement engagement = facebookEngagements.get(0);
+      double daysSincePublish = (System.currentTimeMillis() - 
+          article.getPublishedTime()) / MILLIS_PER_DAY;
+      return engagement.getLikeCount() / daysSincePublish;
     } else {
-      // TODO: use the time interval between the last two
-      // engagement checks
-      return 0;
+      // Use the time interval between the last two engagement checks
+      ArticleFacebookEngagement mostRecentEng = facebookEngagements.get(0);
+      ArticleFacebookEngagement previousEng = facebookEngagements.get(0);
+      long changeInLikes = mostRecentEng.getLikeCount() 
+          - previousEng.getLikeCount();
+      double daysBetweenChecks = (mostRecentEng.getCreateTime()
+          - previousEng.getCreateTime()) / MILLIS_PER_DAY;
+      return changeInLikes / daysBetweenChecks;
     }
   }
   
+  // TODO: getShareVelocity() - more complete with data than likes
+  
+  public Article getArticle() {
+    return article;
+  }
+  
   public int getAgeInMillis() {
-    //TODO: test to make sure this works
     return (int) (System.currentTimeMillis() - article.getPublishedTime()); 
   }
   
@@ -104,6 +118,28 @@ public class CompleteArticle {
       }
     }
     return false;
+  }
+  
+  public double getSimilarityToIndustry(int industryCode) {
+    for (ArticleIndustryClassification classification : industryClassifications) {
+      if (classification.getIndustryCodeId() == industryCode) {
+        return classification.getSimilarity();
+      }
+    }
+    return 0;
+  }
+  
+  public String getIndustryClassificationsString() {
+    String output = "[";
+    for (ArticleIndustryClassification classification : industryClassifications) {
+      output += IndustryCodes.INDUSTRY_CODE_MAP.get(
+          classification.getIndustryCodeId()).getDescription();
+      output += ": ";
+      output += classification.getSimilarity();
+      output += ", ";
+    }
+    output = output.substring(0, output.length() - 2) + "]";
+    return output;
   }
   
   public boolean containsKeyword(String keyword) {

@@ -194,6 +194,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
               break;
             case DOUBLE:
               statement.setDouble(offset, (double) message.getField(field));
+              break;
             default:
               throw new IllegalStateException("Unsupported type: " + field.getJavaType().name());
           }

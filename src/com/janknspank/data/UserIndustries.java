@@ -7,8 +7,9 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 import com.janknspank.dom.parser.DocumentNode;
+import com.janknspank.proto.Core.ArticleFacebookEngagement;
+import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.UserIndustry;
-import com.janknspank.proto.Core.UserInterest;
 
 public class UserIndustries {
   public static final String SOURCE_LINKEDIN_PROFILE = "lp";
@@ -24,10 +25,17 @@ public class UserIndustries {
   
   public static List<UserIndustry> updateIndustries(String userId, DocumentNode profileDocumentNode) 
       throws DataInternalException {
-    // TODO: get industry from linkedin profile
-    
+    String industryDescription = profileDocumentNode.findFirst("industry").getFlattenedText();
+    System.out.println("User industry from LinkedIn Profile: " + industryDescription);
+    IndustryCode industryCode = IndustryCodes.getForDescription(industryDescription);
+    UserIndustry userIndustry = UserIndustry.newBuilder()
+        .setIndustryCodeId(industryCode.getId())
+        .setUserId(userId)
+        .setSource(SOURCE_LINKEDIN_PROFILE)
+        .setCreateTime(System.currentTimeMillis())
+        .build();
     List<UserIndustry> industries = new ArrayList<>();
-    
+    industries.add(userIndustry);
     
     // Add any that are not already on the server 
     return updateIndustries(userId, industries);
@@ -63,5 +71,8 @@ public class UserIndustries {
     return allIndustries;
   }
   
-  //TODO public static void main
+  /** Helper method for creating the UserIndustry table. */
+  public static void main(String args[]) throws Exception {
+    Database.with(UserIndustry.class).createTable();
+  }
 }

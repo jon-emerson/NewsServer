@@ -22,18 +22,18 @@ public class ArticleFacebookEngagements {
         try {
           Database.insert(engagement);
         } catch (ValidationException e) {
-          throw new DataInternalException("Error creating user", e);
+          throw new DataInternalException("Error creating facebook engagement", e);
         }
         return ImmutableList.of(engagement);
       }
       return null;        
     }
     else {
-      return null;
+      return engagements;
     }
   }
   
-  /** Helper method for creating the Article table. */
+  /** Helper method for creating the ArticleFacebookEngagement table. */
   public static void main(String args[]) throws Exception {
     Database.with(ArticleFacebookEngagement.class).createTable();
   }

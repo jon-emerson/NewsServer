@@ -637,11 +637,13 @@ message ArticleFacebookEngagement {
   ];
   
   optional int64 share_count = 3 [
-    (required) = YES
+    (required) = YES,
+    (storage_method) = PULL_OUT
   ];
   
   optional int64 comment_count = 4 [
-    (required) = YES
+    (required) = YES,
+    (storage_method) = PULL_OUT
   ];
 
   optional int64 create_time = 5 [

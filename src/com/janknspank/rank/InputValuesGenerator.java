@@ -1,5 +1,8 @@
 package com.janknspank.rank;
 
+import java.util.List;
+
+import com.janknspank.proto.Core.UserIndustry;
 import com.janknspank.proto.Core.UserInterest;
 
 public class InputValuesGenerator {
@@ -21,5 +24,14 @@ public class InputValuesGenerator {
       }
     }
     return count;
+  }
+  
+  public static double industryRelevance(CompleteUser user, CompleteArticle article) {
+    double relevance = 0;
+    List<UserIndustry> userIndustries = user.getIndustries();
+    for (UserIndustry userIndustry : userIndustries) {
+      relevance += article.getSimilarityToIndustry(userIndustry.getIndustryCodeId());
+    }
+    return relevance;
   }
 }

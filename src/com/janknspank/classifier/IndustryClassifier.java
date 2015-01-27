@@ -23,16 +23,12 @@ public class IndustryClassifier {
   private IndustryClassifier() throws IOException, DataInternalException {
     industryVectors = new HashMap<>();
     for (IndustryCode industryCode : IndustryCodes.INDUSTRY_CODE_MAP.values()) {
-      // TODO: get rid of this clause so as industry seed files are made
-      if (industryCode.getId() == 6) {
-        try {
-          industryVectors.put(industryCode, new IndustryVector(industryCode));
-        } catch (IOException | DataInternalException e) {
-          System.out.println("Couldn't generate industry vector for industry code: " + 
-              industryCode.getId());
-          //e.printStackTrace();
-        }        
-      }
+      try {
+        industryVectors.put(industryCode, new IndustryVector(industryCode));
+      } catch (IOException | DataInternalException e) {
+        System.out.println("Couldn't generate industry vector for industry code: " + 
+            industryCode.getId());
+      }        
     }
   }
   
@@ -75,6 +71,7 @@ public class IndustryClassifier {
       code = industry.getKey();
       vector = industry.getValue();
       similarity = articleVector.cosineSimilarityTo(vector);
+      System.out.println("Similarity to " + code.getDescription() + ": " + similarity);
       if (similarity >= RELEVANCE_THRESHOLD) {
         classification = ArticleIndustryClassification.newBuilder()
             .setUrlId(article.getUrlId())

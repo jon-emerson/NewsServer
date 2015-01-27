@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.LinkedInProfiles;
+import com.janknspank.data.UserIndustries;
 import com.janknspank.data.UserInterests;
 import com.janknspank.data.UserUrlFavorites;
 import com.janknspank.data.UserUrlRatings;
@@ -43,17 +44,21 @@ public class CompleteUser {
     ratings = UserUrlRatings.get(userId);
     interests = UserInterests.getInterests(userId);
     favorites = UserUrlFavorites.get(userId);
+    industries = UserIndustries.getIndustries(userId);
     
     LinkedInProfile profile = LinkedInProfiles.getByUserId(userId);
     DocumentNode profileDocument = DocumentBuilder.build(null, new StringReader(profile.getData()));
     List<Node> positions = profileDocument.findAll("position");
     for (Node position : positions) {
-      // TODO: ask Jon how to do this correctly.
-      //position.findFirst("isCurrent")
-      if (position.getChildNode(4).getFlattenedText().equals("true")) {
+      if (position.findFirst("is-current").getFlattenedText().equals("true")) {
         currentWorkplace = position.findFirst("company > name").getFlattenedText();
         break;
       }
+    }
+    
+    if (industries == null || industries.size() == 0) {
+      // Try to generate from linkedIn profile
+      industries = UserIndustries.updateIndustries(userId, profileDocument);
     }
   }
   
@@ -63,5 +68,9 @@ public class CompleteUser {
   
   public String getCurrentWorkplace() {
     return currentWorkplace;
+  }
+  
+  public List<UserIndustry> getIndustries() {
+    return industries;
   }
 }

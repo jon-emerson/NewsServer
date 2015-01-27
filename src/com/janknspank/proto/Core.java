@@ -10823,15 +10823,51 @@ public final class Core {
      */
     int getIndustryCodeId();
 
-    // optional int64 joined_industry_time = 3;
+    // optional string source = 3;
     /**
-     * <code>optional int64 joined_industry_time = 3;</code>
+     * <code>optional string source = 3;</code>
+     *
+     * <pre>
+     * Where did we get this industry from?
+     * 'lp' = LinkedIn profile.
+     * 'ad' = Explicit add.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
+     * </pre>
      */
-    boolean hasJoinedIndustryTime();
+    boolean hasSource();
     /**
-     * <code>optional int64 joined_industry_time = 3;</code>
+     * <code>optional string source = 3;</code>
+     *
+     * <pre>
+     * Where did we get this industry from?
+     * 'lp' = LinkedIn profile.
+     * 'ad' = Explicit add.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
+     * </pre>
      */
-    long getJoinedIndustryTime();
+    java.lang.String getSource();
+    /**
+     * <code>optional string source = 3;</code>
+     *
+     * <pre>
+     * Where did we get this industry from?
+     * 'lp' = LinkedIn profile.
+     * 'ad' = Explicit add.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getSourceBytes();
+
+    // optional int64 create_time = 5;
+    /**
+     * <code>optional int64 create_time = 5;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 create_time = 5;</code>
+     */
+    long getCreateTime();
   }
   /**
    * Protobuf type {@code UserIndustry}
@@ -10894,9 +10930,14 @@ public final class Core {
               industryCodeId_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
               bitField0_ |= 0x00000004;
-              joinedIndustryTime_ = input.readInt64();
+              source_ = input.readBytes();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              createTime_ = input.readInt64();
               break;
             }
           }
@@ -10998,26 +11039,91 @@ public final class Core {
       return industryCodeId_;
     }
 
-    // optional int64 joined_industry_time = 3;
-    public static final int JOINED_INDUSTRY_TIME_FIELD_NUMBER = 3;
-    private long joinedIndustryTime_;
+    // optional string source = 3;
+    public static final int SOURCE_FIELD_NUMBER = 3;
+    private java.lang.Object source_;
     /**
-     * <code>optional int64 joined_industry_time = 3;</code>
+     * <code>optional string source = 3;</code>
+     *
+     * <pre>
+     * Where did we get this industry from?
+     * 'lp' = LinkedIn profile.
+     * 'ad' = Explicit add.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
+     * </pre>
      */
-    public boolean hasJoinedIndustryTime() {
+    public boolean hasSource() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int64 joined_industry_time = 3;</code>
+     * <code>optional string source = 3;</code>
+     *
+     * <pre>
+     * Where did we get this industry from?
+     * 'lp' = LinkedIn profile.
+     * 'ad' = Explicit add.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
+     * </pre>
      */
-    public long getJoinedIndustryTime() {
-      return joinedIndustryTime_;
+    public java.lang.String getSource() {
+      java.lang.Object ref = source_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          source_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string source = 3;</code>
+     *
+     * <pre>
+     * Where did we get this industry from?
+     * 'lp' = LinkedIn profile.
+     * 'ad' = Explicit add.
+     * 't' = Tombstone, represents an interest the user explicitly DELETED.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getSourceBytes() {
+      java.lang.Object ref = source_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        source_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 create_time = 5;
+    public static final int CREATE_TIME_FIELD_NUMBER = 5;
+    private long createTime_;
+    /**
+     * <code>optional int64 create_time = 5;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 create_time = 5;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
     }
 
     private void initFields() {
       userId_ = "";
       industryCodeId_ = 0;
-      joinedIndustryTime_ = 0L;
+      source_ = "";
+      createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -11038,7 +11144,10 @@ public final class Core {
         output.writeInt32(2, industryCodeId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, joinedIndustryTime_);
+        output.writeBytes(3, getSourceBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(5, createTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -11059,7 +11168,11 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, joinedIndustryTime_);
+          .computeBytesSize(3, getSourceBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, createTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -11181,8 +11294,10 @@ public final class Core {
         bitField0_ = (bitField0_ & ~0x00000001);
         industryCodeId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        joinedIndustryTime_ = 0L;
+        source_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -11222,7 +11337,11 @@ public final class Core {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.joinedIndustryTime_ = joinedIndustryTime_;
+        result.source_ = source_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.createTime_ = createTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -11247,8 +11366,13 @@ public final class Core {
         if (other.hasIndustryCodeId()) {
           setIndustryCodeId(other.getIndustryCodeId());
         }
-        if (other.hasJoinedIndustryTime()) {
-          setJoinedIndustryTime(other.getJoinedIndustryTime());
+        if (other.hasSource()) {
+          bitField0_ |= 0x00000004;
+          source_ = other.source_;
+          onChanged();
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -11384,35 +11508,151 @@ public final class Core {
         return this;
       }
 
-      // optional int64 joined_industry_time = 3;
-      private long joinedIndustryTime_ ;
+      // optional string source = 3;
+      private java.lang.Object source_ = "";
       /**
-       * <code>optional int64 joined_industry_time = 3;</code>
+       * <code>optional string source = 3;</code>
+       *
+       * <pre>
+       * Where did we get this industry from?
+       * 'lp' = LinkedIn profile.
+       * 'ad' = Explicit add.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
+       * </pre>
        */
-      public boolean hasJoinedIndustryTime() {
+      public boolean hasSource() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int64 joined_industry_time = 3;</code>
+       * <code>optional string source = 3;</code>
+       *
+       * <pre>
+       * Where did we get this industry from?
+       * 'lp' = LinkedIn profile.
+       * 'ad' = Explicit add.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
+       * </pre>
        */
-      public long getJoinedIndustryTime() {
-        return joinedIndustryTime_;
+      public java.lang.String getSource() {
+        java.lang.Object ref = source_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          source_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 joined_industry_time = 3;</code>
+       * <code>optional string source = 3;</code>
+       *
+       * <pre>
+       * Where did we get this industry from?
+       * 'lp' = LinkedIn profile.
+       * 'ad' = Explicit add.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
+       * </pre>
        */
-      public Builder setJoinedIndustryTime(long value) {
-        bitField0_ |= 0x00000004;
-        joinedIndustryTime_ = value;
+      public com.google.protobuf.ByteString
+          getSourceBytes() {
+        java.lang.Object ref = source_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          source_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string source = 3;</code>
+       *
+       * <pre>
+       * Where did we get this industry from?
+       * 'lp' = LinkedIn profile.
+       * 'ad' = Explicit add.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
+       * </pre>
+       */
+      public Builder setSource(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        source_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 joined_industry_time = 3;</code>
+       * <code>optional string source = 3;</code>
+       *
+       * <pre>
+       * Where did we get this industry from?
+       * 'lp' = LinkedIn profile.
+       * 'ad' = Explicit add.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
+       * </pre>
        */
-      public Builder clearJoinedIndustryTime() {
+      public Builder clearSource() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        joinedIndustryTime_ = 0L;
+        source_ = getDefaultInstance().getSource();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string source = 3;</code>
+       *
+       * <pre>
+       * Where did we get this industry from?
+       * 'lp' = LinkedIn profile.
+       * 'ad' = Explicit add.
+       * 't' = Tombstone, represents an interest the user explicitly DELETED.
+       * </pre>
+       */
+      public Builder setSourceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        source_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 create_time = 5;
+      private long createTime_ ;
+      /**
+       * <code>optional int64 create_time = 5;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 create_time = 5;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 create_time = 5;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000008;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 create_time = 5;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        createTime_ = 0L;
         onChanged();
         return this;
       }
@@ -21566,57 +21806,58 @@ public final class Core {
       "B\004\210\246\035\001\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"u\n\017Use" +
       "rUrlFavorite\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
       "\246\035\026\250\246\035\001\022 \n\006url_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035" +
-      "\001\022\035\n\013create_time\030\003 \001(\003B\010\220\246\035\005\210\246\035\001\"y\n\014User",
-      "Industry\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250" +
-      "\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022" +
-      "\"\n\024joined_industry_time\030\003 \001(\003B\004\220\246\035\005\"\244\001\n\014" +
-      "UserInterest\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246" +
-      "\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\035\n" +
-      "\007keyword\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\034\n\006source\030\004" +
-      " \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\026\n\004type\030\005 \001(\tB\010\230\246\035\005\250\246" +
-      "\035\001\"\224\001\n\nUserIntent\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001" +
-      "\220\246\035\002\230\246\035\026\250\246\035\001\022%\n\013intent_code\030\002 \001(\tB\020\210\246\035\001\220" +
-      "\246\035\003\230\246\035\005\250\246\035\001\022!\n\013description\030\003 \001(\tB\014\210\246\035\001\220\246",
-      "\035\003\230\246\035d\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001\"\365\004\n\006En" +
-      "tity\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\035\n\007ke" +
-      "yword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB" +
-      "\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001(\0162\016.Enti" +
-      "ty.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014canonical_id\030\005 \001(" +
-      "\tB\014\220\246\035\005\230\246\035\026\250\246\035\001\022\"\n\005topic\030\006 \003(\0132\023.Entity." +
-      "EntityTopic\032\277\002\n\013EntityTopic\022\033\n\tentity_id" +
-      "\030\001 \001(\tB\010\230\246\035\026\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230" +
-      "\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030" +
-      "\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033.Entity.En",
-      "tityTopic.Context:\007UNKNOWN\"\220\001\n\007Context\022\013" +
-      "\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED_AT\020\001\022\025\n\021" +
-      "ANGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIST_INVESTE" +
-      "D_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026\n\022WIKIPED" +
-      "IA_SUBTOPIC\020\005\"Z\n\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025" +
-      "DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPEDIA_LONG_" +
-      "ABSTRACT\020\002\022\r\n\tANGELLIST\020\003\"\211\001\n\026TrainedArt" +
-      "icleIndustry\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246" +
-      "\035\026\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246" +
-      "\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035",
-      "\026\250\246\035\001\"\\\n\014IndustryCode\022\024\n\002id\030\001 \001(\005B\010\210\246\035\001\220" +
-      "\246\035\002\022\027\n\005group\030\002 \001(\tB\010\210\246\035\001\230\246\0352\022\035\n\013descript" +
-      "ion\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\203\001\n\035ArticleIndustryC" +
-      "lassification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\026\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220" +
-      "\246\035\005\022\034\n\nsimilarity\030\003 \001(\001B\010\210\246\035\001\220\246\035\005\"\275\001\n\034Tr" +
-      "ainedArticleClassification\022 \n\006url_id\030\001 \001" +
-      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\0225\n\033article_classifi" +
-      "cation_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007c" +
-      "hecked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_i",
-      "d\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\"T\n\017ArticleType" +
-      "Code\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022!\n\013" +
-      "description\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\"\260\001\n\031Arti" +
-      "cleFacebookEngagement\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001" +
-      "\220\246\035\002\230\246\035\377\005\250\246\035\001\022\034\n\nlike_count\030\002 \001(\003B\010\210\246\035\001\220" +
-      "\246\035\005\022\031\n\013share_count\030\003 \001(\003B\004\210\246\035\001\022\033\n\rcommen" +
-      "t_count\030\004 \001(\003B\004\210\246\035\001\022\035\n\013create_time\030\005 \001(\003" +
-      "B\010\210\246\035\001\220\246\035\005\"Q\n\025WordDocumentFrequency\022\033\n\004w" +
-      "ord\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\310\001\022\033\n\tfrequency\030\002 " +
-      "\001(\003B\010\210\246\035\001\220\246\035\005B\026\n\024com.janknspank.proto"
+      "\001\022\035\n\013create_time\030\003 \001(\003B\010\220\246\035\005\210\246\035\001\"\216\001\n\014Use",
+      "rIndustry\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026" +
+      "\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003" +
+      "\022\034\n\006source\030\003 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\031\n\013create" +
+      "_time\030\005 \001(\003B\004\210\246\035\001\"\244\001\n\014UserInterest\022\034\n\002id" +
+      "\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022!\n\007user_id\030\002 \001(" +
+      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\035\n\007keyword\030\003 \001(\tB\014\210\246" +
+      "\035\001\220\246\035\003\230\246\035d\022\034\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002" +
+      "\022\026\n\004type\030\005 \001(\tB\010\230\246\035\005\250\246\035\001\"\224\001\n\nUserIntent\022" +
+      "!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022%\n\013in" +
+      "tent_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022!\n\013des",
+      "cription\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\031\n\013create_t" +
+      "ime\030\005 \001(\003B\004\210\246\035\001\"\365\004\n\006Entity\022\034\n\002id\030\001 \001(\tB\020" +
+      "\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220" +
+      "\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022" +
+      "(\n\006source\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035" +
+      "\005\022\"\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\026\250\246\035\001\022\"\n" +
+      "\005topic\030\006 \003(\0132\023.Entity.EntityTopic\032\277\002\n\013En" +
+      "tityTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\026\250\246\035\001\022\031" +
+      "\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB" +
+      "\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007con",
+      "text\030\005 \001(\0162\033.Entity.EntityTopic.Context:" +
+      "\007UNKNOWN\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANG" +
+      "ELLIST_WORKED_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020" +
+      "\002\022\031\n\025ANGELLIST_INVESTED_IN\020\003\022\025\n\021ANGELLIS" +
+      "T_ADVISED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC\020\005\"Z\n\006S" +
+      "ource\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INSTANCE_T" +
+      "YPE\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r\n\tANGE" +
+      "LLIST\020\003\"\211\001\n\026TrainedArticleIndustry\022 \n\006ur" +
+      "l_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\"\n\020industry" +
+      "_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user",
+      "_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\"\\\n\014IndustryC" +
+      "ode\022\024\n\002id\030\001 \001(\005B\010\210\246\035\001\220\246\035\002\022\027\n\005group\030\002 \001(\t" +
+      "B\010\210\246\035\001\230\246\0352\022\035\n\013description\030\003 \001(\tB\010\210\246\035\001\230\246\035" +
+      "d\"\203\001\n\035ArticleIndustryClassification\022 \n\006u" +
+      "rl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\"\n\020industr" +
+      "y_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\005\022\034\n\nsimilarity\030" +
+      "\003 \001(\001B\010\210\246\035\001\220\246\035\005\"\275\001\n\034TrainedArticleClassi" +
+      "fication\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246" +
+      "\035\001\0225\n\033article_classification_code\030\002 \001(\tB" +
+      "\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001",
+      "\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
+      "\246\035\026\250\246\035\001\"T\n\017ArticleTypeCode\022\036\n\004code\030\001 \001(\t" +
+      "B\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022!\n\013description\030\002 \001(\tB" +
+      "\014\210\246\035\001\220\246\035\003\230\246\035d\"\270\001\n\031ArticleFacebookEngagem" +
+      "ent\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\002\230\246\035\377\005\250\246\035\001\022\034\n\nl" +
+      "ike_count\030\002 \001(\003B\010\210\246\035\001\220\246\035\005\022\035\n\013share_count" +
+      "\030\003 \001(\003B\010\210\246\035\001\220\246\035\005\022\037\n\rcomment_count\030\004 \001(\003B" +
+      "\010\210\246\035\001\220\246\035\005\022\035\n\013create_time\030\005 \001(\003B\010\210\246\035\001\220\246\035\005" +
+      "\"Q\n\025WordDocumentFrequency\022\033\n\004word\030\001 \001(\tB" +
+      "\r\210\246\035\001\220\246\035\002\230\246\035\310\001\022\033\n\tfrequency\030\002 \001(\003B\010\210\246\035\001\220",
+      "\246\035\005B\026\n\024com.janknspank.proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -21694,7 +21935,7 @@ public final class Core {
           internal_static_UserIndustry_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UserIndustry_descriptor,
-              new java.lang.String[] { "UserId", "IndustryCodeId", "JoinedIndustryTime", });
+              new java.lang.String[] { "UserId", "IndustryCodeId", "Source", "CreateTime", });
           internal_static_UserInterest_descriptor =
             getDescriptor().getMessageTypes().get(12);
           internal_static_UserInterest_fieldAccessorTable = new
@@ -21893,6 +22134,94 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.storageMethod);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
+          registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
@@ -21908,62 +22237,6 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
@@ -21971,33 +22244,6 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.required);

@@ -140,7 +140,7 @@ public class WordDocumentFrequencies {
     } catch (NullPointerException e) {
       frequency = 0;
     }
-    System.out.println("WDF.getFrequency for " + word + ": " + frequency);
+//    System.out.println("WDF.getFrequency for " + word + ": " + frequency);
     return frequency;
   }
   

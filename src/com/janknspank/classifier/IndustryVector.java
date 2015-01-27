@@ -72,7 +72,10 @@ public class IndustryVector {
         // Add that to the total frequency of the word in the collection
         newSum = sum.get(word);
         if (newSum != null) {
-          sum.put(word, newSum + tf);
+          sum.put(word, newSum.intValue() + tf.intValue());
+        }
+        else {
+          sum.put(word, tf);
         }
       }
     }

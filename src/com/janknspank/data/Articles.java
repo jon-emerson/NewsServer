@@ -1,5 +1,6 @@
 package com.janknspank.data;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -14,12 +15,14 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.janknspank.common.TopList;
 import com.janknspank.data.QueryOption.LimitWithOffset;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.TrainedArticleIndustry;
 import com.janknspank.proto.Core.UserInterest;
+import com.janknspank.rank.CompleteArticle;
 import com.janknspank.rank.CompleteUser;
 import com.janknspank.rank.Scorer;
 
@@ -65,7 +68,7 @@ public class Articles {
   private static List<ArticleKeyword> getArticleKeywordsForTopics(Iterable<String> topics)
       throws DataInternalException {
     return Database.with(ArticleKeyword.class).get(
-        new QueryOption.WhereEquals("keyword", topics),
+        new QueryOption.WhereEqualsIgnoreCase("keyword", topics),
         new QueryOption.Limit(500));
   }
   
@@ -99,38 +102,31 @@ public class Articles {
   
   
   
-  public static List<Article> getRankedArticles(String userId, Scorer scorer)
-      throws DataInternalException, ParserException {
-    Map<Article, Double> ranks = getArticlesAndScores(userId, scorer);
+  public static Iterable<Article> getRankedArticles(String userId, Scorer scorer)
+      throws DataInternalException, ParserException, IOException, ValidationException {
+    Map<CompleteArticle, Double> ranks = getCompleteArticlesAndScores(userId, scorer);
     
-    // Sort the articles by rank
-    PriorityQueue<Entry<Article, Double>> pq = new PriorityQueue<Map.Entry<Article,Double>>(
-        ranks.size(), new Comparator<Entry<Article, Double>>() {
-
-      @Override
-      public int compare(Entry<Article, Double> arg0, Entry<Article, Double> arg1) {
-        return arg0.getValue().compareTo(arg1.getValue()) * -1;
-      }
-    });
-    pq.addAll(ranks.entrySet());
-    
-    List<Article> sortedArticles = new ArrayList<Article>();
-    while (!pq.isEmpty()) {
-      sortedArticles.add(pq.poll().getKey());
+    // Sort the articles
+    TopList<Article, Double> articles = new TopList<>(ranks.size());
+    for (Map.Entry<CompleteArticle, Double> entry : ranks.entrySet()) {
+      articles.add(entry.getKey().getArticle(), entry.getValue());
     }
-    return sortedArticles;
+    
+    return articles.getKeys();
   }
   
-  public static Map<Article, Double> getArticlesAndScores(String userId, Scorer scorer)
-      throws DataInternalException, ParserException {
+  public static Map<CompleteArticle, Double> getCompleteArticlesAndScores(String userId, Scorer scorer)
+      throws DataInternalException, ParserException, IOException, ValidationException {
     //NeuralNetworkScorer neuralNetworkRank = NeuralNetworkScorer.getInstance();
     CompleteUser completeUser = new CompleteUser(userId);
     // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
     List<Article> articles = getArticles(UserInterests.getInterests(userId));
-    Map<Article, Double> ranks = new HashMap<>();
+    Map<CompleteArticle, Double> ranks = new HashMap<>();
     
+    CompleteArticle completeArticle;
     for (Article article : articles) {
-      ranks.put(article, scorer.getScore(article, completeUser));
+      completeArticle = new CompleteArticle(article);
+      ranks.put(completeArticle, scorer.getScore(completeUser, completeArticle));
     }
     
     return ranks;

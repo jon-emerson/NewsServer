@@ -6,7 +6,6 @@ import org.neuroph.core.NeuralNetwork;
 
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.ValidationException;
-import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleFacebookEngagement;
 
 public final class NeuralNetworkScorer implements Scorer {
@@ -70,13 +69,13 @@ public final class NeuralNetworkScorer implements Scorer {
       // Input 7: Facebook likes velocity
       sigmoid(article.getLikeVelocity()),
       
-      // Input 7: Article age
-      sigmoid(article.getAgeInMillis())
+      // Input 8: Article age
+      sigmoid(article.getAgeInMillis()),
       
-      // Input 8: User has intent to stay on top of industry
-      // which the article is about
+      // Input 9: User has intent to stay on top of industry
+      Math.min(1, InputValuesGenerator.industryRelevance(user, article))
       
-      // Input 9: Article is educational and about a skill
+      // Input 10: Article is educational and about a skill
       // the user wants to develop
       
       // TODO: inputs with article classifications like "data-rich"
@@ -87,9 +86,9 @@ public final class NeuralNetworkScorer implements Scorer {
   
   // V1 has a general rank - one neural network for all intents. No mixing.
   // Slow architecture. Makes too many server calls
-  public double getScore(Article article, CompleteUser user) {
+  public double getScore(CompleteUser user, CompleteArticle article) {
     try {
-      return getScore(article, user, neuralNetwork);      
+      return getScore(user, article, neuralNetwork);      
     }
     catch (DataInternalException | IOException | ValidationException e) {
       System.out.println("Error NeuralNetworkScorer.getScore()");
@@ -98,26 +97,22 @@ public final class NeuralNetworkScorer implements Scorer {
     }
   }
   
-  private static double getScore(Article article, CompleteUser user, NeuralNetwork neuralNetwork) 
+  private static double getScore(CompleteUser completeUser, CompleteArticle completeArticle, NeuralNetwork neuralNetwork) 
       throws DataInternalException, IOException, ValidationException {
     long startMillis = System.currentTimeMillis();
-    CompleteArticle completeArticle = new CompleteArticle(article);
-    long completeArticleAcquiredMillis = System.currentTimeMillis();
-    neuralNetwork.setInput(generateInputNodes(user, completeArticle));
+    neuralNetwork.setInput(generateInputNodes(completeUser, completeArticle));
     long generateInputNodesMillis = System.currentTimeMillis();
     neuralNetwork.calculate();
     long calculateMillis = System.currentTimeMillis();
     
     double totalTimeToRankArticle = (double)(calculateMillis - startMillis) / 1000;
-    double timeToInitializeCompleteArticle = (double)(completeArticleAcquiredMillis - startMillis) / 1000;
-    double timeToGenerateInputNodes = (double)(generateInputNodesMillis - completeArticleAcquiredMillis) / 1000;
+    double timeToGenerateInputNodes = (double)(generateInputNodesMillis - totalTimeToRankArticle) / 1000;
     double timeToCalculate = (double)(calculateMillis - generateInputNodesMillis) / 1000;
     
-    System.out.println("Ranked " + article.getUrl());
+    System.out.println("Ranked " + completeArticle.getArticle().getUrl());
     System.out.println("  Score: " + neuralNetwork.getOutput()[0]);
     System.out.println("  Total time: " + totalTimeToRankArticle + "s");
-    System.out.println("    init article: " + timeToInitializeCompleteArticle + 
-        ", generate input values: " + timeToGenerateInputNodes +
+    System.out.println("    generate input nodes: " + timeToGenerateInputNodes +
         ", compute output: " + timeToCalculate);
     return neuralNetwork.getOutput()[0];
   }

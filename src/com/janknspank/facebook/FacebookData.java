@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Properties;
 
 import com.janknspank.data.DataInternalException;
@@ -27,7 +29,14 @@ public class FacebookData {
       throws DataInternalException {
     try {
       // Example urlObject: http://goo.gl/JVf3tt
-      JsonObject urlObject = facebookClient.fetchObject(url, JsonObject.class);
+      String encodedURL;
+      try {
+        encodedURL = URLEncoder.encode(url, "UTF-8");
+      } catch (UnsupportedEncodingException e) {
+        System.out.println("Can't encode url: " + url);
+        encodedURL = url;
+      }
+      JsonObject urlObject = facebookClient.fetchObject(encodedURL, JsonObject.class);
       
       // Get shares and comments
       JsonObject shareObject = urlObject.getJsonObject("share");

@@ -88,6 +88,7 @@ public class Validator {
         case INT:
         case ENUM:
         case BOOLEAN:
+        case DOUBLE:
           break;
         default:
           throw new RuntimeException("Unsupported type: " + fieldDescriptor.getJavaType().name());

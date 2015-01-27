@@ -1,23 +1,22 @@
 package com.janknspank.rank;
 
-import java.io.IOException;
-
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.ValidationException;
-import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleFacebookEngagement;
 
 public class HeuristicScorer implements Scorer {
-  public double getScore(Article article, CompleteUser completeUser) {
-    CompleteArticle completeArticle;
-    try {
-      completeArticle = new CompleteArticle(article);
-    } catch (DataInternalException | IOException | ValidationException e) {
-      System.out.println("Can't generate CompleteArticle. return a score of 0.");
-      e.printStackTrace();
-      return 0;
+  private static HeuristicScorer instance = null;
+  
+  private HeuristicScorer() {
+    // Nothing for now
+  }
+  
+  public static synchronized HeuristicScorer getInstance() {
+    if(instance == null) {
+       instance = new HeuristicScorer();
     }
-    
+    return instance;
+  }
+  
+  public double getScore(CompleteUser completeUser, CompleteArticle completeArticle) {
     ArticleFacebookEngagement engagement = completeArticle.getLatestFacebookEngagement();
     long likeCount = 0;
     long commentCount = 0;
@@ -49,7 +48,9 @@ public class HeuristicScorer implements Scorer {
       score += Math.min(Math.log(likeCount) / 10, 0.3); 
     }
     
-    // TODO: implement heuristic scoring function
+    // Industry relevance
+    score += InputValuesGenerator.industryRelevance(completeUser, completeArticle);
+    
     return score;
   }
 }

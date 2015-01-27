@@ -766,4 +766,14 @@ public class IndustryCodes {
     }
     return industryCodes;
   }
+  
+  public static IndustryCode getForDescription(String description) {
+    for (IndustryCode industryCode : INDUSTRY_CODE_MAP.values()) {
+      if (industryCode.getDescription().equals(description)) {
+        return industryCode;
+      }
+    }
+    System.out.println("No industry code found with description: " + description);
+    return null;
+  }
 }
