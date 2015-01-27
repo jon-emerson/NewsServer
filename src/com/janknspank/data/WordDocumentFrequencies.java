@@ -1,9 +1,13 @@
 package com.janknspank.data;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +29,7 @@ public class WordDocumentFrequencies {
   private static WordDocumentFrequencies instance = null;
   private Integer totalDocumentCount;
   private static final String PROPERTY_KEY_N = "numArticlesUsedForModel";
+  private static final String PROPERTY_FILE_NAME = "classifier/vectorspace.properties";
   
   private WordDocumentFrequencies() throws DataInternalException, IOException {
     System.out.println("WordDocumentFrequencies constructor");
@@ -59,44 +64,51 @@ public class WordDocumentFrequencies {
     Integer frequency;
     do {
       articles = Articles.getPageOfArticles(limit, offset);
-      System.out.println("Generating Word Document Frequency - article offest: " + offset);
+      System.out.println("Generating Word Document Frequency - article offset: " + offset);
       for (Article article : articles) {
         words = new DocumentVector(article).getWordsInDocument();
         for (String word : words) {
           frequency = wordDocumentFrequency.get(word);
           if (frequency == null) {
-            wordDocumentFrequency.put(word, new Integer(1));
-          }
-          else {
-            wordDocumentFrequency.put(word, new Integer(frequency.intValue() + 1));
+            wordDocumentFrequency.put(word, 1);
+          } else {
+            wordDocumentFrequency.put(word, frequency + 1);
           }
         }
       }
       offset += limit;
       N += articles.size();
     } while (articles.size() == limit);
+    //} while (offset <= 10000);
     saveNLocally(N);
     return wordDocumentFrequency;
   }
   
-  private static void saveDocumentFrequenciesToServer(Map<String, Integer> frequencies) {
+  private static void saveDocumentFrequenciesToServer(Map<String, Integer> frequencies) 
+      throws DataInternalException {
+    List<WordDocumentFrequency> pageToSave = new ArrayList<>();
     String word;
     Integer value;
-    WordDocumentFrequency wdf;
+    
     for (Map.Entry<String, Integer> frequency : frequencies.entrySet()) {
       word = frequency.getKey();
       value = frequency.getValue();
-      
-      wdf = WordDocumentFrequency.newBuilder()
-          .setWord(word)
-          .setFrequency(value.intValue())
-          .build();
-      try {
-        Database.insert(wdf);
-      } catch (ValidationException | DataInternalException e) {
-        System.out.println("Error saving document frequency to server for word: " + word);
-        System.out.println("Skipping it.");
-        //throw new DataInternalException("Error creating document frequency ", e);
+      if (word.length() > 0) {
+        pageToSave.add(WordDocumentFrequency.newBuilder()
+            .setWord(word)
+            .setFrequency(value.intValue())
+            .build());
+        if (pageToSave.size() >= 10) {
+          try {
+            System.out.println("Saving page of WordDocumentFrequencies");
+            Database.insert(pageToSave);
+          } catch (ValidationException | DataInternalException e) {
+            System.out.println("Error saving page of document frequencies to the server");
+            e.printStackTrace();
+            //throw new DataInternalException("Error creating document frequency ", e);
+          }
+          pageToSave.clear();
+        }
       }
     }
   }
@@ -104,6 +116,9 @@ public class WordDocumentFrequencies {
   private static void saveNLocally(int numDocs) throws IOException {
     Properties properties = getVectorSpaceProperties();
     properties.setProperty(PROPERTY_KEY_N, String.valueOf(numDocs));
+    File f = new File(PROPERTY_FILE_NAME);
+    OutputStream out = new FileOutputStream(f);
+    properties.store(out, "Updated N");
   }
   
   private Map<String, Integer> loadPreviouslyComputedDocumentFrequencies() 
@@ -119,7 +134,14 @@ public class WordDocumentFrequencies {
   }
   
   public int getFrequency(String word) {
-    return documentFrequency.get(word);
+    int frequency;
+    try {
+      frequency = documentFrequency.get(word);      
+    } catch (NullPointerException e) {
+      frequency = 0;
+    }
+    System.out.println("WDF.getFrequency for " + word + ": " + frequency);
+    return frequency;
   }
   
   public int getN() throws IOException {
@@ -133,14 +155,12 @@ public class WordDocumentFrequencies {
   
   private static Properties getVectorSpaceProperties() throws IOException {
     Properties properties = new Properties();
-    String propFileName = "classifier/vectorspace.properties";
-     
-    InputStream inputStream = new FileInputStream(propFileName);
+    InputStream inputStream = new FileInputStream(PROPERTY_FILE_NAME);
      
     if (inputStream != null) {
       properties.load(inputStream);
     } else {
-      throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+      throw new FileNotFoundException("property file '" + PROPERTY_FILE_NAME + "' not found in the classpath");
     }
     
     return properties;

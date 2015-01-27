@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.neuroph.core.NeuralNetwork;
 
 import com.janknspank.data.DataInternalException;
+import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleFacebookEngagement;
 
@@ -33,7 +34,7 @@ public final class NeuralNetworkScorer implements Scorer {
     neuralNetwork = NeuralNetwork.load(nnetFile);
   }
   
-  public static double[] generateInputNodes(CompleteUser user, 
+  static double[] generateInputNodes(CompleteUser user, 
       CompleteArticle article) {
     ArticleFacebookEngagement engagement = article.getLatestFacebookEngagement();
     long likeCount = 0;
@@ -86,36 +87,19 @@ public final class NeuralNetworkScorer implements Scorer {
   
   // V1 has a general rank - one neural network for all intents. No mixing.
   // Slow architecture. Makes too many server calls
-//  public static double getScore(String urlId, String userId) 
-//      throws DataInternalException, ParserException {
-//    NeuralNetwork neuralNetwork = NeuralNetwork.load(DEFAULT_NEURAL_NETWORK_FILE);
-//    CompleteUser user = new CompleteUser(userId);
-//    return getScore(urlId, user, neuralNetwork);
-//  }
-//  
-//  public double getScore(String urlId, CompleteUser user) throws DataInternalException {
-//    return getScore(urlId, user, neuralNetwork);
-//  }
-  
   public double getScore(Article article, CompleteUser user) {
     try {
       return getScore(article, user, neuralNetwork);      
     }
-    catch (DataInternalException | IOException e) {
+    catch (DataInternalException | IOException | ValidationException e) {
       System.out.println("Error NeuralNetworkScorer.getScore()");
       e.printStackTrace();
       return 0;
     }
   }
   
-//  private static double getScore(String urlId, CompleteUser user, NeuralNetwork neuralNetwork) 
-//      throws DataInternalException {
-//    Article article = Articles.getArticle(urlId);
-//    return getScore(article, user, neuralNetwork);
-//  }
-  
   private static double getScore(Article article, CompleteUser user, NeuralNetwork neuralNetwork) 
-      throws DataInternalException, IOException {
+      throws DataInternalException, IOException, ValidationException {
     long startMillis = System.currentTimeMillis();
     CompleteArticle completeArticle = new CompleteArticle(article);
     long completeArticleAcquiredMillis = System.currentTimeMillis();

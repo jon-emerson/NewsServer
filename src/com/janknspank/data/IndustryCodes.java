@@ -1,11 +1,14 @@
 package com.janknspank.data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.janknspank.proto.Core.IndustryCode;
+import com.janknspank.proto.Core.UserIndustry;
 
 /**
  * Industry codes on articles added by humans
@@ -755,4 +758,12 @@ public class IndustryCodes {
         }
       });
   
+  public static List<IndustryCode> getFrom(List<UserIndustry> userIndustries) {
+    List<IndustryCode> industryCodes = new ArrayList<>();
+    for (UserIndustry userIndustry : userIndustries) {
+      industryCodes.add(IndustryCodes.INDUSTRY_CODE_MAP.get(
+          userIndustry.getIndustryCodeId()));
+    }
+    return industryCodes;
+  }
 }

@@ -179,12 +179,6 @@ public class Articles {
     return article;
   }
   
-  public static int getTotalCount() {
-    // TODO: Ask Jon how to implement SELECT COUNT(*) FROM article
-    System.out.println("TODO: implement Articles.getTotalCount");
-    return 29342;
-  }
-  
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
     Database.with(Article.class).createTable();

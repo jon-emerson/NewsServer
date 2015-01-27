@@ -33,5 +33,8 @@ public class UserIntents {
         }
       });
   
-  // TODO: publis static void main...
+  /** Helper method for creating the Article table. */
+  public static void main(String args[]) throws Exception {
+    Database.with(UserIntent.class).createTable();
+  }
 }

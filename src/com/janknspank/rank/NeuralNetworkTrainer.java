@@ -13,6 +13,7 @@ import org.neuroph.nnet.MultiLayerPerceptron;
 
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.UserUrlRatings;
+import com.janknspank.data.ValidationException;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.Core.UserUrlRating;
 
@@ -28,7 +29,8 @@ public class NeuralNetworkTrainer {
   
   // train with data from server
   private static DataSet generateTrainingDataSet()
-      throws DataInternalException, ParserException, IOException {
+      throws DataInternalException, ParserException, 
+      IOException, ValidationException {
     List<UserUrlRating> allRatings = UserUrlRatings.getAll();
     CompleteUser user;
     CompleteArticle article;

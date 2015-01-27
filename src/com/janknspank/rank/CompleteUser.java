@@ -49,6 +49,7 @@ public class CompleteUser {
     List<Node> positions = profileDocument.findAll("position");
     for (Node position : positions) {
       // TODO: ask Jon how to do this correctly.
+      //position.findFirst("isCurrent")
       if (position.getChildNode(4).getFlattenedText().equals("true")) {
         currentWorkplace = position.findFirst("company > name").getFlattenedText();
         break;

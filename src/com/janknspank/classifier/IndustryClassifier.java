@@ -6,8 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.janknspank.data.ArticleIndustryClassifications;
 import com.janknspank.data.DataInternalException;
+import com.janknspank.data.Database;
 import com.janknspank.data.IndustryCodes;
+import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleIndustryClassification;
 import com.janknspank.proto.Core.IndustryCode;
@@ -20,11 +23,16 @@ public class IndustryClassifier {
   private IndustryClassifier() throws IOException, DataInternalException {
     industryVectors = new HashMap<>();
     for (IndustryCode industryCode : IndustryCodes.INDUSTRY_CODE_MAP.values()) {
-      // TODO: catch errors 
-     // if (industryCode.getId() == 6) {
-        industryVectors.put(industryCode, new IndustryVector(industryCode));
-        
-     // }
+      // TODO: get rid of this clause so as industry seed files are made
+      if (industryCode.getId() == 6) {
+        try {
+          industryVectors.put(industryCode, new IndustryVector(industryCode));
+        } catch (IOException | DataInternalException e) {
+          System.out.println("Couldn't generate industry vector for industry code: " + 
+              industryCode.getId());
+          //e.printStackTrace();
+        }        
+      }
     }
   }
   
@@ -40,21 +48,29 @@ public class IndustryClassifier {
    * Returns a list of Article Industry Classifications
    * @param article
    * @return
-   * @throws DataInternalException 
+   * @throws DataInternalException
    * @throws IOException 
+   * @throws ValidationException 
    */
   public List<ArticleIndustryClassification> classify(Article article) 
-      throws DataInternalException, IOException {
+      throws DataInternalException, IOException, ValidationException {
     DocumentVector articleVector = new DocumentVector(article);
 
-    // TODO: add DB lookup for classifications before trying to recompute
+    // See if the classifications has already been computed
+    List<ArticleIndustryClassification> classifications =
+        ArticleIndustryClassifications.getFor(article);
+    if (classifications != null && classifications.size() > 0) {
+      return classifications;
+    }
     
-    List<ArticleIndustryClassification> classifications = new ArrayList<>();
+    // Compute classifications from IndustryVectors
+    classifications = new ArrayList<>();
     ArticleIndustryClassification classification;
     IndustryCode code;
     IndustryVector vector;
     double similarity;
     
+    System.out.println("classifying against " + industryVectors.size() + " industry vectors");
     for (Map.Entry<IndustryCode, IndustryVector> industry : industryVectors.entrySet()) {
       code = industry.getKey();
       vector = industry.getValue();
@@ -68,7 +84,13 @@ public class IndustryClassifier {
         classifications.add(classification);
       }
     }
+    saveClassificationsToServer(classifications);
     
     return classifications;
+  }
+  
+  private static void saveClassificationsToServer(List<ArticleIndustryClassification> classifications)
+      throws ValidationException, DataInternalException {
+    Database.insert(classifications);
   }
 }

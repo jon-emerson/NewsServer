@@ -348,10 +348,20 @@ message UserIndustry {
     (required) = YES,
     (storage_method) = INDEX
   ];
-
-  optional int64 joined_industry_time = 3 [
-    (storage_method) = PULL_OUT
+  
+  // Where did we get this industry from?
+  // 'lp' = LinkedIn profile.
+  // 'ad' = Explicit add.
+  // 't' = Tombstone, represents an interest the user explicitly DELETED.
+  optional string source = 3 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 2
   ];
+
+  optional int64 create_time = 5 [
+    (required) = YES
+  ];;
 }
 
 message UserInterest {

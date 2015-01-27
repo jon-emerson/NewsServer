@@ -12,6 +12,7 @@ import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.TrainedArticleClassifications;
+import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleFacebookEngagement;
 import com.janknspank.proto.Core.ArticleIndustryClassification;
@@ -37,17 +38,20 @@ public class CompleteArticle {
   private double likeVelocity;
   private double shareVelocity;
   
-  public CompleteArticle(String urlId) throws DataInternalException, IOException {
+  public CompleteArticle(String urlId) 
+      throws DataInternalException, IOException, ValidationException {
     article = Articles.getArticle(urlId);
     initForArticle(article);
   }
   
-  public CompleteArticle(Article article) throws DataInternalException, IOException {
+  public CompleteArticle(Article article) 
+      throws DataInternalException, IOException, ValidationException {
     this.article = article;
     initForArticle(article);
   }
   
-  private void initForArticle(Article article) throws DataInternalException, IOException {
+  private void initForArticle(Article article) 
+      throws DataInternalException, IOException, ValidationException {
     String urlId = article.getUrlId();
     String url = article.getUrl();
     keywords = ArticleKeywords.get(ImmutableList.of(article));

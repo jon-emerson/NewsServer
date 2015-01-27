@@ -32,7 +32,7 @@ public class IndustryVector {
       System.out.println("Could not load IndustryVector from file - code: " + 
           industryCode.getId());
       System.out.println("Going to generate it from scratch");
-      e.printStackTrace();
+      //e.printStackTrace();
       tfIdfVector = generateVectorForIndustryCode(industryCode);
       save(tfIdfVector, industryCode);
     }
@@ -40,11 +40,14 @@ public class IndustryVector {
   
   private static Map<String, Double> generateVectorForIndustryCode(IndustryCode industryCode) 
       throws DataInternalException, IOException {
+    System.out.println("generateVectorForIndustryCode: " + industryCode.getDescription());
     // 1. Get seed words for industryCode.id
     List<String> words = getSeedWords(industryCode);
+    System.out.println("seed words: " + words);
     
     // 2. Get all documents that contain the seed word
     List<Article> articles = Articles.getArticlesForKeywords(words);
+    System.out.println(articles.size() + " representative articles");
     
     // 3. Convert them into the industry vector
     List<DocumentVector> documentVectors = new ArrayList<>(); 

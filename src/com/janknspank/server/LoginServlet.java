@@ -25,7 +25,9 @@ import com.google.common.io.CharStreams;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.DataRequestException;
 import com.janknspank.data.Database;
+import com.janknspank.data.IndustryCodes;
 import com.janknspank.data.Sessions;
+import com.janknspank.data.UserIndustries;
 import com.janknspank.data.UserInterests;
 import com.janknspank.data.Users;
 import com.janknspank.data.ValidationException;
@@ -35,9 +37,11 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
+import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.LinkedInProfile;
 import com.janknspank.proto.Core.Session;
 import com.janknspank.proto.Core.User;
+import com.janknspank.proto.Core.UserIndustry;
 import com.janknspank.proto.Core.UserInterest;
 import com.janknspank.proto.Serializer;
 
@@ -197,8 +201,10 @@ public class LoginServlet extends StandardServlet {
     User user = Users.loginFromLinkedIn(linkedInProfileDocument, linkedInAccessToken);
     Session session = Sessions.createFromLinkedProfile(linkedInProfileDocument, user);
 
-    // Try to save the user's profile and update his interests.
+    // Try to save the user's profile and update his interests
+    // and industries
     List<UserInterest> interests;
+    List<UserIndustry> industries;
     try {
      LinkedInProfile linkedInProfile = LinkedInProfile.newBuilder()
           .setUserId(user.getId())
@@ -208,11 +214,16 @@ public class LoginServlet extends StandardServlet {
       Database.upsert(linkedInProfile);
       interests = UserInterests.updateInterests(user.getId(), linkedInProfileDocument,
           getLinkedInResponse(CONNECTIONS_URL, linkedInAccessToken));
+      industries = UserIndustries.updateIndustries(user.getId(), linkedInProfileDocument);
     } catch (ParserException e) {
       System.out.println("Warning: Could not parse linked in profile: " + e.getMessage());
       e.printStackTrace();
       interests = UserInterests.getInterests(user.getId());
+      industries = UserIndustries.getIndustries(user.getId());
     }
+    
+    // Get IndustryCodes so the client has more metadata to show
+    List<IndustryCode> industryCodes = IndustryCodes.getFrom(industries);
 
     // Create the response.
     UserHelper userHelper = new UserHelper(user);
@@ -221,6 +232,7 @@ public class LoginServlet extends StandardServlet {
     userJson.put("ratings", userHelper.getRatingsJsonArray());
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
     userJson.put("interests", Serializer.toJSON(interests));
+    userJson.put("industries", Serializer.toJSON(industryCodes));
     response.put("user", userJson);
     response.put("session", Serializer.toJSON(session));
     return response;

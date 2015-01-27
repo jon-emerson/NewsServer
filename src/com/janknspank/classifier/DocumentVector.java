@@ -88,13 +88,15 @@ public class DocumentVector {
     List<String> paragraphs = new ArrayList<>(article.getParagraphList());
     paragraphs.add(article.getTitle());
     paragraphs.add(article.getDescription());
-    
+    System.out.println("generateFrequencyVector for article " + article.getUrlId());
     Integer tokenFrequency;
     for (String paragraph : paragraphs) {
       // For each word increment the frequencyVector
       for (String token : KeywordFinder.getTokens(paragraph)) {
         token = KeywordUtils.cleanKeyword(token);
-        if (!STOP_WORDS.contains(token)) {
+        if (token != null &&
+            token.length() != 0 &&
+            !STOP_WORDS.contains(token.toLowerCase())) {
           tokenFrequency = vector.get(token);
           if (tokenFrequency == null) {
             vector.put(token, new Integer(0));
@@ -102,6 +104,7 @@ public class DocumentVector {
           else {
             vector.put(token, new Integer(tokenFrequency.intValue() + 1));
           }
+          //System.out.println(" " + token + "(" + token.length() + "): " + vector.get(token));
         }
       }
     }
@@ -132,5 +135,9 @@ public class DocumentVector {
     for (String k : v1.keySet()) norm1 += v1.get(k) * v1.get(k);
     for (String k : v2.keySet()) norm2 += v2.get(k) * v2.get(k);
     return sclar / Math.sqrt(norm1 * norm2);
+  }
+  
+  public String toString() {
+    return "DocumentVector.tfIdfVector: " + tfIdfVector;
   }
 }
