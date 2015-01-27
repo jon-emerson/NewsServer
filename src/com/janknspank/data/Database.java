@@ -95,9 +95,11 @@ public class Database {
         + "." + fieldName + " field");
   }
 
-  protected static <T extends Message> Message getDefaultInstance(Class<T> clazz) {
+  // TODO(jonemerson): Make this package-private someday.
+  @SuppressWarnings("unchecked")
+  public static <T extends Message> T getDefaultInstance(Class<T> clazz) {
     try {
-      return (Message) clazz.getMethod("getDefaultInstance").invoke(null);
+      return (T) clazz.getMethod("getDefaultInstance").invoke(null);
     } catch (IllegalAccessException | IllegalArgumentException
         | InvocationTargetException | NoSuchMethodException | SecurityException e) {
       throw new IllegalStateException("Could not reflect on Message type: " + e.getMessage(), e);

@@ -161,7 +161,7 @@ public class RssCrawler {
   private void saveArticle(String url, Long date) {
     Url existing;
     try {
-      existing = Database.with(Url.class).get(url);
+      existing = Urls.getByUrl(url);
       if (existing == null) {
         Database.insert(Url.newBuilder()
             .setUrl(url)

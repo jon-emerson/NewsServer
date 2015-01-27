@@ -10,7 +10,7 @@ message Article {
   optional string url_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -65,7 +65,7 @@ message ArticleKeyword {
   optional string url_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1,
     (client_serialization) = EXCLUDE
   ];
@@ -106,14 +106,14 @@ message Link {
   optional string origin_url_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
   optional string destination_url_id = 2 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -127,17 +127,17 @@ message Link {
 }
 
 message Url {
-  optional string url = 1 [
+  optional string id = 2 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 767,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
-  optional string id = 2 [
+  optional string url = 1 [
     (required) = YES,
     (storage_method) = UNIQUE_INDEX,
-    (string_length) = 22,
+    (string_length) = 767,
     (string_charset) = LATIN1
   ];
 
@@ -180,7 +180,7 @@ message User {
   optional string id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -219,14 +219,14 @@ message User {
 message Session {
   optional string session_key = 1 [
     (required) = YES,
-    (storage_method) = PRIMARY_KEY,
+    (storage_method) = UNIQUE_INDEX,
     (string_length) = 128
   ];
 
   optional string user_id = 2 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -239,7 +239,7 @@ message LinkedInProfile {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -257,7 +257,7 @@ message LinkedInConnections {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -275,7 +275,7 @@ message AddressBook {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -292,15 +292,15 @@ message AddressBook {
 message UserUrlRating {
   optional string user_id = 1 [
     (required) = YES,
-    (storage_method) = INDEX,
-    (string_length) = 22,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
   optional string url_id = 2 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -317,14 +317,14 @@ message UserUrlFavorite {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
   optional string url_id = 2 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -338,7 +338,7 @@ message UserIndustry {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -356,14 +356,14 @@ message UserInterest {
   optional string id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
   optional string user_id = 2 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -398,7 +398,7 @@ message Entity {
   optional string id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -433,7 +433,7 @@ message Entity {
   // canonical_id equal the Wikipedia Entity's id.
   optional string canonical_id = 5 [
     (storage_method) = PULL_OUT,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -444,7 +444,7 @@ message Entity {
   // Ventures" as high-strengthed topics in his Entity.
   message EntityTopic {
     optional string entity_id = 1 [
-      (string_length) = 22,
+      (string_length) = 24,
     (string_charset) = LATIN1
     ];
 
@@ -483,7 +483,7 @@ message TrainedArticleIndustry {
   optional string url_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -497,17 +497,17 @@ message TrainedArticleIndustry {
   optional string trainer_user_id = 3 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 }
 
+// In-memory object.  Not stored in DB.
 message IndustryCode {
   // The LinkedIn industry code.
   // https://developer.linkedin.com/documents/industry-codes
   optional int32 id = 1 [
-    (required) = YES,
-    (storage_method) = PRIMARY_KEY
+    (required) = YES
   ];
 
   // The LinkedIn industry group.
@@ -527,7 +527,7 @@ message TrainedArticleClassification {
   optional string url_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -546,17 +546,16 @@ message TrainedArticleClassification {
   optional string trainer_user_id = 4 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 }
 
+// In-memory object.  Not stored in DB.
 message ArticleClassification {
   optional string code = 1 [
     (required) = YES,
-    (storage_method) = INDEX,
-    (string_length) = 5,
-    (string_charset) = LATIN1
+    (string_length) = 5
   ];
   
   optional string description = 2 [

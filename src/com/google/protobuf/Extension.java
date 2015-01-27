@@ -31,22 +31,55 @@
 package com.google.protobuf;
 
 /**
- * Thrown by blocking RPC methods when a failure occurs.
+ * Interface that generated extensions implement.
  *
- * @author cpovirk@google.com (Chris Povirk)
+ * @author liujisi@google.com (Jisi Liu)
  */
-public class ServiceException extends Exception {
-  private static final long serialVersionUID = -1219262335729891920L;
+public abstract class Extension<ContainingType extends MessageLite, Type>
+    extends ExtensionLite<ContainingType, Type> {
 
-  public ServiceException(final String message) {
-    super(message);
+  /** Returns the descriptor of the extension. */
+  public abstract Descriptors.FieldDescriptor getDescriptor();
+
+  /** Returns whether or not this extension is a Lite Extension. */
+  final boolean isLite() {
+    return false;
   }
 
-  public ServiceException(final Throwable cause) {
-    super(cause);
+  // All the methods below are extension implementation details.
+
+  /**
+   * The API type that the extension is used for.
+   */
+  protected enum ExtensionType {
+    IMMUTABLE,
+    MUTABLE,
+    PROTO1,
   }
 
-  public ServiceException(final String message, final Throwable cause) {
-    super(message, cause);
+  protected ExtensionType getExtensionType() {
+    // TODO(liujisi): make this abstract after we fix proto1.
+    return ExtensionType.IMMUTABLE;
   }
+
+  /**
+   * Type of a message extension.
+   */
+  public enum MessageType {
+    PROTO1,
+    PROTO2,
+  }
+  
+  /**
+   * If the extension is a message extension (i.e., getLiteType() == MESSAGE),
+   * returns the type of the message, otherwise undefined.
+   */
+  public MessageType getMessageType() {
+    return MessageType.PROTO2;
+  }
+
+  protected abstract Object fromReflectionType(Object value);
+  protected abstract Object singularFromReflectionType(Object value);
+  protected abstract Object toReflectionType(Object value);
+  protected abstract Object singularToReflectionType(Object value);
 }

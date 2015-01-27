@@ -31,22 +31,33 @@
 package com.google.protobuf;
 
 /**
- * Thrown by blocking RPC methods when a failure occurs.
- *
- * @author cpovirk@google.com (Chris Povirk)
+ * Lite interface that generated extensions implement.
+ * <p>
+ * Methods are for use by generated code only. You can hold a reference to
+ * extensions using this type name.
  */
-public class ServiceException extends Exception {
-  private static final long serialVersionUID = -1219262335729891920L;
+public abstract class ExtensionLite<ContainingType extends MessageLite, Type> {
 
-  public ServiceException(final String message) {
-    super(message);
-  }
+  /** Returns the field number of the extension. */
+  public abstract int getNumber();
 
-  public ServiceException(final Throwable cause) {
-    super(cause);
-  }
+  /** Returns the type of the field. */
+  public abstract WireFormat.FieldType getLiteType();
 
-  public ServiceException(final String message, final Throwable cause) {
-    super(message, cause);
+  /** Returns whether it is a repeated field. */
+  public abstract boolean isRepeated();
+
+  /** Returns the default value of the extension field. */
+  public abstract Type getDefaultValue();
+
+  /**
+   * Returns the default instance of the extension field, if it's a message
+   * extension.
+   */
+  public abstract MessageLite getMessageDefaultInstance();
+  
+  /** Returns whether or not this extension is a Lite Extension. */
+  boolean isLite() {
+    return true;
   }
 }
