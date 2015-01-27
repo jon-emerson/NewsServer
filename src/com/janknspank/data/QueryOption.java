@@ -44,6 +44,8 @@ public class QueryOption {
     public String getFieldName() {
       return fieldName;
     }
+
+    public abstract int getFieldCount();
   }
 
   public static class WhereLike extends WhereOption {
@@ -56,6 +58,10 @@ public class QueryOption {
 
     public String getValue() {
       return value;
+    }
+
+    public int getFieldCount() {
+      return 1;
     }
   }
 
@@ -80,6 +86,10 @@ public class QueryOption {
     public Iterable<String> getValues() {
       return values;
     }
+
+    public int getFieldCount() {
+      return Iterables.size(values);
+    }
   }
 
   public final static class WhereNotEquals extends WhereEquals {
@@ -102,18 +112,53 @@ public class QueryOption {
     }
   }
 
+  public static class WhereEqualsNumber extends WhereOption {
+    private final Iterable<Number> values;
+
+    public WhereEqualsNumber(String fieldName, Number value) {
+      this(fieldName, ImmutableList.of(value));
+    }
+
+    public WhereEqualsNumber(String fieldName, Iterable<Number> values) {
+      super(fieldName);
+      this.values = values;
+    }
+
+    public Iterable<Number> getValues() {
+      return values;
+    }
+
+    public int getFieldCount() {
+      return Iterables.size(values);
+    }
+  }
+
+  public final static class WhereNotEqualsNumber extends WhereEqualsNumber {
+    public WhereNotEqualsNumber(String fieldName, Number value) {
+      super(fieldName, value);
+    }
+
+    public WhereNotEqualsNumber(String fieldName, Iterable<Number> values) {
+      super(fieldName, values);
+    }
+  }
+
   public static class WhereNull extends WhereOption {
     public WhereNull(String fieldName) {
       super(fieldName);
     }
+
+    public int getFieldCount() {
+      return 1;
+    }
   }
-  
+
   public static class WhereNotNull extends WhereNull {
     public WhereNotNull(String fieldName) {
       super(fieldName);
     }
   }
-  
+
   static class Sort extends QueryOption {
     private final String fieldName;
 

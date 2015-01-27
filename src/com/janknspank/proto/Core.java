@@ -16275,6 +16275,10 @@ public final class Core {
   }
   /**
    * Protobuf type {@code IndustryCode}
+   *
+   * <pre>
+   * In-memory object.  Not stored in DB.
+   * </pre>
    */
   public static final class IndustryCode extends
       com.google.protobuf.GeneratedMessage
@@ -16642,6 +16646,10 @@ public final class Core {
     }
     /**
      * Protobuf type {@code IndustryCode}
+     *
+     * <pre>
+     * In-memory object.  Not stored in DB.
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -17939,6 +17947,10 @@ public final class Core {
   }
   /**
    * Protobuf type {@code ArticleClassification}
+   *
+   * <pre>
+   * In-memory object.  Not stored in DB.
+   * </pre>
    */
   public static final class ArticleClassification extends
       com.google.protobuf.GeneratedMessage
@@ -18243,6 +18255,10 @@ public final class Core {
     }
     /**
      * Protobuf type {@code ArticleClassification}
+     *
+     * <pre>
+     * In-memory object.  Not stored in DB.
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -18668,7 +18684,7 @@ public final class Core {
       "\n\013create_time\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_" +
       "time\030\010 \001(\003\0221\n\026linked_in_access_token\030\t \001" +
       "(\tB\021\210\246\035\001\220\246\035\005\230\246\035\364\003\240\246\035\003*\004\010\006\020\007\"k\n\007Session\022\"" +
-      "\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022!\n\007us" +
+      "\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\004\230\246\035\200\001\022!\n\007us" +
       "er_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create_" +
       "time\030\003 \001(\003B\004\210\246\035\001\"i\n\017LinkedInProfile\022!\n\007u" +
       "ser_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\004data\030\002" +
@@ -18679,7 +18695,7 @@ public final class Core {
       "dressBook\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create" +
       "_time\030\003 \001(\003B\004\210\246\035\001\"\205\001\n\rUserUrlRating\022!\n\007u" +
-      "ser_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022 \n\006url_id" +
+      "ser_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022 \n\006url_id" +
       "\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\024\n\006rating\030\003 \001(\005" +
       "B\004\210\246\035\001\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"u\n\017Use" +
       "rUrlFavorite\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
@@ -18711,17 +18727,17 @@ public final class Core {
       "rainedArticleIndustry\022 \n\006url_id\030\001 \001(\tB\020\210" +
       "\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(" +
       "\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020\210\246" +
-      "\035\001\220\246\035\003\230\246\035\030\250\246\035\001\"\\\n\014IndustryCode\022\024\n\002id\030\001 \001" +
-      "(\005B\010\210\246\035\001\220\246\035\002\022\027\n\005group\030\002 \001(\tB\010\210\246\035\001\230\246\0352\022\035\n" +
-      "\013description\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\275\001\n\034Trained" +
-      "ArticleClassification\022 \n\006url_id\030\001 \001(\tB\020\210",
-      "\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classificatio" +
-      "n_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checke" +
-      "d\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001" +
-      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\"Z\n\025ArticleClassific" +
-      "ation\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022!\n" +
-      "\013description\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035dB\026\n\024com." +
-      "janknspank.proto"
+      "\035\001\220\246\035\003\230\246\035\030\250\246\035\001\"X\n\014IndustryCode\022\020\n\002id\030\001 \001" +
+      "(\005B\004\210\246\035\001\022\027\n\005group\030\002 \001(\tB\010\210\246\035\001\230\246\0352\022\035\n\013des" +
+      "cription\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\275\001\n\034TrainedArti" +
+      "cleClassification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220",
+      "\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classification_co" +
+      "de\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 " +
+      "\001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020" +
+      "\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\"R\n\025ArticleClassificatio" +
+      "n\022\026\n\004code\030\001 \001(\tB\010\210\246\035\001\230\246\035\005\022!\n\013description" +
+      "\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035dB\026\n\024com.janknspank.p" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19025,7 +19041,6 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
@@ -19045,9 +19060,7 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);

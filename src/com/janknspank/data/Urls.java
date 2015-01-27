@@ -166,7 +166,7 @@ public class Urls {
   public static Url getNextUrlToCrawl() throws DataInternalException {
     return Database.with(Url.class).getFirst(
         new QueryOption.WhereNull("last_crawl_start_time"),
-        new QueryOption.WhereNotEquals("crawl_priority", "0"),
+        new QueryOption.WhereNotEqualsNumber("crawl_priority", 0),
         new QueryOption.WhereNotLike("url", "https://twitter.com/%"),
         new QueryOption.DescendingSort("crawl_priority"));
   }

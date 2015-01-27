@@ -159,7 +159,8 @@ public class Sessions {
     String userId = decrypt(sessionKey);
 
     // Make sure the session key is in the database.
-    Session session = Database.with(Session.class).get(sessionKey);
+    Session session = Database.with(Session.class)
+        .getFirst(new QueryOption.WhereEquals("session_key", sessionKey));
     if (session == null) {
       throw new DataRequestException("Session not found in database.");
     }

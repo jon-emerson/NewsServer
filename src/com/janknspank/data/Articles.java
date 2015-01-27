@@ -1,12 +1,5 @@
 package com.janknspank.data;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.PriorityQueue;
 import java.util.Set;
 
 import com.google.common.base.Function;
@@ -14,6 +7,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.janknspank.common.TopList;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.neuralnet.CompleteUser;
 import com.janknspank.neuralnet.NeuralNetworkDriver;
@@ -81,35 +75,19 @@ public class Articles {
     }
     return getArticles(articleIds);
   }
-  
+
   public static Iterable<Article> getArticlesRankedByNeuralNetwork(String userId)
       throws DataInternalException, ParserException {
     NeuralNetworkDriver neuralNetworkDriver = NeuralNetworkDriver.getInstance();
     CompleteUser completeUser = new CompleteUser(userId);
-    // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
-    Iterable<Article> articles = getArticlesByInterest(UserInterests.getInterests(userId));
-    Map<Article, Double> ranks = new HashMap<>();
-    
-    // Sort the articles by rank
-    for (Article article : articles) {
-      ranks.put(article, neuralNetworkDriver.getRank(article, completeUser));
-    }
-    
-    PriorityQueue<Entry<Article, Double>> pq = new PriorityQueue<Map.Entry<Article,Double>>(
-        ranks.size(), new Comparator<Entry<Article, Double>>() {
 
-      @Override
-      public int compare(Entry<Article, Double> arg0, Entry<Article, Double> arg1) {
-        return arg0.getValue().compareTo(arg1.getValue()) * -1;
-      }
-    });
-    pq.addAll(ranks.entrySet());
-    
-    List<Article> sortedArticles = new ArrayList<Article>();
-    while (!pq.isEmpty()) {
-      sortedArticles.add(pq.poll().getKey());
+    // Sort the articles by rank
+    Iterable<Article> articles = getArticlesByInterest(UserInterests.getInterests(userId));
+    TopList<Article, Double> topArticles = new TopList<Article, Double>(Iterables.size(articles));
+    for (Article article : articles) {
+      topArticles.add(article, neuralNetworkDriver.getRank(article, completeUser));
     }
-    return sortedArticles;
+    return topArticles;
   }
 
   /**

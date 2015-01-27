@@ -35,7 +35,7 @@ public class Database {
                       clazz.equals(LongAbstract.class)) {
                     return new LocalSqlCollection(clazz);
                   } else {
-                    return new SqlCollection(clazz);
+                    return new MongoCollection(clazz);
                   }
                 }
               });
@@ -127,6 +127,9 @@ public class Database {
   public static <T extends Message> int update(
       Iterable<T> messages, QueryOption.WhereOption... whereOptions)
       throws ValidationException, DataInternalException {
+    if (Iterables.isEmpty(messages)) {
+      return 0;
+    }
     @SuppressWarnings("unchecked")
     Collection<T> collection =
         (Collection<T>) with(Iterables.getFirst(messages, null).getClass());
@@ -146,6 +149,9 @@ public class Database {
    */
   public static <T extends Message> int insert(Iterable<T> messages)
       throws ValidationException, DataInternalException {
+    if (Iterables.isEmpty(messages)) {
+      return 0;
+    }
     @SuppressWarnings("unchecked")
     Collection<T> collection =
         (Collection<T>) with(Iterables.getFirst(messages, null).getClass());

@@ -51,16 +51,16 @@ public class Mongoizer {
     for (FieldDescriptor fieldDescriptor : defaultInstance.getDescriptorForType().getFields()) {
       String fieldName = fieldDescriptor.getName();
       JavaType javaType = fieldDescriptor.getJavaType();
-      
+
       // Handle primary keys a little differently - they're stored in "_id".
       StorageMethod storageMethod =
           fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
       if (storageMethod == StorageMethod.PRIMARY_KEY) {
         Asserts.assertTrue(javaType == JavaType.STRING, "Primary key must be a string");
         messageBuilder.setField(fieldDescriptor, object.getObjectId("_id").toHexString());
-        continue;        
+        continue;
       }
-      
+
       // Enforce required fields.
       if (!object.containsField(fieldName)) {
         Required required = fieldDescriptor.getOptions().getExtension(Extensions.required);
@@ -158,6 +158,12 @@ public class Mongoizer {
   public static BasicDBObject toDBObject(Message message) throws ValidationException {
     BasicDBObject object = new BasicDBObject();
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
+      StorageMethod storageMethod =
+          fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
+      if (storageMethod == StorageMethod.DO_NOT_STORE) {
+        continue;
+      }
+
       String fieldName = fieldDescriptor.getName();
       JavaType javaType = fieldDescriptor.getJavaType();
       if (fieldDescriptor.isRepeated() &&
@@ -189,8 +195,6 @@ public class Mongoizer {
         object.put(fieldName, list);
 
       } else if (message.hasField(fieldDescriptor)) {
-        StorageMethod storageMethod =
-            fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
         if (storageMethod == StorageMethod.PRIMARY_KEY) {
           Asserts.assertTrue(javaType == JavaType.STRING, "Primary key must be a string");
           object.put("_id", new ObjectId(((String) message.getField(fieldDescriptor))));

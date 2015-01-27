@@ -34,7 +34,7 @@ public class MongoizerTest {
           // Skip context.
           .build())
       .build();
-      
+
   @Test
   public void test() throws Exception {
     BasicDBObject dbObject = Mongoizer.toDBObject(ENTITY);
@@ -42,10 +42,10 @@ public class MongoizerTest {
     assertEquals(ENTITY.getSource(), Source.valueOf(dbObject.getString("source")));
     assertEquals(ENTITY.getKeyword(), dbObject.getString("keyword"));
     assertEquals(ENTITY.getType(), dbObject.getString("type"));
-    
+
     BasicBSONList topicList = ((BasicBSONList) dbObject.get("topic"));
     assertEquals(ENTITY.getTopicCount(), topicList.size());
-    
+
     BasicDBObject dbTopic1 = (BasicDBObject) topicList.get(0);
     assertEquals(ENTITY.getTopic(0).getEntityId(), dbTopic1.getString("entity_id"));
     assertEquals(ENTITY.getTopic(0).getKeyword(), dbTopic1.getString("keyword"));
@@ -59,7 +59,7 @@ public class MongoizerTest {
     assertEquals(ENTITY.getTopic(1).getStrength(), dbTopic2.getInt("strength"));
     assertFalse(dbTopic2.containsField("type"));
     assertFalse(dbTopic2.containsField("context"));
-    
+
     Entity translatedEntity = Mongoizer.fromDBObject(dbObject, Entity.class);
     assertEquals(ENTITY.getId(), translatedEntity.getId());
     assertEquals(ENTITY.getSource(), translatedEntity.getSource());

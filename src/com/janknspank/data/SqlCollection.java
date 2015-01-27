@@ -19,8 +19,11 @@ import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
+import com.janknspank.data.QueryOption.WhereEquals;
 import com.janknspank.data.QueryOption.WhereEqualsIgnoreCase;
+import com.janknspank.data.QueryOption.WhereEqualsNumber;
 import com.janknspank.data.QueryOption.WhereNotEquals;
+import com.janknspank.data.QueryOption.WhereNotEqualsNumber;
 import com.janknspank.data.QueryOption.WhereNotLike;
 import com.janknspank.data.QueryOption.WhereNotNull;
 import com.janknspank.proto.Extensions;
@@ -360,8 +363,8 @@ public class SqlCollection<T extends Message> extends Collection<T> {
             Database.getPrimaryKey(message));
         prepareInsertOrUpdateStatement(statement, message);
         int i = 0;
-        for (String whereValue : getWhereValues(whereOptions)) {
-          statement.setString(columnCount + (i++), whereValue);
+        for (Object whereValue : getWhereValues(whereOptions)) {
+          setObject(statement, columnCount + (i++), whereValue);
         }
         statement.addBatch();
       }
@@ -377,6 +380,27 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     }
   }
 
+  /**
+   * Convenience method for setting a string/long/double/int etc. at a
+   * particular index in a Prepared Statement.
+   */
+  private void setObject(PreparedStatement statement, int parameterIndex, Object whereValue)
+      throws SQLException {
+    if (whereValue instanceof String) {
+      statement.setString(parameterIndex, (String) whereValue);
+    } else if (whereValue instanceof Long) {
+      statement.setLong(parameterIndex, (Long) whereValue);
+    } else if (whereValue instanceof Double) {
+      statement.setDouble(parameterIndex, (Double) whereValue);
+    } else if (whereValue instanceof Integer) {
+      statement.setInt(parameterIndex, (Integer) whereValue);
+    } else {
+      // Go ahead and add more type support above if you need to.
+      throw new IllegalStateException(
+          "Unsupported Number type: " + whereValue.getClass().getSimpleName());
+    }
+  }
+  
   private String getLimitSql(QueryOption[] options) {
     List<QueryOption.Limit> queryOptionList = QueryOption.getList(options, QueryOption.Limit.class);
     if (queryOptionList.size() > 1) {
@@ -397,16 +421,20 @@ public class SqlCollection<T extends Message> extends Collection<T> {
 
   private String getWhereClauseSql(QueryOption[] options) {
     StringBuilder sql = new StringBuilder();
-    for (QueryOption.WhereEquals whereEquals :
-        QueryOption.getList(options, QueryOption.WhereEquals.class)) {
-      int size = Iterables.size(whereEquals.getValues());
-      if (size == 0) {
-        if (whereEquals instanceof WhereNotEquals) {
-          // OK, don't write anything - Everything doesn't equal nothing.
-          continue;
-        }
+    for (QueryOption.WhereOption whereEquals :
+        Iterables.concat(
+            QueryOption.getList(options, QueryOption.WhereEquals.class),
+            QueryOption.getList(options, QueryOption.WhereEqualsNumber.class))) {
+      int size = whereEquals.getFieldCount();
+      if (size == 0 &&
+          (whereEquals instanceof WhereEquals || whereEquals instanceof WhereEqualsNumber)) {
         throw new IllegalStateException("Where clause contains no values - "
             + "This should have been caught earlier.");
+      }
+      if (size == 0 &&
+          (whereEquals instanceof WhereNotEquals || whereEquals instanceof WhereNotEqualsNumber)) {
+        // OK, don't write anything - Everything doesn't equal nothing.
+        continue;
       }
       if (whereEquals instanceof WhereEqualsIgnoreCase) {
         sql.append(sql.length() == 0 ? " WHERE " : " AND ")
@@ -441,16 +469,23 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     return sql.toString();
   }
 
-  private Iterable<String> getWhereValues(QueryOption[] options) {
-    List<String> values = Lists.newArrayList();
-    for (QueryOption.WhereEquals whereEquals :
-        QueryOption.getList(options, QueryOption.WhereEquals.class)) {
+  private Iterable<Object> getWhereValues(QueryOption[] options) {
+    List<Object> values = Lists.newArrayList();
+    for (QueryOption.WhereOption whereEquals :
+        Iterables.concat(
+            QueryOption.getList(options, QueryOption.WhereEquals.class),
+            QueryOption.getList(options, QueryOption.WhereEqualsNumber.class))) {
       if (whereEquals instanceof WhereEqualsIgnoreCase) {
-        for (String value : whereEquals.getValues()) {
+        for (String value : ((WhereEqualsIgnoreCase) whereEquals).getValues()) {
           values.add(value.toLowerCase());
         }
+      } else if (whereEquals instanceof WhereEquals) {
+        Iterables.addAll(values, ((WhereEquals) whereEquals).getValues());
+      } else if (whereEquals instanceof WhereEqualsNumber) {
+        Iterables.addAll(values, ((WhereEqualsNumber) whereEquals).getValues());
       } else {
-        Iterables.addAll(values, whereEquals.getValues());
+        throw new IllegalStateException(
+            "Unknown WhereOption: " + whereEquals.getClass().getSimpleName());
       }
     }
     for (QueryOption.WhereLike whereLike :
@@ -492,8 +527,8 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     try {
       statement = getConnection().prepareStatement(sql.toString());
       int i = 0;
-      for (String key : getWhereValues(options)) {
-        statement.setString(++i, key);
+      for (Object whereValue : getWhereValues(options)) {
+        setObject(statement, ++i, whereValue);
       }
       return createListFromResultSet(statement.executeQuery());
     } catch (MySQLSyntaxErrorException e) {
@@ -522,13 +557,13 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     sql.append(getWhereClauseSql(options));
     sql.append(getOrderBySql(options));
     sql.append(getLimitSql(options));
-    
+
     PreparedStatement statement = null;
     try {
       statement = getConnection().prepareStatement(sql.toString());
       int i = 0;
-      for (String key : getWhereValues(options)) {
-        statement.setString(++i, key);
+      for (Object whereValue : getWhereValues(options)) {
+        setObject(statement, ++i, whereValue);
       }
       return statement.executeUpdate();
     } catch (SQLException e) {
