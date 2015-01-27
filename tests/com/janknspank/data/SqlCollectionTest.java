@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -58,6 +59,17 @@ public class SqlCollectionTest {
     List<String> arguments = argumentCaptor.getAllValues();
     assertEquals(1, arguments.size());
     assertEquals("cou", arguments.get(0));
+  }
+
+  @Test
+  public void testGetIgnoreCase() throws Exception {
+    collection.get(new QueryOption.WhereEqualsIgnoreCase("keyword", "Google"));
+    assertEquals("SELECT * FROM Article WHERE LOWER(keyword) IN (?)", statementCaptor.getValue());
+    ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+    verify(preparedStatement, times(1)).setString(any(Integer.class), argumentCaptor.capture());
+    List<String> arguments = argumentCaptor.getAllValues();
+    assertEquals(1, arguments.size());
+    assertEquals("google", arguments.get(0));
   }
 
   @Test

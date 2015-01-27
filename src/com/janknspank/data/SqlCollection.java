@@ -19,6 +19,7 @@ import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
+import com.janknspank.data.QueryOption.WhereEqualsIgnoreCase;
 import com.janknspank.data.QueryOption.WhereNotEquals;
 import com.janknspank.data.QueryOption.WhereNotLike;
 import com.janknspank.data.QueryOption.WhereNotNull;
@@ -407,12 +408,20 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         throw new IllegalStateException("Where clause contains no values - "
             + "This should have been caught earlier.");
       }
-      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
-          .append(whereEquals.getFieldName())
-          .append(whereEquals instanceof WhereNotEquals ? " NOT" : "")
-          .append(" IN (")
-          .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), size)))
-          .append(")");
+      if (whereEquals instanceof WhereEqualsIgnoreCase) {
+        sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+            .append("LOWER(").append(whereEquals.getFieldName()).append(")")
+            .append(" IN (")
+            .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), size)))
+            .append(")");
+      } else {
+        sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+            .append(whereEquals.getFieldName())
+            .append(whereEquals instanceof WhereNotEquals ? " NOT" : "")
+            .append(" IN (")
+            .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), size)))
+            .append(")");
+      }
     }
     for (QueryOption.WhereLike whereLike :
         QueryOption.getList(options, QueryOption.WhereLike.class)) {
@@ -433,16 +442,22 @@ public class SqlCollection<T extends Message> extends Collection<T> {
   }
 
   private Iterable<String> getWhereValues(QueryOption[] options) {
-    List<Iterable<String>> iterableList = Lists.newArrayList();
+    List<String> values = Lists.newArrayList();
     for (QueryOption.WhereEquals whereEquals :
         QueryOption.getList(options, QueryOption.WhereEquals.class)) {
-      iterableList.add(whereEquals.getValues());
+      if (whereEquals instanceof WhereEqualsIgnoreCase) {
+        for (String value : whereEquals.getValues()) {
+          values.add(value.toLowerCase());
+        }
+      } else {
+        Iterables.addAll(values, whereEquals.getValues());
+      }
     }
     for (QueryOption.WhereLike whereLike :
       QueryOption.getList(options, QueryOption.WhereLike.class)) {
-      iterableList.add(ImmutableList.of(whereLike.getValue()));
+      values.add(whereLike.getValue());
     }
-    return Iterables.concat(iterableList);
+    return values;
   }
 
   private String getOrderBySql(QueryOption[] options) {
