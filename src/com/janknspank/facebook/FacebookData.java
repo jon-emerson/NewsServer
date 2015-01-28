@@ -1,7 +1,6 @@
 package com.janknspank.facebook;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -63,23 +62,12 @@ public class FacebookData {
       
       return engagement;
     } catch (FacebookOAuthException e) {
-      // Handle case where the accessToken expires during a long running
-      // request (like a neural network train, or vector space model initializer)
-      System.out.println("Handle FacebookOAuthException for url: " + url);
-      if (e.getErrorCode() == 104) {
-        System.out.println("Don't have permissions for the url: " + url);
-        System.out.println("Skipping getting the FB shares for it...");
-        return null;
-      }
-      else {
-        e.printStackTrace();
-        return null;
-        //generateFacebookClient();
-      }
-    } catch (JsonException e) {
-      System.out.println("JsonException error getting engagement for url: " + url);
+      //Skip it.
       e.printStackTrace();
-      // Assuming there is no enggagment if the share object is missing
+      return null;
+    } catch (JsonException e) {
+      e.printStackTrace();
+      // There is no engagement if the share object is missing
       ArticleFacebookEngagement engagement = ArticleFacebookEngagement.newBuilder()
           .setUrl(url)
           .setLikeCount(0)
@@ -92,14 +80,10 @@ public class FacebookData {
   }
   
   private static void generateFacebookClient() {
-    Properties properties;
     try {
-      properties = getFacebookProperties();
+      Properties properties = getFacebookProperties();
       String appSecret = properties.getProperty("appSecret");
       String appId = properties.getProperty("appId");
-//      AccessToken accessToken =
-//          new DefaultFacebookClient().obtainAppAccessToken(appId, appSecret);
-//      System.out.println("accessToken: " + accessToken.getAccessToken());
       facebookClient = new DefaultFacebookClient(appId + "|" + appSecret, appSecret, Version.VERSION_2_2);
     } catch (IOException e) {
       e.printStackTrace();
@@ -109,15 +93,8 @@ public class FacebookData {
   private static Properties getFacebookProperties() throws IOException {
     Properties properties = new Properties();
     String propFileName = "facebook.properties";
-     
     InputStream inputStream = new FileInputStream(propFileName);
-     
-    if (inputStream != null) {
-      properties.load(inputStream);
-    } else {
-      throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
-    }
-    
+    properties.load(inputStream);
     return properties;
   }
 }

@@ -29,10 +29,8 @@ public class IndustryVector {
       tfIdfVector = loadVector(industryCode);
       return;
     } catch (ClassNotFoundException | IOException e) {
-      System.out.println("Could not load IndustryVector from file - code: " + 
-          industryCode.getId());
-      System.out.println("Going to generate it from scratch");
-      //e.printStackTrace();
+      // Couldn't load IndustryVector from file
+      // Try to generate it from scratch
       tfIdfVector = generateVectorForIndustryCode(industryCode);
       save(tfIdfVector, industryCode);
     }
@@ -40,14 +38,11 @@ public class IndustryVector {
   
   private static Map<String, Double> generateVectorForIndustryCode(IndustryCode industryCode) 
       throws DataInternalException, IOException {
-    System.out.println("generateVectorForIndustryCode: " + industryCode.getDescription());
     // 1. Get seed words for industryCode.id
     List<String> words = getSeedWords(industryCode);
-    System.out.println("seed words: " + words);
     
     // 2. Get all documents that contain the seed word
     List<Article> articles = Articles.getArticlesForKeywords(words);
-    System.out.println(articles.size() + " representative articles");
     
     // 3. Convert them into the industry vector
     List<DocumentVector> documentVectors = new ArrayList<>(); 
@@ -60,17 +55,15 @@ public class IndustryVector {
   
   private static Map<String, Integer> sumVectors(List<DocumentVector> documentVectors) {
     HashMap<String, Integer> sum = new HashMap<>();
-    Integer newSum;
-    Integer tf;
     
     for (DocumentVector document : documentVectors) {
       for (Map.Entry<String, Integer> wordFrequency : document.getFrequencyVector().entrySet()) {
         // Get frequency of the word in the document
         String word = wordFrequency.getKey();
-        tf = wordFrequency.getValue();
+        Integer tf = wordFrequency.getValue();
         
         // Add that to the total frequency of the word in the collection
-        newSum = sum.get(word);
+        Integer newSum = sum.get(word);
         if (newSum != null) {
           sum.put(word, newSum.intValue() + tf.intValue());
         }
@@ -87,9 +80,7 @@ public class IndustryVector {
   private static Map<String, Double> loadVector(IndustryCode industryCode)
       throws IOException, ClassNotFoundException {
     String fileName = getFileNameForIndustry(industryCode);
-    System.out.println("loadVector for " + fileName);
-    FileInputStream fis = new FileInputStream(
-        fileName);
+    FileInputStream fis = new FileInputStream(fileName);
     ObjectInputStream ois = new ObjectInputStream(fis);
     Map<String, Double> map = (Map<String, Double>) ois.readObject();
     ois.close();
@@ -121,8 +112,7 @@ public class IndustryVector {
   }
   
   static String readFile(String path, Charset encoding) 
-      throws IOException 
-  {
+      throws IOException {
     byte[] encoded = Files.readAllBytes(Paths.get(path));
     return new String(encoded, encoding);
   }

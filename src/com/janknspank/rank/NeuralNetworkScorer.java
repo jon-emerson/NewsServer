@@ -9,7 +9,7 @@ import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.ArticleFacebookEngagement;
 
 public final class NeuralNetworkScorer implements Scorer {
-  static final int INPUT_NODES_COUNT = 8;
+  static final int INPUT_NODES_COUNT = 9;
   static final int OUTPUT_NODES_COUNT = 1;
   static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/default_mlp_" + 
@@ -80,7 +80,7 @@ public final class NeuralNetworkScorer implements Scorer {
       
       // TODO: inputs with article classifications like "data-rich"
       
-      // ...
+      // More inputs...
     };
   }
   
@@ -97,7 +97,8 @@ public final class NeuralNetworkScorer implements Scorer {
     }
   }
   
-  private static double getScore(CompleteUser completeUser, CompleteArticle completeArticle, NeuralNetwork neuralNetwork) 
+  private static double getScore(CompleteUser completeUser, 
+      CompleteArticle completeArticle, NeuralNetwork neuralNetwork) 
       throws DataInternalException, IOException, ValidationException {
     long startMillis = System.currentTimeMillis();
     neuralNetwork.setInput(generateInputNodes(completeUser, completeArticle));
@@ -106,7 +107,8 @@ public final class NeuralNetworkScorer implements Scorer {
     long calculateMillis = System.currentTimeMillis();
     
     double totalTimeToRankArticle = (double)(calculateMillis - startMillis) / 1000;
-    double timeToGenerateInputNodes = (double)(generateInputNodesMillis - totalTimeToRankArticle) / 1000;
+    double timeToGenerateInputNodes = (double)(generateInputNodesMillis 
+        - totalTimeToRankArticle) / 1000;
     double timeToCalculate = (double)(calculateMillis - generateInputNodesMillis) / 1000;
     
     System.out.println("Ranked " + completeArticle.getArticle().getUrl());

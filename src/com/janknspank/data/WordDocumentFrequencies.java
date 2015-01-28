@@ -32,7 +32,6 @@ public class WordDocumentFrequencies {
   private static final String PROPERTY_FILE_NAME = "classifier/vectorspace.properties";
   
   private WordDocumentFrequencies() throws DataInternalException, IOException {
-    System.out.println("WordDocumentFrequencies constructor");
     documentFrequency = loadPreviouslyComputedDocumentFrequencies();
     if (documentFrequency == null) {
       documentFrequency = generateDocumentFrequenciesFromCorpus();
@@ -47,7 +46,6 @@ public class WordDocumentFrequencies {
     }
     return instance;
   }
-  
   
   // Expensive - only do infrequently as the corpus grows
   private static Map<String, Integer> generateDocumentFrequenciesFromCorpus() 
@@ -79,7 +77,6 @@ public class WordDocumentFrequencies {
       offset += limit;
       N += articles.size();
     } while (articles.size() == limit);
-    //} while (offset <= 10000);
     saveNLocally(N);
     return wordDocumentFrequency;
   }
@@ -87,12 +84,10 @@ public class WordDocumentFrequencies {
   private static void saveDocumentFrequenciesToServer(Map<String, Integer> frequencies) 
       throws DataInternalException {
     List<WordDocumentFrequency> pageToSave = new ArrayList<>();
-    String word;
-    Integer value;
     
     for (Map.Entry<String, Integer> frequency : frequencies.entrySet()) {
-      word = frequency.getKey();
-      value = frequency.getValue();
+      String word = frequency.getKey();
+      Integer value = frequency.getValue();
       if (word.length() > 0) {
         pageToSave.add(WordDocumentFrequency.newBuilder()
             .setWord(word)
@@ -100,12 +95,10 @@ public class WordDocumentFrequencies {
             .build());
         if (pageToSave.size() >= 10) {
           try {
-            System.out.println("Saving page of WordDocumentFrequencies");
             Database.insert(pageToSave);
           } catch (ValidationException | DataInternalException e) {
-            System.out.println("Error saving page of document frequencies to the server");
+            System.out.println("Error saving page of document frequencies to the server, but keep going");
             e.printStackTrace();
-            //throw new DataInternalException("Error creating document frequency ", e);
           }
           pageToSave.clear();
         }
@@ -123,13 +116,11 @@ public class WordDocumentFrequencies {
   
   private Map<String, Integer> loadPreviouslyComputedDocumentFrequencies() 
       throws DataInternalException {
-    System.out.println("loadPreviouslyComputedDocumentFrequencies");
     Map<String, Integer> frequencyMap = new HashMap<>();
     List<WordDocumentFrequency> wdfs = Database.with(WordDocumentFrequency.class).get();
     for (WordDocumentFrequency wdf : wdfs) {
       frequencyMap.put(wdf.getWord(), (int) wdf.getFrequency());
     }
-    
     return frequencyMap;
   }
   
@@ -140,7 +131,6 @@ public class WordDocumentFrequencies {
     } catch (NullPointerException e) {
       frequency = 0;
     }
-//    System.out.println("WDF.getFrequency for " + word + ": " + frequency);
     return frequency;
   }
   
@@ -156,13 +146,7 @@ public class WordDocumentFrequencies {
   private static Properties getVectorSpaceProperties() throws IOException {
     Properties properties = new Properties();
     InputStream inputStream = new FileInputStream(PROPERTY_FILE_NAME);
-     
-    if (inputStream != null) {
-      properties.load(inputStream);
-    } else {
-      throw new FileNotFoundException("property file '" + PROPERTY_FILE_NAME + "' not found in the classpath");
-    }
-    
+    properties.load(inputStream);
     return properties;
   }
   

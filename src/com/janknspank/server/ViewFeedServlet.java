@@ -20,7 +20,6 @@ import com.janknspank.proto.Core.ArticleFacebookEngagement;
 import com.janknspank.proto.Core.User;
 import com.janknspank.rank.CompleteArticle;
 import com.janknspank.rank.HeuristicScorer;
-import com.janknspank.rank.NeuralNetworkScorer;
 
 public class ViewFeedServlet extends StandardServlet {
   /**
@@ -77,7 +76,6 @@ public class ViewFeedServlet extends StandardServlet {
                 }));
       }
       catch (ParserException | IOException e) {
-        System.out.println("Error: could not load ranked articles: " + e.getMessage());
         return null;
       }
     }

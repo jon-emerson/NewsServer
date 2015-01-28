@@ -5,6 +5,12 @@ import java.util.List;
 import com.janknspank.proto.Core.UserIndustry;
 import com.janknspank.proto.Core.UserInterest;
 
+/**
+ * Helper class to generate input node values
+ * for the Scorer.
+ * @author tomch
+ *
+ */
 public class InputValuesGenerator {
   public static int isAboutCurrentEmployer(CompleteUser user, CompleteArticle article) {
     String currentEmployer = user.getCurrentWorkplace();

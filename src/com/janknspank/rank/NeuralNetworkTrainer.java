@@ -32,33 +32,26 @@ public class NeuralNetworkTrainer {
       throws DataInternalException, ParserException, 
       IOException, ValidationException {
     List<UserUrlRating> allRatings = UserUrlRatings.getAll();
-    CompleteUser user;
-    CompleteArticle article;
     Map<String, CompleteUser> userCache = new HashMap<String, CompleteUser>();
     
     // create training set
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT, 
         NeuralNetworkScorer.OUTPUT_NODES_COUNT); 
-    DataSetRow row;
-    double[] input;
-    double[] output;
-    String userId;
     
+    CompleteUser user;
     for (UserUrlRating rating : allRatings) {
-      userId = rating.getUserId();
+      String userId = rating.getUserId();
       if (userCache.containsKey(userId)) {
         user = userCache.get(userId);
       } else {
         user = new CompleteUser(rating.getUserId());
         userCache.put(userId, user);
       }
-      article = new CompleteArticle(rating.getUrlId());
-      input = NeuralNetworkScorer.generateInputNodes(user, article);
-      System.out.println("data set row input.length: " + input.length);
-      
-      output = new double[]{(double)rating.getRating() / 100};
-      row = new DataSetRow(input, output);
+      CompleteArticle article = new CompleteArticle(rating.getUrlId());
+      double[] input = NeuralNetworkScorer.generateInputNodes(user, article);
+      double[] output = new double[]{(double)rating.getRating() / 100};
+      DataSetRow row = new DataSetRow(input, output);
       trainingSet.addRow(row);
     }
     
@@ -67,7 +60,6 @@ public class NeuralNetworkTrainer {
   
   /** Helper method for triggering a train. */
   public static void main(String args[]) throws Exception {
-    System.out.println(new File(".").getAbsolutePath());
     NeuralNetwork neuralNetwork = generateTrainedNetwork(generateTrainingDataSet());
     neuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
   }

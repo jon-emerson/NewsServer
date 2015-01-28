@@ -33,11 +33,8 @@ public class CompleteArticle {
   private Article article;
   private List<ArticleKeyword> keywords;
   private List<ArticleIndustryClassification> industryClassifications;
-  //private List<TrainedArticleIndustry> industries;
   private List<TrainedArticleClassification> trainedContentClassifications;
   private List<ArticleFacebookEngagement> facebookEngagements;
-  private double likeVelocity;
-  private double shareVelocity;
   private static final int MILLIS_PER_DAY = 86400000;
   
   public CompleteArticle(String urlId) 
@@ -58,7 +55,6 @@ public class CompleteArticle {
     String url = article.getUrl();
     keywords = ArticleKeywords.get(ImmutableList.of(article));
     industryClassifications = IndustryClassifier.getInstance().classify(article);
-    //industries = TrainedArticleIndustries.getFromArticle(urlId);
     trainedContentClassifications = TrainedArticleClassifications.getFromArticle(urlId);
     facebookEngagements = ArticleFacebookEngagements.getLatest(url, 2);
   }
@@ -77,9 +73,8 @@ public class CompleteArticle {
     }
   }
   
-  //Likes / day
+  // returns Likes / day
   public double getLikeVelocity() {
-    System.out.println("TODO: finish CompleteArticle.getLikeVelocity()");
     if (facebookEngagements == null || facebookEngagements.isEmpty()) {
       return 0;
     }
@@ -101,7 +96,7 @@ public class CompleteArticle {
     }
   }
   
-  // TODO: getShareVelocity() - more complete with data than likes
+  // TODO: getShareVelocity()
   
   public Article getArticle() {
     return article;

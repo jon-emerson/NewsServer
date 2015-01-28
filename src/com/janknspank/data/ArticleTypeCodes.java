@@ -64,5 +64,4 @@ public class ArticleTypeCodes {
           return ArticleTypeCode.getCode();
         }
       });
-  
 }

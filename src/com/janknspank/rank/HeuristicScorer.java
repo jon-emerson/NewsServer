@@ -26,6 +26,7 @@ public class HeuristicScorer implements Scorer {
       commentCount = engagement.getCommentCount();
       shareCount = engagement.getShareCount();
     }
+    long engagementCount = likeCount + commentCount + shareCount;
     
     double score = 0;
     
@@ -43,9 +44,9 @@ public class HeuristicScorer implements Scorer {
       score += 0.1;
     }
     
-    // Like count up to 0.3
-    if (likeCount > 0) {
-      score += Math.min(Math.log(likeCount) / 10, 0.3); 
+    // FB engagement count up to 0.3
+    if (engagementCount > 0) {
+      score += Math.min(Math.log(engagementCount) / 10, 0.3); 
     }
     
     // Industry relevance

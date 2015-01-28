@@ -42,32 +42,21 @@ public class DocumentVector {
   public DocumentVector(Article article) throws DataInternalException {
     frequencyVector = generateFrequencyVector(article);
     // Note: tfIDFVector is lazy loaded to prevent a circular
-    // dependency on WodDocumentFrequencies being generated
+    // dependency on WodDocumentFrequencies
   }
   
   static Map<String, Double> generateTFIDFVectorFromTF(Map<String, Integer> tfVector) 
       throws DataInternalException, IOException {
-    System.out.println("generateTFIDFVectorFromTF");
     Map<String, Double> tfIdfVector = new HashMap<>();
-    int tf;
-    int df;
-    double idf;
-    double tfidf;
-    
     WordDocumentFrequencies dfs = WordDocumentFrequencies.getInstance();
     int N = dfs.getN();
     
     for (Map.Entry<String, Integer> wordFrequency : tfVector.entrySet()) {
       String word = wordFrequency.getKey();
-      tf = wordFrequency.getValue().intValue();
-      df = dfs.getFrequency(word);
-      if (df < tf) {
-        System.out.println("HUGE ERROR: TF for word (" + tf + 
-            ") is greater than DF (" + df + ")");
-        df = tf * 10; // Make the word less important in the vector, since some computation is broken
-      }
-      idf = Math.log(N / df);
-      tfidf = tf * idf;
+      int tf = wordFrequency.getValue().intValue();
+      int df = dfs.getFrequency(word);
+      double idf = Math.log(N / df);
+      double tfidf = tf * idf;
       tfIdfVector.put(word, tfidf);
     }
     
@@ -91,40 +80,32 @@ public class DocumentVector {
   
   private static Map<String, Integer> generateFrequencyVector(Article article) {
     Map<String, Integer> vector = new HashMap<>();
+    
     // Get all words
     List<String> paragraphs = new ArrayList<>(article.getParagraphList());
     paragraphs.add(article.getTitle());
     paragraphs.add(article.getDescription());
-    System.out.println("generateFrequencyVector for article " + article.getUrlId());
-    Integer tokenFrequency;
-    String[] tokens;
+    
     for (String paragraph : paragraphs) {
       // For each word increment the frequencyVector
-      tokens = KeywordFinder.getTokens(paragraph);
+      String[] tokens = KeywordFinder.getTokens(paragraph);
       if (tokens != null) {
         for (String token : tokens) {
           token = KeywordUtils.cleanKeyword(token);
           if (token != null &&
               token.length() != 0 &&
               !STOP_WORDS.contains(token.toLowerCase())) {
-            tokenFrequency = vector.get(token);
+            Integer tokenFrequency = vector.get(token);
             if (tokenFrequency == null) {
               vector.put(token, new Integer(1));
             }
             else {
               vector.put(token, new Integer(tokenFrequency.intValue() + 1));
             }
-            //System.out.println(" " + token + "(" + token.length() + "): " + vector.get(token));
           }
         }
       }
-      else {
-        System.out.println("KeywordFinder.getTokens returned null for paragraph: " + paragraph
-            + " in article: " + article.getUrl());
-      }
     }
-//    System.out.println("Frequency Vector:");
-//    System.out.println(vector);
     return vector;
   }
   

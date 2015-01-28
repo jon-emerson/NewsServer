@@ -26,8 +26,7 @@ public class IndustryClassifier {
       try {
         industryVectors.put(industryCode, new IndustryVector(industryCode));
       } catch (IOException | DataInternalException e) {
-        System.out.println("Couldn't generate industry vector for industry code: " + 
-            industryCode.getId());
+        // Can't generate industry vector. Ignore it.
       }        
     }
   }
@@ -36,8 +35,8 @@ public class IndustryClassifier {
       throws IOException, DataInternalException {
     if(instance == null) {
       instance = new IndustryClassifier();
-   }
-   return instance;
+    }
+    return instance;
   }
   
   /**
@@ -52,7 +51,7 @@ public class IndustryClassifier {
       throws DataInternalException, IOException, ValidationException {
     DocumentVector articleVector = new DocumentVector(article);
 
-    // See if the classifications has already been computed
+    // See if the classification has already been computed
     List<ArticleIndustryClassification> classifications =
         ArticleIndustryClassifications.getFor(article);
     if (classifications != null && classifications.size() > 0) {
@@ -65,13 +64,11 @@ public class IndustryClassifier {
     IndustryCode code;
     IndustryVector vector;
     double similarity;
-    
-    System.out.println("classifying against " + industryVectors.size() + " industry vectors");
     for (Map.Entry<IndustryCode, IndustryVector> industry : industryVectors.entrySet()) {
       code = industry.getKey();
       vector = industry.getValue();
       similarity = articleVector.cosineSimilarityTo(vector);
-      System.out.println("Similarity to " + code.getDescription() + ": " + similarity);
+      // Only save industries that are closely related
       if (similarity >= RELEVANCE_THRESHOLD) {
         classification = ArticleIndustryClassification.newBuilder()
             .setUrlId(article.getUrlId())
@@ -82,7 +79,6 @@ public class IndustryClassifier {
       }
     }
     saveClassificationsToServer(classifications);
-    
     return classifications;
   }
   

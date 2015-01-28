@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.proto.Core.ArticleFacebookEngagement;
 import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.UserIndustry;
 
@@ -26,7 +25,6 @@ public class UserIndustries {
   public static List<UserIndustry> updateIndustries(String userId, DocumentNode profileDocumentNode) 
       throws DataInternalException {
     String industryDescription = profileDocumentNode.findFirst("industry").getFlattenedText();
-    System.out.println("User industry from LinkedIn Profile: " + industryDescription);
     IndustryCode industryCode = IndustryCodes.getForDescription(industryDescription);
     UserIndustry userIndustry = UserIndustry.newBuilder()
         .setIndustryCodeId(industryCode.getId())

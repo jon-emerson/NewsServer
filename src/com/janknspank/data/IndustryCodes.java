@@ -773,7 +773,6 @@ public class IndustryCodes {
         return industryCode;
       }
     }
-    System.out.println("No industry code found with description: " + description);
     return null;
   }
 }
