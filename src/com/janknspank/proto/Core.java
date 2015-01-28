@@ -3919,21 +3919,6 @@ public final class Core {
   public interface UrlOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional string url = 1;
-    /**
-     * <code>optional string url = 1;</code>
-     */
-    boolean hasUrl();
-    /**
-     * <code>optional string url = 1;</code>
-     */
-    java.lang.String getUrl();
-    /**
-     * <code>optional string url = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getUrlBytes();
-
     // optional string id = 2;
     /**
      * <code>optional string id = 2;</code>
@@ -3948,6 +3933,21 @@ public final class Core {
      */
     com.google.protobuf.ByteString
         getIdBytes();
+
+    // optional string url = 1;
+    /**
+     * <code>optional string url = 1;</code>
+     */
+    boolean hasUrl();
+    /**
+     * <code>optional string url = 1;</code>
+     */
+    java.lang.String getUrl();
+    /**
+     * <code>optional string url = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes();
 
     // optional int64 tweet_count = 3;
     /**
@@ -4071,12 +4071,12 @@ public final class Core {
               break;
             }
             case 10: {
-              bitField0_ |= 0x00000001;
+              bitField0_ |= 0x00000002;
               url_ = input.readBytes();
               break;
             }
             case 18: {
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000001;
               id_ = input.readBytes();
               break;
             }
@@ -4145,49 +4145,6 @@ public final class Core {
     }
 
     private int bitField0_;
-    // optional string url = 1;
-    public static final int URL_FIELD_NUMBER = 1;
-    private java.lang.Object url_;
-    /**
-     * <code>optional string url = 1;</code>
-     */
-    public boolean hasUrl() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string url = 1;</code>
-     */
-    public java.lang.String getUrl() {
-      java.lang.Object ref = url_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          url_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string url = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUrlBytes() {
-      java.lang.Object ref = url_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        url_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     // optional string id = 2;
     public static final int ID_FIELD_NUMBER = 2;
     private java.lang.Object id_;
@@ -4195,7 +4152,7 @@ public final class Core {
      * <code>optional string id = 2;</code>
      */
     public boolean hasId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional string id = 2;</code>
@@ -4225,6 +4182,49 @@ public final class Core {
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string url = 1;
+    public static final int URL_FIELD_NUMBER = 1;
+    private java.lang.Object url_;
+    /**
+     * <code>optional string url = 1;</code>
+     */
+    public boolean hasUrl() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string url = 1;</code>
+     */
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          url_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -4332,8 +4332,8 @@ public final class Core {
     }
 
     private void initFields() {
-      url_ = "";
       id_ = "";
+      url_ = "";
       tweetCount_ = 0L;
       discoveryTime_ = 0L;
       lastCrawlStartTime_ = 0L;
@@ -4352,10 +4352,10 @@ public final class Core {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(1, getUrlBytes());
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(2, getIdBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
@@ -4382,11 +4382,11 @@ public final class Core {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getUrlBytes());
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getIdBytes());
       }
@@ -4526,9 +4526,9 @@ public final class Core {
 
       public Builder clear() {
         super.clear();
-        url_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
         id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        url_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         tweetCount_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -4571,11 +4571,11 @@ public final class Core {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.url_ = url_;
+        result.id_ = id_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.id_ = id_;
+        result.url_ = url_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -4612,14 +4612,14 @@ public final class Core {
 
       public Builder mergeFrom(com.janknspank.proto.Core.Url other) {
         if (other == com.janknspank.proto.Core.Url.getDefaultInstance()) return this;
-        if (other.hasUrl()) {
+        if (other.hasId()) {
           bitField0_ |= 0x00000001;
-          url_ = other.url_;
+          id_ = other.id_;
           onChanged();
         }
-        if (other.hasId()) {
+        if (other.hasUrl()) {
           bitField0_ |= 0x00000002;
-          id_ = other.id_;
+          url_ = other.url_;
           onChanged();
         }
         if (other.hasTweetCount()) {
@@ -4664,87 +4664,13 @@ public final class Core {
       }
       private int bitField0_;
 
-      // optional string url = 1;
-      private java.lang.Object url_ = "";
-      /**
-       * <code>optional string url = 1;</code>
-       */
-      public boolean hasUrl() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string url = 1;</code>
-       */
-      public java.lang.String getUrl() {
-        java.lang.Object ref = url_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          url_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string url = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUrlBytes() {
-        java.lang.Object ref = url_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          url_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string url = 1;</code>
-       */
-      public Builder setUrl(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        url_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string url = 1;</code>
-       */
-      public Builder clearUrl() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        url_ = getDefaultInstance().getUrl();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string url = 1;</code>
-       */
-      public Builder setUrlBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        url_ = value;
-        onChanged();
-        return this;
-      }
-
       // optional string id = 2;
       private java.lang.Object id_ = "";
       /**
        * <code>optional string id = 2;</code>
        */
       public boolean hasId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional string id = 2;</code>
@@ -4784,7 +4710,7 @@ public final class Core {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000001;
         id_ = value;
         onChanged();
         return this;
@@ -4793,7 +4719,7 @@ public final class Core {
        * <code>optional string id = 2;</code>
        */
       public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         id_ = getDefaultInstance().getId();
         onChanged();
         return this;
@@ -4806,8 +4732,82 @@ public final class Core {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000001;
         id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string url = 1;
+      private java.lang.Object url_ = "";
+      /**
+       * <code>optional string url = 1;</code>
+       */
+      public boolean hasUrl() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string url = 1;</code>
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          url_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 1;</code>
+       */
+      public Builder setUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 1;</code>
+       */
+      public Builder clearUrl() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 1;</code>
+       */
+      public Builder setUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        url_ = value;
         onChanged();
         return this;
       }
@@ -17389,6 +17389,10 @@ public final class Core {
   }
   /**
    * Protobuf type {@code IndustryCode}
+   *
+   * <pre>
+   * In-memory object.  Not stored in DB.
+   * </pre>
    */
   public static final class IndustryCode extends
       com.google.protobuf.GeneratedMessage
@@ -17756,6 +17760,10 @@ public final class Core {
     }
     /**
      * Protobuf type {@code IndustryCode}
+     *
+     * <pre>
+     * In-memory object.  Not stored in DB.
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -19686,6 +19694,10 @@ public final class Core {
   }
   /**
    * Protobuf type {@code ArticleTypeCode}
+   *
+   * <pre>
+   * In-memory object.  Not stored in DB.
+   * </pre>
    */
   public static final class ArticleTypeCode extends
       com.google.protobuf.GeneratedMessage
@@ -19990,6 +20002,10 @@ public final class Core {
     }
     /**
      * Protobuf type {@code ArticleTypeCode}
+     *
+     * <pre>
+     * In-memory object.  Not stored in DB.
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -21759,7 +21775,7 @@ public final class Core {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/core.proto\032%com/j" +
       "anknspank/proto/extensions.proto\"\301\002\n\007Art" +
-      "icle\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\032" +
+      "icle\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\032" +
       "\n\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005title\030\003 \001(" +
       "\tB\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\031\022\025\n\006" +
       "author\030\005 \001(\tB\005\230\246\035\200\002\022\030\n\tcopyright\030\006 \001(\tB\005" +
@@ -21768,63 +21784,63 @@ public final class Core {
       "(\tB\t\240\246\035\003\230\246\035\200P\022 \n\016published_time\030\n \001(\003B\010\210" +
       "\246\035\001\220\246\035\003\022\025\n\rmodified_time\030\013 \001(\003*\004\010\t\020\n\"\373\001\n",
       "\016ArticleKeyword\022$\n\006url_id\030\001 \001(\tB\024\210\246\035\001\220\246\035" +
-      "\003\230\246\035\026\250\246\035\001\240\246\035\003\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003" +
+      "\003\230\246\035\030\250\246\035\001\240\246\035\003\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003" +
       "\230\246\0352\022\026\n\010strength\030\003 \001(\005B\004\210\246\035\001\022\036\n\004type\030\004 \001" +
       "(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\005 \001(\0162\026.A" +
       "rticleKeyword.Source:\007UNKNOWN\";\n\006Source\022" +
       "\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010" +
       "META_TAG\020\003\"\232\001\n\004Link\022\'\n\rorigin_url_id\030\001 \001" +
-      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022,\n\022destination_url_" +
-      "id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\034\n\016discovery_" +
+      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022,\n\022destination_url_" +
+      "id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\034\n\016discovery_" +
       "time\030\003 \001(\003B\004\210\246\035\001\022\035\n\017last_found_time\030\004 \001(",
-      "\003B\004\210\246\035\001\"\365\001\n\003Url\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\002\230\246" +
-      "\035\377\005\250\246\035\001\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\004\230\246\035\026\250\246\035\001\022\031\n" +
+      "\003B\004\210\246\035\001\"\365\001\n\003Url\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035" +
+      "\030\250\246\035\001\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022\031\n" +
       "\013tweet_count\030\003 \001(\003B\004\210\246\035\001\022 \n\016discovery_ti" +
       "me\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025last_crawl_start_t" +
       "ime\030\005 \001(\003B\010\220\246\035\005\240\246\035\003\022(\n\026last_crawl_finish" +
       "_time\030\006 \001(\003B\010\220\246\035\005\240\246\035\003\022 \n\016crawl_priority\030" +
       "\007 \001(\003B\010\220\246\035\003\240\246\035\003\"\371\001\n\004User\022\034\n\002id\030\001 \001(\tB\020\210\246" +
-      "\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005em" +
+      "\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\022\n\004name\030\002 \001(\tB\004\230\246\035d\022\033\n\005em" +
       "ail\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n\014linked_in_id\030" +
       "\004 \001(\tB\004\230\246\035\031\022\031\n\013facebook_id\030\005 \001(\tB\004\230\246\035\031\022\031",
       "\n\013create_time\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_login_" +
       "time\030\010 \001(\003\0221\n\026linked_in_access_token\030\t \001" +
       "(\tB\021\210\246\035\001\220\246\035\005\230\246\035\364\003\240\246\035\003*\004\010\006\020\007\"k\n\007Session\022\"" +
-      "\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035\200\001\022!\n\007us" +
-      "er_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\031\n\013create_" +
+      "\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\004\230\246\035\200\001\022!\n\007us" +
+      "er_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create_" +
       "time\030\003 \001(\003B\004\210\246\035\001\"i\n\017LinkedInProfile\022!\n\007u" +
-      "ser_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\030\n\004data\030\002" +
+      "ser_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\004data\030\002" +
       " \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210" +
       "\246\035\001\"m\n\023LinkedInConnections\022!\n\007user_id\030\001 " +
-      "\001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\030\n\004data\030\002 \001(\tB\n\210\246\035",
+      "\001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\004data\030\002 \001(\tB\n\210\246\035",
       "\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"e\n\013Ad" +
-      "dressBook\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026" +
+      "dressBook\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create" +
       "_time\030\003 \001(\003B\004\210\246\035\001\"\205\001\n\rUserUrlRating\022!\n\007u" +
-      "ser_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022 \n\006url_id" +
-      "\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\024\n\006rating\030\003 \001(\005" +
+      "ser_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022 \n\006url_id" +
+      "\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\024\n\006rating\030\003 \001(\005" +
       "B\004\210\246\035\001\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"u\n\017Use" +
       "rUrlFavorite\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\026\250\246\035\001\022 \n\006url_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035" +
+      "\246\035\030\250\246\035\001\022 \n\006url_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035" +
       "\001\022\035\n\013create_time\030\003 \001(\003B\010\220\246\035\005\210\246\035\001\"\216\001\n\014Use",
-      "rIndustry\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026" +
+      "rIndustry\022!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003" +
       "\022\034\n\006source\030\003 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002\022\031\n\013create" +
       "_time\030\005 \001(\003B\004\210\246\035\001\"\244\001\n\014UserInterest\022\034\n\002id" +
-      "\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022!\n\007user_id\030\002 \001(" +
-      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\035\n\007keyword\030\003 \001(\tB\014\210\246" +
+      "\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(" +
+      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\003 \001(\tB\014\210\246" +
       "\035\001\220\246\035\003\230\246\035d\022\034\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002" +
       "\022\026\n\004type\030\005 \001(\tB\010\230\246\035\005\250\246\035\001\"\224\001\n\nUserIntent\022" +
       "!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022%\n\013in" +
       "tent_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022!\n\013des",
       "cription\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\031\n\013create_t" +
       "ime\030\005 \001(\003B\004\210\246\035\001\"\365\004\n\006Entity\022\034\n\002id\030\001 \001(\tB\020" +
-      "\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220" +
+      "\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220" +
       "\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022" +
       "(\n\006source\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035" +
-      "\005\022\"\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\026\250\246\035\001\022\"\n" +
+      "\005\022\"\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n" +
       "\005topic\030\006 \003(\0132\023.Entity.EntityTopic\032\277\002\n\013En" +
-      "tityTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\026\250\246\035\001\022\031" +
+      "tityTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031" +
       "\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB" +
       "\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007con",
       "text\030\005 \001(\0162\033.Entity.EntityTopic.Context:" +
@@ -21835,29 +21851,29 @@ public final class Core {
       "ource\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INSTANCE_T" +
       "YPE\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r\n\tANGE" +
       "LLIST\020\003\"\211\001\n\026TrainedArticleIndustry\022 \n\006ur" +
-      "l_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\"\n\020industry" +
+      "l_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry" +
       "_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user",
-      "_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\"\\\n\014IndustryC" +
-      "ode\022\024\n\002id\030\001 \001(\005B\010\210\246\035\001\220\246\035\002\022\027\n\005group\030\002 \001(\t" +
-      "B\010\210\246\035\001\230\246\0352\022\035\n\013description\030\003 \001(\tB\010\210\246\035\001\230\246\035" +
-      "d\"\203\001\n\035ArticleIndustryClassification\022 \n\006u" +
-      "rl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\"\n\020industr" +
-      "y_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\005\022\034\n\nsimilarity\030" +
-      "\003 \001(\001B\010\210\246\035\001\220\246\035\005\"\275\001\n\034TrainedArticleClassi" +
-      "fication\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246" +
-      "\035\001\0225\n\033article_classification_code\030\002 \001(\tB" +
-      "\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001",
-      "\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\026\250\246\035\001\"T\n\017ArticleTypeCode\022\036\n\004code\030\001 \001(\t" +
-      "B\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022!\n\013description\030\002 \001(\tB" +
-      "\014\210\246\035\001\220\246\035\003\230\246\035d\"\270\001\n\031ArticleFacebookEngagem" +
-      "ent\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\002\230\246\035\377\005\250\246\035\001\022\034\n\nl" +
-      "ike_count\030\002 \001(\003B\010\210\246\035\001\220\246\035\005\022\035\n\013share_count" +
-      "\030\003 \001(\003B\010\210\246\035\001\220\246\035\005\022\037\n\rcomment_count\030\004 \001(\003B" +
-      "\010\210\246\035\001\220\246\035\005\022\035\n\013create_time\030\005 \001(\003B\010\210\246\035\001\220\246\035\005" +
-      "\"Q\n\025WordDocumentFrequency\022\033\n\004word\030\001 \001(\tB" +
-      "\r\210\246\035\001\220\246\035\002\230\246\035\310\001\022\033\n\tfrequency\030\002 \001(\003B\010\210\246\035\001\220",
-      "\246\035\005B\026\n\024com.janknspank.proto"
+      "_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\"X\n\014IndustryC" +
+      "ode\022\020\n\002id\030\001 \001(\005B\004\210\246\035\001\022\027\n\005group\030\002 \001(\tB\010\210\246" +
+      "\035\001\230\246\0352\022\035\n\013description\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\203\001" +
+      "\n\035ArticleIndustryClassification\022 \n\006url_i" +
+      "d\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\"\n\020industry_co" +
+      "de_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\005\022\034\n\nsimilarity\030\003 \001(" +
+      "\001B\010\210\246\035\001\220\246\035\005\"\275\001\n\034TrainedArticleClassifica" +
+      "tion\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225" +
+      "\n\033article_classification_code\030\002 \001(\tB\020\210\246\035" +
+      "\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003",
+      "\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250" +
+      "\246\035\001\"L\n\017ArticleTypeCode\022\026\n\004code\030\001 \001(\tB\010\210\246" +
+      "\035\001\230\246\035\005\022!\n\013description\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035" +
+      "d\"\270\001\n\031ArticleFacebookEngagement\022\036\n\003url\030\001" +
+      " \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022\034\n\nlike_count\030\002 " +
+      "\001(\003B\010\210\246\035\001\220\246\035\005\022\035\n\013share_count\030\003 \001(\003B\010\210\246\035\001" +
+      "\220\246\035\005\022\037\n\rcomment_count\030\004 \001(\003B\010\210\246\035\001\220\246\035\005\022\035\n" +
+      "\013create_time\030\005 \001(\003B\010\210\246\035\001\220\246\035\005\"Q\n\025WordDocu" +
+      "mentFrequency\022\033\n\004word\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035" +
+      "\310\001\022\033\n\tfrequency\030\002 \001(\003B\010\210\246\035\001\220\246\035\005B\026\n\024com.j",
+      "anknspank.proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -21887,7 +21903,7 @@ public final class Core {
           internal_static_Url_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Url_descriptor,
-              new java.lang.String[] { "Url", "Id", "TweetCount", "DiscoveryTime", "LastCrawlStartTime", "LastCrawlFinishTime", "CrawlPriority", });
+              new java.lang.String[] { "Id", "Url", "TweetCount", "DiscoveryTime", "LastCrawlStartTime", "LastCrawlFinishTime", "CrawlPriority", });
           internal_static_User_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_User_fieldAccessorTable = new
@@ -22200,7 +22216,6 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
@@ -22228,9 +22243,7 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);

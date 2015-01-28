@@ -24,7 +24,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
     catch (ParserException | ValidationException | IOException e) {
       // Fallback
       System.out.println("Error: couldn't load getArticlesRankedByNeuralNetwork: " + e.getMessage());
-      return Articles.getArticles(UserInterests.getInterests(getSession(req).getUserId()));
+      return Articles.getArticlesByInterest(UserInterests.getInterests(getSession(req).getUserId()));
     }
   }
 }

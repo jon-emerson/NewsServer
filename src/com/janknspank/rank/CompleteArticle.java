@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.janknspank.classifier.IndustryClassifier;
 import com.janknspank.data.ArticleFacebookEngagements;
 import com.janknspank.data.ArticleKeywords;
@@ -31,10 +32,10 @@ import com.janknspank.proto.Core.UserInterest;
  */
 public class CompleteArticle {
   private Article article;
-  private List<ArticleKeyword> keywords;
-  private List<ArticleIndustryClassification> industryClassifications;
-  private List<TrainedArticleClassification> trainedContentClassifications;
-  private List<ArticleFacebookEngagement> facebookEngagements;
+  private Iterable<ArticleKeyword> keywords;
+  private Iterable<ArticleIndustryClassification> industryClassifications;
+  private Iterable<TrainedArticleClassification> trainedContentClassifications;
+  private Iterable<ArticleFacebookEngagement> facebookEngagements;
   private static final int MILLIS_PER_DAY = 86400000;
   
   public CompleteArticle(String urlId) 
@@ -59,14 +60,14 @@ public class CompleteArticle {
     facebookEngagements = ArticleFacebookEngagements.getLatest(url, 2);
   }
   
-  public List<ArticleFacebookEngagement> getFacebookEngagements() {
+  public Iterable<ArticleFacebookEngagement> getFacebookEngagements() {
     return facebookEngagements;
   }
   
   public ArticleFacebookEngagement getLatestFacebookEngagement() {
-    if (facebookEngagements != null && facebookEngagements.size() > 0) {
+    if (facebookEngagements != null && Iterables.size(facebookEngagements) > 0) {
       // First index is the latest (biggest create_time)
-      return facebookEngagements.get(0);      
+      return Iterables.getFirst(facebookEngagements, null);      
     }
     else {
       return null;
@@ -75,19 +76,19 @@ public class CompleteArticle {
   
   // returns Likes / day
   public double getLikeVelocity() {
-    if (facebookEngagements == null || facebookEngagements.isEmpty()) {
+    if (facebookEngagements == null || Iterables.isEmpty(facebookEngagements)) {
       return 0;
     }
-    else if (facebookEngagements.size() == 1) {
+    else if (Iterables.size(facebookEngagements) == 1) {
       // Use the published date to get the velocity
-      ArticleFacebookEngagement engagement = facebookEngagements.get(0);
+      ArticleFacebookEngagement engagement = Iterables.getFirst(facebookEngagements, null);
       double daysSincePublish = (System.currentTimeMillis() - 
           article.getPublishedTime()) / MILLIS_PER_DAY;
       return engagement.getLikeCount() / daysSincePublish;
     } else {
       // Use the time interval between the last two engagement checks
-      ArticleFacebookEngagement mostRecentEng = facebookEngagements.get(0);
-      ArticleFacebookEngagement previousEng = facebookEngagements.get(0);
+      ArticleFacebookEngagement mostRecentEng = Iterables.getFirst(facebookEngagements, null);
+      ArticleFacebookEngagement previousEng = Iterables.getFirst(facebookEngagements, null);
       long changeInLikes = mostRecentEng.getLikeCount() 
           - previousEng.getLikeCount();
       double daysBetweenChecks = (mostRecentEng.getCreateTime()

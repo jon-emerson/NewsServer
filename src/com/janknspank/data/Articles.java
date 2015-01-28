@@ -1,13 +1,8 @@
 package com.janknspank.data;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.PriorityQueue;
 import java.util.Set;
 
 import com.google.common.base.Function;
@@ -39,7 +34,7 @@ public class Articles {
       Database.with(Article.class).getStringLength("description");
 
   public static Iterable<Article> getArticlesOnTopic(String topic) throws DataInternalException {
-    List<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(ImmutableList.of(topic));
+    Iterable<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(ImmutableList.of(topic));
     Set<String> articleIds = Sets.newHashSet();
     for (ArticleKeyword articleKeyword : articleKeywords) {
       articleIds.add(articleKeyword.getUrlId());
@@ -47,7 +42,7 @@ public class Articles {
     return getArticles(articleIds);
   }
 
-  private static List<ArticleKeyword> getArticleKeywords(Iterable<UserInterest> interests)
+  private static Iterable<ArticleKeyword> getArticleKeywords(Iterable<UserInterest> interests)
       throws DataInternalException {
     // Filter out location interests for now, until we can better prioritize them.
     interests = Iterables.filter(interests, new Predicate<UserInterest>() {
@@ -65,7 +60,7 @@ public class Articles {
     }));
   }
 
-  private static List<ArticleKeyword> getArticleKeywordsForTopics(Iterable<String> topics)
+  private static Iterable<ArticleKeyword> getArticleKeywordsForTopics(Iterable<String> topics)
       throws DataInternalException {
     return Database.with(ArticleKeyword.class).get(
         new QueryOption.WhereEqualsIgnoreCase("keyword", topics),
@@ -76,9 +71,9 @@ public class Articles {
    * Gets articles that contain a set of keywords
    * @throws DataInternalException 
    */
-  public static List<Article> getArticlesForKeywords(Iterable<String> keywords) 
+  public static Iterable<Article> getArticlesForKeywords(Iterable<String> keywords) 
       throws DataInternalException {
-    List<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(keywords);
+    Iterable<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(keywords);
     Set<String> articleIds = Sets.newHashSet();
     for (ArticleKeyword articleKeyword : articleKeywords) {
       articleIds.add(articleKeyword.getUrlId());
@@ -90,17 +85,15 @@ public class Articles {
    * Gets a list of articles tailored specifically to the current user's
    * interests.
    */
-  public static List<Article> getArticles(List<UserInterest> interests)
+  public static Iterable<Article> getArticlesByInterest(Iterable<UserInterest> interests)
       throws DataInternalException {
-    List<ArticleKeyword> articleKeywords = getArticleKeywords(interests);
+    Iterable<ArticleKeyword> articleKeywords = getArticleKeywords(interests);
     Set<String> articleIds = Sets.newHashSet();
     for (ArticleKeyword articleKeyword : articleKeywords) {
       articleIds.add(articleKeyword.getUrlId());
     }
     return getArticles(articleIds);
   }
-  
-  
   
   public static Iterable<Article> getRankedArticles(String userId, Scorer scorer)
       throws DataInternalException, ParserException, IOException, ValidationException {
@@ -120,7 +113,7 @@ public class Articles {
     //NeuralNetworkScorer neuralNetworkRank = NeuralNetworkScorer.getInstance();
     CompleteUser completeUser = new CompleteUser(userId);
     // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
-    List<Article> articles = getArticles(UserInterests.getInterests(userId));
+    Iterable<Article> articles = getArticlesByInterest(UserInterests.getInterests(userId));
     Map<CompleteArticle, Double> ranks = new HashMap<>();
     
     CompleteArticle completeArticle;
@@ -136,7 +129,7 @@ public class Articles {
    * Returns articles with the given IDs, ordered by publish time, if they
    * exist. If they don't exist, no error is thrown.
    */
-  public static List<Article> getArticles(Iterable<String> urlIds)
+  public static Iterable<Article> getArticles(Iterable<String> urlIds)
       throws DataInternalException {
     return Database.with(Article.class).get(
         new QueryOption.WhereEquals("url_id", urlIds),
@@ -148,7 +141,7 @@ public class Articles {
     return Database.with(Article.class).get(urlId);
   }
 
-  public static List<Article> getPageOfArticles(int limit, int offset) 
+  public static Iterable<Article> getPageOfArticles(int limit, int offset) 
       throws DataInternalException {
     return Database.with(Article.class).get(
         new LimitWithOffset(limit, offset));
@@ -167,11 +160,11 @@ public class Articles {
    */
   public static Article getRandomUntrainedArticle() throws DataInternalException {
     Article article;
-    List<TrainedArticleIndustry> taggedIndustries;
+    Iterable<TrainedArticleIndustry> taggedIndustries;
     do {
       article = Articles.getRandomArticle();
       taggedIndustries = TrainedArticleIndustries.getFromArticle(article.getUrlId());
-    } while (!taggedIndustries.isEmpty());
+    } while (!Iterables.isEmpty(taggedIndustries));
     return article;
   }
   

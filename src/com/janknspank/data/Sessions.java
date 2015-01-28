@@ -153,13 +153,14 @@ public class Sessions {
    * Officially sanctioned method for getting a user session from a logged-in
    * session key.
    */
-  public static Session get(String sessionKey)
+  public static Session getBySessionKey(String sessionKey)
       throws DataRequestException, DataInternalException {
     // Make sure that the session key can be decrypted.
     String userId = decrypt(sessionKey);
 
     // Make sure the session key is in the database.
-    Session session = Database.with(Session.class).get(sessionKey);
+    Session session = Database.with(Session.class)
+        .getFirst(new QueryOption.WhereEquals("session_key", sessionKey));
     if (session == null) {
       throw new DataRequestException("Session not found in database.");
     }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import com.janknspank.data.ArticleIndustryClassifications;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
@@ -47,42 +48,40 @@ public class IndustryClassifier {
    * @throws IOException 
    * @throws ValidationException 
    */
-  public List<ArticleIndustryClassification> classify(Article article) 
+  public Iterable<ArticleIndustryClassification> classify(Article article) 
       throws DataInternalException, IOException, ValidationException {
     DocumentVector articleVector = new DocumentVector(article);
 
     // See if the classification has already been computed
-    List<ArticleIndustryClassification> classifications =
+    Iterable<ArticleIndustryClassification> classifications =
         ArticleIndustryClassifications.getFor(article);
-    if (classifications != null && classifications.size() > 0) {
+    if (classifications != null && Iterables.size(classifications) > 0) {
       return classifications;
     }
     
     // Compute classifications from IndustryVectors
-    classifications = new ArrayList<>();
-    ArticleIndustryClassification classification;
-    IndustryCode code;
-    IndustryVector vector;
-    double similarity;
+    List<ArticleIndustryClassification> newClassifications = new ArrayList<>();
     for (Map.Entry<IndustryCode, IndustryVector> industry : industryVectors.entrySet()) {
-      code = industry.getKey();
-      vector = industry.getValue();
-      similarity = articleVector.cosineSimilarityTo(vector);
+      IndustryCode code = industry.getKey();
+      IndustryVector vector = industry.getValue();
+      double similarity = articleVector.cosineSimilarityTo(vector);
       // Only save industries that are closely related
       if (similarity >= RELEVANCE_THRESHOLD) {
-        classification = ArticleIndustryClassification.newBuilder()
+        ArticleIndustryClassification classification = 
+            ArticleIndustryClassification.newBuilder()
             .setUrlId(article.getUrlId())
             .setIndustryCodeId(code.getId())
             .setSimilarity(similarity)
             .build();
-        classifications.add(classification);
+        newClassifications.add(classification);
       }
     }
-    saveClassificationsToServer(classifications);
+    saveClassificationsToServer(newClassifications);
     return classifications;
   }
   
-  private static void saveClassificationsToServer(List<ArticleIndustryClassification> classifications)
+  private static void saveClassificationsToServer(
+      Iterable<ArticleIndustryClassification> classifications)
       throws ValidationException, DataInternalException {
     Database.insert(classifications);
   }

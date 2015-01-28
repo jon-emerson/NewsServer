@@ -1,11 +1,14 @@
 package com.janknspank.proto;
 
 import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
+import com.janknspank.data.GuidFactory;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Extensions.Required;
 import com.janknspank.proto.Extensions.StorageMethod;
+import com.janknspank.proto.Extensions.StringCharset;
 
 /**
  * Validates a protocol buffer object by using the Required instructions
@@ -20,6 +23,7 @@ public class Validator {
       throws ValidationException {
     Asserts.assertNotNull(message, "Message cannot be null");
 
+    boolean foundPrimaryKey = false;
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
       String fieldName = message.getClass().getSimpleName() + "." + fieldDescriptor.getName();
 
@@ -38,38 +42,59 @@ public class Validator {
       StorageMethod storageMethod =
           fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
       if (storageMethod != StorageMethod.STANDARD && storageMethod != StorageMethod.DO_NOT_STORE) {
-        int maxLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
-        Asserts.assertTrue(maxLength <= 767 || storageMethod == StorageMethod.PULL_OUT,
-            "Strings larger than 767 characters cannot be indexed");
+        int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
+        int stringBytes = fieldDescriptor.getOptions().getExtension(Extensions.stringCharset)
+            == StringCharset.UTF8 ? stringLength * 2 : stringLength;
+        Asserts.assertTrue(stringBytes <= 767 || storageMethod == StorageMethod.PULL_OUT,
+            "Error on " + fieldName + ": Strings larger than 767 bytes cannot be indexed");
 
         // This seems like a good idea for now, but if we ever re-use protos to
         // de-reference look-ups, we'll probably want to remove this (and that's
         // OK).
-        Asserts.assertTrue(indexedFieldsAllowed, "Indexed fields are not allowed in nested protos");
+        Asserts.assertTrue(indexedFieldsAllowed, "Error in " + message.getClass().getSimpleName()
+            + ": Indexed fields are not allowed in nested protos");
+      }
+      
+      // Verify string length is valid.
+      int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
+      if (fieldDescriptor.getJavaType() == JavaType.STRING) {
+        Asserts.assertTrue(stringLength> 0,
+            "String field " + fieldName + " must have non-zero string_length annotation");
+      } else {
+        Asserts.assertTrue(
+            !fieldDescriptor.getOptions().hasExtension(Extensions.stringLength),
+            "Error in " + fieldName + " definition: Non-strings can't have string_length "
+                + "declarations");
+      }
+
+      // Verify that there's only one primary key, and that it's a 24-character
+      // string.  (This requirement allows us to use MongoDB's _id field for our
+      // primary keys, which is indexed by hash.)
+      if (storageMethod == StorageMethod.PRIMARY_KEY) {
+        Asserts.assertTrue(!foundPrimaryKey, "Error in " + message.getClass().getSimpleName()
+            + ": Only one primary key per table allowed");
+        Asserts.assertTrue(stringLength == GuidFactory.GUID_SIZE,
+            "Primary keys must be strings of size " + GuidFactory.GUID_SIZE);
+        foundPrimaryKey = true;
       }
 
       // Verify we support all the specified types, and that strings are within
       // their length limits.
       switch (fieldDescriptor.getJavaType()) {
         case STRING:
-          int maxLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
-          if (maxLength <= 0) {
-            throw new IllegalStateException(
-                "String field " + fieldName + " must have non-zero string_length annotation");
-          }
           if (fieldDescriptor.isRepeated()) {
             for (int i = 0; i < message.getRepeatedFieldCount(fieldDescriptor); i++) {
-              int stringLength = ((String) message.getRepeatedField(fieldDescriptor, i)).length();
-              if (stringLength > maxLength) {
+              int fieldLength = ((String) message.getRepeatedField(fieldDescriptor, i)).length();
+              if (fieldLength > stringLength) {
                 throw new ValidationException("Field " + fieldName + " can have a maximum "
-                    + "length of " + maxLength + ". Actual length is " + stringLength + ".");
+                    + "length of " + stringLength + ". Actual length is " + fieldLength + ".");
               }
             }
           } else {
-            int stringLength = ((String) message.getField(fieldDescriptor)).length();
-            if (stringLength > maxLength) {
+            int fieldLength = ((String) message.getField(fieldDescriptor)).length();
+            if (fieldLength > stringLength) {
               throw new ValidationException("Field " + fieldName + " can have a maximum "
-                  + "length of " + maxLength + ". Actual length is " + stringLength + ".");
+                  + "length of " + stringLength + ". Actual length is " + fieldLength + ".");
             }
           }
           break;

@@ -90,7 +90,7 @@ public class NewsServlet extends HttpServlet {
       if (Strings.isNullOrEmpty(sessionKey)) {
         session = getSessionFromCookies(request);
       } else {
-        session = Sessions.get(sessionKey);
+        session = Sessions.getBySessionKey(sessionKey);
       }
     } catch (DataRequestException|DataInternalException e) {
       // This only happens for illegal session IDs that don't represent
@@ -120,7 +120,7 @@ public class NewsServlet extends HttpServlet {
         Cookie cookie = cookies[i];
         if (cookieName.equals(cookie.getName())) {
           try {
-            return Sessions.get(cookie.getValue());
+            return Sessions.getBySessionKey(cookie.getValue());
           } catch (DataInternalException|DataRequestException e) {
             System.err.println("Bad cookie found, ignoring: " + e.getMessage());
           }

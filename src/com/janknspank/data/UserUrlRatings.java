@@ -9,12 +9,12 @@ import com.janknspank.proto.Core.UserUrlRating;
  * Used for training the neural network
  */
 public class UserUrlRatings {
-  public static List<UserUrlRating> get(String userId) throws DataInternalException {
+  public static Iterable<UserUrlRating> get(String userId) throws DataInternalException {
     return Database.with(UserUrlRating.class).get(
         new QueryOption.WhereEquals("user_id", userId));
   }
   
-  public static List<UserUrlRating> getAll() throws DataInternalException {
+  public static Iterable<UserUrlRating> getAll() throws DataInternalException {
     return Database.with(UserUrlRating.class).get();
   }
 

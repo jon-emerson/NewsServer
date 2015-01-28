@@ -1,20 +1,16 @@
 package com.janknspank.data;
 
-import java.nio.ByteBuffer;
-import java.util.UUID;
-
-import org.apache.commons.codec.binary.Base64;
+import org.bson.types.ObjectId;
 
 public class GuidFactory {
+  public static final int GUID_SIZE = 24;
+
   /**
-   * Returns a random base-64 string.  The returned string can be up to 22
-   * characters long.
+   * Returns a string suitable for object identifying.  In the Mongo DB
+   * object ID implementation used here, the return value is guaranteed to be
+   * 24 hex characters.
    */
   public static String generate() {
-    UUID uuid = UUID.randomUUID();
-    ByteBuffer bb = ByteBuffer.allocate(16);
-    bb.putLong(uuid.getLeastSignificantBits());
-    bb.putLong(uuid.getMostSignificantBits());
-    return Base64.encodeBase64URLSafeString(bb.array()).replaceAll("=", "");
+    return ObjectId.get().toHexString();
   }
 }

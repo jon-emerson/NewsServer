@@ -87,7 +87,8 @@ public class Urls {
 
     // Use urls.keySet() instead of urlStrings here as a way to dedupe.
     List<Url> urlsToUpdate = Lists.newArrayList(); // To increment tweet_count.
-    for (Url existingUrl : Database.with(Url.class).get(urls.keySet())) {
+    for (Url existingUrl :
+        Database.with(Url.class).get(new QueryOption.WhereEquals("url", urls.keySet()))) {
       urls.put(existingUrl.getUrl(), existingUrl);
 
       if (isTweet) {
@@ -165,18 +166,24 @@ public class Urls {
   public static Url getNextUrlToCrawl() throws DataInternalException {
     return Database.with(Url.class).getFirst(
         new QueryOption.WhereNull("last_crawl_start_time"),
-        new QueryOption.WhereNotEquals("crawl_priority", "0"),
+        new QueryOption.WhereNotEqualsNumber("crawl_priority", 0),
         new QueryOption.WhereNotLike("url", "https://twitter.com/%"),
         new QueryOption.DescendingSort("crawl_priority"));
   }
 
   /**
-   * Gets a URL by its ID (since the primary keys for URLs are the URLs
-   * themselves).
+   * Gets a URL by its ID.
    */
   public static Url getById(String id) throws DataInternalException {
+    return Database.with(Url.class).get(id);
+  }
+
+  /**
+   * Gets a URL by its URL.
+   */
+  public static Url getByUrl(String url) throws DataInternalException {
     return Database.with(Url.class).getFirst(
-        new QueryOption.WhereEquals("id", id));
+        new QueryOption.WhereEquals("url", url));
   }
 
   /** Helper method for creating the discovered-url table. */

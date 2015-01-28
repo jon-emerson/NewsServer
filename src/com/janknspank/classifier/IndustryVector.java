@@ -42,7 +42,7 @@ public class IndustryVector {
     List<String> words = getSeedWords(industryCode);
     
     // 2. Get all documents that contain the seed word
-    List<Article> articles = Articles.getArticlesForKeywords(words);
+    Iterable<Article> articles = Articles.getArticlesForKeywords(words);
     
     // 3. Convert them into the industry vector
     List<DocumentVector> documentVectors = new ArrayList<>(); 

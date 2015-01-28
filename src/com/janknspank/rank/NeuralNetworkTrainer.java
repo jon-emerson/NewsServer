@@ -1,9 +1,7 @@
 package com.janknspank.rank;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.neuroph.core.NeuralNetwork;
@@ -31,7 +29,7 @@ public class NeuralNetworkTrainer {
   private static DataSet generateTrainingDataSet()
       throws DataInternalException, ParserException, 
       IOException, ValidationException {
-    List<UserUrlRating> allRatings = UserUrlRatings.getAll();
+    Iterable<UserUrlRating> allRatings = UserUrlRatings.getAll();
     Map<String, CompleteUser> userCache = new HashMap<String, CompleteUser>();
     
     // create training set

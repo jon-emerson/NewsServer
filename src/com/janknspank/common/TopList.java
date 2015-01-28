@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ import java.util.List;
  *   }
  * </code>
  */
-public class TopList<T, U extends Number> {
+public class TopList<T, U extends Number> implements Iterable<T> {
   private final int maxSize;
   private U smallestValue = null;
   private HashMap<T, U> values = Maps.newHashMap();
@@ -87,5 +88,10 @@ public class TopList<T, U extends Number> {
 
   public U getValue(String key) {
     return values.containsKey(key) ? values.get(key) : null;
+  }
+
+  @Override
+  public Iterator<T> iterator() {
+    return getKeys().iterator();
   }
 }

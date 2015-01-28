@@ -35,6 +35,7 @@ public class Database {
                       clazz.equals(LongAbstract.class)) {
                     return new LocalSqlCollection(clazz);
                   } else {
+                    //return new MongoCollection(clazz);
                     return new SqlCollection(clazz);
                   }
                 }
@@ -95,9 +96,11 @@ public class Database {
         + "." + fieldName + " field");
   }
 
-  protected static <T extends Message> Message getDefaultInstance(Class<T> clazz) {
+  // TODO(jonemerson): Make this package-private someday.
+  @SuppressWarnings("unchecked")
+  public static <T extends Message> T getDefaultInstance(Class<T> clazz) {
     try {
-      return (Message) clazz.getMethod("getDefaultInstance").invoke(null);
+      return (T) clazz.getMethod("getDefaultInstance").invoke(null);
     } catch (IllegalAccessException | IllegalArgumentException
         | InvocationTargetException | NoSuchMethodException | SecurityException e) {
       throw new IllegalStateException("Could not reflect on Message type: " + e.getMessage(), e);
@@ -125,6 +128,9 @@ public class Database {
   public static <T extends Message> int update(
       Iterable<T> messages, QueryOption.WhereOption... whereOptions)
       throws ValidationException, DataInternalException {
+    if (Iterables.isEmpty(messages)) {
+      return 0;
+    }
     @SuppressWarnings("unchecked")
     Collection<T> collection =
         (Collection<T>) with(Iterables.getFirst(messages, null).getClass());
@@ -144,6 +150,9 @@ public class Database {
    */
   public static <T extends Message> int insert(Iterable<T> messages)
       throws ValidationException, DataInternalException {
+    if (Iterables.isEmpty(messages)) {
+      return 0;
+    }
     @SuppressWarnings("unchecked")
     Collection<T> collection =
         (Collection<T>) with(Iterables.getFirst(messages, null).getClass());

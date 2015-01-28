@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.Core.IndustryCode;
@@ -15,7 +16,7 @@ public class UserIndustries {
   public static final String SOURCE_EXPLICIT_ADD = "ad";
   public static final String SOURCE_TOMBSTONE = "t";
   
-  public static List<UserIndustry> getIndustries(String userId) 
+  public static Iterable<UserIndustry> getIndustries(String userId) 
       throws DataInternalException {
     return Database.with(UserIndustry.class).get(
         new QueryOption.WhereEquals("user_id", userId),
@@ -44,8 +45,8 @@ public class UserIndustries {
     List<UserIndustry> allIndustries = Lists.newArrayList();
     List<UserIndustry> industriesToInsert = Lists.newArrayList();
     
-    List<UserIndustry> industriesAlreadySaved = getIndustries(userId);
-    allIndustries.addAll(industriesAlreadySaved);
+    Iterable<UserIndustry> industriesAlreadySaved = getIndustries(userId);
+    Iterables.addAll(allIndustries, industriesAlreadySaved);
     Map<Integer, UserIndustry> alreadySavedMap = new HashMap<>();
     for (UserIndustry industry : industriesAlreadySaved) {
       alreadySavedMap.put(industry.getIndustryCodeId(), industry);

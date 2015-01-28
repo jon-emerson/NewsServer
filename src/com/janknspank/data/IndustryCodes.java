@@ -758,7 +758,7 @@ public class IndustryCodes {
         }
       });
   
-  public static List<IndustryCode> getFrom(List<UserIndustry> userIndustries) {
+  public static List<IndustryCode> getFrom(Iterable<UserIndustry> userIndustries) {
     List<IndustryCode> industryCodes = new ArrayList<>();
     for (UserIndustry userIndustry : userIndustries) {
       industryCodes.add(IndustryCodes.INDUSTRY_CODE_MAP.get(

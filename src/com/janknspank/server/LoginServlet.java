@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -203,8 +202,8 @@ public class LoginServlet extends StandardServlet {
 
     // Try to save the user's profile and update his interests
     // and industries
-    List<UserInterest> interests;
-    List<UserIndustry> industries;
+    Iterable<UserInterest> interests;
+    Iterable<UserIndustry> industries;
     try {
      LinkedInProfile linkedInProfile = LinkedInProfile.newBuilder()
           .setUserId(user.getId())
@@ -223,7 +222,7 @@ public class LoginServlet extends StandardServlet {
     }
     
     // Get IndustryCodes so the client has more metadata to show
-    List<IndustryCode> industryCodes = IndustryCodes.getFrom(industries);
+    Iterable<IndustryCode> industryCodes = IndustryCodes.getFrom(industries);
 
     // Create the response.
     UserHelper userHelper = new UserHelper(user);

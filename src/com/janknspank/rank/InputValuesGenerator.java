@@ -34,7 +34,7 @@ public class InputValuesGenerator {
   
   public static double industryRelevance(CompleteUser user, CompleteArticle article) {
     double relevance = 0;
-    List<UserIndustry> userIndustries = user.getIndustries();
+    Iterable<UserIndustry> userIndustries = user.getIndustries();
     for (UserIndustry userIndustry : userIndustries) {
       relevance += article.getSimilarityToIndustry(userIndustry.getIndustryCodeId());
     }

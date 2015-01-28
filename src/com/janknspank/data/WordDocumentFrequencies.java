@@ -2,7 +2,6 @@ package com.janknspank.data;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
 import com.janknspank.classifier.DocumentVector;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.WordDocumentFrequency;
@@ -57,7 +57,7 @@ public class WordDocumentFrequencies {
     int limit = 1000;
     int offset = 0;
     int N = 0;
-    List<Article> articles;
+    Iterable<Article> articles;
     Set<String> words;
     Integer frequency;
     do {
@@ -75,8 +75,8 @@ public class WordDocumentFrequencies {
         }
       }
       offset += limit;
-      N += articles.size();
-    } while (articles.size() == limit);
+      N += Iterables.size(articles);
+    } while (Iterables.size(articles) == limit);
     saveNLocally(N);
     return wordDocumentFrequency;
   }
@@ -97,7 +97,8 @@ public class WordDocumentFrequencies {
           try {
             Database.insert(pageToSave);
           } catch (ValidationException | DataInternalException e) {
-            System.out.println("Error saving page of document frequencies to the server, but keep going");
+            System.out.println("Error saving page of document frequencies to the server,"
+                + " but keep going");
             e.printStackTrace();
           }
           pageToSave.clear();
@@ -117,7 +118,7 @@ public class WordDocumentFrequencies {
   private Map<String, Integer> loadPreviouslyComputedDocumentFrequencies() 
       throws DataInternalException {
     Map<String, Integer> frequencyMap = new HashMap<>();
-    List<WordDocumentFrequency> wdfs = Database.with(WordDocumentFrequency.class).get();
+    Iterable<WordDocumentFrequency> wdfs = Database.with(WordDocumentFrequency.class).get();
     for (WordDocumentFrequency wdf : wdfs) {
       frequencyMap.put(wdf.getWord(), (int) wdf.getFrequency());
     }

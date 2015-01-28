@@ -3,6 +3,7 @@ package com.janknspank.rank;
 import java.io.StringReader;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.LinkedInProfiles;
 import com.janknspank.data.UserIndustries;
@@ -29,12 +30,12 @@ import com.janknspank.proto.Core.UserUrlFavorite;
  */
 public class CompleteUser {
   private User user;
-  private List<UserInterest> interests;
-  private List<UserIndustry> industries;
-  private List<UserUrlFavorite> favorites;
+  private Iterable<UserInterest> interests;
+  private Iterable<UserIndustry> industries;
+  private Iterable<UserUrlFavorite> favorites;
   private String currentWorkplace;
-  //private List<UserUrlRating> ratings;
-  //private List<String> skills;
+  //private Iterable<UserUrlRating> ratings;
+  //private Iterable<String> skills;
   
   public CompleteUser(String userId) throws DataInternalException, 
       ParserException {
@@ -54,13 +55,13 @@ public class CompleteUser {
       }
     }
     
-    if (industries == null || industries.size() == 0) {
+    if (industries == null || Iterables.size(industries) == 0) {
       // Try to generate from linkedIn profile
       industries = UserIndustries.updateIndustries(userId, profileDocument);
     }
   }
   
-  public List<UserInterest> getInterests() {
+  public Iterable<UserInterest> getInterests() {
     return interests;
   }
   
@@ -68,7 +69,7 @@ public class CompleteUser {
     return currentWorkplace;
   }
   
-  public List<UserIndustry> getIndustries() {
+  public Iterable<UserIndustry> getIndustries() {
     return industries;
   }
 }
