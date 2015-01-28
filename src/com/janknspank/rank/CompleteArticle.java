@@ -1,7 +1,6 @@
 package com.janknspank.rank;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,13 +12,11 @@ import com.janknspank.data.ArticleKeywords;
 import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.IndustryCodes;
-import com.janknspank.data.TrainedArticleClassifications;
 import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleFacebookEngagement;
 import com.janknspank.proto.Core.ArticleIndustryClassification;
 import com.janknspank.proto.Core.ArticleKeyword;
-import com.janknspank.proto.Core.TrainedArticleClassification;
 import com.janknspank.proto.Core.UserInterest;
 
 /**
@@ -34,32 +31,29 @@ public class CompleteArticle {
   private Article article;
   private Iterable<ArticleKeyword> keywords;
   private Iterable<ArticleIndustryClassification> industryClassifications;
-  private Iterable<TrainedArticleClassification> trainedContentClassifications;
   private Iterable<ArticleFacebookEngagement> facebookEngagements;
   private static final int MILLIS_PER_DAY = 86400000;
-  
+
   public CompleteArticle(String urlId) 
       throws DataInternalException, IOException, ValidationException {
     article = Articles.getArticle(urlId);
     initForArticle(article);
   }
-  
+
   public CompleteArticle(Article article) 
       throws DataInternalException, IOException, ValidationException {
     this.article = article;
     initForArticle(article);
   }
-  
+
   private void initForArticle(Article article) 
       throws DataInternalException, IOException, ValidationException {
-    String urlId = article.getUrlId();
     String url = article.getUrl();
     keywords = ArticleKeywords.get(ImmutableList.of(article));
     industryClassifications = IndustryClassifier.getInstance().classify(article);
-    trainedContentClassifications = TrainedArticleClassifications.getFromArticle(urlId);
     facebookEngagements = ArticleFacebookEngagements.getLatest(url, 2);
   }
-  
+
   public Iterable<ArticleFacebookEngagement> getFacebookEngagements() {
     return facebookEngagements;
   }
