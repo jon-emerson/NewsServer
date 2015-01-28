@@ -1,14 +1,17 @@
 package com.janknspank.data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.janknspank.proto.Core.IndustryCode;
+import com.janknspank.proto.Core.UserIndustry;
 
 /**
- * Industry codes on articles added by humans
+ * Industry codes on articles
  */
 public class IndustryCodes {
   public static final Map<Integer, IndustryCode> INDUSTRY_CODE_MAP = Maps.uniqueIndex(
@@ -755,4 +758,21 @@ public class IndustryCodes {
         }
       });
   
+  public static List<IndustryCode> getFrom(Iterable<UserIndustry> userIndustries) {
+    List<IndustryCode> industryCodes = new ArrayList<>();
+    for (UserIndustry userIndustry : userIndustries) {
+      industryCodes.add(IndustryCodes.INDUSTRY_CODE_MAP.get(
+          userIndustry.getIndustryCodeId()));
+    }
+    return industryCodes;
+  }
+  
+  public static IndustryCode getForDescription(String description) {
+    for (IndustryCode industryCode : INDUSTRY_CODE_MAP.values()) {
+      if (industryCode.getDescription().equals(description)) {
+        return industryCode;
+      }
+    }
+    return null;
+  }
 }

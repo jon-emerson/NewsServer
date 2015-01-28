@@ -1,0 +1,49 @@
+{namespace news.viewfeed autoescape="strict"}
+
+/**
+ * Main page layout.
+ */
+{template .main}
+  <head>
+    <link rel="stylesheet" type="text/css" href="resources/viewfeed.css">
+    <script src="resources/jquery-1.11.2.min.js"></script>
+  </head>
+  <body>
+    <script src="resources/viewfeed.js"></script>
+    <div style="width:100%; margin:0;">
+      <div class="leftColumn">
+       {call .streamViewer data="all" /}
+      </div>
+      <div class="rightColumn">
+        {call .userPicker data="all" /}
+      </div>
+    </div>
+  <body>
+{/template}
+
+/**
+ * Renders the feed
+ * @param articles
+ */
+{template .streamViewer}
+  {foreach $article in $articles}
+    <div class="articleCard">
+      <img class="articleImg" src="{$article.image_url}" alt="{$article.title}">
+      <h1>{$article.title}</h1>
+      <a href={$article.url}>{$article.url}</a>
+      <p>{$article.description}</p>
+      <p>Score: {$article.score}</p>
+      <p>Industry Classification: {$article.industry_classifications}</p>
+      <p>Facebook likes: {$article.fb_likes}, shares: {$article.fb_shares}, 
+          comments: {$article.fb_comments}</p>
+    </div>
+  {/foreach}
+{/template}
+
+/**
+ * List info about the current user
+ * and let admin switch
+ */
+{template .userPicker}
+  
+{/template}

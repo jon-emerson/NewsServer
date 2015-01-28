@@ -35,6 +35,7 @@
 	<classpathentry kind="lib" path="target/dependency/icu4j-4.8.1.1.jar"/>
 	<classpathentry kind="lib" path="target/dependency/jsr305-1.3.9.jar"/>
 	<classpathentry kind="lib" path="target/dependency/mongo-java-driver-2.12.5.jar"/>
+	<classpathentry kind="lib" path="target/dependency/restfb-1.7.1.jar"/>
 	<classpathentry kind="lib" path="target/dependency/appengine-api-1.0-sdk-1.9.17.jar"/>
 	<classpathentry kind="lib" path="target/dependency/appengine-api-stubs-1.9.17.jar"/>
 	<classpathentry kind="lib" path="target/dependency/appengine-testing-1.9.17.jar"/>

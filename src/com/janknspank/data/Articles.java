@@ -1,5 +1,8 @@
 package com.janknspank.data;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Function;
@@ -8,13 +11,15 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.janknspank.common.TopList;
+import com.janknspank.data.QueryOption.LimitWithOffset;
 import com.janknspank.dom.parser.ParserException;
-import com.janknspank.neuralnet.CompleteUser;
-import com.janknspank.neuralnet.NeuralNetworkDriver;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.TrainedArticleIndustry;
 import com.janknspank.proto.Core.UserInterest;
+import com.janknspank.rank.CompleteArticle;
+import com.janknspank.rank.CompleteUser;
+import com.janknspank.rank.Scorer;
 
 /**
  * Helper class that manages storing and retrieving Article objects from the
@@ -58,8 +63,22 @@ public class Articles {
   private static Iterable<ArticleKeyword> getArticleKeywordsForTopics(Iterable<String> topics)
       throws DataInternalException {
     return Database.with(ArticleKeyword.class).get(
-        new QueryOption.WhereEquals("keyword", topics),
+        new QueryOption.WhereEqualsIgnoreCase("keyword", topics),
         new QueryOption.Limit(500));
+  }
+  
+  /**
+   * Gets articles that contain a set of keywords
+   * @throws DataInternalException 
+   */
+  public static Iterable<Article> getArticlesForKeywords(Iterable<String> keywords) 
+      throws DataInternalException {
+    Iterable<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(keywords);
+    Set<String> articleIds = Sets.newHashSet();
+    for (ArticleKeyword articleKeyword : articleKeywords) {
+      articleIds.add(articleKeyword.getUrlId());
+    }
+    return getArticles(articleIds);
   }
 
   /**
@@ -75,19 +94,35 @@ public class Articles {
     }
     return getArticles(articleIds);
   }
-
-  public static Iterable<Article> getArticlesRankedByNeuralNetwork(String userId)
-      throws DataInternalException, ParserException {
-    NeuralNetworkDriver neuralNetworkDriver = NeuralNetworkDriver.getInstance();
-    CompleteUser completeUser = new CompleteUser(userId);
-
-    // Sort the articles by rank
-    Iterable<Article> articles = getArticlesByInterest(UserInterests.getInterests(userId));
-    TopList<Article, Double> topArticles = new TopList<Article, Double>(Iterables.size(articles));
-    for (Article article : articles) {
-      topArticles.add(article, neuralNetworkDriver.getRank(article, completeUser));
+  
+  public static Iterable<Article> getRankedArticles(String userId, Scorer scorer)
+      throws DataInternalException, ParserException, IOException, ValidationException {
+    Map<CompleteArticle, Double> ranks = getCompleteArticlesAndScores(userId, scorer);
+    
+    // Sort the articles
+    TopList<Article, Double> articles = new TopList<>(ranks.size());
+    for (Map.Entry<CompleteArticle, Double> entry : ranks.entrySet()) {
+      articles.add(entry.getKey().getArticle(), entry.getValue());
     }
-    return topArticles;
+    
+    return articles.getKeys();
+  }
+  
+  public static Map<CompleteArticle, Double> getCompleteArticlesAndScores(String userId, Scorer scorer)
+      throws DataInternalException, ParserException, IOException, ValidationException {
+    //NeuralNetworkScorer neuralNetworkRank = NeuralNetworkScorer.getInstance();
+    CompleteUser completeUser = new CompleteUser(userId);
+    // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
+    Iterable<Article> articles = getArticlesByInterest(UserInterests.getInterests(userId));
+    Map<CompleteArticle, Double> ranks = new HashMap<>();
+    
+    CompleteArticle completeArticle;
+    for (Article article : articles) {
+      completeArticle = new CompleteArticle(article);
+      ranks.put(completeArticle, scorer.getScore(completeUser, completeArticle));
+    }
+    
+    return ranks;
   }
 
   /**
@@ -106,6 +141,12 @@ public class Articles {
     return Database.with(Article.class).get(urlId);
   }
 
+  public static Iterable<Article> getPageOfArticles(int limit, int offset) 
+      throws DataInternalException {
+    return Database.with(Article.class).get(
+        new LimitWithOffset(limit, offset));
+  }
+  
   /**
    * Returns a random article
    */

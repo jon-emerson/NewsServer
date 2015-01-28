@@ -91,6 +91,8 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         return "INT";
       case BOOLEAN:
         return "BOOLEAN";
+      case DOUBLE:
+        return "DOUBLE";
       default:
         throw new IllegalStateException("Unsupported type: " + fieldDescriptor.getJavaType().name());
     }
@@ -192,6 +194,9 @@ public class SqlCollection<T extends Message> extends Collection<T> {
               break;
             case BOOLEAN:
               statement.setBoolean(offset, (boolean) message.getField(field));
+              break;
+            case DOUBLE:
+              statement.setDouble(offset, (double) message.getField(field));
               break;
             default:
               throw new IllegalStateException("Unsupported type: " + field.getJavaType().name());
