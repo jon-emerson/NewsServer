@@ -52,12 +52,12 @@ public class UserIndustries {
     return updateIndustries(userId, industries, SOURCE_LINKEDIN_PROFILE);
   }
   
-  // Used to keep UserIndustry in sync with user's LinkedIn profile
-  // Industry. Should not be used for explicit industry adds.
-  // For that use just generate a new UserIndustry object and insert it.
   /**
    * Updates the industries for a given source (like LinkedIn)
    * Includes removing old industries and inserting new ones.
+   * Used to keep the DB in sync with LinkedIn profile changes.
+   * This should not be use for explicit industry adds.
+   * For that just generate a new UserIndustry object and insert it.
    * @param userId
    * @param newIndustries
    * @param source

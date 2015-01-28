@@ -69,11 +69,11 @@ public class IndustryVector {
   @SuppressWarnings("unchecked")
   private static Map<String, Double> loadVector(IndustryCode industryCode) {
     try {
-    String fileName = getFileNameForIndustry(industryCode);
-    FileInputStream fis = new FileInputStream(fileName);
-    ObjectInputStream ois = new ObjectInputStream(fis);
-    Map<String, Double> map = (Map<String, Double>) ois.readObject();
-    ois.close();
+      String fileName = getFileNameForIndustry(industryCode);
+      FileInputStream fis = new FileInputStream(fileName);
+      ObjectInputStream ois = new ObjectInputStream(fis);
+      Map<String, Double> map = (Map<String, Double>) ois.readObject();
+      ois.close();
     return map;
     } catch (IOException | ClassNotFoundException e) {
       return null;
@@ -101,24 +101,23 @@ public class IndustryVector {
   private static List<String> getSeedWords(IndustryCode industryCode) 
       throws DataInternalException {
     List<String> words = null;
-    Iterator<String> itr = null;
-
+    
     try {
       String seedFileContents = Files.toString(
           new File(getSeedWordsFileName(industryCode)), Charset.defaultCharset());
       words = IOUtils.readLines(new StringReader(seedFileContents));
-      itr = words.iterator();
     } catch (IOException e) {
       throw new DataInternalException("Couldn't get seed words from file: " 
           + e.getMessage(), e);
     }
 
     // remove all comments
+    Iterator<String> itr = words.iterator();
     while (itr.hasNext()) {
-        String line = itr.next();
-        if (line.startsWith("//")) {
-            itr.remove();
-        }
+      String line = itr.next();
+      if (line.startsWith("//")) {
+        itr.remove();
+      }
     }
 
     return words;

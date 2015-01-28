@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multiset;
@@ -110,22 +111,16 @@ public class WordDocumentFrequencies {
     }
   }
   
-  private static void saveNLocally(int numDocs) throws IOException {
-    Properties properties = getVectorSpaceProperties();
-    properties.setProperty(PROPERTY_KEY_N, String.valueOf(numDocs));
-    File f = new File(PROPERTY_FILE_NAME);
-    OutputStream out = new FileOutputStream(f);
-    properties.store(out, "Updated N");
-  }
-  
   private Multiset<String> loadPreviouslyComputedDocumentFrequencies() {
-    Multiset<String> frequencyMap = HashMultiset.create();
     Iterable<WordDocumentFrequency> wdfs;
     try {
       wdfs = Database.with(WordDocumentFrequency.class).get();
     } catch (DataInternalException e) {
+      e.printStackTrace();
       return null;
     }
+    
+    Multiset<String> frequencyMap = HashMultiset.create();
     for (WordDocumentFrequency wdf : wdfs) {
       frequencyMap.add(wdf.getWord(), (int) wdf.getFrequency());
     }
@@ -133,13 +128,11 @@ public class WordDocumentFrequencies {
   }
   
   public int getFrequency(String word) {
-    int frequency;
     try {
-      frequency = documentFrequency.count(word);
+      return documentFrequency.count(word);
     } catch (NullPointerException e) {
-      frequency = 0;
+      return 0;
     }
-    return frequency;
   }
   
   public int getN() throws DataInternalException {
@@ -149,12 +142,30 @@ public class WordDocumentFrequencies {
         properties = getVectorSpaceProperties();
       } catch (IOException e) {
         throw new DataInternalException(
-            "Can't load N - the total # of articles in the corpus: " + e, e);
+            "Can't load N - the total # of articles in the corpus: " + e.getMessage(), e);
       }
-      totalDocumentCount = Integer.parseInt(
-          properties.getProperty(PROPERTY_KEY_N));
+      String propertyNString = properties.getProperty(PROPERTY_KEY_N);
+      if (Strings.isNullOrEmpty(propertyNString)) {
+        throw new DataInternalException(
+            "Property file doesn't contain a valid total document count N");
+      }
+      totalDocumentCount = Integer.parseInt(propertyNString);
     }
     return totalDocumentCount;
+  }
+  
+  private static void saveNLocally(int numDocs) throws DataInternalException {
+    try {
+    Properties properties = getVectorSpaceProperties();
+    properties.setProperty(PROPERTY_KEY_N, String.valueOf(numDocs));
+    File f = new File(PROPERTY_FILE_NAME);
+    OutputStream out = new FileOutputStream(f);
+    properties.store(out, "Updated N");
+    } catch (IOException e) {
+      throw new DataInternalException(
+          "Issue saving N - the total # of arcitles in the corpus to file: " 
+          + e.getMessage(), e);
+    }
   }
   
   private static Properties getVectorSpaceProperties() throws IOException {

@@ -410,7 +410,7 @@ message UserIntent {
   optional string user_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
@@ -574,7 +574,7 @@ message ArticleIndustryClassification {
   optional string url_id = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 22,
+    (string_length) = 24,
     (string_charset) = LATIN1
   ];
   
@@ -664,7 +664,7 @@ message ArticleFacebookEngagement {
 message WordDocumentFrequency {
   optional string word = 1 [
     (required) = YES,
-    (storage_method) = PRIMARY_KEY,
+    (storage_method) = UNIQUE_INDEX,
     (string_length) = 200
   ];
   
