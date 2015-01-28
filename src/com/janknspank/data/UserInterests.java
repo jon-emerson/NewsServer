@@ -1,7 +1,6 @@
 package com.janknspank.data;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,10 +12,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
-import com.google.i18n.phonenumbers.NumberParseException;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
-import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 import com.janknspank.common.TopList;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -32,10 +27,6 @@ public class UserInterests {
   public static final String SOURCE_LINKEDIN_PROFILE = "lp";
   public static final String SOURCE_USER = "u";
   public static final String SOURCE_TOMBSTONE = "t";
-
-  private final static PhoneNumberUtil PHONE_NUMBER_UTIL = PhoneNumberUtil.getInstance();
-  private final static PhoneNumberOfflineGeocoder GEOCODER =
-      PhoneNumberOfflineGeocoder.getInstance();
 
   /**
    * Returns a complete list of the specified user's interests.
@@ -131,20 +122,6 @@ public class UserInterests {
             .setSource(UserInterests.SOURCE_ADDRESS_BOOK)
             .setType(UserInterests.TYPE_PERSON)
             .build());
-      }
-
-      // Create a list of where the user's contacts are from, so we can tailor
-      // news to where he lives and has lived before.
-      JSONArray phoneNumbersJson = personJson.getJSONArray("phoneNumbers");
-      for (int j = 0; j < phoneNumbersJson.length(); j++) {
-        try {
-          PhoneNumber phoneNumber = PHONE_NUMBER_UTIL.parse(phoneNumbersJson.getString(j), "US");
-          if (PHONE_NUMBER_UTIL.isValidNumber(phoneNumber)) {
-            locations.add(GEOCODER.getDescriptionForNumber(phoneNumber, Locale.US));
-          }
-        } catch (NumberParseException e) {
-          e.printStackTrace();
-        }
       }
     }
 

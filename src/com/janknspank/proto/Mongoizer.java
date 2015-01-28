@@ -97,6 +97,10 @@ public class Mongoizer {
               messageBuilder.addRepeatedField(fieldDescriptor, (Integer) list.get(i));
               break;
 
+            case DOUBLE:
+              messageBuilder.addRepeatedField(fieldDescriptor, (Double) list.get(i));
+              break;
+
             case ENUM:
               // TODO(jonemerson): Add error handling, in case no value is found.
               messageBuilder.addRepeatedField(fieldDescriptor,
@@ -121,6 +125,10 @@ public class Mongoizer {
 
           case INT:
             messageBuilder.setField(fieldDescriptor, object.getInt(fieldName));
+            break;
+
+          case DOUBLE:
+            messageBuilder.setField(fieldDescriptor, object.getDouble(fieldName));
             break;
 
           case ENUM:
@@ -174,6 +182,7 @@ public class Mongoizer {
             case STRING:
             case LONG:
             case INT:
+            case DOUBLE:
               list.add(message.getRepeatedField(fieldDescriptor, i));
               break;
 
@@ -205,6 +214,7 @@ public class Mongoizer {
           case STRING:
           case LONG:
           case INT:
+          case DOUBLE:
             object.put(fieldName, message.getField(fieldDescriptor));
             break;
 

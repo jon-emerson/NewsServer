@@ -17,7 +17,8 @@ import com.janknspank.data.ValidationException;
 @AuthenticationRequired(requestMethod = "POST")
 public abstract class StandardServlet extends NewsServlet {
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+      throws DataInternalException, ValidationException, DataRequestException, NotFoundException,
+          RedirectException {
     return null;
   }
 
@@ -26,7 +27,8 @@ public abstract class StandardServlet extends NewsServlet {
    * servlet's Soy page.
    */
   protected SoyMapData getSoyMapData(HttpServletRequest req)
-      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+      throws DataInternalException, ValidationException, DataRequestException, NotFoundException,
+          RedirectException {
     return null;
   }
 
@@ -36,16 +38,15 @@ public abstract class StandardServlet extends NewsServlet {
     try {
       JSONObject response = doGetInternal(req, resp);
       if (response == null) {
-        if (resp.getStatus() == HttpServletResponse.SC_MOVED_TEMPORARILY) {
-          // Don't do anything, the internal chose to redirect.
-        } else {
-          resp.setHeader("Content-Type", "text/html; charset=utf-8");
-          writeSoyTemplate(resp, ".main", getSoyMapData(req));
-        }
+        resp.setHeader("Content-Type", "text/html; charset=utf-8");
+        writeSoyTemplate(resp, ".main", getSoyMapData(req));
       } else {
         Asserts.assertTrue(response.getBoolean("success"), "success in response");
         writeJson(resp, response);
       }
+    } catch (RedirectException e) {
+      resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+      resp.setHeader("Location", e.getNextUrl());
     } catch (NotFoundException e) {
       resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
       writeJson(resp, getErrorJson(e.getMessage()));

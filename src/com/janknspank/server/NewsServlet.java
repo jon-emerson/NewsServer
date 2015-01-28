@@ -2,6 +2,7 @@ package com.janknspank.server;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -9,10 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.util.MultiMap;
-import org.eclipse.jetty.util.UrlEncoded;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.json.JSONObject;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
 import com.google.template.soy.SoyFileSet;
@@ -43,9 +45,13 @@ public class NewsServlet extends HttpServlet {
     if (value != null) {
       return value;
     } else {
-      return ((MultiMap<String>) request.getAttribute(PARAMS_ATTRIBUTE_KEY)).
-          getString(key);
+      for (NameValuePair pair : (List<NameValuePair>) request.getAttribute(PARAMS_ATTRIBUTE_KEY)) {
+        if (key.equals(pair.getName())) {
+          return pair.getValue();
+        }
+      }
     }
+    return null;
   }
 
   /**
@@ -67,10 +73,8 @@ public class NewsServlet extends HttpServlet {
   final public void service(HttpServletRequest request,
       HttpServletResponse response) throws ServletException, IOException {
     // Parse the parameters.
-    MultiMap<String> params = new MultiMap<String>();
-    String queryString = getQueryString(request);
-    UrlEncoded.decodeTo(queryString, params, "UTF-8", 100);
-    request.setAttribute(PARAMS_ATTRIBUTE_KEY, params);
+    request.setAttribute(PARAMS_ATTRIBUTE_KEY,
+        URLEncodedUtils.parse(getQueryString(request), Charsets.UTF_8));
 
     // Handle authentication.  Authentication is required on servlets that
     // have annotated themselves with @AuthenticationRequired.  These
@@ -223,7 +227,7 @@ public class NewsServlet extends HttpServlet {
    */
   protected void writeSoyTemplate(HttpServletResponse resp, String template, SoyMapData data)
       throws IOException {
-    resp.setContentType("text/html");
+    resp.setContentType("text/html; charset=utf-8");
 
     Renderer renderer = getTofu().newRenderer(template);
     if (data != null) {
@@ -237,7 +241,7 @@ public class NewsServlet extends HttpServlet {
    * to a OutputStream besides converting the whole thing to a String first.
    */
   protected void writeJson(HttpServletResponse resp, JSONObject o) throws IOException {
-    resp.setContentType("application/json");
+    resp.setContentType("application/json; charset=utf-8");
     resp.getOutputStream().write(o.toString().getBytes());
   }
 

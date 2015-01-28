@@ -16,15 +16,15 @@ public class MongoConnection {
   static {
     MONGO_HOST = System.getenv("MONGO_HOST");
     if (MONGO_HOST == null) {
-      throw new IllegalStateException("$MONGO_HOST is undefined");
+      throw new Error("$MONGO_HOST is undefined");
     }
     MONGO_USER = System.getenv("MONGO_USER");
     if (MONGO_USER == null) {
-      throw new IllegalStateException("$MONGO_USER is undefined");
+      throw new Error("$MONGO_USER is undefined");
     }
     MONGO_PASSWORD = System.getenv("MONGO_PASSWORD");
     if (MONGO_PASSWORD == null) {
-      throw new IllegalStateException("$MONGO_PASSWORD is undefined");
+      throw new Error("$MONGO_PASSWORD is undefined");
     }
   }
 

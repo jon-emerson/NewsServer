@@ -14,7 +14,6 @@ public class SqlConnection {
   private static final String DB_URL =
       "jdbc:mysql://newsserver.ceibyxjobuqr.us-west-2.rds.amazonaws.com:4406/newsserver?"
           + Joiner.on("&").join(ImmutableList.of(
-              "useTimezone=true",
               "rewriteBatchedStatements=true",
               "useUnicode=true",
               "characterEncoding=UTF-8",
@@ -26,11 +25,11 @@ public class SqlConnection {
   static {
     MYSQL_USER = System.getenv("MYSQL_USER");
     if (MYSQL_USER == null) {
-      throw new IllegalStateException("$MYSQL_USER is undefined");
+      throw new Error("$MYSQL_USER is undefined");
     }
     MYSQL_PASSWORD = System.getenv("MYSQL_PASSWORD");
     if (MYSQL_PASSWORD == null) {
-      throw new IllegalStateException("$MYSQL_PASSWORD is undefined");
+      throw new Error("$MYSQL_PASSWORD is undefined");
     }
     try {
       // Make sure the MySQL JDBC driver is loaded.
@@ -48,7 +47,8 @@ public class SqlConnection {
       try {
         connection = DriverManager.getConnection(DB_URL, MYSQL_USER, MYSQL_PASSWORD);
       } catch (SQLException e) {
-        throw new DataInternalException("Could not connect to database", e);
+        e.printStackTrace();
+        throw new DataInternalException("Could not connect to database: " + e.getMessage(), e);
       }
       System.out.println("Connected to remote database successfully.");
     }

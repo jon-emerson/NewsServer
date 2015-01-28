@@ -6,23 +6,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="target/dependency/commons-codec-1.9.jar"/>
 	<classpathentry kind="lib" path="target/dependency/commons-logging-1.1.3.jar"/>
-	<classpathentry kind="lib" path="target/dependency/guava-17.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="target/dependency/httpasyncclient-4.0.2.jar"/>
 	<classpathentry kind="lib" path="target/dependency/httpclient-4.3.6.jar"/>
 	<classpathentry kind="lib" path="target/dependency/httpcore-4.3.2.jar"/>
 	<classpathentry kind="lib" path="target/dependency/httpcore-nio-4.3.2.jar"/>
 	<classpathentry kind="lib" path="target/dependency/javax.servlet-api-3.1.0.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-continuation-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-http-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-io-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-security-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-server-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-servlet-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-servlets-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-util-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-webapp-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="target/dependency/jetty-xml-9.2.1.v20140609.jar"/>
 	<classpathentry kind="lib" path="target/dependency/json-20140107.jar"/>
 	<classpathentry kind="lib" path="target/dependency/junit-4.11.jar"/>
 	<classpathentry kind="lib" path="target/dependency/jwnl-1.3.3.jar"/>
@@ -35,11 +24,8 @@
 	<classpathentry kind="lib" path="target/dependency/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="target/dependency/commons-lang3-3.3.2.jar"/>
 	<classpathentry kind="lib" path="target/dependency/juniversalchardet-1.0.3.jar"/>
-	<classpathentry kind="lib" path="target/dependency/libphonenumber-7.0.1.jar"/>
-	<classpathentry kind="lib" path="target/dependency/geocoder-2.18.jar"/>
 	<classpathentry kind="lib" path="target/dependency/neuroph-core-2.7.jar"/>
 	<classpathentry kind="lib" path="target/dependency/mockito-all-1.10.19.jar"/>
-	<classpathentry kind="lib" path="target/dependency/prefixmapper-2.18.jar"/>
 	<classpathentry kind="lib" path="target/dependency/guice-3.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/guice-assistedinject-3.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/guice-multibindings-3.0.jar"/>
@@ -49,5 +35,20 @@
 	<classpathentry kind="lib" path="target/dependency/icu4j-4.8.1.1.jar"/>
 	<classpathentry kind="lib" path="target/dependency/jsr305-1.3.9.jar"/>
 	<classpathentry kind="lib" path="target/dependency/mongo-java-driver-2.12.5.jar"/>
+	<classpathentry kind="lib" path="target/dependency/appengine-api-1.0-sdk-1.9.17.jar"/>
+	<classpathentry kind="lib" path="target/dependency/appengine-api-stubs-1.9.17.jar"/>
+	<classpathentry kind="lib" path="target/dependency/appengine-testing-1.9.17.jar"/>
+	<classpathentry kind="lib" path="target/dependency/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-continuation-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-http-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-io-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-security-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-server-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-servlet-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-servlets-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-util-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-webapp-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jetty-xml-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="target/dependency/google-http-client-1.19.0.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
