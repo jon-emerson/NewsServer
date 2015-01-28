@@ -35,17 +35,17 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 public class SqlCollection<T extends Message> extends Collection<T> {
   private static final String PROTO_COLUMN_NAME = "proto";
-  private Connection __connectionCache; // DO NOT USE THIS DIRECTLY!!
+  private Connection __connection; // DO NOT USE THIS DIRECTLY!!
 
   public SqlCollection(Class<T> clazz) {
     super(clazz);
   }
 
   protected Connection getConnection() throws DataInternalException {
-    if (__connectionCache == null) {
-      __connectionCache = SqlConnection.getConnection();
+    if (__connection == null) {
+      __connection = SqlConnection.getConnection();
     }
-    return __connectionCache;
+    return __connection;
   }
 
   @Override

@@ -54,7 +54,7 @@ public class Validator {
         Asserts.assertTrue(indexedFieldsAllowed, "Error in " + message.getClass().getSimpleName()
             + ": Indexed fields are not allowed in nested protos");
       }
-      
+
       // Verify string length is valid.
       int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
       if (fieldDescriptor.getJavaType() == JavaType.STRING) {
@@ -73,8 +73,8 @@ public class Validator {
       if (storageMethod == StorageMethod.PRIMARY_KEY) {
         Asserts.assertTrue(!foundPrimaryKey, "Error in " + message.getClass().getSimpleName()
             + ": Only one primary key per table allowed");
-        Asserts.assertTrue(stringLength == GuidFactory.GUID_SIZE,
-            "Primary keys must be strings of size " + GuidFactory.GUID_SIZE);
+//        Asserts.assertTrue(stringLength == GuidFactory.GUID_SIZE,
+//            "Primary keys must be strings of size " + GuidFactory.GUID_SIZE);
         foundPrimaryKey = true;
       }
 

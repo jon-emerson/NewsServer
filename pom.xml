@@ -3,24 +3,46 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.janknspank</groupId>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
+
+  <groupId>com.janknspank</groupId>
   <artifactId>NewsServer</artifactId>
+
+  <properties>
+    <appengine.app.version>1</appengine.app.version>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <prerequisites>
+    <maven>3.1.0</maven>
+  </prerequisites>
+
   <dependencies>
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-api-1.0-sdk</artifactId>
+      <version>1.9.17</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-api-stubs</artifactId>
+      <version>1.9.17</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-testing</artifactId>
+      <version>1.9.17</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>com.googlecode.juniversalchardet</groupId>
       <artifactId>juniversalchardet</artifactId>
       <version>1.0.3</version>
-    </dependency>
-    <dependency>
-      <groupId>com.googlecode.libphonenumber</groupId>
-      <artifactId>geocoder</artifactId>
-      <version>2.18</version>
-    </dependency>
-    <dependency>
-      <groupId>com.googlecode.libphonenumber</groupId>
-      <artifactId>libphonenumber</artifactId>
-      <version>7.0.1</version>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
@@ -40,12 +62,22 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>17.0</version>
+      <version>18.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+      <version>1.19.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.template</groupId>
       <artifactId>soy</artifactId>
       <version>2012-12-21</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
@@ -58,11 +90,6 @@
       <version>4.3.6</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpcore-nio</artifactId>
-      <version>4.3.2</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.opennlp</groupId>
       <artifactId>opennlp-tools</artifactId>
       <version>1.5.3</version>
@@ -70,27 +97,27 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-servlet</artifactId>
-      <version>9.2.1.v20140609</version>
+      <version>9.2.7.v20150116</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-servlets</artifactId>
-      <version>9.2.1.v20140609</version>
+      <version>9.2.7.v20150116</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-util</artifactId>
-      <version>9.2.1.v20140609</version>
+      <version>9.2.7.v20150116</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-webapp</artifactId>
-      <version>9.2.1.v20140609</version>
+      <version>9.2.7.v20150116</version>
     </dependency>
     <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
-      <version>20140107</version>
+      <version>20140107</version> <!-- Later versions require Java 8 -->
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
@@ -134,6 +161,9 @@
     </dependency>
   </dependencies>
   <build>
+    <!-- for hot reload of the web application-->
+    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+
     <testOutputDirectory>target/test-classes</testOutputDirectory>
     <sourceDirectory>src</sourceDirectory>
     <scriptSourceDirectory>scripts</scriptSourceDirectory>
@@ -149,6 +179,20 @@
       </testResource>
     </testResources>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.1</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>display-dependency-updates</goal>
+              <goal>display-plugin-updates</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -178,14 +222,40 @@
           <argLine>-Dfile.encoding=UTF-8</argLine>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <archiveClasses>true</archiveClasses>
+          <webResources>
+            <!-- in order to interpolate version from pom into appengine-web.xml -->
+            <resource>
+              <directory>${basedir}/WEB-INF</directory>
+              <filtering>true</filtering>
+              <targetPath>WEB-INF</targetPath>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.google.appengine</groupId>
+        <artifactId>appengine-maven-plugin</artifactId>
+        <version>1.9.17</version>
+        <configuration>
+          <enableJarClasses>false</enableJarClasses>
+          <!-- Comment in the below snippet to bind to all IPs instead of just localhost -->
+          <!-- address>0.0.0.0</address>
+          <port>8080</port -->
+          <!-- Comment in the below snippet to enable local debugging with a remove debugger
+               like those included with Eclipse or IntelliJ -->
+          <!-- jvmFlags>
+            <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
+          </jvmFlags -->
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-  <properties>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
   <repositories>
     <repository>
       <id>Neuroph repo</id>

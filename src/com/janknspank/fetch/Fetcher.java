@@ -8,11 +8,12 @@ import java.io.Reader;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.HttpResponse;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.common.io.CharStreams;
 import com.janknspank.proto.Core.Url;
 
@@ -21,7 +22,8 @@ import com.janknspank.proto.Core.Url;
  * TODO(jonemerson): This class should enforce robots.txt.
  */
 public class Fetcher {
-  private CloseableHttpClient httpclient = HttpClients.createDefault();
+  private HttpTransport transport = new NetHttpTransport();
+  private HttpRequestFactory httpRequestFactory = transport.createRequestFactory();
 
   public Fetcher() {
   }
@@ -30,17 +32,18 @@ public class Fetcher {
     // TODO(jonemerson): Use the file system cache for returning cached responses?
 
     try {
-      CloseableHttpResponse response = httpclient.execute(new HttpGet(url.getUrl()));
-      Reader reader = new CharsetDetectingReader(response.getEntity().getContent());
-      if (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_OK) {
+      HttpRequest request = httpRequestFactory.buildGetRequest(new GenericUrl(url.getUrl()));
+      HttpResponse response = request.execute();
+      Reader reader = new CharsetDetectingReader(response.getContent());
+      if (response.getStatusCode() == HttpServletResponse.SC_OK) {
         try {
-          return new FetchResponse(response.getStatusLine().getStatusCode(),
+          return new FetchResponse(response.getStatusCode(),
               cacheToFile(url, reader));
         } finally {
           reader.close();
         }
       }
-      return new FetchResponse(response.getStatusLine().getStatusCode(), reader);
+      return new FetchResponse(response.getStatusCode(), reader);
     } catch (IOException e) {
       throw new FetchException("Error fetching", e);
     }
@@ -48,9 +51,10 @@ public class Fetcher {
 
   public FetchResponse fetch(String urlString) throws FetchException {
     try {
-      CloseableHttpResponse response = httpclient.execute(new HttpGet(urlString));
-      return new FetchResponse(response.getStatusLine().getStatusCode(),
-          new CharsetDetectingReader(response.getEntity().getContent()));
+      HttpRequest request = httpRequestFactory.buildGetRequest(new GenericUrl(urlString));
+      HttpResponse response = request.execute();
+      return new FetchResponse(response.getStatusCode(),
+          new CharsetDetectingReader(response.getContent()));
     } catch (IOException e) {
       throw new FetchException("Error fetching", e);
     }

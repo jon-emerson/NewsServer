@@ -35,7 +35,7 @@ public class Database {
                       clazz.equals(LongAbstract.class)) {
                     return new LocalSqlCollection(clazz);
                   } else {
-                    //return new MongoCollection(clazz);
+                    // return new MongoCollection(clazz);
                     return new SqlCollection(clazz);
                   }
                 }

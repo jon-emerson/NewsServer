@@ -146,9 +146,8 @@ public class GetKeywordsFromDbpediaAbstracts {
     return false;
   }
 
-  public static LongAbstract getNextLongAbstract() throws DataInternalException {
-    return Database.with(LongAbstract.class).getFirst(
-        new QueryOption.LimitWithOffset(1, (int) (10000 * Math.random())));
+  public static LongAbstract getNextLongAbstract(int offset) throws DataInternalException {
+    return Database.with(LongAbstract.class).getFirst(new QueryOption.LimitWithOffset(1, offset));
   }
 
   /**
@@ -223,6 +222,7 @@ public class GetKeywordsFromDbpediaAbstracts {
 
       reader = new BufferedReader(new FileReader("dbpedia/long_abstracts_en.nq"));
       String line = reader.readLine();
+      int i = 0;
       while (line != null) {
         if (line.startsWith("#")) {
           line = reader.readLine();
@@ -230,7 +230,7 @@ public class GetKeywordsFromDbpediaAbstracts {
         }
 
         try {
-          LongAbstract abs = getNextLongAbstract();
+          LongAbstract abs = getNextLongAbstract(i++);
           Entity entity = Entities.getEntityByKeyword(abs.getTopic());
           if (entity == null) {
             longAbstractsToDelete.add(abs);
@@ -280,6 +280,7 @@ public class GetKeywordsFromDbpediaAbstracts {
           entitiesToUpdate.clear();
           Database.delete(longAbstractsToDelete);
           longAbstractsToDelete.clear();
+          i = 0;
         }
 
         line = reader.readLine();
