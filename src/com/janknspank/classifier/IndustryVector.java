@@ -1,19 +1,24 @@
 package com.janknspank.classifier;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.StringReader;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
+
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
+import com.google.common.io.Files;
 import com.janknspank.data.Articles;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.proto.Core.Article;
@@ -23,12 +28,10 @@ public class IndustryVector {
   private Map<String, Double> tfIdfVector;
   private IndustryCode industryCode;
   
-  public IndustryVector(IndustryCode code) throws IOException, DataInternalException {
+  public IndustryVector(IndustryCode code) throws DataInternalException {
     industryCode = code;
-    try {
-      tfIdfVector = loadVector(industryCode);
-      return;
-    } catch (ClassNotFoundException | IOException e) {
+    tfIdfVector = loadVector(industryCode);
+    if (tfIdfVector == null) {
       // Couldn't load IndustryVector from file
       // Try to generate it from scratch
       tfIdfVector = generateVectorForIndustryCode(industryCode);
@@ -37,7 +40,7 @@ public class IndustryVector {
   }
   
   private static Map<String, Double> generateVectorForIndustryCode(IndustryCode industryCode) 
-      throws DataInternalException, IOException {
+      throws DataInternalException {
     // 1. Get seed words for industryCode.id
     List<String> words = getSeedWords(industryCode);
     
@@ -49,51 +52,46 @@ public class IndustryVector {
     for (Article article : articles) {
       documentVectors.add(new DocumentVector(article));
     }
-    Map<String, Integer> frequencyVector = sumVectors(documentVectors);
+    Multiset<String> frequencyVector = sumVectors(documentVectors);
     return DocumentVector.generateTFIDFVectorFromTF(frequencyVector);
   }
   
-  private static Map<String, Integer> sumVectors(List<DocumentVector> documentVectors) {
-    HashMap<String, Integer> sum = new HashMap<>();
+  private static Multiset<String> sumVectors(List<DocumentVector> documentVectors) {
+    Multiset<String> sum = HashMultiset.create();
     
     for (DocumentVector document : documentVectors) {
-      for (Map.Entry<String, Integer> wordFrequency : document.getFrequencyVector().entrySet()) {
-        // Get frequency of the word in the document
-        String word = wordFrequency.getKey();
-        Integer tf = wordFrequency.getValue();
-        
-        // Add that to the total frequency of the word in the collection
-        Integer newSum = sum.get(word);
-        if (newSum != null) {
-          sum.put(word, newSum.intValue() + tf.intValue());
-        }
-        else {
-          sum.put(word, tf);
-        }
-      }
+      sum = Multisets.union(sum, document.getFrequencyVector());
     }
     
     return sum;
   }
   
   @SuppressWarnings("unchecked")
-  private static Map<String, Double> loadVector(IndustryCode industryCode)
-      throws IOException, ClassNotFoundException {
+  private static Map<String, Double> loadVector(IndustryCode industryCode) {
+    try {
     String fileName = getFileNameForIndustry(industryCode);
     FileInputStream fis = new FileInputStream(fileName);
     ObjectInputStream ois = new ObjectInputStream(fis);
     Map<String, Double> map = (Map<String, Double>) ois.readObject();
     ois.close();
     return map;
+    } catch (IOException | ClassNotFoundException e) {
+      return null;
+    }
   }
   
   private static void save(Map<String, Double> vector, IndustryCode industryCode) 
-      throws IOException {
-    FileOutputStream fos = new FileOutputStream(
-        getFileNameForIndustry(industryCode));
-    ObjectOutputStream oos = new ObjectOutputStream(fos);
-    oos.writeObject(vector);
-    oos.close();
+      throws DataInternalException {
+    try {
+      FileOutputStream fos = new FileOutputStream(
+          getFileNameForIndustry(industryCode));
+      ObjectOutputStream oos = new ObjectOutputStream(fos);
+      oos.writeObject(vector);
+      oos.close();
+    } catch (IOException e) {
+      throw new DataInternalException("Couldn't save industry vector to file: " 
+          + e.getMessage(), e);
+    }
   }
   
   private static String getFileNameForIndustry(IndustryCode industryCode) {
@@ -101,20 +99,33 @@ public class IndustryVector {
   }
   
   private static List<String> getSeedWords(IndustryCode industryCode) 
-      throws IOException {
-    String seedFileContents = readFile(getSeedWordsFileName(industryCode),
-        Charset.defaultCharset());
-    return Arrays.asList(seedFileContents.split("[\\s,;\\n\\t]+"));
+      throws DataInternalException {
+    List<String> words = null;
+    Iterator<String> itr = null;
+
+    try {
+      String seedFileContents = Files.toString(
+          new File(getSeedWordsFileName(industryCode)), Charset.defaultCharset());
+      words = IOUtils.readLines(new StringReader(seedFileContents));
+      itr = words.iterator();
+    } catch (IOException e) {
+      throw new DataInternalException("Couldn't get seed words from file: " 
+          + e.getMessage(), e);
+    }
+
+    // remove all comments
+    while (itr.hasNext()) {
+        String line = itr.next();
+        if (line.startsWith("//")) {
+            itr.remove();
+        }
+    }
+
+    return words;
   }
   
   private static String getSeedWordsFileName(IndustryCode industryCode) {
     return "classifier/industryseeds/" + industryCode.getId() + ".seedwords";
-  }
-  
-  static String readFile(String path, Charset encoding) 
-      throws IOException {
-    byte[] encoded = Files.readAllBytes(Paths.get(path));
-    return new String(encoded, encoding);
   }
   
   Map<String, Double> getVector() {

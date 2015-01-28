@@ -5,13 +5,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.WordDocumentFrequencies;
@@ -20,23 +23,22 @@ import com.janknspank.interpreter.KeywordUtils;
 import com.janknspank.proto.Core.Article;
 
 public class DocumentVector {
-  private Map<String, Integer> frequencyVector;
+  private Multiset<String> frequencyVector;
   private Map<String, Double> tfIdfVector;
-  private static Set<String> STOP_WORDS;
+  private static final Set<String> STOP_WORDS;
   
   static {
+    InputStream inputStream = null;
     try {
-      InputStream inputStream =
-          new FileInputStream("neuralnet/english_stopwords");
-        String myString = IOUtils.toString(inputStream, "UTF-8");
-      String words[] = myString.split("\\r?\\n");
-      STOP_WORDS = new HashSet<>(words.length);
-      for (String word : words) {
-        STOP_WORDS.add(word);
-      }
+      inputStream = new FileInputStream("neuralnet/english_stopwords");
+      STOP_WORDS = ImmutableSet.copyOf(
+          IOUtils.toString(inputStream, "UTF-8").split("\r?\n"));
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new Error("Can't read stopwords file. Won't be able to create valid DocumentVectors");
+    } finally {
+      IOUtils.closeQuietly(inputStream);
     }
+    
   }
   
   public DocumentVector(Article article) throws DataInternalException {
@@ -45,41 +47,22 @@ public class DocumentVector {
     // dependency on WodDocumentFrequencies
   }
   
-  static Map<String, Double> generateTFIDFVectorFromTF(Map<String, Integer> tfVector) 
-      throws DataInternalException, IOException {
-    Map<String, Double> tfIdfVector = new HashMap<>();
-    WordDocumentFrequencies dfs = WordDocumentFrequencies.getInstance();
-    int N = dfs.getN();
-    
-    for (Map.Entry<String, Integer> wordFrequency : tfVector.entrySet()) {
-      String word = wordFrequency.getKey();
-      int tf = wordFrequency.getValue().intValue();
-      int df = dfs.getFrequency(word);
-      double idf = Math.log(N / df);
-      double tfidf = tf * idf;
-      tfIdfVector.put(word, tfidf);
-    }
-    
-    return tfIdfVector;
-  }
-  
-  Map<String, Integer> getFrequencyVector() {
+  Multiset<String> getFrequencyVector() {
     return frequencyVector;
   }
   
   Map<String, Double> getTFIDFVector() 
-      throws DataInternalException, IOException {
+      throws DataInternalException {
     if (tfIdfVector != null) {
       return tfIdfVector;
-    }
-    else {
+    } else {
       tfIdfVector = generateTFIDFVectorFromTF(frequencyVector);
       return tfIdfVector;
     }
   }
   
-  private static Map<String, Integer> generateFrequencyVector(Article article) {
-    Map<String, Integer> vector = new HashMap<>();
+  private static Multiset<String> generateFrequencyVector(Article article) {
+    Multiset<String> vector = HashMultiset.create();
     
     // Get all words
     List<String> paragraphs = new ArrayList<>(article.getParagraphList());
@@ -92,16 +75,9 @@ public class DocumentVector {
       if (tokens != null) {
         for (String token : tokens) {
           token = KeywordUtils.cleanKeyword(token);
-          if (token != null &&
-              token.length() != 0 &&
+          if (!Strings.isNullOrEmpty(token) &&
               !STOP_WORDS.contains(token.toLowerCase())) {
-            Integer tokenFrequency = vector.get(token);
-            if (tokenFrequency == null) {
-              vector.put(token, new Integer(1));
-            }
-            else {
-              vector.put(token, new Integer(tokenFrequency.intValue() + 1));
-            }
+            vector.add(token);
           }
         }
       }
@@ -109,8 +85,33 @@ public class DocumentVector {
     return vector;
   }
   
-  public Set<String> getWordsInDocument() {
-    return frequencyVector.keySet();
+  static Map<String, Double> generateTFIDFVectorFromTF(Multiset<String> tfVector) 
+      throws DataInternalException {
+    Map<String, Double> tfIdfVector = new HashMap<>();
+    WordDocumentFrequencies dfs = null;
+    int totalDocumentsN;
+    dfs = WordDocumentFrequencies.getInstance();
+    totalDocumentsN = dfs.getN();
+    
+    for (Multiset.Entry<String> wordFrequency : tfVector.entrySet()) {
+      String word = wordFrequency.getElement();
+      int tf = wordFrequency.getCount();
+      int df = dfs.getFrequency(word);
+      // There's a chance a new word in an article is not
+      // yet in the WordDocumentFrequencies table.
+      // For now ignore it. Solution is to regenerate WDF
+      if (df != 0) {
+        double idf = Math.log(totalDocumentsN / df);
+        double tfIdf = tf * idf;
+        tfIdfVector.put(word, tfIdf);
+      }
+    }
+    
+    return tfIdfVector;
+  }
+  
+  public Set<String> getUniqueWordsInDocument() {
+    return frequencyVector.elementSet();
   }
   
   public double cosineSimilarityTo(DocumentVector document) 
@@ -119,7 +120,7 @@ public class DocumentVector {
   }
   
   public double cosineSimilarityTo(IndustryVector industry) 
-      throws DataInternalException, IOException {
+      throws DataInternalException {
     return cosineSimilarity(getTFIDFVector(), industry.getVector());
   }
   
@@ -129,9 +130,15 @@ public class DocumentVector {
     Set<String> both = Sets.newHashSet(v1.keySet());
     both.retainAll(v2.keySet());
     double sclar = 0, norm1 = 0, norm2 = 0;
-    for (String k : both) sclar += v1.get(k) * v2.get(k);
-    for (String k : v1.keySet()) norm1 += v1.get(k) * v1.get(k);
-    for (String k : v2.keySet()) norm2 += v2.get(k) * v2.get(k);
+    for (String k : both) {
+      sclar += v1.get(k) * v2.get(k);
+    }
+    for (String k : v1.keySet()) {
+      norm1 += v1.get(k) * v1.get(k);
+    }
+    for (String k : v2.keySet()) {
+      norm2 += v2.get(k) * v2.get(k);
+    }
     return sclar / Math.sqrt(norm1 * norm2);
   }
   

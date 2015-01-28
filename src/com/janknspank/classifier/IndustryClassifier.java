@@ -12,6 +12,7 @@ import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
 import com.janknspank.data.IndustryCodes;
 import com.janknspank.data.ValidationException;
+import com.janknspank.data.QueryOption.WhereEquals;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleIndustryClassification;
 import com.janknspank.proto.Core.IndustryCode;
@@ -21,20 +22,20 @@ public class IndustryClassifier {
   private static Map<IndustryCode, IndustryVector> industryVectors;
   private static final double RELEVANCE_THRESHOLD = 0.01;
   
-  private IndustryClassifier() throws IOException, DataInternalException {
+  private IndustryClassifier() {
     industryVectors = new HashMap<>();
     for (IndustryCode industryCode : IndustryCodes.INDUSTRY_CODE_MAP.values()) {
       try {
         industryVectors.put(industryCode, new IndustryVector(industryCode));
-      } catch (IOException | DataInternalException e) {
+      } catch (DataInternalException e) {
         // Can't generate industry vector. Ignore it.
-      }        
+      }
     }
   }
   
   public static synchronized IndustryClassifier getInstance() 
       throws IOException, DataInternalException {
-    if(instance == null) {
+    if (instance == null) {
       instance = new IndustryClassifier();
     }
     return instance;
@@ -49,7 +50,7 @@ public class IndustryClassifier {
    * @throws ValidationException 
    */
   public Iterable<ArticleIndustryClassification> classify(Article article) 
-      throws DataInternalException, IOException, ValidationException {
+      throws DataInternalException, ValidationException {
     DocumentVector articleVector = new DocumentVector(article);
 
     // See if the classification has already been computed
@@ -69,10 +70,10 @@ public class IndustryClassifier {
       if (similarity >= RELEVANCE_THRESHOLD) {
         ArticleIndustryClassification classification = 
             ArticleIndustryClassification.newBuilder()
-            .setUrlId(article.getUrlId())
-            .setIndustryCodeId(code.getId())
-            .setSimilarity(similarity)
-            .build();
+                .setUrlId(article.getUrlId())
+                .setIndustryCodeId(code.getId())
+                .setSimilarity(similarity)
+                .build();
         newClassifications.add(classification);
       }
     }
@@ -83,6 +84,13 @@ public class IndustryClassifier {
   private static void saveClassificationsToServer(
       Iterable<ArticleIndustryClassification> classifications)
       throws ValidationException, DataInternalException {
-    Database.insert(classifications);
+    ArticleIndustryClassification classification = 
+        Iterables.getFirst(classifications, null);
+    if (classification != null) {
+      String urlId = classification.getUrlId();
+      Database.with(ArticleIndustryClassification.class).delete(
+          new WhereEquals("url_id", urlId));
+      Database.insert(classifications);
+    }
   }
 }

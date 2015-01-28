@@ -142,7 +142,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ViewFeedServlet</servlet-name>
-    <url-pattern>/viewfeed</url-pattern>
+    <url-pattern>/viewFeed</url-pattern>
   </servlet-mapping>
   
 </web-app>

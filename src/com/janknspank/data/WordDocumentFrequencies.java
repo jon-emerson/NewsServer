@@ -13,7 +13,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multiset;
 import com.janknspank.classifier.DocumentVector;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.WordDocumentFrequency;
@@ -25,69 +27,70 @@ import com.janknspank.proto.Core.WordDocumentFrequency;
  *
  */
 public class WordDocumentFrequencies {
-  private Map<String, Integer> documentFrequency;
+  private Multiset<String> documentFrequency;
   private static WordDocumentFrequencies instance = null;
   private Integer totalDocumentCount;
   private static final String PROPERTY_KEY_N = "numArticlesUsedForModel";
   private static final String PROPERTY_FILE_NAME = "classifier/vectorspace.properties";
   
-  private WordDocumentFrequencies() throws DataInternalException, IOException {
+  private WordDocumentFrequencies() throws DataInternalException {
     documentFrequency = loadPreviouslyComputedDocumentFrequencies();
     if (documentFrequency == null) {
-      documentFrequency = generateDocumentFrequenciesFromCorpus();
+      try {
+        documentFrequency = generateDocumentFrequenciesFromCorpus();
+      } catch (IOException e) {
+        throw new DataInternalException(
+            "Can't generate document frequencies from corpus: " + e.getMessage(), e);
+      }
       saveDocumentFrequenciesToServer(documentFrequency);
     }
   }
   
   public static synchronized WordDocumentFrequencies getInstance() 
-      throws DataInternalException, IOException {
-    if(instance == null) {
-       instance = new WordDocumentFrequencies();
+      throws DataInternalException {
+    if (instance == null) {
+      instance = new WordDocumentFrequencies();
     }
     return instance;
   }
   
   // Expensive - only do infrequently as the corpus grows
-  private static Map<String, Integer> generateDocumentFrequenciesFromCorpus() 
+  private static Multiset<String> generateDocumentFrequenciesFromCorpus() 
       throws DataInternalException, IOException {
     System.out.println("Warning: calling expensive function: generateWordFrequenciesFromCorpus");
     System.out.println("Use loadPreviouslyComputedDocumentFrequencies instead");
     
-    Map<String, Integer> wordDocumentFrequency = new HashMap<>();
+    Multiset<String> wordDocumentFrequency = HashMultiset.create();
     int limit = 1000;
     int offset = 0;
-    int N = 0;
+    int totalDocumentCount = 0;
     Iterable<Article> articles;
-    Set<String> words;
-    Integer frequency;
     do {
       articles = Articles.getPageOfArticles(limit, offset);
       System.out.println("Generating Word Document Frequency - article offset: " + offset);
       for (Article article : articles) {
-        words = new DocumentVector(article).getWordsInDocument();
+        Set<String> words = new DocumentVector(article).getUniqueWordsInDocument();
         for (String word : words) {
-          frequency = wordDocumentFrequency.get(word);
-          if (frequency == null) {
-            wordDocumentFrequency.put(word, 1);
-          } else {
-            wordDocumentFrequency.put(word, frequency + 1);
-          }
+          wordDocumentFrequency.add(word);
         }
       }
       offset += limit;
-      N += Iterables.size(articles);
+      totalDocumentCount += Iterables.size(articles);
     } while (Iterables.size(articles) == limit);
-    saveNLocally(N);
+    saveNLocally(totalDocumentCount);
     return wordDocumentFrequency;
   }
   
-  private static void saveDocumentFrequenciesToServer(Map<String, Integer> frequencies) 
+  private static void saveDocumentFrequenciesToServer(Multiset<String> frequencies) 
       throws DataInternalException {
-    List<WordDocumentFrequency> pageToSave = new ArrayList<>();
+    // Clear the table
+    Database.with(WordDocumentFrequency.class).delete();
     
-    for (Map.Entry<String, Integer> frequency : frequencies.entrySet()) {
-      String word = frequency.getKey();
-      Integer value = frequency.getValue();
+    // Generate the new rows
+    List<WordDocumentFrequency> pageToSave = new ArrayList<>();
+    for (Multiset.Entry<String> frequency : frequencies.entrySet()) {
+      String word = frequency.getElement();
+      Integer value = frequency.getCount();
       if (word.length() > 0) {
         pageToSave.add(WordDocumentFrequency.newBuilder()
             .setWord(word)
@@ -115,12 +118,16 @@ public class WordDocumentFrequencies {
     properties.store(out, "Updated N");
   }
   
-  private Map<String, Integer> loadPreviouslyComputedDocumentFrequencies() 
-      throws DataInternalException {
-    Map<String, Integer> frequencyMap = new HashMap<>();
-    Iterable<WordDocumentFrequency> wdfs = Database.with(WordDocumentFrequency.class).get();
+  private Multiset<String> loadPreviouslyComputedDocumentFrequencies() {
+    Multiset<String> frequencyMap = HashMultiset.create();
+    Iterable<WordDocumentFrequency> wdfs;
+    try {
+      wdfs = Database.with(WordDocumentFrequency.class).get();
+    } catch (DataInternalException e) {
+      return null;
+    }
     for (WordDocumentFrequency wdf : wdfs) {
-      frequencyMap.put(wdf.getWord(), (int) wdf.getFrequency());
+      frequencyMap.add(wdf.getWord(), (int) wdf.getFrequency());
     }
     return frequencyMap;
   }
@@ -128,16 +135,22 @@ public class WordDocumentFrequencies {
   public int getFrequency(String word) {
     int frequency;
     try {
-      frequency = documentFrequency.get(word);      
+      frequency = documentFrequency.count(word);
     } catch (NullPointerException e) {
       frequency = 0;
     }
     return frequency;
   }
   
-  public int getN() throws IOException {
+  public int getN() throws DataInternalException {
     if (totalDocumentCount == null) {
-      Properties properties = getVectorSpaceProperties();
+      Properties properties;
+      try {
+        properties = getVectorSpaceProperties();
+      } catch (IOException e) {
+        throw new DataInternalException(
+            "Can't load N - the total # of articles in the corpus: " + e, e);
+      }
       totalDocumentCount = Integer.parseInt(
           properties.getProperty(PROPERTY_KEY_N));
     }
@@ -158,7 +171,7 @@ public class WordDocumentFrequencies {
     } catch (DataInternalException e) {
       System.out.println("WordDocumentFrequency table already exists. No need to create it.");
     }
-    Map<String, Integer> df = generateDocumentFrequenciesFromCorpus();
+    Multiset<String> df = generateDocumentFrequenciesFromCorpus();
     saveDocumentFrequenciesToServer(df);
   }
 }

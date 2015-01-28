@@ -420,15 +420,24 @@ message UserIntent {
     (string_length) = 5,
     (string_charset) = LATIN1
   ];
+  
+  optional int64 create_time = 3 [
+    (required) = YES
+  ];
+}
 
-  optional string description = 3 [
+// In-memory object.  Not stored in DB.
+message IntentCode {
+  optional string code = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 100
+    (string_length) = 5,
+    (string_charset) = LATIN1
   ];
   
-  optional int64 create_time = 5 [
-    (required) = YES
+  optional string description = 2 [
+    (required) = YES,
+    (string_length) = 200
   ];
 }
 

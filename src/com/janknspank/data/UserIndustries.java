@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.UserIndustry;
+import com.janknspank.proto.Core.UserInterest;
 
 public class UserIndustries {
   public static final String SOURCE_LINKEDIN_PROFILE = "lp";
@@ -23,6 +27,14 @@ public class UserIndustries {
         new QueryOption.WhereNotEquals("source", SOURCE_TOMBSTONE));
   }
   
+  /**
+   * Returns a list of industries derived from the user's passed in
+   * LinkedIn profile + other industries the user explicitly added
+   * @param userId
+   * @param profileDocumentNode
+   * @return
+   * @throws DataInternalException
+   */
   public static List<UserIndustry> updateIndustries(String userId, DocumentNode profileDocumentNode) 
       throws DataInternalException {
     String industryDescription = profileDocumentNode.findFirst("industry").getFlattenedText();
@@ -37,27 +49,55 @@ public class UserIndustries {
     industries.add(userIndustry);
     
     // Add any that are not already on the server 
-    return updateIndustries(userId, industries);
+    return updateIndustries(userId, industries, SOURCE_LINKEDIN_PROFILE);
   }
   
-  private static List<UserIndustry> updateIndustries(String userId, List<UserIndustry> industries) 
-      throws DataInternalException {
+  // Used to keep UserIndustry in sync with user's LinkedIn profile
+  // Industry. Should not be used for explicit industry adds.
+  // For that use just generate a new UserIndustry object and insert it.
+  /**
+   * Updates the industries for a given source (like LinkedIn)
+   * Includes removing old industries and inserting new ones.
+   * @param userId
+   * @param newIndustries
+   * @param source
+   * @return all industries the user is interested in, irrespective of source
+   * @throws DataInternalException
+   */
+  private static List<UserIndustry> updateIndustries(String userId, List<UserIndustry> newIndustries,
+      String source) throws DataInternalException {
     List<UserIndustry> allIndustries = Lists.newArrayList();
-    List<UserIndustry> industriesToInsert = Lists.newArrayList();
     
-    Iterable<UserIndustry> industriesAlreadySaved = getIndustries(userId);
-    Iterables.addAll(allIndustries, industriesAlreadySaved);
-    Map<Integer, UserIndustry> alreadySavedMap = new HashMap<>();
-    for (UserIndustry industry : industriesAlreadySaved) {
-      alreadySavedMap.put(industry.getIndustryCodeId(), industry);
+    // Find the Industries from source (ex. LinkedIn) the user already has. 
+    Map<Integer, UserIndustry> industryByCode = Maps.newHashMap();
+    for (UserIndustry industry : getIndustries(userId)) {
+      if (source.equals(industry.getSource())) {
+        industryByCode.put(industry.getIndustryCodeId(), industry);
+      }
+      else {
+        allIndustries.add(industry);
+      }
     }
     
-    for (UserIndustry industryToAdd : industries) {
-      if (!alreadySavedMap.containsKey(industryToAdd.getIndustryCodeId())) {
-        //Add it
-        alreadySavedMap.put(industryToAdd.getIndustryCodeId(), industryToAdd);
-        allIndustries.add(industryToAdd);
-        industriesToInsert.add(industryToAdd);
+    Set<UserIndustry> industriesToDelete = Sets.newHashSet();
+    List<UserIndustry> industriesToInsert = Lists.newArrayList();
+    for (UserIndustry industry : industryByCode.values()) {
+      industriesToDelete.add(industry);
+    }
+    
+    for (UserIndustry newIndustry : newIndustries) {
+      if (!source.equals(newIndustry.getSource())) {
+        // This method only supports updating one type at a time.
+        throw new DataInternalException("Cannot add UserIndustry of source " + newIndustry.getSource()
+            + " inside a call to update UserIndustries of source " + source + ": "
+            + newIndustry.toString());
+      }
+      UserIndustry existingIndustry = industryByCode.get(newIndustry.getIndustryCodeId());
+      if (existingIndustry != null) {
+        industriesToDelete.remove(existingIndustry);
+      } else {
+        industriesToInsert.add(newIndustry);
+        allIndustries.add(newIndustry);
       }
     }
     
@@ -66,7 +106,9 @@ public class UserIndustries {
     } catch (ValidationException e) {
       throw new DataInternalException("Error inserting industries: " + e.getMessage(), e);
     }
+    Database.delete(industriesToDelete);
     
+    // Return the latest and greatest industries, regardless of source.
     return allIndustries;
   }
   

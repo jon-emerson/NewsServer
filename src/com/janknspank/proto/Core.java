@@ -12976,28 +12976,13 @@ public final class Core {
     com.google.protobuf.ByteString
         getIntentCodeBytes();
 
-    // optional string description = 3;
+    // optional int64 create_time = 3;
     /**
-     * <code>optional string description = 3;</code>
-     */
-    boolean hasDescription();
-    /**
-     * <code>optional string description = 3;</code>
-     */
-    java.lang.String getDescription();
-    /**
-     * <code>optional string description = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getDescriptionBytes();
-
-    // optional int64 create_time = 5;
-    /**
-     * <code>optional int64 create_time = 5;</code>
+     * <code>optional int64 create_time = 3;</code>
      */
     boolean hasCreateTime();
     /**
-     * <code>optional int64 create_time = 5;</code>
+     * <code>optional int64 create_time = 3;</code>
      */
     long getCreateTime();
   }
@@ -13062,13 +13047,8 @@ public final class Core {
               intentCode_ = input.readBytes();
               break;
             }
-            case 26: {
+            case 24: {
               bitField0_ |= 0x00000004;
-              description_ = input.readBytes();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000008;
               createTime_ = input.readInt64();
               break;
             }
@@ -13198,60 +13178,17 @@ public final class Core {
       }
     }
 
-    // optional string description = 3;
-    public static final int DESCRIPTION_FIELD_NUMBER = 3;
-    private java.lang.Object description_;
+    // optional int64 create_time = 3;
+    public static final int CREATE_TIME_FIELD_NUMBER = 3;
+    private long createTime_;
     /**
-     * <code>optional string description = 3;</code>
+     * <code>optional int64 create_time = 3;</code>
      */
-    public boolean hasDescription() {
+    public boolean hasCreateTime() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string description = 3;</code>
-     */
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          description_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string description = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional int64 create_time = 5;
-    public static final int CREATE_TIME_FIELD_NUMBER = 5;
-    private long createTime_;
-    /**
-     * <code>optional int64 create_time = 5;</code>
-     */
-    public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int64 create_time = 5;</code>
+     * <code>optional int64 create_time = 3;</code>
      */
     public long getCreateTime() {
       return createTime_;
@@ -13260,7 +13197,6 @@ public final class Core {
     private void initFields() {
       userId_ = "";
       intentCode_ = "";
-      description_ = "";
       createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -13282,10 +13218,7 @@ public final class Core {
         output.writeBytes(2, getIntentCodeBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(5, createTime_);
+        output.writeInt64(3, createTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -13306,11 +13239,7 @@ public final class Core {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, createTime_);
+          .computeInt64Size(3, createTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -13432,10 +13361,8 @@ public final class Core {
         bitField0_ = (bitField0_ & ~0x00000001);
         intentCode_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
         createTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -13475,10 +13402,6 @@ public final class Core {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.description_ = description_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
         result.createTime_ = createTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -13504,11 +13427,6 @@ public final class Core {
         if (other.hasIntentCode()) {
           bitField0_ |= 0x00000002;
           intentCode_ = other.intentCode_;
-          onChanged();
-        }
-        if (other.hasDescription()) {
-          bitField0_ |= 0x00000004;
-          description_ = other.description_;
           onChanged();
         }
         if (other.hasCreateTime()) {
@@ -13689,16 +13607,610 @@ public final class Core {
         return this;
       }
 
-      // optional string description = 3;
-      private java.lang.Object description_ = "";
+      // optional int64 create_time = 3;
+      private long createTime_ ;
       /**
-       * <code>optional string description = 3;</code>
+       * <code>optional int64 create_time = 3;</code>
        */
-      public boolean hasDescription() {
+      public boolean hasCreateTime() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string description = 3;</code>
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000004;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 create_time = 3;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:UserIntent)
+    }
+
+    static {
+      defaultInstance = new UserIntent(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:UserIntent)
+  }
+
+  public interface IntentCodeOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string code = 1;
+    /**
+     * <code>optional string code = 1;</code>
+     */
+    boolean hasCode();
+    /**
+     * <code>optional string code = 1;</code>
+     */
+    java.lang.String getCode();
+    /**
+     * <code>optional string code = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getCodeBytes();
+
+    // optional string description = 2;
+    /**
+     * <code>optional string description = 2;</code>
+     */
+    boolean hasDescription();
+    /**
+     * <code>optional string description = 2;</code>
+     */
+    java.lang.String getDescription();
+    /**
+     * <code>optional string description = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescriptionBytes();
+  }
+  /**
+   * Protobuf type {@code IntentCode}
+   *
+   * <pre>
+   * In-memory object.  Not stored in DB.
+   * </pre>
+   */
+  public static final class IntentCode extends
+      com.google.protobuf.GeneratedMessage
+      implements IntentCodeOrBuilder {
+    // Use IntentCode.newBuilder() to construct.
+    private IntentCode(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IntentCode(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final IntentCode defaultInstance;
+    public static IntentCode getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IntentCode getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private IntentCode(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              code_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              description_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.Core.internal_static_IntentCode_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.Core.internal_static_IntentCode_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.Core.IntentCode.class, com.janknspank.proto.Core.IntentCode.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<IntentCode> PARSER =
+        new com.google.protobuf.AbstractParser<IntentCode>() {
+      public IntentCode parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IntentCode(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IntentCode> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string code = 1;
+    public static final int CODE_FIELD_NUMBER = 1;
+    private java.lang.Object code_;
+    /**
+     * <code>optional string code = 1;</code>
+     */
+    public boolean hasCode() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string code = 1;</code>
+     */
+    public java.lang.String getCode() {
+      java.lang.Object ref = code_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          code_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string code = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCodeBytes() {
+      java.lang.Object ref = code_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        code_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string description = 2;
+    public static final int DESCRIPTION_FIELD_NUMBER = 2;
+    private java.lang.Object description_;
+    /**
+     * <code>optional string description = 2;</code>
+     */
+    public boolean hasDescription() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string description = 2;</code>
+     */
+    public java.lang.String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          description_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string description = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      code_ = "";
+      description_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getCodeBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getDescriptionBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getCodeBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getDescriptionBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.Core.IntentCode parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.Core.IntentCode parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.Core.IntentCode prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code IntentCode}
+     *
+     * <pre>
+     * In-memory object.  Not stored in DB.
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.Core.IntentCodeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.Core.internal_static_IntentCode_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.Core.internal_static_IntentCode_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.Core.IntentCode.class, com.janknspank.proto.Core.IntentCode.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.Core.IntentCode.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        code_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        description_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.Core.internal_static_IntentCode_descriptor;
+      }
+
+      public com.janknspank.proto.Core.IntentCode getDefaultInstanceForType() {
+        return com.janknspank.proto.Core.IntentCode.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.Core.IntentCode build() {
+        com.janknspank.proto.Core.IntentCode result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.Core.IntentCode buildPartial() {
+        com.janknspank.proto.Core.IntentCode result = new com.janknspank.proto.Core.IntentCode(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.code_ = code_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.description_ = description_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.Core.IntentCode) {
+          return mergeFrom((com.janknspank.proto.Core.IntentCode)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.Core.IntentCode other) {
+        if (other == com.janknspank.proto.Core.IntentCode.getDefaultInstance()) return this;
+        if (other.hasCode()) {
+          bitField0_ |= 0x00000001;
+          code_ = other.code_;
+          onChanged();
+        }
+        if (other.hasDescription()) {
+          bitField0_ |= 0x00000002;
+          description_ = other.description_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.Core.IntentCode parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.Core.IntentCode) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string code = 1;
+      private java.lang.Object code_ = "";
+      /**
+       * <code>optional string code = 1;</code>
+       */
+      public boolean hasCode() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string code = 1;</code>
+       */
+      public java.lang.String getCode() {
+        java.lang.Object ref = code_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          code_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string code = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCodeBytes() {
+        java.lang.Object ref = code_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          code_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string code = 1;</code>
+       */
+      public Builder setCode(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string code = 1;</code>
+       */
+      public Builder clearCode() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        code_ = getDefaultInstance().getCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string code = 1;</code>
+       */
+      public Builder setCodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        code_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string description = 2;
+      private java.lang.Object description_ = "";
+      /**
+       * <code>optional string description = 2;</code>
+       */
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string description = 2;</code>
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -13712,7 +14224,7 @@ public final class Core {
         }
       }
       /**
-       * <code>optional string description = 3;</code>
+       * <code>optional string description = 2;</code>
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -13728,83 +14240,50 @@ public final class Core {
         }
       }
       /**
-       * <code>optional string description = 3;</code>
+       * <code>optional string description = 2;</code>
        */
       public Builder setDescription(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000002;
         description_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string description = 3;</code>
+       * <code>optional string description = 2;</code>
        */
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string description = 3;</code>
+       * <code>optional string description = 2;</code>
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000002;
         description_ = value;
         onChanged();
         return this;
       }
 
-      // optional int64 create_time = 5;
-      private long createTime_ ;
-      /**
-       * <code>optional int64 create_time = 5;</code>
-       */
-      public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int64 create_time = 5;</code>
-       */
-      public long getCreateTime() {
-        return createTime_;
-      }
-      /**
-       * <code>optional int64 create_time = 5;</code>
-       */
-      public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000008;
-        createTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 create_time = 5;</code>
-       */
-      public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        createTime_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:UserIntent)
+      // @@protoc_insertion_point(builder_scope:IntentCode)
     }
 
     static {
-      defaultInstance = new UserIntent(true);
+      defaultInstance = new IntentCode(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:UserIntent)
+    // @@protoc_insertion_point(class_scope:IntentCode)
   }
 
   public interface EntityOrBuilder
@@ -21720,6 +22199,11 @@ public final class Core {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_UserIntent_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_IntentCode_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_IntentCode_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Entity_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -21830,50 +22314,51 @@ public final class Core {
       "\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(" +
       "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\003 \001(\tB\014\210\246" +
       "\035\001\220\246\035\003\230\246\035d\022\034\n\006source\030\004 \001(\tB\014\210\246\035\001\220\246\035\005\230\246\035\002" +
-      "\022\026\n\004type\030\005 \001(\tB\010\230\246\035\005\250\246\035\001\"\224\001\n\nUserIntent\022" +
-      "!\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022%\n\013in" +
-      "tent_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022!\n\013des",
-      "cription\030\003 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\031\n\013create_t" +
-      "ime\030\005 \001(\003B\004\210\246\035\001\"\365\004\n\006Entity\022\034\n\002id\030\001 \001(\tB\020" +
-      "\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220" +
-      "\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022" +
-      "(\n\006source\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035" +
-      "\005\022\"\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n" +
-      "\005topic\030\006 \003(\0132\023.Entity.EntityTopic\032\277\002\n\013En" +
-      "tityTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031" +
-      "\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB" +
-      "\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007con",
-      "text\030\005 \001(\0162\033.Entity.EntityTopic.Context:" +
-      "\007UNKNOWN\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANG" +
-      "ELLIST_WORKED_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020" +
-      "\002\022\031\n\025ANGELLIST_INVESTED_IN\020\003\022\025\n\021ANGELLIS" +
-      "T_ADVISED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC\020\005\"Z\n\006S" +
-      "ource\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INSTANCE_T" +
-      "YPE\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r\n\tANGE" +
-      "LLIST\020\003\"\211\001\n\026TrainedArticleIndustry\022 \n\006ur" +
-      "l_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry" +
-      "_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user",
-      "_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\"X\n\014IndustryC" +
-      "ode\022\020\n\002id\030\001 \001(\005B\004\210\246\035\001\022\027\n\005group\030\002 \001(\tB\010\210\246" +
-      "\035\001\230\246\0352\022\035\n\013description\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"\203\001" +
-      "\n\035ArticleIndustryClassification\022 \n\006url_i" +
-      "d\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\"\n\020industry_co" +
-      "de_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\005\022\034\n\nsimilarity\030\003 \001(" +
-      "\001B\010\210\246\035\001\220\246\035\005\"\275\001\n\034TrainedArticleClassifica" +
-      "tion\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225" +
-      "\n\033article_classification_code\030\002 \001(\tB\020\210\246\035" +
-      "\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003",
-      "\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250" +
-      "\246\035\001\"L\n\017ArticleTypeCode\022\026\n\004code\030\001 \001(\tB\010\210\246" +
-      "\035\001\230\246\035\005\022!\n\013description\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035" +
-      "d\"\270\001\n\031ArticleFacebookEngagement\022\036\n\003url\030\001" +
-      " \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022\034\n\nlike_count\030\002 " +
-      "\001(\003B\010\210\246\035\001\220\246\035\005\022\035\n\013share_count\030\003 \001(\003B\010\210\246\035\001" +
-      "\220\246\035\005\022\037\n\rcomment_count\030\004 \001(\003B\010\210\246\035\001\220\246\035\005\022\035\n" +
-      "\013create_time\030\005 \001(\003B\010\210\246\035\001\220\246\035\005\"Q\n\025WordDocu" +
-      "mentFrequency\022\033\n\004word\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230\246\035" +
-      "\310\001\022\033\n\tfrequency\030\002 \001(\003B\010\210\246\035\001\220\246\035\005B\026\n\024com.j",
-      "anknspank.proto"
+      "\022\026\n\004type\030\005 \001(\tB\010\230\246\035\005\250\246\035\001\"q\n\nUserIntent\022!" +
+      "\n\007user_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\026\250\246\035\001\022%\n\013int" +
+      "ent_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013crea",
+      "te_time\030\003 \001(\003B\004\210\246\035\001\"L\n\nIntentCode\022\036\n\004cod" +
+      "e\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\036\n\013description" +
+      "\030\002 \001(\tB\t\210\246\035\001\230\246\035\310\001\"\365\004\n\006Entity\022\034\n\002id\030\001 \001(\t" +
+      "B\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035" +
+      "\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035" +
+      "\001\022(\n\006source\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220" +
+      "\246\035\005\022\"\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022" +
+      "\"\n\005topic\030\006 \003(\0132\023.Entity.EntityTopic\032\277\002\n\013" +
+      "EntityTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001" +
+      "\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(",
+      "\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007c" +
+      "ontext\030\005 \001(\0162\033.Entity.EntityTopic.Contex" +
+      "t:\007UNKNOWN\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000\022\027\n\023A" +
+      "NGELLIST_WORKED_AT\020\001\022\025\n\021ANGELLIST_FOUNDE" +
+      "D\020\002\022\031\n\025ANGELLIST_INVESTED_IN\020\003\022\025\n\021ANGELL" +
+      "IST_ADVISED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC\020\005\"Z\n" +
+      "\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INSTANCE" +
+      "_TYPE\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r\n\tAN" +
+      "GELLIST\020\003\"\211\001\n\026TrainedArticleIndustry\022 \n\006" +
+      "url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020indust",
+      "ry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_us" +
+      "er_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\"X\n\014Industr" +
+      "yCode\022\020\n\002id\030\001 \001(\005B\004\210\246\035\001\022\027\n\005group\030\002 \001(\tB\010" +
+      "\210\246\035\001\230\246\0352\022\035\n\013description\030\003 \001(\tB\010\210\246\035\001\230\246\035d\"" +
+      "\203\001\n\035ArticleIndustryClassification\022 \n\006url" +
+      "_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\026\250\246\035\001\022\"\n\020industry_" +
+      "code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\005\022\034\n\nsimilarity\030\003 " +
+      "\001(\001B\010\210\246\035\001\220\246\035\005\"\275\001\n\034TrainedArticleClassifi" +
+      "cation\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001" +
+      "\0225\n\033article_classification_code\030\002 \001(\tB\020\210",
+      "\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246" +
+      "\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035" +
+      "\030\250\246\035\001\"L\n\017ArticleTypeCode\022\026\n\004code\030\001 \001(\tB\010" +
+      "\210\246\035\001\230\246\035\005\022!\n\013description\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230" +
+      "\246\035d\"\270\001\n\031ArticleFacebookEngagement\022\036\n\003url" +
+      "\030\001 \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022\034\n\nlike_count\030" +
+      "\002 \001(\003B\010\210\246\035\001\220\246\035\005\022\035\n\013share_count\030\003 \001(\003B\010\210\246" +
+      "\035\001\220\246\035\005\022\037\n\rcomment_count\030\004 \001(\003B\010\210\246\035\001\220\246\035\005\022" +
+      "\035\n\013create_time\030\005 \001(\003B\010\210\246\035\001\220\246\035\005\"Q\n\025WordDo" +
+      "cumentFrequency\022\033\n\004word\030\001 \001(\tB\r\210\246\035\001\220\246\035\002\230",
+      "\246\035\310\001\022\033\n\tfrequency\030\002 \001(\003B\010\210\246\035\001\220\246\035\005B\026\n\024com" +
+      ".janknspank.proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -21963,9 +22448,15 @@ public final class Core {
           internal_static_UserIntent_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UserIntent_descriptor,
-              new java.lang.String[] { "UserId", "IntentCode", "Description", "CreateTime", });
-          internal_static_Entity_descriptor =
+              new java.lang.String[] { "UserId", "IntentCode", "CreateTime", });
+          internal_static_IntentCode_descriptor =
             getDescriptor().getMessageTypes().get(14);
+          internal_static_IntentCode_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_IntentCode_descriptor,
+              new java.lang.String[] { "Code", "Description", });
+          internal_static_Entity_descriptor =
+            getDescriptor().getMessageTypes().get(15);
           internal_static_Entity_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Entity_descriptor,
@@ -21977,43 +22468,43 @@ public final class Core {
               internal_static_Entity_EntityTopic_descriptor,
               new java.lang.String[] { "EntityId", "Keyword", "Type", "Strength", "Context", });
           internal_static_TrainedArticleIndustry_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_TrainedArticleIndustry_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TrainedArticleIndustry_descriptor,
               new java.lang.String[] { "UrlId", "IndustryCodeId", "TrainerUserId", });
           internal_static_IndustryCode_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_IndustryCode_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_IndustryCode_descriptor,
               new java.lang.String[] { "Id", "Group", "Description", });
           internal_static_ArticleIndustryClassification_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_ArticleIndustryClassification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleIndustryClassification_descriptor,
               new java.lang.String[] { "UrlId", "IndustryCodeId", "Similarity", });
           internal_static_TrainedArticleClassification_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_TrainedArticleClassification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TrainedArticleClassification_descriptor,
               new java.lang.String[] { "UrlId", "ArticleClassificationCode", "Checked", "TrainerUserId", });
           internal_static_ArticleTypeCode_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_ArticleTypeCode_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleTypeCode_descriptor,
               new java.lang.String[] { "Code", "Description", });
           internal_static_ArticleFacebookEngagement_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_ArticleFacebookEngagement_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleFacebookEngagement_descriptor,
               new java.lang.String[] { "Url", "LikeCount", "ShareCount", "CommentCount", "CreateTime", });
           internal_static_WordDocumentFrequency_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_WordDocumentFrequency_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_WordDocumentFrequency_descriptor,
@@ -22179,9 +22670,12 @@ public final class Core {
           registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.proto.Extensions.stringCharset);
           registry.add(com.janknspank.proto.Extensions.required);
+          registry.add(com.janknspank.proto.Extensions.stringLength);
           registry.add(com.janknspank.proto.Extensions.required);
           registry.add(com.janknspank.proto.Extensions.storageMethod);
           registry.add(com.janknspank.proto.Extensions.stringLength);

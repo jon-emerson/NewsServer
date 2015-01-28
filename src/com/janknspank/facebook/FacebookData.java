@@ -8,6 +8,8 @@ import java.net.URLEncoder;
 import java.util.Properties;
 
 import com.janknspank.data.DataInternalException;
+import com.janknspank.data.Database;
+import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.ArticleFacebookEngagement;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -26,6 +28,7 @@ public class FacebookData {
   
   public static ArticleFacebookEngagement getEngagementForURL(String url) 
       throws DataInternalException {
+    ArticleFacebookEngagement engagement = null;
     try {
       // Example urlObject: http://goo.gl/JVf3tt
       String encodedURL;
@@ -38,45 +41,56 @@ public class FacebookData {
       JsonObject urlObject = facebookClient.fetchObject(encodedURL, JsonObject.class);
       
       // Get shares and comments
-      JsonObject shareObject = urlObject.getJsonObject("share");
-      int shareCount = shareObject.getInt("share_count");
-      int commentCount = shareObject.getInt("comment_count");
-      
-      // Get likes
-      String objectId = urlObject.getJsonObject("og_object")
-          .getString("id");
-      JsonObject likesObject = facebookClient.fetchObject(objectId, 
-          JsonObject.class,
-          Parameter.with("fields", "likes.summary(true)"));
-      int likeCount = likesObject.getJsonObject("likes")
-          .getJsonObject("summary")
-          .getInt("total_count");
-      
-      ArticleFacebookEngagement engagement = ArticleFacebookEngagement.newBuilder()
-      .setUrl(url)
-      .setLikeCount(likeCount)
-      .setShareCount(shareCount)
-      .setCommentCount(commentCount)
-      .setCreateTime(System.currentTimeMillis())
-      .build();
-      
-      return engagement;
+      if (!urlObject.has("share")) {
+        // There is no engagement if the share object is missing
+        engagement = ArticleFacebookEngagement.newBuilder()
+            .setUrl(url)
+            .setLikeCount(0)
+            .setShareCount(0)
+            .setCommentCount(0)
+            .setCreateTime(System.currentTimeMillis())
+            .build();
+      }
+      else {
+        JsonObject shareObject = urlObject.getJsonObject("share");
+        int shareCount = shareObject.getInt("share_count");
+        int commentCount = shareObject.getInt("comment_count");
+        
+        // Get likes
+        String objectId = urlObject.getJsonObject("og_object")
+            .getString("id");
+        JsonObject likesObject = facebookClient.fetchObject(objectId, 
+            JsonObject.class,
+            Parameter.with("fields", "likes.summary(true)"));
+        int likeCount = likesObject.getJsonObject("likes")
+            .getJsonObject("summary")
+            .getInt("total_count");
+        
+        engagement = ArticleFacebookEngagement.newBuilder()
+            .setUrl(url)
+            .setLikeCount(likeCount)
+            .setShareCount(shareCount)
+            .setCommentCount(commentCount)
+            .setCreateTime(System.currentTimeMillis())
+            .build();
+      }
     } catch (FacebookOAuthException e) {
-      //Skip it.
       e.printStackTrace();
-      return null;
+      throw new DataInternalException("Can't get FB engagement for url " 
+          + url + ": " + e.getMessage(), e);
     } catch (JsonException e) {
       e.printStackTrace();
-      // There is no engagement if the share object is missing
-      ArticleFacebookEngagement engagement = ArticleFacebookEngagement.newBuilder()
-          .setUrl(url)
-          .setLikeCount(0)
-          .setShareCount(0)
-          .setCommentCount(0)
-          .setCreateTime(System.currentTimeMillis())
-          .build();
-      return engagement;
+      throw new DataInternalException("Can't parse Facebook JSON: " + e.getMessage(), e);
     }
+    
+    // Save the engagement object
+    try {
+      Database.insert(engagement);
+    } catch (ValidationException e) {
+      throw new DataInternalException("Error inserting facebook engagement:" + e.getMessage(), e);
+    }
+    
+    return engagement;
   }
   
   private static void generateFacebookClient() {

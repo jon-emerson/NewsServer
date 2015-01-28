@@ -134,13 +134,13 @@ public class LoginServlet extends StandardServlet {
       System.out.println("Fetching " + url);
       response = fetcher.fetch(url);
     } catch (FetchException|URISyntaxException e) {
-      throw new DataInternalException("Could not fetch access token");
+      throw new DataInternalException("Could not fetch access token", e);
     }
     StringWriter sw = new StringWriter();
     try {
       CharStreams.copy(response.getReader(), sw);
     } catch (IOException e) {
-      throw new DataInternalException("Could not read accessToken response");
+      throw new DataInternalException("Could not read accessToken response", e);
     }
     if (response.getStatusCode() == HttpServletResponse.SC_OK) {
       JSONObject responseObj = new JSONObject(sw.toString());

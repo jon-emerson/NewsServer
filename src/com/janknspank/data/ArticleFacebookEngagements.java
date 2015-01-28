@@ -1,7 +1,5 @@
 package com.janknspank.data;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.janknspank.data.QueryOption.DescendingSort;
@@ -17,21 +15,15 @@ public class ArticleFacebookEngagements {
         new WhereEquals("url", url),
         new Limit(limit),
         new DescendingSort("create_time"));
-    if (engagements == null || Iterables.isEmpty(engagements)) {
+    if (Iterables.isEmpty(engagements)) {
       ArticleFacebookEngagement engagement = FacebookData.getEngagementForURL(url);
       if (engagement != null) {
-        try {
-          Database.insert(engagement);
-        } catch (ValidationException e) {
-          throw new DataInternalException("Error creating facebook engagement", e);
-        }
         return ImmutableList.of(engagement);
       }
-      return null;        
+      return null;
     }
-    else {
-      return engagements;
-    }
+    
+    return engagements;
   }
   
   /** Helper method for creating the ArticleFacebookEngagement table. */

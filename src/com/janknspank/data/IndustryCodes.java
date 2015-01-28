@@ -11,7 +11,7 @@ import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.UserIndustry;
 
 /**
- * Industry codes on articles added by humans
+ * Industry codes on articles
  */
 public class IndustryCodes {
   public static final Map<Integer, IndustryCode> INDUSTRY_CODE_MAP = Maps.uniqueIndex(
