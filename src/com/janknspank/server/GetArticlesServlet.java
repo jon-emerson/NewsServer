@@ -17,11 +17,10 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
 
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req) throws DataInternalException {
-    try {  
+    try {
       return Articles.getRankedArticles(getSession(req).getUserId(),
-          NeuralNetworkScorer.getInstance());      
-    }
-    catch (ParserException | ValidationException | IOException e) {
+          NeuralNetworkScorer.getInstance());
+    } catch (ParserException | ValidationException | IOException e) {
       // Fallback
       System.out.println("Error: couldn't load getArticlesRankedByNeuralNetwork: " + e.getMessage());
       return Articles.getArticlesByInterest(UserInterests.getInterests(getSession(req).getUserId()));

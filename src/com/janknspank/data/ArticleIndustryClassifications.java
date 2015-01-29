@@ -10,7 +10,7 @@ public class ArticleIndustryClassifications {
     return Database.with(ArticleIndustryClassification.class).get(
         new WhereEquals("url_id", article.getUrlId()));
   }
-  
+
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
     Database.with(ArticleIndustryClassification.class).createTable();

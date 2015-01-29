@@ -1,17 +1,16 @@
 package com.janknspank.data;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+
+import org.apache.commons.io.IOUtils;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.HashMultiset;
@@ -153,26 +152,33 @@ public class WordDocumentFrequencies {
     }
     return totalDocumentCount;
   }
-  
+
   private static void saveNLocally(int numDocs) throws DataInternalException {
+    OutputStream out = null;
     try {
-    Properties properties = getVectorSpaceProperties();
-    properties.setProperty(PROPERTY_KEY_N, String.valueOf(numDocs));
-    File f = new File(PROPERTY_FILE_NAME);
-    OutputStream out = new FileOutputStream(f);
-    properties.store(out, "Updated N");
+      Properties properties = getVectorSpaceProperties();
+      properties.setProperty(PROPERTY_KEY_N, String.valueOf(numDocs));
+      out = new FileOutputStream(PROPERTY_FILE_NAME);
+      properties.store(out, "Updated N");
     } catch (IOException e) {
       throw new DataInternalException(
           "Issue saving N - the total # of arcitles in the corpus to file: " 
           + e.getMessage(), e);
+    } finally {
+      IOUtils.closeQuietly(out);
     }
   }
-  
+
   private static Properties getVectorSpaceProperties() throws IOException {
     Properties properties = new Properties();
-    InputStream inputStream = new FileInputStream(PROPERTY_FILE_NAME);
-    properties.load(inputStream);
-    return properties;
+    InputStream inputStream = null;
+    try {
+      inputStream = new FileInputStream(PROPERTY_FILE_NAME);
+      properties.load(inputStream);
+      return properties;
+    } finally {
+      IOUtils.closeQuietly(inputStream);
+    }
   }
   
   /** Helper method for creating the Article table. */

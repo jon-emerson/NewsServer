@@ -1,19 +1,16 @@
 package com.janknspank.data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.Core.IndustryCode;
 import com.janknspank.proto.Core.UserIndustry;
-import com.janknspank.proto.Core.UserInterest;
 
 public class UserIndustries {
   public static final String SOURCE_LINKEDIN_PROFILE = "lp";

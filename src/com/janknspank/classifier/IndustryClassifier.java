@@ -21,7 +21,7 @@ public class IndustryClassifier {
   private static IndustryClassifier instance = null;
   private static Map<IndustryCode, IndustryVector> industryVectors;
   private static final double RELEVANCE_THRESHOLD = 0.01;
-  
+
   private IndustryClassifier() {
     industryVectors = new HashMap<>();
     for (IndustryCode industryCode : IndustryCodes.INDUSTRY_CODE_MAP.values()) {
@@ -39,16 +39,16 @@ public class IndustryClassifier {
     }
     return instance;
   }
-  
+
   /**
    * Returns a list of Article Industry Classifications
    * @param article
    * @return
    * @throws DataInternalException
-   * @throws IOException 
-   * @throws ValidationException 
+   * @throws IOException
+   * @throws ValidationException
    */
-  public Iterable<ArticleIndustryClassification> classify(Article article) 
+  public Iterable<ArticleIndustryClassification> classify(Article article)
       throws DataInternalException, ValidationException {
     // See if the classification has already been computed
     Iterable<ArticleIndustryClassification> classifications =
@@ -89,8 +89,7 @@ public class IndustryClassifier {
   private static void saveClassificationsToServer(
       Iterable<ArticleIndustryClassification> classifications)
       throws ValidationException, DataInternalException {
-    ArticleIndustryClassification classification = 
-        Iterables.getFirst(classifications, null);
+    ArticleIndustryClassification classification = Iterables.getFirst(classifications, null);
     if (classification != null) {
       String urlId = classification.getUrlId();
       Database.with(ArticleIndustryClassification.class).delete(

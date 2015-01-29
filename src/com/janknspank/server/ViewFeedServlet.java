@@ -1,6 +1,5 @@
 package com.janknspank.server;
 
-import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,16 +32,16 @@ public class ViewFeedServlet extends StandardServlet {
     if (user.getEmail().equals("tom.charytoniuk@gmail.com") ||
         user.getEmail().equals("panaceaa@gmail.com")) {
       try {
-        final Map<CompleteArticle, Double> articlesToRankMap = 
+        final Map<CompleteArticle, Double> articlesToRankMap =
             Articles.getCompleteArticlesAndScores(
-            getSession(req).getUserId(), HeuristicScorer.getInstance());
-        
+                getSession(req).getUserId(), HeuristicScorer.getInstance());
+
         // Sort the articles
         TopList<CompleteArticle, Double> articles = new TopList<>(articlesToRankMap.size());
         for (Map.Entry<CompleteArticle, Double> entry : articlesToRankMap.entrySet()) {
           articles.add(entry.getKey(), entry.getValue());
         }
-        
+
         return new SoyMapData(
             "sessionKey", this.getSession(req).getSessionKey(),
             "articles", Iterables.transform(articles.getKeys(),
@@ -50,7 +49,8 @@ public class ViewFeedServlet extends StandardServlet {
                   @Override
                   public SoyMapData apply(CompleteArticle completeArticle) {
                     Article article = completeArticle.getArticle();
-                    ArticleFacebookEngagement engagement = completeArticle.getLatestFacebookEngagement();
+                    ArticleFacebookEngagement engagement =
+                        completeArticle.getLatestFacebookEngagement();
                     int likeCount = 0;
                     int shareCount = 0;
                     int commentCount = 0;
@@ -59,7 +59,7 @@ public class ViewFeedServlet extends StandardServlet {
                       shareCount = (int) engagement.getShareCount();
                       commentCount = (int) engagement.getCommentCount();
                     }
-                    
+
                     return new SoyMapData(
                         "title", article.getTitle(),
                         "url", article.getUrl(),
@@ -70,12 +70,11 @@ public class ViewFeedServlet extends StandardServlet {
                         "fb_likes", likeCount,
                         "fb_shares", shareCount,
                         "fb_comments" ,commentCount,
-                        "industry_classifications", completeArticle
-                            .getIndustryClassificationsString());
+                        "industry_classifications",
+                            completeArticle.getIndustryClassificationsString());
                   }
                 }));
-      }
-      catch (ParserException | IOException e) {
+      } catch (ParserException e) {
         return null;
       }
     }

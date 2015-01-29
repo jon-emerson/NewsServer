@@ -7,6 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Properties;
 
+import org.apache.commons.io.IOUtils;
+
 import com.janknspank.data.DataInternalException;
 import com.janknspank.data.Database;
 import com.janknspank.data.ValidationException;
@@ -20,13 +22,9 @@ import com.restfb.json.JsonException;
 import com.restfb.json.JsonObject;
 
 public class FacebookData {
-  private static FacebookClient facebookClient;
-  
-  static {
-    generateFacebookClient();
-  }
-  
-  public static ArticleFacebookEngagement getEngagementForURL(String url) 
+  private static FacebookClient __facebookClient = null;
+
+  public static ArticleFacebookEngagement getEngagementForURL(String url)
       throws DataInternalException {
     ArticleFacebookEngagement engagement = null;
     try {
@@ -38,8 +36,8 @@ public class FacebookData {
         System.out.println("Can't encode url: " + url);
         encodedURL = url;
       }
-      JsonObject urlObject = facebookClient.fetchObject(encodedURL, JsonObject.class);
-      
+      JsonObject urlObject = getFacebookClient().fetchObject(encodedURL, JsonObject.class);
+
       // Get shares and comments
       if (!urlObject.has("share")) {
         // There is no engagement if the share object is missing
@@ -55,17 +53,17 @@ public class FacebookData {
         JsonObject shareObject = urlObject.getJsonObject("share");
         int shareCount = shareObject.getInt("share_count");
         int commentCount = shareObject.getInt("comment_count");
-        
+
         // Get likes
         String objectId = urlObject.getJsonObject("og_object")
             .getString("id");
-        JsonObject likesObject = facebookClient.fetchObject(objectId, 
+        JsonObject likesObject = getFacebookClient().fetchObject(objectId,
             JsonObject.class,
             Parameter.with("fields", "likes.summary(true)"));
         int likeCount = likesObject.getJsonObject("likes")
             .getJsonObject("summary")
             .getInt("total_count");
-        
+
         engagement = ArticleFacebookEngagement.newBuilder()
             .setUrl(url)
             .setLikeCount(likeCount)
@@ -76,39 +74,45 @@ public class FacebookData {
       }
     } catch (FacebookOAuthException e) {
       e.printStackTrace();
-      throw new DataInternalException("Can't get FB engagement for url " 
+      throw new DataInternalException("Can't get FB engagement for url "
           + url + ": " + e.getMessage(), e);
     } catch (JsonException e) {
       e.printStackTrace();
       throw new DataInternalException("Can't parse Facebook JSON: " + e.getMessage(), e);
     }
-    
+
     // Save the engagement object
     try {
       Database.insert(engagement);
     } catch (ValidationException e) {
       throw new DataInternalException("Error inserting facebook engagement:" + e.getMessage(), e);
     }
-    
+
     return engagement;
   }
-  
-  private static void generateFacebookClient() {
-    try {
+
+  private static FacebookClient getFacebookClient() throws DataInternalException {
+    if (__facebookClient == null) {
       Properties properties = getFacebookProperties();
       String appSecret = properties.getProperty("appSecret");
       String appId = properties.getProperty("appId");
-      facebookClient = new DefaultFacebookClient(appId + "|" + appSecret, appSecret, Version.VERSION_2_2);
-    } catch (IOException e) {
-      e.printStackTrace();
+      __facebookClient =
+          new DefaultFacebookClient(appId + "|" + appSecret, appSecret, Version.VERSION_2_2);
     }
+    return __facebookClient;
   }
-  
-  private static Properties getFacebookProperties() throws IOException {
+
+  private static Properties getFacebookProperties() throws DataInternalException {
     Properties properties = new Properties();
-    String propFileName = "facebook.properties";
-    InputStream inputStream = new FileInputStream(propFileName);
-    properties.load(inputStream);
-    return properties;
+    InputStream inputStream = null;
+    try {
+      inputStream = new FileInputStream("facebook.properties");
+      properties.load(inputStream);
+      return properties;
+    } catch (IOException e) {
+      throw new DataInternalException("Could not read facebook.properties: " + e.getMessage(), e);
+    } finally {
+      IOUtils.closeQuietly(inputStream);
+    }
   }
 }

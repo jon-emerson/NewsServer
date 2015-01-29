@@ -1,7 +1,5 @@
 package com.janknspank.rank;
 
-import java.util.List;
-
 import com.janknspank.proto.Core.UserIndustry;
 import com.janknspank.proto.Core.UserInterest;
 
