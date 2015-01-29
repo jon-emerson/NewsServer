@@ -86,7 +86,7 @@ public class TopList<T, U extends Number> implements Iterable<T> {
     return keyList;
   }
 
-  public U getValue(String key) {
+  public U getValue(T key) {
     return values.containsKey(key) ? values.get(key) : null;
   }
 

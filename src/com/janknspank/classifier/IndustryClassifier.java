@@ -33,8 +33,7 @@ public class IndustryClassifier {
     }
   }
   
-  public static synchronized IndustryClassifier getInstance() 
-      throws IOException, DataInternalException {
+  public static synchronized IndustryClassifier getInstance() {
     if (instance == null) {
       instance = new IndustryClassifier();
     }
@@ -51,8 +50,6 @@ public class IndustryClassifier {
    */
   public Iterable<ArticleIndustryClassification> classify(Article article) 
       throws DataInternalException, ValidationException {
-    DocumentVector articleVector = new DocumentVector(article);
-
     // See if the classification has already been computed
     Iterable<ArticleIndustryClassification> classifications =
         ArticleIndustryClassifications.getFor(article);
@@ -60,25 +57,33 @@ public class IndustryClassifier {
       return classifications;
     }
     
-    // Compute classifications from IndustryVectors
+    // Compute classifications from scratch against IndustryVectors
     List<ArticleIndustryClassification> newClassifications = new ArrayList<>();
-    for (Map.Entry<IndustryCode, IndustryVector> industry : industryVectors.entrySet()) {
-      IndustryCode code = industry.getKey();
-      IndustryVector vector = industry.getValue();
-      double similarity = articleVector.cosineSimilarityTo(vector);
-      // Only save industries that are closely related
-      if (similarity >= RELEVANCE_THRESHOLD) {
-        ArticleIndustryClassification classification = 
-            ArticleIndustryClassification.newBuilder()
-                .setUrlId(article.getUrlId())
-                .setIndustryCodeId(code.getId())
-                .setSimilarity(similarity)
-                .build();
+    for (IndustryCode industryCode : industryVectors.keySet()) {
+      ArticleIndustryClassification classification = 
+          classifyForIndustry(article, industryCode);
+      if (classification.getSimilarity() >= RELEVANCE_THRESHOLD) {
         newClassifications.add(classification);
       }
     }
     saveClassificationsToServer(newClassifications);
     return classifications;
+  }
+  
+  public ArticleIndustryClassification classifyForIndustry(
+      Article article, IndustryCode industryCode) 
+      throws DataInternalException {
+    IndustryVector vector = industryVectors.get(industryCode);
+    DocumentVector articleVector = new DocumentVector(article);
+    double similarity = articleVector.cosineSimilarityTo(vector);
+    // Only save industries that are closely related
+    ArticleIndustryClassification classification = 
+        ArticleIndustryClassification.newBuilder()
+            .setUrlId(article.getUrlId())
+            .setIndustryCodeId(industryCode.getId())
+            .setSimilarity(similarity)
+            .build();
+    return classification;
   }
   
   private static void saveClassificationsToServer(
