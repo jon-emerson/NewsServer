@@ -40,14 +40,12 @@ public class CompleteArticle {
     initForArticle(article);
   }
 
-  public CompleteArticle(Article article) 
-      throws DataInternalException, IOException, ValidationException {
+  public CompleteArticle(Article article)  throws DataInternalException, ValidationException {
     this.article = article;
     initForArticle(article);
   }
 
-  private void initForArticle(Article article) 
-      throws DataInternalException, IOException, ValidationException {
+  private void initForArticle(Article article) throws DataInternalException, ValidationException {
     String url = article.getUrl();
     keywords = ArticleKeywords.get(ImmutableList.of(article));
     industryClassifications = IndustryClassifier.getInstance().classify(article);

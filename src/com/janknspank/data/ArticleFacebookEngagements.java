@@ -22,10 +22,10 @@ public class ArticleFacebookEngagements {
       }
       return null;
     }
-    
+
     return engagements;
   }
-  
+
   /** Helper method for creating the ArticleFacebookEngagement table. */
   public static void main(String args[]) throws Exception {
     Database.with(ArticleFacebookEngagement.class).createTable();

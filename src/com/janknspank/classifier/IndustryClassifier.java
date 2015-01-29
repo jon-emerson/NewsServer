@@ -21,7 +21,7 @@ public class IndustryClassifier {
   private static IndustryClassifier instance = null;
   private static Map<IndustryCode, IndustryVector> industryVectors;
   private static final double RELEVANCE_THRESHOLD = 0.01;
-  
+
   private IndustryClassifier() {
     industryVectors = new HashMap<>();
     for (IndustryCode industryCode : IndustryCodes.INDUSTRY_CODE_MAP.values()) {
@@ -32,24 +32,23 @@ public class IndustryClassifier {
       }
     }
   }
-  
-  public static synchronized IndustryClassifier getInstance() 
-      throws IOException, DataInternalException {
+
+  public static synchronized IndustryClassifier getInstance() throws DataInternalException {
     if (instance == null) {
       instance = new IndustryClassifier();
     }
     return instance;
   }
-  
+
   /**
    * Returns a list of Article Industry Classifications
    * @param article
    * @return
    * @throws DataInternalException
-   * @throws IOException 
-   * @throws ValidationException 
+   * @throws IOException
+   * @throws ValidationException
    */
-  public Iterable<ArticleIndustryClassification> classify(Article article) 
+  public Iterable<ArticleIndustryClassification> classify(Article article)
       throws DataInternalException, ValidationException {
     DocumentVector articleVector = new DocumentVector(article);
 
@@ -59,7 +58,7 @@ public class IndustryClassifier {
     if (classifications != null && Iterables.size(classifications) > 0) {
       return classifications;
     }
-    
+
     // Compute classifications from IndustryVectors
     List<ArticleIndustryClassification> newClassifications = new ArrayList<>();
     for (Map.Entry<IndustryCode, IndustryVector> industry : industryVectors.entrySet()) {
@@ -68,7 +67,7 @@ public class IndustryClassifier {
       double similarity = articleVector.cosineSimilarityTo(vector);
       // Only save industries that are closely related
       if (similarity >= RELEVANCE_THRESHOLD) {
-        ArticleIndustryClassification classification = 
+        ArticleIndustryClassification classification =
             ArticleIndustryClassification.newBuilder()
                 .setUrlId(article.getUrlId())
                 .setIndustryCodeId(code.getId())
@@ -80,12 +79,11 @@ public class IndustryClassifier {
     saveClassificationsToServer(newClassifications);
     return classifications;
   }
-  
+
   private static void saveClassificationsToServer(
       Iterable<ArticleIndustryClassification> classifications)
       throws ValidationException, DataInternalException {
-    ArticleIndustryClassification classification = 
-        Iterables.getFirst(classifications, null);
+    ArticleIndustryClassification classification = Iterables.getFirst(classifications, null);
     if (classification != null) {
       String urlId = classification.getUrlId();
       Database.with(ArticleIndustryClassification.class).delete(

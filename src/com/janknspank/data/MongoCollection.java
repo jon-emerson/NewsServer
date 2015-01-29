@@ -53,8 +53,10 @@ public class MongoCollection<T extends Message> extends Collection<T> {
 
   @Override
   public void createTable() throws DataInternalException {
-    DBCollection collection =
-        getDatabase().createCollection(getTableName(), new BasicDBObject());
+    DBCollection collection = getDatabase().getCollection(getTableName());
+    if (collection == null) {
+      collection = getDatabase().createCollection(getTableName(), new BasicDBObject());
+    }
     for (FieldDescriptor field : storageMethodMap.keySet()) {
       StorageMethod storageMethod = storageMethodMap.get(field);
       if (storageMethod == StorageMethod.INDEX ||

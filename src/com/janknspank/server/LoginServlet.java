@@ -82,7 +82,7 @@ public class LoginServlet extends StandardServlet {
           .setScheme(req.getScheme())
           .setHost(req.getServerName())
           .setPath("/login");
-      int port = req.getLocalPort();
+      int port = req.getServerPort();
       if (!(port == 0 ||
             port == 80 && "http".equals(req.getScheme()) ||
             port == 443 && "https".equals(req.getScheme()))) {

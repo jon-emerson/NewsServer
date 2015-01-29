@@ -66,7 +66,7 @@ public class Articles {
         new QueryOption.WhereEqualsIgnoreCase("keyword", topics),
         new QueryOption.Limit(500));
   }
-  
+
   /**
    * Gets articles that contain a set of keywords
    * @throws DataInternalException 
@@ -94,34 +94,34 @@ public class Articles {
     }
     return getArticles(articleIds);
   }
-  
+
   public static Iterable<Article> getRankedArticles(String userId, Scorer scorer)
       throws DataInternalException, ParserException, IOException, ValidationException {
     Map<CompleteArticle, Double> ranks = getCompleteArticlesAndScores(userId, scorer);
-    
+
     // Sort the articles
     TopList<Article, Double> articles = new TopList<>(ranks.size());
     for (Map.Entry<CompleteArticle, Double> entry : ranks.entrySet()) {
       articles.add(entry.getKey().getArticle(), entry.getValue());
     }
-    
+
     return articles.getKeys();
   }
-  
+
   public static Map<CompleteArticle, Double> getCompleteArticlesAndScores(String userId, Scorer scorer)
-      throws DataInternalException, ParserException, IOException, ValidationException {
+      throws DataInternalException, ParserException, ValidationException {
     //NeuralNetworkScorer neuralNetworkRank = NeuralNetworkScorer.getInstance();
     CompleteUser completeUser = new CompleteUser(userId);
     // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
     Iterable<Article> articles = getArticlesByInterest(UserInterests.getInterests(userId));
     Map<CompleteArticle, Double> ranks = new HashMap<>();
-    
+
     CompleteArticle completeArticle;
     for (Article article : articles) {
       completeArticle = new CompleteArticle(article);
       ranks.put(completeArticle, scorer.getScore(completeUser, completeArticle));
     }
-    
+
     return ranks;
   }
 
@@ -135,7 +135,7 @@ public class Articles {
         new QueryOption.WhereEquals("url_id", urlIds),
         new QueryOption.DescendingSort("published_time"));
   }
-  
+
   public static Article getArticle(String urlId) 
       throws DataInternalException {
     return Database.with(Article.class).get(urlId);
@@ -146,7 +146,7 @@ public class Articles {
     return Database.with(Article.class).get(
         new LimitWithOffset(limit, offset));
   }
-  
+
   /**
    * Returns a random article
    */
@@ -167,7 +167,7 @@ public class Articles {
     } while (!Iterables.isEmpty(taggedIndustries));
     return article;
   }
-  
+
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
     Database.with(Article.class).createTable();

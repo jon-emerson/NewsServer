@@ -1,7 +1,5 @@
 package com.janknspank.rank;
 
-import java.io.IOException;
-
 import org.neuroph.core.NeuralNetwork;
 
 import com.janknspank.data.DataInternalException;
@@ -23,8 +21,8 @@ public final class NeuralNetworkScorer implements Scorer {
   }
 
   public static synchronized NeuralNetworkScorer getInstance() {
-    if(instance == null) {
-       instance = new NeuralNetworkScorer();
+    if (instance == null) {
+      instance = new NeuralNetworkScorer();
     }
     return instance;
   }
@@ -33,8 +31,7 @@ public final class NeuralNetworkScorer implements Scorer {
     neuralNetwork = NeuralNetwork.createFromFile(nnetFile);
   }
 
-  static double[] generateInputNodes(CompleteUser user, 
-      CompleteArticle article) {
+  static double[] generateInputNodes(CompleteUser user, CompleteArticle article) {
     ArticleFacebookEngagement engagement = article.getLatestFacebookEngagement();
     long likeCount = 0;
     long commentCount = 0;
@@ -89,8 +86,7 @@ public final class NeuralNetworkScorer implements Scorer {
   public double getScore(CompleteUser user, CompleteArticle article) {
     try {
       return getScore(user, article, neuralNetwork);
-    }
-    catch (DataInternalException | IOException | ValidationException e) {
+    } catch (DataInternalException | ValidationException e) {
       System.out.println("Error NeuralNetworkScorer.getScore()");
       e.printStackTrace();
       return 0;
@@ -99,7 +95,7 @@ public final class NeuralNetworkScorer implements Scorer {
 
   private static double getScore(CompleteUser completeUser, 
       CompleteArticle completeArticle, NeuralNetwork<?> neuralNetwork) 
-      throws DataInternalException, IOException, ValidationException {
+      throws DataInternalException, ValidationException {
     long startMillis = System.currentTimeMillis();
     neuralNetwork.setInput(generateInputNodes(completeUser, completeArticle));
     long generateInputNodesMillis = System.currentTimeMillis();
