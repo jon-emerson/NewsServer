@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import com.janknspank.data.EntityType;
+import com.janknspank.bizness.EntityType;
 import com.janknspank.proto.Core.ArticleKeyword;
 
 public class KeywordCanonicalizerTest {

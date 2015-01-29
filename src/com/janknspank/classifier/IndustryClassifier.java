@@ -6,13 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.ValidationException;
+
 import com.google.common.collect.Iterables;
-import com.janknspank.data.ArticleIndustryClassifications;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
-import com.janknspank.data.IndustryCodes;
-import com.janknspank.data.ValidationException;
-import com.janknspank.data.QueryOption.WhereEquals;
+import com.janknspank.bizness.ArticleIndustryClassifications;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.IndustryCodes;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption.WhereEquals;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleIndustryClassification;
 import com.janknspank.proto.Core.IndustryCode;
@@ -27,13 +30,13 @@ public class IndustryClassifier {
     for (IndustryCode industryCode : IndustryCodes.INDUSTRY_CODE_MAP.values()) {
       try {
         industryVectors.put(industryCode, new IndustryVector(industryCode));
-      } catch (DataInternalException e) {
+      } catch (BiznessException | DatabaseSchemaException e) {
         // Can't generate industry vector. Ignore it.
       }
     }
   }
 
-  public static synchronized IndustryClassifier getInstance() throws DataInternalException {
+  public static synchronized IndustryClassifier getInstance() {
     if (instance == null) {
       instance = new IndustryClassifier();
     }
@@ -44,12 +47,15 @@ public class IndustryClassifier {
    * Returns a list of Article Industry Classifications
    * @param article
    * @return
+   * @throws DatabaseSchemaException 
+   * @throws BiznessException 
+   * @throws DatabaseRequestException 
    * @throws DataInternalException
    * @throws IOException
    * @throws ValidationException
    */
   public Iterable<ArticleIndustryClassification> classify(Article article)
-      throws DataInternalException, ValidationException {
+      throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
     DocumentVector articleVector = new DocumentVector(article);
 
     // See if the classification has already been computed
@@ -82,7 +88,7 @@ public class IndustryClassifier {
 
   private static void saveClassificationsToServer(
       Iterable<ArticleIndustryClassification> classifications)
-      throws ValidationException, DataInternalException {
+          throws DatabaseSchemaException, DatabaseRequestException {
     ArticleIndustryClassification classification = Iterables.getFirst(classifications, null);
     if (classification != null) {
       String urlId = classification.getUrlId();

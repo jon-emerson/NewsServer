@@ -1,26 +1,53 @@
 package com.janknspank.common;
 
-import com.janknspank.data.ValidationException;
+import java.lang.reflect.InvocationTargetException;
 
 public class Asserts {
-  public static <T extends Object> T assertNotNull(T o, String desc) throws ValidationException {
+  public static <T extends Object> T assertNotNull(T o, String desc) throws AssertionException {
+    return assertNotNull(o, desc, AssertionException.class);
+  }
+
+  public static <T extends Object, X extends Exception> T assertNotNull(
+      T o, String desc, Class<X> clazz) throws X {
     if (o == null) {
-      throw new ValidationException("Object is null: " + desc);
+      throwException("Object is null: " + desc, clazz);
     }
     return o;
   }
 
-  public static void assertTrue(boolean b, String desc) throws ValidationException {
+  public static void assertTrue(boolean b, String desc) throws AssertionException {
+    assertTrue(b, desc, AssertionException.class);
+  }
+
+  public static <X extends Exception> void assertTrue(boolean b, String desc, Class<X> clazz)
+      throws X {
     if (!b) {
-      throw new ValidationException("Condition is false: " + desc);
+      throwException("Condition is false: " + desc, clazz);
     }
   }
 
-  public static String assertNonEmpty(String s, String desc) throws ValidationException {
-    assertNotNull(s, desc);
+  public static String assertNonEmpty(String s, String desc) throws AssertionException {
+    return assertNonEmpty(s, desc, AssertionException.class);
+  }
+
+  public static <X extends Exception> String assertNonEmpty(String s, String desc, Class<X> clazz)
+      throws X {
+    assertNotNull(s, desc, clazz);
     if (s.trim().length() == 0) {
-      throw new ValidationException("String is empty: " + desc);
+      throwException("String is empty: " + desc, clazz);
     }
     return s;
+  }
+
+  private static <X extends Exception> void throwException(String message, Class<X> clazz)
+      throws X {
+    try {
+      throw clazz.getConstructor(String.class).newInstance(message);
+    } catch (InstantiationException | IllegalAccessException
+        | IllegalArgumentException | InvocationTargetException
+        | NoSuchMethodException | SecurityException e) {
+      throw new RuntimeException("Exception class " + clazz.getSimpleName()
+          + " should implement (String message) constructor");
+    }
   }
 }

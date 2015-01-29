@@ -13,13 +13,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
-import com.janknspank.data.Entities;
-import com.janknspank.data.EntityType;
-import com.janknspank.data.GuidFactory;
-import com.janknspank.data.QueryOption;
-import com.janknspank.data.ValidationException;
+import com.janknspank.bizness.Entities;
+import com.janknspank.bizness.EntityType;
+import com.janknspank.bizness.GuidFactory;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
+import com.janknspank.database.Validator;
 import com.janknspank.interpreter.KeywordFinder;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.Entity;
@@ -27,7 +28,6 @@ import com.janknspank.proto.Core.Entity.EntityTopic;
 import com.janknspank.proto.Core.Entity.EntityTopic.Context;
 import com.janknspank.proto.Core.Entity.Source;
 import com.janknspank.proto.Local.LongAbstract;
-import com.janknspank.proto.Validator;
 
 public class GetKeywordsFromDbpediaAbstracts {
   public static boolean isRelevantEntityType(EntityType type) {
@@ -50,8 +50,7 @@ public class GetKeywordsFromDbpediaAbstracts {
         !type.isA(EntityType.POPULATED_PLACE);
   }
 
-  private static Iterable<Entity> getPartialMatches(Multimap<String, Entity> entityMap, String text)
-      throws DataInternalException {
+  private static Iterable<Entity> getPartialMatches(Multimap<String, Entity> entityMap, String text) {
     Set<Entity> entities = Sets.newHashSet();
     for (String sentence : KeywordFinder.getSentences(text)) {
       for (String token : KeywordFinder.getTokens(sentence)) {
@@ -63,7 +62,7 @@ public class GetKeywordsFromDbpediaAbstracts {
 
   private static Iterable<Entity> getEntities(
       Multimap<String, Entity> entityMap, LongAbstract longAbstract, String text)
-      throws DataInternalException {
+          throws DatabaseSchemaException {
     // Find words that look like keywords, using NLP.  This helps find entities
     // that might not be in Wikipedia - Which is probably quite a few!
     List<Entity> entities = Lists.newArrayList();
@@ -115,9 +114,10 @@ public class GetKeywordsFromDbpediaAbstracts {
   /**
    * De-dupes and finds entity_ids for each given Entity, so that we can write
    * fully-qualified data to the DB.
+   * @throws DatabaseSchemaException 
    */
   private static Iterable<Entity> canonicalize(LongAbstract longAbstract, List<Entity> entities)
-      throws DataInternalException {
+      throws DatabaseSchemaException {
     Map<String, Entity> topicToEntityMap = Maps.newHashMap();
     for (Entity entity : entities) {
       Entity existingEntity = topicToEntityMap.get(entity.getKeyword());
@@ -146,7 +146,7 @@ public class GetKeywordsFromDbpediaAbstracts {
     return false;
   }
 
-  public static LongAbstract getNextLongAbstract(int offset) throws DataInternalException {
+  public static LongAbstract getNextLongAbstract(int offset) throws DatabaseSchemaException {
     return Database.with(LongAbstract.class).getFirst(new QueryOption.LimitWithOffset(1, offset));
   }
 
@@ -267,7 +267,7 @@ public class GetKeywordsFromDbpediaAbstracts {
           entitiesToUpdate.add(updatedEntity);
           longAbstractsToDelete.add(abs);
 
-        } catch (DataInternalException | ValidationException e) {
+        } catch (DatabaseSchemaException | DatabaseRequestException e) {
           e.printStackTrace();
         }
 
@@ -290,7 +290,7 @@ public class GetKeywordsFromDbpediaAbstracts {
       Database.insert(entitiesToInsert);
       Database.insert(entitiesToUpdate);
 
-    } catch (IOException | ValidationException | DataInternalException e) {
+    } catch (IOException | DatabaseSchemaException | DatabaseRequestException e) {
       e.printStackTrace();
 
     } finally {

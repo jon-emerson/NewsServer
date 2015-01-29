@@ -7,9 +7,9 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.janknspank.data.Database;
-import com.janknspank.data.Entities;
-import com.janknspank.data.EntityType;
+import com.janknspank.bizness.Entities;
+import com.janknspank.bizness.EntityType;
+import com.janknspank.database.Database;
 import com.janknspank.interpreter.KeywordUtils;
 import com.janknspank.proto.Local.TokenToEntity;
 

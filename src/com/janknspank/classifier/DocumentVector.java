@@ -16,8 +16,9 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.WordDocumentFrequencies;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.WordDocumentFrequencies;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.interpreter.KeywordFinder;
 import com.janknspank.interpreter.KeywordUtils;
 import com.janknspank.proto.Core.Article;
@@ -26,7 +27,7 @@ public class DocumentVector {
   private Multiset<String> frequencyVector;
   private Map<String, Double> tfIdfVector;
   private static final Set<String> STOP_WORDS;
-  
+
   static {
     InputStream inputStream = null;
     try {
@@ -38,37 +39,39 @@ public class DocumentVector {
     } finally {
       IOUtils.closeQuietly(inputStream);
     }
-    
   }
-  
-  public DocumentVector(Article article) throws DataInternalException {
+
+  public DocumentVector(Article article) {
     frequencyVector = generateFrequencyVector(article);
     // Note: tfIDFVector is lazy loaded to prevent a circular
     // dependency on WodDocumentFrequencies
   }
-  
+
   Multiset<String> getFrequencyVector() {
     return frequencyVector;
   }
-  
-  Map<String, Double> getTFIDFVector() 
-      throws DataInternalException {
+
+  Map<String, Double> getTFIDFVector() throws BiznessException {
     if (tfIdfVector != null) {
       return tfIdfVector;
     } else {
-      tfIdfVector = generateTFIDFVectorFromTF(frequencyVector);
+      try {
+        tfIdfVector = generateTFIDFVectorFromTF(frequencyVector);
+      } catch (DatabaseSchemaException e) {
+        throw new BiznessException("Error generating vector: " + e.getMessage(), e);
+      }
       return tfIdfVector;
     }
   }
-  
+
   private static Multiset<String> generateFrequencyVector(Article article) {
     Multiset<String> vector = HashMultiset.create();
-    
+
     // Get all words
     List<String> paragraphs = new ArrayList<>(article.getParagraphList());
     paragraphs.add(article.getTitle());
     paragraphs.add(article.getDescription());
-    
+
     for (String paragraph : paragraphs) {
       // For each word increment the frequencyVector
       String[] tokens = KeywordFinder.getTokens(paragraph);
@@ -84,15 +87,15 @@ public class DocumentVector {
     }
     return vector;
   }
-  
-  static Map<String, Double> generateTFIDFVectorFromTF(Multiset<String> tfVector) 
-      throws DataInternalException {
+
+  static Map<String, Double> generateTFIDFVectorFromTF(Multiset<String> tfVector)
+      throws DatabaseSchemaException, BiznessException {
     Map<String, Double> tfIdfVector = new HashMap<>();
     WordDocumentFrequencies dfs = null;
     int totalDocumentsN;
     dfs = WordDocumentFrequencies.getInstance();
     totalDocumentsN = dfs.getN();
-    
+
     for (Multiset.Entry<String> wordFrequency : tfVector.entrySet()) {
       String word = wordFrequency.getElement();
       int tf = wordFrequency.getCount();
@@ -106,24 +109,22 @@ public class DocumentVector {
         tfIdfVector.put(word, tfIdf);
       }
     }
-    
+
     return tfIdfVector;
   }
-  
+
   public Set<String> getUniqueWordsInDocument() {
     return frequencyVector.elementSet();
   }
-  
-  public double cosineSimilarityTo(DocumentVector document) 
-      throws DataInternalException, IOException {
+
+  public double cosineSimilarityTo(DocumentVector document) throws BiznessException {
     return cosineSimilarity(getTFIDFVector(), document.tfIdfVector);
   }
-  
-  public double cosineSimilarityTo(IndustryVector industry) 
-      throws DataInternalException {
+
+  public double cosineSimilarityTo(IndustryVector industry) throws BiznessException {
     return cosineSimilarity(getTFIDFVector(), industry.getVector());
   }
-  
+
   // Note: this function normalizes by length of each document
   // So not necessary to normalize by length elsewhere
   static double cosineSimilarity(Map<String, Double> v1, Map<String, Double> v2) {
@@ -141,7 +142,7 @@ public class DocumentVector {
     }
     return dotProduct / Math.sqrt(normalizedLength1 * normalizedLength2);
   }
-  
+
   public String toString() {
     return "DocumentVector.tfIdfVector: " + tfIdfVector;
   }

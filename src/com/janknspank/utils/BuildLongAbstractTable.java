@@ -17,10 +17,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
-import com.janknspank.data.SqlConnection;
-import com.janknspank.data.ValidationException;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.SqlConnection;
 import com.janknspank.proto.Local.LongAbstract;
 
 public class BuildLongAbstractTable {
@@ -202,7 +202,7 @@ public class BuildLongAbstractTable {
       // Insert the remaining stragglers.
       Database.insert(longAbstractsToInsert);
 
-    } catch (IOException | ValidationException | DataInternalException e) {
+    } catch (IOException | DatabaseSchemaException | DatabaseRequestException e) {
       e.printStackTrace();
 
     } finally {

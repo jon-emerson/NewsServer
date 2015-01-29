@@ -9,20 +9,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.common.collect.Maps;
-import com.janknspank.data.ArticleKeywords;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.ValidationException;
+import com.janknspank.bizness.ArticleKeywords;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.Serializer;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleKeyword;
-import com.janknspank.proto.Serializer;
 
 public abstract class AbstractArticlesServlet extends StandardServlet {
   protected abstract Iterable<Article> getArticles(HttpServletRequest req)
-      throws ValidationException, DataInternalException;
+      throws BiznessException, DatabaseSchemaException, DatabaseRequestException, RequestException;
 
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws ValidationException, DataInternalException {
+      throws DatabaseSchemaException, DatabaseRequestException, RequestException, BiznessException {
     JSONObject response = createSuccessResponse();
     response.put("articles", getArticleJsonArray(getArticles(req)));
     return response;
@@ -32,7 +33,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
    * Returns a JSON array of JSON article objects with their keywords filled in.
    */
   private JSONArray getArticleJsonArray(Iterable<Article> articleList)
-      throws DataInternalException {
+      throws DatabaseSchemaException {
     // Create a look-up table for article keywords.
     Map<String, JSONArray> articleKeywordJsonMap = Maps.newHashMap();
     for (ArticleKeyword articleKeyword : ArticleKeywords.get(articleList)) {

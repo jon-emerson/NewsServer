@@ -4,15 +4,16 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.janknspank.bizness.ArticleKeywords;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.Links;
+import com.janknspank.bizness.Urls;
 import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.UrlCleaner;
 import com.janknspank.common.UrlWhitelist;
-import com.janknspank.data.ArticleKeywords;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
-import com.janknspank.data.Links;
-import com.janknspank.data.Urls;
-import com.janknspank.data.ValidationException;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.interpreter.Interpreter;
@@ -27,8 +28,8 @@ public class TheMachine {
     // Uncomment this to start the crawl at a specific page.
     try {
       Urls.put("http://recode.net/", false);
-    } catch (DataInternalException e1) {
-      e1.printStackTrace();
+    } catch (BiznessException | DatabaseSchemaException e) {
+      e.printStackTrace();
     }
 
     while (true) {
@@ -46,7 +47,7 @@ public class TheMachine {
           // Some other thread has likely claimed this URL - Go get another.
           continue;
         }
-      } catch (DataInternalException e) {
+      } catch (BiznessException | DatabaseSchemaException e) {
         throw new RuntimeException("Could not read URL to crawl");
       }
 
@@ -66,7 +67,7 @@ public class TheMachine {
           InterpretedData interpretedData = Interpreter.interpret(url);
           try {
             Database.insert(interpretedData.getArticle());
-          } catch (DataInternalException e) {
+          } catch (DatabaseRequestException | DatabaseSchemaException e) {
             // It could be that some other process decided to steal this article
             // and process it first (mainly due to human error).  If so, delete
             // everything and store it again.
@@ -94,7 +95,7 @@ public class TheMachine {
         Links.put(url, destinationUrls);
         Urls.markCrawlFinish(url);
 
-      } catch (ValidationException|DataInternalException e) {
+      } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
         // Internal error (bug in our code).
         e.printStackTrace();
       } catch (FetchException|ParserException|RequiredFieldException e) {

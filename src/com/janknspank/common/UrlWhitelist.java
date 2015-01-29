@@ -16,10 +16,10 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.janknspank.data.ArticleKeywords;
-import com.janknspank.data.Database;
-import com.janknspank.data.Links;
-import com.janknspank.data.QueryOption;
+import com.janknspank.bizness.ArticleKeywords;
+import com.janknspank.bizness.Links;
+import com.janknspank.database.Database;
+import com.janknspank.database.QueryOption;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 

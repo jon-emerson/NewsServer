@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.protobuf.Message;
 import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.Message;
+import com.janknspank.common.AssertionException;
 import com.janknspank.common.Asserts;
-import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Extensions.ClientSerialization;
 import com.janknspank.proto.Extensions.Required;
 import com.janknspank.proto.Extensions.StorageMethod;
@@ -16,7 +16,7 @@ import com.janknspank.proto.Extensions.StorageMethod;
  * Prints a protocol buffer's values.
  */
 public class Printer {
-  public static void print(Message message) throws ValidationException {
+  public static void print(Message message) throws AssertionException {
     Asserts.assertNotNull(message, "Message cannot be null");
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
       System.out.print(fieldDescriptor.getName() + " = ");

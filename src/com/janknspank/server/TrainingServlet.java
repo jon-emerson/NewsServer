@@ -14,14 +14,13 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
+import com.janknspank.bizness.ArticleTypeCodes;
+import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.IndustryCodes;
 import com.janknspank.common.Asserts;
-import com.janknspank.data.ArticleTypeCodes;
-import com.janknspank.data.Articles;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.DataRequestException;
-import com.janknspank.data.Database;
-import com.janknspank.data.IndustryCodes;
-import com.janknspank.data.ValidationException;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.ArticleTypeCode;
 import com.janknspank.proto.Core.IndustryCode;
@@ -35,10 +34,10 @@ public class TrainingServlet extends StandardServlet {
   /**
    * Returns any Soy data necessary for rendering the .main template for this
    * servlet's Soy page.
+   * @throws DatabaseSchemaException
    */
   @Override
-  protected SoyMapData getSoyMapData(HttpServletRequest req)
-      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+  protected SoyMapData getSoyMapData(HttpServletRequest req) throws DatabaseSchemaException {
     Article article = Articles.getRandomUntrainedArticle();
     return new SoyMapData(
         "sessionKey", this.getSession(req).getSessionKey(),
@@ -67,19 +66,20 @@ public class TrainingServlet extends StandardServlet {
               }
             }));
   }
-  
+
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+      throws RequestException, DatabaseRequestException, DatabaseSchemaException {
     Session session = this.getSession(req);
-    
+
     // Read parameters.
     String urlId = getRequiredParameter(req, "urlId");
     String[] industryIdsList = req.getParameterValues("industriesCheckboxes");
     //Only returns the selected checkboxes
     String[] articleClassificationCodesList = req.getParameterValues("classifications");
     int rating100scale = Integer.parseInt(req.getParameter("qualityScore"));
-    Asserts.assertTrue(rating100scale > 0 && rating100scale < 100, "qualityScore must be between 0 - 100");
-    
+    Asserts.assertTrue(rating100scale > 0 && rating100scale < 100, "qualityScore must be between 0 - 100",
+        RequestException.class);
+
     // Business logic.
     // Save the tagged industries
     if (industryIdsList != null) {
@@ -91,9 +91,9 @@ public class TrainingServlet extends StandardServlet {
             .setIndustryCodeId(Integer.parseInt(industryId))
             .build());
       }
-      Database.insert(articleIndustries);      
+      Database.insert(articleIndustries);
     }
-    
+
     // Save the user relevance rating
     UserUrlRating userRating = UserUrlRating.newBuilder()
         .setUrlId(urlId)
@@ -102,7 +102,7 @@ public class TrainingServlet extends StandardServlet {
         .setCreateTime(System.currentTimeMillis())
         .build();
     Database.insert(userRating);
-    
+
     // Collect all checked and unchecked classification states
     Map<String, Boolean> classificationsHelper = new HashMap<String, Boolean>();
     for (String code : ArticleTypeCodes.ARTICLE_CLASSIFICATION_CODE_MAP.keySet()) {
@@ -113,7 +113,7 @@ public class TrainingServlet extends StandardServlet {
         classificationsHelper.put(taggedCodes, true);
       }
     }
-    
+
     // Save the article classifications
     List<TrainedArticleClassification> articleClassifications = new ArrayList<TrainedArticleClassification>();
     for (Map.Entry<String, Boolean> entry : classificationsHelper.entrySet()) {
@@ -127,7 +127,7 @@ public class TrainingServlet extends StandardServlet {
           .build());
     }
     Database.insert(articleClassifications);
-    
+
     return this.createSuccessResponse();
   }
 }

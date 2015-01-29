@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.janknspank.data.ValidationException;
+import com.janknspank.common.AssertionException;
 
 /**
  * Reads all the individual training data files and writes them out as a single
@@ -47,7 +47,7 @@ public class TrainingDataCollator {
    * @param file the file we're parsing, for error announcements
    */
   private static String getLineForType(String type, String line, File file)
-      throws ValidationException {
+      throws AssertionException {
     int depth = 0;
     List<String> relevantTokens = Lists.newArrayList();
     String startType = "";
@@ -55,11 +55,11 @@ public class TrainingDataCollator {
       if (token.startsWith("<START:")) {
         depth++;
         if (!token.endsWith(">")) {
-          throw new ValidationException("Malformed <START> tag: " + token + "\n"
+          throw new AssertionException("Malformed <START> tag: " + token + "\n"
               + "Line: " + line + "\n" + "In file: " + getFilePath(file));
         }
         if (depth != 1) {
-          throw new ValidationException("<START> tag found while already in <START> tag\n"
+          throw new AssertionException("<START> tag found while already in <START> tag\n"
               + "Line: " + line + "\n" + "In file: " + getFilePath(file));
         }
         startType = token.substring("<START:".length(), token.indexOf(">"));
@@ -69,28 +69,28 @@ public class TrainingDataCollator {
       } else if (token.startsWith("<END")) {
         depth--;
         if (!token.equals("<END>")) {
-          throw new ValidationException("Malformed <END> tag: " + token + "\n"
+          throw new AssertionException("Malformed <END> tag: " + token + "\n"
               + "Line: " + line + "\n" + "In file: " + getFilePath(file));
         }
         if (depth != 0) {
-          throw new ValidationException("<END> tag does not match <START>\n"
+          throw new AssertionException("<END> tag does not match <START>\n"
               + "Line: " + line + "\n" + "In file: " + getFilePath(file));
         }
         if (type.equals(startType)) {
           relevantTokens.add(token);
         }
       } else if (token.contains("<START")) {
-        throw new ValidationException("Error on line: <START... is not beginning of token.\n"
+        throw new AssertionException("Error on line: <START... is not beginning of token.\n"
             + "Line: " + line + "\n" + "In file: " + getFilePath(file));
       } else if (token.contains("<END")) {
-        throw new ValidationException("Error on line: <END... is not beginning of token.\n"
+        throw new AssertionException("Error on line: <END... is not beginning of token.\n"
             + "Line: " + line + "\n" + "In file: " + getFilePath(file));
       } else {
         relevantTokens.add(token);
       }
     }
     if (depth != 0) {
-      throw new ValidationException("<START> has no <END> to match!\n"
+      throw new AssertionException("<START> has no <END> to match!\n"
           + "Line: " + line + "\n" + "In file: " + getFilePath(file));
     }
     return Joiner.on(" ").join(relevantTokens);

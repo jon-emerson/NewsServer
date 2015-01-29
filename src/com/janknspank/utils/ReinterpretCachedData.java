@@ -9,13 +9,14 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.janknspank.bizness.ArticleKeywords;
+import com.janknspank.bizness.Links;
+import com.janknspank.bizness.Urls;
 import com.janknspank.common.UrlCleaner;
 import com.janknspank.common.UrlWhitelist;
-import com.janknspank.data.ArticleKeywords;
-import com.janknspank.data.Database;
-import com.janknspank.data.Links;
-import com.janknspank.data.Urls;
-import com.janknspank.data.ValidationException;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.interpreter.Interpreter;
@@ -75,7 +76,7 @@ public class ReinterpretCachedData {
         Links.put(url, destinationUrls);
         Urls.markCrawlFinish(url);
 
-      } catch (ValidationException | FileNotFoundException e) {
+      } catch (DatabaseSchemaException | DatabaseRequestException | FileNotFoundException e) {
         // Internal error (bug in our code).
         e.printStackTrace();
       } catch (FetchException|ParserException|RequiredFieldException e) {

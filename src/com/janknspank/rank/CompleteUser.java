@@ -4,10 +4,11 @@ import java.io.StringReader;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.LinkedInProfiles;
-import com.janknspank.data.UserIndustries;
-import com.janknspank.data.UserInterests;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.LinkedInProfiles;
+import com.janknspank.bizness.UserIndustries;
+import com.janknspank.bizness.UserInterests;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -26,7 +27,7 @@ public class CompleteUser {
   //private Iterable<UserUrlRating> ratings;
   //private Iterable<String> skills;
 
-  public CompleteUser(String userId) throws DataInternalException, ParserException {
+  public CompleteUser(String userId) throws DatabaseSchemaException, ParserException, BiznessException {
     interests = UserInterests.getInterests(userId);
     industries = UserIndustries.getIndustries(userId);
 

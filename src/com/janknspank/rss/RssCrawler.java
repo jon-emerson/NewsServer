@@ -6,15 +6,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.collect.Iterables;
+import com.janknspank.bizness.GuidFactory;
+import com.janknspank.bizness.Urls;
 import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.DateParser;
 import com.janknspank.common.UrlCleaner;
 import com.janknspank.common.UrlWhitelist;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
-import com.janknspank.data.GuidFactory;
-import com.janknspank.data.Urls;
-import com.janknspank.data.ValidationException;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -171,7 +171,7 @@ public class RssCrawler {
             .setCrawlPriority(Urls.getCrawlPriority(url, date))
             .build());
       }
-    } catch (DataInternalException|ValidationException e) {
+    } catch (DatabaseSchemaException | DatabaseRequestException e) {
       // Oh well, it's just RSS.  Print it out at least, so we can debug it.
       e.printStackTrace();
     }
