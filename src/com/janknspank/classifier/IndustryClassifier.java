@@ -67,6 +67,7 @@ public class IndustryClassifier {
     for (IndustryCode industryCode : industryVectors.keySet()) {
       ArticleIndustry classification = 
           classifyForIndustry(article, industryCode);
+      // Only save industries that are closely related
       if (classification.getSimilarity() >= RELEVANCE_THRESHOLD) {
         newClassifications.add(classification);
       }
@@ -81,7 +82,6 @@ public class IndustryClassifier {
     IndustryVector vector = industryVectors.get(industryCode);
     DocumentVector articleVector = new DocumentVector(article);
     double similarity = articleVector.cosineSimilarityTo(vector);
-    // Only save industries that are closely related
     ArticleIndustry classification =
         ArticleIndustry.newBuilder()
             .setIndustryCodeId(industryCode.getId())
