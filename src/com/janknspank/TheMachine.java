@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.janknspank.bizness.ArticleKeywords;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Links;
 import com.janknspank.bizness.Urls;
@@ -19,9 +18,9 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.interpreter.Interpreter;
 import com.janknspank.interpreter.RequiredFieldException;
 import com.janknspank.interpreter.UrlFinder;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.Url;
-import com.janknspank.proto.Interpreter.InterpretedData;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.InterpretedData;
+import com.janknspank.proto.CoreProto.Url;
 
 public class TheMachine {
   public void start() {
@@ -73,14 +72,11 @@ public class TheMachine {
             // everything and store it again.
             System.out.println("Handling human error: " + url.getUrl());
             Database.with(Article.class).delete(url.getId());
-            ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
             Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
 
             // Try again!
             Database.insert(interpretedData.getArticle());
           }
-
-          Database.insert(interpretedData.getKeywordList());
           urls = interpretedData.getUrlList();
         } else {
           urls = UrlFinder.findUrls(url);

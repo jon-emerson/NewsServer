@@ -1,50 +1,33 @@
 package com.janknspank.server;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.AddressBook;
-import com.janknspank.proto.Core.UserInterest;
+import com.janknspank.database.Serializer;
+import com.janknspank.proto.UserProto.AddressBook;
+import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class SetAddressBookServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws BiznessException, DatabaseSchemaException, DatabaseRequestException, RequestException {
-    String userId = this.getSession(req).getUserId();
+    User user = Database.with(User.class).get(getSession(req).getUserId());
     AddressBook addressBook = AddressBook.newBuilder()
-        .setUserId(userId)
         .setData(getRequiredParameter(req, "data"))
         .setCreateTime(System.currentTimeMillis())
         .build();
-    Database.upsert(addressBook);
-    List<UserInterest> interests = UserInterests.updateInterests(userId, addressBook);
-
-    // Return the user's interests.
-    JSONObject userJson = new JSONObject();
-    userJson.put("interests", interests);
+    user = Database.set(user, "address_book", addressBook);
 
     // Create response.
     JSONObject response = createSuccessResponse();
-    response.put("user", userJson);
+    response.put("user", Serializer.toJSON(user));
     return response;
-  }
-
-  public static void main(String args[]) throws Exception {
-    for (String userId : new String[] {
-        "vWxNTAAKB-KYAEofUGJL4A",
-        "o0Sr9HzgxZMUVcUi09NIhg"}) {
-      AddressBook addressBook = Database.with(AddressBook.class).get(userId);
-      UserInterests.updateInterests(userId, addressBook);
-    }
   }
 }

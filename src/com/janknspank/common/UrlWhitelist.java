@@ -16,12 +16,11 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.janknspank.bizness.ArticleKeywords;
 import com.janknspank.bizness.Links;
 import com.janknspank.database.Database;
 import com.janknspank.database.QueryOption;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.Url;
 
 public class UrlWhitelist {
   public static final Predicate<String> PREDICATE = new Predicate<String>() {
@@ -700,7 +699,6 @@ public class UrlWhitelist {
           ids.add(urlToDelete.getValue());
         }
         System.out.println("Deleted " + Database.with(Article.class).delete(ids) + " articles");
-        System.out.println("Deleted " + ArticleKeywords.deleteForUrlIds(ids) + " article keywords");
         System.out.println("Deleted " + Links.deleteIds(ids) + " links");
         System.out.println("Deleted " + Database.with(Url.class).delete(urls) + " urls");
         urlsToDelete.clear();

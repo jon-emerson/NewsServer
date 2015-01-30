@@ -22,7 +22,7 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.CoreProto.Url;
 
 /**
  * Iterates through all the RSS of various sites we like to crawl and pushes

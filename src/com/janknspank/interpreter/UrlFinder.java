@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -12,7 +13,7 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.CoreProto.Url;
 
 public class UrlFinder {
   private static final Fetcher FETCHER = new Fetcher();
@@ -41,7 +42,9 @@ public class UrlFinder {
           !href.startsWith("whatsapp:")) {
         try {
           String resolvedUrl = resolveUrl(documentNode, href);
-          if (resolvedUrl.startsWith("http://") || resolvedUrl.startsWith("https://")) {
+          // To save on space, only save links to articles.  Without this,
+          // 80% of our data is links to general category pages and the like.
+          if (ArticleUrlDetector.isArticle(resolvedUrl)) {
             urlList.add(resolvedUrl);
           }
         } catch (MalformedURLException e) {

@@ -1,57 +1,54 @@
 package com.janknspank.rank;
 
-import com.janknspank.proto.Core.ArticleFacebookEngagement;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.UserProto.User;
 
-public class HeuristicScorer implements Scorer {
+public class HeuristicScorer extends Scorer {
   private static HeuristicScorer instance = null;
-  
+
   private HeuristicScorer() {
     // Nothing for now
   }
-  
+
   public static synchronized HeuristicScorer getInstance() {
-    if(instance == null) {
-       instance = new HeuristicScorer();
+    if (instance == null) {
+      instance = new HeuristicScorer();
     }
     return instance;
   }
-  
-  public double getScore(CompleteUser completeUser, CompleteArticle completeArticle) {
-    ArticleFacebookEngagement engagement = completeArticle.getLatestFacebookEngagement();
-    long likeCount = 0;
-    long commentCount = 0;
-    long shareCount = 0;
-    if (engagement != null) {
-      likeCount = engagement.getLikeCount();
-      commentCount = engagement.getCommentCount();
-      shareCount = engagement.getShareCount();
+
+  public double getScore(User user, Article article) {
+    SocialEngagement engagement = getLatestFacebookEngagement(article);
+    if (engagement == null) {
+      engagement = SocialEngagement.getDefaultInstance();
     }
-    long engagementCount = likeCount + commentCount + shareCount;
-    
+    long engagementCount = engagement.getLikeCount() + engagement.getCommentCount()
+        + engagement.getShareCount();
+
     double score = 0;
-    
+
     // Max Current workplace value: 0.2
-    if (InputValuesGenerator.isAboutCurrentEmployer(completeUser, completeArticle) == 1) {
+    if (InputValuesGenerator.isAboutCurrentEmployer(user, article)) {
       score += 0.2;
     }
-    
+
     // Matched interests up to 0.3
-    score += Math.min(InputValuesGenerator.matchedInterestsCount(
-        completeUser, completeArticle) / 10, 0.3);
-    
+    score += Math.min(InputValuesGenerator.matchedInterestsCount(user, article) / 10, 0.3);
+
     // Article length not super short: 0.1
-    if (completeArticle.wordCount() > 300) {
+    if (article.getWordCount() > 300) {
       score += 0.1;
     }
-    
+
     // FB engagement count up to 0.3
     if (engagementCount > 0) {
-      score += Math.min(Math.log(engagementCount) / 10, 0.3); 
+      score += Math.min(Math.log(engagementCount) / 10, 0.3);
     }
-    
+
     // Industry relevance
-    score += InputValuesGenerator.industryRelevance(completeUser, completeArticle);
-    
+    score += InputValuesGenerator.industryRelevance(user, article);
+
     return score;
   }
 }

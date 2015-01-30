@@ -21,7 +21,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.SqlConnection;
-import com.janknspank.proto.Local.LongAbstract;
+import com.janknspank.proto.LocalProto.LongAbstract;
 
 public class BuildLongAbstractTable {
   public static class Abstract {
@@ -156,11 +156,11 @@ public class BuildLongAbstractTable {
       String line = reader.readLine();
       final Set<String> existingArticleNames = getExistingArticleNames();
       final int maxTopicLength =
-          Database.with(LongAbstract.class).getStringLength("topic");
+          Database.getStringLength(LongAbstract.class, "topic");
       final int maxArticleNameLength =
-          Database.with(LongAbstract.class).getStringLength("article_name");
+          Database.getStringLength(LongAbstract.class, "article_name");
       final int maxTextLength =
-          Database.with(LongAbstract.class).getStringLength("text");
+          Database.getStringLength(LongAbstract.class, "text");
       while (line != null) {
         if (line.startsWith("#")) {
           line = reader.readLine();

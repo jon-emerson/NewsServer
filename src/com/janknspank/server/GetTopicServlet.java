@@ -2,9 +2,10 @@ package com.janknspank.server;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.common.collect.ImmutableList;
 import com.janknspank.bizness.Articles;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.ArticleProto.Article;
 
 @AuthenticationRequired
 public class GetTopicServlet extends AbstractArticlesServlet {
@@ -12,6 +13,6 @@ public class GetTopicServlet extends AbstractArticlesServlet {
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException {
-    return Articles.getArticlesOnTopic(getRequiredParameter(req, "topic"));
+    return Articles.getArticlesForKeywords(ImmutableList.of(getRequiredParameter(req, "topic")));
   }
 }

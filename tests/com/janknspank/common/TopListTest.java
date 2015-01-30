@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.ArticleProto.Article;
 
 public class TopListTest {
   @Test

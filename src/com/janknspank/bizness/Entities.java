@@ -15,14 +15,14 @@ import com.google.common.collect.Maps;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.proto.Core.Entity;
-import com.janknspank.proto.Core.Entity.EntityTopic;
+import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.Entity.EntityTopic;
 
 public class Entities extends CacheLoader<String, Entity> {
   public static final int MAX_KEYWORD_LENGTH =
-      Database.with(Entity.class).getStringLength("keyword");
+      Database.getStringLength(Entity.class, "keyword");
   public static final int MAX_TOPIC_KEYWORD_LENGTH =
-      Database.with(EntityTopic.class).getStringLength("keyword");
+      Database.getStringLength(EntityTopic.class, "keyword");
 
   private static LoadingCache<String, Entity> ENTITY_CACHE =
       CacheBuilder.newBuilder()

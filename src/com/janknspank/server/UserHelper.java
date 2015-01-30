@@ -12,16 +12,13 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.janknspank.bizness.UserInterests;
-import com.janknspank.bizness.UserUrlFavorites;
-import com.janknspank.bizness.UserUrlRatings;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.User;
-import com.janknspank.proto.Core.UserUrlFavorite;
-import com.janknspank.proto.Core.UserUrlRating;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.UrlFavorite;
+import com.janknspank.proto.UserProto.UrlRating;
+import com.janknspank.proto.UserProto.User;
 
 /**
  * Helper class containing the user's favorite and rated articles.
@@ -46,7 +43,7 @@ public class UserHelper {
 
   private Map<String, Integer> getRatedArticleIds() throws DatabaseSchemaException {
     Map<String, Integer> ratedArticleIds = Maps.newHashMap();
-    for (UserUrlRating rating : UserUrlRatings.get(user.getId())) {
+    for (UrlRating rating : user.getUrlRatingList()) {
       ratedArticleIds.put(rating.getUrlId(), rating.getRating());
     }
     return ratedArticleIds;
@@ -54,7 +51,7 @@ public class UserHelper {
 
   private Map<String, Long> getFavoriteArticleIds() throws DatabaseSchemaException {
     Map<String, Long> favoriteArticleIds = Maps.newHashMap();
-    for (UserUrlFavorite favorite : UserUrlFavorites.get(user.getId())) {
+    for (UrlFavorite favorite : user.getUrlFavoriteList()) {
       favoriteArticleIds.put(favorite.getUrlId(), favorite.getCreateTime());
     }
     return favoriteArticleIds;
@@ -113,6 +110,6 @@ public class UserHelper {
   }
 
   public JSONArray getInterestsJsonArray() throws DatabaseSchemaException {
-    return Serializer.toJSON(UserInterests.getInterests(user.getId()));
+    return Serializer.toJSON(user.getInterestList());
   }
 }

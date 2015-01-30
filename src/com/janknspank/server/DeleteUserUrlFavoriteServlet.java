@@ -5,30 +5,37 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.google.common.collect.ImmutableList;
-import com.janknspank.bizness.UserUrlFavorites;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Session;
+import com.janknspank.proto.UserProto.UrlFavorite;
+import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class DeleteUserUrlFavoriteServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws RequestException, DatabaseSchemaException, NotFoundException {
-    Session session = this.getSession(req);
+      throws DatabaseRequestException, DatabaseSchemaException, RequestException {
 
     // Get parameters.
-    String urlId = getRequiredParameter(req, "urlId");
+    final String urlId = getRequiredParameter(req, "urlId");
 
     // Business logic.
-    int numDeleted = UserUrlFavorites.deleteIds(session.getUserId(), ImmutableList.of(urlId));
-    if (numDeleted == 0) {
-      throw new NotFoundException("Favorite not found");
-    }
+    User user = Database.with(User.class).get(getSession(req).getUserId());
+    user = Database.with(User.class).set(user, "url_favorite", Iterables.filter(
+        user.getUrlFavoriteList(),
+        new Predicate<UrlFavorite>() {
+          @Override
+          public boolean apply(UrlFavorite urlFavorite) {
+            return !urlFavorite.getUrlId().equals(urlId);
+          }
+        }));
 
     // Write response.
     JSONObject response = createSuccessResponse();
-    response.put("url_id", urlId);
+    response.put("user", user);
     return response;
   }
 }

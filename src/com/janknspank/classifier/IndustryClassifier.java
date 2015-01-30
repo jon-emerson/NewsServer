@@ -15,10 +15,9 @@ import com.janknspank.bizness.IndustryCodes;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.QueryOption.WhereEquals;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.ArticleIndustryClassification;
-import com.janknspank.proto.Core.IndustryCode;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleIndustry;
+import com.janknspank.proto.EnumsProto.IndustryCode;
 
 public class IndustryClassifier {
   private static IndustryClassifier instance = null;
@@ -54,47 +53,34 @@ public class IndustryClassifier {
    * @throws IOException
    * @throws ValidationException
    */
-  public Iterable<ArticleIndustryClassification> classify(Article article)
+  public Iterable<ArticleIndustry> classify(Article article)
       throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
     DocumentVector articleVector = new DocumentVector(article);
 
     // See if the classification has already been computed
-    Iterable<ArticleIndustryClassification> classifications =
+    Iterable<ArticleIndustry> classifications =
         ArticleIndustryClassifications.getFor(article);
     if (classifications != null && Iterables.size(classifications) > 0) {
       return classifications;
     }
 
     // Compute classifications from IndustryVectors
-    List<ArticleIndustryClassification> newClassifications = new ArrayList<>();
+    List<ArticleIndustry> newClassifications = new ArrayList<>();
     for (Map.Entry<IndustryCode, IndustryVector> industry : industryVectors.entrySet()) {
       IndustryCode code = industry.getKey();
       IndustryVector vector = industry.getValue();
       double similarity = articleVector.cosineSimilarityTo(vector);
       // Only save industries that are closely related
       if (similarity >= RELEVANCE_THRESHOLD) {
-        ArticleIndustryClassification classification =
-            ArticleIndustryClassification.newBuilder()
-                .setUrlId(article.getUrlId())
+        ArticleIndustry classification =
+            ArticleIndustry.newBuilder()
                 .setIndustryCodeId(code.getId())
                 .setSimilarity(similarity)
                 .build();
         newClassifications.add(classification);
       }
     }
-    saveClassificationsToServer(newClassifications);
+    Database.set(article, "industry", newClassifications);
     return classifications;
-  }
-
-  private static void saveClassificationsToServer(
-      Iterable<ArticleIndustryClassification> classifications)
-          throws DatabaseSchemaException, DatabaseRequestException {
-    ArticleIndustryClassification classification = Iterables.getFirst(classifications, null);
-    if (classification != null) {
-      String urlId = classification.getUrlId();
-      Database.with(ArticleIndustryClassification.class).delete(
-          new WhereEquals("url_id", urlId));
-      Database.insert(classifications);
-    }
   }
 }

@@ -15,7 +15,7 @@ import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.common.io.CharStreams;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.CoreProto.Url;
 
 /**
  * Central point for fetching Readers of URLs.

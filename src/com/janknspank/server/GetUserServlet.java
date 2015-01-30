@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
-import com.janknspank.proto.Core.User;
+import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired
 public class GetUserServlet extends StandardServlet {

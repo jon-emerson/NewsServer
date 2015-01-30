@@ -9,9 +9,7 @@ import org.json.JSONObject;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
-import com.janknspank.database.Serializer;
-import com.janknspank.database.Validator;
-import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.ArticleProto.Article;
 
 public class SerializerTest {
   private static final List<String> PARAGRAPHS = ImmutableList.of("paragraph1", "p2");
@@ -24,6 +22,7 @@ public class SerializerTest {
   private static final String TITLE = "title";
   private static final String TYPE = "article";
   private static final String URL = "http://www.nytimes.com/super/article.html";
+  private static final long WORD_COUNT = 825;
 
   @Test
   public void testSerializer() throws Exception {
@@ -39,6 +38,7 @@ public class SerializerTest {
     builder.setType(TYPE);
     builder.setUrl(URL);
     builder.setUrlId(URL_ID);
+    builder.setWordCount(WORD_COUNT);
     Article article = builder.build();
     Validator.assertValid(article);
 
@@ -53,6 +53,7 @@ public class SerializerTest {
     assertEquals(TYPE, o.getString("type"));
     assertEquals(URL, o.getString("url"));
     assertEquals(URL_ID, o.getString("url_id"));
+    assertEquals(Long.toString(WORD_COUNT), o.getString("word_count"));
 
     // These fields should not exist - They were explicitly marked as server-
     // only.

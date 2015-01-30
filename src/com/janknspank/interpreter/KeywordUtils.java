@@ -8,11 +8,15 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
-import com.janknspank.bizness.ArticleKeywords;
 import com.janknspank.common.AssertionException;
 import com.janknspank.common.Asserts;
+import com.janknspank.database.Database;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
 
 public class KeywordUtils {
+  public static final int MAX_KEYWORD_LENGTH =
+      Database.getStringLength(ArticleKeyword.class, "keyword");
+
   // Matches: "5", "5) Topic.", "5. Example".
   private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+([\\.\\)\\,\\-].*)?");
   private static final Pattern BEST_OF_PATTERN = Pattern.compile("^best( [a-z]+)? of ");
@@ -123,7 +127,7 @@ public class KeywordUtils {
         lowercaseKeyword.endsWith(" restaurants") ||
         lowercaseKeyword.endsWith(" trends") ||
         (lowercaseKeyword.contains("&") && lowercaseKeyword.contains(";")) || // XML entities.
-        lowercaseKeyword.length() > ArticleKeywords.MAX_KEYWORD_LENGTH) {
+        lowercaseKeyword.length() > MAX_KEYWORD_LENGTH) {
       return false;
     }
     return !BLACKLIST.contains(lowercaseKeyword);

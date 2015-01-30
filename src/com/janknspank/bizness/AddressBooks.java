@@ -1,7 +1,7 @@
 package com.janknspank.bizness;
 
 import com.janknspank.database.Database;
-import com.janknspank.proto.Core.AddressBook;
+import com.janknspank.proto.UserProto.AddressBook;
 
 public class AddressBooks {
   /** Helper method for creating the AddressBook table. */

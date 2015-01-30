@@ -9,7 +9,7 @@ import com.janknspank.bizness.Sessions;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.User;
+import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class DeleteUserServlet extends StandardServlet {

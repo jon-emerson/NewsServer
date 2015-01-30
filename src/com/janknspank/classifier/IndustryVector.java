@@ -22,8 +22,8 @@ import com.google.common.io.Files;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.IndustryCode;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.EnumsProto.IndustryCode;
 
 public class IndustryVector {
   private Map<String, Double> tfIdfVector;

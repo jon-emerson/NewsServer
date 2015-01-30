@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.janknspank.database.Database;
-import com.janknspank.proto.Core.Entity;
+import com.janknspank.proto.CoreProto.Entity;
 
 public class BuildEntityTable {
   /** Helper method for creating the Article table. */

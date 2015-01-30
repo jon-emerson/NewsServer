@@ -22,13 +22,20 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.database.Validator;
 import com.janknspank.interpreter.KeywordFinder;
-import com.janknspank.proto.Core.ArticleKeyword;
-import com.janknspank.proto.Core.Entity;
-import com.janknspank.proto.Core.Entity.EntityTopic;
-import com.janknspank.proto.Core.Entity.EntityTopic.Context;
-import com.janknspank.proto.Core.Entity.Source;
-import com.janknspank.proto.Local.LongAbstract;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.Entity.EntityTopic;
+import com.janknspank.proto.CoreProto.Entity.EntityTopic.Context;
+import com.janknspank.proto.CoreProto.Entity.Source;
+import com.janknspank.proto.LocalProto.LongAbstract;
 
+/**
+ * This utility was used in January 2015 to run our NLP processor over all the
+ * summary paragraphs on Wikipedia and write any discovered keywords to
+ * Entity.Topic on the entities that previously were inserted.  These keywords
+ * will give us a signal as to whether a keyword we found was actually about
+ * a subject (e.g. a person) or just a red herring.
+ */
 public class GetKeywordsFromDbpediaAbstracts {
   public static boolean isRelevantEntityType(EntityType type) {
     if (type == null) {

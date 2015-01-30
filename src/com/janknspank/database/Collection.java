@@ -9,8 +9,7 @@ import com.google.common.collect.Lists;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
-import com.janknspank.proto.Extensions;
-import com.janknspank.proto.Extensions.StorageMethod;
+import com.janknspank.database.ExtensionsProto.StorageMethod;
 
 /**
  * A collection is a table of data of the same data type.  In SQL instances,
@@ -45,7 +44,7 @@ public abstract class Collection<T extends Message> {
     int primaryKeyCount = 0;
     Message message = Database.getDefaultInstance(clazz);
     for (FieldDescriptor field : message.getDescriptorForType().getFields()) {
-      StorageMethod storageMethod = field.getOptions().getExtension(Extensions.storageMethod);
+      StorageMethod storageMethod = field.getOptions().getExtension(ExtensionsProto.storageMethod);
       switch (storageMethod) {
         case PRIMARY_KEY:
           primaryKeyCount++;
@@ -85,23 +84,6 @@ public abstract class Collection<T extends Message> {
   }
 
   /**
-   * Returns the maximum allowed string length for the specified field in the
-   * passed Message subclass.
-   */
-  public int getStringLength(String fieldName) {
-    for (FieldDescriptor field :
-        Database.getDefaultInstance(clazz).getDescriptorForType().getFields()) {
-      if (JavaType.STRING == field.getJavaType()) {
-        if (fieldName.equals(field.getName())) {
-          return field.getOptions().getExtension(Extensions.stringLength);
-        }
-      }
-    }
-    throw new IllegalStateException("Could not find length of " + clazz.getSimpleName()
-        + "." + fieldName + " field");
-  }
-
-  /**
    * Removes the values of any Message fields annotated with StorageMethod:
    * DO_NOT_STORE.  This method should be called on Messages before writing them
    * to the database.
@@ -109,7 +91,7 @@ public abstract class Collection<T extends Message> {
   protected static Message cleanDoNotStoreFields(Message message) {
     Message.Builder messageBuilder = message.toBuilder();
     for (FieldDescriptor field : message.getAllFields().keySet()) {
-      StorageMethod storageMethod = field.getOptions().getExtension(Extensions.storageMethod);
+      StorageMethod storageMethod = field.getOptions().getExtension(ExtensionsProto.storageMethod);
       if (storageMethod == StorageMethod.DO_NOT_STORE) {
         messageBuilder.clearField(field);
       } else if (field.getJavaType() == JavaType.MESSAGE) {
@@ -131,8 +113,8 @@ public abstract class Collection<T extends Message> {
    * Returns the MySQL table name that Messages of the passed type should be
    * stored in.
    */
-  public String getTableName() {
-    return clazz.getSimpleName();
+  public String getTableName() throws DatabaseSchemaException {
+    return Database.getTableName(clazz);
   }
 
   /**
@@ -233,4 +215,20 @@ public abstract class Collection<T extends Message> {
    */
   public abstract int update(Iterable<T> messages, QueryOption.WhereOption... whereOptions)
       throws DatabaseRequestException, DatabaseSchemaException;
+
+  /**
+   * Sets a specific subfield in the specified message to a value.  The value
+   * can be a primitive, an Iterable, or a Message.  Returns the modified
+   * message.
+   */
+  public abstract T set(T message, String fieldName, Object value)
+      throws DatabaseSchemaException, DatabaseRequestException;
+
+  /**
+   * Pushes values into an embedded array within the passed message, with the 
+   * array field specifed by {@code fieldName}.
+   * TODO(jonerson): Return the modified message.
+   */
+  public abstract <U extends Object> void push(T message, String fieldName, List<U> values)
+      throws DatabaseSchemaException, DatabaseRequestException;
 }

@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Session;
+import com.janknspank.proto.CoreProto.Session;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class LogoutServlet extends StandardServlet {

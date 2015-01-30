@@ -5,7 +5,7 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-import com.janknspank.proto.Core.IntentCode;
+import com.janknspank.proto.EnumsProto.IntentCode;
 
 /**
  * Intent codes on users

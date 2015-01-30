@@ -7,14 +7,14 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption.DescendingSort;
 import com.janknspank.database.QueryOption.Limit;
 import com.janknspank.database.QueryOption.WhereEquals;
-import com.janknspank.proto.Core.ArticleFacebookEngagement;
+import com.janknspank.proto.ArticleProto.SocialEngagement;
 
 public class ArticleFacebookEngagements {
-  public static Iterable<ArticleFacebookEngagement> getLatest(String url, int limit)
+  public static Iterable<SocialEngagement> getLatest(String url, int limit)
       throws BiznessException {
-    Iterable<ArticleFacebookEngagement> engagements;
+    Iterable<SocialEngagement> engagements;
     try {
-      engagements = Database.with(ArticleFacebookEngagement.class).get(
+      engagements = Database.with(SocialEngagement.class).get(
           new WhereEquals("url", url),
           new Limit(limit),
           new DescendingSort("create_time"));
@@ -22,7 +22,7 @@ public class ArticleFacebookEngagements {
       throw new BiznessException("Error reading facebook engagements", e);
     }
     if (Iterables.isEmpty(engagements)) {
-      ArticleFacebookEngagement engagement = FacebookData.getEngagementForURL(url);
+      SocialEngagement engagement = FacebookData.getEngagementForURL(url);
       if (engagement != null) {
         return ImmutableList.of(engagement);
       }
@@ -31,8 +31,8 @@ public class ArticleFacebookEngagements {
     return engagements;
   }
 
-  /** Helper method for creating the ArticleFacebookEngagement table. */
+  /** Helper method for creating the SocialEngagement table. */
   public static void main(String args[]) throws Exception {
-    Database.with(ArticleFacebookEngagement.class).createTable();
+    Database.with(SocialEngagement.class).createTable();
   }
 }

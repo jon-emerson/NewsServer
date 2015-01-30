@@ -20,8 +20,8 @@ import com.janknspank.classifier.DocumentVector;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.WordDocumentFrequency;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.WordDocumentFrequency;
 
 /**
  * Computes and returns the # of documents in the corpus that contain a given

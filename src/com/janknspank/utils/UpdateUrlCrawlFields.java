@@ -8,8 +8,8 @@ import com.google.common.collect.Sets;
 import com.janknspank.bizness.Urls;
 import com.janknspank.database.Database;
 import com.janknspank.database.QueryOption;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.Url;
 
 /**
  * Updates crawl_priority, last_crawl_start_time, and last_crawl_finish_time for

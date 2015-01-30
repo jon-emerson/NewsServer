@@ -4,10 +4,9 @@ import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
-import com.janknspank.proto.Extensions;
-import com.janknspank.proto.Extensions.Required;
-import com.janknspank.proto.Extensions.StorageMethod;
-import com.janknspank.proto.Extensions.StringCharset;
+import com.janknspank.database.ExtensionsProto.Required;
+import com.janknspank.database.ExtensionsProto.StorageMethod;
+import com.janknspank.database.ExtensionsProto.StringCharset;
 
 /**
  * Validates a protocol buffer object by using the Required instructions
@@ -28,7 +27,7 @@ public class Validator {
       String fieldName = message.getClass().getSimpleName() + "." + fieldDescriptor.getName();
 
       // Verify required fields are all set, and required repeateds are non-empty.
-      if (fieldDescriptor.getOptions().getExtension(Extensions.required) == Required.YES) {
+      if (fieldDescriptor.getOptions().getExtension(ExtensionsProto.required) == Required.YES) {
         if (fieldDescriptor.isRepeated()) {
           Asserts.assertTrue(message.getRepeatedFieldCount(fieldDescriptor) > 0,
               "Required repeated field " + fieldName + " must be non-empty",
@@ -41,10 +40,10 @@ public class Validator {
 
       // Verify only valid fields are indexed.
       StorageMethod storageMethod =
-          fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
+          fieldDescriptor.getOptions().getExtension(ExtensionsProto.storageMethod);
       if (storageMethod != StorageMethod.STANDARD && storageMethod != StorageMethod.DO_NOT_STORE) {
-        int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
-        int stringBytes = fieldDescriptor.getOptions().getExtension(Extensions.stringCharset)
+        int stringLength = fieldDescriptor.getOptions().getExtension(ExtensionsProto.stringLength);
+        int stringBytes = fieldDescriptor.getOptions().getExtension(ExtensionsProto.stringCharset)
             == StringCharset.UTF8 ? stringLength * 2 : stringLength;
         Asserts.assertTrue(stringBytes <= 767 || storageMethod == StorageMethod.PULL_OUT,
             "Error on " + fieldName + ": Strings larger than 767 bytes cannot be indexed",
@@ -58,13 +57,13 @@ public class Validator {
       }
 
       // Verify string length is valid.
-      int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
+      int stringLength = fieldDescriptor.getOptions().getExtension(ExtensionsProto.stringLength);
       if (fieldDescriptor.getJavaType() == JavaType.STRING) {
         Asserts.assertTrue(stringLength> 0, "String field " + fieldName
             + " must have non-zero string_length annotation", DatabaseSchemaException.class);
       } else {
         Asserts.assertTrue(
-            !fieldDescriptor.getOptions().hasExtension(Extensions.stringLength),
+            !fieldDescriptor.getOptions().hasExtension(ExtensionsProto.stringLength),
             "Error in " + fieldName + " definition: Non-strings can't have string_length "
                 + "declarations", DatabaseSchemaException.class);
       }

@@ -1,10 +1,11 @@
 // Object definitions for the local (e.g. on my Laptop) database.
 // It'd be slow for these objects to live in the remote DB.
 
+import "com/janknspank/database/extensions.proto";
 import "com/janknspank/proto/core.proto";
-import "com/janknspank/proto/extensions.proto";
 
 option java_package = "com.janknspank.proto";
+option java_outer_classname = "LocalProto";
 
 message TokenToEntity {
   optional string token = 1 [

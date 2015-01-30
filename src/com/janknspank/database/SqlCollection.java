@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -19,17 +20,18 @@ import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
+import com.janknspank.database.ExtensionsProto.Required;
+import com.janknspank.database.ExtensionsProto.StorageMethod;
+import com.janknspank.database.ExtensionsProto.StringCharset;
 import com.janknspank.database.QueryOption.WhereEquals;
+import com.janknspank.database.QueryOption.WhereEqualsEnum;
 import com.janknspank.database.QueryOption.WhereEqualsIgnoreCase;
 import com.janknspank.database.QueryOption.WhereEqualsNumber;
 import com.janknspank.database.QueryOption.WhereNotEquals;
+import com.janknspank.database.QueryOption.WhereNotEqualsEnum;
 import com.janknspank.database.QueryOption.WhereNotEqualsNumber;
 import com.janknspank.database.QueryOption.WhereNotLike;
 import com.janknspank.database.QueryOption.WhereNotNull;
-import com.janknspank.proto.Extensions;
-import com.janknspank.proto.Extensions.Required;
-import com.janknspank.proto.Extensions.StorageMethod;
-import com.janknspank.proto.Extensions.StringCharset;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 public class SqlCollection<T extends Message> extends Collection<T> {
@@ -61,10 +63,11 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     System.out.println("Table created: " + getTableName());
   }
 
-  private String getSqlTypeForField(FieldDescriptor fieldDescriptor) {
+  private String getSqlTypeForField(FieldDescriptor fieldDescriptor)
+      throws DatabaseSchemaException {
     switch (fieldDescriptor.getJavaType()) {
       case STRING:
-        int stringLength = fieldDescriptor.getOptions().getExtension(Extensions.stringLength);
+        int stringLength = fieldDescriptor.getOptions().getExtension(ExtensionsProto.stringLength);
         if (stringLength == -1) {
           throw new IllegalStateException("String length undefined for "
               + fieldDescriptor.getName());
@@ -74,7 +77,8 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         } else if (stringLength > 65535) {
           throw new IllegalStateException("MySQL only allows strings up to is 65535 chars long");
         }
-        StringCharset charset = fieldDescriptor.getOptions().getExtension(Extensions.stringCharset);
+        StringCharset charset =
+            fieldDescriptor.getOptions().getExtension(ExtensionsProto.stringCharset);
         String sqlType = (stringLength > 767)
             ? "BLOB"
             : "VARCHAR(" + stringLength + ")";
@@ -93,7 +97,8 @@ public class SqlCollection<T extends Message> extends Collection<T> {
       case DOUBLE:
         return "DOUBLE";
       default:
-        throw new IllegalStateException("Unsupported type: " + fieldDescriptor.getJavaType().name());
+        throw new DatabaseSchemaException(
+            "Unsupported type: " + fieldDescriptor.getJavaType().name());
     }
   }
 
@@ -101,7 +106,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
    * Given a protocol buffer message, returns the MySQL statement for creating
    * an appropriate table for storing it.
    */
-  private String getCreateTableSql() {
+  private String getCreateTableSql() throws DatabaseSchemaException {
     // Start creating the SQL statement.
     StringBuilder sql = new StringBuilder();
     sql.append("CREATE TABLE " + getTableName() + " (");
@@ -117,7 +122,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         if (storageMethod == StorageMethod.PRIMARY_KEY) {
           sql.append(" PRIMARY KEY");
         }
-        if (Required.YES == field.getOptions().getExtension(Extensions.required)) {
+        if (Required.YES == field.getOptions().getExtension(ExtensionsProto.required)) {
           sql.append(" NOT NULL");
         }
         sql.append(", ");
@@ -165,7 +170,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
    * definition.
    */
   private void prepareInsertOrUpdateStatement(PreparedStatement statement, Message message)
-      throws SQLException {
+      throws SQLException, DatabaseSchemaException {
     int offset = 0;
     for (FieldDescriptor field : storageMethodMap.keySet()) {
       StorageMethod storageMethod = storageMethodMap.get(field);
@@ -198,7 +203,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
               statement.setDouble(offset, (double) message.getField(field));
               break;
             default:
-              throw new IllegalStateException("Unsupported type: " + field.getJavaType().name());
+              throw new DatabaseSchemaException("Unsupported type: " + field.getJavaType().name());
           }
         }
       }
@@ -426,15 +431,20 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     for (QueryOption.WhereOption whereEquals :
         Iterables.concat(
             QueryOption.getList(options, QueryOption.WhereEquals.class),
+            QueryOption.getList(options, QueryOption.WhereEqualsEnum.class),
             QueryOption.getList(options, QueryOption.WhereEqualsNumber.class))) {
       int size = whereEquals.getFieldCount();
       if (size == 0 &&
-          (whereEquals instanceof WhereEquals || whereEquals instanceof WhereEqualsNumber)) {
+          (whereEquals instanceof WhereEquals
+              || whereEquals instanceof WhereEqualsEnum
+              || whereEquals instanceof WhereEqualsNumber)) {
         throw new IllegalStateException("Where clause contains no values - "
             + "This should have been caught earlier.");
       }
       if (size == 0 &&
-          (whereEquals instanceof WhereNotEquals || whereEquals instanceof WhereNotEqualsNumber)) {
+          (whereEquals instanceof WhereNotEquals
+              || whereEquals instanceof WhereNotEqualsEnum
+              || whereEquals instanceof WhereNotEqualsNumber)) {
         // OK, don't write anything - Everything doesn't equal nothing.
         continue;
       }
@@ -476,6 +486,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     for (QueryOption.WhereOption whereEquals :
         Iterables.concat(
             QueryOption.getList(options, QueryOption.WhereEquals.class),
+            QueryOption.getList(options, QueryOption.WhereEqualsEnum.class),
             QueryOption.getList(options, QueryOption.WhereEqualsNumber.class))) {
       if (whereEquals instanceof WhereEqualsIgnoreCase) {
         for (String value : ((WhereEqualsIgnoreCase) whereEquals).getValues()) {
@@ -483,6 +494,14 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         }
       } else if (whereEquals instanceof WhereEquals) {
         Iterables.addAll(values, ((WhereEquals) whereEquals).getValues());
+      } else if (whereEquals instanceof WhereEqualsEnum) {
+        Iterables.addAll(values, Iterables.transform(((WhereEqualsEnum) whereEquals).getValues(),
+            new Function<Enum<?>, String>() {
+              @Override
+              public String apply(Enum<?> e) {
+                return e.name();
+              }
+            }));
       } else if (whereEquals instanceof WhereEqualsNumber) {
         Iterables.addAll(values, ((WhereEqualsNumber) whereEquals).getValues());
       } else {
@@ -636,5 +655,52 @@ public class SqlCollection<T extends Message> extends Collection<T> {
       throw new DatabaseSchemaException("Could not read message: " + e.getMessage(), e);
     }
     return messages;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public T set(T message, String fieldName, Object value)
+      throws DatabaseSchemaException, DatabaseRequestException {
+    if (value instanceof Iterable<?>) {
+      return setIterable(message, fieldName, (Iterable<Object>) value);
+    }
+    String classAndField = message.getClass().getSimpleName() + "." + fieldName;
+    FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
+    Asserts.assertTrue(field != null && !field.isRepeated(),
+        classAndField + " is not a singular field", DatabaseRequestException.class);
+    Message.Builder messageBuilder = message.toBuilder();
+    messageBuilder.setField(field, value);
+    message = (T) messageBuilder.build();
+    if (update(ImmutableList.of(message)) != 1) {
+      throw new DatabaseSchemaException("Object not found: " + classAndField
+          + " (id=" + Database.getPrimaryKey(message) + ")");
+    }
+    return message;
+  }
+
+  @SuppressWarnings("unchecked")
+  private T setIterable(T message, String fieldName, Iterable<Object> values)
+      throws DatabaseSchemaException, DatabaseRequestException {
+    String classAndField = message.getClass().getSimpleName() + "." + fieldName;
+    FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
+    Asserts.assertTrue(field != null && field.isRepeated(),
+        classAndField + " is not a repeated field", DatabaseRequestException.class);
+    Message.Builder messageBuilder = message.toBuilder();
+    messageBuilder.clearField(field);
+    for (Object o : values) {
+      messageBuilder.addRepeatedField(field, o);
+    }
+    message = (T) messageBuilder.build();
+    if (update(ImmutableList.of(message)) != 1) {
+      throw new DatabaseSchemaException("Object not found: " + classAndField
+          + " (id=" + Database.getPrimaryKey(message) + ")");
+    }
+    return message;
+  }
+
+  @Override
+  public <U extends Object> void push(T message, String fieldName, List<U> values)
+      throws DatabaseSchemaException, DatabaseRequestException {
+    throw new UnsupportedOperationException();
   }
 }

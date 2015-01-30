@@ -21,13 +21,13 @@ import com.janknspank.common.Asserts;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.ArticleTypeCode;
-import com.janknspank.proto.Core.IndustryCode;
-import com.janknspank.proto.Core.Session;
-import com.janknspank.proto.Core.TrainedArticleClassification;
-import com.janknspank.proto.Core.TrainedArticleIndustry;
-import com.janknspank.proto.Core.UserUrlRating;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.Session;
+import com.janknspank.proto.CoreProto.TrainedArticleClassification;
+import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
+import com.janknspank.proto.EnumsProto.ArticleTypeCode;
+import com.janknspank.proto.EnumsProto.IndustryCode;
+import com.janknspank.proto.UserProto.UrlRating;
 
 @AuthenticationRequired
 public class TrainingServlet extends StandardServlet {
@@ -95,9 +95,8 @@ public class TrainingServlet extends StandardServlet {
     }
 
     // Save the user relevance rating
-    UserUrlRating userRating = UserUrlRating.newBuilder()
+    UrlRating userRating = UrlRating.newBuilder()
         .setUrlId(urlId)
-        .setUserId(session.getUserId())
         .setRating(rating100scale)
         .setCreateTime(System.currentTimeMillis())
         .build();

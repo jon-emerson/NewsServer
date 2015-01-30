@@ -18,10 +18,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import com.google.common.collect.ImmutableList;
-import com.janknspank.database.Collection;
-import com.janknspank.database.QueryOption;
-import com.janknspank.database.SqlCollection;
-import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.ArticleProto.Article;
 
 public class SqlCollectionTest {
   private PreparedStatement preparedStatement;
@@ -109,6 +106,7 @@ public class SqlCollectionTest {
         .setTitle("Title de Article Amazement")
         .setUrl("http://www.nytimes.com/ouiouioui")
         .setUrlId("ID")
+        .setWordCount(2520)
         .build();
     collection.update(ImmutableList.of(article));
     assertEquals("UPDATE Article SET url_id=?, title=?, published_time=?, proto=? "

@@ -15,7 +15,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.CoreProto.Url;
 
 /**
  * Row in the MySQL database: Url.  Represents a URL we discovered.

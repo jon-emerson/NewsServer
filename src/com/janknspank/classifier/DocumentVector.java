@@ -21,7 +21,7 @@ import com.janknspank.bizness.WordDocumentFrequencies;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.interpreter.KeywordFinder;
 import com.janknspank.interpreter.KeywordUtils;
-import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.ArticleProto.Article;
 
 public class DocumentVector {
   private Multiset<String> frequencyVector;

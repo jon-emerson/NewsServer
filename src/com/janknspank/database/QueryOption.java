@@ -112,6 +112,39 @@ public class QueryOption {
     }
   }
 
+  public static class WhereEqualsEnum extends WhereOption {
+    private final Iterable<?> values;
+
+    public WhereEqualsEnum(String fieldName, Enum<?> value) {
+      super(fieldName);
+      this.values = ImmutableList.of(value);
+    }
+
+    public WhereEqualsEnum(String fieldName, Iterable<Enum<?>> values) {
+      super(fieldName);
+      this.values = values;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Iterable<Enum<?>> getValues() {
+      return (Iterable<Enum<?>>) values;
+    }
+
+    public int getFieldCount() {
+      return Iterables.size(values);
+    }
+  }
+
+  public final static class WhereNotEqualsEnum extends WhereEqualsEnum {
+    public WhereNotEqualsEnum(String fieldName, Enum<?> value) {
+      super(fieldName, value);
+    }
+
+    public WhereNotEqualsEnum(String fieldName, Iterable<Enum<?>> values) {
+      super(fieldName, values);
+    }
+  }
+
   public static class WhereEqualsNumber extends WhereOption {
     private final Iterable<Number> values;
 

@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +24,8 @@ import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.util.Lists;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
@@ -36,16 +43,16 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
+import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
-import com.janknspank.proto.Core.IndustryCode;
-import com.janknspank.proto.Core.LinkedInProfile;
-import com.janknspank.proto.Core.Session;
-import com.janknspank.proto.Core.User;
-import com.janknspank.proto.Core.UserIndustry;
-import com.janknspank.proto.Core.UserInterest;
+import com.janknspank.proto.CoreProto.Session;
+import com.janknspank.proto.EnumsProto.IndustryCode;
+import com.janknspank.proto.UserProto.LinkedInProfile;
+import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
+import com.janknspank.proto.UserProto.User;
 
 public class LoginServlet extends StandardServlet {
   private static final String PROFILE_URL = "https://api.linkedin.com/v1/people/~:("
@@ -189,6 +196,52 @@ public class LoginServlet extends StandardServlet {
     return loginFromLinkedIn(getRequiredParameter(req, "linkedInAccessToken"));
   }
 
+  private Long makeDate(Node year, Node month) {
+    if (year == null) {
+      return null;
+    }
+    GregorianCalendar calendar = new GregorianCalendar();
+    calendar.set(Calendar.YEAR, Integer.parseInt(year.getFlattenedText()));
+    if (month != null) {
+      calendar.set(Calendar.MONTH, Integer.parseInt(month.getFlattenedText()) - 1);
+    }
+    return calendar.getTimeInMillis();
+  }
+
+  /**
+   * Gets a list of the user's employers, past and present, ordered by end time
+   * descending.
+   */
+  @VisibleForTesting
+  List<Employer> getEmployers(DocumentNode linkedInProfileDocument) {
+    List<Employer> employers = Lists.newArrayList();
+    for (Node node : linkedInProfileDocument.findAll("positions > position")) {
+      Employer.Builder builder = Employer.newBuilder();
+      builder.setName(node.findFirst("company > name").getFlattenedText());
+      builder.setTitle(node.findFirst("title").getFlattenedText());
+      Long startTime = makeDate(node.findFirst("startDate > year"),
+          node.findFirst("startDate > month"));
+      if (startTime != null) {
+        builder.setStartTime(startTime);
+      }
+      Long endTime = makeDate(node.findFirst("endDate > year"),
+          node.findFirst("endDate > month"));
+      if (endTime != null) {
+        builder.setEndTime(endTime);
+      }
+      employers.add(builder.build());
+    }
+    Collections.sort(employers, new Comparator<Employer>() {
+      @Override
+      public int compare(Employer o1, Employer o2) {
+        return - Long.compare(
+            o1.hasEndTime() ? o1.getEndTime() : Long.MAX_VALUE,
+            o2.hasEndTime() ? o2.getEndTime() : Long.MAX_VALUE);
+      }
+    });
+    return employers;
+  }
+
   private JSONObject loginFromLinkedIn(String linkedInAccessToken)
       throws RequestException, DatabaseSchemaException, BiznessException, DatabaseRequestException {
     // Read user's profile from LinkedIn.  If this succeeds, we know the access
@@ -204,29 +257,30 @@ public class LoginServlet extends StandardServlet {
     User user = Users.loginFromLinkedIn(linkedInProfileDocument, linkedInAccessToken);
     Session session = Sessions.createFromLinkedProfile(linkedInProfileDocument, user);
 
-    // Try to save the user's profile and update his interests
-    // and industries
-    Iterable<UserInterest> interests;
-    Iterable<UserIndustry> industries;
+    // Update the user's interests and industries based on the LinkedIn profile
+    // we just received.
     try {
-     LinkedInProfile linkedInProfile = LinkedInProfile.newBuilder()
-          .setUserId(user.getId())
+      LinkedInProfile.Builder linkedInProfileBuilder = LinkedInProfile.newBuilder()
           .setData(linkedInProfileDocument.toLiteralString())
-          .setCreateTime(System.currentTimeMillis())
-          .build();
-      Database.upsert(linkedInProfile);
-      interests = UserInterests.updateInterests(user.getId(), linkedInProfileDocument,
+          .setCreateTime(System.currentTimeMillis());
+      List<Employer> employers = getEmployers(linkedInProfileDocument);
+      if (employers.size() > 0) {
+        linkedInProfileBuilder.setCurrentEmployer(employers.get(0));
+      }
+      if (employers.size() > 1) {
+        linkedInProfileBuilder.addAllPastEmployer(employers.subList(1, employers.size()));
+      }
+      user = Database.set(user, "linked_in_profile", linkedInProfileBuilder.build());
+      user = UserInterests.updateInterests(user, linkedInProfileDocument,
           getLinkedInResponse(CONNECTIONS_URL, linkedInAccessToken));
-      industries = UserIndustries.updateIndustries(user.getId(), linkedInProfileDocument);
+      user = UserIndustries.updateIndustries(user, linkedInProfileDocument);
     } catch (ParserException e) {
       System.out.println("Warning: Could not parse linked in profile: " + e.getMessage());
       e.printStackTrace();
-      interests = UserInterests.getInterests(user.getId());
-      industries = UserIndustries.getIndustries(user.getId());
     }
-    
+
     // Get IndustryCodes so the client has more metadata to show
-    Iterable<IndustryCode> industryCodes = IndustryCodes.getFrom(industries);
+    Iterable<IndustryCode> industryCodes = IndustryCodes.getFrom(user.getIndustryList());
 
     // Create the response.
     UserHelper userHelper = new UserHelper(user);
@@ -234,7 +288,6 @@ public class LoginServlet extends StandardServlet {
     JSONObject userJson = Serializer.toJSON(user);
     userJson.put("ratings", userHelper.getRatingsJsonArray());
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
-    userJson.put("interests", Serializer.toJSON(interests));
     userJson.put("industries", Serializer.toJSON(industryCodes));
     response.put("user", userJson);
     response.put("session", Serializer.toJSON(session));

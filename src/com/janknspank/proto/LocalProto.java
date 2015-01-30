@@ -3,8 +3,8 @@
 
 package com.janknspank.proto;
 
-public final class Local {
-  private Local() {}
+public final class LocalProto {
+  private LocalProto() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
@@ -136,14 +136,14 @@ public final class Local {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.janknspank.proto.Local.internal_static_TokenToEntity_descriptor;
+      return com.janknspank.proto.LocalProto.internal_static_TokenToEntity_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.janknspank.proto.Local.internal_static_TokenToEntity_fieldAccessorTable
+      return com.janknspank.proto.LocalProto.internal_static_TokenToEntity_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.Local.TokenToEntity.class, com.janknspank.proto.Local.TokenToEntity.Builder.class);
+              com.janknspank.proto.LocalProto.TokenToEntity.class, com.janknspank.proto.LocalProto.TokenToEntity.Builder.class);
     }
 
     public static com.google.protobuf.Parser<TokenToEntity> PARSER =
@@ -350,53 +350,53 @@ public final class Local {
       return super.writeReplace();
     }
 
-    public static com.janknspank.proto.Local.TokenToEntity parseFrom(
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseFrom(
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseFrom(byte[] data)
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseFrom(
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseFrom(java.io.InputStream input)
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseFrom(
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseDelimitedFrom(java.io.InputStream input)
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseDelimitedFrom(
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseFrom(
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Local.TokenToEntity parseFrom(
+    public static com.janknspank.proto.LocalProto.TokenToEntity parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -405,7 +405,7 @@ public final class Local {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.Local.TokenToEntity prototype) {
+    public static Builder newBuilder(com.janknspank.proto.LocalProto.TokenToEntity prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -421,20 +421,20 @@ public final class Local {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.Local.TokenToEntityOrBuilder {
+       implements com.janknspank.proto.LocalProto.TokenToEntityOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.Local.internal_static_TokenToEntity_descriptor;
+        return com.janknspank.proto.LocalProto.internal_static_TokenToEntity_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.Local.internal_static_TokenToEntity_fieldAccessorTable
+        return com.janknspank.proto.LocalProto.internal_static_TokenToEntity_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.Local.TokenToEntity.class, com.janknspank.proto.Local.TokenToEntity.Builder.class);
+                com.janknspank.proto.LocalProto.TokenToEntity.class, com.janknspank.proto.LocalProto.TokenToEntity.Builder.class);
       }
 
-      // Construct using com.janknspank.proto.Local.TokenToEntity.newBuilder()
+      // Construct using com.janknspank.proto.LocalProto.TokenToEntity.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -469,23 +469,23 @@ public final class Local {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.janknspank.proto.Local.internal_static_TokenToEntity_descriptor;
+        return com.janknspank.proto.LocalProto.internal_static_TokenToEntity_descriptor;
       }
 
-      public com.janknspank.proto.Local.TokenToEntity getDefaultInstanceForType() {
-        return com.janknspank.proto.Local.TokenToEntity.getDefaultInstance();
+      public com.janknspank.proto.LocalProto.TokenToEntity getDefaultInstanceForType() {
+        return com.janknspank.proto.LocalProto.TokenToEntity.getDefaultInstance();
       }
 
-      public com.janknspank.proto.Local.TokenToEntity build() {
-        com.janknspank.proto.Local.TokenToEntity result = buildPartial();
+      public com.janknspank.proto.LocalProto.TokenToEntity build() {
+        com.janknspank.proto.LocalProto.TokenToEntity result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.janknspank.proto.Local.TokenToEntity buildPartial() {
-        com.janknspank.proto.Local.TokenToEntity result = new com.janknspank.proto.Local.TokenToEntity(this);
+      public com.janknspank.proto.LocalProto.TokenToEntity buildPartial() {
+        com.janknspank.proto.LocalProto.TokenToEntity result = new com.janknspank.proto.LocalProto.TokenToEntity(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -506,16 +506,16 @@ public final class Local {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.Local.TokenToEntity) {
-          return mergeFrom((com.janknspank.proto.Local.TokenToEntity)other);
+        if (other instanceof com.janknspank.proto.LocalProto.TokenToEntity) {
+          return mergeFrom((com.janknspank.proto.LocalProto.TokenToEntity)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.janknspank.proto.Local.TokenToEntity other) {
-        if (other == com.janknspank.proto.Local.TokenToEntity.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.janknspank.proto.LocalProto.TokenToEntity other) {
+        if (other == com.janknspank.proto.LocalProto.TokenToEntity.getDefaultInstance()) return this;
         if (other.hasToken()) {
           bitField0_ |= 0x00000001;
           token_ = other.token_;
@@ -543,11 +543,11 @@ public final class Local {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.janknspank.proto.Local.TokenToEntity parsedMessage = null;
+        com.janknspank.proto.LocalProto.TokenToEntity parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.Local.TokenToEntity) e.getUnfinishedMessage();
+          parsedMessage = (com.janknspank.proto.LocalProto.TokenToEntity) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -919,14 +919,14 @@ public final class Local {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.janknspank.proto.Local.internal_static_LongAbstract_descriptor;
+      return com.janknspank.proto.LocalProto.internal_static_LongAbstract_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.janknspank.proto.Local.internal_static_LongAbstract_fieldAccessorTable
+      return com.janknspank.proto.LocalProto.internal_static_LongAbstract_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.Local.LongAbstract.class, com.janknspank.proto.Local.LongAbstract.Builder.class);
+              com.janknspank.proto.LocalProto.LongAbstract.class, com.janknspank.proto.LocalProto.LongAbstract.Builder.class);
     }
 
     public static com.google.protobuf.Parser<LongAbstract> PARSER =
@@ -1133,53 +1133,53 @@ public final class Local {
       return super.writeReplace();
     }
 
-    public static com.janknspank.proto.Local.LongAbstract parseFrom(
+    public static com.janknspank.proto.LocalProto.LongAbstract parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseFrom(
+    public static com.janknspank.proto.LocalProto.LongAbstract parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseFrom(byte[] data)
+    public static com.janknspank.proto.LocalProto.LongAbstract parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseFrom(
+    public static com.janknspank.proto.LocalProto.LongAbstract parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseFrom(java.io.InputStream input)
+    public static com.janknspank.proto.LocalProto.LongAbstract parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseFrom(
+    public static com.janknspank.proto.LocalProto.LongAbstract parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseDelimitedFrom(java.io.InputStream input)
+    public static com.janknspank.proto.LocalProto.LongAbstract parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseDelimitedFrom(
+    public static com.janknspank.proto.LocalProto.LongAbstract parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseFrom(
+    public static com.janknspank.proto.LocalProto.LongAbstract parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.Local.LongAbstract parseFrom(
+    public static com.janknspank.proto.LocalProto.LongAbstract parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1188,7 +1188,7 @@ public final class Local {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.Local.LongAbstract prototype) {
+    public static Builder newBuilder(com.janknspank.proto.LocalProto.LongAbstract prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -1204,20 +1204,20 @@ public final class Local {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.Local.LongAbstractOrBuilder {
+       implements com.janknspank.proto.LocalProto.LongAbstractOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.Local.internal_static_LongAbstract_descriptor;
+        return com.janknspank.proto.LocalProto.internal_static_LongAbstract_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.Local.internal_static_LongAbstract_fieldAccessorTable
+        return com.janknspank.proto.LocalProto.internal_static_LongAbstract_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.Local.LongAbstract.class, com.janknspank.proto.Local.LongAbstract.Builder.class);
+                com.janknspank.proto.LocalProto.LongAbstract.class, com.janknspank.proto.LocalProto.LongAbstract.Builder.class);
       }
 
-      // Construct using com.janknspank.proto.Local.LongAbstract.newBuilder()
+      // Construct using com.janknspank.proto.LocalProto.LongAbstract.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1252,23 +1252,23 @@ public final class Local {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.janknspank.proto.Local.internal_static_LongAbstract_descriptor;
+        return com.janknspank.proto.LocalProto.internal_static_LongAbstract_descriptor;
       }
 
-      public com.janknspank.proto.Local.LongAbstract getDefaultInstanceForType() {
-        return com.janknspank.proto.Local.LongAbstract.getDefaultInstance();
+      public com.janknspank.proto.LocalProto.LongAbstract getDefaultInstanceForType() {
+        return com.janknspank.proto.LocalProto.LongAbstract.getDefaultInstance();
       }
 
-      public com.janknspank.proto.Local.LongAbstract build() {
-        com.janknspank.proto.Local.LongAbstract result = buildPartial();
+      public com.janknspank.proto.LocalProto.LongAbstract build() {
+        com.janknspank.proto.LocalProto.LongAbstract result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.janknspank.proto.Local.LongAbstract buildPartial() {
-        com.janknspank.proto.Local.LongAbstract result = new com.janknspank.proto.Local.LongAbstract(this);
+      public com.janknspank.proto.LocalProto.LongAbstract buildPartial() {
+        com.janknspank.proto.LocalProto.LongAbstract result = new com.janknspank.proto.LocalProto.LongAbstract(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1289,16 +1289,16 @@ public final class Local {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.Local.LongAbstract) {
-          return mergeFrom((com.janknspank.proto.Local.LongAbstract)other);
+        if (other instanceof com.janknspank.proto.LocalProto.LongAbstract) {
+          return mergeFrom((com.janknspank.proto.LocalProto.LongAbstract)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.janknspank.proto.Local.LongAbstract other) {
-        if (other == com.janknspank.proto.Local.LongAbstract.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.janknspank.proto.LocalProto.LongAbstract other) {
+        if (other == com.janknspank.proto.LocalProto.LongAbstract.getDefaultInstance()) return this;
         if (other.hasArticleName()) {
           bitField0_ |= 0x00000001;
           articleName_ = other.articleName_;
@@ -1326,11 +1326,11 @@ public final class Local {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.janknspank.proto.Local.LongAbstract parsedMessage = null;
+        com.janknspank.proto.LocalProto.LongAbstract parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.Local.LongAbstract) e.getUnfinishedMessage();
+          parsedMessage = (com.janknspank.proto.LocalProto.LongAbstract) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -1593,15 +1593,15 @@ public final class Local {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n com/janknspank/proto/local.proto\032\037com/" +
-      "janknspank/proto/core.proto\032%com/janknsp" +
-      "ank/proto/extensions.proto\"m\n\rTokenToEnt" +
-      "ity\022\033\n\005token\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022 \n\016enti" +
-      "ty_keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\035\n\013entity_typ" +
-      "e\030\003 \001(\tB\010\210\246\035\001\230\246\035\005\"e\n\014LongAbstract\022\"\n\014art" +
-      "icle_name\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035x\022\027\n\005topic\030\002" +
-      " \001(\tB\010\210\246\035\001\230\246\035d\022\030\n\004text\030\003 \001(\tB\n\210\246\035\001\230\246\035\377\377\003" +
-      "B\026\n\024com.janknspank.proto"
+      "\n com/janknspank/proto/local.proto\032(com/" +
+      "janknspank/database/extensions.proto\032\037co" +
+      "m/janknspank/proto/core.proto\"m\n\rTokenTo" +
+      "Entity\022\033\n\005token\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022 \n\016e" +
+      "ntity_keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\035\n\013entity_" +
+      "type\030\003 \001(\tB\010\210\246\035\001\230\246\035\005\"e\n\014LongAbstract\022\"\n\014" +
+      "article_name\030\001 \001(\tB\014\210\246\035\001\220\246\035\002\230\246\035x\022\027\n\005topi" +
+      "c\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\030\n\004text\030\003 \001(\tB\n\210\246\035\001\230\246\035" +
+      "\377\377\003B\"\n\024com.janknspank.protoB\nLocalProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1622,28 +1622,28 @@ public final class Local {
               new java.lang.String[] { "ArticleName", "Topic", "Text", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.storageMethod);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
-          registry.add(com.janknspank.proto.Extensions.required);
-          registry.add(com.janknspank.proto.Extensions.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           return registry;
         }
       };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.janknspank.proto.Core.getDescriptor(),
-          com.janknspank.proto.Extensions.getDescriptor(),
+          com.janknspank.database.ExtensionsProto.getDescriptor(),
+          com.janknspank.proto.CoreProto.getDescriptor(),
         }, assigner);
   }
 

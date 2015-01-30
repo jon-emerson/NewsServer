@@ -7,8 +7,7 @@ import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
-import com.janknspank.proto.Extensions;
-import com.janknspank.proto.Extensions.ClientSerialization;
+import com.janknspank.database.ExtensionsProto.ClientSerialization;
 
 /**
  * Converts a protocol buffer object to JSON by using the ClientSerialization
@@ -27,7 +26,7 @@ public class Serializer {
     JSONObject o = new JSONObject();
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
       ClientSerialization serialization =
-          fieldDescriptor.getOptions().getExtension(Extensions.clientSerialization);
+          fieldDescriptor.getOptions().getExtension(ExtensionsProto.clientSerialization);
 
       // Omit unset fields and fields we've been requested to not serialize.
       if (serialization == ClientSerialization.EXCLUDE ||
