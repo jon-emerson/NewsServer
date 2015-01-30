@@ -775,4 +775,8 @@ public class IndustryCodes {
     }
     return null;
   }
+  
+  public static IndustryCode getForId(int id) {
+    return INDUSTRY_CODE_MAP.get(id);
+  }
 }
