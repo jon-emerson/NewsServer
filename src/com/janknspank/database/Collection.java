@@ -229,6 +229,6 @@ public abstract class Collection<T extends Message> {
    * array field specifed by {@code fieldName}.
    * TODO(jonerson): Return the modified message.
    */
-  public abstract <U extends Object> void push(T message, String fieldName, List<U> values)
+  public abstract <U extends Object> void push(T message, String fieldName, Iterable<U> values)
       throws DatabaseSchemaException, DatabaseRequestException;
 }

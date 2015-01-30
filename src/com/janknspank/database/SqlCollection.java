@@ -699,7 +699,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
   }
 
   @Override
-  public <U extends Object> void push(T message, String fieldName, List<U> values)
+  public <U extends Object> void push(T message, String fieldName, Iterable<U> values)
       throws DatabaseSchemaException, DatabaseRequestException {
     throw new UnsupportedOperationException();
   }

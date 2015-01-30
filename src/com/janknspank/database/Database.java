@@ -254,7 +254,7 @@ public class Database {
    * TODO(jonemerson): Return the modified message.
    */
   @SuppressWarnings("unchecked")
-  public static <T extends Message> void push(T message, String fieldName, List<Object> values)
+  public static <T extends Message> void push(T message, String fieldName, Iterable<Object> values)
       throws DatabaseSchemaException, DatabaseRequestException {
     ((Collection<T>) with(message.getClass())).push(message, fieldName, values);
   }

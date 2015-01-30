@@ -121,33 +121,5 @@ public class Articles {
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
     Database.with(Article.class).createTable();
-
-//    Article.Builder builder = Article.newBuilder();
-//    String id = "id" + System.currentTimeMillis();
-//    builder.setAuthor("author");
-//    builder.setArticleBody("body");
-//    builder.setCopyright("copyright");
-//    builder.setDescription("desc");
-//    builder.setId(id);
-//    builder.setImageUrl("image urllllz");
-//    builder.setModifiedTime(500L);
-//    builder.setPublishedTime(7300L);
-//    builder.setTitle("title");
-//    builder.setType("article");
-//    builder.setUrl("http://www.nytimes.com/super/article.html");
-//    Article article = builder.build();
-//    Database.insert(article);
-//
-//    Article articleRefetched = Database.get(id, Article.class);
-//    Printer.print(articleRefetched);
-//
-//    Article.Builder articleBuilder = articleRefetched.toBuilder();
-//    articleBuilder.setArticleBody("new body");
-//    articleBuilder.setDescription("new description");
-//    articleBuilder.setTitle("new title");
-//    Database.update(articleBuilder.build());
-//
-//    articleRefetched = Database.get(id, Article.class);
-//    Printer.print(articleRefetched);
   }
 }
