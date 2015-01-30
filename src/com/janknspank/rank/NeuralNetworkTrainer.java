@@ -1,6 +1,5 @@
 package com.janknspank.rank;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,9 +9,10 @@ import org.neuroph.core.data.DataSetRow;
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.BackPropagation;
 
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.UserUrlRatings;
-import com.janknspank.data.ValidationException;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.UserUrlRatings;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.Core.UserUrlRating;
 
@@ -28,15 +28,14 @@ public class NeuralNetworkTrainer {
 
   // Train with data from server.
   private static DataSet generateTrainingDataSet()
-      throws DataInternalException, ParserException, 
-      IOException, ValidationException {
+      throws DatabaseSchemaException, ParserException, BiznessException, DatabaseRequestException {
     Iterable<UserUrlRating> allRatings = UserUrlRatings.getAll();
     Map<String, CompleteUser> userCache = new HashMap<String, CompleteUser>();
 
     // Create training set.
     DataSet trainingSet = new DataSet(
-        NeuralNetworkScorer.INPUT_NODES_COUNT, 
-        NeuralNetworkScorer.OUTPUT_NODES_COUNT); 
+        NeuralNetworkScorer.INPUT_NODES_COUNT,
+        NeuralNetworkScorer.OUTPUT_NODES_COUNT);
 
     CompleteUser user;
     for (UserUrlRating rating : allRatings) {

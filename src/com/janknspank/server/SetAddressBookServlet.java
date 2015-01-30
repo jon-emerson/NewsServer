@@ -7,10 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
-import com.janknspank.data.UserInterests;
-import com.janknspank.data.ValidationException;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.UserInterests;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.Core.AddressBook;
 import com.janknspank.proto.Core.UserInterest;
 
@@ -18,7 +19,7 @@ import com.janknspank.proto.Core.UserInterest;
 public class SetAddressBookServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException, ValidationException {
+      throws BiznessException, DatabaseSchemaException, DatabaseRequestException, RequestException {
     String userId = this.getSession(req).getUserId();
     AddressBook addressBook = AddressBook.newBuilder()
         .setUserId(userId)

@@ -12,16 +12,16 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
-import com.janknspank.data.UserInterests;
-import com.janknspank.data.UserUrlFavorites;
-import com.janknspank.data.UserUrlRatings;
+import com.janknspank.bizness.UserInterests;
+import com.janknspank.bizness.UserUrlFavorites;
+import com.janknspank.bizness.UserUrlRatings;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.Serializer;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.User;
 import com.janknspank.proto.Core.UserUrlFavorite;
 import com.janknspank.proto.Core.UserUrlRating;
-import com.janknspank.proto.Serializer;
 
 /**
  * Helper class containing the user's favorite and rated articles.
@@ -32,7 +32,7 @@ public class UserHelper {
   private final Map<String, Long> favoriteArticleIds;
   private final Map<String, Article> articleMap;
 
-  public UserHelper(User user) throws DataInternalException {
+  public UserHelper(User user) throws DatabaseSchemaException {
     this.user = user;
 
     // Figure out the IDs of the articles the user has rated or favorited.
@@ -44,7 +44,7 @@ public class UserHelper {
         ratedArticleIds.keySet(), favoriteArticleIds.keySet()));
   }
 
-  private Map<String, Integer> getRatedArticleIds() throws DataInternalException {
+  private Map<String, Integer> getRatedArticleIds() throws DatabaseSchemaException {
     Map<String, Integer> ratedArticleIds = Maps.newHashMap();
     for (UserUrlRating rating : UserUrlRatings.get(user.getId())) {
       ratedArticleIds.put(rating.getUrlId(), rating.getRating());
@@ -52,7 +52,7 @@ public class UserHelper {
     return ratedArticleIds;
   }
 
-  private Map<String, Long> getFavoriteArticleIds() throws DataInternalException {
+  private Map<String, Long> getFavoriteArticleIds() throws DatabaseSchemaException {
     Map<String, Long> favoriteArticleIds = Maps.newHashMap();
     for (UserUrlFavorite favorite : UserUrlFavorites.get(user.getId())) {
       favoriteArticleIds.put(favorite.getUrlId(), favorite.getCreateTime());
@@ -61,7 +61,7 @@ public class UserHelper {
   }
 
   private Map<String, Article> getArticleMap(Iterable<String> articleIds)
-      throws DataInternalException {
+      throws DatabaseSchemaException {
     return Maps.uniqueIndex(
         Iterables.isEmpty(articleIds)
             ? Collections.<Article>emptyList()
@@ -112,7 +112,7 @@ public class UserHelper {
     return favoritesJsonArray;
   }
 
-  public JSONArray getInterestsJsonArray() throws DataInternalException {
+  public JSONArray getInterestsJsonArray() throws DatabaseSchemaException {
     return Serializer.toJSON(UserInterests.getInterests(user.getId()));
   }
 }

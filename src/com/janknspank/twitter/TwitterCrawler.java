@@ -13,12 +13,13 @@ import twitter4j.URLEntity;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.Urls;
 import com.janknspank.common.UrlCleaner;
 import com.janknspank.common.UrlWhitelist;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
-import com.janknspank.data.Urls;
-import com.janknspank.data.ValidationException;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.Core.Link;
 import com.janknspank.proto.Core.Url;
 
@@ -85,7 +86,7 @@ public class TwitterCrawler implements twitter4j.StatusListener {
                       .setDiscoveryTime(newsUrl.getDiscoveryTime())
                       .setLastFoundTime(newsUrl.getDiscoveryTime())
                       .build());
-                } catch (ValidationException|DataInternalException e) {
+                } catch (DatabaseRequestException | DatabaseSchemaException | BiznessException e) {
                   e.printStackTrace();
                 }
               }

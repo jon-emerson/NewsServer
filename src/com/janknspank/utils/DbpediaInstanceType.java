@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
-import com.janknspank.data.Entities;
-import com.janknspank.data.EntityType;
-import com.janknspank.data.GuidFactory;
+import com.janknspank.bizness.Entities;
+import com.janknspank.bizness.EntityType;
+import com.janknspank.bizness.GuidFactory;
 import com.janknspank.proto.Core.Entity;
 import com.janknspank.proto.Core.Entity.EntityTopic;
 import com.janknspank.proto.Core.Entity.Source;

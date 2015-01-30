@@ -21,11 +21,10 @@ import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.Sessions;
 import com.janknspank.common.Asserts;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.DataRequestException;
-import com.janknspank.data.Sessions;
-import com.janknspank.data.ValidationException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.Core.Session;
 
 public class NewsServlet extends HttpServlet {
@@ -55,11 +54,11 @@ public class NewsServlet extends HttpServlet {
   }
 
   /**
-   * Gets a parameter, or throws a ValidationException.
+   * Gets a parameter, or throws a DatabaseRequestException.
    */
   public String getRequiredParameter(HttpServletRequest request, String key)
-      throws ValidationException {
-    return Asserts.assertNonEmpty(getParameter(request, key), key);
+      throws RequestException {
+    return Asserts.assertNonEmpty(getParameter(request, key), key, RequestException.class);
   }
 
   public Session getSession(HttpServletRequest request) {
@@ -96,8 +95,8 @@ public class NewsServlet extends HttpServlet {
       } else {
         session = Sessions.getBySessionKey(sessionKey);
       }
-    } catch (DataRequestException|DataInternalException e) {
-      // This only happens for illegal session IDs that don't represent
+    } catch (BiznessException | RequestException | DatabaseSchemaException e) {
+      // This should only happen for illegal session IDs that don't represent
       // real people.  Be harsh here: Reject any such requests.
       handleAuthenticationError(request, response, e.getMessage());
       return;
@@ -125,7 +124,7 @@ public class NewsServlet extends HttpServlet {
         if (cookieName.equals(cookie.getName())) {
           try {
             return Sessions.getBySessionKey(cookie.getValue());
-          } catch (DataInternalException|DataRequestException e) {
+          } catch (BiznessException | RequestException | DatabaseSchemaException e) {
             System.err.println("Bad cookie found, ignoring: " + e.getMessage());
           }
         }

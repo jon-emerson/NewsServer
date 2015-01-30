@@ -5,9 +5,9 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.janknspank.data.Database;
-import com.janknspank.data.QueryOption;
-import com.janknspank.data.Urls;
+import com.janknspank.bizness.Urls;
+import com.janknspank.database.Database;
+import com.janknspank.database.QueryOption;
 import com.janknspank.proto.Core.Article;
 import com.janknspank.proto.Core.Url;
 

@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.janknspank.data.EntityType;
+import com.janknspank.bizness.EntityType;
 
 public class DbpediaInstanceTypeLine {
   static final Pattern SUBTOPIC_PATTERN = Pattern.compile("([^\\(]+)\\(([^\\)]+)\\)$");

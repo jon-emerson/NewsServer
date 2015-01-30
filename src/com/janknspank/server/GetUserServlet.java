@@ -5,17 +5,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Database;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.Serializer;
 import com.janknspank.proto.Core.User;
-import com.janknspank.proto.Serializer;
 
 @AuthenticationRequired
 public class GetUserServlet extends StandardServlet {
 
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException {
+      throws DatabaseSchemaException {
     User user = Database.with(User.class).get(getSession(req).getUserId());
     JSONObject userJson = Serializer.toJSON(user);
 

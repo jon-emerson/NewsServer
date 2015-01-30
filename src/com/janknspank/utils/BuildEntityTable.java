@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.janknspank.data.Database;
+import com.janknspank.database.Database;
 import com.janknspank.proto.Core.Entity;
 
 public class BuildEntityTable {

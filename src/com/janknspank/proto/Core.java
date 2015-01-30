@@ -2002,7 +2002,7 @@ public final class Core {
      *
      * <pre>
      * 'o' for organization, 'p' for person, 'l' for location
-     * @see com.janknspank.data.EntityType
+     * @see com.janknspank.bizness.EntityType
      * </pre>
      */
     boolean hasType();
@@ -2011,7 +2011,7 @@ public final class Core {
      *
      * <pre>
      * 'o' for organization, 'p' for person, 'l' for location
-     * @see com.janknspank.data.EntityType
+     * @see com.janknspank.bizness.EntityType
      * </pre>
      */
     java.lang.String getType();
@@ -2020,7 +2020,7 @@ public final class Core {
      *
      * <pre>
      * 'o' for organization, 'p' for person, 'l' for location
-     * @see com.janknspank.data.EntityType
+     * @see com.janknspank.bizness.EntityType
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -2388,7 +2388,7 @@ public final class Core {
      *
      * <pre>
      * 'o' for organization, 'p' for person, 'l' for location
-     * @see com.janknspank.data.EntityType
+     * @see com.janknspank.bizness.EntityType
      * </pre>
      */
     public boolean hasType() {
@@ -2399,7 +2399,7 @@ public final class Core {
      *
      * <pre>
      * 'o' for organization, 'p' for person, 'l' for location
-     * @see com.janknspank.data.EntityType
+     * @see com.janknspank.bizness.EntityType
      * </pre>
      */
     public java.lang.String getType() {
@@ -2421,7 +2421,7 @@ public final class Core {
      *
      * <pre>
      * 'o' for organization, 'p' for person, 'l' for location
-     * @see com.janknspank.data.EntityType
+     * @see com.janknspank.bizness.EntityType
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -2983,7 +2983,7 @@ public final class Core {
        *
        * <pre>
        * 'o' for organization, 'p' for person, 'l' for location
-       * @see com.janknspank.data.EntityType
+       * @see com.janknspank.bizness.EntityType
        * </pre>
        */
       public boolean hasType() {
@@ -2994,7 +2994,7 @@ public final class Core {
        *
        * <pre>
        * 'o' for organization, 'p' for person, 'l' for location
-       * @see com.janknspank.data.EntityType
+       * @see com.janknspank.bizness.EntityType
        * </pre>
        */
       public java.lang.String getType() {
@@ -3013,7 +3013,7 @@ public final class Core {
        *
        * <pre>
        * 'o' for organization, 'p' for person, 'l' for location
-       * @see com.janknspank.data.EntityType
+       * @see com.janknspank.bizness.EntityType
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -3034,7 +3034,7 @@ public final class Core {
        *
        * <pre>
        * 'o' for organization, 'p' for person, 'l' for location
-       * @see com.janknspank.data.EntityType
+       * @see com.janknspank.bizness.EntityType
        * </pre>
        */
       public Builder setType(
@@ -3052,7 +3052,7 @@ public final class Core {
        *
        * <pre>
        * 'o' for organization, 'p' for person, 'l' for location
-       * @see com.janknspank.data.EntityType
+       * @see com.janknspank.bizness.EntityType
        * </pre>
        */
       public Builder clearType() {
@@ -3066,7 +3066,7 @@ public final class Core {
        *
        * <pre>
        * 'o' for organization, 'p' for person, 'l' for location
-       * @see com.janknspank.data.EntityType
+       * @see com.janknspank.bizness.EntityType
        * </pre>
        */
       public Builder setTypeBytes(

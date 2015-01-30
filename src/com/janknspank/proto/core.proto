@@ -254,7 +254,7 @@ message LinkedInProfile {
 }
 
 // TODO: expand out to be one row per connection
-// and stop saving the raw data. 
+// and stop saving the raw data.
 message LinkedInConnections {
   optional string user_id = 1 [
     (required) = YES,
@@ -348,7 +348,7 @@ message UserIndustry {
     (required) = YES,
     (storage_method) = INDEX
   ];
-  
+
   // Where did we get this industry from?
   // 'lp' = LinkedIn profile.
   // 'ad' = Explicit add.
@@ -420,7 +420,7 @@ message UserIntent {
     (string_length) = 5,
     (string_charset) = LATIN1
   ];
-  
+
   optional int64 create_time = 3 [
     (required) = YES
   ];
@@ -434,7 +434,7 @@ message IntentCode {
     (string_length) = 5,
     (string_charset) = LATIN1
   ];
-  
+
   optional string description = 2 [
     (required) = YES,
     (string_length) = 200
@@ -540,7 +540,7 @@ message TrainedArticleIndustry {
     (required) = YES,
     (storage_method) = INDEX
   ];
-  
+
   optional string trainer_user_id = 3 [
     (required) = YES,
     (storage_method) = INDEX,
@@ -562,7 +562,7 @@ message IndustryCode {
     (required) = YES,
     (string_length) = 50
   ];
-  
+
   // The LinkedIn industry description.
   optional string description = 3 [
     (required) = YES,
@@ -577,12 +577,12 @@ message ArticleIndustryClassification {
     (string_length) = 24,
     (string_charset) = LATIN1
   ];
-  
+
   optional int32 industry_code_id = 2 [
     (required) = YES,
     (storage_method) = PULL_OUT
   ];
-  
+
   optional double similarity = 3 [
     (required) = YES,
     (storage_method) = PULL_OUT
@@ -603,12 +603,12 @@ message TrainedArticleClassification {
     (string_length) = 5,
     (string_charset) = LATIN1
   ];
-  
+
   optional bool checked = 3 [
     (required) = YES,
     (storage_method) = INDEX
   ];
-  
+
   optional string trainer_user_id = 4 [
     (required) = YES,
     (storage_method) = INDEX,
@@ -623,7 +623,7 @@ message ArticleTypeCode {
     (required) = YES,
     (string_length) = 5
   ];
-  
+
   optional string description = 2 [
     (required) = YES,
     (storage_method) = INDEX,
@@ -638,17 +638,17 @@ message ArticleFacebookEngagement {
     (string_length) = 767,
     (string_charset) = LATIN1
   ];
-  
+
   optional int64 like_count = 2 [
     (required) = YES,
     (storage_method) = PULL_OUT
   ];
-  
+
   optional int64 share_count = 3 [
     (required) = YES,
     (storage_method) = PULL_OUT
   ];
-  
+
   optional int64 comment_count = 4 [
     (required) = YES,
     (storage_method) = PULL_OUT
@@ -667,7 +667,7 @@ message WordDocumentFrequency {
     (storage_method) = UNIQUE_INDEX,
     (string_length) = 200
   ];
-  
+
   optional int64 frequency = 2 [
     (required) = YES,
     (storage_method) = PULL_OUT

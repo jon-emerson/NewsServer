@@ -2,16 +2,14 @@ package com.janknspank.rank;
 
 import org.neuroph.core.NeuralNetwork;
 
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.ValidationException;
 import com.janknspank.proto.Core.ArticleFacebookEngagement;
 
 public final class NeuralNetworkScorer implements Scorer {
   static final int INPUT_NODES_COUNT = 9;
   static final int OUTPUT_NODES_COUNT = 1;
   static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
-  static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/default_mlp_" + 
-      INPUT_NODES_COUNT + "in-" + HIDDEN_NODES_COUNT + "hidden-" + 
+  static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/default_mlp_" +
+      INPUT_NODES_COUNT + "in-" + HIDDEN_NODES_COUNT + "hidden-" +
       OUTPUT_NODES_COUNT + "out.nnet";
   private static NeuralNetworkScorer instance = null;
   private NeuralNetwork<?> neuralNetwork;
@@ -52,7 +50,7 @@ public final class NeuralNetworkScorer implements Scorer {
       // Input 3: the length of the article
       // TODO: improve normalization
       // Use average wordcount and max word count
-      sigmoid(Math.log(article.wordCount())), 
+      sigmoid(Math.log(article.wordCount())),
 
       // Input 4: Facebook likes
       sigmoid(likeCount),
@@ -84,18 +82,11 @@ public final class NeuralNetworkScorer implements Scorer {
   // V1 has a general rank - one neural network for all intents. No mixing.
   // Slow architecture. Makes too many server calls
   public double getScore(CompleteUser user, CompleteArticle article) {
-    try {
-      return getScore(user, article, neuralNetwork);
-    } catch (DataInternalException | ValidationException e) {
-      System.out.println("Error NeuralNetworkScorer.getScore()");
-      e.printStackTrace();
-      return 0;
-    }
+    return getScore(user, article, neuralNetwork);
   }
 
-  private static double getScore(CompleteUser completeUser, 
-      CompleteArticle completeArticle, NeuralNetwork<?> neuralNetwork) 
-      throws DataInternalException, ValidationException {
+  private static double getScore(CompleteUser completeUser,
+      CompleteArticle completeArticle, NeuralNetwork<?> neuralNetwork) {
     long startMillis = System.currentTimeMillis();
     neuralNetwork.setInput(generateInputNodes(completeUser, completeArticle));
     long generateInputNodesMillis = System.currentTimeMillis();
@@ -103,7 +94,7 @@ public final class NeuralNetworkScorer implements Scorer {
     long calculateMillis = System.currentTimeMillis();
 
     double totalTimeToRankArticle = (double)(calculateMillis - startMillis) / 1000;
-    double timeToGenerateInputNodes = (double)(generateInputNodesMillis 
+    double timeToGenerateInputNodes = (double)(generateInputNodesMillis
         - totalTimeToRankArticle) / 1000;
     double timeToCalculate = (double)(calculateMillis - generateInputNodesMillis) / 1000;
 

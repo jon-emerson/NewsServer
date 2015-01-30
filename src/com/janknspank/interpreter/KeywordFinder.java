@@ -28,11 +28,13 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
-import com.janknspank.data.EntityType;
-import com.janknspank.data.ValidationException;
+import com.janknspank.bizness.EntityType;
+import com.janknspank.common.AssertionException;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.Validator;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.proto.Validator;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.ArticleKeyword.Source;
 
@@ -95,7 +97,7 @@ public class KeywordFinder {
       public boolean add(ArticleKeyword keyword) {
         try {
           return super.add((ArticleKeyword) Validator.assertValid(keyword));
-        } catch (ValidationException e) {
+        } catch (DatabaseSchemaException | DatabaseRequestException e) {
           throw new IllegalArgumentException("Bad keyword: " + keyword.toString(), e);
         }
       }
@@ -164,7 +166,7 @@ public class KeywordFinder {
                   .setSource(Source.NLP));
             }
           }
-        } catch (ValidationException e) {
+        } catch (AssertionException e) {
           e.printStackTrace();
         }
       }
@@ -253,7 +255,7 @@ public class KeywordFinder {
             isMetaKeywordRelevant(wordsInArticle, keywordStr)) {
           keywords.add(keywordStr);
         }
-      } catch (ValidationException e) {
+      } catch (AssertionException e) {
         e.printStackTrace();
       }
     }

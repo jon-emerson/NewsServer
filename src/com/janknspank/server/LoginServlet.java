@@ -24,15 +24,16 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.DataRequestException;
-import com.janknspank.data.Database;
-import com.janknspank.data.IndustryCodes;
-import com.janknspank.data.Sessions;
-import com.janknspank.data.UserIndustries;
-import com.janknspank.data.UserInterests;
-import com.janknspank.data.Users;
-import com.janknspank.data.ValidationException;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.IndustryCodes;
+import com.janknspank.bizness.Sessions;
+import com.janknspank.bizness.UserIndustries;
+import com.janknspank.bizness.UserInterests;
+import com.janknspank.bizness.Users;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.Serializer;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.ParserException;
@@ -45,7 +46,6 @@ import com.janknspank.proto.Core.Session;
 import com.janknspank.proto.Core.User;
 import com.janknspank.proto.Core.UserIndustry;
 import com.janknspank.proto.Core.UserInterest;
-import com.janknspank.proto.Serializer;
 
 public class LoginServlet extends StandardServlet {
   private static final String PROFILE_URL = "https://api.linkedin.com/v1/people/~:("
@@ -95,7 +95,7 @@ public class LoginServlet extends StandardServlet {
   }
 
   private DocumentNode getLinkedInResponse(String url, String linkedInAccessToken)
-      throws DataRequestException, DataInternalException, IllegalStateException, ParserException {
+      throws RequestException, ParserException, DatabaseSchemaException {
     HttpResponse response = null;
     try {
       HttpRequest request = httpRequestFactory.buildGetRequest(new GenericUrl(url));
@@ -106,22 +106,22 @@ public class LoginServlet extends StandardServlet {
       if (response.getStatusCode() != HttpServletResponse.SC_OK) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ByteStreams.copy(response.getContent(), baos);
-        throw new DataRequestException("Bad access token.  Response code = " +
+        throw new RequestException("Bad access token.  Response code = " +
             response.getStatusCode() + "\n" + new String(baos.toByteArray()));
       }
       return DocumentBuilder.build(url, new InputStreamReader(response.getContent()));
     } catch (IOException e) {
-      throw new DataInternalException("Error reading from LinkedIn: " + e.getMessage(), e);
+      throw new DatabaseSchemaException("Error reading from LinkedIn: " + e.getMessage(), e);
     }
   }
 
   /**
    * Exchanges an authorization code for a access token by bouncing it off
    * of LinkedIn's API.
+   * @throws BiznessException 
    */
   private String getAccessTokenFromAuthorizationCode(
-      HttpServletRequest req, String authorizationCode, String state)
-      throws DataInternalException, DataRequestException {
+      HttpServletRequest req, String authorizationCode, String state) throws BiznessException {
     Sessions.verifyLinkedInOAuthState(state);
 
     FetchResponse response;
@@ -138,28 +138,27 @@ public class LoginServlet extends StandardServlet {
           .build().toString();
       System.out.println("Fetching " + url);
       response = fetcher.fetch(url);
-    } catch (FetchException|URISyntaxException e) {
-      throw new DataInternalException("Could not fetch access token", e);
+    } catch (FetchException | URISyntaxException e) {
+      throw new BiznessException("Could not fetch access token", e);
     }
     StringWriter sw = new StringWriter();
     try {
       CharStreams.copy(response.getReader(), sw);
     } catch (IOException e) {
-      throw new DataInternalException("Could not read accessToken response", e);
+      throw new BiznessException("Could not read accessToken response", e);
     }
     if (response.getStatusCode() == HttpServletResponse.SC_OK) {
       JSONObject responseObj = new JSONObject(sw.toString());
       return responseObj.getString("access_token");
     } else {
       System.out.println("Error: " + sw.toString());
-      throw new DataRequestException("Access token exchange failed ("
-          + response.getStatusCode() + ")");
+      throw new BiznessException("Access token exchange failed (" + response.getStatusCode() + ")");
     }
   }
 
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException, ValidationException, DataRequestException, NotFoundException,
+      throws BiznessException, RequestException, DatabaseSchemaException, DatabaseRequestException,
           RedirectException {
     String authorizationCode = getParameter(req, "code");
     String state = getParameter(req, "state");
@@ -180,24 +179,25 @@ public class LoginServlet extends StandardServlet {
           .addParameter("redirect_uri", getRedirectUrl(req))
           .build().toString());
     } catch (URISyntaxException e) {
-      throw new DataInternalException("Error creating LinkedIn OAuth URL", e);
+      throw new DatabaseSchemaException("Error creating LinkedIn OAuth URL", e);
     }
   }
 
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DataInternalException, ValidationException, DataRequestException, NotFoundException {
+      throws DatabaseSchemaException, DatabaseRequestException, NotFoundException, RequestException,
+          BiznessException {
     return loginFromLinkedIn(getRequiredParameter(req, "linkedInAccessToken"));
   }
 
   private JSONObject loginFromLinkedIn(String linkedInAccessToken)
-      throws DataInternalException, DataRequestException, ValidationException {
+      throws RequestException, DatabaseSchemaException, BiznessException, DatabaseRequestException {
     // Read user's profile from LinkedIn.  If this succeeds, we know the access
     // token is good, and we can proceed to log the user in.
     DocumentNode linkedInProfileDocument;
     try {
       linkedInProfileDocument = getLinkedInResponse(PROFILE_URL, linkedInAccessToken);
     } catch (ParserException e) {
-      throw new DataInternalException("Could not parse linked in profile: " + e.getMessage(), e);
+      throw new DatabaseSchemaException("Could not parse linked in profile: " + e.getMessage(), e);
     }
 
     // Get or create a User and Session object for this user.

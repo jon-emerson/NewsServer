@@ -10,10 +10,10 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.janknspank.data.DataInternalException;
-import com.janknspank.data.Entities;
-import com.janknspank.data.EntityType;
-import com.janknspank.data.ValidationException;
+import com.janknspank.bizness.Entities;
+import com.janknspank.bizness.EntityType;
+import com.janknspank.common.AssertionException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.Core.ArticleKeyword;
 import com.janknspank.proto.Core.ArticleKeyword.Source;
 import com.janknspank.proto.Core.Entity;
@@ -116,7 +116,7 @@ public class KeywordCanonicalizer {
       public boolean apply(ArticleKeyword keyword) {
         try {
           return KeywordUtils.isValidKeyword(keyword.getKeyword());
-        } catch (ValidationException e) {
+        } catch (AssertionException e) {
           System.out.print("Error filtering invalid keywords: ");
           e.printStackTrace();
           return false;
@@ -168,7 +168,7 @@ public class KeywordCanonicalizer {
                   little.toBuilder().setStrength(little.getStrength() + 1).build());
             }
           }
-        } catch (DataInternalException e) {
+        } catch (DatabaseSchemaException e) {
           e.printStackTrace();
         }
       }
