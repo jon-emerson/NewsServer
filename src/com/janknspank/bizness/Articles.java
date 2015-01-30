@@ -2,13 +2,9 @@ package com.janknspank.bizness;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -16,12 +12,10 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.database.QueryOption.LimitWithOffset;
 import com.janknspank.dom.parser.ParserException;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.ArticleKeyword;
-import com.janknspank.proto.Core.TrainedArticleIndustry;
-import com.janknspank.proto.Core.UserInterest;
-import com.janknspank.rank.CompleteArticle;
-import com.janknspank.rank.CompleteUser;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Scorer;
 
 /**
@@ -30,101 +24,57 @@ import com.janknspank.rank.Scorer;
  */
 public class Articles {
   public static final int MAX_TITLE_LENGTH =
-      Database.with(Article.class).getStringLength("title");
+      Database.getStringLength(Article.class, "title");
   public static final int MAX_PARAGRAPH_LENGTH =
-      Database.with(Article.class).getStringLength("paragraph");
+      Database.getStringLength(Article.class, "paragraph");
   public static final int MAX_DESCRIPTION_LENGTH =
-      Database.with(Article.class).getStringLength("description");
-
-  public static Iterable<Article> getArticlesOnTopic(String topic) throws DatabaseSchemaException {
-    Iterable<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(ImmutableList.of(topic));
-    Set<String> articleIds = Sets.newHashSet();
-    for (ArticleKeyword articleKeyword : articleKeywords) {
-      articleIds.add(articleKeyword.getUrlId());
-    }
-    return getArticles(articleIds);
-  }
-
-  private static Iterable<ArticleKeyword> getArticleKeywords(Iterable<UserInterest> interests)
-      throws DatabaseSchemaException {
-    // Filter out location interests for now, until we can better prioritize them.
-    interests = Iterables.filter(interests, new Predicate<UserInterest>() {
-      @Override
-      public boolean apply(UserInterest userInterest) {
-        return !UserInterests.TYPE_LOCATION.equals(userInterest.getType());
-      }
-    });
-    return getArticleKeywordsForTopics(Iterables.transform(interests,
-        new Function<UserInterest, String>() {
-          @Override
-          public String apply(UserInterest interest) {
-            return interest.getKeyword();
-          }
-    }));
-  }
-
-  private static Iterable<ArticleKeyword> getArticleKeywordsForTopics(Iterable<String> topics)
-      throws DatabaseSchemaException {
-    return Database.with(ArticleKeyword.class).get(
-        new QueryOption.WhereEqualsIgnoreCase("keyword", topics),
-        new QueryOption.Limit(500));
-  }
+      Database.getStringLength(Article.class, "description");
 
   /**
    * Gets articles that contain a set of keywords
    * @throws DataInternalException 
    */
-  public static Iterable<Article> getArticlesForKeywords(Iterable<String> keywords) 
+  public static Iterable<Article> getArticlesForKeywords(Iterable<String> keywords)
       throws DatabaseSchemaException {
-    Iterable<ArticleKeyword> articleKeywords = getArticleKeywordsForTopics(keywords);
-    Set<String> articleIds = Sets.newHashSet();
-    for (ArticleKeyword articleKeyword : articleKeywords) {
-      articleIds.add(articleKeyword.getUrlId());
-    }
-    return getArticles(articleIds);
+    return Database.with(Article.class).get(
+        new QueryOption.WhereEquals("keyword.keyword", keywords));
   }
 
   /**
    * Gets a list of articles tailored specifically to the current user's
    * interests.
    */
-  public static Iterable<Article> getArticlesByInterest(Iterable<UserInterest> interests)
+  public static Iterable<Article> getArticlesByInterest(Iterable<Interest> interests)
       throws DatabaseSchemaException {
-    Iterable<ArticleKeyword> articleKeywords = getArticleKeywords(interests);
-    Set<String> articleIds = Sets.newHashSet();
-    for (ArticleKeyword articleKeyword : articleKeywords) {
-      articleIds.add(articleKeyword.getUrlId());
-    }
-    return getArticles(articleIds);
+    return getArticlesForKeywords(Iterables.transform(interests, new Function<Interest, String>() {
+      @Override
+      public String apply(Interest interest) {
+        return interest.getKeyword();
+      }
+    }));
   }
 
-  public static Iterable<Article> getRankedArticles(String userId, Scorer scorer)
+  public static Iterable<Article> getRankedArticles(User user, Scorer scorer)
       throws DatabaseSchemaException, ParserException, BiznessException, DatabaseRequestException {
-    Map<CompleteArticle, Double> ranks = getCompleteArticlesAndScores(userId, scorer);
+    Map<Article, Double> ranks = getArticlesAndScores(user, scorer);
 
     // Sort the articles
     TopList<Article, Double> articles = new TopList<>(ranks.size());
-    for (Map.Entry<CompleteArticle, Double> entry : ranks.entrySet()) {
-      articles.add(entry.getKey().getArticle(), entry.getValue());
+    for (Map.Entry<Article, Double> entry : ranks.entrySet()) {
+      articles.add(entry.getKey(), entry.getValue());
     }
 
     return articles.getKeys();
   }
 
-  public static Map<CompleteArticle, Double> getCompleteArticlesAndScores(String userId, Scorer scorer)
+  public static Map<Article, Double> getArticlesAndScores(User user, Scorer scorer)
       throws DatabaseSchemaException, ParserException, BiznessException, DatabaseRequestException {
-    //NeuralNetworkScorer neuralNetworkRank = NeuralNetworkScorer.getInstance();
-    CompleteUser completeUser = new CompleteUser(userId);
     // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
-    Iterable<Article> articles = getArticlesByInterest(UserInterests.getInterests(userId));
-    Map<CompleteArticle, Double> ranks = new HashMap<>();
-
-    CompleteArticle completeArticle;
+    Iterable<Article> articles = getArticlesByInterest(user.getInterestList());
+    Map<Article, Double> ranks = new HashMap<>();
     for (Article article : articles) {
-      completeArticle = new CompleteArticle(article);
-      ranks.put(completeArticle, scorer.getScore(completeUser, completeArticle));
+      ranks.put(article, scorer.getScore(user, article));
     }
-
     return ranks;
   }
 

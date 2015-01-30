@@ -10,8 +10,8 @@ import org.junit.Test;
 import com.google.common.collect.Iterables;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.proto.Core.ArticleKeyword;
-import com.janknspank.proto.Core.ArticleKeyword.Source;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
 
 public class KeywordFinderTest {
   private void assertNotContainsKeyword(

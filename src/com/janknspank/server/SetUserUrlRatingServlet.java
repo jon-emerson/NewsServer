@@ -1,20 +1,23 @@
 package com.janknspank.server;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.primitives.Ints;
 import com.janknspank.bizness.Urls;
-import com.janknspank.bizness.UserUrlRatings;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
-import com.janknspank.proto.Core.Session;
-import com.janknspank.proto.Core.UserUrlRating;
+import com.janknspank.proto.UserProto.UrlRating;
+import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class SetUserUrlRatingServlet extends StandardServlet {
@@ -23,35 +26,35 @@ public class SetUserUrlRatingServlet extends StandardServlet {
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     // Read parameters.
     String urlId = getRequiredParameter(req, "urlId");
-    Session session = this.getSession(req);
+    User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
     if (Urls.getById(urlId) == null) {
       throw new RequestException("URL does not exist");
     }
-
-    // Business logic.
-    UserUrlRating rating;
     Integer ratingScore = Ints.tryParse(getParameter(req, "rating"));
     if (ratingScore == null || ratingScore < 0 || ratingScore > 10) {
       throw new RequestException("rating must be between 0 and 10, inclusive");
     }
 
-    // Delete any existing rating we have for this userId/urlId tuple.
-    UserUrlRatings.deleteIds(session.getUserId(), ImmutableList.of(urlId));
-
-    // Store the rating.
-    rating = UserUrlRating.newBuilder()
-        .setUserId(session.getUserId())
-        .setUrlId(urlId)
-        .setCreateTime(System.currentTimeMillis())
-        .setRating(ratingScore)
-        .build();
-    Database.insert(rating);
+    // Business logic.
+    List<UrlRating> existingRatings = Lists.newArrayList();
+    for (UrlRating rating : user.getUrlRatingList()) {
+      if (!rating.getUrlId().equals(urlId)) {
+        existingRatings.add(rating);
+      }
+    }
+    user = Database.with(User.class).set(user, "url_rating", Iterables.concat(
+        existingRatings,
+        ImmutableList.of(UrlRating.newBuilder()
+            .setUrlId(urlId)
+            .setRating(ratingScore)
+            .setCreateTime(System.currentTimeMillis())
+            .build())));
 
     // Create response.
     JSONObject response = createSuccessResponse();
-    response.put("rating", Serializer.toJSON(rating));
+    response.put("user", Serializer.toJSON(user));
     return response;
   }
 }

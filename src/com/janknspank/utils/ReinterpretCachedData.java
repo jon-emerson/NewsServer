@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.janknspank.bizness.ArticleKeywords;
 import com.janknspank.bizness.Links;
 import com.janknspank.bizness.Urls;
 import com.janknspank.common.UrlCleaner;
@@ -21,13 +20,20 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.interpreter.Interpreter;
 import com.janknspank.interpreter.RequiredFieldException;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.Url;
-import com.janknspank.proto.Interpreter.InterpretedData;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.InterpretedData;
+import com.janknspank.proto.CoreProto.Url;
 
+/**
+ * This class takes files that have been previously crawled on the current
+ * computer and "reinterprets" them - as though they're being crawled again.
+ * The previously crawled files are read from the /data/ directory.  This is
+ * useful if we purge the database and want a quick way to reconstitute our
+ * schema without a bunch of network calls to news sites.
+ */
 public class ReinterpretCachedData {
   private static final Pattern FILE_PATTERN =
-      Pattern.compile("^([a-zA-Z\\-\\_0-9]{22})\\.html$");
+      Pattern.compile("^([a-zA-Z\\-\\_0-9]{22,24})\\.html$");
 
   public static void main(String args[]) throws Exception {
     File dataDirectory = new File("data/");
@@ -53,7 +59,6 @@ public class ReinterpretCachedData {
       } else {
         System.out.println("Cleaning old data for URL: " + url.getUrl());
         Database.with(Article.class).delete(url.getId());
-        ArticleKeywords.deleteForUrlIds(ImmutableList.of(url.getId()));
         Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
       }
 
@@ -65,7 +70,6 @@ public class ReinterpretCachedData {
         fileReader = new FileReader(dataFile);
         InterpretedData interpretedData = Interpreter.interpret(url, fileReader);
         Database.insert(interpretedData.getArticle());
-        Database.insert(interpretedData.getKeywordList());
 
         // Make sure to filter and clean the URLs - only store the ones we want to crawl!
         Iterable<Url> destinationUrls = Urls.put(

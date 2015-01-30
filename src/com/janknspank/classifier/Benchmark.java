@@ -13,10 +13,9 @@ import java.util.Map;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.IndustryCodes;
 import com.janknspank.common.TopList;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.Article.Builder;
-import com.janknspank.proto.Core.ArticleIndustryClassification;
-import com.janknspank.proto.Core.IndustryCode;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleIndustry;
+import com.janknspank.proto.EnumsProto.IndustryCode;
 
 public class Benchmark {
   /**
@@ -62,7 +61,7 @@ public class Benchmark {
     Map<Article, Double> articleSimilarities = new HashMap<>();
 
     for (Article article : articles) {
-      ArticleIndustryClassification classification = 
+      ArticleIndustry classification = 
           classifier.classifyForIndustry(article, industryCode);
       articleSimilarities.put(article, classification.getSimilarity());
     }
@@ -164,7 +163,7 @@ public class Benchmark {
   
   private static Article generateArticleFromPath(File file) 
       throws IOException {
-    Builder articleBuilder = Article.newBuilder()
+    Article.Builder articleBuilder = Article.newBuilder()
         .setTitle(file.getName());
     BufferedReader br = new BufferedReader(new FileReader(file));
     try {

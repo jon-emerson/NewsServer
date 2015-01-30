@@ -11,8 +11,8 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
-import com.janknspank.proto.Core.Url;
-import com.janknspank.proto.Interpreter.InterpretedData;
+import com.janknspank.proto.CoreProto.InterpretedData;
+import com.janknspank.proto.CoreProto.Url;
 
 /**
  * Built off the power of SiteParser, this class further interprets a web page
@@ -58,7 +58,6 @@ public class Interpreter {
     String urlId = url.getId();
     return InterpretedData.newBuilder()
         .setArticle(ArticleCreator.create(urlId, documentNode))
-        .addAllKeyword(KeywordFinder.findKeywords(urlId, documentNode))
         .addAllUrl(UrlFinder.findUrls(documentNode))
         .build();
   }

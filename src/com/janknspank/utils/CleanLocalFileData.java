@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
-import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.ArticleProto.Article;
 
 /**
  * Deletes all the files in /data/ that don't correspond to a crawled article.

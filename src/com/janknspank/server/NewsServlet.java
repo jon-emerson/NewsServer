@@ -25,7 +25,7 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Sessions;
 import com.janknspank.common.Asserts;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Session;
+import com.janknspank.proto.CoreProto.Session;
 
 public class NewsServlet extends HttpServlet {
   protected static final String SESSION_ID_PARAM = "sessionKey";

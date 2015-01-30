@@ -6,11 +6,10 @@ import static org.junit.Assert.assertFalse;
 import org.bson.types.BasicBSONList;
 import org.junit.Test;
 
-import com.janknspank.database.Mongoizer;
-import com.janknspank.proto.Core.Entity;
-import com.janknspank.proto.Core.Entity.EntityTopic;
-import com.janknspank.proto.Core.Entity.EntityTopic.Context;
-import com.janknspank.proto.Core.Entity.Source;
+import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.Entity.EntityTopic;
+import com.janknspank.proto.CoreProto.Entity.EntityTopic.Context;
+import com.janknspank.proto.CoreProto.Entity.Source;
 import com.mongodb.BasicDBObject;
 
 public class MongoizerTest {

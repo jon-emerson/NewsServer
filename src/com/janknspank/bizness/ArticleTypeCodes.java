@@ -5,7 +5,7 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-import com.janknspank.proto.Core.ArticleTypeCode;
+import com.janknspank.proto.EnumsProto.ArticleTypeCode;
 
 public class ArticleTypeCodes {
   public static final Map<String, ArticleTypeCode> ARTICLE_CLASSIFICATION_CODE_MAP = Maps.uniqueIndex(

@@ -12,7 +12,8 @@ import org.apache.commons.io.IOUtils;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.ArticleFacebookEngagement;
+import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -24,8 +25,8 @@ import com.restfb.json.JsonObject;
 public class FacebookData {
   private static FacebookClient __facebookClient = null;
 
-  public static ArticleFacebookEngagement getEngagementForURL(String url) throws BiznessException {
-    ArticleFacebookEngagement engagement = null;
+  public static SocialEngagement getEngagementForURL(String url) throws BiznessException {
+    SocialEngagement engagement = null;
     try {
       // Example urlObject: http://goo.gl/JVf3tt
       String encodedURL;
@@ -40,8 +41,8 @@ public class FacebookData {
       // Get shares and comments
       if (!urlObject.has("share")) {
         // There is no engagement if the share object is missing
-        engagement = ArticleFacebookEngagement.newBuilder()
-            .setUrl(url)
+        engagement = SocialEngagement.newBuilder()
+            .setSite(Site.FACEBOOK)
             .setLikeCount(0)
             .setShareCount(0)
             .setCommentCount(0)
@@ -63,8 +64,8 @@ public class FacebookData {
             .getJsonObject("summary")
             .getInt("total_count");
 
-        engagement = ArticleFacebookEngagement.newBuilder()
-            .setUrl(url)
+        engagement = SocialEngagement.newBuilder()
+            .setSite(Site.FACEBOOK)
             .setLikeCount(likeCount)
             .setShareCount(shareCount)
             .setCommentCount(commentCount)

@@ -21,8 +21,8 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.TopList;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.IndustryCode;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.EnumsProto.IndustryCode;
 
 public class IndustryVector {
   private Map<String, Double> tfIdfVector;
@@ -58,10 +58,11 @@ public class IndustryVector {
     // 4. Remove all blacklist words which decrease the quality of the vector
     frequencyVector = filterAgainstBlacklist(frequencyVector, industryCode);    
     
+    Map<String, Double> returnVector = DocumentVector.generateTFIDFVectorFromTF(frequencyVector);
+    
     // This normalization by document count is completely unnecessary
     // but it helps to debug industry vectors so they have values
     // similar in scale to individual documents
-    Map<String, Double> returnVector = DocumentVector.generateTFIDFVectorFromTF(frequencyVector);
     int numArticlesInIndustry = documentVectors.size();
     for (Map.Entry<String, Double> entry : returnVector.entrySet()) {
       returnVector.put(entry.getKey(), entry.getValue() / numArticlesInIndustry);
@@ -120,17 +121,19 @@ public class IndustryVector {
       if (industryFolderName.startsWith(industryCodeId + "-")) {
         industryFolderFullPath = INDUSTRIES_DIRECTORY 
             + "/" + industryFolderName;
+        return industryFolderFullPath;
       }
     }
-    return industryFolderFullPath;
+    return null;
   }
 
   private static List<String> getSeedWords(IndustryCode industryCode) throws BiznessException {
     List<String> words = null;
 
     try {
+      String seedWordsFileName = getSeedWordsFileName(industryCode);
       String seedFileContents = Files.toString(
-          new File(getSeedWordsFileName(industryCode)), Charset.defaultCharset());
+          new File(seedWordsFileName), Charset.defaultCharset());
       words = IOUtils.readLines(new StringReader(seedFileContents));
     } catch (IOException e) {
       throw new BiznessException("Couldn't get seed words from file: " + e.getMessage(), e);
@@ -149,7 +152,7 @@ public class IndustryVector {
   }
 
   private static String getSeedWordsFileName(IndustryCode industryCode) {
-    return getDirectoryForIndustry(industryCode) + "seed.list";
+    return getDirectoryForIndustry(industryCode) + "/seed.list";
   }
   
   private static Set<String> getBlacklist(IndustryCode industryCode) throws BiznessException {
@@ -178,7 +181,7 @@ public class IndustryVector {
   }
   
   private static String getBlacklistFileName(IndustryCode industryCode) {
-    return getDirectoryForIndustry(industryCode) + "black.list";
+    return getDirectoryForIndustry(industryCode) + "/black.list";
   }
 
   Map<String, Double> getVector() {

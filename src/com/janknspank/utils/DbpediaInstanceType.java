@@ -8,10 +8,10 @@ import com.google.common.collect.Lists;
 import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.GuidFactory;
-import com.janknspank.proto.Core.Entity;
-import com.janknspank.proto.Core.Entity.EntityTopic;
-import com.janknspank.proto.Core.Entity.Source;
-import com.janknspank.proto.Core.Entity.EntityTopic.Context;
+import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.Entity.EntityTopic;
+import com.janknspank.proto.CoreProto.Entity.EntityTopic.Context;
+import com.janknspank.proto.CoreProto.Entity.Source;
 
 public class DbpediaInstanceType {
   private List<DbpediaInstanceTypeLine> lines = Lists.newArrayList();

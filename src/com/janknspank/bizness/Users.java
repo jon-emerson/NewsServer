@@ -6,7 +6,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.proto.Core.User;
+import com.janknspank.proto.UserProto.User;
 
 /**
  * Tracks a link from one URL's content to another's.

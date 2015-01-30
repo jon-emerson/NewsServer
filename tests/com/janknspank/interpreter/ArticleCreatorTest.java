@@ -14,8 +14,8 @@ import org.junit.Test;
 import com.janknspank.common.DateParserTest;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.proto.Core.Article;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.Url;
 
 public class ArticleCreatorTest {
   private static final String DESCRIPTION = "Hello there boys and girls";

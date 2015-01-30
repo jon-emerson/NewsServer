@@ -7,45 +7,33 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.api.client.repackaged.com.google.common.base.Joiner;
+import com.google.api.client.util.Maps;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.QueryOption;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.proto.Core.AddressBook;
-import com.janknspank.proto.Core.UserInterest;
+import com.janknspank.proto.UserProto.AddressBook;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.Source;
+import com.janknspank.proto.UserProto.User;
 
 public class UserInterests {
   public static final String TYPE_LOCATION = "l";
   public static final String TYPE_PERSON = "p";
   public static final String TYPE_ORGANIZATION = "o";
-  public static final String SOURCE_ADDRESS_BOOK = "ab";
-  public static final String SOURCE_LINKEDIN_CONNECTIONS = "lc";
-  public static final String SOURCE_LINKEDIN_PROFILE = "lp";
-  public static final String SOURCE_USER = "u";
-  public static final String SOURCE_TOMBSTONE = "t";
 
   /**
-   * Returns a complete list of the specified user's interests.
+   * Updates the user's interests using his LinkedIn profile, and returns his
+   * updated User representation (containing said LinkedIn interests).
    */
-  public static Iterable<UserInterest> getInterests(String userId) throws DatabaseSchemaException {
-    return Database.with(UserInterest.class).get(
-        new QueryOption.WhereEquals("user_id", userId),
-        new QueryOption.WhereNotEquals("source", SOURCE_TOMBSTONE));
-  }
-
-  /**
-   * Returns a list of interests derived from the user's passed-in LinkedIn
-   * profile.
-   */
-  public static List<UserInterest> updateInterests(String userId, DocumentNode profileDocumentNode,
+  public static User updateInterests(User user, DocumentNode profileDocumentNode,
       DocumentNode connectionsDocumentNode)
       throws BiznessException, DatabaseSchemaException {
 
@@ -55,17 +43,17 @@ public class UserInterests {
     for (Node companyNameNode : profileDocumentNode.findAll("position > company > name")) {
       companyNames.add(companyNameNode.getFlattenedText());
     }
-    List<UserInterest> companyInterests = Lists.newArrayList();
+    List<Interest> companyInterests = Lists.newArrayList();
     for (String companyName : companyNames) {
-      companyInterests.add(UserInterest.newBuilder()
+      companyInterests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
-          .setUserId(userId)
           .setKeyword(companyName)
-          .setSource(UserInterests.SOURCE_LINKEDIN_PROFILE)
-          .setType(UserInterests.TYPE_ORGANIZATION)
+          .setSource(Source.LINKED_IN_PROFILE)
+          .setType(TYPE_ORGANIZATION)
+          .setCreateTime(System.currentTimeMillis())
           .build());
     }
-    updateInterests(userId, companyInterests, SOURCE_LINKEDIN_PROFILE);
+    user = updateInterests(user, companyInterests, Source.LINKED_IN_PROFILE);
 
     // Step 2: Update people.
     Set<String> peopleNames = Sets.newHashSet();
@@ -84,25 +72,25 @@ public class UserInterests {
       }
       peopleNames.add(nameBuilder.toString());
     }
-    List<UserInterest> personInterests = Lists.newArrayList();
+    List<Interest> personInterests = Lists.newArrayList();
     for (String peopleName : peopleNames) {
-      personInterests.add(UserInterest.newBuilder()
+      personInterests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
-          .setUserId(userId)
           .setKeyword(peopleName)
-          .setSource(UserInterests.SOURCE_LINKEDIN_CONNECTIONS)
-          .setType(UserInterests.TYPE_PERSON)
+          .setSource(Source.LINKED_IN_CONNECTIONS)
+          .setType(TYPE_PERSON)
+          .setCreateTime(System.currentTimeMillis())
           .build());
     }
-    return updateInterests(userId, personInterests, SOURCE_LINKEDIN_CONNECTIONS);
+    return updateInterests(user, personInterests, Source.LINKED_IN_CONNECTIONS);
   }
 
   /**
    * Returns a list of implied interests derived from the user's passed-in
    * address book.
    */
-  private static List<UserInterest> calculateInterests(String userId, AddressBook addressBook) {
-    List<UserInterest> interests = Lists.newArrayList();
+  private static List<Interest> calculateInterests(User user, AddressBook addressBook) {
+    List<Interest> interests = Lists.newArrayList();
     Multiset<String> locations = HashMultiset.create();
 
     JSONArray addressBookJson = new JSONArray(addressBook.getData());
@@ -119,12 +107,12 @@ public class UserInterests {
         name = personJson.getString("lastName");
       }
       if (name != null && name.contains(" ")) {
-        interests.add(UserInterest.newBuilder()
+        interests.add(Interest.newBuilder()
             .setId(GuidFactory.generate())
-            .setUserId(userId)
             .setKeyword(name)
-            .setSource(UserInterests.SOURCE_ADDRESS_BOOK)
-            .setType(UserInterests.TYPE_PERSON)
+            .setSource(Source.ADDRESS_BOOK)
+            .setType(TYPE_PERSON)
+            .setCreateTime(System.currentTimeMillis())
             .build());
       }
     }
@@ -135,85 +123,69 @@ public class UserInterests {
       topLocations.add(location, locations.count(location));
     }
     for (String location : topLocations.getKeys()) {
-      interests.add(UserInterest.newBuilder()
+      interests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
-          .setUserId(userId)
           .setKeyword(location)
-          .setSource(UserInterests.SOURCE_ADDRESS_BOOK)
-          .setType(UserInterests.TYPE_LOCATION)
+          .setSource(Source.ADDRESS_BOOK)
+          .setType(TYPE_LOCATION)
+          .setCreateTime(System.currentTimeMillis())
           .build());
     }
 
     return interests;
   }
 
-  public static List<UserInterest> updateInterests(String userId, AddressBook addressBook)
+  public static User updateInterests(User user, AddressBook addressBook)
       throws BiznessException, DatabaseSchemaException {
-    return updateInterests(userId, calculateInterests(userId, addressBook), SOURCE_ADDRESS_BOOK);
+    return updateInterests(user, calculateInterests(user, addressBook), Source.ADDRESS_BOOK);
   }
 
-  private static List<UserInterest> updateInterests(String userId, List<UserInterest> interests,
-      String source) throws BiznessException, DatabaseSchemaException {
-    // Collect all the final interests, so we can return them in the end.
-    List<UserInterest> allInterests = Lists.newArrayList();
-    allInterests.addAll(interests);
+  /**
+   * Converts an interest to a String that can be used for uniqueness.
+   */
+  private static String hashInterest(Interest interest) {
+    List<String> tokens = Lists.newArrayList();
+    if (interest.hasSource()) {
+      tokens.add(interest.getSource().name());
+    }
+    if (interest.hasType()) {
+      tokens.add(interest.getType());
+    }
+    if (interest.hasKeyword()) {
+      tokens.add(interest.getKeyword());
+    }
+    return Joiner.on(":").join(tokens);
+  }
 
-    // Find what interests we already have, so that we can keep ones that the
-    // address book still contains, and we can delete ones it doesn't.
-    Map<String, Map<String, UserInterest>> interestsByTypeAndKeyword = Maps.newHashMap();
-    for (UserInterest interest : getInterests(userId)) {
-      if (source.equals(interest.getSource())) {
-        Map<String, UserInterest> keywordMap =
-            interestsByTypeAndKeyword.get(interest.getType());
-        if (keywordMap == null) {
-          keywordMap = Maps.newHashMap();
-          interestsByTypeAndKeyword.put(interest.getType(), keywordMap);
-        }
-        keywordMap.put(interest.getKeyword(), interest);
+  /**
+   * For the given {@code source}, replaces the user's interests with those
+   * passed in {@code interests}.  If any previous interests from the source
+   * match interests in {@code interests}, the previous object instances are
+   * retained, so that that {@code Interest#getCreateTime()} is not lost.
+   */
+  private static User updateInterests(User user, List<Interest> interests,
+      Source source) throws BiznessException, DatabaseSchemaException {
+    List<Interest> finalInterests = Lists.newArrayList();
+    Map<String, Interest> existingInterestMap = Maps.newHashMap();
+    for (Interest interest : user.getInterestList()) {
+      if (interest.getSource() == source) {
+        existingInterestMap.put(hashInterest(interest), interest);
       } else {
-        allInterests.add(interest);
+        finalInterests.add(interest);
       }
     }
-
-    // Figure out which interests we should delete and which we should insert.
-    Set<UserInterest> interestsToDelete = Sets.newHashSet();
-    List<UserInterest> interestsToInsert = Lists.newArrayList();
-    for (Map<String, UserInterest> keywordMap : interestsByTypeAndKeyword.values()) {
-      interestsToDelete.addAll(keywordMap.values());
-    }
-    for (UserInterest interest : interests) {
-      if (!source.equals(interest.getSource())) {
-        // This method only supports updating one type at a time.
-        throw new BiznessException("Cannot add UserInterest of source " + interest.getSource()
-            + " inside a call to update UserInterests of source " + source + ": "
-            + interest.toString());
-      }
-      UserInterest existingInterest =
-          interestsByTypeAndKeyword.containsKey(interest.getType())
-              ? interestsByTypeAndKeyword.get(interest.getType()).get(interest.getKeyword())
-              : null;
-      if (existingInterest != null) {
-        interestsToDelete.remove(existingInterest);
+    for (Interest interest : interests) {
+      String hash = hashInterest(interest);
+      if (existingInterestMap.containsKey(hash)) {
+        finalInterests.add(existingInterestMap.get(hash));
       } else {
-        interestsToInsert.add(interest);
-        allInterests.add(interest);
+        finalInterests.add(interest);
       }
     }
-
-    // Get 'er done.
     try {
-      Database.insert(interestsToInsert);
+      return Database.set(user, "interest", finalInterests);
     } catch (DatabaseRequestException e) {
-      throw new BiznessException("Error inserting interests: " + e.getMessage(), e);
+      throw new BiznessException("Could not update interests: " + e.getMessage(), e);
     }
-    Database.delete(interestsToDelete);
-
-    // Return the latest and greatest interests, regardless of type.
-    return allInterests;
-  }
-
-  /** Helper method for creating the UserInterestData table. */
-  public static void main(String args[]) throws Exception {
-    Database.with(UserInterest.class).createTable();
   }
 }

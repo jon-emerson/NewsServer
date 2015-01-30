@@ -2,7 +2,8 @@
 
 import "google/protobuf/descriptor.proto";
 
-option java_package = "com.janknspank.proto";
+option java_package = "com.janknspank.database";
+option java_outer_classname = "ExtensionsProto";
 
 // For legacy reasons, these default to true. However, as of version 2.3.0
 // (January 2010), it is considered preferable for RPC implementations to
@@ -70,4 +71,8 @@ extend google.protobuf.FieldOptions {
   optional int32 string_length = 60003 [default = -1];
   optional ClientSerialization client_serialization = 60004 [default = INCLUDE];
   optional StringCharset string_charset = 60005 [default = UTF8];
+}
+
+extend google.protobuf.MessageOptions {
+  optional string database_collection = 50001;
 }

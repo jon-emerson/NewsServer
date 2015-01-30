@@ -14,9 +14,9 @@ import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.common.AssertionException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.ArticleKeyword;
-import com.janknspank.proto.Core.ArticleKeyword.Source;
-import com.janknspank.proto.Core.Entity;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
+import com.janknspank.proto.CoreProto.Entity;
 
 public class KeywordCanonicalizer {
   private static final Set<String> PERSON_TITLES = Sets.newHashSet(

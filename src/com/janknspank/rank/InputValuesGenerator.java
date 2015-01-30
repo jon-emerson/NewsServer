@@ -1,41 +1,62 @@
 package com.janknspank.rank;
 
-import com.janknspank.proto.Core.UserIndustry;
-import com.janknspank.proto.Core.UserInterest;
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleIndustry;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
+import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.UserIndustry;
 
 /**
- * Helper class to generate input node values
- * for the Scorer.
- * @author tomch
- *
+ * Helper class to generate input node values for the Scorer.
  */
 public class InputValuesGenerator {
-  public static int isAboutCurrentEmployer(CompleteUser user, CompleteArticle article) {
-    String currentEmployer = user.getCurrentWorkplace();
-    if (article.containsKeyword(currentEmployer)) {
-      return 1;
+  public static boolean isAboutCurrentEmployer(User user, Article article) {
+    if (user.hasLinkedInProfile()) {
+      Employer currentEmployer = user.getLinkedInProfile().getCurrentEmployer();
+      if (currentEmployer != null) {
+        for (ArticleKeyword keyword : article.getKeywordList()) {
+          if (currentEmployer.getName().equals(keyword.getKeyword())) {
+            return true;
+          }
+        }
+      }
     }
-    else {
-      return 0;
-    }
+    return false;
   }
-  
-  public static int matchedInterestsCount(CompleteUser user, CompleteArticle article) {
+
+  public static int matchedInterestsCount(User user, Article article) {
+    Set<String> userInterestKeywords = Sets.newHashSet();
+    for (Interest interest : user.getInterestList()) {
+      userInterestKeywords.add(interest.getKeyword());
+    }
     int count = 0;
-    for (UserInterest interest : user.getInterests()) {
-      if (article.containsInterest(interest)) {
+    for (ArticleKeyword keyword : article.getKeywordList()) {
+      if (userInterestKeywords.contains(keyword.getKeyword())) {
         count++;
       }
     }
     return count;
   }
-  
-  public static double industryRelevance(CompleteUser user, CompleteArticle article) {
+
+  public static double industryRelevance(User user, Article article) {
     double relevance = 0;
-    Iterable<UserIndustry> userIndustries = user.getIndustries();
-    for (UserIndustry userIndustry : userIndustries) {
-      relevance += article.getSimilarityToIndustry(userIndustry.getIndustryCodeId());
+    for (UserIndustry userIndustry : user.getIndustryList()) {
+      relevance += getSimilarityToIndustry(article, userIndustry.getIndustryCodeId());
     }
     return relevance;
+  }
+
+  public static double getSimilarityToIndustry(Article article, int industryCode) {
+    for (ArticleIndustry classification : article.getIndustryList()) {
+      if (classification.getIndustryCodeId() == industryCode) {
+        return classification.getSimilarity();
+      }
+    }
+    return 0;
   }
 }

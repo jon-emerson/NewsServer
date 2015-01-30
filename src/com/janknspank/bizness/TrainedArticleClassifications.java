@@ -3,7 +3,7 @@ package com.janknspank.bizness;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption.WhereEquals;
-import com.janknspank.proto.Core.TrainedArticleClassification;
+import com.janknspank.proto.CoreProto.TrainedArticleClassification;
 
 /**
  * ArticleClassification codes on articles added by humans

@@ -35,8 +35,8 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Validator;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.proto.Core.ArticleKeyword;
-import com.janknspank.proto.Core.ArticleKeyword.Source;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
 
 /**
  * Finds all the keywords in an article, by looking at meta tags, as well as
@@ -159,7 +159,6 @@ public class KeywordFinder {
                   Math.min(maxStrength, keywordMap.get(keywordStr).getStrength() + strengthMultiplier));
             } else {
               keywordMap.put(keywordStr, ArticleKeyword.newBuilder()
-                  .setUrlId(urlId)
                   .setKeyword(keywordStr)
                   .setStrength(strengthMultiplier)
                   .setType(type.toString())
@@ -277,7 +276,6 @@ public class KeywordFinder {
           @Override
           public ArticleKeyword apply(String keyword) {
             return ArticleKeyword.newBuilder()
-              .setUrlId(urlId)
               .setKeyword(keyword)
               .setStrength(Math.min(3, keywords.count(keyword)))
               .setSource(Source.META_TAG)
@@ -333,7 +331,6 @@ public class KeywordFinder {
           @Override
           public ArticleKeyword apply(String keyword) {
             return ArticleKeyword.newBuilder()
-              .setUrlId(urlId)
               .setKeyword(keyword)
               .setStrength(4)
               .setSource(Source.HYPERLINK)

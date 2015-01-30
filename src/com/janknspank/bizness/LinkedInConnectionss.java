@@ -1,7 +1,7 @@
 package com.janknspank.bizness;
 
 import com.janknspank.database.Database;
-import com.janknspank.proto.Core.LinkedInConnections;
+import com.janknspank.proto.UserProto.LinkedInConnections;
 
 public class LinkedInConnectionss {
   /** Helper method for creating the LinkedInConnections table. */

@@ -20,8 +20,8 @@ import com.janknspank.common.UrlWhitelist;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.Core.Link;
-import com.janknspank.proto.Core.Url;
+import com.janknspank.proto.CoreProto.Link;
+import com.janknspank.proto.CoreProto.Url;
 
 public class TwitterCrawler implements twitter4j.StatusListener {
   private final UrlResolver resolver = UrlResolver.getInstance();

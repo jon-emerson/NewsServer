@@ -12,9 +12,8 @@ import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
-import com.janknspank.proto.Extensions;
-import com.janknspank.proto.Extensions.Required;
-import com.janknspank.proto.Extensions.StorageMethod;
+import com.janknspank.database.ExtensionsProto.Required;
+import com.janknspank.database.ExtensionsProto.StorageMethod;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
@@ -53,7 +52,7 @@ public class Mongoizer {
 
       // Handle primary keys a little differently - they're stored in "_id".
       StorageMethod storageMethod =
-          fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
+          fieldDescriptor.getOptions().getExtension(ExtensionsProto.storageMethod);
       if (storageMethod == StorageMethod.PRIMARY_KEY) {
         Asserts.assertTrue(javaType == JavaType.STRING, "Primary key must be a string",
             DatabaseSchemaException.class);
@@ -63,8 +62,9 @@ public class Mongoizer {
 
       // Enforce required fields.
       if (!object.containsField(fieldName)) {
-        Required required = fieldDescriptor.getOptions().getExtension(Extensions.required);
-        Asserts.assertTrue(required != Required.YES, "Required field missing: " + fieldName,
+        Required required = fieldDescriptor.getOptions().getExtension(ExtensionsProto.required);
+        Asserts.assertTrue(required != Required.YES,
+            "Required field missing: " + fieldDescriptor.getFullName(),
             DatabaseSchemaException.class);
         continue;
       }
@@ -166,15 +166,17 @@ public class Mongoizer {
     BasicDBObject object = new BasicDBObject();
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
       StorageMethod storageMethod =
-          fieldDescriptor.getOptions().getExtension(Extensions.storageMethod);
+          fieldDescriptor.getOptions().getExtension(ExtensionsProto.storageMethod);
       if (storageMethod == StorageMethod.DO_NOT_STORE) {
         continue;
       }
 
       String fieldName = fieldDescriptor.getName();
       JavaType javaType = fieldDescriptor.getJavaType();
-      if (fieldDescriptor.isRepeated() &&
-          message.getRepeatedFieldCount(fieldDescriptor) > 0) {
+      if (fieldDescriptor.isRepeated()) {
+        if (message.getRepeatedFieldCount(fieldDescriptor) == 0) {
+          continue;
+        }
         BasicDBList list = new BasicDBList();
         for (int i = 0; i < message.getRepeatedFieldCount(fieldDescriptor); i++) {
           switch (javaType) {
@@ -234,5 +236,18 @@ public class Mongoizer {
       }
     }
     return object;
+  }
+
+  public static <U extends Object> BasicDBList toDBList(Iterable<U> list)
+      throws DatabaseRequestException, DatabaseSchemaException {
+    BasicDBList dbList = new BasicDBList();
+    for (Object value : list) {
+      if (value instanceof Message) {
+        dbList.add(toDBObject(Validator.assertValid((Message) value)));
+      } else {
+        dbList.add(value);
+      }
+    }
+    return dbList;
   }
 }

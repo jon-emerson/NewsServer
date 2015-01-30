@@ -11,7 +11,7 @@ import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.database.Database;
 import com.janknspank.interpreter.KeywordUtils;
-import com.janknspank.proto.Local.TokenToEntity;
+import com.janknspank.proto.LocalProto.TokenToEntity;
 
 /**
  * Using the local database, builds an indexed table of all Wikipedia entities.

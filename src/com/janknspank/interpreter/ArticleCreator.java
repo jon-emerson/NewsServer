@@ -22,7 +22,7 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.common.DateParser;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.proto.Core.Article;
+import com.janknspank.proto.ArticleProto.Article;
 
 class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   private static LoadingCache<DocumentNode, Iterable<String>> PARAGRAPH_CACHE =
@@ -89,6 +89,12 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     if (type != null) {
       articleBuilder.setType(type);
     }
+
+    // Word count (required).
+    articleBuilder.setWordCount(getWordCount(documentNode));
+
+    // Keywords.
+    articleBuilder.addAllKeyword(KeywordFinder.findKeywords(urlId, documentNode));
 
     // Since many sites double-escape their HTML entities (why anyone would
     // do this is beyond me), do another escape pass on everything before we
@@ -255,6 +261,19 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       }
       throw new RequiredFieldException("Could not get paragraphs: " + e.getMessage(), e);
     }
+  }
+
+  public static int getWordCount(final DocumentNode documentNode) throws RequiredFieldException {
+    Pattern pattern = Pattern.compile("[\\s]+");
+    int words = 0;
+    for (String paragraph : getParagraphs(documentNode)) {
+      Matcher matcher = pattern.matcher(paragraph);
+      while (matcher.find()) {
+        words++;
+      }
+      words++;
+    }
+    return words;
   }
 
   public static long getPublishedTime(DocumentNode documentNode) throws RequiredFieldException {

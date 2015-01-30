@@ -11,23 +11,27 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
+import com.janknspank.common.Asserts;
+import com.janknspank.database.ExtensionsProto.StorageMethod;
 import com.janknspank.database.QueryOption.LimitWithOffset;
 import com.janknspank.database.QueryOption.WhereEquals;
+import com.janknspank.database.QueryOption.WhereEqualsEnum;
 import com.janknspank.database.QueryOption.WhereEqualsIgnoreCase;
 import com.janknspank.database.QueryOption.WhereEqualsNumber;
 import com.janknspank.database.QueryOption.WhereLike;
 import com.janknspank.database.QueryOption.WhereNotEquals;
+import com.janknspank.database.QueryOption.WhereNotEqualsEnum;
 import com.janknspank.database.QueryOption.WhereNotEqualsNumber;
 import com.janknspank.database.QueryOption.WhereNotLike;
 import com.janknspank.database.QueryOption.WhereNotNull;
 import com.janknspank.database.QueryOption.WhereNull;
 import com.janknspank.database.QueryOption.WhereOption;
-import com.janknspank.proto.Extensions.StorageMethod;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 public class MongoCollection<T extends Message> extends Collection<T> {
@@ -82,11 +86,16 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     return (fieldName.equals(this.primaryKeyField)) ? "_id" : fieldName;
   }
 
-  private BasicDBObject getQueryObject(QueryOption[] options) {
+  /**
+   * TODO(jonemerson): This should throw DatabaseRequestExceptions if any
+   * options don't match up to the schema.
+   */
+  private BasicDBObject getQueryObject(QueryOption... options) {
     BasicDBObject dbObject = new BasicDBObject();
     for (WhereOption whereEquals :
         Iterables.concat(
             QueryOption.getList(options, WhereEquals.class),
+            QueryOption.getList(options, WhereEqualsEnum.class),
             QueryOption.getList(options, WhereEqualsNumber.class))) {
       int size = whereEquals.getFieldCount();
       if (size == 0 &&
@@ -101,16 +110,26 @@ public class MongoCollection<T extends Message> extends Collection<T> {
       }
       String fieldName = getFieldName(whereEquals);
       if (size == 1) {
-        Object value = Iterables.getFirst(whereEquals instanceof WhereEquals ?
-            ((WhereEquals) whereEquals).getValues() : ((WhereEqualsNumber) whereEquals).getValues(), null);
+        Object value;
+        if (whereEquals instanceof WhereEquals) {
+          value = Iterables.getFirst(((WhereEquals) whereEquals).getValues(), null);
+        } else if (whereEquals instanceof WhereEqualsEnum) {
+          Enum<?> e = Iterables.getFirst(((WhereEqualsEnum) whereEquals).getValues(), null);
+          value = e.name();
+        } else if (whereEquals instanceof WhereEqualsNumber) {
+          value = Iterables.getFirst(((WhereEqualsNumber) whereEquals).getValues(), null);
+        } else {
+          throw new IllegalStateException();
+        }
         if ("_id".equals(fieldName)) {
           value = new ObjectId((String) value);
         }
         if (whereEquals instanceof WhereEqualsIgnoreCase) {
           dbObject.put(fieldName, Pattern.compile((String) value, Pattern.CASE_INSENSITIVE));
-        } else if (whereEquals instanceof WhereNotEquals || whereEquals instanceof WhereNotEqualsNumber) {
-          dbObject.put(fieldName, new BasicDBObject("$ne",
-              fieldName.equals("_id") ? value : value));
+        } else if (whereEquals instanceof WhereNotEquals
+            || whereEquals instanceof WhereNotEqualsEnum
+            || whereEquals instanceof WhereNotEqualsNumber) {
+          dbObject.put(fieldName, new BasicDBObject("$ne", value));
         } else {
           dbObject.put(fieldName, value);
         }
@@ -124,6 +143,18 @@ public class MongoCollection<T extends Message> extends Collection<T> {
             BasicDBList or = new BasicDBList();
             for (Number value : ((WhereEqualsNumber) whereEquals).getValues()) {
               or.add(new BasicDBObject(fieldName, value));
+            }
+            dbObject.put("$or", or);
+          }
+        } else if (whereEquals instanceof WhereEqualsEnum) {
+          if (whereEquals instanceof WhereNotEqualsEnum) {
+            for (Enum<?> value : ((WhereNotEqualsEnum) whereEquals).getValues()) {
+              dbObject.put(fieldName, new BasicDBObject("$ne", value.name()));
+            }
+          } else {
+            BasicDBList or = new BasicDBList();
+            for (Enum<?> value : ((WhereEqualsEnum) whereEquals).getValues()) {
+              or.add(new BasicDBObject(fieldName, value.name()));
             }
             dbObject.put("$or", or);
           }
@@ -253,10 +284,19 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     if (Iterables.isEmpty(messages)) {
       return 0;
     }
-    System.out.println("Insert: " + Iterables.getFirst(messages, null) + " ... and "
-        + (Iterables.size(messages) - 1) + " more " + clazz.getSimpleName() + " items");
+    List<DBObject> dbObjectList = Mongoizer.toDBObjectList(messages);
+
+    // Do some logging, so devs can see something happening.
+    StringBuilder logText = new StringBuilder();
+    logText.append("Insert: " + clazz.getSimpleName() + " (id=" +
+        dbObjectList.get(0).get("_id") + ")");
+    if (dbObjectList.size() > 1) {
+      logText.append(" and " + (dbObjectList.size() - 1) + " more items");
+    }
+    System.out.println(logText);
+
     return getDatabase().getCollection(this.getTableName())
-        .insert(Mongoizer.toDBObjectList(messages))
+        .insert(dbObjectList)
         .getN();
   }
 
@@ -266,8 +306,9 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     int rows = 0;
     BasicDBObject queryDbObject = getQueryObject(whereOptions);
     for (T t : messages) {
-      System.out.println("Update: " + t);
-      queryDbObject.put("_id", new ObjectId(Database.getPrimaryKey(t)));
+      String primaryKey = Database.getPrimaryKey(t);
+      System.out.println("Update: " + clazz.getSimpleName() + " (id=" + primaryKey + ")");
+      queryDbObject.put("_id", new ObjectId(primaryKey));
       rows += getDatabase().getCollection(this.getTableName())
           .update(queryDbObject, Mongoizer.toDBObject(t))
           .getN();
@@ -275,4 +316,76 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     return rows;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public T set(T message, String fieldName, Object value)
+      throws DatabaseSchemaException, DatabaseRequestException {
+    if (value instanceof Iterable<?>) {
+      return setIterable(message, fieldName, (Iterable<Object>) value);
+    }
+    String classAndField = message.getClass().getSimpleName() + "." + fieldName;
+    FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
+    Asserts.assertTrue(field != null && !field.isRepeated(),
+        classAndField + " is not a singular field", DatabaseRequestException.class);
+
+    BasicDBObject queryDbObject = getQueryObject(
+        new WhereEquals("_id", Database.getPrimaryKey(message)));
+    if (getDatabase().getCollection(this.getTableName())
+        .update(queryDbObject, new BasicDBObject("$set",
+            new BasicDBObject(fieldName, value instanceof Message ?
+                Mongoizer.toDBObject(Validator.assertValid((Message) value)) : value)))
+        .getN() == 0) {
+      throw new DatabaseSchemaException("Object not found: " + classAndField
+          + " (id=" + Database.getPrimaryKey(message) + ")");
+    }
+
+    Message.Builder messageBuilder = message.toBuilder();
+    messageBuilder.setField(field, value);
+    return (T) messageBuilder.build();
+  }
+
+  @SuppressWarnings("unchecked")
+  private T setIterable(T message, String fieldName, Iterable<Object> values)
+      throws DatabaseSchemaException, DatabaseRequestException {
+    String classAndField = message.getClass().getSimpleName() + "." + fieldName;
+    FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
+    Asserts.assertTrue(field != null && field.isRepeated(),
+        classAndField + " is not a repeated field", DatabaseRequestException.class);
+
+    BasicDBObject queryDbObject = getQueryObject(
+        new WhereEquals("_id", Database.getPrimaryKey(message)));
+    if (getDatabase().getCollection(this.getTableName())
+        .update(queryDbObject, new BasicDBObject("$set", 
+            new BasicDBObject(fieldName, Mongoizer.toDBList(values))))
+        .getN() == 0) {
+      throw new DatabaseSchemaException("Object not found: " + classAndField
+          + " (id=" + Database.getPrimaryKey(message) + ")");
+    }
+
+    Message.Builder messageBuilder = message.toBuilder();
+    messageBuilder.clearField(field);
+    for (Object o : values) {
+      messageBuilder.addRepeatedField(field, o);
+    }
+    return (T) messageBuilder.build();
+  }
+
+  @Override
+  public <U extends Object> void push(T message, String fieldName, List<U> values)
+      throws DatabaseSchemaException, DatabaseRequestException {
+    String classAndField = message.getClass().getSimpleName() + "." + fieldName;
+    FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
+    Asserts.assertTrue(field != null && field.isRepeated(),
+        classAndField + " is not a repeated field", DatabaseRequestException.class);
+
+    BasicDBObject queryDbObject = getQueryObject(
+        new WhereEquals("_id", Database.getPrimaryKey(message)));
+    if (getDatabase().getCollection(this.getTableName())
+        .update(queryDbObject, new BasicDBObject("$push", 
+            new BasicDBObject(fieldName, new BasicDBObject("$each", Mongoizer.toDBList(values)))))
+        .getN() == 0) {
+      throw new DatabaseSchemaException("Object not found: " + classAndField
+          + " (id=" + Database.getPrimaryKey(message) + ")");
+    }
+  }
 }

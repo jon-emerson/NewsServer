@@ -1,18 +1,20 @@
 package com.janknspank.server;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Sets;
 import com.janknspank.bizness.Urls;
-import com.janknspank.bizness.UserUrlFavorites;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.Serializer;
-import com.janknspank.proto.Core.Session;
-import com.janknspank.proto.Core.UserUrlFavorite;
+import com.janknspank.proto.UserProto.UrlFavorite;
+import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class SetUserUrlFavoriteServlet extends StandardServlet {
@@ -21,7 +23,7 @@ public class SetUserUrlFavoriteServlet extends StandardServlet {
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     // Read parameters.
     String urlId = getRequiredParameter(req, "urlId");
-    Session session = this.getSession(req);
+    User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
     if (Urls.getById(urlId) == null) {
@@ -29,22 +31,19 @@ public class SetUserUrlFavoriteServlet extends StandardServlet {
     }
 
     // Business logic.
-    UserUrlFavorite favorite;
-
-    // Make sure that the user hasn't already favorited this.
-    favorite = UserUrlFavorites.get(session.getUserId(), urlId);
-    if (favorite == null) {
-      favorite = UserUrlFavorite.newBuilder()
-          .setUserId(session.getUserId())
-          .setUrlId(urlId)
-          .setCreateTime(System.currentTimeMillis())
-          .build();
-      Database.insert(favorite);
+    Set<String> existingFavoriteUrlIds = Sets.newHashSet();
+    for (UrlFavorite favorite : user.getUrlFavoriteList()) {
+      existingFavoriteUrlIds.add(favorite.getUrlId());
+    }
+    if (!existingFavoriteUrlIds.contains(urlId)) {
+      Database.with(User.class).push(user, "url_favorite", ImmutableList.of(
+          UrlFavorite.newBuilder()
+              .setUrlId(urlId)
+              .setCreateTime(System.currentTimeMillis())
+              .build()));
     }
 
     // Write response.
-    JSONObject response = createSuccessResponse();
-    response.put("favorite", Serializer.toJSON(favorite));
-    return response;
+    return createSuccessResponse();
   }
 }

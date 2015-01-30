@@ -1,5 +1,6 @@
 package com.janknspank.common;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -24,6 +25,10 @@ import java.util.List;
  *     // Print out "twelve", "eleven", "ten".
  *   }
  * </code>
+ * 
+ * NOTE(jonemerson): Turns out this is a generally useful class and I should
+ * re-implement it with a linked HashMap, though LinkedHashMap doesn't allow
+ * for arbitrary input positioning, so I'd have to probably build my own.
  */
 public class TopList<T, U extends Number> implements Iterable<T> {
   private final int maxSize;
@@ -86,6 +91,14 @@ public class TopList<T, U extends Number> implements Iterable<T> {
     return keyList;
   }
 
+  /**
+   * Returns the "i"th top-most key in this top list.  Note: This isn't at all
+   * efficient.
+   */
+  public T getKey(int i) {
+    return Iterables.get(getKeys(), i);
+  }
+
   public U getValue(T key) {
     return values.containsKey(key) ? values.get(key) : null;
   }
@@ -93,5 +106,9 @@ public class TopList<T, U extends Number> implements Iterable<T> {
   @Override
   public Iterator<T> iterator() {
     return getKeys().iterator();
+  }
+
+  public int size() {
+    return values.size();
   }
 }

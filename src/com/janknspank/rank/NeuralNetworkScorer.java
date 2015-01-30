@@ -2,9 +2,11 @@ package com.janknspank.rank;
 
 import org.neuroph.core.NeuralNetwork;
 
-import com.janknspank.proto.Core.ArticleFacebookEngagement;
+import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.UserProto.User;
 
-public final class NeuralNetworkScorer implements Scorer {
+public final class NeuralNetworkScorer extends Scorer {
   static final int INPUT_NODES_COUNT = 9;
   static final int OUTPUT_NODES_COUNT = 1;
   static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
@@ -12,7 +14,7 @@ public final class NeuralNetworkScorer implements Scorer {
       INPUT_NODES_COUNT + "in-" + HIDDEN_NODES_COUNT + "hidden-" +
       OUTPUT_NODES_COUNT + "out.nnet";
   private static NeuralNetworkScorer instance = null;
-  private NeuralNetwork<?> neuralNetwork;
+  private NeuralNetwork neuralNetwork;
 
   private NeuralNetworkScorer() {
     setFile(DEFAULT_NEURAL_NETWORK_FILE);
@@ -26,23 +28,18 @@ public final class NeuralNetworkScorer implements Scorer {
   }
 
   public void setFile(String nnetFile) {
-    neuralNetwork = NeuralNetwork.createFromFile(nnetFile);
+    neuralNetwork = NeuralNetwork.load(nnetFile);
   }
 
-  static double[] generateInputNodes(CompleteUser user, CompleteArticle article) {
-    ArticleFacebookEngagement engagement = article.getLatestFacebookEngagement();
-    long likeCount = 0;
-    long commentCount = 0;
-    long shareCount = 0;
-    if (engagement != null) {
-      likeCount = engagement.getLikeCount();
-      commentCount = engagement.getCommentCount();
-      shareCount = engagement.getShareCount();
+  static double[] generateInputNodes(User user, Article article) {
+    SocialEngagement engagement = getLatestFacebookEngagement(article);
+    if (engagement == null) {
+      engagement = SocialEngagement.getDefaultInstance();
     }
 
     return new double[] {
       // Input 1: equals 1 if article is about the user's current place of work
-      InputValuesGenerator.isAboutCurrentEmployer(user, article),
+      InputValuesGenerator.isAboutCurrentEmployer(user, article) ? 1 : 0,
 
       // Input 2: # of topics matches between user and article
       sigmoid(InputValuesGenerator.matchedInterestsCount(user, article)),
@@ -50,22 +47,22 @@ public final class NeuralNetworkScorer implements Scorer {
       // Input 3: the length of the article
       // TODO: improve normalization
       // Use average wordcount and max word count
-      sigmoid(Math.log(article.wordCount())),
+      sigmoid(Math.log(article.getWordCount())),
 
       // Input 4: Facebook likes
-      sigmoid(likeCount),
+      sigmoid(engagement.getLikeCount()),
 
       // Input 5: Facebook comments
-      sigmoid(commentCount),
+      sigmoid(engagement.getCommentCount()),
 
       // Input 6: Facebook shares
-      sigmoid(shareCount),
+      sigmoid(engagement.getShareCount()),
 
       // Input 7: Facebook likes velocity
-      sigmoid(article.getLikeVelocity()),
+      sigmoid(getLikeVelocity(article)),
 
       // Input 8: Article age
-      sigmoid(article.getAgeInMillis()),
+      sigmoid(System.currentTimeMillis() - article.getPublishedTime()),
 
       // Input 9: User has intent to stay on top of industry
       Math.min(1, InputValuesGenerator.industryRelevance(user, article))
@@ -81,14 +78,10 @@ public final class NeuralNetworkScorer implements Scorer {
 
   // V1 has a general rank - one neural network for all intents. No mixing.
   // Slow architecture. Makes too many server calls
-  public double getScore(CompleteUser user, CompleteArticle article) {
-    return getScore(user, article, neuralNetwork);
-  }
-
-  private static double getScore(CompleteUser completeUser,
-      CompleteArticle completeArticle, NeuralNetwork<?> neuralNetwork) {
+  @Override
+  public double getScore(User user, Article article) {
     long startMillis = System.currentTimeMillis();
-    neuralNetwork.setInput(generateInputNodes(completeUser, completeArticle));
+    neuralNetwork.setInput(generateInputNodes(user, article));
     long generateInputNodesMillis = System.currentTimeMillis();
     neuralNetwork.calculate();
     long calculateMillis = System.currentTimeMillis();
@@ -98,7 +91,7 @@ public final class NeuralNetworkScorer implements Scorer {
         - totalTimeToRankArticle) / 1000;
     double timeToCalculate = (double)(calculateMillis - generateInputNodesMillis) / 1000;
 
-    System.out.println("Ranked " + completeArticle.getArticle().getUrl());
+    System.out.println("Ranked " + article.getUrl());
     System.out.println("  Score: " + neuralNetwork.getOutput()[0]);
     System.out.println("  Total time: " + totalTimeToRankArticle + "s");
     System.out.println("    generate input nodes: " + timeToGenerateInputNodes +

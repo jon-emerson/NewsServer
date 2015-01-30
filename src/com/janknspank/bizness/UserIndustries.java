@@ -3,30 +3,20 @@ package com.janknspank.bizness;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import com.google.api.client.repackaged.com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.QueryOption;
 import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.proto.Core.IndustryCode;
-import com.janknspank.proto.Core.UserIndustry;
+import com.janknspank.proto.EnumsProto.IndustryCode;
+import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.UserIndustry;
+import com.janknspank.proto.UserProto.UserIndustry.Source;
 
 public class UserIndustries {
-  public static final String SOURCE_LINKEDIN_PROFILE = "lp";
-  public static final String SOURCE_EXPLICIT_ADD = "ad";
-  public static final String SOURCE_TOMBSTONE = "t";
-  
-  public static Iterable<UserIndustry> getIndustries(String userId) throws DatabaseSchemaException {
-    return Database.with(UserIndustry.class).get(
-        new QueryOption.WhereEquals("user_id", userId),
-        new QueryOption.WhereNotEquals("source", SOURCE_TOMBSTONE));
-  }
-  
   /**
    * Returns a list of industries derived from the user's passed in
    * LinkedIn profile + other industries the user explicitly added
@@ -35,85 +25,68 @@ public class UserIndustries {
    * @return
    * @throws DataInternalException
    */
-  public static List<UserIndustry> updateIndustries(String userId, DocumentNode profileDocumentNode) 
+  public static User updateIndustries(User user, DocumentNode profileDocumentNode) 
       throws BiznessException, DatabaseSchemaException {
     String industryDescription = profileDocumentNode.findFirst("industry").getFlattenedText();
     IndustryCode industryCode = IndustryCodes.getForDescription(industryDescription);
     UserIndustry userIndustry = UserIndustry.newBuilder()
         .setIndustryCodeId(industryCode.getId())
-        .setUserId(userId)
-        .setSource(SOURCE_LINKEDIN_PROFILE)
+        .setSource(Source.LINKED_IN_PROFILE)
         .setCreateTime(System.currentTimeMillis())
         .build();
     List<UserIndustry> industries = new ArrayList<>();
     industries.add(userIndustry);
 
     // Add any that are not already on the server 
-    return updateIndustries(userId, industries, SOURCE_LINKEDIN_PROFILE);
+    return updateIndustries(user, industries, Source.LINKED_IN_PROFILE);
   }
 
   /**
-   * Updates the industries for a given source (like LinkedIn)
-   * Includes removing old industries and inserting new ones.
-   * Used to keep the DB in sync with LinkedIn profile changes.
-   * This should not be use for explicit industry adds.
-   * For that just generate a new UserIndustry object and insert it.
-   * @param userId
-   * @param newIndustries
-   * @param source
-   * @return all industries the user is interested in, irrespective of source
-   * @throws DataInternalException
+   * Converts an industry to a String that can be used for uniqueness.
    */
-  private static List<UserIndustry> updateIndustries(String userId, List<UserIndustry> newIndustries,
-      String source) throws BiznessException, DatabaseSchemaException {
-    List<UserIndustry> allIndustries = Lists.newArrayList();
-
-    // Find the Industries from source (ex. LinkedIn) the user already has. 
-    Map<Integer, UserIndustry> industryByCode = Maps.newHashMap();
-    for (UserIndustry industry : getIndustries(userId)) {
-      if (source.equals(industry.getSource())) {
-        industryByCode.put(industry.getIndustryCodeId(), industry);
-      }
-      else {
-        allIndustries.add(industry);
-      }
+  private static String hashUserIndustry(UserIndustry industry) {
+    List<String> tokens = Lists.newArrayList();
+    if (industry.hasIndustryCodeId()) {
+      tokens.add(Integer.toString(industry.getIndustryCodeId()));
     }
-
-    Set<UserIndustry> industriesToDelete = Sets.newHashSet();
-    List<UserIndustry> industriesToInsert = Lists.newArrayList();
-    for (UserIndustry industry : industryByCode.values()) {
-      industriesToDelete.add(industry);
+    if (industry.hasSource()) {
+      tokens.add(industry.getSource().name());
     }
-
-    for (UserIndustry newIndustry : newIndustries) {
-      if (!source.equals(newIndustry.getSource())) {
-        // This method only supports updating one type at a time.
-        throw new BiznessException("Cannot add UserIndustry of source " + newIndustry.getSource()
-            + " inside a call to update UserIndustries of source " + source + ": "
-            + newIndustry.toString());
-      }
-      UserIndustry existingIndustry = industryByCode.get(newIndustry.getIndustryCodeId());
-      if (existingIndustry != null) {
-        industriesToDelete.remove(existingIndustry);
-      } else {
-        industriesToInsert.add(newIndustry);
-        allIndustries.add(newIndustry);
-      }
-    }
-
-    try {
-      Database.insert(industriesToInsert);
-    } catch (DatabaseRequestException e) {
-      throw new BiznessException("Error inserting industries: " + e.getMessage(), e);
-    }
-    Database.delete(industriesToDelete);
-
-    // Return the latest and greatest industries, regardless of source.
-    return allIndustries;
+    return Joiner.on(":").join(tokens);
   }
 
-  /** Helper method for creating the UserIndustry table. */
-  public static void main(String args[]) throws Exception {
-    Database.with(UserIndustry.class).createTable();
+  /**
+   * Updates the industries for a given source (like LinkedIn).  Includes
+   * removing old industries and inserting new ones.  Used to keep the DB in
+   * sync with LinkedIn profile changes.  This should not be use for explicit
+   * industry adds.  For that just generate a new UserIndustry object and push
+   * it.
+   * @return all industries the user is industryed in, irrespective of source
+   */
+  private static User updateIndustries(User user,
+      List<UserIndustry> industries, Source source)
+      throws BiznessException, DatabaseSchemaException {
+    List<UserIndustry> finalUserIndustrys = Lists.newArrayList();
+    Map<String, UserIndustry> existingUserIndustryMap = Maps.newHashMap();
+    for (UserIndustry industry : user.getIndustryList()) {
+      if (industry.getSource() == source) {
+        existingUserIndustryMap.put(hashUserIndustry(industry), industry);
+      } else {
+        finalUserIndustrys.add(industry);
+      }
+    }
+    for (UserIndustry industry : industries) {
+      String hash = hashUserIndustry(industry);
+      if (existingUserIndustryMap.containsKey(hash)) {
+        finalUserIndustrys.add(existingUserIndustryMap.get(hash));
+      } else {
+        finalUserIndustrys.add(industry);
+      }
+    }
+    try {
+      return Database.set(user, "industry", finalUserIndustrys);
+    } catch (DatabaseRequestException e) {
+      throw new BiznessException("Could not update industries: " + e.getMessage(), e);
+    }
   }
 }
