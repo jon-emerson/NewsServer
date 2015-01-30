@@ -1,15 +1,20 @@
 package com.janknspank.classifier;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.HashMultiset;
@@ -18,6 +23,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.WordDocumentFrequencies;
+import com.janknspank.common.TopList;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.interpreter.KeywordFinder;
 import com.janknspank.interpreter.KeywordUtils;
@@ -27,7 +33,7 @@ public class DocumentVector {
   private Multiset<String> frequencyVector;
   private Map<String, Double> tfIdfVector;
   private static final Set<String> STOP_WORDS;
-
+  
   static {
     InputStream inputStream = null;
     try {
@@ -79,7 +85,11 @@ public class DocumentVector {
         for (String token : tokens) {
           token = KeywordUtils.cleanKeyword(token);
           if (!Strings.isNullOrEmpty(token) &&
-              !STOP_WORDS.contains(token.toLowerCase())) {
+              !STOP_WORDS.contains(token.toLowerCase()) &&
+              token.length() > 2 &&
+              !NumberUtils.isNumber(token) &&
+              !token.startsWith("T.co/")
+              ) {
             vector.add(token);
           }
         }
@@ -144,6 +154,66 @@ public class DocumentVector {
   }
 
   public String toString() {
-    return "DocumentVector.tfIdfVector: " + tfIdfVector;
+    TopList<String, Double> topWords = new TopList<>(tfIdfVector.size());
+    for (Map.Entry<String, Double> entry : tfIdfVector.entrySet()) {
+      String word = entry.getKey();
+      double weight = entry.getValue();
+      topWords.add(word, weight);
+    }
+    
+    String output = "";
+    for (String word : topWords.getKeys()) {
+      output += word + ": " + topWords.getValue(word) + "\n";
+    }
+    return output;
+  }
+  
+  static void saveVectorToFile(Map<String, Double> vector, String path) 
+      throws BiznessException {
+    File vectorFile = new File(path);
+    if (vectorFile.exists()) {
+      vectorFile.delete();
+    }
+    
+    Properties prop = new Properties();
+    OutputStream output = null;
+    
+    try {
+      output = new FileOutputStream(vectorFile);
+      
+      for (Map.Entry<String, Double> entry : vector.entrySet()) {
+        String word = entry.getKey();
+        String value = String.valueOf(entry.getValue());
+        prop.setProperty(word, value);
+      }
+      
+      prop.store(output, null);
+    } catch (IOException e) {
+      throw new BiznessException("Can't save vector to file " 
+          + path + ": " + e.getMessage(), e);
+    } finally {
+      IOUtils.closeQuietly(output);
+    }
+  }
+  
+  static Map<String, Double> loadVectorFromFile(String path) 
+      throws BiznessException {
+    Properties properties = new Properties();
+    InputStream inputStream = null;
+    Map<String, Double> vector = new HashMap<>();
+    try {
+      inputStream = new FileInputStream(path);
+      properties.load(inputStream);
+      
+      for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+        vector.put((String)entry.getKey(), Double.parseDouble((String)entry.getValue()));
+      }
+      
+      return vector;
+    } catch (IOException e) {
+      throw new BiznessException("Error reading " + path + ": " + e.getMessage(), e);
+    } finally {
+      IOUtils.closeQuietly(inputStream);
+    }
   }
 }

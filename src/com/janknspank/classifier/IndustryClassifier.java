@@ -55,32 +55,48 @@ public class IndustryClassifier {
    */
   public Iterable<ArticleIndustry> classify(Article article)
       throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
-    DocumentVector articleVector = new DocumentVector(article);
-
     // See if the classification has already been computed
     Iterable<ArticleIndustry> classifications =
         ArticleIndustryClassifications.getFor(article);
     if (classifications != null && Iterables.size(classifications) > 0) {
       return classifications;
     }
-
-    // Compute classifications from IndustryVectors
+    
+    // Compute classifications from scratch against IndustryVectors
     List<ArticleIndustry> newClassifications = new ArrayList<>();
-    for (Map.Entry<IndustryCode, IndustryVector> industry : industryVectors.entrySet()) {
-      IndustryCode code = industry.getKey();
-      IndustryVector vector = industry.getValue();
-      double similarity = articleVector.cosineSimilarityTo(vector);
+    for (IndustryCode industryCode : industryVectors.keySet()) {
+      ArticleIndustry classification = 
+          classifyForIndustry(article, industryCode);
       // Only save industries that are closely related
-      if (similarity >= RELEVANCE_THRESHOLD) {
-        ArticleIndustry classification =
-            ArticleIndustry.newBuilder()
-                .setIndustryCodeId(code.getId())
-                .setSimilarity(similarity)
-                .build();
+      if (classification.getSimilarity() >= RELEVANCE_THRESHOLD) {
         newClassifications.add(classification);
       }
     }
     Database.set(article, "industry", newClassifications);
     return classifications;
+  }
+  
+  public ArticleIndustry classifyForIndustry(
+      Article article, IndustryCode industryCode) 
+      throws BiznessException {
+    IndustryVector vector = industryVectors.get(industryCode);
+    DocumentVector articleVector = new DocumentVector(article);
+    double similarity = articleVector.cosineSimilarityTo(vector);
+    ArticleIndustry classification =
+        ArticleIndustry.newBuilder()
+            .setIndustryCodeId(industryCode.getId())
+            .setSimilarity(similarity)
+            .build();
+    return classification;
+  }
+
+  private static void saveClassificationsToServer(
+      Article article, Iterable<ArticleIndustry> classifications)
+          throws DatabaseSchemaException, DatabaseRequestException {
+    Database.set(article, "industry", classifications);
+  }
+  
+  IndustryVector getIndustryVector(IndustryCode industryCode) {
+    return industryVectors.get(industryCode);
   }
 }

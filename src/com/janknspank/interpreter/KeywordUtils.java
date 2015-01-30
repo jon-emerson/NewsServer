@@ -144,7 +144,9 @@ public class KeywordUtils {
         keyword.startsWith("&") || keyword.startsWith(",") ||
         keyword.startsWith("!") || keyword.startsWith("*") ||
         keyword.startsWith("+") || keyword.startsWith("/") ||
-        keyword.startsWith("-")) {
+        keyword.startsWith("-") || keyword.startsWith("—") ||
+        keyword.startsWith("%") || keyword.startsWith("—") ||
+        keyword.startsWith("…") || keyword.startsWith("[")) {
       keyword = keyword.substring(1).trim();
     }
     if (keyword.endsWith("’s") || keyword.endsWith("'s")) {
@@ -155,7 +157,9 @@ public class KeywordUtils {
         keyword.endsWith(",") || keyword.endsWith(";") ||
         keyword.endsWith("-") || keyword.endsWith("!")||
         keyword.endsWith("?") || keyword.endsWith("*")||
-        keyword.endsWith(")") || keyword.endsWith("/")) {
+        keyword.endsWith(")") || keyword.endsWith("/") ||
+        keyword.endsWith("$") || keyword.endsWith("—") ||
+        keyword.endsWith("″") || keyword.endsWith("]")) {
       keyword = keyword.substring(0, keyword.length() - 1).trim();
     }
     if (keyword.endsWith(".") && StringUtils.countMatches(keyword, ".") == 1) {
