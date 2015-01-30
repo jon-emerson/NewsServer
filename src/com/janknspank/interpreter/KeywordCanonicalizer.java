@@ -12,7 +12,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.common.AssertionException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
@@ -114,13 +113,7 @@ public class KeywordCanonicalizer {
     keywords = Iterables.filter(keywords, new Predicate<ArticleKeyword>() {
       @Override
       public boolean apply(ArticleKeyword keyword) {
-        try {
-          return KeywordUtils.isValidKeyword(keyword.getKeyword());
-        } catch (AssertionException e) {
-          System.out.print("Error filtering invalid keywords: ");
-          e.printStackTrace();
-          return false;
-        }
+        return KeywordUtils.isValidKeyword(keyword.getKeyword());
       }
     });
 

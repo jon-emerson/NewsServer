@@ -29,7 +29,6 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.common.AssertionException;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Validator;
@@ -152,21 +151,17 @@ public class KeywordFinder {
       Span keywordSpans[] = nameFinderMe.find(tokens);
       for (String keywordStr : Span.spansToStrings(keywordSpans, tokens)) {
         keywordStr = KeywordUtils.cleanKeyword(keywordStr);
-        try {
-          if (KeywordUtils.isValidKeyword(keywordStr)) {
-            if (keywordMap.containsKey(keywordStr)) {
-              keywordMap.get(keywordStr).setStrength(
-                  Math.min(maxStrength, keywordMap.get(keywordStr).getStrength() + strengthMultiplier));
-            } else {
-              keywordMap.put(keywordStr, ArticleKeyword.newBuilder()
-                  .setKeyword(keywordStr)
-                  .setStrength(strengthMultiplier)
-                  .setType(type.toString())
-                  .setSource(Source.NLP));
-            }
+        if (KeywordUtils.isValidKeyword(keywordStr)) {
+          if (keywordMap.containsKey(keywordStr)) {
+            keywordMap.get(keywordStr).setStrength(
+                Math.min(maxStrength, keywordMap.get(keywordStr).getStrength() + strengthMultiplier));
+          } else {
+            keywordMap.put(keywordStr, ArticleKeyword.newBuilder()
+                .setKeyword(keywordStr)
+                .setStrength(strengthMultiplier)
+                .setType(type.toString())
+                .setSource(Source.NLP));
           }
-        } catch (AssertionException e) {
-          e.printStackTrace();
         }
       }
     }
@@ -249,13 +244,9 @@ public class KeywordFinder {
     Multiset<String> keywords = HashMultiset.create();
     for (String keywordStr : rawKeywords.split(delimiter)) {
       keywordStr = KeywordUtils.cleanKeyword(keywordStr);
-      try {
-        if (KeywordUtils.isValidKeyword(keywordStr) &&
-            isMetaKeywordRelevant(wordsInArticle, keywordStr)) {
-          keywords.add(keywordStr);
-        }
-      } catch (AssertionException e) {
-        e.printStackTrace();
+      if (KeywordUtils.isValidKeyword(keywordStr) &&
+          isMetaKeywordRelevant(wordsInArticle, keywordStr)) {
+        keywords.add(keywordStr);
       }
     }
     return keywords;
@@ -318,7 +309,8 @@ public class KeywordFinder {
 
       // This text is capitalized like a proper noun, and has 5 or fewer
       // words in it - let's consider it a keyword!
-      if (possibleKeyword.equals(WordUtils.capitalizeFully(possibleKeyword)) &&
+      if (KeywordUtils.isValidKeyword(possibleKeyword) &&
+          possibleKeyword.equals(WordUtils.capitalizeFully(possibleKeyword)) &&
           !possibleKeyword.equals(possibleKeyword.toUpperCase()) &&
           StringUtils.countMatches(possibleKeyword, " ") < 5) {
         keywords.add(possibleKeyword);
