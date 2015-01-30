@@ -371,7 +371,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
   }
 
   @Override
-  public <U extends Object> void push(T message, String fieldName, List<U> values)
+  public <U extends Object> void push(T message, String fieldName, Iterable<U> values)
       throws DatabaseSchemaException, DatabaseRequestException {
     String classAndField = message.getClass().getSimpleName() + "." + fieldName;
     FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
