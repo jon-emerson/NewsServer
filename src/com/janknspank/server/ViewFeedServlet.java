@@ -22,6 +22,7 @@ import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.HeuristicScorer;
 import com.janknspank.rank.Scorer;
 
+@AuthenticationRequired
 public class ViewFeedServlet extends StandardServlet {
   /**
    * Returns any Soy data necessary for rendering the .main template for this
@@ -64,9 +65,9 @@ public class ViewFeedServlet extends StandardServlet {
                         "description", article.getDescription(),
                         "image_url", article.getImageUrl(),
                         "score", articlesToRankMap.get(article),
-                        "fb_likes", engagement.getLikeCount(),
-                        "fb_shares", engagement.getShareCount(),
-                        "fb_comments" ,engagement.getCommentCount(),
+                        "fb_likes", (int) engagement.getLikeCount(),
+                        "fb_shares", (int) engagement.getShareCount(),
+                        "fb_comments" ,(int) engagement.getCommentCount(),
                         "industry_classifications", getIndustryString(article));
                   }
                 }));
@@ -78,15 +79,15 @@ public class ViewFeedServlet extends StandardServlet {
   }
 
   private String getIndustryString(Article article) {
-    String output = "[";
-    for (ArticleIndustry classification : article.getIndustryList()) {
-      output += IndustryCodes.INDUSTRY_CODE_MAP.get(
-          classification.getIndustryCodeId()).getDescription();
-      output += ": ";
-      output += classification.getSimilarity();
-      output += ", ";
+    StringBuilder sb = new StringBuilder();
+    for (ArticleIndustry industry : article.getIndustryList()) {
+      if (sb.length() > 0) {
+        sb.append(", ");
+      }
+      sb.append(IndustryCodes.INDUSTRY_CODE_MAP.get(industry.getIndustryCodeId()).getDescription())
+          .append(": ")
+          .append(industry.getSimilarity());
     }
-    output = output.substring(0, output.length() - 2) + "]";
-    return output;
+    return "[" + sb.toString() + "]";
   }
 }
