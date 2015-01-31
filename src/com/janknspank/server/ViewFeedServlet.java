@@ -1,5 +1,6 @@
 package com.janknspank.server;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,9 +65,9 @@ public class ViewFeedServlet extends StandardServlet {
                         "description", article.getDescription(),
                         "image_url", article.getImageUrl(),
                         "score", articlesToRankMap.get(article),
-                        "fb_likes", engagement.getLikeCount(),
-                        "fb_shares", engagement.getShareCount(),
-                        "fb_comments" ,engagement.getCommentCount(),
+                        "fb_likes", String.valueOf(engagement.getLikeCount()),
+                        "fb_shares", String.valueOf(engagement.getShareCount()),
+                        "fb_comments" , String.valueOf(engagement.getCommentCount()),
                         "industry_classifications", getIndustryString(article));
                   }
                 }));
@@ -78,15 +79,23 @@ public class ViewFeedServlet extends StandardServlet {
   }
 
   private String getIndustryString(Article article) {
-    String output = "[";
-    for (ArticleIndustry classification : article.getIndustryList()) {
-      output += IndustryCodes.INDUSTRY_CODE_MAP.get(
-          classification.getIndustryCodeId()).getDescription();
-      output += ": ";
-      output += classification.getSimilarity();
-      output += ", ";
+    String output = null;
+    List<ArticleIndustry> classifications = article.getIndustryList();
+    if (classifications.size() > 0) {
+      output = "[";
+      for (ArticleIndustry classification : article.getIndustryList()) {
+        output += IndustryCodes.INDUSTRY_CODE_MAP.get(
+            classification.getIndustryCodeId()).getDescription();
+        output += ": ";
+        output += classification.getSimilarity();
+        output += ", ";
+      }
+      output = output.substring(0, output.length() - 2) + "]";
     }
-    output = output.substring(0, output.length() - 2) + "]";
+    else {
+      output = "[No industry classifications]";
+    }
+
     return output;
   }
 }
