@@ -1,7 +1,5 @@
 package com.janknspank.rank;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.neuroph.core.NeuralNetwork;
@@ -9,11 +7,9 @@ import org.neuroph.core.learning.DataSet;
 import org.neuroph.core.learning.DataSetRow;
 import org.neuroph.nnet.MultiLayerPerceptron;
 
-import com.google.api.client.util.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.Users;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;

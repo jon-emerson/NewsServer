@@ -36,8 +36,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       "http://www.sfgate.com/img/pages/article/opengraph_default.png");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLE_ENDS[] = new Pattern[] {
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
-      Pattern.compile("\\s?(\\||\\-\\-|\\-)\\s+([A-Z][A-Za-z]+\\.com)$"),
-      Pattern.compile("\\s?(\\||\\-\\-|\\-)\\s+[A-Z][A-Za-z\\s'']{2,25}$")};
+      Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+([A-Z][A-Za-z]+\\.com)$"),
+      Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+[A-Z][A-Za-z\\s'']{2,25}$")};
 
   public static Article create(String urlId, DocumentNode documentNode)
       throws RequiredFieldException {
@@ -323,6 +323,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   public static String getTitle(DocumentNode documentNode) throws RequiredFieldException {
     // For most sites, we can get it from the meta keywords.
     // For others, the meta keywords are crap, so we skip this step.
+    String title = null;
     if (!documentNode.getUrl().contains("//advice.careerbuilder.com/")) {
       Node metaNode = documentNode.findFirst(ImmutableList.of(
           "html > head meta[name=\"fb_title\"]",
@@ -333,28 +334,28 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
           "html > head meta[property=\"rnews:headline\"]",
           "html > head meta[itemprop=\"alternativeHeadline\"]"));
       if (metaNode != null) {
-        return metaNode.getAttributeValue("content");
-      }
-    }
-
-    Node titleNode = documentNode.findFirst("title");
-    if (titleNode != null) {
-      String title = unescape(titleNode.getFlattenedText());
-
-      // Clean and truncate the title, if necessary.
-      for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLE_ENDS) {
-        Matcher matcher = pattern.matcher(title);
-        if (matcher.find()) {
-          title = title.substring(0, title.length() - matcher.group().length());
+        title = metaNode.getAttributeValue("content");
+      } else {
+        Node titleNode = documentNode.findFirst("title");
+        if (titleNode != null) {
+          title = unescape(titleNode.getFlattenedText());
+        } else {
+          throw new RequiredFieldException("Could not find required field: title");
         }
       }
-      if (title.length() > Articles.MAX_TITLE_LENGTH) {
-        title = title.substring(0, Articles.MAX_TITLE_LENGTH - 1) + "\u2026";
-      }
-
-      return title;
     }
-    throw new RequiredFieldException("Could not find required field: title");
+
+    // Clean and truncate the title, if necessary.
+    for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLE_ENDS) {
+      Matcher matcher = pattern.matcher(title);
+      if (matcher.find()) {
+        title = title.substring(0, title.length() - matcher.group().length());
+      }
+    }
+    if (title.length() > Articles.MAX_TITLE_LENGTH) {
+      title = title.substring(0, Articles.MAX_TITLE_LENGTH - 1) + "\u2026";
+    }
+    return title;
   }
 
   public static String getType(DocumentNode documentNode) {

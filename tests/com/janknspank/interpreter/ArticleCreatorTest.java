@@ -17,6 +17,7 @@ import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Url;
 
+@SuppressWarnings("resource")
 public class ArticleCreatorTest {
   private static final String DESCRIPTION = "Hello there boys and girls";
   private static final Url URL = Url.newBuilder()
@@ -277,5 +278,135 @@ public class ArticleCreatorTest {
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith(
             "FORTUNE — Self-driving cars may be closer than anybody realizes."));
+  }
+
+  @Test
+  public void testSlateArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://www.slate.com/articles/health_and_science/science/2014/06/facebook_unethical_"
+        + "experiment_it_made_news_feeds_happier_or_sadder_to_manipulate.html",
+        new FileReader("testdata/slate-facebook-unethical-experiment.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals(
+        "Facebook has been experimenting on us. A new paper in the Proceedings of the "
+        + "National Academy of Sciences reveals that Facebook intentionally manipulated "
+        + "the news feeds of almost 700,000 users in order to study “emotional contagion "
+        + "through social networks.” The researchers, who are affiliated with Facebook, "
+        + "Cornell, and the University...",
+        article.getDescription());
+    assertEquals("Facebook’s Unethical Experiment Manipulated Users’ Emotions", article.getTitle());
+    assertEquals("http://www.slate.com/content/dam/slate/articles/health_and_science/science/2014/"
+        + "06/facebook_unethical_experiment_it_made_news_feeds_happier_or_sadder_to_manipulate/"
+        + "465888347.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg",
+        article.getImageUrl());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "Facebook has been experimenting on us. A new paper in the Proceedings of the "
+            + "National Academy of Sciences reveals that Facebook intentionally manipulated "
+            + "the news feeds of almost 700,000 users in order to study “emotional contagion "
+            + "through social networks.”"));
+  }
+
+  @Test
+  public void testVentureBeatArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://venturebeat.com/2015/01/29/googles-eric-schmidt-has-a-10-year-prediction-"
+        + "of-how-tech-will-disrupt-whole-industries/",
+        new FileReader("testdata/venturebeat-googles-eric-schmidt-has-a-10-year-prediction.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals(
+        "Mixing and matching free services",
+        article.getDescription());
+    assertEquals("Google's Eric Schmidt has a 10-year prediction of how tech will "
+        + "disrupt whole industries", article.getTitle());
+    assertEquals("http://venturebeat.com/wp-content/uploads/2015/01/conversation-780x354.png",
+        article.getImageUrl());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "In conversation with Khan Academy founder and amateur baritone, Sal Khan, "
+            + "Google chairman Eric Schmidt predicted how technology will change whole "
+            + "industries over the next 10 years. The path to tech riches, he predicts, "
+            + "will be startups that use existing online tools to unseat incumbents."));
+  }
+
+  @Test
+  public void testRedHerringArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/",
+        new FileReader("testdata/redherring-alibabas-road-largest-ipo-ever.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals(
+        "Over the past two weeks, institutional investors have piled into the Alibaba "
+        + "roadshow as if the company was handing out free money. The long awaited "
+        + "process started three years ago and the…",
+        article.getDescription());
+    assertEquals("Alibaba's road to the largest technology IPO ever", article.getTitle());
+    assertEquals("http://www.redherring.com/wp-content/uploads/2014/08/Alibaba-headquarters.jpg",
+        article.getImageUrl());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "Over the past two weeks, institutional investors have piled into the Alibaba "
+            + "roadshow as if the company was handing out free money. The long awaited process "
+            + "started three years ago and the biggest tech IPO ever has the potential to pave "
+            + "the way for a tech rally not unlike the surge seen following the Netscape and "
+            + "Yahoo IPOs in the dotcom era."));
+  }
+
+  @Test
+  public void testStartupWorkoutArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://startupworkout.com/inbox-hero-how-to-write-hypnotizing-emails-that-convert-"
+        + "like-crazy/",
+        new FileReader("testdata/startupworkout-inbox-hero-how-to-write-hypnotizing-emails.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals(
+        "If someone was able to travel back in time and tell me 10 years ago that email would "
+        + "still be fundamental to how we communicate today, I probably would have dropped "
+        + "everything I...",
+        article.getDescription());
+    assertEquals("Inbox Hero: How I Write Hypnotizing Emails That Convert Like Crazy",
+        article.getTitle());
+    assertEquals("http://startupworkout.com/wp-content/uploads/2015/01/"
+        + "how-to-write-great-emails.jpg", article.getImageUrl());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "If someone was able to travel back in time and tell me 10 years ago that email "
+            + "would still be fundamental to how we communicate today, I probably would have "
+            + "dropped everything I was doing and started working on inventing a holographic "
+            + "communicator HoloLens."));
+  }
+
+  @Test
+  public void testMediumArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "https://medium.com/@chrismessina/thoughts-on-google-8883844a9ca4",
+        new FileReader("testdata/medium-thoughts-on-google.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals("I fucked up. So has Google.", article.getDescription());
+    assertEquals("Thoughts on Google+", article.getTitle());
+    assertEquals("https://d262ilb51hltx0.cloudfront.net/max/800/1*eoQ_FC_sDMQ7WEs69OL7kw.jpeg",
+        article.getImageUrl());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "Want to hear me read this post? I’ve published a narration on Umano."));
+  }
+
+  @Test
+  public void testTechnologyReviewArticle() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://www.technologyreview.com/review/534581/the-purpose-of-silicon-valley/",
+        new FileReader("testdata/technologyreview-the-purpose-of-silicon-valley.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals("Capital and engineering talent have been flocking to seemingly "
+        + "trivial mobile apps. But would we really be better off if more startups "
+        + "instead went directly after big problems?", article.getDescription());
+    assertEquals("Letter from Silicon Valley: “This Town Used to Think Big”",
+        article.getTitle());
+    assertEquals("http://www.technologyreview.com/sites/default/files/images/"
+        + "review.siliconx392.jpg", article.getImageUrl());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).startsWith(
+            "The view from Mike Steep’s office on Palo Alto’s Coyote Hill is one "
+            + "of the greatest in Silicon Valley."));
   }
 }

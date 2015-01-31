@@ -115,8 +115,7 @@ public class Node {
   }
 
   /**
-   * Consolidates neighbor text children into single, trimmed text
-   * children.
+   * Consolidates neighboring text children.
    */
   public void condenseTextChildren() {
     int i = 0;
@@ -133,12 +132,7 @@ public class Node {
         children.set(i, sb.toString());
       }
       if (isChildTextNode(i)) {
-        String trimmedText = getChildText(i).trim();
-        if (trimmedText.length() == 0) {
-          children.remove(i);
-        } else {
-          children.set(i, trimmedText);
-        }
+        children.set(i, getChildText(i).replaceAll("\\s+", " "));
       }
       i++;
     }
@@ -219,26 +213,24 @@ public class Node {
    * spaces in between them.  Any tags (e.g. <a> hyperlinks) are dropped.
    */
   public String getFlattenedText() {
-    List<String> texts = new ArrayList<String>();
+    StringBuilder sb = new StringBuilder();
+    getFlattenedText(sb);
+    return sb.toString().trim();
+  }
+
+  private void getFlattenedText(StringBuilder sb) {
     for (int i = 0; i < getChildCount(); i++) {
       if (isChildTextNode(i)) {
-        texts.add(getChildText(i));
+        sb.append(getChildText(i));
       } else {
-        Node child = getChildNode(i);
-
         // Ignore scripts and styles - We only want text for humans.
-        if (child.getTagName().equalsIgnoreCase("script") ||
-            child.getTagName().equalsIgnoreCase("style")) {
-          continue;
-        }
-
-        String flattenedText = child.getFlattenedText();
-        if (flattenedText.length() > 0) {
-          texts.add(flattenedText);
+        Node child = getChildNode(i);
+        if (!child.getTagName().equalsIgnoreCase("script") &&
+            !child.getTagName().equalsIgnoreCase("style")) {
+          child.getFlattenedText(sb);
         }
       }
     }
-    return Joiner.on(" ").join(texts);
   }
 
   public String getId() {

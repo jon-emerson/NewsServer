@@ -44,9 +44,7 @@ public class Asserts {
   private static <X extends Exception> void throwException(String message, Class<X> clazz)
       throws X {
     try {
-      X x = clazz.getConstructor(String.class).newInstance(message);
-      x.printStackTrace(); // TODO(jonemerson): Probably remove this some day.
-      throw x;
+      throw clazz.getConstructor(String.class).newInstance(message);
     } catch (InstantiationException | IllegalAccessException
         | IllegalArgumentException | InvocationTargetException
         | NoSuchMethodException | SecurityException e) {

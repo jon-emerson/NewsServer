@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
@@ -70,6 +71,8 @@ public class ArticleUrlDetector {
       Pattern.compile("\\-[0-9]{5,8}$");
   private static final Pattern CURBED_PATH =
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9](\\/[0-3][0-9])?\\/[^\\/\\.]+\\.php$");
+  private static final Pattern FAST_COMPANY_PATH =
+      Pattern.compile("\\/3[0-9]{6}\\/.*");
   private static final Pattern LATIMES_PATH_1 =
       Pattern.compile("20[0-9]{2}[01][0-9][0-3][0-9]\\-"
           + "(column|htmlstory|story|storygallery)\\.html$");
@@ -77,12 +80,18 @@ public class ArticleUrlDetector {
       Pattern.compile(",[0-9]{6,10}\\.(column|htmlstory|story|storygallery)$");
   private static final Pattern MARKETS_CBSNEWS_PATH =
       Pattern.compile("^\\/[^\\/]+\\/[0-9a-f]{12,19}\\/");
+  private static final Pattern MEDIUM_PATH =
+      Pattern.compile("\\-[0-9a-z]{12}$");
   private static final Pattern MERCURY_NEWS_PATH =
       Pattern.compile("\\/ci_[0-9]{7,10}(\\/.*)?$");
   private static final Pattern PATH_ENDS_WITH_DASH_NUMBER =
       Pattern.compile("-[0-9]{5,10}$");
+  private static final Pattern RED_HERRING_PATH =
+      Pattern.compile("\\/[a-z]+\\/[^\\/]+-[^\\/]+\\/$");
   private static final Pattern SFGATE_PATH =
       Pattern.compile("\\/article.*(\\-|\\/)[0-9]{7,10}\\.php$");
+  private static final Pattern TECHNOLOGY_REVIEW_PATH =
+      Pattern.compile("\\/[a-z]+\\/[0-9]{5,7}\\/");
   private static final Pattern WASHINGTON_POST_PATH_1 =
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+(\\/|_story\\.html)$");
   private static final Pattern WASHINGTON_POST_PATH_2 =
@@ -191,6 +200,9 @@ public class ArticleUrlDetector {
     if (host.endsWith("curbed.com")) {
       return CURBED_PATH.matcher(path).find();
     }
+    if (host.endsWith("fastcompany.com")) {
+      return FAST_COMPANY_PATH.matcher(path).find();
+    }
     if (host.endsWith("latimes.com")) {
       return LATIMES_PATH_1.matcher(path).find() ||
           LATIMES_PATH_2.matcher(path).find();
@@ -198,20 +210,42 @@ public class ArticleUrlDetector {
     if (host.equals("markets.cbsnews.com")) {
       return MARKETS_CBSNEWS_PATH.matcher(path).find();
     }
+    if (host.endsWith("medium.com")) {
+      return MEDIUM_PATH.matcher(path).find();
+    }
     if (host.endsWith("mercurynews.com")) {
       return MERCURY_NEWS_PATH.matcher(path).find();
     }
     if (host.endsWith("recode.net")) {
       return DateParser.parseDateFromUrl(urlString, false) != null;
     }
+    if (host.endsWith("redherring.com")) {
+      return RED_HERRING_PATH.matcher(path).find() &&
+          !path.startsWith("/events/");
+    }
     if (host.endsWith("sfgate.com")) {
       return SFGATE_PATH.matcher(path).find() ||
           DateParser.parseDateFromUrl(urlString, false) != null;
+    }
+    if (host.endsWith("slate.com")) {
+      return (path.startsWith("/blogs/") || path.startsWith("/articles/"))
+          && !path.contains("/podcasts/")
+          && DateParser.parseDateFromUrl(urlString, true) != null
+          && path.endsWith(".html");
+    }
+    if (host.endsWith("startupworkout.com")) {
+      return StringUtils.countMatches(path, "-") > 2;
+    }
+    if (host.endsWith("technologyreview.com")) {
+      return TECHNOLOGY_REVIEW_PATH.matcher(path).find();
     }
     if (host.endsWith("washingtonpost.com")) {
       return WASHINGTON_POST_PATH_1.matcher(path).find() ||
           WASHINGTON_POST_PATH_2.matcher(path).find() ||
           YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
+    }
+    if (host.endsWith("wired.com")) {
+      return DateParser.parseDateFromUrl(urlString, true) != null;
     }
 
     return DateParser.parseDateFromUrl(urlString, false) != null;

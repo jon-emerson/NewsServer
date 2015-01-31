@@ -70,6 +70,7 @@ public class RssCrawler {
     "http://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
     "http://seattle.curbed.com/atom.xml",
     "http://sf.curbed.com/atom.xml",
+    "http://thenextweb.com/feed/",
     "http://www.abc.net.au/news/feed/45910/rss.xml", // "Top".
     "http://www.abc.net.au/news/feed/51120/rss.xml", // "Just in".
     "http://www.abc.net.au/news/feed/51892/rss.xml", // Business.
