@@ -1,11 +1,7 @@
 package com.janknspank.bizness;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -15,7 +11,6 @@ import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.database.QueryOption.LimitWithOffset;
-import com.janknspank.database.Serializer;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
