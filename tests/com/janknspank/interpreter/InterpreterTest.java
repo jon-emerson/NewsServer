@@ -23,7 +23,7 @@ public class InterpreterTest {
         .build());
 
     Article article = data.getArticle();
-    assertEquals("Katy Perry Shines at the Super Bowl", article.getTitle());
+    assertEquals("Katy Perry’s Halftime Show at the Super Bowl", article.getTitle());
     assertEquals("Given the agonizing over air pressure that has racked the N.F.L. in "
         + "recent weeks, it was appropriate that the halftime entertainment at Super Bowl "
         + "XLIX was Katy Perry, a queen of our deflated pop times.",
