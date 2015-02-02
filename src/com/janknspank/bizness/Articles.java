@@ -3,6 +3,9 @@ package com.janknspank.bizness;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.janknspank.common.TopList;
@@ -10,6 +13,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
+import com.janknspank.database.Serializer;
 import com.janknspank.database.QueryOption.LimitWithOffset;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.ArticleProto.Article;
@@ -116,6 +120,31 @@ public class Articles {
       taggedIndustries = TrainedArticleIndustries.getFromArticle(article.getUrlId());
     } while (!Iterables.isEmpty(taggedIndustries));
     return article;
+  }
+  
+  public static JSONObject serialize(Article article) {
+    JSONObject articleJson = Serializer.toJSON(article);
+
+    JSONArray firstParagraphsArray = new JSONArray();
+    int count = 0;
+    for (String paragraph : article.getParagraphList()) {
+      firstParagraphsArray.put(paragraph);
+      count++;
+      if (count >= 3) {
+        break;
+      }
+    }
+    articleJson.put("first_3_paragraphs", firstParagraphsArray);
+
+    return articleJson;
+  }
+  
+  public static JSONArray getParagraphs(Article article) {
+    JSONArray paragraphsArray = new JSONArray();
+    for (String paragraph : article.getParagraphList()) {
+      paragraphsArray.put(paragraph);
+    }
+    return paragraphsArray;
   }
 
   /** Helper method for creating the Article table. */

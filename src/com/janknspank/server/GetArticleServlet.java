@@ -3,14 +3,12 @@ package com.janknspank.server;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 
 public class GetArticleServlet extends StandardServlet {
@@ -20,14 +18,11 @@ public class GetArticleServlet extends StandardServlet {
       DatabaseRequestException, RequestException {
     try {
       Article article = Articles.getArticle(getRequiredParameter(req, "id"));
-      JSONObject articleJson = Serializer.toJSON(article);
+      JSONObject articleJson = Articles.serialize(article);
 
-      JSONArray paragraphsArray = new JSONArray();
-      for (String paragraph : article.getParagraphList()) {
-        paragraphsArray.put(paragraph);
-      }
-      articleJson.put("paragraphs", paragraphsArray);
-      
+      // Add full article text to the response
+      articleJson.put("paragraphs", Articles.getParagraphs(article));
+
       // Create response.
       JSONObject response = createSuccessResponse();
       response.put("article", articleJson);
