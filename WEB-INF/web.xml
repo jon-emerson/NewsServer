@@ -145,4 +145,13 @@
     <url-pattern>/viewFeed</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>GetArticleServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetArticleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetArticleServlet</servlet-name>
+    <url-pattern>/getArticle</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
