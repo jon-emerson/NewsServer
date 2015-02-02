@@ -1,4 +1,4 @@
-package com.janknspank.bizness;
+package com.janknspank.interpreter;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,9 +9,6 @@ import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 
-import com.janknspank.database.Database;
-import com.janknspank.database.DatabaseRequestException;
-import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.restfb.DefaultFacebookClient;
@@ -25,8 +22,7 @@ import com.restfb.json.JsonObject;
 public class FacebookData {
   private static FacebookClient __facebookClient = null;
 
-  public static SocialEngagement getEngagementForURL(String url) throws BiznessException {
-    SocialEngagement engagement = null;
+  public static SocialEngagement getEngagementForURL(String url) throws FacebookException {
     try {
       // Example urlObject: http://goo.gl/JVf3tt
       String encodedURL;
@@ -41,7 +37,7 @@ public class FacebookData {
       // Get shares and comments
       if (!urlObject.has("share")) {
         // There is no engagement if the share object is missing
-        engagement = SocialEngagement.newBuilder()
+        return SocialEngagement.newBuilder()
             .setSite(Site.FACEBOOK)
             .setLikeCount(0)
             .setShareCount(0)
@@ -64,7 +60,7 @@ public class FacebookData {
             .getJsonObject("summary")
             .getInt("total_count");
 
-        engagement = SocialEngagement.newBuilder()
+        return SocialEngagement.newBuilder()
             .setSite(Site.FACEBOOK)
             .setLikeCount(likeCount)
             .setShareCount(shareCount)
@@ -74,24 +70,15 @@ public class FacebookData {
       }
     } catch (FacebookOAuthException e) {
       e.printStackTrace();
-      throw new BiznessException("Can't get FB engagement for url "
+      throw new FacebookException("Can't get FB engagement for url "
           + url + ": " + e.getMessage(), e);
     } catch (JsonException e) {
       e.printStackTrace();
-      throw new BiznessException("Can't parse Facebook JSON: " + e.getMessage(), e);
+      throw new FacebookException("Can't parse Facebook JSON: " + e.getMessage(), e);
     }
-
-    // Save the engagement object
-    try {
-      Database.insert(engagement);
-    } catch (DatabaseSchemaException | DatabaseRequestException e) {
-      throw new BiznessException("Error inserting facebook engagement:" + e.getMessage(), e);
-    }
-
-    return engagement;
   }
 
-  private static FacebookClient getFacebookClient() throws BiznessException {
+  private static FacebookClient getFacebookClient() throws FacebookException {
     if (__facebookClient == null) {
       Properties properties = getFacebookProperties();
       String appSecret = properties.getProperty("appSecret");
@@ -102,7 +89,7 @@ public class FacebookData {
     return __facebookClient;
   }
 
-  private static Properties getFacebookProperties() throws BiznessException {
+  private static Properties getFacebookProperties() throws FacebookException {
     Properties properties = new Properties();
     InputStream inputStream = null;
     try {
@@ -110,7 +97,7 @@ public class FacebookData {
       properties.load(inputStream);
       return properties;
     } catch (IOException e) {
-      throw new BiznessException("Could not read facebook.properties: " + e.getMessage(), e);
+      throw new FacebookException("Could not read facebook.properties: " + e.getMessage(), e);
     } finally {
       IOUtils.closeQuietly(inputStream);
     }

@@ -15,8 +15,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.Articles;
-import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.IndustryCodes;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.EnumsProto.IndustryCode;
@@ -24,16 +22,16 @@ import com.janknspank.proto.EnumsProto.IndustryCode;
 public class IndustryVector {
   private static final String INDUSTRIES_DIRECTORY = "classifier";
 
-  public static Vector get(int industryCodeId) throws BiznessException {
+  public static Vector get(int industryCodeId) throws ClassifierException {
     return get(IndustryCodes.getFromIndustryCodeId(industryCodeId));
   }
 
-  public static Vector get(IndustryCode industryCode) throws BiznessException {
+  public static Vector get(IndustryCode industryCode) throws ClassifierException {
     return Vector.fromFile(getVectorFileForIndustry(industryCode));
   }
 
   private static void createVectorForIndustryCode(IndustryCode industryCode)
-      throws BiznessException, DatabaseSchemaException {
+      throws ClassifierException, DatabaseSchemaException {
     // 1. Get seed words for industryCode.id
     System.out.println("Reading keywords for " + industryCode.getId() + ", \""
         + industryCode.getDescription() + "\"...");
@@ -69,15 +67,15 @@ public class IndustryVector {
     return new File(getDirectoryForIndustry(industryCode), "/seed.list");
   }
 
-  private static Set<String> getSeedWords(IndustryCode industryCode) throws BiznessException {
+  private static Set<String> getSeedWords(IndustryCode industryCode) throws ClassifierException {
     File seedWordFile = getSeedWordFileForIndustry(industryCode);
     if (!seedWordFile.exists()) {
-      throw new BiznessException("No seed words found for industry: " + industryCode.getId());
+      throw new ClassifierException("No seed words found for industry: " + industryCode.getId());
     }
     try {
       return readWords(seedWordFile);
     } catch (IOException e) {
-      throw new BiznessException("Couldn't get seed words from file: " + e.getMessage(), e);
+      throw new ClassifierException("Couldn't get seed words from file: " + e.getMessage(), e);
     }
   }
 
@@ -103,7 +101,7 @@ public class IndustryVector {
     return blacklist;
   }
 
-  private static Set<String> getBlacklist(IndustryCode industryCode) throws BiznessException {
+  private static Set<String> getBlacklist(IndustryCode industryCode) throws ClassifierException {
     File blacklistFile = new File(getDirectoryForIndustry(industryCode), "/black.list");
     if (!blacklistFile.exists()) {
       return ImmutableSet.of();
@@ -111,7 +109,7 @@ public class IndustryVector {
     try {
       return readWords(blacklistFile);
     } catch (IOException e) {
-      throw new BiznessException("Couldn't get blacklist words from file: " + e.getMessage(), e);
+      throw new ClassifierException("Couldn't get blacklist words from file: " + e.getMessage(), e);
     }
   }
 

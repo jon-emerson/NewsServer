@@ -7,6 +7,7 @@ import java.util.Map;
 import com.google.api.client.repackaged.com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.janknspank.classifier.IndustryCodes;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;

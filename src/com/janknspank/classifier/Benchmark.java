@@ -13,8 +13,6 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 
 import com.google.common.base.Charsets;
-import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.IndustryCodes;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleIndustry;
@@ -27,7 +25,7 @@ public class Benchmark {
    * @throws DataInternalException
    * @throws IOException
    */
-  public static void benchmark(int industryCodeId) throws BiznessException {
+  public static void benchmark(int industryCodeId) throws ClassifierException {
     IndustryCode industryCode = IndustryCodes.INDUSTRY_CODE_MAP.get(industryCodeId);
 
     // Load up the good and bad articles.
@@ -58,12 +56,13 @@ public class Benchmark {
   }
 
   private static Map<Article, Double> getSimilaritiesForArticles(
-      Iterable<Article> articles, IndustryCode industryCode) throws BiznessException {
-    IndustryClassifier classifier = IndustryClassifier.getInstance();
+      Iterable<Article> articles, IndustryCode industryCode) throws ClassifierException {
+    IndustryClassifier industryClassifier = IndustryClassifier.getInstance();
     Map<Article, Double> articleSimilarities = new HashMap<>();
 
     for (Article article : articles) {
-      ArticleIndustry classification = classifier.classifyForIndustry(article, industryCode);
+      ArticleIndustry classification =
+          industryClassifier.classifyForIndustry(article, industryCode);
       articleSimilarities.put(article, classification.getSimilarity());
     }
 
@@ -131,7 +130,7 @@ public class Benchmark {
   }
 
   private static Iterable<Article> generateArticlesFromDirectory(String directoryPath)
-      throws BiznessException {
+      throws ClassifierException {
     File articlesDirectory = new File(directoryPath);
     String[] articleFileNames = articlesDirectory.list();
     List<Article> articles = new ArrayList<>();
@@ -140,7 +139,7 @@ public class Benchmark {
       try {
         articles.add(generateArticleFromPath(new File(articleFullPath)));
       } catch (IOException e) {
-        throw new BiznessException("Can't generate article from path "
+        throw new ClassifierException("Can't generate article from path "
             + articleFullPath + ": " + e.getMessage(), e);
       }
     }
@@ -207,7 +206,7 @@ public class Benchmark {
    * articles perform the way they do in other parts of the system.
    */
   private static void writeArticleVectorsToFile(Iterable<Article> articles, String path)
-      throws BiznessException {
+      throws ClassifierException {
     FileOutputStream outputStream = null;
     try {
       new File(path).mkdir();
@@ -220,7 +219,7 @@ public class Benchmark {
                 Charsets.UTF_8);
       }
     } catch (IOException e) {
-      throw new BiznessException("Could not write article text vector: " + e.getMessage(), e);
+      throw new ClassifierException("Could not write article text vector: " + e.getMessage(), e);
     } finally {
       IOUtils.closeQuietly(outputStream);
     }
@@ -249,7 +248,7 @@ public class Benchmark {
    * Called by benchmark.sh.
    * @param args an array of industry code Ids (ex. 6 for Internet) to benchmark
    */
-  public static void main(String[] args) throws NumberFormatException, BiznessException {
+  public static void main(String[] args) throws Exception {
     // Args are the industries code ids to benchmark
     if (args.length == 0) {
       System.out.println("ERROR: You must pass industry IDs as parameters.");

@@ -24,7 +24,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Sets;
-import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.Asserts;
 import com.janknspank.interpreter.KeywordFinder;
 import com.janknspank.interpreter.KeywordUtils;
@@ -144,25 +143,25 @@ public class Vector {
     }
   }
 
-  public static Vector fromFile(File vectorFile) throws BiznessException {
+  public static Vector fromFile(File vectorFile) throws ClassifierException {
     InputStream inputStream = null;
     try {
       inputStream = new GZIPInputStream(new FileInputStream(vectorFile));
       return new Vector(VectorData.parseFrom(inputStream));
     } catch (IOException e) {
-      throw new BiznessException("Could not read file: " + e.getMessage(), e);
+      throw new ClassifierException("Could not read file: " + e.getMessage(), e);
     } finally {
       IOUtils.closeQuietly(inputStream);
     }
   }
 
-  public void writeToFile(File vectorFile) throws BiznessException {
+  public void writeToFile(File vectorFile) throws ClassifierException {
     OutputStream outputStream = null;
     try {
       outputStream = new GZIPOutputStream(new FileOutputStream(vectorFile));
       toVectorData().writeTo(outputStream);
     } catch (IOException e) {
-      throw new BiznessException("Could not write file: " + e.getMessage(), e);
+      throw new ClassifierException("Could not write file: " + e.getMessage(), e);
     } finally {
       IOUtils.closeQuietly(outputStream);
     }

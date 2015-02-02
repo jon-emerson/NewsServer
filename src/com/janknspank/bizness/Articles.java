@@ -23,13 +23,6 @@ import com.janknspank.rank.Scorer;
  * database.
  */
 public class Articles {
-  public static final int MAX_TITLE_LENGTH =
-      Database.getStringLength(Article.class, "title");
-  public static final int MAX_PARAGRAPH_LENGTH =
-      Database.getStringLength(Article.class, "paragraph");
-  public static final int MAX_DESCRIPTION_LENGTH =
-      Database.getStringLength(Article.class, "description");
-
   /**
    * Gets articles that contain a set of keywords
    * @throws DataInternalException 

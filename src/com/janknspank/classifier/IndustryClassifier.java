@@ -3,8 +3,6 @@ package com.janknspank.classifier;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.IndustryCodes;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.ArticleIndustry;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
@@ -25,7 +23,7 @@ public class IndustryClassifier {
         } else {
           industryVectors.put(industryCode, industryVector);
         }
-      } catch (BiznessException e) {
+      } catch (ClassifierException e) {
         // It's OK, just ignore this vector for now.
       }
     }
@@ -41,7 +39,7 @@ public class IndustryClassifier {
   /**
    * Returns a list of article industry classifications.
    */
-  public Iterable<ArticleIndustry> classify(ArticleOrBuilder article) throws BiznessException {
+  public Iterable<ArticleIndustry> classify(ArticleOrBuilder article) throws ClassifierException {
     // Compute classifications from scratch against IndustryVectors
     TopList<ArticleIndustry, Double> classifications = new TopList<>(5);
     for (IndustryCode industryCode : industryVectors.keySet()) {
@@ -52,15 +50,14 @@ public class IndustryClassifier {
   }
 
   public ArticleIndustry classifyForIndustry(
-      ArticleOrBuilder article, IndustryCode industryCode) throws BiznessException {
+      ArticleOrBuilder article, IndustryCode industryCode) throws ClassifierException {
     Vector vector = IndustryVector.get(industryCode);
     Vector articleVector = new Vector(article);
     double similarity = articleVector.getCosineSimilarity(UniverseVector.getInstance(), vector);
-    ArticleIndustry classification =
-        ArticleIndustry.newBuilder()
-            .setIndustryCodeId(industryCode.getId())
-            .setSimilarity(similarity)
-            .build();
+    ArticleIndustry classification = ArticleIndustry.newBuilder()
+        .setIndustryCodeId(industryCode.getId())
+        .setSimilarity(similarity)
+        .build();
     return classification;
   }
 }

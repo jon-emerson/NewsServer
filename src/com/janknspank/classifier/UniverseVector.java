@@ -6,7 +6,6 @@ import java.util.List;
 import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.Articles;
-import com.janknspank.bizness.BiznessException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 
@@ -21,7 +20,7 @@ public class UniverseVector {
 
   private UniverseVector() {}
 
-  public static Vector getInstance() throws BiznessException {
+  public static Vector getInstance() throws ClassifierException {
     if (universeVector == null) {
       universeVector = Vector.fromFile(UNIVERSE_VECTOR_FILE);
     }

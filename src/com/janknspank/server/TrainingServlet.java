@@ -16,7 +16,7 @@ import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.ArticleTypeCodes;
 import com.janknspank.bizness.Articles;
-import com.janknspank.bizness.IndustryCodes;
+import com.janknspank.classifier.IndustryCodes;
 import com.janknspank.common.Asserts;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;

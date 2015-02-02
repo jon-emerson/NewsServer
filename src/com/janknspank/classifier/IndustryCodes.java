@@ -1,4 +1,4 @@
-package com.janknspank.bizness;
+package com.janknspank.classifier;
 
 import java.util.ArrayList;
 import java.util.List;

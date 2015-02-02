@@ -18,10 +18,10 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.janknspank.bizness.Articles;
-import com.janknspank.bizness.BiznessException;
+import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.IndustryClassifier;
 import com.janknspank.common.DateParser;
+import com.janknspank.database.Database;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.ArticleProto.Article;
@@ -32,6 +32,12 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
           .maximumSize(10)
           .expireAfterWrite(10, TimeUnit.MINUTES)
           .build(new ArticleCreator());
+  private static final int MAX_TITLE_LENGTH =
+      Database.getStringLength(Article.class, "title");
+  private static final int MAX_PARAGRAPH_LENGTH =
+      Database.getStringLength(Article.class, "paragraph");
+  private static final int MAX_DESCRIPTION_LENGTH =
+      Database.getStringLength(Article.class, "description");
   private static final IndustryClassifier INDUSTRY_CLASSIFIER = IndustryClassifier.getInstance();
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
@@ -116,7 +122,12 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     }
     try {
       articleBuilder.addAllIndustry(INDUSTRY_CLASSIFIER.classify(articleBuilder));
-    } catch (BiznessException e) {
+    } catch (ClassifierException e) {
+      e.printStackTrace();
+    }
+    try {
+      articleBuilder.addSocialEngagement(FacebookData.getEngagementForURL(documentNode.getUrl()));
+    } catch (FacebookException e) {
       e.printStackTrace();
     }
 
@@ -157,9 +168,9 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       }
     }
 
-    if (description.length() > Articles.MAX_DESCRIPTION_LENGTH) {
+    if (description.length() > MAX_DESCRIPTION_LENGTH) {
       System.out.println("Warning: Trimming description for url " + documentNode.getUrl());
-      description = description.substring(0, Articles.MAX_DESCRIPTION_LENGTH - 1) + "\u2026";
+      description = description.substring(0, MAX_DESCRIPTION_LENGTH - 1) + "\u2026";
     }
 
     return description;
@@ -360,8 +371,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
         title = title.substring(0, title.length() - matcher.group().length());
       }
     }
-    if (title.length() > Articles.MAX_TITLE_LENGTH) {
-      title = title.substring(0, Articles.MAX_TITLE_LENGTH - 1) + "\u2026";
+    if (title.length() > MAX_TITLE_LENGTH) {
+      title = title.substring(0, MAX_TITLE_LENGTH - 1) + "\u2026";
     }
     return title;
   }
@@ -399,10 +410,10 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
           @Override
           public String apply(Node paragraphNode) {
             String text = paragraphNode.getFlattenedText();
-            if (text.length() > Articles.MAX_PARAGRAPH_LENGTH) {
+            if (text.length() > MAX_PARAGRAPH_LENGTH) {
               System.out.println("Warning: Trimming paragraph text on " +
                   documentNode.getUrl());
-              text = text.substring(0, Articles.MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
+              text = text.substring(0, MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
             }
             return text;
           }
