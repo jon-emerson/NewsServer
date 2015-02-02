@@ -119,9 +119,13 @@ public class Vector {
     for (ArticleOrBuilder article : articles) {
       Set<String> articleWords = Sets.newHashSet();
       for (String paragraph : article.getParagraphList()) {
+        String[] additionalPhrases = new String[] {
+            article.getTitle(),
+            article.getDescription(),
+            article.getAuthor()
+        };
         for (String sentence : ObjectArrays.concat(
-            KeywordFinder.getSentences(paragraph),
-            article.getTitle())) {
+            KeywordFinder.getSentences(paragraph), additionalPhrases, String.class)) {
           for (String word : KeywordFinder.getTokens(sentence)) {
             if (word != null && !stopWords.contains(word)) {
               word = KeywordUtils.cleanKeyword(word);
