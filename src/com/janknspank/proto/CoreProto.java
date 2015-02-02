@@ -5372,57 +5372,116 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:Entity)
   }
 
-  public interface WordDocumentFrequencyOrBuilder
+  public interface VectorDataOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional string word = 1;
+    // optional int32 document_count = 1;
     /**
-     * <code>optional string word = 1;</code>
+     * <code>optional int32 document_count = 1;</code>
+     *
+     * <pre>
+     * The total number of documents used in creating this vector.
+     * </pre>
      */
-    boolean hasWord();
+    boolean hasDocumentCount();
     /**
-     * <code>optional string word = 1;</code>
+     * <code>optional int32 document_count = 1;</code>
+     *
+     * <pre>
+     * The total number of documents used in creating this vector.
+     * </pre>
      */
-    java.lang.String getWord();
-    /**
-     * <code>optional string word = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getWordBytes();
+    int getDocumentCount();
 
-    // optional int64 frequency = 2;
+    // optional int32 word_count = 2;
     /**
-     * <code>optional int64 frequency = 2;</code>
+     * <code>optional int32 word_count = 2;</code>
+     *
+     * <pre>
+     * This is the total word count for documents in this vector.
+     * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
+     * words are not included in WordFrequencies.  But they are included here.
+     * </pre>
      */
-    boolean hasFrequency();
+    boolean hasWordCount();
     /**
-     * <code>optional int64 frequency = 2;</code>
+     * <code>optional int32 word_count = 2;</code>
+     *
+     * <pre>
+     * This is the total word count for documents in this vector.
+     * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
+     * words are not included in WordFrequencies.  But they are included here.
+     * </pre>
      */
-    long getFrequency();
+    int getWordCount();
+
+    // optional int32 unique_word_count = 3;
+    /**
+     * <code>optional int32 unique_word_count = 3;</code>
+     *
+     * <pre>
+     * Total unique word count for documents in this vector, including stop words.
+     * </pre>
+     */
+    boolean hasUniqueWordCount();
+    /**
+     * <code>optional int32 unique_word_count = 3;</code>
+     *
+     * <pre>
+     * Total unique word count for documents in this vector, including stop words.
+     * </pre>
+     */
+    int getUniqueWordCount();
+
+    // repeated .VectorData.WordFrequency word_frequency = 4;
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> 
+        getWordFrequencyList();
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    com.janknspank.proto.CoreProto.VectorData.WordFrequency getWordFrequency(int index);
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    int getWordFrequencyCount();
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> 
+        getWordFrequencyOrBuilderList();
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder getWordFrequencyOrBuilder(
+        int index);
   }
   /**
-   * Protobuf type {@code WordDocumentFrequency}
+   * Protobuf type {@code VectorData}
    *
    * <pre>
-   * The DF part of TF-IDF
+   * A word frequency vector - Could be specific to a document, or could represent
+   * the entire corpus.
    * </pre>
    */
-  public static final class WordDocumentFrequency extends
+  public static final class VectorData extends
       com.google.protobuf.GeneratedMessage
-      implements WordDocumentFrequencyOrBuilder {
-    // Use WordDocumentFrequency.newBuilder() to construct.
-    private WordDocumentFrequency(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements VectorDataOrBuilder {
+    // Use VectorData.newBuilder() to construct.
+    private VectorData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private WordDocumentFrequency(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private VectorData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final WordDocumentFrequency defaultInstance;
-    public static WordDocumentFrequency getDefaultInstance() {
+    private static final VectorData defaultInstance;
+    public static VectorData getDefaultInstance() {
       return defaultInstance;
     }
 
-    public WordDocumentFrequency getDefaultInstanceForType() {
+    public VectorData getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -5432,7 +5491,7 @@ public final class CoreProto {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private WordDocumentFrequency(
+    private VectorData(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5455,14 +5514,27 @@ public final class CoreProto {
               }
               break;
             }
-            case 10: {
+            case 8: {
               bitField0_ |= 0x00000001;
-              word_ = input.readBytes();
+              documentCount_ = input.readInt32();
               break;
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              frequency_ = input.readInt64();
+              wordCount_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              uniqueWordCount_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                wordFrequency_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.VectorData.WordFrequency>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              wordFrequency_.add(input.readMessage(com.janknspank.proto.CoreProto.VectorData.WordFrequency.PARSER, extensionRegistry));
               break;
             }
           }
@@ -5473,100 +5545,879 @@ public final class CoreProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          wordFrequency_ = java.util.Collections.unmodifiableList(wordFrequency_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.janknspank.proto.CoreProto.internal_static_WordDocumentFrequency_descriptor;
+      return com.janknspank.proto.CoreProto.internal_static_VectorData_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.janknspank.proto.CoreProto.internal_static_WordDocumentFrequency_fieldAccessorTable
+      return com.janknspank.proto.CoreProto.internal_static_VectorData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.CoreProto.WordDocumentFrequency.class, com.janknspank.proto.CoreProto.WordDocumentFrequency.Builder.class);
+              com.janknspank.proto.CoreProto.VectorData.class, com.janknspank.proto.CoreProto.VectorData.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<WordDocumentFrequency> PARSER =
-        new com.google.protobuf.AbstractParser<WordDocumentFrequency>() {
-      public WordDocumentFrequency parsePartialFrom(
+    public static com.google.protobuf.Parser<VectorData> PARSER =
+        new com.google.protobuf.AbstractParser<VectorData>() {
+      public VectorData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WordDocumentFrequency(input, extensionRegistry);
+        return new VectorData(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<WordDocumentFrequency> getParserForType() {
+    public com.google.protobuf.Parser<VectorData> getParserForType() {
       return PARSER;
     }
 
-    private int bitField0_;
-    // optional string word = 1;
-    public static final int WORD_FIELD_NUMBER = 1;
-    private java.lang.Object word_;
+    public interface WordFrequencyOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional string word = 1;
+      /**
+       * <code>optional string word = 1;</code>
+       */
+      boolean hasWord();
+      /**
+       * <code>optional string word = 1;</code>
+       */
+      java.lang.String getWord();
+      /**
+       * <code>optional string word = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getWordBytes();
+
+      // optional int32 frequency = 2;
+      /**
+       * <code>optional int32 frequency = 2;</code>
+       *
+       * <pre>
+       * A count of every time this word has existed in any document in this
+       * vector.
+       * </pre>
+       */
+      boolean hasFrequency();
+      /**
+       * <code>optional int32 frequency = 2;</code>
+       *
+       * <pre>
+       * A count of every time this word has existed in any document in this
+       * vector.
+       * </pre>
+       */
+      int getFrequency();
+
+      // optional int32 document_occurences = 3;
+      /**
+       * <code>optional int32 document_occurences = 3;</code>
+       *
+       * <pre>
+       * The number of documents this word appears in.  E.g. if "hello" occurs
+       * in one document twice, and another document only once, its 
+       * document_occurences value would be 2.
+       * </pre>
+       */
+      boolean hasDocumentOccurences();
+      /**
+       * <code>optional int32 document_occurences = 3;</code>
+       *
+       * <pre>
+       * The number of documents this word appears in.  E.g. if "hello" occurs
+       * in one document twice, and another document only once, its 
+       * document_occurences value would be 2.
+       * </pre>
+       */
+      int getDocumentOccurences();
+    }
     /**
-     * <code>optional string word = 1;</code>
+     * Protobuf type {@code VectorData.WordFrequency}
      */
-    public boolean hasWord() {
+    public static final class WordFrequency extends
+        com.google.protobuf.GeneratedMessage
+        implements WordFrequencyOrBuilder {
+      // Use WordFrequency.newBuilder() to construct.
+      private WordFrequency(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private WordFrequency(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final WordFrequency defaultInstance;
+      public static WordFrequency getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public WordFrequency getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private WordFrequency(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                word_ = input.readBytes();
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000002;
+                frequency_ = input.readInt32();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                documentOccurences_ = input.readInt32();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_VectorData_WordFrequency_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_VectorData_WordFrequency_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.VectorData.WordFrequency.class, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<WordFrequency> PARSER =
+          new com.google.protobuf.AbstractParser<WordFrequency>() {
+        public WordFrequency parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new WordFrequency(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<WordFrequency> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // optional string word = 1;
+      public static final int WORD_FIELD_NUMBER = 1;
+      private java.lang.Object word_;
+      /**
+       * <code>optional string word = 1;</code>
+       */
+      public boolean hasWord() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string word = 1;</code>
+       */
+      public java.lang.String getWord() {
+        java.lang.Object ref = word_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            word_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string word = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getWordBytes() {
+        java.lang.Object ref = word_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          word_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional int32 frequency = 2;
+      public static final int FREQUENCY_FIELD_NUMBER = 2;
+      private int frequency_;
+      /**
+       * <code>optional int32 frequency = 2;</code>
+       *
+       * <pre>
+       * A count of every time this word has existed in any document in this
+       * vector.
+       * </pre>
+       */
+      public boolean hasFrequency() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 frequency = 2;</code>
+       *
+       * <pre>
+       * A count of every time this word has existed in any document in this
+       * vector.
+       * </pre>
+       */
+      public int getFrequency() {
+        return frequency_;
+      }
+
+      // optional int32 document_occurences = 3;
+      public static final int DOCUMENT_OCCURENCES_FIELD_NUMBER = 3;
+      private int documentOccurences_;
+      /**
+       * <code>optional int32 document_occurences = 3;</code>
+       *
+       * <pre>
+       * The number of documents this word appears in.  E.g. if "hello" occurs
+       * in one document twice, and another document only once, its 
+       * document_occurences value would be 2.
+       * </pre>
+       */
+      public boolean hasDocumentOccurences() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 document_occurences = 3;</code>
+       *
+       * <pre>
+       * The number of documents this word appears in.  E.g. if "hello" occurs
+       * in one document twice, and another document only once, its 
+       * document_occurences value would be 2.
+       * </pre>
+       */
+      public int getDocumentOccurences() {
+        return documentOccurences_;
+      }
+
+      private void initFields() {
+        word_ = "";
+        frequency_ = 0;
+        documentOccurences_ = 0;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getWordBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeInt32(2, frequency_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(3, documentOccurences_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getWordBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(2, frequency_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, documentOccurences_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.VectorData.WordFrequency parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CoreProto.VectorData.WordFrequency prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code VectorData.WordFrequency}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CoreProto.internal_static_VectorData_WordFrequency_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CoreProto.internal_static_VectorData_WordFrequency_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CoreProto.VectorData.WordFrequency.class, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CoreProto.VectorData.WordFrequency.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          word_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          frequency_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          documentOccurences_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CoreProto.internal_static_VectorData_WordFrequency_descriptor;
+        }
+
+        public com.janknspank.proto.CoreProto.VectorData.WordFrequency getDefaultInstanceForType() {
+          return com.janknspank.proto.CoreProto.VectorData.WordFrequency.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CoreProto.VectorData.WordFrequency build() {
+          com.janknspank.proto.CoreProto.VectorData.WordFrequency result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CoreProto.VectorData.WordFrequency buildPartial() {
+          com.janknspank.proto.CoreProto.VectorData.WordFrequency result = new com.janknspank.proto.CoreProto.VectorData.WordFrequency(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.word_ = word_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.frequency_ = frequency_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.documentOccurences_ = documentOccurences_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CoreProto.VectorData.WordFrequency) {
+            return mergeFrom((com.janknspank.proto.CoreProto.VectorData.WordFrequency)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CoreProto.VectorData.WordFrequency other) {
+          if (other == com.janknspank.proto.CoreProto.VectorData.WordFrequency.getDefaultInstance()) return this;
+          if (other.hasWord()) {
+            bitField0_ |= 0x00000001;
+            word_ = other.word_;
+            onChanged();
+          }
+          if (other.hasFrequency()) {
+            setFrequency(other.getFrequency());
+          }
+          if (other.hasDocumentOccurences()) {
+            setDocumentOccurences(other.getDocumentOccurences());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CoreProto.VectorData.WordFrequency parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CoreProto.VectorData.WordFrequency) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional string word = 1;
+        private java.lang.Object word_ = "";
+        /**
+         * <code>optional string word = 1;</code>
+         */
+        public boolean hasWord() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional string word = 1;</code>
+         */
+        public java.lang.String getWord() {
+          java.lang.Object ref = word_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            word_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string word = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getWordBytes() {
+          java.lang.Object ref = word_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            word_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string word = 1;</code>
+         */
+        public Builder setWord(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          word_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string word = 1;</code>
+         */
+        public Builder clearWord() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          word_ = getDefaultInstance().getWord();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string word = 1;</code>
+         */
+        public Builder setWordBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          word_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 frequency = 2;
+        private int frequency_ ;
+        /**
+         * <code>optional int32 frequency = 2;</code>
+         *
+         * <pre>
+         * A count of every time this word has existed in any document in this
+         * vector.
+         * </pre>
+         */
+        public boolean hasFrequency() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional int32 frequency = 2;</code>
+         *
+         * <pre>
+         * A count of every time this word has existed in any document in this
+         * vector.
+         * </pre>
+         */
+        public int getFrequency() {
+          return frequency_;
+        }
+        /**
+         * <code>optional int32 frequency = 2;</code>
+         *
+         * <pre>
+         * A count of every time this word has existed in any document in this
+         * vector.
+         * </pre>
+         */
+        public Builder setFrequency(int value) {
+          bitField0_ |= 0x00000002;
+          frequency_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 frequency = 2;</code>
+         *
+         * <pre>
+         * A count of every time this word has existed in any document in this
+         * vector.
+         * </pre>
+         */
+        public Builder clearFrequency() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          frequency_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 document_occurences = 3;
+        private int documentOccurences_ ;
+        /**
+         * <code>optional int32 document_occurences = 3;</code>
+         *
+         * <pre>
+         * The number of documents this word appears in.  E.g. if "hello" occurs
+         * in one document twice, and another document only once, its 
+         * document_occurences value would be 2.
+         * </pre>
+         */
+        public boolean hasDocumentOccurences() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional int32 document_occurences = 3;</code>
+         *
+         * <pre>
+         * The number of documents this word appears in.  E.g. if "hello" occurs
+         * in one document twice, and another document only once, its 
+         * document_occurences value would be 2.
+         * </pre>
+         */
+        public int getDocumentOccurences() {
+          return documentOccurences_;
+        }
+        /**
+         * <code>optional int32 document_occurences = 3;</code>
+         *
+         * <pre>
+         * The number of documents this word appears in.  E.g. if "hello" occurs
+         * in one document twice, and another document only once, its 
+         * document_occurences value would be 2.
+         * </pre>
+         */
+        public Builder setDocumentOccurences(int value) {
+          bitField0_ |= 0x00000004;
+          documentOccurences_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 document_occurences = 3;</code>
+         *
+         * <pre>
+         * The number of documents this word appears in.  E.g. if "hello" occurs
+         * in one document twice, and another document only once, its 
+         * document_occurences value would be 2.
+         * </pre>
+         */
+        public Builder clearDocumentOccurences() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          documentOccurences_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:VectorData.WordFrequency)
+      }
+
+      static {
+        defaultInstance = new WordFrequency(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:VectorData.WordFrequency)
+    }
+
+    private int bitField0_;
+    // optional int32 document_count = 1;
+    public static final int DOCUMENT_COUNT_FIELD_NUMBER = 1;
+    private int documentCount_;
+    /**
+     * <code>optional int32 document_count = 1;</code>
+     *
+     * <pre>
+     * The total number of documents used in creating this vector.
+     * </pre>
+     */
+    public boolean hasDocumentCount() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string word = 1;</code>
+     * <code>optional int32 document_count = 1;</code>
+     *
+     * <pre>
+     * The total number of documents used in creating this vector.
+     * </pre>
      */
-    public java.lang.String getWord() {
-      java.lang.Object ref = word_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          word_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string word = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getWordBytes() {
-      java.lang.Object ref = word_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        word_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getDocumentCount() {
+      return documentCount_;
     }
 
-    // optional int64 frequency = 2;
-    public static final int FREQUENCY_FIELD_NUMBER = 2;
-    private long frequency_;
+    // optional int32 word_count = 2;
+    public static final int WORD_COUNT_FIELD_NUMBER = 2;
+    private int wordCount_;
     /**
-     * <code>optional int64 frequency = 2;</code>
+     * <code>optional int32 word_count = 2;</code>
+     *
+     * <pre>
+     * This is the total word count for documents in this vector.
+     * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
+     * words are not included in WordFrequencies.  But they are included here.
+     * </pre>
      */
-    public boolean hasFrequency() {
+    public boolean hasWordCount() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int64 frequency = 2;</code>
+     * <code>optional int32 word_count = 2;</code>
+     *
+     * <pre>
+     * This is the total word count for documents in this vector.
+     * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
+     * words are not included in WordFrequencies.  But they are included here.
+     * </pre>
      */
-    public long getFrequency() {
-      return frequency_;
+    public int getWordCount() {
+      return wordCount_;
+    }
+
+    // optional int32 unique_word_count = 3;
+    public static final int UNIQUE_WORD_COUNT_FIELD_NUMBER = 3;
+    private int uniqueWordCount_;
+    /**
+     * <code>optional int32 unique_word_count = 3;</code>
+     *
+     * <pre>
+     * Total unique word count for documents in this vector, including stop words.
+     * </pre>
+     */
+    public boolean hasUniqueWordCount() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 unique_word_count = 3;</code>
+     *
+     * <pre>
+     * Total unique word count for documents in this vector, including stop words.
+     * </pre>
+     */
+    public int getUniqueWordCount() {
+      return uniqueWordCount_;
+    }
+
+    // repeated .VectorData.WordFrequency word_frequency = 4;
+    public static final int WORD_FREQUENCY_FIELD_NUMBER = 4;
+    private java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> wordFrequency_;
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    public java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> getWordFrequencyList() {
+      return wordFrequency_;
+    }
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> 
+        getWordFrequencyOrBuilderList() {
+      return wordFrequency_;
+    }
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    public int getWordFrequencyCount() {
+      return wordFrequency_.size();
+    }
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    public com.janknspank.proto.CoreProto.VectorData.WordFrequency getWordFrequency(int index) {
+      return wordFrequency_.get(index);
+    }
+    /**
+     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     */
+    public com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder getWordFrequencyOrBuilder(
+        int index) {
+      return wordFrequency_.get(index);
     }
 
     private void initFields() {
-      word_ = "";
-      frequency_ = 0L;
+      documentCount_ = 0;
+      wordCount_ = 0;
+      uniqueWordCount_ = 0;
+      wordFrequency_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5581,10 +6432,16 @@ public final class CoreProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getWordBytes());
+        output.writeInt32(1, documentCount_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, frequency_);
+        output.writeInt32(2, wordCount_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, uniqueWordCount_);
+      }
+      for (int i = 0; i < wordFrequency_.size(); i++) {
+        output.writeMessage(4, wordFrequency_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -5597,11 +6454,19 @@ public final class CoreProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getWordBytes());
+          .computeInt32Size(1, documentCount_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, frequency_);
+          .computeInt32Size(2, wordCount_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, uniqueWordCount_);
+      }
+      for (int i = 0; i < wordFrequency_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, wordFrequency_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5615,53 +6480,53 @@ public final class CoreProto {
       return super.writeReplace();
     }
 
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseFrom(
+    public static com.janknspank.proto.CoreProto.VectorData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseFrom(
+    public static com.janknspank.proto.CoreProto.VectorData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseFrom(byte[] data)
+    public static com.janknspank.proto.CoreProto.VectorData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseFrom(
+    public static com.janknspank.proto.CoreProto.VectorData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseFrom(java.io.InputStream input)
+    public static com.janknspank.proto.CoreProto.VectorData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseFrom(
+    public static com.janknspank.proto.CoreProto.VectorData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseDelimitedFrom(java.io.InputStream input)
+    public static com.janknspank.proto.CoreProto.VectorData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseDelimitedFrom(
+    public static com.janknspank.proto.CoreProto.VectorData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseFrom(
+    public static com.janknspank.proto.CoreProto.VectorData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.CoreProto.WordDocumentFrequency parseFrom(
+    public static com.janknspank.proto.CoreProto.VectorData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5670,7 +6535,7 @@ public final class CoreProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.CoreProto.WordDocumentFrequency prototype) {
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.VectorData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -5682,28 +6547,29 @@ public final class CoreProto {
       return builder;
     }
     /**
-     * Protobuf type {@code WordDocumentFrequency}
+     * Protobuf type {@code VectorData}
      *
      * <pre>
-     * The DF part of TF-IDF
+     * A word frequency vector - Could be specific to a document, or could represent
+     * the entire corpus.
      * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.CoreProto.WordDocumentFrequencyOrBuilder {
+       implements com.janknspank.proto.CoreProto.VectorDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.CoreProto.internal_static_WordDocumentFrequency_descriptor;
+        return com.janknspank.proto.CoreProto.internal_static_VectorData_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CoreProto.internal_static_WordDocumentFrequency_fieldAccessorTable
+        return com.janknspank.proto.CoreProto.internal_static_VectorData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CoreProto.WordDocumentFrequency.class, com.janknspank.proto.CoreProto.WordDocumentFrequency.Builder.class);
+                com.janknspank.proto.CoreProto.VectorData.class, com.janknspank.proto.CoreProto.VectorData.Builder.class);
       }
 
-      // Construct using com.janknspank.proto.CoreProto.WordDocumentFrequency.newBuilder()
+      // Construct using com.janknspank.proto.CoreProto.VectorData.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -5715,6 +6581,7 @@ public final class CoreProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getWordFrequencyFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5723,10 +6590,18 @@ public final class CoreProto {
 
       public Builder clear() {
         super.clear();
-        word_ = "";
+        documentCount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        frequency_ = 0L;
+        wordCount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        uniqueWordCount_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (wordFrequencyBuilder_ == null) {
+          wordFrequency_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          wordFrequencyBuilder_.clear();
+        }
         return this;
       }
 
@@ -5736,56 +6611,96 @@ public final class CoreProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.janknspank.proto.CoreProto.internal_static_WordDocumentFrequency_descriptor;
+        return com.janknspank.proto.CoreProto.internal_static_VectorData_descriptor;
       }
 
-      public com.janknspank.proto.CoreProto.WordDocumentFrequency getDefaultInstanceForType() {
-        return com.janknspank.proto.CoreProto.WordDocumentFrequency.getDefaultInstance();
+      public com.janknspank.proto.CoreProto.VectorData getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.VectorData.getDefaultInstance();
       }
 
-      public com.janknspank.proto.CoreProto.WordDocumentFrequency build() {
-        com.janknspank.proto.CoreProto.WordDocumentFrequency result = buildPartial();
+      public com.janknspank.proto.CoreProto.VectorData build() {
+        com.janknspank.proto.CoreProto.VectorData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.janknspank.proto.CoreProto.WordDocumentFrequency buildPartial() {
-        com.janknspank.proto.CoreProto.WordDocumentFrequency result = new com.janknspank.proto.CoreProto.WordDocumentFrequency(this);
+      public com.janknspank.proto.CoreProto.VectorData buildPartial() {
+        com.janknspank.proto.CoreProto.VectorData result = new com.janknspank.proto.CoreProto.VectorData(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.word_ = word_;
+        result.documentCount_ = documentCount_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.frequency_ = frequency_;
+        result.wordCount_ = wordCount_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.uniqueWordCount_ = uniqueWordCount_;
+        if (wordFrequencyBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            wordFrequency_ = java.util.Collections.unmodifiableList(wordFrequency_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.wordFrequency_ = wordFrequency_;
+        } else {
+          result.wordFrequency_ = wordFrequencyBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.CoreProto.WordDocumentFrequency) {
-          return mergeFrom((com.janknspank.proto.CoreProto.WordDocumentFrequency)other);
+        if (other instanceof com.janknspank.proto.CoreProto.VectorData) {
+          return mergeFrom((com.janknspank.proto.CoreProto.VectorData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.janknspank.proto.CoreProto.WordDocumentFrequency other) {
-        if (other == com.janknspank.proto.CoreProto.WordDocumentFrequency.getDefaultInstance()) return this;
-        if (other.hasWord()) {
-          bitField0_ |= 0x00000001;
-          word_ = other.word_;
-          onChanged();
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.VectorData other) {
+        if (other == com.janknspank.proto.CoreProto.VectorData.getDefaultInstance()) return this;
+        if (other.hasDocumentCount()) {
+          setDocumentCount(other.getDocumentCount());
         }
-        if (other.hasFrequency()) {
-          setFrequency(other.getFrequency());
+        if (other.hasWordCount()) {
+          setWordCount(other.getWordCount());
+        }
+        if (other.hasUniqueWordCount()) {
+          setUniqueWordCount(other.getUniqueWordCount());
+        }
+        if (wordFrequencyBuilder_ == null) {
+          if (!other.wordFrequency_.isEmpty()) {
+            if (wordFrequency_.isEmpty()) {
+              wordFrequency_ = other.wordFrequency_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureWordFrequencyIsMutable();
+              wordFrequency_.addAll(other.wordFrequency_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.wordFrequency_.isEmpty()) {
+            if (wordFrequencyBuilder_.isEmpty()) {
+              wordFrequencyBuilder_.dispose();
+              wordFrequencyBuilder_ = null;
+              wordFrequency_ = other.wordFrequency_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              wordFrequencyBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getWordFrequencyFieldBuilder() : null;
+            } else {
+              wordFrequencyBuilder_.addAllMessages(other.wordFrequency_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5799,11 +6714,11 @@ public final class CoreProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.janknspank.proto.CoreProto.WordDocumentFrequency parsedMessage = null;
+        com.janknspank.proto.CoreProto.VectorData parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.CoreProto.WordDocumentFrequency) e.getUnfinishedMessage();
+          parsedMessage = (com.janknspank.proto.CoreProto.VectorData) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -5814,122 +6729,410 @@ public final class CoreProto {
       }
       private int bitField0_;
 
-      // optional string word = 1;
-      private java.lang.Object word_ = "";
+      // optional int32 document_count = 1;
+      private int documentCount_ ;
       /**
-       * <code>optional string word = 1;</code>
+       * <code>optional int32 document_count = 1;</code>
+       *
+       * <pre>
+       * The total number of documents used in creating this vector.
+       * </pre>
        */
-      public boolean hasWord() {
+      public boolean hasDocumentCount() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string word = 1;</code>
+       * <code>optional int32 document_count = 1;</code>
+       *
+       * <pre>
+       * The total number of documents used in creating this vector.
+       * </pre>
        */
-      public java.lang.String getWord() {
-        java.lang.Object ref = word_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          word_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getDocumentCount() {
+        return documentCount_;
       }
       /**
-       * <code>optional string word = 1;</code>
+       * <code>optional int32 document_count = 1;</code>
+       *
+       * <pre>
+       * The total number of documents used in creating this vector.
+       * </pre>
        */
-      public com.google.protobuf.ByteString
-          getWordBytes() {
-        java.lang.Object ref = word_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          word_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string word = 1;</code>
-       */
-      public Builder setWord(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        word_ = value;
+      public Builder setDocumentCount(int value) {
+        bitField0_ |= 0x00000001;
+        documentCount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string word = 1;</code>
+       * <code>optional int32 document_count = 1;</code>
+       *
+       * <pre>
+       * The total number of documents used in creating this vector.
+       * </pre>
        */
-      public Builder clearWord() {
+      public Builder clearDocumentCount() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        word_ = getDefaultInstance().getWord();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string word = 1;</code>
-       */
-      public Builder setWordBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        word_ = value;
+        documentCount_ = 0;
         onChanged();
         return this;
       }
 
-      // optional int64 frequency = 2;
-      private long frequency_ ;
+      // optional int32 word_count = 2;
+      private int wordCount_ ;
       /**
-       * <code>optional int64 frequency = 2;</code>
+       * <code>optional int32 word_count = 2;</code>
+       *
+       * <pre>
+       * This is the total word count for documents in this vector.
+       * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
+       * words are not included in WordFrequencies.  But they are included here.
+       * </pre>
        */
-      public boolean hasFrequency() {
+      public boolean hasWordCount() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int64 frequency = 2;</code>
+       * <code>optional int32 word_count = 2;</code>
+       *
+       * <pre>
+       * This is the total word count for documents in this vector.
+       * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
+       * words are not included in WordFrequencies.  But they are included here.
+       * </pre>
        */
-      public long getFrequency() {
-        return frequency_;
+      public int getWordCount() {
+        return wordCount_;
       }
       /**
-       * <code>optional int64 frequency = 2;</code>
+       * <code>optional int32 word_count = 2;</code>
+       *
+       * <pre>
+       * This is the total word count for documents in this vector.
+       * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
+       * words are not included in WordFrequencies.  But they are included here.
+       * </pre>
        */
-      public Builder setFrequency(long value) {
+      public Builder setWordCount(int value) {
         bitField0_ |= 0x00000002;
-        frequency_ = value;
+        wordCount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 frequency = 2;</code>
+       * <code>optional int32 word_count = 2;</code>
+       *
+       * <pre>
+       * This is the total word count for documents in this vector.
+       * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
+       * words are not included in WordFrequencies.  But they are included here.
+       * </pre>
        */
-      public Builder clearFrequency() {
+      public Builder clearWordCount() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        frequency_ = 0L;
+        wordCount_ = 0;
         onChanged();
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:WordDocumentFrequency)
+      // optional int32 unique_word_count = 3;
+      private int uniqueWordCount_ ;
+      /**
+       * <code>optional int32 unique_word_count = 3;</code>
+       *
+       * <pre>
+       * Total unique word count for documents in this vector, including stop words.
+       * </pre>
+       */
+      public boolean hasUniqueWordCount() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 unique_word_count = 3;</code>
+       *
+       * <pre>
+       * Total unique word count for documents in this vector, including stop words.
+       * </pre>
+       */
+      public int getUniqueWordCount() {
+        return uniqueWordCount_;
+      }
+      /**
+       * <code>optional int32 unique_word_count = 3;</code>
+       *
+       * <pre>
+       * Total unique word count for documents in this vector, including stop words.
+       * </pre>
+       */
+      public Builder setUniqueWordCount(int value) {
+        bitField0_ |= 0x00000004;
+        uniqueWordCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 unique_word_count = 3;</code>
+       *
+       * <pre>
+       * Total unique word count for documents in this vector, including stop words.
+       * </pre>
+       */
+      public Builder clearUniqueWordCount() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        uniqueWordCount_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated .VectorData.WordFrequency word_frequency = 4;
+      private java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> wordFrequency_ =
+        java.util.Collections.emptyList();
+      private void ensureWordFrequencyIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          wordFrequency_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.VectorData.WordFrequency>(wordFrequency_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.VectorData.WordFrequency, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder, com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> wordFrequencyBuilder_;
+
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> getWordFrequencyList() {
+        if (wordFrequencyBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(wordFrequency_);
+        } else {
+          return wordFrequencyBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public int getWordFrequencyCount() {
+        if (wordFrequencyBuilder_ == null) {
+          return wordFrequency_.size();
+        } else {
+          return wordFrequencyBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public com.janknspank.proto.CoreProto.VectorData.WordFrequency getWordFrequency(int index) {
+        if (wordFrequencyBuilder_ == null) {
+          return wordFrequency_.get(index);
+        } else {
+          return wordFrequencyBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder setWordFrequency(
+          int index, com.janknspank.proto.CoreProto.VectorData.WordFrequency value) {
+        if (wordFrequencyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureWordFrequencyIsMutable();
+          wordFrequency_.set(index, value);
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder setWordFrequency(
+          int index, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder builderForValue) {
+        if (wordFrequencyBuilder_ == null) {
+          ensureWordFrequencyIsMutable();
+          wordFrequency_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder addWordFrequency(com.janknspank.proto.CoreProto.VectorData.WordFrequency value) {
+        if (wordFrequencyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureWordFrequencyIsMutable();
+          wordFrequency_.add(value);
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder addWordFrequency(
+          int index, com.janknspank.proto.CoreProto.VectorData.WordFrequency value) {
+        if (wordFrequencyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureWordFrequencyIsMutable();
+          wordFrequency_.add(index, value);
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder addWordFrequency(
+          com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder builderForValue) {
+        if (wordFrequencyBuilder_ == null) {
+          ensureWordFrequencyIsMutable();
+          wordFrequency_.add(builderForValue.build());
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder addWordFrequency(
+          int index, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder builderForValue) {
+        if (wordFrequencyBuilder_ == null) {
+          ensureWordFrequencyIsMutable();
+          wordFrequency_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder addAllWordFrequency(
+          java.lang.Iterable<? extends com.janknspank.proto.CoreProto.VectorData.WordFrequency> values) {
+        if (wordFrequencyBuilder_ == null) {
+          ensureWordFrequencyIsMutable();
+          super.addAll(values, wordFrequency_);
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder clearWordFrequency() {
+        if (wordFrequencyBuilder_ == null) {
+          wordFrequency_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public Builder removeWordFrequency(int index) {
+        if (wordFrequencyBuilder_ == null) {
+          ensureWordFrequencyIsMutable();
+          wordFrequency_.remove(index);
+          onChanged();
+        } else {
+          wordFrequencyBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder getWordFrequencyBuilder(
+          int index) {
+        return getWordFrequencyFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder getWordFrequencyOrBuilder(
+          int index) {
+        if (wordFrequencyBuilder_ == null) {
+          return wordFrequency_.get(index);  } else {
+          return wordFrequencyBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> 
+           getWordFrequencyOrBuilderList() {
+        if (wordFrequencyBuilder_ != null) {
+          return wordFrequencyBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(wordFrequency_);
+        }
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder addWordFrequencyBuilder() {
+        return getWordFrequencyFieldBuilder().addBuilder(
+            com.janknspank.proto.CoreProto.VectorData.WordFrequency.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder addWordFrequencyBuilder(
+          int index) {
+        return getWordFrequencyFieldBuilder().addBuilder(
+            index, com.janknspank.proto.CoreProto.VectorData.WordFrequency.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder> 
+           getWordFrequencyBuilderList() {
+        return getWordFrequencyFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.VectorData.WordFrequency, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder, com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> 
+          getWordFrequencyFieldBuilder() {
+        if (wordFrequencyBuilder_ == null) {
+          wordFrequencyBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.CoreProto.VectorData.WordFrequency, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder, com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder>(
+                  wordFrequency_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          wordFrequency_ = null;
+        }
+        return wordFrequencyBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:VectorData)
     }
 
     static {
-      defaultInstance = new WordDocumentFrequency(true);
+      defaultInstance = new VectorData(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:WordDocumentFrequency)
+    // @@protoc_insertion_point(class_scope:VectorData)
   }
 
   public interface TrainedArticleIndustryOrBuilder
@@ -5987,6 +7190,11 @@ public final class CoreProto {
   }
   /**
    * Protobuf type {@code TrainedArticleIndustry}
+   *
+   * <pre>
+   * This stores a user's recommendation that a certain article be trained as
+   * being part of a specific industry.
+   * </pre>
    */
   public static final class TrainedArticleIndustry extends
       com.google.protobuf.GeneratedMessage
@@ -6330,6 +7538,11 @@ public final class CoreProto {
     }
     /**
      * Protobuf type {@code TrainedArticleIndustry}
+     *
+     * <pre>
+     * This stores a user's recommendation that a certain article be trained as
+     * being part of a specific industry.
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -6740,6 +7953,11 @@ public final class CoreProto {
   }
   /**
    * Protobuf type {@code TrainedArticleClassification}
+   *
+   * <pre>
+   * This stores a user's recommendation that a certain article be trained as
+   * being a certain class of article (e.g. opinion, fluff, tutorial, etc.).
+   * </pre>
    */
   public static final class TrainedArticleClassification extends
       com.google.protobuf.GeneratedMessage
@@ -7129,6 +8347,11 @@ public final class CoreProto {
     }
     /**
      * Protobuf type {@code TrainedArticleClassification}
+     *
+     * <pre>
+     * This stores a user's recommendation that a certain article be trained as
+     * being a certain class of article (e.g. opinion, fluff, tutorial, etc.).
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -8274,10 +9497,15 @@ public final class CoreProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Entity_EntityTopic_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_WordDocumentFrequency_descriptor;
+    internal_static_VectorData_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_WordDocumentFrequency_fieldAccessorTable;
+      internal_static_VectorData_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_VectorData_WordFrequency_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_VectorData_WordFrequency_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_TrainedArticleIndustry_descriptor;
   private static
@@ -8335,22 +9563,26 @@ public final class CoreProto {
       "\n\022WIKIPEDIA_SUBTOPIC\020\005\"Z\n\006Source\022\013\n\007UNKN" +
       "OWN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPE" +
       "DIA_LONG_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003:\020\212\265\030\014" +
-      "MySQL.Entity\"t\n\025WordDocumentFrequency\022\033\n" +
-      "\004word\030\001 \001(\tB\r\210\246\035\001\220\246\035\004\230\246\035\310\001\022\033\n\tfrequency\030" +
-      "\002 \001(\003B\010\210\246\035\001\220\246\035\005:!\212\265\030\035MongoDB.WordDocumen" +
-      "tFrequency\"\255\001\n\026TrainedArticleIndustry\022 \n" +
-      "\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020indus" +
-      "try_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_u" +
-      "ser_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036Mong",
-      "oDB.TrainedArticleIndustry\"\347\001\n\034TrainedAr" +
-      "ticleClassification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035" +
-      "\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classification_" +
-      "code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030" +
-      "\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\t" +
-      "B\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedA" +
-      "rticleClassification\"9\n\017InterpretedData\022" +
-      "\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB" +
-      "!\n\024com.janknspank.protoB\tCoreProto"
+      "MySQL.Entity\"\375\001\n\nVectorData\022\034\n\016document_" +
+      "count\030\001 \001(\005B\004\210\246\035\001\022\030\n\nword_count\030\002 \001(\005B\004\210" +
+      "\246\035\001\022\037\n\021unique_word_count\030\003 \001(\005B\004\210\246\035\001\0221\n\016" +
+      "word_frequency\030\004 \003(\0132\031.VectorData.WordFr" +
+      "equency\032c\n\rWordFrequency\022\026\n\004word\030\001 \001(\tB\010" +
+      "\210\246\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(\005B\004\210\246\035\001\022!\n\023doc" +
+      "ument_occurences\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026Trained",
+      "ArticleIndustry\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035" +
+      "\003\230\246\035\030\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035" +
+      "\001\220\246\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003" +
+      "\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB.TrainedArticleIndu" +
+      "stry\"\347\001\n\034TrainedArticleClassification\022 \n" +
+      "\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033artic" +
+      "le_classification_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246" +
+      "\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017tra" +
+      "iner_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265" +
+      "\030$MongoDB.TrainedArticleClassification\"9",
+      "\n\017InterpretedData\022\031\n\007article\030\001 \001(\0132\010.Art" +
+      "icle\022\013\n\003url\030\002 \003(\tB!\n\024com.janknspank.prot" +
+      "oB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8387,12 +9619,18 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Entity_EntityTopic_descriptor,
               new java.lang.String[] { "EntityId", "Keyword", "Type", "Strength", "Context", });
-          internal_static_WordDocumentFrequency_descriptor =
+          internal_static_VectorData_descriptor =
             getDescriptor().getMessageTypes().get(4);
-          internal_static_WordDocumentFrequency_fieldAccessorTable = new
+          internal_static_VectorData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_WordDocumentFrequency_descriptor,
-              new java.lang.String[] { "Word", "Frequency", });
+              internal_static_VectorData_descriptor,
+              new java.lang.String[] { "DocumentCount", "WordCount", "UniqueWordCount", "WordFrequency", });
+          internal_static_VectorData_WordFrequency_descriptor =
+            internal_static_VectorData_descriptor.getNestedTypes().get(0);
+          internal_static_VectorData_WordFrequency_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_VectorData_WordFrequency_descriptor,
+              new java.lang.String[] { "Word", "Frequency", "DocumentOccurences", });
           internal_static_TrainedArticleIndustry_descriptor =
             getDescriptor().getMessageTypes().get(5);
           internal_static_TrainedArticleIndustry_fieldAccessorTable = new
@@ -8476,11 +9714,12 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

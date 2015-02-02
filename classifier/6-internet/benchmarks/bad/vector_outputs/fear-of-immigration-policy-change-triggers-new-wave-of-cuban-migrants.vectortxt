@@ -1,0 +1,2453 @@
+# Text-representation of an article vector for:
+# 
+document_count: 1
+word_frequency {
+  word: "Changes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wondering"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Bush"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Privileges"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Thaw"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Two"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Morning"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Busy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Board"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Percent"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Talks"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Miami"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quietly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Among"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Legal"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Capital"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Country"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Obama"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Forums"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nassau"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gongora"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Occurred"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Third"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Changed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Up-to-date"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Received"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Monthly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Period"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Aliosis"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Enticed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Park"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fear"
+  frequency: 33
+  document_occurences: 1
+}
+word_frequency {
+  word: "Politics"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Measures"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Perks"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Warning"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Work"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Treat"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Elsewhere"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Advocates"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Requiring"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Talent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Giving"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Part"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Offering"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Seasonally"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "U.S.-Cuba"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Undermines"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ask"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Making"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Admission"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Options"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Firma"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Asylum"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Grandchildren"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Receiving"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Airport"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Identify"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sweeping"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Additional"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Line"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Allen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Past"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Breaks"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Castro"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Europe"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Warnings"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reaching"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Month"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Migration"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Florida"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hurry"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Illegal"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Loved"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Normalization"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wants"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "George"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "E-mails"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wet-foot"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Presidents"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Home"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Visa"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Embassy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Change"
+  frequency: 34
+  document_occurences: 1
+}
+word_frequency {
+  word: "Legislators"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Border"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Visit"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "States"
+  frequency: 12
+  document_occurences: 1
+}
+word_frequency {
+  word: "Socialist"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Assurances"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Last"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
+  word: "Return"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Protections"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Democratic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Office"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Diplomats"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Field"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ended"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Offers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "island"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fees"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Entrepreneurs"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Attempting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Journeys"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Immigration"
+  frequency: 39
+  document_occurences: 1
+}
+word_frequency {
+  word: "Non-immigrant"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Irony"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "New"
+  frequency: 35
+  document_occurences: 1
+}
+word_frequency {
+  word: "Years"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Need"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Generation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Worried"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sets"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pouring"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Risk"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Bahamas"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Leap"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Going"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Supporting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Arrived"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Users"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ecuador"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Thinking"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gift"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Building"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Assured"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Long-standing"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Center"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Customs"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Half-century"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Intercepted"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Entry"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Denounces"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Let"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Chat"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Increase"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Outside"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Chosen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Charge"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nature"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Laws"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lee"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Will"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Away"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Santeria"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Financial"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stand"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Travel"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Others"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sarah"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reach"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Way"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ever-growing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Persecution"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Law"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Interests"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Completely"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Silence"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Obtained"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Never"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Say"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Newer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Traveled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Marriage"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dental"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Increasingly"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pillars"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Explained"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Existing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Live"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Numbers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stay"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Repeated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lifting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Critics"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ports"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cuba"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
+  word: "Issued"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Migration-related"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Open-door"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nervous"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Back"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Supports"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Really"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Political"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Counterparts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decision"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "LBJ"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Research"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Boarded"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Passports"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rose"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Revise"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fidel"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Committed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Offered"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Added"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Desperate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Factor"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Weaken"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Visas"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Number"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Must"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Accelerated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fleeing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Foot"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Documents"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Anyone"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Think"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Citizens"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Week"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Spreading"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Urged"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Spain"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Opposition"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Help"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Boats"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Looking"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Trips"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Secure"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reason"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Without"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Owner"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "agency"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Automatic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Leader"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Airports"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Million"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nations"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Miami-Dade"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Resembles"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ceremonies"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Specifics"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Facilitated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Latest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Statistics"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Resettled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Trade"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Exile"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Oppression"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Development"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Property"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Countries"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Emigres"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jeopardy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Re-examination"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Forever"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Window"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Values"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Panama"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Residency"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "American"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Everyone"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Calls"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Arrivals"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Mexico"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Grow"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Terra"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Move"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Provides"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Risky"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pull"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Estimated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Circumstance"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Three"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Possible"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Triggers"
+  frequency: 33
+  document_occurences: 1
+}
+word_frequency {
+  word: "Permanent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Alexandria"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Post"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Powerful"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Surprise"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Months"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Image"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Given"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Block"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Least"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Seen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Washington"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Money"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Act"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Seeking"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Anywhere"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Advice"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Functioned"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Professionals"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Restrictions"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "President"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Possibly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Criticized"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Americans"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "December"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Migrants"
+  frequency: 39
+  document_occurences: 1
+}
+word_frequency {
+  word: "Valve"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Adding"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Abroad"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hoping"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unique"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Emphatic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Draining"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Upon"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Straight"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lawyer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Former"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Soil"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Heard"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Opening"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Applications"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dry-foot"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Heart"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Thousands"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Also"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Agreements"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Havana"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "R-Fla"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Writing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Debate"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ronald"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tens"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Benefits"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "United"
+  frequency: 12
+  document_occurences: 1
+}
+word_frequency {
+  word: "Update"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Regardless"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Health"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Share"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Diplomatic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Refugees"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decades"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Year"
+  frequency: 10
+  document_occurences: 1
+}
+word_frequency {
+  word: "Blames"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sense"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Peters"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Coast"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Losing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "System"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Eligible"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Drain"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Surge"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Citizenship"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Businesses"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Local"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Essentially"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Training"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Restore"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lost"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Poorest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Applicants"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Backs"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "See"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Conferred"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sea"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Patterns"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Status"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Government"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pupi"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "State"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Previous"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Mockery"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "People"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tips"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Repeatedly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lawmakers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Savings"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Moving"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Petition"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Life"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Breakdown"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Obtain"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Touch"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Free"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Habits"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Upholding"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Voisin/The"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Even"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Returned"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Arrival"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Guard"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Adjustment"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rafter"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Long"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Result"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reinforced"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Waiting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Take"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Brain"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Madrid"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Protection"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hundreds"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Toward"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Around"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Adamant"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reflect"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Distrusts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Latin"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Flights"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Refuge"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Policy"
+  frequency: 39
+  document_occurences: 1
+}
+word_frequency {
+  word: "Access"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rickety"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Enter"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Living"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Make"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cubans"
+  frequency: 24
+  document_occurences: 1
+}
+word_frequency {
+  word: "Provide"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Grand"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Along"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Request"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Demonstrate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "European"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Soon"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Traveling"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fraction"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Remains"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Adjusted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Puts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pressure"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rafts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Object"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rubio"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reopen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reagan"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Spanish"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Houses"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Roughly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Congress"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Coffers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Relations("
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wilfredo"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Alex"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cuban"
+  frequency: 52
+  document_occurences: 1
+}
+word_frequency {
+  word: "Said"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
+  word: "Come"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Boaters"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Crossings"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Flew"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fall"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Though"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Communist"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Recent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Agents"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Flight"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Arrive"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Massive"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Official"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sort"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cheap"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Overdue"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Negotiations"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Leading"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Like"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Secret"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fueling"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ties"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tattered"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Argument"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Refugee"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Phil"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Today"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Venezuela"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stories"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Officials"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Elements"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ra\303\272l"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Bestowed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Marco"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Account"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "South"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Island"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jumped"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wave"
+  frequency: 33
+  document_occurences: 1
+}
+word_frequency {
+  word: "Encouraging"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fill"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Beaches"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Mexican"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cheaply"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Now"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Argues"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Abusing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Children"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Paved"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Closes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Section"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "America"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "County"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Processed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Don"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Approving"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Care"
+  frequency: 1
+  document_occurences: 1
+}

@@ -190,22 +190,38 @@ message Entity {
   repeated EntityTopic topic = 6;
 }
 
-// The DF part of TF-IDF
-message WordDocumentFrequency {
-  option (database_collection) = "MongoDB.WordDocumentFrequency";
-
-  optional string word = 1 [
-    (required) = YES,
-    (storage_method) = UNIQUE_INDEX,
-    (string_length) = 200
+// A word frequency vector - Could be specific to a document, or could represent
+// the entire corpus.
+message VectorData {
+  // The total number of documents used in creating this vector.
+  optional int32 document_count = 1 [
+    (required) = YES
   ];
 
-  optional int64 frequency = 2 [
-    (required) = YES,
-    (storage_method) = PULL_OUT
-  ];
+  message WordFrequency {
+    optional string word = 1 [
+      (required) = YES,
+      (string_length) = 50
+    ];
+
+    // A count of every time this word has existed in any document in this
+    // vector.
+    optional int32 frequency = 2 [
+      (required) = YES
+    ];
+
+    // The number of documents this word appears in.  E.g. if "hello" occurs
+    // in one document twice, and another document only once, its 
+    // document_occurences value would be 2.
+    optional int32 document_occurences = 3 [
+      (required) = YES
+    ];
+  };
+  repeated WordFrequency word_frequency = 2;
 }
 
+// This stores a user's recommendation that a certain article be trained as
+// being part of a specific industry.
 message TrainedArticleIndustry {
   option (database_collection) = "MongoDB.TrainedArticleIndustry";
 
@@ -231,6 +247,8 @@ message TrainedArticleIndustry {
   ];
 }
 
+// This stores a user's recommendation that a certain article be trained as
+// being a certain class of article (e.g. opinion, fluff, tutorial, etc.).
 message TrainedArticleClassification {
   option (database_collection) = "MongoDB.TrainedArticleClassification";
 

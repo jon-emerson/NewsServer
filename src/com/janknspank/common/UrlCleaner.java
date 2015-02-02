@@ -157,6 +157,9 @@ public class UrlCleaner {
       queryParameters.remove("switchEdition");
       queryParameters.remove("xid");
       queryParameters.remove("_s");
+      if (path.endsWith("/index.html")) {
+        path = path.substring(0, path.length() - "index.html".length());
+      }
     }
     if (host.endsWith(".economist.com") || host.equals("economist.com")) {
       queryParameters.remove("fsrc");

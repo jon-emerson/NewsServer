@@ -280,7 +280,7 @@ public class LoginServlet extends StandardServlet {
     }
 
     // Get IndustryCodes so the client has more metadata to show
-    Iterable<IndustryCode> industryCodes = IndustryCodes.getFrom(user.getIndustryList());
+    Iterable<IndustryCode> industryCodes = IndustryCodes.getFromUserIndustries(user.getIndustryList());
 
     // Create the response.
     UserHelper userHelper = new UserHelper(user);

@@ -1,0 +1,2948 @@
+# Text-representation of an article vector for:
+# 
+document_count: 1
+word_frequency {
+  word: "Rely"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Censorship"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Alarmed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Uses"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Blocked"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Illustrating"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Eggs"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Clip"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Spent"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Two"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ratcheted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Doors"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Involving"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Frogs"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Smothering"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Follow"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Excessive"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hellbent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Worrisome"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "government"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Director"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Forces"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ministry"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Among"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Broadcasters"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "James"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Drive"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wide"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Legal"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Apple"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hostile"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Capital"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Edge"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Contemporary"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Country"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Made"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Claims"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Email"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Used"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hardware"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Foiling"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Docs"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Complained"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Central"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reading"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Methods"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hacking"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Work"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Elsewhere"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Choose"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Difficult"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Promoting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Normal"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Astrill"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Third-party"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Best"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Attack"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Compel"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Chamber"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Talent"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Content"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fluent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Inability"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sophistication"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Place"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hours"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Making"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Little"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Scientific"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Avoid"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Countless"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Helped"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Art"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Anonymity"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Links"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Qian"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Incidents"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Vaulting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Role"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Found"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Taken"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wrote"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Software"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cut"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Aggressive"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Problems"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "However"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Respect"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Biologist"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Implicitly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Archaeologists"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ridiculous"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jing"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Zimmerman"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Illegal"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Scientists"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Suggest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wants"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Commerce"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Scholar"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "World-class"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Comments"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Smartphones"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Home"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Visa"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Adam"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gmail"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Multinational"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Microsoft"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lifeline"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Comes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Last"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stream"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Paris"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wei"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Yuechen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hordes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "VPNi"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sapping"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Store"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Circumscribed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Skirt"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Vast"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ambitious"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "VPNs"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fueled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Studying"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Friends"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Entrepreneurs"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Firewall"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Main"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Particularly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Services"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Write"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Denied"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Days"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Feel"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Mail"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pollution"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Medium"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Promotes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Logical"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dissent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Need"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "New"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Years"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Worried"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Popular"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "According"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jinping"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Described"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Become"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Becomes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wall"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Users"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Chairman"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ears"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Building"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Czar"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Since"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Academics"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Per"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Henry"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Coverage"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Watch"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Assaults"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Prominent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Papers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cheng"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ages"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Refer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Currently"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tackle"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Already"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Let"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gain"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Attract"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Proliferation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Outside"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Studies"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cyberpolice"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Effectively"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Great"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Will"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Well"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tuesday"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unable"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wasted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Impossible"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Assignments"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Struggles"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Grip"
+  frequency: 54
+  document_occurences: 1
+}
+word_frequency {
+  word: "Others"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dean"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Complain"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Incentives"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "YouTube"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tightens"
+  frequency: 54
+  document_occurences: 1
+}
+word_frequency {
+  word: "Deaf"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Engine"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fails"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reach"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unending"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Growth"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Growing"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Disabling"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Weeks"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Interest"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Says"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Andrew"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Outrage"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Completely"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Slowly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Foils"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cafe"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Goals"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Inaccessible"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Yang"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Say"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Collaborative"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Requirements"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Increasingly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nathan"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Require"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Half"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lives"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stay"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Critics"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Private"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Censorship.gregarious"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "DEC"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Authorities"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Scholarly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sophisticated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Although"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Membership"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Within"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Essay"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cybersovereignty"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Contradictions"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "India"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Back"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Telecom"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Establishing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Virtual"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Political"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Colleagues"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Actually"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Counterparts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Professor"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Innovation"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Something"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Judgeroybean"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Historian"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Number"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hand"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Security"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Foot"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Think"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pennsylvania"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Week"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Especially"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unabridged"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Microblog"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Millions"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "DoorkeeperDEC"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Announced"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ordinary"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Revive"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Day"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Onerous"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Targeting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Throw"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Administration"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Engaged"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Trips"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Constraints"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Regulations"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Naval"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Appointed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Circumvent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Notion"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Storycontinue"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Without"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Step"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Commercial"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Coupled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tries"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Daily"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Depend"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Needs"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Blockages"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Han"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Disrupted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unprecedented"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Almost"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Productivity"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Browse"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Complicated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "English-language"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expatriates"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Latest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Working"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stifling"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Array"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Learn"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Development"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Counting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Low-end"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "France"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Able"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Affairs"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Videos"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Focus"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Submitting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Propaganda"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Researching"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Protest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gone"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "American"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Employees"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Facebook"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Campaign"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Investors"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Promote"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Move"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Provides"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Scrutiny"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lure"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Came"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Programs"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Chin-Chin"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rotten"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Weibo"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Works"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Summer"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unrelenting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Control"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Astounding"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Frog"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Foreign"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dispiriting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Given"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "World"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decide"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "International"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Block"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Right"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Seek"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Relocating"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Seeking"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Guan/Associated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Enterprises"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Downloading"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Languages"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Force"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Information"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quite"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Zhang"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Slowing"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unfiltered"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expat"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Restrictions"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Designers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Language"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "President"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Innovative"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "world"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Abroad"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Barriers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Golden"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Express"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Start-up"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Receive"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Circulating"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Widely"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Goldstein"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "VPN"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Man-in-the-middle"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Disrupting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ability"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Applications"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Conference"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "SEE"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cursing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shanghai"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Also"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Warranted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Legitimate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "nation"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Including"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tracks"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Leave"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Several"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Founder"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Prospect"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Beijing"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Benefits"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sharing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Industry"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Carry"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Start"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Graphic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Update"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Continue"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Yahoo"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Transform"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Networks"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Losing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Universities"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Artist"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Easing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "System"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "China"
+  frequency: 71
+  document_occurences: 1
+}
+word_frequency {
+  word: "Overcame"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Businesses"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Learning"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Crucial"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Essentially"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Photo-sharing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decade"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Analysts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Related"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "English"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Professes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wang"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Government"
+  frequency: 10
+  document_occurences: 1
+}
+word_frequency {
+  word: "State"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Websites"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fallen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ago"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unfortunate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Google"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Alongside"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "People"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Definitely"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Look"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Service"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Search"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Behind"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Online"
+  frequency: 10
+  document_occurences: 1
+}
+word_frequency {
+  word: "Strange"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shutterstock"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Life"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Push"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Touch"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Data"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Workarounds"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Bemoaned"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Outlook"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Returned"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "High-level"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "York"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Long"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Result"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Young"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Comment"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Air"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Companies"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Students"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Suggested"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Undermine"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Senior"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Around"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Series"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Access"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Living"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Use"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Street"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "So-called"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Give"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Talk"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Scramble"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Might"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dismissed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ways"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Social"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Depended"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dissuade"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Time"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Encourage"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Experts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Entrepreneurial"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Interfering"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Just"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Frustrations"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Promised"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Direct"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Provoked"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Large"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Foster"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Crackdown"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Interfere"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Owners"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shutting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Science"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Traffic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Globalized"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Critic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jianguo"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Finds"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sina"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Euphemism"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Said"
+  frequency: 10
+  document_occurences: 1
+}
+word_frequency {
+  word: "Come"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Earlier"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gummed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Heavily"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "StrongVPN"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Co-founder"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Artists"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Press"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Translation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Culture"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Editor"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "MAIN"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Simply"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Editorial"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Manufacturing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Communist"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Recent"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Majority"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Complaining"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Less-fettered"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Aren"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Attacks"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "V.P.N.s"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decided"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Accusations"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Blocking"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unapologetic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "State-owned"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ideas"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Greatfire"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tolerated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Official"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Middle"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Business"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Filtering"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Find"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Power"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shortage"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Mounted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stewart"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Like"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shooting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Photo"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Needed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Officials"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Professors"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Boiled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Acknowledged"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Overthrowing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Astronomers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Disable"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lot"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Credit"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Order"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Crave"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tuned"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Healthy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Chinese"
+  frequency: 15
+  document_occurences: 1
+}
+word_frequency {
+  word: "Avery"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Requested"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Flickr"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Strident"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Org"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Qingsong"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Strategic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Film"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Soaring"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lesson"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Website"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Brains"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Now"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Commentator"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pot"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Western"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jennifer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Using"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Energy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Singapore"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Torrent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Minutes"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Digital"
+  frequency: 1
+  document_occurences: 1
+}

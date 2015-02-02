@@ -757,8 +757,8 @@ public class IndustryCodes {
           return industryCode.getId();
         }
       });
-  
-  public static List<IndustryCode> getFrom(Iterable<UserIndustry> userIndustries) {
+
+  public static List<IndustryCode> getFromUserIndustries(Iterable<UserIndustry> userIndustries) {
     List<IndustryCode> industryCodes = new ArrayList<>();
     for (UserIndustry userIndustry : userIndustries) {
       industryCodes.add(IndustryCodes.INDUSTRY_CODE_MAP.get(
@@ -766,8 +766,12 @@ public class IndustryCodes {
     }
     return industryCodes;
   }
-  
-  public static IndustryCode getForDescription(String description) {
+
+  /**
+   * It's awful that we have to do this, but unfortunately LinkedIn's Profile
+   * response only includes English strings for people's current industries.
+   */
+  public static IndustryCode getFromDescription(String description) {
     for (IndustryCode industryCode : INDUSTRY_CODE_MAP.values()) {
       if (industryCode.getDescription().equals(description)) {
         return industryCode;
@@ -776,7 +780,7 @@ public class IndustryCodes {
     return null;
   }
   
-  public static IndustryCode getForId(int id) {
+  public static IndustryCode getFromIndustryCodeId(int id) {
     return INDUSTRY_CODE_MAP.get(id);
   }
 }

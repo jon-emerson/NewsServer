@@ -103,8 +103,7 @@ public class KeywordUtils {
     }
   }
 
-  @VisibleForTesting
-  static boolean isValidKeyword(String keyword) {
+  public static boolean isValidKeyword(String keyword) {
     keyword = keyword.trim();
     String lowercaseKeyword = keyword.toLowerCase();
     if (lowercaseKeyword.length() < 2 ||

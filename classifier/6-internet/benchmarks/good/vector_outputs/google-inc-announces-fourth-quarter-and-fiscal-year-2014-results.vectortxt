@@ -1,0 +1,2533 @@
+# Text-representation of an article vector for:
+# 
+document_count: 1
+word_frequency {
+  word: "Amortization"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Changes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Compensation"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Land"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Uses"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Forth"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dividend"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Comparable"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Partners"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expenses"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
+  word: "Net"
+  frequency: 40
+  document_occurences: 1
+}
+word_frequency {
+  word: "Commentary"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Foreseeable"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Among"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Announces"
+  frequency: 51
+  document_occurences: 1
+}
+word_frequency {
+  word: "Capital"
+  frequency: 10
+  document_occurences: 1
+}
+word_frequency {
+  word: "Made"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Third"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
+  word: "Billion"
+  frequency: 46
+  document_occurences: 1
+}
+word_frequency {
+  word: "Associated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Used"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hardware"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Patrick"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Exclude"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Complete"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reconciliations"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Period"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Caption"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Serve"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Details"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Measures"
+  frequency: 18
+  document_occurences: 1
+}
+word_frequency {
+  word: "Operational"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "ASC"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Effected"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nearest"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "TrueView"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Planning"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Apply"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Part"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Content"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decision-making"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Diluted"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Construction"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Making"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Consolidated"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Evaluate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Inc"
+  frequency: 55
+  document_occurences: 1
+}
+word_frequency {
+  word: "Advertising"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Consistent"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Employee"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Employed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Investor"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cost-Per-Click"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Split"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Specific"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Alternative"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Filings"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Additional"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Greater"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Activities"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unless"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Notices"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "However"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Respect"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Strong"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Impairment"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Acquisition"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Depreciation"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Providing"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Blended"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Kingdom"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "AdMob"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Amount"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tax-deductible"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Finance"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Metric"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Forward-looking"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Acquisitions"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Grants"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decreased"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Representing"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Namely"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Facilitate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Engagement"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shown"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Buildings"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Earnings"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "States"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Summary"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Meaningful"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Analysis"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fiscal"
+  frequency: 53
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cost-per-click"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Multiple"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Recurring"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Substitute"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Investing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ended"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Otherwise"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Contains"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Browser"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Uncertainties"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Purchases"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Com/webcast"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Superior"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Average"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Partner"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expense"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Important"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Need"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Directly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hedging"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Risk"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Described"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Means"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Production"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Revenues"
+  frequency: 56
+  document_occurences: 1
+}
+word_frequency {
+  word: "Begins"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Mountain"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Geographies"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Institutional"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Method"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Full-time"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Inventory"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Per"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Approximately"
+  frequency: 13
+  document_occurences: 1
+}
+word_frequency {
+  word: "Statements"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Supplemental"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Compensates"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Center"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Except"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Aggregate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Currently"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Investor.google"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Investments"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gain"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Increase"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Outside"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Manufacturers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Charge"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nature"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Required"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Well"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Worldwide"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Will"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Revenue"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Benefit"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Financial"
+  frequency: 28
+  document_occurences: 1
+}
+word_frequency {
+  word: "Twelve"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Second"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Others"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Captioned"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Https"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "YouTube"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Realized"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Growth"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Releases"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Interest"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Comprised"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Law"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Outstanding"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Future"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Granted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Involve"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tax"
+  frequency: 10
+  document_occurences: 1
+}
+word_frequency {
+  word: "Par"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Attachments"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Payments"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nasdaq"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Live"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Announce"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Issued"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tool"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pichette"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Devices"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Comparisons"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Federal"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Measure"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Meaning"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Remained"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Variety"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decision"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Http"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Define"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Forecasting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Program"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Discontinued"
+  frequency: 10
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reconciled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Relations"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Actual"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Factors"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Number"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unforeseen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Googl"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Despite"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Continuing"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Network"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Different"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Results"
+  frequency: 73
+  document_occurences: 1
+}
+word_frequency {
+  word: "Effects"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Portion"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Announced"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Corresponding"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Areas"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Members"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Isolation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Clicks"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Predicted"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fully-diluted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Help"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Indication"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Deducting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "TAC"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Significant"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Form"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "May"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Flows"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Include"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Charges"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Impact"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Securities"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Without"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Million"
+  frequency: 23
+  document_occurences: 1
+}
+word_frequency {
+  word: "Potential"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "April"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Owned"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Presentation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Restated"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Intended"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Condition"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Special"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Key"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Useful"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Applying"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Property"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Excludes"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stock"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Comparison"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Divided"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "CFO"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Infrequent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Period-to-period"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Page"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "References"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "GAAP"
+  frequency: 25
+  document_occurences: 1
+}
+word_frequency {
+  word: "Distribution"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Focus"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Queries"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Served"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Facilitates"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Excluded"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "October"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Strengthening"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Amounts"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Equipment"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gains"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Discussion"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Employees"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Believes"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Components"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Across"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Provided"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Investors"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expect"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tables"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Class"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Operated"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Limitation"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Captions"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Computed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Provides"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Analyze"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Analyzing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Increased"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "September"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fourth"
+  frequency: 131
+  document_occurences: 1
+}
+word_frequency {
+  word: "Differ"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "SBC"
+  frequency: 18
+  document_occurences: 1
+}
+word_frequency {
+  word: "Carriers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Higher"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Applicable"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Headwinds"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Undertake"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Three"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Compare"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Distribute"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Risks"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Available"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Paid"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Foreign"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "January"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Allows"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Months"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Topic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Defined"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "International"
+  frequency: 11
+  document_occurences: 1
+}
+word_frequency {
+  word: "Opportunities"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Picture"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Items"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Non-gaap"
+  frequency: 53
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sites"
+  frequency: 10
+  document_occurences: 1
+}
+word_frequency {
+  word: "Peer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Information"
+  frequency: 15
+  document_occurences: 1
+}
+word_frequency {
+  word: "Non-google"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "CALL"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Metrics"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Movements"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Webcast"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Face"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "December"
+  frequency: 11
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cause"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Competitors"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Methodologies"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Html"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ads"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Prior"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Regarding"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Com/+googleinvestorrelations/posts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Consider"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Discrete"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Allow"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Internal"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Periods"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Set"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Balance"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Conference"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Www"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Current"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Equivalents"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Value"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Site"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Weighted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Calculation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Call"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Certain"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "SEC"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Also"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Less"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Including"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Release"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Real"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Referring"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Valuation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Believe"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Compared"
+  frequency: 25
+  document_occurences: 1
+}
+word_frequency {
+  word: "Benefits"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "United"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Accommodate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Award"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Flow"
+  frequency: 14
+  document_occurences: 1
+}
+word_frequency {
+  word: "Liquidity"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "FASB"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Together"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Motorola"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Update"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Statement"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Continue"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Report"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Health"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Compares"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Generated"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Share"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Income"
+  frequency: 57
+  document_occurences: 1
+}
+word_frequency {
+  word: "Costs"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expenditures"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
+  word: "Year"
+  frequency: 61
+  document_occurences: 1
+}
+word_frequency {
+  word: "Includes"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Recognized"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Indicative"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Full"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Calif"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Performance"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rate"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Margin"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Basis"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Loss"
+  frequency: 11
+  document_occurences: 1
+}
+word_frequency {
+  word: "Represents"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Businesses"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Estimate"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Plans"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quarter"
+  frequency: 149
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shared"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Included"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Events"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Related"
+  frequency: 17
+  document_occurences: 1
+}
+word_frequency {
+  word: "See"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Patterns"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "State"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shares"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Accompanying"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Google"
+  frequency: 76
+  document_occurences: 1
+}
+word_frequency {
+  word: "Effective"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sheet"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Search"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Entity-specific"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Free"
+  frequency: 13
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stockholders"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Data"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Date"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Intangibles"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sale"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Awards"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Currency"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Accordance"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Companies"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Effect"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Limitations"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reflect"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Non-cash"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Use"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Make"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Marketable"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Varying"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Presented"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Represent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Management"
+  frequency: 19
+  document_occurences: 1
+}
+word_frequency {
+  word: "Provide"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Assets"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "VIEW"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rates"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expected"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hiring"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Considered"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "AdSense"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Assumptions"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Retroactively"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Properties"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Infrastructure"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Taxes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Time"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Exchange"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
+  word: "Plus.google"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Please"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Transparency"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Assessing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Direct"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Analyst"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Duty"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Traffic"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gross"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Said"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Translating"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Disposal"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Subjective"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Materially"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Audio"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Total"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Types"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Press"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "End"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Primarily"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Headcount"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Supplement"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decrease"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Maps"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Recent"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "GOOG"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Majority"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Constant"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reconciliation"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Totaled"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Non-GAAP"
+  frequency: 13
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cash"
+  frequency: 28
+  document_occurences: 1
+}
+word_frequency {
+  word: "Excluding"
+  frequency: 11
+  document_occurences: 1
+}
+word_frequency {
+  word: "Business"
+  frequency: 13
+  document_occurences: 1
+}
+word_frequency {
+  word: "Versus"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Considers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Like"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cost"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Estate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reports"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Today"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Following"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "management"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Monetization"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Operations"
+  frequency: 20
+  document_occurences: 1
+}
+word_frequency {
+  word: "Resulted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Order"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Prepared"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Original"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quarterly"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Authorized"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Percentage"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "EPS"
+  frequency: 14
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sec.gov."
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Strategic"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Addition"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Community"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Operating"
+  frequency: 50
+  document_occurences: 1
+}
+word_frequency {
+  word: "Website"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Closed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "File"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Core"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Highlights"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Historical"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Calculated"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expend"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Participating"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reasons"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reported"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Com"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Using"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Annual"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ultimately"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Evaluating"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stock-Based"
+  frequency: 1
+  document_occurences: 1
+}

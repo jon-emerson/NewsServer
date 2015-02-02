@@ -1,0 +1,1778 @@
+# Text-representation of an article vector for:
+# 
+document_count: 1
+word_frequency {
+  word: "Dubbed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Prices"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Giant"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Property"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lead"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Two"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Kind"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Single"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Karma"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Doors"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Follow"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Page"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Slightly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Immediate"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Neighboring"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Project"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Window"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Firm"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Zoning"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Monster"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gone"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Floors"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Legal"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Believed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Located"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Anne"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Facebook"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Charles"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Premium"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Finger"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rodgers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Messages"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Communities"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Grow"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Priced"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "High-priced"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quickly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Advertisements"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Appears"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Asking"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Love"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cheaper"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fourth"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Good"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Estimated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shiny"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Middle-finger"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Penthouse"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Prince"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Spring"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Three"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ella"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Respectively"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Elsewhere"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Nearly"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Balcony"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Condo"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "January"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Post"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Taxable"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Months"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stands"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jenkins"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Court"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Block"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "pop-up"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Least"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "site"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Right"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sites"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Washington"
+  frequency: 36
+  document_occurences: 1
+}
+word_frequency {
+  word: "Boasts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Commenters"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Construction"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "firm"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Neighborhoods"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Older"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Little"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Concept"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Avoid"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Vicinity"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Bets"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Commission"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Consumer-debt"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Links"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Declined"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pass"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "High"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Taken"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Capitalizing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tour"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hold"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wrote"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Two-bedroom"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Open"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Celebrate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "However"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reader"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Strong"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Built"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gonna"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sparked"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Straight"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Redfin"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Countertops"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ava"
+  frequency: 11
+  document_occurences: 1
+}
+word_frequency {
+  word: "Consider"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Records"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Molly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pop-ups"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rents"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Set"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Wind"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Petworth"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "E-mails"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Contracting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Chadwick"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Site"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Feed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Call"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Adam"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Also"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Outcry"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Buildings"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Selling"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Including"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Real"
+  frequency: 35
+  document_occurences: 1
+}
+word_frequency {
+  word: "Return"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Read"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Multiple"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Twitter"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Phone"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Purchased"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Initially"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Questions"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dropped"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "BabyCenter.com"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Report"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pop-up"
+  frequency: 6
+  document_occurences: 1
+}
+word_frequency {
+  word: "Two-story"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Generated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Girl"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Year"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Feet"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Days"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Trapped"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Average"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Understand"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shortly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Removed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Public"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Resource"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Labeling"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tetris"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reduce"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Interviewed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Realtor"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Christmas"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Looks"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Popular"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Upward"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "See"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Homeowners"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Kitchens"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "According"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Went"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Writes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Government"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fallen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Going"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ownership"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Justsold"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sold"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "People"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Whether"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Frequently"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Maximized"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Three-unit"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Bankruptcy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Taking"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Building"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Online"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Filed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Push"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Homes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "D.C."
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Confusing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Liabilities"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Voisin/The"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quartz"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hope"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Creditors"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Refer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sale"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Still"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Zone"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jointly"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Trulia"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Long"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Christened"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Take"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Comment"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Buyers"
+  frequency: 30
+  document_occurences: 1
+}
+word_frequency {
+  word: "Notorious"
+  frequency: 30
+  document_occurences: 1
+}
+word_frequency {
+  word: "Carving"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hurricane-force"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Left"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hardwood"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Bottom"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Active"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sympathy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "August"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Will"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Notice"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Price"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Row"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hyping"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Struggles"
+  frequency: 29
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rowhouse"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Street"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Troubles"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Joking"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "PoPville"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Along"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sarah"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Might"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Unit"
+  frequency: 7
+  document_occurences: 1
+}
+word_frequency {
+  word: "Properties"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Struggling"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Time"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Savage"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Interest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Says"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Husband"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Corridor"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Just"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Told"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Early"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Answer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pedestrians"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Analyst"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Kingsley-Ibeh"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "WTOP"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ziegler"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Phenomenon"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Owners"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Throughout"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "City"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Article"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Next"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Said"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Come"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Live"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Decline"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lives"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Private"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Galleries"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Owns"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ibiezugbe"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Coldwell"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rowhouses"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Ground"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Developers"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Taller"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Chow"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Pieces"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Less-expensive"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Took"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "SOLD"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Back"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Immediately"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Colleagues"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sell"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Piece"
+  frequency: 29
+  document_occurences: 1
+}
+word_frequency {
+  word: "One-story"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Banker"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "House"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Kevin"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Equity"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Thing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dropping"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Listing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Offered"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Middle"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fine"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Amy"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sympathetic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Find"
+  frequency: 29
+  document_occurences: 1
+}
+word_frequency {
+  word: "Number"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Maximum"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Height"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Like"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Photo"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Showed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Estate"
+  frequency: 35
+  document_occurences: 1
+}
+word_frequency {
+  word: "Purgatory"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Different"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Market"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stories"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jan"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Underneath"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Anyone"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Advertised"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Think"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
+  word: "Sunday"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Spreading"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Converting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Credit"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Called"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hot"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Original"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Day"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Julie"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Napoleon"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "March"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "One-bedroom"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Soars"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Photos"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Yield"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Units"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Blanketing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "PoP"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shumate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Done"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "November"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Eye-shaped"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Contributed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Neighbors"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reason"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Check"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Owner"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Without"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Posts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Turek"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "building"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Falkner"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reporting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Rowhouse-turned-sky-high"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Million"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Far"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stretching"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Laugh"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Name"
+  frequency: 5
+  document_occurences: 1
+}
+word_frequency {
+  word: "Reported"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "April"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Jennifer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Clients"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Don"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Naming"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Coveted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hearing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Visits"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Expand"
+  frequency: 1
+  document_occurences: 1
+}

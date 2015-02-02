@@ -28,7 +28,7 @@ public class UserIndustries {
   public static User updateIndustries(User user, DocumentNode profileDocumentNode) 
       throws BiznessException, DatabaseSchemaException {
     String industryDescription = profileDocumentNode.findFirst("industry").getFlattenedText();
-    IndustryCode industryCode = IndustryCodes.getForDescription(industryDescription);
+    IndustryCode industryCode = IndustryCodes.getFromDescription(industryDescription);
     UserIndustry userIndustry = UserIndustry.newBuilder()
         .setIndustryCodeId(industryCode.getId())
         .setSource(Source.LINKED_IN_PROFILE)
