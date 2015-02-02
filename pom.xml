@@ -43,7 +43,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>18.0</version>
+      <version>17.0</version> <!-- 18.0 doesn't work with Soy 2012-12-21. -->
     </dependency>
     <dependency>
       <groupId>com.google.http-client</groupId>

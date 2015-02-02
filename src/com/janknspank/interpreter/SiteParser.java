@@ -99,6 +99,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("mashable.com", new String[] {
         ".article-content p",
         ".long-card p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("medium.com", new String[] {
+        ".section-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("mercurynews.com", new String[] {
         ".articleBody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("money.cnn.com", new String[] {
@@ -111,8 +113,13 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         "p.story-body-text",
         "#mod-a-body-first-para > p",
         "#mod-a-body-after-first-para > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("pcmag.com", new String[] {
+        ".article-body p",
+        ".blogstory p"});
     DOMAIN_TO_DOM_ADDRESSES.put("recode.net", new String[] {
         ".article p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("redherring.com", new String[] {
+        ".entry-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfexaminer.com", new String[] {
         "#storyBody > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfgate.com", new String[] {
@@ -121,11 +128,21 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         ".post-contents p"});
     DOMAIN_TO_DOM_ADDRESSES.put("siliconbeat.com", new String[] {
         ".post-content > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("slate.com", new String[] {
+        ".body .text"});
+    DOMAIN_TO_DOM_ADDRESSES.put("startupworkout.com", new String[] {
+        ".entry-content p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("technologyreview.com", new String[] {
+        "section.body p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("thenextweb.com", new String[] {
+        ".entry-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("theverge.com", new String[] {
         "article p"});
     DOMAIN_TO_DOM_ADDRESSES.put("techcrunch.com", new String[] {
         ".article-entry > p",
         ".article-entry > h2"});
+    DOMAIN_TO_DOM_ADDRESSES.put("venturebeat.com", new String[] {
+        ".post-content > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("washingtonpost.com", new String[] {
         ".row p",
         "article > p"});

@@ -61,7 +61,7 @@ public class IndustryClassifier {
     if (classifications != null && Iterables.size(classifications) > 0) {
       return classifications;
     }
-    
+
     // Compute classifications from scratch against IndustryVectors
     List<ArticleIndustry> newClassifications = new ArrayList<>();
     for (IndustryCode industryCode : industryVectors.keySet()) {
@@ -75,7 +75,7 @@ public class IndustryClassifier {
     Database.set(article, "industry", newClassifications);
     return classifications;
   }
-  
+
   public ArticleIndustry classifyForIndustry(
       Article article, IndustryCode industryCode) 
       throws BiznessException {
@@ -95,7 +95,7 @@ public class IndustryClassifier {
           throws DatabaseSchemaException, DatabaseRequestException {
     Database.set(article, "industry", classifications);
   }
-  
+
   IndustryVector getIndustryVector(IndustryCode industryCode) {
     return industryVectors.get(industryCode);
   }

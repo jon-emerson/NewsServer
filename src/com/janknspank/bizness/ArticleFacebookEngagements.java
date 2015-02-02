@@ -10,6 +10,14 @@ import com.janknspank.database.QueryOption.WhereEquals;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 
 public class ArticleFacebookEngagements {
+  /**
+   * Returns the latest SocialEngagements. Only requests new engagement
+   * from FB if there are none.
+   * @param url
+   * @param limit
+   * @return
+   * @throws BiznessException
+   */
   public static Iterable<SocialEngagement> getLatest(String url, int limit)
       throws BiznessException {
     Iterable<SocialEngagement> engagements;

@@ -85,6 +85,7 @@ public class UrlWhitelist {
     // WHITELIST.add("manchestereveningnews.co.uk");
     // WHITELIST.add("manoramaonline.com");
     WHITELIST.add("mashable.com");
+    WHITELIST.add("medium.com");
     WHITELIST.add("mercurynews.com");
     // WHITELIST.add("mg.co.za");
     // WHITELIST.add("msnbc.com");
@@ -97,6 +98,7 @@ public class UrlWhitelist {
     WHITELIST.add("nytimes.com");
     // WHITELIST.add("nzherald.co.nz");
     WHITELIST.add("recode.net");
+    WHITELIST.add("redherring.com");
     // WHITELIST.add("reuters.com");
     // WHITELIST.add("scmp.com");
     // WHITELIST.add("scotsman.com");
@@ -104,12 +106,15 @@ public class UrlWhitelist {
     WHITELIST.add("sfexaminer.com");
     WHITELIST.add("sfgate.com");
     WHITELIST.add("siliconbeat.com");
+    WHITELIST.add("slate.com");
     // WHITELIST.add("smh.com.au");
     // WHITELIST.add("startribune.com");
+    WHITELIST.add("startupworkout.com");
     // WHITELIST.add("statesman.com");
     // WHITELIST.add("straitstimes.com");
     WHITELIST.add("techcrunch.com");
     WHITELIST.add("techmeme.com");
+    WHITELIST.add("technologyreview.com");
     // WHITELIST.add("telegraph.co.uk");
     // WHITELIST.add("theatlantic.com"); **
     // WHITELIST.add("theglobeandmail.com");
@@ -121,6 +126,7 @@ public class UrlWhitelist {
     // WHITELIST.add("tmz.com");
     // WHITELIST.add("usatoday.com");
     // WHITELIST.add("usnews.com");
+    WHITELIST.add("venturebeat.com");
     WHITELIST.add("washingtonpost.com");
     // WHITELIST.add("washingtontimes.com");
     // WHITELIST.add("westword.com");

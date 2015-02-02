@@ -8,8 +8,6 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
-import com.janknspank.common.AssertionException;
-import com.janknspank.common.Asserts;
 import com.janknspank.database.Database;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 
@@ -106,10 +104,8 @@ public class KeywordUtils {
   }
 
   @VisibleForTesting
-  static boolean isValidKeyword(String keyword) throws AssertionException {
+  static boolean isValidKeyword(String keyword) {
     keyword = keyword.trim();
-    Asserts.assertTrue(keyword.equals(cleanKeyword(keyword)),
-        "You should clean your keywords before calling this: \"" + keyword + "\"");
     String lowercaseKeyword = keyword.toLowerCase();
     if (lowercaseKeyword.length() < 2 ||
         !Character.isAlphabetic(keyword.charAt(0)) ||
