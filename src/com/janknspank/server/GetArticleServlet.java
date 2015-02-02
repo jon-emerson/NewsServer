@@ -19,7 +19,7 @@ public class GetArticleServlet extends StandardServlet {
       DatabaseRequestException, RequestException {
     Article article = Articles.getArticle(getRequiredParameter(req, "id"));
     if (article == null) {
-      throw new RequestException("Article ID does not exist");
+      throw new RequestException("Article doesn't exist");
     }
     JSONObject articleJson = Serializer.toJSON(article);
 
