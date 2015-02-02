@@ -14,6 +14,8 @@ import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
 
 public class KeywordFinderTest {
+  private static final KeywordFinder KEYWORD_FINDER = KeywordFinder.getInstance();
+
   private void assertNotContainsKeyword(
       String keywordStr, Iterable<ArticleKeyword> keywords) {
     for (ArticleKeyword keyword : keywords) {
@@ -56,7 +58,7 @@ public class KeywordFinderTest {
             + "on wikipedia."
             + "</p></div>"
             + "</body</html>"));
-    Iterable<ArticleKeyword> keywords = KeywordFinder.findKeywords("urlId", documentNode);
+    Iterable<ArticleKeyword> keywords = KEYWORD_FINDER.findKeywords("urlId", documentNode);
 
     // While these are in the <meta> tag, they do not exist in the document,
     // so we filter them.

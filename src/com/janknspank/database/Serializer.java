@@ -65,6 +65,14 @@ public class Serializer {
               jsonArray.put((int) message.getRepeatedField(fieldDescriptor, i));
               break;
 
+            case DOUBLE:
+              jsonArray.put((double) message.getRepeatedField(fieldDescriptor, i));
+              break;
+
+            case FLOAT:
+              jsonArray.put((float) message.getRepeatedField(fieldDescriptor, i));
+              break;
+
             case ENUM:
               EnumValueDescriptor v =
                   (EnumValueDescriptor) message.getRepeatedField(fieldDescriptor, i);
@@ -96,6 +104,14 @@ public class Serializer {
 
           case INT:
             o.put(fieldName, (int) message.getField(fieldDescriptor));
+            break;
+
+          case DOUBLE:
+            o.put(fieldName, (double) message.getField(fieldDescriptor));
+            break;
+
+          case FLOAT:
+            o.put(fieldName, (float) message.getField(fieldDescriptor));
             break;
 
           case ENUM:

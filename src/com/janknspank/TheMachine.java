@@ -1,6 +1,8 @@
 package com.janknspank;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -22,8 +24,12 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
 
-public class TheMachine {
-  public void start() {
+public class TheMachine implements Runnable {
+  // NOTE(jonemerson): This needs to be 1 if the database is empty.
+  public static final int THREAD_COUNT = 5;
+
+  @Override
+  public void run() {
     // Uncomment this to start the crawl at a specific page.
     try {
       Urls.put("http://recode.net/", false);
@@ -102,6 +108,11 @@ public class TheMachine {
   }
 
   public static void main(String args[]) throws Exception {
-    new TheMachine().start();
+    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+    for (int i = 0; i < 5; i++) {
+      Runnable worker = new TheMachine();
+      executor.execute(worker);
+    }
+    executor.shutdown();
   }
 }

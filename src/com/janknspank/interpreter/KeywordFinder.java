@@ -43,12 +43,15 @@ import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
  * sets.
  */
 public class KeywordFinder {
-  private static final SentenceDetectorME SENTENCE_DETECTOR_ME;
-  private static final opennlp.tools.tokenize.Tokenizer TOKENIZER;
-  private static final List<NameFinderME> PERSON_FINDER_LIST = Lists.newArrayList();
-  private static final List<NameFinderME> ORGANIZATION_FINDER_LIST = Lists.newArrayList();
-  private static final List<NameFinderME> LOCATION_FINDER_LIST = Lists.newArrayList();
-  static {
+  private final SentenceDetectorME SENTENCE_DETECTOR_ME;
+  private final opennlp.tools.tokenize.Tokenizer TOKENIZER;
+  private final List<NameFinderME> PERSON_FINDER_LIST = Lists.newArrayList();
+  private final List<NameFinderME> ORGANIZATION_FINDER_LIST = Lists.newArrayList();
+  private final List<NameFinderME> LOCATION_FINDER_LIST = Lists.newArrayList();
+
+  private static KeywordFinder instance = null;
+
+  private KeywordFinder() {
     try {
       @SuppressWarnings("resource")
       InputStream sentenceModelInputStream = new FileInputStream("opennlp/en-sent.bin");
@@ -84,13 +87,21 @@ public class KeywordFinder {
     }
   }
 
-  private KeywordFinder() {}
+  /**
+   * Returns a KeywordFinder singleton.
+   */
+  public static synchronized KeywordFinder getInstance() {
+    if (instance == null) {
+      instance = new KeywordFinder();
+    }
+    return instance;
+  }
 
   /**
    * Top level method: Finds all the keywords in an article, whether they be
    * in the article body, meta tags, wherever!
    */
-  public static Iterable<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode) {
+  public Iterable<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode) {
     List<ArticleKeyword> keywords = new ArrayList<ArticleKeyword>() {
       @Override
       public boolean add(ArticleKeyword keyword) {
@@ -114,7 +125,7 @@ public class KeywordFinder {
     return KeywordCanonicalizer.canonicalize(keywords);
   }
 
-  public static Iterable<ArticleKeyword> findParagraphKeywords(
+  public synchronized Iterable<ArticleKeyword> findParagraphKeywords(
       String urlId, Iterable<String> paragraphs) {
     List<ArticleKeyword> keywords = Lists.newArrayList();
 
@@ -139,7 +150,7 @@ public class KeywordFinder {
     return KeywordCanonicalizer.canonicalize(keywords);
   }
 
-  private static Iterable<ArticleKeyword> findKeywords(
+  private synchronized Iterable<ArticleKeyword> findKeywords(
       String urlId,
       String[] tokens,
       List<NameFinderME> finders,
@@ -174,7 +185,7 @@ public class KeywordFinder {
         });
   }
 
-  private static Iterable<ArticleKeyword> findPeople(String urlId, String[] tokens) {
+  private synchronized Iterable<ArticleKeyword> findPeople(String urlId, String[] tokens) {
     return findKeywords(
         urlId,
         tokens,
@@ -184,7 +195,7 @@ public class KeywordFinder {
         20 /* maxStrength */);
   }
 
-  private static Iterable<ArticleKeyword> findOrganizations(String urlId, String[] tokens) {
+  private synchronized Iterable<ArticleKeyword> findOrganizations(String urlId, String[] tokens) {
     return findKeywords(
         urlId,
         tokens,
@@ -194,7 +205,7 @@ public class KeywordFinder {
         20 /* maxStrength */);
   }
 
-  private static Iterable<ArticleKeyword> findLocations(String urlId, String[] tokens) {
+  private synchronized Iterable<ArticleKeyword> findLocations(String urlId, String[] tokens) {
     return findKeywords(
         urlId,
         tokens,
@@ -207,7 +218,7 @@ public class KeywordFinder {
   /**
    * Returns a LOWERCASED Set of all the words in the specified article.
    */
-  private static Set<String> getWordsInArticle(DocumentNode documentNode) {
+  private Set<String> getWordsInArticle(DocumentNode documentNode) {
     Set<String> wordsInArticle = Sets.newHashSet();
     for (Node paragraphNode : SiteParser.getParagraphNodes(documentNode)) {
       for (String word : getTokens(paragraphNode.getFlattenedText())) {
@@ -221,7 +232,7 @@ public class KeywordFinder {
    * Returns true if any of the words in the passed keyword exist in the
    * article.
    */
-  private static boolean isMetaKeywordRelevant(Set<String> wordsInArticle, String keyword) {
+  private boolean isMetaKeywordRelevant(Set<String> wordsInArticle, String keyword) {
     for (String keywordPart : getTokens(keyword)) {
       if (wordsInArticle.contains(KeywordUtils.cleanKeyword(keywordPart).toLowerCase())) {
         return true;
@@ -230,7 +241,7 @@ public class KeywordFinder {
     return false;
   }
 
-  private static Multiset<String> getKeywordsFromMetaContent(
+  private Multiset<String> getKeywordsFromMetaContent(
       DocumentNode documentNode, Node metaNode) {
     Set<String> wordsInArticle = getWordsInArticle(documentNode);
 
@@ -252,7 +263,7 @@ public class KeywordFinder {
     return keywords;
   }
 
-  private static Iterable<ArticleKeyword> findKeywordsInMetaTags(
+  private Iterable<ArticleKeyword> findKeywordsInMetaTags(
       final String urlId, DocumentNode documentNode) {
     final Multiset<String> keywords = HashMultiset.create();
     for (Node metaNode : documentNode.findAll(ImmutableList.of(
@@ -332,11 +343,11 @@ public class KeywordFinder {
         });
   }
 
-  public static String[] getSentences(String paragraph) {
+  public synchronized String[] getSentences(String paragraph) {
     return SENTENCE_DETECTOR_ME.sentDetect(paragraph);
   }
 
-  public static String[] getTokens(String sentence) {
+  public synchronized String[] getTokens(String sentence) {
     return TOKENIZER.tokenize(sentence);
   }
 }

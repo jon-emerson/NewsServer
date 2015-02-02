@@ -106,9 +106,9 @@ public class GrabTrainingData {
       // Write out all the sentences, tokenized.
       for (Node paragraph : paragraphs) {
         String paragraphText = paragraph.getFlattenedText();
-        for (String sentence : KeywordFinder.getSentences(paragraphText)) {
+        for (String sentence : KeywordFinder.getInstance().getSentences(paragraphText)) {
           boolean first = true;
-          for (String token : KeywordFinder.getTokens(sentence)) {
+          for (String token : KeywordFinder.getInstance().getTokens(sentence)) {
             if (first) {
               first = false;
             } else {

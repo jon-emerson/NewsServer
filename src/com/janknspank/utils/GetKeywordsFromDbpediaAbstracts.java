@@ -37,6 +37,8 @@ import com.janknspank.proto.LocalProto.LongAbstract;
  * a subject (e.g. a person) or just a red herring.
  */
 public class GetKeywordsFromDbpediaAbstracts {
+  private static final KeywordFinder KEYWORD_FINDER = KeywordFinder.getInstance();
+
   public static boolean isRelevantEntityType(EntityType type) {
     if (type == null) {
       return false;
@@ -59,8 +61,8 @@ public class GetKeywordsFromDbpediaAbstracts {
 
   private static Iterable<Entity> getPartialMatches(Multimap<String, Entity> entityMap, String text) {
     Set<Entity> entities = Sets.newHashSet();
-    for (String sentence : KeywordFinder.getSentences(text)) {
-      for (String token : KeywordFinder.getTokens(sentence)) {
+    for (String sentence : KEYWORD_FINDER.getSentences(text)) {
+      for (String token : KEYWORD_FINDER.getTokens(sentence)) {
         entities.addAll(entityMap.get(token));
       }
     }
@@ -74,7 +76,7 @@ public class GetKeywordsFromDbpediaAbstracts {
     // that might not be in Wikipedia - Which is probably quite a few!
     List<Entity> entities = Lists.newArrayList();
     for (ArticleKeyword articleKeyword :
-        KeywordFinder.findParagraphKeywords("" /* urlId */, ImmutableList.of(text))) {
+        KEYWORD_FINDER.findParagraphKeywords("" /* urlId */, ImmutableList.of(text))) {
       if (!articleKeyword.getKeyword().contains(".")) {
         entities.add(Entity.newBuilder()
             .setKeyword(articleKeyword.getKeyword())

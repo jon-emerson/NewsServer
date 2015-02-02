@@ -39,6 +39,7 @@ import com.janknspank.proto.CoreProto.VectorData.WordFrequency;
  */
 public class Vector {
   private static final ImmutableSet<String> STOP_WORDS;
+  private static final KeywordFinder KEYWORD_FINDER = KeywordFinder.getInstance();
 
   private final int documentCount;
 
@@ -125,8 +126,8 @@ public class Vector {
             article.getAuthor()
         };
         for (String sentence : ObjectArrays.concat(
-            KeywordFinder.getSentences(paragraph), additionalPhrases, String.class)) {
-          for (String word : KeywordFinder.getTokens(sentence)) {
+            KEYWORD_FINDER.getSentences(paragraph), additionalPhrases, String.class)) {
+          for (String word : KEYWORD_FINDER.getTokens(sentence)) {
             if (word != null && !stopWords.contains(word)) {
               word = KeywordUtils.cleanKeyword(word);
               if (word.length() > 2 && KeywordUtils.isValidKeyword(word)) {

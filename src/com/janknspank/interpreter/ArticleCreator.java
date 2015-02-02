@@ -103,7 +103,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     articleBuilder.setWordCount(getWordCount(documentNode));
 
     // Keywords.
-    articleBuilder.addAllKeyword(KeywordFinder.findKeywords(urlId, documentNode));
+    articleBuilder.addAllKeyword(KeywordFinder.getInstance().findKeywords(urlId, documentNode));
 
     // Since many sites double-escape their HTML entities (why anyone would
     // do this is beyond me), do another escape pass on everything before we
