@@ -32,7 +32,7 @@ public class TheMachine implements Runnable {
   public void run() {
     // Uncomment this to start the crawl at a specific page.
     try {
-      Urls.put("http://recode.net/", false);
+      Urls.put("http://recode.net/", "http://jonemerson.net/", false);
     } catch (BiznessException | DatabaseSchemaException e) {
       e.printStackTrace();
     }
@@ -93,6 +93,7 @@ public class TheMachine implements Runnable {
             Iterables.transform(
                 Iterables.filter(urls, UrlWhitelist.PREDICATE),
                 UrlCleaner.TRANSFORM_FUNCTION),
+            url.getUrl(),
             false /* isTweet */);
         Links.put(url, destinationUrls);
         Urls.markCrawlFinish(url);

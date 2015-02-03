@@ -17,11 +17,7 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Urls;
 import com.janknspank.common.UrlCleaner;
 import com.janknspank.common.UrlWhitelist;
-import com.janknspank.database.Database;
-import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.CoreProto.Link;
-import com.janknspank.proto.CoreProto.Url;
 
 public class TwitterCrawler implements twitter4j.StatusListener {
   private final UrlResolver resolver = UrlResolver.getInstance();
@@ -78,15 +74,8 @@ public class TwitterCrawler implements twitter4j.StatusListener {
                     + status.getUser().getScreenName() + "/status/" + status.getId();
 
                 try {
-                  Url discoveredTwitterUrl = Urls.put(twitterUrl, /* isTweet */ false);
-                  Url newsUrl = Urls.put(longUrl, /* isTweet */ true);
-                  Database.insert(Link.newBuilder()
-                      .setOriginUrlId(discoveredTwitterUrl.getId())
-                      .setDestinationUrlId(newsUrl.getId())
-                      .setDiscoveryTime(newsUrl.getDiscoveryTime())
-                      .setLastFoundTime(newsUrl.getDiscoveryTime())
-                      .build());
-                } catch (DatabaseRequestException | DatabaseSchemaException | BiznessException e) {
+                  Urls.put(longUrl, twitterUrl, /* isTweet */ true);
+                } catch (DatabaseSchemaException | BiznessException e) {
                   e.printStackTrace();
                 }
               }

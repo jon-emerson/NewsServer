@@ -50,10 +50,11 @@ public class Urls {
     return url.contains("//twitter.com/") ? 0 : 10;
   }
 
-  private static Url create(String url, boolean isTweet) {
+  private static Url create(String url, String originUrl, boolean isTweet) {
     return Url.newBuilder()
-        .setUrl(url)
         .setId(GuidFactory.generate())
+        .setUrl(url)
+        .setOriginUrl(originUrl)
         .setTweetCount(isTweet ? 1 : 0)
         .setDiscoveryTime(System.currentTimeMillis())
         .setCrawlPriority(getCrawlPriority(url, null))
@@ -66,9 +67,9 @@ public class Urls {
    * The returned Url is either an updated version of the existing field or
    * a new Url, as necessary.
    */
-  public static Url put(String urlString, boolean isTweet)
+  public static Url put(String urlString, String originUrl, boolean isTweet)
       throws BiznessException, DatabaseSchemaException {
-    return Iterables.getFirst(put(ImmutableList.of(urlString), isTweet), null);
+    return Iterables.getFirst(put(ImmutableList.of(urlString), originUrl, isTweet), null);
   }
 
   /**
@@ -77,7 +78,7 @@ public class Urls {
    * true.  The return Url objects are in the same order as the URL strings,
    * though duplicates will be removed.
    */
-  public static Iterable<Url> put(Iterable<String> urlStrings, boolean isTweet)
+  public static Iterable<Url> put(Iterable<String> urlStrings, String originUrl, boolean isTweet)
       throws BiznessException, DatabaseSchemaException {
     if (Iterables.isEmpty(urlStrings)) {
       return ImmutableList.of();
@@ -113,7 +114,7 @@ public class Urls {
       // (Well, the database would actually prevent us, by crashing this whole
       // method!!)
       if (urls.get(urlString) == null && !existingCreates.contains(urlString)) {
-        Url newUrl = create(urlString, isTweet);
+        Url newUrl = create(urlString, originUrl, isTweet);
         urlsToCreate.add(newUrl);
         urls.put(urlString, newUrl);
         existingCreates.add(urlString);

@@ -830,6 +830,33 @@ public final class CoreProto {
     com.google.protobuf.ByteString
         getUrlBytes();
 
+    // optional string origin_url = 8;
+    /**
+     * <code>optional string origin_url = 8;</code>
+     *
+     * <pre>
+     * On what page did we find this URL?
+     * </pre>
+     */
+    boolean hasOriginUrl();
+    /**
+     * <code>optional string origin_url = 8;</code>
+     *
+     * <pre>
+     * On what page did we find this URL?
+     * </pre>
+     */
+    java.lang.String getOriginUrl();
+    /**
+     * <code>optional string origin_url = 8;</code>
+     *
+     * <pre>
+     * On what page did we find this URL?
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getOriginUrlBytes();
+
     // optional int64 tweet_count = 3;
     /**
      * <code>optional int64 tweet_count = 3;</code>
@@ -962,28 +989,33 @@ public final class CoreProto {
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               tweetCount_ = input.readInt64();
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               discoveryTime_ = input.readInt64();
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               lastCrawlStartTime_ = input.readInt64();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               lastCrawlFinishTime_ = input.readInt64();
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               crawlPriority_ = input.readInt64();
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000004;
+              originUrl_ = input.readBytes();
               break;
             }
           }
@@ -1112,6 +1144,61 @@ public final class CoreProto {
       }
     }
 
+    // optional string origin_url = 8;
+    public static final int ORIGIN_URL_FIELD_NUMBER = 8;
+    private java.lang.Object originUrl_;
+    /**
+     * <code>optional string origin_url = 8;</code>
+     *
+     * <pre>
+     * On what page did we find this URL?
+     * </pre>
+     */
+    public boolean hasOriginUrl() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string origin_url = 8;</code>
+     *
+     * <pre>
+     * On what page did we find this URL?
+     * </pre>
+     */
+    public java.lang.String getOriginUrl() {
+      java.lang.Object ref = originUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          originUrl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string origin_url = 8;</code>
+     *
+     * <pre>
+     * On what page did we find this URL?
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getOriginUrlBytes() {
+      java.lang.Object ref = originUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        originUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional int64 tweet_count = 3;
     public static final int TWEET_COUNT_FIELD_NUMBER = 3;
     private long tweetCount_;
@@ -1119,7 +1206,7 @@ public final class CoreProto {
      * <code>optional int64 tweet_count = 3;</code>
      */
     public boolean hasTweetCount() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional int64 tweet_count = 3;</code>
@@ -1135,7 +1222,7 @@ public final class CoreProto {
      * <code>optional int64 discovery_time = 4;</code>
      */
     public boolean hasDiscoveryTime() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int64 discovery_time = 4;</code>
@@ -1151,7 +1238,7 @@ public final class CoreProto {
      * <code>optional int64 last_crawl_start_time = 5;</code>
      */
     public boolean hasLastCrawlStartTime() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional int64 last_crawl_start_time = 5;</code>
@@ -1167,7 +1254,7 @@ public final class CoreProto {
      * <code>optional int64 last_crawl_finish_time = 6;</code>
      */
     public boolean hasLastCrawlFinishTime() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional int64 last_crawl_finish_time = 6;</code>
@@ -1193,7 +1280,7 @@ public final class CoreProto {
      * </pre>
      */
     public boolean hasCrawlPriority() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional int64 crawl_priority = 7;</code>
@@ -1215,6 +1302,7 @@ public final class CoreProto {
     private void initFields() {
       id_ = "";
       url_ = "";
+      originUrl_ = "";
       tweetCount_ = 0L;
       discoveryTime_ = 0L;
       lastCrawlStartTime_ = 0L;
@@ -1239,20 +1327,23 @@ public final class CoreProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(2, getIdBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(3, tweetCount_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(4, discoveryTime_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt64(5, lastCrawlStartTime_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(6, lastCrawlFinishTime_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt64(7, crawlPriority_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(8, getOriginUrlBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1271,25 +1362,29 @@ public final class CoreProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getIdBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, tweetCount_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, discoveryTime_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, lastCrawlStartTime_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(6, lastCrawlFinishTime_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(7, crawlPriority_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getOriginUrlBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1411,16 +1506,18 @@ public final class CoreProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         url_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        tweetCount_ = 0L;
+        originUrl_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        discoveryTime_ = 0L;
+        tweetCount_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
-        lastCrawlStartTime_ = 0L;
+        discoveryTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
-        lastCrawlFinishTime_ = 0L;
+        lastCrawlStartTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
-        crawlPriority_ = 0L;
+        lastCrawlFinishTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000040);
+        crawlPriority_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -1460,21 +1557,25 @@ public final class CoreProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.tweetCount_ = tweetCount_;
+        result.originUrl_ = originUrl_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.discoveryTime_ = discoveryTime_;
+        result.tweetCount_ = tweetCount_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.lastCrawlStartTime_ = lastCrawlStartTime_;
+        result.discoveryTime_ = discoveryTime_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.lastCrawlFinishTime_ = lastCrawlFinishTime_;
+        result.lastCrawlStartTime_ = lastCrawlStartTime_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
+        }
+        result.lastCrawlFinishTime_ = lastCrawlFinishTime_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
         }
         result.crawlPriority_ = crawlPriority_;
         result.bitField0_ = to_bitField0_;
@@ -1501,6 +1602,11 @@ public final class CoreProto {
         if (other.hasUrl()) {
           bitField0_ |= 0x00000002;
           url_ = other.url_;
+          onChanged();
+        }
+        if (other.hasOriginUrl()) {
+          bitField0_ |= 0x00000004;
+          originUrl_ = other.originUrl_;
           onChanged();
         }
         if (other.hasTweetCount()) {
@@ -1693,13 +1799,111 @@ public final class CoreProto {
         return this;
       }
 
+      // optional string origin_url = 8;
+      private java.lang.Object originUrl_ = "";
+      /**
+       * <code>optional string origin_url = 8;</code>
+       *
+       * <pre>
+       * On what page did we find this URL?
+       * </pre>
+       */
+      public boolean hasOriginUrl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string origin_url = 8;</code>
+       *
+       * <pre>
+       * On what page did we find this URL?
+       * </pre>
+       */
+      public java.lang.String getOriginUrl() {
+        java.lang.Object ref = originUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          originUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string origin_url = 8;</code>
+       *
+       * <pre>
+       * On what page did we find this URL?
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getOriginUrlBytes() {
+        java.lang.Object ref = originUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          originUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string origin_url = 8;</code>
+       *
+       * <pre>
+       * On what page did we find this URL?
+       * </pre>
+       */
+      public Builder setOriginUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        originUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string origin_url = 8;</code>
+       *
+       * <pre>
+       * On what page did we find this URL?
+       * </pre>
+       */
+      public Builder clearOriginUrl() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        originUrl_ = getDefaultInstance().getOriginUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string origin_url = 8;</code>
+       *
+       * <pre>
+       * On what page did we find this URL?
+       * </pre>
+       */
+      public Builder setOriginUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        originUrl_ = value;
+        onChanged();
+        return this;
+      }
+
       // optional int64 tweet_count = 3;
       private long tweetCount_ ;
       /**
        * <code>optional int64 tweet_count = 3;</code>
        */
       public boolean hasTweetCount() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional int64 tweet_count = 3;</code>
@@ -1711,7 +1915,7 @@ public final class CoreProto {
        * <code>optional int64 tweet_count = 3;</code>
        */
       public Builder setTweetCount(long value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         tweetCount_ = value;
         onChanged();
         return this;
@@ -1720,7 +1924,7 @@ public final class CoreProto {
        * <code>optional int64 tweet_count = 3;</code>
        */
       public Builder clearTweetCount() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         tweetCount_ = 0L;
         onChanged();
         return this;
@@ -1732,7 +1936,7 @@ public final class CoreProto {
        * <code>optional int64 discovery_time = 4;</code>
        */
       public boolean hasDiscoveryTime() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int64 discovery_time = 4;</code>
@@ -1744,7 +1948,7 @@ public final class CoreProto {
        * <code>optional int64 discovery_time = 4;</code>
        */
       public Builder setDiscoveryTime(long value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         discoveryTime_ = value;
         onChanged();
         return this;
@@ -1753,7 +1957,7 @@ public final class CoreProto {
        * <code>optional int64 discovery_time = 4;</code>
        */
       public Builder clearDiscoveryTime() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         discoveryTime_ = 0L;
         onChanged();
         return this;
@@ -1765,7 +1969,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_start_time = 5;</code>
        */
       public boolean hasLastCrawlStartTime() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional int64 last_crawl_start_time = 5;</code>
@@ -1777,7 +1981,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_start_time = 5;</code>
        */
       public Builder setLastCrawlStartTime(long value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         lastCrawlStartTime_ = value;
         onChanged();
         return this;
@@ -1786,7 +1990,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_start_time = 5;</code>
        */
       public Builder clearLastCrawlStartTime() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         lastCrawlStartTime_ = 0L;
         onChanged();
         return this;
@@ -1798,7 +2002,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_finish_time = 6;</code>
        */
       public boolean hasLastCrawlFinishTime() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional int64 last_crawl_finish_time = 6;</code>
@@ -1810,7 +2014,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_finish_time = 6;</code>
        */
       public Builder setLastCrawlFinishTime(long value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         lastCrawlFinishTime_ = value;
         onChanged();
         return this;
@@ -1819,7 +2023,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_finish_time = 6;</code>
        */
       public Builder clearLastCrawlFinishTime() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         lastCrawlFinishTime_ = 0L;
         onChanged();
         return this;
@@ -1841,7 +2045,7 @@ public final class CoreProto {
        * </pre>
        */
       public boolean hasCrawlPriority() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional int64 crawl_priority = 7;</code>
@@ -1873,7 +2077,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder setCrawlPriority(long value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         crawlPriority_ = value;
         onChanged();
         return this;
@@ -1892,7 +2096,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder clearCrawlPriority() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         crawlPriority_ = 0L;
         onChanged();
         return this;
@@ -5393,67 +5597,27 @@ public final class CoreProto {
      */
     int getDocumentCount();
 
-    // optional int32 word_count = 2;
+    // repeated .VectorData.WordFrequency word_frequency = 2;
     /**
-     * <code>optional int32 word_count = 2;</code>
-     *
-     * <pre>
-     * This is the total word count for documents in this vector.
-     * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
-     * words are not included in WordFrequencies.  But they are included here.
-     * </pre>
-     */
-    boolean hasWordCount();
-    /**
-     * <code>optional int32 word_count = 2;</code>
-     *
-     * <pre>
-     * This is the total word count for documents in this vector.
-     * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
-     * words are not included in WordFrequencies.  But they are included here.
-     * </pre>
-     */
-    int getWordCount();
-
-    // optional int32 unique_word_count = 3;
-    /**
-     * <code>optional int32 unique_word_count = 3;</code>
-     *
-     * <pre>
-     * Total unique word count for documents in this vector, including stop words.
-     * </pre>
-     */
-    boolean hasUniqueWordCount();
-    /**
-     * <code>optional int32 unique_word_count = 3;</code>
-     *
-     * <pre>
-     * Total unique word count for documents in this vector, including stop words.
-     * </pre>
-     */
-    int getUniqueWordCount();
-
-    // repeated .VectorData.WordFrequency word_frequency = 4;
-    /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> 
         getWordFrequencyList();
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     com.janknspank.proto.CoreProto.VectorData.WordFrequency getWordFrequency(int index);
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     int getWordFrequencyCount();
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     java.util.List<? extends com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> 
         getWordFrequencyOrBuilderList();
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder getWordFrequencyOrBuilder(
         int index);
@@ -5519,20 +5683,10 @@ public final class CoreProto {
               documentCount_ = input.readInt32();
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              wordCount_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              uniqueWordCount_ = input.readInt32();
-              break;
-            }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 wordFrequency_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.VectorData.WordFrequency>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000002;
               }
               wordFrequency_.add(input.readMessage(com.janknspank.proto.CoreProto.VectorData.WordFrequency.PARSER, extensionRegistry));
               break;
@@ -5545,7 +5699,7 @@ public final class CoreProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           wordFrequency_ = java.util.Collections.unmodifiableList(wordFrequency_);
         }
         this.unknownFields = unknownFields.build();
@@ -6325,88 +6479,36 @@ public final class CoreProto {
       return documentCount_;
     }
 
-    // optional int32 word_count = 2;
-    public static final int WORD_COUNT_FIELD_NUMBER = 2;
-    private int wordCount_;
-    /**
-     * <code>optional int32 word_count = 2;</code>
-     *
-     * <pre>
-     * This is the total word count for documents in this vector.
-     * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
-     * words are not included in WordFrequencies.  But they are included here.
-     * </pre>
-     */
-    public boolean hasWordCount() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 word_count = 2;</code>
-     *
-     * <pre>
-     * This is the total word count for documents in this vector.
-     * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
-     * words are not included in WordFrequencies.  But they are included here.
-     * </pre>
-     */
-    public int getWordCount() {
-      return wordCount_;
-    }
-
-    // optional int32 unique_word_count = 3;
-    public static final int UNIQUE_WORD_COUNT_FIELD_NUMBER = 3;
-    private int uniqueWordCount_;
-    /**
-     * <code>optional int32 unique_word_count = 3;</code>
-     *
-     * <pre>
-     * Total unique word count for documents in this vector, including stop words.
-     * </pre>
-     */
-    public boolean hasUniqueWordCount() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 unique_word_count = 3;</code>
-     *
-     * <pre>
-     * Total unique word count for documents in this vector, including stop words.
-     * </pre>
-     */
-    public int getUniqueWordCount() {
-      return uniqueWordCount_;
-    }
-
-    // repeated .VectorData.WordFrequency word_frequency = 4;
-    public static final int WORD_FREQUENCY_FIELD_NUMBER = 4;
+    // repeated .VectorData.WordFrequency word_frequency = 2;
+    public static final int WORD_FREQUENCY_FIELD_NUMBER = 2;
     private java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> wordFrequency_;
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     public java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> getWordFrequencyList() {
       return wordFrequency_;
     }
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     public java.util.List<? extends com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> 
         getWordFrequencyOrBuilderList() {
       return wordFrequency_;
     }
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     public int getWordFrequencyCount() {
       return wordFrequency_.size();
     }
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     public com.janknspank.proto.CoreProto.VectorData.WordFrequency getWordFrequency(int index) {
       return wordFrequency_.get(index);
     }
     /**
-     * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+     * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
      */
     public com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder getWordFrequencyOrBuilder(
         int index) {
@@ -6415,8 +6517,6 @@ public final class CoreProto {
 
     private void initFields() {
       documentCount_ = 0;
-      wordCount_ = 0;
-      uniqueWordCount_ = 0;
       wordFrequency_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -6434,14 +6534,8 @@ public final class CoreProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, documentCount_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, wordCount_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, uniqueWordCount_);
-      }
       for (int i = 0; i < wordFrequency_.size(); i++) {
-        output.writeMessage(4, wordFrequency_.get(i));
+        output.writeMessage(2, wordFrequency_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -6456,17 +6550,9 @@ public final class CoreProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, documentCount_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, wordCount_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, uniqueWordCount_);
-      }
       for (int i = 0; i < wordFrequency_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, wordFrequency_.get(i));
+          .computeMessageSize(2, wordFrequency_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6592,13 +6678,9 @@ public final class CoreProto {
         super.clear();
         documentCount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        wordCount_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        uniqueWordCount_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
         if (wordFrequencyBuilder_ == null) {
           wordFrequency_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           wordFrequencyBuilder_.clear();
         }
@@ -6634,18 +6716,10 @@ public final class CoreProto {
           to_bitField0_ |= 0x00000001;
         }
         result.documentCount_ = documentCount_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.wordCount_ = wordCount_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.uniqueWordCount_ = uniqueWordCount_;
         if (wordFrequencyBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             wordFrequency_ = java.util.Collections.unmodifiableList(wordFrequency_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.wordFrequency_ = wordFrequency_;
         } else {
@@ -6670,17 +6744,11 @@ public final class CoreProto {
         if (other.hasDocumentCount()) {
           setDocumentCount(other.getDocumentCount());
         }
-        if (other.hasWordCount()) {
-          setWordCount(other.getWordCount());
-        }
-        if (other.hasUniqueWordCount()) {
-          setUniqueWordCount(other.getUniqueWordCount());
-        }
         if (wordFrequencyBuilder_ == null) {
           if (!other.wordFrequency_.isEmpty()) {
             if (wordFrequency_.isEmpty()) {
               wordFrequency_ = other.wordFrequency_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureWordFrequencyIsMutable();
               wordFrequency_.addAll(other.wordFrequency_);
@@ -6693,7 +6761,7 @@ public final class CoreProto {
               wordFrequencyBuilder_.dispose();
               wordFrequencyBuilder_ = null;
               wordFrequency_ = other.wordFrequency_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000002);
               wordFrequencyBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getWordFrequencyFieldBuilder() : null;
@@ -6778,119 +6846,13 @@ public final class CoreProto {
         return this;
       }
 
-      // optional int32 word_count = 2;
-      private int wordCount_ ;
-      /**
-       * <code>optional int32 word_count = 2;</code>
-       *
-       * <pre>
-       * This is the total word count for documents in this vector.
-       * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
-       * words are not included in WordFrequencies.  But they are included here.
-       * </pre>
-       */
-      public boolean hasWordCount() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 word_count = 2;</code>
-       *
-       * <pre>
-       * This is the total word count for documents in this vector.
-       * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
-       * words are not included in WordFrequencies.  But they are included here.
-       * </pre>
-       */
-      public int getWordCount() {
-        return wordCount_;
-      }
-      /**
-       * <code>optional int32 word_count = 2;</code>
-       *
-       * <pre>
-       * This is the total word count for documents in this vector.
-       * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
-       * words are not included in WordFrequencies.  But they are included here.
-       * </pre>
-       */
-      public Builder setWordCount(int value) {
-        bitField0_ |= 0x00000002;
-        wordCount_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 word_count = 2;</code>
-       *
-       * <pre>
-       * This is the total word count for documents in this vector.
-       * NOTE(jonemerson): This is not merely the sum of all the frequencies.  Stop
-       * words are not included in WordFrequencies.  But they are included here.
-       * </pre>
-       */
-      public Builder clearWordCount() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        wordCount_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 unique_word_count = 3;
-      private int uniqueWordCount_ ;
-      /**
-       * <code>optional int32 unique_word_count = 3;</code>
-       *
-       * <pre>
-       * Total unique word count for documents in this vector, including stop words.
-       * </pre>
-       */
-      public boolean hasUniqueWordCount() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 unique_word_count = 3;</code>
-       *
-       * <pre>
-       * Total unique word count for documents in this vector, including stop words.
-       * </pre>
-       */
-      public int getUniqueWordCount() {
-        return uniqueWordCount_;
-      }
-      /**
-       * <code>optional int32 unique_word_count = 3;</code>
-       *
-       * <pre>
-       * Total unique word count for documents in this vector, including stop words.
-       * </pre>
-       */
-      public Builder setUniqueWordCount(int value) {
-        bitField0_ |= 0x00000004;
-        uniqueWordCount_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 unique_word_count = 3;</code>
-       *
-       * <pre>
-       * Total unique word count for documents in this vector, including stop words.
-       * </pre>
-       */
-      public Builder clearUniqueWordCount() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        uniqueWordCount_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // repeated .VectorData.WordFrequency word_frequency = 4;
+      // repeated .VectorData.WordFrequency word_frequency = 2;
       private java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> wordFrequency_ =
         java.util.Collections.emptyList();
       private void ensureWordFrequencyIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           wordFrequency_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.VectorData.WordFrequency>(wordFrequency_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -6898,7 +6860,7 @@ public final class CoreProto {
           com.janknspank.proto.CoreProto.VectorData.WordFrequency, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder, com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> wordFrequencyBuilder_;
 
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency> getWordFrequencyList() {
         if (wordFrequencyBuilder_ == null) {
@@ -6908,7 +6870,7 @@ public final class CoreProto {
         }
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public int getWordFrequencyCount() {
         if (wordFrequencyBuilder_ == null) {
@@ -6918,7 +6880,7 @@ public final class CoreProto {
         }
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public com.janknspank.proto.CoreProto.VectorData.WordFrequency getWordFrequency(int index) {
         if (wordFrequencyBuilder_ == null) {
@@ -6928,7 +6890,7 @@ public final class CoreProto {
         }
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder setWordFrequency(
           int index, com.janknspank.proto.CoreProto.VectorData.WordFrequency value) {
@@ -6945,7 +6907,7 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder setWordFrequency(
           int index, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder builderForValue) {
@@ -6959,7 +6921,7 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder addWordFrequency(com.janknspank.proto.CoreProto.VectorData.WordFrequency value) {
         if (wordFrequencyBuilder_ == null) {
@@ -6975,7 +6937,7 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder addWordFrequency(
           int index, com.janknspank.proto.CoreProto.VectorData.WordFrequency value) {
@@ -6992,7 +6954,7 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder addWordFrequency(
           com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder builderForValue) {
@@ -7006,7 +6968,7 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder addWordFrequency(
           int index, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder builderForValue) {
@@ -7020,7 +6982,7 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder addAllWordFrequency(
           java.lang.Iterable<? extends com.janknspank.proto.CoreProto.VectorData.WordFrequency> values) {
@@ -7034,12 +6996,12 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder clearWordFrequency() {
         if (wordFrequencyBuilder_ == null) {
           wordFrequency_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           wordFrequencyBuilder_.clear();
@@ -7047,7 +7009,7 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public Builder removeWordFrequency(int index) {
         if (wordFrequencyBuilder_ == null) {
@@ -7060,14 +7022,14 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder getWordFrequencyBuilder(
           int index) {
         return getWordFrequencyFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder getWordFrequencyOrBuilder(
           int index) {
@@ -7077,7 +7039,7 @@ public final class CoreProto {
         }
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public java.util.List<? extends com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder> 
            getWordFrequencyOrBuilderList() {
@@ -7088,14 +7050,14 @@ public final class CoreProto {
         }
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder addWordFrequencyBuilder() {
         return getWordFrequencyFieldBuilder().addBuilder(
             com.janknspank.proto.CoreProto.VectorData.WordFrequency.getDefaultInstance());
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder addWordFrequencyBuilder(
           int index) {
@@ -7103,7 +7065,7 @@ public final class CoreProto {
             index, com.janknspank.proto.CoreProto.VectorData.WordFrequency.getDefaultInstance());
       }
       /**
-       * <code>repeated .VectorData.WordFrequency word_frequency = 4;</code>
+       * <code>repeated .VectorData.WordFrequency word_frequency = 2;</code>
        */
       public java.util.List<com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder> 
            getWordFrequencyBuilderList() {
@@ -7116,7 +7078,7 @@ public final class CoreProto {
           wordFrequencyBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.CoreProto.VectorData.WordFrequency, com.janknspank.proto.CoreProto.VectorData.WordFrequency.Builder, com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder>(
                   wordFrequency_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           wordFrequency_ = null;
@@ -9537,52 +9499,51 @@ public final class CoreProto {
       "\001\022,\n\022destination_url_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
       "\246\035\030\250\246\035\001\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022\035\n" +
       "\017last_found_time\030\004 \001(\003B\004\210\246\035\001:\020\212\265\030\014MongoD" +
-      "B.Link\"\206\002\n\003Url\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
-      "\250\246\035\001\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022\031\n\013" +
-      "tweet_count\030\003 \001(\003B\004\210\246\035\001\022 \n\016discovery_tim",
-      "e\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025last_crawl_start_ti" +
-      "me\030\005 \001(\003B\010\220\246\035\005\240\246\035\003\022(\n\026last_crawl_finish_" +
-      "time\030\006 \001(\003B\010\220\246\035\005\240\246\035\003\022 \n\016crawl_priority\030\007" +
-      " \001(\003B\010\220\246\035\003\240\246\035\003:\017\212\265\030\013MongoDB.Url\"\200\001\n\007Sess" +
-      "ion\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\004\230\246\035\200\001\022" +
-      "!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013cr" +
-      "eate_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017MongoDB.Sessi" +
-      "on\"\207\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250" +
-      "\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004ty" +
-      "pe\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001",
-      "(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014canonica" +
-      "l_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005topic\030\006 \003(\0132" +
-      "\023.Entity.EntityTopic\032\277\002\n\013EntityTopic\022\033\n\t" +
-      "entity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001" +
-      "(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010" +
-      "strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033." +
-      "Entity.EntityTopic.Context:\007UNKNOWN\"\220\001\n\007" +
-      "Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED" +
-      "_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIS" +
-      "T_INVESTED_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026",
-      "\n\022WIKIPEDIA_SUBTOPIC\020\005\"Z\n\006Source\022\013\n\007UNKN" +
-      "OWN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPE" +
-      "DIA_LONG_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003:\020\212\265\030\014" +
-      "MySQL.Entity\"\375\001\n\nVectorData\022\034\n\016document_" +
-      "count\030\001 \001(\005B\004\210\246\035\001\022\030\n\nword_count\030\002 \001(\005B\004\210" +
-      "\246\035\001\022\037\n\021unique_word_count\030\003 \001(\005B\004\210\246\035\001\0221\n\016" +
-      "word_frequency\030\004 \003(\0132\031.VectorData.WordFr" +
-      "equency\032c\n\rWordFrequency\022\026\n\004word\030\001 \001(\tB\010" +
-      "\210\246\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(\005B\004\210\246\035\001\022!\n\023doc" +
-      "ument_occurences\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026Trained",
-      "ArticleIndustry\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035" +
-      "\003\230\246\035\030\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035" +
-      "\001\220\246\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003" +
-      "\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB.TrainedArticleIndu" +
-      "stry\"\347\001\n\034TrainedArticleClassification\022 \n" +
-      "\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033artic" +
-      "le_classification_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246" +
-      "\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017tra" +
-      "iner_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265" +
-      "\030$MongoDB.TrainedArticleClassification\"9",
-      "\n\017InterpretedData\022\031\n\007article\030\001 \001(\0132\010.Art" +
-      "icle\022\013\n\003url\030\002 \003(\tB!\n\024com.janknspank.prot" +
-      "oB\tCoreProto"
+      "B.Link\"\251\002\n\003Url\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
+      "\250\246\035\001\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022!\n\n" +
+      "origin_url\030\010 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\031\n\013tweet",
+      "_count\030\003 \001(\003B\004\210\246\035\001\022 \n\016discovery_time\030\004 \001" +
+      "(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025last_crawl_start_time\030\005 " +
+      "\001(\003B\010\220\246\035\005\240\246\035\003\022(\n\026last_crawl_finish_time\030" +
+      "\006 \001(\003B\010\220\246\035\005\240\246\035\003\022 \n\016crawl_priority\030\007 \001(\003B" +
+      "\010\220\246\035\003\240\246\035\003:\017\212\265\030\013MongoDB.Url\"\200\001\n\007Session\022\"" +
+      "\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\004\230\246\035\200\001\022!\n\007us" +
+      "er_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create_" +
+      "time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017MongoDB.Session\"\207\005" +
+      "\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035" +
+      "\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 ",
+      "\001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001(\0162\016." +
+      "Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014canonical_id\030" +
+      "\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005topic\030\006 \003(\0132\023.Ent" +
+      "ity.EntityTopic\032\277\002\n\013EntityTopic\022\033\n\tentit" +
+      "y_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210" +
+      "\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010stren" +
+      "gth\030\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033.Entit" +
+      "y.EntityTopic.Context:\007UNKNOWN\"\220\001\n\007Conte" +
+      "xt\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED_AT\020\001" +
+      "\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIST_INV",
+      "ESTED_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026\n\022WIK" +
+      "IPEDIA_SUBTOPIC\020\005\"Z\n\006Source\022\013\n\007UNKNOWN\020\000" +
+      "\022\031\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPEDIA_L" +
+      "ONG_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003:\020\212\265\030\014MySQL" +
+      ".Entity\"\302\001\n\nVectorData\022\034\n\016document_count" +
+      "\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 \003(\0132\031.V" +
+      "ectorData.WordFrequency\032c\n\rWordFrequency" +
+      "\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency\030\002 " +
+      "\001(\005B\004\210\246\035\001\022!\n\023document_occurences\030\003 \001(\005B\004" +
+      "\210\246\035\001\"\255\001\n\026TrainedArticleIndustry\022 \n\006url_i",
+      "d\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_co" +
+      "de_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id" +
+      "\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB.Tr" +
+      "ainedArticleIndustry\"\347\001\n\034TrainedArticleC" +
+      "lassification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
+      "\246\035\030\250\246\035\001\0225\n\033article_classification_code\030\002" +
+      " \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B" +
+      "\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001" +
+      "\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArticle" +
+      "Classification\"9\n\017InterpretedData\022\031\n\007art",
+      "icle\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB!\n\024com" +
+      ".janknspank.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9600,7 +9561,7 @@ public final class CoreProto {
           internal_static_Url_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Url_descriptor,
-              new java.lang.String[] { "Id", "Url", "TweetCount", "DiscoveryTime", "LastCrawlStartTime", "LastCrawlFinishTime", "CrawlPriority", });
+              new java.lang.String[] { "Id", "Url", "OriginUrl", "TweetCount", "DiscoveryTime", "LastCrawlStartTime", "LastCrawlFinishTime", "CrawlPriority", });
           internal_static_Session_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_Session_fieldAccessorTable = new
@@ -9624,7 +9585,7 @@ public final class CoreProto {
           internal_static_VectorData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_VectorData_descriptor,
-              new java.lang.String[] { "DocumentCount", "WordCount", "UniqueWordCount", "WordFrequency", });
+              new java.lang.String[] { "DocumentCount", "WordFrequency", });
           internal_static_VectorData_WordFrequency_descriptor =
             internal_static_VectorData_descriptor.getNestedTypes().get(0);
           internal_static_VectorData_WordFrequency_fieldAccessorTable = new
@@ -9671,6 +9632,9 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
@@ -9713,8 +9677,6 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

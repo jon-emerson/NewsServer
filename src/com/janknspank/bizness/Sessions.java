@@ -70,7 +70,7 @@ public class Sessions {
   private static String toEncryptedBase64(String rawStr) throws BiznessException {
     try {
       byte[] encryptedBytes = ENCRYPT_CIPHER.doFinal(rawStr.getBytes("UTF-8"));
-      return Base64.encodeBase64URLSafeString(encryptedBytes).replaceAll("=", "");
+      return Base64.encodeBase64URLSafeString(encryptedBytes);
     } catch (UnsupportedEncodingException|IllegalBlockSizeException|BadPaddingException e) {
       throw new BiznessException("Could not encrypt session key: " + e.getMessage(), e);
     }

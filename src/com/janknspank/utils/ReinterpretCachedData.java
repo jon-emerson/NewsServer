@@ -76,6 +76,7 @@ public class ReinterpretCachedData {
             Iterables.transform(
                 Iterables.filter(interpretedData.getUrlList(), UrlWhitelist.PREDICATE),
                 UrlCleaner.TRANSFORM_FUNCTION),
+            url.getUrl(),
             false /* isTweet */);
         Links.put(url, destinationUrls);
         Urls.markCrawlFinish(url);
