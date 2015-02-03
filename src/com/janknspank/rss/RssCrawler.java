@@ -159,13 +159,14 @@ public class RssCrawler {
     return millis;
   }
 
-  private void saveArticle(String url, Long date) {
+  private void saveArticle(String url, String originUrl, Long date) {
     Url existing;
     try {
       existing = Urls.getByUrl(url);
       if (existing == null) {
         Database.insert(Url.newBuilder()
             .setUrl(url)
+            .setOriginUrl(originUrl)
             .setId(GuidFactory.generate())
             .setTweetCount(0)
             .setDiscoveryTime(System.currentTimeMillis())
@@ -190,7 +191,7 @@ public class RssCrawler {
           String articleUrl = getArticleUrl(itemNode);
           if (ArticleUrlDetector.isArticle(articleUrl)) {
             Long millis = getArticleDate(itemNode);
-            saveArticle(articleUrl, millis);
+            saveArticle(articleUrl, rssUrl, millis);
           }
         }
       }

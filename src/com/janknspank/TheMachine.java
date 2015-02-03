@@ -25,7 +25,8 @@ import com.janknspank.proto.CoreProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
 
 public class TheMachine implements Runnable {
-  // NOTE(jonemerson): This needs to be 1 if the database is empty.
+  // NOTE(jonemerson): This needs to be 1 if the database is empty.  Or, just
+  // run ./rss.sh first!
   public static final int THREAD_COUNT = 5;
 
   @Override

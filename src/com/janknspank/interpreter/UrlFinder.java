@@ -2,7 +2,10 @@ package com.janknspank.interpreter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
 import com.janknspank.common.ArticleUrlDetector;
@@ -17,6 +20,16 @@ import com.janknspank.proto.CoreProto.Url;
 
 public class UrlFinder {
   private static final Fetcher FETCHER = new Fetcher();
+
+  /**
+   * Simple synchronized cache for <base> tag lookups on documents.
+   */
+  private static final Map<DocumentNode, String> BASE_URL_MAP = Collections.synchronizedMap(
+      new LinkedHashMap<DocumentNode, String>() {
+        protected boolean removeEldestEntry(Map.Entry<DocumentNode, String> eldest) {
+          return this.size() > 50;
+        }
+      });
 
   /**
    * Retrieves the passed URL by making a request to the respective website,
@@ -56,10 +69,17 @@ public class UrlFinder {
   }
 
   /**
-   * Resolves a relative URL to its base based on the URL of this article.
+   * Resolves a relative URL to its fully-qualified version based on either the
+   * <base> tag in the article, or the article URL itself.
    */
   private static String resolveUrl(DocumentNode documentNode, String relativeUrl)
       throws MalformedURLException {
-    return new URL(new URL(documentNode.getUrl()), relativeUrl).toString();
+    String baseUrl = BASE_URL_MAP.get(documentNode);
+    if (baseUrl == null) {
+      Node baseNode = documentNode.findFirst("base");
+      baseUrl = (baseNode == null) ? documentNode.getUrl() : baseNode.getAttributeValue("href");
+      BASE_URL_MAP.put(documentNode, baseUrl);
+    }
+    return new URL(new URL(documentNode.getUrl()), baseUrl).toString();
   }
 }
