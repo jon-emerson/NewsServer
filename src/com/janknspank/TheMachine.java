@@ -27,7 +27,7 @@ import com.janknspank.proto.CoreProto.Url;
 public class TheMachine implements Runnable {
   // NOTE(jonemerson): This needs to be 1 if the database is empty.  Or, just
   // run ./rss.sh first!
-  public static final int THREAD_COUNT = 5;
+  public static final int THREAD_COUNT = 20;
 
   @Override
   public void run() {
@@ -66,38 +66,8 @@ public class TheMachine implements Runnable {
           continue;
         }
 
-        System.err.println("Crawling: " + url.getUrl());
-
-        List<String> urls;
-        if (ArticleUrlDetector.isArticle(url.getUrl())) {
-          InterpretedData interpretedData = Interpreter.interpret(url);
-          try {
-            Database.insert(interpretedData.getArticle());
-          } catch (DatabaseRequestException | DatabaseSchemaException e) {
-            // It could be that some other process decided to steal this article
-            // and process it first (mainly due to human error).  If so, delete
-            // everything and store it again.
-            System.out.println("Handling human error: " + url.getUrl());
-            Database.with(Article.class).delete(url.getId());
-            Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
-
-            // Try again!
-            Database.insert(interpretedData.getArticle());
-          }
-          urls = interpretedData.getUrlList();
-        } else {
-          urls = UrlFinder.findUrls(url);
-        }
-
-        // Make sure to filter and clean the URLs - only store the ones we want to crawl!
-        Iterable<Url> destinationUrls = Urls.put(
-            Iterables.transform(
-                Iterables.filter(urls, UrlWhitelist.PREDICATE),
-                UrlCleaner.TRANSFORM_FUNCTION),
-            url.getUrl(),
-            false /* isTweet */);
-        Links.put(url, destinationUrls);
-        Urls.markCrawlFinish(url);
+        // Let's do this.
+        crawl(url, false /* markCrawlStart */);
 
       } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
         // Internal error (bug in our code).
@@ -109,9 +79,57 @@ public class TheMachine implements Runnable {
     }
   }
 
+  /**
+   * Crawls a URL, putting the article (if found) in the database, and storing
+   * any outbound links.
+   */
+  public static Article crawl(Url url, boolean markCrawlStart) throws FetchException,
+       ParserException, RequiredFieldException, DatabaseSchemaException, DatabaseRequestException,
+       BiznessException {
+    System.err.println("Crawling: " + url.getUrl());
+
+    if (markCrawlStart) {
+      Urls.markCrawlStart(url);
+    }
+
+    List<String> urls;
+    Article article = null;
+    if (ArticleUrlDetector.isArticle(url.getUrl())) {
+      InterpretedData interpretedData = Interpreter.interpret(url);
+      article = interpretedData.getArticle();
+      try {
+        Database.insert(article);
+      } catch (DatabaseRequestException | DatabaseSchemaException e) {
+        // It could be that some other process decided to steal this article
+        // and process it first (mainly due to human error).  If so, delete
+        // everything and store it again.
+        System.out.println("Handling human error: " + url.getUrl());
+        Database.with(Article.class).delete(url.getId());
+        Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
+
+        // Try again!
+        Database.insert(article);
+      }
+      urls = interpretedData.getUrlList();
+    } else {
+      urls = UrlFinder.findUrls(url);
+    }
+
+    // Make sure to filter and clean the URLs - only store the ones we want to crawl!
+    Iterable<Url> destinationUrls = Urls.put(
+        Iterables.transform(
+            Iterables.filter(urls, UrlWhitelist.PREDICATE),
+            UrlCleaner.TRANSFORM_FUNCTION),
+        url.getUrl(),
+        false /* isTweet */);
+    Links.put(url, destinationUrls);
+    Urls.markCrawlFinish(url);
+    return article;
+  }
+
   public static void main(String args[]) throws Exception {
     ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < THREAD_COUNT; i++) {
       Runnable worker = new TheMachine();
       executor.execute(worker);
     }

@@ -312,7 +312,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
         "html > head meta[property=\"rnews:datePublished\"]",
         "html > head meta[name=\"pdate\"]", // Usually day only.
         "html > head meta[name=\"DC.date.issued\"]", // Abcnews.go.com.
-        "html meta[itemprop=\"datePublished\"]")); // Cbsnews.com.
+        "html meta[itemprop=\"datePublished\"]", // Cbsnews.com.
+        "html > head meta[name=\"live_date\"]")); // Pcmag.com.
     if (metaNode != null) {
       return DateParser.parseDateTime(metaNode.getAttributeValue("content"));
     }
@@ -419,7 +420,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
           }
     });
     if (Iterables.isEmpty(paragraphs)) {
-      throw new RequiredFieldException("No paragraphs found");
+      throw new RequiredFieldException("No paragraphs found in " + documentNode.getUrl());
     }
     return paragraphs;
   }

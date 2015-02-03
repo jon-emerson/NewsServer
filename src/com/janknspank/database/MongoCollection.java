@@ -7,9 +7,12 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 
+import com.google.api.client.util.Lists;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
@@ -34,6 +37,10 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
+/**
+ * An implementation of the Collection abstract class that enables gets,
+ * deletes, updates, and inserts against a Mongo DB database.
+ */
 public class MongoCollection<T extends Message> extends Collection<T> {
   private MongoClient __clientInternal = null; // DO NOT USE DIRECTLY!!
   private DB __database = null; // DO NOT USE DIRECTLY!!
@@ -55,18 +62,44 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     return __database;
   }
 
+  @VisibleForTesting
+  static List<String> getIndexes(Iterable<FieldDescriptor> fields)
+      throws DatabaseSchemaException {
+    List<String> indexes = Lists.newArrayList();
+    for (FieldDescriptor field : fields) {
+      StorageMethod storageMethod = field.getOptions().getExtension(ExtensionsProto.storageMethod);
+      if (storageMethod == StorageMethod.INDEX ||
+          storageMethod == StorageMethod.UNIQUE_INDEX) {
+        switch (field.getJavaType()) {
+          case STRING:
+          case LONG:
+          case INT:
+          case DOUBLE:
+          case FLOAT:
+            indexes.add(field.getName());
+            break;
+          default:
+            throw new DatabaseSchemaException("Field type cannot be indexed: "
+                + field.getJavaType() + " (in " + field.getFullName() + ")");
+        }
+      }
+      if (field.getJavaType() == JavaType.MESSAGE) {
+        for (String subindex : getIndexes(field.getMessageType().getFields())) {
+          indexes.add(field.getName() + "." + subindex);
+        }
+      }
+    }
+    return indexes;
+  }
+
   @Override
   public void createTable() throws DatabaseSchemaException {
     DBCollection collection = getDatabase().getCollection(getTableName());
     if (collection == null) {
       collection = getDatabase().createCollection(getTableName(), new BasicDBObject());
     }
-    for (FieldDescriptor field : storageMethodMap.keySet()) {
-      StorageMethod storageMethod = storageMethodMap.get(field);
-      if (storageMethod == StorageMethod.INDEX ||
-          storageMethod == StorageMethod.UNIQUE_INDEX) {
-        collection.createIndex(new BasicDBObject(field.getName(), 1));
-      }
+    for (String index : getIndexes(storageMethodMap.keySet())) {
+      collection.createIndex(new BasicDBObject(index, 1));
     }
   }
 
@@ -76,7 +109,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
    */
   private String getFieldName(QueryOption option) {
     String fieldName;
-    if (option instanceof WhereOption){
+    if (option instanceof WhereOption) {
       fieldName = ((WhereOption) option).getFieldName();
     } else if (option instanceof QueryOption.Sort) {
       fieldName = ((QueryOption.Sort) option).getFieldName();
@@ -224,9 +257,9 @@ public class MongoCollection<T extends Message> extends Collection<T> {
 
     DBCursor cursor = null;
     try {
-      cursor = getDatabase().getCollection(this.getTableName())
-          .find(getQueryObject(options))
-          .sort(getSortObject(options));
+      BasicDBObject query = getQueryObject(options);
+      BasicDBObject sort = getSortObject(options);
+      cursor = getDatabase().getCollection(this.getTableName()).find(query).sort(sort);
 
       List<QueryOption.Limit> queryOptionList = QueryOption.getList(options, QueryOption.Limit.class);
       if (queryOptionList.size() > 1) {
@@ -386,6 +419,15 @@ public class MongoCollection<T extends Message> extends Collection<T> {
         .getN() == 0) {
       throw new DatabaseSchemaException("Object not found: " + classAndField
           + " (id=" + Database.getPrimaryKey(message) + ")");
+    }
+  }
+
+  @Override
+  public String toString() {
+    try {
+      return getTableName() + "=" + storageMethodMap.toString();
+    } catch (DatabaseSchemaException e) {
+      return super.toString();
     }
   }
 }

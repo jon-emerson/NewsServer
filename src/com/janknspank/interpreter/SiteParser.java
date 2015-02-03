@@ -38,8 +38,12 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         ".post-body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
         ".text > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
+        ".text > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
-        ".article-content > p"});
+        ".article-content p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("allthingsd.com", new String[] {
+        ".article-body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bbc.co.uk", new String[] {
         ".story-body p",
         ".map-body p"});
@@ -49,9 +53,14 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("bdnews24.com", new String[] {
         ".body > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
-        ".article_body > p",    // See "Lawsky Said to Probe Medley Hedge Fund ...".
-        ".article-body > p",    // See "... Joins the NYPD Funeral Protest Backlash".
-        "#story_content > p"}); // Printable pages.
+        // See "Lawsky Said to Probe Medley Hedge Fund ...".
+        ".article_body > p",
+        // See "... Joins the NYPD Funeral Protest Backlash".
+        ".article-body > p",
+        // Printable pages.
+        "#story_content > p",
+        // See: "Inside RadioShack’s Slow-Motion Collapse".
+        "[itemprop=\"articleBody\"] p"});
     DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
         "article > p",
         ".content-text > p"});
@@ -86,6 +95,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("default", new String[] {
         "article > p",
         "article > div > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("fastcompany.com", new String[] {
+        ".article-prose p"});
     DOMAIN_TO_DOM_ADDRESSES.put("forbes.com", new String[] {
         ".article_body p",
         ".article-body p"});
@@ -146,6 +157,9 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("washingtonpost.com", new String[] {
         ".row p",
         "article > p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("wired.com", new String[] {
+        "span[itemprop=\"articleBody\"] div",
+        "span[itemprop=\"articleBody\"] p"});
   }
 
   private SiteParser() {}

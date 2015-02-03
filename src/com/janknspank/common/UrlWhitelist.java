@@ -36,6 +36,7 @@ public class UrlWhitelist {
     WHITELIST.add("abc.net.au");
     WHITELIST.add("abcnews.go.com");
     WHITELIST.add("advice.careerbuilder.com");
+    WHITELIST.add("allthingsd.com");
     WHITELIST.add("america.aljazeera.com");
     WHITELIST.add("arstechnica.com");
     WHITELIST.add("bbc.co.uk");
@@ -66,6 +67,7 @@ public class UrlWhitelist {
     // WHITELIST.add("ew.com");
     // WHITELIST.add("examiner.com");
     // WHITELIST.add("extremetech.com");
+    WHITELIST.add("fastcompany.com");
     WHITELIST.add("forbes.com");
     // WHITELIST.add("foxnews.com");
     // WHITELIST.add("freep.com");
@@ -97,6 +99,7 @@ public class UrlWhitelist {
     // WHITELIST.add("nypost.com");
     WHITELIST.add("nytimes.com");
     // WHITELIST.add("nzherald.co.nz");
+    WHITELIST.add("pcmag.com");
     WHITELIST.add("recode.net");
     WHITELIST.add("redherring.com");
     // WHITELIST.add("reuters.com");

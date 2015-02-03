@@ -224,6 +224,7 @@ public class ArticleUrlDetectorTest {
       "http://www.nytimes.com/2015/02/01/your-money/why-you-should-tell-your-kids-how-much-you-make.html",
       "http://www.nytimes.com/aponline/2014/04/11/us/ap-us-salesforce-san-francisco-lease.html",
       "http://www.nytimes.com/aponline/2015/01/30/business/ap-us-google-money-management.html",
+      "http://www.pcmag.com/article2/0,2817,2430291,00.asp",
       "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/",
       "http://www.redherring.com/finance/uber-raises-another-1-2bn-staggering-40bn-valuation/",
       "http://www.sfgate.com/49ers/article/49ers-say-goodbye-to-Jim-Harbaugh-and-a-5982751.php",

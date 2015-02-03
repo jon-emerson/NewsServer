@@ -50,9 +50,10 @@ public class UrlFinder {
     List<String> urlList = Lists.newArrayList();
     for (Node linkNode : documentNode.findAll("html > body a[href]")) {
       String href = linkNode.getAttributeValue("href");
-      if (!href.startsWith("javascript:") &&
-          !href.startsWith("mailto:") &&
-          !href.startsWith("whatsapp:")) {
+      String hrefToLowerCase = href.toLowerCase();
+      if (!hrefToLowerCase.startsWith("javascript:") &&
+          !hrefToLowerCase.startsWith("mailto:") &&
+          !hrefToLowerCase.startsWith("whatsapp:")) {
         try {
           String resolvedUrl = resolveUrl(documentNode, href);
           // To save on space, only save links to articles.  Without this,

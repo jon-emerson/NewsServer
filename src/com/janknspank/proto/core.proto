@@ -7,7 +7,7 @@ option java_package = "com.janknspank.proto";
 option java_outer_classname = "CoreProto";
 
 message Link {
-  option (database_collection) = "MongoDB.Link";
+  option (database_collection) = "MySQL.Link";
 
   optional string origin_url_id = 1 [
     (required) = YES,

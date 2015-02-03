@@ -5,6 +5,8 @@ import java.io.Reader;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
+
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.ParserException;
@@ -37,13 +39,7 @@ public class Interpreter {
       }
       return interpret(url, response.getReader());
     } finally {
-      try {
-        if (response != null) {
-          response.getReader().close();
-        }
-      } catch (IOException e) {
-        throw new FetchException("Could not close connection", e);
-      }
+      IOUtils.closeQuietly(response.getReader());
     }
   }
 

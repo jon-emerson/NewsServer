@@ -26,7 +26,7 @@ public class DateParser {
       new SimpleDateFormat("MMMM dd, yyyy, hh:mm a"), // CBS News.
       new SimpleDateFormat("MMMM dd, yyyy"), // Chicago Tribune.
       new SimpleDateFormat("yyyy-MM-dd'T'HH:mmX"), // Channelnewsasia.com.
-      new SimpleDateFormat("yyyy-MM-dd"), // New York Times and LA Times.
+      new SimpleDateFormat("yyyy-MM-dd"), // New York Times, LA Times and PCMag.
       new SimpleDateFormat("yyyyMMddHHmmss"), // New York Times 'pdate'.
       new SimpleDateFormat("yyyyMMdd"), // Washington Post.
       new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"), // BBC.
@@ -59,7 +59,10 @@ public class DateParser {
       Matcher dateInUrlMatcher = MONTH_IN_URL_PATTERN.matcher(url);
       if (dateInUrlMatcher.find()) {
         try {
-          return MONTH_IN_URL_DATE_FORMAT.parse(dateInUrlMatcher.group()).getTime();
+          // Note: SimpleDateFormat is not thread-safe.
+          synchronized (MONTH_IN_URL_DATE_FORMAT) {
+            return MONTH_IN_URL_DATE_FORMAT.parse(dateInUrlMatcher.group()).getTime();
+          }
         } catch (ParseException e) {
           // This is OK - we just don't match.
         }
@@ -75,10 +78,13 @@ public class DateParser {
       return null;
     }
     for (DateFormat format : KNOWN_DATE_FORMATS) {
-      try {
-        return format.parse(dateStr).getTime();
-      } catch (ParseException e2) {
-        // This is OK - we just don't match.  Try the next one.
+      // Note: SimpleDateFormat is not thread-safe.
+      synchronized (format) {
+        try {
+          return format.parse(dateStr).getTime();
+        } catch (ParseException e2) {
+          // This is OK - we just don't match.  Try the next one.
+        }
       }
     }
     System.err.println("COULD NOT PARSE DATE: " + dateStr);
