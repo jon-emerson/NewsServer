@@ -80,6 +80,6 @@ public class UrlFinder {
       baseUrl = (baseNode == null) ? documentNode.getUrl() : baseNode.getAttributeValue("href");
       BASE_URL_MAP.put(documentNode, baseUrl);
     }
-    return new URL(new URL(documentNode.getUrl()), baseUrl).toString();
+    return new URL(new URL(baseUrl), relativeUrl).toString();
   }
 }
