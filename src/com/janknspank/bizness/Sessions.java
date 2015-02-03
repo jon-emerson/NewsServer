@@ -106,16 +106,18 @@ public class Sessions {
   /**
    * Decrypts a session key and returns the user ID from inside it.
    */
-  private static String decrypt(String sessionKey) throws BiznessException, RequestException {
+  static String decrypt(String sessionKey) throws BiznessException, RequestException {
     String rawStr;
     try {
       byte[] encryptedBytes = Base64.decodeBase64(sessionKey);
       byte[] decryptedBytes = DECRYPT_CIPHER.doFinal(encryptedBytes);
       rawStr = new String(decryptedBytes);
     } catch (IllegalBlockSizeException e) {
-      throw new BiznessException("Could not decrypt session", e);
+      throw new BiznessException(
+          "Could not decrypt session, illegal block size: \"" + sessionKey + "\"", e);
     } catch (BadPaddingException e) {
-      throw new BiznessException("Could not decrypt session", e);
+      throw new BiznessException(
+          "Could not decrypt session, bad padding: \"" + sessionKey + "\"", e);
     }
 
     Matcher matcher = SESSION_PATTERN.matcher(rawStr);
