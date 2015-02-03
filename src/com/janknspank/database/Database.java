@@ -138,7 +138,7 @@ public class Database {
     @SuppressWarnings("unchecked")
     Collection<T> collection =
         (Collection<T>) with(Iterables.getFirst(messages, null).getClass());
-    return collection.update(messages);
+    return collection.update(messages, whereOptions);
   }
 
   /**
