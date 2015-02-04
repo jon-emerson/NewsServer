@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -14,13 +16,18 @@ import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.janknspank.TheMachine;
 import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.common.ArticleUrlDetector;
+import com.janknspank.common.UrlWhitelist;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.EnumsProto.IndustryCode;
 
 public class IndustryVector {
-  private static final String INDUSTRIES_DIRECTORY = "classifier";
+  private static final File INDUSTRIES_DIRECTORY = new File("classifier/");
+  private static final Pattern INDUSTRY_SUBDIRECTORY_PATTERN = Pattern.compile("([0-9]+)-.*");
 
   public static Vector get(int industryCodeId) throws ClassifierException {
     return get(IndustryCodes.getFromIndustryCodeId(industryCodeId));
@@ -31,16 +38,33 @@ public class IndustryVector {
   }
 
   private static void createVectorForIndustryCode(IndustryCode industryCode)
-      throws ClassifierException, DatabaseSchemaException {
+      throws ClassifierException, BiznessException, DatabaseSchemaException {
     // 1. Get seed words for industryCode.id
-    System.out.println("Reading keywords for " + industryCode.getId() + ", \""
+    System.out.println("Reading keywords and URLs for " + industryCode.getId() + ", \""
         + industryCode.getDescription() + "\"...");
-    Set<String> words = getSeedWords(industryCode);
-    System.out.println(words.size() + " words found");
+    Set<String> seeds = getSeeds(industryCode);
+    System.out.println(seeds.size() + " words/URLs found");
 
     // 2. Get all documents that contain the seed word
     System.out.println("Reading articles...");
-    Iterable<Article> articles = Articles.getArticlesForKeywords(words);
+    List<String> words = Lists.newArrayList();
+    List<String> urls = Lists.newArrayList();
+    for (String seed : seeds) {
+      if (seed.startsWith("http://") || seed.startsWith("https://")) {
+        if (!UrlWhitelist.isOkay(seed)) {
+          System.out.println("Warning: Skipping URL which is not whitelisted: " + seed);
+        } else if (!ArticleUrlDetector.isArticle(seed)) {
+          System.out.println("Warning: Skipping URL which is not an article: " + seed);
+        } else {
+          urls.add(seed);
+        }
+      } else {
+        words.add(seed);
+      }
+    }
+    Iterable<Article> articles = Iterables.concat(
+        TheMachine.getArticles(urls).values(),
+        Articles.getArticlesForKeywords(words));
     System.out.println(Iterables.size(articles) + " articles found");
 
     // 3. Convert them into the industry vector
@@ -55,7 +79,7 @@ public class IndustryVector {
 
   static File getDirectoryForIndustry(IndustryCode industryCode) {
     int industryCodeId = industryCode.getId();
-    for (String industryFolderName : new File(INDUSTRIES_DIRECTORY).list()) {
+    for (String industryFolderName : INDUSTRIES_DIRECTORY.list()) {
       if (industryFolderName.startsWith(industryCodeId + "-")) {
         return new File(INDUSTRIES_DIRECTORY + "/" + industryFolderName);
       }
@@ -63,12 +87,12 @@ public class IndustryVector {
     return null;
   }
 
-  private static File getSeedWordFileForIndustry(IndustryCode industryCode) {
+  private static File getSeedFileForIndustry(IndustryCode industryCode) {
     return new File(getDirectoryForIndustry(industryCode), "/seed.list");
   }
 
-  private static Set<String> getSeedWords(IndustryCode industryCode) throws ClassifierException {
-    File seedWordFile = getSeedWordFileForIndustry(industryCode);
+  private static Set<String> getSeeds(IndustryCode industryCode) throws ClassifierException {
+    File seedWordFile = getSeedFileForIndustry(industryCode);
     if (!seedWordFile.exists()) {
       throw new ClassifierException("No seed words found for industry: " + industryCode.getId());
     }
@@ -114,11 +138,26 @@ public class IndustryVector {
   }
 
   /**
-   * Regenerates the vector files for given industry IDs.  Industry IDs are
-   * specified as integers, passed as command-line parameters to this program.
+   * Regenerates the vector files for given industry IDs, or "all".  Industry
+   * IDs are specified as integers, passed as command-line parameters to this
+   * program.
    */
   public static void main(String args[]) throws Exception {
     List<IndustryCode> codes = Lists.newArrayList();
+
+    // If the first argument is "all", treat it as if all the industries were
+    // specified.
+    if (args.length > 0 && args[0].equals("all")) {
+      List<String> newArgs = Lists.newArrayList();
+      for (File directory : INDUSTRIES_DIRECTORY.listFiles()) {
+        Matcher matcher = INDUSTRY_SUBDIRECTORY_PATTERN.matcher(directory.getName());
+        if (matcher.matches()) {
+          newArgs.add(matcher.group(1));
+        }
+      }
+      args = newArgs.toArray(new String[0]);
+    }
+
     for (String industryCodeId : args) {
       IndustryCode code = IndustryCodes.getFromIndustryCodeId(NumberUtils.toInt(industryCodeId, -1));
       if (code == null) {

@@ -122,6 +122,12 @@ public class UrlCleaner {
     if (host.endsWith(".buffalonews.com") || host.equals("buffalonews.com")) {
       queryParameters.remove("ref");
     }
+    if (host.endsWith(".businessinsider.com") || host.equals("businessinsider.com")) {
+      if (path.contains("/")) {
+        path = path.substring(0, path.indexOf("/"));
+      }
+      queryParameters.clear();
+    }
     if (host.endsWith(".businessweek.com") || host.equals("businessweek.com")) {
       queryParameters.remove("hootPostID");
     }
@@ -234,6 +240,13 @@ public class UrlCleaner {
     }
     if (host.endsWith(".sfgate.com") || host.equals("sfgate.com")) {
       queryParameters.remove("cmpid");
+    }
+    if (host.endsWith(".slate.com") || host.equals("slate.com")) {
+      // Sometimes Slate paginates its articles - Make sure we always get a
+      // single page.
+      if (path.endsWith(".html") && !path.endsWith(".single.html")) {
+        path = path.substring(0, path.length() - ".html".length()) + ".single.html";
+      }
     }
     if (host.endsWith(".siliconbeat.com") || host.equals("siliconbeat.com")) {
       queryParameters.remove("msg");

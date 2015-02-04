@@ -46,6 +46,7 @@ public class UrlWhitelist {
     WHITELIST.add("boston.com");
     WHITELIST.add("breitbart.com");
     WHITELIST.add("buffalonews.com");
+    WHITELIST.add("businessinsider.com");
     WHITELIST.add("businessweek.com");
     WHITELIST.add("cbc.ca");
     WHITELIST.add("cbsnews.com");
@@ -166,6 +167,8 @@ public class UrlWhitelist {
       "^(" + Joiner.on("|").join(new String[] {
           "dealbook\\.nytimes\\.com",
           "nytimes\\.com",
+          "opinionator\\.blogs\\.nytimes\\.com",
+          "well\\.blogs\\.nytimes\\.com",
           "www\\.nytimes\\.com"
       }) + ")$");
   private static final Pattern NYTIMES_ARTICLE_PATH = Pattern.compile(

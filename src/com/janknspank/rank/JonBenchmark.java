@@ -1,37 +1,26 @@
 package com.janknspank.rank;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import com.google.api.client.repackaged.com.google.common.base.Joiner;
-import com.google.common.base.Function;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.Sets;
 import com.janknspank.TheMachine;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.Urls;
 import com.janknspank.bizness.Users;
 import com.janknspank.common.Asserts;
-import com.janknspank.database.Database;
-import com.janknspank.database.DatabaseRequestException;
-import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.QueryOption;
-import com.janknspank.dom.parser.ParserException;
-import com.janknspank.fetch.FetchException;
-import com.janknspank.interpreter.RequiredFieldException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.User;
 
 public class JonBenchmark {
   private static final List<String> GOOD_URLS = ImmutableList.of(
+      // Retiring announcement: Because I used to report through him at Google,
+      // and he's a leader in the field.
+      "http://techcrunch.com/2015/02/03/alan-eustace-google/",
       // Because it's in the space I'm working in.
       "http://techcrunch.com/2013/04/23/google-buys-wavii-for-north-of-30-million/",
       "http://techcrunch.com/2014/01/07/yahoo-launches-news-digest-its-first-app-based-on-summly/",
@@ -152,75 +141,10 @@ public class JonBenchmark {
       "http://www.wired.com/2015/01/new-3ds-zelda-majoras-mask/",
       "http://www.wired.com/2015/01/daniel-gebhart-de-koekkoek-bodybuilders/");
 
-  /**
-   * Returns a map of URL -> Article for each given article.
-   */
-  private static Map<String, Article> createArticleMap(Iterable<Article> articles) {
-    return Maps.uniqueIndex(
-        articles,
-        new Function<Article, String>() {
-          @Override
-          public String apply(Article article) {
-            return article.getUrl();
-          }
-        });
-  }
-
-  /**
-   * Gets a Map of all the existing Articles for the requested {@code
-   * urlStrings}.  The Map maps each article's URL to its Article object.
-   */
-  private static Map<String, Article> getExistingArticles(Iterable<String> urlStrings)
-      throws DatabaseSchemaException {
-    return createArticleMap(
-        Database.with(Article.class).get(new QueryOption.WhereEquals("url", urlStrings)));
-  }
-
-  /**
-   * Inserts URL objects for each of the passed URL strings, then crawls said
-   * URLs, putting the resulting Urls and Articles into the database.  The
-   * retrieved Articles are returned, mapped to their original URLs.
-   */
-  private static Map<String, Article> getNewArticles(Iterable<String> urlStrings)
-      throws DatabaseRequestException, DatabaseSchemaException, FetchException, ParserException,
-          RequiredFieldException, BiznessException {
-    Iterable<Url> urls = Urls.put(urlStrings, "http://jonemerson.net/benchmark", false /* isTweet */);
-    List<Article> articles = Lists.newArrayList();
-    for (Url url : urls) {
-      Article article = TheMachine.crawl(url, true /* markCrawlStart */);
-      if (article == null) {
-        throw new IllegalStateException("URL is not an Article: " + url.getUrl());
-      }
-      articles.add(article);
-    }
-    return createArticleMap(articles);
-  }
-
-  /**
-   * Gets articles for each of the requested URL strings, whether they've been
-   * previously crawled or not.  (Ones that haven't been crawled will be
-   * crawled.)
-   */
-  public static Map<String, Article> getArticles(Iterable<String> urlStrings)
-      throws DatabaseRequestException, DatabaseSchemaException, FetchException,
-          ParserException, RequiredFieldException, BiznessException {
-    Map<String, Article> articles = getExistingArticles(urlStrings);
-    articles = ImmutableMap.<String, Article>builder()
-        .putAll(articles)
-        .putAll(getNewArticles(Sets.<String>symmetricDifference(
-            new HashSet<String>(Lists.newArrayList(urlStrings)), articles.keySet())))
-        .build();
-    Asserts.assertTrue(Iterables.size(urlStrings) == articles.size(),
-        "Should have received Articles fo all requested URLs.", BiznessException.class);
-    return articles;
-  }
-
   public static Map<Article, Double> getScores(
-      User user, Iterable<String> urlStrings, Scorer scorer)
-      throws DatabaseRequestException, DatabaseSchemaException, FetchException, ParserException,
-          RequiredFieldException, BiznessException {
+      User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
     Map<Article, Double> scoreMap = Maps.newHashMap();
-    for (Article article : getArticles(urlStrings).values()) {
+    for (Article article : TheMachine.getArticles(urlStrings).values()) {
       scoreMap.put(article, scorer.getScore(user, article));
     }
     return scoreMap;
@@ -230,9 +154,7 @@ public class JonBenchmark {
    * Prints out a performance score (aka a "grade") for how well the Scorer did
    * at creating scores for the passed Article -> Score maps.
    */
-  public static void grade(Map<Article, Double> goodScoreMap, Map<Article, Double> badScoreMap)
-      throws DatabaseRequestException, DatabaseSchemaException, FetchException, ParserException,
-          RequiredFieldException, BiznessException {
+  public static void grade(Map<Article, Double> goodScoreMap, Map<Article, Double> badScoreMap) {
     int positives = 0;
     int falseNegatives = 0;
     for (Double score : goodScoreMap.values()) {

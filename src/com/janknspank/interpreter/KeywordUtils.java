@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;

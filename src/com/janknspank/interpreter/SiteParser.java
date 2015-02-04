@@ -15,6 +15,7 @@ import com.google.common.base.Throwables;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -69,6 +70,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("buffalonews.com", new String[] {
         ".articleP p",
         ".entry-content p"});
+    DOMAIN_TO_DOM_ADDRESSES.put("businessinsider.com", new String[] {
+        ".post-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("businessweek.com", new String[] {
         "#article_body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("cbc.ca", new String[] {
@@ -128,7 +131,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         ".article-body p",
         ".blogstory p"});
     DOMAIN_TO_DOM_ADDRESSES.put("recode.net", new String[] {
-        ".article p"});
+        ".postarea p"});
     DOMAIN_TO_DOM_ADDRESSES.put("redherring.com", new String[] {
         ".entry-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("sfexaminer.com", new String[] {
@@ -269,11 +272,28 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
 
     // HACK(jonemerson): We should find a more extensible way of removing
     // By-lines and other crap we pick up. This may do for now.
-    if (paragraphs.size() > 0 &&
+    while (paragraphs.size() > 0 &&
         paragraphs.get(0).getFlattenedText().toLowerCase().startsWith("by ") &&
         paragraphs.get(0).getFlattenedText().length() < 100) {
       // Remove "By XXX from Washington Post" etc. crap text.
       paragraphs.remove(0);
+    }
+
+    // Remove trailing lines.  E.g. the "Have something to add to this story?
+    // Share it in the comments." <em> text on mashable.com, or "Chat with me
+    // on Twitter @peard33" <strong> text on latimes.com.
+    while (paragraphs.size() > 0) {
+      // Do allow <em>s and <strong>s if sufficiently embedded inside the
+      // paragraph.  (Ya... some sites do use them fairly.)
+      long paragraphOffset = paragraphs.get(paragraphs.size() - 1).getStartingOffset();
+      Node firstEm = Iterables.getLast(paragraphs, null).findFirst("em");
+      Node firstStrong = Iterables.getLast(paragraphs, null).findFirst("strong");
+      if ((firstEm != null && (firstEm.getStartingOffset() - paragraphOffset < 10)) ||
+          (firstStrong != null && (firstStrong.getStartingOffset() - paragraphOffset < 10))) {
+        paragraphs.remove(paragraphs.size() - 1);
+      } else {
+        break;
+      }
     }
 
     sortAndDedupe(paragraphs);

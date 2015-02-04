@@ -2,6 +2,7 @@ package com.janknspank.interpreter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.google.common.base.Function;
+import com.google.api.client.util.Lists;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -405,20 +406,18 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
    */
   @Override
   public Iterable<String> load(final DocumentNode documentNode) throws Exception {
-    Iterable<String> paragraphs = Iterables.transform(
-        SiteParser.getParagraphNodes(documentNode),
-        new Function<Node, String>() {
-          @Override
-          public String apply(Node paragraphNode) {
-            String text = paragraphNode.getFlattenedText();
-            if (text.length() > MAX_PARAGRAPH_LENGTH) {
-              System.out.println("Warning: Trimming paragraph text on " +
-                  documentNode.getUrl());
-              text = text.substring(0, MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
-            }
-            return text;
-          }
-    });
+    List<String> paragraphs = Lists.newArrayList();
+    for (Node paragraphNode : SiteParser.getParagraphNodes(documentNode)) {
+      String text = unescape(paragraphNode.getFlattenedText()).trim();
+      if (text.length() > MAX_PARAGRAPH_LENGTH) {
+        System.out.println("Warning: Trimming paragraph text on " +
+            documentNode.getUrl());
+        text = text.substring(0, MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
+      }
+      if (text.length() > 0) {
+        paragraphs.add(text);
+      }
+    }
     if (Iterables.isEmpty(paragraphs)) {
       throw new RequiredFieldException("No paragraphs found in " + documentNode.getUrl());
     }

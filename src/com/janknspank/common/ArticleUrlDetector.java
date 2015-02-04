@@ -167,6 +167,9 @@ public class ArticleUrlDetector {
     if (host.endsWith("buffalonews.com")) {
       return BUFFALO_NEWS_PATH.matcher(path).find();
     }
+    if (host.endsWith("businessinsider.com")) {
+      return path.indexOf("-") != -1;
+    }
     if (host.endsWith("businessweek.com")) {
       return YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find() ||
           DateParser.parseDateFromUrl(urlString, false) != null;

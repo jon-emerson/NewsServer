@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
@@ -17,7 +17,7 @@ public class GetArticleServlet extends StandardServlet {
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, BiznessException,
       DatabaseRequestException, RequestException {
-    Article article = Articles.getArticle(getRequiredParameter(req, "id"));
+    Article article = Database.with(Article.class).get(getRequiredParameter(req, "id"));
     if (article == null) {
       throw new RequestException("Article doesn't exist");
     }
