@@ -235,6 +235,13 @@ public class UrlCleaner {
     if (host.endsWith(".sfgate.com") || host.equals("sfgate.com")) {
       queryParameters.remove("cmpid");
     }
+    if (host.endsWith(".slate.com") || host.equals("slate.com")) {
+      // Sometimes Slate paginates its articles - Make sure we always get a
+      // single page.
+      if (path.endsWith(".html") && !path.endsWith(".single.html")) {
+        path = path.substring(0, path.length() - ".html".length()) + ".single.html";
+      }
+    }
     if (host.endsWith(".siliconbeat.com") || host.equals("siliconbeat.com")) {
       queryParameters.remove("msg");
       queryParameters.remove("shared");

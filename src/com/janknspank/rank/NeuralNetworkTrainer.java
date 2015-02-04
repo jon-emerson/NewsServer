@@ -8,7 +8,6 @@ import org.neuroph.core.learning.DataSetRow;
 import org.neuroph.nnet.MultiLayerPerceptron;
 
 import com.google.common.collect.Maps;
-import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -45,7 +44,7 @@ public class NeuralNetworkTrainer {
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
     for (UrlRating rating : urlRatingToUserMap.keySet()) {
-      Article article = Articles.getArticle(rating.getUrlId());
+      Article article = Database.with(Article.class).get(rating.getUrlId());
       double[] input =
           NeuralNetworkScorer.generateInputNodes(urlRatingToUserMap.get(rating), article);
       double[] output = new double[]{(double)rating.getRating() / 100};

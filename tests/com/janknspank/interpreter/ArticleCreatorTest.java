@@ -308,6 +308,37 @@ public class ArticleCreatorTest {
   }
 
   @Test
+  public void testSlateArticle2() throws Exception {
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://www.slate.com/articles/life/food/2015/02/"
+        + "hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.single.html",
+        new FileReader("testdata/slate-hellmanns-mayonnaise-different-texture.html"));
+    Article article = ArticleCreator.create("urlId", documentNode);
+    assertEquals("Hellmann’s Real Mayonnaise has been smeared in the news lately, thanks to a "
+        + "lawsuit filed by its parent company, Unilever, against fledgling vegan “mayo” purveyor "
+        + "Hampton Creek. The case rested on the notion that Hampton Creek’s flagship product, "
+        + "Just Mayo, is not, in fact, mayo, according to the Food and...",
+        article.getDescription());
+    assertEquals("Why Does Hellmann’s Mayonnaise Taste Different From How It Used To?",
+        article.getTitle());
+    assertEquals("http://www.slate.com/content/dam/slate/articles/life/food/2015/01/"
+        + "150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg",
+        article.getImageUrl());
+    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
+        article.getParagraph(0).equals(
+            "Hellmann’s Real Mayonnaise has been smeared in the news lately, thanks to a "
+            + "lawsuit filed by its parent company, Unilever, against fledgling vegan “mayo” "
+            + "purveyor Hampton Creek. The case rested on the notion that Hampton Creek’s "
+            + "flagship product, Just Mayo, is not, in fact, mayo, according to the Food and "
+            + "Drug Administration’s definition of mayonnaise, because it contains no eggs."));
+    assertTrue("Unexpected last paragraph: "
+        + article.getParagraph(article.getParagraphCount() - 1),
+        article.getParagraph(article.getParagraphCount() - 1).startsWith(
+            "Unilever regained some of its lost good will in the eyes of the public by dropping "
+            + "its suit against Hampton Creek."));
+  }
+
+  @Test
   public void testVentureBeatArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://venturebeat.com/2015/01/29/googles-eric-schmidt-has-a-10-year-prediction-"

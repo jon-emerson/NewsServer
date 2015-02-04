@@ -1,0 +1,5259 @@
+
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 modePublish"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8 modePublish"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9 modePublish"> <![endif]-->
+<!--[if IE 9]> <html class="no-js modePublish"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js gt-ie9 modePublish"><!--<![endif]-->
+  
+
+
+
+  <head>
+    
+    <script>
+      //Reload to canonical if you try to paste in the print page
+      if (window.location.search.indexOf("print") > -1) {
+        if (document.referrer.indexOf("http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html") != 0) {
+          window.location = "http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html";
+        }
+      }
+      //-- Stop hiding script -->
+    </script>
+    
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQ4OUFNbGwEGU1dUAwE="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),u=c.length,f=i(a,o,r),d=0;u>d;d++)c[d].apply(f,n);return f}function a(t,e){u[t]=s(t).concat(e)}function s(t){return u[t]||[]}function c(){return n(e)}var u={};return{on:a,emit:e,create:c,listeners:s,_events:u}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(u){try{r("ierr",[u,(new Date).getTime(),!0])}catch(f){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(4),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(u){"stack"in u&&(t(5),t(3),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:4,2:7,3:5,4:19,5:6,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:19,2:20,ee:"QJf3ax",gos:"7eSDFh"}],5:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:20,2:19,ee:"QJf3ax"}],6:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:20,2:19,ee:"QJf3ax"}],7:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),u=s(a),f=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new f(t);try{i.emit("new-xhr",[],e),u.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=f.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:4,2:20,ee:"QJf3ax"}],8:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,u="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=e(u);if(f&&(r.rxSize=f),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,u=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var u=e(o);u&&(r.txSize=u)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var f=0;c>f;f++)n.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:9,3:7,4:4,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],9:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=l.info=NREUM.info;if(t&&t.licenseKey&&t.applicationID&&u&&u.body){s(h,function(e,n){e in t||(t[e]=n)}),l.proto="https"===p.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=u.createElement("script");e.src=l.proto+t.agent,u.body.appendChild(e)}}function r(){"complete"===u.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=t(1),c=window,u=c.document,f="addEventListener",d="attachEvent",p=(""+location).split("?")[0],h={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-515.min.js"},l=e.exports={offset:i(),origin:p,features:{}};u[f]?(u[f]("DOMContentLoaded",o,!1),c[f]("load",n,!1)):(u[d]("onreadystatechange",r),c[d]("onload",n)),a("mark",["firstbyte",i()])},{1:18,handle:"D5DuLP"}],18:[function(t,e){function n(t,e){var n=[],o="",i=0;for(o in t)r.call(t,o)&&(n[i]=e(o,t[o]),i+=1);return n}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],19:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],20:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,u;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){f([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return u=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,u],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,u(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,u="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,u?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){f([o,e,n,r])}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){f([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function f(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:19,ee:"QJf3ax"}]},{},["G9z0Bl",3,8]);</script>
+    <script type="text/javascript">
+      var slate_public_url = "http://www.slate.com/";
+      window._sf_startpt=(new Date()).getTime();
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Hellmann&rsquo;s mayonnaise different texture: Has something changed in Unilever&rsquo;s recipe?</title>
+    <meta name="description" content="Hellmann&rsquo;s Real Mayonnaise has been smeared in the news lately, thanks to a lawsuit filed by its parent company, Unilever, against fledgling vegan &ldquo;mayo&rdquo; purveyor Hampton Creek. The case rested on the notion that Hampton Creek&rsquo;s flagship product, Just Mayo, is not, in fact, mayo, according to the Food and..." />
+    <meta name="keywords" content="hellmann&rsquo;s, hellmann&rsquo;s mayonnaise, hellmann&rsquo;s mayonnaise change, hellmann&rsquo;s different, hellmann&rsquo;s recipe change, hellmann&rsquo;s recipe worse, best mayonnaise, hellmann&rsquo;s recipe" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    
+    
+
+    
+    
+    
+    <script>
+      
+      var commercialNode = 'life/food';
+      
+      var commercialPageType = 'article';
+      var selectedText = "";
+    </script>
+    <!-- Facebook OG -->
+    <meta id="ogtitle" property="og:title" content="Why Does Hellmann&rsquo;s Mayonnaise Taste Different From How It Used To?" />
+    
+
+    <meta property="article:publisher" content="http://www.facebook.com/Slate" />
+
+    
+
+    <meta property="og:type" content="article" />
+    <meta id="ogurl" property="og:url" content="http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html" />
+    <meta id="ogimage" property="og:image" content="http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" />
+    <meta property="og:site_name" content="Slate Magazine" />
+    <meta id="ogdescription" property="og:description" content="Hellmann&rsquo;s Real Mayonnaise has been smeared in the news lately, thanks to a lawsuit filed by its parent company, Unilever, against fledgling vegan &ldquo;mayo&rdquo; purveyor Hampton Creek. The case rested on the notion that Hampton Creek&rsquo;s flagship product, Just Mayo, is not, in fact, mayo, according to the Food and..." />
+    <meta property="fb:app_id" content="142011022527753"/>
+    <!-- Twitter -->
+    <meta name="twitter:card" value="summary" />
+    <meta name="twitter:site" value="@slate" />
+    
+    <meta name="twitter:creator" value="" />
+    
+    <meta name="twitter:url" value="http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html" />
+    <meta name="twitter:title" value="Why Does Hellmann&rsquo;s Mayonnaise Taste Different From How It Used To?" />
+    <meta name="twitter:description" value="Hellmann&rsquo;s Real Mayonnaise has been smeared in the news lately, thanks to a lawsuit filed by its parent company, Unilever, against fledgling vegan &ldquo;mayo&rdquo; purveyor Hampton Creek. The case rested on the notion that Hampton Creek&rsquo;s flagship product, Just Mayo, is not, in fact, mayo, according to the Food and..." />
+    <meta name="twitter:image" value="http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" />
+    
+    <link type="text/css" href="http://static.cdnslate.com/etc/designs/slate/css/story.8438cda6.css" rel="stylesheet" />
+    
+    
+    
+    
+    <script data-ad-site="slate" src="http://static.cdnslate.com/etc/designs/slate/js/libs/require.js"></script>
+    <script>
+    requirejs.config({
+      "baseUrl": "http://static.cdnslate.com/etc/designs/slate/js",
+      "waitSeconds": 0,
+      "paths": {
+        "jquery": "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min",
+        "jqueryui": "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min",
+        "modernizr": "/etc/designs/slate/js/libs/modernizr-2.6.1.min",
+        "announcements": "/etc/designs/slate/js/announcements",
+        "slate": "/etc/designs/slate/lib",
+        "hogan": "libs/hogan-2.0.0",
+        "facebook": "//connect.facebook.net/en_US/all",
+        "livefyre": "http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre",
+        "livefyresidenotes": "//cdn.livefyre.com/Livefyre",
+        "brightcove": "http://admin.brightcove.com/js/BrightcoveExperiences",
+        "brightcovetracking": "/etc/designs/slate/js/brightcovetracking",
+        "mobileredirection": "libs/redirection_mobile_1.0.0.min",
+        "optimizely": "//cdn.optimizely.com/js/37441550",
+        "outbrain": "//widgets.outbrain.com/outbrain",
+        "shared": "http://static.cdnslate.com/etc/designs/shared/js",
+        "instafeed": "/etc/designs/slate/js/instafeed",
+        "campaigns": "http://campaigns.slate.com/campaigns/slate",
+        "clipboard": "libs/zeroclipboard/ZeroClipboard.min"
+      },
+      "shim": {
+        "shared/devicemode": ["modernizr"],
+        "hcs/script": ["jquery", "modernizr", "shared/devicemode"],
+        "libs/jquery-plugins/jquery.browser": ["jquery"],
+        "hcs/plugins/jquery.transit": ["jquery"],
+        "hcs/plugins/SGFootnote.jquery": ["jquery"],
+        "hcs/plugins/SGSocialIcons.jquery": ["jquery", "hcs/script"],
+        "hcs/plugins/SGNavDropdown.jquery": ["jquery"],
+        "hcs/plugins/SGComments.jquery": ["jquery", "hcs/script"],
+        "hcs/plugins/SGRollup.jquery": ["jquery", "hcs/script"],
+        "hcs/plugins/SGGlobalNav.jquery": ["jquery", "hcs/script"],
+        "hcs/plugins/SGLightbox.jquery": ["jquery"],
+        "hcs/plugins/jQuery.highlighter": ["jquery"],
+        "hcs/libs/swipe": ["jquery"],
+        "hcs/libs/magnific": ["jquery"],
+        "hcs/plugins/jquery.swipebox": ["jquery"],
+        "hcs/plugins/SGBigSlider.jquery": ["jquery", "hcs/script", "hcs/libs/swipe"],
+        "hcs/plugins/jquery.placeholder.min": ["jquery"],
+        "libs/jquery-plugins/jquery.timeago": ["jquery"],
+        "libs/jquery-plugins/jquery.form": ["jquery"],
+        "libs/jquery-plugins/jquery.cookie": ["jquery"],
+        "libs/jquery-plugins/jquery.fittext": ["jquery"],
+        "libs/jquery-plugins/jquery.backgroundSize": ["jquery"],
+        "libs/jquery-plugins/jquery.flexslider": ["jquery"],
+        "libs/jquery-plugins/purl": ["jquery"],
+        "libs/jquery-plugins/jquery.colorbox": [ "jquery" ],
+        "libs/jquery-plugins/jquery.sticky": ["jquery"],
+        "libs/jquery-plugins/jquery.autoComplete": ["jquery"],
+        "libs/jquery-plugins/jquery.boxfit": ["jquery"],
+        "libs/jquery-plugins/jquery.dateformat": ["jquery"],
+        "libs/jquery-plugins/jquery.lazyloadxt": ["jquery"],
+        "libs/jquery-plugins/jquery.lazyloadxt.extra": ["jquery"],
+        "libs/jquery-plugins/jquery.lazyloadxt.bg": ["jquery"],
+        "libs/jquery-plugins/jquery.lazyloadxt.widget": ["jquery"],
+        "libs/jquery-plugins/jquery.visible": ["jquery"],
+        "optimizely": ["jquery"],
+        "facebook": {
+            deps: ["identity/wapo_site_bottom"],
+            exports: "FB"
+        },
+        "livefyre": {
+            exports: "fyre"
+        },
+        "brightcove": {
+          	"exports": "brightcove"
+        },
+        "mobileredirection": {
+                "exports": "mobileredirection"
+        },
+        "hogan": {
+          	"exports": "Hogan"
+        },
+        "outbrain": {
+          "exports": "OBR"
+        }
+      }
+    });
+
+
+    
+    define("config", {
+      "env": {
+        "edit": false
+      },
+      "identity": {
+		"fb_xd_receiver": "http://www.slate.com/xd_receiver.htm",
+		"fb_app_id": 142011022527753,
+		"publicationName": "Slate",
+		"site_base_domain": "slate.com",
+		"site_path": "/",
+		"wapo_secure_protocol": "https:",
+		"wapo_site_url": "//id.slate.com/identity/",
+		"site_url": "//www.slate.com/",
+		"wapo_public_protocol": "http:",
+		"myslate_domain": "//my.slate.com/",
+		"myslate_https": true,
+		"enabled": true
+	  },
+	  "livefyre": {
+	    "network": "slate.fyre.co",
+	    "jsSourceUrl": "http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js",
+	    "siteId": "337720"
+	  },
+      "campaigns": {
+         "domain":"campaigns.slate.com"
+       },
+       "site": {
+         "site": "slate",
+         "title": "Slate",
+         "staticUrl": "http://static.cdnslate.com",
+         "omniturePrefix": "sl"
+       },
+       "data_domain": "http://www.slate.com/",
+       "page": {
+         "articleId": "100150202016",
+         "roadblocked": false,
+         "embeddedContent": false
+       },
+      "ads": {
+        "enableHomepageViewability": false,
+        "enableStoryViewability": true,
+        "viewabilityEnabled": true,
+        "viewability": {
+          "leaderboardRollup": true,
+          "refreshInterval": "30",
+          "refreshPolar": false,
+          "testPageList": "news,life,arts,sports,technology,blogs,business,science,doublex,video,podvideo,podcasts,news,life,arts,sports,technology,blogs,business,science,doublex,video,podvideo,podcasts",
+          "lazyload": {
+            "homepageBB": true,
+            "tiffTiles": false,
+            "rightflex": false
+          }
+        }
+      },
+      "_log": [],
+      "log": function(data) {
+         requirejs(["config"], function(config) {
+           if (typeof console != "undefined" &&
+               typeof console.log != "undefined") {
+             console.log(data);
+           }
+           config._log.push(data);
+         });
+       }
+    });
+    var homepagePolarSpot = 'b1';
+    </script>
+
+    
+    <script src="http://static.cdnslate.com/etc/designs/slate/js/main.min.693d2247.js"></script>
+    
+
+
+<script type="text/javascript" language="javascript">
+requirejs(["s_code"], function(s) {
+
+        s.currencyCode="usd";
+        s.charSet="utf-8";
+        s.trackDownloadLinks=true;
+        s.trackExternalLinks=true;
+        s.trackInlineStats=true;
+        s.linkDownloadFileTypes="exe,zip,wav,mp3,mov,mpg,avi,wmv,doc,pdf,xls";
+        s.linkInternalFilters="javascript:,slate.com,traffic.outbrain.com";
+        s.linkTrackVars="none";
+        s.linkTrackEvents="none";
+        s.pageName="life:article - 20150202 - hellmann’s mayonnaise different texture: has something changed in unilever’s recipe?";
+        s.channel="sl - life";
+        s.server="www.slate.com";
+        s.prop2="food";
+        s.prop3="article";
+        s.prop4="slate";
+        s.prop5="ari levaux";
+        s.prop12="100150202016";
+        s.prop13="hellmann’s mayonnaise different texture: has something changed in unilever’s recipe?";
+        s.prop14="1";
+        s.prop34="3.61.2";
+        s.prop36="general";
+        s.prop39="life/food";
+        s.hier1="life|food|article";
+        s.eVar8="ari levaux";
+        s.eVar17="article";
+s.t();
+});
+</script>
+
+
+    <script>               
+      var _isNavMoving = false; // acts as a global (sorry) mutex for keeping track of when our nav panels are moving around. Allows us to prevent overlapping actions.
+    </script>
+
+    <!-- Google Sitemap -->
+    <meta name="google-site-verification" content="jXqoqqPSmx_PWchRdG-IXu-X616Ee2Ptf_AiElI9LzQ" />
+    <link rel="canonical" href="http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html" />
+    <link rel="image_src" href="http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg.CROP.thumbnail-small.jpg" />
+
+    <!-- Parsely -->
+        <meta name='parsely-page' content='{
+  "title": "Why Does Hellmann\u2019s Mayonnaise Taste Different From How It Used To?",
+  "link": "http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html",
+  "image_url": "http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg.CROP.thumbnail-small.jpg",
+  "type": "post",
+  "post_id": "100150202016",
+  "pub_date": "2015-02-02T23:44:00Z",
+  "section": "Life",
+  "author": "Ari LeVaux",
+  "tags": ["food"]
+}'/>
+    
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Life (RSS 2.0)" href="http://www.slate.com/articles/life.fulltext.all.rss" />
+
+    
+    <script>var wp_meta_data = {"authors":["Ari LeVaux"],"contentType":"article","page_id":"100150202016","keywords":"Food,food,hellmann\u2019s, hellmann\u2019s mayonnaise, hellmann\u2019s mayonnaise change, hellmann\u2019s different, hellmann\u2019s recipe change, hellmann\u2019s recipe worse, best mayonnaise, hellmann\u2019s recipe","section":"Life","rubric":"Food"};</script>
+
+    
+    <![if gte IE 8]>
+    <script type="text/javascript">
+    requirejs(['pagenav', 'jquery'], function(pagenav, $) {
+      var SlateNextbox = {};
+
+      SlateNextbox.data = {
+        'headline': 'Gossiping About a Person\u2019s Gender Identity Is a Dangerous Game',
+        'subhead': '',
+        'url': 'http:\/\/www.slate.com\/blogs\/outward\/2015\/02\/02\/bruce_jenner_gender_identity_gossip_is_dangerous_and_disrespectful.html',
+        'article_id': '239150202003',
+        'hasImage': true,
+        
+        'image': 'http:\/\/www.slate.com\/content\/dam\/slate\/blogs\/outward\/2015\/02\/02\/bruce_jenner_gender_identity_gossip_is_dangerous_and_disrespectful\/107899850-bruce-jenner-and-kris-jenner-attend-the-comcast.jpg.CROP.rectangle-small.jpg',
+        
+      
+        'section': 'Outward',
+      
+        'subscribe_type': 'rubric'
+      };
+      $.data(window, "SlateNextbox", SlateNextbox);
+      pagenav.addStory(SlateNextbox.data);
+    });
+
+    </script>
+    <![endif]>
+    
+
+    
+
+      
+        <!-- sailthru meta -->
+        <meta name="sailthru.tags" content="hellmann&rsquo;s, hellmann&rsquo;s mayonnaise, hellmann&rsquo;s mayonnaise change, hellmann&rsquo;s different, hellmann&rsquo;s recipe change, hellmann&rsquo;s recipe worse, best mayonnaise, hellmann&rsquo;s recipe" />
+        <meta name="sailthru.author" content="Ari LeVaux" />
+        <meta name="sailthru.date" content="2015-02-02T23:44:00Z" />
+        <meta name="sailthru.description" content="Hellmann&rsquo;s Real Mayonnaise has been smeared in the news lately, thanks to a lawsuit filed by its parent company, Unilever, against fledgling vegan &ldquo;mayo&rdquo; purveyor Hampton Creek. The case rested on the notion that Hampton Creek&rsquo;s flagship product, Just Mayo, is not, in fact, mayo, according to the Food and..." />
+        <meta name="sailthru.image.full" content="http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" />
+
+        <meta name="sailthru.headline" content="What&rsquo;s Going on With Hellmann&rsquo;s Mayonnaise?" />
+        <meta name="sailthru.subheadline" content="Something is different about Unilever&rsquo;s signature spread, but it&rsquo;s not clear what." />
+        <meta name="sailthru.promoheadline" content="Why Does Hellmann&rsquo;s Mayonnaise Taste Different From How It Used To?" />
+        
+
+  </head>
+
+  
+
+  <body class="article story">
+    
+<div id="slug_teads" class="ad " data-ad-type="teads" data-ad-mode="large"></div>
+
+    <input type="hidden" id="currPath" value="/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever"/>
+    <!-- HCS: shared/roll_ups/tablet -->
+    <!-- This is the header bar we always show in tablet mode -->
+    <header class="roll-up" id="tablet_header">
+      <div class="container">
+        <div class="main">
+
+        </div>
+        <div class="sidebar">
+          
+
+
+
+
+
+
+
+<section class="nav-panel" >
+  <div class="nav-header">
+    <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+    <a href="#" class="user-link "></a>
+    <a href="#" class="search-link "></a>
+    <a href="#" class="global-nav-handle "></a>
+    <div class="buttons">
+      
+      <span class="link option "><a class="first nav-option sign-in-link" href="#" id="sign_in_link">Sign In</a></span>
+      <span class="link option "><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+      
+    </div>
+  </div>
+  
+</section>
+
+        </div>
+      </div><!-- /.container -->
+    </header><!-- /.header.roll-up -->
+    <!-- HCS END: shared/roll_ups/tablet -->
+    
+    <div class="top">
+      
+<div id="slug_teads" class="ad " data-ad-type="teads" data-ad-mode="large"></div>
+
+      
+      
+<div id="slug_t" class="tAd ad " data-ad-type="t" data-ad-mode="mobile"></div>
+
+      
+      
+<div id="slug_leaderboard" class="banner ad " data-ad-type="leaderboard" data-ad-mode="large"></div>
+
+      
+<div id="slug_pushdown" class="banner ad " data-ad-type="pushdown" data-ad-mode="large"></div>
+
+    </div><!-- end #top -->
+    
+    <!-- HCS END: layouts/shared/top -->
+    
+    
+    
+
+
+<!-- this is the rollup for basic article, no multipart fun -->
+<header class="roll-up with-dropdown" id="article_rollup">
+  <div class="container">
+    
+    <div class="main">
+      
+        
+        
+        
+        
+          <div class="titles centered-titles">
+            <h1 class="primary centered-primary">Why Does Hellmann’s Mayonnaise Taste Different From How It Used To?</h1>
+          </div>
+        
+      
+      
+
+
+<div class="social social-with-popup sharing-buttons">
+    <a href="#" data-share="http://www.facebook.com/sharer.php?s=100&p[title]=Why+Does+Hellmann%E2%80%99s+Mayonnaise+Taste+Different+From+How+It+Used+To%3F&p[summary]=Hellmann&rsquo;s+Real+Mayonnaise+has+been+smeared+in+the+news+lately,+thanks+to+a+lawsuit+filed+by+its+parent+company,+Unilever,+against+fledgling+vegan+&ldquo;mayo&rdquo;+purveyor+Hampton+Creek.+The+case+rested+on+the+notion+that+Hampton+Creek&rsquo;s+flagship+product,+Just+Mayo,+is+not,+in+fact,+mayo,+according+to+the+Food+and...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_dt_fb_ru" class="facebook first">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>    
+    
+    <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Why+does+Hellmann%E2%80%99s+mayonnaise+taste+different+from+how+it+used+to%3F&count=none&via=slate&url=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_dt_tw_ru" class="twitter">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>
+    </div>
+
+    
+      <a href="#comments" class="comments">
+        <span class="icon"></span>           
+      </a>        
+    
+
+     <a href="mailto:?subject=Check%20out%20this%20piece%20on%20Slate&body=I%20thought%20you%20might%20like%20this%20article%20on%20Slate:%0AWhy%20Does%20Hellmann%E2%80%99s%20Mayonnaise%20Taste%20Different%20From%20How%20It%20Used%20To%3F%0Ahttp://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_dt_em_ru" class="email">
+        <span class="icon"></span>         
+      </a>        
+</div>
+
+
+    </div>
+    <div class="sidebar">
+      
+
+
+
+
+
+
+
+<section class="nav-panel" >
+  <div class="nav-header">
+    <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+    <a href="#" class="user-link "></a>
+    <a href="#" class="search-link "></a>
+    <a href="#" class="global-nav-handle "></a>
+    <div class="buttons">
+      
+      <span class="link option "><a class="first nav-option sign-in-link" href="#" id="sign_in_link">Sign In</a></span>
+      <span class="link option "><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+      
+    </div>
+  </div>
+  
+</section>
+
+    </div>
+  </div><!-- /.container -->
+  <a href="#" class="mobile-social-toggle"><span></span></a> <!-- only shown in mobile -->
+</header><!-- /.header.roll-up -->
+
+
+
+
+
+    <div class="page">
+      
+      <article class="main">
+        
+        <div class="parsys contentWellTop iparsys"><div class="section"><div class="new"></div>
+</div><div class="iparys_inherited"><div class="parsys contentWellTop iparsys">
+</div>
+</div>
+</div>
+
+        
+
+
+
+<header class="article-header" id="article_header">
+    
+    <div class="meta">
+        <div class="prop-name print-only"><a href="http://www.slate.com">Slate</a></div><div class="prop-name"><a href="http://www.slate.com/articles/life/food.html">Food</a></div><div class="prop-desc">What to eat. What not to eat.</div><div class="pub-date">Feb. 2 2015 11:44 PM</div>
+    </div>
+    
+    
+    <h1 class="hed">What’s Going on With Hellmann’s Mayonnaise?</h1>
+    
+
+
+ <div class="social social-with-popup sharing-buttons" id="header_social">
+    <a href="#" data-share="http://www.facebook.com/sharer.php?s=100&p[title]=Why+Does+Hellmann%E2%80%99s+Mayonnaise+Taste+Different+From+How+It+Used+To%3F&p[summary]=Hellmann&rsquo;s+Real+Mayonnaise+has+been+smeared+in+the+news+lately,+thanks+to+a+lawsuit+filed+by+its+parent+company,+Unilever,+against+fledgling+vegan+&ldquo;mayo&rdquo;+purveyor+Hampton+Creek.+The+case+rested+on+the+notion+that+Hampton+Creek&rsquo;s+flagship+product,+Just+Mayo,+is+not,+in+fact,+mayo,+according+to+the+Food+and...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_dt_fb_top" class="facebook">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>
+    <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Why+does+Hellmann%E2%80%99s+mayonnaise+taste+different+from+how+it+used+to%3F&count=none&via=slate&url=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_dt_tw_top" class="twitter">
+       <span class="icon"></span>
+    </a>
+    <a class="tw-count" href="http://twitter.com/search?q=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html"><span class="count"></span></a>
+    </div>
+    
+      <a href="#comments" class="comments">
+        <span class="icon"></span>
+        <span class="count"></span>
+      </a>
+    
+ </div>
+
+
+    <h2 class="dek">Something is different about Unilever’s signature spread, but it’s not clear what.</h2>
+    
+    <div class="byline" id="main_byline">
+        By <a rel="author" href="http://www.slate.com/authors.ari_levaux.html">Ari LeVaux</a>
+    </div>
+    
+
+    
+
+
+
+
+
+  
+  
+  
+
+
+<div class="social horiz-counts-mobile centered sharing-buttons">
+  
+    <div class="comments">
+      <a class="mobile-comments" href="#comments">
+        <span class="icon"></span>
+        <span class="count"></span>
+      </a>
+    </div>
+  
+  <div class="facebook">
+    <a href="#" data-share="http://www.facebook.com/sharer.php?m2w&s=100&p[title]=Why+Does+Hellmann%E2%80%99s+Mayonnaise+Taste+Different+From+How+It+Used+To%3F&p[summary]=Hellmann&rsquo;s+Real+Mayonnaise+has+been+smeared+in+the+news+lately,+thanks+to+a+lawsuit+filed+by+its+parent+company,+Unilever,+against+fledgling+vegan+&ldquo;mayo&rdquo;+purveyor+Hampton+Creek.+The+case+rested+on+the+notion+that+Hampton+Creek&rsquo;s+flagship+product,+Just+Mayo,+is+not,+in+fact,+mayo,+according+to+the+Food+and...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_mob_fb_top" class="share facebook" target="_blank">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>
+  </div>
+  <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Why+does+Hellmann%E2%80%99s+mayonnaise+taste+different+from+how+it+used+to%3F&count=none&via=slate&url=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_mob_tw_top" class="twitter">
+       <span class="icon"></span>
+    </a>
+    <a class="tw-count" href="http://twitter.com/search?q=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html"><span class="count"></span></a>
+  </div>
+  
+  <div class="whatsapp">
+    <a href="whatsapp://send?text=Why%20does%20Hellmann%E2%80%99s%20mayonnaise%20taste%20different%20from%20how%20it%20used%20to%3F%20http%3A%2F%2Fwww.slate.com%2Farticles%2Flife%2Ffood%2F2015%2F02%2Fhellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html%3Fwpsrc%3Dsh_all_mob_wa_top" class="whatsapp">
+       <span class="icon"></span>
+    </a>
+  </div>
+  
+  
+  <div class="email">
+    <a href="mailto:?subject=Check%20out%20this%20piece%20on%20Slate&body=I%20thought%20you%20might%20like%20this%20article%20on%20Slate:%0AWhy%20Does%20Hellmann%E2%80%99s%20Mayonnaise%20Taste%20Different%20From%20How%20It%20Used%20To%3F%0Ahttp://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_mob_em_top" class="email">
+      <span class="icon"></span>
+      <span class="count">&nbsp;</span>
+    </a>
+  </div>
+</div>
+
+
+</header><!-- /header -->
+
+
+<section class="content">
+    <div class="parsys iparsys editorsNote"><div class="section"><div class="new"></div>
+</div><div class="iparys_inherited"><div class="parsys iparsys editorsNote">
+</div>
+</div>
+</div>
+
+    
+    <div class="newbody body parsys">
+
+<div class="parbase image slate_image section">
+
+
+ <div class=" none">
+        <figure class="image inline " style="width: 590px;  display: block;margin: 0 auto;float: none;"> <img title="150202_FOOD_Hellmans" alt="Hellman&rsquo;s Mayonnaise." src="/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Hellman’s Mayonnaise: The difference is Real.</span></figcaption>  <p class="credit">Photo illustration by <strong><em>Slate</em></strong>. Photo courtesy <a target="_blank" href="https://www.flickr.com/photos/jeepersmedia/15221612026">Mike Mozart</a>/Flickr.</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="text text-1 parbase section">
+
+<p>Hellmann&rsquo;s Real Mayonnaise has been smeared in the news lately, thanks to a lawsuit filed by its parent company, Unilever, against fledgling vegan &ldquo;mayo&rdquo; purveyor Hampton Creek. The case rested on the notion that Hampton Creek&rsquo;s flagship product, Just Mayo, is not, in fact, mayo, according to the Food and Drug Administration&rsquo;s definition of mayonnaise, because it contains no eggs.</p>
+
+
+</div>
+
+
+
+
+
+<div class="text-2 text parbase section">
+
+<p>About a month after filing it, Unilever <a href="http://www.slate.com/blogs/moneybox/2014/12/19/hellmann_s_drops_just_mayo_lawsuit_free_press_and_victory_for_egg_less_rival.html">dropped the lawsuit</a>, and with good reason. By picking this fight, Unilever came across as a <a href="https://www.change.org/p/tell-unilever-to-stop-bullying-sustainable-food-companies">bully</a> and generated the kind of publicity for its startup rival that money can&rsquo;t buy. Hampton Creek was able to <a href="http://fortune.com/2014/12/18/hampton-creek-funding/">leverage the ensuing sympathy it received into $90 million</a> in additional financing.</p>
+
+
+</div>
+
+<div class="text-3 text parbase section">
+
+<p>Unfortunately for Unilever, the fallout from this lawsuit might be the least of its concerns. According to longtime Hellmann&rsquo;s loyalists and professional tasters alike, the company has been messing with the world&rsquo;s favorite mayo.</p>
+
+
+</div>
+
+
+
+<div class="tablet-ad">
+    Advertisement<br>
+    
+<div id="slug_midarticleflex" class="ad " data-ad-type="midarticleflex" data-ad-mode="tabletPortrait"></div>
+
+    
+<div id="slug_mob_bigbox" class="ad " data-ad-type="mob_bigbox" data-ad-mode="mobile"></div>
+
+</div>
+
+<div class="text parbase text-4 section">
+
+<p>While Googling in the wake of Unilever&rsquo;s lawsuit back in November, I came across the product information page for <a href="http://www.hellmanns.com/product/detail/97847/real-mayonnaise">Hellmann&rsquo;s Real Mayonnaise</a> on the Hellmann&rsquo;s site and began scrolling through the comments. At the time, there were 152 comments registered. Sixty-one of them were complaints that the Hellmann&rsquo;s recipe had changed. Many of these accusations bore a remarkable similarity; the new texture was repeatedly described as &ldquo;soupy,&rdquo; for example. There were also claims that the flavor had changed, and for the worse. For instance:</p>
+
+
+</div>
+
+<div class="text parbase text-5 section">
+
+<blockquote>Even my husband knows it's not the same. Instead of a thick and almost sturdy mayonnaise, the "Real" jar now contains a oily oozy glop. Really, change it back. If my husband can tell it's different, then everyone knows. Please, change it back. This is a total wipeout.</blockquote>
+
+
+</div>
+
+<div class="text text-6 parbase section">
+
+<p>Or:</p>
+
+
+</div>
+
+<div class="text parbase text-7 section">
+
+<blockquote>I've been using Hellmans mayo for over 50 years. I'm very disappointed about the changes that have recently been made to the recipe. It impacts the taste, texture and consistency in a negative way. I haven't tasted this new formula side by side against any other brands, so I can't say whether or not it's still my preferred mayo. Any chance you'll go back to the old recipe?</blockquote>
+
+
+</div>
+
+<div class="text parbase text-8 section">
+
+<p>Some commenters even invoked the dreaded specter of another mayo substitute, the very name of which is known to give chills to aficionados of real mayonnaise.</p>
+
+
+</div>
+
+<div class="text parbase text-9 section">
+
+<blockquote>The new mayo is terrible, I could never make sandwiches or salads without it. Now my potato salad looks runny the very next day. I wish they would go back to their original recipe. Won't buy it anymore. Miracle whip here I come.</blockquote>
+
+
+</div>
+
+<div class="text parbase text-10 section">
+
+<p>As a <a href="http://www.slate.com/articles/life/food/2013/12/hellmann_s_mayonnaise_formula_why_does_this_high_amplitude_condiment_taste.html">proud Hellmann&rsquo;s lover</a> and aspiring scholar of all things mayo, I was shocked by these allegations about the world&rsquo;s top-selling mayonnaise brand. So I went out and bought myself a new jar. (I also bought a jar of Just Mayo, because I was curious about this mayolike substance that Unilever finds so threatening. And you know what? It&rsquo;s pretty good, even if I still prefer Vegenaise.)</p>
+
+
+</div>
+
+<div class="text-11 text parbase section">
+
+<p>It had been about a year since my previous taste of Hellmann&rsquo;s (thanks to my Vegenaise kick), and I figured that if something had changed since then, I&rsquo;d probably notice it. And indeed I did notice a difference. To me, the charges of soupiness were on the mark; it seemed less viscous than I recalled. With less certainty, I wondered if the flavor wasn&rsquo;t as bright as it used to be. I was visiting my parents at the time, and a friend of theirs who was over, upon hearing of my inquiry, said she had herself noticed a difference in Hellmann&rsquo;s lately.</p>
+
+
+</div>
+
+<div class="pagebreak section">
+
+</div>
+
+<div class="text-12 text parbase section">
+
+<p>I contacted Unilever, both as a distressed consumer and as a member of the media. My consumer complaint got this response: &ldquo;[W]e would like to assure you that our formula has not changed.&rdquo; My media inquiry received a slightly more detailed statement saying that &ldquo;Hellmann's Real Mayonnaise flavor, our specific ingredients, and our recipe have remained consistent over time.&rdquo; Pressed for clarification, Unilever spokeswoman Jaime Stein said, &ldquo;There has been no change that would lead to recent comments, in fact there have been no recipe changes for almost a decade.&rdquo;</p>
+
+
+</div>
+
+<div class="text-13 text parbase section">
+
+<p>Indeed, in March 2006 a Hellmann&rsquo;s representative admitted to recipe changes in an email exchange with Chris Phillips of <a href="http://www.thekitchn.com/brown-bag-lunch-recipe-better-than-hellmans-mayonnaise-14814">the Kitchn</a>. In emails that Phillips kindly shared with me, a Unilever rep wrote: &nbsp;</p>
+
+
+</div>
+
+<div class="text text-14 parbase section">
+
+<blockquote>In March, to improve the stability and quality of our Real mayonnaise products, Hellmann's has slightly increased the sodium level.&nbsp; This ensures a consistent high quality product throughout the product's 9 month shelf life.</blockquote>
+
+
+</div>
+
+<div class="text text-15 parbase section">
+
+<blockquote>In 2003, whole eggs &amp; egg yolks have become the third ingredients. This minor modification will improve product stability &amp; result in less separation.&nbsp; Every effort is made to ensure that we maintain the great taste and quality of our&nbsp;mayonnaise to which our consumers have become accustomed.</blockquote>
+
+
+</div>
+
+<div class="text parbase text-16 section">
+
+<p>Meanwhile, I had discovered another apparent change by comparing the ingredient list on my new jar with a Google image search for &ldquo;Hellmann&rsquo;s label&rdquo;: Lemon juice concentrate now appears where lemon juice used to. I wondered if that change explained complaints I&rsquo;d read about Hellmann&rsquo;s new wan flavor. But Anita Larsen, director of communications for Unilever in North America, told me that the difference between lemon juice and lemon juice concentrate is simply semantic. She wrote, &ldquo;The use of lemon juice concentrate in Hellmann&rsquo;s Real is not a recipe change, simply a label update&mdash;so this is unrelated to any particular complaints you may see.&rdquo;</p>
+
+
+</div>
+
+<div class="text parbase text-17 section">
+
+<p>It was Unilever&rsquo;s word against my&mdash;and dozens of irate, if amateur, commenters&rsquo;&mdash;taste buds. It was certainly possible, if not likely, that we were all deluding ourselves, so I contacted someone who I thought could weigh in on this matter with authority and objectivity, an expert taster whose job is to notice differing minutiae in food products. Joanne Seltsam is a descriptive taster for <a href="http://www.sensoryspectrum.com/">Sensory Spectrum</a>, a consulting firm that specializes in the &ldquo;sensory consumer experience.&rdquo; She&rsquo;s also very familiar with Hellmann&rsquo;s. I had interviewed Seltsam for my 2013 article about <a href="http://www.slate.com/articles/life/food/2013/12/hellmann_s_mayonnaise_formula_why_does_this_high_amplitude_condiment_taste.html">why Hellmann&rsquo;s mayo is so great</a>, and she&rsquo;d raved about Hellmann&rsquo;s as being a nearly perfect product.</p>
+
+
+</div>
+
+<div class="text parbase text-18 section">
+
+<p>In light of the recent allegations, I convinced Seltsam to pick up a new jar and give it a try. Here is what she wrote to me after she conducted an informal taste test with some colleagues.</p>
+
+
+</div>
+
+<div class="text parbase text-19 section">
+
+<blockquote>The texture is definitely different.&nbsp; It&rsquo;s much smoother (used to have a rougher, almost curdled appearance when you dragged a utensil through it).&nbsp; This new texture is apparent in mouth as well (if you eat it from a spoon&mdash;not sure if you&rsquo;d notice after spread on a piece of bread with turkey and cheese on it &hellip;).&nbsp; The new texture is more characteristic of their low(er) fat version.</blockquote>
+
+
+</div>
+
+<div class="text parbase section text-20">
+
+<p>This would appear to vindicate those irate commenters&mdash;but Seltsam informed me that just because Hellmann&rsquo;s tastes different, it doesn&rsquo;t mean the ingredients, or &ldquo;formula,&rdquo; changed per se. The difference could be due to what Seltsam calls a &ldquo;processing parameter,&rdquo; which she explained was &ldquo;a change in the processing, like temp, or the order the ingredients are added, or even a new piece of equipment.&rdquo; Inconsistencies in storage conditions could play a role as well.</p>
+
+
+</div>
+
+
+
+
+
+
+<aside class="top-comment top-comment-link">
+  <a href="#lf_comment=267104647" class="primary"></a>
+  <p class="title"><span>Top Comment</span></p>
+  <div class="quote">
+    <p>
+    
+        
+            The answer is Wal Mart. &nbsp; As a food scientist who understands what is really happening, the representatives statement regarding shelf life gives it away. &nbsp;<a>More...</a>
+        
+        
+    
+    </p>
+    <p style="text-align:right; margin-bottom:-5px; margin-top:-18px;">-sieg</p>
+  </div>
+  <p class="comment-options">
+    <a href="#comments" class="count labeled"></a>
+    <a href="#comments" class="join-in">Join In</a>
+  </p>
+</aside>
+
+<div class="text parbase section text-21">
+
+<p>Unilever&rsquo;s Larsen emailed that according to the company&rsquo;s records, there has actually been &ldquo;a decrease in consumer complaints within the last year.&rdquo; Regardless, if Seltsam&rsquo;s panel of experts say that something is different, I&rsquo;m inclined to believe them.</p>
+
+
+</div>
+
+<div class="text-22 text parbase section">
+
+<p>Unilever regained some of its lost good will in the eyes of the public by dropping its suit against Hampton Creek. But Hellmann&rsquo;s won&rsquo;t fully regain its reputation with mayonnaise lovers until that sturdy, thick body makes a comeback. Whatever&rsquo;s really going on here, the dollop is in your court, Unilever.</p>
+
+
+</div>
+</div>
+
+    
+    
+    <script>
+        requirejs(["jquery"], function($) {
+            function getDropCappedString(firstParagraphObj) {
+                var textString = firstParagraphObj.html().trim();
+                if (textString.length > 0) {
+                    var firstLetter = textString[0].match(/[A-Za-z0-9]/);
+                    if (firstLetter != null) {
+                        return '<span class="drop-capped">' +
+                            firstLetter + '</span>' + textString.substr(1);
+                    }
+                }
+                return null;
+            };
+
+
+            $(function() {
+                var $p = $(".main div.body div.text:first p:first");
+                if ($p.length != 0 && $p.find("span.drop-capped").length==0 ) {
+                   var newString = getDropCappedString($p);
+                   if (newString != null && 1 < 2) {
+                       $p.html(newString);
+                   }
+                }
+                if($(".main div.body div.sectionheader").length!=0) {
+                    //apply to first par of each section of fresca
+                    $(".main div.body div.sectionheader").each(
+                            function(index) {
+                                if($(this).nextAll("div.text").first().find("p:first span.drop-capped").length==0)  {
+                                    var $p = $(this).nextAll("div.text").first().find("p:first"),
+                                     newString = getDropCappedString($p);
+                                    if (newString != null) {
+                                        $p.html(newString);
+                                    }
+                                }
+                            }
+                    )
+                }
+
+            });
+        });
+    </script>
+    
+</section>
+
+<footer>
+    
+
+    
+
+
+  
+  <section class="about-the-author multi">
+    
+    <div class="author-bio">
+      <p>
+        <p>Ari LeVaux writes <a href="http://www.flashinthepan.net/">Flash in the Pan</a>, a syndicated weekly food column that’s appeared in more than 50 newspapers in more than 24 states.<br>
+</p>
+
+	  </p>
+	</div>
+	
+  </section>
+  
+
+
+    
+
+    
+    <div class="pagination">
+        
+        
+
+
+    
+
+
+    <div class="social social-with-popup sharing-buttons">
+      <div class="plus-popup">
+        <a href="http://www.slatereprints.com/reprint-products-quote-request/?cf2_field_17=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html&cf2_field_18=www.slate.com&cf2_field_19=Why+Does+Hellmann%E2%80%99s+Mayonnaise+Taste+Different+From+How+It+Used+To%3F&cf2_field_20=09%2F20%2F2013" class="reprint">REPRINT</a>
+        <a href="http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.single.html?print" target="_blank" class="print">PRINT</a>
+        <a href="mailto:?subject=Check%20out%20this%20piece%20on%20Slate&body=I%20thought%20you%20might%20like%20this%20article%20on%20Slate:%0AWhy%20Does%20Hellmann%E2%80%99s%20Mayonnaise%20Taste%20Different%20From%20How%20It%20Used%20To%3F%0Ahttp://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_dt_em_bot" class="email">EMAIL</a>
+        <div class="arrow-border"></div>
+        <div class="arrow"></div>        
+      </div>
+      <a href="#" class="plus">
+        <span class="icon"></span>
+      </a>
+      <a href="#" data-share="http://www.facebook.com/sharer.php?s=100&p[title]=Why+Does+Hellmann%E2%80%99s+Mayonnaise+Taste+Different+From+How+It+Used+To%3F&p[summary]=Hellmann&rsquo;s+Real+Mayonnaise+has+been+smeared+in+the+news+lately,+thanks+to+a+lawsuit+filed+by+its+parent+company,+Unilever,+against+fledgling+vegan+&ldquo;mayo&rdquo;+purveyor+Hampton+Creek.+The+case+rested+on+the+notion+that+Hampton+Creek&rsquo;s+flagship+product,+Just+Mayo,+is+not,+in+fact,+mayo,+according+to+the+Food+and...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_dt_fb_bot" class="facebook">
+        <span class="icon"></span>
+        <span class="count"></span>
+      </a>
+    <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Why+does+Hellmann%E2%80%99s+mayonnaise+taste+different+from+how+it+used+to%3F&count=none&via=slate&url=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_dt_tw_bot" class="twitter">
+       <span class="icon"></span>
+    </a>
+    <a class="tw-count" href="http://twitter.com/search?q=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html"><span class="count"></span></a>
+    </div>
+      
+        <a href="#comments" class="comments">
+          <span class="icon"></span>         
+          <span class="count"></span>                
+        </a>              
+      
+    </div>
+    
+
+    </div><!-- /.pagination -->
+
+    
+
+
+
+
+
+
+  
+  
+  
+
+<div class="social horiz-counts-mobile centered sharing-buttons">
+  
+    <div class="comments">
+      <a class="mobile-comments" href="#comments">
+        <span class="icon"></span>
+        <span class="count"></span>
+      </a>
+    </div>
+  
+  <div class="facebook">
+    <a href="#" data-share="http://www.facebook.com/sharer.php?m2w&s=100&p[title]=Why+Does+Hellmann%E2%80%99s+Mayonnaise+Taste+Different+From+How+It+Used+To%3F&p[summary]=Hellmann&rsquo;s+Real+Mayonnaise+has+been+smeared+in+the+news+lately,+thanks+to+a+lawsuit+filed+by+its+parent+company,+Unilever,+against+fledgling+vegan+&ldquo;mayo&rdquo;+purveyor+Hampton+Creek.+The+case+rested+on+the+notion+that+Hampton+Creek&rsquo;s+flagship+product,+Just+Mayo,+is+not,+in+fact,+mayo,+according+to+the+Food+and...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_mob_fb_bot" class="share facebook" target="_blank">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>
+  </div>
+  <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Why+does+Hellmann%E2%80%99s+mayonnaise+taste+different+from+how+it+used+to%3F&count=none&via=slate&url=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_mob_tw_bot" class="twitter">
+       <span class="icon"></span>
+    </a>
+    <a class="tw-count" href="http://twitter.com/search?q=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html"><span class="count"></span></a>
+  </div>
+  
+  
+  <div class="whatsapp">
+    <a href="whatsapp://send?text=Why%20does%20Hellmann%E2%80%99s%20mayonnaise%20taste%20different%20from%20how%20it%20used%20to%3F%20http%3A%2F%2Fwww.slate.com%2Farticles%2Flife%2Ffood%2F2015%2F02%2Fhellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html%3Fwpsrc%3Dsh_all_mob_wa_bot" class="whatsapp">
+       <span class="icon"></span>
+    </a>
+  </div>
+  
+  <div class="email">
+    <a href="mailto:?subject=Check%20out%20this%20piece%20on%20Slate&body=I%20thought%20you%20might%20like%20this%20article%20on%20Slate:%0AWhy%20Does%20Hellmann%E2%80%99s%20Mayonnaise%20Taste%20Different%20From%20How%20It%20Used%20To%3F%0Ahttp://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html?wpsrc=sh_all_mob_em_bot" class="email">
+      <span class="icon"></span>
+      <span class="count">&nbsp;</span>
+    </a>
+  </div>
+</div>
+
+
+    <div class="row up-next" id="up-next-box"></div>
+    
+    
+    <div class="footer-tiles">
+        <div class="row">
+            
+
+  <div id="outbrain_placeholder"></div>
+  <div class="sl-outbrain-divider"></div>
+
+  <script type="text/javascript">
+  requirejs(["jquery","myslate"], function($,myslate) {
+    var isCommentUser = $.cookie("s_segs") && $.cookie("s_segs").indexOf('commenter') > -1;
+    if(!myslate.isSlatePlusUser) {
+      var createOutbrainDivs = function(widgetId) {
+        var divHtml = '<div class="OUTBRAIN" data-src="http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html" data-widget-id="' + widgetId + '" data-ob-template="SlateMag" ></div>';
+        $("#outbrain_placeholder").append(divHtml);
+      }
+      if (mobileMode()) {
+        createOutbrainDivs("MB_1");
+      } else {
+        createOutbrainDivs("AR_3");
+        createOutbrainDivs("AR_17");
+      }
+      $('<script>', {src: '//widgets.outbrain.com/outbrain.js'}).appendTo('body');
+    }
+  });
+  </script>
+
+        </div>
+    </div> <!-- /.footer-tiles -->
+    
+    
+    
+</footer>
+
+
+
+
+
+<div id="comments" class="comments-container" data-lf-hash="MzM3NzIwOmNxLTEwMDE1MDIwMjAxNg==">
+  <div id="livefyre">
+  	<div class="button-container lf-loader" style="text-align:center;">
+      <button class="push-button" onClick="loadLivefyre(); return false;" style="padding: 0 15px;">Load Comments</button>
+    </div>
+  </div>
+  <div id="powered_by_livefyre_new"><a href="http://livefyre.com" target="_blank">Powered by Livefyre</a></div>
+</div>
+<div id="comments-ads" class="comments-ads-container">
+</div>
+
+<script type="text/javascript">
+
+var loadLivefyre = function () {
+   var articleId = "100150202016";
+   if (articleId.length == 0) {
+     
+     return;
+   }
+   if (typeof($) != "undefined") {
+     $(".lf-loader").html("<div style='color:#999;'>Loading...</div>" +
+                         "<div style='color:#999;font-size:smaller; margin: 20px auto'>" +
+                         "Are Slate's comments not loading even after a few seconds? " +
+                         "<br/><a target=\"_blank\" href=\"http://www.slate.com/features/browser-data-comment.html\">"+
+                         "Send us your browser and operating system information.</a></div>");
+   }
+
+  requirejs(["livefyre", "livefyresidenotes", "jquery", "identity/identity", "identity/wapo_env", "libs/jquery-plugins/jquery.cookie", "s_code", "myslate"],
+            function (fyre, sidenotes, $, wapoVisitor, wapoEnv, unused0, s, myslate) {
+    // buttons that may prompt login should not propagate up to the document level; if they do, the login screen will open and close quickly.
+    $("#livefyre").on("click", ".fyre-user-loggedout, .fyre-comment-like-btn, .fyre-post-button", function (event) {
+      event.stopPropagation();
+    });
+
+    function isElementInViewport(el) {
+      var rect = el.getBoundingClientRect();
+
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+      );
+    }
+
+    var authDelegate = new fyre.conv.RemoteAuthDelegate();
+
+    // if the login process completes successfully, call this method: handlers.success();
+    // if the login process failed for any reason, call this method: handlers.failure();
+    authDelegate.login = function (handlers) {
+      wapoVisitor.loginQueue.push(handlers);
+      // open up the login dialog
+      var clickEvent = $('html').hasClass('touch') ? 'touchstart' : 'click';
+
+      // more than on handler may be ":visible"; we want the one that's in the viewport as well.
+      $($(".global-nav-handle:visible").filter(function (idx) {
+        return isElementInViewport(this)
+      }).get(0)).trigger(clickEvent);
+      $("#sign_in_link").click();
+    };
+
+    authDelegate.logout = function (handlers) {
+      $.removeCookie("lf_usertokenValue", {
+        path: wapoEnv.site_path,
+        domain: wapoEnv.site_base_domain
+      });
+      $.removeCookie("lf_secure_login_id", {
+        path: wapoEnv.site_path,
+        domain: wapoEnv.site_base_domain
+      });
+      $.removeCookie("lf_networksecret", {
+        path: wapoEnv.site_path,
+        domain: wapoEnv.site_base_domain
+      });
+      handlers.success();
+
+      // added to prevent infinite loop.
+      if ($.cookie("wapo_login_id")) {
+        wapoVisitor.wapoLogout();
+      }
+    };
+
+    authDelegate.viewProfile = function (handlers, author) {
+      /* place custom view profile code here, below is an example */
+      //console.log('here is the user id from livefyre: ',author.id);
+      //console.log('here is the external system user id: ',author.id.split('@')[0]);
+      handlers.success();
+    };
+
+    authDelegate.editProfile = function (handlers, author) {
+      /* place custom edit profile code here, could be as simple as setting document.location */
+      //console.log('here is the user id from livefyre: ',author.id);
+      //console.log('here is the external system user id: ',author.id.split('@')[0]);
+      handlers.success();
+    };
+
+
+
+    var initLivefyre = function(widget) {
+      // listen for widget initialization
+      widget.on('initialRenderComplete', function () {
+        changeUserLabels();
+        $(".lf-loader").remove();
+
+        /**
+         * hack to compensate for livefyres lack of events
+         */
+        setInterval(changeUserLabels, 100);
+
+			if (mobileMode()) {
+        $('#comments #livefyre .fyre-user-loggedout').off().on("click", function(e) {
+
+					$('#livefyre-login-mobile, #mobile_identity_inline').remove();
+
+					$("#comments").before([
+            '<header id="mobile_identity_inline">',
+            '<a href="#"><button class="push-button" id="mobile_sign_in_inline">SIGN IN</button></a>',
+            '<a href="#"><button class="push-button" id="mobile_sign_up_inline">SIGN UP</button></a>',
+            '</header>'
+					].join(''));
+
+          $('#mobile_sign_in_inline, #mobile_sign_up_inline').on('click', function(e) {
+            e.preventDefault();
+            $('#livefyre-login-mobile').remove();
+            var classes = ['livefyre-iframe'],
+                url;
+
+            if ($(this).attr('id') === 'mobile_sign_in_inline') {
+              url = wapoVisitor.identityUser().urls.login;
+              classes.push('livefyre-signin');
+            } else {
+              url = [
+                wapoEnv.wapo_secure_protocol,
+                wapoEnv.wapo_site_url,
+                "siteRegistration/addRegistration?",
+                wapoEnv.param_name_redirect,
+                '=' + encodeURIComponent(window.location),
+                '&' + wapoEnv.param_name_previous_url,
+                '=' + encodeURIComponent(window.location),
+                '&KeepThis=true'
+              ].join('');
+              classes.push('livefyre-signup');
+            }
+
+            $('#mobile_identity_inline').after([
+              "<iframe id='livefyre-login-mobile' class='" + classes.join(' ') + "' src='" + url,
+              "&reg_group=comments&check_default=lf_notification_replies' frameborder='0' allowtransparency='true' scrolling='no'>",
+              "</iframe>"
+            ].join(''));
+          });
+          $(document).bind('wapoRegister.default', function() {
+            $(this).trigger('wapoLogin.livefyre');
+          })
+					$(document).bind('wapoLogin.livefyre', function() {
+            $('#mobile_identity_inline').remove();
+						$('html').addClass('livefyre-loggedin livefyre-loggedin-mobile');
+					});
+
+				});
+			}
+
+
+      });
+
+      widget.on('commentCountUpdated', function () {
+        changeUserLabels();
+      });
+
+      widget.on('commentPosted', function(data) {
+        s.trackComment("", "event3");
+        showCommentOptions();
+        changeUserLabels();
+      });
+
+      doLivefyreAuth();
+
+    }
+
+    var changeUserLabels = function() {
+      $(".fyre-comment-author-tag").each(function() {
+        if ($(this).html() == "staff") {
+          $(this).addClass("fyre-comment-author-tag-writer").html("Slate Writer");
+        } else if ($(this).html() == "plus") {
+          $(this).addClass("fyre-comment-author-tag-plus").html("Member").wrap('<a href="https://secure.slate.com/plus?wpsrc=sp_all_commenter_badge"></a>');
+        }
+      })
+    };
+
+
+    var showCommentOptions = function() {
+      if (wapoVisitor.completedGroups && $.inArray("comments", wapoVisitor.completedGroups.split('-')) === -1) {
+        // show options.
+        var url = wapoVisitor.identityUser().urls.editProfile + '&reg_group=comments&check_default=lf_notification_replies';
+        $(".fyre-stream-header").before("<div class='update-comment-registration' style='clear: both; display:none; margin-top: 10px;'><div class='settings-header'><div style='position:absolute; right:10px; display: block; cursor: pointer;'><strong>X</strong></div>Update Notifications</div><iframe id='lf_prefs_iframe' height='360' width='100%' frameborder='0' allowtransparency='true' scrolling='no'></iframe></div>");
+        document.getElementById('lf_prefs_iframe').src = url;
+
+        $(".update-comment-registration").hide();
+
+        $(".update-comment-registration").slideDown();
+		$(".settings-header").on('click', function() { $(".update-comment-registration").slideUp(); });
+	  }
+    }
+
+    var doLivefyreAuth = function() {
+
+      var cval = $.cookie("lf_secure_login_id");
+      if (cval) {
+        try {
+          fyre.conv.login(cval);
+          while (wapoVisitor.loginQueue.length > 0) {
+            wapoVisitor.loginQueue.shift().success();
+          }
+        } catch (e) {
+          //console.log("Error attempting to login with lf_secure_login_id cookie value: ", cval, " ", e);
+        }
+      }
+    }
+
+    $(document).bind('wapoLogin.livefyre', doLivefyreAuth);
+    $(document).bind('wapoLogout.livefyre', function () {
+      fyre.conv.logout()
+    });
+
+
+    var streamConfig = [{
+      "collectionMeta": "eyJhbGciOiJIUzI1NiJ9.eyJ0aXRsZSI6IldoeSBEb2VzIEhlbGxtYW5u4oCZcyBNYXlvbm5haXNlIFRhc3RlIERpZmZlcmVudCBGcm9tIEhvdyBJdCBVc2VkIFRvPyIsInVybCI6Imh0dHA6Ly93d3cuc2xhdGUuY29tL2FydGljbGVzL2xpZmUvZm9vZC8yMDE1LzAyL2hlbGxtYW5uX3NfbWF5b25uYWlzZV9kaWZmZXJlbnRfdGV4dHVyZV9oYXNfc29tZXRoaW5nX2NoYW5nZWRfaW5fdW5pbGV2ZXIuaHRtbD93cGlzcmNcdTAwM2RsZiIsInRhZ3MiOiJmb29kIiwiY2hlY2tzdW0iOiJjYzYxZjVkMWM4NDY5ZjE2YjBhNzE3OGEwNjBlNWMzMSIsImFydGljbGVJZCI6ImNxLTEwMDE1MDIwMjAxNiJ9.1a1Y2MjgqAkNQkmBydJYYRIcuD-Vknhf0hs7lkCEGkU",
+      "postToButtons": ['tw', 'fb'],
+      "siteId": 337720,
+      "articleId": "cq-100150202016",
+      "el": "livefyre"
+    }];
+
+    fyre.conv.load({
+        network: "slate.fyre.co",
+        authDelegate: authDelegate
+      },
+      streamConfig,
+      initLivefyre
+    );
+
+
+/**
+ * Livefyre Sidenotes Test
+ */
+
+
+  });
+}
+
+var loadLivefyreWithTiming = function() {
+  var loadTiming = "demand";
+  if (loadTiming != "delayed" && loadTiming != "demand") {
+    loadTiming = "immediate";
+  }
+
+  if (window.location.search.indexOf("livefyreLoad=dem") == -1) {
+    if (window.location.search.indexOf("livefyreLoad=del") != -1 || loadTiming == "delayed") {
+      window.setTimeout(loadLivefyre, 500);
+    } else if (window.location.search.indexOf("livefyreLoad=imm") != -1 || loadTiming != "demand") {
+      loadLivefyre();
+    }
+  }
+};
+
+requirejs(["myslate", "jquery", "libs/jquery-plugins/jquery.cookie"], function(myslate, $, unused) {
+  var isCommentUser = $.cookie("s_segs") && $.cookie("s_segs").indexOf('commenter') > -1;
+  if(myslate.isSlatePlusUser || false) {
+    $("#comments").addClass("inline");
+    loadLivefyre();
+    $('.top-comment-link a.primary').bind('click', function(e){
+      if(mobileMode()){return;} 
+      e.stopImmediatePropagation(); 
+      loadLivefyre();
+    });
+  } else {
+    loadLivefyreWithTiming();
+  }
+});
+</script>
+
+
+
+
+        <div class="parsys iparsys contentWellBottom"><div class="section"><div class="new"></div>
+</div><div class="iparys_inherited"><div class="parsys iparsys contentWellBottom">
+</div>
+</div>
+</div>
+
+        
+        <div class="abridgedhomepage">
+
+
+<div class="twocolumn-stories">
+  <div class="twocolumn-stories__left large-tiles tiles">
+    <div class="parsys homepageSectionStoriesLeft"><div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: News & Politics" class="story-box-news-politics">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/news_and_politics.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+News & Politics</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/articles/news_and_politics/politics/2015/02/150203_POL_BoehnerPresser.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/articles/news_and_politics/politics/2015/02/150203_POL_BoehnerPresser.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/news_and_politics/politics/2015/02/republicans_hope_for_the_supreme_court_to_kill_obamacare_if_the_court_rules.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Politics</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 3 2015 5:46 PM</span>
+                <!-- <span class="hed">The GOP’s Sick Maneuvers</span> -->
+                
+                  
+                  
+                    <span class="hed">The GOP’s Sick Maneuvers</span>
+                  
+                
+                <span class="dek">If the Supreme Court throws Obamacare into chaos, Republicans are content to just watch it fail.</span>
+                <span class="byline">Jamelle Bouie</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/jurisprudence/2015/02/capital_punishment_cover_up_virginia_hides_all_information_relating_to_the.html" class="primary">Virginia Wants to Hide “All Information Relating to the Execution Process”</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/politics/2015/02/presidential_campaigns_are_beginning_far_too_early_the_permanent_campaign.html" class="primary">Presidential Campaign Season Shouldn’t Begin 644 Days Before Election Day</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/crime/2015/02/bobby_shmurda_is_the_hot_boy_rapper_a_violent_criminal_or_the_victim_of.html" class="primary">Is Bobby Shmurda a Violent Criminal or the Victim of Racial Injustice? Could He Be Both?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/moment/2015/02/israel_2015_election_myths_benjamin_netanyahu_isn_t_a_shrewd_politician.html" class="primary">The Myths of Israel’s 2015 Election</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/politics/2015/02/scott_walker_and_grassroots_conservatives_why_the_wisconsin_governor_isn.html" class="primary">Why Scott Walker Isn’t a Slam Dunk for Grass-Roots Conservatives</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/politics/2015/02/anti_vaxxers_resist_persuasion_if_they_refuse_we_have_to_force_them_to_vaccinate.html" class="primary">How to Deal With Anti-Vaxxers</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Business" class="story-box-business">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/business.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Business</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/articles/business/moneybox/2015/01/150114_$BOX_Chipotle.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/articles/business/moneybox/2015/01/150114_$BOX_Chipotle.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/blogs/moneybox/2015/02/03/chipotle_q4_2014_earnings_most_menu_prices_aren_t_going_up_in_2015.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Moneybox</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 3 2015 6:05 PM</span>
+                <!-- <span class="hed">Good News: Chipotle Menu Prices (Mostly) Aren’t Going Up in 2015</span> -->
+                
+                  
+                  
+                    <span class="hed">Good News: Chipotle Menu Prices (Mostly) Aren’t Going Up in 2015</span>
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">Alison Griswold</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/business/the_juice/2015/02/low_gas_prices_and_electric_cars_why_tesla_and_other_companies_aren_t_vulnerable.html" class="primary">Low Gas Prices May Be Bad for Hybrids, but They Won’t Stop the Rise of All-Electric Cars</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/moneybox/2015/02/02/uber_self_driving_cars_autonomous_taxis_aren_t_so_good_for_contractors_in.html" class="primary">Uber Wants to Replace Its Drivers With Robots. So Much for That “New Economy” It Was Building.</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/moneybox/2015/02/02/budweiser_super_bowl_ad_a_perfect_illustration_of_why_young_people_don_t.html" class="primary">Budweiser’s Awful Super Bowl Ad Is a Perfect Illustration of Why Young People Don’t Drink It</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/moneybox/2015/02/02/radioshack_bankruptcy_company_may_sell_half_its_stores_to_sprint_and_close.html" class="primary">RadioShack’s Years-in-the-Making End Might Finally Be Nigh</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/moneybox/2015/02/02/obama_free_community_college_program_wealthy_kids_need_not_apply.html" class="primary">Obama’s Free Community College Plan Has a Catch: Wealthy Kids Wouldn’t Be Eligible</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/moneybox/2015/02/02/chip_wilson_resigns_from_lululemon_board_some_founders_just_don_t_actually.html" class="primary">Man Who Said Certain Women’s Bodies “Just Don’t Actually Work” for Yoga Pants Resigns From Lululemon Board</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Life" class="story-box-life">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/life.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Life</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/blogs/lexicon_valley/2015/02/03/origins_and_use_of_the_phrase_shit_show_from_james_ellroy_to_the_red_army/56931684-dog-goes-to-the-bathroom-behind-a-bush-at-ft-funston.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/blogs/lexicon_valley/2015/02/03/origins_and_use_of_the_phrase_shit_show_from_james_ellroy_to_the_red_army/56931684-dog-goes-to-the-bathroom-behind-a-bush-at-ft-funston.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/blogs/lexicon_valley/2015/02/03/origins_and_use_of_the_phrase_shit_show_from_james_ellroy_to_the_red_army.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Lexicon Valley</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 3 2015 1:09 PM</span>
+                <!-- <span class="hed">The Craptastic History of <em>Sh-t Show</em></span> -->
+                
+                  
+                  
+                    <span class="hed">The Craptastic History of <em>Sh-t Show</em></span>
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">Mike Vuolo</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/the_eye/2015/02/03/louise_sandhaus_explores_california_graphic_design_in_the_20th_century_in.html" class="primary">What Makes California’s Graphic Design So Distinct?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/atlas_obscura/2015/02/03/passetto_di_borgo_the_pope_s_secret_vatican_city_passage.html" class="primary">The Pope's Secret Passage Hides in Plain Sight</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/life/the_short_cut/2015/02/how_to_improve_cheap_wine_fast_use_a_blender_to_aeration_video.html" class="primary">The Fastest Way to Improve a Cheap Bottle of Wine</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/the_vault/2015/02/03/history_of_measles_mortality_maps_from_a_time_before_vaccines.html" class="primary">Late 19th-Century Maps Show Measles Mortality Before Vaccines</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/quora/2015/02/03/what_is_the_craftiest_way_to_dodge_a_question_during_a_presentation.html" class="primary">What’s the Craftiest Way to Dodge a Question During a Presentation?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/life/dear_prudence/2015/02/dear_prudence_ever_since_i_remarried_my_daughter_has_treated_me_terribly.html" class="primary">Help! My Daughter Has Treated Me Terribly Since I Remarried.</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Double X" class="story-box-double-x">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/double_x.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Double X</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/articles/double_x/the_kids/2015/01/150121_KIDS_HolisticColdDebunking.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/articles/double_x/the_kids/2015/01/150121_KIDS_HolisticColdDebunking.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/double_x/the_kids/2015/02/treating_kids_cough_and_cold_symptoms_homeopathic_remedies_and_natural_supplements.html" class="primary"></a>
+            
+            
+                <span class="rubrik">The Kids</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 3 2015 2:41 PM</span>
+                <!-- <span class="hed">Not 4 Kids</span> -->
+                
+                  
+                  
+                    <span class="hed">Not 4 Kids</span>
+                  
+                
+                <span class="dek">Homeopathic cold and cough “medicines” for children don’t work. So don’t buy them.</span>
+                <span class="byline">Melinda Wenner Moyer</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2015/02/03/ross_baker_in_usa_today_hillary_clinton_is_scaring_off_all_the_good_male.html" class="primary"><em>USA Today</em> Columnist: Hillary Clinton Is Scaring Off All the Good Male Candidates</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2015/02/02/women_s_mosque_of_america_first_female_only_mosque_in_u_s_opens_in_l_a.html" class="primary">American Muslim Women Fight for Equality in the Mosque by Opening Their Own</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2015/02/02/women_in_the_senate_losing_committee_chair_positions_with_republicans_in.html" class="primary">With Republicans in Charge, Women Are Losing Leadership Positions in the Senate</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2015/02/02/chris_christie_on_vaccinations_calls_for_balance_and_parental_choice.html" class="primary">Chris Christie Supports Parents Who Choose Not to Vaccinate Their Kids</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2015/01/30/megyn_kelly_and_her_megyn_moments_not_all_that.html" class="primary">The Misguided Liberal Love for Megyn Kelly</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2015/01/29/council_on_contemporary_families_study_money_not_marriage_has_the_most_impact.html" class="primary">Money, Not Marital Status, Has the Most Impact on How Parents Raise Their Kids</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+
+</div>
+
+  </div>
+  <div class="twocolumn-stories__right large-tiles tiles">
+    <div class="parsys homepageSectionStoriesRight"><div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Slate Plus" class="story-box-slate-plus">
+<header class="black-header">
+
+<a href="/plus/home?wpisrc=sp_all_native-by-section" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Slate Plus</header>
+
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed slateplus-preview" style="background-image: url('http://www.slate.com/content/dam/slate/Slate%20Plus/articles/2015/02/150202_PLUS_Helmuth_590x421.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/Slate%20Plus/articles/2015/02/150202_PLUS_Helmuth_590x421.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/podcasts/slate_voice/2015/02/slate_out_loud_laura_helmuth_reads_james_watson_throws_a_fit.html?wpsrc=sp_all_native_by-section" class="primary"></a>
+            
+            
+                <span class="rubrik">Slate Voice</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 3 2015 7:30 AM</span>
+                <!-- <span class="hed">Slate Voice: “James Watson Throws a Fit”</span> -->
+                
+                  
+                  
+                    <span class="hed">Slate Voice: “James Watson Throws a Fit”</span>
+                  
+                
+                <span class="dek">Listen to Laura Helmuth read her piece about the tarnished legacy of a Nobel laureate.</span>
+                <span class="byline">Laura Helmuth</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list slateplus-preview" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/arts/tv_club/2015/02/slate_s_downton_abbey_podcast_recap_and_spoiler_special_episode_5.html?wpsrc=sp_all_native_by-section" class="primary">A Spoiler-Filled Podcast on <em>Downton Abbey </em>Episode 5</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list slateplus-preview" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/plus_roundups/2015/01/slate_s_weekly_roundup_what_lindsey_underwood_read_about_the_east_coast.html?wpsrc=sp_all_native_by-section" class="primary">Lindsey Underwood on What <strong><em>Slate</em></strong> Stories Ruled Social Media This Week</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list slateplus-preview" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/arts/slate_plus/2015/01/slate_music_january_spotify_playlist_for_slate_plus_members.html?wpsrc=sp_all_native_by-section" class="primary"><strong><em>Slate</em> </strong>Staff Pick<strong> </strong>the Best Songs From January</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list slateplus-preview last" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/podcasts/behind_the_scenes/2015/01/patton_oswalt_interview_silver_screen_fiend_and_his_love_of_movies_audio.html?wpsrc=sp_all_native_by-section" class="primary">A Conversation With Patton Oswalt About Movies (Audio)</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Arts" class="story-box-arts">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/arts.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Arts</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/blogs/browbeat/2015/02/03/magic_mike_xxl_poster_revealed_by_channing_tatum_via_instagram/magic_mike_poster.png.CROP.promo-medium2.png');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/blogs/browbeat/2015/02/03/magic_mike_xxl_poster_revealed_by_channing_tatum_via_instagram/magic_mike_poster.png.CROP.promo-medium2.png">
+            <a href="http://www.slate.com/blogs/browbeat/2015/02/03/magic_mike_xxl_poster_revealed_by_channing_tatum_via_instagram.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Brow Beat</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 3 2015 5:56 PM</span>
+                <!-- <span class="hed">The Unsubtle Brilliance of the New <em>Magic Mike XXL </em>Poster</span> -->
+                
+                  
+                  
+                    <span class="hed">The Unsubtle Brilliance of the New <em>Magic Mike XXL </em>Poster</span>
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">Aisha Harris</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/arts/books/2015/02/robert_repino_s_cat_detective_novel_mort_e_reviewed.html" class="primary">The Best Post-Apocalyptic Cat Detective Novel You’ll Read All Year</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/browbeat/2015/02/03/cary_fukunaga_on_true_detective_season_2_his_adaption_of_stephen_king_s.html" class="primary">Cary Fukunaga on Adapting <em>It</em>, His Musical With Owen Pallett, and #TrueDetectiveSeason2</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/browbeat/2015/02/03/animals_creators_phil_matarese_and_mark_luciano_on_improvisation_animation.html" class="primary">The Creators of <em>Animals </em>on How They Mix Animation With Improvisation</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/arts/television/2015/02/abc_s_fresh_off_the_boat_review_this_show_is_the_latest_reason_to_be_grateful.html" class="primary"><em>Fresh Off the Boat </em>Is the Latest Reason to Be Grateful for TV’s Diversity Push</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/browbeat/2015/02/03/sam_elliott_interview_the_actor_on_hollywood_versus_indie_film_decision.html" class="primary">Sam Elliott on How Decision-Making Differs in Hollywood vs. the Indie Scene</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/browbeat/2015/02/03/rick_rubin_genius_annotations_read_his_notes_for_songs_from_kanye_west_johnny.html" class="primary">Rick Rubin Is Annotating Dozens of Songs on Genius, and His Notes Are Great</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Technology" class="story-box-technology">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/technology.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Technology</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/blogs/future_tense/2015/02/03/three_parent_baby_legislation_approved_in_free_vote_by_uk_house_of_commons/73453634-embryologist-ric-ross-holds-a-dish-with-human-embryos-at.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/blogs/future_tense/2015/02/03/three_parent_baby_legislation_approved_in_free_vote_by_uk_house_of_commons/73453634-embryologist-ric-ross-holds-a-dish-with-human-embryos-at.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/blogs/future_tense/2015/02/03/three_parent_baby_legislation_approved_in_free_vote_by_uk_house_of_commons.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Future Tense</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 3 2015 6:36 PM</span>
+                <!-- <span class="hed">U.K. Votes to Allow Treatment That Fights Disease by Creating &quot;Three-Parent Babies&quot;</span> -->
+                
+                  
+                  
+                    <span class="hed">U.K. Votes to Allow Treatment That Fights Disease by Creating &quot;Three-Parent Babies&quot;</span>
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">Lily Hay Newman</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/technology/technology/2015/02/silk_road_trial_online_drug_dealing_is_on_trial_but_so_is_everyone_s_online.html" class="primary">The Silk Road Trial Isn’t Just About Drugs. It’s About Curbing Anonymity Online.</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/future_tense/2015/02/03/investigators_selfies_contributed_to_colorado_deadly_small_plane_crash_in.html" class="primary">Investigators Say Selfies “Likely” Contributed to Plane Crash That Left Two Dead</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/technology/future_tense/2015/02/stelarc_and_other_contemporary_artists_experiment_with_science.html" class="primary">This Man Is Growing an Ear on His Arm. Is It Art?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/technology/future_tense/2015/02/the_spectacular_failure_of_china_s_electric_car.html" class="primary">The Spectacular Failure of China’s Electric Car</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/future_tense/2015/02/02/google_uber_rival_bloomberg_reports_google_working_on_ride_hailing_app.html" class="primary">Whoa, If True: Is Google Launching an Uber Rival?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/future_tense/2015/02/02/reports_fcc_will_reclassify_high_speed_internet_as_a_utility.html" class="primary">This Might Be the Week the FCC Stands Up for Net Neutrality</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Health & Science" class="story-box-health-science">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/health_and_science.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Health & Science</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/blogs/bad_astronomy/2014/05/30/no_virus_354.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/blogs/bad_astronomy/2014/05/30/no_virus_354.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/blogs/bad_astronomy/2015/02/03/disneyland_measles_anti_vax_beliefs_are_just_one_part_of_all_this.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Bad Astronomy</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 3 2015 2:43 PM</span>
+                <!-- <span class="hed">Disneyland, Measles, and Blame</span> -->
+                
+                  
+                  
+                    <span class="hed">Disneyland, Measles, and Blame</span>
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">Phil Plait</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/bad_astronomy/2015/02/03/space_station_sunrise_vine_video_by_terry_virts.html" class="primary">The Long, Hot ISS Summer</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/bad_astronomy/2015/02/03/nasa_budget_2016_europa.html" class="primary">NASA Has Its Sights Set on Europa. And It Has a Decent Shot at Getting There.</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/bad_astronomy/2015/02/02/climate_change_elevator_pitch_video_series.html" class="primary">The Climate Change Elevator Pitch</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/health_and_science/books/2015/02/rob_dunn_s_the_man_who_touched_his_own_heart_reviewed.html" class="primary">Cardiology Was Born When a Doctor Fed a Tube Through His Own Arm Vein and Into His Heart</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/bad_astronomy/2015/02/02/water_vapor_ir_video_of_the_earth_from_space.html" class="primary">Watch Our Planet’s Mesmerizing Vapors (Video)</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/bad_astronomy/2015/02/01/illusion_of_lights_time_lapse_video_by_brad_goldpaint.html" class="primary">Illusion of Lights: Stunning Time-Lapse Animation (Video)</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Sports" class="story-box-sports">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/sports.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Sports</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2015/02/150202_SNUT_PatriotsCelebrate.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2015/02/150202_SNUT_PatriotsCelebrate.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/sports/sports_nut/2015/02/pete_carroll_s_play_call_didn_t_lose_the_super_bowl_bill_belichick_tom_brady.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Sports Nut</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Feb. 2 2015 5:00 PM</span>
+                <!-- <span class="hed">The Seahawks Didn’t Throw Away the Super Bowl</span> -->
+                
+                  
+                  
+                    <span class="hed">The Seahawks Didn’t Throw Away the Super Bowl</span>
+                  
+                
+                <span class="dek">The Patriots reached out and grabbed it.</span>
+                <span class="byline">Will Oremus and Seth Stevenson</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2015/02/why_pete_carroll_s_decision_to_pass_wasn_t_the_worst_play_call_ever.html" class="primary">Why Pete Carroll’s Final Call Was Not As Stupid As It Looked</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2015/02/this_super_bowl_was_one_of_the_greatest_and_worst_of_all_time.html" class="primary">Why This Super Bowl Was the Perfect End to a Horrible Season</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2015/02/super_bowl_twitter_the_best_tweets_from_sports_fans_and_culture_experts.html" class="primary">What Twitter’s Smartest Culture and Sports Writers Are Saying about the Super Bowl</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2015/01/new_england_patriots_at_the_super_bowl_vince_wilfork_is_the_team_s_heart.html" class="primary">The Most Important Player on the New England Patriots Never Touches the Balls</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2015/01/new_england_fumbles_the_patriots_incredible_ball_security_is_not_impossible.html" class="primary">New England’s Incredible Ball Security Is Not Impossible but Also Not Meaningless</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2015/01/legion_of_boom_what_the_seattle_seahawks_have_in_common_with_the_last_new.html" class="primary">What the Seahawks’ “Legion of Boom” Has in Common With the Last Patriots Championship Team</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+
+</div>
+
+  </div>
+</div>
+</div>
+
+      </article><!-- /.main -->
+      
+
+      <aside class="sidebar" id="main_sidebar">
+        <div class="sidebar-wrapper">
+          
+          
+          
+          
+
+
+
+
+
+
+  
+  
+  
+
+
+<section class="nav-panel" id='slate_logo'>
+  <div class="nav-header">
+    <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+    <a href="#" class="user-link sidebar-handle"></a>
+    <a href="#" class="search-link sidebar-handle"></a>
+    <a href="#" class="global-nav-handle sidebar-handle"></a>
+    <div class="buttons">
+      
+      <span class="link option "><a class="first nav-option sign-in-link" href="#" id="sign_in_link">Sign In</a></span>
+      <span class="link option "><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+      
+    </div>
+  </div>
+  
+</section>
+
+          
+
+          
+          
+
+<div class="parsys iparsys contentSidebar"><div class="section"><div class="new"></div>
+</div><div class="iparys_inherited"><div class="parsys iparsys contentSidebar"><div class="renderHtml section">
+
+<style type="text/css">
+.mostshared {display: none;}
+.mostpopular {display: none;}
+</style>
+
+<script type="text/javascript">
+ 
+requirejs(["shared/campaignManager"], function(campaigns) {
+
+if (!($.cookie("slate_plus")) || $.cookie("slate_plus").split(",")[0].split(":")[1]!="true") {
+if (window.location.href.indexOf("seven_wonders")==-1) {
+if (!mobileMode()) {
+
+   if (typeof console.log != "undefined") {
+     console.log("Configuring campaign.");
+   }
+   campaigns.set({
+     id: "sp_25x_interstitial_softlaunch",
+     template_id: "slateplus",
+     data: { 
+       "img": { "src": "slateplus-logo.png" },
+       "title": "You like Slate. And we like you. This is Slate Plus.",
+       "body": "<div style='font-size: 1em; line-height: 1.1;'><strong>Slate Plus</strong>, our membership program, offers our loyal readers great perks, including special access to your favorite <strong><em>Slate</em></strong> writers and editors, ad free podcasts with bonus audio segments, early access to some of our very best content, exclusive behind-the-scenes features, 30 percent off live events and 20 percent off <strong><em>Slate</em></strong> merchandise, and more.<br/><br/>Become an annual member today and receive your choice of an exclusive <strong><em>Slate</em></strong> mug designed by Jonathan Adler or a 1-year subscription to <em>New York</em> magazine!</div>",
+       "action": {
+         "text": "Learn more",
+         "url": "http://www.slate.com/plus?wpsrc=sp_25x_interstitial_softlaunch_kois-short"
+
+       },
+       "submit": "Sign up"
+     },
+     mode: campaigns.modes.overlay,
+     frequency: 20,
+     resurrection: 0,
+     initialDelay: 1,
+     completeOnClose: false,
+     dismissOnClose: false,
+     options: {
+        onOpen: function() {
+            $(".overlay-wrapper").css("z-index", "100000000");
+        }
+     }
+   });
+
+};
+};
+};
+
+ });
+
+</script> 
+</div>
+<div class="mostpopular section">
+
+
+<section class="items">
+  <a class="header" href="#">Most Read</a>
+  <ul class="numbered-list">
+  
+    
+      
+      <li><a href="http://www.slate.com/articles/life/dear_prudence/2015/02/dear_prudence_ever_since_i_remarried_my_daughter_has_treated_me_terribly.html"><small>1.</small> <span>Help! My Daughter Has Treated Me Terribly Since I Remarried.</span></a></li>
+      
+    
+  
+    
+      
+      <li><a href="http://www.slate.com/blogs/moneybox/2015/02/02/budweiser_super_bowl_ad_a_perfect_illustration_of_why_young_people_don_t.html"><small>2.</small> <span>Budweiser’s Awful Super Bowl Ad Is a Perfect Illustration of Why Young People Don’t Drink It</span></a></li>
+      
+    
+  
+    
+      
+      <li><a href="http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html"><small>3.</small> <span>Why Does Hellmann’s Mayonnaise Taste Different From How It Used To?</span></a></li>
+      
+    
+  
+    
+      
+      <li><a href="http://www.slate.com/blogs/bad_astronomy/2015/02/03/disneyland_measles_anti_vax_beliefs_are_just_one_part_of_all_this.html"><small>4.</small> <span>Disneyland and Measles: Who to Blame, and How?</span></a></li>
+      
+    
+  
+    
+      
+      <li><a href="http://www.slate.com/articles/life/family/2014/01/growing_up_unvaccinated_a_healthy_lifestyle_couldn_t_prevent_many_childhood.html"><small>5.</small> <span>My ’70s Health-Nut Parents Didn’t Vaccinate Me. This Is What My Childhood Was Like.</span></a></li>
+      
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  </ul>
+</section>
+
+</div>
+<div class="mostshared section">
+
+
+<section data-vr-zone="Most Shared">
+    <header class="black-header">Most Shared</header>
+    <ul class="numbered-list">
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/blogs/browbeat/2015/02/02/super_bowl_halftime_show_review_a_professional_dance_critic_defends_bad.html">
+                    <small>1.</small> <span>A Defense of “Bad Left Shark” From a Professional Dance Critic</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/articles/sports/sports_nut/2015/02/pete_carroll_s_play_call_didn_t_lose_the_super_bowl_bill_belichick_tom_brady.html">
+                    <small>2.</small> <span>Seattle Didn’t Throw Away the Super Bowl. The Patriots Won It.</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/blogs/xx_factor/2015/02/02/chris_christie_on_vaccinations_calls_for_balance_and_parental_choice.html">
+                    <small>3.</small> <span>Chris Christie Supports Parents Who Choose Not to Vaccinate Their Kids</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/blogs/moneybox/2015/02/02/budweiser_super_bowl_ad_a_perfect_illustration_of_why_young_people_don_t.html">
+                    <small>4.</small> <span>Budweiser’s Awful Super Bowl Ad Is a Perfect Illustration of Why Young People Don’t Drink It</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/blogs/xx_factor/2015/02/02/women_in_the_senate_losing_committee_chair_positions_with_republicans_in.html">
+                    <small>5.</small> <span>With Republicans in Charge, Women Are Losing Leadership Positions in the Senate</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </ul>
+</section>
+</div>
+<div class="rightrailstories section">
+
+<section class="items">
+  
+
+  
+    <div id="rr-results" data-track-module="smart-rr" data-omit-views="true">
+    <div class="smallvideos">
+
+<div class="row">
+<section class="video-gallery" id="small_videos" style="display: none;">
+    <div id='small_video_gallery_mobile_wrap'>
+        
+        <div class="current-video">
+            <img src="http://www.slate.com/content/dam/slate/articles/video/video/2015/01/_4k_tv_explained_how_ultra_hd_televisions_work_and_why_it_s_early_to_upgrade/screen_shot_20150130_at_12.17.38_pm.png.CROP.hd-large.png" />
+            <a href="http://www.slate.com/articles/video/video/2015/01/_4k_tv_explained_how_ultra_hd_televisions_work_and_why_it_s_early_to_upgrade.html?wpisrc=seg_video" class="primary">
+                <span class="play-button"></span>
+                <span class="main-title">What's So Great About 4K?</span>
+            </a>
+        </div>
+        
+    </div>
+</section>
+</div>
+<script>
+requirejs(["jquery"], function($) {
+	if ($.cookie("s_segs") && $.cookie("s_segs").indexOf('video') > -1) {
+      $([
+        '#small_videos',
+        '#video_gallery_mobile',
+        '#small_video_gallery_mobile_wrap',
+        '.current-video'
+      ].join(',')).show();
+      $(".video-gallery").css('height','auto');
+      $(window).load(function() {
+        var dataCount3 = $('.rr-block[data-count="3"]');
+        dataCount3.addClass('repositioned');
+        $('.rr-block[data-count="9"]').before(dataCount3);
+      });
+	}
+});
+</script></div>
+
+      <div class="rr-block" data-count="3"></div>
+     
+      <div class="item ad-container">
+          
+            
+            
+              
+<div id="slug_rightflex" class="ad " data-ad-type="rightflex" data-ad-mode="desktop"></div>
+
+              
+              
+<div id="slug_rightflex" class="ad " data-ad-type="rightflex" data-ad-mode="tabletLandscape"></div>
+
+              
+            
+          
+      </div>
+      
+      <div class="rr-block" data-count="9"></div>
+     
+     <div class="sl-art-ad-midflex">
+        <div class="item ad-container">
+        
+          
+          
+            
+<div id="slug_rightflex_2" class="ad " data-ad-type="rightflex|2" data-ad-mode="desktop"></div>
+
+            
+            
+<div id="slug_rightflex_2" class="ad " data-ad-type="rightflex|2" data-ad-mode="tabletLandscape"></div>
+
+            
+          
+        
+        </div>
+      </div>
+      
+      <div class="rr-block"></div>
+    </div>
+
+  
+ </section>
+
+
+ 
+<script type="text/javascript">
+requirejs(["jquery","rrstories"], function($,rrs) {
+  if (!mobileMode()) {
+    rrs.init(40,14,"trending");
+  } else {
+    $(".rightrailstories section").remove();
+  }
+});
+</script>
+
+
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+          
+        </div><!-- /.sidebar-wrapper -->
+      </aside><!-- /.sidebar -->
+      
+      
+      
+      	
+
+  <footer id="article_footer_tiles">
+    
+  </footer>
+
+<!--YieldMoTag-->
+    <div data-lazy-widget>
+    <!-- <div id="ym_910627945566641941" class="ym" pltag="Life"></div>
+    <script type="text/javascript">
+      if (mobileMode()) {
+        (function(e,t){if(t._ym===void 0){t._ym="";var m=e.createElement("script");m.type="text/javascript",m.async=!0,m.src="//static.yieldmo.com/ym.min.js",(e.getElementsByTagName("head")[0]||e.getElementsByTagName("body")[0]).appendChild(m)}else
+     t._ym instanceof String||void 0===t._ym.chkPls||t._ym.chkPls()})(document,window);
+      }
+    </script> -->
+    </div>
+    <!-- end yieldmo -->
+
+
+      
+    </div><!-- /.page -->
+
+
+
+<!-- HCS: layout -->
+  
+    <style type="text/css">
+      body > .bottom {
+        text-align: center;
+        padding: 10px 0;
+      }
+      .bottom > #slug_leaderboard_2 {
+        position: relative;
+        width: auto;
+        text-align: center;
+      }
+    </style>
+    <div class="bottom">
+      
+<div id="slug_leaderboard_2" class="banner ad " data-ad-type="leaderboard|2" data-ad-mode="large"></div>
+
+    </div>
+    <footer class="footer-base">
+      <div class="container">
+
+      <div class="sub-slate-row">
+        <div class="left">
+          <span class="label">FOLLOW SLATE</span>
+          <a href="https://twitter.com/slate" class="twitter"><img src="http://static.cdnslate.com/etc/designs/slate/images/social/yellow-twitterNew.821dc365.png" /></a>
+          <a href="http://www.facebook.com/Slate" class="facebook"><img src="http://static.cdnslate.com/etc/designs/slate/images/social/yellow-facebookNew.74981e6f.png" /></a>
+        </div>
+
+        <div class="left slate-on">
+          <span class="label">SLATE ON</span>
+          <a href="http://itunes.apple.com/us/app/slate-magazine/id384914589?mt=8">IPAD</a>
+          <a href="http://itunes.apple.com/us/app/slate-com/id357555242?mt=8">IPHONE</a>
+          <a href="https://market.android.com/details?id=com.wapo.slate.android">ANDROID</a>
+          <a href="http://www.amazon.com/gp/product/B000IOMTC0?ie=UTF8&tag=slatmaga-20&link_code=as3&camp=211189&creative=373489&creativeASIN=B000IOMTC0/">KINDLE</a>
+        </div>
+
+        <div class="right">
+          <a href="http://www.slatereprints.com" class="label reprints">REPRINTS</a>
+
+          <a href="http://innovate.slate.com/" class="label advertise-with-us" target="_blank">ADVERTISE WITH US</a>
+        </div>
+      </div>
+
+      </div><!-- /.container -->
+
+
+    </footer>
+  
+    
+    <footer class="footer-base-toc">
+      <div class="container">
+        <div class="footer-link-cols">
+          <ul>
+            <li><a href="/articles/news_and_politics/slate_fare/2006/08/about_us.html">ABOUT US</a></li>
+            <li><a href="/articles/briefing/contact_us/2006/08/whereto_find_slate_staff.html">CONTACT US</a></li>
+            <li><a href="/articles/news_and_politics/slate_fare/2008/04/a_job_for_you_at_slate.html">WORK WITH US</a></li>
+          </ul>
+          <ul class="center">
+            <li><a href="/articles/briefing/slate_user_agreement_and_privacy_policy/2012/12/slate_s_terms_of_service.html">USER AGREEMENT</a></li>
+            <li><a href="/articles/briefing/slate_user_agreement_and_privacy_policy/2012/12/slate_s_privacy_policy.html">PRIVACY POLICY</a></li>
+            <li><a href="/articles/briefing/slate_fare/2011/12/commenting_on_slate_frequently_asked_questions.html">FAQ</a></li>
+          </ul>
+          <ul class="last">
+            <li><a href="mailto:feedback@slate.com">FEEDBACK</a></li>
+            <li><a href="/articles/news_and_politics/corrections.html">CORRECTIONS</a></li>
+          </ul>
+        </div>
+        <ul class="copyright unstyled">
+          <li><a href="http://www.slate.com"><img src="http://static.cdnslate.com/etc/designs/slate/images/the-slate-group-logo.12cbe5ac.png" /></a></li>
+          <li><a href="http://www.theroot.com"><img src="http://static.cdnslate.com/etc/designs/slate/images/the-root-logo.74009c0a.png" /></a></li>
+          <li class="blurb">Slate is published by The Slate Group, a Graham Holdings Company. All contents &copy; 2014 The Slate Group LLC. All rights reserved.</li>
+        </ul>
+      </div><!-- /.container -->
+    </footer> <!-- /.footer-base-toc -->
+<!-- HCS END: layout -->
+<!-- HCS: layouts/shared/bottom -->
+<div id="sidebar_toggle">
+  <a href="#" id="sidebar_handle"></a>
+</div>
+<script src="http://slate-ad-scripts.s3.amazonaws.com/wp-srv/ad/loaders/latest/js/min/polar_config.min.js"></script>
+<script>
+
+
+requirejs(["jquery", "hcs/libs/iscroll-lite", "modernizr", "hcs/script", "hcs/plugins/SGGlobalNav.jquery", "hcs/plugins/jQuery.highlighter","hcs/plugins/SGGlobalNav.jquery","libs/jquery-plugins/jquery.timeago","announcements","myslate"], function($, iScroll, unused0, unused1, unused2, unused3, unused4, unused5, announcements, myslate) {
+  $(document).ready(function() {
+    announcements.deleteOldCookies();
+    
+    $("span.timeago").timeago();
+  });
+  function pageLoadedForScrolling(){
+
+
+    scroller = new iScroll('main_sidebar', {
+      hScroll: false,
+      hScrollbar: false,
+      bounce: false
+    });
+
+    if(!mobileMode() && tabletMode() && $('html').hasClass('touch')){
+      // Nav gets iScroll if we're on an actual tablet.
+      window.tabletScroller = new iScroll('nav_sections', {
+        hScroll: false,
+        hScrollbar: false,
+        bounce: false,
+        onBeforeScrollStart: function (e) {
+          var target = e.target;
+          while (target.nodeType != 1) target = target.parentNode;
+
+          if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+          e.preventDefault();
+        }
+      });
+    }
+
+  }
+
+  // We institute fancy scrolling on iscroll only on mobile webkit.
+
+  // Webkit detection script
+  Modernizr.addTest('webkit', function(){
+    return RegExp(" AppleWebKit/").test(navigator.userAgent);
+  });
+
+  // Mobile Webkit
+  Modernizr.addTest('mobile', function(){
+    return RegExp(" Mobile/").test(navigator.userAgent);
+  });
+
+  if(Modernizr.webkit && Modernizr.mobile){
+    if (document.addEventListener){
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(pageLoadedForScrolling, 200); }, false);
+    } else if (document.attachEvent){
+      document.attachEvent('DOMContentLoaded', function () { setTimeout(pageLoadedForScrolling, 200); }, false);
+    }
+  }
+
+
+
+  $(function(){
+
+    watchSidebar();
+
+    if ($('body').hasClass('home')
+        || $('body').hasClass('landing')
+        || $('body').hasClass('settings')) {
+      $('.nav-header').SGGlobalNav({
+        noRollup: true, // Need to tell the homepage and landing etc that there's no rollup here, which causes things to behave differently.
+        noBurgerScroll: $('body').hasClass('no-burger-scroll'),
+        isSlatePlusUser: myslate.isSlatePlusUser
+      });
+    } else {
+      $('.nav-header').SGGlobalNav({
+        isSlatePlusUser: myslate.isSlatePlusUser
+      });
+    }
+
+
+    // Input field placeholder plugin to account for placeholder fallbacks.
+    jQuery(document).ready(function($) {
+      $(".field-with-placeholder").placeholder();
+    });
+
+
+    $('.content').highlighter({
+      'selector': '.highlighter-container',
+      'noHighlightIds': $('#podcast-slateplus-page'),
+      'minWords': 0,
+      'complete': function (data) {
+        // Here we have the selected string for use.
+        // console.log(data);
+        selectedText = data;
+      }
+    });
+
+  });
+
+
+  $(document).ready(function() {
+    $(".sticky").each(function() {
+      var stickyTop = $(".sticky").offset().top; // returns number
+      $(window).scroll(function() { // scroll event
+        var windowTop = $(window).scrollTop() + 57 + parseInt($(".sticky").css("margin-top").split("px")[0]); // returns number
+        if (stickyTop < windowTop) {
+          $(".sticky").css({ position: "fixed", top: "53px" });
+        } else {
+          $(".sticky").css("position","static");
+        }
+      });
+    })
+  });
+
+  watchSocialWelcomeNotifications();
+
+});
+    </script>
+
+    
+    
+
+    <script>
+requirejs(["jquery", "myslate", "hcs/script", "hcs/plugins/SGNavDropdown.jquery", 
+		"hcs/plugins/SGBigSlider.jquery","hcs/plugins/SGFootnote.jquery","hcs/plugins/SGRollup.jquery",
+		"hcs/plugins/SGNavDropdown.jquery","hcs/plugins/SGComments.jquery","hcs/plugins/SGLightbox.jquery",
+		"hcs/plugins/SGSocialIcons.jquery"], 
+		function($, myslate, unused0, unused1, unused2, unused3, unused4, unused5, unused6, unused7, unused8) {
+    
+    $(function(){
+        
+      $('#big_slider').SGBigSlider({
+        type: 'home'
+      });
+      
+      $('.footnote').SGFootnote();      
+      var multipartArticleRollup = $('#article_rollup');
+    
+      var subHed = $('#sub_hed');
+      if(subHed.length > 0){     
+        subHed.SGNavDropdown({ // Multipart rollup triggered by tapping the subhed.
+          extraId: 'subhed', // Used to name events inside the plugin, so we can be sure to bind/unbind the correct stuff.
+          targetId: '#multipart_nav', // The thing to show.
+          leftOffset: function(){ return $('#sub_hed').position().left; },
+          topOffset: function(){ return $('#sub_hed').position().top + $('#sub_hed').outerHeight(true); },
+          onShow: function(){
+            $('#multipart_nav').css('position', 'absolute');  
+            $('#multipart_nav').css('height', 'auto');
+            $('#multipart_nav').css('overflow', 'auto');
+            // subHed.find('.toggle').addClass('open-toggle');
+          },
+          onHide: function(){
+            // subHed.find('.toggle').removeClass('open-toggle');
+          }        
+        });        
+      }
+    
+      if($('#article_header').length > 0){
+        // The roll up.
+        $('#main_sidebar').SGRollup({ // The main element assigned to this plugin is used to trigger the drop of the rollup on desktop mode.
+          rollupEl: multipartArticleRollup,
+          topOffset: $('#slate_logo').height(), 
+          leftOffset: $('#article_header').offset().left,
+          tablet: {el: $('#article_header'), topOffset: $('#article_header').height()}, // Indicate the visibility triggers for tablet mode.
+          mobile: {el: $('#tablet_header'), topOffset: $('#tablet_header').height()},// Indicate the visibility triggers for mobile mode.
+          onHide: function(){
+            // On roll back up make sure to hide the nav if it's open, assuming it was opened by the rollup toggle.
+            if(multipartArticleRollup.data('plugin_SGNavDropdown').isTargetVisible() && $('#multipart_nav').data('openedByRollup')){
+              multipartArticleRollup.data('plugin_SGNavDropdown').close();
+            }
+            if (!myslate.isSlatePlusUser) {
+              if ($('#comments').length > 0) {
+                $('#comments').data('plugin_SGComments').close();                      
+              }
+            }
+          }          
+        });
+      }      
+    
+    // Multipart dropdown triggered by the rollup in the multipart nav.
+      multipartArticleRollup.SGNavDropdown({
+        targetId: '#multipart_nav', // The thing to show.
+        extraSpecificHandle: '.handle',
+        extraId: 'multipart', // Used to name events inside the plugin, so we can be sure to bind/unbind the correct stuff.
+        leftOffset: function(){ return multipartArticleRollup.find('.main').offset().left; },
+        topOffset: function(){
+          return multipartArticleRollup.outerHeight(true)
+        },
+        onShow: function(){
+          $('#multipart_nav').css('position', ''); // undo the absolute bit we might have affixed in subHed.SGNavDropdown().
+          $('#multipart_nav').addClass('fixed').data('openedByRollup', true);
+          $('#multipart_nav').css('max-height', (mobileMode() ? $(window).outerHeight(true) + 10 : $(window).height() - $('#article_rollup').height()));
+          $('#multipart_nav').css('overflow', 'scroll');
+          if(mobileMode()){
+            $('#multipart_nav').css('right', 0);
+          }
+        },
+        onHide: function(){
+          $('#multipart_nav').data('openedByRollup', false);
+        }        
+      });
+    
+
+      if (!myslate.isSlatePlusUser) {
+        $('#comments').SGComments({
+          handles: $('.social .comments, .comment-options a'),
+          rollUp: $('#main_sidebar').data('plugin_SGRollup'),
+          leftOffset: function(){
+            // The intent is for the right side of the comments to line up with the sidebar.
+            if(tabletMode()){
+              return 0;
+            } else {
+              return $('#main_sidebar').offset().left - $('#comments').outerWidth() - 11;
+            }
+          },
+          topOffset: function(){ return $('#article_rollup').height(); },
+          onShow: function(){
+            if(multipartArticleRollup.data('plugin_SGNavDropdown').isTargetVisible()){
+              multipartArticleRollup.data('plugin_SGNavDropdown').close();  
+            }
+            if ($("#livefyre .fyre").size() == 0) {
+              loadLivefyre();
+            }
+          },
+          mobile: {
+            handle: $('#see_more_comments') // This both triggers the mobile comments and indicates where to drop the content in the DOM.
+          }
+          
+        });
+      }
+    
+    
+      // Trigger the slideshow lightbox for from the .slideshow-preview example.
+        $('#slideshow_preview_link').SGLightbox({
+          type: 'slideshow',
+          slideshowElement: $('#the_slideshow')
+        });  
+    
+    
+      $('.social-with-popup').SGSocialIcons({});
+      
+      watchMobileRollupSocialToggle();    
+    
+      $('.expandable').find('.toggle').click(function(e){
+        $(this).closest('.social').toggleClass('visible');
+        $('#main_byline').toggle();
+        e.preventDefault();
+      });
+    
+      $('.full-width').setFullWidth();
+      
+      myslate.benefits();
+    
+    });
+});
+    </script>
+    <script>
+    // Manage the social horizontal toggles on the landing pages.
+requirejs(["jquery", "hcs/script"], 
+		function($, unused0) {
+
+      $(function(){
+        $('.social').find('.toggle').click(function(e){
+          e.preventDefault();
+          $(this).closest('.social').toggleClass('visible');
+        });
+      });
+});
+    </script>
+
+
+    
+    <script>
+    requirejs(["facebook"], function(unused0) {
+      $(function(){
+        FB.XFBML.parse();
+      });
+    });
+    </script>
+    <!-- Buzzfeed -->
+    <!-- Chartbeat -->
+    
+<script type="text/javascript">
+
+var _sf_async_config={uid:9250,domain:"slate.com"};
+_sf_async_config.useCanonical = true;
+if (wp_meta_data) {
+    var sectionsArray = new Array();
+    if (wp_meta_data.section !== undefined) {
+        sectionsArray.push(wp_meta_data.section);
+    }
+    if (wp_meta_data.rubric !== undefined) {
+        sectionsArray.push(wp_meta_data.rubric);
+    }
+    if (wp_meta_data.blog !== undefined) {
+        sectionsArray.push(wp_meta_data.blog);
+    }
+    _sf_async_config.sections = sectionsArray.join(",");
+    if (wp_meta_data.authors !== undefined) {
+        _sf_async_config.authors = wp_meta_data.authors.join(",");
+    }
+}
+
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+</script>
+    <!-- Parsely -->
+    
+
+<div id="parsely-root" style="display: none">
+  <div id="parsely-cfg" data-parsely-site="slate.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+      :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include -->
+    
+
+
+
+    
+    
+        <script>
+            requirejs(["shared/sgads"], function(slateads) {
+                slateads.wire("http://js.slate.com/wp-srv/ad/loaders/latest/js/min/loader.min.js");
+            });
+        </script>
+    
+
+<div class="nav-header" id="magic_nav_header">
+  <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+  <div class="buttons">
+  	
+    <span class="link option"><a class="first nav-option sign-in-link" href="#" id="sign_in_link">
+      Sign In
+    </a></span>
+    <span class="link option"><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+    
+  </div>
+</div><!-- /.nav-header -->
+<!-- HCS: layouts/shared/nav/nav -->
+<div id="nav_sections"></div>
+<!-- HCS END: layouts/shared/nav/nav -->
+
+      
+      
+
+
+
+
+
+
+  
+  
+  
+
+
+<section class="nav-panel" id='nav_header_for_rollup_magic'>
+  <div class="nav-header">
+    <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+    <a href="#" class="user-link sidebar-handle"></a>
+    <a href="#" class="search-link sidebar-handle"></a>
+    <a href="#" class="global-nav-handle sidebar-handle"></a>
+    <div class="buttons">
+      
+      <span class="link option "><a class="first nav-option sign-in-link" href="#" id="sign_in_link">Sign In</a></span>
+      <span class="link option "><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+      
+    </div>
+  </div>
+  
+</section>
+
+
+    <div id="nav_animation_mask">
+
+    </div>
+
+    
+    <span class='highlighter-container'>
+      <div class="social social-with-popup sharing-buttons">
+        <a href="#" data-share="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html&p[images][0]=http://www.slate.com/content/dam/slate/articles/life/food/2015/01/150202_FOOD_Hellmans.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[title]=Why+Does+Hellmann%E2%80%99s+Mayonnaise+Taste+Different+From+How+It+Used+To%3F&p[summary]=Hellmann%E2%80%99s+Real+Mayonnaise+has+been+smeared+in+the+news+lately%2C+thanks+to+a+lawsuit+filed+by+its+parent+company%2C+Unilever%2C+against+fledgling+vegan+%E2%80%9Cmayo%E2%80%9D+purveyor+Hampton+Creek.+The+case+rested+on+the+notion+that+Hampton+Creek%E2%80%99s+flagship+product%2C+Just+Mayo%2C+is+not%2C+in+fact%2C+mayo%2C+according+to+the+Food+and..." class="facebook share highlighter">
+          <span class="icon"></span>
+        </a>
+        <a href="#" data-share="http://twitter.com/share?url=http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.html&count=none&via=slate" class="twitter">
+          <span class="icon"></span>
+        </a>
+        
+          <a href="#comments" class="comments" style="display: none;">
+            <span class="icon"></span>
+          </a>
+        
+      </div>
+        <div class="arrow-border"></div>
+        <div class="arrow"></div>
+    </span>
+    <!-- Sailthru Horizon -->
+    <script>
+    requirejs(['jquery'], function($) {
+      (function() {
+        function loadHorizon() {
+          var s = document.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = location.protocol + '//ak.sail-horizon.com/horizon/v1.js';
+          var x = document.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+        }
+        loadHorizon();
+        var oldOnLoad = window.onload;
+        window.onload = function() {
+          if (typeof oldOnLoad === 'function') {
+            oldOnLoad();
+          }
+          Sailthru.setup({
+            domain: 'horizon.slate.com'
+          });
+        };
+      })();
+    });
+    </script>
+    
+<!-- HCS END: layouts/shared/bottom -->
+
+    <!-- Campaigns -->
+    <script>
+     requirejs(["shared/campaignManager", "optimizely"], function(campaigns, optimizely) {
+       // setTimeout.  Boo.
+       setTimeout(campaigns.execute, 400);
+     });
+    </script>
+
+  
+  
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"applicationID":"2676640","applicationTime":188,"beacon":"beacon-5.newrelic.com","queueTime":0,"licenseKey":"f3154255a5","transactionName":"YwEAY0tTXkJYURBYVlpLLFhLX1FdUEgBVWxGDU1WS0ZZUlVXFx5VXQIHGF9dX1UWGEsbFlwBDltUU15fZkE7XFhNCwxZWFtDVGZWDVdfURYHWU1tRFRBRhFDXGsMA0RmQV9cXEYMWFdTOwFfWFxXVF1tDV9mQQoLW1xEVUMXQQ1fXlgBTF9NX1w=","agent":"js-agent.newrelic.com\/nr-515.min.js","errorBeacon":"bam.nr-data.net"}</script>
+<!--
+Page Loading starts on 2015/02/03 19:28:01, Total time elapsed to render is 0.1819148 seconds, Server: pub2.slate.com
+-->
+  </body>
+</html>

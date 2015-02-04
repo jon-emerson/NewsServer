@@ -1,6 +1,7 @@
 package com.janknspank.bizness;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Function;
@@ -10,7 +11,6 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.database.QueryOption.LimitWithOffset;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
@@ -57,9 +57,14 @@ public class Articles {
       articles.add(entry.getKey(), entry.getValue());
     }
 
-    return articles.getKeys();
+    List<Article> topArticles = articles.getKeys();
+    return topArticles.subList(0, Math.min(topArticles.size(), 100));
   }
 
+  /**
+   * Used by ViewFeedServlet to show a set of Articles and their corresponding
+   * scores.
+   */
   public static Map<Article, Double> getArticlesAndScores(User user, Scorer scorer)
       throws DatabaseSchemaException, ParserException, BiznessException, DatabaseRequestException {
     // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
@@ -69,25 +74,6 @@ public class Articles {
       ranks.put(article, scorer.getScore(user, article));
     }
     return ranks;
-  }
-
-  /**
-   * Returns articles with the given IDs, ordered by publish time, if they
-   * exist. If they don't exist, no error is thrown.
-   */
-  public static Iterable<Article> getArticles(Iterable<String> urlIds) throws DatabaseSchemaException {
-    return Database.with(Article.class).get(
-        new QueryOption.WhereEquals("url_id", urlIds),
-        new QueryOption.DescendingSort("published_time"));
-  }
-
-  public static Article getArticle(String urlId) throws DatabaseSchemaException {
-    return Database.with(Article.class).get(urlId);
-  }
-
-  public static Iterable<Article> getPageOfArticles(int limit, int offset)
-      throws DatabaseSchemaException {
-    return Database.with(Article.class).get(new LimitWithOffset(limit, offset));
   }
 
   /**

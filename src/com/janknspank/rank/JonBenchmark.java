@@ -32,6 +32,9 @@ import com.janknspank.proto.UserProto.User;
 
 public class JonBenchmark {
   private static final List<String> GOOD_URLS = ImmutableList.of(
+      // Retiring announcement: Because I used to report through him at Google,
+      // and he's a leader in the field.
+      "http://techcrunch.com/2015/02/03/alan-eustace-google/",
       // Because it's in the space I'm working in.
       "http://techcrunch.com/2013/04/23/google-buys-wavii-for-north-of-30-million/",
       "http://techcrunch.com/2014/01/07/yahoo-launches-news-digest-its-first-app-based-on-summly/",

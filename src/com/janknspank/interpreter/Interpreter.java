@@ -1,6 +1,5 @@
 package com.janknspank.interpreter;
 
-import java.io.IOException;
 import java.io.Reader;
 
 import javax.servlet.http.HttpServletResponse;

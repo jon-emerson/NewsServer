@@ -5,8 +5,9 @@ import java.util.List;
 
 import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
-import com.janknspank.bizness.Articles;
+import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption.LimitWithOffset;
 import com.janknspank.proto.ArticleProto.Article;
 
 /**
@@ -33,12 +34,12 @@ public class UniverseVector {
 
     int offset = 0;
     List<Article> allArticles = Lists.newArrayList();
-    Iterable<Article> articles = Articles.getPageOfArticles(1000, offset);
+    Iterable<Article> articles = Database.with(Article.class).get(new LimitWithOffset(1000, offset));
     while (!Iterables.isEmpty(articles)) {
       System.out.println("Generating universal word document frequency - article offset: " + offset);
       Iterables.addAll(allArticles, articles);
       offset += 1000;
-      articles = Articles.getPageOfArticles(1000, offset);
+      articles = Database.with(Article.class).get(new LimitWithOffset(1000, offset));
     }
     System.out.println("Let the computing begin!");
     return new Vector(allArticles);

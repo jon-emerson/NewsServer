@@ -16,6 +16,7 @@ import com.janknspank.interpreter.SiteParser;
  * Tests for the site parser.
  */
 public class SiteParserTest {
+  @SuppressWarnings("resource")
   @Test
   public void testGetParagraphNodes() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
