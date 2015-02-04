@@ -122,6 +122,12 @@ public class UrlCleaner {
     if (host.endsWith(".buffalonews.com") || host.equals("buffalonews.com")) {
       queryParameters.remove("ref");
     }
+    if (host.endsWith(".businessinsider.com") || host.equals("businessinsider.com")) {
+      if (path.contains("/")) {
+        path = path.substring(0, path.indexOf("/"));
+      }
+      queryParameters.clear();
+    }
     if (host.endsWith(".businessweek.com") || host.equals("businessweek.com")) {
       queryParameters.remove("hootPostID");
     }

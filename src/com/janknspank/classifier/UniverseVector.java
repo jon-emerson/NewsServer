@@ -36,7 +36,7 @@ public class UniverseVector {
     List<Article> allArticles = Lists.newArrayList();
     Iterable<Article> articles = Database.with(Article.class).get(new LimitWithOffset(1000, offset));
     while (!Iterables.isEmpty(articles)) {
-      System.out.println("Generating universal word document frequency - article offset: " + offset);
+      System.out.println("Getting articles - offset: " + offset);
       Iterables.addAll(allArticles, articles);
       offset += 1000;
       articles = Database.with(Article.class).get(new LimitWithOffset(1000, offset));

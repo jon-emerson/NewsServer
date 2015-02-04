@@ -234,11 +234,13 @@ public class ArticleCreatorTest {
     assertEquals("Psychology: Why does guilt increase pleasure?", article.getTitle());
     assertEquals("http://ichef.bbci.co.uk/wwfeatures/624_351/images/live/p0/2f/l8/p02fl8qx.jpg",
         article.getImageUrl());
-    assertEquals(22, article.getParagraphCount());
+    assertEquals(21, article.getParagraphCount());
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith(
             "This year, my New Year’s Resolutions are going to take a somewhat different "
             + "form to those of previous Januaries."));
+    assertEquals("And that is exactly what I plan to do.",
+        article.getParagraph(article.getParagraphCount() - 1));
   }
 
   @Test
@@ -376,11 +378,11 @@ public class ArticleCreatorTest {
         article.getImageUrl());
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith(
-            "Over the past two weeks, institutional investors have piled into the Alibaba "
-            + "roadshow as if the company was handing out free money. The long awaited process "
-            + "started three years ago and the biggest tech IPO ever has the potential to pave "
-            + "the way for a tech rally not unlike the surge seen following the Netscape and "
-            + "Yahoo IPOs in the dotcom era."));
+            "Over the past two weeks, institutional investors have piled into the Alibaba roadshow "
+            + "as if the company was handing out free money. The long awaited process started "
+            + "three years ago and the biggest tech IPO ever has the potential to pave the way for "
+            + "a tech rally not unlike the surge seen following the Netscape and Yahoo IPOs in the "
+            + "dotcom era."));
   }
 
   @Test
@@ -401,10 +403,10 @@ public class ArticleCreatorTest {
         + "how-to-write-great-emails.jpg", article.getImageUrl());
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith(
-            "If someone was able to travel back in time and tell me 10 years ago that email "
-            + "would still be fundamental to how we communicate today, I probably would have "
-            + "dropped everything I was doing and started working on inventing a holographic "
-            + "communicator HoloLens."));
+            "If someone was able to travel back in time and tell me 10 years ago that email "
+            + "would still be fundamental to how we communicate today, I probably would have "
+            + "dropped everything I was doing and started working on inventing a holographic "
+            + "communicator HoloLens."));
   }
 
   @Test
