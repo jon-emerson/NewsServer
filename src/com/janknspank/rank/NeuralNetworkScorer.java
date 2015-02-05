@@ -39,7 +39,7 @@ public final class NeuralNetworkScorer extends Scorer {
 
     return new double[] {
       // Input 1: equals 1 if article is about the user's current place of work
-      InputValuesGenerator.isAboutCurrentEmployer(user, article) ? 1 : 0,
+      InputValuesGenerator.relevanceToCurrentEmployer(user, article),
 
       // Input 2: # of topics matches between user and article
       sigmoid(InputValuesGenerator.matchedInterestsCount(user, article)),

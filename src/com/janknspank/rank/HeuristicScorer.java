@@ -32,7 +32,7 @@ public class HeuristicScorer extends Scorer {
     score += 0.2 * InputValuesGenerator.relevanceToCurrentEmployer(user, article);
 
     // Matched interests up to 0.3
-    score += Math.min(InputValuesGenerator.matchedInterestsCount(user, article) / 10, 0.3);
+    score += 0.3 * InputValuesGenerator.matchedInterestsCount(user, article);
 
     // Article length not super short: 0.1
     if (article.getWordCount() > 300) {
