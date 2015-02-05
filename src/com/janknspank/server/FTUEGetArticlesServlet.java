@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.client.util.Lists;
+import com.google.common.base.Strings;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.IntentCodes;
@@ -25,11 +26,13 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
   protected Iterable<Article> getArticles(HttpServletRequest req)
       throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
     String intentCodesCommaSeparated = getParameter(req, "intents");
-    List<String> intentCodes = Arrays.asList(intentCodesCommaSeparated.split(","));
-    Iterable<Intent> intents = getIntentsFromCodes(intentCodes);
     User user = Database.with(User.class).get(getSession(req).getUserId());
-    user = Intents.setIntents(user, intents);
-    
+    if (!Strings.isNullOrEmpty(intentCodesCommaSeparated)) {
+      List<String> intentCodes = Arrays.asList(intentCodesCommaSeparated.split(","));
+      Iterable<Intent> intents = getIntentsFromCodes(intentCodes);
+      user = Intents.setIntents(user, intents);
+    }
+
     try {
       return Articles.getRankedArticles(user, HeuristicScorer.getInstance());
     } catch (DatabaseSchemaException | ParserException e) {
