@@ -9433,6 +9433,1374 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:InterpretedData)
   }
 
+  public interface DistributionOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .Distribution.Percentile percentile = 1;
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    java.util.List<com.janknspank.proto.CoreProto.Distribution.Percentile> 
+        getPercentileList();
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    com.janknspank.proto.CoreProto.Distribution.Percentile getPercentile(int index);
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    int getPercentileCount();
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder> 
+        getPercentileOrBuilderList();
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder getPercentileOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code Distribution}
+   */
+  public static final class Distribution extends
+      com.google.protobuf.GeneratedMessage
+      implements DistributionOrBuilder {
+    // Use Distribution.newBuilder() to construct.
+    private Distribution(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Distribution(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Distribution defaultInstance;
+    public static Distribution getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Distribution getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Distribution(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                percentile_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.Distribution.Percentile>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              percentile_.add(input.readMessage(com.janknspank.proto.CoreProto.Distribution.Percentile.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          percentile_ = java.util.Collections.unmodifiableList(percentile_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_Distribution_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_Distribution_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.Distribution.class, com.janknspank.proto.CoreProto.Distribution.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Distribution> PARSER =
+        new com.google.protobuf.AbstractParser<Distribution>() {
+      public Distribution parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Distribution(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Distribution> getParserForType() {
+      return PARSER;
+    }
+
+    public interface PercentileOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional int32 percentile = 1;
+      /**
+       * <code>optional int32 percentile = 1;</code>
+       *
+       * <pre>
+       * A number, between 1 and 100, for which percentile of data this set
+       * contains.
+       * </pre>
+       */
+      boolean hasPercentile();
+      /**
+       * <code>optional int32 percentile = 1;</code>
+       *
+       * <pre>
+       * A number, between 1 and 100, for which percentile of data this set
+       * contains.
+       * </pre>
+       */
+      int getPercentile();
+
+      // optional int64 value = 2;
+      /**
+       * <code>optional int64 value = 2;</code>
+       *
+       * <pre>
+       * This is a representative value for the top of this percentile.  E.g. if
+       * the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
+       * then the value would be 4, since it's the top-most value in the 80th
+       * percentile.
+       * </pre>
+       */
+      boolean hasValue();
+      /**
+       * <code>optional int64 value = 2;</code>
+       *
+       * <pre>
+       * This is a representative value for the top of this percentile.  E.g. if
+       * the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
+       * then the value would be 4, since it's the top-most value in the 80th
+       * percentile.
+       * </pre>
+       */
+      long getValue();
+
+      // optional int64 data_point_count = 3;
+      /**
+       * <code>optional int64 data_point_count = 3;</code>
+       *
+       * <pre>
+       * The total number of data points included in this percentile, from 0 to
+       * {&#64;code percentile}.  This is the SUM of everything so far!!
+       * </pre>
+       */
+      boolean hasDataPointCount();
+      /**
+       * <code>optional int64 data_point_count = 3;</code>
+       *
+       * <pre>
+       * The total number of data points included in this percentile, from 0 to
+       * {&#64;code percentile}.  This is the SUM of everything so far!!
+       * </pre>
+       */
+      long getDataPointCount();
+    }
+    /**
+     * Protobuf type {@code Distribution.Percentile}
+     */
+    public static final class Percentile extends
+        com.google.protobuf.GeneratedMessage
+        implements PercentileOrBuilder {
+      // Use Percentile.newBuilder() to construct.
+      private Percentile(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private Percentile(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final Percentile defaultInstance;
+      public static Percentile getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public Percentile getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private Percentile(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 8: {
+                bitField0_ |= 0x00000001;
+                percentile_ = input.readInt32();
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000002;
+                value_ = input.readInt64();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                dataPointCount_ = input.readInt64();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_Distribution_Percentile_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_Distribution_Percentile_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.Distribution.Percentile.class, com.janknspank.proto.CoreProto.Distribution.Percentile.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<Percentile> PARSER =
+          new com.google.protobuf.AbstractParser<Percentile>() {
+        public Percentile parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Percentile(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Percentile> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // optional int32 percentile = 1;
+      public static final int PERCENTILE_FIELD_NUMBER = 1;
+      private int percentile_;
+      /**
+       * <code>optional int32 percentile = 1;</code>
+       *
+       * <pre>
+       * A number, between 1 and 100, for which percentile of data this set
+       * contains.
+       * </pre>
+       */
+      public boolean hasPercentile() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 percentile = 1;</code>
+       *
+       * <pre>
+       * A number, between 1 and 100, for which percentile of data this set
+       * contains.
+       * </pre>
+       */
+      public int getPercentile() {
+        return percentile_;
+      }
+
+      // optional int64 value = 2;
+      public static final int VALUE_FIELD_NUMBER = 2;
+      private long value_;
+      /**
+       * <code>optional int64 value = 2;</code>
+       *
+       * <pre>
+       * This is a representative value for the top of this percentile.  E.g. if
+       * the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
+       * then the value would be 4, since it's the top-most value in the 80th
+       * percentile.
+       * </pre>
+       */
+      public boolean hasValue() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 value = 2;</code>
+       *
+       * <pre>
+       * This is a representative value for the top of this percentile.  E.g. if
+       * the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
+       * then the value would be 4, since it's the top-most value in the 80th
+       * percentile.
+       * </pre>
+       */
+      public long getValue() {
+        return value_;
+      }
+
+      // optional int64 data_point_count = 3;
+      public static final int DATA_POINT_COUNT_FIELD_NUMBER = 3;
+      private long dataPointCount_;
+      /**
+       * <code>optional int64 data_point_count = 3;</code>
+       *
+       * <pre>
+       * The total number of data points included in this percentile, from 0 to
+       * {&#64;code percentile}.  This is the SUM of everything so far!!
+       * </pre>
+       */
+      public boolean hasDataPointCount() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 data_point_count = 3;</code>
+       *
+       * <pre>
+       * The total number of data points included in this percentile, from 0 to
+       * {&#64;code percentile}.  This is the SUM of everything so far!!
+       * </pre>
+       */
+      public long getDataPointCount() {
+        return dataPointCount_;
+      }
+
+      private void initFields() {
+        percentile_ = 0;
+        value_ = 0L;
+        dataPointCount_ = 0L;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeInt32(1, percentile_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeInt64(2, value_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt64(3, dataPointCount_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, percentile_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(2, value_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(3, dataPointCount_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.Distribution.Percentile parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CoreProto.Distribution.Percentile prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code Distribution.Percentile}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CoreProto.internal_static_Distribution_Percentile_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CoreProto.internal_static_Distribution_Percentile_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CoreProto.Distribution.Percentile.class, com.janknspank.proto.CoreProto.Distribution.Percentile.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CoreProto.Distribution.Percentile.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          percentile_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          value_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          dataPointCount_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CoreProto.internal_static_Distribution_Percentile_descriptor;
+        }
+
+        public com.janknspank.proto.CoreProto.Distribution.Percentile getDefaultInstanceForType() {
+          return com.janknspank.proto.CoreProto.Distribution.Percentile.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CoreProto.Distribution.Percentile build() {
+          com.janknspank.proto.CoreProto.Distribution.Percentile result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CoreProto.Distribution.Percentile buildPartial() {
+          com.janknspank.proto.CoreProto.Distribution.Percentile result = new com.janknspank.proto.CoreProto.Distribution.Percentile(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.percentile_ = percentile_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.value_ = value_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.dataPointCount_ = dataPointCount_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CoreProto.Distribution.Percentile) {
+            return mergeFrom((com.janknspank.proto.CoreProto.Distribution.Percentile)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CoreProto.Distribution.Percentile other) {
+          if (other == com.janknspank.proto.CoreProto.Distribution.Percentile.getDefaultInstance()) return this;
+          if (other.hasPercentile()) {
+            setPercentile(other.getPercentile());
+          }
+          if (other.hasValue()) {
+            setValue(other.getValue());
+          }
+          if (other.hasDataPointCount()) {
+            setDataPointCount(other.getDataPointCount());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CoreProto.Distribution.Percentile parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CoreProto.Distribution.Percentile) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional int32 percentile = 1;
+        private int percentile_ ;
+        /**
+         * <code>optional int32 percentile = 1;</code>
+         *
+         * <pre>
+         * A number, between 1 and 100, for which percentile of data this set
+         * contains.
+         * </pre>
+         */
+        public boolean hasPercentile() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional int32 percentile = 1;</code>
+         *
+         * <pre>
+         * A number, between 1 and 100, for which percentile of data this set
+         * contains.
+         * </pre>
+         */
+        public int getPercentile() {
+          return percentile_;
+        }
+        /**
+         * <code>optional int32 percentile = 1;</code>
+         *
+         * <pre>
+         * A number, between 1 and 100, for which percentile of data this set
+         * contains.
+         * </pre>
+         */
+        public Builder setPercentile(int value) {
+          bitField0_ |= 0x00000001;
+          percentile_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 percentile = 1;</code>
+         *
+         * <pre>
+         * A number, between 1 and 100, for which percentile of data this set
+         * contains.
+         * </pre>
+         */
+        public Builder clearPercentile() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          percentile_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // optional int64 value = 2;
+        private long value_ ;
+        /**
+         * <code>optional int64 value = 2;</code>
+         *
+         * <pre>
+         * This is a representative value for the top of this percentile.  E.g. if
+         * the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
+         * then the value would be 4, since it's the top-most value in the 80th
+         * percentile.
+         * </pre>
+         */
+        public boolean hasValue() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional int64 value = 2;</code>
+         *
+         * <pre>
+         * This is a representative value for the top of this percentile.  E.g. if
+         * the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
+         * then the value would be 4, since it's the top-most value in the 80th
+         * percentile.
+         * </pre>
+         */
+        public long getValue() {
+          return value_;
+        }
+        /**
+         * <code>optional int64 value = 2;</code>
+         *
+         * <pre>
+         * This is a representative value for the top of this percentile.  E.g. if
+         * the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
+         * then the value would be 4, since it's the top-most value in the 80th
+         * percentile.
+         * </pre>
+         */
+        public Builder setValue(long value) {
+          bitField0_ |= 0x00000002;
+          value_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 value = 2;</code>
+         *
+         * <pre>
+         * This is a representative value for the top of this percentile.  E.g. if
+         * the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
+         * then the value would be 4, since it's the top-most value in the 80th
+         * percentile.
+         * </pre>
+         */
+        public Builder clearValue() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          value_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // optional int64 data_point_count = 3;
+        private long dataPointCount_ ;
+        /**
+         * <code>optional int64 data_point_count = 3;</code>
+         *
+         * <pre>
+         * The total number of data points included in this percentile, from 0 to
+         * {&#64;code percentile}.  This is the SUM of everything so far!!
+         * </pre>
+         */
+        public boolean hasDataPointCount() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional int64 data_point_count = 3;</code>
+         *
+         * <pre>
+         * The total number of data points included in this percentile, from 0 to
+         * {&#64;code percentile}.  This is the SUM of everything so far!!
+         * </pre>
+         */
+        public long getDataPointCount() {
+          return dataPointCount_;
+        }
+        /**
+         * <code>optional int64 data_point_count = 3;</code>
+         *
+         * <pre>
+         * The total number of data points included in this percentile, from 0 to
+         * {&#64;code percentile}.  This is the SUM of everything so far!!
+         * </pre>
+         */
+        public Builder setDataPointCount(long value) {
+          bitField0_ |= 0x00000004;
+          dataPointCount_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 data_point_count = 3;</code>
+         *
+         * <pre>
+         * The total number of data points included in this percentile, from 0 to
+         * {&#64;code percentile}.  This is the SUM of everything so far!!
+         * </pre>
+         */
+        public Builder clearDataPointCount() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          dataPointCount_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:Distribution.Percentile)
+      }
+
+      static {
+        defaultInstance = new Percentile(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:Distribution.Percentile)
+    }
+
+    // repeated .Distribution.Percentile percentile = 1;
+    public static final int PERCENTILE_FIELD_NUMBER = 1;
+    private java.util.List<com.janknspank.proto.CoreProto.Distribution.Percentile> percentile_;
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    public java.util.List<com.janknspank.proto.CoreProto.Distribution.Percentile> getPercentileList() {
+      return percentile_;
+    }
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder> 
+        getPercentileOrBuilderList() {
+      return percentile_;
+    }
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    public int getPercentileCount() {
+      return percentile_.size();
+    }
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    public com.janknspank.proto.CoreProto.Distribution.Percentile getPercentile(int index) {
+      return percentile_.get(index);
+    }
+    /**
+     * <code>repeated .Distribution.Percentile percentile = 1;</code>
+     */
+    public com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder getPercentileOrBuilder(
+        int index) {
+      return percentile_.get(index);
+    }
+
+    private void initFields() {
+      percentile_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < percentile_.size(); i++) {
+        output.writeMessage(1, percentile_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < percentile_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, percentile_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.Distribution parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.Distribution parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.Distribution prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Distribution}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.DistributionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_Distribution_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_Distribution_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.Distribution.class, com.janknspank.proto.CoreProto.Distribution.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.Distribution.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPercentileFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (percentileBuilder_ == null) {
+          percentile_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          percentileBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_Distribution_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.Distribution getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.Distribution build() {
+        com.janknspank.proto.CoreProto.Distribution result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.Distribution buildPartial() {
+        com.janknspank.proto.CoreProto.Distribution result = new com.janknspank.proto.CoreProto.Distribution(this);
+        int from_bitField0_ = bitField0_;
+        if (percentileBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            percentile_ = java.util.Collections.unmodifiableList(percentile_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.percentile_ = percentile_;
+        } else {
+          result.percentile_ = percentileBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.Distribution) {
+          return mergeFrom((com.janknspank.proto.CoreProto.Distribution)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.Distribution other) {
+        if (other == com.janknspank.proto.CoreProto.Distribution.getDefaultInstance()) return this;
+        if (percentileBuilder_ == null) {
+          if (!other.percentile_.isEmpty()) {
+            if (percentile_.isEmpty()) {
+              percentile_ = other.percentile_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensurePercentileIsMutable();
+              percentile_.addAll(other.percentile_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.percentile_.isEmpty()) {
+            if (percentileBuilder_.isEmpty()) {
+              percentileBuilder_.dispose();
+              percentileBuilder_ = null;
+              percentile_ = other.percentile_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              percentileBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getPercentileFieldBuilder() : null;
+            } else {
+              percentileBuilder_.addAllMessages(other.percentile_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.Distribution parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.Distribution) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .Distribution.Percentile percentile = 1;
+      private java.util.List<com.janknspank.proto.CoreProto.Distribution.Percentile> percentile_ =
+        java.util.Collections.emptyList();
+      private void ensurePercentileIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          percentile_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.Distribution.Percentile>(percentile_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.Distribution.Percentile, com.janknspank.proto.CoreProto.Distribution.Percentile.Builder, com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder> percentileBuilder_;
+
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.Distribution.Percentile> getPercentileList() {
+        if (percentileBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(percentile_);
+        } else {
+          return percentileBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public int getPercentileCount() {
+        if (percentileBuilder_ == null) {
+          return percentile_.size();
+        } else {
+          return percentileBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.Distribution.Percentile getPercentile(int index) {
+        if (percentileBuilder_ == null) {
+          return percentile_.get(index);
+        } else {
+          return percentileBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder setPercentile(
+          int index, com.janknspank.proto.CoreProto.Distribution.Percentile value) {
+        if (percentileBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePercentileIsMutable();
+          percentile_.set(index, value);
+          onChanged();
+        } else {
+          percentileBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder setPercentile(
+          int index, com.janknspank.proto.CoreProto.Distribution.Percentile.Builder builderForValue) {
+        if (percentileBuilder_ == null) {
+          ensurePercentileIsMutable();
+          percentile_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          percentileBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder addPercentile(com.janknspank.proto.CoreProto.Distribution.Percentile value) {
+        if (percentileBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePercentileIsMutable();
+          percentile_.add(value);
+          onChanged();
+        } else {
+          percentileBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder addPercentile(
+          int index, com.janknspank.proto.CoreProto.Distribution.Percentile value) {
+        if (percentileBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePercentileIsMutable();
+          percentile_.add(index, value);
+          onChanged();
+        } else {
+          percentileBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder addPercentile(
+          com.janknspank.proto.CoreProto.Distribution.Percentile.Builder builderForValue) {
+        if (percentileBuilder_ == null) {
+          ensurePercentileIsMutable();
+          percentile_.add(builderForValue.build());
+          onChanged();
+        } else {
+          percentileBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder addPercentile(
+          int index, com.janknspank.proto.CoreProto.Distribution.Percentile.Builder builderForValue) {
+        if (percentileBuilder_ == null) {
+          ensurePercentileIsMutable();
+          percentile_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          percentileBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder addAllPercentile(
+          java.lang.Iterable<? extends com.janknspank.proto.CoreProto.Distribution.Percentile> values) {
+        if (percentileBuilder_ == null) {
+          ensurePercentileIsMutable();
+          super.addAll(values, percentile_);
+          onChanged();
+        } else {
+          percentileBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder clearPercentile() {
+        if (percentileBuilder_ == null) {
+          percentile_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          percentileBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public Builder removePercentile(int index) {
+        if (percentileBuilder_ == null) {
+          ensurePercentileIsMutable();
+          percentile_.remove(index);
+          onChanged();
+        } else {
+          percentileBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.Distribution.Percentile.Builder getPercentileBuilder(
+          int index) {
+        return getPercentileFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder getPercentileOrBuilder(
+          int index) {
+        if (percentileBuilder_ == null) {
+          return percentile_.get(index);  } else {
+          return percentileBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder> 
+           getPercentileOrBuilderList() {
+        if (percentileBuilder_ != null) {
+          return percentileBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(percentile_);
+        }
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.Distribution.Percentile.Builder addPercentileBuilder() {
+        return getPercentileFieldBuilder().addBuilder(
+            com.janknspank.proto.CoreProto.Distribution.Percentile.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.Distribution.Percentile.Builder addPercentileBuilder(
+          int index) {
+        return getPercentileFieldBuilder().addBuilder(
+            index, com.janknspank.proto.CoreProto.Distribution.Percentile.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Distribution.Percentile percentile = 1;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.Distribution.Percentile.Builder> 
+           getPercentileBuilderList() {
+        return getPercentileFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.Distribution.Percentile, com.janknspank.proto.CoreProto.Distribution.Percentile.Builder, com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder> 
+          getPercentileFieldBuilder() {
+        if (percentileBuilder_ == null) {
+          percentileBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.CoreProto.Distribution.Percentile, com.janknspank.proto.CoreProto.Distribution.Percentile.Builder, com.janknspank.proto.CoreProto.Distribution.PercentileOrBuilder>(
+                  percentile_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          percentile_ = null;
+        }
+        return percentileBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:Distribution)
+    }
+
+    static {
+      defaultInstance = new Distribution(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:Distribution)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -9483,6 +10851,16 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_InterpretedData_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_Distribution_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Distribution_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_Distribution_Percentile_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Distribution_Percentile_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9542,8 +10920,12 @@ public final class CoreProto {
       "\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246" +
       "\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArticleCl" +
       "assification\"9\n\017InterpretedData\022\031\n\007artic",
-      "le\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB!\n\024com.j" +
-      "anknspank.protoB\tCoreProto"
+      "le\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\t\"\207\001\n\014Dist" +
+      "ribution\022,\n\npercentile\030\001 \003(\0132\030.Distribut" +
+      "ion.Percentile\032I\n\nPercentile\022\022\n\npercenti" +
+      "le\030\001 \001(\005\022\r\n\005value\030\002 \001(\003\022\030\n\020data_point_co" +
+      "unt\030\003 \001(\003B!\n\024com.janknspank.protoB\tCoreP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9610,6 +10992,18 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_InterpretedData_descriptor,
               new java.lang.String[] { "Article", "Url", });
+          internal_static_Distribution_descriptor =
+            getDescriptor().getMessageTypes().get(8);
+          internal_static_Distribution_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_Distribution_descriptor,
+              new java.lang.String[] { "Percentile", });
+          internal_static_Distribution_Percentile_descriptor =
+            internal_static_Distribution_descriptor.getNestedTypes().get(0);
+          internal_static_Distribution_Percentile_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_Distribution_Percentile_descriptor,
+              new java.lang.String[] { "Percentile", "Value", "DataPointCount", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);

@@ -71,7 +71,8 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
         ".articleP p",
         ".entry-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("businessinsider.com", new String[] {
-        ".post-content p"});
+        ".post-content p",
+        ".intro-content p"});
     DOMAIN_TO_DOM_ADDRESSES.put("businessweek.com", new String[] {
         "#article_body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("cbc.ca", new String[] {
