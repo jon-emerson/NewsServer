@@ -666,8 +666,8 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     }
     String classAndField = message.getClass().getSimpleName() + "." + fieldName;
     FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
-    Asserts.assertTrue(field != null && !field.isRepeated(),
-        classAndField + " is not a singular field", DatabaseRequestException.class);
+    Collection.validateType(field, value);
+
     Message.Builder messageBuilder = message.toBuilder();
     messageBuilder.setField(field, value);
     message = (T) messageBuilder.build();
@@ -683,8 +683,8 @@ public class SqlCollection<T extends Message> extends Collection<T> {
       throws DatabaseSchemaException, DatabaseRequestException {
     String classAndField = message.getClass().getSimpleName() + "." + fieldName;
     FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
-    Asserts.assertTrue(field != null && field.isRepeated(),
-        classAndField + " is not a repeated field", DatabaseRequestException.class);
+    Collection.validateType(field, values);
+
     Message.Builder messageBuilder = message.toBuilder();
     messageBuilder.clearField(field);
     for (Object o : values) {

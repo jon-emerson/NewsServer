@@ -14,7 +14,6 @@ import com.google.common.collect.Iterables;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
-import com.janknspank.common.Asserts;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
 import com.janknspank.database.QueryOption.LimitWithOffset;
 import com.janknspank.database.QueryOption.WhereEquals;
@@ -405,9 +404,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
   public <U extends Object> void push(T message, String fieldName, Iterable<U> values)
       throws DatabaseSchemaException, DatabaseRequestException {
     String classAndField = message.getClass().getSimpleName() + "." + fieldName;
-    FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
-    Asserts.assertTrue(field != null && field.isRepeated(),
-        classAndField + " is not a repeated field", DatabaseRequestException.class);
+    Collection.validateType(Database.getFieldDescriptor(message.getClass(), fieldName), values);
 
     BasicDBObject queryDbObject = getQueryObject(
         new WhereEquals("_id", Database.getPrimaryKey(message)));
