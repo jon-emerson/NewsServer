@@ -338,7 +338,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       }
     }
 
-    throw new RequiredFieldException("Could not find published_time");
+    throw new RequiredFieldException("Could not find published_time: " + documentNode.getUrl());
   }
 
   public static String getTitle(DocumentNode documentNode) throws RequiredFieldException {

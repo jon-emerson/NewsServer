@@ -13,6 +13,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
@@ -21,6 +22,13 @@ import com.google.common.collect.Maps;
  * by inspecting its URL.
  */
 public class ArticleUrlDetector {
+  public static final Predicate<String> PREDICATE = new Predicate<String>() {
+    @Override
+    public boolean apply(String url) {
+      return ArticleUrlDetector.isArticle(url);
+    }
+  };
+
   private static final Pattern ABC_NET_AU_PATH = Pattern.compile("\\/[0-9]{6,10}.htm$");
   private static final Pattern ABC_NEWS_ID_PARAM = Pattern.compile("^[0-9]{5,10}$");
   private static final Pattern ABC_NEWS_BLOG_PATH =

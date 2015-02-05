@@ -1,10 +1,14 @@
-package com.janknspank.rss;
+package com.janknspank;
 
 import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Urls;
@@ -22,14 +26,31 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
+import com.janknspank.interpreter.UrlFinder;
 import com.janknspank.proto.CoreProto.Url;
 
 /**
- * Iterates through all the RSS of various sites we like to crawl and pushes
- * any discovered articles to the database.
+ * Iterates through the home pages of the various sites we support, and RSS
+ * feeds of sites that offer those, to push as many new article URLs to the
+ * database as possible.
  */
-public class RssCrawler {
+public class UrlCrawler {
   private final Fetcher fetcher = new Fetcher();
+  private static final Iterable<String> WEBSITES = Iterables.concat(
+      Iterables.transform(UrlWhitelist.WHITELIST, new Function<String, String>() {
+        @Override
+        public String apply(String domain) {
+          if (StringUtils.countMatches(domain, ".") <= 1) {
+            domain = "www." + domain;
+          }
+          return "http://" + domain + "/";
+        }
+      }),
+      ImmutableList.of(
+          "https://medium.com/top-100/",
+          "http://opinionator.blogs.nytimes.com/",
+          "http://www.businessinsider.com/"
+      ));
   private static final String[] RSS_URLS = new String[] {
     "http://america.aljazeera.com/content/ajam/articles.rss",
     "http://bdnews24.com/?widgetName=rssfeed&widgetId=1150&getXmlFeed=true",
@@ -200,8 +221,14 @@ public class RssCrawler {
     }
   }
 
-  public static void main(String args[]) {
-    RssCrawler crawler = new RssCrawler();
+  public static void main(String args[]) throws Exception {
+    UrlCrawler crawler = new UrlCrawler();
+    for (String website : WEBSITES) {
+      System.out.println("***** WEBSITE: " + website);
+      Urls.put(
+          Iterables.filter(UrlFinder.findUrls(website), ArticleUrlDetector.PREDICATE),
+          website, false /* isTweet */);
+    }
     for (String rssUrl : RSS_URLS) {
       System.out.println("***** RSS FILE: " + rssUrl);
       crawler.crawl(rssUrl);

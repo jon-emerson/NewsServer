@@ -7,7 +7,7 @@ if [ $? -eq 0 ]; then
       -Xdebug \
       -Xrunjdwp:transport=dt_socket,address=8003,server=y,suspend=n \
       -Dcom.sun.media.imageio.disableCodecLib=true \
-      com.janknspank.rss.RssCrawler
+      com.janknspank.UrlCrawler
 else
   echo "Build failed"
 fi

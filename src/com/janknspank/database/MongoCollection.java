@@ -358,8 +358,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     }
     String classAndField = message.getClass().getSimpleName() + "." + fieldName;
     FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
-    Asserts.assertTrue(field != null && !field.isRepeated(),
-        classAndField + " is not a singular field", DatabaseRequestException.class);
+    validateType(field, value);
 
     BasicDBObject queryDbObject = getQueryObject(
         new WhereEquals("_id", Database.getPrimaryKey(message)));
@@ -382,8 +381,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
       throws DatabaseSchemaException, DatabaseRequestException {
     String classAndField = message.getClass().getSimpleName() + "." + fieldName;
     FieldDescriptor field = Database.getFieldDescriptor(message.getClass(), fieldName);
-    Asserts.assertTrue(field != null && field.isRepeated(),
-        classAndField + " is not a repeated field", DatabaseRequestException.class);
+    validateType(field, values);
 
     BasicDBObject queryDbObject = getQueryObject(
         new WhereEquals("_id", Database.getPrimaryKey(message)));

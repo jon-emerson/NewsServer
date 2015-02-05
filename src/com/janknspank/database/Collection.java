@@ -2,6 +2,7 @@ package com.janknspank.database;
 
 import java.util.List;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
@@ -9,6 +10,7 @@ import com.google.common.collect.Lists;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
+import com.janknspank.common.Asserts;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
 
 /**
@@ -107,6 +109,73 @@ public abstract class Collection<T extends Message> {
       }
     }
     return messageBuilder.build();
+  }
+
+  /**
+   * Don't call this directly.  {@code #validateType(FieldDescriptor, Object)}
+   * uses this to validates types of repeated and scalar fields.
+   */
+  private static void validateTypeInternal(FieldDescriptor field, Object value)
+      throws DatabaseRequestException {
+    Asserts.assertTrue(!(value instanceof Message.Builder),
+        "Don't pass Message.Builders in here.  Call .build() first, pass a Message!",
+        DatabaseRequestException.class);
+    Asserts.assertTrue(!(value instanceof Iterable<?>),
+        "Don't call this method directly.  Use #validateType.", IllegalStateException.class);
+
+    switch (field.getJavaType()) {
+      case MESSAGE:
+        Asserts.assertTrue(value instanceof Message &&
+            field.getMessageType().equals(((Message) value).getDescriptorForType()),
+            "Value for " + field.getFullName() + " does not have type "
+                + field.getMessageType().getFullName(), DatabaseRequestException.class);
+        break;
+      case INT:
+      case DOUBLE:
+      case FLOAT:
+      case LONG:
+        Asserts.assertTrue(value instanceof Number,
+            "Value for " + field.getFullName() + " does not have type "
+                + field.getJavaType(), DatabaseRequestException.class);
+        break;
+      case ENUM:
+        // I'm not sure how to do this better.  There really should be a way to compare
+        // actual Enum types.  But for now, just make sure the value is an Enum and its
+        // serialization matches up with an enum value defined in the proto...
+        Asserts.assertTrue(value instanceof Enum<?>, "Value should be an Enum type",
+            DatabaseRequestException.class);
+        Asserts.assertNotNull(field.getEnumType().findValueByName(value.toString()),
+            "Enum value " + value.toString() + " not relevant for "
+                + field.getEnumType().getFullName(), DatabaseRequestException.class);
+        break;
+      case STRING:
+        Asserts.assertTrue(value instanceof String,
+            "Value for " + field.getFullName() + " does not have type "
+                + field.getJavaType(), DatabaseRequestException.class);
+        break;
+      default:
+        throw new DatabaseRequestException("Unsupported type: " + field.getJavaType());
+    }
+  }
+
+  /**
+   * Validates that the passed {@code value} is either scaler or repeated and the
+   * proper type to be stored as a value for {@code field}.
+   */
+  @VisibleForTesting
+  static void validateType(FieldDescriptor field, Object value) throws DatabaseRequestException {
+    // todo(jonemerson): use this from mysql collection too
+    if (value instanceof Iterable<?>) {
+      Asserts.assertTrue(field != null && field.isRepeated(),
+          field.getFullName() + " is not a repeated field", DatabaseRequestException.class);
+      for (Object o : (Iterable<?>) value) {
+        validateTypeInternal(field, o);
+      }
+    } else {
+      Asserts.assertTrue(field != null && !field.isRepeated(),
+          field.getFullName() + " is not a singular field", DatabaseRequestException.class);
+      validateTypeInternal(field, value);
+    }
   }
 
   /**

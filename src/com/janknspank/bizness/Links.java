@@ -45,7 +45,7 @@ public class Links {
    * Deletes any links coming to or from the passed discovered URL ID.
    */
   public static int deleteIds(List<String> ids) throws DatabaseSchemaException {
-    return Database.with(Link.class).delete(new QueryOption.WhereEquals("url_id", ids))
+    return Database.with(Link.class).delete(new QueryOption.WhereEquals("destination_url_id", ids))
         + deleteFromOriginUrlId(ids);
   }
 
