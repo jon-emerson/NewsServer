@@ -10,7 +10,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.rank.NeuralNetworkScorer;
+import com.janknspank.rank.HeuristicScorer;
 
 @AuthenticationRequired
 public class GetArticlesServlet extends AbstractArticlesServlet {
@@ -20,10 +20,10 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
       throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
     User user = Database.with(User.class).get(getSession(req).getUserId());
     try {
-      return Articles.getRankedArticles(user, NeuralNetworkScorer.getInstance());
+      return Articles.getRankedArticles(user, HeuristicScorer.getInstance());
     } catch (DatabaseSchemaException | ParserException e) {
       // Fallback
-      System.out.println("Error: couldn't load getArticlesRankedByNeuralNetwork: " + e.getMessage());
+      System.out.println("Error: couldn't load getRankedArticles: " + e.getMessage());
       return Articles.getArticlesByInterest(user.getInterestList());
     }
   }

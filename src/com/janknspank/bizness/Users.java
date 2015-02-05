@@ -35,11 +35,14 @@ public class Users {
     }
     String email = emailNode.getFlattenedText();
 
+    String linkedInProfilePhotoUrl = getLinkedInProfilePhotoUrl(linkedInProfileDocument);
+    
     // If we already have a user, great, use him!  Mark him as logged in too!
     User user = getByEmail(email);
     if (user != null) {
       user = user.toBuilder()
           .setLinkedInAccessToken(linkedInAccessToken)
+          .setLinkedInProfilePhotoUrl(linkedInProfilePhotoUrl)
           .setLastLoginTime(System.currentTimeMillis())
           .build();
       try {
@@ -57,6 +60,7 @@ public class Users {
         .setLinkedInAccessToken(linkedInAccessToken)
         .setCreateTime(System.currentTimeMillis())
         .setLastLoginTime(System.currentTimeMillis())
+        .setLinkedInProfilePhotoUrl(linkedInProfilePhotoUrl)
         .build();
     try {
       Database.insert(user);
@@ -64,6 +68,12 @@ public class Users {
       throw new BiznessException("Error creating user", e);
     }
     return user;
+  }
+  
+  private static String getLinkedInProfilePhotoUrl(
+      DocumentNode linkedInProfileDocument) {
+    Node pictureNode = linkedInProfileDocument.findFirst("picture-url");
+    return (pictureNode == null) ? null : pictureNode.getFlattenedText();
   }
 
   /** Helper method for creating the User table. */

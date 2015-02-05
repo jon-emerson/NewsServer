@@ -31,14 +31,16 @@ public class Interpreter {
       throws FetchException, ParserException, RequiredFieldException {
 
     FetchResponse response = null;
+    Reader reader = null;
     try {
       response = FETCHER.fetch(url);
       if (response.getStatusCode() != HttpServletResponse.SC_OK) {
         throw new FetchException("URL not found (" + response.getStatusCode() + ")");
       }
-      return interpret(url, response.getReader());
+      reader = response.getReader();
+      return interpret(url, reader);
     } finally {
-      IOUtils.closeQuietly(response.getReader());
+      IOUtils.closeQuietly(reader);
     }
   }
 

@@ -150,6 +150,21 @@ public final class UserProto {
      */
     com.janknspank.proto.UserProto.LinkedInConnectionsOrBuilder getLinkedInConnectionsOrBuilder();
 
+    // optional string linked_in_profile_photo_url = 18;
+    /**
+     * <code>optional string linked_in_profile_photo_url = 18;</code>
+     */
+    boolean hasLinkedInProfilePhotoUrl();
+    /**
+     * <code>optional string linked_in_profile_photo_url = 18;</code>
+     */
+    java.lang.String getLinkedInProfilePhotoUrl();
+    /**
+     * <code>optional string linked_in_profile_photo_url = 18;</code>
+     */
+    com.google.protobuf.ByteString
+        getLinkedInProfilePhotoUrlBytes();
+
     // optional .AddressBook address_book = 12;
     /**
      * <code>optional .AddressBook address_book = 12;</code>
@@ -408,7 +423,7 @@ public final class UserProto {
             }
             case 98: {
               com.janknspank.proto.UserProto.AddressBook.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000400) == 0x00000400)) {
+              if (((bitField0_ & 0x00000800) == 0x00000800)) {
                 subBuilder = addressBook_.toBuilder();
               }
               addressBook_ = input.readMessage(com.janknspank.proto.UserProto.AddressBook.PARSER, extensionRegistry);
@@ -416,47 +431,52 @@ public final class UserProto {
                 subBuilder.mergeFrom(addressBook_);
                 addressBook_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000800;
               break;
             }
             case 106: {
-              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
                 urlRating_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlRating>();
-                mutable_bitField0_ |= 0x00000800;
+                mutable_bitField0_ |= 0x00001000;
               }
               urlRating_.add(input.readMessage(com.janknspank.proto.UserProto.UrlRating.PARSER, extensionRegistry));
               break;
             }
             case 114: {
-              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
                 urlFavorite_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlFavorite>();
-                mutable_bitField0_ |= 0x00001000;
+                mutable_bitField0_ |= 0x00002000;
               }
               urlFavorite_.add(input.readMessage(com.janknspank.proto.UserProto.UrlFavorite.PARSER, extensionRegistry));
               break;
             }
             case 122: {
-              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
                 industry_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UserIndustry>();
-                mutable_bitField0_ |= 0x00002000;
+                mutable_bitField0_ |= 0x00004000;
               }
               industry_.add(input.readMessage(com.janknspank.proto.UserProto.UserIndustry.PARSER, extensionRegistry));
               break;
             }
             case 130: {
-              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
                 interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>();
-                mutable_bitField0_ |= 0x00004000;
+                mutable_bitField0_ |= 0x00008000;
               }
               interest_.add(input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry));
               break;
             }
             case 138: {
-              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+              if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
                 intent_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Intent>();
-                mutable_bitField0_ |= 0x00008000;
+                mutable_bitField0_ |= 0x00010000;
               }
               intent_.add(input.readMessage(com.janknspank.proto.UserProto.Intent.PARSER, extensionRegistry));
+              break;
+            }
+            case 146: {
+              bitField0_ |= 0x00000400;
+              linkedInProfilePhotoUrl_ = input.readBytes();
               break;
             }
           }
@@ -467,19 +487,19 @@ public final class UserProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
           urlRating_ = java.util.Collections.unmodifiableList(urlRating_);
         }
-        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
           urlFavorite_ = java.util.Collections.unmodifiableList(urlFavorite_);
         }
-        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
           industry_ = java.util.Collections.unmodifiableList(industry_);
         }
-        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
           interest_ = java.util.Collections.unmodifiableList(interest_);
         }
-        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+        if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
           intent_ = java.util.Collections.unmodifiableList(intent_);
         }
         this.unknownFields = unknownFields.build();
@@ -848,6 +868,49 @@ public final class UserProto {
       return linkedInConnections_;
     }
 
+    // optional string linked_in_profile_photo_url = 18;
+    public static final int LINKED_IN_PROFILE_PHOTO_URL_FIELD_NUMBER = 18;
+    private java.lang.Object linkedInProfilePhotoUrl_;
+    /**
+     * <code>optional string linked_in_profile_photo_url = 18;</code>
+     */
+    public boolean hasLinkedInProfilePhotoUrl() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional string linked_in_profile_photo_url = 18;</code>
+     */
+    public java.lang.String getLinkedInProfilePhotoUrl() {
+      java.lang.Object ref = linkedInProfilePhotoUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          linkedInProfilePhotoUrl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string linked_in_profile_photo_url = 18;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLinkedInProfilePhotoUrlBytes() {
+      java.lang.Object ref = linkedInProfilePhotoUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        linkedInProfilePhotoUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional .AddressBook address_book = 12;
     public static final int ADDRESS_BOOK_FIELD_NUMBER = 12;
     private com.janknspank.proto.UserProto.AddressBook addressBook_;
@@ -855,7 +918,7 @@ public final class UserProto {
      * <code>optional .AddressBook address_book = 12;</code>
      */
     public boolean hasAddressBook() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
      * <code>optional .AddressBook address_book = 12;</code>
@@ -1061,6 +1124,7 @@ public final class UserProto {
       linkedInAccessToken_ = "";
       linkedInProfile_ = com.janknspank.proto.UserProto.LinkedInProfile.getDefaultInstance();
       linkedInConnections_ = com.janknspank.proto.UserProto.LinkedInConnections.getDefaultInstance();
+      linkedInProfilePhotoUrl_ = "";
       addressBook_ = com.janknspank.proto.UserProto.AddressBook.getDefaultInstance();
       urlRating_ = java.util.Collections.emptyList();
       urlFavorite_ = java.util.Collections.emptyList();
@@ -1118,7 +1182,7 @@ public final class UserProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeMessage(11, linkedInConnections_);
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeMessage(12, addressBook_);
       }
       for (int i = 0; i < urlRating_.size(); i++) {
@@ -1135,6 +1199,9 @@ public final class UserProto {
       }
       for (int i = 0; i < intent_.size(); i++) {
         output.writeMessage(17, intent_.get(i));
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBytes(18, getLinkedInProfilePhotoUrlBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1185,7 +1252,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(11, linkedInConnections_);
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, addressBook_);
       }
@@ -1208,6 +1275,10 @@ public final class UserProto {
       for (int i = 0; i < intent_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(17, intent_.get(i));
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(18, getLinkedInProfilePhotoUrlBytes());
       }
       size += extensionsSerializedSize();
       size += getUnknownFields().getSerializedSize();
@@ -1362,39 +1433,41 @@ public final class UserProto {
           linkedInConnectionsBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000200);
+        linkedInProfilePhotoUrl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000400);
         if (addressBookBuilder_ == null) {
           addressBook_ = com.janknspank.proto.UserProto.AddressBook.getDefaultInstance();
         } else {
           addressBookBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         if (urlRatingBuilder_ == null) {
           urlRating_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00001000);
         } else {
           urlRatingBuilder_.clear();
         }
         if (urlFavoriteBuilder_ == null) {
           urlFavorite_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00002000);
         } else {
           urlFavoriteBuilder_.clear();
         }
         if (industryBuilder_ == null) {
           industry_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
         } else {
           industryBuilder_.clear();
         }
         if (interestBuilder_ == null) {
           interest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           interestBuilder_.clear();
         }
         if (intentBuilder_ == null) {
           intent_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
         } else {
           intentBuilder_.clear();
         }
@@ -1477,51 +1550,55 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
+        result.linkedInProfilePhotoUrl_ = linkedInProfilePhotoUrl_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
         if (addressBookBuilder_ == null) {
           result.addressBook_ = addressBook_;
         } else {
           result.addressBook_ = addressBookBuilder_.build();
         }
         if (urlRatingBuilder_ == null) {
-          if (((bitField0_ & 0x00000800) == 0x00000800)) {
+          if (((bitField0_ & 0x00001000) == 0x00001000)) {
             urlRating_ = java.util.Collections.unmodifiableList(urlRating_);
-            bitField0_ = (bitField0_ & ~0x00000800);
+            bitField0_ = (bitField0_ & ~0x00001000);
           }
           result.urlRating_ = urlRating_;
         } else {
           result.urlRating_ = urlRatingBuilder_.build();
         }
         if (urlFavoriteBuilder_ == null) {
-          if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          if (((bitField0_ & 0x00002000) == 0x00002000)) {
             urlFavorite_ = java.util.Collections.unmodifiableList(urlFavorite_);
-            bitField0_ = (bitField0_ & ~0x00001000);
+            bitField0_ = (bitField0_ & ~0x00002000);
           }
           result.urlFavorite_ = urlFavorite_;
         } else {
           result.urlFavorite_ = urlFavoriteBuilder_.build();
         }
         if (industryBuilder_ == null) {
-          if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          if (((bitField0_ & 0x00004000) == 0x00004000)) {
             industry_ = java.util.Collections.unmodifiableList(industry_);
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00004000);
           }
           result.industry_ = industry_;
         } else {
           result.industry_ = industryBuilder_.build();
         }
         if (interestBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
             interest_ = java.util.Collections.unmodifiableList(interest_);
-            bitField0_ = (bitField0_ & ~0x00004000);
+            bitField0_ = (bitField0_ & ~0x00008000);
           }
           result.interest_ = interest_;
         } else {
           result.interest_ = interestBuilder_.build();
         }
         if (intentBuilder_ == null) {
-          if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          if (((bitField0_ & 0x00010000) == 0x00010000)) {
             intent_ = java.util.Collections.unmodifiableList(intent_);
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00010000);
           }
           result.intent_ = intent_;
         } else {
@@ -1585,6 +1662,11 @@ public final class UserProto {
         if (other.hasLinkedInConnections()) {
           mergeLinkedInConnections(other.getLinkedInConnections());
         }
+        if (other.hasLinkedInProfilePhotoUrl()) {
+          bitField0_ |= 0x00000400;
+          linkedInProfilePhotoUrl_ = other.linkedInProfilePhotoUrl_;
+          onChanged();
+        }
         if (other.hasAddressBook()) {
           mergeAddressBook(other.getAddressBook());
         }
@@ -1592,7 +1674,7 @@ public final class UserProto {
           if (!other.urlRating_.isEmpty()) {
             if (urlRating_.isEmpty()) {
               urlRating_ = other.urlRating_;
-              bitField0_ = (bitField0_ & ~0x00000800);
+              bitField0_ = (bitField0_ & ~0x00001000);
             } else {
               ensureUrlRatingIsMutable();
               urlRating_.addAll(other.urlRating_);
@@ -1605,7 +1687,7 @@ public final class UserProto {
               urlRatingBuilder_.dispose();
               urlRatingBuilder_ = null;
               urlRating_ = other.urlRating_;
-              bitField0_ = (bitField0_ & ~0x00000800);
+              bitField0_ = (bitField0_ & ~0x00001000);
               urlRatingBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUrlRatingFieldBuilder() : null;
@@ -1618,7 +1700,7 @@ public final class UserProto {
           if (!other.urlFavorite_.isEmpty()) {
             if (urlFavorite_.isEmpty()) {
               urlFavorite_ = other.urlFavorite_;
-              bitField0_ = (bitField0_ & ~0x00001000);
+              bitField0_ = (bitField0_ & ~0x00002000);
             } else {
               ensureUrlFavoriteIsMutable();
               urlFavorite_.addAll(other.urlFavorite_);
@@ -1631,7 +1713,7 @@ public final class UserProto {
               urlFavoriteBuilder_.dispose();
               urlFavoriteBuilder_ = null;
               urlFavorite_ = other.urlFavorite_;
-              bitField0_ = (bitField0_ & ~0x00001000);
+              bitField0_ = (bitField0_ & ~0x00002000);
               urlFavoriteBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUrlFavoriteFieldBuilder() : null;
@@ -1644,7 +1726,7 @@ public final class UserProto {
           if (!other.industry_.isEmpty()) {
             if (industry_.isEmpty()) {
               industry_ = other.industry_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
             } else {
               ensureIndustryIsMutable();
               industry_.addAll(other.industry_);
@@ -1657,7 +1739,7 @@ public final class UserProto {
               industryBuilder_.dispose();
               industryBuilder_ = null;
               industry_ = other.industry_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
               industryBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getIndustryFieldBuilder() : null;
@@ -1670,7 +1752,7 @@ public final class UserProto {
           if (!other.interest_.isEmpty()) {
             if (interest_.isEmpty()) {
               interest_ = other.interest_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             } else {
               ensureInterestIsMutable();
               interest_.addAll(other.interest_);
@@ -1683,7 +1765,7 @@ public final class UserProto {
               interestBuilder_.dispose();
               interestBuilder_ = null;
               interest_ = other.interest_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
               interestBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getInterestFieldBuilder() : null;
@@ -1696,7 +1778,7 @@ public final class UserProto {
           if (!other.intent_.isEmpty()) {
             if (intent_.isEmpty()) {
               intent_ = other.intent_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
             } else {
               ensureIntentIsMutable();
               intent_.addAll(other.intent_);
@@ -1709,7 +1791,7 @@ public final class UserProto {
               intentBuilder_.dispose();
               intentBuilder_ = null;
               intent_ = other.intent_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
               intentBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getIntentFieldBuilder() : null;
@@ -2494,6 +2576,80 @@ public final class UserProto {
         return linkedInConnectionsBuilder_;
       }
 
+      // optional string linked_in_profile_photo_url = 18;
+      private java.lang.Object linkedInProfilePhotoUrl_ = "";
+      /**
+       * <code>optional string linked_in_profile_photo_url = 18;</code>
+       */
+      public boolean hasLinkedInProfilePhotoUrl() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional string linked_in_profile_photo_url = 18;</code>
+       */
+      public java.lang.String getLinkedInProfilePhotoUrl() {
+        java.lang.Object ref = linkedInProfilePhotoUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          linkedInProfilePhotoUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string linked_in_profile_photo_url = 18;</code>
+       */
+      public com.google.protobuf.ByteString
+          getLinkedInProfilePhotoUrlBytes() {
+        java.lang.Object ref = linkedInProfilePhotoUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          linkedInProfilePhotoUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string linked_in_profile_photo_url = 18;</code>
+       */
+      public Builder setLinkedInProfilePhotoUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        linkedInProfilePhotoUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string linked_in_profile_photo_url = 18;</code>
+       */
+      public Builder clearLinkedInProfilePhotoUrl() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        linkedInProfilePhotoUrl_ = getDefaultInstance().getLinkedInProfilePhotoUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string linked_in_profile_photo_url = 18;</code>
+       */
+      public Builder setLinkedInProfilePhotoUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        linkedInProfilePhotoUrl_ = value;
+        onChanged();
+        return this;
+      }
+
       // optional .AddressBook address_book = 12;
       private com.janknspank.proto.UserProto.AddressBook addressBook_ = com.janknspank.proto.UserProto.AddressBook.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
@@ -2502,7 +2658,7 @@ public final class UserProto {
        * <code>optional .AddressBook address_book = 12;</code>
        */
       public boolean hasAddressBook() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional .AddressBook address_book = 12;</code>
@@ -2527,7 +2683,7 @@ public final class UserProto {
         } else {
           addressBookBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         return this;
       }
       /**
@@ -2541,7 +2697,7 @@ public final class UserProto {
         } else {
           addressBookBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         return this;
       }
       /**
@@ -2549,7 +2705,7 @@ public final class UserProto {
        */
       public Builder mergeAddressBook(com.janknspank.proto.UserProto.AddressBook value) {
         if (addressBookBuilder_ == null) {
-          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+          if (((bitField0_ & 0x00000800) == 0x00000800) &&
               addressBook_ != com.janknspank.proto.UserProto.AddressBook.getDefaultInstance()) {
             addressBook_ =
               com.janknspank.proto.UserProto.AddressBook.newBuilder(addressBook_).mergeFrom(value).buildPartial();
@@ -2560,7 +2716,7 @@ public final class UserProto {
         } else {
           addressBookBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         return this;
       }
       /**
@@ -2573,14 +2729,14 @@ public final class UserProto {
         } else {
           addressBookBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
       /**
        * <code>optional .AddressBook address_book = 12;</code>
        */
       public com.janknspank.proto.UserProto.AddressBook.Builder getAddressBookBuilder() {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         onChanged();
         return getAddressBookFieldBuilder().getBuilder();
       }
@@ -2615,9 +2771,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.UrlRating> urlRating_ =
         java.util.Collections.emptyList();
       private void ensureUrlRatingIsMutable() {
-        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
           urlRating_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlRating>(urlRating_);
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00001000;
          }
       }
 
@@ -2766,7 +2922,7 @@ public final class UserProto {
       public Builder clearUrlRating() {
         if (urlRatingBuilder_ == null) {
           urlRating_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00001000);
           onChanged();
         } else {
           urlRatingBuilder_.clear();
@@ -2843,7 +2999,7 @@ public final class UserProto {
           urlRatingBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.UrlRating, com.janknspank.proto.UserProto.UrlRating.Builder, com.janknspank.proto.UserProto.UrlRatingOrBuilder>(
                   urlRating_,
-                  ((bitField0_ & 0x00000800) == 0x00000800),
+                  ((bitField0_ & 0x00001000) == 0x00001000),
                   getParentForChildren(),
                   isClean());
           urlRating_ = null;
@@ -2855,9 +3011,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.UrlFavorite> urlFavorite_ =
         java.util.Collections.emptyList();
       private void ensureUrlFavoriteIsMutable() {
-        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
           urlFavorite_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlFavorite>(urlFavorite_);
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00002000;
          }
       }
 
@@ -3006,7 +3162,7 @@ public final class UserProto {
       public Builder clearUrlFavorite() {
         if (urlFavoriteBuilder_ == null) {
           urlFavorite_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00002000);
           onChanged();
         } else {
           urlFavoriteBuilder_.clear();
@@ -3083,7 +3239,7 @@ public final class UserProto {
           urlFavoriteBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.UrlFavorite, com.janknspank.proto.UserProto.UrlFavorite.Builder, com.janknspank.proto.UserProto.UrlFavoriteOrBuilder>(
                   urlFavorite_,
-                  ((bitField0_ & 0x00001000) == 0x00001000),
+                  ((bitField0_ & 0x00002000) == 0x00002000),
                   getParentForChildren(),
                   isClean());
           urlFavorite_ = null;
@@ -3095,9 +3251,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.UserIndustry> industry_ =
         java.util.Collections.emptyList();
       private void ensureIndustryIsMutable() {
-        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
           industry_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UserIndustry>(industry_);
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00004000;
          }
       }
 
@@ -3246,7 +3402,7 @@ public final class UserProto {
       public Builder clearIndustry() {
         if (industryBuilder_ == null) {
           industry_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           onChanged();
         } else {
           industryBuilder_.clear();
@@ -3323,7 +3479,7 @@ public final class UserProto {
           industryBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.UserIndustry, com.janknspank.proto.UserProto.UserIndustry.Builder, com.janknspank.proto.UserProto.UserIndustryOrBuilder>(
                   industry_,
-                  ((bitField0_ & 0x00002000) == 0x00002000),
+                  ((bitField0_ & 0x00004000) == 0x00004000),
                   getParentForChildren(),
                   isClean());
           industry_ = null;
@@ -3335,9 +3491,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.Interest> interest_ =
         java.util.Collections.emptyList();
       private void ensureInterestIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
           interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>(interest_);
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
          }
       }
 
@@ -3486,7 +3642,7 @@ public final class UserProto {
       public Builder clearInterest() {
         if (interestBuilder_ == null) {
           interest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           onChanged();
         } else {
           interestBuilder_.clear();
@@ -3563,7 +3719,7 @@ public final class UserProto {
           interestBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder>(
                   interest_,
-                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  ((bitField0_ & 0x00008000) == 0x00008000),
                   getParentForChildren(),
                   isClean());
           interest_ = null;
@@ -3575,9 +3731,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.Intent> intent_ =
         java.util.Collections.emptyList();
       private void ensureIntentIsMutable() {
-        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
           intent_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Intent>(intent_);
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00010000;
          }
       }
 
@@ -3726,7 +3882,7 @@ public final class UserProto {
       public Builder clearIntent() {
         if (intentBuilder_ == null) {
           intent_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
           onChanged();
         } else {
           intentBuilder_.clear();
@@ -3803,7 +3959,7 @@ public final class UserProto {
           intentBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.Intent, com.janknspank.proto.UserProto.Intent.Builder, com.janknspank.proto.UserProto.IntentOrBuilder>(
                   intent_,
-                  ((bitField0_ & 0x00008000) == 0x00008000),
+                  ((bitField0_ & 0x00010000) == 0x00010000),
                   getParentForChildren(),
                   isClean());
           intent_ = null;
@@ -6302,7 +6458,7 @@ public final class UserProto {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
      * If not known, NULL.
      * </pre>
      */
@@ -6311,7 +6467,7 @@ public final class UserProto {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
      * If not known, NULL.
      * </pre>
      */
@@ -6320,7 +6476,7 @@ public final class UserProto {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
      * If not known, NULL.
      * </pre>
      */
@@ -6503,6 +6659,10 @@ public final class UserProto {
        * <code>LINKED_IN_PROFILE = 5;</code>
        */
       LINKED_IN_PROFILE(5, 5),
+      /**
+       * <code>LINKED_IN_SKILLS = 6;</code>
+       */
+      LINKED_IN_SKILLS(6, 6),
       ;
 
       /**
@@ -6541,6 +6701,10 @@ public final class UserProto {
        * <code>LINKED_IN_PROFILE = 5;</code>
        */
       public static final int LINKED_IN_PROFILE_VALUE = 5;
+      /**
+       * <code>LINKED_IN_SKILLS = 6;</code>
+       */
+      public static final int LINKED_IN_SKILLS_VALUE = 6;
 
 
       public final int getNumber() { return value; }
@@ -6553,6 +6717,7 @@ public final class UserProto {
           case 3: return ADDRESS_BOOK;
           case 4: return LINKED_IN_CONNECTIONS;
           case 5: return LINKED_IN_PROFILE;
+          case 6: return LINKED_IN_SKILLS;
           default: return null;
         }
       }
@@ -6714,7 +6879,7 @@ public final class UserProto {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
      * If not known, NULL.
      * </pre>
      */
@@ -6725,7 +6890,7 @@ public final class UserProto {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
      * If not known, NULL.
      * </pre>
      */
@@ -6747,7 +6912,7 @@ public final class UserProto {
      * <code>optional string type = 4;</code>
      *
      * <pre>
-     * 'o' for organization, 'p' for person, 'l' for location.
+     * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
      * If not known, NULL.
      * </pre>
      */
@@ -7272,7 +7437,7 @@ public final class UserProto {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
        * If not known, NULL.
        * </pre>
        */
@@ -7283,7 +7448,7 @@ public final class UserProto {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
        * If not known, NULL.
        * </pre>
        */
@@ -7302,7 +7467,7 @@ public final class UserProto {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
        * If not known, NULL.
        * </pre>
        */
@@ -7323,7 +7488,7 @@ public final class UserProto {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
        * If not known, NULL.
        * </pre>
        */
@@ -7341,7 +7506,7 @@ public final class UserProto {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
        * If not known, NULL.
        * </pre>
        */
@@ -7355,7 +7520,7 @@ public final class UserProto {
        * <code>optional string type = 4;</code>
        *
        * <pre>
-       * 'o' for organization, 'p' for person, 'l' for location.
+       * 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
        * If not known, NULL.
        * </pre>
        */
@@ -7417,20 +7582,20 @@ public final class UserProto {
   public interface IntentOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional string intent_code = 1;
+    // optional string code = 1;
     /**
-     * <code>optional string intent_code = 1;</code>
+     * <code>optional string code = 1;</code>
      */
-    boolean hasIntentCode();
+    boolean hasCode();
     /**
-     * <code>optional string intent_code = 1;</code>
+     * <code>optional string code = 1;</code>
      */
-    java.lang.String getIntentCode();
+    java.lang.String getCode();
     /**
-     * <code>optional string intent_code = 1;</code>
+     * <code>optional string code = 1;</code>
      */
     com.google.protobuf.ByteString
-        getIntentCodeBytes();
+        getCodeBytes();
 
     // optional int64 create_time = 2;
     /**
@@ -7495,7 +7660,7 @@ public final class UserProto {
             }
             case 10: {
               bitField0_ |= 0x00000001;
-              intentCode_ = input.readBytes();
+              code_ = input.readBytes();
               break;
             }
             case 16: {
@@ -7543,20 +7708,20 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional string intent_code = 1;
-    public static final int INTENT_CODE_FIELD_NUMBER = 1;
-    private java.lang.Object intentCode_;
+    // optional string code = 1;
+    public static final int CODE_FIELD_NUMBER = 1;
+    private java.lang.Object code_;
     /**
-     * <code>optional string intent_code = 1;</code>
+     * <code>optional string code = 1;</code>
      */
-    public boolean hasIntentCode() {
+    public boolean hasCode() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string intent_code = 1;</code>
+     * <code>optional string code = 1;</code>
      */
-    public java.lang.String getIntentCode() {
-      java.lang.Object ref = intentCode_;
+    public java.lang.String getCode() {
+      java.lang.Object ref = code_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -7564,22 +7729,22 @@ public final class UserProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          intentCode_ = s;
+          code_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string intent_code = 1;</code>
+     * <code>optional string code = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getIntentCodeBytes() {
-      java.lang.Object ref = intentCode_;
+        getCodeBytes() {
+      java.lang.Object ref = code_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        intentCode_ = b;
+        code_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -7603,7 +7768,7 @@ public final class UserProto {
     }
 
     private void initFields() {
-      intentCode_ = "";
+      code_ = "";
       createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -7619,7 +7784,7 @@ public final class UserProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getIntentCodeBytes());
+        output.writeBytes(1, getCodeBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, createTime_);
@@ -7635,7 +7800,7 @@ public final class UserProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getIntentCodeBytes());
+          .computeBytesSize(1, getCodeBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -7757,7 +7922,7 @@ public final class UserProto {
 
       public Builder clear() {
         super.clear();
-        intentCode_ = "";
+        code_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         createTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -7792,7 +7957,7 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.intentCode_ = intentCode_;
+        result.code_ = code_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -7813,9 +7978,9 @@ public final class UserProto {
 
       public Builder mergeFrom(com.janknspank.proto.UserProto.Intent other) {
         if (other == com.janknspank.proto.UserProto.Intent.getDefaultInstance()) return this;
-        if (other.hasIntentCode()) {
+        if (other.hasCode()) {
           bitField0_ |= 0x00000001;
-          intentCode_ = other.intentCode_;
+          code_ = other.code_;
           onChanged();
         }
         if (other.hasCreateTime()) {
@@ -7848,76 +8013,76 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional string intent_code = 1;
-      private java.lang.Object intentCode_ = "";
+      // optional string code = 1;
+      private java.lang.Object code_ = "";
       /**
-       * <code>optional string intent_code = 1;</code>
+       * <code>optional string code = 1;</code>
        */
-      public boolean hasIntentCode() {
+      public boolean hasCode() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string intent_code = 1;</code>
+       * <code>optional string code = 1;</code>
        */
-      public java.lang.String getIntentCode() {
-        java.lang.Object ref = intentCode_;
+      public java.lang.String getCode() {
+        java.lang.Object ref = code_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          intentCode_ = s;
+          code_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string intent_code = 1;</code>
+       * <code>optional string code = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getIntentCodeBytes() {
-        java.lang.Object ref = intentCode_;
+          getCodeBytes() {
+        java.lang.Object ref = code_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          intentCode_ = b;
+          code_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string intent_code = 1;</code>
+       * <code>optional string code = 1;</code>
        */
-      public Builder setIntentCode(
+      public Builder setCode(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        intentCode_ = value;
+        code_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string intent_code = 1;</code>
+       * <code>optional string code = 1;</code>
        */
-      public Builder clearIntentCode() {
+      public Builder clearCode() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        intentCode_ = getDefaultInstance().getIntentCode();
+        code_ = getDefaultInstance().getCode();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string intent_code = 1;</code>
+       * <code>optional string code = 1;</code>
        */
-      public Builder setIntentCodeBytes(
+      public Builder setCodeBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        intentCode_ = value;
+        code_ = value;
         onChanged();
         return this;
       }
@@ -10639,7 +10804,7 @@ public final class UserProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/user.proto\032(com/j" +
-      "anknspank/database/extensions.proto\"\270\004\n\004" +
+      "anknspank/database/extensions.proto\"\344\004\n\004" +
       "User\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\022\n\004na" +
       "me\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230" +
       "\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\031\022\031\n\013faceb" +
@@ -10648,43 +10813,44 @@ public final class UserProto {
       "_in_access_token\030\t \001(\tB\021\210\246\035\001\220\246\035\005\230\246\035\364\003\240\246\035" +
       "\003\0221\n\021linked_in_profile\030\n \001(\0132\020.LinkedInP" +
       "rofileB\004\240\246\035\003\0229\n\025linked_in_connections\030\013 ",
-      "\001(\0132\024.LinkedInConnectionsB\004\240\246\035\003\022\"\n\014addre" +
-      "ss_book\030\014 \001(\0132\014.AddressBook\022\036\n\nurl_ratin" +
-      "g\030\r \003(\0132\n.UrlRating\022\"\n\014url_favorite\030\016 \003(" +
-      "\0132\014.UrlFavorite\022\037\n\010industry\030\017 \003(\0132\r.User" +
-      "Industry\022\033\n\010interest\030\020 \003(\0132\t.Interest\022\027\n" +
-      "\006intent\030\021 \003(\0132\007.Intent*\004\010\006\020\007:\020\212\265\030\014MongoD" +
-      "B.User\"B\n\013AddressBook\022\030\n\004data\030\001 \001(\tB\n\210\246\035" +
-      "\001\230\246\035\200\240\006\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"^\n\tUr" +
-      "lRating\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035" +
-      "\001\022\024\n\006rating\030\002 \001(\005B\004\210\246\035\001\022\031\n\013create_time\030\003",
-      " \001(\003B\004\210\246\035\001\"N\n\013UrlFavorite\022 \n\006url_id\030\001 \001(" +
-      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\035\n\013create_time\030\002 \001(\003" +
-      "B\010\220\246\035\005\210\246\035\001\"\300\001\n\014UserIndustry\022\"\n\020industry_" +
-      "code_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022*\n\006source\030\002 \001(\0162" +
-      "\024.UserIndustry.SourceB\004\210\246\035\001\022\031\n\013create_ti" +
-      "me\030\003 \001(\003B\004\210\246\035\001\"E\n\006Source\022\013\n\007UNKNOWN\020\000\022\010\n" +
-      "\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED_IN_PROF" +
-      "ILE\020\003\"\226\002\n\010Interest\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002" +
-      "\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022" +
-      "&\n\006source\030\003 \001(\0162\020.Interest.SourceB\004\210\246\035\001\022",
-      "\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\005" +
-      " \001(\003B\004\210\246\035\001\"r\n\006Source\022\013\n\007UNKNOWN\020\000\022\010\n\004USE" +
-      "R\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDRESS_BOOK\020\003\022\031\n\025" +
-      "LINKED_IN_CONNECTIONS\020\004\022\025\n\021LINKED_IN_PRO" +
-      "FILE\020\005\"J\n\006Intent\022%\n\013intent_code\030\001 \001(\tB\020\210" +
-      "\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246" +
-      "\035\001\"\251\002\n\017LinkedInProfile\0223\n\020current_employ" +
-      "er\030\001 \001(\0132\031.LinkedInProfile.Employer\0220\n\rp" +
-      "ast_employer\030\002 \003(\0132\031.LinkedInProfile.Emp" +
-      "loyer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013creat",
-      "e_time\030\004 \001(\003B\004\210\246\035\001\032z\n\010Employer\022\026\n\004name\030\001" +
-      " \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022" +
-      "\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004" +
-      " \001(\003\022\020\n\010end_time\030\005 \001(\003\"J\n\023LinkedInConnec" +
-      "tions\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013creat" +
-      "e_time\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknspank.pro" +
-      "toB\tUserProto"
+      "\001(\0132\024.LinkedInConnectionsB\004\240\246\035\003\022*\n\033linke" +
+      "d_in_profile_photo_url\030\022 \001(\tB\005\230\246\035\310\001\022\"\n\014a" +
+      "ddress_book\030\014 \001(\0132\014.AddressBook\022\036\n\nurl_r" +
+      "ating\030\r \003(\0132\n.UrlRating\022\"\n\014url_favorite\030" +
+      "\016 \003(\0132\014.UrlFavorite\022\037\n\010industry\030\017 \003(\0132\r." +
+      "UserIndustry\022\033\n\010interest\030\020 \003(\0132\t.Interes" +
+      "t\022\027\n\006intent\030\021 \003(\0132\007.Intent*\004\010\006\020\007:\020\212\265\030\014Mo" +
+      "ngoDB.User\"B\n\013AddressBook\022\030\n\004data\030\001 \001(\tB" +
+      "\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"^" +
+      "\n\tUrlRating\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035",
+      "\030\250\246\035\001\022\024\n\006rating\030\002 \001(\005B\004\210\246\035\001\022\031\n\013create_ti" +
+      "me\030\003 \001(\003B\004\210\246\035\001\"N\n\013UrlFavorite\022 \n\006url_id\030" +
+      "\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\035\n\013create_time\030\002" +
+      " \001(\003B\010\220\246\035\005\210\246\035\001\"\300\001\n\014UserIndustry\022\"\n\020indus" +
+      "try_code_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022*\n\006source\030\002 " +
+      "\001(\0162\024.UserIndustry.SourceB\004\210\246\035\001\022\031\n\013creat" +
+      "e_time\030\003 \001(\003B\004\210\246\035\001\"E\n\006Source\022\013\n\007UNKNOWN\020" +
+      "\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED_IN_" +
+      "PROFILE\020\003\"\255\002\n\010Interest\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001" +
+      "\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230",
+      "\246\035d\022&\n\006source\030\003 \001(\0162\020.Interest.SourceB\004\210" +
+      "\246\035\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n\013create_ti" +
+      "me\030\005 \001(\003B\004\210\246\035\001\"\210\001\n\006Source\022\013\n\007UNKNOWN\020\000\022\010" +
+      "\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDRESS_BOOK\020" +
+      "\003\022\031\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n\021LINKED_I" +
+      "N_PROFILE\020\005\022\024\n\020LINKED_IN_SKILLS\020\006\"C\n\006Int" +
+      "ent\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013c" +
+      "reate_time\030\002 \001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfi" +
+      "le\0223\n\020current_employer\030\001 \001(\0132\031.LinkedInP" +
+      "rofile.Employer\0220\n\rpast_employer\030\002 \003(\0132\031",
+      ".LinkedInProfile.Employer\022\030\n\004data\030\003 \001(\tB" +
+      "\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z" +
+      "\n\010Employer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005ti" +
+      "tle\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004" +
+      "\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001" +
+      "(\003\"J\n\023LinkedInConnections\022\030\n\004data\030\002 \001(\tB" +
+      "\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!" +
+      "\n\024com.janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10696,7 +10862,7 @@ public final class UserProto {
           internal_static_User_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_User_descriptor,
-              new java.lang.String[] { "Id", "Name", "Email", "LinkedInId", "FacebookId", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInConnections", "AddressBook", "UrlRating", "UrlFavorite", "Industry", "Interest", "Intent", });
+              new java.lang.String[] { "Id", "Name", "Email", "LinkedInId", "FacebookId", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInConnections", "LinkedInProfilePhotoUrl", "AddressBook", "UrlRating", "UrlFavorite", "Industry", "Interest", "Intent", });
           internal_static_AddressBook_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_AddressBook_fieldAccessorTable = new
@@ -10732,7 +10898,7 @@ public final class UserProto {
           internal_static_Intent_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Intent_descriptor,
-              new java.lang.String[] { "IntentCode", "CreateTime", });
+              new java.lang.String[] { "Code", "CreateTime", });
           internal_static_LinkedInProfile_descriptor =
             getDescriptor().getMessageTypes().get(7);
           internal_static_LinkedInProfile_fieldAccessorTable = new
@@ -10770,6 +10936,7 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

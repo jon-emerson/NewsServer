@@ -23,7 +23,7 @@ public class IntentCodes {
               .build(),
           IntentCode.newBuilder()
               .setCode("swtch")
-              .setDescription("Switch careers")
+              .setDescription("Switch companies")
               .build(),
           IntentCode.newBuilder()
               .setCode("start")

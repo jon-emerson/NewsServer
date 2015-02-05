@@ -56,6 +56,10 @@ message User {
     (client_serialization) = EXCLUDE
   ];
 
+  optional string linked_in_profile_photo_url = 18 [
+    (string_length) = 200
+  ];
+
   optional AddressBook address_book = 12;
   repeated UrlRating url_rating = 13;
   repeated UrlFavorite url_favorite = 14;
@@ -150,12 +154,13 @@ message Interest {
     ADDRESS_BOOK = 3; // Phone address book.
     LINKED_IN_CONNECTIONS = 4;
     LINKED_IN_PROFILE = 5;
+    LINKED_IN_SKILLS = 6;
   }
   optional Source source = 3 [
     (required) = YES
   ];
 
-  // 'o' for organization, 'p' for person, 'l' for location.
+  // 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
   // If not known, NULL.
   optional string type = 4 [
     (string_length) = 5,
@@ -168,7 +173,7 @@ message Interest {
 }
 
 message Intent {
-  optional string intent_code = 1 [
+  optional string code = 1 [
     (required) = YES,
     (storage_method) = INDEX,
     (string_length) = 5,
