@@ -28,6 +28,7 @@ public class UserInterests {
   public static final String TYPE_LOCATION = "l";
   public static final String TYPE_PERSON = "p";
   public static final String TYPE_ORGANIZATION = "o";
+  public static final String TYPE_SKILL = "s";
 
   /**
    * Updates the user's interests using his LinkedIn profile, and returns his
@@ -56,33 +57,53 @@ public class UserInterests {
     user = updateInterests(user, companyInterests, Source.LINKED_IN_PROFILE);
 
     // Step 2: Update people.
-    Set<String> peopleNames = Sets.newHashSet();
-    for (Node personNode : connectionsDocumentNode.findAll("person")) {
-      StringBuilder nameBuilder = new StringBuilder();
-      Node firstNameNode = personNode.findFirst("first-name");
-      if (firstNameNode != null) {
-        nameBuilder.append(firstNameNode.getFlattenedText());
-      }
-      Node lastNameNode = personNode.findFirst("last-name");
-      if (lastNameNode != null) {
+    if (connectionsDocumentNode != null) {
+      Set<String> peopleNames = Sets.newHashSet();
+      for (Node personNode : connectionsDocumentNode.findAll("person")) {
+        StringBuilder nameBuilder = new StringBuilder();
+        Node firstNameNode = personNode.findFirst("first-name");
         if (firstNameNode != null) {
-          nameBuilder.append(" ");
+          nameBuilder.append(firstNameNode.getFlattenedText());
         }
-        nameBuilder.append(lastNameNode.getFlattenedText());
+        Node lastNameNode = personNode.findFirst("last-name");
+        if (lastNameNode != null) {
+          if (firstNameNode != null) {
+            nameBuilder.append(" ");
+          }
+          nameBuilder.append(lastNameNode.getFlattenedText());
+        }
+        peopleNames.add(nameBuilder.toString());
       }
-      peopleNames.add(nameBuilder.toString());
+      List<Interest> personInterests = Lists.newArrayList();
+      for (String peopleName : peopleNames) {
+        personInterests.add(Interest.newBuilder()
+            .setId(GuidFactory.generate())
+            .setKeyword(peopleName)
+            .setSource(Source.LINKED_IN_CONNECTIONS)
+            .setType(TYPE_PERSON)
+            .setCreateTime(System.currentTimeMillis())
+            .build());
+      }
+      user = updateInterests(user, personInterests, Source.LINKED_IN_CONNECTIONS);
     }
-    List<Interest> personInterests = Lists.newArrayList();
-    for (String peopleName : peopleNames) {
-      personInterests.add(Interest.newBuilder()
+
+    // Step 3: Update skills
+    Set<String> skills = Sets.newHashSet();
+    for (Node skillNode : profileDocumentNode.findAll("skill > name")) {
+      skills.add(skillNode.getFlattenedText());
+    }
+    List<Interest> skillInterests = Lists.newArrayList();
+    for (String skill : skills) {
+      skillInterests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
-          .setKeyword(peopleName)
-          .setSource(Source.LINKED_IN_CONNECTIONS)
-          .setType(TYPE_PERSON)
+          .setKeyword(skill)
+          .setSource(Source.LINKED_IN_SKILLS)
+          .setType(TYPE_SKILL)
           .setCreateTime(System.currentTimeMillis())
           .build());
     }
-    return updateInterests(user, personInterests, Source.LINKED_IN_CONNECTIONS);
+
+    return updateInterests(user, skillInterests, Source.LINKED_IN_SKILLS);
   }
 
   /**

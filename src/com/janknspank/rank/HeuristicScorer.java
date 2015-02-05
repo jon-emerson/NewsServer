@@ -29,9 +29,7 @@ public class HeuristicScorer extends Scorer {
     double score = 0;
 
     // Max Current workplace value: 0.2
-    if (InputValuesGenerator.isAboutCurrentEmployer(user, article)) {
-      score += 0.2;
-    }
+    score += 0.2 * InputValuesGenerator.relevanceToCurrentEmployer(user, article);
 
     // Matched interests up to 0.3
     score += Math.min(InputValuesGenerator.matchedInterestsCount(user, article) / 10, 0.3);

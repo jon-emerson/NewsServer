@@ -65,6 +65,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>FTUEGetArticlesServlet</servlet-name>
+    <servlet-class>com.janknspank.server.FTUEGetArticlesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FTUEGetArticlesServlet</servlet-name>
+    <url-pattern>/ftueGetArticles</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>GetTopicServlet</servlet-name>
     <servlet-class>com.janknspank.server.GetTopicServlet</servlet-class>
   </servlet>
