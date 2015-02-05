@@ -131,9 +131,13 @@ public class Mongoizer {
             break;
 
           case ENUM:
-            // TODO(jonemerson): Add error handling, in case no value is found.
-            messageBuilder.setField(fieldDescriptor,
-                fieldDescriptor.getEnumType().findValueByName(object.getString(fieldName)));
+            EnumValueDescriptor value =
+                fieldDescriptor.getEnumType().findValueByName(object.getString(fieldName));
+            if (value != null) {
+              messageBuilder.setField(fieldDescriptor, value);
+            } else {
+              messageBuilder.clearField(fieldDescriptor);
+            }
             break;
 
           case MESSAGE:
