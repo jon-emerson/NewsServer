@@ -73,10 +73,7 @@ public class Users {
   private static String getLinkedInProfilePhotoUrl(
       DocumentNode linkedInProfileDocument) {
     Node pictureNode = linkedInProfileDocument.findFirst("picture-url");
-    if (pictureNode == null) {
-      return null;
-    }
-    return pictureNode.getFlattenedText();
+    return (pictureNode == null) ? null : pictureNode.getFlattenedText();
   }
 
   /** Helper method for creating the User table. */

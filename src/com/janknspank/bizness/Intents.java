@@ -10,20 +10,6 @@ import com.janknspank.proto.UserProto.Intent;
 import com.janknspank.proto.UserProto.User;
 
 public class Intents {
-  public static Iterable<Intent> getIntentsFromCodes(Iterable<String> intentCodes) {
-    List<Intent> intents = Lists.newArrayList();
-    for(String intentCode : intentCodes) {
-      // Validate the intent code strings
-      if (IntentCodes.INTENT_CODE_MAP.containsKey(intentCode)) {
-        intents.add(Intent.newBuilder()
-            .setCode(intentCode)
-            .setCreateTime(System.currentTimeMillis())
-            .build());
-      }
-    }
-    return intents;
-  }
-  
   public static User setIntents(User user, Iterable<Intent> intents) 
       throws DatabaseSchemaException, BiznessException {
     try {

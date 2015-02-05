@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.api.client.util.Lists;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.IntentCodes;
 import com.janknspank.bizness.Intents;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -24,7 +26,7 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
       throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
     String intentCodesCommaSeparated = getParameter(req, "intents");
     List<String> intentCodes = Arrays.asList(intentCodesCommaSeparated.split(","));
-    Iterable<Intent> intents = Intents.getIntentsFromCodes(intentCodes);
+    Iterable<Intent> intents = getIntentsFromCodes(intentCodes);
     User user = Database.with(User.class).get(getSession(req).getUserId());
     user = Intents.setIntents(user, intents);
     
@@ -35,5 +37,19 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
       System.out.println("Error: couldn't load getRankedArticles: " + e.getMessage());
       return Articles.getArticlesByInterest(user.getInterestList());
     }
+  }
+  
+  public static Iterable<Intent> getIntentsFromCodes(Iterable<String> intentCodes) {
+    List<Intent> intents = Lists.newArrayList();
+    for (String intentCode : intentCodes) {
+      // Validate the intent code strings
+      if (IntentCodes.INTENT_CODE_MAP.containsKey(intentCode)) {
+        intents.add(Intent.newBuilder()
+            .setCode(intentCode)
+            .setCreateTime(System.currentTimeMillis())
+            .build());
+      }
+    }
+    return intents;
   }
 }
