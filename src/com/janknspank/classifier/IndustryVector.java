@@ -16,7 +16,7 @@ import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.janknspank.TheMachine;
+import com.janknspank.ArticleCrawler;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.ArticleUrlDetector;
@@ -63,7 +63,7 @@ public class IndustryVector {
       }
     }
     Iterable<Article> articles = Iterables.concat(
-        TheMachine.getArticles(urls).values(),
+        ArticleCrawler.getArticles(urls).values(),
         Articles.getArticlesForKeywords(words));
     System.out.println(Iterables.size(articles) + " articles found");
 

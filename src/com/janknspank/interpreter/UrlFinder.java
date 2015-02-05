@@ -16,7 +16,6 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
-import com.janknspank.proto.CoreProto.Url;
 
 public class UrlFinder {
   private static final Fetcher FETCHER = new Fetcher();
@@ -35,11 +34,11 @@ public class UrlFinder {
    * Retrieves the passed URL by making a request to the respective website,
    * and then interprets the returned results.
    */
-  public static List<String> findUrls(Url url)
+  public static List<String> findUrls(String url)
       throws FetchException, ParserException, RequiredFieldException {
 
     FetchResponse response = FETCHER.fetch(url);
-    return findUrls(DocumentBuilder.build(url.getUrl(), response.getReader()));
+    return findUrls(DocumentBuilder.build(url, response.getReader()));
   }
 
   /**

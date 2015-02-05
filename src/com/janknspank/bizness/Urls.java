@@ -9,7 +9,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.janknspank.TheMachine;
+import com.janknspank.ArticleCrawler;
 import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.DateParser;
 import com.janknspank.database.Database;
@@ -84,7 +84,7 @@ public class Urls {
       return ImmutableList.of();
     }
 
-    // Create a LinkedHashMap for the return values.  (Doing this now preseves
+    // Create a LinkedHashMap for the return values.  (Doing this now preserves
     // the order of our return values, so they match the order of urlStrings.
     LinkedHashMap<String, Url> urls = Maps.newLinkedHashMap();
     for (String urlString : urlStrings) {
@@ -177,7 +177,7 @@ public class Urls {
         new QueryOption.WhereNotLike("url", "https://twitter.com/%"),
         new QueryOption.DescendingSort("crawl_priority"),
         new QueryOption.LimitWithOffset(1,
-            TheMachine.THREAD_COUNT == 1 ? 0 : (int) (20 * Math.random())));
+            ArticleCrawler.THREAD_COUNT == 1 ? 0 : (int) (20 * Math.random())));
   }
 
   /**

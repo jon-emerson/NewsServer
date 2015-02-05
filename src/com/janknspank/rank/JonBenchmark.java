@@ -9,7 +9,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
-import com.janknspank.TheMachine;
+import com.janknspank.ArticleCrawler;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Users;
 import com.janknspank.common.Asserts;
@@ -77,7 +77,14 @@ public class JonBenchmark {
       "http://www.redherring.com/finance/uber-raises-another-1-2bn-staggering-40bn-valuation/",
       "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/",
       "http://www.wired.com/2015/01/facebook-making-news-feed-better-asking-real-people-direct-questions/",
-      "http://www.wired.com/2015/01/smartest-richest-companies-cant-crack-mobile-future-belongs-anyone-can/");
+      "http://www.wired.com/2015/01/smartest-richest-companies-cant-crack-mobile-future-belongs-anyone-can/",
+      // Because I have been thinking about the Apple Watch as a launch platform.
+      "http://money.cnn.com/2015/02/04/technology/apple-watch-flop/index.html",
+      // Looking for avenues of funding / recognition / promotion.
+      "http://techcrunch.com/2015/02/04/disrupt-ny-battlefield-applications-are-open-so-apply-now/",
+      // Another startup's journey from idea to angel funding to relaunch.
+      "http://techcrunch.com/2015/02/04/bunkr-is-now-the-definitive-modern-presentation-tool-for-the-web/",
+      "http://techcrunch.com/2015/02/04/microsoft-sunrise/");
 
   private static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
@@ -139,12 +146,17 @@ public class JonBenchmark {
       "http://www.wired.com/2015/01/absurd-creature-of-the-week-barbados-threadsnake/",
       "http://www.wired.com/2015/01/nissan-juke-tracks-snow/",
       "http://www.wired.com/2015/01/new-3ds-zelda-majoras-mask/",
-      "http://www.wired.com/2015/01/daniel-gebhart-de-koekkoek-bodybuilders/");
+      "http://www.wired.com/2015/01/daniel-gebhart-de-koekkoek-bodybuilders/",
+      "http://www.cnn.com/2015/02/04/asia/taiwan-plane-crash-transasia/index.html",
+      "http://money.cnn.com/2015/02/04/autos/toyota-camry-lawsuit/index.html",
+      "http://www.businessinsider.com/argentina-president-makes-racist-joke-in-china-2015-2",
+      "http://www.businessinsider.com/alternative-uses-for-tinder-2015-2",
+      "http://www.businessinsider.com/most-visited-cities-in-the-world-2015-1");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
     Map<Article, Double> scoreMap = Maps.newHashMap();
-    for (Article article : TheMachine.getArticles(urlStrings).values()) {
+    for (Article article : ArticleCrawler.getArticles(urlStrings).values()) {
       scoreMap.put(article, scorer.getScore(user, article));
     }
     return scoreMap;

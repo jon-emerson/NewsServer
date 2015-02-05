@@ -33,7 +33,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
 
-public class TheMachine implements Runnable {
+public class ArticleCrawler implements Runnable {
   // NOTE(jonemerson): This needs to be 1 if the database is empty.  Or, just
   // run ./rss.sh first!
   public static final int THREAD_COUNT = 20;
@@ -121,7 +121,7 @@ public class TheMachine implements Runnable {
       }
       urls = interpretedData.getUrlList();
     } else {
-      urls = UrlFinder.findUrls(url);
+      urls = UrlFinder.findUrls(url.getUrl());
     }
 
     // Make sure to filter and clean the URLs - only store the ones we want to crawl!
@@ -207,7 +207,7 @@ public class TheMachine implements Runnable {
   public static void main(String args[]) throws Exception {
     ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
     for (int i = 0; i < THREAD_COUNT; i++) {
-      Runnable worker = new TheMachine();
+      Runnable worker = new ArticleCrawler();
       executor.execute(worker);
     }
     executor.shutdown();
