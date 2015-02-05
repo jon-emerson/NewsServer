@@ -1,5 +1,6 @@
 package com.janknspank.server;
 
+import java.io.StringReader;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,15 +10,20 @@ import com.google.common.collect.Iterables;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.LinkedInProfiles;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.IndustryCodes;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.dom.parser.DocumentBuilder;
+import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleIndustry;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.UserProto.LinkedInProfile;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.HeuristicScorer;
 import com.janknspank.rank.Scorer;
@@ -38,6 +44,13 @@ public class ViewFeedServlet extends StandardServlet {
     if (user.getEmail().equals("tom.charytoniuk@gmail.com") ||
         user.getEmail().equals("panaceaa@gmail.com")) {
       try {
+        // Debugging for Linkedinprofile document
+//        LinkedInProfile profile = user.getLinkedInProfile();
+//        DocumentNode linkedInProfileDocument = DocumentBuilder.build(null, 
+//            new StringReader(profile.getData()));
+//        UserInterests.updateInterests(user, linkedInProfileDocument, null);
+        // Uncomment to play with profile data
+        
         final Map<Article, Double> articlesToRankMap =
             Articles.getArticlesAndScores(user, HeuristicScorer.getInstance());
 
