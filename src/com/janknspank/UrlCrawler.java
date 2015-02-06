@@ -226,7 +226,11 @@ public class UrlCrawler {
     for (String website : WEBSITES) {
       System.out.println("***** WEBSITE: " + website);
       Urls.put(
-          Iterables.filter(UrlFinder.findUrls(website), ArticleUrlDetector.PREDICATE),
+          Iterables.transform(
+              Iterables.filter(
+                  Iterables.filter(UrlFinder.findUrls(website), ArticleUrlDetector.PREDICATE),
+                  UrlWhitelist.PREDICATE),
+              UrlCleaner.TRANSFORM_FUNCTION),
           website, false /* isTweet */);
     }
     for (String rssUrl : RSS_URLS) {

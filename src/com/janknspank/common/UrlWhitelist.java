@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.Links;
 import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Url;
@@ -165,6 +166,7 @@ public class UrlWhitelist {
    */
   private static final Pattern NYTIMES_ARTICLE_DOMAIN = Pattern.compile(
       "^(" + Joiner.on("|").join(new String[] {
+          "bits\\.blogs\\.nytimes\\.com",
           "dealbook\\.nytimes\\.com",
           "nytimes\\.com",
           "opinionator\\.blogs\\.nytimes\\.com",
@@ -703,19 +705,22 @@ public class UrlWhitelist {
         urlsToDelete.put(urlStr, url.getId());
       }
       if (urlsToDelete.size() == 100 || url == null) {
-        List<String> urls = Lists.newArrayList();
-        List<String> ids = Lists.newArrayList();
-        for (Map.Entry<String, String> urlToDelete : urlsToDelete.entrySet()) {
-          System.out.println("Deleting url: " + urlToDelete.getKey());
-          urls.add(urlToDelete.getKey());
-          ids.add(urlToDelete.getValue());
-        }
-        System.out.println("Deleted " + Database.with(Article.class).delete(ids) + " articles");
-        System.out.println("Deleted " + Links.deleteIds(ids) + " links");
-        System.out.println("Deleted " + Database.with(Url.class).delete(urls) + " urls");
+        deleteUrlMap(urlsToDelete);
         urlsToDelete.clear();
       }
     }
+    deleteUrlMap(urlsToDelete);
+  }
+
+  private static void deleteUrlMap(Map<String, String> urlsToDelete) throws DatabaseSchemaException {
+    List<String> ids = Lists.newArrayList();
+    for (Map.Entry<String, String> urlToDelete : urlsToDelete.entrySet()) {
+      System.out.println("Deleting url: " + urlToDelete.getKey());
+      ids.add(urlToDelete.getValue());
+    }
+    System.out.println("Deleted " + Database.with(Article.class).delete(ids) + " articles");
+    System.out.println("Deleted " + Links.deleteIds(ids) + " links");
+    System.out.println("Deleted " + Database.with(Url.class).delete(ids) + " urls");
   }
 }
 

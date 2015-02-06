@@ -21,20 +21,39 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.UrlWhitelist;
+import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.Distribution;
 import com.janknspank.proto.EnumsProto.IndustryCode;
+import com.janknspank.rank.DistributionBuilder;
 
 public class IndustryVector {
   private static final File INDUSTRIES_DIRECTORY = new File("classifier/");
   private static final Pattern INDUSTRY_SUBDIRECTORY_PATTERN = Pattern.compile("([0-9]+)-.*");
+  private static final List<Vector> __DOCUMENT_VECTORS = Lists.newArrayList();
 
-  public static Vector get(int industryCodeId) throws ClassifierException {
+  public static synchronized Vector get(int industryCodeId) throws ClassifierException {
     return get(IndustryCodes.getFromIndustryCodeId(industryCodeId));
+  }
+
+  public static synchronized Distribution getDistribution(IndustryCode industryCode)
+      throws ClassifierException {
+    return DistributionBuilder.fromFile(getDistributionFileForIndustry(industryCode));
   }
 
   public static Vector get(IndustryCode industryCode) throws ClassifierException {
     return Vector.fromFile(getVectorFileForIndustry(industryCode));
+  }
+
+  private static List<Vector> getDocumentVectors() throws DatabaseSchemaException {
+    if (__DOCUMENT_VECTORS.isEmpty()) {
+      for (Article article : Database.with(Article.class).get(new QueryOption.Limit(5000))) {
+        __DOCUMENT_VECTORS.add(new Vector(article));
+      }
+    }
+    return __DOCUMENT_VECTORS;
   }
 
   private static void createVectorForIndustryCode(IndustryCode industryCode)
@@ -73,12 +92,28 @@ public class IndustryVector {
 
     // 3. Convert them into the industry vector
     System.out.println("Calculating vector...");
-    new Vector(articles, getBlacklist(industryCode))
-        .writeToFile(getVectorFileForIndustry(industryCode));
+    Vector vector = new Vector(articles, getBlacklist(industryCode));
+
+    // 4. Write the industry vector and its effective distribution to disk.
+    vector.writeToFile(getVectorFileForIndustry(industryCode));
+    getDistributionForVector(vector).writeToFile(getDistributionFileForIndustry(industryCode));
+  }
+
+  private static DistributionBuilder getDistributionForVector(Vector industryVector)
+      throws ClassifierException, DatabaseSchemaException {
+    DistributionBuilder builder = new DistributionBuilder();
+    for (Vector documentVector : getDocumentVectors()) {
+      builder.add(industryVector.getCosineSimilarity(UniverseVector.getInstance(), documentVector));
+    }
+    return builder;
   }
 
   private static File getVectorFileForIndustry(IndustryCode industryCode) {
     return new File(getDirectoryForIndustry(industryCode) + "/industry.vector");
+  }
+
+  private static File getDistributionFileForIndustry(IndustryCode industryCode) {
+    return new File(getDirectoryForIndustry(industryCode) + "/industry.distribution");
   }
 
   static File getDirectoryForIndustry(IndustryCode industryCode) {

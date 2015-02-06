@@ -204,7 +204,7 @@ public class JonBenchmark {
     System.out.println("Negatives: " + negatives + " (GOOD!)");
     System.out.println("Percent correct: " +
         (int) (100 * (((double) positives + negatives)
-            / (GOOD_URLS.size() + BAD_URLS.size()))) + "%");
+            / (goodScoreMap.size() + badScoreMap.size()))) + "%");
   }
 
   /**

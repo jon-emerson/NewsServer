@@ -1,7 +1,6 @@
 package com.janknspank.rank;
 
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.User;
 
 public class HeuristicScorer extends Scorer {

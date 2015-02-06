@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import org.bson.types.BasicBSONList;
 import org.junit.Test;
 
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.Entity.EntityTopic;
 import com.janknspank.proto.CoreProto.Entity.EntityTopic.Context;
@@ -36,7 +37,7 @@ public class MongoizerTest {
       .build();
 
   @Test
-  public void test() throws Exception {
+  public void testToDBObject() throws Exception {
     BasicDBObject dbObject = Mongoizer.toDBObject(ENTITY);
     assertEquals("01234567890123456789abcd", dbObject.getObjectId("_id").toHexString());
     assertEquals(ENTITY.getSource(), Source.valueOf(dbObject.getString("source")));
@@ -78,5 +79,27 @@ public class MongoizerTest {
     assertFalse(translatedEntity.getTopic(1).hasType());
     assertFalse(ENTITY.getTopic(1).hasContext()); // Test of this test.
     assertFalse(translatedEntity.getTopic(1).hasContext());
+  }
+
+  @Test
+  public void test() throws Exception {
+    ArticleKeyword articleKeyword = ArticleKeyword.newBuilder()
+        .setKeyword("Jorge Pasilda")
+        .setSource(ArticleKeyword.Source.META_TAG)
+        .setStrength(15)
+        .setType("p")
+        .build();
+    BasicDBObject dbObject = Mongoizer.toDBObject(articleKeyword);
+    assertEquals("Jorge Pasilda", dbObject.getString("keyword"));
+    assertEquals(ArticleKeyword.Source.META_TAG.toString(), dbObject.getString("source"));
+    assertEquals(15, dbObject.getInt("strength"));
+    assertEquals("p", dbObject.getString("type"));
+
+    // Now, put an invalid enum value into the dbObject, and make sure that we
+    // don't crash while parsing it.  (Instead, the enum should  be undefined.)
+    dbObject.put("source", "FUTURE_SOURCE_XXX");
+    ArticleKeyword keywordFromFuture = Mongoizer.fromDBObject(dbObject, ArticleKeyword.class);
+    assertEquals("Jorge Pasilda", keywordFromFuture.getKeyword());
+    assertFalse("Source should not be set.", keywordFromFuture.hasSource());
   }
 }

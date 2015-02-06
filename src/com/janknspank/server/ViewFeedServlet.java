@@ -27,9 +27,6 @@ public class ViewFeedServlet extends StandardServlet {
   /**
    * Returns any Soy data necessary for rendering the .main template for this
    * servlet's Soy page.
-   * @throws DatabaseSchemaException 
-   * @throws DatabaseRequestException 
-   * @throws BiznessException 
    */
   @Override
   protected SoyMapData getSoyMapData(HttpServletRequest req)
