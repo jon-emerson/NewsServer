@@ -58,13 +58,13 @@ public class IndustryClassifier {
       ArticleOrBuilder article, IndustryCode industryCode) throws ClassifierException {
     Vector vector = IndustryVector.get(industryCode);
     Vector articleVector = new Vector(article);
-    double similarity = articleVector.getCosineSimilarity(UniverseVector.getInstance(), vector);
-    double normalizedSimilarity = DistributionBuilder.projectQuantile(
-        industryDistributions.get(industryCode), similarity);
+    double rawSimilarity = articleVector.getCosineSimilarity(UniverseVector.getInstance(), vector);
+    double similarity = DistributionBuilder.projectQuantile(
+        industryDistributions.get(industryCode), rawSimilarity);
     ArticleIndustry classification = ArticleIndustry.newBuilder()
         .setIndustryCodeId(industryCode.getId())
+        .setRawSimilarity(rawSimilarity)
         .setSimilarity(similarity)
-        .setNormalizedSimilarity(normalizedSimilarity)
         .build();
     return classification;
   }

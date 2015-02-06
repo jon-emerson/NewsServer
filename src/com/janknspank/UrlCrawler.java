@@ -227,7 +227,9 @@ public class UrlCrawler {
       System.out.println("***** WEBSITE: " + website);
       Urls.put(
           Iterables.transform(
-              Iterables.filter(UrlFinder.findUrls(website), ArticleUrlDetector.PREDICATE),
+              Iterables.filter(
+                  Iterables.filter(UrlFinder.findUrls(website), ArticleUrlDetector.PREDICATE),
+                  UrlWhitelist.PREDICATE),
               UrlCleaner.TRANSFORM_FUNCTION),
           website, false /* isTweet */);
     }
