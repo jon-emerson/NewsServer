@@ -9,6 +9,7 @@ import com.google.common.collect.Iterables;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.IndustryCodes;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
@@ -19,7 +20,6 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleIndustry;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.rank.InputValuesGenerator;
 import com.janknspank.rank.NeuralNetworkScorer;
 
 @AuthenticationRequired
@@ -59,7 +59,8 @@ public class ViewFeedServlet extends StandardServlet {
                 new Function<Article, SoyMapData>() {
                   @Override
                   public SoyMapData apply(Article article) {
-                    SocialEngagement engagement = InputValuesGenerator.getLatestFacebookEngagement(article);
+                    SocialEngagement engagement =
+                        SocialEngagements.getForArticle(article, SocialEngagement.Site.FACEBOOK);
                     if (engagement == null) {
                       engagement = SocialEngagement.getDefaultInstance();
                     }
