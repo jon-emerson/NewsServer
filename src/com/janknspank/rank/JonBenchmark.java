@@ -17,7 +17,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public class JonBenchmark {
-  private static final List<String> GOOD_URLS = ImmutableList.of(
+  static final List<String> GOOD_URLS = ImmutableList.of(
       // Retiring announcement: Because I used to report through him at Google,
       // and he's a leader in the field.
       "http://techcrunch.com/2015/02/03/alan-eustace-google/",
@@ -86,7 +86,7 @@ public class JonBenchmark {
       "http://techcrunch.com/2015/02/04/bunkr-is-now-the-definitive-modern-presentation-tool-for-the-web/",
       "http://techcrunch.com/2015/02/04/microsoft-sunrise/");
 
-  private static final List<String> BAD_URLS = ImmutableList.of(
+  static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
       "http://techcrunch.com/2015/01/26/becoming-an-engineering-manager/",
       // Not relevant to me or my industry.
@@ -150,8 +150,8 @@ public class JonBenchmark {
       "http://www.cnn.com/2015/02/04/asia/taiwan-plane-crash-transasia/index.html",
       "http://money.cnn.com/2015/02/04/autos/toyota-camry-lawsuit/index.html",
       "http://www.businessinsider.com/argentina-president-makes-racist-joke-in-china-2015-2",
-      "http://www.businessinsider.com/alternative-uses-for-tinder-2015-2",
-      "http://www.businessinsider.com/most-visited-cities-in-the-world-2015-1");
+      "http://www.businessinsider.com/alternative-uses-for-tinder-2015-2");
+      //"http://www.businessinsider.com/most-visited-cities-in-the-world-2015-1");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {

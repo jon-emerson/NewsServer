@@ -19,33 +19,37 @@ public class HeuristicScorer extends Scorer {
   }
 
   public double getScore(User user, Article article) {
-    SocialEngagement engagement = getLatestFacebookEngagement(article);
-    if (engagement == null) {
-      engagement = SocialEngagement.getDefaultInstance();
-    }
-    long engagementCount = engagement.getLikeCount() + engagement.getCommentCount()
-        + engagement.getShareCount();
-
     double score = 0;
 
-    // Max Current workplace value: 0.2
+    // 1. Relevance to user's industries
+    score += 0.4 * InputValuesGenerator.relevanceToUserIndustries(user, article);
+
+    // 2. Relevance to social media
+    score += 0.3 * InputValuesGenerator.relevanceToSocialMedia(user, article);
+
+    // 3. Relevance to contacts
+    score += 0.3 * InputValuesGenerator.relevanceToContacts(user, article);
+
+    // 4. Relevance to current employer
     score += 0.2 * InputValuesGenerator.relevanceToCurrentEmployer(user, article);
 
-    // Matched interests up to 0.3
-    score += 0.3 * InputValuesGenerator.matchedInterestsCount(user, article);
+    // 5. Relevance to companies the user wants to work at
+    score += 0.2 * InputValuesGenerator.relevanceToCompaniesTheUserWantsToWorkAt(user, article);
+    
+    // 6. Relevance to skills
+    score += 0.2 * InputValuesGenerator.relevanceToSkills(user, article);
+    
+    // 7. Relevance to current role
+    score += 0.1 * InputValuesGenerator.relevanceToCurrentRole(user, article);
 
-    // Article length not super short: 0.1
-    if (article.getWordCount() > 300) {
-      score += 0.1;
-    }
+    // 8. Timeliness
+    score += 0.1 * InputValuesGenerator.timeliness(article);
 
-    // FB engagement count up to 0.3
-    if (engagementCount > 0) {
-      score += Math.min(Math.log(engagementCount) / 10, 0.3);
-    }
-
-    // Industry relevance
-    score += InputValuesGenerator.industryRelevance(user, article);
+    // 9. Past employers
+    score += 0.1 * InputValuesGenerator.relevanceToPastEmployers(user, article);
+    
+    // 10. Article text quality
+    score += 0.1 * InputValuesGenerator.articleTextQualityScore(article);
 
     return score;
   }
