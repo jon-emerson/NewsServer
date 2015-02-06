@@ -187,7 +187,10 @@ public class JonBenchmark {
       "http://www.businessinsider.com/finance-is-a-strange-industry-2014-8",
       "http://www.businessinsider.com/r-russias-finance-minister-sees-economy-shrinking-4-percent-in-2015-2014-12",
       "http://www.businessinsider.com/financial-advisor-perspectives-october-6-2014-10",
-      "http://www.businessinsider.com/r-china-corruption-watchdog-launches-inspections-eyes-sinopec-2014-11");
+      "http://www.businessinsider.com/r-china-corruption-watchdog-launches-inspections-eyes-sinopec-2014-11",
+      // Random uninteresting tech.
+      "http://techcrunch.com/2015/02/05/this-millennium-falcon-drone-can-make-the-kessel-run-in-less-than-twelve-parsecs/",
+      "http://techcrunch.com/2015/02/01/the-pirate-bay-returns/");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
