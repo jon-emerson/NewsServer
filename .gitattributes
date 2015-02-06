@@ -1,3 +1,4 @@
 # Treat vector files as binary.  Otherwise sometimes they get corrupted.
 *.vector binary
+*.distribution binary
 

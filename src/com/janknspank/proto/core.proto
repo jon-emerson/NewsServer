@@ -225,6 +225,12 @@ message VectorData {
     ];
   };
   repeated WordFrequency word_frequency = 2;
+
+  // A distribution score for how articles tend to do against this vector.
+  // Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+  // scores for outputs from the cosine similarity function for this vector
+  // against some large collection of articles.
+  optional Distribution distribution = 3;
 }
 
 // This stores a user's recommendation that a certain article be trained as
@@ -301,7 +307,7 @@ message Distribution {
     // the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
     // then the value would be 4, since it's the top-most value in the 80th
     // percentile.
-    optional int64 value = 2;
+    optional double value = 2;
 
     // The total number of data points included in this percentile, from 0 to
     // {@code percentile}.  This is the SUM of everything so far!!

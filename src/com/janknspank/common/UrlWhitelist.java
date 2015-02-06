@@ -165,6 +165,7 @@ public class UrlWhitelist {
    */
   private static final Pattern NYTIMES_ARTICLE_DOMAIN = Pattern.compile(
       "^(" + Joiner.on("|").join(new String[] {
+          "bits\\.blogs\\.nytimes\\.com",
           "dealbook\\.nytimes\\.com",
           "nytimes\\.com",
           "opinionator\\.blogs\\.nytimes\\.com",

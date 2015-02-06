@@ -5621,6 +5621,41 @@ public final class CoreProto {
      */
     com.janknspank.proto.CoreProto.VectorData.WordFrequencyOrBuilder getWordFrequencyOrBuilder(
         int index);
+
+    // optional .Distribution distribution = 3;
+    /**
+     * <code>optional .Distribution distribution = 3;</code>
+     *
+     * <pre>
+     * A distribution score for how articles tend to do against this vector.
+     * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+     * scores for outputs from the cosine similarity function for this vector
+     * against some large collection of articles.
+     * </pre>
+     */
+    boolean hasDistribution();
+    /**
+     * <code>optional .Distribution distribution = 3;</code>
+     *
+     * <pre>
+     * A distribution score for how articles tend to do against this vector.
+     * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+     * scores for outputs from the cosine similarity function for this vector
+     * against some large collection of articles.
+     * </pre>
+     */
+    com.janknspank.proto.CoreProto.Distribution getDistribution();
+    /**
+     * <code>optional .Distribution distribution = 3;</code>
+     *
+     * <pre>
+     * A distribution score for how articles tend to do against this vector.
+     * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+     * scores for outputs from the cosine similarity function for this vector
+     * against some large collection of articles.
+     * </pre>
+     */
+    com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder();
   }
   /**
    * Protobuf type {@code VectorData}
@@ -5689,6 +5724,19 @@ public final class CoreProto {
                 mutable_bitField0_ |= 0x00000002;
               }
               wordFrequency_.add(input.readMessage(com.janknspank.proto.CoreProto.VectorData.WordFrequency.PARSER, extensionRegistry));
+              break;
+            }
+            case 26: {
+              com.janknspank.proto.CoreProto.Distribution.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = distribution_.toBuilder();
+              }
+              distribution_ = input.readMessage(com.janknspank.proto.CoreProto.Distribution.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(distribution_);
+                distribution_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
               break;
             }
           }
@@ -6515,9 +6563,53 @@ public final class CoreProto {
       return wordFrequency_.get(index);
     }
 
+    // optional .Distribution distribution = 3;
+    public static final int DISTRIBUTION_FIELD_NUMBER = 3;
+    private com.janknspank.proto.CoreProto.Distribution distribution_;
+    /**
+     * <code>optional .Distribution distribution = 3;</code>
+     *
+     * <pre>
+     * A distribution score for how articles tend to do against this vector.
+     * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+     * scores for outputs from the cosine similarity function for this vector
+     * against some large collection of articles.
+     * </pre>
+     */
+    public boolean hasDistribution() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .Distribution distribution = 3;</code>
+     *
+     * <pre>
+     * A distribution score for how articles tend to do against this vector.
+     * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+     * scores for outputs from the cosine similarity function for this vector
+     * against some large collection of articles.
+     * </pre>
+     */
+    public com.janknspank.proto.CoreProto.Distribution getDistribution() {
+      return distribution_;
+    }
+    /**
+     * <code>optional .Distribution distribution = 3;</code>
+     *
+     * <pre>
+     * A distribution score for how articles tend to do against this vector.
+     * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+     * scores for outputs from the cosine similarity function for this vector
+     * against some large collection of articles.
+     * </pre>
+     */
+    public com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder() {
+      return distribution_;
+    }
+
     private void initFields() {
       documentCount_ = 0;
       wordFrequency_ = java.util.Collections.emptyList();
+      distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6537,6 +6629,9 @@ public final class CoreProto {
       for (int i = 0; i < wordFrequency_.size(); i++) {
         output.writeMessage(2, wordFrequency_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(3, distribution_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -6553,6 +6648,10 @@ public final class CoreProto {
       for (int i = 0; i < wordFrequency_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, wordFrequency_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, distribution_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6668,6 +6767,7 @@ public final class CoreProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getWordFrequencyFieldBuilder();
+          getDistributionFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6684,6 +6784,12 @@ public final class CoreProto {
         } else {
           wordFrequencyBuilder_.clear();
         }
+        if (distributionBuilder_ == null) {
+          distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+        } else {
+          distributionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -6724,6 +6830,14 @@ public final class CoreProto {
           result.wordFrequency_ = wordFrequency_;
         } else {
           result.wordFrequency_ = wordFrequencyBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (distributionBuilder_ == null) {
+          result.distribution_ = distribution_;
+        } else {
+          result.distribution_ = distributionBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -6769,6 +6883,9 @@ public final class CoreProto {
               wordFrequencyBuilder_.addAllMessages(other.wordFrequency_);
             }
           }
+        }
+        if (other.hasDistribution()) {
+          mergeDistribution(other.getDistribution());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7084,6 +7201,186 @@ public final class CoreProto {
           wordFrequency_ = null;
         }
         return wordFrequencyBuilder_;
+      }
+
+      // optional .Distribution distribution = 3;
+      private com.janknspank.proto.CoreProto.Distribution distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder> distributionBuilder_;
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      public boolean hasDistribution() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      public com.janknspank.proto.CoreProto.Distribution getDistribution() {
+        if (distributionBuilder_ == null) {
+          return distribution_;
+        } else {
+          return distributionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      public Builder setDistribution(com.janknspank.proto.CoreProto.Distribution value) {
+        if (distributionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          distribution_ = value;
+          onChanged();
+        } else {
+          distributionBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      public Builder setDistribution(
+          com.janknspank.proto.CoreProto.Distribution.Builder builderForValue) {
+        if (distributionBuilder_ == null) {
+          distribution_ = builderForValue.build();
+          onChanged();
+        } else {
+          distributionBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      public Builder mergeDistribution(com.janknspank.proto.CoreProto.Distribution value) {
+        if (distributionBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              distribution_ != com.janknspank.proto.CoreProto.Distribution.getDefaultInstance()) {
+            distribution_ =
+              com.janknspank.proto.CoreProto.Distribution.newBuilder(distribution_).mergeFrom(value).buildPartial();
+          } else {
+            distribution_ = value;
+          }
+          onChanged();
+        } else {
+          distributionBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      public Builder clearDistribution() {
+        if (distributionBuilder_ == null) {
+          distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+          onChanged();
+        } else {
+          distributionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      public com.janknspank.proto.CoreProto.Distribution.Builder getDistributionBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getDistributionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      public com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder() {
+        if (distributionBuilder_ != null) {
+          return distributionBuilder_.getMessageOrBuilder();
+        } else {
+          return distribution_;
+        }
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       *
+       * <pre>
+       * A distribution score for how articles tend to do against this vector.
+       * Included are 0%, 5%, 10%, 25%, 50%, 75%, 90%, 95%, and 100%-quantile
+       * scores for outputs from the cosine similarity function for this vector
+       * against some large collection of articles.
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder> 
+          getDistributionFieldBuilder() {
+        if (distributionBuilder_ == null) {
+          distributionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder>(
+                  distribution_,
+                  getParentForChildren(),
+                  isClean());
+          distribution_ = null;
+        }
+        return distributionBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:VectorData)
@@ -9585,9 +9882,9 @@ public final class CoreProto {
        */
       int getPercentile();
 
-      // optional int64 value = 2;
+      // optional double value = 2;
       /**
-       * <code>optional int64 value = 2;</code>
+       * <code>optional double value = 2;</code>
        *
        * <pre>
        * This is a representative value for the top of this percentile.  E.g. if
@@ -9598,7 +9895,7 @@ public final class CoreProto {
        */
       boolean hasValue();
       /**
-       * <code>optional int64 value = 2;</code>
+       * <code>optional double value = 2;</code>
        *
        * <pre>
        * This is a representative value for the top of this percentile.  E.g. if
@@ -9607,7 +9904,7 @@ public final class CoreProto {
        * percentile.
        * </pre>
        */
-      long getValue();
+      double getValue();
 
       // optional int64 data_point_count = 3;
       /**
@@ -9685,9 +9982,9 @@ public final class CoreProto {
                 percentile_ = input.readInt32();
                 break;
               }
-              case 16: {
+              case 17: {
                 bitField0_ |= 0x00000002;
-                value_ = input.readInt64();
+                value_ = input.readDouble();
                 break;
               }
               case 24: {
@@ -9761,11 +10058,11 @@ public final class CoreProto {
         return percentile_;
       }
 
-      // optional int64 value = 2;
+      // optional double value = 2;
       public static final int VALUE_FIELD_NUMBER = 2;
-      private long value_;
+      private double value_;
       /**
-       * <code>optional int64 value = 2;</code>
+       * <code>optional double value = 2;</code>
        *
        * <pre>
        * This is a representative value for the top of this percentile.  E.g. if
@@ -9778,7 +10075,7 @@ public final class CoreProto {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int64 value = 2;</code>
+       * <code>optional double value = 2;</code>
        *
        * <pre>
        * This is a representative value for the top of this percentile.  E.g. if
@@ -9787,7 +10084,7 @@ public final class CoreProto {
        * percentile.
        * </pre>
        */
-      public long getValue() {
+      public double getValue() {
         return value_;
       }
 
@@ -9819,7 +10116,7 @@ public final class CoreProto {
 
       private void initFields() {
         percentile_ = 0;
-        value_ = 0L;
+        value_ = 0D;
         dataPointCount_ = 0L;
       }
       private byte memoizedIsInitialized = -1;
@@ -9838,7 +10135,7 @@ public final class CoreProto {
           output.writeInt32(1, percentile_);
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeInt64(2, value_);
+          output.writeDouble(2, value_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           output.writeInt64(3, dataPointCount_);
@@ -9858,7 +10155,7 @@ public final class CoreProto {
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt64Size(2, value_);
+            .computeDoubleSize(2, value_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           size += com.google.protobuf.CodedOutputStream
@@ -9982,7 +10279,7 @@ public final class CoreProto {
           super.clear();
           percentile_ = 0;
           bitField0_ = (bitField0_ & ~0x00000001);
-          value_ = 0L;
+          value_ = 0D;
           bitField0_ = (bitField0_ & ~0x00000002);
           dataPointCount_ = 0L;
           bitField0_ = (bitField0_ & ~0x00000004);
@@ -10131,10 +10428,10 @@ public final class CoreProto {
           return this;
         }
 
-        // optional int64 value = 2;
-        private long value_ ;
+        // optional double value = 2;
+        private double value_ ;
         /**
-         * <code>optional int64 value = 2;</code>
+         * <code>optional double value = 2;</code>
          *
          * <pre>
          * This is a representative value for the top of this percentile.  E.g. if
@@ -10147,7 +10444,7 @@ public final class CoreProto {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>optional int64 value = 2;</code>
+         * <code>optional double value = 2;</code>
          *
          * <pre>
          * This is a representative value for the top of this percentile.  E.g. if
@@ -10156,11 +10453,11 @@ public final class CoreProto {
          * percentile.
          * </pre>
          */
-        public long getValue() {
+        public double getValue() {
           return value_;
         }
         /**
-         * <code>optional int64 value = 2;</code>
+         * <code>optional double value = 2;</code>
          *
          * <pre>
          * This is a representative value for the top of this percentile.  E.g. if
@@ -10169,14 +10466,14 @@ public final class CoreProto {
          * percentile.
          * </pre>
          */
-        public Builder setValue(long value) {
+        public Builder setValue(double value) {
           bitField0_ |= 0x00000002;
           value_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional int64 value = 2;</code>
+         * <code>optional double value = 2;</code>
          *
          * <pre>
          * This is a representative value for the top of this percentile.  E.g. if
@@ -10187,7 +10484,7 @@ public final class CoreProto {
          */
         public Builder clearValue() {
           bitField0_ = (bitField0_ & ~0x00000002);
-          value_ = 0L;
+          value_ = 0D;
           onChanged();
           return this;
         }
@@ -10904,28 +11201,29 @@ public final class CoreProto {
       "EDIA_SUBTOPIC\020\005\"Z\n\006Source\022\013\n\007UNKNOWN\020\000\022\031" +
       "\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPEDIA_LON" +
       "G_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003:\020\212\265\030\014MySQL.E" +
-      "ntity\"\302\001\n\nVectorData\022\034\n\016document_count\030\001" +
+      "ntity\"\347\001\n\nVectorData\022\034\n\016document_count\030\001" +
       " \001(\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 \003(\0132\031.Vec" +
-      "torData.WordFrequency\032c\n\rWordFrequency\022\026" +
-      "\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(" +
-      "\005B\004\210\246\035\001\022!\n\023document_occurences\030\003 \001(\005B\004\210\246" +
-      "\035\001\"\255\001\n\026TrainedArticleIndustry\022 \n\006url_id\030",
-      "\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_code" +
-      "_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\003" +
-      " \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB.Trai" +
-      "nedArticleIndustry\"\347\001\n\034TrainedArticleCla" +
-      "ssification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035" +
-      "\030\250\246\035\001\0225\n\033article_classification_code\030\002 \001" +
-      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210" +
-      "\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246" +
-      "\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArticleCl" +
-      "assification\"9\n\017InterpretedData\022\031\n\007artic",
-      "le\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\t\"\207\001\n\014Dist" +
-      "ribution\022,\n\npercentile\030\001 \003(\0132\030.Distribut" +
-      "ion.Percentile\032I\n\nPercentile\022\022\n\npercenti" +
-      "le\030\001 \001(\005\022\r\n\005value\030\002 \001(\003\022\030\n\020data_point_co" +
-      "unt\030\003 \001(\003B!\n\024com.janknspank.protoB\tCoreP" +
-      "roto"
+      "torData.WordFrequency\022#\n\014distribution\030\003 " +
+      "\001(\0132\r.Distribution\032c\n\rWordFrequency\022\026\n\004w" +
+      "ord\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(\005B\004" +
+      "\210\246\035\001\022!\n\023document_occurences\030\003 \001(\005B\004\210\246\035\001\"",
+      "\255\001\n\026TrainedArticleIndustry\022 \n\006url_id\030\001 \001" +
+      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_code_id" +
+      "\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\003 \001(" +
+      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB.Trained" +
+      "ArticleIndustry\"\347\001\n\034TrainedArticleClassi" +
+      "fication\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246" +
+      "\035\001\0225\n\033article_classification_code\030\002 \001(\tB" +
+      "\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001" +
+      "\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
+      "\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArticleClass",
+      "ification\"9\n\017InterpretedData\022\031\n\007article\030" +
+      "\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\t\"\207\001\n\014Distrib" +
+      "ution\022,\n\npercentile\030\001 \003(\0132\030.Distribution" +
+      ".Percentile\032I\n\nPercentile\022\022\n\npercentile\030" +
+      "\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_point_count" +
+      "\030\003 \001(\003B!\n\024com.janknspank.protoB\tCoreProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10967,7 +11265,7 @@ public final class CoreProto {
           internal_static_VectorData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_VectorData_descriptor,
-              new java.lang.String[] { "DocumentCount", "WordFrequency", });
+              new java.lang.String[] { "DocumentCount", "WordFrequency", "Distribution", });
           internal_static_VectorData_WordFrequency_descriptor =
             internal_static_VectorData_descriptor.getNestedTypes().get(0);
           internal_static_VectorData_WordFrequency_fieldAccessorTable = new

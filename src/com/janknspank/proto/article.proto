@@ -111,9 +111,16 @@ message ArticleIndustry {
     (storage_method) = PULL_OUT
   ];
 
-  optional double similarity = 2 [
-    (required) = YES,
-    (storage_method) = PULL_OUT
+  // Normalized similarity score for this article's relevance against the
+  // {@code industry_code_id} industry.  Range is between 0 and 1.  A score
+  // near 1 means this article is extremely relevant to the given industry.
+  // A score above 0.80 means its relevance is in the top 20% of articles.
+  optional double normalized_similarity = 2;
+
+  // Raw output from the cosine similarity function for the relevance of this
+  // article to the {@code industry_code_id} industry.
+  optional double similarity = 3 [
+    (required) = YES
   ];
 }
 

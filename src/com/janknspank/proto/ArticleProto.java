@@ -4152,13 +4152,47 @@ public final class ArticleProto {
      */
     int getIndustryCodeId();
 
-    // optional double similarity = 2;
+    // optional double normalized_similarity = 2;
     /**
-     * <code>optional double similarity = 2;</code>
+     * <code>optional double normalized_similarity = 2;</code>
+     *
+     * <pre>
+     * Normalized similarity score for this article's relevance against the
+     * {&#64;code industry_code_id} industry.  Range is between 0 and 1.  A score
+     * near 1 means this article is extremely relevant to the given industry.
+     * A score above 0.80 means its relevance is in the top 20% of articles.
+     * </pre>
+     */
+    boolean hasNormalizedSimilarity();
+    /**
+     * <code>optional double normalized_similarity = 2;</code>
+     *
+     * <pre>
+     * Normalized similarity score for this article's relevance against the
+     * {&#64;code industry_code_id} industry.  Range is between 0 and 1.  A score
+     * near 1 means this article is extremely relevant to the given industry.
+     * A score above 0.80 means its relevance is in the top 20% of articles.
+     * </pre>
+     */
+    double getNormalizedSimilarity();
+
+    // optional double similarity = 3;
+    /**
+     * <code>optional double similarity = 3;</code>
+     *
+     * <pre>
+     * Raw output from the cosine similarity function for the relevance of this
+     * article to the {&#64;code industry_code_id} industry.
+     * </pre>
      */
     boolean hasSimilarity();
     /**
-     * <code>optional double similarity = 2;</code>
+     * <code>optional double similarity = 3;</code>
+     *
+     * <pre>
+     * Raw output from the cosine similarity function for the relevance of this
+     * article to the {&#64;code industry_code_id} industry.
+     * </pre>
      */
     double getSimilarity();
   }
@@ -4220,6 +4254,11 @@ public final class ArticleProto {
             }
             case 17: {
               bitField0_ |= 0x00000002;
+              normalizedSimilarity_ = input.readDouble();
+              break;
+            }
+            case 25: {
+              bitField0_ |= 0x00000004;
               similarity_ = input.readDouble();
               break;
             }
@@ -4279,17 +4318,57 @@ public final class ArticleProto {
       return industryCodeId_;
     }
 
-    // optional double similarity = 2;
-    public static final int SIMILARITY_FIELD_NUMBER = 2;
-    private double similarity_;
+    // optional double normalized_similarity = 2;
+    public static final int NORMALIZED_SIMILARITY_FIELD_NUMBER = 2;
+    private double normalizedSimilarity_;
     /**
-     * <code>optional double similarity = 2;</code>
+     * <code>optional double normalized_similarity = 2;</code>
+     *
+     * <pre>
+     * Normalized similarity score for this article's relevance against the
+     * {&#64;code industry_code_id} industry.  Range is between 0 and 1.  A score
+     * near 1 means this article is extremely relevant to the given industry.
+     * A score above 0.80 means its relevance is in the top 20% of articles.
+     * </pre>
      */
-    public boolean hasSimilarity() {
+    public boolean hasNormalizedSimilarity() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional double similarity = 2;</code>
+     * <code>optional double normalized_similarity = 2;</code>
+     *
+     * <pre>
+     * Normalized similarity score for this article's relevance against the
+     * {&#64;code industry_code_id} industry.  Range is between 0 and 1.  A score
+     * near 1 means this article is extremely relevant to the given industry.
+     * A score above 0.80 means its relevance is in the top 20% of articles.
+     * </pre>
+     */
+    public double getNormalizedSimilarity() {
+      return normalizedSimilarity_;
+    }
+
+    // optional double similarity = 3;
+    public static final int SIMILARITY_FIELD_NUMBER = 3;
+    private double similarity_;
+    /**
+     * <code>optional double similarity = 3;</code>
+     *
+     * <pre>
+     * Raw output from the cosine similarity function for the relevance of this
+     * article to the {&#64;code industry_code_id} industry.
+     * </pre>
+     */
+    public boolean hasSimilarity() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional double similarity = 3;</code>
+     *
+     * <pre>
+     * Raw output from the cosine similarity function for the relevance of this
+     * article to the {&#64;code industry_code_id} industry.
+     * </pre>
      */
     public double getSimilarity() {
       return similarity_;
@@ -4297,6 +4376,7 @@ public final class ArticleProto {
 
     private void initFields() {
       industryCodeId_ = 0;
+      normalizedSimilarity_ = 0D;
       similarity_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
@@ -4315,7 +4395,10 @@ public final class ArticleProto {
         output.writeInt32(1, industryCodeId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeDouble(2, similarity_);
+        output.writeDouble(2, normalizedSimilarity_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeDouble(3, similarity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4332,7 +4415,11 @@ public final class ArticleProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, similarity_);
+          .computeDoubleSize(2, normalizedSimilarity_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(3, similarity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4452,8 +4539,10 @@ public final class ArticleProto {
         super.clear();
         industryCodeId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        similarity_ = 0D;
+        normalizedSimilarity_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000002);
+        similarity_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -4489,6 +4578,10 @@ public final class ArticleProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
+        result.normalizedSimilarity_ = normalizedSimilarity_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
         result.similarity_ = similarity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -4508,6 +4601,9 @@ public final class ArticleProto {
         if (other == com.janknspank.proto.ArticleProto.ArticleIndustry.getDefaultInstance()) return this;
         if (other.hasIndustryCodeId()) {
           setIndustryCodeId(other.getIndustryCodeId());
+        }
+        if (other.hasNormalizedSimilarity()) {
+          setNormalizedSimilarity(other.getNormalizedSimilarity());
         }
         if (other.hasSimilarity()) {
           setSimilarity(other.getSimilarity());
@@ -4572,34 +4668,115 @@ public final class ArticleProto {
         return this;
       }
 
-      // optional double similarity = 2;
-      private double similarity_ ;
+      // optional double normalized_similarity = 2;
+      private double normalizedSimilarity_ ;
       /**
-       * <code>optional double similarity = 2;</code>
+       * <code>optional double normalized_similarity = 2;</code>
+       *
+       * <pre>
+       * Normalized similarity score for this article's relevance against the
+       * {&#64;code industry_code_id} industry.  Range is between 0 and 1.  A score
+       * near 1 means this article is extremely relevant to the given industry.
+       * A score above 0.80 means its relevance is in the top 20% of articles.
+       * </pre>
        */
-      public boolean hasSimilarity() {
+      public boolean hasNormalizedSimilarity() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional double similarity = 2;</code>
+       * <code>optional double normalized_similarity = 2;</code>
+       *
+       * <pre>
+       * Normalized similarity score for this article's relevance against the
+       * {&#64;code industry_code_id} industry.  Range is between 0 and 1.  A score
+       * near 1 means this article is extremely relevant to the given industry.
+       * A score above 0.80 means its relevance is in the top 20% of articles.
+       * </pre>
+       */
+      public double getNormalizedSimilarity() {
+        return normalizedSimilarity_;
+      }
+      /**
+       * <code>optional double normalized_similarity = 2;</code>
+       *
+       * <pre>
+       * Normalized similarity score for this article's relevance against the
+       * {&#64;code industry_code_id} industry.  Range is between 0 and 1.  A score
+       * near 1 means this article is extremely relevant to the given industry.
+       * A score above 0.80 means its relevance is in the top 20% of articles.
+       * </pre>
+       */
+      public Builder setNormalizedSimilarity(double value) {
+        bitField0_ |= 0x00000002;
+        normalizedSimilarity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double normalized_similarity = 2;</code>
+       *
+       * <pre>
+       * Normalized similarity score for this article's relevance against the
+       * {&#64;code industry_code_id} industry.  Range is between 0 and 1.  A score
+       * near 1 means this article is extremely relevant to the given industry.
+       * A score above 0.80 means its relevance is in the top 20% of articles.
+       * </pre>
+       */
+      public Builder clearNormalizedSimilarity() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        normalizedSimilarity_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional double similarity = 3;
+      private double similarity_ ;
+      /**
+       * <code>optional double similarity = 3;</code>
+       *
+       * <pre>
+       * Raw output from the cosine similarity function for the relevance of this
+       * article to the {&#64;code industry_code_id} industry.
+       * </pre>
+       */
+      public boolean hasSimilarity() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional double similarity = 3;</code>
+       *
+       * <pre>
+       * Raw output from the cosine similarity function for the relevance of this
+       * article to the {&#64;code industry_code_id} industry.
+       * </pre>
        */
       public double getSimilarity() {
         return similarity_;
       }
       /**
-       * <code>optional double similarity = 2;</code>
+       * <code>optional double similarity = 3;</code>
+       *
+       * <pre>
+       * Raw output from the cosine similarity function for the relevance of this
+       * article to the {&#64;code industry_code_id} industry.
+       * </pre>
        */
       public Builder setSimilarity(double value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         similarity_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional double similarity = 2;</code>
+       * <code>optional double similarity = 3;</code>
+       *
+       * <pre>
+       * Raw output from the cosine similarity function for the relevance of this
+       * article to the {&#64;code industry_code_id} industry.
+       * </pre>
        */
       public Builder clearSimilarity() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         similarity_ = 0D;
         onChanged();
         return this;
@@ -5484,16 +5661,17 @@ public final class ArticleProto {
       "\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n" +
       "\006source\030\004 \001(\0162\026.ArticleKeyword.Source:\007U" +
       "NKNOWN\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r" +
-      "\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\"S\n\017ArticleIn",
+      "\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\"n\n\017ArticleIn",
       "dustry\022\"\n\020industry_code_id\030\001 \001(\005B\010\210\246\035\001\220\246" +
-      "\035\005\022\034\n\nsimilarity\030\002 \001(\001B\010\210\246\035\001\220\246\035\005\"\336\001\n\020Soc" +
-      "ialEngagement\022-\n\004site\030\001 \001(\0162\026.SocialEnga" +
-      "gement.Site:\007UNKNOWN\022\030\n\nlike_count\030\002 \001(\003" +
-      "B\004\220\246\035\005\022\031\n\013share_count\030\003 \001(\003B\004\220\246\035\005\022\033\n\rcom" +
-      "ment_count\030\004 \001(\003B\004\220\246\035\005\022\031\n\013create_time\030\005 " +
-      "\001(\003B\004\220\246\035\005\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBO" +
-      "OK\020\001\022\013\n\007TWITTER\020\002B$\n\024com.janknspank.prot" +
-      "oB\014ArticleProto"
+      "\035\005\022\035\n\025normalized_similarity\030\002 \001(\001\022\030\n\nsim" +
+      "ilarity\030\003 \001(\001B\004\210\246\035\001\"\336\001\n\020SocialEngagement" +
+      "\022-\n\004site\030\001 \001(\0162\026.SocialEngagement.Site:\007" +
+      "UNKNOWN\022\030\n\nlike_count\030\002 \001(\003B\004\220\246\035\005\022\031\n\013sha" +
+      "re_count\030\003 \001(\003B\004\220\246\035\005\022\033\n\rcomment_count\030\004 " +
+      "\001(\003B\004\220\246\035\005\022\031\n\013create_time\030\005 \001(\003B\004\220\246\035\005\".\n\004" +
+      "Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITT" +
+      "ER\020\002B$\n\024com.janknspank.protoB\014ArticlePro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5517,7 +5695,7 @@ public final class ArticleProto {
           internal_static_ArticleIndustry_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleIndustry_descriptor,
-              new java.lang.String[] { "IndustryCodeId", "Similarity", });
+              new java.lang.String[] { "IndustryCodeId", "NormalizedSimilarity", "Similarity", });
           internal_static_SocialEngagement_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_SocialEngagement_fieldAccessorTable = new
@@ -5559,7 +5737,6 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

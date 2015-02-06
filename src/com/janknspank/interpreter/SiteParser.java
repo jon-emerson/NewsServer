@@ -30,7 +30,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES = Maps.newHashMap();
   static {
     DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
-        ".article p",
+        ".article > p", // DO NOT EXPAND THIS TO .article p, ALL USER COMMENTS GET PULLED!
         "#story > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
         "#storyText p",
