@@ -3,11 +3,10 @@ package com.janknspank.rank;
 import org.neuroph.core.NeuralNetwork;
 
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 9;
+  static final int INPUT_NODES_COUNT = 10;
   static final int OUTPUT_NODES_COUNT = 1;
   static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/default_mlp_" +
@@ -32,47 +31,36 @@ public final class NeuralNetworkScorer extends Scorer {
   }
 
   static double[] generateInputNodes(User user, Article article) {
-    SocialEngagement engagement = getLatestFacebookEngagement(article);
-    if (engagement == null) {
-      engagement = SocialEngagement.getDefaultInstance();
-    }
-
     return new double[] {
-      // Input 1: equals 1 if article is about the user's current place of work
-      InputValuesGenerator.isAboutCurrentEmployer(user, article) ? 1 : 0,
+        // 1. Relevance to user's industries
+        InputValuesGenerator.relevanceToUserIndustries(user, article),
 
-      // Input 2: # of topics matches between user and article
-      sigmoid(InputValuesGenerator.matchedInterestsCount(user, article)),
+        // 2. Relevance to social media
+        InputValuesGenerator.relevanceToSocialMedia(user, article),
 
-      // Input 3: the length of the article
-      // TODO: improve normalization
-      // Use average wordcount and max word count
-      sigmoid(Math.log(article.getWordCount())),
+        // 3. Relevance to contacts
+        InputValuesGenerator.relevanceToContacts(user, article),
 
-      // Input 4: Facebook likes
-      sigmoid(engagement.getLikeCount()),
+        // 4. Relevance to current employer
+        InputValuesGenerator.relevanceToCurrentEmployer(user, article),
 
-      // Input 5: Facebook comments
-      sigmoid(engagement.getCommentCount()),
+        // 5. Relevance to companies the user wants to work at
+        InputValuesGenerator.relevanceToCompaniesTheUserWantsToWorkAt(user, article),
 
-      // Input 6: Facebook shares
-      sigmoid(engagement.getShareCount()),
+        // 6. Relevance to skills
+        InputValuesGenerator.relevanceToSkills(user, article),
 
-      // Input 7: Facebook likes velocity
-      sigmoid(getLikeVelocity(article)),
+        // 7. Relevance to current role
+        InputValuesGenerator.relevanceToCurrentRole(user, article),
 
-      // Input 8: Article age
-      sigmoid(System.currentTimeMillis() - article.getPublishedTime()),
+        // 8. Timeliness
+        InputValuesGenerator.timeliness(article),
 
-      // Input 9: User has intent to stay on top of industry
-      Math.min(1, InputValuesGenerator.industryRelevance(user, article))
+        // 9. Past employers
+        InputValuesGenerator.relevanceToPastEmployers(user, article),
 
-      // Input 10: Article is educational and about a skill
-      // the user wants to develop
-
-      // TODO: inputs with article classifications like "data-rich"
-
-      // More inputs...
+        // 10. Article text quality
+        InputValuesGenerator.articleTextQualityScore(article)
     };
   }
 
@@ -97,9 +85,5 @@ public final class NeuralNetworkScorer extends Scorer {
     System.out.println("    generate input nodes: " + timeToGenerateInputNodes +
         ", compute output: " + timeToCalculate);
     return neuralNetwork.getOutput()[0];
-  }
-
-  private static double sigmoid(double x) {
-    return 1 / (1 + Math.exp(-x));
   }
 }

@@ -6659,10 +6659,6 @@ public final class UserProto {
        * <code>LINKED_IN_PROFILE = 5;</code>
        */
       LINKED_IN_PROFILE(5, 5),
-      /**
-       * <code>LINKED_IN_SKILLS = 6;</code>
-       */
-      LINKED_IN_SKILLS(6, 6),
       ;
 
       /**
@@ -6701,10 +6697,6 @@ public final class UserProto {
        * <code>LINKED_IN_PROFILE = 5;</code>
        */
       public static final int LINKED_IN_PROFILE_VALUE = 5;
-      /**
-       * <code>LINKED_IN_SKILLS = 6;</code>
-       */
-      public static final int LINKED_IN_SKILLS_VALUE = 6;
 
 
       public final int getNumber() { return value; }
@@ -6717,7 +6709,6 @@ public final class UserProto {
           case 3: return ADDRESS_BOOK;
           case 4: return LINKED_IN_CONNECTIONS;
           case 5: return LINKED_IN_PROFILE;
-          case 6: return LINKED_IN_SKILLS;
           default: return null;
         }
       }
@@ -10831,26 +10822,26 @@ public final class UserProto {
       "\001(\0162\024.UserIndustry.SourceB\004\210\246\035\001\022\031\n\013creat" +
       "e_time\030\003 \001(\003B\004\210\246\035\001\"E\n\006Source\022\013\n\007UNKNOWN\020" +
       "\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED_IN_" +
-      "PROFILE\020\003\"\255\002\n\010Interest\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001" +
+      "PROFILE\020\003\"\226\002\n\010Interest\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001" +
       "\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230",
       "\246\035d\022&\n\006source\030\003 \001(\0162\020.Interest.SourceB\004\210" +
       "\246\035\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n\013create_ti" +
-      "me\030\005 \001(\003B\004\210\246\035\001\"\210\001\n\006Source\022\013\n\007UNKNOWN\020\000\022\010" +
-      "\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDRESS_BOOK\020" +
-      "\003\022\031\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n\021LINKED_I" +
-      "N_PROFILE\020\005\022\024\n\020LINKED_IN_SKILLS\020\006\"C\n\006Int" +
-      "ent\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013c" +
-      "reate_time\030\002 \001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfi" +
-      "le\0223\n\020current_employer\030\001 \001(\0132\031.LinkedInP" +
-      "rofile.Employer\0220\n\rpast_employer\030\002 \003(\0132\031",
-      ".LinkedInProfile.Employer\022\030\n\004data\030\003 \001(\tB" +
-      "\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z" +
-      "\n\010Employer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005ti" +
-      "tle\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004" +
-      "\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001" +
-      "(\003\"J\n\023LinkedInConnections\022\030\n\004data\030\002 \001(\tB" +
-      "\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!" +
-      "\n\024com.janknspank.protoB\tUserProto"
+      "me\030\005 \001(\003B\004\210\246\035\001\"r\n\006Source\022\013\n\007UNKNOWN\020\000\022\010\n" +
+      "\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDRESS_BOOK\020\003" +
+      "\022\031\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n\021LINKED_IN" +
+      "_PROFILE\020\005\"C\n\006Intent\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001" +
+      "\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"" +
+      "\251\002\n\017LinkedInProfile\0223\n\020current_employer\030" +
+      "\001 \001(\0132\031.LinkedInProfile.Employer\0220\n\rpast" +
+      "_employer\030\002 \003(\0132\031.LinkedInProfile.Employ",
+      "er\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_t" +
+      "ime\030\004 \001(\003B\004\210\246\035\001\032z\n\010Employer\022\026\n\004name\030\001 \001(" +
+      "\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\t" +
+      "entity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004 \001(" +
+      "\003\022\020\n\010end_time\030\005 \001(\003\"J\n\023LinkedInConnectio" +
+      "ns\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_t" +
+      "ime\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknspank.protoB" +
+      "\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

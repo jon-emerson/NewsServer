@@ -97,13 +97,13 @@ public class UserInterests {
       skillInterests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
           .setKeyword(skill)
-          .setSource(Source.LINKED_IN_SKILLS)
+          .setSource(Source.LINKED_IN_PROFILE)
           .setType(TYPE_SKILL)
           .setCreateTime(System.currentTimeMillis())
           .build());
     }
 
-    return updateInterests(user, skillInterests, Source.LINKED_IN_SKILLS);
+    return updateInterests(user, skillInterests, Source.LINKED_IN_PROFILE);
   }
 
   /**

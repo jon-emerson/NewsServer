@@ -19,8 +19,8 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleIndustry;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.rank.HeuristicScorer;
-import com.janknspank.rank.Scorer;
+import com.janknspank.rank.InputValuesGenerator;
+import com.janknspank.rank.NeuralNetworkScorer;
 
 @AuthenticationRequired
 public class ViewFeedServlet extends StandardServlet {
@@ -43,7 +43,9 @@ public class ViewFeedServlet extends StandardServlet {
         // Uncomment to play with profile data
         
         final Map<Article, Double> articlesToRankMap =
-            Articles.getArticlesAndScores(user, HeuristicScorer.getInstance());
+//            Articles.getArticlesAndScores(user, HeuristicScorer.getInstance());
+            Articles.getArticlesAndScores(user, NeuralNetworkScorer.getInstance());
+            
 
         // Sort the articles
         TopList<Article, Double> articles = new TopList<>(articlesToRankMap.size());
@@ -57,7 +59,7 @@ public class ViewFeedServlet extends StandardServlet {
                 new Function<Article, SoyMapData>() {
                   @Override
                   public SoyMapData apply(Article article) {
-                    SocialEngagement engagement = Scorer.getLatestFacebookEngagement(article);
+                    SocialEngagement engagement = InputValuesGenerator.getLatestFacebookEngagement(article);
                     if (engagement == null) {
                       engagement = SocialEngagement.getDefaultInstance();
                     }

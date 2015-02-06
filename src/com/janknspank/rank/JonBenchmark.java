@@ -1,5 +1,6 @@
 package com.janknspank.rank;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public class JonBenchmark {
-  private static final List<String> GOOD_URLS = ImmutableList.of(
+  static final List<String> GOOD_URLS = ImmutableList.of(
       // Retiring announcement: Because I used to report through him at Google,
       // and he's a leader in the field.
       "http://techcrunch.com/2015/02/03/alan-eustace-google/",
@@ -95,7 +96,7 @@ public class JonBenchmark {
       // Most important tech business news of the day: Two rivals found common ground.
       "http://techcrunch.com/2015/02/05/twitter-confirms-new-google-firehose-deal-to-distribute-traffic-to-logged-out-users/");
 
-  private static final List<String> BAD_URLS = ImmutableList.of(
+  static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
       "http://techcrunch.com/2015/01/26/becoming-an-engineering-manager/",
       // Not relevant to me or my industry.
@@ -195,10 +196,22 @@ public class JonBenchmark {
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
     Map<Article, Double> scoreMap = Maps.newHashMap();
-    for (Article article : ArticleCrawler.getArticles(urlStrings).values()) {
-      scoreMap.put(article, scorer.getScore(user, article));
+    Collection<Article> articles = ArticleCrawler.getArticles(urlStrings).values();
+    for (Article article : articles) {
+      // Use the holdback for the benchmark. The other 80% are used
+      // to train the neural network.
+      if (isInTrainingHoldback(article)) {
+        scoreMap.put(article, scorer.getScore(user, article));
+      }
     }
     return scoreMap;
+  }
+  
+  static boolean isInTrainingHoldback(Article article) {
+    if (article.getUrl().hashCode() % 5 == 0) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -230,7 +243,7 @@ public class JonBenchmark {
     System.out.println("Negatives: " + negatives + " (GOOD!)");
     System.out.println("Percent correct: " +
         (int) (100 * (((double) positives + negatives)
-            / (GOOD_URLS.size() + BAD_URLS.size()))) + "%");
+            / (goodScoreMap.size() + badScoreMap.size()))) + "%");
   }
 
   /**

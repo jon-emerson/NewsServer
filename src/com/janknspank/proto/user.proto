@@ -154,7 +154,6 @@ message Interest {
     ADDRESS_BOOK = 3; // Phone address book.
     LINKED_IN_CONNECTIONS = 4;
     LINKED_IN_PROFILE = 5;
-    LINKED_IN_SKILLS = 6;
   }
   optional Source source = 3 [
     (required) = YES
