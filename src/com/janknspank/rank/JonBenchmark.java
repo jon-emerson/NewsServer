@@ -1,5 +1,6 @@
 package com.janknspank.rank;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -156,10 +157,22 @@ public class JonBenchmark {
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
     Map<Article, Double> scoreMap = Maps.newHashMap();
-    for (Article article : ArticleCrawler.getArticles(urlStrings).values()) {
-      scoreMap.put(article, scorer.getScore(user, article));
+    Collection<Article> articles = ArticleCrawler.getArticles(urlStrings).values();
+    for (Article article : articles) {
+      // Use the holdback for the benchmark. The other 80% are used
+      // to train the neural network.
+      if (isInTrainingHoldback(article)) {
+        scoreMap.put(article, scorer.getScore(user, article));
+      }
     }
     return scoreMap;
+  }
+  
+  static boolean isInTrainingHoldback(Article article) {
+    if (article.getUrl().hashCode() % 5 == 0) {
+      return true;
+    }
+    return false;
   }
 
   /**

@@ -66,6 +66,10 @@ public class IndustryVector {
         ArticleCrawler.getArticles(urls).values(),
         Articles.getArticlesForKeywords(words));
     System.out.println(Iterables.size(articles) + " articles found");
+    
+    // TODO 2.5 Output # articles / seed word - make it easy to prune out
+    // empty seed words, or find gaps in the corpus
+    
 
     // 3. Convert them into the industry vector
     System.out.println("Calculating vector...");

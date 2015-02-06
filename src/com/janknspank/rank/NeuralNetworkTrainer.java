@@ -114,10 +114,16 @@ public class NeuralNetworkTrainer implements LearningEventListener {
         new QueryOption.WhereEquals("email", "panaceaa@gmail.com"));
     Hashtable<Article, Double> ratings = new Hashtable<>();
     for (Article article : ArticleCrawler.getArticles(JonBenchmark.BAD_URLS).values()) {
-      ratings.put(article, 0.0 + (Math.random() / 5));
+      // If the article isn't in the holdback, use it for training.
+      if (!JonBenchmark.isInTrainingHoldback(article)) {
+        ratings.put(article, 0.0);
+      }
     }
     for (Article article : ArticleCrawler.getArticles(JonBenchmark.GOOD_URLS).values()) {
-      ratings.put(article, 1.0 - (Math.random() / 5));
+      // If the article isn't in the holdback, use it for training.
+      if (!JonBenchmark.isInTrainingHoldback(article)) {
+        ratings.put(article, 1.0);
+      }
     }
 
     NeuralNetwork neuralNetwork =
