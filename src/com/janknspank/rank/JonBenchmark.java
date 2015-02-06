@@ -84,7 +84,16 @@ public class JonBenchmark {
       "http://techcrunch.com/2015/02/04/disrupt-ny-battlefield-applications-are-open-so-apply-now/",
       // Another startup's journey from idea to angel funding to relaunch.
       "http://techcrunch.com/2015/02/04/bunkr-is-now-the-definitive-modern-presentation-tool-for-the-web/",
-      "http://techcrunch.com/2015/02/04/microsoft-sunrise/");
+      "http://techcrunch.com/2015/02/04/microsoft-sunrise/",
+      // Because I feel statistics are critical for employees to make good decisions, and it seems
+      // Twitter is acting against this, just like Google+ did.  Interesting to get their perspective.
+      "http://recode.net/2015/02/05/twitter-cuts-off-employee-access-to-its-metrics/",
+      // Because I'm working on software for business people, and LinkedIn is the behemoth in the space.
+      "http://recode.net/2015/02/05/linkedin-beats-earnings-estimates-as-more-employers-seek-talent/",
+      // Fun article about running a small VC firm as a start-up: Finding MVP, iterating.
+      "http://recode.net/2015/02/06/getting-past-the-catch-22-of-venture-capital/",
+      // Most important tech business news of the day: Two rivals found common ground.
+      "http://techcrunch.com/2015/02/05/twitter-confirms-new-google-firehose-deal-to-distribute-traffic-to-logged-out-users/");
 
   private static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
@@ -100,7 +109,7 @@ public class JonBenchmark {
       "http://techcrunch.com/2015/01/30/gillmor-gang-live-01-30-15/",
       // Don't care about Inbox. (Not sure why, but I really don't.)  And usually I hate free stuff.
       "http://techcrunch.com/2015/01/29/google-offering-24-hours-of-inbox-invites-on-the-day-of-outlooks-ios-launch/",
-      "http://mashable.com/2015/01/30/lego-marvel-helicarrier/?utm_cid=hp-hh-pri",
+      "http://mashable.com/2015/01/30/lego-marvel-helicarrier/",
       "http://mashable.com/2015/01/30/18-new-photos-game-of-thrones-season-5/",
       "http://mashable.com/2015/01/27/dad-rap/",
       "http://mashable.com/2015/01/27/robert-kraft-patriots-deflategate/",
@@ -113,7 +122,7 @@ public class JonBenchmark {
       // Mentions Google, but is actually about a TV show.
       "http://www.nytimes.com/2015/02/01/magazine/black-mirror-and-the-horrors-and-delights-of-technology.html",
       // About parenting.
-      "http://www.nytimes.com/2015/02/01/your-money/why-you-should-tell-your-kids-how-much-you-make.html?src=me",
+      "http://www.nytimes.com/2015/02/01/your-money/why-you-should-tell-your-kids-how-much-you-make.html",
       "http://www.slate.com/articles/technology/technology/2015/01/snapchat_why_teens_favorite_app_makes_the_facebook_generation_feel_old.html",
       "http://www.slate.com/blogs/the_slatest/2015/01/30/lindsey_graham_2016_south_carolina_senator_says_center_right_positions_make.html",
       "http://www.slate.com/articles/life/dear_prudence/2015/01/dear_prudence_i_want_to_stop_working_at_26.html",
@@ -151,7 +160,34 @@ public class JonBenchmark {
       "http://money.cnn.com/2015/02/04/autos/toyota-camry-lawsuit/index.html",
       "http://www.businessinsider.com/argentina-president-makes-racist-joke-in-china-2015-2",
       "http://www.businessinsider.com/alternative-uses-for-tinder-2015-2",
-      "http://www.businessinsider.com/most-visited-cities-in-the-world-2015-1");
+      "http://www.businessinsider.com/most-visited-cities-in-the-world-2015-1",
+      // Australian politics, ya, don't care!! :)
+      "http://www.abc.net.au/news/2015-01-19/matthewson-signs-of-mutiny-on-the-good-ship-abbott/6024180",
+      // Don't care about random PC laptop launches...
+      "http://recode.net/2015/02/06/dude-the-dell-xps-13-is-a-pretty-sweet-macbook-air-competitor/",
+      // Sports...
+      "http://www.latimes.com/sports/clippers/la-sp-clippers-cavaliers-20150206-story.html",
+      "http://www.latimes.com/sports/sportsnow/la-sp-sn-michael-phelps-return-swimming-20150206-story.html",
+      "http://www.latimes.com/sports/sportsnow/la-sp-sn-nba-playoff-format-changes-20150206-story.html",
+      "http://www.latimes.com/sports/lakers/lakersnow/la-sp-ln-preview-lakers-at-orlando-magic-20150205-story.html",
+      "http://www.latimes.com/sports/sportsnow/la-sp-sn-ducks-nashville-predators-nhl-capitals-boudreau-20150205-story.html",
+      "http://www.latimes.com/sports/usc/uscnow/la-sp-usc-football-morning-report-spring-game-scheduled-20150205-story.html",
+      "http://www.nytimes.com/2015/02/07/sports/in-pond-hockey-no-reason-to-have-one-big-fish.html",
+      "http://www.nytimes.com/2015/02/06/sports/olympics/cost-is-big-theme-at-public-meeting-on-boston-bid.html",
+      "http://www.nytimes.com/2015/02/06/sports/basketball/at-these-pickup-games-the-camaraderie-never-gets-old.html",
+      "http://www.nytimes.com/2015/02/05/sports/baseball/as-wrigley-field-is-rebuilt-the-curious-take-a-look.html",
+      "http://www.nytimes.com/2015/01/15/sports/football/nfl-roundup.html",
+      "http://www.nytimes.com/2015/01/28/sports/football/in-seahawks-fierce-secondary-new-members-make-the-cut.html",
+      // Random business articles about financing / the economy that are unimportant to me.
+      "http://www.businessinsider.com/impact-of-mortgage-refinance-on-housing-2013-6",
+      "http://www.businessinsider.com/refiners-gas-futures-2012-3",
+      "http://www.businessinsider.com/afp-greek-finance-minister-says-eyeing-new-debt-deal-by-end-may-2015-2",
+      "http://www.businessinsider.com/r-economist-varoufakis-says-to-become-new-greek-finance-minister-on-tuesday-2015-1",
+      "http://www.businessinsider.com/north-korea-is-accepting-rubles-now-2015-1",
+      "http://www.businessinsider.com/finance-is-a-strange-industry-2014-8",
+      "http://www.businessinsider.com/r-russias-finance-minister-sees-economy-shrinking-4-percent-in-2015-2014-12",
+      "http://www.businessinsider.com/financial-advisor-perspectives-october-6-2014-10",
+      "http://www.businessinsider.com/r-china-corruption-watchdog-launches-inspections-eyes-sinopec-2014-11");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
