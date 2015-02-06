@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
+import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
@@ -31,7 +32,8 @@ public class InputValuesGenerator {
   }
 
   public static double relevanceToSocialMedia(User user, Article article) {
-    SocialEngagement engagement = getLatestFacebookEngagement(article);
+    SocialEngagement engagement = SocialEngagements.getForArticle(
+        article, SocialEngagement.Site.FACEBOOK);
     if (engagement == null) {
       engagement = SocialEngagement.getDefaultInstance();
     }
@@ -131,18 +133,6 @@ public class InputValuesGenerator {
       }
     }
     return 0;
-  }
-  
-  public static SocialEngagement getLatestFacebookEngagement(Article article) {
-    SocialEngagement facebookEngagement = null;
-    for (SocialEngagement socialEngagement : article.getSocialEngagementList()) {
-      if (socialEngagement.getSite() == Site.FACEBOOK &&
-          (facebookEngagement == null ||
-              socialEngagement.getCreateTime() > facebookEngagement.getCreateTime())) {
-        facebookEngagement = socialEngagement;
-      }
-    }
-    return facebookEngagement;
   }
 
   // returns Likes / day

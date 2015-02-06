@@ -151,8 +151,8 @@ public class JonBenchmark {
       "http://www.cnn.com/2015/02/04/asia/taiwan-plane-crash-transasia/index.html",
       "http://money.cnn.com/2015/02/04/autos/toyota-camry-lawsuit/index.html",
       "http://www.businessinsider.com/argentina-president-makes-racist-joke-in-china-2015-2",
-      "http://www.businessinsider.com/alternative-uses-for-tinder-2015-2");
-      //"http://www.businessinsider.com/most-visited-cities-in-the-world-2015-1");
+      "http://www.businessinsider.com/alternative-uses-for-tinder-2015-2",
+      "http://www.businessinsider.com/most-visited-cities-in-the-world-2015-1");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
