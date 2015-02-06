@@ -99,7 +99,7 @@ public class InputValuesGenerator {
       for (Employer employer : pastEmployers) {
         for (ArticleKeyword keyword : article.getKeywordList()) {
           if (employer.getName().equals(keyword.getKeyword())) {
-            relevance += (double)keyword.getStrength() / 20;
+            relevance += (double) keyword.getStrength() / 20;
           }
         }
       }
