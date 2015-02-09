@@ -3,15 +3,16 @@ package com.janknspank.rank;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
+import org.neuroph.core.data.DataSet;
+import org.neuroph.core.data.DataSetRow;
 import org.neuroph.core.events.LearningEvent;
 import org.neuroph.core.events.LearningEventListener;
-import org.neuroph.core.learning.DataSet;
-import org.neuroph.core.learning.DataSetRow;
 import org.neuroph.core.learning.LearningRule;
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.BackPropagation;
-import org.neuroph.nnet.learning.ResilientPropagation;
+import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
 import com.janknspank.ArticleCrawler;
@@ -21,13 +22,19 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private NeuralNetwork generateTrainedNetwork(DataSet trainingSet) {
-    NeuralNetwork neuralNetwork = new MultiLayerPerceptron(TransferFunctionType.SIGMOID,
+  private static int MAX_ITERATIONS = 100000;
+  private Double[] lowestErrorNetworkWeights;
+  private double lowestError = 1.0;
+  private double lowestErrorIteration = 0;
+  
+  private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
+    NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(TransferFunctionType.SIGMOID,
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.HIDDEN_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
 
-    neuralNetwork.setLearningRule(new ResilientPropagation()); 
+    //neuralNetwork.setLearningRule(new ResilientPropagation());
+    neuralNetwork.setLearningRule(new MomentumBackpropagation());
 
     // set learning parameters
     LearningRule learningRule = neuralNetwork.getLearningRule();
@@ -36,6 +43,20 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     System.out.println("Training neural network...");
     neuralNetwork.learn(trainingSet);
     System.out.println("Trained");
+
+    // Return the network with the lowest error
+    System.out.println("Lowest error: " + lowestError + " at iteration " + lowestErrorIteration);
+    neuralNetwork.setWeights(ArrayUtils.toPrimitive(lowestErrorNetworkWeights));
+
+    // Print correlation of each input node to the output
+    for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
+      double [] isolatedInput = NeuralNetworkScorer.generateIsolatedInputNodes(i);
+      neuralNetwork.setInput(isolatedInput);
+      neuralNetwork.calculate();
+      System.out.println("Input node " + i + " correlation to output: " 
+          + neuralNetwork.getOutput()[0]);
+    }
+
     return neuralNetwork;
   }
 
@@ -78,7 +99,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       }
     }
 
-    NeuralNetwork neuralNetwork =
+    NeuralNetwork<BackPropagation> neuralNetwork =
         new NeuralNetworkTrainer().generateTrainedNetwork(generateTrainingDataSet(user, ratings));
     neuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
   }
@@ -86,8 +107,14 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   @Override
   public void handleLearningEvent(LearningEvent event) {
     BackPropagation bp = (BackPropagation)event.getSource();
-    System.out.println(bp.getCurrentIteration() + ". iteration : "+ bp.getTotalNetworkError());
-    if (bp.getCurrentIteration() > 1000000) {
+    double error = bp.getTotalNetworkError();
+    System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
+    if (error < lowestError) {
+      lowestError = error;
+      lowestErrorIteration = bp.getCurrentIteration();
+      lowestErrorNetworkWeights = bp.getNeuralNetwork().getWeights();
+    }
+    if (bp.getCurrentIteration() > MAX_ITERATIONS) {
       bp.stopLearning();
     }
   }

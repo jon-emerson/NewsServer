@@ -75,6 +75,7 @@ public class DistributionBuilder {
     Distribution.Percentile topPercentile = null;
 
     for (Distribution.Percentile percentile : distribution.getPercentileList()) {
+//      System.out.println("percentile - " + percentile.getPercentile() + " value: " + percentile.getValue());
       if (percentile.getValue() <= value
           && (bottomPercentile == null
               || percentile.getPercentile() > bottomPercentile.getPercentile())) {
@@ -85,6 +86,13 @@ public class DistributionBuilder {
               || percentile.getPercentile() < topPercentile.getPercentile())) {
         topPercentile = percentile;
       }
+//      if (percentile.getPercentile() == 100 && percentile.getValue() <= value) {
+//        return 1.0;
+//      }
+    }
+
+    if (distribution.getPercentile(distribution.getPercentileCount() - 1).getValue() <= value) {
+      return 1.0;
     }
 
     double range = topPercentile.getValue() - bottomPercentile.getValue();

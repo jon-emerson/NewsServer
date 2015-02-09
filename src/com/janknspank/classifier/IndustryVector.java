@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -13,8 +15,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.api.client.util.Lists;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.janknspank.ArticleCrawler;
 import com.janknspank.bizness.Articles;
@@ -25,12 +29,13 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.CoreProto.Distribution;
 import com.janknspank.proto.EnumsProto.IndustryCode;
 import com.janknspank.rank.DistributionBuilder;
 
 public class IndustryVector {
-  private static final File INDUSTRIES_DIRECTORY = new File("classifier/");
+  private static final File INDUSTRIES_DIRECTORY = new File("classifier/industry");
   private static final Pattern INDUSTRY_SUBDIRECTORY_PATTERN = Pattern.compile("([0-9]+)-.*");
   private static final List<Vector> __DOCUMENT_VECTORS = Lists.newArrayList();
 
@@ -85,10 +90,10 @@ public class IndustryVector {
         ArticleCrawler.getArticles(urls).values(),
         Articles.getArticlesForKeywords(words));
     System.out.println(Iterables.size(articles) + " articles found");
-    
-    // TODO 2.5 Output # articles / seed word - make it easy to prune out
+
+    // 2.5 Output # articles / seed word - make it easy to prune out
     // empty seed words, or find gaps in the corpus
-    
+    printSeedWordOccurrenceCounts(seeds, articles);
 
     // 3. Convert them into the industry vector
     System.out.println("Calculating vector...");
@@ -173,6 +178,26 @@ public class IndustryVector {
       return readWords(blacklistFile);
     } catch (IOException e) {
       throw new ClassifierException("Couldn't get blacklist words from file: " + e.getMessage(), e);
+    }
+  }
+
+  private static void printSeedWordOccurrenceCounts(Set<String> seeds, 
+      Iterable<Article> articles) {
+    Multiset<String> seedOccurrenceCounts = HashMultiset.create();
+    for (Article article : articles) {
+      Set<String> keywords = new HashSet<>();
+      for (ArticleKeyword articleKeyword : article.getKeywordList()) {
+        keywords.add(articleKeyword.getKeyword());
+      }
+      for (String seed : seeds) {
+        if (keywords.contains(seed)) {
+          seedOccurrenceCounts.add(seed);
+        }
+      }
+    }
+    System.out.println("Seed word occurrences in corpus:");
+    for (String seed : seeds) {
+      System.out.println("  " + seed + ": " + seedOccurrenceCounts.count(seed));
     }
   }
 

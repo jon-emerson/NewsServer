@@ -1,6 +1,7 @@
 package com.janknspank.rank;
 
 import org.neuroph.core.NeuralNetwork;
+import org.neuroph.nnet.learning.BackPropagation;
 
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
@@ -13,7 +14,7 @@ public final class NeuralNetworkScorer extends Scorer {
       INPUT_NODES_COUNT + "in-" + HIDDEN_NODES_COUNT + "hidden-" +
       OUTPUT_NODES_COUNT + "out.nnet";
   private static NeuralNetworkScorer instance = null;
-  private NeuralNetwork neuralNetwork;
+  private NeuralNetwork<BackPropagation> neuralNetwork;
 
   private NeuralNetworkScorer() {
     setFile(DEFAULT_NEURAL_NETWORK_FILE);
@@ -26,8 +27,9 @@ public final class NeuralNetworkScorer extends Scorer {
     return instance;
   }
 
+  @SuppressWarnings("unchecked")
   public void setFile(String nnetFile) {
-    neuralNetwork = NeuralNetwork.load(nnetFile);
+    neuralNetwork = NeuralNetwork.createFromFile(nnetFile);
   }
 
   static double[] generateInputNodes(User user, Article article) {
@@ -62,6 +64,25 @@ public final class NeuralNetworkScorer extends Scorer {
         // 10. Article text quality
         InputValuesGenerator.articleTextQualityScore(article)
     };
+  }
+  
+  /**
+   * generate an nodes array with all indexes = 0 except for the specified
+   * index 
+   * @param i
+   * @return
+   */
+  static double[] generateIsolatedInputNodes(int enabledIndex) {
+    double[] inputs = new double[INPUT_NODES_COUNT];
+    for (int i = 0; i < INPUT_NODES_COUNT; i++) {
+      if (i == enabledIndex) {
+        inputs[i] = 1.0;
+      }
+      else {
+        inputs[i] = 0.0;
+      }
+    }
+    return inputs;
   }
 
   // V1 has a general rank - one neural network for all intents. No mixing.
