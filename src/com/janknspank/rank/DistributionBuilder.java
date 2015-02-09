@@ -86,9 +86,6 @@ public class DistributionBuilder {
               || percentile.getPercentile() < topPercentile.getPercentile())) {
         topPercentile = percentile;
       }
-//      if (percentile.getPercentile() == 100 && percentile.getValue() <= value) {
-//        return 1.0;
-//      }
     }
 
     if (distribution.getPercentile(distribution.getPercentileCount() - 1).getValue() <= value) {
