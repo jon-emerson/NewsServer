@@ -6,7 +6,6 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
-import com.janknspank.common.FleschReadingEase;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleIndustry;
@@ -121,15 +120,9 @@ public class InputValuesGenerator {
     // Older is smaller value
     return sigmoid(article.getPublishedTime() - timeInMillis); 
   }
-  
+
   public static double articleTextQualityScore(Article article) {
-    String articleText = "";
-    for (String paragraph : article.getParagraphList()) {
-      articleText += paragraph + "\n";
-    }
-    double readingEaseScore = FleschReadingEase.readingEaseScore(articleText);
-//    System.out.println("Article text quality: " + readingEaseScore + " (" + article.getUrl() + ")");
-    return Math.min(1.0, readingEaseScore / 100);
+    return 0;
   }
 
   public static double getSimilarityToIndustry(Article article, int industryCode) {
