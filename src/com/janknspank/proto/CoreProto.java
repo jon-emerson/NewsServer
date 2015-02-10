@@ -11098,6 +11098,2113 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:Distribution)
   }
 
+  public interface ShareNormalizationDataOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution> 
+        getDomainTimedDistributionList();
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution getDomainTimedDistribution(int index);
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    int getDomainTimedDistributionCount();
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder> 
+        getDomainTimedDistributionOrBuilderList();
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder getDomainTimedDistributionOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ShareNormalizationData}
+   *
+   * <pre>
+   * Stores per-domain share aggregate counts for various time lengths, so that
+   * we can normalize social engagement for an article versus its peers on the
+   * same news site domain.
+   * </pre>
+   */
+  public static final class ShareNormalizationData extends
+      com.google.protobuf.GeneratedMessage
+      implements ShareNormalizationDataOrBuilder {
+    // Use ShareNormalizationData.newBuilder() to construct.
+    private ShareNormalizationData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ShareNormalizationData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ShareNormalizationData defaultInstance;
+    public static ShareNormalizationData getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ShareNormalizationData getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ShareNormalizationData(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                domainTimedDistribution_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              domainTimedDistribution_.add(input.readMessage(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          domainTimedDistribution_ = java.util.Collections.unmodifiableList(domainTimedDistribution_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.ShareNormalizationData.class, com.janknspank.proto.CoreProto.ShareNormalizationData.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ShareNormalizationData> PARSER =
+        new com.google.protobuf.AbstractParser<ShareNormalizationData>() {
+      public ShareNormalizationData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ShareNormalizationData(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ShareNormalizationData> getParserForType() {
+      return PARSER;
+    }
+
+    public interface DomainTimedDistributionOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional string domain = 1;
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      boolean hasDomain();
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      java.lang.String getDomain();
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getDomainBytes();
+
+      // repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution> 
+          getTimedDistributionList();
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution getTimedDistribution(int index);
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      int getTimedDistributionCount();
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder> 
+          getTimedDistributionOrBuilderList();
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder getTimedDistributionOrBuilder(
+          int index);
+    }
+    /**
+     * Protobuf type {@code ShareNormalizationData.DomainTimedDistribution}
+     */
+    public static final class DomainTimedDistribution extends
+        com.google.protobuf.GeneratedMessage
+        implements DomainTimedDistributionOrBuilder {
+      // Use DomainTimedDistribution.newBuilder() to construct.
+      private DomainTimedDistribution(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private DomainTimedDistribution(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final DomainTimedDistribution defaultInstance;
+      public static DomainTimedDistribution getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public DomainTimedDistribution getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private DomainTimedDistribution(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                domain_ = input.readBytes();
+                break;
+              }
+              case 18: {
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                  timedDistribution_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution>();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                timedDistribution_.add(input.readMessage(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.PARSER, extensionRegistry));
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            timedDistribution_ = java.util.Collections.unmodifiableList(timedDistribution_);
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.class, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<DomainTimedDistribution> PARSER =
+          new com.google.protobuf.AbstractParser<DomainTimedDistribution>() {
+        public DomainTimedDistribution parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new DomainTimedDistribution(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<DomainTimedDistribution> getParserForType() {
+        return PARSER;
+      }
+
+      public interface TimedDistributionOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+
+        // optional int64 time_since_published = 1;
+        /**
+         * <code>optional int64 time_since_published = 1;</code>
+         */
+        boolean hasTimeSincePublished();
+        /**
+         * <code>optional int64 time_since_published = 1;</code>
+         */
+        long getTimeSincePublished();
+
+        // optional .Distribution distribution = 2;
+        /**
+         * <code>optional .Distribution distribution = 2;</code>
+         */
+        boolean hasDistribution();
+        /**
+         * <code>optional .Distribution distribution = 2;</code>
+         */
+        com.janknspank.proto.CoreProto.Distribution getDistribution();
+        /**
+         * <code>optional .Distribution distribution = 2;</code>
+         */
+        com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder();
+      }
+      /**
+       * Protobuf type {@code ShareNormalizationData.DomainTimedDistribution.TimedDistribution}
+       */
+      public static final class TimedDistribution extends
+          com.google.protobuf.GeneratedMessage
+          implements TimedDistributionOrBuilder {
+        // Use TimedDistribution.newBuilder() to construct.
+        private TimedDistribution(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+          super(builder);
+          this.unknownFields = builder.getUnknownFields();
+        }
+        private TimedDistribution(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+        private static final TimedDistribution defaultInstance;
+        public static TimedDistribution getDefaultInstance() {
+          return defaultInstance;
+        }
+
+        public TimedDistribution getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+
+        private final com.google.protobuf.UnknownFieldSet unknownFields;
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+            getUnknownFields() {
+          return this.unknownFields;
+        }
+        private TimedDistribution(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          initFields();
+          int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  timeSincePublished_ = input.readInt64();
+                  break;
+                }
+                case 18: {
+                  com.janknspank.proto.CoreProto.Distribution.Builder subBuilder = null;
+                  if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                    subBuilder = distribution_.toBuilder();
+                  }
+                  distribution_ = input.readMessage(com.janknspank.proto.CoreProto.Distribution.PARSER, extensionRegistry);
+                  if (subBuilder != null) {
+                    subBuilder.mergeFrom(distribution_);
+                    distribution_ = subBuilder.buildPartial();
+                  }
+                  bitField0_ |= 0x00000002;
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+          } finally {
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.class, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder.class);
+        }
+
+        public static com.google.protobuf.Parser<TimedDistribution> PARSER =
+            new com.google.protobuf.AbstractParser<TimedDistribution>() {
+          public TimedDistribution parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            return new TimedDistribution(input, extensionRegistry);
+          }
+        };
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<TimedDistribution> getParserForType() {
+          return PARSER;
+        }
+
+        private int bitField0_;
+        // optional int64 time_since_published = 1;
+        public static final int TIME_SINCE_PUBLISHED_FIELD_NUMBER = 1;
+        private long timeSincePublished_;
+        /**
+         * <code>optional int64 time_since_published = 1;</code>
+         */
+        public boolean hasTimeSincePublished() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional int64 time_since_published = 1;</code>
+         */
+        public long getTimeSincePublished() {
+          return timeSincePublished_;
+        }
+
+        // optional .Distribution distribution = 2;
+        public static final int DISTRIBUTION_FIELD_NUMBER = 2;
+        private com.janknspank.proto.CoreProto.Distribution distribution_;
+        /**
+         * <code>optional .Distribution distribution = 2;</code>
+         */
+        public boolean hasDistribution() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional .Distribution distribution = 2;</code>
+         */
+        public com.janknspank.proto.CoreProto.Distribution getDistribution() {
+          return distribution_;
+        }
+        /**
+         * <code>optional .Distribution distribution = 2;</code>
+         */
+        public com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder() {
+          return distribution_;
+        }
+
+        private void initFields() {
+          timeSincePublished_ = 0L;
+          distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt64(1, timeSincePublished_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeMessage(2, distribution_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt64Size(1, timeSincePublished_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeMessageSize(2, distribution_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input, extensionRegistry);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * Protobuf type {@code ShareNormalizationData.DomainTimedDistribution.TimedDistribution}
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_descriptor;
+          }
+
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.class, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder.class);
+          }
+
+          // Construct using com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+              getDistributionFieldBuilder();
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+
+          public Builder clear() {
+            super.clear();
+            timeSincePublished_ = 0L;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            if (distributionBuilder_ == null) {
+              distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+            } else {
+              distributionBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_descriptor;
+          }
+
+          public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution getDefaultInstanceForType() {
+            return com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.getDefaultInstance();
+          }
+
+          public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution build() {
+            com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution buildPartial() {
+            com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution result = new com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.timeSincePublished_ = timeSincePublished_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            if (distributionBuilder_ == null) {
+              result.distribution_ = distribution_;
+            } else {
+              result.distribution_ = distributionBuilder_.build();
+            }
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution) {
+              return mergeFrom((com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution other) {
+            if (other == com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.getDefaultInstance()) return this;
+            if (other.hasTimeSincePublished()) {
+              setTimeSincePublished(other.getTimeSincePublished());
+            }
+            if (other.hasDistribution()) {
+              mergeDistribution(other.getDistribution());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+
+          public final boolean isInitialized() {
+            return true;
+          }
+
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution) e.getUnfinishedMessage();
+              throw e;
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+          private int bitField0_;
+
+          // optional int64 time_since_published = 1;
+          private long timeSincePublished_ ;
+          /**
+           * <code>optional int64 time_since_published = 1;</code>
+           */
+          public boolean hasTimeSincePublished() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          /**
+           * <code>optional int64 time_since_published = 1;</code>
+           */
+          public long getTimeSincePublished() {
+            return timeSincePublished_;
+          }
+          /**
+           * <code>optional int64 time_since_published = 1;</code>
+           */
+          public Builder setTimeSincePublished(long value) {
+            bitField0_ |= 0x00000001;
+            timeSincePublished_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int64 time_since_published = 1;</code>
+           */
+          public Builder clearTimeSincePublished() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            timeSincePublished_ = 0L;
+            onChanged();
+            return this;
+          }
+
+          // optional .Distribution distribution = 2;
+          private com.janknspank.proto.CoreProto.Distribution distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+          private com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder> distributionBuilder_;
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          public boolean hasDistribution() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          public com.janknspank.proto.CoreProto.Distribution getDistribution() {
+            if (distributionBuilder_ == null) {
+              return distribution_;
+            } else {
+              return distributionBuilder_.getMessage();
+            }
+          }
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          public Builder setDistribution(com.janknspank.proto.CoreProto.Distribution value) {
+            if (distributionBuilder_ == null) {
+              if (value == null) {
+                throw new NullPointerException();
+              }
+              distribution_ = value;
+              onChanged();
+            } else {
+              distributionBuilder_.setMessage(value);
+            }
+            bitField0_ |= 0x00000002;
+            return this;
+          }
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          public Builder setDistribution(
+              com.janknspank.proto.CoreProto.Distribution.Builder builderForValue) {
+            if (distributionBuilder_ == null) {
+              distribution_ = builderForValue.build();
+              onChanged();
+            } else {
+              distributionBuilder_.setMessage(builderForValue.build());
+            }
+            bitField0_ |= 0x00000002;
+            return this;
+          }
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          public Builder mergeDistribution(com.janknspank.proto.CoreProto.Distribution value) {
+            if (distributionBuilder_ == null) {
+              if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  distribution_ != com.janknspank.proto.CoreProto.Distribution.getDefaultInstance()) {
+                distribution_ =
+                  com.janknspank.proto.CoreProto.Distribution.newBuilder(distribution_).mergeFrom(value).buildPartial();
+              } else {
+                distribution_ = value;
+              }
+              onChanged();
+            } else {
+              distributionBuilder_.mergeFrom(value);
+            }
+            bitField0_ |= 0x00000002;
+            return this;
+          }
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          public Builder clearDistribution() {
+            if (distributionBuilder_ == null) {
+              distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+              onChanged();
+            } else {
+              distributionBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          public com.janknspank.proto.CoreProto.Distribution.Builder getDistributionBuilder() {
+            bitField0_ |= 0x00000002;
+            onChanged();
+            return getDistributionFieldBuilder().getBuilder();
+          }
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          public com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder() {
+            if (distributionBuilder_ != null) {
+              return distributionBuilder_.getMessageOrBuilder();
+            } else {
+              return distribution_;
+            }
+          }
+          /**
+           * <code>optional .Distribution distribution = 2;</code>
+           */
+          private com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder> 
+              getDistributionFieldBuilder() {
+            if (distributionBuilder_ == null) {
+              distributionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder>(
+                      distribution_,
+                      getParentForChildren(),
+                      isClean());
+              distribution_ = null;
+            }
+            return distributionBuilder_;
+          }
+
+          // @@protoc_insertion_point(builder_scope:ShareNormalizationData.DomainTimedDistribution.TimedDistribution)
+        }
+
+        static {
+          defaultInstance = new TimedDistribution(true);
+          defaultInstance.initFields();
+        }
+
+        // @@protoc_insertion_point(class_scope:ShareNormalizationData.DomainTimedDistribution.TimedDistribution)
+      }
+
+      private int bitField0_;
+      // optional string domain = 1;
+      public static final int DOMAIN_FIELD_NUMBER = 1;
+      private java.lang.Object domain_;
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      public boolean hasDomain() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      public java.lang.String getDomain() {
+        java.lang.Object ref = domain_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            domain_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDomainBytes() {
+        java.lang.Object ref = domain_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          domain_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;
+      public static final int TIMED_DISTRIBUTION_FIELD_NUMBER = 2;
+      private java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution> timedDistribution_;
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution> getTimedDistributionList() {
+        return timedDistribution_;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder> 
+          getTimedDistributionOrBuilderList() {
+        return timedDistribution_;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      public int getTimedDistributionCount() {
+        return timedDistribution_.size();
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution getTimedDistribution(int index) {
+        return timedDistribution_.get(index);
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder getTimedDistributionOrBuilder(
+          int index) {
+        return timedDistribution_.get(index);
+      }
+
+      private void initFields() {
+        domain_ = "";
+        timedDistribution_ = java.util.Collections.emptyList();
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getDomainBytes());
+        }
+        for (int i = 0; i < timedDistribution_.size(); i++) {
+          output.writeMessage(2, timedDistribution_.get(i));
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getDomainBytes());
+        }
+        for (int i = 0; i < timedDistribution_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, timedDistribution_.get(i));
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code ShareNormalizationData.DomainTimedDistribution}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.class, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getTimedDistributionFieldBuilder();
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          domain_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          if (timedDistributionBuilder_ == null) {
+            timedDistribution_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            timedDistributionBuilder_.clear();
+          }
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainTimedDistribution_descriptor;
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution getDefaultInstanceForType() {
+          return com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution build() {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution buildPartial() {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution result = new com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.domain_ = domain_;
+          if (timedDistributionBuilder_ == null) {
+            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+              timedDistribution_ = java.util.Collections.unmodifiableList(timedDistribution_);
+              bitField0_ = (bitField0_ & ~0x00000002);
+            }
+            result.timedDistribution_ = timedDistribution_;
+          } else {
+            result.timedDistribution_ = timedDistributionBuilder_.build();
+          }
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution) {
+            return mergeFrom((com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution other) {
+          if (other == com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.getDefaultInstance()) return this;
+          if (other.hasDomain()) {
+            bitField0_ |= 0x00000001;
+            domain_ = other.domain_;
+            onChanged();
+          }
+          if (timedDistributionBuilder_ == null) {
+            if (!other.timedDistribution_.isEmpty()) {
+              if (timedDistribution_.isEmpty()) {
+                timedDistribution_ = other.timedDistribution_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+              } else {
+                ensureTimedDistributionIsMutable();
+                timedDistribution_.addAll(other.timedDistribution_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.timedDistribution_.isEmpty()) {
+              if (timedDistributionBuilder_.isEmpty()) {
+                timedDistributionBuilder_.dispose();
+                timedDistributionBuilder_ = null;
+                timedDistribution_ = other.timedDistribution_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+                timedDistributionBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getTimedDistributionFieldBuilder() : null;
+              } else {
+                timedDistributionBuilder_.addAllMessages(other.timedDistribution_);
+              }
+            }
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional string domain = 1;
+        private java.lang.Object domain_ = "";
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public boolean hasDomain() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public java.lang.String getDomain() {
+          java.lang.Object ref = domain_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            domain_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getDomainBytes() {
+          java.lang.Object ref = domain_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            domain_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public Builder setDomain(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          domain_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public Builder clearDomain() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          domain_ = getDefaultInstance().getDomain();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public Builder setDomainBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          domain_ = value;
+          onChanged();
+          return this;
+        }
+
+        // repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;
+        private java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution> timedDistribution_ =
+          java.util.Collections.emptyList();
+        private void ensureTimedDistributionIsMutable() {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+            timedDistribution_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution>(timedDistribution_);
+            bitField0_ |= 0x00000002;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder> timedDistributionBuilder_;
+
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution> getTimedDistributionList() {
+          if (timedDistributionBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(timedDistribution_);
+          } else {
+            return timedDistributionBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public int getTimedDistributionCount() {
+          if (timedDistributionBuilder_ == null) {
+            return timedDistribution_.size();
+          } else {
+            return timedDistributionBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution getTimedDistribution(int index) {
+          if (timedDistributionBuilder_ == null) {
+            return timedDistribution_.get(index);
+          } else {
+            return timedDistributionBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder setTimedDistribution(
+            int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution value) {
+          if (timedDistributionBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureTimedDistributionIsMutable();
+            timedDistribution_.set(index, value);
+            onChanged();
+          } else {
+            timedDistributionBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder setTimedDistribution(
+            int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder builderForValue) {
+          if (timedDistributionBuilder_ == null) {
+            ensureTimedDistributionIsMutable();
+            timedDistribution_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            timedDistributionBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder addTimedDistribution(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution value) {
+          if (timedDistributionBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureTimedDistributionIsMutable();
+            timedDistribution_.add(value);
+            onChanged();
+          } else {
+            timedDistributionBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder addTimedDistribution(
+            int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution value) {
+          if (timedDistributionBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureTimedDistributionIsMutable();
+            timedDistribution_.add(index, value);
+            onChanged();
+          } else {
+            timedDistributionBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder addTimedDistribution(
+            com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder builderForValue) {
+          if (timedDistributionBuilder_ == null) {
+            ensureTimedDistributionIsMutable();
+            timedDistribution_.add(builderForValue.build());
+            onChanged();
+          } else {
+            timedDistributionBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder addTimedDistribution(
+            int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder builderForValue) {
+          if (timedDistributionBuilder_ == null) {
+            ensureTimedDistributionIsMutable();
+            timedDistribution_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            timedDistributionBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder addAllTimedDistribution(
+            java.lang.Iterable<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution> values) {
+          if (timedDistributionBuilder_ == null) {
+            ensureTimedDistributionIsMutable();
+            super.addAll(values, timedDistribution_);
+            onChanged();
+          } else {
+            timedDistributionBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder clearTimedDistribution() {
+          if (timedDistributionBuilder_ == null) {
+            timedDistribution_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            onChanged();
+          } else {
+            timedDistributionBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public Builder removeTimedDistribution(int index) {
+          if (timedDistributionBuilder_ == null) {
+            ensureTimedDistributionIsMutable();
+            timedDistribution_.remove(index);
+            onChanged();
+          } else {
+            timedDistributionBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder getTimedDistributionBuilder(
+            int index) {
+          return getTimedDistributionFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder getTimedDistributionOrBuilder(
+            int index) {
+          if (timedDistributionBuilder_ == null) {
+            return timedDistribution_.get(index);  } else {
+            return timedDistributionBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder> 
+             getTimedDistributionOrBuilderList() {
+          if (timedDistributionBuilder_ != null) {
+            return timedDistributionBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(timedDistribution_);
+          }
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder addTimedDistributionBuilder() {
+          return getTimedDistributionFieldBuilder().addBuilder(
+              com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder addTimedDistributionBuilder(
+            int index) {
+          return getTimedDistributionFieldBuilder().addBuilder(
+              index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .ShareNormalizationData.DomainTimedDistribution.TimedDistribution timed_distribution = 2;</code>
+         */
+        public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder> 
+             getTimedDistributionBuilderList() {
+          return getTimedDistributionFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder> 
+            getTimedDistributionFieldBuilder() {
+          if (timedDistributionBuilder_ == null) {
+            timedDistributionBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.TimedDistributionOrBuilder>(
+                    timedDistribution_,
+                    ((bitField0_ & 0x00000002) == 0x00000002),
+                    getParentForChildren(),
+                    isClean());
+            timedDistribution_ = null;
+          }
+          return timedDistributionBuilder_;
+        }
+
+        // @@protoc_insertion_point(builder_scope:ShareNormalizationData.DomainTimedDistribution)
+      }
+
+      static {
+        defaultInstance = new DomainTimedDistribution(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:ShareNormalizationData.DomainTimedDistribution)
+    }
+
+    // repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;
+    public static final int DOMAIN_TIMED_DISTRIBUTION_FIELD_NUMBER = 1;
+    private java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution> domainTimedDistribution_;
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution> getDomainTimedDistributionList() {
+      return domainTimedDistribution_;
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder> 
+        getDomainTimedDistributionOrBuilderList() {
+      return domainTimedDistribution_;
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    public int getDomainTimedDistributionCount() {
+      return domainTimedDistribution_.size();
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution getDomainTimedDistribution(int index) {
+      return domainTimedDistribution_.get(index);
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+     */
+    public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder getDomainTimedDistributionOrBuilder(
+        int index) {
+      return domainTimedDistribution_.get(index);
+    }
+
+    private void initFields() {
+      domainTimedDistribution_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < domainTimedDistribution_.size(); i++) {
+        output.writeMessage(1, domainTimedDistribution_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < domainTimedDistribution_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, domainTimedDistribution_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.ShareNormalizationData prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ShareNormalizationData}
+     *
+     * <pre>
+     * Stores per-domain share aggregate counts for various time lengths, so that
+     * we can normalize social engagement for an article versus its peers on the
+     * same news site domain.
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.ShareNormalizationDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.ShareNormalizationData.class, com.janknspank.proto.CoreProto.ShareNormalizationData.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.ShareNormalizationData.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getDomainTimedDistributionFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (domainTimedDistributionBuilder_ == null) {
+          domainTimedDistribution_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          domainTimedDistributionBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.ShareNormalizationData getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.ShareNormalizationData.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.ShareNormalizationData build() {
+        com.janknspank.proto.CoreProto.ShareNormalizationData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.ShareNormalizationData buildPartial() {
+        com.janknspank.proto.CoreProto.ShareNormalizationData result = new com.janknspank.proto.CoreProto.ShareNormalizationData(this);
+        int from_bitField0_ = bitField0_;
+        if (domainTimedDistributionBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            domainTimedDistribution_ = java.util.Collections.unmodifiableList(domainTimedDistribution_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.domainTimedDistribution_ = domainTimedDistribution_;
+        } else {
+          result.domainTimedDistribution_ = domainTimedDistributionBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.ShareNormalizationData) {
+          return mergeFrom((com.janknspank.proto.CoreProto.ShareNormalizationData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.ShareNormalizationData other) {
+        if (other == com.janknspank.proto.CoreProto.ShareNormalizationData.getDefaultInstance()) return this;
+        if (domainTimedDistributionBuilder_ == null) {
+          if (!other.domainTimedDistribution_.isEmpty()) {
+            if (domainTimedDistribution_.isEmpty()) {
+              domainTimedDistribution_ = other.domainTimedDistribution_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureDomainTimedDistributionIsMutable();
+              domainTimedDistribution_.addAll(other.domainTimedDistribution_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.domainTimedDistribution_.isEmpty()) {
+            if (domainTimedDistributionBuilder_.isEmpty()) {
+              domainTimedDistributionBuilder_.dispose();
+              domainTimedDistributionBuilder_ = null;
+              domainTimedDistribution_ = other.domainTimedDistribution_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              domainTimedDistributionBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getDomainTimedDistributionFieldBuilder() : null;
+            } else {
+              domainTimedDistributionBuilder_.addAllMessages(other.domainTimedDistribution_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.ShareNormalizationData parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.ShareNormalizationData) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;
+      private java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution> domainTimedDistribution_ =
+        java.util.Collections.emptyList();
+      private void ensureDomainTimedDistributionIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          domainTimedDistribution_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution>(domainTimedDistribution_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder> domainTimedDistributionBuilder_;
+
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution> getDomainTimedDistributionList() {
+        if (domainTimedDistributionBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(domainTimedDistribution_);
+        } else {
+          return domainTimedDistributionBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public int getDomainTimedDistributionCount() {
+        if (domainTimedDistributionBuilder_ == null) {
+          return domainTimedDistribution_.size();
+        } else {
+          return domainTimedDistributionBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution getDomainTimedDistribution(int index) {
+        if (domainTimedDistributionBuilder_ == null) {
+          return domainTimedDistribution_.get(index);
+        } else {
+          return domainTimedDistributionBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder setDomainTimedDistribution(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution value) {
+        if (domainTimedDistributionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDomainTimedDistributionIsMutable();
+          domainTimedDistribution_.set(index, value);
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder setDomainTimedDistribution(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder builderForValue) {
+        if (domainTimedDistributionBuilder_ == null) {
+          ensureDomainTimedDistributionIsMutable();
+          domainTimedDistribution_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder addDomainTimedDistribution(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution value) {
+        if (domainTimedDistributionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDomainTimedDistributionIsMutable();
+          domainTimedDistribution_.add(value);
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder addDomainTimedDistribution(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution value) {
+        if (domainTimedDistributionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDomainTimedDistributionIsMutable();
+          domainTimedDistribution_.add(index, value);
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder addDomainTimedDistribution(
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder builderForValue) {
+        if (domainTimedDistributionBuilder_ == null) {
+          ensureDomainTimedDistributionIsMutable();
+          domainTimedDistribution_.add(builderForValue.build());
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder addDomainTimedDistribution(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder builderForValue) {
+        if (domainTimedDistributionBuilder_ == null) {
+          ensureDomainTimedDistributionIsMutable();
+          domainTimedDistribution_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder addAllDomainTimedDistribution(
+          java.lang.Iterable<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution> values) {
+        if (domainTimedDistributionBuilder_ == null) {
+          ensureDomainTimedDistributionIsMutable();
+          super.addAll(values, domainTimedDistribution_);
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder clearDomainTimedDistribution() {
+        if (domainTimedDistributionBuilder_ == null) {
+          domainTimedDistribution_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public Builder removeDomainTimedDistribution(int index) {
+        if (domainTimedDistributionBuilder_ == null) {
+          ensureDomainTimedDistributionIsMutable();
+          domainTimedDistribution_.remove(index);
+          onChanged();
+        } else {
+          domainTimedDistributionBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder getDomainTimedDistributionBuilder(
+          int index) {
+        return getDomainTimedDistributionFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder getDomainTimedDistributionOrBuilder(
+          int index) {
+        if (domainTimedDistributionBuilder_ == null) {
+          return domainTimedDistribution_.get(index);  } else {
+          return domainTimedDistributionBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder> 
+           getDomainTimedDistributionOrBuilderList() {
+        if (domainTimedDistributionBuilder_ != null) {
+          return domainTimedDistributionBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(domainTimedDistribution_);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder addDomainTimedDistributionBuilder() {
+        return getDomainTimedDistributionFieldBuilder().addBuilder(
+            com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder addDomainTimedDistributionBuilder(
+          int index) {
+        return getDomainTimedDistributionFieldBuilder().addBuilder(
+            index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainTimedDistribution domain_timed_distribution = 1;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder> 
+           getDomainTimedDistributionBuilderList() {
+        return getDomainTimedDistributionFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder> 
+          getDomainTimedDistributionFieldBuilder() {
+        if (domainTimedDistributionBuilder_ == null) {
+          domainTimedDistributionBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainTimedDistributionOrBuilder>(
+                  domainTimedDistribution_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          domainTimedDistribution_ = null;
+        }
+        return domainTimedDistributionBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ShareNormalizationData)
+    }
+
+    static {
+      defaultInstance = new ShareNormalizationData(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ShareNormalizationData)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -11158,6 +13265,21 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Distribution_Percentile_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ShareNormalizationData_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ShareNormalizationData_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ShareNormalizationData_DomainTimedDistribution_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ShareNormalizationData_DomainTimedDistribution_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -11222,8 +13344,17 @@ public final class CoreProto {
       "ution\022,\n\npercentile\030\001 \003(\0132\030.Distribution" +
       ".Percentile\032I\n\nPercentile\022\022\n\npercentile\030" +
       "\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_point_count" +
-      "\030\003 \001(\003B!\n\024com.janknspank.protoB\tCoreProt" +
-      "o"
+      "\030\003 \001(\003\"\355\002\n\026ShareNormalizationData\022X\n\031dom" +
+      "ain_timed_distribution\030\001 \003(\0132/.ShareNorm" +
+      "alizationData.DomainTimedDistributionB\004\210" +
+      "\246\035\001\032\370\001\n\027DomainTimedDistribution\022\024\n\006domai" +
+      "n\030\001 \001(\tB\004\210\246\035\001\022c\n\022timed_distribution\030\002 \003(",
+      "\0132A.ShareNormalizationData.DomainTimedDi" +
+      "stribution.TimedDistributionB\004\210\246\035\001\032b\n\021Ti" +
+      "medDistribution\022\"\n\024time_since_published\030" +
+      "\001 \001(\003B\004\210\246\035\001\022)\n\014distribution\030\002 \001(\0132\r.Dist" +
+      "ributionB\004\210\246\035\001B!\n\024com.janknspank.protoB\t" +
+      "CoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11302,6 +13433,24 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Distribution_Percentile_descriptor,
               new java.lang.String[] { "Percentile", "Value", "DataPointCount", });
+          internal_static_ShareNormalizationData_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+          internal_static_ShareNormalizationData_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ShareNormalizationData_descriptor,
+              new java.lang.String[] { "DomainTimedDistribution", });
+          internal_static_ShareNormalizationData_DomainTimedDistribution_descriptor =
+            internal_static_ShareNormalizationData_descriptor.getNestedTypes().get(0);
+          internal_static_ShareNormalizationData_DomainTimedDistribution_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ShareNormalizationData_DomainTimedDistribution_descriptor,
+              new java.lang.String[] { "Domain", "TimedDistribution", });
+          internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_descriptor =
+            internal_static_ShareNormalizationData_DomainTimedDistribution_descriptor.getNestedTypes().get(0);
+          internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ShareNormalizationData_DomainTimedDistribution_TimedDistribution_descriptor,
+              new java.lang.String[] { "TimeSincePublished", "Distribution", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -11400,6 +13549,11 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           return registry;
         }
       };

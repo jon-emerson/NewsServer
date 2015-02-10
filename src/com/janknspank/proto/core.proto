@@ -315,3 +315,30 @@ message Distribution {
   }
   repeated Percentile percentile = 1;
 }
+
+// Stores per-domain share aggregate counts for various time lengths, so that
+// we can normalize social engagement for an article versus its peers on the
+// same news site domain.
+message ShareNormalizationData {
+  message DomainTimedDistribution {
+    optional string domain = 1 [
+      (required) = YES
+    ];
+
+    message TimedDistribution {
+      optional int64 time_since_published = 1 [
+        (required) = YES
+      ];
+
+      optional Distribution distribution = 2 [
+        (required) = YES
+      ];
+    }
+    repeated TimedDistribution timed_distribution = 2 [
+      (required) = YES
+    ];
+  }
+  repeated DomainTimedDistribution domain_timed_distribution = 1 [
+    (required) = YES
+  ];
+}
