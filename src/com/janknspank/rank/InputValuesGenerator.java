@@ -120,9 +120,8 @@ public class InputValuesGenerator {
     // Older is smaller value
     return sigmoid(article.getPublishedTime() - timeInMillis); 
   }
-  
+
   public static double articleTextQualityScore(Article article) {
-    // TODO!!!!
     return 0;
   }
 

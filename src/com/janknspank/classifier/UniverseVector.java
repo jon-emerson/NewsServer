@@ -15,7 +15,7 @@ import com.janknspank.proto.ArticleProto.Article;
  * term. This is the DF part of TF-IDF.
  */
 public class UniverseVector {
-  private static final File UNIVERSE_VECTOR_FILE = new File("classifier/universe.vector");
+  private static final File UNIVERSE_VECTOR_FILE = new File("classifier/industry/universe.vector");
 
   private static Vector universeVector = null;
 
@@ -47,7 +47,7 @@ public class UniverseVector {
 
   /**
    * Helper method for saving the universe vector to the local codebase.  We'll
-   * likely want to run this periodically, as we collect more and more acticles,
+   * likely want to run this periodically, as we collect more and more articles,
    * so that we have a very good vector for English news article word
    * distribution.
    */

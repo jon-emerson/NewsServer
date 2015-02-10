@@ -1,5 +1,6 @@
 package com.janknspank.rank;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -221,11 +222,15 @@ public class JonBenchmark {
   public static void grade(Map<Article, Double> goodScoreMap, Map<Article, Double> badScoreMap) {
     int positives = 0;
     int falseNegatives = 0;
-    for (Double score : goodScoreMap.values()) {
+    List<String> falseNegativesTitles = new ArrayList<>();
+    for (Map.Entry<Article, Double> entry : goodScoreMap.entrySet()) {
+      double score = entry.getValue();
+      Article article = entry.getKey();
       if (score > 0.5) {
         positives++;
       } else {
         falseNegatives++;
+        falseNegativesTitles.add(article.getTitle());
       }
     }
     int negatives = 0;
@@ -244,6 +249,10 @@ public class JonBenchmark {
     System.out.println("Percent correct: " +
         (int) (100 * (((double) positives + negatives)
             / (goodScoreMap.size() + badScoreMap.size()))) + "%");
+    System.out.println("False negative titles:");
+    for (int i = 0; i < falseNegativesTitles.size(); i++) {
+      System.out.println("  " + falseNegativesTitles.get(i));
+    }
   }
 
   /**
