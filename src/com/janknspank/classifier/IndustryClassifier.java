@@ -59,6 +59,8 @@ public class IndustryClassifier {
     Vector vector = IndustryVector.get(industryCode);
     Vector articleVector = new Vector(article);
     double rawSimilarity = articleVector.getCosineSimilarity(UniverseVector.getInstance(), vector);
+//    System.out.println("Classifying " + article.getUrl() + " against industry: " 
+//        + industryCode.getDescription() + ", rawSimilarity: " + rawSimilarity);
     double similarity = DistributionBuilder.projectQuantile(
         industryDistributions.get(industryCode), rawSimilarity);
     ArticleIndustry classification = ArticleIndustry.newBuilder()
