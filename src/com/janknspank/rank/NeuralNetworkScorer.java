@@ -75,12 +75,7 @@ public final class NeuralNetworkScorer extends Scorer {
   static double[] generateIsolatedInputNodes(int enabledIndex) {
     double[] inputs = new double[INPUT_NODES_COUNT];
     for (int i = 0; i < INPUT_NODES_COUNT; i++) {
-      if (i == enabledIndex) {
-        inputs[i] = 1.0;
-      }
-      else {
-        inputs[i] = 0.0;
-      }
+      inputs[i] = (i == enabledIndex) ? 1.0 : 0.0;
     }
     return inputs;
   }
