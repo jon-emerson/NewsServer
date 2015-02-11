@@ -114,11 +114,11 @@ public class IndustryVector {
   }
 
   private static File getVectorFileForIndustry(IndustryCode industryCode) {
-    return new File(getDirectoryForIndustry(industryCode) + "/industry.vector");
+    return new File(getDirectoryForIndustry(industryCode), "/industry.vector");
   }
 
   private static File getDistributionFileForIndustry(IndustryCode industryCode) {
-    return new File(getDirectoryForIndustry(industryCode) + "/industry.distribution");
+    return new File(getDirectoryForIndustry(industryCode), "/industry.distribution");
   }
 
   static File getDirectoryForIndustry(IndustryCode industryCode) {

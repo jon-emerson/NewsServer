@@ -62,7 +62,10 @@ public final class NeuralNetworkScorer extends Scorer {
         InputValuesGenerator.relevanceToPastEmployers(user, article),
 
         // 10. Article text quality
-        InputValuesGenerator.articleTextQualityScore(article)
+        InputValuesGenerator.articleTextQualityScore(article),
+        
+        // 11. Relevance to startup vector for people with that intent
+        InputValuesGenerator.relevanceToStartupIntent(user, article)
     };
   }
   
@@ -84,22 +87,8 @@ public final class NeuralNetworkScorer extends Scorer {
   // Slow architecture. Makes too many server calls
   @Override
   public double getScore(User user, Article article) {
-    long startMillis = System.currentTimeMillis();
     neuralNetwork.setInput(generateInputNodes(user, article));
-    long generateInputNodesMillis = System.currentTimeMillis();
     neuralNetwork.calculate();
-    long calculateMillis = System.currentTimeMillis();
-
-    double totalTimeToRankArticle = (double)(calculateMillis - startMillis) / 1000;
-    double timeToGenerateInputNodes = (double)(generateInputNodesMillis
-        - totalTimeToRankArticle) / 1000;
-    double timeToCalculate = (double)(calculateMillis - generateInputNodesMillis) / 1000;
-
-    System.out.println("Ranked " + article.getUrl());
-    System.out.println("  Score: " + neuralNetwork.getOutput()[0]);
-    System.out.println("  Total time: " + totalTimeToRankArticle + "s");
-    System.out.println("    generate input nodes: " + timeToGenerateInputNodes +
-        ", compute output: " + timeToCalculate);
     return neuralNetwork.getOutput()[0];
   }
 }

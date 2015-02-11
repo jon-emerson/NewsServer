@@ -22,7 +22,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, DatabaseRequestException, RequestException, BiznessException {
     JSONObject response = createSuccessResponse();
-    
+
     Iterable<Article> articles = getArticles(req);
     JSONArray articlesJson = new JSONArray();
     for (Article article : articles) {
