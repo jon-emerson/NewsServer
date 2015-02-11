@@ -4,14 +4,20 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
+import com.janknspank.bizness.IntentCodes;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.classifier.ArticleFeatureEnum;
+import com.janknspank.classifier.Feature;
+import com.janknspank.classifier.StartupFeature;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleIndustry;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
+import com.janknspank.proto.UserProto.Intent;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
 import com.janknspank.proto.UserProto.User;
@@ -122,6 +128,26 @@ public class InputValuesGenerator {
   }
 
   public static double articleTextQualityScore(Article article) {
+    return 0;
+  }
+  
+  // Expensive function!!! TODO: Figure out how to simplify
+  public static double relevanceToStartupIntent(User user, Article article) {
+    for (Intent intent: user.getIntentList()) {
+      if (intent.getCode() == IntentCodes.START_COMPANY.getCode()) {
+        for (ArticleFeature articleFeature : article.getFeatureList()) {
+          Feature feature = ArticleFeatureEnum
+              .findById(articleFeature.getFeatureId())
+              .getFeature();
+          if (feature instanceof StartupFeature) {
+            StartupFeature startupFeature = (StartupFeature) feature;
+            if (startupFeature.isRelatedToIndustries(user.getIndustryList())) {
+              return articleFeature.getSimilarity();
+            }
+          }
+        }
+      }
+    }
     return 0;
   }
 

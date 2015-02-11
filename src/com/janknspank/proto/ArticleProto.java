@@ -256,6 +256,31 @@ public final class ArticleProto {
      */
     com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder getSocialEngagementOrBuilder(
         int index);
+
+    // repeated .ArticleFeature feature = 18;
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> 
+        getFeatureList();
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    com.janknspank.proto.ArticleProto.ArticleFeature getFeature(int index);
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    int getFeatureCount();
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> 
+        getFeatureOrBuilderList();
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder getFeatureOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code Article}
@@ -395,6 +420,14 @@ public final class ArticleProto {
               socialEngagement_.add(input.readMessage(com.janknspank.proto.ArticleProto.SocialEngagement.PARSER, extensionRegistry));
               break;
             }
+            case 146: {
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+                feature_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleFeature>();
+                mutable_bitField0_ |= 0x00008000;
+              }
+              feature_.add(input.readMessage(com.janknspank.proto.ArticleProto.ArticleFeature.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -414,6 +447,9 @@ public final class ArticleProto {
         }
         if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
           socialEngagement_ = java.util.Collections.unmodifiableList(socialEngagement_);
+        }
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+          feature_ = java.util.Collections.unmodifiableList(feature_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -977,6 +1013,42 @@ public final class ArticleProto {
       return socialEngagement_.get(index);
     }
 
+    // repeated .ArticleFeature feature = 18;
+    public static final int FEATURE_FIELD_NUMBER = 18;
+    private java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> feature_;
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    public java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> getFeatureList() {
+      return feature_;
+    }
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> 
+        getFeatureOrBuilderList() {
+      return feature_;
+    }
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    public int getFeatureCount() {
+      return feature_.size();
+    }
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    public com.janknspank.proto.ArticleProto.ArticleFeature getFeature(int index) {
+      return feature_.get(index);
+    }
+    /**
+     * <code>repeated .ArticleFeature feature = 18;</code>
+     */
+    public com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder getFeatureOrBuilder(
+        int index) {
+      return feature_.get(index);
+    }
+
     private void initFields() {
       urlId_ = "";
       url_ = "";
@@ -993,6 +1065,7 @@ public final class ArticleProto {
       keyword_ = java.util.Collections.emptyList();
       industry_ = java.util.Collections.emptyList();
       socialEngagement_ = java.util.Collections.emptyList();
+      feature_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1059,6 +1132,9 @@ public final class ArticleProto {
       }
       for (int i = 0; i < socialEngagement_.size(); i++) {
         output.writeMessage(17, socialEngagement_.get(i));
+      }
+      for (int i = 0; i < feature_.size(); i++) {
+        output.writeMessage(18, feature_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1133,6 +1209,10 @@ public final class ArticleProto {
       for (int i = 0; i < socialEngagement_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(17, socialEngagement_.get(i));
+      }
+      for (int i = 0; i < feature_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(18, feature_.get(i));
       }
       size += extensionsSerializedSize();
       size += getUnknownFields().getSerializedSize();
@@ -1246,6 +1326,7 @@ public final class ArticleProto {
           getKeywordFieldBuilder();
           getIndustryFieldBuilder();
           getSocialEngagementFieldBuilder();
+          getFeatureFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1295,6 +1376,12 @@ public final class ArticleProto {
           bitField0_ = (bitField0_ & ~0x00004000);
         } else {
           socialEngagementBuilder_.clear();
+        }
+        if (featureBuilder_ == null) {
+          feature_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00008000);
+        } else {
+          featureBuilder_.clear();
         }
         return this;
       }
@@ -1400,6 +1487,15 @@ public final class ArticleProto {
           result.socialEngagement_ = socialEngagement_;
         } else {
           result.socialEngagement_ = socialEngagementBuilder_.build();
+        }
+        if (featureBuilder_ == null) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
+            feature_ = java.util.Collections.unmodifiableList(feature_);
+            bitField0_ = (bitField0_ & ~0x00008000);
+          }
+          result.feature_ = feature_;
+        } else {
+          result.feature_ = featureBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1551,6 +1647,32 @@ public final class ArticleProto {
                    getSocialEngagementFieldBuilder() : null;
             } else {
               socialEngagementBuilder_.addAllMessages(other.socialEngagement_);
+            }
+          }
+        }
+        if (featureBuilder_ == null) {
+          if (!other.feature_.isEmpty()) {
+            if (feature_.isEmpty()) {
+              feature_ = other.feature_;
+              bitField0_ = (bitField0_ & ~0x00008000);
+            } else {
+              ensureFeatureIsMutable();
+              feature_.addAll(other.feature_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.feature_.isEmpty()) {
+            if (featureBuilder_.isEmpty()) {
+              featureBuilder_.dispose();
+              featureBuilder_ = null;
+              feature_ = other.feature_;
+              bitField0_ = (bitField0_ & ~0x00008000);
+              featureBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getFeatureFieldBuilder() : null;
+            } else {
+              featureBuilder_.addAllMessages(other.feature_);
             }
           }
         }
@@ -3088,6 +3210,246 @@ public final class ArticleProto {
           socialEngagement_ = null;
         }
         return socialEngagementBuilder_;
+      }
+
+      // repeated .ArticleFeature feature = 18;
+      private java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> feature_ =
+        java.util.Collections.emptyList();
+      private void ensureFeatureIsMutable() {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+          feature_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleFeature>(feature_);
+          bitField0_ |= 0x00008000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.ArticleProto.ArticleFeature, com.janknspank.proto.ArticleProto.ArticleFeature.Builder, com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> featureBuilder_;
+
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> getFeatureList() {
+        if (featureBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(feature_);
+        } else {
+          return featureBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public int getFeatureCount() {
+        if (featureBuilder_ == null) {
+          return feature_.size();
+        } else {
+          return featureBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public com.janknspank.proto.ArticleProto.ArticleFeature getFeature(int index) {
+        if (featureBuilder_ == null) {
+          return feature_.get(index);
+        } else {
+          return featureBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder setFeature(
+          int index, com.janknspank.proto.ArticleProto.ArticleFeature value) {
+        if (featureBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeatureIsMutable();
+          feature_.set(index, value);
+          onChanged();
+        } else {
+          featureBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder setFeature(
+          int index, com.janknspank.proto.ArticleProto.ArticleFeature.Builder builderForValue) {
+        if (featureBuilder_ == null) {
+          ensureFeatureIsMutable();
+          feature_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          featureBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder addFeature(com.janknspank.proto.ArticleProto.ArticleFeature value) {
+        if (featureBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeatureIsMutable();
+          feature_.add(value);
+          onChanged();
+        } else {
+          featureBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder addFeature(
+          int index, com.janknspank.proto.ArticleProto.ArticleFeature value) {
+        if (featureBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeatureIsMutable();
+          feature_.add(index, value);
+          onChanged();
+        } else {
+          featureBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder addFeature(
+          com.janknspank.proto.ArticleProto.ArticleFeature.Builder builderForValue) {
+        if (featureBuilder_ == null) {
+          ensureFeatureIsMutable();
+          feature_.add(builderForValue.build());
+          onChanged();
+        } else {
+          featureBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder addFeature(
+          int index, com.janknspank.proto.ArticleProto.ArticleFeature.Builder builderForValue) {
+        if (featureBuilder_ == null) {
+          ensureFeatureIsMutable();
+          feature_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          featureBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder addAllFeature(
+          java.lang.Iterable<? extends com.janknspank.proto.ArticleProto.ArticleFeature> values) {
+        if (featureBuilder_ == null) {
+          ensureFeatureIsMutable();
+          super.addAll(values, feature_);
+          onChanged();
+        } else {
+          featureBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder clearFeature() {
+        if (featureBuilder_ == null) {
+          feature_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00008000);
+          onChanged();
+        } else {
+          featureBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public Builder removeFeature(int index) {
+        if (featureBuilder_ == null) {
+          ensureFeatureIsMutable();
+          feature_.remove(index);
+          onChanged();
+        } else {
+          featureBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public com.janknspank.proto.ArticleProto.ArticleFeature.Builder getFeatureBuilder(
+          int index) {
+        return getFeatureFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder getFeatureOrBuilder(
+          int index) {
+        if (featureBuilder_ == null) {
+          return feature_.get(index);  } else {
+          return featureBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> 
+           getFeatureOrBuilderList() {
+        if (featureBuilder_ != null) {
+          return featureBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(feature_);
+        }
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public com.janknspank.proto.ArticleProto.ArticleFeature.Builder addFeatureBuilder() {
+        return getFeatureFieldBuilder().addBuilder(
+            com.janknspank.proto.ArticleProto.ArticleFeature.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public com.janknspank.proto.ArticleProto.ArticleFeature.Builder addFeatureBuilder(
+          int index) {
+        return getFeatureFieldBuilder().addBuilder(
+            index, com.janknspank.proto.ArticleProto.ArticleFeature.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ArticleFeature feature = 18;</code>
+       */
+      public java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature.Builder> 
+           getFeatureBuilderList() {
+        return getFeatureFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.ArticleProto.ArticleFeature, com.janknspank.proto.ArticleProto.ArticleFeature.Builder, com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> 
+          getFeatureFieldBuilder() {
+        if (featureBuilder_ == null) {
+          featureBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.ArticleProto.ArticleFeature, com.janknspank.proto.ArticleProto.ArticleFeature.Builder, com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder>(
+                  feature_,
+                  ((bitField0_ & 0x00008000) == 0x00008000),
+                  getParentForChildren(),
+                  isClean());
+          feature_ = null;
+        }
+        return featureBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:Article)
@@ -5750,6 +6112,859 @@ public final class ArticleProto {
     // @@protoc_insertion_point(class_scope:SocialEngagement)
   }
 
+  public interface ArticleFeatureOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 feature_id = 1;
+    /**
+     * <code>optional int32 feature_id = 1;</code>
+     */
+    boolean hasFeatureId();
+    /**
+     * <code>optional int32 feature_id = 1;</code>
+     */
+    int getFeatureId();
+
+    // optional .ArticleFeature.Type type = 4 [default = UNKNOWN];
+    /**
+     * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
+     */
+    boolean hasType();
+    /**
+     * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
+     */
+    com.janknspank.proto.ArticleProto.ArticleFeature.Type getType();
+
+    // optional double similarity = 2;
+    /**
+     * <code>optional double similarity = 2;</code>
+     *
+     * <pre>
+     * Normalized similarity score for this article's relevance against the
+     * {&#64;code feature_id} feature.  Range is between 0 and 1.  A score
+     * near 1 means this article is extremely relevant to the given feature.
+     * A score above 0.80 means its relevance is in the top 20% of articles.
+     * </pre>
+     */
+    boolean hasSimilarity();
+    /**
+     * <code>optional double similarity = 2;</code>
+     *
+     * <pre>
+     * Normalized similarity score for this article's relevance against the
+     * {&#64;code feature_id} feature.  Range is between 0 and 1.  A score
+     * near 1 means this article is extremely relevant to the given feature.
+     * A score above 0.80 means its relevance is in the top 20% of articles.
+     * </pre>
+     */
+    double getSimilarity();
+
+    // optional double raw_similarity = 3;
+    /**
+     * <code>optional double raw_similarity = 3;</code>
+     *
+     * <pre>
+     * Raw output from the cosine similarity function for the relevance of this
+     * article to the {&#64;code feature_id} feature.
+     * </pre>
+     */
+    boolean hasRawSimilarity();
+    /**
+     * <code>optional double raw_similarity = 3;</code>
+     *
+     * <pre>
+     * Raw output from the cosine similarity function for the relevance of this
+     * article to the {&#64;code feature_id} feature.
+     * </pre>
+     */
+    double getRawSimilarity();
+  }
+  /**
+   * Protobuf type {@code ArticleFeature}
+   */
+  public static final class ArticleFeature extends
+      com.google.protobuf.GeneratedMessage
+      implements ArticleFeatureOrBuilder {
+    // Use ArticleFeature.newBuilder() to construct.
+    private ArticleFeature(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ArticleFeature(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ArticleFeature defaultInstance;
+    public static ArticleFeature getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ArticleFeature getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ArticleFeature(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              featureId_ = input.readInt32();
+              break;
+            }
+            case 17: {
+              bitField0_ |= 0x00000004;
+              similarity_ = input.readDouble();
+              break;
+            }
+            case 25: {
+              bitField0_ |= 0x00000008;
+              rawSimilarity_ = input.readDouble();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.ArticleProto.ArticleFeature.Type value = com.janknspank.proto.ArticleProto.ArticleFeature.Type.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                type_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.ArticleProto.internal_static_ArticleFeature_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.ArticleProto.internal_static_ArticleFeature_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.ArticleProto.ArticleFeature.class, com.janknspank.proto.ArticleProto.ArticleFeature.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ArticleFeature> PARSER =
+        new com.google.protobuf.AbstractParser<ArticleFeature>() {
+      public ArticleFeature parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ArticleFeature(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ArticleFeature> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code ArticleFeature.Type}
+     */
+    public enum Type
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>SERVES_INTENT = 1;</code>
+       */
+      SERVES_INTENT(1, 1),
+      /**
+       * <code>ABOUT_INDUSTRY = 2;</code>
+       */
+      ABOUT_INDUSTRY(2, 2),
+      /**
+       * <code>IMPROVES_SKILL = 3;</code>
+       */
+      IMPROVES_SKILL(3, 3),
+      /**
+       * <code>TEXT_CHARACTER = 4;</code>
+       */
+      TEXT_CHARACTER(4, 4),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>SERVES_INTENT = 1;</code>
+       */
+      public static final int SERVES_INTENT_VALUE = 1;
+      /**
+       * <code>ABOUT_INDUSTRY = 2;</code>
+       */
+      public static final int ABOUT_INDUSTRY_VALUE = 2;
+      /**
+       * <code>IMPROVES_SKILL = 3;</code>
+       */
+      public static final int IMPROVES_SKILL_VALUE = 3;
+      /**
+       * <code>TEXT_CHARACTER = 4;</code>
+       */
+      public static final int TEXT_CHARACTER_VALUE = 4;
+
+
+      public final int getNumber() { return value; }
+
+      public static Type valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return SERVES_INTENT;
+          case 2: return ABOUT_INDUSTRY;
+          case 3: return IMPROVES_SKILL;
+          case 4: return TEXT_CHARACTER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Type>() {
+              public Type findValueByNumber(int number) {
+                return Type.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.ArticleProto.ArticleFeature.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Type[] VALUES = values();
+
+      public static Type valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Type(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:ArticleFeature.Type)
+    }
+
+    private int bitField0_;
+    // optional int32 feature_id = 1;
+    public static final int FEATURE_ID_FIELD_NUMBER = 1;
+    private int featureId_;
+    /**
+     * <code>optional int32 feature_id = 1;</code>
+     */
+    public boolean hasFeatureId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 feature_id = 1;</code>
+     */
+    public int getFeatureId() {
+      return featureId_;
+    }
+
+    // optional .ArticleFeature.Type type = 4 [default = UNKNOWN];
+    public static final int TYPE_FIELD_NUMBER = 4;
+    private com.janknspank.proto.ArticleProto.ArticleFeature.Type type_;
+    /**
+     * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
+     */
+    public com.janknspank.proto.ArticleProto.ArticleFeature.Type getType() {
+      return type_;
+    }
+
+    // optional double similarity = 2;
+    public static final int SIMILARITY_FIELD_NUMBER = 2;
+    private double similarity_;
+    /**
+     * <code>optional double similarity = 2;</code>
+     *
+     * <pre>
+     * Normalized similarity score for this article's relevance against the
+     * {&#64;code feature_id} feature.  Range is between 0 and 1.  A score
+     * near 1 means this article is extremely relevant to the given feature.
+     * A score above 0.80 means its relevance is in the top 20% of articles.
+     * </pre>
+     */
+    public boolean hasSimilarity() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional double similarity = 2;</code>
+     *
+     * <pre>
+     * Normalized similarity score for this article's relevance against the
+     * {&#64;code feature_id} feature.  Range is between 0 and 1.  A score
+     * near 1 means this article is extremely relevant to the given feature.
+     * A score above 0.80 means its relevance is in the top 20% of articles.
+     * </pre>
+     */
+    public double getSimilarity() {
+      return similarity_;
+    }
+
+    // optional double raw_similarity = 3;
+    public static final int RAW_SIMILARITY_FIELD_NUMBER = 3;
+    private double rawSimilarity_;
+    /**
+     * <code>optional double raw_similarity = 3;</code>
+     *
+     * <pre>
+     * Raw output from the cosine similarity function for the relevance of this
+     * article to the {&#64;code feature_id} feature.
+     * </pre>
+     */
+    public boolean hasRawSimilarity() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional double raw_similarity = 3;</code>
+     *
+     * <pre>
+     * Raw output from the cosine similarity function for the relevance of this
+     * article to the {&#64;code feature_id} feature.
+     * </pre>
+     */
+    public double getRawSimilarity() {
+      return rawSimilarity_;
+    }
+
+    private void initFields() {
+      featureId_ = 0;
+      type_ = com.janknspank.proto.ArticleProto.ArticleFeature.Type.UNKNOWN;
+      similarity_ = 0D;
+      rawSimilarity_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, featureId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeDouble(2, similarity_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(3, rawSimilarity_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(4, type_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, featureId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, similarity_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(3, rawSimilarity_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, type_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.ArticleFeature parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.ArticleProto.ArticleFeature prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ArticleFeature}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.ArticleProto.internal_static_ArticleFeature_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.ArticleProto.internal_static_ArticleFeature_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.ArticleProto.ArticleFeature.class, com.janknspank.proto.ArticleProto.ArticleFeature.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.ArticleProto.ArticleFeature.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        featureId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = com.janknspank.proto.ArticleProto.ArticleFeature.Type.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        similarity_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        rawSimilarity_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.ArticleProto.internal_static_ArticleFeature_descriptor;
+      }
+
+      public com.janknspank.proto.ArticleProto.ArticleFeature getDefaultInstanceForType() {
+        return com.janknspank.proto.ArticleProto.ArticleFeature.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.ArticleProto.ArticleFeature build() {
+        com.janknspank.proto.ArticleProto.ArticleFeature result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.ArticleProto.ArticleFeature buildPartial() {
+        com.janknspank.proto.ArticleProto.ArticleFeature result = new com.janknspank.proto.ArticleProto.ArticleFeature(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.featureId_ = featureId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.similarity_ = similarity_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.rawSimilarity_ = rawSimilarity_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.ArticleProto.ArticleFeature) {
+          return mergeFrom((com.janknspank.proto.ArticleProto.ArticleFeature)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.ArticleProto.ArticleFeature other) {
+        if (other == com.janknspank.proto.ArticleProto.ArticleFeature.getDefaultInstance()) return this;
+        if (other.hasFeatureId()) {
+          setFeatureId(other.getFeatureId());
+        }
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasSimilarity()) {
+          setSimilarity(other.getSimilarity());
+        }
+        if (other.hasRawSimilarity()) {
+          setRawSimilarity(other.getRawSimilarity());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.ArticleProto.ArticleFeature parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.ArticleProto.ArticleFeature) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 feature_id = 1;
+      private int featureId_ ;
+      /**
+       * <code>optional int32 feature_id = 1;</code>
+       */
+      public boolean hasFeatureId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 feature_id = 1;</code>
+       */
+      public int getFeatureId() {
+        return featureId_;
+      }
+      /**
+       * <code>optional int32 feature_id = 1;</code>
+       */
+      public Builder setFeatureId(int value) {
+        bitField0_ |= 0x00000001;
+        featureId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 feature_id = 1;</code>
+       */
+      public Builder clearFeatureId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        featureId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional .ArticleFeature.Type type = 4 [default = UNKNOWN];
+      private com.janknspank.proto.ArticleProto.ArticleFeature.Type type_ = com.janknspank.proto.ArticleProto.ArticleFeature.Type.UNKNOWN;
+      /**
+       * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
+       */
+      public com.janknspank.proto.ArticleProto.ArticleFeature.Type getType() {
+        return type_;
+      }
+      /**
+       * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
+       */
+      public Builder setType(com.janknspank.proto.ArticleProto.ArticleFeature.Type value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        type_ = com.janknspank.proto.ArticleProto.ArticleFeature.Type.UNKNOWN;
+        onChanged();
+        return this;
+      }
+
+      // optional double similarity = 2;
+      private double similarity_ ;
+      /**
+       * <code>optional double similarity = 2;</code>
+       *
+       * <pre>
+       * Normalized similarity score for this article's relevance against the
+       * {&#64;code feature_id} feature.  Range is between 0 and 1.  A score
+       * near 1 means this article is extremely relevant to the given feature.
+       * A score above 0.80 means its relevance is in the top 20% of articles.
+       * </pre>
+       */
+      public boolean hasSimilarity() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional double similarity = 2;</code>
+       *
+       * <pre>
+       * Normalized similarity score for this article's relevance against the
+       * {&#64;code feature_id} feature.  Range is between 0 and 1.  A score
+       * near 1 means this article is extremely relevant to the given feature.
+       * A score above 0.80 means its relevance is in the top 20% of articles.
+       * </pre>
+       */
+      public double getSimilarity() {
+        return similarity_;
+      }
+      /**
+       * <code>optional double similarity = 2;</code>
+       *
+       * <pre>
+       * Normalized similarity score for this article's relevance against the
+       * {&#64;code feature_id} feature.  Range is between 0 and 1.  A score
+       * near 1 means this article is extremely relevant to the given feature.
+       * A score above 0.80 means its relevance is in the top 20% of articles.
+       * </pre>
+       */
+      public Builder setSimilarity(double value) {
+        bitField0_ |= 0x00000004;
+        similarity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double similarity = 2;</code>
+       *
+       * <pre>
+       * Normalized similarity score for this article's relevance against the
+       * {&#64;code feature_id} feature.  Range is between 0 and 1.  A score
+       * near 1 means this article is extremely relevant to the given feature.
+       * A score above 0.80 means its relevance is in the top 20% of articles.
+       * </pre>
+       */
+      public Builder clearSimilarity() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        similarity_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional double raw_similarity = 3;
+      private double rawSimilarity_ ;
+      /**
+       * <code>optional double raw_similarity = 3;</code>
+       *
+       * <pre>
+       * Raw output from the cosine similarity function for the relevance of this
+       * article to the {&#64;code feature_id} feature.
+       * </pre>
+       */
+      public boolean hasRawSimilarity() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional double raw_similarity = 3;</code>
+       *
+       * <pre>
+       * Raw output from the cosine similarity function for the relevance of this
+       * article to the {&#64;code feature_id} feature.
+       * </pre>
+       */
+      public double getRawSimilarity() {
+        return rawSimilarity_;
+      }
+      /**
+       * <code>optional double raw_similarity = 3;</code>
+       *
+       * <pre>
+       * Raw output from the cosine similarity function for the relevance of this
+       * article to the {&#64;code feature_id} feature.
+       * </pre>
+       */
+      public Builder setRawSimilarity(double value) {
+        bitField0_ |= 0x00000008;
+        rawSimilarity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double raw_similarity = 3;</code>
+       *
+       * <pre>
+       * Raw output from the cosine similarity function for the relevance of this
+       * article to the {&#64;code feature_id} feature.
+       * </pre>
+       */
+      public Builder clearRawSimilarity() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        rawSimilarity_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ArticleFeature)
+    }
+
+    static {
+      defaultInstance = new ArticleFeature(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ArticleFeature)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Article_descriptor;
   private static
@@ -5770,6 +6985,11 @@ public final class ArticleProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SocialEngagement_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ArticleFeature_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ArticleFeature_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -5780,8 +7000,8 @@ public final class ArticleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\352" +
-      "\003\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
+      "m/janknspank/database/extensions.proto\"\214" +
+      "\004\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\032\n\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005titl" +
       "e\030\003 \001(\tB\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246" +
       "\035\031\022\025\n\006author\030\005 \001(\tB\005\230\246\035\200\002\022\030\n\tcopyright\030\006" +
@@ -5792,22 +7012,29 @@ public final class ArticleProto {
       "word_count\030\016 \001(\003B\004\210\246\035\001\022 \n\007keyword\030\017 \003(\0132" +
       "\017.ArticleKeyword\022\"\n\010industry\030\020 \003(\0132\020.Art" +
       "icleIndustry\022,\n\021social_engagement\030\021 \003(\0132" +
-      "\021.SocialEngagement*\004\010\t\020\n*\004\010\014\020\r:\023\212\265\030\017Mong" +
-      "oDB.Article\"\325\001\n\016ArticleKeyword\022\035\n\007keywor" +
-      "d\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B" +
-      "\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n" +
-      "\006source\030\004 \001(\0162\026.ArticleKeyword.Source:\007U" +
-      "NKNOWN\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r" +
-      "\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\"g\n\017ArticleIn",
-      "dustry\022\"\n\020industry_code_id\030\001 \001(\005B\010\210\246\035\001\220\246" +
-      "\035\005\022\022\n\nsimilarity\030\002 \001(\001\022\034\n\016raw_similarity" +
-      "\030\003 \001(\001B\004\210\246\035\001\"\341\001\n\020SocialEngagement\022-\n\004sit" +
-      "e\030\001 \001(\0162\026.SocialEngagement.Site:\007UNKNOWN" +
-      "\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\023\n\013share_sco" +
-      "re\030\003 \001(\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_" +
-      "count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site" +
-      "\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002" +
-      "B$\n\024com.janknspank.protoB\014ArticleProto"
+      "\021.SocialEngagement\022 \n\007feature\030\022 \003(\0132\017.Ar" +
+      "ticleFeature*\004\010\t\020\n*\004\010\014\020\r:\023\212\265\030\017MongoDB.Ar" +
+      "ticle\"\325\001\n\016ArticleKeyword\022\035\n\007keyword\030\001 \001(" +
+      "\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022" +
+      "\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006sourc" +
+      "e\030\004 \001(\0162\026.ArticleKeyword.Source:\007UNKNOWN" +
+      "\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPE",
+      "RLINK\020\002\022\014\n\010META_TAG\020\003\"g\n\017ArticleIndustry" +
+      "\022\"\n\020industry_code_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\005\022\022\n\n" +
+      "similarity\030\002 \001(\001\022\034\n\016raw_similarity\030\003 \001(\001" +
+      "B\004\210\246\035\001\"\341\001\n\020SocialEngagement\022-\n\004site\030\001 \001(" +
+      "\0162\026.SocialEngagement.Site:\007UNKNOWN\022\031\n\013sh" +
+      "are_count\030\002 \001(\003B\004\210\246\035\001\022\023\n\013share_score\030\003 \001" +
+      "(\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_count\030" +
+      "\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site\022\013\n\007UN" +
+      "KNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"\361\001\n\016A" +
+      "rticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220",
+      "\246\035\005\022+\n\004type\030\004 \001(\0162\024.ArticleFeature.Type:" +
+      "\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001\022\034\n\016raw_simi" +
+      "larity\030\003 \001(\001B\004\210\246\035\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000\022" +
+      "\021\n\rSERVES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020\002\022\022" +
+      "\n\016IMPROVES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020\004B$" +
+      "\n\024com.janknspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5819,7 +7046,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "WordCount", "Keyword", "Industry", "SocialEngagement", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "WordCount", "Keyword", "Industry", "SocialEngagement", "Feature", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -5838,6 +7065,12 @@ public final class ArticleProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SocialEngagement_descriptor,
               new java.lang.String[] { "Site", "ShareCount", "ShareScore", "LikeCount", "CommentCount", "CreateTime", });
+          internal_static_ArticleFeature_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_ArticleFeature_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ArticleFeature_descriptor,
+              new java.lang.String[] { "FeatureId", "Type", "Similarity", "RawSimilarity", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -5873,6 +7106,9 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           return registry;
         }

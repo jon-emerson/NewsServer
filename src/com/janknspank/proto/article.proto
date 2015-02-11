@@ -70,6 +70,7 @@ message Article {
   repeated ArticleKeyword keyword = 15;
   repeated ArticleIndustry industry = 16;
   repeated SocialEngagement social_engagement = 17;
+  repeated ArticleFeature feature = 18;
 }
 
 message ArticleKeyword {
@@ -147,4 +148,34 @@ message SocialEngagement {
   optional int64 like_count = 4;
   optional int64 comment_count = 5;
   optional int64 create_time = 6;
+}
+
+message ArticleFeature {
+  optional int32 feature_id = 1 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+  
+  enum Type {
+    UNKNOWN = 0;
+    SERVES_INTENT = 1;
+    ABOUT_INDUSTRY = 2;
+    IMPROVES_SKILL = 3;
+    TEXT_CHARACTER = 4;
+  }
+  optional Type type = 4 [
+    default = UNKNOWN
+  ];
+
+  // Normalized similarity score for this article's relevance against the
+  // {@code feature_id} feature.  Range is between 0 and 1.  A score
+  // near 1 means this article is extremely relevant to the given feature.
+  // A score above 0.80 means its relevance is in the top 20% of articles.
+  optional double similarity = 2;
+
+  // Raw output from the cosine similarity function for the relevance of this
+  // article to the {@code feature_id} feature.
+  optional double raw_similarity = 3 [
+    (required) = YES
+  ];
 }
