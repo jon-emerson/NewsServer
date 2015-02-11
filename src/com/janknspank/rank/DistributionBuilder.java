@@ -106,7 +106,6 @@ public class DistributionBuilder {
     Distribution.Percentile topPercentile = null;
 
     for (Distribution.Percentile percentile : distribution.getPercentileList()) {
-//      System.out.println("percentile - " + percentile.getPercentile() + " value: " + percentile.getValue());
       if (percentile.getValue() <= value
           && (bottomPercentile == null
               || percentile.getPercentile() > bottomPercentile.getPercentile())) {

@@ -4,9 +4,13 @@ import java.io.File;
 
 public class IndustryFeature extends VectorFeature {
   private static final File VECTORS_DIRECTORY = new File("classifier/industry");
+
+  @SuppressWarnings("unused")
   private String linkedInGroup;
+
+  @SuppressWarnings("unused")
   private int linkedInId;
-  
+
   public IndustryFeature(int id, String description, 
       FeatureType type, String group) {
     super(id, description, type);
