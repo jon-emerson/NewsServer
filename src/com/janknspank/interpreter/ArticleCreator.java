@@ -26,6 +26,7 @@ import com.janknspank.database.Database;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.SocialEngagement;
 
 class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   private static LoadingCache<DocumentNode, Iterable<String>> PARAGRAPH_CACHE =
@@ -127,7 +128,10 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       e.printStackTrace();
     }
     try {
-      articleBuilder.addSocialEngagement(FacebookData.getEngagementForURL(documentNode.getUrl()));
+      SocialEngagement engagement = FacebookData.getEngagementForURL(articleBuilder);
+      if (engagement != null) {
+        articleBuilder.addSocialEngagement(engagement);
+      }
     } catch (FacebookException e) {
       e.printStackTrace();
     }

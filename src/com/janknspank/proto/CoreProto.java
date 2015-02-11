@@ -11098,6 +11098,2394 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:Distribution)
   }
 
+  public interface ShareNormalizationDataOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution> 
+        getTimeRangeDistributionList();
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution getTimeRangeDistribution(int index);
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    int getTimeRangeDistributionCount();
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder> 
+        getTimeRangeDistributionOrBuilderList();
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder getTimeRangeDistributionOrBuilder(
+        int index);
+
+    // repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount> 
+        getDomainShareCountList();
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount getDomainShareCount(int index);
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    int getDomainShareCountCount();
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder> 
+        getDomainShareCountOrBuilderList();
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder getDomainShareCountOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ShareNormalizationData}
+   *
+   * <pre>
+   * Stores share aggregate counts for various time lengths, so that we can
+   * normalize social engagement for an article versus its peers.
+   * </pre>
+   */
+  public static final class ShareNormalizationData extends
+      com.google.protobuf.GeneratedMessage
+      implements ShareNormalizationDataOrBuilder {
+    // Use ShareNormalizationData.newBuilder() to construct.
+    private ShareNormalizationData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ShareNormalizationData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ShareNormalizationData defaultInstance;
+    public static ShareNormalizationData getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ShareNormalizationData getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ShareNormalizationData(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                timeRangeDistribution_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              timeRangeDistribution_.add(input.readMessage(com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.PARSER, extensionRegistry));
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                domainShareCount_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              domainShareCount_.add(input.readMessage(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          timeRangeDistribution_ = java.util.Collections.unmodifiableList(timeRangeDistribution_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          domainShareCount_ = java.util.Collections.unmodifiableList(domainShareCount_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.ShareNormalizationData.class, com.janknspank.proto.CoreProto.ShareNormalizationData.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ShareNormalizationData> PARSER =
+        new com.google.protobuf.AbstractParser<ShareNormalizationData>() {
+      public ShareNormalizationData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ShareNormalizationData(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ShareNormalizationData> getParserForType() {
+      return PARSER;
+    }
+
+    public interface TimeRangeDistributionOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional int64 start_millis = 1;
+      /**
+       * <code>optional int64 start_millis = 1;</code>
+       *
+       * <pre>
+       * The beginning of the range, in milliseconds since the article was
+       * published.  This value must be smaller than end_millis.
+       * </pre>
+       */
+      boolean hasStartMillis();
+      /**
+       * <code>optional int64 start_millis = 1;</code>
+       *
+       * <pre>
+       * The beginning of the range, in milliseconds since the article was
+       * published.  This value must be smaller than end_millis.
+       * </pre>
+       */
+      long getStartMillis();
+
+      // optional int64 end_millis = 2;
+      /**
+       * <code>optional int64 end_millis = 2;</code>
+       */
+      boolean hasEndMillis();
+      /**
+       * <code>optional int64 end_millis = 2;</code>
+       */
+      long getEndMillis();
+
+      // optional .Distribution distribution = 3;
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       */
+      boolean hasDistribution();
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       */
+      com.janknspank.proto.CoreProto.Distribution getDistribution();
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       */
+      com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder();
+    }
+    /**
+     * Protobuf type {@code ShareNormalizationData.TimeRangeDistribution}
+     */
+    public static final class TimeRangeDistribution extends
+        com.google.protobuf.GeneratedMessage
+        implements TimeRangeDistributionOrBuilder {
+      // Use TimeRangeDistribution.newBuilder() to construct.
+      private TimeRangeDistribution(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private TimeRangeDistribution(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final TimeRangeDistribution defaultInstance;
+      public static TimeRangeDistribution getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public TimeRangeDistribution getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private TimeRangeDistribution(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 8: {
+                bitField0_ |= 0x00000001;
+                startMillis_ = input.readInt64();
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000002;
+                endMillis_ = input.readInt64();
+                break;
+              }
+              case 26: {
+                com.janknspank.proto.CoreProto.Distribution.Builder subBuilder = null;
+                if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                  subBuilder = distribution_.toBuilder();
+                }
+                distribution_ = input.readMessage(com.janknspank.proto.CoreProto.Distribution.PARSER, extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(distribution_);
+                  distribution_ = subBuilder.buildPartial();
+                }
+                bitField0_ |= 0x00000004;
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_TimeRangeDistribution_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_TimeRangeDistribution_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.class, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<TimeRangeDistribution> PARSER =
+          new com.google.protobuf.AbstractParser<TimeRangeDistribution>() {
+        public TimeRangeDistribution parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new TimeRangeDistribution(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<TimeRangeDistribution> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // optional int64 start_millis = 1;
+      public static final int START_MILLIS_FIELD_NUMBER = 1;
+      private long startMillis_;
+      /**
+       * <code>optional int64 start_millis = 1;</code>
+       *
+       * <pre>
+       * The beginning of the range, in milliseconds since the article was
+       * published.  This value must be smaller than end_millis.
+       * </pre>
+       */
+      public boolean hasStartMillis() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int64 start_millis = 1;</code>
+       *
+       * <pre>
+       * The beginning of the range, in milliseconds since the article was
+       * published.  This value must be smaller than end_millis.
+       * </pre>
+       */
+      public long getStartMillis() {
+        return startMillis_;
+      }
+
+      // optional int64 end_millis = 2;
+      public static final int END_MILLIS_FIELD_NUMBER = 2;
+      private long endMillis_;
+      /**
+       * <code>optional int64 end_millis = 2;</code>
+       */
+      public boolean hasEndMillis() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 end_millis = 2;</code>
+       */
+      public long getEndMillis() {
+        return endMillis_;
+      }
+
+      // optional .Distribution distribution = 3;
+      public static final int DISTRIBUTION_FIELD_NUMBER = 3;
+      private com.janknspank.proto.CoreProto.Distribution distribution_;
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       */
+      public boolean hasDistribution() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       */
+      public com.janknspank.proto.CoreProto.Distribution getDistribution() {
+        return distribution_;
+      }
+      /**
+       * <code>optional .Distribution distribution = 3;</code>
+       */
+      public com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder() {
+        return distribution_;
+      }
+
+      private void initFields() {
+        startMillis_ = 0L;
+        endMillis_ = 0L;
+        distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeInt64(1, startMillis_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeInt64(2, endMillis_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeMessage(3, distribution_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(1, startMillis_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(2, endMillis_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(3, distribution_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code ShareNormalizationData.TimeRangeDistribution}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_TimeRangeDistribution_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_TimeRangeDistribution_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.class, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getDistributionFieldBuilder();
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          startMillis_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          endMillis_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          if (distributionBuilder_ == null) {
+            distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+          } else {
+            distributionBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_TimeRangeDistribution_descriptor;
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution getDefaultInstanceForType() {
+          return com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution build() {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution buildPartial() {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution result = new com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.startMillis_ = startMillis_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.endMillis_ = endMillis_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          if (distributionBuilder_ == null) {
+            result.distribution_ = distribution_;
+          } else {
+            result.distribution_ = distributionBuilder_.build();
+          }
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution) {
+            return mergeFrom((com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution other) {
+          if (other == com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.getDefaultInstance()) return this;
+          if (other.hasStartMillis()) {
+            setStartMillis(other.getStartMillis());
+          }
+          if (other.hasEndMillis()) {
+            setEndMillis(other.getEndMillis());
+          }
+          if (other.hasDistribution()) {
+            mergeDistribution(other.getDistribution());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional int64 start_millis = 1;
+        private long startMillis_ ;
+        /**
+         * <code>optional int64 start_millis = 1;</code>
+         *
+         * <pre>
+         * The beginning of the range, in milliseconds since the article was
+         * published.  This value must be smaller than end_millis.
+         * </pre>
+         */
+        public boolean hasStartMillis() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional int64 start_millis = 1;</code>
+         *
+         * <pre>
+         * The beginning of the range, in milliseconds since the article was
+         * published.  This value must be smaller than end_millis.
+         * </pre>
+         */
+        public long getStartMillis() {
+          return startMillis_;
+        }
+        /**
+         * <code>optional int64 start_millis = 1;</code>
+         *
+         * <pre>
+         * The beginning of the range, in milliseconds since the article was
+         * published.  This value must be smaller than end_millis.
+         * </pre>
+         */
+        public Builder setStartMillis(long value) {
+          bitField0_ |= 0x00000001;
+          startMillis_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 start_millis = 1;</code>
+         *
+         * <pre>
+         * The beginning of the range, in milliseconds since the article was
+         * published.  This value must be smaller than end_millis.
+         * </pre>
+         */
+        public Builder clearStartMillis() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          startMillis_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // optional int64 end_millis = 2;
+        private long endMillis_ ;
+        /**
+         * <code>optional int64 end_millis = 2;</code>
+         */
+        public boolean hasEndMillis() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional int64 end_millis = 2;</code>
+         */
+        public long getEndMillis() {
+          return endMillis_;
+        }
+        /**
+         * <code>optional int64 end_millis = 2;</code>
+         */
+        public Builder setEndMillis(long value) {
+          bitField0_ |= 0x00000002;
+          endMillis_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 end_millis = 2;</code>
+         */
+        public Builder clearEndMillis() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          endMillis_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // optional .Distribution distribution = 3;
+        private com.janknspank.proto.CoreProto.Distribution distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder> distributionBuilder_;
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        public boolean hasDistribution() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        public com.janknspank.proto.CoreProto.Distribution getDistribution() {
+          if (distributionBuilder_ == null) {
+            return distribution_;
+          } else {
+            return distributionBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        public Builder setDistribution(com.janknspank.proto.CoreProto.Distribution value) {
+          if (distributionBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            distribution_ = value;
+            onChanged();
+          } else {
+            distributionBuilder_.setMessage(value);
+          }
+          bitField0_ |= 0x00000004;
+          return this;
+        }
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        public Builder setDistribution(
+            com.janknspank.proto.CoreProto.Distribution.Builder builderForValue) {
+          if (distributionBuilder_ == null) {
+            distribution_ = builderForValue.build();
+            onChanged();
+          } else {
+            distributionBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x00000004;
+          return this;
+        }
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        public Builder mergeDistribution(com.janknspank.proto.CoreProto.Distribution value) {
+          if (distributionBuilder_ == null) {
+            if (((bitField0_ & 0x00000004) == 0x00000004) &&
+                distribution_ != com.janknspank.proto.CoreProto.Distribution.getDefaultInstance()) {
+              distribution_ =
+                com.janknspank.proto.CoreProto.Distribution.newBuilder(distribution_).mergeFrom(value).buildPartial();
+            } else {
+              distribution_ = value;
+            }
+            onChanged();
+          } else {
+            distributionBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x00000004;
+          return this;
+        }
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        public Builder clearDistribution() {
+          if (distributionBuilder_ == null) {
+            distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+            onChanged();
+          } else {
+            distributionBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        public com.janknspank.proto.CoreProto.Distribution.Builder getDistributionBuilder() {
+          bitField0_ |= 0x00000004;
+          onChanged();
+          return getDistributionFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        public com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder() {
+          if (distributionBuilder_ != null) {
+            return distributionBuilder_.getMessageOrBuilder();
+          } else {
+            return distribution_;
+          }
+        }
+        /**
+         * <code>optional .Distribution distribution = 3;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilder<
+            com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder> 
+            getDistributionFieldBuilder() {
+          if (distributionBuilder_ == null) {
+            distributionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder>(
+                    distribution_,
+                    getParentForChildren(),
+                    isClean());
+            distribution_ = null;
+          }
+          return distributionBuilder_;
+        }
+
+        // @@protoc_insertion_point(builder_scope:ShareNormalizationData.TimeRangeDistribution)
+      }
+
+      static {
+        defaultInstance = new TimeRangeDistribution(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:ShareNormalizationData.TimeRangeDistribution)
+    }
+
+    public interface DomainShareCountOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional string domain = 1;
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      boolean hasDomain();
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      java.lang.String getDomain();
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getDomainBytes();
+
+      // optional int64 article_count = 2;
+      /**
+       * <code>optional int64 article_count = 2;</code>
+       */
+      boolean hasArticleCount();
+      /**
+       * <code>optional int64 article_count = 2;</code>
+       */
+      long getArticleCount();
+
+      // optional int64 share_count = 3;
+      /**
+       * <code>optional int64 share_count = 3;</code>
+       */
+      boolean hasShareCount();
+      /**
+       * <code>optional int64 share_count = 3;</code>
+       */
+      long getShareCount();
+    }
+    /**
+     * Protobuf type {@code ShareNormalizationData.DomainShareCount}
+     */
+    public static final class DomainShareCount extends
+        com.google.protobuf.GeneratedMessage
+        implements DomainShareCountOrBuilder {
+      // Use DomainShareCount.newBuilder() to construct.
+      private DomainShareCount(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private DomainShareCount(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final DomainShareCount defaultInstance;
+      public static DomainShareCount getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public DomainShareCount getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private DomainShareCount(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                domain_ = input.readBytes();
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000002;
+                articleCount_ = input.readInt64();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                shareCount_ = input.readInt64();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainShareCount_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainShareCount_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.class, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<DomainShareCount> PARSER =
+          new com.google.protobuf.AbstractParser<DomainShareCount>() {
+        public DomainShareCount parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new DomainShareCount(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<DomainShareCount> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // optional string domain = 1;
+      public static final int DOMAIN_FIELD_NUMBER = 1;
+      private java.lang.Object domain_;
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      public boolean hasDomain() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      public java.lang.String getDomain() {
+        java.lang.Object ref = domain_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            domain_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string domain = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDomainBytes() {
+        java.lang.Object ref = domain_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          domain_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional int64 article_count = 2;
+      public static final int ARTICLE_COUNT_FIELD_NUMBER = 2;
+      private long articleCount_;
+      /**
+       * <code>optional int64 article_count = 2;</code>
+       */
+      public boolean hasArticleCount() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 article_count = 2;</code>
+       */
+      public long getArticleCount() {
+        return articleCount_;
+      }
+
+      // optional int64 share_count = 3;
+      public static final int SHARE_COUNT_FIELD_NUMBER = 3;
+      private long shareCount_;
+      /**
+       * <code>optional int64 share_count = 3;</code>
+       */
+      public boolean hasShareCount() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 share_count = 3;</code>
+       */
+      public long getShareCount() {
+        return shareCount_;
+      }
+
+      private void initFields() {
+        domain_ = "";
+        articleCount_ = 0L;
+        shareCount_ = 0L;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getDomainBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeInt64(2, articleCount_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt64(3, shareCount_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getDomainBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(2, articleCount_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(3, shareCount_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code ShareNormalizationData.DomainShareCount}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainShareCount_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainShareCount_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.class, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          domain_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          articleCount_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          shareCount_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_DomainShareCount_descriptor;
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount getDefaultInstanceForType() {
+          return com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount build() {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount buildPartial() {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount result = new com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.domain_ = domain_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.articleCount_ = articleCount_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.shareCount_ = shareCount_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount) {
+            return mergeFrom((com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount other) {
+          if (other == com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.getDefaultInstance()) return this;
+          if (other.hasDomain()) {
+            bitField0_ |= 0x00000001;
+            domain_ = other.domain_;
+            onChanged();
+          }
+          if (other.hasArticleCount()) {
+            setArticleCount(other.getArticleCount());
+          }
+          if (other.hasShareCount()) {
+            setShareCount(other.getShareCount());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional string domain = 1;
+        private java.lang.Object domain_ = "";
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public boolean hasDomain() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public java.lang.String getDomain() {
+          java.lang.Object ref = domain_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            domain_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getDomainBytes() {
+          java.lang.Object ref = domain_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            domain_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public Builder setDomain(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          domain_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public Builder clearDomain() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          domain_ = getDefaultInstance().getDomain();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string domain = 1;</code>
+         */
+        public Builder setDomainBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          domain_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional int64 article_count = 2;
+        private long articleCount_ ;
+        /**
+         * <code>optional int64 article_count = 2;</code>
+         */
+        public boolean hasArticleCount() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional int64 article_count = 2;</code>
+         */
+        public long getArticleCount() {
+          return articleCount_;
+        }
+        /**
+         * <code>optional int64 article_count = 2;</code>
+         */
+        public Builder setArticleCount(long value) {
+          bitField0_ |= 0x00000002;
+          articleCount_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 article_count = 2;</code>
+         */
+        public Builder clearArticleCount() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          articleCount_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // optional int64 share_count = 3;
+        private long shareCount_ ;
+        /**
+         * <code>optional int64 share_count = 3;</code>
+         */
+        public boolean hasShareCount() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional int64 share_count = 3;</code>
+         */
+        public long getShareCount() {
+          return shareCount_;
+        }
+        /**
+         * <code>optional int64 share_count = 3;</code>
+         */
+        public Builder setShareCount(long value) {
+          bitField0_ |= 0x00000004;
+          shareCount_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 share_count = 3;</code>
+         */
+        public Builder clearShareCount() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          shareCount_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:ShareNormalizationData.DomainShareCount)
+      }
+
+      static {
+        defaultInstance = new DomainShareCount(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:ShareNormalizationData.DomainShareCount)
+    }
+
+    // repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;
+    public static final int TIME_RANGE_DISTRIBUTION_FIELD_NUMBER = 2;
+    private java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution> timeRangeDistribution_;
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution> getTimeRangeDistributionList() {
+      return timeRangeDistribution_;
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder> 
+        getTimeRangeDistributionOrBuilderList() {
+      return timeRangeDistribution_;
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    public int getTimeRangeDistributionCount() {
+      return timeRangeDistribution_.size();
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution getTimeRangeDistribution(int index) {
+      return timeRangeDistribution_.get(index);
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+     */
+    public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder getTimeRangeDistributionOrBuilder(
+        int index) {
+      return timeRangeDistribution_.get(index);
+    }
+
+    // repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;
+    public static final int DOMAIN_SHARE_COUNT_FIELD_NUMBER = 3;
+    private java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount> domainShareCount_;
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount> getDomainShareCountList() {
+      return domainShareCount_;
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder> 
+        getDomainShareCountOrBuilderList() {
+      return domainShareCount_;
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    public int getDomainShareCountCount() {
+      return domainShareCount_.size();
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount getDomainShareCount(int index) {
+      return domainShareCount_.get(index);
+    }
+    /**
+     * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+     */
+    public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder getDomainShareCountOrBuilder(
+        int index) {
+      return domainShareCount_.get(index);
+    }
+
+    private void initFields() {
+      timeRangeDistribution_ = java.util.Collections.emptyList();
+      domainShareCount_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < timeRangeDistribution_.size(); i++) {
+        output.writeMessage(2, timeRangeDistribution_.get(i));
+      }
+      for (int i = 0; i < domainShareCount_.size(); i++) {
+        output.writeMessage(3, domainShareCount_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < timeRangeDistribution_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, timeRangeDistribution_.get(i));
+      }
+      for (int i = 0; i < domainShareCount_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, domainShareCount_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ShareNormalizationData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.ShareNormalizationData prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ShareNormalizationData}
+     *
+     * <pre>
+     * Stores share aggregate counts for various time lengths, so that we can
+     * normalize social engagement for an article versus its peers.
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.ShareNormalizationDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.ShareNormalizationData.class, com.janknspank.proto.CoreProto.ShareNormalizationData.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.ShareNormalizationData.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getTimeRangeDistributionFieldBuilder();
+          getDomainShareCountFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (timeRangeDistributionBuilder_ == null) {
+          timeRangeDistribution_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          timeRangeDistributionBuilder_.clear();
+        }
+        if (domainShareCountBuilder_ == null) {
+          domainShareCount_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          domainShareCountBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_ShareNormalizationData_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.ShareNormalizationData getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.ShareNormalizationData.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.ShareNormalizationData build() {
+        com.janknspank.proto.CoreProto.ShareNormalizationData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.ShareNormalizationData buildPartial() {
+        com.janknspank.proto.CoreProto.ShareNormalizationData result = new com.janknspank.proto.CoreProto.ShareNormalizationData(this);
+        int from_bitField0_ = bitField0_;
+        if (timeRangeDistributionBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            timeRangeDistribution_ = java.util.Collections.unmodifiableList(timeRangeDistribution_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.timeRangeDistribution_ = timeRangeDistribution_;
+        } else {
+          result.timeRangeDistribution_ = timeRangeDistributionBuilder_.build();
+        }
+        if (domainShareCountBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            domainShareCount_ = java.util.Collections.unmodifiableList(domainShareCount_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.domainShareCount_ = domainShareCount_;
+        } else {
+          result.domainShareCount_ = domainShareCountBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.ShareNormalizationData) {
+          return mergeFrom((com.janknspank.proto.CoreProto.ShareNormalizationData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.ShareNormalizationData other) {
+        if (other == com.janknspank.proto.CoreProto.ShareNormalizationData.getDefaultInstance()) return this;
+        if (timeRangeDistributionBuilder_ == null) {
+          if (!other.timeRangeDistribution_.isEmpty()) {
+            if (timeRangeDistribution_.isEmpty()) {
+              timeRangeDistribution_ = other.timeRangeDistribution_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureTimeRangeDistributionIsMutable();
+              timeRangeDistribution_.addAll(other.timeRangeDistribution_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.timeRangeDistribution_.isEmpty()) {
+            if (timeRangeDistributionBuilder_.isEmpty()) {
+              timeRangeDistributionBuilder_.dispose();
+              timeRangeDistributionBuilder_ = null;
+              timeRangeDistribution_ = other.timeRangeDistribution_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              timeRangeDistributionBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getTimeRangeDistributionFieldBuilder() : null;
+            } else {
+              timeRangeDistributionBuilder_.addAllMessages(other.timeRangeDistribution_);
+            }
+          }
+        }
+        if (domainShareCountBuilder_ == null) {
+          if (!other.domainShareCount_.isEmpty()) {
+            if (domainShareCount_.isEmpty()) {
+              domainShareCount_ = other.domainShareCount_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureDomainShareCountIsMutable();
+              domainShareCount_.addAll(other.domainShareCount_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.domainShareCount_.isEmpty()) {
+            if (domainShareCountBuilder_.isEmpty()) {
+              domainShareCountBuilder_.dispose();
+              domainShareCountBuilder_ = null;
+              domainShareCount_ = other.domainShareCount_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              domainShareCountBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getDomainShareCountFieldBuilder() : null;
+            } else {
+              domainShareCountBuilder_.addAllMessages(other.domainShareCount_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.ShareNormalizationData parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.ShareNormalizationData) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;
+      private java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution> timeRangeDistribution_ =
+        java.util.Collections.emptyList();
+      private void ensureTimeRangeDistributionIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          timeRangeDistribution_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution>(timeRangeDistribution_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder> timeRangeDistributionBuilder_;
+
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution> getTimeRangeDistributionList() {
+        if (timeRangeDistributionBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(timeRangeDistribution_);
+        } else {
+          return timeRangeDistributionBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public int getTimeRangeDistributionCount() {
+        if (timeRangeDistributionBuilder_ == null) {
+          return timeRangeDistribution_.size();
+        } else {
+          return timeRangeDistributionBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution getTimeRangeDistribution(int index) {
+        if (timeRangeDistributionBuilder_ == null) {
+          return timeRangeDistribution_.get(index);
+        } else {
+          return timeRangeDistributionBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder setTimeRangeDistribution(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution value) {
+        if (timeRangeDistributionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTimeRangeDistributionIsMutable();
+          timeRangeDistribution_.set(index, value);
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder setTimeRangeDistribution(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder builderForValue) {
+        if (timeRangeDistributionBuilder_ == null) {
+          ensureTimeRangeDistributionIsMutable();
+          timeRangeDistribution_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder addTimeRangeDistribution(com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution value) {
+        if (timeRangeDistributionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTimeRangeDistributionIsMutable();
+          timeRangeDistribution_.add(value);
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder addTimeRangeDistribution(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution value) {
+        if (timeRangeDistributionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTimeRangeDistributionIsMutable();
+          timeRangeDistribution_.add(index, value);
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder addTimeRangeDistribution(
+          com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder builderForValue) {
+        if (timeRangeDistributionBuilder_ == null) {
+          ensureTimeRangeDistributionIsMutable();
+          timeRangeDistribution_.add(builderForValue.build());
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder addTimeRangeDistribution(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder builderForValue) {
+        if (timeRangeDistributionBuilder_ == null) {
+          ensureTimeRangeDistributionIsMutable();
+          timeRangeDistribution_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder addAllTimeRangeDistribution(
+          java.lang.Iterable<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution> values) {
+        if (timeRangeDistributionBuilder_ == null) {
+          ensureTimeRangeDistributionIsMutable();
+          super.addAll(values, timeRangeDistribution_);
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder clearTimeRangeDistribution() {
+        if (timeRangeDistributionBuilder_ == null) {
+          timeRangeDistribution_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public Builder removeTimeRangeDistribution(int index) {
+        if (timeRangeDistributionBuilder_ == null) {
+          ensureTimeRangeDistributionIsMutable();
+          timeRangeDistribution_.remove(index);
+          onChanged();
+        } else {
+          timeRangeDistributionBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder getTimeRangeDistributionBuilder(
+          int index) {
+        return getTimeRangeDistributionFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder getTimeRangeDistributionOrBuilder(
+          int index) {
+        if (timeRangeDistributionBuilder_ == null) {
+          return timeRangeDistribution_.get(index);  } else {
+          return timeRangeDistributionBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder> 
+           getTimeRangeDistributionOrBuilderList() {
+        if (timeRangeDistributionBuilder_ != null) {
+          return timeRangeDistributionBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(timeRangeDistribution_);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder addTimeRangeDistributionBuilder() {
+        return getTimeRangeDistributionFieldBuilder().addBuilder(
+            com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder addTimeRangeDistributionBuilder(
+          int index) {
+        return getTimeRangeDistributionFieldBuilder().addBuilder(
+            index, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.TimeRangeDistribution time_range_distribution = 2;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder> 
+           getTimeRangeDistributionBuilderList() {
+        return getTimeRangeDistributionFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder> 
+          getTimeRangeDistributionFieldBuilder() {
+        if (timeRangeDistributionBuilder_ == null) {
+          timeRangeDistributionBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributionOrBuilder>(
+                  timeRangeDistribution_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          timeRangeDistribution_ = null;
+        }
+        return timeRangeDistributionBuilder_;
+      }
+
+      // repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;
+      private java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount> domainShareCount_ =
+        java.util.Collections.emptyList();
+      private void ensureDomainShareCountIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          domainShareCount_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount>(domainShareCount_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder> domainShareCountBuilder_;
+
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount> getDomainShareCountList() {
+        if (domainShareCountBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(domainShareCount_);
+        } else {
+          return domainShareCountBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public int getDomainShareCountCount() {
+        if (domainShareCountBuilder_ == null) {
+          return domainShareCount_.size();
+        } else {
+          return domainShareCountBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount getDomainShareCount(int index) {
+        if (domainShareCountBuilder_ == null) {
+          return domainShareCount_.get(index);
+        } else {
+          return domainShareCountBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder setDomainShareCount(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount value) {
+        if (domainShareCountBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDomainShareCountIsMutable();
+          domainShareCount_.set(index, value);
+          onChanged();
+        } else {
+          domainShareCountBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder setDomainShareCount(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder builderForValue) {
+        if (domainShareCountBuilder_ == null) {
+          ensureDomainShareCountIsMutable();
+          domainShareCount_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          domainShareCountBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder addDomainShareCount(com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount value) {
+        if (domainShareCountBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDomainShareCountIsMutable();
+          domainShareCount_.add(value);
+          onChanged();
+        } else {
+          domainShareCountBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder addDomainShareCount(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount value) {
+        if (domainShareCountBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDomainShareCountIsMutable();
+          domainShareCount_.add(index, value);
+          onChanged();
+        } else {
+          domainShareCountBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder addDomainShareCount(
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder builderForValue) {
+        if (domainShareCountBuilder_ == null) {
+          ensureDomainShareCountIsMutable();
+          domainShareCount_.add(builderForValue.build());
+          onChanged();
+        } else {
+          domainShareCountBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder addDomainShareCount(
+          int index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder builderForValue) {
+        if (domainShareCountBuilder_ == null) {
+          ensureDomainShareCountIsMutable();
+          domainShareCount_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          domainShareCountBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder addAllDomainShareCount(
+          java.lang.Iterable<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount> values) {
+        if (domainShareCountBuilder_ == null) {
+          ensureDomainShareCountIsMutable();
+          super.addAll(values, domainShareCount_);
+          onChanged();
+        } else {
+          domainShareCountBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder clearDomainShareCount() {
+        if (domainShareCountBuilder_ == null) {
+          domainShareCount_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          domainShareCountBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public Builder removeDomainShareCount(int index) {
+        if (domainShareCountBuilder_ == null) {
+          ensureDomainShareCountIsMutable();
+          domainShareCount_.remove(index);
+          onChanged();
+        } else {
+          domainShareCountBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder getDomainShareCountBuilder(
+          int index) {
+        return getDomainShareCountFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder getDomainShareCountOrBuilder(
+          int index) {
+        if (domainShareCountBuilder_ == null) {
+          return domainShareCount_.get(index);  } else {
+          return domainShareCountBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder> 
+           getDomainShareCountOrBuilderList() {
+        if (domainShareCountBuilder_ != null) {
+          return domainShareCountBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(domainShareCount_);
+        }
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder addDomainShareCountBuilder() {
+        return getDomainShareCountFieldBuilder().addBuilder(
+            com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder addDomainShareCountBuilder(
+          int index) {
+        return getDomainShareCountFieldBuilder().addBuilder(
+            index, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ShareNormalizationData.DomainShareCount domain_share_count = 3;</code>
+       */
+      public java.util.List<com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder> 
+           getDomainShareCountBuilderList() {
+        return getDomainShareCountFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder> 
+          getDomainShareCountFieldBuilder() {
+        if (domainShareCountBuilder_ == null) {
+          domainShareCountBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount.Builder, com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCountOrBuilder>(
+                  domainShareCount_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          domainShareCount_ = null;
+        }
+        return domainShareCountBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ShareNormalizationData)
+    }
+
+    static {
+      defaultInstance = new ShareNormalizationData(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ShareNormalizationData)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -11158,6 +13546,21 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Distribution_Percentile_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ShareNormalizationData_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ShareNormalizationData_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ShareNormalizationData_TimeRangeDistribution_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ShareNormalizationData_TimeRangeDistribution_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ShareNormalizationData_DomainShareCount_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ShareNormalizationData_DomainShareCount_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -11222,8 +13625,18 @@ public final class CoreProto {
       "ution\022,\n\npercentile\030\001 \003(\0132\030.Distribution" +
       ".Percentile\032I\n\nPercentile\022\022\n\npercentile\030" +
       "\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_point_count" +
-      "\030\003 \001(\003B!\n\024com.janknspank.protoB\tCoreProt" +
-      "o"
+      "\030\003 \001(\003\"\226\003\n\026ShareNormalizationData\022T\n\027tim" +
+      "e_range_distribution\030\002 \003(\0132-.ShareNormal" +
+      "izationData.TimeRangeDistributionB\004\210\246\035\001\022" +
+      "J\n\022domain_share_count\030\003 \003(\0132(.ShareNorma" +
+      "lizationData.DomainShareCountB\004\210\246\035\001\032x\n\025T",
+      "imeRangeDistribution\022\032\n\014start_millis\030\001 \001" +
+      "(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014di" +
+      "stribution\030\003 \001(\0132\r.DistributionB\004\210\246\035\001\032`\n" +
+      "\020DomainShareCount\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022" +
+      "\033\n\rarticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_co" +
+      "unt\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknspank.protoB" +
+      "\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11302,6 +13715,24 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Distribution_Percentile_descriptor,
               new java.lang.String[] { "Percentile", "Value", "DataPointCount", });
+          internal_static_ShareNormalizationData_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+          internal_static_ShareNormalizationData_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ShareNormalizationData_descriptor,
+              new java.lang.String[] { "TimeRangeDistribution", "DomainShareCount", });
+          internal_static_ShareNormalizationData_TimeRangeDistribution_descriptor =
+            internal_static_ShareNormalizationData_descriptor.getNestedTypes().get(0);
+          internal_static_ShareNormalizationData_TimeRangeDistribution_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ShareNormalizationData_TimeRangeDistribution_descriptor,
+              new java.lang.String[] { "StartMillis", "EndMillis", "Distribution", });
+          internal_static_ShareNormalizationData_DomainShareCount_descriptor =
+            internal_static_ShareNormalizationData_descriptor.getNestedTypes().get(1);
+          internal_static_ShareNormalizationData_DomainShareCount_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ShareNormalizationData_DomainShareCount_descriptor,
+              new java.lang.String[] { "Domain", "ArticleCount", "ShareCount", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -11400,6 +13831,14 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           return registry;
         }
       };

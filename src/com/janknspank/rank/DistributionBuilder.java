@@ -43,7 +43,7 @@ public class DistributionBuilder {
       doubleArrayCache = Doubles.toArray(values);
     }
     if (percentile <= 0.0000001) {
-      return Doubles.min(doubleArrayCache);
+      return doubleArrayCache.length == 0 ? 0 : Doubles.min(doubleArrayCache);
     }
     return percentileInstance.evaluate(doubleArrayCache, percentile);
   }
@@ -59,6 +59,38 @@ public class DistributionBuilder {
   }
 
   /**
+   * Returns what value exists at the given percentile.
+   * E.g. getValueAtPercentile(distribution, 50) would give the median value.
+   * @param percentile value between 0 and 100, inclusive
+   */
+  public static double getValueAtPercentile(Distribution distribution, double percentile) {
+    // This will become the biggest percentile that's lower than the quantile.
+    Distribution.Percentile bottomPercentileObj = null;
+
+    // This will become the littlist percentile that's biggest than the quantile.
+    Distribution.Percentile topPercentileObj = null;
+
+    for (Distribution.Percentile percentileObj : distribution.getPercentileList()) {
+      if (percentileObj.getPercentile() <= percentile
+          && (bottomPercentileObj == null
+              || percentileObj.getPercentile() > bottomPercentileObj.getPercentile())) {
+        bottomPercentileObj = percentileObj;
+      }
+      if (percentileObj.getPercentile() >= percentile
+          && (topPercentileObj == null
+              || percentileObj.getPercentile() < topPercentileObj.getPercentile())) {
+        topPercentileObj = percentileObj;
+      }
+    }
+
+    double range = topPercentileObj.getPercentile() - bottomPercentileObj.getPercentile();
+    double ratioTowardsTop =
+        (range == 0) ? 1 : (percentile - bottomPercentileObj.getPercentile()) / range;
+    return (topPercentileObj.getValue() * ratioTowardsTop +
+        bottomPercentileObj.getValue() * (1 - ratioTowardsTop));
+  }
+
+  /**
    * Returns a projected normalized value for the given value based on the
    * historical distribution of that value, as provided by {@code distribution}.
    */
@@ -66,7 +98,6 @@ public class DistributionBuilder {
     if (distribution.getPercentileCount() == 0) {
       throw new IllegalStateException("Distribution has no percentiles");
     }
-    value = Math.max(0, Math.min(1, value));
 
     // This will become the biggest percentile that's lower than the value.
     Distribution.Percentile bottomPercentile = null;
@@ -93,12 +124,16 @@ public class DistributionBuilder {
     }
 
     double range = topPercentile.getValue() - bottomPercentile.getValue();
-    double percentTowardsTop = (value - bottomPercentile.getValue()) / range;
-    return (topPercentile.getPercentile() * percentTowardsTop +
-        bottomPercentile.getPercentile() * (1 - percentTowardsTop)) / 100;
+    double ratioTowardsTop =
+        (range == 0) ? 1 : (value - bottomPercentile.getValue()) / range;
+    return (topPercentile.getPercentile() * ratioTowardsTop +
+        bottomPercentile.getPercentile() * (1 - ratioTowardsTop)) / 100;
   }
 
   public Distribution build() {
+    if (values.size() == 0) {
+      throw new IllegalStateException("Distribution cannot be built: No values set.");
+    }
     Distribution.Builder builder = Distribution.newBuilder();
     for (double percentile : new double[] { 0, 1, 5, 10, 25, 37, 50, 63, 75, 90, 95, 99, 100 }) {
       double value = getPercentileValue(percentile);

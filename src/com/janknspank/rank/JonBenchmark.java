@@ -19,7 +19,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public class JonBenchmark {
-  static final List<String> GOOD_URLS = ImmutableList.of(
+  public static final List<String> GOOD_URLS = ImmutableList.of(
       // Retiring announcement: Because I used to report through him at Google,
       // and he's a leader in the field.
       "http://techcrunch.com/2015/02/03/alan-eustace-google/",
@@ -95,9 +95,19 @@ public class JonBenchmark {
       // Fun article about running a small VC firm as a start-up: Finding MVP, iterating.
       "http://recode.net/2015/02/06/getting-past-the-catch-22-of-venture-capital/",
       // Most important tech business news of the day: Two rivals found common ground.
-      "http://techcrunch.com/2015/02/05/twitter-confirms-new-google-firehose-deal-to-distribute-traffic-to-logged-out-users/");
+      "http://techcrunch.com/2015/02/05/twitter-confirms-new-google-firehose-deal-to-distribute-traffic-to-logged-out-users/",
+      // I use to manage the team Odysee's joining at Google.
+      "http://techcrunch.com/2015/02/08/google-odysee/",
+      // Big moves in AI.
+      "http://techcrunch.com/2014/01/26/google-deepmind/",
+      "http://www.technologyreview.com/news/524026/is-google-cornering-the-market-on-deep-learning/",
+      // Complete crap rambling article about correlations with little insight inside rote tech-hate.
+      "http://techcrunch.com/2015/02/08/startups-a-rich-mans-game/",
+      "http://techcrunch.com/2015/02/10/yelp-gulps-eat24/",
+      "http://bits.blogs.nytimes.com/2015/02/10/yelp-buys-eat24-an-online-food-ordering-service-for-134-million/",
+      "http://techcrunch.com/2015/02/10/flipboard-web/");
 
-  static final List<String> BAD_URLS = ImmutableList.of(
+  public static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
       "http://techcrunch.com/2015/01/26/becoming-an-engineering-manager/",
       // Not relevant to me or my industry.
@@ -192,7 +202,16 @@ public class JonBenchmark {
       "http://www.businessinsider.com/r-china-corruption-watchdog-launches-inspections-eyes-sinopec-2014-11",
       // Random uninteresting tech.
       "http://techcrunch.com/2015/02/05/this-millennium-falcon-drone-can-make-the-kessel-run-in-less-than-twelve-parsecs/",
-      "http://techcrunch.com/2015/02/01/the-pirate-bay-returns/");
+      "http://techcrunch.com/2015/02/01/the-pirate-bay-returns/",
+      // Celebrity / entertainment news.
+      "http://www.cnn.com/2015/02/08/entertainment/bruce-jenner-car-accident/index.html",
+      "http://www.cnn.com/2015/02/08/entertainment/grammys-2015-winners-list-thr/index.html",
+      "http://www.cnn.com/2015/02/07/entertainment/rosie-odonnell-leaving-the-view/index.html",
+      "http://www.cnn.com/2015/02/05/entertainment/bobbi-kristina-brown-players-who-is-who/index.html",
+      "http://www.cnn.com/2015/02/04/entertainment/feat-magic-mike-xxl-poster-trailer/index.html",
+      "http://www.cnn.com/2015/02/03/entertainment/china-katy-perry-celebrity-nicknames/index.html",
+      "http://www.cnn.com/2015/01/25/entertainment/feat-sag-awards-2015-wrap/index.html",
+      "http://www.cnn.com/2015/01/25/entertainment/feat-sag-awards-andy-samberg-rashida-jones-speech/index.html");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {

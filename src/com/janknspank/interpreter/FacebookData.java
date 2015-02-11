@@ -9,6 +9,8 @@ import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 
+import com.janknspank.classifier.ClassifierException;
+import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.restfb.DefaultFacebookClient;
@@ -22,7 +24,8 @@ import com.restfb.json.JsonObject;
 public class FacebookData {
   private static FacebookClient __facebookClient = null;
 
-  public static SocialEngagement getEngagementForURL(String url) throws FacebookException {
+  public static SocialEngagement getEngagementForURL(ArticleOrBuilder article) throws FacebookException {
+    String url = article.getUrl();
     try {
       // Example urlObject: http://goo.gl/JVf3tt
       String encodedURL;
@@ -36,14 +39,7 @@ public class FacebookData {
 
       // Get shares and comments
       if (!urlObject.has("share")) {
-        // There is no engagement if the share object is missing
-        return SocialEngagement.newBuilder()
-            .setSite(Site.FACEBOOK)
-            .setLikeCount(0)
-            .setShareCount(0)
-            .setCommentCount(0)
-            .setCreateTime(System.currentTimeMillis())
-            .build();
+        return null;
       }
       else {
         JsonObject shareObject = urlObject.getJsonObject("share");
@@ -64,10 +60,18 @@ public class FacebookData {
             .setSite(Site.FACEBOOK)
             .setLikeCount(likeCount)
             .setShareCount(shareCount)
+            .setShareScore(FacebookShareNormalizer.getInstance().getShareScore(
+                url,
+                shareCount,
+                Math.max(0, System.currentTimeMillis() - article.getPublishedTime())
+                    /* ageInMillis */))
             .setCommentCount(commentCount)
             .setCreateTime(System.currentTimeMillis())
             .build();
       }
+    } catch (ClassifierException e) {
+      // FacebookShareNormalizer failed to instantiate from disk - this is an invalid state.
+      throw new IllegalStateException(e);
     } catch (FacebookOAuthException e) {
       e.printStackTrace();
       throw new FacebookException("Can't get FB engagement for url "

@@ -89,6 +89,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     DOMAIN_TO_DOM_ADDRESSES.put("cnbc.com", new String[] {
         "#article_body p"});
     DOMAIN_TO_DOM_ADDRESSES.put("cnn.com", new String[] {
+        ".cnnStoryContent p", // Really old articles.
         ".cnn_storyarea p",
         "p.cnn_storypgraphtxt",
         "p.zn-body__paragraph"});

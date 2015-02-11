@@ -135,21 +135,19 @@ message SocialEngagement {
     default = UNKNOWN
   ];
 
-  optional int64 like_count = 2 [
-    (storage_method) = PULL_OUT
+  optional int64 share_count = 2 [
+    (required) = YES
   ];
 
-  optional int64 share_count = 3 [
-    (storage_method) = PULL_OUT
-  ];
+  // A number between 0 and 1 representing the relative strength of this
+  // article's Facebook shares versus articles of similar age on similar
+  // sites.  1 is considered very high strength, aka lots of shares.
+  // TODO(jonemerson): Make this required once the DB is updated.
+  optional double share_score = 3;
 
-  optional int64 comment_count = 4 [
-    (storage_method) = PULL_OUT
-  ];
-
-  optional int64 create_time = 5 [
-    (storage_method) = PULL_OUT
-  ];
+  optional int64 like_count = 4;
+  optional int64 comment_count = 5;
+  optional int64 create_time = 6;
 }
 
 message ArticleFeature {
