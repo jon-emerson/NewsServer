@@ -4806,43 +4806,67 @@ public final class ArticleProto {
      */
     com.janknspank.proto.ArticleProto.SocialEngagement.Site getSite();
 
-    // optional int64 like_count = 2;
+    // optional int64 share_count = 2;
     /**
-     * <code>optional int64 like_count = 2;</code>
-     */
-    boolean hasLikeCount();
-    /**
-     * <code>optional int64 like_count = 2;</code>
-     */
-    long getLikeCount();
-
-    // optional int64 share_count = 3;
-    /**
-     * <code>optional int64 share_count = 3;</code>
+     * <code>optional int64 share_count = 2;</code>
      */
     boolean hasShareCount();
     /**
-     * <code>optional int64 share_count = 3;</code>
+     * <code>optional int64 share_count = 2;</code>
      */
     long getShareCount();
 
-    // optional int64 comment_count = 4;
+    // optional double share_score = 3;
     /**
-     * <code>optional int64 comment_count = 4;</code>
+     * <code>optional double share_score = 3;</code>
+     *
+     * <pre>
+     * A number between 0 and 1 representing the relative strength of this
+     * article's Facebook shares versus articles of similar age on similar
+     * sites.  1 is considered very high strength, aka lots of shares.
+     * TODO(jonemerson): Make this required once the DB is updated.
+     * </pre>
+     */
+    boolean hasShareScore();
+    /**
+     * <code>optional double share_score = 3;</code>
+     *
+     * <pre>
+     * A number between 0 and 1 representing the relative strength of this
+     * article's Facebook shares versus articles of similar age on similar
+     * sites.  1 is considered very high strength, aka lots of shares.
+     * TODO(jonemerson): Make this required once the DB is updated.
+     * </pre>
+     */
+    double getShareScore();
+
+    // optional int64 like_count = 4;
+    /**
+     * <code>optional int64 like_count = 4;</code>
+     */
+    boolean hasLikeCount();
+    /**
+     * <code>optional int64 like_count = 4;</code>
+     */
+    long getLikeCount();
+
+    // optional int64 comment_count = 5;
+    /**
+     * <code>optional int64 comment_count = 5;</code>
      */
     boolean hasCommentCount();
     /**
-     * <code>optional int64 comment_count = 4;</code>
+     * <code>optional int64 comment_count = 5;</code>
      */
     long getCommentCount();
 
-    // optional int64 create_time = 5;
+    // optional int64 create_time = 6;
     /**
-     * <code>optional int64 create_time = 5;</code>
+     * <code>optional int64 create_time = 6;</code>
      */
     boolean hasCreateTime();
     /**
-     * <code>optional int64 create_time = 5;</code>
+     * <code>optional int64 create_time = 6;</code>
      */
     long getCreateTime();
   }
@@ -4910,21 +4934,26 @@ public final class ArticleProto {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              likeCount_ = input.readInt64();
+              shareCount_ = input.readInt64();
               break;
             }
-            case 24: {
+            case 25: {
               bitField0_ |= 0x00000004;
-              shareCount_ = input.readInt64();
+              shareScore_ = input.readDouble();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              commentCount_ = input.readInt64();
+              likeCount_ = input.readInt64();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000010;
+              commentCount_ = input.readInt64();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
               createTime_ = input.readInt64();
               break;
             }
@@ -5075,65 +5104,95 @@ public final class ArticleProto {
       return site_;
     }
 
-    // optional int64 like_count = 2;
-    public static final int LIKE_COUNT_FIELD_NUMBER = 2;
-    private long likeCount_;
+    // optional int64 share_count = 2;
+    public static final int SHARE_COUNT_FIELD_NUMBER = 2;
+    private long shareCount_;
     /**
-     * <code>optional int64 like_count = 2;</code>
+     * <code>optional int64 share_count = 2;</code>
      */
-    public boolean hasLikeCount() {
+    public boolean hasShareCount() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int64 like_count = 2;</code>
-     */
-    public long getLikeCount() {
-      return likeCount_;
-    }
-
-    // optional int64 share_count = 3;
-    public static final int SHARE_COUNT_FIELD_NUMBER = 3;
-    private long shareCount_;
-    /**
-     * <code>optional int64 share_count = 3;</code>
-     */
-    public boolean hasShareCount() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int64 share_count = 3;</code>
+     * <code>optional int64 share_count = 2;</code>
      */
     public long getShareCount() {
       return shareCount_;
     }
 
-    // optional int64 comment_count = 4;
-    public static final int COMMENT_COUNT_FIELD_NUMBER = 4;
-    private long commentCount_;
+    // optional double share_score = 3;
+    public static final int SHARE_SCORE_FIELD_NUMBER = 3;
+    private double shareScore_;
     /**
-     * <code>optional int64 comment_count = 4;</code>
+     * <code>optional double share_score = 3;</code>
+     *
+     * <pre>
+     * A number between 0 and 1 representing the relative strength of this
+     * article's Facebook shares versus articles of similar age on similar
+     * sites.  1 is considered very high strength, aka lots of shares.
+     * TODO(jonemerson): Make this required once the DB is updated.
+     * </pre>
      */
-    public boolean hasCommentCount() {
+    public boolean hasShareScore() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional double share_score = 3;</code>
+     *
+     * <pre>
+     * A number between 0 and 1 representing the relative strength of this
+     * article's Facebook shares versus articles of similar age on similar
+     * sites.  1 is considered very high strength, aka lots of shares.
+     * TODO(jonemerson): Make this required once the DB is updated.
+     * </pre>
+     */
+    public double getShareScore() {
+      return shareScore_;
+    }
+
+    // optional int64 like_count = 4;
+    public static final int LIKE_COUNT_FIELD_NUMBER = 4;
+    private long likeCount_;
+    /**
+     * <code>optional int64 like_count = 4;</code>
+     */
+    public boolean hasLikeCount() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int64 comment_count = 4;</code>
+     * <code>optional int64 like_count = 4;</code>
+     */
+    public long getLikeCount() {
+      return likeCount_;
+    }
+
+    // optional int64 comment_count = 5;
+    public static final int COMMENT_COUNT_FIELD_NUMBER = 5;
+    private long commentCount_;
+    /**
+     * <code>optional int64 comment_count = 5;</code>
+     */
+    public boolean hasCommentCount() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 comment_count = 5;</code>
      */
     public long getCommentCount() {
       return commentCount_;
     }
 
-    // optional int64 create_time = 5;
-    public static final int CREATE_TIME_FIELD_NUMBER = 5;
+    // optional int64 create_time = 6;
+    public static final int CREATE_TIME_FIELD_NUMBER = 6;
     private long createTime_;
     /**
-     * <code>optional int64 create_time = 5;</code>
+     * <code>optional int64 create_time = 6;</code>
      */
     public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional int64 create_time = 5;</code>
+     * <code>optional int64 create_time = 6;</code>
      */
     public long getCreateTime() {
       return createTime_;
@@ -5141,8 +5200,9 @@ public final class ArticleProto {
 
     private void initFields() {
       site_ = com.janknspank.proto.ArticleProto.SocialEngagement.Site.UNKNOWN;
-      likeCount_ = 0L;
       shareCount_ = 0L;
+      shareScore_ = 0D;
+      likeCount_ = 0L;
       commentCount_ = 0L;
       createTime_ = 0L;
     }
@@ -5162,16 +5222,19 @@ public final class ArticleProto {
         output.writeEnum(1, site_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, likeCount_);
+        output.writeInt64(2, shareCount_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, shareCount_);
+        output.writeDouble(3, shareScore_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(4, commentCount_);
+        output.writeInt64(4, likeCount_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, createTime_);
+        output.writeInt64(5, commentCount_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, createTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5188,19 +5251,23 @@ public final class ArticleProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, likeCount_);
+          .computeInt64Size(2, shareCount_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, shareCount_);
+          .computeDoubleSize(3, shareScore_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, commentCount_);
+          .computeInt64Size(4, likeCount_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, createTime_);
+          .computeInt64Size(5, commentCount_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, createTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5320,14 +5387,16 @@ public final class ArticleProto {
         super.clear();
         site_ = com.janknspank.proto.ArticleProto.SocialEngagement.Site.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000001);
-        likeCount_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
         shareCount_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        shareScore_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000004);
-        commentCount_ = 0L;
+        likeCount_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
-        createTime_ = 0L;
+        commentCount_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -5363,17 +5432,21 @@ public final class ArticleProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.likeCount_ = likeCount_;
+        result.shareCount_ = shareCount_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.shareCount_ = shareCount_;
+        result.shareScore_ = shareScore_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.commentCount_ = commentCount_;
+        result.likeCount_ = likeCount_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.commentCount_ = commentCount_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
         result.createTime_ = createTime_;
         result.bitField0_ = to_bitField0_;
@@ -5395,11 +5468,14 @@ public final class ArticleProto {
         if (other.hasSite()) {
           setSite(other.getSite());
         }
-        if (other.hasLikeCount()) {
-          setLikeCount(other.getLikeCount());
-        }
         if (other.hasShareCount()) {
           setShareCount(other.getShareCount());
+        }
+        if (other.hasShareScore()) {
+          setShareScore(other.getShareScore());
+        }
+        if (other.hasLikeCount()) {
+          setLikeCount(other.getLikeCount());
         }
         if (other.hasCommentCount()) {
           setCommentCount(other.getCommentCount());
@@ -5470,133 +5546,194 @@ public final class ArticleProto {
         return this;
       }
 
-      // optional int64 like_count = 2;
-      private long likeCount_ ;
+      // optional int64 share_count = 2;
+      private long shareCount_ ;
       /**
-       * <code>optional int64 like_count = 2;</code>
+       * <code>optional int64 share_count = 2;</code>
        */
-      public boolean hasLikeCount() {
+      public boolean hasShareCount() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int64 like_count = 2;</code>
-       */
-      public long getLikeCount() {
-        return likeCount_;
-      }
-      /**
-       * <code>optional int64 like_count = 2;</code>
-       */
-      public Builder setLikeCount(long value) {
-        bitField0_ |= 0x00000002;
-        likeCount_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 like_count = 2;</code>
-       */
-      public Builder clearLikeCount() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        likeCount_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // optional int64 share_count = 3;
-      private long shareCount_ ;
-      /**
-       * <code>optional int64 share_count = 3;</code>
-       */
-      public boolean hasShareCount() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int64 share_count = 3;</code>
+       * <code>optional int64 share_count = 2;</code>
        */
       public long getShareCount() {
         return shareCount_;
       }
       /**
-       * <code>optional int64 share_count = 3;</code>
+       * <code>optional int64 share_count = 2;</code>
        */
       public Builder setShareCount(long value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         shareCount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 share_count = 3;</code>
+       * <code>optional int64 share_count = 2;</code>
        */
       public Builder clearShareCount() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         shareCount_ = 0L;
         onChanged();
         return this;
       }
 
-      // optional int64 comment_count = 4;
-      private long commentCount_ ;
+      // optional double share_score = 3;
+      private double shareScore_ ;
       /**
-       * <code>optional int64 comment_count = 4;</code>
+       * <code>optional double share_score = 3;</code>
+       *
+       * <pre>
+       * A number between 0 and 1 representing the relative strength of this
+       * article's Facebook shares versus articles of similar age on similar
+       * sites.  1 is considered very high strength, aka lots of shares.
+       * TODO(jonemerson): Make this required once the DB is updated.
+       * </pre>
        */
-      public boolean hasCommentCount() {
+      public boolean hasShareScore() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional double share_score = 3;</code>
+       *
+       * <pre>
+       * A number between 0 and 1 representing the relative strength of this
+       * article's Facebook shares versus articles of similar age on similar
+       * sites.  1 is considered very high strength, aka lots of shares.
+       * TODO(jonemerson): Make this required once the DB is updated.
+       * </pre>
+       */
+      public double getShareScore() {
+        return shareScore_;
+      }
+      /**
+       * <code>optional double share_score = 3;</code>
+       *
+       * <pre>
+       * A number between 0 and 1 representing the relative strength of this
+       * article's Facebook shares versus articles of similar age on similar
+       * sites.  1 is considered very high strength, aka lots of shares.
+       * TODO(jonemerson): Make this required once the DB is updated.
+       * </pre>
+       */
+      public Builder setShareScore(double value) {
+        bitField0_ |= 0x00000004;
+        shareScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double share_score = 3;</code>
+       *
+       * <pre>
+       * A number between 0 and 1 representing the relative strength of this
+       * article's Facebook shares versus articles of similar age on similar
+       * sites.  1 is considered very high strength, aka lots of shares.
+       * TODO(jonemerson): Make this required once the DB is updated.
+       * </pre>
+       */
+      public Builder clearShareScore() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        shareScore_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 like_count = 4;
+      private long likeCount_ ;
+      /**
+       * <code>optional int64 like_count = 4;</code>
+       */
+      public boolean hasLikeCount() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int64 comment_count = 4;</code>
+       * <code>optional int64 like_count = 4;</code>
+       */
+      public long getLikeCount() {
+        return likeCount_;
+      }
+      /**
+       * <code>optional int64 like_count = 4;</code>
+       */
+      public Builder setLikeCount(long value) {
+        bitField0_ |= 0x00000008;
+        likeCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 like_count = 4;</code>
+       */
+      public Builder clearLikeCount() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        likeCount_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 comment_count = 5;
+      private long commentCount_ ;
+      /**
+       * <code>optional int64 comment_count = 5;</code>
+       */
+      public boolean hasCommentCount() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 comment_count = 5;</code>
        */
       public long getCommentCount() {
         return commentCount_;
       }
       /**
-       * <code>optional int64 comment_count = 4;</code>
+       * <code>optional int64 comment_count = 5;</code>
        */
       public Builder setCommentCount(long value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         commentCount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 comment_count = 4;</code>
+       * <code>optional int64 comment_count = 5;</code>
        */
       public Builder clearCommentCount() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         commentCount_ = 0L;
         onChanged();
         return this;
       }
 
-      // optional int64 create_time = 5;
+      // optional int64 create_time = 6;
       private long createTime_ ;
       /**
-       * <code>optional int64 create_time = 5;</code>
+       * <code>optional int64 create_time = 6;</code>
        */
       public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional int64 create_time = 5;</code>
+       * <code>optional int64 create_time = 6;</code>
        */
       public long getCreateTime() {
         return createTime_;
       }
       /**
-       * <code>optional int64 create_time = 5;</code>
+       * <code>optional int64 create_time = 6;</code>
        */
       public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         createTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 create_time = 5;</code>
+       * <code>optional int64 create_time = 6;</code>
        */
       public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         createTime_ = 0L;
         onChanged();
         return this;
@@ -5664,13 +5801,13 @@ public final class ArticleProto {
       "\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\"g\n\017ArticleIn",
       "dustry\022\"\n\020industry_code_id\030\001 \001(\005B\010\210\246\035\001\220\246" +
       "\035\005\022\022\n\nsimilarity\030\002 \001(\001\022\034\n\016raw_similarity" +
-      "\030\003 \001(\001B\004\210\246\035\001\"\336\001\n\020SocialEngagement\022-\n\004sit" +
+      "\030\003 \001(\001B\004\210\246\035\001\"\341\001\n\020SocialEngagement\022-\n\004sit" +
       "e\030\001 \001(\0162\026.SocialEngagement.Site:\007UNKNOWN" +
-      "\022\030\n\nlike_count\030\002 \001(\003B\004\220\246\035\005\022\031\n\013share_coun" +
-      "t\030\003 \001(\003B\004\220\246\035\005\022\033\n\rcomment_count\030\004 \001(\003B\004\220\246" +
-      "\035\005\022\031\n\013create_time\030\005 \001(\003B\004\220\246\035\005\".\n\004Site\022\013\n" +
-      "\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002B$\n" +
-      "\024com.janknspank.protoB\014ArticleProto"
+      "\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\023\n\013share_sco" +
+      "re\030\003 \001(\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_" +
+      "count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site" +
+      "\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002" +
+      "B$\n\024com.janknspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5700,7 +5837,7 @@ public final class ArticleProto {
           internal_static_SocialEngagement_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SocialEngagement_descriptor,
-              new java.lang.String[] { "Site", "LikeCount", "ShareCount", "CommentCount", "CreateTime", });
+              new java.lang.String[] { "Site", "ShareCount", "ShareScore", "LikeCount", "CommentCount", "CreateTime", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -5736,10 +5873,7 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           return registry;
         }
       };

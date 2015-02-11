@@ -98,7 +98,6 @@ public class DistributionBuilder {
     if (distribution.getPercentileCount() == 0) {
       throw new IllegalStateException("Distribution has no percentiles");
     }
-    value = Math.max(0, Math.min(1, value));
 
     // This will become the biggest percentile that's lower than the value.
     Distribution.Percentile bottomPercentile = null;
@@ -132,6 +131,9 @@ public class DistributionBuilder {
   }
 
   public Distribution build() {
+    if (values.size() == 0) {
+      throw new IllegalStateException("Distribution cannot be built: No values set.");
+    }
     Distribution.Builder builder = Distribution.newBuilder();
     for (double percentile : new double[] { 0, 1, 5, 10, 25, 37, 50, 63, 75, 90, 95, 99, 100 }) {
       double value = getPercentileValue(percentile);

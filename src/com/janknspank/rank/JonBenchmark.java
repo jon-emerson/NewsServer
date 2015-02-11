@@ -104,7 +104,8 @@ public class JonBenchmark {
       // Complete crap rambling article about correlations with little insight inside rote tech-hate.
       "http://techcrunch.com/2015/02/08/startups-a-rich-mans-game/",
       "http://techcrunch.com/2015/02/10/yelp-gulps-eat24/",
-      "http://bits.blogs.nytimes.com/2015/02/10/yelp-buys-eat24-an-online-food-ordering-service-for-134-million/");
+      "http://bits.blogs.nytimes.com/2015/02/10/yelp-buys-eat24-an-online-food-ordering-service-for-134-million/",
+      "http://techcrunch.com/2015/02/10/flipboard-web/");
 
   public static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
