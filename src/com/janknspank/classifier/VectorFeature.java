@@ -48,7 +48,7 @@ public abstract class VectorFeature extends Feature {
   
   public void generate() throws ClassifierException, DatabaseSchemaException, BiznessException {
     createVector();
-    writeVectorToFile();
+    writeVectorToTextFile();
   }
   
   public Vector getVector() throws ClassifierException {
@@ -111,8 +111,12 @@ public abstract class VectorFeature extends Feature {
     getDistributionForVector(vector).writeToFile(getDistributionFile());
   }
   
-  private void writeVectorToFile()
-      throws ClassifierException {
+  /**
+   * Saves the Feature's vector in a human readable text file
+   * for debugging.
+   * @throws ClassifierException
+   */
+  private void writeVectorToTextFile() throws ClassifierException {
     FileOutputStream outputStream = null;
     try {
       outputStream = new FileOutputStream(getVectorFile() + ".txt");

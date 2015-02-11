@@ -134,7 +134,7 @@ public class InputValuesGenerator {
   // Expensive function!!! TODO: Figure out how to simplify
   public static double relevanceToStartupIntent(User user, Article article) {
     for (Intent intent: user.getIntentList()) {
-      if (intent.getCode() == IntentCodes.START.getCode()) {
+      if (intent.getCode() == IntentCodes.START_COMPANY.getCode()) {
         for (ArticleFeature articleFeature : article.getFeatureList()) {
           Feature feature = ArticleFeatureEnum
               .findById(articleFeature.getFeatureId())

@@ -10,6 +10,12 @@ import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.CoreProto.Distribution;
 import com.janknspank.rank.DistributionBuilder;
 
+/**
+ * FeatureClassifier scores articles against a number of Features
+ * like relevance to startups.
+ * @author tomch
+ *
+ */
 public class FeatureClassifier {
   private static FeatureClassifier instance = null;
   // Note not all features have vectors

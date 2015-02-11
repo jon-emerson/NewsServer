@@ -16,7 +16,6 @@ public class IndustryFeature extends VectorFeature {
 
   @Override
   protected File getVectorsContainerDirectory() {
-    // TODO Auto-generated method stub
     return VECTORS_DIRECTORY;
   }
 }

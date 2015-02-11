@@ -7,23 +7,23 @@ public enum ArticleFeatureEnum {
       "Related to tech startups", 
       FeatureType.SERVES_INTENT, 
       new IndustryCode[] {
+        IndustryCodes.INDUSTRY_CODE_MAP.get(3),
         IndustryCodes.INDUSTRY_CODE_MAP.get(4),
+        IndustryCodes.INDUSTRY_CODE_MAP.get(5),
         IndustryCodes.INDUSTRY_CODE_MAP.get(6),
-        IndustryCodes.INDUSTRY_CODE_MAP.get(109),
-        IndustryCodes.INDUSTRY_CODE_MAP.get(118),
         IndustryCodes.INDUSTRY_CODE_MAP.get(12),
         IndustryCodes.INDUSTRY_CODE_MAP.get(24),
-        IndustryCodes.INDUSTRY_CODE_MAP.get(3),
-        IndustryCodes.INDUSTRY_CODE_MAP.get(5),
+        IndustryCodes.INDUSTRY_CODE_MAP.get(109),
+        IndustryCodes.INDUSTRY_CODE_MAP.get(118),
         IndustryCodes.INDUSTRY_CODE_MAP.get(127),
-  })),
+      })),
   START_TRADITIONAL(1001, new StartupFeature(1001, 
       "Related to traditional brick and mortar startups", 
       FeatureType.SERVES_INTENT,
       new IndustryCode[] {
         IndustryCodes.INDUSTRY_CODE_MAP.get(25),
         IndustryCodes.INDUSTRY_CODE_MAP.get(53),
-  }));
+      }));
   //PREDICTS_FUTURE(2, new CharacterFeature(2, "Future oriented article - predicitve.", ArticleFeature.Type.TEXT_CHARACTER);
   //TODO: copy all ArticleTypeCodes in
 

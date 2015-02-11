@@ -39,7 +39,7 @@ public class TrainingDataCollator {
 
   /**
    * Returns the given line of annotated training data with only the specified
-   * training type <START> and <END> tags retained.  Additionally, this code
+   * training type <START_COMPANY> and <END> tags retained.  Additionally, this code
    * validates that the training data is correctly formed.
    * @param type the type of annotations that should be retained
    * @param line the line of text to parse, validate, and return a cleaned
@@ -52,17 +52,17 @@ public class TrainingDataCollator {
     List<String> relevantTokens = Lists.newArrayList();
     String startType = "";
     for (String token : line.split(" ")) {
-      if (token.startsWith("<START:")) {
+      if (token.startsWith("<START_COMPANY:")) {
         depth++;
         if (!token.endsWith(">")) {
-          throw new AssertionException("Malformed <START> tag: " + token + "\n"
+          throw new AssertionException("Malformed <START_COMPANY> tag: " + token + "\n"
               + "Line: " + line + "\n" + "In file: " + getFilePath(file));
         }
         if (depth != 1) {
-          throw new AssertionException("<START> tag found while already in <START> tag\n"
+          throw new AssertionException("<START_COMPANY> tag found while already in <START_COMPANY> tag\n"
               + "Line: " + line + "\n" + "In file: " + getFilePath(file));
         }
-        startType = token.substring("<START:".length(), token.indexOf(">"));
+        startType = token.substring("<START_COMPANY:".length(), token.indexOf(">"));
         if (type.equals(startType)) {
           relevantTokens.add(token);
         }
@@ -73,14 +73,14 @@ public class TrainingDataCollator {
               + "Line: " + line + "\n" + "In file: " + getFilePath(file));
         }
         if (depth != 0) {
-          throw new AssertionException("<END> tag does not match <START>\n"
+          throw new AssertionException("<END> tag does not match <START_COMPANY>\n"
               + "Line: " + line + "\n" + "In file: " + getFilePath(file));
         }
         if (type.equals(startType)) {
           relevantTokens.add(token);
         }
-      } else if (token.contains("<START")) {
-        throw new AssertionException("Error on line: <START... is not beginning of token.\n"
+      } else if (token.contains("<START_COMPANY")) {
+        throw new AssertionException("Error on line: <START_COMPANY... is not beginning of token.\n"
             + "Line: " + line + "\n" + "In file: " + getFilePath(file));
       } else if (token.contains("<END")) {
         throw new AssertionException("Error on line: <END... is not beginning of token.\n"
@@ -90,7 +90,7 @@ public class TrainingDataCollator {
       }
     }
     if (depth != 0) {
-      throw new AssertionException("<START> has no <END> to match!\n"
+      throw new AssertionException("<START_COMPANY> has no <END> to match!\n"
           + "Line: " + line + "\n" + "In file: " + getFilePath(file));
     }
     return Joiner.on(" ").join(relevantTokens);

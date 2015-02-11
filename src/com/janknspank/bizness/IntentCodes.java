@@ -11,28 +11,28 @@ import com.janknspank.proto.EnumsProto.IntentCode;
  * Intent codes on users
  */
 public class IntentCodes {
-  public static final IntentCode INDUSTRY = IntentCode.newBuilder()
+  public static final IntentCode STAY_ON_TOP_OF_INDUSTRY = IntentCode.newBuilder()
       .setCode("indst")
       .setDescription("Stay on top of your industry")
       .build();
-  public static final IntentCode SKILLS = IntentCode.newBuilder()
+  public static final IntentCode IMPROVE_SKILLS = IntentCode.newBuilder()
       .setCode("sklls")
       .setDescription("Improve your skills")
       .build();
-  public static final IntentCode SWITCH = IntentCode.newBuilder()
+  public static final IntentCode SWITCH_COMPANIES = IntentCode.newBuilder()
       .setCode("swtch")
       .setDescription("Switch companies")
       .build();
-  public static final IntentCode START = IntentCode.newBuilder()
+  public static final IntentCode START_COMPANY = IntentCode.newBuilder()
       .setCode("start")
       .setDescription("Start a company")
       .build();
   public static final Map<String, IntentCode> INTENT_CODE_MAP = Maps.uniqueIndex(
       ImmutableList.of(
-          INDUSTRY,
-          SKILLS,
-          SWITCH,
-          START),
+          STAY_ON_TOP_OF_INDUSTRY,
+          IMPROVE_SKILLS,
+          SWITCH_COMPANIES,
+          START_COMPANY),
       new Function<IntentCode, String>() {
         @Override
         public String apply(IntentCode intentCode) {
