@@ -10,12 +10,13 @@ import org.json.JSONObject;
 import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.primitives.Ints;
+import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.Urls;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
+import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
@@ -29,25 +30,26 @@ public class SetUserUrlRatingServlet extends StandardServlet {
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
-    if (Urls.getById(urlId) == null) {
+    Url articleUrl = Urls.getById(urlId);
+    if (articleUrl == null) {
       throw new RequestException("URL does not exist");
     }
-    Integer ratingScore = Ints.tryParse(getParameter(req, "rating"));
-    if (ratingScore == null || ratingScore < 0 || ratingScore > 10) {
-      throw new RequestException("rating must be between 0 and 10, inclusive");
+    Double ratingScore = Doubles.tryParse(getParameter(req, "rating"));
+    if (ratingScore == null || ratingScore < 0 || ratingScore > 1) {
+      throw new RequestException("rating must be between 0 and 1, inclusive");
     }
 
     // Business logic.
     List<UrlRating> existingRatings = Lists.newArrayList();
     for (UrlRating rating : user.getUrlRatingList()) {
-      if (!rating.getUrlId().equals(urlId)) {
+      if (!rating.getUrl().equals(articleUrl.getUrl())) {
         existingRatings.add(rating);
       }
     }
     user = Database.with(User.class).set(user, "url_rating", Iterables.concat(
         existingRatings,
         ImmutableList.of(UrlRating.newBuilder()
-            .setUrlId(urlId)
+            .setUrl(articleUrl.getUrl())
             .setRating(ratingScore)
             .setCreateTime(System.currentTimeMillis())
             .build())));

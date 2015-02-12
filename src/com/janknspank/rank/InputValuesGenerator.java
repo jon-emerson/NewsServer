@@ -8,8 +8,11 @@ import com.janknspank.bizness.IntentCodes;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.ArticleFeatureEnum;
+import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.StartupFeature;
+import com.janknspank.classifier.UniverseVector;
+import com.janknspank.classifier.Vector;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
@@ -80,22 +83,6 @@ public class InputValuesGenerator {
 
   public static double relevanceToCompaniesTheUserWantsToWorkAt(User user, Article article) {
     return 0;
-  }
-
-  public static double relevanceToSkills(User user, Article article) {
-    Set<String> skillsKeywords = Sets.newHashSet();
-    for (Interest interest : user.getInterestList()) {
-      if (interest.getType() == UserInterests.TYPE_SKILL) {
-        skillsKeywords.add(interest.getKeyword());
-      }
-    }
-    int count = 0;
-    for (ArticleKeyword keyword : article.getKeywordList()) {
-      if (skillsKeywords.contains(keyword.getKeyword())) {
-        count++;
-      }
-    }
-    return count;
   }
 
   public static double relevanceToPastEmployers(User user, Article article) {

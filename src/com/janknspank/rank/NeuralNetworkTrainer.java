@@ -30,7 +30,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
     NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(TransferFunctionType.SIGMOID,
         NeuralNetworkScorer.INPUT_NODES_COUNT,
-        NeuralNetworkScorer.HIDDEN_NODES_COUNT,
+        //NeuralNetworkScorer.HIDDEN_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
 
     //neuralNetwork.setLearningRule(new ResilientPropagation());

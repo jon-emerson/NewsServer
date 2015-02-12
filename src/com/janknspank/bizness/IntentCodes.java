@@ -19,9 +19,13 @@ public class IntentCodes {
       .setCode("sklls")
       .setDescription("Improve your skills")
       .build();
-  public static final IntentCode SWITCH_COMPANIES = IntentCode.newBuilder()
+  public static final IntentCode SWITCH_INDUSTRIES = IntentCode.newBuilder()
       .setCode("swtch")
-      .setDescription("Switch companies")
+      .setDescription("Switch industries")
+      .build();
+  public static final IntentCode NEW_JOB = IntentCode.newBuilder()
+      .setCode("nwjob")
+      .setDescription("Find a new job")
       .build();
   public static final IntentCode START_COMPANY = IntentCode.newBuilder()
       .setCode("start")
@@ -31,7 +35,8 @@ public class IntentCodes {
       ImmutableList.of(
           STAY_ON_TOP_OF_INDUSTRY,
           IMPROVE_SKILLS,
-          SWITCH_COMPANIES,
+          SWITCH_INDUSTRIES,
+          NEW_JOB,
           START_COMPANY),
       new Function<IntentCode, String>() {
         @Override
