@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.Urls;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -33,7 +34,7 @@ public class SetUserUrlRatingServlet extends StandardServlet {
     if (articleUrl == null) {
       throw new RequestException("URL does not exist");
     }
-    Double ratingScore = Double.parseDouble(getParameter(req, "rating"));
+    Double ratingScore = Doubles.tryParse(getParameter(req, "rating"));
     if (ratingScore == null || ratingScore < 0 || ratingScore > 1) {
       throw new RequestException("rating must be between 0 and 1, inclusive");
     }
