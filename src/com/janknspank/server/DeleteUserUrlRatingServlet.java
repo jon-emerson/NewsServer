@@ -23,8 +23,8 @@ public class DeleteUserUrlRatingServlet extends StandardServlet {
 
     // Get parameters.
     final String urlId = getRequiredParameter(req, "urlId");
-    final Url articleURL = Urls.getById(urlId);
-    if (articleURL == null) {
+    final Url articleUrl = Urls.getById(urlId);
+    if (articleUrl == null) {
       throw new RequestException("URL does not exist");
     }
     
@@ -35,7 +35,7 @@ public class DeleteUserUrlRatingServlet extends StandardServlet {
         new Predicate<UrlRating>() {
           @Override
           public boolean apply(UrlRating urlRating) {
-            return !urlRating.getUrl().equals(articleURL.getUrl());
+            return !urlRating.getUrl().equals(articleUrl.getUrl());
           }
         }));
 

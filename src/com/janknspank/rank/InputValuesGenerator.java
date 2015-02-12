@@ -85,33 +85,6 @@ public class InputValuesGenerator {
     return 0;
   }
 
-  public static double relevanceToSkills(User user, Article article) {
-    Set<String> skillsKeywords = Sets.newHashSet();
-    for (Interest interest : user.getInterestList()) {
-      if (interest.getType() == UserInterests.TYPE_SKILL) {
-        skillsKeywords.add(interest.getKeyword());
-      }
-    }
-    int count = 0;
-    Vector universeVector;
-    try {
-      universeVector = UniverseVector.getInstance();
-      for (ArticleKeyword keyword : article.getKeywordList()) {
-        if (skillsKeywords.contains(keyword.getKeyword())) {
-          count += 1 / universeVector.getDocumentOccurences(keyword.getKeyword());
-        }
-      }
-      
-      if (count > 0) {
-        System.out.println("relevance to skills: " + count);
-      }
-      return count;
-    } catch (ClassifierException e) {
-      e.printStackTrace();
-      return 0;
-    }
-  }
-
   public static double relevanceToPastEmployers(User user, Article article) {
     double relevance = 0.0;
     if (user.hasLinkedInProfile()) {

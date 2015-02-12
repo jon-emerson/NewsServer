@@ -29,8 +29,8 @@ public class SetUserUrlRatingServlet extends StandardServlet {
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
-    Url articleURL = Urls.getById(urlId);
-    if (articleURL == null) {
+    Url articleUrl = Urls.getById(urlId);
+    if (articleUrl == null) {
       throw new RequestException("URL does not exist");
     }
     Double ratingScore = Double.parseDouble(getParameter(req, "rating"));
@@ -41,14 +41,14 @@ public class SetUserUrlRatingServlet extends StandardServlet {
     // Business logic.
     List<UrlRating> existingRatings = Lists.newArrayList();
     for (UrlRating rating : user.getUrlRatingList()) {
-      if (!rating.getUrl().equals(articleURL.getUrl())) {
+      if (!rating.getUrl().equals(articleUrl.getUrl())) {
         existingRatings.add(rating);
       }
     }
     user = Database.with(User.class).set(user, "url_rating", Iterables.concat(
         existingRatings,
         ImmutableList.of(UrlRating.newBuilder()
-            .setUrl(articleURL.getUrl())
+            .setUrl(articleUrl.getUrl())
             .setRating(ratingScore)
             .setCreateTime(System.currentTimeMillis())
             .build())));

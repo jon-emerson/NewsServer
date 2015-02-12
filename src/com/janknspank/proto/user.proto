@@ -83,7 +83,7 @@ message UrlRating {
   optional string url = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 24,
+    (string_length) = 767,
     (string_charset) = LATIN1
   ];
 
