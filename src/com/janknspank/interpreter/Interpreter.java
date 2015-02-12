@@ -35,7 +35,8 @@ public class Interpreter {
     try {
       response = FETCHER.fetch(url);
       if (response.getStatusCode() != HttpServletResponse.SC_OK) {
-        throw new FetchException("URL not found (" + response.getStatusCode() + ")");
+        throw new FetchException(
+            "URL not found (" + response.getStatusCode() + "): " + url.getUrl());
       }
       reader = response.getReader();
       return interpret(url, reader);

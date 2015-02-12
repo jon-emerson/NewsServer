@@ -4154,7 +4154,6 @@ public final class ArticleProto {
      * A number between 0 and 1 representing the relative strength of this
      * article's Facebook shares versus articles of similar age on similar
      * sites.  1 is considered very high strength, aka lots of shares.
-     * TODO(jonemerson): Make this required before starting crawler again.
      * </pre>
      */
     boolean hasShareScore();
@@ -4165,7 +4164,6 @@ public final class ArticleProto {
      * A number between 0 and 1 representing the relative strength of this
      * article's Facebook shares versus articles of similar age on similar
      * sites.  1 is considered very high strength, aka lots of shares.
-     * TODO(jonemerson): Make this required before starting crawler again.
      * </pre>
      */
     double getShareScore();
@@ -4460,7 +4458,6 @@ public final class ArticleProto {
      * A number between 0 and 1 representing the relative strength of this
      * article's Facebook shares versus articles of similar age on similar
      * sites.  1 is considered very high strength, aka lots of shares.
-     * TODO(jonemerson): Make this required before starting crawler again.
      * </pre>
      */
     public boolean hasShareScore() {
@@ -4473,7 +4470,6 @@ public final class ArticleProto {
      * A number between 0 and 1 representing the relative strength of this
      * article's Facebook shares versus articles of similar age on similar
      * sites.  1 is considered very high strength, aka lots of shares.
-     * TODO(jonemerson): Make this required before starting crawler again.
      * </pre>
      */
     public double getShareScore() {
@@ -4918,7 +4914,6 @@ public final class ArticleProto {
        * A number between 0 and 1 representing the relative strength of this
        * article's Facebook shares versus articles of similar age on similar
        * sites.  1 is considered very high strength, aka lots of shares.
-       * TODO(jonemerson): Make this required before starting crawler again.
        * </pre>
        */
       public boolean hasShareScore() {
@@ -4931,7 +4926,6 @@ public final class ArticleProto {
        * A number between 0 and 1 representing the relative strength of this
        * article's Facebook shares versus articles of similar age on similar
        * sites.  1 is considered very high strength, aka lots of shares.
-       * TODO(jonemerson): Make this required before starting crawler again.
        * </pre>
        */
       public double getShareScore() {
@@ -4944,7 +4938,6 @@ public final class ArticleProto {
        * A number between 0 and 1 representing the relative strength of this
        * article's Facebook shares versus articles of similar age on similar
        * sites.  1 is considered very high strength, aka lots of shares.
-       * TODO(jonemerson): Make this required before starting crawler again.
        * </pre>
        */
       public Builder setShareScore(double value) {
@@ -4960,7 +4953,6 @@ public final class ArticleProto {
        * A number between 0 and 1 representing the relative strength of this
        * article's Facebook shares versus articles of similar age on similar
        * sites.  1 is considered very high strength, aka lots of shares.
-       * TODO(jonemerson): Make this required before starting crawler again.
        * </pre>
        */
       public Builder clearShareScore() {
@@ -5860,19 +5852,19 @@ public final class ArticleProto {
       "\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162" +
       "\026.ArticleKeyword.Source:\007UNKNOWN\";\n\006Sour" +
       "ce\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022" +
-      "\014\n\010META_TAG\020\003\"\341\001\n\020SocialEngagement\022-\n\004si",
+      "\014\n\010META_TAG\020\003\"\347\001\n\020SocialEngagement\022-\n\004si",
       "te\030\001 \001(\0162\026.SocialEngagement.Site:\007UNKNOW" +
-      "N\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\023\n\013share_sc" +
-      "ore\030\003 \001(\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment" +
-      "_count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Sit" +
-      "e\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020" +
-      "\002\"\323\001\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001(\005" +
-      "B\010\210\246\035\001\220\246\035\005\022+\n\004type\030\004 \001(\0162\024.ArticleFeatur" +
-      "e.Type:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001\"b\n\004T" +
-      "ype\022\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020\001\022\022\n\016A" +
-      "BOUT_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020\003\022\022\n\016T",
-      "EXT_CHARACTER\020\004B$\n\024com.janknspank.protoB" +
-      "\014ArticleProto"
+      "N\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_sc" +
+      "ore\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rc" +
+      "omment_count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\"" +
+      ".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TW" +
+      "ITTER\020\002\"\323\001\n\016ArticleFeature\022\034\n\nfeature_id" +
+      "\030\001 \001(\005B\010\210\246\035\001\220\246\035\005\022+\n\004type\030\004 \001(\0162\024.Article" +
+      "Feature.Type:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(" +
+      "\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020" +
+      "\001\022\022\n\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020",
+      "\003\022\022\n\016TEXT_CHARACTER\020\004B$\n\024com.janknspank." +
+      "protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5935,6 +5927,7 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

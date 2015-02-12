@@ -46,7 +46,9 @@ public class UrlCleaner {
     ImmutableSet.Builder<String> setBuilder = ImmutableSet.<String>builder();
     String domain = url.getHost();
     while (domain.contains(".")) {
-      setBuilder.addAll(WHITELISTED_QUERY_PARAMETERS.get(domain));
+      if (WHITELISTED_QUERY_PARAMETERS.containsKey(domain)) {
+        setBuilder.addAll(WHITELISTED_QUERY_PARAMETERS.get(domain));
+      }
       domain = domain.substring(domain.indexOf(".") + 1);
     }
     return setBuilder.build();

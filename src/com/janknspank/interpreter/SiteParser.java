@@ -33,6 +33,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   static {
     DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
         ".article > p", // DO NOT EXPAND THIS TO .article p, ALL USER COMMENTS GET PULLED!
+        ".story > p", // E.g. http://www.abc.net.au/health/features/stories/2015/02/12/4178721.htm
         "#story > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
         "#storyText p",
