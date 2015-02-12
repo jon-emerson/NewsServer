@@ -8,8 +8,11 @@ import com.janknspank.bizness.IntentCodes;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.ArticleFeatureEnum;
+import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.StartupFeature;
+import com.janknspank.classifier.UniverseVector;
+import com.janknspank.classifier.Vector;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
@@ -90,12 +93,23 @@ public class InputValuesGenerator {
       }
     }
     int count = 0;
-    for (ArticleKeyword keyword : article.getKeywordList()) {
-      if (skillsKeywords.contains(keyword.getKeyword())) {
-        count++;
+    Vector universeVector;
+    try {
+      universeVector = UniverseVector.getInstance();
+      for (ArticleKeyword keyword : article.getKeywordList()) {
+        if (skillsKeywords.contains(keyword.getKeyword())) {
+          count += 1 / universeVector.getDocumentOccurences(keyword.getKeyword());
+        }
       }
+      
+      if (count > 0) {
+        System.out.println("relevance to skills: " + count);
+      }
+      return count;
+    } catch (ClassifierException e) {
+      e.printStackTrace();
+      return 0;
     }
-    return count;
   }
 
   public static double relevanceToPastEmployers(User user, Article article) {

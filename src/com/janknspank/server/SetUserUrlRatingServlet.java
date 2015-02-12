@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.primitives.Ints;
 import com.janknspank.bizness.Urls;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -32,9 +31,9 @@ public class SetUserUrlRatingServlet extends StandardServlet {
     if (Urls.getById(urlId) == null) {
       throw new RequestException("URL does not exist");
     }
-    Integer ratingScore = Ints.tryParse(getParameter(req, "rating"));
-    if (ratingScore == null || ratingScore < 0 || ratingScore > 10) {
-      throw new RequestException("rating must be between 0 and 10, inclusive");
+    Double ratingScore = Double.parseDouble(getParameter(req, "rating"));
+    if (ratingScore == null || ratingScore < 0 || ratingScore > 1) {
+      throw new RequestException("rating must be between 0 and 1, inclusive");
     }
 
     // Business logic.

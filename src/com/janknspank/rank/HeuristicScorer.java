@@ -1,5 +1,6 @@
 package com.janknspank.rank;
 
+import com.janknspank.classifier.ClassifierException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
@@ -35,7 +36,6 @@ public class HeuristicScorer extends Scorer {
     // 5. Relevance to companies the user wants to work at
     score += 0.2 * InputValuesGenerator.relevanceToCompaniesTheUserWantsToWorkAt(user, article);
     
-    // 6. Relevance to skills
     score += 0.2 * InputValuesGenerator.relevanceToSkills(user, article);
     
     // 7. Relevance to current role

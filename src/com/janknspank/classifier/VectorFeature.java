@@ -55,8 +55,7 @@ public abstract class VectorFeature extends Feature {
     return Vector.fromFile(getVectorFile());
   }
   
-  public synchronized Distribution getDistribution()
-      throws ClassifierException {
+  public synchronized Distribution getDistribution() throws ClassifierException {
     return DistributionBuilder.fromFile(getDistributionFile());
   }
   

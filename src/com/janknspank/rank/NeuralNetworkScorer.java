@@ -56,15 +56,15 @@ public final class NeuralNetworkScorer extends Scorer {
         InputValuesGenerator.relevanceToCurrentRole(user, article),
 
         // 8. Timeliness
-        InputValuesGenerator.timeliness(article),
+        //InputValuesGenerator.timeliness(article),
 
-        // 9. Past employers
+        // 8. Past employers
         InputValuesGenerator.relevanceToPastEmployers(user, article),
 
-        // 10. Article text quality
+        // 9. Article text quality
         InputValuesGenerator.articleTextQualityScore(article),
         
-        // 11. Relevance to startup vector for people with that intent
+        // 10. Relevance to startup vector for people with that intent
         InputValuesGenerator.relevanceToStartupIntent(user, article)
     };
   }
