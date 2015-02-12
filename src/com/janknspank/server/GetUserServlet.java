@@ -20,7 +20,6 @@ public class GetUserServlet extends StandardServlet {
     JSONObject userJson = Serializer.toJSON(user);
 
     UserHelper userHelper = new UserHelper(user);
-    userJson.put("ratings", userHelper.getRatingsJsonArray());
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
     userJson.put("interests", userHelper.getInterestsJsonArray());
 
