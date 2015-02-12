@@ -57,15 +57,13 @@ import com.janknspank.proto.UserProto.User;
 
 public class LoginServlet extends StandardServlet {
   private static final String PROFILE_URL = "https://api.linkedin.com/v1/people/~:("
-      + Joiner.on(",").join(ImmutableList.of("id", "first-name", "last-name", "industry",
-          "headline", "siteStandardProfileRequest", "location", "num-connections", "summary",
-          "specialties", "positions", "picture-url", "api-standard-profile-request",
-          "public-profile-url", "email-address", "associations", "interests", "publications",
-          "patents", "languages", "skills", "certifications", "educations", "courses", "volunteer",
-          "three-current-positions", "three-past-positions", "num-recommenders",
-          "recommendations-received", "following", "job-bookmarks", "suggestions",
-          "date-of-birth", "member-url-resources", "related-profile-views", "honors-awards"))
-      + ")"; // ?oauth2_access_token=%@&format=json
+      + Joiner.on(",").join(ImmutableList.of("id", "first-name", "last-name",
+          "maiden-name", "formatted-name", "phonetic-first-name", "phonetic-last-name",
+          "formatted-phonetic-name", "headline", "location", "industry", "current-share",
+          "num-connections", "num-connections-capped", "summary", "specialities", "positions",
+          "picture-url", "site-standard-profile-request", "api-standard-profile-request",
+          "public-profile-url"))
+      + ")";
   private static final String CONNECTIONS_URL = "https://api.linkedin.com/v1/people/~/connections";
 
   private HttpTransport transport = new NetHttpTransport();
