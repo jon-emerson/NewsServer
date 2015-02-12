@@ -7,7 +7,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 10;
+  static final int INPUT_NODES_COUNT = 9;
   static final int OUTPUT_NODES_COUNT = 1;
   static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/default_mlp_" +
