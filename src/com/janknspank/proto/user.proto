@@ -80,8 +80,6 @@ message AddressBook {
 }
 
 message UrlRating {
-  option (database_collection) = "MySQL.Entity";
-
   optional string url = 1 [
     (required) = YES,
     (storage_method) = INDEX,

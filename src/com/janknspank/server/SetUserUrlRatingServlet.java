@@ -15,6 +15,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
+import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
@@ -28,7 +29,8 @@ public class SetUserUrlRatingServlet extends StandardServlet {
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
-    if (Urls.getById(urlId) == null) {
+    Url articleURL = Urls.getById(urlId);
+    if (articleURL == null) {
       throw new RequestException("URL does not exist");
     }
     Double ratingScore = Double.parseDouble(getParameter(req, "rating"));
@@ -39,14 +41,14 @@ public class SetUserUrlRatingServlet extends StandardServlet {
     // Business logic.
     List<UrlRating> existingRatings = Lists.newArrayList();
     for (UrlRating rating : user.getUrlRatingList()) {
-      if (!rating.getUrlId().equals(urlId)) {
+      if (!rating.getUrl().equals(articleURL.getUrl())) {
         existingRatings.add(rating);
       }
     }
     user = Database.with(User.class).set(user, "url_rating", Iterables.concat(
         existingRatings,
         ImmutableList.of(UrlRating.newBuilder()
-            .setUrlId(urlId)
+            .setUrl(articleURL.getUrl())
             .setRating(ratingScore)
             .setCreateTime(System.currentTimeMillis())
             .build())));
