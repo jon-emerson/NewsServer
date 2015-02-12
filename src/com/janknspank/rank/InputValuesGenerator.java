@@ -80,22 +80,6 @@ public class InputValuesGenerator {
     return 0;
   }
 
-  public static double relevanceToSkills(User user, Article article) {
-    Set<String> skillsKeywords = Sets.newHashSet();
-    for (Interest interest : user.getInterestList()) {
-      if (interest.getType() == UserInterests.TYPE_SKILL) {
-        skillsKeywords.add(interest.getKeyword());
-      }
-    }
-    int count = 0;
-    for (ArticleKeyword keyword : article.getKeywordList()) {
-      if (skillsKeywords.contains(keyword.getKeyword())) {
-        count++;
-      }
-    }
-    return count;
-  }
-
   public static double relevanceToPastEmployers(User user, Article article) {
     double relevance = 0.0;
     if (user.hasLinkedInProfile()) {

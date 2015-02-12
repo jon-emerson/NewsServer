@@ -17,7 +17,6 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.UrlFavorite;
-import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 /**
@@ -25,28 +24,15 @@ import com.janknspank.proto.UserProto.User;
  */
 public class UserHelper {
   private final User user;
-  private final Map<String, Integer> ratedArticleIds;
   private final Map<String, Long> favoriteArticleIds;
   private final Map<String, Article> articleMap;
 
   public UserHelper(User user) throws DatabaseSchemaException {
     this.user = user;
 
-    // Figure out the IDs of the articles the user has rated or favorited.
-    ratedArticleIds = getRatedArticleIds();
+    // Create a map of the favorite articles.
     favoriteArticleIds = getFavoriteArticleIds();
-
-    // Create a map of the articles.
-    articleMap = getArticleMap(Iterables.concat(
-        ratedArticleIds.keySet(), favoriteArticleIds.keySet()));
-  }
-
-  private Map<String, Integer> getRatedArticleIds() throws DatabaseSchemaException {
-    Map<String, Integer> ratedArticleIds = Maps.newHashMap();
-    for (UrlRating rating : user.getUrlRatingList()) {
-      ratedArticleIds.put(rating.getUrlId(), rating.getRating());
-    }
-    return ratedArticleIds;
+    articleMap = getArticleMap(favoriteArticleIds.keySet());
   }
 
   private Map<String, Long> getFavoriteArticleIds() throws DatabaseSchemaException {
@@ -71,18 +57,10 @@ public class UserHelper {
         });
   }
 
-  public JSONArray getRatingsJsonArray() {
-    JSONArray ratingsJsonArray = new JSONArray();
-    for (String urlId : ratedArticleIds.keySet()) {
-      if (articleMap.containsKey(urlId)) {
-        JSONObject ratingsJson = Serializer.toJSON(articleMap.get(urlId));
-        ratingsJson.put("rating", ratedArticleIds.get(urlId));
-        ratingsJsonArray.put(ratingsJson);
-      }
-    }
-    return ratingsJsonArray;
-  }
-
+  /**
+   * @param favoriteArticleIds A map from article URL ID to the time the
+   *     current user favorited it.
+   */
   public JSONArray getFavoritesJsonArray() {
     List<Article> favoriteArticles = Lists.newArrayList();
     for (String urlId : favoriteArticleIds.keySet()) {

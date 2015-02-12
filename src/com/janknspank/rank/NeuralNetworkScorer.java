@@ -7,7 +7,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 10;
+  static final int INPUT_NODES_COUNT = 9;
   static final int OUTPUT_NODES_COUNT = 1;
   static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/default_mlp_" +
@@ -49,22 +49,19 @@ public final class NeuralNetworkScorer extends Scorer {
         // 5. Relevance to companies the user wants to work at
         InputValuesGenerator.relevanceToCompaniesTheUserWantsToWorkAt(user, article),
 
-        // 6. Relevance to skills
-        InputValuesGenerator.relevanceToSkills(user, article),
-
-        // 7. Relevance to current role
+        // 6. Relevance to current role
         InputValuesGenerator.relevanceToCurrentRole(user, article),
 
-        // 8. Timeliness
-        InputValuesGenerator.timeliness(article),
+        // 7. Timeliness
+        //InputValuesGenerator.timeliness(article),
 
-        // 9. Past employers
+        // 7. Past employers
         InputValuesGenerator.relevanceToPastEmployers(user, article),
 
-        // 10. Article text quality
+        // 8. Article text quality
         InputValuesGenerator.articleTextQualityScore(article),
         
-        // 11. Relevance to startup vector for people with that intent
+        // 9. Relevance to startup vector for people with that intent
         InputValuesGenerator.relevanceToStartupIntent(user, article)
     };
   }

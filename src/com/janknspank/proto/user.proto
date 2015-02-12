@@ -80,14 +80,14 @@ message AddressBook {
 }
 
 message UrlRating {
-  optional string url_id = 1 [
+  optional string url = 1 [
     (required) = YES,
     (storage_method) = INDEX,
-    (string_length) = 24,
+    (string_length) = 767,
     (string_charset) = LATIN1
   ];
 
-  optional int32 rating = 2 [
+  optional double rating = 2 [
     (required) = YES
   ];
 

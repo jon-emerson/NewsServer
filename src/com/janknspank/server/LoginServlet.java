@@ -287,7 +287,6 @@ public class LoginServlet extends StandardServlet {
     UserHelper userHelper = new UserHelper(user);
     JSONObject response = this.createSuccessResponse();
     JSONObject userJson = Serializer.toJSON(user);
-    userJson.put("ratings", userHelper.getRatingsJsonArray());
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
     userJson.put("industries", toJSON(industryCodes));
     response.put("user", userJson);

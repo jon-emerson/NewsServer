@@ -229,7 +229,7 @@ public enum IndustryCode {
       "Venture Capital & Private Equity"),
   POLITICAL_ORGANIZATION(107, FeatureId.POLITICAL_ORGANIZATION, "gov org",
       "Political Organization"),
-  TRANSLATION_AND_LOCALIZATION(108, FeatureId.POLITICAL_ORGANIZATION, "corp gov serv",
+  TRANSLATION_AND_LOCALIZATION(108, FeatureId.TRANSLATION_AND_LOCALIZATION, "corp gov serv",
       "Translation and Localization"),
   COMPUTER_GAMES(109, FeatureId.COMPUTER_GAMES, "med rec",
       "Computer Games"),
@@ -261,7 +261,7 @@ public enum IndustryCode {
       "Facilities Services"),
   OUTSOURCING_OFFSHORING(123, FeatureId.OUTSOURCING_OFFSHORING, "corp",
       "Outsourcing/Offshoring"),
-  HEALTH_WELLNESS_AND_FITNESS(124, FeatureId.OUTSOURCING_OFFSHORING, "hlth rec",
+  HEALTH_WELLNESS_AND_FITNESS(124, FeatureId.HEALTH_WELLNESS_AND_FITNESS, "hlth rec",
       "Health, Wellness and Fitness"),
   ALTERNATIVE_MEDICINE(125, FeatureId.ALTERNATIVE_MEDICINE, "hlth",
       "Alternative Medicine"),
@@ -297,8 +297,8 @@ public enum IndustryCode {
       "Hospital & Health Care"),
   GRAPHIC_DESIGN(140, FeatureId.GRAPHIC_DESIGN, "art med",
       "Graphic Design"),
-  INTERNATIONAL_TRADE_AND_DEVELOPMENT(141, FeatureId.INTERNATIONAL_TRADE_AND_DEVELOPMENT, "gov org tran",
-      "International Trade and Development"),
+  INTERNATIONAL_TRADE_AND_DEVELOPMENT(141, FeatureId.INTERNATIONAL_TRADE_AND_DEVELOPMENT,
+       "gov org tran", "International Trade and Development"),
   WINE_AND_SPIRITS(142, FeatureId.WINE_AND_SPIRITS, "good man rec",
       "Wine and Spirits"),
   LUXURY_GOODS_AND_JEWELRY(143, FeatureId.LUXURY_GOODS_AND_JEWELRY, "good",
@@ -329,14 +329,6 @@ public enum IndustryCode {
   private final String description;
 
   private IndustryCode(int id, FeatureId featureId, String group, String description) {
-    // TODO(jonemerson): Remove these before checkin.
-    if (featureId.getId() != id) {
-      throw new Error("IDs don't match: " + id);
-    }
-    if (!featureId.getTitle().equals(description)) {
-      throw new Error("Descriptions don't match, id=" + id);
-    }
-
     this.id = id;
     this.featureId = featureId;
     this.group = group;

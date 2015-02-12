@@ -7,9 +7,11 @@ import org.json.JSONObject;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.janknspank.bizness.Urls;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
@@ -21,7 +23,11 @@ public class DeleteUserUrlRatingServlet extends StandardServlet {
 
     // Get parameters.
     final String urlId = getRequiredParameter(req, "urlId");
-
+    final Url articleUrl = Urls.getById(urlId);
+    if (articleUrl == null) {
+      throw new RequestException("URL does not exist");
+    }
+    
     // Business logic.
     User user = Database.with(User.class).get(getSession(req).getUserId());
     user = Database.with(User.class).set(user, "url_rating", Iterables.filter(
@@ -29,7 +35,7 @@ public class DeleteUserUrlRatingServlet extends StandardServlet {
         new Predicate<UrlRating>() {
           @Override
           public boolean apply(UrlRating urlRating) {
-            return !urlRating.getUrlId().equals(urlId);
+            return !urlRating.getUrl().equals(articleUrl.getUrl());
           }
         }));
 

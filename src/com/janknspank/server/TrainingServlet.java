@@ -17,6 +17,7 @@ import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.ArticleTypeCodes;
 import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.Urls;
 import com.janknspank.classifier.IndustryCode;
 import com.janknspank.common.Asserts;
 import com.janknspank.database.Database;
@@ -26,6 +27,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.CoreProto.TrainedArticleClassification;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
+import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.EnumsProto.ArticleTypeCode;
 import com.janknspank.proto.UserProto.UrlRating;
 
@@ -73,6 +75,11 @@ public class TrainingServlet extends StandardServlet {
 
     // Read parameters.
     String urlId = getRequiredParameter(req, "urlId");
+    Url articleURL = Urls.getById(urlId);
+    if (articleURL == null) {
+      throw new RequestException("URL does not exist");
+    }
+    
     String[] industryIdsList = req.getParameterValues("industriesCheckboxes");
     //Only returns the selected checkboxes
     String[] articleClassificationCodesList = req.getParameterValues("classifications");
@@ -96,7 +103,7 @@ public class TrainingServlet extends StandardServlet {
 
     // Save the user relevance rating
     UrlRating userRating = UrlRating.newBuilder()
-        .setUrlId(urlId)
+        .setUrl(articleURL.getUrl())
         .setRating(rating100scale)
         .setCreateTime(System.currentTimeMillis())
         .build();
