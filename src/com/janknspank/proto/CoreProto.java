@@ -9239,12 +9239,6 @@ public final class CoreProto {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (hasArticle()) {
-        if (!getArticle().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -9481,12 +9475,6 @@ public final class CoreProto {
       }
 
       public final boolean isInitialized() {
-        if (hasArticle()) {
-          if (!getArticle().isInitialized()) {
-            
-            return false;
-          }
-        }
         return true;
       }
 

@@ -27,11 +27,7 @@ public class UrlCleaner {
       new Function<String, String>() {
         @Override
         public String apply(String dirtyUrl) {
-          try {
-            return clean(dirtyUrl);
-          } catch (MalformedURLException e) {
-            throw new RuntimeException("Could not clean url: " + e.getMessage(), e);
-          }
+          return clean(dirtyUrl);
         }
       };
 
@@ -50,8 +46,16 @@ public class UrlCleaner {
     }
   }
 
-  public static String clean(String dirtyUrl) throws MalformedURLException {
-    URL url = new URL(dirtyUrl);
+  public static String clean(String dirtyUrl) {
+    URL url;
+    try {
+      url = new URL(dirtyUrl);
+    } catch (MalformedURLException e) {
+      // TODO(jonemerson): Handle this more elegantly.  Perhaps the URL
+      // whitelist and the URL cleaner should be combined?
+      e.printStackTrace();
+      return dirtyUrl;
+    }
     TreeMap<String, String> queryParameters = new TreeMap<>(new Comparator<String>() {
       @Override
       public int compare(String one, String two) {
@@ -276,7 +280,7 @@ public class UrlCleaner {
         path = path.substring("/pb".length());
       }
     }
-    if (host.endsWith(".wsj.com") || host.equals("wjs.com")) {
+    if (host.endsWith(".wsj.com") || host.equals("wsj.com")) {
       queryParameters.remove("mg");
       queryParameters.remove("mod");
       queryParameters.remove("tesla");

@@ -1,6 +1,7 @@
 package com.janknspank.server;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.ArticleTypeCodes;
 import com.janknspank.bizness.Articles;
-import com.janknspank.classifier.IndustryCodes;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.common.Asserts;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -26,7 +27,6 @@ import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.CoreProto.TrainedArticleClassification;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
 import com.janknspank.proto.EnumsProto.ArticleTypeCode;
-import com.janknspank.proto.EnumsProto.IndustryCode;
 import com.janknspank.proto.UserProto.UrlRating;
 
 @AuthenticationRequired
@@ -55,7 +55,7 @@ public class TrainingServlet extends StandardServlet {
                     "description", articleClassification.getDescription());
               }
             }),
-        "industries", Iterables.transform(IndustryCodes.INDUSTRY_CODE_MAP.values(),
+        "industries", Iterables.transform(Arrays.asList(IndustryCode.values()),
             new Function<IndustryCode, SoyMapData>() {
               @Override
               public SoyMapData apply(IndustryCode industryCode) {

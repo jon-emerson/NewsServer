@@ -7,12 +7,11 @@ import java.util.Map;
 import com.google.api.client.repackaged.com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.janknspank.classifier.IndustryCodes;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.proto.EnumsProto.IndustryCode;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserIndustry;
 import com.janknspank.proto.UserProto.UserIndustry.Source;
@@ -29,7 +28,7 @@ public class UserIndustries {
   public static User updateIndustries(User user, DocumentNode profileDocumentNode) 
       throws BiznessException, DatabaseSchemaException {
     String industryDescription = profileDocumentNode.findFirst("industry").getFlattenedText();
-    IndustryCode industryCode = IndustryCodes.getFromDescription(industryDescription);
+    IndustryCode industryCode = IndustryCode.fromDescription(industryDescription);
     UserIndustry userIndustry = UserIndustry.newBuilder()
         .setIndustryCodeId(industryCode.getId())
         .setSource(Source.LINKED_IN_PROFILE)

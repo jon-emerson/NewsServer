@@ -20,27 +20,6 @@ message ArticleTypeCode {
 }
 
 // In-memory object.  Not stored in DB.
-message IndustryCode {
-  // The LinkedIn industry code.
-  // https://developer.linkedin.com/documents/industry-codes
-  optional int32 id = 1 [
-    (required) = YES
-  ];
-
-  // The LinkedIn industry group.
-  optional string group = 2 [
-    (required) = YES,
-    (string_length) = 50
-  ];
-
-  // The LinkedIn industry description.
-  optional string description = 3 [
-    (required) = YES,
-    (string_length) = 100
-  ];
-}
-
-// In-memory object.  Not stored in DB.
 message IntentCode {
   optional string code = 1 [
     (required) = YES,

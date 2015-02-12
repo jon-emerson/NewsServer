@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.janknspank.classifier.ClassifierException;
-import com.janknspank.classifier.IndustryClassifier;
+import com.janknspank.classifier.FeatureClassifier;
 import com.janknspank.common.DateParser;
 import com.janknspank.database.Database;
 import com.janknspank.dom.parser.DocumentNode;
@@ -40,7 +40,6 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       Database.getStringLength(Article.class, "paragraph");
   private static final int MAX_DESCRIPTION_LENGTH =
       Database.getStringLength(Article.class, "description");
-  private static final IndustryClassifier INDUSTRY_CLASSIFIER = IndustryClassifier.getInstance();
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.chron.com/img/pages/article/opengraph_default.jpg",
@@ -123,7 +122,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       articleBuilder.setImageUrl(unescape(articleBuilder.getImageUrl()));
     }
     try {
-      articleBuilder.addAllIndustry(INDUSTRY_CLASSIFIER.classify(articleBuilder));
+      articleBuilder.addAllFeature(FeatureClassifier.classify(articleBuilder));
     } catch (ClassifierException e) {
       e.printStackTrace();
     }

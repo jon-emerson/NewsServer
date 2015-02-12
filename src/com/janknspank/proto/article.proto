@@ -8,8 +8,6 @@ option java_outer_classname = "ArticleProto";
 message Article {
   option (database_collection) = "MongoDB.Article";
 
-  extensions 9, 12; // Old fields.
-
   optional string url_id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
@@ -50,7 +48,7 @@ message Article {
     (string_length) = 2048 // 767
   ];
 
-  repeated string paragraph = 13 [
+  repeated string paragraph = 9 [
     // (required) = YES,
     (client_serialization) = EXCLUDE,
     (string_length) = 10240
@@ -63,14 +61,13 @@ message Article {
 
   optional int64 modified_time = 11;
 
-  optional int64 word_count = 14 [
+  optional int64 word_count = 12 [
     (required) = YES
   ];
 
-  repeated ArticleKeyword keyword = 15;
-  repeated ArticleIndustry industry = 16;
-  repeated SocialEngagement social_engagement = 17;
-  repeated ArticleFeature feature = 18;
+  repeated ArticleKeyword keyword = 13;
+  repeated SocialEngagement social_engagement = 14;
+  repeated ArticleFeature feature = 15;
 }
 
 message ArticleKeyword {
@@ -106,25 +103,6 @@ message ArticleKeyword {
   ];
 }
 
-message ArticleIndustry {
-  optional int32 industry_code_id = 1 [
-    (required) = YES,
-    (storage_method) = PULL_OUT
-  ];
-
-  // Normalized similarity score for this article's relevance against the
-  // {@code industry_code_id} industry.  Range is between 0 and 1.  A score
-  // near 1 means this article is extremely relevant to the given industry.
-  // A score above 0.80 means its relevance is in the top 20% of articles.
-  optional double similarity = 2;
-
-  // Raw output from the cosine similarity function for the relevance of this
-  // article to the {@code industry_code_id} industry.
-  optional double raw_similarity = 3 [
-    (required) = YES
-  ];
-}
-
 message SocialEngagement {
   enum Site {
     UNKNOWN = 0;
@@ -142,8 +120,9 @@ message SocialEngagement {
   // A number between 0 and 1 representing the relative strength of this
   // article's Facebook shares versus articles of similar age on similar
   // sites.  1 is considered very high strength, aka lots of shares.
-  // TODO(jonemerson): Make this required once the DB is updated.
-  optional double share_score = 3;
+  optional double share_score = 3 [
+    (required) = YES
+  ];
 
   optional int64 like_count = 4;
   optional int64 comment_count = 5;
@@ -155,7 +134,7 @@ message ArticleFeature {
     (required) = YES,
     (storage_method) = PULL_OUT
   ];
-  
+
   enum Type {
     UNKNOWN = 0;
     SERVES_INTENT = 1;
@@ -172,10 +151,4 @@ message ArticleFeature {
   // near 1 means this article is extremely relevant to the given feature.
   // A score above 0.80 means its relevance is in the top 20% of articles.
   optional double similarity = 2;
-
-  // Raw output from the cosine similarity function for the relevance of this
-  // article to the {@code feature_id} feature.
-  optional double raw_similarity = 3 [
-    (required) = YES
-  ];
 }

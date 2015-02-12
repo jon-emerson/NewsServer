@@ -7,13 +7,11 @@ import com.google.common.collect.Sets;
 import com.janknspank.bizness.IntentCodes;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
-import com.janknspank.classifier.ArticleFeatureEnum;
-import com.janknspank.classifier.Feature;
-import com.janknspank.classifier.StartupFeature;
+import com.janknspank.classifier.FeatureId;
+import com.janknspank.classifier.StartupFeatureHelper;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
-import com.janknspank.proto.ArticleProto.ArticleIndustry;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
@@ -119,31 +117,22 @@ public class InputValuesGenerator {
   }
 
   public static double timeliness(Article article) {
-    return timelinessAtTime(article, System.currentTimeMillis());
-  }
-
-  public static double timelinessAtTime(Article article, long timeInMillis) {
     // Older is smaller value
-    return sigmoid(article.getPublishedTime() - timeInMillis); 
+    return sigmoid(article.getPublishedTime() - System.currentTimeMillis());
   }
 
   public static double articleTextQualityScore(Article article) {
     return 0;
   }
-  
-  // Expensive function!!! TODO: Figure out how to simplify
+
   public static double relevanceToStartupIntent(User user, Article article) {
-    for (Intent intent: user.getIntentList()) {
+    for (Intent intent : user.getIntentList()) {
       if (intent.getCode() == IntentCodes.START_COMPANY.getCode()) {
         for (ArticleFeature articleFeature : article.getFeatureList()) {
-          Feature feature = ArticleFeatureEnum
-              .findById(articleFeature.getFeatureId())
-              .getFeature();
-          if (feature instanceof StartupFeature) {
-            StartupFeature startupFeature = (StartupFeature) feature;
-            if (startupFeature.isRelatedToIndustries(user.getIndustryList())) {
-              return articleFeature.getSimilarity();
-            }
+          FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
+          if (StartupFeatureHelper.isStartupFeature(featureId) &&
+              StartupFeatureHelper.isRelatedToIndustries(featureId, user.getIndustryList())) {
+            return articleFeature.getSimilarity();
           }
         }
       }
@@ -152,8 +141,8 @@ public class InputValuesGenerator {
   }
 
   public static double getSimilarityToIndustry(Article article, int industryCode) {
-    for (ArticleIndustry classification : article.getIndustryList()) {
-      if (classification.getIndustryCodeId() == industryCode) {
+    for (ArticleFeature classification : article.getFeatureList()) {
+      if (classification.getFeatureId() == industryCode) {
         return classification.getSimilarity();
       }
     }

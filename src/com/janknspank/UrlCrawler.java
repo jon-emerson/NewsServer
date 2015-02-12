@@ -1,6 +1,5 @@
 package com.janknspank;
 
-import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -135,36 +134,32 @@ public class UrlCrawler {
     List<Node> linkNodes = itemNode.findAll("atom:link");
     linkNodes.addAll(itemNode.findAll("link"));
     String articleUrl = null;
-    try {
-      if (linkNodes.size() > 0) {
-        String href = linkNodes.get(0).getAttributeValue("href");
-        if (href != null) {
-          articleUrl = href;
+    if (linkNodes.size() > 0) {
+      String href = linkNodes.get(0).getAttributeValue("href");
+      if (href != null) {
+        articleUrl = href;
+      } else {
+        // Some sites (e.g. mercurynews.com) put the URL as character data inside
+        // the <link>...</link> element.
+        String maybeUrl = linkNodes.get(0).getFlattenedText();
+        if (ArticleUrlDetector.isArticle(maybeUrl)) {
+          articleUrl = maybeUrl;
         } else {
-          // Some sites (e.g. mercurynews.com) put the URL as character data inside
-          // the <link>...</link> element.
-          String maybeUrl = linkNodes.get(0).getFlattenedText();
-          if (ArticleUrlDetector.isArticle(maybeUrl)) {
-            articleUrl = maybeUrl;
-          } else {
-            // Then, some sites put the URL in the GUID, while using 'link' for
-            // a trackable click-through URL that doesn't tell us anything and
-            // is not canonicalized.  See if we can use the GUID URL.
-            List<Node> guidNodes = itemNode.findAll("guid");
-            if (guidNodes.size() > 0) {
-              maybeUrl = guidNodes.get(0).getFlattenedText();
-              if (ArticleUrlDetector.isArticle(maybeUrl)) {
-                articleUrl = maybeUrl;
-              }
+          // Then, some sites put the URL in the GUID, while using 'link' for
+          // a trackable click-through URL that doesn't tell us anything and
+          // is not canonicalized.  See if we can use the GUID URL.
+          List<Node> guidNodes = itemNode.findAll("guid");
+          if (guidNodes.size() > 0) {
+            maybeUrl = guidNodes.get(0).getFlattenedText();
+            if (ArticleUrlDetector.isArticle(maybeUrl)) {
+              articleUrl = maybeUrl;
             }
           }
         }
       }
-      if (UrlWhitelist.isOkay(articleUrl)) {
-        return UrlCleaner.clean(articleUrl);
-      }
-    } catch (MalformedURLException e) {
-      // Ehh OK, ignore it.
+    }
+    if (UrlWhitelist.isOkay(articleUrl)) {
+      return UrlCleaner.clean(articleUrl);
     }
     return null;
   }

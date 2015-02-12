@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleIndustry;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 
 public class IndustryClassifierTest {
@@ -130,20 +130,20 @@ public class IndustryClassifierTest {
   public void test() throws Exception {
     // Mock an article and verify that all the classification scores are
     // reasonable.
-    Iterable<ArticleIndustry> industries = IndustryClassifier.getInstance().classify(ARTICLE);
-    for (ArticleIndustry industry : industries) {
-      assertNotNull("Classifier found industry that doesn't exist: " + industry.getIndustryCodeId(),
-          IndustryVector.get(industry.getIndustryCodeId()));
-      assertTrue("For industry " + industry.getIndustryCodeId() + ", similarity should be in range "
-          + "[0, 1].  Instead found: " + industry.getSimilarity(),
-          industry.getSimilarity() >= 0 && industry.getSimilarity() <= 1);
+    Iterable<ArticleFeature> articleFeatures = FeatureClassifier.classify(ARTICLE);
+    for (ArticleFeature articleFeature : articleFeatures) {
+      assertNotNull("Classifier found feature that doesn't exist: " + articleFeature.getFeatureId(),
+          FeatureId.fromId(articleFeature.getFeatureId()));
+      assertTrue("For feature " + articleFeature.getFeatureId() + ", similarity should be in range "
+          + "[0, 1].  Instead found: " + articleFeature.getSimilarity(),
+          articleFeature.getSimilarity() >= 0 && articleFeature.getSimilarity() <= 1);
     }
 
     // Make sure that .classify doesn't return all classifications, but returns
     // at least some.
-    assertTrue("No industries found", !Iterables.isEmpty(industries));
-    assertTrue("All industries should not be returned",
-        IndustryClassifier.industryVectors.size() > Iterables.size(industries));
+    assertTrue("No features found", !Iterables.isEmpty(articleFeatures));
+    assertTrue("All features should not be returned",
+        Iterables.size(Feature.getAllFeatures()) > Iterables.size(articleFeatures));
   }
 
 }

@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.http.client.utils.URIBuilder;
 import org.json.JSONObject;
 
+import twitter4j.JSONArray;
+
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;
@@ -36,7 +38,7 @@ import com.janknspank.bizness.Sessions;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
-import com.janknspank.classifier.IndustryCodes;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -49,7 +51,6 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Session;
-import com.janknspank.proto.EnumsProto.IndustryCode;
 import com.janknspank.proto.UserProto.LinkedInProfile;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
 import com.janknspank.proto.UserProto.User;
@@ -280,7 +281,7 @@ public class LoginServlet extends StandardServlet {
     }
 
     // Get IndustryCodes so the client has more metadata to show
-    Iterable<IndustryCode> industryCodes = IndustryCodes.getFromUserIndustries(user.getIndustryList());
+    Iterable<IndustryCode> industryCodes = IndustryCode.getFromUserIndustries(user.getIndustryList());
 
     // Create the response.
     UserHelper userHelper = new UserHelper(user);
@@ -288,9 +289,17 @@ public class LoginServlet extends StandardServlet {
     JSONObject userJson = Serializer.toJSON(user);
     userJson.put("ratings", userHelper.getRatingsJsonArray());
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
-    userJson.put("industries", Serializer.toJSON(industryCodes));
+    userJson.put("industries", toJSON(industryCodes));
     response.put("user", userJson);
     response.put("session", Serializer.toJSON(session));
     return response;
+  }
+
+  public JSONArray toJSON(Iterable<IndustryCode> industryCodes) {
+    JSONArray jsonArray = new JSONArray();
+    for (IndustryCode code : industryCodes) {
+      jsonArray.put(code.toJSON());
+    }
+    return jsonArray;
   }
 }

@@ -1,91 +1,96 @@
 package com.janknspank.classifier;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
-import com.janknspank.bizness.BiznessException;
-import com.janknspank.database.DatabaseSchemaException;
+import com.google.common.base.Throwables;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.collect.ImmutableList;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
-import com.janknspank.proto.CoreProto.Distribution;
 
+/**
+ * A business class that scores news articles against a particular attribute,
+ * such as relevance to an industry or relevance to a user's intent.  Every
+ * Feature must have a FeatureId and an implementation of the
+ * {@code #score(Article)} method.  The implementation of the score method can
+ * be decided on a case-by-case subclass basis.
+ */
 public abstract class Feature {
-  protected final int id;
-  protected final String description;
-  protected final FeatureType type;
-  
-  public Feature(int id, String description, FeatureType type) {
-    this.id = id;
-    this.description = description;
-    this.type = type;
+  private static final LoadingCache<FeatureId, Feature> FEATURE_CACHE =
+      CacheBuilder.newBuilder().maximumSize(1000).build(new FeatureLoader());
+  private static final Iterable<FeatureId> VALID_FEATURE_IDS;
+  static {
+    // Pre-warm the cache.
+    ImmutableList.Builder<FeatureId> validFeatureIdsBuilder = ImmutableList.<FeatureId>builder();
+    for (FeatureId featureId : FeatureId.values()) {
+      try {
+        FEATURE_CACHE.get(featureId);
+      } catch (ExecutionException e) {
+        continue;
+      }
+      validFeatureIdsBuilder.add(featureId);
+    }
+    VALID_FEATURE_IDS = validFeatureIdsBuilder.build();
+    System.out.println(FEATURE_CACHE.size() + " features loaded");
   }
-  
+
   /**
-   * Generates the feature from root sources like seed lists
-   * and the corpus of documents
+   * Loader for the Guava cache that returns a Feature for each FeatureId.  This
+   * is where new Feature type instantiations should go.
    */
-  protected abstract void generate() 
-      throws ClassifierException, DatabaseSchemaException, BiznessException;
-  
+  private static class FeatureLoader extends CacheLoader<FeatureId, Feature> {
+    @Override
+    public Feature load(FeatureId featureId) throws ClassifierException {
+      // NOTE(jonemerson): This section is going to get a lot more complicated
+      // as we support more features!!  That's as designed, this is where that
+      // logic is supposed to go!  But for now, we can assume the only things
+      // around are vector features.
+      return new VectorFeature(featureId);
+    }
+  }
+
   /**
-   * Computes the prevalence of the feature within the article
-   * @param article
+   * Returns an implementation of the requested feature, constructing one from
+   * vectors on disk (or wherever) as necessary.
+   */
+  public static Feature getFeature(FeatureId featureId) throws ClassifierException {
+    try {
+      return FEATURE_CACHE.get(featureId);
+    } catch (ExecutionException e) {
+      Throwables.propagateIfInstanceOf(e.getCause(), ClassifierException.class);
+      throw new RuntimeException(e);
+    }
+  }
+
+  /**
+   * Returns all the features that were successfully instantiated at class-loading time.
+   */
+  public static Iterable<Feature> getAllFeatures() {
+    return FEATURE_CACHE.getAllPresent(VALID_FEATURE_IDS).values();
+  }
+
+  protected final FeatureId featureId;
+
+  public Feature(FeatureId featureId) {
+    this.featureId = featureId;
+  }
+
+  public FeatureId getId() {
+    return featureId;
+  }
+
+  public final FeatureId getFeatureId() {
+    return featureId;
+  }
+
+  public final String getDescription() {
+    return featureId.getTitle();
+  }
+
+  /**
+   * Computes a normalized relevance of this feature within the passed article.
    * @return [0-1]
-   * @throws ClassifierException
    */
-  public abstract double getScore(ArticleOrBuilder article) 
-      throws ClassifierException;
-  
-  /**
-   * Returns a distribution for the feature used to normalize
-   * scores
-   * @return
-   * @throws ClassifierException
-   */
-  public abstract Distribution getDistribution()
-      throws ClassifierException;
-  
-  public int getId() {
-    return id;
-  }
-  
-  public String getDescription() {
-    return description;
-  }
-  
-  public FeatureType getType() {
-    return type;
-  }
-  
-  /**
-   * Regenerates a feature with a given ID, or "all".  Feature IDs
-   * are specified as integers, passed as command-line parameters to this
-   * program.
-   */
-  public static void main(String args[]) throws Exception {
-    // 1. Figure out which features to regenerate from args
-    boolean regenerateAllFeatures = false;
-    Set<Integer> featuresToRegenerate = new HashSet<>();
-    if (args.length > 0) {
-      if (args[0].equals("all")) {
-        regenerateAllFeatures = true;
-      } else {
-        for (String featureId : args) {
-          Integer id = NumberUtils.toInt(featureId, -1);
-          if (id != -1) {
-            featuresToRegenerate.add(id);
-          }
-        }
-      }
-    }
-    
-    // 2. Run through all features and regenerate where necessary
-    for (ArticleFeatureEnum feature: ArticleFeatureEnum.values()) {
-      if (regenerateAllFeatures || 
-          featuresToRegenerate.contains(feature.getFeatureId())) {
-        feature.getFeature().generate();
-      }
-    }
-  }
+  public abstract double score(ArticleOrBuilder article) throws ClassifierException;
 }
