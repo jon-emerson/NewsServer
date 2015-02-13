@@ -55,6 +55,8 @@ public class UserRatingsBenchmark {
       Article article = urlArticleMap.get(urlRating.getUrl());
       User user = emailUserMap.get(urlRating.getEmail());
 
+      // A user rating may outlive any particular Article or User
+      // in our system. So check to see that they exist before scoring
       if (article == null) {
         LOG.warning("Can't find Article to score: " + urlRating.getUrl());
       } else if (user == null) {

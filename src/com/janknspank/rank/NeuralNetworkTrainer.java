@@ -84,7 +84,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     // Load up all users who submitted ratings
     Iterable<User> users = Users.getByEmails(userEmails);
     Map<String, User> emailUserMap = Maps.newHashMap();
-    for (User user: users) {
+    for (User user : users) {
       emailUserMap.put(user.getEmail(), user);
     }
 
@@ -99,6 +99,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       User user = emailUserMap.get(rating.getEmail());
       Article article = urlArticleMap.get(rating.getUrl());
 
+      // A user rating may outlive any particular Article or User
+      // in our system. So check to see that they exist before scoring
       if (article == null) {
         LOG.warning("Can't find Article to score: " + rating.getUrl());
       } else if (user == null) {
