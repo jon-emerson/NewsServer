@@ -179,31 +179,6 @@ public final class UserProto {
      */
     com.janknspank.proto.UserProto.AddressBookOrBuilder getAddressBookOrBuilder();
 
-    // repeated .UrlRating url_rating = 13;
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    java.util.List<com.janknspank.proto.UserProto.UrlRating> 
-        getUrlRatingList();
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    com.janknspank.proto.UserProto.UrlRating getUrlRating(int index);
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    int getUrlRatingCount();
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    java.util.List<? extends com.janknspank.proto.UserProto.UrlRatingOrBuilder> 
-        getUrlRatingOrBuilderList();
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    com.janknspank.proto.UserProto.UrlRatingOrBuilder getUrlRatingOrBuilder(
-        int index);
-
     // repeated .UrlFavorite url_favorite = 14;
     /**
      * <code>repeated .UrlFavorite url_favorite = 14;</code>
@@ -434,42 +409,34 @@ public final class UserProto {
               bitField0_ |= 0x00000800;
               break;
             }
-            case 106: {
-              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
-                urlRating_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlRating>();
-                mutable_bitField0_ |= 0x00001000;
-              }
-              urlRating_.add(input.readMessage(com.janknspank.proto.UserProto.UrlRating.PARSER, extensionRegistry));
-              break;
-            }
             case 114: {
-              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
                 urlFavorite_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlFavorite>();
-                mutable_bitField0_ |= 0x00002000;
+                mutable_bitField0_ |= 0x00001000;
               }
               urlFavorite_.add(input.readMessage(com.janknspank.proto.UserProto.UrlFavorite.PARSER, extensionRegistry));
               break;
             }
             case 122: {
-              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
                 industry_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UserIndustry>();
-                mutable_bitField0_ |= 0x00004000;
+                mutable_bitField0_ |= 0x00002000;
               }
               industry_.add(input.readMessage(com.janknspank.proto.UserProto.UserIndustry.PARSER, extensionRegistry));
               break;
             }
             case 130: {
-              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
                 interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>();
-                mutable_bitField0_ |= 0x00008000;
+                mutable_bitField0_ |= 0x00004000;
               }
               interest_.add(input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry));
               break;
             }
             case 138: {
-              if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
                 intent_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Intent>();
-                mutable_bitField0_ |= 0x00010000;
+                mutable_bitField0_ |= 0x00008000;
               }
               intent_.add(input.readMessage(com.janknspank.proto.UserProto.Intent.PARSER, extensionRegistry));
               break;
@@ -488,18 +455,15 @@ public final class UserProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
-          urlRating_ = java.util.Collections.unmodifiableList(urlRating_);
-        }
-        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
           urlFavorite_ = java.util.Collections.unmodifiableList(urlFavorite_);
         }
-        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
           industry_ = java.util.Collections.unmodifiableList(industry_);
         }
-        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
           interest_ = java.util.Collections.unmodifiableList(interest_);
         }
-        if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
           intent_ = java.util.Collections.unmodifiableList(intent_);
         }
         this.unknownFields = unknownFields.build();
@@ -933,42 +897,6 @@ public final class UserProto {
       return addressBook_;
     }
 
-    // repeated .UrlRating url_rating = 13;
-    public static final int URL_RATING_FIELD_NUMBER = 13;
-    private java.util.List<com.janknspank.proto.UserProto.UrlRating> urlRating_;
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    public java.util.List<com.janknspank.proto.UserProto.UrlRating> getUrlRatingList() {
-      return urlRating_;
-    }
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    public java.util.List<? extends com.janknspank.proto.UserProto.UrlRatingOrBuilder> 
-        getUrlRatingOrBuilderList() {
-      return urlRating_;
-    }
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    public int getUrlRatingCount() {
-      return urlRating_.size();
-    }
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    public com.janknspank.proto.UserProto.UrlRating getUrlRating(int index) {
-      return urlRating_.get(index);
-    }
-    /**
-     * <code>repeated .UrlRating url_rating = 13;</code>
-     */
-    public com.janknspank.proto.UserProto.UrlRatingOrBuilder getUrlRatingOrBuilder(
-        int index) {
-      return urlRating_.get(index);
-    }
-
     // repeated .UrlFavorite url_favorite = 14;
     public static final int URL_FAVORITE_FIELD_NUMBER = 14;
     private java.util.List<com.janknspank.proto.UserProto.UrlFavorite> urlFavorite_;
@@ -1126,7 +1054,6 @@ public final class UserProto {
       linkedInConnections_ = com.janknspank.proto.UserProto.LinkedInConnections.getDefaultInstance();
       linkedInProfilePhotoUrl_ = "";
       addressBook_ = com.janknspank.proto.UserProto.AddressBook.getDefaultInstance();
-      urlRating_ = java.util.Collections.emptyList();
       urlFavorite_ = java.util.Collections.emptyList();
       industry_ = java.util.Collections.emptyList();
       interest_ = java.util.Collections.emptyList();
@@ -1184,9 +1111,6 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeMessage(12, addressBook_);
-      }
-      for (int i = 0; i < urlRating_.size(); i++) {
-        output.writeMessage(13, urlRating_.get(i));
       }
       for (int i = 0; i < urlFavorite_.size(); i++) {
         output.writeMessage(14, urlFavorite_.get(i));
@@ -1255,10 +1179,6 @@ public final class UserProto {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, addressBook_);
-      }
-      for (int i = 0; i < urlRating_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(13, urlRating_.get(i));
       }
       for (int i = 0; i < urlFavorite_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -1392,7 +1312,6 @@ public final class UserProto {
           getLinkedInProfileFieldBuilder();
           getLinkedInConnectionsFieldBuilder();
           getAddressBookFieldBuilder();
-          getUrlRatingFieldBuilder();
           getUrlFavoriteFieldBuilder();
           getIndustryFieldBuilder();
           getInterestFieldBuilder();
@@ -1441,33 +1360,27 @@ public final class UserProto {
           addressBookBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000800);
-        if (urlRatingBuilder_ == null) {
-          urlRating_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00001000);
-        } else {
-          urlRatingBuilder_.clear();
-        }
         if (urlFavoriteBuilder_ == null) {
           urlFavorite_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00001000);
         } else {
           urlFavoriteBuilder_.clear();
         }
         if (industryBuilder_ == null) {
           industry_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00002000);
         } else {
           industryBuilder_.clear();
         }
         if (interestBuilder_ == null) {
           interest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00004000);
         } else {
           interestBuilder_.clear();
         }
         if (intentBuilder_ == null) {
           intent_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00010000);
+          bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           intentBuilder_.clear();
         }
@@ -1559,46 +1472,37 @@ public final class UserProto {
         } else {
           result.addressBook_ = addressBookBuilder_.build();
         }
-        if (urlRatingBuilder_ == null) {
-          if (((bitField0_ & 0x00001000) == 0x00001000)) {
-            urlRating_ = java.util.Collections.unmodifiableList(urlRating_);
-            bitField0_ = (bitField0_ & ~0x00001000);
-          }
-          result.urlRating_ = urlRating_;
-        } else {
-          result.urlRating_ = urlRatingBuilder_.build();
-        }
         if (urlFavoriteBuilder_ == null) {
-          if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          if (((bitField0_ & 0x00001000) == 0x00001000)) {
             urlFavorite_ = java.util.Collections.unmodifiableList(urlFavorite_);
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00001000);
           }
           result.urlFavorite_ = urlFavorite_;
         } else {
           result.urlFavorite_ = urlFavoriteBuilder_.build();
         }
         if (industryBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          if (((bitField0_ & 0x00002000) == 0x00002000)) {
             industry_ = java.util.Collections.unmodifiableList(industry_);
-            bitField0_ = (bitField0_ & ~0x00004000);
+            bitField0_ = (bitField0_ & ~0x00002000);
           }
           result.industry_ = industry_;
         } else {
           result.industry_ = industryBuilder_.build();
         }
         if (interestBuilder_ == null) {
-          if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          if (((bitField0_ & 0x00004000) == 0x00004000)) {
             interest_ = java.util.Collections.unmodifiableList(interest_);
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00004000);
           }
           result.interest_ = interest_;
         } else {
           result.interest_ = interestBuilder_.build();
         }
         if (intentBuilder_ == null) {
-          if (((bitField0_ & 0x00010000) == 0x00010000)) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
             intent_ = java.util.Collections.unmodifiableList(intent_);
-            bitField0_ = (bitField0_ & ~0x00010000);
+            bitField0_ = (bitField0_ & ~0x00008000);
           }
           result.intent_ = intent_;
         } else {
@@ -1670,37 +1574,11 @@ public final class UserProto {
         if (other.hasAddressBook()) {
           mergeAddressBook(other.getAddressBook());
         }
-        if (urlRatingBuilder_ == null) {
-          if (!other.urlRating_.isEmpty()) {
-            if (urlRating_.isEmpty()) {
-              urlRating_ = other.urlRating_;
-              bitField0_ = (bitField0_ & ~0x00001000);
-            } else {
-              ensureUrlRatingIsMutable();
-              urlRating_.addAll(other.urlRating_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.urlRating_.isEmpty()) {
-            if (urlRatingBuilder_.isEmpty()) {
-              urlRatingBuilder_.dispose();
-              urlRatingBuilder_ = null;
-              urlRating_ = other.urlRating_;
-              bitField0_ = (bitField0_ & ~0x00001000);
-              urlRatingBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getUrlRatingFieldBuilder() : null;
-            } else {
-              urlRatingBuilder_.addAllMessages(other.urlRating_);
-            }
-          }
-        }
         if (urlFavoriteBuilder_ == null) {
           if (!other.urlFavorite_.isEmpty()) {
             if (urlFavorite_.isEmpty()) {
               urlFavorite_ = other.urlFavorite_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00001000);
             } else {
               ensureUrlFavoriteIsMutable();
               urlFavorite_.addAll(other.urlFavorite_);
@@ -1713,7 +1591,7 @@ public final class UserProto {
               urlFavoriteBuilder_.dispose();
               urlFavoriteBuilder_ = null;
               urlFavorite_ = other.urlFavorite_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00001000);
               urlFavoriteBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUrlFavoriteFieldBuilder() : null;
@@ -1726,7 +1604,7 @@ public final class UserProto {
           if (!other.industry_.isEmpty()) {
             if (industry_.isEmpty()) {
               industry_ = other.industry_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00002000);
             } else {
               ensureIndustryIsMutable();
               industry_.addAll(other.industry_);
@@ -1739,7 +1617,7 @@ public final class UserProto {
               industryBuilder_.dispose();
               industryBuilder_ = null;
               industry_ = other.industry_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00002000);
               industryBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getIndustryFieldBuilder() : null;
@@ -1752,7 +1630,7 @@ public final class UserProto {
           if (!other.interest_.isEmpty()) {
             if (interest_.isEmpty()) {
               interest_ = other.interest_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00004000);
             } else {
               ensureInterestIsMutable();
               interest_.addAll(other.interest_);
@@ -1765,7 +1643,7 @@ public final class UserProto {
               interestBuilder_.dispose();
               interestBuilder_ = null;
               interest_ = other.interest_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00004000);
               interestBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getInterestFieldBuilder() : null;
@@ -1778,7 +1656,7 @@ public final class UserProto {
           if (!other.intent_.isEmpty()) {
             if (intent_.isEmpty()) {
               intent_ = other.intent_;
-              bitField0_ = (bitField0_ & ~0x00010000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             } else {
               ensureIntentIsMutable();
               intent_.addAll(other.intent_);
@@ -1791,7 +1669,7 @@ public final class UserProto {
               intentBuilder_.dispose();
               intentBuilder_ = null;
               intent_ = other.intent_;
-              bitField0_ = (bitField0_ & ~0x00010000);
+              bitField0_ = (bitField0_ & ~0x00008000);
               intentBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getIntentFieldBuilder() : null;
@@ -2767,253 +2645,13 @@ public final class UserProto {
         return addressBookBuilder_;
       }
 
-      // repeated .UrlRating url_rating = 13;
-      private java.util.List<com.janknspank.proto.UserProto.UrlRating> urlRating_ =
-        java.util.Collections.emptyList();
-      private void ensureUrlRatingIsMutable() {
-        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
-          urlRating_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlRating>(urlRating_);
-          bitField0_ |= 0x00001000;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.UserProto.UrlRating, com.janknspank.proto.UserProto.UrlRating.Builder, com.janknspank.proto.UserProto.UrlRatingOrBuilder> urlRatingBuilder_;
-
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public java.util.List<com.janknspank.proto.UserProto.UrlRating> getUrlRatingList() {
-        if (urlRatingBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(urlRating_);
-        } else {
-          return urlRatingBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public int getUrlRatingCount() {
-        if (urlRatingBuilder_ == null) {
-          return urlRating_.size();
-        } else {
-          return urlRatingBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public com.janknspank.proto.UserProto.UrlRating getUrlRating(int index) {
-        if (urlRatingBuilder_ == null) {
-          return urlRating_.get(index);
-        } else {
-          return urlRatingBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder setUrlRating(
-          int index, com.janknspank.proto.UserProto.UrlRating value) {
-        if (urlRatingBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUrlRatingIsMutable();
-          urlRating_.set(index, value);
-          onChanged();
-        } else {
-          urlRatingBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder setUrlRating(
-          int index, com.janknspank.proto.UserProto.UrlRating.Builder builderForValue) {
-        if (urlRatingBuilder_ == null) {
-          ensureUrlRatingIsMutable();
-          urlRating_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          urlRatingBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder addUrlRating(com.janknspank.proto.UserProto.UrlRating value) {
-        if (urlRatingBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUrlRatingIsMutable();
-          urlRating_.add(value);
-          onChanged();
-        } else {
-          urlRatingBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder addUrlRating(
-          int index, com.janknspank.proto.UserProto.UrlRating value) {
-        if (urlRatingBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUrlRatingIsMutable();
-          urlRating_.add(index, value);
-          onChanged();
-        } else {
-          urlRatingBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder addUrlRating(
-          com.janknspank.proto.UserProto.UrlRating.Builder builderForValue) {
-        if (urlRatingBuilder_ == null) {
-          ensureUrlRatingIsMutable();
-          urlRating_.add(builderForValue.build());
-          onChanged();
-        } else {
-          urlRatingBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder addUrlRating(
-          int index, com.janknspank.proto.UserProto.UrlRating.Builder builderForValue) {
-        if (urlRatingBuilder_ == null) {
-          ensureUrlRatingIsMutable();
-          urlRating_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          urlRatingBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder addAllUrlRating(
-          java.lang.Iterable<? extends com.janknspank.proto.UserProto.UrlRating> values) {
-        if (urlRatingBuilder_ == null) {
-          ensureUrlRatingIsMutable();
-          super.addAll(values, urlRating_);
-          onChanged();
-        } else {
-          urlRatingBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder clearUrlRating() {
-        if (urlRatingBuilder_ == null) {
-          urlRating_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00001000);
-          onChanged();
-        } else {
-          urlRatingBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public Builder removeUrlRating(int index) {
-        if (urlRatingBuilder_ == null) {
-          ensureUrlRatingIsMutable();
-          urlRating_.remove(index);
-          onChanged();
-        } else {
-          urlRatingBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public com.janknspank.proto.UserProto.UrlRating.Builder getUrlRatingBuilder(
-          int index) {
-        return getUrlRatingFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public com.janknspank.proto.UserProto.UrlRatingOrBuilder getUrlRatingOrBuilder(
-          int index) {
-        if (urlRatingBuilder_ == null) {
-          return urlRating_.get(index);  } else {
-          return urlRatingBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public java.util.List<? extends com.janknspank.proto.UserProto.UrlRatingOrBuilder> 
-           getUrlRatingOrBuilderList() {
-        if (urlRatingBuilder_ != null) {
-          return urlRatingBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(urlRating_);
-        }
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public com.janknspank.proto.UserProto.UrlRating.Builder addUrlRatingBuilder() {
-        return getUrlRatingFieldBuilder().addBuilder(
-            com.janknspank.proto.UserProto.UrlRating.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public com.janknspank.proto.UserProto.UrlRating.Builder addUrlRatingBuilder(
-          int index) {
-        return getUrlRatingFieldBuilder().addBuilder(
-            index, com.janknspank.proto.UserProto.UrlRating.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .UrlRating url_rating = 13;</code>
-       */
-      public java.util.List<com.janknspank.proto.UserProto.UrlRating.Builder> 
-           getUrlRatingBuilderList() {
-        return getUrlRatingFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.UserProto.UrlRating, com.janknspank.proto.UserProto.UrlRating.Builder, com.janknspank.proto.UserProto.UrlRatingOrBuilder> 
-          getUrlRatingFieldBuilder() {
-        if (urlRatingBuilder_ == null) {
-          urlRatingBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.janknspank.proto.UserProto.UrlRating, com.janknspank.proto.UserProto.UrlRating.Builder, com.janknspank.proto.UserProto.UrlRatingOrBuilder>(
-                  urlRating_,
-                  ((bitField0_ & 0x00001000) == 0x00001000),
-                  getParentForChildren(),
-                  isClean());
-          urlRating_ = null;
-        }
-        return urlRatingBuilder_;
-      }
-
       // repeated .UrlFavorite url_favorite = 14;
       private java.util.List<com.janknspank.proto.UserProto.UrlFavorite> urlFavorite_ =
         java.util.Collections.emptyList();
       private void ensureUrlFavoriteIsMutable() {
-        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
           urlFavorite_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlFavorite>(urlFavorite_);
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00001000;
          }
       }
 
@@ -3162,7 +2800,7 @@ public final class UserProto {
       public Builder clearUrlFavorite() {
         if (urlFavoriteBuilder_ == null) {
           urlFavorite_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00001000);
           onChanged();
         } else {
           urlFavoriteBuilder_.clear();
@@ -3239,7 +2877,7 @@ public final class UserProto {
           urlFavoriteBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.UrlFavorite, com.janknspank.proto.UserProto.UrlFavorite.Builder, com.janknspank.proto.UserProto.UrlFavoriteOrBuilder>(
                   urlFavorite_,
-                  ((bitField0_ & 0x00002000) == 0x00002000),
+                  ((bitField0_ & 0x00001000) == 0x00001000),
                   getParentForChildren(),
                   isClean());
           urlFavorite_ = null;
@@ -3251,9 +2889,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.UserIndustry> industry_ =
         java.util.Collections.emptyList();
       private void ensureIndustryIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
           industry_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UserIndustry>(industry_);
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00002000;
          }
       }
 
@@ -3402,7 +3040,7 @@ public final class UserProto {
       public Builder clearIndustry() {
         if (industryBuilder_ == null) {
           industry_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00002000);
           onChanged();
         } else {
           industryBuilder_.clear();
@@ -3479,7 +3117,7 @@ public final class UserProto {
           industryBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.UserIndustry, com.janknspank.proto.UserProto.UserIndustry.Builder, com.janknspank.proto.UserProto.UserIndustryOrBuilder>(
                   industry_,
-                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  ((bitField0_ & 0x00002000) == 0x00002000),
                   getParentForChildren(),
                   isClean());
           industry_ = null;
@@ -3491,9 +3129,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.Interest> interest_ =
         java.util.Collections.emptyList();
       private void ensureInterestIsMutable() {
-        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
           interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>(interest_);
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00004000;
          }
       }
 
@@ -3642,7 +3280,7 @@ public final class UserProto {
       public Builder clearInterest() {
         if (interestBuilder_ == null) {
           interest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           onChanged();
         } else {
           interestBuilder_.clear();
@@ -3719,7 +3357,7 @@ public final class UserProto {
           interestBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder>(
                   interest_,
-                  ((bitField0_ & 0x00008000) == 0x00008000),
+                  ((bitField0_ & 0x00004000) == 0x00004000),
                   getParentForChildren(),
                   isClean());
           interest_ = null;
@@ -3731,9 +3369,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.Intent> intent_ =
         java.util.Collections.emptyList();
       private void ensureIntentIsMutable() {
-        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
           intent_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Intent>(intent_);
-          bitField0_ |= 0x00010000;
+          bitField0_ |= 0x00008000;
          }
       }
 
@@ -3882,7 +3520,7 @@ public final class UserProto {
       public Builder clearIntent() {
         if (intentBuilder_ == null) {
           intent_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00010000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           onChanged();
         } else {
           intentBuilder_.clear();
@@ -3959,7 +3597,7 @@ public final class UserProto {
           intentBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.Intent, com.janknspank.proto.UserProto.Intent.Builder, com.janknspank.proto.UserProto.IntentOrBuilder>(
                   intent_,
-                  ((bitField0_ & 0x00010000) == 0x00010000),
+                  ((bitField0_ & 0x00008000) == 0x00008000),
                   getParentForChildren(),
                   isClean());
           intent_ = null;
@@ -4533,38 +4171,68 @@ public final class UserProto {
   public interface UrlRatingOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional string url = 1;
+    // optional string id = 1;
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional string email = 2;
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    boolean hasEmail();
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    java.lang.String getEmail();
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getEmailBytes();
+
+    // optional string url = 3;
+    /**
+     * <code>optional string url = 3;</code>
      */
     boolean hasUrl();
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string url = 3;</code>
      */
     java.lang.String getUrl();
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string url = 3;</code>
      */
     com.google.protobuf.ByteString
         getUrlBytes();
 
-    // optional double rating = 2;
+    // optional double rating = 4;
     /**
-     * <code>optional double rating = 2;</code>
+     * <code>optional double rating = 4;</code>
      */
     boolean hasRating();
     /**
-     * <code>optional double rating = 2;</code>
+     * <code>optional double rating = 4;</code>
      */
     double getRating();
 
-    // optional int64 create_time = 3;
+    // optional int64 create_time = 5;
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 5;</code>
      */
     boolean hasCreateTime();
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 5;</code>
      */
     long getCreateTime();
   }
@@ -4621,16 +4289,26 @@ public final class UserProto {
             }
             case 10: {
               bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              email_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
               url_ = input.readBytes();
               break;
             }
-            case 17: {
-              bitField0_ |= 0x00000002;
+            case 33: {
+              bitField0_ |= 0x00000008;
               rating_ = input.readDouble();
               break;
             }
-            case 24: {
-              bitField0_ |= 0x00000004;
+            case 40: {
+              bitField0_ |= 0x00000010;
               createTime_ = input.readInt64();
               break;
             }
@@ -4674,17 +4352,103 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional string url = 1;
-    public static final int URL_FIELD_NUMBER = 1;
-    private java.lang.Object url_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string id = 1;</code>
      */
-    public boolean hasUrl() {
+    public boolean hasId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string id = 1;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string email = 2;
+    public static final int EMAIL_FIELD_NUMBER = 2;
+    private java.lang.Object email_;
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    public boolean hasEmail() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          email_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEmailBytes() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        email_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string url = 3;
+    public static final int URL_FIELD_NUMBER = 3;
+    private java.lang.Object url_;
+    /**
+     * <code>optional string url = 3;</code>
+     */
+    public boolean hasUrl() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string url = 3;</code>
      */
     public java.lang.String getUrl() {
       java.lang.Object ref = url_;
@@ -4701,7 +4465,7 @@ public final class UserProto {
       }
     }
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string url = 3;</code>
      */
     public com.google.protobuf.ByteString
         getUrlBytes() {
@@ -4717,39 +4481,41 @@ public final class UserProto {
       }
     }
 
-    // optional double rating = 2;
-    public static final int RATING_FIELD_NUMBER = 2;
+    // optional double rating = 4;
+    public static final int RATING_FIELD_NUMBER = 4;
     private double rating_;
     /**
-     * <code>optional double rating = 2;</code>
+     * <code>optional double rating = 4;</code>
      */
     public boolean hasRating() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional double rating = 2;</code>
+     * <code>optional double rating = 4;</code>
      */
     public double getRating() {
       return rating_;
     }
 
-    // optional int64 create_time = 3;
-    public static final int CREATE_TIME_FIELD_NUMBER = 3;
+    // optional int64 create_time = 5;
+    public static final int CREATE_TIME_FIELD_NUMBER = 5;
     private long createTime_;
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 5;</code>
      */
     public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 5;</code>
      */
     public long getCreateTime() {
       return createTime_;
     }
 
     private void initFields() {
+      id_ = "";
+      email_ = "";
       url_ = "";
       rating_ = 0D;
       createTime_ = 0L;
@@ -4767,13 +4533,19 @@ public final class UserProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUrlBytes());
+        output.writeBytes(1, getIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeDouble(2, rating_);
+        output.writeBytes(2, getEmailBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, createTime_);
+        output.writeBytes(3, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, rating_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, createTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4786,15 +4558,23 @@ public final class UserProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUrlBytes());
+          .computeBytesSize(1, getIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, rating_);
+          .computeBytesSize(2, getEmailBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, createTime_);
+          .computeBytesSize(3, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, rating_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, createTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4912,12 +4692,16 @@ public final class UserProto {
 
       public Builder clear() {
         super.clear();
-        url_ = "";
+        id_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        rating_ = 0D;
+        email_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        createTime_ = 0L;
+        url_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        rating_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -4949,13 +4733,21 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.url_ = url_;
+        result.id_ = id_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.rating_ = rating_;
+        result.email_ = email_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
+        }
+        result.url_ = url_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.rating_ = rating_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
         }
         result.createTime_ = createTime_;
         result.bitField0_ = to_bitField0_;
@@ -4974,8 +4766,18 @@ public final class UserProto {
 
       public Builder mergeFrom(com.janknspank.proto.UserProto.UrlRating other) {
         if (other == com.janknspank.proto.UserProto.UrlRating.getDefaultInstance()) return this;
-        if (other.hasUrl()) {
+        if (other.hasId()) {
           bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasEmail()) {
+          bitField0_ |= 0x00000002;
+          email_ = other.email_;
+          onChanged();
+        }
+        if (other.hasUrl()) {
+          bitField0_ |= 0x00000004;
           url_ = other.url_;
           onChanged();
         }
@@ -5012,16 +4814,164 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional string url = 1;
-      private java.lang.Object url_ = "";
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string id = 1;</code>
        */
-      public boolean hasUrl() {
+      public boolean hasId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string email = 2;
+      private java.lang.Object email_ = "";
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public boolean hasEmail() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public java.lang.String getEmail() {
+        java.lang.Object ref = email_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          email_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEmailBytes() {
+        java.lang.Object ref = email_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          email_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public Builder setEmail(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        email_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public Builder clearEmail() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        email_ = getDefaultInstance().getEmail();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public Builder setEmailBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        email_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string url = 3;
+      private java.lang.Object url_ = "";
+      /**
+       * <code>optional string url = 3;</code>
+       */
+      public boolean hasUrl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string url = 3;</code>
        */
       public java.lang.String getUrl() {
         java.lang.Object ref = url_;
@@ -5035,7 +4985,7 @@ public final class UserProto {
         }
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string url = 3;</code>
        */
       public com.google.protobuf.ByteString
           getUrlBytes() {
@@ -5051,102 +5001,102 @@ public final class UserProto {
         }
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string url = 3;</code>
        */
       public Builder setUrl(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000004;
         url_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string url = 3;</code>
        */
       public Builder clearUrl() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000004);
         url_ = getDefaultInstance().getUrl();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string url = 3;</code>
        */
       public Builder setUrlBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000004;
         url_ = value;
         onChanged();
         return this;
       }
 
-      // optional double rating = 2;
+      // optional double rating = 4;
       private double rating_ ;
       /**
-       * <code>optional double rating = 2;</code>
+       * <code>optional double rating = 4;</code>
        */
       public boolean hasRating() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional double rating = 2;</code>
+       * <code>optional double rating = 4;</code>
        */
       public double getRating() {
         return rating_;
       }
       /**
-       * <code>optional double rating = 2;</code>
+       * <code>optional double rating = 4;</code>
        */
       public Builder setRating(double value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000008;
         rating_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional double rating = 2;</code>
+       * <code>optional double rating = 4;</code>
        */
       public Builder clearRating() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000008);
         rating_ = 0D;
         onChanged();
         return this;
       }
 
-      // optional int64 create_time = 3;
+      // optional int64 create_time = 5;
       private long createTime_ ;
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 5;</code>
        */
       public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 5;</code>
        */
       public long getCreateTime() {
         return createTime_;
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 5;</code>
        */
       public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000010;
         createTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 5;</code>
        */
       public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000010);
         createTime_ = 0L;
         onChanged();
         return this;
@@ -10795,7 +10745,7 @@ public final class UserProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/user.proto\032(com/j" +
-      "anknspank/database/extensions.proto\"\344\004\n\004" +
+      "anknspank/database/extensions.proto\"\312\004\n\004" +
       "User\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\022\n\004na" +
       "me\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230" +
       "\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\031\022\031\n\013faceb" +
@@ -10806,42 +10756,43 @@ public final class UserProto {
       "rofileB\004\240\246\035\003\0229\n\025linked_in_connections\030\013 ",
       "\001(\0132\024.LinkedInConnectionsB\004\240\246\035\003\022*\n\033linke" +
       "d_in_profile_photo_url\030\022 \001(\tB\005\230\246\035\310\001\022\"\n\014a" +
-      "ddress_book\030\014 \001(\0132\014.AddressBook\022\036\n\nurl_r" +
-      "ating\030\r \003(\0132\n.UrlRating\022\"\n\014url_favorite\030" +
-      "\016 \003(\0132\014.UrlFavorite\022\037\n\010industry\030\017 \003(\0132\r." +
-      "UserIndustry\022\033\n\010interest\030\020 \003(\0132\t.Interes" +
-      "t\022\027\n\006intent\030\021 \003(\0132\007.Intent*\004\010\006\020\007:\020\212\265\030\014Mo" +
-      "ngoDB.User\"B\n\013AddressBook\022\030\n\004data\030\001 \001(\tB" +
-      "\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"\\" +
-      "\n\tUrlRating\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250",
-      "\246\035\001\022\024\n\006rating\030\002 \001(\001B\004\210\246\035\001\022\031\n\013create_time" +
-      "\030\003 \001(\003B\004\210\246\035\001\"N\n\013UrlFavorite\022 \n\006url_id\030\001 " +
-      "\001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\035\n\013create_time\030\002 \001" +
-      "(\003B\010\220\246\035\005\210\246\035\001\"\300\001\n\014UserIndustry\022\"\n\020industr" +
-      "y_code_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022*\n\006source\030\002 \001(" +
-      "\0162\024.UserIndustry.SourceB\004\210\246\035\001\022\031\n\013create_" +
-      "time\030\003 \001(\003B\004\210\246\035\001\"E\n\006Source\022\013\n\007UNKNOWN\020\000\022" +
-      "\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED_IN_PR" +
-      "OFILE\020\003\"\226\002\n\010Interest\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246" +
-      "\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035",
-      "d\022&\n\006source\030\003 \001(\0162\020.Interest.SourceB\004\210\246\035" +
-      "\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n\013create_time" +
-      "\030\005 \001(\003B\004\210\246\035\001\"r\n\006Source\022\013\n\007UNKNOWN\020\000\022\010\n\004U" +
-      "SER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDRESS_BOOK\020\003\022\031" +
-      "\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n\021LINKED_IN_P" +
-      "ROFILE\020\005\"C\n\006Intent\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001\220\246" +
-      "\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"\251\002" +
-      "\n\017LinkedInProfile\0223\n\020current_employer\030\001 " +
-      "\001(\0132\031.LinkedInProfile.Employer\0220\n\rpast_e" +
-      "mployer\030\002 \003(\0132\031.LinkedInProfile.Employer",
-      "\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_tim" +
-      "e\030\004 \001(\003B\004\210\246\035\001\032z\n\010Employer\022\026\n\004name\030\001 \001(\tB" +
-      "\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\ten" +
-      "tity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022" +
-      "\020\n\010end_time\030\005 \001(\003\"J\n\023LinkedInConnections" +
-      "\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_tim" +
-      "e\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknspank.protoB\tU" +
-      "serProto"
+      "ddress_book\030\014 \001(\0132\014.AddressBook\022(\n\014url_f" +
+      "avorite\030\016 \003(\0132\014.UrlFavoriteB\004\240\246\035\003\022\037\n\010ind" +
+      "ustry\030\017 \003(\0132\r.UserIndustry\022\033\n\010interest\030\020" +
+      " \003(\0132\t.Interest\022\027\n\006intent\030\021 \003(\0132\007.Intent" +
+      "*\004\010\006\020\007:\020\212\265\030\014MongoDB.User\"B\n\013AddressBook\022" +
+      "\030\n\004data\030\001 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time" +
+      "\030\002 \001(\003B\004\210\246\035\001\"\260\001\n\tUrlRating\022\034\n\002id\030\001 \001(\tB\020" +
+      "\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\037\n\005email\030\002 \001(\tB\020\210\246\035\001\220\246\035",
+      "\003\230\246\035d\250\246\035\001\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035" +
+      "\001\022\024\n\006rating\030\004 \001(\001B\004\210\246\035\001\022\031\n\013create_time\030\005" +
+      " \001(\003B\004\210\246\035\001:\023\212\265\030\017MySQL.UrlRating\"N\n\013UrlFa" +
+      "vorite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001" +
+      "\022\035\n\013create_time\030\002 \001(\003B\010\220\246\035\005\210\246\035\001\"\300\001\n\014User" +
+      "Industry\022\"\n\020industry_code_id\030\001 \001(\005B\010\210\246\035\001" +
+      "\220\246\035\003\022*\n\006source\030\002 \001(\0162\024.UserIndustry.Sour" +
+      "ceB\004\210\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"E\n\006S" +
+      "ource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTON" +
+      "E\020\002\022\025\n\021LINKED_IN_PROFILE\020\003\"\226\002\n\010Interest\022",
+      "\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword" +
+      "\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022&\n\006source\030\003 \001(\0162\020.I" +
+      "nterest.SourceB\004\210\246\035\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005" +
+      "\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001\"r\n\006Sourc" +
+      "e\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022" +
+      "\020\n\014ADDRESS_BOOK\020\003\022\031\n\025LINKED_IN_CONNECTIO" +
+      "NS\020\004\022\025\n\021LINKED_IN_PROFILE\020\005\"C\n\006Intent\022\036\n" +
+      "\004code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_" +
+      "time\030\002 \001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfile\0223\n\020" +
+      "current_employer\030\001 \001(\0132\031.LinkedInProfile",
+      ".Employer\0220\n\rpast_employer\030\002 \003(\0132\031.Linke" +
+      "dInProfile.Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230" +
+      "\246\035\200\240\006\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z\n\010Empl" +
+      "oyer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 " +
+      "\001(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022" +
+      "\n\nstart_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\"J\n\023" +
+      "LinkedInConnections\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230" +
+      "\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!\n\024com." +
+      "janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10853,7 +10804,7 @@ public final class UserProto {
           internal_static_User_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_User_descriptor,
-              new java.lang.String[] { "Id", "Name", "Email", "LinkedInId", "FacebookId", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInConnections", "LinkedInProfilePhotoUrl", "AddressBook", "UrlRating", "UrlFavorite", "Industry", "Interest", "Intent", });
+              new java.lang.String[] { "Id", "Name", "Email", "LinkedInId", "FacebookId", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInConnections", "LinkedInProfilePhotoUrl", "AddressBook", "UrlFavorite", "Industry", "Interest", "Intent", });
           internal_static_AddressBook_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_AddressBook_fieldAccessorTable = new
@@ -10865,7 +10816,7 @@ public final class UserProto {
           internal_static_UrlRating_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UrlRating_descriptor,
-              new java.lang.String[] { "Url", "Rating", "CreateTime", });
+              new java.lang.String[] { "Id", "Email", "Url", "Rating", "CreateTime", });
           internal_static_UrlFavorite_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_UrlFavorite_fieldAccessorTable = new
@@ -10928,6 +10879,7 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
@@ -10937,7 +10889,16 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

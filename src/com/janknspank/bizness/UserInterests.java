@@ -87,23 +87,25 @@ public class UserInterests {
       user = updateInterests(user, personInterests, Source.LINKED_IN_CONNECTIONS);
     }
 
-    // Step 3: Update skills
-    Set<String> skills = Sets.newHashSet();
-    for (Node skillNode : profileDocumentNode.findAll("skill > name")) {
-      skills.add(skillNode.getFlattenedText());
-    }
-    List<Interest> skillInterests = Lists.newArrayList();
-    for (String skill : skills) {
-      skillInterests.add(Interest.newBuilder()
-          .setId(GuidFactory.generate())
-          .setKeyword(skill)
-          .setSource(Source.LINKED_IN_PROFILE)
-          .setType(TYPE_SKILL)
-          .setCreateTime(System.currentTimeMillis())
-          .build());
-    }
+    return user;
 
-    return updateInterests(user, skillInterests, Source.LINKED_IN_PROFILE);
+    // Step 3: Update skills
+//    Set<String> skills = Sets.newHashSet();
+//    for (Node skillNode : profileDocumentNode.findAll("skill > name")) {
+//      skills.add(skillNode.getFlattenedText());
+//    }
+//    List<Interest> skillInterests = Lists.newArrayList();
+//    for (String skill : skills) {
+//      skillInterests.add(Interest.newBuilder()
+//          .setId(GuidFactory.generate())
+//          .setKeyword(skill)
+//          .setSource(Source.LINKED_IN_PROFILE)
+//          .setType(TYPE_SKILL)
+//          .setCreateTime(System.currentTimeMillis())
+//          .build());
+//    }
+
+//    return updateInterests(user, skillInterests, Source.LINKED_IN_PROFILE);
   }
 
   /**

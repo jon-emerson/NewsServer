@@ -1,7 +1,9 @@
 package com.janknspank.rank;
 
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
@@ -15,10 +17,17 @@ import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
+import com.google.api.client.util.Sets;
+import com.google.common.collect.Maps;
 import com.janknspank.ArticleCrawler;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.UrlRatings;
+import com.janknspank.bizness.Users;
 import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
@@ -60,6 +69,58 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     return neuralNetwork;
   }
 
+  /**
+   * Generate 
+   * @param ratings
+   * @param emailToUserMap
+   * @param urlToArticleMap
+   * @return
+   * @throws BiznessException 
+   * @throws DatabaseSchemaException 
+   */
+  private static DataSet generateTrainingDataSet(Iterable<UrlRating> ratings) 
+      throws BiznessException, DatabaseSchemaException {
+    Set<String> urlStrings = Sets.newHashSet();
+    Set<String> userEmails = Sets.newHashSet();
+    for (UrlRating urlRating : ratings) {
+      urlStrings.add(urlRating.getUrl());
+      userEmails.add(urlRating.getEmail());
+    }
+
+    // Load up all users who submitted ratings
+    Iterable<User> users = Users.getByEmails(userEmails);
+    Map<String, User> emailUserMap = Maps.newHashMap();
+    for (User user: users) {
+      emailUserMap.put(user.getEmail(), user);
+    }
+
+    // Load up all articles that have ratings
+    Collection<Article> articles = ArticleCrawler.getArticles(urlStrings).values();
+    Map<String, Article> urlArticleMap = Maps.newHashMap();
+    for (Article article: articles) {
+      urlArticleMap.put(article.getUrl(), article);
+    }
+    
+    DataSet trainingSet = new DataSet(
+        NeuralNetworkScorer.INPUT_NODES_COUNT,
+        NeuralNetworkScorer.OUTPUT_NODES_COUNT);
+    
+    for (UrlRating rating : ratings) {
+      User user = emailUserMap.get(rating.getEmail());
+      Article article = urlArticleMap.get(rating.getUrl());
+      
+      if (article != null & user != null) {
+        double[] input =
+            NeuralNetworkScorer.generateInputNodes(user, article);
+        double[] output = new double[]{rating.getRating()};
+        DataSetRow row = new DataSetRow(input, output);
+        trainingSet.addRow(row);
+      }
+    }
+    
+    return trainingSet;
+  }
+  
   private static DataSet generateTrainingDataSet(User user, Hashtable<Article, Double> ratings) {
     // Create training set.
     DataSet trainingSet = new DataSet(
@@ -98,9 +159,15 @@ public class NeuralNetworkTrainer implements LearningEventListener {
         ratings.put(article, 1.0);
       }
     }
+    
+    DataSet jonBenchmarkDataSet = generateTrainingDataSet(user, ratings);
+    DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
+    for (DataSetRow row : jonBenchmarkDataSet.getRows()) {
+      userRatingsDataSet.addRow(row);
+    }
 
     NeuralNetwork<BackPropagation> neuralNetwork =
-        new NeuralNetworkTrainer().generateTrainedNetwork(generateTrainingDataSet(user, ratings));
+        new NeuralNetworkTrainer().generateTrainedNetwork(userRatingsDataSet);
     neuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
   }
 

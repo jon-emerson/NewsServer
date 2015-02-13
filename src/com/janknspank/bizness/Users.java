@@ -21,6 +21,11 @@ public class Users {
     return Database.with(User.class).getFirst(new QueryOption.WhereEquals("email", email));
   }
   
+  public static Iterable<User> getByEmails(Iterable<String> emails) 
+      throws DatabaseSchemaException {
+    return Database.with(User.class).get(new QueryOption.WhereEquals("email", emails));
+  }
+  
   public static User getByUserId(String userId) throws DatabaseSchemaException {
     return Database.with(User.class).get(userId);
   }

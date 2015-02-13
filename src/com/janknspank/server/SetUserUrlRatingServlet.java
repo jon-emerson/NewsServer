@@ -1,23 +1,18 @@
 package com.janknspank.server;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.google.api.client.util.Lists;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.primitives.Doubles;
+import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Urls;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.CoreProto.Url;
-import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
@@ -40,19 +35,7 @@ public class SetUserUrlRatingServlet extends StandardServlet {
     }
 
     // Business logic.
-    List<UrlRating> existingRatings = Lists.newArrayList();
-    for (UrlRating rating : user.getUrlRatingList()) {
-      if (!rating.getUrl().equals(articleUrl.getUrl())) {
-        existingRatings.add(rating);
-      }
-    }
-    user = Database.with(User.class).set(user, "url_rating", Iterables.concat(
-        existingRatings,
-        ImmutableList.of(UrlRating.newBuilder()
-            .setUrl(articleUrl.getUrl())
-            .setRating(ratingScore)
-            .setCreateTime(System.currentTimeMillis())
-            .build())));
+    UrlRatings.upsertRating(articleUrl.getUrl(), ratingScore, user);
 
     // Create response.
     JSONObject response = createSuccessResponse();

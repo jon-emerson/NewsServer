@@ -18,7 +18,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleIndustry;
 import com.janknspank.proto.EnumsProto.IndustryCode;
 
-public class Benchmark {
+public class IndustryBenchmark {
   /**
    * Runs the IndustryClassifier against a set of files.
    * @param industryCode

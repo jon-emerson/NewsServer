@@ -61,8 +61,11 @@ message User {
   ];
 
   optional AddressBook address_book = 12;
-  repeated UrlRating url_rating = 13;
-  repeated UrlFavorite url_favorite = 14;
+
+  repeated UrlFavorite url_favorite = 14 [
+    (client_serialization) = EXCLUDE
+  ];
+
   repeated UserIndustry industry = 15;
   repeated Interest interest = 16;
   repeated Intent intent = 17;
@@ -80,18 +83,35 @@ message AddressBook {
 }
 
 message UrlRating {
-  optional string url = 1 [
+  option (database_collection) = "MySQL.UrlRating";
+
+  // Note this is not a URL id, just a unique identifier
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional string email = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 100,
+    (string_charset) = LATIN1
+  ];
+
+  optional string url = 3 [
     (required) = YES,
     (storage_method) = INDEX,
     (string_length) = 767,
     (string_charset) = LATIN1
   ];
 
-  optional double rating = 2 [
+  optional double rating = 4 [
     (required) = YES
   ];
 
-  optional int64 create_time = 3 [
+  optional int64 create_time = 5 [
     (required) = YES
   ];
 }
