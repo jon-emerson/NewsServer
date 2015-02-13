@@ -43,7 +43,7 @@ public class UserRatingsBenchmark {
     // Load up all users who submitted ratings
     Iterable<User> users = Users.getByEmails(userEmails);
     Map<String, User> emailUserMap = Maps.newHashMap();
-    for (User user: users) {
+    for (User user : users) {
       emailUserMap.put(user.getEmail(), user);
     }
 
