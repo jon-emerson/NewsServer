@@ -14,6 +14,7 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.IntentCodes;
 import com.janknspank.bizness.Intents;
+import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -24,6 +25,7 @@ import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.HeuristicScorer;
 
 public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
+  private static final Logger LOG = new Logger(FTUEGetArticlesServlet.class);
 
   /**
    * Called by the Mobile client right after a user sets their goals / intents
@@ -53,7 +55,7 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
       return Articles.getRankedArticles(user, HeuristicScorer.getInstance());
     } catch (DatabaseSchemaException | ParserException e) {
       // Fallback
-      System.out.println("Error: couldn't load getRankedArticles: " + e.getMessage());
+      LOG.error("Couldn't load getRankedArticles: " + e.getMessage(), e);
       return Articles.getArticlesByInterest(user.getInterestList());
     }
   }

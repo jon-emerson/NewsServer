@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +21,7 @@ import com.google.common.collect.Iterables;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.FeatureClassifier;
 import com.janknspank.common.DateParser;
+import com.janknspank.common.Logger;
 import com.janknspank.common.StringHelper;
 import com.janknspank.crawler.facebook.FacebookData;
 import com.janknspank.crawler.facebook.FacebookException;
@@ -40,7 +40,7 @@ import com.janknspank.proto.ArticleProto.SocialEngagement;
  * classification features, plus Facebook / other social engagement scores.
  */
 class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
-  private static final Logger LOG = Logger.getLogger(ArticleCreator.class.getName());
+  private static final Logger LOG = new Logger(ArticleCreator.class);
   private static LoadingCache<DocumentNode, Iterable<String>> PARAGRAPH_CACHE =
       CacheBuilder.newBuilder()
           .maximumSize(10)

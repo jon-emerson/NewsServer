@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.janknspank.common.Logger;
 
 public class SqlConnection {
-  private static final Logger LOG = Logger.getLogger(SqlConnection.class.getName());
+  private static final Logger LOG = new Logger(SqlConnection.class);
 
   // JDBC driver name and database URL
   private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";

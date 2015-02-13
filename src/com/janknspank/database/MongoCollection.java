@@ -1,7 +1,6 @@
 package com.janknspank.database;
 
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
@@ -15,6 +14,7 @@ import com.google.common.collect.Iterables;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
+import com.janknspank.common.Logger;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
 import com.janknspank.database.QueryOption.LimitWithOffset;
 import com.janknspank.database.QueryOption.WhereEquals;
@@ -42,7 +42,7 @@ import com.mongodb.MongoClient;
  * deletes, updates, and inserts against a Mongo DB database.
  */
 public class MongoCollection<T extends Message> extends Collection<T> {
-  private static final Logger LOG = Logger.getLogger(MongoCollection.class.getName());
+  private static final Logger LOG = new Logger(MongoCollection.class);
   private MongoClient __clientInternal = null; // DO NOT USE DIRECTLY!!
   private DB __database = null; // DO NOT USE DIRECTLY!!
 

@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -22,6 +21,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.ClassifierException;
+import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -36,7 +36,7 @@ import com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributi
 import com.janknspank.rank.DistributionBuilder;
 
 public class FacebookShareNormalizer {
-  private static final Logger LOG = Logger.getLogger(FacebookShareNormalizer.class.getName());
+  private static final Logger LOG = new Logger(FacebookShareNormalizer.class);
   private static final String FILENAME = "classifier/shares/facebooksharenormalizer.bin";
 
   private static FacebookShareNormalizer instance = null;

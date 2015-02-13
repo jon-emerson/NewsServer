@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -18,6 +17,7 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Links;
 import com.janknspank.bizness.Urls;
 import com.janknspank.common.Asserts;
+import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -34,7 +34,7 @@ import com.janknspank.proto.CoreProto.Url;
  * those article documents, then stores the results to the database.
  */
 public class ArticleCrawler implements Runnable {
-  private static final Logger LOG = Logger.getLogger(ArticleCrawler.class.getName());
+  private static final Logger LOG = new Logger(ArticleCrawler.class);
 
   // NOTE(jonemerson): This needs to be 1 if the database is empty.  Or, just
   // run ./rss.sh first!

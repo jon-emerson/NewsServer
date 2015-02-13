@@ -1,7 +1,6 @@
 package com.janknspank.crawler;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Urls;
 import com.janknspank.common.DateParser;
+import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -31,7 +31,7 @@ import com.janknspank.proto.CoreProto.Url;
  * database as possible.
  */
 public class UrlCrawler {
-  private static final Logger LOG = Logger.getLogger(UrlCrawler.class.getName());
+  private static final Logger LOG = new Logger(UrlCrawler.class);
   private final Fetcher fetcher = new Fetcher();
   private static final Iterable<String> WEBSITES = Iterables.concat(
       Iterables.transform(UrlWhitelist.WHITELIST, new Function<String, String>() {

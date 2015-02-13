@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import com.google.common.collect.Lists;
+import com.janknspank.common.Logger;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -18,7 +18,7 @@ import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 
 public class UrlFinder {
-  private static final Logger LOG = Logger.getLogger(UrlFinder.class.getName());
+  private static final Logger LOG = new Logger(UrlFinder.class);
   private static final Fetcher FETCHER = new Fetcher();
 
   /**

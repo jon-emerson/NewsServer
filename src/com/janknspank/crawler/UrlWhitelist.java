@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.apache.http.NameValuePair;
@@ -18,6 +17,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.Links;
+import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -25,7 +25,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Url;
 
 public class UrlWhitelist {
-  private static final Logger LOG = Logger.getLogger(UrlWhitelist.class.getName());
+  private static final Logger LOG = new Logger(UrlWhitelist.class);
   public static final Predicate<String> PREDICATE = new Predicate<String>() {
     @Override
     public boolean apply(String url) {

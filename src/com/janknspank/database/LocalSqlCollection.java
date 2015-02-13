@@ -3,14 +3,14 @@ package com.janknspank.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.protobuf.Message;
+import com.janknspank.common.Logger;
 
 class LocalSqlCollection<T extends Message> extends SqlCollection<T> {
-  private static final Logger LOG = Logger.getLogger(LocalSqlCollection.class.getName());
+  private static final Logger LOG = new Logger(LocalSqlCollection.class);
   private static final String DB_URL =
       "jdbc:mysql://localhost/test?"
           + Joiner.on("&").join(ImmutableList.of(

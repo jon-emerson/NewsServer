@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -21,6 +20,7 @@ import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
 import com.janknspank.common.Asserts;
+import com.janknspank.common.Logger;
 import com.janknspank.database.ExtensionsProto.Required;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
 import com.janknspank.database.ExtensionsProto.StringCharset;
@@ -36,7 +36,7 @@ import com.janknspank.database.QueryOption.WhereNotNull;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 public class SqlCollection<T extends Message> extends Collection<T> {
-  private static final Logger LOG = Logger.getLogger(SqlCollection.class.getName());
+  private static final Logger LOG = new Logger(SqlCollection.class);
   private static final String PROTO_COLUMN_NAME = "proto";
   private Connection __connection; // DO NOT USE THIS DIRECTLY!!
 
