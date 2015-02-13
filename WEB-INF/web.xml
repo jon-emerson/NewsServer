@@ -47,15 +47,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>DeleteUserUrlRatingServlet</servlet-name>
-    <servlet-class>com.janknspank.server.DeleteUserUrlRatingServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteUserUrlRatingServlet</servlet-name>
-    <url-pattern>/deleteUserUrlRating</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>GetArticlesServlet</servlet-name>
     <servlet-class>com.janknspank.server.GetArticlesServlet</servlet-class>
   </servlet>

@@ -4533,38 +4533,80 @@ public final class UserProto {
   public interface UrlRatingOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional string url = 1;
+    // optional string id = 1;
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string id = 1;</code>
+     *
+     * <pre>
+     * Note this is not a URL id, just a unique identifier
+     * </pre>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     *
+     * <pre>
+     * Note this is not a URL id, just a unique identifier
+     * </pre>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     *
+     * <pre>
+     * Note this is not a URL id, just a unique identifier
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional string email = 2;
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    boolean hasEmail();
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    java.lang.String getEmail();
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getEmailBytes();
+
+    // optional string url = 3;
+    /**
+     * <code>optional string url = 3;</code>
      */
     boolean hasUrl();
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string url = 3;</code>
      */
     java.lang.String getUrl();
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string url = 3;</code>
      */
     com.google.protobuf.ByteString
         getUrlBytes();
 
-    // optional double rating = 2;
+    // optional double rating = 4;
     /**
-     * <code>optional double rating = 2;</code>
+     * <code>optional double rating = 4;</code>
      */
     boolean hasRating();
     /**
-     * <code>optional double rating = 2;</code>
+     * <code>optional double rating = 4;</code>
      */
     double getRating();
 
-    // optional int64 create_time = 3;
+    // optional int64 create_time = 5;
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 5;</code>
      */
     boolean hasCreateTime();
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 5;</code>
      */
     long getCreateTime();
   }
@@ -4621,16 +4663,26 @@ public final class UserProto {
             }
             case 10: {
               bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              email_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
               url_ = input.readBytes();
               break;
             }
-            case 17: {
-              bitField0_ |= 0x00000002;
+            case 33: {
+              bitField0_ |= 0x00000008;
               rating_ = input.readDouble();
               break;
             }
-            case 24: {
-              bitField0_ |= 0x00000004;
+            case 40: {
+              bitField0_ |= 0x00000010;
               createTime_ = input.readInt64();
               break;
             }
@@ -4674,17 +4726,115 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional string url = 1;
-    public static final int URL_FIELD_NUMBER = 1;
-    private java.lang.Object url_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string id = 1;</code>
+     *
+     * <pre>
+     * Note this is not a URL id, just a unique identifier
+     * </pre>
      */
-    public boolean hasUrl() {
+    public boolean hasId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string id = 1;</code>
+     *
+     * <pre>
+     * Note this is not a URL id, just a unique identifier
+     * </pre>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     *
+     * <pre>
+     * Note this is not a URL id, just a unique identifier
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string email = 2;
+    public static final int EMAIL_FIELD_NUMBER = 2;
+    private java.lang.Object email_;
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    public boolean hasEmail() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          email_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string email = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEmailBytes() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        email_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string url = 3;
+    public static final int URL_FIELD_NUMBER = 3;
+    private java.lang.Object url_;
+    /**
+     * <code>optional string url = 3;</code>
+     */
+    public boolean hasUrl() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string url = 3;</code>
      */
     public java.lang.String getUrl() {
       java.lang.Object ref = url_;
@@ -4701,7 +4851,7 @@ public final class UserProto {
       }
     }
     /**
-     * <code>optional string url = 1;</code>
+     * <code>optional string url = 3;</code>
      */
     public com.google.protobuf.ByteString
         getUrlBytes() {
@@ -4717,39 +4867,41 @@ public final class UserProto {
       }
     }
 
-    // optional double rating = 2;
-    public static final int RATING_FIELD_NUMBER = 2;
+    // optional double rating = 4;
+    public static final int RATING_FIELD_NUMBER = 4;
     private double rating_;
     /**
-     * <code>optional double rating = 2;</code>
+     * <code>optional double rating = 4;</code>
      */
     public boolean hasRating() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional double rating = 2;</code>
+     * <code>optional double rating = 4;</code>
      */
     public double getRating() {
       return rating_;
     }
 
-    // optional int64 create_time = 3;
-    public static final int CREATE_TIME_FIELD_NUMBER = 3;
+    // optional int64 create_time = 5;
+    public static final int CREATE_TIME_FIELD_NUMBER = 5;
     private long createTime_;
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 5;</code>
      */
     public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 5;</code>
      */
     public long getCreateTime() {
       return createTime_;
     }
 
     private void initFields() {
+      id_ = "";
+      email_ = "";
       url_ = "";
       rating_ = 0D;
       createTime_ = 0L;
@@ -4767,13 +4919,19 @@ public final class UserProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUrlBytes());
+        output.writeBytes(1, getIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeDouble(2, rating_);
+        output.writeBytes(2, getEmailBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, createTime_);
+        output.writeBytes(3, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, rating_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, createTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4786,15 +4944,23 @@ public final class UserProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUrlBytes());
+          .computeBytesSize(1, getIdBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, rating_);
+          .computeBytesSize(2, getEmailBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, createTime_);
+          .computeBytesSize(3, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, rating_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, createTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4912,12 +5078,16 @@ public final class UserProto {
 
       public Builder clear() {
         super.clear();
-        url_ = "";
+        id_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        rating_ = 0D;
+        email_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        createTime_ = 0L;
+        url_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        rating_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -4949,13 +5119,21 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.url_ = url_;
+        result.id_ = id_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.rating_ = rating_;
+        result.email_ = email_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
+        }
+        result.url_ = url_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.rating_ = rating_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
         }
         result.createTime_ = createTime_;
         result.bitField0_ = to_bitField0_;
@@ -4974,8 +5152,18 @@ public final class UserProto {
 
       public Builder mergeFrom(com.janknspank.proto.UserProto.UrlRating other) {
         if (other == com.janknspank.proto.UserProto.UrlRating.getDefaultInstance()) return this;
-        if (other.hasUrl()) {
+        if (other.hasId()) {
           bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasEmail()) {
+          bitField0_ |= 0x00000002;
+          email_ = other.email_;
+          onChanged();
+        }
+        if (other.hasUrl()) {
+          bitField0_ |= 0x00000004;
           url_ = other.url_;
           onChanged();
         }
@@ -5012,16 +5200,188 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional string url = 1;
-      private java.lang.Object url_ = "";
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string id = 1;</code>
+       *
+       * <pre>
+       * Note this is not a URL id, just a unique identifier
+       * </pre>
        */
-      public boolean hasUrl() {
+      public boolean hasId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string id = 1;</code>
+       *
+       * <pre>
+       * Note this is not a URL id, just a unique identifier
+       * </pre>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       *
+       * <pre>
+       * Note this is not a URL id, just a unique identifier
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       *
+       * <pre>
+       * Note this is not a URL id, just a unique identifier
+       * </pre>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       *
+       * <pre>
+       * Note this is not a URL id, just a unique identifier
+       * </pre>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       *
+       * <pre>
+       * Note this is not a URL id, just a unique identifier
+       * </pre>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string email = 2;
+      private java.lang.Object email_ = "";
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public boolean hasEmail() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public java.lang.String getEmail() {
+        java.lang.Object ref = email_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          email_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEmailBytes() {
+        java.lang.Object ref = email_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          email_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public Builder setEmail(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        email_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public Builder clearEmail() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        email_ = getDefaultInstance().getEmail();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string email = 2;</code>
+       */
+      public Builder setEmailBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        email_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string url = 3;
+      private java.lang.Object url_ = "";
+      /**
+       * <code>optional string url = 3;</code>
+       */
+      public boolean hasUrl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string url = 3;</code>
        */
       public java.lang.String getUrl() {
         java.lang.Object ref = url_;
@@ -5035,7 +5395,7 @@ public final class UserProto {
         }
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string url = 3;</code>
        */
       public com.google.protobuf.ByteString
           getUrlBytes() {
@@ -5051,102 +5411,102 @@ public final class UserProto {
         }
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string url = 3;</code>
        */
       public Builder setUrl(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000004;
         url_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string url = 3;</code>
        */
       public Builder clearUrl() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000004);
         url_ = getDefaultInstance().getUrl();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string url = 1;</code>
+       * <code>optional string url = 3;</code>
        */
       public Builder setUrlBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000004;
         url_ = value;
         onChanged();
         return this;
       }
 
-      // optional double rating = 2;
+      // optional double rating = 4;
       private double rating_ ;
       /**
-       * <code>optional double rating = 2;</code>
+       * <code>optional double rating = 4;</code>
        */
       public boolean hasRating() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional double rating = 2;</code>
+       * <code>optional double rating = 4;</code>
        */
       public double getRating() {
         return rating_;
       }
       /**
-       * <code>optional double rating = 2;</code>
+       * <code>optional double rating = 4;</code>
        */
       public Builder setRating(double value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000008;
         rating_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional double rating = 2;</code>
+       * <code>optional double rating = 4;</code>
        */
       public Builder clearRating() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000008);
         rating_ = 0D;
         onChanged();
         return this;
       }
 
-      // optional int64 create_time = 3;
+      // optional int64 create_time = 5;
       private long createTime_ ;
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 5;</code>
        */
       public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 5;</code>
        */
       public long getCreateTime() {
         return createTime_;
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 5;</code>
        */
       public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000010;
         createTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 5;</code>
        */
       public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000010);
         createTime_ = 0L;
         onChanged();
         return this;
@@ -10998,39 +11358,41 @@ public final class UserProto {
       "st\030\020 \003(\0132\t.Interest\022\027\n\006intent\030\021 \003(\0132\007.In" +
       "tent*\004\010\006\020\007:\020\212\265\030\014MongoDB.User\"B\n\013AddressB" +
       "ook\022\030\n\004data\030\001 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_" +
-      "time\030\002 \001(\003B\004\210\246\035\001\"\\\n\tUrlRating\022\036\n\003url\030\001 \001",
-      "(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\024\n\006rating\030\002 \001(\001B\004\210" +
-      "\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"N\n\013UrlFav" +
-      "orite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022" +
-      "\035\n\013create_time\030\002 \001(\003B\010\220\246\035\005\210\246\035\001\"\325\002\n\014UserI" +
-      "ndustry\022\"\n\020industry_code_id\030\001 \001(\005B\010\210\246\035\001\220" +
-      "\246\035\003\022*\n\006source\030\002 \001(\0162\024.UserIndustry.Sourc" +
-      "eB\004\210\246\035\001\0226\n\014relationship\030\003 \001(\0162\032.UserIndu" +
-      "stry.RelationshipB\004\210\246\035\001\022\031\n\013create_time\030\004" +
-      " \001(\003B\004\210\246\035\001\"L\n\006Source\022\022\n\016UNKNOWN_SOURCE\020\000" +
-      "\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED_IN_P",
-      "ROFILE\020\003\"T\n\014Relationship\022\030\n\024UNKNOWN_RELA" +
-      "TIONSHIP\020\000\022\024\n\020CURRENT_INDUSTRY\020\001\022\024\n\020DESI" +
-      "RED_INDUSTRY\020\002\"\226\002\n\010Interest\022\034\n\002id\030\001 \001(\tB" +
-      "\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001" +
-      "\220\246\035\003\230\246\035d\022&\n\006source\030\003 \001(\0162\020.Interest.Sour" +
-      "ceB\004\210\246\035\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n\013crea" +
-      "te_time\030\005 \001(\003B\004\210\246\035\001\"r\n\006Source\022\013\n\007UNKNOWN" +
-      "\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDRESS_B" +
-      "OOK\020\003\022\031\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n\021LINK" +
-      "ED_IN_PROFILE\020\005\"C\n\006Intent\022\036\n\004code\030\001 \001(\tB",
-      "\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004" +
-      "\210\246\035\001\"\251\002\n\017LinkedInProfile\0223\n\020current_empl" +
-      "oyer\030\001 \001(\0132\031.LinkedInProfile.Employer\0220\n" +
-      "\rpast_employer\030\002 \003(\0132\031.LinkedInProfile.E" +
-      "mployer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013cre" +
-      "ate_time\030\004 \001(\003B\004\210\246\035\001\032z\n\010Employer\022\026\n\004name" +
-      "\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035" +
-      "d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time" +
-      "\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\"J\n\023LinkedInConn" +
-      "ections\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013cre",
-      "ate_time\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknspank.p" +
-      "rotoB\tUserProto"
+      "time\030\002 \001(\003B\004\210\246\035\001\"\260\001\n\tUrlRating\022\034\n\002id\030\001 \001",
+      "(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\037\n\005email\030\002 \001(\tB\020\210\246\035" +
+      "\001\220\246\035\003\230\246\035d\250\246\035\001\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377" +
+      "\005\250\246\035\001\022\024\n\006rating\030\004 \001(\001B\004\210\246\035\001\022\031\n\013create_ti" +
+      "me\030\005 \001(\003B\004\210\246\035\001:\023\212\265\030\017MySQL.UrlRating\"N\n\013U" +
+      "rlFavorite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
+      "\250\246\035\001\022\035\n\013create_time\030\002 \001(\003B\010\220\246\035\005\210\246\035\001\"\325\002\n\014" +
+      "UserIndustry\022\"\n\020industry_code_id\030\001 \001(\005B\010" +
+      "\210\246\035\001\220\246\035\003\022*\n\006source\030\002 \001(\0162\024.UserIndustry." +
+      "SourceB\004\210\246\035\001\0226\n\014relationship\030\003 \001(\0162\032.Use" +
+      "rIndustry.RelationshipB\004\210\246\035\001\022\031\n\013create_t",
+      "ime\030\004 \001(\003B\004\210\246\035\001\"L\n\006Source\022\022\n\016UNKNOWN_SOU" +
+      "RCE\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED" +
+      "_IN_PROFILE\020\003\"T\n\014Relationship\022\030\n\024UNKNOWN" +
+      "_RELATIONSHIP\020\000\022\024\n\020CURRENT_INDUSTRY\020\001\022\024\n" +
+      "\020DESIRED_INDUSTRY\020\002\"\226\002\n\010Interest\022\034\n\002id\030\001" +
+      " \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB" +
+      "\014\210\246\035\001\220\246\035\003\230\246\035d\022&\n\006source\030\003 \001(\0162\020.Interest" +
+      ".SourceB\004\210\246\035\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n" +
+      "\013create_time\030\005 \001(\003B\004\210\246\035\001\"r\n\006Source\022\013\n\007UN" +
+      "KNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDR",
+      "ESS_BOOK\020\003\022\031\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n" +
+      "\021LINKED_IN_PROFILE\020\005\"C\n\006Intent\022\036\n\004code\030\001" +
+      " \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\002 " +
+      "\001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfile\0223\n\020current" +
+      "_employer\030\001 \001(\0132\031.LinkedInProfile.Employ" +
+      "er\0220\n\rpast_employer\030\002 \003(\0132\031.LinkedInProf" +
+      "ile.Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031" +
+      "\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z\n\010Employer\022\026\n" +
+      "\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246" +
+      "\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart",
+      "_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\"J\n\023LinkedI" +
+      "nConnections\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031" +
+      "\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknsp" +
+      "ank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11054,7 +11416,7 @@ public final class UserProto {
           internal_static_UrlRating_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UrlRating_descriptor,
-              new java.lang.String[] { "Url", "Rating", "CreateTime", });
+              new java.lang.String[] { "Id", "Email", "Url", "Rating", "CreateTime", });
           internal_static_UrlFavorite_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_UrlFavorite_fieldAccessorTable = new
@@ -11129,7 +11491,16 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
