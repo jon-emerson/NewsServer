@@ -85,7 +85,6 @@ public class UserInterests {
       }
       user = updateInterests(user, personInterests, Source.LINKED_IN_CONNECTIONS);
     }
-
     return user;
   }
 

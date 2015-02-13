@@ -25,6 +25,10 @@ import com.janknspank.rank.HeuristicScorer;
 
 public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
 
+  /**
+   * Called by the Mobile client right after a user sets their goals / intents
+   * It returns the first stream the client will render.
+   */
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException, BiznessException {
@@ -38,7 +42,7 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
 
     return super.doGetInternal(req, resp);
   }
-  
+
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
       throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
@@ -53,9 +57,7 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
       return Articles.getArticlesByInterest(user.getInterestList());
     }
   }
-  
-  
-  
+
   public static Iterable<Intent> getIntentsFromCodes(Iterable<String> intentCodes) {
     List<Intent> intents = Lists.newArrayList();
     for (String intentCode : intentCodes) {

@@ -68,11 +68,10 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   }
 
   /**
-   * Generate 
+   * Generate DataSet to train neural network from a list of
+   * URLRatings.
    * @param ratings
-   * @param emailToUserMap
-   * @param urlToArticleMap
-   * @return
+   * @return DataSet of training data
    * @throws BiznessException 
    * @throws DatabaseSchemaException 
    */
@@ -98,15 +97,15 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     for (Article article: articles) {
       urlArticleMap.put(article.getUrl(), article);
     }
-    
+
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
-    
+
     for (UrlRating rating : ratings) {
       User user = emailUserMap.get(rating.getEmail());
       Article article = urlArticleMap.get(rating.getUrl());
-      
+
       if (article != null & user != null) {
         double[] input =
             NeuralNetworkScorer.generateInputNodes(user, article);
@@ -115,10 +114,17 @@ public class NeuralNetworkTrainer implements LearningEventListener {
         trainingSet.addRow(row);
       }
     }
-    
+
     return trainingSet;
   }
-  
+
+  /**
+   * Generate a training data set for a specific user
+   * and their article ratings. This is used by Jon's Benchmark
+   * @param user
+   * @param ratings
+   * @return DataSet of training data
+   */
   private static DataSet generateTrainingDataSet(User user, Hashtable<Article, Double> ratings) {
     // Create training set.
     DataSet trainingSet = new DataSet(
@@ -152,6 +158,20 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
   }
 
+  /**
+   * Returns if an article should be excluded from use in
+   * training the neural network. Articles are excluded so
+   * they can be used as a benchmark against the quality of the scorer 
+   * @param article
+   * @return true if should be excluded from training
+   */
+  static boolean isInTrainingHoldback(Article article) {
+    if (article.getUrl().hashCode() % 5 == 0) {
+      return true;
+    }
+    return false;
+  }
+
   /** Helper method for triggering a train. 
    * run ./trainneuralnet.sh to execute
    * */
@@ -165,18 +185,20 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     Hashtable<Article, Double> ratings = new Hashtable<>();
     for (Article article : ArticleCrawler.getArticles(JonBenchmark.BAD_URLS).values()) {
       // If the article isn't in the holdback, use it for training.
-      if (!JonBenchmark.isInTrainingHoldback(article)) {
+      if (!isInTrainingHoldback(article)) {
         ratings.put(article, 0.0);
       }
     }
     for (Article article : ArticleCrawler.getArticles(JonBenchmark.GOOD_URLS).values()) {
       // If the article isn't in the holdback, use it for training.
-      if (!JonBenchmark.isInTrainingHoldback(article)) {
+      if (!isInTrainingHoldback(article)) {
         ratings.put(article, 1.0);
       }
     }
-    
+
     DataSet jonBenchmarkDataSet = generateTrainingDataSet(user, ratings);
+
+    // Train against User URL Ratings
     DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
     for (DataSetRow row : jonBenchmarkDataSet.getRows()) {
       userRatingsDataSet.addRow(row);

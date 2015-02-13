@@ -16,18 +16,26 @@ import com.janknspank.ArticleCrawler;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Users;
-import com.janknspank.common.Asserts;
-import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class UserRatingsBenchmark {
+  /**
+   * Generates ranking scores for every article-user pair passed
+   * in the list of UrlRatings. This is used to determine the
+   * error of a scorer against a benchmark.
+   * @param allRatings
+   * @param scorer
+   * @return
+   * @throws BiznessException
+   * @throws DatabaseSchemaException
+   */
   public static Map<UrlRating, Double> spotterScoresFor(Iterable<UrlRating> allRatings, 
       Scorer scorer) throws BiznessException, DatabaseSchemaException {
     Map<UrlRating, Double> scoreMap = Maps.newHashMap();
-    
+
     Set<String> urlStrings = Sets.newHashSet();
     Set<String> userEmails = Sets.newHashSet();
     for (UrlRating urlRating : allRatings) {
@@ -57,19 +65,12 @@ public class UserRatingsBenchmark {
       if (article != null && user != null) {
         // Use the holdback for the benchmark. The other 80% are used
         // to train the neural network.
-        if (isInTrainingHoldback(article)) {
+        if (NeuralNetworkTrainer.isInTrainingHoldback(article)) {
           scoreMap.put(urlRating, scorer.getScore(user, article));
         }
       }
     }
     return scoreMap;
-  }
-  
-  static boolean isInTrainingHoldback(Article article) {
-    if (article.getUrl().hashCode() % 5 == 0) {
-      return true;
-    }
-    return false;
   }
 
   /**
