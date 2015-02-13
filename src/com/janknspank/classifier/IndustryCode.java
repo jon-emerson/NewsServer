@@ -1,16 +1,13 @@
 package com.janknspank.classifier;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.janknspank.proto.UserProto.UserIndustry;
+import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 
 /**
  * Canonicalization of various business industries.  Used for user and
@@ -351,12 +348,19 @@ public enum IndustryCode {
     return description;
   }
 
-  public static List<IndustryCode> getFromUserIndustries(Iterable<UserIndustry> userIndustries) {
-    List<IndustryCode> industryCodes = new ArrayList<>();
+  /**
+   * Returns a Map of the user's industries, mapped to the user's relationship
+   * with each industry (e.g. current, desired, etc).
+   */
+  public static Map<IndustryCode, Relationship> getFromUserIndustries(
+      Iterable<UserIndustry> userIndustries) {
+    ImmutableMap.Builder<IndustryCode, Relationship> industryCodeMapBuilder =
+        ImmutableMap.builder();
     for (UserIndustry userIndustry : userIndustries) {
-      industryCodes.add(INDUSTRY_CODE_MAP.get(userIndustry.getIndustryCodeId()));
+      industryCodeMapBuilder.put(INDUSTRY_CODE_MAP.get(userIndustry.getIndustryCodeId()),
+          userIndustry.getRelationship());
     }
-    return industryCodes;
+    return industryCodeMapBuilder.build();
   }
 
   /**
@@ -392,17 +396,5 @@ public enum IndustryCode {
 
   public static IndustryCode findFromId(int id) {
     return INDUSTRY_CODE_MAP.get(id);
-  }
-
-  public JSONObject toJSON() {
-    try {
-      JSONObject o = new JSONObject();
-      o.put("id", id);
-      o.put("group", group);
-      o.put("description", description);
-      return o;
-    } catch (JSONException e) {
-      throw new RuntimeException(e);
-    }
   }
 }

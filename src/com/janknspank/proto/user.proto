@@ -136,7 +136,7 @@ message UserIndustry {
 
   // Where did we get this industry from?
   enum Source {
-    UNKNOWN = 0;
+    UNKNOWN_SOURCE = 0;
     USER = 1; // Explicitly added by the user.
     TOMBSTONE = 2; // Tombstone, represents an interest the user explicitly DELETED.
     LINKED_IN_PROFILE = 3; // Phone address book.
@@ -145,7 +145,17 @@ message UserIndustry {
     (required) = YES
   ];
 
-  optional int64 create_time = 3 [
+  // What is the user's relationship to this industry?
+  enum Relationship {
+    UNKNOWN_RELATIONSHIP = 0;
+    CURRENT_INDUSTRY = 1;
+    DESIRED_INDUSTRY = 2;
+  }
+  optional Relationship relationship = 3 [
+    (required) = YES
+  ];
+
+  optional int64 create_time = 4 [
     (required) = YES
   ];
 }

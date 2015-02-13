@@ -22,6 +22,7 @@ public class GetUserServlet extends StandardServlet {
     UserHelper userHelper = new UserHelper(user);
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
     userJson.put("interests", userHelper.getInterestsJsonArray());
+    userJson.put("industries", userHelper.getIndustriesJsonArray());
 
     // Create response.
     JSONObject response = createSuccessResponse();

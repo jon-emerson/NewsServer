@@ -12,12 +12,14 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.UrlFavorite;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 
 /**
  * Helper class containing the user's favorite and rated articles.
@@ -25,6 +27,7 @@ import com.janknspank.proto.UserProto.User;
 public class UserHelper {
   private final User user;
   private final Map<String, Long> favoriteArticleIds;
+  private final Map<IndustryCode, Relationship> industryCodeRelationships;
   private final Map<String, Article> articleMap;
 
   public UserHelper(User user) throws DatabaseSchemaException {
@@ -32,6 +35,7 @@ public class UserHelper {
 
     // Create a map of the favorite articles.
     favoriteArticleIds = getFavoriteArticleIds();
+    industryCodeRelationships = IndustryCode.getFromUserIndustries(user.getIndustryList());
     articleMap = getArticleMap(favoriteArticleIds.keySet());
   }
 
@@ -89,5 +93,23 @@ public class UserHelper {
 
   public JSONArray getInterestsJsonArray() throws DatabaseSchemaException {
     return Serializer.toJSON(user.getInterestList());
+  }
+
+  /**
+   * Returns a filled-out version of the user's industries, including their
+   * titles and groups.  (The industry codes stored in the database are just
+   * thin pointer references, which is not enough for the client.)
+   */
+  public JSONArray getIndustriesJsonArray() {
+    JSONArray jsonArray = new JSONArray();
+    for (IndustryCode code : industryCodeRelationships.keySet()) {
+      JSONObject o = new JSONObject();
+      o.put("id", code.getId());
+      o.put("group", code.getGroup());
+      o.put("description", code.getDescription());
+      o.put("relationship", industryCodeRelationships.get(code).toString());
+      jsonArray.put(o);
+    }
+    return jsonArray;
   }
 }
