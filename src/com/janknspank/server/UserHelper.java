@@ -12,12 +12,14 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.janknspank.bizness.UrlRatings;
 import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.UrlFavorite;
+import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 
@@ -108,6 +110,17 @@ public class UserHelper {
       o.put("group", code.getGroup());
       o.put("description", code.getDescription());
       o.put("relationship", industryCodeRelationships.get(code).toString());
+      jsonArray.put(o);
+    }
+    return jsonArray;
+  }
+  
+  public JSONArray getRatingsJsonArray() throws DatabaseSchemaException {
+    JSONArray jsonArray = new JSONArray();
+    for (UrlRating rating : UrlRatings.getForUser(user)) {
+      JSONObject o = new JSONObject();
+      o.put("url", rating.getUrl());
+      o.put("rating", rating.getRating());
       jsonArray.put(o);
     }
     return jsonArray;
