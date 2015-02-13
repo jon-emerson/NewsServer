@@ -6,11 +6,11 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
 
 import com.janknspank.classifier.ClassifierException;
+import com.janknspank.common.Logger;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
@@ -23,7 +23,7 @@ import com.restfb.json.JsonException;
 import com.restfb.json.JsonObject;
 
 public class FacebookData {
-  private static final Logger LOG = Logger.getLogger(FacebookData.class.getName());
+  private static final Logger LOG = new Logger(FacebookData.class);
   private static FacebookClient __facebookClient = null;
 
   public static SocialEngagement getEngagementForURL(ArticleOrBuilder article) throws FacebookException {
