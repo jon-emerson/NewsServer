@@ -10795,7 +10795,7 @@ public final class UserProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/user.proto\032(com/j" +
-      "anknspank/database/extensions.proto\"\344\004\n\004" +
+      "anknspank/database/extensions.proto\"\366\004\n\004" +
       "User\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\022\n\004na" +
       "me\030\002 \001(\tB\004\230\246\035d\022\033\n\005email\030\003 \001(\tB\014\210\246\035\001\220\246\035\004\230" +
       "\246\035d\022\032\n\014linked_in_id\030\004 \001(\tB\004\230\246\035\031\022\031\n\013faceb" +
@@ -10805,43 +10805,43 @@ public final class UserProto {
       "\003\0221\n\021linked_in_profile\030\n \001(\0132\020.LinkedInP" +
       "rofileB\004\240\246\035\003\0229\n\025linked_in_connections\030\013 ",
       "\001(\0132\024.LinkedInConnectionsB\004\240\246\035\003\022*\n\033linke" +
-      "d_in_profile_photo_url\030\022 \001(\tB\005\230\246\035\310\001\022\"\n\014a" +
-      "ddress_book\030\014 \001(\0132\014.AddressBook\022\036\n\nurl_r" +
-      "ating\030\r \003(\0132\n.UrlRating\022\"\n\014url_favorite\030" +
-      "\016 \003(\0132\014.UrlFavorite\022\037\n\010industry\030\017 \003(\0132\r." +
-      "UserIndustry\022\033\n\010interest\030\020 \003(\0132\t.Interes" +
-      "t\022\027\n\006intent\030\021 \003(\0132\007.Intent*\004\010\006\020\007:\020\212\265\030\014Mo" +
-      "ngoDB.User\"B\n\013AddressBook\022\030\n\004data\030\001 \001(\tB" +
-      "\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"\\" +
-      "\n\tUrlRating\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250",
-      "\246\035\001\022\024\n\006rating\030\002 \001(\001B\004\210\246\035\001\022\031\n\013create_time" +
-      "\030\003 \001(\003B\004\210\246\035\001\"N\n\013UrlFavorite\022 \n\006url_id\030\001 " +
-      "\001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\035\n\013create_time\030\002 \001" +
-      "(\003B\010\220\246\035\005\210\246\035\001\"\300\001\n\014UserIndustry\022\"\n\020industr" +
-      "y_code_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022*\n\006source\030\002 \001(" +
-      "\0162\024.UserIndustry.SourceB\004\210\246\035\001\022\031\n\013create_" +
-      "time\030\003 \001(\003B\004\210\246\035\001\"E\n\006Source\022\013\n\007UNKNOWN\020\000\022" +
-      "\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED_IN_PR" +
-      "OFILE\020\003\"\226\002\n\010Interest\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246" +
-      "\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035",
-      "d\022&\n\006source\030\003 \001(\0162\020.Interest.SourceB\004\210\246\035" +
-      "\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n\013create_time" +
-      "\030\005 \001(\003B\004\210\246\035\001\"r\n\006Source\022\013\n\007UNKNOWN\020\000\022\010\n\004U" +
-      "SER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDRESS_BOOK\020\003\022\031" +
-      "\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n\021LINKED_IN_P" +
-      "ROFILE\020\005\"C\n\006Intent\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001\220\246" +
-      "\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"\251\002" +
-      "\n\017LinkedInProfile\0223\n\020current_employer\030\001 " +
-      "\001(\0132\031.LinkedInProfile.Employer\0220\n\rpast_e" +
-      "mployer\030\002 \003(\0132\031.LinkedInProfile.Employer",
-      "\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_tim" +
-      "e\030\004 \001(\003B\004\210\246\035\001\032z\n\010Employer\022\026\n\004name\030\001 \001(\tB" +
-      "\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\ten" +
-      "tity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022" +
-      "\020\n\010end_time\030\005 \001(\003\"J\n\023LinkedInConnections" +
-      "\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_tim" +
-      "e\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknspank.protoB\tU" +
-      "serProto"
+      "d_in_profile_photo_url\030\022 \001(\tB\005\230\246\035\310\001\022(\n\014a" +
+      "ddress_book\030\014 \001(\0132\014.AddressBookB\004\240\246\035\003\022\036\n" +
+      "\nurl_rating\030\r \003(\0132\n.UrlRating\022(\n\014url_fav" +
+      "orite\030\016 \003(\0132\014.UrlFavoriteB\004\240\246\035\003\022%\n\010indus" +
+      "try\030\017 \003(\0132\r.UserIndustryB\004\240\246\035\003\022\033\n\010intere" +
+      "st\030\020 \003(\0132\t.Interest\022\027\n\006intent\030\021 \003(\0132\007.In" +
+      "tent*\004\010\006\020\007:\020\212\265\030\014MongoDB.User\"B\n\013AddressB" +
+      "ook\022\030\n\004data\030\001 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_" +
+      "time\030\002 \001(\003B\004\210\246\035\001\"\\\n\tUrlRating\022\036\n\003url\030\001 \001",
+      "(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\024\n\006rating\030\002 \001(\001B\004\210" +
+      "\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"N\n\013UrlFav" +
+      "orite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022" +
+      "\035\n\013create_time\030\002 \001(\003B\010\220\246\035\005\210\246\035\001\"\300\001\n\014UserI" +
+      "ndustry\022\"\n\020industry_code_id\030\001 \001(\005B\010\210\246\035\001\220" +
+      "\246\035\003\022*\n\006source\030\002 \001(\0162\024.UserIndustry.Sourc" +
+      "eB\004\210\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"E\n\006So" +
+      "urce\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE" +
+      "\020\002\022\025\n\021LINKED_IN_PROFILE\020\003\"\226\002\n\010Interest\022\034" +
+      "\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030",
+      "\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022&\n\006source\030\003 \001(\0162\020.In" +
+      "terest.SourceB\004\210\246\035\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250" +
+      "\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001\"r\n\006Source" +
+      "\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\020" +
+      "\n\014ADDRESS_BOOK\020\003\022\031\n\025LINKED_IN_CONNECTION" +
+      "S\020\004\022\025\n\021LINKED_IN_PROFILE\020\005\"C\n\006Intent\022\036\n\004" +
+      "code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_t" +
+      "ime\030\002 \001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfile\0223\n\020c" +
+      "urrent_employer\030\001 \001(\0132\031.LinkedInProfile." +
+      "Employer\0220\n\rpast_employer\030\002 \003(\0132\031.Linked",
+      "InProfile.Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246" +
+      "\035\200\240\006\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z\n\010Emplo" +
+      "yer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001" +
+      "(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n" +
+      "\nstart_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\"J\n\023L" +
+      "inkedInConnections\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246" +
+      "\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!\n\024com.j" +
+      "anknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10928,6 +10928,9 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

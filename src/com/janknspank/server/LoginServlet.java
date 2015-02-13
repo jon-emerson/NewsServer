@@ -290,7 +290,11 @@ public class LoginServlet extends StandardServlet {
     return response;
   }
 
-  // TODO(jonemerson): Remove this once the client's looking at "industry".
+  /**
+   * Returns a filled-out version of the user's industries, including their
+   * titles and groups.  (The industry codes stored in the database are just
+   * thin pointer references, which is not enough for the client.)
+   */
   public JSONArray toJSON(Iterable<IndustryCode> industryCodes) {
     JSONArray jsonArray = new JSONArray();
     for (IndustryCode code : industryCodes) {
