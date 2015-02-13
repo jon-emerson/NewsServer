@@ -21,7 +21,7 @@ import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.database.Validator;
-import com.janknspank.interpreter.KeywordFinder;
+import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.Entity.EntityTopic;

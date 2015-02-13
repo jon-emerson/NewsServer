@@ -11,10 +11,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
-import com.janknspank.ArticleCrawler;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Users;
 import com.janknspank.common.Asserts;
+import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 

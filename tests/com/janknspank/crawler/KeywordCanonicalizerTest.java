@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.EntityType;
+import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 
 public class KeywordCanonicalizerTest {

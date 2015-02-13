@@ -1,9 +1,10 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.janknspank.crawler.Interpreter;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;

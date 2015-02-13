@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 import org.junit.Test;
 
 import com.janknspank.common.DateParserTest;
+import com.janknspank.crawler.ArticleCreator;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.ArticleProto.Article;

@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.google.common.collect.Iterables;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
+import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
 

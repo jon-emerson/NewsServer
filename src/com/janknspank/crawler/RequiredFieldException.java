@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler;
 
 /**
  * Exception thrown when an article being interpreted doesn't have a field that

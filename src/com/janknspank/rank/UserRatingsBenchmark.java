@@ -13,10 +13,10 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
-import com.janknspank.ArticleCrawler;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Users;
+import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.UrlRating;
@@ -88,15 +88,22 @@ public class UserRatingsBenchmark {
    * at creating scores compared to user ratings.
    */
   public static void grade(Map<UrlRating, Double> scores) {
-    int positives = 0;
-    int falseNegatives = 0;
-    int negatives = 0;
-    int falsePositives = 0;
+    int positives = 0; // # of Articles both the scorer and user thought were good
+    int realPositives = 0; // Total # of Articles which the user thought were good
+    int falseNegatives = 0; // Good articles the scorer thought were bad
+    int negatives = 0; // # of Articles both the scorer and user thought were bad
+    int realNegatives = 0; // Total # of Articles which the user thought were bad
+    int falsePositives = 0; // Bad articles the scorer thought were good
     List<String> falseNegativesUrls = new ArrayList<>();
     for (Map.Entry<UrlRating, Double> entry : scores.entrySet()) {
       double spotterScore = entry.getValue();
       UrlRating userUrlRating = entry.getKey();
-      
+      if (userUrlRating.getRating() > 0.5) {
+        realPositives++;
+      } else {
+        realNegatives++;
+      }
+
       if (userUrlRating.getRating() > 0.5 && spotterScore > 0.5) {
         positives++;
       } else if (userUrlRating.getRating() > 0.5 && spotterScore <= 0.5) {
@@ -109,10 +116,12 @@ public class UserRatingsBenchmark {
       }
     }
 
-    System.out.println("Positives: " + positives + " (GOOD!)");
+    System.out.println("Positives: " + positives
+        + " (" + (int) ((double) 100 * positives / realPositives) + "% correct)");
     System.out.println("False negatives: " + falseNegatives);
     System.out.println("False positives: " + falsePositives);
-    System.out.println("Negatives: " + negatives + " (GOOD!)");
+    System.out.println("Negatives: " + negatives
+        + " (" + (int) ((double) 100 * negatives / realNegatives) + "% correct)");
     System.out.println("Percent correct: " +
         (int) (100 * (((double) positives + negatives)
             / (scores.size()))) + "%");

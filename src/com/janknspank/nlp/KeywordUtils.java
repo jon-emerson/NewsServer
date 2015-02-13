@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.nlp;
 
 import java.util.Set;
 import java.util.regex.Pattern;

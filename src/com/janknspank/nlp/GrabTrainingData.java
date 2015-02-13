@@ -1,4 +1,4 @@
-package com.janknspank.opennlp;
+package com.janknspank.nlp;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.base.Joiner;
+import com.janknspank.crawler.SiteParser;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -18,8 +19,6 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
-import com.janknspank.interpreter.KeywordFinder;
-import com.janknspank.interpreter.SiteParser;
 
 /**
  * Grabs content from all the URLs in "URLS", then writes their tokenized

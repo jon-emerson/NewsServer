@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.crawler;
 
 import java.util.List;
 
@@ -11,10 +11,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Urls;
-import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.DateParser;
-import com.janknspank.common.UrlCleaner;
-import com.janknspank.common.UrlWhitelist;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -25,7 +22,6 @@ import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
-import com.janknspank.interpreter.UrlFinder;
 import com.janknspank.proto.CoreProto.Url;
 
 /**

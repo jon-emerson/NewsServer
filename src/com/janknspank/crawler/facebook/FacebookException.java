@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler.facebook;
 
 /**
  * Exception thrown when trying to get social engagement from Facebook.

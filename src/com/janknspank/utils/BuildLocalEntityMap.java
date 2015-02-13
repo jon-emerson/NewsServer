@@ -10,7 +10,7 @@ import com.google.common.collect.Lists;
 import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.database.Database;
-import com.janknspank.interpreter.KeywordUtils;
+import com.janknspank.nlp.KeywordUtils;
 import com.janknspank.proto.LocalProto.TokenToEntity;
 
 /**

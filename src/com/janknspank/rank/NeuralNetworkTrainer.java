@@ -1,6 +1,5 @@
 package com.janknspank.rank;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -17,12 +16,12 @@ import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
-import com.google.api.client.util.Sets;
 import com.google.common.collect.Maps;
-import com.janknspank.ArticleCrawler;
+import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Users;
+import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.UrlRating;
@@ -191,7 +190,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     // Train against User URL Ratings
     DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
-    
+
     // Combine the two training sets
     for (DataSetRow row : jonBenchmarkDataSet.getRows()) {
       userRatingsDataSet.addRow(row);

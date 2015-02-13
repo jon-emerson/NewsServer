@@ -1,4 +1,4 @@
-package com.janknspank.common;
+package com.janknspank.crawler;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -16,6 +16,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+import com.janknspank.common.DateParser;
 
 /**
  * Utility method for determining whether a URL is a news article, solely
