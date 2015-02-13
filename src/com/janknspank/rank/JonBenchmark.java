@@ -263,10 +263,12 @@ public class JonBenchmark {
         falsePositives++;
       }
     }
-    System.out.println("Positives: " + positives + " (GOOD!)");
+    System.out.println("Positives: " + positives
+        + " (" + (int) ((double) 100 * positives / goodScoreMap.size()) + "% correct)");
     System.out.println("False negatives: " + falseNegatives);
     System.out.println("False positives: " + falsePositives);
-    System.out.println("Negatives: " + negatives + " (GOOD!)");
+    System.out.println("Negatives: " + negatives
+        + " (" + (int) ((double) 100 * negatives / badScoreMap.size()) + "% correct)");
     System.out.println("Percent correct: " +
         (int) (100 * (((double) positives + negatives)
             / (goodScoreMap.size() + badScoreMap.size()))) + "%");
@@ -313,7 +315,7 @@ public class JonBenchmark {
   }
 
   public static void main(String args[]) throws Exception {
-    User jonUser = Users.getByUserId("54cc0b05e4b0513cefbe24cc");
+    User jonUser = Users.getByEmail("panaceaa@gmail.com");
     Asserts.assertNotNull(jonUser, "Could not read user");
 
     Map<Article, Double> goodScores =

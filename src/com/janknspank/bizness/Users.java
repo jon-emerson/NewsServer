@@ -12,15 +12,10 @@ import com.janknspank.proto.UserProto.User;
  * Tracks a link from one URL's content to another's.
  */
 public class Users {
-  /**
-   * This is currently private because its uses should be only internal.
-   * When we implement login, that should be through a different method that
-   * additionally updates the last login time.
-   */
-  private static User getByEmail(String email) throws DatabaseSchemaException {
+  public static User getByEmail(String email) throws DatabaseSchemaException {
     return Database.with(User.class).getFirst(new QueryOption.WhereEquals("email", email));
   }
-  
+
   public static User getByUserId(String userId) throws DatabaseSchemaException {
     return Database.with(User.class).get(userId);
   }
@@ -36,7 +31,7 @@ public class Users {
     String email = emailNode.getFlattenedText();
 
     String linkedInProfilePhotoUrl = getLinkedInProfilePhotoUrl(linkedInProfileDocument);
-    
+
     // If we already have a user, great, use him!  Mark him as logged in too!
     User user = getByEmail(email);
     if (user != null) {

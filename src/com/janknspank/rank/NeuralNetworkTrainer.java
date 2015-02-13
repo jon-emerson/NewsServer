@@ -16,8 +16,7 @@ import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
 import com.janknspank.ArticleCrawler;
-import com.janknspank.database.Database;
-import com.janknspank.database.QueryOption;
+import com.janknspank.bizness.Users;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
@@ -26,11 +25,11 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   private Double[] lowestErrorNetworkWeights;
   private double lowestError = 1.0;
   private double lowestErrorIteration = 0;
-  
+
   private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
     NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(TransferFunctionType.SIGMOID,
         NeuralNetworkScorer.INPUT_NODES_COUNT,
-        //NeuralNetworkScorer.HIDDEN_NODES_COUNT,
+        NeuralNetworkScorer.HIDDEN_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
 
     //neuralNetwork.setLearningRule(new ResilientPropagation());
@@ -78,13 +77,31 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     return trainingSet;
   }
 
+  @Override
+  public void handleLearningEvent(LearningEvent event) {
+    BackPropagation bp = (BackPropagation)event.getSource();
+    double error = bp.getTotalNetworkError();
+    System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
+    if (error < lowestError) {
+      lowestError = error;
+      lowestErrorIteration = bp.getCurrentIteration();
+      lowestErrorNetworkWeights = bp.getNeuralNetwork().getWeights();
+    }
+    if (bp.getCurrentIteration() > MAX_ITERATIONS) {
+      bp.stopLearning();
+    }
+  }
+
   /** Helper method for triggering a train. 
    * run ./trainneuralnet.sh to execute
    * */
   public static void main(String args[]) throws Exception {
     // Train against Jon's Benchmarks
-    User user = Database.with(User.class).getFirst(
-        new QueryOption.WhereEquals("email", "panaceaa@gmail.com"));
+    User user = Users.getByEmail("panaceaa@gmail.com");
+    if (user == null) {
+      throw new Error("User panaceaa@gmail.com does not exist.");
+    }
+
     Hashtable<Article, Double> ratings = new Hashtable<>();
     for (Article article : ArticleCrawler.getArticles(JonBenchmark.BAD_URLS).values()) {
       // If the article isn't in the holdback, use it for training.
@@ -102,20 +119,5 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     NeuralNetwork<BackPropagation> neuralNetwork =
         new NeuralNetworkTrainer().generateTrainedNetwork(generateTrainingDataSet(user, ratings));
     neuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
-  }
-
-  @Override
-  public void handleLearningEvent(LearningEvent event) {
-    BackPropagation bp = (BackPropagation)event.getSource();
-    double error = bp.getTotalNetworkError();
-    System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
-    if (error < lowestError) {
-      lowestError = error;
-      lowestErrorIteration = bp.getCurrentIteration();
-      lowestErrorNetworkWeights = bp.getNeuralNetwork().getWeights();
-    }
-    if (bp.getCurrentIteration() > MAX_ITERATIONS) {
-      bp.stopLearning();
-    }
   }
 }

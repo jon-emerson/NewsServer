@@ -381,6 +381,15 @@ public enum IndustryCode {
     return null;
   }
 
+  public static IndustryCode fromId(int id) {
+    for (IndustryCode industryCode : INDUSTRY_CODE_MAP.values()) {
+      if (industryCode.id == id) {
+        return industryCode;
+      }
+    }
+    throw new IllegalArgumentException("Value " + id + " is not a valid industry code ID.");
+  }
+
   public static IndustryCode findFromId(int id) {
     return INDUSTRY_CODE_MAP.get(id);
   }

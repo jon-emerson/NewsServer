@@ -8,13 +8,12 @@ import com.janknspank.bizness.IntentCodes;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.classifier.StartupFeatureHelper;
-import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
-import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.UserProto.Intent;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
@@ -25,12 +24,11 @@ import com.janknspank.proto.UserProto.UserIndustry;
  * Helper class to generate input node values for the Scorer.
  */
 public class InputValuesGenerator {
-  private static final int MILLIS_PER_DAY = 86400000;
-
   public static double relevanceToUserIndustries(User user, Article article) {
     double relevance = 0;
     for (UserIndustry userIndustry : user.getIndustryList()) {
-      relevance += getSimilarityToIndustry(article, userIndustry.getIndustryCodeId());
+      relevance += getSimilarityToIndustry(
+          article, IndustryCode.fromId(userIndustry.getIndustryCodeId()));
     }
     return Math.min(1.0, relevance);
   }
@@ -38,12 +36,7 @@ public class InputValuesGenerator {
   public static double relevanceToSocialMedia(User user, Article article) {
     SocialEngagement engagement = SocialEngagements.getForArticle(
         article, SocialEngagement.Site.FACEBOOK);
-    if (engagement == null) {
-      engagement = SocialEngagement.getDefaultInstance();
-    }
-    long engagementCount = engagement.getLikeCount() + engagement.getCommentCount()
-        + engagement.getShareCount();
-    return Math.min(Math.log(engagementCount) / 10, 1.0);
+    return (engagement == null) ? 0 : engagement.getShareScore();
   }
 
   public static double relevanceToContacts(User user, Article article) {
@@ -68,7 +61,7 @@ public class InputValuesGenerator {
       if (currentEmployer != null) {
         for (ArticleKeyword keyword : article.getKeywordList()) {
           if (currentEmployer.getName().equals(keyword.getKeyword())) {
-            return (double)keyword.getStrength() / 20;
+            return (double) keyword.getStrength() / 20;
           }
         }
       }
@@ -92,8 +85,7 @@ public class InputValuesGenerator {
         }
       }
     }
-
-    return relevance;
+    return Math.min(1, relevance);
   }
 
   public static double relevanceToCurrentRole(User user, Article article) {
@@ -124,41 +116,14 @@ public class InputValuesGenerator {
     return 0;
   }
 
-  public static double getSimilarityToIndustry(Article article, int industryCode) {
-    for (ArticleFeature classification : article.getFeatureList()) {
-      if (classification.getFeatureId() == industryCode) {
-        return classification.getSimilarity();
+  public static double getSimilarityToIndustry(Article article, IndustryCode industryCode) {
+    for (ArticleFeature feature : article.getFeatureList()) {
+      if (feature.getFeatureId() == industryCode.getFeatureId().getId()) {
+        // Only value relevance greater than 66.7%.
+        return Math.max(0, feature.getSimilarity() * 3 - 2);
       }
     }
     return 0;
-  }
-
-  // returns Likes / day
-  public static double getLikeVelocity(Article article) {
-    TopList<SocialEngagement, Long> q = new TopList<>(2);
-    for (SocialEngagement engagement : article.getSocialEngagementList()) {
-      if (engagement.getSite() == Site.FACEBOOK) {
-        q.add(engagement, engagement.getCreateTime());
-      }
-    }
-    if (q.size() == 0) {
-      return 0;
-    } else if (q.size() == 1) {
-      // Use the published date to get the velocity
-      SocialEngagement engagement = q.getKey(0);
-      double daysSincePublish = (System.currentTimeMillis() -
-          article.getPublishedTime()) / MILLIS_PER_DAY;
-      return engagement.getLikeCount() / daysSincePublish;
-    } else {
-      // Use the time interval between the last two engagement checks
-      SocialEngagement mostRecentEng = q.getKey(0);
-      SocialEngagement previousEng = q.getKey(1);
-      long changeInLikes = mostRecentEng.getLikeCount()
-          - previousEng.getLikeCount();
-      double daysBetweenChecks = (mostRecentEng.getCreateTime()
-          - previousEng.getCreateTime()) / MILLIS_PER_DAY;
-      return changeInLikes / daysBetweenChecks;
-    }
   }
 
   // Normalize any value to [0,1]
