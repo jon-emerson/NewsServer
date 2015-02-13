@@ -150,11 +150,11 @@ public class UserRatingsBenchmark {
 
     for (Map.Entry<UrlRating, Double> entry: scores.entrySet()) {
       UrlRating userRating = entry.getKey();
-      Double spotterRating = entry.getValue();
+      Double rating = entry.getValue();
       if (userRating.getRating() > 0.5) {
-        goodArticleScores.add(spotterRating);
+        goodArticleScores.add(rating);
       } else {
-        badArticleScores.add(spotterRating);
+        badArticleScores.add(rating);
       }
     }
     
@@ -172,17 +172,17 @@ public class UserRatingsBenchmark {
 
   public static void main(String args[]) throws Exception {
     Iterable<UrlRating> allRatings = UrlRatings.getAllRatings();
-    Map<UrlRating, Double> spotterScores = 
+    Map<UrlRating, Double> scores = 
         calculateScoresFor(allRatings, NeuralNetworkScorer.getInstance());
     System.out.println("\nNEURAL NETWORK SCORER:");
-    printHistogram(spotterScores);
-    grade(spotterScores);
+    printHistogram(scores);
+    grade(scores);
 
-    spotterScores = 
+    scores = 
         calculateScoresFor(allRatings, NeuralNetworkScorer.getInstance());
     System.out.println("\nHEURISTIC SCORER:");
-    printHistogram(spotterScores);
-    grade(spotterScores);
+    printHistogram(scores);
+    grade(scores);
 
     System.out.println("\n");
   }
