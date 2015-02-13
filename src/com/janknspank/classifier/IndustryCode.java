@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import twitter4j.JSONException;
-import twitter4j.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
