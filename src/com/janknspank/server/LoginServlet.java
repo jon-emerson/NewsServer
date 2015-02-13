@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.utils.URIBuilder;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.api.client.http.GenericUrl;
@@ -37,7 +36,6 @@ import com.janknspank.bizness.Sessions;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
-import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -276,30 +274,14 @@ public class LoginServlet extends StandardServlet {
       e.printStackTrace();
     }
 
-    // Get IndustryCodes so the client has more metadata to show
-    Iterable<IndustryCode> industryCodes = IndustryCode.getFromUserIndustries(user.getIndustryList());
-
     // Create the response.
     UserHelper userHelper = new UserHelper(user);
     JSONObject response = this.createSuccessResponse();
     JSONObject userJson = Serializer.toJSON(user);
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
-    userJson.put("industries", toJSON(industryCodes));
+    userJson.put("industries", userHelper.getIndustriesJsonArray());
     response.put("user", userJson);
     response.put("session", Serializer.toJSON(session));
     return response;
-  }
-
-  /**
-   * Returns a filled-out version of the user's industries, including their
-   * titles and groups.  (The industry codes stored in the database are just
-   * thin pointer references, which is not enough for the client.)
-   */
-  public JSONArray toJSON(Iterable<IndustryCode> industryCodes) {
-    JSONArray jsonArray = new JSONArray();
-    for (IndustryCode code : industryCodes) {
-      jsonArray.put(code.toJSON());
-    }
-    return jsonArray;
   }
 }

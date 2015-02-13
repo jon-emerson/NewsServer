@@ -6098,13 +6098,23 @@ public final class UserProto {
      */
     com.janknspank.proto.UserProto.UserIndustry.Source getSource();
 
-    // optional int64 create_time = 3;
+    // optional .UserIndustry.Relationship relationship = 3;
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional .UserIndustry.Relationship relationship = 3;</code>
+     */
+    boolean hasRelationship();
+    /**
+     * <code>optional .UserIndustry.Relationship relationship = 3;</code>
+     */
+    com.janknspank.proto.UserProto.UserIndustry.Relationship getRelationship();
+
+    // optional int64 create_time = 4;
+    /**
+     * <code>optional int64 create_time = 4;</code>
      */
     boolean hasCreateTime();
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional int64 create_time = 4;</code>
      */
     long getCreateTime();
   }
@@ -6176,7 +6186,18 @@ public final class UserProto {
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
+              int rawValue = input.readEnum();
+              com.janknspank.proto.UserProto.UserIndustry.Relationship value = com.janknspank.proto.UserProto.UserIndustry.Relationship.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                relationship_ = value;
+              }
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
               createTime_ = input.readInt64();
               break;
             }
@@ -6229,9 +6250,9 @@ public final class UserProto {
     public enum Source
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>UNKNOWN = 0;</code>
+       * <code>UNKNOWN_SOURCE = 0;</code>
        */
-      UNKNOWN(0, 0),
+      UNKNOWN_SOURCE(0, 0),
       /**
        * <code>USER = 1;</code>
        *
@@ -6259,9 +6280,9 @@ public final class UserProto {
       ;
 
       /**
-       * <code>UNKNOWN = 0;</code>
+       * <code>UNKNOWN_SOURCE = 0;</code>
        */
-      public static final int UNKNOWN_VALUE = 0;
+      public static final int UNKNOWN_SOURCE_VALUE = 0;
       /**
        * <code>USER = 1;</code>
        *
@@ -6292,7 +6313,7 @@ public final class UserProto {
 
       public static Source valueOf(int value) {
         switch (value) {
-          case 0: return UNKNOWN;
+          case 0: return UNKNOWN_SOURCE;
           case 1: return USER;
           case 2: return TOMBSTONE;
           case 3: return LINKED_IN_PROFILE;
@@ -6347,6 +6368,101 @@ public final class UserProto {
       // @@protoc_insertion_point(enum_scope:UserIndustry.Source)
     }
 
+    /**
+     * Protobuf enum {@code UserIndustry.Relationship}
+     *
+     * <pre>
+     * What is the user's relationship to this industry?
+     * </pre>
+     */
+    public enum Relationship
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN_RELATIONSHIP = 0;</code>
+       */
+      UNKNOWN_RELATIONSHIP(0, 0),
+      /**
+       * <code>CURRENT_INDUSTRY = 1;</code>
+       */
+      CURRENT_INDUSTRY(1, 1),
+      /**
+       * <code>DESIRED_INDUSTRY = 2;</code>
+       */
+      DESIRED_INDUSTRY(2, 2),
+      ;
+
+      /**
+       * <code>UNKNOWN_RELATIONSHIP = 0;</code>
+       */
+      public static final int UNKNOWN_RELATIONSHIP_VALUE = 0;
+      /**
+       * <code>CURRENT_INDUSTRY = 1;</code>
+       */
+      public static final int CURRENT_INDUSTRY_VALUE = 1;
+      /**
+       * <code>DESIRED_INDUSTRY = 2;</code>
+       */
+      public static final int DESIRED_INDUSTRY_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static Relationship valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN_RELATIONSHIP;
+          case 1: return CURRENT_INDUSTRY;
+          case 2: return DESIRED_INDUSTRY;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Relationship>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Relationship>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Relationship>() {
+              public Relationship findValueByNumber(int number) {
+                return Relationship.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.UserProto.UserIndustry.getDescriptor().getEnumTypes().get(1);
+      }
+
+      private static final Relationship[] VALUES = values();
+
+      public static Relationship valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Relationship(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:UserIndustry.Relationship)
+    }
+
     private int bitField0_;
     // optional int32 industry_code_id = 1;
     public static final int INDUSTRY_CODE_ID_FIELD_NUMBER = 1;
@@ -6380,17 +6496,33 @@ public final class UserProto {
       return source_;
     }
 
-    // optional int64 create_time = 3;
-    public static final int CREATE_TIME_FIELD_NUMBER = 3;
-    private long createTime_;
+    // optional .UserIndustry.Relationship relationship = 3;
+    public static final int RELATIONSHIP_FIELD_NUMBER = 3;
+    private com.janknspank.proto.UserProto.UserIndustry.Relationship relationship_;
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional .UserIndustry.Relationship relationship = 3;</code>
      */
-    public boolean hasCreateTime() {
+    public boolean hasRelationship() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int64 create_time = 3;</code>
+     * <code>optional .UserIndustry.Relationship relationship = 3;</code>
+     */
+    public com.janknspank.proto.UserProto.UserIndustry.Relationship getRelationship() {
+      return relationship_;
+    }
+
+    // optional int64 create_time = 4;
+    public static final int CREATE_TIME_FIELD_NUMBER = 4;
+    private long createTime_;
+    /**
+     * <code>optional int64 create_time = 4;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 create_time = 4;</code>
      */
     public long getCreateTime() {
       return createTime_;
@@ -6398,7 +6530,8 @@ public final class UserProto {
 
     private void initFields() {
       industryCodeId_ = 0;
-      source_ = com.janknspank.proto.UserProto.UserIndustry.Source.UNKNOWN;
+      source_ = com.janknspank.proto.UserProto.UserIndustry.Source.UNKNOWN_SOURCE;
+      relationship_ = com.janknspank.proto.UserProto.UserIndustry.Relationship.UNKNOWN_RELATIONSHIP;
       createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -6420,7 +6553,10 @@ public final class UserProto {
         output.writeEnum(2, source_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, createTime_);
+        output.writeEnum(3, relationship_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, createTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6441,7 +6577,11 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, createTime_);
+          .computeEnumSize(3, relationship_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, createTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6561,10 +6701,12 @@ public final class UserProto {
         super.clear();
         industryCodeId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        source_ = com.janknspank.proto.UserProto.UserIndustry.Source.UNKNOWN;
+        source_ = com.janknspank.proto.UserProto.UserIndustry.Source.UNKNOWN_SOURCE;
         bitField0_ = (bitField0_ & ~0x00000002);
-        createTime_ = 0L;
+        relationship_ = com.janknspank.proto.UserProto.UserIndustry.Relationship.UNKNOWN_RELATIONSHIP;
         bitField0_ = (bitField0_ & ~0x00000004);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -6604,6 +6746,10 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
+        result.relationship_ = relationship_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
         result.createTime_ = createTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -6626,6 +6772,9 @@ public final class UserProto {
         }
         if (other.hasSource()) {
           setSource(other.getSource());
+        }
+        if (other.hasRelationship()) {
+          setRelationship(other.getRelationship());
         }
         if (other.hasCreateTime()) {
           setCreateTime(other.getCreateTime());
@@ -6691,7 +6840,7 @@ public final class UserProto {
       }
 
       // optional .UserIndustry.Source source = 2;
-      private com.janknspank.proto.UserProto.UserIndustry.Source source_ = com.janknspank.proto.UserProto.UserIndustry.Source.UNKNOWN;
+      private com.janknspank.proto.UserProto.UserIndustry.Source source_ = com.janknspank.proto.UserProto.UserIndustry.Source.UNKNOWN_SOURCE;
       /**
        * <code>optional .UserIndustry.Source source = 2;</code>
        */
@@ -6721,39 +6870,75 @@ public final class UserProto {
        */
       public Builder clearSource() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        source_ = com.janknspank.proto.UserProto.UserIndustry.Source.UNKNOWN;
+        source_ = com.janknspank.proto.UserProto.UserIndustry.Source.UNKNOWN_SOURCE;
         onChanged();
         return this;
       }
 
-      // optional int64 create_time = 3;
-      private long createTime_ ;
+      // optional .UserIndustry.Relationship relationship = 3;
+      private com.janknspank.proto.UserProto.UserIndustry.Relationship relationship_ = com.janknspank.proto.UserProto.UserIndustry.Relationship.UNKNOWN_RELATIONSHIP;
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional .UserIndustry.Relationship relationship = 3;</code>
        */
-      public boolean hasCreateTime() {
+      public boolean hasRelationship() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional .UserIndustry.Relationship relationship = 3;</code>
+       */
+      public com.janknspank.proto.UserProto.UserIndustry.Relationship getRelationship() {
+        return relationship_;
+      }
+      /**
+       * <code>optional .UserIndustry.Relationship relationship = 3;</code>
+       */
+      public Builder setRelationship(com.janknspank.proto.UserProto.UserIndustry.Relationship value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        relationship_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .UserIndustry.Relationship relationship = 3;</code>
+       */
+      public Builder clearRelationship() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        relationship_ = com.janknspank.proto.UserProto.UserIndustry.Relationship.UNKNOWN_RELATIONSHIP;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 create_time = 4;
+      private long createTime_ ;
+      /**
+       * <code>optional int64 create_time = 4;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 create_time = 4;</code>
        */
       public long getCreateTime() {
         return createTime_;
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 4;</code>
        */
       public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         createTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 create_time = 3;</code>
+       * <code>optional int64 create_time = 4;</code>
        */
       public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         createTime_ = 0L;
         onChanged();
         return this;
@@ -11179,31 +11364,35 @@ public final class UserProto {
       "\005\250\246\035\001\022\024\n\006rating\030\004 \001(\001B\004\210\246\035\001\022\031\n\013create_ti" +
       "me\030\005 \001(\003B\004\210\246\035\001:\023\212\265\030\017MySQL.UrlRating\"N\n\013U" +
       "rlFavorite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
-      "\250\246\035\001\022\035\n\013create_time\030\002 \001(\003B\010\220\246\035\005\210\246\035\001\"\300\001\n\014" +
+      "\250\246\035\001\022\035\n\013create_time\030\002 \001(\003B\010\220\246\035\005\210\246\035\001\"\325\002\n\014" +
       "UserIndustry\022\"\n\020industry_code_id\030\001 \001(\005B\010" +
       "\210\246\035\001\220\246\035\003\022*\n\006source\030\002 \001(\0162\024.UserIndustry." +
-      "SourceB\004\210\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001\"" +
-      "E\n\006Source\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMB",
-      "STONE\020\002\022\025\n\021LINKED_IN_PROFILE\020\003\"\226\002\n\010Inter" +
-      "est\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007key" +
-      "word\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022&\n\006source\030\003 \001(\016" +
-      "2\020.Interest.SourceB\004\210\246\035\001\022\026\n\004type\030\004 \001(\tB\010" +
-      "\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001\"r\n\006S" +
-      "ource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTON" +
-      "E\020\002\022\020\n\014ADDRESS_BOOK\020\003\022\031\n\025LINKED_IN_CONNE" +
-      "CTIONS\020\004\022\025\n\021LINKED_IN_PROFILE\020\005\"C\n\006Inten" +
-      "t\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013cre" +
-      "ate_time\030\002 \001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfile",
-      "\0223\n\020current_employer\030\001 \001(\0132\031.LinkedInPro" +
-      "file.Employer\0220\n\rpast_employer\030\002 \003(\0132\031.L" +
-      "inkedInProfile.Employer\022\030\n\004data\030\003 \001(\tB\n\210" +
-      "\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z\n\010" +
-      "Employer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005titl" +
-      "e\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246" +
-      "\035\030\022\022\n\nstart_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003" +
-      "\"J\n\023LinkedInConnections\022\030\n\004data\030\002 \001(\tB\n\210" +
-      "\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!\n\024" +
-      "com.janknspank.protoB\tUserProto"
+      "SourceB\004\210\246\035\001\0226\n\014relationship\030\003 \001(\0162\032.Use" +
+      "rIndustry.RelationshipB\004\210\246\035\001\022\031\n\013create_t",
+      "ime\030\004 \001(\003B\004\210\246\035\001\"L\n\006Source\022\022\n\016UNKNOWN_SOU" +
+      "RCE\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED" +
+      "_IN_PROFILE\020\003\"T\n\014Relationship\022\030\n\024UNKNOWN" +
+      "_RELATIONSHIP\020\000\022\024\n\020CURRENT_INDUSTRY\020\001\022\024\n" +
+      "\020DESIRED_INDUSTRY\020\002\"\226\002\n\010Interest\022\034\n\002id\030\001" +
+      " \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB" +
+      "\014\210\246\035\001\220\246\035\003\230\246\035d\022&\n\006source\030\003 \001(\0162\020.Interest" +
+      ".SourceB\004\210\246\035\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n" +
+      "\013create_time\030\005 \001(\003B\004\210\246\035\001\"r\n\006Source\022\013\n\007UN" +
+      "KNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDR",
+      "ESS_BOOK\020\003\022\031\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n" +
+      "\021LINKED_IN_PROFILE\020\005\"C\n\006Intent\022\036\n\004code\030\001" +
+      " \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\002 " +
+      "\001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfile\0223\n\020current" +
+      "_employer\030\001 \001(\0132\031.LinkedInProfile.Employ" +
+      "er\0220\n\rpast_employer\030\002 \003(\0132\031.LinkedInProf" +
+      "ile.Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031" +
+      "\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z\n\010Employer\022\026\n" +
+      "\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246" +
+      "\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart",
+      "_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\"J\n\023LinkedI" +
+      "nConnections\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031" +
+      "\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknsp" +
+      "ank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11239,7 +11428,7 @@ public final class UserProto {
           internal_static_UserIndustry_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UserIndustry_descriptor,
-              new java.lang.String[] { "IndustryCodeId", "Source", "CreateTime", });
+              new java.lang.String[] { "IndustryCodeId", "Source", "Relationship", "CreateTime", });
           internal_static_Interest_descriptor =
             getDescriptor().getMessageTypes().get(5);
           internal_static_Interest_fieldAccessorTable = new
@@ -11320,6 +11509,7 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);

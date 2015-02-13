@@ -107,7 +107,8 @@ public class JonBenchmark {
       "http://bits.blogs.nytimes.com/2015/02/10/yelp-buys-eat24-an-online-food-ordering-service-for-134-million/",
       "http://techcrunch.com/2015/02/10/flipboard-web/",
       "http://techcrunch.com/2015/02/12/expedia-buys-orbitz-for-1-6b-in-cash-to-square-up-to-priceline/",
-      "http://techcrunch.com/2015/02/12/linkedin-battens-down-the-hatches-on-api-use-limiting-full-access-to-partners/");
+      "http://techcrunch.com/2015/02/12/linkedin-battens-down-the-hatches-on-api-use-limiting-full-access-to-partners/",
+      "http://techcrunch.com/2015/02/13/google-pulls-its-helpouts-mobile-applications-from-the-app-stores/");
 
   public static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
@@ -213,7 +214,13 @@ public class JonBenchmark {
       "http://www.cnn.com/2015/02/04/entertainment/feat-magic-mike-xxl-poster-trailer/index.html",
       "http://www.cnn.com/2015/02/03/entertainment/china-katy-perry-celebrity-nicknames/index.html",
       "http://www.cnn.com/2015/01/25/entertainment/feat-sag-awards-2015-wrap/index.html",
-      "http://www.cnn.com/2015/01/25/entertainment/feat-sag-awards-andy-samberg-rashida-jones-speech/index.html");
+      "http://www.cnn.com/2015/01/25/entertainment/feat-sag-awards-andy-samberg-rashida-jones-speech/index.html",
+      "http://techcrunch.com/2015/02/13/samsung-could-roll-back-its-own-software-and-embrace-microsoft-for-galaxy-s6/",
+      "http://techcrunch.com/2015/02/13/google-and-mattel-revive-the-85-year-old-view-master-with-cardboard-vr/",
+      "http://techcrunch.com/2015/02/13/watch-tim-cook-speak-at-president-obamas-summit-on-cybersecurity/",
+      "http://techcrunch.com/2015/02/13/a-third-act-for-biofuels/",
+      "http://techcrunch.com/2015/02/13/alf/",
+      "http://techcrunch.com/2015/02/13/rockbot-anthem/");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {

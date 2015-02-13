@@ -14,6 +14,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserIndustry;
+import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 import com.janknspank.proto.UserProto.UserIndustry.Source;
 
 public class UserIndustries {
@@ -32,6 +33,7 @@ public class UserIndustries {
     UserIndustry userIndustry = UserIndustry.newBuilder()
         .setIndustryCodeId(industryCode.getId())
         .setSource(Source.LINKED_IN_PROFILE)
+        .setRelationship(Relationship.CURRENT_INDUSTRY)
         .setCreateTime(System.currentTimeMillis())
         .build();
     List<UserIndustry> industries = new ArrayList<>();
