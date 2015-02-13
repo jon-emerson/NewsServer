@@ -1,7 +1,6 @@
 package com.janknspank.rank;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,18 +55,15 @@ public class UserRatingsBenchmark {
       Article article = urlArticleMap.get(urlRating.getUrl());
       User user = emailUserMap.get(urlRating.getEmail());
 
-      if (article != null && user != null) {
+      if (article == null) {
+        LOG.warning("Can't find Article to score: " + urlRating.getUrl());
+      } else if (user == null) {
+        LOG.warning("Can't find User to score: " + urlRating.getEmail());
+      } else {
         // Use the holdback for the benchmark. The other 80% are used
         // to train the neural network.
         if (NeuralNetworkTrainer.isInTrainingHoldback(article)) {
           scoreMap.put(urlRating, scorer.getScore(user, article));
-        }
-      } else {
-        if (article == null) {
-          LOG.warning("Can't find Article to score: " + urlRating.getUrl());
-        }
-        if (user == null) {
-          LOG.warning("Can't find User to score: " + urlRating.getEmail());
         }
       }
     }
@@ -80,19 +76,19 @@ public class UserRatingsBenchmark {
    */
   public static void grade(Map<UrlRating, Double> scores) {
     int positives = 0; // # of Articles both the scorer and user thought were good
-    int realPositives = 0; // Total # of Articles which the user thought were good
+    int userPositives = 0; // Total # of Articles which the user thought were good
     int falseNegatives = 0; // Good articles the scorer thought were bad
     int negatives = 0; // # of Articles both the scorer and user thought were bad
-    int realNegatives = 0; // Total # of Articles which the user thought were bad
+    int userNegatives = 0; // Total # of Articles which the user thought were bad
     int falsePositives = 0; // Bad articles the scorer thought were good
     List<String> falseNegativesUrls = new ArrayList<>();
     for (Map.Entry<UrlRating, Double> entry : scores.entrySet()) {
       double score = entry.getValue();
       UrlRating userUrlRating = entry.getKey();
       if (userUrlRating.getRating() > 0.5) {
-        realPositives++;
+        userPositives++;
       } else {
-        realNegatives++;
+        userNegatives++;
       }
 
       if (userUrlRating.getRating() > 0.5 && score > 0.5) {
@@ -108,11 +104,11 @@ public class UserRatingsBenchmark {
     }
 
     System.out.println("Positives: " + positives
-        + " (" + (int) ((double) 100 * positives / realPositives) + "% correct)");
+        + " (" + (int) ((double) 100 * positives / userPositives) + "% correct)");
     System.out.println("False negatives: " + falseNegatives);
     System.out.println("False positives: " + falsePositives);
     System.out.println("Negatives: " + negatives
-        + " (" + (int) ((double) 100 * negatives / realNegatives) + "% correct)");
+        + " (" + (int) ((double) 100 * negatives / userNegatives) + "% correct)");
     System.out.println("Percent correct: " +
         (int) (100 * (((double) positives + negatives)
             / (scores.size()))) + "%");

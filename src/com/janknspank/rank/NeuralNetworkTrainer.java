@@ -3,6 +3,7 @@ package com.janknspank.rank;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
@@ -28,6 +29,7 @@ import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
+  private final static Logger LOG = Logger.getLogger(NeuralNetworkTrainer.class.getName());
   private static int MAX_ITERATIONS = 100000;
   private Double[] lowestErrorNetworkWeights;
   private double lowestError = 1.0;
@@ -97,7 +99,11 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       User user = emailUserMap.get(rating.getEmail());
       Article article = urlArticleMap.get(rating.getUrl());
 
-      if (article != null & user != null) {
+      if (article == null) {
+        LOG.warning("Can't find Article to score: " + rating.getUrl());
+      } else if (user == null) {
+        LOG.warning("Can't find User to score: " + rating.getEmail());
+      } else {
         double[] input =
             NeuralNetworkScorer.generateInputNodes(user, article);
         double[] output = new double[] { rating.getRating() };

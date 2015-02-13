@@ -46,7 +46,7 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
       throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
-    // BAD: this makes second call to DB for user after doPostInternal call
+    // BAD: this makes second call to DB for User after doPostInternal call
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     try {
