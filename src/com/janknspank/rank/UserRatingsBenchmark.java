@@ -29,11 +29,6 @@ public class UserRatingsBenchmark {
    * Generates ranking scores for every article-user pair passed
    * in the list of UrlRatings. This is used to determine the
    * error of a scorer against a benchmark.
-   * @param allRatings
-   * @param scorer
-   * @return
-   * @throws BiznessException
-   * @throws DatabaseSchemaException
    */
   public static Map<UrlRating, Double> calculateScoresFor(Iterable<UrlRating> allRatings, 
       Scorer scorer) throws BiznessException, DatabaseSchemaException {
@@ -54,11 +49,7 @@ public class UserRatingsBenchmark {
     }
 
     // Load up all articles that have ratings
-    Collection<Article> articles = ArticleCrawler.getArticles(urlStrings).values();
-    Map<String, Article> urlArticleMap = Maps.newHashMap();
-    for (Article article: articles) {
-      urlArticleMap.put(article.getUrl(), article);
-    }
+    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings);
 
     // Compute scores
     for (UrlRating urlRating : allRatings) {
@@ -96,7 +87,7 @@ public class UserRatingsBenchmark {
     int falsePositives = 0; // Bad articles the scorer thought were good
     List<String> falseNegativesUrls = new ArrayList<>();
     for (Map.Entry<UrlRating, Double> entry : scores.entrySet()) {
-      double spotterScore = entry.getValue();
+      double score = entry.getValue();
       UrlRating userUrlRating = entry.getKey();
       if (userUrlRating.getRating() > 0.5) {
         realPositives++;
@@ -104,14 +95,14 @@ public class UserRatingsBenchmark {
         realNegatives++;
       }
 
-      if (userUrlRating.getRating() > 0.5 && spotterScore > 0.5) {
+      if (userUrlRating.getRating() > 0.5 && score > 0.5) {
         positives++;
-      } else if (userUrlRating.getRating() > 0.5 && spotterScore <= 0.5) {
+      } else if (userUrlRating.getRating() > 0.5 && score <= 0.5) {
         falseNegatives++;
         falseNegativesUrls.add(userUrlRating.getUrl());
-      } else if (userUrlRating.getRating() <= 0.5 && spotterScore <= 0.5) {
+      } else if (userUrlRating.getRating() <= 0.5 && score <= 0.5) {
         negatives++;
-      } else if (userUrlRating.getRating() <= 0.5 && spotterScore > 0.5) {
+      } else if (userUrlRating.getRating() <= 0.5 && score > 0.5) {
         falsePositives++;
       }
     }
@@ -153,11 +144,11 @@ public class UserRatingsBenchmark {
         Joiner.on("").join(Iterables.limit(Iterables.cycle("B"), bad));
   }
 
-  private static void printHistogram(Map<UrlRating, Double> spotterScores) {
+  private static void printHistogram(Map<UrlRating, Double> scores) {
     List<Double> goodArticleScores = new ArrayList<>();
     List<Double> badArticleScores = new ArrayList<>();
 
-    for (Map.Entry<UrlRating, Double> entry: spotterScores.entrySet()) {
+    for (Map.Entry<UrlRating, Double> entry: scores.entrySet()) {
       UrlRating userRating = entry.getKey();
       Double spotterRating = entry.getValue();
       if (userRating.getRating() > 0.5) {
