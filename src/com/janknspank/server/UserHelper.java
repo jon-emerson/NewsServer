@@ -19,7 +19,6 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.UrlFavorite;
-import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 
