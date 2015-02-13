@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.protobuf.Message;
+import com.janknspank.common.Logger;
 
 class LocalSqlCollection<T extends Message> extends SqlCollection<T> {
+  private static final Logger LOG = new Logger(LocalSqlCollection.class);
   private static final String DB_URL =
       "jdbc:mysql://localhost/test?"
           + Joiner.on("&").join(ImmutableList.of(
@@ -27,13 +29,13 @@ class LocalSqlCollection<T extends Message> extends SqlCollection<T> {
   @Override
   protected Connection getConnection() throws DatabaseSchemaException {
     if (connection == null) {
-      System.out.println("Connecting to local database...");
+      LOG.info("Connecting to local database...");
       try {
         connection = DriverManager.getConnection(DB_URL, "hello", "");
       } catch (SQLException e) {
         throw new DatabaseSchemaException("Could not connect to local database", e);
       }
-      System.out.println("Connected to local database successfully.");
+      LOG.info("Connected to local database successfully.");
     }
     return connection;
   }

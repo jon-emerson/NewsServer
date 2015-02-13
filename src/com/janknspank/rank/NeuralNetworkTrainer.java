@@ -3,7 +3,6 @@ package com.janknspank.rank;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
@@ -22,6 +21,7 @@ import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Users;
+import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
@@ -29,7 +29,7 @@ import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private final static Logger LOG = Logger.getLogger(NeuralNetworkTrainer.class.getName());
+  private final static Logger LOG = new Logger(NeuralNetworkTrainer.class);
   private static int MAX_ITERATIONS = 100000;
   private Double[] lowestErrorNetworkWeights;
   private double lowestError = 1.0;
@@ -90,7 +90,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     // Load up all articles that have ratings
     Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings);
-    
+
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);

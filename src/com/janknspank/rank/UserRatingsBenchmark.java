@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import com.google.api.client.util.Sets;
 import com.google.common.base.Joiner;
@@ -15,6 +14,7 @@ import com.google.common.collect.Multiset;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Users;
+import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
@@ -22,7 +22,7 @@ import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class UserRatingsBenchmark {
-  private final static Logger LOG = Logger.getLogger(UserRatingsBenchmark.class.getName());
+  private final static Logger LOG = new Logger(UserRatingsBenchmark.class);
 
   /**
    * Generates ranking scores for every article-user pair passed

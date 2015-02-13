@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Urls;
 import com.janknspank.common.DateParser;
+import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -30,6 +31,7 @@ import com.janknspank.proto.CoreProto.Url;
  * database as possible.
  */
 public class UrlCrawler {
+  private static final Logger LOG = new Logger(UrlCrawler.class);
   private final Fetcher fetcher = new Fetcher();
   private static final Iterable<String> WEBSITES = Iterables.concat(
       Iterables.transform(UrlWhitelist.WHITELIST, new Function<String, String>() {
@@ -215,7 +217,7 @@ public class UrlCrawler {
   public static void main(String args[]) throws Exception {
     UrlCrawler crawler = new UrlCrawler();
     for (String website : WEBSITES) {
-      System.out.println("***** WEBSITE: " + website);
+      LOG.info("WEBSITE: " + website);
       Urls.put(
           Iterables.transform(
               Iterables.filter(
@@ -225,7 +227,7 @@ public class UrlCrawler {
           website, false /* isTweet */);
     }
     for (String rssUrl : RSS_URLS) {
-      System.out.println("***** RSS FILE: " + rssUrl);
+      LOG.info("RSS FILE: " + rssUrl);
       crawler.crawl(rssUrl);
     }
   }

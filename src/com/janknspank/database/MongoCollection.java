@@ -14,6 +14,7 @@ import com.google.common.collect.Iterables;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
+import com.janknspank.common.Logger;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
 import com.janknspank.database.QueryOption.LimitWithOffset;
 import com.janknspank.database.QueryOption.WhereEquals;
@@ -41,6 +42,7 @@ import com.mongodb.MongoClient;
  * deletes, updates, and inserts against a Mongo DB database.
  */
 public class MongoCollection<T extends Message> extends Collection<T> {
+  private static final Logger LOG = new Logger(MongoCollection.class);
   private MongoClient __clientInternal = null; // DO NOT USE DIRECTLY!!
   private DB __database = null; // DO NOT USE DIRECTLY!!
 
@@ -299,7 +301,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
               .remove(Mongoizer.toDBObject(t))
               .getN();
         } catch (DatabaseSchemaException e) {
-          System.err.println("Warning: " + e.getMessage());
+          LOG.warning(e.getMessage());
         }
       }
     } else {
@@ -325,7 +327,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     if (dbObjectList.size() > 1) {
       logText.append(" and " + (dbObjectList.size() - 1) + " more items");
     }
-    System.out.println(logText);
+    LOG.fine(logText.toString());
 
     return getDatabase().getCollection(this.getTableName())
         .insert(dbObjectList)
@@ -339,7 +341,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     BasicDBObject queryDbObject = getQueryObject(whereOptions);
     for (T t : messages) {
       String primaryKey = Database.getPrimaryKey(t);
-      System.out.println("Update: " + clazz.getSimpleName() + " (id=" + primaryKey + ")");
+      LOG.fine("Update: " + clazz.getSimpleName() + " (id=" + primaryKey + ")");
       queryDbObject.put("_id", new ObjectId(primaryKey));
       rows += getDatabase().getCollection(this.getTableName())
           .update(queryDbObject, Mongoizer.toDBObject(t))

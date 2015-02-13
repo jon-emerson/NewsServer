@@ -21,6 +21,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.ClassifierException;
+import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -35,6 +36,7 @@ import com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributi
 import com.janknspank.rank.DistributionBuilder;
 
 public class FacebookShareNormalizer {
+  private static final Logger LOG = new Logger(FacebookShareNormalizer.class);
   private static final String FILENAME = "classifier/shares/facebooksharenormalizer.bin";
 
   private static FacebookShareNormalizer instance = null;
@@ -173,7 +175,7 @@ public class FacebookShareNormalizer {
     for (Article article : Database.with(Article.class).get(new QueryOption.Limit(50))) {
       SocialEngagement engagement = SocialEngagements.getForArticle(article, Site.FACEBOOK);
       if (engagement != null) {
-        System.out.println(getInstance().getShareScore(
+        LOG.info(getInstance().getShareScore(
             article.getUrl(),
             engagement.getShareCount(),
             Math.max(0, engagement.getCreateTime() - article.getPublishedTime()))
@@ -311,7 +313,7 @@ public class FacebookShareNormalizer {
               }
             });
 
-    System.out.println("Reading all articles...");
+    LOG.info("Reading all articles...");
     for (Article article : articles) {
       int i = 0;
       if (++i % 100 == 0) {
@@ -339,7 +341,7 @@ public class FacebookShareNormalizer {
         ShareNormalizationData.newBuilder();
     for (TimeRangeDistribution.Builder timeRangeDistributionBuilder
         : timeRangeDistributionBuilders) {
-      System.out.println("Building range " + timeRangeDistributionBuilder.getStartMillis()
+      LOG.info("Building range " + timeRangeDistributionBuilder.getStartMillis()
           + " - " + timeRangeDistributionBuilder.getEndMillis() + " ...");
       shareNormalizationDataBuilder.addTimeRangeDistribution(
           timeRangeDistributionBuilder
