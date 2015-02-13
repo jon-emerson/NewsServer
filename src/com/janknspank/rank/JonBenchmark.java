@@ -105,7 +105,9 @@ public class JonBenchmark {
       "http://techcrunch.com/2015/02/08/startups-a-rich-mans-game/",
       "http://techcrunch.com/2015/02/10/yelp-gulps-eat24/",
       "http://bits.blogs.nytimes.com/2015/02/10/yelp-buys-eat24-an-online-food-ordering-service-for-134-million/",
-      "http://techcrunch.com/2015/02/10/flipboard-web/");
+      "http://techcrunch.com/2015/02/10/flipboard-web/",
+      "http://techcrunch.com/2015/02/12/expedia-buys-orbitz-for-1-6b-in-cash-to-square-up-to-priceline/",
+      "http://techcrunch.com/2015/02/12/linkedin-battens-down-the-hatches-on-api-use-limiting-full-access-to-partners/");
 
   public static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
@@ -261,10 +263,12 @@ public class JonBenchmark {
         falsePositives++;
       }
     }
-    System.out.println("Positives: " + positives + " (GOOD!)");
+    System.out.println("Positives: " + positives
+        + " (" + (int) ((double) 100 * positives / goodScoreMap.size()) + "% correct)");
     System.out.println("False negatives: " + falseNegatives);
     System.out.println("False positives: " + falsePositives);
-    System.out.println("Negatives: " + negatives + " (GOOD!)");
+    System.out.println("Negatives: " + negatives
+        + " (" + (int) ((double) 100 * negatives / badScoreMap.size()) + "% correct)");
     System.out.println("Percent correct: " +
         (int) (100 * (((double) positives + negatives)
             / (goodScoreMap.size() + badScoreMap.size()))) + "%");
@@ -311,7 +315,7 @@ public class JonBenchmark {
   }
 
   public static void main(String args[]) throws Exception {
-    User jonUser = Users.getByUserId("54cc0b05e4b0513cefbe24cc");
+    User jonUser = Users.getByEmail("panaceaa@gmail.com");
     Asserts.assertNotNull(jonUser, "Could not read user");
 
     Map<Article, Double> goodScores =

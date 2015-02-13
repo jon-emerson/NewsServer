@@ -11,12 +11,18 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import org.apache.commons.io.IOUtils;
 
 import com.google.api.client.util.Maps;
+import com.google.api.client.util.Throwables;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -38,6 +44,16 @@ import com.janknspank.proto.CoreProto.VectorData.WordFrequency;
  * deserialization functionality.
  */
 public class Vector {
+  private static final LoadingCache<ArticleOrBuilder, Vector> ARTICLE_VECTOR_CACHE =
+      CacheBuilder.newBuilder()
+          .maximumSize(1000)
+          .expireAfterWrite(1, TimeUnit.MINUTES)
+          .build(
+              new CacheLoader<ArticleOrBuilder, Vector>() {
+                 public Vector load(ArticleOrBuilder article) {
+                   return new Vector(article);
+                 }
+              });
   private static final ImmutableSet<String> STOP_WORDS;
   private static final KeywordFinder KEYWORD_FINDER = KeywordFinder.getInstance();
 
@@ -92,9 +108,22 @@ public class Vector {
   /**
    * Constructs a document frequency vector for a specific Article.
    */
-  @SafeVarargs
-  public <T extends ArticleOrBuilder> Vector(T article, Set<String>... additionalStopWords) {
-    this(ImmutableList.of(article), additionalStopWords);
+  private <T extends ArticleOrBuilder> Vector(T article) {
+    this(ImmutableList.of(article), ImmutableSet.<String>of());
+  }
+
+  /**
+   * Returns a Vector for the word occurrences in the passed article.  Vectors
+   * are cached for 1 minute, to allow this method to be called multiple times
+   * efficiently.
+   */
+  public static Vector fromArticle(ArticleOrBuilder article) {
+    try {
+      return ARTICLE_VECTOR_CACHE.get(article);
+    } catch (ExecutionException e) {
+      Throwables.propagateIfPossible(e.getCause());
+      throw new RuntimeException(e);
+    }
   }
 
   /**

@@ -14,12 +14,17 @@ public enum FeatureType {
     this.type = type;
     this.description = description;
   }
-  
+
   public int getType() {
     return type;
   }
-  
+
   public String getDescription() {
     return description;
+  }
+
+  @Override
+  public String toString() {
+    return name();
   }
 }

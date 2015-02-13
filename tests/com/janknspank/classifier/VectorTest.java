@@ -114,7 +114,7 @@ public class VectorTest {
   @Test
   public void testGetTfIdf() throws Exception {
     ImmutableList<ArticleOrBuilder> articles = testWikipediaTestArticleSet();
-    Vector v2 = new Vector(articles.get(1));
+    Vector v2 = Vector.fromArticle(articles.get(1));
     Vector universe = new Vector(articles);
     Map<String, Double> tfIdf = v2.getTfIdf(universe);
     assertEquals(0, tfIdf.get("Thisx"), 0.0001 /* epsilon */);

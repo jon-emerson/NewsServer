@@ -63,11 +63,7 @@ public class TwitterCrawler implements twitter4j.StatusListener {
             @Override
             public void onSuccess(String longUrl) {
               if (UrlWhitelist.isOkay(longUrl)) {
-                try {
-                  longUrl = UrlCleaner.clean(longUrl);
-                } catch (MalformedURLException e) {
-                  e.printStackTrace();
-                }
+                longUrl = UrlCleaner.clean(longUrl);
 
                 System.err.println("News URL found: " + longUrl);
                 String twitterUrl = "https://twitter.com/"

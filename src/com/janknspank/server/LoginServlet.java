@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.utils.URIBuilder;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.api.client.http.GenericUrl;
@@ -36,7 +37,7 @@ import com.janknspank.bizness.Sessions;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
-import com.janknspank.classifier.IndustryCodes;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -49,22 +50,18 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Session;
-import com.janknspank.proto.EnumsProto.IndustryCode;
 import com.janknspank.proto.UserProto.LinkedInProfile;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
 import com.janknspank.proto.UserProto.User;
 
 public class LoginServlet extends StandardServlet {
   private static final String PROFILE_URL = "https://api.linkedin.com/v1/people/~:("
-      + Joiner.on(",").join(ImmutableList.of("id", "first-name", "last-name", "industry",
-          "headline", "siteStandardProfileRequest", "location", "num-connections", "summary",
-          "specialties", "positions", "picture-url", "api-standard-profile-request",
-          "public-profile-url", "email-address", "associations", "interests", "publications",
-          "patents", "languages", "skills", "certifications", "educations", "courses", "volunteer",
-          "three-current-positions", "three-past-positions", "num-recommenders",
-          "recommendations-received", "following", "job-bookmarks", "suggestions",
-          "date-of-birth", "member-url-resources", "related-profile-views", "honors-awards"))
-      + ")"; // ?oauth2_access_token=%@&format=json
+      + Joiner.on(",").join(ImmutableList.of("id", "email-address", "first-name", "last-name",
+          "maiden-name", "formatted-name", "phonetic-first-name", "phonetic-last-name",
+          "formatted-phonetic-name", "headline", "location", "industry", "current-share",
+          "num-connections", "num-connections-capped", "summary", "positions", "picture-url",
+          "site-standard-profile-request", "api-standard-profile-request", "public-profile-url"))
+      + ")";
   private static final String CONNECTIONS_URL = "https://api.linkedin.com/v1/people/~/connections";
 
   private HttpTransport transport = new NetHttpTransport();
@@ -280,16 +277,29 @@ public class LoginServlet extends StandardServlet {
     }
 
     // Get IndustryCodes so the client has more metadata to show
-    Iterable<IndustryCode> industryCodes = IndustryCodes.getFromUserIndustries(user.getIndustryList());
+    Iterable<IndustryCode> industryCodes = IndustryCode.getFromUserIndustries(user.getIndustryList());
 
     // Create the response.
     UserHelper userHelper = new UserHelper(user);
     JSONObject response = this.createSuccessResponse();
     JSONObject userJson = Serializer.toJSON(user);
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
-    userJson.put("industries", Serializer.toJSON(industryCodes));
+    userJson.put("industries", toJSON(industryCodes));
     response.put("user", userJson);
     response.put("session", Serializer.toJSON(session));
     return response;
+  }
+
+  /**
+   * Returns a filled-out version of the user's industries, including their
+   * titles and groups.  (The industry codes stored in the database are just
+   * thin pointer references, which is not enough for the client.)
+   */
+  public JSONArray toJSON(Iterable<IndustryCode> industryCodes) {
+    JSONArray jsonArray = new JSONArray();
+    for (IndustryCode code : industryCodes) {
+      jsonArray.put(code.toJSON());
+    }
+    return jsonArray;
   }
 }

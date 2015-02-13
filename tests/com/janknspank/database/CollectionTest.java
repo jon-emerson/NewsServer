@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleIndustry;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
@@ -27,9 +27,9 @@ public class CollectionTest {
   @Test
   public void testValidateType() throws Exception {
     Collection.validateType(Database.getFieldDescriptor(Article.class, "url"), "http://moo/");
-    Collection.validateType(Database.getFieldDescriptor(Article.class, "industry"),
-        ImmutableList.of(ArticleIndustry.newBuilder()
-            .setIndustryCodeId(5)
+    Collection.validateType(Database.getFieldDescriptor(Article.class, "feature"),
+        ImmutableList.of(ArticleFeature.newBuilder()
+            .setFeatureId(5)
             .setSimilarity(0.2525)
             .build()));
     Collection.validateType(Database.getFieldDescriptor(Article.class, "keyword"),
@@ -46,9 +46,9 @@ public class CollectionTest {
     assertInvalidType(Database.getFieldDescriptor(Article.class, "url"), ImmutableList.of("http://moo/"));
 
     // Should be repeated.
-    assertInvalidType(Database.getFieldDescriptor(Article.class, "industry"),
-        ArticleIndustry.newBuilder()
-            .setIndustryCodeId(5)
+    assertInvalidType(Database.getFieldDescriptor(Article.class, "feature"),
+        ArticleFeature.newBuilder()
+            .setFeatureId(5)
             .setSimilarity(0.2525)
             .build());
     assertInvalidType(Database.getFieldDescriptor(Article.class, "keyword"),

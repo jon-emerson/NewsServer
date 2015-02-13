@@ -7,7 +7,7 @@ if [ $? -eq 0 ]; then
       -Xdebug \
       -Xrunjdwp:transport=dt_socket,address=8022,server=y,suspend=n \
       -Dcom.sun.media.imageio.disableCodecLib=true \
-      com.janknspank.classifier.Feature $@
+      com.janknspank.classifier.VectorFeatureCreator $@
 else
   echo "Build failed"
 fi

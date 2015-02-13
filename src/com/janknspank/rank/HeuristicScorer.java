@@ -1,6 +1,5 @@
 package com.janknspank.rank;
 
-import com.janknspank.classifier.ClassifierException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 

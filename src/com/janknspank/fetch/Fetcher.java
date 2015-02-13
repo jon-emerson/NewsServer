@@ -42,7 +42,7 @@ public class Fetcher {
       }
       return new FetchResponse(response.getStatusLine().getStatusCode(), reader);
     } catch (IOException e) {
-      throw new FetchException("Error fetching", e);
+      throw new FetchException("Error fetching " + url.getUrl(), e);
     }
   }
 
@@ -52,7 +52,7 @@ public class Fetcher {
       return new FetchResponse(response.getStatusLine().getStatusCode(),
           new CharsetDetectingReader(response.getEntity().getContent()));
     } catch (IOException e) {
-      throw new FetchException("Error fetching", e);
+      throw new FetchException("Error fetching " + urlString, e);
     }
   }
 

@@ -10,7 +10,7 @@ public final class NeuralNetworkScorer extends Scorer {
   static final int INPUT_NODES_COUNT = 9;
   static final int OUTPUT_NODES_COUNT = 1;
   static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
-  static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/default_mlp_" +
+  static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_" +
       INPUT_NODES_COUNT + "in-" + HIDDEN_NODES_COUNT + "hidden-" +
       OUTPUT_NODES_COUNT + "out.nnet";
   private static NeuralNetworkScorer instance = null;
@@ -52,20 +52,17 @@ public final class NeuralNetworkScorer extends Scorer {
         // 6. Relevance to current role
         InputValuesGenerator.relevanceToCurrentRole(user, article),
 
-        // 7. Timeliness
-        //InputValuesGenerator.timeliness(article),
-
         // 7. Past employers
         InputValuesGenerator.relevanceToPastEmployers(user, article),
 
         // 8. Article text quality
         InputValuesGenerator.articleTextQualityScore(article),
-        
+
         // 9. Relevance to startup vector for people with that intent
         InputValuesGenerator.relevanceToStartupIntent(user, article)
     };
   }
-  
+
   /**
    * generate an nodes array with all indexes = 0 except for the specified
    * index 

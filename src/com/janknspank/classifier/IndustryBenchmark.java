@@ -15,8 +15,6 @@ import org.apache.commons.io.IOUtils;
 import com.google.common.base.Charsets;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleIndustry;
-import com.janknspank.proto.EnumsProto.IndustryCode;
 
 public class IndustryBenchmark {
   /**
@@ -25,11 +23,15 @@ public class IndustryBenchmark {
    * @throws DataInternalException
    * @throws IOException
    */
-  public static void benchmark(int industryCodeId) throws ClassifierException {
-    IndustryCode industryCode = IndustryCodes.INDUSTRY_CODE_MAP.get(industryCodeId);
+  public static void benchmark(int rawFeatureId) throws ClassifierException {
+    FeatureId featureId = FeatureId.fromId(rawFeatureId);
+    // Currently this only works for VectorFeatures, because only VectorFeatures
+    // have directories to put benchmark files in.  We can hopefully improve on
+    // this in the future, but for now, it is what it is.
+    VectorFeature feature = (VectorFeature) Feature.getFeature(featureId);
 
     // Load up the good and bad articles.
-    File industryDirectory = IndustryVector.getDirectoryForIndustry(industryCode);
+    File industryDirectory = VectorFeature.getVectorDirectory(featureId);
     Iterable<Article> goodArticles = null;
     Iterable<Article> badArticles = null;
     goodArticles = generateArticlesFromDirectory(industryDirectory + "/benchmarks/good/articles");
@@ -37,13 +39,13 @@ public class IndustryBenchmark {
 
     // Compute good article similarity scores.
     Map<Article, Double> goodArticleSimilarities =
-        getSimilaritiesForArticles(goodArticles, industryCode);
+        getSimilaritiesForArticles(goodArticles, feature);
 
     // Compute bad article similarity scores.
     Map<Article, Double> badArticleSimilarities =
-        getSimilaritiesForArticles(badArticles, industryCode);
+        getSimilaritiesForArticles(badArticles, feature);
 
-    analyzeClassifications(goodArticleSimilarities, badArticleSimilarities, industryCode);
+    analyzeClassifications(goodArticleSimilarities, badArticleSimilarities, feature);
 
     // Write DocumentVectors to file for quality debugging
     writeArticleVectorsToFile(goodArticles, industryDirectory + "/benchmarks/good/vector_outputs");
@@ -56,21 +58,16 @@ public class IndustryBenchmark {
   }
 
   private static Map<Article, Double> getSimilaritiesForArticles(
-      Iterable<Article> articles, IndustryCode industryCode) throws ClassifierException {
-    IndustryClassifier industryClassifier = IndustryClassifier.getInstance();
+      Iterable<Article> articles, Feature feature) throws ClassifierException {
     Map<Article, Double> articleSimilarities = new HashMap<>();
-
     for (Article article : articles) {
-      ArticleIndustry classification =
-          industryClassifier.classifyForIndustry(article, industryCode);
-      articleSimilarities.put(article, classification.getSimilarity());
+      articleSimilarities.put(article, feature.score(article));
     }
-
     return articleSimilarities;
   }
 
-  private static void analyzeClassifications(Map<Article, Double> goods,
-      Map<Article, Double> bads, IndustryCode industryCode) {
+  private static void analyzeClassifications(
+      Map<Article, Double> goods, Map<Article, Double> bads, Feature feature) {
 //    int articlesCount25percent = (int)(Math.ceil(totalArticleCount * 0.25));
     double minSimilarity = Double.MAX_VALUE;
     double maxSimilarity = Double.MIN_VALUE;
@@ -105,7 +102,7 @@ public class IndustryBenchmark {
         numGoodInTop20Percent++;
       }
     }
-    double percentGoodTop25 = (double)numGoodInTop20Percent / (double)goods.size();
+    double percentGoodTop25 = (double) numGoodInTop20Percent / (double) goods.size();
 
     int numBadInBottom20Percent = 0;
     for (Map.Entry<Article, Double> entry : bads.entrySet()) {
@@ -113,10 +110,9 @@ public class IndustryBenchmark {
         numBadInBottom20Percent++;
       }
     }
-    double percentBadBottom25 = (double)numBadInBottom20Percent / (double)bads.size();
+    double percentBadBottom25 = (double) numBadInBottom20Percent / (double) bads.size();
 
-    System.out.println("Industry " + industryCode.getId() + ": "
-       + industryCode.getDescription());
+    System.out.println("Feature " + feature.getFeatureId());
     System.out.println((int) (percentGoodTop25 * 100)
         + "% of good articles score in the top quartile");
     System.out.println((int) (percentBadBottom25 * 100)
@@ -215,8 +211,8 @@ public class IndustryBenchmark {
             IOUtils.write("# Text-representation of an article vector for:\n", outputStream,
                 Charsets.UTF_8);
             IOUtils.write("# " + article.getUrl() + "\n", outputStream, Charsets.UTF_8);
-            IOUtils.write(new Vector(article).toVectorData().toString(), outputStream,
-                Charsets.UTF_8);
+            IOUtils.write(Vector.fromArticle(article).toVectorData().toString(),
+                outputStream, Charsets.UTF_8);
       }
     } catch (IOException e) {
       throw new ClassifierException("Could not write article text vector: " + e.getMessage(), e);

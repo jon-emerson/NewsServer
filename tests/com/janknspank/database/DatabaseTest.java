@@ -57,7 +57,7 @@ public class DatabaseTest {
         "hello world");
     Database.assertObjectValidForField(Article.class, "keyword.source",
         Source.ANGELLIST);
-    Database.assertObjectValidForField(Article.class, "industry.industry_code_id", 32);
+    Database.assertObjectValidForField(Article.class, "feature.feature_id", 32);
     Database.assertObjectValidForField(Article.class, "keyword",
         ArticleKeyword.getDefaultInstance());
 
@@ -71,7 +71,7 @@ public class DatabaseTest {
         Source.ANGELLIST);
     assertObjectNotValidForField(Article.class, "keyword.source",
         "angellist");
-    assertObjectNotValidForField(Article.class, "industry.industry_code_id", Long.MIN_VALUE);
+    assertObjectNotValidForField(Article.class, "feature.feature_id", Long.MIN_VALUE);
     assertObjectNotValidForField(Article.class, "keyword", Article.getDefaultInstance());
   }
 }

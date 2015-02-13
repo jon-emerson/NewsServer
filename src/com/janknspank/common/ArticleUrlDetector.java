@@ -29,7 +29,7 @@ public class ArticleUrlDetector {
     }
   };
 
-  private static final Pattern ABC_NET_AU_PATH = Pattern.compile("\\/[0-9]{6,10}.htm$");
+  private static final Pattern ABC_NET_AU_PATH = Pattern.compile("\\/[0-9]{6,10}(.htm)?$");
   private static final Pattern ABC_NEWS_ID_PARAM = Pattern.compile("^[0-9]{5,10}$");
   private static final Pattern ABC_NEWS_BLOG_PATH =
       Pattern.compile("^\\/blogs\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$$");
@@ -132,8 +132,7 @@ public class ArticleUrlDetector {
     String host = url.getHost().toLowerCase();
     String path = url.getPath();
     if (host.endsWith("abc.net.au")) {
-      return ABC_NET_AU_PATH.matcher(path).find() ||
-          DateParser.parseDateFromUrl(urlString, false) != null;
+      return ABC_NET_AU_PATH.matcher(path).find();
     }
     if (host.endsWith("abcnews.go.com")) {
       return ABC_NEWS_ID_PARAM.matcher(Strings.nullToEmpty(parameters.get("id"))).find() ||

@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Throwables;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -31,6 +33,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   static {
     DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
         ".article > p", // DO NOT EXPAND THIS TO .article p, ALL USER COMMENTS GET PULLED!
+        ".story > p", // E.g. http://www.abc.net.au/health/features/stories/2015/02/12/4178721.htm
         "#story > p"});
     DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
         "#storyText p",
@@ -174,12 +177,9 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   private SiteParser() {}
 
   /**
-   * Returns the best set of DOM addresses we currently know about for the given
-   * domain (or subdomain, if one is so configured).  Looks in
-   * DOMAIN_TO_DOM_ADDRESSES hierarchically through each subdomain until a match
-   * is found, or a default set is returned instead.
+   * Normalizes a domain to its "www."- and other subdomain-free self.
    */
-  private static String[] getDomAddressesForUrl(String url) {
+  public static String getNormalizedDomain(String url) {
     String domain;
     try {
       domain = new URL(url).getHost();
@@ -189,12 +189,24 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
 
     while (domain.contains(".")) {
       String[] domAddresses = DOMAIN_TO_DOM_ADDRESSES.get(domain);
-      if (domAddresses != null) {
-        return domAddresses;
+      if (domAddresses != null || StringUtils.countMatches(domain, ".") == 1) {
+        return domain;
       }
       domain = domain.substring(domain.indexOf(".") + 1);
     }
-    return DOMAIN_TO_DOM_ADDRESSES.get("default");
+    return null;
+  }
+
+  /**
+   * Returns the best set of DOM addresses we currently know about for the given
+   * domain (or subdomain, if one is so configured).  Looks in
+   * DOMAIN_TO_DOM_ADDRESSES hierarchically through each subdomain until a match
+   * is found, or a default set is returned instead.
+   */
+  private static String[] getDomAddressesForUrl(String url) {
+    String domain = getNormalizedDomain(url);
+    return DOMAIN_TO_DOM_ADDRESSES.containsKey(domain)
+        ? DOMAIN_TO_DOM_ADDRESSES.get(domain) : DOMAIN_TO_DOM_ADDRESSES.get("default");
   }
 
   /**

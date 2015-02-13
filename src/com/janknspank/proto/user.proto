@@ -49,10 +49,12 @@ message User {
   ];
 
   optional LinkedInProfile linked_in_profile = 10 [
+    // Excluded because this is the raw LinkedIn API XML.
     (client_serialization) = EXCLUDE
   ];
 
   optional LinkedInConnections linked_in_connections = 11 [
+    // Excluded because this is the raw LinkedIn API XML.
     (client_serialization) = EXCLUDE
   ];
 
@@ -60,13 +62,26 @@ message User {
     (string_length) = 200
   ];
 
-  optional AddressBook address_book = 12;
-
-  repeated UrlFavorite url_favorite = 14 [
+  optional AddressBook address_book = 12 [
+    // Excluded because the client will receive these as interests with
+    // Source.ADDRESS_BOOK.  The client doesn't need the raw source.
     (client_serialization) = EXCLUDE
   ];
 
-  repeated UserIndustry industry = 15;
+  repeated UrlRating url_rating = 13;
+
+  repeated UrlFavorite url_favorite = 14 [
+    // Excluded because the client needs to receive an entire Article object,
+    // which the /server/ code handles resolving for us.
+    (client_serialization) = EXCLUDE
+  ];
+
+  repeated UserIndustry industry = 15 [
+    // Excluded because the client needs to receive an entire IndustryCode
+    // object, which the /server/ code handles resolving for us.
+    (client_serialization) = EXCLUDE
+  ];
+
   repeated Interest interest = 16;
   repeated Intent intent = 17;
 }

@@ -28,7 +28,6 @@ public class UserInterests {
   public static final String TYPE_LOCATION = "l";
   public static final String TYPE_PERSON = "p";
   public static final String TYPE_ORGANIZATION = "o";
-  public static final String TYPE_SKILL = "s";
 
   /**
    * Updates the user's interests using his LinkedIn profile, and returns his
@@ -88,24 +87,6 @@ public class UserInterests {
     }
 
     return user;
-
-    // Step 3: Update skills
-//    Set<String> skills = Sets.newHashSet();
-//    for (Node skillNode : profileDocumentNode.findAll("skill > name")) {
-//      skills.add(skillNode.getFlattenedText());
-//    }
-//    List<Interest> skillInterests = Lists.newArrayList();
-//    for (String skill : skills) {
-//      skillInterests.add(Interest.newBuilder()
-//          .setId(GuidFactory.generate())
-//          .setKeyword(skill)
-//          .setSource(Source.LINKED_IN_PROFILE)
-//          .setType(TYPE_SKILL)
-//          .setCreateTime(System.currentTimeMillis())
-//          .build());
-//    }
-
-//    return updateInterests(user, skillInterests, Source.LINKED_IN_PROFILE);
   }
 
   /**
