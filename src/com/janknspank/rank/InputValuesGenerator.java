@@ -102,8 +102,8 @@ public class InputValuesGenerator {
   }
 
   public static double relevanceToStartupIntent(User user, Article article) {
-    for (Intent intent : user.getIntentList()) {
-      if (intent.getCode() == IntentCodes.START_COMPANY.getCode()) {
+//    for (Intent intent : user.getIntentList()) {
+//      if (intent.getCode() == IntentCodes.START_COMPANY.getCode()) {
         for (ArticleFeature articleFeature : article.getFeatureList()) {
           FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
           if (StartupFeatureHelper.isStartupFeature(featureId) &&
@@ -111,8 +111,8 @@ public class InputValuesGenerator {
             return articleFeature.getSimilarity();
           }
         }
-      }
-    }
+//      }
+//    }
     return 0;
   }
 

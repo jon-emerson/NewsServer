@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.utils.URIBuilder;
+import org.json.JSONArray;
 import org.json.JSONObject;
-
-import twitter4j.JSONArray;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
@@ -291,6 +290,7 @@ public class LoginServlet extends StandardServlet {
     return response;
   }
 
+  // TODO(jonemerson): Remove this once the client's looking at "industry".
   public JSONArray toJSON(Iterable<IndustryCode> industryCodes) {
     JSONArray jsonArray = new JSONArray();
     for (IndustryCode code : industryCodes) {
