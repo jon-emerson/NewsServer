@@ -1,6 +1,8 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler;
 
 import org.junit.Test;
+
+import com.janknspank.nlp.KeywordUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

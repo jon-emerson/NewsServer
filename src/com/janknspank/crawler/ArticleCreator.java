@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.api.client.util.Lists;
@@ -22,12 +21,23 @@ import com.google.common.collect.Iterables;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.FeatureClassifier;
 import com.janknspank.common.DateParser;
+import com.janknspank.common.StringHelper;
+import com.janknspank.crawler.facebook.FacebookData;
+import com.janknspank.crawler.facebook.FacebookException;
 import com.janknspank.database.Database;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
+import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 
+/**
+ * ArticleCreator is a very high-level object in the crawling system: It's
+ * responsible for creating Article objects from yet-uninterpreted
+ * DocumentNodes.  ArticleCreator digs through the DocumentNode to find all
+ * the Article's attributes, such as entities, industry and other
+ * classification features, plus Facebook / other social engagement scores.
+ */
 class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   private static LoadingCache<DocumentNode, Iterable<String>> PARAGRAPH_CACHE =
       CacheBuilder.newBuilder()
@@ -110,16 +120,16 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     // do this is beyond me), do another escape pass on everything before we
     // start telling people about this article.
     if (articleBuilder.hasDescription()) {
-      articleBuilder.setDescription(unescape(articleBuilder.getDescription()).trim());
+      articleBuilder.setDescription(StringHelper.unescape(articleBuilder.getDescription()).trim());
     }
     if (articleBuilder.hasAuthor()) {
-      articleBuilder.setAuthor(unescape(articleBuilder.getAuthor()));
+      articleBuilder.setAuthor(StringHelper.unescape(articleBuilder.getAuthor()));
     }
     if (articleBuilder.hasCopyright()) {
-      articleBuilder.setCopyright(unescape(articleBuilder.getCopyright()));
+      articleBuilder.setCopyright(StringHelper.unescape(articleBuilder.getCopyright()));
     }
     if (articleBuilder.hasImageUrl()) {
-      articleBuilder.setImageUrl(unescape(articleBuilder.getImageUrl()));
+      articleBuilder.setImageUrl(StringHelper.unescape(articleBuilder.getImageUrl()));
     }
     try {
       articleBuilder.addAllFeature(FeatureClassifier.classify(articleBuilder));
@@ -362,7 +372,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       } else {
         Node titleNode = documentNode.findFirst("title");
         if (titleNode != null) {
-          title = unescape(titleNode.getFlattenedText());
+          title = StringHelper.unescape(titleNode.getFlattenedText());
         } else {
           throw new RequiredFieldException("Could not find required field: title");
         }
@@ -388,22 +398,6 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   }
 
   /**
-   * Unescapes the passed string, including &apos;, which was added in XHTML 1.0
-   * but for some reason isn't handled by Apache's StringEscapeUtils.  Also,
-   * &nbsp; is converted to a standard space, since we don't want to worry about
-   * that.
-   */
-  static String unescape(String escaped) {
-    return StringEscapeUtils
-        .unescapeHtml4(escaped
-            .replaceAll("&nbsp;", " ")
-            .replaceAll("&#8203;", "")) // Zero-width space.
-        .replaceAll("&apos;", "’")
-        .replaceAll("\u00A0", " ") // Non-breaking space.
-        .replaceAll("\u200B", ""); // Zero-width space.
-  }
-
-  /**
    * DO NOT CALL THIS DIRECTLY.
    * @see #getParagraphs(DocumentNode)
    */
@@ -411,7 +405,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   public Iterable<String> load(final DocumentNode documentNode) throws Exception {
     List<String> paragraphs = Lists.newArrayList();
     for (Node paragraphNode : SiteParser.getParagraphNodes(documentNode)) {
-      String text = unescape(paragraphNode.getFlattenedText()).trim();
+      String text = StringHelper.unescape(paragraphNode.getFlattenedText()).trim();
       if (text.length() > MAX_PARAGRAPH_LENGTH) {
         System.out.println("Warning: Trimming paragraph text on " +
             documentNode.getUrl());

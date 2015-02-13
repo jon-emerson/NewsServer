@@ -15,8 +15,8 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Urls;
-import com.janknspank.common.UrlCleaner;
-import com.janknspank.common.UrlWhitelist;
+import com.janknspank.crawler.UrlCleaner;
+import com.janknspank.crawler.UrlWhitelist;
 import com.janknspank.database.DatabaseSchemaException;
 
 public class TwitterCrawler implements twitter4j.StatusListener {

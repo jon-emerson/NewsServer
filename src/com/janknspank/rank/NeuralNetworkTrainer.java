@@ -15,8 +15,8 @@ import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
-import com.janknspank.ArticleCrawler;
 import com.janknspank.bizness.Users;
+import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 

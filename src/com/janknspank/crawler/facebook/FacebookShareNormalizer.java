@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.crawler.facebook;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

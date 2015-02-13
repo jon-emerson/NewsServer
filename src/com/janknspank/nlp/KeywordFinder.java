@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.nlp;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -29,6 +29,8 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.EntityType;
+import com.janknspank.common.StringHelper;
+import com.janknspank.crawler.SiteParser;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Validator;
@@ -247,7 +249,7 @@ public class KeywordFinder {
 
     // Find the best delimiter to split on based on which is more prevalent.
     // E.g. some sites use semicolons, others use commas.
-    String rawKeywords = ArticleCreator.unescape(metaNode.getAttributeValue("content"));
+    String rawKeywords = StringHelper.unescape(metaNode.getAttributeValue("content"));
     String delimiter =
         (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";"))
             ? "," : ";";

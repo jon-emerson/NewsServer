@@ -1,4 +1,4 @@
-package com.janknspank.common;
+package com.janknspank.crawler;
 
 import java.net.MalformedURLException;
 import java.net.URL;

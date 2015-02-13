@@ -7,10 +7,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.janknspank.crawler.SiteParser;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.interpreter.SiteParser;
 
 /**
  * Tests for the site parser.

@@ -1,9 +1,11 @@
-package com.janknspank.common;
+package com.janknspank.crawler;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import com.janknspank.crawler.UrlWhitelist;
 
 public class UrlWhitelistTest {
   @Test

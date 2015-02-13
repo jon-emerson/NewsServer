@@ -1,4 +1,4 @@
-package com.janknspank.interpreter;
+package com.janknspank.nlp;
 
 import java.util.Map;
 import java.util.Set;

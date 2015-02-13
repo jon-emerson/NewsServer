@@ -1,4 +1,4 @@
-package com.janknspank;
+package com.janknspank.crawler;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,23 +16,22 @@ import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Links;
 import com.janknspank.bizness.Urls;
-import com.janknspank.common.ArticleUrlDetector;
 import com.janknspank.common.Asserts;
-import com.janknspank.common.UrlCleaner;
-import com.janknspank.common.UrlWhitelist;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
-import com.janknspank.interpreter.Interpreter;
-import com.janknspank.interpreter.RequiredFieldException;
-import com.janknspank.interpreter.UrlFinder;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
 
+/**
+ * The is the top-most method of the Crawl task.  It creates a bunch of threads
+ * that go and grab articles off of sites, then uses ArticleCreator to interpret
+ * those article documents, then stores the results to the database.
+ */
 public class ArticleCrawler implements Runnable {
   // NOTE(jonemerson): This needs to be 1 if the database is empty.  Or, just
   // run ./rss.sh first!

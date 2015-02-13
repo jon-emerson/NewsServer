@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.janknspank.common.ArticleUrlDetector;
+import com.janknspank.crawler.ArticleUrlDetector;
 
 public class ArticleUrlDetectorTest {
   private static final String[] POSITIVES = {
