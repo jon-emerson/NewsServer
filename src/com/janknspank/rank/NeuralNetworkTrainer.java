@@ -1,7 +1,7 @@
 package com.janknspank.rank;
 
 import java.util.Collection;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -68,12 +68,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   }
 
   /**
-   * Generate DataSet to train neural network from a list of
-   * URLRatings.
-   * @param ratings
+   * Generate DataSet to train neural network from a list of UrlRatings.
    * @return DataSet of training data
-   * @throws BiznessException 
-   * @throws DatabaseSchemaException 
    */
   private static DataSet generateTrainingDataSet(Iterable<UrlRating> ratings) 
       throws BiznessException, DatabaseSchemaException {
@@ -92,12 +88,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
 
     // Load up all articles that have ratings
-    Collection<Article> articles = ArticleCrawler.getArticles(urlStrings).values();
-    Map<String, Article> urlArticleMap = Maps.newHashMap();
-    for (Article article: articles) {
-      urlArticleMap.put(article.getUrl(), article);
-    }
-
+    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings);
+    
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
@@ -109,7 +101,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       if (article != null & user != null) {
         double[] input =
             NeuralNetworkScorer.generateInputNodes(user, article);
-        double[] output = new double[]{rating.getRating()};
+        double[] output = new double[] { rating.getRating() };
         DataSetRow row = new DataSetRow(input, output);
         trainingSet.addRow(row);
       }
@@ -119,13 +111,31 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   }
 
   /**
-   * Generate a training data set for a specific user
-   * and their article ratings. This is used by Jon's Benchmark
-   * @param user
-   * @param ratings
+   * Generate a training data set from JonsBenchmark. Note this uses only the percentage
+   * of the benchmark that is not in the training holdback.
    * @return DataSet of training data
    */
-  private static DataSet generateTrainingDataSet(User user, Hashtable<Article, Double> ratings) {
+  private static DataSet generateJonsTrainingDataSet() 
+      throws DatabaseSchemaException, BiznessException {
+    User user = Users.getByEmail("panaceaa@gmail.com");
+    if (user == null) {
+      throw new Error("User panaceaa@gmail.com does not exist.");
+    }
+
+    HashMap<Article, Double> ratings = new HashMap<>();
+    for (Article article : ArticleCrawler.getArticles(JonBenchmark.BAD_URLS).values()) {
+      // If the article isn't in the holdback, use it for training.
+      if (!isInTrainingHoldback(article)) {
+        ratings.put(article, 0.0);
+      }
+    }
+    for (Article article : ArticleCrawler.getArticles(JonBenchmark.GOOD_URLS).values()) {
+      // If the article isn't in the holdback, use it for training.
+      if (!isInTrainingHoldback(article)) {
+        ratings.put(article, 1.0);
+      }
+    }
+
     // Create training set.
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
@@ -161,8 +171,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   /**
    * Returns if an article should be excluded from use in
    * training the neural network. Articles are excluded so
-   * they can be used as a benchmark against the quality of the scorer 
-   * @param article
+   * they can be used as a benchmark to determine the quality of the scorer.
    * @return true if should be excluded from training
    */
   static boolean isInTrainingHoldback(Article article) {
@@ -172,34 +181,18 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     return false;
   }
 
-  /** Helper method for triggering a train. 
+  /** 
+   * Helper method for triggering a train. 
    * run ./trainneuralnet.sh to execute
    * */
   public static void main(String args[]) throws Exception {
     // Train against Jon's Benchmarks
-    User user = Users.getByEmail("panaceaa@gmail.com");
-    if (user == null) {
-      throw new Error("User panaceaa@gmail.com does not exist.");
-    }
-
-    Hashtable<Article, Double> ratings = new Hashtable<>();
-    for (Article article : ArticleCrawler.getArticles(JonBenchmark.BAD_URLS).values()) {
-      // If the article isn't in the holdback, use it for training.
-      if (!isInTrainingHoldback(article)) {
-        ratings.put(article, 0.0);
-      }
-    }
-    for (Article article : ArticleCrawler.getArticles(JonBenchmark.GOOD_URLS).values()) {
-      // If the article isn't in the holdback, use it for training.
-      if (!isInTrainingHoldback(article)) {
-        ratings.put(article, 1.0);
-      }
-    }
-
-    DataSet jonBenchmarkDataSet = generateTrainingDataSet(user, ratings);
+    DataSet jonBenchmarkDataSet = generateJonsTrainingDataSet();
 
     // Train against User URL Ratings
     DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
+    
+    // Combine the two training sets
     for (DataSetRow row : jonBenchmarkDataSet.getRows()) {
       userRatingsDataSet.addRow(row);
     }

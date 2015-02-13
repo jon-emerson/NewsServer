@@ -5,9 +5,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
-import com.google.api.client.repackaged.com.google.common.base.Joiner;
 import com.google.api.client.util.Sets;
+import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -22,6 +23,8 @@ import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class UserRatingsBenchmark {
+  private final static Logger LOG = Logger.getLogger(UserRatingsBenchmark.class.getName());
+
   /**
    * Generates ranking scores for every article-user pair passed
    * in the list of UrlRatings. This is used to determine the
@@ -32,7 +35,7 @@ public class UserRatingsBenchmark {
    * @throws BiznessException
    * @throws DatabaseSchemaException
    */
-  public static Map<UrlRating, Double> spotterScoresFor(Iterable<UrlRating> allRatings, 
+  public static Map<UrlRating, Double> calculateScoresFor(Iterable<UrlRating> allRatings, 
       Scorer scorer) throws BiznessException, DatabaseSchemaException {
     Map<UrlRating, Double> scoreMap = Maps.newHashMap();
 
@@ -58,7 +61,7 @@ public class UserRatingsBenchmark {
     }
 
     // Compute scores
-    for (UrlRating urlRating: allRatings) {
+    for (UrlRating urlRating : allRatings) {
       Article article = urlArticleMap.get(urlRating.getUrl());
       User user = emailUserMap.get(urlRating.getEmail());
 
@@ -67,6 +70,13 @@ public class UserRatingsBenchmark {
         // to train the neural network.
         if (NeuralNetworkTrainer.isInTrainingHoldback(article)) {
           scoreMap.put(urlRating, scorer.getScore(user, article));
+        }
+      } else {
+        if (article == null) {
+          LOG.warning("Can't find Article to score: " + urlRating.getUrl());
+        }
+        if (user == null) {
+          LOG.warning("Can't find User to score: " + urlRating.getEmail());
         }
       }
     }
@@ -77,13 +87,13 @@ public class UserRatingsBenchmark {
    * Prints out a performance score (aka a "grade") for how well the Scorer did
    * at creating scores compared to user ratings.
    */
-  public static void grade(Map<UrlRating, Double> spotterScores) {
+  public static void grade(Map<UrlRating, Double> scores) {
     int positives = 0;
     int falseNegatives = 0;
     int negatives = 0;
     int falsePositives = 0;
     List<String> falseNegativesUrls = new ArrayList<>();
-    for (Map.Entry<UrlRating, Double> entry : spotterScores.entrySet()) {
+    for (Map.Entry<UrlRating, Double> entry : scores.entrySet()) {
       double spotterScore = entry.getValue();
       UrlRating userUrlRating = entry.getKey();
       
@@ -105,7 +115,7 @@ public class UserRatingsBenchmark {
     System.out.println("Negatives: " + negatives + " (GOOD!)");
     System.out.println("Percent correct: " +
         (int) (100 * (((double) positives + negatives)
-            / (spotterScores.size()))) + "%");
+            / (scores.size()))) + "%");
     System.out.println("False negative urls:");
     for (int i = 0; i < falseNegativesUrls.size(); i++) {
       System.out.println("  " + falseNegativesUrls.get(i));
@@ -163,13 +173,13 @@ public class UserRatingsBenchmark {
   public static void main(String args[]) throws Exception {
     Iterable<UrlRating> allRatings = UrlRatings.getAllRatings();
     Map<UrlRating, Double> spotterScores = 
-        spotterScoresFor(allRatings, NeuralNetworkScorer.getInstance());
+        calculateScoresFor(allRatings, NeuralNetworkScorer.getInstance());
     System.out.println("\nNEURAL NETWORK SCORER:");
     printHistogram(spotterScores);
     grade(spotterScores);
 
     spotterScores = 
-        spotterScoresFor(allRatings, NeuralNetworkScorer.getInstance());
+        calculateScoresFor(allRatings, NeuralNetworkScorer.getInstance());
     System.out.println("\nHEURISTIC SCORER:");
     printHistogram(spotterScores);
     grade(spotterScores);
