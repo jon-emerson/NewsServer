@@ -32,7 +32,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     return response;
   }
 
-  private JSONObject serialize(Article article) {
+  protected JSONObject serialize(Article article) {
     JSONObject articleJson = Serializer.toJSON(article);
     List<String> paragraphs = article.getParagraphList();
     articleJson.put("first_3_paragraphs", toJsonArray(

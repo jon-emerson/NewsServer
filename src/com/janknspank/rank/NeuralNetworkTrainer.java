@@ -1,7 +1,9 @@
 package com.janknspank.rank;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
@@ -15,12 +17,19 @@ import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Users;
 import com.janknspank.crawler.ArticleCrawler;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
+  private final static Logger LOG = Logger.getLogger(NeuralNetworkTrainer.class.getName());
   private static int MAX_ITERATIONS = 100000;
   private Double[] lowestErrorNetworkWeights;
   private double lowestError = 1.0;
@@ -59,7 +68,81 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     return neuralNetwork;
   }
 
-  private static DataSet generateTrainingDataSet(User user, Hashtable<Article, Double> ratings) {
+  /**
+   * Generate DataSet to train neural network from a list of UrlRatings.
+   * @return DataSet of training data
+   */
+  private static DataSet generateTrainingDataSet(Iterable<UrlRating> ratings) 
+      throws BiznessException, DatabaseSchemaException {
+    Set<String> urlStrings = Sets.newHashSet();
+    Set<String> userEmails = Sets.newHashSet();
+    for (UrlRating urlRating : ratings) {
+      urlStrings.add(urlRating.getUrl());
+      userEmails.add(urlRating.getEmail());
+    }
+
+    // Load up all users who submitted ratings
+    Iterable<User> users = Users.getByEmails(userEmails);
+    Map<String, User> emailUserMap = Maps.newHashMap();
+    for (User user : users) {
+      emailUserMap.put(user.getEmail(), user);
+    }
+
+    // Load up all articles that have ratings
+    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings);
+    
+    DataSet trainingSet = new DataSet(
+        NeuralNetworkScorer.INPUT_NODES_COUNT,
+        NeuralNetworkScorer.OUTPUT_NODES_COUNT);
+
+    for (UrlRating rating : ratings) {
+      User user = emailUserMap.get(rating.getEmail());
+      Article article = urlArticleMap.get(rating.getUrl());
+
+      // A user rating may outlive any particular Article or User
+      // in our system. So check to see that they exist before scoring
+      if (article == null) {
+        LOG.warning("Can't find Article to score: " + rating.getUrl());
+      } else if (user == null) {
+        LOG.warning("Can't find User to score: " + rating.getEmail());
+      } else {
+        double[] input =
+            NeuralNetworkScorer.generateInputNodes(user, article);
+        double[] output = new double[] { rating.getRating() };
+        DataSetRow row = new DataSetRow(input, output);
+        trainingSet.addRow(row);
+      }
+    }
+
+    return trainingSet;
+  }
+
+  /**
+   * Generate a training data set from JonsBenchmark. Note this uses only the percentage
+   * of the benchmark that is not in the training holdback.
+   * @return DataSet of training data
+   */
+  private static DataSet generateJonsTrainingDataSet() 
+      throws DatabaseSchemaException, BiznessException {
+    User user = Users.getByEmail("panaceaa@gmail.com");
+    if (user == null) {
+      throw new Error("User panaceaa@gmail.com does not exist.");
+    }
+
+    HashMap<Article, Double> ratings = new HashMap<>();
+    for (Article article : ArticleCrawler.getArticles(JonBenchmark.BAD_URLS).values()) {
+      // If the article isn't in the holdback, use it for training.
+      if (!isInTrainingHoldback(article)) {
+        ratings.put(article, 0.0);
+      }
+    }
+    for (Article article : ArticleCrawler.getArticles(JonBenchmark.GOOD_URLS).values()) {
+      // If the article isn't in the holdback, use it for training.
+      if (!isInTrainingHoldback(article)) {
+        ratings.put(article, 1.0);
+      }
+    }
+
     // Create training set.
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
@@ -92,32 +175,37 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
   }
 
-  /** Helper method for triggering a train. 
+  /**
+   * Returns if an article should be excluded from use in
+   * training the neural network. Articles are excluded so
+   * they can be used as a benchmark to determine the quality of the scorer.
+   * @return true if should be excluded from training
+   */
+  static boolean isInTrainingHoldback(Article article) {
+    if (article.getUrl().hashCode() % 5 == 0) {
+      return true;
+    }
+    return false;
+  }
+
+  /** 
+   * Helper method for triggering a train. 
    * run ./trainneuralnet.sh to execute
    * */
   public static void main(String args[]) throws Exception {
     // Train against Jon's Benchmarks
-    User user = Users.getByEmail("panaceaa@gmail.com");
-    if (user == null) {
-      throw new Error("User panaceaa@gmail.com does not exist.");
-    }
+    DataSet jonBenchmarkDataSet = generateJonsTrainingDataSet();
 
-    Hashtable<Article, Double> ratings = new Hashtable<>();
-    for (Article article : ArticleCrawler.getArticles(JonBenchmark.BAD_URLS).values()) {
-      // If the article isn't in the holdback, use it for training.
-      if (!JonBenchmark.isInTrainingHoldback(article)) {
-        ratings.put(article, 0.0);
-      }
-    }
-    for (Article article : ArticleCrawler.getArticles(JonBenchmark.GOOD_URLS).values()) {
-      // If the article isn't in the holdback, use it for training.
-      if (!JonBenchmark.isInTrainingHoldback(article)) {
-        ratings.put(article, 1.0);
-      }
+    // Train against User URL Ratings
+    DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
+
+    // Combine the two training sets
+    for (DataSetRow row : jonBenchmarkDataSet.getRows()) {
+      userRatingsDataSet.addRow(row);
     }
 
     NeuralNetwork<BackPropagation> neuralNetwork =
-        new NeuralNetworkTrainer().generateTrainedNetwork(generateTrainingDataSet(user, ratings));
+        new NeuralNetworkTrainer().generateTrainedNetwork(userRatingsDataSet);
     neuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
   }
 }

@@ -16,12 +16,11 @@ import com.google.common.base.Charsets;
 import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
 
-public class Benchmark {
+public class IndustryBenchmark {
   /**
-   * Runs the IndustryClassifier against a set of files.
-   * @param industryCode
-   * @throws DataInternalException
-   * @throws IOException
+   * Runs the IndustryClassifier against articles within
+   * a /benchmarks folder for a specific feature and output
+   * quality scores for the feature against the benchmark
    */
   public static void benchmark(int rawFeatureId) throws ClassifierException {
     FeatureId featureId = FeatureId.fromId(rawFeatureId);
@@ -68,24 +67,20 @@ public class Benchmark {
 
   private static void analyzeClassifications(
       Map<Article, Double> goods, Map<Article, Double> bads, Feature feature) {
-//    int articlesCount25percent = (int)(Math.ceil(totalArticleCount * 0.25));
     double minSimilarity = Double.MAX_VALUE;
     double maxSimilarity = Double.MIN_VALUE;
 
     // Get the top 25% and bottom 25% the articles
     TopList<Article, Double> topArticles = new TopList<>(goods.size() + bads.size());
-//    TopList<Article, Double> bottomArticles = new TopList<>(articlesCount25percent);
     for (Map.Entry<Article, Double> entry : goods.entrySet()) {
       double score = entry.getValue();
       topArticles.add(entry.getKey(), score);
-//      bottomArticles.add(entry.getKey(), score * -1);
       maxSimilarity = Math.max(maxSimilarity, score);
       minSimilarity = Math.min(minSimilarity, score);
     }
     for (Map.Entry<Article, Double> entry : bads.entrySet()) {
       double score = entry.getValue();
       topArticles.add(entry.getKey(), score);
-//      bottomArticles.add(entry.getKey(), score * -1);
       maxSimilarity = Math.max(maxSimilarity, score);
       minSimilarity = Math.min(minSimilarity, score);
     }
@@ -163,27 +158,6 @@ public class Benchmark {
   }
 
   /**
-   * For debugging each industry vector
-   */
-//  private static void printIndustryVectorToFile(IndustryCode industryCode, String path) {
-//    IndustryClassifier classifier = IndustryClassifier.getInstance();
-//    IndustryVector industryVector = classifier.getIndustryVector(industryCode);
-//    File file = new File(path);
-//    FileWriter writer = null;
-//    PrintWriter out = null;
-//    try {
-//      writer = new FileWriter(file, true);
-//      out = new PrintWriter(writer);
-//      out.println(industryVector);
-//    } catch (IOException e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    } finally {
-//      out.close();
-//    }
-//  }
-
-  /**
    * Returns a decent filename for storing information about the passed article.
    * An extension is not added - that's for the caller to do based on what's
    * being stored.
@@ -222,26 +196,7 @@ public class Benchmark {
   }
 
   /**
-   * For debugging each document vector
-   */
-//  private static void printDocumentVectorToFile(DocumentVector vector, String path) {
-//    File file = new File(path);
-//    FileWriter writer = null;
-//    PrintWriter out = null;
-//    try {
-//      writer = new FileWriter(file, true);
-//      out = new PrintWriter(writer);
-//      out.println(vector);
-//    } catch (IOException e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    } finally {
-//      out.close();
-//    }
-//  }
-
-  /**
-   * Called by benchmark.sh.
+   * Called by industrybenchmark.sh.
    * @param args an array of industry code Ids (ex. 6 for Internet) to benchmark
    */
   public static void main(String[] args) throws Exception {
