@@ -116,13 +116,6 @@ public class UserHelper {
   }
   
   public JSONArray getRatingsJsonArray() throws DatabaseSchemaException {
-    JSONArray jsonArray = new JSONArray();
-    for (UrlRating rating : UrlRatings.getForUser(user)) {
-      JSONObject o = new JSONObject();
-      o.put("url", rating.getUrl());
-      o.put("rating", rating.getRating());
-      jsonArray.put(o);
-    }
-    return jsonArray;
+    return Serializer.toJSON(UrlRatings.getForUser(user));
   }
 }

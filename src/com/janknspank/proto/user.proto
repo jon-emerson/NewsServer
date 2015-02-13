@@ -105,14 +105,16 @@ message UrlRating {
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
     (string_length) = 24,
-    (string_charset) = LATIN1
+    (string_charset) = LATIN1,
+    (client_serialization) = EXCLUDE
   ];
 
   optional string email = 2 [
     (required) = YES,
     (storage_method) = INDEX,
     (string_length) = 100,
-    (string_charset) = LATIN1
+    (string_charset) = LATIN1,
+    (client_serialization) = EXCLUDE
   ];
 
   optional string url = 3 [
@@ -127,7 +129,8 @@ message UrlRating {
   ];
 
   optional int64 create_time = 5 [
-    (required) = YES
+    (required) = YES,
+    (client_serialization) = EXCLUDE
   ];
 }
 
