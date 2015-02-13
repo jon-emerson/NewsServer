@@ -1,6 +1,7 @@
 package com.janknspank.crawler;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,6 +31,7 @@ import com.janknspank.proto.CoreProto.Url;
  * database as possible.
  */
 public class UrlCrawler {
+  private static final Logger LOG = Logger.getLogger(UrlCrawler.class.getName());
   private final Fetcher fetcher = new Fetcher();
   private static final Iterable<String> WEBSITES = Iterables.concat(
       Iterables.transform(UrlWhitelist.WHITELIST, new Function<String, String>() {
@@ -215,7 +217,7 @@ public class UrlCrawler {
   public static void main(String args[]) throws Exception {
     UrlCrawler crawler = new UrlCrawler();
     for (String website : WEBSITES) {
-      System.out.println("***** WEBSITE: " + website);
+      LOG.info("WEBSITE: " + website);
       Urls.put(
           Iterables.transform(
               Iterables.filter(
@@ -225,7 +227,7 @@ public class UrlCrawler {
           website, false /* isTweet */);
     }
     for (String rssUrl : RSS_URLS) {
-      System.out.println("***** RSS FILE: " + rssUrl);
+      LOG.info("RSS FILE: " + rssUrl);
       crawler.crawl(rssUrl);
     }
   }

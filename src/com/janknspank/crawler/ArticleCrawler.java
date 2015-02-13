@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -33,6 +34,8 @@ import com.janknspank.proto.CoreProto.Url;
  * those article documents, then stores the results to the database.
  */
 public class ArticleCrawler implements Runnable {
+  private static final Logger LOG = Logger.getLogger(ArticleCrawler.class.getName());
+
   // NOTE(jonemerson): This needs to be 1 if the database is empty.  Or, just
   // run ./rss.sh first!
   public static final int THREAD_COUNT = 20;
@@ -111,7 +114,7 @@ public class ArticleCrawler implements Runnable {
         // It could be that some other process decided to steal this article
         // and process it first (mainly due to human error).  If so, delete
         // everything and store it again.
-        System.out.println("Handling human error: " + url.getUrl());
+        LOG.severe("Handling human error: " + url.getUrl());
         Database.with(Article.class).delete(url.getId());
         Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
 

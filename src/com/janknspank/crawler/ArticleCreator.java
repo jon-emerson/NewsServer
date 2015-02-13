@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +40,7 @@ import com.janknspank.proto.ArticleProto.SocialEngagement;
  * classification features, plus Facebook / other social engagement scores.
  */
 class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
+  private static final Logger LOG = Logger.getLogger(ArticleCreator.class.getName());
   private static LoadingCache<DocumentNode, Iterable<String>> PARAGRAPH_CACHE =
       CacheBuilder.newBuilder()
           .maximumSize(10)
@@ -407,8 +409,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     for (Node paragraphNode : SiteParser.getParagraphNodes(documentNode)) {
       String text = StringHelper.unescape(paragraphNode.getFlattenedText()).trim();
       if (text.length() > MAX_PARAGRAPH_LENGTH) {
-        System.out.println("Warning: Trimming paragraph text on " +
-            documentNode.getUrl());
+        LOG.warning("Trimming paragraph text on " + documentNode.getUrl());
         text = text.substring(0, MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
       }
       if (text.length() > 0) {

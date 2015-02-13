@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
 
@@ -22,6 +23,7 @@ import com.restfb.json.JsonException;
 import com.restfb.json.JsonObject;
 
 public class FacebookData {
+  private static final Logger LOG = Logger.getLogger(FacebookData.class.getName());
   private static FacebookClient __facebookClient = null;
 
   public static SocialEngagement getEngagementForURL(ArticleOrBuilder article) throws FacebookException {
@@ -32,7 +34,7 @@ public class FacebookData {
       try {
         encodedURL = URLEncoder.encode(url, "UTF-8");
       } catch (UnsupportedEncodingException e) {
-        System.out.println("Can't encode url: " + url);
+        LOG.warning("Can't encode url: " + url);
         encodedURL = url;
       }
       JsonObject urlObject = getFacebookClient().fetchObject(encodedURL, JsonObject.class);

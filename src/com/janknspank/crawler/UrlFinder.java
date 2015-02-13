@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.google.common.collect.Lists;
 import com.janknspank.dom.parser.DocumentBuilder;
@@ -17,6 +18,7 @@ import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 
 public class UrlFinder {
+  private static final Logger LOG = Logger.getLogger(UrlFinder.class.getName());
   private static final Fetcher FETCHER = new Fetcher();
 
   /**
@@ -60,7 +62,7 @@ public class UrlFinder {
             urlList.add(resolvedUrl);
           }
         } catch (MalformedURLException e) {
-          System.out.println("Bad relative URL: " + linkNode.getAttributeValue("href"));
+          LOG.info("Bad relative URL: " + linkNode.getAttributeValue("href"));
         }
       }
     }

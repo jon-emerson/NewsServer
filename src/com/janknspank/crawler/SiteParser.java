@@ -235,35 +235,6 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
     }
   }
 
-  private static void printSpacePrefix(int depth) {
-    for (int i = 0; i < depth; i ++) {
-      System.out.print("  ");
-    }
-  }
-
-  /**
-   * Helper function for pretty printing a site's DOM to System.out.
-   */
-  @SuppressWarnings("unused")
-  private static void printNode(Node node, int depth) {
-    // Print {@code node}.
-    printSpacePrefix(depth);
-    System.out.println(node.toString());
-
-    // Iterate {@code node}'s children, unless they're <script> or <style> text.
-    if (!"script".equalsIgnoreCase(node.getTagName()) &&
-        !"style".equalsIgnoreCase(node.getTagName())) {
-      for (int i = 0; i < node.getChildCount(); i++) {
-        if (node.isChildTextNode(i)) {
-          printSpacePrefix(depth + 1);
-          System.out.println("TEXT: \"" + node.getChildText(i) + "\"");
-        } else {
-          printNode(node.getChildNode(i), depth + 1);
-        }
-      }
-    }
-  }
-
   /**
    * Returns Nodes for all the paragraph / header / quote / etc content within
    * an article's web page.

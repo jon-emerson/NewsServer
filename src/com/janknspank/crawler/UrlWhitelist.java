@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.apache.http.NameValuePair;
@@ -24,6 +25,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Url;
 
 public class UrlWhitelist {
+  private static final Logger LOG = Logger.getLogger(UrlWhitelist.class.getName());
   public static final Predicate<String> PREDICATE = new Predicate<String>() {
     @Override
     public boolean apply(String url) {
@@ -716,12 +718,12 @@ public class UrlWhitelist {
   private static void deleteUrlMap(Map<String, String> urlsToDelete) throws DatabaseSchemaException {
     List<String> ids = Lists.newArrayList();
     for (Map.Entry<String, String> urlToDelete : urlsToDelete.entrySet()) {
-      System.out.println("Deleting url: " + urlToDelete.getKey());
+      LOG.info("Deleting url: " + urlToDelete.getKey());
       ids.add(urlToDelete.getValue());
     }
-    System.out.println("Deleted " + Database.with(Article.class).delete(ids) + " articles");
-    System.out.println("Deleted " + Links.deleteIds(ids) + " links");
-    System.out.println("Deleted " + Database.with(Url.class).delete(ids) + " urls");
+    LOG.info("Deleted " + Database.with(Article.class).delete(ids) + " articles");
+    LOG.info("Deleted " + Links.deleteIds(ids) + " links");
+    LOG.info("Deleted " + Database.with(Url.class).delete(ids) + " urls");
   }
 }
 

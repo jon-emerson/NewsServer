@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -35,6 +36,7 @@ import com.janknspank.database.QueryOption.WhereNotNull;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 public class SqlCollection<T extends Message> extends Collection<T> {
+  private static final Logger LOG = Logger.getLogger(SqlCollection.class.getName());
   private static final String PROTO_COLUMN_NAME = "proto";
   private Connection __connection; // DO NOT USE THIS DIRECTLY!!
 
@@ -60,7 +62,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
       throw new DatabaseSchemaException(
           "Could not create table " + clazz.getSimpleName() + ": " + e.getMessage(), e);
     }
-    System.out.println("Table created: " + getTableName());
+    LOG.info("Table created: " + getTableName());
   }
 
   private String getSqlTypeForField(FieldDescriptor fieldDescriptor)
@@ -246,7 +248,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     }
     sql.append(")");
 
-    System.out.println(sql.toString());
+    LOG.fine(sql.toString());
 
     // Prepare the statement!
     return getConnection().prepareStatement(sql.toString());
@@ -331,7 +333,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     sql.append(PROTO_COLUMN_NAME + "=?");
     sql.append(getWhereClauseSql(whereOptions));
 
-    System.out.println(sql.toString());
+    LOG.fine(sql.toString());
 
     return getConnection().prepareStatement(sql.toString());
   }

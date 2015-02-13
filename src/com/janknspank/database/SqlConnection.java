@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 
 public class SqlConnection {
+  private static final Logger LOG = Logger.getLogger(SqlConnection.class.getName());
+
   // JDBC driver name and database URL
   private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
   private static final String DB_URL =
@@ -43,14 +46,14 @@ public class SqlConnection {
 
   static synchronized Connection getConnection() throws DatabaseSchemaException {
     if (connection == null) {
-      System.out.println("Connecting to remote database...");
+      LOG.info("Connecting to remote database...");
       try {
         connection = DriverManager.getConnection(DB_URL, MYSQL_USER, MYSQL_PASSWORD);
       } catch (SQLException e) {
         e.printStackTrace();
         throw new DatabaseSchemaException("Could not connect to database: " + e.getMessage(), e);
       }
-      System.out.println("Connected to remote database successfully.");
+      LOG.info("Connected to remote database successfully.");
     }
     return connection;
   }
