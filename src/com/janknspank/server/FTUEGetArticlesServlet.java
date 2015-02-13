@@ -24,6 +24,7 @@ import com.janknspank.proto.UserProto.Intent;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.HeuristicScorer;
 
+@AuthenticationRequired
 public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
   private static final Logger LOG = new Logger(FTUEGetArticlesServlet.class);
 

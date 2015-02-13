@@ -11358,41 +11358,41 @@ public final class UserProto {
       "st\030\020 \003(\0132\t.Interest\022\027\n\006intent\030\021 \003(\0132\007.In" +
       "tent*\004\010\006\020\007:\020\212\265\030\014MongoDB.User\"B\n\013AddressB" +
       "ook\022\030\n\004data\030\001 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_" +
-      "time\030\002 \001(\003B\004\210\246\035\001\"\260\001\n\tUrlRating\022\034\n\002id\030\001 \001",
-      "(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\037\n\005email\030\002 \001(\tB\020\210\246\035" +
-      "\001\220\246\035\003\230\246\035d\250\246\035\001\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377" +
-      "\005\250\246\035\001\022\024\n\006rating\030\004 \001(\001B\004\210\246\035\001\022\031\n\013create_ti" +
-      "me\030\005 \001(\003B\004\210\246\035\001:\023\212\265\030\017MySQL.UrlRating\"N\n\013U" +
-      "rlFavorite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
-      "\250\246\035\001\022\035\n\013create_time\030\002 \001(\003B\010\220\246\035\005\210\246\035\001\"\325\002\n\014" +
-      "UserIndustry\022\"\n\020industry_code_id\030\001 \001(\005B\010" +
-      "\210\246\035\001\220\246\035\003\022*\n\006source\030\002 \001(\0162\024.UserIndustry." +
-      "SourceB\004\210\246\035\001\0226\n\014relationship\030\003 \001(\0162\032.Use" +
-      "rIndustry.RelationshipB\004\210\246\035\001\022\031\n\013create_t",
-      "ime\030\004 \001(\003B\004\210\246\035\001\"L\n\006Source\022\022\n\016UNKNOWN_SOU" +
-      "RCE\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\025\n\021LINKED" +
-      "_IN_PROFILE\020\003\"T\n\014Relationship\022\030\n\024UNKNOWN" +
-      "_RELATIONSHIP\020\000\022\024\n\020CURRENT_INDUSTRY\020\001\022\024\n" +
-      "\020DESIRED_INDUSTRY\020\002\"\226\002\n\010Interest\022\034\n\002id\030\001" +
-      " \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB" +
-      "\014\210\246\035\001\220\246\035\003\230\246\035d\022&\n\006source\030\003 \001(\0162\020.Interest" +
-      ".SourceB\004\210\246\035\001\022\026\n\004type\030\004 \001(\tB\010\230\246\035\005\250\246\035\001\022\031\n" +
-      "\013create_time\030\005 \001(\003B\004\210\246\035\001\"r\n\006Source\022\013\n\007UN" +
-      "KNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE\020\002\022\020\n\014ADDR",
-      "ESS_BOOK\020\003\022\031\n\025LINKED_IN_CONNECTIONS\020\004\022\025\n" +
-      "\021LINKED_IN_PROFILE\020\005\"C\n\006Intent\022\036\n\004code\030\001" +
-      " \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\002 " +
-      "\001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfile\0223\n\020current" +
-      "_employer\030\001 \001(\0132\031.LinkedInProfile.Employ" +
-      "er\0220\n\rpast_employer\030\002 \003(\0132\031.LinkedInProf" +
-      "ile.Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031" +
-      "\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z\n\010Employer\022\026\n" +
-      "\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246" +
-      "\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart",
-      "_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\"J\n\023LinkedI" +
-      "nConnections\022\030\n\004data\030\002 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\031" +
-      "\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!\n\024com.janknsp" +
-      "ank.protoB\tUserProto"
+      "time\030\002 \001(\003B\004\210\246\035\001\"\274\001\n\tUrlRating\022 \n\002id\030\001 \001",
+      "(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB" +
+      "\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001" +
+      "\220\246\035\003\230\246\035\377\005\250\246\035\001\022\024\n\006rating\030\004 \001(\001B\004\210\246\035\001\022\035\n\013c" +
+      "reate_time\030\005 \001(\003B\010\210\246\035\001\240\246\035\003:\023\212\265\030\017MySQL.Ur" +
+      "lRating\"N\n\013UrlFavorite\022 \n\006url_id\030\001 \001(\tB\020" +
+      "\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\035\n\013create_time\030\002 \001(\003B\010\220" +
+      "\246\035\005\210\246\035\001\"\325\002\n\014UserIndustry\022\"\n\020industry_cod" +
+      "e_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022*\n\006source\030\002 \001(\0162\024.U" +
+      "serIndustry.SourceB\004\210\246\035\001\0226\n\014relationship" +
+      "\030\003 \001(\0162\032.UserIndustry.RelationshipB\004\210\246\035\001",
+      "\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\"L\n\006Source\022\022\n" +
+      "\016UNKNOWN_SOURCE\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTONE" +
+      "\020\002\022\025\n\021LINKED_IN_PROFILE\020\003\"T\n\014Relationshi" +
+      "p\022\030\n\024UNKNOWN_RELATIONSHIP\020\000\022\024\n\020CURRENT_I" +
+      "NDUSTRY\020\001\022\024\n\020DESIRED_INDUSTRY\020\002\"\226\002\n\010Inte" +
+      "rest\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007ke" +
+      "yword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022&\n\006source\030\003 \001(" +
+      "\0162\020.Interest.SourceB\004\210\246\035\001\022\026\n\004type\030\004 \001(\tB" +
+      "\010\230\246\035\005\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001\"r\n\006" +
+      "Source\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\r\n\tTOMBSTO",
+      "NE\020\002\022\020\n\014ADDRESS_BOOK\020\003\022\031\n\025LINKED_IN_CONN" +
+      "ECTIONS\020\004\022\025\n\021LINKED_IN_PROFILE\020\005\"C\n\006Inte" +
+      "nt\022\036\n\004code\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\013cr" +
+      "eate_time\030\002 \001(\003B\004\210\246\035\001\"\251\002\n\017LinkedInProfil" +
+      "e\0223\n\020current_employer\030\001 \001(\0132\031.LinkedInPr" +
+      "ofile.Employer\0220\n\rpast_employer\030\002 \003(\0132\031." +
+      "LinkedInProfile.Employer\022\030\n\004data\030\003 \001(\tB\n" +
+      "\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\004 \001(\003B\004\210\246\035\001\032z\n" +
+      "\010Employer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005tit" +
+      "le\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230",
+      "\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(" +
+      "\003\"J\n\023LinkedInConnections\022\030\n\004data\030\002 \001(\tB\n" +
+      "\210\246\035\001\230\246\035\200\240\006\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001B!\n" +
+      "\024com.janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11489,17 +11489,20 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
