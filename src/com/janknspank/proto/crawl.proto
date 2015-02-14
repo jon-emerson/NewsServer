@@ -61,4 +61,12 @@ message TestInstructions {
   optional UrlWhitelistChecks url_whitelist_checks = 1 [
     (required) = YES
   ];
+
+  message ArticleUrlDetectorChecks {
+    repeated string article_url = 1;
+    repeated string non_article_url = 2;
+  }
+  optional ArticleUrlDetectorChecks article_url_detector_checks = 2 [
+    (required) = YES
+  ];
 }
