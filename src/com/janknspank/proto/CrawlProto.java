@@ -828,6 +828,26 @@ public final class CrawlProto {
      */
     com.janknspank.proto.CrawlProto.ContentSite.PathBlacklistOrBuilder getPathBlacklistOrBuilder(
         int index);
+
+    // repeated string paragraph_selector = 6;
+    /**
+     * <code>repeated string paragraph_selector = 6;</code>
+     */
+    java.util.List<java.lang.String>
+    getParagraphSelectorList();
+    /**
+     * <code>repeated string paragraph_selector = 6;</code>
+     */
+    int getParagraphSelectorCount();
+    /**
+     * <code>repeated string paragraph_selector = 6;</code>
+     */
+    java.lang.String getParagraphSelector(int index);
+    /**
+     * <code>repeated string paragraph_selector = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getParagraphSelectorBytes(int index);
   }
   /**
    * Protobuf type {@code ContentSite}
@@ -917,6 +937,14 @@ public final class CrawlProto {
               pathBlacklist_.add(input.readMessage(com.janknspank.proto.CrawlProto.ContentSite.PathBlacklist.PARSER, extensionRegistry));
               break;
             }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                paragraphSelector_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              paragraphSelector_.add(input.readBytes());
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -936,6 +964,9 @@ public final class CrawlProto {
         }
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           pathBlacklist_ = java.util.Collections.unmodifiableList(pathBlacklist_);
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          paragraphSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(paragraphSelector_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1861,12 +1892,43 @@ public final class CrawlProto {
       return pathBlacklist_.get(index);
     }
 
+    // repeated string paragraph_selector = 6;
+    public static final int PARAGRAPH_SELECTOR_FIELD_NUMBER = 6;
+    private com.google.protobuf.LazyStringList paragraphSelector_;
+    /**
+     * <code>repeated string paragraph_selector = 6;</code>
+     */
+    public java.util.List<java.lang.String>
+        getParagraphSelectorList() {
+      return paragraphSelector_;
+    }
+    /**
+     * <code>repeated string paragraph_selector = 6;</code>
+     */
+    public int getParagraphSelectorCount() {
+      return paragraphSelector_.size();
+    }
+    /**
+     * <code>repeated string paragraph_selector = 6;</code>
+     */
+    public java.lang.String getParagraphSelector(int index) {
+      return paragraphSelector_.get(index);
+    }
+    /**
+     * <code>repeated string paragraph_selector = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getParagraphSelectorBytes(int index) {
+      return paragraphSelector_.getByteString(index);
+    }
+
     private void initFields() {
       rootDomain_ = "";
       akaRootDomain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       startUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       subdomainBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       pathBlacklist_ = java.util.Collections.emptyList();
+      paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1894,6 +1956,9 @@ public final class CrawlProto {
       }
       for (int i = 0; i < pathBlacklist_.size(); i++) {
         output.writeMessage(5, pathBlacklist_.get(i));
+      }
+      for (int i = 0; i < paragraphSelector_.size(); i++) {
+        output.writeBytes(6, paragraphSelector_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1938,6 +2003,15 @@ public final class CrawlProto {
       for (int i = 0; i < pathBlacklist_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, pathBlacklist_.get(i));
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < paragraphSelector_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(paragraphSelector_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getParagraphSelectorList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2070,6 +2144,8 @@ public final class CrawlProto {
         } else {
           pathBlacklistBuilder_.clear();
         }
+        paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -2129,6 +2205,12 @@ public final class CrawlProto {
         } else {
           result.pathBlacklist_ = pathBlacklistBuilder_.build();
         }
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          paragraphSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              paragraphSelector_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.paragraphSelector_ = paragraphSelector_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2205,6 +2287,16 @@ public final class CrawlProto {
               pathBlacklistBuilder_.addAllMessages(other.pathBlacklist_);
             }
           }
+        }
+        if (!other.paragraphSelector_.isEmpty()) {
+          if (paragraphSelector_.isEmpty()) {
+            paragraphSelector_ = other.paragraphSelector_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureParagraphSelectorIsMutable();
+            paragraphSelector_.addAll(other.paragraphSelector_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2922,6 +3014,99 @@ public final class CrawlProto {
         return pathBlacklistBuilder_;
       }
 
+      // repeated string paragraph_selector = 6;
+      private com.google.protobuf.LazyStringList paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureParagraphSelectorIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          paragraphSelector_ = new com.google.protobuf.LazyStringArrayList(paragraphSelector_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public java.util.List<java.lang.String>
+          getParagraphSelectorList() {
+        return java.util.Collections.unmodifiableList(paragraphSelector_);
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public int getParagraphSelectorCount() {
+        return paragraphSelector_.size();
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public java.lang.String getParagraphSelector(int index) {
+        return paragraphSelector_.get(index);
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getParagraphSelectorBytes(int index) {
+        return paragraphSelector_.getByteString(index);
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public Builder setParagraphSelector(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureParagraphSelectorIsMutable();
+        paragraphSelector_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public Builder addParagraphSelector(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureParagraphSelectorIsMutable();
+        paragraphSelector_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public Builder addAllParagraphSelector(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureParagraphSelectorIsMutable();
+        super.addAll(values, paragraphSelector_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public Builder clearParagraphSelector() {
+        paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paragraph_selector = 6;</code>
+       */
+      public Builder addParagraphSelectorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureParagraphSelectorIsMutable();
+        paragraphSelector_.add(value);
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:ContentSite)
     }
 
@@ -2960,17 +3145,18 @@ public final class CrawlProto {
       "\n com/janknspank/proto/crawl.proto\032(com/" +
       "janknspank/database/extensions.proto\"7\n\021" +
       "CrawlInstructions\022\"\n\014content_site\030\001 \003(\0132" +
-      "\014.ContentSite\"\376\002\n\013ContentSite\022\031\n\013root_do" +
+      "\014.ContentSite\"\240\003\n\013ContentSite\022\031\n\013root_do" +
       "main\030\001 \001(\tB\004\210\246\035\001\022\027\n\017aka_root_domain\030\002 \003(" +
       "\t\022\027\n\tstart_url\030\003 \003(\tB\004\210\246\035\001\022\033\n\023subdomain_" +
       "blacklist\030\004 \003(\t\0222\n\016path_blacklist\030\005 \003(\0132" +
-      "\032.ContentSite.PathBlacklist\032\320\001\n\rPathBlac" +
-      "klist\022\024\n\006needle\030\001 \001(\tB\004\210\246\035\001\022B\n\010location\030" +
-      "\004 \001(\0162#.ContentSite.PathBlacklist.Locati",
-      "on:\013STARTS_WITH\"e\n\010Location\022\n\n\006EQUALS\020\001\022" +
-      "\017\n\013STARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTA" +
-      "INS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006B\"" +
-      "\n\024com.janknspank.protoB\nCrawlProto"
+      "\032.ContentSite.PathBlacklist\022 \n\022paragraph" +
+      "_selector\030\006 \003(\tB\004\210\246\035\001\032\320\001\n\rPathBlacklist\022" +
+      "\024\n\006needle\030\001 \001(\tB\004\210\246\035\001\022B\n\010location\030\004 \001(\0162",
+      "#.ContentSite.PathBlacklist.Location:\013ST" +
+      "ARTS_WITH\"e\n\010Location\022\n\n\006EQUALS\020\001\022\017\n\013STA" +
+      "RTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAINS\020\004\022" +
+      "\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006B\"\n\024com." +
+      "janknspank.protoB\nCrawlProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2988,7 +3174,7 @@ public final class CrawlProto {
           internal_static_ContentSite_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ContentSite_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", });
           internal_static_ContentSite_PathBlacklist_descriptor =
             internal_static_ContentSite_descriptor.getNestedTypes().get(0);
           internal_static_ContentSite_PathBlacklist_fieldAccessorTable = new
@@ -2997,6 +3183,7 @@ public final class CrawlProto {
               new java.lang.String[] { "Needle", "Location", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);

@@ -43,4 +43,8 @@ message ContentSite {
     ];
   }
   repeated PathBlacklist path_blacklist = 5;
+
+  repeated string paragraph_selector = 6 [
+    (required) = YES
+  ];
 }

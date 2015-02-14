@@ -7,20 +7,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Throwables;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
+import com.janknspank.proto.CrawlProto.ContentSite;
 
 public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   private static LoadingCache<DocumentNode, List<Node>> CACHE =
@@ -29,173 +26,7 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
           .expireAfterWrite(10, TimeUnit.MINUTES)
           .build(new SiteParser());
 
-  private static final Map<String, String[]> DOMAIN_TO_DOM_ADDRESSES = Maps.newHashMap();
-  static {
-    DOMAIN_TO_DOM_ADDRESSES.put("abc.net.au", new String[] {
-        ".article > p", // DO NOT EXPAND THIS TO .article p, ALL USER COMMENTS GET PULLED!
-        ".story > p", // E.g. http://www.abc.net.au/health/features/stories/2015/02/12/4178721.htm
-        "#story > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("abcnews.go.com", new String[] {
-        "#storyText p",
-        "#innerbody p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("advice.careerbuilder.com", new String[] {
-        ".post-body > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
-        ".text > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("aljazeera.com", new String[] {
-        ".text > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("arstechnica.com", new String[] {
-        ".article-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("allthingsd.com", new String[] {
-        ".article-body > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("bbc.co.uk", new String[] {
-        ".story-body p",
-        ".map-body p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("bbc.com", new String[] {
-        ".story-body > p",
-        ".map-body > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("bdnews24.com", new String[] {
-        ".body > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("bloomberg.com", new String[] {
-        // See "Lawsky Said to Probe Medley Hedge Fund ...".
-        ".article_body > p",
-        // See "... Joins the NYPD Funeral Protest Backlash".
-        ".article-body > p",
-        // Printable pages.
-        "#story_content > p",
-        // See: "Inside RadioShack’s Slow-Motion Collapse".
-        "[itemprop=\"articleBody\"] p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("boston.com", new String[] {
-        "article > p",
-        ".content-text > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("breitbart.com", new String[] {
-        "article > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("buffalonews.com", new String[] {
-        ".articleP p",
-        ".entry-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("businessinsider.com", new String[] {
-        ".post-content p",
-        ".intro-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("businessweek.com", new String[] {
-        "#article_body p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("cbc.ca", new String[] {
-        ".story-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("cbsnews.com", new String[] {
-        "#article-entry p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("channelnewsasia.com", new String[] {
-        ".news_detail p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("chron.com", new String[] {
-        ".article-body p",
-        ".entry p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("cleveland.com", new String[] {
-        ".entry-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("cnbc.com", new String[] {
-        "#article_body p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("cnn.com", new String[] {
-        ".cnnStoryContent p", // Really old articles.
-        ".cnn_storyarea p",
-        "p.cnn_storypgraphtxt",
-        "p.zn-body__paragraph"});
-    DOMAIN_TO_DOM_ADDRESSES.put("curbed.com", new String[] {
-        ".post-body > p",
-        ".post-body > .post-more > p",
-        ".post-body > .quicklink-body > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("default", new String[] {
-        "article > p",
-        "article > div > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("engadget.com", new String[] {
-        ".article-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("fastcompany.com", new String[] {
-        ".article-prose p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("forbes.com", new String[] {
-        ".article_body p",
-        ".article-body p",
-        ".article-content-body p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("fortune.com", new String[] {
-        ".article-body p",
-        ".entry-content p"}); // To work around Javascript-rendered pages.
-    DOMAIN_TO_DOM_ADDRESSES.put("latimes.com", new String[] {
-        ".trb_article_page > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("markets.cbsnews.com", new String[] {
-        ".news-story p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("mashable.com", new String[] {
-        ".article-content p",
-        ".long-card p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("medium.com", new String[] {
-        ".section-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("mercurynews.com", new String[] {
-        ".articleBody > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("money.cnn.com", new String[] {
-        "div#storytext p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("nytimes.com", new String[] {
-        ".articleBody > p",
-        "article > p",
-        "article > div > p",
-        "nyt_text > p",
-        "p.story-body-text",
-        "#mod-a-body-first-para > p",
-        "#mod-a-body-after-first-para > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("pcmag.com", new String[] {
-        ".article-body p",
-        ".blogstory p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("recode.net", new String[] {
-        ".postarea p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("redherring.com", new String[] {
-        ".entry-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("sfexaminer.com", new String[] {
-        "#storyBody > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("sfgate.com", new String[] {
-        ".article-body p",
-        ".entry p",
-        ".post-contents p",
-        "#article-section .entry div"});
-    DOMAIN_TO_DOM_ADDRESSES.put("siliconbeat.com", new String[] {
-        ".post-content > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("slate.com", new String[] {
-        ".body .text"});
-    DOMAIN_TO_DOM_ADDRESSES.put("startupworkout.com", new String[] {
-        ".entry-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("technologyreview.com", new String[] {
-        "section.body p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("thenextweb.com", new String[] {
-        ".entry-content p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("theverge.com", new String[] {
-        "article p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("techcrunch.com", new String[] {
-        ".article-entry > p",
-        ".article-entry > h2"});
-    DOMAIN_TO_DOM_ADDRESSES.put("venturebeat.com", new String[] {
-        ".post-content > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("washingtonpost.com", new String[] {
-        ".row p",
-        "article > p"});
-    DOMAIN_TO_DOM_ADDRESSES.put("wired.com", new String[] {
-        "span[itemprop=\"articleBody\"] div",
-        "span[itemprop=\"articleBody\"] p"});
-  }
-
   private SiteParser() {}
-
-  /**
-   * Normalizes a domain to its "www."- and other subdomain-free self.
-   */
-  public static String getNormalizedDomain(String url) {
-    String domain;
-    try {
-      domain = new URL(url).getHost();
-    } catch (MalformedURLException e) {
-      throw new RuntimeException(e);
-    }
-
-    while (domain.contains(".")) {
-      String[] domAddresses = DOMAIN_TO_DOM_ADDRESSES.get(domain);
-      if (domAddresses != null || StringUtils.countMatches(domain, ".") == 1) {
-        return domain;
-      }
-      domain = domain.substring(domain.indexOf(".") + 1);
-    }
-    return null;
-  }
 
   /**
    * Returns the best set of DOM addresses we currently know about for the given
@@ -203,10 +34,16 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
    * DOMAIN_TO_DOM_ADDRESSES hierarchically through each subdomain until a match
    * is found, or a default set is returned instead.
    */
-  private static String[] getDomAddressesForUrl(String url) {
-    String domain = getNormalizedDomain(url);
-    return DOMAIN_TO_DOM_ADDRESSES.containsKey(domain)
-        ? DOMAIN_TO_DOM_ADDRESSES.get(domain) : DOMAIN_TO_DOM_ADDRESSES.get("default");
+  private static List<String> getDomAddressesForUrl(String url) {
+    try {
+      ContentSite contentSite = UrlWhitelist.getContentSiteForUrl(new URL(url));
+      if (contentSite == null) {
+        throw new IllegalStateException("No content site definition found for URL: " + url);
+      }
+      return contentSite.getParagraphSelectorList();
+    } catch (MalformedURLException e) {
+      throw new IllegalStateException("Bad URL: " + url);
+    }
   }
 
   /**
