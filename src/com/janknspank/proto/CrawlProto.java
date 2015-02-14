@@ -848,6 +848,20 @@ public final class CrawlProto {
      */
     com.google.protobuf.ByteString
         getParagraphSelectorBytes(int index);
+
+    // optional .TestInstructions test_instructions = 7;
+    /**
+     * <code>optional .TestInstructions test_instructions = 7;</code>
+     */
+    boolean hasTestInstructions();
+    /**
+     * <code>optional .TestInstructions test_instructions = 7;</code>
+     */
+    com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions();
+    /**
+     * <code>optional .TestInstructions test_instructions = 7;</code>
+     */
+    com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder();
   }
   /**
    * Protobuf type {@code ContentSite}
@@ -943,6 +957,19 @@ public final class CrawlProto {
                 mutable_bitField0_ |= 0x00000020;
               }
               paragraphSelector_.add(input.readBytes());
+              break;
+            }
+            case 58: {
+              com.janknspank.proto.CrawlProto.TestInstructions.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = testInstructions_.toBuilder();
+              }
+              testInstructions_ = input.readMessage(com.janknspank.proto.CrawlProto.TestInstructions.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(testInstructions_);
+                testInstructions_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
               break;
             }
           }
@@ -1922,6 +1949,28 @@ public final class CrawlProto {
       return paragraphSelector_.getByteString(index);
     }
 
+    // optional .TestInstructions test_instructions = 7;
+    public static final int TEST_INSTRUCTIONS_FIELD_NUMBER = 7;
+    private com.janknspank.proto.CrawlProto.TestInstructions testInstructions_;
+    /**
+     * <code>optional .TestInstructions test_instructions = 7;</code>
+     */
+    public boolean hasTestInstructions() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .TestInstructions test_instructions = 7;</code>
+     */
+    public com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions() {
+      return testInstructions_;
+    }
+    /**
+     * <code>optional .TestInstructions test_instructions = 7;</code>
+     */
+    public com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
+      return testInstructions_;
+    }
+
     private void initFields() {
       rootDomain_ = "";
       akaRootDomain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -1929,6 +1978,7 @@ public final class CrawlProto {
       subdomainBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       pathBlacklist_ = java.util.Collections.emptyList();
       paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1959,6 +2009,9 @@ public final class CrawlProto {
       }
       for (int i = 0; i < paragraphSelector_.size(); i++) {
         output.writeBytes(6, paragraphSelector_.getByteString(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(7, testInstructions_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2012,6 +2065,10 @@ public final class CrawlProto {
         }
         size += dataSize;
         size += 1 * getParagraphSelectorList().size();
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, testInstructions_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2122,6 +2179,7 @@ public final class CrawlProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getPathBlacklistFieldBuilder();
+          getTestInstructionsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2146,6 +2204,12 @@ public final class CrawlProto {
         }
         paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000020);
+        if (testInstructionsBuilder_ == null) {
+          testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+        } else {
+          testInstructionsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2211,6 +2275,14 @@ public final class CrawlProto {
           bitField0_ = (bitField0_ & ~0x00000020);
         }
         result.paragraphSelector_ = paragraphSelector_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (testInstructionsBuilder_ == null) {
+          result.testInstructions_ = testInstructions_;
+        } else {
+          result.testInstructions_ = testInstructionsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2297,6 +2369,9 @@ public final class CrawlProto {
             paragraphSelector_.addAll(other.paragraphSelector_);
           }
           onChanged();
+        }
+        if (other.hasTestInstructions()) {
+          mergeTestInstructions(other.getTestInstructions());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3107,6 +3182,123 @@ public final class CrawlProto {
         return this;
       }
 
+      // optional .TestInstructions test_instructions = 7;
+      private com.janknspank.proto.CrawlProto.TestInstructions testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder> testInstructionsBuilder_;
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      public boolean hasTestInstructions() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      public com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions() {
+        if (testInstructionsBuilder_ == null) {
+          return testInstructions_;
+        } else {
+          return testInstructionsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      public Builder setTestInstructions(com.janknspank.proto.CrawlProto.TestInstructions value) {
+        if (testInstructionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          testInstructions_ = value;
+          onChanged();
+        } else {
+          testInstructionsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      public Builder setTestInstructions(
+          com.janknspank.proto.CrawlProto.TestInstructions.Builder builderForValue) {
+        if (testInstructionsBuilder_ == null) {
+          testInstructions_ = builderForValue.build();
+          onChanged();
+        } else {
+          testInstructionsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      public Builder mergeTestInstructions(com.janknspank.proto.CrawlProto.TestInstructions value) {
+        if (testInstructionsBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              testInstructions_ != com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance()) {
+            testInstructions_ =
+              com.janknspank.proto.CrawlProto.TestInstructions.newBuilder(testInstructions_).mergeFrom(value).buildPartial();
+          } else {
+            testInstructions_ = value;
+          }
+          onChanged();
+        } else {
+          testInstructionsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      public Builder clearTestInstructions() {
+        if (testInstructionsBuilder_ == null) {
+          testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+          onChanged();
+        } else {
+          testInstructionsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      public com.janknspank.proto.CrawlProto.TestInstructions.Builder getTestInstructionsBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getTestInstructionsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      public com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
+        if (testInstructionsBuilder_ != null) {
+          return testInstructionsBuilder_.getMessageOrBuilder();
+        } else {
+          return testInstructions_;
+        }
+      }
+      /**
+       * <code>optional .TestInstructions test_instructions = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder> 
+          getTestInstructionsFieldBuilder() {
+        if (testInstructionsBuilder_ == null) {
+          testInstructionsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder>(
+                  testInstructions_,
+                  getParentForChildren(),
+                  isClean());
+          testInstructions_ = null;
+        }
+        return testInstructionsBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:ContentSite)
     }
 
@@ -3116,6 +3308,1195 @@ public final class CrawlProto {
     }
 
     // @@protoc_insertion_point(class_scope:ContentSite)
+  }
+
+  public interface TestInstructionsOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;
+    /**
+     * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+     */
+    boolean hasUrlWhitelistChecks();
+    /**
+     * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+     */
+    com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks();
+    /**
+     * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+     */
+    com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder();
+  }
+  /**
+   * Protobuf type {@code TestInstructions}
+   */
+  public static final class TestInstructions extends
+      com.google.protobuf.GeneratedMessage
+      implements TestInstructionsOrBuilder {
+    // Use TestInstructions.newBuilder() to construct.
+    private TestInstructions(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TestInstructions(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TestInstructions defaultInstance;
+    public static TestInstructions getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TestInstructions getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TestInstructions(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = urlWhitelistChecks_.toBuilder();
+              }
+              urlWhitelistChecks_ = input.readMessage(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(urlWhitelistChecks_);
+                urlWhitelistChecks_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CrawlProto.TestInstructions.class, com.janknspank.proto.CrawlProto.TestInstructions.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TestInstructions> PARSER =
+        new com.google.protobuf.AbstractParser<TestInstructions>() {
+      public TestInstructions parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TestInstructions(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TestInstructions> getParserForType() {
+      return PARSER;
+    }
+
+    public interface UrlWhitelistChecksOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // repeated string good_url = 1;
+      /**
+       * <code>repeated string good_url = 1;</code>
+       */
+      java.util.List<java.lang.String>
+      getGoodUrlList();
+      /**
+       * <code>repeated string good_url = 1;</code>
+       */
+      int getGoodUrlCount();
+      /**
+       * <code>repeated string good_url = 1;</code>
+       */
+      java.lang.String getGoodUrl(int index);
+      /**
+       * <code>repeated string good_url = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getGoodUrlBytes(int index);
+
+      // repeated string bad_url = 2;
+      /**
+       * <code>repeated string bad_url = 2;</code>
+       */
+      java.util.List<java.lang.String>
+      getBadUrlList();
+      /**
+       * <code>repeated string bad_url = 2;</code>
+       */
+      int getBadUrlCount();
+      /**
+       * <code>repeated string bad_url = 2;</code>
+       */
+      java.lang.String getBadUrl(int index);
+      /**
+       * <code>repeated string bad_url = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getBadUrlBytes(int index);
+    }
+    /**
+     * Protobuf type {@code TestInstructions.UrlWhitelistChecks}
+     */
+    public static final class UrlWhitelistChecks extends
+        com.google.protobuf.GeneratedMessage
+        implements UrlWhitelistChecksOrBuilder {
+      // Use UrlWhitelistChecks.newBuilder() to construct.
+      private UrlWhitelistChecks(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private UrlWhitelistChecks(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final UrlWhitelistChecks defaultInstance;
+      public static UrlWhitelistChecks getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public UrlWhitelistChecks getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private UrlWhitelistChecks(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                  goodUrl_ = new com.google.protobuf.LazyStringArrayList();
+                  mutable_bitField0_ |= 0x00000001;
+                }
+                goodUrl_.add(input.readBytes());
+                break;
+              }
+              case 18: {
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                  badUrl_ = new com.google.protobuf.LazyStringArrayList();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                badUrl_.add(input.readBytes());
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+            goodUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(goodUrl_);
+          }
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            badUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(badUrl_);
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.class, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<UrlWhitelistChecks> PARSER =
+          new com.google.protobuf.AbstractParser<UrlWhitelistChecks>() {
+        public UrlWhitelistChecks parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new UrlWhitelistChecks(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<UrlWhitelistChecks> getParserForType() {
+        return PARSER;
+      }
+
+      // repeated string good_url = 1;
+      public static final int GOOD_URL_FIELD_NUMBER = 1;
+      private com.google.protobuf.LazyStringList goodUrl_;
+      /**
+       * <code>repeated string good_url = 1;</code>
+       */
+      public java.util.List<java.lang.String>
+          getGoodUrlList() {
+        return goodUrl_;
+      }
+      /**
+       * <code>repeated string good_url = 1;</code>
+       */
+      public int getGoodUrlCount() {
+        return goodUrl_.size();
+      }
+      /**
+       * <code>repeated string good_url = 1;</code>
+       */
+      public java.lang.String getGoodUrl(int index) {
+        return goodUrl_.get(index);
+      }
+      /**
+       * <code>repeated string good_url = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getGoodUrlBytes(int index) {
+        return goodUrl_.getByteString(index);
+      }
+
+      // repeated string bad_url = 2;
+      public static final int BAD_URL_FIELD_NUMBER = 2;
+      private com.google.protobuf.LazyStringList badUrl_;
+      /**
+       * <code>repeated string bad_url = 2;</code>
+       */
+      public java.util.List<java.lang.String>
+          getBadUrlList() {
+        return badUrl_;
+      }
+      /**
+       * <code>repeated string bad_url = 2;</code>
+       */
+      public int getBadUrlCount() {
+        return badUrl_.size();
+      }
+      /**
+       * <code>repeated string bad_url = 2;</code>
+       */
+      public java.lang.String getBadUrl(int index) {
+        return badUrl_.get(index);
+      }
+      /**
+       * <code>repeated string bad_url = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBadUrlBytes(int index) {
+        return badUrl_.getByteString(index);
+      }
+
+      private void initFields() {
+        goodUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        badUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        for (int i = 0; i < goodUrl_.size(); i++) {
+          output.writeBytes(1, goodUrl_.getByteString(i));
+        }
+        for (int i = 0; i < badUrl_.size(); i++) {
+          output.writeBytes(2, badUrl_.getByteString(i));
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        {
+          int dataSize = 0;
+          for (int i = 0; i < goodUrl_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeBytesSizeNoTag(goodUrl_.getByteString(i));
+          }
+          size += dataSize;
+          size += 1 * getGoodUrlList().size();
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < badUrl_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeBytesSizeNoTag(badUrl_.getByteString(i));
+          }
+          size += dataSize;
+          size += 1 * getBadUrlList().size();
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code TestInstructions.UrlWhitelistChecks}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.class, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          goodUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          badUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
+        }
+
+        public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks getDefaultInstanceForType() {
+          return com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks build() {
+          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks buildPartial() {
+          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks result = new com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks(this);
+          int from_bitField0_ = bitField0_;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            goodUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(
+                goodUrl_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.goodUrl_ = goodUrl_;
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            badUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(
+                badUrl_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.badUrl_ = badUrl_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks) {
+            return mergeFrom((com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks other) {
+          if (other == com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance()) return this;
+          if (!other.goodUrl_.isEmpty()) {
+            if (goodUrl_.isEmpty()) {
+              goodUrl_ = other.goodUrl_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureGoodUrlIsMutable();
+              goodUrl_.addAll(other.goodUrl_);
+            }
+            onChanged();
+          }
+          if (!other.badUrl_.isEmpty()) {
+            if (badUrl_.isEmpty()) {
+              badUrl_ = other.badUrl_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureBadUrlIsMutable();
+              badUrl_.addAll(other.badUrl_);
+            }
+            onChanged();
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // repeated string good_url = 1;
+        private com.google.protobuf.LazyStringList goodUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        private void ensureGoodUrlIsMutable() {
+          if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+            goodUrl_ = new com.google.protobuf.LazyStringArrayList(goodUrl_);
+            bitField0_ |= 0x00000001;
+           }
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public java.util.List<java.lang.String>
+            getGoodUrlList() {
+          return java.util.Collections.unmodifiableList(goodUrl_);
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public int getGoodUrlCount() {
+          return goodUrl_.size();
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public java.lang.String getGoodUrl(int index) {
+          return goodUrl_.get(index);
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getGoodUrlBytes(int index) {
+          return goodUrl_.getByteString(index);
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public Builder setGoodUrl(
+            int index, java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureGoodUrlIsMutable();
+          goodUrl_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public Builder addGoodUrl(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureGoodUrlIsMutable();
+          goodUrl_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public Builder addAllGoodUrl(
+            java.lang.Iterable<java.lang.String> values) {
+          ensureGoodUrlIsMutable();
+          super.addAll(values, goodUrl_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public Builder clearGoodUrl() {
+          goodUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string good_url = 1;</code>
+         */
+        public Builder addGoodUrlBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureGoodUrlIsMutable();
+          goodUrl_.add(value);
+          onChanged();
+          return this;
+        }
+
+        // repeated string bad_url = 2;
+        private com.google.protobuf.LazyStringList badUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        private void ensureBadUrlIsMutable() {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+            badUrl_ = new com.google.protobuf.LazyStringArrayList(badUrl_);
+            bitField0_ |= 0x00000002;
+           }
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public java.util.List<java.lang.String>
+            getBadUrlList() {
+          return java.util.Collections.unmodifiableList(badUrl_);
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public int getBadUrlCount() {
+          return badUrl_.size();
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public java.lang.String getBadUrl(int index) {
+          return badUrl_.get(index);
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getBadUrlBytes(int index) {
+          return badUrl_.getByteString(index);
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public Builder setBadUrl(
+            int index, java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBadUrlIsMutable();
+          badUrl_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public Builder addBadUrl(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBadUrlIsMutable();
+          badUrl_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public Builder addAllBadUrl(
+            java.lang.Iterable<java.lang.String> values) {
+          ensureBadUrlIsMutable();
+          super.addAll(values, badUrl_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public Builder clearBadUrl() {
+          badUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string bad_url = 2;</code>
+         */
+        public Builder addBadUrlBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBadUrlIsMutable();
+          badUrl_.add(value);
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:TestInstructions.UrlWhitelistChecks)
+      }
+
+      static {
+        defaultInstance = new UrlWhitelistChecks(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:TestInstructions.UrlWhitelistChecks)
+    }
+
+    private int bitField0_;
+    // optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;
+    public static final int URL_WHITELIST_CHECKS_FIELD_NUMBER = 1;
+    private com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks urlWhitelistChecks_;
+    /**
+     * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+     */
+    public boolean hasUrlWhitelistChecks() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+     */
+    public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks() {
+      return urlWhitelistChecks_;
+    }
+    /**
+     * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+     */
+    public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder() {
+      return urlWhitelistChecks_;
+    }
+
+    private void initFields() {
+      urlWhitelistChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, urlWhitelistChecks_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, urlWhitelistChecks_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CrawlProto.TestInstructions prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TestInstructions}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CrawlProto.TestInstructions.class, com.janknspank.proto.CrawlProto.TestInstructions.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CrawlProto.TestInstructions.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getUrlWhitelistChecksFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (urlWhitelistChecksBuilder_ == null) {
+          urlWhitelistChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+        } else {
+          urlWhitelistChecksBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_descriptor;
+      }
+
+      public com.janknspank.proto.CrawlProto.TestInstructions getDefaultInstanceForType() {
+        return com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CrawlProto.TestInstructions build() {
+        com.janknspank.proto.CrawlProto.TestInstructions result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CrawlProto.TestInstructions buildPartial() {
+        com.janknspank.proto.CrawlProto.TestInstructions result = new com.janknspank.proto.CrawlProto.TestInstructions(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (urlWhitelistChecksBuilder_ == null) {
+          result.urlWhitelistChecks_ = urlWhitelistChecks_;
+        } else {
+          result.urlWhitelistChecks_ = urlWhitelistChecksBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CrawlProto.TestInstructions) {
+          return mergeFrom((com.janknspank.proto.CrawlProto.TestInstructions)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CrawlProto.TestInstructions other) {
+        if (other == com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance()) return this;
+        if (other.hasUrlWhitelistChecks()) {
+          mergeUrlWhitelistChecks(other.getUrlWhitelistChecks());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CrawlProto.TestInstructions parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CrawlProto.TestInstructions) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;
+      private com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks urlWhitelistChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder> urlWhitelistChecksBuilder_;
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      public boolean hasUrlWhitelistChecks() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks() {
+        if (urlWhitelistChecksBuilder_ == null) {
+          return urlWhitelistChecks_;
+        } else {
+          return urlWhitelistChecksBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      public Builder setUrlWhitelistChecks(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks value) {
+        if (urlWhitelistChecksBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          urlWhitelistChecks_ = value;
+          onChanged();
+        } else {
+          urlWhitelistChecksBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      public Builder setUrlWhitelistChecks(
+          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder builderForValue) {
+        if (urlWhitelistChecksBuilder_ == null) {
+          urlWhitelistChecks_ = builderForValue.build();
+          onChanged();
+        } else {
+          urlWhitelistChecksBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      public Builder mergeUrlWhitelistChecks(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks value) {
+        if (urlWhitelistChecksBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              urlWhitelistChecks_ != com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance()) {
+            urlWhitelistChecks_ =
+              com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.newBuilder(urlWhitelistChecks_).mergeFrom(value).buildPartial();
+          } else {
+            urlWhitelistChecks_ = value;
+          }
+          onChanged();
+        } else {
+          urlWhitelistChecksBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      public Builder clearUrlWhitelistChecks() {
+        if (urlWhitelistChecksBuilder_ == null) {
+          urlWhitelistChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+          onChanged();
+        } else {
+          urlWhitelistChecksBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder getUrlWhitelistChecksBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getUrlWhitelistChecksFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder() {
+        if (urlWhitelistChecksBuilder_ != null) {
+          return urlWhitelistChecksBuilder_.getMessageOrBuilder();
+        } else {
+          return urlWhitelistChecks_;
+        }
+      }
+      /**
+       * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder> 
+          getUrlWhitelistChecksFieldBuilder() {
+        if (urlWhitelistChecksBuilder_ == null) {
+          urlWhitelistChecksBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder>(
+                  urlWhitelistChecks_,
+                  getParentForChildren(),
+                  isClean());
+          urlWhitelistChecks_ = null;
+        }
+        return urlWhitelistChecksBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TestInstructions)
+    }
+
+    static {
+      defaultInstance = new TestInstructions(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TestInstructions)
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
@@ -3133,6 +4514,16 @@ public final class CrawlProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ContentSite_PathBlacklist_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TestInstructions_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TestInstructions_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TestInstructions_UrlWhitelistChecks_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3145,18 +4536,23 @@ public final class CrawlProto {
       "\n com/janknspank/proto/crawl.proto\032(com/" +
       "janknspank/database/extensions.proto\"7\n\021" +
       "CrawlInstructions\022\"\n\014content_site\030\001 \003(\0132" +
-      "\014.ContentSite\"\240\003\n\013ContentSite\022\031\n\013root_do" +
+      "\014.ContentSite\"\324\003\n\013ContentSite\022\031\n\013root_do" +
       "main\030\001 \001(\tB\004\210\246\035\001\022\027\n\017aka_root_domain\030\002 \003(" +
       "\t\022\027\n\tstart_url\030\003 \003(\tB\004\210\246\035\001\022\033\n\023subdomain_" +
       "blacklist\030\004 \003(\t\0222\n\016path_blacklist\030\005 \003(\0132" +
       "\032.ContentSite.PathBlacklist\022 \n\022paragraph" +
-      "_selector\030\006 \003(\tB\004\210\246\035\001\032\320\001\n\rPathBlacklist\022" +
-      "\024\n\006needle\030\001 \001(\tB\004\210\246\035\001\022B\n\010location\030\004 \001(\0162",
-      "#.ContentSite.PathBlacklist.Location:\013ST" +
-      "ARTS_WITH\"e\n\010Location\022\n\n\006EQUALS\020\001\022\017\n\013STA" +
-      "RTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAINS\020\004\022" +
-      "\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006B\"\n\024com." +
-      "janknspank.protoB\nCrawlProto"
+      "_selector\030\006 \003(\tB\004\210\246\035\001\0222\n\021test_instructio" +
+      "ns\030\007 \001(\0132\021.TestInstructionsB\004\210\246\035\001\032\320\001\n\rPa",
+      "thBlacklist\022\024\n\006needle\030\001 \001(\tB\004\210\246\035\001\022B\n\010loc" +
+      "ation\030\004 \001(\0162#.ContentSite.PathBlacklist." +
+      "Location:\013STARTS_WITH\"e\n\010Location\022\n\n\006EQU" +
+      "ALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n" +
+      "\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MAT" +
+      "CH\020\006\"\225\001\n\020TestInstructions\022H\n\024url_whiteli" +
+      "st_checks\030\001 \001(\0132$.TestInstructions.UrlWh" +
+      "itelistChecksB\004\210\246\035\001\0327\n\022UrlWhitelistCheck" +
+      "s\022\020\n\010good_url\030\001 \003(\t\022\017\n\007bad_url\030\002 \003(\tB\"\n\024" +
+      "com.janknspank.protoB\nCrawlProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3174,15 +4570,29 @@ public final class CrawlProto {
           internal_static_ContentSite_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ContentSite_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "TestInstructions", });
           internal_static_ContentSite_PathBlacklist_descriptor =
             internal_static_ContentSite_descriptor.getNestedTypes().get(0);
           internal_static_ContentSite_PathBlacklist_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ContentSite_PathBlacklist_descriptor,
               new java.lang.String[] { "Needle", "Location", });
+          internal_static_TestInstructions_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_TestInstructions_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TestInstructions_descriptor,
+              new java.lang.String[] { "UrlWhitelistChecks", });
+          internal_static_TestInstructions_UrlWhitelistChecks_descriptor =
+            internal_static_TestInstructions_descriptor.getNestedTypes().get(0);
+          internal_static_TestInstructions_UrlWhitelistChecks_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TestInstructions_UrlWhitelistChecks_descriptor,
+              new java.lang.String[] { "GoodUrl", "BadUrl", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);

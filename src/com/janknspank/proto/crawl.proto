@@ -47,4 +47,18 @@ message ContentSite {
   repeated string paragraph_selector = 6 [
     (required) = YES
   ];
+
+  optional TestInstructions test_instructions = 7 [
+    (required) = YES
+  ];
+}
+
+message TestInstructions {
+  message UrlWhitelistChecks {
+    repeated string good_url = 1;
+    repeated string bad_url = 2;
+  }
+  optional UrlWhitelistChecks url_whitelist_checks = 1 [
+    (required) = YES
+  ];
 }
