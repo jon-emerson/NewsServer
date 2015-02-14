@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -24,6 +22,7 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.CrawlProto.ContentSite;
 
 /**
  * Iterates through the home pages of the various sites we support, and RSS
@@ -34,15 +33,14 @@ public class UrlCrawler {
   private static final Logger LOG = new Logger(UrlCrawler.class);
   private final Fetcher fetcher = new Fetcher();
   private static final Iterable<String> WEBSITES = Iterables.concat(
-      Iterables.transform(UrlWhitelist.WHITELIST, new Function<String, String>() {
-        @Override
-        public String apply(String domain) {
-          if (StringUtils.countMatches(domain, ".") <= 1) {
-            domain = "www." + domain;
-          }
-          return "http://" + domain + "/";
-        }
-      }),
+      Iterables.concat(
+          Iterables.transform(UrlWhitelist.CRAWL_INSTRUCTIONS.getContentSiteList(),
+              new Function<ContentSite, Iterable<String>>() {
+                @Override
+                public Iterable<String> apply(ContentSite contentSite) {
+                  return contentSite.getStartUrlList();
+                }
+              })),
       ImmutableList.of(
           "https://medium.com/top-100/",
           "http://opinionator.blogs.nytimes.com/",

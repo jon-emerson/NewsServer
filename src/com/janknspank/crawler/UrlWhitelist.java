@@ -2,18 +2,12 @@ package com.janknspank.crawler;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
-
-import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.Links;
@@ -23,9 +17,12 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.CrawlProto.ContentSite;
+import com.janknspank.proto.CrawlProto.ContentSite.PathBlacklist;
+import com.janknspank.proto.CrawlProto.ContentSite.PathBlacklist.Location;
+import com.janknspank.proto.CrawlProto.CrawlInstructions;
 
 public class UrlWhitelist {
-  private static final Logger LOG = new Logger(UrlWhitelist.class);
   public static final Predicate<String> PREDICATE = new Predicate<String>() {
     @Override
     public boolean apply(String url) {
@@ -33,358 +30,680 @@ public class UrlWhitelist {
     }
   };
 
-  public static final HashSet<String> WHITELIST = new HashSet<String>();
-  static {
-    // Add: http://hbswk.hbs.edu/industries/
-    WHITELIST.add("abc.net.au");
-    WHITELIST.add("abcnews.go.com");
-    WHITELIST.add("advice.careerbuilder.com");
-    WHITELIST.add("allthingsd.com");
-    WHITELIST.add("america.aljazeera.com");
-    WHITELIST.add("arstechnica.com");
-    WHITELIST.add("bbc.co.uk");
-    WHITELIST.add("bbc.com");
-    WHITELIST.add("bdnews24.com");
-    WHITELIST.add("bloomberg.com");
-    WHITELIST.add("boston.com");
-    WHITELIST.add("breitbart.com");
-    WHITELIST.add("buffalonews.com");
-    WHITELIST.add("businessinsider.com");
-    WHITELIST.add("businessweek.com");
-    WHITELIST.add("cbc.ca");
-    WHITELIST.add("cbsnews.com");
-    WHITELIST.add("channelnewsasia.com");
-    WHITELIST.add("chron.com");
-    WHITELIST.add("cleveland.com");
-    WHITELIST.add("cnbc.com");
-    WHITELIST.add("cnn.com");
-    // WHITELIST.add("csmonitor.com");
-    WHITELIST.add("curbed.com");
-    // WHITELIST.add("dailyrecord.co.uk");
-    // WHITELIST.add("dallasnews.com");
-    // WHITELIST.add("denverpost.com");
-    // WHITELIST.add("drudgereport.com");
-    // WHITELIST.add("dw.de");
-    // WHITELIST.add("economist.com"); // DO NOT TURN ON - PAYWALL IS HORRIBLE.
-    WHITELIST.add("engadget.com");
-    // WHITELIST.add("eonline.com");
-    // WHITELIST.add("ew.com");
-    // WHITELIST.add("examiner.com");
-    // WHITELIST.add("extremetech.com");
-    WHITELIST.add("fastcompany.com");
-    WHITELIST.add("forbes.com");
-    // WHITELIST.add("foxnews.com");
-    // WHITELIST.add("freep.com");
-    WHITELIST.add("gizmodo.com");
-    // WHITELIST.add("globalpost.com");
-    // WHITELIST.add("guardian.co.uk");
-    // WHITELIST.add("haaretz.com");
-    // WHITELIST.add("heraldscotland.com");
-    // WHITELIST.add("hindustantimes.com");
-    // WHITELIST.add("hollywoodreporter.com");
-    // WHITELIST.add("huffingtonpost.com");
-    // WHITELIST.add("indiatimes.com");
-    // WHITELIST.add("iol.co.za");
-    // WHITELIST.add("irishtimes.com");
-    // WHITELIST.add("jpost.com");
-    WHITELIST.add("latimes.com");
-    // WHITELIST.add("manchestereveningnews.co.uk");
-    // WHITELIST.add("manoramaonline.com");
-    WHITELIST.add("mashable.com");
-    WHITELIST.add("medium.com");
-    WHITELIST.add("mercurynews.com");
-    // WHITELIST.add("mg.co.za");
-    // WHITELIST.add("msnbc.com");
-    // WHITELIST.add("nbcnews.com");
-    // WHITELIST.add("nationalgeographic.com");
-    // WHITELIST.add("ndtv.com");
-    // WHITELIST.add("news.yahoo.com");
-    // WHITELIST.add("nj.com");
-    // WHITELIST.add("nypost.com");
-    WHITELIST.add("nytimes.com");
-    // WHITELIST.add("nzherald.co.nz");
-    WHITELIST.add("pcmag.com");
-    WHITELIST.add("recode.net");
-    WHITELIST.add("redherring.com");
-    // WHITELIST.add("reuters.com");
-    // WHITELIST.add("scmp.com");
-    // WHITELIST.add("scotsman.com");
-    // WHITELIST.add("seattletimes.com");
-    WHITELIST.add("sfexaminer.com");
-    WHITELIST.add("sfgate.com");
-    WHITELIST.add("siliconbeat.com");
-    WHITELIST.add("slate.com");
-    // WHITELIST.add("smh.com.au");
-    // WHITELIST.add("startribune.com");
-    WHITELIST.add("startupworkout.com");
-    // WHITELIST.add("statesman.com");
-    // WHITELIST.add("straitstimes.com");
-    WHITELIST.add("techcrunch.com");
-    WHITELIST.add("techmeme.com");
-    WHITELIST.add("technologyreview.com");
-    // WHITELIST.add("telegraph.co.uk");
-    // WHITELIST.add("theatlantic.com"); **
-    // WHITELIST.add("theglobeandmail.com");
-    // WHITELIST.add("theguardian.com");
-    // WHITELIST.add("thehindu.com");
-    WHITELIST.add("thenextweb.com");
-    // WHITELIST.add("theregister.co.uk");
-    WHITELIST.add("theverge.com");
-    // WHITELIST.add("tmz.com");
-    // WHITELIST.add("usatoday.com");
-    // WHITELIST.add("usnews.com");
-    WHITELIST.add("venturebeat.com");
-    WHITELIST.add("washingtonpost.com");
-    // WHITELIST.add("washingtontimes.com");
-    // WHITELIST.add("westword.com");
-    WHITELIST.add("wired.com");
-    // WHITELIST.add("zdnet.com");
-  }
+  public static final CrawlInstructions CRAWL_INSTRUCTIONS = CrawlInstructions.newBuilder()
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("abc.net.au")
+          .addStartUrl("http://www.abc.net.au/")
+          .addSubdomainBlacklist("about.abc.net.au")
+          .addSubdomainBlacklist("iview.abc.net.au")
+          .addSubdomainBlacklist("mobile.abc.net.au")
+          .addSubdomainBlacklist("mobile-phones.smh.com.au")
+          .addSubdomainBlacklist("nucwed.aus.aunty.abc.net.au")
+          .addSubdomainBlacklist("search.abc.net.au")
+          .addSubdomainBlacklist("shop.abc.net.au")
+          .addSubdomainBlacklist("www2b.abc.net.au")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/radio/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("\\/sport\\/.*\\/scoreboard\\/")
+              .setLocation(Location.REGEX_FIND))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("\\/sport\\/.*\\/results\\/")
+              .setLocation(Location.REGEX_FIND))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/image/")
+              .setLocation(Location.CONTAINS))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("abcnews.go.com")
+          .addStartUrl("http://www.abcnews.go.com")
+          .addSubdomainBlacklist("forums.abcnews.go.com")
+          .addSubdomainBlacklist("ugv.abcnews.go.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/Site/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/meta/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/xmldata/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/photos/")
+              .setLocation(Location.CONTAINS))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("advice.careerbuilder.com")
+          .addStartUrl("http://www.advice.careerbuilder.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("allthingsd.com")
+          .addStartUrl("http://www.allthingsd.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("america.aljazeera.com")
+          .addStartUrl("http://america.aljazeera.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("arstechnica.com")
+          .addStartUrl("http://www.arstechnica.com")
+          .addSubdomainBlacklist("demiurge.arstechnica.com")
+          .addSubdomainBlacklist("episteme.arstechnica.com")
+          .addSubdomainBlacklist("feeds.arstechnica.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/archive/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/articles/paedia/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/civis/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/cpu/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/etc/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/features/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/forum/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/guide/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/guides/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/mt-static/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/old/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/paedia/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/reviews/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/site/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/sponsored/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/subscriptions/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/tweak/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/wankerdesk/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/sendnews.php")
+              .setLocation(Location.ENDS_WITH))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("bbc.co.uk")
+          .addAkaRootDomain("bbc.com")
+          .addStartUrl("http://www.bbc.co.uk")
+          .addStartUrl("http://www.bbc.com")
+          .addSubdomainBlacklist("iplayerhelp.external.bbc.co.uk")
+          .addSubdomainBlacklist("faq.external.bbc.co.uk")
+          .addSubdomainBlacklist("newsvote.bbc.co.uk")
+          .addSubdomainBlacklist("ssl.bbc.co.uk")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/guides/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/iplayer/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/mundo/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/programmes/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/portuguese/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/sport/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/travel/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/webwise/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("bbc.com")
+          .addStartUrl("http://www.bbc.com")
+          .addSubdomainBlacklist("m.bbc.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("bdnews24.com")
+          .addStartUrl("http://www.bdnews24.com")
+          .addSubdomainBlacklist("ads.bdnews24.com")
+          .addSubdomainBlacklist("revive.bdnews24.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("bloomberg.com")
+          .addStartUrl("http://www.bloomberg.com")
+          .addSubdomainBlacklist("bdn-ak.bloomberg.com")
+          .addSubdomainBlacklist("bdns.bloomberg.com")
+          .addSubdomainBlacklist("connect.bloomberg.com")
+          .addSubdomainBlacklist("m.bloomberg.com")
+          .addSubdomainBlacklist("jobs.bloomberg.com")
+          .addSubdomainBlacklist("jobsearch.bloomberg.com")
+          .addSubdomainBlacklist("login.bloomberg.com")
+          .addSubdomainBlacklist("media.bloomberg.com")
+          .addSubdomainBlacklist("mobile.bloomberg.com")
+          .addSubdomainBlacklist("open.bloomberg.com")
+          .addSubdomainBlacklist("search.bloomberg.com")
+          .addSubdomainBlacklist("search1.bloomberg.com")
+          .addSubdomainBlacklist("service.bloomberg.com")
+          .addSubdomainBlacklist("washpost.bloomberg.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/ad-section/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/apps/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/billionaires/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/graphics/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/infographics/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/news/print/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/podcasts/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/quote/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/slideshow/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/visual-data/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/_/slideshow/")
+              .setLocation(Location.ENDS_WITH))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("boston.com")
+          .addStartUrl("http://www.boston.com")
+          .addSubdomainBlacklist("blogcabin.boston.com")
+          .addSubdomainBlacklist("calendar.boston.com")
+          .addSubdomainBlacklist("circulars.boston.com")
+          .addSubdomainBlacklist("finds.boston.com")
+          .addSubdomainBlacklist("healthguide.boston.com")
+          .addSubdomainBlacklist("listings.boston.com")
+          .addSubdomainBlacklist("members.boston.com")
+          .addSubdomainBlacklist("r.prdedit.boston.com")
+          .addSubdomainBlacklist("realestate.boston.com")
+          .addSubdomainBlacklist("search.boston.com")
+          .addSubdomainBlacklist("scene.boston.com")
+          .addSubdomainBlacklist("spiderbites.boston.com")
+          .addSubdomainBlacklist("stats.boston.com")
+          .addSubdomainBlacklist("syndication.boston.com")
+          .addSubdomainBlacklist("tickets.boston.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/boston/action/rssfeed"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/cars/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/eom/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/help/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/news/traffic/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/radio"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/sports/blogs/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/quote")
+              .setLocation(Location.ENDS_WITH))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("breitbart.com")
+          .addStartUrl("http://www.breitbart.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("buffalonews.com")
+          .addStartUrl("http://www.buffalonews.com")
+          .addSubdomainBlacklist("services.buffalonews.com")
+          .addSubdomainBlacklist("shopping.buffalonews.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("businessinsider.com")
+          .addStartUrl("http://www.businessinsider.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("businessweek.com")
+          .addStartUrl("http://www.businessweek.com")
+          .addSubdomainBlacklist("bwso.businessweek.com")
+          .addSubdomainBlacklist("forums.businessweek.com")
+          .addSubdomainBlacklist("images.businessweek.com")
+          .addSubdomainBlacklist("jobs.businessweek.com")
+          .addSubdomainBlacklist("mobile.businessweek.com")
+          .addSubdomainBlacklist("secure.businessweek.com")
+          .addSubdomainBlacklist("subscribe.businessweek.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/adsections/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/blogs/getting-in/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/bschools/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/business-schools/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/companies-and-industries/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/global-economics/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/innovation-and-design/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/innovation/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/interactive/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/lifestyle/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/markets-and-finance/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/photos/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/politics-and-policy/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/printer/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/quiz/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/reports/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/research/stocks/snapshot/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/slideshows/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/slideshows")
+              .setLocation(Location.EQUALS))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/small-business/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/technology/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/videos/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/videos")
+              .setLocation(Location.EQUALS))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("cbc.ca")
+          .addStartUrl("http://www.cbc.ca")
+          .addSubdomainBlacklist("music.cbc.ca")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/connects/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/mediacentre/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/player/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/shop/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("cbsnews.com")
+          .addStartUrl("http://www.cbsnews.com")
+          .addSubdomainBlacklist("cbsn.cbsnews.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/cbsnews./quote"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/media/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("channelnewsasia.com")
+          .addStartUrl("http://www.channelnewsasia.com")
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/wp-admin/")
+              .setLocation(Location.CONTAINS))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("chicagotribune.com")
+          .addStartUrl("http://www.chicagotribune.com")
+          .addSubdomainBlacklist("advertising.chicagotribune.com")
+          .addSubdomainBlacklist("apps.chicagotribune.com")
+          .addSubdomainBlacklist("members.chicagotribune.com")
+          .addSubdomainBlacklist("placeanad.chicagotribune.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("chron.com")
+          .addStartUrl("http://www.chron.com")
+          .addSubdomainBlacklist("cars.chron.com")
+          .addSubdomainBlacklist("fangear.chron.com")
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/feed")
+              .setLocation(Location.ENDS_WITH))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/merge/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("cleveland.com")
+          .addStartUrl("http://www.cleveland.com")
+          .addSubdomainBlacklist("autos.cleveland.com")
+          .addSubdomainBlacklist("blog.cleveland.com")
+          .addSubdomainBlacklist("businessfinder.cleveland.com")
+          .addSubdomainBlacklist("connect.cleveland.com")
+          .addSubdomainBlacklist("findnsave.cleveland.com")
+          .addSubdomainBlacklist("mobilejobs.cleveland.com")
+          .addSubdomainBlacklist("mobileobits.cleveland.com")
+          .addSubdomainBlacklist("photos.cleveland.com")
+          .addSubdomainBlacklist("realestate.cleveland.com")
+          .addSubdomainBlacklist("cinesport.cleveland.com")
+          .addSubdomainBlacklist("classifieds.cleveland.com")
+          .addSubdomainBlacklist("foreclosures.cleveland.com")
+          .addSubdomainBlacklist("highschoolsports.cleveland.com")
+          .addSubdomainBlacklist("jobs.cleveland.com")
+          .addSubdomainBlacklist("m.cleveland.com")
+          .addSubdomainBlacklist("search.cleveland.com")
+          .addSubdomainBlacklist("signup.cleveland.com")
+          .addSubdomainBlacklist("stats.cleveland.com")
+          .addSubdomainBlacklist("update.cleveland.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/events/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/events")
+              .setLocation(Location.EQUALS))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/forums/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/forums")
+              .setLocation(Location.EQUALS))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/jobs/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/jobs")
+              .setLocation(Location.EQUALS))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/print.html")
+              .setLocation(Location.ENDS_WITH))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("cnbc.com")
+          .addStartUrl("http://www.cnbc.com")
+          .addSubdomainBlacklist("data.cnbc.com")
+          .addSubdomainBlacklist("futuresnow.cnbc.com")
+          .addSubdomainBlacklist("portfolio.cnbc.com")
+          .addSubdomainBlacklist("pro.cnbc.com")
+          .addSubdomainBlacklist("watchlist.cnbc.com")
+          .addSubdomainBlacklist("videoreprints.cnbc.com")
+          .addSubdomainBlacklist("webcast.cnbc.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/live-tv/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("cnn.com")
+          .addStartUrl("http://www.cnn.com")
+          .addSubdomainBlacklist("arabic.cnn.com")
+          .addSubdomainBlacklist("audience.cnn.com")
+          .addSubdomainBlacklist("blogs.cnn.com")
+          .addSubdomainBlacklist("cnnespanol.cnn.com")
+          .addSubdomainBlacklist("games.cnn.com")
+          .addSubdomainBlacklist("inhealth.cnn.com")
+          .addSubdomainBlacklist("ireport.cnn.com")
+          .addSubdomainBlacklist("mexico.cnn.com")
+          .addSubdomainBlacklist("partners.cnn.com")
+          .addSubdomainBlacklist("rss.cnn.com")
+          .addSubdomainBlacklist("search.cnn.com")
+          .addSubdomainBlacklist("transcripts.cnn.com")
+          .addSubdomainBlacklist("weather.cnn.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/CNN/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/CNNI/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/calculator/"))
+          // E.g. /comment-page-9/
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/comment-page-")
+              .setLocation(Location.CONTAINS))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/data/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/gallery/")
+              .setLocation(Location.CONTAINS))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/infographic/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/interactive/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/linkto/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/quizzes/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/services/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("curbed.com")
+          .addStartUrl("http://www.curbed.com")
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/search.php")
+              .setLocation(Location.ENDS_WITH))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("engadget.com")
+          .addStartUrl("http://www.engadget.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("fastcompany.com")
+          .addStartUrl("http://www.fastcompany.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("forbes.com")
+          .addStartUrl("http://www.forbes.com")
+          .addSubdomainBlacklist("blogs.forbes.com") // This is their account management site.
+          .addSubdomainBlacklist("related.forbes.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/account/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/pictures/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/video/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle(".*\\/[0-9]{1,3}\\/$") // Page 2, 3, etc.
+              .setLocation(Location.REGEX_MATCH))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/print/")
+              .setLocation(Location.ENDS_WITH))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("gizmodo.com")
+          .addStartUrl("http://www.gizmodo.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("latimes.com")
+          .addStartUrl("http://www.latimes.com")
+          .addSubdomainBlacklist("advertise.latimes.com")
+          .addSubdomainBlacklist("classifieds.latimes.com")
+          .addSubdomainBlacklist("digitalservices.latimes.com")
+          .addSubdomainBlacklist("datadesk.latimes.com")
+          .addSubdomainBlacklist("dailydeals.latimes.com")
+          .addSubdomainBlacklist("discussions.latimes.com")
+          .addSubdomainBlacklist("documents.latimes.com")
+          .addSubdomainBlacklist("ee.latimes.com")
+          .addSubdomainBlacklist("framework.latimes.com")
+          .addSubdomainBlacklist("games.latimes.com")
+          .addSubdomainBlacklist("graphics.latimes.com")
+          .addSubdomainBlacklist("guides.latimes.com")
+          .addSubdomainBlacklist("ilivehere.latimes.com")
+          .addSubdomainBlacklist("localdeals.latimes.com")
+          .addSubdomainBlacklist("marketplace.latimes.com")
+          .addSubdomainBlacklist("marketplaceads.latimes.com")
+          .addSubdomainBlacklist("mediakit.latimes.com")
+          .addSubdomainBlacklist("membership.latimes.com")
+          .addSubdomainBlacklist("myaccount2.latimes.com")
+          .addSubdomainBlacklist("placeanad.latimes.com")
+          .addSubdomainBlacklist("projects.latimes.com")
+          .addSubdomainBlacklist("recipes.latimes.com")
+          .addSubdomainBlacklist("schools.latimes.com")
+          .addSubdomainBlacklist("store.latimes.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/classified/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/shopping/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("mashable.com")
+          .addStartUrl("http://www.mashable.com")
+          .addSubdomainBlacklist("events.mashable.com")
+          .addSubdomainBlacklist("findjobs.mashable.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/login/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/search/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/sgs/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/media-summit/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("medium.com")
+          .addStartUrl("http://www.medium.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("mercurynews.com")
+          .addStartUrl("http://www.mercurynews.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("money.cnn.com")
+          .addStartUrl("http://money.cnn.com")
+          .addSubdomainBlacklist("cgi.money.cnn.com")
+          .addSubdomainBlacklist("jobsearch.money.cnn.com")
+          .addSubdomainBlacklist("portfolio.money.cnn.com")
+          .addSubdomainBlacklist("realestate.money.cnn.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/data/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/galleries/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/gallery/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/quote/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/magazines/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/tag/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/tools/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("nytimes.com")
+          .addStartUrl("http://www.nytimes.com")
+          .addSubdomainBlacklist("jobmarket.nytimes.com")
+          .addSubdomainBlacklist("homedelivery.nytimes.com")
+          .addSubdomainBlacklist("mobile.nytimes.com")
+          .addSubdomainBlacklist("autos.nytimes.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/content/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/rss")
+              .setLocation(Location.EQUALS))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/rss/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/ref/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/adx/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/content/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/register")
+              .setLocation(Location.EQUALS))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/services/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/slideshow/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/subscriptions/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/times-journeys/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("pcmag.com")
+          .addStartUrl("http://www.pcmag.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("recode.net")
+          .addStartUrl("http://recode.net")
+          .addSubdomainBlacklist("on.recode.net")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/events/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/follow-us/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/next/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/sponsored-content/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/video/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/wp-admin/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("redherring.com")
+          .addStartUrl("http://www.redherring.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("sfexaminer.com")
+          .addStartUrl("http://www.sfexaminer.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("sfgate.com")
+          .addStartUrl("http://www.sfgate.com")
+          .addSubdomainBlacklist("cars.sfgate.com")
+          .addSubdomainBlacklist("events.sfgate.com")
+          .addSubdomainBlacklist("extras.sfgate.com")
+          .addSubdomainBlacklist("fanshop.sfgate.com")
+          .addSubdomainBlacklist("homeguides.sfgate.com")
+          .addSubdomainBlacklist("markets.sfgate.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/merge/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("siliconbeat.com")
+          .addStartUrl("http://www.siliconbeat.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("slate.com")
+          .addStartUrl("http://www.slate.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("startupworkout.com")
+          .addStartUrl("http://www.startupworkout.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("techcrunch.com")
+          .addStartUrl("http://www.techcrunch.com")
+          .addSubdomainBlacklist("disrupt.techcrunch.com")
+          .addSubdomainBlacklist("jp.techcrunch.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/event-type/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/events/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/gallery/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/rss/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("techmeme.com")
+          .addStartUrl("http://www.techmeme.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("technologyreview.com")
+          .addStartUrl("http://www.technologyreview.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("telegraph.co.uk")
+          .addStartUrl("http://www.telegraph.co.uk")
+          .addSubdomainBlacklist("dating.telegraph.co.uk")
+          .addSubdomainBlacklist("gardenshop.telegraph.co.uk")
+          .addSubdomainBlacklist("shop.telegraph.co.uk")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/sponsored/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("theguardian.com")
+          .addStartUrl("http://www.theguardian.com")
+          .addSubdomainBlacklist("discussion.theguardian.com")
+          .addSubdomainBlacklist("id.theguardian.com")
+          .addSubdomainBlacklist("profile.theguardian.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("thenextweb.com")
+          .addStartUrl("http://www.thenextweb.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("theverge.com")
+          .addStartUrl("http://www.theverge.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/forums/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/jobs"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/search"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/video/"))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("venturebeat.com")
+          .addStartUrl("http://www.venturebeat.com")
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("washingtonpost.com")
+          .addStartUrl("http://www.washingtonpost.com")
+          .addSubdomainBlacklist("account.washingtonpost.com")
+          .addSubdomainBlacklist("advertising.washingtonpost.com")
+          .addSubdomainBlacklist("apps.washingtonpost.com")
+          .addSubdomainBlacklist("feeds.washingtonpost.com")
+          .addSubdomainBlacklist("findnsave.washingtonpost.com")
+          .addSubdomainBlacklist("games.washingtonpost.com")
+          .addSubdomainBlacklist("js.washingtonpost.com")
+          .addSubdomainBlacklist("m.washingtonpost.com")
+          .addSubdomainBlacklist("nie.washingtonpost.com")
+          .addSubdomainBlacklist("realestate.washingtonpost.com")
+          .addSubdomainBlacklist("stats.washingtonpost.com")
+          .addSubdomainBlacklist("syndication.washingtonpost.com")
+          .addSubdomainBlacklist("ssl.washingtonpost.com")
+          .addSubdomainBlacklist("subscribe.washingtonpost.com")
+          .addSubdomainBlacklist("yellowpages.washingtonpost.com")
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/capitalweathergang/"))
+          .addPathBlacklist(PathBlacklist.newBuilder().setNeedle("/newssearch/"))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/wp-dyn/")
+              .setLocation(Location.CONTAINS))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/wp-srv/")
+              .setLocation(Location.CONTAINS))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/wp-dyn")
+              .setLocation(Location.ENDS_WITH))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("_category.html")
+              .setLocation(Location.ENDS_WITH))
+          .addPathBlacklist(PathBlacklist.newBuilder()
+              .setNeedle("/post.php")
+              .setLocation(Location.ENDS_WITH))
+          .build())
+      .addContentSite(ContentSite.newBuilder()
+          .setRootDomain("wired.com")
+          .addStartUrl("http://www.wired.com")
+          .build())
+      .build();
 
-  /**
-   * Makes sure that BBC News URLs start with a path in the joined whitelist and
-   * end with an article number somewhere in the path after the final slash.
-   * (Article numbers are usually 8 digits.)
-   * TODO(jonemerson): Make this a lot more lenient.  This was made tight
-   * initially to address the "we're crawling too much crap" issue - Now that
-   * issue's addressed by ArticleUrlDetector and URL crawl priority.
-   */
-  private static final Pattern BBC_NEWS_ARTICLE_PATH = Pattern.compile(
-      "^\\/(" + Joiner.on("|").join(new String[] {
-          "autos\\/story",
-          "capital\\/story",
-          "culture\\/story",
-          "earth\\/story",
-          "future\\/story",
-          "news"
-          // TODO: add democracylive (which has a different url pattern)
-      }) + ")\\/.*[0-9]{6,10}[^\\/]*$");
+  private static final Logger LOG = new Logger(UrlWhitelist.class);
 
-  /**
-   * URL validation regex's for NYTimes articles.
-   * TODO(jonemerson): Make this a lot more lenient.  This was made tight
-   * initially to address the "we're crawling too much crap" issue - Now that
-   * issue's addressed by ArticleUrlDetector and URL crawl priority.
-   */
-  private static final Pattern NYTIMES_ARTICLE_DOMAIN = Pattern.compile(
-      "^(" + Joiner.on("|").join(new String[] {
-          "bits\\.blogs\\.nytimes\\.com",
-          "boss\\.blogs\\.nytimes\\.com",
-          "dealbook\\.nytimes\\.com",
-          "nytimes\\.com",
-          "opinionator\\.blogs\\.nytimes\\.com",
-          "well\\.blogs\\.nytimes\\.com",
-          "www\\.nytimes\\.com"
-      }) + ")$");
-  private static final Pattern NYTIMES_ARTICLE_PATH = Pattern.compile(
-      "^\\/(1|2)[0-9]{3}\\/[0-9]{2}\\/[0-9]{2}\\/.*(\\/|\\.html)$");
-
-  private static final HashSet<String> BLACKLIST = new HashSet<String>();
-  static {
-    for (String blacklistDomain : new String[] {
-        "about.abc.net.au",
-        "account.washingtonpost.com",
-        "ads.bdnews24.com",
-        "advertise.latimes.com",
-        "advertising.chicagotribune.com",
-        "advertising.washingtonpost.com",
-        "alerts.uk.reuters.com",
-        "apps.chicagotribune.com",
-        "apps.washingtonpost.com",
-        "arabic.cnn.com",
-        "audience.cnn.com",
-        "autos.cleveland.com",
-        "autos.nj.com",
-        "bdn-ak.bloomberg.com",
-        "bdns.bloomberg.com",
-        "binaryapi.ap.org",
-        "blog.cleveland.com",
-        "blogcabin.boston.com",
-        "blogs.cnn.com",
-        "blogs.forbes.com", // This is their account management site.
-        "businessfinder.cleveland.com",
-        "bwso.businessweek.com",
-        "calendar.boston.com",
-        "cars.chron.com",
-        "cars.irishtimes.com",
-        "cars.sfgate.com",
-        "cbsn.cbsnews.com",
-        "cgi.money.cnn.com",
-        "cinesport.cleveland.com",
-        "circulars.boston.com",
-        "classifieds.cleveland.com",
-        "classifieds.latimes.com",
-        "classifieds.nj.com",
-        "cnnespanol.cnn.com",
-        "connect.bloomberg.com",
-        "connect.cleveland.com",
-        "customers.reuters.com",
-        "data.cnbc.com",
-        "datadesk.latimes.com",
-        "dating.telegraph.co.uk",
-        "dailydeals.latimes.com",
-        "demiurge.arstechnica.com",
-        "digitalservices.latimes.com",
-        "discussion.theguardian.com",
-        "discussions.latimes.com",
-        "disrupt.techcrunch.com",
-        "dj.wsj.com",
-        "documents.latimes.com",
-        "ee.latimes.com",
-        "episteme.arstechnica.com",
-        "events.mashable.com",
-        "events.sfgate.com",
-        "extras.sfgate.com",
-        "fangear.chron.com",
-        "fanshop.sfgate.com",
-        "faq.external.bbc.co.uk",
-        "feeds.arstechnica.com",
-        "feeds.washingtonpost.com",
-        "findjobs.mashable.com",
-        "findnsave.cleveland.com",
-        "findnsave.dallasnews.com",
-        "findnsave.washingtonpost.com",
-        "finds.boston.com",
-        "foreclosures.cleveland.com",
-        "forums.abcnews.go.com",
-        "forums.businessweek.com",
-        "framework.latimes.com",
-        "futuresnow.cnbc.com",
-        "games.cnn.com",
-        "games.latimes.com",
-        "games.washingtonpost.com",
-        "gardenshop.telegraph.co.uk",
-        "graphics.latimes.com",
-        "guides.latimes.com",
-        "healthguide.boston.com",
-        "highschoolsports.cleveland.com",
-        "homeguides.sfgate.com",
-        "id.theguardian.com",
-        "ilivehere.latimes.com",
-        "images.businessweek.com",
-        "inhealth.cnn.com",
-        "iplayerhelp.external.bbc.co.uk",
-        "ireport.cnn.com",
-        "iview.abc.net.au",
-        "jobs.bloomberg.com",
-        "jobs.businessweek.com",
-        "jobs.cleveland.com",
-        "jobsearch.bloomberg.com",
-        "jobsearch.money.cnn.com",
-        "jp.techcrunch.com",
-        "jp.wsj.com",
-        "js.washingtonpost.com",
-        "khabar.ndtv.com",
-        "listings.boston.com",
-        "localdeals.latimes.com",
-        "login.bloomberg.com",
-        "m.bbc.com",
-        "m.bloomberg.com",
-        "m.cleveland.com",
-        "m.washingtonpost.com",
-        "marketplace.latimes.com",
-        "marketplaceads.latimes.com",
-        "markets.sfgate.com",
-        "media.bloomberg.com",
-        "mediakit.latimes.com",
-        "members.boston.com",
-        "members.chicagotribune.com",
-        "membership.latimes.com",
-        "mexico.cnn.com",
-        "mobile.abc.net.au",
-        "mobile.bloomberg.com",
-        "mobile.businessweek.com",
-        "mobilejobs.cleveland.com",
-        "mobileobits.cleveland.com",
-        "mobile-phones.smh.com.au",
-        "music.cbc.ca",
-        "myaccount.dallasnews.com",
-        "myaccount2.latimes.com",
-        "nie.washingtonpost.com",
-        "nucwed.aus.aunty.abc.net.au",
-        "on.recode.net",
-        "open.bloomberg.com",
-        "partners.cnn.com",
-        "photos.cleveland.com",
-        "placeanad.chicagotribune.com",
-        "placeanad.latimes.com",
-        "portfolio.cnbc.com",
-        "portfolio.money.cnn.com",
-        "pro.cnbc.com",
-        "profile.theguardian.com",
-        "projects.latimes.com",
-        "r.prdedit.boston.com",
-        "radio.foxnews.com",
-        "realestate.boston.com",
-        "realestate.cleveland.com",
-        "realestate.money.cnn.com",
-        "realestate.washingtonpost.com",
-        "recipes.latimes.com",
-        "related.forbes.com",
-        "revive.bdnews24.com",
-        "rss.cnn.com",
-        "rssfeeds.usatoday.com",
-        "scene.boston.com",
-        "schools.latimes.com",
-        "search.abc.net.au",
-        "search.bloomberg.com",
-        "search.boston.com",
-        "search.cleveland.com",
-        "search.cnn.com",
-        "search1.bloomberg.com",
-        "secure.businessweek.com",
-        "service.bloomberg.com",
-        "services.buffalonews.com",
-        "shop.abc.net.au",
-        "shop.telegraph.co.uk",
-        "shopping.buffalonews.com",
-        "shopping.nj.com",
-        "signup.cleveland.com",
-        "spiderbites.boston.com",
-        "ssl.bbc.co.uk",
-        "ssl.washingtonpost.com",
-        "static.reuters.com",
-        "stats.boston.com",
-        "stats.cleveland.com",
-        "stats.washingtonpost.com",
-        "store.latimes.com",
-        "subscribe.businessweek.com",
-        "subscribe.washingtonpost.com",
-        "syndication.boston.com",
-        "syndication.washingtonpost.com",
-        "tamil.thehindu.com",
-        "tickets.boston.com",
-        "transcripts.cnn.com",
-        "ugv.abcnews.go.com",
-        "update.cleveland.com",
-        "videoreprints.cnbc.com",
-        "washpost.bloomberg.com",
-        "watchlist.cnbc.com",
-        "weather.cnn.com",
-        "webcast.cnbc.com",
-        "www2b.abc.net.au",
-        "yellowpages.washingtonpost.com"}) {
-      BLACKLIST.add(blacklistDomain);
+  public static ContentSite getContentSiteForUrl(URL url) {
+    String domain = url.getHost();
+    while (domain.contains(".")) {
+      for (ContentSite contentSite : CRAWL_INSTRUCTIONS.getContentSiteList()) {
+        if (contentSite.getRootDomain().equals(domain)
+            || Iterables.contains(contentSite.getAkaRootDomainList(), domain)) {
+          return contentSite;
+        }
+      }
+      domain = domain.substring(domain.indexOf(".") + 1);
     }
+    return null;
   }
 
-  public static boolean isOkay(String url) {
+  public static boolean isOkay(String urlString) {
     try {
-      URL bigUrl = new URL(url);
+      URL url = new URL(urlString);
 
       // Length exclusion (this is the longest a URL can be in our database).
-      if (url.length() > 767) {
+      if (urlString.length() > 767) {
         return false;
       }
 
-      TreeMap<String, String> parameters = new TreeMap<>();
-      for (NameValuePair nameValue : URLEncodedUtils.parse(bigUrl.getQuery(), Charsets.UTF_8)) {
-        parameters.put(nameValue.getName(), nameValue.getValue());
+      ContentSite contentSite = getContentSiteForUrl(url);
+      if (contentSite == null) {
+        return false;
+      }
+      String domain = url.getHost();
+      for (String blacklistedDomain : contentSite.getSubdomainBlacklistList()) {
+        if (domain.equals(blacklistedDomain)) {
+          return false;
+        }
+      }
+      String path = url.getPath();
+      for (PathBlacklist blacklistedPath : contentSite.getPathBlacklistList()) {
+        switch (blacklistedPath.getLocation()) {
+          case EQUALS:
+            if (path.equals(blacklistedPath.getNeedle())) {
+              return false;
+            }
+            break;
+
+          case STARTS_WITH:
+            if (path.startsWith(blacklistedPath.getNeedle())) {
+              return false;
+            }
+            break;
+
+          case ENDS_WITH:
+            if (path.endsWith(blacklistedPath.getNeedle())) {
+              return false;
+            }
+            break;
+
+          case CONTAINS:
+            if (path.contains(blacklistedPath.getNeedle())) {
+              return false;
+            }
+            break;
+
+          case REGEX_FIND:
+            if (Pattern.compile(blacklistedPath.getNeedle()).matcher(path).find()) {
+              return false;
+            }
+            break;
+
+          case REGEX_MATCH:
+            if (Pattern.compile(blacklistedPath.getNeedle()).matcher(path).matches()) {
+              return false;
+            }
+            break;
+        }
       }
 
-      // Path exclusions.
-      String domain = bigUrl.getHost();
-      String path = bigUrl.getPath();
+      // Global path exclusions.
       if (domain.contains("video.") ||
           domain.contains("videos.") ||
           path.startsWith("/cgi-bin/") ||
@@ -392,276 +711,8 @@ public class UrlWhitelist {
           path.contains("/videos/")) {
         return false;
       }
-      if (domain.endsWith("abc.net.au") &&
-          path.startsWith("/radio/") ||
-          (path.contains("/sport/") && path.contains("/scoreboard/")) ||
-          (path.contains("/sport/") && path.contains("/results/")) ||
-          (path.contains("/image/"))) {
-        return false;
-      }
-      if (domain.endsWith("abcnews.go.com") &&
-          (path.startsWith("/Site/") ||
-           path.startsWith("/meta/") ||
-           path.startsWith("/xmldata/") ||
-           path.contains("/photos/") ||
-           path.contains("/videos/") ||
-           path.endsWith("/video"))) {
-        return false;
-      }
-      if (domain.endsWith("arstechnica.com") &&
-          (path.startsWith("/archive/") ||
-           path.startsWith("/articles/paedia/") ||
-           path.startsWith("/civis/") ||
-           path.startsWith("/cpu/") ||
-           path.startsWith("/etc/") ||
-           path.startsWith("/features/") ||
-           path.startsWith("/forum/") ||
-           path.startsWith("/guide/") ||
-           path.startsWith("/guides/") ||
-           path.startsWith("/mt-static/") ||
-           path.startsWith("/old/") ||
-           path.startsWith("/paedia/") ||
-           path.startsWith("/reviews/") ||
-           path.startsWith("/site/") ||
-           path.startsWith("/sponsored/") ||
-           path.startsWith("/subscriptions/") ||
-           path.startsWith("/tweak/") ||
-           path.startsWith("/wankerdesk/")) ||
-           path.endsWith("/sendnews.php")) {
-        return false;
-      }
-      if (domain.endsWith("bbc.co.uk") || domain.endsWith("bbc.com")) {
-        if (!path.startsWith("/newsbeat/") &&
-            !BBC_NEWS_ARTICLE_PATH.matcher(path).matches()) {
-          return false;
-        }
-      }
-      if (domain.endsWith("bdnews24.com")) {
-        if (!parameters.containsKey("getXmlFeed") ||
-            "rssfeed".equals(parameters.get("widgetName"))) {
-          return false;
-        }
-      }
-      if (domain.endsWith(".bloomberg.com") &&
-          (path.startsWith("/ad-section/") ||
-           path.startsWith("/apps/") ||
-           path.startsWith("/billionaires/") ||
-           path.startsWith("/graphics/") ||
-           path.startsWith("/infographics/") ||
-           path.startsWith("/news/print/") ||
-           path.startsWith("/podcasts/") ||
-           path.startsWith("/quote/") ||
-           path.startsWith("/slideshow/") ||
-           path.startsWith("/visual-data/") ||
-           path.endsWith("/_/slideshow/"))) {
-        return false;
-      }
-      if (domain.endsWith("boston.com") &&
-          (path.startsWith("/boston/action/rssfeed") ||
-           path.startsWith("/cars/") ||
-           path.startsWith("/eom/") ||
-           path.startsWith("/help/") ||
-           // /jobs/ is OK!!!
-           path.startsWith("/news/traffic/") ||
-           path.startsWith("/radio") ||
-           path.startsWith("/sports/blogs/"))) {
-        return false;
-      }
-      if (domain.endsWith("businessweek.com") &&
-          (path.startsWith("/adsections/") ||
-           path.startsWith("/blogs/getting-in/") ||
-           path.startsWith("/bschools/") ||
-           path.startsWith("/business-schools/") ||
-           path.startsWith("/companies-and-industries/") ||
-           path.startsWith("/global-economics/") ||
-           path.startsWith("/innovation-and-design/") ||
-           path.startsWith("/innovation/") ||
-           path.startsWith("/interactive/") ||
-           path.startsWith("/lifestyle/") ||
-           path.startsWith("/markets-and-finance/") ||
-           path.startsWith("/photos/") ||
-           path.startsWith("/politics-and-policy/") ||
-           path.startsWith("/printer/") ||
-           path.startsWith("/quiz/") ||
-           path.startsWith("/reports/") ||
-           path.startsWith("/slideshows/") || path.equals("/slideshows") ||
-           path.startsWith("/small-business/") ||
-           path.startsWith("/technology/") ||
-           path.startsWith("/videos/") || path.equals("/videos"))) {
-        return false;
-      }
-      if (domain.endsWith("cbc.ca") &&
-          (path.startsWith("/connects/") ||
-           path.startsWith("/mediacentre/") ||
-           path.startsWith("/player/") ||
-           path.startsWith("/shop/"))) {
-        return false;
-      }
-      if (domain.endsWith("cbsnews.com") &&
-          (path.startsWith("/cbsnews./quote")) ||
-           path.startsWith("/media/")) {
-        return false;
-      }
-      if (domain.endsWith("channelnewsasia.com") &&
-          path.contains("/wp-admin/")) {
-        return false;
-      }
-      if (domain.endsWith("cleveland.com") &&
-          (path.startsWith("/events/") || path.equals("/events") ||
-           path.startsWith("/forums/") || path.equals("/forums") ||
-           path.startsWith("/jobs/") || path.equals("/jobs") ||
-           path.endsWith("/print.html"))) {
-        return false;
-      }
-      if (domain.endsWith("cnbc.com") &&
-          path.startsWith("/live-tv/")) {
-        return false;
-      }
-      if (domain.endsWith("cnn.com") &&
-          (path.startsWith("/CNN/") ||
-           path.startsWith("/CNNI/") ||
-           path.startsWith("/linkto/") ||
-           path.startsWith("/services/") ||
-           path.contains("/gallery/"))) {
-        return false;
-      }
-      if (domain.endsWith(".chicagotribune.com") && path.endsWith("/comments/atom.xml")) {
-        return false;
-      }
-      if (domain.endsWith(".chron.com") &&
-          (path.endsWith("/feed") ||
-              parameters.containsKey("share"))) {
-        return false;
-      }
-      if (domain.endsWith(".cnn.com") &&
-          (path.startsWith("/calculator/") ||
-           path.startsWith("/data/") ||
-           path.startsWith("/infographic/") ||
-           path.startsWith("/interactive/") ||
-           path.startsWith("/quizzes/") ||
-           path.contains("/comment-page-"))) { // E.g. /comment-page-9/
-        return false;
-      }
-      if (domain.endsWith("curbed.com") && path.equals("/search.php")) {
-        return false;
-      }
-      if (domain.endsWith("finance.boston.com") && path.endsWith("/quote")) {
-        return false;
-      }
-      if (domain.endsWith("forbes.com") &&
-          (path.startsWith("/account/") ||
-           path.startsWith("/pictures/") ||
-           path.startsWith("/video/") ||
-           path.matches(".*\\/[0-9]{1,3}\\/$") ||  // Page 2, 3, etc.
-           path.endsWith("/print/"))) {
-        return false;
-      }
-      if (domain.equals("investing.businessweek.com") &&
-          path.startsWith("/research/stocks/snapshot/")) {
-        return false;
-      }
-      if (domain.endsWith("latimes.com")) {
-        if (path.startsWith("/classified/") ||
-            path.startsWith("/shopping/")) {
-          return false;
-        }
-        // Don't geek out on the historical articles.  If they're linked from other
-        // places, great, but we don't need to dig through all of them.
-        if (path.matches("^\\/[12][0-9]{3}\\/.*")) {
-          return false;
-        }
-      }
-      if (domain.endsWith("mashable.com") &&
-          (path.startsWith("/login/") ||
-           path.startsWith("/search/") ||
-           path.startsWith("/sgs/") ||
-           path.startsWith("/media-summit/"))) {
-        return false;
-      }
-      if (domain.endsWith("money.usnews.com") && path.startsWith("/529s/")) {
-        return false;
-      }
-      if (domain.endsWith("money.cnn.com") &&
-          (path.startsWith("/data/") ||
-           path.startsWith("/galleries/") ||
-           path.startsWith("/gallery/") ||
-           path.startsWith("/quote/") ||
-           path.startsWith("/magazines/") ||
-           path.startsWith("/tag/") ||
-           path.startsWith("/tools/"))) {
-        return false;
-      }
-      if (domain.endsWith(".nj.com") && path.endsWith("/print.html")) {
-        return false;
-      }
-      if (domain.endsWith("nytimes.com")) {
-        if (!NYTIMES_ARTICLE_DOMAIN.matcher(domain).matches() ||
-            !NYTIMES_ARTICLE_PATH.matcher(path).matches()) {
-          return false;
-        }
-      }
-      if (domain.endsWith("recode.net") &&
-          (path.startsWith("/events/") ||
-           path.startsWith("/follow-us/") ||
-           path.startsWith("/next/") ||
-           path.startsWith("/sponsored-content/") ||
-           path.startsWith("/video/") ||
-           path.startsWith("/wp-admin/") ||
-           parameters.containsKey("share"))) {
-        return false;
-      }
-      if (domain.endsWith("sfgate.com") &&
-          (path.startsWith("/merge/") ||
-           parameters.containsKey("share"))) {
-        return false;
-      }
-      if (domain.endsWith("siliconbeat.com") &&
-          parameters.containsKey("share")) {
-        return false;
-      }
-      if (domain.endsWith("sports.chron.com") &&
-          path.startsWith("/merge/")) {
-        return false;
-      }
-      if (domain.endsWith("techcrunch.com") &&
-          (path.startsWith("/event-type/") ||
-           path.startsWith("/events/") ||
-           path.startsWith("/gallery/") ||
-           path.startsWith("/rss/"))) {
-        return false;
-      }
-      if (domain.endsWith("telegraph.co.uk") && path.startsWith("/sponsored/")) {
-        return false;
-      }
-      if (domain.endsWith("theverge.com") &&
-          (path.startsWith("/forums/") ||
-           path.startsWith("/jobs") ||
-           path.startsWith("/search") ||
-           path.startsWith("/video/"))) {
-        return false;
-      }
-      if (domain.endsWith("usatoday.com") && path.startsWith("/marketing/rss/")) {
-        return false;
-      }
-      if (domain.endsWith("washingtonpost.com") &&
-          (path.startsWith("/capitalweathergang/") ||
-           path.startsWith("/newssearch/") ||
-           path.contains("/wp-dyn/") ||
-           path.contains("/wp-srv/") ||
-           path.endsWith("/wp-dyn") ||
-           path.endsWith("_category.html") ||
-           path.endsWith("/post.php"))) {
-        return false;
-      }
-      if (domain.endsWith("westword.com") &&
-          (path.startsWith("/classifieds/") || path.startsWith("/promotions/"))) {
-        return false;
-      }
-      if (domain.endsWith(".wsj.com") && path.endsWith("/tab/print")) {
-        return false;
-      }
 
-      // Extension exclusions.
+      // Global extension exclusions.
       if (path.endsWith("/atom.xml") ||
           path.endsWith("/rss.xml") ||
           path.endsWith(".gif") ||
@@ -675,17 +726,9 @@ public class UrlWhitelist {
         return false;
       }
 
-      // Domain exclusions.
-      while (domain.contains(".")) {
-        if (BLACKLIST.contains(domain)) {
-          return false;
-        }
-        if (WHITELIST.contains(domain)) {
-          return true;
-        }
-        domain = domain.substring(domain.indexOf(".") + 1);
-      }
-      return false;
+      // Everything passed!
+      return true;
+
     } catch (MalformedURLException e) {
       return false;
     }
@@ -726,4 +769,3 @@ public class UrlWhitelist {
     LOG.info("Deleted " + Database.with(Url.class).delete(ids) + " urls");
   }
 }
-

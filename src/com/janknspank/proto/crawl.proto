@@ -1,0 +1,46 @@
+// Objects representing crawler instructions.
+
+import "com/janknspank/database/extensions.proto";
+
+option java_package = "com.janknspank.proto";
+option java_outer_classname = "CrawlProto";
+
+message CrawlInstructions {
+  repeated ContentSite content_site = 1;
+}
+
+message ContentSite {
+  // E.g. "nytimes.com".
+  optional string root_domain = 1 [
+    (required) = YES
+  ];
+
+  // E.g. bbc.com, which is the US-site for bbc.co.uk.
+  repeated string aka_root_domain = 2;
+
+  // E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
+  repeated string start_url = 3 [
+    (required) = YES
+  ];
+
+  repeated string subdomain_blacklist = 4;
+
+  message PathBlacklist {
+    optional string needle = 1 [
+      (required) = YES
+    ];
+
+    enum Location {
+      EQUALS = 1;
+      STARTS_WITH = 2;
+      ENDS_WITH = 3;
+      CONTAINS = 4;
+      REGEX_FIND = 5;
+      REGEX_MATCH = 6;
+    }
+    optional Location location = 4 [
+      default = STARTS_WITH
+    ];
+  }
+  repeated PathBlacklist path_blacklist = 5;
+}
