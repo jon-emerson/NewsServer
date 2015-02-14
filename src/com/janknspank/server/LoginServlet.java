@@ -280,6 +280,7 @@ public class LoginServlet extends StandardServlet {
     JSONObject userJson = Serializer.toJSON(user);
     userJson.put("favorites", userHelper.getFavoritesJsonArray());
     userJson.put("industries", userHelper.getIndustriesJsonArray());
+    userJson.put("ratings", userHelper.getRatingsJsonArray());
     response.put("user", userJson);
     response.put("session", Serializer.toJSON(session));
     return response;

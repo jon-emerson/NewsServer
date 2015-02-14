@@ -12,6 +12,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.janknspank.bizness.UrlRatings;
 import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -111,5 +112,9 @@ public class UserHelper {
       jsonArray.put(o);
     }
     return jsonArray;
+  }
+  
+  public JSONArray getRatingsJsonArray() throws DatabaseSchemaException {
+    return Serializer.toJSON(UrlRatings.getForUser(user));
   }
 }
