@@ -103,6 +103,7 @@ public class UrlWhitelist {
               .setPathRegex("^\\/blogs\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$$"))
           .addArticleUrlPattern(ArticleUrlPattern.newBuilder()
               .setPathRegex("^\\/[^\\/]+\\/wireStory\\/.*[0-9]{7,9}$"))
+          .addWhitelistedQueryParameter("id")
           .setTestInstructions(TestInstructions.newBuilder()
               .setArticleUrlDetectorChecks(ArticleUrlDetectorChecks.newBuilder()
                   .addArticleUrl("http://abcnews.go.com/2020/20-2020-surprising-celebrity-infomercials/story?id=13623616")
@@ -1822,6 +1823,7 @@ public class UrlWhitelist {
               .setPathRegex("\\-20[0-9]{2}[01][0-9][0-3][0-9]\\.html$"))
           .addArticleUrlPattern(ArticleUrlPattern.newBuilder()
               .setPathRegex("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$"))
+          .addWhitelistedQueryParameter("p") // Not 100% sure about this being necessary...
           .setTestInstructions(TestInstructions.newBuilder()
               .setArticleUrlDetectorChecks(ArticleUrlDetectorChecks.newBuilder()
                   .addArticleUrl("http://blog.washingtonpost.com/fact-checker/2007/09/about_the_fact_checker.html")

@@ -874,17 +874,65 @@ public final class CrawlProto {
     com.janknspank.proto.CrawlProto.ContentSite.ArticleUrlPatternOrBuilder getArticleUrlPatternOrBuilder(
         int index);
 
-    // optional .TestInstructions test_instructions = 8;
+    // repeated string whitelisted_query_parameter = 8;
     /**
-     * <code>optional .TestInstructions test_instructions = 8;</code>
+     * <code>repeated string whitelisted_query_parameter = 8;</code>
+     *
+     * <pre>
+     * These are rare: URL query parameters that are actually used to address a
+     * unique article.  Any tracking query parameters or UI-configuring query
+     * parameters should NOT be listed.  Basically, only put article ID specifiers
+     * here, IFF the respective site uses query parameters to address articles.
+     * </pre>
+     */
+    java.util.List<java.lang.String>
+    getWhitelistedQueryParameterList();
+    /**
+     * <code>repeated string whitelisted_query_parameter = 8;</code>
+     *
+     * <pre>
+     * These are rare: URL query parameters that are actually used to address a
+     * unique article.  Any tracking query parameters or UI-configuring query
+     * parameters should NOT be listed.  Basically, only put article ID specifiers
+     * here, IFF the respective site uses query parameters to address articles.
+     * </pre>
+     */
+    int getWhitelistedQueryParameterCount();
+    /**
+     * <code>repeated string whitelisted_query_parameter = 8;</code>
+     *
+     * <pre>
+     * These are rare: URL query parameters that are actually used to address a
+     * unique article.  Any tracking query parameters or UI-configuring query
+     * parameters should NOT be listed.  Basically, only put article ID specifiers
+     * here, IFF the respective site uses query parameters to address articles.
+     * </pre>
+     */
+    java.lang.String getWhitelistedQueryParameter(int index);
+    /**
+     * <code>repeated string whitelisted_query_parameter = 8;</code>
+     *
+     * <pre>
+     * These are rare: URL query parameters that are actually used to address a
+     * unique article.  Any tracking query parameters or UI-configuring query
+     * parameters should NOT be listed.  Basically, only put article ID specifiers
+     * here, IFF the respective site uses query parameters to address articles.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getWhitelistedQueryParameterBytes(int index);
+
+    // optional .TestInstructions test_instructions = 9;
+    /**
+     * <code>optional .TestInstructions test_instructions = 9;</code>
      */
     boolean hasTestInstructions();
     /**
-     * <code>optional .TestInstructions test_instructions = 8;</code>
+     * <code>optional .TestInstructions test_instructions = 9;</code>
      */
     com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions();
     /**
-     * <code>optional .TestInstructions test_instructions = 8;</code>
+     * <code>optional .TestInstructions test_instructions = 9;</code>
      */
     com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder();
   }
@@ -993,6 +1041,14 @@ public final class CrawlProto {
               break;
             }
             case 66: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                whitelistedQueryParameter_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              whitelistedQueryParameter_.add(input.readBytes());
+              break;
+            }
+            case 74: {
               com.janknspank.proto.CrawlProto.TestInstructions.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = testInstructions_.toBuilder();
@@ -1030,6 +1086,9 @@ public final class CrawlProto {
         }
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           articleUrlPattern_ = java.util.Collections.unmodifiableList(articleUrlPattern_);
+        }
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          whitelistedQueryParameter_ = new com.google.protobuf.UnmodifiableLazyStringList(whitelistedQueryParameter_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2756,23 +2815,81 @@ public final class CrawlProto {
       return articleUrlPattern_.get(index);
     }
 
-    // optional .TestInstructions test_instructions = 8;
-    public static final int TEST_INSTRUCTIONS_FIELD_NUMBER = 8;
+    // repeated string whitelisted_query_parameter = 8;
+    public static final int WHITELISTED_QUERY_PARAMETER_FIELD_NUMBER = 8;
+    private com.google.protobuf.LazyStringList whitelistedQueryParameter_;
+    /**
+     * <code>repeated string whitelisted_query_parameter = 8;</code>
+     *
+     * <pre>
+     * These are rare: URL query parameters that are actually used to address a
+     * unique article.  Any tracking query parameters or UI-configuring query
+     * parameters should NOT be listed.  Basically, only put article ID specifiers
+     * here, IFF the respective site uses query parameters to address articles.
+     * </pre>
+     */
+    public java.util.List<java.lang.String>
+        getWhitelistedQueryParameterList() {
+      return whitelistedQueryParameter_;
+    }
+    /**
+     * <code>repeated string whitelisted_query_parameter = 8;</code>
+     *
+     * <pre>
+     * These are rare: URL query parameters that are actually used to address a
+     * unique article.  Any tracking query parameters or UI-configuring query
+     * parameters should NOT be listed.  Basically, only put article ID specifiers
+     * here, IFF the respective site uses query parameters to address articles.
+     * </pre>
+     */
+    public int getWhitelistedQueryParameterCount() {
+      return whitelistedQueryParameter_.size();
+    }
+    /**
+     * <code>repeated string whitelisted_query_parameter = 8;</code>
+     *
+     * <pre>
+     * These are rare: URL query parameters that are actually used to address a
+     * unique article.  Any tracking query parameters or UI-configuring query
+     * parameters should NOT be listed.  Basically, only put article ID specifiers
+     * here, IFF the respective site uses query parameters to address articles.
+     * </pre>
+     */
+    public java.lang.String getWhitelistedQueryParameter(int index) {
+      return whitelistedQueryParameter_.get(index);
+    }
+    /**
+     * <code>repeated string whitelisted_query_parameter = 8;</code>
+     *
+     * <pre>
+     * These are rare: URL query parameters that are actually used to address a
+     * unique article.  Any tracking query parameters or UI-configuring query
+     * parameters should NOT be listed.  Basically, only put article ID specifiers
+     * here, IFF the respective site uses query parameters to address articles.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getWhitelistedQueryParameterBytes(int index) {
+      return whitelistedQueryParameter_.getByteString(index);
+    }
+
+    // optional .TestInstructions test_instructions = 9;
+    public static final int TEST_INSTRUCTIONS_FIELD_NUMBER = 9;
     private com.janknspank.proto.CrawlProto.TestInstructions testInstructions_;
     /**
-     * <code>optional .TestInstructions test_instructions = 8;</code>
+     * <code>optional .TestInstructions test_instructions = 9;</code>
      */
     public boolean hasTestInstructions() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .TestInstructions test_instructions = 8;</code>
+     * <code>optional .TestInstructions test_instructions = 9;</code>
      */
     public com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions() {
       return testInstructions_;
     }
     /**
-     * <code>optional .TestInstructions test_instructions = 8;</code>
+     * <code>optional .TestInstructions test_instructions = 9;</code>
      */
     public com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
       return testInstructions_;
@@ -2786,6 +2903,7 @@ public final class CrawlProto {
       pathBlacklist_ = java.util.Collections.emptyList();
       paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       articleUrlPattern_ = java.util.Collections.emptyList();
+      whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -2821,8 +2939,11 @@ public final class CrawlProto {
       for (int i = 0; i < articleUrlPattern_.size(); i++) {
         output.writeMessage(7, articleUrlPattern_.get(i));
       }
+      for (int i = 0; i < whitelistedQueryParameter_.size(); i++) {
+        output.writeBytes(8, whitelistedQueryParameter_.getByteString(i));
+      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(8, testInstructions_);
+        output.writeMessage(9, testInstructions_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2881,9 +3002,18 @@ public final class CrawlProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, articleUrlPattern_.get(i));
       }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < whitelistedQueryParameter_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(whitelistedQueryParameter_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getWhitelistedQueryParameterList().size();
+      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, testInstructions_);
+          .computeMessageSize(9, testInstructions_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3026,12 +3156,14 @@ public final class CrawlProto {
         } else {
           articleUrlPatternBuilder_.clear();
         }
+        whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
         if (testInstructionsBuilder_ == null) {
           testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
         } else {
           testInstructionsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -3106,7 +3238,13 @@ public final class CrawlProto {
         } else {
           result.articleUrlPattern_ = articleUrlPatternBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          whitelistedQueryParameter_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              whitelistedQueryParameter_);
+          bitField0_ = (bitField0_ & ~0x00000080);
+        }
+        result.whitelistedQueryParameter_ = whitelistedQueryParameter_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000002;
         }
         if (testInstructionsBuilder_ == null) {
@@ -3226,6 +3364,16 @@ public final class CrawlProto {
               articleUrlPatternBuilder_.addAllMessages(other.articleUrlPattern_);
             }
           }
+        }
+        if (!other.whitelistedQueryParameter_.isEmpty()) {
+          if (whitelistedQueryParameter_.isEmpty()) {
+            whitelistedQueryParameter_ = other.whitelistedQueryParameter_;
+            bitField0_ = (bitField0_ & ~0x00000080);
+          } else {
+            ensureWhitelistedQueryParameterIsMutable();
+            whitelistedQueryParameter_.addAll(other.whitelistedQueryParameter_);
+          }
+          onChanged();
         }
         if (other.hasTestInstructions()) {
           mergeTestInstructions(other.getTestInstructions());
@@ -4279,18 +4427,174 @@ public final class CrawlProto {
         return articleUrlPatternBuilder_;
       }
 
-      // optional .TestInstructions test_instructions = 8;
+      // repeated string whitelisted_query_parameter = 8;
+      private com.google.protobuf.LazyStringList whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureWhitelistedQueryParameterIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          whitelistedQueryParameter_ = new com.google.protobuf.LazyStringArrayList(whitelistedQueryParameter_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public java.util.List<java.lang.String>
+          getWhitelistedQueryParameterList() {
+        return java.util.Collections.unmodifiableList(whitelistedQueryParameter_);
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public int getWhitelistedQueryParameterCount() {
+        return whitelistedQueryParameter_.size();
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public java.lang.String getWhitelistedQueryParameter(int index) {
+        return whitelistedQueryParameter_.get(index);
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getWhitelistedQueryParameterBytes(int index) {
+        return whitelistedQueryParameter_.getByteString(index);
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public Builder setWhitelistedQueryParameter(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureWhitelistedQueryParameterIsMutable();
+        whitelistedQueryParameter_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public Builder addWhitelistedQueryParameter(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureWhitelistedQueryParameterIsMutable();
+        whitelistedQueryParameter_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public Builder addAllWhitelistedQueryParameter(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureWhitelistedQueryParameterIsMutable();
+        super.addAll(values, whitelistedQueryParameter_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public Builder clearWhitelistedQueryParameter() {
+        whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string whitelisted_query_parameter = 8;</code>
+       *
+       * <pre>
+       * These are rare: URL query parameters that are actually used to address a
+       * unique article.  Any tracking query parameters or UI-configuring query
+       * parameters should NOT be listed.  Basically, only put article ID specifiers
+       * here, IFF the respective site uses query parameters to address articles.
+       * </pre>
+       */
+      public Builder addWhitelistedQueryParameterBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureWhitelistedQueryParameterIsMutable();
+        whitelistedQueryParameter_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // optional .TestInstructions test_instructions = 9;
       private com.janknspank.proto.CrawlProto.TestInstructions testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder> testInstructionsBuilder_;
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       public boolean hasTestInstructions() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       public com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions() {
         if (testInstructionsBuilder_ == null) {
@@ -4300,7 +4604,7 @@ public final class CrawlProto {
         }
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       public Builder setTestInstructions(com.janknspank.proto.CrawlProto.TestInstructions value) {
         if (testInstructionsBuilder_ == null) {
@@ -4312,11 +4616,11 @@ public final class CrawlProto {
         } else {
           testInstructionsBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       public Builder setTestInstructions(
           com.janknspank.proto.CrawlProto.TestInstructions.Builder builderForValue) {
@@ -4326,15 +4630,15 @@ public final class CrawlProto {
         } else {
           testInstructionsBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       public Builder mergeTestInstructions(com.janknspank.proto.CrawlProto.TestInstructions value) {
         if (testInstructionsBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+          if (((bitField0_ & 0x00000100) == 0x00000100) &&
               testInstructions_ != com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance()) {
             testInstructions_ =
               com.janknspank.proto.CrawlProto.TestInstructions.newBuilder(testInstructions_).mergeFrom(value).buildPartial();
@@ -4345,11 +4649,11 @@ public final class CrawlProto {
         } else {
           testInstructionsBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       public Builder clearTestInstructions() {
         if (testInstructionsBuilder_ == null) {
@@ -4358,19 +4662,19 @@ public final class CrawlProto {
         } else {
           testInstructionsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       public com.janknspank.proto.CrawlProto.TestInstructions.Builder getTestInstructionsBuilder() {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         onChanged();
         return getTestInstructionsFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       public com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
         if (testInstructionsBuilder_ != null) {
@@ -4380,7 +4684,7 @@ public final class CrawlProto {
         }
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 8;</code>
+       * <code>optional .TestInstructions test_instructions = 9;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder> 
@@ -6517,30 +6821,31 @@ public final class CrawlProto {
       "\n com/janknspank/proto/crawl.proto\032(com/" +
       "janknspank/database/extensions.proto\"7\n\021" +
       "CrawlInstructions\022\"\n\014content_site\030\001 \003(\0132" +
-      "\014.ContentSite\"\323\004\n\013ContentSite\022\031\n\013root_do" +
+      "\014.ContentSite\"\370\004\n\013ContentSite\022\031\n\013root_do" +
       "main\030\001 \001(\tB\004\210\246\035\001\022\027\n\017aka_root_domain\030\002 \003(" +
       "\t\022\027\n\tstart_url\030\003 \003(\tB\004\210\246\035\001\022\033\n\023subdomain_" +
       "blacklist\030\004 \003(\t\0222\n\016path_blacklist\030\005 \003(\0132" +
       "\032.ContentSite.PathBlacklist\022 \n\022paragraph" +
       "_selector\030\006 \003(\tB\004\210\246\035\001\022;\n\023article_url_pat" +
       "tern\030\007 \003(\0132\036.ContentSite.ArticleUrlPatte",
-      "rn\0222\n\021test_instructions\030\010 \001(\0132\021.TestInst" +
-      "ructionsB\004\210\246\035\001\032\320\001\n\rPathBlacklist\022\024\n\006need" +
-      "le\030\001 \001(\tB\004\210\246\035\001\022B\n\010location\030\004 \001(\0162#.Conte" +
-      "ntSite.PathBlacklist.Location:\013STARTS_WI" +
-      "TH\"e\n\010Location\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WIT" +
-      "H\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGE" +
-      "X_FIND\020\005\022\017\n\013REGEX_MATCH\020\006\032@\n\021ArticleUrlP" +
-      "attern\022\030\n\npath_regex\030\001 \001(\tB\004\210\246\035\001\022\021\n\tsubd" +
-      "omain\030\002 \001(\t\"\266\002\n\020TestInstructions\022H\n\024url_" +
-      "whitelist_checks\030\001 \001(\0132$.TestInstruction",
-      "s.UrlWhitelistChecksB\004\210\246\035\001\022U\n\033article_ur" +
-      "l_detector_checks\030\002 \001(\0132*.TestInstructio" +
-      "ns.ArticleUrlDetectorChecksB\004\210\246\035\001\0327\n\022Url" +
-      "WhitelistChecks\022\020\n\010good_url\030\001 \003(\t\022\017\n\007bad" +
-      "_url\030\002 \003(\t\032H\n\030ArticleUrlDetectorChecks\022\023" +
-      "\n\013article_url\030\001 \003(\t\022\027\n\017non_article_url\030\002" +
-      " \003(\tB\"\n\024com.janknspank.protoB\nCrawlProto"
+      "rn\022#\n\033whitelisted_query_parameter\030\010 \003(\t\022" +
+      "2\n\021test_instructions\030\t \001(\0132\021.TestInstruc" +
+      "tionsB\004\210\246\035\001\032\320\001\n\rPathBlacklist\022\024\n\006needle\030" +
+      "\001 \001(\tB\004\210\246\035\001\022B\n\010location\030\004 \001(\0162#.ContentS" +
+      "ite.PathBlacklist.Location:\013STARTS_WITH\"" +
+      "e\n\010Location\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002" +
+      "\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_F" +
+      "IND\020\005\022\017\n\013REGEX_MATCH\020\006\032@\n\021ArticleUrlPatt" +
+      "ern\022\030\n\npath_regex\030\001 \001(\tB\004\210\246\035\001\022\021\n\tsubdoma" +
+      "in\030\002 \001(\t\"\266\002\n\020TestInstructions\022H\n\024url_whi",
+      "telist_checks\030\001 \001(\0132$.TestInstructions.U" +
+      "rlWhitelistChecksB\004\210\246\035\001\022U\n\033article_url_d" +
+      "etector_checks\030\002 \001(\0132*.TestInstructions." +
+      "ArticleUrlDetectorChecksB\004\210\246\035\001\0327\n\022UrlWhi" +
+      "telistChecks\022\020\n\010good_url\030\001 \003(\t\022\017\n\007bad_ur" +
+      "l\030\002 \003(\t\032H\n\030ArticleUrlDetectorChecks\022\023\n\013a" +
+      "rticle_url\030\001 \003(\t\022\027\n\017non_article_url\030\002 \003(" +
+      "\tB\"\n\024com.janknspank.protoB\nCrawlProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6558,7 +6863,7 @@ public final class CrawlProto {
           internal_static_ContentSite_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ContentSite_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "TestInstructions", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "TestInstructions", });
           internal_static_ContentSite_PathBlacklist_descriptor =
             internal_static_ContentSite_descriptor.getNestedTypes().get(0);
           internal_static_ContentSite_PathBlacklist_fieldAccessorTable = new
