@@ -1,21 +1,10 @@
 package com.janknspank.crawler;
 
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
-
-import com.google.common.base.Charsets;
 import com.google.common.base.Predicate;
-import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
-import com.janknspank.common.DateParser;
 
 /**
  * Utility method for determining whether a URL is a news article, solely
@@ -29,339 +18,197 @@ public class ArticleUrlDetector {
     }
   };
 
-  private static final Pattern ABC_NET_AU_PATH =
-      Pattern.compile("\\/[0-9]{6,10}(.htm)?$");
-  private static final Pattern ABC_NEWS_ID_PARAM =
-      Pattern.compile("^[0-9]{5,10}$");
-  private static final Pattern ABC_NEWS_BLOG_PATH =
-      Pattern.compile("^\\/blogs\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$$");
-  private static final Pattern ABC_NEWS_WIRESTORY_PATH =
-      Pattern.compile("^\\/[^\\/]+\\/wireStory\\/.*[0-9]{7,9}$");
-  private static final Pattern ALL_THINGS_D_PATH =
-      Pattern.compile("^\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/");
-  private static final Pattern ARS_TECHNICA_PATH_1 =
-      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$");
-  private static final Pattern ARS_TECHNICA_PATH_2 =
-      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.ars$");
-  private static final Pattern ARS_TECHNICA_PATH_3 =
-      Pattern.compile("^\\/news\\/.*[0-9]{5,12}\\.html$");
-  private static final Pattern ARS_TECHNICA_PATH_4 =
-      Pattern.compile("\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-[0-9]{3,10}\\.html$");
-  private static final Pattern BBC_CO_UK_PATH_1 =
-      Pattern.compile("\\/story\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-");
-  private static final Pattern BBC_CO_UK_PATH_2 =
-      Pattern.compile("\\/newsbeat\\/[0-9]{7,10}$");
-  private static final Pattern BDNEWS24_PATH =
-      Pattern.compile("^\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/");
-  private static final Pattern BLOOMBERG_ARCHIVE_PATH =
-      Pattern.compile("^\\/bb\\/newsarchive\\/[a-zA-Z0-9_]{5,15}\\.html$");
-  private static final Pattern BOSTON_COM_PATH_1 =
-      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*story\\.html$");
-  private static final Pattern BOSTON_COM_PATH_2 =
-      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$");
-  private static final Pattern BOSTON_FINANCE_COM_PATH =
-      Pattern.compile("\\/read\\/[0-9]{6,10}\\/[^\\/]+\\/$");
-  private static final Pattern BREITBART_PATH =
-      Pattern.compile("\\/news\\/[^\\/]+\\-[^\\/]+\\-[^\\/]+\\/$");
-  private static final Pattern BUFFALO_NEWS_PATH_1 =
-      Pattern.compile("\\-20[0-9]{6}$");
-  private static final Pattern BUFFALO_NEWS_PATH_2 =
-      Pattern.compile("^\\/article\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/");
-  private static final Pattern BUFFALO_NEWS_PATH_3 =
-      Pattern.compile("^\\/apps\\/pbcs.dll\\/article");
-  private static final Pattern BUSINESS_INSIDER_PATH =
-      Pattern.compile("^\\/(?!category\\/).*\\-.*\\-");
-  private static final Pattern CBC_PATH =
-      Pattern.compile("\\/news\\/.*\\-1\\.[0-9]{6,10}$");
-  private static final Pattern CBS_NEWS_PATH_1 =
-      Pattern.compile("\\/news\\/[^\\/]+\\/$");
-  private static final Pattern CBS_NEWS_PATH_2 =
-      Pattern.compile("\\/8301\\-[0-9_\\-]+\\/[^\\/]+\\/$");
-  private static final Pattern CBS_NEWS_PATH_3 =
-      Pattern.compile("\\/[^\\/]+\\/[0-9a-f]+\\/([0-9]+\\/)?$");
-  private static final Pattern CHANNEL_NEWS_ASIA_PATH_1 =
-      Pattern.compile("^\\/news\\/.*\\/[0-9]+\\.html$");
-  private static final Pattern CHANNEL_NEWS_ASIA_PATH_2 =
-      Pattern.compile("^\\/premier\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\/$");
-  private static final Pattern CHRON_BLOG_PATH =
-      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$");
-  private static final Pattern CHRON_PATH =
-      Pattern.compile("(\\-|\\/)[0-9]{7,10}\\.(php|html)$");
-  private static final Pattern CNBC_PATH =
-      Pattern.compile("^\\/id\\/[0-9]{9,11}(\\/[^\\/]*)?$");
-  private static final Pattern CNN_PATH_1 =
-      Pattern.compile("\\/20[0-9]{2}\\/([A-Z]+\\/([A-Za-z]+\\/)?)?[01][0-9]\\/[0-3][0-9]\\/");
-  private static final Pattern CNN_PATH_2 =
-      Pattern.compile("\\/SPECIALS\\/.*\\/index.html?$");
-  private static final Pattern CNN_TRAVEL_PATH =
-      Pattern.compile("\\-[0-9]{5,8}$");
-  private static final Pattern CURBED_PATH =
-      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9](\\/[0-3][0-9])?\\/[^\\/\\.]+\\.php$");
-  private static final Pattern ENGADGET_PATH =
-      Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-");
-  private static final Pattern FAST_COMPANY_PATH =
-      Pattern.compile("\\/3[0-9]{6}\\/.*");
-  private static final Pattern FORBES_PATH =
-      Pattern.compile("^\\/sites\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/");
-  private static final Pattern FORTUNE_PATH =
-      Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/(.*\\-.*|[0-9]+)\\/$");
-  private static final Pattern GIZMODO_PATH =
-      Pattern.compile("[\\/-]1[0-9]{9}(\\/[^\\/]+)?$");
-  private static final Pattern LATIMES_PATH_1 =
-      Pattern.compile("20[0-9]{2}[01][0-9][0-3][0-9]\\-"
-          + "(column|htmlstory|story|storygallery)\\.html$");
-  private static final Pattern LATIMES_PATH_2 =
-      Pattern.compile(",[0-9]{6,10}\\.(column|htmlstory|story|storygallery)$");
-  private static final Pattern MARKETS_CBSNEWS_PATH =
-      Pattern.compile("^\\/[^\\/]+\\/[0-9a-f]{12,19}\\/");
-  private static final Pattern MASHABLE_PATH =
-      Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-.*\\/$");
-  private static final Pattern MEDIUM_PATH =
-      Pattern.compile("[\\/-][0-9a-f]{12}$");
-  private static final Pattern MERCURY_NEWS_PATH =
-      Pattern.compile("\\/ci_[0-9]{7,10}(\\/.*)?$");
-  private static final Pattern NYTIMES_PATH =
-      Pattern.compile("^\\/(aponline\\/)?(19|20)[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-.*\\-.*(\\/|\\.html)$");
-  private static final Pattern PATH_ENDS_WITH_DASH_NUMBER =
-      Pattern.compile("-[0-9]{5,10}$");
-  private static final Pattern PC_MAG_PATH =
-      Pattern.compile("\\/article2\\/.+\\.asp$");
-  private static final Pattern RED_HERRING_PATH =
-      Pattern.compile("\\/[a-z]+\\/[^\\/]+-[^\\/]+\\/$");
-  private static final Pattern SFGATE_PATH =
-      Pattern.compile("\\/article.*(\\-|\\/)[0-9]{7,10}\\.php$");
-  private static final Pattern SILICONBEAT_PATH =
-      Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-.*\\/$");
-  private static final Pattern SLATE_PATH =
-      Pattern.compile("^\\/(articles|blogs)\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/.*\\.html$");
-  private static final Pattern STARTUP_WORKOUT_PATH =
-      Pattern.compile("^\\/(?!author\\/).+\\-.+");
-  private static final Pattern TECHCRUNCH_PATH =
-      Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$");
-  private static final Pattern TECHNOLOGY_REVIEW_PATH =
-      Pattern.compile("\\/[a-z]+\\/[0-9]{5,7}\\/");
-  private static final Pattern TELEGRAPH_PATH =
-      Pattern.compile("\\/1[0-9]{7}\\/");
-  private static final Pattern THEGUARDIAN_PATH =
-      Pattern.compile("\\/20[0-9]{2}\\/(jan|feb|mar|apr|may|jun|jul|aug|sep|nov|dec)\\/[0-3][0-9]\\/");
-  private static final Pattern THENEXTWEB_PATH =
-      Pattern.compile("^\\/([a-z\\_\\-]+\\/)?20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$");
-  private static final Pattern THEVERGE_PATH =
-      Pattern.compile("^\\/([a-z\\_\\-]+\\/)?20[0-9]{2}\\/1?[0-9]\\/[1-3]?[0-9]\\/[0-9]{7,9}\\/");
-  private static final Pattern VENTUREBEAT_PATH =
-      Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$");
-  private static final Pattern WASHINGTON_POST_PATH_1 =
-      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+(\\/|_story\\.html)$");
-  private static final Pattern WASHINGTON_POST_PATH_2 =
-      Pattern.compile("\\-20[0-9]{2}[01][0-9][0-3][0-9]\\.html$");
-  private static final Pattern WIRED_PATH =
-      Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/.*\\/$");
-  private static final Pattern YEAR_MONTH_THEN_ARTICLE_NAME_PATH =
-      Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$");
-  private static Map<String, String> getParameters(String urlString) throws URISyntaxException {
-    List<NameValuePair> parameters = URLEncodedUtils.parse(new URI(urlString), Charsets.UTF_8.name());
-    Map<String, String> parameterMap = Maps.newHashMap();
-    for (NameValuePair nameValuePair : parameters) {
-      parameterMap.put(nameValuePair.getName(), nameValuePair.getValue());
-    }
-    return parameterMap;
-  }
-
   public static boolean isArticle(String urlString) {
     URL url;
-    Map<String, String> parameters;
     try {
       url = new URL(urlString);
-      parameters = getParameters(urlString);
-    } catch (MalformedURLException|URISyntaxException e) {
+    } catch (MalformedURLException e) {
       return false;
     }
 
     String host = url.getHost().toLowerCase();
     String path = url.getPath();
     if (host.endsWith("abc.net.au")) {
-      return ABC_NET_AU_PATH.matcher(path).find();
+      return Pattern.compile("\\/[0-9]{6,10}(.htm)?$").matcher(path).find();
     }
     if (host.endsWith("abcnews.go.com")) {
-      return ABC_NEWS_ID_PARAM.matcher(Strings.nullToEmpty(parameters.get("id"))).find()
-          || ABC_NEWS_BLOG_PATH.matcher(path).find()
-          || ABC_NEWS_WIRESTORY_PATH.matcher(path).find();
+      return Pattern.compile("\\/story$").matcher(path).find()
+          || Pattern.compile("^\\/blogs\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$$").matcher(path).find()
+          || Pattern.compile("^\\/[^\\/]+\\/wireStory\\/.*[0-9]{7,9}$").matcher(path).find();
     }
     if (host.equals("advice.careerbuilder.com")) {
-      return path.startsWith("/posts/");
+      return Pattern.compile("^\\/posts\\/").matcher(path).find();
     }
     if (host.endsWith("aljazeera.com")) {
-      return DateParser.parseDateFromUrl(urlString, false) != null;
+      return Pattern.compile("^\\/articles\\/20[0-9]{2}\\/1?[0-9]\\/[1-3]?[0-9]\\/.*\\.html$").matcher(path).find();
     }
     if (host.endsWith("allthingsd.com")) {
-      return ALL_THINGS_D_PATH.matcher(path).find();
+      return Pattern.compile("^\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/").matcher(path).find();
     }
     if (host.endsWith("arstechnica.com")) {
-      return ARS_TECHNICA_PATH_1.matcher(path).find()
-          || ARS_TECHNICA_PATH_2.matcher(path).find()
-          || ARS_TECHNICA_PATH_3.matcher(path).find()
-          || ARS_TECHNICA_PATH_4.matcher(path).find();
+      return Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$").matcher(path).find()
+          || Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.ars$").matcher(path).find()
+          || Pattern.compile("^\\/news\\/.*[0-9]{5,12}\\.html$").matcher(path).find()
+          || Pattern.compile("\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-[0-9]{3,10}\\.html$").matcher(path).find();
     }
     if (host.endsWith("bbc.co.uk") || host.endsWith("bbc.com")) {
-      return PATH_ENDS_WITH_DASH_NUMBER.matcher(path).find()
-          || BBC_CO_UK_PATH_1.matcher(path).find()
-          || BBC_CO_UK_PATH_2.matcher(path).find();
+      return Pattern.compile("-[0-9]{5,10}$").matcher(path).find()
+          || Pattern.compile("\\/story\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-").matcher(path).find()
+          || Pattern.compile("\\/newsbeat\\/[0-9]{7,10}$").matcher(path).find();
     }
     if (host.endsWith("bdnews24.com")) {
-      return BDNEWS24_PATH.matcher(path).find();
+      return Pattern.compile("^\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/").matcher(path).find();
     }
     if (host.endsWith("bloomberg.com")) {
-      return BLOOMBERG_ARCHIVE_PATH.matcher(path).find()
-          || DateParser.parseDateFromUrl(urlString, false) != null;
+      return Pattern.compile("^\\/[a-z\\-\\_]+\\/20[0-9]{2}-[01][0-9]-[0-3][0-9](-|\\/).*(\\/|\\.html)$").matcher(path).find()
+          || Pattern.compile("^\\/news\\/articles\\/(19|20)[0-9]{2}-[01][0-9]-[0-3][0-9]\\/[^\\/]+$").matcher(path).find()
+          || Pattern.compile("^\\/bb\\/newsarchive\\/[a-zA-Z0-9_]{5,15}\\.html$").matcher(path).find();
     }
     if (host.endsWith("boston.com")) {
       if (host.equals("finance.boston.com")) {
-        return BOSTON_FINANCE_COM_PATH.matcher(path).find();
+        return Pattern.compile("\\/read\\/[0-9]{6,10}\\/[^\\/]+\\/$").matcher(path).find();
       }
-      return BOSTON_COM_PATH_1.matcher(path).find()
-          || BOSTON_COM_PATH_2.matcher(path).find()
-          || YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
+      return Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*story\\.html$").matcher(path).find()
+          || Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$").matcher(path).find()
+          || Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$").matcher(path).find();
     }
     if (host.endsWith("breitbart.com")) {
-      return BREITBART_PATH.matcher(path).find() ||
-          DateParser.parseDateFromUrl(urlString, false) != null;
+      return Pattern.compile("\\/[A-Za-z0-9\\-\\_]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\/$").matcher(path).find()
+          || Pattern.compile("\\/news\\/[^\\/]+\\-[^\\/]+\\-[^\\/]+\\/$").matcher(path).find();
     }
     if (host.endsWith("buffalonews.com")) {
-      return BUFFALO_NEWS_PATH_1.matcher(path).find()
-          || BUFFALO_NEWS_PATH_2.matcher(path).find()
-          || BUFFALO_NEWS_PATH_3.matcher(path).find();
+      return Pattern.compile("\\-20[0-9]{6}$").matcher(path).find()
+          || Pattern.compile("^\\/article\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/").matcher(path).find()
+          || Pattern.compile("^\\/apps\\/pbcs.dll\\/article").matcher(path).find();
     }
     if (host.endsWith("businessinsider.com")) {
-      return BUSINESS_INSIDER_PATH.matcher(path).find();
-    }
-    if (host.endsWith("businessweek.com")) {
-      return YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find()
-          || DateParser.parseDateFromUrl(urlString, false) != null;
+      return Pattern.compile("^\\/(?!category\\/).*\\-.*\\-").matcher(path).find();
     }
     if (host.endsWith("cbc.ca")) {
-      return CBC_PATH.matcher(path).find()
-          || YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
+      return Pattern.compile("\\/news\\/.*\\-1\\.[0-9]{6,10}$").matcher(path).find()
+          || Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$").matcher(path).find();
     }
     if (host.endsWith("cbsnews.com")) {
-      return CBS_NEWS_PATH_1.matcher(path).find()
-          || CBS_NEWS_PATH_2.matcher(path).find()
-          || CBS_NEWS_PATH_3.matcher(path).find()
-          || DateParser.parseDateFromUrl(urlString, false) != null;
+      return Pattern.compile("\\/news\\/(?!cbs-news-)[^\\/]+\\/$").matcher(path).find()
+          || Pattern.compile("\\/8301\\-[0-9_\\-]+\\/[^\\/]+\\/$").matcher(path).find()
+          || Pattern.compile("\\/[^\\/]+\\/[0-9a-f]+\\/([0-9]+\\/)?$").matcher(path).find();
     }
     if (host.endsWith("channelnewsasia.com")) {
-      return CHANNEL_NEWS_ASIA_PATH_1.matcher(path).find()
-          || CHANNEL_NEWS_ASIA_PATH_2.matcher(path).find();
+      return Pattern.compile("^\\/news\\/.*\\/[0-9]+\\.html$").matcher(path).find()
+          || Pattern.compile("^\\/premier\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\/$").matcher(path).find();
     }
     if (host.endsWith("chicagotribune.com")) {
-      return LATIMES_PATH_1.matcher(path).find()
-          || LATIMES_PATH_2.matcher(path).find()
-          || DateParser.parseDateFromUrl(urlString, false) != null;
+      if (host.equals("articles.chicagotribune.com")) {
+        return Pattern.compile("^\\/(19|20)[0-9]{2}-[01][0-9]-[0-3][0-9]\\/.*[0-9]{8}").matcher(path).find();
+      }
+      return Pattern.compile("20[0-9]{2}[01][0-9][0-3][0-9]\\-(column|htmlstory|story|storygallery)\\.html$").matcher(path).find()
+          || Pattern.compile(",[0-9]{6,10}\\.(column|htmlstory|story|storygallery)$").matcher(path).find();
     }
     if (host.endsWith("chron.com")) {
-      return CHRON_BLOG_PATH.matcher(path).find()
-          || CHRON_PATH.matcher(path).find();
+      return Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$").matcher(path).find()
+          || Pattern.compile("(\\-|\\/)[0-9]{7,10}\\.(php|html)$").matcher(path).find();
     }
     if (host.endsWith("cleveland.com")) {
-      return YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
+      return Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$").matcher(path).find();
     }
     if (host.endsWith("cnbc.com")) {
-      return CNBC_PATH.matcher(path).find();
+      return Pattern.compile("^\\/id\\/[0-9]{9,11}(\\/[^\\/]*)?$").matcher(path).find();
     }
     if (host.endsWith("cnn.com")) {
       if (host.equals("travel.cnn.com")) {
-        return CNN_TRAVEL_PATH.matcher(path).find();
+        return Pattern.compile("\\-[0-9]{5,8}$").matcher(path).find();
       }
-      return CNN_PATH_1.matcher(path).find()
-          || CNN_PATH_2.matcher(path).find();
+      return Pattern.compile("\\/20[0-9]{2}\\/([A-Z]+\\/([A-Za-z]+\\/)?)?[01][0-9]\\/[0-3][0-9]\\/").matcher(path).find()
+          || Pattern.compile("\\/SPECIALS\\/.*\\/index.html?$").matcher(path).find();
     }
     if (host.endsWith("curbed.com")) {
-      return CURBED_PATH.matcher(path).find();
+      return Pattern.compile("\\/20[0-9]{2}\\/[01][0-9](\\/[0-3][0-9])?\\/[^\\/\\.]+\\.php$").matcher(path).find();
     }
     if (host.endsWith("engadget.com")) {
-      return ENGADGET_PATH.matcher(path).find();
+      return Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-").matcher(path).find();
     }
     if (host.endsWith("fastcompany.com")) {
-      return FAST_COMPANY_PATH.matcher(path).find();
+      return Pattern.compile("\\/3[0-9]{6}\\/.*").matcher(path).find();
     }
     if (host.endsWith("forbes.com")) {
-      return FORBES_PATH.matcher(path).find();
+      return Pattern.compile("^\\/sites\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/").matcher(path).find();
     }
     if (host.endsWith("fortune.com")) {
-      return FORTUNE_PATH.matcher(path).find();
+      return Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/(.*\\-.*|[0-9]+)\\/$").matcher(path).find();
     }
     if (host.endsWith("gizmodo.com")) {
-      return GIZMODO_PATH.matcher(path).find();
+      return Pattern.compile("[\\/-]1[0-9]{9}(\\/[^\\/]+)?$").matcher(path).find();
     }
     if (host.endsWith("latimes.com")) {
-      return LATIMES_PATH_1.matcher(path).find()
-          || LATIMES_PATH_2.matcher(path).find();
+      return Pattern.compile("20[0-9]{2}[01][0-9][0-3][0-9]\\-(column|htmlstory|story|storygallery)\\.html$").matcher(path).find()
+          || Pattern.compile(",[0-9]{6,10}\\.(column|htmlstory|story|storygallery)$").matcher(path).find();
     }
     if (host.equals("markets.cbsnews.com")) {
-      return MARKETS_CBSNEWS_PATH.matcher(path).find();
+      return Pattern.compile("^\\/[^\\/]+\\/[0-9a-f]{12,19}\\/").matcher(path).find();
     }
     if (host.equals("mashable.com")) {
-      return MASHABLE_PATH.matcher(path).find();
+      return Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-.*\\/$").matcher(path).find();
     }
     if (host.endsWith("medium.com")) {
-      return MEDIUM_PATH.matcher(path).find();
+      return Pattern.compile("[\\/-][0-9a-f]{12}$").matcher(path).find();
     }
     if (host.endsWith("mercurynews.com")) {
-      return MERCURY_NEWS_PATH.matcher(path).find()
-          || DateParser.parseDateFromUrl(urlString, false) != null;
+      return Pattern.compile("\\/ci_[0-9]{7,10}(\\/.*)?$").matcher(path).find()
+          || Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$").matcher(path).find();
     }
     if (host.endsWith("nytimes.com")) {
-      return NYTIMES_PATH.matcher(path).find();
+      return Pattern.compile("^\\/(aponline\\/)?(19|20)[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-.*\\-.*(\\/|\\.html)$").matcher(path).find();
     }
     if (host.endsWith("pcmag.com")) {
-      return PC_MAG_PATH.matcher(path).find();
+      return Pattern.compile("\\/article2\\/.+\\.asp$").matcher(path).find();
     }
     if (host.endsWith("recode.net")) {
-      return DateParser.parseDateFromUrl(urlString, false) != null;
+      return Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$").matcher(path).find();
     }
     if (host.endsWith("redherring.com")) {
-      return RED_HERRING_PATH.matcher(path).find();
+      return Pattern.compile("\\/[a-z]+\\/[^\\/]+-[^\\/]+\\/$").matcher(path).find();
     }
     if (host.endsWith("sfgate.com")) {
-      return SFGATE_PATH.matcher(path).find()
-          || DateParser.parseDateFromUrl(urlString, false) != null;
+      return Pattern.compile("\\/article.*(\\-|\\/)[0-9]{7,10}\\.php$").matcher(path).find()
+          || Pattern.compile("\\/[0-9a-z\\-]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$").matcher(path).find();
     }
     if (host.endsWith("siliconbeat.com")) {
-      return SILICONBEAT_PATH.matcher(path).find();
+      return Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-.*\\/$").matcher(path).find();
     }
     if (host.endsWith("slate.com")) {
-      return SLATE_PATH.matcher(path).find();
+      return Pattern.compile("^\\/(articles|blogs)\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/.*\\.html$").matcher(path).find();
     }
     if (host.endsWith("startupworkout.com")) {
-      return STARTUP_WORKOUT_PATH.matcher(path).find();
+      return Pattern.compile("^\\/(?!author\\/).+\\-.+").matcher(path).find();
     }
     if (host.endsWith("techcrunch.com")) {
-      return TECHCRUNCH_PATH.matcher(path).find();
+      return Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$").matcher(path).find();
     }
     if (host.endsWith("technologyreview.com")) {
-      return TECHNOLOGY_REVIEW_PATH.matcher(path).find();
+      return Pattern.compile("\\/[a-z]+\\/[0-9]{5,7}\\/").matcher(path).find();
     }
     if (host.endsWith("telegraph.co.uk")) {
-      return TELEGRAPH_PATH.matcher(path).find();
+      return Pattern.compile("\\/1[0-9]{7}\\/").matcher(path).find();
     }
     if (host.endsWith("theguardian.com")) {
-      return THEGUARDIAN_PATH.matcher(path).find();
+      return Pattern.compile("\\/20[0-9]{2}\\/(jan|feb|mar|apr|may|jun|jul|aug|sep|nov|dec)\\/[0-3][0-9]\\/").matcher(path).find();
     }
     if (host.endsWith("thenextweb.com")) {
-      return THENEXTWEB_PATH.matcher(path).find();
+      return Pattern.compile("^\\/([a-z\\_\\-]+\\/)?20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$").matcher(path).find();
     }
     if (host.endsWith("theverge.com")) {
-      return THEVERGE_PATH.matcher(path).find();
+      return Pattern.compile("^\\/([a-z\\_\\-]+\\/)?20[0-9]{2}\\/1?[0-9]\\/[1-3]?[0-9]\\/[0-9]{7,9}\\/").matcher(path).find();
     }
     if (host.endsWith("venturebeat.com")) {
-      return VENTUREBEAT_PATH.matcher(path).find();
+      return Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$").matcher(path).find();
     }
     if (host.endsWith("washingtonpost.com")) {
-      return WASHINGTON_POST_PATH_1.matcher(path).find()
-          || WASHINGTON_POST_PATH_2.matcher(path).find()
-          || YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
+      return Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+(\\/|_story\\.html)$").matcher(path).find()
+          || Pattern.compile("\\-20[0-9]{2}[01][0-9][0-3][0-9]\\.html$").matcher(path).find()
+          || Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$").matcher(path).find();
     }
     if (host.endsWith("wired.com")) {
-      return WIRED_PATH.matcher(path).find();
+      return Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/.*\\/$").matcher(path).find();
     }
 
     return false;
