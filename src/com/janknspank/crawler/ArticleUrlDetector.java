@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
@@ -30,10 +29,14 @@ public class ArticleUrlDetector {
     }
   };
 
-  private static final Pattern ABC_NET_AU_PATH = Pattern.compile("\\/[0-9]{6,10}(.htm)?$");
-  private static final Pattern ABC_NEWS_ID_PARAM = Pattern.compile("^[0-9]{5,10}$");
+  private static final Pattern ABC_NET_AU_PATH =
+      Pattern.compile("\\/[0-9]{6,10}(.htm)?$");
+  private static final Pattern ABC_NEWS_ID_PARAM =
+      Pattern.compile("^[0-9]{5,10}$");
   private static final Pattern ABC_NEWS_BLOG_PATH =
       Pattern.compile("^\\/blogs\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$$");
+  private static final Pattern ABC_NEWS_WIRESTORY_PATH =
+      Pattern.compile("^\\/[^\\/]+\\/wireStory\\/.*[0-9]{7,9}$");
   private static final Pattern ALL_THINGS_D_PATH =
       Pattern.compile("^\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/");
   private static final Pattern ARS_TECHNICA_PATH_1 =
@@ -64,6 +67,8 @@ public class ArticleUrlDetector {
       Pattern.compile("^\\/article\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/");
   private static final Pattern BUFFALO_NEWS_PATH_3 =
       Pattern.compile("^\\/apps\\/pbcs.dll\\/article");
+  private static final Pattern BUSINESS_INSIDER_PATH =
+      Pattern.compile("^\\/(?!category\\/).*\\-.*\\-");
   private static final Pattern CBC_PATH =
       Pattern.compile("\\/news\\/.*\\-1\\.[0-9]{6,10}$");
   private static final Pattern CBS_NEWS_PATH_1 =
@@ -72,8 +77,10 @@ public class ArticleUrlDetector {
       Pattern.compile("\\/8301\\-[0-9_\\-]+\\/[^\\/]+\\/$");
   private static final Pattern CBS_NEWS_PATH_3 =
       Pattern.compile("\\/[^\\/]+\\/[0-9a-f]+\\/([0-9]+\\/)?$");
-  private static final Pattern CHANNEL_NEWS_ASIA_PATH =
-      Pattern.compile("\\/news\\/.*\\/[0-9]+\\.html$");
+  private static final Pattern CHANNEL_NEWS_ASIA_PATH_1 =
+      Pattern.compile("^\\/news\\/.*\\/[0-9]+\\.html$");
+  private static final Pattern CHANNEL_NEWS_ASIA_PATH_2 =
+      Pattern.compile("^\\/premier\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\/$");
   private static final Pattern CHRON_BLOG_PATH =
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$");
   private static final Pattern CHRON_PATH =
@@ -111,6 +118,10 @@ public class ArticleUrlDetector {
       Pattern.compile("\\/[a-z]+\\/[^\\/]+-[^\\/]+\\/$");
   private static final Pattern SFGATE_PATH =
       Pattern.compile("\\/article.*(\\-|\\/)[0-9]{7,10}\\.php$");
+  private static final Pattern SLATE_PATH =
+      Pattern.compile("^\\/(articles|blogs)\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/.*\\.html$");
+  private static final Pattern STARTUP_WORKOUT_PATH =
+      Pattern.compile("^\\/(?!author\\/).+\\-.+");
   private static final Pattern TECHNOLOGY_REVIEW_PATH =
       Pattern.compile("\\/[a-z]+\\/[0-9]{5,7}\\/");
   private static final Pattern TELEGRAPH_PATH =
@@ -121,6 +132,8 @@ public class ArticleUrlDetector {
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+(\\/|_story\\.html)$");
   private static final Pattern WASHINGTON_POST_PATH_2 =
       Pattern.compile("\\-20[0-9]{2}[01][0-9][0-3][0-9]\\.html$");
+  private static final Pattern WIRED_PATH =
+      Pattern.compile("^\\/20[0-9]{2}\\/[01][0-9]\\/.*\\/$");
   private static final Pattern YEAR_MONTH_THEN_ARTICLE_NAME_PATH =
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$");
   private static Map<String, String> getParameters(String urlString) throws URISyntaxException {
@@ -150,7 +163,7 @@ public class ArticleUrlDetector {
     if (host.endsWith("abcnews.go.com")) {
       return ABC_NEWS_ID_PARAM.matcher(Strings.nullToEmpty(parameters.get("id"))).find()
           || ABC_NEWS_BLOG_PATH.matcher(path).find()
-          || (path.contains("/wireStory/") && PATH_ENDS_WITH_DASH_NUMBER.matcher(path).find());
+          || ABC_NEWS_WIRESTORY_PATH.matcher(path).find();
     }
     if (host.equals("advice.careerbuilder.com")) {
       return path.startsWith("/posts/");
@@ -194,7 +207,7 @@ public class ArticleUrlDetector {
           || BUFFALO_NEWS_PATH_3.matcher(path).find();
     }
     if (host.endsWith("businessinsider.com")) {
-      return !path.startsWith("/category/") && StringUtils.countMatches(path, "-") >= 2;
+      return BUSINESS_INSIDER_PATH.matcher(path).find();
     }
     if (host.endsWith("businessweek.com")) {
       return YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find()
@@ -211,8 +224,8 @@ public class ArticleUrlDetector {
           || DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("channelnewsasia.com")) {
-      return CHANNEL_NEWS_ASIA_PATH.matcher(path).find() ||
-          path.startsWith("/premier/") && DateParser.parseDateFromUrl(urlString, false) != null;
+      return CHANNEL_NEWS_ASIA_PATH_1.matcher(path).find()
+          || CHANNEL_NEWS_ASIA_PATH_2.matcher(path).find();
     }
     if (host.endsWith("chicagotribune.com")) {
       return LATIMES_PATH_1.matcher(path).find()
@@ -220,10 +233,8 @@ public class ArticleUrlDetector {
           || DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("chron.com")) {
-      if (host.equals("blog.chron.com") && CHRON_BLOG_PATH.matcher(path).find()) {
-        return true;
-      }
-      return CHRON_PATH.matcher(path).find();
+      return CHRON_BLOG_PATH.matcher(path).find()
+          || CHRON_PATH.matcher(path).find();
     }
     if (host.endsWith("cleveland.com")) {
       return YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
@@ -268,23 +279,17 @@ public class ArticleUrlDetector {
       return DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("redherring.com")) {
-      return RED_HERRING_PATH.matcher(path).find() &&
-          !path.startsWith("/events/");
+      return RED_HERRING_PATH.matcher(path).find();
     }
     if (host.endsWith("sfgate.com")) {
       return SFGATE_PATH.matcher(path).find()
           || DateParser.parseDateFromUrl(urlString, false) != null;
     }
     if (host.endsWith("slate.com")) {
-      return (path.startsWith("/blogs/") || path.startsWith("/articles/"))
-          && !path.contains("/podcasts/")
-          && !path.contains("/slate_fare/")
-          && DateParser.parseDateFromUrl(urlString, true) != null
-          && path.endsWith(".html");
+      return SLATE_PATH.matcher(path).find();
     }
     if (host.endsWith("startupworkout.com")) {
-      return StringUtils.countMatches(path, "-") >= 1
-          && !path.startsWith("/author/");
+      return STARTUP_WORKOUT_PATH.matcher(path).find();
     }
     if (host.endsWith("technologyreview.com")) {
       return TECHNOLOGY_REVIEW_PATH.matcher(path).find();
@@ -301,7 +306,7 @@ public class ArticleUrlDetector {
           || YEAR_MONTH_THEN_ARTICLE_NAME_PATH.matcher(path).find();
     }
     if (host.endsWith("wired.com")) {
-      return DateParser.parseDateFromUrl(urlString, true) != null;
+      return WIRED_PATH.matcher(path).find();
     }
 
     return DateParser.parseDateFromUrl(urlString, false) != null;
