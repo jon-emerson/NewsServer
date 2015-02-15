@@ -68,7 +68,10 @@ message ContentSite {
   // here, IFF the respective site uses query parameters to address articles.
   repeated string whitelisted_query_parameter = 8;
 
-  optional TestInstructions test_instructions = 9 [
+  // An RSS or Atom URL for getting URLs hosted on this content site.
+  repeated string rss_url = 9;
+
+  optional TestInstructions test_instructions = 10 [
     (required) = YES
   ];
 }

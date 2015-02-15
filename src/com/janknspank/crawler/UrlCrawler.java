@@ -39,85 +39,14 @@ public class UrlCrawler {
               return contentSite.getStartUrlList();
             }
           }));
-  private static final String[] RSS_URLS = new String[] {
-    "http://america.aljazeera.com/content/ajam/articles.rss",
-    "http://bdnews24.com/?widgetName=rssfeed&widgetId=1150&getXmlFeed=true",
-    "http://blog.cleveland.com/business_impact/atom.xml",
-    "http://blog.cleveland.com/business_impact/technology/atom.xml",
-    "http://blog.cleveland.com/realtimenews/atom.xml",
-    "http://curbed.com/atom.xml",
-    "http://feeds.abcnews.com/abcnews/internationalheadlines",
-    "http://feeds.abcnews.com/abcnews/moneyheadlines",
-    "http://feeds.abcnews.com/abcnews/politicsheadlines",
-    "http://feeds.abcnews.com/abcnews/technologyheadlines",
-    "http://feeds.abcnews.com/abcnews/usheadlines",
-    "http://feeds.bbci.co.uk/news/business/rss.xml",
-    "http://feeds.bbci.co.uk/news/politics/rss.xml",
-    "http://feeds.bbci.co.uk/news/rss.xml",
-    "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
-    "http://feeds.bbci.co.uk/news/technology/rss.xml",
-    "http://feeds.bbci.co.uk/news/world/rss.xml",
-    "http://feeds.mercurynews.com/mngi/rss/CustomRssServlet/568/200735.xml",
-    "http://feeds.mercurynews.com/mngi/rss/CustomRssServlet/568/200737.xml",
-    "http://feeds.washingtonpost.com/rss/business",
-    "http://la.curbed.com/atom.xml",
-    "http://ny.curbed.com/atom.xml",
-    "http://recode.net/category/general/feed/",
-    "http://recode.net/feed/",
-    "http://rss.cnn.com/rss/cnn_tech.rss",
-    "http://rss.cnn.com/rss/cnn_topstories.rss",
-    "http://rss.cnn.com/rss/cnn_world.rss",
-    "http://rss.cnn.com/rss/money_latest.rss",
-    "http://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
-    "http://rss.nytimes.com/services/xml/rss/nyt/Economy.xml",
-    "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-    "http://rss.nytimes.com/services/xml/rss/nyt/InternationalHome.xml",
-    "http://rss.nytimes.com/services/xml/rss/nyt/PersonalTech.xml",
-    "http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml",
-    "http://rss.nytimes.com/services/xml/rss/nyt/Science.xml",
-    "http://rss.nytimes.com/services/xml/rss/nyt/SmallBusiness.xml",
-    "http://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
-    "http://seattle.curbed.com/atom.xml",
-    "http://sf.curbed.com/atom.xml",
-    "http://thenextweb.com/feed/",
-    "http://www.abc.net.au/news/feed/45910/rss.xml", // "Top".
-    "http://www.abc.net.au/news/feed/51120/rss.xml", // "Just in".
-    "http://www.abc.net.au/news/feed/51892/rss.xml", // Business.
-    "http://www.abc.net.au/news/feed/52278/rss.xml", // World.
-    "http://www.buffalonews.com/section/rssGen?profileID=1109&profileName=Top%20Stories",
-    "http://www.cbc.ca/cmlink/rss-business",
-    "http://www.cbc.ca/cmlink/rss-technology",
-    "http://www.cbc.ca/cmlink/rss-topstories",
-    "http://www.cbsnews.com/latest/rss/main",
-    "http://www.cbsnews.com/latest/rss/moneywatch",
-    "http://www.cbsnews.com/latest/rss/tech",
-    "http://www.cbsnews.com/latest/rss/us",
-    "http://www.channelnewsasia.com/starterkit/servlet/cna/rss/business.xml",
-    "http://www.channelnewsasia.com/starterkit/servlet/cna/rss/home.xml",
-    "http://www.channelnewsasia.com/starterkit/servlet/cna/rss/world.xml",
-    "http://www.chron.com/rss/feed/AP-Technology-and-Science-266.php",
-    "http://www.chron.com/rss/feed/Business-287.php",
-    "http://www.chron.com/rss/feed/News-270.php",
-    "http://www.cnbc.com/id/100003114/device/rss/rss.html", // Top.
-    "http://www.cnbc.com/id/10001147/device/rss/rss.html", // Business.
-    "http://www.cnbc.com/id/19854910/device/rss/rss.html", // Tech.
-    "http://www.forbes.com/business/feed/",
-    "http://www.forbes.com/most-popular/feed/",
-    "http://www.forbes.com/real-time/feed2/",
-    "http://www.forbes.com/technology/feed/",
-    "http://www.latimes.com/business/rss2.0.xml",
-    "http://www.latimes.com/business/technology/rss2.0.xml",
-    "http://www.latimes.com/nation/rss2.0.xml",
-    "http://www.latimes.com/opinion/editorials/rss2.0.xml",
-    "http://www.latimes.com/rss2.0.xml",
-    "http://www.latimes.com/science/rss2.0.xml",
-    "http://www.nytimes.com/services/xml/rss/nyt/JobMarket.xml",
-    "http://www.sfgate.com/default/feed/City-Insider-Blog-573.php",
-    "http://www.sfgate.com/rss/feed/Page-One-News-593.php",
-    "http://www.sfgate.com/rss/feed/Tech-News-449.php",
-    "http://www.theverge.com/mobile/rss/index.xml",
-    "http://www.theverge.com/rss/index.xml"
-  };
+  private static final Iterable<String> RSS_URLS = Iterables.concat(
+      Iterables.transform(UrlWhitelist.CRAWL_INSTRUCTIONS.getContentSiteList(),
+          new Function<ContentSite, Iterable<String>>() {
+            @Override
+            public Iterable<String> apply(ContentSite contentSite) {
+              return contentSite.getRssUrlList();
+            }
+          }));
 
   private String getArticleUrl(Node itemNode) {
     List<Node> linkNodes = itemNode.findAll("atom:link");

@@ -922,17 +922,53 @@ public final class CrawlProto {
     com.google.protobuf.ByteString
         getWhitelistedQueryParameterBytes(int index);
 
-    // optional .TestInstructions test_instructions = 9;
+    // repeated string rss_url = 9;
     /**
-     * <code>optional .TestInstructions test_instructions = 9;</code>
+     * <code>repeated string rss_url = 9;</code>
+     *
+     * <pre>
+     * An RSS or Atom URL for getting URLs hosted on this content site.
+     * </pre>
+     */
+    java.util.List<java.lang.String>
+    getRssUrlList();
+    /**
+     * <code>repeated string rss_url = 9;</code>
+     *
+     * <pre>
+     * An RSS or Atom URL for getting URLs hosted on this content site.
+     * </pre>
+     */
+    int getRssUrlCount();
+    /**
+     * <code>repeated string rss_url = 9;</code>
+     *
+     * <pre>
+     * An RSS or Atom URL for getting URLs hosted on this content site.
+     * </pre>
+     */
+    java.lang.String getRssUrl(int index);
+    /**
+     * <code>repeated string rss_url = 9;</code>
+     *
+     * <pre>
+     * An RSS or Atom URL for getting URLs hosted on this content site.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getRssUrlBytes(int index);
+
+    // optional .TestInstructions test_instructions = 10;
+    /**
+     * <code>optional .TestInstructions test_instructions = 10;</code>
      */
     boolean hasTestInstructions();
     /**
-     * <code>optional .TestInstructions test_instructions = 9;</code>
+     * <code>optional .TestInstructions test_instructions = 10;</code>
      */
     com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions();
     /**
-     * <code>optional .TestInstructions test_instructions = 9;</code>
+     * <code>optional .TestInstructions test_instructions = 10;</code>
      */
     com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder();
   }
@@ -1049,6 +1085,14 @@ public final class CrawlProto {
               break;
             }
             case 74: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                rssUrl_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              rssUrl_.add(input.readBytes());
+              break;
+            }
+            case 82: {
               com.janknspank.proto.CrawlProto.TestInstructions.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = testInstructions_.toBuilder();
@@ -1089,6 +1133,9 @@ public final class CrawlProto {
         }
         if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           whitelistedQueryParameter_ = new com.google.protobuf.UnmodifiableLazyStringList(whitelistedQueryParameter_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          rssUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(rssUrl_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2873,23 +2920,69 @@ public final class CrawlProto {
       return whitelistedQueryParameter_.getByteString(index);
     }
 
-    // optional .TestInstructions test_instructions = 9;
-    public static final int TEST_INSTRUCTIONS_FIELD_NUMBER = 9;
+    // repeated string rss_url = 9;
+    public static final int RSS_URL_FIELD_NUMBER = 9;
+    private com.google.protobuf.LazyStringList rssUrl_;
+    /**
+     * <code>repeated string rss_url = 9;</code>
+     *
+     * <pre>
+     * An RSS or Atom URL for getting URLs hosted on this content site.
+     * </pre>
+     */
+    public java.util.List<java.lang.String>
+        getRssUrlList() {
+      return rssUrl_;
+    }
+    /**
+     * <code>repeated string rss_url = 9;</code>
+     *
+     * <pre>
+     * An RSS or Atom URL for getting URLs hosted on this content site.
+     * </pre>
+     */
+    public int getRssUrlCount() {
+      return rssUrl_.size();
+    }
+    /**
+     * <code>repeated string rss_url = 9;</code>
+     *
+     * <pre>
+     * An RSS or Atom URL for getting URLs hosted on this content site.
+     * </pre>
+     */
+    public java.lang.String getRssUrl(int index) {
+      return rssUrl_.get(index);
+    }
+    /**
+     * <code>repeated string rss_url = 9;</code>
+     *
+     * <pre>
+     * An RSS or Atom URL for getting URLs hosted on this content site.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getRssUrlBytes(int index) {
+      return rssUrl_.getByteString(index);
+    }
+
+    // optional .TestInstructions test_instructions = 10;
+    public static final int TEST_INSTRUCTIONS_FIELD_NUMBER = 10;
     private com.janknspank.proto.CrawlProto.TestInstructions testInstructions_;
     /**
-     * <code>optional .TestInstructions test_instructions = 9;</code>
+     * <code>optional .TestInstructions test_instructions = 10;</code>
      */
     public boolean hasTestInstructions() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .TestInstructions test_instructions = 9;</code>
+     * <code>optional .TestInstructions test_instructions = 10;</code>
      */
     public com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions() {
       return testInstructions_;
     }
     /**
-     * <code>optional .TestInstructions test_instructions = 9;</code>
+     * <code>optional .TestInstructions test_instructions = 10;</code>
      */
     public com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
       return testInstructions_;
@@ -2904,6 +2997,7 @@ public final class CrawlProto {
       paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       articleUrlPattern_ = java.util.Collections.emptyList();
       whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -2942,8 +3036,11 @@ public final class CrawlProto {
       for (int i = 0; i < whitelistedQueryParameter_.size(); i++) {
         output.writeBytes(8, whitelistedQueryParameter_.getByteString(i));
       }
+      for (int i = 0; i < rssUrl_.size(); i++) {
+        output.writeBytes(9, rssUrl_.getByteString(i));
+      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(9, testInstructions_);
+        output.writeMessage(10, testInstructions_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3011,9 +3108,18 @@ public final class CrawlProto {
         size += dataSize;
         size += 1 * getWhitelistedQueryParameterList().size();
       }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < rssUrl_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(rssUrl_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getRssUrlList().size();
+      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, testInstructions_);
+          .computeMessageSize(10, testInstructions_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3158,12 +3264,14 @@ public final class CrawlProto {
         }
         whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000080);
+        rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
         if (testInstructionsBuilder_ == null) {
           testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
         } else {
           testInstructionsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -3244,7 +3352,13 @@ public final class CrawlProto {
           bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.whitelistedQueryParameter_ = whitelistedQueryParameter_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          rssUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              rssUrl_);
+          bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.rssUrl_ = rssUrl_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000002;
         }
         if (testInstructionsBuilder_ == null) {
@@ -3372,6 +3486,16 @@ public final class CrawlProto {
           } else {
             ensureWhitelistedQueryParameterIsMutable();
             whitelistedQueryParameter_.addAll(other.whitelistedQueryParameter_);
+          }
+          onChanged();
+        }
+        if (!other.rssUrl_.isEmpty()) {
+          if (rssUrl_.isEmpty()) {
+            rssUrl_ = other.rssUrl_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+          } else {
+            ensureRssUrlIsMutable();
+            rssUrl_.addAll(other.rssUrl_);
           }
           onChanged();
         }
@@ -4583,18 +4707,147 @@ public final class CrawlProto {
         return this;
       }
 
-      // optional .TestInstructions test_instructions = 9;
+      // repeated string rss_url = 9;
+      private com.google.protobuf.LazyStringList rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureRssUrlIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          rssUrl_ = new com.google.protobuf.LazyStringArrayList(rssUrl_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public java.util.List<java.lang.String>
+          getRssUrlList() {
+        return java.util.Collections.unmodifiableList(rssUrl_);
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public int getRssUrlCount() {
+        return rssUrl_.size();
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public java.lang.String getRssUrl(int index) {
+        return rssUrl_.get(index);
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getRssUrlBytes(int index) {
+        return rssUrl_.getByteString(index);
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public Builder setRssUrl(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRssUrlIsMutable();
+        rssUrl_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public Builder addRssUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRssUrlIsMutable();
+        rssUrl_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public Builder addAllRssUrl(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureRssUrlIsMutable();
+        super.addAll(values, rssUrl_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public Builder clearRssUrl() {
+        rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string rss_url = 9;</code>
+       *
+       * <pre>
+       * An RSS or Atom URL for getting URLs hosted on this content site.
+       * </pre>
+       */
+      public Builder addRssUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRssUrlIsMutable();
+        rssUrl_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // optional .TestInstructions test_instructions = 10;
       private com.janknspank.proto.CrawlProto.TestInstructions testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder> testInstructionsBuilder_;
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public boolean hasTestInstructions() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions() {
         if (testInstructionsBuilder_ == null) {
@@ -4604,7 +4857,7 @@ public final class CrawlProto {
         }
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public Builder setTestInstructions(com.janknspank.proto.CrawlProto.TestInstructions value) {
         if (testInstructionsBuilder_ == null) {
@@ -4616,11 +4869,11 @@ public final class CrawlProto {
         } else {
           testInstructionsBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         return this;
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public Builder setTestInstructions(
           com.janknspank.proto.CrawlProto.TestInstructions.Builder builderForValue) {
@@ -4630,15 +4883,15 @@ public final class CrawlProto {
         } else {
           testInstructionsBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         return this;
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public Builder mergeTestInstructions(com.janknspank.proto.CrawlProto.TestInstructions value) {
         if (testInstructionsBuilder_ == null) {
-          if (((bitField0_ & 0x00000100) == 0x00000100) &&
+          if (((bitField0_ & 0x00000200) == 0x00000200) &&
               testInstructions_ != com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance()) {
             testInstructions_ =
               com.janknspank.proto.CrawlProto.TestInstructions.newBuilder(testInstructions_).mergeFrom(value).buildPartial();
@@ -4649,11 +4902,11 @@ public final class CrawlProto {
         } else {
           testInstructionsBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         return this;
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public Builder clearTestInstructions() {
         if (testInstructionsBuilder_ == null) {
@@ -4662,19 +4915,19 @@ public final class CrawlProto {
         } else {
           testInstructionsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public com.janknspank.proto.CrawlProto.TestInstructions.Builder getTestInstructionsBuilder() {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         onChanged();
         return getTestInstructionsFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
         if (testInstructionsBuilder_ != null) {
@@ -4684,7 +4937,7 @@ public final class CrawlProto {
         }
       }
       /**
-       * <code>optional .TestInstructions test_instructions = 9;</code>
+       * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder> 
@@ -6821,7 +7074,7 @@ public final class CrawlProto {
       "\n com/janknspank/proto/crawl.proto\032(com/" +
       "janknspank/database/extensions.proto\"7\n\021" +
       "CrawlInstructions\022\"\n\014content_site\030\001 \003(\0132" +
-      "\014.ContentSite\"\370\004\n\013ContentSite\022\031\n\013root_do" +
+      "\014.ContentSite\"\211\005\n\013ContentSite\022\031\n\013root_do" +
       "main\030\001 \001(\tB\004\210\246\035\001\022\027\n\017aka_root_domain\030\002 \003(" +
       "\t\022\027\n\tstart_url\030\003 \003(\tB\004\210\246\035\001\022\033\n\023subdomain_" +
       "blacklist\030\004 \003(\t\0222\n\016path_blacklist\030\005 \003(\0132" +
@@ -6829,23 +7082,24 @@ public final class CrawlProto {
       "_selector\030\006 \003(\tB\004\210\246\035\001\022;\n\023article_url_pat" +
       "tern\030\007 \003(\0132\036.ContentSite.ArticleUrlPatte",
       "rn\022#\n\033whitelisted_query_parameter\030\010 \003(\t\022" +
-      "2\n\021test_instructions\030\t \001(\0132\021.TestInstruc" +
-      "tionsB\004\210\246\035\001\032\320\001\n\rPathBlacklist\022\024\n\006needle\030" +
-      "\001 \001(\tB\004\210\246\035\001\022B\n\010location\030\004 \001(\0162#.ContentS" +
-      "ite.PathBlacklist.Location:\013STARTS_WITH\"" +
-      "e\n\010Location\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002" +
-      "\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_F" +
-      "IND\020\005\022\017\n\013REGEX_MATCH\020\006\032@\n\021ArticleUrlPatt" +
-      "ern\022\030\n\npath_regex\030\001 \001(\tB\004\210\246\035\001\022\021\n\tsubdoma" +
-      "in\030\002 \001(\t\"\266\002\n\020TestInstructions\022H\n\024url_whi",
-      "telist_checks\030\001 \001(\0132$.TestInstructions.U" +
-      "rlWhitelistChecksB\004\210\246\035\001\022U\n\033article_url_d" +
-      "etector_checks\030\002 \001(\0132*.TestInstructions." +
-      "ArticleUrlDetectorChecksB\004\210\246\035\001\0327\n\022UrlWhi" +
-      "telistChecks\022\020\n\010good_url\030\001 \003(\t\022\017\n\007bad_ur" +
-      "l\030\002 \003(\t\032H\n\030ArticleUrlDetectorChecks\022\023\n\013a" +
-      "rticle_url\030\001 \003(\t\022\027\n\017non_article_url\030\002 \003(" +
-      "\tB\"\n\024com.janknspank.protoB\nCrawlProto"
+      "\017\n\007rss_url\030\t \003(\t\0222\n\021test_instructions\030\n " +
+      "\001(\0132\021.TestInstructionsB\004\210\246\035\001\032\320\001\n\rPathBla" +
+      "cklist\022\024\n\006needle\030\001 \001(\tB\004\210\246\035\001\022B\n\010location" +
+      "\030\004 \001(\0162#.ContentSite.PathBlacklist.Locat" +
+      "ion:\013STARTS_WITH\"e\n\010Location\022\n\n\006EQUALS\020\001" +
+      "\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONT" +
+      "AINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006\032" +
+      "@\n\021ArticleUrlPattern\022\030\n\npath_regex\030\001 \001(\t" +
+      "B\004\210\246\035\001\022\021\n\tsubdomain\030\002 \001(\t\"\266\002\n\020TestInstru",
+      "ctions\022H\n\024url_whitelist_checks\030\001 \001(\0132$.T" +
+      "estInstructions.UrlWhitelistChecksB\004\210\246\035\001" +
+      "\022U\n\033article_url_detector_checks\030\002 \001(\0132*." +
+      "TestInstructions.ArticleUrlDetectorCheck" +
+      "sB\004\210\246\035\001\0327\n\022UrlWhitelistChecks\022\020\n\010good_ur" +
+      "l\030\001 \003(\t\022\017\n\007bad_url\030\002 \003(\t\032H\n\030ArticleUrlDe" +
+      "tectorChecks\022\023\n\013article_url\030\001 \003(\t\022\027\n\017non" +
+      "_article_url\030\002 \003(\tB\"\n\024com.janknspank.pro" +
+      "toB\nCrawlProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6863,7 +7117,7 @@ public final class CrawlProto {
           internal_static_ContentSite_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ContentSite_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "TestInstructions", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", });
           internal_static_ContentSite_PathBlacklist_descriptor =
             internal_static_ContentSite_descriptor.getNestedTypes().get(0);
           internal_static_ContentSite_PathBlacklist_fieldAccessorTable = new
