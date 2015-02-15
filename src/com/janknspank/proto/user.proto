@@ -68,8 +68,6 @@ message User {
     (client_serialization) = EXCLUDE
   ];
 
-  repeated UrlRating url_rating = 13;
-
   repeated UrlFavorite url_favorite = 14 [
     // Excluded because the client needs to receive an entire Article object,
     // which the /server/ code handles resolving for us.
@@ -94,43 +92,6 @@ message AddressBook {
 
   optional int64 create_time = 2 [
     (required) = YES
-  ];
-}
-
-message UrlRating {
-  option (database_collection) = "MySQL.UrlRating";
-
-  // Note this is not a URL id, just a unique identifier
-  optional string id = 1 [
-    (required) = YES,
-    (storage_method) = PRIMARY_KEY,
-    (string_length) = 24,
-    (string_charset) = LATIN1,
-    (client_serialization) = EXCLUDE
-  ];
-
-  optional string email = 2 [
-    (required) = YES,
-    (storage_method) = INDEX,
-    (string_length) = 100,
-    (string_charset) = LATIN1,
-    (client_serialization) = EXCLUDE
-  ];
-
-  optional string url = 3 [
-    (required) = YES,
-    (storage_method) = INDEX,
-    (string_length) = 767,
-    (string_charset) = LATIN1
-  ];
-
-  optional double rating = 4 [
-    (required) = YES
-  ];
-
-  optional int64 create_time = 5 [
-    (required) = YES,
-    (client_serialization) = EXCLUDE
   ];
 }
 

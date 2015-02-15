@@ -41,7 +41,7 @@ public class ArticleUrlDetector {
   private static final Pattern ARS_TECHNICA_PATH_2 =
       Pattern.compile("\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.ars$");
   private static final Pattern ARS_TECHNICA_PATH_3 =
-      Pattern.compile("^\\/(archive|news)\\/.*[0-9]{5,12}\\.html$");
+      Pattern.compile("^\\/news\\/.*[0-9]{5,12}\\.html$");
   private static final Pattern ARS_TECHNICA_PATH_4 =
       Pattern.compile("\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-[0-9]{3,10}\\.html$");
   private static final Pattern BBC_CO_UK_PATH_1 =

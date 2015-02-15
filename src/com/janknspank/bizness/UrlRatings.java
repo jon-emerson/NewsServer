@@ -5,7 +5,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.proto.UserProto.UrlRating;
+import com.janknspank.proto.CoreProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class UrlRatings {
