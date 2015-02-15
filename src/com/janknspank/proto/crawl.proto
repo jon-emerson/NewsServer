@@ -48,7 +48,21 @@ message ContentSite {
     (required) = YES
   ];
 
-  optional TestInstructions test_instructions = 7 [
+  // A collection of regular expressions that together identify all article URLs
+  // on this site.  If any Pattern matches, the URL is determined to be an
+  // article.
+  message ArticleUrlPattern {
+    // A regular expression specification to run against the article's path.
+    optional string path_regex = 1 [
+      (required) = YES
+    ];
+
+    // If present, a subdomain that this regular expression is restricted to.
+    optional string subdomain = 2;
+  }
+  repeated ArticleUrlPattern article_url_pattern = 7;
+
+  optional TestInstructions test_instructions = 8 [
     (required) = YES
   ];
 }
