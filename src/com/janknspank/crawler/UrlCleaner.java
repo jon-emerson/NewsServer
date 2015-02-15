@@ -37,6 +37,7 @@ public class UrlCleaner {
   private static final Map<String, Set<String>> WHITELISTED_QUERY_PARAMETERS =
       ImmutableMap.<String, Set<String>>builder()
           .put("abcnews.go.com", ImmutableSet.of("id"))
+          .put("sfexaminer.com", ImmutableSet.of("oid"))
           // Not 100% sure about 'p' on washingtonpost.com, but historically
           // we've allowed it.
           .put("washingtonpost.com", ImmutableSet.of("p"))

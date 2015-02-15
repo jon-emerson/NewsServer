@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Urls;
@@ -33,19 +32,13 @@ public class UrlCrawler {
   private static final Logger LOG = new Logger(UrlCrawler.class);
   private final Fetcher fetcher = new Fetcher();
   private static final Iterable<String> WEBSITES = Iterables.concat(
-      Iterables.concat(
-          Iterables.transform(UrlWhitelist.CRAWL_INSTRUCTIONS.getContentSiteList(),
-              new Function<ContentSite, Iterable<String>>() {
-                @Override
-                public Iterable<String> apply(ContentSite contentSite) {
-                  return contentSite.getStartUrlList();
-                }
-              })),
-      ImmutableList.of(
-          "https://medium.com/top-100/",
-          "http://opinionator.blogs.nytimes.com/",
-          "http://www.businessinsider.com/"
-      ));
+      Iterables.transform(UrlWhitelist.CRAWL_INSTRUCTIONS.getContentSiteList(),
+          new Function<ContentSite, Iterable<String>>() {
+            @Override
+            public Iterable<String> apply(ContentSite contentSite) {
+              return contentSite.getStartUrlList();
+            }
+          }));
   private static final String[] RSS_URLS = new String[] {
     "http://america.aljazeera.com/content/ajam/articles.rss",
     "http://bdnews24.com/?widgetName=rssfeed&widgetId=1150&getXmlFeed=true",
