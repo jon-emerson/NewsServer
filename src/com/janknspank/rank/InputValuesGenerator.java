@@ -113,6 +113,65 @@ public class InputValuesGenerator {
 //    }
     return 0;
   }
+  
+  public static double relevanceToAcquisitions(User user, Article article) {
+    String lowerCaseTitle = article.getTitle().toLowerCase();
+    String lowerCaseBody = getLowerCaseBody(article);
+
+    if (lowerCaseTitle.contains("acquires")) {
+      return 1.0;
+    } else if (lowerCaseTitle.contains("buys")) {
+      return 0.9;
+    } else if (lowerCaseBody.contains("acquires")) {
+      return 0.8;
+    } else if (lowerCaseBody.contains("acquired")) {
+      return 0.6;
+    } else if (lowerCaseTitle.contains("acquisition")) {
+      return 0.5;
+    } else if (lowerCaseBody.contains("acquisition")) {
+      return 0.2;
+    }
+    return 0;
+  }
+  
+  public static double relevanceToLaunches(User user, Article article) {
+    String lowerCaseTitle = article.getTitle().toLowerCase();
+    String lowerCaseBody = getLowerCaseBody(article);
+
+    if (lowerCaseTitle.contains("launches")) {
+      return 1.0;
+    } else if (lowerCaseTitle.contains("launched")) {
+      return 0.9;
+    } else if (lowerCaseBody.contains("launches")) {
+      return 0.8;
+    } else if (lowerCaseBody.contains("launched")) {
+      return 0.6;
+    } else if (lowerCaseTitle.contains("releases")) {
+      return 0.9;
+    } else if (lowerCaseBody.contains("releases")) {
+      return 0.4;
+    }
+    return 0;
+  }
+  
+  public static double relevanceToFundraising(User user, Article article) {
+    String lowerCaseTitle = article.getTitle().toLowerCase();
+    String lowerCaseBody = getLowerCaseBody(article);
+
+    if (lowerCaseTitle.contains("raises") || lowerCaseTitle.contains("series a")
+        || lowerCaseTitle.contains("series b") || lowerCaseTitle.contains("series c")
+        || lowerCaseTitle.contains("angel round") || lowerCaseTitle.contains("series a")
+        || lowerCaseTitle.contains("valuation")) {
+      return 1.0;
+    } else if (lowerCaseBody.contains("raises") || lowerCaseBody.contains("series a")
+        || lowerCaseBody.contains("series b") || lowerCaseBody.contains("series c")
+        || lowerCaseBody.contains("angel round") || lowerCaseBody.contains("series a")) {
+      return 0.9;
+    } else if (lowerCaseBody.contains("investors")) {
+      return 0.8;
+    }
+    return 0;
+  }
 
   public static double getSimilarityToIndustry(Article article, IndustryCode industryCode) {
     for (ArticleFeature feature : article.getFeatureList()) {
@@ -122,6 +181,14 @@ public class InputValuesGenerator {
       }
     }
     return 0;
+  }
+  
+  private static String getLowerCaseBody(Article article) {
+    StringBuilder bodyBuilder = new StringBuilder();
+    for (String paragraph : article.getParagraphList()) {
+      bodyBuilder.append(paragraph.toLowerCase());
+    }
+    return bodyBuilder.toString();
   }
 
   // Normalize any value to [0,1]

@@ -164,7 +164,10 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   public void handleLearningEvent(LearningEvent event) {
     BackPropagation bp = (BackPropagation)event.getSource();
     double error = bp.getTotalNetworkError();
-    System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
+    if (bp.getCurrentIteration() % 1000 == 0) {
+      System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
+    }
+
     if (error < lowestError) {
       lowestError = error;
       lowestErrorIteration = bp.getCurrentIteration();
@@ -200,8 +203,21 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
 
     // Combine the two training sets
+    double[] averageInputValues = new double[NeuralNetworkScorer.INPUT_NODES_COUNT];
     for (DataSetRow row : jonBenchmarkDataSet.getRows()) {
+      double[] inputs = row.getInput();
+      for (int i = 0; i < inputs.length; i++) {
+        averageInputValues[i] += inputs[i];
+      }
       userRatingsDataSet.addRow(row);
+    }
+
+    int numRows = userRatingsDataSet.size();
+    //LOG.info("Average input values:");
+    System.out.println("Average input values:");
+    for (int i = 0; i < averageInputValues.length; i++) {
+      averageInputValues[i] = averageInputValues[i] / numRows;
+      System.out.println("  [" + i + "] = " + averageInputValues[i]);
     }
 
     NeuralNetwork<BackPropagation> neuralNetwork =
