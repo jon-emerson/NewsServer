@@ -18,7 +18,7 @@ import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.UserProto.UrlRating;
+import com.janknspank.proto.CoreProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
 
 public class UserRatingsBenchmark {

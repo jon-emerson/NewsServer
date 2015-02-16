@@ -19,10 +19,10 @@ public class UrlsTest {
     // Test fully-qualified dates.
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     assertEquals(100, Urls.getCrawlPriority(
-        "http://www.bloomberg.com/news/" + dateFormat.format(new Date(0))
+        "http://www.bloomberg.com/news/articles/" + dateFormat.format(new Date(0))
         + "/obama-delivers-support-for-myanmar-opposition.html", null));
     assertTrue(500 < Urls.getCrawlPriority(
-        "http://www.bloomberg.com/news/" + dateFormat.format(new Date())
+        "http://www.bloomberg.com/news/articles/" + dateFormat.format(new Date())
         + "/obama-delivers-support-for-myanmar-opposition.html", null));
 
     // Test month-only.

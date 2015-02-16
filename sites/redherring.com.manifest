@@ -1,0 +1,27 @@
+root_domain: "redherring.com"
+start_url: "http://www.redherring.com"
+path_blacklist {
+  needle: "/events/"
+}
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "\\/[a-z]+\\/[^\\/]+-[^\\/]+\\/$"
+}
+test_instructions {
+  url_whitelist_checks {
+    bad_url: "http://www.redherring.com/events/red-herring-global/"
+    bad_url: "http://www.redherring.com/events/top-100/testimonials/"
+  }
+  article_url_detector_checks {
+    article_url: "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/"
+    article_url: "http://www.redherring.com/finance/uber-raises-another-1-2bn-staggering-40bn-valuation/"
+    article_url: "http://www.redherring.com/mobile/drones-looking-beyond-fear/"
+    article_url: "http://www.redherring.com/finance/10-2014s-largest-pre-ipo-funding-rounds/"
+    article_url: "http://www.redherring.com/startups/twitters-user-growth-worry-anthem-security-breach-wheeler-makes-net-neutrality-stand/"
+    non_article_url: "http://www.redherring.com/category/consumer/"
+    non_article_url: "http://www.redherring.com/category/enterprise/"
+    non_article_url: "http://www.redherring.com/category/startups/page/3/"
+    non_article_url: "http://www.redherring.com/contact-us/"
+    non_article_url: "http://www.redherring.com/press-media/"
+  }
+}

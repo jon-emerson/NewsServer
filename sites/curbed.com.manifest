@@ -1,0 +1,45 @@
+root_domain: "curbed.com"
+start_url: "http://curbed.com"
+start_url: "http://sf.curbed.com"
+start_url: "http://la.curbed.com"
+start_url: "http://ny.curbed.com"
+path_blacklist {
+  needle: "/search.php"
+  location: ENDS_WITH
+}
+paragraph_selector: ".post-body > p"
+paragraph_selector: ".post-body > .post-more > p"
+paragraph_selector: ".post-body > .quicklink-body > p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9](\\/[0-3][0-9])?\\/[^\\/\\.]+\\.php$"
+}
+rss_url: "http://curbed.com/atom.xml"
+rss_url: "http://la.curbed.com/atom.xml"
+rss_url: "http://ny.curbed.com/atom.xml"
+rss_url: "http://seattle.curbed.com/atom.xml"
+rss_url: "http://sf.curbed.com/atom.xml"
+test_instructions {
+  url_whitelist_checks {
+    good_url: "http://curbed.com/archives/2014/12/30/best-homes-architectural-digest-dwell-house-beautiful.php"
+    good_url: "http://la.curbed.com/archives/2014/12/the_21_best_los_angeles_maps_of_2014.php"
+    good_url: "http://seattle.curbed.com/archives/2014/12/five-properties-worth-buying-along-metro-bus-route-355.php"
+    good_url: "http://ski.curbed.com/archives/2015/02/new-utah-blueprint-threatens-the-future-of-one-wasatch.php"
+    good_url: "http://ski.curbed.com/archives/2015/02/new-utah-blueprint-threatens-the-future-of-one-wasatch.php"
+    bad_url: "http://sf.curbed.com/search.php"
+    bad_url: "http://ny.curbed.com/search.php"
+    bad_url: "http://la.curbed.com/search.php"
+    bad_url: "http://curbed.com/search.php"
+  }
+  article_url_detector_checks {
+    article_url: "http://curbed.com/archives/2014/12/30/best-homes-architectural-digest-dwell-house-beautiful.php"
+    article_url: "http://la.curbed.com/archives/2014/12/the_21_best_los_angeles_maps_of_2014.php"
+    article_url: "http://seattle.curbed.com/archives/2014/12/five-properties-worth-buying-along-metro-bus-route-355.php"
+    article_url: "http://ski.curbed.com/archives/2015/02/new-utah-blueprint-threatens-the-future-of-one-wasatch.php"
+    article_url: "http://sf.curbed.com/archives/2015/02/13/vintage_airline_posters_that_lured_tourists_to_san_francisco.php"
+    non_article_url: "http://curbed.com/tags/top"
+    non_article_url: "http://curbed.com/search.php?origin=cna&sites=all&blogs=1,5,7,8,20,29,32,33,34,42,45,46,47,49,54,65&query=moose"
+    non_article_url: "http://seattle.curbed.com/tags/windermere"
+    non_article_url: "http://ski.curbed.com/authors/katie-shapiro"
+    non_article_url: "http://ski.curbed.com/archives/categories/park_city.php"
+  }
+}

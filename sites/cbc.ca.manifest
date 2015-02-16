@@ -1,0 +1,40 @@
+root_domain: "cbc.ca"
+start_url: "http://www.cbc.ca"
+start_url: "http://archives.cbc.ca"
+subdomain_blacklist: "music.cbc.ca"
+path_blacklist {
+  needle: "/connects/"
+}
+path_blacklist {
+  needle: "/mediacentre/"
+}
+path_blacklist {
+  needle: "/player/"
+}
+path_blacklist {
+  needle: "/shop/"
+}
+paragraph_selector: ".story-content p"
+article_url_pattern {
+  path_regex: "\\/news\\/.*\\-1\\.[0-9]{6,10}$"
+}
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$"
+}
+rss_url: "http://www.cbc.ca/cmlink/rss-business"
+rss_url: "http://www.cbc.ca/cmlink/rss-technology"
+rss_url: "http://www.cbc.ca/cmlink/rss-topstories"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.cbc.ca/m/news/canada/british-columbia/b-c-premier-christy-clark-defends-site-c-as-a-100-year-plan-1.2883064"
+    article_url: "http://www.cbc.ca/news/business/biggest-marketing-fails-of-2014-apple-coors-and-more-1.2877875"
+    article_url: "http://www.cbc.ca/news/world/black-ivory-coffee-canadian-s-elephant-poop-coffee-makes-a-pricey-cup-of-joe-1.2881812"
+    article_url: "http://www.cbc.ca/newsblogs/yourcommunity/2014/04/rob-ford-crackathon-video-game-lights-up-the-web.html"
+    article_url: "http://www.cbc.ca/news/business/canadian-pacific-railway-talks-fail-engineers-go-on-strike-1.2958056"
+    non_article_url: "http://www.cbc.ca/aboutcbc/discover/privacy.html"
+    non_article_url: "http://www.cbc.ca/archives/onthisday/february.html"
+    non_article_url: "http://www.cbc.ca/archives/tools/faq.html"
+    non_article_url: "http://www.cbc.ca/newsblogs/politics/inside-politics-blog/author/kady-omalley/"
+    non_article_url: "http://www.cbc.ca/services/consumer_recordings.html"
+  }
+}

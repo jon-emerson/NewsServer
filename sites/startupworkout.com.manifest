@@ -1,0 +1,20 @@
+root_domain: "startupworkout.com"
+start_url: "http://startupworkout.com"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "^\\/(?!author\\/).+\\-.+"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://startupworkout.com/inbox-hero-how-to-write-hypnotizing-emails-that-convert-like-crazy/1/"
+    article_url: "http://startupworkout.com/motivation-121-epic-business-quotes-to-inspire-your-success/"
+    article_url: "http://startupworkout.com/traction-list/"
+    article_url: "http://startupworkout.com/how-to-build-a-minimal-viable-product-that-works/"
+    article_url: "http://startupworkout.com/boring-to-billion/"
+    non_article_url: "http://startupworkout.com/about/"
+    non_article_url: "http://startupworkout.com/recommended/"
+    non_article_url: "http://startupworkout.com/category/marketing/"
+    non_article_url: "http://startupworkout.com/page/2/"
+    non_article_url: "http://startupworkout.com/author/kevin-fleming/"
+  }
+}

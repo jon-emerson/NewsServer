@@ -1,0 +1,29 @@
+root_domain: "wired.com"
+start_url: "http://www.wired.com"
+subdomain_blacklist: "jobs.wired.com"
+paragraph_selector: "span[itemprop=\"articleBody\"] div"
+paragraph_selector: "span[itemprop=\"articleBody\"] p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/.*\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.wired.com/2014/12/indispensable-vehicles-got-start-wwi/"
+    article_url: "http://www.wired.com/2015/01/absurd-creature-of-the-week-barbados-threadsnake/"
+    article_url: "http://www.wired.com/2015/01/daniel-gebhart-de-koekkoek-bodybuilders/"
+    article_url: "http://www.wired.com/2015/01/facebook-making-news-feed-better-asking-real-people-direct-questions/"
+    article_url: "http://www.wired.com/2015/01/game-of-thrones-season-5-trailer/"
+    article_url: "http://www.wired.com/2015/01/new-3ds-zelda-majoras-mask/"
+    article_url: "http://www.wired.com/2015/01/nissan-juke-tracks-snow/"
+    article_url: "http://www.wired.com/2015/01/smartest-richest-companies-cant-crack-mobile-future-belongs-anyone-can/"
+    article_url: "http://www.wired.com/2015/01/tech-time-warp-pizza/"
+    article_url: "http://www.wired.com/2015/01/think-students-allowed-cheat/"
+    article_url: "http://www.wired.com/2015/01/verizon-will-let-customers-sidestep-privacy-killing-perma-cookie/"
+    article_url: "http://www.wired.com/2015/02/get-silicon-valleys-unvaccinated-change-minds/"
+    non_article_url: "http://www.wired.com/category/beyondapollo/"
+    non_article_url: "http://www.wired.com/about/rss_feeds/"
+    non_article_url: "http://www.wired.com/about/staff_publishing/"
+    non_article_url: "http://www.wired.com/services/newsletters/demographics/"
+    non_article_url: "http://www.wired.com/category/science-blogs/"
+  }
+}

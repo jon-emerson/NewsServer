@@ -1,0 +1,60 @@
+root_domain: "abc.net.au"
+start_url: "http://www.abc.net.au/"
+subdomain_blacklist: "about.abc.net.au"
+subdomain_blacklist: "iview.abc.net.au"
+subdomain_blacklist: "mobile.abc.net.au"
+subdomain_blacklist: "nucwed.aus.aunty.abc.net.au"
+subdomain_blacklist: "search.abc.net.au"
+subdomain_blacklist: "shop.abc.net.au"
+subdomain_blacklist: "www2b.abc.net.au"
+path_blacklist {
+  needle: "/radio/"
+}
+path_blacklist {
+  needle: "\\/sport\\/.*\\/scoreboard\\/"
+  location: REGEX_FIND
+}
+path_blacklist {
+  needle: "\\/sport\\/.*\\/results\\/"
+  location: REGEX_FIND
+}
+path_blacklist {
+  needle: "/image/"
+  location: CONTAINS
+}
+# DO NOT EXPAND THIS TO .article p, ALL USER COMMENTS GET PULLED!
+paragraph_selector: ".article > p"
+# E.g. http://www.abc.net.au/health/features/stories/2015/02/12/4178721.htm
+paragraph_selector: ".story > p"
+paragraph_selector: "#story > p"
+article_url_pattern {
+  path_regex: "\\/[0-9]{6,10}(.htm)?$"
+}
+# "Top".
+rss_url: "http://www.abc.net.au/news/feed/45910/rss.xml"
+# "Just in".
+rss_url: "http://www.abc.net.au/news/feed/51120/rss.xml"
+# Business.
+rss_url: "http://www.abc.net.au/news/feed/51892/rss.xml"
+# World.
+rss_url: "http://www.abc.net.au/news/feed/52278/rss.xml"
+test_instructions {
+  url_whitelist_checks {
+    bad_url: "http://www.abc.net.au/news/2015-01-08/image/6006554"
+  }
+  article_url_detector_checks {
+    article_url: "http://www.abc.net.au/catalyst/stories/4002580.htm"
+    article_url: "http://www.abc.net.au/health/features/stories/2014/10/28/4116350.htm"
+    article_url: "http://www.abc.net.au/health/thepulse/stories/2015/01/28/4169022.htm"
+    article_url: "http://www.abc.net.au/news/2014-12-26/world-war-i-relatives-indigenous-soldiers-fight-for-recognition/5954752"
+    article_url: "http://www.abc.net.au/news/2015-02-13/pms-comments-could-still-prejudice-trial-says-legal-community/6090058"
+    article_url: "http://www.abc.net.au/science/articles/2015/02/12/4178774.htm"
+    non_article_url: "http://abc.net.au/btn/"
+    non_article_url: "http://www.abc.net.au/7.30/"
+    non_article_url: "http://www.abc.net.au/abc3/news/"
+    non_article_url: "http://www.abc.net.au/copyright.htm"
+    non_article_url: "http://www.abc.net.au/science/articles/2015/02/12/"
+    non_article_url: "http://www.abc.net.au/technology/techexplained/default.htm"
+    non_article_url: "http://www.abc.net.au/tv/connect/messageboards.htm"
+  }
+}

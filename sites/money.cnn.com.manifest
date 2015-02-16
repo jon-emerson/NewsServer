@@ -1,0 +1,48 @@
+root_domain: "money.cnn.com"
+start_url: "http://money.cnn.com"
+subdomain_blacklist: "cgi.money.cnn.com"
+subdomain_blacklist: "jobsearch.money.cnn.com"
+subdomain_blacklist: "portfolio.money.cnn.com"
+subdomain_blacklist: "realestate.money.cnn.com"
+path_blacklist {
+  needle: "/data/"
+}
+path_blacklist {
+  needle: "/galleries/"
+}
+path_blacklist {
+  needle: "/gallery/"
+}
+path_blacklist {
+  needle: "/quote/"
+}
+path_blacklist {
+  needle: "/magazines/"
+}
+path_blacklist {
+  needle: "/profile/"
+}
+path_blacklist {
+  needle: "/tag/"
+}
+path_blacklist {
+  needle: "/tools/"
+}
+paragraph_selector: "div#storytext p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/([A-Z]+\\/([A-Za-z]+\\/)?)?[01][0-9]\\/[0-3][0-9]\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://buzz.money.cnn.com/2013/01/25/herbalife-ackman-icahn/"
+    article_url: "http://money.cnn.com/2006/08/09/technology/webaroundtheworld.biz2/"
+    article_url: "http://money.cnn.com/2014/02/19/technology/social/facebook-whatsapp/"
+    article_url: "http://money.cnn.com/2015/02/09/technology/online-dating-coaches/index.html"
+    article_url: "http://money.cnn.com/2015/02/13/investing/valentines-day-1800flowers-ftd/index.html"
+    non_article_url: "http://buzz.money.cnn.com/author/brooneycnn/"
+    non_article_url: "http://economy.money.cnn.com/author/cnnkurtz/"
+    non_article_url: "http://money.cnn.com/data/markets/"
+    non_article_url: "http://money.cnn.com/news/companies/"
+    non_article_url: "http://money.cnn.com/services/closed-captioning.html"
+  }
+}

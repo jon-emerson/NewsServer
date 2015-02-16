@@ -1,0 +1,66 @@
+root_domain: "latimes.com"
+start_url: "http://www.latimes.com"
+subdomain_blacklist: "advertise.latimes.com"
+subdomain_blacklist: "classifieds.latimes.com"
+subdomain_blacklist: "digitalservices.latimes.com"
+subdomain_blacklist: "datadesk.latimes.com"
+subdomain_blacklist: "dailydeals.latimes.com"
+subdomain_blacklist: "discussions.latimes.com"
+subdomain_blacklist: "documents.latimes.com"
+subdomain_blacklist: "ee.latimes.com"
+subdomain_blacklist: "framework.latimes.com"
+subdomain_blacklist: "games.latimes.com"
+subdomain_blacklist: "graphics.latimes.com"
+subdomain_blacklist: "guides.latimes.com"
+subdomain_blacklist: "ilivehere.latimes.com"
+subdomain_blacklist: "localdeals.latimes.com"
+subdomain_blacklist: "marketplace.latimes.com"
+subdomain_blacklist: "marketplaceads.latimes.com"
+subdomain_blacklist: "mediakit.latimes.com"
+subdomain_blacklist: "membership.latimes.com"
+subdomain_blacklist: "myaccount2.latimes.com"
+subdomain_blacklist: "placeanad.latimes.com"
+subdomain_blacklist: "projects.latimes.com"
+subdomain_blacklist: "recipes.latimes.com"
+subdomain_blacklist: "schools.latimes.com"
+subdomain_blacklist: "store.latimes.com"
+path_blacklist {
+  needle: "/classified/"
+}
+path_blacklist {
+  needle: "/shopping/"
+}
+paragraph_selector: ".trb_article_page > p"
+article_url_pattern {
+  path_regex: "20[0-9]{2}[01][0-9][0-3][0-9]\\-(column|htmlstory|story|storygallery)\\.html$"
+}
+article_url_pattern {
+  path_regex: ",[0-9]{6,10}\\.(column|htmlstory|story|storygallery)$"
+}
+rss_url: "http://www.latimes.com/business/rss2.0.xml"
+rss_url: "http://www.latimes.com/business/technology/rss2.0.xml"
+rss_url: "http://www.latimes.com/nation/rss2.0.xml"
+rss_url: "http://www.latimes.com/opinion/editorials/rss2.0.xml"
+rss_url: "http://www.latimes.com/rss2.0.xml"
+rss_url: "http://www.latimes.com/science/rss2.0.xml"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.latimes.com/books/jacketcopy/la-et-jc-sherlock-holmes-belongs-to-us-all-20141103-story.html"
+    article_url: "http://www.latimes.com/business/hiltzik/la-fi-mh-issas-big-dud-20141224-column.html"
+    article_url: "http://www.latimes.com/food/dailydish/la-dd-recipes-for-santa-or-yourself-on-christmas-eve-20141222-storygallery.html"
+    article_url: "http://www.latimes.com/la-california-20141016-htmlstory.html"
+    article_url: "http://www.latimes.com/la-me-aqueduct-comments-20131028,0,3652614.story"
+    article_url: "http://www.latimes.com/local/crime/la-me-lapd-trust-20140828-story.html#page=1"
+    article_url: "http://www.latimes.com/local/la-me-c1-aqueduct-bomber-20131030-dto,0,7855162.htmlstory"
+    article_url: "http://www.latimes.com/local/lanow/la-me-ln-fire-homeless-20140504,0,756604.story"
+    article_url: "http://www.latimes.com/local/lanow/la-me-ln-lightning-rain-storms-southern-california-20150130-story.html"
+    article_url: "http://www.latimes.com/local/lanow/la-me-ln-measles-outbreak-hits-marin-county-20150130-story.html"
+    article_url: "http://www.latimes.com/news/politics/la-na-rove14aug14,1,1728147.story"
+    article_url: "http://www.latimes.com/sports/sportsnow/la-sp-sn-nhl-all-star-zemgus-girgensons20141230-story.html"
+    non_article_url: "http://latimesblogs.latimes.com/alltherage/"
+    non_article_url: "http://www.latimes.com/aboutus"
+    non_article_url: "http://www.latimes.com/business/personalfinance/"
+    non_article_url: "http://www.latimes.com/search/dispatcher.front?Query=hello&target=all"
+    non_article_url: "http://www.latimes.com/topic/crime-law-justice/law-enforcement/los-angeles-police-department-ORGOV000939.topic"
+  }
+}

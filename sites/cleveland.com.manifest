@@ -1,0 +1,67 @@
+root_domain: "cleveland.com"
+start_url: "http://www.cleveland.com"
+subdomain_blacklist: "autos.cleveland.com"
+subdomain_blacklist: "blog.cleveland.com"
+subdomain_blacklist: "businessfinder.cleveland.com"
+subdomain_blacklist: "connect.cleveland.com"
+subdomain_blacklist: "findnsave.cleveland.com"
+subdomain_blacklist: "mobilejobs.cleveland.com"
+subdomain_blacklist: "mobileobits.cleveland.com"
+subdomain_blacklist: "photos.cleveland.com"
+subdomain_blacklist: "realestate.cleveland.com"
+subdomain_blacklist: "cinesport.cleveland.com"
+subdomain_blacklist: "classifieds.cleveland.com"
+subdomain_blacklist: "foreclosures.cleveland.com"
+subdomain_blacklist: "highschoolsports.cleveland.com"
+subdomain_blacklist: "jobs.cleveland.com"
+subdomain_blacklist: "m.cleveland.com"
+subdomain_blacklist: "search.cleveland.com"
+subdomain_blacklist: "signup.cleveland.com"
+subdomain_blacklist: "stats.cleveland.com"
+subdomain_blacklist: "update.cleveland.com"
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/events"
+  location: EQUALS
+}
+path_blacklist {
+  needle: "/forums/"
+}
+path_blacklist {
+  needle: "/forums"
+  location: EQUALS
+}
+path_blacklist {
+  needle: "/jobs/"
+}
+path_blacklist {
+  needle: "/jobs"
+  location: EQUALS
+}
+path_blacklist {
+  needle: "/print.html"
+  location: ENDS_WITH
+}
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$"
+}
+rss_url: "http://blog.cleveland.com/business_impact/atom.xml"
+rss_url: "http://blog.cleveland.com/business_impact/technology/atom.xml"
+rss_url: "http://blog.cleveland.com/realtimenews/atom.xml"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.cleveland.com/business/index.ssf/2014/12/marc_krantz_managing_partner_o.html"
+    article_url: "http://www.cleveland.com/nation/index.ssf/2015/01/ohio_judge_tells_shoplifting_mom.html"
+    article_url: "http://www.cleveland.com/sunnews/index.ssf/2012/09/read_your_news_from_your_commu.html"
+    article_url: "http://www.cleveland.com/travel/index.ssf/2014/12/alpine_valley_opens_today_at_5.html"
+    article_url: "http://www.cleveland.com/weather/blog/index.ssf/2015/02/dangerously_low_wind_chill_tem.html#incart_m-rpt-1"
+    non_article_url: "http://connect.cleveland.com/user/jpiorkow/posts.html"
+    non_article_url: "http://topics.cleveland.com/tag/fashion%20flash/index.html"
+    non_article_url: "http://www.cleveland.com/aboutus/"
+    non_article_url: "http://www.cleveland.com/business/index.ssf/technology"
+    non_article_url: "http://www.cleveland.com/religion/index.ssf/faith_on_the_fly/"
+  }
+}

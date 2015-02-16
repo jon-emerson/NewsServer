@@ -1,0 +1,66 @@
+root_domain: "bdnews24.com"
+start_url: "http://bdnews24.com"
+subdomain_blacklist: "ads.bdnews24.com"
+subdomain_blacklist: "bangla.bdnews24.com"
+subdomain_blacklist: "blog.bdnews24.com"
+subdomain_blacklist: "click.bdnews24.com"
+subdomain_blacklist: "hello.bdnews24.com"
+subdomain_blacklist: "revive.bdnews24.com"
+path_blacklist {
+  needle: "/animals/"
+}
+path_blacklist {
+  needle: "/cars-vehicles/"
+}
+path_blacklist {
+  needle: "/electronics/"
+}
+path_blacklist {
+  needle: "/fashion/"
+}
+path_blacklist {
+  needle: "/food-agro/"
+}
+path_blacklist {
+  needle: "/hobbies-leisure/"
+}
+path_blacklist {
+  needle: "/household/"
+}
+path_blacklist {
+  needle: "/jobs/"
+}
+path_blacklist {
+  needle: "/media/"
+}
+path_blacklist {
+  needle: "/media-en/"
+}
+path_blacklist {
+  needle: "/mobile/"
+}
+path_blacklist {
+  needle: "/property/"
+}
+path_blacklist {
+  needle: "/services-bangladesh/"
+}
+paragraph_selector: ".body > p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/"
+}
+rss_url: "http://bdnews24.com/?widgetName=rssfeed&widgetId=1150&getXmlFeed=true"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://bdnews24.com/business/2015/02/10/saudi-arabia-enters-deal-to-hire-120000-bangladeshis-a-year-start-with-domestic-helps"
+    article_url: "http://bdnews24.com/campus/2015/02/15/bcl-factions-clash-at-chittagong-university"
+    article_url: "http://bdnews24.com/cricket/2015/02/14/mathews-blames-poor-bowling-fielding-for-loss"
+    article_url: "http://bdnews24.com/lifestyle/2015/02/13/your-name-may-win-you-a-date-online"
+    article_url: "http://bdnews24.com/politics/2015/02/14/leave-khaleda-zia-if-you-want-popularity-al-leader-hasan-mahmood-tells-bnp"
+    non_article_url: "http://bdnews24.com/aboutus/index/"
+    non_article_url: "http://bdnews24.com/bangladesh/"
+    non_article_url: "http://bdnews24.com/entertainment/"
+    non_article_url: "http://opinion.bdnews24.com/author/a-qayyum-khan/"
+    non_article_url: "http://opinion.bdnews24.com/category/democracy/"
+  }
+}

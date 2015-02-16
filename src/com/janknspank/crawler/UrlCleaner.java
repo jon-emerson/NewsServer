@@ -3,7 +3,6 @@ package com.janknspank.crawler;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.http.NameValuePair;
@@ -11,9 +10,9 @@ import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.janknspank.proto.SiteProto.SiteManifest;
 
 /**
  * Utility class for cleaning up news site URLs, so they can be reduced to their
@@ -28,30 +27,11 @@ public class UrlCleaner {
         }
       };
 
-  /**
-   * URL query parameters per-domain that are actually used to address a unique
-   * article.  Any tracking query parameters or UI-configuring query parameters
-   * should NOT be listed.  Basically, only put article ID specifiers here, IFF
-   * the respective site uses query parameters to address articles.
-   */
-  private static final Map<String, Set<String>> WHITELISTED_QUERY_PARAMETERS =
-      ImmutableMap.<String, Set<String>>builder()
-          .put("abcnews.go.com", ImmutableSet.of("id"))
-          // Not 100% sure about 'p' on washingtonpost.com, but historically
-          // we've allowed it.
-          .put("washingtonpost.com", ImmutableSet.of("p"))
-          .build();
-
   private static Set<String> getWhitelistedQueryParameters(URL url) {
-    ImmutableSet.Builder<String> setBuilder = ImmutableSet.<String>builder();
-    String domain = url.getHost();
-    while (domain.contains(".")) {
-      if (WHITELISTED_QUERY_PARAMETERS.containsKey(domain)) {
-        setBuilder.addAll(WHITELISTED_QUERY_PARAMETERS.get(domain));
-      }
-      domain = domain.substring(domain.indexOf(".") + 1);
-    }
-    return setBuilder.build();
+    SiteManifest site = SiteManifests.getForUrl(url);
+    return (site == null)
+        ? ImmutableSet.<String>of()
+        : ImmutableSet.copyOf(site.getWhitelistedQueryParameterList());
   }
 
   private static List<NameValuePair> getCleanedParameters(URL url) {

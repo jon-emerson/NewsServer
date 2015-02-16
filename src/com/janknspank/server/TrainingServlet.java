@@ -28,8 +28,8 @@ import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.CoreProto.TrainedArticleClassification;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.CoreProto.UrlRating;
 import com.janknspank.proto.EnumsProto.ArticleTypeCode;
-import com.janknspank.proto.UserProto.UrlRating;
 
 @AuthenticationRequired
 public class TrainingServlet extends StandardServlet {

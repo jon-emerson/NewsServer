@@ -1,0 +1,149 @@
+// Objects representing crawler instructions.
+
+import "com/janknspank/database/extensions.proto";
+
+option java_package = "com.janknspank.proto";
+option java_outer_classname = "SiteProto";
+
+// Defines crawling instructions for a news site.  The minimal set of crawling
+// instructions is a root domain, a start URL (usually the http:// of the
+// homepage), a regular expression set for determining which URLs represent
+// articles, a set of CSS element selectors for specifying where the paragraph
+// elements are, and test instructions containing 5 article URLs and 5
+// non-Article URLs that validate the regular expression set.
+//
+// Additional instructions are allowed and encouraged.  You should blacklist
+// subdomains and paths that are not literary or news-oriented, such as job
+// boards, conference promotions, stock market quotes, UGC forums, etc.  And
+// adding test instructions for these blacklists is extremely helpful for
+// debugging and explaining what's being blacklisted.
+
+message SiteManifest {
+  // Primary identifier for this site.  DO NOT INCLUDE "www.".
+  // E.g. "nytimes.com".
+  optional string root_domain = 1 [
+    (required) = YES,
+    (string_length) = 767
+  ];
+
+  // Other domains that this site goes by.  Often used for International
+  // editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+  // These should not be subdomains of the root domain... That would just be
+  // redundant.
+  repeated string aka_root_domain = 2 [
+    (string_length) = 767
+  ];
+
+  // This is where we'll start the crawlers, so specify any good start URLs:
+  // Usually the home page is good, but also interesting subdomains and paths
+  // for subsites are very helpful to know about.
+  // E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
+  repeated string start_url = 3 [
+    (required) = YES,
+    (string_length) = 767
+  ];
+
+  // Any subdomains listed here will not be crawled.  Please list anything that
+  // would be non-news oriented, especially authentication, UGC forums,
+  // conference information sites, job boards, real estate, stock quotes...
+  repeated string subdomain_blacklist = 4 [
+    (string_length) = 767
+  ];
+
+  // Any paths blacklisted here will not be crawled.
+  message PathBlacklist {
+    // A string or regular expression to blacklist.
+    optional string needle = 1 [
+      (required) = YES,
+      (string_length) = 767
+    ];
+
+    // For strings, where to look for the string.
+    enum Location {
+      // The path must perfectly equal the needle to be blacklisted.
+      EQUALS = 1;
+      // The path must start with the needle to be blacklisted.
+      STARTS_WITH = 2;
+      // The path must end with the needle to be blacklisted.
+      ENDS_WITH = 3;
+      // The path must contain the needle to be blacklisted.
+      CONTAINS = 4;
+      // If a substring in the path matches this regular expression, it's
+      // blacklisted.
+      REGEX_FIND = 5;
+      // If the entire path matches this regular expression, it's blacklisted.
+      REGEX_MATCH = 6;
+    }
+    optional Location location = 4 [
+      default = STARTS_WITH
+    ];
+  }
+  repeated PathBlacklist path_blacklist = 5;
+
+  repeated string paragraph_selector = 6 [
+    (required) = YES,
+    (string_length) = 767
+  ];
+
+  // A collection of regular expressions that together identify all article URLs
+  // on this site.  If any Pattern matches, the URL is determined to be an
+  // article.
+  message ArticleUrlPattern {
+    // A regular expression specification to run against the article's path.
+    optional string path_regex = 1 [
+      (required) = YES,
+      (string_length) = 767
+    ];
+
+    // If present, a subdomain that this regular expression is restricted to.
+    optional string subdomain = 2 [
+      (string_length) = 767
+    ];
+  }
+  repeated ArticleUrlPattern article_url_pattern = 7;
+
+  // These are rare: URL query parameters that are actually used to address a
+  // unique article.  Any tracking query parameters or UI-configuring query
+  // parameters should NOT be listed.  Basically, only put article ID specifiers
+  // here, IFF the respective site uses query parameters to address articles.
+  repeated string whitelisted_query_parameter = 8 [
+    (string_length) = 767
+  ];
+
+  // An RSS or Atom URL for getting URLs hosted on this content site.
+  repeated string rss_url = 9 [
+    (string_length) = 767
+  ];
+
+  optional TestInstructions test_instructions = 10 [
+    (required) = YES
+  ];
+}
+
+// Any URLs in these lists will be checked as either whitelisted or not, or
+// articles or not, depending which list you add them to.  These are a GREAT
+// HELP TO YOU to validate your regular expressions and blacklists, please
+// do use them!!
+message TestInstructions {
+  message UrlWhitelistChecks {
+    repeated string good_url = 1 [
+      (string_length) = 767
+    ];
+    repeated string bad_url = 2 [
+      (string_length) = 767
+    ];
+  }
+  optional UrlWhitelistChecks url_whitelist_checks = 1;
+
+  message ArticleUrlDetectorChecks {
+    repeated string article_url = 1 [
+      (string_length) = 767
+    ];
+    repeated string non_article_url = 2 [
+      (string_length) = 767
+    ];
+  }
+  optional ArticleUrlDetectorChecks article_url_detector_checks = 2 [
+    (required) = YES
+  ];
+}

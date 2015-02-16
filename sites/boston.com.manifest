@@ -1,0 +1,79 @@
+root_domain: "boston.com"
+start_url: "http://www.boston.com"
+subdomain_blacklist: "blogcabin.boston.com"
+subdomain_blacklist: "calendar.boston.com"
+subdomain_blacklist: "circulars.boston.com"
+subdomain_blacklist: "finds.boston.com"
+subdomain_blacklist: "healthguide.boston.com"
+subdomain_blacklist: "listings.boston.com"
+subdomain_blacklist: "members.boston.com"
+subdomain_blacklist: "r.prdedit.boston.com"
+subdomain_blacklist: "realestate.boston.com"
+subdomain_blacklist: "search.boston.com"
+subdomain_blacklist: "scene.boston.com"
+subdomain_blacklist: "spiderbites.boston.com"
+subdomain_blacklist: "stats.boston.com"
+subdomain_blacklist: "syndication.boston.com"
+subdomain_blacklist: "tickets.boston.com"
+path_blacklist {
+  needle: "/boston/action/rssfeed"
+}
+path_blacklist {
+  needle: "/cars/"
+}
+path_blacklist {
+  needle: "/eom/"
+}
+path_blacklist {
+  needle: "/help/"
+}
+path_blacklist {
+  needle: "/news/traffic/"
+}
+path_blacklist {
+  needle: "/radio"
+}
+path_blacklist {
+  needle: "/sports/blogs/"
+}
+path_blacklist {
+  needle: "/quote"
+  location: ENDS_WITH
+}
+paragraph_selector: "article > p"
+paragraph_selector: ".content-text > p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*story\\.html$"
+}
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$"
+}
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$"
+}
+article_url_pattern {
+  path_regex: "\\/read\\/[0-9]{6,10}\\/[^\\/]+\\/$"
+  subdomain: "finance.boston.com"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://boston.com/community/blogs/crime_punishment/2014/02/political_rift_over_coakleys_s.html"
+    article_url: "http://boston.com/news/local/massachusetts/2014/12/29/blackstone-mother-pleads-not-guilty-murder-infant-death-case/1pZ9tly1GUZ9w5Yl1tRpSP/story.html"
+    article_url: "http://boston.com/sports/touching_all_the_bases/2014/12/_playing_nine_innings_while.html"
+    article_url: "http://finance.boston.com/boston/news/read/20733509/zipcar_unveils_inaugural_future_metropolis_index_to_measure/"
+    article_url: "http://www.boston.com/2012/03/16/dating/nkfeF9xitUXoWteAwWX1QI/story.html"
+    article_url: "http://www.boston.com/ae/blogs/mediaremix/2014/03/oprah_teases_lindsay_lohans_re.html"
+    article_url: "http://www.boston.com/blogs/ae/restaurants/the-restaurant-hub/2014/05/boston-mexican-cantina-cinco-.html"
+    article_url: "http://www.boston.com/business/innovation/state-of-play/2014/03/inside_demiurge_albert_reed_ce.html"
+    article_url: "http://www.boston.com/jobs/news/2014/05/03/nomination-letters-amedisys-home-healthcare/9lKICo47FRLGHGIKR4kSJN/story.html"
+    article_url: "http://www.boston.com/lifestyle/relationships/blogs/blissfullyinspired/2014/02/so_who_got_engaged_on_valentin.html"
+    non_article_url: "http://finance.boston.com/boston/markets"
+    non_article_url: "http://www.boston.com/ae/"
+    non_article_url: "http://www.boston.com/ae/blogs/mediaremix/"
+    non_article_url: "http://www.boston.com/blogs/ae/restaurants/the-restaurant-hub/"
+    non_article_url: "http://www.boston.com/lifestyle/relationships/blogs/blissfullyinspired/"
+    non_article_url: "http://boston.com/ae/fun/"
+    non_article_url: "http://boston.com/community/blogs/crime_punishment/"
+    non_article_url: "http://boston.com/weather/"
+  }
+}

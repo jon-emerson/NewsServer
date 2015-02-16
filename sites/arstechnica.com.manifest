@@ -1,0 +1,112 @@
+root_domain: "arstechnica.com"
+start_url: "http://arstechnica.com"
+subdomain_blacklist: "demiurge.arstechnica.com"
+subdomain_blacklist: "episteme.arstechnica.com"
+subdomain_blacklist: "feeds.arstechnica.com"
+path_blacklist {
+  needle: "/archive/"
+}
+path_blacklist {
+  needle: "/articles/paedia/"
+}
+path_blacklist {
+  needle: "/civis/"
+}
+path_blacklist {
+  needle: "/cpu/"
+}
+path_blacklist {
+  needle: "/etc/"
+}
+path_blacklist {
+  needle: "/features/"
+}
+path_blacklist {
+  needle: "/forum/"
+}
+path_blacklist {
+  needle: "/guide/"
+}
+path_blacklist {
+  needle: "/guides/"
+}
+path_blacklist {
+  needle: "/mt-static/"
+}
+path_blacklist {
+  needle: "/old/"
+}
+path_blacklist {
+  needle: "/paedia/"
+}
+path_blacklist {
+  needle: "/reviews/"
+}
+path_blacklist {
+  needle: "/site/"
+}
+path_blacklist {
+  needle: "/sponsored/"
+}
+path_blacklist {
+  needle: "/subscriptions/"
+}
+path_blacklist {
+  needle: "/tweak/"
+}
+path_blacklist {
+  needle: "/wankerdesk/"
+}
+path_blacklist {
+  needle: "/sendnews.php"
+  location: ENDS_WITH
+}
+paragraph_selector: ".article-content p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$"
+}
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.ars$"
+}
+article_url_pattern {
+  path_regex: "^\\/news\\/.*[0-9]{5,12}\\.html$"
+}
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-[0-9]{3,10}\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://arstechnica.com/apple/2005/05/305/"
+    article_url: "http://arstechnica.com/apple/2005/09/nano/"
+    article_url: "http://arstechnica.com/apple/2007/04/apple-going-to-offer-itunes-subscription-service-concentrate-and-ask-again/"
+    article_url: "http://arstechnica.com/apple/2008/07/iphone3g-review/"
+    article_url: "http://arstechnica.com/apple/2014/09/apple-announces-iphone-6-iphone-6-plus/"
+    article_url: "http://arstechnica.com/business/2014/10/after-gamergate-tweet-adobe-distances-itself-from-gawker-bullying/"
+    article_url: "http://arstechnica.com/business/2015/01/more-comcast-customers-write-in-report-name-changes-of-whore-dummy/"
+    article_url: "http://arstechnica.com/cars/2014/12/california-dmv-will-miss-its-deadline-for-driverless-car-regulations/"
+    article_url: "http://arstechnica.com/gadgets/2003/03/soundcathode/"
+    article_url: "http://arstechnica.com/gadgets/2012/04/ars-reviews-adobe-lightroom-4/"
+    article_url: "http://arstechnica.com/gadgets/2015/01/microsoft-to-invest-in-cyanogen-hopes-to-take-android-away-from-google/"
+    article_url: "http://arstechnica.com/gaming/2015/01/a-virtual-day-with-750-pinball-and-arcade-games-no-quarters-needed/"
+    article_url: "http://arstechnica.com/information-technology/2012/09/adobes-continuing-revolution-pushes-the-cutting-edge-of-html5-development/"
+    article_url: "http://arstechnica.com/news.ars/post/20050427-4857.html"
+    article_url: "http://arstechnica.com/science/2015/01/have-a-scientific-problem-steal-an-answer-from-nature/"
+    article_url: "http://arstechnica.com/security/2014/04/vicious-heartbleed-bug-bites-millions-of-android-phones-other-devices/"
+    article_url: "http://arstechnica.com/tech-policy/2015/01/silk-road-trial-how-the-dread-pirate-roberts-embraced-violence/"
+    article_url: "http://arstechnica.com/telecom/news/2009/02/gop-strives-to-get-their-tech-on.ars"
+    article_url: "http://arstechnica.com/the-multiverse/2014/12/battle-of-the-five-armies-is-a-soulless-end-to-the-flawed-hobbit-trilogy/"
+    article_url: "http://arstechnica.com/uncategorized/2003/05/300-2/"
+    article_url: "http://arstechnica.com/uncategorized/2008/03/broadcasters-blast-fcc-localism-proposals/"
+    article_url: "http://www.arstechnica.com/news/posts/1080081775.html"
+    non_article_url: "http://arstechnica.com/2014-ars-childs-play-drive-official-sweepstakes-rules/"
+    non_article_url: "http://arstechnica.com/apple/"
+    non_article_url: "http://arstechnica.com/apple/2008/07/iphone3g-review/1/"
+    non_article_url: "http://arstechnica.com/author/andrew-webster/"
+    non_article_url: "http://arstechnica.com/contact-us/"
+    non_article_url: "http://arstechnica.com/gadgets/"
+    non_article_url: "http://arstechnica.com/gadgets/2008/09/guide-200809/2/"
+    non_article_url: "http://arstechnica.com/the-multiverse/"
+    non_article_url: "http://arstechnica.com/uncategorized/"
+    non_article_url: "http://www.arstechnica.com/site/user-agreement.ars"
+  }
+}

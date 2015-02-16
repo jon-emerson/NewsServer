@@ -1,0 +1,22 @@
+root_domain: "siliconbeat.com"
+start_url: "http://www.siliconbeat.com"
+paragraph_selector: ".post-content > p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-.*\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.siliconbeat.com/2014/02/28/adobe-to-donate-300-million-in-software-to-schools/"
+    article_url: "http://www.siliconbeat.com/2015/02/12/rashgate-fitbit-and-the-itch-you-cant-scratch/"
+    article_url: "http://www.siliconbeat.com/2015/02/10/tesla-earnings-what-to-watch/"
+    article_url: "http://www.siliconbeat.com/2015/02/13/linkedin-data-where-do-google-facebook-and-other-major-tech-companies-hire-from/"
+    article_url: "http://www.siliconbeat.com/2015/02/10/disgraced-puc-boss-peevey-to-be-honored-by-cronies/"
+    non_article_url: "http://www.siliconbeat.com/2014/02/"
+    non_article_url: "http://www.siliconbeat.com/about-siliconbeat/"
+    non_article_url: "http://www.siliconbeat.com/about-siliconbeat/?uid=36"
+    non_article_url: "http://www.siliconbeat.com/category/big-data/"
+    non_article_url: "http://www.siliconbeat.com/category/mobile-2/"
+    non_article_url: "http://www.siliconbeat.com/category/mobile-2/page/2/"
+    non_article_url: "http://www.siliconbeat.com/page/195/"
+  }
+}

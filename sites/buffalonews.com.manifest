@@ -1,0 +1,36 @@
+root_domain: "buffalonews.com"
+start_url: "http://www.buffalonews.com"
+subdomain_blacklist: "cars.buffalonews.com"
+subdomain_blacklist: "corp.buffalonews.com"
+subdomain_blacklist: "galleries.buffalonews.com"
+subdomain_blacklist: "realestate.buffalonews.com"
+subdomain_blacklist: "services.buffalonews.com"
+subdomain_blacklist: "shopping.buffalonews.com"
+subdomain_blacklist: "subscribe.buffalonews.com"
+paragraph_selector: ".articleP p"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "\\-20[0-9]{6}$"
+}
+article_url_pattern {
+  path_regex: "^\\/article\\/20[0-9]{2}[01][0-9][0-3][0-9]\\/"
+}
+article_url_pattern {
+  path_regex: "^\\/apps\\/pbcs.dll\\/article"
+}
+rss_url: "http://www.buffalonews.com/section/rssGen?profileID=1109&profileName=Top%20Stories"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.buffalonews.com/apps/pbcs.dll/article?aid=/20130122/cityandregion/130129744/1010"
+    article_url: "http://www.buffalonews.com/article/20141124/CITYANDREGION/141129410"
+    article_url: "http://www.buffalonews.com/business/sp-500-erases-monthly-loss-on-biggest-3-day-rally-since-2011-20141219"
+    article_url: "http://www.buffalonews.com/city-region/town-of-niagara-shooting-suspect-treated-for-injuries-20150101"
+    article_url: "http://www.buffalonews.com/city-region/cold-tightens-grip-on-region-as-valentines-day-storm-kills-2-20150214"
+    article_url: "http://www.buffalonews.com/life-arts/travel/what-travelers-need-to-know-about-measles-20150215"
+    non_article_url: "http://www.buffalonews.com/help/terms-and-conditions"
+    non_article_url: "http://www.buffalonews.com/help/faq"
+    non_article_url: "http://www.buffalonews.com/life-arts"
+    non_article_url: "http://www.buffalonews.com/life-arts/travel"
+    non_article_url: "http://www.buffalonews.com/section/sitemap"
+  }
+}

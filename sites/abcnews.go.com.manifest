@@ -1,0 +1,64 @@
+root_domain: "abcnews.go.com"
+start_url: "http://www.abcnews.go.com"
+subdomain_blacklist: "forums.abcnews.go.com"
+subdomain_blacklist: "ugv.abcnews.go.com"
+path_blacklist {
+  needle: "/Site/"
+}
+path_blacklist {
+  needle: "/meta/"
+}
+path_blacklist {
+  needle: "/xmldata/"
+}
+path_blacklist {
+  needle: "/photos/"
+  location: CONTAINS
+}
+paragraph_selector: "#storyText p"
+paragraph_selector: "#innerbody p"
+article_url_pattern {
+  path_regex: "\\/story$"
+}
+article_url_pattern {
+  path_regex: "^\\/blogs\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$$"
+}
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/wireStory\\/.*[0-9]{7,9}$"
+}
+whitelisted_query_parameter: "id"
+rss_url: "http://feeds.abcnews.com/abcnews/internationalheadlines"
+rss_url: "http://feeds.abcnews.com/abcnews/moneyheadlines"
+rss_url: "http://feeds.abcnews.com/abcnews/politicsheadlines"
+rss_url: "http://feeds.abcnews.com/abcnews/technologyheadlines"
+rss_url: "http://feeds.abcnews.com/abcnews/usheadlines"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://abcnews.go.com/2020/20-2020-surprising-celebrity-infomercials/story?id=13623616"
+    article_url: "http://abcnews.go.com/2020/story?id=124078"
+    article_url: "http://abcnews.go.com/ABCNews/cheerleader-fights-back-critics-big-game-hunting/story?id=24398963"
+    article_url: "http://abcnews.go.com/ABC_Univision/ABC_Univision/trouble-paradise-us-brazil/story?id=20320361"
+    article_url: "http://abcnews.go.com/ABC_Univision/Entertainment/draco-rosa-livin-la-vida-loca-beating-cancer/story?id=18766491"
+    article_url: "http://abcnews.go.com/ABC_Univision/cuban-blogger-yoani-snchezs-visit-brazil-sparks-protests/story?id=18556994"
+    article_url: "http://abcnews.go.com/Blotter/60-seconds-video-shows-us-secret-snatch-operation/story?id=22449318"
+    article_url: "http://abcnews.go.com/Business/10-brands-changing-public-image/story?id=23160475"
+    article_url: "http://abcnews.go.com/Business/story?id=89092"
+    article_url: "http://abcnews.go.com/US/2014-fifa-world-cup-win-lose-draw-hows/story?id=24321155"
+    article_url: "http://abcnews.go.com/US/wireStory/suspected-honduran-drug-kingpins-extradited-us-27726946"
+    article_url: "http://abcnews.go.com/US/wireStory/top-news-2014-left-public-grasping-answers-27671210"
+    article_url: "http://abcnews.go.com/US/woman-shot-killed-year-walmart/story?id=27907997"
+    article_url: "http://abcnews.go.com/WN/DianeSawyer/diane-sawyers-biography/story?id=9380180"
+    article_url: "http://abcnews.go.com/Weird/wireStory/boy-sends-allowance-save-uab-football-27716105"
+    article_url: "http://abcnews.go.com/blogs/politics/2014/08/7-unmistakable-signs-the-2016-presidential-race-has-already-started/"
+    non_article_url: "http://abcnews.go.com/2020"
+    non_article_url: "http://abcnews.go.com/author/"
+    non_article_url: "http://abcnews.go.com/author/andrew_springer"
+    non_article_url: "http://abcnews.go.com/business"
+    non_article_url: "http://abcnews.go.com/topics/"
+    non_article_url: "http://abcnews.go.com/topics/business/airlines/aer-lingus.htm"
+    non_article_url: "http://abcnews.go.com/topics/business/airlines/hawaiian-airlines.htm?mediatype=Image"
+    non_article_url: "http://abcnews.go.com/topics/business/airlines/hawaiian-airlines.htm?mediatype=Video"
+    non_article_url: "http://abcnews.go.com/topics/entertainment/music/justin-bieber.htm"
+    non_article_url: "http://abcnews.go.com/topics/news/angola.htm"
+  }
+}

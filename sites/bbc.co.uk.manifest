@@ -1,0 +1,94 @@
+root_domain: "bbc.co.uk"
+aka_root_domain: "bbc.com"
+start_url: "http://www.bbc.co.uk"
+start_url: "http://www.bbc.com"
+subdomain_blacklist: "iplayerhelp.external.bbc.co.uk"
+subdomain_blacklist: "faq.external.bbc.co.uk"
+subdomain_blacklist: "newsvote.bbc.co.uk"
+subdomain_blacklist: "ssl.bbc.co.uk"
+subdomain_blacklist: "m.bbc.com"
+path_blacklist {
+  needle: "/guides/"
+}
+path_blacklist {
+  needle: "/iplayer/"
+}
+path_blacklist {
+  needle: "/mundo/"
+}
+path_blacklist {
+  needle: "/programmes/"
+}
+path_blacklist {
+  needle: "/portuguese/"
+}
+path_blacklist {
+  needle: "/sport/"
+}
+path_blacklist {
+  needle: "/travel/"
+}
+path_blacklist {
+  needle: "/webwise/"
+}
+paragraph_selector: ".story-body > p"
+paragraph_selector: ".map-body > p"
+article_url_pattern {
+  path_regex: "-[0-9]{5,10}$"
+}
+article_url_pattern {
+  path_regex: "\\/story\\/20[0-9]{2}[01][0-9][0-3][0-9]\\-"
+}
+article_url_pattern {
+  path_regex: "\\/newsbeat\\/[0-9]{7,10}$"
+}
+rss_url: "http://feeds.bbci.co.uk/news/business/rss.xml"
+rss_url: "http://feeds.bbci.co.uk/news/politics/rss.xml"
+rss_url: "http://feeds.bbci.co.uk/news/rss.xml"
+rss_url: "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml"
+rss_url: "http://feeds.bbci.co.uk/news/technology/rss.xml"
+rss_url: "http://feeds.bbci.co.uk/news/world/rss.xml"
+test_instructions {
+  url_whitelist_checks {
+    good_url: "http://www.bbc.com/news/world-asia-30573040"
+    good_url: "http://www.bbc.co.uk/news/10725415"
+    good_url: "http://bbc.co.uk/news/10725415"
+    good_url: "http://www.bbc.com/future/story/20140629-how-pickpockets-trick-your-mind"
+    good_url: "http://www.bbc.com/culture/story/20141223-the-10-best-books-of-2014"
+    good_url: "http://www.bbc.com/earth/story/20141210-astounding-microscope-images"
+    good_url: "http://www.bbc.com/capital/story/20141113-surprising-career-killing-habits"
+    good_url: "http://www.bbc.com/earth/story/20141117-why-seals-have-sex-with-penguins"
+    good_url: "http://www.bbc.com/autos/story/20141223-most-fascinating-green-car-of-2014-local-motors-strati"
+    good_url: "http://www.bbc.co.uk/capital/story/20141113-surprising-career-killing-habits"
+    good_url: "http://www.bbc.co.uk/earth/story/20141117-why-seals-have-sex-with-penguins"
+    good_url: "http://www.bbc.co.uk/autos/story/20141223-most-fascinating-green-car-of-2014-local-motors-strati"
+    good_url: "http://www.bbc.com/news/world-asia-30573040/"
+    bad_url: "http://www.bbc.co.uk/webwise/0/22717887"
+    bad_url: "http://newsvote.bbc.co.uk/go/news/int/story/services/-/email/news"
+    bad_url: "http://www.bbc.co.uk/iplayer/episode/b00wv8gy/horrible-histories-horrible-christmas"
+    bad_url: "http://www.bbc.co.uk/guides/zttpn39"
+    bad_url: "http://www.bbc.com/sport/0/30603067"
+    bad_url: "http://www.bbc.co.uk/iplayer/categories/comedy/highlights"
+    bad_url: "http://www.bbc.com/travel/slideshow/20141211-father-christmas-mediterranean-island-escape"
+    bad_url: "http://www.bbc.co.uk/programmes/articles/s790szKLSc1l3n9Fqwxl9F/6-musics-albums-of-the-year-2014"
+    bad_url: "http://www.bbc.co.uk/portuguese/noticias/2014/12/141226_brasileira_tailandia_tsunami_gerardo_rw"
+    bad_url: "http://www.bbc.co.uk/mundo/noticias/2014/12/141119_cosas_sorprendentes_finde2014_yv"
+    bad_url: "http://www.bbc.com/programmes/articles/s790szKLSc1l3n9Fqwxl9F/6-musics-albums-of-the-year-2014"
+    bad_url: "http://www.bbc.com/portuguese/noticias/2014/12/141226_brasileira_tailandia_tsunami_gerardo_rw"
+    bad_url: "http://www.bbc.com/mundo/noticias/2014/12/141119_cosas_sorprendentes_finde2014_yv"
+  }
+  article_url_detector_checks {
+    article_url: "http://www.bbc.co.uk/news/business-25754888"
+    article_url: "http://www.bbc.co.uk/newsbeat/30624897"
+    article_url: "http://www.bbc.com/capital/story/20130821-six-tales-of-top-level-nepotism"
+    article_url: "http://www.bbc.com/culture/story/20141223-the-10-best-books-of-2014"
+    article_url: "http://www.bbc.com/future/story/20140629-how-pickpockets-trick-your-mind"
+    article_url: "http://www.bbc.com/news/business-14897130"
+    article_url: "http://www.bbc.com/news/world-asia-30896028"
+    non_article_url: "http://news.bbc.co.uk/democracylive/hi/bbc_parliament/newsid_8762000/8762150.stm"
+    non_article_url: "http://www.bbc.co.uk/capital/tags/personal-finance"
+    non_article_url: "http://www.bbc.co.uk/guides/zttpn39"
+    non_article_url: "http://www.bbc.com/capital/tags/personal-finance"
+    non_article_url: "http://www.bbc.com/news/world-asia-30573040/"
+  }
+}

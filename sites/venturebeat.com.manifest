@@ -1,0 +1,26 @@
+root_domain: "venturebeat.com"
+start_url: "http://venturebeat.com"
+subdomain_blacklist: "events.venturebeat.com"
+subdomain_blacklist: "insight.venturebeat.com"
+path_blacklist {
+  needle: "/jobs/"
+}
+paragraph_selector: ".post-content > p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://venturebeat.com/2015/01/29/googles-eric-schmidt-has-a-10-year-prediction-of-how-tech-will-disrupt-whole-industries/"
+    article_url: "http://venturebeat.com/2015/01/30/google-ventures-releases-new-diy-guide-to-help-startups-design-better-products/"
+    article_url: "http://venturebeat.com/2015/01/30/here-are-the-predictions-for-who-will-win-the-super-bowl-of-ads/"
+    article_url: "http://venturebeat.com/2015/01/30/new-apple-and-ibm-enterprise-app-delivers-a-lot-of-utility/"
+    article_url: "http://venturebeat.com/2015/01/30/tencent-grabs-the-digital-rights-to-nba-basketball-in-china/"
+    article_url: "http://venturebeat.com/2015/02/14/a-new-app-called-sparkstarter-offers-a-fresh-twist-on-online-dating-matchmaking/"
+    non_article_url: "http://venturebeat.com/tag/android/"
+    non_article_url: "http://venturebeat.com/contact/"
+    non_article_url: "http://venturebeat.com/advertise/"
+    non_article_url: "http://venturebeat.com/category/small-biz/"
+    non_article_url: "http://venturebeat.com/sign-up/"
+  }
+}

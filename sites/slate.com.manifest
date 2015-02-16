@@ -1,0 +1,39 @@
+root_domain: "slate.com"
+start_url: "http://www.slate.com"
+subdomain_blacklist: "innovate.slate.com"
+path_blacklist {
+  needle: "/podcasts/"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/slate_fare/"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/video/"
+  location: CONTAINS
+}
+paragraph_selector: ".body .text"
+article_url_pattern {
+  path_regex: "^\\/(articles|blogs)\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/.*\\.html$"
+}
+test_instructions {
+  url_whitelist_checks {
+    bad_url: "http://www.slate.com/articles/briefing/slate_fare/2011/12/commenting_on_slate_frequently_asked_questions.html"
+    bad_url: "http://www.slate.com/articles/news_and_politics/slate_fare/2006/08/about_us.html"
+    bad_url: "http://www.slate.com/articles/podcasts/working/2014/12/google_software_engineer_nina_kang_talks_about_the_differences_between_writing.html"
+  }
+  article_url_detector_checks {
+    article_url: "http://www.slate.com/articles/health_and_science/science/2014/06/facebook_unethical_experiment_it_made_news_feeds_happier_or_sadder_to_manipulate.html"
+    article_url: "http://www.slate.com/articles/life/dear_prudence/2015/01/dear_prudence_i_want_to_stop_working_at_26.html"
+    article_url: "http://www.slate.com/articles/technology/technology/2015/01/snapchat_why_teens_favorite_app_makes_the_facebook_generation_feel_old.html"
+    article_url: "http://www.slate.com/blogs/business_insider/2014/10/17/google_launches_text_messaging_app_named_messenger_like_facebook_app.html"
+    article_url: "http://www.slate.com/blogs/future_tense/2015/02/13/wsj_report_apple_building_a_minivan_like_electric_car_to_rival_tesla.html"
+    article_url: "http://www.slate.com/blogs/the_slatest/2015/01/30/lindsey_graham_2016_south_carolina_senator_says_center_right_positions_make.html"
+    non_article_url: "http://www.slate.com/articles/news_and_politics/corrections.html"
+    non_article_url: "http://www.slate.com/authors.lv_anderson.slateplus.html"
+    non_article_url: "http://www.slate.com/authors.john_dickerson.html"
+    non_article_url: "http://www.slate.com/blogs/future_tense.html"
+    non_article_url: "http://www.slate.com/blogs/the_slatest.html"
+  }
+}

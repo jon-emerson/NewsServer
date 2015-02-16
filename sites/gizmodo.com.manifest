@@ -1,0 +1,22 @@
+root_domain: "gizmodo.com"
+start_url: "http://www.gizmodo.com"
+paragraph_selector: "article > p"
+paragraph_selector: "article > div > p"
+article_url_pattern {
+  path_regex: "[\\/-]1[0-9]{9}(\\/[^\\/]+)?$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://gizmodo.com/canon-5ds-and-5ds-r-the-highest-resolution-full-frame-1683275915"
+    article_url: "http://gizmodo.com/canon-5ds-and-5ds-r-the-highest-resolution-full-frame-1683275915/+michaelhession"
+    article_url: "http://gizmodo.com/hackers-stole-hundreds-of-millions-in-massive-malware-b-1685908496"
+    article_url: "http://gizmodo.com/newspaper-dumps-george-will-over-atrocious-rape-column-1593126677"
+    article_url: "http://paleofuture.gizmodo.com/heres-what-skype-was-like-in-1947-1685715294"
+    article_url: "http://toyland.gizmodo.com/forget-zelda-this-20-inch-link-figure-is-worthy-of-an-1685818837"
+    non_article_url: "http://gizmodo.com/295268/"
+    non_article_url: "http://gizmodo.com/5732042/about-gizmodo-for-beta"
+    non_article_url: "http://gizmodo.com/search?q=hello"
+    non_article_url: "http://gizmodo.com/tag/gizmodo"
+    non_article_url: "http://toyland.gizmodo.com/rss"
+  }
+}

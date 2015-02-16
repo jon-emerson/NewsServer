@@ -1,0 +1,38 @@
+root_domain: "sfgate.com"
+start_url: "http://www.sfgate.com"
+subdomain_blacklist: "cars.sfgate.com"
+subdomain_blacklist: "events.sfgate.com"
+subdomain_blacklist: "extras.sfgate.com"
+subdomain_blacklist: "fanshop.sfgate.com"
+subdomain_blacklist: "homeguides.sfgate.com"
+subdomain_blacklist: "markets.sfgate.com"
+path_blacklist {
+  needle: "/merge/"
+}
+paragraph_selector: ".article-body p"
+paragraph_selector: ".entry p"
+paragraph_selector: ".post-contents p"
+paragraph_selector: "#article-section .entry div"
+article_url_pattern {
+  path_regex: "\\/article.*(\\-|\\/)[0-9]{7,10}\\.php$"
+}
+article_url_pattern {
+  path_regex: "\\/[0-9a-z\\-]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+rss_url: "http://www.sfgate.com/default/feed/City-Insider-Blog-573.php"
+rss_url: "http://www.sfgate.com/rss/feed/Page-One-News-593.php"
+rss_url: "http://www.sfgate.com/rss/feed/Tech-News-449.php"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://blog.sfgate.com/49ers/2014/12/29/baalke-price-tag-was-too-high-to-trade-up-for-odell-beckham/"
+    article_url: "http://blog.sfgate.com/49ers/2014/12/30/jed-york-on-knbr-winning-with-class-is-what-matters/"
+    article_url: "http://insidescoopsf.sfgate.com/blog/2014/12/17/your-guide-to-the-progress-the-new-sequel-to-state-bird-provisions/"
+    article_url: "http://www.sfgate.com/49ers/article/49ers-say-goodbye-to-Jim-Harbaugh-and-a-5982751.php"
+    article_url: "http://www.sfgate.com/entertainment/garchik/article/Back-of-the-Datebook-gang-pitches-in-to-rescue-5976457.php"
+    non_article_url: "http://blog.sfgate.com/49ers/"
+    non_article_url: "http://blog.sfgate.com/dailydish/"
+    non_article_url: "http://blog.sfgate.com/dailydish/2005/08/"
+    non_article_url: "http://blog.sfgate.com/tgladysz/category/authors/"
+    non_article_url: "http://www.sfgate.com/entertainment/blogs/"
+  }
+}

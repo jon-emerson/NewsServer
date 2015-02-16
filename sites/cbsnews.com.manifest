@@ -1,0 +1,51 @@
+root_domain: "cbsnews.com"
+start_url: "http://www.cbsnews.com"
+subdomain_blacklist: "cbsn.cbsnews.com"
+path_blacklist {
+  needle: "/cbsnews./quote"
+}
+path_blacklist {
+  needle: "/media/"
+}
+path_blacklist {
+  needle: "/pictures/"
+}
+paragraph_selector: ".news-story p"
+article_url_pattern {
+  path_regex: "\\/news\\/(?!cbs-news-)[^\\/]+\\/$"
+}
+article_url_pattern {
+  path_regex: "\\/8301\\-[0-9_\\-]+\\/[^\\/]+\\/$"
+}
+article_url_pattern {
+  path_regex: "\\/[^\\/]+\\/[0-9a-f]+\\/([0-9]+\\/)?$"
+}
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[0-9a-f]{12,19}\\/"
+  subdomain: "markets.cbsnews.com"
+}
+rss_url: "http://www.cbsnews.com/latest/rss/main"
+rss_url: "http://www.cbsnews.com/latest/rss/moneywatch"
+rss_url: "http://www.cbsnews.com/latest/rss/tech"
+rss_url: "http://www.cbsnews.com/latest/rss/us"
+test_instructions {
+  url_whitelist_checks {
+    bad_url: "http://www.cbsnews.com/videos/where-selma-meets-hollywood/"
+  }
+  article_url_detector_checks {
+    article_url: "http://markets.cbsnews.com/AP-GfK-Poll-Americans-support-menu-labeling/017c0215bce7d92e/"
+    article_url: "http://markets.cbsnews.com/Google-confirms-it-sold-barge-docked-in-Maine/39e802b6c46600b2/99589142/"
+    article_url: "http://markets.cbsnews.com/Googles-pivotal-IPO-launched-a-decade-of-big-bets/43b914344536deee/3306396/"
+    article_url: "http://www.cbsnews.com/8301-204_162-57557287/french-scientists-warn-sperm-counts-falling-for-men/"
+    article_url: "http://www.cbsnews.com/8301-3460_162-57454827/face-the-nation-transcripts-june-17-2012-gov-romney-senator-graham-gov-dean/?morningSubCatAsset&tag=showDoorSubcatGrid"
+    article_url: "http://www.cbsnews.com/news/fbi-still-believes-north-korea-is-responsible-for-sony-hack/"
+    article_url: "http://www.cbsnews.com/news/israeli-pm-benjamin-netanyahu-encourages-jews-to-flee-europe/"
+    article_url: "http://www.cbsnews.com/news/trucker-who-helped-save-sex-captive-in-virginia-ive-got-daughters/"
+    non_article_url: "http://markets.cbsnews.com/I:DJI/quote-324977/"
+    non_article_url: "http://www.cbsnews.com/entertainment/"
+    non_article_url: "http://www.cbsnews.com/latest/tech/"
+    non_article_url: "http://www.cbsnews.com/media/top-health-stories-of-2014/"
+    non_article_url: "http://www.cbsnews.com/news/cbs-news-internship-program/"
+    non_article_url: "http://www.cbsnews.com/team/steve-kroft/"
+  }
+}
