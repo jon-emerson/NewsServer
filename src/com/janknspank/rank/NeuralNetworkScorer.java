@@ -7,9 +7,10 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 9;
+  static final int INPUT_NODES_COUNT = 12;
   static final int OUTPUT_NODES_COUNT = 1;
-  static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
+  //static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
+  static final int HIDDEN_NODES_COUNT = 9;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_" +
       INPUT_NODES_COUNT + "in-" + HIDDEN_NODES_COUNT + "hidden-" +
       OUTPUT_NODES_COUNT + "out.nnet";
@@ -59,7 +60,16 @@ public final class NeuralNetworkScorer extends Scorer {
         InputValuesGenerator.articleTextQualityScore(article),
 
         // 9. Relevance to startup vector for people with that intent
-        InputValuesGenerator.relevanceToStartupIntent(user, article)
+        InputValuesGenerator.relevanceToStartupIntent(user, article),
+
+        // 10. Relevance to acquisitions
+        InputValuesGenerator.relevanceToAcquisitions(user, article),
+
+        // 11. Relevance to launches
+        InputValuesGenerator.relevanceToLaunches(user, article),
+        
+        // 11. Relevance to fundraising
+        InputValuesGenerator.relevanceToFundraising(user, article)
     };
   }
 

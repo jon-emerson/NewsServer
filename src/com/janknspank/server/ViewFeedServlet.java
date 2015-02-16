@@ -10,7 +10,11 @@ import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.SocialEngagements;
+import com.janknspank.classifier.ClassifierException;
+import com.janknspank.classifier.Feature;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.IndustryCode;
+import com.janknspank.classifier.VectorFeature;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -24,6 +28,7 @@ import com.janknspank.rank.NeuralNetworkScorer;
 
 @AuthenticationRequired
 public class ViewFeedServlet extends StandardServlet {
+  private static final float MILLIS_PER_DAY = 86400000;
   /**
    * Returns any Soy data necessary for rendering the .main template for this
    * servlet's Soy page.
@@ -50,7 +55,9 @@ public class ViewFeedServlet extends StandardServlet {
         // Sort the articles
         TopList<Article, Double> articles = new TopList<>(articlesToRankMap.size());
         for (Map.Entry<Article, Double> entry : articlesToRankMap.entrySet()) {
-          articles.add(entry.getKey(), entry.getValue());
+          Article article = entry.getKey();
+          double daysAgo = Math.floor((System.currentTimeMillis() - article.getPublishedTime()) / MILLIS_PER_DAY) + 1;
+          articles.add(entry.getKey(), entry.getValue() / daysAgo);
         }
 
         return new SoyMapData(
@@ -65,6 +72,13 @@ public class ViewFeedServlet extends StandardServlet {
                       engagement = SocialEngagement.getDefaultInstance();
                     }
 
+                    String industryClassifications = "";
+                    try {
+                      industryClassifications = getIndustryString(article);
+                    } catch (ClassifierException e) {
+                      // TODO Auto-generated catch block
+                      e.printStackTrace();
+                    }
                     return new SoyMapData(
                         "title", article.getTitle(),
                         "url", article.getUrl(),
@@ -75,7 +89,7 @@ public class ViewFeedServlet extends StandardServlet {
                         "fb_likes", (int) engagement.getLikeCount(),
                         "fb_shares", (int) engagement.getShareCount(),
                         "fb_comments" ,(int) engagement.getCommentCount(),
-                        "industry_classifications", getIndustryString(article));
+                        "industry_classifications", industryClassifications);
                   }
                 }));
       } catch (ParserException e) {
@@ -85,15 +99,18 @@ public class ViewFeedServlet extends StandardServlet {
     return null;
   }
 
-  private String getIndustryString(Article article) {
+  private String getIndustryString(Article article) throws ClassifierException {
     StringBuilder sb = new StringBuilder();
-    for (ArticleFeature feature : article.getFeatureList()) {
+    for (ArticleFeature articleFeature : article.getFeatureList()) {
       if (sb.length() > 0) {
         sb.append(", ");
       }
-      sb.append(IndustryCode.findFromId(feature.getFeatureId()).getDescription())
+      if (articleFeature.getType() == ArticleFeature.Type.ABOUT_INDUSTRY) {
+        Feature feature = Feature.getFeature(FeatureId.fromId(articleFeature.getFeatureId()));
+        sb.append(feature.getDescription())
           .append(": ")
-          .append(feature.getSimilarity());
+          .append(articleFeature.getSimilarity());
+      }
     }
     return "[" + sb.toString() + "]";
   }
