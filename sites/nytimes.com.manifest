@@ -1,0 +1,124 @@
+root_domain: "nytimes.com"
+start_url: "http://www.nytimes.com"
+start_url: "http://opinionator.blogs.nytimes.com/"
+subdomain_blacklist: "jobmarket.nytimes.com"
+subdomain_blacklist: "homedelivery.nytimes.com"
+subdomain_blacklist: "mobile.nytimes.com"
+subdomain_blacklist: "autos.nytimes.com"
+path_blacklist {
+  needle: "/content/"
+}
+path_blacklist {
+  needle: "/rss"
+  location: EQUALS
+}
+path_blacklist {
+  needle: "/rss/"
+}
+path_blacklist {
+  needle: "/ref/"
+}
+path_blacklist {
+  needle: "/adx/"
+}
+path_blacklist {
+  needle: "/content/"
+}
+path_blacklist {
+  needle: "/register"
+  location: EQUALS
+}
+path_blacklist {
+  needle: "/services/"
+}
+path_blacklist {
+  needle: "/slideshow/"
+}
+path_blacklist {
+  needle: "/subscriptions/"
+}
+path_blacklist {
+  needle: "/times-journeys/"
+}
+paragraph_selector: ".articleBody > p"
+paragraph_selector: "article > p"
+paragraph_selector: "article > div > p"
+paragraph_selector: "nyt_text > p"
+paragraph_selector: "p.story-body-text"
+paragraph_selector: "#mod-a-body-first-para > p"
+paragraph_selector: "#mod-a-body-after-first-para > p"
+article_url_pattern {
+  path_regex: "^\\/(aponline\\/)?(19|20)[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\-.*\\-.*(\\/|\\.html)$"
+}
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/Business.xml"
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/Economy.xml"
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/InternationalHome.xml"
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/PersonalTech.xml"
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml"
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/Science.xml"
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/SmallBusiness.xml"
+rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
+rss_url: "http://www.nytimes.com/services/xml/rss/nyt/JobMarket.xml"
+test_instructions {
+  url_whitelist_checks {
+    good_url: "http://www.nytimes.com/"
+    good_url: "http://www.nytimes.com/2014/12/27/your-money/what-annie-can-tell-us-about-money.html"
+    good_url: "http://www.nytimes.com/2014/12/26/your-money/affordable-care-acts-tax-effects-now-loom-for-filers.html"
+    good_url: "http://www.nytimes.com/2014/12/26/opinion/david-brooks-the-sidney-awards-part-i.html"
+    good_url: "http://www.nytimes.com/2014/12/21/business/corner-office-robert-reid-of-intacct-the-culture-always-comes-first.html"
+    good_url: "http://www.nytimes.com/2004/03/07/magazine/our-correspondent-in-cape-town-south-africa-geology-is-destiny.html"
+    good_url: "http://www.nytimes.com/2014/12/28/realestate/selling-condos-with-holograms.html"
+    good_url: "http://dealbook.nytimes.com/2014/12/25/unsolved-shooting-accentuates-problems-at-doral-one-of-puerto-ricos-biggest-lenders/"
+    good_url: "http://www.nytimes.com/2004/04/30/business/the-google-ipo-wall-street-an-egalitarian-auction-bankers-are-not-amused.html"
+    good_url: "http://nytimes.com/2014/12/27/your-money/what-annie-can-tell-us-about-money.html"
+    good_url: "http://nytimes.com/2014/12/26/your-money/affordable-care-acts-tax-effects-now-loom-for-filers.html"
+    good_url: "http://nytimes.com/2014/12/26/opinion/david-brooks-the-sidney-awards-part-i.html"
+    good_url: "http://www.nytimes.com/1992/11/04/us/1992-elections-president-overview-clinton-captures-presidency-with-huge.html"
+    good_url: "http://www.nytimes.com/1865/04/15/news/president-lincoln-shot-assassin-deed-done-ford-s-theatre-last-night-act.html"
+    good_url: "http://publiceditor.blogs.nytimes.com/2014/12/22/sony-emails-free-speech-and-trying-a-little-f2f/"
+    bad_url: "http://jobmarket.nytimes.com/pages/jobs/index.html"
+    bad_url: "http://autos.nytimes.com/15229-19UUA8F59CA030453/Acura/TL/listingOverview.aspx"
+    bad_url: "http://www.nytimes.com/times-journeys/travel/follow-silk-route-uzbekistan-turkmenistan/terms/"
+    bad_url: "http://www.nytimes.com/times-journeys/travel/colorful-spirit-columbia/"
+    bad_url: "http://homedelivery.nytimes.com"
+    bad_url: "http://mobile.nytimes.com"
+    bad_url: "http://www.nytimes.com/content/help/rights/copyright/copyright-notice.html"
+    bad_url: "http://www.nytimes.com/rss"
+    bad_url: "http://www.nytimes.com/services/xml/rss/nyt/index.opml"
+    bad_url: "http://www.nytimes.com/ref/multimedia/podcasts.html"
+    bad_url: "http://www.nytimes.com/adx/bin/adx_click.html"
+    bad_url: "http://www.nytimes.com/content/help/contact/directory.html"
+    bad_url: "http://www.nytimes.com/register"
+    bad_url: "http://www.nytimes.com/slideshow/2014/12/14/fashion/NOTEWORTHY-STYLE-2014.html"
+    bad_url: "http://www.nytimes.com/subscriptions/Multiproduct/lp5558.html"
+  }
+  article_url_detector_checks {
+    article_url: "http://bits.blogs.nytimes.com/2014/04/24/vic-gundotra-google-plus-lead-departing/"
+    article_url: "http://bits.blogs.nytimes.com/2014/12/31/qwant-wants-to-be-alternative-to-google/"
+    article_url: "http://bits.blogs.nytimes.com/2015/01/30/verizon-wireless-to-allow-complete-opt-out-of-mobile-supercookies/"
+    article_url: "http://boss.blogs.nytimes.com/2014/12/22/rethinking-the-relationship-between-bosses-and-employees/"
+    article_url: "http://dealbook.nytimes.com/2014/02/09/the-new-normal-for-tech-companies-and-others-the-stealth-i-p-o/"
+    article_url: "http://dotearth.blogs.nytimes.com/2014/12/31/tracing-the-roots-of-pope-franciss-climate-plans-for-2015/"
+    article_url: "http://opinionator.blogs.nytimes.com/2013/09/28/the-enigma-of-chinese-medicine/"
+    article_url: "http://www.nytimes.com/1993/11/16/business/house-banking-chairman-increases-pressure-on-the-fed.html"
+    article_url: "http://www.nytimes.com/2014/10/27/business/media/how-facebook-is-changing-the-way-its-users-consume-journalism.html"
+    article_url: "http://www.nytimes.com/2015/01/01/us/politics/arizona-supreme-court-allows-challenge-to-states-medicaid-expansion.html"
+    article_url: "http://www.nytimes.com/2015/01/16/business/swiss-national-bank-euro-franc-exchange-rate.html"
+    article_url: "http://www.nytimes.com/2015/01/31/sports/football/no-1-debate-in-tampa-whether-to-draft-jameis-winston.html"
+    article_url: "http://www.nytimes.com/2015/01/31/your-money/paying-for-college/the-wouldve-shouldve-and-couldve-of-taxing-529-plans.html"
+    article_url: "http://www.nytimes.com/2015/02/01/magazine/black-mirror-and-the-horrors-and-delights-of-technology.html"
+    article_url: "http://www.nytimes.com/2015/02/01/nyregion/for-manoush-zomorodi-time-for-some-conscious-unplugging.html"
+    article_url: "http://www.nytimes.com/2015/02/01/travel/you-googled-it-we-answered-it.html"
+    article_url: "http://www.nytimes.com/2015/02/01/your-money/why-you-should-tell-your-kids-how-much-you-make.html"
+    article_url: "http://www.nytimes.com/aponline/2014/04/11/us/ap-us-salesforce-san-francisco-lease.html"
+    article_url: "http://www.nytimes.com/aponline/2015/01/30/business/ap-us-google-money-management.html"
+    article_url: "http://well.blogs.nytimes.com/2013/04/29/really-the-claim-evening-primrose-oil-soothes-eczema/"
+    non_article_url: "http://www.nytimes.com/content/help/rights/copyright/copyright-notice.html"
+    non_article_url: "http://www.nytimes.com/restaurants/search/"
+    non_article_url: "http://www.nytimes.com/roomfordebate"
+    non_article_url: "http://www.nytimes.com/roomfordebate/whos-who"
+    non_article_url: "http://www.nytimes.com/rss"
+    non_article_url: "http://rss.nytimes.com/services/xml/rss/nyt/SmallBusiness.xml"
+  }
+}

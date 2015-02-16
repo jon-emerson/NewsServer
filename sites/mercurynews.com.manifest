@@ -1,0 +1,31 @@
+root_domain: "mercurynews.com"
+start_url: "http://www.mercurynews.com"
+subdomain_blacklist: "mylocal.mercurynews.com"
+subdomain_blacklist: "re.mercurynews.com"
+subdomain_blacklist: "yourviews.mercurynews.com"
+paragraph_selector: ".articleBody > p"
+article_url_pattern {
+  path_regex: "\\/ci_[0-9]{7,10}(\\/.*)?$"
+}
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+rss_url: "http://feeds.mercurynews.com/mngi/rss/CustomRssServlet/568/200735.xml"
+rss_url: "http://feeds.mercurynews.com/mngi/rss/CustomRssServlet/568/200737.xml"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://realestate.mercurynews.com/2015/02/06/facebook-purchases-56-acres-in-menlo-park/"
+    article_url: "http://realestate.mercurynews.com/2015/02/15/who-sold-what-published-feb-14-2015/"
+    article_url: "http://www.mercurynews.com/bay-area-living/ci_27235425/phallic-looking-play-doh-toy-yanked-after-backlash"
+    article_url: "http://www.mercurynews.com/business/ci_24450039/twitter-increases-ipo-price-range-following-facebooks-path"
+    article_url: "http://www.mercurynews.com/ci_18730079"
+    article_url: "http://www.mercurynews.com/ci_18730079?IADID=Search-www.mercurynews.com-www.mercurynews.com%0A"
+    article_url: "http://www.mercurynews.com/bay-area-news/ci_27528549/rotten-at-core-downtown-san-jose-may-finally"
+    article_url: "http://www.mercurynews.com/peninsula/ci_27456164/mountain-view-council-agrees-resurrect-housing-question-north"
+    non_article_url: "http://www.mercurynews.com/circare/html/gsa_template.jsp"
+    non_article_url: "http://www.mercurynews.com/opinion"
+    non_article_url: "http://www.mercurynews.com/portlet/layout/html/privacypolicy/privacypolicy.jsp?siteId=568"
+    non_article_url: "http://www.mercurynews.com/real-estate-news/"
+    non_article_url: "http://www.mercurynews.com/scott-herhold"
+  }
+}

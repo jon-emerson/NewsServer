@@ -1,0 +1,36 @@
+root_domain: "cnbc.com"
+start_url: "http://www.cnbc.com"
+subdomain_blacklist: "data.cnbc.com"
+subdomain_blacklist: "futuresnow.cnbc.com"
+subdomain_blacklist: "portfolio.cnbc.com"
+subdomain_blacklist: "pro.cnbc.com"
+subdomain_blacklist: "watchlist.cnbc.com"
+subdomain_blacklist: "videoreprints.cnbc.com"
+subdomain_blacklist: "webcast.cnbc.com"
+path_blacklist {
+  needle: "/live-tv/"
+}
+paragraph_selector: "#article_body p"
+article_url_pattern {
+  path_regex: "^\\/id\\/[0-9]{9,11}(\\/[^\\/]*)?$"
+}
+# Top.
+rss_url: "http://www.cnbc.com/id/100003114/device/rss/rss.html"
+# Business.
+rss_url: "http://www.cnbc.com/id/10001147/device/rss/rss.html"
+# Tech.
+rss_url: "http://www.cnbc.com/id/19854910/device/rss/rss.html"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.cnbc.com/id/102301617"
+    article_url: "http://www.cnbc.com/id/102301834/"
+    article_url: "http://www.cnbc.com/id/102301896/asgasgag"
+    article_url: "http://www.cnbc.com/id/102427047"
+    article_url: "http://www.cnbc.com/id/102409378"
+    non_article_url: "http://www.cnbc.com/live-tv/schedule"
+    non_article_url: "http://www.cnbc.com/account"
+    non_article_url: "http://www.cnbc.com/halftime"
+    non_article_url: "http://www.cnbc.com/id/10000066"
+    non_article_url: "http://www.cnbc.com/id/17689937"
+  }
+}

@@ -1,0 +1,23 @@
+root_domain: "advice.careerbuilder.com"
+start_url: "http://advice.careerbuilder.com"
+paragraph_selector: ".post-body > p"
+article_url_pattern {
+  path_regex: "^\\/posts\\/"
+}
+whitelisted_query_parameter: "author"
+whitelisted_query_parameter: "categories"
+whitelisted_query_parameter: "industries"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://advice.careerbuilder.com/posts/3-things-to-know-about-the-december-2014-jobs-report"
+    article_url: "http://advice.careerbuilder.com/posts/use-company-technology-for-this-not-that"
+    article_url: "http://advice.careerbuilder.com/posts/which-tv-couple-defines-your-work-spouse-relationship"
+    article_url: "http://advice.careerbuilder.com/posts/email-signatures-whats-in-and-whats-out-in-2015"
+    article_url: "http://advice.careerbuilder.com/posts/tips-for-spotting-a-bad-boss-in-an-interview"
+    non_article_url: "http://advice.careerbuilder.com/?author=Eric%20Presley"
+    non_article_url: "http://advice.careerbuilder.com/?categories=Bosses"
+    non_article_url: "http://advice.careerbuilder.com/?industries=27-0000"
+    non_article_url: "http://advice.careerbuilder.com/about"
+    non_article_url: "http://advice.careerbuilder.com/feed.rss"
+  }
+}

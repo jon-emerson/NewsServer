@@ -1,0 +1,38 @@
+root_domain: "theverge.com"
+start_url: "http://www.theverge.com"
+path_blacklist {
+  needle: "/forums/"
+}
+path_blacklist {
+  needle: "/jobs"
+}
+path_blacklist {
+  needle: "/search"
+}
+path_blacklist {
+  needle: "/video/"
+}
+paragraph_selector: "article p"
+article_url_pattern {
+  path_regex: "^\\/([a-z\\_\\-]+\\/)?20[0-9]{2}\\/1?[0-9]\\/[1-3]?[0-9]\\/[0-9]{7,9}\\/"
+}
+rss_url: "http://www.theverge.com/mobile/rss/index.xml"
+rss_url: "http://www.theverge.com/rss/index.xml"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.theverge.com/2014/10/15/6982167/google-android-5-0-l-lollipop-announcement-release"
+    article_url: "http://www.theverge.com/2014/2/7/5389668/bitcoin-exchange-mt-gox-halts-withdrawals-maintenance"
+    article_url: "http://www.theverge.com/2015/1/15/7551569/harmony-api-use-case"
+    article_url: "http://www.theverge.com/2015/1/21/7861645/finfisher-spyware-let-bahrain-government-hack-political-activist"
+    article_url: "http://www.theverge.com/2015/1/23/7876777/sonos-sound-wave-logo"
+    article_url: "http://www.theverge.com/2015/1/30/7948619/before-uber-revolutionizes-labor-its-going-to-have-to-explain-these"
+    article_url: "http://www.theverge.com/2015/1/30/7952941/at-t-largest-bidder-fcc-aws-3-wireless-spectrum-auction"
+    article_url: "http://www.theverge.com/2015/1/9/7522021/phonebloks-block-modular-smartwatch-ces-2015"
+    article_url: "http://www.theverge.com/tldr/2015/1/9/7521373/ces-2015-living-in-LVCC"
+    non_article_url: "http://www.theverge.com/design"
+    non_article_url: "http://www.theverge.com/about-the-verge"
+    non_article_url: "http://www.theverge.com/label/features"
+    non_article_url: "http://www.theverge.com/users/K.Ananse"
+    non_article_url: "http://www.theverge.com/rss/index.xml"
+  }
+}

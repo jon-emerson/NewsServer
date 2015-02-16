@@ -21,7 +21,7 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Url;
-import com.janknspank.proto.CrawlProto.ContentSite;
+import com.janknspank.proto.SiteProto.SiteManifest;
 
 /**
  * Iterates through the home pages of the various sites we support, and RSS
@@ -32,18 +32,18 @@ public class UrlCrawler {
   private static final Logger LOG = new Logger(UrlCrawler.class);
   private final Fetcher fetcher = new Fetcher();
   private static final Iterable<String> WEBSITES = Iterables.concat(
-      Iterables.transform(UrlWhitelist.CRAWL_INSTRUCTIONS.getContentSiteList(),
-          new Function<ContentSite, Iterable<String>>() {
+      Iterables.transform(SiteManifests.getList(),
+          new Function<SiteManifest, Iterable<String>>() {
             @Override
-            public Iterable<String> apply(ContentSite contentSite) {
+            public Iterable<String> apply(SiteManifest contentSite) {
               return contentSite.getStartUrlList();
             }
           }));
   private static final Iterable<String> RSS_URLS = Iterables.concat(
-      Iterables.transform(UrlWhitelist.CRAWL_INSTRUCTIONS.getContentSiteList(),
-          new Function<ContentSite, Iterable<String>>() {
+      Iterables.transform(SiteManifests.getList(),
+          new Function<SiteManifest, Iterable<String>>() {
             @Override
-            public Iterable<String> apply(ContentSite contentSite) {
+            public Iterable<String> apply(SiteManifest contentSite) {
               return contentSite.getRssUrlList();
             }
           }));

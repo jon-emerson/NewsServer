@@ -1,0 +1,30 @@
+root_domain: "pcmag.com"
+start_url: "http://www.pcmag.com"
+path_blacklist {
+  needle: "/best-deals-today"
+}
+path_blacklist {
+  needle: "/join/"
+}
+path_blacklist {
+  needle: "/slideshow/"
+}
+paragraph_selector: ".article-body p"
+paragraph_selector: ".blogstory p"
+article_url_pattern {
+  path_regex: "\\/article2\\/.+\\.asp$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.pcmag.com/article2/0,2817,1904319,00.asp"
+    article_url: "http://www.pcmag.com/article2/0,2817,2430291,00.asp"
+    article_url: "http://www.pcmag.com/article2/0,2817,2469447,00.asp"
+    article_url: "http://www.pcmag.com/article2/0,2817,2470682,00.asp"
+    article_url: "http://www.pcmag.com/article2/0,2817,2475453,00.asp"
+    non_article_url: "http://www.pcmag.com/author-bio/kathy-yakal"
+    non_article_url: "http://www.pcmag.com/newsletter_manage/"
+    non_article_url: "http://www.pcmag.com/reviews/cell-phones/company/apple-inc"
+    non_article_url: "http://www.pcmag.com/site_map/"
+    non_article_url: "http://www.pcmag.com/reviews/laptop-computers"
+  }
+}

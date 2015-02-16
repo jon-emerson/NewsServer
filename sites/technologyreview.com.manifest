@@ -1,0 +1,68 @@
+root_domain: "technologyreview.com"
+start_url: "http://www.technologyreview.com"
+path_blacklist {
+  needle: "/careers/"
+}
+path_blacklist {
+  needle: "/connect/"
+}
+path_blacklist {
+  needle: "/downloads/"
+}
+path_blacklist {
+  needle: "/emtech/"
+}
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/getinsider/"
+}
+path_blacklist {
+  needle: "/graphiti/"
+}
+path_blacklist {
+  needle: "/lists/"
+}
+path_blacklist {
+  needle: "/login/"
+}
+path_blacklist {
+  needle: "/media/"
+}
+path_blacklist {
+  needle: "/my/"
+}
+path_blacklist {
+  needle: "/subscribe/"
+}
+path_blacklist {
+  needle: "/summit/"
+}
+path_blacklist {
+  needle: "/support/"
+}
+path_blacklist {
+  needle: "/video/"
+}
+path_blacklist {
+  needle: "/videos/"
+}
+paragraph_selector: "section.body p"
+article_url_pattern {
+  path_regex: "\\/[a-z]+\\/[0-9]{5,7}\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.technologyreview.com/news/535041/automating-the-data-scientists/"
+    article_url: "http://www.technologyreview.com/review/534581/the-purpose-of-silicon-valley/"
+    article_url: "http://www.technologyreview.com/view/533361/what-moocs-teach-us/"
+    article_url: "http://www.technologyreview.com/view/535176/human-face-recognition-found-in-neural-network-based-on-monkey-brains/"
+    article_url: "http://www.technologyreview.com/view/534411/what-obama-meant-by-converting-sunlight-into-liquid-fuel/"
+    non_article_url: "http://www.technologyreview.com/about/commenting-guidelines/"
+    non_article_url: "http://www.technologyreview.com/contributor/kevin-bullis/"
+    non_article_url: "http://www.technologyreview.com/purchase/businessreport/subscription/"
+    non_article_url: "http://www.technologyreview.com/tagged/samsung-1/"
+    non_article_url: "https://www.technologyreview.com/purchase/businessreport/subscription/"
+  }
+}

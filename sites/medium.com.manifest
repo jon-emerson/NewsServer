@@ -1,0 +1,21 @@
+root_domain: "medium.com"
+start_url: "http://medium.com"
+start_url: "https://medium.com/top-100/"
+paragraph_selector: ".section-content p"
+article_url_pattern {
+  path_regex: "[\\/-][0-9a-f]{12}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://medium.com/@chrismessina/thoughts-on-google-8883844a9ca4"
+    article_url: "https://medium.com/foreword/everybodys-taking-aim-e61603f34845"
+    article_url: "https://medium.com/life-hacks-for-business/the-x-factor-that-every-professional-needs-13f4ef0d3e37"
+    article_url: "https://medium.com/p/3e7ffc93b5f3"
+    article_url: "https://medium.com/reportedly/ayotzinapa-supporters-use-their-nude-bodies-as-protest-art-fbc3f5d76bc8"
+    non_article_url: "https://medium.com/@acarvin"
+    non_article_url: "https://medium.com/leadership-journal"
+    non_article_url: "https://medium.com/life-hacks-for-business"
+    non_article_url: "https://medium.com/matter/featured"
+    non_article_url: "https://medium.com/reportedly/"
+  }
+}

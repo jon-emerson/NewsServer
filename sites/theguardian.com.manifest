@@ -1,0 +1,38 @@
+root_domain: "theguardian.com"
+start_url: "http://www.theguardian.com"
+subdomain_blacklist: "discussion.theguardian.com"
+subdomain_blacklist: "id.theguardian.com"
+subdomain_blacklist: "jobs.theguardian.com"
+subdomain_blacklist: "profile.theguardian.com"
+subdomain_blacklist: "subscribe.theguardian.com"
+path_blacklist {
+  needle: "/gallery/"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/live/"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/match/" # Sports match coverage.
+  location: CONTAINS
+}
+paragraph_selector: "article > p"
+paragraph_selector: "article > div > p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/(jan|feb|mar|apr|may|jun|jul|aug|sep|nov|dec)\\/[0-3][0-9]\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.theguardian.com/business/blog/2015/feb/11/has-an-accidental-currency-war-erupted"
+    article_url: "http://www.theguardian.com/football/2015/feb/14/crystal-palace-liverpool-fa-cup-match-report"
+    article_url: "http://www.theguardian.com/money/2015/feb/12/home-repossession-lowest-since-2006"
+    article_url: "http://www.theguardian.com/music/2015/feb/15/bjork-delta-archives-alex-ross"
+    article_url: "http://www.theguardian.com/technology/2014/dec/22/the-best-android-apps-of-2014"
+    non_article_url: "http://www.theguardian.com/business/series/project-syndicate-economists"
+    non_article_url: "http://www.theguardian.com/business/series/us-small-business"
+    non_article_url: "http://www.theguardian.com/environment/series/weekinwildlife"
+    non_article_url: "http://www.theguardian.com/film/aacta-awards-2015"
+    non_article_url: "http://www.theguardian.com/profile/jim-o-neill"
+  }
+}

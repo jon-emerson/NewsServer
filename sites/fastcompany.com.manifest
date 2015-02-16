@@ -1,0 +1,22 @@
+root_domain: "fastcompany.com"
+start_url: "http://www.fastcompany.com"
+subdomain_blacklist: "magazine.fastcompany.com"
+subdomain_blacklist: "mediakit.fastcompany.com"
+paragraph_selector: ".article-prose p"
+article_url_pattern {
+  path_regex: "\\/3[0-9]{6}\\/.*"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.fastcompany.com/3029883/bottom-line/11-famous-entrepreneurs-share-how-they-overcame-their-biggest-failure"
+    article_url: "http://www.fastcompany.com/3040001/science-backed-tactics-for-motivating-other-people"
+    article_url: "http://www.fastcompany.com/3041435/revolutionizing-work/startups-revolutionizing-work"
+    article_url: "http://www.fastcompany.com/3042103/the-recommender/how-to-binge-watch-high-maintenance-on-vimeo-your-episode-guide-ranked-by-po"
+    article_url: "http://www.fastcompany.com/3042317/the-attitude-shift-that-guarantees-your-success"
+    non_article_url: "http://www.fastcompany.com/section/the-recommender"
+    non_article_url: "http://www.fastcompany.com/magazine/191/december-2014-january-2015"
+    non_article_url: "http://www.fastcompany.com/user/vivian-giang"
+    non_article_url: "http://www.fastcompany.com/about-us"
+    non_article_url: "http://www.fastcompany.com/contact-us"
+  }
+}

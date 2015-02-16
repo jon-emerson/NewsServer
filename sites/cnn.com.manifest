@@ -1,0 +1,106 @@
+root_domain: "cnn.com"
+start_url: "http://www.cnn.com"
+subdomain_blacklist: "arabic.cnn.com"
+subdomain_blacklist: "audience.cnn.com"
+subdomain_blacklist: "blogs.cnn.com"
+subdomain_blacklist: "cnnespanol.cnn.com"
+subdomain_blacklist: "games.cnn.com"
+subdomain_blacklist: "inhealth.cnn.com"
+subdomain_blacklist: "ireport.cnn.com"
+subdomain_blacklist: "mexico.cnn.com"
+subdomain_blacklist: "partners.cnn.com"
+subdomain_blacklist: "rss.cnn.com"
+subdomain_blacklist: "search.cnn.com"
+subdomain_blacklist: "transcripts.cnn.com"
+subdomain_blacklist: "weather.cnn.com"
+path_blacklist {
+  needle: "/CNN/"
+}
+path_blacklist {
+  needle: "/CNNI/"
+}
+path_blacklist {
+  needle: "/calculator/"
+}
+# E.g. /comment-page-9/
+path_blacklist {
+  needle: "/comment-page-"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/data/"
+}
+path_blacklist {
+  needle: "/gallery/"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/infographic/"
+}
+path_blacklist {
+  needle: "/interactive/"
+}
+path_blacklist {
+  needle: "/linkto/"
+}
+path_blacklist {
+  needle: "/quizzes/"
+}
+path_blacklist {
+  needle: "/services/"
+}
+paragraph_selector: ".cnn_storyarea p"
+paragraph_selector: "p.cnn_storypgraphtxt"
+paragraph_selector: "p.zn-body__paragraph"
+paragraph_selector: ".cnnStoryContent p" # Really old articles.
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/([A-Z]+\\/([A-Za-z]+\\/)?)?[01][0-9]\\/[0-3][0-9]\\/"
+}
+article_url_pattern {
+  path_regex: "\\/SPECIALS\\/.*\\/index.html?$"
+}
+article_url_pattern {
+  path_regex: "\\-[0-9]{5,8}$"
+  subdomain: "travel.cnn.com"
+}
+rss_url: "http://rss.cnn.com/rss/cnn_tech.rss"
+rss_url: "http://rss.cnn.com/rss/cnn_topstories.rss"
+rss_url: "http://rss.cnn.com/rss/cnn_world.rss"
+rss_url: "http://rss.cnn.com/rss/money_latest.rss"
+test_instructions {
+  url_whitelist_checks {
+    bad_url: "http://eatocracy.cnn.com/2010/06/18/are-you-still-working-on-that/comment-page-9/"
+  }
+  article_url_detector_checks {
+    article_url: "http://brainstormtech.blogs.fortune.cnn.com/2009/11/06/andreessen-on-skype/"
+    article_url: "http://eatocracy.cnn.com/2010/05/12/chef-besh-eat-u-s-seafood-save-a-way-of-life/"
+    article_url: "http://eatocracy.cnn.com/2014/08/07/summer-only-treats/"
+    article_url: "http://edition.cnn.com/2013/02/04/opinion/opinion-boredom-work-mark-de-rond-route-to-the-top/index.html"
+    article_url: "http://features.blogs.fortune.cnn.com/2012/02/27/general-motors-last-tango-in-paris/"
+    article_url: "http://finance.fortune.cnn.com/2011/05/10/yes-microsoft-is-buying-skype/"
+    article_url: "http://management.fortune.cnn.com/2011/06/30/harvard-business-school-extreme-makeover/"
+    article_url: "http://postcards.blogs.fortune.cnn.com/2011/10/20/buffett-rule/"
+    article_url: "http://tech.fortune.cnn.com/2010/10/04/verizons-refund-is-just-the-start-of-a-shakeup-in-wireless/"
+    article_url: "http://travel.cnn.com/face-face-portraits-human-spirit-046291"
+    article_url: "http://www.cnn.com/2003/HEALTH/02/16/false.memory.ap/index.html"
+    article_url: "http://www.cnn.com/2005/TECH/science/05/12/new.species.ap/index.html"
+    article_url: "http://www.cnn.com/2011/11/09/studentnews/black-in-america-silicon-valley-educator-parent-guide/index.html"
+    article_url: "http://www.cnn.com/2011/SHOWBIZ/Music/02/16/grace.potter.soundcheck"
+    article_url: "http://www.cnn.com/2014/07/14/sport/football/world-cup-team-of-the-tournament/index.html"
+    article_url: "http://www.cnn.com/2014/11/28/tech/innovation/smart-sports-equipment/index.html"
+    article_url: "http://www.cnn.com/2014/12/16/tech/web/google-year-in-search-2014/index.html"
+    article_url: "http://www.cnn.com/2014/12/23/world/africa/nigeria-boko-haram-leposo/index.html"
+    article_url: "http://www.cnn.com/2015/01/30/asia/china-dragon-dinosaur/index.html"
+    article_url: "http://www.cnn.com/2015/01/30/entertainment/suge-knight-hit-and-run/index.html"
+    article_url: "http://www.cnn.com/SPECIALS/2010/building.up.america/index.html"
+    non_article_url: "http://cnn.com/about/"
+    non_article_url: "http://eatocracy.cnn.com/category/5-things-to-know-for-your-new-day/"
+    non_article_url: "http://eatocracy.cnn.com/category/news/business-and-farming-news/fast-food-business-and-farming-news/chick-fil-a/"
+    non_article_url: "http://edition.cnn.com/LATINAMERICA"
+    non_article_url: "http://edition.cnn.com/interactive_legal.html"
+    non_article_url: "http://mobileworldcongress.edition.cnn.com/Event/Mobile_World_Congress_2014_As_it_happens"
+    non_article_url: "http://tech.fortune.cnn.com/category/enterprise/"
+    non_article_url: "http://topics.cnn.com/topics/Bullying"
+    non_article_url: "http://www.cnn.com/tools/index.html"
+  }
+}

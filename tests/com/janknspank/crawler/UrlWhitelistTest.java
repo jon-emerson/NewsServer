@@ -5,12 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.janknspank.proto.CrawlProto.ContentSite;
+import com.janknspank.proto.SiteProto.SiteManifest;
 
 public class UrlWhitelistTest {
   @Test
   public void test() throws Exception {
-    for (ContentSite site : UrlWhitelist.CRAWL_INSTRUCTIONS.getContentSiteList()) {
+    for (SiteManifest site : SiteManifests.getList()) {
       if (!site.hasTestInstructions()) {
         // TODO(jonemerson): Throw!  Every site should have test instructions!
         continue;

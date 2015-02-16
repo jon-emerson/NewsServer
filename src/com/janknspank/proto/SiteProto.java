@@ -3,8 +3,8 @@
 
 package com.janknspank.proto;
 
-public final class CrawlProto {
-  private CrawlProto() {}
+public final class SiteProto {
+  private SiteProto() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
@@ -134,12 +134,12 @@ public final class CrawlProto {
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
-    java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist> 
+    java.util.List<com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist> 
         getPathBlacklistList();
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
-    com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist getPathBlacklist(int index);
+    com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist getPathBlacklist(int index);
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
@@ -147,12 +147,12 @@ public final class CrawlProto {
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
-    java.util.List<? extends com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder> 
+    java.util.List<? extends com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder> 
         getPathBlacklistOrBuilderList();
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
-    com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder getPathBlacklistOrBuilder(
+    com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder getPathBlacklistOrBuilder(
         int index);
 
     // repeated string paragraph_selector = 6;
@@ -179,12 +179,12 @@ public final class CrawlProto {
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
-    java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern> 
+    java.util.List<com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern> 
         getArticleUrlPatternList();
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
-    com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern getArticleUrlPattern(int index);
+    com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern getArticleUrlPattern(int index);
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
@@ -192,12 +192,12 @@ public final class CrawlProto {
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
-    java.util.List<? extends com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder> 
+    java.util.List<? extends com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder> 
         getArticleUrlPatternOrBuilderList();
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
-    com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder getArticleUrlPatternOrBuilder(
+    com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder getArticleUrlPatternOrBuilder(
         int index);
 
     // repeated string whitelisted_query_parameter = 8;
@@ -292,11 +292,11 @@ public final class CrawlProto {
     /**
      * <code>optional .TestInstructions test_instructions = 10;</code>
      */
-    com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions();
+    com.janknspank.proto.SiteProto.TestInstructions getTestInstructions();
     /**
      * <code>optional .TestInstructions test_instructions = 10;</code>
      */
-    com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder();
+    com.janknspank.proto.SiteProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder();
   }
   /**
    * Protobuf type {@code SiteManifest}
@@ -380,10 +380,10 @@ public final class CrawlProto {
             }
             case 42: {
               if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                pathBlacklist_ = new java.util.ArrayList<com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist>();
+                pathBlacklist_ = new java.util.ArrayList<com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist>();
                 mutable_bitField0_ |= 0x00000010;
               }
-              pathBlacklist_.add(input.readMessage(com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.PARSER, extensionRegistry));
+              pathBlacklist_.add(input.readMessage(com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.PARSER, extensionRegistry));
               break;
             }
             case 50: {
@@ -396,10 +396,10 @@ public final class CrawlProto {
             }
             case 58: {
               if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                articleUrlPattern_ = new java.util.ArrayList<com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern>();
+                articleUrlPattern_ = new java.util.ArrayList<com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern>();
                 mutable_bitField0_ |= 0x00000040;
               }
-              articleUrlPattern_.add(input.readMessage(com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.PARSER, extensionRegistry));
+              articleUrlPattern_.add(input.readMessage(com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.PARSER, extensionRegistry));
               break;
             }
             case 66: {
@@ -419,11 +419,11 @@ public final class CrawlProto {
               break;
             }
             case 82: {
-              com.janknspank.proto.CrawlProto.TestInstructions.Builder subBuilder = null;
+              com.janknspank.proto.SiteProto.TestInstructions.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = testInstructions_.toBuilder();
               }
-              testInstructions_ = input.readMessage(com.janknspank.proto.CrawlProto.TestInstructions.PARSER, extensionRegistry);
+              testInstructions_ = input.readMessage(com.janknspank.proto.SiteProto.TestInstructions.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(testInstructions_);
                 testInstructions_ = subBuilder.buildPartial();
@@ -469,14 +469,14 @@ public final class CrawlProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_descriptor;
+      return com.janknspank.proto.SiteProto.internal_static_SiteManifest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_fieldAccessorTable
+      return com.janknspank.proto.SiteProto.internal_static_SiteManifest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.CrawlProto.SiteManifest.class, com.janknspank.proto.CrawlProto.SiteManifest.Builder.class);
+              com.janknspank.proto.SiteProto.SiteManifest.class, com.janknspank.proto.SiteProto.SiteManifest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<SiteManifest> PARSER =
@@ -520,7 +520,7 @@ public final class CrawlProto {
       /**
        * <code>optional .SiteManifest.PathBlacklist.Location location = 4 [default = STARTS_WITH];</code>
        */
-      com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location getLocation();
+      com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location getLocation();
     }
     /**
      * Protobuf type {@code SiteManifest.PathBlacklist}
@@ -580,7 +580,7 @@ public final class CrawlProto {
               }
               case 32: {
                 int rawValue = input.readEnum();
-                com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location value = com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location.valueOf(rawValue);
+                com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location value = com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location.valueOf(rawValue);
                 if (value == null) {
                   unknownFields.mergeVarintField(4, rawValue);
                 } else {
@@ -603,14 +603,14 @@ public final class CrawlProto {
       }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_PathBlacklist_descriptor;
+        return com.janknspank.proto.SiteProto.internal_static_SiteManifest_PathBlacklist_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_PathBlacklist_fieldAccessorTable
+        return com.janknspank.proto.SiteProto.internal_static_SiteManifest_PathBlacklist_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.class, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder.class);
+                com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.class, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder.class);
       }
 
       public static com.google.protobuf.Parser<PathBlacklist> PARSER =
@@ -721,7 +721,7 @@ public final class CrawlProto {
         }
         public static final com.google.protobuf.Descriptors.EnumDescriptor
             getDescriptor() {
-          return com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.getDescriptor().getEnumTypes().get(0);
+          return com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.getDescriptor().getEnumTypes().get(0);
         }
 
         private static final Location[] VALUES = values();
@@ -792,7 +792,7 @@ public final class CrawlProto {
 
       // optional .SiteManifest.PathBlacklist.Location location = 4 [default = STARTS_WITH];
       public static final int LOCATION_FIELD_NUMBER = 4;
-      private com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location location_;
+      private com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location location_;
       /**
        * <code>optional .SiteManifest.PathBlacklist.Location location = 4 [default = STARTS_WITH];</code>
        */
@@ -802,13 +802,13 @@ public final class CrawlProto {
       /**
        * <code>optional .SiteManifest.PathBlacklist.Location location = 4 [default = STARTS_WITH];</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location getLocation() {
+      public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location getLocation() {
         return location_;
       }
 
       private void initFields() {
         needle_ = "";
-        location_ = com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location.STARTS_WITH;
+        location_ = com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location.STARTS_WITH;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -857,53 +857,53 @@ public final class CrawlProto {
         return super.writeReplace();
       }
 
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseFrom(byte[] data)
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseFrom(java.io.InputStream input)
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseFrom(input, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseDelimitedFrom(java.io.InputStream input)
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseDelimitedFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -912,7 +912,7 @@ public final class CrawlProto {
 
       public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist prototype) {
+      public static Builder newBuilder(com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist prototype) {
         return newBuilder().mergeFrom(prototype);
       }
       public Builder toBuilder() { return newBuilder(this); }
@@ -928,20 +928,20 @@ public final class CrawlProto {
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder {
+         implements com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_PathBlacklist_descriptor;
+          return com.janknspank.proto.SiteProto.internal_static_SiteManifest_PathBlacklist_descriptor;
         }
 
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_PathBlacklist_fieldAccessorTable
+          return com.janknspank.proto.SiteProto.internal_static_SiteManifest_PathBlacklist_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                  com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.class, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder.class);
+                  com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.class, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder.class);
         }
 
-        // Construct using com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.newBuilder()
+        // Construct using com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
@@ -963,7 +963,7 @@ public final class CrawlProto {
           super.clear();
           needle_ = "";
           bitField0_ = (bitField0_ & ~0x00000001);
-          location_ = com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location.STARTS_WITH;
+          location_ = com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location.STARTS_WITH;
           bitField0_ = (bitField0_ & ~0x00000002);
           return this;
         }
@@ -974,23 +974,23 @@ public final class CrawlProto {
 
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_PathBlacklist_descriptor;
+          return com.janknspank.proto.SiteProto.internal_static_SiteManifest_PathBlacklist_descriptor;
         }
 
-        public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist getDefaultInstanceForType() {
-          return com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.getDefaultInstance();
+        public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist getDefaultInstanceForType() {
+          return com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.getDefaultInstance();
         }
 
-        public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist build() {
-          com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist result = buildPartial();
+        public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist build() {
+          com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(result);
           }
           return result;
         }
 
-        public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist buildPartial() {
-          com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist result = new com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist(this);
+        public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist buildPartial() {
+          com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist result = new com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist(this);
           int from_bitField0_ = bitField0_;
           int to_bitField0_ = 0;
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1007,16 +1007,16 @@ public final class CrawlProto {
         }
 
         public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist) {
-            return mergeFrom((com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist)other);
+          if (other instanceof com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist) {
+            return mergeFrom((com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist)other);
           } else {
             super.mergeFrom(other);
             return this;
           }
         }
 
-        public Builder mergeFrom(com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist other) {
-          if (other == com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.getDefaultInstance()) return this;
+        public Builder mergeFrom(com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist other) {
+          if (other == com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.getDefaultInstance()) return this;
           if (other.hasNeedle()) {
             bitField0_ |= 0x00000001;
             needle_ = other.needle_;
@@ -1037,11 +1037,11 @@ public final class CrawlProto {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist parsedMessage = null;
+          com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist) e.getUnfinishedMessage();
+            parsedMessage = (com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist) e.getUnfinishedMessage();
             throw e;
           } finally {
             if (parsedMessage != null) {
@@ -1127,7 +1127,7 @@ public final class CrawlProto {
         }
 
         // optional .SiteManifest.PathBlacklist.Location location = 4 [default = STARTS_WITH];
-        private com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location location_ = com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location.STARTS_WITH;
+        private com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location location_ = com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location.STARTS_WITH;
         /**
          * <code>optional .SiteManifest.PathBlacklist.Location location = 4 [default = STARTS_WITH];</code>
          */
@@ -1137,13 +1137,13 @@ public final class CrawlProto {
         /**
          * <code>optional .SiteManifest.PathBlacklist.Location location = 4 [default = STARTS_WITH];</code>
          */
-        public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location getLocation() {
+        public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location getLocation() {
           return location_;
         }
         /**
          * <code>optional .SiteManifest.PathBlacklist.Location location = 4 [default = STARTS_WITH];</code>
          */
-        public Builder setLocation(com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location value) {
+        public Builder setLocation(com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location value) {
           if (value == null) {
             throw new NullPointerException();
           }
@@ -1157,7 +1157,7 @@ public final class CrawlProto {
          */
         public Builder clearLocation() {
           bitField0_ = (bitField0_ & ~0x00000002);
-          location_ = com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Location.STARTS_WITH;
+          location_ = com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Location.STARTS_WITH;
           onChanged();
           return this;
         }
@@ -1311,14 +1311,14 @@ public final class CrawlProto {
       }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_ArticleUrlPattern_descriptor;
+        return com.janknspank.proto.SiteProto.internal_static_SiteManifest_ArticleUrlPattern_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_ArticleUrlPattern_fieldAccessorTable
+        return com.janknspank.proto.SiteProto.internal_static_SiteManifest_ArticleUrlPattern_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.class, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder.class);
+                com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.class, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder.class);
       }
 
       public static com.google.protobuf.Parser<ArticleUrlPattern> PARSER =
@@ -1498,53 +1498,53 @@ public final class CrawlProto {
         return super.writeReplace();
       }
 
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseFrom(byte[] data)
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseFrom(java.io.InputStream input)
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseFrom(input, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseDelimitedFrom(java.io.InputStream input)
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseDelimitedFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parseFrom(
+      public static com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -1553,7 +1553,7 @@ public final class CrawlProto {
 
       public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern prototype) {
+      public static Builder newBuilder(com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern prototype) {
         return newBuilder().mergeFrom(prototype);
       }
       public Builder toBuilder() { return newBuilder(this); }
@@ -1575,20 +1575,20 @@ public final class CrawlProto {
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder {
+         implements com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_ArticleUrlPattern_descriptor;
+          return com.janknspank.proto.SiteProto.internal_static_SiteManifest_ArticleUrlPattern_descriptor;
         }
 
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_ArticleUrlPattern_fieldAccessorTable
+          return com.janknspank.proto.SiteProto.internal_static_SiteManifest_ArticleUrlPattern_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                  com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.class, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder.class);
+                  com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.class, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder.class);
         }
 
-        // Construct using com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.newBuilder()
+        // Construct using com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
@@ -1621,23 +1621,23 @@ public final class CrawlProto {
 
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_ArticleUrlPattern_descriptor;
+          return com.janknspank.proto.SiteProto.internal_static_SiteManifest_ArticleUrlPattern_descriptor;
         }
 
-        public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern getDefaultInstanceForType() {
-          return com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.getDefaultInstance();
+        public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern getDefaultInstanceForType() {
+          return com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.getDefaultInstance();
         }
 
-        public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern build() {
-          com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern result = buildPartial();
+        public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern build() {
+          com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(result);
           }
           return result;
         }
 
-        public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern buildPartial() {
-          com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern result = new com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern(this);
+        public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern buildPartial() {
+          com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern result = new com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern(this);
           int from_bitField0_ = bitField0_;
           int to_bitField0_ = 0;
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1654,16 +1654,16 @@ public final class CrawlProto {
         }
 
         public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern) {
-            return mergeFrom((com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern)other);
+          if (other instanceof com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern) {
+            return mergeFrom((com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern)other);
           } else {
             super.mergeFrom(other);
             return this;
           }
         }
 
-        public Builder mergeFrom(com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern other) {
-          if (other == com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.getDefaultInstance()) return this;
+        public Builder mergeFrom(com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern other) {
+          if (other == com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.getDefaultInstance()) return this;
           if (other.hasPathRegex()) {
             bitField0_ |= 0x00000001;
             pathRegex_ = other.pathRegex_;
@@ -1686,11 +1686,11 @@ public final class CrawlProto {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern parsedMessage = null;
+          com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern) e.getUnfinishedMessage();
+            parsedMessage = (com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern) e.getUnfinishedMessage();
             throw e;
           } finally {
             if (parsedMessage != null) {
@@ -2088,17 +2088,17 @@ public final class CrawlProto {
 
     // repeated .SiteManifest.PathBlacklist path_blacklist = 5;
     public static final int PATH_BLACKLIST_FIELD_NUMBER = 5;
-    private java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist> pathBlacklist_;
+    private java.util.List<com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist> pathBlacklist_;
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
-    public java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist> getPathBlacklistList() {
+    public java.util.List<com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist> getPathBlacklistList() {
       return pathBlacklist_;
     }
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
-    public java.util.List<? extends com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder> 
+    public java.util.List<? extends com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder> 
         getPathBlacklistOrBuilderList() {
       return pathBlacklist_;
     }
@@ -2111,13 +2111,13 @@ public final class CrawlProto {
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
-    public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist getPathBlacklist(int index) {
+    public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist getPathBlacklist(int index) {
       return pathBlacklist_.get(index);
     }
     /**
      * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
      */
-    public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder getPathBlacklistOrBuilder(
+    public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder getPathBlacklistOrBuilder(
         int index) {
       return pathBlacklist_.get(index);
     }
@@ -2154,17 +2154,17 @@ public final class CrawlProto {
 
     // repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;
     public static final int ARTICLE_URL_PATTERN_FIELD_NUMBER = 7;
-    private java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern> articleUrlPattern_;
+    private java.util.List<com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern> articleUrlPattern_;
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
-    public java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern> getArticleUrlPatternList() {
+    public java.util.List<com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern> getArticleUrlPatternList() {
       return articleUrlPattern_;
     }
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
-    public java.util.List<? extends com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder> 
+    public java.util.List<? extends com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder> 
         getArticleUrlPatternOrBuilderList() {
       return articleUrlPattern_;
     }
@@ -2177,13 +2177,13 @@ public final class CrawlProto {
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
-    public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern getArticleUrlPattern(int index) {
+    public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern getArticleUrlPattern(int index) {
       return articleUrlPattern_.get(index);
     }
     /**
      * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
      */
-    public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder getArticleUrlPatternOrBuilder(
+    public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder getArticleUrlPatternOrBuilder(
         int index) {
       return articleUrlPattern_.get(index);
     }
@@ -2294,7 +2294,7 @@ public final class CrawlProto {
 
     // optional .TestInstructions test_instructions = 10;
     public static final int TEST_INSTRUCTIONS_FIELD_NUMBER = 10;
-    private com.janknspank.proto.CrawlProto.TestInstructions testInstructions_;
+    private com.janknspank.proto.SiteProto.TestInstructions testInstructions_;
     /**
      * <code>optional .TestInstructions test_instructions = 10;</code>
      */
@@ -2304,13 +2304,13 @@ public final class CrawlProto {
     /**
      * <code>optional .TestInstructions test_instructions = 10;</code>
      */
-    public com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions() {
+    public com.janknspank.proto.SiteProto.TestInstructions getTestInstructions() {
       return testInstructions_;
     }
     /**
      * <code>optional .TestInstructions test_instructions = 10;</code>
      */
-    public com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
+    public com.janknspank.proto.SiteProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
       return testInstructions_;
     }
 
@@ -2324,7 +2324,7 @@ public final class CrawlProto {
       articleUrlPattern_ = java.util.Collections.emptyList();
       whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+      testInstructions_ = com.janknspank.proto.SiteProto.TestInstructions.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2459,53 +2459,53 @@ public final class CrawlProto {
       return super.writeReplace();
     }
 
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseFrom(
+    public static com.janknspank.proto.SiteProto.SiteManifest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseFrom(
+    public static com.janknspank.proto.SiteProto.SiteManifest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseFrom(byte[] data)
+    public static com.janknspank.proto.SiteProto.SiteManifest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseFrom(
+    public static com.janknspank.proto.SiteProto.SiteManifest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseFrom(java.io.InputStream input)
+    public static com.janknspank.proto.SiteProto.SiteManifest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseFrom(
+    public static com.janknspank.proto.SiteProto.SiteManifest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseDelimitedFrom(java.io.InputStream input)
+    public static com.janknspank.proto.SiteProto.SiteManifest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseDelimitedFrom(
+    public static com.janknspank.proto.SiteProto.SiteManifest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseFrom(
+    public static com.janknspank.proto.SiteProto.SiteManifest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.CrawlProto.SiteManifest parseFrom(
+    public static com.janknspank.proto.SiteProto.SiteManifest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2514,7 +2514,7 @@ public final class CrawlProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.CrawlProto.SiteManifest prototype) {
+    public static Builder newBuilder(com.janknspank.proto.SiteProto.SiteManifest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -2530,20 +2530,20 @@ public final class CrawlProto {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.CrawlProto.SiteManifestOrBuilder {
+       implements com.janknspank.proto.SiteProto.SiteManifestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_descriptor;
+        return com.janknspank.proto.SiteProto.internal_static_SiteManifest_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_fieldAccessorTable
+        return com.janknspank.proto.SiteProto.internal_static_SiteManifest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CrawlProto.SiteManifest.class, com.janknspank.proto.CrawlProto.SiteManifest.Builder.class);
+                com.janknspank.proto.SiteProto.SiteManifest.class, com.janknspank.proto.SiteProto.SiteManifest.Builder.class);
       }
 
-      // Construct using com.janknspank.proto.CrawlProto.SiteManifest.newBuilder()
+      // Construct using com.janknspank.proto.SiteProto.SiteManifest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2593,7 +2593,7 @@ public final class CrawlProto {
         rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000100);
         if (testInstructionsBuilder_ == null) {
-          testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+          testInstructions_ = com.janknspank.proto.SiteProto.TestInstructions.getDefaultInstance();
         } else {
           testInstructionsBuilder_.clear();
         }
@@ -2607,23 +2607,23 @@ public final class CrawlProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.janknspank.proto.CrawlProto.internal_static_SiteManifest_descriptor;
+        return com.janknspank.proto.SiteProto.internal_static_SiteManifest_descriptor;
       }
 
-      public com.janknspank.proto.CrawlProto.SiteManifest getDefaultInstanceForType() {
-        return com.janknspank.proto.CrawlProto.SiteManifest.getDefaultInstance();
+      public com.janknspank.proto.SiteProto.SiteManifest getDefaultInstanceForType() {
+        return com.janknspank.proto.SiteProto.SiteManifest.getDefaultInstance();
       }
 
-      public com.janknspank.proto.CrawlProto.SiteManifest build() {
-        com.janknspank.proto.CrawlProto.SiteManifest result = buildPartial();
+      public com.janknspank.proto.SiteProto.SiteManifest build() {
+        com.janknspank.proto.SiteProto.SiteManifest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.janknspank.proto.CrawlProto.SiteManifest buildPartial() {
-        com.janknspank.proto.CrawlProto.SiteManifest result = new com.janknspank.proto.CrawlProto.SiteManifest(this);
+      public com.janknspank.proto.SiteProto.SiteManifest buildPartial() {
+        com.janknspank.proto.SiteProto.SiteManifest result = new com.janknspank.proto.SiteProto.SiteManifest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2698,16 +2698,16 @@ public final class CrawlProto {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.CrawlProto.SiteManifest) {
-          return mergeFrom((com.janknspank.proto.CrawlProto.SiteManifest)other);
+        if (other instanceof com.janknspank.proto.SiteProto.SiteManifest) {
+          return mergeFrom((com.janknspank.proto.SiteProto.SiteManifest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.janknspank.proto.CrawlProto.SiteManifest other) {
-        if (other == com.janknspank.proto.CrawlProto.SiteManifest.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.janknspank.proto.SiteProto.SiteManifest other) {
+        if (other == com.janknspank.proto.SiteProto.SiteManifest.getDefaultInstance()) return this;
         if (other.hasRootDomain()) {
           bitField0_ |= 0x00000001;
           rootDomain_ = other.rootDomain_;
@@ -2840,11 +2840,11 @@ public final class CrawlProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.janknspank.proto.CrawlProto.SiteManifest parsedMessage = null;
+        com.janknspank.proto.SiteProto.SiteManifest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.CrawlProto.SiteManifest) e.getUnfinishedMessage();
+          parsedMessage = (com.janknspank.proto.SiteProto.SiteManifest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -3305,22 +3305,22 @@ public final class CrawlProto {
       }
 
       // repeated .SiteManifest.PathBlacklist path_blacklist = 5;
-      private java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist> pathBlacklist_ =
+      private java.util.List<com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist> pathBlacklist_ =
         java.util.Collections.emptyList();
       private void ensurePathBlacklistIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          pathBlacklist_ = new java.util.ArrayList<com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist>(pathBlacklist_);
+          pathBlacklist_ = new java.util.ArrayList<com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist>(pathBlacklist_);
           bitField0_ |= 0x00000010;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder> pathBlacklistBuilder_;
+          com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder> pathBlacklistBuilder_;
 
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist> getPathBlacklistList() {
+      public java.util.List<com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist> getPathBlacklistList() {
         if (pathBlacklistBuilder_ == null) {
           return java.util.Collections.unmodifiableList(pathBlacklist_);
         } else {
@@ -3340,7 +3340,7 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist getPathBlacklist(int index) {
+      public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist getPathBlacklist(int index) {
         if (pathBlacklistBuilder_ == null) {
           return pathBlacklist_.get(index);
         } else {
@@ -3351,7 +3351,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
       public Builder setPathBlacklist(
-          int index, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist value) {
+          int index, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist value) {
         if (pathBlacklistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3368,7 +3368,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
       public Builder setPathBlacklist(
-          int index, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder builderForValue) {
+          int index, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder builderForValue) {
         if (pathBlacklistBuilder_ == null) {
           ensurePathBlacklistIsMutable();
           pathBlacklist_.set(index, builderForValue.build());
@@ -3381,7 +3381,7 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public Builder addPathBlacklist(com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist value) {
+      public Builder addPathBlacklist(com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist value) {
         if (pathBlacklistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3398,7 +3398,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
       public Builder addPathBlacklist(
-          int index, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist value) {
+          int index, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist value) {
         if (pathBlacklistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3415,7 +3415,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
       public Builder addPathBlacklist(
-          com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder builderForValue) {
+          com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder builderForValue) {
         if (pathBlacklistBuilder_ == null) {
           ensurePathBlacklistIsMutable();
           pathBlacklist_.add(builderForValue.build());
@@ -3429,7 +3429,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
       public Builder addPathBlacklist(
-          int index, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder builderForValue) {
+          int index, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder builderForValue) {
         if (pathBlacklistBuilder_ == null) {
           ensurePathBlacklistIsMutable();
           pathBlacklist_.add(index, builderForValue.build());
@@ -3443,7 +3443,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
       public Builder addAllPathBlacklist(
-          java.lang.Iterable<? extends com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist> values) {
+          java.lang.Iterable<? extends com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist> values) {
         if (pathBlacklistBuilder_ == null) {
           ensurePathBlacklistIsMutable();
           super.addAll(values, pathBlacklist_);
@@ -3482,14 +3482,14 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder getPathBlacklistBuilder(
+      public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder getPathBlacklistBuilder(
           int index) {
         return getPathBlacklistFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder getPathBlacklistOrBuilder(
+      public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder getPathBlacklistOrBuilder(
           int index) {
         if (pathBlacklistBuilder_ == null) {
           return pathBlacklist_.get(index);  } else {
@@ -3499,7 +3499,7 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public java.util.List<? extends com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder> 
+      public java.util.List<? extends com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder> 
            getPathBlacklistOrBuilderList() {
         if (pathBlacklistBuilder_ != null) {
           return pathBlacklistBuilder_.getMessageOrBuilderList();
@@ -3510,31 +3510,31 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder addPathBlacklistBuilder() {
+      public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder addPathBlacklistBuilder() {
         return getPathBlacklistFieldBuilder().addBuilder(
-            com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.getDefaultInstance());
+            com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.getDefaultInstance());
       }
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder addPathBlacklistBuilder(
+      public com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder addPathBlacklistBuilder(
           int index) {
         return getPathBlacklistFieldBuilder().addBuilder(
-            index, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.getDefaultInstance());
+            index, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.getDefaultInstance());
       }
       /**
        * <code>repeated .SiteManifest.PathBlacklist path_blacklist = 5;</code>
        */
-      public java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder> 
+      public java.util.List<com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder> 
            getPathBlacklistBuilderList() {
         return getPathBlacklistFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder> 
+          com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder> 
           getPathBlacklistFieldBuilder() {
         if (pathBlacklistBuilder_ == null) {
           pathBlacklistBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklist.Builder, com.janknspank.proto.CrawlProto.SiteManifest.PathBlacklistOrBuilder>(
+              com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist.Builder, com.janknspank.proto.SiteProto.SiteManifest.PathBlacklistOrBuilder>(
                   pathBlacklist_,
                   ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
@@ -3638,22 +3638,22 @@ public final class CrawlProto {
       }
 
       // repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;
-      private java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern> articleUrlPattern_ =
+      private java.util.List<com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern> articleUrlPattern_ =
         java.util.Collections.emptyList();
       private void ensureArticleUrlPatternIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          articleUrlPattern_ = new java.util.ArrayList<com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern>(articleUrlPattern_);
+          articleUrlPattern_ = new java.util.ArrayList<com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern>(articleUrlPattern_);
           bitField0_ |= 0x00000040;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder> articleUrlPatternBuilder_;
+          com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder> articleUrlPatternBuilder_;
 
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern> getArticleUrlPatternList() {
+      public java.util.List<com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern> getArticleUrlPatternList() {
         if (articleUrlPatternBuilder_ == null) {
           return java.util.Collections.unmodifiableList(articleUrlPattern_);
         } else {
@@ -3673,7 +3673,7 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern getArticleUrlPattern(int index) {
+      public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern getArticleUrlPattern(int index) {
         if (articleUrlPatternBuilder_ == null) {
           return articleUrlPattern_.get(index);
         } else {
@@ -3684,7 +3684,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
       public Builder setArticleUrlPattern(
-          int index, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern value) {
+          int index, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern value) {
         if (articleUrlPatternBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3701,7 +3701,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
       public Builder setArticleUrlPattern(
-          int index, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder builderForValue) {
+          int index, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder builderForValue) {
         if (articleUrlPatternBuilder_ == null) {
           ensureArticleUrlPatternIsMutable();
           articleUrlPattern_.set(index, builderForValue.build());
@@ -3714,7 +3714,7 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public Builder addArticleUrlPattern(com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern value) {
+      public Builder addArticleUrlPattern(com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern value) {
         if (articleUrlPatternBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3731,7 +3731,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
       public Builder addArticleUrlPattern(
-          int index, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern value) {
+          int index, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern value) {
         if (articleUrlPatternBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3748,7 +3748,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
       public Builder addArticleUrlPattern(
-          com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder builderForValue) {
+          com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder builderForValue) {
         if (articleUrlPatternBuilder_ == null) {
           ensureArticleUrlPatternIsMutable();
           articleUrlPattern_.add(builderForValue.build());
@@ -3762,7 +3762,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
       public Builder addArticleUrlPattern(
-          int index, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder builderForValue) {
+          int index, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder builderForValue) {
         if (articleUrlPatternBuilder_ == null) {
           ensureArticleUrlPatternIsMutable();
           articleUrlPattern_.add(index, builderForValue.build());
@@ -3776,7 +3776,7 @@ public final class CrawlProto {
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
       public Builder addAllArticleUrlPattern(
-          java.lang.Iterable<? extends com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern> values) {
+          java.lang.Iterable<? extends com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern> values) {
         if (articleUrlPatternBuilder_ == null) {
           ensureArticleUrlPatternIsMutable();
           super.addAll(values, articleUrlPattern_);
@@ -3815,14 +3815,14 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder getArticleUrlPatternBuilder(
+      public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder getArticleUrlPatternBuilder(
           int index) {
         return getArticleUrlPatternFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder getArticleUrlPatternOrBuilder(
+      public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder getArticleUrlPatternOrBuilder(
           int index) {
         if (articleUrlPatternBuilder_ == null) {
           return articleUrlPattern_.get(index);  } else {
@@ -3832,7 +3832,7 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public java.util.List<? extends com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder> 
+      public java.util.List<? extends com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder> 
            getArticleUrlPatternOrBuilderList() {
         if (articleUrlPatternBuilder_ != null) {
           return articleUrlPatternBuilder_.getMessageOrBuilderList();
@@ -3843,31 +3843,31 @@ public final class CrawlProto {
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder addArticleUrlPatternBuilder() {
+      public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder addArticleUrlPatternBuilder() {
         return getArticleUrlPatternFieldBuilder().addBuilder(
-            com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.getDefaultInstance());
+            com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.getDefaultInstance());
       }
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder addArticleUrlPatternBuilder(
+      public com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder addArticleUrlPatternBuilder(
           int index) {
         return getArticleUrlPatternFieldBuilder().addBuilder(
-            index, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.getDefaultInstance());
+            index, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.getDefaultInstance());
       }
       /**
        * <code>repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;</code>
        */
-      public java.util.List<com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder> 
+      public java.util.List<com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder> 
            getArticleUrlPatternBuilderList() {
         return getArticleUrlPatternFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder> 
+          com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder> 
           getArticleUrlPatternFieldBuilder() {
         if (articleUrlPatternBuilder_ == null) {
           articleUrlPatternBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPattern.Builder, com.janknspank.proto.CrawlProto.SiteManifest.ArticleUrlPatternOrBuilder>(
+              com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern.Builder, com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPatternOrBuilder>(
                   articleUrlPattern_,
                   ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
@@ -4163,9 +4163,9 @@ public final class CrawlProto {
       }
 
       // optional .TestInstructions test_instructions = 10;
-      private com.janknspank.proto.CrawlProto.TestInstructions testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+      private com.janknspank.proto.SiteProto.TestInstructions testInstructions_ = com.janknspank.proto.SiteProto.TestInstructions.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder> testInstructionsBuilder_;
+          com.janknspank.proto.SiteProto.TestInstructions, com.janknspank.proto.SiteProto.TestInstructions.Builder, com.janknspank.proto.SiteProto.TestInstructionsOrBuilder> testInstructionsBuilder_;
       /**
        * <code>optional .TestInstructions test_instructions = 10;</code>
        */
@@ -4175,7 +4175,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions test_instructions = 10;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructions getTestInstructions() {
+      public com.janknspank.proto.SiteProto.TestInstructions getTestInstructions() {
         if (testInstructionsBuilder_ == null) {
           return testInstructions_;
         } else {
@@ -4185,7 +4185,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions test_instructions = 10;</code>
        */
-      public Builder setTestInstructions(com.janknspank.proto.CrawlProto.TestInstructions value) {
+      public Builder setTestInstructions(com.janknspank.proto.SiteProto.TestInstructions value) {
         if (testInstructionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4202,7 +4202,7 @@ public final class CrawlProto {
        * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       public Builder setTestInstructions(
-          com.janknspank.proto.CrawlProto.TestInstructions.Builder builderForValue) {
+          com.janknspank.proto.SiteProto.TestInstructions.Builder builderForValue) {
         if (testInstructionsBuilder_ == null) {
           testInstructions_ = builderForValue.build();
           onChanged();
@@ -4215,12 +4215,12 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions test_instructions = 10;</code>
        */
-      public Builder mergeTestInstructions(com.janknspank.proto.CrawlProto.TestInstructions value) {
+      public Builder mergeTestInstructions(com.janknspank.proto.SiteProto.TestInstructions value) {
         if (testInstructionsBuilder_ == null) {
           if (((bitField0_ & 0x00000200) == 0x00000200) &&
-              testInstructions_ != com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance()) {
+              testInstructions_ != com.janknspank.proto.SiteProto.TestInstructions.getDefaultInstance()) {
             testInstructions_ =
-              com.janknspank.proto.CrawlProto.TestInstructions.newBuilder(testInstructions_).mergeFrom(value).buildPartial();
+              com.janknspank.proto.SiteProto.TestInstructions.newBuilder(testInstructions_).mergeFrom(value).buildPartial();
           } else {
             testInstructions_ = value;
           }
@@ -4236,7 +4236,7 @@ public final class CrawlProto {
        */
       public Builder clearTestInstructions() {
         if (testInstructionsBuilder_ == null) {
-          testInstructions_ = com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+          testInstructions_ = com.janknspank.proto.SiteProto.TestInstructions.getDefaultInstance();
           onChanged();
         } else {
           testInstructionsBuilder_.clear();
@@ -4247,7 +4247,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions test_instructions = 10;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructions.Builder getTestInstructionsBuilder() {
+      public com.janknspank.proto.SiteProto.TestInstructions.Builder getTestInstructionsBuilder() {
         bitField0_ |= 0x00000200;
         onChanged();
         return getTestInstructionsFieldBuilder().getBuilder();
@@ -4255,7 +4255,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions test_instructions = 10;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
+      public com.janknspank.proto.SiteProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder() {
         if (testInstructionsBuilder_ != null) {
           return testInstructionsBuilder_.getMessageOrBuilder();
         } else {
@@ -4266,11 +4266,11 @@ public final class CrawlProto {
        * <code>optional .TestInstructions test_instructions = 10;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder> 
+          com.janknspank.proto.SiteProto.TestInstructions, com.janknspank.proto.SiteProto.TestInstructions.Builder, com.janknspank.proto.SiteProto.TestInstructionsOrBuilder> 
           getTestInstructionsFieldBuilder() {
         if (testInstructionsBuilder_ == null) {
           testInstructionsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.janknspank.proto.CrawlProto.TestInstructions, com.janknspank.proto.CrawlProto.TestInstructions.Builder, com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder>(
+              com.janknspank.proto.SiteProto.TestInstructions, com.janknspank.proto.SiteProto.TestInstructions.Builder, com.janknspank.proto.SiteProto.TestInstructionsOrBuilder>(
                   testInstructions_,
                   getParentForChildren(),
                   isClean());
@@ -4301,11 +4301,11 @@ public final class CrawlProto {
     /**
      * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
      */
-    com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks();
+    com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks();
     /**
      * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
      */
-    com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder();
+    com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder();
 
     // optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;
     /**
@@ -4315,11 +4315,11 @@ public final class CrawlProto {
     /**
      * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
      */
-    com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks getArticleUrlDetectorChecks();
+    com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks getArticleUrlDetectorChecks();
     /**
      * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
      */
-    com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder getArticleUrlDetectorChecksOrBuilder();
+    com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder getArticleUrlDetectorChecksOrBuilder();
   }
   /**
    * Protobuf type {@code TestInstructions}
@@ -4373,11 +4373,11 @@ public final class CrawlProto {
               break;
             }
             case 10: {
-              com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder subBuilder = null;
+              com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = urlWhitelistChecks_.toBuilder();
               }
-              urlWhitelistChecks_ = input.readMessage(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.PARSER, extensionRegistry);
+              urlWhitelistChecks_ = input.readMessage(com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(urlWhitelistChecks_);
                 urlWhitelistChecks_ = subBuilder.buildPartial();
@@ -4386,11 +4386,11 @@ public final class CrawlProto {
               break;
             }
             case 18: {
-              com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.Builder subBuilder = null;
+              com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = articleUrlDetectorChecks_.toBuilder();
               }
-              articleUrlDetectorChecks_ = input.readMessage(com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.PARSER, extensionRegistry);
+              articleUrlDetectorChecks_ = input.readMessage(com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(articleUrlDetectorChecks_);
                 articleUrlDetectorChecks_ = subBuilder.buildPartial();
@@ -4412,14 +4412,14 @@ public final class CrawlProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_descriptor;
+      return com.janknspank.proto.SiteProto.internal_static_TestInstructions_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_fieldAccessorTable
+      return com.janknspank.proto.SiteProto.internal_static_TestInstructions_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.CrawlProto.TestInstructions.class, com.janknspank.proto.CrawlProto.TestInstructions.Builder.class);
+              com.janknspank.proto.SiteProto.TestInstructions.class, com.janknspank.proto.SiteProto.TestInstructions.Builder.class);
     }
 
     public static com.google.protobuf.Parser<TestInstructions> PARSER =
@@ -4567,14 +4567,14 @@ public final class CrawlProto {
       }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
+        return com.janknspank.proto.SiteProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_fieldAccessorTable
+        return com.janknspank.proto.SiteProto.internal_static_TestInstructions_UrlWhitelistChecks_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.class, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder.class);
+                com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.class, com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.Builder.class);
       }
 
       public static com.google.protobuf.Parser<UrlWhitelistChecks> PARSER =
@@ -4713,53 +4713,53 @@ public final class CrawlProto {
         return super.writeReplace();
       }
 
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(byte[] data)
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(java.io.InputStream input)
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseFrom(input, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseDelimitedFrom(java.io.InputStream input)
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseDelimitedFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -4768,7 +4768,7 @@ public final class CrawlProto {
 
       public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks prototype) {
+      public static Builder newBuilder(com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks prototype) {
         return newBuilder().mergeFrom(prototype);
       }
       public Builder toBuilder() { return newBuilder(this); }
@@ -4784,20 +4784,20 @@ public final class CrawlProto {
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder {
+         implements com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecksOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
+          return com.janknspank.proto.SiteProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
         }
 
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_fieldAccessorTable
+          return com.janknspank.proto.SiteProto.internal_static_TestInstructions_UrlWhitelistChecks_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                  com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.class, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder.class);
+                  com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.class, com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.Builder.class);
         }
 
-        // Construct using com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.newBuilder()
+        // Construct using com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
@@ -4830,23 +4830,23 @@ public final class CrawlProto {
 
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
+          return com.janknspank.proto.SiteProto.internal_static_TestInstructions_UrlWhitelistChecks_descriptor;
         }
 
-        public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks getDefaultInstanceForType() {
-          return com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+        public com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks getDefaultInstanceForType() {
+          return com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
         }
 
-        public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks build() {
-          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks result = buildPartial();
+        public com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks build() {
+          com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(result);
           }
           return result;
         }
 
-        public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks buildPartial() {
-          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks result = new com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks(this);
+        public com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks buildPartial() {
+          com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks result = new com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks(this);
           int from_bitField0_ = bitField0_;
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             goodUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(
@@ -4865,16 +4865,16 @@ public final class CrawlProto {
         }
 
         public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks) {
-            return mergeFrom((com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks)other);
+          if (other instanceof com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks) {
+            return mergeFrom((com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks)other);
           } else {
             super.mergeFrom(other);
             return this;
           }
         }
 
-        public Builder mergeFrom(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks other) {
-          if (other == com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance()) return this;
+        public Builder mergeFrom(com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks other) {
+          if (other == com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance()) return this;
           if (!other.goodUrl_.isEmpty()) {
             if (goodUrl_.isEmpty()) {
               goodUrl_ = other.goodUrl_;
@@ -4907,11 +4907,11 @@ public final class CrawlProto {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks parsedMessage = null;
+          com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks) e.getUnfinishedMessage();
+            parsedMessage = (com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks) e.getUnfinishedMessage();
             throw e;
           } finally {
             if (parsedMessage != null) {
@@ -5249,14 +5249,14 @@ public final class CrawlProto {
       }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_descriptor;
+        return com.janknspank.proto.SiteProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_fieldAccessorTable
+        return com.janknspank.proto.SiteProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.class, com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.Builder.class);
+                com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.class, com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.Builder.class);
       }
 
       public static com.google.protobuf.Parser<ArticleUrlDetectorChecks> PARSER =
@@ -5395,53 +5395,53 @@ public final class CrawlProto {
         return super.writeReplace();
       }
 
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(byte[] data)
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(java.io.InputStream input)
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseFrom(input, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseDelimitedFrom(java.io.InputStream input)
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseDelimitedFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input, extensionRegistry);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
+      public static com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -5450,7 +5450,7 @@ public final class CrawlProto {
 
       public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks prototype) {
+      public static Builder newBuilder(com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks prototype) {
         return newBuilder().mergeFrom(prototype);
       }
       public Builder toBuilder() { return newBuilder(this); }
@@ -5466,20 +5466,20 @@ public final class CrawlProto {
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder {
+         implements com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_descriptor;
+          return com.janknspank.proto.SiteProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_descriptor;
         }
 
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_fieldAccessorTable
+          return com.janknspank.proto.SiteProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                  com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.class, com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.Builder.class);
+                  com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.class, com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.Builder.class);
         }
 
-        // Construct using com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.newBuilder()
+        // Construct using com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
@@ -5512,23 +5512,23 @@ public final class CrawlProto {
 
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_descriptor;
+          return com.janknspank.proto.SiteProto.internal_static_TestInstructions_ArticleUrlDetectorChecks_descriptor;
         }
 
-        public com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks getDefaultInstanceForType() {
-          return com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
+        public com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks getDefaultInstanceForType() {
+          return com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
         }
 
-        public com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks build() {
-          com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks result = buildPartial();
+        public com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks build() {
+          com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(result);
           }
           return result;
         }
 
-        public com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks buildPartial() {
-          com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks result = new com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks(this);
+        public com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks buildPartial() {
+          com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks result = new com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks(this);
           int from_bitField0_ = bitField0_;
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             articleUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(
@@ -5547,16 +5547,16 @@ public final class CrawlProto {
         }
 
         public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks) {
-            return mergeFrom((com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks)other);
+          if (other instanceof com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks) {
+            return mergeFrom((com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks)other);
           } else {
             super.mergeFrom(other);
             return this;
           }
         }
 
-        public Builder mergeFrom(com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks other) {
-          if (other == com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance()) return this;
+        public Builder mergeFrom(com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks other) {
+          if (other == com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance()) return this;
           if (!other.articleUrl_.isEmpty()) {
             if (articleUrl_.isEmpty()) {
               articleUrl_ = other.articleUrl_;
@@ -5589,11 +5589,11 @@ public final class CrawlProto {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks parsedMessage = null;
+          com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks) e.getUnfinishedMessage();
+            parsedMessage = (com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks) e.getUnfinishedMessage();
             throw e;
           } finally {
             if (parsedMessage != null) {
@@ -5804,7 +5804,7 @@ public final class CrawlProto {
     private int bitField0_;
     // optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;
     public static final int URL_WHITELIST_CHECKS_FIELD_NUMBER = 1;
-    private com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks urlWhitelistChecks_;
+    private com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks urlWhitelistChecks_;
     /**
      * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
      */
@@ -5814,19 +5814,19 @@ public final class CrawlProto {
     /**
      * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
      */
-    public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks() {
+    public com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks() {
       return urlWhitelistChecks_;
     }
     /**
      * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
      */
-    public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder() {
+    public com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder() {
       return urlWhitelistChecks_;
     }
 
     // optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;
     public static final int ARTICLE_URL_DETECTOR_CHECKS_FIELD_NUMBER = 2;
-    private com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks articleUrlDetectorChecks_;
+    private com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks articleUrlDetectorChecks_;
     /**
      * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
      */
@@ -5836,19 +5836,19 @@ public final class CrawlProto {
     /**
      * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
      */
-    public com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks getArticleUrlDetectorChecks() {
+    public com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks getArticleUrlDetectorChecks() {
       return articleUrlDetectorChecks_;
     }
     /**
      * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
      */
-    public com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder getArticleUrlDetectorChecksOrBuilder() {
+    public com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder getArticleUrlDetectorChecksOrBuilder() {
       return articleUrlDetectorChecks_;
     }
 
     private void initFields() {
-      urlWhitelistChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
-      articleUrlDetectorChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
+      urlWhitelistChecks_ = com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+      articleUrlDetectorChecks_ = com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5897,53 +5897,53 @@ public final class CrawlProto {
       return super.writeReplace();
     }
 
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+    public static com.janknspank.proto.SiteProto.TestInstructions parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+    public static com.janknspank.proto.SiteProto.TestInstructions parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(byte[] data)
+    public static com.janknspank.proto.SiteProto.TestInstructions parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+    public static com.janknspank.proto.SiteProto.TestInstructions parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(java.io.InputStream input)
+    public static com.janknspank.proto.SiteProto.TestInstructions parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+    public static com.janknspank.proto.SiteProto.TestInstructions parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseDelimitedFrom(java.io.InputStream input)
+    public static com.janknspank.proto.SiteProto.TestInstructions parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseDelimitedFrom(
+    public static com.janknspank.proto.SiteProto.TestInstructions parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+    public static com.janknspank.proto.SiteProto.TestInstructions parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.janknspank.proto.CrawlProto.TestInstructions parseFrom(
+    public static com.janknspank.proto.SiteProto.TestInstructions parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5952,7 +5952,7 @@ public final class CrawlProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.CrawlProto.TestInstructions prototype) {
+    public static Builder newBuilder(com.janknspank.proto.SiteProto.TestInstructions prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -5968,20 +5968,20 @@ public final class CrawlProto {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.CrawlProto.TestInstructionsOrBuilder {
+       implements com.janknspank.proto.SiteProto.TestInstructionsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_descriptor;
+        return com.janknspank.proto.SiteProto.internal_static_TestInstructions_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_fieldAccessorTable
+        return com.janknspank.proto.SiteProto.internal_static_TestInstructions_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CrawlProto.TestInstructions.class, com.janknspank.proto.CrawlProto.TestInstructions.Builder.class);
+                com.janknspank.proto.SiteProto.TestInstructions.class, com.janknspank.proto.SiteProto.TestInstructions.Builder.class);
       }
 
-      // Construct using com.janknspank.proto.CrawlProto.TestInstructions.newBuilder()
+      // Construct using com.janknspank.proto.SiteProto.TestInstructions.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -6004,13 +6004,13 @@ public final class CrawlProto {
       public Builder clear() {
         super.clear();
         if (urlWhitelistChecksBuilder_ == null) {
-          urlWhitelistChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+          urlWhitelistChecks_ = com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
         } else {
           urlWhitelistChecksBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (articleUrlDetectorChecksBuilder_ == null) {
-          articleUrlDetectorChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
+          articleUrlDetectorChecks_ = com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
         } else {
           articleUrlDetectorChecksBuilder_.clear();
         }
@@ -6024,23 +6024,23 @@ public final class CrawlProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.janknspank.proto.CrawlProto.internal_static_TestInstructions_descriptor;
+        return com.janknspank.proto.SiteProto.internal_static_TestInstructions_descriptor;
       }
 
-      public com.janknspank.proto.CrawlProto.TestInstructions getDefaultInstanceForType() {
-        return com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance();
+      public com.janknspank.proto.SiteProto.TestInstructions getDefaultInstanceForType() {
+        return com.janknspank.proto.SiteProto.TestInstructions.getDefaultInstance();
       }
 
-      public com.janknspank.proto.CrawlProto.TestInstructions build() {
-        com.janknspank.proto.CrawlProto.TestInstructions result = buildPartial();
+      public com.janknspank.proto.SiteProto.TestInstructions build() {
+        com.janknspank.proto.SiteProto.TestInstructions result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.janknspank.proto.CrawlProto.TestInstructions buildPartial() {
-        com.janknspank.proto.CrawlProto.TestInstructions result = new com.janknspank.proto.CrawlProto.TestInstructions(this);
+      public com.janknspank.proto.SiteProto.TestInstructions buildPartial() {
+        com.janknspank.proto.SiteProto.TestInstructions result = new com.janknspank.proto.SiteProto.TestInstructions(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -6065,16 +6065,16 @@ public final class CrawlProto {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.CrawlProto.TestInstructions) {
-          return mergeFrom((com.janknspank.proto.CrawlProto.TestInstructions)other);
+        if (other instanceof com.janknspank.proto.SiteProto.TestInstructions) {
+          return mergeFrom((com.janknspank.proto.SiteProto.TestInstructions)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.janknspank.proto.CrawlProto.TestInstructions other) {
-        if (other == com.janknspank.proto.CrawlProto.TestInstructions.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.janknspank.proto.SiteProto.TestInstructions other) {
+        if (other == com.janknspank.proto.SiteProto.TestInstructions.getDefaultInstance()) return this;
         if (other.hasUrlWhitelistChecks()) {
           mergeUrlWhitelistChecks(other.getUrlWhitelistChecks());
         }
@@ -6093,11 +6093,11 @@ public final class CrawlProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.janknspank.proto.CrawlProto.TestInstructions parsedMessage = null;
+        com.janknspank.proto.SiteProto.TestInstructions parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.CrawlProto.TestInstructions) e.getUnfinishedMessage();
+          parsedMessage = (com.janknspank.proto.SiteProto.TestInstructions) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -6109,9 +6109,9 @@ public final class CrawlProto {
       private int bitField0_;
 
       // optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;
-      private com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks urlWhitelistChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+      private com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks urlWhitelistChecks_ = com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder> urlWhitelistChecksBuilder_;
+          com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecksOrBuilder> urlWhitelistChecksBuilder_;
       /**
        * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
        */
@@ -6121,7 +6121,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks() {
+      public com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks getUrlWhitelistChecks() {
         if (urlWhitelistChecksBuilder_ == null) {
           return urlWhitelistChecks_;
         } else {
@@ -6131,7 +6131,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
        */
-      public Builder setUrlWhitelistChecks(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks value) {
+      public Builder setUrlWhitelistChecks(com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks value) {
         if (urlWhitelistChecksBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6148,7 +6148,7 @@ public final class CrawlProto {
        * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
        */
       public Builder setUrlWhitelistChecks(
-          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder builderForValue) {
+          com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.Builder builderForValue) {
         if (urlWhitelistChecksBuilder_ == null) {
           urlWhitelistChecks_ = builderForValue.build();
           onChanged();
@@ -6161,12 +6161,12 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
        */
-      public Builder mergeUrlWhitelistChecks(com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks value) {
+      public Builder mergeUrlWhitelistChecks(com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks value) {
         if (urlWhitelistChecksBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              urlWhitelistChecks_ != com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance()) {
+              urlWhitelistChecks_ != com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance()) {
             urlWhitelistChecks_ =
-              com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.newBuilder(urlWhitelistChecks_).mergeFrom(value).buildPartial();
+              com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.newBuilder(urlWhitelistChecks_).mergeFrom(value).buildPartial();
           } else {
             urlWhitelistChecks_ = value;
           }
@@ -6182,7 +6182,7 @@ public final class CrawlProto {
        */
       public Builder clearUrlWhitelistChecks() {
         if (urlWhitelistChecksBuilder_ == null) {
-          urlWhitelistChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
+          urlWhitelistChecks_ = com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.getDefaultInstance();
           onChanged();
         } else {
           urlWhitelistChecksBuilder_.clear();
@@ -6193,7 +6193,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder getUrlWhitelistChecksBuilder() {
+      public com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.Builder getUrlWhitelistChecksBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getUrlWhitelistChecksFieldBuilder().getBuilder();
@@ -6201,7 +6201,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder() {
+      public com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecksOrBuilder getUrlWhitelistChecksOrBuilder() {
         if (urlWhitelistChecksBuilder_ != null) {
           return urlWhitelistChecksBuilder_.getMessageOrBuilder();
         } else {
@@ -6212,11 +6212,11 @@ public final class CrawlProto {
        * <code>optional .TestInstructions.UrlWhitelistChecks url_whitelist_checks = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder> 
+          com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecksOrBuilder> 
           getUrlWhitelistChecksFieldBuilder() {
         if (urlWhitelistChecksBuilder_ == null) {
           urlWhitelistChecksBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.UrlWhitelistChecksOrBuilder>(
+              com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks, com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecks.Builder, com.janknspank.proto.SiteProto.TestInstructions.UrlWhitelistChecksOrBuilder>(
                   urlWhitelistChecks_,
                   getParentForChildren(),
                   isClean());
@@ -6226,9 +6226,9 @@ public final class CrawlProto {
       }
 
       // optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;
-      private com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks articleUrlDetectorChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
+      private com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks articleUrlDetectorChecks_ = com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks, com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder> articleUrlDetectorChecksBuilder_;
+          com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks, com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.Builder, com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder> articleUrlDetectorChecksBuilder_;
       /**
        * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
        */
@@ -6238,7 +6238,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks getArticleUrlDetectorChecks() {
+      public com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks getArticleUrlDetectorChecks() {
         if (articleUrlDetectorChecksBuilder_ == null) {
           return articleUrlDetectorChecks_;
         } else {
@@ -6248,7 +6248,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
        */
-      public Builder setArticleUrlDetectorChecks(com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks value) {
+      public Builder setArticleUrlDetectorChecks(com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks value) {
         if (articleUrlDetectorChecksBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6265,7 +6265,7 @@ public final class CrawlProto {
        * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
        */
       public Builder setArticleUrlDetectorChecks(
-          com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.Builder builderForValue) {
+          com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.Builder builderForValue) {
         if (articleUrlDetectorChecksBuilder_ == null) {
           articleUrlDetectorChecks_ = builderForValue.build();
           onChanged();
@@ -6278,12 +6278,12 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
        */
-      public Builder mergeArticleUrlDetectorChecks(com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks value) {
+      public Builder mergeArticleUrlDetectorChecks(com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks value) {
         if (articleUrlDetectorChecksBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              articleUrlDetectorChecks_ != com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance()) {
+              articleUrlDetectorChecks_ != com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance()) {
             articleUrlDetectorChecks_ =
-              com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.newBuilder(articleUrlDetectorChecks_).mergeFrom(value).buildPartial();
+              com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.newBuilder(articleUrlDetectorChecks_).mergeFrom(value).buildPartial();
           } else {
             articleUrlDetectorChecks_ = value;
           }
@@ -6299,7 +6299,7 @@ public final class CrawlProto {
        */
       public Builder clearArticleUrlDetectorChecks() {
         if (articleUrlDetectorChecksBuilder_ == null) {
-          articleUrlDetectorChecks_ = com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
+          articleUrlDetectorChecks_ = com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.getDefaultInstance();
           onChanged();
         } else {
           articleUrlDetectorChecksBuilder_.clear();
@@ -6310,7 +6310,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.Builder getArticleUrlDetectorChecksBuilder() {
+      public com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.Builder getArticleUrlDetectorChecksBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getArticleUrlDetectorChecksFieldBuilder().getBuilder();
@@ -6318,7 +6318,7 @@ public final class CrawlProto {
       /**
        * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
        */
-      public com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder getArticleUrlDetectorChecksOrBuilder() {
+      public com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder getArticleUrlDetectorChecksOrBuilder() {
         if (articleUrlDetectorChecksBuilder_ != null) {
           return articleUrlDetectorChecksBuilder_.getMessageOrBuilder();
         } else {
@@ -6329,11 +6329,11 @@ public final class CrawlProto {
        * <code>optional .TestInstructions.ArticleUrlDetectorChecks article_url_detector_checks = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks, com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder> 
+          com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks, com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.Builder, com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder> 
           getArticleUrlDetectorChecksFieldBuilder() {
         if (articleUrlDetectorChecksBuilder_ == null) {
           articleUrlDetectorChecksBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks, com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks.Builder, com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder>(
+              com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks, com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks.Builder, com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecksOrBuilder>(
                   articleUrlDetectorChecks_,
                   getParentForChildren(),
                   isClean());
@@ -6411,17 +6411,17 @@ public final class CrawlProto {
       "ARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAINS\020\004" +
       "\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006\032L\n\021Art" +
       "icleUrlPattern\022\035\n\npath_regex\030\001 \001(\tB\t\210\246\035\001" +
-      "\230\246\035\377\005\022\030\n\tsubdomain\030\002 \001(\tB\005\230\246\035\377\005\"\322\002\n\020Test",
-      "Instructions\022H\n\024url_whitelist_checks\030\001 \001" +
+      "\230\246\035\377\005\022\030\n\tsubdomain\030\002 \001(\tB\005\230\246\035\377\005\"\314\002\n\020Test",
+      "Instructions\022B\n\024url_whitelist_checks\030\001 \001" +
       "(\0132$.TestInstructions.UrlWhitelistChecks" +
-      "B\004\210\246\035\001\022U\n\033article_url_detector_checks\030\002 " +
-      "\001(\0132*.TestInstructions.ArticleUrlDetecto" +
-      "rChecksB\004\210\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010g" +
-      "ood_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230" +
-      "\246\035\377\005\032V\n\030ArticleUrlDetectorChecks\022\032\n\013arti" +
-      "cle_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030" +
-      "\002 \003(\tB\005\230\246\035\377\005B\"\n\024com.janknspank.protoB\nCr" +
-      "awlProto"
+      "\022U\n\033article_url_detector_checks\030\002 \001(\0132*." +
+      "TestInstructions.ArticleUrlDetectorCheck" +
+      "sB\004\210\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010good_ur" +
+      "l\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005\032V" +
+      "\n\030ArticleUrlDetectorChecks\022\032\n\013article_ur" +
+      "l\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030\002 \003(\tB" +
+      "\005\230\246\035\377\005B!\n\024com.janknspank.protoB\tSiteProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6482,7 +6482,6 @@ public final class CrawlProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

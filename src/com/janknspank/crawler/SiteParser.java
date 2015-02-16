@@ -17,7 +17,7 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.proto.CrawlProto.ContentSite;
+import com.janknspank.proto.SiteProto.SiteManifest;
 
 public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   private static LoadingCache<DocumentNode, List<Node>> CACHE =
@@ -36,11 +36,11 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
    */
   private static List<String> getDomAddressesForUrl(String url) {
     try {
-      ContentSite contentSite = UrlWhitelist.getContentSiteForUrl(new URL(url));
-      if (contentSite == null) {
+      SiteManifest site = SiteManifests.getForUrl(new URL(url));
+      if (site == null) {
         throw new IllegalStateException("No content site definition found for URL: " + url);
       }
-      return contentSite.getParagraphSelectorList();
+      return site.getParagraphSelectorList();
     } catch (MalformedURLException e) {
       throw new IllegalStateException("Bad URL: " + url);
     }

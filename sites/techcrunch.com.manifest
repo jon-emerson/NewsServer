@@ -1,0 +1,52 @@
+root_domain: "techcrunch.com"
+start_url: "http://www.techcrunch.com"
+subdomain_blacklist: "disrupt.techcrunch.com"
+subdomain_blacklist: "jp.techcrunch.com"
+path_blacklist {
+  needle: "/event-type/"
+}
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/gallery/"
+}
+path_blacklist {
+  needle: "/rss/"
+}
+paragraph_selector: ".article-entry > p"
+paragraph_selector: ".article-entry > h2"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://techcrunch.com/2006/10/31/2080/"
+    article_url: "http://techcrunch.com/2013/04/23/google-buys-wavii-for-north-of-30-million/"
+    article_url: "http://techcrunch.com/2014/01/07/yahoo-launches-news-digest-its-first-app-based-on-summly/"
+    article_url: "http://techcrunch.com/2014/03/25/best-y-combinator-demo-day-startups/"
+    article_url: "http://techcrunch.com/2014/05/28/apple-buys-beats-electronics-for-3b/"
+    article_url: "http://techcrunch.com/2014/09/09/announces-mobile-payments-solution-called-apple-pay/"
+    article_url: "http://techcrunch.com/2014/09/23/gobble-launch/"
+    article_url: "http://techcrunch.com/2014/12/30/what-the-hell-is-a-startup-anyway/"
+    article_url: "http://techcrunch.com/2015/01/20/microsoft-acquires-text-analysis-service-equivio/"
+    article_url: "http://techcrunch.com/2015/01/26/becoming-an-engineering-manager/"
+    article_url: "http://techcrunch.com/2015/01/26/favados-new-app-helps-you-find-the-best-grocery-deals/"
+    article_url: "http://techcrunch.com/2015/01/27/techstars-ventures-raises-150-million-as-it-expands-into-series-a-investments/"
+    article_url: "http://techcrunch.com/2015/01/29/google-glass-patrick-pichette/"
+    article_url: "http://techcrunch.com/2015/01/29/google-offering-24-hours-of-inbox-invites-on-the-day-of-outlooks-ios-launch/"
+    article_url: "http://techcrunch.com/2015/01/29/google-q4-2014-earnings/"
+    article_url: "http://techcrunch.com/2015/01/29/secret-co-founder-chrys-bader-wechseler-steps-down-because-its-not-about-design-anymore/"
+    article_url: "http://techcrunch.com/2015/01/29/teslas-p85d-will-get-even-faster-thanks-to-a-software-update/"
+    article_url: "http://techcrunch.com/2015/01/30/canon-5ds-leaked-specs-reveal-a-high-megapixel-dslr-geared-for-color-accuracy/"
+    article_url: "http://techcrunch.com/2015/01/30/gillmor-gang-live-01-30-15/"
+    article_url: "http://techcrunch.com/2015/01/30/uber-privacy-review/"
+    article_url: "http://techcrunch.com/2015/01/30/will-uber-convertibles-run-out-of-gas/"
+    article_url: "http://www.techcrunch.com/2008/11/03/old-friends-wink-and-reunioncom-reconnect-merge/"
+    non_article_url: "http://techcrunch.com/author/alexia-tsotsis/"
+    non_article_url: "http://techcrunch.com/entertainment-2/"
+    non_article_url: "http://techcrunch.com/topic/company/chatroulette/popular/"
+    non_article_url: "http://techcrunch.com/topic/product/android/"
+    non_article_url: "http://techcrunch.com/topic/product/apple-ios-8/"
+  }
+}

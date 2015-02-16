@@ -1,0 +1,67 @@
+root_domain: "fortune.com"
+start_url: "http://fortune.com"
+subdomain_blacklist: "backissues.fortune.com"
+subdomain_blacklist: "realestate.fortune.com"
+subdomain_blacklist: "subscription.fortune.com"
+path_blacklist {
+  needle: "/40-under-40/"
+}
+path_blacklist {
+  needle: "/application/"
+}
+path_blacklist {
+  needle: "/best-companies/"
+}
+path_blacklist {
+  needle: "/company/"
+}
+path_blacklist {
+  needle: "/etf/"
+}
+path_blacklist {
+  needle: "/feedback/"
+}
+path_blacklist {
+  needle: "/fortune500/"
+}
+path_blacklist {
+  needle: "/global500/"
+}
+path_blacklist {
+  needle: "/heroes-of-the-500/"
+}
+path_blacklist {
+  needle: "/most-powerful-women/"
+}
+path_blacklist {
+  needle: "/mpw/"
+}
+path_blacklist {
+  needle: "/rankings/"
+}
+path_blacklist {
+  needle: "/video/"
+}
+path_blacklist {
+  needle: "/worlds-most-admired-companies/"
+}
+paragraph_selector: ".article-body-text > p"
+paragraph_selector: ".entry-content p" # To work around Javascript-rendered pages.
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/(.*\\-.*|[0-9]+)\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://fortune.com/2015/02/13/here-are-3-people-profiting-from-the-business-of-love/"
+    article_url: "http://fortune.com/2015/02/14/tapped-in-the-sweet-taste-of-sour-beers-makes-a-comeback/"
+    article_url: "http://fortune.com/2015/01/06/ces-2015-the-mainstreaming-of-4k-tvs/"
+    article_url: "http://fortune.com/2015/02/09/shark-tank-the-lost-pitches/"
+    article_url: "http://fortune.com/2014/11/06/starbucks-brings-back-eggnog-latte-after-outcry/"
+    article_url: "http://fortune.com/2014/11/12/864039/"
+    non_article_url: "http://fortune.com/author/chris-morris/"
+    non_article_url: "http://fortune.com/autos/"
+    non_article_url: "http://fortune.com/sitemap/1933/"
+    non_article_url: "http://fortune.com/tag/fortune-live/"
+    non_article_url: "http://fortune.com/tag/starbucks/"
+  }
+}

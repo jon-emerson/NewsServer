@@ -1,0 +1,60 @@
+root_domain: "telegraph.co.uk"
+start_url: "http://www.telegraph.co.uk"
+subdomain_blacklist: "advertising.telegraph.co.uk"
+subdomain_blacklist: "announcements.telegraph.co.uk"
+subdomain_blacklist: "dating.telegraph.co.uk"
+subdomain_blacklist: "fantasyfootball.telegraph.co.uk"
+subdomain_blacklist: "gardenshop.telegraph.co.uk"
+subdomain_blacklist: "my.telegraph.co.uk"
+subdomain_blacklist: "puzzles.telegraph.co.uk"
+subdomain_blacklist: "shares.telegraph.co.uk"
+subdomain_blacklist: "shop.telegraph.co.uk"
+subdomain_blacklist: "travelshop.telegraph.co.uk"
+path_blacklist {
+  needle: "/apps/"
+}
+path_blacklist {
+  needle: "/cars/"
+}
+path_blacklist {
+  needle: "/culture/culturevideo/"
+}
+path_blacklist {
+  needle: "/finance/investor/"
+}
+path_blacklist {
+  needle: "/financialservices/"
+}
+path_blacklist {
+  needle: "/promotions/"
+}
+path_blacklist {
+  needle: "/subscriptions/"
+}
+path_blacklist {
+  needle: "/sponsored/"
+}
+path_blacklist {
+  needle: "Weather-forecast.html"
+  location: ENDS_WITH
+}
+paragraph_selector: "article > p"
+paragraph_selector: "article > div > p"
+article_url_pattern {
+  path_regex: "\\/1[0-9]{7}\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.telegraph.co.uk/finance/comment/11413173/Greek-drama-puts-eurozone-at-risk.html"
+    article_url: "http://www.telegraph.co.uk/finance/property/pictures/11355816/Beautiful-homes-in-Britains-national-parks-starting-at-300000.html"
+    article_url: "http://www.telegraph.co.uk/finance/businessclub/technology/11410369/Professional-gamers-could-earn-as-much-as-Premier-League-stars.html"
+    article_url: "http://www.telegraph.co.uk/news/religion/11412153/Locating-Lucifer-has-become-the-devil-of-a-job.html"
+    article_url: "http://www.telegraph.co.uk/women/womens-life/11393482/AntiSelfieDay-Rediscover-your-personality-this-Valentines-Day.html"
+    article_url: "http://www.telegraph.co.uk/culture/film/filmreviews/11404791/Fifty-Shades-of-Grey-review.html"
+    non_article_url: "http://www.telegraph.co.uk/archive/2015-2-15.html"
+    non_article_url: "http://www.telegraph.co.uk/culture/tvandradio/broadchurch/"
+    non_article_url: "http://www.telegraph.co.uk/journalists/charles-spencer/"
+    non_article_url: "http://www.telegraph.co.uk/technology/video-games/"
+    non_article_url: "http://www.telegraph.co.uk/topics/about-us/style-book/"
+  }
+}

@@ -7,26 +7,18 @@ import java.net.URL;
 
 import org.junit.Test;
 
-import com.janknspank.proto.CrawlProto.ContentSite;
-import com.janknspank.proto.CrawlProto.TestInstructions.ArticleUrlDetectorChecks;
+import com.janknspank.proto.SiteProto.SiteManifest;
+import com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks;
 
 public class ArticleUrlDetectorTest {
   @Test
   public void test() throws Exception {
-    for (ContentSite site : UrlWhitelist.CRAWL_INSTRUCTIONS.getContentSiteList()) {
-      assertTrue("Every ContentSite must have test instructions" + site.getRootDomain()
-          + " does not.", site.hasTestInstructions());
-      assertTrue(
-          "Every ContentSite must have test definition checks for Article vs. non-Article URLs",
-          site.getTestInstructions().hasArticleUrlDetectorChecks());
-      assertTrue("Every ContentSite must have at least 5 Article URLs defined in "
-          + "test_instructions.  " + site.getRootDomain() + " does not.",
-          site.getTestInstructions().getArticleUrlDetectorChecks().getArticleUrlCount() >= 5);
-      assertTrue("Every ContentSite must have at least 5 non-Article URLs defined in "
-          + "test_instructions" + site.getRootDomain() + " does not.",
-          site.getTestInstructions().getArticleUrlDetectorChecks().getNonArticleUrlCount() >= 5);
-
+    for (SiteManifest site : SiteManifests.getList()) {
       ArticleUrlDetectorChecks checks = site.getTestInstructions().getArticleUrlDetectorChecks();
+      for (String startUrl : site.getStartUrlList()) {
+        assertFalse("Start URLs cannot be articles", ArticleUrlDetector.isArticle(startUrl));
+      }
+
       for (String articleUrl : checks.getArticleUrlList()) {
         new URL(articleUrl);
         assertFalse(articleUrl.isEmpty());

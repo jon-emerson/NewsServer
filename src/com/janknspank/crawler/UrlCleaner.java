@@ -12,7 +12,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.janknspank.proto.CrawlProto.ContentSite;
+import com.janknspank.proto.SiteProto.SiteManifest;
 
 /**
  * Utility class for cleaning up news site URLs, so they can be reduced to their
@@ -28,10 +28,10 @@ public class UrlCleaner {
       };
 
   private static Set<String> getWhitelistedQueryParameters(URL url) {
-    ContentSite contentSite = UrlWhitelist.getContentSiteForUrl(url);
-    return (contentSite == null)
+    SiteManifest site = SiteManifests.getForUrl(url);
+    return (site == null)
         ? ImmutableSet.<String>of()
-        : ImmutableSet.copyOf(contentSite.getWhitelistedQueryParameterList());
+        : ImmutableSet.copyOf(site.getWhitelistedQueryParameterList());
   }
 
   private static List<NameValuePair> getCleanedParameters(URL url) {
