@@ -47,6 +47,8 @@ path_blacklist {
 }
 paragraph_selector: ".article-body-text > p"
 paragraph_selector: ".entry-content p" # To work around Javascript-rendered pages.
+paragraph_selector: ".listicle-intro p"
+paragraph_selector: ".listicle-body p"
 article_url_pattern {
   path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/(.*\\-.*|[0-9]+)\\/$"
 }
