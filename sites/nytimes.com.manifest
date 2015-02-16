@@ -42,6 +42,7 @@ path_blacklist {
 }
 paragraph_selector: ".articleBody > p"
 paragraph_selector: "article > p"
+paragraph_selector: ".story-body > p"
 paragraph_selector: "article > div > p"
 paragraph_selector: "nyt_text > p"
 paragraph_selector: "p.story-body-text"

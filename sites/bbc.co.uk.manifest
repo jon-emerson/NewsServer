@@ -32,6 +32,7 @@ path_blacklist {
   needle: "/webwise/"
 }
 paragraph_selector: ".story-body > p"
+paragraph_selector: ".story-body__inner > p"
 paragraph_selector: ".map-body > p"
 article_url_pattern {
   path_regex: "-[0-9]{5,10}$"

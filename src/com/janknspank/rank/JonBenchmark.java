@@ -49,7 +49,6 @@ public class JonBenchmark {
       "http://www.nytimes.com/aponline/2014/04/11/us/ap-us-salesforce-san-francisco-lease.html",
       "http://www.fastcompany.com/3041435/revolutionizing-work/startups-revolutionizing-work",
       "http://arstechnica.com/gadgets/2015/01/microsoft-to-invest-in-cyanogen-hopes-to-take-android-away-from-google/",
-      "http://startupworkout.com/inbox-hero-how-to-write-hypnotizing-emails-that-convert-like-crazy/1/",
       "http://startupworkout.com/motivation-121-epic-business-quotes-to-inspire-your-success/",
       "http://www.slate.com/articles/health_and_science/science/2014/06/facebook_unethical_experiment_it_made_news_feeds_happier_or_sadder_to_manipulate.html",
       "http://recode.net/2014/04/24/exclusive-google-head-vic-gundotra-leaving-company/",

@@ -30,6 +30,10 @@ path_blacklist {
   location: CONTAINS
 }
 path_blacklist {
+  needle: "/ups-and-downs-"
+  location: CONTAINS
+}
+path_blacklist {
   needle: "/wp-dyn"
   location: ENDS_WITH
 }

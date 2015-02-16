@@ -11,6 +11,9 @@ path_blacklist {
   needle: "/radio/"
 }
 path_blacklist {
+  needle: "/radionational/"
+}
+path_blacklist {
   needle: "\\/sport\\/.*\\/scoreboard\\/"
   location: REGEX_FIND
 }

@@ -11,6 +11,8 @@ path_blacklist {
   needle: "/pictures/"
 }
 paragraph_selector: ".news-story p"
+paragraph_selector: "#article-entry h2"
+paragraph_selector: "#article-entry p"
 article_url_pattern {
   path_regex: "\\/news\\/(?!cbs-news-)[^\\/]+\\/$"
 }
