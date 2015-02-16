@@ -116,10 +116,7 @@ public class InputValuesGenerator {
   
   public static double relevanceToAcquisitions(User user, Article article) {
     String lowerCaseTitle = article.getTitle().toLowerCase();
-    String lowerCaseBody = "";
-    for (String paragraph : article.getParagraphList()) {
-      lowerCaseBody += paragraph.toLowerCase();
-    }
+    String lowerCaseBody = getLowerCaseBody(article);
 
     if (lowerCaseTitle.contains("acquires")) {
       return 1.0;
@@ -139,10 +136,7 @@ public class InputValuesGenerator {
   
   public static double relevanceToLaunches(User user, Article article) {
     String lowerCaseTitle = article.getTitle().toLowerCase();
-    String lowerCaseBody = "";
-    for (String paragraph : article.getParagraphList()) {
-      lowerCaseBody += paragraph.toLowerCase();
-    }
+    String lowerCaseBody = getLowerCaseBody(article);
 
     if (lowerCaseTitle.contains("launches")) {
       return 1.0;
@@ -162,10 +156,7 @@ public class InputValuesGenerator {
   
   public static double relevanceToFundraising(User user, Article article) {
     String lowerCaseTitle = article.getTitle().toLowerCase();
-    String lowerCaseBody = "";
-    for (String paragraph : article.getParagraphList()) {
-      lowerCaseBody += paragraph.toLowerCase();
-    }
+    String lowerCaseBody = getLowerCaseBody(article);
 
     if (lowerCaseTitle.contains("raises") || lowerCaseTitle.contains("series a")
         || lowerCaseTitle.contains("series b") || lowerCaseTitle.contains("series c")
@@ -190,6 +181,14 @@ public class InputValuesGenerator {
       }
     }
     return 0;
+  }
+  
+  private static String getLowerCaseBody(Article article) {
+    StringBuilder bodyBuilder = new StringBuilder();
+    for (String paragraph : article.getParagraphList()) {
+      bodyBuilder.append(paragraph.toLowerCase());
+    }
+    return bodyBuilder.toString();
   }
 
   // Normalize any value to [0,1]
