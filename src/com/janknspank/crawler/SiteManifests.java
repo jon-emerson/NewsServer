@@ -157,6 +157,10 @@ public class SiteManifests {
     }
   }
 
+  /**
+   * Builds a Map of SiteManifest object definitions, keyed by root URL, from
+   * the .manifest files located in /sites/.
+   */
   private static synchronized Map<String, SiteManifest> getSiteManifestMap() {
     if (CONTENT_SITE_MAP == null) {
       CONTENT_SITE_MAP = Maps.newHashMap();
@@ -168,7 +172,13 @@ public class SiteManifests {
         Reader reader = null;
         try {
           reader = new FileReader(manifestFile);
-          TextFormat.merge(reader, contentSiteBuilder);
+          try {
+            TextFormat.merge(reader, contentSiteBuilder);
+          } catch (TextFormat.ParseException e) {
+            throw new SiteManifestException(
+                "Error in site manifest " + manifestFile.getAbsolutePath() + ": " + e.getMessage(),
+                e);
+          }
           SiteManifest contentSite = contentSiteBuilder.build();
           validateSiteManifest(manifestFile, contentSite);
           CONTENT_SITE_MAP.put(contentSite.getRootDomain(), contentSite);

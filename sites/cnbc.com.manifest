@@ -14,12 +14,9 @@ paragraph_selector: "#article_body p"
 article_url_pattern {
   path_regex: "^\\/id\\/[0-9]{9,11}(\\/[^\\/]*)?$"
 }
-# Top.
-rss_url: "http://www.cnbc.com/id/100003114/device/rss/rss.html"
-# Business.
-rss_url: "http://www.cnbc.com/id/10001147/device/rss/rss.html"
-# Tech.
-rss_url: "http://www.cnbc.com/id/19854910/device/rss/rss.html"
+rss_url: "http://www.cnbc.com/id/100003114/device/rss/rss.html" # Top.
+rss_url: "http://www.cnbc.com/id/10001147/device/rss/rss.html" # Business.
+rss_url: "http://www.cnbc.com/id/19854910/device/rss/rss.html" # Tech.
 test_instructions {
   article_url_detector_checks {
     article_url: "http://www.cnbc.com/id/102301617"
@@ -30,7 +27,9 @@ test_instructions {
     non_article_url: "http://www.cnbc.com/live-tv/schedule"
     non_article_url: "http://www.cnbc.com/account"
     non_article_url: "http://www.cnbc.com/halftime"
+    # This is a summary page.  It's also 8 digits, while articles have 9.
     non_article_url: "http://www.cnbc.com/id/10000066"
+    # This is a graph of pre-market stock index charts.  Also, only 8 digits.
     non_article_url: "http://www.cnbc.com/id/17689937"
   }
 }

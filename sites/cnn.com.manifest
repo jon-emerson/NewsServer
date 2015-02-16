@@ -22,9 +22,8 @@ path_blacklist {
 path_blacklist {
   needle: "/calculator/"
 }
-# E.g. /comment-page-9/
 path_blacklist {
-  needle: "/comment-page-"
+  needle: "/comment-page-" # E.g. /comment-page-9/
   location: CONTAINS
 }
 path_blacklist {
