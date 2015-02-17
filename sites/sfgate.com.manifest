@@ -12,7 +12,6 @@ path_blacklist {
 paragraph_selector: ".article-body p"
 paragraph_selector: ".entry p"
 paragraph_selector: ".post-contents p"
-paragraph_selector: "#article-section .entry div"
 article_url_pattern {
   path_regex: "\\/article.*(\\-|\\/)[0-9]{7,10}\\.php$"
 }
