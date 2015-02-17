@@ -42,7 +42,7 @@ public class TopList<T, U extends Number> implements Iterable<T> {
   @SuppressWarnings("unchecked")
   public synchronized void add(T key, U value) {
     if (values.containsKey(key)) {
-      values.put(key,  value);
+      values.put(key, value);
       return;
     }
 

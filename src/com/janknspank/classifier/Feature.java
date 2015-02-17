@@ -46,7 +46,11 @@ public abstract class Feature {
       // as we support more features!!  That's as designed, this is where that
       // logic is supposed to go!  But for now, we can assume the only things
       // around are vector features.
-      return new VectorFeature(featureId);
+      if (featureId.getFeatureType() == FeatureType.MANUAL_HEURISTIC) {
+        return new ManualHeuristicFeature(featureId);
+      } else {
+        return new VectorFeature(featureId);
+      }
     }
   }
 

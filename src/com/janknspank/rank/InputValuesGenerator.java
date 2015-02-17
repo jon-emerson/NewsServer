@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
+import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
@@ -113,82 +114,31 @@ public class InputValuesGenerator {
 //    }
     return 0;
   }
-  
+
   public static double relevanceToAcquisitions(User user, Article article) {
-    String lowerCaseTitle = article.getTitle().toLowerCase();
-    String lowerCaseBody = getLowerCaseBody(article);
-
-    if (lowerCaseTitle.contains("acquires")) {
-      return 1.0;
-    } else if (lowerCaseTitle.contains("buys")) {
-      return 0.9;
-    } else if (lowerCaseBody.contains("acquires")) {
-      return 0.8;
-    } else if (lowerCaseBody.contains("acquired")) {
-      return 0.6;
-    } else if (lowerCaseTitle.contains("acquisition")) {
-      return 0.5;
-    } else if (lowerCaseBody.contains("acquisition")) {
-      return 0.2;
-    }
-    return 0;
+    ArticleFeature acquisitionFeature =
+        ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_ACQUISITIONS);
+    return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
   }
-  
+
   public static double relevanceToLaunches(User user, Article article) {
-    String lowerCaseTitle = article.getTitle().toLowerCase();
-    String lowerCaseBody = getLowerCaseBody(article);
-
-    if (lowerCaseTitle.contains("launches")) {
-      return 1.0;
-    } else if (lowerCaseTitle.contains("launched")) {
-      return 0.9;
-    } else if (lowerCaseBody.contains("launches")) {
-      return 0.8;
-    } else if (lowerCaseBody.contains("launched")) {
-      return 0.6;
-    } else if (lowerCaseTitle.contains("releases")) {
-      return 0.9;
-    } else if (lowerCaseBody.contains("releases")) {
-      return 0.4;
-    }
-    return 0;
+    ArticleFeature acquisitionFeature =
+        ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_LAUNCHES);
+    return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
   }
-  
-  public static double relevanceToFundraising(User user, Article article) {
-    String lowerCaseTitle = article.getTitle().toLowerCase();
-    String lowerCaseBody = getLowerCaseBody(article);
 
-    if (lowerCaseTitle.contains("raises") || lowerCaseTitle.contains("series a")
-        || lowerCaseTitle.contains("series b") || lowerCaseTitle.contains("series c")
-        || lowerCaseTitle.contains("angel round") || lowerCaseTitle.contains("series a")
-        || lowerCaseTitle.contains("valuation")) {
-      return 1.0;
-    } else if (lowerCaseBody.contains("raises") || lowerCaseBody.contains("series a")
-        || lowerCaseBody.contains("series b") || lowerCaseBody.contains("series c")
-        || lowerCaseBody.contains("angel round") || lowerCaseBody.contains("series a")) {
-      return 0.9;
-    } else if (lowerCaseBody.contains("investors")) {
-      return 0.8;
-    }
-    return 0;
+  public static double relevanceToFundraising(User user, Article article) {
+    ArticleFeature acquisitionFeature =
+        ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_FUNDRAISING);
+    return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
   }
 
   public static double getSimilarityToIndustry(Article article, IndustryCode industryCode) {
-    for (ArticleFeature feature : article.getFeatureList()) {
-      if (feature.getFeatureId() == industryCode.getFeatureId().getId()) {
-        // Only value relevance greater than 66.7%.
-        return Math.max(0, feature.getSimilarity() * 3 - 2);
-      }
-    }
-    return 0;
-  }
-  
-  private static String getLowerCaseBody(Article article) {
-    StringBuilder bodyBuilder = new StringBuilder();
-    for (String paragraph : article.getParagraphList()) {
-      bodyBuilder.append(paragraph.toLowerCase());
-    }
-    return bodyBuilder.toString();
+    ArticleFeature industryFeature =
+        ArticleFeatures.getFeature(article, industryCode.getFeatureId());
+    // Only value relevance greater than 66.7%.
+    return (industryFeature == null) ? 0 :
+        Math.max(0, industryFeature.getSimilarity() * 3 - 2);
   }
 
   // Normalize any value to [0,1]

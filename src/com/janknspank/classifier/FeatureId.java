@@ -1,5 +1,6 @@
 package com.janknspank.classifier;
 
+
 /**
  * A list of all features we support or plan to support.
  * @see Feature
@@ -164,7 +165,13 @@ public enum FeatureId {
   GOVERNMENT_RELATIONS(10148, FeatureType.INDUSTRY, "Government Relations"),
   STARTUP_TECH(20000, FeatureType.SERVES_INTENT, "Related to tech startups"),
   STARTUP_TRADITIONAL(20001, FeatureType.SERVES_INTENT,
-      "Related to traditional brick and mortar startups");
+      "Related to traditional brick and mortar startups"),
+  MANUAL_HEURISTIC_ACQUISITIONS(30000, FeatureType.MANUAL_HEURISTIC,
+      "Hard-coded search term checks for whether an article is about an acquisition"),
+  MANUAL_HEURISTIC_LAUNCHES(30001, FeatureType.MANUAL_HEURISTIC,
+      "Hard-coded search term checks for whether an article is about a product launch"),
+  MANUAL_HEURISTIC_FUNDRAISING(30002, FeatureType.MANUAL_HEURISTIC,
+      "Hard-coded search term checks for whether an article is about a funding round");
 
   private final int id;
   private final FeatureType featureType;
