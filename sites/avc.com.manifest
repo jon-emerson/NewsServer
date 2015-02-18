@@ -1,0 +1,36 @@
+root_domain: "avc.com"
+start_url: "http://www.avc.com"
+path_blacklist {
+  needle: "/about/"
+}
+path_blacklist {
+  needle: "/subscribe/"
+}
+path_blacklist {
+  needle: "/twitter/"
+}
+path_blacklist {
+  needle: "/category/my-music/"
+}
+path_blacklist {
+  needle: "/category/food-and-drink/"
+}
+paragraph_selector: ".post-inside p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$"
+}
+rss_url: "http://feeds.feedburner.com/avc"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://avc.com/2015/02/basketball-startups-and-life/"
+    article_url: "http://avc.com/2015/02/can-mobile-banking-improve-the-lives-of-the-poor/"
+    article_url: "http://avc.com/2015/02/video-of-the-week-the-obama-recode-interview/"
+    article_url: "http://avc.com/2015/02/the-mobile-phone-addiction/"
+    article_url: "http://avc.com/2015/02/scripted-summer-internships/"
+    non_article_url: "http://avc.com/archive/"
+    non_article_url: "http://avc.com/about/"
+    non_article_url: "http://avc.com/subscribe/"
+    non_article_url: "http://avc.com/twitter/"
+    non_article_url: "http://avc.com/category/top-10-records-2007/"
+  }
+}

@@ -1,0 +1,41 @@
+root_domain: "a16z.com"
+start_url: "http://a16z.com/"
+path_blacklist {
+  needle: "/about"
+}
+path_blacklist {
+  needle: "/archive"
+}
+path_blacklist {
+  needle: "/portfolio"
+}
+path_blacklist {
+  needle: "/briefings"
+}
+path_blacklist {
+  needle: "/contact"
+}
+path_blacklist {
+  needle: "/team"
+}
+path_blacklist {
+  needle: "/lps"
+}
+paragraph_selector: ".article p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://a16z.com/2015/02/12/slack-1-year-later/"
+    article_url: "http://a16z.com/2015/01/27/a16z-podcast-vr-goes-pro/"
+    article_url: "http://a16z.com/2015/02/09/third-mobile-os-3/"
+    article_url: "http://a16z.com/2015/02/06/third-mobile-os-2/"
+    article_url: "http://a16z.com/2015/02/03/a16z-podcast-crisis-time-what-to-do-when-things-go-sideways/"
+    non_article_url: "http://a16z.com/tag/enterprise"
+    non_article_url: "http://a16z.com/tag/consumer"
+    non_article_url: "http://a16z.com/tag/workplace"
+    non_article_url: "http://a16z.com/tag/founders"
+    non_article_url: "http://a16z.com/tag/design"
+  }
+}

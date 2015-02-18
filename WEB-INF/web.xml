@@ -153,5 +153,32 @@
     <servlet-name>GetArticleServlet</servlet-name>
     <url-pattern>/getArticle</url-pattern>
   </servlet-mapping>
-  
+
+  <servlet>
+    <servlet-name>GetLatestDemoVersionServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetLatestDemoVersionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetLatestDemoVersionServlet</servlet-name>
+    <url-pattern>/getLatestDemoVersion</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DemoServlet</servlet-name>
+    <servlet-class>com.janknspank.server.DemoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DemoServlet</servlet-name>
+    <url-pattern>/demo</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>S3PipeServlet</servlet-name>
+    <servlet-class>com.janknspank.server.S3PipeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>S3PipeServlet</servlet-name>
+    <url-pattern>/s3Pipe/*</url-pattern>
+  </servlet-mapping>
+
 </web-app>
