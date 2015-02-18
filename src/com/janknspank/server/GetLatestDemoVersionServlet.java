@@ -40,10 +40,10 @@ public class GetLatestDemoVersionServlet extends StandardServlet {
     ClientConfiguration clientConfig = new ClientConfiguration();
     clientConfig.setProtocol(Protocol.HTTPS);
 
-    AmazonS3 conn = new AmazonS3Client(credentials, clientConfig);
-    conn.setEndpoint("https://s3-us-west-2.amazonaws.com/");
+    AmazonS3 amazonS3Client = new AmazonS3Client(credentials, clientConfig);
+    amazonS3Client.setEndpoint("https://s3-us-west-2.amazonaws.com/");
 
-    ObjectListing objects = conn.listObjects("spotter-demo");
+    ObjectListing objects = amazonS3Client.listObjects("spotter-demo");
     int[] latestVersionComponents = {0, 0, 0};
 
     do {
@@ -53,6 +53,7 @@ public class GetLatestDemoVersionServlet extends StandardServlet {
             StringUtils.fromDate(objectSummary.getLastModified()));
 
         // Pull out the major, minor, bug fix version numbers from the file
+        // Example file name: Spotter-v1.0.2.ipa
         String fileName = objectSummary.getKey();
         String[] fileNameParts = fileName.split("-v");
         if (fileNameParts.length > 0) {
@@ -85,7 +86,7 @@ public class GetLatestDemoVersionServlet extends StandardServlet {
           }
         }
       }
-      objects = conn.listNextBatchOfObjects(objects);
+      objects = amazonS3Client.listNextBatchOfObjects(objects);
     } while (objects.isTruncated());
 
     // Create response

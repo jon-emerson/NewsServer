@@ -46,21 +46,22 @@ public class S3PipeServlet extends HttpServlet {
     ClientConfiguration clientConfig = new ClientConfiguration();
     clientConfig.setProtocol(Protocol.HTTPS);
 
-    AmazonS3 conn = new AmazonS3Client(credentials, clientConfig);
-    conn.setEndpoint("https://s3-us-west-2.amazonaws.com/");
+    AmazonS3 amazonS3Client = new AmazonS3Client(credentials, clientConfig);
+    amazonS3Client.setEndpoint("https://s3-us-west-2.amazonaws.com/");
 
     InputStream in = null;
     OutputStream out = null;
-
+    S3Object object = null;
     try {
-      @SuppressWarnings("resource")
-      S3Object object = conn.getObject(
+      object = amazonS3Client.getObject(
           new GetObjectRequest(BUCKET_NAME, pathToPipe));
-
       in = object.getObjectContent();
       out = resp.getOutputStream();
       IOUtils.copy(in, out);
     } finally {
+      if (object != null) {
+        object.close();
+      }
       IOUtils.closeQuietly(in);
       IOUtils.closeQuietly(out);
     }
