@@ -56,6 +56,7 @@ public class S3PipeServlet extends HttpServlet {
       object = amazonS3Client.getObject(
           new GetObjectRequest(BUCKET_NAME, pathToPipe));
       in = object.getObjectContent();
+      resp.setContentType(object.getObjectMetadata().getContentType());
       out = resp.getOutputStream();
       IOUtils.copy(in, out);
     } finally {
