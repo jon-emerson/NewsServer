@@ -5,7 +5,8 @@ public enum FeatureType {
   SERVES_INTENT(1, "Serves a user intent"),
   INDUSTRY(2, "Industry classification"),
   SKILL(3, "Improves or is related to a skill"),
-  CHARACTER(4, "Some text characteristic");
+  CHARACTER(4, "Some text characteristic"),
+  MANUAL_HEURISTIC(5, "A heuristic about something we built manually");
 
   private final int type;
   private final String description;

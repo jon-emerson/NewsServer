@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.api.client.util.Lists;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -359,6 +360,23 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     return System.currentTimeMillis();
   }
 
+  /**
+   * Removes cruft from the ends of article titles.
+   */
+  @VisibleForTesting
+  static String cleanTitle(String title) {
+    for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLE_ENDS) {
+      Matcher matcher = pattern.matcher(title);
+      if (matcher.find()) {
+        title = title.substring(0, title.length() - matcher.group().length());
+      }
+    }
+    if (title.length() > MAX_TITLE_LENGTH) {
+      title = title.substring(0, MAX_TITLE_LENGTH - 1) + "\u2026";
+    }
+    return title;
+  }
+
   public static String getTitle(DocumentNode documentNode) throws RequiredFieldException {
     // For most sites, we can get it from the meta keywords.
     // For others, the meta keywords are crap, so we skip this step.
@@ -385,16 +403,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     }
 
     // Clean and truncate the title, if necessary.
-    for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLE_ENDS) {
-      Matcher matcher = pattern.matcher(title);
-      if (matcher.find()) {
-        title = title.substring(0, title.length() - matcher.group().length());
-      }
-    }
-    if (title.length() > MAX_TITLE_LENGTH) {
-      title = title.substring(0, MAX_TITLE_LENGTH - 1) + "\u2026";
-    }
-    return title;
+    return cleanTitle(title);
   }
 
   public static String getType(DocumentNode documentNode) {

@@ -28,6 +28,11 @@ public class ArticleCreatorTest {
       .setDiscoveryTime(500L)
       .build();
 
+  public void testCleanTitle() {
+    assertEquals("Basketball, Startups, and Life",
+        ArticleCreator.cleanTitle("Basketball, Startups, and Life – AVC"));
+  }
+
   /**
    * Verifies that we handle meta tags.
    */
