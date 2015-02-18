@@ -67,7 +67,7 @@ public final class NeuralNetworkScorer extends Scorer {
 
         // 11. Relevance to launches
         InputValuesGenerator.relevanceToLaunches(user, article),
-        
+
         // 11. Relevance to fundraising
         InputValuesGenerator.relevanceToFundraising(user, article)
     };

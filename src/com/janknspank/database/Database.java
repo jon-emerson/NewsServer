@@ -53,18 +53,22 @@ public class Database {
     }
   }
 
-  /**
-   * Returns the value of the passed {@code Message}'s primary key.
-   */
-  static String getPrimaryKey(Message message) throws DatabaseSchemaException {
+  static FieldDescriptor getPrimaryKeyField(Message message) throws DatabaseSchemaException {
     Map<FieldDescriptor, StorageMethod> fieldMap = with(message.getClass()).storageMethodMap;
     for (FieldDescriptor field : fieldMap.keySet()) {
       if (fieldMap.get(field) == StorageMethod.PRIMARY_KEY) {
-        return (String) message.getField(field);
+        return field;
       }
     }
     throw new IllegalStateException(
         "Class " + message.getClass().getName() + " has no primary key");
+  }
+
+  /**
+   * Returns the value of the passed {@code Message}'s primary key.
+   */
+  static String getPrimaryKey(Message message) throws DatabaseSchemaException {
+    return (String) message.getField(getPrimaryKeyField(message));
   }
 
   /**

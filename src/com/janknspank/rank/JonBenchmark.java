@@ -331,6 +331,12 @@ public class JonBenchmark {
     printHistogram(goodScores, badScores);
     grade(goodScores, badScores);
 
+    goodScores = getScores(jonUser, GOOD_URLS, JavascriptScorer.getInstance());
+    badScores = getScores(jonUser, BAD_URLS, JavascriptScorer.getInstance());
+    System.out.println("\nJAVASCRIPT SCORER:");
+    printHistogram(goodScores, badScores);
+    grade(goodScores, badScores);
+
     System.out.println("\n");
   }
 }
