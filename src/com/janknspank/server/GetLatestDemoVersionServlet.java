@@ -93,6 +93,7 @@ public class GetLatestDemoVersionServlet extends StandardServlet {
     
     response.put("version", latestVersionComponents[0] 
         + "." + latestVersionComponents[1] + "." + latestVersionComponents[2]);
+    response.put("downloadUrl", "https://www.spotternews.com/demo");
     return response;
   }
 }
