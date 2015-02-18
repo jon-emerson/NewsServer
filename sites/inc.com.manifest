@@ -1,0 +1,27 @@
+root_domain: "inc.com"
+start_url: "http://www.inc.com/sitemaps"
+paragraph_selector: ".articlecontent p"
+paragraph_selector: ".articlecontent h1"
+path_blacklist {
+  needle: "/inc5000apply/"
+}
+path_blacklist {
+  needle: "/magazine/"
+}
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+-[^\\/]+\\/[^\\/]+html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.inc.com/leigh-buchanan/remaining-relevant-in-an-age-of-disruption.html"
+    article_url: "http://www.inc.com/peter-economy/39-habits-of-extremely-happy-people.html"
+    article_url: "http://www.inc.com/adam-heitzman/the-new-age-of-seo-why-your-approach-must-change.html"
+    article_url: "http://www.inc.com/jeff-haden/7-habits-of-remarkably-successful-startup-entrepreneurs.html"
+    article_url: "http://www.inc.com/christina-desmarais/5-things-to-look-for-in-your-next-incredible-mentor.html"
+    non_article_url: "http://www.inc.com/inc5000apply/apply.html"
+    non_article_url: "http://www.inc.com/inc5000application"
+    non_article_url: "http://www.inc.com/inc5000apply/faqs.html"
+    non_article_url: "http://www.inc.com/events"
+    non_article_url: "http://www.inc.com/theinclife"
+  }
+}

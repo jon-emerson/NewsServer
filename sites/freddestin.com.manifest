@@ -1,0 +1,21 @@
+root_domain: "freddestin.com"
+start_url: "http://freddestin.com/"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+$"
+}
+rss_url: "http://feeds.feedburner.com/typepad/FredDestin"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://freddestin.com/2014/10/cytokinesis-atlas-venture.html"
+    article_url: "http://freddestin.com/2014/05/zoopla-focus-speed.html"
+    article_url: "http://freddestin.com/2014/04/the-boston-surprise.html"
+    article_url: "http://freddestin.com/2014/03/raising-series-hardest.html"
+    article_url: "http://freddestin.com/2014/03/rata-rights-ugly.html"
+    non_article_url: "http://freddestin.com/fred"
+    non_article_url: "http://freddestin.com/fractals"
+    non_article_url: "http://freddestin.com/2008/09"
+    non_article_url: "http://freddestin.com/2012"
+    non_article_url: "http://freddestin.com/startups"
+  }
+}

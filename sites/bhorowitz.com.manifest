@@ -1,0 +1,40 @@
+root_domain: "bhorowitz.com"
+start_url: "http://www.bhorowitz.com/"
+subdomain_blacklist: "hardthings.bhorowitz.com"
+path_blacklist {
+  needle: "/about"
+}
+path_blacklist {
+  needle: "/archive"
+}
+path_blacklist {
+  needle: "/portfolio"
+}
+path_blacklist {
+  needle: "/briefings"
+}
+path_blacklist {
+  needle: "/team"
+}
+path_blacklist {
+  needle: "/lps"
+}
+paragraph_selector: "#content p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+_[^\\/]+$"
+}
+rss_url: "http://www.bhorowitz.com/blog.rss"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.bhorowitz.com/learning_from_my_mistakes"
+    article_url: "http://www.bhorowitz.com/why_i_will_give_100_of_my_book_earnings_to_women_in_the_struggle"
+    article_url: "http://www.bhorowitz.com/one_management_concept_from_how_to_manage_startups"
+    article_url: "http://www.bhorowitz.com/making_any_web_app_mobile_the_capriza"
+    article_url: "http://www.bhorowitz.com/the_prophets_of_rage"
+    non_article_url: "http://www.bhorowitz.com/archive"
+    non_article_url: "http://www.bhorowitz.com/team"
+    non_article_url: "http://www.bhorowitz.com/portfolio"
+    non_article_url: "http://www.bhorowitz.com/briefings"
+    non_article_url: "http://www.bhorowitz.com/lps"
+  }
+}
