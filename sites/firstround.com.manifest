@@ -1,0 +1,22 @@
+root_domain: "firstround.com"
+start_url: "http://firstround.com/review"
+start_url: "http://firstround.com/review/blog"
+paragraph_selector: "article p"
+article_url_pattern {
+  path_regex: "^\\/article\\/[^\\/]+$"
+}
+rss_url: "http://feeds.feedburner.com/firstround/TbEd?format=xml"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://firstround.com/article/The-Arc-of-Company-Life-and-How-to-Prolong-It"
+    article_url: "http://firstround.com/article/This-Founder-Turned-a-Slow-Burn-Rate-into-a-Big-Exit"
+    article_url: "http://firstround.com/article/To-Build-An-Amazing-Sales-Team-Start-Here-First"
+    article_url: "http://firstround.com/article/From-0-to-1B-Slacks-Founder-Shares-Their-Epic-Launch-Strategy"
+    article_url: "http://firstround.com/article/Execute-Like-a-Rookie-Lead-Like-a-Multiplier"
+    non_article_url: "http://firstround.com/review/category/Management-and-Company-Building"
+    non_article_url: "http://firstround.com/review/page/8"
+    non_article_url: "http://firstround.com/review/page/12"
+    non_article_url: "http://firstround.com/review/page/7"
+    non_article_url: "http://firstround.com/review/page/11"
+  }
+}

@@ -13,8 +13,6 @@ import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
-import com.janknspank.classifier.IndustryCode;
-import com.janknspank.classifier.VectorFeature;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -50,7 +48,6 @@ public class ViewFeedServlet extends StandardServlet {
         final Map<Article, Double> articlesToRankMap =
 //            Articles.getArticlesAndScores(user, HeuristicScorer.getInstance());
             Articles.getArticlesAndScores(user, NeuralNetworkScorer.getInstance());
-            
 
         // Sort the articles
         TopList<Article, Double> articles = new TopList<>(articlesToRankMap.size());

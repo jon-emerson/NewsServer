@@ -354,7 +354,9 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       }
     }
 
-    throw new RequiredFieldException("Could not find published_time: " + documentNode.getUrl());
+    // If no published time was found in the article body,
+    // default to the time that the article was created in the system
+    return System.currentTimeMillis();
   }
 
   /**
