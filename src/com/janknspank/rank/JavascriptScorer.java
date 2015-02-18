@@ -73,6 +73,14 @@ public class JavascriptScorer extends Scorer {
     }
   }
 
+  /**
+   * Implements the {@link Scorer#getScore(User, Article)} function by running our
+   * Map function against an Apache Rhino runtime.
+   * NOTE(jonemerson): THIS IS NOT FOR PRODUCTION USE!!  In production, the
+   * Javascript functions should run directly on MongoDB.  This is here so that
+   * we can benchmark our algorithms on developer boxes without having to hit
+   * Mongo.
+   */
   @Override
   public double getScore(User user, Article article) {
     Context cx = Context.enter();
@@ -122,6 +130,10 @@ public class JavascriptScorer extends Scorer {
     }
   }
 
+  /**
+   * Old function that tested our MapReduce against MongoDB itself.  This code
+   * will move to Articles, probably.
+   */
   public static void oldMain(String args[]) throws DatabaseSchemaException {
     DBCollection articleCollection = MongoConnection.getDatabase().getCollection("Article");
     MapReduceCommand cmd = new MapReduceCommand(
@@ -143,6 +155,10 @@ public class JavascriptScorer extends Scorer {
     System.out.println("Duration: " + out.getDuration());
   }
 
+  /**
+   * Helper function for getting the integer value of the user's current
+   * industry.
+   */
   public static int getUserIndustryCode(User user) {
     for (UserIndustry userIndustry : user.getIndustryList()) {
       if (userIndustry.getRelationship() == Relationship.CURRENT_INDUSTRY) {
@@ -152,12 +168,25 @@ public class JavascriptScorer extends Scorer {
     return 0;
   }
 
+  /**
+   * Helper function for getting the FeatureId enum value for the user's
+   * current industry.  (Basically, the 100xx version of it.)
+   */
   public static int getUserIndustryFeatureCode(User user) {
     int userIndustryCode = getUserIndustryCode(user);
     return (userIndustryCode > 0)
         ? IndustryCode.fromId(userIndustryCode).getFeatureId().getId() : 0;
   }
 
+  /**
+   * Returns a set of Javascript/MongoDB objects that should be in the root
+   * scope when running the Map and Reduce functions.  Anything returned here
+   * will be accessible directly in the Javascript runtime.
+   * NOTE(jonemerson): Please put anything even remotely computationally
+   * intensive in here, and NOT in the map.js function.  Anything in map.js
+   * will be re-interpreted thousands of times, once per article.  If you can
+   * calculate things once, here, please do!
+   */
   public static BasicDBObject getScope(User user) throws DatabaseSchemaException {
     BasicDBObject obj = new BasicDBObject();
     obj.put("user", Mongoizer.toDBObject(user));
@@ -169,14 +198,18 @@ public class JavascriptScorer extends Scorer {
     return obj;
   }
 
+  /**
+   * Helper function for converting MongoDB BasicDBObject values to JSON, so
+   * that it can be consumed by Rhino.
+   * NOTE(jonemerson): It's a bit weird we need to do this just for special
+   * handling of String types.  Maybe we don't actually... but I'm pretty sure
+   * we do.
+   */
   public static String toJSON(Object obj) {
-    if (obj instanceof Number) {
-      return obj.toString();
-    } else if (obj instanceof String) {
+    if (obj instanceof String) {
       return "'" + StringEscapeUtils.escapeJson((String) obj) + "'";
-    } else {
-      return ((BasicDBObject) obj).toString();
     }
+    return obj.toString();
   }
 
   public static void main(String[] args) throws DatabaseSchemaException {
