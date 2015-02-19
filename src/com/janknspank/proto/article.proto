@@ -68,6 +68,7 @@ message Article {
   repeated ArticleKeyword keyword = 13;
   repeated SocialEngagement social_engagement = 14;
   repeated ArticleFeature feature = 15;
+  repeated DuplicateArticle duplicate = 16;
 }
 
 message ArticleKeyword {
@@ -151,4 +152,17 @@ message ArticleFeature {
   // near 1 means this article is extremely relevant to the given feature.
   // A score above 0.80 means its relevance is in the top 20% of articles.
   optional double similarity = 2;
+}
+
+message DuplicateArticle {
+  optional string url_id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional double similarity = 2 [
+    (required) = YES
+  ];
 }

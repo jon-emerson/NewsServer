@@ -88,10 +88,14 @@ public class UrlCleaner {
       }
     }
 
+    SiteManifest contentSite = SiteManifests.getForUrl(url);
+    String protocol = (contentSite != null && contentSite.getIsHttps())
+        ? "https" : "http";
+    
     // Recreate the URL with alphabetized query parameters, lowercased scheme
     // and domain, and consistentized port, and no fragment.
     StringBuilder b = new StringBuilder();
-    b.append(url.getProtocol().toLowerCase());
+    b.append(protocol);
     b.append("://");
     b.append(host.toLowerCase());
     if (url.getPort() != -1 &&

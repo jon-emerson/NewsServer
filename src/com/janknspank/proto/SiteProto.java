@@ -16,6 +16,7 @@ public final class SiteProto {
      * <code>optional string root_domain = 1;</code>
      *
      * <pre>
+     * Primary identifier for this site.  DO NOT INCLUDE "www.".
      * E.g. "nytimes.com".
      * </pre>
      */
@@ -24,6 +25,7 @@ public final class SiteProto {
      * <code>optional string root_domain = 1;</code>
      *
      * <pre>
+     * Primary identifier for this site.  DO NOT INCLUDE "www.".
      * E.g. "nytimes.com".
      * </pre>
      */
@@ -32,6 +34,7 @@ public final class SiteProto {
      * <code>optional string root_domain = 1;</code>
      *
      * <pre>
+     * Primary identifier for this site.  DO NOT INCLUDE "www.".
      * E.g. "nytimes.com".
      * </pre>
      */
@@ -43,7 +46,10 @@ public final class SiteProto {
      * <code>repeated string aka_root_domain = 2;</code>
      *
      * <pre>
-     * E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * Other domains that this site goes by.  Often used for International
+     * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * These should not be subdomains of the root domain... That would just be
+     * redundant.
      * </pre>
      */
     java.util.List<java.lang.String>
@@ -52,7 +58,10 @@ public final class SiteProto {
      * <code>repeated string aka_root_domain = 2;</code>
      *
      * <pre>
-     * E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * Other domains that this site goes by.  Often used for International
+     * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * These should not be subdomains of the root domain... That would just be
+     * redundant.
      * </pre>
      */
     int getAkaRootDomainCount();
@@ -60,7 +69,10 @@ public final class SiteProto {
      * <code>repeated string aka_root_domain = 2;</code>
      *
      * <pre>
-     * E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * Other domains that this site goes by.  Often used for International
+     * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * These should not be subdomains of the root domain... That would just be
+     * redundant.
      * </pre>
      */
     java.lang.String getAkaRootDomain(int index);
@@ -68,7 +80,10 @@ public final class SiteProto {
      * <code>repeated string aka_root_domain = 2;</code>
      *
      * <pre>
-     * E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * Other domains that this site goes by.  Often used for International
+     * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * These should not be subdomains of the root domain... That would just be
+     * redundant.
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -79,6 +94,9 @@ public final class SiteProto {
      * <code>repeated string start_url = 3;</code>
      *
      * <pre>
+     * This is where we'll start the crawlers, so specify any good start URLs:
+     * Usually the home page is good, but also interesting subdomains and paths
+     * for subsites are very helpful to know about.
      * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
      * </pre>
      */
@@ -88,6 +106,9 @@ public final class SiteProto {
      * <code>repeated string start_url = 3;</code>
      *
      * <pre>
+     * This is where we'll start the crawlers, so specify any good start URLs:
+     * Usually the home page is good, but also interesting subdomains and paths
+     * for subsites are very helpful to know about.
      * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
      * </pre>
      */
@@ -96,6 +117,9 @@ public final class SiteProto {
      * <code>repeated string start_url = 3;</code>
      *
      * <pre>
+     * This is where we'll start the crawlers, so specify any good start URLs:
+     * Usually the home page is good, but also interesting subdomains and paths
+     * for subsites are very helpful to know about.
      * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
      * </pre>
      */
@@ -104,6 +128,9 @@ public final class SiteProto {
      * <code>repeated string start_url = 3;</code>
      *
      * <pre>
+     * This is where we'll start the crawlers, so specify any good start URLs:
+     * Usually the home page is good, but also interesting subdomains and paths
+     * for subsites are very helpful to know about.
      * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
      * </pre>
      */
@@ -113,19 +140,43 @@ public final class SiteProto {
     // repeated string subdomain_blacklist = 4;
     /**
      * <code>repeated string subdomain_blacklist = 4;</code>
+     *
+     * <pre>
+     * Any subdomains listed here will not be crawled.  Please list anything that
+     * would be non-news oriented, especially authentication, UGC forums,
+     * conference information sites, job boards, real estate, stock quotes...
+     * </pre>
      */
     java.util.List<java.lang.String>
     getSubdomainBlacklistList();
     /**
      * <code>repeated string subdomain_blacklist = 4;</code>
+     *
+     * <pre>
+     * Any subdomains listed here will not be crawled.  Please list anything that
+     * would be non-news oriented, especially authentication, UGC forums,
+     * conference information sites, job boards, real estate, stock quotes...
+     * </pre>
      */
     int getSubdomainBlacklistCount();
     /**
      * <code>repeated string subdomain_blacklist = 4;</code>
+     *
+     * <pre>
+     * Any subdomains listed here will not be crawled.  Please list anything that
+     * would be non-news oriented, especially authentication, UGC forums,
+     * conference information sites, job boards, real estate, stock quotes...
+     * </pre>
      */
     java.lang.String getSubdomainBlacklist(int index);
     /**
      * <code>repeated string subdomain_blacklist = 4;</code>
+     *
+     * <pre>
+     * Any subdomains listed here will not be crawled.  Please list anything that
+     * would be non-news oriented, especially authentication, UGC forums,
+     * conference information sites, job boards, real estate, stock quotes...
+     * </pre>
      */
     com.google.protobuf.ByteString
         getSubdomainBlacklistBytes(int index);
@@ -297,6 +348,16 @@ public final class SiteProto {
      * <code>optional .TestInstructions test_instructions = 10;</code>
      */
     com.janknspank.proto.SiteProto.TestInstructionsOrBuilder getTestInstructionsOrBuilder();
+
+    // optional bool is_https = 11;
+    /**
+     * <code>optional bool is_https = 11;</code>
+     */
+    boolean hasIsHttps();
+    /**
+     * <code>optional bool is_https = 11;</code>
+     */
+    boolean getIsHttps();
   }
   /**
    * Protobuf type {@code SiteManifest}
@@ -431,6 +492,11 @@ public final class SiteProto {
               bitField0_ |= 0x00000002;
               break;
             }
+            case 88: {
+              bitField0_ |= 0x00000004;
+              isHttps_ = input.readBool();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -500,14 +566,26 @@ public final class SiteProto {
       // optional string needle = 1;
       /**
        * <code>optional string needle = 1;</code>
+       *
+       * <pre>
+       * A string or regular expression to blacklist.
+       * </pre>
        */
       boolean hasNeedle();
       /**
        * <code>optional string needle = 1;</code>
+       *
+       * <pre>
+       * A string or regular expression to blacklist.
+       * </pre>
        */
       java.lang.String getNeedle();
       /**
        * <code>optional string needle = 1;</code>
+       *
+       * <pre>
+       * A string or regular expression to blacklist.
+       * </pre>
        */
       com.google.protobuf.ByteString
           getNeedleBytes();
@@ -524,6 +602,10 @@ public final class SiteProto {
     }
     /**
      * Protobuf type {@code SiteManifest.PathBlacklist}
+     *
+     * <pre>
+     * Any paths blacklisted here will not be crawled.
+     * </pre>
      */
     public static final class PathBlacklist extends
         com.google.protobuf.GeneratedMessage
@@ -630,57 +712,111 @@ public final class SiteProto {
 
       /**
        * Protobuf enum {@code SiteManifest.PathBlacklist.Location}
+       *
+       * <pre>
+       * For strings, where to look for the string.
+       * </pre>
        */
       public enum Location
           implements com.google.protobuf.ProtocolMessageEnum {
         /**
          * <code>EQUALS = 1;</code>
+         *
+         * <pre>
+         * The path must perfectly equal the needle to be blacklisted.
+         * </pre>
          */
         EQUALS(0, 1),
         /**
          * <code>STARTS_WITH = 2;</code>
+         *
+         * <pre>
+         * The path must start with the needle to be blacklisted.
+         * </pre>
          */
         STARTS_WITH(1, 2),
         /**
          * <code>ENDS_WITH = 3;</code>
+         *
+         * <pre>
+         * The path must end with the needle to be blacklisted.
+         * </pre>
          */
         ENDS_WITH(2, 3),
         /**
          * <code>CONTAINS = 4;</code>
+         *
+         * <pre>
+         * The path must contain the needle to be blacklisted.
+         * </pre>
          */
         CONTAINS(3, 4),
         /**
          * <code>REGEX_FIND = 5;</code>
+         *
+         * <pre>
+         * If a substring in the path matches this regular expression, it's
+         * blacklisted.
+         * </pre>
          */
         REGEX_FIND(4, 5),
         /**
          * <code>REGEX_MATCH = 6;</code>
+         *
+         * <pre>
+         * If the entire path matches this regular expression, it's blacklisted.
+         * </pre>
          */
         REGEX_MATCH(5, 6),
         ;
 
         /**
          * <code>EQUALS = 1;</code>
+         *
+         * <pre>
+         * The path must perfectly equal the needle to be blacklisted.
+         * </pre>
          */
         public static final int EQUALS_VALUE = 1;
         /**
          * <code>STARTS_WITH = 2;</code>
+         *
+         * <pre>
+         * The path must start with the needle to be blacklisted.
+         * </pre>
          */
         public static final int STARTS_WITH_VALUE = 2;
         /**
          * <code>ENDS_WITH = 3;</code>
+         *
+         * <pre>
+         * The path must end with the needle to be blacklisted.
+         * </pre>
          */
         public static final int ENDS_WITH_VALUE = 3;
         /**
          * <code>CONTAINS = 4;</code>
+         *
+         * <pre>
+         * The path must contain the needle to be blacklisted.
+         * </pre>
          */
         public static final int CONTAINS_VALUE = 4;
         /**
          * <code>REGEX_FIND = 5;</code>
+         *
+         * <pre>
+         * If a substring in the path matches this regular expression, it's
+         * blacklisted.
+         * </pre>
          */
         public static final int REGEX_FIND_VALUE = 5;
         /**
          * <code>REGEX_MATCH = 6;</code>
+         *
+         * <pre>
+         * If the entire path matches this regular expression, it's blacklisted.
+         * </pre>
          */
         public static final int REGEX_MATCH_VALUE = 6;
 
@@ -752,12 +888,20 @@ public final class SiteProto {
       private java.lang.Object needle_;
       /**
        * <code>optional string needle = 1;</code>
+       *
+       * <pre>
+       * A string or regular expression to blacklist.
+       * </pre>
        */
       public boolean hasNeedle() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional string needle = 1;</code>
+       *
+       * <pre>
+       * A string or regular expression to blacklist.
+       * </pre>
        */
       public java.lang.String getNeedle() {
         java.lang.Object ref = needle_;
@@ -775,6 +919,10 @@ public final class SiteProto {
       }
       /**
        * <code>optional string needle = 1;</code>
+       *
+       * <pre>
+       * A string or regular expression to blacklist.
+       * </pre>
        */
       public com.google.protobuf.ByteString
           getNeedleBytes() {
@@ -925,6 +1073,10 @@ public final class SiteProto {
       }
       /**
        * Protobuf type {@code SiteManifest.PathBlacklist}
+       *
+       * <pre>
+       * Any paths blacklisted here will not be crawled.
+       * </pre>
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -1056,12 +1208,20 @@ public final class SiteProto {
         private java.lang.Object needle_ = "";
         /**
          * <code>optional string needle = 1;</code>
+         *
+         * <pre>
+         * A string or regular expression to blacklist.
+         * </pre>
          */
         public boolean hasNeedle() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
          * <code>optional string needle = 1;</code>
+         *
+         * <pre>
+         * A string or regular expression to blacklist.
+         * </pre>
          */
         public java.lang.String getNeedle() {
           java.lang.Object ref = needle_;
@@ -1076,6 +1236,10 @@ public final class SiteProto {
         }
         /**
          * <code>optional string needle = 1;</code>
+         *
+         * <pre>
+         * A string or regular expression to blacklist.
+         * </pre>
          */
         public com.google.protobuf.ByteString
             getNeedleBytes() {
@@ -1092,6 +1256,10 @@ public final class SiteProto {
         }
         /**
          * <code>optional string needle = 1;</code>
+         *
+         * <pre>
+         * A string or regular expression to blacklist.
+         * </pre>
          */
         public Builder setNeedle(
             java.lang.String value) {
@@ -1105,6 +1273,10 @@ public final class SiteProto {
         }
         /**
          * <code>optional string needle = 1;</code>
+         *
+         * <pre>
+         * A string or regular expression to blacklist.
+         * </pre>
          */
         public Builder clearNeedle() {
           bitField0_ = (bitField0_ & ~0x00000001);
@@ -1114,6 +1286,10 @@ public final class SiteProto {
         }
         /**
          * <code>optional string needle = 1;</code>
+         *
+         * <pre>
+         * A string or regular expression to blacklist.
+         * </pre>
          */
         public Builder setNeedleBytes(
             com.google.protobuf.ByteString value) {
@@ -1916,6 +2092,7 @@ public final class SiteProto {
      * <code>optional string root_domain = 1;</code>
      *
      * <pre>
+     * Primary identifier for this site.  DO NOT INCLUDE "www.".
      * E.g. "nytimes.com".
      * </pre>
      */
@@ -1926,6 +2103,7 @@ public final class SiteProto {
      * <code>optional string root_domain = 1;</code>
      *
      * <pre>
+     * Primary identifier for this site.  DO NOT INCLUDE "www.".
      * E.g. "nytimes.com".
      * </pre>
      */
@@ -1947,6 +2125,7 @@ public final class SiteProto {
      * <code>optional string root_domain = 1;</code>
      *
      * <pre>
+     * Primary identifier for this site.  DO NOT INCLUDE "www.".
      * E.g. "nytimes.com".
      * </pre>
      */
@@ -1971,7 +2150,10 @@ public final class SiteProto {
      * <code>repeated string aka_root_domain = 2;</code>
      *
      * <pre>
-     * E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * Other domains that this site goes by.  Often used for International
+     * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * These should not be subdomains of the root domain... That would just be
+     * redundant.
      * </pre>
      */
     public java.util.List<java.lang.String>
@@ -1982,7 +2164,10 @@ public final class SiteProto {
      * <code>repeated string aka_root_domain = 2;</code>
      *
      * <pre>
-     * E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * Other domains that this site goes by.  Often used for International
+     * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * These should not be subdomains of the root domain... That would just be
+     * redundant.
      * </pre>
      */
     public int getAkaRootDomainCount() {
@@ -1992,7 +2177,10 @@ public final class SiteProto {
      * <code>repeated string aka_root_domain = 2;</code>
      *
      * <pre>
-     * E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * Other domains that this site goes by.  Often used for International
+     * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * These should not be subdomains of the root domain... That would just be
+     * redundant.
      * </pre>
      */
     public java.lang.String getAkaRootDomain(int index) {
@@ -2002,7 +2190,10 @@ public final class SiteProto {
      * <code>repeated string aka_root_domain = 2;</code>
      *
      * <pre>
-     * E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * Other domains that this site goes by.  Often used for International
+     * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+     * These should not be subdomains of the root domain... That would just be
+     * redundant.
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -2017,6 +2208,9 @@ public final class SiteProto {
      * <code>repeated string start_url = 3;</code>
      *
      * <pre>
+     * This is where we'll start the crawlers, so specify any good start URLs:
+     * Usually the home page is good, but also interesting subdomains and paths
+     * for subsites are very helpful to know about.
      * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
      * </pre>
      */
@@ -2028,6 +2222,9 @@ public final class SiteProto {
      * <code>repeated string start_url = 3;</code>
      *
      * <pre>
+     * This is where we'll start the crawlers, so specify any good start URLs:
+     * Usually the home page is good, but also interesting subdomains and paths
+     * for subsites are very helpful to know about.
      * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
      * </pre>
      */
@@ -2038,6 +2235,9 @@ public final class SiteProto {
      * <code>repeated string start_url = 3;</code>
      *
      * <pre>
+     * This is where we'll start the crawlers, so specify any good start URLs:
+     * Usually the home page is good, but also interesting subdomains and paths
+     * for subsites are very helpful to know about.
      * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
      * </pre>
      */
@@ -2048,6 +2248,9 @@ public final class SiteProto {
      * <code>repeated string start_url = 3;</code>
      *
      * <pre>
+     * This is where we'll start the crawlers, so specify any good start URLs:
+     * Usually the home page is good, but also interesting subdomains and paths
+     * for subsites are very helpful to know about.
      * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
      * </pre>
      */
@@ -2061,6 +2264,12 @@ public final class SiteProto {
     private com.google.protobuf.LazyStringList subdomainBlacklist_;
     /**
      * <code>repeated string subdomain_blacklist = 4;</code>
+     *
+     * <pre>
+     * Any subdomains listed here will not be crawled.  Please list anything that
+     * would be non-news oriented, especially authentication, UGC forums,
+     * conference information sites, job boards, real estate, stock quotes...
+     * </pre>
      */
     public java.util.List<java.lang.String>
         getSubdomainBlacklistList() {
@@ -2068,18 +2277,36 @@ public final class SiteProto {
     }
     /**
      * <code>repeated string subdomain_blacklist = 4;</code>
+     *
+     * <pre>
+     * Any subdomains listed here will not be crawled.  Please list anything that
+     * would be non-news oriented, especially authentication, UGC forums,
+     * conference information sites, job boards, real estate, stock quotes...
+     * </pre>
      */
     public int getSubdomainBlacklistCount() {
       return subdomainBlacklist_.size();
     }
     /**
      * <code>repeated string subdomain_blacklist = 4;</code>
+     *
+     * <pre>
+     * Any subdomains listed here will not be crawled.  Please list anything that
+     * would be non-news oriented, especially authentication, UGC forums,
+     * conference information sites, job boards, real estate, stock quotes...
+     * </pre>
      */
     public java.lang.String getSubdomainBlacklist(int index) {
       return subdomainBlacklist_.get(index);
     }
     /**
      * <code>repeated string subdomain_blacklist = 4;</code>
+     *
+     * <pre>
+     * Any subdomains listed here will not be crawled.  Please list anything that
+     * would be non-news oriented, especially authentication, UGC forums,
+     * conference information sites, job boards, real estate, stock quotes...
+     * </pre>
      */
     public com.google.protobuf.ByteString
         getSubdomainBlacklistBytes(int index) {
@@ -2314,6 +2541,22 @@ public final class SiteProto {
       return testInstructions_;
     }
 
+    // optional bool is_https = 11;
+    public static final int IS_HTTPS_FIELD_NUMBER = 11;
+    private boolean isHttps_;
+    /**
+     * <code>optional bool is_https = 11;</code>
+     */
+    public boolean hasIsHttps() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bool is_https = 11;</code>
+     */
+    public boolean getIsHttps() {
+      return isHttps_;
+    }
+
     private void initFields() {
       rootDomain_ = "";
       akaRootDomain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -2325,6 +2568,7 @@ public final class SiteProto {
       whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       testInstructions_ = com.janknspank.proto.SiteProto.TestInstructions.getDefaultInstance();
+      isHttps_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2367,6 +2611,9 @@ public final class SiteProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(10, testInstructions_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(11, isHttps_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2446,6 +2693,10 @@ public final class SiteProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, testInstructions_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(11, isHttps_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2598,6 +2849,8 @@ public final class SiteProto {
           testInstructionsBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000200);
+        isHttps_ = false;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -2692,6 +2945,10 @@ public final class SiteProto {
         } else {
           result.testInstructions_ = testInstructionsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.isHttps_ = isHttps_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2828,6 +3085,9 @@ public final class SiteProto {
         if (other.hasTestInstructions()) {
           mergeTestInstructions(other.getTestInstructions());
         }
+        if (other.hasIsHttps()) {
+          setIsHttps(other.getIsHttps());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -2861,6 +3121,7 @@ public final class SiteProto {
        * <code>optional string root_domain = 1;</code>
        *
        * <pre>
+       * Primary identifier for this site.  DO NOT INCLUDE "www.".
        * E.g. "nytimes.com".
        * </pre>
        */
@@ -2871,6 +3132,7 @@ public final class SiteProto {
        * <code>optional string root_domain = 1;</code>
        *
        * <pre>
+       * Primary identifier for this site.  DO NOT INCLUDE "www.".
        * E.g. "nytimes.com".
        * </pre>
        */
@@ -2889,6 +3151,7 @@ public final class SiteProto {
        * <code>optional string root_domain = 1;</code>
        *
        * <pre>
+       * Primary identifier for this site.  DO NOT INCLUDE "www.".
        * E.g. "nytimes.com".
        * </pre>
        */
@@ -2909,6 +3172,7 @@ public final class SiteProto {
        * <code>optional string root_domain = 1;</code>
        *
        * <pre>
+       * Primary identifier for this site.  DO NOT INCLUDE "www.".
        * E.g. "nytimes.com".
        * </pre>
        */
@@ -2926,6 +3190,7 @@ public final class SiteProto {
        * <code>optional string root_domain = 1;</code>
        *
        * <pre>
+       * Primary identifier for this site.  DO NOT INCLUDE "www.".
        * E.g. "nytimes.com".
        * </pre>
        */
@@ -2939,6 +3204,7 @@ public final class SiteProto {
        * <code>optional string root_domain = 1;</code>
        *
        * <pre>
+       * Primary identifier for this site.  DO NOT INCLUDE "www.".
        * E.g. "nytimes.com".
        * </pre>
        */
@@ -2965,7 +3231,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public java.util.List<java.lang.String>
@@ -2976,7 +3245,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public int getAkaRootDomainCount() {
@@ -2986,7 +3258,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public java.lang.String getAkaRootDomain(int index) {
@@ -2996,7 +3271,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -3007,7 +3285,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public Builder setAkaRootDomain(
@@ -3024,7 +3305,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public Builder addAkaRootDomain(
@@ -3041,7 +3325,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public Builder addAllAkaRootDomain(
@@ -3055,7 +3342,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public Builder clearAkaRootDomain() {
@@ -3068,7 +3358,10 @@ public final class SiteProto {
        * <code>repeated string aka_root_domain = 2;</code>
        *
        * <pre>
-       * E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * Other domains that this site goes by.  Often used for International
+       * editions.  E.g. bbc.com, which is the US-site for bbc.co.uk.
+       * These should not be subdomains of the root domain... That would just be
+       * redundant.
        * </pre>
        */
       public Builder addAkaRootDomainBytes(
@@ -3094,6 +3387,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3105,6 +3401,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3115,6 +3414,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3125,6 +3427,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3136,6 +3441,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3153,6 +3461,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3170,6 +3481,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3184,6 +3498,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3197,6 +3514,9 @@ public final class SiteProto {
        * <code>repeated string start_url = 3;</code>
        *
        * <pre>
+       * This is where we'll start the crawlers, so specify any good start URLs:
+       * Usually the home page is good, but also interesting subdomains and paths
+       * for subsites are very helpful to know about.
        * E.g. "https://www.nytimes.com/", "http://sf.curbed.com".
        * </pre>
        */
@@ -3221,6 +3541,12 @@ public final class SiteProto {
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public java.util.List<java.lang.String>
           getSubdomainBlacklistList() {
@@ -3228,18 +3554,36 @@ public final class SiteProto {
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public int getSubdomainBlacklistCount() {
         return subdomainBlacklist_.size();
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public java.lang.String getSubdomainBlacklist(int index) {
         return subdomainBlacklist_.get(index);
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public com.google.protobuf.ByteString
           getSubdomainBlacklistBytes(int index) {
@@ -3247,6 +3591,12 @@ public final class SiteProto {
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public Builder setSubdomainBlacklist(
           int index, java.lang.String value) {
@@ -3260,6 +3610,12 @@ public final class SiteProto {
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public Builder addSubdomainBlacklist(
           java.lang.String value) {
@@ -3273,6 +3629,12 @@ public final class SiteProto {
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public Builder addAllSubdomainBlacklist(
           java.lang.Iterable<java.lang.String> values) {
@@ -3283,6 +3645,12 @@ public final class SiteProto {
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public Builder clearSubdomainBlacklist() {
         subdomainBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -3292,6 +3660,12 @@ public final class SiteProto {
       }
       /**
        * <code>repeated string subdomain_blacklist = 4;</code>
+       *
+       * <pre>
+       * Any subdomains listed here will not be crawled.  Please list anything that
+       * would be non-news oriented, especially authentication, UGC forums,
+       * conference information sites, job boards, real estate, stock quotes...
+       * </pre>
        */
       public Builder addSubdomainBlacklistBytes(
           com.google.protobuf.ByteString value) {
@@ -4279,6 +4653,39 @@ public final class SiteProto {
         return testInstructionsBuilder_;
       }
 
+      // optional bool is_https = 11;
+      private boolean isHttps_ ;
+      /**
+       * <code>optional bool is_https = 11;</code>
+       */
+      public boolean hasIsHttps() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional bool is_https = 11;</code>
+       */
+      public boolean getIsHttps() {
+        return isHttps_;
+      }
+      /**
+       * <code>optional bool is_https = 11;</code>
+       */
+      public Builder setIsHttps(boolean value) {
+        bitField0_ |= 0x00000400;
+        isHttps_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool is_https = 11;</code>
+       */
+      public Builder clearIsHttps() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        isHttps_ = false;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:SiteManifest)
     }
 
@@ -4323,6 +4730,13 @@ public final class SiteProto {
   }
   /**
    * Protobuf type {@code TestInstructions}
+   *
+   * <pre>
+   * Any URLs in these lists will be checked as either whitelisted or not, or
+   * articles or not, depending which list you add them to.  These are a GREAT
+   * HELP TO YOU to validate your regular expressions and blacklists, please
+   * do use them!!
+   * </pre>
    */
   public static final class TestInstructions extends
       com.google.protobuf.GeneratedMessage
@@ -5965,6 +6379,13 @@ public final class SiteProto {
     }
     /**
      * Protobuf type {@code TestInstructions}
+     *
+     * <pre>
+     * Any URLs in these lists will be checked as either whitelisted or not, or
+     * articles or not, depending which list you add them to.  These are a GREAT
+     * HELP TO YOU to validate your regular expressions and blacklists, please
+     * do use them!!
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -6393,7 +6814,7 @@ public final class SiteProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/site.proto\032(com/j" +
-      "anknspank/database/extensions.proto\"\311\005\n\014" +
+      "anknspank/database/extensions.proto\"\333\005\n\014" +
       "SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246\035\001\230" +
       "\246\035\377\005\022\036\n\017aka_root_domain\030\002 \003(\tB\005\230\246\035\377\005\022\034\n\t" +
       "start_url\030\003 \003(\tB\t\210\246\035\001\230\246\035\377\005\022\"\n\023subdomain_" +
@@ -6404,24 +6825,24 @@ public final class SiteProto {
       "rticleUrlPattern\022*\n\033whitelisted_query_pa",
       "rameter\030\010 \003(\tB\005\230\246\035\377\005\022\026\n\007rss_url\030\t \003(\tB\005\230" +
       "\246\035\377\005\0222\n\021test_instructions\030\n \001(\0132\021.TestIn" +
-      "structionsB\004\210\246\035\001\032\326\001\n\rPathBlacklist\022\031\n\006ne" +
-      "edle\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022C\n\010location\030\004 \001(\0162" +
-      "$.SiteManifest.PathBlacklist.Location:\013S" +
-      "TARTS_WITH\"e\n\010Location\022\n\n\006EQUALS\020\001\022\017\n\013ST" +
-      "ARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAINS\020\004" +
-      "\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006\032L\n\021Art" +
-      "icleUrlPattern\022\035\n\npath_regex\030\001 \001(\tB\t\210\246\035\001" +
-      "\230\246\035\377\005\022\030\n\tsubdomain\030\002 \001(\tB\005\230\246\035\377\005\"\314\002\n\020Test",
-      "Instructions\022B\n\024url_whitelist_checks\030\001 \001" +
-      "(\0132$.TestInstructions.UrlWhitelistChecks" +
-      "\022U\n\033article_url_detector_checks\030\002 \001(\0132*." +
-      "TestInstructions.ArticleUrlDetectorCheck" +
-      "sB\004\210\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010good_ur" +
-      "l\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005\032V" +
-      "\n\030ArticleUrlDetectorChecks\022\032\n\013article_ur" +
-      "l\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030\002 \003(\tB" +
-      "\005\230\246\035\377\005B!\n\024com.janknspank.protoB\tSiteProt" +
-      "o"
+      "structionsB\004\210\246\035\001\022\020\n\010is_https\030\013 \001(\010\032\326\001\n\rP" +
+      "athBlacklist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022" +
+      "C\n\010location\030\004 \001(\0162$.SiteManifest.PathBla" +
+      "cklist.Location:\013STARTS_WITH\"e\n\010Location" +
+      "\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS_WI" +
+      "TH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013RE" +
+      "GEX_MATCH\020\006\032L\n\021ArticleUrlPattern\022\035\n\npath" +
+      "_regex\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\tsubdomain\030\002 \001",
+      "(\tB\005\230\246\035\377\005\"\314\002\n\020TestInstructions\022B\n\024url_wh" +
+      "itelist_checks\030\001 \001(\0132$.TestInstructions." +
+      "UrlWhitelistChecks\022U\n\033article_url_detect" +
+      "or_checks\030\002 \001(\0132*.TestInstructions.Artic" +
+      "leUrlDetectorChecksB\004\210\246\035\001\032E\n\022UrlWhitelis" +
+      "tChecks\022\027\n\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_" +
+      "url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUrlDetectorCh" +
+      "ecks\022\032\n\013article_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_" +
+      "article_url\030\002 \003(\tB\005\230\246\035\377\005B!\n\024com.janknspa" +
+      "nk.protoB\tSiteProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6433,7 +6854,7 @@ public final class SiteProto {
           internal_static_SiteManifest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", });
           internal_static_SiteManifest_PathBlacklist_descriptor =
             internal_static_SiteManifest_descriptor.getNestedTypes().get(0);
           internal_static_SiteManifest_PathBlacklist_fieldAccessorTable = new
