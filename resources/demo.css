@@ -110,13 +110,14 @@ h1 {
 .wrapper {
   display: inline-flex;
   height: 100%;
-  margin: 0;
-  text-align: center;
   width: 100%; 
+  margin: 0;
 }
 
 .content {
-  margin: 50% auto 50% auto;
+  margin: auto auto;
+  padding-top: 150px;
+  text-align: center;
 }
 
 #spotterVisual {
