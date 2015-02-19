@@ -3,7 +3,6 @@ package com.janknspank.crawler;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.janknspank.classifier.Deduper;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -11,6 +10,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.ArticleProto.DuplicateArticle;
+import com.janknspank.rank.Deduper;
 import com.janknspank.rank.RankException;
 
 public class FindDupes {

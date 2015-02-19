@@ -1,4 +1,4 @@
-package com.janknspank.classifier;
+package com.janknspank.rank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Lists;
+import com.janknspank.classifier.ClassifierException;
+import com.janknspank.classifier.UniverseVector;
+import com.janknspank.classifier.Vector;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.ArticleProto.DuplicateArticle;
