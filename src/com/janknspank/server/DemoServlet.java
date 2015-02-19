@@ -23,14 +23,14 @@ public class DemoServlet extends StandardServlet {
     if (!Strings.isNullOrEmpty(update)) {
       prompt = "Please update your demo";
     }
-    
+
     // TODO: fix so the plist URL is dynamic
     int[] latestVersionComponents = S3DemoHelper.findLatestDemoVersion();
     String versionString = latestVersionComponents[0] + "." + latestVersionComponents[1];
     if (latestVersionComponents[2] != 0) {
       versionString += "." + latestVersionComponents[2];
     }
-    
+
     return new SoyMapData(
         "prompt", prompt, 
         "downloadUrl", "https://murmuring-sands-7215.herokuapp.com/s3Pipe/Spotter-v" + versionString + ".plist");

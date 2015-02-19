@@ -18,6 +18,7 @@ public class MongoCollectionTest {
         Database.getDefaultInstance(Article.class).getDescriptorForType();
     Set<String> indexes =
         Sets.newHashSet(MongoCollection.getIndexes(articleDescriptor.getFields()));
-    assertEquals(ImmutableSet.of("keyword.keyword", "published_time"), indexes);
+    assertEquals(ImmutableSet.of("feature.feature_id", "keyword.keyword", "published_time"),
+        indexes);
   }
 }

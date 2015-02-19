@@ -44,6 +44,7 @@ public class SerializerTest {
 
     JSONObject o = Serializer.toJSON(article);
     assertFalse(o.has("author"));
+    assertFalse(o.has("word_count"));
     assertEquals(COPYRIGHT, o.getString("copyright"));
     assertEquals(DESCRIPTION, o.getString("description"));
     assertEquals(IMAGE_URL, o.getString("image_url"));
@@ -53,7 +54,6 @@ public class SerializerTest {
     assertEquals(TYPE, o.getString("type"));
     assertEquals(URL, o.getString("url"));
     assertEquals(URL_ID, o.getString("url_id"));
-    assertEquals(Long.toString(WORD_COUNT), o.getString("word_count"));
 
     // These fields should not exist - They were explicitly marked as server-
     // only.

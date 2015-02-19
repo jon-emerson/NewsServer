@@ -64,7 +64,7 @@ public class S3DemoHelper {
             if (versionComponents[0] > latestVersionComponents[0]) {
               isLatest = true;
             } else if (versionComponents[0] == latestVersionComponents[0] 
-                && versionComponents[1] == latestVersionComponents[1]) {
+                && versionComponents[1] > latestVersionComponents[1]) {
               isLatest = true;
             } else if (versionComponents[0] == latestVersionComponents[0] 
                 && versionComponents[1] == latestVersionComponents[1]
