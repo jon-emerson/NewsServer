@@ -20,8 +20,8 @@ public class FindDupes {
    * all articles that are actually duplicates. This method is used during
    * crawl time to store dupes on Article objects.
    */
-  public static Iterable<DuplicateArticle> findDupes(ArticleOrBuilder article) throws RankException 
-       {
+  public static Iterable<DuplicateArticle> findDupes(ArticleOrBuilder article) 
+      throws RankException {
     // Query for articles that were published within 1 day of this article
     // and contain any of the same keywords
     List<String> keywords = new ArrayList<>();
