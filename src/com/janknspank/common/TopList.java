@@ -1,14 +1,16 @@
 package com.janknspank.common;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * Generic utility class for collecting many strings with associated integer
@@ -110,5 +112,13 @@ public class TopList<T, U extends Number> implements Iterable<T> {
 
   public int size() {
     return values.size();
+  }
+
+  public Map<T, U> toMap() {
+    ImmutableMap.Builder<T, U> builder = ImmutableMap.<T, U>builder();
+    for (Map.Entry<T, U> entry : values.entrySet()) {
+      builder.put(entry.getKey(), entry.getValue());
+    }
+    return builder.build();
   }
 }

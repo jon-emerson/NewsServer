@@ -33,7 +33,6 @@ import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.DuplicateArticle;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
-import com.janknspank.rank.Deduper;
 import com.janknspank.rank.RankException;
 
 /**

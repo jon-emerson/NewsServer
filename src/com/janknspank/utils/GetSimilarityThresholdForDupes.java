@@ -53,7 +53,7 @@ public class GetSimilarityThresholdForDupes {
   public static void printArticlePairsThatHaveSimilaritiesAbove(double thresholdSimilarity) 
       throws DatabaseSchemaException {
     ArrayList<Article> articles = Lists.newArrayList(
-        Articles.getArticlesByFeatures(ImmutableList.of(FeatureId.INTERNET)));
+        Articles.getArticlesByFeatures(ImmutableList.of(FeatureId.INTERNET), 1000));
     int size = articles.size();
     int duplicatesCount = 0;
     System.out.println("Deduping " + size + " articles");

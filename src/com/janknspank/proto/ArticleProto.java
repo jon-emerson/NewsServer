@@ -6753,7 +6753,7 @@ public final class ArticleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\202" +
+      "m/janknspank/database/extensions.proto\"\230" +
       "\004\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\032\n\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005titl" +
       "e\030\003 \001(\tB\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246" +
@@ -6761,32 +6761,32 @@ public final class ArticleProto {
       " \001(\tB\005\230\246\035\200\002\022\036\n\013description\030\007 \001(\tB\t\210\246\035\001\230\246" +
       "\035\200\020\022\030\n\timage_url\030\010 \001(\tB\005\230\246\035\200\020\022\034\n\tparagra" +
       "ph\030\t \003(\tB\t\240\246\035\003\230\246\035\200P\022 \n\016published_time\030\n " +
-      "\001(\003B\010\210\246\035\001\220\246\035\003\022\025\n\rmodified_time\030\013 \001(\003\022\030\n\n",
-      "word_count\030\014 \001(\003B\004\210\246\035\001\022 \n\007keyword\030\r \003(\0132" +
-      "\017.ArticleKeyword\022,\n\021social_engagement\030\016 " +
-      "\003(\0132\021.SocialEngagement\022 \n\007feature\030\017 \003(\0132" +
-      "\017.ArticleFeature\022$\n\tduplicate\030\020 \003(\0132\021.Du" +
-      "plicateArticle:\023\212\265\030\017MongoDB.Article\"\325\001\n\016" +
-      "ArticleKeyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035" +
-      "\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 " +
-      "\001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026." +
-      "ArticleKeyword.Source:\007UNKNOWN\";\n\006Source" +
-      "\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n",
-      "\010META_TAG\020\003\"\347\001\n\020SocialEngagement\022-\n\004site" +
-      "\030\001 \001(\0162\026.SocialEngagement.Site:\007UNKNOWN\022" +
-      "\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_scor" +
-      "e\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcom" +
-      "ment_count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n" +
-      "\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWIT" +
-      "TER\020\002\"\323\001\n\016ArticleFeature\022\034\n\nfeature_id\030\001" +
-      " \001(\005B\010\210\246\035\001\220\246\035\005\022+\n\004type\030\004 \001(\0162\024.ArticleFe" +
-      "ature.Type:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001\"" +
-      "b\n\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020\001\022",
-      "\022\n\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020\003\022" +
-      "\022\n\016TEXT_CHARACTER\020\004\"N\n\020DuplicateArticle\022" +
-      " \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\nsim" +
-      "ilarity\030\002 \001(\001B\004\210\246\035\001B$\n\024com.janknspank.pr" +
-      "otoB\014ArticleProto"
+      "\001(\003B\010\210\246\035\001\220\246\035\003\022\025\n\rmodified_time\030\013 \001(\003\022\034\n\n",
+      "word_count\030\014 \001(\003B\010\210\246\035\001\240\246\035\003\022 \n\007keyword\030\r " +
+      "\003(\0132\017.ArticleKeyword\0222\n\021social_engagemen" +
+      "t\030\016 \003(\0132\021.SocialEngagementB\004\240\246\035\003\022&\n\007feat" +
+      "ure\030\017 \003(\0132\017.ArticleFeatureB\004\240\246\035\003\022*\n\tdupl" +
+      "icate\030\020 \003(\0132\021.DuplicateArticleB\004\240\246\035\003:\023\212\265" +
+      "\030\017MongoDB.Article\"\325\001\n\016ArticleKeyword\022\035\n\007" +
+      "keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030" +
+      "\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250" +
+      "\246\035\001\022/\n\006source\030\004 \001(\0162\026.ArticleKeyword.Sou" +
+      "rce:\007UNKNOWN\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003N",
+      "LP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\"\347\001\n\020So" +
+      "cialEngagement\022-\n\004site\030\001 \001(\0162\026.SocialEng" +
+      "agement.Site:\007UNKNOWN\022\031\n\013share_count\030\002 \001" +
+      "(\003B\004\210\246\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nl" +
+      "ike_count\030\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023" +
+      "\n\013create_time\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000" +
+      "\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"\323\001\n\016ArticleF" +
+      "eature\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004" +
+      "type\030\004 \001(\0162\024.ArticleFeature.Type:\007UNKNOW" +
+      "N\022\022\n\nsimilarity\030\002 \001(\001\"b\n\004Type\022\013\n\007UNKNOWN",
+      "\020\000\022\021\n\rSERVES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020" +
+      "\002\022\022\n\016IMPROVES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020" +
+      "\004\"N\n\020DuplicateArticle\022 \n\006url_id\030\001 \001(\tB\020\210" +
+      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\nsimilarity\030\002 \001(\001B\004\210\246\035" +
+      "\001B$\n\024com.janknspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6846,6 +6846,10 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

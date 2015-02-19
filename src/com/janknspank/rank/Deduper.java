@@ -26,21 +26,20 @@ public class Deduper {
    * method should be used during getArticles, not the "dedupe" method below.
    */
   public static Iterable<Article> filterOutDupes(Iterable<Article> articles) {
-    HashMap<String, Article> urlIdsMap = new HashMap<>();
-    Set<Article> dedupedArticles = new HashSet<>();
-
+    HashMap<String, Article> articleMap = new HashMap<>();
     for (Article article : articles) {
-      urlIdsMap.put(article.getUrlId(), article);
+      articleMap.put(article.getUrlId(), article);
     }
 
-    for (Article article : articles) {
+    Set<Article> dedupedArticles = new HashSet<>();
+    for (Article article : articleMap.values()) {
       List<DuplicateArticle> dupes = article.getDuplicateList();
       SocialEngagement articleEngagement = article.getSocialEngagement(
           article.getSocialEngagementCount() - 1);
       double highestSocialScore = articleEngagement.getShareScore();
       Article mostValuableDupe = article;
       for (DuplicateArticle dupe : dupes) {
-        Article dupeArticle = urlIdsMap.get(dupe.getUrlId());
+        Article dupeArticle = articleMap.get(dupe.getUrlId());
         if (dupeArticle != null) {
           // There's a dupe! Take the one with the largest social score
           SocialEngagement dupeEngagement = dupeArticle.getSocialEngagement(

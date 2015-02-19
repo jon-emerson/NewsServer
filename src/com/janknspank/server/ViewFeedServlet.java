@@ -1,8 +1,5 @@
 package com.janknspank.server;
 
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.common.base.Function;
@@ -44,22 +41,11 @@ public class ViewFeedServlet extends StandardServlet {
 //      UserInterests.updateInterests(user, linkedInProfileDocument, null);
       // Uncomment to play with profile data
 
-      final Map<Article, Double> articlesToRankMap =
-//          Articles.getArticlesAndScores(user, HeuristicScorer.getInstance());
-          Articles.getArticlesAndScores(user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
-
-      // Sort the articles
-      TopList<Article, Double> articles = new TopList<>(articlesToRankMap.size());
-      for (Map.Entry<Article, Double> entry : articlesToRankMap.entrySet()) {
-        Article article = entry.getKey();
-        double daysAgo = Math.floor((System.currentTimeMillis() - article.getPublishedTime())
-            / TimeUnit.DAYS.toMillis(1)) + 1;
-        articles.add(entry.getKey(), entry.getValue() / daysAgo);
-      }
-
+      final TopList<Article, Double> rankedArticlesAndScores =
+          Articles.getRankedArticlesAndScores(user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
       return new SoyMapData(
           "sessionKey", this.getSession(req).getSessionKey(),
-          "articles", Iterables.transform(articles.getKeys(),
+          "articles", Iterables.transform(rankedArticlesAndScores.getKeys(),
               new Function<Article, SoyMapData>() {
                 @Override
                 public SoyMapData apply(Article article) {
@@ -76,7 +62,7 @@ public class ViewFeedServlet extends StandardServlet {
                       "urlId", article.getUrlId(),
                       "description", article.getDescription(),
                       "image_url", article.getImageUrl(),
-                      "score", articlesToRankMap.get(article),
+                      "score", rankedArticlesAndScores.getValue(article),
                       "fb_likes", (int) engagement.getLikeCount(),
                       "fb_shares", (int) engagement.getShareCount(),
                       "fb_comments" ,(int) engagement.getCommentCount(),

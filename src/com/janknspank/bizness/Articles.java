@@ -1,13 +1,11 @@
 package com.janknspank.bizness;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.janknspank.classifier.FeatureId;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -16,6 +14,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.UserIndustry;
 import com.janknspank.rank.Deduper;
 import com.janknspank.rank.Scorer;
 
@@ -35,51 +34,44 @@ public class Articles {
         new QueryOption.Limit(limit));
   }
 
+  /**
+   * This is the best method for getting articles relevant to the current user!!
+   * This is probably what you're looking for! :)
+   */
   public static Iterable<Article> getRankedArticles(User user, Scorer scorer, int limit)
       throws DatabaseSchemaException {
-    Map<Article, Double> ranks = getArticlesAndScores(user, scorer, limit * 5);
-
-    // Sort the articles
-    TopList<Article, Double> articles = new TopList<>(ranks.size());
-    for (Map.Entry<Article, Double> entry : ranks.entrySet()) {
-      articles.add(entry.getKey(), entry.getValue());
-    }
-
-    List<Article> topArticles = articles.getKeys();
-    return topArticles.subList(0, Math.min(topArticles.size(), limit));
+    return getRankedArticlesAndScores(user, scorer, limit);
   }
 
-  /**
-   * Used by ViewFeedServlet to show a set of Articles and their corresponding
-   * scores.
-   */
-  public static Map<Article, Double> getArticlesAndScores(User user, Scorer scorer, int limit)
+  public static TopList<Article, Double> getRankedArticlesAndScores(User user, Scorer scorer, int limit)
       throws DatabaseSchemaException {
-    // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
-    Iterable<Article> articles = getArticlesByInterest(user.getInterestList(), limit);
-    Iterable<Article> dedupedArticles = Deduper.filterOutDupes(articles);
-    Map<Article, Double> ranks = new HashMap<>();
-    for (Article article : dedupedArticles) {
-      ranks.put(article, scorer.getScore(user, article));
+    TopList<Article, Double> bestArticles = new TopList<>(limit);
+    for (Article article : Deduper.filterOutDupes(Iterables.concat(
+        getArticlesByInterest(user.getInterestList(), limit * 5),
+        getArticlesByIndustries(user.getIndustryList(), limit * 5)))) {
+      double hoursSincePublished =
+          ((double) System.currentTimeMillis() - article.getPublishedTime())
+              / TimeUnit.HOURS.toMillis(1);
+      bestArticles.add(article, scorer.getScore(user, article) / hoursSincePublished);
     }
-    return ranks;
+    return bestArticles;
   }
-  
-  /**
-   * Used for dupe detection threshold testing
-   * @param features
-   * @return
-   */
-  public static Iterable<Article> getArticlesByFeatures(Iterable<FeatureId> featureIds)
-      throws DatabaseSchemaException{
-    List<Number> featureNumbers = new ArrayList<>();
-    for (FeatureId featureId : featureIds) {
-      featureNumbers.add((Number)featureId.getId());
-    }
 
+  /**
+   * Used for dupe detection threshold testing.
+   */
+  public static Iterable<Article> getArticlesByFeatures(Iterable<FeatureId> featureIds, int limit)
+      throws DatabaseSchemaException{
     return Database.with(Article.class).get(
-        new QueryOption.WhereEqualsNumber("feature.feature_id", featureNumbers),
-        new QueryOption.Limit(1000));
+        new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(featureIds,
+            new Function<FeatureId, Number>() {
+          @Override
+          public Number apply(FeatureId featureId) {
+            return featureId.getId();
+          }
+        })),
+        new QueryOption.DescendingSort("published_time"),
+        new QueryOption.Limit(limit));
   }
 
   /**
@@ -96,6 +88,21 @@ public class Articles {
           }
         }),
         limit);
+  }
+
+  /**
+   * Gets a list of articles tailored specifically to the current user's
+   * industries.
+   */
+  public static Iterable<Article> getArticlesByIndustries(Iterable<UserIndustry> industries, int limit)
+      throws DatabaseSchemaException {
+    return getArticlesByFeatures(Iterables.transform(industries,
+            new Function<UserIndustry, FeatureId>() {
+              @Override
+              public FeatureId apply(UserIndustry industry) {
+                return IndustryCode.fromId(industry.getIndustryCodeId()).getFeatureId();
+              }
+            }), limit);
   }
 
   /**
