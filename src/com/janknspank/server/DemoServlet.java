@@ -16,6 +16,6 @@ public class DemoServlet extends StandardServlet {
   protected SoyMapData getSoyMapData(HttpServletRequest req)
       throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
     return new SoyMapData(
-          "downloadUrl", "https://murmuring-sands-7215.herokuapp.com/s3Pipe/SpotterApp.plist");
+          "downloadUrl", "https://murmuring-sands-7215.herokuapp.com/s3Pipe/Spotter-v0.1.plist");
   }
 }
