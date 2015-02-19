@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.janknspank.bizness.Articles;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.rank.Deduper;
 
 @AuthenticationRequired
 public class GetTopicServlet extends AbstractArticlesServlet {
@@ -14,7 +15,7 @@ public class GetTopicServlet extends AbstractArticlesServlet {
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException {
-    return Articles.getArticlesForKeywords(
-        ImmutableList.of(getRequiredParameter(req, "topic")), NUM_RESULTS);
+    return Deduper.filterOutDupes(Articles.getArticlesForKeywords(
+        ImmutableList.of(getRequiredParameter(req, "topic")), NUM_RESULTS));
   }
 }
