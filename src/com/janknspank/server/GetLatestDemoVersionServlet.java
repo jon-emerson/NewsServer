@@ -91,7 +91,7 @@ public class GetLatestDemoVersionServlet extends StandardServlet {
 
     // Create response
     JSONObject response = createSuccessResponse();
-    
+
     response.put("version", latestVersionComponents[0] 
         + "." + latestVersionComponents[1] + "." + latestVersionComponents[2]);
     response.put("downloadUrl", "https://www.spotternews.com/demo?update=1");

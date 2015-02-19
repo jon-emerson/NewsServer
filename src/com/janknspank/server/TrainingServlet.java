@@ -79,7 +79,7 @@ public class TrainingServlet extends StandardServlet {
     if (articleURL == null) {
       throw new RequestException("URL does not exist");
     }
-    
+
     String[] industryIdsList = req.getParameterValues("industriesCheckboxes");
     //Only returns the selected checkboxes
     String[] articleClassificationCodesList = req.getParameterValues("classifications");

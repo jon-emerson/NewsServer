@@ -48,7 +48,7 @@ public class GetSimilarityThresholdForDupes {
           UniverseVector.getInstance(),  vector2));
     }
   }
-  
+
   public static void printArticlePairsThatHaveSimilaritiesAbove(double thresholdSimilarity) 
       throws DatabaseSchemaException {
     ArrayList<Article> articles = Lists.newArrayList(
@@ -73,7 +73,7 @@ public class GetSimilarityThresholdForDupes {
     }
     System.out.println("Total duplicates found: " + duplicatesCount);
   }
-  
+
   public static void main(String args[]) throws ClassifierException, 
       BiznessException, DatabaseSchemaException {
     printConfirmedDupeSimilarities();
