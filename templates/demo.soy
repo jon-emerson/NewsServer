@@ -3,6 +3,7 @@
 /**
  * Main page layout.
  * @param downloadUrl
+ * @param prompt
  */
 {template .main}
   <head>
@@ -18,7 +19,7 @@
         <img id="spotterVisual" style="text-align: center;" src="resources/img/welcomeVisual@3x.png"/>
         <br />
 
-        <a id="installButton" href="itms-services://?action=download-manifest&url={$downloadUrl}" id="text">Install Demo</a>
+        <a id="installButton" href="itms-services://?action=download-manifest&url={$downloadUrl}" id="text">{$prompt}</a>
       </div>
     </div>
   <body>
