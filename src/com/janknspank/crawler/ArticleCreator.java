@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.janknspank.classifier.ClassifierException;
+import com.janknspank.classifier.Deduper;
 import com.janknspank.classifier.FeatureClassifier;
 import com.janknspank.common.DateParser;
 import com.janknspank.common.Logger;
@@ -33,7 +34,6 @@ import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.DuplicateArticle;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
-import com.janknspank.rank.Deduper;
 import com.janknspank.rank.RankException;
 
 /**
@@ -157,7 +157,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
 
     // Duplicates
     try {
-      Iterable<DuplicateArticle> duplicates = Deduper.findDupes(articleBuilder);
+      Iterable<DuplicateArticle> duplicates = FindDupes.findDupes(articleBuilder);
       if (duplicates != null) {
         articleBuilder.addAllDuplicate(duplicates);
       }

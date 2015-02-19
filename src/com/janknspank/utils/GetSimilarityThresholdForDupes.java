@@ -9,13 +9,13 @@ import com.google.common.collect.Lists;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.classifier.ClassifierException;
+import com.janknspank.classifier.Deduper;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.UniverseVector;
 import com.janknspank.classifier.Vector;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.rank.Deduper;
 
 public class GetSimilarityThresholdForDupes {
   private static final Map<String, String> dupes;
