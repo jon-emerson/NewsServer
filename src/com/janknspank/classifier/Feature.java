@@ -1,5 +1,6 @@
 package com.janknspank.classifier;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import com.google.common.base.Throwables;
@@ -19,21 +20,7 @@ import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 public abstract class Feature {
   private static final LoadingCache<FeatureId, Feature> FEATURE_CACHE =
       CacheBuilder.newBuilder().maximumSize(1000).build(new FeatureLoader());
-  private static final Iterable<FeatureId> VALID_FEATURE_IDS;
-  static {
-    // Pre-warm the cache.
-    ImmutableList.Builder<FeatureId> validFeatureIdsBuilder = ImmutableList.<FeatureId>builder();
-    for (FeatureId featureId : FeatureId.values()) {
-      try {
-        FEATURE_CACHE.get(featureId);
-      } catch (ExecutionException e) {
-        continue;
-      }
-      validFeatureIdsBuilder.add(featureId);
-    }
-    VALID_FEATURE_IDS = validFeatureIdsBuilder.build();
-    System.out.println(FEATURE_CACHE.size() + " features loaded");
-  }
+  private static List<FeatureId> VALID_FEATURE_IDS = null;
 
   /**
    * Loader for the Guava cache that returns a Feature for each FeatureId.  This
@@ -68,9 +55,24 @@ public abstract class Feature {
   }
 
   /**
-   * Returns all the features that were successfully instantiated at class-loading time.
+   * Returns all the features that have been defined on disk.
    */
-  public static Iterable<Feature> getAllFeatures() {
+  public static synchronized Iterable<Feature> getAllFeatures() {
+    if (VALID_FEATURE_IDS == null) {
+      ImmutableList.Builder<FeatureId> validFeatureIdsBuilder = ImmutableList.<FeatureId>builder();
+      for (FeatureId featureId : FeatureId.values()) {
+        try {
+          FEATURE_CACHE.get(featureId);
+        } catch (ExecutionException e) {
+          continue;
+        }
+        validFeatureIdsBuilder.add(featureId);
+      }
+      VALID_FEATURE_IDS = validFeatureIdsBuilder.build();
+      if (VALID_FEATURE_IDS.size() == 0) {
+        throw new Error("Could not find any valid features");
+      }
+    }
     return FEATURE_CACHE.getAllPresent(VALID_FEATURE_IDS).values();
   }
 

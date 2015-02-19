@@ -31,7 +31,10 @@ import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.DuplicateArticle;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.rank.Deduper;
+import com.janknspank.rank.RankException;
 
 /**
  * ArticleCreator is a very high-level object in the crawling system: It's
@@ -134,17 +137,31 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     if (articleBuilder.hasImageUrl()) {
       articleBuilder.setImageUrl(StringHelper.unescape(articleBuilder.getImageUrl()));
     }
+
+    // Features
     try {
       articleBuilder.addAllFeature(FeatureClassifier.classify(articleBuilder));
     } catch (ClassifierException e) {
       e.printStackTrace();
     }
+
+    // Social Engagement
     try {
       SocialEngagement engagement = FacebookData.getEngagementForURL(articleBuilder);
       if (engagement != null) {
         articleBuilder.addSocialEngagement(engagement);
       }
     } catch (FacebookException e) {
+      e.printStackTrace();
+    }
+
+    // Duplicates
+    try {
+      Iterable<DuplicateArticle> duplicates = FindDupes.findDupes(articleBuilder);
+      if (duplicates != null) {
+        articleBuilder.addAllDuplicate(duplicates);
+      }
+    } catch (RankException e) {
       e.printStackTrace();
     }
 

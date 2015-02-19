@@ -83,12 +83,15 @@ public class ManualHeuristicFeature extends Feature {
           getScore(article.getTitle().toLowerCase(),
               ImmutableMap.<String, Double>builder()
                   .put("acquires", 1.0)
+                  .put("is acquiring", 1.0)
                   .put("buys", 0.9)
-                  .put("acquisition", 0.5)
+                  .put("acquisition", 0.7)
+                  .put("buying", 0.4)
                   .build()),
           getScore(LOWER_CASE_BODY_CACHE.get(article),
               ImmutableMap.<String, Double>builder()
                   .put("acquires", 0.8)
+                  .put("is acquiring", 0.8)
                   .put("acquisition", 0.2)
                   .build()));
     } catch (ExecutionException e) {
@@ -127,6 +130,8 @@ public class ManualHeuristicFeature extends Feature {
                   .put("series a", 1.0)
                   .put("series b", 1.0)
                   .put("series c", 1.0)
+                  .put("series d", 1.0)
+                  .put("series e", 1.0)
                   .put("angel round", 1.0)
                   .put("valuation", 1.0)
                   .build()),
@@ -136,6 +141,8 @@ public class ManualHeuristicFeature extends Feature {
                   .put("series a", 0.9)
                   .put("series b", 0.9)
                   .put("series c", 0.9)
+                  .put("series d", 0.9)
+                  .put("series e", 0.9)
                   .put("angel round", 0.9)
                   .put("investors", 0.8)
                   .build()));

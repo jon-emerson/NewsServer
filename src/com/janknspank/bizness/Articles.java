@@ -1,11 +1,13 @@
 package com.janknspank.bizness;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -14,6 +16,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.rank.Deduper;
 import com.janknspank.rank.Scorer;
 
 /**
@@ -54,11 +57,29 @@ public class Articles {
       throws DatabaseSchemaException {
     // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
     Iterable<Article> articles = getArticlesByInterest(user.getInterestList(), limit);
+    Iterable<Article> dedupedArticles = Deduper.filterOutDupes(articles);
     Map<Article, Double> ranks = new HashMap<>();
-    for (Article article : articles) {
+    for (Article article : dedupedArticles) {
       ranks.put(article, scorer.getScore(user, article));
     }
     return ranks;
+  }
+  
+  /**
+   * Used for dupe detection threshold testing
+   * @param features
+   * @return
+   */
+  public static Iterable<Article> getArticlesByFeatures(Iterable<FeatureId> featureIds)
+      throws DatabaseSchemaException{
+    List<Number> featureNumbers = new ArrayList<>();
+    for (FeatureId featureId : featureIds) {
+      featureNumbers.add((Number)featureId.getId());
+    }
+
+    return Database.with(Article.class).get(
+        new QueryOption.WhereEqualsNumber("feature.feature_id", featureNumbers),
+        new QueryOption.Limit(1000));
   }
 
   /**

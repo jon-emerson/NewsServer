@@ -118,6 +118,8 @@ message SiteManifest {
   optional TestInstructions test_instructions = 10 [
     (required) = YES
   ];
+  
+  optional bool is_https = 11;
 }
 
 // Any URLs in these lists will be checked as either whitelisted or not, or
