@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -36,8 +37,9 @@ import com.mongodb.MapReduceOutput;
 public class JavascriptScorer extends Scorer {
   private static final Logger LOG = new Logger(JavascriptScorer.class);
   private static final String JAVASCRIPT_MAPREDUCE_DIRECTORY = "mongodb/";
-  private static final String JAVASCRIPT_MAP_FUNCTION = readJsFile("map.js");
-  private static final String JAVASCRIPT_REDUCE_FUNCTION = readJsFile("reduce.js");
+  private static final String JAVASCRIPT_MAP_FUNCTION_DEBUG = readJsFile("map.js", true);
+  private static final String JAVASCRIPT_MAP_FUNCTION = readJsFile("map.js", false);
+  private static final String JAVASCRIPT_REDUCE_FUNCTION = readJsFile("reduce.js", false);
   private static JavascriptScorer INSTANCE = null;
 
   private JavascriptScorer() {}
@@ -49,7 +51,7 @@ public class JavascriptScorer extends Scorer {
     return INSTANCE;
   }
 
-  private static final String readJsFile(String localFileName) {
+  private static final String readJsFile(String localFileName, boolean debug) {
     FileReader fileReader = null;
     BufferedReader jsFileReader = null;
     StringBuilder buffer = new StringBuilder();
@@ -58,8 +60,10 @@ public class JavascriptScorer extends Scorer {
       jsFileReader = new BufferedReader(fileReader);
       String line = jsFileReader.readLine();
       while (line != null) {
-        if (!line.trim().startsWith("//")) {
-          buffer.append(line.trim());
+        String trimLine = line.trim();
+        if (debug || (!trimLine.startsWith("var log =") && !trimLine.startsWith("log.push("))) {
+          int commentStart = trimLine.indexOf("//");
+          buffer.append(commentStart == -1 ? trimLine : trimLine.substring(0, commentStart));
         }
         line = jsFileReader.readLine();
       }
@@ -107,7 +111,7 @@ public class JavascriptScorer extends Scorer {
       scriptBuilder.append("var emit = function(key, value) {\n");
       scriptBuilder.append("  emitValue = value;\n");
       scriptBuilder.append("};\n");
-      scriptBuilder.append("var mapFunction = " + JAVASCRIPT_MAP_FUNCTION + ";\n");
+      scriptBuilder.append("var mapFunction = " + JAVASCRIPT_MAP_FUNCTION_DEBUG + ";\n");
       scriptBuilder.append("mapFunction.call(" + Mongoizer.toDBObject(article).toString() + ");\n");
       cx.evaluateString(scope, scriptBuilder.toString(), null, 1, null);
 
@@ -134,7 +138,19 @@ public class JavascriptScorer extends Scorer {
    * Old function that tested our MapReduce against MongoDB itself.  This code
    * will move to Articles, probably.
    */
-  public static void oldMain(String args[]) throws DatabaseSchemaException {
+  public static void main(String args[]) throws DatabaseSchemaException {
+    // TODO(jonemerson): Tune the hell out of this!  We need to be SMART about
+    // what Articles we run through:
+    // - Newer articles: Good!
+    // - Less new articles but very relevant to the user's industries: Good!
+    // - Moderately new articles but relevant to the user's contacts: YES!!
+    // - Other ideas?!
+    User user = Users.getByEmail("panaceaa@gmail.com");
+    BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(
+        new BasicDBObject("published_time",
+            new BasicDBObject("$gte", System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1))),
+        new BasicDBObject("feature.feature_id", getUserIndustryFeatureCode(user))));
+
     DBCollection articleCollection = MongoConnection.getDatabase().getCollection("Article");
     MapReduceCommand cmd = new MapReduceCommand(
         articleCollection,
@@ -142,11 +158,9 @@ public class JavascriptScorer extends Scorer {
         JAVASCRIPT_REDUCE_FUNCTION,
         null,
         MapReduceCommand.OutputType.INLINE,
-        new BasicDBObject("$or", ImmutableList.of(
-            new BasicDBObject("published_time",
-                new BasicDBObject("$gte", 1424073600000L)),
-            new BasicDBObject("feature.feature_id", 10006))));
+        query);
     cmd.addExtraOption("jsMode", true);
+    cmd.addExtraOption("scope", getScope(user));
 
     MapReduceOutput out = articleCollection.mapReduce(cmd);
     for (DBObject o : out.results()) {
@@ -212,7 +226,7 @@ public class JavascriptScorer extends Scorer {
     return obj.toString();
   }
 
-  public static void main(String[] args) throws DatabaseSchemaException {
+  public static void oldMain(String[] args) throws DatabaseSchemaException {
     User user = Users.getByEmail("panaceaa@gmail.com");
 
     // Now we can evaluate a script. Let's create a new object
