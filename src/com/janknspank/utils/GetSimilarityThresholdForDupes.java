@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.classifier.ClassifierException;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.UniverseVector;
 import com.janknspank.classifier.Vector;
 import com.janknspank.crawler.ArticleCrawler;
@@ -52,7 +53,7 @@ public class GetSimilarityThresholdForDupes {
   public static void printArticlePairsThatHaveSimilaritiesAbove(double thresholdSimilarity) 
       throws DatabaseSchemaException {
     ArrayList<Article> articles = Lists.newArrayList(
-        Articles.getArticlesByFeatures(ImmutableList.of((Number)10006)));
+        Articles.getArticlesByFeatures(ImmutableList.of(FeatureId.INTERNET)));
     int size = articles.size();
     int duplicatesCount = 0;
     System.out.println("Deduping " + size + " articles");
