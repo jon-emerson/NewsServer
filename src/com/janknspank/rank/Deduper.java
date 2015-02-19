@@ -32,11 +32,11 @@ public class Deduper {
   public static Iterable<Article> filterOutDupes(Iterable<Article> articles) {
     HashMap<String, Article> urlIdsMap = new HashMap<>();
     Set<Article> dedupedArticles = new HashSet<>();
-    
+
     for (Article article : articles) {
       urlIdsMap.put(article.getUrlId(), article);
     }
-    
+
     for (Article article : articles) {
       List<DuplicateArticle> dupes = article.getDuplicateList();
       SocialEngagement articleEngagement = article.getSocialEngagement(
@@ -73,7 +73,7 @@ public class Deduper {
    * NOTE: computationally expensive
    * Computes which articles are duplicates of each other and removes
    * them from the list of articles that is returned. Dupes are detected
-   * based on their cosine similarity
+   * based on their cosine similarity.
    */
   public static Iterable<Article> dedupe(Iterable<Article> articles) {
     ArrayList<Article> dedupedArticles = Lists.newArrayList(articles);
@@ -98,7 +98,7 @@ public class Deduper {
       System.out.println("\t" + dupe1.getTitle() + "\t\t" + dupe1.getUrl() 
           + "\n\t& " + dupe2.getTitle() + "\t\t" + dupe2.getUrl());
     }
-    
+
     return dedupedArticles;
   }
 
@@ -107,14 +107,12 @@ public class Deduper {
    */
   public static boolean areDupes(ArticleOrBuilder article1, ArticleOrBuilder article2) {
     double similarity = similarity(article1, article2);
-//    System.out.println("similarity between " + article1.getTitle() 
-//        + "\n\t& " + article2.getTitle() + "\n\t\t ->" + similarity);
     if (similarity > DUPLICATE_SIMILARITY_THRESHOLD) {
       return true;
     }
     return false;
   }
-  
+
   public static double similarity(ArticleOrBuilder article1, ArticleOrBuilder article2) {
     Vector vector1 = Vector.fromArticle(article1);
     Vector vector2 = Vector.fromArticle(article2);
@@ -126,6 +124,12 @@ public class Deduper {
     }
   }
 
+  /**
+   * Queries the database for a set of articles that are potential duplicates based
+   * on keyword matches and time published. Then checks similarities and returns
+   * all articles that are actually duplicates. This method is used during
+   * crawl time to store dupes on Article objects.
+   */
   public static Iterable<DuplicateArticle> findDupes(ArticleOrBuilder article) throws RankException 
        {
     // Query for articles that were published within 1 day of this article
@@ -134,7 +138,7 @@ public class Deduper {
     for (ArticleKeyword articleKeyword : article.getKeywordList()) {
       keywords.add(articleKeyword.getKeyword());
     }
-    
+
     Iterable<Article> possibleDupes;
     try {
       possibleDupes = Database.with(Article.class).get(
@@ -150,7 +154,7 @@ public class Deduper {
     ArrayList<DuplicateArticle> dupes = new ArrayList<>();
     for (Article possibleDupe : possibleDupes) {
       double similarity = similarity(article, possibleDupe);
-      
+
       if (similarity > DUPLICATE_SIMILARITY_THRESHOLD) {
         dupes.add(DuplicateArticle.newBuilder()
           .setUrlId(possibleDupe.getUrlId())
@@ -158,7 +162,7 @@ public class Deduper {
           .build());
       }
     }
-    
+
     return dupes;
   }
 }

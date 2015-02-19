@@ -32,6 +32,12 @@ public class InspectVector {
     }
   }
 
+  /**
+   * Called by bin/inspectvector.sh
+   * Generates and article object for the passed in Url, and prints
+   * out its TFIDF vector to help debug quality issues.
+   * @param args a URL to inspect
+   */
   public static void main(String args[]) throws BiznessException, ClassifierException {
     if (args.length == 0) {
       System.out.println("Usage: bin/inspectvector.sh http://path/to/url");
