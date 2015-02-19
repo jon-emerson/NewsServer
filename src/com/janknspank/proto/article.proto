@@ -62,13 +62,23 @@ message Article {
   optional int64 modified_time = 11;
 
   optional int64 word_count = 12 [
-    (required) = YES
+    (required) = YES,
+    (client_serialization) = EXCLUDE
   ];
 
   repeated ArticleKeyword keyword = 13;
-  repeated SocialEngagement social_engagement = 14;
-  repeated ArticleFeature feature = 15;
-  repeated DuplicateArticle duplicate = 16;
+
+  repeated SocialEngagement social_engagement = 14 [
+    (client_serialization) = EXCLUDE
+  ];
+
+  repeated ArticleFeature feature = 15 [
+    (client_serialization) = EXCLUDE
+  ];
+
+  repeated DuplicateArticle duplicate = 16 [
+    (client_serialization) = EXCLUDE
+  ];
 }
 
 message ArticleKeyword {
