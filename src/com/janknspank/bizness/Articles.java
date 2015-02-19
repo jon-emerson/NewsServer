@@ -8,10 +8,8 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
-import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
 import com.janknspank.proto.UserProto.Interest;
@@ -25,32 +23,19 @@ import com.janknspank.rank.Scorer;
  */
 public class Articles {
   /**
-   * Gets articles that contain a set of keywords
-   * @throws DataInternalException 
+   * Gets articles that contain a set of keywords.
    */
-  public static Iterable<Article> getArticlesForKeywords(Iterable<String> keywords)
+  public static Iterable<Article> getArticlesForKeywords(Iterable<String> keywords, int limit)
       throws DatabaseSchemaException {
     return Database.with(Article.class).get(
-        new QueryOption.WhereEquals("keyword.keyword", keywords));
+        new QueryOption.DescendingSort("published_time"),
+        new QueryOption.WhereEquals("keyword.keyword", keywords),
+        new QueryOption.Limit(limit));
   }
 
-  /**
-   * Gets a list of articles tailored specifically to the current user's
-   * interests.
-   */
-  public static Iterable<Article> getArticlesByInterest(Iterable<Interest> interests)
+  public static Iterable<Article> getRankedArticles(User user, Scorer scorer, int limit)
       throws DatabaseSchemaException {
-    return getArticlesForKeywords(Iterables.transform(interests, new Function<Interest, String>() {
-      @Override
-      public String apply(Interest interest) {
-        return interest.getKeyword();
-      }
-    }));
-  }
-
-  public static Iterable<Article> getRankedArticles(User user, Scorer scorer)
-      throws DatabaseSchemaException, ParserException, BiznessException, DatabaseRequestException {
-    Map<Article, Double> ranks = getArticlesAndScores(user, scorer);
+    Map<Article, Double> ranks = getArticlesAndScores(user, scorer, limit * 5);
 
     // Sort the articles
     TopList<Article, Double> articles = new TopList<>(ranks.size());
@@ -59,17 +44,17 @@ public class Articles {
     }
 
     List<Article> topArticles = articles.getKeys();
-    return topArticles.subList(0, Math.min(topArticles.size(), 100));
+    return topArticles.subList(0, Math.min(topArticles.size(), limit));
   }
 
   /**
    * Used by ViewFeedServlet to show a set of Articles and their corresponding
    * scores.
    */
-  public static Map<Article, Double> getArticlesAndScores(User user, Scorer scorer)
-      throws DatabaseSchemaException, ParserException, BiznessException, DatabaseRequestException {
+  public static Map<Article, Double> getArticlesAndScores(User user, Scorer scorer, int limit)
+      throws DatabaseSchemaException {
     // TODO: replace this with getArticles(UserIndustries.getIndustries(userId))
-    Iterable<Article> articles = getArticlesByInterest(user.getInterestList());
+    Iterable<Article> articles = getArticlesByInterest(user.getInterestList(), limit);
     Iterable<Article> dedupedArticles = Deduper.filterOutDupes(articles);
     Map<Article, Double> ranks = new HashMap<>();
     for (Article article : dedupedArticles) {
@@ -91,11 +76,26 @@ public class Articles {
   }
 
   /**
-   * Returns a random article
+   * Gets a list of articles tailored specifically to the current user's
+   * interests.
+   */
+  public static Iterable<Article> getArticlesByInterest(Iterable<Interest> interests, int limit)
+      throws DatabaseSchemaException {
+    return getArticlesForKeywords(
+        Iterables.transform(interests, new Function<Interest, String>() {
+          @Override
+          public String apply(Interest interest) {
+            return interest.getKeyword();
+          }
+        }),
+        limit);
+  }
+
+  /**
+   * Returns a random article.
    */
   public static Article getRandomArticle() throws DatabaseSchemaException {
-    return Database.with(Article.class).getFirst(
-        new QueryOption.AscendingSort("rand()"));
+    return Database.with(Article.class).getFirst(new QueryOption.AscendingSort("rand()"));
   }
 
   /**

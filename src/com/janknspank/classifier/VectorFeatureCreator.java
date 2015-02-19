@@ -96,7 +96,7 @@ public class VectorFeatureCreator {
     }
     Iterable<Article> articles = Iterables.concat(
         ArticleCrawler.getArticles(urls).values(),
-        Articles.getArticlesForKeywords(words));
+        Articles.getArticlesForKeywords(words, 1000));
     System.out.println(Iterables.size(articles) + " articles found");
 
     // 2.5 Output # articles / seed word - make it easy to prune out

@@ -14,11 +14,9 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.IntentCodes;
 import com.janknspank.bizness.Intents;
-import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.Intent;
 import com.janknspank.proto.UserProto.User;
@@ -26,7 +24,7 @@ import com.janknspank.rank.HeuristicScorer;
 
 @AuthenticationRequired
 public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
-  private static final Logger LOG = new Logger(FTUEGetArticlesServlet.class);
+  private static final int NUM_RESULTS = 50;
 
   /**
    * Called by the Mobile client right after a user sets their goals / intents
@@ -47,18 +45,10 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
   }
 
   @Override
-  protected Iterable<Article> getArticles(HttpServletRequest req)
-      throws DatabaseSchemaException, BiznessException, DatabaseRequestException {
+  protected Iterable<Article> getArticles(HttpServletRequest req) throws DatabaseSchemaException {
     // BAD: this makes second call to DB for User after doPostInternal call
     User user = Database.with(User.class).get(getSession(req).getUserId());
-
-    try {
-      return Articles.getRankedArticles(user, HeuristicScorer.getInstance());
-    } catch (DatabaseSchemaException | ParserException e) {
-      // Fallback
-      LOG.error("Couldn't load getRankedArticles: " + e.getMessage(), e);
-      return Articles.getArticlesByInterest(user.getInterestList());
-    }
+    return Articles.getRankedArticles(user, HeuristicScorer.getInstance(), NUM_RESULTS);
   }
 
   public static Iterable<Intent> getIntentsFromCodes(Iterable<String> intentCodes) {

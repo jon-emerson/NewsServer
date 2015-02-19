@@ -21,6 +21,9 @@ path_blacklist {
 path_blacklist {
   needle: "/merge/"
 }
+path_blacklist {
+  needle: "/nickanderson/" # Cartoonist.
+}
 paragraph_selector: ".article-body p"
 paragraph_selector: ".entry p"
 article_url_pattern {

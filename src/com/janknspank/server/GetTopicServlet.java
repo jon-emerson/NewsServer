@@ -9,10 +9,12 @@ import com.janknspank.proto.ArticleProto.Article;
 
 @AuthenticationRequired
 public class GetTopicServlet extends AbstractArticlesServlet {
+  private static final int NUM_RESULTS = 50;
 
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException {
-    return Articles.getArticlesForKeywords(ImmutableList.of(getRequiredParameter(req, "topic")));
+    return Articles.getArticlesForKeywords(
+        ImmutableList.of(getRequiredParameter(req, "topic")), NUM_RESULTS);
   }
 }

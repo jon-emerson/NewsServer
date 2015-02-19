@@ -1,7 +1,7 @@
 
 // Called by MongoDB.  "this" is an Article object.
 function() {
-  log = log || [];
+  var log = log || { push: function() {} };
   log.push("URL ID: " + this._id.$oid);
   log.push("userIndustryFeatureCode = " + userIndustryFeatureCode);
 
@@ -13,14 +13,15 @@ function() {
   for (var i = 0; i < this.feature.length; i++) {
     log.push("similarity(" + this.feature[i].feature_id + ") = " + this.feature[i].similarity);
     if (this.feature[i].feature_id == userIndustryFeatureCode ||
-          this.feature[i].feature_id == 20000 /* Startup vector */) {
+        this.feature[i].feature_id == 20000 /* Startup vector */) {
       score = Math.max(score, this.feature[i].similarity);
     }
-    emit(0, {
-      'object': {
-        'article': this,
-        'score': score * (3 / 4)
-      }
-    });
   }
+  emit(0, {
+    'object': {
+      'article': this,
+      'url_id': this._id,
+      'score': score * (3 / 4)
+    }
+  });
 }
