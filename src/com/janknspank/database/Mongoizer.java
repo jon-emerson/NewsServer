@@ -243,11 +243,11 @@ public class Mongoizer {
   }
 
   public static <U extends Object> BasicDBList toDBList(Iterable<U> list)
-      throws DatabaseRequestException, DatabaseSchemaException {
+      throws DatabaseSchemaException {
     BasicDBList dbList = new BasicDBList();
     for (Object value : list) {
       if (value instanceof Message) {
-        dbList.add(toDBObject(Validator.assertValid((Message) value)));
+        dbList.add(toDBObject((Message) value));
       } else {
         dbList.add(value);
       }

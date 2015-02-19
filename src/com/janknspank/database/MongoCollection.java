@@ -124,7 +124,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
    * TODO(jonemerson): This should throw DatabaseRequestExceptions if any
    * options don't match up to the schema.
    */
-  private BasicDBObject getQueryObject(QueryOption... options) {
+  BasicDBObject getQueryObject(QueryOption... options) {
     BasicDBObject dbObject = new BasicDBObject();
     for (WhereOption whereEquals :
         Iterables.concat(

@@ -133,7 +133,7 @@ message SocialEngagement {
 message ArticleFeature {
   optional int32 feature_id = 1 [
     (required) = YES,
-    (storage_method) = PULL_OUT
+    (storage_method) = INDEX
   ];
 
   enum Type {

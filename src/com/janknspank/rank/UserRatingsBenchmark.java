@@ -170,15 +170,21 @@ public class UserRatingsBenchmark {
 
   public static void main(String args[]) throws Exception {
     Iterable<UrlRating> allRatings = UrlRatings.getAllRatings();
-    Map<UrlRating, Double> scores = 
+    Map<UrlRating, Double> scores =
         calculateScoresFor(allRatings, NeuralNetworkScorer.getInstance());
     System.out.println("\nNEURAL NETWORK SCORER:");
     printHistogram(scores);
     grade(scores);
 
-    scores = 
-        calculateScoresFor(allRatings, NeuralNetworkScorer.getInstance());
+    scores =
+        calculateScoresFor(allRatings, HeuristicScorer.getInstance());
     System.out.println("\nHEURISTIC SCORER:");
+    printHistogram(scores);
+    grade(scores);
+
+    scores =
+        calculateScoresFor(allRatings, JavascriptScorer.getInstance());
+    System.out.println("\nJAVASCRIPT SCORER:");
     printHistogram(scores);
     grade(scores);
 
