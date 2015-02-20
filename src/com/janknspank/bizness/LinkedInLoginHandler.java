@@ -133,6 +133,7 @@ public class LinkedInLoginHandler {
     try {
       // Get the user's email address from the LinkedIn profile response.
       DocumentNode linkedInProfileDocument = linkedInProfileDocumentFuture.get();
+      long startTime = System.currentTimeMillis();
       System.out.println("Processing profile...");
 
       // Get a User.Builder object we can start updating with the user's updated
@@ -147,28 +148,43 @@ public class LinkedInLoginHandler {
       userBuilder.setFirstName(linkedInProfileDocument.findFirst("first-name").getFlattenedText());
       userBuilder.setLastName(linkedInProfileDocument.findFirst("last-name").getFlattenedText());
 
+      System.out.println("So far: " + (System.currentTimeMillis() - startTime) + "ms");
+
       // Update LinkedInProfile field on User object, including an updated set of Employers.
+      long stepStartTime = System.currentTimeMillis();
       userBuilder.setLinkedInProfile(createLinkedInProfile(linkedInProfileDocument));
+      System.out.println("setLinkedInProfile: " + (System.currentTimeMillis() - stepStartTime) + "ms");
 
       // Update LinkedInConnections field on User object.
+      stepStartTime = System.currentTimeMillis();
       DocumentNode linkedInConnectionsDocument = linkedInConnectionsDocumentFuture.get(); // TODO: move this down to where it's used
       userBuilder.setLinkedInConnections(createLinkedInConnections(linkedInConnectionsDocument));
+      System.out.println("setLinkedInConnections: " + (System.currentTimeMillis() - stepStartTime) + "ms");
 
       // Update Interests.
+      stepStartTime = System.currentTimeMillis();
       Iterable<Interest> updatedInterests = getUpdatedInterests(
           userBuilder, linkedInProfileDocument, linkedInConnectionsDocument);
       userBuilder.clearInterest();
       userBuilder.addAllInterest(updatedInterests);
+      System.out.println("addAllInterest: " + (System.currentTimeMillis() - stepStartTime) + "ms");
 
       // Update UserIndustries.
+      stepStartTime = System.currentTimeMillis();
       Iterable<UserIndustry> updatedUserIndustries = getUpdatedUserIndustries(
           userBuilder, linkedInProfileDocument);
       userBuilder.clearIndustry();
       userBuilder.addAllIndustry(updatedUserIndustries);
+      System.out.println("addAllIndustry: " + (System.currentTimeMillis() - stepStartTime) + "ms");
 
       // Update LinkedIn profile photo URL.
+      stepStartTime = System.currentTimeMillis();
       userBuilder.setLinkedInProfilePhotoUrl(getLinkedInProfilePhotoUrl(linkedInProfileDocument));
+      System.out.println("setLinkedInProfilePhotoUrl: " + (System.currentTimeMillis() - stepStartTime) + "ms");
 
+      System.out.println("Completed User update processing in "
+          + (System.currentTimeMillis() - startTime) + "ms");
+      startTime = System.currentTimeMillis();
       try {
         User user = userBuilder.build();
         if (isNewUser) {
@@ -176,6 +192,8 @@ public class LinkedInLoginHandler {
         } else {
           Database.update(user);
         }
+        System.out.println("Updated User in DB in "
+            + (System.currentTimeMillis() - startTime) + "ms");
         return user;
       } catch (DatabaseRequestException e) {
         throw new BiznessException("Error creating user", e);
