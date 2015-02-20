@@ -391,3 +391,48 @@ message UrlRating {
     (storage_method) = PULL_OUT
   ];
 }
+
+message DeviceRegistration {
+  option (database_collection) = "MongoDB.UrlRating";
+
+  // Unique ID for the user ID + device registration ID pair.
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1,
+    (client_serialization) = EXCLUDE
+  ];
+
+  optional string user_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  enum DeviceType {
+    UNKNOWN = 0;
+    ANDROID = 1;
+    IOS = 2;
+  }
+  optional DeviceType device_type = 3 [
+    default = UNKNOWN,
+    (required) = YES
+  ];
+
+  // Opaque device type-specific identifier for the phone / tablet / whatever
+  // we should send notifications to.  iOS calls this a device ID, Android calls
+  // it a registration ID.
+  optional string device_id = 4 [
+    (required) = YES,
+    (string_length) = 100,
+    (string_charset) = LATIN1
+  ];
+
+  optional int64 create_time = 5 [
+    (required) = YES,
+    (client_serialization) = EXCLUDE,
+    (storage_method) = PULL_OUT
+  ];
+}
