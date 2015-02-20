@@ -1,4 +1,4 @@
-package com.janknspank.server;
+package com.janknspank.bizness;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,15 +12,14 @@ import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
 
-public class LoginServletTest {
+public class LinkedInLoginHandlerTest {
   @SuppressWarnings("resource")
   @Test
   public void testGetEmployers() throws Exception {
-    LoginServlet servlet = new LoginServlet();
     DocumentNode documentNode = DocumentBuilder.build(
         "https://api.linkedin.com/~me",
         new FileReader("testdata/linkedinprofile.xml"));
-    List<Employer> employers = servlet.getEmployers(documentNode);
+    List<Employer> employers = LinkedInLoginHandler.getEmployers(documentNode);
     assertEquals(6, employers.size());
     assertEquals("Spotter", employers.get(0).getName());
     assertEquals("Google", employers.get(1).getName());

@@ -2,7 +2,6 @@ package com.janknspank.bizness;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,13 +11,10 @@ import com.google.api.client.util.Maps;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.Sets;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.UserProto.AddressBook;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.Source;
@@ -28,65 +24,6 @@ public class UserInterests {
   public static final String TYPE_LOCATION = "l";
   public static final String TYPE_PERSON = "p";
   public static final String TYPE_ORGANIZATION = "o";
-
-  /**
-   * Updates the user's interests using his LinkedIn profile, and returns his
-   * updated User representation (containing said LinkedIn interests).
-   */
-  public static User updateInterests(User user, DocumentNode profileDocumentNode,
-      DocumentNode connectionsDocumentNode)
-      throws BiznessException, DatabaseSchemaException {
-
-    // Step 1: Update companies / organizations.
-    // Note: Dedupe by using a set.
-    Set<String> companyNames = Sets.newHashSet();
-    for (Node companyNameNode : profileDocumentNode.findAll("position > company > name")) {
-      companyNames.add(companyNameNode.getFlattenedText());
-    }
-    List<Interest> companyInterests = Lists.newArrayList();
-    for (String companyName : companyNames) {
-      companyInterests.add(Interest.newBuilder()
-          .setId(GuidFactory.generate())
-          .setKeyword(companyName)
-          .setSource(Source.LINKED_IN_PROFILE)
-          .setType(TYPE_ORGANIZATION)
-          .setCreateTime(System.currentTimeMillis())
-          .build());
-    }
-    user = updateInterests(user, companyInterests, Source.LINKED_IN_PROFILE);
-
-    // Step 2: Update people.
-    if (connectionsDocumentNode != null) {
-      Set<String> peopleNames = Sets.newHashSet();
-      for (Node personNode : connectionsDocumentNode.findAll("person")) {
-        StringBuilder nameBuilder = new StringBuilder();
-        Node firstNameNode = personNode.findFirst("first-name");
-        if (firstNameNode != null) {
-          nameBuilder.append(firstNameNode.getFlattenedText());
-        }
-        Node lastNameNode = personNode.findFirst("last-name");
-        if (lastNameNode != null) {
-          if (firstNameNode != null) {
-            nameBuilder.append(" ");
-          }
-          nameBuilder.append(lastNameNode.getFlattenedText());
-        }
-        peopleNames.add(nameBuilder.toString());
-      }
-      List<Interest> personInterests = Lists.newArrayList();
-      for (String peopleName : peopleNames) {
-        personInterests.add(Interest.newBuilder()
-            .setId(GuidFactory.generate())
-            .setKeyword(peopleName)
-            .setSource(Source.LINKED_IN_CONNECTIONS)
-            .setType(TYPE_PERSON)
-            .setCreateTime(System.currentTimeMillis())
-            .build());
-      }
-      user = updateInterests(user, personInterests, Source.LINKED_IN_CONNECTIONS);
-    }
-    return user;
-  }
 
   /**
    * Returns a list of implied interests derived from the user's passed-in
