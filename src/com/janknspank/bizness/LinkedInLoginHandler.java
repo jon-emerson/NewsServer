@@ -148,7 +148,7 @@ public class LinkedInLoginHandler {
       userBuilder.setFirstName(linkedInProfileDocument.findFirst("first-name").getFlattenedText());
       userBuilder.setLastName(linkedInProfileDocument.findFirst("last-name").getFlattenedText());
 
-      System.out.println("So far: " + (System.currentTimeMillis() - startTime) + "ms");
+      System.out.println("Read existing user: " + (System.currentTimeMillis() - startTime) + "ms");
 
       // Update LinkedInProfile field on User object, including an updated set of Employers.
       long stepStartTime = System.currentTimeMillis();
