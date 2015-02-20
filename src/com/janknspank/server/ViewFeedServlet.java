@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
@@ -30,10 +31,12 @@ public class ViewFeedServlet extends StandardServlet {
    * servlet's Soy page.
    */
   @Override
-  protected SoyMapData getSoyMapData(HttpServletRequest req) throws DatabaseSchemaException {
+  protected SoyMapData getSoyMapData(HttpServletRequest req)
+      throws DatabaseSchemaException, RequestException {
     User user = Database.with(User.class).get(getSession(req).getUserId());
     if (user.getEmail().equals("tom.charytoniuk@gmail.com") ||
-        user.getEmail().equals("panaceaa@gmail.com")) {
+        user.getEmail().equals("panaceaa@gmail.com") ||
+        user.getEmail().equals("chrysb@gmail.com")) {
       // Debugging for Linkedinprofile document
 //      LinkedInProfile profile = user.getLinkedInProfile();
 //      DocumentNode linkedInProfileDocument = DocumentBuilder.build(null, 
@@ -45,7 +48,7 @@ public class ViewFeedServlet extends StandardServlet {
           Articles.getRankedArticlesAndScores(user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
       return new SoyMapData(
           "sessionKey", this.getSession(req).getSessionKey(),
-          "articles", Iterables.transform(rankedArticlesAndScores.getKeys(),
+          "articles", new SoyListData(Iterables.transform(rankedArticlesAndScores.getKeys(),
               new Function<Article, SoyMapData>() {
                 @Override
                 public SoyMapData apply(Article article) {
@@ -68,9 +71,10 @@ public class ViewFeedServlet extends StandardServlet {
                       "fb_comments" ,(int) engagement.getCommentCount(),
                       "industry_classifications", industryClassifications);
                 }
-              }));
+              })));
+    } else {
+      throw new RequestException("You are not authorized to use this page.");
     }
-    return null;
   }
 
   private String getIndustryString(Article article) {
