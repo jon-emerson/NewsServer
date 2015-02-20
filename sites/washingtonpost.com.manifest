@@ -16,10 +16,19 @@ subdomain_blacklist: "ssl.washingtonpost.com"
 subdomain_blacklist: "subscribe.washingtonpost.com"
 subdomain_blacklist: "yellowpages.washingtonpost.com"
 path_blacklist {
+  needle: "/blogs/dc-sports-bog/" # Yes, it's actually "bog".
+}
+path_blacklist {
+  needle: "/blogs/football-insider/"
+}
+path_blacklist {
   needle: "/capitalweathergang/"
 }
 path_blacklist {
   needle: "/newssearch/"
+}
+path_blacklist {
+  needle: "/sports/"
 }
 path_blacklist {
   needle: "/wp-dyn/"
@@ -68,7 +77,6 @@ test_instructions {
     article_url: "http://www.washingtonpost.com/blogs/the-switch/wp/2013/12/23/heres-what-paul-krugman-doesnt-get-about-bitcoin/"
     article_url: "http://www.washingtonpost.com/news/morning-mix/wp/2014/12/16/hong-kongs-occupy-central-protest-is-no-more/"
     article_url: "http://www.washingtonpost.com/politics/house-majority-whip-scalise-confirms-he-spoke-to-white-nationalists-in-2002/2014/12/29/7f80dc14-8fa3-11e4-a900-9960214d4cd7_story.html"
-    article_url: "http://www.washingtonpost.com/sports/highschools/prosecutors-allege-that-dc-assault-co-founder-curtis-malone-is-principle-character-in-wide-ranging-drug-conspiracy/2013/10/09/ff92d324-30f6-11e3-8627-c5d7de0a046b_story.html"
     article_url: "http://www.washingtonpost.com/world/asia_pacific/air-search-for-missing-airasia-jet-suspended/2014/12/28/a903067e-8e8c-11e4-a900-9960214d4cd7_story.html"
     article_url: "http://www.washingtonpost.com/world/russias-putin-prepares-to-annex-crimea/2014/03/18/933183b2-654e-45ce-920e-4d18c0ffec73_story.html"
     non_article_url: "http://primary.washingtonpost.com/blogs/right-turn/"

@@ -107,7 +107,15 @@ public class JonBenchmark {
       "http://techcrunch.com/2015/02/10/flipboard-web/",
       "http://techcrunch.com/2015/02/12/expedia-buys-orbitz-for-1-6b-in-cash-to-square-up-to-priceline/",
       "http://techcrunch.com/2015/02/12/linkedin-battens-down-the-hatches-on-api-use-limiting-full-access-to-partners/",
-      "http://techcrunch.com/2015/02/13/google-pulls-its-helpouts-mobile-applications-from-the-app-stores/");
+      "http://techcrunch.com/2015/02/13/google-pulls-its-helpouts-mobile-applications-from-the-app-stores/",
+      "http://recode.net/2015/02/19/social-marketing-company-livefyre-announces-47-million-in-funding/",
+      "http://www.theverge.com/2015/2/19/8073273/youtube-kids-android-app-for-children",
+      "http://bits.blogs.nytimes.com/2015/02/19/yahoo-unveils-tools-for-making-mobile-apps/",
+      "http://recode.net/2015/02/19/social-marketing-company-livefyre-announces-47-million-in-funding/",
+      "https://gigaom.com/2015/02/19/googles-inbox-lands-on-tablets-works-in-firefox-and-safari-too/",
+      "http://takingnote.blogs.nytimes.com/2015/02/19/putting-a-price-on-privacy-29/",
+      "http://mashable.com/2015/02/18/yahoo-mobile-developers/",
+      "http://techcrunch.com/2015/02/19/entrepreneur-first-hatches-latest-startups-partners-with-media-power-players/");
 
   public static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
@@ -219,7 +227,30 @@ public class JonBenchmark {
       "http://techcrunch.com/2015/02/13/watch-tim-cook-speak-at-president-obamas-summit-on-cybersecurity/",
       "http://techcrunch.com/2015/02/13/a-third-act-for-biofuels/",
       "http://techcrunch.com/2015/02/13/alf/",
-      "http://techcrunch.com/2015/02/13/rockbot-anthem/");
+      "http://techcrunch.com/2015/02/13/rockbot-anthem/",
+      "http://artsbeat.blogs.nytimes.com/2015/02/19/new-york-philharmonics-archive-expands/",
+      "http://www.nytimes.com/2015/02/20/world/europe/dominique-strauss-kahn-trial.html",
+      "http://www.slate.com/blogs/moneybox/2015/02/19/walmart_q4_2015_earnings_pay_raises_for_everyone.single.html",
+      "http://www.washingtonpost.com/news/act-four/wp/2015/02/19/how-tv-made-christianity-radical-again/",
+      "http://www.bloomberg.com/news/articles/2015-02-19/are-credit-suisse-rbs-standard-chartered-hsbc-and-barclays-terrorist-banks-",
+      "http://www.theverge.com/2015/2/19/8069493/iggy-azalea-quits-twitter-over-hatred",
+      "http://www.nytimes.com/2015/02/22/magazine/can-i-ask-my-neighbors-to-quiet-their-baby.html",
+      "http://blog.sfgate.com/inoakland/2015/02/19/oakland-shows-at-noise-pop-2015/",
+      "http://www.washingtonpost.com/news/act-four/wp/2015/02/19/how-tv-made-christianity-radical-again/",
+      "https://gigaom.com/2015/02/19/the-4-things-at-least-youll-learn-about-at-structure-data/",
+      "https://gigaom.com/2015/02/19/upcoming-gigaom-event-solving-real-issues-with-todays-big-data-experts/",
+      "http://dealbook.nytimes.com/2015/02/19/rexam-board-to-recommend-investors-accept-ball-takeover-offer/",
+      "http://www.cnn.com/2015/02/19/africa/best-african-shows/",
+      "http://recode.net/2015/02/19/dells-take-on-the-tablet-stands-out-with-high-quality-build/",
+      "http://www.forbes.com/sites/bradthomas/2015/02/19/just-what-the-doctor-ordered-a-disciplined-health-care-reit/",
+      "http://www.washingtonpost.com/blogs/erik-wemple/wp/2015/02/19/clinton-aide-philippe-reines-praises-on-the-record-communications/",
+      "http://www.cbsnews.com/news/whats-behind-angies-list-stunning-stock-performance/",
+      "http://www.siliconbeat.com/2015/02/19/white-house-working-with-twitter-facebook-and-other-social-media-companies-to-combat-violent-extremism/",
+      "http://mashable.com/2015/02/20/events-advertising-social-media/",
+      "http://www.bbc.co.uk/newsbeat/31530528",
+      "http://www.nytimes.com/2015/02/20/business/fda-eases-access-to-dna-tests-of-rare-disorders.html",
+      "http://www.nytimes.com/2015/02/20/upshot/american-sniper-the-peoples-choice-for-best-picture.html",
+      "http://www.sfgate.com/news/politics/article/Snowden-leak-NSA-helped-British-steal-cell-phone-6091392.php");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {

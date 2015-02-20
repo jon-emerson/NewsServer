@@ -1,12 +1,12 @@
 package com.janknspank.crawler;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
@@ -16,7 +16,6 @@ import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Links;
 import com.janknspank.bizness.Urls;
-import com.janknspank.common.Asserts;
 import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -142,14 +141,11 @@ public class ArticleCrawler implements Runnable {
    * Returns a map of URL -> Article for each given article.
    */
   private static Map<String, Article> createArticleMap(Iterable<Article> articles) {
-    return Maps.uniqueIndex(
-        articles,
-        new Function<Article, String>() {
-          @Override
-          public String apply(Article article) {
-            return article.getUrl();
-          }
-        });
+    HashMap<String, Article> articleMap = Maps.newHashMap();
+    for (Article article : articles) {
+      articleMap.put(article.getUrl(), article);
+    }
+    return articleMap;
   }
 
   /**
@@ -201,8 +197,6 @@ public class ArticleCrawler implements Runnable {
         | ParserException | RequiredFieldException e) {
       throw new BiznessException("Could not get articles: " + e.getMessage(), e);
     }
-    Asserts.assertTrue(Iterables.size(urlStrings) == articles.size(),
-        "Should have received Articles fo all requested URLs.", BiznessException.class);
     return articles;
   }
 

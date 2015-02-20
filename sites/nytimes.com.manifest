@@ -25,6 +25,10 @@ path_blacklist {
   needle: "/content/"
 }
 path_blacklist {
+  needle: "/morning-agenda-"
+  location: CONTAINS
+}
+path_blacklist {
   needle: "/register"
   location: EQUALS
 }
