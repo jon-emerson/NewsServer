@@ -15,6 +15,7 @@ import com.janknspank.rank.Deduper;
 import com.janknspank.rank.RankException;
 
 public class FindDupes {
+  public static final double DUPLICATE_SIMILARITY_THRESHOLD = 0.25;
   public static final long PUBLISHED_TIME_WINDOW_FOR_DUPES = TimeUnit.HOURS.toMillis(6);
   /**
    * Queries the database for a set of articles that are potential duplicates based
@@ -48,11 +49,11 @@ public class FindDupes {
       if (publishedTimeDifference(article, possibleDupe) < PUBLISHED_TIME_WINDOW_FOR_DUPES) {
         double similarity = Deduper.similarity(article, possibleDupe);
 
-        if (similarity > Deduper.DUPLICATE_SIMILARITY_THRESHOLD) {
+        if (similarity > DUPLICATE_SIMILARITY_THRESHOLD) {
           dupes.add(DuplicateArticle.newBuilder()
-            .setUrlId(possibleDupe.getUrlId())
-            .setSimilarity(similarity)
-            .build());
+              .setUrlId(possibleDupe.getUrlId())
+              .setSimilarity(similarity)
+              .build());
         }
       }
     }
