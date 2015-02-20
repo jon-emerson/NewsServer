@@ -40,6 +40,9 @@ path_blacklist {
 path_blacklist {
   needle: "/times-journeys/"
 }
+path_blacklist {
+  needle: "/morning-agenda"
+}
 paragraph_selector: ".articleBody > p"
 paragraph_selector: "article > p"
 paragraph_selector: ".story-body > p"

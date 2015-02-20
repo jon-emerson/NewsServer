@@ -2,6 +2,7 @@ package com.janknspank.crawler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -14,6 +15,7 @@ import com.janknspank.rank.Deduper;
 import com.janknspank.rank.RankException;
 
 public class FindDupes {
+  public static final long PUBLISHED_TIME_WINDOW_FOR_DUPES = TimeUnit.HOURS.toMillis(6);
   /**
    * Queries the database for a set of articles that are potential duplicates based
    * on keyword matches and time published. Then checks similarities and returns
@@ -43,16 +45,22 @@ public class FindDupes {
 
     ArrayList<DuplicateArticle> dupes = new ArrayList<>();
     for (Article possibleDupe : possibleDupes) {
-      double similarity = Deduper.similarity(article, possibleDupe);
+      if (publishedTimeDifference(article, possibleDupe) < PUBLISHED_TIME_WINDOW_FOR_DUPES) {
+        double similarity = Deduper.similarity(article, possibleDupe);
 
-      if (similarity > Deduper.DUPLICATE_SIMILARITY_THRESHOLD) {
-        dupes.add(DuplicateArticle.newBuilder()
-          .setUrlId(possibleDupe.getUrlId())
-          .setSimilarity(similarity)
-          .build());
+        if (similarity > Deduper.DUPLICATE_SIMILARITY_THRESHOLD) {
+          dupes.add(DuplicateArticle.newBuilder()
+            .setUrlId(possibleDupe.getUrlId())
+            .setSimilarity(similarity)
+            .build());
+        }
       }
     }
 
     return dupes;
+  }
+  
+  public static long publishedTimeDifference(ArticleOrBuilder article1, ArticleOrBuilder article2) {
+    return Math.abs(article1.getPublishedTime() - article2.getPublishedTime());
   }
 }

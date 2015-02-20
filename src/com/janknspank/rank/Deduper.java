@@ -17,7 +17,7 @@ import com.janknspank.proto.ArticleProto.DuplicateArticle;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 
 public class Deduper {
-  public static final double DUPLICATE_SIMILARITY_THRESHOLD = 0.5;
+  public static final double DUPLICATE_SIMILARITY_THRESHOLD = 0.25;
   
   /**
    * This method filters out duplicates based on the DuplicateArticles
