@@ -31,6 +31,8 @@ public class GetSimilarityThresholdForDupes {
         "http://dealbook.nytimes.com/2015/02/18/uber-expands-funding-round-by-1-billion/");
     dupes.put("http://www.wired.com/2015/02/facebook-unveils-tool-sharing-data-malicious-botnets/",
         "http://www.slate.com/blogs/future_tense/2015/02/16/facebook_threatexchange_the_tool_for_sharing_data_on_malicious_botnets.single.html");
+    dupes.put("http://thenextweb.com/apps/2015/02/20/youtube-kids-launching-february-23/",
+        "http://money.cnn.com/2015/02/20/technology/mobile/youtube-for-kids/");
   }
 
   /**
@@ -78,6 +80,6 @@ public class GetSimilarityThresholdForDupes {
   public static void main(String args[]) throws ClassifierException, 
       BiznessException, DatabaseSchemaException {
     printConfirmedDupeSimilarities();
-    printArticlePairsThatHaveSimilaritiesAbove(0.5);
+    printArticlePairsThatHaveSimilaritiesAbove(0.25);
   }
 }

@@ -11,13 +11,14 @@ import com.google.common.collect.Lists;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.UniverseVector;
 import com.janknspank.classifier.Vector;
+import com.janknspank.crawler.FindDupes;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.ArticleProto.DuplicateArticle;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 
 public class Deduper {
-  public static final double DUPLICATE_SIMILARITY_THRESHOLD = 0.5;
+
   
   /**
    * This method filters out duplicates based on the DuplicateArticles
@@ -102,7 +103,7 @@ public class Deduper {
    */
   public static boolean areDupes(ArticleOrBuilder article1, ArticleOrBuilder article2) {
     double similarity = similarity(article1, article2);
-    if (similarity > DUPLICATE_SIMILARITY_THRESHOLD) {
+    if (similarity > FindDupes.DUPLICATE_SIMILARITY_THRESHOLD) {
       return true;
     }
     return false;
