@@ -15796,15 +15796,15 @@ public final class CoreProto {
       "\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220" +
       "\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!" +
       "\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017M",
-      "ySQL.UrlRating\"\251\002\n\022DeviceRegistration\022 \n" +
+      "ySQL.UrlRating\"\262\002\n\022DeviceRegistration\022 \n" +
       "\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022!\n\007user_" +
       "id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022B\n\013device_typ" +
       "e\030\003 \001(\0162\036.DeviceRegistration.DeviceType:" +
       "\007UNKNOWNB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230" +
       "\246\035d\250\246\035\001\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246" +
       "\035\005\"/\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID" +
-      "\020\001\022\007\n\003IOS\020\002:\025\212\265\030\021MongoDB.UrlRatingB!\n\024co" +
-      "m.janknspank.protoB\tCoreProto"
+      "\020\001\022\007\n\003IOS\020\002:\036\212\265\030\032MongoDB.DeviceRegistrat" +
+      "ionB!\n\024com.janknspank.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

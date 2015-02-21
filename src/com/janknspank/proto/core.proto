@@ -393,7 +393,7 @@ message UrlRating {
 }
 
 message DeviceRegistration {
-  option (database_collection) = "MongoDB.UrlRating";
+  option (database_collection) = "MongoDB.DeviceRegistration";
 
   // Unique ID for the user ID + device registration ID pair.
   optional string id = 1 [
