@@ -181,4 +181,31 @@
     <url-pattern>/s3Pipe/*</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>GetIndustriesServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetIndustriesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetIndustriesServlet</servlet-name>
+    <url-pattern>/getIndustries</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetOrganizationsServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetOrganizationsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetOrganizationsServlet</servlet-name>
+    <url-pattern>/getOrganizations</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetPeopleServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetPeopleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetPeopleServlet</servlet-name>
+    <url-pattern>/getPeople</url-pattern>
+  </servlet-mapping>
+
 </web-app>

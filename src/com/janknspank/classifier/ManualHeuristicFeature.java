@@ -107,6 +107,7 @@ public class ManualHeuristicFeature extends Feature {
               ImmutableMap.<String, Double>builder()
                   .put("launches", 1.0)
                   .put("launched", 0.9)
+                  .put("to launch", 0.9)
                   .put("releases", 0.9)
                   .build()),
           getScore(LOWER_CASE_BODY_CACHE.get(article),
