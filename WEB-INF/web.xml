@@ -217,4 +217,13 @@
     <url-pattern>/getPeople</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>SetUserInterestServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetUserInterestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetUserInterestServlet</servlet-name>
+    <url-pattern>/setUserInterest</url-pattern>
+  </servlet-mapping>
+
 </web-app>
