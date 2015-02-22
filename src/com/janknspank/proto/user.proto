@@ -8,8 +8,6 @@ option java_outer_classname = "UserProto";
 message User {
   option (database_collection) = "MongoDB.User";
 
-  extensions 6; // Old fields.
-
   optional string id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
@@ -17,21 +15,25 @@ message User {
     (string_charset) = LATIN1
   ];
 
-  optional string name = 2 [
+  optional string first_name = 2 [
     (string_length) = 100
   ];
 
-  optional string email = 3 [
+  optional string last_name = 3 [
+    (string_length) = 100
+  ];
+
+  optional string email = 4 [
     (required) = YES,
     (storage_method) = UNIQUE_INDEX,
     (string_length) = 100
   ];
 
-  optional string linked_in_id = 4 [
+  optional string linked_in_id = 5 [
     (string_length) = 25
   ];
 
-  optional string facebook_id = 5 [
+  optional string facebook_id = 6 [
     (string_length) = 25
   ];
 

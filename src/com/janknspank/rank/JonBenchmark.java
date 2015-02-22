@@ -250,7 +250,10 @@ public class JonBenchmark {
       "http://www.bbc.co.uk/newsbeat/31530528",
       "http://www.nytimes.com/2015/02/20/business/fda-eases-access-to-dna-tests-of-rare-disorders.html",
       "http://www.nytimes.com/2015/02/20/upshot/american-sniper-the-peoples-choice-for-best-picture.html",
-      "http://www.sfgate.com/news/politics/article/Snowden-leak-NSA-helped-British-steal-cell-phone-6091392.php");
+      "http://www.sfgate.com/news/politics/article/Snowden-leak-NSA-helped-British-steal-cell-phone-6091392.php",
+      "http://www.sfgate.com/bayarea/article/San-Francisco-to-privatize-management-of-public-6090606.php",
+      "http://www.bloomberg.com/news/articles/2015-02-19/gundlach-hates-automakers-long-term-as-ride-sharing-grows",
+      "http://www.washingtonpost.com/blogs/dc-sports-bog/wp/2015/02/19/how-espn-980-landed-a-90-minute-mike-shanahan-interview/");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
