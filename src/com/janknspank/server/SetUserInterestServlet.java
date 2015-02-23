@@ -66,10 +66,7 @@ public class SetUserInterestServlet extends StandardServlet {
 
   private boolean isValidType(String type) {
     // 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
-    if (type.equals(UserInterests.TYPE_LOCATION) || type.equals(UserInterests.TYPE_ORGANIZATION) 
-        || type.equals(UserInterests.TYPE_PERSON)) {
-      return true;
-    }
-    return false;
+    return (type.equals(UserInterests.TYPE_LOCATION) || type.equals(UserInterests.TYPE_ORGANIZATION) 
+        || type.equals(UserInterests.TYPE_PERSON));
   }
 }
