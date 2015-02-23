@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.google.common.collect.ImmutableList;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -65,7 +66,8 @@ public class SetUserInterestServlet extends StandardServlet {
 
   private boolean isValidType(String type) {
     // 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
-    if (type.equals("o") || type.equals("p") || type.equals("l") || type.equals("s")) {
+    if (type.equals(UserInterests.TYPE_LOCATION) || type.equals(UserInterests.TYPE_ORGANIZATION) 
+        || type.equals(UserInterests.TYPE_PERSON)) {
       return true;
     }
     return false;
