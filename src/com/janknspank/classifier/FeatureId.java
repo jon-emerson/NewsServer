@@ -1,5 +1,8 @@
 package com.janknspank.classifier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A list of all features we support or plan to support.
  * @see Feature
@@ -206,5 +209,15 @@ public enum FeatureId {
       }
     }
     return null;
+  }
+
+  public static Iterable<FeatureId> getByType(FeatureType type) {
+    List<FeatureId> features = new ArrayList<>();
+    for (FeatureId featureId : FeatureId.values()) {
+      if (featureId.getFeatureType() == type) {
+        features.add(featureId);
+      }
+    }
+    return features;
   }
 }

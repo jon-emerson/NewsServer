@@ -56,12 +56,12 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>GetArticlesServlet</servlet-name>
-    <servlet-class>com.janknspank.server.GetArticlesServlet</servlet-class>
+    <servlet-name>DemoServlet</servlet-name>
+    <servlet-class>com.janknspank.server.DemoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetArticlesServlet</servlet-name>
-    <url-pattern>/getArticles</url-pattern>
+    <servlet-name>DemoServlet</servlet-name>
+    <url-pattern>/demo</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -74,6 +74,60 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>GetArticleServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetArticleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetArticleServlet</servlet-name>
+    <url-pattern>/getArticle</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetArticlesServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetArticlesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetArticlesServlet</servlet-name>
+    <url-pattern>/getArticles</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetLatestDemoVersionServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetLatestDemoVersionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetLatestDemoVersionServlet</servlet-name>
+    <url-pattern>/getLatestDemoVersion</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetIndustriesServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetIndustriesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetIndustriesServlet</servlet-name>
+    <url-pattern>/getIndustries</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetOrganizationsServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetOrganizationsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetOrganizationsServlet</servlet-name>
+    <url-pattern>/getOrganizations</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetPeopleServlet</servlet-name>
+    <servlet-class>com.janknspank.server.GetPeopleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetPeopleServlet</servlet-name>
+    <url-pattern>/getPeople</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>GetTopicServlet</servlet-name>
     <servlet-class>com.janknspank.server.GetTopicServlet</servlet-class>
   </servlet>
@@ -81,7 +135,7 @@
     <servlet-name>GetTopicServlet</servlet-name>
     <url-pattern>/getTopic</url-pattern>
   </servlet-mapping>
-  
+
   <servlet>
     <servlet-name>GetUserServlet</servlet-name>
     <servlet-class>com.janknspank.server.GetUserServlet</servlet-class>
@@ -110,6 +164,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>S3PipeServlet</servlet-name>
+    <servlet-class>com.janknspank.server.S3PipeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>S3PipeServlet</servlet-name>
+    <url-pattern>/s3Pipe/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>SetAddressBookServlet</servlet-name>
     <servlet-class>com.janknspank.server.SetAddressBookServlet</servlet-class>
   </servlet>
@@ -125,6 +188,24 @@
   <servlet-mapping>
     <servlet-name>SetUserUrlFavoriteServlet</servlet-name>
     <url-pattern>/setUserUrlFavorite</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SetUserIndustryServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetUserIndustryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetUserIndustryServlet</servlet-name>
+    <url-pattern>/setUserIndustry</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SetUserInterestServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetUserInterestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetUserInterestServlet</servlet-name>
+    <url-pattern>/setUserInterest</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -144,7 +225,7 @@
     <servlet-name>TrainingServlet</servlet-name>
     <url-pattern>/training</url-pattern>
   </servlet-mapping>
-  
+
   <servlet>
     <servlet-name>ViewFeedServlet</servlet-name>
     <servlet-class>com.janknspank.server.ViewFeedServlet</servlet-class>
@@ -152,42 +233,6 @@
   <servlet-mapping>
     <servlet-name>ViewFeedServlet</servlet-name>
     <url-pattern>/viewFeed</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>GetArticleServlet</servlet-name>
-    <servlet-class>com.janknspank.server.GetArticleServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetArticleServlet</servlet-name>
-    <url-pattern>/getArticle</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>GetLatestDemoVersionServlet</servlet-name>
-    <servlet-class>com.janknspank.server.GetLatestDemoVersionServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetLatestDemoVersionServlet</servlet-name>
-    <url-pattern>/getLatestDemoVersion</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>DemoServlet</servlet-name>
-    <servlet-class>com.janknspank.server.DemoServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DemoServlet</servlet-name>
-    <url-pattern>/demo</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>S3PipeServlet</servlet-name>
-    <servlet-class>com.janknspank.server.S3PipeServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>S3PipeServlet</servlet-name>
-    <url-pattern>/s3Pipe/*</url-pattern>
   </servlet-mapping>
 
 </web-app>

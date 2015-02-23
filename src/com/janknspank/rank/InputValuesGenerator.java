@@ -40,7 +40,7 @@ public class InputValuesGenerator {
 
   public static double relevanceToContacts(User user, Article article) {
     Set<String> contactsKeywords = Sets.newHashSet();
-    for (Interest interest : user.getInterestList()) {
+    for (Interest interest : UserInterests.getCurrentInterests(user)) {
       if (interest.getType() == UserInterests.TYPE_PERSON) {
         contactsKeywords.add(interest.getKeyword());
       }
