@@ -47,7 +47,7 @@ public class Articles {
       throws DatabaseSchemaException {
     TopList<Article, Double> bestArticles = new TopList<>(limit);
     for (Article article : Deduper.filterOutDupes(Iterables.concat(
-        getArticlesByInterest(user.getInterestList(), limit * 5),
+        getArticlesByInterest(UserInterests.getCurrentInterests(user), limit * 5),
         getArticlesByIndustries(user.getIndustryList(), limit * 5)))) {
       double hoursSincePublished =
           ((double) System.currentTimeMillis() - article.getPublishedTime())

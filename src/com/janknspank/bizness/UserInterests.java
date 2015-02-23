@@ -1,5 +1,6 @@
 package com.janknspank.bizness;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,21 @@ public class UserInterests {
   public static final String TYPE_PERSON = "p";
   public static final String TYPE_ORGANIZATION = "o";
 
+  /**
+   * Returns only valid, currently followed user interests. 
+   * Filters out TOMBSTONEd interests
+   */
+  public static List<Interest> getCurrentInterests(User user) {
+    List<Interest> allInterests = user.getInterestList();
+    List<Interest> currentInterests = new ArrayList<>();
+    for (Interest interest : allInterests) {
+      if (interest.getSource() != Interest.Source.TOMBSTONE) {
+        currentInterests.add(interest);
+      }
+    }
+    return currentInterests;
+  }
+  
   /**
    * Returns a list of implied interests derived from the user's passed-in
    * address book.
