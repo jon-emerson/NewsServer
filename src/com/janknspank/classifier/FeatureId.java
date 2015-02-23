@@ -1,6 +1,5 @@
 package com.janknspank.classifier;
 
-
 /**
  * A list of all features we support or plan to support.
  * @see Feature

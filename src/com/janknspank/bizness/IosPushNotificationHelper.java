@@ -18,6 +18,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 import com.google.common.util.concurrent.AsyncFunction;
@@ -35,44 +36,58 @@ import com.janknspank.proto.UserProto.User;
 
 /**
  * Helper class for sending push notifications to iOS devices.
- * @see #sendNewSoundViaFuture(Sound, String phoneNumber)
- * @see #sendNewSoundViaFuture(Sound, DeviceRegistrationId)
- * @see #sendNewSoundViaFuture(Sound, List<DeviceRegistrationId>)
+ * @see #sendNewArticleViaFuture(Sound, DeviceRegistrationId)
+ * @see #sendNewArticleViaFuture(Sound, List<DeviceRegistrationId>)
  *
  * TODO(jonemerson): We probably want to forget about registration IDs that
- * APNS tells us are no good (by deleting them from DynamoDb).
+ * APNS tells us are no good (by deleting them from the database).
  */
 public class IosPushNotificationHelper {
   private static ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
-  private static String SEND_HOSTNAME = "gateway.sandbox.push.apple.com";
+  private static IosPushNotificationHelper INSTANCE = null;
+
+  // For development builds, use gateway.sandbox.push.apple.com.
+  private static String SEND_HOSTNAME = "gateway.push.apple.com";
+
   private static int SEND_PORT = 2195;
+  private static final String APNS_PRIVATE_KEY_PASSPHRASE;
+  static {
+    APNS_PRIVATE_KEY_PASSPHRASE = System.getenv("APNS_PRIVATE_KEY_PASSPHRASE");
+    if (APNS_PRIVATE_KEY_PASSPHRASE == null) {
+      throw new Error("$APNS_PRIVATE_KEY_PASSPHRASE is undefined");
+    }
+  }
 
-  /**
-   * The password for unlocking our private key.
-   */
-  private static char[] APNS_PRIVATE_KEY_PASSPHRASE;
+  private KeyStore keyStore;
+  private KeyManagerFactory keyManagerFactory;
 
-  private static KeyStore keyStore;
-  private static KeyManagerFactory keyManagerFactory;
+  public static synchronized IosPushNotificationHelper getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new IosPushNotificationHelper();
+    }
+    return INSTANCE;
+  }
 
-  public static void setPrivateKeyPassphrase(String privateKeyPassphrase) {
-    APNS_PRIVATE_KEY_PASSPHRASE = privateKeyPassphrase.toCharArray();
-
+  private IosPushNotificationHelper() {
     // Load the keystore and key manager factory.
+    FileInputStream keyFileInputStream = null;
     try {
-      File keyFile = new File("WEB-INF/obnoxx_dev.p12");
+      File keyFile = new File("WEB-INF/EnterpriseDistributionCertificates.p12");
       if (!keyFile.exists()) {
         throw new RuntimeException("Could not find key file");
       }
 
       keyStore = KeyStore.getInstance("PKCS12");
-      keyStore.load(new FileInputStream(keyFile), APNS_PRIVATE_KEY_PASSPHRASE);
+      keyFileInputStream = new FileInputStream(keyFile);
+      keyStore.load(keyFileInputStream, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
 
       keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
-      keyManagerFactory.init(keyStore, APNS_PRIVATE_KEY_PASSPHRASE);
+      keyManagerFactory.init(keyStore, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
 
     } catch (GeneralSecurityException|IOException e) {
-      throw new RuntimeException("Could not load iOS push notification service certs", e);
+      throw new Error("Could not load iOS push notification service certs", e);
+    } finally {
+      IOUtils.closeQuietly(keyFileInputStream);
     }
   }
 
@@ -80,7 +95,7 @@ public class IosPushNotificationHelper {
    * Sends a push notification about a new sound to all the iOS devices
    * registered with the passed phone number.
    */
-  public static ListenableFuture<Void> sendNewArticleViaFuture(
+  public ListenableFuture<Void> sendNewArticleViaFuture(
       final Article article, final User recipient) throws DatabaseSchemaException {
     Iterable<DeviceRegistration> registrations = Database.with(DeviceRegistration.class).get(
         new QueryOption.WhereEquals("user_id", recipient.getId()),
@@ -88,7 +103,7 @@ public class IosPushNotificationHelper {
     return sendNewArticleViaFuture(article, registrations);
   }
 
-  public static ListenableFuture<Void> sendNewArticleViaFuture(
+  public ListenableFuture<Void> sendNewArticleViaFuture(
       final Article article, final Iterable<DeviceRegistration> registrations) {
     List<ListenableFuture<Void>> futures = new ArrayList<>();
     for (DeviceRegistration registration : registrations) {
@@ -104,13 +119,13 @@ public class IosPushNotificationHelper {
         });
   }
 
-  public static ListenableFuture<Void> sendNewArticleViaFuture(
+  public ListenableFuture<Void> sendNewArticleViaFuture(
       final Article article, final DeviceRegistration registration) {
     ListeningExecutorService service = MoreExecutors.listeningDecorator(EXECUTOR_SERVICE);
     return service.submit(new Callable<Void>() {
       @Override
       public Void call() throws Exception {
-        sendNewSound(article, registration);
+        sendNewArticle(article, registration);
         return null;
       }
     });
@@ -136,7 +151,8 @@ public class IosPushNotificationHelper {
     return baos.toByteArray();
   }
 
-  private static void sendNewSound(Article article, DeviceRegistration registration) {
+  private void sendNewArticle(Article article, DeviceRegistration registration) {
+    SSLSocket socket = null;
     try {
       // Basically do this, but in java:
       // openssl s_client -connect gateway.sandbox.push.apple.com:2195 \
@@ -144,7 +160,7 @@ public class IosPushNotificationHelper {
       SSLContext sslContext = SSLContext.getInstance("TLS");
       sslContext.init(keyManagerFactory.getKeyManagers(), null, null);
       SSLSocketFactory factory = sslContext.getSocketFactory();
-      SSLSocket socket = (SSLSocket) factory.createSocket(SEND_HOSTNAME, SEND_PORT);
+      socket = (SSLSocket) factory.createSocket(SEND_HOSTNAME, SEND_PORT);
       socket.setEnabledCipherSuites(socket.getSupportedCipherSuites());
       socket.startHandshake();
 
@@ -171,6 +187,8 @@ public class IosPushNotificationHelper {
       out.close();
     } catch (GeneralSecurityException|IOException e) {
       throw new RuntimeException("IO error sending push notification", e);
+    } finally {
+      IOUtils.closeQuietly(socket);
     }
   }
 
@@ -223,5 +241,10 @@ public class IosPushNotificationHelper {
           + Character.digit(s.charAt(i+1), 16));
     }
     return data;
+  }
+
+  public static final void main(String args[]) throws DatabaseSchemaException {
+    IosPushNotificationHelper.getInstance().sendNewArticleViaFuture(
+        Database.with(Article.class).getFirst(), Users.getByEmail("panaceaa@gmail.com"));
   }
 }
