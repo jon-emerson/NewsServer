@@ -61,8 +61,9 @@ public class UrlCleaner {
     String path = url.getPath();
 
     if (host.endsWith(".businessinsider.com") || host.equals("businessinsider.com")) {
-      if (path.contains("/")) {
-        path = path.substring(0, path.indexOf("/"));
+      int slash = path.indexOf("/", 1); // Find first slash after initial starting /.
+      if (slash > 0) {
+        path = path.substring(0, slash);
       }
     }
     if (host.endsWith(".cnn.com") || host.equals("cnn.com")) {

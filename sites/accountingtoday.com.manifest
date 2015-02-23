@@ -1,0 +1,85 @@
+root_domain: "accountingtoday.com"
+start_url: "http://www.accountingtoday.com"
+subdomain_blacklist: "digital.accountingtoday.com"
+path_blacklist {
+  needle: "/60-seconds-smarter/"
+}
+path_blacklist {
+  needle: "/aci/"
+}
+path_blacklist {
+  needle: "/advertise/"
+}
+path_blacklist {
+  needle: "/ato_issues/"
+}
+path_blacklist {
+  needle: "/auditing/"
+}
+path_blacklist {
+  needle: "/channels/"
+}
+path_blacklist {
+  needle: "/conferences/"
+}
+path_blacklist {
+  needle: "/digital_edition/"
+}
+path_blacklist {
+  needle: "/ebooks/"
+}
+path_blacklist {
+  needle: "/gallery/"
+}
+path_blacklist {
+  needle: "/newsletters/"
+}
+path_blacklist {
+  needle: "/papers/"
+}
+path_blacklist {
+  needle: "/podcasts/"
+}
+path_blacklist {
+  needle: "/register/"
+}
+path_blacklist {
+  needle: "/reprints/"
+}
+path_blacklist {
+  needle: "/search/"
+}
+path_blacklist {
+  needle: "/specialoffers/"
+}
+path_blacklist {
+  needle: "/subscribe/"
+}
+path_blacklist {
+  needle: "/web-seminars/"
+}
+path_blacklist {
+  needle: "/video/"
+}
+paragraph_selector: "entry-content p"
+article_url_pattern {
+  path_regex: "[\\-\\/][0-9]{5,7}\\-1\\.html"
+}
+rss_url: "http://www.theverge.com/mobile/rss/index.xml"
+rss_url: "http://www.theverge.com/rss/index.xml"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.accountingtoday.com/blogs/accounting-tomorrow/thomson-reuters-checkpoint-releases-report-presidents-2016-budget-73704-1.html"
+    article_url: "http://www.accountingtoday.com/news/tax-season/800000-taxpayers-received-wrong-tax-info-from-health-insurance-marketplace-73707-1.html"
+    article_url: "http://www.accountingtoday.com/news/tax_news/tax-fraud-blotter-the-in-laws-73716-1.html"
+    article_url: "http://www.accountingtoday.com/news/26200-1.html"
+    article_url: "http://www.accountingtoday.com/ci_news/59825-1.html"
+    article_url: "http://www.accountingtoday.com/news/legal-watch/when-a-house-is-a-tax-home-73699-1.html"
+    non_article_url: "http://www.accountingtoday.com/customer-service/"
+    non_article_url: "http://www.accountingtoday.com/industry-leaders/"
+    non_article_url: "http://www.accountingtoday.com/payroll/"
+    non_article_url: "http://www.accountingtoday.com/profile/"
+    non_article_url: "http://www.accountingtoday.com/profile/password.reminder.html"
+    non_article_url: "http://www.accountingtoday.com/reports-and-rankings/"
+  }
+}

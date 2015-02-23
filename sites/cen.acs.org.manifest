@@ -1,0 +1,22 @@
+root_domain: "cen.acs.org"
+start_url: "http://cen.acs.org/news.html"
+paragraph_selector: "#article_text .section p"
+article_url_pattern {
+  path_regex: "^\\/articles\\/.*\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://cen.acs.org/articles/93/i8/Spying-Bond-Making-Solution.html"
+    article_url: "http://cen.acs.org/articles/93/web/2015/02/Chemistry-Based-Biotech-Start-Ups.html"
+    article_url: "http://cen.acs.org/articles/93/i6/Two-Dimensional-Silicon-Makes-Device.html"
+    article_url: "http://cen.acs.org/articles/93/i6/Scientists-Watch-Neural-Connections-Strengthen.html"
+    article_url: "http://cen.acs.org/articles/93/web/2015/02/New-Layered-Design-Lead-Better.html"
+    article_url: "http://cen.acs.org/articles/85/web/2007/09/Cleaved-Ether-Shines-ID-Trace.html"
+    article_url: "http://cen.acs.org/articles/82/i2/DEMYSTIFYING-MATERIALS-SCIENCE.html"
+    non_article_url: "http://cen.acs.org/magazine/93/09308.html"
+    non_article_url: "http://cen.acs.org/collections/ctw.html"
+    non_article_url: "http://cen.acs.org/media.html"
+    non_article_url: "http://cen.acs.org/collections/safelet.html"
+    non_article_url: "http://cen.acs.org/static/about/contactus.html"
+  }
+}

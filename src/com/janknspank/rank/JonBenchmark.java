@@ -253,7 +253,14 @@ public class JonBenchmark {
       "http://www.sfgate.com/news/politics/article/Snowden-leak-NSA-helped-British-steal-cell-phone-6091392.php",
       "http://www.sfgate.com/bayarea/article/San-Francisco-to-privatize-management-of-public-6090606.php",
       "http://www.bloomberg.com/news/articles/2015-02-19/gundlach-hates-automakers-long-term-as-ride-sharing-grows",
-      "http://www.washingtonpost.com/blogs/dc-sports-bog/wp/2015/02/19/how-espn-980-landed-a-90-minute-mike-shanahan-interview/");
+      "http://www.washingtonpost.com/blogs/dc-sports-bog/wp/2015/02/19/how-espn-980-landed-a-90-minute-mike-shanahan-interview/",
+      "http://www.nytimes.com/2015/02/21/world/americas/canada-attack-suspect-is-now-charged-in-3-killings.html",
+      "http://recode.net/2015/02/20/floyd-mayweather-announces-manny-pacquiao-fight-shots/",
+      "http://techcrunch.com/2015/02/20/altos-adventure-review/",
+      "http://www.forbes.com/sites/robertwood/2015/02/20/dont-file-taxes-early-wrong-tax-statements-sent-admits-obama-administration/",
+      "http://www.nytimes.com/2015/02/23/us/lawsuits-lurid-details-draw-an-online-crowd.html",
+      "http://artsbeat.blogs.nytimes.com/2015/02/22/downton-abbey-recap-yes-its-called-the-hornby-hotel/",
+      "http://artsbeat.blogs.nytimes.com/2015/02/22/girls-recap-hannah-and-adam-try-to-rebuild/");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {

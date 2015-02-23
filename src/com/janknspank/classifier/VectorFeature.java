@@ -1,9 +1,11 @@
 package com.janknspank.classifier;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.CoreProto.Distribution;
 import com.janknspank.rank.DistributionBuilder;
@@ -51,6 +53,31 @@ public final class VectorFeature extends Feature {
 
   static File getDistributionFile(FeatureId featureId) throws ClassifierException {
     return new File(getVectorDirectory(featureId), "/feature.distribution");
+  }
+
+  /**
+   * Returns a collection of feature IDs that have folders representing their
+   * seed words, blacklisted words, etc, in /classifier/.
+   */
+  static Iterable<FeatureId> getDefinedFeatureIds() {
+    List<FeatureId> featureIds = Lists.newArrayList();
+    for (File parentDirectory : VECTOR_DIRECTORY_MAP.values()) {
+      for (File vectorDirectory : parentDirectory.listFiles()) {
+        String name = vectorDirectory.getName();
+        if (name.contains("-")) {
+          try {
+            FeatureId featureId =
+                FeatureId.fromId(Integer.parseInt(name.substring(0, name.indexOf("-"))));
+            if (featureId != null) {
+              featureIds.add(featureId);
+            }
+          } catch (NumberFormatException e) {
+            // Don't care.  Directory must not be a feature, that's OK.
+          }
+        }
+      }
+    }
+    return featureIds;
   }
 
   static File getVectorDirectory(FeatureId featureId) throws ClassifierException {

@@ -19,6 +19,7 @@ path_blacklist {
 }
 paragraph_selector: "article > p"
 paragraph_selector: "article > div > p"
+paragraph_selector: ".content__article-body > p"
 article_url_pattern {
   path_regex: "\\/20[0-9]{2}\\/(jan|feb|mar|apr|may|jun|jul|aug|sep|nov|dec)\\/[0-3][0-9]\\/"
 }
@@ -29,6 +30,7 @@ test_instructions {
     article_url: "http://www.theguardian.com/money/2015/feb/12/home-repossession-lowest-since-2006"
     article_url: "http://www.theguardian.com/music/2015/feb/15/bjork-delta-archives-alex-ross"
     article_url: "http://www.theguardian.com/technology/2014/dec/22/the-best-android-apps-of-2014"
+    article_url: "http://www.theguardian.com/technology/2015/feb/19/best-video-games-beginners",
     non_article_url: "http://www.theguardian.com/business/series/project-syndicate-economists"
     non_article_url: "http://www.theguardian.com/business/series/us-small-business"
     non_article_url: "http://www.theguardian.com/environment/series/weekinwildlife"

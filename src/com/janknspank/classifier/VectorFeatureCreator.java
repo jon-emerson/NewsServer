@@ -222,28 +222,27 @@ public class VectorFeatureCreator {
    */
   public static void main(String args[]) throws Exception {
     // 1. Figure out which features to regenerate from args.
-    boolean regenerateAllFeatures = false;
-    Set<Integer> featuresToRegenerate = new HashSet<>();
+    Set<FeatureId> featuresToRegenerate = new HashSet<>();
     if (args.length > 0) {
       if (args[0].equals("all")) {
-        regenerateAllFeatures = true;
+        Iterables.addAll(featuresToRegenerate, VectorFeature.getDefinedFeatureIds());
       } else {
-        for (String featureId : args) {
-          int id = NumberUtils.toInt(featureId, -1);
+        for (String featureIdStr : args) {
+          int id = NumberUtils.toInt(featureIdStr, -1);
           if (id != -1) {
-            featuresToRegenerate.add(id);
+            FeatureId featureId = FeatureId.fromId(id);
+            if (featureId == null) {
+              throw new Error("Feature ID is not defined: " + id);
+            }
+            featuresToRegenerate.add(featureId);
           }
         }
       }
     }
 
     // 2. Regenerate vector and distribution files for the specified features.
-    for (FeatureId featureId : FeatureId.values()) {
-      // TODO(jonemerson): Update this to ignore non-vector features when in
-      // "all" mode, once we have non-vector features.
-      if ((regenerateAllFeatures || featuresToRegenerate.contains(featureId.getId()))) {
-        new VectorFeatureCreator(featureId).createVectorAndDistribution();
-      }
+    for (FeatureId featureId : featuresToRegenerate) {
+      new VectorFeatureCreator(featureId).createVectorAndDistribution();
     }
   }
 }

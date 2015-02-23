@@ -22,6 +22,7 @@ import com.google.common.collect.Maps;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.common.Logger;
+import com.janknspank.crawler.SiteManifests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -33,6 +34,7 @@ import com.janknspank.proto.CoreProto.ShareNormalizationData;
 import com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount;
 import com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution;
 import com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder;
+import com.janknspank.proto.SiteProto.SiteManifest;
 import com.janknspank.rank.DistributionBuilder;
 
 public class FacebookShareNormalizer {
@@ -196,72 +198,15 @@ public class FacebookShareNormalizer {
   }
 
   private static final Map<String, ShareCount> createShareMap(Iterable<Article> articles) {
-    ImmutableMap<String, ShareCount> map = ImmutableMap.<String, ShareCount>builder()
-        .put("philly.curbed.com", new ShareCount())
-        .put("boston.com", new ShareCount())
-        .put("la.curbed.com", new ShareCount())
-        .put("redherring.com", new ShareCount())
-        .put("cnbc.com", new ShareCount())
-        .put("siliconbeat.com", new ShareCount())
-        .put("nola.curbed.com", new ShareCount())
-        .put("cbsnews.com", new ShareCount())
-        .put("bloomberg.com", new ShareCount())
-        .put("engadget.com", new ShareCount())
-        .put("sf.curbed.com", new ShareCount())
-        .put("atlanta.curbed.com", new ShareCount())
-        .put("well.blogs.nytimes.com", new ShareCount())
-        .put("buffalonews.com", new ShareCount())
-        .put("forbes.com", new ShareCount())
-        .put("miami.curbed.com", new ShareCount())
-        .put("wired.com", new ShareCount())
-        .put("cbc.ca", new ShareCount())
-        .put("blog.sfgate.com", new ShareCount())
-        .put("chicago.curbed.com", new ShareCount())
-        .put("cnn.com", new ShareCount())
-        .put("recode.net", new ShareCount())
-        .put("seattle.curbed.com", new ShareCount())
-        .put("nytimes.com", new ShareCount())
-        .put("bbc.co.uk", new ShareCount())
-        .put("boston.curbed.com", new ShareCount())
-        .put("businessinsider.com", new ShareCount())
-        .put("capecod.curbed.com", new ShareCount())
-        .put("venturebeat.com", new ShareCount())
-        .put("channelnewsasia.com", new ShareCount())
-        .put("startupworkout.com", new ShareCount())
-        .put("thenextweb.com", new ShareCount())
-        .put("mercurynews.com", new ShareCount())
-        .put("hamptons.curbed.com", new ShareCount())
-        .put("cleveland.com", new ShareCount())
-        .put("medium.com", new ShareCount())
-        .put("money.cnn.com", new ShareCount())
-        .put("ny.curbed.com", new ShareCount())
-        .put("pcmag.com", new ShareCount())
-        .put("chron.com", new ShareCount())
-        .put("arstechnica.com", new ShareCount())
-        .put("ski.curbed.com", new ShareCount())
-        .put("dealbook.nytimes.com", new ShareCount())
-        .put("insidescoopsf.sfgate.com", new ShareCount())
-        .put("theverge.com", new ShareCount())
-        .put("businessweek.com", new ShareCount())
-        .put("allthingsd.com", new ShareCount())
-        .put("abcnews.go.com", new ShareCount())
-        .put("america.aljazeera.com", new ShareCount())
-        .put("fastcompany.com", new ShareCount())
-        .put("latimes.com", new ShareCount())
-        .put("breitbart.com", new ShareCount())
-        .put("opinionator.blogs.nytimes.com", new ShareCount())
-        .put("dc.curbed.com", new ShareCount())
-        .put("slate.com", new ShareCount())
-        .put("detroit.curbed.com", new ShareCount())
-        .put("mashable.com", new ShareCount())
-        .put("blog.chron.com", new ShareCount())
-        .put("washingtonpost.com", new ShareCount())
-        .put("techcrunch.com", new ShareCount())
-        .put("sfgate.com", new ShareCount())
-        .put("curbed.com", new ShareCount())
-        .put("abc.net.au", new ShareCount())
-        .put("bits.blogs.nytimes.com", new ShareCount())
-        .build();
+    ImmutableMap.Builder<String, ShareCount> mapBuilder = ImmutableMap.<String, ShareCount>builder();
+    for (SiteManifest siteManifest : SiteManifests.getList()) {
+      mapBuilder.put(siteManifest.getRootDomain(), new ShareCount());
+      for (String akaRootDomain : siteManifest.getAkaRootDomainList()) {
+        mapBuilder.put(akaRootDomain, new ShareCount());
+      }
+    }
+    ImmutableMap<String, ShareCount> map = mapBuilder.build();
+
     for (Article article : articles) {
       URL url;
       try {
