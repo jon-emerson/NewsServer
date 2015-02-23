@@ -13,7 +13,8 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserIndustry;
 
-public class SetUserIndustriesServlet extends StandardServlet {
+@AuthenticationRequired(requestMethod = "POST")
+public class SetUserIndustryServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {

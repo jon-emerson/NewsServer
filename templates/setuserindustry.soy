@@ -1,0 +1,21 @@
+{namespace news.setuserindustry autoescape="strict"}
+
+/**
+ * Renders the URL rating page.
+ */
+{template .main}
+  <h1>Set User Industry</h1>
+
+  <form method="POST" action="setUserIndustry">
+    Session key:<br>
+    <input type="text" name="sessionKey"><br>
+    <br>
+    Industry Code Id (1-148):<br>
+    <input type="number" name="industry_id"><br>
+    <br>
+    Follow ("true" or "false"):<br>
+    <input type="text" name="follow"><br>
+    <br>
+    <input type="submit" value="Set"><br>
+  </form>
+{/template}

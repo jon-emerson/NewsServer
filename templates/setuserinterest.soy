@@ -1,0 +1,24 @@
+{namespace news.setuserinterest autoescape="strict"}
+
+/**
+ * Renders the URL rating page.
+ */
+{template .main}
+  <h1>Set User Interest</h1>
+
+  <form method="POST" action="setUserInterest">
+    Session key:<br>
+    <input type="text" name="sessionKey"><br>
+    <br>
+    Keyword:<br>
+    <input type="text" name="keyword"><br>
+    <br>
+    Type ("o" for organization, "p" for person, or "l" for location):<br>
+    <input type="text" name="type"><br>
+    <br>
+    Follow ("true" or "false"):<br>
+    <input type="text" name="follow"><br>
+    <br>
+    <input type="submit" value="Set"><br>
+  </form>
+{/template}

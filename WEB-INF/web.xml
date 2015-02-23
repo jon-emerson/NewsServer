@@ -191,6 +191,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>SetUserIndustryServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetUserIndustryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetUserIndustryServlet</servlet-name>
+    <url-pattern>/setUserIndustry</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>SetUserInterestServlet</servlet-name>
     <servlet-class>com.janknspank.server.SetUserInterestServlet</servlet-class>
   </servlet>

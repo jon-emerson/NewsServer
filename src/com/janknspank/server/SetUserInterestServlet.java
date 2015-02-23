@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.google.common.collect.ImmutableList;
+import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -27,7 +28,7 @@ public class SetUserInterestServlet extends StandardServlet {
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
-    if (isValidType(type)) {
+    if (!isValidType(type)) {
       throw new RequestException("Type is not valid");
     }
 
@@ -55,6 +56,7 @@ public class SetUserInterestServlet extends StandardServlet {
     if (!isExistingInterest) {
       Database.with(User.class).push(user, "interest", ImmutableList.of(
           Interest.newBuilder()
+              .setId(GuidFactory.generate())
               .setKeyword(keyword)
               .setType(type)
               .setSource(source)
@@ -70,7 +72,7 @@ public class SetUserInterestServlet extends StandardServlet {
 
   private boolean isValidType(String type) {
     // 'o' for organization, 'p' for person, 'l' for location, 's' for skill.
-    return (type.equals(UserInterests.TYPE_LOCATION) || type.equals(UserInterests.TYPE_ORGANIZATION) 
-        || type.equals(UserInterests.TYPE_PERSON));
+    return (UserInterests.TYPE_LOCATION.equals(type) || UserInterests.TYPE_ORGANIZATION.equals(type) 
+        || UserInterests.TYPE_PERSON.equals(type));
   }
 }
