@@ -27,10 +27,10 @@ public class GetOrganizationsServlet extends StandardServlet {
       orgs = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", "%" + StringUtils.capitalize(searchString) + "%"),
           new QueryOption.WhereEquals("type", "org"),
-          new QueryOption.Limit(100));
+          new QueryOption.Limit(20));
     } else {
       orgs = Database.with(Entity.class).get(new QueryOption.WhereEquals("type", "org"), 
-          new QueryOption.Limit(100));
+          new QueryOption.Limit(20));
     }
 
     JSONArray orgsJson = Serializer.toJSON(orgs);

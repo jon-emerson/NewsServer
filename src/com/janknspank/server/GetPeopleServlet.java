@@ -27,10 +27,10 @@ public class GetPeopleServlet extends StandardServlet {
       people = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", "%" + StringUtils.capitalize(searchString) + "%"),
           new QueryOption.WhereEquals("type", "p"),
-          new QueryOption.Limit(100));
+          new QueryOption.Limit(20));
     } else {
       people = Database.with(Entity.class).get(new QueryOption.WhereEquals("type", "p"), 
-          new QueryOption.Limit(100));
+          new QueryOption.Limit(20));
     }
 
     // TODO: add some kind of sorting for relevance
