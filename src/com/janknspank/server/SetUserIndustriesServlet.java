@@ -30,7 +30,7 @@ public class SetUserIndustriesServlet extends StandardServlet {
 
     // Business logic.
     UserIndustry.Source source;
-    if (follow.equals("true")) {
+    if ("true".equals(follow)) {
       source = UserIndustry.Source.USER;
     } else {
       source = UserIndustry.Source.TOMBSTONE;

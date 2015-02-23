@@ -1,5 +1,7 @@
 package com.janknspank.server;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,21 +33,26 @@ public class SetUserInterestServlet extends StandardServlet {
 
     // Business logic.
     Interest.Source source;
-    if (follow.equals("true")) {
+    if ("true".equals(follow)) {
       source = Interest.Source.USER;
     } else {
       source = Interest.Source.TOMBSTONE;
     }
 
-    Interest existingInterest = null;
-    for (Interest interest : user.getInterestList()) {
+    boolean isExistingInterest = false;
+    List<Interest> interests = user.getInterestList();
+    int index = 0;
+    for (Interest interest : interests) {
       if (interest.getType().equals(type) && interest.getKeyword().equals(keyword)) {
-        existingInterest = interest;
-        break;
+        if (interest.getSource() != source) {
+          interests.set(index, interest.toBuilder().setSource(source).build());
+        }
+        isExistingInterest = true;
       }
+      index++;
     }
 
-    if (existingInterest == null) {
+    if (!isExistingInterest) {
       Database.with(User.class).push(user, "interest", ImmutableList.of(
           Interest.newBuilder()
               .setKeyword(keyword)
@@ -54,10 +61,7 @@ public class SetUserInterestServlet extends StandardServlet {
               .setCreateTime(System.currentTimeMillis())
               .build()));
     } else {
-      if (existingInterest.getSource() != source) {
-        Interest interestToUpdate = existingInterest.toBuilder().setSource(source).build();
-        Database.update(interestToUpdate);
-      }
+      Database.with(User.class).set(user, "interest", interests);
     }
 
     // Write response.
