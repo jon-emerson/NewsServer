@@ -13,6 +13,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.UrlRatings;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -93,7 +94,7 @@ public class UserHelper {
   }
 
   public JSONArray getInterestsJsonArray() throws DatabaseSchemaException {
-    return Serializer.toJSON(user.getInterestList());
+    return Serializer.toJSON(UserInterests.getCurrentInterests(user));
   }
 
   /**
