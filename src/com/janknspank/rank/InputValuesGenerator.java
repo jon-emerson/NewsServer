@@ -6,6 +6,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.SocialEngagements;
+import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.IndustryCode;
@@ -25,7 +26,7 @@ import com.janknspank.proto.UserProto.UserIndustry;
 public class InputValuesGenerator {
   public static double relevanceToUserIndustries(User user, Article article) {
     double relevance = 0;
-    for (UserIndustry userIndustry : user.getIndustryList()) {
+    for (UserIndustry userIndustry : UserIndustries.getCurrentIndustries(user)) {
       relevance += getSimilarityToIndustry(
           article, IndustryCode.fromId(userIndustry.getIndustryCodeId()));
     }

@@ -13,6 +13,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.UrlRatings;
+import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
@@ -37,7 +38,8 @@ public class UserHelper {
 
     // Create a map of the favorite articles.
     favoriteArticleIds = getFavoriteArticleIds();
-    industryCodeRelationships = IndustryCode.getFromUserIndustries(user.getIndustryList());
+    industryCodeRelationships = IndustryCode.getFromUserIndustries(
+        UserIndustries.getCurrentIndustries(user));
     articleMap = getArticleMap(favoriteArticleIds.keySet());
   }
 
