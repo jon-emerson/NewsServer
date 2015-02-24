@@ -306,14 +306,32 @@ public class LinkedInLoginHandler {
    */
   private Iterable<UserIndustry> getUpdatedUserIndustries(UserOrBuilder user,
       DocumentNode linkedInProfileDocument) {
-    return Iterables.concat(
+    // Retain any industries the user has previously set himself (aka anything
+    // that we didn't get from LinkedIn!).
+    Iterable<UserIndustry> manuallyAddedIndustries =
         Iterables.filter(user.getIndustryList(), new Predicate<UserIndustry>() {
           @Override
           public boolean apply(UserIndustry industry) {
             return industry.getSource() != UserIndustry.Source.LINKED_IN_PROFILE;
           }
-        }),
-        ImmutableList.of(getLinkedInProfileIndustry(linkedInProfileDocument)));
+        });
+
+    // Take special note of the industry IDs the user removed.  We don't want to
+    // put the user's LinkedIn industry back into the list if the user's
+    // explicitly removed it.
+    Set<Integer> tombstonedIndustryIds = Sets.newHashSet();
+    for (UserIndustry userIndustry : user.getIndustryList()) {
+      if (userIndustry.getSource() == UserIndustry.Source.TOMBSTONE) {
+        tombstonedIndustryIds.add(userIndustry.getIndustryCodeId());
+      }
+    }
+
+    // Combine the user's LinkedIn industry and his manually-added industries,
+    // though drop the LinkedIn industry if it was tombstoned.
+    UserIndustry linkedInProfileIndustry = getLinkedInProfileIndustry(linkedInProfileDocument);
+    return tombstonedIndustryIds.contains(linkedInProfileIndustry.getIndustryCodeId())
+        ? manuallyAddedIndustries
+        : Iterables.concat(manuallyAddedIndustries, ImmutableList.of(linkedInProfileIndustry));
   }
 
   private UserIndustry getLinkedInProfileIndustry(DocumentNode linkedInProfileDocument) {
