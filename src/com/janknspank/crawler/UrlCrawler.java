@@ -1,11 +1,14 @@
 package com.janknspank.crawler;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.api.client.util.Lists;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Urls;
 import com.janknspank.common.DateParser;
@@ -13,6 +16,7 @@ import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -93,28 +97,45 @@ public class UrlCrawler {
     return millis;
   }
 
-  private void saveArticle(String url, String originUrl, Long date) {
-    Url existing;
-    try {
-      existing = Urls.getByUrl(url);
-      if (existing == null) {
-        Database.insert(Url.newBuilder()
-            .setUrl(url)
-            .setOriginUrl(originUrl)
-            .setId(GuidFactory.generate())
-            .setTweetCount(0)
-            .setDiscoveryTime(System.currentTimeMillis())
-            .setCrawlPriority(Urls.getCrawlPriority(url, date))
-            .build());
+  /**
+   * Inserts all the passed URLs into the database, preventing duplicates.
+   */
+  private static void putIfNotExists(Iterable<Url> urls)
+      throws DatabaseSchemaException, DatabaseRequestException {
+    Iterable<Url> existingUrlObjects =
+        Database.with(Url.class).get(new QueryOption.WhereEquals("url", Iterables.transform(urls,
+            new Function<Url, String>() {
+              @Override
+              public String apply(Url url) {
+                return url.getUrl();
+              }
+            })));
+    Set<String> existingUrls = Sets.newHashSet();
+    Iterables.addAll(existingUrls, Iterables.transform(existingUrlObjects,
+        new Function<Url, String>() {
+          @Override
+          public String apply(Url url) {
+            return url.getUrl();
+          }
+        }));
+    List<Url> urlsToInsert = Lists.newArrayList();
+    for (Url url : urls) {
+      if (!existingUrls.contains(url.getUrl())) {
+        System.out.println("Inserting " + url.getUrl());
+        urlsToInsert.add(url);
+        existingUrls.add(url.getUrl()); // To prevent inserting dupes.
       }
-    } catch (DatabaseSchemaException | DatabaseRequestException e) {
-      // Oh well, it's just RSS.  Print it out at least, so we can debug it.
-      e.printStackTrace();
+      if (urlsToInsert.size() > 250) {
+        Database.insert(urlsToInsert);
+        urlsToInsert.clear();
+      }
     }
+    Database.insert(urlsToInsert);
   }
 
-  public void crawl(String rssUrl) {
+  public void crawl(String rssUrl) throws DatabaseSchemaException, DatabaseRequestException {
     FetchResponse fetchResponse;
+    List<Url> urlsToInsert = Lists.newArrayList();
     try {
       fetchResponse = fetcher.fetch(rssUrl);
       if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
@@ -125,26 +146,49 @@ public class UrlCrawler {
           String articleUrl = getArticleUrl(itemNode);
           if (ArticleUrlDetector.isArticle(articleUrl)) {
             Long millis = getArticleDate(itemNode);
-            saveArticle(articleUrl, rssUrl, millis);
+            urlsToInsert.add(Url.newBuilder()
+                .setUrl(articleUrl)
+                .setOriginUrl(rssUrl)
+                .setId(GuidFactory.generate())
+                .setDiscoveryTime(System.currentTimeMillis())
+                .setCrawlPriority(Urls.getCrawlPriority(articleUrl, millis))
+                .build());
           }
         }
       }
     } catch (FetchException | ParserException e) {
       e.printStackTrace();
     }
+    putIfNotExists(urlsToInsert);
   }
 
   public static void main(String args[]) throws Exception {
     UrlCrawler crawler = new UrlCrawler();
-    for (String website : WEBSITES) {
+    for (final String website : WEBSITES) {
       LOG.info("WEBSITE: " + website);
-      Urls.put(
-          Iterables.transform(
-              Iterables.filter(
-                  Iterables.filter(UrlFinder.findUrls(website), ArticleUrlDetector.PREDICATE),
-                  UrlWhitelist.PREDICATE),
-              UrlCleaner.TRANSFORM_FUNCTION),
-          website, false /* isTweet */);
+
+      // Find all the URLs on the page, filter them to only have the article
+      // URLs, and then clean those before trying to put them into the database.
+      Iterable<String> urlStrings = Iterables.transform(
+          Iterables.filter(
+              Iterables.filter(UrlFinder.findUrls(website), ArticleUrlDetector.PREDICATE),
+              UrlWhitelist.PREDICATE),
+          UrlCleaner.TRANSFORM_FUNCTION);
+      putIfNotExists(Iterables.transform(urlStrings, new Function<String, Url>() {
+        @Override
+        public Url apply(String urlString) {
+          return Url.newBuilder()
+              .setUrl(urlString)
+              .setOriginUrl(website)
+              .setId(GuidFactory.generate())
+              .setDiscoveryTime(System.currentTimeMillis())
+              // MAX_CRAWL_PRIORITY because we found this URL on the site's HOME PAGE
+              // so in all probability it's pretty new, regardless of whether we can
+              // parse a date from its URL like getCrawlPriority() tries to do.
+              .setCrawlPriority(Urls.MAX_CRAWL_PRIORITY)
+              .build();
+        }
+      }));
     }
     for (String rssUrl : RSS_URLS) {
       LOG.info("RSS FILE: " + rssUrl);

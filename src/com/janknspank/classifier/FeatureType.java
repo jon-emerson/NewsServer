@@ -6,7 +6,8 @@ public enum FeatureType {
   INDUSTRY(2, "Industry classification"),
   SKILL(3, "Improves or is related to a skill"),
   CHARACTER(4, "Some text characteristic"),
-  MANUAL_HEURISTIC(5, "A heuristic about something we built manually");
+  MANUAL_HEURISTIC(5, "A heuristic about something we built manually"),
+  TOPIC(6, "Something topical, e.g. entertainment or sports");
 
   private final int type;
   private final String description;

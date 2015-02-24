@@ -23,6 +23,7 @@ public final class VectorFeature extends Feature {
       ImmutableMap.<FeatureType, File>builder()
           .put(FeatureType.INDUSTRY, new File("classifier/industry"))
           .put(FeatureType.SERVES_INTENT, new File("classifier/serves-intent"))
+          .put(FeatureType.TOPIC, new File("classifier/topic"))
           .build();
 
   private final Vector vector;

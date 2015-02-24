@@ -43,7 +43,7 @@ public class ArticleCrawler implements Runnable {
   public void run() {
     // Uncomment this to start the crawl at a specific page.
     try {
-      Urls.put("http://recode.net/", "http://jonemerson.net/", false);
+      Urls.put("http://recode.net/", "http://jonemerson.net/");
     } catch (BiznessException | DatabaseSchemaException e) {
       e.printStackTrace();
     }
@@ -130,8 +130,7 @@ public class ArticleCrawler implements Runnable {
         Iterables.transform(
             Iterables.filter(urls, UrlWhitelist.PREDICATE),
             UrlCleaner.TRANSFORM_FUNCTION),
-        url.getUrl(),
-        false /* isTweet */);
+        url.getUrl());
     Links.put(url, destinationUrls);
     Urls.markCrawlFinish(url);
     return article;
@@ -166,7 +165,7 @@ public class ArticleCrawler implements Runnable {
   private static Map<String, Article> getNewArticles(Iterable<String> urlStrings)
       throws DatabaseRequestException, DatabaseSchemaException, FetchException, ParserException,
           RequiredFieldException, BiznessException {
-    Iterable<Url> urls = Urls.put(urlStrings, "http://jonemerson.net/benchmark", false /* isTweet */);
+    Iterable<Url> urls = Urls.put(urlStrings, "http://jonemerson.net/benchmark");
     List<Article> articles = Lists.newArrayList();
     for (Url url : urls) {
       Article article = crawl(url, true /* markCrawlStart */);

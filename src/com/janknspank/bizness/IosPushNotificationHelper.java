@@ -72,7 +72,7 @@ public class IosPushNotificationHelper {
     // Load the keystore and key manager factory.
     FileInputStream keyFileInputStream = null;
     try {
-      File keyFile = new File("WEB-INF/EnterpriseDistributionCertificates.p12");
+      File keyFile = new File("WEB-INF/newsserver_production.p12");
       if (!keyFile.exists()) {
         throw new RuntimeException("Could not find key file");
       }
@@ -99,7 +99,9 @@ public class IosPushNotificationHelper {
       final Article article, final User recipient) throws DatabaseSchemaException {
     Iterable<DeviceRegistration> registrations = Database.with(DeviceRegistration.class).get(
         new QueryOption.WhereEquals("user_id", recipient.getId()),
-        new QueryOption.WhereEquals("device_type", DeviceType.IOS.name()));
+        new QueryOption.WhereEquals("device_type", DeviceType.IOS.name()),
+        new QueryOption.DescendingSort("create_time"),
+        new QueryOption.Limit(1));
     return sendNewArticleViaFuture(article, registrations);
   }
 
@@ -155,8 +157,8 @@ public class IosPushNotificationHelper {
     SSLSocket socket = null;
     try {
       // Basically do this, but in java:
-      // openssl s_client -connect gateway.sandbox.push.apple.com:2195 \
-      //     -cert CookoutCert.pem -key CookoutKey.pem
+      // openssl s_client -connect gateway.push.apple.com:2195 \
+      //     -cert ProductionCert.pem -key ProductionKey.pem
       SSLContext sslContext = SSLContext.getInstance("TLS");
       sslContext.init(keyManagerFactory.getKeyManagers(), null, null);
       SSLSocketFactory factory = sslContext.getSocketFactory();
@@ -170,17 +172,17 @@ public class IosPushNotificationHelper {
       out.flush();
 
       // Read the response.
-//      ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream();
-//      byte[] buffer = new byte[2000];
-//      int readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
-//      while (readBytes > 0) {
-//        responseOutputStream.write(buffer, 0, readBytes);
-//        readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
-//      }
-//      // (BTW it looks like nothing comes back - weird.  How do you know if the
-//      // request was valid?)
-//      System.err.println("Received response: " +
-//          new String(responseOutputStream.toByteArray()));
+      ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream();
+      byte[] buffer = new byte[2000];
+      int readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
+      while (readBytes > 0) {
+        responseOutputStream.write(buffer, 0, readBytes);
+        readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
+      }
+      // (BTW it looks like nothing comes back - weird.  How do you know if the
+      // request was valid?)
+      System.err.println("Received response: " +
+          new String(responseOutputStream.toByteArray()));
 
       // Close the socket.
       socket.getInputStream().close();

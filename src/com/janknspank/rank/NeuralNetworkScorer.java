@@ -7,7 +7,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 12;
+  static final int INPUT_NODES_COUNT = 13;
   static final int OUTPUT_NODES_COUNT = 1;
   //static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
   static final int HIDDEN_NODES_COUNT = 9;
@@ -68,8 +68,11 @@ public final class NeuralNetworkScorer extends Scorer {
         // 11. Relevance to launches
         InputValuesGenerator.relevanceToLaunches(user, article),
 
-        // 11. Relevance to fundraising
-        InputValuesGenerator.relevanceToFundraising(user, article)
+        // 12. Relevance to fundraising
+        InputValuesGenerator.relevanceToFundraising(user, article),
+
+        // 13. Pop culture score.
+        InputValuesGenerator.relevanceToPopCulture(article)
     };
   }
 

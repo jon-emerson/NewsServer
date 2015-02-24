@@ -24,6 +24,8 @@ import com.janknspank.proto.CoreProto.Url;
  * used as a foreign key in other tables.
  */
 public class Urls {
+  public static final int MAX_CRAWL_PRIORITY = 2000;
+
   /**
    * Returns the crawl priority for the URL, assuming that we don't know
    * anything about it yet (e.g. it hasn't been discovered before and we don't
@@ -42,20 +44,19 @@ public class Urls {
       millis = (millis == null)
           ? DateParser.parseDateFromUrl(url, true /* allowMonth */) : millis;
       if (millis != null) {
-        long millisAgo = System.currentTimeMillis() - millis;
-        return (int) Math.max(100, 2000 - (millisAgo / (1000 * 60 * 60)));
+        long millisAgo = Math.max(0, System.currentTimeMillis() - millis);
+        return (int) Math.max(100, MAX_CRAWL_PRIORITY - (millisAgo / (1000 * 60 * 60)));
       }
       return 100;
     }
     return url.contains("//twitter.com/") ? 0 : 10;
   }
 
-  private static Url create(String url, String originUrl, boolean isTweet) {
+  private static Url create(String url, String originUrl) {
     return Url.newBuilder()
         .setId(GuidFactory.generate())
         .setUrl(url)
         .setOriginUrl(originUrl)
-        .setTweetCount(isTweet ? 1 : 0)
         .setDiscoveryTime(System.currentTimeMillis())
         .setCrawlPriority(getCrawlPriority(url, null))
         .build();
@@ -67,9 +68,9 @@ public class Urls {
    * The returned Url is either an updated version of the existing field or
    * a new Url, as necessary.
    */
-  public static Url put(String urlString, String originUrl, boolean isTweet)
+  public static Url put(String urlString, String originUrl)
       throws BiznessException, DatabaseSchemaException {
-    return Iterables.getFirst(put(ImmutableList.of(urlString), originUrl, isTweet), null);
+    return Iterables.getFirst(put(ImmutableList.of(urlString), originUrl), null);
   }
 
   /**
@@ -78,7 +79,7 @@ public class Urls {
    * true.  The return Url objects are in the same order as the URL strings,
    * though duplicates will be removed.
    */
-  public static Iterable<Url> put(Iterable<String> urlStrings, String originUrl, boolean isTweet)
+  public static Iterable<Url> put(Iterable<String> urlStrings, String originUrl)
       throws BiznessException, DatabaseSchemaException {
     if (Iterables.isEmpty(urlStrings)) {
       return ImmutableList.of();
@@ -96,15 +97,6 @@ public class Urls {
     for (Url existingUrl :
         Database.with(Url.class).get(new QueryOption.WhereEquals("url", urls.keySet()))) {
       urls.put(existingUrl.getUrl(), existingUrl);
-
-      if (isTweet) {
-        Url.Builder updatedUrlBuilder = existingUrl.toBuilder();
-        updatedUrlBuilder.setTweetCount(existingUrl.getTweetCount() + 1);
-        if (!existingUrl.hasLastCrawlFinishTime() && existingUrl.getTweetCount() < 500) {
-          updatedUrlBuilder.setCrawlPriority(existingUrl.getCrawlPriority() + 10);
-        }
-        urlsToUpdate.add(updatedUrlBuilder.build());
-      }
     }
 
     List<Url> urlsToCreate = Lists.newArrayList();
@@ -114,7 +106,7 @@ public class Urls {
       // (Well, the database would actually prevent us, by crashing this whole
       // method!!)
       if (urls.get(urlString) == null && !existingCreates.contains(urlString)) {
-        Url newUrl = create(urlString, originUrl, isTweet);
+        Url newUrl = create(urlString, originUrl);
         urlsToCreate.add(newUrl);
         urls.put(urlString, newUrl);
         existingCreates.add(urlString);

@@ -118,8 +118,11 @@ public class DistributionBuilder {
       }
     }
 
-    if (distribution.getPercentile(distribution.getPercentileCount() - 1).getValue() <= value) {
+    if (topPercentile == null
+        || distribution.getPercentile(distribution.getPercentileCount() - 1).getValue() <= value) {
       return 1.0;
+    } else if (bottomPercentile == null) {
+      return 0.0;
     }
 
     double range = topPercentile.getValue() - bottomPercentile.getValue();

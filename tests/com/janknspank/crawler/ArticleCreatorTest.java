@@ -24,7 +24,6 @@ public class ArticleCreatorTest {
   private static final Url URL = Url.newBuilder()
       .setUrl("http://www.cnn.com/2014/05/24/hello.html")
       .setId("test id")
-      .setTweetCount(0)
       .setDiscoveryTime(500L)
       .build();
 

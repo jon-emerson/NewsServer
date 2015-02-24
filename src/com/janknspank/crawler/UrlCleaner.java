@@ -59,7 +59,9 @@ public class UrlCleaner {
     // Do website-specific query parameter filtering and URL canonicalization.
     String host = url.getHost();
     String path = url.getPath();
-
+    if (host.equals("www.abcnews.go.com")) {
+      host = "abcnews.go.com";
+    }
     if (host.endsWith(".businessinsider.com") || host.equals("businessinsider.com")) {
       int slash = path.indexOf("/", 1); // Find first slash after initial starting /.
       if (slash > 0) {
@@ -92,7 +94,7 @@ public class UrlCleaner {
     SiteManifest contentSite = SiteManifests.getForUrl(url);
     String protocol = (contentSite != null && contentSite.getIsHttps())
         ? "https" : "http";
-    
+
     // Recreate the URL with alphabetized query parameters, lowercased scheme
     // and domain, and consistentized port, and no fragment.
     StringBuilder b = new StringBuilder();

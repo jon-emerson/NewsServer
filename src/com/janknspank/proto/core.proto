@@ -56,10 +56,6 @@ message Url {
     (string_charset) = LATIN1
   ];
 
-  optional int64 tweet_count = 3 [
-    (required) = YES
-  ];
-
   optional int64 discovery_time = 4 [
     (required) = YES,
     (client_serialization) = EXCLUDE

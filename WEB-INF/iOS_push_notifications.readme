@@ -1,0 +1,15 @@
+# First get aps_production.cer from the Apple Developer Console, in
+# Certificates, Identifiers & Profiles > Identifiers > Spotter, click Download
+# next to "Development SSL Certificate".
+
+# Next, get ProductionKey.p12 by exporting BOTH THE PRIVATE KEY AND
+# AND THE CERTIFICATE in Keychain Access for the "iPhone Distribution: Spotter
+# Technologies Inc." certificate.  Specify ProductionKey.p12 as the
+# filename to export to.
+
+# Then run these OpenSSL commands to translate it into a public key.
+mkdir work
+openssl x509 -in aps_production.cer -inform der -out work/ProductionCert.pem
+openssl pkcs12 -nocerts -in ProductionKey.p12 -out work/ProductionKey.pem
+openssl pkcs12 -export -inkey work/ProductionKey.pem -in work/ProductionCert.pem -out newsserver_production.p12
+

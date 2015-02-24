@@ -115,7 +115,9 @@ public class JonBenchmark {
       "https://gigaom.com/2015/02/19/googles-inbox-lands-on-tablets-works-in-firefox-and-safari-too/",
       "http://takingnote.blogs.nytimes.com/2015/02/19/putting-a-price-on-privacy-29/",
       "http://mashable.com/2015/02/18/yahoo-mobile-developers/",
-      "http://techcrunch.com/2015/02/19/entrepreneur-first-hatches-latest-startups-partners-with-media-power-players/");
+      "http://techcrunch.com/2015/02/19/entrepreneur-first-hatches-latest-startups-partners-with-media-power-players/",
+      "http://www.forbes.com/sites/bryanstolle/2015/02/04/ready-aim-fire-part-1-how-to-execute-successfully-every-time/",
+      "http://www.forbes.com/sites/bryanstolle/2015/02/23/ready-aim-fire-how-to-execute-successfully-every-time-part-2/");
 
   public static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
@@ -200,6 +202,28 @@ public class JonBenchmark {
       "http://www.nytimes.com/2015/02/05/sports/baseball/as-wrigley-field-is-rebuilt-the-curious-take-a-look.html",
       "http://www.nytimes.com/2015/01/15/sports/football/nfl-roundup.html",
       "http://www.nytimes.com/2015/01/28/sports/football/in-seahawks-fierce-secondary-new-members-make-the-cut.html",
+      "http://www.sfgate.com/athletics/article/A-s-GM-Beane-stands-by-trade-for-Lester-5795508.php",
+      "http://www.sfgate.com/athletics/article/Wild-card-roster-could-have-unique-look-5789273.php",
+      "http://www.sfgate.com/athletics/article/Closing-message-ugly-for-Oakland-5763447.php",
+      "http://www.sfgate.com/athletics/article/Rangers-score-4-in-1st-A-s-lose-another-5765575.php",
+      "http://www.sfgate.com/athletics/article/Defensive-lapses-cost-A-s-in-6-3-loss-to-Texas-5760667.php",
+      "http://www.nytimes.com/2015/02/24/sports/baseball/alex-rodriguez-arrives-early-surprising-the-yankees.html",
+      "http://www.nytimes.com/1991/02/18/sports/spring-training-yankees-regroup-trying-to-forget-90.html",
+      "http://www.nytimes.com/1998/03/13/sports/baseball-spring-training-jones-will-pitch-season-opener.html",
+      "http://www.nytimes.com/2015/02/07/sports/basketball/before-rivalry-yields-to-cooperation-nets-hold-off-knicks.html",
+      "http://www.nytimes.com/2015/02/17/sports/hockey/rangers-erupt-late-and-shock-islanders.html",
+      "http://www.businessinsider.com/afp-djokovic-plans-next-step-to-greatness-at-dubai-open-2015-2",
+      "http://www.nytimes.com/2015/02/01/sports/golf/at-32-phoenix-open-leader-seems-ancient.html",
+      "http://www.nytimes.com/1996/03/03/nyregion/at-leisure-a-sport-that-offers-equal-opportunity-if-not-fresh-air.html",
+      "http://www.nytimes.com/aponline/2015/02/05/sports/olympics/ap-oly-tokyo-2020.html",
+      "http://wordplay.blogs.nytimes.com/2015/01/26/sicherman/",
+      "http://www.nytimes.com/2015/02/24/sports/baseball/red-sox-place-a-big-bet-on-the-latest-prospect-from-cuba.html",
+      "http://www.businessinsider.com/boston-2024-olympics-waste-2015-1",
+      "http://www.businessinsider.com/us-cities-bid-for-2024-olympics-2014-12",
+      "http://www.businessinsider.com/olympic-athletes-and-power-of-visualization-2015-1",
+      "http://www.businessinsider.com/the-most-expensive-olympics-ever-is-becoming-a-major-headache-for-putin-2015-2",
+      "http://www.businessinsider.com/afp-rio-games-choose-yellow-feline-as-mascot-2014-11",
+      "http://www.businessinsider.com/r-san-francisco-to-submit-bid-for-2024-olympics-2014-11",
       // Random business articles about financing / the economy that are unimportant to me.
       "http://www.businessinsider.com/impact-of-mortgage-refinance-on-housing-2013-6",
       "http://www.businessinsider.com/refiners-gas-futures-2012-3",
@@ -213,7 +237,32 @@ public class JonBenchmark {
       // Random uninteresting tech.
       "http://techcrunch.com/2015/02/05/this-millennium-falcon-drone-can-make-the-kessel-run-in-less-than-twelve-parsecs/",
       "http://techcrunch.com/2015/02/01/the-pirate-bay-returns/",
+      // Politics unrelated to tech.
+      "http://www.nytimes.com/2015/02/24/us/jeb-bush-looms-large-for-marco-rubio-in-2016.html",
+      "http://www.nytimes.com/2015/02/24/us/homeland-security-funding-fight-over-immigration-poses-risks-for-republicans.html",
+      "http://www.nytimes.com/2015/02/24/us/govern-yourselves-state-lawmakers-tell-cities-but-not-too-much.html",
+      "http://www.nytimes.com/2015/02/24/us/with-congress-stalled-obama-seeks-governors-help-to-aid-middle-class.html",
+      "http://www.nytimes.com/2015/02/24/nyregion/christie-broke-law-with-pension-move-new-jersey-judge-says.html",
+      "http://www.nytimes.com/2015/02/24/us/supreme-court-weighs-denial-of-visa-to-husband-of-us-citizen.html",
+      "http://www.nytimes.com/2015/02/24/us/more-conflict-over-cutting-federal-role-in-education.html",
+      "http://www.nytimes.com/2015/02/24/us/politics/defense-chief-vouches-for-us-strategy-on-isis.html",
+      "http://www.nytimes.com/2015/02/24/world/middleeast/iran-nuclear-talks.html",
+      "http://www.nytimes.com/2015/02/24/us/in-justices-tests-on-standing-to-sue-answers-arent-always-clear-cut.html",
+      "http://www.washingtonpost.com/politics/republicans-split-on-dhs-funding-edging-closer-to-partial-shutdown/2015/02/23/4b2de138-bb76-11e4-b274-e5209a3bc9a9_story.html",
+      "http://www.washingtonpost.com/politics/gay-rights-groups-urge-military-to-lift-ban-on-transgender-service-members/2015/02/23/c056e5b6-bb73-11e4-8668-4e7ba8439ca6_story.html",
+      "http://www.washingtonpost.com/politics/kerry-names-openly-gay-foreign-service-officer/2015/02/23/97afa858-bb89-11e4-8668-4e7ba8439ca6_story.html",
+      "http://www.washingtonpost.com/politics/lawmaker-with-lavish-decor-billed-private-planes-concerts/2015/02/23/c7754d72-bbac-11e4-bdfa-b8e8f594e6ee_story.html",
+      "http://www.washingtonpost.com/politics/courts_law/high-court-divided-on-refusal-of-a-visa-to-a-us-citizens-afghan-spouse/2015/02/23/6416685e-bb8b-11e4-b274-e5209a3bc9a9_story.html",
+      "http://www.washingtonpost.com/blogs/the-fix/wp/2015/02/23/jeb-bush-had-an-awesome-mustache-in-the-1970s/",
+      "http://www.washingtonpost.com/blogs/the-fix/wp/2015/02/23/the-newest-conservative-hero-is-a-black-middle-schooler-from-georgia/",
+      "http://www.washingtonpost.com/blogs/the-fix/wp/2015/02/23/how-scott-walkers-confidence-led-him-to-an-unnecessary-error-on-president-obamas-christianity/",
+      "http://www.washingtonpost.com/blogs/the-fix/wp/2015/02/23/how-to-run-for-president-in-4-easy-steps/",
+      "http://www.washingtonpost.com/blogs/in-the-loop/wp/2015/02/23/kerry-picks-foreign-service-officer-to-be-states-first-special-envoy-for-gay-rights/",
+      "http://www.washingtonpost.com/politics/courts_law/intense-fight-over-obamacare-extends-to-those-named-in-the-challenge/2015/02/22/b616ca6c-b9ed-11e4-9423-f3d0a1ec335c_story.html",
+      "http://www.washingtonpost.com/politics/courts_law/the-scaliaginsburg-reality-show-a-not-100-percent-sober-friendship/2015/02/13/b8336930-b368-11e4-886b-c22184f27c35_story.html",
+      "http://www.washingtonpost.com/blogs/post-politics/wp/2015/02/10/obama-senses-supreme-court-will-make-shift-on-gay-marriage/",
       // Celebrity / entertainment news.
+      "http://mashable.com/2015/02/19/anna-wintours-facial-expression/",
       "http://www.cnn.com/2015/02/08/entertainment/bruce-jenner-car-accident/index.html",
       "http://www.cnn.com/2015/02/08/entertainment/grammys-2015-winners-list-thr/index.html",
       "http://www.cnn.com/2015/02/07/entertainment/rosie-odonnell-leaving-the-view/index.html",
@@ -248,6 +297,7 @@ public class JonBenchmark {
       "http://www.siliconbeat.com/2015/02/19/white-house-working-with-twitter-facebook-and-other-social-media-companies-to-combat-violent-extremism/",
       "http://mashable.com/2015/02/20/events-advertising-social-media/",
       "http://www.bbc.co.uk/newsbeat/31530528",
+      "http://www.abc.net.au/news/2015-02-24/judge-dismisses-bali-nine-pairs-application-president-clemency/6253042",
       "http://www.nytimes.com/2015/02/20/business/fda-eases-access-to-dna-tests-of-rare-disorders.html",
       "http://www.nytimes.com/2015/02/20/upshot/american-sniper-the-peoples-choice-for-best-picture.html",
       "http://www.sfgate.com/news/politics/article/Snowden-leak-NSA-helped-British-steal-cell-phone-6091392.php",
@@ -260,7 +310,8 @@ public class JonBenchmark {
       "http://www.forbes.com/sites/robertwood/2015/02/20/dont-file-taxes-early-wrong-tax-statements-sent-admits-obama-administration/",
       "http://www.nytimes.com/2015/02/23/us/lawsuits-lurid-details-draw-an-online-crowd.html",
       "http://artsbeat.blogs.nytimes.com/2015/02/22/downton-abbey-recap-yes-its-called-the-hornby-hotel/",
-      "http://artsbeat.blogs.nytimes.com/2015/02/22/girls-recap-hannah-and-adam-try-to-rebuild/");
+      "http://artsbeat.blogs.nytimes.com/2015/02/22/girls-recap-hannah-and-adam-try-to-rebuild/",
+      "http://www.abc.net.au/news/2015-02-24/small-business-warns-gst-compliance-burden-is/6245022");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {

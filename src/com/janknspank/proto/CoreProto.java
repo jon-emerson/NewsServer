@@ -857,16 +857,6 @@ public final class CoreProto {
     com.google.protobuf.ByteString
         getOriginUrlBytes();
 
-    // optional int64 tweet_count = 3;
-    /**
-     * <code>optional int64 tweet_count = 3;</code>
-     */
-    boolean hasTweetCount();
-    /**
-     * <code>optional int64 tweet_count = 3;</code>
-     */
-    long getTweetCount();
-
     // optional int64 discovery_time = 4;
     /**
      * <code>optional int64 discovery_time = 4;</code>
@@ -988,28 +978,23 @@ public final class CoreProto {
               id_ = input.readBytes();
               break;
             }
-            case 24: {
-              bitField0_ |= 0x00000008;
-              tweetCount_ = input.readInt64();
-              break;
-            }
             case 32: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               discoveryTime_ = input.readInt64();
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000010;
               lastCrawlStartTime_ = input.readInt64();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000020;
               lastCrawlFinishTime_ = input.readInt64();
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000040;
               crawlPriority_ = input.readInt64();
               break;
             }
@@ -1199,22 +1184,6 @@ public final class CoreProto {
       }
     }
 
-    // optional int64 tweet_count = 3;
-    public static final int TWEET_COUNT_FIELD_NUMBER = 3;
-    private long tweetCount_;
-    /**
-     * <code>optional int64 tweet_count = 3;</code>
-     */
-    public boolean hasTweetCount() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int64 tweet_count = 3;</code>
-     */
-    public long getTweetCount() {
-      return tweetCount_;
-    }
-
     // optional int64 discovery_time = 4;
     public static final int DISCOVERY_TIME_FIELD_NUMBER = 4;
     private long discoveryTime_;
@@ -1222,7 +1191,7 @@ public final class CoreProto {
      * <code>optional int64 discovery_time = 4;</code>
      */
     public boolean hasDiscoveryTime() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional int64 discovery_time = 4;</code>
@@ -1238,7 +1207,7 @@ public final class CoreProto {
      * <code>optional int64 last_crawl_start_time = 5;</code>
      */
     public boolean hasLastCrawlStartTime() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int64 last_crawl_start_time = 5;</code>
@@ -1254,7 +1223,7 @@ public final class CoreProto {
      * <code>optional int64 last_crawl_finish_time = 6;</code>
      */
     public boolean hasLastCrawlFinishTime() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional int64 last_crawl_finish_time = 6;</code>
@@ -1280,7 +1249,7 @@ public final class CoreProto {
      * </pre>
      */
     public boolean hasCrawlPriority() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional int64 crawl_priority = 7;</code>
@@ -1303,7 +1272,6 @@ public final class CoreProto {
       id_ = "";
       url_ = "";
       originUrl_ = "";
-      tweetCount_ = 0L;
       discoveryTime_ = 0L;
       lastCrawlStartTime_ = 0L;
       lastCrawlFinishTime_ = 0L;
@@ -1328,18 +1296,15 @@ public final class CoreProto {
         output.writeBytes(2, getIdBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(3, tweetCount_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(4, discoveryTime_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(5, lastCrawlStartTime_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt64(6, lastCrawlFinishTime_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(7, crawlPriority_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
@@ -1364,21 +1329,17 @@ public final class CoreProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, tweetCount_);
+          .computeInt64Size(4, discoveryTime_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, discoveryTime_);
+          .computeInt64Size(5, lastCrawlStartTime_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, lastCrawlStartTime_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(6, lastCrawlFinishTime_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(7, crawlPriority_);
       }
@@ -1508,16 +1469,14 @@ public final class CoreProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         originUrl_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        tweetCount_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
         discoveryTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         lastCrawlStartTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         lastCrawlFinishTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         crawlPriority_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -1561,21 +1520,17 @@ public final class CoreProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.tweetCount_ = tweetCount_;
+        result.discoveryTime_ = discoveryTime_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.discoveryTime_ = discoveryTime_;
+        result.lastCrawlStartTime_ = lastCrawlStartTime_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.lastCrawlStartTime_ = lastCrawlStartTime_;
+        result.lastCrawlFinishTime_ = lastCrawlFinishTime_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
-        }
-        result.lastCrawlFinishTime_ = lastCrawlFinishTime_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
         }
         result.crawlPriority_ = crawlPriority_;
         result.bitField0_ = to_bitField0_;
@@ -1608,9 +1563,6 @@ public final class CoreProto {
           bitField0_ |= 0x00000004;
           originUrl_ = other.originUrl_;
           onChanged();
-        }
-        if (other.hasTweetCount()) {
-          setTweetCount(other.getTweetCount());
         }
         if (other.hasDiscoveryTime()) {
           setDiscoveryTime(other.getDiscoveryTime());
@@ -1897,46 +1849,13 @@ public final class CoreProto {
         return this;
       }
 
-      // optional int64 tweet_count = 3;
-      private long tweetCount_ ;
-      /**
-       * <code>optional int64 tweet_count = 3;</code>
-       */
-      public boolean hasTweetCount() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int64 tweet_count = 3;</code>
-       */
-      public long getTweetCount() {
-        return tweetCount_;
-      }
-      /**
-       * <code>optional int64 tweet_count = 3;</code>
-       */
-      public Builder setTweetCount(long value) {
-        bitField0_ |= 0x00000008;
-        tweetCount_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 tweet_count = 3;</code>
-       */
-      public Builder clearTweetCount() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        tweetCount_ = 0L;
-        onChanged();
-        return this;
-      }
-
       // optional int64 discovery_time = 4;
       private long discoveryTime_ ;
       /**
        * <code>optional int64 discovery_time = 4;</code>
        */
       public boolean hasDiscoveryTime() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional int64 discovery_time = 4;</code>
@@ -1948,7 +1867,7 @@ public final class CoreProto {
        * <code>optional int64 discovery_time = 4;</code>
        */
       public Builder setDiscoveryTime(long value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         discoveryTime_ = value;
         onChanged();
         return this;
@@ -1957,7 +1876,7 @@ public final class CoreProto {
        * <code>optional int64 discovery_time = 4;</code>
        */
       public Builder clearDiscoveryTime() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         discoveryTime_ = 0L;
         onChanged();
         return this;
@@ -1969,7 +1888,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_start_time = 5;</code>
        */
       public boolean hasLastCrawlStartTime() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int64 last_crawl_start_time = 5;</code>
@@ -1981,7 +1900,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_start_time = 5;</code>
        */
       public Builder setLastCrawlStartTime(long value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         lastCrawlStartTime_ = value;
         onChanged();
         return this;
@@ -1990,7 +1909,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_start_time = 5;</code>
        */
       public Builder clearLastCrawlStartTime() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         lastCrawlStartTime_ = 0L;
         onChanged();
         return this;
@@ -2002,7 +1921,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_finish_time = 6;</code>
        */
       public boolean hasLastCrawlFinishTime() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional int64 last_crawl_finish_time = 6;</code>
@@ -2014,7 +1933,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_finish_time = 6;</code>
        */
       public Builder setLastCrawlFinishTime(long value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         lastCrawlFinishTime_ = value;
         onChanged();
         return this;
@@ -2023,7 +1942,7 @@ public final class CoreProto {
        * <code>optional int64 last_crawl_finish_time = 6;</code>
        */
       public Builder clearLastCrawlFinishTime() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         lastCrawlFinishTime_ = 0L;
         onChanged();
         return this;
@@ -2045,7 +1964,7 @@ public final class CoreProto {
        * </pre>
        */
       public boolean hasCrawlPriority() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional int64 crawl_priority = 7;</code>
@@ -2077,7 +1996,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder setCrawlPriority(long value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         crawlPriority_ = value;
         onChanged();
         return this;
@@ -2096,7 +2015,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder clearCrawlPriority() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         crawlPriority_ = 0L;
         onChanged();
         return this;
@@ -15733,78 +15652,78 @@ public final class CoreProto {
       "\001\022,\n\022destination_url_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
       "\246\035\030\250\246\035\001\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022\035\n" +
       "\017last_found_time\030\004 \001(\003B\004\210\246\035\001:\016\212\265\030\nMySQL." +
-      "Link\"\251\002\n\003Url\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246" +
+      "Link\"\216\002\n\003Url\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246" +
       "\035\001\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022!\n\nor" +
-      "igin_url\030\010 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\031\n\013tweet_c",
-      "ount\030\003 \001(\003B\004\210\246\035\001\022 \n\016discovery_time\030\004 \001(\003" +
-      "B\010\210\246\035\001\240\246\035\003\022\'\n\025last_crawl_start_time\030\005 \001(" +
-      "\003B\010\220\246\035\005\240\246\035\003\022(\n\026last_crawl_finish_time\030\006 " +
-      "\001(\003B\010\220\246\035\005\240\246\035\003\022 \n\016crawl_priority\030\007 \001(\003B\010\220" +
-      "\246\035\003\240\246\035\003:\017\212\265\030\013MongoDB.Url\"\200\001\n\007Session\022\"\n\013" +
-      "session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\004\230\246\035\200\001\022!\n\007user" +
-      "_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create_ti" +
-      "me\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017MongoDB.Session\"\207\005\n\006" +
-      "Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007" +
-      "keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(",
-      "\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001(\0162\016.En" +
-      "tity.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014canonical_id\030\005 " +
-      "\001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005topic\030\006 \003(\0132\023.Entit" +
-      "y.EntityTopic\032\277\002\n\013EntityTopic\022\033\n\tentity_" +
-      "id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035" +
-      "\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strengt" +
-      "h\030\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033.Entity." +
-      "EntityTopic.Context:\007UNKNOWN\"\220\001\n\007Context" +
-      "\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED_AT\020\001\022\025" +
-      "\n\021ANGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIST_INVES",
-      "TED_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026\n\022WIKIP" +
-      "EDIA_SUBTOPIC\020\005\"Z\n\006Source\022\013\n\007UNKNOWN\020\000\022\031" +
-      "\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPEDIA_LON" +
-      "G_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003:\020\212\265\030\014MySQL.E" +
-      "ntity\"\347\001\n\nVectorData\022\034\n\016document_count\030\001" +
-      " \001(\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 \003(\0132\031.Vec" +
-      "torData.WordFrequency\022#\n\014distribution\030\003 " +
-      "\001(\0132\r.Distribution\032c\n\rWordFrequency\022\026\n\004w" +
-      "ord\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(\005B\004" +
-      "\210\246\035\001\022!\n\023document_occurences\030\003 \001(\005B\004\210\246\035\001\"",
-      "\255\001\n\026TrainedArticleIndustry\022 \n\006url_id\030\001 \001" +
-      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_code_id" +
-      "\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\003 \001(" +
-      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB.Trained" +
-      "ArticleIndustry\"\347\001\n\034TrainedArticleClassi" +
-      "fication\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246" +
-      "\035\001\0225\n\033article_classification_code\030\002 \001(\tB" +
-      "\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001" +
-      "\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArticleClass",
-      "ification\"9\n\017InterpretedData\022\031\n\007article\030" +
-      "\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\t\"\207\001\n\014Distrib" +
-      "ution\022,\n\npercentile\030\001 \003(\0132\030.Distribution" +
-      ".Percentile\032I\n\nPercentile\022\022\n\npercentile\030" +
-      "\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_point_count" +
-      "\030\003 \001(\003\"\226\003\n\026ShareNormalizationData\022T\n\027tim" +
-      "e_range_distribution\030\002 \003(\0132-.ShareNormal" +
-      "izationData.TimeRangeDistributionB\004\210\246\035\001\022" +
-      "J\n\022domain_share_count\030\003 \003(\0132(.ShareNorma" +
-      "lizationData.DomainShareCountB\004\210\246\035\001\032x\n\025T",
-      "imeRangeDistribution\022\032\n\014start_millis\030\001 \001" +
-      "(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014di" +
-      "stribution\030\003 \001(\0132\r.DistributionB\004\210\246\035\001\032`\n" +
-      "\020DomainShareCount\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022" +
-      "\033\n\rarticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_co" +
-      "unt\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001 \001(" +
-      "\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB\024" +
-      "\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220" +
-      "\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!" +
-      "\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017M",
-      "ySQL.UrlRating\"\262\002\n\022DeviceRegistration\022 \n" +
-      "\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022!\n\007user_" +
-      "id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022B\n\013device_typ" +
-      "e\030\003 \001(\0162\036.DeviceRegistration.DeviceType:" +
-      "\007UNKNOWNB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230" +
-      "\246\035d\250\246\035\001\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246" +
-      "\035\005\"/\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID" +
-      "\020\001\022\007\n\003IOS\020\002:\036\212\265\030\032MongoDB.DeviceRegistrat" +
-      "ionB!\n\024com.janknspank.protoB\tCoreProto"
+      "igin_url\030\010 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022 \n\016discove",
+      "ry_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025last_crawl_st" +
+      "art_time\030\005 \001(\003B\010\220\246\035\005\240\246\035\003\022(\n\026last_crawl_f" +
+      "inish_time\030\006 \001(\003B\010\220\246\035\005\240\246\035\003\022 \n\016crawl_prio" +
+      "rity\030\007 \001(\003B\010\220\246\035\003\240\246\035\003:\017\212\265\030\013MongoDB.Url\"\200\001" +
+      "\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\004" +
+      "\230\246\035\200\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001" +
+      "\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017MongoDB" +
+      ".Session\"\207\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035" +
+      "\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d" +
+      "\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006sour",
+      "ce\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014ca" +
+      "nonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005topic\030" +
+      "\006 \003(\0132\023.Entity.EntityTopic\032\277\002\n\013EntityTop" +
+      "ic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keywo" +
+      "rd\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246" +
+      "\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 " +
+      "\001(\0162\033.Entity.EntityTopic.Context:\007UNKNOW" +
+      "N\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_" +
+      "WORKED_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031\n\025AN" +
+      "GELLIST_INVESTED_IN\020\003\022\025\n\021ANGELLIST_ADVIS",
+      "ED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC\020\005\"Z\n\006Source\022\013" +
+      "\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031" +
+      "\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003" +
+      ":\020\212\265\030\014MySQL.Entity\"\347\001\n\nVectorData\022\034\n\016doc" +
+      "ument_count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_frequenc" +
+      "y\030\002 \003(\0132\031.VectorData.WordFrequency\022#\n\014di" +
+      "stribution\030\003 \001(\0132\r.Distribution\032c\n\rWordF" +
+      "requency\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfreq" +
+      "uency\030\002 \001(\005B\004\210\246\035\001\022!\n\023document_occurences" +
+      "\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndustry\022",
+      " \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020ind" +
+      "ustry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer" +
+      "_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036Mo" +
+      "ngoDB.TrainedArticleIndustry\"\347\001\n\034Trained" +
+      "ArticleClassification\022 \n\006url_id\030\001 \001(\tB\020\210" +
+      "\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classificatio" +
+      "n_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checke" +
+      "d\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001" +
+      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.Traine" +
+      "dArticleClassification\"9\n\017InterpretedDat",
+      "a\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(" +
+      "\t\"\207\001\n\014Distribution\022,\n\npercentile\030\001 \003(\0132\030" +
+      ".Distribution.Percentile\032I\n\nPercentile\022\022" +
+      "\n\npercentile\030\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020dat" +
+      "a_point_count\030\003 \001(\003\"\226\003\n\026ShareNormalizati" +
+      "onData\022T\n\027time_range_distribution\030\002 \003(\0132" +
+      "-.ShareNormalizationData.TimeRangeDistri" +
+      "butionB\004\210\246\035\001\022J\n\022domain_share_count\030\003 \003(\013" +
+      "2(.ShareNormalizationData.DomainShareCou" +
+      "ntB\004\210\246\035\001\032x\n\025TimeRangeDistribution\022\032\n\014sta",
+      "rt_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(" +
+      "\003B\004\210\246\035\001\022)\n\014distribution\030\003 \001(\0132\r.Distribu" +
+      "tionB\004\210\246\035\001\032`\n\020DomainShareCount\022\024\n\006domain" +
+      "\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 \001(\003B\004\210\246\035" +
+      "\001\022\031\n\013share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRati" +
+      "ng\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005" +
+      "email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url" +
+      "\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(" +
+      "\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246" +
+      "\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRating\"\262\002\n\022DeviceRe",
+      "gistration\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
+      "\240\246\035\003\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022" +
+      "B\n\013device_type\030\003 \001(\0162\036.DeviceRegistratio" +
+      "n.DeviceType:\007UNKNOWNB\004\210\246\035\001\022\037\n\tdevice_id" +
+      "\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022!\n\013create_time\030\005 \001(" +
+      "\003B\014\210\246\035\001\240\246\035\003\220\246\035\005\"/\n\nDeviceType\022\013\n\007UNKNOWN" +
+      "\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002:\036\212\265\030\032MongoDB.De" +
+      "viceRegistrationB!\n\024com.janknspank.proto" +
+      "B\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15822,7 +15741,7 @@ public final class CoreProto {
           internal_static_Url_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Url_descriptor,
-              new java.lang.String[] { "Id", "Url", "OriginUrl", "TweetCount", "DiscoveryTime", "LastCrawlStartTime", "LastCrawlFinishTime", "CrawlPriority", });
+              new java.lang.String[] { "Id", "Url", "OriginUrl", "DiscoveryTime", "LastCrawlStartTime", "LastCrawlFinishTime", "CrawlPriority", });
           internal_static_Session_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_Session_fieldAccessorTable = new
@@ -15937,7 +15856,6 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

@@ -141,6 +141,24 @@ public class InputValuesGenerator {
         Math.max(0, industryFeature.getSimilarity() * 3 - 2);
   }
 
+  /**
+   * Returns a score for how related this article is to sports, entertainment,
+   * or popular politics.
+   */
+  public static double relevanceToPopCulture(Article article) {
+    double score = 0;
+    for (ArticleFeature feature : new ArticleFeature[] {
+        ArticleFeatures.getFeature(article, FeatureId.TOPIC_ENTERTAINMENT),
+        ArticleFeatures.getFeature(article, FeatureId.TOPIC_SPORTS),
+        ArticleFeatures.getFeature(article, FeatureId.TOPIC_POLITICS)
+    }) {
+      if (feature != null) {
+        score = Math.max(score, feature.getSimilarity());
+      }
+    }
+    return score;
+  }
+
   // Normalize any value to [0,1]
   private static double sigmoid(double x) {
     return 1 / (1 + Math.exp(-x));
