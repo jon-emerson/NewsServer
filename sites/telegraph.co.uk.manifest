@@ -40,6 +40,7 @@ path_blacklist {
 }
 paragraph_selector: "article > p"
 paragraph_selector: "article > div > p"
+paragraph_selector: "#mainBodyArea > div > p"
 article_url_pattern {
   path_regex: "\\/1[0-9]{7}\\/"
 }

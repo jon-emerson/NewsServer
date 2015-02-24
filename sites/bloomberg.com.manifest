@@ -62,7 +62,7 @@ article_url_pattern {
   path_regex: "^\\/[a-z\\-\\_]+\\/20[0-9]{2}-[01][0-9]-[0-3][0-9](-|\\/).*(\\/|\\.html)$"
 }
 article_url_pattern {
-  path_regex: "^\\/news\\/articles\\/(19|20)[0-9]{2}-[01][0-9]-[0-3][0-9]\\/[^\\/]+$"
+  path_regex: "^\\/(news|politics)\\/articles\\/(19|20)[0-9]{2}-[01][0-9]-[0-3][0-9]\\/[^\\/]+$"
 }
 article_url_pattern {
   path_regex: "^\\/bb\\/newsarchive\\/[a-zA-Z0-9_]{5,15}\\.html$"
@@ -78,6 +78,7 @@ test_instructions {
     article_url: "http://www.bloomberg.com/news/articles/2014-11-14/obama-delivers-support-for-myanmar-opposition"
     article_url: "http://www.bloomberg.com/news/articles/2015-02-14/obama-sends-labor-secretary-to-resolve-west-coast-ports-dispute"
     article_url: "http://www.bloomberg.com/now/2011-05-25/introducing-bloomberg-view-putting-the-world-in-focus/"
+    article_url: "http://www.bloomberg.com/politics/articles/2015-02-24/u-s-said-not-to-seek-civil-rights-charges-over-trayvon-martin"
     non_article_url: "http://bloomberg.com/careers"
     non_article_url: "http://bloomberg.com/company"
     non_article_url: "http://go.bloomberg.com/market-now/"

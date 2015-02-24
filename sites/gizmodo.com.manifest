@@ -2,6 +2,7 @@ root_domain: "gizmodo.com"
 start_url: "http://www.gizmodo.com"
 paragraph_selector: "article > p"
 paragraph_selector: "article > div > p"
+paragraph_selector: ".post-content > p"
 article_url_pattern {
   path_regex: "[\\/-]1[0-9]{9}(\\/[^\\/]+)?$"
 }

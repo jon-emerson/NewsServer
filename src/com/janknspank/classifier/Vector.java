@@ -54,7 +54,26 @@ public class Vector {
                    return new Vector(article);
                  }
               });
-  private static final ImmutableSet<String> STOP_WORDS;
+
+  public static final ImmutableSet<String> STOP_WORDS;
+  static {
+    BufferedReader br = null;
+    try {
+      br = new BufferedReader(new FileReader("neuralnet/english_stopwords"));
+      ImmutableSet.Builder<String> stopWordSetBuilder = ImmutableSet.builder();
+      String stopWord = br.readLine();
+      while (stopWord != null) {
+        stopWordSetBuilder.add(stopWord);
+        stopWord = br.readLine();
+      }
+      STOP_WORDS = stopWordSetBuilder.build();
+    } catch (IOException e) {
+      throw new Error("Can't read stopwords file.");
+    } finally {
+      IOUtils.closeQuietly(br);
+    }
+  }
+
   private static final KeywordFinder KEYWORD_FINDER = KeywordFinder.getInstance();
 
   private final int documentCount;
@@ -77,24 +96,6 @@ public class Vector {
    */
   private final Map<Vector, Map<String, Double>> tfIdfAgainstUniverseMap =
       Maps.newHashMap();
-
-  static {
-    BufferedReader br = null;
-    try {
-      br = new BufferedReader(new FileReader("neuralnet/english_stopwords"));
-      ImmutableSet.Builder<String> stopWordSetBuilder = ImmutableSet.builder();
-      String stopWord = br.readLine();
-      while (stopWord != null) {
-        stopWordSetBuilder.add(stopWord);
-        stopWord = br.readLine();
-      }
-      STOP_WORDS = stopWordSetBuilder.build();
-    } catch (IOException e) {
-      throw new Error("Can't read stopwords file.");
-    } finally {
-      IOUtils.closeQuietly(br);
-    }
-  }
 
   public Vector(VectorData data) {
     documentCount = data.hasDocumentCount() ? data.getDocumentCount() : 1;

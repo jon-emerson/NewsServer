@@ -311,7 +311,9 @@ public class JonBenchmark {
       "http://www.nytimes.com/2015/02/23/us/lawsuits-lurid-details-draw-an-online-crowd.html",
       "http://artsbeat.blogs.nytimes.com/2015/02/22/downton-abbey-recap-yes-its-called-the-hornby-hotel/",
       "http://artsbeat.blogs.nytimes.com/2015/02/22/girls-recap-hannah-and-adam-try-to-rebuild/",
-      "http://www.abc.net.au/news/2015-02-24/small-business-warns-gst-compliance-burden-is/6245022");
+      "http://www.abc.net.au/news/2015-02-24/small-business-warns-gst-compliance-burden-is/6245022",
+      "http://www.nytimes.com/2015/02/26/technology/personaltech/despite-the-promise-of-technology-the-mysteries-of-sleep-lie-unsolved.html",
+      "http://www.inc.com/zoe-henry/top-10-cities-for-entrepreneurship-in-europe_1.html");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
