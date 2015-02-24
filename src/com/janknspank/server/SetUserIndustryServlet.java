@@ -1,5 +1,8 @@
 package com.janknspank.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,11 +36,20 @@ public class SetUserIndustryServlet extends StandardServlet {
     UserIndustry.Source source;
     source = ("true".equals(follow)) ? UserIndustry.Source.USER : UserIndustry.Source.TOMBSTONE;
 
+    List<UserIndustry> userIndustries = new ArrayList<>();
     UserIndustry existingIndustry = null;
+    boolean industryStateChanged = false;
     for (UserIndustry userIndustry : user.getIndustryList()) {
       if (userIndustry.getIndustryCodeId() == industryCodeId) {
         existingIndustry = userIndustry;
-        break;
+        if (existingIndustry.getSource() != source) {
+          userIndustries.add(existingIndustry.toBuilder().setSource(source).build());
+          industryStateChanged = true;
+        } else {
+          userIndustries.add(existingIndustry);
+        }
+      } else {
+        userIndustries.add(userIndustry);
       }
     }
 
@@ -50,9 +62,8 @@ public class SetUserIndustryServlet extends StandardServlet {
               .setCreateTime(System.currentTimeMillis())
               .build()));
     } else {
-      if (existingIndustry.getSource() != source) {
-        UserIndustry industryToUpdate = existingIndustry.toBuilder().setSource(source).build();
-        Database.update(industryToUpdate);
+      if (industryStateChanged) {
+        Database.with(User.class).set(user, "industry", userIndustries);
       }
     }
 

@@ -16,6 +16,7 @@ import ro.isdc.wro.extensions.script.RhinoUtils;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.IndustryCode;
 import com.janknspank.common.Logger;
@@ -174,7 +175,7 @@ public class JavascriptScorer extends Scorer {
    * industry.
    */
   public static int getUserIndustryCode(User user) {
-    for (UserIndustry userIndustry : user.getIndustryList()) {
+    for (UserIndustry userIndustry : UserIndustries.getCurrentIndustries(user)) {
       if (userIndustry.getRelationship() == Relationship.CURRENT_INDUSTRY) {
         return userIndustry.getIndustryCodeId();
       }
