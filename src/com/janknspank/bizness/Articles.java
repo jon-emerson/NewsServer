@@ -48,7 +48,7 @@ public class Articles {
     TopList<Article, Double> bestArticles = new TopList<>(limit);
     for (Article article : Deduper.filterOutDupes(Iterables.concat(
         getArticlesByInterest(UserInterests.getCurrentInterests(user), limit * 5),
-        getArticlesByIndustries(user.getIndustryList(), limit * 5)))) {
+        getArticlesByIndustries(UserIndustries.getCurrentIndustries(user), limit * 5)))) {
       double hoursSincePublished =
           ((double) System.currentTimeMillis() - article.getPublishedTime())
               / TimeUnit.HOURS.toMillis(1);
