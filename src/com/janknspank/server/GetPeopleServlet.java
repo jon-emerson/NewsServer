@@ -6,7 +6,6 @@ import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -33,9 +32,8 @@ public class GetPeopleServlet extends StandardServlet {
     Iterable<Entity> people; 
 
     if (searchString != null) {
-      String whereCondition = "%" + StringUtils.capitalize(searchString) + "%";
       people = Database.with(Entity.class).get(
-          new QueryOption.WhereLike("keyword", whereCondition),
+          new QueryOption.WhereLikeIgnoreCase("keyword", "%" + searchString + "%"),
           new QueryOption.WhereEquals("type", "p"),
           new QueryOption.Limit(20));
     } else {
