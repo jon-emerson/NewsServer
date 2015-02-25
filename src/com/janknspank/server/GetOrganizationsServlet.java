@@ -3,7 +3,6 @@ package com.janknspank.server;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -19,13 +18,12 @@ public class GetOrganizationsServlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException {
-    String searchString = getParameter(req, "contains");
-
+    String searchString  = getParameter(req, "contains");
     Iterable<Entity> orgs; 
 
     if (searchString != null) {
       orgs = Database.with(Entity.class).get(
-          new QueryOption.WhereLike("keyword", "%" + StringUtils.capitalize(searchString) + "%"),
+          new QueryOption.WhereLikeIgnoreCase("keyword", searchString + "%"),
           new QueryOption.WhereEquals("type", "org"),
           new QueryOption.Limit(20));
     } else {
