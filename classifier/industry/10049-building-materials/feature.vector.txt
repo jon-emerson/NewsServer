@@ -1307,11 +1307,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "New"
-  frequency: 35
-  document_occurences: 4
-}
-word_frequency {
   word: "Compression"
   frequency: 1
   document_occurences: 1

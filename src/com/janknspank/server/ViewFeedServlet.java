@@ -2,6 +2,7 @@ package com.janknspank.server;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.common.base.Function;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.common.TopList;
@@ -38,7 +39,14 @@ public class ViewFeedServlet extends StandardServlet {
           Articles.getRankedArticlesAndScores(user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
       return new SoyMapData(
           "sessionKey", this.getSession(req).getSessionKey(),
-          "articles", ArticleSoy.toSoyListData(rankedArticlesAndScores));
+          "articles", ArticleSoy.toSoyListData(
+              rankedArticlesAndScores,
+              new Function<Article, Double>() {
+                @Override
+                public Double apply(Article article) {
+                  return rankedArticlesAndScores.getValue(article);
+                }
+              }));
     } else {
       throw new RequestException("You are not authorized to use this page.");
     }

@@ -9,7 +9,6 @@ import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.Logger;
-import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
@@ -17,8 +16,9 @@ import com.janknspank.proto.ArticleProto.SocialEngagement;
 public class ArticleSoy {
   private static final Logger LOG = new Logger(ArticleSoy.class);
 
-  public static SoyListData toSoyListData(final TopList<Article, Double> rankedArticlesAndScores) {
-    return new SoyListData(Iterables.transform(rankedArticlesAndScores,
+  public static SoyListData toSoyListData(
+      final Iterable<Article> articles, final Function<Article, Double> scoreFunction) {
+    return new SoyListData(Iterables.transform(articles,
         new Function<Article, SoyMapData>() {
       @Override
       public SoyMapData apply(Article article) {
@@ -35,7 +35,7 @@ public class ArticleSoy {
             "urlId", article.getUrlId(),
             "description", article.getDescription(),
             "image_url", article.getImageUrl(),
-            "score", rankedArticlesAndScores.getValue(article),
+            "score", scoreFunction.apply(article),
             "fb_likes", (int) engagement.getLikeCount(),
             "fb_shares", (int) engagement.getShareCount(),
             "fb_comments" ,(int) engagement.getCommentCount(),

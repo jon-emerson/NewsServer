@@ -1342,11 +1342,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "App"
-  frequency: 23
-  document_occurences: 3
-}
-word_frequency {
   word: "Regret"
   frequency: 1
   document_occurences: 1
@@ -8427,11 +8422,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Firm"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Scott"
   frequency: 1
   document_occurences: 1
@@ -14210,11 +14200,6 @@ word_frequency {
   word: "Net"
   frequency: 2
   document_occurences: 2
-}
-word_frequency {
-  word: "New"
-  frequency: 124
-  document_occurences: 23
 }
 word_frequency {
   word: "Counted"

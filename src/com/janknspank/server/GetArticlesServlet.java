@@ -3,6 +3,7 @@ package com.janknspank.server;
 import javax.servlet.http.HttpServletRequest;
 
 import com.janknspank.bizness.Articles;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
@@ -15,7 +16,18 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
 
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req) throws DatabaseSchemaException {
-    User user = Database.with(User.class).get(getSession(req).getUserId());
-    return Articles.getRankedArticles(user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
+    String featureId = this.getParameter(req, "featureId");
+
+    if (featureId == null) {
+      User user = Database.with(User.class).get(getSession(req).getUserId());
+      return Articles.getRankedArticles(
+          user,
+          NeuralNetworkScorer.getInstance(),
+          NUM_RESULTS);
+    } else {
+      return Articles.getArticlesForFeature(
+          FeatureId.fromId(Integer.parseInt(featureId)),
+          NUM_RESULTS);
+    }
   }
 }

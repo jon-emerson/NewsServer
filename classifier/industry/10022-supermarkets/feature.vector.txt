@@ -1,6 +1,6 @@
 # Text-representation of a feature vector for:
 # Supermarkets
-document_count: 30
+document_count: 33
 word_frequency {
   word: "Rap"
   frequency: 1
@@ -47,14 +47,19 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Western"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
   word: "Grow"
   frequency: 4
   document_occurences: 4
 }
 word_frequency {
   word: "Sure"
-  frequency: 27
-  document_occurences: 7
+  frequency: 28
+  document_occurences: 8
 }
 word_frequency {
   word: "Massive"
@@ -77,14 +82,19 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Eventually"
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
   word: "Pinterest"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Eventually"
-  frequency: 2
-  document_occurences: 2
+  word: "Ensuring"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Approval"
@@ -102,19 +112,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Small"
-  frequency: 20
-  document_occurences: 9
+  word: "Unhealthy"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
-  word: "Cynthia"
-  frequency: 2
-  document_occurences: 1
+  word: "Small"
+  frequency: 22
+  document_occurences: 11
 }
 word_frequency {
   word: "Died"
   frequency: 16
   document_occurences: 2
+}
+word_frequency {
+  word: "Cynthia"
+  frequency: 2
+  document_occurences: 1
 }
 word_frequency {
   word: "Marty"
@@ -173,6 +188,11 @@ word_frequency {
 }
 word_frequency {
   word: "Duarte"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Stakeholders"
   frequency: 1
   document_occurences: 1
 }
@@ -243,8 +263,8 @@ word_frequency {
 }
 word_frequency {
   word: "Food"
-  frequency: 249
-  document_occurences: 24
+  frequency: 268
+  document_occurences: 27
 }
 word_frequency {
   word: "Center"
@@ -253,6 +273,11 @@ word_frequency {
 }
 word_frequency {
   word: "Precisely"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Effectiveness"
   frequency: 1
   document_occurences: 1
 }
@@ -277,12 +302,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Incapable"
+  word: "Presentation"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Presentation"
+  word: "Incapable"
   frequency: 1
   document_occurences: 1
 }
@@ -297,14 +322,14 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
-  word: "Agreement"
-  frequency: 22
-  document_occurences: 5
-}
-word_frequency {
   word: "Periods"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Agreement"
+  frequency: 23
+  document_occurences: 6
 }
 word_frequency {
   word: "Mobil"
@@ -312,9 +337,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Act"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
   word: "Reminded"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Celeste"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Layout"
@@ -358,8 +393,8 @@ word_frequency {
 }
 word_frequency {
   word: "Cooking"
-  frequency: 122
-  document_occurences: 3
+  frequency: 123
+  document_occurences: 4
 }
 word_frequency {
   word: "Priciest"
@@ -388,8 +423,8 @@ word_frequency {
 }
 word_frequency {
   word: "Light"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Enjoys"
@@ -443,8 +478,8 @@ word_frequency {
 }
 word_frequency {
   word: "Form"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Fiber"
@@ -502,13 +537,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Recalls"
-  frequency: 2
+  word: "Suffered"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Suffered"
-  frequency: 1
+  word: "Recalls"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -532,6 +567,11 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
+  word: "Gary"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Young"
   frequency: 78
   document_occurences: 4
@@ -547,14 +587,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Ago"
-  frequency: 10
-  document_occurences: 8
-}
-word_frequency {
   word: "Tasting"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Ago"
+  frequency: 10
+  document_occurences: 8
 }
 word_frequency {
   word: "Shampoo"
@@ -637,6 +677,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Mongolia"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Dillons"
   frequency: 1
   document_occurences: 1
@@ -657,12 +702,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Peruse"
+  word: "Circumstances"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Montana"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Peruse"
   frequency: 1
   document_occurences: 1
 }
@@ -723,8 +773,8 @@ word_frequency {
 }
 word_frequency {
   word: "Diets"
-  frequency: 1
-  document_occurences: 1
+  frequency: 12
+  document_occurences: 2
 }
 word_frequency {
   word: "Same-day"
@@ -758,8 +808,8 @@ word_frequency {
 }
 word_frequency {
   word: "Farming"
-  frequency: 3
-  document_occurences: 1
+  frequency: 4
+  document_occurences: 2
 }
 word_frequency {
   word: "Bishop"
@@ -777,12 +827,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Corruption"
+  word: "Spirits"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Spirits"
+  word: "Corruption"
   frequency: 1
   document_occurences: 1
 }
@@ -808,8 +858,8 @@ word_frequency {
 }
 word_frequency {
   word: "Supply"
-  frequency: 4
-  document_occurences: 3
+  frequency: 8
+  document_occurences: 4
 }
 word_frequency {
   word: "Agree"
@@ -862,14 +912,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Low-income"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Four"
-  frequency: 115
-  document_occurences: 11
+  frequency: 116
+  document_occurences: 12
 }
 word_frequency {
   word: "Manage"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Longest"
@@ -892,22 +947,22 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Instacart"
-  frequency: 30
-  document_occurences: 3
-}
-word_frequency {
   word: "Pittsford"
   frequency: 3
   document_occurences: 1
 }
 word_frequency {
-  word: "Anecdote"
+  word: "Cooler"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Cooler"
+  word: "Instacart"
+  frequency: 30
+  document_occurences: 3
+}
+word_frequency {
+  word: "Anecdote"
   frequency: 1
   document_occurences: 1
 }
@@ -1013,11 +1068,16 @@ word_frequency {
 }
 word_frequency {
   word: "Plus"
-  frequency: 4
-  document_occurences: 1
+  frequency: 5
+  document_occurences: 2
 }
 word_frequency {
   word: "Agro-ecological"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Mildly"
   frequency: 1
   document_occurences: 1
 }
@@ -1030,11 +1090,6 @@ word_frequency {
   word: "Faces"
   frequency: 23
   document_occurences: 2
-}
-word_frequency {
-  word: "Mildly"
-  frequency: 1
-  document_occurences: 1
 }
 word_frequency {
   word: "Investment-speak"
@@ -1070,6 +1125,11 @@ word_frequency {
   word: "Brought"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Beets"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Trouble"
@@ -1108,7 +1168,12 @@ word_frequency {
 }
 word_frequency {
   word: "Death"
-  frequency: 2
+  frequency: 3
+  document_occurences: 2
+}
+word_frequency {
+  word: "Flocks"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -1142,6 +1207,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Wholesalers"
+  frequency: 33
+  document_occurences: 1
+}
+word_frequency {
   word: "Studio"
   frequency: 2
   document_occurences: 1
@@ -1168,8 +1238,8 @@ word_frequency {
 }
 word_frequency {
   word: "Getting"
-  frequency: 7
-  document_occurences: 4
+  frequency: 17
+  document_occurences: 6
 }
 word_frequency {
   word: "Accountants"
@@ -1178,8 +1248,8 @@ word_frequency {
 }
 word_frequency {
   word: "Point"
-  frequency: 9
-  document_occurences: 2
+  frequency: 10
+  document_occurences: 3
 }
 word_frequency {
   word: "Grass-fed"
@@ -1188,8 +1258,8 @@ word_frequency {
 }
 word_frequency {
   word: "Major"
-  frequency: 24
-  document_occurences: 9
+  frequency: 28
+  document_occurences: 11
 }
 word_frequency {
   word: "Milk&apos"
@@ -1210,11 +1280,6 @@ word_frequency {
   word: "Recovered"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "App"
-  frequency: 3
-  document_occurences: 2
 }
 word_frequency {
   word: "Sear"
@@ -1277,6 +1342,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Village"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Bonnie"
   frequency: 1
   document_occurences: 1
@@ -1287,12 +1357,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Com/shopping/express"
+  word: "Refrigerator"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Refrigerator"
+  word: "Com/shopping/express"
   frequency: 1
   document_occurences: 1
 }
@@ -1303,8 +1373,8 @@ word_frequency {
 }
 word_frequency {
   word: "Comes"
-  frequency: 8
-  document_occurences: 7
+  frequency: 9
+  document_occurences: 8
 }
 word_frequency {
   word: "Offering"
@@ -1313,8 +1383,8 @@ word_frequency {
 }
 word_frequency {
   word: "Code"
-  frequency: 1
-  document_occurences: 1
+  frequency: 78
+  document_occurences: 2
 }
 word_frequency {
   word: "Kerry"
@@ -1357,14 +1427,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Arm"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Toward"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Arm"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Stock"
@@ -1468,8 +1538,8 @@ word_frequency {
 }
 word_frequency {
   word: "Calls"
-  frequency: 4
-  document_occurences: 4
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "Chocolate"
@@ -1477,14 +1547,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Run"
+  frequency: 7
+  document_occurences: 5
+}
+word_frequency {
   word: "Lawyers"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "Run"
-  frequency: 6
-  document_occurences: 4
 }
 word_frequency {
   word: "Pharmaceutical"
@@ -1538,13 +1608,18 @@ word_frequency {
 }
 word_frequency {
   word: "Companies"
-  frequency: 44
-  document_occurences: 14
+  frequency: 52
+  document_occurences: 15
 }
 word_frequency {
   word: "Sees"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Morning"
+  frequency: 20
+  document_occurences: 1
 }
 word_frequency {
   word: "Know"
@@ -1567,19 +1642,19 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Injunctions"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Mac-and-cheese-o-matic"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Court"
+  word: "Injunctions"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Court"
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Suffocate"
@@ -1617,13 +1692,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Creation"
+  word: "Prescribed"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Attention"
-  frequency: 2
+  word: "Creation"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -1632,13 +1707,23 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Involved"
+  word: "Attention"
   frequency: 2
-  document_occurences: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Involved"
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Squalid"
   frequency: 75
+  document_occurences: 1
+}
+word_frequency {
+  word: "Athletes"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -1647,7 +1732,7 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Athletes"
+  word: "Overdue"
   frequency: 1
   document_occurences: 1
 }
@@ -1683,8 +1768,8 @@ word_frequency {
 }
 word_frequency {
   word: "Seen"
-  frequency: 5
-  document_occurences: 4
+  frequency: 6
+  document_occurences: 5
 }
 word_frequency {
   word: "District"
@@ -1712,9 +1797,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Collect"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Coke"
-  frequency: 21
-  document_occurences: 2
+  frequency: 23
+  document_occurences: 3
 }
 word_frequency {
   word: "Darting"
@@ -1728,8 +1818,8 @@ word_frequency {
 }
 word_frequency {
   word: "Forces"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Supported"
@@ -1778,8 +1868,8 @@ word_frequency {
 }
 word_frequency {
   word: "Happy"
-  frequency: 3
-  document_occurences: 1
+  frequency: 4
+  document_occurences: 2
 }
 word_frequency {
   word: "Newest"
@@ -1788,8 +1878,8 @@ word_frequency {
 }
 word_frequency {
   word: "Agricultural"
-  frequency: 3
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Provides"
@@ -1848,8 +1938,8 @@ word_frequency {
 }
 word_frequency {
   word: "Come"
-  frequency: 86
-  document_occurences: 10
+  frequency: 87
+  document_occurences: 11
 }
 word_frequency {
   word: "Support"
@@ -1858,8 +1948,8 @@ word_frequency {
 }
 word_frequency {
   word: "Important"
-  frequency: 4
-  document_occurences: 3
+  frequency: 6
+  document_occurences: 4
 }
 word_frequency {
   word: "Solicit"
@@ -1892,13 +1982,18 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Components"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Training"
   frequency: 7
   document_occurences: 3
 }
 word_frequency {
-  word: "Components"
-  frequency: 2
+  word: "Greece"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -2037,14 +2132,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Transactions"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Nonprofit"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
+  word: "Haydu"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Beginning"
-  frequency: 3
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Finding"
@@ -2079,6 +2184,11 @@ word_frequency {
 word_frequency {
   word: "Improper"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Puts"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -2137,14 +2247,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Sell"
+  frequency: 28
+  document_occurences: 8
+}
+word_frequency {
   word: "Charged"
   frequency: 2
   document_occurences: 2
 }
 word_frequency {
-  word: "Sell"
-  frequency: 28
-  document_occurences: 8
+  word: "Consumer-protection"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Export"
@@ -2155,6 +2270,11 @@ word_frequency {
   word: "Charges"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Outlines"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Named"
@@ -2188,8 +2308,8 @@ word_frequency {
 }
 word_frequency {
   word: "Found"
-  frequency: 9
-  document_occurences: 8
+  frequency: 12
+  document_occurences: 9
 }
 word_frequency {
   word: "Kinds"
@@ -2228,8 +2348,8 @@ word_frequency {
 }
 word_frequency {
   word: "Gives"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Breast"
@@ -2248,6 +2368,11 @@ word_frequency {
 }
 word_frequency {
   word: "Spoken"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Atwater"
   frequency: 1
   document_occurences: 1
 }
@@ -2293,8 +2418,8 @@ word_frequency {
 }
 word_frequency {
   word: "Like"
-  frequency: 88
-  document_occurences: 17
+  frequency: 92
+  document_occurences: 19
 }
 word_frequency {
   word: "Promotional"
@@ -2363,8 +2488,8 @@ word_frequency {
 }
 word_frequency {
   word: "Neighborhoods"
-  frequency: 7
-  document_occurences: 5
+  frequency: 9
+  document_occurences: 6
 }
 word_frequency {
   word: "Requires"
@@ -2373,8 +2498,8 @@ word_frequency {
 }
 word_frequency {
   word: "Making"
-  frequency: 7
-  document_occurences: 7
+  frequency: 9
+  document_occurences: 8
 }
 word_frequency {
   word: "Noon"
@@ -2388,6 +2513,11 @@ word_frequency {
 }
 word_frequency {
   word: "Youth"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Appalling"
   frequency: 1
   document_occurences: 1
 }
@@ -2418,6 +2548,11 @@ word_frequency {
 }
 word_frequency {
   word: "USDA"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Resolution"
   frequency: 1
   document_occurences: 1
 }
@@ -2458,8 +2593,8 @@ word_frequency {
 }
 word_frequency {
   word: "Say"
-  frequency: 63
-  document_occurences: 10
+  frequency: 65
+  document_occurences: 12
 }
 word_frequency {
   word: "Cost"
@@ -2523,18 +2658,18 @@ word_frequency {
 }
 word_frequency {
   word: "Will"
-  frequency: 101
-  document_occurences: 22
-}
-word_frequency {
-  word: "Drug"
-  frequency: 2
-  document_occurences: 2
+  frequency: 106
+  document_occurences: 24
 }
 word_frequency {
   word: "Gordon"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Drug"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Receiving"
@@ -2548,8 +2683,8 @@ word_frequency {
 }
 word_frequency {
   word: "Famous"
-  frequency: 1
-  document_occurences: 1
+  frequency: 21
+  document_occurences: 2
 }
 word_frequency {
   word: "Bag"
@@ -2607,6 +2742,11 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
+  word: "Bargaining"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Sinaloa"
   frequency: 4
   document_occurences: 2
@@ -2618,8 +2758,8 @@ word_frequency {
 }
 word_frequency {
   word: "Backing"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Heart"
@@ -2652,14 +2792,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Much"
-  frequency: 36
-  document_occurences: 13
-}
-word_frequency {
   word: "Republican"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Much"
+  frequency: 38
+  document_occurences: 15
 }
 word_frequency {
   word: "Towards"
@@ -2692,12 +2832,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Nonperishables"
+  word: "Thus"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Thus"
+  word: "Nonperishables"
   frequency: 1
   document_occurences: 1
 }
@@ -2707,14 +2847,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Exploited"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Trips"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Exploited"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Space"
@@ -2722,12 +2862,22 @@ word_frequency {
   document_occurences: 6
 }
 word_frequency {
-  word: "Compared"
+  word: "Skeptical"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
+  word: "Compared"
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
   word: "Crops"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quintupled"
   frequency: 1
   document_occurences: 1
 }
@@ -2742,7 +2892,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Arab"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Chase"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Heard"
   frequency: 1
   document_occurences: 1
 }
@@ -2752,14 +2912,9 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
-  word: "Heard"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "See"
-  frequency: 13
-  document_occurences: 7
+  frequency: 14
+  document_occurences: 8
 }
 word_frequency {
   word: "Experience"
@@ -2802,19 +2957,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Set"
-  frequency: 28
-  document_occurences: 6
-}
-word_frequency {
   word: "Called"
-  frequency: 4
-  document_occurences: 2
+  frequency: 5
+  document_occurences: 3
 }
 word_frequency {
   word: "Marketers"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Set"
+  frequency: 29
+  document_occurences: 7
 }
 word_frequency {
   word: "Increasing"
@@ -2842,6 +2997,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Chard"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "October"
   frequency: 3
   document_occurences: 3
@@ -2862,19 +3022,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Sets"
-  frequency: 1
-  document_occurences: 1
+  word: "Located"
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
-  word: "Located"
+  word: "Sets"
   frequency: 2
   document_occurences: 2
 }
 word_frequency {
   word: "Days"
-  frequency: 11
-  document_occurences: 9
+  frequency: 12
+  document_occurences: 10
 }
 word_frequency {
   word: "Typically"
@@ -2882,13 +3042,13 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Strange"
-  frequency: 1
+  word: "Humidity"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
-  word: "Humidity"
-  frequency: 2
+  word: "Strange"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -2898,8 +3058,8 @@ word_frequency {
 }
 word_frequency {
   word: "Season"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Chart"
@@ -2908,6 +3068,11 @@ word_frequency {
 }
 word_frequency {
   word: "Circles"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Bed"
   frequency: 1
   document_occurences: 1
 }
@@ -2958,8 +3123,8 @@ word_frequency {
 }
 word_frequency {
   word: "Pushing"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Dismissed"
@@ -2998,8 +3163,8 @@ word_frequency {
 }
 word_frequency {
   word: "Around"
-  frequency: 40
-  document_occurences: 10
+  frequency: 50
+  document_occurences: 12
 }
 word_frequency {
   word: "Upgrade"
@@ -3012,13 +3177,13 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Complexity"
-  frequency: 1
+  word: "Lisa"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
-  word: "Lisa"
-  frequency: 2
+  word: "Complexity"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -3047,12 +3212,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Lack"
+  word: "Visiting"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Visiting"
+  word: "Lack"
   frequency: 1
   document_occurences: 1
 }
@@ -3072,14 +3237,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Family-owned"
-  frequency: 27
-  document_occurences: 2
-}
-word_frequency {
   word: "Lovely"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Family-owned"
+  frequency: 27
+  document_occurences: 2
 }
 word_frequency {
   word: "Protection"
@@ -3088,6 +3253,11 @@ word_frequency {
 }
 word_frequency {
   word: "Alike"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Shawn"
   frequency: 1
   document_occurences: 1
 }
@@ -3113,13 +3283,13 @@ word_frequency {
 }
 word_frequency {
   word: "Healthful"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Area"
-  frequency: 22
-  document_occurences: 11
+  frequency: 23
+  document_occurences: 12
 }
 word_frequency {
   word: "Reeling"
@@ -3167,14 +3337,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Sit"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Adapt"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Six"
-  frequency: 9
-  document_occurences: 5
+  frequency: 10
+  document_occurences: 6
 }
 word_frequency {
   word: "Ripened"
@@ -3202,9 +3377,14 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
+  word: "Organized"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Businesses"
-  frequency: 8
-  document_occurences: 5
+  frequency: 9
+  document_occurences: 6
 }
 word_frequency {
   word: "Alzheimer"
@@ -3248,8 +3428,8 @@ word_frequency {
 }
 word_frequency {
   word: "Children"
-  frequency: 89
-  document_occurences: 5
+  frequency: 93
+  document_occurences: 6
 }
 word_frequency {
   word: "Bid"
@@ -3258,8 +3438,8 @@ word_frequency {
 }
 word_frequency {
   word: "Million"
-  frequency: 63
-  document_occurences: 9
+  frequency: 67
+  document_occurences: 12
 }
 word_frequency {
   word: "CouponMom.com"
@@ -3272,12 +3452,17 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
-  word: "Big"
-  frequency: 9
-  document_occurences: 6
+  word: "Characterized"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
-  word: "Characterized"
+  word: "Big"
+  frequency: 10
+  document_occurences: 7
+}
+word_frequency {
+  word: "Grains"
   frequency: 1
   document_occurences: 1
 }
@@ -3363,8 +3548,8 @@ word_frequency {
 }
 word_frequency {
   word: "Poultry"
-  frequency: 120
-  document_occurences: 2
+  frequency: 121
+  document_occurences: 3
 }
 word_frequency {
   word: "Outbreaks"
@@ -3403,8 +3588,8 @@ word_frequency {
 }
 word_frequency {
   word: "December"
-  frequency: 2
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Gonzalez"
@@ -3423,8 +3608,8 @@ word_frequency {
 }
 word_frequency {
   word: "Even"
-  frequency: 68
-  document_occurences: 16
+  frequency: 69
+  document_occurences: 17
 }
 word_frequency {
   word: "Lawyer"
@@ -3457,14 +3642,14 @@ word_frequency {
   document_occurences: 5
 }
 word_frequency {
-  word: "Director"
-  frequency: 14
-  document_occurences: 10
-}
-word_frequency {
   word: "Live"
   frequency: 4
   document_occurences: 3
+}
+word_frequency {
+  word: "Director"
+  frequency: 16
+  document_occurences: 11
 }
 word_frequency {
   word: "Ralphs"
@@ -3485,6 +3670,16 @@ word_frequency {
   word: "Florida"
   frequency: 17
   document_occurences: 4
+}
+word_frequency {
+  word: "Bulk"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Canada"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "U10"
@@ -3518,8 +3713,8 @@ word_frequency {
 }
 word_frequency {
   word: "Chain"
-  frequency: 171
-  document_occurences: 17
+  frequency: 174
+  document_occurences: 18
 }
 word_frequency {
   word: "Irrigation"
@@ -3558,8 +3753,8 @@ word_frequency {
 }
 word_frequency {
   word: "Addressing"
-  frequency: 19
-  document_occurences: 2
+  frequency: 20
+  document_occurences: 3
 }
 word_frequency {
   word: "Renovate"
@@ -3632,9 +3827,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Breach"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Government"
-  frequency: 4
-  document_occurences: 3
+  frequency: 38
+  document_occurences: 4
 }
 word_frequency {
   word: "One-hour"
@@ -3712,14 +3912,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Commuters"
-  frequency: 16
-  document_occurences: 1
-}
-word_frequency {
   word: "Loyal"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Commuters"
+  frequency: 16
+  document_occurences: 1
 }
 word_frequency {
   word: "Mascara"
@@ -3762,17 +3962,22 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Trade"
-  frequency: 9
-  document_occurences: 4
-}
-word_frequency {
   word: "Lovett"
   frequency: 23
   document_occurences: 1
 }
 word_frequency {
+  word: "Trade"
+  frequency: 9
+  document_occurences: 4
+}
+word_frequency {
   word: "Wines"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Adelaide-5000"
   frequency: 1
   document_occurences: 1
 }
@@ -3803,8 +4008,8 @@ word_frequency {
 }
 word_frequency {
   word: "Addition"
-  frequency: 29
-  document_occurences: 5
+  frequency: 30
+  document_occurences: 6
 }
 word_frequency {
   word: "Six-mile"
@@ -3887,13 +4092,18 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Value"
-  frequency: 23
-  document_occurences: 4
-}
-word_frequency {
   word: "Caves"
   frequency: 36
+  document_occurences: 1
+}
+word_frequency {
+  word: "Value"
+  frequency: 24
+  document_occurences: 5
+}
+word_frequency {
+  word: "Relevant"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -3938,8 +4148,8 @@ word_frequency {
 }
 word_frequency {
   word: "County"
-  frequency: 4
-  document_occurences: 3
+  frequency: 6
+  document_occurences: 4
 }
 word_frequency {
   word: "Lamb"
@@ -3953,6 +4163,11 @@ word_frequency {
 }
 word_frequency {
   word: "Succeed"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Domino"
   frequency: 1
   document_occurences: 1
 }
@@ -4047,12 +4262,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Exponentially"
+  word: "Sanchez"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Sanchez"
+  word: "Exponentially"
   frequency: 1
   document_occurences: 1
 }
@@ -4075,6 +4290,11 @@ word_frequency {
   word: "Connected"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Oversees"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Busy"
@@ -4167,12 +4387,37 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Laos"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Overseen"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Classes"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Equally"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Sue"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Argentina"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Regularly"
   frequency: 1
   document_occurences: 1
 }
@@ -4187,12 +4432,22 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Mandated"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Completely"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Sum"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Circuit"
   frequency: 1
   document_occurences: 1
 }
@@ -4217,6 +4472,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Preferred"
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
   word: "TVs"
   frequency: 1
   document_occurences: 1
@@ -4225,11 +4485,6 @@ word_frequency {
   word: "A.m."
   frequency: 4
   document_occurences: 3
-}
-word_frequency {
-  word: "Preferred"
-  frequency: 2
-  document_occurences: 2
 }
 word_frequency {
   word: "Assortment"
@@ -4253,8 +4508,8 @@ word_frequency {
 }
 word_frequency {
   word: "Key"
-  frequency: 5
-  document_occurences: 4
+  frequency: 7
+  document_occurences: 6
 }
 word_frequency {
   word: "Inventory"
@@ -4312,6 +4567,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Trans"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Boycotting"
   frequency: 1
   document_occurences: 1
@@ -4343,8 +4603,8 @@ word_frequency {
 }
 word_frequency {
   word: "Buy"
-  frequency: 286
-  document_occurences: 11
+  frequency: 289
+  document_occurences: 12
 }
 word_frequency {
   word: "Hitting"
@@ -4363,8 +4623,8 @@ word_frequency {
 }
 word_frequency {
   word: "Pushed"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Merger"
@@ -4398,8 +4658,8 @@ word_frequency {
 }
 word_frequency {
   word: "Process"
-  frequency: 10
-  document_occurences: 7
+  frequency: 12
+  document_occurences: 8
 }
 word_frequency {
   word: "Mario"
@@ -4438,8 +4698,8 @@ word_frequency {
 }
 word_frequency {
   word: "Last"
-  frequency: 130
-  document_occurences: 13
+  frequency: 133
+  document_occurences: 15
 }
 word_frequency {
   word: "Santa"
@@ -4450,6 +4710,11 @@ word_frequency {
   word: "Wash"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Jackie"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Wary"
@@ -4493,8 +4758,8 @@ word_frequency {
 }
 word_frequency {
   word: "Program"
-  frequency: 16
-  document_occurences: 8
+  frequency: 18
+  document_occurences: 9
 }
 word_frequency {
   word: "Poverty"
@@ -4532,6 +4797,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Games"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Tentatively"
   frequency: 1
   document_occurences: 1
@@ -4562,13 +4832,13 @@ word_frequency {
   document_occurences: 5
 }
 word_frequency {
-  word: "Gluten-free"
-  frequency: 1
+  word: "Alameda"
+  frequency: 3
   document_occurences: 1
 }
 word_frequency {
-  word: "Alameda"
-  frequency: 3
+  word: "Gluten-free"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -4598,8 +4868,8 @@ word_frequency {
 }
 word_frequency {
   word: "Time"
-  frequency: 55
-  document_occurences: 17
+  frequency: 57
+  document_occurences: 19
 }
 word_frequency {
   word: "Whether"
@@ -4612,14 +4882,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Buys"
-  frequency: 38
-  document_occurences: 5
-}
-word_frequency {
   word: "Control"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Buys"
+  frequency: 38
+  document_occurences: 5
 }
 word_frequency {
   word: "Corner"
@@ -4672,12 +4942,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Chili"
+  word: "Concierges"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Concierges"
+  word: "Chili"
   frequency: 1
   document_occurences: 1
 }
@@ -4688,8 +4958,8 @@ word_frequency {
 }
 word_frequency {
   word: "Eating"
-  frequency: 2
-  document_occurences: 1
+  frequency: 4
+  document_occurences: 2
 }
 word_frequency {
   word: "Late"
@@ -4727,14 +4997,24 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Bruce"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Inability"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
+  word: "Stunting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Every"
-  frequency: 9
-  document_occurences: 6
+  frequency: 10
+  document_occurences: 7
 }
 word_frequency {
   word: "Brands"
@@ -4797,14 +5077,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Deserve"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Kosher"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Deserve"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Security"
@@ -4812,23 +5092,23 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Fruits"
-  frequency: 81
-  document_occurences: 5
+  word: "Conventional"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
-  word: "Conventional"
+  word: "Fruits"
+  frequency: 107
+  document_occurences: 7
+}
+word_frequency {
+  word: "Exporting"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Picketing"
   frequency: 2
-  document_occurences: 1
-}
-word_frequency {
-  word: "Exporting"
-  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -4877,17 +5157,17 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Price-conscious"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Cecilia"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Foresee"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Price-conscious"
   frequency: 1
   document_occurences: 1
 }
@@ -4902,14 +5182,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Anonymity"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Locations"
   frequency: 10
   document_occurences: 9
+}
+word_frequency {
+  word: "Anonymity"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Ribbon-cutting"
@@ -4948,6 +5228,11 @@ word_frequency {
 }
 word_frequency {
   word: "Survey"
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
+  word: "Strawberries"
   frequency: 1
   document_occurences: 1
 }
@@ -5007,6 +5292,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Chad"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Occur"
   frequency: 1
   document_occurences: 1
@@ -5062,9 +5352,19 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Doctor"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Everybody"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Chance"
-  frequency: 3
-  document_occurences: 2
+  frequency: 5
+  document_occurences: 4
 }
 word_frequency {
   word: "Marketplace"
@@ -5079,6 +5379,11 @@ word_frequency {
 word_frequency {
   word: "Steve"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Edwards"
+  frequency: 3
   document_occurences: 1
 }
 word_frequency {
@@ -5097,7 +5402,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Farmer"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Tightened"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Woolworths"
   frequency: 1
   document_occurences: 1
 }
@@ -5107,14 +5422,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Tap"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Crummy"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Tap"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Lactate"
@@ -5123,6 +5438,11 @@ word_frequency {
 }
 word_frequency {
   word: "Refrigerators"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Posted"
   frequency: 1
   document_occurences: 1
 }
@@ -5148,8 +5468,8 @@ word_frequency {
 }
 word_frequency {
   word: "Doubles"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Gigantic"
@@ -5197,6 +5517,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Behaviour"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Americans"
   frequency: 2
   document_occurences: 2
@@ -5218,8 +5543,8 @@ word_frequency {
 }
 word_frequency {
   word: "Ways"
-  frequency: 4
-  document_occurences: 4
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "Neat-and-tidy"
@@ -5238,8 +5563,8 @@ word_frequency {
 }
 word_frequency {
   word: "Necessary"
-  frequency: 1
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Cap"
@@ -5258,8 +5583,8 @@ word_frequency {
 }
 word_frequency {
   word: "Environment"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Oregon"
@@ -5293,8 +5618,8 @@ word_frequency {
 }
 word_frequency {
   word: "Chief"
-  frequency: 8
-  document_occurences: 7
+  frequency: 9
+  document_occurences: 8
 }
 word_frequency {
   word: "Science"
@@ -5368,13 +5693,8 @@ word_frequency {
 }
 word_frequency {
   word: "Since"
-  frequency: 11
-  document_occurences: 8
-}
-word_frequency {
-  word: "Camelia"
-  frequency: 1
-  document_occurences: 1
+  frequency: 12
+  document_occurences: 9
 }
 word_frequency {
   word: "Disintegrate"
@@ -5382,9 +5702,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Camelia"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "February"
-  frequency: 2
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Soda"
@@ -5413,8 +5738,8 @@ word_frequency {
 }
 word_frequency {
   word: "Fruit"
-  frequency: 39
-  document_occurences: 4
+  frequency: 40
+  document_occurences: 5
 }
 word_frequency {
   word: "Buildings"
@@ -5482,14 +5807,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Future"
-  frequency: 27
-  document_occurences: 4
-}
-word_frequency {
   word: "Arguably"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Future"
+  frequency: 28
+  document_occurences: 5
 }
 word_frequency {
   word: "Griffin"
@@ -5612,6 +5937,11 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Meet"
+  frequency: 20
+  document_occurences: 1
+}
+word_frequency {
   word: "Brews"
   frequency: 1
   document_occurences: 1
@@ -5629,6 +5959,11 @@ word_frequency {
 word_frequency {
   word: "Kravis"
   frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Junk"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -5667,14 +6002,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Insufficient"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Properly"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Insufficient"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Aches"
@@ -5743,8 +6078,8 @@ word_frequency {
 }
 word_frequency {
   word: "Soft"
-  frequency: 2
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Putting"
@@ -5767,14 +6102,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Self-checkout"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "DIY"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Self-checkout"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Register"
@@ -5798,8 +6133,8 @@ word_frequency {
 }
 word_frequency {
   word: "Take"
-  frequency: 15
-  document_occurences: 12
+  frequency: 16
+  document_occurences: 13
 }
 word_frequency {
   word: "Discussions"
@@ -5808,8 +6143,8 @@ word_frequency {
 }
 word_frequency {
   word: "Using"
-  frequency: 12
-  document_occurences: 4
+  frequency: 13
+  document_occurences: 5
 }
 word_frequency {
   word: "Fluctuate"
@@ -5822,14 +6157,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Repaired"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Worth"
   frequency: 4
   document_occurences: 4
+}
+word_frequency {
+  word: "Repaired"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Off-the-interstate"
@@ -5840,6 +6175,11 @@ word_frequency {
   word: "Violations"
   frequency: 5
   document_occurences: 2
+}
+word_frequency {
+  word: "Brazil"
+  frequency: 2
+  document_occurences: 1
 }
 word_frequency {
   word: "Aggravation"
@@ -5868,8 +6208,8 @@ word_frequency {
 }
 word_frequency {
   word: "Worst"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Signed"
@@ -5883,8 +6223,8 @@ word_frequency {
 }
 word_frequency {
   word: "Market"
-  frequency: 77
-  document_occurences: 17
+  frequency: 91
+  document_occurences: 18
 }
 word_frequency {
   word: "Authorize"
@@ -5892,14 +6232,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Worse"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Continually"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Worse"
+  frequency: 11
+  document_occurences: 3
 }
 word_frequency {
   word: "Storage"
@@ -5913,8 +6253,8 @@ word_frequency {
 }
 word_frequency {
   word: "Little"
-  frequency: 16
-  document_occurences: 9
+  frequency: 17
+  document_occurences: 10
 }
 word_frequency {
   word: "Taste"
@@ -5992,12 +6332,12 @@ word_frequency {
   document_occurences: 6
 }
 word_frequency {
-  word: "Www.gatheredtable"
+  word: "Nearly-double"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Nearly-double"
+  word: "Www.gatheredtable"
   frequency: 1
   document_occurences: 1
 }
@@ -6018,8 +6358,8 @@ word_frequency {
 }
 word_frequency {
   word: "Home"
-  frequency: 17
-  document_occurences: 9
+  frequency: 18
+  document_occurences: 10
 }
 word_frequency {
   word: "Approve"
@@ -6058,8 +6398,8 @@ word_frequency {
 }
 word_frequency {
   word: "Retailers"
-  frequency: 14
-  document_occurences: 8
+  frequency: 48
+  document_occurences: 9
 }
 word_frequency {
   word: "Achieved"
@@ -6078,8 +6418,8 @@ word_frequency {
 }
 word_frequency {
   word: "Sustainable"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Hold"
@@ -6152,6 +6492,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Middle-income"
+  frequency: 9
+  document_occurences: 1
+}
+word_frequency {
   word: "Fleet"
   frequency: 1
   document_occurences: 1
@@ -6178,8 +6523,8 @@ word_frequency {
 }
 word_frequency {
   word: "Just"
-  frequency: 27
-  document_occurences: 14
+  frequency: 28
+  document_occurences: 15
 }
 word_frequency {
   word: "Certify"
@@ -6227,11 +6572,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Trapped"
-  frequency: 75
-  document_occurences: 1
-}
-word_frequency {
   word: "Person"
   frequency: 17
   document_occurences: 4
@@ -6239,6 +6579,11 @@ word_frequency {
 word_frequency {
   word: "Journey"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Trapped"
+  frequency: 75
   document_occurences: 1
 }
 word_frequency {
@@ -6283,8 +6628,8 @@ word_frequency {
 }
 word_frequency {
   word: "Food-and-beverage"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Target"
@@ -6310,6 +6655,11 @@ word_frequency {
   word: "Reputation"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Alarming"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Multi-generational"
@@ -6342,24 +6692,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Delivered"
-  frequency: 38
-  document_occurences: 3
-}
-word_frequency {
   word: "Fillets"
   frequency: 2
   document_occurences: 1
 }
 word_frequency {
-  word: "Able"
-  frequency: 4
+  word: "Delivered"
+  frequency: 38
   document_occurences: 3
 }
 word_frequency {
-  word: "Living"
-  frequency: 32
-  document_occurences: 5
+  word: "Able"
+  frequency: 5
+  document_occurences: 4
 }
 word_frequency {
   word: "Sons"
@@ -6367,9 +6712,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Living"
+  frequency: 32
+  document_occurences: 5
+}
+word_frequency {
   word: "Amount"
-  frequency: 7
-  document_occurences: 6
+  frequency: 8
+  document_occurences: 7
 }
 word_frequency {
   word: "Meantime"
@@ -6422,6 +6772,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Per-capita"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Enterprise"
   frequency: 2
   document_occurences: 2
@@ -6437,11 +6792,6 @@ word_frequency {
   document_occurences: 5
 }
 word_frequency {
-  word: "Eliminating"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Favorable"
   frequency: 1
   document_occurences: 1
@@ -6450,6 +6800,11 @@ word_frequency {
   word: "Variety"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Eliminating"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Hope"
@@ -6487,14 +6842,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Enough"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Enlisting"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Enough"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Spread"
@@ -6537,6 +6892,16 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Reconsider"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "CalFresh"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Calculate"
   frequency: 2
   document_occurences: 1
@@ -6567,14 +6932,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Trucks"
+  word: "Mandatory"
   frequency: 2
-  document_occurences: 2
+  document_occurences: 1
 }
 word_frequency {
   word: "Formally"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Trucks"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Radius"
@@ -6608,8 +6978,8 @@ word_frequency {
 }
 word_frequency {
   word: "Relatively"
-  frequency: 2
-  document_occurences: 2
+  frequency: 10
+  document_occurences: 3
 }
 word_frequency {
   word: "Windows"
@@ -6658,6 +7028,11 @@ word_frequency {
 }
 word_frequency {
   word: "France"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Framework"
   frequency: 1
   document_occurences: 1
 }
@@ -6723,13 +7098,13 @@ word_frequency {
 }
 word_frequency {
   word: "Standards"
-  frequency: 10
-  document_occurences: 3
+  frequency: 11
+  document_occurences: 4
 }
 word_frequency {
   word: "Cooks"
-  frequency: 1
-  document_occurences: 1
+  frequency: 21
+  document_occurences: 2
 }
 word_frequency {
   word: "Hyper-competitive"
@@ -6747,14 +7122,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Find"
+  frequency: 30
+  document_occurences: 7
+}
+word_frequency {
   word: "OSHA"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "Find"
-  frequency: 29
-  document_occurences: 6
 }
 word_frequency {
   word: "Strategy"
@@ -6763,8 +7138,8 @@ word_frequency {
 }
 word_frequency {
   word: "Let"
-  frequency: 15
-  document_occurences: 2
+  frequency: 16
+  document_occurences: 3
 }
 word_frequency {
   word: "Perhaps"
@@ -6818,8 +7193,8 @@ word_frequency {
 }
 word_frequency {
   word: "Consumer"
-  frequency: 27
-  document_occurences: 4
+  frequency: 29
+  document_occurences: 5
 }
 word_frequency {
   word: "Sickened"
@@ -6838,8 +7213,8 @@ word_frequency {
 }
 word_frequency {
   word: "Best"
-  frequency: 125
-  document_occurences: 7
+  frequency: 126
+  document_occurences: 8
 }
 word_frequency {
   word: "DWP"
@@ -6953,8 +7328,8 @@ word_frequency {
 }
 word_frequency {
   word: "Started"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Plastic-wrapped"
@@ -7017,17 +7392,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Demanding"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Fish"
   frequency: 9
   document_occurences: 3
 }
 word_frequency {
-  word: "Employ"
+  word: "Demanding"
   frequency: 1
   document_occurences: 1
 }
@@ -7037,14 +7407,19 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
+  word: "Employ"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Courier"
   frequency: 3
   document_occurences: 1
 }
 word_frequency {
   word: "Rural"
-  frequency: 5
-  document_occurences: 1
+  frequency: 6
+  document_occurences: 2
 }
 word_frequency {
   word: "Designation"
@@ -7118,8 +7493,8 @@ word_frequency {
 }
 word_frequency {
   word: "Draft"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Partners"
@@ -7162,11 +7537,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Firm"
-  frequency: 4
-  document_occurences: 4
-}
-word_frequency {
   word: "Scott"
   frequency: 1
   document_occurences: 1
@@ -7188,8 +7558,8 @@ word_frequency {
 }
 word_frequency {
   word: "Commission"
-  frequency: 5
-  document_occurences: 4
+  frequency: 6
+  document_occurences: 5
 }
 word_frequency {
   word: "Label"
@@ -7208,8 +7578,8 @@ word_frequency {
 }
 word_frequency {
   word: "Benefits"
-  frequency: 17
-  document_occurences: 1
+  frequency: 47
+  document_occurences: 2
 }
 word_frequency {
   word: "Delay"
@@ -7272,6 +7642,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Engaged"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Economics"
   frequency: 1
   document_occurences: 1
@@ -7283,8 +7658,8 @@ word_frequency {
 }
 word_frequency {
   word: "Years"
-  frequency: 82
-  document_occurences: 17
+  frequency: 84
+  document_occurences: 18
 }
 word_frequency {
   word: "Grill"
@@ -7292,12 +7667,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Harry"
+  word: "Automated"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Automated"
+  word: "Harry"
   frequency: 1
   document_occurences: 1
 }
@@ -7343,18 +7718,18 @@ word_frequency {
 }
 word_frequency {
   word: "Downtown"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
-  word: "Fact"
-  frequency: 4
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Free"
-  frequency: 33
-  document_occurences: 4
+  frequency: 34
+  document_occurences: 5
+}
+word_frequency {
+  word: "Fact"
+  frequency: 5
+  document_occurences: 3
 }
 word_frequency {
   word: "Stumped"
@@ -7372,6 +7747,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Score"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Overtime"
   frequency: 2
   document_occurences: 1
@@ -7382,11 +7762,6 @@ word_frequency {
   document_occurences: 10
 }
 word_frequency {
-  word: "Culiacan"
-  frequency: 2
-  document_occurences: 1
-}
-word_frequency {
   word: "Texas"
   frequency: 2
   document_occurences: 2
@@ -7395,6 +7770,11 @@ word_frequency {
   word: "Individual"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Culiacan"
+  frequency: 2
+  document_occurences: 1
 }
 word_frequency {
   word: "N.Y"
@@ -7417,6 +7797,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Parliament"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "September"
   frequency: 4
   document_occurences: 2
@@ -7432,12 +7817,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Factory"
+  word: "Rapidly"
   frequency: 2
   document_occurences: 2
 }
 word_frequency {
-  word: "Rapidly"
+  word: "Factory"
   frequency: 2
   document_occurences: 2
 }
@@ -7468,16 +7853,11 @@ word_frequency {
 }
 word_frequency {
   word: "Relationships"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Shell"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
-  word: "Columnist"
   frequency: 1
   document_occurences: 1
 }
@@ -7487,12 +7867,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Mangoes"
+  word: "Columnist"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Legions"
+  word: "Mangoes"
   frequency: 1
   document_occurences: 1
 }
@@ -7502,19 +7882,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Legions"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Substitutions"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Improved"
-  frequency: 26
-  document_occurences: 2
-}
-word_frequency {
   word: "Tuesday"
   frequency: 19
   document_occurences: 6
+}
+word_frequency {
+  word: "Improved"
+  frequency: 26
+  document_occurences: 2
 }
 word_frequency {
   word: "Stories"
@@ -7533,8 +7918,8 @@ word_frequency {
 }
 word_frequency {
   word: "Moved"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Sustained"
@@ -7587,6 +7972,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Trust"
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
   word: "Pre-ordered"
   frequency: 1
   document_occurences: 1
@@ -7608,8 +7998,8 @@ word_frequency {
 }
 word_frequency {
   word: "Five"
-  frequency: 9
-  document_occurences: 7
+  frequency: 10
+  document_occurences: 8
 }
 word_frequency {
   word: "Scope"
@@ -7653,8 +8043,13 @@ word_frequency {
 }
 word_frequency {
   word: "Behind"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
+}
+word_frequency {
+  word: "Ordered"
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Break"
@@ -7662,12 +8057,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Ordered"
-  frequency: 3
-  document_occurences: 3
+  word: "Proves"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
-  word: "Proves"
+  word: "Bacon"
   frequency: 1
   document_occurences: 1
 }
@@ -7677,7 +8072,7 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Bacon"
+  word: "Shared"
   frequency: 1
   document_occurences: 1
 }
@@ -7705,6 +8100,11 @@ word_frequency {
   word: "Shares"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Wondering"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Fail"
@@ -7738,8 +8138,8 @@ word_frequency {
 }
 word_frequency {
   word: "Seven"
-  frequency: 5
-  document_occurences: 4
+  frequency: 6
+  document_occurences: 5
 }
 word_frequency {
   word: "Fairfax"
@@ -7753,8 +8153,8 @@ word_frequency {
 }
 word_frequency {
   word: "Lot"
-  frequency: 12
-  document_occurences: 7
+  frequency: 14
+  document_occurences: 8
 }
 word_frequency {
   word: "Station"
@@ -7763,8 +8163,8 @@ word_frequency {
 }
 word_frequency {
   word: "Los"
-  frequency: 345
-  document_occurences: 12
+  frequency: 367
+  document_occurences: 13
 }
 word_frequency {
   word: "Farmhouses"
@@ -7788,8 +8188,8 @@ word_frequency {
 }
 word_frequency {
   word: "Always"
-  frequency: 8
-  document_occurences: 5
+  frequency: 10
+  document_occurences: 6
 }
 word_frequency {
   word: "Yanks"
@@ -7803,8 +8203,8 @@ word_frequency {
 }
 word_frequency {
   word: "Transparency"
-  frequency: 1
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Tough"
@@ -7817,9 +8217,9 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Research"
-  frequency: 3
-  document_occurences: 3
+  word: "Richer"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Saturdays"
@@ -7827,19 +8227,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Research"
+  frequency: 4
+  document_occurences: 4
+}
+word_frequency {
   word: "Affordability"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
+  word: "Particularly"
+  frequency: 7
+  document_occurences: 5
+}
+word_frequency {
   word: "Runs"
   frequency: 3
   document_occurences: 2
-}
-word_frequency {
-  word: "Particularly"
-  frequency: 5
-  document_occurences: 3
 }
 word_frequency {
   word: "Dressing"
@@ -7868,18 +8273,18 @@ word_frequency {
 }
 word_frequency {
   word: "Without"
-  frequency: 10
-  document_occurences: 6
-}
-word_frequency {
-  word: "Begin"
-  frequency: 3
-  document_occurences: 3
+  frequency: 11
+  document_occurences: 7
 }
 word_frequency {
   word: "Nice"
   frequency: 4
   document_occurences: 4
+}
+word_frequency {
+  word: "Begin"
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Trends"
@@ -7898,8 +8303,8 @@ word_frequency {
 }
 word_frequency {
   word: "Fair"
-  frequency: 2
-  document_occurences: 1
+  frequency: 4
+  document_occurences: 2
 }
 word_frequency {
   word: "Shrink-wrap"
@@ -7913,6 +8318,11 @@ word_frequency {
 }
 word_frequency {
   word: "Reliance"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Alive"
   frequency: 1
   document_occurences: 1
 }
@@ -7932,6 +8342,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "H5N1"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Carrots"
   frequency: 3
   document_occurences: 2
@@ -7948,8 +8363,8 @@ word_frequency {
 }
 word_frequency {
   word: "Day"
-  frequency: 75
-  document_occurences: 10
+  frequency: 76
+  document_occurences: 11
 }
 word_frequency {
   word: "Certifying"
@@ -7963,8 +8378,8 @@ word_frequency {
 }
 word_frequency {
   word: "Regulators"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Corked"
@@ -7993,13 +8408,13 @@ word_frequency {
 }
 word_frequency {
   word: "Urged"
-  frequency: 1
-  document_occurences: 1
+  frequency: 33
+  document_occurences: 2
 }
 word_frequency {
   word: "Drink"
-  frequency: 6
-  document_occurences: 2
+  frequency: 7
+  document_occurences: 3
 }
 word_frequency {
   word: "Keeping"
@@ -8014,6 +8429,11 @@ word_frequency {
 word_frequency {
   word: "Filters"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Targeted"
+  frequency: 8
   document_occurences: 1
 }
 word_frequency {
@@ -8037,19 +8457,24 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Behavior"
+  word: "Benefiting"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Assistance"
-  frequency: 3
+  word: "Behavior"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Culture"
   frequency: 3
   document_occurences: 3
+}
+word_frequency {
+  word: "Assistance"
+  frequency: 3
+  document_occurences: 1
 }
 word_frequency {
   word: "Violated"
@@ -8063,8 +8488,8 @@ word_frequency {
 }
 word_frequency {
   word: "Consumption"
-  frequency: 2
-  document_occurences: 1
+  frequency: 4
+  document_occurences: 2
 }
 word_frequency {
   word: "Survived"
@@ -8103,8 +8528,8 @@ word_frequency {
 }
 word_frequency {
   word: "Customers"
-  frequency: 49
-  document_occurences: 13
+  frequency: 58
+  document_occurences: 14
 }
 word_frequency {
   word: "Mainstream"
@@ -8118,8 +8543,8 @@ word_frequency {
 }
 word_frequency {
   word: "Foods"
-  frequency: 125
-  document_occurences: 15
+  frequency: 127
+  document_occurences: 16
 }
 word_frequency {
   word: "Fans"
@@ -8138,8 +8563,8 @@ word_frequency {
 }
 word_frequency {
   word: "Touch"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Merchandising"
@@ -8232,19 +8657,24 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Confusing"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Tender"
   frequency: 2
   document_occurences: 1
 }
 word_frequency {
+  word: "Confusing"
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
   word: "Waiting"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Agricultural-marketing"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Perishable"
@@ -8258,8 +8688,8 @@ word_frequency {
 }
 word_frequency {
   word: "Today"
-  frequency: 7
-  document_occurences: 4
+  frequency: 8
+  document_occurences: 5
 }
 word_frequency {
   word: "Treatment"
@@ -8323,8 +8753,8 @@ word_frequency {
 }
 word_frequency {
   word: "Across"
-  frequency: 8
-  document_occurences: 7
+  frequency: 9
+  document_occurences: 8
 }
 word_frequency {
   word: "Vinegar"
@@ -8352,14 +8782,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Pool"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Questions"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Pool"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Embedded"
@@ -8407,12 +8837,12 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Millions"
+  word: "Ripening"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Ripening"
+  word: "Millions"
   frequency: 1
   document_occurences: 1
 }
@@ -8483,8 +8913,8 @@ word_frequency {
 }
 word_frequency {
   word: "Makes"
-  frequency: 4
-  document_occurences: 4
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "Stocking"
@@ -8518,8 +8948,8 @@ word_frequency {
 }
 word_frequency {
   word: "Fast"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Upper"
@@ -8538,8 +8968,8 @@ word_frequency {
 }
 word_frequency {
   word: "Poor"
-  frequency: 4
-  document_occurences: 2
+  frequency: 18
+  document_occurences: 5
 }
 word_frequency {
   word: "Stakes"
@@ -8558,13 +8988,13 @@ word_frequency {
 }
 word_frequency {
   word: "Better"
-  frequency: 17
-  document_occurences: 10
+  frequency: 20
+  document_occurences: 12
 }
 word_frequency {
   word: "Farm"
-  frequency: 22
-  document_occurences: 5
+  frequency: 23
+  document_occurences: 6
 }
 word_frequency {
   word: "Distributed"
@@ -8588,8 +9018,8 @@ word_frequency {
 }
 word_frequency {
   word: "Published"
-  frequency: 78
-  document_occurences: 2
+  frequency: 79
+  document_occurences: 3
 }
 word_frequency {
   word: "Lining"
@@ -8607,19 +9037,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Sprawling"
-  frequency: 4
-  document_occurences: 3
-}
-word_frequency {
   word: "Place"
-  frequency: 17
-  document_occurences: 10
+  frequency: 21
+  document_occurences: 12
 }
 word_frequency {
   word: "Brendan"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Sprawling"
+  frequency: 5
+  document_occurences: 4
 }
 word_frequency {
   word: "Types"
@@ -8688,8 +9118,13 @@ word_frequency {
 }
 word_frequency {
   word: "Friday"
-  frequency: 6
-  document_occurences: 5
+  frequency: 8
+  document_occurences: 6
+}
+word_frequency {
+  word: "Cooperation"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Operative"
@@ -8715,6 +9150,11 @@ word_frequency {
   word: "Though"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Incentive"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Wherever"
@@ -8757,6 +9197,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Monitored"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Vastly"
   frequency: 2
   document_occurences: 2
@@ -8778,6 +9223,11 @@ word_frequency {
 }
 word_frequency {
   word: "Spices"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Fats"
   frequency: 1
   document_occurences: 1
 }
@@ -8818,8 +9268,8 @@ word_frequency {
 }
 word_frequency {
   word: "Number"
-  frequency: 8
-  document_occurences: 8
+  frequency: 9
+  document_occurences: 9
 }
 word_frequency {
   word: "Romaine"
@@ -8852,14 +9302,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Growers"
-  frequency: 19
-  document_occurences: 4
-}
-word_frequency {
   word: "Strictly"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Growers"
+  frequency: 19
+  document_occurences: 4
 }
 word_frequency {
   word: "Appeal"
@@ -8888,8 +9338,8 @@ word_frequency {
 }
 word_frequency {
   word: "Staying"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Buy-one-get-one"
@@ -8897,14 +9347,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Schedule"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Nine"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Schedule"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Stepped"
@@ -8922,13 +9372,13 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Midnight"
-  frequency: 3
+  word: "Appear"
+  frequency: 2
   document_occurences: 2
 }
 word_frequency {
-  word: "Appear"
-  frequency: 2
+  word: "Midnight"
+  frequency: 3
   document_occurences: 2
 }
 word_frequency {
@@ -8947,17 +9397,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Fresh"
-  frequency: 45
-  document_occurences: 11
-}
-word_frequency {
-  word: "Loans"
+  word: "David.colker@latimes.com"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "David.colker@latimes.com"
+  word: "Fresh"
+  frequency: 51
+  document_occurences: 12
+}
+word_frequency {
+  word: "Loans"
   frequency: 1
   document_occurences: 1
 }
@@ -8992,14 +9442,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Conditional"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Throughout"
   frequency: 3
   document_occurences: 3
+}
+word_frequency {
+  word: "Conditional"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Eggs"
@@ -9017,9 +9467,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Helps"
-  frequency: 1
+  word: "Dealings"
+  frequency: 3
   document_occurences: 1
+}
+word_frequency {
+  word: "Helps"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Discuss"
@@ -9072,6 +9527,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Perfect"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Meander"
   frequency: 1
   document_occurences: 1
@@ -9118,6 +9578,11 @@ word_frequency {
 }
 word_frequency {
   word: "Map"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Application"
   frequency: 1
   document_occurences: 1
 }
@@ -9222,14 +9687,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "James"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Wi-Fi"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Use"
-  frequency: 13
-  document_occurences: 7
+  frequency: 17
+  document_occurences: 8
 }
 word_frequency {
   word: "Situations"
@@ -9262,14 +9732,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Considering"
-  frequency: 16
-  document_occurences: 3
-}
-word_frequency {
   word: "Morcilla"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Considering"
+  frequency: 16
+  document_occurences: 3
 }
 word_frequency {
   word: "Walmart"
@@ -9283,18 +9753,13 @@ word_frequency {
 }
 word_frequency {
   word: "Upscale"
-  frequency: 7
-  document_occurences: 4
-}
-word_frequency {
-  word: "NEW"
-  frequency: 1
-  document_occurences: 1
+  frequency: 8
+  document_occurences: 5
 }
 word_frequency {
   word: "Probably"
-  frequency: 4
-  document_occurences: 4
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "Tends"
@@ -9363,8 +9828,8 @@ word_frequency {
 }
 word_frequency {
   word: "Updated"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Organic"
@@ -9392,14 +9857,14 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
-  word: "Pressure"
-  frequency: 4
-  document_occurences: 2
-}
-word_frequency {
   word: "Successful"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Pressure"
+  frequency: 5
+  document_occurences: 3
 }
 word_frequency {
   word: "Certification"
@@ -9417,7 +9882,7 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Conditioned"
+  word: "Broad"
   frequency: 1
   document_occurences: 1
 }
@@ -9427,9 +9892,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Conditioned"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Coalition"
-  frequency: 4
-  document_occurences: 2
+  frequency: 5
+  document_occurences: 3
 }
 word_frequency {
   word: "L05122014"
@@ -9472,6 +9942,11 @@ word_frequency {
   document_occurences: 4
 }
 word_frequency {
+  word: "Match"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Includes"
   frequency: 7
   document_occurences: 6
@@ -9482,17 +9957,12 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Numbers"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Increased"
-  frequency: 2
-  document_occurences: 2
+  frequency: 14
+  document_occurences: 4
 }
 word_frequency {
-  word: "Crosses"
+  word: "Numbers"
   frequency: 1
   document_occurences: 1
 }
@@ -9500,6 +9970,11 @@ word_frequency {
   word: "Jamie"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Crosses"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Combining"
@@ -9547,14 +10022,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Included"
+  frequency: 3
+  document_occurences: 3
+}
+word_frequency {
   word: "Immediate"
   frequency: 2
   document_occurences: 1
-}
-word_frequency {
-  word: "Included"
-  frequency: 2
-  document_occurences: 2
 }
 word_frequency {
   word: "Wilson"
@@ -9582,19 +10057,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Walgreens"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Delicious"
   frequency: 5
   document_occurences: 2
 }
 word_frequency {
+  word: "Walgreens"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Extensive"
-  frequency: 2
-  document_occurences: 2
+  frequency: 35
+  document_occurences: 3
 }
 word_frequency {
   word: "Currently"
@@ -9642,9 +10117,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Kazakhstan"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "States"
-  frequency: 110
-  document_occurences: 9
+  frequency: 111
+  document_occurences: 10
 }
 word_frequency {
   word: "Significant"
@@ -9672,13 +10152,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Remember"
-  frequency: 3
+  word: "Criticized"
+  frequency: 2
   document_occurences: 2
 }
 word_frequency {
-  word: "Criticized"
-  frequency: 2
+  word: "Remember"
+  frequency: 3
   document_occurences: 2
 }
 word_frequency {
@@ -9698,6 +10178,11 @@ word_frequency {
 }
 word_frequency {
   word: "Replacing"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Damage"
   frequency: 1
   document_occurences: 1
 }
@@ -9757,24 +10242,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Backdrop"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Close"
-  frequency: 28
-  document_occurences: 5
+  frequency: 29
+  document_occurences: 6
 }
 word_frequency {
   word: "Eastern"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Sushi"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Backdrop"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Split"
@@ -9837,11 +10322,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Confident"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Jones"
   frequency: 2
   document_occurences: 2
@@ -9850,6 +10330,11 @@ word_frequency {
   word: "Dye"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Confident"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Sticking"
@@ -9878,8 +10363,8 @@ word_frequency {
 }
 word_frequency {
   word: "Toddlers"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Vice"
@@ -9917,14 +10402,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Quickly"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Cala"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Quickly"
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Section"
@@ -10043,8 +10528,8 @@ word_frequency {
 }
 word_frequency {
   word: "Interest"
-  frequency: 1
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Latching"
@@ -10112,14 +10597,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Common"
+  word: "Reached"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Reached"
-  frequency: 1
-  document_occurences: 1
+  word: "Common"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Cooker"
@@ -10138,8 +10623,8 @@ word_frequency {
 }
 word_frequency {
   word: "Nationally"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Affiliates"
@@ -10202,9 +10687,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Delineate"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Plans"
   frequency: 12
   document_occurences: 9
+}
+word_frequency {
+  word: "Sustain"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Rumors"
@@ -10222,14 +10717,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Soared"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Specializing"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Health"
-  frequency: 7
-  document_occurences: 4
+  frequency: 9
+  document_occurences: 5
 }
 word_frequency {
   word: "Joking"
@@ -10263,8 +10763,8 @@ word_frequency {
 }
 word_frequency {
   word: "Negotiations"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Billions"
@@ -10288,8 +10788,8 @@ word_frequency {
 }
 word_frequency {
   word: "Bills"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Staffers"
@@ -10328,6 +10828,11 @@ word_frequency {
 }
 word_frequency {
   word: "Demolished"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Schwarz"
   frequency: 1
   document_occurences: 1
 }
@@ -10378,8 +10883,8 @@ word_frequency {
 }
 word_frequency {
   word: "Ranging"
-  frequency: 15
-  document_occurences: 1
+  frequency: 16
+  document_occurences: 2
 }
 word_frequency {
   word: "Believes"
@@ -10428,8 +10933,8 @@ word_frequency {
 }
 word_frequency {
   word: "Surprise"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Care"
@@ -10448,8 +10953,8 @@ word_frequency {
 }
 word_frequency {
   word: "Shop"
-  frequency: 29
-  document_occurences: 9
+  frequency: 50
+  document_occurences: 10
 }
 word_frequency {
   word: "Advantage"
@@ -10473,13 +10978,13 @@ word_frequency {
 }
 word_frequency {
   word: "Eat"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Level"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Chorizo"
@@ -10548,8 +11053,8 @@ word_frequency {
 }
 word_frequency {
   word: "Mother"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Cruz"
@@ -10573,8 +11078,8 @@ word_frequency {
 }
 word_frequency {
   word: "According"
-  frequency: 28
-  document_occurences: 10
+  frequency: 30
+  document_occurences: 12
 }
 word_frequency {
   word: "Cart"
@@ -10588,8 +11093,8 @@ word_frequency {
 }
 word_frequency {
   word: "Table"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Desirable"
@@ -10607,14 +11112,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Multibillion-dollar"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Born"
   frequency: 3
   document_occurences: 3
+}
+word_frequency {
+  word: "Multibillion-dollar"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Model"
@@ -10624,6 +11129,11 @@ word_frequency {
 word_frequency {
   word: "Veg"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Gardena"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -10638,13 +11148,18 @@ word_frequency {
 }
 word_frequency {
   word: "Online"
-  frequency: 10
-  document_occurences: 7
+  frequency: 11
+  document_occurences: 8
 }
 word_frequency {
   word: "Primarily"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Congregational"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Sounded"
@@ -10663,8 +11178,8 @@ word_frequency {
 }
 word_frequency {
   word: "Sells"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Infancy"
@@ -10698,13 +11213,13 @@ word_frequency {
 }
 word_frequency {
   word: "Central"
-  frequency: 2
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "World"
-  frequency: 10
-  document_occurences: 5
+  frequency: 19
+  document_occurences: 6
 }
 word_frequency {
   word: "Harvest"
@@ -10812,6 +11327,16 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Retailer-supply"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "WIC"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
   word: "Cave"
   frequency: 3
   document_occurences: 1
@@ -10827,13 +11352,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Villarejo"
-  frequency: 2
+  word: "Spaces"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Spaces"
-  frequency: 1
+  word: "Villarejo"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -10855,6 +11380,16 @@ word_frequency {
   word: "Favorite"
   frequency: 120
   document_occurences: 2
+}
+word_frequency {
+  word: "Stunted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Small-business"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Prepared"
@@ -10883,8 +11418,8 @@ word_frequency {
 }
 word_frequency {
   word: "Reason"
-  frequency: 1
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Shaunette"
@@ -10892,12 +11427,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Taught"
+  word: "Bone-In"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Bone-In"
+  word: "Donald"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
+  word: "Taught"
   frequency: 1
   document_occurences: 1
 }
@@ -10987,14 +11527,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Luck"
-  frequency: 26
-  document_occurences: 2
-}
-word_frequency {
   word: "Large-scale"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Luck"
+  frequency: 26
+  document_occurences: 2
 }
 word_frequency {
   word: "Total"
@@ -11003,8 +11543,8 @@ word_frequency {
 }
 word_frequency {
   word: "Also"
-  frequency: 45
-  document_occurences: 22
+  frequency: 50
+  document_occurences: 25
 }
 word_frequency {
   word: "Privilege"
@@ -11028,8 +11568,8 @@ word_frequency {
 }
 word_frequency {
   word: "Think"
-  frequency: 78
-  document_occurences: 9
+  frequency: 98
+  document_occurences: 10
 }
 word_frequency {
   word: "Steakiest"
@@ -11052,17 +11592,22 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Pepsi"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Austin"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Adds"
+  word: "Nibbling"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Nibbling"
+  word: "Adds"
   frequency: 1
   document_occurences: 1
 }
@@ -11092,9 +11637,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "ACCC"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Thing"
-  frequency: 3
-  document_occurences: 2
+  frequency: 5
+  document_occurences: 3
 }
 word_frequency {
   word: "Colleagues"
@@ -11117,14 +11667,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Things"
+  frequency: 15
+  document_occurences: 10
+}
+word_frequency {
   word: "Everywhere"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "Things"
-  frequency: 14
-  document_occurences: 9
 }
 word_frequency {
   word: "Exposure"
@@ -11148,8 +11698,8 @@ word_frequency {
 }
 word_frequency {
   word: "Providing"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Rockville"
@@ -11198,13 +11748,13 @@ word_frequency {
 }
 word_frequency {
   word: "Angeles"
-  frequency: 360
-  document_occurences: 13
+  frequency: 382
+  document_occurences: 14
 }
 word_frequency {
   word: "Happening"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Boxes"
@@ -11237,12 +11787,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Frankenstein"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Drumbeat"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Frankenstein"
+  word: "Boys"
   frequency: 1
   document_occurences: 1
 }
@@ -11257,11 +11812,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Boys"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Towels"
   frequency: 1
   document_occurences: 1
@@ -11272,14 +11822,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Expectations"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Social"
   frequency: 12
   document_occurences: 2
+}
+word_frequency {
+  word: "Expectations"
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Printing"
@@ -11293,8 +11843,8 @@ word_frequency {
 }
 word_frequency {
   word: "Returned"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Buyout"
@@ -11343,8 +11893,8 @@ word_frequency {
 }
 word_frequency {
   word: "Forward"
-  frequency: 49
-  document_occurences: 2
+  frequency: 50
+  document_occurences: 3
 }
 word_frequency {
   word: "Imperial"
@@ -11398,8 +11948,8 @@ word_frequency {
 }
 word_frequency {
   word: "Global"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Jewish"
@@ -11442,14 +11992,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Sequoia"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Meals"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Sequoia"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Taste-tests"
@@ -11533,12 +12083,22 @@ word_frequency {
 }
 word_frequency {
   word: "Outlets"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Explaining"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Enormous"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Coca-Cola"
+  frequency: 22
   document_occurences: 1
 }
 word_frequency {
@@ -11549,11 +12109,6 @@ word_frequency {
 word_frequency {
   word: "Legacies"
   frequency: 1
-  document_occurences: 1
-}
-word_frequency {
-  word: "Coca-Cola"
-  frequency: 22
   document_occurences: 1
 }
 word_frequency {
@@ -11573,8 +12128,8 @@ word_frequency {
 }
 word_frequency {
   word: "Spending"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Vision"
@@ -11598,8 +12153,8 @@ word_frequency {
 }
 word_frequency {
   word: "End"
-  frequency: 13
-  document_occurences: 8
+  frequency: 14
+  document_occurences: 9
 }
 word_frequency {
   word: "Expensive"
@@ -11633,8 +12188,8 @@ word_frequency {
 }
 word_frequency {
   word: "Supermarket"
-  frequency: 137
-  document_occurences: 16
+  frequency: 139
+  document_occurences: 17
 }
 word_frequency {
   word: "Prefer"
@@ -11673,6 +12228,11 @@ word_frequency {
 }
 word_frequency {
   word: "Naturally"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "McDonald"
   frequency: 1
   document_occurences: 1
 }
@@ -11717,14 +12277,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Topics"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Report"
   frequency: 27
   document_occurences: 2
 }
 word_frequency {
   word: "Sector"
-  frequency: 2
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Closest"
@@ -11733,8 +12298,8 @@ word_frequency {
 }
 word_frequency {
   word: "People"
-  frequency: 75
-  document_occurences: 13
+  frequency: 97
+  document_occurences: 15
 }
 word_frequency {
   word: "Unfortunately"
@@ -11857,6 +12422,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Egyptian"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Tweak"
   frequency: 2
   document_occurences: 1
@@ -11872,12 +12442,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Excuse"
+  word: "Pieces"
   frequency: 2
   document_occurences: 2
 }
 word_frequency {
-  word: "Pieces"
+  word: "Excuse"
   frequency: 2
   document_occurences: 2
 }
@@ -11968,8 +12538,8 @@ word_frequency {
 }
 word_frequency {
   word: "Keeps"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Finally"
@@ -11983,8 +12553,8 @@ word_frequency {
 }
 word_frequency {
   word: "Means"
-  frequency: 6
-  document_occurences: 4
+  frequency: 7
+  document_occurences: 5
 }
 word_frequency {
   word: "Organization"
@@ -12007,14 +12577,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Culled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Kale"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Tissues"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Highest"
-  frequency: 2
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Side"
@@ -12053,8 +12633,8 @@ word_frequency {
 }
 word_frequency {
   word: "Among"
-  frequency: 8
-  document_occurences: 8
+  frequency: 9
+  document_occurences: 9
 }
 word_frequency {
   word: "Reuseable"
@@ -12128,17 +12708,17 @@ word_frequency {
 }
 word_frequency {
   word: "Faring"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
+  word: "Underserved"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Beloved"
   frequency: 24
-  document_occurences: 1
-}
-word_frequency {
-  word: "Underserved"
-  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -12155,11 +12735,6 @@ word_frequency {
   word: "Net"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "New"
-  frequency: 120
-  document_occurences: 17
 }
 word_frequency {
   word: "Choice"
@@ -12192,19 +12767,19 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Counter"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Intended"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
+  word: "Counter"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Third"
-  frequency: 5
-  document_occurences: 3
+  frequency: 6
+  document_occurences: 4
 }
 word_frequency {
   word: "Fifth"
@@ -12288,8 +12863,8 @@ word_frequency {
 }
 word_frequency {
   word: "Approach"
-  frequency: 4
-  document_occurences: 3
+  frequency: 5
+  document_occurences: 4
 }
 word_frequency {
   word: "Publix"
@@ -12307,6 +12882,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Formerly"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Nation"
   frequency: 2
   document_occurences: 2
@@ -12314,6 +12894,11 @@ word_frequency {
 word_frequency {
   word: "Banon"
   frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Meetings"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -12393,8 +12978,8 @@ word_frequency {
 }
 word_frequency {
   word: "Sign"
-  frequency: 3
-  document_occurences: 2
+  frequency: 39
+  document_occurences: 3
 }
 word_frequency {
   word: "Hailed"
@@ -12408,8 +12993,8 @@ word_frequency {
 }
 word_frequency {
   word: "Pilot"
-  frequency: 5
-  document_occurences: 2
+  frequency: 6
+  document_occurences: 3
 }
 word_frequency {
   word: "Described"
@@ -12492,8 +13077,28 @@ word_frequency {
   document_occurences: 6
 }
 word_frequency {
+  word: "Obese"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Africa"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Avian"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Thumbs-up"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "See-la"
+  frequency: 3
   document_occurences: 1
 }
 word_frequency {
@@ -12517,14 +13122,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Managing"
+  frequency: 4
+  document_occurences: 4
+}
+word_frequency {
   word: "Specialists"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "Managing"
-  frequency: 3
-  document_occurences: 3
 }
 word_frequency {
   word: "Anointed"
@@ -12557,7 +13162,7 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Generator"
+  word: "Watts"
   frequency: 1
   document_occurences: 1
 }
@@ -12567,17 +13172,22 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Generator"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Hill"
   frequency: 3
   document_occurences: 3
 }
 word_frequency {
-  word: "Vast"
+  word: "Announcement"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Announcement"
+  word: "Vast"
   frequency: 1
   document_occurences: 1
 }
@@ -12677,9 +13287,14 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Sugary"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Really"
-  frequency: 13
-  document_occurences: 8
+  frequency: 17
+  document_occurences: 10
 }
 word_frequency {
   word: "Express"
@@ -12703,8 +13318,8 @@ word_frequency {
 }
 word_frequency {
   word: "Statement"
-  frequency: 3
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Impending"
@@ -12727,14 +13342,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Breaker"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Fetas"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Estimates"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Start-Up"
@@ -12772,6 +13392,11 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Dispute"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Vary"
   frequency: 1
   document_occurences: 1
@@ -12792,24 +13417,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Federal"
+  frequency: 40
+  document_occurences: 6
+}
+word_frequency {
   word: "Lending"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Federal"
-  frequency: 6
-  document_occurences: 5
+  word: "Countries"
+  frequency: 17
+  document_occurences: 2
 }
 word_frequency {
   word: "Anything"
   frequency: 19
   document_occurences: 5
-}
-word_frequency {
-  word: "Countries"
-  frequency: 1
-  document_occurences: 1
 }
 word_frequency {
   word: "Hint"
@@ -12833,8 +13458,8 @@ word_frequency {
 }
 word_frequency {
   word: "Manager"
-  frequency: 5
-  document_occurences: 3
+  frequency: 7
+  document_occurences: 4
 }
 word_frequency {
   word: "Fetch"
@@ -12843,8 +13468,8 @@ word_frequency {
 }
 word_frequency {
   word: "Beach"
-  frequency: 1
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Container"
@@ -12897,14 +13522,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Saleyards"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Markowitz"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Protections"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Andrew"
@@ -12938,8 +13568,8 @@ word_frequency {
 }
 word_frequency {
   word: "Areas"
-  frequency: 9
-  document_occurences: 7
+  frequency: 11
+  document_occurences: 9
 }
 word_frequency {
   word: "Harrison"
@@ -12947,12 +13577,22 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Wholesaler"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Now"
-  frequency: 53
-  document_occurences: 17
+  frequency: 57
+  document_occurences: 18
 }
 word_frequency {
   word: "Misery"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Quiet"
   frequency: 1
   document_occurences: 1
 }
@@ -12988,8 +13628,8 @@ word_frequency {
 }
 word_frequency {
   word: "Ones"
-  frequency: 4
-  document_occurences: 4
+  frequency: 6
+  document_occurences: 5
 }
 word_frequency {
   word: "War"
@@ -12998,13 +13638,13 @@ word_frequency {
 }
 word_frequency {
   word: "Review"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Continue"
-  frequency: 3
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Scandal"
@@ -13012,14 +13652,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Way"
-  frequency: 32
-  document_occurences: 9
+  word: "Council"
+  frequency: 5
+  document_occurences: 3
 }
 word_frequency {
-  word: "Council"
-  frequency: 3
-  document_occurences: 2
+  word: "Way"
+  frequency: 33
+  document_occurences: 10
 }
 word_frequency {
   word: "Rethink"
@@ -13027,14 +13667,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Quality"
-  frequency: 7
-  document_occurences: 6
-}
-word_frequency {
   word: "McGuire"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Quality"
+  frequency: 7
+  document_occurences: 6
 }
 word_frequency {
   word: "Caused"
@@ -13082,6 +13722,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Regulation"
+  frequency: 3
+  document_occurences: 1
+}
+word_frequency {
   word: "Jungmeyer"
   frequency: 4
   document_occurences: 1
@@ -13122,6 +13767,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "McNeil"
+  frequency: 8
+  document_occurences: 1
+}
+word_frequency {
   word: "Negotiate"
   frequency: 1
   document_occurences: 1
@@ -13137,14 +13787,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Development"
-  frequency: 9
+  word: "Special"
+  frequency: 27
   document_occurences: 5
 }
 word_frequency {
-  word: "Special"
-  frequency: 26
-  document_occurences: 4
+  word: "Guyana"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Development"
+  frequency: 10
+  document_occurences: 6
 }
 word_frequency {
   word: "Established"
@@ -13183,8 +13838,8 @@ word_frequency {
 }
 word_frequency {
   word: "Emphasis"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Gobbling"
@@ -13223,8 +13878,8 @@ word_frequency {
 }
 word_frequency {
   word: "Idea"
-  frequency: 7
-  document_occurences: 5
+  frequency: 8
+  document_occurences: 6
 }
 word_frequency {
   word: "Hire"
@@ -13233,8 +13888,8 @@ word_frequency {
 }
 word_frequency {
   word: "Country"
-  frequency: 13
-  document_occurences: 10
+  frequency: 14
+  document_occurences: 11
 }
 word_frequency {
   word: "Rosemary"
@@ -13343,12 +13998,17 @@ word_frequency {
 }
 word_frequency {
   word: "Almost"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Long-standing"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Feb"
+  frequency: 11
   document_occurences: 1
 }
 word_frequency {
@@ -13357,14 +14017,9 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Feb"
-  frequency: 11
-  document_occurences: 1
-}
-word_frequency {
   word: "Road"
-  frequency: 27
-  document_occurences: 2
+  frequency: 28
+  document_occurences: 3
 }
 word_frequency {
   word: "Fee"
@@ -13427,7 +14082,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Quite"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Facility"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Scored"
   frequency: 2
   document_occurences: 1
 }
@@ -13497,24 +14162,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Goes"
+  frequency: 4
+  document_occurences: 4
+}
+word_frequency {
   word: "Production"
   frequency: 20
   document_occurences: 4
 }
 word_frequency {
-  word: "Goes"
-  frequency: 3
-  document_occurences: 3
-}
-word_frequency {
   word: "Emerging"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Items"
-  frequency: 27
-  document_occurences: 9
+  frequency: 28
+  document_occurences: 10
 }
 word_frequency {
   word: "Bacon-cheeseburger"
@@ -13552,6 +14217,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Collards"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Neon-light"
   frequency: 1
   document_occurences: 1
@@ -13562,14 +14232,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Especially"
+  frequency: 7
+  document_occurences: 7
+}
+word_frequency {
   word: "Months"
   frequency: 3
   document_occurences: 3
-}
-word_frequency {
-  word: "Especially"
-  frequency: 6
-  document_occurences: 6
 }
 word_frequency {
   word: "Observers"
@@ -13598,8 +14268,8 @@ word_frequency {
 }
 word_frequency {
   word: "Tripled"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Atmosphere"
@@ -13613,8 +14283,8 @@ word_frequency {
 }
 word_frequency {
   word: "Closely"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "McMillan"
@@ -13647,14 +14317,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Leaves"
-  frequency: 4
-  document_occurences: 3
-}
-word_frequency {
   word: "Blessed"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Leaves"
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Reddit"
@@ -13683,8 +14353,8 @@ word_frequency {
 }
 word_frequency {
   word: "Healthy"
-  frequency: 4
-  document_occurences: 3
+  frequency: 14
+  document_occurences: 5
 }
 word_frequency {
   word: "Evolved"
@@ -13712,12 +14382,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Transfers"
+  word: "Cornell"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Cornell"
+  word: "Transfers"
   frequency: 1
   document_occurences: 1
 }
@@ -13743,8 +14413,8 @@ word_frequency {
 }
 word_frequency {
   word: "Left"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Supplemental"
@@ -13752,24 +14422,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Produce"
-  frequency: 93
-  document_occurences: 12
-}
-word_frequency {
   word: "Represents"
   frequency: 4
   document_occurences: 3
 }
 word_frequency {
-  word: "Size"
-  frequency: 4
-  document_occurences: 4
+  word: "Produce"
+  frequency: 94
+  document_occurences: 13
 }
 word_frequency {
   word: "Ideal"
   frequency: 2
   document_occurences: 1
+}
+word_frequency {
+  word: "Size"
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Product"
@@ -13823,8 +14493,8 @@ word_frequency {
 }
 word_frequency {
   word: "National"
-  frequency: 13
-  document_occurences: 7
+  frequency: 14
+  document_occurences: 8
 }
 word_frequency {
   word: "Tangled"
@@ -13837,17 +14507,22 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Blue-collar"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Picture"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Considers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Blue-collar"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Redeem"
   frequency: 1
   document_occurences: 1
 }
@@ -13872,6 +14547,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Makers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Produce-rich"
   frequency: 1
   document_occurences: 1
@@ -13888,8 +14568,8 @@ word_frequency {
 }
 word_frequency {
   word: "California"
-  frequency: 57
-  document_occurences: 9
+  frequency: 58
+  document_occurences: 10
 }
 word_frequency {
   word: "Eligible"
@@ -13898,8 +14578,8 @@ word_frequency {
 }
 word_frequency {
   word: "Said"
-  frequency: 211
-  document_occurences: 22
+  frequency: 226
+  document_occurences: 23
 }
 word_frequency {
   word: "Brian"
@@ -13933,8 +14613,8 @@ word_frequency {
 }
 word_frequency {
   word: "Week"
-  frequency: 11
-  document_occurences: 8
+  frequency: 13
+  document_occurences: 10
 }
 word_frequency {
   word: "Amenities"
@@ -13943,8 +14623,8 @@ word_frequency {
 }
 word_frequency {
   word: "Grocery"
-  frequency: 453
-  document_occurences: 24
+  frequency: 521
+  document_occurences: 25
 }
 word_frequency {
   word: "Sale"
@@ -13980,6 +14660,11 @@ word_frequency {
   word: "Labor"
   frequency: 25
   document_occurences: 5
+}
+word_frequency {
+  word: "Flu"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Rebuild"
@@ -14018,8 +14703,8 @@ word_frequency {
 }
 word_frequency {
   word: "Ensure"
-  frequency: 30
-  document_occurences: 4
+  frequency: 35
+  document_occurences: 5
 }
 word_frequency {
   word: "Tolerating"
@@ -14077,14 +14762,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Mehta"
-  frequency: 5
-  document_occurences: 1
-}
-word_frequency {
   word: "Half"
   frequency: 12
   document_occurences: 4
+}
+word_frequency {
+  word: "Mehta"
+  frequency: 5
+  document_occurences: 1
 }
 word_frequency {
   word: "Takeovers"
@@ -14308,8 +14993,8 @@ word_frequency {
 }
 word_frequency {
   word: "Well"
-  frequency: 13
-  document_occurences: 9
+  frequency: 14
+  document_occurences: 10
 }
 word_frequency {
   word: "Fivefold"
@@ -14322,24 +15007,24 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Schwegmann"
-  frequency: 69
-  document_occurences: 1
-}
-word_frequency {
   word: "Outer"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Field"
-  frequency: 2
-  document_occurences: 2
+  word: "Schwegmann"
+  frequency: 69
+  document_occurences: 1
 }
 word_frequency {
   word: "Money"
   frequency: 11
   document_occurences: 8
+}
+word_frequency {
+  word: "Field"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "School"
@@ -14427,13 +15112,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Leyson"
-  frequency: 2
-  document_occurences: 1
+  word: "Coverage"
+  frequency: 5
+  document_occurences: 2
 }
 word_frequency {
-  word: "Coverage"
-  frequency: 4
+  word: "Leyson"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -14442,12 +15127,12 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Football"
+  word: "Artisanal"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Artisanal"
+  word: "Football"
   frequency: 1
   document_occurences: 1
 }
@@ -14498,11 +15183,16 @@ word_frequency {
 }
 word_frequency {
   word: "Good"
-  frequency: 31
-  document_occurences: 11
+  frequency: 35
+  document_occurences: 13
 }
 word_frequency {
   word: "Recalled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Barnsdall"
   frequency: 1
   document_occurences: 1
 }
@@ -14512,19 +15202,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Stink"
+  word: "Stamps"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Respect"
-  frequency: 3
+  word: "Stink"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Thinking"
   frequency: 4
   document_occurences: 4
+}
+word_frequency {
+  word: "Respect"
+  frequency: 3
+  document_occurences: 1
 }
 word_frequency {
   word: "Access"
@@ -14537,12 +15232,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Communicate"
+  word: "Juice"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Juice"
+  word: "Communicate"
   frequency: 1
   document_occurences: 1
 }
@@ -14563,8 +15258,8 @@ word_frequency {
 }
 word_frequency {
   word: "Potential"
-  frequency: 25
-  document_occurences: 2
+  frequency: 26
+  document_occurences: 3
 }
 word_frequency {
   word: "Sights"
@@ -14578,8 +15273,8 @@ word_frequency {
 }
 word_frequency {
   word: "Doubt"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Odd"
@@ -14613,8 +15308,8 @@ word_frequency {
 }
 word_frequency {
   word: "Went"
-  frequency: 17
-  document_occurences: 2
+  frequency: 18
+  document_occurences: 3
 }
 word_frequency {
   word: "Human"
@@ -14633,16 +15328,16 @@ word_frequency {
 }
 word_frequency {
   word: "Hard"
-  frequency: 7
-  document_occurences: 5
+  frequency: 9
+  document_occurences: 6
 }
 word_frequency {
-  word: "Reigned"
+  word: "Conscious"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Conscious"
+  word: "Reigned"
   frequency: 1
   document_occurences: 1
 }
@@ -14672,14 +15367,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Horrific"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Harm"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Horrific"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Cottage"
@@ -14712,12 +15407,12 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Advanced"
+  word: "Slats"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Slats"
+  word: "Advanced"
   frequency: 1
   document_occurences: 1
 }
@@ -14727,14 +15422,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Right"
+  frequency: 10
+  document_occurences: 7
+}
+word_frequency {
   word: "Slowed"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "Right"
-  frequency: 8
-  document_occurences: 5
 }
 word_frequency {
   word: "Cardboard"
@@ -14743,8 +15438,8 @@ word_frequency {
 }
 word_frequency {
   word: "Rose"
-  frequency: 20
-  document_occurences: 3
+  frequency: 21
+  document_occurences: 4
 }
 word_frequency {
   word: "Reader"
@@ -14758,8 +15453,8 @@ word_frequency {
 }
 word_frequency {
   word: "Still"
-  frequency: 19
-  document_occurences: 14
+  frequency: 20
+  document_occurences: 15
 }
 word_frequency {
   word: "Obvious"
@@ -14778,6 +15473,11 @@ word_frequency {
 }
 word_frequency {
   word: "Gracefully"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Vietnam"
   frequency: 1
   document_occurences: 1
 }
@@ -14823,8 +15523,8 @@ word_frequency {
 }
 word_frequency {
   word: "Whole"
-  frequency: 109
-  document_occurences: 17
+  frequency: 111
+  document_occurences: 19
 }
 word_frequency {
   word: "Allowed"
@@ -14918,13 +15618,18 @@ word_frequency {
 }
 word_frequency {
   word: "Build"
-  frequency: 6
-  document_occurences: 5
+  frequency: 7
+  document_occurences: 6
 }
 word_frequency {
   word: "Primary"
   frequency: 3
   document_occurences: 3
+}
+word_frequency {
+  word: "Exercising"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Less"
@@ -14948,8 +15653,8 @@ word_frequency {
 }
 word_frequency {
   word: "Accept"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Occupied"
@@ -14978,6 +15683,16 @@ word_frequency {
 }
 word_frequency {
   word: "Short-handled"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Mid-sized"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Progressive"
   frequency: 1
   document_occurences: 1
 }
@@ -15033,8 +15748,8 @@ word_frequency {
 }
 word_frequency {
   word: "Chains"
-  frequency: 67
-  document_occurences: 12
+  frequency: 70
+  document_occurences: 13
 }
 word_frequency {
   word: "Mackerel"
@@ -15042,13 +15757,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Philip"
-  frequency: 2
+  word: "Traction"
+  frequency: 13
   document_occurences: 1
 }
 word_frequency {
-  word: "Traction"
-  frequency: 13
+  word: "Philip"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -15077,14 +15792,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Happens"
-  frequency: 3
-  document_occurences: 2
-}
-word_frequency {
   word: "Beings"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Happens"
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Create"
@@ -15157,19 +15872,19 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Touts"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Talks"
   frequency: 41
   document_occurences: 4
 }
 word_frequency {
+  word: "Touts"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Families"
-  frequency: 13
-  document_occurences: 5
+  frequency: 15
+  document_occurences: 6
 }
 word_frequency {
   word: "Totten"
@@ -15182,9 +15897,9 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Independent"
-  frequency: 4
-  document_occurences: 4
+  word: "Mediterranean"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Upon"
@@ -15192,14 +15907,24 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Closed"
-  frequency: 5
-  document_occurences: 5
+  word: "Independent"
+  frequency: 4
+  document_occurences: 4
+}
+word_frequency {
+  word: "Homeless"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Eye-popping"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Closed"
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "Spend"
@@ -15223,8 +15948,8 @@ word_frequency {
 }
 word_frequency {
   word: "Smaller"
-  frequency: 5
-  document_occurences: 5
+  frequency: 7
+  document_occurences: 6
 }
 word_frequency {
   word: "Voice"
@@ -15263,13 +15988,8 @@ word_frequency {
 }
 word_frequency {
   word: "United"
-  frequency: 110
-  document_occurences: 8
-}
-word_frequency {
-  word: "Buyers"
-  frequency: 7
-  document_occurences: 3
+  frequency: 111
+  document_occurences: 9
 }
 word_frequency {
   word: "Reluctant"
@@ -15277,14 +15997,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Shoes"
-  frequency: 1
-  document_occurences: 1
+  word: "Buyers"
+  frequency: 7
+  document_occurences: 3
 }
 word_frequency {
   word: "Premium"
   frequency: 27
   document_occurences: 3
+}
+word_frequency {
+  word: "Shoes"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Waste"
@@ -15297,14 +16022,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Minutes"
-  frequency: 9
-  document_occurences: 3
-}
-word_frequency {
   word: "Blood"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Minutes"
+  frequency: 9
+  document_occurences: 3
 }
 word_frequency {
   word: "Month"
@@ -15312,14 +16037,14 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Develop"
-  frequency: 3
+  word: "Suppliers"
+  frequency: 7
   document_occurences: 3
 }
 word_frequency {
-  word: "Suppliers"
-  frequency: 2
-  document_occurences: 2
+  word: "Develop"
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Unknown"
@@ -15352,13 +16077,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Small-scale"
-  frequency: 2
+  word: "Construction"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Construction"
-  frequency: 1
+  word: "Small-scale"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -15388,8 +16113,8 @@ word_frequency {
 }
 word_frequency {
   word: "Says"
-  frequency: 28
-  document_occurences: 10
+  frequency: 35
+  document_occurences: 11
 }
 word_frequency {
   word: "Later"
@@ -15467,6 +16192,11 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Targeting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Stroll"
   frequency: 1
   document_occurences: 1
@@ -15507,6 +16237,11 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Creates"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Inspecting"
   frequency: 1
   document_occurences: 1
@@ -15517,13 +16252,13 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Technologically"
-  frequency: 1
+  word: "Swordfish"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
-  word: "Swordfish"
-  frequency: 2
+  word: "Technologically"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -15542,6 +16277,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Precious"
+  frequency: 20
+  document_occurences: 1
+}
+word_frequency {
   word: "Decision"
   frequency: 3
   document_occurences: 2
@@ -15552,17 +16292,22 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Effective"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dowling"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Dock"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "Baltimore"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
-  word: "Dowling"
   frequency: 1
   document_occurences: 1
 }
@@ -15668,18 +16413,13 @@ word_frequency {
 }
 word_frequency {
   word: "Strong"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Breezing"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "Full"
-  frequency: 7
-  document_occurences: 4
 }
 word_frequency {
   word: "Stirs"
@@ -15690,6 +16430,11 @@ word_frequency {
   word: "Erik"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Full"
+  frequency: 7
+  document_occurences: 4
 }
 word_frequency {
   word: "Sounds"
@@ -15717,6 +16462,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Federation"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Capitalize"
   frequency: 1
   document_occurences: 1
@@ -15732,13 +16482,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Ability"
-  frequency: 2
+  word: "Initiatives"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Initiatives"
-  frequency: 1
+  word: "Ability"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -15757,9 +16507,14 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Chefs"
-  frequency: 1
+  word: "Voluntary"
+  frequency: 3
   document_occurences: 1
+}
+word_frequency {
+  word: "Chefs"
+  frequency: 21
+  document_occurences: 2
 }
 word_frequency {
   word: "Suffer"
@@ -15807,6 +16562,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Enacted"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Separate"
   frequency: 1
   document_occurences: 1
@@ -15832,19 +16592,24 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Metcash"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Legal"
   frequency: 2
   document_occurences: 1
 }
 word_frequency {
   word: "Equity"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Paid"
-  frequency: 9
-  document_occurences: 2
+  frequency: 11
+  document_occurences: 3
 }
 word_frequency {
   word: "Shadow"
@@ -15853,6 +16618,11 @@ word_frequency {
 }
 word_frequency {
   word: "Viewers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Heavily"
   frequency: 1
   document_occurences: 1
 }
@@ -15957,14 +16727,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Pound"
-  frequency: 8
-  document_occurences: 4
-}
-word_frequency {
   word: "Dogs"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Pound"
+  frequency: 8
+  document_occurences: 4
 }
 word_frequency {
   word: "Boasts"
@@ -15977,12 +16747,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Contribute"
+  word: "Sponge"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Sponge"
+  word: "Contribute"
   frequency: 1
   document_occurences: 1
 }
@@ -16028,8 +16798,8 @@ word_frequency {
 }
 word_frequency {
   word: "Away"
-  frequency: 6
-  document_occurences: 5
+  frequency: 7
+  document_occurences: 6
 }
 word_frequency {
   word: "Covers"
@@ -16097,6 +16867,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Turkey"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Pharmacy"
   frequency: 4
   document_occurences: 3
@@ -16113,8 +16888,8 @@ word_frequency {
 }
 word_frequency {
   word: "Examples"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Pierre"
@@ -16133,8 +16908,8 @@ word_frequency {
 }
 word_frequency {
   word: "Unconscionable"
-  frequency: 2
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Reuters"
@@ -16142,13 +16917,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Challenge"
-  frequency: 18
+  word: "Cheap"
+  frequency: 6
   document_occurences: 4
 }
 word_frequency {
-  word: "Cheap"
-  frequency: 6
+  word: "Challenge"
+  frequency: 18
   document_occurences: 4
 }
 word_frequency {
@@ -16193,8 +16968,8 @@ word_frequency {
 }
 word_frequency {
   word: "Pattern"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Much-needed"
@@ -16213,6 +16988,11 @@ word_frequency {
 }
 word_frequency {
   word: "Mimic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tamai"
   frequency: 1
   document_occurences: 1
 }
@@ -16292,6 +17072,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Australian"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Known"
   frequency: 9
   document_occurences: 6
@@ -16362,12 +17147,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Below-average"
-  frequency: 1
-  document_occurences: 1
+  word: "Organize"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
-  word: "Organize"
+  word: "Below-average"
   frequency: 2
   document_occurences: 2
 }
@@ -16408,8 +17193,8 @@ word_frequency {
 }
 word_frequency {
   word: "Advertising"
-  frequency: 4
-  document_occurences: 3
+  frequency: 15
+  document_occurences: 4
 }
 word_frequency {
   word: "Stake"
@@ -16443,8 +17228,8 @@ word_frequency {
 }
 word_frequency {
   word: "Farmers"
-  frequency: 6
-  document_occurences: 3
+  frequency: 54
+  document_occurences: 5
 }
 word_frequency {
   word: "Beautifully"
@@ -16462,13 +17247,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Solvable"
-  frequency: 1
+  word: "Thick"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
-  word: "Thick"
-  frequency: 2
+  word: "Solvable"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -16633,8 +17418,8 @@ word_frequency {
 }
 word_frequency {
   word: "Continues"
-  frequency: 3
-  document_occurences: 3
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "CNN.com"
@@ -16672,6 +17457,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Roland"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Additional"
   frequency: 6
   document_occurences: 4
@@ -16693,18 +17483,18 @@ word_frequency {
 }
 word_frequency {
   word: "Greater"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
-  word: "Learned"
-  frequency: 1
-  document_occurences: 1
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Likes"
   frequency: 4
   document_occurences: 4
+}
+word_frequency {
+  word: "Learned"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Joined"
@@ -16788,18 +17578,13 @@ word_frequency {
 }
 word_frequency {
   word: "Past"
-  frequency: 8
-  document_occurences: 5
+  frequency: 9
+  document_occurences: 6
 }
 word_frequency {
   word: "Might"
-  frequency: 10
-  document_occurences: 9
-}
-word_frequency {
-  word: "Hassle"
-  frequency: 1
-  document_occurences: 1
+  frequency: 11
+  document_occurences: 10
 }
 word_frequency {
   word: "Nextel"
@@ -16807,7 +17592,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Hassle"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Dose"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Onboard"
   frequency: 1
   document_occurences: 1
 }
@@ -16822,12 +17617,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Andcostco"
+  word: "Sherry"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Sherry"
+  word: "Andcostco"
   frequency: 1
   document_occurences: 1
 }
@@ -16838,8 +17633,8 @@ word_frequency {
 }
 word_frequency {
   word: "Alternative"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Bakery"
@@ -16862,23 +17657,23 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Co-founder"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Acquisition"
   frequency: 2
   document_occurences: 2
 }
 word_frequency {
-  word: "Cultural"
-  frequency: 5
-  document_occurences: 3
+  word: "Co-founder"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Likely"
   frequency: 3
+  document_occurences: 3
+}
+word_frequency {
+  word: "Cultural"
+  frequency: 5
   document_occurences: 3
 }
 word_frequency {
@@ -16893,8 +17688,8 @@ word_frequency {
 }
 word_frequency {
   word: "Park"
-  frequency: 3
-  document_occurences: 1
+  frequency: 5
+  document_occurences: 2
 }
 word_frequency {
   word: "Tens"
@@ -16902,19 +17697,19 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Mike"
-  frequency: 14
-  document_occurences: 2
-}
-word_frequency {
   word: "Newspaper"
   frequency: 2
   document_occurences: 2
 }
 word_frequency {
+  word: "Mike"
+  frequency: 14
+  document_occurences: 2
+}
+word_frequency {
   word: "Part"
-  frequency: 87
-  document_occurences: 10
+  frequency: 88
+  document_occurences: 11
 }
 word_frequency {
   word: "Bill"
@@ -16927,6 +17722,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Author"
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
   word: "Profitable"
   frequency: 3
   document_occurences: 2
@@ -16935,11 +17735,6 @@ word_frequency {
   word: "Beltway"
   frequency: 3
   document_occurences: 1
-}
-word_frequency {
-  word: "Author"
-  frequency: 2
-  document_occurences: 2
 }
 word_frequency {
   word: "Planning"
@@ -16958,6 +17753,11 @@ word_frequency {
 }
 word_frequency {
   word: "Faux-sale"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Cereals"
   frequency: 1
   document_occurences: 1
 }
@@ -16987,13 +17787,18 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "French"
+  frequency: 4
+  document_occurences: 1
+}
+word_frequency {
   word: "Adopt"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "French"
-  frequency: 4
+  word: "Mind"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -17027,12 +17832,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Minimize"
+  word: "Silky"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Silky"
+  word: "Minimize"
   frequency: 1
   document_occurences: 1
 }
@@ -17048,8 +17853,8 @@ word_frequency {
 }
 word_frequency {
   word: "Parking"
-  frequency: 13
-  document_occurences: 5
+  frequency: 15
+  document_occurences: 6
 }
 word_frequency {
   word: "Century"
@@ -17112,6 +17917,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Agricultural-prices"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Fruitless"
   frequency: 1
   document_occurences: 1
@@ -17142,6 +17952,16 @@ word_frequency {
   document_occurences: 5
 }
 word_frequency {
+  word: "Par"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Participation"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Founded"
   frequency: 5
   document_occurences: 5
@@ -17153,8 +17973,8 @@ word_frequency {
 }
 word_frequency {
   word: "Pay"
-  frequency: 52
-  document_occurences: 9
+  frequency: 53
+  document_occurences: 10
 }
 word_frequency {
   word: "Lofty"
@@ -17228,8 +18048,8 @@ word_frequency {
 }
 word_frequency {
   word: "Southern"
-  frequency: 18
-  document_occurences: 3
+  frequency: 19
+  document_occurences: 4
 }
 word_frequency {
   word: "Belin"
@@ -17307,12 +18127,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Wrongly"
+  word: "Edward"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Edward"
+  word: "Wrongly"
   frequency: 1
   document_occurences: 1
 }
@@ -17353,8 +18173,8 @@ word_frequency {
 }
 word_frequency {
   word: "Opportunity"
-  frequency: 3
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Attendance"
@@ -17463,8 +18283,8 @@ word_frequency {
 }
 word_frequency {
   word: "Cases"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Bite"
@@ -17480,6 +18300,11 @@ word_frequency {
   word: "Needed"
   frequency: 16
   document_occurences: 2
+}
+word_frequency {
+  word: "Overweight"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Triangle-NoMa"
@@ -17503,8 +18328,8 @@ word_frequency {
 }
 word_frequency {
   word: "Back"
-  frequency: 12
-  document_occurences: 8
+  frequency: 13
+  document_occurences: 9
 }
 word_frequency {
   word: "InformationWeek"
@@ -17522,6 +18347,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Minister"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Tex."
   frequency: 1
   document_occurences: 1
@@ -17537,17 +18367,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Graphic"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Asbed"
   frequency: 2
   document_occurences: 1
 }
 word_frequency {
   word: "Ambitious"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
-  word: "Graphic"
   frequency: 1
   document_occurences: 1
 }
@@ -17587,7 +18417,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Enterprises"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Infamous"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Miso"
   frequency: 1
   document_occurences: 1
 }
@@ -17595,11 +18435,6 @@ word_frequency {
   word: "Sourced"
   frequency: 3
   document_occurences: 3
-}
-word_frequency {
-  word: "Miso"
-  frequency: 1
-  document_occurences: 1
 }
 word_frequency {
   word: "Meeting"
@@ -17612,7 +18447,17 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Certainty"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Yards"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Interfaith"
   frequency: 1
   document_occurences: 1
 }
@@ -17667,6 +18512,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Study"
+  frequency: 4
+  document_occurences: 2
+}
+word_frequency {
   word: "Haters"
   frequency: 1
   document_occurences: 1
@@ -17707,9 +18557,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Worsening"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Indeed"
-  frequency: 4
-  document_occurences: 3
+  frequency: 5
+  document_occurences: 4
 }
 word_frequency {
   word: "Defense"
@@ -17737,9 +18592,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Julie"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Supermarkets"
-  frequency: 44
-  document_occurences: 13
+  frequency: 83
+  document_occurences: 14
 }
 word_frequency {
   word: "High-quality"
@@ -17758,8 +18618,8 @@ word_frequency {
 }
 word_frequency {
   word: "Including"
-  frequency: 31
-  document_occurences: 17
+  frequency: 32
+  document_occurences: 18
 }
 word_frequency {
   word: "Unanimously"
@@ -17773,8 +18633,8 @@ word_frequency {
 }
 word_frequency {
   word: "Benefit"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Worlds"
@@ -17792,13 +18652,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Imhoff"
-  frequency: 2
+  word: "Limitations"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Limitations"
-  frequency: 1
+  word: "Imhoff"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -17858,8 +18718,8 @@ word_frequency {
 }
 word_frequency {
   word: "Feed"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Opened"
@@ -18017,14 +18877,14 @@ word_frequency {
   document_occurences: 5
 }
 word_frequency {
-  word: "Expands"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Reopening"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Expands"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Format"
@@ -18033,8 +18893,8 @@ word_frequency {
 }
 word_frequency {
   word: "Urging"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Safety"
@@ -18052,14 +18912,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Appetite"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Hands"
   frequency: 3
   document_occurences: 3
+}
+word_frequency {
+  word: "Appetite"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Pregnant"
@@ -18078,6 +18938,11 @@ word_frequency {
 }
 word_frequency {
   word: "Hammerman"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Faith"
   frequency: 1
   document_occurences: 1
 }
@@ -18118,8 +18983,8 @@ word_frequency {
 }
 word_frequency {
   word: "Series"
-  frequency: 109
-  document_occurences: 5
+  frequency: 110
+  document_occurences: 6
 }
 word_frequency {
   word: "Pi\303\251"
@@ -18163,8 +19028,8 @@ word_frequency {
 }
 word_frequency {
   word: "Mexico"
-  frequency: 208
-  document_occurences: 3
+  frequency: 210
+  document_occurences: 4
 }
 word_frequency {
   word: "Depot"
@@ -18188,12 +19053,17 @@ word_frequency {
 }
 word_frequency {
   word: "Habits"
-  frequency: 1
-  document_occurences: 1
+  frequency: 10
+  document_occurences: 2
 }
 word_frequency {
   word: "Franklin"
   frequency: 2
+  document_occurences: 1
+}
+word_frequency {
+  word: "Backbone"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -18262,6 +19132,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Mali"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Challenges"
   frequency: 4
   document_occurences: 2
@@ -18302,12 +19177,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Menu-planning"
+  word: "Impractical"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Impractical"
+  word: "Menu-planning"
   frequency: 1
   document_occurences: 1
 }
@@ -18338,8 +19213,8 @@ word_frequency {
 }
 word_frequency {
   word: "Make"
-  frequency: 24
-  document_occurences: 18
+  frequency: 25
+  document_occurences: 19
 }
 word_frequency {
   word: "Spring"
@@ -18352,14 +19227,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Covered"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Handle"
   frequency: 4
   document_occurences: 4
+}
+word_frequency {
+  word: "Covered"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Outrage"
@@ -18382,14 +19257,14 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Becomes"
-  frequency: 3
-  document_occurences: 2
-}
-word_frequency {
   word: "IAN"
   frequency: 23
   document_occurences: 1
+}
+word_frequency {
+  word: "Becomes"
+  frequency: 3
+  document_occurences: 2
 }
 word_frequency {
   word: "Portola"
@@ -18402,12 +19277,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Sprint"
+  word: "Bankruptcies"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Bankruptcies"
+  word: "Sprint"
   frequency: 1
   document_occurences: 1
 }
@@ -18487,6 +19362,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Open"
+  frequency: 18
+  document_occurences: 9
+}
+word_frequency {
   word: "Often"
   frequency: 10
   document_occurences: 7
@@ -18495,11 +19375,6 @@ word_frequency {
   word: "Certainly"
   frequency: 3
   document_occurences: 3
-}
-word_frequency {
-  word: "Open"
-  frequency: 18
-  document_occurences: 9
 }
 word_frequency {
   word: "Solicited"
@@ -18518,8 +19393,8 @@ word_frequency {
 }
 word_frequency {
   word: "Groups"
-  frequency: 7
-  document_occurences: 2
+  frequency: 8
+  document_occurences: 3
 }
 word_frequency {
   word: "Heads"
@@ -18528,8 +19403,8 @@ word_frequency {
 }
 word_frequency {
   word: "Occurs"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Newer"
@@ -18583,8 +19458,8 @@ word_frequency {
 }
 word_frequency {
   word: "Pretty"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Great"
@@ -18592,14 +19467,14 @@ word_frequency {
   document_occurences: 6
 }
 word_frequency {
-  word: "Violate"
-  frequency: 2
-  document_occurences: 1
-}
-word_frequency {
   word: "Several"
   frequency: 14
   document_occurences: 11
+}
+word_frequency {
+  word: "Violate"
+  frequency: 2
+  document_occurences: 1
 }
 word_frequency {
   word: "Underdeveloped"
@@ -18667,6 +19542,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Admitting"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Meaningless"
   frequency: 1
   document_occurences: 1
@@ -18707,9 +19587,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Teenagers"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Look"
-  frequency: 50
-  document_occurences: 3
+  frequency: 51
+  document_occurences: 4
 }
 word_frequency {
   word: "Plates"
@@ -18718,13 +19603,13 @@ word_frequency {
 }
 word_frequency {
   word: "Binding"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Expected"
-  frequency: 20
-  document_occurences: 6
+  frequency: 21
+  document_occurences: 7
 }
 word_frequency {
   word: "Bring"
@@ -18762,14 +19647,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Convenience"
-  frequency: 63
-  document_occurences: 4
-}
-word_frequency {
   word: "Cuts"
   frequency: 134
   document_occurences: 3
+}
+word_frequency {
+  word: "Convenience"
+  frequency: 63
+  document_occurences: 4
 }
 word_frequency {
   word: "Marinate"
@@ -18783,8 +19668,8 @@ word_frequency {
 }
 word_frequency {
   word: "Long"
-  frequency: 13
-  document_occurences: 10
+  frequency: 15
+  document_occurences: 11
 }
 word_frequency {
   word: "Wrote"
@@ -18832,6 +19717,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Maintain"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Burrata"
   frequency: 1
   document_occurences: 1
@@ -18857,14 +19747,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Leave"
-  frequency: 5
-  document_occurences: 5
-}
-word_frequency {
   word: "Mark"
   frequency: 3
   document_occurences: 3
+}
+word_frequency {
+  word: "Leave"
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "Saves"
@@ -18888,13 +19778,13 @@ word_frequency {
 }
 word_frequency {
   word: "Step"
-  frequency: 4
-  document_occurences: 4
+  frequency: 7
+  document_occurences: 6
 }
 word_frequency {
   word: "Conduct"
-  frequency: 1
-  document_occurences: 1
+  frequency: 69
+  document_occurences: 2
 }
 word_frequency {
   word: "Nationwide"
@@ -18908,13 +19798,13 @@ word_frequency {
 }
 word_frequency {
   word: "Detailed"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Places"
-  frequency: 4
-  document_occurences: 4
+  frequency: 24
+  document_occurences: 5
 }
 word_frequency {
   word: "Bearing"
@@ -18942,13 +19832,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Farms"
-  frequency: 64
-  document_occurences: 4
+  word: "Opening"
+  frequency: 6
+  document_occurences: 5
 }
 word_frequency {
-  word: "Opening"
-  frequency: 5
+  word: "Farms"
+  frequency: 64
   document_occurences: 4
 }
 word_frequency {
@@ -19017,14 +19907,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Put"
-  frequency: 64
-  document_occurences: 5
-}
-word_frequency {
   word: "Base"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Put"
+  frequency: 66
+  document_occurences: 6
 }
 word_frequency {
   word: "Guidance"
@@ -19032,12 +19922,12 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Fend"
+  word: "Greet"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Greet"
+  word: "Fend"
   frequency: 1
   document_occurences: 1
 }
@@ -19084,6 +19974,11 @@ word_frequency {
 word_frequency {
   word: "Bars"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Vital"
+  frequency: 19
   document_occurences: 1
 }
 word_frequency {
@@ -19143,8 +20038,8 @@ word_frequency {
 }
 word_frequency {
   word: "Work"
-  frequency: 26
-  document_occurences: 10
+  frequency: 27
+  document_occurences: 11
 }
 word_frequency {
   word: "Subsidies"
@@ -19164,6 +20059,11 @@ word_frequency {
 word_frequency {
   word: "Flame"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Obesity"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -19203,13 +20103,8 @@ word_frequency {
 }
 word_frequency {
   word: "Apartment"
-  frequency: 14
-  document_occurences: 2
-}
-word_frequency {
-  word: "Partnered"
-  frequency: 1
-  document_occurences: 1
+  frequency: 15
+  document_occurences: 3
 }
 word_frequency {
   word: "Flavor"
@@ -19218,6 +20113,11 @@ word_frequency {
 }
 word_frequency {
   word: "Mash"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Partnered"
   frequency: 1
   document_occurences: 1
 }
@@ -19233,8 +20133,8 @@ word_frequency {
 }
 word_frequency {
   word: "Studies"
-  frequency: 5
-  document_occurences: 2
+  frequency: 7
+  document_occurences: 3
 }
 word_frequency {
   word: "Enforcing"
@@ -19287,9 +20187,9 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Stopped"
-  frequency: 2
-  document_occurences: 2
+  word: "Shape"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Adopted"
@@ -19297,9 +20197,14 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
-  word: "Lots"
-  frequency: 3
+  word: "Stopped"
+  frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Lots"
+  frequency: 5
+  document_occurences: 3
 }
 word_frequency {
   word: "Couple"
@@ -19323,8 +20228,8 @@ word_frequency {
 }
 word_frequency {
   word: "Hunger"
-  frequency: 10
-  document_occurences: 2
+  frequency: 30
+  document_occurences: 3
 }
 word_frequency {
   word: "Minute"
@@ -19463,8 +20368,8 @@ word_frequency {
 }
 word_frequency {
   word: "Competition"
-  frequency: 10
-  document_occurences: 6
+  frequency: 12
+  document_occurences: 7
 }
 word_frequency {
   word: "Beautiful"
@@ -19510,6 +20415,11 @@ word_frequency {
   word: "Mission"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Looked"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Turns"
@@ -19588,8 +20498,8 @@ word_frequency {
 }
 word_frequency {
   word: "Love"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Punctuated"
@@ -19603,8 +20513,8 @@ word_frequency {
 }
 word_frequency {
   word: "Become"
-  frequency: 9
-  document_occurences: 7
+  frequency: 11
+  document_occurences: 9
 }
 word_frequency {
   word: "Fully"
@@ -19707,6 +20617,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "AFGC"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Flower"
   frequency: 2
   document_occurences: 1
@@ -19733,13 +20648,13 @@ word_frequency {
 }
 word_frequency {
   word: "Showed"
-  frequency: 4
-  document_occurences: 4
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "Commercial"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Resemblance"
@@ -19793,8 +20708,8 @@ word_frequency {
 }
 word_frequency {
   word: "Stop"
-  frequency: 24
-  document_occurences: 7
+  frequency: 25
+  document_occurences: 8
 }
 word_frequency {
   word: "Pepper"
@@ -19837,6 +20752,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Communications"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Unaffordable"
   frequency: 1
   document_occurences: 1
@@ -19844,11 +20764,6 @@ word_frequency {
 word_frequency {
   word: "Hop"
   frequency: 2
-  document_occurences: 1
-}
-word_frequency {
-  word: "Communications"
-  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -19867,14 +20782,14 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Joint"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Hot"
   frequency: 3
   document_occurences: 3
+}
+word_frequency {
+  word: "Joint"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Dandy"
@@ -19883,6 +20798,11 @@ word_frequency {
 }
 word_frequency {
   word: "Grates"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Hollywood"
   frequency: 1
   document_occurences: 1
 }
@@ -19920,6 +20840,11 @@ word_frequency {
   word: "Centers"
   frequency: 5
   document_occurences: 5
+}
+word_frequency {
+  word: "ABC"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Instance"
@@ -19973,8 +20898,8 @@ word_frequency {
 }
 word_frequency {
   word: "Sales"
-  frequency: 21
-  document_occurences: 7
+  frequency: 25
+  document_occurences: 8
 }
 word_frequency {
   word: "Shopped"
@@ -19992,14 +20917,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Near"
-  frequency: 7
-  document_occurences: 4
-}
-word_frequency {
   word: "Planned"
   frequency: 5
   document_occurences: 5
+}
+word_frequency {
+  word: "Near"
+  frequency: 7
+  document_occurences: 4
 }
 word_frequency {
   word: "Organizing"
@@ -20033,13 +20958,13 @@ word_frequency {
 }
 word_frequency {
   word: "Year"
-  frequency: 50
-  document_occurences: 17
+  frequency: 52
+  document_occurences: 19
 }
 word_frequency {
   word: "Television"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Aiming"
@@ -20048,8 +20973,8 @@ word_frequency {
 }
 word_frequency {
   word: "Drinks"
-  frequency: 4
-  document_occurences: 2
+  frequency: 5
+  document_occurences: 3
 }
 word_frequency {
   word: "Regarding"
@@ -20068,8 +20993,8 @@ word_frequency {
 }
 word_frequency {
   word: "Power"
-  frequency: 4
-  document_occurences: 3
+  frequency: 5
+  document_occurences: 4
 }
 word_frequency {
   word: "Issue"
@@ -20083,8 +21008,8 @@ word_frequency {
 }
 word_frequency {
   word: "Communities"
-  frequency: 3
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Nails"
@@ -20113,8 +21038,8 @@ word_frequency {
 }
 word_frequency {
   word: "Need"
-  frequency: 19
-  document_occurences: 12
+  frequency: 20
+  document_occurences: 13
 }
 word_frequency {
   word: "Volumes"
@@ -20153,8 +21078,8 @@ word_frequency {
 }
 word_frequency {
   word: "Business"
-  frequency: 64
-  document_occurences: 13
+  frequency: 71
+  document_occurences: 15
 }
 word_frequency {
   word: "Failed"
@@ -20164,6 +21089,11 @@ word_frequency {
 word_frequency {
   word: "Color"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Billson"
+  frequency: 4
   document_occurences: 1
 }
 word_frequency {
@@ -20203,8 +21133,8 @@ word_frequency {
 }
 word_frequency {
   word: "Instead"
-  frequency: 7
-  document_occurences: 7
+  frequency: 8
+  document_occurences: 8
 }
 word_frequency {
   word: "Incomes"
@@ -20228,8 +21158,8 @@ word_frequency {
 }
 word_frequency {
   word: "Wanted"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Respond"
@@ -20247,9 +21177,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Beefed-up"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Rich"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Preferences"
@@ -20298,11 +21233,16 @@ word_frequency {
 }
 word_frequency {
   word: "Nutrition"
+  frequency: 3
+  document_occurences: 3
+}
+word_frequency {
+  word: "Rhames"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Rhames"
+  word: "Livelihood"
   frequency: 1
   document_occurences: 1
 }
@@ -20318,6 +21258,11 @@ word_frequency {
 }
 word_frequency {
   word: "Material"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Snack"
   frequency: 1
   document_occurences: 1
 }
@@ -20338,18 +21283,18 @@ word_frequency {
 }
 word_frequency {
   word: "Nearly"
-  frequency: 40
-  document_occurences: 6
-}
-word_frequency {
-  word: "Vegetables"
-  frequency: 109
+  frequency: 41
   document_occurences: 7
 }
 word_frequency {
   word: "Import"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Vegetables"
+  frequency: 135
+  document_occurences: 8
 }
 word_frequency {
   word: "Image"
@@ -20367,12 +21312,17 @@ word_frequency {
   document_occurences: 8
 }
 word_frequency {
+  word: "Washed-rind"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Penalties"
   frequency: 2
   document_occurences: 2
 }
 word_frequency {
-  word: "Washed-rind"
+  word: "Cheating"
   frequency: 1
   document_occurences: 1
 }
@@ -20392,14 +21342,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Example"
-  frequency: 6
-  document_occurences: 6
-}
-word_frequency {
   word: "Difficult"
   frequency: 3
   document_occurences: 3
+}
+word_frequency {
+  word: "Example"
+  frequency: 6
+  document_occurences: 6
 }
 word_frequency {
   word: "Raleigh-Durham"
@@ -20447,8 +21397,8 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Cheapest"
-  frequency: 1
+  word: "Pleasant"
+  frequency: 20
   document_occurences: 1
 }
 word_frequency {
@@ -20457,9 +21407,19 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Cheapest"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Immigrants"
   frequency: 3
   document_occurences: 2
+}
+word_frequency {
+  word: "Earlier"
+  frequency: 5
+  document_occurences: 5
 }
 word_frequency {
   word: "Breadbasket"
@@ -20467,13 +21427,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Earlier"
-  frequency: 4
-  document_occurences: 4
-}
-word_frequency {
   word: "Duh-vil-a"
   frequency: 18
+  document_occurences: 1
+}
+word_frequency {
+  word: "India"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -20637,22 +21597,17 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "On-demand"
-  frequency: 14
-  document_occurences: 1
-}
-word_frequency {
   word: "Stages"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Takeaway"
-  frequency: 1
+  word: "On-demand"
+  frequency: 14
   document_occurences: 1
 }
 word_frequency {
-  word: "Tools"
+  word: "Takeaway"
   frequency: 1
   document_occurences: 1
 }
@@ -20663,8 +21618,13 @@ word_frequency {
 }
 word_frequency {
   word: "South"
-  frequency: 4
-  document_occurences: 2
+  frequency: 5
+  document_occurences: 3
+}
+word_frequency {
+  word: "Tools"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Allison"
@@ -20720,6 +21680,11 @@ word_frequency {
   word: "Products"
   frequency: 19
   document_occurences: 10
+}
+word_frequency {
+  word: "Church"
+  frequency: 2
+  document_occurences: 1
 }
 word_frequency {
   word: "Promising"
@@ -20783,13 +21748,13 @@ word_frequency {
 }
 word_frequency {
   word: "Executive"
-  frequency: 13
-  document_occurences: 11
+  frequency: 15
+  document_occurences: 13
 }
 word_frequency {
   word: "Europe"
-  frequency: 4
-  document_occurences: 1
+  frequency: 5
+  document_occurences: 2
 }
 word_frequency {
   word: "Received"
@@ -20822,14 +21787,14 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Proof"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "David"
   frequency: 31
   document_occurences: 3
+}
+word_frequency {
+  word: "Proof"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Advice"
@@ -20858,8 +21823,8 @@ word_frequency {
 }
 word_frequency {
   word: "Issues"
-  frequency: 6
-  document_occurences: 4
+  frequency: 7
+  document_occurences: 5
 }
 word_frequency {
   word: "Evaluate"
@@ -20892,6 +21857,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Colford"
+  frequency: 2
+  document_occurences: 1
+}
+word_frequency {
   word: "Issued"
   frequency: 2
   document_occurences: 2
@@ -20902,7 +21872,17 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Consultation"
+  frequency: 33
+  document_occurences: 1
+}
+word_frequency {
   word: "Snacks"
+  frequency: 2
+  document_occurences: 2
+}
+word_frequency {
+  word: "Height"
   frequency: 1
   document_occurences: 1
 }
@@ -20928,8 +21908,8 @@ word_frequency {
 }
 word_frequency {
   word: "Comment"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Donna"
@@ -20950,6 +21930,11 @@ word_frequency {
   word: "Scale"
   frequency: 16
   document_occurences: 2
+}
+word_frequency {
+  word: "Coles"
+  frequency: 2
+  document_occurences: 1
 }
 word_frequency {
   word: "Improving"
@@ -20992,24 +21977,24 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Along"
+  frequency: 5
+  document_occurences: 5
+}
+word_frequency {
   word: "Jars"
   frequency: 3
-  document_occurences: 2
-}
-word_frequency {
-  word: "Along"
-  frequency: 4
-  document_occurences: 4
-}
-word_frequency {
-  word: "Alone"
-  frequency: 2
   document_occurences: 2
 }
 word_frequency {
   word: "Gourmet"
   frequency: 4
   document_occurences: 1
+}
+word_frequency {
+  word: "Alone"
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "E-grocery"
@@ -21038,8 +22023,8 @@ word_frequency {
 }
 word_frequency {
   word: "Friends"
-  frequency: 1
-  document_occurences: 1
+  frequency: 21
+  document_occurences: 2
 }
 word_frequency {
   word: "Needs"
@@ -21067,13 +22052,13 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Frequent"
-  frequency: 1
-  document_occurences: 1
+  word: "Saturday"
+  frequency: 16
+  document_occurences: 2
 }
 word_frequency {
-  word: "Saturday"
-  frequency: 15
+  word: "Frequent"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -21127,6 +22112,11 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Tougher"
+  frequency: 33
+  document_occurences: 1
+}
+word_frequency {
   word: "Gaybrick"
   frequency: 1
   document_occurences: 1
@@ -21153,12 +22143,17 @@ word_frequency {
 }
 word_frequency {
   word: "Effect"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Grassy"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Dawson"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -21173,17 +22168,17 @@ word_frequency {
 }
 word_frequency {
   word: "Coming"
-  frequency: 46
-  document_occurences: 6
-}
-word_frequency {
-  word: "Time-traveling"
-  frequency: 1
-  document_occurences: 1
+  frequency: 48
+  document_occurences: 8
 }
 word_frequency {
   word: "Farmworkers&apos"
   frequency: 23
+  document_occurences: 1
+}
+word_frequency {
+  word: "Time-traveling"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
@@ -21258,11 +22253,16 @@ word_frequency {
 }
 word_frequency {
   word: "Protect"
-  frequency: 2
-  document_occurences: 2
+  frequency: 3
+  document_occurences: 3
 }
 word_frequency {
   word: "Distinguished"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Echo"
   frequency: 1
   document_occurences: 1
 }
@@ -21298,8 +22298,8 @@ word_frequency {
 }
 word_frequency {
   word: "Settlement"
-  frequency: 10
-  document_occurences: 1
+  frequency: 11
+  document_occurences: 2
 }
 word_frequency {
   word: "Thorough"
@@ -21327,6 +22327,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Colas"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Denied"
   frequency: 76
   document_occurences: 2
@@ -21340,6 +22345,11 @@ word_frequency {
   word: "Expertise"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Myanmar"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Lower"
@@ -21367,7 +22377,17 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Ida"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "One-up"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Apps"
   frequency: 1
   document_occurences: 1
 }
@@ -21403,8 +22423,8 @@ word_frequency {
 }
 word_frequency {
   word: "Programs"
-  frequency: 9
-  document_occurences: 5
+  frequency: 30
+  document_occurences: 6
 }
 word_frequency {
   word: "Deliver"
@@ -21428,6 +22448,11 @@ word_frequency {
 }
 word_frequency {
   word: "Attorneys"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Tabled"
   frequency: 1
   document_occurences: 1
 }
@@ -21487,6 +22512,11 @@ word_frequency {
   document_occurences: 2
 }
 word_frequency {
+  word: "Food-consumption"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Risk"
   frequency: 5
   document_occurences: 3
@@ -21502,13 +22532,13 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
-  word: "Greg"
-  frequency: 2
+  word: "Remodeling"
+  frequency: 1
   document_occurences: 1
 }
 word_frequency {
-  word: "Remodeling"
-  frequency: 1
+  word: "Greg"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -21523,6 +22553,11 @@ word_frequency {
 }
 word_frequency {
   word: "Strict"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Exist"
   frequency: 1
   document_occurences: 1
 }
@@ -21578,8 +22613,8 @@ word_frequency {
 }
 word_frequency {
   word: "Grew"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Schools"
@@ -21623,8 +22658,8 @@ word_frequency {
 }
 word_frequency {
   word: "Huge"
-  frequency: 3
-  document_occurences: 3
+  frequency: 4
+  document_occurences: 4
 }
 word_frequency {
   word: "Largest"
@@ -21662,18 +22697,23 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Thrive"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Bethesda"
   frequency: 2
   document_occurences: 1
 }
 word_frequency {
+  word: "Thrive"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Account"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Lancet"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -21704,6 +22744,11 @@ word_frequency {
 word_frequency {
   word: "Suit"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Passionate"
+  frequency: 20
   document_occurences: 1
 }
 word_frequency {
@@ -21788,8 +22833,13 @@ word_frequency {
 }
 word_frequency {
   word: "Agribusiness"
-  frequency: 3
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
+}
+word_frequency {
+  word: "Imbalance"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Valley"
@@ -21817,6 +22867,11 @@ word_frequency {
   document_occurences: 3
 }
 word_frequency {
+  word: "Package"
+  frequency: 4
+  document_occurences: 3
+}
+word_frequency {
   word: "Resources"
   frequency: 3
   document_occurences: 3
@@ -21825,11 +22880,6 @@ word_frequency {
   word: "Cities"
   frequency: 6
   document_occurences: 4
-}
-word_frequency {
-  word: "Package"
-  frequency: 4
-  document_occurences: 3
 }
 word_frequency {
   word: "Welcomes"
@@ -21862,6 +22912,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Spectrum"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Peonage"
   frequency: 75
   document_occurences: 1
@@ -21878,8 +22933,8 @@ word_frequency {
 }
 word_frequency {
   word: "Avenue"
-  frequency: 3
-  document_occurences: 2
+  frequency: 4
+  document_occurences: 3
 }
 word_frequency {
   word: "Reliable"
@@ -21907,6 +22962,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Sauceda-Rivera"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Plan"
   frequency: 49
   document_occurences: 9
@@ -21917,14 +22977,14 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Play"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Asked"
   frequency: 1
   document_occurences: 1
+}
+word_frequency {
+  word: "Play"
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Sometimes"
@@ -21978,8 +23038,8 @@ word_frequency {
 }
 word_frequency {
   word: "Summer"
-  frequency: 1
-  document_occurences: 1
+  frequency: 2
+  document_occurences: 2
 }
 word_frequency {
   word: "Three-week-aged"
@@ -21990,6 +23050,11 @@ word_frequency {
   word: "Larger"
   frequency: 7
   document_occurences: 5
+}
+word_frequency {
+  word: "Dependent"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Anytime"
@@ -22010,6 +23075,11 @@ word_frequency {
   word: "Helping"
   frequency: 2
   document_occurences: 2
+}
+word_frequency {
+  word: "Released"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Advance"
@@ -22057,6 +23127,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Outright"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Thomson"
   frequency: 1
   document_occurences: 1
@@ -22087,22 +23162,22 @@ word_frequency {
   document_occurences: 5
 }
 word_frequency {
-  word: "Embrace"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
-  word: "User"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Grain-finished"
   frequency: 1
   document_occurences: 1
 }
 word_frequency {
   word: "SoftBank"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Embrace"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "User"
   frequency: 1
   document_occurences: 1
 }
@@ -22117,6 +23192,11 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
+  word: "Insisted"
+  frequency: 1
+  document_occurences: 1
+}
+word_frequency {
   word: "Generic"
   frequency: 2
   document_occurences: 1
@@ -22124,6 +23204,11 @@ word_frequency {
 word_frequency {
   word: "Lance"
   frequency: 1
+  document_occurences: 1
+}
+word_frequency {
+  word: "Egypt"
+  frequency: 2
   document_occurences: 1
 }
 word_frequency {
@@ -22178,8 +23263,8 @@ word_frequency {
 }
 word_frequency {
   word: "Announced"
-  frequency: 8
-  document_occurences: 7
+  frequency: 41
+  document_occurences: 8
 }
 word_frequency {
   word: "Dice"
@@ -22200,6 +23285,11 @@ word_frequency {
   word: "Management"
   frequency: 18
   document_occurences: 5
+}
+word_frequency {
+  word: "Healthier"
+  frequency: 1
+  document_occurences: 1
 }
 word_frequency {
   word: "Chops"
@@ -22233,8 +23323,8 @@ word_frequency {
 }
 word_frequency {
   word: "Used"
-  frequency: 11
-  document_occurences: 8
+  frequency: 12
+  document_occurences: 9
 }
 word_frequency {
   word: "Bought"
