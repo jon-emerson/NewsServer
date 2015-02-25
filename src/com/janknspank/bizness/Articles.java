@@ -1,9 +1,11 @@
 package com.janknspank.bizness;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.IndustryCode;
 import com.janknspank.common.TopList;
@@ -45,14 +47,24 @@ public class Articles {
 
   public static TopList<Article, Double> getRankedArticlesAndScores(User user, Scorer scorer, int limit)
       throws DatabaseSchemaException {
-    TopList<Article, Double> bestArticles = new TopList<>(limit);
-    for (Article article : Deduper.filterOutDupes(Iterables.concat(
+    TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
+    Set<String> urls = Sets.newHashSet();
+    for (Article article : Iterables.concat(
         getArticlesByInterest(UserInterests.getCurrentInterests(user), limit * 5),
-        getArticlesByIndustries(UserIndustries.getCurrentIndustries(user), limit * 5)))) {
+        getArticlesByIndustries(UserIndustries.getCurrentIndustries(user), limit * 5))) {
+      if (urls.contains(article.getUrl())) {
+        continue;
+      }
+      urls.add(article.getUrl());
+
       double hoursSincePublished =
           ((double) System.currentTimeMillis() - article.getPublishedTime())
               / TimeUnit.HOURS.toMillis(1);
-      bestArticles.add(article, scorer.getScore(user, article) / hoursSincePublished);
+      goodArticles.add(article, scorer.getScore(user, article) / hoursSincePublished);
+    }
+    TopList<Article, Double> bestArticles = new TopList<>(limit);
+    for (Article article : Deduper.filterOutDupes(goodArticles)) {
+      bestArticles.add(article, goodArticles.getValue(article));
     }
     return bestArticles;
   }

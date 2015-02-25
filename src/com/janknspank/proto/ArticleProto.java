@@ -256,30 +256,49 @@ public final class ArticleProto {
     com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder getFeatureOrBuilder(
         int index);
 
-    // repeated .DuplicateArticle duplicate = 16;
+    // repeated string deduping_stems = 17;
     /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
+     * <code>repeated string deduping_stems = 17;</code>
+     *
+     * <pre>
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+     * if you compare these across 2 articles, if there's at least 2 matches,
+     * they strongly tend to be duplicates.
+     * </pre>
      */
-    java.util.List<com.janknspank.proto.ArticleProto.DuplicateArticle> 
-        getDuplicateList();
+    java.util.List<java.lang.String>
+    getDedupingStemsList();
     /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
+     * <code>repeated string deduping_stems = 17;</code>
+     *
+     * <pre>
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+     * if you compare these across 2 articles, if there's at least 2 matches,
+     * they strongly tend to be duplicates.
+     * </pre>
      */
-    com.janknspank.proto.ArticleProto.DuplicateArticle getDuplicate(int index);
+    int getDedupingStemsCount();
     /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
+     * <code>repeated string deduping_stems = 17;</code>
+     *
+     * <pre>
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+     * if you compare these across 2 articles, if there's at least 2 matches,
+     * they strongly tend to be duplicates.
+     * </pre>
      */
-    int getDuplicateCount();
+    java.lang.String getDedupingStems(int index);
     /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
+     * <code>repeated string deduping_stems = 17;</code>
+     *
+     * <pre>
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+     * if you compare these across 2 articles, if there's at least 2 matches,
+     * they strongly tend to be duplicates.
+     * </pre>
      */
-    java.util.List<? extends com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder> 
-        getDuplicateOrBuilderList();
-    /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
-     */
-    com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder getDuplicateOrBuilder(
-        int index);
+    com.google.protobuf.ByteString
+        getDedupingStemsBytes(int index);
   }
   /**
    * Protobuf type {@code Article}
@@ -419,12 +438,12 @@ public final class ArticleProto {
               feature_.add(input.readMessage(com.janknspank.proto.ArticleProto.ArticleFeature.PARSER, extensionRegistry));
               break;
             }
-            case 130: {
+            case 138: {
               if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
-                duplicate_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.DuplicateArticle>();
+                dedupingStems_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00008000;
               }
-              duplicate_.add(input.readMessage(com.janknspank.proto.ArticleProto.DuplicateArticle.PARSER, extensionRegistry));
+              dedupingStems_.add(input.readBytes());
               break;
             }
           }
@@ -448,7 +467,7 @@ public final class ArticleProto {
           feature_ = java.util.Collections.unmodifiableList(feature_);
         }
         if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
-          duplicate_ = java.util.Collections.unmodifiableList(duplicate_);
+          dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(dedupingStems_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1012,40 +1031,58 @@ public final class ArticleProto {
       return feature_.get(index);
     }
 
-    // repeated .DuplicateArticle duplicate = 16;
-    public static final int DUPLICATE_FIELD_NUMBER = 16;
-    private java.util.List<com.janknspank.proto.ArticleProto.DuplicateArticle> duplicate_;
+    // repeated string deduping_stems = 17;
+    public static final int DEDUPING_STEMS_FIELD_NUMBER = 17;
+    private com.google.protobuf.LazyStringList dedupingStems_;
     /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
+     * <code>repeated string deduping_stems = 17;</code>
+     *
+     * <pre>
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+     * if you compare these across 2 articles, if there's at least 2 matches,
+     * they strongly tend to be duplicates.
+     * </pre>
      */
-    public java.util.List<com.janknspank.proto.ArticleProto.DuplicateArticle> getDuplicateList() {
-      return duplicate_;
+    public java.util.List<java.lang.String>
+        getDedupingStemsList() {
+      return dedupingStems_;
     }
     /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
+     * <code>repeated string deduping_stems = 17;</code>
+     *
+     * <pre>
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+     * if you compare these across 2 articles, if there's at least 2 matches,
+     * they strongly tend to be duplicates.
+     * </pre>
      */
-    public java.util.List<? extends com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder> 
-        getDuplicateOrBuilderList() {
-      return duplicate_;
+    public int getDedupingStemsCount() {
+      return dedupingStems_.size();
     }
     /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
+     * <code>repeated string deduping_stems = 17;</code>
+     *
+     * <pre>
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+     * if you compare these across 2 articles, if there's at least 2 matches,
+     * they strongly tend to be duplicates.
+     * </pre>
      */
-    public int getDuplicateCount() {
-      return duplicate_.size();
+    public java.lang.String getDedupingStems(int index) {
+      return dedupingStems_.get(index);
     }
     /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
+     * <code>repeated string deduping_stems = 17;</code>
+     *
+     * <pre>
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+     * if you compare these across 2 articles, if there's at least 2 matches,
+     * they strongly tend to be duplicates.
+     * </pre>
      */
-    public com.janknspank.proto.ArticleProto.DuplicateArticle getDuplicate(int index) {
-      return duplicate_.get(index);
-    }
-    /**
-     * <code>repeated .DuplicateArticle duplicate = 16;</code>
-     */
-    public com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder getDuplicateOrBuilder(
-        int index) {
-      return duplicate_.get(index);
+    public com.google.protobuf.ByteString
+        getDedupingStemsBytes(int index) {
+      return dedupingStems_.getByteString(index);
     }
 
     private void initFields() {
@@ -1064,7 +1101,7 @@ public final class ArticleProto {
       keyword_ = java.util.Collections.emptyList();
       socialEngagement_ = java.util.Collections.emptyList();
       feature_ = java.util.Collections.emptyList();
-      duplicate_ = java.util.Collections.emptyList();
+      dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1123,8 +1160,8 @@ public final class ArticleProto {
       for (int i = 0; i < feature_.size(); i++) {
         output.writeMessage(15, feature_.get(i));
       }
-      for (int i = 0; i < duplicate_.size(); i++) {
-        output.writeMessage(16, duplicate_.get(i));
+      for (int i = 0; i < dedupingStems_.size(); i++) {
+        output.writeBytes(17, dedupingStems_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1200,9 +1237,14 @@ public final class ArticleProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(15, feature_.get(i));
       }
-      for (int i = 0; i < duplicate_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(16, duplicate_.get(i));
+      {
+        int dataSize = 0;
+        for (int i = 0; i < dedupingStems_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(dedupingStems_.getByteString(i));
+        }
+        size += dataSize;
+        size += 2 * getDedupingStemsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1315,7 +1357,6 @@ public final class ArticleProto {
           getKeywordFieldBuilder();
           getSocialEngagementFieldBuilder();
           getFeatureFieldBuilder();
-          getDuplicateFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1366,12 +1407,8 @@ public final class ArticleProto {
         } else {
           featureBuilder_.clear();
         }
-        if (duplicateBuilder_ == null) {
-          duplicate_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
-        } else {
-          duplicateBuilder_.clear();
-        }
+        dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00008000);
         return this;
       }
 
@@ -1477,15 +1514,12 @@ public final class ArticleProto {
         } else {
           result.feature_ = featureBuilder_.build();
         }
-        if (duplicateBuilder_ == null) {
-          if (((bitField0_ & 0x00008000) == 0x00008000)) {
-            duplicate_ = java.util.Collections.unmodifiableList(duplicate_);
-            bitField0_ = (bitField0_ & ~0x00008000);
-          }
-          result.duplicate_ = duplicate_;
-        } else {
-          result.duplicate_ = duplicateBuilder_.build();
+        if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              dedupingStems_);
+          bitField0_ = (bitField0_ & ~0x00008000);
         }
+        result.dedupingStems_ = dedupingStems_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1639,31 +1673,15 @@ public final class ArticleProto {
             }
           }
         }
-        if (duplicateBuilder_ == null) {
-          if (!other.duplicate_.isEmpty()) {
-            if (duplicate_.isEmpty()) {
-              duplicate_ = other.duplicate_;
-              bitField0_ = (bitField0_ & ~0x00008000);
-            } else {
-              ensureDuplicateIsMutable();
-              duplicate_.addAll(other.duplicate_);
-            }
-            onChanged();
+        if (!other.dedupingStems_.isEmpty()) {
+          if (dedupingStems_.isEmpty()) {
+            dedupingStems_ = other.dedupingStems_;
+            bitField0_ = (bitField0_ & ~0x00008000);
+          } else {
+            ensureDedupingStemsIsMutable();
+            dedupingStems_.addAll(other.dedupingStems_);
           }
-        } else {
-          if (!other.duplicate_.isEmpty()) {
-            if (duplicateBuilder_.isEmpty()) {
-              duplicateBuilder_.dispose();
-              duplicateBuilder_ = null;
-              duplicate_ = other.duplicate_;
-              bitField0_ = (bitField0_ & ~0x00008000);
-              duplicateBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getDuplicateFieldBuilder() : null;
-            } else {
-              duplicateBuilder_.addAllMessages(other.duplicate_);
-            }
-          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3196,244 +3214,151 @@ public final class ArticleProto {
         return featureBuilder_;
       }
 
-      // repeated .DuplicateArticle duplicate = 16;
-      private java.util.List<com.janknspank.proto.ArticleProto.DuplicateArticle> duplicate_ =
-        java.util.Collections.emptyList();
-      private void ensureDuplicateIsMutable() {
+      // repeated string deduping_stems = 17;
+      private com.google.protobuf.LazyStringList dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureDedupingStemsIsMutable() {
         if (!((bitField0_ & 0x00008000) == 0x00008000)) {
-          duplicate_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.DuplicateArticle>(duplicate_);
+          dedupingStems_ = new com.google.protobuf.LazyStringArrayList(dedupingStems_);
           bitField0_ |= 0x00008000;
          }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.ArticleProto.DuplicateArticle, com.janknspank.proto.ArticleProto.DuplicateArticle.Builder, com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder> duplicateBuilder_;
-
       /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
        */
-      public java.util.List<com.janknspank.proto.ArticleProto.DuplicateArticle> getDuplicateList() {
-        if (duplicateBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(duplicate_);
-        } else {
-          return duplicateBuilder_.getMessageList();
-        }
+      public java.util.List<java.lang.String>
+          getDedupingStemsList() {
+        return java.util.Collections.unmodifiableList(dedupingStems_);
       }
       /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
        */
-      public int getDuplicateCount() {
-        if (duplicateBuilder_ == null) {
-          return duplicate_.size();
-        } else {
-          return duplicateBuilder_.getCount();
-        }
+      public int getDedupingStemsCount() {
+        return dedupingStems_.size();
       }
       /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
        */
-      public com.janknspank.proto.ArticleProto.DuplicateArticle getDuplicate(int index) {
-        if (duplicateBuilder_ == null) {
-          return duplicate_.get(index);
-        } else {
-          return duplicateBuilder_.getMessage(index);
-        }
+      public java.lang.String getDedupingStems(int index) {
+        return dedupingStems_.get(index);
       }
       /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
        */
-      public Builder setDuplicate(
-          int index, com.janknspank.proto.ArticleProto.DuplicateArticle value) {
-        if (duplicateBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDuplicateIsMutable();
-          duplicate_.set(index, value);
-          onChanged();
-        } else {
-          duplicateBuilder_.setMessage(index, value);
-        }
+      public com.google.protobuf.ByteString
+          getDedupingStemsBytes(int index) {
+        return dedupingStems_.getByteString(index);
+      }
+      /**
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
+       */
+      public Builder setDedupingStems(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDedupingStemsIsMutable();
+        dedupingStems_.set(index, value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
        */
-      public Builder setDuplicate(
-          int index, com.janknspank.proto.ArticleProto.DuplicateArticle.Builder builderForValue) {
-        if (duplicateBuilder_ == null) {
-          ensureDuplicateIsMutable();
-          duplicate_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          duplicateBuilder_.setMessage(index, builderForValue.build());
-        }
+      public Builder addDedupingStems(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDedupingStemsIsMutable();
+        dedupingStems_.add(value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
        */
-      public Builder addDuplicate(com.janknspank.proto.ArticleProto.DuplicateArticle value) {
-        if (duplicateBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDuplicateIsMutable();
-          duplicate_.add(value);
-          onChanged();
-        } else {
-          duplicateBuilder_.addMessage(value);
-        }
+      public Builder addAllDedupingStems(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureDedupingStemsIsMutable();
+        super.addAll(values, dedupingStems_);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
        */
-      public Builder addDuplicate(
-          int index, com.janknspank.proto.ArticleProto.DuplicateArticle value) {
-        if (duplicateBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDuplicateIsMutable();
-          duplicate_.add(index, value);
-          onChanged();
-        } else {
-          duplicateBuilder_.addMessage(index, value);
-        }
+      public Builder clearDedupingStems() {
+        dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00008000);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
+       * <code>repeated string deduping_stems = 17;</code>
+       *
+       * <pre>
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
+       * if you compare these across 2 articles, if there's at least 2 matches,
+       * they strongly tend to be duplicates.
+       * </pre>
        */
-      public Builder addDuplicate(
-          com.janknspank.proto.ArticleProto.DuplicateArticle.Builder builderForValue) {
-        if (duplicateBuilder_ == null) {
-          ensureDuplicateIsMutable();
-          duplicate_.add(builderForValue.build());
-          onChanged();
-        } else {
-          duplicateBuilder_.addMessage(builderForValue.build());
-        }
+      public Builder addDedupingStemsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDedupingStemsIsMutable();
+        dedupingStems_.add(value);
+        onChanged();
         return this;
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public Builder addDuplicate(
-          int index, com.janknspank.proto.ArticleProto.DuplicateArticle.Builder builderForValue) {
-        if (duplicateBuilder_ == null) {
-          ensureDuplicateIsMutable();
-          duplicate_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          duplicateBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public Builder addAllDuplicate(
-          java.lang.Iterable<? extends com.janknspank.proto.ArticleProto.DuplicateArticle> values) {
-        if (duplicateBuilder_ == null) {
-          ensureDuplicateIsMutable();
-          super.addAll(values, duplicate_);
-          onChanged();
-        } else {
-          duplicateBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public Builder clearDuplicate() {
-        if (duplicateBuilder_ == null) {
-          duplicate_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
-          onChanged();
-        } else {
-          duplicateBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public Builder removeDuplicate(int index) {
-        if (duplicateBuilder_ == null) {
-          ensureDuplicateIsMutable();
-          duplicate_.remove(index);
-          onChanged();
-        } else {
-          duplicateBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public com.janknspank.proto.ArticleProto.DuplicateArticle.Builder getDuplicateBuilder(
-          int index) {
-        return getDuplicateFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder getDuplicateOrBuilder(
-          int index) {
-        if (duplicateBuilder_ == null) {
-          return duplicate_.get(index);  } else {
-          return duplicateBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public java.util.List<? extends com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder> 
-           getDuplicateOrBuilderList() {
-        if (duplicateBuilder_ != null) {
-          return duplicateBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(duplicate_);
-        }
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public com.janknspank.proto.ArticleProto.DuplicateArticle.Builder addDuplicateBuilder() {
-        return getDuplicateFieldBuilder().addBuilder(
-            com.janknspank.proto.ArticleProto.DuplicateArticle.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public com.janknspank.proto.ArticleProto.DuplicateArticle.Builder addDuplicateBuilder(
-          int index) {
-        return getDuplicateFieldBuilder().addBuilder(
-            index, com.janknspank.proto.ArticleProto.DuplicateArticle.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .DuplicateArticle duplicate = 16;</code>
-       */
-      public java.util.List<com.janknspank.proto.ArticleProto.DuplicateArticle.Builder> 
-           getDuplicateBuilderList() {
-        return getDuplicateFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.ArticleProto.DuplicateArticle, com.janknspank.proto.ArticleProto.DuplicateArticle.Builder, com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder> 
-          getDuplicateFieldBuilder() {
-        if (duplicateBuilder_ == null) {
-          duplicateBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.janknspank.proto.ArticleProto.DuplicateArticle, com.janknspank.proto.ArticleProto.DuplicateArticle.Builder, com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder>(
-                  duplicate_,
-                  ((bitField0_ & 0x00008000) == 0x00008000),
-                  getParentForChildren(),
-                  isClean());
-          duplicate_ = null;
-        }
-        return duplicateBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:Article)
@@ -6166,558 +6091,6 @@ public final class ArticleProto {
     // @@protoc_insertion_point(class_scope:ArticleFeature)
   }
 
-  public interface DuplicateArticleOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional string url_id = 1;
-    /**
-     * <code>optional string url_id = 1;</code>
-     */
-    boolean hasUrlId();
-    /**
-     * <code>optional string url_id = 1;</code>
-     */
-    java.lang.String getUrlId();
-    /**
-     * <code>optional string url_id = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getUrlIdBytes();
-
-    // optional double similarity = 2;
-    /**
-     * <code>optional double similarity = 2;</code>
-     */
-    boolean hasSimilarity();
-    /**
-     * <code>optional double similarity = 2;</code>
-     */
-    double getSimilarity();
-  }
-  /**
-   * Protobuf type {@code DuplicateArticle}
-   */
-  public static final class DuplicateArticle extends
-      com.google.protobuf.GeneratedMessage
-      implements DuplicateArticleOrBuilder {
-    // Use DuplicateArticle.newBuilder() to construct.
-    private DuplicateArticle(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private DuplicateArticle(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final DuplicateArticle defaultInstance;
-    public static DuplicateArticle getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public DuplicateArticle getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private DuplicateArticle(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              urlId_ = input.readBytes();
-              break;
-            }
-            case 17: {
-              bitField0_ |= 0x00000002;
-              similarity_ = input.readDouble();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.janknspank.proto.ArticleProto.internal_static_DuplicateArticle_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.janknspank.proto.ArticleProto.internal_static_DuplicateArticle_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.ArticleProto.DuplicateArticle.class, com.janknspank.proto.ArticleProto.DuplicateArticle.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<DuplicateArticle> PARSER =
-        new com.google.protobuf.AbstractParser<DuplicateArticle>() {
-      public DuplicateArticle parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new DuplicateArticle(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<DuplicateArticle> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    // optional string url_id = 1;
-    public static final int URL_ID_FIELD_NUMBER = 1;
-    private java.lang.Object urlId_;
-    /**
-     * <code>optional string url_id = 1;</code>
-     */
-    public boolean hasUrlId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string url_id = 1;</code>
-     */
-    public java.lang.String getUrlId() {
-      java.lang.Object ref = urlId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          urlId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string url_id = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUrlIdBytes() {
-      java.lang.Object ref = urlId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        urlId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional double similarity = 2;
-    public static final int SIMILARITY_FIELD_NUMBER = 2;
-    private double similarity_;
-    /**
-     * <code>optional double similarity = 2;</code>
-     */
-    public boolean hasSimilarity() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional double similarity = 2;</code>
-     */
-    public double getSimilarity() {
-      return similarity_;
-    }
-
-    private void initFields() {
-      urlId_ = "";
-      similarity_ = 0D;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUrlIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeDouble(2, similarity_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUrlIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, similarity_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.janknspank.proto.ArticleProto.DuplicateArticle parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.ArticleProto.DuplicateArticle prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code DuplicateArticle}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.ArticleProto.DuplicateArticleOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.janknspank.proto.ArticleProto.internal_static_DuplicateArticle_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.janknspank.proto.ArticleProto.internal_static_DuplicateArticle_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.ArticleProto.DuplicateArticle.class, com.janknspank.proto.ArticleProto.DuplicateArticle.Builder.class);
-      }
-
-      // Construct using com.janknspank.proto.ArticleProto.DuplicateArticle.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        urlId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        similarity_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.janknspank.proto.ArticleProto.internal_static_DuplicateArticle_descriptor;
-      }
-
-      public com.janknspank.proto.ArticleProto.DuplicateArticle getDefaultInstanceForType() {
-        return com.janknspank.proto.ArticleProto.DuplicateArticle.getDefaultInstance();
-      }
-
-      public com.janknspank.proto.ArticleProto.DuplicateArticle build() {
-        com.janknspank.proto.ArticleProto.DuplicateArticle result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.janknspank.proto.ArticleProto.DuplicateArticle buildPartial() {
-        com.janknspank.proto.ArticleProto.DuplicateArticle result = new com.janknspank.proto.ArticleProto.DuplicateArticle(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.urlId_ = urlId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.similarity_ = similarity_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.ArticleProto.DuplicateArticle) {
-          return mergeFrom((com.janknspank.proto.ArticleProto.DuplicateArticle)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.janknspank.proto.ArticleProto.DuplicateArticle other) {
-        if (other == com.janknspank.proto.ArticleProto.DuplicateArticle.getDefaultInstance()) return this;
-        if (other.hasUrlId()) {
-          bitField0_ |= 0x00000001;
-          urlId_ = other.urlId_;
-          onChanged();
-        }
-        if (other.hasSimilarity()) {
-          setSimilarity(other.getSimilarity());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.janknspank.proto.ArticleProto.DuplicateArticle parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.ArticleProto.DuplicateArticle) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // optional string url_id = 1;
-      private java.lang.Object urlId_ = "";
-      /**
-       * <code>optional string url_id = 1;</code>
-       */
-      public boolean hasUrlId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string url_id = 1;</code>
-       */
-      public java.lang.String getUrlId() {
-        java.lang.Object ref = urlId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          urlId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string url_id = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUrlIdBytes() {
-        java.lang.Object ref = urlId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          urlId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string url_id = 1;</code>
-       */
-      public Builder setUrlId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        urlId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string url_id = 1;</code>
-       */
-      public Builder clearUrlId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        urlId_ = getDefaultInstance().getUrlId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string url_id = 1;</code>
-       */
-      public Builder setUrlIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        urlId_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional double similarity = 2;
-      private double similarity_ ;
-      /**
-       * <code>optional double similarity = 2;</code>
-       */
-      public boolean hasSimilarity() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional double similarity = 2;</code>
-       */
-      public double getSimilarity() {
-        return similarity_;
-      }
-      /**
-       * <code>optional double similarity = 2;</code>
-       */
-      public Builder setSimilarity(double value) {
-        bitField0_ |= 0x00000002;
-        similarity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional double similarity = 2;</code>
-       */
-      public Builder clearSimilarity() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        similarity_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:DuplicateArticle)
-    }
-
-    static {
-      defaultInstance = new DuplicateArticle(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:DuplicateArticle)
-  }
-
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Article_descriptor;
   private static
@@ -6738,11 +6111,6 @@ public final class ArticleProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ArticleFeature_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_DuplicateArticle_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_DuplicateArticle_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6753,7 +6121,7 @@ public final class ArticleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\230" +
+      "m/janknspank/database/extensions.proto\"\216" +
       "\004\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\032\n\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005titl" +
       "e\030\003 \001(\tB\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246" +
@@ -6765,28 +6133,26 @@ public final class ArticleProto {
       "word_count\030\014 \001(\003B\010\210\246\035\001\240\246\035\003\022 \n\007keyword\030\r " +
       "\003(\0132\017.ArticleKeyword\0222\n\021social_engagemen" +
       "t\030\016 \003(\0132\021.SocialEngagementB\004\240\246\035\003\022&\n\007feat" +
-      "ure\030\017 \003(\0132\017.ArticleFeatureB\004\240\246\035\003\022*\n\tdupl" +
-      "icate\030\020 \003(\0132\021.DuplicateArticleB\004\240\246\035\003:\023\212\265" +
-      "\030\017MongoDB.Article\"\325\001\n\016ArticleKeyword\022\035\n\007" +
-      "keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030" +
-      "\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250" +
-      "\246\035\001\022/\n\006source\030\004 \001(\0162\026.ArticleKeyword.Sou" +
-      "rce:\007UNKNOWN\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003N",
-      "LP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\"\347\001\n\020So" +
-      "cialEngagement\022-\n\004site\030\001 \001(\0162\026.SocialEng" +
-      "agement.Site:\007UNKNOWN\022\031\n\013share_count\030\002 \001" +
-      "(\003B\004\210\246\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nl" +
-      "ike_count\030\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023" +
-      "\n\013create_time\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000" +
-      "\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"\323\001\n\016ArticleF" +
-      "eature\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004" +
-      "type\030\004 \001(\0162\024.ArticleFeature.Type:\007UNKNOW" +
-      "N\022\022\n\nsimilarity\030\002 \001(\001\"b\n\004Type\022\013\n\007UNKNOWN",
-      "\020\000\022\021\n\rSERVES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020" +
-      "\002\022\022\n\016IMPROVES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020" +
-      "\004\"N\n\020DuplicateArticle\022 \n\006url_id\030\001 \001(\tB\020\210" +
-      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\nsimilarity\030\002 \001(\001B\004\210\246\035" +
-      "\001B$\n\024com.janknspank.protoB\014ArticleProto"
+      "ure\030\017 \003(\0132\017.ArticleFeatureB\004\240\246\035\003\022 \n\016dedu" +
+      "ping_stems\030\021 \003(\tB\010\230\246\035\004\240\246\035\003:\023\212\265\030\017MongoDB." +
+      "Article\"\325\001\n\016ArticleKeyword\022\035\n\007keyword\030\001 " +
+      "\001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035" +
+      "\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006sou" +
+      "rce\030\004 \001(\0162\026.ArticleKeyword.Source:\007UNKNO" +
+      "WN\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHY",
+      "PERLINK\020\002\022\014\n\010META_TAG\020\003\"\347\001\n\020SocialEngage" +
+      "ment\022-\n\004site\030\001 \001(\0162\026.SocialEngagement.Si" +
+      "te:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031" +
+      "\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030" +
+      "\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013create_t" +
+      "ime\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBO" +
+      "OK\020\001\022\013\n\007TWITTER\020\002\"\323\001\n\016ArticleFeature\022\034\n\n" +
+      "feature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004type\030\004 \001(\016" +
+      "2\024.ArticleFeature.Type:\007UNKNOWN\022\022\n\nsimil" +
+      "arity\030\002 \001(\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERV",
+      "ES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPRO" +
+      "VES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020\004B$\n\024com.j" +
+      "anknspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6798,7 +6164,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "Duplicate", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -6817,12 +6183,6 @@ public final class ArticleProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleFeature_descriptor,
               new java.lang.String[] { "FeatureId", "Type", "Similarity", });
-          internal_static_DuplicateArticle_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_DuplicateArticle_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_DuplicateArticle_descriptor,
-              new java.lang.String[] { "UrlId", "Similarity", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -6849,6 +6209,7 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -6863,11 +6224,6 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
           return registry;
         }
       };

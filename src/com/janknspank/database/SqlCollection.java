@@ -467,10 +467,18 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     }
     for (QueryOption.WhereLike whereLike :
         QueryOption.getList(options, QueryOption.WhereLike.class)) {
-      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
-          .append(whereLike.getFieldName())
-          .append(whereLike instanceof WhereNotLike ? " NOT" : "")
-          .append(" LIKE ?");
+      if (whereLike instanceof QueryOption.WhereLikeIgnoreCase
+          || whereLike instanceof QueryOption.WhereNotLikeIgnoreCase) {
+        sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+            .append("LOWER(").append(whereLike.getFieldName()).append(")")
+            .append(whereLike instanceof WhereNotLike ? " NOT" : "")
+            .append(" LIKE ?");
+      } else {
+        sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+        .append(whereLike.getFieldName())
+        .append(whereLike instanceof WhereNotLike ? " NOT" : "")
+        .append(" LIKE ?");
+      }
     }
     for (QueryOption.WhereNull whereNull :
         QueryOption.getList(options, QueryOption.WhereNull.class)) {
@@ -479,6 +487,24 @@ public class SqlCollection<T extends Message> extends Collection<T> {
           .append(" IS")
           .append(whereNull instanceof WhereNotNull ? " NOT" : "")
           .append(" NULL");
+    }
+    for (QueryOption.WhereInequality whereInequality :
+        QueryOption.getList(options, QueryOption.WhereInequality.class)) {
+      String comparatorStr;
+      if (whereInequality instanceof QueryOption.WhereGreaterThan) {
+        comparatorStr = ">";
+      } else if (whereInequality instanceof QueryOption.WhereGreaterThanOrEquals) {
+        comparatorStr = ">=";
+      } else if (whereInequality instanceof QueryOption.WhereLessThan) {
+        comparatorStr = "<";
+      } else if (whereInequality instanceof QueryOption.WhereLessThanOrEquals) {
+        comparatorStr = "<=";
+      } else {
+        throw new IllegalStateException("Unexpected inequality: " + whereInequality.getClass());
+      }
+      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+          .append(whereInequality.getFieldName())
+          .append(" " + comparatorStr + " ?");
     }
     return sql.toString();
   }
@@ -512,9 +538,18 @@ public class SqlCollection<T extends Message> extends Collection<T> {
       }
     }
     for (QueryOption.WhereLike whereLike :
-      QueryOption.getList(options, QueryOption.WhereLike.class)) {
-      values.add(whereLike.getValue());
+        QueryOption.getList(options, QueryOption.WhereLike.class)) {
+      if (whereLike instanceof QueryOption.WhereLikeIgnoreCase
+          || whereLike instanceof QueryOption.WhereNotLikeIgnoreCase) {
+        values.add(whereLike.getValue().toLowerCase());
+      } else {
+        values.add(whereLike.getValue());
+      }
     }
+    for (QueryOption.WhereInequality whereInequality :
+      QueryOption.getList(options, QueryOption.WhereInequality.class)) {
+    values.add(whereInequality.getValue());
+  }
     return values;
   }
 

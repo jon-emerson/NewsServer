@@ -13,27 +13,31 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.api.client.util.Lists;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Splitter;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.FeatureClassifier;
+import com.janknspank.classifier.Vector;
 import com.janknspank.common.DateParser;
 import com.janknspank.common.Logger;
 import com.janknspank.common.StringHelper;
 import com.janknspank.crawler.facebook.FacebookData;
 import com.janknspank.crawler.facebook.FacebookException;
 import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.nlp.KeywordFinder;
+import com.janknspank.nlp.KeywordUtils;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.DuplicateArticle;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
-import com.janknspank.rank.RankException;
 
 /**
  * ArticleCreator is a very high-level object in the crawling system: It's
@@ -63,6 +67,12 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+([A-Z][A-Za-z]+\\.com)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+[A-Z][A-Za-z\\s'']{2,25}$")};
+  private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
+
+  // It's a neat trick that stems of 4 characters are actually better than stems
+  // closer to full-word lengths.  Do note, that stems of 5 or 6 characters are
+  // generally worse.  You either want this value to be 4 or 10+.
+  private static final int MAX_STEM_LENGTH = 4;
 
   public static Article create(String urlId, DocumentNode documentNode)
       throws RequiredFieldException {
@@ -154,15 +164,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       e.printStackTrace();
     }
 
-    // Duplicates
-    try {
-      Iterable<DuplicateArticle> duplicates = FindDupes.findDupes(articleBuilder);
-      if (duplicates != null) {
-        articleBuilder.addAllDuplicate(duplicates);
-      }
-    } catch (RankException e) {
-      e.printStackTrace();
-    }
+    // Deduping.
+    articleBuilder.addAllDedupingStems(getDedupingStems(articleBuilder.getTitle()));
 
     // Done!
     return articleBuilder.build();
@@ -426,6 +429,19 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
   }
 
+  private static Set<String> getDedupingStems(String articleTitle) {
+    Set<String> stems = Sets.newHashSet();
+    for (String word : Splitter.on(WHITESPACE_PATTERN).split(articleTitle)) {
+      String stemWord = KeywordUtils.cleanKeyword(word).toLowerCase();
+      if (!stemWord.isEmpty() && !Vector.STOP_WORDS.contains(stemWord)) {
+        stems.add(stemWord.length() > MAX_STEM_LENGTH
+            ? stemWord.substring(0, MAX_STEM_LENGTH)
+            : stemWord);
+      }
+    }
+    return stems;
+  }
+
   /**
    * DO NOT CALL THIS DIRECTLY.
    * @see #getParagraphs(DocumentNode)
@@ -447,5 +463,18 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       throw new RequiredFieldException("No paragraphs found in " + documentNode.getUrl());
     }
     return paragraphs;
+  }
+
+  public static void main(String args[]) throws DatabaseSchemaException, DatabaseRequestException {
+    Iterable<Article> articles = Database.with(Article.class).get();
+    List<Article> articlesToUpdate = Lists.newArrayList();
+    int i = 0;
+    for (Article article : articles) {
+      Database.with(Article.class).set(article, "deduping_stems", getDedupingStems(article.getTitle()));
+      if (++i % 100 == 0) {
+        System.out.println(i);
+      }
+    }
+    Database.update(articlesToUpdate);
   }
 }

@@ -78,23 +78,33 @@ public class SqlCollectionTest {
         new QueryOption.WhereEquals("id", ImmutableList.of("X", "Y", "Z")),
         new QueryOption.WhereNotEquals("crawl_priority", "0"),
         new QueryOption.WhereNotLike("url", "%//twitter.com/%"),
+        new QueryOption.WhereNotLikeIgnoreCase("author", "Michael %"),
+        new QueryOption.WhereGreaterThanOrEquals("word_count", 50),
         new QueryOption.DescendingSort("published_time"),
         new QueryOption.Limit(5));
     assertEquals("SELECT * FROM Article "
         + "WHERE id IN (?,?,?) "
         + "AND crawl_priority NOT IN (?) "
         + "AND url NOT LIKE ? "
+        + "AND LOWER(author) NOT LIKE ? "
+        + "AND word_count >= ? "
         + "ORDER BY published_time DESC "
         + "LIMIT 5", statementCaptor.getValue());
     ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
-    verify(preparedStatement, atLeast(0)).setString(any(Integer.class), argumentCaptor.capture());
+    verify(preparedStatement, atLeast(0)).setString(any(Integer.class),
+        argumentCaptor.capture());
+    ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+    verify(preparedStatement, atLeast(0)).setInt(any(Integer.class),
+        integerArgumentCaptor.capture());
     List<String> arguments = argumentCaptor.getAllValues();
-    assertEquals(5, arguments.size());
+    assertEquals(6, arguments.size());
     assertEquals("X", arguments.get(0));
     assertEquals("Y", arguments.get(1));
     assertEquals("Z", arguments.get(2));
     assertEquals("0", arguments.get(3));
     assertEquals("%//twitter.com/%", arguments.get(4));
+    assertEquals("michael %", arguments.get(5));
+    assertEquals(50, (int) integerArgumentCaptor.getValue());
   }
 
   @Test
