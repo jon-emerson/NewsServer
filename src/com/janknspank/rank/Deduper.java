@@ -82,7 +82,7 @@ public class Deduper {
    * method should be used during getArticles, not the "dedupe" method below.
    */
   public static Iterable<Article> filterOutDupes(Iterable<Article> articles) {
-    // This cache saves us about 30ms when de-duping 100 articles.
+    // This cache saves us about 500ms when de-duping 100 articles.
     final Map<ArticleExtraction, Article> extractionMap = Maps.newHashMap();
     for (Article article : articles) {
       extractionMap.put(new ArticleExtraction(article), article);

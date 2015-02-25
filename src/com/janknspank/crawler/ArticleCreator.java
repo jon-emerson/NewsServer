@@ -429,25 +429,14 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
   }
 
-  /**
-   * Attempts to canonicalize input strings by removing common endings.
-   * This isn't the most amazing algorithm but it (hopefully) does the job.
-   */
-  private static String stem(String input) {
-    for (String suffix : new String[] { "ing", "s", "e" }) {
-      if (input.endsWith(suffix)) {
-        input = input.substring(0, input.length() - suffix.length());
-      }
-    }
-    return (input.length() > MAX_STEM_LENGTH) ? input.substring(0, MAX_STEM_LENGTH) : input;
-  }
-
   private static Set<String> getDedupingStems(String articleTitle) {
     Set<String> stems = Sets.newHashSet();
     for (String word : Splitter.on(WHITESPACE_PATTERN).split(articleTitle)) {
-      String stemWord = stem(KeywordUtils.cleanKeyword(word).toLowerCase());
+      String stemWord = KeywordUtils.cleanKeyword(word).toLowerCase();
       if (!stemWord.isEmpty() && !Vector.STOP_WORDS.contains(stemWord)) {
-        stems.add(stemWord);
+        stems.add(stemWord.length() > MAX_STEM_LENGTH
+            ? stemWord.substring(0, MAX_STEM_LENGTH)
+            : stemWord);
       }
     }
     return stems;
