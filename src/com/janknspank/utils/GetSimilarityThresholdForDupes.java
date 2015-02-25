@@ -3,96 +3,18 @@ package com.janknspank.utils;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
-import com.google.common.base.Splitter;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
-import com.janknspank.classifier.FeatureId;
-import com.janknspank.classifier.FeatureType;
-import com.janknspank.classifier.Vector;
-import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
-import com.janknspank.nlp.KeywordUtils;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleFeature;
+import com.janknspank.rank.Deduper;
 
+/**
+ * This is just a playground for trying different de-duping techniques.
+ */
 public class GetSimilarityThresholdForDupes {
-  private static int STEM_INTERSECTION_COUNT_MINIMUM = 3;
-
-  // Turns out a pretty large value gives us the best results, based on this
-  // score calculation:
-  // int score = positives * 10 - (5 * missedDupes + 2 * falseDupes);
-  private static final long STEM_INTERSECTION_PUBLISH_DATE_RANGE = TimeUnit.HOURS.toMillis(30);
-
-  private static final LoadingCache<Article, ArticleExtraction> EXTRACTION_CACHE =
-      CacheBuilder.newBuilder()
-          .maximumSize(1000)
-          .build(
-              new CacheLoader<Article, ArticleExtraction>() {
-                public ArticleExtraction load(Article article) {
-                  return new ArticleExtraction(article);
-                }
-              });
-  private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
-
-  private static class ArticleExtraction {
-    private final long publishTime;
-    private final Set<String> stems = Sets.newHashSet();
-    private final Set<Integer> top3Industries = Sets.newHashSet();
-
-    /**
-     * Attempts to canonicalize input strings by removing common endings.
-     * This isn't the most amazing algorithm but it (hopefully) does the job.
-     */
-    private static String stem(String input) {
-      for (String suffix : new String[] { "ing", "s", "e" }) {
-        if (input.endsWith(suffix)) {
-          input = input.substring(0, input.length() - suffix.length());
-        }
-      }
-      return input;
-    }
-
-    public ArticleExtraction(Article article) {
-      publishTime = article.getPublishedTime();
-
-      for (String component : new String[] { article.getTitle(), article.getDescription() }) {
-        for (String word : Splitter.on(WHITESPACE_PATTERN).split(component)) {
-          String stemWord = stem((KeywordUtils.cleanKeyword(word).toLowerCase()));
-          if (!Vector.STOP_WORDS.contains(stemWord)) {
-            stems.add(stemWord);
-          }
-        }
-      }
-      TopList<Integer, Double> topIndustryFeatures = new TopList<>(4);
-      for (ArticleFeature feature : article.getFeatureList()) {
-        if (FeatureId.fromId(feature.getFeatureId()).getFeatureType() == FeatureType.INDUSTRY) {
-          topIndustryFeatures.add(feature.getFeatureId(), feature.getSimilarity());
-        }
-      }
-      top3Industries.addAll(topIndustryFeatures.getKeys());
-    }
-
-    public boolean isDuplicate(ArticleExtraction extraction2) {
-      if (Math.abs(extraction2.publishTime - publishTime) > STEM_INTERSECTION_PUBLISH_DATE_RANGE) {
-        return false;
-      }
-      int stemIntersectionCount = Sets.intersection(stems, extraction2.stems).size();
-      int industryIntersectionCount =
-          Sets.intersection(top3Industries, extraction2.top3Industries).size();
-      return stemIntersectionCount >= STEM_INTERSECTION_COUNT_MINIMUM
-          && industryIntersectionCount >= 1;
-    }
-  }
-
   private static final List<Set<String>> DUPES = ImmutableList.<Set<String>>builder()
       .add(ImmutableSet.of(
           "http://techcrunch.com/2015/02/10/yelp-gulps-eat24/",
@@ -204,16 +126,7 @@ public class GetSimilarityThresholdForDupes {
           "http://www.washingtonpost.com/national/investors-purchasing-pawtucket-red-sox-may-move-the-team/2015/02/23/9b22fb70-bb8e-11e4-9dfb-03366e719af8_story.html"))
       .build();
 
-  private static boolean isDupe(Article article1, Article article2) {
-    try {
-      return EXTRACTION_CACHE.get(article1).isDuplicate(EXTRACTION_CACHE.get(article2));
-    } catch (ExecutionException e) {
-      return false;
-    }
-  }
-
-  public static int go(int countMin) throws Exception {
-    STEM_INTERSECTION_COUNT_MINIMUM = countMin;
+  public static final void main(String args[]) throws Exception {
     Iterable<String> allArticleUrls = Iterables.concat(DUPES);
     Map<String, Article> articles = ArticleCrawler.getArticles(allArticleUrls);
     int positives = 0;
@@ -229,14 +142,14 @@ public class GetSimilarityThresholdForDupes {
 
           if (dupeSet.contains(compareToUrl)) {
             // These articles should dupe.
-            if (isDupe(articles.get(currentUrl), articles.get(compareToUrl))) {
+            if (Deduper.isDupe(articles.get(currentUrl), articles.get(compareToUrl))) {
               positives++;
             } else {
               missedDupes++;
             }
           } else {
             // These articles should not dupe.
-            if (isDupe(articles.get(currentUrl), articles.get(compareToUrl))) {
+            if (Deduper.isDupe(articles.get(currentUrl), articles.get(compareToUrl))) {
               falseDupes++;
             } else {
               negatives++;
@@ -245,7 +158,6 @@ public class GetSimilarityThresholdForDupes {
         }
       }
     }
-    System.out.println("** COUNT: " + countMin);
     System.out.println("Positives = " + positives);
     System.out.println("Negatives = " + negatives);
     System.out.println("False dupes = " + falseDupes);
@@ -253,19 +165,5 @@ public class GetSimilarityThresholdForDupes {
 
     int score = positives * 10 - (5 * missedDupes + 2 * falseDupes);
     System.out.println("Score: " + score);
-    return score;
-  }
-
-  public static final void main(String args[]) throws Exception {
-    int bestScore = Integer.MIN_VALUE;
-    int bestCount = 0;
-    for (int i = 2; i < 7; i++) {
-      int score = go(i);
-      if (score >= bestScore) {
-        bestScore = score;
-        bestCount = i;
-      }
-    }
-    System.out.println("BEST MINIMUM STEM VALUE: " + bestCount);
   }
 }

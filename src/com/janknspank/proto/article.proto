@@ -76,7 +76,11 @@ message Article {
     (client_serialization) = EXCLUDE
   ];
 
-  repeated DuplicateArticle duplicate = 16 [
+  // Lower-cased 4-letter stems from the article's title.  Weirdly enough
+  // if you compare these across 2 articles, if there's at least 2 matches,
+  // they strongly tend to be duplicates.
+  repeated string deduping_stems = 17 [
+    (string_length) = 4,
     (client_serialization) = EXCLUDE
   ];
 }
@@ -162,17 +166,4 @@ message ArticleFeature {
   // near 1 means this article is extremely relevant to the given feature.
   // A score above 0.80 means its relevance is in the top 20% of articles.
   optional double similarity = 2;
-}
-
-message DuplicateArticle {
-  optional string url_id = 1 [
-    (required) = YES,
-    (storage_method) = PRIMARY_KEY,
-    (string_length) = 24,
-    (string_charset) = LATIN1
-  ];
-
-  optional double similarity = 2 [
-    (required) = YES
-  ];
 }
