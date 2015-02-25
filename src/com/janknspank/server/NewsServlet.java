@@ -193,7 +193,7 @@ public class NewsServlet extends HttpServlet {
    * Returns the base filename for resources related to this servlet.  E.g.
    * if this servlet is named HappyServlet, this method would return "happy".
    */
-  protected String getImpliedResourceName() {
+  protected String getResourceName() {
     String name = this.getClass().getSimpleName();
     if (name.endsWith("Servlet")) {
       return name.substring(0, name.length() - "Servlet".length()).toLowerCase();
@@ -213,7 +213,7 @@ public class NewsServlet extends HttpServlet {
       }
     }
     SoyFileSet sfs = sfsBuilder.build();
-    SoyTofu tofu = sfs.compileToTofu().forNamespace("news." + getImpliedResourceName());
+    SoyTofu tofu = sfs.compileToTofu().forNamespace("news." + getResourceName());
     return tofu;
   }
 

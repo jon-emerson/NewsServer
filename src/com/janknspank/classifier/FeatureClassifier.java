@@ -27,14 +27,14 @@ public class FeatureClassifier {
 
   public static Iterable<ArticleFeature> classify(ArticleOrBuilder article)
       throws ClassifierException {
-    // For each FeatureType, find the top 10 matches.
+    // For each FeatureType, find the top 5 matches.
     final Map<FeatureType, TopList<ArticleFeature, Double>> topArticleFeaturesMap =
         Maps.newHashMap();
     for (Feature feature : Feature.getAllFeatures()) {
       TopList<ArticleFeature, Double> topArticleFeatures =
           topArticleFeaturesMap.get(feature.getFeatureId().getFeatureType());
       if (topArticleFeatures == null) {
-        topArticleFeatures = new TopList<>(10);
+        topArticleFeatures = new TopList<>(5);
         topArticleFeaturesMap.put(feature.getFeatureId().getFeatureType(), topArticleFeatures);
       }
 

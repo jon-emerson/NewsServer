@@ -57,7 +57,7 @@ public class VectorFeatureCreator {
 
   private static synchronized List<Vector> getDocumentVectors() throws DatabaseSchemaException {
     if (__DOCUMENT_VECTORS.isEmpty()) {
-      for (Article article : Database.with(Article.class).get(new QueryOption.Limit(5000))) {
+      for (Article article : Database.with(Article.class).get(new QueryOption.Limit(15000))) {
         __DOCUMENT_VECTORS.add(Vector.fromArticle(article));
       }
     }

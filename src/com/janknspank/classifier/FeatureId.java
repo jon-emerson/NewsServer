@@ -175,11 +175,11 @@ public enum FeatureId {
   MANUAL_HEURISTIC_FUNDRAISING(30002, FeatureType.MANUAL_HEURISTIC,
       "Hard-coded search term checks for whether an article is about a funding round"),
   TOPIC_SPORTS(40000, FeatureType.TOPIC,
-      "Related to sports"),
+      "Sports"),
   TOPIC_ENTERTAINMENT(40001, FeatureType.TOPIC,
-      "Related to entertainment: Movies, music, TV shows, Broadway, etc."),
+      "Entertainment: Movies, music, TV shows, Broadway, etc."),
   TOPIC_POLITICS(40002, FeatureType.TOPIC,
-      "Related to politics, both local, national and international.");
+      "Politics, both local, national and international.");
 
   private final int id;
   private final FeatureType featureType;

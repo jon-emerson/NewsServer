@@ -2,18 +2,21 @@ package com.janknspank.server;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
+import com.google.api.client.util.Lists;
+import com.google.common.base.Function;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.rank.NeuralNetworkScorer;
 import com.janknspank.server.soy.ArticleSoy;
 
 public class FeatureArticlesServlet extends StandardServlet {
@@ -28,9 +31,9 @@ public class FeatureArticlesServlet extends StandardServlet {
   private FeatureId getFeatureId(HttpServletRequest req) throws RequestException {
     URL url;
     try {
-      url = new URL(req.getRequestURI());
+      url = new URL(req.getRequestURL().toString());
     } catch (MalformedURLException e) {
-      throw new RequestException("Invalid URL: " + req.getRequestURI());
+      throw new RequestException("Invalid URL: " + req.getRequestURL());
     }
 
     String path = url.getPath();
@@ -53,6 +56,11 @@ public class FeatureArticlesServlet extends StandardServlet {
     return null;
   }
 
+  @Override
+  protected String getResourceName() {
+    return "viewfeed";
+  }
+
   /**
    * Returns any Soy data necessary for rendering the .main template for this
    * servlet's Soy page.
@@ -64,12 +72,25 @@ public class FeatureArticlesServlet extends StandardServlet {
     if (featureId == null) {
       throw new RequestException("Could not determine feature for request");
     }
-//
-//    final TopList<Article, Double> rankedArticlesAndScores =
-//        Articles.getFeatureArticlesAndScores(featureId, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
-//    return new SoyMapData(
-//        "sessionKey", this.getSession(req).getSessionKey(),
-//        "articles", ArticleSoy.toSoyListData(rankedArticlesAndScores));
-    throw new RequestException("Not implemented yet, try back later!!");
+
+    final TopList<Article, Double> rankedArticlesAndScores =
+        Articles.getArticlesForFeature(featureId, NUM_RESULTS);
+    List<Article> articles = Lists.newArrayList();
+    articles.addAll(rankedArticlesAndScores.getKeys());
+    articles.sort(new Comparator<Article>() {
+      @Override
+      public int compare(Article o1, Article o2) {
+        return -Long.compare(o1.getPublishedTime(), o2.getPublishedTime());
+      }
+    });
+    return new SoyMapData(
+        "articles", ArticleSoy.toSoyListData(
+            articles,
+            new Function<Article, Double>() {
+              @Override
+              public Double apply(Article article) {
+                return rankedArticlesAndScores.getValue(article);
+              }
+            }));
   }
 }

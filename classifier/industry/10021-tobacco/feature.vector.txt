@@ -907,11 +907,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "App"
-  frequency: 1
-  document_occurences: 1
-}
-word_frequency {
   word: "Suspect"
   frequency: 1
   document_occurences: 1
@@ -5542,11 +5537,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "Firm"
-  frequency: 2
-  document_occurences: 2
-}
-word_frequency {
   word: "Throat"
   frequency: 2
   document_occurences: 1
@@ -8955,11 +8945,6 @@ word_frequency {
   word: "Amplified"
   frequency: 1
   document_occurences: 1
-}
-word_frequency {
-  word: "New"
-  frequency: 141
-  document_occurences: 18
 }
 word_frequency {
   word: "Choice"

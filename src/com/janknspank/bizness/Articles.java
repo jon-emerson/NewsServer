@@ -13,6 +13,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
@@ -34,6 +35,31 @@ public class Articles {
         new QueryOption.DescendingSort("published_time"),
         new QueryOption.WhereEquals("keyword.keyword", keywords),
         new QueryOption.Limit(limit));
+  }
+
+  public static TopList<Article, Double> getArticlesForFeature(FeatureId featureId, int limit)
+      throws DatabaseSchemaException {
+    TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
+    for (Article article : Database.with(Article.class).get(
+        new QueryOption.DescendingSort("published_time"),
+        new QueryOption.WhereEqualsNumber("feature.feature_id", featureId.getId()),
+        new QueryOption.Limit(limit * 20))) {
+      double similarity = 0;
+      for (ArticleFeature feature : article.getFeatureList()) {
+        if (feature.getFeatureId() == featureId.getId()) {
+          similarity = feature.getSimilarity();
+          break;
+        }
+      }
+      goodArticles.add(article, similarity);
+    }
+    TopList<Article, Double> bestArticles = new TopList<>(limit);
+    for (Article article : Deduper.filterOutDupes(goodArticles)) {
+      // Include the social score in the ranking here, since we're not using a
+      // neural network for ranking, so otherwise it wouldn't be considered.
+      bestArticles.add(article, goodArticles.getValue(article));
+    }
+    return bestArticles;
   }
 
   /**
@@ -72,7 +98,7 @@ public class Articles {
   /**
    * Used for dupe detection threshold testing.
    */
-  public static Iterable<Article> getArticlesByFeatures(Iterable<FeatureId> featureIds, int limit)
+  private static Iterable<Article> getArticlesByFeatures(Iterable<FeatureId> featureIds, int limit)
       throws DatabaseSchemaException{
     return Database.with(Article.class).get(
         new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(featureIds,

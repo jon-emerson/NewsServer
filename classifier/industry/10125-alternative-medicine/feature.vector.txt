@@ -1212,11 +1212,6 @@ word_frequency {
   document_occurences: 1
 }
 word_frequency {
-  word: "New"
-  frequency: 75
-  document_occurences: 6
-}
-word_frequency {
   word: "marijuana"
   frequency: 2
   document_occurences: 1

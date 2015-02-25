@@ -74,6 +74,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>FeatureArticlesServlet</servlet-name>
+    <servlet-class>com.janknspank.server.FeatureArticlesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FeatureArticlesServlet</servlet-name>
+    <url-pattern>/news/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>GetArticleServlet</servlet-name>
     <servlet-class>com.janknspank.server.GetArticleServlet</servlet-class>
   </servlet>
