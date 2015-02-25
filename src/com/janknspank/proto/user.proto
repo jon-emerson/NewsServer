@@ -121,7 +121,7 @@ message UserIndustry {
   enum Source {
     UNKNOWN_SOURCE = 0;
     USER = 1; // Explicitly added by the user.
-    TOMBSTONE = 2; // Tombstone, represents an interest the user explicitly DELETED.
+    TOMBSTONE = 2; // Tombstone, represents an industry the user explicitly DELETED.
     LINKED_IN_PROFILE = 3; // Phone address book.
   }
   optional Source source = 2 [
