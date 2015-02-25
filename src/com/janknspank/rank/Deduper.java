@@ -1,14 +1,14 @@
 package com.janknspank.rank;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.FeatureId;
@@ -32,16 +32,6 @@ public class Deduper {
   // score calculation:
   // int score = positives * 10 - (5 * missedDupes + 2 * falseDupes);
   private static final long STEM_INTERSECTION_PUBLISH_DATE_RANGE = TimeUnit.HOURS.toMillis(30);
-
-  private static final LoadingCache<Article, ArticleExtraction> EXTRACTION_CACHE =
-      CacheBuilder.newBuilder()
-          .maximumSize(1000)
-          .build(
-              new CacheLoader<Article, ArticleExtraction>() {
-                public ArticleExtraction load(Article article) {
-                  return new ArticleExtraction(article);
-                }
-              });
 
   /**
    * Helper class that contains extracted values from an article that are
@@ -82,11 +72,7 @@ public class Deduper {
   }
 
   public static boolean isDupe(Article article1, Article article2) {
-    try {
-      return EXTRACTION_CACHE.get(article1).isDuplicate(EXTRACTION_CACHE.get(article2));
-    } catch (ExecutionException e) {
-      return false;
-    }
+    return new ArticleExtraction(article1).isDuplicate(new ArticleExtraction(article2));
   }
 
   /**
@@ -96,26 +82,50 @@ public class Deduper {
    * method should be used during getArticles, not the "dedupe" method below.
    */
   public static Iterable<Article> filterOutDupes(Iterable<Article> articles) {
-    List<Article> nonDupeArticles = Lists.newArrayList();
+    // This cache saves us about 30ms when de-duping 100 articles.
+    final Map<ArticleExtraction, Article> extractionMap = Maps.newHashMap();
     for (Article article : articles) {
-      for (int i = 0; i < nonDupeArticles.size(); i++) {
-        Article nonDupeArticle = nonDupeArticles.get(i);
-        if (isDupe(article, nonDupeArticle)) {
+      extractionMap.put(new ArticleExtraction(article), article);
+    }
+
+    List<ArticleExtraction> nonDupeExtractions = Lists.newArrayList();
+    long startMillis = System.currentTimeMillis();
+    for (ArticleExtraction extraction : extractionMap.keySet()) {
+      boolean foundDupe = false;
+      for (int i = 0; i < nonDupeExtractions.size(); i++) {
+        ArticleExtraction nonDupeExtraction = nonDupeExtractions.get(i);
+        if (extraction.isDuplicate(nonDupeExtraction)) {
           // Choose the one with the higher social score.
-          SocialEngagement engagement = SocialEngagements.getForArticle(article, Site.FACEBOOK);
+          SocialEngagement engagement =
+              SocialEngagements.getForArticle(extractionMap.get(extraction), Site.FACEBOOK);
           SocialEngagement nonDupeEngagement =
-              SocialEngagements.getForArticle(nonDupeArticle, Site.FACEBOOK);
+              SocialEngagements.getForArticle(extractionMap.get(nonDupeExtraction), Site.FACEBOOK);
           if (nonDupeEngagement == null
               || (engagement != null
                   && engagement.getShareScore() > nonDupeEngagement.getShareScore())) {
             // The new article is more socially valuable, use it instead.
-            nonDupeArticles.set(i, article);
+            nonDupeExtractions.set(i, extraction);
+            System.out.println("Dupe removed: " + extractionMap.get(nonDupeExtraction).getTitle()
+                + " (Better article: " + extractionMap.get(extraction).getTitle() + ")");
+          } else {
+            System.out.println("Dupe removed: " + extractionMap.get(extraction).getTitle()
+                + " (Better article: " + extractionMap.get(nonDupeExtraction).getTitle() + ")");
           }
-        } else {
-          nonDupeArticles.add(article);
+          foundDupe = true;
+          break;
         }
       }
+      if (!foundDupe) {
+        nonDupeExtractions.add(extraction);
+      }
     }
-    return nonDupeArticles;
+    System.out.println("Duplicates calculated in "
+        + (System.currentTimeMillis() - startMillis) + "ms");
+    return Iterables.transform(nonDupeExtractions, new Function<ArticleExtraction, Article>() {
+      @Override
+      public Article apply(ArticleExtraction extraction) {
+        return extractionMap.get(extraction);
+      }
+    });
   }
 }
