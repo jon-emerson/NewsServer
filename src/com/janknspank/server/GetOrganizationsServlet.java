@@ -33,7 +33,7 @@ public class GetOrganizationsServlet extends StandardServlet {
 
     if (searchString != null) {
       orgs = Database.with(Entity.class).get(
-          new QueryOption.WhereLikeIgnoreCase("keyword", "%" + searchString + "%"),
+          new QueryOption.WhereLikeIgnoreCase("keyword", searchString + "%"),
           new QueryOption.WhereEquals("type", "org"),
           new QueryOption.Limit(20));
     } else {
