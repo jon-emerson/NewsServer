@@ -29,6 +29,7 @@ import com.janknspank.database.QueryOption.WhereNotLike;
 import com.janknspank.database.QueryOption.WhereNotNull;
 import com.janknspank.database.QueryOption.WhereNull;
 import com.janknspank.database.QueryOption.WhereOption;
+import com.janknspank.database.QueryOption.WhereInequality;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -214,6 +215,10 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     }
     for (WhereLike whereLike :
         QueryOption.getList(options, WhereLike.class)) {
+      int flags =
+          (whereLike instanceof QueryOption.WhereLikeIgnoreCase
+              || whereLike instanceof QueryOption.WhereNotLikeIgnoreCase) ?
+          Pattern.CASE_INSENSITIVE : 0;
       String fieldName = getFieldName(whereLike);
       String escapedValue = Pattern.quote(whereLike.getValue()).substring(2);
       escapedValue = escapedValue.substring(0, escapedValue.length() - 2);
@@ -228,9 +233,10 @@ public class MongoCollection<T extends Message> extends Collection<T> {
               + "wildcard is at the end of the match.");
         }
         dbObject.put(fieldName,
-            Pattern.compile("(?!" + escapedValue.substring(0, escapedValue.length() - 1) + ").*"));
+            Pattern.compile("(?!" + escapedValue.substring(0, escapedValue.length() - 1) + ").*",
+                flags));
       } else {
-        dbObject.put(fieldName, Pattern.compile(escapedValue.replaceAll("%", ".*")));
+        dbObject.put(fieldName, Pattern.compile(escapedValue.replaceAll("%", ".*"), flags));
       }
     }
     for (WhereNull whereNull :
@@ -238,6 +244,23 @@ public class MongoCollection<T extends Message> extends Collection<T> {
       String fieldName = getFieldName(whereNull);
       dbObject.put(fieldName,
           new BasicDBObject("$exists", whereNull instanceof WhereNotNull));
+    }
+    for (WhereInequality whereInequality :
+        QueryOption.getList(options, WhereInequality.class)) {
+      String fieldName = getFieldName(whereInequality);
+      String comparatorStr;
+      if (whereInequality instanceof QueryOption.WhereGreaterThan) {
+        comparatorStr = "$gt";
+      } else if (whereInequality instanceof QueryOption.WhereGreaterThanOrEquals) {
+        comparatorStr = "$gte";
+      } else if (whereInequality instanceof QueryOption.WhereLessThan) {
+        comparatorStr = "$lt";
+      } else if (whereInequality instanceof QueryOption.WhereLessThanOrEquals) {
+        comparatorStr = "$lte";
+      } else {
+        throw new IllegalStateException("Unexpected inequality: " + whereInequality.getClass());
+      }
+      dbObject.put(fieldName, new BasicDBObject(comparatorStr, whereInequality.getValue()));
     }
     return dbObject;
   }

@@ -65,8 +65,20 @@ public class QueryOption {
     }
   }
 
+  public static class WhereLikeIgnoreCase extends WhereLike {
+    public WhereLikeIgnoreCase(String fieldName, String value) {
+      super(fieldName, value);
+    }
+  }
+
   public static class WhereNotLike extends WhereLike {
     public WhereNotLike(String fieldName, String value) {
+      super(fieldName, value);
+    }
+  }
+
+  public static class WhereNotLikeIgnoreCase extends WhereNotLike {
+    public WhereNotLikeIgnoreCase(String fieldName, String value) {
       super(fieldName, value);
     }
   }
@@ -173,6 +185,47 @@ public class QueryOption {
 
     public WhereNotEqualsNumber(String fieldName, Iterable<Number> values) {
       super(fieldName, values);
+    }
+  }
+
+  public abstract static class WhereInequality extends WhereOption {
+    private final Number value;
+
+    public WhereInequality(String fieldName, Number value) {
+      super(fieldName);
+      this.value = value;
+    }
+
+    public Number getValue() {
+      return value;
+    }
+
+    public int getFieldCount() {
+      return 1;
+    }
+  }
+
+  public final static class WhereGreaterThan extends WhereInequality {
+    public WhereGreaterThan(String fieldName, Number value) {
+      super(fieldName, value);
+    }
+  }
+
+  public final static class WhereGreaterThanOrEquals extends WhereInequality {
+    public WhereGreaterThanOrEquals(String fieldName, Number value) {
+      super(fieldName, value);
+    }
+  }
+
+  public final static class WhereLessThan extends WhereInequality {
+    public WhereLessThan(String fieldName, Number value) {
+      super(fieldName, value);
+    }
+  }
+
+  public final static class WhereLessThanOrEquals extends WhereInequality {
+    public WhereLessThanOrEquals(String fieldName, Number value) {
+      super(fieldName, value);
     }
   }
 
