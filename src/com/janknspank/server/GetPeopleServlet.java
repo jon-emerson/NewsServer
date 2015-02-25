@@ -21,14 +21,7 @@ public class GetPeopleServlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, RequestException {
-    String searchString;
-    try {
-      searchString = URLDecoder.decode(getParameter(req, "contains"), "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-      throw new RequestException("Unable to decode 'contains' parameter: " + e.getMessage(), e);
-    }
-
+    String searchString = getParameter(req, "contains");
     Iterable<Entity> people; 
 
     if (searchString != null) {
