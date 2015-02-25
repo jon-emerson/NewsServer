@@ -17,7 +17,7 @@ public class GetOrganizationsServlet extends StandardServlet {
 
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DatabaseSchemaException, RequestException {
+      throws DatabaseSchemaException {
     String searchString  = getParameter(req, "contains");
     Iterable<Entity> orgs; 
 
