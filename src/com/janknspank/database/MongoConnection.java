@@ -42,4 +42,13 @@ public class MongoConnection {
   public static DB getDatabase() throws DatabaseSchemaException {
     return getClient().getDB(MONGO_DATABASE);
   }
+
+  /**
+   * This command temporarily locks the database to reclaim space used by
+   * previously deleted objects.  We should try not to call it too regularly,
+   * but considering we're quota-constrained, we have to call it sometimes.
+   */
+  public static void repairDatabase() throws DatabaseSchemaException {
+    getDatabase().command("repairDatabase");
+  }
 }

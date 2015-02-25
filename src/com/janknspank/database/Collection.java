@@ -300,4 +300,9 @@ public abstract class Collection<T extends Message> {
    */
   public abstract <U extends Object> void push(T message, String fieldName, Iterable<U> values)
       throws DatabaseSchemaException, DatabaseRequestException;
+
+  /**
+   * Returns the number of rows/documents in this collection.
+   */
+  public abstract long size() throws DatabaseSchemaException;
 }

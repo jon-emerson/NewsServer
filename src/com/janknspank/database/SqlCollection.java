@@ -591,8 +591,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     } catch (MySQLSyntaxErrorException e) {
       throw new DatabaseSchemaException("Invalid query: " + sql, e);
     } catch (SQLException e) {
-      throw new DatabaseSchemaException("Could not execute get: " + e.getMessage()
-          + ": " + e.getMessage(), e);
+      throw new DatabaseSchemaException("Could not execute get: " + e.getMessage(), e);
     } finally {
       if (statement != null) {
         try {
@@ -739,5 +738,33 @@ public class SqlCollection<T extends Message> extends Collection<T> {
   public <U extends Object> void push(T message, String fieldName, Iterable<U> values)
       throws DatabaseSchemaException, DatabaseRequestException {
     throw new UnsupportedOperationException();
+  }
+
+  /**
+   * Returns the number of rows in this table.
+   */
+  @SuppressWarnings("resource")
+  public long size() throws DatabaseSchemaException {
+    PreparedStatement statement = null;
+    ResultSet results = null;
+    try {
+      statement = getConnection().prepareStatement("SELECT count(*) FROM " + this.getTableName());
+      results = statement.executeQuery();
+      while (results.next()) {
+        return results.getLong(1);
+      }
+    } catch (SQLException e) {
+      throw new DatabaseSchemaException("Could not find collection size: " + e.getMessage(), e);
+    } finally {
+      try {
+        if (statement != null) {
+          statement.close();
+        }
+        if (results != null) {
+          results.close();
+        }
+      } catch (SQLException e) {}
+    }
+    throw new DatabaseSchemaException("Failed to get collection size");
   }
 }

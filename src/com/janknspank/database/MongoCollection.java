@@ -442,6 +442,13 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     }
   }
 
+  /**
+   * Returns the number of documents in this collection.
+   */
+  public long size() throws DatabaseSchemaException {
+    return getDatabase().getCollection(this.getTableName()).count();
+  }
+
   @Override
   public String toString() {
     try {

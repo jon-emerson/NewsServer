@@ -1,0 +1,28 @@
+root_domain: "medicalnewstoday.com"
+start_url: "http://www.medicalnewstoday.com"
+start_url: "http://www.medicalnewstoday.com/categories/veterinary"
+path_blacklist {
+  needle: "/account"
+}
+path_blacklist {
+  needle: "/info/"
+}
+paragraph_selector: "div[itemprop=\"articleBody\"] p"
+paragraph_selector: "div[itemprop=\"articleBody\"] h2"
+article_url_pattern {
+  path_regex: "\\/(releases|articles)\\/[0-9]{5,7}\\.php$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.medicalnewstoday.com/releases/282871.php"
+    article_url: "http://www.medicalnewstoday.com/articles/289863.php"
+    article_url: "http://www.medicalnewstoday.com/articles/289924.php"
+    article_url: "http://www.medicalnewstoday.com/releases/289895.php"
+    article_url: "http://www.medicalnewstoday.com/articles/289604.php"
+    non_article_url: "http://www.medicalnewstoday.com/submit-an-article"
+    non_article_url: "http://www.medicalnewstoday.com/categories/veterinary"
+    non_article_url: "http://www.medicalnewstoday.com/categories/cervical_cancer"
+    non_article_url: "http://www.medicalnewstoday.com/opinions/183335"
+    non_article_url: "http://www.medicalnewstoday.com/categories/multiple_sclerosis"
+  }
+}

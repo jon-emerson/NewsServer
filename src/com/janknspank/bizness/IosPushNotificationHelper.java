@@ -10,6 +10,7 @@ import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -245,8 +246,8 @@ public class IosPushNotificationHelper {
     return data;
   }
 
-  public static final void main(String args[]) throws DatabaseSchemaException {
+  public static final void main(String args[]) throws DatabaseSchemaException, InterruptedException, ExecutionException {
     IosPushNotificationHelper.getInstance().sendNewArticleViaFuture(
-        Database.with(Article.class).getFirst(), Users.getByEmail("panaceaa@gmail.com"));
+        Database.with(Article.class).getFirst(), Users.getByEmail("panaceaa@gmail.com")).get();
   }
 }

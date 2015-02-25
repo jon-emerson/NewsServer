@@ -1,0 +1,28 @@
+root_domain: "sciencedaily.com"
+start_url: "http://www.sciencedaily.com"
+start_url: "http://www.sciencedaily.com/news/health_medicine/"
+start_url: "http://www.sciencedaily.com/news/plants_animals/"
+start_url: "http://www.sciencedaily.com/news/plants_animals/veterinary_medicine/"
+subdomain_blacklist: "m.sciencedaily.com"
+path_blacklist {
+  needle: "/videos/"
+}
+paragraph_selector: "#story > p"
+paragraph_selector: "#text > p"
+article_url_pattern {
+  path_regex: "^\\/releases\\/20[0-9]{2}\\/[0-1][0-9]\\/.*\\.htm$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.sciencedaily.com/releases/2015/02/150225122644.htm"
+    article_url: "http://www.sciencedaily.com/releases/2015/02/150225132112.htm"
+    article_url: "http://www.sciencedaily.com/releases/2007/06/070605120939.htm"
+    article_url: "http://www.sciencedaily.com/releases/2015/02/150225094420.htm"
+    article_url: "http://www.sciencedaily.com/releases/2015/02/150224192703.htm"
+    non_article_url: "http://www.sciencedaily.com/awards.htm"
+    non_article_url: "http://www.sciencedaily.com/news/matter_energy/nanotechnology/"
+    non_article_url: "http://www.sciencedaily.com/news/plants_animals/veterinary_medicine/"
+    non_article_url: "http://www.sciencedaily.com/news/top/environment/"
+    non_article_url: "http://www.sciencedaily.com/news/fossils_ruins/ancient_civilizations/"
+  }
+}

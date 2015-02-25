@@ -15,7 +15,7 @@ import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.crawler.UrlWhitelist;
 import com.janknspank.proto.ArticleProto.Article;
 
-public class InspectVector {  
+public class InspectVector {
   public static void printTFIDFVectorForUrl(String url) 
       throws BiznessException, ClassifierException {
     Article article = ArticleCrawler.getArticles(ImmutableList.of(url)).get(url);
