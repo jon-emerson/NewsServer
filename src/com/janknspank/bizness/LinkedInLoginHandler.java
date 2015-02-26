@@ -306,7 +306,7 @@ public class LinkedInLoginHandler {
    */
   private Iterable<UserIndustry> getUpdatedUserIndustries(UserOrBuilder user,
       DocumentNode linkedInProfileDocument) {
-    UserIndustry linkedInProfileIndustry = getLinkedInProfileIndustry(linkedInProfileDocument);
+    final UserIndustry linkedInProfileIndustry = getLinkedInProfileIndustry(linkedInProfileDocument);
     // If the user already has the industry from his linkedin profile added,
     // do nothing - Leave it as it, it's OK!  If not, append it.
     if (Iterables.any(user.getIndustryList(), new Predicate<UserIndustry>() {
