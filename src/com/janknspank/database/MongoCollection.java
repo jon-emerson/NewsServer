@@ -443,10 +443,11 @@ public class MongoCollection<T extends Message> extends Collection<T> {
   }
 
   /**
-   * Returns the number of documents in this collection.
+   * Returns the number of documents in this collection that match the passed
+   * QueryOptions.
    */
-  public long size() throws DatabaseSchemaException {
-    return getDatabase().getCollection(this.getTableName()).count();
+  public long getSize(QueryOption.WhereOption... whereOptions) throws DatabaseSchemaException {
+    return getDatabase().getCollection(this.getTableName()).count(getQueryObject(whereOptions));
   }
 
   @Override

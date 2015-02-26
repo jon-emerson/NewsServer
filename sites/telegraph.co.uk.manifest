@@ -23,6 +23,9 @@ path_blacklist {
   needle: "/finance/investor/"
 }
 path_blacklist {
+  needle: "/finance/property/pictures/"
+}
+path_blacklist {
   needle: "/financialservices/"
 }
 path_blacklist {
@@ -33,6 +36,10 @@ path_blacklist {
 }
 path_blacklist {
   needle: "/sponsored/"
+}
+path_blacklist {
+  needle: "/picturegalleries/"
+  location: CONTAINS
 }
 path_blacklist {
   needle: "Weather-forecast.html"
@@ -47,7 +54,6 @@ article_url_pattern {
 test_instructions {
   article_url_detector_checks {
     article_url: "http://www.telegraph.co.uk/finance/comment/11413173/Greek-drama-puts-eurozone-at-risk.html"
-    article_url: "http://www.telegraph.co.uk/finance/property/pictures/11355816/Beautiful-homes-in-Britains-national-parks-starting-at-300000.html"
     article_url: "http://www.telegraph.co.uk/finance/businessclub/technology/11410369/Professional-gamers-could-earn-as-much-as-Premier-League-stars.html"
     article_url: "http://www.telegraph.co.uk/news/religion/11412153/Locating-Lucifer-has-become-the-devil-of-a-job.html"
     article_url: "http://www.telegraph.co.uk/women/womens-life/11393482/AntiSelfieDay-Rediscover-your-personality-this-Valentines-Day.html"

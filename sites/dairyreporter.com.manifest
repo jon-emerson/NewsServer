@@ -1,0 +1,43 @@
+root_domain: "dairyreporter.com"
+start_url: "http://www.dairyreporter.com"
+paragraph_selector: "[itemprop=\"articleBody\"] p"
+article_url_pattern {
+  path_regex: "^\\/(?!(smartlead|Events|Publications))[^\\/]+\\/[^\\/]+\\/[^\\/]+"
+}
+article_url_pattern {
+  path_regex: "^\\/(Commodities|Manufacturers|Markets|Regulation-Safety|R-D|Ingredients|Processing-Packaging)\\/[^\\/]+"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.dairyreporter.com/Big-Brands/FrieslandCampina/Dutch-dairy-sector-has-a-lot-of-knowledge-to-share-with-China"
+    article_url: "http://www.dairyreporter.com/Manufacturers/Dairy-director-fined-18k"
+    article_url: "http://www.dairyreporter.com/Manufacturers/Fairlife-in-every-fridge-in-America!-CEO-predicts-rebirth-of-US-milk"
+    article_url: "http://www.dairyreporter.com/Markets/British-taxman-vows-to-treat-struggling-dairy-farmers-sympathetically"
+    article_url: "http://www.dairyreporter.com/Regulation-Safety/Russia-suspends-import-of-Polish-cheese-products-after-violations"
+    article_url: "http://www.dairyreporter.com/Sectors/Fresh-Milk/French-dairy-Danone-forecasts-difficult-and-unstable-year-ahead"
+    article_url: "http://www.dairyreporter.com/Sectors/Nutritionals/Formula-fed-infants-exposed-to-greater-levels-of-arsenic-Study"
+    article_url: "http://www.dairyreporter.com/Sectors/Yogurt-and-Desserts/French-dairy-Danone-forecasts-difficult-and-unstable-year-ahead"
+    article_url: "http://www.dairyreporter.com/Trends/Emerging-Markets/Nestle-Ecolean-Olper-s-rebranding-in-Pakistan"
+    article_url: "http://www.dairyreporter.com/Trends/Pricing-Pressures/Arla-Foods-opts-not-to-issue-2015-forecast-after-volatile-2014"
+    article_url: "http://www.dairyreporter.com/Trends/Smart-Packaging/Wendel-to-acquire-Constantia-Flexibles-for-2.3bn"
+    article_url: "http://www.dairyreporter.com/Trends/Sustainability/Valio-and-Tetra-Pak-World-first-100-renewable-carton"
+    article_url: "http://www.dairyreporter.com/Commodities/Milk-quota-abolition-will-leave-GDT-more-attractive-to-dairies"
+    article_url: "http://www.dairyreporter.com/Commodities/Russian-sanctions-could-cost-EU-industry-more-than-5-billion-in-exports"
+    article_url: "http://www.dairyreporter.com/Commodities/International-factors-greatest-influence-on-US-milk-prices"
+    article_url: "http://www.dairyreporter.com/Commodities/Why-are-US-butter-prices-dropping-like-a-rock-after-record-highs"
+    article_url: "http://www.dairyreporter.com/Commodities/How-does-the-US-milk-producer-payment-system-work"
+    article_url: "http://www.dairyreporter.com/Commodities/US-dairy-exports-falling-significantly-as-value-of-the-dollar-rises"
+    article_url: "http://www.dairyreporter.com/Commodities/Is-anticipation-of-reduced-demand-for-cheese-behind-Class-III-milk-price-fall"
+    article_url: "http://www.dairyreporter.com/Commodities/Will-US-dairy-sector-pursue-proven-butter-export-market"
+    article_url: "http://www.dairyreporter.com/Commodities/Where-s-that-missing-Red-Tractor-FFA-slams-Muller-Wiseman-for-lack-of-milk-quality-logo"
+    non_article_url: "http://www.dairyreporter.com/Events/Food-Vision"
+    non_article_url: "http://www.dairyreporter.com/Events/(filter)/our"
+    non_article_url: "http://www.dairyreporter.com/Publications/Info/Terms-Conditions"
+    non_article_url: "http://www.dairyreporter.com/Sectors/Cheese"
+    non_article_url: "http://www.dairyreporter.com/Sectors/Yogurt-and-Desserts"
+    non_article_url: "http://www.dairyreporter.com/Technology/Filling-Packaging-Equipment-Systems"
+    non_article_url: "http://www.dairyreporter.com/Trends/Dairy-Health-Check"
+    non_article_url: "http://www.dairyreporter.com/smartlead/view/802573/4/Tip-a-friend-DairyReporter.com"
+    non_article_url: "http://www.dairyreporter.com/smartlead/view/209263/4/Feedback-Sales"
+  }
+}

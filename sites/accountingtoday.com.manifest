@@ -61,7 +61,7 @@ path_blacklist {
 path_blacklist {
   needle: "/video/"
 }
-paragraph_selector: "entry-content p"
+paragraph_selector: ".entry-content p"
 article_url_pattern {
   path_regex: "[\\-\\/][0-9]{5,7}\\-1\\.html"
 }
