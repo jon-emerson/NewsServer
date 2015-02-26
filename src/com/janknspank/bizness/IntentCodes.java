@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.proto.EnumsProto.IntentCode;
 
 /**
@@ -44,4 +45,13 @@ public class IntentCodes {
           return intentCode.getCode();
         }
       });
+
+  public static IntentCode fromCode(String code) {
+    for (IntentCode intentCode : INTENT_CODE_MAP.values()) {
+      if (intentCode.getCode().equals(code)) {
+        return intentCode;
+      }
+    }
+    throw new IllegalArgumentException("Value " + code + " is not a valid intent code.");
+  }
 }

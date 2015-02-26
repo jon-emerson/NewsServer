@@ -209,6 +209,14 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>SetUserIntentServlet</servlet-name>
+    <servlet-class>com.janknspank.server.SetUserIntentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetUserIntentServlet</servlet-name>
+    <url-pattern>/setUserIntent</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SetUserInterestServlet</servlet-name>
     <servlet-class>com.janknspank.server.SetUserInterestServlet</servlet-class>
   </servlet>
