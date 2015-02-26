@@ -1,10 +1,10 @@
 package com.janknspank.classifier;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.janknspank.proto.UserProto.UserIndustry;
 import com.janknspank.proto.UserProto.UserIndustry.Relationship;
@@ -353,13 +353,12 @@ public enum IndustryCode {
    */
   public static Map<IndustryCode, Relationship> getFromUserIndustries(
       Iterable<UserIndustry> userIndustries) {
-    ImmutableMap.Builder<IndustryCode, Relationship> industryCodeMapBuilder =
-        ImmutableMap.builder();
+    Map<IndustryCode, Relationship> industryCodeMap = new HashMap<>();
     for (UserIndustry userIndustry : userIndustries) {
-      industryCodeMapBuilder.put(INDUSTRY_CODE_MAP.get(userIndustry.getIndustryCodeId()),
+      industryCodeMap.put(INDUSTRY_CODE_MAP.get(userIndustry.getIndustryCodeId()),
           userIndustry.getRelationship());
     }
-    return industryCodeMapBuilder.build();
+    return industryCodeMap;
   }
 
   /**
