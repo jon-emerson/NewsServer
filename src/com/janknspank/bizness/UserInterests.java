@@ -48,7 +48,7 @@ public class UserInterests {
     List<Interest> allInterests = user.getInterestList();
     List<Interest> linkedInContacts = new ArrayList<>();
     for (Interest interest : allInterests) {
-      if (interest.getSource() != Interest.Source.LINKED_IN_CONNECTIONS) {
+      if (interest.getSource() == Interest.Source.LINKED_IN_CONNECTIONS) {
         linkedInContacts.add(interest);
       }
     }
@@ -63,7 +63,7 @@ public class UserInterests {
     List<Interest> allInterests = user.getInterestList();
     List<Interest> addressBookContacts = new ArrayList<>();
     for (Interest interest : allInterests) {
-      if (interest.getSource() != Interest.Source.ADDRESS_BOOK) {
+      if (interest.getSource() == Interest.Source.ADDRESS_BOOK) {
         addressBookContacts.add(interest);
       }
     }
