@@ -83,10 +83,11 @@ public class Articles {
       }
       urls.add(article.getUrl());
 
-      double hoursSincePublished =
+      double minutesSincePublished = Math.max(90,
           ((double) System.currentTimeMillis() - article.getPublishedTime())
-              / TimeUnit.HOURS.toMillis(1);
-      goodArticles.add(article, scorer.getScore(user, article) / hoursSincePublished);
+              / TimeUnit.MINUTES.toMillis(1));
+      goodArticles.add(article, scorer.getScore(user, article) /
+          Math.sqrt(minutesSincePublished));
     }
     TopList<Article, Double> bestArticles = new TopList<>(limit);
     for (Article article : Deduper.filterOutDupes(goodArticles)) {
@@ -110,7 +111,7 @@ public class Articles {
         }),
         limit);
   }
-  
+
   /**
    * Gets a list of articles containing the user's LinkedIn contacts 
    */
@@ -119,7 +120,7 @@ public class Articles {
     return Deduper.filterOutDupes(getArticlesByInterest(
         UserInterests.getCurrentInterestsBySource(user, Interest.Source.LINKED_IN_CONNECTIONS), limit * 2));
   }
-  
+
   /**
    * Gets a list of articles containing the user's Address Book contacts 
    */
@@ -128,7 +129,7 @@ public class Articles {
     return Deduper.filterOutDupes(getArticlesByInterest(
         UserInterests.getCurrentInterestsBySource(user, Interest.Source.ADDRESS_BOOK), limit * 2));
   }
-  
+
   /**
    * Gets a list of articles tailored specifically to the specified
    * industries.
