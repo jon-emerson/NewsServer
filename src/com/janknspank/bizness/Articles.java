@@ -134,7 +134,7 @@ public class Articles {
   public static Iterable<Article> getArticlesContainingLinkedInContacts(User user, int limit) 
       throws DatabaseSchemaException {
     return Deduper.filterOutDupes(getArticlesByInterest(
-        UserInterests.getCurrentLinkedInContacts(user), limit * 5));
+        UserInterests.getCurrentInterestsBySource(user, Interest.Source.LINKED_IN_CONNECTIONS), limit * 5));
   }
   
   /**
@@ -143,7 +143,7 @@ public class Articles {
   public static Iterable<Article> getArticlesContainingAddressBookContacts(User user, int limit) 
       throws DatabaseSchemaException {
     return Deduper.filterOutDupes(getArticlesByInterest(
-        UserInterests.getCurrentAddressBookContacts(user), limit * 5));
+        UserInterests.getCurrentInterestsBySource(user, Interest.Source.ADDRESS_BOOK), limit * 5));
   }
   
   /**
