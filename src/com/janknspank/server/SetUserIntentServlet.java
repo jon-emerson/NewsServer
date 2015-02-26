@@ -28,7 +28,7 @@ public class SetUserIntentServlet extends StandardServlet {
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
-    IntentCode intentCode = IntentCodes.fromCode(intentCodeString);
+    IntentCode intentCode = IntentCodes.INTENT_CODE_MAP.get(intentCodeString);
     if (intentCode == null) {
       throw new RequestException("Intent code is not valid");
     }

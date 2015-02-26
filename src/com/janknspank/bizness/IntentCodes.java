@@ -45,13 +45,4 @@ public class IntentCodes {
           return intentCode.getCode();
         }
       });
-
-  public static IntentCode fromCode(String code) {
-    for (IntentCode intentCode : INTENT_CODE_MAP.values()) {
-      if (intentCode.getCode().equals(code)) {
-        return intentCode;
-      }
-    }
-    throw new IllegalArgumentException("Value " + code + " is not a valid intent code.");
-  }
 }
