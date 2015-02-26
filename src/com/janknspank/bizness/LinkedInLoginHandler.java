@@ -316,15 +316,17 @@ public class LinkedInLoginHandler {
           }
         });
 
-    Set<Integer> alreadyAddedIndustryIds = Sets.newHashSet();
+    Set<Integer> explicitlySetIndustryIds = Sets.newHashSet();
     for (UserIndustry userIndustry : user.getIndustryList()) {
-      alreadyAddedIndustryIds.add(userIndustry.getIndustryCodeId());
+      if (userIndustry.getSource() != UserIndustry.Source.LINKED_IN_PROFILE) {
+        explicitlySetIndustryIds.add(userIndustry.getIndustryCodeId());
+      }
     }
 
     // Combine the user's LinkedIn industry and his manually-added industries,
     // though drop the LinkedIn industry if it was tombstoned or already added by the user.
     UserIndustry linkedInProfileIndustry = getLinkedInProfileIndustry(linkedInProfileDocument);
-    return alreadyAddedIndustryIds.contains(linkedInProfileIndustry.getIndustryCodeId())
+    return explicitlySetIndustryIds.contains(linkedInProfileIndustry.getIndustryCodeId())
         ? manuallyAddedIndustries
         : Iterables.concat(manuallyAddedIndustries, ImmutableList.of(linkedInProfileIndustry));
   }
