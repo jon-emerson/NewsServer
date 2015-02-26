@@ -1,0 +1,21 @@
+{namespace news.setuserintent autoescape="strict"}
+
+/**
+ * Renders the Set user intent page.
+ */
+{template .main}
+  <h1>Set User Intent</h1>
+
+  <form method="POST" action="setUserIntent">
+    Session key:<br>
+    <input type="text" name="sessionKey"><br>
+    <br>
+    Code: ("indst, sklls, swtch, nwjob, start")<br>
+    <input type="text" name="code"><br>
+    <br>
+    Enabled ("true" or "false"):<br>
+    <input type="text" name="enabled"><br>
+    <br>
+    <input type="submit" value="Set"><br>
+  </form>
+{/template}

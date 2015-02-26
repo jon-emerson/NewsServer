@@ -1,6 +1,5 @@
 package com.janknspank.server;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -36,21 +36,19 @@ public class SetUserIndustryServlet extends StandardServlet {
     UserIndustry.Source source;
     source = ("true".equals(follow)) ? UserIndustry.Source.USER : UserIndustry.Source.TOMBSTONE;
 
-    List<UserIndustry> userIndustries = new ArrayList<>();
+    List<UserIndustry> userIndustries = Lists.newArrayList(user.getIndustryList());
     UserIndustry existingIndustry = null;
     boolean industryStateChanged = false;
-    for (UserIndustry userIndustry : user.getIndustryList()) {
+    int index = 0;
+    for (UserIndustry userIndustry : userIndustries) {
       if (userIndustry.getIndustryCodeId() == industryCodeId) {
         existingIndustry = userIndustry;
         if (existingIndustry.getSource() != source) {
-          userIndustries.add(existingIndustry.toBuilder().setSource(source).build());
+          userIndustries.set(index, existingIndustry.toBuilder().setSource(source).build());
           industryStateChanged = true;
-        } else {
-          userIndustries.add(existingIndustry);
         }
-      } else {
-        userIndustries.add(userIndustry);
       }
+      index++;
     }
 
     if (existingIndustry == null) {

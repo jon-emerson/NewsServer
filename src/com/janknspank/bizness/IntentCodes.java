@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.janknspank.classifier.IndustryCode;
 import com.janknspank.proto.EnumsProto.IntentCode;
 
 /**
