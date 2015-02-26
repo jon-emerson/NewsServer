@@ -316,6 +316,9 @@ public class LinkedInLoginHandler {
           }
         });
 
+    // Take special note of the industry IDs the user explicitly set.  We don't want to
+    // put the user's LinkedIn industry back into the list if the user
+    // explicitly removed or added it.
     Set<Integer> explicitlySetIndustryIds = Sets.newHashSet();
     for (UserIndustry userIndustry : user.getIndustryList()) {
       if (userIndustry.getSource() != UserIndustry.Source.LINKED_IN_PROFILE) {
