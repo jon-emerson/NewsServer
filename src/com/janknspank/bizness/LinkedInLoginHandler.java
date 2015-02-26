@@ -306,32 +306,19 @@ public class LinkedInLoginHandler {
    */
   private Iterable<UserIndustry> getUpdatedUserIndustries(UserOrBuilder user,
       DocumentNode linkedInProfileDocument) {
-    // Retain any industries the user has previously set himself (aka anything
-    // that we didn't get from LinkedIn!).
-    Iterable<UserIndustry> manuallyAddedIndustries =
-        Iterables.filter(user.getIndustryList(), new Predicate<UserIndustry>() {
-          @Override
-          public boolean apply(UserIndustry industry) {
-            return industry.getSource() != UserIndustry.Source.LINKED_IN_PROFILE;
-          }
-        });
-
-    // Take special note of the industry IDs the user explicitly set.  We don't want to
-    // put the user's LinkedIn industry back into the list if the user
-    // explicitly removed or added it.
-    Set<Integer> explicitlySetIndustryIds = Sets.newHashSet();
-    for (UserIndustry userIndustry : user.getIndustryList()) {
-      if (userIndustry.getSource() != UserIndustry.Source.LINKED_IN_PROFILE) {
-        explicitlySetIndustryIds.add(userIndustry.getIndustryCodeId());
-      }
-    }
-
-    // Combine the user's LinkedIn industry and his manually-added industries,
-    // though drop the LinkedIn industry if it was tombstoned or already added by the user.
     UserIndustry linkedInProfileIndustry = getLinkedInProfileIndustry(linkedInProfileDocument);
-    return explicitlySetIndustryIds.contains(linkedInProfileIndustry.getIndustryCodeId())
-        ? manuallyAddedIndustries
-        : Iterables.concat(manuallyAddedIndustries, ImmutableList.of(linkedInProfileIndustry));
+    // If the user already has the industry from his linkedin profile added,
+    // do nothing - Leave it as it, it's OK!  If not, append it.
+    if (Iterables.any(user.getIndustryList(), new Predicate<UserIndustry>() {
+       @Override
+       public boolean apply(UserIndustry industry) {
+         return linkedInProfileIndustry.getIndustryCodeId() == industry.getIndustryCodeId();
+       }
+     })) {
+      return user.getIndustryList();
+    } else {
+      return Iterables.concat(user.getIndustryList(), ImmutableList.of(linkedInProfileIndustry));
+    }
   }
 
   private UserIndustry getLinkedInProfileIndustry(DocumentNode linkedInProfileDocument) {
