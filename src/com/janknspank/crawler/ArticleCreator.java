@@ -62,7 +62,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.chron.com/img/pages/article/opengraph_default.jpg",
-      "http://www.sfgate.com/img/pages/article/opengraph_default.png");
+      "http://www.sfgate.com/img/pages/article/opengraph_default.png",
+      "http://images.forbes.com/media/assets/forbes_1200x1200.jpg");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLE_ENDS[] = new Pattern[] {
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+([A-Z][A-Za-z]+\\.com)$"),

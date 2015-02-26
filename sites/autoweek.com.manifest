@@ -1,0 +1,34 @@
+root_domain: "autoweek.com"
+start_url: "http://autoweek.com"
+subdomain_blacklist: "home.autoweek.com"
+subdomain_blacklist: "www.autoweek.com"
+path_blacklist {
+  needle: "/video/"
+}
+path_blacklist {
+  needle: "/gallery/"
+}
+path_blacklist {
+  needle: "/photos"
+}
+path_blacklist {
+  needle: "/store"
+}
+paragraph_selector: "article.story p"
+article_url_pattern {
+  path_regex: "^\\/article\\/.+\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://autoweek.com/article/car-reviews/2015-gmc-canyon-slt-extended-cab-review-notes"
+    article_url: "http://autoweek.com/article/formula-one/lotus-names-female-racer-carmen-jorda-f1-development-role"
+    article_url: "http://autoweek.com/article/geneva-motor-show/brabus-850-60-biturbo-coupe-coming-geneva-motor-show-850-hp"
+    article_url: "http://autoweek.com/article/drive-reviews/2016-volvo-xc90-t6-first-drive"
+    article_url: "http://autoweek.com/article/car-reviews/car-reviews-what-we-drove-week-feb-15"
+    non_article_url: "http://autoweek.com/reviews"
+    non_article_url: "http://autoweek.com/vehicles/volkswagen"
+    non_article_url: "http://autoweek.com/car-news/green-cars"
+    non_article_url: "http://autoweek.com/racing/nascar-sprint-cup"
+    non_article_url: "http://autoweek.com/racing/other-motorsports"
+  }
+}

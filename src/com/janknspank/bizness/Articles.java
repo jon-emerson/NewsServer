@@ -71,8 +71,8 @@ public class Articles {
     return getRankedArticlesAndScores(user, scorer, limit);
   }
 
-  public static TopList<Article, Double> getRankedArticlesAndScores(User user, Scorer scorer, int limit)
-      throws DatabaseSchemaException {
+  public static TopList<Article, Double> getRankedArticlesAndScores(
+      User user, Scorer scorer, int limit) throws DatabaseSchemaException {
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
     Set<String> urls = Sets.newHashSet();
     for (Article article : Iterables.concat(
@@ -96,23 +96,6 @@ public class Articles {
   }
 
   /**
-   * Used for dupe detection threshold testing.
-   */
-  private static Iterable<Article> getArticlesByFeatures(Iterable<FeatureId> featureIds, int limit)
-      throws DatabaseSchemaException{
-    return Database.with(Article.class).get(
-        new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(featureIds,
-            new Function<FeatureId, Number>() {
-          @Override
-          public Number apply(FeatureId featureId) {
-            return featureId.getId();
-          }
-        })),
-        new QueryOption.DescendingSort("published_time"),
-        new QueryOption.Limit(limit));
-  }
-
-  /**
    * Gets a list of articles tailored specifically to the current user's
    * interests.
    */
@@ -129,18 +112,21 @@ public class Articles {
   }
 
   /**
-   * Gets a list of articles tailored specifically to the current user's
+   * Gets a list of articles tailored specifically to the specified
    * industries.
    */
-  public static Iterable<Article> getArticlesByIndustries(Iterable<UserIndustry> industries, int limit)
-      throws DatabaseSchemaException {
-    return getArticlesByFeatures(Iterables.transform(industries,
-            new Function<UserIndustry, FeatureId>() {
-              @Override
-              public FeatureId apply(UserIndustry industry) {
-                return IndustryCode.fromId(industry.getIndustryCodeId()).getFeatureId();
-              }
-            }), limit);
+  public static Iterable<Article> getArticlesByIndustries(
+      Iterable<UserIndustry> industries, int limit) throws DatabaseSchemaException {
+    return Database.with(Article.class).get(
+        new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(industries,
+            new Function<UserIndustry, Number>() {
+          @Override
+          public Number apply(UserIndustry industry) {
+            return IndustryCode.fromId(industry.getIndustryCodeId()).getFeatureId().getId();
+          }
+        })),
+        new QueryOption.DescendingSort("published_time"),
+        new QueryOption.Limit(limit));
   }
 
   /**
