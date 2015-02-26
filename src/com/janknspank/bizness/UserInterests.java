@@ -42,6 +42,35 @@ public class UserInterests {
   }
   
   /**
+   * Returns only valid, currently followed LinkedIn contacts. 
+   */
+  public static List<Interest> getCurrentLinkedInContacts(User user) {
+    List<Interest> allInterests = user.getInterestList();
+    List<Interest> linkedInContacts = new ArrayList<>();
+    for (Interest interest : allInterests) {
+      if (interest.getSource() != Interest.Source.LINKED_IN_CONNECTIONS) {
+        linkedInContacts.add(interest);
+      }
+    }
+    return linkedInContacts;
+  }
+  
+  /**
+   * Returns only valid, currently followed contacts. 
+   * Filters out TOMBSTONEd interests
+   */
+  public static List<Interest> getCurrentAddressBookContacts(User user) {
+    List<Interest> allInterests = user.getInterestList();
+    List<Interest> addressBookContacts = new ArrayList<>();
+    for (Interest interest : allInterests) {
+      if (interest.getSource() != Interest.Source.ADDRESS_BOOK) {
+        addressBookContacts.add(interest);
+      }
+    }
+    return addressBookContacts;
+  }
+  
+  /**
    * Returns a list of implied interests derived from the user's passed-in
    * address book.
    */

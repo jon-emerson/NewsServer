@@ -127,7 +127,25 @@ public class Articles {
         }),
         limit);
   }
-
+  
+  /**
+   * Gets a list of articles containing the user's LinkedIn contacts 
+   */
+  public static Iterable<Article> getArticlesContainingLinkedInContacts(User user, int limit) 
+      throws DatabaseSchemaException {
+    return Deduper.filterOutDupes(getArticlesByInterest(
+        UserInterests.getCurrentLinkedInContacts(user), limit * 5));
+  }
+  
+  /**
+   * Gets a list of articles containing the user's Address Book contacts 
+   */
+  public static Iterable<Article> getArticlesContainingAddressBookContacts(User user, int limit) 
+      throws DatabaseSchemaException {
+    return Deduper.filterOutDupes(getArticlesByInterest(
+        UserInterests.getCurrentAddressBookContacts(user), limit * 5));
+  }
+  
   /**
    * Gets a list of articles tailored specifically to the current user's
    * industries.
