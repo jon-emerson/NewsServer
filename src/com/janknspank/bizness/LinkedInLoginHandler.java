@@ -316,20 +316,15 @@ public class LinkedInLoginHandler {
           }
         });
 
-    // Take special note of the industry IDs the user removed.  We don't want to
-    // put the user's LinkedIn industry back into the list if the user's
-    // explicitly removed it.
-    Set<Integer> tombstonedIndustryIds = Sets.newHashSet();
+    Set<Integer> alreadyAddedIndustryIds = Sets.newHashSet();
     for (UserIndustry userIndustry : user.getIndustryList()) {
-      if (userIndustry.getSource() == UserIndustry.Source.TOMBSTONE) {
-        tombstonedIndustryIds.add(userIndustry.getIndustryCodeId());
-      }
+      alreadyAddedIndustryIds.add(userIndustry.getIndustryCodeId());
     }
 
     // Combine the user's LinkedIn industry and his manually-added industries,
-    // though drop the LinkedIn industry if it was tombstoned.
+    // though drop the LinkedIn industry if it was tombstoned or already added by the user.
     UserIndustry linkedInProfileIndustry = getLinkedInProfileIndustry(linkedInProfileDocument);
-    return tombstonedIndustryIds.contains(linkedInProfileIndustry.getIndustryCodeId())
+    return alreadyAddedIndustryIds.contains(linkedInProfileIndustry.getIndustryCodeId())
         ? manuallyAddedIndustries
         : Iterables.concat(manuallyAddedIndustries, ImmutableList.of(linkedInProfileIndustry));
   }
