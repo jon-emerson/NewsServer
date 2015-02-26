@@ -45,9 +45,8 @@ public class UserInterests {
    * Returns only interests from a specific source. 
    */
   public static List<Interest> getCurrentInterestsBySource(User user, Interest.Source source) {
-    List<Interest> allInterests = user.getInterestList();
     List<Interest> matchingInterests = new ArrayList<>();
-    for (Interest interest : allInterests) {
+    for (Interest interest : user.getInterestList()) {
       if (interest.getSource() == source) {
         matchingInterests.add(interest);
       }
