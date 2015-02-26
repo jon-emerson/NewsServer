@@ -110,7 +110,25 @@ public class Articles {
         }),
         limit);
   }
-
+  
+  /**
+   * Gets a list of articles containing the user's LinkedIn contacts 
+   */
+  public static Iterable<Article> getArticlesContainingLinkedInContacts(User user, int limit) 
+      throws DatabaseSchemaException {
+    return Deduper.filterOutDupes(getArticlesByInterest(
+        UserInterests.getCurrentInterestsBySource(user, Interest.Source.LINKED_IN_CONNECTIONS), limit * 2));
+  }
+  
+  /**
+   * Gets a list of articles containing the user's Address Book contacts 
+   */
+  public static Iterable<Article> getArticlesContainingAddressBookContacts(User user, int limit) 
+      throws DatabaseSchemaException {
+    return Deduper.filterOutDupes(getArticlesByInterest(
+        UserInterests.getCurrentInterestsBySource(user, Interest.Source.ADDRESS_BOOK), limit * 2));
+  }
+  
   /**
    * Gets a list of articles tailored specifically to the specified
    * industries.

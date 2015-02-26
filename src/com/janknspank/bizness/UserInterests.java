@@ -42,6 +42,19 @@ public class UserInterests {
   }
   
   /**
+   * Returns only interests from a specific source. 
+   */
+  public static List<Interest> getCurrentInterestsBySource(User user, Interest.Source source) {
+    List<Interest> matchingInterests = new ArrayList<>();
+    for (Interest interest : user.getInterestList()) {
+      if (interest.getSource() == source) {
+        matchingInterests.add(interest);
+      }
+    }
+    return matchingInterests;
+  }
+
+  /**
    * Returns a list of implied interests derived from the user's passed-in
    * address book.
    */
