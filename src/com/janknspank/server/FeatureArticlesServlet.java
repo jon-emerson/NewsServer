@@ -2,6 +2,7 @@ package com.janknspank.server;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -9,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.google.api.client.util.Lists;
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.classifier.FeatureId;
@@ -77,7 +78,7 @@ public class FeatureArticlesServlet extends StandardServlet {
         Articles.getArticlesForFeature(featureId, NUM_RESULTS);
     List<Article> articles = Lists.newArrayList();
     articles.addAll(rankedArticlesAndScores.getKeys());
-    articles.sort(new Comparator<Article>() {
+    Collections.sort(articles, new Comparator<Article>() {
       @Override
       public int compare(Article o1, Article o2) {
         return -Long.compare(o1.getPublishedTime(), o2.getPublishedTime());

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
@@ -41,12 +42,13 @@ public class SetUserInterestServlet extends StandardServlet {
     }
 
     boolean isExistingInterest = false;
-    List<Interest> interests = user.getInterestList();
+    List<Interest> interests = Lists.newArrayList(user.getInterestList());
     int index = 0;
     for (Interest interest : interests) {
       if (interest.getType().equals(type) && interest.getKeyword().equals(keyword)) {
         if (interest.getSource() != source) {
-          interests.set(index, interest.toBuilder().setSource(source).build());
+          Interest updatedInterest = interest.toBuilder().setSource(source).build();
+          interests.set(index, updatedInterest);
         }
         isExistingInterest = true;
       }
