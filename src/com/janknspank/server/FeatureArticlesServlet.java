@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
+import com.google.api.client.util.Lists;
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.classifier.FeatureId;
