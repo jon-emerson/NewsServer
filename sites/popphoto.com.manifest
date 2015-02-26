@@ -1,0 +1,26 @@
+root_domain: "popphoto.com"
+start_url: "http://www.popphoto.com"
+subdomain_blacklist: "forums.popphoto.com"
+subdomain_blacklist: "videostore.popphoto.com"
+path_blacklist {
+  needle: "/gallery/"
+}
+paragraph_selector: ".content div"
+article_url_pattern {
+  path_regex: "\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.popphoto.com/news/2015/02/google-vp-cautions-us-to-print-our-photos"
+    article_url: "http://www.popphoto.com/gear/2015/02/affinity-photo-editing-software-goes-free-beta-takes-aim-photoshop-crowd"
+    article_url: "http://www.popphoto.com/how-to/2015/02/10-tips-using-darkness-your-photography"
+    article_url: "http://www.popphoto.com/gear/2015/02/quick-review-moment-smartphone-camera-lenses"
+    article_url: "http://www.popphoto.com/news/2015/02/open-post-whats-first-photography-related-thing-you-would-buy-if-you-won-lottery"
+    article_url: "http://www.popphoto.com/gear/2014/01/best-camera-and-photo-gear-ces-2014"
+    non_article_url: "http://www.popphoto.com/buying-guide/cameras"
+    non_article_url: "http://www.popphoto.com/buying-guide/camera/panasonic-lumix-gh3"
+    non_article_url: "http://www.popphoto.com/photo-contest/YBSfeb2015/home"
+    non_article_url: "http://www.popphoto.com/advertise-0"
+    non_article_url: "http://www.popphoto.com/tags/processing"
+  }
+}

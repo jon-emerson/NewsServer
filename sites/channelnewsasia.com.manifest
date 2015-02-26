@@ -5,6 +5,10 @@ path_blacklist {
   needle: "/wp-admin/"
   location: CONTAINS
 }
+path_blacklist {
+  needle: "/slideshow/"
+  location: CONTAINS
+}
 paragraph_selector: ".news_detail p"
 article_url_pattern {
   path_regex: "^\\/news\\/.*\\/[0-9]+\\.html$"

@@ -117,7 +117,8 @@ public class JonBenchmark {
       "http://mashable.com/2015/02/18/yahoo-mobile-developers/",
       "http://techcrunch.com/2015/02/19/entrepreneur-first-hatches-latest-startups-partners-with-media-power-players/",
       "http://www.forbes.com/sites/bryanstolle/2015/02/04/ready-aim-fire-part-1-how-to-execute-successfully-every-time/",
-      "http://www.forbes.com/sites/bryanstolle/2015/02/23/ready-aim-fire-how-to-execute-successfully-every-time-part-2/");
+      "http://www.forbes.com/sites/bryanstolle/2015/02/23/ready-aim-fire-how-to-execute-successfully-every-time-part-2/",
+      "http://techcrunch.com/2015/02/25/apple-watch-this-space/");
 
   public static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
@@ -314,7 +315,21 @@ public class JonBenchmark {
       "http://www.abc.net.au/news/2015-02-24/small-business-warns-gst-compliance-burden-is/6245022",
       "http://www.nytimes.com/2015/02/26/technology/personaltech/despite-the-promise-of-technology-the-mysteries-of-sleep-lie-unsolved.html",
       "http://www.inc.com/zoe-henry/top-10-cities-for-entrepreneurship-in-europe_1.html",
-      "https://gigaom.com/2015/02/24/think-big-solve-tomorrow-2/");
+      "https://gigaom.com/2015/02/24/think-big-solve-tomorrow-2/",
+      // About the Dairy industry.
+      "http://www.agweb.com/article/agriculture-leaders-discuss-big-data-with-vilsack-NAA-alison-rice/",
+      "http://www.dairyreporter.com/R-D/Formula-fed-infants-exposed-to-greater-levels-of-arsenic-Study",
+      "http://www.dairyreporter.com/Ingredients/Tate-Lyle-unveils-Dolcia-Prima-allulose-low-calorie-sugar",
+      "http://www.dairyreporter.com/Manufacturers/ESSNA-non-compliance-campaign",
+      "http://www.dairyreporter.com/Trends/Greek-Yogurt-Revolution/What-a-difference-a-year-makes!-General-Mills-stops-Yoplait-yogurt-rot-and-targets-snackers",
+      "http://www.dairyreporter.com/Trends/Sustainability/Valio-and-Tetra-Pak-World-first-100-renewable-carton",
+      "http://www.dairyreporter.com/Trends/Emerging-Markets/Fonterra-tables-offer-for-20-stake-in-Chinese-infant-formula-firm-Beingmate",
+      "http://www.dairyreporter.com/Trends/Pricing-Pressures/British-taxman-vows-to-treat-struggling-dairy-farmers-sympathetically",
+      "http://www.dairyreporter.com/Trends/Consolidation/Obram-well-situated-for-Russian-trade-embargo-cheese-opportunities-Tetra-Pak",
+      "http://www.dairyreporter.com/Trends/Smart-Packaging/Danone-moves-to-patent-more-user-friendly-two-foil-yogurt-pot",
+      "http://www.dairyreporter.com/Trends/Functional-Dairy/6-years-of-hurt-Probiotic-heavyweights-debate-the-EU-s-health-claim-blockade",
+      "http://www.dairyreporter.com/Trends/Dairy-Health-Check/Listeria-studied-in-raw-milk-Cantal-type-cheese");
+
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {

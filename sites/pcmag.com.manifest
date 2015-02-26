@@ -11,6 +11,7 @@ path_blacklist {
 }
 paragraph_selector: ".article-body p"
 paragraph_selector: ".blogstory p"
+paragraph_selector: ".review-body p"
 article_url_pattern {
   path_regex: "\\/article2\\/.+\\.asp$"
 }

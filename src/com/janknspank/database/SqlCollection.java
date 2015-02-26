@@ -741,14 +741,21 @@ public class SqlCollection<T extends Message> extends Collection<T> {
   }
 
   /**
-   * Returns the number of rows in this table.
+   * Returns the number of rows in this table that match the specified
+   * QueryOptions.
    */
   @SuppressWarnings("resource")
-  public long size() throws DatabaseSchemaException {
+  public long getSize(QueryOption.WhereOption... whereOptions) throws DatabaseSchemaException {
     PreparedStatement statement = null;
     ResultSet results = null;
     try {
-      statement = getConnection().prepareStatement("SELECT count(*) FROM " + this.getTableName());
+      statement = getConnection().prepareStatement(
+          "SELECT count(*) FROM " + this.getTableName()
+              + getWhereClauseSql(whereOptions));
+      int i = 0;
+      for (Object whereValue : getWhereValues(whereOptions)) {
+        setObject(statement, ++i, whereValue);
+      }
       results = statement.executeQuery();
       while (results.next()) {
         return results.getLong(1);

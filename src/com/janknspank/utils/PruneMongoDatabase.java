@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.MongoConnection;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Url;
@@ -27,6 +28,8 @@ import com.janknspank.proto.CoreProto.Url;
  * - Repair the database to reclaim the space we created.
  */
 public class PruneMongoDatabase {
+  private static final long MAX_ARTICLE_COUNT = 25000;
+
   /**
    * Deletes any passed URLs that do not have Articles associated with them in
    * the database.
@@ -67,12 +70,26 @@ public class PruneMongoDatabase {
     System.out.println("done!");
   }
 
+  /**
+   * Gets the # of articles in the system reasonably close to MAX_ARTICLE_COUNT
+   * by deleting the oldest articles by published_time.
+   */
   private static void pruneArticles() throws DatabaseSchemaException {
-    long articleCount = Database.with(Article.class).size();
-    System.out.println("Articles = " + articleCount);
+    // Mongo DB doesn't have a "delete with limit" concept.  So, instead,
+    // find the 25,000th oldest article in the system, then delete everything
+    // older than it.
+    Article oldestArticle = Database.with(Article.class).getFirst(
+        new QueryOption.DescendingSort("published_time"),
+        new QueryOption.LimitWithOffset(1, (int) MAX_ARTICLE_COUNT));
+    int count = Database.with(Article.class).delete(
+        new QueryOption.WhereLessThan("published_time", oldestArticle.getPublishedTime()));
+    System.out.println("Deleted " + count + " older articles");
   }
 
   public static void main(String args[]) throws DatabaseSchemaException {
     pruneArticles();
+    cleanUrls();
+    MongoConnection.repairDatabase();
+    System.out.println("Database pruned successfully.");
   }
 }

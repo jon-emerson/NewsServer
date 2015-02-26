@@ -396,9 +396,9 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   }
 
   public static String getTitle(DocumentNode documentNode) throws RequiredFieldException {
-    // For most sites, we can get it from the meta keywords.
-    // For others, the meta keywords are crap, so we skip this step.
-    String title = null;
+    // For most sites, we can get it from the meta keywords.  For
+    // advice.careerbuilder.com, the meta keywords are crap, so we skip this
+    // step.
     if (!documentNode.getUrl().contains("//advice.careerbuilder.com/")) {
       Node metaNode = documentNode.findFirst(ImmutableList.of(
           "html > head meta[name=\"fb_title\"]",
@@ -409,19 +409,17 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
           "html > head meta[property=\"rnews:headline\"]",
           "html > head meta[itemprop=\"alternativeHeadline\"]"));
       if (metaNode != null) {
-        title = metaNode.getAttributeValue("content");
-      } else {
-        Node titleNode = documentNode.findFirst("title");
-        if (titleNode != null) {
-          title = StringHelper.unescape(titleNode.getFlattenedText());
-        } else {
-          throw new RequiredFieldException("Could not find required field: title");
-        }
+        return cleanTitle(metaNode.getAttributeValue("content"));
       }
     }
 
-    // Clean and truncate the title, if necessary.
-    return cleanTitle(title);
+    // Failover to <title> tag.
+    Node titleNode = documentNode.findFirst("title");
+    if (titleNode != null) {
+      return cleanTitle(StringHelper.unescape(titleNode.getFlattenedText()));
+    }
+
+    throw new RequiredFieldException("Could not find required field: title");
   }
 
   public static String getType(DocumentNode documentNode) {

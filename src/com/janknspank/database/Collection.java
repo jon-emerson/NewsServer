@@ -302,7 +302,9 @@ public abstract class Collection<T extends Message> {
       throws DatabaseSchemaException, DatabaseRequestException;
 
   /**
-   * Returns the number of rows/documents in this collection.
+   * Returns the number of rows/documents in this collection that match the
+   * optional QueryOptions.
    */
-  public abstract long size() throws DatabaseSchemaException;
+  public abstract long getSize(QueryOption.WhereOption... whereOptions)
+      throws DatabaseSchemaException;
 }

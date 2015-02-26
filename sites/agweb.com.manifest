@@ -1,0 +1,35 @@
+root_domain: "agweb.com"
+start_url: "http://www.agweb.com"
+subdomain_blacklist: "discussions.agweb.com"
+path_blacklist {
+  needle: "/agday/"
+}
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/markets/"
+}
+path_blacklist {
+  needle: "/weather/"
+}
+paragraph_selector: ".article-body > p"
+paragraph_selector: ".articleContent p"
+article_url_pattern {
+  path_regex: "^\\/article\\/[^\\/]+\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.agweb.com/article/projected-soybean-acres-surprisingly-low-NAA-ben-potter/"
+    article_url: "http://www.agweb.com/article/petes-pick-of-the-week-pair-of-international-1026-tractors-NAA-greg-peterson/"
+    article_url: "http://www.agweb.com/article/time-to-replace-toxic-fescue-when-beef-prices-are-good-NAA-university-news-release/"
+    article_url: "http://www.agweb.com/article/egypt-buys-us-wheat-in-tender-for-first-time-since-september-blmg/"
+    article_url: "http://www.agweb.com/article/grains-analysts-accept-inevitable-at-board-of-trade-NAA-alison-rice/"
+    article_url: "http://www.agweb.com/article/3-reasons-to-consider-reallocating-base-acres-NAA-sara-schafer/"
+    non_article_url: "http://www.agweb.com/machinery/technology/"
+    non_article_url: "http://www.agweb.com/machinery/machinery-news/"
+    non_article_url: "http://www.agweb.com/livestock/hay-and-forage/"
+    non_article_url: "http://www.agweb.com/advertise-with-agweb/"
+    non_article_url: "http://www.agweb.com/news/audience-polls/"
+  }
+}
