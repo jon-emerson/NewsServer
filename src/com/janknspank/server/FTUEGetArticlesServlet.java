@@ -12,13 +12,12 @@ import com.google.api.client.util.Lists;
 import com.google.common.base.Strings;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.IntentCodes;
+import com.janknspank.bizness.Intent;
 import com.janknspank.bizness.Intents;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.UserProto.Intent;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.HeuristicScorer;
 
@@ -55,11 +54,9 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
     List<Intent> intents = Lists.newArrayList();
     for (String intentCode : intentCodes) {
       // Validate the intent code strings
-      if (IntentCodes.INTENT_CODE_MAP.containsKey(intentCode)) {
-        intents.add(Intent.newBuilder()
-            .setCode(intentCode)
-            .setCreateTime(System.currentTimeMillis())
-            .build());
+      Intent intent = Intent.fromCode(intentCode);
+      if (intent != null) {
+        intents.add(intent);
       }
     }
     return intents;

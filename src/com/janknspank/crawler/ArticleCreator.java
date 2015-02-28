@@ -112,7 +112,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     }
 
     // Published time (required).
-    articleBuilder.setPublishedTime(getPublishedTime(documentNode));
+    articleBuilder.setPublishedTime(
+        Math.min(System.currentTimeMillis(),getPublishedTime(documentNode)));
 
     // Title.
     String title = getTitle(documentNode);

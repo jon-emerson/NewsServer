@@ -222,7 +222,6 @@ public class ArticleCreatorTest {
     assertEquals(3, article.getParagraphCount());
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith("This year makes 25 years since"));
-    DateParserTest.assertSameTime("2015/06/01", article.getPublishedTime());
   }
 
   @Test

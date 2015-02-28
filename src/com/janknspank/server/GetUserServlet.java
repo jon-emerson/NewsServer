@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.Serializer;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired
@@ -17,17 +16,10 @@ public class GetUserServlet extends StandardServlet {
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException {
     User user = Database.with(User.class).get(getSession(req).getUserId());
-    JSONObject userJson = Serializer.toJSON(user);
 
-    UserHelper userHelper = new UserHelper(user);
-    userJson.put("favorites", userHelper.getFavoritesJsonArray());
-    userJson.put("interests", userHelper.getInterestsJsonArray());
-    userJson.put("industries", userHelper.getIndustriesJsonArray());
-    userJson.put("ratings", userHelper.getRatingsJsonArray());
-
-    // Create response.
-    JSONObject response = createSuccessResponse();
-    response.put("user", userJson);
+    // Create the response.
+    JSONObject response = this.createSuccessResponse();
+    response.put("user", new UserHelper(user).getUserJson());
     return response;
   }
 }

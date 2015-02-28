@@ -1,23 +1,37 @@
 package com.janknspank.bizness;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
-import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserIndustry;
+import com.google.api.client.util.Sets;
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
+import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.UserOrBuilder;
 
 public class UserIndustries {
   /**
-   * Filters out TOMBSTONEd industries
+   * Returns a user's industry interests, accounting for tombstones and dupes.
    */
-  public static List<UserIndustry> getCurrentIndustries(User user) {
-    List<UserIndustry> allIndustries = user.getIndustryList();
-    List<UserIndustry> currentIndustries = new ArrayList<>();
-    for (UserIndustry industry : allIndustries) {
-      if (industry.getSource() != UserIndustry.Source.TOMBSTONE) {
-        currentIndustries.add(industry);
+  public static Iterable<Industry> getIndustries(UserOrBuilder user) {
+    Set<Integer> tombstonedIndustryCodes = Sets.newHashSet();
+    Set<Integer> industries = Sets.newHashSet();
+    for (Interest interest : user.getInterestList()) {
+      if (interest.getType() == InterestType.INDUSTRY) {
+        if (interest.getSource() == InterestSource.TOMBSTONE) {
+          tombstonedIndustryCodes.add(interest.getIndustryCode());
+        } else {
+          industries.add(interest.getIndustryCode());
+        }
       }
     }
-    return currentIndustries;
+    industries.removeAll(tombstonedIndustryCodes);
+    return Iterables.transform(industries, new Function<Integer, Industry>() {
+      @Override
+      public Industry apply(Integer industryCode) {
+        return Industry.fromCode(industryCode);
+      }
+    });
   }
 }

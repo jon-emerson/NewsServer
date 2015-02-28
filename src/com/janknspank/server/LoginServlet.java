@@ -139,13 +139,8 @@ public class LoginServlet extends StandardServlet {
         Sessions.createFromLinkedProfile(linkedInLoginHandler.getLinkedInProfileDocument(), user);
 
     // Create the response.
-    UserHelper userHelper = new UserHelper(user);
     JSONObject response = this.createSuccessResponse();
-    JSONObject userJson = Serializer.toJSON(user);
-    userJson.put("favorites", userHelper.getFavoritesJsonArray());
-    userJson.put("industries", userHelper.getIndustriesJsonArray());
-    userJson.put("ratings", userHelper.getRatingsJsonArray());
-    response.put("user", userJson);
+    response.put("user", new UserHelper(user).getUserJson());
     response.put("session", Serializer.toJSON(session));
     return response;
   }

@@ -3015,6 +3015,10 @@ public final class CoreProto {
        * <code>ANGELLIST = 3;</code>
        */
       ANGELLIST(3, 3),
+      /**
+       * <code>USER = 4;</code>
+       */
+      USER(4, 4),
       ;
 
       /**
@@ -3033,6 +3037,10 @@ public final class CoreProto {
        * <code>ANGELLIST = 3;</code>
        */
       public static final int ANGELLIST_VALUE = 3;
+      /**
+       * <code>USER = 4;</code>
+       */
+      public static final int USER_VALUE = 4;
 
 
       public final int getNumber() { return value; }
@@ -3043,6 +3051,7 @@ public final class CoreProto {
           case 1: return DBPEDIA_INSTANCE_TYPE;
           case 2: return DBPEDIA_LONG_ABSTRACT;
           case 3: return ANGELLIST;
+          case 4: return USER;
           default: return null;
         }
       }
@@ -8943,698 +8952,6 @@ public final class CoreProto {
     }
 
     // @@protoc_insertion_point(class_scope:TrainedArticleClassification)
-  }
-
-  public interface InterpretedDataOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional .Article article = 1;
-    /**
-     * <code>optional .Article article = 1;</code>
-     */
-    boolean hasArticle();
-    /**
-     * <code>optional .Article article = 1;</code>
-     */
-    com.janknspank.proto.ArticleProto.Article getArticle();
-    /**
-     * <code>optional .Article article = 1;</code>
-     */
-    com.janknspank.proto.ArticleProto.ArticleOrBuilder getArticleOrBuilder();
-
-    // repeated string url = 2;
-    /**
-     * <code>repeated string url = 2;</code>
-     */
-    java.util.List<java.lang.String>
-    getUrlList();
-    /**
-     * <code>repeated string url = 2;</code>
-     */
-    int getUrlCount();
-    /**
-     * <code>repeated string url = 2;</code>
-     */
-    java.lang.String getUrl(int index);
-    /**
-     * <code>repeated string url = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getUrlBytes(int index);
-  }
-  /**
-   * Protobuf type {@code InterpretedData}
-   */
-  public static final class InterpretedData extends
-      com.google.protobuf.GeneratedMessage
-      implements InterpretedDataOrBuilder {
-    // Use InterpretedData.newBuilder() to construct.
-    private InterpretedData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private InterpretedData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final InterpretedData defaultInstance;
-    public static InterpretedData getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public InterpretedData getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private InterpretedData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.janknspank.proto.ArticleProto.Article.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = article_.toBuilder();
-              }
-              article_ = input.readMessage(com.janknspank.proto.ArticleProto.Article.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(article_);
-                article_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                url_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              url_.add(input.readBytes());
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          url_ = new com.google.protobuf.UnmodifiableLazyStringList(url_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.janknspank.proto.CoreProto.internal_static_InterpretedData_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.janknspank.proto.CoreProto.internal_static_InterpretedData_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.CoreProto.InterpretedData.class, com.janknspank.proto.CoreProto.InterpretedData.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<InterpretedData> PARSER =
-        new com.google.protobuf.AbstractParser<InterpretedData>() {
-      public InterpretedData parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new InterpretedData(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<InterpretedData> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    // optional .Article article = 1;
-    public static final int ARTICLE_FIELD_NUMBER = 1;
-    private com.janknspank.proto.ArticleProto.Article article_;
-    /**
-     * <code>optional .Article article = 1;</code>
-     */
-    public boolean hasArticle() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional .Article article = 1;</code>
-     */
-    public com.janknspank.proto.ArticleProto.Article getArticle() {
-      return article_;
-    }
-    /**
-     * <code>optional .Article article = 1;</code>
-     */
-    public com.janknspank.proto.ArticleProto.ArticleOrBuilder getArticleOrBuilder() {
-      return article_;
-    }
-
-    // repeated string url = 2;
-    public static final int URL_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList url_;
-    /**
-     * <code>repeated string url = 2;</code>
-     */
-    public java.util.List<java.lang.String>
-        getUrlList() {
-      return url_;
-    }
-    /**
-     * <code>repeated string url = 2;</code>
-     */
-    public int getUrlCount() {
-      return url_.size();
-    }
-    /**
-     * <code>repeated string url = 2;</code>
-     */
-    public java.lang.String getUrl(int index) {
-      return url_.get(index);
-    }
-    /**
-     * <code>repeated string url = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUrlBytes(int index) {
-      return url_.getByteString(index);
-    }
-
-    private void initFields() {
-      article_ = com.janknspank.proto.ArticleProto.Article.getDefaultInstance();
-      url_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, article_);
-      }
-      for (int i = 0; i < url_.size(); i++) {
-        output.writeBytes(2, url_.getByteString(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, article_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < url_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(url_.getByteString(i));
-        }
-        size += dataSize;
-        size += 1 * getUrlList().size();
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.janknspank.proto.CoreProto.InterpretedData parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.InterpretedData parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.CoreProto.InterpretedData prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code InterpretedData}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.CoreProto.InterpretedDataOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.janknspank.proto.CoreProto.internal_static_InterpretedData_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CoreProto.internal_static_InterpretedData_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CoreProto.InterpretedData.class, com.janknspank.proto.CoreProto.InterpretedData.Builder.class);
-      }
-
-      // Construct using com.janknspank.proto.CoreProto.InterpretedData.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getArticleFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        if (articleBuilder_ == null) {
-          article_ = com.janknspank.proto.ArticleProto.Article.getDefaultInstance();
-        } else {
-          articleBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        url_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.janknspank.proto.CoreProto.internal_static_InterpretedData_descriptor;
-      }
-
-      public com.janknspank.proto.CoreProto.InterpretedData getDefaultInstanceForType() {
-        return com.janknspank.proto.CoreProto.InterpretedData.getDefaultInstance();
-      }
-
-      public com.janknspank.proto.CoreProto.InterpretedData build() {
-        com.janknspank.proto.CoreProto.InterpretedData result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.janknspank.proto.CoreProto.InterpretedData buildPartial() {
-        com.janknspank.proto.CoreProto.InterpretedData result = new com.janknspank.proto.CoreProto.InterpretedData(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (articleBuilder_ == null) {
-          result.article_ = article_;
-        } else {
-          result.article_ = articleBuilder_.build();
-        }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          url_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              url_);
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.url_ = url_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.CoreProto.InterpretedData) {
-          return mergeFrom((com.janknspank.proto.CoreProto.InterpretedData)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.janknspank.proto.CoreProto.InterpretedData other) {
-        if (other == com.janknspank.proto.CoreProto.InterpretedData.getDefaultInstance()) return this;
-        if (other.hasArticle()) {
-          mergeArticle(other.getArticle());
-        }
-        if (!other.url_.isEmpty()) {
-          if (url_.isEmpty()) {
-            url_ = other.url_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureUrlIsMutable();
-            url_.addAll(other.url_);
-          }
-          onChanged();
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.janknspank.proto.CoreProto.InterpretedData parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.CoreProto.InterpretedData) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // optional .Article article = 1;
-      private com.janknspank.proto.ArticleProto.Article article_ = com.janknspank.proto.ArticleProto.Article.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.janknspank.proto.ArticleProto.Article, com.janknspank.proto.ArticleProto.Article.Builder, com.janknspank.proto.ArticleProto.ArticleOrBuilder> articleBuilder_;
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      public boolean hasArticle() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      public com.janknspank.proto.ArticleProto.Article getArticle() {
-        if (articleBuilder_ == null) {
-          return article_;
-        } else {
-          return articleBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      public Builder setArticle(com.janknspank.proto.ArticleProto.Article value) {
-        if (articleBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          article_ = value;
-          onChanged();
-        } else {
-          articleBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      public Builder setArticle(
-          com.janknspank.proto.ArticleProto.Article.Builder builderForValue) {
-        if (articleBuilder_ == null) {
-          article_ = builderForValue.build();
-          onChanged();
-        } else {
-          articleBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      public Builder mergeArticle(com.janknspank.proto.ArticleProto.Article value) {
-        if (articleBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              article_ != com.janknspank.proto.ArticleProto.Article.getDefaultInstance()) {
-            article_ =
-              com.janknspank.proto.ArticleProto.Article.newBuilder(article_).mergeFrom(value).buildPartial();
-          } else {
-            article_ = value;
-          }
-          onChanged();
-        } else {
-          articleBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      public Builder clearArticle() {
-        if (articleBuilder_ == null) {
-          article_ = com.janknspank.proto.ArticleProto.Article.getDefaultInstance();
-          onChanged();
-        } else {
-          articleBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      public com.janknspank.proto.ArticleProto.Article.Builder getArticleBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getArticleFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      public com.janknspank.proto.ArticleProto.ArticleOrBuilder getArticleOrBuilder() {
-        if (articleBuilder_ != null) {
-          return articleBuilder_.getMessageOrBuilder();
-        } else {
-          return article_;
-        }
-      }
-      /**
-       * <code>optional .Article article = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.janknspank.proto.ArticleProto.Article, com.janknspank.proto.ArticleProto.Article.Builder, com.janknspank.proto.ArticleProto.ArticleOrBuilder> 
-          getArticleFieldBuilder() {
-        if (articleBuilder_ == null) {
-          articleBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.janknspank.proto.ArticleProto.Article, com.janknspank.proto.ArticleProto.Article.Builder, com.janknspank.proto.ArticleProto.ArticleOrBuilder>(
-                  article_,
-                  getParentForChildren(),
-                  isClean());
-          article_ = null;
-        }
-        return articleBuilder_;
-      }
-
-      // repeated string url = 2;
-      private com.google.protobuf.LazyStringList url_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureUrlIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          url_ = new com.google.protobuf.LazyStringArrayList(url_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public java.util.List<java.lang.String>
-          getUrlList() {
-        return java.util.Collections.unmodifiableList(url_);
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public int getUrlCount() {
-        return url_.size();
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public java.lang.String getUrl(int index) {
-        return url_.get(index);
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUrlBytes(int index) {
-        return url_.getByteString(index);
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public Builder setUrl(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUrlIsMutable();
-        url_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public Builder addUrl(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUrlIsMutable();
-        url_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public Builder addAllUrl(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureUrlIsMutable();
-        super.addAll(values, url_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public Builder clearUrl() {
-        url_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string url = 2;</code>
-       */
-      public Builder addUrlBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUrlIsMutable();
-        url_.add(value);
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:InterpretedData)
-    }
-
-    static {
-      defaultInstance = new InterpretedData(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:InterpretedData)
   }
 
   public interface DistributionOrBuilder
@@ -15597,11 +14914,6 @@ public final class CoreProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_TrainedArticleClassification_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_InterpretedData_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_InterpretedData_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Distribution_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -15646,84 +14958,82 @@ public final class CoreProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/core.proto\032(com/j" +
-      "anknspank/database/extensions.proto\032\"com" +
-      "/janknspank/proto/article.proto\"\252\001\n\004Link" +
-      "\022\'\n\rorigin_url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035" +
-      "\001\022,\n\022destination_url_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\030\250\246\035\001\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246\035\001\022\035\n" +
-      "\017last_found_time\030\004 \001(\003B\004\210\246\035\001:\016\212\265\030\nMySQL." +
-      "Link\"\216\002\n\003Url\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246" +
-      "\035\001\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022!\n\nor" +
-      "igin_url\030\010 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022 \n\016discove",
-      "ry_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025last_crawl_st" +
-      "art_time\030\005 \001(\003B\010\220\246\035\005\240\246\035\003\022(\n\026last_crawl_f" +
-      "inish_time\030\006 \001(\003B\010\220\246\035\005\240\246\035\003\022 \n\016crawl_prio" +
-      "rity\030\007 \001(\003B\010\220\246\035\003\240\246\035\003:\017\212\265\030\013MongoDB.Url\"\200\001" +
-      "\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001\220\246\035\004" +
-      "\230\246\035\200\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001" +
-      "\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017MongoDB" +
-      ".Session\"\207\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035" +
-      "\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d" +
-      "\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006sour",
-      "ce\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014ca" +
-      "nonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005topic\030" +
-      "\006 \003(\0132\023.Entity.EntityTopic\032\277\002\n\013EntityTop" +
-      "ic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keywo" +
-      "rd\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246" +
-      "\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 " +
-      "\001(\0162\033.Entity.EntityTopic.Context:\007UNKNOW" +
-      "N\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_" +
-      "WORKED_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031\n\025AN" +
-      "GELLIST_INVESTED_IN\020\003\022\025\n\021ANGELLIST_ADVIS",
-      "ED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC\020\005\"Z\n\006Source\022\013" +
-      "\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031" +
-      "\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003" +
-      ":\020\212\265\030\014MySQL.Entity\"\347\001\n\nVectorData\022\034\n\016doc" +
-      "ument_count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_frequenc" +
-      "y\030\002 \003(\0132\031.VectorData.WordFrequency\022#\n\014di" +
-      "stribution\030\003 \001(\0132\r.Distribution\032c\n\rWordF" +
-      "requency\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfreq" +
-      "uency\030\002 \001(\005B\004\210\246\035\001\022!\n\023document_occurences" +
-      "\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndustry\022",
-      " \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020ind" +
-      "ustry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer" +
-      "_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036Mo" +
-      "ngoDB.TrainedArticleIndustry\"\347\001\n\034Trained" +
-      "ArticleClassification\022 \n\006url_id\030\001 \001(\tB\020\210" +
-      "\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classificatio" +
-      "n_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checke" +
-      "d\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001" +
-      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.Traine" +
-      "dArticleClassification\"9\n\017InterpretedDat",
-      "a\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(" +
-      "\t\"\207\001\n\014Distribution\022,\n\npercentile\030\001 \003(\0132\030" +
-      ".Distribution.Percentile\032I\n\nPercentile\022\022" +
-      "\n\npercentile\030\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020dat" +
-      "a_point_count\030\003 \001(\003\"\226\003\n\026ShareNormalizati" +
-      "onData\022T\n\027time_range_distribution\030\002 \003(\0132" +
-      "-.ShareNormalizationData.TimeRangeDistri" +
-      "butionB\004\210\246\035\001\022J\n\022domain_share_count\030\003 \003(\013" +
-      "2(.ShareNormalizationData.DomainShareCou" +
-      "ntB\004\210\246\035\001\032x\n\025TimeRangeDistribution\022\032\n\014sta",
-      "rt_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(" +
-      "\003B\004\210\246\035\001\022)\n\014distribution\030\003 \001(\0132\r.Distribu" +
-      "tionB\004\210\246\035\001\032`\n\020DomainShareCount\022\024\n\006domain" +
-      "\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 \001(\003B\004\210\246\035" +
-      "\001\022\031\n\013share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRati" +
-      "ng\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005" +
-      "email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url" +
-      "\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(" +
-      "\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246" +
-      "\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRating\"\262\002\n\022DeviceRe",
-      "gistration\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
-      "\240\246\035\003\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022" +
-      "B\n\013device_type\030\003 \001(\0162\036.DeviceRegistratio" +
-      "n.DeviceType:\007UNKNOWNB\004\210\246\035\001\022\037\n\tdevice_id" +
-      "\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022!\n\013create_time\030\005 \001(" +
-      "\003B\014\210\246\035\001\240\246\035\003\220\246\035\005\"/\n\nDeviceType\022\013\n\007UNKNOWN" +
-      "\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002:\036\212\265\030\032MongoDB.De" +
-      "viceRegistrationB!\n\024com.janknspank.proto" +
-      "B\tCoreProto"
+      "anknspank/database/extensions.proto\"\252\001\n\004" +
+      "Link\022\'\n\rorigin_url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035" +
+      "\030\250\246\035\001\022,\n\022destination_url_id\030\002 \001(\tB\020\210\246\035\001\220" +
+      "\246\035\003\230\246\035\030\250\246\035\001\022\034\n\016discovery_time\030\003 \001(\003B\004\210\246\035" +
+      "\001\022\035\n\017last_found_time\030\004 \001(\003B\004\210\246\035\001:\016\212\265\030\nMy" +
+      "SQL.Link\"\216\002\n\003Url\022\034\n\002id\030\002 \001(\tB\020\210\246\035\001\220\246\035\002\230\246" +
+      "\035\030\250\246\035\001\022\036\n\003url\030\001 \001(\tB\021\210\246\035\001\220\246\035\004\230\246\035\377\005\250\246\035\001\022!" +
+      "\n\norigin_url\030\010 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022 \n\016dis" +
+      "covery_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\'\n\025last_craw",
+      "l_start_time\030\005 \001(\003B\010\220\246\035\005\240\246\035\003\022(\n\026last_cra" +
+      "wl_finish_time\030\006 \001(\003B\010\220\246\035\005\240\246\035\003\022 \n\016crawl_" +
+      "priority\030\007 \001(\003B\010\220\246\035\003\240\246\035\003:\017\212\265\030\013MongoDB.Ur" +
+      "l\"\200\001\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001" +
+      "\220\246\035\004\230\246\035\200\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
+      "\250\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017Mon" +
+      "goDB.Session\"\221\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
+      "\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003" +
+      "\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006" +
+      "source\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"",
+      "\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005to" +
+      "pic\030\006 \003(\0132\023.Entity.EntityTopic\032\277\002\n\013Entit" +
+      "yTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007k" +
+      "eyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246" +
+      "\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007contex" +
+      "t\030\005 \001(\0162\033.Entity.EntityTopic.Context:\007UN" +
+      "KNOWN\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELL" +
+      "IST_WORKED_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031" +
+      "\n\025ANGELLIST_INVESTED_IN\020\003\022\025\n\021ANGELLIST_A" +
+      "DVISED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC\020\005\"d\n\006Sour",
+      "ce\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE" +
+      "\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r\n\tANGELLI" +
+      "ST\020\003\022\010\n\004USER\020\004:\020\212\265\030\014MySQL.Entity\"\347\001\n\nVec" +
+      "torData\022\034\n\016document_count\030\001 \001(\005B\004\210\246\035\001\0221\n" +
+      "\016word_frequency\030\002 \003(\0132\031.VectorData.WordF" +
+      "requency\022#\n\014distribution\030\003 \001(\0132\r.Distrib" +
+      "ution\032c\n\rWordFrequency\022\026\n\004word\030\001 \001(\tB\010\210\246" +
+      "\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(\005B\004\210\246\035\001\022!\n\023docum" +
+      "ent_occurences\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026TrainedAr" +
+      "ticleIndustry\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230",
+      "\246\035\030\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220" +
+      "\246\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246" +
+      "\035\030\250\246\035\001:\"\212\265\030\036MongoDB.TrainedArticleIndust" +
+      "ry\"\347\001\n\034TrainedArticleClassification\022 \n\006u" +
+      "rl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article" +
+      "_classification_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005" +
+      "\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017train" +
+      "er_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$" +
+      "MongoDB.TrainedArticleClassification\"\207\001\n" +
+      "\014Distribution\022,\n\npercentile\030\001 \003(\0132\030.Dist",
+      "ribution.Percentile\032I\n\nPercentile\022\022\n\nper" +
+      "centile\030\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_poi" +
+      "nt_count\030\003 \001(\003\"\226\003\n\026ShareNormalizationDat" +
+      "a\022T\n\027time_range_distribution\030\002 \003(\0132-.Sha" +
+      "reNormalizationData.TimeRangeDistributio" +
+      "nB\004\210\246\035\001\022J\n\022domain_share_count\030\003 \003(\0132(.Sh" +
+      "areNormalizationData.DomainShareCountB\004\210" +
+      "\246\035\001\032x\n\025TimeRangeDistribution\022\032\n\014start_mi" +
+      "llis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246" +
+      "\035\001\022)\n\014distribution\030\003 \001(\0132\r.DistributionB",
+      "\004\210\246\035\001\032`\n\020DomainShareCount\022\024\n\006domain\030\001 \001(" +
+      "\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013" +
+      "share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n" +
+      "\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email" +
+      "\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(" +
+      "\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246" +
+      "\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035" +
+      "\005:\023\212\265\030\017MySQL.UrlRating\"\262\002\n\022DeviceRegistr" +
+      "ation\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022" +
+      "!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022B\n\013de",
+      "vice_type\030\003 \001(\0162\036.DeviceRegistration.Dev" +
+      "iceType:\007UNKNOWNB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(" +
+      "\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022!\n\013create_time\030\005 \001(\003B\014\210\246" +
+      "\035\001\240\246\035\003\220\246\035\005\"/\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n" +
+      "\007ANDROID\020\001\022\007\n\003IOS\020\002:\036\212\265\030\032MongoDB.DeviceR" +
+      "egistrationB!\n\024com.janknspank.protoB\tCor" +
+      "eProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15784,14 +15094,8 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TrainedArticleClassification_descriptor,
               new java.lang.String[] { "UrlId", "ArticleClassificationCode", "Checked", "TrainerUserId", });
-          internal_static_InterpretedData_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_InterpretedData_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_InterpretedData_descriptor,
-              new java.lang.String[] { "Article", "Url", });
           internal_static_Distribution_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_Distribution_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Distribution_descriptor,
@@ -15803,7 +15107,7 @@ public final class CoreProto {
               internal_static_Distribution_Percentile_descriptor,
               new java.lang.String[] { "Percentile", "Value", "DataPointCount", });
           internal_static_ShareNormalizationData_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_ShareNormalizationData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ShareNormalizationData_descriptor,
@@ -15821,13 +15125,13 @@ public final class CoreProto {
               internal_static_ShareNormalizationData_DomainShareCount_descriptor,
               new java.lang.String[] { "Domain", "ArticleCount", "ShareCount", });
           internal_static_UrlRating_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_UrlRating_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UrlRating_descriptor,
               new java.lang.String[] { "Id", "Email", "Url", "Rating", "CreateTime", });
           internal_static_DeviceRegistration_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_DeviceRegistration_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_DeviceRegistration_descriptor,
@@ -15981,7 +15285,6 @@ public final class CoreProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.janknspank.database.ExtensionsProto.getDescriptor(),
-          com.janknspank.proto.ArticleProto.getDescriptor(),
         }, assigner);
   }
 

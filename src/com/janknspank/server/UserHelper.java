@@ -4,25 +4,32 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.api.client.util.Sets;
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.janknspank.bizness.EntityType;
+import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.UrlRatings;
-import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
-import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.AddressBookContact;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
+import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.UrlFavorite;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 
 /**
  * Helper class containing the user's favorite and rated articles.
@@ -30,17 +37,50 @@ import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 public class UserHelper {
   private final User user;
   private final Map<String, Long> favoriteArticleIds;
-  private final Map<IndustryCode, Relationship> industryCodeRelationships;
   private final Map<String, Article> articleMap;
+  private final Iterable<LinkedInContact> linkedInContacts;
+  private final Iterable<AddressBookContact> addressBookContacts;
 
   public UserHelper(User user) throws DatabaseSchemaException {
     this.user = user;
 
     // Create a map of the favorite articles.
     favoriteArticleIds = getFavoriteArticleIds();
-    industryCodeRelationships = IndustryCode.getFromUserIndustries(
-        UserIndustries.getCurrentIndustries(user));
     articleMap = getArticleMap(favoriteArticleIds.keySet());
+    Set<String> tombstonedPeopleNames = getTombstonedPeopleNames();
+    linkedInContacts = getLinkedInContacts(tombstonedPeopleNames);
+    addressBookContacts = getAddressBookContacts(tombstonedPeopleNames);
+  }
+
+  public Set<String> getTombstonedPeopleNames() {
+    Set<String> tombstonedPeopleNames = Sets.newHashSet();
+    for (Interest interest : user.getInterestList()) {
+      if (interest.getType() == InterestType.ENTITY
+          && EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.PERSON)
+          && interest.getSource() == InterestSource.TOMBSTONE) {
+        tombstonedPeopleNames.add(interest.getEntity().getKeyword());
+      }
+    }
+    return tombstonedPeopleNames;
+  }
+
+  private Iterable<LinkedInContact> getLinkedInContacts(final Set<String> tombstonedPeopleNames) {
+    return Iterables.filter(user.getLinkedInContactList(), new Predicate<LinkedInContact>() {
+      @Override
+      public boolean apply(LinkedInContact linkedInContact) {
+        return !tombstonedPeopleNames.contains(linkedInContact.getName());
+      }
+    });
+  }
+
+  private Iterable<AddressBookContact> getAddressBookContacts(
+      final Set<String> tombstonedPeopleNames) {
+    return Iterables.filter(user.getAddressBookContactList(), new Predicate<AddressBookContact>() {
+      @Override
+      public boolean apply(AddressBookContact addressBookContact) {
+        return !tombstonedPeopleNames.contains(addressBookContact.getName());
+      }
+    });
   }
 
   private Map<String, Long> getFavoriteArticleIds() throws DatabaseSchemaException {
@@ -69,7 +109,7 @@ public class UserHelper {
    * @param favoriteArticleIds A map from article URL ID to the time the
    *     current user favorited it.
    */
-  public JSONArray getFavoritesJsonArray() {
+  private JSONArray getFavoritesJsonArray() {
     List<Article> favoriteArticles = Lists.newArrayList();
     for (String urlId : favoriteArticleIds.keySet()) {
       if (articleMap.containsKey(urlId)) {
@@ -95,29 +135,27 @@ public class UserHelper {
     return favoritesJsonArray;
   }
 
-  public JSONArray getInterestsJsonArray() throws DatabaseSchemaException {
-    return Serializer.toJSON(UserInterests.getCurrentInterests(user));
-  }
-
-  /**
-   * Returns a filled-out version of the user's industries, including their
-   * titles and groups.  (The industry codes stored in the database are just
-   * thin pointer references, which is not enough for the client.)
-   */
-  public JSONArray getIndustriesJsonArray() {
+  private JSONArray getInterestsJsonArray() {
     JSONArray jsonArray = new JSONArray();
-    for (IndustryCode code : industryCodeRelationships.keySet()) {
-      JSONObject o = new JSONObject();
-      o.put("id", code.getId());
-      o.put("group", code.getGroup());
-      o.put("description", code.getDescription());
-      o.put("relationship", industryCodeRelationships.get(code).toString());
-      jsonArray.put(o);
+    for (Interest interest : UserInterests.getInterests(user)) {
+      JSONObject interestJsonObject = Serializer.toJSON(interest);
+      if (interest.getType() == InterestType.INDUSTRY) {
+        // This client needs to know industry names so it can render them!!
+        interestJsonObject.put("name",
+            Industry.fromCode(interest.getIndustryCode()).getName());
+      }
+      jsonArray.put(interestJsonObject);
     }
     return jsonArray;
   }
-  
-  public JSONArray getRatingsJsonArray() throws DatabaseSchemaException {
-    return Serializer.toJSON(UrlRatings.getForUser(user));
+
+  public JSONObject getUserJson() throws DatabaseSchemaException {
+    JSONObject userJson = Serializer.toJSON(user);
+    userJson.append("address_book_bontacts", Serializer.toJSON(addressBookContacts));
+    userJson.append("favorites", getFavoritesJsonArray());
+    userJson.append("interests", getInterestsJsonArray());
+    userJson.append("linked_in_contacts", Serializer.toJSON(linkedInContacts));
+    userJson.append("ratings", Serializer.toJSON(UrlRatings.getForUser(user)));
+    return userJson;
   }
 }

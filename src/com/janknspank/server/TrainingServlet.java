@@ -17,8 +17,8 @@ import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.ArticleTypeCodes;
 import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.Urls;
-import com.janknspank.classifier.IndustryCode;
 import com.janknspank.common.Asserts;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -57,14 +57,14 @@ public class TrainingServlet extends StandardServlet {
                     "description", articleClassification.getDescription());
               }
             }),
-        "industries", Iterables.transform(Arrays.asList(IndustryCode.values()),
-            new Function<IndustryCode, SoyMapData>() {
+        "industries", Iterables.transform(Arrays.asList(Industry.values()),
+            new Function<Industry, SoyMapData>() {
               @Override
-              public SoyMapData apply(IndustryCode industryCode) {
+              public SoyMapData apply(Industry industryCode) {
                 return new SoyMapData(
-                    "id", industryCode.getId(),
+                    "code", industryCode.getCode(),
                     "group", industryCode.getGroup(),
-                    "description", industryCode.getDescription());
+                    "description", industryCode.getName());
               }
             }));
   }

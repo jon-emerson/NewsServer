@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.janknspank.classifier.IndustryCode;
+import com.janknspank.bizness.Industry;
 import com.janknspank.database.DatabaseSchemaException;
 
 @AuthenticationRequired
@@ -20,20 +20,20 @@ public class GetIndustriesServlet extends StandardServlet {
     JSONArray matchingIndustries = new JSONArray();
     if (searchString != null) {
       searchString = searchString.toLowerCase();
-      for (IndustryCode industry : IndustryCode.values()) {
-        if (industry.getDescription().toLowerCase().contains(searchString)) {
+      for (Industry industry : Industry.values()) {
+        if (industry.getName().toLowerCase().contains(searchString)) {
           JSONObject industryJSON = new JSONObject();
-          industryJSON.put("keyword", industry.getDescription());
-          industryJSON.put("id", industry.getId());
+          industryJSON.put("keyword", industry.getName());
+          industryJSON.put("code", industry.getCode());
           matchingIndustries.put(industryJSON);
         }
       }
     } else {
       // Get all the titles
-      for (IndustryCode industry : IndustryCode.values()) {
+      for (Industry industry : Industry.values()) {
         JSONObject industryJSON = new JSONObject();
-        industryJSON.put("keyword", industry.getDescription());
-        industryJSON.put("id", industry.getId());
+        industryJSON.put("keyword", industry.getName());
+        industryJSON.put("code", industry.getCode());
         matchingIndustries.put(industryJSON);
       }
     }

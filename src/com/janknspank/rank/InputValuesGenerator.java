@@ -5,20 +5,21 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
+import com.janknspank.bizness.EntityType;
+import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
-import com.janknspank.classifier.IndustryCode;
 import com.janknspank.classifier.StartupFeatureHelper;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserIndustry;
 
 /**
  * Helper class to generate input node values for the Scorer.
@@ -26,9 +27,8 @@ import com.janknspank.proto.UserProto.UserIndustry;
 public class InputValuesGenerator {
   public static double relevanceToUserIndustries(User user, Article article) {
     double relevance = 0;
-    for (UserIndustry userIndustry : UserIndustries.getCurrentIndustries(user)) {
-      relevance += getSimilarityToIndustry(
-          article, IndustryCode.fromId(userIndustry.getIndustryCodeId()));
+    for (Industry userIndustry : UserIndustries.getIndustries(user)) {
+      relevance += getSimilarityToIndustry(article, userIndustry);
     }
     return Math.min(1.0, relevance);
   }
@@ -41,9 +41,10 @@ public class InputValuesGenerator {
 
   public static double relevanceToContacts(User user, Article article) {
     Set<String> contactsKeywords = Sets.newHashSet();
-    for (Interest interest : UserInterests.getCurrentInterests(user)) {
-      if (interest.getType() == UserInterests.TYPE_PERSON) {
-        contactsKeywords.add(interest.getKeyword());
+    for (Interest interest : UserInterests.getInterests(user)) {
+      if (interest.getType() == InterestType.ENTITY &&
+          EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.PERSON)) {
+        contactsKeywords.add(interest.getEntity().getKeyword());
       }
     }
     int count = 0;
@@ -107,7 +108,8 @@ public class InputValuesGenerator {
         for (ArticleFeature articleFeature : article.getFeatureList()) {
           FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
           if (StartupFeatureHelper.isStartupFeature(featureId) &&
-              StartupFeatureHelper.isRelatedToIndustries(featureId, user.getIndustryList())) {
+              StartupFeatureHelper.isRelatedToIndustries(
+                  featureId, UserIndustries.getIndustries(user))) {
             return articleFeature.getSimilarity();
           }
         }
@@ -134,9 +136,9 @@ public class InputValuesGenerator {
     return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
   }
 
-  public static double getSimilarityToIndustry(Article article, IndustryCode industryCode) {
+  public static double getSimilarityToIndustry(Article article, Industry industry) {
     ArticleFeature industryFeature =
-        ArticleFeatures.getFeature(article, industryCode.getFeatureId());
+        ArticleFeatures.getFeature(article, industry.getFeatureId());
     // Only value relevance greater than 66.7%.
     return (industryFeature == null) ? 0 :
         Math.max(0, industryFeature.getSimilarity() * 3 - 2);

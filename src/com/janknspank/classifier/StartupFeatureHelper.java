@@ -1,12 +1,11 @@
 package com.janknspank.classifier;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.janknspank.proto.UserProto.UserIndustry;
+import com.janknspank.bizness.Industry;
 
 /**
  * Records the relevance of various startup feature vectors to their underlying
@@ -15,36 +14,35 @@ import com.janknspank.proto.UserProto.UserIndustry;
  * since /classifier/ should be crawl-time concerns.)
  */
 public class StartupFeatureHelper {
-  private static final Map<FeatureId, Set<IndustryCode>> RELATED_INDUSTRIES_MAP =
-      ImmutableMap.<FeatureId, Set<IndustryCode>>builder()
+  private static final Map<FeatureId, Set<Industry>> RELATED_INDUSTRIES_MAP =
+      ImmutableMap.<FeatureId, Set<Industry>>builder()
           .put(FeatureId.STARTUP_TECH, ImmutableSet.of(
-              IndustryCode.COMPUTER_HARDWARE,
-              IndustryCode.COMPUTER_SOFTWARE,
-              IndustryCode.COMPUTER_NETWORKING,
-              IndustryCode.INTERNET,
-              IndustryCode.BIOTECHNOLOGY,  // Probably can improve this.
-              IndustryCode.CONSUMER_ELECTRONICS,
-              IndustryCode.COMPUTER_GAMES,
-              IndustryCode.COMPUTER_AND_NETWORK_SECURITY))
+              Industry.COMPUTER_HARDWARE,
+              Industry.COMPUTER_SOFTWARE,
+              Industry.COMPUTER_NETWORKING,
+              Industry.INTERNET,
+              Industry.BIOTECHNOLOGY,  // Probably can improve this.
+              Industry.CONSUMER_ELECTRONICS,
+              Industry.COMPUTER_GAMES,
+              Industry.COMPUTER_AND_NETWORK_SECURITY))
           .put(FeatureId.STARTUP_TRADITIONAL, ImmutableSet.of(
-              IndustryCode.CONSUMER_GOODS,
-              IndustryCode.AUTOMOTIVE))
+              Industry.CONSUMER_GOODS,
+              Industry.AUTOMOTIVE))
           .build();
 
   /**
    * Returns true if this startup feature is particularly relevant to the
    * passed industry code.
    */
-  public static boolean isRelatedToIndustry(FeatureId featureId, IndustryCode industryCode) {
+  public static boolean isRelatedToIndustry(FeatureId featureId, Industry industryCode) {
     return RELATED_INDUSTRIES_MAP.containsKey(featureId)
         && RELATED_INDUSTRIES_MAP.get(featureId).contains(industryCode);
   }
 
   public static boolean isRelatedToIndustries(
-      FeatureId featureId, List<UserIndustry> userIndustries) {
-    for (UserIndustry userIndustry : userIndustries) {
-      if (isRelatedToIndustry(
-          featureId, IndustryCode.findFromId(userIndustry.getIndustryCodeId()))) {
+      FeatureId featureId, Iterable<Industry> userIndustries) {
+    for (Industry userIndustry : userIndustries) {
+      if (isRelatedToIndustry(featureId, userIndustry)) {
         return true;
       }
     }
