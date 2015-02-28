@@ -167,3 +167,8 @@ message ArticleFeature {
   // A score above 0.80 means its relevance is in the top 20% of articles.
   optional double similarity = 2;
 }
+
+message InterpretedData {
+  optional Article article = 1;
+  repeated string url = 2;
+}

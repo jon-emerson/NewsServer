@@ -1,19 +1,17 @@
-package com.janknspank.classifier;
+package com.janknspank.bizness;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
-import com.janknspank.proto.UserProto.UserIndustry;
-import com.janknspank.proto.UserProto.UserIndustry.Relationship;
+import com.janknspank.classifier.FeatureId;
 
 /**
  * Canonicalization of various business industries.  Used for user and
  * article classifications.
  */
-public enum IndustryCode {
+public enum Industry {
   DEFENSE_AND_SPACE(1, FeatureId.DEFENSE_AND_SPACE, "gov tech",
       "Defense & Space"),
   COMPUTER_HARDWARE(3, FeatureId.COMPUTER_HARDWARE, "tech",
@@ -310,29 +308,29 @@ public enum IndustryCode {
   GOVERNMENT_RELATIONS(148, FeatureId.GOVERNMENT_RELATIONS, "gov",
       "Government Relations");
 
-  private static final Map<Integer, IndustryCode> INDUSTRY_CODE_MAP = Maps.uniqueIndex(
-      Arrays.asList(IndustryCode.values()),
-      new Function<IndustryCode, Integer>() {
+  private static final Map<Integer, Industry> INDUSTRY_MAP = Maps.uniqueIndex(
+      Arrays.asList(Industry.values()),
+      new Function<Industry, Integer>() {
         @Override
-        public Integer apply(IndustryCode industryCode) {
-          return industryCode.id;
+        public Integer apply(Industry industry) {
+          return industry.code;
         }
       });
 
-  private final int id;
+  private final int code;
   private final FeatureId featureId;
   private final String group;
-  private final String description;
+  private final String name;
 
-  private IndustryCode(int id, FeatureId featureId, String group, String description) {
-    this.id = id;
+  private Industry(int code, FeatureId featureId, String group, String name) {
+    this.code = code;
     this.featureId = featureId;
     this.group = group;
-    this.description = description;
+    this.name = name;
   }
 
-  public int getId() {
-    return id;
+  public int getCode() {
+    return code;
   }
 
   public FeatureId getFeatureId() {
@@ -343,56 +341,33 @@ public enum IndustryCode {
     return group;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
-  /**
-   * Returns a Map of the user's industries, mapped to the user's relationship
-   * with each industry (e.g. current, desired, etc).
-   */
-  public static Map<IndustryCode, Relationship> getFromUserIndustries(
-      Iterable<UserIndustry> userIndustries) {
-    Map<IndustryCode, Relationship> industryCodeMap = new HashMap<>();
-    for (UserIndustry userIndustry : userIndustries) {
-      industryCodeMap.put(INDUSTRY_CODE_MAP.get(userIndustry.getIndustryCodeId()),
-          userIndustry.getRelationship());
-    }
-    return industryCodeMap;
+  public String getName() {
+    return name;
   }
 
   /**
    * It's awful that we have to do this, but unfortunately LinkedIn's Profile
    * response only includes English strings for people's current industries.
    */
-  public static IndustryCode fromDescription(String description) {
-    for (IndustryCode industryCode : INDUSTRY_CODE_MAP.values()) {
-      if (industryCode.description.equals(description)) {
-        return industryCode;
+  public static Industry fromDescription(String description) {
+    for (Industry industry : INDUSTRY_MAP.values()) {
+      if (industry.name.equals(description)) {
+        return industry;
       }
     }
     return null;
   }
 
-  public static IndustryCode fromFeatureId(FeatureId featureId) {
-    for (IndustryCode industryCode : INDUSTRY_CODE_MAP.values()) {
-      if (industryCode.featureId == featureId) {
-        return industryCode;
+  public static Industry fromFeatureId(FeatureId featureId) {
+    for (Industry industry : INDUSTRY_MAP.values()) {
+      if (industry.featureId == featureId) {
+        return industry;
       }
     }
     return null;
   }
 
-  public static IndustryCode fromId(int id) {
-    for (IndustryCode industryCode : INDUSTRY_CODE_MAP.values()) {
-      if (industryCode.id == id) {
-        return industryCode;
-      }
-    }
-    throw new IllegalArgumentException("Value " + id + " is not a valid industry code ID.");
-  }
-
-  public static IndustryCode findFromId(int id) {
-    return INDUSTRY_CODE_MAP.get(id);
+  public static Industry fromCode(int code) {
+    return INDUSTRY_MAP.get(code);
   }
 }

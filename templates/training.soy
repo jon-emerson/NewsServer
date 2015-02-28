@@ -65,7 +65,7 @@
       <ul class="list">
       {foreach $industry in $industries}
         <li>
-          <input type="checkbox" name="industriesCheckboxes" value="{$industry.id}" />
+          <input type="checkbox" name="industriesCheckboxes" value="{$industry.code}" />
           <span class="industryDescription">{$industry.description}</span>
           <span class="industryGroup">{$industry.group}</span><br>
         </li>

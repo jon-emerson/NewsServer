@@ -6091,6 +6091,698 @@ public final class ArticleProto {
     // @@protoc_insertion_point(class_scope:ArticleFeature)
   }
 
+  public interface InterpretedDataOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional .Article article = 1;
+    /**
+     * <code>optional .Article article = 1;</code>
+     */
+    boolean hasArticle();
+    /**
+     * <code>optional .Article article = 1;</code>
+     */
+    com.janknspank.proto.ArticleProto.Article getArticle();
+    /**
+     * <code>optional .Article article = 1;</code>
+     */
+    com.janknspank.proto.ArticleProto.ArticleOrBuilder getArticleOrBuilder();
+
+    // repeated string url = 2;
+    /**
+     * <code>repeated string url = 2;</code>
+     */
+    java.util.List<java.lang.String>
+    getUrlList();
+    /**
+     * <code>repeated string url = 2;</code>
+     */
+    int getUrlCount();
+    /**
+     * <code>repeated string url = 2;</code>
+     */
+    java.lang.String getUrl(int index);
+    /**
+     * <code>repeated string url = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes(int index);
+  }
+  /**
+   * Protobuf type {@code InterpretedData}
+   */
+  public static final class InterpretedData extends
+      com.google.protobuf.GeneratedMessage
+      implements InterpretedDataOrBuilder {
+    // Use InterpretedData.newBuilder() to construct.
+    private InterpretedData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private InterpretedData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final InterpretedData defaultInstance;
+    public static InterpretedData getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public InterpretedData getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private InterpretedData(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.janknspank.proto.ArticleProto.Article.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = article_.toBuilder();
+              }
+              article_ = input.readMessage(com.janknspank.proto.ArticleProto.Article.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(article_);
+                article_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                url_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              url_.add(input.readBytes());
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          url_ = new com.google.protobuf.UnmodifiableLazyStringList(url_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.ArticleProto.internal_static_InterpretedData_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.ArticleProto.internal_static_InterpretedData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.ArticleProto.InterpretedData.class, com.janknspank.proto.ArticleProto.InterpretedData.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<InterpretedData> PARSER =
+        new com.google.protobuf.AbstractParser<InterpretedData>() {
+      public InterpretedData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new InterpretedData(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InterpretedData> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional .Article article = 1;
+    public static final int ARTICLE_FIELD_NUMBER = 1;
+    private com.janknspank.proto.ArticleProto.Article article_;
+    /**
+     * <code>optional .Article article = 1;</code>
+     */
+    public boolean hasArticle() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .Article article = 1;</code>
+     */
+    public com.janknspank.proto.ArticleProto.Article getArticle() {
+      return article_;
+    }
+    /**
+     * <code>optional .Article article = 1;</code>
+     */
+    public com.janknspank.proto.ArticleProto.ArticleOrBuilder getArticleOrBuilder() {
+      return article_;
+    }
+
+    // repeated string url = 2;
+    public static final int URL_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList url_;
+    /**
+     * <code>repeated string url = 2;</code>
+     */
+    public java.util.List<java.lang.String>
+        getUrlList() {
+      return url_;
+    }
+    /**
+     * <code>repeated string url = 2;</code>
+     */
+    public int getUrlCount() {
+      return url_.size();
+    }
+    /**
+     * <code>repeated string url = 2;</code>
+     */
+    public java.lang.String getUrl(int index) {
+      return url_.get(index);
+    }
+    /**
+     * <code>repeated string url = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUrlBytes(int index) {
+      return url_.getByteString(index);
+    }
+
+    private void initFields() {
+      article_ = com.janknspank.proto.ArticleProto.Article.getDefaultInstance();
+      url_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, article_);
+      }
+      for (int i = 0; i < url_.size(); i++) {
+        output.writeBytes(2, url_.getByteString(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, article_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < url_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(url_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getUrlList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.InterpretedData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.ArticleProto.InterpretedData prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code InterpretedData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.ArticleProto.InterpretedDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.ArticleProto.internal_static_InterpretedData_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.ArticleProto.internal_static_InterpretedData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.ArticleProto.InterpretedData.class, com.janknspank.proto.ArticleProto.InterpretedData.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.ArticleProto.InterpretedData.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getArticleFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (articleBuilder_ == null) {
+          article_ = com.janknspank.proto.ArticleProto.Article.getDefaultInstance();
+        } else {
+          articleBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        url_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.ArticleProto.internal_static_InterpretedData_descriptor;
+      }
+
+      public com.janknspank.proto.ArticleProto.InterpretedData getDefaultInstanceForType() {
+        return com.janknspank.proto.ArticleProto.InterpretedData.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.ArticleProto.InterpretedData build() {
+        com.janknspank.proto.ArticleProto.InterpretedData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.ArticleProto.InterpretedData buildPartial() {
+        com.janknspank.proto.ArticleProto.InterpretedData result = new com.janknspank.proto.ArticleProto.InterpretedData(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (articleBuilder_ == null) {
+          result.article_ = article_;
+        } else {
+          result.article_ = articleBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          url_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              url_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.url_ = url_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.ArticleProto.InterpretedData) {
+          return mergeFrom((com.janknspank.proto.ArticleProto.InterpretedData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.ArticleProto.InterpretedData other) {
+        if (other == com.janknspank.proto.ArticleProto.InterpretedData.getDefaultInstance()) return this;
+        if (other.hasArticle()) {
+          mergeArticle(other.getArticle());
+        }
+        if (!other.url_.isEmpty()) {
+          if (url_.isEmpty()) {
+            url_ = other.url_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureUrlIsMutable();
+            url_.addAll(other.url_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.ArticleProto.InterpretedData parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.ArticleProto.InterpretedData) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional .Article article = 1;
+      private com.janknspank.proto.ArticleProto.Article article_ = com.janknspank.proto.ArticleProto.Article.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.ArticleProto.Article, com.janknspank.proto.ArticleProto.Article.Builder, com.janknspank.proto.ArticleProto.ArticleOrBuilder> articleBuilder_;
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      public boolean hasArticle() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      public com.janknspank.proto.ArticleProto.Article getArticle() {
+        if (articleBuilder_ == null) {
+          return article_;
+        } else {
+          return articleBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      public Builder setArticle(com.janknspank.proto.ArticleProto.Article value) {
+        if (articleBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          article_ = value;
+          onChanged();
+        } else {
+          articleBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      public Builder setArticle(
+          com.janknspank.proto.ArticleProto.Article.Builder builderForValue) {
+        if (articleBuilder_ == null) {
+          article_ = builderForValue.build();
+          onChanged();
+        } else {
+          articleBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      public Builder mergeArticle(com.janknspank.proto.ArticleProto.Article value) {
+        if (articleBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              article_ != com.janknspank.proto.ArticleProto.Article.getDefaultInstance()) {
+            article_ =
+              com.janknspank.proto.ArticleProto.Article.newBuilder(article_).mergeFrom(value).buildPartial();
+          } else {
+            article_ = value;
+          }
+          onChanged();
+        } else {
+          articleBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      public Builder clearArticle() {
+        if (articleBuilder_ == null) {
+          article_ = com.janknspank.proto.ArticleProto.Article.getDefaultInstance();
+          onChanged();
+        } else {
+          articleBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      public com.janknspank.proto.ArticleProto.Article.Builder getArticleBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getArticleFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      public com.janknspank.proto.ArticleProto.ArticleOrBuilder getArticleOrBuilder() {
+        if (articleBuilder_ != null) {
+          return articleBuilder_.getMessageOrBuilder();
+        } else {
+          return article_;
+        }
+      }
+      /**
+       * <code>optional .Article article = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.ArticleProto.Article, com.janknspank.proto.ArticleProto.Article.Builder, com.janknspank.proto.ArticleProto.ArticleOrBuilder> 
+          getArticleFieldBuilder() {
+        if (articleBuilder_ == null) {
+          articleBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.ArticleProto.Article, com.janknspank.proto.ArticleProto.Article.Builder, com.janknspank.proto.ArticleProto.ArticleOrBuilder>(
+                  article_,
+                  getParentForChildren(),
+                  isClean());
+          article_ = null;
+        }
+        return articleBuilder_;
+      }
+
+      // repeated string url = 2;
+      private com.google.protobuf.LazyStringList url_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUrlIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          url_ = new com.google.protobuf.LazyStringArrayList(url_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public java.util.List<java.lang.String>
+          getUrlList() {
+        return java.util.Collections.unmodifiableList(url_);
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public int getUrlCount() {
+        return url_.size();
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public java.lang.String getUrl(int index) {
+        return url_.get(index);
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes(int index) {
+        return url_.getByteString(index);
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public Builder setUrl(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUrlIsMutable();
+        url_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public Builder addUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUrlIsMutable();
+        url_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public Builder addAllUrl(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUrlIsMutable();
+        super.addAll(values, url_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public Builder clearUrl() {
+        url_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string url = 2;</code>
+       */
+      public Builder addUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUrlIsMutable();
+        url_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:InterpretedData)
+    }
+
+    static {
+      defaultInstance = new InterpretedData(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:InterpretedData)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Article_descriptor;
   private static
@@ -6111,6 +6803,11 @@ public final class ArticleProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ArticleFeature_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_InterpretedData_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_InterpretedData_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6151,8 +6848,10 @@ public final class ArticleProto {
       "2\024.ArticleFeature.Type:\007UNKNOWN\022\022\n\nsimil" +
       "arity\030\002 \001(\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERV",
       "ES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPRO" +
-      "VES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020\004B$\n\024com.j" +
-      "anknspank.protoB\014ArticleProto"
+      "VES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020\004\"9\n\017Inter" +
+      "pretedData\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n" +
+      "\003url\030\002 \003(\tB$\n\024com.janknspank.protoB\014Arti" +
+      "cleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6183,6 +6882,12 @@ public final class ArticleProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleFeature_descriptor,
               new java.lang.String[] { "FeatureId", "Type", "Similarity", });
+          internal_static_InterpretedData_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_InterpretedData_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_InterpretedData_descriptor,
+              new java.lang.String[] { "Article", "Url", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);

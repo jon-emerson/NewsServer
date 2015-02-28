@@ -1,7 +1,8 @@
-// Core definitions for NewsServer protos.
+// Core definitions for NewsServer protos.  This should be where shared protos
+// are defined.  As such, this file shouldn't depend on anything else, except
+// for the base extensions (extensions.proto).
 
 import "com/janknspank/database/extensions.proto";
-import "com/janknspank/proto/article.proto";
 
 option java_package = "com.janknspank.proto";
 option java_outer_classname = "CoreProto";
@@ -134,6 +135,7 @@ message Entity {
     DBPEDIA_INSTANCE_TYPE = 1;
     DBPEDIA_LONG_ABSTRACT = 2;
     ANGELLIST = 3;
+    USER = 4;
   }
   optional Source source = 4 [
     (required) = YES,
@@ -286,11 +288,6 @@ message TrainedArticleClassification {
     (string_length) = 24,
     (string_charset) = LATIN1
   ];
-}
-
-message InterpretedData {
-  optional Article article = 1;
-  repeated string url = 2;
 }
 
 message Distribution {

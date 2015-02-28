@@ -1,13 +1,15 @@
 package com.janknspank.bizness;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.janknspank.classifier.FeatureId;
-import com.janknspank.classifier.IndustryCode;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -15,9 +17,11 @@ import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
+import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserIndustry;
 import com.janknspank.rank.Deduper;
 import com.janknspank.rank.Scorer;
 
@@ -37,6 +41,9 @@ public class Articles {
         new QueryOption.Limit(limit));
   }
 
+  /**
+   * NOTE(jonemerson): This function is crap and shouldn't be used in production.
+   */
   public static TopList<Article, Double> getArticlesForFeature(FeatureId featureId, int limit)
       throws DatabaseSchemaException {
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
@@ -75,9 +82,8 @@ public class Articles {
       User user, Scorer scorer, int limit) throws DatabaseSchemaException {
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
     Set<String> urls = Sets.newHashSet();
-    for (Article article : Iterables.concat(
-        getArticlesByInterest(UserInterests.getCurrentInterests(user), limit * 5),
-        getArticlesByIndustries(UserIndustries.getCurrentIndustries(user), limit * 5))) {
+    for (Article article :
+        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 5)) {
       if (urls.contains(article.getUrl())) {
         continue;
       }
@@ -100,34 +106,43 @@ public class Articles {
    * Gets a list of articles tailored specifically to the current user's
    * interests.
    */
-  public static Iterable<Article> getArticlesByInterest(Iterable<Interest> interests, int limit)
+  public static Iterable<Article> getArticlesForInterests(
+      User user, Iterable<Interest> interests, int limitPerType)
       throws DatabaseSchemaException {
-    return getArticlesForKeywords(
-        Iterables.transform(interests, new Function<Interest, String>() {
-          @Override
-          public String apply(Interest interest) {
-            return interest.getKeyword();
+    List<Industry> industries = Lists.newArrayList();
+    List<String> keywords = Lists.newArrayList();
+    for (Interest interest : interests) {
+      switch (interest.getType()) {
+        case ADDRESS_BOOK_CONTACTS:
+          for (AddressBookContact contact : user.getAddressBookContactList()) {
+            keywords.add(contact.getName());
           }
-        }),
-        limit);
-  }
+          break;
 
-  /**
-   * Gets a list of articles containing the user's LinkedIn contacts 
-   */
-  public static Iterable<Article> getArticlesContainingLinkedInContacts(User user, int limit) 
-      throws DatabaseSchemaException {
-    return Deduper.filterOutDupes(getArticlesByInterest(
-        UserInterests.getCurrentInterestsBySource(user, Interest.Source.LINKED_IN_CONNECTIONS), limit * 2));
-  }
+        case INDUSTRY:
+          industries.add(Industry.fromCode(interest.getIndustryCode()));
+          break;
 
-  /**
-   * Gets a list of articles containing the user's Address Book contacts 
-   */
-  public static Iterable<Article> getArticlesContainingAddressBookContacts(User user, int limit) 
-      throws DatabaseSchemaException {
-    return Deduper.filterOutDupes(getArticlesByInterest(
-        UserInterests.getCurrentInterestsBySource(user, Interest.Source.ADDRESS_BOOK), limit * 2));
+        case LINKED_IN_CONTACTS:
+          for (LinkedInContact contact : user.getLinkedInContactList()) {
+            keywords.add(contact.getName());
+          }
+          break;
+
+        case INTENT:
+          // INTENT interests are just used for ranking.
+          break;
+
+        case ENTITY:
+          keywords.add(interest.getEntity().getKeyword());
+          break;
+      }
+    }
+    // TODO(jonemerson): Each query should be a future.  The response should be
+    // a transforming future that dedupes the results.
+    return Iterables.concat(
+        getArticlesByIndustries(industries, limitPerType),
+        getArticlesForKeywords(keywords, limitPerType));
   }
 
   /**
@@ -135,13 +150,13 @@ public class Articles {
    * industries.
    */
   public static Iterable<Article> getArticlesByIndustries(
-      Iterable<UserIndustry> industries, int limit) throws DatabaseSchemaException {
+      Iterable<Industry> industries, int limit) throws DatabaseSchemaException {
     return Database.with(Article.class).get(
         new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(industries,
-            new Function<UserIndustry, Number>() {
+            new Function<Industry, Number>() {
           @Override
-          public Number apply(UserIndustry industry) {
-            return IndustryCode.fromId(industry.getIndustryCodeId()).getFeatureId().getId();
+          public Number apply(Industry industry) {
+            return Industry.fromCode(industry.getCode()).getFeatureId().getId();
           }
         })),
         new QueryOption.DescendingSort("published_time"),
@@ -166,6 +181,14 @@ public class Articles {
       taggedIndustries = TrainedArticleIndustries.getFromArticle(article.getUrlId());
     } while (!Iterables.isEmpty(taggedIndustries));
     return article;
+  }
+
+  public static Iterable<Article> getArticlesForContacts(
+      User user, InterestType contactType, int limit) throws DatabaseSchemaException {
+    // Kinda hacky but it works and re-uses code.
+    return getArticlesForInterests(user,
+        ImmutableList.of(Interest.newBuilder().setType(contactType).build()),
+        limit);
   }
 
   /** Helper method for creating the Article table. */

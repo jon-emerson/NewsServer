@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -28,27 +29,28 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.io.ByteStreams;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.JdkFutureAdapters;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.janknspank.classifier.IndustryCode;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
+import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.Entity.Source;
 import com.janknspank.proto.UserProto.Interest;
-import com.janknspank.proto.UserProto.Interest.Source;
-import com.janknspank.proto.UserProto.LinkedInConnections;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
+import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.LinkedInProfile;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserIndustry;
-import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 import com.janknspank.proto.UserProto.UserOrBuilder;
 import com.janknspank.server.RequestException;
 
@@ -157,25 +159,17 @@ public class LinkedInLoginHandler {
 
       // Update LinkedInConnections field on User object.
       stepStartTime = System.currentTimeMillis();
-      DocumentNode linkedInConnectionsDocument = linkedInConnectionsDocumentFuture.get(); // TODO: move this down to where it's used
-      userBuilder.setLinkedInConnections(createLinkedInConnections(linkedInConnectionsDocument));
-      System.out.println("setLinkedInConnections: " + (System.currentTimeMillis() - stepStartTime) + "ms");
+      DocumentNode linkedInConnectionsDocument = linkedInConnectionsDocumentFuture.get();
+      userBuilder.clearLinkedInContact();
+      userBuilder.addAllLinkedInContact(getLinkedInContacts(linkedInConnectionsDocument));
+      System.out.println("addAllLinkedInContact: " + (System.currentTimeMillis() - stepStartTime) + "ms");
 
       // Update Interests.
       stepStartTime = System.currentTimeMillis();
-      Iterable<Interest> updatedInterests = getUpdatedInterests(
-          userBuilder, linkedInProfileDocument, linkedInConnectionsDocument);
+      Iterable<Interest> updatedInterests = getUpdatedInterests(userBuilder, linkedInProfileDocument);
       userBuilder.clearInterest();
       userBuilder.addAllInterest(updatedInterests);
       System.out.println("addAllInterest: " + (System.currentTimeMillis() - stepStartTime) + "ms");
-
-      // Update UserIndustries.
-      stepStartTime = System.currentTimeMillis();
-      Iterable<UserIndustry> updatedUserIndustries = getUpdatedUserIndustries(
-          userBuilder, linkedInProfileDocument);
-      userBuilder.clearIndustry();
-      userBuilder.addAllIndustry(updatedUserIndustries);
-      System.out.println("addAllIndustry: " + (System.currentTimeMillis() - stepStartTime) + "ms");
 
       // Update LinkedIn profile photo URL.
       stepStartTime = System.currentTimeMillis();
@@ -238,13 +232,6 @@ public class LinkedInLoginHandler {
     return linkedInProfileBuilder.build();
   }
 
-  private LinkedInConnections createLinkedInConnections(DocumentNode linkedInConnectionsDocument) {
-    return LinkedInConnections.newBuilder()
-        .setData(linkedInConnectionsDocument.toLiteralString())
-        .setCreateTime(System.currentTimeMillis())
-        .build();
-  }
-
   /**
    * Gets a list of the user's employers, past and present, ordered by end time
    * descending.
@@ -285,85 +272,91 @@ public class LinkedInLoginHandler {
    * the user's latest LinkedIn API response documents.
    */
   private Iterable<Interest> getUpdatedInterests(UserOrBuilder user,
-      DocumentNode linkedInProfileDocument,
-      DocumentNode linkedInConnectionsDocument) {
+      DocumentNode linkedInProfileDocument) {
+    Interest linkedInContactInterest = null;
+    for (Interest interest : user.getInterestList()) {
+      if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
+        linkedInContactInterest = interest;
+      }
+    }
+    if (linkedInContactInterest == null) {
+      linkedInContactInterest = Interest.newBuilder()
+          .setId(GuidFactory.generate())
+          .setType(InterestType.LINKED_IN_CONTACTS)
+          .setSource(InterestSource.USER)
+          .setCreateTime(System.currentTimeMillis())
+          .build();
+    }
+
     return Iterables.concat(
         Iterables.filter(user.getInterestList(), new Predicate<Interest>() {
           @Override
           public boolean apply(Interest interest) {
-            return interest.getSource() != Source.LINKED_IN_CONNECTIONS
-                && interest.getSource() != Source.LINKED_IN_PROFILE;
+            return interest.getSource() != InterestSource.LINKED_IN_PROFILE
+                && interest.getType() != InterestType.LINKED_IN_CONTACTS;
           }
         }),
         getLinkedInProfileInterests(linkedInProfileDocument),
-        getLinkedInConnectionsInterests(linkedInConnectionsDocument));
+        ImmutableList.of(linkedInContactInterest));
   }
 
   /**
-   * Returns an updated list of UserIndustries for the current user, replacing any
-   * existing LinkedIn profile industries with ones derived from latest LinkedI
-   * profile response.
+   * Returns an Interest representing the current Industry specified in the passed
+   * LinkedIn profile.
    */
-  private Iterable<UserIndustry> getUpdatedUserIndustries(UserOrBuilder user,
-      DocumentNode linkedInProfileDocument) {
-    final UserIndustry linkedInProfileIndustry = getLinkedInProfileIndustry(linkedInProfileDocument);
-    // If the user already has the industry from his linkedin profile added,
-    // do nothing - Leave it as it, it's OK!  If not, append it.
-    if (Iterables.any(user.getIndustryList(), new Predicate<UserIndustry>() {
-       @Override
-       public boolean apply(UserIndustry industry) {
-         return linkedInProfileIndustry.getIndustryCodeId() == industry.getIndustryCodeId();
-       }
-     })) {
-      return user.getIndustryList();
-    } else {
-      return Iterables.concat(user.getIndustryList(), ImmutableList.of(linkedInProfileIndustry));
-    }
-  }
-
-  private UserIndustry getLinkedInProfileIndustry(DocumentNode linkedInProfileDocument) {
+  private Industry getLinkedInProfileIndustry(DocumentNode linkedInProfileDocument) {
     String industryDescription = linkedInProfileDocument.findFirst("industry").getFlattenedText();
-    IndustryCode industryCode = IndustryCode.fromDescription(industryDescription);
-    return UserIndustry.newBuilder()
-        .setIndustryCodeId(industryCode.getId())
-        .setSource(UserIndustry.Source.LINKED_IN_PROFILE)
-        .setRelationship(Relationship.CURRENT_INDUSTRY)
-        .setCreateTime(System.currentTimeMillis())
-        .build();
+    return Industry.fromDescription(industryDescription);
   }
 
   /**
-   * Returns a List of Interest objects for companies, skills, and other noun-
-   * like entities in the user's LinkedIn Profile document.  Each Interest will
-   * have a Source of LINKED_IN_PROFILE.
+   * Returns a List of Interest objects for industries, companies, skills, and
+   * other noun-like entities in the user's LinkedIn Profile document.  Each
+   * Interest will have a Source of LINKED_IN_PROFILE.
    * NOTE(jonemerson): Actually, this just does companies for now.  We found
    * that skills and locations added too much noise to the user's stream.
    */
-  private List<Interest> getLinkedInProfileInterests(DocumentNode linkedInProfileDocument) {
+  private Iterable<Interest> getLinkedInProfileInterests(DocumentNode linkedInProfileDocument) {
     Set<String> companyNames = Sets.newHashSet();
     for (Node companyNameNode : linkedInProfileDocument.findAll("position > company > name")) {
       companyNames.add(companyNameNode.getFlattenedText());
     }
-    List<Interest> companyInterests = Lists.newArrayList();
+    List<Interest> interests = Lists.newArrayList();
     for (String companyName : companyNames) {
-      companyInterests.add(Interest.newBuilder()
+      interests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
-          .setKeyword(companyName)
-          .setSource(Source.LINKED_IN_PROFILE)
-          .setType(UserInterests.TYPE_ORGANIZATION)
+          .setType(InterestType.ENTITY)
+          .setEntity(Entity.newBuilder()
+              // TODO(jonemerson): Canonicalize these vs. the Entity table in
+              // MySQL.
+              .setId(GuidFactory.generate())
+              .setKeyword(companyName)
+              .setType(EntityType.COMPANY.toString())
+              .setSource(Source.USER)
+              .build())
+          .setSource(InterestSource.LINKED_IN_PROFILE)
           .setCreateTime(System.currentTimeMillis())
           .build());
     }
-    return companyInterests;
+    Industry industry = getLinkedInProfileIndustry(linkedInProfileDocument);
+    if (industry != null) {
+      interests.add(Interest.newBuilder()
+              .setId(GuidFactory.generate())
+              .setType(InterestType.INDUSTRY)
+              .setIndustryCode(industry.getCode())
+              .setSource(InterestSource.LINKED_IN_PROFILE)
+              .setCreateTime(System.currentTimeMillis())
+              .build());
+    }
+    return interests;
   }
 
   /**
-   * Returns a List of Interest objects for every person in the LinkedIn
-   * Connections document.  Each Interest will have a Source of
-   * LINKED_IN_CONNECTIONS.
+   * Returns LinkedInContact objects for each person in the user's linked in
+   * connections.
    */
-  private List<Interest> getLinkedInConnectionsInterests(DocumentNode linkedInConnectionsDocument) {
-    Set<String> peopleNames = Sets.newHashSet();
+  private Iterable<LinkedInContact> getLinkedInContacts(DocumentNode linkedInConnectionsDocument) {
+    Map<String, LinkedInContact> linkedInContactsMap = Maps.newHashMap();
     for (Node personNode : linkedInConnectionsDocument.findAll("person")) {
       StringBuilder nameBuilder = new StringBuilder();
       Node firstNameNode = personNode.findFirst("first-name");
@@ -377,19 +370,10 @@ public class LinkedInLoginHandler {
         }
         nameBuilder.append(lastNameNode.getFlattenedText());
       }
-      peopleNames.add(nameBuilder.toString());
+      String name = nameBuilder.toString();
+      linkedInContactsMap.put(name, LinkedInContact.newBuilder().setName(name).build());
     }
-    List<Interest> personInterests = Lists.newArrayList();
-    for (String peopleName : peopleNames) {
-      personInterests.add(Interest.newBuilder()
-          .setId(GuidFactory.generate())
-          .setKeyword(peopleName)
-          .setSource(Source.LINKED_IN_CONNECTIONS)
-          .setType(UserInterests.TYPE_PERSON)
-          .setCreateTime(System.currentTimeMillis())
-          .build());
-    }
-    return personInterests;
+    return linkedInContactsMap.values();
   }
 
   /**

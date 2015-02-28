@@ -24,7 +24,7 @@ import com.janknspank.database.QueryOption;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.CoreProto.InterpretedData;
+import com.janknspank.proto.ArticleProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
 
 /**

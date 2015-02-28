@@ -7,14 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.janknspank.classifier.IndustryCode;
+import com.janknspank.bizness.GuidFactory;
+import com.janknspank.bizness.Industry;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserIndustry;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class SetUserIndustryServlet extends StandardServlet {
@@ -22,47 +25,46 @@ public class SetUserIndustryServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     // Read parameters.
-    int industryCodeId = Integer.parseInt(getRequiredParameter(req, "industry_id"));
+    int industryCode = Integer.parseInt(getRequiredParameter(req, "industryCode"));
     String follow = getRequiredParameter(req, "follow");
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
-    IndustryCode industryCode = IndustryCode.fromId(industryCodeId);
-    if (industryCode == null) {
-      throw new RequestException("Industry id is not valid");
+    if (Industry.fromCode(industryCode) == null) {
+      throw new RequestException("industryCode is not valid");
     }
 
     // Business logic.
-    UserIndustry.Source source;
-    source = ("true".equals(follow)) ? UserIndustry.Source.USER : UserIndustry.Source.TOMBSTONE;
+    InterestSource source = ("true".equals(follow))
+        ? InterestSource.USER : InterestSource.TOMBSTONE;
 
-    List<UserIndustry> userIndustries = Lists.newArrayList(user.getIndustryList());
-    UserIndustry existingIndustry = null;
-    boolean industryStateChanged = false;
+    List<Interest> interests = Lists.newArrayList(user.getInterestList());
+    Interest existingIndustryInterest = null;
+    boolean interestsChanged = false;
     int index = 0;
-    for (UserIndustry userIndustry : userIndustries) {
-      if (userIndustry.getIndustryCodeId() == industryCodeId) {
-        existingIndustry = userIndustry;
-        if (existingIndustry.getSource() != source) {
-          userIndustries.set(index, existingIndustry.toBuilder().setSource(source).build());
-          industryStateChanged = true;
+    for (Interest interest : interests) {
+      if (interest.getType() == InterestType.INDUSTRY
+          && interest.getIndustryCode() == industryCode) {
+        existingIndustryInterest = interest;
+        if (interest.getSource() != source) {
+          interests.set(index, interest.toBuilder().setSource(source).build());
+          interestsChanged = true;
         }
       }
       index++;
     }
 
-    if (existingIndustry == null) {
-      Database.with(User.class).push(user, "industry", ImmutableList.of(
-          UserIndustry.newBuilder()
-              .setIndustryCodeId(industryCodeId)
-              .setRelationship(UserIndustry.Relationship.DESIRED_INDUSTRY)
-              .setSource(source)
+    if (existingIndustryInterest == null) {
+      Database.with(User.class).push(user, "interest", ImmutableList.of(
+          Interest.newBuilder()
+              .setId(GuidFactory.generate())
+              .setType(InterestType.INDUSTRY)
+              .setIndustryCode(industryCode)
+              .setSource(InterestSource.USER)
               .setCreateTime(System.currentTimeMillis())
               .build()));
-    } else {
-      if (industryStateChanged) {
-        Database.with(User.class).set(user, "industry", userIndustries);
-      }
+    } else if (interestsChanged) {
+      Database.with(User.class).set(user, "interest", interests);
     }
 
     // Write response.

@@ -16,9 +16,8 @@ import ro.isdc.wro.extensions.script.RhinoUtils;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.janknspank.bizness.UserIndustries;
+import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.Users;
-import com.janknspank.classifier.IndustryCode;
 import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -26,9 +25,10 @@ import com.janknspank.database.MongoConnection;
 import com.janknspank.database.Mongoizer;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserIndustry;
-import com.janknspank.proto.UserProto.UserIndustry.Relationship;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
@@ -150,7 +150,7 @@ public class JavascriptScorer extends Scorer {
     BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(
         new BasicDBObject("published_time",
             new BasicDBObject("$gte", System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1))),
-        new BasicDBObject("feature.feature_id", getUserIndustryFeatureCode(user))));
+        new BasicDBObject("feature.feature_id", getUserIndustry(user).getFeatureId().getId())));
 
     DBCollection articleCollection = MongoConnection.getDatabase().getCollection("Article");
     MapReduceCommand cmd = new MapReduceCommand(
@@ -174,23 +174,14 @@ public class JavascriptScorer extends Scorer {
    * Helper function for getting the integer value of the user's current
    * industry.
    */
-  public static int getUserIndustryCode(User user) {
-    for (UserIndustry userIndustry : UserIndustries.getCurrentIndustries(user)) {
-      if (userIndustry.getRelationship() == Relationship.CURRENT_INDUSTRY) {
-        return userIndustry.getIndustryCodeId();
+  public static Industry getUserIndustry(User user) {
+    for (Interest interest : user.getInterestList()) {
+      if (interest.getType() == InterestType.INDUSTRY
+          && interest.getSource() == InterestSource.LINKED_IN_PROFILE) {
+        return Industry.fromCode(interest.getIndustryCode());
       }
     }
-    return 0;
-  }
-
-  /**
-   * Helper function for getting the FeatureId enum value for the user's
-   * current industry.  (Basically, the 100xx version of it.)
-   */
-  public static int getUserIndustryFeatureCode(User user) {
-    int userIndustryCode = getUserIndustryCode(user);
-    return (userIndustryCode > 0)
-        ? IndustryCode.fromId(userIndustryCode).getFeatureId().getId() : 0;
+    return null;
   }
 
   /**
@@ -206,9 +197,11 @@ public class JavascriptScorer extends Scorer {
     BasicDBObject obj = new BasicDBObject();
     obj.put("user", Mongoizer.toDBObject(user));
 
-    int userIndustryCode = getUserIndustryCode(user);
-    obj.put("userIndustryCode", userIndustryCode);
-    obj.put("userIndustryFeatureCode", IndustryCode.fromId(userIndustryCode).getFeatureId().getId());
+    Industry userIndustry = getUserIndustry(user);
+    if (userIndustry != null) {
+      obj.put("userIndustryCode", userIndustry.getCode());
+      obj.put("userIndustryFeatureCode", userIndustry.getFeatureId().getId());
+    }
 
     return obj;
   }
@@ -233,12 +226,14 @@ public class JavascriptScorer extends Scorer {
     // Now we can evaluate a script. Let's create a new object
     // using the object literal notation.
     Iterable<Article> articles = Database.with(Article.class).get(
-        new QueryOption.WhereEqualsNumber("feature.feature_id", getUserIndustryFeatureCode(user)),
+        new QueryOption.WhereEqualsNumber("feature.feature_id",
+            getUserIndustry(user).getFeatureId().getId()),
         new QueryOption.Limit(10));
     System.out.println("Processing " + Iterables.size(articles) + " articles...");
     JavascriptScorer scorer = new JavascriptScorer();
     for (Article article : articles) {
-      System.out.println("Found score " + scorer.getScore(user, article) + " for " + article.getUrl());
+      System.out.println("Found score " + scorer.getScore(user, article) + " for "
+          + article.getUrl());
     }
   }
 }
