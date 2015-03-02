@@ -15,6 +15,7 @@ import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Industry;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -26,41 +27,46 @@ import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
 public class SetUserInterestServlet extends StandardServlet {
+  /**
+   * Please see the {@code UserProto.Interest} for the required parameters.
+   * Depending on the interest type, different fields are required.
+   */
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     // Read parameters.
-    String interestTypeString = getRequiredParameter(req, "interest[type]");
-    String entityTypeString = getParameter(req, "interest[entity][type]");
-    String entityKeyword = getParameter(req, "interest[entity][keyword]");
-    String entityId = getParameter(req, "interest[entity][id]");
-    String entitySourceString = getParameter(req, "interest[entity][source]");
-    String industryCode = getParameter(req, "interest[industry_code]");
-    String intentCode = getParameter(req, "interest[intent_code]");
-    String following = getRequiredParameter(req, "follow");
+    String interestTypeParam = getRequiredParameter(req, "interest[type]");
+    String interestEntityTypeParam = getParameter(req, "interest[entity][type]");
+    String interestEntityKeywordParam = getParameter(req, "interest[entity][keyword]");
+    String interestEntityIdParam = getParameter(req, "interest[entity][id]");
+    String interestEntitySourceParam = getParameter(req, "interest[entity][source]");
+    String interestIndustryCodeParam = getParameter(req, "interest[industry_code]");
+    String interestIntentCodeParam = getParameter(req, "interest[intent_code]");
+    String followParam = getRequiredParameter(req, "follow");
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.
-    InterestType interestType = InterestType.valueOf(interestTypeString);
+    InterestType interestType = InterestType.valueOf(interestTypeParam);
     if (interestType == null) {
       throw new RequestException("Parameter 'interest[type]' is invalid");
     }
 
     InterestSource interestSource;
-    if ("true".equals(following)) {
+    if ("true".equals(followParam)) {
       interestSource = InterestSource.USER;
-    } else if ("false".equals(following)) {
+    } else if ("false".equals(followParam)) {
       interestSource = InterestSource.TOMBSTONE;
     } else {
       throw new RequestException("Parameter 'following' is invalid");
     }
-    
+
     // Build the new interest
     Interest.Builder interestBuilder = Interest.newBuilder();
-    interestBuilder.setType(interestType)
+    interestBuilder.setId(GuidFactory.generate())
+        .setType(interestType)
         .setSource(interestSource)
         .setCreateTime(System.currentTimeMillis());
-    
+
     // Set type-specific properties
     if (interestType == InterestType.ADDRESS_BOOK_CONTACTS ||
         interestType == InterestType.LINKED_IN_CONTACTS) {
@@ -68,35 +74,37 @@ public class SetUserInterestServlet extends StandardServlet {
     } else if (interestType == InterestType.ENTITY) {
       // Validate entity parameters
       Entity entity;
-      if (entityId != null) {
-        entity = Entities.getEntityById(entityId);
+      if (interestEntityIdParam != null) {
+        entity = Entities.getEntityById(interestEntityIdParam);
         if (entity == null) {
           throw new RequestException("Parameter 'interest[entity][id]' is invalid");
         }
       } else {
-        if (entityKeyword == null) {
+        if (interestEntityKeywordParam == null) {
           throw new RequestException("Parameter 'interest[entity][keyword]' is missing");
         }
-        entity = Entities.getEntityByKeyword(entityKeyword);
+        entity = Entities.getEntityByKeyword(interestEntityKeywordParam);
         if (entity == null) {
-          EntityType entityType = EntityType.valueOf(entityTypeString);
+          EntityType entityType = EntityType.valueOf(interestEntityTypeParam);
           if (entityType == null) {
             throw new RequestException("Parameter 'interest[entity][type]' is invalid");
           }
 
-          Entity.Source entitySource = Entity.Source.valueOf(entitySourceString);
-          // TODO: Create a new entity if possible
-          System.out.println("TODO: create a new entity from the setUserInterest parameters");
+          entity = Entity.newBuilder().setId(GuidFactory.generate())
+              .setKeyword(interestEntityKeywordParam)
+              .setSource(Entity.Source.USER)
+              .setType(interestEntityTypeParam)
+              .build();
         }
       }
       interestBuilder.setEntity(entity);
     } else if (interestType == InterestType.INDUSTRY) {
-      interestBuilder.setIndustryCode(Integer.parseInt(industryCode));
+      interestBuilder.setIndustryCode(Integer.parseInt(interestIndustryCodeParam));
     } else if (interestType == InterestType.INTENT) {
-      if (Strings.isNullOrEmpty(intentCode)) {
+      if (Strings.isNullOrEmpty(interestIntentCodeParam)) {
         throw new RequestException("Parameter 'interest[intent_code]' is missing");
       }
-      interestBuilder.setIntentCode(intentCode);
+      interestBuilder.setIntentCode(interestIntentCodeParam);
     }
 
     Interest newInterest = interestBuilder.build();
@@ -106,7 +114,7 @@ public class SetUserInterestServlet extends StandardServlet {
     // interest.
     List<Interest> existingInterests = Lists.newArrayList();
     for (Interest interest : user.getInterestList()) {
-      if (equals(interest, newInterest)) {
+      if (UserInterests.equals(interest, newInterest)) {
         continue;
       }
       existingInterests.add(interest);
@@ -121,25 +129,5 @@ public class SetUserInterestServlet extends StandardServlet {
 
     // Write response.
     return createSuccessResponse();
-  }
-  
-  /**
-   * Returns if the two interests are about the same thing, but not if they are from
-   * the same source
-   */
-  private boolean equals(Interest interest1, Interest interest2) {
-    if (interest1.getType() == interest2.getType()) {
-      if (interest1.getType() == InterestType.ADDRESS_BOOK_CONTACTS ||
-          interest1.getType() == InterestType.LINKED_IN_CONTACTS) {
-        return true;
-      } else if (interest1.getType() == InterestType.ENTITY) {
-        return interest1.getEntity().equals(interest2.getEntity());
-      } else if (interest1.getType() == InterestType.INDUSTRY) {
-        return interest1.getIndustryCode() == interest2.getIndustryCode();
-      } else if (interest1.getType() == InterestType.INTENT) {
-        return interest1.getIntentCode() == interest2.getIntentCode();
-      }
-    }
-    return false;
   }
 }

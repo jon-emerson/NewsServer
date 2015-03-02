@@ -20,7 +20,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
 
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req) throws DatabaseSchemaException {
-    String featureId = this.getParameter(req, "featureId");
+    String featureId = this.getParameter(req, "feature_id");
     String industryCodeId = this.getParameter(req, "industry_code");
     String contacts = this.getParameter(req, "contacts");
     String entityKeyword = this.getParameter(req, "entity_keyword");
