@@ -128,6 +128,11 @@ public class Urls {
    *     given Url has already been crawled by another thread
    */
   public static Url markCrawlStart(Url url) throws BiznessException, DatabaseSchemaException {
+    if (url == null) {
+      // Nothing to do!
+      return null;
+    }
+
     url = url.toBuilder()
         .setLastCrawlStartTime(System.currentTimeMillis())
         .build();

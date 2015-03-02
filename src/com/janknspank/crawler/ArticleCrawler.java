@@ -42,11 +42,11 @@ public class ArticleCrawler implements Runnable {
   @Override
   public void run() {
     // Uncomment this to start the crawl at a specific page.
-    try {
-      Urls.put("http://recode.net/", "http://jonemerson.net/");
-    } catch (BiznessException | DatabaseSchemaException e) {
-      e.printStackTrace();
-    }
+//    try {
+//      Urls.put("http://recode.net/", "http://jonemerson.net/");
+//    } catch (BiznessException | DatabaseSchemaException e) {
+//      e.printStackTrace();
+//    }
 
     while (true) {
       final Url url;

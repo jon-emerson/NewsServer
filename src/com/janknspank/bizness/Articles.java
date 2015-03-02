@@ -163,6 +163,9 @@ public class Articles {
    */
   public static Iterable<Article> getArticlesByIndustries(
       Iterable<Industry> industries, int limit) throws DatabaseSchemaException {
+    if (Iterables.isEmpty(industries)) {
+      return ImmutableList.of();
+    }
     return Database.with(Article.class).get(
         new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(industries,
             new Function<Industry, Number>() {
