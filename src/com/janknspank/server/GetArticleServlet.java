@@ -13,7 +13,6 @@ import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 
 public class GetArticleServlet extends StandardServlet {
-
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, BiznessException,
       DatabaseRequestException, RequestException {
@@ -23,9 +22,13 @@ public class GetArticleServlet extends StandardServlet {
     }
     JSONObject articleJson = Serializer.toJSON(article);
 
-    // Add full article text to the response
-    articleJson.put("paragraphs", AbstractArticlesServlet.toJsonArray(
-        article.getParagraphList()));
+    // If we're allowed, add full article text to the response.
+    boolean nativeReaderEnabled = GetArticlesServlet.isNativeReaderEnabled(article);
+    articleJson.put("native_reader_enabled", nativeReaderEnabled);
+    if (nativeReaderEnabled) {
+      articleJson.put("paragraphs", AbstractArticlesServlet.toJsonArray(
+          article.getParagraphList()));
+    }
 
     // Create response.
     JSONObject response = createSuccessResponse();

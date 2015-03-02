@@ -60,19 +60,20 @@ message Article {
   ];
 
   optional int64 modified_time = 11;
+  optional int64 crawl_time = 12;
 
-  optional int64 word_count = 12 [
+  optional int64 word_count = 13 [
     (required) = YES,
     (client_serialization) = EXCLUDE
   ];
 
-  repeated ArticleKeyword keyword = 13;
+  repeated ArticleKeyword keyword = 14;
 
-  repeated SocialEngagement social_engagement = 14 [
+  repeated SocialEngagement social_engagement = 15 [
     (client_serialization) = EXCLUDE
   ];
 
-  repeated ArticleFeature feature = 15 [
+  repeated ArticleFeature feature = 16 [
     (client_serialization) = EXCLUDE
   ];
 

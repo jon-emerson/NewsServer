@@ -55,7 +55,6 @@ public class GetSimilarityThresholdForDupes {
           "https://gigaom.com/2015/02/24/opera-launches-app-pass-zero-rating-tool-for-carriers/",
           "http://www.channelnewsasia.com/news/technology/opera-offers-new-feature/1678006.html"))
       .add(ImmutableSet.of(
-          "http://blog.chron.com/techblog/2015/02/google-wants-to-clean-up-bloggers-act-bans-sexually-explicit-content/",
           "http://www.bbc.com/news/technology-31602891",
           "http://www.businessinsider.com/google-banning-porn-on-blogger-2015-2",
           "http://www.pcmag.com/article2/0,2817,2477317,00.asp",

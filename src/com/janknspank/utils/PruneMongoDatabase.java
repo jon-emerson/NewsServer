@@ -81,6 +81,12 @@ public class PruneMongoDatabase {
     Article oldestArticle = Database.with(Article.class).getFirst(
         new QueryOption.DescendingSort("published_time"),
         new QueryOption.LimitWithOffset(1, (int) MAX_ARTICLE_COUNT));
+    if (oldestArticle == null) {
+      System.out.println("We're already within the limits for # of articles allowed, "
+          + "deleting no articles!");
+      return;
+    }
+
     int count = Database.with(Article.class).delete(
         new QueryOption.WhereLessThan("published_time", oldestArticle.getPublishedTime()));
     System.out.println("Deleted " + count + " older articles");

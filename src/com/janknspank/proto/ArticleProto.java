@@ -171,87 +171,97 @@ public final class ArticleProto {
      */
     long getModifiedTime();
 
-    // optional int64 word_count = 12;
+    // optional int64 crawl_time = 12;
     /**
-     * <code>optional int64 word_count = 12;</code>
+     * <code>optional int64 crawl_time = 12;</code>
+     */
+    boolean hasCrawlTime();
+    /**
+     * <code>optional int64 crawl_time = 12;</code>
+     */
+    long getCrawlTime();
+
+    // optional int64 word_count = 13;
+    /**
+     * <code>optional int64 word_count = 13;</code>
      */
     boolean hasWordCount();
     /**
-     * <code>optional int64 word_count = 12;</code>
+     * <code>optional int64 word_count = 13;</code>
      */
     long getWordCount();
 
-    // repeated .ArticleKeyword keyword = 13;
+    // repeated .ArticleKeyword keyword = 14;
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     java.util.List<com.janknspank.proto.ArticleProto.ArticleKeyword> 
         getKeywordList();
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     com.janknspank.proto.ArticleProto.ArticleKeyword getKeyword(int index);
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     int getKeywordCount();
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder> 
         getKeywordOrBuilderList();
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder getKeywordOrBuilder(
         int index);
 
-    // repeated .SocialEngagement social_engagement = 14;
+    // repeated .SocialEngagement social_engagement = 15;
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     java.util.List<com.janknspank.proto.ArticleProto.SocialEngagement> 
         getSocialEngagementList();
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     com.janknspank.proto.ArticleProto.SocialEngagement getSocialEngagement(int index);
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     int getSocialEngagementCount();
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     java.util.List<? extends com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder> 
         getSocialEngagementOrBuilderList();
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder getSocialEngagementOrBuilder(
         int index);
 
-    // repeated .ArticleFeature feature = 15;
+    // repeated .ArticleFeature feature = 16;
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> 
         getFeatureList();
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     com.janknspank.proto.ArticleProto.ArticleFeature getFeature(int index);
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     int getFeatureCount();
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> 
         getFeatureOrBuilderList();
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder getFeatureOrBuilder(
         int index);
@@ -411,37 +421,42 @@ public final class ArticleProto {
             }
             case 96: {
               bitField0_ |= 0x00000400;
-              wordCount_ = input.readInt64();
+              crawlTime_ = input.readInt64();
               break;
             }
-            case 106: {
-              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
-                keyword_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleKeyword>();
-                mutable_bitField0_ |= 0x00001000;
-              }
-              keyword_.add(input.readMessage(com.janknspank.proto.ArticleProto.ArticleKeyword.PARSER, extensionRegistry));
+            case 104: {
+              bitField0_ |= 0x00000800;
+              wordCount_ = input.readInt64();
               break;
             }
             case 114: {
               if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
-                socialEngagement_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.SocialEngagement>();
+                keyword_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleKeyword>();
                 mutable_bitField0_ |= 0x00002000;
               }
-              socialEngagement_.add(input.readMessage(com.janknspank.proto.ArticleProto.SocialEngagement.PARSER, extensionRegistry));
+              keyword_.add(input.readMessage(com.janknspank.proto.ArticleProto.ArticleKeyword.PARSER, extensionRegistry));
               break;
             }
             case 122: {
               if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
-                feature_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleFeature>();
+                socialEngagement_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.SocialEngagement>();
                 mutable_bitField0_ |= 0x00004000;
+              }
+              socialEngagement_.add(input.readMessage(com.janknspank.proto.ArticleProto.SocialEngagement.PARSER, extensionRegistry));
+              break;
+            }
+            case 130: {
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+                feature_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleFeature>();
+                mutable_bitField0_ |= 0x00008000;
               }
               feature_.add(input.readMessage(com.janknspank.proto.ArticleProto.ArticleFeature.PARSER, extensionRegistry));
               break;
             }
             case 138: {
-              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+              if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
                 dedupingStems_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00008000;
+                mutable_bitField0_ |= 0x00010000;
               }
               dedupingStems_.add(input.readBytes());
               break;
@@ -457,16 +472,16 @@ public final class ArticleProto {
         if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           paragraph_ = new com.google.protobuf.UnmodifiableLazyStringList(paragraph_);
         }
-        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
           keyword_ = java.util.Collections.unmodifiableList(keyword_);
         }
-        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
           socialEngagement_ = java.util.Collections.unmodifiableList(socialEngagement_);
         }
-        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
           feature_ = java.util.Collections.unmodifiableList(feature_);
         }
-        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+        if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
           dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(dedupingStems_);
         }
         this.unknownFields = unknownFields.build();
@@ -907,124 +922,140 @@ public final class ArticleProto {
       return modifiedTime_;
     }
 
-    // optional int64 word_count = 12;
-    public static final int WORD_COUNT_FIELD_NUMBER = 12;
-    private long wordCount_;
+    // optional int64 crawl_time = 12;
+    public static final int CRAWL_TIME_FIELD_NUMBER = 12;
+    private long crawlTime_;
     /**
-     * <code>optional int64 word_count = 12;</code>
+     * <code>optional int64 crawl_time = 12;</code>
      */
-    public boolean hasWordCount() {
+    public boolean hasCrawlTime() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
-     * <code>optional int64 word_count = 12;</code>
+     * <code>optional int64 crawl_time = 12;</code>
+     */
+    public long getCrawlTime() {
+      return crawlTime_;
+    }
+
+    // optional int64 word_count = 13;
+    public static final int WORD_COUNT_FIELD_NUMBER = 13;
+    private long wordCount_;
+    /**
+     * <code>optional int64 word_count = 13;</code>
+     */
+    public boolean hasWordCount() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional int64 word_count = 13;</code>
      */
     public long getWordCount() {
       return wordCount_;
     }
 
-    // repeated .ArticleKeyword keyword = 13;
-    public static final int KEYWORD_FIELD_NUMBER = 13;
+    // repeated .ArticleKeyword keyword = 14;
+    public static final int KEYWORD_FIELD_NUMBER = 14;
     private java.util.List<com.janknspank.proto.ArticleProto.ArticleKeyword> keyword_;
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     public java.util.List<com.janknspank.proto.ArticleProto.ArticleKeyword> getKeywordList() {
       return keyword_;
     }
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     public java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder> 
         getKeywordOrBuilderList() {
       return keyword_;
     }
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     public int getKeywordCount() {
       return keyword_.size();
     }
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     public com.janknspank.proto.ArticleProto.ArticleKeyword getKeyword(int index) {
       return keyword_.get(index);
     }
     /**
-     * <code>repeated .ArticleKeyword keyword = 13;</code>
+     * <code>repeated .ArticleKeyword keyword = 14;</code>
      */
     public com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder getKeywordOrBuilder(
         int index) {
       return keyword_.get(index);
     }
 
-    // repeated .SocialEngagement social_engagement = 14;
-    public static final int SOCIAL_ENGAGEMENT_FIELD_NUMBER = 14;
+    // repeated .SocialEngagement social_engagement = 15;
+    public static final int SOCIAL_ENGAGEMENT_FIELD_NUMBER = 15;
     private java.util.List<com.janknspank.proto.ArticleProto.SocialEngagement> socialEngagement_;
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     public java.util.List<com.janknspank.proto.ArticleProto.SocialEngagement> getSocialEngagementList() {
       return socialEngagement_;
     }
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     public java.util.List<? extends com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder> 
         getSocialEngagementOrBuilderList() {
       return socialEngagement_;
     }
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     public int getSocialEngagementCount() {
       return socialEngagement_.size();
     }
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     public com.janknspank.proto.ArticleProto.SocialEngagement getSocialEngagement(int index) {
       return socialEngagement_.get(index);
     }
     /**
-     * <code>repeated .SocialEngagement social_engagement = 14;</code>
+     * <code>repeated .SocialEngagement social_engagement = 15;</code>
      */
     public com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder getSocialEngagementOrBuilder(
         int index) {
       return socialEngagement_.get(index);
     }
 
-    // repeated .ArticleFeature feature = 15;
-    public static final int FEATURE_FIELD_NUMBER = 15;
+    // repeated .ArticleFeature feature = 16;
+    public static final int FEATURE_FIELD_NUMBER = 16;
     private java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> feature_;
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     public java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> getFeatureList() {
       return feature_;
     }
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     public java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> 
         getFeatureOrBuilderList() {
       return feature_;
     }
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     public int getFeatureCount() {
       return feature_.size();
     }
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     public com.janknspank.proto.ArticleProto.ArticleFeature getFeature(int index) {
       return feature_.get(index);
     }
     /**
-     * <code>repeated .ArticleFeature feature = 15;</code>
+     * <code>repeated .ArticleFeature feature = 16;</code>
      */
     public com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder getFeatureOrBuilder(
         int index) {
@@ -1097,6 +1128,7 @@ public final class ArticleProto {
       paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       publishedTime_ = 0L;
       modifiedTime_ = 0L;
+      crawlTime_ = 0L;
       wordCount_ = 0L;
       keyword_ = java.util.Collections.emptyList();
       socialEngagement_ = java.util.Collections.emptyList();
@@ -1149,16 +1181,19 @@ public final class ArticleProto {
         output.writeInt64(11, modifiedTime_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt64(12, wordCount_);
+        output.writeInt64(12, crawlTime_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeInt64(13, wordCount_);
       }
       for (int i = 0; i < keyword_.size(); i++) {
-        output.writeMessage(13, keyword_.get(i));
+        output.writeMessage(14, keyword_.get(i));
       }
       for (int i = 0; i < socialEngagement_.size(); i++) {
-        output.writeMessage(14, socialEngagement_.get(i));
+        output.writeMessage(15, socialEngagement_.get(i));
       }
       for (int i = 0; i < feature_.size(); i++) {
-        output.writeMessage(15, feature_.get(i));
+        output.writeMessage(16, feature_.get(i));
       }
       for (int i = 0; i < dedupingStems_.size(); i++) {
         output.writeBytes(17, dedupingStems_.getByteString(i));
@@ -1223,19 +1258,23 @@ public final class ArticleProto {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(12, wordCount_);
+          .computeInt64Size(12, crawlTime_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(13, wordCount_);
       }
       for (int i = 0; i < keyword_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(13, keyword_.get(i));
+          .computeMessageSize(14, keyword_.get(i));
       }
       for (int i = 0; i < socialEngagement_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(14, socialEngagement_.get(i));
+          .computeMessageSize(15, socialEngagement_.get(i));
       }
       for (int i = 0; i < feature_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(15, feature_.get(i));
+          .computeMessageSize(16, feature_.get(i));
       }
       {
         int dataSize = 0;
@@ -1387,28 +1426,30 @@ public final class ArticleProto {
         bitField0_ = (bitField0_ & ~0x00000200);
         modifiedTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000400);
-        wordCount_ = 0L;
+        crawlTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000800);
+        wordCount_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00001000);
         if (keywordBuilder_ == null) {
           keyword_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00002000);
         } else {
           keywordBuilder_.clear();
         }
         if (socialEngagementBuilder_ == null) {
           socialEngagement_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
         } else {
           socialEngagementBuilder_.clear();
         }
         if (featureBuilder_ == null) {
           feature_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           featureBuilder_.clear();
         }
         dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         return this;
       }
 
@@ -1486,38 +1527,42 @@ public final class ArticleProto {
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000400;
         }
+        result.crawlTime_ = crawlTime_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000800;
+        }
         result.wordCount_ = wordCount_;
         if (keywordBuilder_ == null) {
-          if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          if (((bitField0_ & 0x00002000) == 0x00002000)) {
             keyword_ = java.util.Collections.unmodifiableList(keyword_);
-            bitField0_ = (bitField0_ & ~0x00001000);
+            bitField0_ = (bitField0_ & ~0x00002000);
           }
           result.keyword_ = keyword_;
         } else {
           result.keyword_ = keywordBuilder_.build();
         }
         if (socialEngagementBuilder_ == null) {
-          if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          if (((bitField0_ & 0x00004000) == 0x00004000)) {
             socialEngagement_ = java.util.Collections.unmodifiableList(socialEngagement_);
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00004000);
           }
           result.socialEngagement_ = socialEngagement_;
         } else {
           result.socialEngagement_ = socialEngagementBuilder_.build();
         }
         if (featureBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
             feature_ = java.util.Collections.unmodifiableList(feature_);
-            bitField0_ = (bitField0_ & ~0x00004000);
+            bitField0_ = (bitField0_ & ~0x00008000);
           }
           result.feature_ = feature_;
         } else {
           result.feature_ = featureBuilder_.build();
         }
-        if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        if (((bitField0_ & 0x00010000) == 0x00010000)) {
           dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(
               dedupingStems_);
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
         }
         result.dedupingStems_ = dedupingStems_;
         result.bitField0_ = to_bitField0_;
@@ -1592,6 +1637,9 @@ public final class ArticleProto {
         if (other.hasModifiedTime()) {
           setModifiedTime(other.getModifiedTime());
         }
+        if (other.hasCrawlTime()) {
+          setCrawlTime(other.getCrawlTime());
+        }
         if (other.hasWordCount()) {
           setWordCount(other.getWordCount());
         }
@@ -1599,7 +1647,7 @@ public final class ArticleProto {
           if (!other.keyword_.isEmpty()) {
             if (keyword_.isEmpty()) {
               keyword_ = other.keyword_;
-              bitField0_ = (bitField0_ & ~0x00001000);
+              bitField0_ = (bitField0_ & ~0x00002000);
             } else {
               ensureKeywordIsMutable();
               keyword_.addAll(other.keyword_);
@@ -1612,7 +1660,7 @@ public final class ArticleProto {
               keywordBuilder_.dispose();
               keywordBuilder_ = null;
               keyword_ = other.keyword_;
-              bitField0_ = (bitField0_ & ~0x00001000);
+              bitField0_ = (bitField0_ & ~0x00002000);
               keywordBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getKeywordFieldBuilder() : null;
@@ -1625,7 +1673,7 @@ public final class ArticleProto {
           if (!other.socialEngagement_.isEmpty()) {
             if (socialEngagement_.isEmpty()) {
               socialEngagement_ = other.socialEngagement_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
             } else {
               ensureSocialEngagementIsMutable();
               socialEngagement_.addAll(other.socialEngagement_);
@@ -1638,7 +1686,7 @@ public final class ArticleProto {
               socialEngagementBuilder_.dispose();
               socialEngagementBuilder_ = null;
               socialEngagement_ = other.socialEngagement_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
               socialEngagementBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getSocialEngagementFieldBuilder() : null;
@@ -1651,7 +1699,7 @@ public final class ArticleProto {
           if (!other.feature_.isEmpty()) {
             if (feature_.isEmpty()) {
               feature_ = other.feature_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             } else {
               ensureFeatureIsMutable();
               feature_.addAll(other.feature_);
@@ -1664,7 +1712,7 @@ public final class ArticleProto {
               featureBuilder_.dispose();
               featureBuilder_ = null;
               feature_ = other.feature_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
               featureBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getFeatureFieldBuilder() : null;
@@ -1676,7 +1724,7 @@ public final class ArticleProto {
         if (!other.dedupingStems_.isEmpty()) {
           if (dedupingStems_.isEmpty()) {
             dedupingStems_ = other.dedupingStems_;
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00010000);
           } else {
             ensureDedupingStemsIsMutable();
             dedupingStems_.addAll(other.dedupingStems_);
@@ -2461,46 +2509,79 @@ public final class ArticleProto {
         return this;
       }
 
-      // optional int64 word_count = 12;
-      private long wordCount_ ;
+      // optional int64 crawl_time = 12;
+      private long crawlTime_ ;
       /**
-       * <code>optional int64 word_count = 12;</code>
+       * <code>optional int64 crawl_time = 12;</code>
        */
-      public boolean hasWordCount() {
+      public boolean hasCrawlTime() {
         return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional int64 word_count = 12;</code>
+       * <code>optional int64 crawl_time = 12;</code>
+       */
+      public long getCrawlTime() {
+        return crawlTime_;
+      }
+      /**
+       * <code>optional int64 crawl_time = 12;</code>
+       */
+      public Builder setCrawlTime(long value) {
+        bitField0_ |= 0x00000800;
+        crawlTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 crawl_time = 12;</code>
+       */
+      public Builder clearCrawlTime() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        crawlTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 word_count = 13;
+      private long wordCount_ ;
+      /**
+       * <code>optional int64 word_count = 13;</code>
+       */
+      public boolean hasWordCount() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional int64 word_count = 13;</code>
        */
       public long getWordCount() {
         return wordCount_;
       }
       /**
-       * <code>optional int64 word_count = 12;</code>
+       * <code>optional int64 word_count = 13;</code>
        */
       public Builder setWordCount(long value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00001000;
         wordCount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 word_count = 12;</code>
+       * <code>optional int64 word_count = 13;</code>
        */
       public Builder clearWordCount() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         wordCount_ = 0L;
         onChanged();
         return this;
       }
 
-      // repeated .ArticleKeyword keyword = 13;
+      // repeated .ArticleKeyword keyword = 14;
       private java.util.List<com.janknspank.proto.ArticleProto.ArticleKeyword> keyword_ =
         java.util.Collections.emptyList();
       private void ensureKeywordIsMutable() {
-        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
           keyword_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleKeyword>(keyword_);
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00002000;
          }
       }
 
@@ -2508,7 +2589,7 @@ public final class ArticleProto {
           com.janknspank.proto.ArticleProto.ArticleKeyword, com.janknspank.proto.ArticleProto.ArticleKeyword.Builder, com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder> keywordBuilder_;
 
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public java.util.List<com.janknspank.proto.ArticleProto.ArticleKeyword> getKeywordList() {
         if (keywordBuilder_ == null) {
@@ -2518,7 +2599,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public int getKeywordCount() {
         if (keywordBuilder_ == null) {
@@ -2528,7 +2609,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleKeyword getKeyword(int index) {
         if (keywordBuilder_ == null) {
@@ -2538,7 +2619,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder setKeyword(
           int index, com.janknspank.proto.ArticleProto.ArticleKeyword value) {
@@ -2555,7 +2636,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder setKeyword(
           int index, com.janknspank.proto.ArticleProto.ArticleKeyword.Builder builderForValue) {
@@ -2569,7 +2650,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder addKeyword(com.janknspank.proto.ArticleProto.ArticleKeyword value) {
         if (keywordBuilder_ == null) {
@@ -2585,7 +2666,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder addKeyword(
           int index, com.janknspank.proto.ArticleProto.ArticleKeyword value) {
@@ -2602,7 +2683,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder addKeyword(
           com.janknspank.proto.ArticleProto.ArticleKeyword.Builder builderForValue) {
@@ -2616,7 +2697,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder addKeyword(
           int index, com.janknspank.proto.ArticleProto.ArticleKeyword.Builder builderForValue) {
@@ -2630,7 +2711,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder addAllKeyword(
           java.lang.Iterable<? extends com.janknspank.proto.ArticleProto.ArticleKeyword> values) {
@@ -2644,12 +2725,12 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder clearKeyword() {
         if (keywordBuilder_ == null) {
           keyword_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00002000);
           onChanged();
         } else {
           keywordBuilder_.clear();
@@ -2657,7 +2738,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public Builder removeKeyword(int index) {
         if (keywordBuilder_ == null) {
@@ -2670,14 +2751,14 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleKeyword.Builder getKeywordBuilder(
           int index) {
         return getKeywordFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder getKeywordOrBuilder(
           int index) {
@@ -2687,7 +2768,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder> 
            getKeywordOrBuilderList() {
@@ -2698,14 +2779,14 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleKeyword.Builder addKeywordBuilder() {
         return getKeywordFieldBuilder().addBuilder(
             com.janknspank.proto.ArticleProto.ArticleKeyword.getDefaultInstance());
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleKeyword.Builder addKeywordBuilder(
           int index) {
@@ -2713,7 +2794,7 @@ public final class ArticleProto {
             index, com.janknspank.proto.ArticleProto.ArticleKeyword.getDefaultInstance());
       }
       /**
-       * <code>repeated .ArticleKeyword keyword = 13;</code>
+       * <code>repeated .ArticleKeyword keyword = 14;</code>
        */
       public java.util.List<com.janknspank.proto.ArticleProto.ArticleKeyword.Builder> 
            getKeywordBuilderList() {
@@ -2726,7 +2807,7 @@ public final class ArticleProto {
           keywordBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.ArticleProto.ArticleKeyword, com.janknspank.proto.ArticleProto.ArticleKeyword.Builder, com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder>(
                   keyword_,
-                  ((bitField0_ & 0x00001000) == 0x00001000),
+                  ((bitField0_ & 0x00002000) == 0x00002000),
                   getParentForChildren(),
                   isClean());
           keyword_ = null;
@@ -2734,13 +2815,13 @@ public final class ArticleProto {
         return keywordBuilder_;
       }
 
-      // repeated .SocialEngagement social_engagement = 14;
+      // repeated .SocialEngagement social_engagement = 15;
       private java.util.List<com.janknspank.proto.ArticleProto.SocialEngagement> socialEngagement_ =
         java.util.Collections.emptyList();
       private void ensureSocialEngagementIsMutable() {
-        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
           socialEngagement_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.SocialEngagement>(socialEngagement_);
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00004000;
          }
       }
 
@@ -2748,7 +2829,7 @@ public final class ArticleProto {
           com.janknspank.proto.ArticleProto.SocialEngagement, com.janknspank.proto.ArticleProto.SocialEngagement.Builder, com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder> socialEngagementBuilder_;
 
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public java.util.List<com.janknspank.proto.ArticleProto.SocialEngagement> getSocialEngagementList() {
         if (socialEngagementBuilder_ == null) {
@@ -2758,7 +2839,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public int getSocialEngagementCount() {
         if (socialEngagementBuilder_ == null) {
@@ -2768,7 +2849,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public com.janknspank.proto.ArticleProto.SocialEngagement getSocialEngagement(int index) {
         if (socialEngagementBuilder_ == null) {
@@ -2778,7 +2859,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder setSocialEngagement(
           int index, com.janknspank.proto.ArticleProto.SocialEngagement value) {
@@ -2795,7 +2876,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder setSocialEngagement(
           int index, com.janknspank.proto.ArticleProto.SocialEngagement.Builder builderForValue) {
@@ -2809,7 +2890,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder addSocialEngagement(com.janknspank.proto.ArticleProto.SocialEngagement value) {
         if (socialEngagementBuilder_ == null) {
@@ -2825,7 +2906,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder addSocialEngagement(
           int index, com.janknspank.proto.ArticleProto.SocialEngagement value) {
@@ -2842,7 +2923,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder addSocialEngagement(
           com.janknspank.proto.ArticleProto.SocialEngagement.Builder builderForValue) {
@@ -2856,7 +2937,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder addSocialEngagement(
           int index, com.janknspank.proto.ArticleProto.SocialEngagement.Builder builderForValue) {
@@ -2870,7 +2951,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder addAllSocialEngagement(
           java.lang.Iterable<? extends com.janknspank.proto.ArticleProto.SocialEngagement> values) {
@@ -2884,12 +2965,12 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder clearSocialEngagement() {
         if (socialEngagementBuilder_ == null) {
           socialEngagement_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           onChanged();
         } else {
           socialEngagementBuilder_.clear();
@@ -2897,7 +2978,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public Builder removeSocialEngagement(int index) {
         if (socialEngagementBuilder_ == null) {
@@ -2910,14 +2991,14 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public com.janknspank.proto.ArticleProto.SocialEngagement.Builder getSocialEngagementBuilder(
           int index) {
         return getSocialEngagementFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder getSocialEngagementOrBuilder(
           int index) {
@@ -2927,7 +3008,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public java.util.List<? extends com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder> 
            getSocialEngagementOrBuilderList() {
@@ -2938,14 +3019,14 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public com.janknspank.proto.ArticleProto.SocialEngagement.Builder addSocialEngagementBuilder() {
         return getSocialEngagementFieldBuilder().addBuilder(
             com.janknspank.proto.ArticleProto.SocialEngagement.getDefaultInstance());
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public com.janknspank.proto.ArticleProto.SocialEngagement.Builder addSocialEngagementBuilder(
           int index) {
@@ -2953,7 +3034,7 @@ public final class ArticleProto {
             index, com.janknspank.proto.ArticleProto.SocialEngagement.getDefaultInstance());
       }
       /**
-       * <code>repeated .SocialEngagement social_engagement = 14;</code>
+       * <code>repeated .SocialEngagement social_engagement = 15;</code>
        */
       public java.util.List<com.janknspank.proto.ArticleProto.SocialEngagement.Builder> 
            getSocialEngagementBuilderList() {
@@ -2966,7 +3047,7 @@ public final class ArticleProto {
           socialEngagementBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.ArticleProto.SocialEngagement, com.janknspank.proto.ArticleProto.SocialEngagement.Builder, com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder>(
                   socialEngagement_,
-                  ((bitField0_ & 0x00002000) == 0x00002000),
+                  ((bitField0_ & 0x00004000) == 0x00004000),
                   getParentForChildren(),
                   isClean());
           socialEngagement_ = null;
@@ -2974,13 +3055,13 @@ public final class ArticleProto {
         return socialEngagementBuilder_;
       }
 
-      // repeated .ArticleFeature feature = 15;
+      // repeated .ArticleFeature feature = 16;
       private java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> feature_ =
         java.util.Collections.emptyList();
       private void ensureFeatureIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
           feature_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleFeature>(feature_);
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
          }
       }
 
@@ -2988,7 +3069,7 @@ public final class ArticleProto {
           com.janknspank.proto.ArticleProto.ArticleFeature, com.janknspank.proto.ArticleProto.ArticleFeature.Builder, com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> featureBuilder_;
 
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> getFeatureList() {
         if (featureBuilder_ == null) {
@@ -2998,7 +3079,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public int getFeatureCount() {
         if (featureBuilder_ == null) {
@@ -3008,7 +3089,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleFeature getFeature(int index) {
         if (featureBuilder_ == null) {
@@ -3018,7 +3099,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder setFeature(
           int index, com.janknspank.proto.ArticleProto.ArticleFeature value) {
@@ -3035,7 +3116,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder setFeature(
           int index, com.janknspank.proto.ArticleProto.ArticleFeature.Builder builderForValue) {
@@ -3049,7 +3130,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder addFeature(com.janknspank.proto.ArticleProto.ArticleFeature value) {
         if (featureBuilder_ == null) {
@@ -3065,7 +3146,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder addFeature(
           int index, com.janknspank.proto.ArticleProto.ArticleFeature value) {
@@ -3082,7 +3163,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder addFeature(
           com.janknspank.proto.ArticleProto.ArticleFeature.Builder builderForValue) {
@@ -3096,7 +3177,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder addFeature(
           int index, com.janknspank.proto.ArticleProto.ArticleFeature.Builder builderForValue) {
@@ -3110,7 +3191,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder addAllFeature(
           java.lang.Iterable<? extends com.janknspank.proto.ArticleProto.ArticleFeature> values) {
@@ -3124,12 +3205,12 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder clearFeature() {
         if (featureBuilder_ == null) {
           feature_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           onChanged();
         } else {
           featureBuilder_.clear();
@@ -3137,7 +3218,7 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public Builder removeFeature(int index) {
         if (featureBuilder_ == null) {
@@ -3150,14 +3231,14 @@ public final class ArticleProto {
         return this;
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleFeature.Builder getFeatureBuilder(
           int index) {
         return getFeatureFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder getFeatureOrBuilder(
           int index) {
@@ -3167,7 +3248,7 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public java.util.List<? extends com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder> 
            getFeatureOrBuilderList() {
@@ -3178,14 +3259,14 @@ public final class ArticleProto {
         }
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleFeature.Builder addFeatureBuilder() {
         return getFeatureFieldBuilder().addBuilder(
             com.janknspank.proto.ArticleProto.ArticleFeature.getDefaultInstance());
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public com.janknspank.proto.ArticleProto.ArticleFeature.Builder addFeatureBuilder(
           int index) {
@@ -3193,7 +3274,7 @@ public final class ArticleProto {
             index, com.janknspank.proto.ArticleProto.ArticleFeature.getDefaultInstance());
       }
       /**
-       * <code>repeated .ArticleFeature feature = 15;</code>
+       * <code>repeated .ArticleFeature feature = 16;</code>
        */
       public java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature.Builder> 
            getFeatureBuilderList() {
@@ -3206,7 +3287,7 @@ public final class ArticleProto {
           featureBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.ArticleProto.ArticleFeature, com.janknspank.proto.ArticleProto.ArticleFeature.Builder, com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder>(
                   feature_,
-                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  ((bitField0_ & 0x00008000) == 0x00008000),
                   getParentForChildren(),
                   isClean());
           feature_ = null;
@@ -3217,9 +3298,9 @@ public final class ArticleProto {
       // repeated string deduping_stems = 17;
       private com.google.protobuf.LazyStringList dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureDedupingStemsIsMutable() {
-        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
           dedupingStems_ = new com.google.protobuf.LazyStringArrayList(dedupingStems_);
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00010000;
          }
       }
       /**
@@ -3337,7 +3418,7 @@ public final class ArticleProto {
        */
       public Builder clearDedupingStems() {
         dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         onChanged();
         return this;
       }
@@ -6818,7 +6899,7 @@ public final class ArticleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\216" +
+      "m/janknspank/database/extensions.proto\"\242" +
       "\004\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\032\n\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005titl" +
       "e\030\003 \001(\tB\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246" +
@@ -6826,32 +6907,32 @@ public final class ArticleProto {
       " \001(\tB\005\230\246\035\200\002\022\036\n\013description\030\007 \001(\tB\t\210\246\035\001\230\246" +
       "\035\200\020\022\030\n\timage_url\030\010 \001(\tB\005\230\246\035\200\020\022\034\n\tparagra" +
       "ph\030\t \003(\tB\t\240\246\035\003\230\246\035\200P\022 \n\016published_time\030\n " +
-      "\001(\003B\010\210\246\035\001\220\246\035\003\022\025\n\rmodified_time\030\013 \001(\003\022\034\n\n",
-      "word_count\030\014 \001(\003B\010\210\246\035\001\240\246\035\003\022 \n\007keyword\030\r " +
-      "\003(\0132\017.ArticleKeyword\0222\n\021social_engagemen" +
-      "t\030\016 \003(\0132\021.SocialEngagementB\004\240\246\035\003\022&\n\007feat" +
-      "ure\030\017 \003(\0132\017.ArticleFeatureB\004\240\246\035\003\022 \n\016dedu" +
-      "ping_stems\030\021 \003(\tB\010\230\246\035\004\240\246\035\003:\023\212\265\030\017MongoDB." +
-      "Article\"\325\001\n\016ArticleKeyword\022\035\n\007keyword\030\001 " +
-      "\001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035" +
-      "\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006sou" +
-      "rce\030\004 \001(\0162\026.ArticleKeyword.Source:\007UNKNO" +
-      "WN\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHY",
-      "PERLINK\020\002\022\014\n\010META_TAG\020\003\"\347\001\n\020SocialEngage" +
-      "ment\022-\n\004site\030\001 \001(\0162\026.SocialEngagement.Si" +
-      "te:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031" +
-      "\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030" +
-      "\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013create_t" +
-      "ime\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBO" +
-      "OK\020\001\022\013\n\007TWITTER\020\002\"\323\001\n\016ArticleFeature\022\034\n\n" +
-      "feature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004type\030\004 \001(\016" +
-      "2\024.ArticleFeature.Type:\007UNKNOWN\022\022\n\nsimil" +
-      "arity\030\002 \001(\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERV",
-      "ES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPRO" +
-      "VES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020\004\"9\n\017Inter" +
-      "pretedData\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n" +
-      "\003url\030\002 \003(\tB$\n\024com.janknspank.protoB\014Arti" +
-      "cleProto"
+      "\001(\003B\010\210\246\035\001\220\246\035\003\022\025\n\rmodified_time\030\013 \001(\003\022\022\n\n",
+      "crawl_time\030\014 \001(\003\022\034\n\nword_count\030\r \001(\003B\010\210\246" +
+      "\035\001\240\246\035\003\022 \n\007keyword\030\016 \003(\0132\017.ArticleKeyword" +
+      "\0222\n\021social_engagement\030\017 \003(\0132\021.SocialEnga" +
+      "gementB\004\240\246\035\003\022&\n\007feature\030\020 \003(\0132\017.ArticleF" +
+      "eatureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003(\tB\010\230\246" +
+      "\035\004\240\246\035\003:\023\212\265\030\017MongoDB.Article\"\325\001\n\016ArticleK" +
+      "eyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n" +
+      "\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035" +
+      "\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.ArticleK" +
+      "eyword.Source:\007UNKNOWN\";\n\006Source\022\013\n\007UNKN",
+      "OWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TA" +
+      "G\020\003\"\347\001\n\020SocialEngagement\022-\n\004site\030\001 \001(\0162\026" +
+      ".SocialEngagement.Site:\007UNKNOWN\022\031\n\013share" +
+      "_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_score\030\003 \001(\001B" +
+      "\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_cou" +
+      "nt\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site\022\013\n" +
+      "\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"\323\001" +
+      "\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246" +
+      "\035\001\220\246\035\003\022+\n\004type\030\004 \001(\0162\024.ArticleFeature.Ty" +
+      "pe:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001\"b\n\004Type\022",
+      "\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020\001\022\022\n\016ABOUT" +
+      "_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020\003\022\022\n\016TEXT_" +
+      "CHARACTER\020\004\"9\n\017InterpretedData\022\031\n\007articl" +
+      "e\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024com.ja" +
+      "nknspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6863,7 +6944,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new

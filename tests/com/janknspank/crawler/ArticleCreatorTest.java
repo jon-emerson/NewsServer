@@ -207,24 +207,6 @@ public class ArticleCreatorTest {
   }
 
   @Test
-  public void testChronArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://www.chron.com/news/article/Hubble-celebrates-25-years-in-space-5997685.php",
-        new FileReader("testdata/chron-hubble-celebrates-25-years.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
-    assertEquals(
-        "This year makes 25 years since the Hubble telescope was "
-        + "sent into outer space to explore the unknown.",
-        article.getDescription());
-    assertEquals("Hubble celebrates 25 years in space", article.getTitle());
-    assertEquals("http://ww1.hdnux.com/photos/34/03/54/7355140/6/rawImage.jpg",
-        article.getImageUrl());
-    assertEquals(3, article.getParagraphCount());
-    assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
-        article.getParagraph(0).startsWith("This year makes 25 years since"));
-  }
-
-  @Test
   public void testBbcArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.bbc.com/future/story/20141219-why-does-guilt-increase-pleasure",
