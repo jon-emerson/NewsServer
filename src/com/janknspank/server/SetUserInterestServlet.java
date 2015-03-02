@@ -114,10 +114,9 @@ public class SetUserInterestServlet extends StandardServlet {
     // interest.
     List<Interest> existingInterests = Lists.newArrayList();
     for (Interest interest : user.getInterestList()) {
-      if (UserInterests.equals(interest, newInterest)) {
-        continue;
+      if (!UserInterests.equals(interest, newInterest)) {
+        existingInterests.add(interest);
       }
-      existingInterests.add(interest);
     }
 
     // Write the filtered list plus a new Interest that represents the
