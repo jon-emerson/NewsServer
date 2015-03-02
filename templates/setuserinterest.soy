@@ -10,11 +10,26 @@
     Session key:<br>
     <input type="text" name="sessionKey"><br>
     <br>
-    Keyword:<br>
-    <input type="text" name="keyword"><br>
+    Interest Type (ENTITY, INDUSTRY, ADDRESS_BOOK_CONTACTS, LINKED_IN_CONTACTS, INTENT):<br>
+    <input type="text" name="interest[type]"><br>
     <br>
-    Type ("o" for organization, "p" for person, or "l" for location):<br>
-    <input type="text" name="type"><br>
+    If entity --
+    <br>
+    Entity Id:<br>
+    <input type="text" name="interest[entity][id]"><br>
+    <br>
+    or Entity Keyword:<br>
+    <input type="text" name="interest[entity][keyword]"><br>
+    <br>
+    If industry --
+    <br>
+    Industry code:<br>
+    <input type="text" name="interest[industry_code]"><br>
+    <br>
+    If intent --
+    <br>
+    Intent code: (start, nwjob, swtch, sklls, indst)<br>
+    <input type="text" name="interest[intent_code]"><br>
     <br>
     Follow ("true" or "false"):<br>
     <input type="text" name="follow"><br>

@@ -16,6 +16,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
+import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.TrainedArticleIndustry;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
@@ -136,6 +137,9 @@ public class Articles {
         case ENTITY:
           keywords.add(interest.getEntity().getKeyword());
           break;
+
+        case UNKNONWN:
+          break;
       }
     }
     // TODO(jonemerson): Each query should be a future.  The response should be
@@ -143,6 +147,14 @@ public class Articles {
     return Iterables.concat(
         getArticlesByIndustries(industries, limitPerType),
         getArticlesForKeywords(keywords, limitPerType));
+  }
+  
+  /**
+   * Gets articles containing a specific entity (person, organization, or place)
+   */
+  public static Iterable<Article> getArticlesForEntity(Entity entity, int limitPerType) 
+      throws DatabaseSchemaException {
+    return getArticlesForKeywords(ImmutableList.of(entity.getKeyword()), limitPerType);
   }
 
   /**

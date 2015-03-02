@@ -137,15 +137,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>GetTopicServlet</servlet-name>
-    <servlet-class>com.janknspank.server.GetTopicServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetTopicServlet</servlet-name>
-    <url-pattern>/getTopic</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>GetUserServlet</servlet-name>
     <servlet-class>com.janknspank.server.GetUserServlet</servlet-class>
   </servlet>

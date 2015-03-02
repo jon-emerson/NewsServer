@@ -34,6 +34,10 @@ public class Entities extends CacheLoader<String, Entity> {
   public static Entity getEntityByKeyword(String keyword) throws DatabaseSchemaException {
     return Iterables.getFirst(getEntitiesByKeyword(ImmutableList.of(keyword)), null);
   }
+  
+  public static Entity getEntityById(String id) throws DatabaseSchemaException {
+    return Database.with(Entity.class).getFirst(new QueryOption.WhereEquals("id", id));
+  }
 
   public static Iterable<Entity> getEntitiesByKeyword(Iterable<String> keywords)
       throws DatabaseSchemaException {
