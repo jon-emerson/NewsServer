@@ -151,11 +151,11 @@ public class UserHelper {
 
   public JSONObject getUserJson() throws DatabaseSchemaException {
     JSONObject userJson = Serializer.toJSON(user);
-    userJson.append("address_book_bontacts", Serializer.toJSON(addressBookContacts));
-    userJson.append("favorites", getFavoritesJsonArray());
-    userJson.append("interests", getInterestsJsonArray());
-    userJson.append("linked_in_contacts", Serializer.toJSON(linkedInContacts));
-    userJson.append("ratings", Serializer.toJSON(UrlRatings.getForUser(user)));
+    userJson.put("address_book_contacts", Serializer.toJSON(addressBookContacts));
+    userJson.put("favorites", getFavoritesJsonArray());
+    userJson.put("interests", getInterestsJsonArray());
+    userJson.put("linked_in_contacts", Serializer.toJSON(linkedInContacts));
+    userJson.put("ratings", Serializer.toJSON(UrlRatings.getForUser(user)));
     return userJson;
   }
 }
