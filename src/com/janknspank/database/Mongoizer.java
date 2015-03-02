@@ -56,7 +56,10 @@ public class Mongoizer {
       if (storageMethod == StorageMethod.PRIMARY_KEY) {
         Asserts.assertTrue(javaType == JavaType.STRING, "Primary key must be a string",
             DatabaseSchemaException.class);
-        messageBuilder.setField(fieldDescriptor, object.getObjectId("_id").toHexString());
+        ObjectId objectId = object.getObjectId("_id");
+        Asserts.assertNotNull(objectId, "Primary key must be defined",
+            DatabaseSchemaException.class);
+        messageBuilder.setField(fieldDescriptor, objectId.toHexString());
         continue;
       }
 

@@ -35,10 +35,10 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
       return Articles.getArticlesForFeature(
           Industry.fromCode(Integer.parseInt(industryCodeId)).getFeatureId(),
           NUM_RESULTS);
-    } else if ("linkedIn".equals(contacts)) {
+    } else if ("linked_in".equals(contacts)) {
       User user = Database.with(User.class).get(getSession(req).getUserId());
       return Articles.getArticlesForContacts(user, InterestType.LINKED_IN_CONTACTS, NUM_RESULTS);
-    } else if ("addressBook".equals(contacts)) {
+    } else if ("address_book".equals(contacts)) {
       User user = Database.with(User.class).get(getSession(req).getUserId());
       return Articles.getArticlesForContacts(user, InterestType.ADDRESS_BOOK_CONTACTS, NUM_RESULTS);
     } else if (entityKeyword != null) {

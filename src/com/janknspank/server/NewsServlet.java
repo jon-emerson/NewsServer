@@ -28,7 +28,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.CoreProto.Session;
 
 public class NewsServlet extends HttpServlet {
-  protected static final String SESSION_ID_PARAM = "sessionKey";
+  protected static final String SESSION_ID_PARAM = "session_key";
   private static final String PARAMS_ATTRIBUTE_KEY = "__params";
   private static final String SESSION_ATTRIBUTE_KEY = "__session";
 
@@ -89,7 +89,7 @@ public class NewsServlet extends HttpServlet {
             authRequired.requestMethod().equals(request.getMethod()));
     Session session;
     try {
-      String sessionKey = getParameter(request, "sessionKey");
+      String sessionKey = getParameter(request, "session_key");
       if (Strings.isNullOrEmpty(sessionKey)) {
         session = getSessionFromCookies(request);
       } else {

@@ -128,7 +128,7 @@ public class LoginServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, DatabaseRequestException, NotFoundException, RequestException,
           BiznessException {
-    return loginFromLinkedIn(getRequiredParameter(req, "linkedInAccessToken"));
+    return loginFromLinkedIn(getRequiredParameter(req, "linked_in_access_token"));
   }
 
   private JSONObject loginFromLinkedIn(String linkedInAccessToken)

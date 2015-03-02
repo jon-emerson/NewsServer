@@ -22,7 +22,7 @@ public class AddDeviceRegistrationServlet extends StandardServlet {
     DeviceRegistration registration = DeviceRegistration.newBuilder()
         .setId(GuidFactory.generate())
         .setUserId(user.getId())
-        .setDeviceId(this.getRequiredParameter(req, "iOSDeviceToken"))
+        .setDeviceId(this.getRequiredParameter(req, "ios_device_token"))
         .setDeviceType(DeviceType.IOS)
         .setCreateTime(System.currentTimeMillis())
         .build();
