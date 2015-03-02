@@ -79,4 +79,24 @@ public class UserInterests {
     }
     return matchingInterests;
   }
+
+  /**
+   * Returns if the two interests are about the same thing, but not if they are from
+   * the same source
+   */
+  public static boolean equals(Interest interest1, Interest interest2) {
+    if (interest1.getType() == interest2.getType()) {
+      if (interest1.getType() == InterestType.ADDRESS_BOOK_CONTACTS ||
+          interest1.getType() == InterestType.LINKED_IN_CONTACTS) {
+        return true;
+      } else if (interest1.getType() == InterestType.ENTITY) {
+        return interest1.getEntity().equals(interest2.getEntity());
+      } else if (interest1.getType() == InterestType.INDUSTRY) {
+        return interest1.getIndustryCode() == interest2.getIndustryCode();
+      } else if (interest1.getType() == InterestType.INTENT) {
+        return interest1.getIntentCode() == interest2.getIntentCode();
+      }
+    }
+    return false;
+  }
 }

@@ -10,14 +10,20 @@ import org.json.JSONObject;
 
 import com.google.api.client.util.Lists;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.Intent;
+import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Intents;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.HeuristicScorer;
 
@@ -36,8 +42,24 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
     User user = Database.with(User.class).get(getSession(req).getUserId());
     if (!Strings.isNullOrEmpty(intentCodesCommaSeparated)) {
       List<String> intentCodes = Arrays.asList(intentCodesCommaSeparated.split(","));
-      Iterable<Intent> intents = getIntentsFromCodes(intentCodes);
-      user = Intents.setIntents(user, intents);
+      Iterable<Interest> intentInterests = getInterestsFromIntentCodes(intentCodes);
+
+      // Business logic.
+      // Find all interests that have nothing to do with the specified user
+      // interest.
+      List<Interest> existingInterests = Lists.newArrayList();
+      for (Interest interest : user.getInterestList()) {
+        if (interest.getType() != InterestType.INTENT) {
+          existingInterests.add(interest);
+        }
+      }
+
+      // Write the filtered list plus a new Interest that represents the
+      // parameters received from the client.
+      Database.with(User.class).set(user, "interest",
+          Iterables.concat(
+              existingInterests,
+              intentInterests));
     }
 
     return super.doGetInternal(req, resp);
@@ -50,15 +72,17 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
     return Articles.getRankedArticles(user, HeuristicScorer.getInstance(), NUM_RESULTS);
   }
 
-  public static Iterable<Intent> getIntentsFromCodes(Iterable<String> intentCodes) {
-    List<Intent> intents = Lists.newArrayList();
+  public static Iterable<Interest> getInterestsFromIntentCodes(Iterable<String> intentCodes) {
+    List<Interest> interests = Lists.newArrayList();
     for (String intentCode : intentCodes) {
       // Validate the intent code strings
-      Intent intent = Intent.fromCode(intentCode);
-      if (intent != null) {
-        intents.add(intent);
-      }
+      interests.add(Interest.newBuilder().setId(GuidFactory.generate())
+          .setCreateTime(System.currentTimeMillis())
+          .setType(InterestType.INTENT)
+          .setIntentCode(intentCode)
+          .setSource(InterestSource.USER)
+          .build());
     }
-    return intents;
+    return interests;
   }
 }

@@ -248,6 +248,6 @@ public class IosPushNotificationHelper {
 
   public static final void main(String args[]) throws DatabaseSchemaException, InterruptedException, ExecutionException {
     IosPushNotificationHelper.getInstance().sendNewArticleViaFuture(
-        Database.with(Article.class).getFirst(), Users.getByEmail("panaceaa@gmail.com")).get();
+        Database.with(Article.class).getFirst(), Users.getByEmail("tom.charytoniuk@gmail.com")).get();
   }
 }
