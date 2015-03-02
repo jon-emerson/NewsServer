@@ -44,15 +44,14 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
       List<String> intentCodes = Arrays.asList(intentCodesCommaSeparated.split(","));
       Iterable<Interest> intentInterests = getInterestsFromIntentCodes(intentCodes);
 
-   // Business logic.
+      // Business logic.
       // Find all interests that have nothing to do with the specified user
       // interest.
       List<Interest> existingInterests = Lists.newArrayList();
       for (Interest interest : user.getInterestList()) {
-        if (interest.getType() == InterestType.INTENT) {
-            continue;
+        if (interest.getType() != InterestType.INTENT) {
+          existingInterests.add(interest);
         }
-        existingInterests.add(interest);
       }
 
       // Write the filtered list plus a new Interest that represents the
@@ -77,15 +76,12 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
     List<Interest> interests = Lists.newArrayList();
     for (String intentCode : intentCodes) {
       // Validate the intent code strings
-      Interest interest = Interest.newBuilder().setId(GuidFactory.generate())
+      interests.add(Interest.newBuilder().setId(GuidFactory.generate())
           .setCreateTime(System.currentTimeMillis())
           .setType(InterestType.INTENT)
           .setIntentCode(intentCode)
           .setSource(InterestSource.USER)
-          .build();
-      if (interest != null) {
-        interests.add(interest);
-      }
+          .build());
     }
     return interests;
   }
