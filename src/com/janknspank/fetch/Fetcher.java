@@ -3,6 +3,7 @@ package com.janknspank.fetch;
 import java.io.IOException;
 import java.io.Reader;
 
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -15,7 +16,14 @@ import com.janknspank.proto.CoreProto.Url;
  * TODO(jonemerson): This class should enforce robots.txt.
  */
 public class Fetcher {
-  private CloseableHttpClient httpclient = HttpClients.createDefault();
+  RequestConfig requestConfig = RequestConfig.custom()
+      .setConnectionRequestTimeout(10000)
+      .setConnectTimeout(10000)
+      .setSocketTimeout(10000)
+      .build();
+  private CloseableHttpClient httpclient = HttpClients.custom()
+      .setDefaultRequestConfig(requestConfig)
+      .build();
 
   public Fetcher() {
   }
