@@ -57,7 +57,7 @@ public class SetUserInterestServlet extends StandardServlet {
     } else if ("false".equals(followParam)) {
       interestSource = InterestSource.TOMBSTONE;
     } else {
-      throw new RequestException("Parameter 'following' is invalid");
+      throw new RequestException("Parameter 'follow' is invalid");
     }
 
     // Build the new interest
