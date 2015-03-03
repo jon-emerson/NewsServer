@@ -23,6 +23,7 @@ public class AddUserActionServlet extends StandardServlet {
     String urlParam = getRequiredParameter(req, "url");
     String readStartTimeParam = getParameter(req, "read_start_time");
     String readEndTimeParam = getParameter(req, "read_end_time");
+    User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // parameter validation
     UserAction.ActionType actionType = UserAction.ActionType.valueOf(actionTypeParam);
@@ -30,7 +31,6 @@ public class AddUserActionServlet extends StandardServlet {
       throw new RequestException("Parameter 'type' is invalid");
     }
 
-    User user = Database.with(User.class).get(getSession(req).getUserId());
     UserAction.Builder actionBuilder = UserAction.newBuilder()
         .setId(GuidFactory.generate())
         .setUserId(user.getId())
