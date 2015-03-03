@@ -7,6 +7,9 @@ subdomain_blacklist: "realestate.buffalonews.com"
 subdomain_blacklist: "services.buffalonews.com"
 subdomain_blacklist: "shopping.buffalonews.com"
 subdomain_blacklist: "subscribe.buffalonews.com"
+path_blacklist {
+  needle: "/sports/" # Redirects to http://sabres.buffalonews.com/
+}
 paragraph_selector: ".articleP p"
 paragraph_selector: ".entry-content p"
 article_url_pattern {

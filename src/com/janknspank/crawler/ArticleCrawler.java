@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -34,7 +35,7 @@ import com.janknspank.proto.SiteProto.SiteManifest;
  * that go and grab articles off of sites, then uses ArticleCreator to interpret
  * those article documents, then stores the results to the database.
  */
-public class ArticleCrawler implements Runnable {
+public class ArticleCrawler implements Callable<Void> {
   private static final Logger LOG = new Logger(ArticleCrawler.class);
   public static final int THREAD_COUNT = 20;
 
@@ -45,10 +46,11 @@ public class ArticleCrawler implements Runnable {
   }
 
   @Override
-  public void run() {
+  public Void call() throws Exception {
     for (SiteManifest manifest : manifests) {
       crawlSite(manifest);
     }
+    return null;
   }
 
   public void crawlSite(SiteManifest manifest) {
@@ -230,10 +232,11 @@ public class ArticleCrawler implements Runnable {
 
     // Schedule all the threads.
     ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+    List<Callable<Void>> crawlers = Lists.newArrayList();
     for (int i = 0; i < THREAD_COUNT; i++) {
-      Runnable worker = new ArticleCrawler(manifestsForThread.get(i));
-      executor.execute(worker);
+      crawlers.add(new ArticleCrawler(manifestsForThread.get(i)));
     }
+    executor.invokeAll(crawlers);
     executor.shutdown();
     System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
   }
