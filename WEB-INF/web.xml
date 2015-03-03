@@ -38,6 +38,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>AddUserActionServlet</servlet-name>
+    <servlet-class>com.janknspank.server.AddUserActionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddUserActionServlet</servlet-name>
+    <url-pattern>/addUserAction</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>DeleteUserServlet</servlet-name>
     <servlet-class>com.janknspank.server.DeleteUserServlet</servlet-class>
   </servlet>

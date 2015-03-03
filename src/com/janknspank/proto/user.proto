@@ -194,3 +194,54 @@ message Interest {
     (string_length) = 5
   ];
 }
+
+message UserAction {
+  option (database_collection) = "MongoDB.UserAction";
+
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional string user_id = 2 [
+    (required) = YES,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  enum ActionType {
+    UNKNONWN = 0;
+    FAVORITE = 1;
+    X_OUT = 2;
+    TAP_FROM_STREAM = 3; // User tapped the article cell to view the full article from the stream
+    SHARE = 4;
+    READ_ARTICLE = 5;
+  }
+  optional ActionType action_type = 3 [
+    (required) = YES
+  ];
+
+  optional string url_id = 4 [
+    (required) = YES,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional string url = 5 [
+    (required) = YES,
+    (string_length) = 767,
+    (string_charset) = LATIN1
+  ];
+
+  optional int64 create_time = 6 [
+    (required) = YES
+  ];
+
+  // IFF ActionType == READ_ARTICLE
+  optional int64 read_start_time = 7;
+
+  // IFF ActionType == READ_ARTICLE
+  optional int64 read_end_time = 8;
+}
