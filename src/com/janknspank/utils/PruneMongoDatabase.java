@@ -34,7 +34,7 @@ public class PruneMongoDatabase {
    * Deletes any passed URLs that do not have Articles associated with them in
    * the database.
    */
-  private static void cleanUrls(List<Url> urls) throws DatabaseSchemaException {
+  private static int cleanUrls(List<Url> urls) throws DatabaseSchemaException {
     final Set<String> existingArticleUrlIds = Sets.newHashSet();
     for (Article article : Database.with(Article.class).get(
         new QueryOption.WhereEquals("url",
@@ -46,7 +46,7 @@ public class PruneMongoDatabase {
             })))) {
       existingArticleUrlIds.add(article.getUrlId());
     }
-    Database.delete(Iterables.filter(urls, new Predicate<Url>() {
+    return Database.delete(Iterables.filter(urls, new Predicate<Url>() {
       @Override
       public boolean apply(Url url) {
         return !existingArticleUrlIds.contains(url.getId());
@@ -55,19 +55,27 @@ public class PruneMongoDatabase {
   }
 
   private static void cleanUrls() throws DatabaseSchemaException {
+    long startTime = System.currentTimeMillis();
+    System.out.println("Retrieving URLs ...");
+
     Iterable<Url> urls = Database.with(Url.class).get();
+    System.out.println("Received " + Iterables.size(urls) + " URLs to evaluate in "
+        + (System.currentTimeMillis() - startTime) + "ms");
+
+    System.out.print("Cleaning ..");
     List<Url> urlsToCheck = Lists.newArrayList();
-    System.out.print("Cleaning URLs ..");
+    int numDeleted = 0;
     for (Url url : urls) {
       urlsToCheck.add(url);
       if (urlsToCheck.size() > 250) {
-        cleanUrls(urlsToCheck);
+        numDeleted += cleanUrls(urlsToCheck);
         urlsToCheck.clear();
         System.out.print(".");
       }
     }
-    cleanUrls(urlsToCheck);
-    System.out.println("done!");
+    numDeleted += cleanUrls(urlsToCheck);
+    System.out.println(numDeleted + " URLs cleaned in "
+        + (System.currentTimeMillis() - startTime) + "ms!");
   }
 
   /**
@@ -75,6 +83,9 @@ public class PruneMongoDatabase {
    * by deleting the oldest articles by published_time.
    */
   private static void pruneArticles() throws DatabaseSchemaException {
+    long startTime = System.currentTimeMillis();
+    System.out.println("Pruning articles to about " + MAX_ARTICLE_COUNT + " ...");
+
     // Mongo DB doesn't have a "delete with limit" concept.  So, instead,
     // find the 25,000th oldest article in the system, then delete everything
     // older than it.
@@ -89,13 +100,23 @@ public class PruneMongoDatabase {
 
     int count = Database.with(Article.class).delete(
         new QueryOption.WhereLessThan("published_time", oldestArticle.getPublishedTime()));
-    System.out.println("Deleted " + count + " older articles");
+    System.out.println("Deleted " + count + " older articles in "
+        + (System.currentTimeMillis() - startTime) + "ms.  Article count: "
+        + Database.with(Article.class).getSize());
+  }
+
+  private static void repairDatabase() throws DatabaseSchemaException {
+    long startTime = System.currentTimeMillis();
+    System.out.println("Repairing database to free up quota from deleted items ...");
+    MongoConnection.repairDatabase();
+    System.out.println("Database repaired in "
+        + (System.currentTimeMillis() - startTime) + "ms");
   }
 
   public static void main(String args[]) throws DatabaseSchemaException {
     pruneArticles();
     cleanUrls();
-    MongoConnection.repairDatabase();
+    repairDatabase();
     System.out.println("Database pruned successfully.");
   }
 }
