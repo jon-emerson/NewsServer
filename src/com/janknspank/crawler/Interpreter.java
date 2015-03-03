@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 
-import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
@@ -38,8 +37,7 @@ public class Interpreter {
         throw new FetchException(
             "URL not found (" + response.getStatusCode() + "): " + url.getUrl());
       }
-      reader = response.getReader();
-      return interpret(url, reader);
+      return interpret(url, response.getDocumentNode());
     } finally {
       IOUtils.closeQuietly(reader);
     }
@@ -49,10 +47,9 @@ public class Interpreter {
    * Advanced method: If we already have the data from the URL, use this method
    * to interpret the web page using said data.
    */
-  public static InterpretedData interpret(Url url, Reader reader)
+  public static InterpretedData interpret(Url url, DocumentNode documentNode)
       throws FetchException, ParserException, RequiredFieldException {
 
-    DocumentNode documentNode = DocumentBuilder.build(url.getUrl(), reader);
     String urlId = url.getId();
     return InterpretedData.newBuilder()
         .setArticle(ArticleCreator.create(urlId, documentNode))

@@ -9,7 +9,6 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 import com.janknspank.common.Logger;
-import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
@@ -39,7 +38,7 @@ public class UrlFinder {
       throws FetchException, ParserException, RequiredFieldException {
 
     FetchResponse response = FETCHER.fetch(url);
-    return findUrls(DocumentBuilder.build(url, response.getReader()));
+    return findUrls(response.getDocumentNode());
   }
 
   /**

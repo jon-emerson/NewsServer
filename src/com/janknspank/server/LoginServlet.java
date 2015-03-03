@@ -1,7 +1,5 @@
 package com.janknspank.server;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +9,6 @@ import org.apache.http.client.utils.URIBuilder;
 import org.json.JSONObject;
 
 import com.google.common.base.Strings;
-import com.google.common.io.CharStreams;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.LinkedInLoginHandler;
 import com.janknspank.bizness.Sessions;
@@ -19,7 +16,6 @@ import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.fetch.FetchException;
-import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.UserProto.User;
@@ -66,7 +62,7 @@ public class LoginServlet extends StandardServlet {
       HttpServletRequest req, String authorizationCode, String state) throws BiznessException {
     Sessions.verifyLinkedInOAuthState(state);
 
-    FetchResponse response;
+    String response;
     try {
       String url = new URIBuilder()
           .setScheme("https")
@@ -79,23 +75,12 @@ public class LoginServlet extends StandardServlet {
           .addParameter("client_secret", LoginServlet.LINKED_IN_SECRET_KEY)
           .build().toString();
       System.out.println("Fetching " + url);
-      response = fetcher.fetch(url);
+      response = fetcher.getResponseBody(url);
     } catch (FetchException | URISyntaxException e) {
       throw new BiznessException("Could not fetch access token", e);
     }
-    StringWriter sw = new StringWriter();
-    try {
-      CharStreams.copy(response.getReader(), sw);
-    } catch (IOException e) {
-      throw new BiznessException("Could not read accessToken response", e);
-    }
-    if (response.getStatusCode() == HttpServletResponse.SC_OK) {
-      JSONObject responseObj = new JSONObject(sw.toString());
-      return responseObj.getString("access_token");
-    } else {
-      System.out.println("Error: " + sw.toString());
-      throw new BiznessException("Access token exchange failed (" + response.getStatusCode() + ")");
-    }
+    JSONObject responseObj = new JSONObject(response);
+    return responseObj.getString("access_token");
   }
 
   @Override

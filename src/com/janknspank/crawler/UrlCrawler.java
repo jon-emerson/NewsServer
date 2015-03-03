@@ -17,7 +17,6 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
@@ -130,7 +129,7 @@ class UrlCrawler {
     try {
       fetchResponse = fetcher.fetch(rssUrl);
       if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
-        DocumentNode documentNode = DocumentBuilder.build(rssUrl, fetchResponse.getReader());
+        DocumentNode documentNode = fetchResponse.getDocumentNode();
         for (Node itemNode : Iterables.concat(
             documentNode.findAll("item"),
             documentNode.findAll("entry"))) {

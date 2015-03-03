@@ -1,21 +1,21 @@
 package com.janknspank.fetch;
 
-import java.io.Reader;
+import com.janknspank.dom.parser.DocumentNode;
 
 public class FetchResponse {
   private final int statusCode;
-  private final Reader reader;
+  private final DocumentNode documentNode;
 
-  FetchResponse(int statusCode, Reader reader) {
+  FetchResponse(int statusCode, DocumentNode documentNode) {
     this.statusCode = statusCode;
-    this.reader = reader;
+    this.documentNode = documentNode;
   }
 
   public int getStatusCode() {
     return statusCode;
   }
 
-  public Reader getReader() {
-    return reader;
+  public DocumentNode getDocumentNode() {
+    return documentNode;
   }
 }
