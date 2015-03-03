@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -39,21 +40,14 @@ public class ArticleCrawler implements Callable<Void> {
   private static final Logger LOG = new Logger(ArticleCrawler.class);
   public static final int THREAD_COUNT = 20;
 
-  private final Iterable<SiteManifest> manifests;
+  private final SiteManifest manifest;
 
-  private ArticleCrawler(Iterable<SiteManifest> manifests) {
-    this.manifests = manifests;
+  private ArticleCrawler(SiteManifest manifest) {
+    this.manifest = manifest;
   }
 
   @Override
   public Void call() throws Exception {
-    for (SiteManifest manifest : manifests) {
-      crawlSite(manifest);
-    }
-    return null;
-  }
-
-  public void crawlSite(SiteManifest manifest) {
     long startTime = System.currentTimeMillis();
     Iterable<Url> urls;
     try {
@@ -61,7 +55,7 @@ public class ArticleCrawler implements Callable<Void> {
     } catch (DatabaseSchemaException | DatabaseRequestException e) {
       System.out.println("ERROR parsing site: " + manifest.getRootDomain());
       e.printStackTrace();
-      return;
+      return null;
     }
 
     for (Url url : urls) {
@@ -98,6 +92,7 @@ public class ArticleCrawler implements Callable<Void> {
     }
     System.out.println("Finished updating " + manifest.getRootDomain() + " in "
         + (System.currentTimeMillis() - startTime) + "ms");
+    return null;
   }
 
   /**
@@ -216,25 +211,33 @@ public class ArticleCrawler implements Callable<Void> {
     return articles;
   }
 
+  private static class PoisonPillCallable implements Callable<Void> {
+    @Override
+    public Void call() throws Exception {
+      // Kill the process after 9 minutes.  Usually it takes 3 minutes.  But
+      // sometimes it takes longer, and we have crawlers running every 10
+      // minutes, so if this one's running long, let the next one run with it.
+      Thread.sleep(TimeUnit.MINUTES.toMillis(9));
+      System.out.println("KILLING PROCESS - TIMEOUT REACHED - See " + this.getClass().getName());
+      System.exit(-1);
+      return null;
+    }
+  }
+
   public static void main(String args[]) throws Exception {
     long startTime = System.currentTimeMillis();
 
-    // Randomly assign each thread a set of manifests to work on.
-    List<List<SiteManifest>> manifestsForThread = Lists.newArrayList();
-    for (int i = 0; i < THREAD_COUNT; i++) {
-      manifestsForThread.add(Lists.<SiteManifest>newArrayList());
-    }
+    // Randomly create crawlers, which will be execution poll throttled to
+    // THREAD_COUNT threads, for each website in our corpus.
     List<SiteManifest> allManifests = Lists.newArrayList(SiteManifests.getList());
     Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
-    for (int i = 0; i < allManifests.size(); i++) {
-      manifestsForThread.get(i % THREAD_COUNT).add(allManifests.get(i));
-    }
 
     // Schedule all the threads.
-    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT + 1);
     List<Callable<Void>> crawlers = Lists.newArrayList();
-    for (int i = 0; i < THREAD_COUNT; i++) {
-      crawlers.add(new ArticleCrawler(manifestsForThread.get(i)));
+    crawlers.add(new PoisonPillCallable());
+    for (SiteManifest manifest : allManifests) {
+      crawlers.add(new ArticleCrawler(manifest));
     }
     executor.invokeAll(crawlers);
     executor.shutdown();
