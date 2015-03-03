@@ -152,7 +152,11 @@ class UrlCrawler {
     return putIfNotExists(urlsToInsert);
   }
 
-  public Iterable<Url> getUrls(SiteManifest manifest)
+  /**
+   * Returns a set of all the articles on a site's home page and other start
+   * URLs, regardless of whether we've indexed them before or not.
+   */
+  public Iterable<Url> findArticleUrls(SiteManifest manifest)
       throws DatabaseSchemaException, DatabaseRequestException {
     LOG.info("WEBSITE: " + manifest.getRootDomain());
 

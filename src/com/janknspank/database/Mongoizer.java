@@ -161,9 +161,10 @@ public class Mongoizer {
   }
 
   public static <T extends Message> List<DBObject> toDBObjectList(Iterable<T> messages)
-      throws DatabaseSchemaException {
+      throws DatabaseSchemaException, DatabaseRequestException {
     List<DBObject> list = Lists.newArrayList();
     for (Message message : messages) {
+      Validator.assertValid(message);
       list.add(toDBObject(message));
     }
     return list;

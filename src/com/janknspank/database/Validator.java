@@ -48,12 +48,6 @@ public class Validator {
         Asserts.assertTrue(stringBytes <= 767 || storageMethod == StorageMethod.PULL_OUT,
             "Error on " + fieldName + ": Strings larger than 767 bytes cannot be indexed",
             DatabaseSchemaException.class);
-
-        // This seems like a good idea for now, but if we ever re-use protos to
-        // de-reference look-ups, we'll probably want to remove this (and that's
-        // OK).
-        Asserts.assertTrue(indexedFieldsAllowed, "Error in " + message.getClass().getSimpleName()
-            + ": Indexed fields are not allowed in nested protos", DatabaseSchemaException.class);
       }
 
       // Verify string length is valid.

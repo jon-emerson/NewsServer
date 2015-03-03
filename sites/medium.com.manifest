@@ -1,5 +1,6 @@
 root_domain: "medium.com"
-start_url: "http://medium.com"
+start_url: "https://medium.com"
+start_url: "https://medium.com/top-stories"
 start_url: "https://medium.com/top-100/"
 path_blacklist {
   needle: "/@Medium/"

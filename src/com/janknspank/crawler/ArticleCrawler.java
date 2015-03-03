@@ -1,5 +1,6 @@
 package com.janknspank.crawler;
 
+import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +19,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Links;
 import com.janknspank.bizness.Urls;
 import com.janknspank.common.Logger;
@@ -29,6 +32,7 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.CrawlerProto.CrawlHistory;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 /**
@@ -41,6 +45,9 @@ public class ArticleCrawler implements Callable<Void> {
   public static final int THREAD_COUNT = 20;
 
   private final SiteManifest manifest;
+  private final static CrawlHistory.Builder CRAWL_HISTORY_BUILDER = CrawlHistory.newBuilder();
+  private final static ConcurrentHashMap<String, CrawlHistory.Site.Builder> CRAWL_HISTORY_SITES =
+      new ConcurrentHashMap<>();
 
   private ArticleCrawler(SiteManifest manifest) {
     this.manifest = manifest;
@@ -49,9 +56,15 @@ public class ArticleCrawler implements Callable<Void> {
   @Override
   public Void call() throws Exception {
     long startTime = System.currentTimeMillis();
+    CrawlHistory.Site.Builder crawlHistorySiteBuilder = CrawlHistory.Site.newBuilder()
+        .setRootDomain(manifest.getRootDomain())
+        .setStartTime(startTime)
+        .setArticlesCrawled(0);
+    CRAWL_HISTORY_SITES.put(manifest.getRootDomain(), crawlHistorySiteBuilder);
+
     Iterable<Url> urls;
     try {
-      urls = new UrlCrawler().getUrls(manifest);
+      urls = new UrlCrawler().findArticleUrls(manifest);
     } catch (DatabaseSchemaException | DatabaseRequestException e) {
       System.out.println("ERROR parsing site: " + manifest.getRootDomain());
       e.printStackTrace();
@@ -81,6 +94,8 @@ public class ArticleCrawler implements Callable<Void> {
       // Save this article and its keywords.
       try {
         crawl(url, false /* markCrawlStart */);
+        crawlHistorySiteBuilder.setArticlesCrawled(
+            crawlHistorySiteBuilder.getArticlesCrawled() + 1);
 
       } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
         // Internal error (bug in our code).
@@ -90,6 +105,9 @@ public class ArticleCrawler implements Callable<Void> {
         e.printStackTrace();
       }
     }
+    crawlHistorySiteBuilder.setEndTime(System.currentTimeMillis());
+    crawlHistorySiteBuilder.setMillis(
+        crawlHistorySiteBuilder.getEndTime() - crawlHistorySiteBuilder.getStartTime());
     System.out.println("Finished updating " + manifest.getRootDomain() + " in "
         + (System.currentTimeMillis() - startTime) + "ms");
     return null;
@@ -211,19 +229,73 @@ public class ArticleCrawler implements Callable<Void> {
     return articles;
   }
 
+  private static void updateCrawlHistoryInDatabase()
+      throws DatabaseRequestException, DatabaseSchemaException {
+    if (CRAWL_HISTORY_BUILDER.hasEndTime()) {
+      CRAWL_HISTORY_BUILDER.setMillis(
+          CRAWL_HISTORY_BUILDER.getEndTime() - CRAWL_HISTORY_BUILDER.getStartTime());
+    } else {
+      CRAWL_HISTORY_BUILDER.setMillis(
+          System.currentTimeMillis() - CRAWL_HISTORY_BUILDER.getStartTime());
+    }
+
+    CRAWL_HISTORY_BUILDER.clearSite();
+    for (CrawlHistory.Site.Builder siteBuilder : CRAWL_HISTORY_SITES.values()) {
+      CRAWL_HISTORY_BUILDER.addSite(siteBuilder.build());
+    }
+    Database.update(CRAWL_HISTORY_BUILDER.build());
+  }
+
+  /**
+   * Periodically updates the database with statistics about how the crawler is
+   * doing.
+   */
+  private static class CommitCrawlHistoryThread extends Thread {
+    @Override
+    public void run() {
+      try {
+        String host = System.getenv("DYNO");
+        if (host == null) {
+          try {
+            host = java.net.InetAddress.getLocalHost().getHostName();
+          } catch (UnknownHostException e) {
+            throw new Error(e);
+          }
+        }
+        CRAWL_HISTORY_BUILDER
+            .setCrawlId(GuidFactory.generate())
+            .setHost(host)
+            .setStartTime(System.currentTimeMillis());
+        Database.insert(CRAWL_HISTORY_BUILDER.build());
+
+        while (true) {
+          Thread.sleep(TimeUnit.MINUTES.toMillis(1));
+          updateCrawlHistoryInDatabase();
+        }
+      } catch (InterruptedException | DatabaseRequestException | DatabaseSchemaException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
   private static class PoisonPillThread extends Thread {
     @Override
     public void run() {
       try {
-        // Kill the process after 8 minutes.  Usually it takes 5 minutes.  But
-        // sometimes it takes longer, and we have crawlers running every 10
-        // minutes, so if this one's running long, let the next crawler take
+        // Kill the process after 18 minutes, then let the next crawler take
         // over.  (Note: Heroku's scheduling isn't that reliable, so we can't
-        // keep this at 9 minutes - Tasks start to overlap.)
-        Thread.sleep(TimeUnit.MINUTES.toMillis(8));
+        // keep this at 20 minutes - Tasks start to overlap.)
+        Thread.sleep(TimeUnit.MINUTES.toMillis(18));
+
+        // Record what's happening.
+        CRAWL_HISTORY_BUILDER
+            .setWasInterrupted(true)
+            .setEndTime(System.currentTimeMillis());
+        updateCrawlHistoryInDatabase();
+
         System.out.println("KILLING PROCESS - TIMEOUT REACHED - See " + this.getClass().getName());
         System.exit(-1);
-      } catch (InterruptedException e) {
+      } catch (InterruptedException | DatabaseRequestException | DatabaseSchemaException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
@@ -232,6 +304,9 @@ public class ArticleCrawler implements Callable<Void> {
 
   public static void main(String args[]) throws Exception {
     long startTime = System.currentTimeMillis();
+
+    // Record crawl history on a regular basis.
+    new CommitCrawlHistoryThread().start();
 
     // Make sure we die in a reasonable amount of time.
     new PoisonPillThread().start();
@@ -250,6 +325,14 @@ public class ArticleCrawler implements Callable<Void> {
     executor.invokeAll(crawlers);
     executor.shutdown();
     System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
-    System.exit(0); // Hard quit because the PoisonPillThread is still running.
+
+    // Record that we finished.
+    CRAWL_HISTORY_BUILDER
+        .setWasInterrupted(false)
+        .setEndTime(System.currentTimeMillis());
+    updateCrawlHistoryInDatabase();
+
+    // Hard quit because CommitCrawlHistoryThread and PoisonPillThread are still running.
+    System.exit(0); 
   }
 }

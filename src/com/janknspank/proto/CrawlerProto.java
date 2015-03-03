@@ -6774,6 +6774,2188 @@ public final class CrawlerProto {
     // @@protoc_insertion_point(class_scope:TestInstructions)
   }
 
+  public interface CrawlHistoryOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string crawl_id = 1;
+    /**
+     * <code>optional string crawl_id = 1;</code>
+     */
+    boolean hasCrawlId();
+    /**
+     * <code>optional string crawl_id = 1;</code>
+     */
+    java.lang.String getCrawlId();
+    /**
+     * <code>optional string crawl_id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getCrawlIdBytes();
+
+    // optional string host = 2;
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    boolean hasHost();
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    java.lang.String getHost();
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getHostBytes();
+
+    // repeated .CrawlHistory.Site site = 3;
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    java.util.List<com.janknspank.proto.CrawlerProto.CrawlHistory.Site> 
+        getSiteList();
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    com.janknspank.proto.CrawlerProto.CrawlHistory.Site getSite(int index);
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    int getSiteCount();
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder> 
+        getSiteOrBuilderList();
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder getSiteOrBuilder(
+        int index);
+
+    // optional int64 start_time = 4;
+    /**
+     * <code>optional int64 start_time = 4;</code>
+     */
+    boolean hasStartTime();
+    /**
+     * <code>optional int64 start_time = 4;</code>
+     */
+    long getStartTime();
+
+    // optional int64 end_time = 5;
+    /**
+     * <code>optional int64 end_time = 5;</code>
+     */
+    boolean hasEndTime();
+    /**
+     * <code>optional int64 end_time = 5;</code>
+     */
+    long getEndTime();
+
+    // optional int64 millis = 6;
+    /**
+     * <code>optional int64 millis = 6;</code>
+     *
+     * <pre>
+     * Elapsed time.
+     * </pre>
+     */
+    boolean hasMillis();
+    /**
+     * <code>optional int64 millis = 6;</code>
+     *
+     * <pre>
+     * Elapsed time.
+     * </pre>
+     */
+    long getMillis();
+
+    // optional bool was_interrupted = 7;
+    /**
+     * <code>optional bool was_interrupted = 7;</code>
+     */
+    boolean hasWasInterrupted();
+    /**
+     * <code>optional bool was_interrupted = 7;</code>
+     */
+    boolean getWasInterrupted();
+  }
+  /**
+   * Protobuf type {@code CrawlHistory}
+   *
+   * <pre>
+   * Records a run of ArticleCrawler: What sites did it crawl, how long did each
+   * take, how did the process end, etc.
+   * </pre>
+   */
+  public static final class CrawlHistory extends
+      com.google.protobuf.GeneratedMessage
+      implements CrawlHistoryOrBuilder {
+    // Use CrawlHistory.newBuilder() to construct.
+    private CrawlHistory(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CrawlHistory(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CrawlHistory defaultInstance;
+    public static CrawlHistory getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CrawlHistory getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CrawlHistory(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              crawlId_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              host_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                site_ = new java.util.ArrayList<com.janknspank.proto.CrawlerProto.CrawlHistory.Site>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              site_.add(input.readMessage(com.janknspank.proto.CrawlerProto.CrawlHistory.Site.PARSER, extensionRegistry));
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              startTime_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              endTime_ = input.readInt64();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              millis_ = input.readInt64();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000020;
+              wasInterrupted_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          site_ = java.util.Collections.unmodifiableList(site_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CrawlerProto.CrawlHistory.class, com.janknspank.proto.CrawlerProto.CrawlHistory.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CrawlHistory> PARSER =
+        new com.google.protobuf.AbstractParser<CrawlHistory>() {
+      public CrawlHistory parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CrawlHistory(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CrawlHistory> getParserForType() {
+      return PARSER;
+    }
+
+    public interface SiteOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional string root_domain = 1;
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      boolean hasRootDomain();
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      java.lang.String getRootDomain();
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getRootDomainBytes();
+
+      // optional int64 start_time = 2;
+      /**
+       * <code>optional int64 start_time = 2;</code>
+       */
+      boolean hasStartTime();
+      /**
+       * <code>optional int64 start_time = 2;</code>
+       */
+      long getStartTime();
+
+      // optional int64 end_time = 3;
+      /**
+       * <code>optional int64 end_time = 3;</code>
+       */
+      boolean hasEndTime();
+      /**
+       * <code>optional int64 end_time = 3;</code>
+       */
+      long getEndTime();
+
+      // optional int64 millis = 4;
+      /**
+       * <code>optional int64 millis = 4;</code>
+       *
+       * <pre>
+       * Elapsed time.
+       * </pre>
+       */
+      boolean hasMillis();
+      /**
+       * <code>optional int64 millis = 4;</code>
+       *
+       * <pre>
+       * Elapsed time.
+       * </pre>
+       */
+      long getMillis();
+
+      // optional int32 articles_crawled = 5;
+      /**
+       * <code>optional int32 articles_crawled = 5;</code>
+       */
+      boolean hasArticlesCrawled();
+      /**
+       * <code>optional int32 articles_crawled = 5;</code>
+       */
+      int getArticlesCrawled();
+    }
+    /**
+     * Protobuf type {@code CrawlHistory.Site}
+     */
+    public static final class Site extends
+        com.google.protobuf.GeneratedMessage
+        implements SiteOrBuilder {
+      // Use Site.newBuilder() to construct.
+      private Site(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private Site(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final Site defaultInstance;
+      public static Site getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public Site getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private Site(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                rootDomain_ = input.readBytes();
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000002;
+                startTime_ = input.readInt64();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                endTime_ = input.readInt64();
+                break;
+              }
+              case 32: {
+                bitField0_ |= 0x00000008;
+                millis_ = input.readInt64();
+                break;
+              }
+              case 40: {
+                bitField0_ |= 0x00000010;
+                articlesCrawled_ = input.readInt32();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_Site_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_Site_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CrawlerProto.CrawlHistory.Site.class, com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<Site> PARSER =
+          new com.google.protobuf.AbstractParser<Site>() {
+        public Site parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Site(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Site> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // optional string root_domain = 1;
+      public static final int ROOT_DOMAIN_FIELD_NUMBER = 1;
+      private java.lang.Object rootDomain_;
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public boolean hasRootDomain() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public java.lang.String getRootDomain() {
+        java.lang.Object ref = rootDomain_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            rootDomain_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRootDomainBytes() {
+        java.lang.Object ref = rootDomain_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          rootDomain_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional int64 start_time = 2;
+      public static final int START_TIME_FIELD_NUMBER = 2;
+      private long startTime_;
+      /**
+       * <code>optional int64 start_time = 2;</code>
+       */
+      public boolean hasStartTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 start_time = 2;</code>
+       */
+      public long getStartTime() {
+        return startTime_;
+      }
+
+      // optional int64 end_time = 3;
+      public static final int END_TIME_FIELD_NUMBER = 3;
+      private long endTime_;
+      /**
+       * <code>optional int64 end_time = 3;</code>
+       */
+      public boolean hasEndTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 end_time = 3;</code>
+       */
+      public long getEndTime() {
+        return endTime_;
+      }
+
+      // optional int64 millis = 4;
+      public static final int MILLIS_FIELD_NUMBER = 4;
+      private long millis_;
+      /**
+       * <code>optional int64 millis = 4;</code>
+       *
+       * <pre>
+       * Elapsed time.
+       * </pre>
+       */
+      public boolean hasMillis() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 millis = 4;</code>
+       *
+       * <pre>
+       * Elapsed time.
+       * </pre>
+       */
+      public long getMillis() {
+        return millis_;
+      }
+
+      // optional int32 articles_crawled = 5;
+      public static final int ARTICLES_CRAWLED_FIELD_NUMBER = 5;
+      private int articlesCrawled_;
+      /**
+       * <code>optional int32 articles_crawled = 5;</code>
+       */
+      public boolean hasArticlesCrawled() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 articles_crawled = 5;</code>
+       */
+      public int getArticlesCrawled() {
+        return articlesCrawled_;
+      }
+
+      private void initFields() {
+        rootDomain_ = "";
+        startTime_ = 0L;
+        endTime_ = 0L;
+        millis_ = 0L;
+        articlesCrawled_ = 0;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getRootDomainBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeInt64(2, startTime_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt64(3, endTime_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeInt64(4, millis_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          output.writeInt32(5, articlesCrawled_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getRootDomainBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(2, startTime_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(3, endTime_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(4, millis_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(5, articlesCrawled_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.CrawlHistory.Site parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CrawlerProto.CrawlHistory.Site prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code CrawlHistory.Site}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_Site_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_Site_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CrawlerProto.CrawlHistory.Site.class, com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CrawlerProto.CrawlHistory.Site.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          rootDomain_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          startTime_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          endTime_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          millis_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000008);
+          articlesCrawled_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000010);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_Site_descriptor;
+        }
+
+        public com.janknspank.proto.CrawlerProto.CrawlHistory.Site getDefaultInstanceForType() {
+          return com.janknspank.proto.CrawlerProto.CrawlHistory.Site.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CrawlerProto.CrawlHistory.Site build() {
+          com.janknspank.proto.CrawlerProto.CrawlHistory.Site result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CrawlerProto.CrawlHistory.Site buildPartial() {
+          com.janknspank.proto.CrawlerProto.CrawlHistory.Site result = new com.janknspank.proto.CrawlerProto.CrawlHistory.Site(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.rootDomain_ = rootDomain_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.startTime_ = startTime_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.endTime_ = endTime_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.millis_ = millis_;
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          result.articlesCrawled_ = articlesCrawled_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CrawlerProto.CrawlHistory.Site) {
+            return mergeFrom((com.janknspank.proto.CrawlerProto.CrawlHistory.Site)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CrawlerProto.CrawlHistory.Site other) {
+          if (other == com.janknspank.proto.CrawlerProto.CrawlHistory.Site.getDefaultInstance()) return this;
+          if (other.hasRootDomain()) {
+            bitField0_ |= 0x00000001;
+            rootDomain_ = other.rootDomain_;
+            onChanged();
+          }
+          if (other.hasStartTime()) {
+            setStartTime(other.getStartTime());
+          }
+          if (other.hasEndTime()) {
+            setEndTime(other.getEndTime());
+          }
+          if (other.hasMillis()) {
+            setMillis(other.getMillis());
+          }
+          if (other.hasArticlesCrawled()) {
+            setArticlesCrawled(other.getArticlesCrawled());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CrawlerProto.CrawlHistory.Site parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CrawlerProto.CrawlHistory.Site) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional string root_domain = 1;
+        private java.lang.Object rootDomain_ = "";
+        /**
+         * <code>optional string root_domain = 1;</code>
+         */
+        public boolean hasRootDomain() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional string root_domain = 1;</code>
+         */
+        public java.lang.String getRootDomain() {
+          java.lang.Object ref = rootDomain_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            rootDomain_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string root_domain = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getRootDomainBytes() {
+          java.lang.Object ref = rootDomain_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            rootDomain_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string root_domain = 1;</code>
+         */
+        public Builder setRootDomain(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          rootDomain_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string root_domain = 1;</code>
+         */
+        public Builder clearRootDomain() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          rootDomain_ = getDefaultInstance().getRootDomain();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string root_domain = 1;</code>
+         */
+        public Builder setRootDomainBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          rootDomain_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional int64 start_time = 2;
+        private long startTime_ ;
+        /**
+         * <code>optional int64 start_time = 2;</code>
+         */
+        public boolean hasStartTime() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional int64 start_time = 2;</code>
+         */
+        public long getStartTime() {
+          return startTime_;
+        }
+        /**
+         * <code>optional int64 start_time = 2;</code>
+         */
+        public Builder setStartTime(long value) {
+          bitField0_ |= 0x00000002;
+          startTime_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 start_time = 2;</code>
+         */
+        public Builder clearStartTime() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          startTime_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // optional int64 end_time = 3;
+        private long endTime_ ;
+        /**
+         * <code>optional int64 end_time = 3;</code>
+         */
+        public boolean hasEndTime() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional int64 end_time = 3;</code>
+         */
+        public long getEndTime() {
+          return endTime_;
+        }
+        /**
+         * <code>optional int64 end_time = 3;</code>
+         */
+        public Builder setEndTime(long value) {
+          bitField0_ |= 0x00000004;
+          endTime_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 end_time = 3;</code>
+         */
+        public Builder clearEndTime() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          endTime_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // optional int64 millis = 4;
+        private long millis_ ;
+        /**
+         * <code>optional int64 millis = 4;</code>
+         *
+         * <pre>
+         * Elapsed time.
+         * </pre>
+         */
+        public boolean hasMillis() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        /**
+         * <code>optional int64 millis = 4;</code>
+         *
+         * <pre>
+         * Elapsed time.
+         * </pre>
+         */
+        public long getMillis() {
+          return millis_;
+        }
+        /**
+         * <code>optional int64 millis = 4;</code>
+         *
+         * <pre>
+         * Elapsed time.
+         * </pre>
+         */
+        public Builder setMillis(long value) {
+          bitField0_ |= 0x00000008;
+          millis_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 millis = 4;</code>
+         *
+         * <pre>
+         * Elapsed time.
+         * </pre>
+         */
+        public Builder clearMillis() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          millis_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 articles_crawled = 5;
+        private int articlesCrawled_ ;
+        /**
+         * <code>optional int32 articles_crawled = 5;</code>
+         */
+        public boolean hasArticlesCrawled() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional int32 articles_crawled = 5;</code>
+         */
+        public int getArticlesCrawled() {
+          return articlesCrawled_;
+        }
+        /**
+         * <code>optional int32 articles_crawled = 5;</code>
+         */
+        public Builder setArticlesCrawled(int value) {
+          bitField0_ |= 0x00000010;
+          articlesCrawled_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 articles_crawled = 5;</code>
+         */
+        public Builder clearArticlesCrawled() {
+          bitField0_ = (bitField0_ & ~0x00000010);
+          articlesCrawled_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:CrawlHistory.Site)
+      }
+
+      static {
+        defaultInstance = new Site(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:CrawlHistory.Site)
+    }
+
+    private int bitField0_;
+    // optional string crawl_id = 1;
+    public static final int CRAWL_ID_FIELD_NUMBER = 1;
+    private java.lang.Object crawlId_;
+    /**
+     * <code>optional string crawl_id = 1;</code>
+     */
+    public boolean hasCrawlId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string crawl_id = 1;</code>
+     */
+    public java.lang.String getCrawlId() {
+      java.lang.Object ref = crawlId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          crawlId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string crawl_id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCrawlIdBytes() {
+      java.lang.Object ref = crawlId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        crawlId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string host = 2;
+    public static final int HOST_FIELD_NUMBER = 2;
+    private java.lang.Object host_;
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    public boolean hasHost() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    public java.lang.String getHost() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          host_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getHostBytes() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        host_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // repeated .CrawlHistory.Site site = 3;
+    public static final int SITE_FIELD_NUMBER = 3;
+    private java.util.List<com.janknspank.proto.CrawlerProto.CrawlHistory.Site> site_;
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    public java.util.List<com.janknspank.proto.CrawlerProto.CrawlHistory.Site> getSiteList() {
+      return site_;
+    }
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder> 
+        getSiteOrBuilderList() {
+      return site_;
+    }
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    public int getSiteCount() {
+      return site_.size();
+    }
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    public com.janknspank.proto.CrawlerProto.CrawlHistory.Site getSite(int index) {
+      return site_.get(index);
+    }
+    /**
+     * <code>repeated .CrawlHistory.Site site = 3;</code>
+     */
+    public com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder getSiteOrBuilder(
+        int index) {
+      return site_.get(index);
+    }
+
+    // optional int64 start_time = 4;
+    public static final int START_TIME_FIELD_NUMBER = 4;
+    private long startTime_;
+    /**
+     * <code>optional int64 start_time = 4;</code>
+     */
+    public boolean hasStartTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 start_time = 4;</code>
+     */
+    public long getStartTime() {
+      return startTime_;
+    }
+
+    // optional int64 end_time = 5;
+    public static final int END_TIME_FIELD_NUMBER = 5;
+    private long endTime_;
+    /**
+     * <code>optional int64 end_time = 5;</code>
+     */
+    public boolean hasEndTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 end_time = 5;</code>
+     */
+    public long getEndTime() {
+      return endTime_;
+    }
+
+    // optional int64 millis = 6;
+    public static final int MILLIS_FIELD_NUMBER = 6;
+    private long millis_;
+    /**
+     * <code>optional int64 millis = 6;</code>
+     *
+     * <pre>
+     * Elapsed time.
+     * </pre>
+     */
+    public boolean hasMillis() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 millis = 6;</code>
+     *
+     * <pre>
+     * Elapsed time.
+     * </pre>
+     */
+    public long getMillis() {
+      return millis_;
+    }
+
+    // optional bool was_interrupted = 7;
+    public static final int WAS_INTERRUPTED_FIELD_NUMBER = 7;
+    private boolean wasInterrupted_;
+    /**
+     * <code>optional bool was_interrupted = 7;</code>
+     */
+    public boolean hasWasInterrupted() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional bool was_interrupted = 7;</code>
+     */
+    public boolean getWasInterrupted() {
+      return wasInterrupted_;
+    }
+
+    private void initFields() {
+      crawlId_ = "";
+      host_ = "";
+      site_ = java.util.Collections.emptyList();
+      startTime_ = 0L;
+      endTime_ = 0L;
+      millis_ = 0L;
+      wasInterrupted_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getCrawlIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getHostBytes());
+      }
+      for (int i = 0; i < site_.size(); i++) {
+        output.writeMessage(3, site_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(4, startTime_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(5, endTime_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(6, millis_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(7, wasInterrupted_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getCrawlIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getHostBytes());
+      }
+      for (int i = 0; i < site_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, site_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, startTime_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, endTime_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, millis_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, wasInterrupted_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CrawlerProto.CrawlHistory parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CrawlerProto.CrawlHistory prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CrawlHistory}
+     *
+     * <pre>
+     * Records a run of ArticleCrawler: What sites did it crawl, how long did each
+     * take, how did the process end, etc.
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CrawlerProto.CrawlHistoryOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CrawlerProto.CrawlHistory.class, com.janknspank.proto.CrawlerProto.CrawlHistory.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CrawlerProto.CrawlHistory.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSiteFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        crawlId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        host_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (siteBuilder_ == null) {
+          site_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          siteBuilder_.clear();
+        }
+        startTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        endTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        millis_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        wasInterrupted_ = false;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CrawlerProto.internal_static_CrawlHistory_descriptor;
+      }
+
+      public com.janknspank.proto.CrawlerProto.CrawlHistory getDefaultInstanceForType() {
+        return com.janknspank.proto.CrawlerProto.CrawlHistory.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CrawlerProto.CrawlHistory build() {
+        com.janknspank.proto.CrawlerProto.CrawlHistory result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CrawlerProto.CrawlHistory buildPartial() {
+        com.janknspank.proto.CrawlerProto.CrawlHistory result = new com.janknspank.proto.CrawlerProto.CrawlHistory(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.crawlId_ = crawlId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.host_ = host_;
+        if (siteBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            site_ = java.util.Collections.unmodifiableList(site_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.site_ = site_;
+        } else {
+          result.site_ = siteBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.startTime_ = startTime_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.endTime_ = endTime_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.millis_ = millis_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.wasInterrupted_ = wasInterrupted_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CrawlerProto.CrawlHistory) {
+          return mergeFrom((com.janknspank.proto.CrawlerProto.CrawlHistory)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CrawlerProto.CrawlHistory other) {
+        if (other == com.janknspank.proto.CrawlerProto.CrawlHistory.getDefaultInstance()) return this;
+        if (other.hasCrawlId()) {
+          bitField0_ |= 0x00000001;
+          crawlId_ = other.crawlId_;
+          onChanged();
+        }
+        if (other.hasHost()) {
+          bitField0_ |= 0x00000002;
+          host_ = other.host_;
+          onChanged();
+        }
+        if (siteBuilder_ == null) {
+          if (!other.site_.isEmpty()) {
+            if (site_.isEmpty()) {
+              site_ = other.site_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureSiteIsMutable();
+              site_.addAll(other.site_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.site_.isEmpty()) {
+            if (siteBuilder_.isEmpty()) {
+              siteBuilder_.dispose();
+              siteBuilder_ = null;
+              site_ = other.site_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              siteBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getSiteFieldBuilder() : null;
+            } else {
+              siteBuilder_.addAllMessages(other.site_);
+            }
+          }
+        }
+        if (other.hasStartTime()) {
+          setStartTime(other.getStartTime());
+        }
+        if (other.hasEndTime()) {
+          setEndTime(other.getEndTime());
+        }
+        if (other.hasMillis()) {
+          setMillis(other.getMillis());
+        }
+        if (other.hasWasInterrupted()) {
+          setWasInterrupted(other.getWasInterrupted());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CrawlerProto.CrawlHistory parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CrawlerProto.CrawlHistory) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string crawl_id = 1;
+      private java.lang.Object crawlId_ = "";
+      /**
+       * <code>optional string crawl_id = 1;</code>
+       */
+      public boolean hasCrawlId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string crawl_id = 1;</code>
+       */
+      public java.lang.String getCrawlId() {
+        java.lang.Object ref = crawlId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          crawlId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string crawl_id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCrawlIdBytes() {
+        java.lang.Object ref = crawlId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          crawlId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string crawl_id = 1;</code>
+       */
+      public Builder setCrawlId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        crawlId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string crawl_id = 1;</code>
+       */
+      public Builder clearCrawlId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        crawlId_ = getDefaultInstance().getCrawlId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string crawl_id = 1;</code>
+       */
+      public Builder setCrawlIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        crawlId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string host = 2;
+      private java.lang.Object host_ = "";
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public boolean hasHost() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public java.lang.String getHost() {
+        java.lang.Object ref = host_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          host_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getHostBytes() {
+        java.lang.Object ref = host_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          host_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public Builder setHost(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public Builder clearHost() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        host_ = getDefaultInstance().getHost();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public Builder setHostBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+
+      // repeated .CrawlHistory.Site site = 3;
+      private java.util.List<com.janknspank.proto.CrawlerProto.CrawlHistory.Site> site_ =
+        java.util.Collections.emptyList();
+      private void ensureSiteIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          site_ = new java.util.ArrayList<com.janknspank.proto.CrawlerProto.CrawlHistory.Site>(site_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CrawlerProto.CrawlHistory.Site, com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder, com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder> siteBuilder_;
+
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public java.util.List<com.janknspank.proto.CrawlerProto.CrawlHistory.Site> getSiteList() {
+        if (siteBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(site_);
+        } else {
+          return siteBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public int getSiteCount() {
+        if (siteBuilder_ == null) {
+          return site_.size();
+        } else {
+          return siteBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.CrawlHistory.Site getSite(int index) {
+        if (siteBuilder_ == null) {
+          return site_.get(index);
+        } else {
+          return siteBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder setSite(
+          int index, com.janknspank.proto.CrawlerProto.CrawlHistory.Site value) {
+        if (siteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSiteIsMutable();
+          site_.set(index, value);
+          onChanged();
+        } else {
+          siteBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder setSite(
+          int index, com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder builderForValue) {
+        if (siteBuilder_ == null) {
+          ensureSiteIsMutable();
+          site_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          siteBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder addSite(com.janknspank.proto.CrawlerProto.CrawlHistory.Site value) {
+        if (siteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSiteIsMutable();
+          site_.add(value);
+          onChanged();
+        } else {
+          siteBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder addSite(
+          int index, com.janknspank.proto.CrawlerProto.CrawlHistory.Site value) {
+        if (siteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSiteIsMutable();
+          site_.add(index, value);
+          onChanged();
+        } else {
+          siteBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder addSite(
+          com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder builderForValue) {
+        if (siteBuilder_ == null) {
+          ensureSiteIsMutable();
+          site_.add(builderForValue.build());
+          onChanged();
+        } else {
+          siteBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder addSite(
+          int index, com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder builderForValue) {
+        if (siteBuilder_ == null) {
+          ensureSiteIsMutable();
+          site_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          siteBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder addAllSite(
+          java.lang.Iterable<? extends com.janknspank.proto.CrawlerProto.CrawlHistory.Site> values) {
+        if (siteBuilder_ == null) {
+          ensureSiteIsMutable();
+          super.addAll(values, site_);
+          onChanged();
+        } else {
+          siteBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder clearSite() {
+        if (siteBuilder_ == null) {
+          site_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          siteBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public Builder removeSite(int index) {
+        if (siteBuilder_ == null) {
+          ensureSiteIsMutable();
+          site_.remove(index);
+          onChanged();
+        } else {
+          siteBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder getSiteBuilder(
+          int index) {
+        return getSiteFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder getSiteOrBuilder(
+          int index) {
+        if (siteBuilder_ == null) {
+          return site_.get(index);  } else {
+          return siteBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder> 
+           getSiteOrBuilderList() {
+        if (siteBuilder_ != null) {
+          return siteBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(site_);
+        }
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder addSiteBuilder() {
+        return getSiteFieldBuilder().addBuilder(
+            com.janknspank.proto.CrawlerProto.CrawlHistory.Site.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder addSiteBuilder(
+          int index) {
+        return getSiteFieldBuilder().addBuilder(
+            index, com.janknspank.proto.CrawlerProto.CrawlHistory.Site.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .CrawlHistory.Site site = 3;</code>
+       */
+      public java.util.List<com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder> 
+           getSiteBuilderList() {
+        return getSiteFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CrawlerProto.CrawlHistory.Site, com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder, com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder> 
+          getSiteFieldBuilder() {
+        if (siteBuilder_ == null) {
+          siteBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.CrawlerProto.CrawlHistory.Site, com.janknspank.proto.CrawlerProto.CrawlHistory.Site.Builder, com.janknspank.proto.CrawlerProto.CrawlHistory.SiteOrBuilder>(
+                  site_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          site_ = null;
+        }
+        return siteBuilder_;
+      }
+
+      // optional int64 start_time = 4;
+      private long startTime_ ;
+      /**
+       * <code>optional int64 start_time = 4;</code>
+       */
+      public boolean hasStartTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 start_time = 4;</code>
+       */
+      public long getStartTime() {
+        return startTime_;
+      }
+      /**
+       * <code>optional int64 start_time = 4;</code>
+       */
+      public Builder setStartTime(long value) {
+        bitField0_ |= 0x00000008;
+        startTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 start_time = 4;</code>
+       */
+      public Builder clearStartTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        startTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 end_time = 5;
+      private long endTime_ ;
+      /**
+       * <code>optional int64 end_time = 5;</code>
+       */
+      public boolean hasEndTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 end_time = 5;</code>
+       */
+      public long getEndTime() {
+        return endTime_;
+      }
+      /**
+       * <code>optional int64 end_time = 5;</code>
+       */
+      public Builder setEndTime(long value) {
+        bitField0_ |= 0x00000010;
+        endTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 end_time = 5;</code>
+       */
+      public Builder clearEndTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        endTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 millis = 6;
+      private long millis_ ;
+      /**
+       * <code>optional int64 millis = 6;</code>
+       *
+       * <pre>
+       * Elapsed time.
+       * </pre>
+       */
+      public boolean hasMillis() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int64 millis = 6;</code>
+       *
+       * <pre>
+       * Elapsed time.
+       * </pre>
+       */
+      public long getMillis() {
+        return millis_;
+      }
+      /**
+       * <code>optional int64 millis = 6;</code>
+       *
+       * <pre>
+       * Elapsed time.
+       * </pre>
+       */
+      public Builder setMillis(long value) {
+        bitField0_ |= 0x00000020;
+        millis_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 millis = 6;</code>
+       *
+       * <pre>
+       * Elapsed time.
+       * </pre>
+       */
+      public Builder clearMillis() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        millis_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional bool was_interrupted = 7;
+      private boolean wasInterrupted_ ;
+      /**
+       * <code>optional bool was_interrupted = 7;</code>
+       */
+      public boolean hasWasInterrupted() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional bool was_interrupted = 7;</code>
+       */
+      public boolean getWasInterrupted() {
+        return wasInterrupted_;
+      }
+      /**
+       * <code>optional bool was_interrupted = 7;</code>
+       */
+      public Builder setWasInterrupted(boolean value) {
+        bitField0_ |= 0x00000040;
+        wasInterrupted_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool was_interrupted = 7;</code>
+       */
+      public Builder clearWasInterrupted() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        wasInterrupted_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:CrawlHistory)
+    }
+
+    static {
+      defaultInstance = new CrawlHistory(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:CrawlHistory)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_SiteManifest_descriptor;
   private static
@@ -6804,6 +8986,16 @@ public final class CrawlerProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_TestInstructions_ArticleUrlDetectorChecks_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_CrawlHistory_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_CrawlHistory_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_CrawlHistory_Site_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_CrawlHistory_Site_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6841,8 +9033,17 @@ public final class CrawlerProto {
       "listChecks\022\027\n\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007b" +
       "ad_url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUrlDetecto" +
       "rChecks\022\032\n\013article_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017n" +
-      "on_article_url\030\002 \003(\tB\005\230\246\035\377\005B$\n\024com.jankn" +
-      "spank.protoB\014CrawlerProto"
+      "on_article_url\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHis" +
+      "tory\022\"\n\010crawl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001",
+      "\022\027\n\004host\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132" +
+      "\022.CrawlHistory.Site\022\030\n\nstart_time\030\004 \001(\003B" +
+      "\004\210\246\035\001\022\020\n\010end_time\030\005 \001(\003\022\016\n\006millis\030\006 \001(\003\022" +
+      "\027\n\017was_interrupted\030\007 \001(\010\032\202\001\n\004Site\022\036\n\013roo" +
+      "t_domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nstart_time\030" +
+      "\002 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\003 \001(\003\022\016\n\006millis\030" +
+      "\004 \001(\003\022\036\n\020articles_crawled\030\005 \001(\005B\004\210\246\035\001:\030\212" +
+      "\265\030\024MongoDB.CrawlHistoryB$\n\024com.janknspan" +
+      "k.protoB\014CrawlerProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6885,6 +9086,18 @@ public final class CrawlerProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TestInstructions_ArticleUrlDetectorChecks_descriptor,
               new java.lang.String[] { "ArticleUrl", "NonArticleUrl", });
+          internal_static_CrawlHistory_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_CrawlHistory_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_CrawlHistory_descriptor,
+              new java.lang.String[] { "CrawlId", "Host", "Site", "StartTime", "EndTime", "Millis", "WasInterrupted", });
+          internal_static_CrawlHistory_Site_descriptor =
+            internal_static_CrawlHistory_descriptor.getNestedTypes().get(0);
+          internal_static_CrawlHistory_Site_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_CrawlHistory_Site_descriptor,
+              new java.lang.String[] { "RootDomain", "StartTime", "EndTime", "Millis", "ArticlesCrawled", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -6908,6 +9121,18 @@ public final class CrawlerProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           return registry;
         }
       };

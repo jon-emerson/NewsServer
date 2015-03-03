@@ -149,3 +149,53 @@ message TestInstructions {
     (required) = YES
   ];
 }
+
+// Records a run of ArticleCrawler: What sites did it crawl, how long did each
+// take, how did the process end, etc.
+message CrawlHistory {
+  option (database_collection) = "MongoDB.CrawlHistory";
+
+  optional string crawl_id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional string host = 2 [
+    (required) = YES,
+    (string_length) = 256
+  ];
+
+  message Site {
+    optional string root_domain = 1 [
+      (required) = YES,
+      (string_length) = 767
+    ];
+
+    optional int64 start_time = 2 [
+      (required) = YES
+    ];
+
+    optional int64 end_time = 3;
+
+    // Elapsed time.
+    optional int64 millis = 4;
+
+    optional int32 articles_crawled = 5 [
+      (required) = YES
+    ];
+  }
+  repeated Site site = 3;
+
+  optional int64 start_time = 4 [
+    (required) = YES
+  ];
+
+  optional int64 end_time = 5;
+
+  // Elapsed time.
+  optional int64 millis = 6;
+
+  optional bool was_interrupted = 7;
+}
