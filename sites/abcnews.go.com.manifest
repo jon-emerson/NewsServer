@@ -3,6 +3,9 @@ start_url: "http://www.abcnews.go.com"
 subdomain_blacklist: "forums.abcnews.go.com"
 subdomain_blacklist: "ugv.abcnews.go.com"
 path_blacklist {
+  needle: "/International/wireStory/"
+}
+path_blacklist {
   needle: "/Site/"
 }
 path_blacklist {

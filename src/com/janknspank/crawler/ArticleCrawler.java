@@ -215,11 +215,12 @@ public class ArticleCrawler implements Callable<Void> {
     @Override
     public void run() {
       try {
-        // Kill the process after 9 minutes.  Usually it takes 3 minutes.  But
+        // Kill the process after 8 minutes.  Usually it takes 5 minutes.  But
         // sometimes it takes longer, and we have crawlers running every 10
         // minutes, so if this one's running long, let the next crawler take
-        // over.
-        Thread.sleep(TimeUnit.MINUTES.toMillis(9));
+        // over.  (Note: Heroku's scheduling isn't that reliable, so we can't
+        // keep this at 9 minutes - Tasks start to overlap.)
+        Thread.sleep(TimeUnit.MINUTES.toMillis(8));
         System.out.println("KILLING PROCESS - TIMEOUT REACHED - See " + this.getClass().getName());
         System.exit(-1);
       } catch (InterruptedException e) {
