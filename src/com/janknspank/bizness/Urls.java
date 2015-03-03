@@ -166,17 +166,6 @@ public class Urls {
     return url;
   }
 
-  @SuppressWarnings("unused")
-  public static Url getNextUrlToCrawl() throws DatabaseSchemaException {
-    return Database.with(Url.class).getFirst(
-        new QueryOption.WhereNull("last_crawl_start_time"),
-        new QueryOption.WhereNotEqualsNumber("crawl_priority", 0),
-        new QueryOption.WhereNotLike("url", "https://twitter.com/%"),
-        new QueryOption.DescendingSort("crawl_priority"),
-        new QueryOption.LimitWithOffset(1,
-            ArticleCrawler.THREAD_COUNT == 1 ? 0 : (int) (20 * Math.random())));
-  }
-
   /**
    * Gets a URL by its ID.
    */

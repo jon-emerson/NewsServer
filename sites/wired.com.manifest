@@ -6,6 +6,9 @@ subdomain_blacklist: "jobs.wired.com"
 # element, inside a "gallery-wrap" div.
 paragraph_selector: "span[itemprop=\"articleBody\"] > p"
 
+# E.g. http://www.wired.com/2015/03/internet-anything-shortcut-drone-license/
+paragraph_selector: "section.post-container p"
+
 article_url_pattern {
   path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/.*\\/$"
 }

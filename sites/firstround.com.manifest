@@ -1,7 +1,7 @@
 root_domain: "firstround.com"
 start_url: "http://firstround.com/review"
 start_url: "http://firstround.com/review/blog"
-paragraph_selector: "article p"
+paragraph_selector: "._Content__ p"
 article_url_pattern {
   path_regex: "^\\/article\\/[^\\/]+$"
 }

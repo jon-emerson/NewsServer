@@ -1,9 +1,11 @@
 package com.janknspank.crawler;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,6 +27,7 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.SiteProto.SiteManifest;
 
 /**
  * The is the top-most method of the Crawl task.  It creates a bunch of threads
@@ -33,33 +36,46 @@ import com.janknspank.proto.CoreProto.Url;
  */
 public class ArticleCrawler implements Runnable {
   private static final Logger LOG = new Logger(ArticleCrawler.class);
-
-  // NOTE(jonemerson): This needs to be 1 if the database is empty.  Or, just
-  // run ./rss.sh first!
   public static final int THREAD_COUNT = 20;
+
+  private final Iterable<SiteManifest> manifests;
+
+  private ArticleCrawler(Iterable<SiteManifest> manifests) {
+    this.manifests = manifests;
+  }
 
   @Override
   public void run() {
-    // Uncomment this to start the crawl at a specific page.
-//    try {
-//      Urls.put("http://recode.net/", "http://jonemerson.net/");
-//    } catch (BiznessException | DatabaseSchemaException e) {
-//      e.printStackTrace();
-//    }
+    for (SiteManifest manifest : manifests) {
+      crawlSite(manifest);
+    }
+  }
 
-    while (true) {
-      final Url url;
+  public void crawlSite(SiteManifest manifest) {
+    long startTime = System.currentTimeMillis();
+    Iterable<Url> urls;
+    try {
+      urls = new UrlCrawler().getUrls(manifest);
+    } catch (DatabaseSchemaException | DatabaseRequestException e) {
+      System.out.println("ERROR parsing site: " + manifest.getRootDomain());
+      e.printStackTrace();
+      return;
+    }
+
+    for (Url url : urls) {
+      // In the new design, we get a list of all the URLs on a site's homepage
+      // and RSS pages, and in many cases, we've crawled them before.  If so,
+      // skip the crawling, but do refresh the article's social score if it
+      // hasn't recently been updated.
+      if (url.hasLastCrawlStartTime()) {
+        // TODO(jonemerson): Update social score.
+        continue;
+      }
+
       try {
-        url = Urls.markCrawlStart(Urls.getNextUrlToCrawl());
-//      final Url url = Url.newBuilder()
-//          .setId("pYZDE7M36zxQNxbFTUVFCQ")
-//          .setUrl("http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-"
-//              + "future-of-finance/")
-//          .setTweetCount(0)
-//          .setDiscoveryTime(System.currentTimeMillis())
-//          .build();
+        url = Urls.markCrawlStart(url);
         if (url == null) {
-          // Some other thread has likely claimed this URL - Go get another.
+          // Some other thread has likely claimed this URL - Move along.
           continue;
         }
       } catch (BiznessException | DatabaseSchemaException e) {
@@ -68,14 +84,6 @@ public class ArticleCrawler implements Runnable {
 
       // Save this article and its keywords.
       try {
-        if (!UrlWhitelist.isOkay(url.getUrl())) {
-          System.err.println("Removing now-blacklisted page: " + url.getUrl());
-          Links.deleteIds(ImmutableList.of(url.getId()));
-          Database.delete(url);
-          continue;
-        }
-
-        // Let's do this.
         crawl(url, false /* markCrawlStart */);
 
       } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
@@ -86,6 +94,8 @@ public class ArticleCrawler implements Runnable {
         e.printStackTrace();
       }
     }
+    System.out.println("Finished updating " + manifest.getRootDomain() + " in "
+        + (System.currentTimeMillis() - startTime) + "ms");
   }
 
   /**
@@ -101,7 +111,9 @@ public class ArticleCrawler implements Runnable {
       Urls.markCrawlStart(url);
     }
 
+    @SuppressWarnings("unused")
     List<String> urls;
+
     Article article = null;
     if (ArticleUrlDetector.isArticle(url.getUrl())) {
       InterpretedData interpretedData = Interpreter.interpret(url);
@@ -203,11 +215,26 @@ public class ArticleCrawler implements Runnable {
   }
 
   public static void main(String args[]) throws Exception {
+    long startTime = System.currentTimeMillis();
+
+    // Randomly assign each thread a set of manifests to work on.
+    List<List<SiteManifest>> manifestsForThread = Lists.newArrayList();
+    for (int i = 0; i < THREAD_COUNT; i++) {
+      manifestsForThread.add(Lists.<SiteManifest>newArrayList());
+    }
+    List<SiteManifest> allManifests = Lists.newArrayList(SiteManifests.getList());
+    Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
+    for (int i = 0; i < allManifests.size(); i++) {
+      manifestsForThread.get(i % THREAD_COUNT).add(allManifests.get(i));
+    }
+
+    // Schedule all the threads.
     ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
     for (int i = 0; i < THREAD_COUNT; i++) {
-      Runnable worker = new ArticleCrawler();
+      Runnable worker = new ArticleCrawler(manifestsForThread.get(i));
       executor.execute(worker);
     }
     executor.shutdown();
+    System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
   }
 }
