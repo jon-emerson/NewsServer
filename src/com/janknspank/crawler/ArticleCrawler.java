@@ -211,21 +211,29 @@ public class ArticleCrawler implements Callable<Void> {
     return articles;
   }
 
-  private static class PoisonPillCallable implements Callable<Void> {
+  private static class PoisonPillThread extends Thread {
     @Override
-    public Void call() throws Exception {
-      // Kill the process after 9 minutes.  Usually it takes 3 minutes.  But
-      // sometimes it takes longer, and we have crawlers running every 10
-      // minutes, so if this one's running long, let the next one run with it.
-      Thread.sleep(TimeUnit.MINUTES.toMillis(9));
-      System.out.println("KILLING PROCESS - TIMEOUT REACHED - See " + this.getClass().getName());
-      System.exit(-1);
-      return null;
+    public void run() {
+      try {
+        // Kill the process after 9 minutes.  Usually it takes 3 minutes.  But
+        // sometimes it takes longer, and we have crawlers running every 10
+        // minutes, so if this one's running long, let the next crawler take
+        // over.
+        Thread.sleep(TimeUnit.MINUTES.toMillis(9));
+        System.out.println("KILLING PROCESS - TIMEOUT REACHED - See " + this.getClass().getName());
+        System.exit(-1);
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
   }
 
   public static void main(String args[]) throws Exception {
     long startTime = System.currentTimeMillis();
+
+    // Make sure we die in a reasonable amount of time.
+    new PoisonPillThread().start();
 
     // Randomly create crawlers, which will be execution poll throttled to
     // THREAD_COUNT threads, for each website in our corpus.
@@ -233,14 +241,14 @@ public class ArticleCrawler implements Callable<Void> {
     Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
 
     // Schedule all the threads.
-    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT + 1);
+    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
     List<Callable<Void>> crawlers = Lists.newArrayList();
-    crawlers.add(new PoisonPillCallable());
     for (SiteManifest manifest : allManifests) {
       crawlers.add(new ArticleCrawler(manifest));
     }
     executor.invokeAll(crawlers);
     executor.shutdown();
     System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
+    System.exit(0); // Hard quit because the PoisonPillThread is still running.
   }
 }
