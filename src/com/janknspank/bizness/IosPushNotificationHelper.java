@@ -7,12 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Set;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -22,11 +17,7 @@ import javax.net.ssl.SSLSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
-import com.google.common.util.concurrent.AsyncFunction;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -44,7 +35,6 @@ import com.janknspank.proto.UserProto.User;
  * APNS tells us are no good (by deleting them from the database).
  */
 public class IosPushNotificationHelper {
-  private static ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
   private static IosPushNotificationHelper INSTANCE = null;
 
   // For development builds, use gateway.sandbox.push.apple.com.
@@ -93,48 +83,6 @@ public class IosPushNotificationHelper {
   }
 
   /**
-   * Sends a push notification about a new sound to all the iOS devices
-   * registered with the passed phone number.
-   */
-  public ListenableFuture<Void> sendNewArticleViaFuture(
-      final Article article, final User recipient) throws DatabaseSchemaException {
-    Iterable<DeviceRegistration> registrations = Database.with(DeviceRegistration.class).get(
-        new QueryOption.WhereEquals("user_id", recipient.getId()),
-        new QueryOption.WhereEquals("device_type", DeviceType.IOS.name()),
-        new QueryOption.DescendingSort("create_time"),
-        new QueryOption.Limit(1));
-    return sendNewArticleViaFuture(article, registrations);
-  }
-
-  public ListenableFuture<Void> sendNewArticleViaFuture(
-      final Article article, final Iterable<DeviceRegistration> registrations) {
-    List<ListenableFuture<Void>> futures = new ArrayList<>();
-    for (DeviceRegistration registration : registrations) {
-      futures.add(sendNewArticleViaFuture(article, registration));
-    }
-    return Futures.transform(
-        Futures.allAsList(futures),
-        new AsyncFunction<List<Void>, Void>() {
-          @Override
-          public ListenableFuture<Void> apply(List<Void> result) {
-            return Futures.immediateFuture(null);
-          }
-        });
-  }
-
-  public ListenableFuture<Void> sendNewArticleViaFuture(
-      final Article article, final DeviceRegistration registration) {
-    ListeningExecutorService service = MoreExecutors.listeningDecorator(EXECUTOR_SERVICE);
-    return service.submit(new Callable<Void>() {
-      @Override
-      public Void call() throws Exception {
-        sendNewArticle(article, registration);
-        return null;
-      }
-    });
-  }
-
-  /**
    * Returns a byte array containing the request to send to Apple PNS.  This
    * is obviously in a weird binary format, and unfortunately I think it was
    * reversed engineered by someone, so I haven't seen the documentation for
@@ -152,6 +100,20 @@ public class IosPushNotificationHelper {
     baos.write(payload.length());
     baos.write(payload.getBytes());
     return baos.toByteArray();
+  }
+
+  private void sendNewArticle(Article article, User user) throws DatabaseSchemaException {
+    Set<String> uniqueDeviceIds = Sets.newHashSet();
+    for (DeviceRegistration registration : Database.with(DeviceRegistration.class).get(
+        new QueryOption.WhereEquals("user_id", user.getId()),
+        new QueryOption.WhereEquals("device_type", DeviceType.IOS.name()),
+        new QueryOption.DescendingSort("create_time"),
+        new QueryOption.Limit(1))) {
+      if (!uniqueDeviceIds.contains(registration.getDeviceId())) {
+        sendNewArticle(article, registration);
+        uniqueDeviceIds.add(registration.getDeviceId());
+      }
+    }
   }
 
   private void sendNewArticle(Article article, DeviceRegistration registration) {
@@ -173,17 +135,17 @@ public class IosPushNotificationHelper {
       out.flush();
 
       // Read the response.
-      ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream();
-      byte[] buffer = new byte[2000];
-      int readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
-      while (readBytes > 0) {
-        responseOutputStream.write(buffer, 0, readBytes);
-        readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
-      }
-      // (BTW it looks like nothing comes back - weird.  How do you know if the
-      // request was valid?)
-      System.err.println("Received response: " +
-          new String(responseOutputStream.toByteArray()));
+//      ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream();
+//      byte[] buffer = new byte[2000];
+//      int readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
+//      while (readBytes > 0) {
+//        responseOutputStream.write(buffer, 0, readBytes);
+//        readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
+//      }
+//      // (BTW it looks like nothing comes back - weird.  How do you know if the
+//      // request was valid?)
+//      System.err.println("Received response: " +
+//          new String(responseOutputStream.toByteArray()));
 
       // Close the socket.
       socket.getInputStream().close();
@@ -246,8 +208,8 @@ public class IosPushNotificationHelper {
     return data;
   }
 
-  public static final void main(String args[]) throws DatabaseSchemaException, InterruptedException, ExecutionException {
-    IosPushNotificationHelper.getInstance().sendNewArticleViaFuture(
-        Database.with(Article.class).getFirst(), Users.getByEmail("tom.charytoniuk@gmail.com")).get();
+  public static final void main(String args[]) throws DatabaseSchemaException {
+    IosPushNotificationHelper.getInstance().sendNewArticle(
+        Database.with(Article.class).getFirst(), Users.getByEmail("tom.charytoniuk@gmail.com"));
   }
 }
