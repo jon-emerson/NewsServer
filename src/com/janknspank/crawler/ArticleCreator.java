@@ -403,7 +403,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     // For most sites, we can get it from the meta keywords.  For
     // advice.careerbuilder.com, the meta keywords are crap, so we skip this
     // step.
-    if (!documentNode.getUrl().contains("//advice.careerbuilder.com/")) {
+    if (!documentNode.getUrl().contains("//advice.careerbuilder.com/")
+        && !documentNode.getUrl().contains("//www.bhorowitz.com/")) {
       Node metaNode = documentNode.findFirst(ImmutableList.of(
           "html > head meta[name=\"fb_title\"]",
           "html > head meta[name=\"hdl\"]",

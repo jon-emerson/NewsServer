@@ -125,6 +125,8 @@ public class ArticleCreatorTest {
         ArticleCreator.getTitle(getDocumentWithTitle(
             "Why Brad Paisley’s self-deprecating ‘black-ish’/’white-ish’ joke at the "
             + "CMAs was a bad idea. (But not racist.)")));
+    assertEquals("Why I Did Not Go To Jail",
+        ArticleCreator.getTitle(getDocumentWithTitle("Why I Did Not Go To Jail - Ben's Blog")));
   }
 
   @Test
