@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.janknspank.proto.SiteProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 public class UrlWhitelistTest {
   @Test

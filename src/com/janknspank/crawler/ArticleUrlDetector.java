@@ -11,8 +11,8 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
-import com.janknspank.proto.SiteProto.SiteManifest;
-import com.janknspank.proto.SiteProto.SiteManifest.ArticleUrlPattern;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest.ArticleUrlPattern;
 
 /**
  * Utility method for determining whether a URL is a news article, solely

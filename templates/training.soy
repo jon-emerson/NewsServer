@@ -48,15 +48,15 @@
  */
 {template .industryPicker}
   <form id="form" method="POST" action="train">
-    <input id="sessionKey" type="hidden" name="sessionKey" value="{$sessionKey}" />
-    <input type="hidden" name="urlId" value="{$urlId}" />
+    <input type="hidden" name="session_key" value="{$sessionKey}" />
+    <input type="hidden" name="url_id" value="{$urlId}" />
     <h2 class="sectionHeader">Article Characteristics</h2>
     {foreach $classification in $classifications}
       <input type="checkbox" name="classifications" value="{$classification.code}" />
       {$classification.description}<br>
     {/foreach}
     <h2 class="sectionHeader">Interest to me</h2>
-    <input type="range" name="qualityScore" id="qualityScore" min="0" max="100" 
+    <input type="range" name="quality_score" id="qualityScore" min="0" max="100" 
       onchange="updateRangeLabel(this.value);" value="50" />
     <span id="qualityScoreLabel">50</span><br>
     <div id="industries">
@@ -65,7 +65,7 @@
       <ul class="list">
       {foreach $industry in $industries}
         <li>
-          <input type="checkbox" name="industriesCheckboxes" value="{$industry.code}" />
+          <input type="checkbox" name="industries_checkboxes" value="{$industry.code}" />
           <span class="industryDescription">{$industry.description}</span>
           <span class="industryGroup">{$industry.group}</span><br>
         </li>

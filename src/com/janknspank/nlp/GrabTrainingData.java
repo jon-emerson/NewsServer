@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.base.Joiner;
 import com.janknspank.crawler.SiteParser;
-import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
@@ -52,15 +51,15 @@ public class GrabTrainingData {
   }
 
   private DocumentNode getDocumentNode(String url) throws FetchException {
-    FetchResponse fetchResponse = FETCHER.fetch(url);
-    if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
-      try {
-        return DocumentBuilder.build(url, fetchResponse.getReader());
-      } catch (ParserException e) {
-        throw new FetchException("Could not read web site: " + e.getMessage(), e);
+    try {
+      FetchResponse fetchResponse = FETCHER.fetch(url);
+      if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
+        return fetchResponse.getDocumentNode();
+      } else {
+        throw new FetchException("Could not read web site");
       }
-    } else {
-      throw new FetchException("Could not read web site");
+    } catch (ParserException e) {
+      throw new FetchException("Could not read web site: " + e.getMessage(), e);
     }
   }
 

@@ -16,7 +16,7 @@ public class LogoutServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, RequestException {
     Database.with(Session.class).delete(
-        new QueryOption.WhereEquals("session_key", getRequiredParameter(req, "sessionKey")));
+        new QueryOption.WhereEquals("session_key", getRequiredParameter(req, "session_key")));
     return createSuccessResponse();
   }
 }

@@ -3,7 +3,7 @@
 import "com/janknspank/database/extensions.proto";
 
 option java_package = "com.janknspank.proto";
-option java_outer_classname = "SiteProto";
+option java_outer_classname = "CrawlerProto";
 
 // Defines crawling instructions for a news site.  The minimal set of crawling
 // instructions is a root domain, a start URL (usually the http:// of the

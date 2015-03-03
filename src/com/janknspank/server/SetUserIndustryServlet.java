@@ -25,7 +25,7 @@ public class SetUserIndustryServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     // Read parameters.
-    int industryCode = Integer.parseInt(getRequiredParameter(req, "industryCode"));
+    int industryCode = Integer.parseInt(getRequiredParameter(req, "industry_code"));
     String follow = getRequiredParameter(req, "follow");
     User user = Database.with(User.class).get(getSession(req).getUserId());
 

@@ -17,6 +17,9 @@ path_blacklist {
   needle: "/mundo/"
 }
 path_blacklist {
+  needle: "/news/live/"
+}
+path_blacklist {
   needle: "/programmes/"
 }
 path_blacklist {

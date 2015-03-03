@@ -21,7 +21,7 @@ public class SetUserUrlRatingServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     // Read parameters.
-    String urlId = getRequiredParameter(req, "urlId");
+    String urlId = getRequiredParameter(req, "url_id");
     User user = Database.with(User.class).get(getSession(req).getUserId());
 
     // Parameter validation.

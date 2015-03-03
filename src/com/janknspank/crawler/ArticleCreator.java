@@ -61,7 +61,6 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
       Database.getStringLength(Article.class, "description");
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
-      "http://www.chron.com/img/pages/article/opengraph_default.jpg",
       "http://www.sfgate.com/img/pages/article/opengraph_default.png",
       "http://images.forbes.com/media/assets/forbes_1200x1200.jpg");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLE_ENDS[] = new Pattern[] {
@@ -168,6 +167,9 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
 
     // Deduping.
     articleBuilder.addAllDedupingStems(getDedupingStems(articleBuilder.getTitle()));
+
+    // Timestamp.
+    articleBuilder.setCrawlTime(System.currentTimeMillis());
 
     // Done!
     return articleBuilder.build();
@@ -401,7 +403,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     // For most sites, we can get it from the meta keywords.  For
     // advice.careerbuilder.com, the meta keywords are crap, so we skip this
     // step.
-    if (!documentNode.getUrl().contains("//advice.careerbuilder.com/")) {
+    if (!documentNode.getUrl().contains("//advice.careerbuilder.com/")
+        && !documentNode.getUrl().contains("//www.bhorowitz.com/")) {
       Node metaNode = documentNode.findFirst(ImmutableList.of(
           "html > head meta[name=\"fb_title\"]",
           "html > head meta[name=\"hdl\"]",

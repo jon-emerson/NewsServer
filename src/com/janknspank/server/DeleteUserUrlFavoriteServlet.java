@@ -20,7 +20,7 @@ public class DeleteUserUrlFavoriteServlet extends StandardServlet {
       throws DatabaseRequestException, DatabaseSchemaException, RequestException {
 
     // Get parameters.
-    final String urlId = getRequiredParameter(req, "urlId");
+    final String urlId = getRequiredParameter(req, "url_id");
 
     // Business logic.
     User user = Database.with(User.class).get(getSession(req).getUserId());

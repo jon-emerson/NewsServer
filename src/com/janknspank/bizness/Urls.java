@@ -128,6 +128,11 @@ public class Urls {
    *     given Url has already been crawled by another thread
    */
   public static Url markCrawlStart(Url url) throws BiznessException, DatabaseSchemaException {
+    if (url == null) {
+      // Nothing to do!
+      return null;
+    }
+
     url = url.toBuilder()
         .setLastCrawlStartTime(System.currentTimeMillis())
         .build();
@@ -159,17 +164,6 @@ public class Urls {
       throw new BiznessException("Could not update last crawl finish time", e);
     }
     return url;
-  }
-
-  @SuppressWarnings("unused")
-  public static Url getNextUrlToCrawl() throws DatabaseSchemaException {
-    return Database.with(Url.class).getFirst(
-        new QueryOption.WhereNull("last_crawl_start_time"),
-        new QueryOption.WhereNotEqualsNumber("crawl_priority", 0),
-        new QueryOption.WhereNotLike("url", "https://twitter.com/%"),
-        new QueryOption.DescendingSort("crawl_priority"),
-        new QueryOption.LimitWithOffset(1,
-            ArticleCrawler.THREAD_COUNT == 1 ? 0 : (int) (20 * Math.random())));
   }
 
   /**

@@ -1,15 +1,18 @@
 package com.janknspank.crawler;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -26,41 +29,49 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 /**
  * The is the top-most method of the Crawl task.  It creates a bunch of threads
  * that go and grab articles off of sites, then uses ArticleCreator to interpret
  * those article documents, then stores the results to the database.
  */
-public class ArticleCrawler implements Runnable {
+public class ArticleCrawler implements Callable<Void> {
   private static final Logger LOG = new Logger(ArticleCrawler.class);
-
-  // NOTE(jonemerson): This needs to be 1 if the database is empty.  Or, just
-  // run ./rss.sh first!
   public static final int THREAD_COUNT = 20;
 
+  private final SiteManifest manifest;
+
+  private ArticleCrawler(SiteManifest manifest) {
+    this.manifest = manifest;
+  }
+
   @Override
-  public void run() {
-    // Uncomment this to start the crawl at a specific page.
+  public Void call() throws Exception {
+    long startTime = System.currentTimeMillis();
+    Iterable<Url> urls;
     try {
-      Urls.put("http://recode.net/", "http://jonemerson.net/");
-    } catch (BiznessException | DatabaseSchemaException e) {
+      urls = new UrlCrawler().getUrls(manifest);
+    } catch (DatabaseSchemaException | DatabaseRequestException e) {
+      System.out.println("ERROR parsing site: " + manifest.getRootDomain());
       e.printStackTrace();
+      return null;
     }
 
-    while (true) {
-      final Url url;
+    for (Url url : urls) {
+      // In the new design, we get a list of all the URLs on a site's homepage
+      // and RSS pages, and in many cases, we've crawled them before.  If so,
+      // skip the crawling, but do refresh the article's social score if it
+      // hasn't recently been updated.
+      if (url.hasLastCrawlStartTime()) {
+        // TODO(jonemerson): Update social score.
+        continue;
+      }
+
       try {
-        url = Urls.markCrawlStart(Urls.getNextUrlToCrawl());
-//      final Url url = Url.newBuilder()
-//          .setId("pYZDE7M36zxQNxbFTUVFCQ")
-//          .setUrl("http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-"
-//              + "future-of-finance/")
-//          .setTweetCount(0)
-//          .setDiscoveryTime(System.currentTimeMillis())
-//          .build();
+        url = Urls.markCrawlStart(url);
         if (url == null) {
-          // Some other thread has likely claimed this URL - Go get another.
+          // Some other thread has likely claimed this URL - Move along.
           continue;
         }
       } catch (BiznessException | DatabaseSchemaException e) {
@@ -69,14 +80,6 @@ public class ArticleCrawler implements Runnable {
 
       // Save this article and its keywords.
       try {
-        if (!UrlWhitelist.isOkay(url.getUrl())) {
-          System.err.println("Removing now-blacklisted page: " + url.getUrl());
-          Links.deleteIds(ImmutableList.of(url.getId()));
-          Database.delete(url);
-          continue;
-        }
-
-        // Let's do this.
         crawl(url, false /* markCrawlStart */);
 
       } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
@@ -87,6 +90,9 @@ public class ArticleCrawler implements Runnable {
         e.printStackTrace();
       }
     }
+    System.out.println("Finished updating " + manifest.getRootDomain() + " in "
+        + (System.currentTimeMillis() - startTime) + "ms");
+    return null;
   }
 
   /**
@@ -102,7 +108,9 @@ public class ArticleCrawler implements Runnable {
       Urls.markCrawlStart(url);
     }
 
+    @SuppressWarnings("unused")
     List<String> urls;
+
     Article article = null;
     if (ArticleUrlDetector.isArticle(url.getUrl())) {
       InterpretedData interpretedData = Interpreter.interpret(url);
@@ -125,13 +133,17 @@ public class ArticleCrawler implements Runnable {
       urls = UrlFinder.findUrls(url.getUrl());
     }
 
-    // Make sure to filter and clean the URLs - only store the ones we want to crawl!
-    Iterable<Url> destinationUrls = Urls.put(
-        Iterables.transform(
-            Iterables.filter(urls, UrlWhitelist.PREDICATE),
-            UrlCleaner.TRANSFORM_FUNCTION),
-        url.getUrl());
-    Links.put(url, destinationUrls);
+    // TODO(jonemerson): Someday use URLs we find in articles to augment our
+    // corpus.  But for now, to simplify the processing we do down to a finite
+    // amount, we ignore URLs we find while crawling.
+    // // Make sure to filter and clean the URLs - only store the ones we want to crawl!
+    // Iterable<Url> destinationUrls = Urls.put(
+    //     Iterables.transform(
+    //         Iterables.filter(urls, UrlWhitelist.PREDICATE),
+    //         UrlCleaner.TRANSFORM_FUNCTION),
+    //     url.getUrl());
+    // Links.put(url, destinationUrls);
+
     Urls.markCrawlFinish(url);
     return article;
   }
@@ -199,12 +211,45 @@ public class ArticleCrawler implements Runnable {
     return articles;
   }
 
-  public static void main(String args[]) throws Exception {
-    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
-    for (int i = 0; i < THREAD_COUNT; i++) {
-      Runnable worker = new ArticleCrawler();
-      executor.execute(worker);
+  private static class PoisonPillThread extends Thread {
+    @Override
+    public void run() {
+      try {
+        // Kill the process after 8 minutes.  Usually it takes 5 minutes.  But
+        // sometimes it takes longer, and we have crawlers running every 10
+        // minutes, so if this one's running long, let the next crawler take
+        // over.  (Note: Heroku's scheduling isn't that reliable, so we can't
+        // keep this at 9 minutes - Tasks start to overlap.)
+        Thread.sleep(TimeUnit.MINUTES.toMillis(8));
+        System.out.println("KILLING PROCESS - TIMEOUT REACHED - See " + this.getClass().getName());
+        System.exit(-1);
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
+  }
+
+  public static void main(String args[]) throws Exception {
+    long startTime = System.currentTimeMillis();
+
+    // Make sure we die in a reasonable amount of time.
+    new PoisonPillThread().start();
+
+    // Randomly create crawlers, which will be execution poll throttled to
+    // THREAD_COUNT threads, for each website in our corpus.
+    List<SiteManifest> allManifests = Lists.newArrayList(SiteManifests.getList());
+    Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
+
+    // Schedule all the threads.
+    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+    List<Callable<Void>> crawlers = Lists.newArrayList();
+    for (SiteManifest manifest : allManifests) {
+      crawlers.add(new ArticleCrawler(manifest));
+    }
+    executor.invokeAll(crawlers);
     executor.shutdown();
+    System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
+    System.exit(0); // Hard quit because the PoisonPillThread is still running.
   }
 }

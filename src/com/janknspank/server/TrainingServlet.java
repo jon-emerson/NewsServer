@@ -42,10 +42,10 @@ public class TrainingServlet extends StandardServlet {
   protected SoyMapData getSoyMapData(HttpServletRequest req) throws DatabaseSchemaException {
     Article article = Articles.getRandomUntrainedArticle();
     return new SoyMapData(
-        "sessionKey", this.getSession(req).getSessionKey(),
+        "session_key", this.getSession(req).getSessionKey(),
         "title", article.getTitle(),
         "url", article.getUrl(),
-        "urlId", article.getUrlId(),
+        "url_id", article.getUrlId(),
         "paragraphs", new SoyListData(article.getParagraphList()),
         "image_url", article.getImageUrl(),
         "classifications", Iterables.transform(ArticleTypeCodes.ARTICLE_CLASSIFICATION_CODE_MAP.values(),
@@ -74,16 +74,16 @@ public class TrainingServlet extends StandardServlet {
     Session session = this.getSession(req);
 
     // Read parameters.
-    String urlId = getRequiredParameter(req, "urlId");
+    String urlId = getRequiredParameter(req, "url_id");
     Url articleURL = Urls.getById(urlId);
     if (articleURL == null) {
       throw new RequestException("URL does not exist");
     }
 
-    String[] industryIdsList = req.getParameterValues("industriesCheckboxes");
+    String[] industryIdsList = req.getParameterValues("industries_checkboxes");
     //Only returns the selected checkboxes
     String[] articleClassificationCodesList = req.getParameterValues("classifications");
-    int rating100scale = Integer.parseInt(req.getParameter("qualityScore"));
+    int rating100scale = Integer.parseInt(req.getParameter("quality_score"));
     Asserts.assertTrue(rating100scale > 0 && rating100scale < 100, "qualityScore must be between 0 - 100",
         RequestException.class);
 

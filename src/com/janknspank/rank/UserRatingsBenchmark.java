@@ -16,6 +16,7 @@ import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Users;
 import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
+import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.UrlRating;
@@ -36,8 +37,12 @@ public class UserRatingsBenchmark {
     Set<String> urlStrings = Sets.newHashSet();
     Set<String> userEmails = Sets.newHashSet();
     for (UrlRating urlRating : allRatings) {
-      urlStrings.add(urlRating.getUrl());
-      userEmails.add(urlRating.getEmail());
+      // Double check that we still support the site that was rated.
+      // (Sometimes we take down sites that aren't relevant to most people.)
+      if (ArticleUrlDetector.isArticle(urlRating.getUrl())) {
+        urlStrings.add(urlRating.getUrl());
+        userEmails.add(urlRating.getEmail());
+      }
     }
 
     // Load up all users who submitted ratings
@@ -155,7 +160,7 @@ public class UserRatingsBenchmark {
         badArticleScores.add(rating);
       }
     }
-    
+
     Multiset<Integer> goodHistogram = getHistogram(goodArticleScores);
     Multiset<Integer> badHistogram = getHistogram(badArticleScores);
     for (int i = 9; i >= 0; i--) {
@@ -179,12 +184,6 @@ public class UserRatingsBenchmark {
     scores =
         calculateScoresFor(allRatings, HeuristicScorer.getInstance());
     System.out.println("\nHEURISTIC SCORER:");
-    printHistogram(scores);
-    grade(scores);
-
-    scores =
-        calculateScoresFor(allRatings, JavascriptScorer.getInstance());
-    System.out.println("\nJAVASCRIPT SCORER:");
     printHistogram(scores);
     grade(scores);
 
