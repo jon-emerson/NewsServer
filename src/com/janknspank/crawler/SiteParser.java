@@ -17,7 +17,7 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
-import com.janknspank.proto.SiteProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   private static LoadingCache<DocumentNode, List<Node>> CACHE =

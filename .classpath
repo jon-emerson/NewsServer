@@ -48,7 +48,6 @@
 	<classpathentry kind="lib" path="target/dependency/neuroph-core-2.9.jar"/>
 	<classpathentry kind="lib" path="target/dependency/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="target/dependency/slf4j-nop-1.7.6.jar"/>
-	<classpathentry kind="lib" path="target/dependency/rhino-1.7R5.jar"/>
 	<classpathentry kind="lib" path="target/dependency/aws-java-sdk-core-1.9.19.jar"/>
 	<classpathentry kind="lib" path="target/dependency/aws-java-sdk-kms-1.9.19.jar"/>
 	<classpathentry kind="lib" path="target/dependency/aws-java-sdk-s3-1.9.19.jar"/>

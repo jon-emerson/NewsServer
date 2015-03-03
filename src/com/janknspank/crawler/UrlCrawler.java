@@ -24,7 +24,7 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Url;
-import com.janknspank.proto.SiteProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 /**
  * Iterates through the start URLs and RSS feeds for a particular site, inserts

@@ -7,8 +7,8 @@ import java.net.URL;
 
 import org.junit.Test;
 
-import com.janknspank.proto.SiteProto.SiteManifest;
-import com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.TestInstructions.ArticleUrlDetectorChecks;
 
 public class ArticleUrlDetectorTest {
   @Test

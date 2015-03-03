@@ -34,7 +34,7 @@ import com.janknspank.proto.CoreProto.ShareNormalizationData;
 import com.janknspank.proto.CoreProto.ShareNormalizationData.DomainShareCount;
 import com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution;
 import com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistribution.Builder;
-import com.janknspank.proto.SiteProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.rank.DistributionBuilder;
 
 public class FacebookShareNormalizer {

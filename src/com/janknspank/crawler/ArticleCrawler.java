@@ -29,7 +29,7 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
-import com.janknspank.proto.SiteProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 /**
  * The is the top-most method of the Crawl task.  It creates a bunch of threads

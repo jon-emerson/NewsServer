@@ -23,8 +23,8 @@ import com.janknspank.common.Logger;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Validator;
-import com.janknspank.proto.SiteProto.SiteManifest;
-import com.janknspank.proto.SiteProto.TestInstructions.ArticleUrlDetectorChecks;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.TestInstructions.ArticleUrlDetectorChecks;
 
 public class SiteManifests {
   private static final Logger LOG = new Logger(SiteManifests.class);

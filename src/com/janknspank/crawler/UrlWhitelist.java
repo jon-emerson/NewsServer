@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 import com.google.common.base.Predicate;
 import com.janknspank.database.Database;
 import com.janknspank.proto.CoreProto.Url;
-import com.janknspank.proto.SiteProto.SiteManifest;
-import com.janknspank.proto.SiteProto.SiteManifest.PathBlacklist;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest.PathBlacklist;
 
 /**
  * Uses SiteManifest.subdomain_blacklist and SiteManifest.path_blacklist against
