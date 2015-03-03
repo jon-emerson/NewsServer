@@ -10019,19 +10019,18 @@ public final class UserProto {
       "\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n" +
       "\025ADDRESS_BOOK_CONTACTS\020\004\022\n\n\006INTENT\020\005\"M\n\016" +
       "InterestSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n" +
-      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\234\003\n\n",
+      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\200\003\n\n",
       "UserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
-      "\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\240\246\035\003\0221\n\013a" +
-      "ction_type\030\003 \001(\0162\026.UserAction.ActionType" +
-      "B\004\210\246\035\001\022\034\n\006url_id\030\004 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\022\032\n\003" +
-      "url\030\005 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\035\n\013create_time\030" +
-      "\006 \001(\003B\010\210\246\035\001\240\246\035\003\022!\n\017read_start_time\030\007 \001(\003" +
-      "B\010\210\246\035\001\240\246\035\003\022\037\n\rread_end_time\030\010 \001(\003B\010\210\246\035\001\240" +
-      "\246\035\003\"e\n\nActionType\022\014\n\010UNKNONWN\020\000\022\014\n\010FAVOR" +
-      "ITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n" +
-      "\005SHARE\020\004\022\020\n\014READ_ARTICLE\020\005:\026\212\265\030\022MongoDB.",
-      "UserActionB!\n\024com.janknspank.protoB\tUser" +
-      "Proto"
+      "\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\0221\n\013actio" +
+      "n_type\030\003 \001(\0162\026.UserAction.ActionTypeB\004\210\246" +
+      "\035\001\022\034\n\006url_id\030\004 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\022\032\n\003url\030" +
+      "\005 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\031\n\013create_time\030\006 \001(" +
+      "\003B\004\210\246\035\001\022\027\n\017read_start_time\030\007 \001(\003\022\025\n\rread" +
+      "_end_time\030\010 \001(\003\"e\n\nActionType\022\014\n\010UNKNONW" +
+      "N\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM" +
+      "_STREAM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_ARTICLE\020\005:\026" +
+      "\212\265\030\022MongoDB.UserActionB!\n\024com.janknspank",
+      ".protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10145,7 +10144,6 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -10155,11 +10153,6 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           return registry;
         }

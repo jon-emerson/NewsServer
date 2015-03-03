@@ -208,8 +208,7 @@ message UserAction {
   optional string user_id = 2 [
     (required) = YES,
     (string_length) = 24,
-    (string_charset) = LATIN1,
-    (client_serialization) = EXCLUDE
+    (string_charset) = LATIN1
   ];
 
   enum ActionType {
@@ -237,19 +236,12 @@ message UserAction {
   ];
 
   optional int64 create_time = 6 [
-    (required) = YES,
-    (client_serialization) = EXCLUDE
+    (required) = YES
   ];
 
   // IFF ActionType == READ_ARTICLE
-  optional int64 read_start_time = 7 [ 
-    (required) = YES,
-    (client_serialization) = EXCLUDE
-  ];
+  optional int64 read_start_time = 7;
 
   // IFF ActionType == READ_ARTICLE
-  optional int64 read_end_time = 8 [ 
-    (required) = YES,
-    (client_serialization) = EXCLUDE
-  ];
+  optional int64 read_end_time = 8;
 }
