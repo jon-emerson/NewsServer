@@ -46,7 +46,7 @@ public class ArticleCreatorTest {
             + "</head><body>"
             + "<div class=\"cnn_storyarea\"><p>Super article man!!!</p></div>"
             + "</body</html>"));
-    Article article = ArticleCreator.create(URL.getUrl(), documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals("National Society of Film Critics goes for Godard", article.getTitle());
     assertEquals(DESCRIPTION, article.getDescription());
 
@@ -135,21 +135,24 @@ public class ArticleCreatorTest {
     DocumentNode documentNode = DocumentBuilder.build("url",
         new StringReader("<html><head><title><meta name=\"date\" content=\"2015/01/07\" />"
             + "</title></head></html>"));
-    DateParserTest.assertSameTime("20150107000000", ArticleCreator.getPublishedTime(documentNode));
+    DateParserTest.assertSameTime("20150107000000",
+        ArticleCreator.getPublishedTime(documentNode, URL));
 
     // From Cbsnews.com.
     documentNode = DocumentBuilder.build("url",
         new StringReader("<html><head><title>"
             + "<meta itemprop=\"datePublished\" content=\"January 9, 2015, 3:43 AM\">"
             + "</title></head></html>"));
-    DateParserTest.assertSameTime("20150109034300", ArticleCreator.getPublishedTime(documentNode));
+    DateParserTest.assertSameTime("20150109034300",
+        ArticleCreator.getPublishedTime(documentNode, URL));
 
     // From abc.net.au: Get the date from the URL.
     documentNode = DocumentBuilder.build(
         "http://www.abc.net.au/news/2015-01-01/victims-of-sydney-to-hobart-yacht-"
         + "race-plane-crash/5995656",
         new StringReader("<html><head></head></html>"));
-    DateParserTest.assertSameTime("20150101000000", ArticleCreator.getPublishedTime(documentNode));
+    DateParserTest.assertSameTime("20150101000000",
+        ArticleCreator.getPublishedTime(documentNode, URL));
 
     // From http://advice.careerbuilder.com/: Get the date from the copyright notice.
     documentNode = DocumentBuilder.build(
@@ -158,7 +161,8 @@ public class ArticleCreatorTest {
             + "<div class=\"copyright\">© 2014 CareerBuilder, LLC. "
             + "Original publish date: 12.26.2014</div>"
             + "</body></html>"));
-    DateParserTest.assertSameTime("20141226000000", ArticleCreator.getPublishedTime(documentNode));
+    DateParserTest.assertSameTime("20141226000000",
+        ArticleCreator.getPublishedTime(documentNode, URL));
   }
 
   @Test
@@ -166,7 +170,7 @@ public class ArticleCreatorTest {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.nytimes.com/2015/01/04/realestate/year-of-the-condo-in-new-york-city.html",
         new FileReader("testdata/year-of-the-condo-in-new-york-city.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals("Twice as many new condominium units will hit the Manhattan "
         + "market this year as in 2014.", article.getDescription());
     assertEquals("Year of the Condo in New York City", article.getTitle());
@@ -179,7 +183,7 @@ public class ArticleCreatorTest {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-future-of-finance/",
         new FileReader("testdata/techcrunch-the-sharing-economy-and-the-future-of-finance.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals("Banking has gone from somewhere you go to something you "
         + "do. If we are to believe that the sharing economy will shape our "
         + "future, banking and all financial services will become something "
@@ -196,7 +200,7 @@ public class ArticleCreatorTest {
         "http://www.sfgate.com/nation/article/"
         + "News-of-the-day-from-across-the-nation-Jan-7-5997832.php",
         new FileReader("testdata/sfgate-news-of-the-day-jan-7.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertTrue(article.getDescription().startsWith("The launch countdown of "
         + "a rocket carrying equipment and supplies for the International Space "
         + "Station was called off just minutes before it was to lift off from "
@@ -213,7 +217,7 @@ public class ArticleCreatorTest {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.bbc.com/future/story/20141219-why-does-guilt-increase-pleasure",
         new FileReader("testdata/bbc-why-does-guilt-increase-pleasure.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals(
         "Feelings of guilt can make a temptations feel even more seductive. "
         + "So could we be healthier if we just embraced a little bit of vice, "
@@ -237,7 +241,7 @@ public class ArticleCreatorTest {
         "http://www.bloomberg.com/politics/articles/2014-12-30/the-new-york-times-joins-"
         + "the-nypd-funeral-protest-backlash",
         new FileReader("testdata/bloomberg-nypd-funeral-protest-backlash.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals(
         "The editorial board criticized what it called one of several acts of "
         + "“passive-aggressive contempt and self-pity.”",
@@ -256,7 +260,7 @@ public class ArticleCreatorTest {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://fortune.com/2012/04/06/gm-sees-self-driving-cars-sooner-not-later/",
         new FileReader("testdata/fortune-gm-sees-self-driving-cars-sooner-not-later.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals(
         "An array of new sensors, warnings and automatic controls can already help drivers "
         + "detect hazardous situations and avoid accidents. More advanced cars aren't that "
@@ -276,7 +280,7 @@ public class ArticleCreatorTest {
         "http://www.slate.com/articles/health_and_science/science/2014/06/facebook_unethical_"
         + "experiment_it_made_news_feeds_happier_or_sadder_to_manipulate.html",
         new FileReader("testdata/slate-facebook-unethical-experiment.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals(
         "Facebook has been experimenting on us. A new paper in the Proceedings of the "
         + "National Academy of Sciences reveals that Facebook intentionally manipulated "
@@ -303,7 +307,7 @@ public class ArticleCreatorTest {
         "http://www.slate.com/articles/life/food/2015/02/"
         + "hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.single.html",
         new FileReader("testdata/slate-hellmanns-mayonnaise-different-texture.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals("Hellmann’s Real Mayonnaise has been smeared in the news lately, thanks to a "
         + "lawsuit filed by its parent company, Unilever, against fledgling vegan “mayo” purveyor "
         + "Hampton Creek. The case rested on the notion that Hampton Creek’s flagship product, "
@@ -334,7 +338,7 @@ public class ArticleCreatorTest {
         "http://venturebeat.com/2015/01/29/googles-eric-schmidt-has-a-10-year-prediction-"
         + "of-how-tech-will-disrupt-whole-industries/",
         new FileReader("testdata/venturebeat-googles-eric-schmidt-has-a-10-year-prediction.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals(
         "Mixing and matching free services",
         article.getDescription());
@@ -355,7 +359,7 @@ public class ArticleCreatorTest {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/",
         new FileReader("testdata/redherring-alibabas-road-largest-ipo-ever.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals(
         "Over the past two weeks, institutional investors have piled into the Alibaba "
         + "roadshow as if the company was handing out free money. The long awaited "
@@ -379,7 +383,7 @@ public class ArticleCreatorTest {
         "http://startupworkout.com/inbox-hero-how-to-write-hypnotizing-emails-that-convert-"
         + "like-crazy/",
         new FileReader("testdata/startupworkout-inbox-hero-how-to-write-hypnotizing-emails.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals(
         "If someone was able to travel back in time and tell me 10 years ago that email would "
         + "still be fundamental to how we communicate today, I probably would have dropped "
@@ -402,7 +406,7 @@ public class ArticleCreatorTest {
     DocumentNode documentNode = DocumentBuilder.build(
         "https://medium.com/@chrismessina/thoughts-on-google-8883844a9ca4",
         new FileReader("testdata/medium-thoughts-on-google.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals("I fucked up. So has Google.", article.getDescription());
     assertEquals("Thoughts on Google+", article.getTitle());
     assertEquals("https://d262ilb51hltx0.cloudfront.net/max/800/1*eoQ_FC_sDMQ7WEs69OL7kw.jpeg",
@@ -417,7 +421,7 @@ public class ArticleCreatorTest {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.technologyreview.com/review/534581/the-purpose-of-silicon-valley/",
         new FileReader("testdata/technologyreview-the-purpose-of-silicon-valley.html"));
-    Article article = ArticleCreator.create("urlId", documentNode);
+    Article article = ArticleCreator.create(URL, documentNode);
     assertEquals("Capital and engineering talent have been flocking to seemingly "
         + "trivial mobile apps. But would we really be better off if more startups "
         + "instead went directly after big problems?", article.getDescription());

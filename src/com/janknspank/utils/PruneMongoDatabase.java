@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.MongoConnection;
 import com.janknspank.database.QueryOption;
@@ -20,12 +20,13 @@ import com.janknspank.proto.CoreProto.Url;
  * quota.
  * 
  * Steps performed:
- * - Remove all URLs that don't have an Article associated with them.  (URLs
- *     are cheap and easy to find... If we have a URL we haven't crawled, and
- *     it's actually relevant, we'll find it again.)
  * - Keep Article count under 25,000 by removing the oldest articles.  (This
  *     keeps the Article collection at around 250 megabytes.)
  * - Repair the database to reclaim the space we created.
+ * 
+ * URLs are NOT pruned - We need them so that we know which articles we've seen
+ * before.  And they're really not that big.  But we do update the Urls table
+ * to remove crawl data from any articles we've pruned above.
  */
 public class PruneMongoDatabase {
   private static final long MAX_ARTICLE_COUNT = 25000;
@@ -34,7 +35,8 @@ public class PruneMongoDatabase {
    * Deletes any passed URLs that do not have Articles associated with them in
    * the database.
    */
-  private static int cleanUrls(List<Url> urls) throws DatabaseSchemaException {
+  private static int fixUrls(List<Url> urls)
+      throws DatabaseSchemaException, DatabaseRequestException {
     final Set<String> existingArticleUrlIds = Sets.newHashSet();
     for (Article article : Database.with(Article.class).get(
         new QueryOption.WhereEquals("url",
@@ -46,15 +48,25 @@ public class PruneMongoDatabase {
             })))) {
       existingArticleUrlIds.add(article.getUrlId());
     }
-    return Database.delete(Iterables.filter(urls, new Predicate<Url>() {
-      @Override
-      public boolean apply(Url url) {
-        return !existingArticleUrlIds.contains(url.getId());
+    List<Url> urlsToUpdate = Lists.newArrayList();
+    for (Url url : urls) {
+      if (!existingArticleUrlIds.contains(url.getId())
+          && (url.hasLastCrawlStartTime() || url.hasLastCrawlFinishTime())) {
+        urlsToUpdate.add(url.toBuilder()
+            .clearLastCrawlFinishTime()
+            .clearLastCrawlStartTime()
+            .build());
       }
-    }));
+    }
+    Database.update(urlsToUpdate);
+    return urlsToUpdate.size();
   }
 
-  private static void cleanUrls() throws DatabaseSchemaException {
+  /**
+   * Updates any URLs that don't have Articles associated with them to not have
+   * crawl data, so that they may someday be crawled again.
+   */
+  private static void fixUrls() throws DatabaseSchemaException, DatabaseRequestException {
     long startTime = System.currentTimeMillis();
     System.out.println("Retrieving URLs ...");
 
@@ -62,19 +74,19 @@ public class PruneMongoDatabase {
     System.out.println("Received " + Iterables.size(urls) + " URLs to evaluate in "
         + (System.currentTimeMillis() - startTime) + "ms");
 
-    System.out.print("Cleaning ..");
+    System.out.print("Fixing ..");
     List<Url> urlsToCheck = Lists.newArrayList();
     int numDeleted = 0;
     for (Url url : urls) {
       urlsToCheck.add(url);
       if (urlsToCheck.size() > 250) {
-        numDeleted += cleanUrls(urlsToCheck);
+        numDeleted += fixUrls(urlsToCheck);
         urlsToCheck.clear();
         System.out.print(".");
       }
     }
-    numDeleted += cleanUrls(urlsToCheck);
-    System.out.println(numDeleted + " URLs cleaned in "
+    numDeleted += fixUrls(urlsToCheck);
+    System.out.println(numDeleted + " URLs fixed in "
         + (System.currentTimeMillis() - startTime) + "ms!");
   }
 
@@ -113,9 +125,9 @@ public class PruneMongoDatabase {
         + (System.currentTimeMillis() - startTime) + "ms");
   }
 
-  public static void main(String args[]) throws DatabaseSchemaException {
+  public static void main(String args[]) throws DatabaseSchemaException, DatabaseRequestException {
     pruneArticles();
-    cleanUrls();
+    fixUrls();
     repairDatabase();
     System.out.println("Database pruned successfully.");
   }

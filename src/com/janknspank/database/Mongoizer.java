@@ -200,6 +200,7 @@ public class Mongoizer {
             case LONG:
             case INT:
             case DOUBLE:
+            case BOOLEAN:
               list.add(message.getRepeatedField(fieldDescriptor, i));
               break;
 
@@ -233,6 +234,7 @@ public class Mongoizer {
           case LONG:
           case INT:
           case DOUBLE:
+          case BOOLEAN:
             object.put(fieldName, message.getField(fieldDescriptor));
             break;
 

@@ -38,6 +38,7 @@ import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.nlp.KeywordUtils;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.CoreProto.Url;
 
 /**
  * ArticleCreator is a very high-level object in the crawling system: It's
@@ -74,10 +75,10 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   // generally worse.  You either want this value to be 4 or 10+.
   private static final int MAX_STEM_LENGTH = 4;
 
-  public static Article create(String urlId, DocumentNode documentNode)
+  public static Article create(Url url, DocumentNode documentNode)
       throws RequiredFieldException {
     Article.Builder articleBuilder = Article.newBuilder();
-    articleBuilder.setUrlId(urlId);
+    articleBuilder.setUrlId(url.getId());
     articleBuilder.setUrl(documentNode.getUrl());
 
     // Paragraphs (required).
@@ -112,7 +113,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
 
     // Published time (required).
     articleBuilder.setPublishedTime(
-        Math.min(System.currentTimeMillis(),getPublishedTime(documentNode)));
+        Math.min(System.currentTimeMillis(), getPublishedTime(documentNode, url)));
 
     // Title.
     String title = getTitle(documentNode);
@@ -130,7 +131,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     articleBuilder.setWordCount(getWordCount(documentNode));
 
     // Keywords.
-    articleBuilder.addAllKeyword(KeywordFinder.getInstance().findKeywords(urlId, documentNode));
+    articleBuilder.addAllKeyword(
+        KeywordFinder.getInstance().findKeywords(url.getId(), documentNode));
 
     // Since many sites double-escape their HTML entities (why anyone would
     // do this is beyond me), do another escape pass on everything before we
@@ -335,7 +337,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     return words;
   }
 
-  public static long getPublishedTime(DocumentNode documentNode) throws RequiredFieldException {
+  public static long getPublishedTime(DocumentNode documentNode, Url url) throws RequiredFieldException {
     Node metaNode = documentNode.findFirst(ImmutableList.of(
         "html > head meta[name=\"ptime\"]", // Usually very precise.
         "html > head meta[name=\"date\"]",
@@ -379,7 +381,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
 
     // If no published time was found in the article body,
     // default to the time that the article was created in the system
-    return System.currentTimeMillis();
+    return url.getDiscoveryTime();
   }
 
   /**
