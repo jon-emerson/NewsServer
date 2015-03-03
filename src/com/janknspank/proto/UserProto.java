@@ -8469,6 +8469,1468 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:Interest)
   }
 
+  public interface UserActionOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string id = 1;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional string user_id = 2;
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    // optional .UserAction.ActionType action_type = 3;
+    /**
+     * <code>optional .UserAction.ActionType action_type = 3;</code>
+     */
+    boolean hasActionType();
+    /**
+     * <code>optional .UserAction.ActionType action_type = 3;</code>
+     */
+    com.janknspank.proto.UserProto.UserAction.ActionType getActionType();
+
+    // optional string url_id = 4;
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    boolean hasUrlId();
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    java.lang.String getUrlId();
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getUrlIdBytes();
+
+    // optional string url = 5;
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    boolean hasUrl();
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    java.lang.String getUrl();
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes();
+
+    // optional int64 create_time = 6;
+    /**
+     * <code>optional int64 create_time = 6;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 create_time = 6;</code>
+     */
+    long getCreateTime();
+
+    // optional int64 read_start_time = 7;
+    /**
+     * <code>optional int64 read_start_time = 7;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    boolean hasReadStartTime();
+    /**
+     * <code>optional int64 read_start_time = 7;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    long getReadStartTime();
+
+    // optional int64 read_end_time = 8;
+    /**
+     * <code>optional int64 read_end_time = 8;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    boolean hasReadEndTime();
+    /**
+     * <code>optional int64 read_end_time = 8;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    long getReadEndTime();
+  }
+  /**
+   * Protobuf type {@code UserAction}
+   */
+  public static final class UserAction extends
+      com.google.protobuf.GeneratedMessage
+      implements UserActionOrBuilder {
+    // Use UserAction.newBuilder() to construct.
+    private UserAction(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserAction(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserAction defaultInstance;
+    public static UserAction getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserAction getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserAction(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.UserProto.UserAction.ActionType value = com.janknspank.proto.UserProto.UserAction.ActionType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                actionType_ = value;
+              }
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              urlId_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              url_ = input.readBytes();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              createTime_ = input.readInt64();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              readStartTime_ = input.readInt64();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              readEndTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.UserProto.internal_static_UserAction_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.UserProto.internal_static_UserAction_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.UserProto.UserAction.class, com.janknspank.proto.UserProto.UserAction.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserAction> PARSER =
+        new com.google.protobuf.AbstractParser<UserAction>() {
+      public UserAction parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserAction(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserAction> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code UserAction.ActionType}
+     */
+    public enum ActionType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNONWN = 0;</code>
+       */
+      UNKNONWN(0, 0),
+      /**
+       * <code>FAVORITE = 1;</code>
+       */
+      FAVORITE(1, 1),
+      /**
+       * <code>X_OUT = 2;</code>
+       */
+      X_OUT(2, 2),
+      /**
+       * <code>TAP_FROM_STREAM = 3;</code>
+       *
+       * <pre>
+       * User tapped the article cell to view the full article from the stream
+       * </pre>
+       */
+      TAP_FROM_STREAM(3, 3),
+      /**
+       * <code>SHARE = 4;</code>
+       */
+      SHARE(4, 4),
+      /**
+       * <code>READ_ARTICLE = 5;</code>
+       */
+      READ_ARTICLE(5, 5),
+      ;
+
+      /**
+       * <code>UNKNONWN = 0;</code>
+       */
+      public static final int UNKNONWN_VALUE = 0;
+      /**
+       * <code>FAVORITE = 1;</code>
+       */
+      public static final int FAVORITE_VALUE = 1;
+      /**
+       * <code>X_OUT = 2;</code>
+       */
+      public static final int X_OUT_VALUE = 2;
+      /**
+       * <code>TAP_FROM_STREAM = 3;</code>
+       *
+       * <pre>
+       * User tapped the article cell to view the full article from the stream
+       * </pre>
+       */
+      public static final int TAP_FROM_STREAM_VALUE = 3;
+      /**
+       * <code>SHARE = 4;</code>
+       */
+      public static final int SHARE_VALUE = 4;
+      /**
+       * <code>READ_ARTICLE = 5;</code>
+       */
+      public static final int READ_ARTICLE_VALUE = 5;
+
+
+      public final int getNumber() { return value; }
+
+      public static ActionType valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNONWN;
+          case 1: return FAVORITE;
+          case 2: return X_OUT;
+          case 3: return TAP_FROM_STREAM;
+          case 4: return SHARE;
+          case 5: return READ_ARTICLE;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<ActionType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<ActionType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ActionType>() {
+              public ActionType findValueByNumber(int number) {
+                return ActionType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.UserProto.UserAction.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final ActionType[] VALUES = values();
+
+      public static ActionType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private ActionType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:UserAction.ActionType)
+    }
+
+    private int bitField0_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string user_id = 2;
+    public static final int USER_ID_FIELD_NUMBER = 2;
+    private java.lang.Object userId_;
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional .UserAction.ActionType action_type = 3;
+    public static final int ACTION_TYPE_FIELD_NUMBER = 3;
+    private com.janknspank.proto.UserProto.UserAction.ActionType actionType_;
+    /**
+     * <code>optional .UserAction.ActionType action_type = 3;</code>
+     */
+    public boolean hasActionType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .UserAction.ActionType action_type = 3;</code>
+     */
+    public com.janknspank.proto.UserProto.UserAction.ActionType getActionType() {
+      return actionType_;
+    }
+
+    // optional string url_id = 4;
+    public static final int URL_ID_FIELD_NUMBER = 4;
+    private java.lang.Object urlId_;
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    public boolean hasUrlId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    public java.lang.String getUrlId() {
+      java.lang.Object ref = urlId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          urlId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUrlIdBytes() {
+      java.lang.Object ref = urlId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        urlId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string url = 5;
+    public static final int URL_FIELD_NUMBER = 5;
+    private java.lang.Object url_;
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    public boolean hasUrl() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          url_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 create_time = 6;
+    public static final int CREATE_TIME_FIELD_NUMBER = 6;
+    private long createTime_;
+    /**
+     * <code>optional int64 create_time = 6;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int64 create_time = 6;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    // optional int64 read_start_time = 7;
+    public static final int READ_START_TIME_FIELD_NUMBER = 7;
+    private long readStartTime_;
+    /**
+     * <code>optional int64 read_start_time = 7;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    public boolean hasReadStartTime() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int64 read_start_time = 7;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    public long getReadStartTime() {
+      return readStartTime_;
+    }
+
+    // optional int64 read_end_time = 8;
+    public static final int READ_END_TIME_FIELD_NUMBER = 8;
+    private long readEndTime_;
+    /**
+     * <code>optional int64 read_end_time = 8;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    public boolean hasReadEndTime() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int64 read_end_time = 8;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    public long getReadEndTime() {
+      return readEndTime_;
+    }
+
+    private void initFields() {
+      id_ = "";
+      userId_ = "";
+      actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNONWN;
+      urlId_ = "";
+      url_ = "";
+      createTime_ = 0L;
+      readStartTime_ = 0L;
+      readEndTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, actionType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getUrlIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, createTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(7, readStartTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt64(8, readEndTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, actionType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getUrlIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, createTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, readStartTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(8, readEndTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.UserProto.UserAction parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.UserProto.UserAction parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.UserProto.UserAction prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code UserAction}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.UserProto.UserActionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.UserProto.internal_static_UserAction_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.UserProto.internal_static_UserAction_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.UserProto.UserAction.class, com.janknspank.proto.UserProto.UserAction.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.UserProto.UserAction.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNONWN;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        urlId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        url_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        readStartTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        readEndTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.UserProto.internal_static_UserAction_descriptor;
+      }
+
+      public com.janknspank.proto.UserProto.UserAction getDefaultInstanceForType() {
+        return com.janknspank.proto.UserProto.UserAction.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.UserProto.UserAction build() {
+        com.janknspank.proto.UserProto.UserAction result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.UserProto.UserAction buildPartial() {
+        com.janknspank.proto.UserProto.UserAction result = new com.janknspank.proto.UserProto.UserAction(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.actionType_ = actionType_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.urlId_ = urlId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.url_ = url_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.createTime_ = createTime_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.readStartTime_ = readStartTime_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.readEndTime_ = readEndTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.UserProto.UserAction) {
+          return mergeFrom((com.janknspank.proto.UserProto.UserAction)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.UserProto.UserAction other) {
+        if (other == com.janknspank.proto.UserProto.UserAction.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000002;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasActionType()) {
+          setActionType(other.getActionType());
+        }
+        if (other.hasUrlId()) {
+          bitField0_ |= 0x00000008;
+          urlId_ = other.urlId_;
+          onChanged();
+        }
+        if (other.hasUrl()) {
+          bitField0_ |= 0x00000010;
+          url_ = other.url_;
+          onChanged();
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
+        }
+        if (other.hasReadStartTime()) {
+          setReadStartTime(other.getReadStartTime());
+        }
+        if (other.hasReadEndTime()) {
+          setReadEndTime(other.getReadEndTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.UserProto.UserAction parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.UserProto.UserAction) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string user_id = 2;
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional .UserAction.ActionType action_type = 3;
+      private com.janknspank.proto.UserProto.UserAction.ActionType actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNONWN;
+      /**
+       * <code>optional .UserAction.ActionType action_type = 3;</code>
+       */
+      public boolean hasActionType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .UserAction.ActionType action_type = 3;</code>
+       */
+      public com.janknspank.proto.UserProto.UserAction.ActionType getActionType() {
+        return actionType_;
+      }
+      /**
+       * <code>optional .UserAction.ActionType action_type = 3;</code>
+       */
+      public Builder setActionType(com.janknspank.proto.UserProto.UserAction.ActionType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        actionType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .UserAction.ActionType action_type = 3;</code>
+       */
+      public Builder clearActionType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNONWN;
+        onChanged();
+        return this;
+      }
+
+      // optional string url_id = 4;
+      private java.lang.Object urlId_ = "";
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public boolean hasUrlId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public java.lang.String getUrlId() {
+        java.lang.Object ref = urlId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          urlId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUrlIdBytes() {
+        java.lang.Object ref = urlId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          urlId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public Builder setUrlId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        urlId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public Builder clearUrlId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        urlId_ = getDefaultInstance().getUrlId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public Builder setUrlIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        urlId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string url = 5;
+      private java.lang.Object url_ = "";
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public boolean hasUrl() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          url_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public Builder setUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public Builder clearUrl() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public Builder setUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 create_time = 6;
+      private long createTime_ ;
+      /**
+       * <code>optional int64 create_time = 6;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int64 create_time = 6;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 create_time = 6;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000020;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 create_time = 6;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 read_start_time = 7;
+      private long readStartTime_ ;
+      /**
+       * <code>optional int64 read_start_time = 7;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public boolean hasReadStartTime() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int64 read_start_time = 7;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public long getReadStartTime() {
+        return readStartTime_;
+      }
+      /**
+       * <code>optional int64 read_start_time = 7;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public Builder setReadStartTime(long value) {
+        bitField0_ |= 0x00000040;
+        readStartTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 read_start_time = 7;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public Builder clearReadStartTime() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        readStartTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 read_end_time = 8;
+      private long readEndTime_ ;
+      /**
+       * <code>optional int64 read_end_time = 8;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public boolean hasReadEndTime() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int64 read_end_time = 8;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public long getReadEndTime() {
+        return readEndTime_;
+      }
+      /**
+       * <code>optional int64 read_end_time = 8;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public Builder setReadEndTime(long value) {
+        bitField0_ |= 0x00000080;
+        readEndTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 read_end_time = 8;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public Builder clearReadEndTime() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        readEndTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:UserAction)
+    }
+
+    static {
+      defaultInstance = new UserAction(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:UserAction)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_User_descriptor;
   private static
@@ -8504,6 +9966,11 @@ public final class UserProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Interest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_UserAction_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_UserAction_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -8552,8 +10019,19 @@ public final class UserProto {
       "\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n" +
       "\025ADDRESS_BOOK_CONTACTS\020\004\022\n\n\006INTENT\020\005\"M\n\016" +
       "InterestSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n" +
-      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003B!\n\024c",
-      "om.janknspank.protoB\tUserProto"
+      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\234\003\n\n",
+      "UserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
+      "\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\240\246\035\003\0221\n\013a" +
+      "ction_type\030\003 \001(\0162\026.UserAction.ActionType" +
+      "B\004\210\246\035\001\022\034\n\006url_id\030\004 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\022\032\n\003" +
+      "url\030\005 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\035\n\013create_time\030" +
+      "\006 \001(\003B\010\210\246\035\001\240\246\035\003\022!\n\017read_start_time\030\007 \001(\003" +
+      "B\010\210\246\035\001\240\246\035\003\022\037\n\rread_end_time\030\010 \001(\003B\010\210\246\035\001\240" +
+      "\246\035\003\"e\n\nActionType\022\014\n\010UNKNONWN\020\000\022\014\n\010FAVOR" +
+      "ITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n" +
+      "\005SHARE\020\004\022\020\n\014READ_ARTICLE\020\005:\026\212\265\030\022MongoDB.",
+      "UserActionB!\n\024com.janknspank.protoB\tUser" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8602,6 +10080,12 @@ public final class UserProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Interest_descriptor,
               new java.lang.String[] { "Id", "Type", "Source", "CreateTime", "IndustryCode", "Entity", "IntentCode", });
+          internal_static_UserAction_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_UserAction_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_UserAction_descriptor,
+              new java.lang.String[] { "Id", "UserId", "ActionType", "UrlId", "Url", "CreateTime", "ReadStartTime", "ReadEndTime", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -8655,6 +10139,28 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           return registry;
         }
       };
