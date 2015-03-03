@@ -50,7 +50,7 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
   private static final Logger LOG = new Logger(ArticleCreator.class);
   private static LoadingCache<DocumentNode, Iterable<String>> PARAGRAPH_CACHE =
       CacheBuilder.newBuilder()
-          .maximumSize(10)
+          .maximumSize(50)
           .expireAfterWrite(10, TimeUnit.MINUTES)
           .build(new ArticleCreator());
   private static final int MAX_TITLE_LENGTH =

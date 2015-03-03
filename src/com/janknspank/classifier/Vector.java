@@ -46,7 +46,7 @@ import com.janknspank.proto.CoreProto.VectorData.WordFrequency;
 public class Vector {
   private static final LoadingCache<ArticleOrBuilder, Vector> ARTICLE_VECTOR_CACHE =
       CacheBuilder.newBuilder()
-          .maximumSize(1000)
+          .maximumSize(100)
           .expireAfterWrite(1, TimeUnit.MINUTES)
           .build(
               new CacheLoader<ArticleOrBuilder, Vector>() {

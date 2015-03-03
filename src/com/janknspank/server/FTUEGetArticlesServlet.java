@@ -10,13 +10,10 @@ import org.json.JSONObject;
 
 import com.google.api.client.util.Lists;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.GuidFactory;
-import com.janknspank.bizness.Intents;
-import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;

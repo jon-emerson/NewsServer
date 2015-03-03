@@ -2,4 +2,3 @@ web:       java $JAVA_OPTS -cp target/classes:target/dependency/* -Dcom.sun.medi
 prune:     sh target/bin/PruneMongoDatabase
 crawl:     sh target/bin/ArticleCrawler
 pushdaily: sh target/bin/PushDailyNotifications
-

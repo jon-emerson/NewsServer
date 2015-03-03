@@ -26,7 +26,7 @@ public class Entities extends CacheLoader<String, Entity> {
 
   private static LoadingCache<String, Entity> ENTITY_CACHE =
       CacheBuilder.newBuilder()
-          .maximumSize(10000)
+          .maximumSize(2000)
           .expireAfterAccess(5, TimeUnit.DAYS)
           .expireAfterWrite(0, TimeUnit.MINUTES)
           .build(new Entities());
