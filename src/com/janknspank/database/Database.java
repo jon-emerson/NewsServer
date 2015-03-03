@@ -187,12 +187,13 @@ public class Database {
    * @throws DataInternalException if the object could not be deleted, including
    *     if it could not be found
    */
-  public static <T extends Message> void delete(Iterable<T> messages)
+  public static <T extends Message> int delete(Iterable<T> messages)
       throws DatabaseSchemaException {
     if (!Iterables.isEmpty(messages)) {
-      with(Iterables.getFirst(messages, null).getClass())
+      return with(Iterables.getFirst(messages, null).getClass())
           .delete(getPrimaryKeys(messages));
     }
+    return 0;
   }
 
   /**

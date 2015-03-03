@@ -9,7 +9,6 @@ import java.util.concurrent.Executors;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -125,13 +124,17 @@ public class ArticleCrawler implements Runnable {
       urls = UrlFinder.findUrls(url.getUrl());
     }
 
-    // Make sure to filter and clean the URLs - only store the ones we want to crawl!
-    Iterable<Url> destinationUrls = Urls.put(
-        Iterables.transform(
-            Iterables.filter(urls, UrlWhitelist.PREDICATE),
-            UrlCleaner.TRANSFORM_FUNCTION),
-        url.getUrl());
-    Links.put(url, destinationUrls);
+    // TODO(jonemerson): Someday use URLs we find in articles to augment our
+    // corpus.  But for now, to simplify the processing we do down to a finite
+    // amount, we ignore URLs we find while crawling.
+    // // Make sure to filter and clean the URLs - only store the ones we want to crawl!
+    // Iterable<Url> destinationUrls = Urls.put(
+    //     Iterables.transform(
+    //         Iterables.filter(urls, UrlWhitelist.PREDICATE),
+    //         UrlCleaner.TRANSFORM_FUNCTION),
+    //     url.getUrl());
+    // Links.put(url, destinationUrls);
+
     Urls.markCrawlFinish(url);
     return article;
   }

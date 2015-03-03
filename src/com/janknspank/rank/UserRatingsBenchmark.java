@@ -155,7 +155,7 @@ public class UserRatingsBenchmark {
         badArticleScores.add(rating);
       }
     }
-    
+
     Multiset<Integer> goodHistogram = getHistogram(goodArticleScores);
     Multiset<Integer> badHistogram = getHistogram(badArticleScores);
     for (int i = 9; i >= 0; i--) {
@@ -179,12 +179,6 @@ public class UserRatingsBenchmark {
     scores =
         calculateScoresFor(allRatings, HeuristicScorer.getInstance());
     System.out.println("\nHEURISTIC SCORER:");
-    printHistogram(scores);
-    grade(scores);
-
-    scores =
-        calculateScoresFor(allRatings, JavascriptScorer.getInstance());
-    System.out.println("\nJAVASCRIPT SCORER:");
     printHistogram(scores);
     grade(scores);
 
