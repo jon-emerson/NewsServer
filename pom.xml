@@ -66,6 +66,11 @@
       <version>2012-12-21</version>
     </dependency>
     <dependency>
+      <groupId>com.restfb</groupId>
+      <artifactId>restfb</artifactId>
+      <version>1.8.0</version>
+    </dependency>
+    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>3.1.0</version>
@@ -134,11 +139,6 @@
       <groupId>org.neuroph</groupId>
       <artifactId>neuroph-core</artifactId>
       <version>2.9</version>
-    </dependency>
-    <dependency>
-      <groupId>com.restfb</groupId>
-      <artifactId>restfb</artifactId>
-      <version>1.8.0</version>
     </dependency>
   </dependencies>
   <build>

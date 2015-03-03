@@ -16,6 +16,7 @@ import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Users;
 import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
+import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.UrlRating;
@@ -36,8 +37,12 @@ public class UserRatingsBenchmark {
     Set<String> urlStrings = Sets.newHashSet();
     Set<String> userEmails = Sets.newHashSet();
     for (UrlRating urlRating : allRatings) {
-      urlStrings.add(urlRating.getUrl());
-      userEmails.add(urlRating.getEmail());
+      // Double check that we still support the site that was rated.
+      // (Sometimes we take down sites that aren't relevant to most people.)
+      if (ArticleUrlDetector.isArticle(urlRating.getUrl())) {
+        urlStrings.add(urlRating.getUrl());
+        userEmails.add(urlRating.getEmail());
+      }
     }
 
     // Load up all users who submitted ratings
