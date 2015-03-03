@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.SequenceInputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.mozilla.universalchardet.UniversalDetector;
 
 import com.google.common.base.Charsets;
@@ -22,9 +23,11 @@ import com.google.common.base.Charsets;
  * Mozilla's implementation works flawlessly, though.
  */
 class CharsetDetectingReader extends Reader {
+  private final InputStream originalInputStream;
   private final InputStreamReader internalReader;
 
   public CharsetDetectingReader(InputStream inputStream) throws IOException {
+    this.originalInputStream = inputStream;
     UniversalDetector detector = new UniversalDetector(null);
 
     // Read data until the UniversalDetector says it's had enough (isDone()
@@ -58,7 +61,8 @@ class CharsetDetectingReader extends Reader {
 
   @Override
   public void close() throws IOException {
-    internalReader.close();
+    IOUtils.closeQuietly(originalInputStream);
+    IOUtils.closeQuietly(internalReader);
   }
 
   @Override
