@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -274,9 +275,12 @@ public class LinkedInLoginHandler {
   private Iterable<Interest> getUpdatedInterests(UserOrBuilder user,
       DocumentNode linkedInProfileDocument) {
     Interest linkedInContactInterest = null;
+    final Set<Integer> userIndustryCodes = new HashSet<>();
     for (Interest interest : user.getInterestList()) {
       if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
         linkedInContactInterest = interest;
+      } else if (interest.getType() == InterestType.INDUSTRY) {
+        userIndustryCodes.add(interest.getIndustryCode());
       }
     }
     if (linkedInContactInterest == null) {
@@ -296,7 +300,16 @@ public class LinkedInLoginHandler {
                 && interest.getType() != InterestType.LINKED_IN_CONTACTS;
           }
         }),
-        getLinkedInProfileInterests(linkedInProfileDocument),
+        // Filter out any industries from the linkedIn profile that the user
+        // has already explicitly added.
+        Iterables.filter(getLinkedInProfileInterests(linkedInProfileDocument),  
+            new Predicate<Interest>() {
+          @Override
+          public boolean apply(Interest interest) {
+            return interest.getType() != InterestType.INDUSTRY
+                || !userIndustryCodes.contains(interest.getIndustryCode());
+          }
+        } ),
         ImmutableList.of(linkedInContactInterest));
   }
 
