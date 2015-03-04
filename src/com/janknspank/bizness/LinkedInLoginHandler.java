@@ -287,7 +287,8 @@ public class LinkedInLoginHandler {
     for (Interest interest : user.getInterestList()) {
       if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
         linkedInContactInterest = interest;
-      } else if (interest.getType() == InterestType.INDUSTRY) {
+      } else if (interest.getType() == InterestType.INDUSTRY 
+          && interest.getSource() == InterestSource.USER) {
         userIndustryCodes.add(interest.getIndustryCode());
       }
     }
