@@ -165,19 +165,10 @@ public class IosPushNotificationHelper {
   }
 
   /**
-   * Retrieves the domain from a URL.
-   */
-  private static String getDomain(String urlString) {
-    urlString = urlString.substring(urlString.indexOf("//") + 2);
-    urlString = urlString.substring(0, urlString.indexOf("/"));
-    return (urlString.startsWith("www.")) ? urlString.substring("www.".length()) : urlString;
-  }
-
-  /**
    * Returns the text we should use for a notification about the passed article.
    */
   private static String getText(Article article) {
-    String text = getDomain(article.getUrl()) + ": " + article.getTitle();
+    String text = article.getTitle();
     if (text.length() > 100) {
       text = text.substring(0, 97) + "...";
     }

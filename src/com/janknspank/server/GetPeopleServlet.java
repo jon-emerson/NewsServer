@@ -23,7 +23,7 @@ public class GetPeopleServlet extends StandardServlet {
 
     if (searchString != null) {
       people = Database.with(Entity.class).get(
-          new QueryOption.WhereLikeIgnoreCase("keyword", searchString + "%"),
+          new QueryOption.WhereLike("keyword", searchString + "%"),
           new QueryOption.WhereEquals("type", "p"),
           new QueryOption.Limit(20));
     } else {
