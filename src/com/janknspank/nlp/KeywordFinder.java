@@ -226,10 +226,17 @@ public class KeywordFinder {
 
   /**
    * Returns a LOWERCASED Set of all the words in the specified article.
+   * Only words in the top 2/3rds of the article are used, because we're using
+   * this Set only for meta keyword validation, and if a meta keyword doesn't
+   * reference something that's the primary topic of an article, we don't need
+   * it.
    */
   private Set<String> getWordsInArticle(DocumentNode documentNode) {
+    Iterable<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
+    articleNodes = Iterables.limit(articleNodes,
+        (int) Math.ceil(((double) Iterables.size(articleNodes)) * 2 / 3)); 
     Set<String> wordsInArticle = Sets.newHashSet();
-    for (Node paragraphNode : SiteParser.getParagraphNodes(documentNode)) {
+    for (Node paragraphNode : articleNodes) {
       for (String word : getTokens(paragraphNode.getFlattenedText())) {
         wordsInArticle.add(KeywordUtils.cleanKeyword(word).toLowerCase());
       }
