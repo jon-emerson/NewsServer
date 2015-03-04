@@ -27,7 +27,7 @@ public class SetUserIndustryServlet extends StandardServlet {
     // Read parameters.
     int industryCode = Integer.parseInt(getRequiredParameter(req, "industry_code"));
     String follow = getRequiredParameter(req, "follow");
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
 
     // Parameter validation.
     if (Industry.fromCode(industryCode) == null) {

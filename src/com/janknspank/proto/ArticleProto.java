@@ -6899,7 +6899,7 @@ public final class ArticleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\242" +
+      "m/janknspank/database/extensions.proto\"\250" +
       "\004\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\032\n\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005titl" +
       "e\030\003 \001(\tB\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246" +
@@ -6909,30 +6909,30 @@ public final class ArticleProto {
       "ph\030\t \003(\tB\t\240\246\035\003\230\246\035\200P\022 \n\016published_time\030\n " +
       "\001(\003B\010\210\246\035\001\220\246\035\003\022\025\n\rmodified_time\030\013 \001(\003\022\022\n\n",
       "crawl_time\030\014 \001(\003\022\034\n\nword_count\030\r \001(\003B\010\210\246" +
-      "\035\001\240\246\035\003\022 \n\007keyword\030\016 \003(\0132\017.ArticleKeyword" +
-      "\0222\n\021social_engagement\030\017 \003(\0132\021.SocialEnga" +
-      "gementB\004\240\246\035\003\022&\n\007feature\030\020 \003(\0132\017.ArticleF" +
-      "eatureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003(\tB\010\230\246" +
-      "\035\004\240\246\035\003:\023\212\265\030\017MongoDB.Article\"\325\001\n\016ArticleK" +
-      "eyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n" +
-      "\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035" +
-      "\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.ArticleK" +
-      "eyword.Source:\007UNKNOWN\";\n\006Source\022\013\n\007UNKN",
-      "OWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TA" +
-      "G\020\003\"\347\001\n\020SocialEngagement\022-\n\004site\030\001 \001(\0162\026" +
-      ".SocialEngagement.Site:\007UNKNOWN\022\031\n\013share" +
-      "_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_score\030\003 \001(\001B" +
-      "\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_cou" +
-      "nt\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site\022\013\n" +
-      "\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"\323\001" +
-      "\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246" +
-      "\035\001\220\246\035\003\022+\n\004type\030\004 \001(\0162\024.ArticleFeature.Ty" +
-      "pe:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001\"b\n\004Type\022",
-      "\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020\001\022\022\n\016ABOUT" +
-      "_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020\003\022\022\n\016TEXT_" +
-      "CHARACTER\020\004\"9\n\017InterpretedData\022\031\n\007articl" +
-      "e\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024com.ja" +
-      "nknspank.protoB\014ArticleProto"
+      "\035\001\240\246\035\003\022&\n\007keyword\030\016 \003(\0132\017.ArticleKeyword" +
+      "B\004\240\246\035\003\0222\n\021social_engagement\030\017 \003(\0132\021.Soci" +
+      "alEngagementB\004\240\246\035\003\022&\n\007feature\030\020 \003(\0132\017.Ar" +
+      "ticleFeatureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003" +
+      "(\tB\010\230\246\035\004\240\246\035\003:\023\212\265\030\017MongoDB.Article\"\325\001\n\016Ar" +
+      "ticleKeyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230" +
+      "\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(" +
+      "\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.Ar" +
+      "ticleKeyword.Source:\007UNKNOWN\";\n\006Source\022\013",
+      "\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010M" +
+      "ETA_TAG\020\003\"\347\001\n\020SocialEngagement\022-\n\004site\030\001" +
+      " \001(\0162\026.SocialEngagement.Site:\007UNKNOWN\022\031\n" +
+      "\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_score\030" +
+      "\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomme" +
+      "nt_count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004S" +
+      "ite\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTE" +
+      "R\020\002\"\323\001\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001" +
+      "(\005B\010\210\246\035\001\220\246\035\003\022+\n\004type\030\004 \001(\0162\024.ArticleFeat" +
+      "ure.Type:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001\"b\n",
+      "\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020\001\022\022\n" +
+      "\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020\003\022\022\n" +
+      "\016TEXT_CHARACTER\020\004\"9\n\017InterpretedData\022\031\n\007" +
+      "article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024" +
+      "com.janknspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6992,6 +6992,7 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);

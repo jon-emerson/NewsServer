@@ -23,7 +23,7 @@ public class AddUserActionServlet extends StandardServlet {
     String urlParam = getRequiredParameter(req, "url");
     String readStartTimeParam = getParameter(req, "read_start_time");
     String readEndTimeParam = getParameter(req, "read_end_time");
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
 
     // parameter validation
     UserAction.ActionType actionType = UserAction.ActionType.valueOf(actionTypeParam);

@@ -23,7 +23,7 @@ public class SetUserUrlFavoriteServlet extends StandardServlet {
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     // Read parameters.
     String urlId = getRequiredParameter(req, "url_id");
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
 
     // Parameter validation.
     if (Urls.getById(urlId) == null) {

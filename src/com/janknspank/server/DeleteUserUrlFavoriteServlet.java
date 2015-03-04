@@ -23,7 +23,7 @@ public class DeleteUserUrlFavoriteServlet extends StandardServlet {
     final String urlId = getRequiredParameter(req, "url_id");
 
     // Business logic.
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
     user = Database.with(User.class).set(user, "url_favorite", Iterables.filter(
         user.getUrlFavoriteList(),
         new Predicate<UrlFavorite>() {

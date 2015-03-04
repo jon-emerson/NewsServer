@@ -16,7 +16,7 @@ public class DeleteUserServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, DatabaseRequestException {
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
     Sessions.deleteAllFromUser(user);
     Database.delete(user);
 

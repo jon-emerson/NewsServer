@@ -1,6 +1,7 @@
 package com.janknspank.server;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,11 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.EntityType;
+import com.janknspank.common.TopList;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.User;
 
 public abstract class AbstractArticlesServlet extends StandardServlet {
   protected abstract Iterable<Article> getArticles(HttpServletRequest req)
@@ -36,13 +45,23 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     Iterable<Article> articles = getArticles(req);
     JSONArray articlesJson = new JSONArray();
     for (Article article : articles) {
-      articlesJson.put(serialize(article));
+      articlesJson.put(serialize(article, getUserKeywordSet(getUser(req))));
     }
     response.put("articles", articlesJson);
     return response;
   }
 
-  protected JSONObject serialize(Article article) {
+  private Set<String> getUserKeywordSet(User user) {
+    Set<String> userKeywordSet = Sets.newHashSet();
+    for (Interest interest : user.getInterestList()) {
+      if (interest.getType() == InterestType.ENTITY) {
+        userKeywordSet.add(interest.getEntity().getKeyword().toLowerCase());
+      }
+    }
+    return userKeywordSet;
+  }
+
+  private JSONObject serialize(Article article, Set<String> userKeywordSet) {
     JSONObject articleJson = Serializer.toJSON(article);
     List<String> paragraphs = article.getParagraphList();
     articleJson.put("first_paragraphs", toJsonArray(
@@ -50,7 +69,27 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     articleJson.put("first_3_paragraphs", toJsonArray(
         paragraphs.subList(0, Math.min(3, paragraphs.size()))));
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));
+    articleJson.put("keyword", Serializer.toJSON(getArticleKeywords(article, userKeywordSet)));
     return articleJson;
+  }
+
+  /**
+   * Returns the top 2 keywords for an article, as tuned to the current user.
+   */
+  private Iterable<ArticleKeyword> getArticleKeywords(Article article, Set<String> userKeywordSet) {
+    TopList<ArticleKeyword, Integer> topUserKeywords = new TopList<>(2);
+    TopList<ArticleKeyword, Integer> topNonUserKeyword = new TopList<>(1);
+    for (ArticleKeyword keyword : article.getKeywordList()) {
+      if (userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
+        topUserKeywords.add(keyword, keyword.getStrength());
+      } else if (keyword.getKeyword().length() < 15
+          && !EntityType.fromValue(keyword.getType()).isA(EntityType.PERSON)) {
+        // Only include small-ish keywords because the super long ones are often
+        // crap.
+        topNonUserKeyword.add(keyword, keyword.getStrength());
+      }
+    }
+    return Iterables.limit(Iterables.concat(topUserKeywords, topNonUserKeyword), 2);
   }
 
   public static JSONArray toJsonArray(List<String> strings) {

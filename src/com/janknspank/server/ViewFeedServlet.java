@@ -24,7 +24,7 @@ public class ViewFeedServlet extends StandardServlet {
   @Override
   protected SoyMapData getSoyMapData(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException {
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
     if (user.getEmail().equals("tom.charytoniuk@gmail.com") ||
         user.getEmail().equals("panaceaa@gmail.com") ||
         user.getEmail().equals("chrysb@gmail.com")) {

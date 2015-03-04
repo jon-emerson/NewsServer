@@ -41,7 +41,7 @@ public class SetUserInterestServlet extends StandardServlet {
     String interestIndustryCodeParam = getParameter(req, "interest[industry_code]");
     String interestIntentCodeParam = getParameter(req, "interest[intent_code]");
     String followParam = getRequiredParameter(req, "follow");
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
 
     // Parameter validation.
     InterestType interestType = InterestType.valueOf(interestTypeParam);

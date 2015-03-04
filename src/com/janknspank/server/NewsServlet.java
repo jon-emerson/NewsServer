@@ -24,13 +24,16 @@ import com.google.template.soy.tofu.SoyTofu.Renderer;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Sessions;
 import com.janknspank.common.Asserts;
+import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.CoreProto.Session;
+import com.janknspank.proto.UserProto.User;
 
 public class NewsServlet extends HttpServlet {
   protected static final String SESSION_ID_PARAM = "session_key";
   private static final String PARAMS_ATTRIBUTE_KEY = "__params";
   private static final String SESSION_ATTRIBUTE_KEY = "__session";
+  private static final String USER_ATTRIBUTE_KEY = "__user";
 
   /**
    * This is a highly robust way of looking for parameters either in post body,
@@ -63,6 +66,15 @@ public class NewsServlet extends HttpServlet {
 
   public Session getSession(HttpServletRequest request) {
     return (Session) request.getAttribute(SESSION_ATTRIBUTE_KEY);
+  }
+
+  public User getUser(HttpServletRequest request) throws DatabaseSchemaException {
+    User user = (User) request.getAttribute(USER_ATTRIBUTE_KEY);
+    if (user == null) {
+      user = Database.with(User.class).get(getSession(request).getUserId());
+      request.setAttribute(USER_ATTRIBUTE_KEY, user);
+    }
+    return user;
   }
 
   /**

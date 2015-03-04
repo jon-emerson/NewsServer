@@ -15,7 +15,7 @@ public class GetUserServlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException {
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
 
     // Create the response.
     JSONObject response = this.createSuccessResponse();

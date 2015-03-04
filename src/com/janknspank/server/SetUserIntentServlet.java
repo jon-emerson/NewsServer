@@ -27,7 +27,7 @@ public class SetUserIntentServlet extends StandardServlet {
     // Read parameters.
     String intentCode = getRequiredParameter(req, "code");
     boolean enabled = Boolean.parseBoolean(getRequiredParameter(req, "enabled"));
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
 
     // Parameter validation.
     if (Intent.fromCode(intentCode) == null) {

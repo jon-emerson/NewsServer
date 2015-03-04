@@ -70,7 +70,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
           FeatureId.fromId(20000), NUM_RESULTS);
     }
 
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
     if ("linked_in".equals(contacts)) {
       return Articles.getArticlesForContacts(user, InterestType.LINKED_IN_CONTACTS, NUM_RESULTS);
     } else if ("address_book".equals(contacts)) {
@@ -150,14 +150,14 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
     final String urlId = getNotificationBlobValue(notificationBlob, "uid");
     final String notificationId = getNotificationBlobValue(notificationBlob, "nid");
     Future<Void> updateNotificationFuture = (notificationId == null) ?
-        Futures.immediateFuture(null) :
+        Futures.immediateFuture((Void) null) :
         EXECUTOR.submit(new UpdateNotificationCallable(notificationId));
     Future<Article> articleFuture = (urlId == null) ?
-        Futures.immediateFuture(null) :
+        Futures.immediateFuture((Article) null) :
         EXECUTOR.submit(new GetArticleCallable(urlId));
 
     // Now get the standard /getArticles stream.
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
     Iterable<Article> rankedArticles = Articles.getRankedArticles(
         user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
 

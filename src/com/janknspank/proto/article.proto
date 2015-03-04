@@ -67,7 +67,9 @@ message Article {
     (client_serialization) = EXCLUDE
   ];
 
-  repeated ArticleKeyword keyword = 14;
+  repeated ArticleKeyword keyword = 14 [
+    (client_serialization) = EXCLUDE
+  ];
 
   repeated SocialEngagement social_engagement = 15 [
     (client_serialization) = EXCLUDE

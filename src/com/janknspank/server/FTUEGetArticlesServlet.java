@@ -36,7 +36,7 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException, BiznessException {
     String intentCodesCommaSeparated = getParameter(req, "intents");
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
     if (!Strings.isNullOrEmpty(intentCodesCommaSeparated)) {
       List<String> intentCodes = Arrays.asList(intentCodesCommaSeparated.split(","));
       Iterable<Interest> intentInterests = getInterestsFromIntentCodes(intentCodes);
@@ -65,7 +65,7 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req) throws DatabaseSchemaException {
     // BAD: this makes second call to DB for User after doPostInternal call
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
     return Articles.getRankedArticles(user, HeuristicScorer.getInstance(), NUM_RESULTS);
   }
 

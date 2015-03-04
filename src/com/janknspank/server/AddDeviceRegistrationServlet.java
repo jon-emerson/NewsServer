@@ -18,7 +18,7 @@ public class AddDeviceRegistrationServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
-    User user = Database.with(User.class).get(getSession(req).getUserId());
+    User user = getUser(req);
     DeviceRegistration registration = DeviceRegistration.newBuilder()
         .setId(GuidFactory.generate())
         .setUserId(user.getId())
