@@ -105,11 +105,6 @@ public class Deduper {
                   && engagement.getShareScore() > nonDupeEngagement.getShareScore())) {
             // The new article is more socially valuable, use it instead.
             nonDupeExtractions.set(i, extraction);
-            System.out.println("Dupe removed: " + extractionMap.get(nonDupeExtraction).getTitle()
-                + " (Better article: " + extractionMap.get(extraction).getTitle() + ")");
-          } else {
-            System.out.println("Dupe removed: " + extractionMap.get(extraction).getTitle()
-                + " (Better article: " + extractionMap.get(nonDupeExtraction).getTitle() + ")");
           }
           foundDupe = true;
           break;

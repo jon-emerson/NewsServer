@@ -8,6 +8,97 @@ public final class CoreProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  /**
+   * Protobuf enum {@code DeviceType}
+   */
+  public enum DeviceType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>UNKNOWN = 0;</code>
+     */
+    UNKNOWN(0, 0),
+    /**
+     * <code>ANDROID = 1;</code>
+     */
+    ANDROID(1, 1),
+    /**
+     * <code>IOS = 2;</code>
+     */
+    IOS(2, 2),
+    ;
+
+    /**
+     * <code>UNKNOWN = 0;</code>
+     */
+    public static final int UNKNOWN_VALUE = 0;
+    /**
+     * <code>ANDROID = 1;</code>
+     */
+    public static final int ANDROID_VALUE = 1;
+    /**
+     * <code>IOS = 2;</code>
+     */
+    public static final int IOS_VALUE = 2;
+
+
+    public final int getNumber() { return value; }
+
+    public static DeviceType valueOf(int value) {
+      switch (value) {
+        case 0: return UNKNOWN;
+        case 1: return ANDROID;
+        case 2: return IOS;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<DeviceType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<DeviceType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<DeviceType>() {
+            public DeviceType findValueByNumber(int number) {
+              return DeviceType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final DeviceType[] VALUES = values();
+
+    public static DeviceType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private DeviceType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:DeviceType)
+  }
+
   public interface LinkOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -13748,15 +13839,15 @@ public final class CoreProto {
     com.google.protobuf.ByteString
         getUserIdBytes();
 
-    // optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];
+    // optional .DeviceType device_type = 3;
     /**
-     * <code>optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];</code>
+     * <code>optional .DeviceType device_type = 3;</code>
      */
     boolean hasDeviceType();
     /**
-     * <code>optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];</code>
+     * <code>optional .DeviceType device_type = 3;</code>
      */
-    com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType getDeviceType();
+    com.janknspank.proto.CoreProto.DeviceType getDeviceType();
 
     // optional string device_id = 4;
     /**
@@ -13864,7 +13955,7 @@ public final class CoreProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType value = com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType.valueOf(rawValue);
+              com.janknspank.proto.CoreProto.DeviceType value = com.janknspank.proto.CoreProto.DeviceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -13920,97 +14011,6 @@ public final class CoreProto {
     @java.lang.Override
     public com.google.protobuf.Parser<DeviceRegistration> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code DeviceRegistration.DeviceType}
-     */
-    public enum DeviceType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>UNKNOWN = 0;</code>
-       */
-      UNKNOWN(0, 0),
-      /**
-       * <code>ANDROID = 1;</code>
-       */
-      ANDROID(1, 1),
-      /**
-       * <code>IOS = 2;</code>
-       */
-      IOS(2, 2),
-      ;
-
-      /**
-       * <code>UNKNOWN = 0;</code>
-       */
-      public static final int UNKNOWN_VALUE = 0;
-      /**
-       * <code>ANDROID = 1;</code>
-       */
-      public static final int ANDROID_VALUE = 1;
-      /**
-       * <code>IOS = 2;</code>
-       */
-      public static final int IOS_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static DeviceType valueOf(int value) {
-        switch (value) {
-          case 0: return UNKNOWN;
-          case 1: return ANDROID;
-          case 2: return IOS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<DeviceType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<DeviceType>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<DeviceType>() {
-              public DeviceType findValueByNumber(int number) {
-                return DeviceType.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.janknspank.proto.CoreProto.DeviceRegistration.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final DeviceType[] VALUES = values();
-
-      public static DeviceType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private DeviceType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:DeviceRegistration.DeviceType)
     }
 
     private int bitField0_;
@@ -14112,19 +14112,19 @@ public final class CoreProto {
       }
     }
 
-    // optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];
+    // optional .DeviceType device_type = 3;
     public static final int DEVICE_TYPE_FIELD_NUMBER = 3;
-    private com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType deviceType_;
+    private com.janknspank.proto.CoreProto.DeviceType deviceType_;
     /**
-     * <code>optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];</code>
+     * <code>optional .DeviceType device_type = 3;</code>
      */
     public boolean hasDeviceType() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];</code>
+     * <code>optional .DeviceType device_type = 3;</code>
      */
-    public com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType getDeviceType() {
+    public com.janknspank.proto.CoreProto.DeviceType getDeviceType() {
       return deviceType_;
     }
 
@@ -14208,7 +14208,7 @@ public final class CoreProto {
     private void initFields() {
       id_ = "";
       userId_ = "";
-      deviceType_ = com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType.UNKNOWN;
+      deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
       deviceId_ = "";
       createTime_ = 0L;
     }
@@ -14388,7 +14388,7 @@ public final class CoreProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         userId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        deviceType_ = com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType.UNKNOWN;
+        deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000004);
         deviceId_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -14678,24 +14678,24 @@ public final class CoreProto {
         return this;
       }
 
-      // optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];
-      private com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType deviceType_ = com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType.UNKNOWN;
+      // optional .DeviceType device_type = 3;
+      private com.janknspank.proto.CoreProto.DeviceType deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
       /**
-       * <code>optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];</code>
+       * <code>optional .DeviceType device_type = 3;</code>
        */
       public boolean hasDeviceType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];</code>
+       * <code>optional .DeviceType device_type = 3;</code>
        */
-      public com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType getDeviceType() {
+      public com.janknspank.proto.CoreProto.DeviceType getDeviceType() {
         return deviceType_;
       }
       /**
-       * <code>optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];</code>
+       * <code>optional .DeviceType device_type = 3;</code>
        */
-      public Builder setDeviceType(com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType value) {
+      public Builder setDeviceType(com.janknspank.proto.CoreProto.DeviceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -14705,11 +14705,11 @@ public final class CoreProto {
         return this;
       }
       /**
-       * <code>optional .DeviceRegistration.DeviceType device_type = 3 [default = UNKNOWN];</code>
+       * <code>optional .DeviceType device_type = 3;</code>
        */
       public Builder clearDeviceType() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        deviceType_ = com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType.UNKNOWN;
+        deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
         onChanged();
         return this;
       }
@@ -14868,6 +14868,1557 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:DeviceRegistration)
   }
 
+  public interface PushNotificationOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string id = 1;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional int64 create_time = 2;
+    /**
+     * <code>optional int64 create_time = 2;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 create_time = 2;</code>
+     */
+    long getCreateTime();
+
+    // optional int64 click_time = 3;
+    /**
+     * <code>optional int64 click_time = 3;</code>
+     *
+     * <pre>
+     * If the user clicked on the notification, and the app opened and sent us
+     * a ping, this is the time that happened.
+     * </pre>
+     */
+    boolean hasClickTime();
+    /**
+     * <code>optional int64 click_time = 3;</code>
+     *
+     * <pre>
+     * If the user clicked on the notification, and the app opened and sent us
+     * a ping, this is the time that happened.
+     * </pre>
+     */
+    long getClickTime();
+
+    // optional string user_id = 4;
+    /**
+     * <code>optional string user_id = 4;</code>
+     *
+     * <pre>
+     * The user who we sent the notification to.
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional string user_id = 4;</code>
+     *
+     * <pre>
+     * The user who we sent the notification to.
+     * </pre>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>optional string user_id = 4;</code>
+     *
+     * <pre>
+     * The user who we sent the notification to.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    // optional string url_id = 5;
+    /**
+     * <code>optional string url_id = 5;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL ID of that
+     * article.
+     * </pre>
+     */
+    boolean hasUrlId();
+    /**
+     * <code>optional string url_id = 5;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL ID of that
+     * article.
+     * </pre>
+     */
+    java.lang.String getUrlId();
+    /**
+     * <code>optional string url_id = 5;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL ID of that
+     * article.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUrlIdBytes();
+
+    // optional .DeviceType device_type = 6;
+    /**
+     * <code>optional .DeviceType device_type = 6;</code>
+     */
+    boolean hasDeviceType();
+    /**
+     * <code>optional .DeviceType device_type = 6;</code>
+     */
+    com.janknspank.proto.CoreProto.DeviceType getDeviceType();
+
+    // optional string device_id = 7;
+    /**
+     * <code>optional string device_id = 7;</code>
+     */
+    boolean hasDeviceId();
+    /**
+     * <code>optional string device_id = 7;</code>
+     */
+    java.lang.String getDeviceId();
+    /**
+     * <code>optional string device_id = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getDeviceIdBytes();
+
+    // optional string text = 8;
+    /**
+     * <code>optional string text = 8;</code>
+     *
+     * <pre>
+     * The actual text that we sent to the user.
+     * </pre>
+     */
+    boolean hasText();
+    /**
+     * <code>optional string text = 8;</code>
+     *
+     * <pre>
+     * The actual text that we sent to the user.
+     * </pre>
+     */
+    java.lang.String getText();
+    /**
+     * <code>optional string text = 8;</code>
+     *
+     * <pre>
+     * The actual text that we sent to the user.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTextBytes();
+  }
+  /**
+   * Protobuf type {@code PushNotification}
+   *
+   * <pre>
+   * Historical record of what notifications we've sent and to whom.
+   * </pre>
+   */
+  public static final class PushNotification extends
+      com.google.protobuf.GeneratedMessage
+      implements PushNotificationOrBuilder {
+    // Use PushNotification.newBuilder() to construct.
+    private PushNotification(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PushNotification(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PushNotification defaultInstance;
+    public static PushNotification getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PushNotification getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PushNotification(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              createTime_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              clickTime_ = input.readInt64();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              urlId_ = input.readBytes();
+              break;
+            }
+            case 48: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.CoreProto.DeviceType value = com.janknspank.proto.CoreProto.DeviceType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(6, rawValue);
+              } else {
+                bitField0_ |= 0x00000020;
+                deviceType_ = value;
+              }
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
+              deviceId_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000080;
+              text_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_PushNotification_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_PushNotification_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.PushNotification.class, com.janknspank.proto.CoreProto.PushNotification.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PushNotification> PARSER =
+        new com.google.protobuf.AbstractParser<PushNotification>() {
+      public PushNotification parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PushNotification(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PushNotification> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 create_time = 2;
+    public static final int CREATE_TIME_FIELD_NUMBER = 2;
+    private long createTime_;
+    /**
+     * <code>optional int64 create_time = 2;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 create_time = 2;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    // optional int64 click_time = 3;
+    public static final int CLICK_TIME_FIELD_NUMBER = 3;
+    private long clickTime_;
+    /**
+     * <code>optional int64 click_time = 3;</code>
+     *
+     * <pre>
+     * If the user clicked on the notification, and the app opened and sent us
+     * a ping, this is the time that happened.
+     * </pre>
+     */
+    public boolean hasClickTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 click_time = 3;</code>
+     *
+     * <pre>
+     * If the user clicked on the notification, and the app opened and sent us
+     * a ping, this is the time that happened.
+     * </pre>
+     */
+    public long getClickTime() {
+      return clickTime_;
+    }
+
+    // optional string user_id = 4;
+    public static final int USER_ID_FIELD_NUMBER = 4;
+    private java.lang.Object userId_;
+    /**
+     * <code>optional string user_id = 4;</code>
+     *
+     * <pre>
+     * The user who we sent the notification to.
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string user_id = 4;</code>
+     *
+     * <pre>
+     * The user who we sent the notification to.
+     * </pre>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string user_id = 4;</code>
+     *
+     * <pre>
+     * The user who we sent the notification to.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string url_id = 5;
+    public static final int URL_ID_FIELD_NUMBER = 5;
+    private java.lang.Object urlId_;
+    /**
+     * <code>optional string url_id = 5;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL ID of that
+     * article.
+     * </pre>
+     */
+    public boolean hasUrlId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string url_id = 5;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL ID of that
+     * article.
+     * </pre>
+     */
+    public java.lang.String getUrlId() {
+      java.lang.Object ref = urlId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          urlId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url_id = 5;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL ID of that
+     * article.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUrlIdBytes() {
+      java.lang.Object ref = urlId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        urlId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional .DeviceType device_type = 6;
+    public static final int DEVICE_TYPE_FIELD_NUMBER = 6;
+    private com.janknspank.proto.CoreProto.DeviceType deviceType_;
+    /**
+     * <code>optional .DeviceType device_type = 6;</code>
+     */
+    public boolean hasDeviceType() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .DeviceType device_type = 6;</code>
+     */
+    public com.janknspank.proto.CoreProto.DeviceType getDeviceType() {
+      return deviceType_;
+    }
+
+    // optional string device_id = 7;
+    public static final int DEVICE_ID_FIELD_NUMBER = 7;
+    private java.lang.Object deviceId_;
+    /**
+     * <code>optional string device_id = 7;</code>
+     */
+    public boolean hasDeviceId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string device_id = 7;</code>
+     */
+    public java.lang.String getDeviceId() {
+      java.lang.Object ref = deviceId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          deviceId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string device_id = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDeviceIdBytes() {
+      java.lang.Object ref = deviceId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        deviceId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string text = 8;
+    public static final int TEXT_FIELD_NUMBER = 8;
+    private java.lang.Object text_;
+    /**
+     * <code>optional string text = 8;</code>
+     *
+     * <pre>
+     * The actual text that we sent to the user.
+     * </pre>
+     */
+    public boolean hasText() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string text = 8;</code>
+     *
+     * <pre>
+     * The actual text that we sent to the user.
+     * </pre>
+     */
+    public java.lang.String getText() {
+      java.lang.Object ref = text_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          text_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string text = 8;</code>
+     *
+     * <pre>
+     * The actual text that we sent to the user.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTextBytes() {
+      java.lang.Object ref = text_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        text_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      id_ = "";
+      createTime_ = 0L;
+      clickTime_ = 0L;
+      userId_ = "";
+      urlId_ = "";
+      deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
+      deviceId_ = "";
+      text_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, createTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, clickTime_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getUrlIdBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeEnum(6, deviceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getDeviceIdBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, getTextBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, createTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clickTime_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getUrlIdBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, deviceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getDeviceIdBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getTextBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.PushNotification prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PushNotification}
+     *
+     * <pre>
+     * Historical record of what notifications we've sent and to whom.
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.PushNotificationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_PushNotification_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_PushNotification_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.PushNotification.class, com.janknspank.proto.CoreProto.PushNotification.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.PushNotification.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clickTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        urlId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        deviceId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        text_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_PushNotification_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.PushNotification getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.PushNotification.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.PushNotification build() {
+        com.janknspank.proto.CoreProto.PushNotification result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.PushNotification buildPartial() {
+        com.janknspank.proto.CoreProto.PushNotification result = new com.janknspank.proto.CoreProto.PushNotification(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.createTime_ = createTime_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clickTime_ = clickTime_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.urlId_ = urlId_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.deviceType_ = deviceType_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.deviceId_ = deviceId_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.text_ = text_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.PushNotification) {
+          return mergeFrom((com.janknspank.proto.CoreProto.PushNotification)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.PushNotification other) {
+        if (other == com.janknspank.proto.CoreProto.PushNotification.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
+        }
+        if (other.hasClickTime()) {
+          setClickTime(other.getClickTime());
+        }
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000008;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasUrlId()) {
+          bitField0_ |= 0x00000010;
+          urlId_ = other.urlId_;
+          onChanged();
+        }
+        if (other.hasDeviceType()) {
+          setDeviceType(other.getDeviceType());
+        }
+        if (other.hasDeviceId()) {
+          bitField0_ |= 0x00000040;
+          deviceId_ = other.deviceId_;
+          onChanged();
+        }
+        if (other.hasText()) {
+          bitField0_ |= 0x00000080;
+          text_ = other.text_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.PushNotification parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.PushNotification) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 create_time = 2;
+      private long createTime_ ;
+      /**
+       * <code>optional int64 create_time = 2;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 create_time = 2;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 create_time = 2;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000002;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 create_time = 2;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 click_time = 3;
+      private long clickTime_ ;
+      /**
+       * <code>optional int64 click_time = 3;</code>
+       *
+       * <pre>
+       * If the user clicked on the notification, and the app opened and sent us
+       * a ping, this is the time that happened.
+       * </pre>
+       */
+      public boolean hasClickTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 click_time = 3;</code>
+       *
+       * <pre>
+       * If the user clicked on the notification, and the app opened and sent us
+       * a ping, this is the time that happened.
+       * </pre>
+       */
+      public long getClickTime() {
+        return clickTime_;
+      }
+      /**
+       * <code>optional int64 click_time = 3;</code>
+       *
+       * <pre>
+       * If the user clicked on the notification, and the app opened and sent us
+       * a ping, this is the time that happened.
+       * </pre>
+       */
+      public Builder setClickTime(long value) {
+        bitField0_ |= 0x00000004;
+        clickTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 click_time = 3;</code>
+       *
+       * <pre>
+       * If the user clicked on the notification, and the app opened and sent us
+       * a ping, this is the time that happened.
+       * </pre>
+       */
+      public Builder clearClickTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clickTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional string user_id = 4;
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>optional string user_id = 4;</code>
+       *
+       * <pre>
+       * The user who we sent the notification to.
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string user_id = 4;</code>
+       *
+       * <pre>
+       * The user who we sent the notification to.
+       * </pre>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 4;</code>
+       *
+       * <pre>
+       * The user who we sent the notification to.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 4;</code>
+       *
+       * <pre>
+       * The user who we sent the notification to.
+       * </pre>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 4;</code>
+       *
+       * <pre>
+       * The user who we sent the notification to.
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 4;</code>
+       *
+       * <pre>
+       * The user who we sent the notification to.
+       * </pre>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string url_id = 5;
+      private java.lang.Object urlId_ = "";
+      /**
+       * <code>optional string url_id = 5;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL ID of that
+       * article.
+       * </pre>
+       */
+      public boolean hasUrlId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string url_id = 5;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL ID of that
+       * article.
+       * </pre>
+       */
+      public java.lang.String getUrlId() {
+        java.lang.Object ref = urlId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          urlId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url_id = 5;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL ID of that
+       * article.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUrlIdBytes() {
+        java.lang.Object ref = urlId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          urlId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url_id = 5;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL ID of that
+       * article.
+       * </pre>
+       */
+      public Builder setUrlId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        urlId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url_id = 5;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL ID of that
+       * article.
+       * </pre>
+       */
+      public Builder clearUrlId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        urlId_ = getDefaultInstance().getUrlId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url_id = 5;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL ID of that
+       * article.
+       * </pre>
+       */
+      public Builder setUrlIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        urlId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional .DeviceType device_type = 6;
+      private com.janknspank.proto.CoreProto.DeviceType deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
+      /**
+       * <code>optional .DeviceType device_type = 6;</code>
+       */
+      public boolean hasDeviceType() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .DeviceType device_type = 6;</code>
+       */
+      public com.janknspank.proto.CoreProto.DeviceType getDeviceType() {
+        return deviceType_;
+      }
+      /**
+       * <code>optional .DeviceType device_type = 6;</code>
+       */
+      public Builder setDeviceType(com.janknspank.proto.CoreProto.DeviceType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        deviceType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .DeviceType device_type = 6;</code>
+       */
+      public Builder clearDeviceType() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
+        onChanged();
+        return this;
+      }
+
+      // optional string device_id = 7;
+      private java.lang.Object deviceId_ = "";
+      /**
+       * <code>optional string device_id = 7;</code>
+       */
+      public boolean hasDeviceId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string device_id = 7;</code>
+       */
+      public java.lang.String getDeviceId() {
+        java.lang.Object ref = deviceId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          deviceId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string device_id = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDeviceIdBytes() {
+        java.lang.Object ref = deviceId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          deviceId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string device_id = 7;</code>
+       */
+      public Builder setDeviceId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        deviceId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string device_id = 7;</code>
+       */
+      public Builder clearDeviceId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        deviceId_ = getDefaultInstance().getDeviceId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string device_id = 7;</code>
+       */
+      public Builder setDeviceIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        deviceId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string text = 8;
+      private java.lang.Object text_ = "";
+      /**
+       * <code>optional string text = 8;</code>
+       *
+       * <pre>
+       * The actual text that we sent to the user.
+       * </pre>
+       */
+      public boolean hasText() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string text = 8;</code>
+       *
+       * <pre>
+       * The actual text that we sent to the user.
+       * </pre>
+       */
+      public java.lang.String getText() {
+        java.lang.Object ref = text_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          text_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string text = 8;</code>
+       *
+       * <pre>
+       * The actual text that we sent to the user.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTextBytes() {
+        java.lang.Object ref = text_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          text_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string text = 8;</code>
+       *
+       * <pre>
+       * The actual text that we sent to the user.
+       * </pre>
+       */
+      public Builder setText(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        text_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string text = 8;</code>
+       *
+       * <pre>
+       * The actual text that we sent to the user.
+       * </pre>
+       */
+      public Builder clearText() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        text_ = getDefaultInstance().getText();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string text = 8;</code>
+       *
+       * <pre>
+       * The actual text that we sent to the user.
+       * </pre>
+       */
+      public Builder setTextBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        text_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PushNotification)
+    }
+
+    static {
+      defaultInstance = new PushNotification(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PushNotification)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -14948,6 +16499,11 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_DeviceRegistration_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PushNotification_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PushNotification_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -15024,16 +16580,22 @@ public final class CoreProto {
       "\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(" +
       "\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246" +
       "\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035" +
-      "\005:\023\212\265\030\017MySQL.UrlRating\"\262\002\n\022DeviceRegistr" +
-      "ation\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022" +
-      "!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022B\n\013de",
-      "vice_type\030\003 \001(\0162\036.DeviceRegistration.Dev" +
-      "iceType:\007UNKNOWNB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(" +
-      "\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022!\n\013create_time\030\005 \001(\003B\014\210\246" +
-      "\035\001\240\246\035\003\220\246\035\005\"/\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n" +
-      "\007ANDROID\020\001\022\007\n\003IOS\020\002:\036\212\265\030\032MongoDB.DeviceR" +
-      "egistrationB!\n\024com.janknspank.protoB\tCor" +
-      "eProto"
+      "\005:\023\212\265\030\017MySQL.UrlRating\"\331\001\n\022DeviceRegistr" +
+      "ation\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007u" +
+      "ser_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device",
+      "_type\030\003 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice" +
+      "_id\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013create_time\030\005" +
+      " \001(\003B\004\210\246\035\001:\036\212\265\030\032MongoDB.DeviceRegistrati" +
+      "on\"\244\002\n\020PushNotification\022 \n\002id\030\001 \001(\tB\024\210\246\035" +
+      "\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\031\n\013create_time\030\002 \001(\003B\004" +
+      "\210\246\035\001\022\022\n\nclick_time\030\003 \001(\003\022!\n\007user_id\030\004 \001(" +
+      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035" +
+      "\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\006 \001(\0162\013.DeviceT" +
+      "ypeB\004\210\246\035\001\022\037\n\tdevice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246" +
+      "\035\001\022\027\n\004text\030\010 \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030MongoDB",
+      ".PushNotification*/\n\nDeviceType\022\013\n\007UNKNO" +
+      "WN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.jankns" +
+      "pank.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15136,6 +16698,12 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_DeviceRegistration_descriptor,
               new java.lang.String[] { "Id", "UserId", "DeviceType", "DeviceId", "CreateTime", });
+          internal_static_PushNotification_descriptor =
+            getDescriptor().getMessageTypes().get(11);
+          internal_static_PushNotification_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PushNotification_descriptor,
+              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Text", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -15264,7 +16832,6 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
@@ -15275,8 +16842,26 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           return registry;
         }

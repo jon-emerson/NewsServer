@@ -6,6 +6,7 @@ import com.janknspank.bizness.IosPushNotificationHelper;
 import com.janknspank.database.Database;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.DeviceRegistration;
+import com.janknspank.proto.CoreProto.PushNotification;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.NeuralNetworkScorer;
 
@@ -24,7 +25,9 @@ public class PushDailyNotifications {
           Article bestArticle = Iterables.getFirst(
               Articles.getRankedArticles(user, NeuralNetworkScorer.getInstance(), 100), null);
           for (DeviceRegistration registration : registrations) {
-            IosPushNotificationHelper.getInstance().sendArticle(bestArticle, registration);
+            PushNotification pushNotification =
+                IosPushNotificationHelper.createPushNotification(registration, bestArticle);
+            IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
           }
         }
       } catch (Exception e) {

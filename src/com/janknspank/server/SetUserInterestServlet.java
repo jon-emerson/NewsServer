@@ -14,7 +14,6 @@ import com.google.common.collect.Lists;
 import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.GuidFactory;
-import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -39,7 +38,6 @@ public class SetUserInterestServlet extends StandardServlet {
     String interestEntityTypeParam = getParameter(req, "interest[entity][type]");
     String interestEntityKeywordParam = getParameter(req, "interest[entity][keyword]");
     String interestEntityIdParam = getParameter(req, "interest[entity][id]");
-    String interestEntitySourceParam = getParameter(req, "interest[entity][source]");
     String interestIndustryCodeParam = getParameter(req, "interest[industry_code]");
     String interestIntentCodeParam = getParameter(req, "interest[intent_code]");
     String followParam = getRequiredParameter(req, "follow");

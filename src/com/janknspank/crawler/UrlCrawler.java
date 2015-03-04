@@ -1,22 +1,16 @@
 package com.janknspank.crawler;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.api.client.util.Lists;
-import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
-import com.janknspank.bizness.GuidFactory;
+import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Urls;
-import com.janknspank.common.DateParser;
 import com.janknspank.common.Logger;
-import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.QueryOption;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
@@ -72,60 +66,10 @@ class UrlCrawler {
     return null;
   }
 
-  private Long getArticleDate(Node itemNode) {
-    Long millis = DateParser.parseDateFromUrl(getArticleUrl(itemNode), true /* allowMonth */);
-    List<Node> dateNodes = itemNode.findAll("pubDate");
-    dateNodes.addAll(itemNode.findAll("published"));
-    if (dateNodes.size() > 0) {
-      Long rssDate = DateParser.parseDateTime(dateNodes.get(0).getFlattenedText());
-      millis = (rssDate == null) ? millis : rssDate;
-    }
-    return millis;
-  }
-
-  /**
-   * Inserts all the passed URLs into the database, preventing duplicates.
-   * @return The resulting set of URLs, which is either pre-existing URLs, or
-   *     the newly created URLs.  No ordering guarantee is given.
-   */
-  private static Iterable<Url> putIfNotExists(Iterable<Url> urls)
-      throws DatabaseSchemaException, DatabaseRequestException {
-    Iterable<Url> existingUrlObjects =
-        Database.with(Url.class).get(new QueryOption.WhereEquals("url", Iterables.transform(urls,
-            new Function<Url, String>() {
-              @Override
-              public String apply(Url url) {
-                return url.getUrl();
-              }
-            })));
-    Set<String> existingUrls = Sets.newHashSet();
-    Iterables.addAll(existingUrls, Iterables.transform(existingUrlObjects,
-        new Function<Url, String>() {
-          @Override
-          public String apply(Url url) {
-            return url.getUrl();
-          }
-        }));
-    List<Url> urlsToInsert = Lists.newArrayList();
-    for (Url url : urls) {
-      if (!existingUrls.contains(url.getUrl())) {
-        System.out.println("Inserting " + url.getUrl());
-        urlsToInsert.add(url);
-        existingUrls.add(url.getUrl()); // To prevent inserting dupes.
-      }
-      if (urlsToInsert.size() > 250) {
-        Database.insert(urlsToInsert);
-        urlsToInsert.clear();
-      }
-    }
-    Database.insert(urlsToInsert);
-    return Iterables.concat(existingUrlObjects, urlsToInsert);
-  }
-
   private Iterable<Url> parseRss(String rssUrl)
-      throws DatabaseSchemaException, DatabaseRequestException {
+      throws DatabaseSchemaException, DatabaseRequestException, BiznessException {
     FetchResponse fetchResponse;
-    List<Url> urlsToInsert = Lists.newArrayList();
+    List<String> urlsToInsert = Lists.newArrayList();
     try {
       fetchResponse = fetcher.fetch(rssUrl);
       if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
@@ -135,29 +79,23 @@ class UrlCrawler {
             documentNode.findAll("entry"))) {
           String articleUrl = getArticleUrl(itemNode);
           if (ArticleUrlDetector.isArticle(articleUrl)) {
-            Long millis = getArticleDate(itemNode);
-            urlsToInsert.add(Url.newBuilder()
-                .setUrl(articleUrl)
-                .setOriginUrl(rssUrl)
-                .setId(GuidFactory.generate())
-                .setDiscoveryTime(System.currentTimeMillis())
-                .setCrawlPriority(Urls.getCrawlPriority(articleUrl, millis))
-                .build());
+            urlsToInsert.add(articleUrl);
           }
         }
       }
     } catch (FetchException | ParserException e) {
       e.printStackTrace();
     }
-    return putIfNotExists(urlsToInsert);
+    return Urls.put(urlsToInsert, rssUrl);
   }
 
   /**
    * Returns a set of all the articles on a site's home page and other start
    * URLs, regardless of whether we've indexed them before or not.
+   * @throws BiznessException 
    */
   public Iterable<Url> findArticleUrls(SiteManifest manifest)
-      throws DatabaseSchemaException, DatabaseRequestException {
+      throws DatabaseSchemaException, DatabaseRequestException, BiznessException {
     LOG.info("WEBSITE: " + manifest.getRootDomain());
 
     // Find all the URLs on the page, filter them to only have the article
@@ -176,22 +114,7 @@ class UrlCrawler {
         e.printStackTrace();
         continue;
       }
-      Iterables.addAll(siteUrls, putIfNotExists(Iterables.transform(urlStrings,
-          new Function<String, Url>() {
-            @Override
-            public Url apply(String urlString) {
-              return Url.newBuilder()
-                  .setUrl(urlString)
-                  .setOriginUrl(startUrl)
-                  .setId(GuidFactory.generate())
-                  .setDiscoveryTime(System.currentTimeMillis())
-                  // MAX_CRAWL_PRIORITY because we found this URL on the site's HOME PAGE
-                  // so in all probability it's pretty new, regardless of whether we can
-                  // parse a date from its URL like getCrawlPriority() tries to do.
-                  .setCrawlPriority(Urls.MAX_CRAWL_PRIORITY)
-                  .build();
-            }
-          })));
+      Iterables.addAll(siteUrls, Urls.put(urlStrings, startUrl));
     }
     for (String rssUrl : manifest.getRssUrlList()) {
       LOG.info("RSS FILE: " + rssUrl);

@@ -10,7 +10,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.CoreProto.DeviceRegistration;
-import com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType;
+import com.janknspank.proto.CoreProto.DeviceType;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")

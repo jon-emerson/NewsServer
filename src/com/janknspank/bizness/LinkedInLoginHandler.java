@@ -155,26 +155,33 @@ public class LinkedInLoginHandler {
       // Update LinkedInProfile field on User object, including an updated set of Employers.
       long stepStartTime = System.currentTimeMillis();
       userBuilder.setLinkedInProfile(createLinkedInProfile(linkedInProfileDocument));
-      System.out.println("setLinkedInProfile: " + (System.currentTimeMillis() - stepStartTime) + "ms");
+      System.out.println("setLinkedInProfile: " + (System.currentTimeMillis() - stepStartTime)
+          + "ms");
 
       // Update LinkedInConnections field on User object.
       stepStartTime = System.currentTimeMillis();
       DocumentNode linkedInConnectionsDocument = linkedInConnectionsDocumentFuture.get();
       userBuilder.clearLinkedInContact();
       userBuilder.addAllLinkedInContact(getLinkedInContacts(linkedInConnectionsDocument));
-      System.out.println("addAllLinkedInContact: " + (System.currentTimeMillis() - stepStartTime) + "ms");
+      System.out.println("addAllLinkedInContact: " + (System.currentTimeMillis() - stepStartTime)
+          + "ms");
 
       // Update Interests.
       stepStartTime = System.currentTimeMillis();
-      Iterable<Interest> updatedInterests = getUpdatedInterests(userBuilder, linkedInProfileDocument);
+      Iterable<Interest> updatedInterests =
+          getUpdatedInterests(userBuilder, linkedInProfileDocument);
       userBuilder.clearInterest();
       userBuilder.addAllInterest(updatedInterests);
       System.out.println("addAllInterest: " + (System.currentTimeMillis() - stepStartTime) + "ms");
 
       // Update LinkedIn profile photo URL.
       stepStartTime = System.currentTimeMillis();
-      userBuilder.setLinkedInProfilePhotoUrl(getLinkedInProfilePhotoUrl(linkedInProfileDocument));
-      System.out.println("setLinkedInProfilePhotoUrl: " + (System.currentTimeMillis() - stepStartTime) + "ms");
+      String linkedInProfilePhotoUrl = getLinkedInProfilePhotoUrl(linkedInProfileDocument);
+      if (linkedInProfilePhotoUrl != null) {
+        userBuilder.setLinkedInProfilePhotoUrl(linkedInProfilePhotoUrl);
+      }
+      System.out.println("setLinkedInProfilePhotoUrl: "
+          + (System.currentTimeMillis() - stepStartTime) + "ms");
 
       System.out.println("Completed User update processing in "
           + (System.currentTimeMillis() - startTime) + "ms");

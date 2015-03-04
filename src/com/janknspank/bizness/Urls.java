@@ -10,7 +10,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.common.DateParser;
-import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -74,10 +73,9 @@ public class Urls {
   }
 
   /**
-   * Makes sure the passed-in URLs are stored in our database.  Existing URLs
-   * have their tweet_count and priority updated accordingly, if isTweet is
-   * true.  The return Url objects are in the same order as the URL strings,
-   * though duplicates will be removed.
+   * Makes sure the passed-in URLs are stored in our database.  The return Url
+   * objects are in the same order as the URL strings, though duplicates will be
+   * removed.
    */
   public static Iterable<Url> put(Iterable<String> urlStrings, String originUrl)
       throws BiznessException, DatabaseSchemaException {
@@ -93,7 +91,6 @@ public class Urls {
     }
 
     // Use urls.keySet() instead of urlStrings here as a way to dedupe.
-    List<Url> urlsToUpdate = Lists.newArrayList(); // To increment tweet_count.
     for (Url existingUrl :
         Database.with(Url.class).get(new QueryOption.WhereEquals("url", urls.keySet()))) {
       urls.put(existingUrl.getUrl(), existingUrl);
@@ -115,7 +112,6 @@ public class Urls {
 
     try {
       Database.insert(urlsToCreate);
-      Database.update(urlsToUpdate);
       return urls.values();
     } catch (DatabaseRequestException e) {
       throw new BiznessException("Could not insert new discovered URL", e);

@@ -19,11 +19,13 @@ import org.json.JSONObject;
 
 import com.google.common.collect.Maps;
 import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.DeviceRegistration;
-import com.janknspank.proto.CoreProto.DeviceRegistration.DeviceType;
+import com.janknspank.proto.CoreProto.DeviceType;
+import com.janknspank.proto.CoreProto.PushNotification;
 import com.janknspank.proto.UserProto.User;
 
 /**
@@ -88,15 +90,15 @@ public class IosPushNotificationHelper {
    * reversed engineered by someone, so I haven't seen the documentation for
    * it.  But it's widely used and translated into many languages! :)
    */
-  private static byte[] getRequestBody(Article article, DeviceRegistration registration)
+  private static byte[] getRequestBody(PushNotification notification)
       throws IOException {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     baos.write(0); // The command.
     baos.write(0); // The first byte of the deviceId length.
     baos.write(32); // The deviceId length.
-    baos.write(hexStringToByteArray(registration.getDeviceId()));
-    String payload = getNewArticleNotificationBody(article).toString();
-    baos.write(0); //First byte of payload length;
+    baos.write(hexStringToByteArray(notification.getDeviceId()));
+    String payload = getPayload(notification).toString();
+    baos.write(0); // First byte of payload length;
     baos.write(payload.length());
     baos.write(payload.getBytes());
     return baos.toByteArray();
@@ -117,7 +119,10 @@ public class IosPushNotificationHelper {
     return uniqueDeviceIds.values();
   }
 
-  public void sendArticle(Article article, DeviceRegistration registration) {
+  public void sendPushNotification(PushNotification pushNotification)
+      throws DatabaseRequestException, DatabaseSchemaException {
+    Database.insert(pushNotification);
+
     SSLSocket socket = null;
     try {
       // Basically do this, but in java:
@@ -132,7 +137,7 @@ public class IosPushNotificationHelper {
 
       // Send the request.
       OutputStream out = socket.getOutputStream();
-      out.write(getRequestBody(article, registration));
+      out.write(getRequestBody(pushNotification));
       out.flush();
 
       // Read the response.
@@ -169,24 +174,31 @@ public class IosPushNotificationHelper {
   }
 
   /**
+   * Returns the text we should use for a notification about the passed article.
+   */
+  private static String getText(Article article) {
+    String text = getDomain(article.getUrl()) + ": " + article.getTitle();
+    if (text.length() > 60) {
+      text = text.substring(0, 57) + "...";
+    }
+    return text;
+  }
+
+  /**
    * Returns the {'aps':{'alert':'{'type':'a','id':'articleId'}'}} JSON object
    * that iOS's server-side SDK expects for APNS requests.  The object contains
    * the IDs of the devices to contact and a data explaining the new sound that
    * was sent.
    */
-  private static JSONObject getNewArticleNotificationBody(Article article) {
+  private static JSONObject getPayload(PushNotification notification) {
     // Create JSON object to describe the notification.
     // NOTE(jonemerson): We only have 256 characters to send to APNS, so
     // we can't stuff the whole sound serialization into the request.
     JSONObject alertInner = new JSONObject();
     alertInner.put("type", "a");
-    alertInner.put("id", article.getUrlId());
-
-    String body = getDomain(article.getUrl()) + ": " + article.getTitle();
-    if (body.length() > 60) {
-      body = body.substring(0, 57) + "...";
-    }
-    alertInner.put("body", body);
+    alertInner.put("blob",
+        "uid(" + notification.getUrlId() + ")!nid(" + notification.getId() + ")");
+    alertInner.put("body", notification.getText());
 
     // Create the aps JSON.
     JSONObject aps = new JSONObject();
@@ -210,11 +222,26 @@ public class IosPushNotificationHelper {
     return data;
   }
 
-  public static final void main(String args[]) throws DatabaseSchemaException {
+  public static PushNotification createPushNotification(
+      DeviceRegistration registration, Article article) {
+    return PushNotification.newBuilder()
+        .setId(GuidFactory.generate())
+        .setCreateTime(System.currentTimeMillis())
+        .setText(getText(article))
+        .setUrlId(article.getUrlId())
+        .setDeviceId(registration.getDeviceId())
+        .setDeviceType(registration.getDeviceType())
+        .setUserId(registration.getUserId())
+        .build();
+  }
+
+  public static final void main(String args[])
+      throws DatabaseSchemaException, DatabaseRequestException {
     for (DeviceRegistration registration
-        : getDeviceRegistrations(Users.getByEmail("tom.charytoniuk@gmail.com"))) {
-      IosPushNotificationHelper.getInstance().sendArticle(
-          Database.with(Article.class).getFirst(), registration);
+        : getDeviceRegistrations(Users.getByEmail("panaceaa@gmail.com"))) {
+      Article article = Database.with(Article.class).getFirst();
+      PushNotification pushNotification = createPushNotification(registration, article);
+      IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
     }
   }
 }
