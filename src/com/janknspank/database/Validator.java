@@ -36,6 +36,9 @@ public class Validator {
           Asserts.assertTrue(message.hasField(fieldDescriptor),
               fieldName + " cannot be null", DatabaseRequestException.class);
         }
+      } else if (!fieldDescriptor.isRepeated() && !message.hasField(fieldDescriptor)) {
+        // Optional field that's unset - totally cromulant!  Let's keep going!
+        continue;
       }
 
       // Verify only valid fields are indexed.

@@ -197,7 +197,8 @@ public class LinkedInLoginHandler {
             + (System.currentTimeMillis() - startTime) + "ms");
         return user;
       } catch (DatabaseRequestException e) {
-        throw new BiznessException("Error creating user", e);
+        e.printStackTrace();
+        throw new BiznessException("Error creating user: " + e.getMessage(), e);
       }
     } catch (ExecutionException|InterruptedException e) {
       Throwables.propagateIfInstanceOf(e.getCause(), BiznessException.class);
