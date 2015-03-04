@@ -114,9 +114,15 @@ public class KeywordFinder {
         }
       }
     };
-    List<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
     Iterables.addAll(keywords, findKeywordsInMetaTags(urlId, documentNode));
     Iterables.addAll(keywords, findKeywordsFromHypertext(urlId, documentNode));
+
+    // Use natural language processing to find keywords in the article text.
+    // Only look at the top 2/3rds of the article, since sites tend to put
+    // click-bait words in their articles towards the end.
+    Iterable<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
+    articleNodes = Iterables.limit(articleNodes,
+        (int) Math.ceil(((double) Iterables.size(articleNodes)) * 2 / 3)); 
     Iterables.addAll(keywords, findParagraphKeywords(urlId, Iterables.transform(articleNodes,
         new Function<Node, String>() {
           @Override
@@ -124,6 +130,7 @@ public class KeywordFinder {
             return articleNode.getFlattenedText();
           }
         })));
+
     return KeywordCanonicalizer.canonicalize(keywords);
   }
 
