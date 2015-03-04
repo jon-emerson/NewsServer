@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
-import java.util.Set;
+import java.util.Map;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -17,7 +17,7 @@ import javax.net.ssl.SSLSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -102,21 +102,22 @@ public class IosPushNotificationHelper {
     return baos.toByteArray();
   }
 
-  private void sendNewArticle(Article article, User user) throws DatabaseSchemaException {
-    Set<String> uniqueDeviceIds = Sets.newHashSet();
+  public static Iterable<DeviceRegistration> getDeviceRegistrations(User user)
+      throws DatabaseSchemaException {
+    Map<String, DeviceRegistration> uniqueDeviceIds = Maps.newHashMap();
     for (DeviceRegistration registration : Database.with(DeviceRegistration.class).get(
         new QueryOption.WhereEquals("user_id", user.getId()),
         new QueryOption.WhereEquals("device_type", DeviceType.IOS.name()),
         new QueryOption.DescendingSort("create_time"),
         new QueryOption.Limit(1))) {
-      if (!uniqueDeviceIds.contains(registration.getDeviceId())) {
-        sendNewArticle(article, registration);
-        uniqueDeviceIds.add(registration.getDeviceId());
+      if (!uniqueDeviceIds.containsKey(registration.getDeviceId())) {
+        uniqueDeviceIds.put(registration.getDeviceId(), registration);
       }
     }
+    return uniqueDeviceIds.values();
   }
 
-  private void sendNewArticle(Article article, DeviceRegistration registration) {
+  public void sendArticle(Article article, DeviceRegistration registration) {
     SSLSocket socket = null;
     try {
       // Basically do this, but in java:
@@ -135,6 +136,7 @@ public class IosPushNotificationHelper {
       out.flush();
 
       // Read the response.
+      // NOTE(jonemerson): DON'T DO THIS!!!  IT BLOCKS!
 //      ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream();
 //      byte[] buffer = new byte[2000];
 //      int readBytes = socket.getInputStream().read(buffer, 0, buffer.length);
@@ -209,7 +211,10 @@ public class IosPushNotificationHelper {
   }
 
   public static final void main(String args[]) throws DatabaseSchemaException {
-    IosPushNotificationHelper.getInstance().sendNewArticle(
-        Database.with(Article.class).getFirst(), Users.getByEmail("tom.charytoniuk@gmail.com"));
+    for (DeviceRegistration registration
+        : getDeviceRegistrations(Users.getByEmail("tom.charytoniuk@gmail.com"))) {
+      IosPushNotificationHelper.getInstance().sendArticle(
+          Database.with(Article.class).getFirst(), registration);
+    }
   }
 }

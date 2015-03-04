@@ -109,6 +109,10 @@ public class Mongoizer {
                   fieldDescriptor.getEnumType().findValueByName(object.getString(fieldName)));
               break;
 
+            case BOOLEAN:
+              messageBuilder.addRepeatedField(fieldDescriptor, (Boolean) list.get(i));
+              break;
+
             default:
               throw new DatabaseSchemaException(
                   "Unsupported type: " + fieldDescriptor.getJavaType().name());
@@ -141,6 +145,10 @@ public class Mongoizer {
             } else {
               messageBuilder.clearField(fieldDescriptor);
             }
+            break;
+
+          case BOOLEAN:
+            messageBuilder.setField(fieldDescriptor, object.getBoolean(fieldName));
             break;
 
           case MESSAGE:
@@ -192,6 +200,7 @@ public class Mongoizer {
             case LONG:
             case INT:
             case DOUBLE:
+            case BOOLEAN:
               list.add(message.getRepeatedField(fieldDescriptor, i));
               break;
 
@@ -225,6 +234,7 @@ public class Mongoizer {
           case LONG:
           case INT:
           case DOUBLE:
+          case BOOLEAN:
             object.put(fieldName, message.getField(fieldDescriptor));
             break;
 

@@ -8,7 +8,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.amazonaws.util.StringUtils;
 
 public class S3DemoHelper {
   static final String S3_ACCESS_KEY;
@@ -38,10 +37,6 @@ public class S3DemoHelper {
 
     do {
       for (S3ObjectSummary objectSummary : objects.getObjectSummaries()) {
-        System.out.println(objectSummary.getKey() + "\t" +
-            objectSummary.getSize() + "\t" +
-            StringUtils.fromDate(objectSummary.getLastModified()));
-
         // Pull out the major, minor, bug fix version numbers from the file
         // Example file name: Spotter-v1.0.2.ipa
         String fileName = objectSummary.getKey();

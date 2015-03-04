@@ -50,9 +50,8 @@ public class Interpreter {
   public static InterpretedData interpret(Url url, DocumentNode documentNode)
       throws FetchException, ParserException, RequiredFieldException {
 
-    String urlId = url.getId();
     return InterpretedData.newBuilder()
-        .setArticle(ArticleCreator.create(urlId, documentNode))
+        .setArticle(ArticleCreator.create(url, documentNode))
         .addAllUrl(UrlFinder.findUrls(documentNode))
         .build();
   }

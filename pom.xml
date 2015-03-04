@@ -215,6 +215,10 @@
               <mainClass>com.janknspank.utils.PruneMongoDatabase</mainClass>
               <name>PruneMongoDatabase</name>
             </program>
+            <program>
+              <mainClass>com.janknspank.utils.PushDailyNotifications</mainClass>
+              <name>PushDailyNotifications</name>
+            </program>
           </programs>
         </configuration>
         <executions>

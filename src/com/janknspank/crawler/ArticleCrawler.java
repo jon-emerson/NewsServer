@@ -305,34 +305,37 @@ public class ArticleCrawler implements Callable<Void> {
   public static void main(String args[]) throws Exception {
     long startTime = System.currentTimeMillis();
 
-    // Record crawl history on a regular basis.
-    new CommitCrawlHistoryThread().start();
+    try {
+      // Record crawl history on a regular basis.
+      new CommitCrawlHistoryThread().start();
 
-    // Make sure we die in a reasonable amount of time.
-    new PoisonPillThread().start();
+      // Make sure we die in a reasonable amount of time.
+      new PoisonPillThread().start();
 
-    // Randomly create crawlers, which will be execution poll throttled to
-    // THREAD_COUNT threads, for each website in our corpus.
-    List<SiteManifest> allManifests = Lists.newArrayList(SiteManifests.getList());
-    Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
+      // Randomly create crawlers, which will be execution poll throttled to
+      // THREAD_COUNT threads, for each website in our corpus.
+      List<SiteManifest> allManifests = Lists.newArrayList(SiteManifests.getList());
+      Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
 
-    // Schedule all the threads.
-    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
-    List<Callable<Void>> crawlers = Lists.newArrayList();
-    for (SiteManifest manifest : allManifests) {
-      crawlers.add(new ArticleCrawler(manifest));
+      // Schedule all the threads.
+      ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+      List<Callable<Void>> crawlers = Lists.newArrayList();
+      for (SiteManifest manifest : allManifests) {
+        crawlers.add(new ArticleCrawler(manifest));
+      }
+      executor.invokeAll(crawlers);
+      executor.shutdown();
+      System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
+
+      // Record that we finished.
+      CRAWL_HISTORY_BUILDER
+          .setWasInterrupted(false)
+          .setEndTime(System.currentTimeMillis());
+      updateCrawlHistoryInDatabase();
+
+    } finally {
+      // Hard quit because CommitCrawlHistoryThread and PoisonPillThread are still running.
+      System.exit(0);
     }
-    executor.invokeAll(crawlers);
-    executor.shutdown();
-    System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
-
-    // Record that we finished.
-    CRAWL_HISTORY_BUILDER
-        .setWasInterrupted(false)
-        .setEndTime(System.currentTimeMillis());
-    updateCrawlHistoryInDatabase();
-
-    // Hard quit because CommitCrawlHistoryThread and PoisonPillThread are still running.
-    System.exit(0); 
   }
 }
