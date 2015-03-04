@@ -83,7 +83,7 @@ public class SetUserInterestServlet extends StandardServlet {
         }
         entity = Entities.getEntityByKeyword(interestEntityKeywordParam);
         if (entity == null) {
-          EntityType entityType = EntityType.valueOf(interestEntityTypeParam);
+          EntityType entityType = EntityType.fromValue(interestEntityTypeParam);
           if (entityType == null) {
             throw new RequestException("Parameter 'interest[entity][type]' is invalid");
           }
