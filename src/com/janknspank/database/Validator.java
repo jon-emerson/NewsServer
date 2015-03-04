@@ -37,7 +37,7 @@ public class Validator {
               fieldName + " cannot be null", DatabaseRequestException.class);
         }
       } else if (!fieldDescriptor.isRepeated() && !message.hasField(fieldDescriptor)) {
-        // Optional field that's unset - totally cromulant!  Let's keep going!
+        // Optional field that's unset - totally cromulent!  Let's keep going!
         continue;
       }
 

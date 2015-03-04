@@ -308,16 +308,16 @@ public class LinkedInLoginHandler {
                 && interest.getType() != InterestType.LINKED_IN_CONTACTS;
           }
         }),
-        // Filter out any industries from the linkedIn profile that the user
-        // has already explicitly added.
-        Iterables.filter(getLinkedInProfileInterests(linkedInProfileDocument),  
+        Iterables.filter(getLinkedInProfileInterests(linkedInProfileDocument),
             new Predicate<Interest>() {
-          @Override
-          public boolean apply(Interest interest) {
-            return interest.getType() != InterestType.INDUSTRY
-                || !userIndustryCodes.contains(interest.getIndustryCode());
-          }
-        } ),
+              @Override
+              public boolean apply(Interest interest) {
+                // Filter out any industries from the linkedIn profile that the
+                // user has already explicitly added.
+                return interest.getType() != InterestType.INDUSTRY
+                    || !userIndustryCodes.contains(interest.getIndustryCode());
+              }
+            }),
         ImmutableList.of(linkedInContactInterest));
   }
 
