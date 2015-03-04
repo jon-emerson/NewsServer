@@ -13,6 +13,7 @@ import com.janknspank.database.Serializer;
 import com.janknspank.proto.CoreProto.Entity;
 
 @AuthenticationRequired
+@ServletMapping(urlPattern = "/v1/get_organizations")
 public class GetOrganizationsServlet extends StandardServlet {
 
   @Override

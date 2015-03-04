@@ -12,6 +12,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/delete_user")
 public class DeleteUserServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

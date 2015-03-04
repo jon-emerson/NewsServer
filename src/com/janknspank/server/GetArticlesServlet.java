@@ -28,6 +28,7 @@ import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.NeuralNetworkScorer;
 
 @AuthenticationRequired
+@ServletMapping(urlPattern = "/v1/get_articles")
 public class GetArticlesServlet extends AbstractArticlesServlet {
   // TODO(jonemerson): Make a global threadpool for this.  Or figure out
   // a better way to do asynchronous calls to Mongo DB - Hopefully via Futures.

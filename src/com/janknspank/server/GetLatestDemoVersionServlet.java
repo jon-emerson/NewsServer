@@ -10,6 +10,7 @@ import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.utils.S3DemoHelper;
 
+@ServletMapping(urlPattern = "/v1/get_latest_demo_version")
 public class GetLatestDemoVersionServlet extends StandardServlet {
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, BiznessException,

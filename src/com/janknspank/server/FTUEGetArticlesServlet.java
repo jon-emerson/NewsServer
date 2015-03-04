@@ -25,6 +25,7 @@ import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.HeuristicScorer;
 
 @AuthenticationRequired
+@ServletMapping(urlPattern = "/v1/ftue_get_articles")
 public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
   private static final int NUM_RESULTS = 50;
 

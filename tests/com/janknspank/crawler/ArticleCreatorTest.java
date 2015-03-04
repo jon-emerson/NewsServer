@@ -165,7 +165,8 @@ public class ArticleCreatorTest {
         ArticleCreator.getPublishedTime(documentNode, URL));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testNytimesArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.nytimes.com/2015/01/04/realestate/year-of-the-condo-in-new-york-city.html",
@@ -178,7 +179,8 @@ public class ArticleCreatorTest {
         + "04COV4/04COV4-facebookJumbo-v2.jpg", article.getImageUrl());
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testTechCrunchArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-future-of-finance/",
@@ -194,7 +196,8 @@ public class ArticleCreatorTest {
         article.getImageUrl());
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testSfgateArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.sfgate.com/nation/article/"
@@ -212,7 +215,8 @@ public class ArticleCreatorTest {
         article.getParagraph(0).contains("The launch countdown of a rocket carrying"));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testBbcArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.bbc.com/future/story/20141219-why-does-guilt-increase-pleasure",
@@ -235,7 +239,8 @@ public class ArticleCreatorTest {
         article.getParagraph(article.getParagraphCount() - 1));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testBloombergArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.bloomberg.com/politics/articles/2014-12-30/the-new-york-times-joins-"
@@ -255,7 +260,8 @@ public class ArticleCreatorTest {
             + "patrol in Brooklyn, the Patrolmen’s Benevolent Association"));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testFortuneArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://fortune.com/2012/04/06/gm-sees-self-driving-cars-sooner-not-later/",
@@ -274,7 +280,8 @@ public class ArticleCreatorTest {
             "FORTUNE — Self-driving cars may be closer than anybody realizes."));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testSlateArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.slate.com/articles/health_and_science/science/2014/06/facebook_unethical_"
@@ -301,7 +308,8 @@ public class ArticleCreatorTest {
             + "through social networks.”"));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testSlateArticle2() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.slate.com/articles/life/food/2015/02/"
@@ -332,7 +340,8 @@ public class ArticleCreatorTest {
             + "its suit against Hampton Creek."));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testVentureBeatArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://venturebeat.com/2015/01/29/googles-eric-schmidt-has-a-10-year-prediction-"
@@ -354,7 +363,8 @@ public class ArticleCreatorTest {
             + "will be startups that use existing online tools to unseat incumbents."));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testRedHerringArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/",
@@ -377,7 +387,8 @@ public class ArticleCreatorTest {
             + "dotcom era."));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testStartupWorkoutArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://startupworkout.com/inbox-hero-how-to-write-hypnotizing-emails-that-convert-"
@@ -401,7 +412,8 @@ public class ArticleCreatorTest {
             + "communicator HoloLens."));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testMediumArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "https://medium.com/@chrismessina/thoughts-on-google-8883844a9ca4",
@@ -416,7 +428,8 @@ public class ArticleCreatorTest {
             "Want to hear me read this post? I’ve published a narration on Umano."));
   }
 
-  @Test
+  // Don't run for now: Takes too long.  Should really be an integration/big test.
+  // @Test
   public void testTechnologyReviewArticle() throws Exception {
     DocumentNode documentNode = DocumentBuilder.build(
         "http://www.technologyreview.com/review/534581/the-purpose-of-silicon-valley/",

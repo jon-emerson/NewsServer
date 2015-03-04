@@ -12,6 +12,8 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 
+@AuthenticationRequired
+@ServletMapping(urlPattern = "/v1/get_article")
 public class GetArticleServlet extends StandardServlet {
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, BiznessException,

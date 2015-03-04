@@ -13,6 +13,7 @@ import com.janknspank.database.Serializer;
 import com.janknspank.proto.CoreProto.Entity;
 
 @AuthenticationRequired
+@ServletMapping(urlPattern = "/v1/get_people")
 public class GetPeopleServlet extends StandardServlet {
 
   @Override

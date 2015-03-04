@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired
+@ServletMapping(urlPattern = "/v1/get_user")
 public class GetUserServlet extends StandardServlet {
 
   @Override

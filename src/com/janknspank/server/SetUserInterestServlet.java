@@ -25,6 +25,7 @@ import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/set_user_interest")
 public class SetUserInterestServlet extends StandardServlet {
   /**
    * Please see the {@code UserProto.Interest} for the required parameters.

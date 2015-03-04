@@ -19,6 +19,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.server.soy.ArticleSoy;
 
+@ServletMapping(urlPattern = "/news/*")
 public class FeatureArticlesServlet extends StandardServlet {
   private static final int NUM_RESULTS = 50;
 

@@ -52,5 +52,6 @@
 	<classpathentry kind="lib" path="target/dependency/aws-java-sdk-kms-1.9.19.jar"/>
 	<classpathentry kind="lib" path="target/dependency/aws-java-sdk-s3-1.9.19.jar"/>
 	<classpathentry kind="lib" path="target/dependency/restfb-1.8.0.jar"/>
+	<classpathentry kind="lib" path="target/dependency/reflections-0.9.9-RC1.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

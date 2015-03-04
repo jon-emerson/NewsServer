@@ -20,15 +20,6 @@
 
   <!-- Application servlets. -->
   <servlet>
-    <servlet-name>IndexServlet</servlet-name>
-    <servlet-class>com.janknspank.server.IndexServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>IndexServlet</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>AddDeviceRegistrationServlet</servlet-name>
     <servlet-class>com.janknspank.server.AddDeviceRegistrationServlet</servlet-class>
   </servlet>
@@ -65,30 +56,12 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>DemoServlet</servlet-name>
-    <servlet-class>com.janknspank.server.DemoServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DemoServlet</servlet-name>
-    <url-pattern>/demo</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>FTUEGetArticlesServlet</servlet-name>
     <servlet-class>com.janknspank.server.FTUEGetArticlesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FTUEGetArticlesServlet</servlet-name>
     <url-pattern>/ftueGetArticles</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>FeatureArticlesServlet</servlet-name>
-    <servlet-class>com.janknspank.server.FeatureArticlesServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FeatureArticlesServlet</servlet-name>
-    <url-pattern>/news/*</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -173,15 +146,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>S3PipeServlet</servlet-name>
-    <servlet-class>com.janknspank.server.S3PipeServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>S3PipeServlet</servlet-name>
-    <url-pattern>/s3Pipe/*</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>SetAddressBookServlet</servlet-name>
     <servlet-class>com.janknspank.server.SetAddressBookServlet</servlet-class>
   </servlet>
@@ -233,23 +197,4 @@
     <servlet-name>SetUserUrlRatingServlet</servlet-name>
     <url-pattern>/setUserUrlRating</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>TrainingServlet</servlet-name>
-    <servlet-class>com.janknspank.server.TrainingServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TrainingServlet</servlet-name>
-    <url-pattern>/training</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>ViewFeedServlet</servlet-name>
-    <servlet-class>com.janknspank.server.ViewFeedServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewFeedServlet</servlet-name>
-    <url-pattern>/viewFeed</url-pattern>
-  </servlet-mapping>
-
 </web-app>

@@ -20,6 +20,7 @@ import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/set_user_intent")
 public class SetUserIntentServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

@@ -32,6 +32,7 @@ import com.janknspank.proto.CoreProto.UrlRating;
 import com.janknspank.proto.EnumsProto.ArticleTypeCode;
 
 @AuthenticationRequired
+@ServletMapping(urlPattern = "/training")
 public class TrainingServlet extends StandardServlet {
   /**
    * Returns any Soy data necessary for rendering the .main template for this

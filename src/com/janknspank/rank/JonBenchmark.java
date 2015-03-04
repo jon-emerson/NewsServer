@@ -328,8 +328,9 @@ public class JonBenchmark {
       "http://www.dairyreporter.com/Trends/Consolidation/Obram-well-situated-for-Russian-trade-embargo-cheese-opportunities-Tetra-Pak",
       "http://www.dairyreporter.com/Trends/Smart-Packaging/Danone-moves-to-patent-more-user-friendly-two-foil-yogurt-pot",
       "http://www.dairyreporter.com/Trends/Functional-Dairy/6-years-of-hurt-Probiotic-heavyweights-debate-the-EU-s-health-claim-blockade",
-      "http://www.dairyreporter.com/Trends/Dairy-Health-Check/Listeria-studied-in-raw-milk-Cantal-type-cheese");
-
+      "http://www.dairyreporter.com/Trends/Dairy-Health-Check/Listeria-studied-in-raw-milk-Cantal-type-cheese",
+      "http://www.cbsnews.com/news/flint-michigan-break-away-detroit-water-riles-residents/",
+      "http://www.telegraph.co.uk/news/worldnews/asia/japan/11449345/Watch-footage-shows-wreck-of-long-lost-WWII-Japanese-battleship.html");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {

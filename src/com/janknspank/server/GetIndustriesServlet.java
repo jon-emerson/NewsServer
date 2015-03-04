@@ -10,6 +10,7 @@ import com.janknspank.bizness.Industry;
 import com.janknspank.database.DatabaseSchemaException;
 
 @AuthenticationRequired
+@ServletMapping(urlPattern = "/v1/get_industries")
 public class GetIndustriesServlet extends StandardServlet {
 
   @Override

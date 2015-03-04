@@ -17,6 +17,7 @@ import com.janknspank.proto.UserProto.UrlFavorite;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/set_user_url_favorite")
 public class SetUserUrlFavoriteServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

@@ -14,6 +14,7 @@ import com.janknspank.proto.UserProto.UrlFavorite;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/delete_user_url_favorite")
 public class DeleteUserUrlFavoriteServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

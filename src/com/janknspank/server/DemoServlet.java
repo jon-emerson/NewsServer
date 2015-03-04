@@ -9,6 +9,7 @@ import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.utils.S3DemoHelper;
 
+@ServletMapping(urlPattern = "/demo")
 public class DemoServlet extends StandardServlet {
   /**
    * Returns any Soy data necessary for rendering the .main template for this

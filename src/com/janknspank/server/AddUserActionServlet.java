@@ -14,6 +14,7 @@ import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/add_user_action")
 public class AddUserActionServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.Urls;
-import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
@@ -16,6 +15,7 @@ import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/set_user_url_rating")
 public class SetUserUrlRatingServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

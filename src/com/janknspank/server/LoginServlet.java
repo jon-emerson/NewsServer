@@ -20,6 +20,7 @@ import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.UserProto.User;
 
+@ServletMapping(urlPattern = "/v1/login")
 public class LoginServlet extends StandardServlet {
   private final Fetcher fetcher = new Fetcher();
   static final String LINKED_IN_API_KEY;
@@ -40,7 +41,7 @@ public class LoginServlet extends StandardServlet {
       URIBuilder builder = new URIBuilder()
           .setScheme(req.getScheme())
           .setHost(req.getServerName())
-          .setPath("/login");
+          .setPath("/v1/login");
       int port = req.getServerPort();
       if (!(port == 0 ||
             port == 80 && "http".equals(req.getScheme()) ||

@@ -11,6 +11,7 @@ import com.janknspank.database.QueryOption;
 import com.janknspank.proto.CoreProto.Session;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/logout")
 public class LogoutServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

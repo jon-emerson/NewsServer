@@ -20,6 +20,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 
+@ServletMapping(urlPattern = "/s3Pipe/*")
 public class S3PipeServlet extends HttpServlet {
   private static final String BUCKET_NAME = "spotter-demo";
   static final String S3_ACCESS_KEY;

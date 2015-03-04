@@ -14,6 +14,7 @@ import com.janknspank.proto.CoreProto.DeviceType;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/add_device_registration")
 public class AddDeviceRegistrationServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

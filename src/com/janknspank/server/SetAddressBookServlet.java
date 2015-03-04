@@ -19,6 +19,7 @@ import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
+@ServletMapping(urlPattern = "/v1/set_address_book")
 public class SetAddressBookServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)

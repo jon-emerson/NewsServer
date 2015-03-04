@@ -6,7 +6,6 @@ import com.google.common.base.Function;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.common.TopList;
-import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
@@ -14,6 +13,7 @@ import com.janknspank.rank.NeuralNetworkScorer;
 import com.janknspank.server.soy.ArticleSoy;
 
 @AuthenticationRequired
+@ServletMapping(urlPattern = "/viewFeed")
 public class ViewFeedServlet extends StandardServlet {
   private static final int NUM_RESULTS = 50;
 
