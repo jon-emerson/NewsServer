@@ -178,8 +178,8 @@ public class IosPushNotificationHelper {
    */
   private static String getText(Article article) {
     String text = getDomain(article.getUrl()) + ": " + article.getTitle();
-    if (text.length() > 60) {
-      text = text.substring(0, 57) + "...";
+    if (text.length() > 100) {
+      text = text.substring(0, 97) + "...";
     }
     return text;
   }
