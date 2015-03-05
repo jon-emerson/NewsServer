@@ -83,7 +83,8 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
       if (userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
         topUserKeywords.add(keyword, keyword.getStrength());
       } else if (keyword.getKeyword().length() < 15
-          && !EntityType.fromValue(keyword.getType()).isA(EntityType.PERSON)) {
+          && !EntityType.fromValue(keyword.getType()).isA(EntityType.PERSON)
+          && !EntityType.fromValue(keyword.getType()).isA(EntityType.PLACE)) {
         // Only include small-ish keywords because the super long ones are often
         // crap.
         topNonUserKeyword.add(keyword, keyword.getStrength());
