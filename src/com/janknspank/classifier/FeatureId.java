@@ -64,7 +64,6 @@ public enum FeatureId {
   MECHANICAL_AND_INDUSTRIAL_ENGINEERING(10553, FeatureType.INDUSTRY,
       "Mechanical and Industrial Engineering"),
   HUMAN_RESOURCES(10554, FeatureType.INDUSTRY, "Human Resources"),
-  ENVIRONMENTALISM(10555, FeatureType.INDUSTRY, "Environmentalism"),
   RESTAURANTS(10556, FeatureType.INDUSTRY, "Restaurants"),
   MARKETING_AND_ADVERTISING(10557, FeatureType.INDUSTRY, "Marketing and Advertising"),
   VENTURE_CAPITAL_AND_PRIVATE_EQUITY(10558, FeatureType.INDUSTRY,

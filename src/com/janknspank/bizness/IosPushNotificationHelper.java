@@ -229,11 +229,14 @@ public class IosPushNotificationHelper {
 
   public static final void main(String args[])
       throws DatabaseSchemaException, DatabaseRequestException {
+    int count = 0;
     for (DeviceRegistration registration
         : getDeviceRegistrations(Users.getByEmail("panaceaa@gmail.com"))) {
+      ++count;
       Article article = Database.with(Article.class).getFirst();
       PushNotification pushNotification = createPushNotification(registration, article);
       IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
     }
+    System.out.println(count + " notifications sent");
   }
 }

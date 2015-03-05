@@ -90,11 +90,11 @@ public class Articles {
       }
       urls.add(article.getUrl());
 
-      double minutesSincePublished = Math.max(90,
+      double hoursSincePublished = Math.max(18,
           ((double) System.currentTimeMillis() - article.getPublishedTime())
-              / TimeUnit.MINUTES.toMillis(1));
+              / TimeUnit.HOURS.toMillis(1)) - 15;
       goodArticles.add(article, scorer.getScore(user, article) /
-          Math.sqrt(minutesSincePublished));
+          Math.sqrt(hoursSincePublished));
     }
     TopList<Article, Double> bestArticles = new TopList<>(limit);
     for (Article article : Deduper.filterOutDupes(goodArticles)) {
