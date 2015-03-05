@@ -52,7 +52,8 @@ public class Deduper {
       // dupes, -5 points).
       TopList<Integer, Double> topIndustryFeatures = new TopList<>(3);
       for (ArticleFeature feature : article.getFeatureList()) {
-        if (FeatureId.fromId(feature.getFeatureId()).getFeatureType() == FeatureType.INDUSTRY) {
+        FeatureId featureId = FeatureId.fromId(feature.getFeatureId());
+        if (featureId != null && featureId.getFeatureType() == FeatureType.INDUSTRY) {
           topIndustryFeatures.add(feature.getFeatureId(), feature.getSimilarity());
         }
       }
