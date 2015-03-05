@@ -194,7 +194,8 @@ public class IosPushNotificationHelper {
     // Create the aps JSON.
     JSONObject aps = new JSONObject();
     aps.put("alert", alertInner);
-    aps.put("content-available", "1");
+    aps.put("badge", "1");
+    aps.put("sound", "default");
 
     // Create the top-level JSON.
     JSONObject jsonObject = new JSONObject();
