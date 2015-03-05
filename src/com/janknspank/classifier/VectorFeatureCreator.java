@@ -2,7 +2,6 @@ package com.janknspank.classifier;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
@@ -13,7 +12,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.api.client.util.Lists;
-import com.google.common.base.Charsets;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -110,7 +108,6 @@ public class VectorFeatureCreator {
     // 4. Write the industry vector and its effective distribution to disk.
     vector.writeToFile(VectorFeature.getVectorFile(featureId));
     generateDistributionForVector(vector).writeToFile(VectorFeature.getDistributionFile(featureId));
-    writeVectorToTextFile(vector);
   }
 
   private DistributionBuilder generateDistributionForVector(Vector vector)
@@ -122,24 +119,24 @@ public class VectorFeatureCreator {
     return builder;
   }
 
-  /**
-   * Saves the Feature's vector in a human readable text file for debugging.
-   */
-  private void writeVectorToTextFile(Vector vector) throws ClassifierException {
-    FileOutputStream outputStream = null;
-    try {
-      outputStream = new FileOutputStream(
-          VectorFeature.getVectorFile(featureId).getAbsoluteFile() + ".txt");
-      IOUtils.write("# Text-representation of a feature vector for:\n", outputStream,
-          Charsets.UTF_8);
-      IOUtils.write("# " + featureId.getTitle() + "\n", outputStream, Charsets.UTF_8);
-      IOUtils.write(vector.toVectorData().toString(), outputStream, Charsets.UTF_8);
-    } catch (IOException e) {
-      throw new ClassifierException("Could not write feature text vector: " + e.getMessage(), e);
-    } finally {
-      IOUtils.closeQuietly(outputStream);
-    }
-  }
+//  /**
+//   * Saves the Feature's vector in a human readable text file for debugging.
+//   */
+//  private void writeVectorToTextFile(Vector vector) throws ClassifierException {
+//    FileOutputStream outputStream = null;
+//    try {
+//      outputStream = new FileOutputStream(
+//          VectorFeature.getVectorFile(featureId).getAbsoluteFile() + ".txt");
+//      IOUtils.write("# Text-representation of a feature vector for:\n", outputStream,
+//          Charsets.UTF_8);
+//      IOUtils.write("# " + featureId.getTitle() + "\n", outputStream, Charsets.UTF_8);
+//      IOUtils.write(vector.toVectorData().toString(), outputStream, Charsets.UTF_8);
+//    } catch (IOException e) {
+//      throw new ClassifierException("Could not write feature text vector: " + e.getMessage(), e);
+//    } finally {
+//      IOUtils.closeQuietly(outputStream);
+//    }
+//  }
 
   /**
    * Returns a Set of words and URLs that should be used for the creation of

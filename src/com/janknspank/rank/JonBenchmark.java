@@ -118,7 +118,10 @@ public class JonBenchmark {
       "http://techcrunch.com/2015/02/19/entrepreneur-first-hatches-latest-startups-partners-with-media-power-players/",
       "http://www.forbes.com/sites/bryanstolle/2015/02/04/ready-aim-fire-part-1-how-to-execute-successfully-every-time/",
       "http://www.forbes.com/sites/bryanstolle/2015/02/23/ready-aim-fire-how-to-execute-successfully-every-time-part-2/",
-      "http://techcrunch.com/2015/02/25/apple-watch-this-space/");
+      "http://techcrunch.com/2015/02/25/apple-watch-this-space/",
+      "https://gigaom.com/2015/03/04/ibm-acquires-deep-learning-startup-alchemyapi/",
+      "https://gigaom.com/2015/03/04/product-hunt-is-using-its-megaphone-to-tackle-startup-depression/",
+      "http://firstround.com/article/Evernotes-CTO-on-Your-Biggest-Security-Worries-From-Three-Employees-to-300");
 
   public static final List<String> BAD_URLS = ImmutableList.of(
       // Fluff, doesn't actually address any actually difficult challenges.
@@ -330,7 +333,11 @@ public class JonBenchmark {
       "http://www.dairyreporter.com/Trends/Functional-Dairy/6-years-of-hurt-Probiotic-heavyweights-debate-the-EU-s-health-claim-blockade",
       "http://www.dairyreporter.com/Trends/Dairy-Health-Check/Listeria-studied-in-raw-milk-Cantal-type-cheese",
       "http://www.cbsnews.com/news/flint-michigan-break-away-detroit-water-riles-residents/",
-      "http://www.telegraph.co.uk/news/worldnews/asia/japan/11449345/Watch-footage-shows-wreck-of-long-lost-WWII-Japanese-battleship.html");
+      "http://www.telegraph.co.uk/news/worldnews/asia/japan/11449345/Watch-footage-shows-wreck-of-long-lost-WWII-Japanese-battleship.html",
+      "http://www.latimes.com/la-a4-correx-20150305-story.html",
+      "http://www.cbsnews.com/news/flint-michigan-break-away-detroit-water-riles-residents/",
+      "http://www.bbc.co.uk/news/business-31300982",
+      "http://www.cbc.ca/news/world/musashi-ww-ii-japanese-warship-found-70-years-after-sinking-1.2981573");
 
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
