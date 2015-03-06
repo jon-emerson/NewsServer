@@ -27,6 +27,7 @@ import com.janknspank.bizness.Users;
 import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.crawler.ArticleUrlDetector;
+import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.UrlRating;
@@ -86,7 +87,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       // Double check that we still support the site that was rated.
       // (Sometimes we take down sites that aren't relevant to most people.)
       if (ArticleUrlDetector.isArticle(userAction.getUrl())) {
-        double score = scoreForAction(userAction);
+        double score = getScoreForAction(userAction);
         if (score >= 0) {
           scoreableActions.add(userAction);
           actionIdScoreMap.put(userAction.getId(), score);
@@ -145,7 +146,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
    * Returns a rating for a given user action. If unable to convert an action to a rating
    * the method will return -1;
    */
-  private static double scoreForAction(UserAction action) {
+  private static double getScoreForAction(UserAction action) {
     if (action.getActionType() == UserAction.ActionType.FAVORITE) {
       return 1.0;
     } else if (action.getActionType() == UserAction.ActionType.READ_ARTICLE) {
@@ -300,12 +301,13 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
 
     // Train against UserActions like x-out article
-    DataSet userActionsDataSet = generateUserActionsTrainingDataSet(UserActions.getAllActions());
-    
+    DataSet userActionsDataSet = generateUserActionsTrainingDataSet(
+        Database.with(UserAction.class).get());
+
     DataSet completeDataSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
-    
+
     // Combine Jon's benchmark into completeDataSet
     double[] averageInputValues = new double[NeuralNetworkScorer.INPUT_NODES_COUNT];
     for (DataSetRow row : jonBenchmarkDataSet.getRows()) {
@@ -315,7 +317,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       }
       completeDataSet.addRow(row);
     }
-    
+
     // Combine User Ratings into completeDataSet
     for (DataSetRow row : userRatingsDataSet.getRows()) {
       double[] inputs = row.getInput();
