@@ -42,7 +42,7 @@ import com.janknspank.proto.CrawlerProto.SiteManifest;
  */
 public class ArticleCrawler implements Callable<Void> {
   private static final Logger LOG = new Logger(ArticleCrawler.class);
-  public static final int THREAD_COUNT = 5;
+  public static final int THREAD_COUNT = 20;
 
   private final SiteManifest manifest;
   private final static CrawlHistory.Builder CRAWL_HISTORY_BUILDER = CrawlHistory.newBuilder();
@@ -278,29 +278,6 @@ public class ArticleCrawler implements Callable<Void> {
     }
   }
 
-  /**
-   * Periodically writes the stack traces for every registered thread.
-   */
-  private static class ThreadDebuggerThread extends Thread {
-    @Override
-    public void run() {
-      try {
-        while (true) {
-          Thread.sleep(TimeUnit.MINUTES.toMillis(1));
-          Map<Thread,StackTraceElement[]> threadStackTraceMap = Thread.getAllStackTraces();
-          for (Thread thread : threadStackTraceMap.keySet()) {
-            System.out.println(thread);
-            for (StackTraceElement el : threadStackTraceMap.get(thread)) {
-              System.out.println("  " + el.toString());
-            }
-          }
-        }
-      } catch (Throwable e) {
-        e.printStackTrace();
-      }
-    }
-  }
-
   private static class PoisonPillThread extends Thread {
     @Override
     public void run() {
@@ -334,9 +311,6 @@ public class ArticleCrawler implements Callable<Void> {
 
       // Make sure we die in a reasonable amount of time.
       new PoisonPillThread().start();
-
-      // Debug thread hangs.
-      new ThreadDebuggerThread().start();
 
       // Randomly create crawlers, which will be execution poll throttled to
       // THREAD_COUNT threads, for each website in our corpus.
