@@ -70,6 +70,12 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
         paragraphs.subList(0, Math.min(3, paragraphs.size()))));
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));
     articleJson.put("keyword", Serializer.toJSON(getArticleKeywords(article, userKeywordSet)));
+
+    // Replace the published time with the crawl time, since people often just
+    // give a date for a publish time, so without this, the clients are showing
+    // midnight as most articles' ages.
+    articleJson.put("published_time", article.getCrawlTime());
+
     return articleJson;
   }
 
