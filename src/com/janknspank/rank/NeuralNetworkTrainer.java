@@ -1,6 +1,8 @@
 package com.janknspank.rank;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,14 +22,17 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.UrlRatings;
+import com.janknspank.bizness.UserActions;
 import com.janknspank.bizness.Users;
 import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.crawler.ArticleUrlDetector;
+import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.UrlRating;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.UserAction;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
   private final static Logger LOG = new Logger(NeuralNetworkTrainer.class);
@@ -69,6 +74,94 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     return neuralNetwork;
   }
 
+  /**
+   * Generate DataSet to train the neural network from a list of UserActions.
+   */
+  private static DataSet generateUserActionsTrainingDataSet(Iterable<UserAction> actions) 
+      throws DatabaseSchemaException, BiznessException {
+    Set<String> urlStrings = Sets.newHashSet();
+    Set<String> userIds = Sets.newHashSet();
+    List<UserAction> scoreableActions = new ArrayList<>(); 
+    Map<String, Double> actionIdScoreMap = Maps.newHashMap();
+    for (UserAction userAction : actions) {
+      // Double check that we still support the site that was rated.
+      // (Sometimes we take down sites that aren't relevant to most people.)
+      if (ArticleUrlDetector.isArticle(userAction.getUrl())) {
+        double score = getScoreForAction(userAction);
+        if (score >= 0) {
+          scoreableActions.add(userAction);
+          actionIdScoreMap.put(userAction.getId(), score);
+          urlStrings.add(userAction.getUrl());
+          userIds.add(userAction.getUserId());
+        }
+      }
+    }
+
+    System.out.println("UserActions in the training set: " + scoreableActions.size());
+
+    // Load up fake User objects from the cached properties
+    Map<String, User> idUserMap = Maps.newHashMap();
+    for (UserAction action : scoreableActions) {
+      User tempUser = User.newBuilder()
+          .addAllAddressBookContact(action.getAddressBookContactList())
+          .addAllLinkedInContact(action.getLinkedInContactList())
+          .addAllInterest(action.getInterestList())
+          .setId(action.getUserId())
+          .setEmail("some.email@gmail.com")
+          .setCreateTime(System.currentTimeMillis())
+          .setLinkedInAccessToken("_").build();
+      idUserMap.put(tempUser.getId(), tempUser);
+    }
+
+    // Load up all articles that have ratings
+    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings);
+
+    DataSet trainingSet = new DataSet(
+        NeuralNetworkScorer.INPUT_NODES_COUNT,
+        NeuralNetworkScorer.OUTPUT_NODES_COUNT);
+
+    for (UserAction action : scoreableActions) {
+      User user = idUserMap.get(action.getUserId());
+      Article article = urlArticleMap.get(action.getUrl());
+
+      // A user rating may outlive any particular Article or User
+      // in our system. So check to see that they exist before scoring
+      if (article == null) {
+        LOG.warning("Can't find Article to score: " + action.getUrl());
+      } else if (user == null) {
+        LOG.warning("Can't find User to score: " + action.getUserId());
+      } else {
+        double[] input =
+            NeuralNetworkScorer.generateInputNodes(user, article);
+        double[] output = new double[] { actionIdScoreMap.get(action.getId()) };
+        DataSetRow row = new DataSetRow(input, output);
+        trainingSet.addRow(row);
+      }
+    }
+
+    return trainingSet;
+  }
+  
+  /**
+   * Returns a rating for a given user action. If unable to convert an action to a rating
+   * the method will return -1;
+   */
+  private static double getScoreForAction(UserAction action) {
+    if (action.getActionType() == UserAction.ActionType.FAVORITE) {
+      return 1.0;
+    } else if (action.getActionType() == UserAction.ActionType.READ_ARTICLE) {
+      return -1; // Not sure how to rate
+    } else if (action.getActionType() == UserAction.ActionType.SHARE) {
+      return 1.0;
+    } else if (action.getActionType() == UserAction.ActionType.TAP_FROM_STREAM) {
+      return 0.7;
+    } else if (action.getActionType() == UserAction.ActionType.X_OUT) {
+      return 0.0;
+    } else {
+      return -1;
+    }
+  }
+  
   /**
    * Generate DataSet to train neural network from a list of UrlRatings.
    * @return DataSet of training data
@@ -207,17 +300,43 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     // Train against User URL Ratings
     DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
 
-    // Combine the two training sets
+    // Train against UserActions like x-out article
+    DataSet userActionsDataSet = generateUserActionsTrainingDataSet(
+        Database.with(UserAction.class).get());
+
+    DataSet completeDataSet = new DataSet(
+        NeuralNetworkScorer.INPUT_NODES_COUNT,
+        NeuralNetworkScorer.OUTPUT_NODES_COUNT);
+
+    // Combine Jon's benchmark into completeDataSet
     double[] averageInputValues = new double[NeuralNetworkScorer.INPUT_NODES_COUNT];
     for (DataSetRow row : jonBenchmarkDataSet.getRows()) {
       double[] inputs = row.getInput();
       for (int i = 0; i < inputs.length; i++) {
         averageInputValues[i] += inputs[i];
       }
-      userRatingsDataSet.addRow(row);
+      completeDataSet.addRow(row);
     }
 
-    int numRows = userRatingsDataSet.size();
+    // Combine User Ratings into completeDataSet
+    for (DataSetRow row : userRatingsDataSet.getRows()) {
+      double[] inputs = row.getInput();
+      for (int i = 0; i < inputs.length; i++) {
+        averageInputValues[i] += inputs[i];
+      }
+      completeDataSet.addRow(row);
+    }
+    
+    // Combine UserActions ratings into completeDataSet
+    for (DataSetRow row : userActionsDataSet.getRows()) {
+      double[] inputs = row.getInput();
+      for (int i = 0; i < inputs.length; i++) {
+        averageInputValues[i] += inputs[i];
+      }
+      completeDataSet.addRow(row);
+    }
+
+    int numRows = completeDataSet.size();
     //LOG.info("Average input values:");
     System.out.println("Average input values:");
     for (int i = 0; i < averageInputValues.length; i++) {
@@ -226,7 +345,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
 
     NeuralNetwork<BackPropagation> neuralNetwork =
-        new NeuralNetworkTrainer().generateTrainedNetwork(userRatingsDataSet);
+        new NeuralNetworkTrainer().generateTrainedNetwork(completeDataSet);
     neuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
   }
 }

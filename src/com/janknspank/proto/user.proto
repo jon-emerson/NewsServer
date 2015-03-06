@@ -244,4 +244,16 @@ message UserAction {
 
   // IFF ActionType == READ_ARTICLE
   optional int64 read_end_time = 8;
+
+  repeated LinkedInContact linked_in_contact = 9 [
+    (client_serialization) = EXCLUDE
+  ];
+
+  repeated AddressBookContact address_book_contact = 10 [
+    (client_serialization) = EXCLUDE
+  ];
+
+  repeated Interest interest = 11 [
+    (client_serialization) = EXCLUDE
+  ];
 }

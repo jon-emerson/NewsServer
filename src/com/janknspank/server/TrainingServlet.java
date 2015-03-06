@@ -41,7 +41,7 @@ public class TrainingServlet extends StandardServlet {
    */
   @Override
   protected SoyMapData getSoyMapData(HttpServletRequest req) throws DatabaseSchemaException {
-    Article article = Articles.getRandomUntrainedArticle();
+    Article article = Articles.getRandomArticle();
     return new SoyMapData(
         "session_key", this.getSession(req).getSessionKey(),
         "title", article.getTitle(),
