@@ -170,7 +170,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
             Iterables.filter(rankedArticles, new Predicate<Article>() {
               @Override
               public boolean apply(Article rankedArticle) {
-                return rankedArticle.getUrlId() != urlId;
+                return !rankedArticle.getUrlId().equals(urlId);
               }
             }));
       }

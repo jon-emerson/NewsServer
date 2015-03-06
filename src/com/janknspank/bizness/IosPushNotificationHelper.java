@@ -231,7 +231,7 @@ public class IosPushNotificationHelper {
       throws DatabaseSchemaException, DatabaseRequestException {
     int count = 0;
     for (DeviceRegistration registration
-        : getDeviceRegistrations(Users.getByEmail("tom.charytoniuk@gmail.com"))) {
+        : getDeviceRegistrations(Users.getByEmail("panaceaa@gmail.com"))) {
       ++count;
       Article article = Database.with(Article.class).getFirst();
       PushNotification pushNotification = createPushNotification(registration, article);
