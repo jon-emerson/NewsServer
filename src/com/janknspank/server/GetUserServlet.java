@@ -19,7 +19,7 @@ public class GetUserServlet extends StandardServlet {
 
     // Create the response.
     JSONObject response = this.createSuccessResponse();
-    response.put("user", new UserHelper(user).getUserJson());
+    response.put("user", new JSONObject()); // new UserHelper(user).getUserJson());
     return response;
   }
 }
