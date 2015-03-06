@@ -22,7 +22,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.UrlRatings;
-import com.janknspank.bizness.UserActions;
 import com.janknspank.bizness.Users;
 import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
