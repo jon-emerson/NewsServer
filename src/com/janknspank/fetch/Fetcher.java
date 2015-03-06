@@ -45,6 +45,7 @@ public class Fetcher {
     try {
       response = httpclient.execute(new HttpGet(urlString));
       reader = new CharsetDetectingReader(response.getEntity().getContent());
+      System.out.println("Fetcher: " + response.getStatusLine().getStatusCode() + " for " + urlString);
       return new FetchResponse(response.getStatusLine().getStatusCode(),
           DocumentBuilder.build(urlString, reader));
     } catch (IOException e) {
