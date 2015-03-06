@@ -338,6 +338,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
   @Override
   public int insert(Iterable<T> messages)
       throws DatabaseSchemaException, DatabaseRequestException {
+    System.out.println("Writing " + Iterables.size(messages) + " " + getTableName() + "s");
     if (Iterables.isEmpty(messages)) {
       return 0;
     }

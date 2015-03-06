@@ -174,6 +174,8 @@ class ArticleCreator extends CacheLoader<DocumentNode, Iterable<String>> {
     articleBuilder.setCrawlTime(System.currentTimeMillis());
 
     // Done!
+    System.out.println("Article created: " + articleBuilder.getUrl() + " \""
+        + articleBuilder.getTitle() + ")");
     return articleBuilder.build();
   }
 

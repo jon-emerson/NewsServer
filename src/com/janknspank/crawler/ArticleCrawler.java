@@ -272,7 +272,7 @@ public class ArticleCrawler implements Callable<Void> {
           Thread.sleep(TimeUnit.MINUTES.toMillis(1));
           updateCrawlHistoryInDatabase();
         }
-      } catch (InterruptedException | DatabaseRequestException | DatabaseSchemaException e) {
+      } catch (Throwable e) {
         e.printStackTrace();
       }
     }
