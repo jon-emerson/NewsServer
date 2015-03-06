@@ -8587,6 +8587,81 @@ public final class UserProto {
      * </pre>
      */
     long getReadEndTime();
+
+    // repeated .LinkedInContact linked_in_contact = 9;
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    java.util.List<com.janknspank.proto.UserProto.LinkedInContact> 
+        getLinkedInContactList();
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    com.janknspank.proto.UserProto.LinkedInContact getLinkedInContact(int index);
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    int getLinkedInContactCount();
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.UserProto.LinkedInContactOrBuilder> 
+        getLinkedInContactOrBuilderList();
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    com.janknspank.proto.UserProto.LinkedInContactOrBuilder getLinkedInContactOrBuilder(
+        int index);
+
+    // repeated .AddressBookContact address_book_contact = 10;
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    java.util.List<com.janknspank.proto.UserProto.AddressBookContact> 
+        getAddressBookContactList();
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    com.janknspank.proto.UserProto.AddressBookContact getAddressBookContact(int index);
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    int getAddressBookContactCount();
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.UserProto.AddressBookContactOrBuilder> 
+        getAddressBookContactOrBuilderList();
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    com.janknspank.proto.UserProto.AddressBookContactOrBuilder getAddressBookContactOrBuilder(
+        int index);
+
+    // repeated .Interest interest = 11;
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    java.util.List<com.janknspank.proto.UserProto.Interest> 
+        getInterestList();
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    com.janknspank.proto.UserProto.Interest getInterest(int index);
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    int getInterestCount();
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
+        getInterestOrBuilderList();
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code UserAction}
@@ -8685,6 +8760,30 @@ public final class UserProto {
               readEndTime_ = input.readInt64();
               break;
             }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                linkedInContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.LinkedInContact>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              linkedInContact_.add(input.readMessage(com.janknspank.proto.UserProto.LinkedInContact.PARSER, extensionRegistry));
+              break;
+            }
+            case 82: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                addressBookContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.AddressBookContact>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              addressBookContact_.add(input.readMessage(com.janknspank.proto.UserProto.AddressBookContact.PARSER, extensionRegistry));
+              break;
+            }
+            case 90: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>();
+                mutable_bitField0_ |= 0x00000400;
+              }
+              interest_.add(input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -8693,6 +8792,15 @@ public final class UserProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          linkedInContact_ = java.util.Collections.unmodifiableList(linkedInContact_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          addressBookContact_ = java.util.Collections.unmodifiableList(addressBookContact_);
+        }
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+          interest_ = java.util.Collections.unmodifiableList(interest_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -9103,6 +9211,114 @@ public final class UserProto {
       return readEndTime_;
     }
 
+    // repeated .LinkedInContact linked_in_contact = 9;
+    public static final int LINKED_IN_CONTACT_FIELD_NUMBER = 9;
+    private java.util.List<com.janknspank.proto.UserProto.LinkedInContact> linkedInContact_;
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    public java.util.List<com.janknspank.proto.UserProto.LinkedInContact> getLinkedInContactList() {
+      return linkedInContact_;
+    }
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.UserProto.LinkedInContactOrBuilder> 
+        getLinkedInContactOrBuilderList() {
+      return linkedInContact_;
+    }
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    public int getLinkedInContactCount() {
+      return linkedInContact_.size();
+    }
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    public com.janknspank.proto.UserProto.LinkedInContact getLinkedInContact(int index) {
+      return linkedInContact_.get(index);
+    }
+    /**
+     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+     */
+    public com.janknspank.proto.UserProto.LinkedInContactOrBuilder getLinkedInContactOrBuilder(
+        int index) {
+      return linkedInContact_.get(index);
+    }
+
+    // repeated .AddressBookContact address_book_contact = 10;
+    public static final int ADDRESS_BOOK_CONTACT_FIELD_NUMBER = 10;
+    private java.util.List<com.janknspank.proto.UserProto.AddressBookContact> addressBookContact_;
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    public java.util.List<com.janknspank.proto.UserProto.AddressBookContact> getAddressBookContactList() {
+      return addressBookContact_;
+    }
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.UserProto.AddressBookContactOrBuilder> 
+        getAddressBookContactOrBuilderList() {
+      return addressBookContact_;
+    }
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    public int getAddressBookContactCount() {
+      return addressBookContact_.size();
+    }
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    public com.janknspank.proto.UserProto.AddressBookContact getAddressBookContact(int index) {
+      return addressBookContact_.get(index);
+    }
+    /**
+     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+     */
+    public com.janknspank.proto.UserProto.AddressBookContactOrBuilder getAddressBookContactOrBuilder(
+        int index) {
+      return addressBookContact_.get(index);
+    }
+
+    // repeated .Interest interest = 11;
+    public static final int INTEREST_FIELD_NUMBER = 11;
+    private java.util.List<com.janknspank.proto.UserProto.Interest> interest_;
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    public java.util.List<com.janknspank.proto.UserProto.Interest> getInterestList() {
+      return interest_;
+    }
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
+        getInterestOrBuilderList() {
+      return interest_;
+    }
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    public int getInterestCount() {
+      return interest_.size();
+    }
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    public com.janknspank.proto.UserProto.Interest getInterest(int index) {
+      return interest_.get(index);
+    }
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     */
+    public com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
+        int index) {
+      return interest_.get(index);
+    }
+
     private void initFields() {
       id_ = "";
       userId_ = "";
@@ -9112,6 +9328,9 @@ public final class UserProto {
       createTime_ = 0L;
       readStartTime_ = 0L;
       readEndTime_ = 0L;
+      linkedInContact_ = java.util.Collections.emptyList();
+      addressBookContact_ = java.util.Collections.emptyList();
+      interest_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9148,6 +9367,15 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt64(8, readEndTime_);
+      }
+      for (int i = 0; i < linkedInContact_.size(); i++) {
+        output.writeMessage(9, linkedInContact_.get(i));
+      }
+      for (int i = 0; i < addressBookContact_.size(); i++) {
+        output.writeMessage(10, addressBookContact_.get(i));
+      }
+      for (int i = 0; i < interest_.size(); i++) {
+        output.writeMessage(11, interest_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -9189,6 +9417,18 @@ public final class UserProto {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(8, readEndTime_);
+      }
+      for (int i = 0; i < linkedInContact_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, linkedInContact_.get(i));
+      }
+      for (int i = 0; i < addressBookContact_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, addressBookContact_.get(i));
+      }
+      for (int i = 0; i < interest_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, interest_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9298,6 +9538,9 @@ public final class UserProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getLinkedInContactFieldBuilder();
+          getAddressBookContactFieldBuilder();
+          getInterestFieldBuilder();
         }
       }
       private static Builder create() {
@@ -9322,6 +9565,24 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         readEndTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
+        if (linkedInContactBuilder_ == null) {
+          linkedInContact_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          linkedInContactBuilder_.clear();
+        }
+        if (addressBookContactBuilder_ == null) {
+          addressBookContact_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          addressBookContactBuilder_.clear();
+        }
+        if (interestBuilder_ == null) {
+          interest_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000400);
+        } else {
+          interestBuilder_.clear();
+        }
         return this;
       }
 
@@ -9382,6 +9643,33 @@ public final class UserProto {
           to_bitField0_ |= 0x00000080;
         }
         result.readEndTime_ = readEndTime_;
+        if (linkedInContactBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            linkedInContact_ = java.util.Collections.unmodifiableList(linkedInContact_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.linkedInContact_ = linkedInContact_;
+        } else {
+          result.linkedInContact_ = linkedInContactBuilder_.build();
+        }
+        if (addressBookContactBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            addressBookContact_ = java.util.Collections.unmodifiableList(addressBookContact_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.addressBookContact_ = addressBookContact_;
+        } else {
+          result.addressBookContact_ = addressBookContactBuilder_.build();
+        }
+        if (interestBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400)) {
+            interest_ = java.util.Collections.unmodifiableList(interest_);
+            bitField0_ = (bitField0_ & ~0x00000400);
+          }
+          result.interest_ = interest_;
+        } else {
+          result.interest_ = interestBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9429,6 +9717,84 @@ public final class UserProto {
         }
         if (other.hasReadEndTime()) {
           setReadEndTime(other.getReadEndTime());
+        }
+        if (linkedInContactBuilder_ == null) {
+          if (!other.linkedInContact_.isEmpty()) {
+            if (linkedInContact_.isEmpty()) {
+              linkedInContact_ = other.linkedInContact_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureLinkedInContactIsMutable();
+              linkedInContact_.addAll(other.linkedInContact_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.linkedInContact_.isEmpty()) {
+            if (linkedInContactBuilder_.isEmpty()) {
+              linkedInContactBuilder_.dispose();
+              linkedInContactBuilder_ = null;
+              linkedInContact_ = other.linkedInContact_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              linkedInContactBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getLinkedInContactFieldBuilder() : null;
+            } else {
+              linkedInContactBuilder_.addAllMessages(other.linkedInContact_);
+            }
+          }
+        }
+        if (addressBookContactBuilder_ == null) {
+          if (!other.addressBookContact_.isEmpty()) {
+            if (addressBookContact_.isEmpty()) {
+              addressBookContact_ = other.addressBookContact_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureAddressBookContactIsMutable();
+              addressBookContact_.addAll(other.addressBookContact_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.addressBookContact_.isEmpty()) {
+            if (addressBookContactBuilder_.isEmpty()) {
+              addressBookContactBuilder_.dispose();
+              addressBookContactBuilder_ = null;
+              addressBookContact_ = other.addressBookContact_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              addressBookContactBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getAddressBookContactFieldBuilder() : null;
+            } else {
+              addressBookContactBuilder_.addAllMessages(other.addressBookContact_);
+            }
+          }
+        }
+        if (interestBuilder_ == null) {
+          if (!other.interest_.isEmpty()) {
+            if (interest_.isEmpty()) {
+              interest_ = other.interest_;
+              bitField0_ = (bitField0_ & ~0x00000400);
+            } else {
+              ensureInterestIsMutable();
+              interest_.addAll(other.interest_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.interest_.isEmpty()) {
+            if (interestBuilder_.isEmpty()) {
+              interestBuilder_.dispose();
+              interestBuilder_ = null;
+              interest_ = other.interest_;
+              bitField0_ = (bitField0_ & ~0x00000400);
+              interestBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getInterestFieldBuilder() : null;
+            } else {
+              interestBuilder_.addAllMessages(other.interest_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -9920,6 +10286,726 @@ public final class UserProto {
         return this;
       }
 
+      // repeated .LinkedInContact linked_in_contact = 9;
+      private java.util.List<com.janknspank.proto.UserProto.LinkedInContact> linkedInContact_ =
+        java.util.Collections.emptyList();
+      private void ensureLinkedInContactIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          linkedInContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.LinkedInContact>(linkedInContact_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.UserProto.LinkedInContact, com.janknspank.proto.UserProto.LinkedInContact.Builder, com.janknspank.proto.UserProto.LinkedInContactOrBuilder> linkedInContactBuilder_;
+
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.LinkedInContact> getLinkedInContactList() {
+        if (linkedInContactBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(linkedInContact_);
+        } else {
+          return linkedInContactBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public int getLinkedInContactCount() {
+        if (linkedInContactBuilder_ == null) {
+          return linkedInContact_.size();
+        } else {
+          return linkedInContactBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public com.janknspank.proto.UserProto.LinkedInContact getLinkedInContact(int index) {
+        if (linkedInContactBuilder_ == null) {
+          return linkedInContact_.get(index);
+        } else {
+          return linkedInContactBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder setLinkedInContact(
+          int index, com.janknspank.proto.UserProto.LinkedInContact value) {
+        if (linkedInContactBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLinkedInContactIsMutable();
+          linkedInContact_.set(index, value);
+          onChanged();
+        } else {
+          linkedInContactBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder setLinkedInContact(
+          int index, com.janknspank.proto.UserProto.LinkedInContact.Builder builderForValue) {
+        if (linkedInContactBuilder_ == null) {
+          ensureLinkedInContactIsMutable();
+          linkedInContact_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          linkedInContactBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder addLinkedInContact(com.janknspank.proto.UserProto.LinkedInContact value) {
+        if (linkedInContactBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLinkedInContactIsMutable();
+          linkedInContact_.add(value);
+          onChanged();
+        } else {
+          linkedInContactBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder addLinkedInContact(
+          int index, com.janknspank.proto.UserProto.LinkedInContact value) {
+        if (linkedInContactBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLinkedInContactIsMutable();
+          linkedInContact_.add(index, value);
+          onChanged();
+        } else {
+          linkedInContactBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder addLinkedInContact(
+          com.janknspank.proto.UserProto.LinkedInContact.Builder builderForValue) {
+        if (linkedInContactBuilder_ == null) {
+          ensureLinkedInContactIsMutable();
+          linkedInContact_.add(builderForValue.build());
+          onChanged();
+        } else {
+          linkedInContactBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder addLinkedInContact(
+          int index, com.janknspank.proto.UserProto.LinkedInContact.Builder builderForValue) {
+        if (linkedInContactBuilder_ == null) {
+          ensureLinkedInContactIsMutable();
+          linkedInContact_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          linkedInContactBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder addAllLinkedInContact(
+          java.lang.Iterable<? extends com.janknspank.proto.UserProto.LinkedInContact> values) {
+        if (linkedInContactBuilder_ == null) {
+          ensureLinkedInContactIsMutable();
+          super.addAll(values, linkedInContact_);
+          onChanged();
+        } else {
+          linkedInContactBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder clearLinkedInContact() {
+        if (linkedInContactBuilder_ == null) {
+          linkedInContact_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          linkedInContactBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public Builder removeLinkedInContact(int index) {
+        if (linkedInContactBuilder_ == null) {
+          ensureLinkedInContactIsMutable();
+          linkedInContact_.remove(index);
+          onChanged();
+        } else {
+          linkedInContactBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public com.janknspank.proto.UserProto.LinkedInContact.Builder getLinkedInContactBuilder(
+          int index) {
+        return getLinkedInContactFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public com.janknspank.proto.UserProto.LinkedInContactOrBuilder getLinkedInContactOrBuilder(
+          int index) {
+        if (linkedInContactBuilder_ == null) {
+          return linkedInContact_.get(index);  } else {
+          return linkedInContactBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.UserProto.LinkedInContactOrBuilder> 
+           getLinkedInContactOrBuilderList() {
+        if (linkedInContactBuilder_ != null) {
+          return linkedInContactBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(linkedInContact_);
+        }
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public com.janknspank.proto.UserProto.LinkedInContact.Builder addLinkedInContactBuilder() {
+        return getLinkedInContactFieldBuilder().addBuilder(
+            com.janknspank.proto.UserProto.LinkedInContact.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public com.janknspank.proto.UserProto.LinkedInContact.Builder addLinkedInContactBuilder(
+          int index) {
+        return getLinkedInContactFieldBuilder().addBuilder(
+            index, com.janknspank.proto.UserProto.LinkedInContact.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.LinkedInContact.Builder> 
+           getLinkedInContactBuilderList() {
+        return getLinkedInContactFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.UserProto.LinkedInContact, com.janknspank.proto.UserProto.LinkedInContact.Builder, com.janknspank.proto.UserProto.LinkedInContactOrBuilder> 
+          getLinkedInContactFieldBuilder() {
+        if (linkedInContactBuilder_ == null) {
+          linkedInContactBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.UserProto.LinkedInContact, com.janknspank.proto.UserProto.LinkedInContact.Builder, com.janknspank.proto.UserProto.LinkedInContactOrBuilder>(
+                  linkedInContact_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          linkedInContact_ = null;
+        }
+        return linkedInContactBuilder_;
+      }
+
+      // repeated .AddressBookContact address_book_contact = 10;
+      private java.util.List<com.janknspank.proto.UserProto.AddressBookContact> addressBookContact_ =
+        java.util.Collections.emptyList();
+      private void ensureAddressBookContactIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          addressBookContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.AddressBookContact>(addressBookContact_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.UserProto.AddressBookContact, com.janknspank.proto.UserProto.AddressBookContact.Builder, com.janknspank.proto.UserProto.AddressBookContactOrBuilder> addressBookContactBuilder_;
+
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.AddressBookContact> getAddressBookContactList() {
+        if (addressBookContactBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(addressBookContact_);
+        } else {
+          return addressBookContactBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public int getAddressBookContactCount() {
+        if (addressBookContactBuilder_ == null) {
+          return addressBookContact_.size();
+        } else {
+          return addressBookContactBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public com.janknspank.proto.UserProto.AddressBookContact getAddressBookContact(int index) {
+        if (addressBookContactBuilder_ == null) {
+          return addressBookContact_.get(index);
+        } else {
+          return addressBookContactBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder setAddressBookContact(
+          int index, com.janknspank.proto.UserProto.AddressBookContact value) {
+        if (addressBookContactBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAddressBookContactIsMutable();
+          addressBookContact_.set(index, value);
+          onChanged();
+        } else {
+          addressBookContactBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder setAddressBookContact(
+          int index, com.janknspank.proto.UserProto.AddressBookContact.Builder builderForValue) {
+        if (addressBookContactBuilder_ == null) {
+          ensureAddressBookContactIsMutable();
+          addressBookContact_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          addressBookContactBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder addAddressBookContact(com.janknspank.proto.UserProto.AddressBookContact value) {
+        if (addressBookContactBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAddressBookContactIsMutable();
+          addressBookContact_.add(value);
+          onChanged();
+        } else {
+          addressBookContactBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder addAddressBookContact(
+          int index, com.janknspank.proto.UserProto.AddressBookContact value) {
+        if (addressBookContactBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAddressBookContactIsMutable();
+          addressBookContact_.add(index, value);
+          onChanged();
+        } else {
+          addressBookContactBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder addAddressBookContact(
+          com.janknspank.proto.UserProto.AddressBookContact.Builder builderForValue) {
+        if (addressBookContactBuilder_ == null) {
+          ensureAddressBookContactIsMutable();
+          addressBookContact_.add(builderForValue.build());
+          onChanged();
+        } else {
+          addressBookContactBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder addAddressBookContact(
+          int index, com.janknspank.proto.UserProto.AddressBookContact.Builder builderForValue) {
+        if (addressBookContactBuilder_ == null) {
+          ensureAddressBookContactIsMutable();
+          addressBookContact_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          addressBookContactBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder addAllAddressBookContact(
+          java.lang.Iterable<? extends com.janknspank.proto.UserProto.AddressBookContact> values) {
+        if (addressBookContactBuilder_ == null) {
+          ensureAddressBookContactIsMutable();
+          super.addAll(values, addressBookContact_);
+          onChanged();
+        } else {
+          addressBookContactBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder clearAddressBookContact() {
+        if (addressBookContactBuilder_ == null) {
+          addressBookContact_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+        } else {
+          addressBookContactBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public Builder removeAddressBookContact(int index) {
+        if (addressBookContactBuilder_ == null) {
+          ensureAddressBookContactIsMutable();
+          addressBookContact_.remove(index);
+          onChanged();
+        } else {
+          addressBookContactBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public com.janknspank.proto.UserProto.AddressBookContact.Builder getAddressBookContactBuilder(
+          int index) {
+        return getAddressBookContactFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public com.janknspank.proto.UserProto.AddressBookContactOrBuilder getAddressBookContactOrBuilder(
+          int index) {
+        if (addressBookContactBuilder_ == null) {
+          return addressBookContact_.get(index);  } else {
+          return addressBookContactBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.UserProto.AddressBookContactOrBuilder> 
+           getAddressBookContactOrBuilderList() {
+        if (addressBookContactBuilder_ != null) {
+          return addressBookContactBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(addressBookContact_);
+        }
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public com.janknspank.proto.UserProto.AddressBookContact.Builder addAddressBookContactBuilder() {
+        return getAddressBookContactFieldBuilder().addBuilder(
+            com.janknspank.proto.UserProto.AddressBookContact.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public com.janknspank.proto.UserProto.AddressBookContact.Builder addAddressBookContactBuilder(
+          int index) {
+        return getAddressBookContactFieldBuilder().addBuilder(
+            index, com.janknspank.proto.UserProto.AddressBookContact.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.AddressBookContact.Builder> 
+           getAddressBookContactBuilderList() {
+        return getAddressBookContactFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.UserProto.AddressBookContact, com.janknspank.proto.UserProto.AddressBookContact.Builder, com.janknspank.proto.UserProto.AddressBookContactOrBuilder> 
+          getAddressBookContactFieldBuilder() {
+        if (addressBookContactBuilder_ == null) {
+          addressBookContactBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.UserProto.AddressBookContact, com.janknspank.proto.UserProto.AddressBookContact.Builder, com.janknspank.proto.UserProto.AddressBookContactOrBuilder>(
+                  addressBookContact_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          addressBookContact_ = null;
+        }
+        return addressBookContactBuilder_;
+      }
+
+      // repeated .Interest interest = 11;
+      private java.util.List<com.janknspank.proto.UserProto.Interest> interest_ =
+        java.util.Collections.emptyList();
+      private void ensureInterestIsMutable() {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+          interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>(interest_);
+          bitField0_ |= 0x00000400;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder> interestBuilder_;
+
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.Interest> getInterestList() {
+        if (interestBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(interest_);
+        } else {
+          return interestBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public int getInterestCount() {
+        if (interestBuilder_ == null) {
+          return interest_.size();
+        } else {
+          return interestBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public com.janknspank.proto.UserProto.Interest getInterest(int index) {
+        if (interestBuilder_ == null) {
+          return interest_.get(index);
+        } else {
+          return interestBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder setInterest(
+          int index, com.janknspank.proto.UserProto.Interest value) {
+        if (interestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInterestIsMutable();
+          interest_.set(index, value);
+          onChanged();
+        } else {
+          interestBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder setInterest(
+          int index, com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          interest_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          interestBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder addInterest(com.janknspank.proto.UserProto.Interest value) {
+        if (interestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInterestIsMutable();
+          interest_.add(value);
+          onChanged();
+        } else {
+          interestBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder addInterest(
+          int index, com.janknspank.proto.UserProto.Interest value) {
+        if (interestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInterestIsMutable();
+          interest_.add(index, value);
+          onChanged();
+        } else {
+          interestBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder addInterest(
+          com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          interest_.add(builderForValue.build());
+          onChanged();
+        } else {
+          interestBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder addInterest(
+          int index, com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          interest_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          interestBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder addAllInterest(
+          java.lang.Iterable<? extends com.janknspank.proto.UserProto.Interest> values) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          super.addAll(values, interest_);
+          onChanged();
+        } else {
+          interestBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder clearInterest() {
+        if (interestBuilder_ == null) {
+          interest_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000400);
+          onChanged();
+        } else {
+          interestBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public Builder removeInterest(int index) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          interest_.remove(index);
+          onChanged();
+        } else {
+          interestBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public com.janknspank.proto.UserProto.Interest.Builder getInterestBuilder(
+          int index) {
+        return getInterestFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
+          int index) {
+        if (interestBuilder_ == null) {
+          return interest_.get(index);  } else {
+          return interestBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
+           getInterestOrBuilderList() {
+        if (interestBuilder_ != null) {
+          return interestBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(interest_);
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public com.janknspank.proto.UserProto.Interest.Builder addInterestBuilder() {
+        return getInterestFieldBuilder().addBuilder(
+            com.janknspank.proto.UserProto.Interest.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public com.janknspank.proto.UserProto.Interest.Builder addInterestBuilder(
+          int index) {
+        return getInterestFieldBuilder().addBuilder(
+            index, com.janknspank.proto.UserProto.Interest.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.Interest.Builder> 
+           getInterestBuilderList() {
+        return getInterestFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder> 
+          getInterestFieldBuilder() {
+        if (interestBuilder_ == null) {
+          interestBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder>(
+                  interest_,
+                  ((bitField0_ & 0x00000400) == 0x00000400),
+                  getParentForChildren(),
+                  isClean());
+          interest_ = null;
+        }
+        return interestBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:UserAction)
     }
 
@@ -10019,18 +11105,21 @@ public final class UserProto {
       "\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n" +
       "\025ADDRESS_BOOK_CONTACTS\020\004\022\n\n\006INTENT\020\005\"M\n\016" +
       "InterestSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n" +
-      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\200\003\n\n",
+      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\217\004\n\n",
       "UserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
       "\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\0221\n\013actio" +
       "n_type\030\003 \001(\0162\026.UserAction.ActionTypeB\004\210\246" +
       "\035\001\022\034\n\006url_id\030\004 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\022\032\n\003url\030" +
       "\005 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\031\n\013create_time\030\006 \001(" +
       "\003B\004\210\246\035\001\022\027\n\017read_start_time\030\007 \001(\003\022\025\n\rread" +
-      "_end_time\030\010 \001(\003\"e\n\nActionType\022\014\n\010UNKNONW" +
-      "N\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM" +
-      "_STREAM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_ARTICLE\020\005:\026" +
-      "\212\265\030\022MongoDB.UserActionB!\n\024com.janknspank",
-      ".protoB\tUserProto"
+      "_end_time\030\010 \001(\003\0221\n\021linked_in_contact\030\t \003" +
+      "(\0132\020.LinkedInContactB\004\240\246\035\003\0227\n\024address_bo" +
+      "ok_contact\030\n \003(\0132\023.AddressBookContactB\004\240" +
+      "\246\035\003\022!\n\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\"e",
+      "\n\nActionType\022\014\n\010UNKNONWN\020\000\022\014\n\010FAVORITE\020\001" +
+      "\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005SHAR" +
+      "E\020\004\022\020\n\014READ_ARTICLE\020\005:\026\212\265\030\022MongoDB.UserA" +
+      "ctionB!\n\024com.janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10084,7 +11173,7 @@ public final class UserProto {
           internal_static_UserAction_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UserAction_descriptor,
-              new java.lang.String[] { "Id", "UserId", "ActionType", "UrlId", "Url", "CreateTime", "ReadStartTime", "ReadEndTime", });
+              new java.lang.String[] { "Id", "UserId", "ActionType", "UrlId", "Url", "CreateTime", "ReadStartTime", "ReadEndTime", "LinkedInContact", "AddressBookContact", "Interest", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -10153,6 +11242,9 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           return registry;
         }

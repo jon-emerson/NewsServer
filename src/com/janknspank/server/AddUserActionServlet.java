@@ -1,5 +1,7 @@
 package com.janknspank.server;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,9 +9,12 @@ import org.json.JSONObject;
 
 import com.google.common.base.Strings;
 import com.janknspank.bizness.GuidFactory;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
 
@@ -39,6 +44,19 @@ public class AddUserActionServlet extends StandardServlet {
         .setUrl(urlParam)
         .setUrlId(urlIdParam)
         .setCreateTime(System.currentTimeMillis());
+    
+    // Save user model components to the user action. If they change later
+    // then we won't lose the context for the neural network
+    // Note: getInterests returns only non-tombstoned interests
+    List<Interest> userInterests = UserInterests.getInterests(user);
+    actionBuilder.addAllInterest(userInterests);
+    for (Interest userInterest : userInterests) {
+      if (userInterest.getType() == InterestType.ADDRESS_BOOK_CONTACTS) {
+        actionBuilder.addAllAddressBookContact(user.getAddressBookContactList());
+      } else if (userInterest.getType() == InterestType.LINKED_IN_CONTACTS) {
+        actionBuilder.addAllLinkedInContact(user.getLinkedInContactList());
+      }
+    }
 
     if (actionType == UserAction.ActionType.READ_ARTICLE) {
       if (Strings.isNullOrEmpty(readStartTimeParam)) {

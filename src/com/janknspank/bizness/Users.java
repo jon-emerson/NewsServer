@@ -21,6 +21,11 @@ public class Users {
   public static User getByUserId(String userId) throws DatabaseSchemaException {
     return Database.with(User.class).get(userId);
   }
+  
+  public static Iterable<User> getByUserIds(Iterable<String> userIds) 
+      throws DatabaseSchemaException {
+    return Database.with(User.class).get(userIds);
+  }
 
   /** Helper method for creating the User table. */
   public static void main(String args[]) throws Exception {

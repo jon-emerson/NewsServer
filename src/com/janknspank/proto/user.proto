@@ -244,4 +244,22 @@ message UserAction {
 
   // IFF ActionType == READ_ARTICLE
   optional int64 read_end_time = 8;
+
+  repeated LinkedInContact linked_in_contact = 9 [
+    // Excluded because we want to prune tombstones and what they tombstone
+    // from the response.
+    (client_serialization) = EXCLUDE
+  ];
+
+  repeated AddressBookContact address_book_contact = 10 [
+    // Excluded because we want to prune tombstones and what they tombstone
+    // from the response.
+    (client_serialization) = EXCLUDE
+  ];
+
+  repeated Interest interest = 11 [
+    // Excluded because we want to prune tombstones and what they tombstone
+    // from the response.
+    (client_serialization) = EXCLUDE
+  ];
 }

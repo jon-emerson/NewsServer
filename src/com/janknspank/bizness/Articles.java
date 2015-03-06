@@ -185,19 +185,6 @@ public class Articles {
     return Database.with(Article.class).getFirst(new QueryOption.AscendingSort("rand()"));
   }
 
-  /**
-   * Returns a random untrained article
-   */
-  public static Article getRandomUntrainedArticle() throws DatabaseSchemaException {
-    Article article;
-    Iterable<TrainedArticleIndustry> taggedIndustries;
-    do {
-      article = Articles.getRandomArticle();
-      taggedIndustries = TrainedArticleIndustries.getFromArticle(article.getUrlId());
-    } while (!Iterables.isEmpty(taggedIndustries));
-    return article;
-  }
-
   public static Iterable<Article> getArticlesForContacts(
       User user, InterestType contactType, int limit) throws DatabaseSchemaException {
     // Kinda hacky but it works and re-uses code.
