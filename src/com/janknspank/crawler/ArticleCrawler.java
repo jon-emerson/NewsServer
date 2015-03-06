@@ -42,7 +42,7 @@ import com.janknspank.proto.CrawlerProto.SiteManifest;
  */
 public class ArticleCrawler implements Callable<Void> {
   private static final Logger LOG = new Logger(ArticleCrawler.class);
-  public static final int THREAD_COUNT = 20;
+  public static final int THREAD_COUNT = 5;
 
   private final SiteManifest manifest;
   private final static CrawlHistory.Builder CRAWL_HISTORY_BUILDER = CrawlHistory.newBuilder();
