@@ -284,12 +284,16 @@ public class LinkedInLoginHandler {
       DocumentNode linkedInProfileDocument) {
     Interest linkedInContactInterest = null;
     final Set<Integer> userIndustryCodes = new HashSet<>();
+    final Set<Interest> tombstonedEntityInterests = new HashSet<>();
     for (Interest interest : user.getInterestList()) {
       if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
         linkedInContactInterest = interest;
       } else if (interest.getType() == InterestType.INDUSTRY 
           && interest.getSource() == InterestSource.USER) {
         userIndustryCodes.add(interest.getIndustryCode());
+      } else if (interest.getType() == InterestType.ENTITY
+          && interest.getSource() == InterestSource.TOMBSTONE) {
+        tombstonedEntityInterests.add(interest);
       }
     }
     if (linkedInContactInterest == null) {
@@ -315,8 +319,17 @@ public class LinkedInLoginHandler {
               public boolean apply(Interest interest) {
                 // Filter out any industries from the linkedIn profile that the
                 // user has already explicitly added.
-                return interest.getType() != InterestType.INDUSTRY
-                    || !userIndustryCodes.contains(interest.getIndustryCode());
+                if (interest.getType() == InterestType.INDUSTRY 
+                    && userIndustryCodes.contains(interest.getIndustryCode())) {
+                  return false;
+                } else if (interest.getType() == InterestType.ENTITY) {
+                  for (Interest tombstonedInterest : tombstonedEntityInterests) {
+                    if (UserInterests.equals(tombstonedInterest, interest)) {
+                      return false;
+                    }
+                  }
+                }
+                return true;
               }
             }),
         ImmutableList.of(linkedInContactInterest));
