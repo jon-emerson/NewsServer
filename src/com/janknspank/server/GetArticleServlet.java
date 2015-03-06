@@ -32,6 +32,11 @@ public class GetArticleServlet extends StandardServlet {
           article.getParagraphList()));
     }
 
+    // Replace the published time with the crawl time, since people often just
+    // give a date for a publish time, so without this, the clients are showing
+    // midnight as most articles' ages.
+    articleJson.put("published_time", Long.toString(article.getCrawlTime()));
+
     // Create response.
     JSONObject response = createSuccessResponse();
     response.put("article", articleJson);

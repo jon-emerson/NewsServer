@@ -74,7 +74,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     // Replace the published time with the crawl time, since people often just
     // give a date for a publish time, so without this, the clients are showing
     // midnight as most articles' ages.
-    articleJson.put("published_time", article.getCrawlTime());
+    articleJson.put("published_time", Long.toString(article.getCrawlTime()));
 
     return articleJson;
   }
