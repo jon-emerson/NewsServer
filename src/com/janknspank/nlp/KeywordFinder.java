@@ -30,6 +30,7 @@ import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.common.StringHelper;
+import com.janknspank.crawler.RequiredFieldException;
 import com.janknspank.crawler.SiteParser;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -102,8 +103,10 @@ public class KeywordFinder {
   /**
    * Top level method: Finds all the keywords in an article, whether they be
    * in the article body, meta tags, wherever!
+   * @throws RequiredFieldException 
    */
-  public Iterable<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode) {
+  public Iterable<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode)
+      throws RequiredFieldException {
     List<ArticleKeyword> keywords = new ArrayList<ArticleKeyword>() {
       @Override
       public boolean add(ArticleKeyword keyword) {
@@ -230,8 +233,10 @@ public class KeywordFinder {
    * this Set only for meta keyword validation, and if a meta keyword doesn't
    * reference something that's the primary topic of an article, we don't need
    * it.
+   * @throws RequiredFieldException 
    */
-  private Set<String> getWordsInArticle(DocumentNode documentNode) {
+  private Set<String> getWordsInArticle(DocumentNode documentNode)
+      throws RequiredFieldException {
     Iterable<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
     articleNodes = Iterables.limit(articleNodes,
         (int) Math.ceil(((double) Iterables.size(articleNodes)) * 2 / 3)); 
@@ -257,8 +262,8 @@ public class KeywordFinder {
     return false;
   }
 
-  private Multiset<String> getKeywordsFromMetaContent(
-      DocumentNode documentNode, Node metaNode) {
+  private Multiset<String> getKeywordsFromMetaContent(DocumentNode documentNode, Node metaNode)
+      throws RequiredFieldException {
     Set<String> wordsInArticle = getWordsInArticle(documentNode);
 
     // Find the best delimiter to split on based on which is more prevalent.
@@ -280,7 +285,8 @@ public class KeywordFinder {
   }
 
   private Iterable<ArticleKeyword> findKeywordsInMetaTags(
-      final String urlId, DocumentNode documentNode) {
+      final String urlId, DocumentNode documentNode)
+      throws RequiredFieldException {
     final Multiset<String> keywords = HashMultiset.create();
     for (Node metaNode : documentNode.findAll(ImmutableList.of(
         "html > head > meta[name=\"keywords\"]",
@@ -307,9 +313,10 @@ public class KeywordFinder {
    * Uses the structure of the hypertext to try to figure out proper nouns and
    * other keywords in the article's paragraphs.  E.g. often times sites link
    * people names and companies to other web pages - use this to find entities!
+   * @throws RequiredFieldException 
    */
   private static Iterable<ArticleKeyword> findKeywordsFromHypertext(
-      final String urlId, DocumentNode documentNode) {
+      final String urlId, DocumentNode documentNode) throws RequiredFieldException {
     // Find all the Nodes inside paragraphs that do not have any children.
     // E.g. if we had <p><a href="#">Michael Douglass</a> is awesome</p>,
     // this method would return the <a> node only.

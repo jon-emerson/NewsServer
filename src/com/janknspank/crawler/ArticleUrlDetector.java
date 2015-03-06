@@ -2,14 +2,11 @@ package com.janknspank.crawler;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
-import com.google.api.client.repackaged.com.google.common.base.Throwables;
 import com.google.common.base.Predicate;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.proto.CrawlerProto.SiteManifest.ArticleUrlPattern;
@@ -25,14 +22,30 @@ public class ArticleUrlDetector {
       return ArticleUrlDetector.isArticle(url);
     }
   };
-  private static final LoadingCache<String, Pattern> PATTERN_CACHE = CacheBuilder.newBuilder()
-      .maximumSize(1000)
-      .build(
-          new CacheLoader<String, Pattern>() {
-            public Pattern load(String regex) {
-              return Pattern.compile(regex);
-            }
-          });
+
+  private static final PatternCache PATTERN_CACHE = new PatternCache();
+  private static class PatternCache extends ThreadLocal<LinkedHashMap<String, Pattern>> {
+    private static final int CACHE_SIZE_PER_THREAD = 100;
+
+    @Override
+    protected LinkedHashMap<String, Pattern> initialValue() {
+      return new LinkedHashMap<String, Pattern>() {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, Pattern> eldest) {
+          return size() > CACHE_SIZE_PER_THREAD;
+        }
+      };
+    }
+
+    public Pattern getPattern(final String regex) {
+      if (this.get().containsKey(regex)) {
+        return this.get().get(regex);
+      }
+      Pattern pattern = Pattern.compile(regex);
+      this.get().put(regex, pattern);
+      return pattern;
+    };
+  }
 
   public static boolean isArticle(String urlString) {
     URL url;
@@ -55,14 +68,8 @@ public class ArticleUrlDetector {
             || domain.equals(contentSite.getRootDomain())
             || Iterables.contains(contentSite.getAkaRootDomainList(), domain)) {
           matched = true;
-          try {
-            if (PATTERN_CACHE.get(articleUrlPattern.getPathRegex()).matcher(path).find()) {
-              return true;
-            }
-          } catch (ExecutionException e) {
-            Throwables.propagateIfPossible(e);
-            throw new Error("Bad pattern for domain: " + domain + "(\""
-                + articleUrlPattern.getPathRegex() + "\"), " + e.getMessage(), e);
+          if (PATTERN_CACHE.getPattern(articleUrlPattern.getPathRegex()).matcher(path).find()) {
+            return true;
           }
         }
       }

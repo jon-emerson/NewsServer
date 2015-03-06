@@ -6,27 +6,76 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
+import java.util.Map;
 
-import com.google.common.base.Throwables;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 
-public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
-  private static LoadingCache<DocumentNode, List<Node>> CACHE =
-      CacheBuilder.newBuilder()
-          .maximumSize(10)
-          .expireAfterWrite(10, TimeUnit.MINUTES)
-          .build(new SiteParser());
-
+public class SiteParser {
   private SiteParser() {}
+
+  private static NodeCache NODE_CACHE = new NodeCache();
+  private static class NodeCache
+      extends ThreadLocal<LinkedHashMap<String, List<Node>>> {
+    private static final int CACHE_SIZE_PER_THREAD = 5;
+
+    @Override
+    protected LinkedHashMap<String, List<Node>> initialValue() {
+      return new LinkedHashMap<String, List<Node>>() {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, List<Node>> eldest) {
+          return size() > CACHE_SIZE_PER_THREAD;
+        }
+      };
+    }
+
+    public List<Node> getNodes(final DocumentNode documentNode)
+        throws RequiredFieldException {
+      if (this.get().containsKey(documentNode.getUrl())) {
+        return this.get().get(documentNode.getUrl());
+      }
+
+      List<Node> paragraphs = new ArrayList<>();
+      for (String domAddress : getDomAddressesForUrl(documentNode.getUrl())) {
+        paragraphs.addAll(documentNode.findAll(domAddress));
+      }
+
+      // HACK(jonemerson): We should find a more extensible way of removing
+      // By-lines and other crap we pick up. This may do for now.
+      while (paragraphs.size() > 0 &&
+          paragraphs.get(0).getFlattenedText().toLowerCase().startsWith("by ") &&
+          paragraphs.get(0).getFlattenedText().length() < 100) {
+        // Remove "By XXX from Washington Post" etc. crap text.
+        paragraphs.remove(0);
+      }
+
+      // Remove trailing lines.  E.g. the "Have something to add to this story?
+      // Share it in the comments." <em> text on mashable.com, or "Chat with me
+      // on Twitter @peard33" <strong> text on latimes.com.
+      while (paragraphs.size() > 0) {
+        // Do allow <em>s and <strong>s if sufficiently embedded inside the
+        // paragraph.  (Ya... some sites do use them fairly.)
+        long paragraphOffset = paragraphs.get(paragraphs.size() - 1).getStartingOffset();
+        Node firstEm = Iterables.getLast(paragraphs, null).findFirst("em");
+        Node firstStrong = Iterables.getLast(paragraphs, null).findFirst("strong");
+        if ((firstEm != null && (firstEm.getStartingOffset() - paragraphOffset < 10)) ||
+            (firstStrong != null && (firstStrong.getStartingOffset() - paragraphOffset < 10))) {
+          paragraphs.remove(paragraphs.size() - 1);
+        } else {
+          break;
+        }
+      }
+
+      sortAndDedupe(paragraphs);
+
+      this.get().put(documentNode.getUrl(), paragraphs);
+      return paragraphs;
+    }
+  };
 
   /**
    * Returns the best set of DOM addresses we currently know about for the given
@@ -75,54 +124,10 @@ public class SiteParser extends CacheLoader<DocumentNode, List<Node>> {
   /**
    * Returns Nodes for all the paragraph / header / quote / etc content within
    * an article's web page.
+   * @throws RequiredFieldException 
    */
-  public static List<Node> getParagraphNodes(DocumentNode documentNode) {
-    try {
-      return CACHE.get(documentNode);
-    } catch (ExecutionException e) {
-      Throwables.propagateIfPossible(e.getCause());
-      throw new RuntimeException("Could not parse paragraphs: " + e.getMessage(), e);
-    }
-  }
-
-  /**
-   * DO NOT CALL THIS DIRECTLY.
-   * @see #getParagraphNodes(DocumentNode)
-   */
-  @Override
-  public List<Node> load(DocumentNode documentNode) {
-    List<Node> paragraphs = new ArrayList<>();
-    for (String domAddress : getDomAddressesForUrl(documentNode.getUrl())) {
-      paragraphs.addAll(documentNode.findAll(domAddress));
-    }
-
-    // HACK(jonemerson): We should find a more extensible way of removing
-    // By-lines and other crap we pick up. This may do for now.
-    while (paragraphs.size() > 0 &&
-        paragraphs.get(0).getFlattenedText().toLowerCase().startsWith("by ") &&
-        paragraphs.get(0).getFlattenedText().length() < 100) {
-      // Remove "By XXX from Washington Post" etc. crap text.
-      paragraphs.remove(0);
-    }
-
-    // Remove trailing lines.  E.g. the "Have something to add to this story?
-    // Share it in the comments." <em> text on mashable.com, or "Chat with me
-    // on Twitter @peard33" <strong> text on latimes.com.
-    while (paragraphs.size() > 0) {
-      // Do allow <em>s and <strong>s if sufficiently embedded inside the
-      // paragraph.  (Ya... some sites do use them fairly.)
-      long paragraphOffset = paragraphs.get(paragraphs.size() - 1).getStartingOffset();
-      Node firstEm = Iterables.getLast(paragraphs, null).findFirst("em");
-      Node firstStrong = Iterables.getLast(paragraphs, null).findFirst("strong");
-      if ((firstEm != null && (firstEm.getStartingOffset() - paragraphOffset < 10)) ||
-          (firstStrong != null && (firstStrong.getStartingOffset() - paragraphOffset < 10))) {
-        paragraphs.remove(paragraphs.size() - 1);
-      } else {
-        break;
-      }
-    }
-
-    sortAndDedupe(paragraphs);
-    return paragraphs;
+  public static List<Node> getParagraphNodes(DocumentNode documentNode)
+      throws RequiredFieldException {
+    return NODE_CACHE.getNodes(documentNode);
   }
 }
