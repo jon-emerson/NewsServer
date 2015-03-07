@@ -52,17 +52,15 @@ public class GetIndustriesServlet extends StandardServlet {
     String searchString = getParameter(req, "contains");
 
     ArrayList<FeatureId> matchingFeatureIds = Lists.newArrayList();
-    searchString = searchString.toLowerCase();
+    searchString = Strings.isNullOrEmpty(searchString) ? null : searchString.toLowerCase();
     for (FeatureId featureId : SORTED_INDUSTRY_FEATURE_IDS) {
-      if (featureId.getFeatureType() == FeatureType.INDUSTRY) {
-        // Put prefix matches at the front, other matches at the back.
-        if (!Strings.isNullOrEmpty(searchString)
-            && featureId.getTitle().toLowerCase().startsWith(searchString)) {
-          matchingFeatureIds.add(0, featureId);
-        } else if (Strings.isNullOrEmpty(searchString)
-            || featureId.getTitle().toLowerCase().contains(searchString)) {
-          matchingFeatureIds.add(featureId);
-        }
+      // Put prefix matches at the front, other matches at the back.
+      if (!Strings.isNullOrEmpty(searchString)
+          && featureId.getTitle().toLowerCase().startsWith(searchString)) {
+        matchingFeatureIds.add(0, featureId);
+      } else if (Strings.isNullOrEmpty(searchString)
+          || featureId.getTitle().toLowerCase().contains(searchString)) {
+        matchingFeatureIds.add(featureId);
       }
     }
 
