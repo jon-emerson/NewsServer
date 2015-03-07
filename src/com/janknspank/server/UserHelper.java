@@ -16,9 +16,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
@@ -142,7 +142,7 @@ public class UserHelper {
       if (interest.getType() == InterestType.INDUSTRY) {
         // This client needs to know industry names so it can render them!!
         interestJsonObject.put("name",
-            Industry.fromCode(interest.getIndustryCode()).getName());
+            FeatureId.fromId(interest.getIndustryCode()).getTitle());
       }
       jsonArray.put(interestJsonObject);
     }

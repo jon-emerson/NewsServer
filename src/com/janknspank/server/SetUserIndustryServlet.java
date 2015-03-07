@@ -11,6 +11,7 @@ import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Industry;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -19,6 +20,10 @@ import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 
+/**
+ * Toggles whether a user is following a specific industry, based on whether
+ * the "follow" parameter is true or false.
+ */
 @AuthenticationRequired(requestMethod = "POST")
 @ServletMapping(urlPattern = "/v1/set_user_industry")
 public class SetUserIndustryServlet extends StandardServlet {
@@ -26,13 +31,32 @@ public class SetUserIndustryServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     // Read parameters.
-    int industryCode = Integer.parseInt(getRequiredParameter(req, "industry_code"));
     String follow = getRequiredParameter(req, "follow");
+
+    // Industry feature ID: Historically this was passed as an industry_code.
+    // We've moved it away from being a LinkedIn ID, it's now our own invention.
+    // But to keep the client working, we accept either industry_code or id.
+    int featureIdValue;
+    String industryCodeStr = getParameter(req, "industry_code");
+    if (industryCodeStr != null) {
+      featureIdValue = Integer.parseInt(industryCodeStr);
+    } else {
+      featureIdValue = Integer.parseInt(getRequiredParameter(req, "id"));
+    }
+
     User user = getUser(req);
 
     // Parameter validation.
-    if (Industry.fromCode(industryCode) == null) {
-      throw new RequestException("industryCode is not valid");
+    FeatureId featureId = FeatureId.fromId(featureIdValue);
+    if (featureId == null) {
+      // See if it's a LinkedIn industry code.
+      Industry industry = Industry.fromCode(featureIdValue);
+      if (industry != null) {
+        featureId = industry.getFeatureId();
+        featureIdValue = featureId.getId();
+      } else {
+        throw new RequestException("Industry feature ID (id) is not valid");
+      }
     }
 
     // Business logic.
@@ -45,7 +69,7 @@ public class SetUserIndustryServlet extends StandardServlet {
     int index = 0;
     for (Interest interest : interests) {
       if (interest.getType() == InterestType.INDUSTRY
-          && interest.getIndustryCode() == industryCode) {
+          && interest.getIndustryCode() == featureIdValue) {
         existingIndustryInterest = interest;
         if (interest.getSource() != source) {
           interests.set(index, interest.toBuilder().setSource(source).build());
@@ -60,7 +84,7 @@ public class SetUserIndustryServlet extends StandardServlet {
           Interest.newBuilder()
               .setId(GuidFactory.generate())
               .setType(InterestType.INDUSTRY)
-              .setIndustryCode(industryCode)
+              .setIndustryCode(featureIdValue)
               .setSource(InterestSource.USER)
               .setCreateTime(System.currentTimeMillis())
               .build()));
@@ -70,5 +94,32 @@ public class SetUserIndustryServlet extends StandardServlet {
 
     // Write response.
     return createSuccessResponse();
+  }
+
+  /**
+   * Helper method for now: Switches industry_code values on user interests from
+   * LinkedIn industry codes to our Industry feature IDs.  Probably never want
+   * to run this after March 6th, when I wrote this.
+   */
+  public static void main(String args[]) throws DatabaseSchemaException, DatabaseRequestException {
+    for (User user : Database.with(User.class).get()) {
+      boolean userIsDirty = false;
+      List<Interest> interests = Lists.newArrayList(user.getInterestList());
+      for (int i = 0; i < interests.size(); i++) {
+        Interest.Builder interestBuilder = interests.get(i).toBuilder();
+        if (interestBuilder.getType() == InterestType.INDUSTRY) {
+          Industry industry = Industry.fromCode(interestBuilder.getIndustryCode());
+          if (industry != null) {
+            interestBuilder.setIndustryCode(industry.getFeatureId().getId());
+            interests.set(i, interestBuilder.build());
+            userIsDirty = true;
+          }
+        }
+      }
+      if (userIsDirty) {
+        System.out.println("Updating user...");
+        Database.with(User.class).set(user, "interest", interests);
+      }
+    }
   }
 }

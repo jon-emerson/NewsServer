@@ -109,7 +109,7 @@ public class Articles {
   public static Iterable<Article> getArticlesForInterests(
       User user, Iterable<Interest> interests, int limitPerType)
       throws DatabaseSchemaException {
-    List<Industry> industries = Lists.newArrayList();
+    List<FeatureId> featureIds = Lists.newArrayList();
     List<String> keywords = Lists.newArrayList();
     for (Interest interest : interests) {
       switch (interest.getType()) {
@@ -120,7 +120,7 @@ public class Articles {
           break;
 
         case INDUSTRY:
-          industries.add(Industry.fromCode(interest.getIndustryCode()));
+          featureIds.add(FeatureId.fromId(interest.getIndustryCode()));
           break;
 
         case LINKED_IN_CONTACTS:
@@ -144,7 +144,7 @@ public class Articles {
     // TODO(jonemerson): Each query should be a future.  The response should be
     // a transforming future that dedupes the results.
     return Iterables.concat(
-        getArticlesByIndustries(industries, limitPerType),
+        getArticlesByFeatureId(featureIds, limitPerType),
         getArticlesForKeywords(keywords, limitPerType));
   }
   
@@ -160,17 +160,17 @@ public class Articles {
    * Gets a list of articles tailored specifically to the specified
    * industries.
    */
-  public static Iterable<Article> getArticlesByIndustries(
-      Iterable<Industry> industries, int limit) throws DatabaseSchemaException {
-    if (Iterables.isEmpty(industries)) {
+  public static Iterable<Article> getArticlesByFeatureId(
+      Iterable<FeatureId> featureIds, int limit) throws DatabaseSchemaException {
+    if (Iterables.isEmpty(featureIds)) {
       return ImmutableList.of();
     }
     return Database.with(Article.class).get(
-        new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(industries,
-            new Function<Industry, Number>() {
+        new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(featureIds,
+            new Function<FeatureId, Number>() {
           @Override
-          public Number apply(Industry industry) {
-            return Industry.fromCode(industry.getCode()).getFeatureId().getId();
+          public Number apply(FeatureId featureId) {
+            return featureId.getId();
           }
         })),
         new QueryOption.DescendingSort("published_time"),

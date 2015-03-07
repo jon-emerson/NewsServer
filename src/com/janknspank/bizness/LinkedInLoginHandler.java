@@ -283,14 +283,14 @@ public class LinkedInLoginHandler {
   private Iterable<Interest> getUpdatedInterests(UserOrBuilder user,
       DocumentNode linkedInProfileDocument) {
     Interest linkedInContactInterest = null;
-    final Set<Integer> userIndustryCodes = new HashSet<>();
+    final Set<Integer> userIndustryFeatureIds = new HashSet<>();
     final Set<Interest> tombstonedEntityInterests = new HashSet<>();
     for (Interest interest : user.getInterestList()) {
       if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
         linkedInContactInterest = interest;
       } else if (interest.getType() == InterestType.INDUSTRY 
           && interest.getSource() == InterestSource.USER) {
-        userIndustryCodes.add(interest.getIndustryCode());
+        userIndustryFeatureIds.add(interest.getIndustryCode());
       } else if (interest.getType() == InterestType.ENTITY
           && interest.getSource() == InterestSource.TOMBSTONE) {
         tombstonedEntityInterests.add(interest);
@@ -320,7 +320,7 @@ public class LinkedInLoginHandler {
                 // Filter out any industries from the linkedIn profile that the
                 // user has already explicitly added.
                 if (interest.getType() == InterestType.INDUSTRY 
-                    && userIndustryCodes.contains(interest.getIndustryCode())) {
+                    && userIndustryFeatureIds.contains(interest.getIndustryCode())) {
                   return false;
                 } else if (interest.getType() == InterestType.ENTITY) {
                   for (Interest tombstonedInterest : tombstonedEntityInterests) {
@@ -378,7 +378,7 @@ public class LinkedInLoginHandler {
       interests.add(Interest.newBuilder()
               .setId(GuidFactory.generate())
               .setType(InterestType.INDUSTRY)
-              .setIndustryCode(industry.getCode())
+              .setIndustryCode(industry.getFeatureId().getId())
               .setSource(InterestSource.LINKED_IN_PROFILE)
               .setCreateTime(System.currentTimeMillis())
               .build());
