@@ -56,6 +56,10 @@ public class NewsServlet extends HttpServlet {
     return null;
   }
 
+  public boolean hasParameter(HttpServletRequest request, String key) {
+    return request.getParameterMap().containsKey(key);
+  }
+
   /**
    * Gets a parameter, or throws a DatabaseRequestException.
    */
@@ -251,9 +255,18 @@ public class NewsServlet extends HttpServlet {
    * TODO(jonemerson): There's probably a better way to write a JSONObject
    * to a OutputStream besides converting the whole thing to a String first.
    */
-  protected void writeJson(HttpServletResponse resp, JSONObject o) throws IOException {
+  protected void writeJson(HttpServletRequest req, HttpServletResponse resp, JSONObject o)
+      throws IOException {
     resp.setContentType("application/json; charset=utf-8");
-    resp.getOutputStream().write(o.toString().getBytes());
+    if (hasParameter(req, "indent")) {
+      int indentFactor = 2;
+      try {
+        indentFactor = Integer.parseInt(getParameter(req, "indent"));
+      } catch (Exception e) {}
+      resp.getOutputStream().write(o.toString(indentFactor).getBytes());
+    } else {
+      resp.getOutputStream().write(o.toString().getBytes());
+    }
   }
 
   protected final JSONObject createSuccessResponse() {

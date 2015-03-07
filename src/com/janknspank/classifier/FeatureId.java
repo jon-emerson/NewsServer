@@ -37,7 +37,6 @@ public enum FeatureId {
   COMPUTER_GAMES(10524, FeatureType.INDUSTRY, "Computer Games"),
   ARTS(10525, FeatureType.INDUSTRY, "Arts"),
   COMPUTER_AND_NETWORK_SECURITY(10526, FeatureType.INDUSTRY, "Computer and Network Security"),
-  MEDIA_PRODUCTION(10527, FeatureType.INDUSTRY, "Media Production"),
   PHOTOGRAPHY(10528, FeatureType.INDUSTRY, "Photography"),
   BUSINESS_SUPPLIES_AND_EQUIPMENT(10529, FeatureType.INDUSTRY, "Business Supplies and Equipment"),
   WINE_AND_SPIRITS(10530, FeatureType.INDUSTRY, "Wine and Spirits"),

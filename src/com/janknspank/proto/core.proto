@@ -473,8 +473,14 @@ message PushNotification {
     (string_charset) = LATIN1
   ];
 
+  // Identifier for the computer who initiated this notification.
+  optional string host = 8 [
+    (string_length) = 100,
+    (string_charset) = LATIN1
+  ];
+
   // The actual text that we sent to the user.
-  optional string text = 8 [
+  optional string text = 9 [
     (required) = YES,
     (string_length) = 1024
   ];

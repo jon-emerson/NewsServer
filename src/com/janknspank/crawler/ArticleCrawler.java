@@ -1,6 +1,5 @@
 package com.janknspank.crawler;
 
-import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,6 +21,7 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Links;
 import com.janknspank.bizness.Urls;
+import com.janknspank.common.Host;
 import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -254,17 +254,9 @@ public class ArticleCrawler implements Callable<Void> {
     @Override
     public void run() {
       try {
-        String host = System.getenv("DYNO");
-        if (host == null) {
-          try {
-            host = java.net.InetAddress.getLocalHost().getHostName();
-          } catch (UnknownHostException e) {
-            throw new Error(e);
-          }
-        }
         CRAWL_HISTORY_BUILDER
             .setCrawlId(GuidFactory.generate())
-            .setHost(host)
+            .setHost(Host.get())
             .setStartTime(System.currentTimeMillis());
         Database.insert(CRAWL_HISTORY_BUILDER.build());
 

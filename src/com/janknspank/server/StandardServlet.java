@@ -43,20 +43,20 @@ public abstract class StandardServlet extends NewsServlet {
       } else {
         Asserts.assertTrue(response.getBoolean("success"), "success in response",
             BiznessException.class);
-        writeJson(resp, response);
+        writeJson(req, resp, response);
       }
     } catch (RedirectException e) {
       resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
       resp.setHeader("Location", e.getNextUrl());
     } catch (NotFoundException e) {
       resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-      writeJson(resp, getErrorJson(e.getMessage()));
+      writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-      writeJson(resp, getErrorJson(e.getMessage()));
+      writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (RequestException e) {
       resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-      writeJson(resp, getErrorJson(e.getMessage()));
+      writeJson(req, resp, getErrorJson(e.getMessage()));
     }
   }
 
@@ -73,19 +73,19 @@ public abstract class StandardServlet extends NewsServlet {
       JSONObject response = doPostInternal(req, resp);
       Asserts.assertTrue(response.getBoolean("success"), "success in response",
           BiznessException.class);
-      writeJson(resp, response);
+      writeJson(req, resp, response);
     } catch (UnsupportedOperationException e) {
       resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
-      writeJson(resp, getErrorJson(e.getMessage()));
+      writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (NotFoundException e) {
       resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-      writeJson(resp, getErrorJson(e.getMessage()));
+      writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-      writeJson(resp, getErrorJson(e.getMessage()));
+      writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (RequestException e) {
       resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-      writeJson(resp, getErrorJson(e.getMessage()));
+      writeJson(req, resp, getErrorJson(e.getMessage()));
     }
   }
 }

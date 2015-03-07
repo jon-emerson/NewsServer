@@ -14998,9 +14998,36 @@ public final class CoreProto {
     com.google.protobuf.ByteString
         getDeviceIdBytes();
 
-    // optional string text = 8;
+    // optional string host = 8;
     /**
-     * <code>optional string text = 8;</code>
+     * <code>optional string host = 8;</code>
+     *
+     * <pre>
+     * Identifier for the computer who initiated this notification.
+     * </pre>
+     */
+    boolean hasHost();
+    /**
+     * <code>optional string host = 8;</code>
+     *
+     * <pre>
+     * Identifier for the computer who initiated this notification.
+     * </pre>
+     */
+    java.lang.String getHost();
+    /**
+     * <code>optional string host = 8;</code>
+     *
+     * <pre>
+     * Identifier for the computer who initiated this notification.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getHostBytes();
+
+    // optional string text = 9;
+    /**
+     * <code>optional string text = 9;</code>
      *
      * <pre>
      * The actual text that we sent to the user.
@@ -15008,7 +15035,7 @@ public final class CoreProto {
      */
     boolean hasText();
     /**
-     * <code>optional string text = 8;</code>
+     * <code>optional string text = 9;</code>
      *
      * <pre>
      * The actual text that we sent to the user.
@@ -15016,7 +15043,7 @@ public final class CoreProto {
      */
     java.lang.String getText();
     /**
-     * <code>optional string text = 8;</code>
+     * <code>optional string text = 9;</code>
      *
      * <pre>
      * The actual text that we sent to the user.
@@ -15123,6 +15150,11 @@ public final class CoreProto {
             }
             case 66: {
               bitField0_ |= 0x00000080;
+              host_ = input.readBytes();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
               text_ = input.readBytes();
               break;
             }
@@ -15423,21 +15455,76 @@ public final class CoreProto {
       }
     }
 
-    // optional string text = 8;
-    public static final int TEXT_FIELD_NUMBER = 8;
+    // optional string host = 8;
+    public static final int HOST_FIELD_NUMBER = 8;
+    private java.lang.Object host_;
+    /**
+     * <code>optional string host = 8;</code>
+     *
+     * <pre>
+     * Identifier for the computer who initiated this notification.
+     * </pre>
+     */
+    public boolean hasHost() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string host = 8;</code>
+     *
+     * <pre>
+     * Identifier for the computer who initiated this notification.
+     * </pre>
+     */
+    public java.lang.String getHost() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          host_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string host = 8;</code>
+     *
+     * <pre>
+     * Identifier for the computer who initiated this notification.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getHostBytes() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        host_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string text = 9;
+    public static final int TEXT_FIELD_NUMBER = 9;
     private java.lang.Object text_;
     /**
-     * <code>optional string text = 8;</code>
+     * <code>optional string text = 9;</code>
      *
      * <pre>
      * The actual text that we sent to the user.
      * </pre>
      */
     public boolean hasText() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional string text = 8;</code>
+     * <code>optional string text = 9;</code>
      *
      * <pre>
      * The actual text that we sent to the user.
@@ -15458,7 +15545,7 @@ public final class CoreProto {
       }
     }
     /**
-     * <code>optional string text = 8;</code>
+     * <code>optional string text = 9;</code>
      *
      * <pre>
      * The actual text that we sent to the user.
@@ -15486,6 +15573,7 @@ public final class CoreProto {
       urlId_ = "";
       deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
       deviceId_ = "";
+      host_ = "";
       text_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -15522,7 +15610,10 @@ public final class CoreProto {
         output.writeBytes(7, getDeviceIdBytes());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(8, getTextBytes());
+        output.writeBytes(8, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, getTextBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -15563,7 +15654,11 @@ public final class CoreProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, getTextBytes());
+          .computeBytesSize(8, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getTextBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15699,8 +15794,10 @@ public final class CoreProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         deviceId_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
-        text_ = "";
+        host_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
+        text_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -15760,6 +15857,10 @@ public final class CoreProto {
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
+        result.host_ = host_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
         result.text_ = text_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -15806,8 +15907,13 @@ public final class CoreProto {
           deviceId_ = other.deviceId_;
           onChanged();
         }
-        if (other.hasText()) {
+        if (other.hasHost()) {
           bitField0_ |= 0x00000080;
+          host_ = other.host_;
+          onChanged();
+        }
+        if (other.hasText()) {
+          bitField0_ |= 0x00000100;
           text_ = other.text_;
           onChanged();
         }
@@ -16310,20 +16416,118 @@ public final class CoreProto {
         return this;
       }
 
-      // optional string text = 8;
+      // optional string host = 8;
+      private java.lang.Object host_ = "";
+      /**
+       * <code>optional string host = 8;</code>
+       *
+       * <pre>
+       * Identifier for the computer who initiated this notification.
+       * </pre>
+       */
+      public boolean hasHost() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string host = 8;</code>
+       *
+       * <pre>
+       * Identifier for the computer who initiated this notification.
+       * </pre>
+       */
+      public java.lang.String getHost() {
+        java.lang.Object ref = host_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          host_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 8;</code>
+       *
+       * <pre>
+       * Identifier for the computer who initiated this notification.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getHostBytes() {
+        java.lang.Object ref = host_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          host_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 8;</code>
+       *
+       * <pre>
+       * Identifier for the computer who initiated this notification.
+       * </pre>
+       */
+      public Builder setHost(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 8;</code>
+       *
+       * <pre>
+       * Identifier for the computer who initiated this notification.
+       * </pre>
+       */
+      public Builder clearHost() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        host_ = getDefaultInstance().getHost();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 8;</code>
+       *
+       * <pre>
+       * Identifier for the computer who initiated this notification.
+       * </pre>
+       */
+      public Builder setHostBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string text = 9;
       private java.lang.Object text_ = "";
       /**
-       * <code>optional string text = 8;</code>
+       * <code>optional string text = 9;</code>
        *
        * <pre>
        * The actual text that we sent to the user.
        * </pre>
        */
       public boolean hasText() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional string text = 8;</code>
+       * <code>optional string text = 9;</code>
        *
        * <pre>
        * The actual text that we sent to the user.
@@ -16341,7 +16545,7 @@ public final class CoreProto {
         }
       }
       /**
-       * <code>optional string text = 8;</code>
+       * <code>optional string text = 9;</code>
        *
        * <pre>
        * The actual text that we sent to the user.
@@ -16361,7 +16565,7 @@ public final class CoreProto {
         }
       }
       /**
-       * <code>optional string text = 8;</code>
+       * <code>optional string text = 9;</code>
        *
        * <pre>
        * The actual text that we sent to the user.
@@ -16372,26 +16576,26 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         text_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string text = 8;</code>
+       * <code>optional string text = 9;</code>
        *
        * <pre>
        * The actual text that we sent to the user.
        * </pre>
        */
       public Builder clearText() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         text_ = getDefaultInstance().getText();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string text = 8;</code>
+       * <code>optional string text = 9;</code>
        *
        * <pre>
        * The actual text that we sent to the user.
@@ -16402,7 +16606,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         text_ = value;
         onChanged();
         return this;
@@ -16586,16 +16790,17 @@ public final class CoreProto {
       "_type\030\003 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice" +
       "_id\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013create_time\030\005" +
       " \001(\003B\004\210\246\035\001:\036\212\265\030\032MongoDB.DeviceRegistrati" +
-      "on\"\244\002\n\020PushNotification\022 \n\002id\030\001 \001(\tB\024\210\246\035" +
+      "on\"\274\002\n\020PushNotification\022 \n\002id\030\001 \001(\tB\024\210\246\035" +
       "\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\031\n\013create_time\030\002 \001(\003B\004" +
       "\210\246\035\001\022\022\n\nclick_time\030\003 \001(\003\022!\n\007user_id\030\004 \001(" +
       "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035" +
       "\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\006 \001(\0162\013.DeviceT" +
       "ypeB\004\210\246\035\001\022\037\n\tdevice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246" +
-      "\035\001\022\027\n\004text\030\010 \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030MongoDB",
-      ".PushNotification*/\n\nDeviceType\022\013\n\007UNKNO" +
-      "WN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.jankns" +
-      "pank.protoB\tCoreProto"
+      "\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\t",
+      "B\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030MongoDB.PushNotificatio" +
+      "n*/\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID\020" +
+      "\001\022\007\n\003IOS\020\002B!\n\024com.janknspank.protoB\tCore" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -16703,7 +16908,7 @@ public final class CoreProto {
           internal_static_PushNotification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PushNotification_descriptor,
-              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Text", });
+              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Host", "Text", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -16858,6 +17063,8 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);

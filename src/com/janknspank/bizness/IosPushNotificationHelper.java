@@ -18,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 import com.google.common.collect.Maps;
+import com.janknspank.common.Host;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -223,6 +224,7 @@ public class IosPushNotificationHelper {
         .setUrlId(article.getUrlId())
         .setDeviceId(registration.getDeviceId())
         .setDeviceType(registration.getDeviceType())
+        .setHost(Host.get())
         .setUserId(registration.getUserId())
         .build();
   }
