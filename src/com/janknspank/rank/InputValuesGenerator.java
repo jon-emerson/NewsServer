@@ -6,7 +6,6 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
@@ -27,8 +26,8 @@ import com.janknspank.proto.UserProto.User;
 public class InputValuesGenerator {
   public static double relevanceToUserIndustries(User user, Article article) {
     double relevance = 0;
-    for (Industry userIndustry : UserIndustries.getIndustries(user)) {
-      relevance += getSimilarityToIndustry(article, userIndustry);
+    for (FeatureId industryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
+      relevance += getSimilarityToIndustry(article, industryFeatureId);
     }
     return Math.min(1.0, relevance);
   }
@@ -109,7 +108,7 @@ public class InputValuesGenerator {
           FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
           if (StartupFeatureHelper.isStartupFeature(featureId) &&
               StartupFeatureHelper.isRelatedToIndustries(
-                  featureId, UserIndustries.getIndustries(user))) {
+                  featureId, UserIndustries.getIndustryFeatureIds(user))) {
             return articleFeature.getSimilarity();
           }
         }
@@ -136,9 +135,9 @@ public class InputValuesGenerator {
     return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
   }
 
-  public static double getSimilarityToIndustry(Article article, Industry industry) {
+  public static double getSimilarityToIndustry(Article article, FeatureId industryFeatureId) {
     ArticleFeature industryFeature =
-        ArticleFeatures.getFeature(article, industry.getFeatureId());
+        ArticleFeatures.getFeature(article, industryFeatureId);
     // Only value relevance greater than 66.7%.
     return (industryFeature == null) ? 0 :
         Math.max(0, industryFeature.getSimilarity() * 3 - 2);

@@ -5,6 +5,7 @@ import java.util.Set;
 import com.google.api.client.util.Sets;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
@@ -14,23 +15,23 @@ public class UserIndustries {
   /**
    * Returns a user's industry interests, accounting for tombstones and dupes.
    */
-  public static Iterable<Industry> getIndustries(UserOrBuilder user) {
-    Set<Integer> tombstonedIndustryCodes = Sets.newHashSet();
-    Set<Integer> industries = Sets.newHashSet();
+  public static Iterable<FeatureId> getIndustryFeatureIds(UserOrBuilder user) {
+    Set<Integer> tombstonedFeatureIds = Sets.newHashSet();
+    Set<Integer> featureIds = Sets.newHashSet();
     for (Interest interest : user.getInterestList()) {
       if (interest.getType() == InterestType.INDUSTRY) {
         if (interest.getSource() == InterestSource.TOMBSTONE) {
-          tombstonedIndustryCodes.add(interest.getIndustryCode());
+          tombstonedFeatureIds.add(interest.getIndustryCode());
         } else {
-          industries.add(interest.getIndustryCode());
+          featureIds.add(interest.getIndustryCode());
         }
       }
     }
-    industries.removeAll(tombstonedIndustryCodes);
-    return Iterables.transform(industries, new Function<Integer, Industry>() {
+    featureIds.removeAll(tombstonedFeatureIds);
+    return Iterables.transform(featureIds, new Function<Integer, FeatureId>() {
       @Override
-      public Industry apply(Integer industryCode) {
-        return Industry.fromCode(industryCode);
+      public FeatureId apply(Integer industryFeatureId) {
+        return FeatureId.fromId(industryFeatureId);
       }
     });
   }
