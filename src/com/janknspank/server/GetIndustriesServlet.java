@@ -40,7 +40,7 @@ public class GetIndustriesServlet extends StandardServlet {
     featureIds.sort(new Comparator<FeatureId>() {
       @Override
       public int compare(FeatureId featureId1, FeatureId featureId2) {
-        return featureId1.compareTo(featureId2);
+        return featureId1.getTitle().compareTo(featureId2.getTitle());
       }
     });
     SORTED_INDUSTRY_FEATURE_IDS = ImmutableList.copyOf(featureIds);
