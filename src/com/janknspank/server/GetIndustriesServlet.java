@@ -1,6 +1,8 @@
 package com.janknspank.server;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,9 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.janknspank.classifier.Feature;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.FeatureType;
 import com.janknspank.database.DatabaseSchemaException;
 
@@ -22,33 +27,51 @@ import com.janknspank.database.DatabaseSchemaException;
 @AuthenticationRequired
 @ServletMapping(urlPattern = "/v1/get_industries")
 public class GetIndustriesServlet extends StandardServlet {
+  private static final List<FeatureId> SORTED_INDUSTRY_FEATURE_IDS;
+  static {
+    List<FeatureId> featureIds = Lists.newArrayList(
+        Iterables.filter(ImmutableList.copyOf(FeatureId.values()),
+        new Predicate<FeatureId>() {
+          @Override
+          public boolean apply(FeatureId featureId) {
+            return featureId.getFeatureType() == FeatureType.INDUSTRY;
+          }
+        }));
+    featureIds.sort(new Comparator<FeatureId>() {
+      @Override
+      public int compare(FeatureId featureId1, FeatureId featureId2) {
+        return featureId1.compareTo(featureId2);
+      }
+    });
+    SORTED_INDUSTRY_FEATURE_IDS = ImmutableList.copyOf(featureIds);
+  }
 
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException {
     String searchString = getParameter(req, "contains");
 
-    ArrayList<Feature> matchingFeatures = Lists.newArrayList();
+    ArrayList<FeatureId> matchingFeatureIds = Lists.newArrayList();
     searchString = searchString.toLowerCase();
-    for (Feature feature : Feature.getAllFeatures()) {
-      if (feature.getFeatureId().getFeatureType() == FeatureType.INDUSTRY) {
+    for (FeatureId featureId : SORTED_INDUSTRY_FEATURE_IDS) {
+      if (featureId.getFeatureType() == FeatureType.INDUSTRY) {
         // Put prefix matches at the front, other matches at the back.
         if (!Strings.isNullOrEmpty(searchString)
-            && feature.getDescription().toLowerCase().startsWith(searchString)) {
-          matchingFeatures.add(0, feature);
+            && featureId.getTitle().toLowerCase().startsWith(searchString)) {
+          matchingFeatureIds.add(0, featureId);
         } else if (Strings.isNullOrEmpty(searchString)
-            || feature.getDescription().toLowerCase().contains(searchString)) {
-          matchingFeatures.add(feature);
+            || featureId.getTitle().toLowerCase().contains(searchString)) {
+          matchingFeatureIds.add(featureId);
         }
       }
     }
 
     JSONArray results = new JSONArray();
-    for (Feature feature : matchingFeatures) {
+    for (FeatureId featureId : matchingFeatureIds) {
       JSONObject industryJSON = new JSONObject();
-      industryJSON.put("keyword", feature.getDescription());
-      industryJSON.put("code", feature.getFeatureId().getId());
-      industryJSON.put("id", feature.getFeatureId().getId());
+      industryJSON.put("keyword", featureId.getTitle());
+      industryJSON.put("code", featureId.getId());
+      industryJSON.put("id", featureId.getId());
       results.put(industryJSON);
     }
 
