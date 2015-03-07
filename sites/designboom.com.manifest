@@ -1,0 +1,37 @@
+root_domain: "designboom.com"
+start_url: "http://www.designboom.com/"
+start_url: "http://www.designboom.com/architecture/"
+start_url: "http://www.designboom.com/art/"
+start_url: "http://www.designboom.com/design/"
+start_url: "http://www.designboom.com/technology/"
+paragraph_selector: ".Article p"
+path_blacklist {
+  needle: "/product-library/"
+}
+path_blacklist {
+  needle: "/shop/"
+}
+path_blacklist {
+  needle: "/search-result/"
+}
+article_url_pattern {
+  path_regex: "-[01][0-9]-[0-3][0-9]-20[0-9]{2}\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.designboom.com/art/urban-shapes-sebastian-weiss-03-06-2015/"
+    article_url: "http://www.designboom.com/architecture/welcome-shelter-longbush-ecosanctuary-new-zealand-sarosh-mulla-03-05-2015/"
+    article_url: "http://www.designboom.com/architecture/kawakubo-tomoyasu-house-in-nasu-japan-03-07-2015/"
+    article_url: "http://www.designboom.com/technology/touring-superleggera-berlinetta-lusso-geneva-motor-show-03-04-2015/"
+    article_url: "http://www.designboom.com/technology/bentley-exp-10-speed-6-concept-geneva-motor-show-03-05-2015/"
+    article_url: "http://www.designboom.com/architecture/francine-houben-mecanoo-interview-12-17-2014/"
+    article_url: "http://www.designboom.com/design/portable-hot-tub-jonathan-odom-03-07-2015/"
+    article_url: "http://www.designboom.com/design/barbara-bernat-hungarian-paper-money-design-02-24-2015/"
+    article_url: "http://www.designboom.com/architecture/reform-architekt-marcin-tomaszewski-reflective-mirror-izabelin-house-2-02-25-2015/"
+    non_article_url: "http://www.designboom.com/interviews/"
+    non_article_url: "http://www.designboom.com/interiors/"
+    non_article_url: "http://www.designboom.com/competition/lexus-design-award-2015/"
+    non_article_url: "http://www.designboom.com/tag/hello-kitty/"
+    non_article_url: "http://www.designboom.com/about-us/"
+  }
+}

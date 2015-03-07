@@ -1,0 +1,24 @@
+root_domain: "detail-online.com"
+start_url: "http://www.detail-online.com/"
+paragraph_selector: ".content-element p" # http://www.detail-online.com/architecture/news/
+paragraph_selector: ".entry-content p" # http://www.detail-online.com/daily/
+article_url_pattern {
+  path_regex: "\\-[0-9]{2,7}(\\.html|\\/)$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.detail-online.com/architecture/news/radical-makeover-town-hall-transformation-by-atelier-kempe-thill-024585.html"
+    article_url: "http://www.detail-online.com/architecture/news/on-the-wish-list-a-garden-shed-024534.html"
+    article_url: "http://www.detail-online.com/daily/we-have-liftoff-pole-house-by-f2-architecture-14453/"
+    article_url: "http://www.detail-online.com/architecture/news/digital-facade-design-rebuild-of-a-half-timbered-house-in-frankfurt-024560.html"
+    article_url: "http://www.detail-online.com/inspiration/production-hall-and-warehouse-for-wooden-goods-in-%C2%ADboehen-111954.html"
+    article_url: "http://www.detail-online.com/daily/crumpled-frank-gehrys-paper-bag-14435/"
+    article_url: "http://www.detail-online.com/daily/milk-carton-home-for-our-feathered-friends-14295/"
+    article_url: "http://www.detail-online.com/daily/london-design-festival-2011-2-61/"
+    non_article_url: "http://www.detail-online.com/daily/category/design/"
+    non_article_url: "http://www.detail-online.com/daily/interior-design/"
+    non_article_url: "http://www.detail-online.com/daily/autor/author/"
+    non_article_url: "http://www.detail-online.com/media-kit/"
+    non_article_url: "http://www.detail-online.com/architecture/topics/city-countryside/"
+  }
+}

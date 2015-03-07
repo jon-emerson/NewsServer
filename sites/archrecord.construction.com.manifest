@@ -1,0 +1,42 @@
+root_domain: "archrecord.construction.com"
+start_url: "http://archrecord.construction.com/"
+start_url: "http://archrecord.construction.com/features/critique/"
+start_url: "http://archrecord.construction.com/news/daily/default.aspx"
+paragraph_selector: "#articleBodyText p"
+paragraph_selector: "#article > p"
+path_blacklist {
+  needle: "/Search/"
+}
+path_blacklist {
+  needle: "/call4entries/"
+}
+path_blacklist {
+  needle: "/video/"
+}
+path_blacklist {
+  needle: "/yb/" # Content from other sites.
+}
+path_blacklist {
+  location: ENDS_WITH
+  needle: "/publicgallery.aspx"
+}
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/.+\\.asp$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://archrecord.construction.com/projects/Building_types_study/civic/2015/1503-Anaheim-Regional-Transportation-Intermodal-Center-HOK.asp"
+    article_url: "http://archrecord.construction.com/news/2015/03/150306-Print-it-Real-Good-First-powder-based-3D-Print-Cement-Structure-unveiled-at-UC-Berkeley.asp"
+    article_url: "http://archrecord.construction.com/community/editorial/2015/1503.asp"
+    article_url: "http://archrecord.construction.com/features/critique/2015/1502-Amnesia-at-Chartres.asp"
+    article_url: "http://archrecord.construction.com/features/2015/1503-Reflections-on-the-Box.asp"
+    article_url: "http://archrecord.construction.com/news/2015/02/150210-Knoll-to-Buy-BB-Italia.asp"
+    article_url: "http://archrecord.construction.com/residential/hotm/2015/1503-Meadow-Farm-House.asp"
+    article_url: "http://archrecord.construction.com/projects/building_types_study/multi-family-housing/2014/1410-Cloverdale749-Lorcan-O-Herlihy-Architects.asp"
+    non_article_url: "http://archrecord.construction.com/practice/"
+    non_article_url: "http://archrecord.construction.com/features/designvanguard/"
+    non_article_url: "http://archrecord.construction.com/features/designvanguard/2009.asp"
+    non_article_url: "http://archrecord.construction.com/calendar.asp"
+    non_article_url: "http://archrecord.construction.com/news/analytics/"
+  }
+}

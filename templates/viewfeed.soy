@@ -33,9 +33,9 @@
       <a href={$article.url}>{$article.url}</a>
       <p>{$article.description}</p>
       <p>Score: {$article.score}</p>
-      <p>Industry Classification: {$article.industry_classifications}</p>
-      <p>Facebook likes: {$article.fb_likes}, shares: {$article.fb_shares}, 
-          comments: {$article.fb_comments}</p>
+      <p>Features: <pre>{$article.features}</pre></p>
+      <p>Facebook score: {$article.fb_score}, likes: {$article.fb_likes},
+          shares: {$article.fb_shares}, comments: {$article.fb_comments}</p>
     </div>
   {/foreach}
 {/template}

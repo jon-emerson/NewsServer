@@ -1,0 +1,39 @@
+root_domain: "dwell.com"
+start_url: "http://www.dwell.com/"
+subdomain_blacklist: "store.dwell.com"
+paragraph_selector: ".content .field-item p"
+paragraph_selector: ".content .node-summary"
+path_blacklist {
+  needle: "/event-spotlight/"
+}
+path_blacklist {
+  needle: "/product-reviews/"
+}
+path_blacklist {
+  needle: "/user/"
+}
+path_blacklist {
+  location: CONTAINS
+  needle: "/slideshow/"
+}
+article_url_pattern {
+  path_regex: ".+\\/article\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.dwell.com/houses-we-love/article/renovation-near-sydney-opens-home-lush-garden"
+    article_url: "http://www.dwell.com/we-recommend/article/architecture-grid-quirky-ice-huts-dot-canadas-frozen-lakes"
+    article_url: "http://www.dwell.com/how/article/7-creative-ways-use-statement-textiles-home"
+    article_url: "http://www.dwell.com/product/article/smart-standing-desk-will-make-your-work-day-healthier"
+    article_url: "http://www.dwell.com/post/article/montreal-firm-receives-emerging-architectural-practice-award"
+    article_url: "http://www.dwell.com/city-guide/article/san-diego-ca"
+    article_url: "http://www.dwell.com/travel-reports/article/live-london-tea-ella-doran"
+    article_url: "http://www.dwell.com/green/article/8-products-indoor-and-urban-gardening"
+    article_url: "http://www.dwell.com/post/article/7-design-blogs-follow"
+    non_article_url: "http://www.dwell.com/homes"
+    non_article_url: "http://www.dwell.com/design-source/building-materials-and-renovations"
+    non_article_url: "http://www.dwell.com/design-source/org/kohler"
+    non_article_url: "http://www.dwell.com/culture/technology"
+    non_article_url: "http://www.dwell.com/articles"
+  }
+}

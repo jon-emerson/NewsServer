@@ -46,8 +46,16 @@ public class UrlFinder {
    * done!!  It's ALL THE URLs!!  We do not want to crawl them all!
    */
   public static List<String> findUrls(DocumentNode documentNode) {
+    List<Node> linkNodes = documentNode.findAll("html > body a[href]");
+    if (linkNodes.isEmpty()) {
+      // Some sites (like archrecord.construction.com) don't have <html> outer
+      // tags.  It's illegal, but it don't matter, we still gotta crawl 'em.
+      Node bodyNode = documentNode.findFirst("body");
+      linkNodes = bodyNode.findAll("a[href]");
+    }
+
     List<String> urlList = Lists.newArrayList();
-    for (Node linkNode : documentNode.findAll("html > body a[href]")) {
+    for (Node linkNode : linkNodes) {
       String href = linkNode.getAttributeValue("href");
       String hrefToLowerCase = href.toLowerCase();
       if (!hrefToLowerCase.startsWith("javascript:") &&

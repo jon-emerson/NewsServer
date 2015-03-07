@@ -64,15 +64,19 @@ public class DocumentBuilder {
     public void endElement(String namespaceURI,
         String localName,
         String qName) throws SAXException {
-      // Clean up text nodes.
-      currentNode.condenseTextChildren();
-
-      while (!(currentNode instanceof DocumentNode) &&
-          !currentNode.getTagName().equalsIgnoreCase(qName)) {
-        currentNode = currentNode.getParent();
+      Node node = currentNode;
+      while (!(node instanceof DocumentNode) &&
+          !node.getTagName().equalsIgnoreCase(qName)) {
+        node = node.getParent();
       }
-      if (!(currentNode instanceof DocumentNode)) {
-        currentNode = currentNode.getParent();
+      if (!(node instanceof DocumentNode)) {
+        // Clean up text nodes.
+        currentNode.condenseTextChildren();
+
+        // If we bubbled all the way up to the document node, then it's a stray
+        // end tag, and we should ignore it.  If not, it closes something, so
+        // set the current node to the parent of what was closed.
+        currentNode = node.getParent();
       }
     }
 

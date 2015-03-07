@@ -26,8 +26,7 @@ public class ViewFeedServlet extends StandardServlet {
       throws DatabaseSchemaException, RequestException {
     User user = getUser(req);
     if (user.getEmail().equals("tom.charytoniuk@gmail.com") ||
-        user.getEmail().equals("panaceaa@gmail.com") ||
-        user.getEmail().equals("chrysb@gmail.com")) {
+        user.getEmail().equals("panaceaa@gmail.com")) {
       // Debugging for Linkedinprofile document
 //      LinkedInProfile profile = user.getLinkedInProfile();
 //      DocumentNode linkedInProfileDocument = DocumentBuilder.build(null, 

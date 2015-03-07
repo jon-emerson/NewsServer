@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -297,6 +298,23 @@ public class ArticleCrawler implements Callable<Void> {
   public static void main(String args[]) throws Exception {
     long startTime = System.currentTimeMillis();
 
+    // If there's any arguments, use them as a filtering method on the manifests
+    // we process.  The Boolean marks whether we found the specified root domain
+    // in the manifests.
+    Map<String, Boolean> rootDomainMap = Maps.newHashMap();
+    for (String arg : args) {
+      String rootDomain = arg.trim();
+      if (rootDomainMap.containsKey(rootDomain)) {
+        throw new Error("Root domain specified more than once: " + rootDomain);
+      }
+      if (rootDomain.length() > 0) {
+        rootDomainMap.put(rootDomain, false);
+      }
+    }
+    if (!rootDomainMap.isEmpty()) {
+      System.out.println("Restricting crawl to: " + Joiner.on(", ").join(rootDomainMap.keySet()));
+    }
+
     try {
       // Record crawl history on a regular basis.
       new CommitCrawlHistoryThread().start();
@@ -309,12 +327,26 @@ public class ArticleCrawler implements Callable<Void> {
       List<SiteManifest> allManifests = Lists.newArrayList(SiteManifests.getList());
       Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
 
-      // Schedule all the threads.
-      ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+      // Create Callables (which will become threads once they're invoked) for
+      // every site that we're instructed to crawl.
       List<Callable<Void>> crawlers = Lists.newArrayList();
       for (SiteManifest manifest : allManifests) {
-        crawlers.add(new ArticleCrawler(manifest));
+        String rootDomain = manifest.getRootDomain();
+        if (rootDomainMap.isEmpty()) {
+          crawlers.add(new ArticleCrawler(manifest));
+        } else if (rootDomainMap.containsKey(rootDomain)) {
+          crawlers.add(new ArticleCrawler(manifest));
+          rootDomainMap.put(manifest.getRootDomain(), true);
+        }
       }
+      for (Map.Entry<String, Boolean> rootDomainMapEntry : rootDomainMap.entrySet()) {
+        if (!rootDomainMapEntry.getValue()) {
+          throw new Error("Could not find manifest for domain " + rootDomainMapEntry.getKey());
+        }
+      }
+
+      // Start the threads!
+      ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
       executor.invokeAll(crawlers);
       executor.shutdown();
       System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");

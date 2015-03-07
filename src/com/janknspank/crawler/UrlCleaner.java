@@ -73,6 +73,9 @@ public class UrlCleaner {
         path = path.substring(0, path.length() - "index.html".length());
       }
     }
+    if (host.equals("detail-online.com")) {
+      host = "www.detail-online.com";
+    }
     if (host.endsWith(".slate.com") || host.equals("slate.com")) {
       // Sometimes Slate paginates its articles - Make sure we always get a
       // single page.
