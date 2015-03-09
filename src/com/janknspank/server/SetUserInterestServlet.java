@@ -73,7 +73,7 @@ public class SetUserInterestServlet extends StandardServlet {
     } else if (interestType == InterestType.ENTITY) {
       // Validate entity parameters
       Entity entity;
-      if (interestEntityIdParam != null) {
+      if (!Strings.isNullOrEmpty(interestEntityIdParam)) {
         entity = Entities.getEntityById(interestEntityIdParam);
         if (entity == null) {
           throw new RequestException("Parameter 'interest[entity][id]' is invalid");
@@ -89,7 +89,8 @@ public class SetUserInterestServlet extends StandardServlet {
             throw new RequestException("Parameter 'interest[entity][type]' is invalid");
           }
 
-          entity = Entity.newBuilder().setId(GuidFactory.generate())
+          entity = Entity.newBuilder()
+              .setId(GuidFactory.generate())
               .setKeyword(interestEntityKeywordParam)
               .setSource(Entity.Source.USER)
               .setType(interestEntityTypeParam)

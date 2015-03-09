@@ -57,6 +57,28 @@ public class Entities extends CacheLoader<String, Entity> {
 
   /** Helper method for creating the Article table. */
   public static void main(String args[]) throws Exception {
-    Database.with(Entity.class).createTable();
+    // Database.with(Entity.class).createTable();
+    Iterable<Entity> staleEntities = Database.with(Entity.class).get(
+        new QueryOption.WhereNull("old_id"),
+        new QueryOption.Limit(1000));
+    int i = 0;
+    while (!Iterables.isEmpty(staleEntities)) {
+      List<Entity> entitiesToInsert = Lists.newArrayList();
+      for (Entity entity : staleEntities) {
+        entitiesToInsert.add(entity.toBuilder()
+            .setOldId(entity.getId())
+            .setId(GuidFactory.generate())
+            .build());
+      }
+      System.out.print(".");
+      if (++i % 20000 == 0) {
+        System.out.println(i);
+      }
+      Database.insert(entitiesToInsert);
+      Database.delete(staleEntities);
+      staleEntities = Database.with(Entity.class).get(
+          new QueryOption.WhereNull("old_id"),
+          new QueryOption.Limit(1000));
+    }
   }
 }

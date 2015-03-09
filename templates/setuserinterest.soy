@@ -6,7 +6,7 @@
 {template .main}
   <h1>Set User Interest</h1>
 
-  <form method="POST" action="setUserInterest">
+  <form method="POST" action="/v1/set_user_interest">
     Session key:<br>
     <input type="text" name="session_key"><br>
     <br>
@@ -17,6 +17,9 @@
     <br>
     Entity Id:<br>
     <input type="text" name="interest[entity][id]"><br>
+    <br>
+    Entity Type (e.g. 'c', 'p'... values from EntityType.java):<br>
+    <input type="text" name="interest[entity][type]"><br>
     <br>
     or Entity Keyword:<br>
     <input type="text" name="interest[entity][keyword]"><br>

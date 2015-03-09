@@ -2849,6 +2849,21 @@ public final class CoreProto {
     com.google.protobuf.ByteString
         getIdBytes();
 
+    // optional string old_id = 7;
+    /**
+     * <code>optional string old_id = 7;</code>
+     */
+    boolean hasOldId();
+    /**
+     * <code>optional string old_id = 7;</code>
+     */
+    java.lang.String getOldId();
+    /**
+     * <code>optional string old_id = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getOldIdBytes();
+
     // optional string keyword = 2;
     /**
      * <code>optional string keyword = 2;</code>
@@ -3010,12 +3025,12 @@ public final class CoreProto {
               break;
             }
             case 18: {
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
               keyword_ = input.readBytes();
               break;
             }
             case 26: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               type_ = input.readBytes();
               break;
             }
@@ -3025,22 +3040,27 @@ public final class CoreProto {
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000008;
+                bitField0_ |= 0x00000010;
                 source_ = value;
               }
               break;
             }
             case 42: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               canonicalId_ = input.readBytes();
               break;
             }
             case 50: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 topic_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.Entity.EntityTopic>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000040;
               }
               topic_.add(input.readMessage(com.janknspank.proto.CoreProto.Entity.EntityTopic.PARSER, extensionRegistry));
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000002;
+              oldId_ = input.readBytes();
               break;
             }
           }
@@ -3051,7 +3071,7 @@ public final class CoreProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           topic_ = java.util.Collections.unmodifiableList(topic_);
         }
         this.unknownFields = unknownFields.build();
@@ -4406,6 +4426,49 @@ public final class CoreProto {
       }
     }
 
+    // optional string old_id = 7;
+    public static final int OLD_ID_FIELD_NUMBER = 7;
+    private java.lang.Object oldId_;
+    /**
+     * <code>optional string old_id = 7;</code>
+     */
+    public boolean hasOldId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string old_id = 7;</code>
+     */
+    public java.lang.String getOldId() {
+      java.lang.Object ref = oldId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          oldId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string old_id = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOldIdBytes() {
+      java.lang.Object ref = oldId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        oldId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional string keyword = 2;
     public static final int KEYWORD_FIELD_NUMBER = 2;
     private java.lang.Object keyword_;
@@ -4413,7 +4476,7 @@ public final class CoreProto {
      * <code>optional string keyword = 2;</code>
      */
     public boolean hasKeyword() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional string keyword = 2;</code>
@@ -4456,7 +4519,7 @@ public final class CoreProto {
      * <code>optional string type = 3;</code>
      */
     public boolean hasType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional string type = 3;</code>
@@ -4499,7 +4562,7 @@ public final class CoreProto {
      * <code>optional .Entity.Source source = 4;</code>
      */
     public boolean hasSource() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional .Entity.Source source = 4;</code>
@@ -4523,7 +4586,7 @@ public final class CoreProto {
      * </pre>
      */
     public boolean hasCanonicalId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional string canonical_id = 5;</code>
@@ -4613,6 +4676,7 @@ public final class CoreProto {
 
     private void initFields() {
       id_ = "";
+      oldId_ = "";
       keyword_ = "";
       type_ = "";
       source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
@@ -4634,20 +4698,23 @@ public final class CoreProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getIdBytes());
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(2, getKeywordBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(3, getTypeBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeEnum(4, source_.getNumber());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(5, getCanonicalIdBytes());
       }
       for (int i = 0; i < topic_.size(); i++) {
         output.writeMessage(6, topic_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(7, getOldIdBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4662,25 +4729,29 @@ public final class CoreProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getIdBytes());
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getKeywordBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getTypeBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, source_.getNumber());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getCanonicalIdBytes());
       }
       for (int i = 0; i < topic_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, topic_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getOldIdBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4801,17 +4872,19 @@ public final class CoreProto {
         super.clear();
         id_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        keyword_ = "";
+        oldId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        type_ = "";
+        keyword_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
+        type_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        canonicalId_ = "";
+        source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000010);
+        canonicalId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         if (topicBuilder_ == null) {
           topic_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           topicBuilder_.clear();
         }
@@ -4850,23 +4923,27 @@ public final class CoreProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.keyword_ = keyword_;
+        result.oldId_ = oldId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.type_ = type_;
+        result.keyword_ = keyword_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.source_ = source_;
+        result.type_ = type_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
+        result.source_ = source_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
         result.canonicalId_ = canonicalId_;
         if (topicBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             topic_ = java.util.Collections.unmodifiableList(topic_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.topic_ = topic_;
         } else {
@@ -4893,13 +4970,18 @@ public final class CoreProto {
           id_ = other.id_;
           onChanged();
         }
-        if (other.hasKeyword()) {
+        if (other.hasOldId()) {
           bitField0_ |= 0x00000002;
+          oldId_ = other.oldId_;
+          onChanged();
+        }
+        if (other.hasKeyword()) {
+          bitField0_ |= 0x00000004;
           keyword_ = other.keyword_;
           onChanged();
         }
         if (other.hasType()) {
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
           type_ = other.type_;
           onChanged();
         }
@@ -4907,7 +4989,7 @@ public final class CoreProto {
           setSource(other.getSource());
         }
         if (other.hasCanonicalId()) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
           canonicalId_ = other.canonicalId_;
           onChanged();
         }
@@ -4915,7 +4997,7 @@ public final class CoreProto {
           if (!other.topic_.isEmpty()) {
             if (topic_.isEmpty()) {
               topic_ = other.topic_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureTopicIsMutable();
               topic_.addAll(other.topic_);
@@ -4928,7 +5010,7 @@ public final class CoreProto {
               topicBuilder_.dispose();
               topicBuilder_ = null;
               topic_ = other.topic_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
               topicBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTopicFieldBuilder() : null;
@@ -5038,13 +5120,87 @@ public final class CoreProto {
         return this;
       }
 
+      // optional string old_id = 7;
+      private java.lang.Object oldId_ = "";
+      /**
+       * <code>optional string old_id = 7;</code>
+       */
+      public boolean hasOldId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string old_id = 7;</code>
+       */
+      public java.lang.String getOldId() {
+        java.lang.Object ref = oldId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          oldId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string old_id = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOldIdBytes() {
+        java.lang.Object ref = oldId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          oldId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string old_id = 7;</code>
+       */
+      public Builder setOldId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        oldId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string old_id = 7;</code>
+       */
+      public Builder clearOldId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        oldId_ = getDefaultInstance().getOldId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string old_id = 7;</code>
+       */
+      public Builder setOldIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        oldId_ = value;
+        onChanged();
+        return this;
+      }
+
       // optional string keyword = 2;
       private java.lang.Object keyword_ = "";
       /**
        * <code>optional string keyword = 2;</code>
        */
       public boolean hasKeyword() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional string keyword = 2;</code>
@@ -5084,7 +5240,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         keyword_ = value;
         onChanged();
         return this;
@@ -5093,7 +5249,7 @@ public final class CoreProto {
        * <code>optional string keyword = 2;</code>
        */
       public Builder clearKeyword() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         keyword_ = getDefaultInstance().getKeyword();
         onChanged();
         return this;
@@ -5106,7 +5262,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         keyword_ = value;
         onChanged();
         return this;
@@ -5118,7 +5274,7 @@ public final class CoreProto {
        * <code>optional string type = 3;</code>
        */
       public boolean hasType() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional string type = 3;</code>
@@ -5158,7 +5314,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         type_ = value;
         onChanged();
         return this;
@@ -5167,7 +5323,7 @@ public final class CoreProto {
        * <code>optional string type = 3;</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         type_ = getDefaultInstance().getType();
         onChanged();
         return this;
@@ -5180,7 +5336,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         type_ = value;
         onChanged();
         return this;
@@ -5192,7 +5348,7 @@ public final class CoreProto {
        * <code>optional .Entity.Source source = 4;</code>
        */
       public boolean hasSource() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional .Entity.Source source = 4;</code>
@@ -5207,7 +5363,7 @@ public final class CoreProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         source_ = value;
         onChanged();
         return this;
@@ -5216,7 +5372,7 @@ public final class CoreProto {
        * <code>optional .Entity.Source source = 4;</code>
        */
       public Builder clearSource() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
         onChanged();
         return this;
@@ -5236,7 +5392,7 @@ public final class CoreProto {
        * </pre>
        */
       public boolean hasCanonicalId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional string canonical_id = 5;</code>
@@ -5300,7 +5456,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         canonicalId_ = value;
         onChanged();
         return this;
@@ -5317,7 +5473,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder clearCanonicalId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         canonicalId_ = getDefaultInstance().getCanonicalId();
         onChanged();
         return this;
@@ -5338,7 +5494,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         canonicalId_ = value;
         onChanged();
         return this;
@@ -5348,9 +5504,9 @@ public final class CoreProto {
       private java.util.List<com.janknspank.proto.CoreProto.Entity.EntityTopic> topic_ =
         java.util.Collections.emptyList();
       private void ensureTopicIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           topic_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.Entity.EntityTopic>(topic_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -5499,7 +5655,7 @@ public final class CoreProto {
       public Builder clearTopic() {
         if (topicBuilder_ == null) {
           topic_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           topicBuilder_.clear();
@@ -5576,7 +5732,7 @@ public final class CoreProto {
           topicBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.CoreProto.Entity.EntityTopic, com.janknspank.proto.CoreProto.Entity.EntityTopic.Builder, com.janknspank.proto.CoreProto.Entity.EntityTopicOrBuilder>(
                   topic_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           topic_ = null;
@@ -16733,74 +16889,74 @@ public final class CoreProto {
       "l\"\200\001\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001" +
       "\220\246\035\004\230\246\035\200\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017Mon" +
-      "goDB.Session\"\221\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
-      "\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003" +
-      "\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006" +
-      "source\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"",
-      "\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005to" +
-      "pic\030\006 \003(\0132\023.Entity.EntityTopic\032\277\002\n\013Entit" +
-      "yTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007k" +
-      "eyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246" +
-      "\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007contex" +
-      "t\030\005 \001(\0162\033.Entity.EntityTopic.Context:\007UN" +
-      "KNOWN\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELL" +
-      "IST_WORKED_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031" +
-      "\n\025ANGELLIST_INVESTED_IN\020\003\022\025\n\021ANGELLIST_A" +
-      "DVISED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC\020\005\"d\n\006Sour",
-      "ce\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE" +
-      "\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r\n\tANGELLI" +
-      "ST\020\003\022\010\n\004USER\020\004:\020\212\265\030\014MySQL.Entity\"\347\001\n\nVec" +
-      "torData\022\034\n\016document_count\030\001 \001(\005B\004\210\246\035\001\0221\n" +
-      "\016word_frequency\030\002 \003(\0132\031.VectorData.WordF" +
-      "requency\022#\n\014distribution\030\003 \001(\0132\r.Distrib" +
-      "ution\032c\n\rWordFrequency\022\026\n\004word\030\001 \001(\tB\010\210\246" +
-      "\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(\005B\004\210\246\035\001\022!\n\023docum" +
-      "ent_occurences\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026TrainedAr" +
-      "ticleIndustry\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230",
-      "\246\035\030\250\246\035\001\022\"\n\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220" +
-      "\246\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246" +
-      "\035\030\250\246\035\001:\"\212\265\030\036MongoDB.TrainedArticleIndust" +
-      "ry\"\347\001\n\034TrainedArticleClassification\022 \n\006u" +
-      "rl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article" +
-      "_classification_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005" +
-      "\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017train" +
-      "er_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$" +
-      "MongoDB.TrainedArticleClassification\"\207\001\n" +
-      "\014Distribution\022,\n\npercentile\030\001 \003(\0132\030.Dist",
-      "ribution.Percentile\032I\n\nPercentile\022\022\n\nper" +
-      "centile\030\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_poi" +
-      "nt_count\030\003 \001(\003\"\226\003\n\026ShareNormalizationDat" +
-      "a\022T\n\027time_range_distribution\030\002 \003(\0132-.Sha" +
-      "reNormalizationData.TimeRangeDistributio" +
-      "nB\004\210\246\035\001\022J\n\022domain_share_count\030\003 \003(\0132(.Sh" +
-      "areNormalizationData.DomainShareCountB\004\210" +
-      "\246\035\001\032x\n\025TimeRangeDistribution\022\032\n\014start_mi" +
-      "llis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246" +
-      "\035\001\022)\n\014distribution\030\003 \001(\0132\r.DistributionB",
-      "\004\210\246\035\001\032`\n\020DomainShareCount\022\024\n\006domain\030\001 \001(" +
-      "\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013" +
-      "share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n" +
-      "\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email" +
-      "\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(" +
-      "\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246" +
-      "\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035" +
-      "\005:\023\212\265\030\017MySQL.UrlRating\"\331\001\n\022DeviceRegistr" +
-      "ation\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007u" +
-      "ser_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device",
-      "_type\030\003 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice" +
-      "_id\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013create_time\030\005" +
-      " \001(\003B\004\210\246\035\001:\036\212\265\030\032MongoDB.DeviceRegistrati" +
-      "on\"\274\002\n\020PushNotification\022 \n\002id\030\001 \001(\tB\024\210\246\035" +
-      "\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\031\n\013create_time\030\002 \001(\003B\004" +
-      "\210\246\035\001\022\022\n\nclick_time\030\003 \001(\003\022!\n\007user_id\030\004 \001(" +
-      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035" +
-      "\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\006 \001(\0162\013.DeviceT" +
-      "ypeB\004\210\246\035\001\022\037\n\tdevice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246" +
-      "\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\t",
-      "B\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030MongoDB.PushNotificatio" +
-      "n*/\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID\020" +
-      "\001\022\007\n\003IOS\020\002B!\n\024com.janknspank.protoB\tCore" +
-      "Proto"
+      "goDB.Session\"\257\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
+      "\001\220\246\035\002\230\246\035\030\250\246\035\001\022\034\n\006old_id\030\007 \001(\tB\014\220\246\035\005\230\246\035\030\250" +
+      "\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004ty" +
+      "pe\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001",
+      "(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014canonica" +
+      "l_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005topic\030\006 \003(\0132" +
+      "\023.Entity.EntityTopic\032\277\002\n\013EntityTopic\022\033\n\t" +
+      "entity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001" +
+      "(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010" +
+      "strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033." +
+      "Entity.EntityTopic.Context:\007UNKNOWN\"\220\001\n\007" +
+      "Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED" +
+      "_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIS" +
+      "T_INVESTED_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026",
+      "\n\022WIKIPEDIA_SUBTOPIC\020\005\"d\n\006Source\022\013\n\007UNKN" +
+      "OWN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPE" +
+      "DIA_LONG_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003\022\010\n\004US" +
+      "ER\020\004:\020\212\265\030\014MySQL.Entity\"\347\001\n\nVectorData\022\034\n" +
+      "\016document_count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_freq" +
+      "uency\030\002 \003(\0132\031.VectorData.WordFrequency\022#" +
+      "\n\014distribution\030\003 \001(\0132\r.Distribution\032c\n\rW" +
+      "ordFrequency\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\t" +
+      "frequency\030\002 \001(\005B\004\210\246\035\001\022!\n\023document_occure" +
+      "nces\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndus",
+      "try\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n" +
+      "\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017tra" +
+      "iner_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265" +
+      "\030\036MongoDB.TrainedArticleIndustry\"\347\001\n\034Tra" +
+      "inedArticleClassification\022 \n\006url_id\030\001 \001(" +
+      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classific" +
+      "ation_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007ch" +
+      "ecked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id" +
+      "\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.Tr" +
+      "ainedArticleClassification\"\207\001\n\014Distribut",
+      "ion\022,\n\npercentile\030\001 \003(\0132\030.Distribution.P" +
+      "ercentile\032I\n\nPercentile\022\022\n\npercentile\030\001 " +
+      "\001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_point_count\030\003" +
+      " \001(\003\"\226\003\n\026ShareNormalizationData\022T\n\027time_" +
+      "range_distribution\030\002 \003(\0132-.ShareNormaliz" +
+      "ationData.TimeRangeDistributionB\004\210\246\035\001\022J\n" +
+      "\022domain_share_count\030\003 \003(\0132(.ShareNormali" +
+      "zationData.DomainShareCountB\004\210\246\035\001\032x\n\025Tim" +
+      "eRangeDistribution\022\032\n\014start_millis\030\001 \001(\003" +
+      "B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014dist",
+      "ribution\030\003 \001(\0132\r.DistributionB\004\210\246\035\001\032`\n\020D" +
+      "omainShareCount\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022\033\n" +
+      "\rarticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_coun" +
+      "t\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001 \001(\tB" +
+      "\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB\024\210\246" +
+      "\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035" +
+      "\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013" +
+      "create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MyS" +
+      "QL.UrlRating\"\331\001\n\022DeviceRegistration\022\034\n\002i" +
+      "d\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001",
+      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(" +
+      "\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB" +
+      "\014\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001" +
+      ":\036\212\265\030\032MongoDB.DeviceRegistration\"\274\002\n\020Pus" +
+      "hNotification\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250" +
+      "\246\035\001\240\246\035\003\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\022\022\n\ncl" +
+      "ick_time\030\003 \001(\003\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035" +
+      "\003\230\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022" +
+      "&\n\013device_type\030\006 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022" +
+      "\037\n\tdevice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host",
+      "\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200" +
+      "\010:\034\212\265\030\030MongoDB.PushNotification*/\n\nDevic" +
+      "eType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002" +
+      "B!\n\024com.janknspank.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -16830,7 +16986,7 @@ public final class CoreProto {
           internal_static_Entity_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Entity_descriptor,
-              new java.lang.String[] { "Id", "Keyword", "Type", "Source", "CanonicalId", "Topic", });
+              new java.lang.String[] { "Id", "OldId", "Keyword", "Type", "Source", "CanonicalId", "Topic", });
           internal_static_Entity_EntityTopic_descriptor =
             internal_static_Entity_descriptor.getNestedTypes().get(0);
           internal_static_Entity_EntityTopic_fieldAccessorTable = new
@@ -16952,6 +17108,9 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
