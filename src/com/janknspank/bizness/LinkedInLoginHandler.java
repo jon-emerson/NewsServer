@@ -324,7 +324,7 @@ public class LinkedInLoginHandler {
                   return false;
                 } else if (interest.getType() == InterestType.ENTITY) {
                   for (Interest tombstonedInterest : tombstonedEntityInterests) {
-                    if (UserInterests.equals(tombstonedInterest, interest)) {
+                    if (UserInterests.equivalent(tombstonedInterest, interest)) {
                       return false;
                     }
                   }

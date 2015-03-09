@@ -68,7 +68,7 @@ public class UserInterests {
   }
 
   /**
-   * Returns only interests from a specific source. 
+   * Returns only interests from a specific source.
    */
   public static List<Interest> getInterestsBySource(User user, InterestSource source) {
     List<Interest> matchingInterests = new ArrayList<>();
@@ -82,15 +82,20 @@ public class UserInterests {
 
   /**
    * Returns if the two interests are about the same thing, but not if they are from
-   * the same source
+   * the same source.
    */
-  public static boolean equals(Interest interest1, Interest interest2) {
+  public static boolean equivalent(Interest interest1, Interest interest2) {
     if (interest1.getType() == interest2.getType()) {
       if (interest1.getType() == InterestType.ADDRESS_BOOK_CONTACTS ||
           interest1.getType() == InterestType.LINKED_IN_CONTACTS) {
         return true;
       } else if (interest1.getType() == InterestType.ENTITY) {
-        return interest1.getEntity().equals(interest2.getEntity());
+        EntityType entityType1 = EntityType.fromValue(interest1.getEntity().getType());
+        EntityType entityType2 = EntityType.fromValue(interest2.getEntity().getType());
+        return interest1.getEntity().getKeyword().equals(interest2.getEntity().getKeyword())
+            && entityType1 != null
+            && entityType2 != null
+            && (entityType1.isA(entityType2) || entityType2.isA(entityType1));
       } else if (interest1.getType() == InterestType.INDUSTRY) {
         return interest1.getIndustryCode() == interest2.getIndustryCode();
       } else if (interest1.getType() == InterestType.INTENT) {

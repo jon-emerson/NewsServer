@@ -41,8 +41,7 @@ public class SetUserInterestServlet extends StandardServlet {
     String interestEntityIdParam = getParameter(req, "interest[entity][id]");
     String interestIndustryCodeParam = getParameter(req, "interest[industry_code]");
     String interestIntentCodeParam = getParameter(req, "interest[intent_code]");
-    String followParam = getRequiredParameter(req, "follow");
-    User user = getUser(req);
+    boolean followParam = "true".equals(getRequiredParameter(req, "follow"));
 
     // Parameter validation.
     InterestType interestType = InterestType.valueOf(interestTypeParam);
@@ -50,45 +49,51 @@ public class SetUserInterestServlet extends StandardServlet {
       throw new RequestException("Parameter 'interest[type]' is invalid");
     }
 
-    InterestSource interestSource;
-    if ("true".equals(followParam)) {
-      interestSource = InterestSource.USER;
-    } else if ("false".equals(followParam)) {
-      interestSource = InterestSource.TOMBSTONE;
-    } else {
-      throw new RequestException("Parameter 'follow' is invalid");
-    }
+    // Business logic.
+    User user = getUser(req);
 
-    // Build the new interest
-    Interest.Builder interestBuilder = Interest.newBuilder();
-    interestBuilder.setId(GuidFactory.generate())
+    // Build the new interest.
+    Interest.Builder interestBuilder = Interest.newBuilder()
+        .setId(GuidFactory.generate())
         .setType(interestType)
-        .setSource(interestSource)
+        .setSource(followParam ? InterestSource.USER : InterestSource.TOMBSTONE)
         .setCreateTime(System.currentTimeMillis());
 
     // Set type-specific properties
-    if (interestType == InterestType.ADDRESS_BOOK_CONTACTS ||
-        interestType == InterestType.LINKED_IN_CONTACTS) {
-      // Nothing extra to save
-    } else if (interestType == InterestType.ENTITY) {
-      // Validate entity parameters
-      Entity entity;
-      if (!Strings.isNullOrEmpty(interestEntityIdParam)) {
-        entity = Entities.getEntityById(interestEntityIdParam);
-        if (entity == null) {
-          throw new RequestException("Parameter 'interest[entity][id]' is invalid");
-        }
-      } else {
-        if (interestEntityKeywordParam == null) {
-          throw new RequestException("Parameter 'interest[entity][keyword]' is missing");
-        }
-        entity = Entities.getEntityByKeyword(interestEntityKeywordParam);
-        if (entity == null) {
-          EntityType entityType = EntityType.fromValue(interestEntityTypeParam);
-          if (entityType == null) {
-            throw new RequestException("Parameter 'interest[entity][type]' is invalid");
-          }
+    switch (interestType) {
+      case ADDRESS_BOOK_CONTACTS:
+      case LINKED_IN_CONTACTS:
+        // Nothing extra to save
+        break;
 
+      case ENTITY:
+        Entity entity;
+        if (followParam) {
+          if (!Strings.isNullOrEmpty(interestEntityIdParam)) {
+            entity = Entities.getEntityById(interestEntityIdParam);
+            if (entity == null) {
+              throw new RequestException("Parameter 'interest[entity][id]' is invalid");
+            }
+          } else {
+            if (interestEntityKeywordParam == null) {
+              throw new RequestException("Parameter 'interest[entity][keyword]' is missing");
+            }
+            entity = Entities.getEntityByKeyword(interestEntityKeywordParam);
+            if (entity == null) {
+              EntityType entityType = EntityType.fromValue(interestEntityTypeParam);
+              if (entityType == null) {
+                throw new RequestException("Parameter 'interest[entity][type]' is invalid");
+              }
+
+              entity = Entity.newBuilder()
+                  .setId(GuidFactory.generate())
+                  .setKeyword(interestEntityKeywordParam)
+                  .setSource(Entity.Source.USER)
+                  .setType(interestEntityTypeParam)
+                  .build();
+            }
+          }
+        } else {
           entity = Entity.newBuilder()
               .setId(GuidFactory.generate())
               .setKeyword(interestEntityKeywordParam)
@@ -96,25 +101,28 @@ public class SetUserInterestServlet extends StandardServlet {
               .setType(interestEntityTypeParam)
               .build();
         }
-      }
-      interestBuilder.setEntity(entity);
-    } else if (interestType == InterestType.INDUSTRY) {
-      interestBuilder.setIndustryCode(Integer.parseInt(interestIndustryCodeParam));
-    } else if (interestType == InterestType.INTENT) {
-      if (Strings.isNullOrEmpty(interestIntentCodeParam)) {
-        throw new RequestException("Parameter 'interest[intent_code]' is missing");
-      }
-      interestBuilder.setIntentCode(interestIntentCodeParam);
+        interestBuilder.setEntity(entity);
+        break;
+
+      case INDUSTRY:
+        interestBuilder.setIndustryCode(Integer.parseInt(interestIndustryCodeParam));
+        break;
+
+      case INTENT:
+        if (Strings.isNullOrEmpty(interestIntentCodeParam)) {
+          throw new RequestException("Parameter 'interest[intent_code]' is missing");
+        }
+        interestBuilder.setIntentCode(interestIntentCodeParam);
+        break;
     }
 
     Interest newInterest = interestBuilder.build();
 
-    // Business logic.
-    // Find all interests that have nothing to do with the specified user
+    // Find all interests that are not equivalent to the specified user
     // interest.
     List<Interest> existingInterests = Lists.newArrayList();
     for (Interest interest : user.getInterestList()) {
-      if (!UserInterests.equals(interest, newInterest)) {
+      if (!UserInterests.equivalent(interest, newInterest)) {
         existingInterests.add(interest);
       }
     }
