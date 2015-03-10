@@ -128,7 +128,7 @@ public class Sessions {
     try {
       String oAuthState = new String(Base64.decodeBase64(sessionKey));
       String[] components = oAuthState.split("\\/", 3);
-      Asserts.assertTrue(components.length == 3, "Session key has format invalid",
+      Asserts.assertTrue(components.length == 3, "Session key has invalid format",
           RequestException.class);
       long milliseconds = Long.parseLong(components[0]);
       String userId = components[1];

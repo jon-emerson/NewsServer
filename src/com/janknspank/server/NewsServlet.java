@@ -114,7 +114,12 @@ public class NewsServlet extends HttpServlet {
         session = Sessions.getBySessionKey(sessionKey);
       }
     } catch (RequestException e) {
-      session = null; // Fall through to auth required error, if applicable.
+      if (isAuthRequired) {
+        handleAuthenticationError(request, response,
+            "Invalid authentication token: " + e.getMessage());
+        return;
+      }
+      session = null;
     } catch (DatabaseSchemaException e) {
       e.printStackTrace();
       response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

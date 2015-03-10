@@ -24,7 +24,7 @@ public class Asserts {
   public static <X extends Exception> void assertTrue(boolean b, String desc, Class<X> clazz)
       throws X {
     if (!b) {
-      throwException("Condition is false: " + desc, clazz);
+      throwException(desc, clazz);
     }
   }
 
