@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.server.RequestException;
 
 public class SessionsTest {
   /**
@@ -25,7 +26,7 @@ public class SessionsTest {
 
     try {
       Sessions.getUserId("suck it trebek");
-    } catch (BiznessException e) {
+    } catch (RequestException e) {
       return; // Success!
     }
     fail("getUserId should have failed on invalid input");

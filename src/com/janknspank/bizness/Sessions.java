@@ -60,9 +60,11 @@ public class Sessions {
   /**
    * Officially sanctioned method for getting a user session from a logged-in
    * session key.
+   * @throws RequestException if the session doesn't exist or is invalid
+   * @throws BiznessException 
    */
   public static Session getBySessionKey(String sessionKey)
-      throws RequestException, BiznessException, DatabaseSchemaException {
+      throws RequestException, DatabaseSchemaException {
     // Make sure that the session key can be decrypted.
     String userId = getUserId(sessionKey);
 
@@ -122,11 +124,12 @@ public class Sessions {
    * returns the validated user ID.
    */
   @VisibleForTesting
-  static String getUserId(String sessionKey) throws BiznessException {
+  static String getUserId(String sessionKey) throws RequestException {
     try {
       String oAuthState = new String(Base64.decodeBase64(sessionKey));
       String[] components = oAuthState.split("\\/", 3);
-      Asserts.assertTrue(components.length == 3, "Session key has format invalid", BiznessException.class);
+      Asserts.assertTrue(components.length == 3, "Session key has format invalid",
+          RequestException.class);
       long milliseconds = Long.parseLong(components[0]);
       String userId = components[1];
       String front = Long.toString(milliseconds) + "/" + userId;
@@ -134,7 +137,7 @@ public class Sessions {
       MessageDigest md = MessageDigest.getInstance("SHA1");
       md.update((SESSION_ENCODER_KEY + front).getBytes());
       Asserts.assertTrue(components[2].equals(new String(md.digest())),
-          "Session key is not internally consistent", BiznessException.class);
+          "Session key is not internally consistent", RequestException.class);
       return userId;
     } catch (NoSuchAlgorithmException e) {
       throw new Error("SHA1 hashing algorithm not found", e);

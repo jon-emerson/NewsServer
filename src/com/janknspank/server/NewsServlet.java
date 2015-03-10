@@ -21,7 +21,6 @@ import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
-import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Sessions;
 import com.janknspank.common.Asserts;
 import com.janknspank.database.Database;
@@ -115,11 +114,8 @@ public class NewsServlet extends HttpServlet {
         session = Sessions.getBySessionKey(sessionKey);
       }
     } catch (RequestException e) {
-      e.printStackTrace();
-      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-      writeJson(request, response, getErrorJson(e.getMessage()));
-      return;
-    } catch (DatabaseSchemaException | BiznessException e) {
+      session = null; // Fall through to auth required error, if applicable.
+    } catch (DatabaseSchemaException e) {
       e.printStackTrace();
       response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       writeJson(request, response, getErrorJson(e.getMessage()));
@@ -148,7 +144,7 @@ public class NewsServlet extends HttpServlet {
         if (cookieName.equals(cookie.getName())) {
           try {
             return Sessions.getBySessionKey(cookie.getValue());
-          } catch (BiznessException | RequestException | DatabaseSchemaException e) {
+          } catch (RequestException | DatabaseSchemaException e) {
             System.err.println("Bad cookie found, ignoring: " + e.getMessage());
           }
         }
