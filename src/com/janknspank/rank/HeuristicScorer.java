@@ -38,13 +38,10 @@ public class HeuristicScorer extends Scorer {
     // 6. Relevance to current role
     score += 0.1 * InputValuesGenerator.relevanceToCurrentRole(user, article);
 
-    // 7. Timeliness
-    score += 0.1 * InputValuesGenerator.timeliness(article);
-
-    // 8. Past employers
+    // 7. Past employers
     score += 0.1 * InputValuesGenerator.relevanceToPastEmployers(user, article);
 
-    // 9. Article text quality
+    // 8. Article text quality
     score += 0.1 * InputValuesGenerator.articleTextQualityScore(article);
 
     return score;

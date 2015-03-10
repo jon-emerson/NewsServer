@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -35,7 +36,7 @@ public class GetArticleServlet extends StandardServlet {
     // Replace the published time with the crawl time, since people often just
     // give a date for a publish time, so without this, the clients are showing
     // midnight as most articles' ages.
-    articleJson.put("published_time", Long.toString(article.getCrawlTime()));
+    articleJson.put("published_time", Long.toString(Articles.getPublishedTime(article)));
 
     // Create response.
     JSONObject response = createSuccessResponse();

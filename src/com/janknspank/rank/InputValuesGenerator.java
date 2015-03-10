@@ -92,11 +92,6 @@ public class InputValuesGenerator {
     return 0;
   }
 
-  public static double timeliness(Article article) {
-    // Older is smaller value
-    return sigmoid(article.getPublishedTime() - System.currentTimeMillis());
-  }
-
   public static double articleTextQualityScore(Article article) {
     return 0;
   }
@@ -162,7 +157,7 @@ public class InputValuesGenerator {
   }
 
   // Normalize any value to [0,1]
-  private static double sigmoid(double x) {
-    return 1 / (1 + Math.exp(-x));
-  }
+  // private static double sigmoid(double x) {
+  //   return 1 / (1 + Math.exp(-x));
+  // }
 }

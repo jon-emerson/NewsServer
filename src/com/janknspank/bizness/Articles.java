@@ -89,17 +89,37 @@ public class Articles {
       }
       urls.add(article.getUrl());
 
-      double hoursSincePublished = Math.max(18,
-          ((double) System.currentTimeMillis() - article.getPublishedTime())
-              / TimeUnit.HOURS.toMillis(1)) - 15;
       goodArticles.add(article, scorer.getScore(user, article) /
-          Math.sqrt(hoursSincePublished));
+          Math.sqrt(getHoursSincePublished(article)));
     }
     TopList<Article, Double> bestArticles = new TopList<>(limit);
     for (Article article : Deduper.filterOutDupes(goodArticles)) {
       bestArticles.add(article, goodArticles.getValue(article));
     }
     return bestArticles;
+  }
+
+  /**
+   * Returns the number of hours since the passed article was published, with
+   * a minimum of 15 hours.
+   */
+  private static double getHoursSincePublished(Article article) {
+    return Math.max(18,
+        ((double) System.currentTimeMillis() - getPublishedTime(article))
+            / TimeUnit.HOURS.toMillis(1)) - 15;
+  }
+
+  /**
+   * A more intelligent approach to knowing when an article was published: The
+   * time we discovered the article, unless the site has self-reported that the
+   * article is at least 36 hours older.  This means that sites can't lie and
+   * post- or pre-date their publish times... But, if we discover an article
+   * well after it was published, we honor its older publish date.
+   */
+  public static long getPublishedTime(Article article) {
+    return (article.getCrawlTime() - TimeUnit.HOURS.toMillis(36) > article.getPublishedTime())
+        ? article.getPublishedTime()
+        : article.getCrawlTime();
   }
 
   /**

@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.common.TopList;
@@ -74,7 +75,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     // Replace the published time with the crawl time, since people often just
     // give a date for a publish time, so without this, the clients are showing
     // midnight as most articles' ages.
-    articleJson.put("published_time", Long.toString(article.getCrawlTime()));
+    articleJson.put("published_time", Long.toString(Articles.getPublishedTime(article)));
 
     return articleJson;
   }
