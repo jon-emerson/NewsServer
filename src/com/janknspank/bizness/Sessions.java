@@ -1,22 +1,12 @@
 package com.janknspank.bizness;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.google.common.annotations.VisibleForTesting;
+import com.janknspank.common.Asserts;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -33,98 +23,12 @@ import com.janknspank.server.RequestException;
  * user to act as the specified user.
  */
 public class Sessions {
-  private static final Cipher ENCRYPT_CIPHER;
-  private static final Cipher DECRYPT_CIPHER;
-  private static final Pattern SESSION_PATTERN = Pattern.compile("^v1_([0-9]+)_(.*)$");
+  static final String SESSION_ENCODER_KEY;
   static {
-    try {
-      String sessionAesKey = System.getenv("NEWS_SESSION_AES_KEY");
-      if (sessionAesKey == null) {
-        throw new Error("$NEWS_SESSION_AES_KEY is undefined");
-      }
-      String sessionInitVector = System.getenv("NEWS_SESSION_INIT_VECTOR");
-      if (sessionInitVector == null) {
-        throw new Error("$NEWS_SESSION_INIT_VECTOR is undefined");
-      }
-
-      SecretKeySpec key = new SecretKeySpec(sessionAesKey.getBytes("UTF-8"), "AES");
-
-      ENCRYPT_CIPHER = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
-      ENCRYPT_CIPHER.init(Cipher.ENCRYPT_MODE, key,
-              new IvParameterSpec(sessionInitVector.getBytes("UTF-8")));
-
-      DECRYPT_CIPHER = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
-      DECRYPT_CIPHER.init(Cipher.DECRYPT_MODE, key,
-          new IvParameterSpec(sessionInitVector.getBytes("UTF-8")));
-
-    } catch (NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException |
-        UnsupportedEncodingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
-      throw new Error("Could not intialize session key", e);
+    SESSION_ENCODER_KEY = System.getenv("SESSION_ENCODER_KEY");
+    if (SESSION_ENCODER_KEY == null) {
+      throw new Error("$SESSION_ENCODER_KEY is undefined");
     }
-  }
-
-  /**
-   * Encrypts the passed-in string and returns a base64 representation of the
-   * encrypted value.  The base64 is web safe.
-   */
-  private static String toEncryptedBase64(String rawStr) throws BiznessException {
-    try {
-      byte[] encryptedBytes = ENCRYPT_CIPHER.doFinal(rawStr.getBytes("UTF-8"));
-      return Base64.encodeBase64URLSafeString(encryptedBytes);
-    } catch (UnsupportedEncodingException|IllegalBlockSizeException|BadPaddingException e) {
-      throw new BiznessException("Could not encrypt session key: " + e.getMessage(), e);
-    }
-  }
-
-  /**
-   * Returns an expiring LinkedIn OAuth state parameter, that we can use to
-   * prevent XSRF attacks.  Contains the encrypted current time.
-   */
-  public static String getLinkedInOAuthState() throws BiznessException {
-    return toEncryptedBase64(Long.toString(System.currentTimeMillis()));
-  }
-
-  /**
-   * Throws if the passed OAuthState is invalid or expired.
-   */
-  public static void verifyLinkedInOAuthState(String linkedInOAuthState) throws BiznessException {
-    try {
-      byte[] encryptedBytes = Base64.decodeBase64(linkedInOAuthState);
-      byte[] decryptedBytes = DECRYPT_CIPHER.doFinal(encryptedBytes);
-      long millis = Long.parseLong(new String(decryptedBytes));
-      if (millis <= System.currentTimeMillis() &&
-          (millis >= System.currentTimeMillis() * 60 * 60 * 1000)) {
-        throw new BiznessException("State expired");
-      }
-    } catch (IllegalBlockSizeException e) {
-      throw new BiznessException("Could not decrypt state", e);
-    } catch (BadPaddingException e) {
-      throw new BiznessException("Could not decrypt state", e);
-    }
-  }
-
-  /**
-   * Decrypts a session key and returns the user ID from inside it.
-   */
-  static String decrypt(String sessionKey) throws BiznessException, RequestException {
-    String rawStr;
-    try {
-      byte[] encryptedBytes = Base64.decodeBase64(sessionKey);
-      byte[] decryptedBytes = DECRYPT_CIPHER.doFinal(encryptedBytes);
-      rawStr = new String(decryptedBytes);
-    } catch (IllegalBlockSizeException e) {
-      throw new BiznessException(
-          "Could not decrypt session, illegal block size: \"" + sessionKey + "\"", e);
-    } catch (BadPaddingException e) {
-      throw new BiznessException(
-          "Could not decrypt session, bad padding: \"" + sessionKey + "\"", e);
-    }
-
-    Matcher matcher = SESSION_PATTERN.matcher(rawStr);
-    if (matcher.find()) {
-      return matcher.group(2);
-    }
-    throw new RequestException("Unrecognized session format: " + rawStr);
   }
 
   /**
@@ -142,8 +46,7 @@ public class Sessions {
     // Insert a new Session object and return it.
     try {
       Session session = Session.newBuilder()
-          .setSessionKey(toEncryptedBase64("v1_" + System.currentTimeMillis()
-              + "_" + user.getId()))
+          .setSessionKey(createSessionKey(user))
           .setUserId(user.getId())
           .setCreateTime(System.currentTimeMillis())
           .build();
@@ -161,7 +64,7 @@ public class Sessions {
   public static Session getBySessionKey(String sessionKey)
       throws RequestException, BiznessException, DatabaseSchemaException {
     // Make sure that the session key can be decrypted.
-    String userId = decrypt(sessionKey);
+    String userId = getUserId(sessionKey);
 
     // Make sure the session key is in the database.
     Session session = Database.with(Session.class)
@@ -187,6 +90,55 @@ public class Sessions {
   public static int deleteAllFromUser(User user) throws DatabaseSchemaException {
     return Database.with(Session.class).delete(
         new QueryOption.WhereEquals("user_id", user.getId()));
+  }
+
+  /**
+   * Returns a base64-encoded String of
+   *
+   * (X/Y/Z)
+   *
+   * Where:
+   *
+   * X = Current time in Milliseconds
+   * Y = User ID
+   * Z = Salted MD5 hash of the string "X/Y".
+   */
+  @VisibleForTesting
+  static String createSessionKey(User user) {
+    try {
+      String front = Long.toString(System.currentTimeMillis()) + "/" + user.getId();
+      MessageDigest md = MessageDigest.getInstance("SHA1");
+      md.update((SESSION_ENCODER_KEY + front).getBytes());
+      String oAuthState = front + "/" + new String(md.digest());
+      return Base64.encodeBase64URLSafeString(oAuthState.getBytes());
+    } catch (NoSuchAlgorithmException e) {
+      throw new Error("SHA1 hashing algorithm not found", e);
+    }
+  }
+
+  /**
+   * Verifies that the passed session keys salted SHA1 section matches the
+   * milliseconds and user ID at the front of the string, and if verified,
+   * returns the validated user ID.
+   */
+  @VisibleForTesting
+  static String getUserId(String sessionKey) throws BiznessException {
+    try {
+      String oAuthState = new String(Base64.decodeBase64(sessionKey));
+      String[] components = oAuthState.split("\\/", 3);
+      Asserts.assertTrue(components.length == 3, "Session key has format invalid", BiznessException.class);
+      long milliseconds = Long.parseLong(components[0]);
+      String userId = components[1];
+      String front = Long.toString(milliseconds) + "/" + userId;
+
+      MessageDigest md = MessageDigest.getInstance("SHA1");
+      md.update((SESSION_ENCODER_KEY + front).getBytes());
+      Asserts.assertTrue(components[2].equals(new String(md.digest())),
+          "Session key is not internally consistent", BiznessException.class);
+      return userId;
+    } catch (NoSuchAlgorithmException e) {
+      throw new Error("SHA1 hashing algorithm not found", e);
+    }
   }
 
   /** Helper method for creating the Session table. */

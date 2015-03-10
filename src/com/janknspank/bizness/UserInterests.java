@@ -93,9 +93,10 @@ public class UserInterests {
         EntityType entityType1 = EntityType.fromValue(interest1.getEntity().getType());
         EntityType entityType2 = EntityType.fromValue(interest2.getEntity().getType());
         return interest1.getEntity().getKeyword().equals(interest2.getEntity().getKeyword())
-            && entityType1 != null
-            && entityType2 != null
-            && (entityType1.isA(entityType2) || entityType2.isA(entityType1));
+            && (entityType1 == null
+                || entityType2 == null
+                || entityType1.isA(entityType2)
+                || entityType2.isA(entityType1));
       } else if (interest1.getType() == InterestType.INDUSTRY) {
         return interest1.getIndustryCode() == interest2.getIndustryCode();
       } else if (interest1.getType() == InterestType.INTENT) {

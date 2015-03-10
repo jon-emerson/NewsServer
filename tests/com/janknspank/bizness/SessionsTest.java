@@ -1,16 +1,33 @@
 package com.janknspank.bizness;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import com.janknspank.proto.UserProto.User;
 
 public class SessionsTest {
   /**
    * Makes sure we can decrypt a session key.
    */
   @Test
-  public void testDecrypt() throws Exception {
-    assertEquals("54cd3623e4b0161a5806d30c", Sessions.decrypt(
-        "JX0_gDDyDHIH1NML0z0tksSgMZzqKLxCltrNwPe7aLlZi-RnmNOZAdNARop58LzV"));
+  public void testLinkedInOAuthState() throws Exception {
+    User user = User.newBuilder()
+        .setId(GuidFactory.generate())
+        .setCreateTime(System.currentTimeMillis())
+        .setFirstName("Jorge")
+        .setLastName("Pasilda")
+        .setEmail("jpasilda@spotternews.com")
+        .build();
+    String sessionKey = Sessions.createSessionKey(user);
+    assertEquals(user.getId(), Sessions.getUserId(sessionKey));
+
+    try {
+      Sessions.getUserId("suck it trebek");
+    } catch (BiznessException e) {
+      return; // Success!
+    }
+    fail("getUserId should have failed on invalid input");
   }
 }
