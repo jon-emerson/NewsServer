@@ -192,7 +192,9 @@ message Entity {
       default = UNKNOWN
     ];
   };
-  repeated EntityTopic topic = 6;
+  repeated EntityTopic topic = 6 [
+    (client_serialization) = EXCLUDE
+  ];
 
   // This is the ID we had before we switched to 24-character MongoDB-generated
   // GUIDs.  We probably can throw this away at some point... But it's here in
@@ -200,11 +202,14 @@ message Entity {
   optional string old_id = 7 [
     (storage_method) = PULL_OUT,
     (string_length) = 24,
-    (string_charset) = LATIN1
+    (string_charset) = LATIN1,
+    (client_serialization) = EXCLUDE
   ];
 
   // For AngelList items, the canonical ID for the entity in their system.
-  optional int64 angel_list_id = 8;
+  optional int64 angel_list_id = 8 [
+    (client_serialization) = EXCLUDE
+  ];
 }
 
 // A word frequency vector - Could be specific to a document, or could represent

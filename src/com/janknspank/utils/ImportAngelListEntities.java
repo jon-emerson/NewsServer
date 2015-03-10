@@ -118,9 +118,18 @@ public class ImportAngelListEntities {
       List<String> line = readLine(reader);
       line = readLine(reader); // Ignore the first line.
       List<Entity> entitiesToCreate = Lists.newArrayList();
+      boolean pastBreakingPoint = false;
       while (line != null) {
         if (line.get(2).length() > 0) {
           String companyName = getCleanCompanyName(line);
+          if (companyName.length() <= 100 && !pastBreakingPoint) {
+            line = readLine(reader);
+            continue;
+          }
+          if (companyName.length() > 100) {
+            companyName = companyName.substring(0, 100);
+          }
+          pastBreakingPoint = true;
           Entity existingEntity = Database.with(Entity.class).getFirst(
               new QueryOption.WhereLike("keyword", companyName + "%"));
           if (existingEntity == null) {

@@ -43,6 +43,12 @@ public class GetOrganizationsServlet extends StandardServlet {
 
     JSONArray orgsJson = Serializer.toJSON(orgs);
 
+    // HACK(jonemerson): Return types the client doesn't crash on.
+    for (int i = 0; i < orgsJson.length(); i++) {
+      JSONObject o = orgsJson.getJSONObject(i);
+      o.put("type", "org");
+    }
+
     // Create response.
     JSONObject response = createSuccessResponse();
     response.put("results", orgsJson);
