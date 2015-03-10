@@ -173,7 +173,7 @@ public class Articles {
    */
   public static Iterable<Article> getArticlesForEntity(Entity entity, int limitPerType) 
       throws DatabaseSchemaException {
-    return getArticlesForKeywords(ImmutableList.of(entity.getKeyword()), limitPerType);
+    return Deduper.filterOutDupes(getArticlesForKeywords(ImmutableList.of(entity.getKeyword()), limitPerType));
   }
 
   /**
