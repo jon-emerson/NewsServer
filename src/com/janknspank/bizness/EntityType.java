@@ -1,5 +1,11 @@
 package com.janknspank.bizness;
 
+import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+
 public enum EntityType {
   THING("t", null, "http://www.w3.org/2002/07/owl#Thing"),
   WORK("work", THING, "http://dbpedia.org/ontology/Work"),
@@ -79,6 +85,20 @@ public enum EntityType {
   private final EntityType parent;
   private final String ontology;
   private final int depth;
+  private static final Map<EntityType, Set<EntityType>> SELF_AND_CHILDREN;
+  static {
+    ImmutableMap.Builder<EntityType, Set<EntityType>> mapBuilder = ImmutableMap.builder();
+    for (EntityType entityType : values()) {
+      ImmutableSet.Builder<EntityType> setBuilder = ImmutableSet.builder();
+      for (EntityType possibleSelfOrChildEntityType : values()) {
+        if (possibleSelfOrChildEntityType.isA(entityType)) {
+          setBuilder.add(possibleSelfOrChildEntityType);
+        }
+      }
+      mapBuilder.put(entityType, setBuilder.build());
+    }
+    SELF_AND_CHILDREN = mapBuilder.build();
+  }
 
   private EntityType(String value, EntityType parent, String ontology) {
     this.value = value;
@@ -120,6 +140,10 @@ public enum EntityType {
       testType = testType.parent;
     }
     return (testType == type);
+  }
+
+  public Set<EntityType> getAllVersions() {
+    return SELF_AND_CHILDREN.get(this);
   }
 
   public int getDepth() {

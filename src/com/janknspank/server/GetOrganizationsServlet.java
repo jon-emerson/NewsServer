@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.janknspank.bizness.EntityType;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -25,7 +28,13 @@ public class GetOrganizationsServlet extends StandardServlet {
     if (searchString != null) {
       orgs = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", searchString + "%"),
-          new QueryOption.WhereEquals("type", "org"),
+          new QueryOption.WhereEquals("type", Iterables.transform(EntityType.ORGANIZATION.getAllVersions(),
+              new Function<EntityType, String>() {
+                @Override
+                public String apply(EntityType entityType) {
+                  return entityType.toString();
+                }
+              })),
           new QueryOption.Limit(50));
     } else {
       orgs = Database.with(Entity.class).get(new QueryOption.WhereEquals("type", "org"), 
