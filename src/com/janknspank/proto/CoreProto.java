@@ -2852,14 +2852,32 @@ public final class CoreProto {
     // optional string old_id = 7;
     /**
      * <code>optional string old_id = 7;</code>
+     *
+     * <pre>
+     * This is the ID we had before we switched to 24-character MongoDB-generated
+     * GUIDs.  We probably can throw this away at some point... But it's here in
+     * case we find we need to update an old table that still has old references.
+     * </pre>
      */
     boolean hasOldId();
     /**
      * <code>optional string old_id = 7;</code>
+     *
+     * <pre>
+     * This is the ID we had before we switched to 24-character MongoDB-generated
+     * GUIDs.  We probably can throw this away at some point... But it's here in
+     * case we find we need to update an old table that still has old references.
+     * </pre>
      */
     java.lang.String getOldId();
     /**
      * <code>optional string old_id = 7;</code>
+     *
+     * <pre>
+     * This is the ID we had before we switched to 24-character MongoDB-generated
+     * GUIDs.  We probably can throw this away at some point... But it's here in
+     * case we find we need to update an old table that still has old references.
+     * </pre>
      */
     com.google.protobuf.ByteString
         getOldIdBytes();
@@ -2967,6 +2985,24 @@ public final class CoreProto {
      */
     com.janknspank.proto.CoreProto.Entity.EntityTopicOrBuilder getTopicOrBuilder(
         int index);
+
+    // optional int64 angel_list_id = 8;
+    /**
+     * <code>optional int64 angel_list_id = 8;</code>
+     *
+     * <pre>
+     * For AngelList items, the canonical ID for the entity in their system.
+     * </pre>
+     */
+    boolean hasAngelListId();
+    /**
+     * <code>optional int64 angel_list_id = 8;</code>
+     *
+     * <pre>
+     * For AngelList items, the canonical ID for the entity in their system.
+     * </pre>
+     */
+    long getAngelListId();
   }
   /**
    * Protobuf type {@code Entity}
@@ -3061,6 +3097,11 @@ public final class CoreProto {
             case 58: {
               bitField0_ |= 0x00000002;
               oldId_ = input.readBytes();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
+              angelListId_ = input.readInt64();
               break;
             }
           }
@@ -4431,12 +4472,24 @@ public final class CoreProto {
     private java.lang.Object oldId_;
     /**
      * <code>optional string old_id = 7;</code>
+     *
+     * <pre>
+     * This is the ID we had before we switched to 24-character MongoDB-generated
+     * GUIDs.  We probably can throw this away at some point... But it's here in
+     * case we find we need to update an old table that still has old references.
+     * </pre>
      */
     public boolean hasOldId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional string old_id = 7;</code>
+     *
+     * <pre>
+     * This is the ID we had before we switched to 24-character MongoDB-generated
+     * GUIDs.  We probably can throw this away at some point... But it's here in
+     * case we find we need to update an old table that still has old references.
+     * </pre>
      */
     public java.lang.String getOldId() {
       java.lang.Object ref = oldId_;
@@ -4454,6 +4507,12 @@ public final class CoreProto {
     }
     /**
      * <code>optional string old_id = 7;</code>
+     *
+     * <pre>
+     * This is the ID we had before we switched to 24-character MongoDB-generated
+     * GUIDs.  We probably can throw this away at some point... But it's here in
+     * case we find we need to update an old table that still has old references.
+     * </pre>
      */
     public com.google.protobuf.ByteString
         getOldIdBytes() {
@@ -4674,6 +4733,30 @@ public final class CoreProto {
       return topic_.get(index);
     }
 
+    // optional int64 angel_list_id = 8;
+    public static final int ANGEL_LIST_ID_FIELD_NUMBER = 8;
+    private long angelListId_;
+    /**
+     * <code>optional int64 angel_list_id = 8;</code>
+     *
+     * <pre>
+     * For AngelList items, the canonical ID for the entity in their system.
+     * </pre>
+     */
+    public boolean hasAngelListId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int64 angel_list_id = 8;</code>
+     *
+     * <pre>
+     * For AngelList items, the canonical ID for the entity in their system.
+     * </pre>
+     */
+    public long getAngelListId() {
+      return angelListId_;
+    }
+
     private void initFields() {
       id_ = "";
       oldId_ = "";
@@ -4682,6 +4765,7 @@ public final class CoreProto {
       source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
       canonicalId_ = "";
       topic_ = java.util.Collections.emptyList();
+      angelListId_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4715,6 +4799,9 @@ public final class CoreProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(7, getOldIdBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(8, angelListId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4752,6 +4839,10 @@ public final class CoreProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getOldIdBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(8, angelListId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4888,6 +4979,8 @@ public final class CoreProto {
         } else {
           topicBuilder_.clear();
         }
+        angelListId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -4949,6 +5042,10 @@ public final class CoreProto {
         } else {
           result.topic_ = topicBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.angelListId_ = angelListId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5018,6 +5115,9 @@ public final class CoreProto {
               topicBuilder_.addAllMessages(other.topic_);
             }
           }
+        }
+        if (other.hasAngelListId()) {
+          setAngelListId(other.getAngelListId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5124,12 +5224,24 @@ public final class CoreProto {
       private java.lang.Object oldId_ = "";
       /**
        * <code>optional string old_id = 7;</code>
+       *
+       * <pre>
+       * This is the ID we had before we switched to 24-character MongoDB-generated
+       * GUIDs.  We probably can throw this away at some point... But it's here in
+       * case we find we need to update an old table that still has old references.
+       * </pre>
        */
       public boolean hasOldId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <code>optional string old_id = 7;</code>
+       *
+       * <pre>
+       * This is the ID we had before we switched to 24-character MongoDB-generated
+       * GUIDs.  We probably can throw this away at some point... But it's here in
+       * case we find we need to update an old table that still has old references.
+       * </pre>
        */
       public java.lang.String getOldId() {
         java.lang.Object ref = oldId_;
@@ -5144,6 +5256,12 @@ public final class CoreProto {
       }
       /**
        * <code>optional string old_id = 7;</code>
+       *
+       * <pre>
+       * This is the ID we had before we switched to 24-character MongoDB-generated
+       * GUIDs.  We probably can throw this away at some point... But it's here in
+       * case we find we need to update an old table that still has old references.
+       * </pre>
        */
       public com.google.protobuf.ByteString
           getOldIdBytes() {
@@ -5160,6 +5278,12 @@ public final class CoreProto {
       }
       /**
        * <code>optional string old_id = 7;</code>
+       *
+       * <pre>
+       * This is the ID we had before we switched to 24-character MongoDB-generated
+       * GUIDs.  We probably can throw this away at some point... But it's here in
+       * case we find we need to update an old table that still has old references.
+       * </pre>
        */
       public Builder setOldId(
           java.lang.String value) {
@@ -5173,6 +5297,12 @@ public final class CoreProto {
       }
       /**
        * <code>optional string old_id = 7;</code>
+       *
+       * <pre>
+       * This is the ID we had before we switched to 24-character MongoDB-generated
+       * GUIDs.  We probably can throw this away at some point... But it's here in
+       * case we find we need to update an old table that still has old references.
+       * </pre>
        */
       public Builder clearOldId() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -5182,6 +5312,12 @@ public final class CoreProto {
       }
       /**
        * <code>optional string old_id = 7;</code>
+       *
+       * <pre>
+       * This is the ID we had before we switched to 24-character MongoDB-generated
+       * GUIDs.  We probably can throw this away at some point... But it's here in
+       * case we find we need to update an old table that still has old references.
+       * </pre>
        */
       public Builder setOldIdBytes(
           com.google.protobuf.ByteString value) {
@@ -5738,6 +5874,55 @@ public final class CoreProto {
           topic_ = null;
         }
         return topicBuilder_;
+      }
+
+      // optional int64 angel_list_id = 8;
+      private long angelListId_ ;
+      /**
+       * <code>optional int64 angel_list_id = 8;</code>
+       *
+       * <pre>
+       * For AngelList items, the canonical ID for the entity in their system.
+       * </pre>
+       */
+      public boolean hasAngelListId() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int64 angel_list_id = 8;</code>
+       *
+       * <pre>
+       * For AngelList items, the canonical ID for the entity in their system.
+       * </pre>
+       */
+      public long getAngelListId() {
+        return angelListId_;
+      }
+      /**
+       * <code>optional int64 angel_list_id = 8;</code>
+       *
+       * <pre>
+       * For AngelList items, the canonical ID for the entity in their system.
+       * </pre>
+       */
+      public Builder setAngelListId(long value) {
+        bitField0_ |= 0x00000080;
+        angelListId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 angel_list_id = 8;</code>
+       *
+       * <pre>
+       * For AngelList items, the canonical ID for the entity in their system.
+       * </pre>
+       */
+      public Builder clearAngelListId() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        angelListId_ = 0L;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:Entity)
@@ -16889,74 +17074,75 @@ public final class CoreProto {
       "l\"\200\001\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001" +
       "\220\246\035\004\230\246\035\200\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017Mon" +
-      "goDB.Session\"\257\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
+      "goDB.Session\"\306\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
       "\001\220\246\035\002\230\246\035\030\250\246\035\001\022\034\n\006old_id\030\007 \001(\tB\014\220\246\035\005\230\246\035\030\250" +
       "\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004ty" +
       "pe\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001",
       "(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014canonica" +
       "l_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\"\n\005topic\030\006 \003(\0132" +
-      "\023.Entity.EntityTopic\032\277\002\n\013EntityTopic\022\033\n\t" +
-      "entity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001" +
-      "(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010" +
-      "strength\030\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033." +
-      "Entity.EntityTopic.Context:\007UNKNOWN\"\220\001\n\007" +
-      "Context\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED" +
-      "_AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIS" +
-      "T_INVESTED_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026",
-      "\n\022WIKIPEDIA_SUBTOPIC\020\005\"d\n\006Source\022\013\n\007UNKN" +
-      "OWN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPE" +
-      "DIA_LONG_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003\022\010\n\004US" +
-      "ER\020\004:\020\212\265\030\014MySQL.Entity\"\347\001\n\nVectorData\022\034\n" +
-      "\016document_count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_freq" +
-      "uency\030\002 \003(\0132\031.VectorData.WordFrequency\022#" +
-      "\n\014distribution\030\003 \001(\0132\r.Distribution\032c\n\rW" +
-      "ordFrequency\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\t" +
-      "frequency\030\002 \001(\005B\004\210\246\035\001\022!\n\023document_occure" +
-      "nces\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndus",
-      "try\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n" +
-      "\020industry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017tra" +
-      "iner_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265" +
-      "\030\036MongoDB.TrainedArticleIndustry\"\347\001\n\034Tra" +
-      "inedArticleClassification\022 \n\006url_id\030\001 \001(" +
-      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classific" +
-      "ation_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007ch" +
-      "ecked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id" +
-      "\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.Tr" +
-      "ainedArticleClassification\"\207\001\n\014Distribut",
-      "ion\022,\n\npercentile\030\001 \003(\0132\030.Distribution.P" +
-      "ercentile\032I\n\nPercentile\022\022\n\npercentile\030\001 " +
-      "\001(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_point_count\030\003" +
-      " \001(\003\"\226\003\n\026ShareNormalizationData\022T\n\027time_" +
-      "range_distribution\030\002 \003(\0132-.ShareNormaliz" +
-      "ationData.TimeRangeDistributionB\004\210\246\035\001\022J\n" +
-      "\022domain_share_count\030\003 \003(\0132(.ShareNormali" +
-      "zationData.DomainShareCountB\004\210\246\035\001\032x\n\025Tim" +
-      "eRangeDistribution\022\032\n\014start_millis\030\001 \001(\003" +
-      "B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014dist",
-      "ribution\030\003 \001(\0132\r.DistributionB\004\210\246\035\001\032`\n\020D" +
-      "omainShareCount\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022\033\n" +
-      "\rarticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_coun" +
-      "t\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001 \001(\tB" +
-      "\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB\024\210\246" +
-      "\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035" +
-      "\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013" +
-      "create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MyS" +
-      "QL.UrlRating\"\331\001\n\022DeviceRegistration\022\034\n\002i" +
-      "d\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001",
-      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(" +
-      "\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB" +
-      "\014\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001" +
-      ":\036\212\265\030\032MongoDB.DeviceRegistration\"\274\002\n\020Pus" +
-      "hNotification\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250" +
-      "\246\035\001\240\246\035\003\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\022\022\n\ncl" +
-      "ick_time\030\003 \001(\003\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035" +
-      "\003\230\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022" +
-      "&\n\013device_type\030\006 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022" +
-      "\037\n\tdevice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host",
-      "\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200" +
-      "\010:\034\212\265\030\030MongoDB.PushNotification*/\n\nDevic" +
-      "eType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002" +
-      "B!\n\024com.janknspank.protoB\tCoreProto"
+      "\023.Entity.EntityTopic\022\025\n\rangel_list_id\030\010 " +
+      "\001(\003\032\277\002\n\013EntityTopic\022\033\n\tentity_id\030\001 \001(\tB\010" +
+      "\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004t" +
+      "ype\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210" +
+      "\246\035\001\0225\n\007context\030\005 \001(\0162\033.Entity.EntityTopi" +
+      "c.Context:\007UNKNOWN\"\220\001\n\007Context\022\013\n\007UNKNOW" +
+      "N\020\000\022\027\n\023ANGELLIST_WORKED_AT\020\001\022\025\n\021ANGELLIS" +
+      "T_FOUNDED\020\002\022\031\n\025ANGELLIST_INVESTED_IN\020\003\022\025",
+      "\n\021ANGELLIST_ADVISED\020\004\022\026\n\022WIKIPEDIA_SUBTO" +
+      "PIC\020\005\"d\n\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_" +
+      "INSTANCE_TYPE\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT" +
+      "\020\002\022\r\n\tANGELLIST\020\003\022\010\n\004USER\020\004:\020\212\265\030\014MySQL.E" +
+      "ntity\"\347\001\n\nVectorData\022\034\n\016document_count\030\001" +
+      " \001(\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 \003(\0132\031.Vec" +
+      "torData.WordFrequency\022#\n\014distribution\030\003 " +
+      "\001(\0132\r.Distribution\032c\n\rWordFrequency\022\026\n\004w" +
+      "ord\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(\005B\004" +
+      "\210\246\035\001\022!\n\023document_occurences\030\003 \001(\005B\004\210\246\035\001\"",
+      "\255\001\n\026TrainedArticleIndustry\022 \n\006url_id\030\001 \001" +
+      "(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_code_id" +
+      "\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\003 \001(" +
+      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB.Trained" +
+      "ArticleIndustry\"\347\001\n\034TrainedArticleClassi" +
+      "fication\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246" +
+      "\035\001\0225\n\033article_classification_code\030\002 \001(\tB" +
+      "\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001" +
+      "\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
+      "\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArticleClass",
+      "ification\"\207\001\n\014Distribution\022,\n\npercentile" +
+      "\030\001 \003(\0132\030.Distribution.Percentile\032I\n\nPerc" +
+      "entile\022\022\n\npercentile\030\001 \001(\005\022\r\n\005value\030\002 \001(" +
+      "\001\022\030\n\020data_point_count\030\003 \001(\003\"\226\003\n\026ShareNor" +
+      "malizationData\022T\n\027time_range_distributio" +
+      "n\030\002 \003(\0132-.ShareNormalizationData.TimeRan" +
+      "geDistributionB\004\210\246\035\001\022J\n\022domain_share_cou" +
+      "nt\030\003 \003(\0132(.ShareNormalizationData.Domain" +
+      "ShareCountB\004\210\246\035\001\032x\n\025TimeRangeDistributio" +
+      "n\022\032\n\014start_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_mil",
+      "lis\030\002 \001(\003B\004\210\246\035\001\022)\n\014distribution\030\003 \001(\0132\r." +
+      "DistributionB\004\210\246\035\001\032`\n\020DomainShareCount\022\024" +
+      "\n\006domain\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 " +
+      "\001(\003B\004\210\246\035\001\022\031\n\013share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n" +
+      "\tUrlRating\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
+      "\240\246\035\003\022#\n\005email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035" +
+      "\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rat" +
+      "ing\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003" +
+      "B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRating\"\331\001\n\022" +
+      "DeviceRegistration\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002",
+      "\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250" +
+      "\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.DeviceTypeB\004\210" +
+      "\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013" +
+      "create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032MongoDB.Dev" +
+      "iceRegistration\"\274\002\n\020PushNotification\022 \n\002" +
+      "id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\031\n\013create" +
+      "_time\030\002 \001(\003B\004\210\246\035\001\022\022\n\nclick_time\030\003 \001(\003\022!\n" +
+      "\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\034\n\006url_" +
+      "id\030\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\006 " +
+      "\001(\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\007 \001(",
+      "\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022" +
+      "\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030MongoDB.Pu" +
+      "shNotification*/\n\nDeviceType\022\013\n\007UNKNOWN\020" +
+      "\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.janknspan" +
+      "k.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -16986,7 +17172,7 @@ public final class CoreProto {
           internal_static_Entity_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Entity_descriptor,
-              new java.lang.String[] { "Id", "OldId", "Keyword", "Type", "Source", "CanonicalId", "Topic", });
+              new java.lang.String[] { "Id", "OldId", "Keyword", "Type", "Source", "CanonicalId", "Topic", "AngelListId", });
           internal_static_Entity_EntityTopic_descriptor =
             internal_static_Entity_descriptor.getNestedTypes().get(0);
           internal_static_Entity_EntityTopic_fieldAccessorTable = new
