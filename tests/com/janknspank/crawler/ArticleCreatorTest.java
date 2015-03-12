@@ -127,6 +127,9 @@ public class ArticleCreatorTest {
             + "CMAs was a bad idea. (But not racist.)")));
     assertEquals("Why I Did Not Go To Jail",
         ArticleCreator.getTitle(getDocumentWithTitle("Why I Did Not Go To Jail - Ben's Blog")));
+    assertEquals("Study: Oil Price Downturn Creates Need for 'Cost Culture' in Industry",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "RIGZONE - Study: Oil Price Downturn Creates Need for 'Cost Culture' in Industry")));
   }
 
   @Test

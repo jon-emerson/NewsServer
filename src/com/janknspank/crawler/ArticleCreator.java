@@ -60,7 +60,8 @@ class ArticleCreator {
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.sfgate.com/img/pages/article/opengraph_default.png",
       "http://images.forbes.com/media/assets/forbes_1200x1200.jpg");
-  private static final Pattern TEXT_TO_REMOVE_FROM_TITLE_ENDS[] = new Pattern[] {
+  private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
+      Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|—)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+([A-Z][A-Za-z]+\\.com)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+[A-Z][A-Za-z\\s'']{2,25}$")};
@@ -422,10 +423,10 @@ class ArticleCreator {
    */
   @VisibleForTesting
   static String cleanTitle(String title) {
-    for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLE_ENDS) {
+    for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLES) {
       Matcher matcher = pattern.matcher(title);
       if (matcher.find()) {
-        title = title.substring(0, title.length() - matcher.group().length());
+        title = title.substring(0, matcher.start()) + title.substring(matcher.end());
       }
     }
     if (title.length() > MAX_TITLE_LENGTH) {
