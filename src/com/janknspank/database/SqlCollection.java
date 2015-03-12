@@ -475,7 +475,10 @@ public class SqlCollection<T extends Message> extends Collection<T> {
       } else {
         sql.append(sql.length() == 0 ? " WHERE " : " AND ")
             .append(whereEquals.getFieldName())
-            .append(whereEquals instanceof WhereNotEquals ? " NOT" : "")
+            .append(
+                (whereEquals instanceof WhereNotEquals
+                    || whereEquals instanceof WhereNotEqualsEnum
+                    || whereEquals instanceof WhereNotEqualsNumber) ? " NOT" : "")
             .append(" IN (")
             .append(Joiner.on(",").join(Iterables.limit(Iterables.cycle("?"), size)))
             .append(")");
