@@ -25,22 +25,24 @@ public class GetOrganizationsServlet extends StandardServlet {
     String searchString  = getParameter(req, "contains");
     Iterable<Entity> orgs; 
 
+    Iterable<String> organizationTypes =
+        Iterables.transform(EntityType.ORGANIZATION.getAllVersions(),
+            new Function<EntityType, String>() {
+              @Override
+              public String apply(EntityType entityType) {
+                return entityType.toString();
+              }
+            });
     if (searchString != null) {
       orgs = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", searchString + "%"),
-          new QueryOption.WhereEquals("type", Iterables.transform(EntityType.ORGANIZATION.getAllVersions(),
-              new Function<EntityType, String>() {
-                @Override
-                public String apply(EntityType entityType) {
-                  return entityType.toString();
-                }
-              })),
+          new QueryOption.WhereEquals("type", organizationTypes),
           new QueryOption.Limit(50),
           new QueryOption.DescendingSort("importance"));
     } else {
       orgs = Database.with(Entity.class).get(
-          new QueryOption.WhereEquals("type", "org"),
-          new QueryOption.Limit(200),
+          new QueryOption.WhereEquals("type", organizationTypes),
+          new QueryOption.Limit(100),
           new QueryOption.DescendingSort("importance"));
     }
 
