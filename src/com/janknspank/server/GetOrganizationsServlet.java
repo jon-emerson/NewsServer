@@ -40,10 +40,15 @@ public class GetOrganizationsServlet extends StandardServlet {
           new QueryOption.Limit(50),
           new QueryOption.DescendingSort("importance"));
     } else {
-      orgs = Database.with(Entity.class).get(
-          new QueryOption.WhereEquals("type", organizationTypes),
-          new QueryOption.Limit(100),
-          new QueryOption.DescendingSort("importance"));
+      orgs = Iterables.concat(
+          Database.with(Entity.class).get(
+              new QueryOption.WhereEquals("type", EntityType.COMPANY.toString()),
+              new QueryOption.Limit(100),
+              new QueryOption.DescendingSort("importance")),
+          Database.with(Entity.class).get(
+              new QueryOption.WhereEquals("type", EntityType.ORGANIZATION.toString()),
+              new QueryOption.Limit(100),
+              new QueryOption.DescendingSort("importance")));
     }
 
     JSONArray orgsJson = Serializer.toJSON(orgs);
