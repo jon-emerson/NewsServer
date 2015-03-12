@@ -93,7 +93,7 @@ public class VectorFeatureCreator {
       }
     }
     Iterable<Article> articles = Iterables.concat(
-        ArticleCrawler.getArticles(urls).values(),
+        ArticleCrawler.getArticles(urls, true /* retain */).values(),
         Articles.getArticlesForKeywords(words, 1000));
     System.out.println(Iterables.size(articles) + " articles found");
 

@@ -24,15 +24,31 @@ import com.janknspank.common.Logger;
 import com.janknspank.database.ExtensionsProto.Required;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
 import com.janknspank.database.ExtensionsProto.StringCharset;
+import com.janknspank.database.QueryOption.DescendingSort;
+import com.janknspank.database.QueryOption.Limit;
+import com.janknspank.database.QueryOption.LimitWithOffset;
+import com.janknspank.database.QueryOption.Sort;
 import com.janknspank.database.QueryOption.WhereEquals;
 import com.janknspank.database.QueryOption.WhereEqualsEnum;
 import com.janknspank.database.QueryOption.WhereEqualsIgnoreCase;
 import com.janknspank.database.QueryOption.WhereEqualsNumber;
+import com.janknspank.database.QueryOption.WhereFalse;
+import com.janknspank.database.QueryOption.WhereGreaterThan;
+import com.janknspank.database.QueryOption.WhereGreaterThanOrEquals;
+import com.janknspank.database.QueryOption.WhereInequality;
+import com.janknspank.database.QueryOption.WhereLessThan;
+import com.janknspank.database.QueryOption.WhereLessThanOrEquals;
+import com.janknspank.database.QueryOption.WhereLike;
+import com.janknspank.database.QueryOption.WhereLikeIgnoreCase;
 import com.janknspank.database.QueryOption.WhereNotEquals;
 import com.janknspank.database.QueryOption.WhereNotEqualsEnum;
 import com.janknspank.database.QueryOption.WhereNotEqualsNumber;
 import com.janknspank.database.QueryOption.WhereNotLike;
+import com.janknspank.database.QueryOption.WhereNotLikeIgnoreCase;
 import com.janknspank.database.QueryOption.WhereNotNull;
+import com.janknspank.database.QueryOption.WhereNull;
+import com.janknspank.database.QueryOption.WhereOption;
+import com.janknspank.database.QueryOption.WhereTrue;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 public class SqlCollection<T extends Message> extends Collection<T> {
@@ -228,10 +244,10 @@ public class SqlCollection<T extends Message> extends Collection<T> {
     int pulledOutFieldCount = 0;
     for (FieldDescriptor field : storageMethodMap.keySet()) {
       StorageMethod storageMethod = storageMethodMap.get(field);
-      if (storageMethod == StorageMethod.PRIMARY_KEY ||
-          storageMethod == StorageMethod.INDEX ||
-          storageMethod == StorageMethod.UNIQUE_INDEX ||
-          storageMethod == StorageMethod.PULL_OUT) {
+      if (storageMethod == StorageMethod.PRIMARY_KEY
+          || storageMethod == StorageMethod.INDEX
+          || storageMethod == StorageMethod.UNIQUE_INDEX
+          || storageMethod == StorageMethod.PULL_OUT) {
         ++pulledOutFieldCount;
         sql.append(field.getName() + ", ");
       }
@@ -314,7 +330,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
    * Returns an UPDATE statement for updating the given protocol buffer message
    * in its respective MySQL table.
    */
-  private PreparedStatement getRawUpdateStatement(QueryOption.WhereOption... whereOptions)
+  private PreparedStatement getRawUpdateStatement(WhereOption... whereOptions)
       throws DatabaseSchemaException, SQLException {
     // Start creating the SQL statement.
     StringBuilder sql = new StringBuilder();
@@ -343,21 +359,21 @@ public class SqlCollection<T extends Message> extends Collection<T> {
    * database before.  Returns the number of modified objects.
    */
   @Override
-  public int update(Iterable<T> messages, QueryOption.WhereOption... whereOptions)
+  public int update(Iterable<T> messages, WhereOption... whereOptions)
       throws DatabaseSchemaException, DatabaseRequestException {
     if (Iterables.isEmpty(messages)) {
       return 0;
     }
 
     T firstMessage = Iterables.getFirst(messages, null);
-    for (QueryOption.WhereOption whereOption : whereOptions) {
+    for (WhereOption whereOption : whereOptions) {
       if (primaryKeyField != null && primaryKeyField.equals(whereOption.getFieldName())) {
         throw new IllegalStateException("Update WhereEquals options cannot put "
             + "additional constraints on the primary key");
       }
     }
     whereOptions = ObjectArrays.concat(
-        new QueryOption.WhereEquals(primaryKeyField, Database.getPrimaryKey(firstMessage)),
+        new WhereEquals(primaryKeyField, Database.getPrimaryKey(firstMessage)),
         whereOptions);
 
     int columnCount = getColumnCount();
@@ -368,7 +384,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         Validator.assertValid(message);
         Asserts.assertTrue(firstMessage.getClass().equals(message.getClass()),
             "Types do not match", DatabaseRequestException.class);
-        whereOptions[0] = new QueryOption.WhereEquals(primaryKeyField,
+        whereOptions[0] = new WhereEquals(primaryKeyField,
             Database.getPrimaryKey(message));
         prepareInsertOrUpdateStatement(statement, message);
         int i = 0;
@@ -409,20 +425,20 @@ public class SqlCollection<T extends Message> extends Collection<T> {
           "Unsupported Number type: " + whereValue.getClass().getSimpleName());
     }
   }
-  
+
   private String getLimitSql(QueryOption[] options) {
-    List<QueryOption.Limit> queryOptionList = QueryOption.getList(options, QueryOption.Limit.class);
+    List<Limit> queryOptionList = QueryOption.getList(options, Limit.class);
     if (queryOptionList.size() > 1) {
-      throw new IllegalStateException("Duplicate definitions of QueryOption.Limit not allowed");
+      throw new IllegalStateException("Duplicate definitions of Limit not allowed");
     }
     if (queryOptionList.isEmpty()) {
       return "";
     }
-    QueryOption.Limit limitOption = (QueryOption.Limit) queryOptionList.get(0);
+    Limit limitOption = (Limit) queryOptionList.get(0);
     StringBuilder sql = new StringBuilder();
     sql.append(" LIMIT ");
-    if (limitOption instanceof QueryOption.LimitWithOffset) {
-      sql.append(((QueryOption.LimitWithOffset) limitOption).getOffset()).append(", ");
+    if (limitOption instanceof LimitWithOffset) {
+      sql.append(((LimitWithOffset) limitOption).getOffset()).append(", ");
     }
     sql.append(limitOption.getLimit());
     return sql.toString();
@@ -430,21 +446,21 @@ public class SqlCollection<T extends Message> extends Collection<T> {
 
   private String getWhereClauseSql(QueryOption[] options) {
     StringBuilder sql = new StringBuilder();
-    for (QueryOption.WhereOption whereEquals :
+    for (WhereOption whereEquals :
         Iterables.concat(
-            QueryOption.getList(options, QueryOption.WhereEquals.class),
-            QueryOption.getList(options, QueryOption.WhereEqualsEnum.class),
-            QueryOption.getList(options, QueryOption.WhereEqualsNumber.class))) {
+            QueryOption.getList(options, WhereEquals.class),
+            QueryOption.getList(options, WhereEqualsEnum.class),
+            QueryOption.getList(options, WhereEqualsNumber.class))) {
       int size = whereEquals.getFieldCount();
-      if (size == 0 &&
-          (whereEquals instanceof WhereEquals
+      if (size == 0
+          && (whereEquals instanceof WhereEquals
               || whereEquals instanceof WhereEqualsEnum
               || whereEquals instanceof WhereEqualsNumber)) {
         throw new IllegalStateException("Where clause contains no values - "
             + "This should have been caught earlier.");
       }
-      if (size == 0 &&
-          (whereEquals instanceof WhereNotEquals
+      if (size == 0
+          && (whereEquals instanceof WhereNotEquals
               || whereEquals instanceof WhereNotEqualsEnum
               || whereEquals instanceof WhereNotEqualsNumber)) {
         // OK, don't write anything - Everything doesn't equal nothing.
@@ -465,39 +481,48 @@ public class SqlCollection<T extends Message> extends Collection<T> {
             .append(")");
       }
     }
-    for (QueryOption.WhereLike whereLike :
-        QueryOption.getList(options, QueryOption.WhereLike.class)) {
-      if (whereLike instanceof QueryOption.WhereLikeIgnoreCase
-          || whereLike instanceof QueryOption.WhereNotLikeIgnoreCase) {
+    for (WhereLike whereLike :
+        QueryOption.getList(options, WhereLike.class)) {
+      if (whereLike instanceof WhereLikeIgnoreCase
+          || whereLike instanceof WhereNotLikeIgnoreCase) {
         sql.append(sql.length() == 0 ? " WHERE " : " AND ")
             .append("LOWER(").append(whereLike.getFieldName()).append(")")
             .append(whereLike instanceof WhereNotLike ? " NOT" : "")
             .append(" LIKE ?");
       } else {
         sql.append(sql.length() == 0 ? " WHERE " : " AND ")
-        .append(whereLike.getFieldName())
-        .append(whereLike instanceof WhereNotLike ? " NOT" : "")
-        .append(" LIKE ?");
+            .append(whereLike.getFieldName())
+            .append(whereLike instanceof WhereNotLike ? " NOT" : "")
+            .append(" LIKE ?");
       }
     }
-    for (QueryOption.WhereNull whereNull :
-        QueryOption.getList(options, QueryOption.WhereNull.class)) {
+    for (WhereTrue whereTrue : QueryOption.getList(options, WhereTrue.class)) {
+      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+          .append(whereTrue.getFieldName())
+          .append(" IS TRUE");
+    }
+    for (WhereFalse whereFalse : QueryOption.getList(options, WhereFalse.class)) {
+      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+          .append(whereFalse.getFieldName())
+          .append(" IS FALSE");
+    }
+    for (WhereNull whereNull : QueryOption.getList(options, WhereNull.class)) {
       sql.append(sql.length() == 0 ? " WHERE " : " AND ")
           .append(whereNull.getFieldName())
           .append(" IS")
           .append(whereNull instanceof WhereNotNull ? " NOT" : "")
           .append(" NULL");
     }
-    for (QueryOption.WhereInequality whereInequality :
-        QueryOption.getList(options, QueryOption.WhereInequality.class)) {
+    for (WhereInequality whereInequality :
+        QueryOption.getList(options, WhereInequality.class)) {
       String comparatorStr;
-      if (whereInequality instanceof QueryOption.WhereGreaterThan) {
+      if (whereInequality instanceof WhereGreaterThan) {
         comparatorStr = ">";
-      } else if (whereInequality instanceof QueryOption.WhereGreaterThanOrEquals) {
+      } else if (whereInequality instanceof WhereGreaterThanOrEquals) {
         comparatorStr = ">=";
-      } else if (whereInequality instanceof QueryOption.WhereLessThan) {
+      } else if (whereInequality instanceof WhereLessThan) {
         comparatorStr = "<";
-      } else if (whereInequality instanceof QueryOption.WhereLessThanOrEquals) {
+      } else if (whereInequality instanceof WhereLessThanOrEquals) {
         comparatorStr = "<=";
       } else {
         throw new IllegalStateException("Unexpected inequality: " + whereInequality.getClass());
@@ -511,11 +536,11 @@ public class SqlCollection<T extends Message> extends Collection<T> {
 
   private Iterable<Object> getWhereValues(QueryOption[] options) {
     List<Object> values = Lists.newArrayList();
-    for (QueryOption.WhereOption whereEquals :
+    for (WhereOption whereEquals :
         Iterables.concat(
-            QueryOption.getList(options, QueryOption.WhereEquals.class),
-            QueryOption.getList(options, QueryOption.WhereEqualsEnum.class),
-            QueryOption.getList(options, QueryOption.WhereEqualsNumber.class))) {
+            QueryOption.getList(options, WhereEquals.class),
+            QueryOption.getList(options, WhereEqualsEnum.class),
+            QueryOption.getList(options, WhereEqualsNumber.class))) {
       if (whereEquals instanceof WhereEqualsIgnoreCase) {
         for (String value : ((WhereEqualsIgnoreCase) whereEquals).getValues()) {
           values.add(value.toLowerCase());
@@ -537,17 +562,17 @@ public class SqlCollection<T extends Message> extends Collection<T> {
             "Unknown WhereOption: " + whereEquals.getClass().getSimpleName());
       }
     }
-    for (QueryOption.WhereLike whereLike :
-        QueryOption.getList(options, QueryOption.WhereLike.class)) {
-      if (whereLike instanceof QueryOption.WhereLikeIgnoreCase
-          || whereLike instanceof QueryOption.WhereNotLikeIgnoreCase) {
+    for (WhereLike whereLike :
+        QueryOption.getList(options, WhereLike.class)) {
+      if (whereLike instanceof WhereLikeIgnoreCase
+          || whereLike instanceof WhereNotLikeIgnoreCase) {
         values.add(whereLike.getValue().toLowerCase());
       } else {
         values.add(whereLike.getValue());
       }
     }
-    for (QueryOption.WhereInequality whereInequality :
-      QueryOption.getList(options, QueryOption.WhereInequality.class)) {
+    for (WhereInequality whereInequality :
+      QueryOption.getList(options, WhereInequality.class)) {
     values.add(whereInequality.getValue());
   }
     return values;
@@ -555,10 +580,10 @@ public class SqlCollection<T extends Message> extends Collection<T> {
 
   private String getOrderBySql(QueryOption[] options) {
     StringBuilder sb = new StringBuilder();
-    for (QueryOption.Sort sort : QueryOption.getList(options, QueryOption.Sort.class)) {
+    for (Sort sort : QueryOption.getList(options, Sort.class)) {
       sb.append((sb.length() == 0) ? " ORDER BY " : ", ");
       sb.append(sort.getFieldName());
-      if (sort instanceof QueryOption.DescendingSort) {
+      if (sort instanceof DescendingSort) {
         sb.append(" DESC");
       }
     }
@@ -745,7 +770,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
    * QueryOptions.
    */
   @SuppressWarnings("resource")
-  public long getSize(QueryOption.WhereOption... whereOptions) throws DatabaseSchemaException {
+  public long getSize(WhereOption... whereOptions) throws DatabaseSchemaException {
     PreparedStatement statement = null;
     ResultSet results = null;
     try {

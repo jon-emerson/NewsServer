@@ -1,0 +1,47 @@
+root_domain: "rigzone.com"
+start_url: "http://www.rigzone.com/"
+path_blacklist {
+  needle: "/data/"
+}
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/jobs/"
+}
+path_blacklist {
+  needle: "/market/"
+}
+path_blacklist {
+  needle: "/news/commodity.asp"
+}
+path_blacklist {
+  needle: "/news/image_"
+}
+path_blacklist {
+  needle: "/search/"
+}
+path_blacklist {
+  needle: "/training/"
+}
+paragraph_selector: "#articleText p"
+article_url_pattern {
+  path_regex: "^\\/news\\/.*\\/[0-9]{5,8}\\/.+(?!\\.asp)$"
+}
+whitelisted_query_parameter: "c_id"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.rigzone.com/news/oil_gas/a/137629/Explosion_Kills_3_Workers_At_Parsley_Energy_Texas_Oil_Rig"
+    article_url: "http://www.rigzone.com/news/oil_gas/a/137619/Eland_on_Track_to_Drill_More_Wells_Onshore_Nigeria"
+    article_url: "http://www.rigzone.com/news/oil_gas/a/137611/Baraka_Applies_to_Renew_Exploration_Permit_EP128_in_NTs_Georgina_Basin"
+    article_url: "http://www.rigzone.com/news/oil_gas/a/137594/Source_Verisk_to_Buy_Energy_Data_Firm_Wood_Mackenzie_in_279B_Deal"
+    article_url: "http://www.rigzone.com/news/oil_gas/a/137562/Indonesia_Considers_Turning_SKK_Migas_into_StateOwned_Enterprise"
+    article_url: "http://www.rigzone.com/news/oil_gas/a/137614/Swire_Oilfield_Services_Opens_New_Yard_at_Kemaman_in_Malaysia"
+    non_article_url: "http://www.rigzone.com/news/category.asp?c_id=3"
+    non_article_url: "http://www.rigzone.com/news/oil_gas/r/4/AustralAsia"
+    non_article_url: "http://www.rigzone.com/contactform.asp"
+    non_article_url: "https://www.rigzone.com/member_register.asp"
+    non_article_url: "https://www.rigzone.com/privacypolicy.asp"
+    non_article_url: "https://www.rigzone.com/news/most_popular.asp"
+  }
+}

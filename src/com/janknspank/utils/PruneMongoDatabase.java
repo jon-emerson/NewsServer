@@ -18,12 +18,12 @@ import com.janknspank.proto.CoreProto.Url;
 /**
  * Reduces the size of our Mongo DB database so that we can stay within our
  * quota.
- * 
+ *
  * Steps performed:
  * - Keep Article count under 25,000 by removing the oldest articles.  (This
  *     keeps the Article collection at around 250 megabytes.)
  * - Repair the database to reclaim the space we created.
- * 
+ *
  * URLs are NOT pruned - We need them so that we know which articles we've seen
  * before.  And they're really not that big.  But we do update the Urls table
  * to remove crawl data from any articles we've pruned above.
@@ -100,10 +100,14 @@ public class PruneMongoDatabase {
 
     // Mongo DB doesn't have a "delete with limit" concept.  So, instead,
     // find the 25,000th oldest article in the system, then delete everything
-    // older than it.
+    // older than it.  Complicating this calculation, there's also a set of
+    // articles we retain for training the system (vectors, neural network) -
+    // so make sure we don't delete those.
+    long numArticlesToRetain =
+        Database.with(Article.class).getSize(new QueryOption.WhereTrue("retain"));
     Article oldestArticle = Database.with(Article.class).getFirst(
         new QueryOption.DescendingSort("published_time"),
-        new QueryOption.LimitWithOffset(1, (int) MAX_ARTICLE_COUNT));
+        new QueryOption.LimitWithOffset(1, (int) (MAX_ARTICLE_COUNT - numArticlesToRetain)));
     if (oldestArticle == null) {
       System.out.println("We're already within the limits for # of articles allowed, "
           + "deleting no articles!");
@@ -111,7 +115,8 @@ public class PruneMongoDatabase {
     }
 
     int count = Database.with(Article.class).delete(
-        new QueryOption.WhereLessThan("published_time", oldestArticle.getPublishedTime()));
+        new QueryOption.WhereLessThan("published_time", oldestArticle.getPublishedTime()),
+        new QueryOption.WhereFalse("retain"));
     System.out.println("Deleted " + count + " older articles in "
         + (System.currentTimeMillis() - startTime) + "ms.  Article count: "
         + Database.with(Article.class).getSize());

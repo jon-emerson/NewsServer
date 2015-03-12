@@ -89,14 +89,19 @@ message SiteManifest {
   // on this site.  If any Pattern matches, the URL is determined to be an
   // article.
   message ArticleUrlPattern {
-    // A regular expression specification to run against the article's path.
-    optional string path_regex = 1 [
-      (required) = YES,
+    // If present, a subdomain that this regular expression is restricted to.
+    optional string subdomain = 1 [
       (string_length) = 767
     ];
 
-    // If present, a subdomain that this regular expression is restricted to.
-    optional string subdomain = 2 [
+    // A regular expression specification to run against the article's path.
+    optional string path_regex = 2 [
+      (string_length) = 767
+    ];
+
+    // A regular expression specification to run against the article unparsed
+    // query string.
+    optional string query_regex = 3 [
       (string_length) = 767
     ];
   }

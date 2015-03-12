@@ -1,5 +1,5 @@
 root_domain: "techcrunch.com"
-start_url: "http://www.techcrunch.com"
+start_url: "http://techcrunch.com"
 subdomain_blacklist: "disrupt.techcrunch.com"
 subdomain_blacklist: "jp.techcrunch.com"
 path_blacklist {

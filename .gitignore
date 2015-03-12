@@ -2,11 +2,11 @@
 .settings
 .DS_Store
 
-/angellist
 /build
 /data
 /dbpedia
 /dist
 /lib
+/rawdata/angellist
 /target
 /.eclipsebin

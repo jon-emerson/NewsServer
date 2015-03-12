@@ -53,7 +53,7 @@ public class UserRatingsBenchmark {
     }
 
     // Load up all articles that have ratings
-    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings);
+    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings, true /* retain */);
 
     // Compute scores
     for (UrlRating urlRating : allRatings) {

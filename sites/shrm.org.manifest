@@ -1,0 +1,38 @@
+root_domain: "shrm.org"
+start_url: "http://www.shrm.org/publications/hrnews/pages/default.aspx"
+start_url: "http://www.shrm.org/publications/hrnews/archive/pages/default.aspx"
+paragraph_selector: "article p"
+paragraph_selector: "#subhead p"
+article_url_pattern {
+  path_regex: "\\/pages\\/[^\\/]+-[^\\/]+\\.aspx$"
+}
+article_url_pattern {
+  path_regex: "\\/hrmagazine\\/[a-zA-Z]+\\/Lists\\/Posts\\/Post.aspx$"
+}
+whitelisted_query_parameter: "ID"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.shrm.org/hrdisciplines/staffingmanagement/articles/pages/quits-rate-continues-rise.aspx"
+    article_url: "http://www.shrm.org/legalissues/stateandlocalresources/pages/calif.-heat-illness-prevention-regulation-amended.aspx"
+    article_url: "http://www.shrm.org/hrdisciplines/benefits/articles/pages/401k-funds-focus.aspx"
+    article_url: "http://www.shrm.org/hrdisciplines/benefits/articles/pages/pension-lump-sum-notices.aspx"
+    article_url: "http://www.shrm.org/hrdisciplines/benefits/articles/pages/supreme-court-stock-drop.aspx"
+    article_url: "http://www.shrm.org/hrdisciplines/benefits/articles/pages/401k-pension-rollovers.aspx"
+    article_url: "http://www.shrm.org/publications/hrmagazine/editorialcontent/2015/0315/pages/0315-meyer-cultural-differences.aspx"
+    article_url: "http://www.shrm.org/publications/hrnews/pages/top-10-most-least-stressful-jobs-for-2015.aspx"
+    article_url: "http://www.shrm.org/Publications/hrmagazine/bookblog/Lists/Posts/Post.aspx?ID=30"
+    article_url: "http://www.shrm.org/Publications/hrmagazine/bookblog/Lists/Posts/Post.aspx?ID=20"
+    non_article_url: "http://www.shrm.org/legalissues/pages/default.aspx"
+    non_article_url: "http://www.shrm.org/publications/pages/default.aspx"
+    non_article_url: "http://www.shrm.org/Publications/HRNews/Documents/Monday%20interactive%20pdf%20FINAL.pdf"
+    non_article_url: "http://www.shrm.org/publications/managingsmart/pages/default.aspx"
+    non_article_url: "http://www.shrm.org/pages/default.aspx"
+    non_article_url: "http://www.shrm.org/about/pages/contactus.aspx"
+    non_article_url: "http://www.shrm.org/about/foundation/pages/foundationhome.aspx"
+    non_article_url: "http://www.shrm.org/hrdisciplines/pages/california.aspx"
+    non_article_url: "http://www.shrm.org/advocacy/pages/hrpolicyactioncenter.aspx"
+    non_article_url: "http://www.shrm.org/hrstandards/pages/processesprocedures.aspx"
+    non_article_url: "http://www.shrm.org/hrstandards/pages/pressreleases.aspx"
+    non_article_url: "http://www.shrm.org/hrstandards/pages/pressandarticles.aspx"
+  }
+}

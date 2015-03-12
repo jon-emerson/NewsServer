@@ -113,7 +113,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
 
     // Load up all articles that have ratings
-    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings);
+    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings, true /* retain */);
 
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
@@ -186,7 +186,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
 
     // Load up all articles that have ratings
-    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings);
+    Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(urlStrings, true /* retain */);
 
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
@@ -227,13 +227,15 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
 
     HashMap<Article, Double> ratings = new HashMap<>();
-    for (Article article : ArticleCrawler.getArticles(JonBenchmark.BAD_URLS).values()) {
+    for (Article article :
+        ArticleCrawler.getArticles(JonBenchmark.BAD_URLS, true /* retain */).values()) {
       // If the article isn't in the holdback, use it for training.
       if (!isInTrainingHoldback(article)) {
         ratings.put(article, 0.0);
       }
     }
-    for (Article article : ArticleCrawler.getArticles(JonBenchmark.GOOD_URLS).values()) {
+    for (Article article :
+        ArticleCrawler.getArticles(JonBenchmark.GOOD_URLS, true /* retain */).values()) {
       // If the article isn't in the holdback, use it for training.
       if (!isInTrainingHoldback(article)) {
         ratings.put(article, 1.0);

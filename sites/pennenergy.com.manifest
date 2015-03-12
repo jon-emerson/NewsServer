@@ -1,0 +1,33 @@
+root_domain: "pennenergy.com"
+start_url: "http://www.pennenergy.com/"
+start_url: "http://www.pennenergy.com/oil-gas/more-oil-gas-news.html"
+path_blacklist {
+  needle: "/whitepapers/"
+}
+paragraph_selector: "#ContentBody p"
+paragraph_selector: ".entrytext p"
+article_url_pattern {
+  path_regex: "^\\/articles\\/pennenergy\\/20[0-9]{2}\\/[0-1][0-9]\\/[^\\/]+\\.html$"
+}
+article_url_pattern {
+  path_regex: "^\\/index\\/blogs\\/[^\\/]+\\/20[0-9]{2}\\/[0-1][0-9]\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.pennenergy.com/articles/pennenergy/2014/12/algeria-calls-for-opec-to-cut-oil-production.html"
+    article_url: "http://www.pennenergy.com/articles/pennenergy/2015/03/oil-spill-cleanup-on-yellowstone-river-on-hold-until-ice-melts.html"
+    article_url: "http://www.pennenergy.com/articles/pennenergy/2015/03/duke-fined-25mm-over-ash-pollution-from-retired-coal-power-plant.html"
+    article_url: "http://www.pennenergy.com/articles/pennenergy/2015/03/energy-markets-china-s-coal-imports-decline-in-february.html"
+    article_url: "http://www.pennenergy.com/articles/pennenergy/2015/03/automating-one-of-the-world-s-most-efficient-combined-heating-and-power-plants.html"
+    article_url: "http://www.pennenergy.com/index/blogs/interliance-insights/2014/05/knowledge_management.html"
+    article_url: "http://www.pennenergy.com/index/blogs/interliance-insights/2013/08/_can_t_fail_managem.html"
+    article_url: "http://www.pennenergy.com/index/blogs/the-insitu-machinist/2014/08/heat-exchanger-repai.html"
+    article_url: "http://www.pennenergy.com/articles/pennenergy/2008/11/the-impacts-of-sunk-costs-and-demand-destruction.html"
+    non_article_url: "http://www.pennenergy.com/oil-gas/oil-refining-processing.html"
+    non_article_url: "http://www.pennenergy.com/power/fossil-fueled-energy.html"
+    non_article_url: "http://www.pennenergy.com/global-thought-leader-series.html"
+    non_article_url: "http://www.pennenergy.com/index/blogs.html"
+    non_article_url: "http://www.pennenergy.com/index/blogs/all-energy-all-the-time.html"
+    non_article_url: "http://www.pennenergy.com/articles/pennenergy/2008.html"
+  }
+}

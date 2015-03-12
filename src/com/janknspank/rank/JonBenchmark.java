@@ -342,7 +342,8 @@ public class JonBenchmark {
   public static Map<Article, Double> getScores(
       User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
     Map<Article, Double> scoreMap = Maps.newHashMap();
-    Collection<Article> articles = ArticleCrawler.getArticles(urlStrings).values();
+    Collection<Article> articles =
+        ArticleCrawler.getArticles(urlStrings, true /* retain */).values();
     for (Article article : articles) {
       // Use the holdback for the benchmark. The other 80% are used
       // to train the neural network.

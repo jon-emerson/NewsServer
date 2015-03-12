@@ -1,0 +1,25 @@
+root_domain: "breakingenergy.com"
+start_url: "http://breakingenergy.com/"
+start_url: "http://breakingenergy.com/category/generation/"
+start_url: "http://breakingenergy.com/category/generation/oil-and-gas/"
+start_url: "http://breakingenergy.com/category/dealmaking/"
+start_url: "http://breakingenergy.com/category/technology/"
+paragraph_selector: ".entry p"
+paragraph_selector: "#html-view-content p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://breakingenergy.com/2015/03/11/breaking-energy-us-nuclear-investigation-exports-of-highly-enriched-uranium-not-definitively-reconciled/"
+    article_url: "http://breakingenergy.com/2015/03/11/rfs-hearing-and-legislation/"
+    article_url: "http://breakingenergy.com/2015/03/10/energy-news-roundup-utility-fightback-100-renewable-town-dune-energy-bankruptcy/"
+    article_url: "http://breakingenergy.com/2015/03/11/this-weeks-top-energy-jobs-51/"
+    article_url: "http://breakingenergy.com/2015/01/20/all-eyes-on-texas-real-estate-as-oil-prices-plunge/"
+    non_article_url: "http://breakingenergy.com/category/technology/"
+    non_article_url: "http://breakingenergy.com/about/"
+    non_article_url: "http://breakingenergy.com/documents/"
+    non_article_url: "http://breakingenergy.com/category/generation/"
+    non_article_url: "http://breakingenergy.com/law-firm-perspectives/"
+  }
+}

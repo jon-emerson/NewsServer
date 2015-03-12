@@ -1,0 +1,22 @@
+root_domain: "entrepreneur.com"
+start_url: "http://www.entrepreneur.com/"
+paragraph_selector: ".content-block p"
+article_url_pattern {
+  path_regex: "^\\/article\\/[0-9]{5,8}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.entrepreneur.com/article/242877"
+    article_url: "http://www.entrepreneur.com/article/236687"
+    article_url: "http://www.entrepreneur.com/article/243711"
+    article_url: "http://www.entrepreneur.com/article/243787"
+    article_url: "http://www.entrepreneur.com/article/243837"
+    non_article_url: "http://www.entrepreneur.com/popular"
+    non_article_url: "http://www.entrepreneur.com/howto"
+    non_article_url: "http://www.entrepreneur.com/lists"
+    non_article_url: "http://www.entrepreneur.com/latest"
+    non_article_url: "http://www.entrepreneur.com/topic/social-media"
+    non_article_url: "http://www.entrepreneur.com/magazine/index.html"
+    non_article_url: "http://www.entrepreneur.com/topic/starting-a-business"
+  }
+}

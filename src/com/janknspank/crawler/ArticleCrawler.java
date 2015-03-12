@@ -94,7 +94,7 @@ public class ArticleCrawler implements Callable<Void> {
 
       // Save this article and its keywords.
       try {
-        crawl(url, false /* markCrawlStart */);
+        crawl(url, false /* markCrawlStart */, false /* retain */);
         crawlHistorySiteBuilder.setArticlesCrawled(
             crawlHistorySiteBuilder.getArticlesCrawled() + 1);
 
@@ -115,12 +115,19 @@ public class ArticleCrawler implements Callable<Void> {
   }
 
   /**
-   * Crawls a URL, putting the article (if found) in the database, and storing
-   * any outbound links.
+   * Crawls a URL, putting the article (if found) in the database.
+   * @param url the URL to attempt to create an Article object from
+   * @param markCrawlStart whether the passed URL should be marked as "crawl
+   *     started" in the database, therefore preventing other threads from
+   *     attempting to crawl it in the future
+   * @param retain Whether to retain this article during prunings.  This should
+   *     be set to true only for articles that are important to our training
+   *     processes, so that we don't have to re-download them whenever we want
+   *     to retrain our vectors or neural network.
    */
-  public static Article crawl(Url url, boolean markCrawlStart) throws FetchException,
-       ParserException, RequiredFieldException, DatabaseSchemaException, DatabaseRequestException,
-       BiznessException {
+  public static Article crawl(Url url, boolean markCrawlStart, boolean retain)
+      throws FetchException, ParserException, RequiredFieldException, DatabaseSchemaException,
+          DatabaseRequestException, BiznessException {
     System.err.println("Crawling: " + url.getUrl());
 
     if (markCrawlStart) {
@@ -134,6 +141,11 @@ public class ArticleCrawler implements Callable<Void> {
     if (ArticleUrlDetector.isArticle(url.getUrl())) {
       InterpretedData interpretedData = Interpreter.interpret(url);
       article = interpretedData.getArticle();
+      if (retain) {
+        article = article.toBuilder()
+            .setRetain(retain)
+            .build();
+      }
       try {
         Database.insert(article);
       } catch (DatabaseRequestException | DatabaseSchemaException e) {
@@ -193,13 +205,13 @@ public class ArticleCrawler implements Callable<Void> {
    * URLs, putting the resulting Urls and Articles into the database.  The
    * retrieved Articles are returned, mapped to their original URLs.
    */
-  private static Map<String, Article> getNewArticles(Iterable<String> urlStrings)
+  private static Map<String, Article> getNewArticles(Iterable<String> urlStrings, boolean retain)
       throws DatabaseRequestException, DatabaseSchemaException, FetchException, ParserException,
           RequiredFieldException, BiznessException {
-    Iterable<Url> urls = Urls.put(urlStrings, "http://jonemerson.net/benchmark");
+    Iterable<Url> urls = Urls.put(urlStrings, "");
     List<Article> articles = Lists.newArrayList();
     for (Url url : urls) {
-      Article article = crawl(url, true /* markCrawlStart */);
+      Article article = crawl(url, true /* markCrawlStart */, retain);
       if (article == null) {
         throw new IllegalStateException("URL is not an Article: " + url.getUrl());
       }
@@ -213,7 +225,7 @@ public class ArticleCrawler implements Callable<Void> {
    * previously crawled or not.  (Ones that haven't been crawled will be
    * crawled.)
    */
-  public static Map<String, Article> getArticles(Iterable<String> urlStrings)
+  public static Map<String, Article> getArticles(Iterable<String> urlStrings, boolean retain)
       throws BiznessException {
     Map<String, Article> articles;
     try {
@@ -221,7 +233,7 @@ public class ArticleCrawler implements Callable<Void> {
       articles = ImmutableMap.<String, Article>builder()
           .putAll(articles)
           .putAll(getNewArticles(Sets.<String>symmetricDifference(
-              new HashSet<String>(Lists.newArrayList(urlStrings)), articles.keySet())))
+              new HashSet<String>(Lists.newArrayList(urlStrings)), articles.keySet()), retain))
           .build();
     } catch (DatabaseSchemaException | DatabaseRequestException | FetchException
         | ParserException | RequiredFieldException e) {

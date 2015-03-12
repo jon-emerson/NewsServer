@@ -1,0 +1,38 @@
+root_domain: "theplan.it"
+start_url: "http://www.theplan.it/J/"
+start_url: "http://www.theplan.it/J/index.php?option=com_content&view=section&layout=endless&id=18&Itemid=239&lang=en"
+path_blacklist {
+  needle: "/forums/"
+}
+paragraph_selector: ".article-content"
+article_url_pattern {
+  query_regex: "&id=[0-9]+%3A"
+}
+whitelisted_query_parameter: "Itemid"
+whitelisted_query_parameter: "cp_sezione"
+whitelisted_query_parameter: "content_element"
+whitelisted_query_parameter: "id"
+whitelisted_query_parameter: "lang"
+whitelisted_query_parameter: "layout"
+whitelisted_query_parameter: "option"
+whitelisted_query_parameter: "show_section"
+whitelisted_query_parameter: "view"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=2019%3Aarchitettura-leggera&lang=en"
+    article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=6885%3Acomplesso-per-uffici-commercio-laboratori-green-place&catid=1240%3Afebbraio-2015&Itemid=240&lang=en"
+    article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=6860%3Acasa-datri-a-dasa&catid=1239%3Afebbraio-2015&Itemid=367&lang=en"
+    article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=6759%3Adetails-architecture-seen-in-section-mostra-e-seminario&catid=29%3Anews&Itemid=5&lang=en"
+    article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=6624%3Athe-chapel-by-a21studio-wins-world-building-of-the-year-award-at-world-architecture-festival-2014&catid=29%3Anews&Itemid=5&lang=en"
+    article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=6492%3Ala-cabotte&catid=901%3Ail-legno-in-architettura&Itemid=385&lang=en"
+    article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=6511%3Awoodblock-house&catid=901%3Ail-legno-in-architettura&Itemid=385&lang=en"
+    article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=6550%3Asede-centrale-siemens-in-medio-oriente&catid=1206%3Aarchitettura-internazionale-027&Itemid=239&lang=en"
+    non_article_url: "http://www.theplan.it/J/index.php?option=com_content&view=section&layout=endless&id=18&Itemid=239&lang=en"
+    non_article_url: "http://www.theplan.it/J/index.php?option=com_content&view=section&layout=endless&id=16&Itemid=240&lang=en"
+    non_article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=384&Itemid=60&lang=en"
+    non_article_url: "http://www.theplan.it/J/index.php?option=com_ckforms&view=ckforms&id=11&Itemid=608&lang=en"
+    non_article_url: "http://www.theplan.it/J/index.php?option=com_customproperties&view=show&task=show&search_arch_app=Architect+initials...&cp_architetto=&cp_continente=&cp_stato=&cp_citta=&cp_tipologia=&cp_materiale=&cp_tecnologia=&cp_anno=&cp_numeri_the_plan=&cp_sezione=focus&cp_prodotto=&cp_azienda=&submit_search=Search"
+    non_article_url: "http://www.theplan.it/J/index.php?option=com_customproperties&cp_sezione=focus&content_element=content&show_section=15&lang=en"
+    non_article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=5158&Itemid=398&lang=en"
+  }
+}

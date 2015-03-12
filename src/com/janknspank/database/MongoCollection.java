@@ -21,6 +21,8 @@ import com.janknspank.database.QueryOption.WhereEquals;
 import com.janknspank.database.QueryOption.WhereEqualsEnum;
 import com.janknspank.database.QueryOption.WhereEqualsIgnoreCase;
 import com.janknspank.database.QueryOption.WhereEqualsNumber;
+import com.janknspank.database.QueryOption.WhereFalse;
+import com.janknspank.database.QueryOption.WhereInequality;
 import com.janknspank.database.QueryOption.WhereLike;
 import com.janknspank.database.QueryOption.WhereNotEquals;
 import com.janknspank.database.QueryOption.WhereNotEqualsEnum;
@@ -29,7 +31,7 @@ import com.janknspank.database.QueryOption.WhereNotLike;
 import com.janknspank.database.QueryOption.WhereNotNull;
 import com.janknspank.database.QueryOption.WhereNull;
 import com.janknspank.database.QueryOption.WhereOption;
-import com.janknspank.database.QueryOption.WhereInequality;
+import com.janknspank.database.QueryOption.WhereTrue;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -239,10 +241,14 @@ public class MongoCollection<T extends Message> extends Collection<T> {
         dbObject.put(fieldName, Pattern.compile(escapedValue.replaceAll("%", ".*"), flags));
       }
     }
-    for (WhereNull whereNull :
-        QueryOption.getList(options, WhereNull.class)) {
-      String fieldName = getFieldName(whereNull);
-      dbObject.put(fieldName,
+    for (WhereTrue whereTrue : QueryOption.getList(options, WhereTrue.class)) {
+      dbObject.put(getFieldName(whereTrue), new BasicDBObject("$eq", true));
+    }
+    for (WhereFalse whereFalse : QueryOption.getList(options, WhereFalse.class)) {
+      dbObject.put(getFieldName(whereFalse), new BasicDBObject("$eq", false));
+    }
+    for (WhereNull whereNull : QueryOption.getList(options, WhereNull.class)) {
+      dbObject.put(getFieldName(whereNull),
           new BasicDBObject("$exists", whereNull instanceof WhereNotNull));
     }
     for (WhereInequality whereInequality :

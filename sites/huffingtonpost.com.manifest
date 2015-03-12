@@ -1,0 +1,30 @@
+root_domain: "huffingtonpost.com"
+start_url: "http://www.huffingtonpost.com/"
+subdomain_blacklist: "live.huffingtonpost.com"
+path_blacklist {
+  needle: "/jobs/"
+}
+path_blacklist {
+  needle: "/search.php/"
+}
+paragraph_selector: ".content p"
+article_url_pattern {
+  path_regex: "_[0-9]{7,8}\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.huffingtonpost.com/victor-pickard/how-the-internet-was-saved_b_6794984.html"
+    article_url: "http://www.huffingtonpost.com/2014/03/12/diamond-earth-interior-theory_n_4950900.html"
+    article_url: "http://www.huffingtonpost.com/2015/03/09/celtic-prince-tomb-chariot-photos_n_6831550.html"
+    article_url: "http://www.huffingtonpost.com/2015/03/10/peter-king-iran_n_6839324.html"
+    article_url: "http://www.huffingtonpost.com/2015/03/09/planet-fitness-transgender-member_n_6833458.html"
+    article_url: "http://www.huffingtonpost.com/robert-wilson/climate-change-the-need-f_1_b_6838258.html"
+    article_url: "http://www.huffingtonpost.com/kristen-taylor/invisibleobama-fully-visi_b_1845445.html"
+    article_url: "http://www.huffingtonpost.com/2015/03/10/my-wife-is-a-cheater-fire-painted-wall-home_n_6839358.html"
+    non_article_url: "http://www.huffingtonpost.com/green/the-blog/"
+    non_article_url: "http://www.huffingtonpost.com/news/offthebus/"
+    non_article_url: "http://www.huffingtonpost.com/news/2012-gop-convention/"
+    non_article_url: "http://www.huffingtonpost.com/news/davos-2015/"
+    non_article_url: "http://www.huffingtonpost.com/news/hollywood-buzz/"
+  }
+}

@@ -210,6 +210,18 @@ message Entity {
   optional int64 angel_list_id = 8 [
     (client_serialization) = EXCLUDE
   ];
+
+  optional int32 importance = 9 [
+    (storage_method) = PULL_OUT,
+    (client_serialization) = EXCLUDE
+  ];
+
+  optional string ticker_symbol = 10 [
+    (storage_method) = PULL_OUT,
+    (string_length) = 10,
+    (string_charset) = LATIN1,
+    (client_serialization) = EXCLUDE
+  ];
 }
 
 // A word frequency vector - Could be specific to a document, or could represent

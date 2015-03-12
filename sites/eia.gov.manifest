@@ -1,0 +1,30 @@
+root_domain: "eia.gov"
+start_url: "http://www.eia.gov/"
+start_url: "http://www.eia.gov/pressroom/"
+start_url: "http://www.eia.gov/todayinenergy/archive.cfm"
+path_blacklist {
+  needle: "/users/"
+}
+paragraph_selector: ".pagecontent p"
+article_url_pattern {
+  path_regex: "^\\/todayinenergy\\/detail\\.cfm$"
+  query_regex: "id=[0-9]{4,7}"
+}
+article_url_pattern {
+  path_regex: "^\\/pressroom\\/releases\\/press[0-9]{2,5}\\.cfm$"
+}
+whitelisted_query_parameter: "id"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.eia.gov/todayinenergy/detail.cfm?id=20312"
+    article_url: "http://www.eia.gov/pressroom/releases/press416.cfm"
+    article_url: "http://www.eia.gov/pressroom/releases/press415.cfm"
+    article_url: "http://www.eia.gov/todayinenergy/detail.cfm?id=19911"
+    article_url: "http://www.eia.gov/todayinenergy/detail.cfm?id=19811"
+    non_article_url: "http://www.eia.gov/todayinenergy/index.cfm"
+    non_article_url: "http://www.eia.gov/petroleum/gasdiesel/"
+    non_article_url: "http://www.eia.gov/coal/"
+    non_article_url: "http://www.eia.gov/forecasts/aeo/"
+    non_article_url: "http://www.eia.gov/state/?sid=AL"
+  }
+}

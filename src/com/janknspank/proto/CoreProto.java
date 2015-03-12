@@ -3003,6 +3003,31 @@ public final class CoreProto {
      * </pre>
      */
     long getAngelListId();
+
+    // optional int32 importance = 9;
+    /**
+     * <code>optional int32 importance = 9;</code>
+     */
+    boolean hasImportance();
+    /**
+     * <code>optional int32 importance = 9;</code>
+     */
+    int getImportance();
+
+    // optional string ticker_symbol = 10;
+    /**
+     * <code>optional string ticker_symbol = 10;</code>
+     */
+    boolean hasTickerSymbol();
+    /**
+     * <code>optional string ticker_symbol = 10;</code>
+     */
+    java.lang.String getTickerSymbol();
+    /**
+     * <code>optional string ticker_symbol = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getTickerSymbolBytes();
   }
   /**
    * Protobuf type {@code Entity}
@@ -3102,6 +3127,16 @@ public final class CoreProto {
             case 64: {
               bitField0_ |= 0x00000040;
               angelListId_ = input.readInt64();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000080;
+              importance_ = input.readInt32();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000100;
+              tickerSymbol_ = input.readBytes();
               break;
             }
           }
@@ -4757,6 +4792,65 @@ public final class CoreProto {
       return angelListId_;
     }
 
+    // optional int32 importance = 9;
+    public static final int IMPORTANCE_FIELD_NUMBER = 9;
+    private int importance_;
+    /**
+     * <code>optional int32 importance = 9;</code>
+     */
+    public boolean hasImportance() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 importance = 9;</code>
+     */
+    public int getImportance() {
+      return importance_;
+    }
+
+    // optional string ticker_symbol = 10;
+    public static final int TICKER_SYMBOL_FIELD_NUMBER = 10;
+    private java.lang.Object tickerSymbol_;
+    /**
+     * <code>optional string ticker_symbol = 10;</code>
+     */
+    public boolean hasTickerSymbol() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional string ticker_symbol = 10;</code>
+     */
+    public java.lang.String getTickerSymbol() {
+      java.lang.Object ref = tickerSymbol_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          tickerSymbol_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string ticker_symbol = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTickerSymbolBytes() {
+      java.lang.Object ref = tickerSymbol_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tickerSymbol_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       id_ = "";
       keyword_ = "";
@@ -4766,6 +4860,8 @@ public final class CoreProto {
       topic_ = java.util.Collections.emptyList();
       oldId_ = "";
       angelListId_ = 0L;
+      importance_ = 0;
+      tickerSymbol_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4802,6 +4898,12 @@ public final class CoreProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(8, angelListId_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(9, importance_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(10, getTickerSymbolBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4843,6 +4945,14 @@ public final class CoreProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(8, angelListId_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, importance_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getTickerSymbolBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4981,6 +5091,10 @@ public final class CoreProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         angelListId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
+        importance_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        tickerSymbol_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -5046,6 +5160,14 @@ public final class CoreProto {
           to_bitField0_ |= 0x00000040;
         }
         result.angelListId_ = angelListId_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.importance_ = importance_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.tickerSymbol_ = tickerSymbol_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5118,6 +5240,14 @@ public final class CoreProto {
         }
         if (other.hasAngelListId()) {
           setAngelListId(other.getAngelListId());
+        }
+        if (other.hasImportance()) {
+          setImportance(other.getImportance());
+        }
+        if (other.hasTickerSymbol()) {
+          bitField0_ |= 0x00000200;
+          tickerSymbol_ = other.tickerSymbol_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5921,6 +6051,113 @@ public final class CoreProto {
       public Builder clearAngelListId() {
         bitField0_ = (bitField0_ & ~0x00000080);
         angelListId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 importance = 9;
+      private int importance_ ;
+      /**
+       * <code>optional int32 importance = 9;</code>
+       */
+      public boolean hasImportance() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional int32 importance = 9;</code>
+       */
+      public int getImportance() {
+        return importance_;
+      }
+      /**
+       * <code>optional int32 importance = 9;</code>
+       */
+      public Builder setImportance(int value) {
+        bitField0_ |= 0x00000100;
+        importance_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 importance = 9;</code>
+       */
+      public Builder clearImportance() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        importance_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional string ticker_symbol = 10;
+      private java.lang.Object tickerSymbol_ = "";
+      /**
+       * <code>optional string ticker_symbol = 10;</code>
+       */
+      public boolean hasTickerSymbol() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional string ticker_symbol = 10;</code>
+       */
+      public java.lang.String getTickerSymbol() {
+        java.lang.Object ref = tickerSymbol_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          tickerSymbol_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string ticker_symbol = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTickerSymbolBytes() {
+        java.lang.Object ref = tickerSymbol_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tickerSymbol_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string ticker_symbol = 10;</code>
+       */
+      public Builder setTickerSymbol(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        tickerSymbol_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ticker_symbol = 10;</code>
+       */
+      public Builder clearTickerSymbol() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        tickerSymbol_ = getDefaultInstance().getTickerSymbol();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ticker_symbol = 10;</code>
+       */
+      public Builder setTickerSymbolBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        tickerSymbol_ = value;
         onChanged();
         return this;
       }
@@ -17074,75 +17311,77 @@ public final class CoreProto {
       "l\"\200\001\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001" +
       "\220\246\035\004\230\246\035\200\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017Mon" +
-      "goDB.Session\"\326\005\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
+      "goDB.Session\"\235\006\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
       "\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003" +
       "\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006" +
       "source\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"",
       "\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022(\n\005to" +
       "pic\030\006 \003(\0132\023.Entity.EntityTopicB\004\240\246\035\003\022 \n\006" +
       "old_id\030\007 \001(\tB\020\220\246\035\005\230\246\035\030\250\246\035\001\240\246\035\003\022\033\n\rangel_" +
-      "list_id\030\010 \001(\003B\004\240\246\035\003\032\277\002\n\013EntityTopic\022\033\n\te" +
-      "ntity_id\030\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001(" +
-      "\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010s" +
-      "trength\030\004 \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033.E" +
-      "ntity.EntityTopic.Context:\007UNKNOWN\"\220\001\n\007C" +
-      "ontext\022\013\n\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED_" +
-      "AT\020\001\022\025\n\021ANGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIST",
-      "_INVESTED_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026\n" +
-      "\022WIKIPEDIA_SUBTOPIC\020\005\"d\n\006Source\022\013\n\007UNKNO" +
-      "WN\020\000\022\031\n\025DBPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPED" +
-      "IA_LONG_ABSTRACT\020\002\022\r\n\tANGELLIST\020\003\022\010\n\004USE" +
-      "R\020\004:\020\212\265\030\014MySQL.Entity\"\347\001\n\nVectorData\022\034\n\016" +
-      "document_count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_frequ" +
-      "ency\030\002 \003(\0132\031.VectorData.WordFrequency\022#\n" +
-      "\014distribution\030\003 \001(\0132\r.Distribution\032c\n\rWo" +
-      "rdFrequency\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tf" +
-      "requency\030\002 \001(\005B\004\210\246\035\001\022!\n\023document_occuren",
-      "ces\030\003 \001(\005B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndust" +
-      "ry\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020" +
-      "industry_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trai" +
-      "ner_user_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030" +
-      "\036MongoDB.TrainedArticleIndustry\"\347\001\n\034Trai" +
-      "nedArticleClassification\022 \n\006url_id\030\001 \001(\t" +
-      "B\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classifica" +
-      "tion_code\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007che" +
-      "cked\030\003 \001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030" +
-      "\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.Tra",
-      "inedArticleClassification\"\207\001\n\014Distributi" +
-      "on\022,\n\npercentile\030\001 \003(\0132\030.Distribution.Pe" +
-      "rcentile\032I\n\nPercentile\022\022\n\npercentile\030\001 \001" +
-      "(\005\022\r\n\005value\030\002 \001(\001\022\030\n\020data_point_count\030\003 " +
-      "\001(\003\"\226\003\n\026ShareNormalizationData\022T\n\027time_r" +
-      "ange_distribution\030\002 \003(\0132-.ShareNormaliza" +
-      "tionData.TimeRangeDistributionB\004\210\246\035\001\022J\n\022" +
-      "domain_share_count\030\003 \003(\0132(.ShareNormaliz" +
-      "ationData.DomainShareCountB\004\210\246\035\001\032x\n\025Time" +
-      "RangeDistribution\022\032\n\014start_millis\030\001 \001(\003B",
-      "\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014distr" +
-      "ibution\030\003 \001(\0132\r.DistributionB\004\210\246\035\001\032`\n\020Do" +
-      "mainShareCount\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022\033\n\r" +
-      "article_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_count" +
-      "\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001 \001(\tB\024" +
-      "\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB\024\210\246\035" +
-      "\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003" +
-      "\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013c" +
-      "reate_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQ" +
-      "L.UrlRating\"\331\001\n\022DeviceRegistration\022\034\n\002id",
-      "\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(" +
-      "\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\016" +
-      "2\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014" +
-      "\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:" +
-      "\036\212\265\030\032MongoDB.DeviceRegistration\"\274\002\n\020Push" +
-      "Notification\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246" +
-      "\035\001\240\246\035\003\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\022\022\n\ncli" +
-      "ck_time\030\003 \001(\003\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003" +
-      "\230\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022&" +
-      "\n\013device_type\030\006 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022\037",
-      "\n\tdevice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030" +
-      "\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010" +
-      ":\034\212\265\030\030MongoDB.PushNotification*/\n\nDevice" +
-      "Type\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B" +
-      "!\n\024com.janknspank.protoB\tCoreProto"
+      "list_id\030\010 \001(\003B\004\240\246\035\003\022\034\n\nimportance\030\t \001(\005B" +
+      "\010\220\246\035\005\240\246\035\003\022\'\n\rticker_symbol\030\n \001(\tB\020\220\246\035\005\230\246" +
+      "\035\n\250\246\035\001\240\246\035\003\032\277\002\n\013EntityTopic\022\033\n\tentity_id\030" +
+      "\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246" +
+      "\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004" +
+      " \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033.Entity.Ent" +
+      "ityTopic.Context:\007UNKNOWN\"\220\001\n\007Context\022\013\n",
+      "\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED_AT\020\001\022\025\n\021A" +
+      "NGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIST_INVESTED" +
+      "_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026\n\022WIKIPEDI" +
+      "A_SUBTOPIC\020\005\"d\n\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025D" +
+      "BPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPEDIA_LONG_A" +
+      "BSTRACT\020\002\022\r\n\tANGELLIST\020\003\022\010\n\004USER\020\004:\020\212\265\030\014" +
+      "MySQL.Entity\"\347\001\n\nVectorData\022\034\n\016document_" +
+      "count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 \003(" +
+      "\0132\031.VectorData.WordFrequency\022#\n\014distribu" +
+      "tion\030\003 \001(\0132\r.Distribution\032c\n\rWordFrequen",
+      "cy\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency\030" +
+      "\002 \001(\005B\004\210\246\035\001\022!\n\023document_occurences\030\003 \001(\005" +
+      "B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndustry\022 \n\006url" +
+      "_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_" +
+      "code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_" +
+      "id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB." +
+      "TrainedArticleIndustry\"\347\001\n\034TrainedArticl" +
+      "eClassification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035" +
+      "\003\230\246\035\030\250\246\035\001\0225\n\033article_classification_code" +
+      "\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(",
+      "\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246" +
+      "\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArtic" +
+      "leClassification\"\207\001\n\014Distribution\022,\n\nper" +
+      "centile\030\001 \003(\0132\030.Distribution.Percentile\032" +
+      "I\n\nPercentile\022\022\n\npercentile\030\001 \001(\005\022\r\n\005val" +
+      "ue\030\002 \001(\001\022\030\n\020data_point_count\030\003 \001(\003\"\226\003\n\026S" +
+      "hareNormalizationData\022T\n\027time_range_dist" +
+      "ribution\030\002 \003(\0132-.ShareNormalizationData." +
+      "TimeRangeDistributionB\004\210\246\035\001\022J\n\022domain_sh" +
+      "are_count\030\003 \003(\0132(.ShareNormalizationData",
+      ".DomainShareCountB\004\210\246\035\001\032x\n\025TimeRangeDist" +
+      "ribution\022\032\n\014start_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\n" +
+      "end_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014distribution\030\003" +
+      " \001(\0132\r.DistributionB\004\210\246\035\001\032`\n\020DomainShare" +
+      "Count\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_c" +
+      "ount\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_count\030\003 \001(\003B\004\210" +
+      "\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230" +
+      "\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d" +
+      "\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001" +
+      "\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_tim",
+      "e\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRati" +
+      "ng\"\331\001\n\022DeviceRegistration\022\034\n\002id\030\001 \001(\tB\020\210" +
+      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246" +
+      "\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.Device" +
+      "TypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250" +
+      "\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032Mong" +
+      "oDB.DeviceRegistration\"\274\002\n\020PushNotificat" +
+      "ion\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\031\n" +
+      "\013create_time\030\002 \001(\003B\004\210\246\035\001\022\022\n\nclick_time\030\003" +
+      " \001(\003\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022",
+      "\034\n\006url_id\030\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_" +
+      "type\030\006 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_" +
+      "id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246" +
+      "\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030Mon" +
+      "goDB.PushNotification*/\n\nDeviceType\022\013\n\007U" +
+      "NKNOWN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.ja" +
+      "nknspank.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -17172,7 +17411,7 @@ public final class CoreProto {
           internal_static_Entity_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Entity_descriptor,
-              new java.lang.String[] { "Id", "Keyword", "Type", "Source", "CanonicalId", "Topic", "OldId", "AngelListId", });
+              new java.lang.String[] { "Id", "Keyword", "Type", "Source", "CanonicalId", "Topic", "OldId", "AngelListId", "Importance", "TickerSymbol", });
           internal_static_Entity_EntityTopic_descriptor =
             internal_static_Entity_descriptor.getNestedTypes().get(0);
           internal_static_Entity_EntityTopic_fieldAccessorTable = new
@@ -17315,6 +17554,12 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);

@@ -79,11 +79,19 @@ message Article {
     (client_serialization) = EXCLUDE
   ];
 
-  // Lower-cased 4-letter stems from the article's title.  Weirdly enough
-  // if you compare these across 2 articles, if there's at least 2 matches,
-  // they strongly tend to be duplicates.
+  // Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+  // compare these across 2 articles, if there's at least 2 matches, they
+  // strongly tend to be duplicates.
   repeated string deduping_stems = 17 [
     (string_length) = 4,
+    (client_serialization) = EXCLUDE
+  ];
+
+  // Whether to retain this article during prunings.  This should be set to true
+  // only for articles that are important to our training processes, so that we
+  // don't have to re-download them whenever we want to retrain our vectors or
+  // neural network.
+  optional bool retain = 18 [
     (client_serialization) = EXCLUDE
   ];
 }

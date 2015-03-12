@@ -271,9 +271,9 @@ public final class ArticleProto {
      * <code>repeated string deduping_stems = 17;</code>
      *
      * <pre>
-     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-     * if you compare these across 2 articles, if there's at least 2 matches,
-     * they strongly tend to be duplicates.
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+     * compare these across 2 articles, if there's at least 2 matches, they
+     * strongly tend to be duplicates.
      * </pre>
      */
     java.util.List<java.lang.String>
@@ -282,9 +282,9 @@ public final class ArticleProto {
      * <code>repeated string deduping_stems = 17;</code>
      *
      * <pre>
-     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-     * if you compare these across 2 articles, if there's at least 2 matches,
-     * they strongly tend to be duplicates.
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+     * compare these across 2 articles, if there's at least 2 matches, they
+     * strongly tend to be duplicates.
      * </pre>
      */
     int getDedupingStemsCount();
@@ -292,9 +292,9 @@ public final class ArticleProto {
      * <code>repeated string deduping_stems = 17;</code>
      *
      * <pre>
-     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-     * if you compare these across 2 articles, if there's at least 2 matches,
-     * they strongly tend to be duplicates.
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+     * compare these across 2 articles, if there's at least 2 matches, they
+     * strongly tend to be duplicates.
      * </pre>
      */
     java.lang.String getDedupingStems(int index);
@@ -302,13 +302,37 @@ public final class ArticleProto {
      * <code>repeated string deduping_stems = 17;</code>
      *
      * <pre>
-     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-     * if you compare these across 2 articles, if there's at least 2 matches,
-     * they strongly tend to be duplicates.
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+     * compare these across 2 articles, if there's at least 2 matches, they
+     * strongly tend to be duplicates.
      * </pre>
      */
     com.google.protobuf.ByteString
         getDedupingStemsBytes(int index);
+
+    // optional bool retain = 18;
+    /**
+     * <code>optional bool retain = 18;</code>
+     *
+     * <pre>
+     * Whether to retain this article during prunings.  This should be set to true
+     * only for articles that are important to our training processes, so that we
+     * don't have to re-download them whenever we want to retrain our vectors or
+     * neural network.
+     * </pre>
+     */
+    boolean hasRetain();
+    /**
+     * <code>optional bool retain = 18;</code>
+     *
+     * <pre>
+     * Whether to retain this article during prunings.  This should be set to true
+     * only for articles that are important to our training processes, so that we
+     * don't have to re-download them whenever we want to retrain our vectors or
+     * neural network.
+     * </pre>
+     */
+    boolean getRetain();
   }
   /**
    * Protobuf type {@code Article}
@@ -459,6 +483,11 @@ public final class ArticleProto {
                 mutable_bitField0_ |= 0x00010000;
               }
               dedupingStems_.add(input.readBytes());
+              break;
+            }
+            case 144: {
+              bitField0_ |= 0x00001000;
+              retain_ = input.readBool();
               break;
             }
           }
@@ -1069,9 +1098,9 @@ public final class ArticleProto {
      * <code>repeated string deduping_stems = 17;</code>
      *
      * <pre>
-     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-     * if you compare these across 2 articles, if there's at least 2 matches,
-     * they strongly tend to be duplicates.
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+     * compare these across 2 articles, if there's at least 2 matches, they
+     * strongly tend to be duplicates.
      * </pre>
      */
     public java.util.List<java.lang.String>
@@ -1082,9 +1111,9 @@ public final class ArticleProto {
      * <code>repeated string deduping_stems = 17;</code>
      *
      * <pre>
-     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-     * if you compare these across 2 articles, if there's at least 2 matches,
-     * they strongly tend to be duplicates.
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+     * compare these across 2 articles, if there's at least 2 matches, they
+     * strongly tend to be duplicates.
      * </pre>
      */
     public int getDedupingStemsCount() {
@@ -1094,9 +1123,9 @@ public final class ArticleProto {
      * <code>repeated string deduping_stems = 17;</code>
      *
      * <pre>
-     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-     * if you compare these across 2 articles, if there's at least 2 matches,
-     * they strongly tend to be duplicates.
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+     * compare these across 2 articles, if there's at least 2 matches, they
+     * strongly tend to be duplicates.
      * </pre>
      */
     public java.lang.String getDedupingStems(int index) {
@@ -1106,14 +1135,44 @@ public final class ArticleProto {
      * <code>repeated string deduping_stems = 17;</code>
      *
      * <pre>
-     * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-     * if you compare these across 2 articles, if there's at least 2 matches,
-     * they strongly tend to be duplicates.
+     * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+     * compare these across 2 articles, if there's at least 2 matches, they
+     * strongly tend to be duplicates.
      * </pre>
      */
     public com.google.protobuf.ByteString
         getDedupingStemsBytes(int index) {
       return dedupingStems_.getByteString(index);
+    }
+
+    // optional bool retain = 18;
+    public static final int RETAIN_FIELD_NUMBER = 18;
+    private boolean retain_;
+    /**
+     * <code>optional bool retain = 18;</code>
+     *
+     * <pre>
+     * Whether to retain this article during prunings.  This should be set to true
+     * only for articles that are important to our training processes, so that we
+     * don't have to re-download them whenever we want to retrain our vectors or
+     * neural network.
+     * </pre>
+     */
+    public boolean hasRetain() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional bool retain = 18;</code>
+     *
+     * <pre>
+     * Whether to retain this article during prunings.  This should be set to true
+     * only for articles that are important to our training processes, so that we
+     * don't have to re-download them whenever we want to retrain our vectors or
+     * neural network.
+     * </pre>
+     */
+    public boolean getRetain() {
+      return retain_;
     }
 
     private void initFields() {
@@ -1134,6 +1193,7 @@ public final class ArticleProto {
       socialEngagement_ = java.util.Collections.emptyList();
       feature_ = java.util.Collections.emptyList();
       dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      retain_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1197,6 +1257,9 @@ public final class ArticleProto {
       }
       for (int i = 0; i < dedupingStems_.size(); i++) {
         output.writeBytes(17, dedupingStems_.getByteString(i));
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeBool(18, retain_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1284,6 +1347,10 @@ public final class ArticleProto {
         }
         size += dataSize;
         size += 2 * getDedupingStemsList().size();
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(18, retain_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1450,6 +1517,8 @@ public final class ArticleProto {
         }
         dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00010000);
+        retain_ = false;
+        bitField0_ = (bitField0_ & ~0x00020000);
         return this;
       }
 
@@ -1565,6 +1634,10 @@ public final class ArticleProto {
           bitField0_ = (bitField0_ & ~0x00010000);
         }
         result.dedupingStems_ = dedupingStems_;
+        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.retain_ = retain_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1730,6 +1803,9 @@ public final class ArticleProto {
             dedupingStems_.addAll(other.dedupingStems_);
           }
           onChanged();
+        }
+        if (other.hasRetain()) {
+          setRetain(other.getRetain());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3307,9 +3383,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public java.util.List<java.lang.String>
@@ -3320,9 +3396,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public int getDedupingStemsCount() {
@@ -3332,9 +3408,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public java.lang.String getDedupingStems(int index) {
@@ -3344,9 +3420,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -3357,9 +3433,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public Builder setDedupingStems(
@@ -3376,9 +3452,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public Builder addDedupingStems(
@@ -3395,9 +3471,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public Builder addAllDedupingStems(
@@ -3411,9 +3487,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public Builder clearDedupingStems() {
@@ -3426,9 +3502,9 @@ public final class ArticleProto {
        * <code>repeated string deduping_stems = 17;</code>
        *
        * <pre>
-       * Lower-cased 4-letter stems from the article's title.  Weirdly enough
-       * if you compare these across 2 articles, if there's at least 2 matches,
-       * they strongly tend to be duplicates.
+       * Lower-cased 4-letter stems from the article's title.  Weirdly enough if you
+       * compare these across 2 articles, if there's at least 2 matches, they
+       * strongly tend to be duplicates.
        * </pre>
        */
       public Builder addDedupingStemsBytes(
@@ -3438,6 +3514,67 @@ public final class ArticleProto {
   }
   ensureDedupingStemsIsMutable();
         dedupingStems_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // optional bool retain = 18;
+      private boolean retain_ ;
+      /**
+       * <code>optional bool retain = 18;</code>
+       *
+       * <pre>
+       * Whether to retain this article during prunings.  This should be set to true
+       * only for articles that are important to our training processes, so that we
+       * don't have to re-download them whenever we want to retrain our vectors or
+       * neural network.
+       * </pre>
+       */
+      public boolean hasRetain() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      /**
+       * <code>optional bool retain = 18;</code>
+       *
+       * <pre>
+       * Whether to retain this article during prunings.  This should be set to true
+       * only for articles that are important to our training processes, so that we
+       * don't have to re-download them whenever we want to retrain our vectors or
+       * neural network.
+       * </pre>
+       */
+      public boolean getRetain() {
+        return retain_;
+      }
+      /**
+       * <code>optional bool retain = 18;</code>
+       *
+       * <pre>
+       * Whether to retain this article during prunings.  This should be set to true
+       * only for articles that are important to our training processes, so that we
+       * don't have to re-download them whenever we want to retrain our vectors or
+       * neural network.
+       * </pre>
+       */
+      public Builder setRetain(boolean value) {
+        bitField0_ |= 0x00020000;
+        retain_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool retain = 18;</code>
+       *
+       * <pre>
+       * Whether to retain this article during prunings.  This should be set to true
+       * only for articles that are important to our training processes, so that we
+       * don't have to re-download them whenever we want to retrain our vectors or
+       * neural network.
+       * </pre>
+       */
+      public Builder clearRetain() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        retain_ = false;
         onChanged();
         return this;
       }
@@ -6899,7 +7036,7 @@ public final class ArticleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\250" +
+      "m/janknspank/database/extensions.proto\"\276" +
       "\004\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\032\n\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005titl" +
       "e\030\003 \001(\tB\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246" +
@@ -6913,26 +7050,27 @@ public final class ArticleProto {
       "B\004\240\246\035\003\0222\n\021social_engagement\030\017 \003(\0132\021.Soci" +
       "alEngagementB\004\240\246\035\003\022&\n\007feature\030\020 \003(\0132\017.Ar" +
       "ticleFeatureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003" +
-      "(\tB\010\230\246\035\004\240\246\035\003:\023\212\265\030\017MongoDB.Article\"\325\001\n\016Ar" +
-      "ticleKeyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230" +
-      "\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(" +
-      "\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.Ar" +
-      "ticleKeyword.Source:\007UNKNOWN\";\n\006Source\022\013",
-      "\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010M" +
-      "ETA_TAG\020\003\"\347\001\n\020SocialEngagement\022-\n\004site\030\001" +
-      " \001(\0162\026.SocialEngagement.Site:\007UNKNOWN\022\031\n" +
-      "\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_score\030" +
-      "\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomme" +
-      "nt_count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004S" +
-      "ite\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTE" +
-      "R\020\002\"\323\001\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001" +
-      "(\005B\010\210\246\035\001\220\246\035\003\022+\n\004type\030\004 \001(\0162\024.ArticleFeat" +
-      "ure.Type:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001\"b\n",
-      "\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020\001\022\022\n" +
-      "\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020\003\022\022\n" +
-      "\016TEXT_CHARACTER\020\004\"9\n\017InterpretedData\022\031\n\007" +
-      "article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024" +
-      "com.janknspank.protoB\014ArticleProto"
+      "(\tB\010\230\246\035\004\240\246\035\003\022\024\n\006retain\030\022 \001(\010B\004\240\246\035\003:\023\212\265\030\017" +
+      "MongoDB.Article\"\325\001\n\016ArticleKeyword\022\035\n\007ke" +
+      "yword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 " +
+      "\001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035" +
+      "\001\022/\n\006source\030\004 \001(\0162\026.ArticleKeyword.Sourc",
+      "e:\007UNKNOWN\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP" +
+      "\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\"\347\001\n\020Soci" +
+      "alEngagement\022-\n\004site\030\001 \001(\0162\026.SocialEngag" +
+      "ement.Site:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003" +
+      "B\004\210\246\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlik" +
+      "e_count\030\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013" +
+      "create_time\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014" +
+      "\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"\323\001\n\016ArticleFea" +
+      "ture\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004ty" +
+      "pe\030\004 \001(\0162\024.ArticleFeature.Type:\007UNKNOWN\022",
+      "\022\n\nsimilarity\030\002 \001(\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000" +
+      "\022\021\n\rSERVES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020\002\022" +
+      "\022\n\016IMPROVES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020\004\"" +
+      "9\n\017InterpretedData\022\031\n\007article\030\001 \001(\0132\010.Ar" +
+      "ticle\022\013\n\003url\030\002 \003(\tB$\n\024com.janknspank.pro" +
+      "toB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6944,7 +7082,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -6997,6 +7135,7 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);

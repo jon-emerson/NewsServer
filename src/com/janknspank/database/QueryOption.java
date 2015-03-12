@@ -229,6 +229,26 @@ public class QueryOption {
     }
   }
 
+  public static class WhereTrue extends WhereOption {
+    public WhereTrue(String fieldName) {
+     super(fieldName);
+   }
+
+   public int getFieldCount() {
+     return 1;
+   }
+ }
+
+ public static class WhereFalse extends WhereOption {
+   public WhereFalse(String fieldName) {
+    super(fieldName);
+  }
+
+  public int getFieldCount() {
+    return 1;
+  }
+}
+
   public static class WhereNull extends WhereOption {
     public WhereNull(String fieldName) {
       super(fieldName);

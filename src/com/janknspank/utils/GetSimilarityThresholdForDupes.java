@@ -127,7 +127,7 @@ public class GetSimilarityThresholdForDupes {
 
   public static final void main(String args[]) throws Exception {
     Iterable<String> allArticleUrls = Iterables.concat(DUPES);
-    Map<String, Article> articles = ArticleCrawler.getArticles(allArticleUrls);
+    Map<String, Article> articles = ArticleCrawler.getArticles(allArticleUrls, true /* retain */);
     int positives = 0;
     int negatives = 0;
     int falseDupes = 0;

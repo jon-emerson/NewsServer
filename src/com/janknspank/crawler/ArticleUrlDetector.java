@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.proto.CrawlerProto.SiteManifest.ArticleUrlPattern;
@@ -68,7 +69,16 @@ public class ArticleUrlDetector {
             || domain.equals(contentSite.getRootDomain())
             || Iterables.contains(contentSite.getAkaRootDomainList(), domain)) {
           matched = true;
-          if (PATTERN_CACHE.getPattern(articleUrlPattern.getPathRegex()).matcher(path).find()) {
+          if (!articleUrlPattern.hasPathRegex() && !articleUrlPattern.hasQueryRegex()) {
+            System.out.println("Warning: article_url_pattern has no path_regex or query_regex");
+            return false;
+          }
+          boolean pathOkay = !articleUrlPattern.hasPathRegex()
+              || PATTERN_CACHE.getPattern(articleUrlPattern.getPathRegex()).matcher(path).find();
+          boolean queryOkay = !articleUrlPattern.hasQueryRegex()
+              || PATTERN_CACHE.getPattern(articleUrlPattern.getQueryRegex())
+                  .matcher(Strings.nullToEmpty(url.getQuery())).find();
+          if (pathOkay && queryOkay) {
             return true;
           }
         }

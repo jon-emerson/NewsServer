@@ -14,6 +14,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.google.api.client.util.Lists;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -236,10 +237,11 @@ class ArticleCreator {
         "html > head meta[property=\"rnews:description\"]",
         "html > head meta[property=\"og:description\"]",
         "html > head meta[itemprop=\"description\"]"));
-    String description;
+    String description = null;
     if (metaNode != null) {
       description = metaNode.getAttributeValue("content");
-    } else {
+    }
+    if (Strings.isNullOrEmpty(description)) {
       // Fall back to the first significant paragraph.
       Iterable<String> paragraphs = PARAGRAPH_CACHE.getParagraphs(documentNode);
       description = Iterables.getFirst(paragraphs, null);
@@ -256,7 +258,7 @@ class ArticleCreator {
       description = description.substring(0, MAX_DESCRIPTION_LENGTH - 1) + "\u2026";
     }
 
-    return description;
+    return description.trim();
   }
 
   private static String resolveImageUrl(DocumentNode documentNode, Node metaNode) {
@@ -427,7 +429,7 @@ class ArticleCreator {
     if (title.length() > MAX_TITLE_LENGTH) {
       title = title.substring(0, MAX_TITLE_LENGTH - 1) + "\u2026";
     }
-    return title;
+    return title.trim();
   }
 
   public static String getTitle(DocumentNode documentNode) throws RequiredFieldException {

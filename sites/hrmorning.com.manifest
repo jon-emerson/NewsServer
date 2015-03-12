@@ -1,0 +1,24 @@
+root_domain: "hrmorning.com"
+start_url: "http://www.hrmorning.com/"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "^\\/(?!write-for-hr-morning)[^\\/]+-[^\\/]+-[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.hrmorning.com/this-is-what-asking-for-too-much-employee-medical-info-looks-like/"
+    article_url: "http://www.hrmorning.com/docking-pay-exempt-employees/"
+    article_url: "http://www.hrmorning.com/feds-offer-a-first-look-at-the-upcoming-cadillac-tax/"
+    article_url: "http://www.hrmorning.com/resume-of-tomorrow/"
+    article_url: "http://www.hrmorning.com/linkedin-maybe-not-the-serious-all-business-forum-you-thought-it-was/"
+    article_url: "http://www.hrmorning.com/dont-let-workplace-bullying-take-down-your-workforce-a-3-step-plan/"
+    article_url: "http://www.hrmorning.com/employee-drugs-use/"
+    non_article_url: "http://www.hrmorning.com/category/healthcare-reform/"
+    non_article_url: "http://www.hrmorning.com/category/hr-management/"
+    non_article_url: "http://www.hrmorning.com/category/retention-turnover/"
+    non_article_url: "http://www.hrmorning.com/editors/"
+    non_article_url: "http://www.hrmorning.com/write-for-hr-morning/"
+    non_article_url: "http://www.hrmorning.com/subscribe-today/"
+    non_article_url: "http://www.hrmorning.com/resource-library/"
+  }
+}

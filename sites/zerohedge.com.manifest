@@ -1,0 +1,24 @@
+root_domain: "zerohedge.com"
+start_url: "http://www.zerohedge.com/"
+path_blacklist {
+  needle: "/users/"
+}
+paragraph_selector: ".content p"
+article_url_pattern {
+  path_regex: "^\\/news\\/20[0-9]{2}-[01][0-9]-[0-3][0-9]\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.zerohedge.com/news/2015-03-11/real-reason-fed-has-raise-rates-june"
+    article_url: "http://www.zerohedge.com/news/2015-03-11/simple-strategy-could-have-potentially-saved-billions"
+    article_url: "http://www.zerohedge.com/news/2015-03-11/visualizing-american-water-crisis"
+    article_url: "http://www.zerohedge.com/news/2015-03-10/currency-wars-continue-imf-concedes-end-dollar-hegemony"
+    article_url: "http://www.zerohedge.com/news/2014-12-19/central-banks-are-now-uncorking-delirium-phase"
+    non_article_url: "http://www.zerohedge.com/taxonomy_vtn/term/10673"
+    non_article_url: "http://www.zerohedge.com/archive/all/2014"
+    non_article_url: "http://www.zerohedge.com/archive/all/2014/12"
+    non_article_url: "http://www.zerohedge.com/archive/all/2014/12/19"
+    non_article_url: "http://www.zerohedge.com/article/zero-hedge-logo-tee"
+    non_article_url: "http://www.zerohedge.com/contributing-editors"
+  }
+}

@@ -1352,9 +1352,36 @@ public final class CrawlerProto {
     public interface ArticleUrlPatternOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
-      // optional string path_regex = 1;
+      // optional string subdomain = 1;
       /**
-       * <code>optional string path_regex = 1;</code>
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      boolean hasSubdomain();
+      /**
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      java.lang.String getSubdomain();
+      /**
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      com.google.protobuf.ByteString
+          getSubdomainBytes();
+
+      // optional string path_regex = 2;
+      /**
+       * <code>optional string path_regex = 2;</code>
        *
        * <pre>
        * A regular expression specification to run against the article's path.
@@ -1362,7 +1389,7 @@ public final class CrawlerProto {
        */
       boolean hasPathRegex();
       /**
-       * <code>optional string path_regex = 1;</code>
+       * <code>optional string path_regex = 2;</code>
        *
        * <pre>
        * A regular expression specification to run against the article's path.
@@ -1370,7 +1397,7 @@ public final class CrawlerProto {
        */
       java.lang.String getPathRegex();
       /**
-       * <code>optional string path_regex = 1;</code>
+       * <code>optional string path_regex = 2;</code>
        *
        * <pre>
        * A regular expression specification to run against the article's path.
@@ -1379,32 +1406,35 @@ public final class CrawlerProto {
       com.google.protobuf.ByteString
           getPathRegexBytes();
 
-      // optional string subdomain = 2;
+      // optional string query_regex = 3;
       /**
-       * <code>optional string subdomain = 2;</code>
+       * <code>optional string query_regex = 3;</code>
        *
        * <pre>
-       * If present, a subdomain that this regular expression is restricted to.
+       * A regular expression specification to run against the article unparsed
+       * query string.
        * </pre>
        */
-      boolean hasSubdomain();
+      boolean hasQueryRegex();
       /**
-       * <code>optional string subdomain = 2;</code>
+       * <code>optional string query_regex = 3;</code>
        *
        * <pre>
-       * If present, a subdomain that this regular expression is restricted to.
+       * A regular expression specification to run against the article unparsed
+       * query string.
        * </pre>
        */
-      java.lang.String getSubdomain();
+      java.lang.String getQueryRegex();
       /**
-       * <code>optional string subdomain = 2;</code>
+       * <code>optional string query_regex = 3;</code>
        *
        * <pre>
-       * If present, a subdomain that this regular expression is restricted to.
+       * A regular expression specification to run against the article unparsed
+       * query string.
        * </pre>
        */
       com.google.protobuf.ByteString
-          getSubdomainBytes();
+          getQueryRegexBytes();
     }
     /**
      * Protobuf type {@code SiteManifest.ArticleUrlPattern}
@@ -1465,12 +1495,17 @@ public final class CrawlerProto {
               }
               case 10: {
                 bitField0_ |= 0x00000001;
-                pathRegex_ = input.readBytes();
+                subdomain_ = input.readBytes();
                 break;
               }
               case 18: {
                 bitField0_ |= 0x00000002;
-                subdomain_ = input.readBytes();
+                pathRegex_ = input.readBytes();
+                break;
+              }
+              case 26: {
+                bitField0_ |= 0x00000004;
+                queryRegex_ = input.readBytes();
                 break;
               }
             }
@@ -1513,76 +1548,21 @@ public final class CrawlerProto {
       }
 
       private int bitField0_;
-      // optional string path_regex = 1;
-      public static final int PATH_REGEX_FIELD_NUMBER = 1;
-      private java.lang.Object pathRegex_;
-      /**
-       * <code>optional string path_regex = 1;</code>
-       *
-       * <pre>
-       * A regular expression specification to run against the article's path.
-       * </pre>
-       */
-      public boolean hasPathRegex() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string path_regex = 1;</code>
-       *
-       * <pre>
-       * A regular expression specification to run against the article's path.
-       * </pre>
-       */
-      public java.lang.String getPathRegex() {
-        java.lang.Object ref = pathRegex_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            pathRegex_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>optional string path_regex = 1;</code>
-       *
-       * <pre>
-       * A regular expression specification to run against the article's path.
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getPathRegexBytes() {
-        java.lang.Object ref = pathRegex_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          pathRegex_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-
-      // optional string subdomain = 2;
-      public static final int SUBDOMAIN_FIELD_NUMBER = 2;
+      // optional string subdomain = 1;
+      public static final int SUBDOMAIN_FIELD_NUMBER = 1;
       private java.lang.Object subdomain_;
       /**
-       * <code>optional string subdomain = 2;</code>
+       * <code>optional string subdomain = 1;</code>
        *
        * <pre>
        * If present, a subdomain that this regular expression is restricted to.
        * </pre>
        */
       public boolean hasSubdomain() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string subdomain = 2;</code>
+       * <code>optional string subdomain = 1;</code>
        *
        * <pre>
        * If present, a subdomain that this regular expression is restricted to.
@@ -1603,7 +1583,7 @@ public final class CrawlerProto {
         }
       }
       /**
-       * <code>optional string subdomain = 2;</code>
+       * <code>optional string subdomain = 1;</code>
        *
        * <pre>
        * If present, a subdomain that this regular expression is restricted to.
@@ -1623,9 +1603,123 @@ public final class CrawlerProto {
         }
       }
 
+      // optional string path_regex = 2;
+      public static final int PATH_REGEX_FIELD_NUMBER = 2;
+      private java.lang.Object pathRegex_;
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      public boolean hasPathRegex() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      public java.lang.String getPathRegex() {
+        java.lang.Object ref = pathRegex_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            pathRegex_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getPathRegexBytes() {
+        java.lang.Object ref = pathRegex_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          pathRegex_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional string query_regex = 3;
+      public static final int QUERY_REGEX_FIELD_NUMBER = 3;
+      private java.lang.Object queryRegex_;
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      public boolean hasQueryRegex() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      public java.lang.String getQueryRegex() {
+        java.lang.Object ref = queryRegex_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            queryRegex_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getQueryRegexBytes() {
+        java.lang.Object ref = queryRegex_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          queryRegex_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
       private void initFields() {
-        pathRegex_ = "";
         subdomain_ = "";
+        pathRegex_ = "";
+        queryRegex_ = "";
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -1640,10 +1734,13 @@ public final class CrawlerProto {
                           throws java.io.IOException {
         getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeBytes(1, getPathRegexBytes());
+          output.writeBytes(1, getSubdomainBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeBytes(2, getSubdomainBytes());
+          output.writeBytes(2, getPathRegexBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeBytes(3, getQueryRegexBytes());
         }
         getUnknownFields().writeTo(output);
       }
@@ -1656,11 +1753,15 @@ public final class CrawlerProto {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(1, getPathRegexBytes());
+            .computeBytesSize(1, getSubdomainBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(2, getSubdomainBytes());
+            .computeBytesSize(2, getPathRegexBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(3, getQueryRegexBytes());
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -1784,10 +1885,12 @@ public final class CrawlerProto {
 
         public Builder clear() {
           super.clear();
-          pathRegex_ = "";
-          bitField0_ = (bitField0_ & ~0x00000001);
           subdomain_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          pathRegex_ = "";
           bitField0_ = (bitField0_ & ~0x00000002);
+          queryRegex_ = "";
+          bitField0_ = (bitField0_ & ~0x00000004);
           return this;
         }
 
@@ -1819,11 +1922,15 @@ public final class CrawlerProto {
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
             to_bitField0_ |= 0x00000001;
           }
-          result.pathRegex_ = pathRegex_;
+          result.subdomain_ = subdomain_;
           if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
             to_bitField0_ |= 0x00000002;
           }
-          result.subdomain_ = subdomain_;
+          result.pathRegex_ = pathRegex_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.queryRegex_ = queryRegex_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -1840,14 +1947,19 @@ public final class CrawlerProto {
 
         public Builder mergeFrom(com.janknspank.proto.CrawlerProto.SiteManifest.ArticleUrlPattern other) {
           if (other == com.janknspank.proto.CrawlerProto.SiteManifest.ArticleUrlPattern.getDefaultInstance()) return this;
-          if (other.hasPathRegex()) {
+          if (other.hasSubdomain()) {
             bitField0_ |= 0x00000001;
+            subdomain_ = other.subdomain_;
+            onChanged();
+          }
+          if (other.hasPathRegex()) {
+            bitField0_ |= 0x00000002;
             pathRegex_ = other.pathRegex_;
             onChanged();
           }
-          if (other.hasSubdomain()) {
-            bitField0_ |= 0x00000002;
-            subdomain_ = other.subdomain_;
+          if (other.hasQueryRegex()) {
+            bitField0_ |= 0x00000004;
+            queryRegex_ = other.queryRegex_;
             onChanged();
           }
           this.mergeUnknownFields(other.getUnknownFields());
@@ -1877,118 +1989,20 @@ public final class CrawlerProto {
         }
         private int bitField0_;
 
-        // optional string path_regex = 1;
-        private java.lang.Object pathRegex_ = "";
-        /**
-         * <code>optional string path_regex = 1;</code>
-         *
-         * <pre>
-         * A regular expression specification to run against the article's path.
-         * </pre>
-         */
-        public boolean hasPathRegex() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        /**
-         * <code>optional string path_regex = 1;</code>
-         *
-         * <pre>
-         * A regular expression specification to run against the article's path.
-         * </pre>
-         */
-        public java.lang.String getPathRegex() {
-          java.lang.Object ref = pathRegex_;
-          if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            pathRegex_ = s;
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
-        }
-        /**
-         * <code>optional string path_regex = 1;</code>
-         *
-         * <pre>
-         * A regular expression specification to run against the article's path.
-         * </pre>
-         */
-        public com.google.protobuf.ByteString
-            getPathRegexBytes() {
-          java.lang.Object ref = pathRegex_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            pathRegex_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>optional string path_regex = 1;</code>
-         *
-         * <pre>
-         * A regular expression specification to run against the article's path.
-         * </pre>
-         */
-        public Builder setPathRegex(
-            java.lang.String value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          pathRegex_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string path_regex = 1;</code>
-         *
-         * <pre>
-         * A regular expression specification to run against the article's path.
-         * </pre>
-         */
-        public Builder clearPathRegex() {
-          bitField0_ = (bitField0_ & ~0x00000001);
-          pathRegex_ = getDefaultInstance().getPathRegex();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string path_regex = 1;</code>
-         *
-         * <pre>
-         * A regular expression specification to run against the article's path.
-         * </pre>
-         */
-        public Builder setPathRegexBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          pathRegex_ = value;
-          onChanged();
-          return this;
-        }
-
-        // optional string subdomain = 2;
+        // optional string subdomain = 1;
         private java.lang.Object subdomain_ = "";
         /**
-         * <code>optional string subdomain = 2;</code>
+         * <code>optional string subdomain = 1;</code>
          *
          * <pre>
          * If present, a subdomain that this regular expression is restricted to.
          * </pre>
          */
         public boolean hasSubdomain() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
+          return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional string subdomain = 2;</code>
+         * <code>optional string subdomain = 1;</code>
          *
          * <pre>
          * If present, a subdomain that this regular expression is restricted to.
@@ -2006,7 +2020,7 @@ public final class CrawlerProto {
           }
         }
         /**
-         * <code>optional string subdomain = 2;</code>
+         * <code>optional string subdomain = 1;</code>
          *
          * <pre>
          * If present, a subdomain that this regular expression is restricted to.
@@ -2026,7 +2040,7 @@ public final class CrawlerProto {
           }
         }
         /**
-         * <code>optional string subdomain = 2;</code>
+         * <code>optional string subdomain = 1;</code>
          *
          * <pre>
          * If present, a subdomain that this regular expression is restricted to.
@@ -2037,26 +2051,26 @@ public final class CrawlerProto {
           if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000001;
           subdomain_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional string subdomain = 2;</code>
+         * <code>optional string subdomain = 1;</code>
          *
          * <pre>
          * If present, a subdomain that this regular expression is restricted to.
          * </pre>
          */
         public Builder clearSubdomain() {
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           subdomain_ = getDefaultInstance().getSubdomain();
           onChanged();
           return this;
         }
         /**
-         * <code>optional string subdomain = 2;</code>
+         * <code>optional string subdomain = 1;</code>
          *
          * <pre>
          * If present, a subdomain that this regular expression is restricted to.
@@ -2067,8 +2081,210 @@ public final class CrawlerProto {
           if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000001;
           subdomain_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional string path_regex = 2;
+        private java.lang.Object pathRegex_ = "";
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public boolean hasPathRegex() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public java.lang.String getPathRegex() {
+          java.lang.Object ref = pathRegex_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            pathRegex_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public com.google.protobuf.ByteString
+            getPathRegexBytes() {
+          java.lang.Object ref = pathRegex_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            pathRegex_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public Builder setPathRegex(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          pathRegex_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public Builder clearPathRegex() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          pathRegex_ = getDefaultInstance().getPathRegex();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public Builder setPathRegexBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          pathRegex_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional string query_regex = 3;
+        private java.lang.Object queryRegex_ = "";
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public boolean hasQueryRegex() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public java.lang.String getQueryRegex() {
+          java.lang.Object ref = queryRegex_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            queryRegex_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public com.google.protobuf.ByteString
+            getQueryRegexBytes() {
+          java.lang.Object ref = queryRegex_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            queryRegex_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public Builder setQueryRegex(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          queryRegex_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public Builder clearQueryRegex() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          queryRegex_ = getDefaultInstance().getQueryRegex();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public Builder setQueryRegexBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          queryRegex_ = value;
           onChanged();
           return this;
         }
@@ -9006,7 +9222,7 @@ public final class CrawlerProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/crawler.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\333" +
+      "m/janknspank/database/extensions.proto\"\363" +
       "\005\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
       "\035\001\230\246\035\377\005\022\036\n\017aka_root_domain\030\002 \003(\tB\005\230\246\035\377\005\022" +
       "\034\n\tstart_url\030\003 \003(\tB\t\210\246\035\001\230\246\035\377\005\022\"\n\023subdoma" +
@@ -9023,27 +9239,28 @@ public final class CrawlerProto {
       "Blacklist.Location:\013STARTS_WITH\"e\n\010Locat" +
       "ion\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS" +
       "_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n" +
-      "\013REGEX_MATCH\020\006\032L\n\021ArticleUrlPattern\022\035\n\np" +
-      "ath_regex\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\tsubdomain\030",
-      "\002 \001(\tB\005\230\246\035\377\005\"\314\002\n\020TestInstructions\022B\n\024url" +
-      "_whitelist_checks\030\001 \001(\0132$.TestInstructio" +
-      "ns.UrlWhitelistChecks\022U\n\033article_url_det" +
-      "ector_checks\030\002 \001(\0132*.TestInstructions.Ar" +
-      "ticleUrlDetectorChecksB\004\210\246\035\001\032E\n\022UrlWhite" +
-      "listChecks\022\027\n\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007b" +
-      "ad_url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUrlDetecto" +
-      "rChecks\022\032\n\013article_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017n" +
-      "on_article_url\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHis" +
-      "tory\022\"\n\010crawl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001",
-      "\022\027\n\004host\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132" +
-      "\022.CrawlHistory.Site\022\030\n\nstart_time\030\004 \001(\003B" +
-      "\004\210\246\035\001\022\020\n\010end_time\030\005 \001(\003\022\016\n\006millis\030\006 \001(\003\022" +
-      "\027\n\017was_interrupted\030\007 \001(\010\032\202\001\n\004Site\022\036\n\013roo" +
-      "t_domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nstart_time\030" +
-      "\002 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\003 \001(\003\022\016\n\006millis\030" +
-      "\004 \001(\003\022\036\n\020articles_crawled\030\005 \001(\005B\004\210\246\035\001:\030\212" +
-      "\265\030\024MongoDB.CrawlHistoryB$\n\024com.janknspan" +
-      "k.protoB\014CrawlerProto"
+      "\013REGEX_MATCH\020\006\032d\n\021ArticleUrlPattern\022\030\n\ts" +
+      "ubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(",
+      "\tB\005\230\246\035\377\005\022\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\"\314\002\n" +
+      "\020TestInstructions\022B\n\024url_whitelist_check" +
+      "s\030\001 \001(\0132$.TestInstructions.UrlWhitelistC" +
+      "hecks\022U\n\033article_url_detector_checks\030\002 \001" +
+      "(\0132*.TestInstructions.ArticleUrlDetector" +
+      "ChecksB\004\210\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010go" +
+      "od_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246" +
+      "\035\377\005\032V\n\030ArticleUrlDetectorChecks\022\032\n\013artic" +
+      "le_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030\002" +
+      " \003(\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHistory\022\"\n\010crawl_id",
+      "\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t" +
+      "\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132\022.CrawlHistory.S" +
+      "ite\022\030\n\nstart_time\030\004 \001(\003B\004\210\246\035\001\022\020\n\010end_tim" +
+      "e\030\005 \001(\003\022\016\n\006millis\030\006 \001(\003\022\027\n\017was_interrupt" +
+      "ed\030\007 \001(\010\032\202\001\n\004Site\022\036\n\013root_domain\030\001 \001(\tB\t" +
+      "\210\246\035\001\230\246\035\377\005\022\030\n\nstart_time\030\002 \001(\003B\004\210\246\035\001\022\020\n\010e" +
+      "nd_time\030\003 \001(\003\022\016\n\006millis\030\004 \001(\003\022\036\n\020article" +
+      "s_crawled\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024MongoDB.Crawl" +
+      "HistoryB$\n\024com.janknspank.protoB\014Crawler" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9067,7 +9284,7 @@ public final class CrawlerProto {
           internal_static_SiteManifest_ArticleUrlPattern_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_ArticleUrlPattern_descriptor,
-              new java.lang.String[] { "PathRegex", "Subdomain", });
+              new java.lang.String[] { "Subdomain", "PathRegex", "QueryRegex", });
           internal_static_TestInstructions_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_TestInstructions_fieldAccessorTable = new
@@ -9113,7 +9330,7 @@ public final class CrawlerProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);

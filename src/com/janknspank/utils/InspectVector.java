@@ -16,9 +16,9 @@ import com.janknspank.crawler.UrlWhitelist;
 import com.janknspank.proto.ArticleProto.Article;
 
 public class InspectVector {
-  public static void printTFIDFVectorForUrl(String url) 
+  public static void printTFIDFVectorForUrl(String url)
       throws BiznessException, ClassifierException {
-    Article article = ArticleCrawler.getArticles(ImmutableList.of(url)).get(url);
+    Article article = ArticleCrawler.getArticles(ImmutableList.of(url), true /* retain */).get(url);
     Vector vector = Vector.fromArticle(article);
     Map<String, Double> tfIdf = vector.getTfIdf(UniverseVector.getInstance());
 
