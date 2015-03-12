@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.text.WordUtils;
 
 import com.google.api.client.util.Lists;
 import com.google.common.annotations.VisibleForTesting;
@@ -37,6 +38,7 @@ import com.janknspank.nlp.KeywordUtils;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 /**
  * ArticleCreator is a very high-level object in the crawling system: It's
@@ -429,10 +431,23 @@ class ArticleCreator {
     if (title.length() > MAX_TITLE_LENGTH) {
       title = title.substring(0, MAX_TITLE_LENGTH - 1) + "\u2026";
     }
+    if (title.length() > 0 && Character.isLowerCase(title.charAt(0))) {
+      title = WordUtils.capitalize(title);
+    }
     return title.trim();
   }
 
-  public static String getTitle(DocumentNode documentNode) throws RequiredFieldException {
+  public static String getTitle(DocumentNode documentNode)
+      throws RequiredFieldException {
+    // First, see if the manifest tells us a specific place to check.
+    SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
+    if (site != null && site.getTitleSelectorCount() > 0) {
+      Node titleNode = documentNode.findFirst(site.getTitleSelectorList());
+      if (titleNode != null) {
+        return cleanTitle(titleNode.getFlattenedText());
+      }
+    }
+
     // For most sites, we can get it from the meta keywords.  For
     // advice.careerbuilder.com, the meta keywords are crap, so we skip this
     // step.

@@ -358,6 +358,46 @@ public final class CrawlerProto {
      * <code>optional bool is_https = 11;</code>
      */
     boolean getIsHttps();
+
+    // repeated string title_selector = 12;
+    /**
+     * <code>repeated string title_selector = 12;</code>
+     *
+     * <pre>
+     * If a site has a special place in the DOM to put a clean non-cluttered-up-
+     * with-annotations title, this lets manifests explain where that is!
+     * </pre>
+     */
+    java.util.List<java.lang.String>
+    getTitleSelectorList();
+    /**
+     * <code>repeated string title_selector = 12;</code>
+     *
+     * <pre>
+     * If a site has a special place in the DOM to put a clean non-cluttered-up-
+     * with-annotations title, this lets manifests explain where that is!
+     * </pre>
+     */
+    int getTitleSelectorCount();
+    /**
+     * <code>repeated string title_selector = 12;</code>
+     *
+     * <pre>
+     * If a site has a special place in the DOM to put a clean non-cluttered-up-
+     * with-annotations title, this lets manifests explain where that is!
+     * </pre>
+     */
+    java.lang.String getTitleSelector(int index);
+    /**
+     * <code>repeated string title_selector = 12;</code>
+     *
+     * <pre>
+     * If a site has a special place in the DOM to put a clean non-cluttered-up-
+     * with-annotations title, this lets manifests explain where that is!
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTitleSelectorBytes(int index);
   }
   /**
    * Protobuf type {@code SiteManifest}
@@ -497,6 +537,14 @@ public final class CrawlerProto {
               isHttps_ = input.readBool();
               break;
             }
+            case 98: {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                titleSelector_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000800;
+              }
+              titleSelector_.add(input.readBytes());
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -528,6 +576,9 @@ public final class CrawlerProto {
         }
         if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           rssUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(rssUrl_);
+        }
+        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+          titleSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(titleSelector_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2773,6 +2824,56 @@ public final class CrawlerProto {
       return isHttps_;
     }
 
+    // repeated string title_selector = 12;
+    public static final int TITLE_SELECTOR_FIELD_NUMBER = 12;
+    private com.google.protobuf.LazyStringList titleSelector_;
+    /**
+     * <code>repeated string title_selector = 12;</code>
+     *
+     * <pre>
+     * If a site has a special place in the DOM to put a clean non-cluttered-up-
+     * with-annotations title, this lets manifests explain where that is!
+     * </pre>
+     */
+    public java.util.List<java.lang.String>
+        getTitleSelectorList() {
+      return titleSelector_;
+    }
+    /**
+     * <code>repeated string title_selector = 12;</code>
+     *
+     * <pre>
+     * If a site has a special place in the DOM to put a clean non-cluttered-up-
+     * with-annotations title, this lets manifests explain where that is!
+     * </pre>
+     */
+    public int getTitleSelectorCount() {
+      return titleSelector_.size();
+    }
+    /**
+     * <code>repeated string title_selector = 12;</code>
+     *
+     * <pre>
+     * If a site has a special place in the DOM to put a clean non-cluttered-up-
+     * with-annotations title, this lets manifests explain where that is!
+     * </pre>
+     */
+    public java.lang.String getTitleSelector(int index) {
+      return titleSelector_.get(index);
+    }
+    /**
+     * <code>repeated string title_selector = 12;</code>
+     *
+     * <pre>
+     * If a site has a special place in the DOM to put a clean non-cluttered-up-
+     * with-annotations title, this lets manifests explain where that is!
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTitleSelectorBytes(int index) {
+      return titleSelector_.getByteString(index);
+    }
+
     private void initFields() {
       rootDomain_ = "";
       akaRootDomain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -2785,6 +2886,7 @@ public final class CrawlerProto {
       rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       testInstructions_ = com.janknspank.proto.CrawlerProto.TestInstructions.getDefaultInstance();
       isHttps_ = false;
+      titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2830,6 +2932,9 @@ public final class CrawlerProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(11, isHttps_);
+      }
+      for (int i = 0; i < titleSelector_.size(); i++) {
+        output.writeBytes(12, titleSelector_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2913,6 +3018,15 @@ public final class CrawlerProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(11, isHttps_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < titleSelector_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(titleSelector_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getTitleSelectorList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3067,6 +3181,8 @@ public final class CrawlerProto {
         bitField0_ = (bitField0_ & ~0x00000200);
         isHttps_ = false;
         bitField0_ = (bitField0_ & ~0x00000400);
+        titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -3165,6 +3281,12 @@ public final class CrawlerProto {
           to_bitField0_ |= 0x00000004;
         }
         result.isHttps_ = isHttps_;
+        if (((bitField0_ & 0x00000800) == 0x00000800)) {
+          titleSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              titleSelector_);
+          bitField0_ = (bitField0_ & ~0x00000800);
+        }
+        result.titleSelector_ = titleSelector_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3303,6 +3425,16 @@ public final class CrawlerProto {
         }
         if (other.hasIsHttps()) {
           setIsHttps(other.getIsHttps());
+        }
+        if (!other.titleSelector_.isEmpty()) {
+          if (titleSelector_.isEmpty()) {
+            titleSelector_ = other.titleSelector_;
+            bitField0_ = (bitField0_ & ~0x00000800);
+          } else {
+            ensureTitleSelectorIsMutable();
+            titleSelector_.addAll(other.titleSelector_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4898,6 +5030,144 @@ public final class CrawlerProto {
       public Builder clearIsHttps() {
         bitField0_ = (bitField0_ & ~0x00000400);
         isHttps_ = false;
+        onChanged();
+        return this;
+      }
+
+      // repeated string title_selector = 12;
+      private com.google.protobuf.LazyStringList titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureTitleSelectorIsMutable() {
+        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+          titleSelector_ = new com.google.protobuf.LazyStringArrayList(titleSelector_);
+          bitField0_ |= 0x00000800;
+         }
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public java.util.List<java.lang.String>
+          getTitleSelectorList() {
+        return java.util.Collections.unmodifiableList(titleSelector_);
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public int getTitleSelectorCount() {
+        return titleSelector_.size();
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public java.lang.String getTitleSelector(int index) {
+        return titleSelector_.get(index);
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTitleSelectorBytes(int index) {
+        return titleSelector_.getByteString(index);
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public Builder setTitleSelector(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTitleSelectorIsMutable();
+        titleSelector_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public Builder addTitleSelector(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTitleSelectorIsMutable();
+        titleSelector_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public Builder addAllTitleSelector(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureTitleSelectorIsMutable();
+        super.addAll(values, titleSelector_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public Builder clearTitleSelector() {
+        titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string title_selector = 12;</code>
+       *
+       * <pre>
+       * If a site has a special place in the DOM to put a clean non-cluttered-up-
+       * with-annotations title, this lets manifests explain where that is!
+       * </pre>
+       */
+      public Builder addTitleSelectorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTitleSelectorIsMutable();
+        titleSelector_.add(value);
         onChanged();
         return this;
       }
@@ -9222,8 +9492,8 @@ public final class CrawlerProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/crawler.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\363" +
-      "\005\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
+      "m/janknspank/database/extensions.proto\"\222" +
+      "\006\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
       "\035\001\230\246\035\377\005\022\036\n\017aka_root_domain\030\002 \003(\tB\005\230\246\035\377\005\022" +
       "\034\n\tstart_url\030\003 \003(\tB\t\210\246\035\001\230\246\035\377\005\022\"\n\023subdoma" +
       "in_blacklist\030\004 \003(\tB\005\230\246\035\377\005\0223\n\016path_blackl" +
@@ -9233,34 +9503,34 @@ public final class CrawlerProto {
       "t.ArticleUrlPattern\022*\n\033whitelisted_query",
       "_parameter\030\010 \003(\tB\005\230\246\035\377\005\022\026\n\007rss_url\030\t \003(\t" +
       "B\005\230\246\035\377\005\0222\n\021test_instructions\030\n \001(\0132\021.Tes" +
-      "tInstructionsB\004\210\246\035\001\022\020\n\010is_https\030\013 \001(\010\032\326\001" +
-      "\n\rPathBlacklist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035" +
-      "\377\005\022C\n\010location\030\004 \001(\0162$.SiteManifest.Path" +
-      "Blacklist.Location:\013STARTS_WITH\"e\n\010Locat" +
-      "ion\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS" +
-      "_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n" +
-      "\013REGEX_MATCH\020\006\032d\n\021ArticleUrlPattern\022\030\n\ts" +
-      "ubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(",
-      "\tB\005\230\246\035\377\005\022\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\"\314\002\n" +
-      "\020TestInstructions\022B\n\024url_whitelist_check" +
-      "s\030\001 \001(\0132$.TestInstructions.UrlWhitelistC" +
-      "hecks\022U\n\033article_url_detector_checks\030\002 \001" +
-      "(\0132*.TestInstructions.ArticleUrlDetector" +
-      "ChecksB\004\210\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010go" +
-      "od_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246" +
-      "\035\377\005\032V\n\030ArticleUrlDetectorChecks\022\032\n\013artic" +
-      "le_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030\002" +
-      " \003(\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHistory\022\"\n\010crawl_id",
-      "\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t" +
-      "\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132\022.CrawlHistory.S" +
-      "ite\022\030\n\nstart_time\030\004 \001(\003B\004\210\246\035\001\022\020\n\010end_tim" +
-      "e\030\005 \001(\003\022\016\n\006millis\030\006 \001(\003\022\027\n\017was_interrupt" +
-      "ed\030\007 \001(\010\032\202\001\n\004Site\022\036\n\013root_domain\030\001 \001(\tB\t" +
-      "\210\246\035\001\230\246\035\377\005\022\030\n\nstart_time\030\002 \001(\003B\004\210\246\035\001\022\020\n\010e" +
-      "nd_time\030\003 \001(\003\022\016\n\006millis\030\004 \001(\003\022\036\n\020article" +
-      "s_crawled\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024MongoDB.Crawl" +
-      "HistoryB$\n\024com.janknspank.protoB\014Crawler" +
-      "Proto"
+      "tInstructionsB\004\210\246\035\001\022\020\n\010is_https\030\013 \001(\010\022\035\n" +
+      "\016title_selector\030\014 \003(\tB\005\230\246\035\377\005\032\326\001\n\rPathBla" +
+      "cklist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022C\n\010loc" +
+      "ation\030\004 \001(\0162$.SiteManifest.PathBlacklist" +
+      ".Location:\013STARTS_WITH\"e\n\010Location\022\n\n\006EQ" +
+      "UALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014" +
+      "\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MA" +
+      "TCH\020\006\032d\n\021ArticleUrlPattern\022\030\n\tsubdomain\030",
+      "\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022" +
+      "\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\"\314\002\n\020TestInst" +
+      "ructions\022B\n\024url_whitelist_checks\030\001 \001(\0132$" +
+      ".TestInstructions.UrlWhitelistChecks\022U\n\033" +
+      "article_url_detector_checks\030\002 \001(\0132*.Test" +
+      "Instructions.ArticleUrlDetectorChecksB\004\210" +
+      "\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010good_url\030\001 " +
+      "\003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030Ar" +
+      "ticleUrlDetectorChecks\022\032\n\013article_url\030\001 " +
+      "\003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030\002 \003(\tB\005\230\246\035",
+      "\377\005\"\341\002\n\014CrawlHistory\022\"\n\010crawl_id\030\001 \001(\tB\020\210" +
+      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002" +
+      "\022 \n\004site\030\003 \003(\0132\022.CrawlHistory.Site\022\030\n\nst" +
+      "art_time\030\004 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\005 \001(\003\022\016" +
+      "\n\006millis\030\006 \001(\003\022\027\n\017was_interrupted\030\007 \001(\010\032" +
+      "\202\001\n\004Site\022\036\n\013root_domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005" +
+      "\022\030\n\nstart_time\030\002 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\003" +
+      " \001(\003\022\016\n\006millis\030\004 \001(\003\022\036\n\020articles_crawled" +
+      "\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024MongoDB.CrawlHistoryB$" +
+      "\n\024com.janknspank.protoB\014CrawlerProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9272,7 +9542,7 @@ public final class CrawlerProto {
           internal_static_SiteManifest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", "TitleSelector", });
           internal_static_SiteManifest_PathBlacklist_descriptor =
             internal_static_SiteManifest_descriptor.getNestedTypes().get(0);
           internal_static_SiteManifest_PathBlacklist_fieldAccessorTable = new
@@ -9328,6 +9598,7 @@ public final class CrawlerProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

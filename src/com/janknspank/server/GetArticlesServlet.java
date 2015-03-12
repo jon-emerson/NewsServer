@@ -15,7 +15,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
-import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.Intent;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
@@ -24,6 +23,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.PushNotification;
 import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.NeuralNetworkScorer;
 
@@ -54,25 +54,31 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
 
     if (notificationBlob != null) {
       return getArticlesForNotification(req, notificationBlob);
-    } else  if (featureId != null) {
+    } else if (featureId != null) {
       return Articles.getArticlesForFeature(
           FeatureId.fromId(Integer.parseInt(featureId)),
-          NUM_RESULTS);
-    } else if (industryCodeId != null) {
-      return Articles.getArticlesForFeature(
-          Industry.fromCode(Integer.parseInt(industryCodeId)).getFeatureId(),
           NUM_RESULTS);
     } else if (entityKeyword != null) {
       Entity entity = Entity.newBuilder().setKeyword(entityKeyword).setType(entityType).build();
       return Articles.getArticlesForEntity(entity, NUM_RESULTS);
     } else if (Intent.START_COMPANY.getCode().equals(intentCode)) {
       // TODO: fix this so its the right feature for the user's industries
-      return Articles.getArticlesForFeature(
-          FeatureId.fromId(20000), NUM_RESULTS);
+      return Articles.getArticlesForFeature(FeatureId.fromId(20000), NUM_RESULTS);
     }
 
     User user = getUser(req);
-    if ("linked_in".equals(contacts)) {
+    if (industryCodeId != null) {
+      return Articles.getRankedArticles(
+          user.toBuilder()
+              .clearInterest()
+              .addInterest(Interest.newBuilder()
+                  .setType(InterestType.INDUSTRY)
+                  .setIndustryCode(Integer.parseInt(industryCodeId))
+                  .build())
+              .build(),
+          NeuralNetworkScorer.getInstance(),
+          NUM_RESULTS);
+    } else if ("linked_in".equals(contacts)) {
       return Articles.getArticlesForContacts(user, InterestType.LINKED_IN_CONTACTS, NUM_RESULTS);
     } else if ("address_book".equals(contacts)) {
       return Articles.getArticlesForContacts(user, InterestType.ADDRESS_BOOK_CONTACTS, NUM_RESULTS);

@@ -205,6 +205,14 @@ public class SiteManifests {
     return CONTENT_SITE_LIST;
   }
 
+  public static SiteManifest getForUrl(String url) {
+    try {
+      return getForUrl(new URL(url));
+    } catch (MalformedURLException e) {
+      return null;
+    }
+  }
+
   /**
    * Gets the site crawling / whitelisting instructions relevant to a specific
    * URL.  E.g. if a CNN article was passed, the SiteManifest object for root URL
