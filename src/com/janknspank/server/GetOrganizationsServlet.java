@@ -6,8 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.ImmutableList;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -25,14 +24,11 @@ public class GetOrganizationsServlet extends StandardServlet {
     String searchString  = getParameter(req, "contains");
     Iterable<Entity> orgs; 
 
-    Iterable<String> organizationTypes =
-        Iterables.transform(EntityType.ORGANIZATION.getAllVersions(),
-            new Function<EntityType, String>() {
-              @Override
-              public String apply(EntityType entityType) {
-                return entityType.toString();
-              }
-            });
+    // DON'T list more than 9 types here!!  MySQL doesn't use indexes anymore
+    // for non-unique keys once you go to 10 or more options.
+    Iterable<String> organizationTypes = ImmutableList.of(
+        EntityType.ORGANIZATION.toString(),
+        EntityType.COMPANY.toString());
     if (searchString != null) {
       orgs = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", searchString + "%"),
@@ -40,17 +36,11 @@ public class GetOrganizationsServlet extends StandardServlet {
           new QueryOption.Limit(50),
           new QueryOption.DescendingSort("importance"));
     } else {
-      orgs = Iterables.concat(
-          Database.with(Entity.class).get(
-              new QueryOption.WhereEquals("type", EntityType.COMPANY.toString()),
-              new QueryOption.Limit(100),
-              new QueryOption.DescendingSort("importance")),
-          Database.with(Entity.class).get(
-              new QueryOption.WhereEquals("type", EntityType.ORGANIZATION.toString()),
-              new QueryOption.Limit(100),
-              new QueryOption.DescendingSort("importance")));
+      orgs = Database.with(Entity.class).get(
+          new QueryOption.WhereEquals("type", organizationTypes),
+          new QueryOption.Limit(100),
+          new QueryOption.DescendingSort("importance"));
     }
-
     JSONArray orgsJson = Serializer.toJSON(orgs);
 
     // HACK(jonemerson): Return types the client doesn't crash on.
