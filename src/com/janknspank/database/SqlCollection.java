@@ -688,9 +688,51 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         Method parseFromMethod = clazz.getMethod("parseFrom", InputStream.class);
 
         @SuppressWarnings("unchecked")
-        T message = (T) parseFromMethod.invoke(null,
+        T maybeStaleMessage = (T) parseFromMethod.invoke(null,
             result.getBlob(PROTO_COLUMN_NAME).getBinaryStream());
+        Message.Builder messageBuilder = maybeStaleMessage.toBuilder();
 
+        // For pulled-out and indexed fields, the proto may have different
+        // values than we've stored in the proto.  In this case, the MySQL
+        // columns win.  Let's make that happen.
+        for (FieldDescriptor field : storageMethodMap.keySet()) {
+          StorageMethod storageMethod = storageMethodMap.get(field);
+          if (storageMethod == StorageMethod.PRIMARY_KEY ||
+              storageMethod == StorageMethod.INDEX ||
+              storageMethod == StorageMethod.UNIQUE_INDEX ||
+              storageMethod == StorageMethod.PULL_OUT) {
+            Object obj = result.getObject(field.getName());
+            if (obj == null) {
+              messageBuilder.clearField(field);
+              continue;
+            }
+            switch (field.getJavaType()) {
+              case STRING:
+                messageBuilder.setField(field, result.getString(field.getName()));
+                break;
+              case LONG:
+                messageBuilder.setField(field, result.getLong(field.getName()));
+                break;
+              case ENUM:
+                EnumValueDescriptor value =
+                    field.getEnumType().findValueByNumber(result.getInt(field.getName()));
+                messageBuilder.setField(field, value);
+                break;
+              case INT:
+                messageBuilder.setField(field, result.getInt(field.getName()));
+                break;
+              case BOOLEAN:
+                messageBuilder.setField(field, result.getBoolean(field.getName()));
+                break;
+              case DOUBLE:
+                messageBuilder.setField(field, result.getDouble(field.getName()));
+                break;
+            }
+          }
+        }
+
+        @SuppressWarnings("unchecked")
+        T message = (T) messageBuilder.build();
         Validator.assertValid(message);
         return message;
       } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException

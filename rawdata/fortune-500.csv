@@ -34,7 +34,7 @@
 34,Microsoft
 35,Amazon
 36,Target
-37,Walgreen
+37,Walgreens
 38,WellPoint
 39,Johnson & Johnson
 40,American International Group
@@ -72,7 +72,7 @@
 72,Prudential
 73,Humana
 74,Goldman Sachs
-75,Tesoro Petroleum
+75,Tesoro
 76,Liberty Mutual
 77,Honeywell International
 78,United Continental
@@ -121,7 +121,7 @@
 121,Emerson Electric
 122,Northrop Grumman
 123,Duke Energy
-124,Capital One Financial
+124,Capital One Bank
 125,Aflac
 126,Raytheon
 127,Staples
@@ -171,7 +171,7 @@
 171,Illinois Tool Works
 172,PNC Bank
 173,Medtronic
-174,The AES Corporation
+174,AES Corporation
 175,Murphy USA
 176,Bristol-Myers Squibb
 177,Lear
@@ -214,7 +214,7 @@
 214,Smithfield Foods
 215,Thermo Fisher Scientific
 216,Yum! Brands
-217,Parker-Hannifin
+217,Parker Hannifin
 218,Whole Foods Market
 219,Marriott
 220,C.H. Robinson
@@ -261,7 +261,7 @@
 261,First Data
 262,AGCO
 263,L Brands
-264,Hertz Global Holdings
+264,Hertz
 265,CDW
 266,CST Brands
 267,Sempra Energy
@@ -269,7 +269,7 @@
 269,BB&T
 270,Devon Energy
 271,Family Dollar
-272,Unum Group
+272,Unum
 273,Ally Financial
 274,Reinsurance Group of America
 275,State Street
@@ -389,12 +389,12 @@
 389,Casey's General Stores
 390,O'Reilly Automotive
 391,The Blackstone Group
-392,Mutual of Omaha Insurance
+392,Mutual of Omaha
 393,Molina Healthcare
 394,CMS Energy
 395,Targa Resources
 396,Quanta Services
-397,Cablevision Systems
+397,Cablevision
 398,Avery Dennison
 399,Celanese
 400,Foot Locker
@@ -427,7 +427,7 @@
 427,United Natural Foods
 428,Auto-Owners Insurance Group
 429,Windstream
-430,Dr. Pepper Snapple Group
+430,Dr. Pepper Snapple
 431,Lennar
 432,Sanmina
 433,Harley-Davidson

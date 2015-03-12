@@ -35,10 +35,13 @@ public class GetOrganizationsServlet extends StandardServlet {
                   return entityType.toString();
                 }
               })),
-          new QueryOption.Limit(50));
+          new QueryOption.Limit(50),
+          new QueryOption.DescendingSort("importance"));
     } else {
-      orgs = Database.with(Entity.class).get(new QueryOption.WhereEquals("type", "org"), 
-          new QueryOption.Limit(20));
+      orgs = Database.with(Entity.class).get(
+          new QueryOption.WhereEquals("type", "org"),
+          new QueryOption.Limit(20),
+          new QueryOption.DescendingSort("importance"));
     }
 
     JSONArray orgsJson = Serializer.toJSON(orgs);
