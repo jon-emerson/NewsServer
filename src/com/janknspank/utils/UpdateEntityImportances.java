@@ -9,6 +9,7 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 
 import com.google.api.client.util.Lists;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -41,6 +42,30 @@ public class UpdateEntityImportances {
     return companyNames;
   }
 
+  private static Map<String, Integer> getMostValuableBrands() {
+    Map<String, Integer> companyNames = Maps.newHashMap();
+    FileReader fileReader = null;
+    try {
+      fileReader = new FileReader("rawdata/mostvaluablebrands.csv");
+      CsvReader reader = new CsvReader(fileReader);
+      List<String> line = reader.readLine();
+      while (line != null) {
+        if (line.size() <= 1) {
+          System.out.println("Skipping invalid line: " + Joiner.on(",").join(line));
+          line = reader.readLine();
+          continue;
+        }
+        companyNames.put(line.get(1), Integer.parseInt(line.get(0)));
+        line = reader.readLine();
+      }
+    } catch (IOException e) {
+      throw new Error(e);
+    } finally {
+      IOUtils.closeQuietly(fileReader);
+    }
+    return companyNames;
+  }
+
   private static Set<String> getCompanyNames(String csvFilename, int companyNameIndex) {
     Set<String> companyNames = Sets.newHashSet();
     FileReader fileReader = null;
@@ -49,6 +74,11 @@ public class UpdateEntityImportances {
       CsvReader reader = new CsvReader(fileReader);
       List<String> line = reader.readLine();
       while (line != null) {
+        if (line.size() <= companyNameIndex) {
+          System.out.println("Skipping invalid line: " + Joiner.on(",").join(line));
+          line = reader.readLine();
+          continue;
+        }
         if (companyNames.contains(line.get(companyNameIndex))) {
           System.out.println("Internal dupe in " + csvFilename + ": " + line.get(companyNameIndex));
         }
@@ -64,15 +94,33 @@ public class UpdateEntityImportances {
   }
 
   public static void main(String args[]) throws Exception {
+    // Start with the Fortune 500.  The top company gets 550 importance points.
+    // The bottom company gets 50.
     Map<String, Integer> companyScoreMap = getFortune500Map();
+    for (String companyName : companyScoreMap.keySet()) {
+      companyScoreMap.put(companyName, 551 - companyScoreMap.get(companyName));
+    }
+
+    // Add in everyone else whose listed on a stock exchange at 20 points.
+    Map<String, Integer> mostValuableBrandsMap = getMostValuableBrands();
     for (String companyName : Iterables.concat(
         getCompanyNames("rawdata/nasdaq.csv", 1),
-        getCompanyNames("rawdata/nyse.csv", 1))) {
+        getCompanyNames("rawdata/nyse.csv", 1),
+        mostValuableBrandsMap.keySet())) {
       if (!companyScoreMap.containsKey(companyName)) {
-        companyScoreMap.put(companyName, 550);
+        companyScoreMap.put(companyName, 20);
       }
     }
     List<String> companyNameList = Lists.newArrayList(companyScoreMap.keySet());
+
+    // Boost most valuable brands by 1 to 100 based on how valuable they are.
+    for (Map.Entry<String, Integer> mostValuableBrandEntry : mostValuableBrandsMap.entrySet()) {
+      String companyName = mostValuableBrandEntry.getKey();
+      int oldScore = companyScoreMap.get(companyName);
+      int newScore = Math.max(100, oldScore) + (120 - mostValuableBrandEntry.getValue());
+      companyScoreMap.put(companyName, newScore);
+      System.out.println(companyName + " from " + oldScore + " to " + newScore);
+    }
 
     int count = 0;
     for (int i = 0; i < companyNameList.size(); i += 100) {
@@ -84,7 +132,7 @@ public class UpdateEntityImportances {
         Integer companyScore = companyScoreMap.get(entity.getKeyword());
         if (companyScore != null) {
           entitiesToUpdate.add(entity.toBuilder()
-              .setImportance(600 - companyScore)
+              .setImportance(companyScore)
               .build());
           count++;
         }

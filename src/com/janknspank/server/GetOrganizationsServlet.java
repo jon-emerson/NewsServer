@@ -33,11 +33,13 @@ public class GetOrganizationsServlet extends StandardServlet {
       orgs = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", searchString + "%"),
           new QueryOption.WhereEquals("type", organizationTypes),
+          new QueryOption.WhereNotEqualsNumber("source", Entity.Source.DBPEDIA_LONG_ABSTRACT_VALUE),
           new QueryOption.Limit(50),
           new QueryOption.DescendingSort("importance"));
     } else {
       orgs = Database.with(Entity.class).get(
           new QueryOption.WhereEquals("type", organizationTypes),
+          new QueryOption.WhereNotEqualsNumber("source", Entity.Source.DBPEDIA_LONG_ABSTRACT_VALUE),
           new QueryOption.Limit(100),
           new QueryOption.DescendingSort("importance"));
     }
