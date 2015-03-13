@@ -116,7 +116,7 @@ public class PruneMongoDatabase {
 
     int count = Database.with(Article.class).delete(
         new QueryOption.WhereLessThan("published_time", oldestArticle.getPublishedTime()),
-        new QueryOption.WhereFalse("retain"));
+        new QueryOption.WhereNotTrue("retain"));
     System.out.println("Deleted " + count + " older articles in "
         + (System.currentTimeMillis() - startTime) + "ms.  Article count: "
         + Database.with(Article.class).getSize());

@@ -43,9 +43,11 @@ import com.janknspank.database.QueryOption.WhereLikeIgnoreCase;
 import com.janknspank.database.QueryOption.WhereNotEquals;
 import com.janknspank.database.QueryOption.WhereNotEqualsEnum;
 import com.janknspank.database.QueryOption.WhereNotEqualsNumber;
+import com.janknspank.database.QueryOption.WhereNotFalse;
 import com.janknspank.database.QueryOption.WhereNotLike;
 import com.janknspank.database.QueryOption.WhereNotLikeIgnoreCase;
 import com.janknspank.database.QueryOption.WhereNotNull;
+import com.janknspank.database.QueryOption.WhereNotTrue;
 import com.janknspank.database.QueryOption.WhereNull;
 import com.janknspank.database.QueryOption.WhereOption;
 import com.janknspank.database.QueryOption.WhereTrue;
@@ -504,10 +506,20 @@ public class SqlCollection<T extends Message> extends Collection<T> {
           .append(whereTrue.getFieldName())
           .append(" IS TRUE");
     }
+    for (WhereNotTrue whereNotTrue : QueryOption.getList(options, WhereNotTrue.class)) {
+      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+          .append(whereNotTrue.getFieldName())
+          .append(" IS NOT TRUE");
+    }
     for (WhereFalse whereFalse : QueryOption.getList(options, WhereFalse.class)) {
       sql.append(sql.length() == 0 ? " WHERE " : " AND ")
           .append(whereFalse.getFieldName())
           .append(" IS FALSE");
+    }
+    for (WhereNotFalse whereNotFalse : QueryOption.getList(options, WhereNotFalse.class)) {
+      sql.append(sql.length() == 0 ? " WHERE " : " AND ")
+          .append(whereNotFalse.getFieldName())
+          .append(" IS NOT FALSE");
     }
     for (WhereNull whereNull : QueryOption.getList(options, WhereNull.class)) {
       sql.append(sql.length() == 0 ? " WHERE " : " AND ")
