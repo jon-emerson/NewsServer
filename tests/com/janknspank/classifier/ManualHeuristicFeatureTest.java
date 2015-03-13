@@ -5,10 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
+import com.janknspank.proto.ArticleProto.Article;
 
 public class ManualHeuristicFeatureTest {
   @Test
-  public void test() {
+  public void testGetScore() {
     assertEquals(50.0,
         ManualHeuristicFeature.getScore("Moose drool 500",
             ImmutableMap.<String, Double>builder()
@@ -29,6 +30,18 @@ public class ManualHeuristicFeatureTest {
                 .put("jorge", 200.0)
                 .put("pasilda", 50.0)
                 .build()),
+        0.000001 /* epsilon */);
+  }
+
+  @Test
+  public void testScore() {
+    ManualHeuristicFeature feature =
+        new ManualHeuristicFeature(FeatureId.MANUAL_HEURISTIC_LAUNCHES);
+    assertEquals(1.0, feature.score(Article.newBuilder()
+        .setTitle("Google launches amazing new product")),
+        0.000001 /* epsilon */);
+    assertEquals(0.0, feature.score(Article.newBuilder()
+        .setTitle("ISIS launches missiles at Israel")),
         0.000001 /* epsilon */);
   }
 }

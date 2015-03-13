@@ -1,40 +1,120 @@
 package com.janknspank.classifier;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.google.api.client.util.Throwables;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 
 public class ManualHeuristicFeature extends Feature {
-  private static final LoadingCache<ArticleOrBuilder, String> LOWER_CASE_BODY_CACHE =
-      CacheBuilder.newBuilder().maximumSize(1000).build(
-          new CacheLoader<ArticleOrBuilder, String>() {
-            @Override
-            public String load(ArticleOrBuilder article) {
-              StringBuilder bodyBuilder = new StringBuilder();
-              for (String paragraph : article.getParagraphList()) {
-                bodyBuilder.append(paragraph.toLowerCase());
-              }
-              return bodyBuilder.toString();
-            }
-          });
-  private static final LoadingCache<String, Pattern> PATTERN_CACHE =
-      CacheBuilder.newBuilder().maximumSize(1000).build(
-          new CacheLoader<String, Pattern>() {
-            @Override
-            public Pattern load(String regex) {
-              return Pattern.compile(regex);
-            }
-          });
+  private static class BodyCache extends ThreadLocal<LinkedHashMap<ArticleOrBuilder, String>> {
+    private static final int CACHE_SIZE_PER_THREAD = 5;
+
+    @Override
+    protected LinkedHashMap<ArticleOrBuilder, String> initialValue() {
+      return new LinkedHashMap<ArticleOrBuilder, String>() {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<ArticleOrBuilder, String> eldest) {
+          return size() > CACHE_SIZE_PER_THREAD;
+        }
+      };
+    }
+
+    public String getBody(final ArticleOrBuilder article) {
+      if (this.get().containsKey(article)) {
+        return this.get().get(article);
+      }
+      StringBuilder bodyBuilder = new StringBuilder();
+      for (String paragraph : article.getParagraphList()) {
+        bodyBuilder.append(paragraph.toLowerCase());
+        bodyBuilder.append(" ");
+      }
+      String body = bodyBuilder.toString();
+      this.get().put(article, body);
+      return body;
+    };
+  }
+  private static final BodyCache BODY_CACHE = new BodyCache();
+
+  private static final Map<Object, Pattern> PATTERN_CACHE = Maps.newHashMap();
+  private static final Map<String, Double> ACQUISITION_TITLE_SCORES =
+      ImmutableMap.<String, Double>builder()
+          .put("acquires", 1.0)
+          .put("is acquiring", 1.0)
+          .put("buys", 0.9)
+          .put("acquisition", 0.7)
+          .put("buying", 0.4)
+          .build();
+  private static final Map<String, Double> ACQUISITION_BODY_SCORES =
+      ImmutableMap.<String, Double>builder()
+          .put("acquires", 0.8)
+          .put("is acquiring", 0.8)
+          .put("acquisition", 0.2)
+          .build();
+  private static final Map<String, Double> LAUNCH_TITLE_SCORES =
+      ImmutableMap.<String, Double>builder()
+          .put("launches", 1.0)
+          .put("launched", 0.9)
+          .put("to launch", 0.9)
+          .put("releases", 0.9)
+          .build();
+  private static final Map<String, Double> LAUNCH_BODY_SCORES =
+      ImmutableMap.<String, Double>builder()
+          .put("launches", 0.8)
+          .put("launched", 0.6)
+          .put("releases", 0.4)
+          .build();
+  private static final Map<String, Double> FUNDRAISING_TITLE_SCORES =
+      ImmutableMap.<String, Double>builder()
+          .put("raises", 1.0)
+          .put("series a", 1.0)
+          .put("series b", 1.0)
+          .put("series c", 1.0)
+          .put("series d", 1.0)
+          .put("series e", 1.0)
+          .put("angel round", 1.0)
+          .put("valuation", 1.0)
+          .build();
+  private static final Map<String, Double> FUNDRAISING_BODY_SCORES =
+      ImmutableMap.<String, Double>builder()
+          .put("raises", 0.9)
+          .put("series a", 0.9)
+          .put("series b", 0.9)
+          .put("series c", 0.9)
+          .put("series d", 0.9)
+          .put("series e", 0.9)
+          .put("angel round", 0.9)
+          .put("investors", 0.8)
+          .build();
+  private static final Map<String, Double> MILITARY_SCORES =
+      ImmutableMap.<String, Double>builder()
+          .put("afghanistan", 1.0)
+          .put("attack", 1.0)
+          .put("attacks", 1.0)
+          .put("gaza", 1.0)
+          .put("injured", 1.0)
+          .put("iran", 1.0)
+          .put("iraq", 1.0)
+          .put("isis", 1.0)
+          .put("killed", 1.0)
+          .put("lebanon", 1.0)
+          .put("militant", 1.0)
+          .put("militants", 1.0)
+          .put("military", 1.0)
+          .put("mortar", 1.0)
+          .put("mortars", 1.0)
+          .put("nasa", 1.0)
+          .put("north korea", 1.0)
+          .put("pakistan", 1.0)
+          .put("paramilitary", 1.0)
+          .put("rocket", 1.0)
+          .put("wounded", 1.0)
+          .build();
 
   public ManualHeuristicFeature(FeatureId featureId) {
     super(featureId);
@@ -44,7 +124,10 @@ public class ManualHeuristicFeature extends Feature {
   }
 
   @Override
-  public double score(ArticleOrBuilder article) throws ClassifierException {
+  public double score(ArticleOrBuilder article) {
+    if (isAboutMilitary(article)) {
+      return 0;
+    }
     switch (featureId) {
       case MANUAL_HEURISTIC_ACQUISITIONS:
         return relevanceToAcquisitions(article);
@@ -58,98 +141,48 @@ public class ManualHeuristicFeature extends Feature {
 
   @VisibleForTesting
   static double getScore(String text, Map<String, Double> scoreRules) {
-    double score = 0;
-    try {
-      Pattern titlePattern = PATTERN_CACHE.get(
-          new StringBuilder()
-              .append("(")
-              .append(Joiner.on("|").join(scoreRules.keySet()))
-              .append(")")
-              .toString());
-      Matcher titleMatcher = titlePattern.matcher(text);
-      while (titleMatcher.find()) {
-        score = Math.max(score, scoreRules.get(titleMatcher.group(1)));
+    Pattern pattern;
+    synchronized (PATTERN_CACHE) {
+      if (PATTERN_CACHE.containsKey(scoreRules)) {
+        pattern = PATTERN_CACHE.get(scoreRules);
+      } else {
+        pattern = Pattern.compile(new StringBuilder()
+            .append("(")
+            .append(Joiner.on("|").join(scoreRules.keySet()))
+            .append(")")
+            .toString());
+        PATTERN_CACHE.put(scoreRules, pattern);
       }
-    } catch (ExecutionException e) {
-      Throwables.propagateIfPossible(e);
-      throw new RuntimeException(e);
+    }
+    double score = 0;
+    Matcher matcher = pattern.matcher(text);
+    while (matcher.find()) {
+      score = Math.max(score, scoreRules.get(matcher.group(1)));
     }
     return score;
   }
 
+  private static boolean isAboutMilitary(ArticleOrBuilder article) {
+    return 0 !=
+        getScore(article.getTitle().toLowerCase(), MILITARY_SCORES)
+        + getScore(BODY_CACHE.getBody(article), MILITARY_SCORES);
+  }
+
   public static double relevanceToAcquisitions(ArticleOrBuilder article) {
-    try {
-      return Math.max(
-          getScore(article.getTitle().toLowerCase(),
-              ImmutableMap.<String, Double>builder()
-                  .put("acquires", 1.0)
-                  .put("is acquiring", 1.0)
-                  .put("buys", 0.9)
-                  .put("acquisition", 0.7)
-                  .put("buying", 0.4)
-                  .build()),
-          getScore(LOWER_CASE_BODY_CACHE.get(article),
-              ImmutableMap.<String, Double>builder()
-                  .put("acquires", 0.8)
-                  .put("is acquiring", 0.8)
-                  .put("acquisition", 0.2)
-                  .build()));
-    } catch (ExecutionException e) {
-      Throwables.propagateIfPossible(e);
-      throw new RuntimeException(e);
-    }
+    return Math.max(
+        getScore(article.getTitle().toLowerCase(), ACQUISITION_TITLE_SCORES),
+        getScore(BODY_CACHE.getBody(article), ACQUISITION_BODY_SCORES));
   }
 
   public static double relevanceToLaunches(ArticleOrBuilder article) {
-    try {
-      return Math.max(
-          getScore(article.getTitle().toLowerCase(),
-              ImmutableMap.<String, Double>builder()
-                  .put("launches", 1.0)
-                  .put("launched", 0.9)
-                  .put("to launch", 0.9)
-                  .put("releases", 0.9)
-                  .build()),
-          getScore(LOWER_CASE_BODY_CACHE.get(article),
-              ImmutableMap.<String, Double>builder()
-                  .put("launches", 0.8)
-                  .put("launched", 0.6)
-                  .put("releases", 0.4)
-                  .build()));
-    } catch (ExecutionException e) {
-      Throwables.propagateIfPossible(e);
-      throw new RuntimeException(e);
-    }
+    return Math.max(
+        getScore(article.getTitle().toLowerCase(), LAUNCH_TITLE_SCORES),
+        getScore(BODY_CACHE.getBody(article), LAUNCH_BODY_SCORES));
   }
 
   public static double relevanceToFundraising(ArticleOrBuilder article) {
-    try {
-      return Math.max(
-          getScore(article.getTitle().toLowerCase(),
-              ImmutableMap.<String, Double>builder()
-                  .put("raises", 1.0)
-                  .put("series a", 1.0)
-                  .put("series b", 1.0)
-                  .put("series c", 1.0)
-                  .put("series d", 1.0)
-                  .put("series e", 1.0)
-                  .put("angel round", 1.0)
-                  .put("valuation", 1.0)
-                  .build()),
-          getScore(LOWER_CASE_BODY_CACHE.get(article),
-              ImmutableMap.<String, Double>builder()
-                  .put("raises", 0.9)
-                  .put("series a", 0.9)
-                  .put("series b", 0.9)
-                  .put("series c", 0.9)
-                  .put("series d", 0.9)
-                  .put("series e", 0.9)
-                  .put("angel round", 0.9)
-                  .put("investors", 0.8)
-                  .build()));
-    } catch (ExecutionException e) {
-      Throwables.propagateIfPossible(e);
-      throw new RuntimeException(e);
-    }
+    return Math.max(
+        getScore(article.getTitle().toLowerCase(), FUNDRAISING_TITLE_SCORES),
+        getScore(BODY_CACHE.getBody(article), FUNDRAISING_BODY_SCORES));
   }
 }

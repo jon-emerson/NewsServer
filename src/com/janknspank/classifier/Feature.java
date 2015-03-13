@@ -2,11 +2,8 @@ package com.janknspank.classifier;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.regex.Pattern;
 
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
@@ -14,6 +11,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
+import com.janknspank.common.PatternCache;
 import com.janknspank.crawler.SiteManifests;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
@@ -31,28 +29,6 @@ public abstract class Feature {
       CacheBuilder.newBuilder().maximumSize(1000).build(new FeatureLoader());
   private static List<FeatureId> VALID_FEATURE_IDS = null;
   private static final PatternCache PATTERN_CACHE = new PatternCache();
-  private static class PatternCache extends ThreadLocal<LinkedHashMap<String, Pattern>> {
-    private static final int CACHE_SIZE_PER_THREAD = 100;
-
-    @Override
-    protected LinkedHashMap<String, Pattern> initialValue() {
-      return new LinkedHashMap<String, Pattern>() {
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<String, Pattern> eldest) {
-          return size() > CACHE_SIZE_PER_THREAD;
-        }
-      };
-    }
-
-    public Pattern getPattern(final String regex) {
-      if (this.get().containsKey(regex)) {
-        return this.get().get(regex);
-      }
-      Pattern pattern = Pattern.compile(regex);
-      this.get().put(regex, pattern);
-      return pattern;
-    };
-  }
 
   /**
    * Loader for the Guava cache that returns a Feature for each FeatureId.  This

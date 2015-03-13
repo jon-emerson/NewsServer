@@ -59,7 +59,8 @@ class ArticleCreator {
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.sfgate.com/img/pages/article/opengraph_default.png",
-      "http://images.forbes.com/media/assets/forbes_1200x1200.jpg");
+      "http://images.forbes.com/media/assets/forbes_1200x1200.jpg",
+      "http://images.rigzone.com/images/rz-facebook.jpg");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|—)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
