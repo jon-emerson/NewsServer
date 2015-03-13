@@ -2489,8 +2489,10 @@ public final class CrawlerProto {
        * <code>optional int32 boost = 5;</code>
        *
        * <pre>
-       * A number between 1 and 10 that indicates the strength of the boost that
-       * should be applied.
+       * A number between -20 and 10 that indicates the strength of the boost that
+       * should be applied.  -20 is an incredible punishment, 10 is a very strong
+       * boost.  0 is what most articles should get if we don't know what topic
+       * they're about and they're on a generic web site.
        * </pre>
        */
       boolean hasBoost();
@@ -2498,8 +2500,10 @@ public final class CrawlerProto {
        * <code>optional int32 boost = 5;</code>
        *
        * <pre>
-       * A number between 1 and 10 that indicates the strength of the boost that
-       * should be applied.
+       * A number between -20 and 10 that indicates the strength of the boost that
+       * should be applied.  -20 is an incredible punishment, 10 is a very strong
+       * boost.  0 is what most articles should get if we don't know what topic
+       * they're about and they're on a generic web site.
        * </pre>
        */
       int getBoost();
@@ -2820,8 +2824,10 @@ public final class CrawlerProto {
        * <code>optional int32 boost = 5;</code>
        *
        * <pre>
-       * A number between 1 and 10 that indicates the strength of the boost that
-       * should be applied.
+       * A number between -20 and 10 that indicates the strength of the boost that
+       * should be applied.  -20 is an incredible punishment, 10 is a very strong
+       * boost.  0 is what most articles should get if we don't know what topic
+       * they're about and they're on a generic web site.
        * </pre>
        */
       public boolean hasBoost() {
@@ -2831,8 +2837,10 @@ public final class CrawlerProto {
        * <code>optional int32 boost = 5;</code>
        *
        * <pre>
-       * A number between 1 and 10 that indicates the strength of the boost that
-       * should be applied.
+       * A number between -20 and 10 that indicates the strength of the boost that
+       * should be applied.  -20 is an incredible punishment, 10 is a very strong
+       * boost.  0 is what most articles should get if we don't know what topic
+       * they're about and they're on a generic web site.
        * </pre>
        */
       public int getBoost() {
@@ -3488,8 +3496,10 @@ public final class CrawlerProto {
          * <code>optional int32 boost = 5;</code>
          *
          * <pre>
-         * A number between 1 and 10 that indicates the strength of the boost that
-         * should be applied.
+         * A number between -20 and 10 that indicates the strength of the boost that
+         * should be applied.  -20 is an incredible punishment, 10 is a very strong
+         * boost.  0 is what most articles should get if we don't know what topic
+         * they're about and they're on a generic web site.
          * </pre>
          */
         public boolean hasBoost() {
@@ -3499,8 +3509,10 @@ public final class CrawlerProto {
          * <code>optional int32 boost = 5;</code>
          *
          * <pre>
-         * A number between 1 and 10 that indicates the strength of the boost that
-         * should be applied.
+         * A number between -20 and 10 that indicates the strength of the boost that
+         * should be applied.  -20 is an incredible punishment, 10 is a very strong
+         * boost.  0 is what most articles should get if we don't know what topic
+         * they're about and they're on a generic web site.
          * </pre>
          */
         public int getBoost() {
@@ -3510,8 +3522,10 @@ public final class CrawlerProto {
          * <code>optional int32 boost = 5;</code>
          *
          * <pre>
-         * A number between 1 and 10 that indicates the strength of the boost that
-         * should be applied.
+         * A number between -20 and 10 that indicates the strength of the boost that
+         * should be applied.  -20 is an incredible punishment, 10 is a very strong
+         * boost.  0 is what most articles should get if we don't know what topic
+         * they're about and they're on a generic web site.
          * </pre>
          */
         public Builder setBoost(int value) {
@@ -3524,8 +3538,10 @@ public final class CrawlerProto {
          * <code>optional int32 boost = 5;</code>
          *
          * <pre>
-         * A number between 1 and 10 that indicates the strength of the boost that
-         * should be applied.
+         * A number between -20 and 10 that indicates the strength of the boost that
+         * should be applied.  -20 is an incredible punishment, 10 is a very strong
+         * boost.  0 is what most articles should get if we don't know what topic
+         * they're about and they're on a generic web site.
          * </pre>
          */
         public Builder clearBoost() {
@@ -11018,7 +11034,7 @@ public final class CrawlerProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/crawler.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\340" +
+      "m/janknspank/database/extensions.proto\"\346" +
       "\007\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
       "\035\001\230\246\035\377\005\022\036\n\017aka_root_domain\030\002 \003(\tB\005\230\246\035\377\005\022" +
       "\034\n\tstart_url\030\003 \003(\tB\t\210\246\035\001\230\246\035\377\005\022\"\n\023subdoma" +
@@ -11040,29 +11056,29 @@ public final class CrawlerProto {
       "\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006\032d\n\021Artic" +
       "leUrlPattern\022\030\n\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031" +
       "\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query_regex" +
-      "\030\003 \001(\tB\005\230\246\035\377\005\032\211\001\n\023FeatureBoostPattern\022\030\n" +
+      "\030\003 \001(\tB\005\230\246\035\377\005\032\217\001\n\023FeatureBoostPattern\022\030\n" +
       "\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 " +
       "\001(\tB\005\230\246\035\377\005\022\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\022\022" +
-      "\n\nfeature_id\030\004 \001(\005\022\r\n\005boost\030\005 \001(\005\"\314\002\n\020Te" +
-      "stInstructions\022B\n\024url_whitelist_checks\030\001" +
-      " \001(\0132$.TestInstructions.UrlWhitelistChec" +
-      "ks\022U\n\033article_url_detector_checks\030\002 \001(\0132",
-      "*.TestInstructions.ArticleUrlDetectorChe" +
-      "cksB\004\210\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010good_" +
-      "url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005" +
-      "\032V\n\030ArticleUrlDetectorChecks\022\032\n\013article_" +
-      "url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030\002 \003(" +
-      "\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHistory\022\"\n\010crawl_id\030\001 " +
-      "\001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t\210\246\035" +
-      "\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132\022.CrawlHistory.Site" +
-      "\022\030\n\nstart_time\030\004 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\005" +
-      " \001(\003\022\016\n\006millis\030\006 \001(\003\022\027\n\017was_interrupted\030",
-      "\007 \001(\010\032\202\001\n\004Site\022\036\n\013root_domain\030\001 \001(\tB\t\210\246\035" +
-      "\001\230\246\035\377\005\022\030\n\nstart_time\030\002 \001(\003B\004\210\246\035\001\022\020\n\010end_" +
-      "time\030\003 \001(\003\022\016\n\006millis\030\004 \001(\003\022\036\n\020articles_c" +
-      "rawled\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024MongoDB.CrawlHis" +
-      "toryB$\n\024com.janknspank.protoB\014CrawlerPro" +
-      "to"
+      "\n\nfeature_id\030\004 \001(\005\022\023\n\005boost\030\005 \001(\005B\004\210\246\035\001\"" +
+      "\314\002\n\020TestInstructions\022B\n\024url_whitelist_ch" +
+      "ecks\030\001 \001(\0132$.TestInstructions.UrlWhiteli" +
+      "stChecks\022U\n\033article_url_detector_checks\030",
+      "\002 \001(\0132*.TestInstructions.ArticleUrlDetec" +
+      "torChecksB\004\210\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n" +
+      "\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB" +
+      "\005\230\246\035\377\005\032V\n\030ArticleUrlDetectorChecks\022\032\n\013ar" +
+      "ticle_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_article_ur" +
+      "l\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHistory\022\"\n\010crawl" +
+      "_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004host\030\002 \001(" +
+      "\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132\022.CrawlHistor" +
+      "y.Site\022\030\n\nstart_time\030\004 \001(\003B\004\210\246\035\001\022\020\n\010end_" +
+      "time\030\005 \001(\003\022\016\n\006millis\030\006 \001(\003\022\027\n\017was_interr",
+      "upted\030\007 \001(\010\032\202\001\n\004Site\022\036\n\013root_domain\030\001 \001(" +
+      "\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nstart_time\030\002 \001(\003B\004\210\246\035\001\022\020" +
+      "\n\010end_time\030\003 \001(\003\022\016\n\006millis\030\004 \001(\003\022\036\n\020arti" +
+      "cles_crawled\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024MongoDB.Cr" +
+      "awlHistoryB$\n\024com.janknspank.protoB\014Craw" +
+      "lerProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11145,6 +11161,7 @@ public final class CrawlerProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

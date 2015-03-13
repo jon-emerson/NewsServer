@@ -94,6 +94,18 @@ message Article {
   optional bool retain = 18 [
     (client_serialization) = EXCLUDE
   ];
+
+  // For client serialization only: Why we're returning this article.  Is it a
+  // people match, industry match, or company match?
+  enum Reason {
+    UNKNOWN = 0;
+    INDUSTRY = 1;
+    PERSON = 2;
+    COMPANY = 3;
+  }
+  optional Reason reason = 19 [
+    (storage_method) = DO_NOT_STORE
+  ];
 }
 
 message ArticleKeyword {

@@ -15,6 +15,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Intent;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
@@ -37,7 +38,8 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
   private static final int NUM_RESULTS = 50;
 
   @Override
-  protected Iterable<Article> getArticles(HttpServletRequest req) throws DatabaseSchemaException {
+  protected Iterable<Article> getArticles(HttpServletRequest req)
+      throws DatabaseSchemaException, NumberFormatException, BiznessException {
     String featureId = this.getParameter(req, "feature_id");
     String industryCodeId = this.getParameter(req, "industry_code");
     String contacts = this.getParameter(req, "contacts");
@@ -147,9 +149,11 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
    *     ID of the article we highlighted and the notification ID we need to
    *     mark as engaged.
    * @throws DatabaseSchemaException 
+   * @throws BiznessException 
    */
   private Iterable<Article> getArticlesForNotification(
-      HttpServletRequest req, String notificationBlob) throws DatabaseSchemaException {
+      HttpServletRequest req, String notificationBlob)
+      throws DatabaseSchemaException, BiznessException {
     // Asynchronously start updating the notification and retrieving the
     // specific article we need to show.
     // NOTE(jonemerson): Notification blob is currently in the form:

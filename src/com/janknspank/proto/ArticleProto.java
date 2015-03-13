@@ -333,6 +333,16 @@ public final class ArticleProto {
      * </pre>
      */
     boolean getRetain();
+
+    // optional .Article.Reason reason = 19;
+    /**
+     * <code>optional .Article.Reason reason = 19;</code>
+     */
+    boolean hasReason();
+    /**
+     * <code>optional .Article.Reason reason = 19;</code>
+     */
+    com.janknspank.proto.ArticleProto.Article.Reason getReason();
   }
   /**
    * Protobuf type {@code Article}
@@ -490,6 +500,17 @@ public final class ArticleProto {
               retain_ = input.readBool();
               break;
             }
+            case 152: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.ArticleProto.Article.Reason value = com.janknspank.proto.ArticleProto.Article.Reason.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(19, rawValue);
+              } else {
+                bitField0_ |= 0x00002000;
+                reason_ = value;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -542,6 +563,111 @@ public final class ArticleProto {
     @java.lang.Override
     public com.google.protobuf.Parser<Article> getParserForType() {
       return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code Article.Reason}
+     *
+     * <pre>
+     * For client serialization only: Why we're returning this article.  Is it a
+     * people match, industry match, or company match?
+     * </pre>
+     */
+    public enum Reason
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>INDUSTRY = 1;</code>
+       */
+      INDUSTRY(1, 1),
+      /**
+       * <code>PERSON = 2;</code>
+       */
+      PERSON(2, 2),
+      /**
+       * <code>COMPANY = 3;</code>
+       */
+      COMPANY(3, 3),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>INDUSTRY = 1;</code>
+       */
+      public static final int INDUSTRY_VALUE = 1;
+      /**
+       * <code>PERSON = 2;</code>
+       */
+      public static final int PERSON_VALUE = 2;
+      /**
+       * <code>COMPANY = 3;</code>
+       */
+      public static final int COMPANY_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static Reason valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return INDUSTRY;
+          case 2: return PERSON;
+          case 3: return COMPANY;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Reason>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Reason>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Reason>() {
+              public Reason findValueByNumber(int number) {
+                return Reason.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.ArticleProto.Article.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Reason[] VALUES = values();
+
+      public static Reason valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Reason(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:Article.Reason)
     }
 
     private int bitField0_;
@@ -1175,6 +1301,22 @@ public final class ArticleProto {
       return retain_;
     }
 
+    // optional .Article.Reason reason = 19;
+    public static final int REASON_FIELD_NUMBER = 19;
+    private com.janknspank.proto.ArticleProto.Article.Reason reason_;
+    /**
+     * <code>optional .Article.Reason reason = 19;</code>
+     */
+    public boolean hasReason() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>optional .Article.Reason reason = 19;</code>
+     */
+    public com.janknspank.proto.ArticleProto.Article.Reason getReason() {
+      return reason_;
+    }
+
     private void initFields() {
       urlId_ = "";
       url_ = "";
@@ -1194,6 +1336,7 @@ public final class ArticleProto {
       feature_ = java.util.Collections.emptyList();
       dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       retain_ = false;
+      reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1260,6 +1403,9 @@ public final class ArticleProto {
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeBool(18, retain_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeEnum(19, reason_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1351,6 +1497,10 @@ public final class ArticleProto {
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(18, retain_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(19, reason_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1519,6 +1669,8 @@ public final class ArticleProto {
         bitField0_ = (bitField0_ & ~0x00010000);
         retain_ = false;
         bitField0_ = (bitField0_ & ~0x00020000);
+        reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00040000);
         return this;
       }
 
@@ -1638,6 +1790,10 @@ public final class ArticleProto {
           to_bitField0_ |= 0x00001000;
         }
         result.retain_ = retain_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.reason_ = reason_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1806,6 +1962,9 @@ public final class ArticleProto {
         }
         if (other.hasRetain()) {
           setRetain(other.getRetain());
+        }
+        if (other.hasReason()) {
+          setReason(other.getReason());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3575,6 +3734,42 @@ public final class ArticleProto {
       public Builder clearRetain() {
         bitField0_ = (bitField0_ & ~0x00020000);
         retain_ = false;
+        onChanged();
+        return this;
+      }
+
+      // optional .Article.Reason reason = 19;
+      private com.janknspank.proto.ArticleProto.Article.Reason reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
+      /**
+       * <code>optional .Article.Reason reason = 19;</code>
+       */
+      public boolean hasReason() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      /**
+       * <code>optional .Article.Reason reason = 19;</code>
+       */
+      public com.janknspank.proto.ArticleProto.Article.Reason getReason() {
+        return reason_;
+      }
+      /**
+       * <code>optional .Article.Reason reason = 19;</code>
+       */
+      public Builder setReason(com.janknspank.proto.ArticleProto.Article.Reason value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00040000;
+        reason_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .Article.Reason reason = 19;</code>
+       */
+      public Builder clearReason() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
         onChanged();
         return this;
       }
@@ -7036,8 +7231,8 @@ public final class ArticleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\276" +
-      "\004\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
+      "m/janknspank/database/extensions.proto\"\243" +
+      "\005\n\007Article\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030" +
       "\250\246\035\001\022\032\n\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005titl" +
       "e\030\003 \001(\tB\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246" +
       "\035\031\022\025\n\006author\030\005 \001(\tB\005\230\246\035\200\002\022\030\n\tcopyright\030\006" +
@@ -7050,27 +7245,29 @@ public final class ArticleProto {
       "B\004\240\246\035\003\0222\n\021social_engagement\030\017 \003(\0132\021.Soci" +
       "alEngagementB\004\240\246\035\003\022&\n\007feature\030\020 \003(\0132\017.Ar" +
       "ticleFeatureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003" +
-      "(\tB\010\230\246\035\004\240\246\035\003\022\024\n\006retain\030\022 \001(\010B\004\240\246\035\003:\023\212\265\030\017" +
-      "MongoDB.Article\"\325\001\n\016ArticleKeyword\022\035\n\007ke" +
-      "yword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 " +
-      "\001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035" +
-      "\001\022/\n\006source\030\004 \001(\0162\026.ArticleKeyword.Sourc",
-      "e:\007UNKNOWN\";\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP" +
-      "\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\"\347\001\n\020Soci" +
-      "alEngagement\022-\n\004site\030\001 \001(\0162\026.SocialEngag" +
-      "ement.Site:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003" +
-      "B\004\210\246\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlik" +
-      "e_count\030\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013" +
-      "create_time\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014" +
-      "\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"\323\001\n\016ArticleFea" +
-      "ture\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004ty" +
-      "pe\030\004 \001(\0162\024.ArticleFeature.Type:\007UNKNOWN\022",
-      "\022\n\nsimilarity\030\002 \001(\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000" +
-      "\022\021\n\rSERVES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020\002\022" +
-      "\022\n\016IMPROVES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020\004\"" +
-      "9\n\017InterpretedData\022\031\n\007article\030\001 \001(\0132\010.Ar" +
-      "ticle\022\013\n\003url\030\002 \003(\tB$\n\024com.janknspank.pro" +
-      "toB\014ArticleProto"
+      "(\tB\010\230\246\035\004\240\246\035\003\022\024\n\006retain\030\022 \001(\010B\004\240\246\035\003\022%\n\006re" +
+      "ason\030\023 \001(\0162\017.Article.ReasonB\004\220\246\035\006\"<\n\006Rea" +
+      "son\022\013\n\007UNKNOWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006PERSON" +
+      "\020\002\022\013\n\007COMPANY\020\003:\023\212\265\030\017MongoDB.Article\"\325\001\n" +
+      "\016ArticleKeyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246",
+      "\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003" +
+      " \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026" +
+      ".ArticleKeyword.Source:\007UNKNOWN\";\n\006Sourc" +
+      "e\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014" +
+      "\n\010META_TAG\020\003\"\347\001\n\020SocialEngagement\022-\n\004sit" +
+      "e\030\001 \001(\0162\026.SocialEngagement.Site:\007UNKNOWN" +
+      "\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_sco" +
+      "re\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rco" +
+      "mment_count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\"." +
+      "\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWI",
+      "TTER\020\002\"\323\001\n\016ArticleFeature\022\034\n\nfeature_id\030" +
+      "\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004type\030\004 \001(\0162\024.ArticleF" +
+      "eature.Type:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001" +
+      "\"b\n\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020\001" +
+      "\022\022\n\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020\003" +
+      "\022\022\n\016TEXT_CHARACTER\020\004\"9\n\017InterpretedData\022" +
+      "\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB" +
+      "$\n\024com.janknspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7082,7 +7279,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -7137,6 +7334,7 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

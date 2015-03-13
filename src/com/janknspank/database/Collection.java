@@ -1,12 +1,17 @@
 package com.janknspank.database;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
@@ -24,6 +29,10 @@ import com.janknspank.database.ExtensionsProto.StorageMethod;
  * @see Collection#get(QueryOption...)
  */
 public abstract class Collection<T extends Message> {
+  // TODO(jonemerson): Think about how many threads we should really have here.
+  ListeningExecutorService EXECUTOR_SERVICE =
+      MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(10));
+
   protected final Class<T> clazz;
   protected final ImmutableMap<FieldDescriptor, StorageMethod> storageMethodMap;
   protected final String primaryKeyField;
@@ -34,7 +43,7 @@ public abstract class Collection<T extends Message> {
     this.primaryKeyField = generatePrimaryKeyField();
   }
 
-  /**S
+  /**
    * Returns a map of protocol buffer field descriptors to their StorageMethod
    * types, as defined in our protocol buffer extensions.
    */
@@ -53,15 +62,8 @@ public abstract class Collection<T extends Message> {
           storageMethodMapBuilder.put(field, storageMethod);
           break;
 
-        case STANDARD:
-        case INDEX:
-        case UNIQUE_INDEX:
-        case PULL_OUT:
-          storageMethodMapBuilder.put(field, storageMethod);
-          break;
-
         default:
-          throw new IllegalStateException("Unsupported storage method: " + storageMethod.name());
+          storageMethodMapBuilder.put(field, storageMethod);
       }
     }
 
@@ -242,6 +244,15 @@ public abstract class Collection<T extends Message> {
    * if they exist.
    */
   public abstract Iterable<T> get(QueryOption... options) throws DatabaseSchemaException;
+
+  public ListenableFuture<Iterable<T>> getFuture(final QueryOption... options) {
+    return EXECUTOR_SERVICE.submit(new Callable<Iterable<T>>() {
+      @Override
+      public Iterable<T> call() throws DatabaseSchemaException {
+        return get(options);
+      }
+    });
+  }
 
   /**
    * Deletes the object with the specified primary key from the table specified

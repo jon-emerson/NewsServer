@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -95,9 +96,14 @@ public class VectorFeatureCreator {
         words.add(seed);
       }
     }
-    Iterable<Article> articles = Iterables.concat(
-        ArticleCrawler.getArticles(urls, true /* retain */).values(),
-        Articles.getArticlesForKeywords(words, 1000));
+    Iterable<Article> articles;
+    try {
+      articles = Iterables.concat(
+          ArticleCrawler.getArticles(urls, true /* retain */).values(),
+          Articles.getArticlesForKeywordsFuture(words, Article.Reason.INDUSTRY, 1000).get());
+    } catch (InterruptedException | ExecutionException e) {
+      throw new ClassifierException("Async error: " + e.getMessage(), e);
+    }
     System.out.println(Iterables.size(articles) + " articles found");
 
     // 2.5 Output # articles / seed word - make it easy to prune out

@@ -42,19 +42,21 @@ public class ManualHeuristicFeature extends Feature {
   private static final BodyCache BODY_CACHE = new BodyCache();
 
   private static final Map<Object, Pattern> PATTERN_CACHE = Maps.newHashMap();
+
+  // Acquisition keywords.
+  // NOTE: Do not use the word "Acquisition".  It matches articles like this:
+  // http://www.channelnewsasia.com/news/singapore/parliament-passes-changes/1714406.html
   private static final Map<String, Double> ACQUISITION_TITLE_SCORES =
       ImmutableMap.<String, Double>builder()
           .put("acquires", 1.0)
           .put("is acquiring", 1.0)
           .put("buys", 0.9)
-          .put("acquisition", 0.7)
           .put("buying", 0.4)
           .build();
   private static final Map<String, Double> ACQUISITION_BODY_SCORES =
       ImmutableMap.<String, Double>builder()
           .put("acquires", 0.8)
           .put("is acquiring", 0.8)
-          .put("acquisition", 0.2)
           .build();
   private static final Map<String, Double> LAUNCH_TITLE_SCORES =
       ImmutableMap.<String, Double>builder()

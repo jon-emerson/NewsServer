@@ -64,7 +64,8 @@ public class FTUEGetArticlesServlet extends AbstractArticlesServlet {
   }
 
   @Override
-  protected Iterable<Article> getArticles(HttpServletRequest req) throws DatabaseSchemaException {
+  protected Iterable<Article> getArticles(HttpServletRequest req)
+      throws DatabaseSchemaException, BiznessException {
     // BAD: this makes second call to DB for User after doPostInternal call
     User user = getUser(req);
     return Articles.getRankedArticles(user, HeuristicScorer.getInstance(), NUM_RESULTS);

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.common.base.Function;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.TopList;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
@@ -23,7 +24,7 @@ public class ViewFeedServlet extends StandardServlet {
    */
   @Override
   protected SoyMapData getSoyMapData(HttpServletRequest req)
-      throws DatabaseSchemaException, RequestException {
+      throws DatabaseSchemaException, RequestException, BiznessException {
     User user = getUser(req);
     if (user.getEmail().equals("tom.charytoniuk@gmail.com") ||
         user.getEmail().equals("panaceaa@gmail.com")) {

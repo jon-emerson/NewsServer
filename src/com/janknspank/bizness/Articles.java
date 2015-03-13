@@ -1,20 +1,28 @@
 package com.janknspank.bizness;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import com.google.api.client.util.Maps;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.UserProto.AddressBookContact;
@@ -31,14 +39,40 @@ import com.janknspank.rank.Scorer;
  */
 public class Articles {
   /**
+   * Returns a function that gives an iterable of articles a specific reason for
+   * existing, such as being about companies, people, or industries.
+   *
+   * Yes it's a little redic that Java's async implementations make us do stupid
+   * crap like this... :).
+   */
+  private static AsyncFunction<Iterable<Article>, Iterable<Article>>
+      getFunctionToGiveArticlesReason(final Article.Reason reason) {
+    return new AsyncFunction<Iterable<Article>, Iterable<Article>>() {
+      @Override
+      public ListenableFuture<Iterable<Article>> apply(Iterable<Article> articles) {
+        return Futures.immediateFuture(
+            Iterables.transform(articles, new Function<Article, Article>() {
+              @Override
+              public Article apply(Article article) {
+                return article.toBuilder().setReason(reason).build();
+              }
+            }));
+      }
+    };
+  }
+
+  /**
    * Gets articles that contain a set of keywords.
    */
-  public static Iterable<Article> getArticlesForKeywords(Iterable<String> keywords, int limit)
+  public static ListenableFuture<Iterable<Article>> getArticlesForKeywordsFuture(
+      Iterable<String> keywords, final Article.Reason reason, int limit)
       throws DatabaseSchemaException {
-    return Database.with(Article.class).get(
-        new QueryOption.DescendingSort("published_time"),
-        new QueryOption.WhereEquals("keyword.keyword", keywords),
-        new QueryOption.Limit(limit));
+    return Futures.transform(
+        Database.with(Article.class).getFuture(
+            new QueryOption.DescendingSort("published_time"),
+            new QueryOption.WhereEquals("keyword.keyword", keywords),
+            new QueryOption.Limit(limit)),
+        getFunctionToGiveArticlesReason(reason));
   }
 
   /**
@@ -74,12 +108,12 @@ public class Articles {
    * This is probably what you're looking for! :)
    */
   public static Iterable<Article> getRankedArticles(User user, Scorer scorer, int limit)
-      throws DatabaseSchemaException {
+      throws DatabaseSchemaException, BiznessException {
     return getRankedArticlesAndScores(user, scorer, limit);
   }
 
   public static TopList<Article, Double> getRankedArticlesAndScores(
-      User user, Scorer scorer, int limit) throws DatabaseSchemaException {
+      User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
     Set<String> urls = Sets.newHashSet();
     for (Article article :
@@ -128,14 +162,15 @@ public class Articles {
    */
   public static Iterable<Article> getArticlesForInterests(
       User user, Iterable<Interest> interests, int limitPerType)
-      throws DatabaseSchemaException {
+      throws DatabaseSchemaException, BiznessException {
     List<FeatureId> featureIds = Lists.newArrayList();
-    List<String> keywords = Lists.newArrayList();
+    List<String> companyNames = Lists.newArrayList();
+    List<String> personNames = Lists.newArrayList();
     for (Interest interest : interests) {
       switch (interest.getType()) {
         case ADDRESS_BOOK_CONTACTS:
           for (AddressBookContact contact : user.getAddressBookContactList()) {
-            keywords.add(contact.getName());
+            personNames.add(contact.getName());
           }
           break;
 
@@ -145,7 +180,7 @@ public class Articles {
 
         case LINKED_IN_CONTACTS:
           for (LinkedInContact contact : user.getLinkedInContactList()) {
-            keywords.add(contact.getName());
+            personNames.add(contact.getName());
           }
           break;
 
@@ -154,47 +189,69 @@ public class Articles {
           break;
 
         case ENTITY:
-          keywords.add(interest.getEntity().getKeyword());
+          companyNames.add(interest.getEntity().getKeyword());
           break;
 
         case UNKNONWN:
           break;
       }
     }
-    // TODO(jonemerson): Each query should be a future.  The response should be
-    // a transforming future that dedupes the results.
-    return Iterables.concat(
-        getArticlesByFeatureId(featureIds, limitPerType),
-        getArticlesForKeywords(keywords, limitPerType));
+
+    List<ListenableFuture<Iterable<Article>>> articlesFutures = ImmutableList.of(
+        getArticlesForKeywordsFuture(companyNames, Article.Reason.COMPANY, limitPerType),
+        getArticlesForKeywordsFuture(personNames, Article.Reason.PERSON, limitPerType / 5),
+        getArticlesByFeatureIdFuture(featureIds, limitPerType));
+    Map<String, Article> dedupingArticleMap = Maps.newHashMap();
+    for (ListenableFuture<Iterable<Article>> articlesFuture : articlesFutures) {
+      try {
+        for (Article article : articlesFuture.get()) {
+          if (!dedupingArticleMap.containsKey(article.getUrlId())) {
+            dedupingArticleMap.put(article.getUrlId(), article);
+          }
+        }
+      } catch (InterruptedException | ExecutionException e) {
+        throw new BiznessException("Async error: " + e.getMessage(), e);
+      }
+    }
+    return dedupingArticleMap.values();
   }
-  
+
   /**
    * Gets articles containing a specific entity (person, organization, or place)
    */
   public static Iterable<Article> getArticlesForEntity(Entity entity, int limitPerType) 
-      throws DatabaseSchemaException {
-    return Deduper.filterOutDupes(getArticlesForKeywords(ImmutableList.of(entity.getKeyword()), limitPerType));
+      throws DatabaseSchemaException, BiznessException {
+    try {
+      return Deduper.filterOutDupes(
+          getArticlesForKeywordsFuture(
+              ImmutableList.of(entity.getKeyword()), Reason.COMPANY, limitPerType).get());
+    } catch (InterruptedException | ExecutionException e) {
+      throw new BiznessException("Async exception: " + e.getMessage(), e);
+    }
   }
 
   /**
    * Gets a list of articles tailored specifically to the specified
    * industries.
    */
-  public static Iterable<Article> getArticlesByFeatureId(
+  public static ListenableFuture<Iterable<Article>> getArticlesByFeatureIdFuture(
       Iterable<FeatureId> featureIds, int limit) throws DatabaseSchemaException {
     if (Iterables.isEmpty(featureIds)) {
-      return ImmutableList.of();
+      Iterable<Article> emptyIterable = Collections.<Article>emptyList();
+      return Futures.immediateFuture(emptyIterable);
     }
-    return Database.with(Article.class).get(
-        new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(featureIds,
-            new Function<FeatureId, Number>() {
-          @Override
-          public Number apply(FeatureId featureId) {
-            return featureId.getId();
-          }
-        })),
-        new QueryOption.DescendingSort("published_time"),
-        new QueryOption.Limit(limit));
+    return Futures.transform(
+        Database.with(Article.class).getFuture(
+            new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(featureIds,
+                new Function<FeatureId, Number>() {
+              @Override
+              public Number apply(FeatureId featureId) {
+                return featureId.getId();
+              }
+            })),
+            new QueryOption.DescendingSort("published_time"),
+            new QueryOption.Limit(limit)),
+        getFunctionToGiveArticlesReason(Reason.INDUSTRY));
   }
 
   /**
@@ -205,7 +262,8 @@ public class Articles {
   }
 
   public static Iterable<Article> getArticlesForContacts(
-      User user, InterestType contactType, int limit) throws DatabaseSchemaException {
+      User user, InterestType contactType, int limit)
+          throws DatabaseSchemaException, BiznessException {
     // Kinda hacky but it works and re-uses code.
     return getArticlesForInterests(user,
         ImmutableList.of(Interest.newBuilder().setType(contactType).build()),
