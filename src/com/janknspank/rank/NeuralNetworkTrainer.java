@@ -26,7 +26,6 @@ import com.janknspank.bizness.Users;
 import com.janknspank.common.Logger;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.crawler.ArticleUrlDetector;
-import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.UrlRating;
@@ -76,6 +75,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   /**
    * Generate DataSet to train the neural network from a list of UserActions.
    */
+  @SuppressWarnings("unused")
   private static DataSet generateUserActionsTrainingDataSet(Iterable<UserAction> actions) 
       throws DatabaseSchemaException, BiznessException {
     Set<String> urlStrings = Sets.newHashSet();
@@ -140,7 +140,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     return trainingSet;
   }
-  
+
   /**
    * Returns a rating for a given user action. If unable to convert an action to a rating
    * the method will return -1;
@@ -160,7 +160,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       return -1;
     }
   }
-  
+
   /**
    * Generate DataSet to train neural network from a list of UrlRatings.
    * @return DataSet of training data
@@ -302,8 +302,10 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     DataSet userRatingsDataSet = generateTrainingDataSet(UrlRatings.getAllRatings());
 
     // Train against UserActions like x-out article
-    DataSet userActionsDataSet = generateUserActionsTrainingDataSet(
-        Database.with(UserAction.class).get());
+    // NOTE(jonemerson): Commented out because we're testing so much and the
+    // data quality here is relatively poor.
+//    DataSet userActionsDataSet = generateUserActionsTrainingDataSet(
+//        Database.with(UserAction.class).get());
 
     DataSet completeDataSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
@@ -327,15 +329,15 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       }
       completeDataSet.addRow(row);
     }
-    
-    // Combine UserActions ratings into completeDataSet
-    for (DataSetRow row : userActionsDataSet.getRows()) {
-      double[] inputs = row.getInput();
-      for (int i = 0; i < inputs.length; i++) {
-        averageInputValues[i] += inputs[i];
-      }
-      completeDataSet.addRow(row);
-    }
+
+//    // Combine UserActions ratings into completeDataSet
+//    for (DataSetRow row : userActionsDataSet.getRows()) {
+//      double[] inputs = row.getInput();
+//      for (int i = 0; i < inputs.length; i++) {
+//        averageInputValues[i] += inputs[i];
+//      }
+//      completeDataSet.addRow(row);
+//    }
 
     int numRows = completeDataSet.size();
     //LOG.info("Average input values:");
