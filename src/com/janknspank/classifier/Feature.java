@@ -136,7 +136,7 @@ public abstract class Feature {
    * Returns the boost this article should receive for ranking against this
    * feature given its domain, subdomain, path, query, etc.
    */
-  protected int getBoost(ArticleOrBuilder article) {
+  protected static int getBoost(FeatureId featureId, ArticleOrBuilder article) {
     URL url;
     try {
       url = new URL(article.getUrl());
@@ -157,7 +157,7 @@ public abstract class Feature {
         System.out.println("INVALID FEATURE BOOST VALUE! Domain=" + domain);
       }
       if (featureBoostPattern.hasFeatureId()
-          && this.featureId.getId() != featureBoostPattern.getFeatureId()) {
+          && featureId.getId() != featureBoostPattern.getFeatureId()) {
         continue;
       }
       if (featureBoostPattern.hasSubdomain()

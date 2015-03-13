@@ -42,11 +42,26 @@ public final class VectorFeature extends Feature {
    */
   @Override
   public double score(ArticleOrBuilder article) throws ClassifierException {
-    double boost = (0.15 * this.getBoost(article));
     return DistributionBuilder.projectQuantile(
         distribution,
-        boost + vector.getCosineSimilarity(
-            UniverseVector.getInstance(), Vector.fromArticle(article)));
+        rawScore(this.featureId, vector, article, Vector.fromArticle(article)));
+  }
+
+  /**
+   * Returns the raw, un-distribution-adjusted score for this article versus
+   * this vector.  Used by both {@link #score(ArticleOrBuilder)} and
+   * {@link VectorFeatureCreator#generateDistributionForVector(Vector)}.  The
+   * latter is responsible for building the distribution histogram.
+   * @param featureId identifier for the feature we're scoring against
+   * @param fectureVector the pre-generated vector for the specified feature ID
+   * @param article the article being scored
+   * @param articleVector the pre-generated vector for the specified article
+   */
+  static double rawScore(
+      FeatureId featureId, Vector featureVector, ArticleOrBuilder article, Vector articleVector)
+      throws ClassifierException {
+    double boost = (0.15 * Feature.getBoost(featureId, article));
+    return boost + featureVector.getCosineSimilarity(UniverseVector.getInstance(), articleVector);
   }
 
   static File getVectorFile(FeatureId featureId) throws ClassifierException {

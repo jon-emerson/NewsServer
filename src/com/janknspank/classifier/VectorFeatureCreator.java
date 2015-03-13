@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
@@ -15,6 +16,7 @@ import com.google.api.client.util.Lists;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.Articles;
@@ -45,7 +47,7 @@ import com.janknspank.rank.DistributionBuilder;
  * also.
  */
 public class VectorFeatureCreator {
-  private static final List<Vector> __DOCUMENT_VECTORS = Lists.newArrayList();
+  private static final Map<Article, Vector> __ARTICLE_VECTOR_MAP = Maps.newHashMap();
 
   private final FeatureId featureId;
 
@@ -53,13 +55,14 @@ public class VectorFeatureCreator {
     this.featureId = featureId;
   }
 
-  private static synchronized List<Vector> getDocumentVectors() throws DatabaseSchemaException {
-    if (__DOCUMENT_VECTORS.isEmpty()) {
+  private static synchronized Map<Article, Vector> getArticleVectorMap()
+      throws DatabaseSchemaException {
+    if (__ARTICLE_VECTOR_MAP.isEmpty()) {
       for (Article article : Database.with(Article.class).get(new QueryOption.Limit(15000))) {
-        __DOCUMENT_VECTORS.add(Vector.fromArticle(article));
+        __ARTICLE_VECTOR_MAP.put(article, Vector.fromArticle(article));
       }
     }
-    return __DOCUMENT_VECTORS;
+    return __ARTICLE_VECTOR_MAP;
   }
 
   /**
@@ -113,8 +116,11 @@ public class VectorFeatureCreator {
   private DistributionBuilder generateDistributionForVector(Vector vector)
       throws ClassifierException, DatabaseSchemaException {
     DistributionBuilder builder = new DistributionBuilder();
-    for (Vector documentVector : getDocumentVectors()) {
-      builder.add(vector.getCosineSimilarity(UniverseVector.getInstance(), documentVector));
+    for (Map.Entry<Article, Vector> articleVectorEntry : getArticleVectorMap().entrySet()) {
+      Article article = articleVectorEntry.getKey();
+      Vector articleVector = articleVectorEntry.getValue();
+      double score = VectorFeature.rawScore(this.featureId, vector, article, articleVector);
+      builder.add(score);
     }
     return builder;
   }

@@ -20,8 +20,8 @@ import com.janknspank.proto.CoreProto.Url;
  * quota.
  *
  * Steps performed:
- * - Keep Article count under 25,000 by removing the oldest articles.  (This
- *     keeps the Article collection at around 250 megabytes.)
+ * - Keep Article count under 30,000 by removing the oldest articles.  (This
+ *     keeps the Article collection at around 280 megabytes.)
  * - Repair the database to reclaim the space we created.
  *
  * URLs are NOT pruned - We need them so that we know which articles we've seen
@@ -29,7 +29,7 @@ import com.janknspank.proto.CoreProto.Url;
  * to remove crawl data from any articles we've pruned above.
  */
 public class PruneMongoDatabase {
-  private static final long MAX_ARTICLE_COUNT = 25000;
+  private static final long MAX_ARTICLE_COUNT = 30000;
 
   /**
    * Deletes any passed URLs that do not have Articles associated with them in
@@ -99,7 +99,7 @@ public class PruneMongoDatabase {
     System.out.println("Pruning articles to about " + MAX_ARTICLE_COUNT + " ...");
 
     // Mongo DB doesn't have a "delete with limit" concept.  So, instead,
-    // find the 25,000th oldest article in the system, then delete everything
+    // find the 30,000th oldest article in the system, then delete everything
     // older than it.  Complicating this calculation, there's also a set of
     // articles we retain for training the system (vectors, neural network) -
     // so make sure we don't delete those.
