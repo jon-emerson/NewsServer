@@ -22,12 +22,16 @@ path_blacklist {
 paragraph_selector: ".article_body p"
 paragraph_selector: ".article-body p"
 paragraph_selector: ".article-content-body p"
+paragraph_selector: ".article .body p"
 
 # E.g. http://www.forbes.com/sites/maribellopez/2015/03/02/hp-rides-arubas-wave-into-contextual-networking/
 paragraph_selector: ".body .body_inner span"
 
 article_url_pattern {
   path_regex: "^\\/sites\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/"
+}
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\.html$"
 }
 rss_url: "http://www.forbes.com/business/feed/"
 rss_url: "http://www.forbes.com/most-popular/feed/"
@@ -43,6 +47,11 @@ test_instructions {
     article_url: "http://www.forbes.com/sites/russellflannery/2015/01/08/li-ka-shing-is-hong-kongs-richest-man-for-17th-consecutive-year/"
     article_url: "http://www.forbes.com/sites/steveschaefer/2015/02/11/retirement-playbook-six-coaching-legends-on-how-to-keep-winning/"
     article_url: "http://www.forbes.com/sites/zackomalleygreenburg/2015/01/09/five-music-business-takeaways-from-ces-2015/"
+    article_url: "http://www.forbes.com/2009/11/20/ten-key-questions-entrepreneurs-management-kramer.html"
+    article_url: "http://www.forbes.com/2010/07/15/affordable-ways-to-entertain-clients-entrepreneurs-sales-marketing-entertain.html"
+    article_url: "http://www.forbes.com/2009/04/15/biggest-business-risks-entrepreneurs-management-risk.html"
+    article_url: "http://www.forbes.com/2008/04/07/cisco-dell-netflix-ent-manage-cx_lv_0407volpecompetition.html"
+    article_url: "http://www.forbes.com/2008/10/08/hiring-legal-help-ent-law-cx_rb_1008bovarnickhire.html"
     non_article_url: "http://www.forbes.com/conferences/2015/Under30Summit.html"
     non_article_url: "http://www.forbes.com/fdc/privacy.html"
     non_article_url: "http://www.forbes.com/forbeslife/food-drink/"
@@ -53,6 +62,10 @@ test_instructions {
 feature_boost_pattern {
   feature_id: 10514 # Financial Services
   boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 2
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity

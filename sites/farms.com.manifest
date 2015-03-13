@@ -1,0 +1,37 @@
+root_domain: "farms.com"
+start_url: "http://www.farms.com/news/"
+path_blacklist {
+  needle: "/agday/"
+}
+paragraph_selector: ".ContentCotainer p"
+paragraph_selector: ".tableBorderthin p"
+paragraph_selector: ".contentpane td.tblfix > div"
+article_url_pattern {
+  path_regex: "^\\/(news|commentaries)\\/.*-[0-9]{4,7}\\.aspx$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.farms.com/news/usda-export-sales-report-89204.aspx"
+    article_url: "http://www.farms.com/news/usda-confirms-avian-flu-h5n2-in-arkansas-turkey-flock-89198.aspx"
+    article_url: "http://www.farms.com/news/versatile-introduces-low-speed-deltatrack-89163.aspx"
+    article_url: "http://www.farms.com/news/farm-equipment/farms-com-welcomes-seven-saskatchewan-dealers-online-88202.aspx"
+    article_url: "http://www.farms.com/news/growers-new-time-lapse-video-series-shows-weeds-after-herbicide-applications-88802.aspx"
+    article_url: "http://www.farms.com/commentaries/osu-time-lapse-video-series-weeds-dying-88804.aspx"
+    non_article_url: "http://www.farms.com/news/farm-equipment/"
+    non_article_url: "http://www.farms.com/ag-industry-news/"
+    non_article_url: "http://www.farms.com/farmspages/enews/shownews/tabid/124/default.aspx"
+    non_article_url: "http://www.farms.com/pulse/"
+    non_article_url: "http://www.farms.com/hay-forage/"
+  }
+}
+feature_boost_pattern {
+  boost: -20 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10522 # Dairy
+  boost: 1
+}

@@ -43,3 +43,7 @@ feature_boost_pattern {
   feature_id: 10554 # Human Resources
   boost: 10
 }
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 0
+}

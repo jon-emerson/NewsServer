@@ -1,0 +1,33 @@
+root_domain: "awn.com"
+start_url: "http://www.awn.com"
+subdomain_blacklist: "jobs.awn.com"
+path_blacklist {
+  needle: "/gallery/"
+}
+paragraph_selector: ".content .even p"
+article_url_pattern {
+  path_regex: "^\\/(news|blog)\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.awn.com/news/disney-announces-frozen-2-its-way"
+    article_url: "http://www.awn.com/blog/go-your-strength"
+    article_url: "http://www.awn.com/news/bob-iger-announces-first-star-wars-stand-alone-film-rogue-one"
+    article_url: "http://www.awn.com/blog/innovation-crush-amos-pizzey-inside-talenthouse"
+    article_url: "http://www.awn.com/news/first-second-buys-oscar-nominated-dam-keeper-graphic-novels"
+    article_url: "http://www.awn.com/blog/big-year-portugese-animation-cinanima"
+    article_url: "http://www.awn.com/news/interstellar-winter-soldier-lead-2015-saturn-award-noms"
+    non_article_url: "http://www.awn.com/animationworld"
+    non_article_url: "http://www.awn.com/news"
+    non_article_url: "http://www.awn.com/tag/brad-bird"
+    non_article_url: "http://www.awn.com/regions/north-america"
+    non_article_url: "http://www.awn.com/users/larry-lauria"
+  }
+}
+feature_boost_pattern {
+  boost: -7 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10527 # Animation
+  boost: 5
+}

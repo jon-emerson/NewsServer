@@ -1,0 +1,29 @@
+root_domain: "decanter.com"
+start_url: "http://www.decanter.com/news"
+paragraph_selector: "#content p.teaser"
+paragraph_selector: "#content .body p"
+article_url_pattern {
+  path_regex: "\\/news\\/.*\\/[0-9]{6,8}\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.decanter.com/news/wine-news/588063/napa-debates-limit-on-winery-numbers"
+    article_url: "http://www.decanter.com/news/blogs/expert/588021/jefford-on-monday-runners-and-ringers"
+    article_url: "http://www.decanter.com/news/wine-news/588049/yao-ming-seeks-3m-in-crowdfunding-to-promote-napa-wine"
+    article_url: "http://www.decanter.com/news/wine-news/588056/smith-haut-lafitte-owner-creates-sauternes-to-mix-with-perrier"
+    article_url: "http://www.decanter.com/news/wine-news/588046/south-african-wine-estates-battle-to-save-vineyards-from-fires"
+    non_article_url: "http://www.decanter.com/news/blogs/1/team?month=3&year=2015"
+    non_article_url: "http://www.decanter.com/wine-learning"
+    non_article_url: "http://www.decanter.com/news/wine-pictures"
+    non_article_url: "http://www.decanter.com/magazine/latest-issue"
+    non_article_url: "http://www.decanter.com/digital-edition/uk"
+    non_article_url: "http://www.decanter.com/people-and-places"
+  }
+}
+feature_boost_pattern {
+  boost: -20 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10530 # Wine and Spirits
+  boost: 10
+}

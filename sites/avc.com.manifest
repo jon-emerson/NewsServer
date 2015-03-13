@@ -1,5 +1,5 @@
 root_domain: "avc.com"
-start_url: "http://www.avc.com"
+start_url: "http://avc.com"
 path_blacklist {
   needle: "/about/"
 }

@@ -110,6 +110,10 @@ public class Node {
     }
   }
 
+  public boolean hasAttribute(String name) {
+    return getAttributeValue(name) != null;
+  }
+
   public Collection<String> getAttributeValues(String name) {
     return attributes.get(name);
   }

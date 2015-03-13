@@ -1,0 +1,28 @@
+root_domain: "cartoonbrew.com"
+start_url: "http://www.cartoonbrew.com"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "\\-[0-9]{6,8}\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.cartoonbrew.com/feature-film/sony-releases-trailer-for-hotel-transylvania-2-110291.html"
+    article_url: "http://www.cartoonbrew.com/feature-film/adventure-time-feature-film-pen-ward-109681.html"
+    article_url: "http://www.cartoonbrew.com/shorts/sascha-ciezata-uses-instagram-to-serialize-his-short-heart-of-darkness-110107.html"
+    article_url: "http://www.cartoonbrew.com/festivals/mune-jellyfish-eyes-and-the-prophet-at-ny-childrens-film-fest-109735.html"
+    article_url: "http://www.cartoonbrew.com/awards/nickelodeon-offers-25000-scholarship-for-young-animators-110262.html"
+    article_url: "http://www.cartoonbrew.com/award-season-focus/breaking-lego-movie-wins-feature-film-at-bafta-childrens-awards-106147.html"
+    non_article_url: "http://www.cartoonbrew.com/animation-festival-guide"
+    non_article_url: "http://www.cartoonbrew.com/feature-film"
+    non_article_url: "http://www.cartoonbrew.com/ideas-commentary"
+    non_article_url: "http://www.cartoonbrew.com/sitearchive/"
+    non_article_url: "http://www.cartoonbrew.com/date/2015/03"
+  }
+}
+feature_boost_pattern {
+  boost: -7 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10527 # Animation
+  boost: 5
+}

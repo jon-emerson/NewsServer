@@ -213,7 +213,7 @@ public class ArticleCrawler implements Callable<Void> {
     for (Url url : urls) {
       Article article = crawl(url, true /* markCrawlStart */, retain);
       if (article == null) {
-        throw new IllegalStateException("URL is not an Article: " + url.getUrl());
+        throw new BiznessException("URL is not an Article: " + url.getUrl());
       }
       articles.add(article);
     }

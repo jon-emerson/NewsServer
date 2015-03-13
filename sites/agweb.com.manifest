@@ -15,8 +15,13 @@ path_blacklist {
 }
 paragraph_selector: ".article-body > p"
 paragraph_selector: ".articleContent p"
+paragraph_selector: ".articleContent.articleTruncate div"
+paragraph_selector: "#CT_ContentBlock_0_pnlPostDetails p"
 article_url_pattern {
   path_regex: "^\\/article\\/[^\\/]+\\/"
+}
+article_url_pattern {
+  path_regex: "^\\/blog\\/[^\\/]+\\/[^\\/]+\\/"
 }
 test_instructions {
   article_url_detector_checks {
@@ -26,6 +31,8 @@ test_instructions {
     article_url: "http://www.agweb.com/article/egypt-buys-us-wheat-in-tender-for-first-time-since-september-blmg/"
     article_url: "http://www.agweb.com/article/grains-analysts-accept-inevitable-at-board-of-trade-NAA-alison-rice/"
     article_url: "http://www.agweb.com/article/3-reasons-to-consider-reallocating-base-acres-NAA-sara-schafer/"
+    article_url: "http://www.agweb.com/blog/in_the_shop/how_perfect_must_a_planter_be/"
+    article_url: "http://www.agweb.com/blog/The_Farm_CPA_243/irs_provides_guidance_on_repair_regulations/"
     non_article_url: "http://www.agweb.com/machinery/technology/"
     non_article_url: "http://www.agweb.com/machinery/machinery-news/"
     non_article_url: "http://www.agweb.com/livestock/hay-and-forage/"
@@ -38,9 +45,9 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10540 # Farming
-  boost: 10
+  boost: 5
 }
 feature_boost_pattern {
   feature_id: 10522 # Dairy
-  boost: 3
+  boost: 2
 }

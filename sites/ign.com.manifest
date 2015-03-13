@@ -1,0 +1,50 @@
+root_domain: "ign.com"
+start_url: "http://www.ign.com/"
+start_url: "http://www.ign.com/blogs"
+paragraph_selector: "#article-content p"
+paragraph_selector: "#content .entry p"
+subdomain_blacklist: "corp.ign.com"
+subdomain_blacklist: "mail.ign.com"
+path_blacklist {
+  needle: "/videos/"
+}
+path_blacklist {
+  needle: "/wikis/"
+}
+article_url_pattern {
+  path_regex: "^\\/articles\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+$"
+}
+article_url_pattern {
+  path_regex: "^\\/blogs\\/[a-z]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.ign.com/articles/2015/02/25/meet-smites-new-butt-kicking-warrior-goddess"
+    article_url: "http://www.ign.com/articles/2015/03/12/watch-robert-downey-jr-give-this-child-an-iron-man-prosthetic-limb"
+    article_url: "http://www.ign.com/articles/2015/03/12/the-evil-within-the-assignment-review"
+    article_url: "http://www.ign.com/articles/2015/03/09/star-wars-rebels-season-1-review"
+    article_url: "http://www.ign.com/articles/2015/03/12/daily-deals-5tb-external-hard-drive-for-xbox-one-xbox-360-and-xbox-one-controller-sale-razer-keyboard-low-price"
+    article_url: "http://www.ign.com/blogs/amaltheaelanor/2015/01/15/the-evolving-role-of-women-in-comic-book-film-and-tv/"
+    article_url: "http://www.ign.com/blogs/einyelvargas/2015/03/12/a-short-rant-on-fanboys-and-brand-loyalty"
+    non_article_url: "http://www.ign.com/games/mario-vs-donkey-kong-2015/3ds-20030065"
+    non_article_url: "http://www.ign.com/wii-u"
+    non_article_url: "http://www.ign.com/support/editorial?category=newstips"
+    non_article_url: "http://www.ign.com/xbox-360"
+    non_article_url: "http://www.ign.com/games/upcoming"
+  }
+}
+feature_boost_pattern {
+  boost: -8 # Not generally interesting to most people.
+}
+feature_boost_pattern {
+  feature_id: 10524 # Computer Games
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10513 # Media
+  boost: 0
+}

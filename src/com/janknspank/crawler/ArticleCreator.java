@@ -390,8 +390,10 @@ class ArticleCreator {
         "html > head meta[name=\"DC.date.issued\"]", // Abcnews.go.com.
         "html meta[itemprop=\"datePublished\"]", // Cbsnews.com.
         "html > head meta[name=\"live_date\"]")); // Pcmag.com.
-    if (metaNode != null) {
+    if (metaNode != null && metaNode.hasAttribute("content")) {
       return DateParser.parseDateTime(metaNode.getAttributeValue("content"));
+    } else if (metaNode != null && metaNode.hasAttribute("value")) {
+      return DateParser.parseDateTime(metaNode.getAttributeValue("value"));
     }
 
     // See if we can parse a date out of the URL.

@@ -190,3 +190,12 @@ feature_boost_pattern {
   path_regex: "\\/nyregion\\/"
   boost: 1
 }
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  path_regex: "\\/business\\/"
+  boost: 3
+}
