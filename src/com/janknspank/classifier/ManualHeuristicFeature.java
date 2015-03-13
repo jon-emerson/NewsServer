@@ -89,7 +89,6 @@ public class ManualHeuristicFeature extends Feature {
           .put("series d", 0.9)
           .put("series e", 0.9)
           .put("angel round", 0.9)
-          .put("investors", 0.8)
           .build();
   private static final Map<String, Double> MILITARY_SCORES =
       ImmutableMap.<String, Double>builder()
