@@ -398,6 +398,31 @@ public final class CrawlerProto {
      */
     com.google.protobuf.ByteString
         getTitleSelectorBytes(int index);
+
+    // repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern> 
+        getFeatureBoostPatternList();
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern getFeatureBoostPattern(int index);
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    int getFeatureBoostPatternCount();
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    java.util.List<? extends com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder> 
+        getFeatureBoostPatternOrBuilderList();
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder getFeatureBoostPatternOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code SiteManifest}
@@ -545,6 +570,14 @@ public final class CrawlerProto {
               titleSelector_.add(input.readBytes());
               break;
             }
+            case 106: {
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                featureBoostPattern_ = new java.util.ArrayList<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern>();
+                mutable_bitField0_ |= 0x00001000;
+              }
+              featureBoostPattern_.add(input.readMessage(com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -579,6 +612,9 @@ public final class CrawlerProto {
         }
         if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
           titleSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(titleSelector_);
+        }
+        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+          featureBoostPattern_ = java.util.Collections.unmodifiableList(featureBoostPattern_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2351,6 +2387,1165 @@ public final class CrawlerProto {
       // @@protoc_insertion_point(class_scope:SiteManifest.ArticleUrlPattern)
     }
 
+    public interface FeatureBoostPatternOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional string subdomain = 1;
+      /**
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      boolean hasSubdomain();
+      /**
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      java.lang.String getSubdomain();
+      /**
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      com.google.protobuf.ByteString
+          getSubdomainBytes();
+
+      // optional string path_regex = 2;
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      boolean hasPathRegex();
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      java.lang.String getPathRegex();
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      com.google.protobuf.ByteString
+          getPathRegexBytes();
+
+      // optional string query_regex = 3;
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      boolean hasQueryRegex();
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      java.lang.String getQueryRegex();
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      com.google.protobuf.ByteString
+          getQueryRegexBytes();
+
+      // optional int32 feature_id = 4;
+      /**
+       * <code>optional int32 feature_id = 4;</code>
+       */
+      boolean hasFeatureId();
+      /**
+       * <code>optional int32 feature_id = 4;</code>
+       */
+      int getFeatureId();
+
+      // optional int32 boost = 5;
+      /**
+       * <code>optional int32 boost = 5;</code>
+       *
+       * <pre>
+       * A number between 1 and 10 that indicates the strength of the boost that
+       * should be applied.
+       * </pre>
+       */
+      boolean hasBoost();
+      /**
+       * <code>optional int32 boost = 5;</code>
+       *
+       * <pre>
+       * A number between 1 and 10 that indicates the strength of the boost that
+       * should be applied.
+       * </pre>
+       */
+      int getBoost();
+    }
+    /**
+     * Protobuf type {@code SiteManifest.FeatureBoostPattern}
+     *
+     * <pre>
+     * URL patterns that indicate whether articles should have their relevancy
+     * for features boosted due to their domain, subdomain, path, or query
+     * parameters.  E.g. articles in rigzone.com should receive a boost for being
+     * Oil &amp; Energy articles.  In this case, no subdomain, path_regex, or
+     * query_regex would be set.  In other cases, certain paths on nytimes.com
+     * could be used to boost feature scores.
+     * </pre>
+     */
+    public static final class FeatureBoostPattern extends
+        com.google.protobuf.GeneratedMessage
+        implements FeatureBoostPatternOrBuilder {
+      // Use FeatureBoostPattern.newBuilder() to construct.
+      private FeatureBoostPattern(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private FeatureBoostPattern(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final FeatureBoostPattern defaultInstance;
+      public static FeatureBoostPattern getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public FeatureBoostPattern getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private FeatureBoostPattern(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                subdomain_ = input.readBytes();
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000002;
+                pathRegex_ = input.readBytes();
+                break;
+              }
+              case 26: {
+                bitField0_ |= 0x00000004;
+                queryRegex_ = input.readBytes();
+                break;
+              }
+              case 32: {
+                bitField0_ |= 0x00000008;
+                featureId_ = input.readInt32();
+                break;
+              }
+              case 40: {
+                bitField0_ |= 0x00000010;
+                boost_ = input.readInt32();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_FeatureBoostPattern_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_FeatureBoostPattern_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.class, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<FeatureBoostPattern> PARSER =
+          new com.google.protobuf.AbstractParser<FeatureBoostPattern>() {
+        public FeatureBoostPattern parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new FeatureBoostPattern(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<FeatureBoostPattern> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // optional string subdomain = 1;
+      public static final int SUBDOMAIN_FIELD_NUMBER = 1;
+      private java.lang.Object subdomain_;
+      /**
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      public boolean hasSubdomain() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      public java.lang.String getSubdomain() {
+        java.lang.Object ref = subdomain_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            subdomain_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string subdomain = 1;</code>
+       *
+       * <pre>
+       * If present, a subdomain that this regular expression is restricted to.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getSubdomainBytes() {
+        java.lang.Object ref = subdomain_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          subdomain_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional string path_regex = 2;
+      public static final int PATH_REGEX_FIELD_NUMBER = 2;
+      private java.lang.Object pathRegex_;
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      public boolean hasPathRegex() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      public java.lang.String getPathRegex() {
+        java.lang.Object ref = pathRegex_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            pathRegex_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string path_regex = 2;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article's path.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getPathRegexBytes() {
+        java.lang.Object ref = pathRegex_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          pathRegex_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional string query_regex = 3;
+      public static final int QUERY_REGEX_FIELD_NUMBER = 3;
+      private java.lang.Object queryRegex_;
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      public boolean hasQueryRegex() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      public java.lang.String getQueryRegex() {
+        java.lang.Object ref = queryRegex_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            queryRegex_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string query_regex = 3;</code>
+       *
+       * <pre>
+       * A regular expression specification to run against the article unparsed
+       * query string.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getQueryRegexBytes() {
+        java.lang.Object ref = queryRegex_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          queryRegex_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional int32 feature_id = 4;
+      public static final int FEATURE_ID_FIELD_NUMBER = 4;
+      private int featureId_;
+      /**
+       * <code>optional int32 feature_id = 4;</code>
+       */
+      public boolean hasFeatureId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 feature_id = 4;</code>
+       */
+      public int getFeatureId() {
+        return featureId_;
+      }
+
+      // optional int32 boost = 5;
+      public static final int BOOST_FIELD_NUMBER = 5;
+      private int boost_;
+      /**
+       * <code>optional int32 boost = 5;</code>
+       *
+       * <pre>
+       * A number between 1 and 10 that indicates the strength of the boost that
+       * should be applied.
+       * </pre>
+       */
+      public boolean hasBoost() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 boost = 5;</code>
+       *
+       * <pre>
+       * A number between 1 and 10 that indicates the strength of the boost that
+       * should be applied.
+       * </pre>
+       */
+      public int getBoost() {
+        return boost_;
+      }
+
+      private void initFields() {
+        subdomain_ = "";
+        pathRegex_ = "";
+        queryRegex_ = "";
+        featureId_ = 0;
+        boost_ = 0;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getSubdomainBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, getPathRegexBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeBytes(3, getQueryRegexBytes());
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeInt32(4, featureId_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          output.writeInt32(5, boost_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getSubdomainBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, getPathRegexBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(3, getQueryRegexBytes());
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(4, featureId_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(5, boost_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code SiteManifest.FeatureBoostPattern}
+       *
+       * <pre>
+       * URL patterns that indicate whether articles should have their relevancy
+       * for features boosted due to their domain, subdomain, path, or query
+       * parameters.  E.g. articles in rigzone.com should receive a boost for being
+       * Oil &amp; Energy articles.  In this case, no subdomain, path_regex, or
+       * query_regex would be set.  In other cases, certain paths on nytimes.com
+       * could be used to boost feature scores.
+       * </pre>
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_FeatureBoostPattern_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_FeatureBoostPattern_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.class, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          subdomain_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          pathRegex_ = "";
+          bitField0_ = (bitField0_ & ~0x00000002);
+          queryRegex_ = "";
+          bitField0_ = (bitField0_ & ~0x00000004);
+          featureId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000008);
+          boost_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000010);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_FeatureBoostPattern_descriptor;
+        }
+
+        public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern getDefaultInstanceForType() {
+          return com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern build() {
+          com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern buildPartial() {
+          com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern result = new com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.subdomain_ = subdomain_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.pathRegex_ = pathRegex_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.queryRegex_ = queryRegex_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.featureId_ = featureId_;
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          result.boost_ = boost_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern) {
+            return mergeFrom((com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern other) {
+          if (other == com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.getDefaultInstance()) return this;
+          if (other.hasSubdomain()) {
+            bitField0_ |= 0x00000001;
+            subdomain_ = other.subdomain_;
+            onChanged();
+          }
+          if (other.hasPathRegex()) {
+            bitField0_ |= 0x00000002;
+            pathRegex_ = other.pathRegex_;
+            onChanged();
+          }
+          if (other.hasQueryRegex()) {
+            bitField0_ |= 0x00000004;
+            queryRegex_ = other.queryRegex_;
+            onChanged();
+          }
+          if (other.hasFeatureId()) {
+            setFeatureId(other.getFeatureId());
+          }
+          if (other.hasBoost()) {
+            setBoost(other.getBoost());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional string subdomain = 1;
+        private java.lang.Object subdomain_ = "";
+        /**
+         * <code>optional string subdomain = 1;</code>
+         *
+         * <pre>
+         * If present, a subdomain that this regular expression is restricted to.
+         * </pre>
+         */
+        public boolean hasSubdomain() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional string subdomain = 1;</code>
+         *
+         * <pre>
+         * If present, a subdomain that this regular expression is restricted to.
+         * </pre>
+         */
+        public java.lang.String getSubdomain() {
+          java.lang.Object ref = subdomain_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            subdomain_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string subdomain = 1;</code>
+         *
+         * <pre>
+         * If present, a subdomain that this regular expression is restricted to.
+         * </pre>
+         */
+        public com.google.protobuf.ByteString
+            getSubdomainBytes() {
+          java.lang.Object ref = subdomain_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            subdomain_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string subdomain = 1;</code>
+         *
+         * <pre>
+         * If present, a subdomain that this regular expression is restricted to.
+         * </pre>
+         */
+        public Builder setSubdomain(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          subdomain_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string subdomain = 1;</code>
+         *
+         * <pre>
+         * If present, a subdomain that this regular expression is restricted to.
+         * </pre>
+         */
+        public Builder clearSubdomain() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          subdomain_ = getDefaultInstance().getSubdomain();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string subdomain = 1;</code>
+         *
+         * <pre>
+         * If present, a subdomain that this regular expression is restricted to.
+         * </pre>
+         */
+        public Builder setSubdomainBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          subdomain_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional string path_regex = 2;
+        private java.lang.Object pathRegex_ = "";
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public boolean hasPathRegex() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public java.lang.String getPathRegex() {
+          java.lang.Object ref = pathRegex_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            pathRegex_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public com.google.protobuf.ByteString
+            getPathRegexBytes() {
+          java.lang.Object ref = pathRegex_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            pathRegex_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public Builder setPathRegex(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          pathRegex_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public Builder clearPathRegex() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          pathRegex_ = getDefaultInstance().getPathRegex();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string path_regex = 2;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article's path.
+         * </pre>
+         */
+        public Builder setPathRegexBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          pathRegex_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional string query_regex = 3;
+        private java.lang.Object queryRegex_ = "";
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public boolean hasQueryRegex() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public java.lang.String getQueryRegex() {
+          java.lang.Object ref = queryRegex_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            queryRegex_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public com.google.protobuf.ByteString
+            getQueryRegexBytes() {
+          java.lang.Object ref = queryRegex_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            queryRegex_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public Builder setQueryRegex(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          queryRegex_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public Builder clearQueryRegex() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          queryRegex_ = getDefaultInstance().getQueryRegex();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string query_regex = 3;</code>
+         *
+         * <pre>
+         * A regular expression specification to run against the article unparsed
+         * query string.
+         * </pre>
+         */
+        public Builder setQueryRegexBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          queryRegex_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 feature_id = 4;
+        private int featureId_ ;
+        /**
+         * <code>optional int32 feature_id = 4;</code>
+         */
+        public boolean hasFeatureId() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        /**
+         * <code>optional int32 feature_id = 4;</code>
+         */
+        public int getFeatureId() {
+          return featureId_;
+        }
+        /**
+         * <code>optional int32 feature_id = 4;</code>
+         */
+        public Builder setFeatureId(int value) {
+          bitField0_ |= 0x00000008;
+          featureId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 feature_id = 4;</code>
+         */
+        public Builder clearFeatureId() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          featureId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 boost = 5;
+        private int boost_ ;
+        /**
+         * <code>optional int32 boost = 5;</code>
+         *
+         * <pre>
+         * A number between 1 and 10 that indicates the strength of the boost that
+         * should be applied.
+         * </pre>
+         */
+        public boolean hasBoost() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional int32 boost = 5;</code>
+         *
+         * <pre>
+         * A number between 1 and 10 that indicates the strength of the boost that
+         * should be applied.
+         * </pre>
+         */
+        public int getBoost() {
+          return boost_;
+        }
+        /**
+         * <code>optional int32 boost = 5;</code>
+         *
+         * <pre>
+         * A number between 1 and 10 that indicates the strength of the boost that
+         * should be applied.
+         * </pre>
+         */
+        public Builder setBoost(int value) {
+          bitField0_ |= 0x00000010;
+          boost_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 boost = 5;</code>
+         *
+         * <pre>
+         * A number between 1 and 10 that indicates the strength of the boost that
+         * should be applied.
+         * </pre>
+         */
+        public Builder clearBoost() {
+          bitField0_ = (bitField0_ & ~0x00000010);
+          boost_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:SiteManifest.FeatureBoostPattern)
+      }
+
+      static {
+        defaultInstance = new FeatureBoostPattern(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:SiteManifest.FeatureBoostPattern)
+    }
+
     private int bitField0_;
     // optional string root_domain = 1;
     public static final int ROOT_DOMAIN_FIELD_NUMBER = 1;
@@ -2874,6 +4069,42 @@ public final class CrawlerProto {
       return titleSelector_.getByteString(index);
     }
 
+    // repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;
+    public static final int FEATURE_BOOST_PATTERN_FIELD_NUMBER = 13;
+    private java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern> featureBoostPattern_;
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    public java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern> getFeatureBoostPatternList() {
+      return featureBoostPattern_;
+    }
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    public java.util.List<? extends com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder> 
+        getFeatureBoostPatternOrBuilderList() {
+      return featureBoostPattern_;
+    }
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    public int getFeatureBoostPatternCount() {
+      return featureBoostPattern_.size();
+    }
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern getFeatureBoostPattern(int index) {
+      return featureBoostPattern_.get(index);
+    }
+    /**
+     * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+     */
+    public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder getFeatureBoostPatternOrBuilder(
+        int index) {
+      return featureBoostPattern_.get(index);
+    }
+
     private void initFields() {
       rootDomain_ = "";
       akaRootDomain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -2887,6 +4118,7 @@ public final class CrawlerProto {
       testInstructions_ = com.janknspank.proto.CrawlerProto.TestInstructions.getDefaultInstance();
       isHttps_ = false;
       titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      featureBoostPattern_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2935,6 +4167,9 @@ public final class CrawlerProto {
       }
       for (int i = 0; i < titleSelector_.size(); i++) {
         output.writeBytes(12, titleSelector_.getByteString(i));
+      }
+      for (int i = 0; i < featureBoostPattern_.size(); i++) {
+        output.writeMessage(13, featureBoostPattern_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -3027,6 +4262,10 @@ public final class CrawlerProto {
         }
         size += dataSize;
         size += 1 * getTitleSelectorList().size();
+      }
+      for (int i = 0; i < featureBoostPattern_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(13, featureBoostPattern_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3139,6 +4378,7 @@ public final class CrawlerProto {
           getPathBlacklistFieldBuilder();
           getArticleUrlPatternFieldBuilder();
           getTestInstructionsFieldBuilder();
+          getFeatureBoostPatternFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3183,6 +4423,12 @@ public final class CrawlerProto {
         bitField0_ = (bitField0_ & ~0x00000400);
         titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000800);
+        if (featureBoostPatternBuilder_ == null) {
+          featureBoostPattern_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00001000);
+        } else {
+          featureBoostPatternBuilder_.clear();
+        }
         return this;
       }
 
@@ -3287,6 +4533,15 @@ public final class CrawlerProto {
           bitField0_ = (bitField0_ & ~0x00000800);
         }
         result.titleSelector_ = titleSelector_;
+        if (featureBoostPatternBuilder_ == null) {
+          if (((bitField0_ & 0x00001000) == 0x00001000)) {
+            featureBoostPattern_ = java.util.Collections.unmodifiableList(featureBoostPattern_);
+            bitField0_ = (bitField0_ & ~0x00001000);
+          }
+          result.featureBoostPattern_ = featureBoostPattern_;
+        } else {
+          result.featureBoostPattern_ = featureBoostPatternBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3435,6 +4690,32 @@ public final class CrawlerProto {
             titleSelector_.addAll(other.titleSelector_);
           }
           onChanged();
+        }
+        if (featureBoostPatternBuilder_ == null) {
+          if (!other.featureBoostPattern_.isEmpty()) {
+            if (featureBoostPattern_.isEmpty()) {
+              featureBoostPattern_ = other.featureBoostPattern_;
+              bitField0_ = (bitField0_ & ~0x00001000);
+            } else {
+              ensureFeatureBoostPatternIsMutable();
+              featureBoostPattern_.addAll(other.featureBoostPattern_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.featureBoostPattern_.isEmpty()) {
+            if (featureBoostPatternBuilder_.isEmpty()) {
+              featureBoostPatternBuilder_.dispose();
+              featureBoostPatternBuilder_ = null;
+              featureBoostPattern_ = other.featureBoostPattern_;
+              bitField0_ = (bitField0_ & ~0x00001000);
+              featureBoostPatternBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getFeatureBoostPatternFieldBuilder() : null;
+            } else {
+              featureBoostPatternBuilder_.addAllMessages(other.featureBoostPattern_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5170,6 +6451,246 @@ public final class CrawlerProto {
         titleSelector_.add(value);
         onChanged();
         return this;
+      }
+
+      // repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;
+      private java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern> featureBoostPattern_ =
+        java.util.Collections.emptyList();
+      private void ensureFeatureBoostPatternIsMutable() {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+          featureBoostPattern_ = new java.util.ArrayList<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern>(featureBoostPattern_);
+          bitField0_ |= 0x00001000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder> featureBoostPatternBuilder_;
+
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern> getFeatureBoostPatternList() {
+        if (featureBoostPatternBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(featureBoostPattern_);
+        } else {
+          return featureBoostPatternBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public int getFeatureBoostPatternCount() {
+        if (featureBoostPatternBuilder_ == null) {
+          return featureBoostPattern_.size();
+        } else {
+          return featureBoostPatternBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern getFeatureBoostPattern(int index) {
+        if (featureBoostPatternBuilder_ == null) {
+          return featureBoostPattern_.get(index);
+        } else {
+          return featureBoostPatternBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder setFeatureBoostPattern(
+          int index, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern value) {
+        if (featureBoostPatternBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeatureBoostPatternIsMutable();
+          featureBoostPattern_.set(index, value);
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder setFeatureBoostPattern(
+          int index, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder builderForValue) {
+        if (featureBoostPatternBuilder_ == null) {
+          ensureFeatureBoostPatternIsMutable();
+          featureBoostPattern_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder addFeatureBoostPattern(com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern value) {
+        if (featureBoostPatternBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeatureBoostPatternIsMutable();
+          featureBoostPattern_.add(value);
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder addFeatureBoostPattern(
+          int index, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern value) {
+        if (featureBoostPatternBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeatureBoostPatternIsMutable();
+          featureBoostPattern_.add(index, value);
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder addFeatureBoostPattern(
+          com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder builderForValue) {
+        if (featureBoostPatternBuilder_ == null) {
+          ensureFeatureBoostPatternIsMutable();
+          featureBoostPattern_.add(builderForValue.build());
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder addFeatureBoostPattern(
+          int index, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder builderForValue) {
+        if (featureBoostPatternBuilder_ == null) {
+          ensureFeatureBoostPatternIsMutable();
+          featureBoostPattern_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder addAllFeatureBoostPattern(
+          java.lang.Iterable<? extends com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern> values) {
+        if (featureBoostPatternBuilder_ == null) {
+          ensureFeatureBoostPatternIsMutable();
+          super.addAll(values, featureBoostPattern_);
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder clearFeatureBoostPattern() {
+        if (featureBoostPatternBuilder_ == null) {
+          featureBoostPattern_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00001000);
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public Builder removeFeatureBoostPattern(int index) {
+        if (featureBoostPatternBuilder_ == null) {
+          ensureFeatureBoostPatternIsMutable();
+          featureBoostPattern_.remove(index);
+          onChanged();
+        } else {
+          featureBoostPatternBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder getFeatureBoostPatternBuilder(
+          int index) {
+        return getFeatureBoostPatternFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder getFeatureBoostPatternOrBuilder(
+          int index) {
+        if (featureBoostPatternBuilder_ == null) {
+          return featureBoostPattern_.get(index);  } else {
+          return featureBoostPatternBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder> 
+           getFeatureBoostPatternOrBuilderList() {
+        if (featureBoostPatternBuilder_ != null) {
+          return featureBoostPatternBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(featureBoostPattern_);
+        }
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder addFeatureBoostPatternBuilder() {
+        return getFeatureBoostPatternFieldBuilder().addBuilder(
+            com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder addFeatureBoostPatternBuilder(
+          int index) {
+        return getFeatureBoostPatternFieldBuilder().addBuilder(
+            index, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .SiteManifest.FeatureBoostPattern feature_boost_pattern = 13;</code>
+       */
+      public java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder> 
+           getFeatureBoostPatternBuilderList() {
+        return getFeatureBoostPatternFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder> 
+          getFeatureBoostPatternFieldBuilder() {
+        if (featureBoostPatternBuilder_ == null) {
+          featureBoostPatternBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder>(
+                  featureBoostPattern_,
+                  ((bitField0_ & 0x00001000) == 0x00001000),
+                  getParentForChildren(),
+                  isClean());
+          featureBoostPattern_ = null;
+        }
+        return featureBoostPatternBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:SiteManifest)
@@ -9458,6 +10979,11 @@ public final class CrawlerProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SiteManifest_ArticleUrlPattern_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_SiteManifest_FeatureBoostPattern_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SiteManifest_FeatureBoostPattern_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_TestInstructions_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -9492,8 +11018,8 @@ public final class CrawlerProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/crawler.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\222" +
-      "\006\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
+      "m/janknspank/database/extensions.proto\"\340" +
+      "\007\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
       "\035\001\230\246\035\377\005\022\036\n\017aka_root_domain\030\002 \003(\tB\005\230\246\035\377\005\022" +
       "\034\n\tstart_url\030\003 \003(\tB\t\210\246\035\001\230\246\035\377\005\022\"\n\023subdoma" +
       "in_blacklist\030\004 \003(\tB\005\230\246\035\377\005\0223\n\016path_blackl" +
@@ -9504,33 +11030,39 @@ public final class CrawlerProto {
       "_parameter\030\010 \003(\tB\005\230\246\035\377\005\022\026\n\007rss_url\030\t \003(\t" +
       "B\005\230\246\035\377\005\0222\n\021test_instructions\030\n \001(\0132\021.Tes" +
       "tInstructionsB\004\210\246\035\001\022\020\n\010is_https\030\013 \001(\010\022\035\n" +
-      "\016title_selector\030\014 \003(\tB\005\230\246\035\377\005\032\326\001\n\rPathBla" +
-      "cklist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022C\n\010loc" +
-      "ation\030\004 \001(\0162$.SiteManifest.PathBlacklist" +
-      ".Location:\013STARTS_WITH\"e\n\010Location\022\n\n\006EQ" +
-      "UALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014" +
-      "\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MA" +
-      "TCH\020\006\032d\n\021ArticleUrlPattern\022\030\n\tsubdomain\030",
-      "\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022" +
-      "\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\"\314\002\n\020TestInst" +
-      "ructions\022B\n\024url_whitelist_checks\030\001 \001(\0132$" +
-      ".TestInstructions.UrlWhitelistChecks\022U\n\033" +
-      "article_url_detector_checks\030\002 \001(\0132*.Test" +
-      "Instructions.ArticleUrlDetectorChecksB\004\210" +
-      "\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010good_url\030\001 " +
-      "\003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030Ar" +
-      "ticleUrlDetectorChecks\022\032\n\013article_url\030\001 " +
-      "\003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030\002 \003(\tB\005\230\246\035",
-      "\377\005\"\341\002\n\014CrawlHistory\022\"\n\010crawl_id\030\001 \001(\tB\020\210" +
-      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002" +
-      "\022 \n\004site\030\003 \003(\0132\022.CrawlHistory.Site\022\030\n\nst" +
-      "art_time\030\004 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\005 \001(\003\022\016" +
-      "\n\006millis\030\006 \001(\003\022\027\n\017was_interrupted\030\007 \001(\010\032" +
-      "\202\001\n\004Site\022\036\n\013root_domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005" +
-      "\022\030\n\nstart_time\030\002 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\003" +
-      " \001(\003\022\016\n\006millis\030\004 \001(\003\022\036\n\020articles_crawled" +
-      "\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024MongoDB.CrawlHistoryB$" +
-      "\n\024com.janknspank.protoB\014CrawlerProto"
+      "\016title_selector\030\014 \003(\tB\005\230\246\035\377\005\022@\n\025feature_" +
+      "boost_pattern\030\r \003(\0132!.SiteManifest.Featu" +
+      "reBoostPattern\032\326\001\n\rPathBlacklist\022\031\n\006need" +
+      "le\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022C\n\010location\030\004 \001(\0162$." +
+      "SiteManifest.PathBlacklist.Location:\013STA" +
+      "RTS_WITH\"e\n\010Location\022\n\n\006EQUALS\020\001\022\017\n\013STAR" +
+      "TS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016",
+      "\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006\032d\n\021Artic" +
+      "leUrlPattern\022\030\n\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031" +
+      "\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query_regex" +
+      "\030\003 \001(\tB\005\230\246\035\377\005\032\211\001\n\023FeatureBoostPattern\022\030\n" +
+      "\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 " +
+      "\001(\tB\005\230\246\035\377\005\022\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\022\022" +
+      "\n\nfeature_id\030\004 \001(\005\022\r\n\005boost\030\005 \001(\005\"\314\002\n\020Te" +
+      "stInstructions\022B\n\024url_whitelist_checks\030\001" +
+      " \001(\0132$.TestInstructions.UrlWhitelistChec" +
+      "ks\022U\n\033article_url_detector_checks\030\002 \001(\0132",
+      "*.TestInstructions.ArticleUrlDetectorChe" +
+      "cksB\004\210\246\035\001\032E\n\022UrlWhitelistChecks\022\027\n\010good_" +
+      "url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005" +
+      "\032V\n\030ArticleUrlDetectorChecks\022\032\n\013article_" +
+      "url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_article_url\030\002 \003(" +
+      "\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHistory\022\"\n\010crawl_id\030\001 " +
+      "\001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t\210\246\035" +
+      "\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132\022.CrawlHistory.Site" +
+      "\022\030\n\nstart_time\030\004 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\005" +
+      " \001(\003\022\016\n\006millis\030\006 \001(\003\022\027\n\017was_interrupted\030",
+      "\007 \001(\010\032\202\001\n\004Site\022\036\n\013root_domain\030\001 \001(\tB\t\210\246\035" +
+      "\001\230\246\035\377\005\022\030\n\nstart_time\030\002 \001(\003B\004\210\246\035\001\022\020\n\010end_" +
+      "time\030\003 \001(\003\022\016\n\006millis\030\004 \001(\003\022\036\n\020articles_c" +
+      "rawled\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024MongoDB.CrawlHis" +
+      "toryB$\n\024com.janknspank.protoB\014CrawlerPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9542,7 +11074,7 @@ public final class CrawlerProto {
           internal_static_SiteManifest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", "TitleSelector", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", "TitleSelector", "FeatureBoostPattern", });
           internal_static_SiteManifest_PathBlacklist_descriptor =
             internal_static_SiteManifest_descriptor.getNestedTypes().get(0);
           internal_static_SiteManifest_PathBlacklist_fieldAccessorTable = new
@@ -9555,6 +11087,12 @@ public final class CrawlerProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_ArticleUrlPattern_descriptor,
               new java.lang.String[] { "Subdomain", "PathRegex", "QueryRegex", });
+          internal_static_SiteManifest_FeatureBoostPattern_descriptor =
+            internal_static_SiteManifest_descriptor.getNestedTypes().get(2);
+          internal_static_SiteManifest_FeatureBoostPattern_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_SiteManifest_FeatureBoostPattern_descriptor,
+              new java.lang.String[] { "Subdomain", "PathRegex", "QueryRegex", "FeatureId", "Boost", });
           internal_static_TestInstructions_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_TestInstructions_fieldAccessorTable = new
@@ -9600,6 +11138,9 @@ public final class CrawlerProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

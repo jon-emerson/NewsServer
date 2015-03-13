@@ -65,3 +65,6 @@ test_instructions {
     non_article_url: "http://abcnews.go.com/topics/news/angola.htm"
   }
 }
+feature_boost_pattern {
+  boost: -2 # Lower quality site.
+}

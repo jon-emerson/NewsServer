@@ -1,14 +1,23 @@
 package com.janknspank.classifier;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Pattern;
 
+import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
+import com.janknspank.crawler.SiteManifests;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern;
 
 /**
  * A business class that scores news articles against a particular attribute,
@@ -21,6 +30,29 @@ public abstract class Feature {
   private static final LoadingCache<FeatureId, Feature> FEATURE_CACHE =
       CacheBuilder.newBuilder().maximumSize(1000).build(new FeatureLoader());
   private static List<FeatureId> VALID_FEATURE_IDS = null;
+  private static final PatternCache PATTERN_CACHE = new PatternCache();
+  private static class PatternCache extends ThreadLocal<LinkedHashMap<String, Pattern>> {
+    private static final int CACHE_SIZE_PER_THREAD = 100;
+
+    @Override
+    protected LinkedHashMap<String, Pattern> initialValue() {
+      return new LinkedHashMap<String, Pattern>() {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, Pattern> eldest) {
+          return size() > CACHE_SIZE_PER_THREAD;
+        }
+      };
+    }
+
+    public Pattern getPattern(final String regex) {
+      if (this.get().containsKey(regex)) {
+        return this.get().get(regex);
+      }
+      Pattern pattern = Pattern.compile(regex);
+      this.get().put(regex, pattern);
+      return pattern;
+    };
+  }
 
   /**
    * Loader for the Guava cache that returns a Feature for each FeatureId.  This
@@ -99,4 +131,51 @@ public abstract class Feature {
    * @return [0-1]
    */
   public abstract double score(ArticleOrBuilder article) throws ClassifierException;
+
+  /**
+   * Returns the boost this article should receive for ranking against this
+   * feature given its domain, subdomain, path, query, etc.
+   */
+  protected int getBoost(ArticleOrBuilder article) {
+    URL url;
+    try {
+      url = new URL(article.getUrl());
+    } catch (MalformedURLException e) {
+      return 0;
+    }
+
+    SiteManifest site = SiteManifests.getForUrl(url);
+    if (site == null) {
+      return 0;
+    }
+
+    FeatureBoostPattern bestFeatureBoostPattern = null;
+    String domain = url.getHost();
+    String path = url.getPath();
+    for (FeatureBoostPattern featureBoostPattern : site.getFeatureBoostPatternList()) {
+      if (featureBoostPattern.getBoost() < -20 || featureBoostPattern.getBoost() > 10) {
+        System.out.println("INVALID FEATURE BOOST VALUE! Domain=" + domain);
+      }
+      if (featureBoostPattern.hasFeatureId()
+          && this.featureId.getId() != featureBoostPattern.getFeatureId()) {
+        continue;
+      }
+      if (featureBoostPattern.hasSubdomain()
+          && !(domain.equals(featureBoostPattern.getSubdomain())
+              || domain.endsWith("." + featureBoostPattern.getSubdomain()))) {
+        continue;
+      }
+      if (featureBoostPattern.hasPathRegex()
+            && !PATTERN_CACHE.getPattern(featureBoostPattern.getPathRegex()).matcher(path).find()) {
+        continue;
+      }
+      if (featureBoostPattern.hasQueryRegex()
+            && !PATTERN_CACHE.getPattern(featureBoostPattern.getQueryRegex())
+                .matcher(Strings.nullToEmpty(url.getQuery())).find()) {
+        continue;
+      }
+      bestFeatureBoostPattern = featureBoostPattern;
+    }
+    return (bestFeatureBoostPattern == null) ? 0 : bestFeatureBoostPattern.getBoost();
+  }
 }

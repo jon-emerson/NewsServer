@@ -140,3 +140,53 @@ test_instructions {
     non_article_url: "http://rss.nytimes.com/services/xml/rss/nyt/SmallBusiness.xml"
   }
 }
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  path_regex: "\\/realestate\\/"
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 10514 # Financial Services
+  path_regex: "\\/business\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10514 # Financial Services
+  subdomain: "dealbook.nytimes.com"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10511 # Leisure, Travel and Tourism
+  path_regex: "^\\/travel\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10511 # Leisure, Travel and Tourism
+  subdomain: "intransit.blogs.nytimes.com"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  path_regex: "^\\/arts\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10556 # Restaurants
+  path_regex: "\\/restaurants\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  subdomain: "bits.blogs.nytimes.com"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  subdomain: "bits.blogs.nytimes.com"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  path_regex: "\\/nyregion\\/"
+  boost: 1
+}

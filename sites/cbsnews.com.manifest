@@ -51,3 +51,6 @@ test_instructions {
     non_article_url: "http://www.cbsnews.com/team/steve-kroft/"
   }
 }
+feature_boost_pattern {
+  boost: -2 # This site is pretty generic mass-market everything-to-everyone.
+}

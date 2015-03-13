@@ -42,9 +42,10 @@ public final class VectorFeature extends Feature {
    */
   @Override
   public double score(ArticleOrBuilder article) throws ClassifierException {
+    double boost = (0.15 * this.getBoost(article));
     return DistributionBuilder.projectQuantile(
         distribution,
-        vector.getCosineSimilarity(
+        boost + vector.getCosineSimilarity(
             UniverseVector.getInstance(), Vector.fromArticle(article)));
   }
 

@@ -32,3 +32,7 @@ test_instructions {
     non_article_url: "http://www.businessinsider.com/sportspage"
   }
 }
+feature_boost_pattern {
+  feature_id: 10514 # Financial Services
+  boost: 1
+}

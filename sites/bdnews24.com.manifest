@@ -64,3 +64,6 @@ test_instructions {
     non_article_url: "http://opinion.bdnews24.com/category/democracy/"
   }
 }
+feature_boost_pattern {
+  boost: -10 # This website is pretty much crap.
+}

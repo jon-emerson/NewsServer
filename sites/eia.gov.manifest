@@ -28,3 +28,10 @@ test_instructions {
     non_article_url: "http://www.eia.gov/state/?sid=AL"
   }
 }
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10538 # Oil & Energy
+  boost: 10
+}

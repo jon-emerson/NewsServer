@@ -77,3 +77,6 @@ test_instructions {
     non_article_url: "http://boston.com/weather/"
   }
 }
+feature_boost_pattern {
+  boost: -2 # Lower-quality site on the whole.
+}

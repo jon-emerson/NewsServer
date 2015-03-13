@@ -35,3 +35,40 @@ test_instructions {
     non_article_url: "http://www.designboom.com/about-us/"
   }
 }
+feature_boost_pattern {
+  boost: -5 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer Electronics
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10544 # Publishing
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10520 # Automotive
+  path_regex: "^\\/technology\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  path_regex: "^\\/architecture\\/"
+  boost: 10
+}

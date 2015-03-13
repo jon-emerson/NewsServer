@@ -94,3 +94,18 @@ test_instructions {
     non_article_url: "http://www.bloomberg.com/solutions/bloomberg_enterprise/bloomberg_vault/"
   }
 }
+feature_boost_pattern {
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10514 # Financial Services
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  boost: 1
+}

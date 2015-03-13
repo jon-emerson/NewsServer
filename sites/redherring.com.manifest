@@ -25,3 +25,12 @@ test_instructions {
     non_article_url: "http://www.redherring.com/press-media/"
   }
 }
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  path_regex: "^\\/finance\\/"
+  boost: 3
+}

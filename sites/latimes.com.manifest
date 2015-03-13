@@ -64,3 +64,8 @@ test_instructions {
     non_article_url: "http://www.latimes.com/topic/crime-law-justice/law-enforcement/los-angeles-police-department-ORGOV000939.topic"
   }
 }
+feature_boost_pattern {
+  feature_id: 10520 # Automotive
+  path_regex: "^\\/business\\/autos\\/"
+  boost: 10
+}

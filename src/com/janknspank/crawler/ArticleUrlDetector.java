@@ -56,18 +56,18 @@ public class ArticleUrlDetector {
       return false;
     }
 
-    SiteManifest contentSite = SiteManifests.getForUrl(url);
-    if (contentSite == null) {
+    SiteManifest site = SiteManifests.getForUrl(url);
+    if (site == null) {
       return false;
     }
     String domain = url.getHost().toLowerCase();
     String path = url.getPath();
     boolean matched = false;
     while (!matched && domain.contains(".")) {
-      for (ArticleUrlPattern articleUrlPattern : contentSite.getArticleUrlPatternList()) {
+      for (ArticleUrlPattern articleUrlPattern : site.getArticleUrlPatternList()) {
         if (articleUrlPattern.hasSubdomain() && domain.equals(articleUrlPattern.getSubdomain())
-            || domain.equals(contentSite.getRootDomain())
-            || Iterables.contains(contentSite.getAkaRootDomainList(), domain)) {
+            || domain.equals(site.getRootDomain())
+            || Iterables.contains(site.getAkaRootDomainList(), domain)) {
           matched = true;
           if (!articleUrlPattern.hasPathRegex() && !articleUrlPattern.hasQueryRegex()) {
             System.out.println("Warning: article_url_pattern has no path_regex or query_regex");

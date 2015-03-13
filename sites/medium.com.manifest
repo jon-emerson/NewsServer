@@ -23,3 +23,7 @@ test_instructions {
     non_article_url: "https://medium.com/reportedly/"
   }
 }
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: 1
+}

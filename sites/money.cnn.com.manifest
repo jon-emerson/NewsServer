@@ -46,3 +46,7 @@ test_instructions {
     non_article_url: "http://money.cnn.com/services/closed-captioning.html"
   }
 }
+feature_boost_pattern {
+  feature_id: 10514 # Financial Services
+  boost: 5
+}

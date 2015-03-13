@@ -35,3 +35,12 @@ test_instructions {
     non_article_url: "http://www.sfgate.com/entertainment/blogs/"
   }
 }
+feature_boost_pattern {
+  path_regex: "^\\/49ers\\/"
+  boost: -10
+}
+feature_boost_pattern {
+  path_regex: "^\\/49ers\\/"
+  feature_id: 10512 # Sports
+  boost: 5
+}

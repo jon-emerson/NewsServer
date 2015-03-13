@@ -67,3 +67,10 @@ test_instructions {
     non_article_url: "http://fortune.com/tag/starbucks/"
   }
 }
+feature_boost_pattern {
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10514 # Financial Services
+  boost: 1
+}

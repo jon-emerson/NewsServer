@@ -33,3 +33,14 @@ test_instructions {
     non_article_url: "http://www.agweb.com/news/audience-polls/"
   }
 }
+feature_boost_pattern {
+  boost: -20 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 10522 # Dairy
+  boost: 3
+}

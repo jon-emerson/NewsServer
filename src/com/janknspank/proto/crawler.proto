@@ -131,6 +131,41 @@ message SiteManifest {
   repeated string title_selector = 12 [
     (string_length) = 767
   ];
+
+  // URL patterns that indicate whether articles should have their relevancy
+  // for features boosted due to their domain, subdomain, path, or query
+  // parameters.  E.g. articles in rigzone.com should receive a boost for being
+  // Oil & Energy articles.  In this case, no subdomain, path_regex, or
+  // query_regex would be set.  In other cases, certain paths on nytimes.com
+  // could be used to boost feature scores.
+  message FeatureBoostPattern {
+    // If present, a subdomain that this regular expression is restricted to.
+    optional string subdomain = 1 [
+      (string_length) = 767
+    ];
+
+    // A regular expression specification to run against the article's path.
+    optional string path_regex = 2 [
+      (string_length) = 767
+    ];
+
+    // A regular expression specification to run against the article unparsed
+    // query string.
+    optional string query_regex = 3 [
+      (string_length) = 767
+    ];
+
+    optional int32 feature_id = 4;
+
+    // A number between -20 and 10 that indicates the strength of the boost that
+    // should be applied.  -20 is an incredible punishment, 10 is a very strong
+    // boost.  0 is what most articles should get if we don't know what topic
+    // they're about and they're on a generic web site.
+    optional int32 boost = 5 [
+      (required) = YES
+    ];
+  }
+  repeated FeatureBoostPattern feature_boost_pattern = 13;
 }
 
 // Any URLs in these lists will be checked as either whitelisted or not, or

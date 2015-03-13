@@ -21,3 +21,7 @@ test_instructions {
     non_article_url: "http://advice.careerbuilder.com/feed.rss"
   }
 }
+feature_boost_pattern {
+  feature_id: 10554 # Human Resources
+  boost: 2
+}

@@ -83,3 +83,10 @@ test_instructions {
     non_article_url: "http://www.accountingtoday.com/reports-and-rankings/"
   }
 }
+feature_boost_pattern {
+  boost: -20 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10515 # Accounting
+  boost: 10
+}

@@ -36,3 +36,10 @@ test_instructions {
     non_article_url: "http://www.theplan.it/J/index.php?option=com_content&view=article&id=5158&Itemid=398&lang=en"
   }
 }
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 10
+}

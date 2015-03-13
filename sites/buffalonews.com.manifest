@@ -37,3 +37,6 @@ test_instructions {
     non_article_url: "http://www.buffalonews.com/section/sitemap"
   }
 }
+feature_boost_pattern {
+  boost: -5 # Regional site.
+}

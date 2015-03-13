@@ -26,3 +26,30 @@ test_instructions {
     non_article_url: "http://www.sciencedaily.com/news/fossils_ruins/ancient_civilizations/"
   }
 }
+feature_boost_pattern {
+  boost: -20 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10521 # Chemistry
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10505 # Veterinary
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  boost: -5
+}

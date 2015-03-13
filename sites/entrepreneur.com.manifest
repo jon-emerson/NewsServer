@@ -20,3 +20,26 @@ test_instructions {
     non_article_url: "http://www.entrepreneur.com/topic/starting-a-business"
   }
 }
+feature_boost_pattern {
+  boost: -5 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 20001 # Related to traditional brick and mortar startups
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10554 # Human Resources
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10514 # Financial Services
+  boost: 2
+}

@@ -24,3 +24,7 @@ test_instructions {
     non_article_url: "http://www.popphoto.com/tags/processing"
   }
 }
+feature_boost_pattern {
+  feature_id: 10528 # Photography
+  boost: 10
+}

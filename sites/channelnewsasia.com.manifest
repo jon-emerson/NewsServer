@@ -35,3 +35,6 @@ test_instructions {
     non_article_url: "http://www1.channelnewsasia.com/regionalevents/"
   }
 }
+feature_boost_pattern {
+  boost: -10 # This site is pretty crap.
+}

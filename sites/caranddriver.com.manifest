@@ -32,3 +32,10 @@ test_instructions {
     non_article_url: "http://www.caranddriver.com/list-features-shopping-advice/chevrolet"
   }
 }
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10520 # Automotive
+  boost: 10
+}

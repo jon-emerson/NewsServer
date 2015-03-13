@@ -97,3 +97,18 @@ test_instructions {
     non_article_url: "http://www.bbc.com/news/world-asia-30573040/"
   }
 }
+feature_boost_pattern {
+  feature_id: 10520 # Automotive
+  path_regex: "^\\/autos\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10511 # Leisure, Travel and Tourism
+  path_regex: "^\\/travel\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  path_regex: "^\\/culture\\/"
+  boost: 5
+}

@@ -10,6 +10,9 @@ path_blacklist {
   needle: "/conference/"
 }
 path_blacklist {
+  needle: "/offers/"
+}
+path_blacklist {
   needle: "/pro"
   location: EQUALS
 }
@@ -30,7 +33,6 @@ test_instructions {
     article_url: "http://thenextweb.com/creativity/2015/02/14/genius-timehops-valentines-day-warning-screen/"
     article_url: "http://thenextweb.com/facebook/2015/02/13/facebook-updates-groups-app-ios-new-admin-abilities/"
     article_url: "http://thenextweb.com/lifehacks/2015/02/14/modern-mentor-guide-courting-influencers/"
-    article_url: "http://thenextweb.com/offers/2015/02/14/top-tnw-deals-week-3/"
     article_url: "http://thenextweb.com/opinion/2015/02/13/wow-slack-got-big/"
     article_url: "http://thenextweb.com/socialmedia/2015/02/14/complete-beginners-guide-social-media-benchmarks/"
     article_url: "http://thenextweb.com/twitter/2015/02/12/twitter-testing-multi-photo-display-feed/"
@@ -41,4 +43,37 @@ test_instructions {
     non_article_url: "http://thenextweb.com/author/jeremeydv/"
     non_article_url: "http://thenextweb.com/twitter/"
   }
+}
+feature_boost_pattern {
+  boost: -3 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  path_regex: "^\\/(apple|apps|facebook|google|insider|twitter)\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  path_regex: "^\\/creativity\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -1
 }

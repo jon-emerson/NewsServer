@@ -50,3 +50,11 @@ test_instructions {
     non_article_url: "http://www.forbes.com/sites/katiebell/"
   }
 }
+feature_boost_pattern {
+  feature_id: 10514 # Financial Services
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 1
+}

@@ -43,3 +43,7 @@ test_instructions {
     non_article_url: "http://www.metropolismag.com/Continuing-Education/"
   }
 }
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 10
+}
