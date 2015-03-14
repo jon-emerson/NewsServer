@@ -198,8 +198,8 @@ public class Articles {
     }
 
     List<ListenableFuture<Iterable<Article>>> articlesFutures = ImmutableList.of(
+        getArticlesForKeywordsFuture(personNames, Article.Reason.PERSON, limitPerType / 4),
         getArticlesForKeywordsFuture(companyNames, Article.Reason.COMPANY, limitPerType),
-        getArticlesForKeywordsFuture(personNames, Article.Reason.PERSON, limitPerType / 5),
         getArticlesByFeatureIdFuture(featureIds, limitPerType));
     Map<String, Article> dedupingArticleMap = Maps.newHashMap();
     for (ListenableFuture<Iterable<Article>> articlesFuture : articlesFutures) {

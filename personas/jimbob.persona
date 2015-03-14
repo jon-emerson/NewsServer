@@ -1,0 +1,147 @@
+# Jim Bob is a farmer who produces corn for ADM.
+name: "Jimmy Bob Thornton"
+email: "jimbob_the_farmer@gmail.com"
+good_url: "http://dealbook.nytimes.com/2014/07/07/a-departure-for-a-d-m-in-3-1-billion-deal/"
+good_url: "http://dealbook.nytimes.com/2012/11/14/graincorp-rebuffs-2-8-billion-bid-by-archer-daniels/"
+good_url: "http://www.washingtonpost.com/blogs/wonkblog/wp/2012/08/16/a-brief-history-of-u-s-corn-in-one-chart/"
+good_url: "http://www.washingtonpost.com/politics/final-2012-drought-report-shows-corn-harvest-took-hardest-hit/2013/01/13/a66113d2-5c45-11e2-88d0-c4cf65c3ad15_story.html"
+good_url: "http://www.washingtonpost.com/lifestyle/food/farm-bill-why-dont-taxpayers-subsidize-the-foods-that-are-better-for-us/2014/02/14/d7642a3c-9434-11e3-84e1-27626c5ef5fb_story.html"
+good_url: "http://www.bloomberg.com/news/articles/2014-09-16/record-corn-filling-silos-means-lower-prices-for-farmers"
+good_url: "http://fortune.com/2012/08/27/the-many-many-uses-for-corn/"
+good_url: "http://fortune.com/2013/04/12/the-fuel-that-could-be-the-end-of-ethanol/"
+good_url: "http://fortune.com/2012/01/31/ethanols-food-fuel-dilemma/"
+good_url: "http://www.agweb.com/article/farm-bill-decisions-are-you-sure-thats-the-right-program-for-your-farm-NAA-jo-windmann/"
+good_url: "http://www.agweb.com/article/farmland-values-under-pressure--NAA-sara-schafer/"
+good_url: "http://www.agweb.com/article/before-you-buy-crop-insurance-4-things-you-need-to-know-now-NAA-alison-rice/"
+good_url: "http://www.huffingtonpost.com/2013/12/18/adm-moving-global-headqua_n_4466314.html"
+good_url: "http://www.huffingtonpost.com/2013/11/01/adm-incentives-legislatio_n_4191148.html"
+good_url: "http://www.huffingtonpost.com/2013/10/02/adm-tax-breaks_n_4030132.html"
+good_url: "http://www.huffingtonpost.com/2013/12/21/adm-bribery_n_4486141.html"
+bad_url: "http://techcrunch.com/2015/02/03/alan-eustace-google/"
+bad_url: "http://techcrunch.com/2013/04/23/google-buys-wavii-for-north-of-30-million/"
+bad_url: "http://techcrunch.com/2014/01/07/yahoo-launches-news-digest-its-first-app-based-on-summly/"
+bad_url: "http://allthingsd.com/20130325/yahoo-paid-30-million-in-cash-for-18-months-of-young-summly-entrepreneurs-time/"
+bad_url: "http://techcrunch.com/2015/01/27/techstars-ventures-raises-150-million-as-it-expands-into-series-a-investments/"
+bad_url: "http://techcrunch.com/2015/01/20/microsoft-acquires-text-analysis-service-equivio/"
+bad_url: "http://techcrunch.com/2015/01/29/secret-co-founder-chrys-bader-wechseler-steps-down-because-its-not-about-design-anymore/"
+bad_url: "http://techcrunch.com/2015/01/29/google-q4-2014-earnings/"
+bad_url: "http://techcrunch.com/2015/01/26/favados-new-app-helps-you-find-the-best-grocery-deals/"
+bad_url: "http://techcrunch.com/2015/01/29/google-glass-patrick-pichette/"
+bad_url: "http://mashable.com/2015/01/27/apple-watch-april/"
+bad_url: "http://mashable.com/2015/01/30/innovative-at-work/"
+bad_url: "http://www.nytimes.com/aponline/2015/01/30/business/ap-us-google-money-management.html"
+bad_url: "http://www.nytimes.com/aponline/2014/04/11/us/ap-us-salesforce-san-francisco-lease.html"
+bad_url: "http://www.fastcompany.com/3041435/revolutionizing-work/startups-revolutionizing-work"
+bad_url: "http://arstechnica.com/gadgets/2015/01/microsoft-to-invest-in-cyanogen-hopes-to-take-android-away-from-google/"
+bad_url: "http://startupworkout.com/motivation-121-epic-business-quotes-to-inspire-your-success/"
+bad_url: "http://www.slate.com/articles/health_and_science/science/2014/06/facebook_unethical_experiment_it_made_news_feeds_happier_or_sadder_to_manipulate.html"
+bad_url: "http://recode.net/2014/04/24/exclusive-google-head-vic-gundotra-leaving-company/"
+bad_url: "http://bits.blogs.nytimes.com/2014/04/24/vic-gundotra-google-plus-lead-departing/"
+bad_url: "http://recode.net/2014/10/24/google-ceo-larry-page-reorgs-staff-anoints-sundar-pichai-as-new-product-czar/"
+bad_url: "http://techcrunch.com/2014/09/23/gobble-launch/"
+bad_url: "http://www.nytimes.com/2015/01/16/business/swiss-national-bank-euro-franc-exchange-rate.html"
+bad_url: "http://money.cnn.com/2014/02/19/technology/social/facebook-whatsapp/"
+bad_url: "http://www.washingtonpost.com/world/russias-putin-prepares-to-annex-crimea/2014/03/18/933183b2-654e-45ce-920e-4d18c0ffec73_story.html"
+bad_url: "http://arstechnica.com/security/2014/04/vicious-heartbleed-bug-bites-millions-of-android-phones-other-devices/"
+bad_url: "http://techcrunch.com/2014/05/28/apple-buys-beats-electronics-for-3b/"
+bad_url: "http://arstechnica.com/apple/2014/09/apple-announces-iphone-6-iphone-6-plus/"
+bad_url: "http://arstechnica.com/science/2015/01/have-a-scientific-problem-steal-an-answer-from-nature/"
+bad_url: "http://www.cnn.com/2014/11/28/tech/innovation/smart-sports-equipment/index.html"
+bad_url: "http://www.theverge.com/2014/10/15/6982167/google-android-5-0-l-lollipop-announcement-release"
+bad_url: "http://techcrunch.com/2014/09/09/announces-mobile-payments-solution-called-apple-pay/"
+bad_url: "http://techcrunch.com/2014/03/25/best-y-combinator-demo-day-startups/"
+bad_url: "https://medium.com/@chrismessina/thoughts-on-google-8883844a9ca4"
+bad_url: "http://www.nytimes.com/2014/10/27/business/media/how-facebook-is-changing-the-way-its-users-consume-journalism.html"
+bad_url: "http://venturebeat.com/2015/01/30/google-ventures-releases-new-diy-guide-to-help-startups-design-better-products/"
+bad_url: "http://venturebeat.com/2015/01/29/googles-eric-schmidt-has-a-10-year-prediction-of-how-tech-will-disrupt-whole-industries/"
+bad_url: "http://www.pcmag.com/article2/0,2817,2430291,00.asp"
+bad_url: "http://www.theverge.com/2014/2/7/5389668/bitcoin-exchange-mt-gox-halts-withdrawals-maintenance"
+bad_url: "http://www.redherring.com/finance/uber-raises-another-1-2bn-staggering-40bn-valuation/"
+bad_url: "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/"
+bad_url: "http://www.wired.com/2015/01/facebook-making-news-feed-better-asking-real-people-direct-questions/"
+bad_url: "http://www.wired.com/2015/01/smartest-richest-companies-cant-crack-mobile-future-belongs-anyone-can/"
+bad_url: "http://money.cnn.com/2015/02/04/technology/apple-watch-flop/index.html"
+bad_url: "http://techcrunch.com/2015/02/04/disrupt-ny-battlefield-applications-are-open-so-apply-now/"
+bad_url: "http://techcrunch.com/2015/02/04/bunkr-is-now-the-definitive-modern-presentation-tool-for-the-web/"
+bad_url: "http://techcrunch.com/2015/02/04/microsoft-sunrise/"
+bad_url: "http://recode.net/2015/02/05/twitter-cuts-off-employee-access-to-its-metrics/"
+bad_url: "http://recode.net/2015/02/05/linkedin-beats-earnings-estimates-as-more-employers-seek-talent/"
+bad_url: "http://recode.net/2015/02/06/getting-past-the-catch-22-of-venture-capital/"
+bad_url: "http://techcrunch.com/2015/02/05/twitter-confirms-new-google-firehose-deal-to-distribute-traffic-to-logged-out-users/"
+bad_url: "http://techcrunch.com/2015/02/08/google-odysee/"
+bad_url: "http://techcrunch.com/2014/01/26/google-deepmind/"
+bad_url: "http://www.technologyreview.com/news/524026/is-google-cornering-the-market-on-deep-learning/"
+bad_url: "http://techcrunch.com/2015/02/08/startups-a-rich-mans-game/"
+bad_url: "http://techcrunch.com/2015/02/10/yelp-gulps-eat24/"
+bad_url: "http://bits.blogs.nytimes.com/2015/02/10/yelp-buys-eat24-an-online-food-ordering-service-for-134-million/"
+bad_url: "http://techcrunch.com/2015/02/10/flipboard-web/"
+bad_url: "http://techcrunch.com/2015/02/12/expedia-buys-orbitz-for-1-6b-in-cash-to-square-up-to-priceline/"
+bad_url: "http://techcrunch.com/2015/02/12/linkedin-battens-down-the-hatches-on-api-use-limiting-full-access-to-partners/"
+bad_url: "http://techcrunch.com/2015/02/13/google-pulls-its-helpouts-mobile-applications-from-the-app-stores/"
+bad_url: "http://recode.net/2015/02/19/social-marketing-company-livefyre-announces-47-million-in-funding/"
+bad_url: "http://www.theverge.com/2015/2/19/8073273/youtube-kids-android-app-for-children"
+bad_url: "http://bits.blogs.nytimes.com/2015/02/19/yahoo-unveils-tools-for-making-mobile-apps/"
+bad_url: "http://recode.net/2015/02/19/social-marketing-company-livefyre-announces-47-million-in-funding/"
+bad_url: "https://gigaom.com/2015/02/19/googles-inbox-lands-on-tablets-works-in-firefox-and-safari-too/"
+bad_url: "http://takingnote.blogs.nytimes.com/2015/02/19/putting-a-price-on-privacy-29/"
+bad_url: "http://mashable.com/2015/02/18/yahoo-mobile-developers/"
+bad_url: "http://techcrunch.com/2015/02/19/entrepreneur-first-hatches-latest-startups-partners-with-media-power-players/"
+bad_url: "http://www.forbes.com/sites/bryanstolle/2015/02/04/ready-aim-fire-part-1-how-to-execute-successfully-every-time/"
+bad_url: "http://www.forbes.com/sites/bryanstolle/2015/02/23/ready-aim-fire-how-to-execute-successfully-every-time-part-2/"
+bad_url: "http://techcrunch.com/2015/02/25/apple-watch-this-space/"
+bad_url: "https://gigaom.com/2015/03/04/ibm-acquires-deep-learning-startup-alchemyapi/"
+bad_url: "https://gigaom.com/2015/03/04/product-hunt-is-using-its-megaphone-to-tackle-startup-depression/"
+bad_url: "http://firstround.com/article/Evernotes-CTO-on-Your-Biggest-Security-Worries-From-Three-Employees-to-300"
+bad_url: "http://www.popphoto.com/how-to/2015/02/10-tips-using-darkness-your-photography"
+bad_url: "http://www.popphoto.com/gear/2015/02/hands-tamron-15-30mm-f28-di-vc-wide-angle-zoom-lens"
+bad_url: "http://www.popphoto.com/how-to/2015/02/how-to-using-drone-dramatic-nature-photos"
+bad_url: "http://www.popphoto.com/how-to/2015/02/mark-seligers-oscar-portraits-fanciest-photo-booth-setup-around"
+bad_url: "http://www.popphoto.com/gear/2015/02/open-post-looking-back-25-years-photoshop"
+bad_url: "http://www.popphoto.com/gear/2015/02/kickstarter-beehive-picture-hangers-designed-to-combat-crooked-frames"
+bad_url: "http://www.popphoto.com/gear/2015/02/nikon-releases-d750-dslr-filmmaker-s-kit-4000"
+bad_url: "http://www.popphoto.com/gear/2015/02/new-gear-nikon-d810a-first-full-frame-astrophotography-camera"
+bad_url: "http://www.popphoto.com/how-to/2015/02/behind-scenes-photographing-benedict-cumberbatch-vanity-fair"
+bad_url: "http://www.popphoto.com/how-to/2015/02/how-to-using-drone-dramatic-nature-photos"
+bad_url: "http://www.medicalnewstoday.com/releases/290616.php"
+bad_url: "http://www.medicalnewstoday.com/releases/290615.php"
+bad_url: "http://www.medicalnewstoday.com/releases/290614.php"
+bad_url: "http://www.medicalnewstoday.com/releases/290613.php"
+bad_url: "http://www.medicalnewstoday.com/releases/290612.php"
+interest {
+  id: "54fe4f60e4b08410bdd85058"
+  type: INTENT
+  source: USER
+  create_time: 1425952608749
+  intent_code: "indst"
+}
+interest {
+  id: "55035cf0e4b097661cf660c9"
+  type: LINKED_IN_CONTACTS
+  source: USER
+  create_time: 1426283760126
+}
+interest {
+  id: "55035cf0e4b097661cf660ca"
+  type: ADDRESS_BOOK_CONTACTS
+  source: USER
+  create_time: 1426283760539
+}
+interest {
+  id: "55036fcfe4b05c7064a87735"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426288591372
+  industry_code: 10540 # Farming
+}
+interest {
+  id: "55034c01e4b097661cf660b1"
+  type: ENTITY
+  source: USER
+  create_time: 1426279425145
+  entity {
+    id: "54fc8cf3d4c6d6801f26713d"
+    keyword: "Archer Daniels Midland"
+    type: "c"
+    source: USER
+  }
+}

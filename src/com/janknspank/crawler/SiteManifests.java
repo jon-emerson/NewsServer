@@ -26,6 +26,10 @@ import com.janknspank.database.Validator;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.proto.CrawlerProto.TestInstructions.ArticleUrlDetectorChecks;
 
+/**
+ * Helper class for reading and returning SiteManifest objects, as interpreted
+ * from .manifest files in /sites/.
+ */
 public class SiteManifests {
   private static final Logger LOG = new Logger(SiteManifests.class);
   private static Map<String, SiteManifest> CONTENT_SITE_MAP = null;

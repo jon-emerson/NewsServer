@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Converts Google Protocl Buffer files (*.proto) to their respective *.java
+# Converts Google Protocol Buffer files (*.proto) to their respective *.java
 # generated sources, putting them in /genfiles/.
 
 protoc \
@@ -11,6 +11,7 @@ protoc \
     src/com/janknspank/proto/enums.proto \
     src/com/janknspank/proto/interpreter.proto \
     src/com/janknspank/proto/local.proto \
+    src/com/janknspank/proto/rank.proto \
     src/com/janknspank/proto/user.proto \
     -Isrc/ \
     -Isupport/ \

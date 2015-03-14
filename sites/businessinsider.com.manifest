@@ -33,6 +33,9 @@ test_instructions {
   }
 }
 feature_boost_pattern {
+  boost: -2 # Have had some complaints that article quality here isn't as good as other sites.
+}
+feature_boost_pattern {
   feature_id: 10514 # Financial Services
   boost: 1
 }

@@ -1,0 +1,44 @@
+// Objects to help with article ranking at user query time.
+
+import "com/janknspank/database/extensions.proto";
+import "com/janknspank/proto/user.proto";
+
+option java_package = "com.janknspank.proto";
+option java_outer_classname = "RankProto";
+
+// Defines a person for ranking training purposes.  Specifies the person's
+// interests, LinkedIn and address book contacts, and articles that the person
+// would like to read or not read.
+
+message Persona {
+  // A name for this person.  Not really used for much of anything now,
+  // but helpful to keep in mind who our different personas are so we can
+  // talk about them.
+  optional string name = 1 [
+    (required) = YES,
+    (string_length) = 767
+  ];
+
+  optional string email = 2 [
+    (required) = YES,
+    (string_length) = 767
+  ];
+
+  repeated string good_url = 3 [
+    (string_length) = 767
+  ];
+
+  repeated string bad_url = 4 [
+    (string_length) = 767
+  ];
+
+  repeated string linked_in_contact_name = 5 [
+    (string_length) = 767
+  ];
+
+  repeated string address_book_contact_name = 6 [
+    (string_length) = 767
+  ];
+
+  repeated Interest interest = 7;
+}

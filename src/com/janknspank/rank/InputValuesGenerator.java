@@ -1,11 +1,11 @@
 package com.janknspank.rank;
 
-import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.EntityType;
+import com.janknspank.bizness.Intent;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
@@ -13,11 +13,11 @@ import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.StartupFeatureHelper;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
+import com.janknspank.proto.ArticleProto.ArticleFeature.Type;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
-import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
 import com.janknspank.proto.UserProto.User;
 
 /**
@@ -25,11 +25,22 @@ import com.janknspank.proto.UserProto.User;
  */
 public class InputValuesGenerator {
   public static double relevanceToUserIndustries(User user, Article article) {
-    double relevance = 0;
-    for (FeatureId industryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
-      relevance += getSimilarityToIndustry(article, industryFeatureId);
+    double highestRelevance = 0;
+    for (ArticleFeature feature : article.getFeatureList()) {
+      if (feature.getType() == Type.ABOUT_INDUSTRY) {
+        highestRelevance = Math.max(highestRelevance, feature.getSimilarity());
+      }
     }
-    return Math.min(1.0, relevance);
+    double userRelevance = 0;
+    for (FeatureId industryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
+      userRelevance = Math.max(userRelevance, getSimilarityToIndustry(article, industryFeatureId));
+    }
+    // If this article's relevance to the user corresponds to the article's
+    // strongest industry relevance, reward it (by not decrementing it).
+    // This helps punish articles-about-everything.
+    return (Math.abs(highestRelevance - userRelevance) < 0.05)
+        ? userRelevance
+        : Math.max(0, userRelevance - 0.1);
   }
 
   public static double relevanceToSocialMedia(User user, Article article) {
@@ -55,60 +66,46 @@ public class InputValuesGenerator {
     return count;
   }
 
-  public static double relevanceToCurrentEmployer(User user, Article article) {
-    if (user.hasLinkedInProfile()) {
-      Employer currentEmployer = user.getLinkedInProfile().getCurrentEmployer();
-      if (currentEmployer != null) {
-        for (ArticleKeyword keyword : article.getKeywordList()) {
-          if (currentEmployer.getName().equals(keyword.getKeyword())) {
-            return (double) keyword.getStrength() / 20;
+  public static double relevanceToCompanyEntities(User user, Article article) {
+    double value = 0;
+    for (Interest interest : UserInterests.getInterests(user)) {
+      if (interest.getType() == InterestType.ENTITY
+          && EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.ORGANIZATION)) {
+        String keyword = interest.getEntity().getKeyword();
+        if (article.getTitle().contains(keyword)) {
+          value += 0.1;
+        }
+        if (article.getParagraph(0).contains(keyword)) {
+          value += 0.05;
+        }
+        for (ArticleKeyword articleKeyword : article.getKeywordList()) {
+          if (articleKeyword.getKeyword().contains(keyword) ||
+              keyword.contains(articleKeyword.getKeyword())) {
+            value += 0.1;
           }
         }
       }
     }
-    return 0;
-  }
-
-  public static double relevanceToCompaniesTheUserWantsToWorkAt(User user, Article article) {
-    return 0;
-  }
-
-  public static double relevanceToPastEmployers(User user, Article article) {
-    double relevance = 0.0;
-    if (user.hasLinkedInProfile()) {
-      List<Employer> pastEmployers = user.getLinkedInProfile().getPastEmployerList();
-      for (Employer employer : pastEmployers) {
-        for (ArticleKeyword keyword : article.getKeywordList()) {
-          if (employer.getName().equals(keyword.getKeyword())) {
-            relevance += (double) keyword.getStrength() / 20;
-          }
-        }
-      }
-    }
-    return Math.min(1, relevance);
-  }
-
-  public static double relevanceToCurrentRole(User user, Article article) {
-    return 0;
-  }
-
-  public static double articleTextQualityScore(Article article) {
-    return 0;
+    return Math.min(1, value);
   }
 
   public static double relevanceToStartupIntent(User user, Article article) {
-//    for (Intent intent : user.getIntentList()) {
-//      if (intent.getCode() == IntentCodes.START_COMPANY.getCode()) {
-        for (ArticleFeature articleFeature : article.getFeatureList()) {
-          FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
-          if (StartupFeatureHelper.isStartupFeature(featureId) &&
-              StartupFeatureHelper.isRelatedToIndustries(
-                  featureId, UserIndustries.getIndustryFeatureIds(user))) {
-            return articleFeature.getSimilarity();
-          }
-        }
-//      }
-//    }
+    boolean foundStartupIntent = false;
+    for (Interest interest : user.getInterestList()) {
+      foundStartupIntent |= (interest.getType() == InterestType.INTENT
+          && interest.getIntentCode().equals(Intent.START_COMPANY.getCode()));
+    }
+    if (!foundStartupIntent) {
+      return 0;
+    }
+    for (ArticleFeature articleFeature : article.getFeatureList()) {
+      FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
+      if (StartupFeatureHelper.isStartupFeature(featureId) &&
+          StartupFeatureHelper.isRelatedToIndustries(
+              featureId, UserIndustries.getIndustryFeatureIds(user))) {
+        return articleFeature.getSimilarity();
+      }
+    }
     return 0;
   }
 

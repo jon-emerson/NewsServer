@@ -38,3 +38,6 @@ test_instructions {
     non_article_url: "http://www.cbc.ca/services/consumer_recordings.html"
   }
 }
+feature_boost_pattern {
+  boost: -3 # Slight downrank due to Canadian-orientedness of site.
+}

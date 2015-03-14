@@ -3,13 +3,13 @@ package com.janknspank.rank;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.nnet.learning.BackPropagation;
 
+import com.janknspank.common.Asserts;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 13;
+  static final int INPUT_NODES_COUNT = 9;
   static final int OUTPUT_NODES_COUNT = 1;
-  //static final int HIDDEN_NODES_COUNT = INPUT_NODES_COUNT + OUTPUT_NODES_COUNT + 1;
   static final int HIDDEN_NODES_COUNT = 9;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_" +
       INPUT_NODES_COUNT + "in-" + HIDDEN_NODES_COUNT + "hidden-" +
@@ -34,53 +34,41 @@ public final class NeuralNetworkScorer extends Scorer {
   }
 
   static double[] generateInputNodes(User user, Article article) {
+    Asserts.assertNotNull(user, "user", NullPointerException.class);
+    Asserts.assertNotNull(article, "article", NullPointerException.class);
     return new double[] {
-        // 1. Relevance to user's industries
-        InputValuesGenerator.relevanceToUserIndustries(user, article),
+      // 0. Relevance to user's industries
+      InputValuesGenerator.relevanceToUserIndustries(user, article),
 
-        // 2. Relevance to social media
-        InputValuesGenerator.relevanceToSocialMedia(user, article),
+      // 1. Relevance to social media
+      InputValuesGenerator.relevanceToSocialMedia(user, article),
 
-        // 3. Relevance to contacts
-        InputValuesGenerator.relevanceToContacts(user, article),
+      // 2. Relevance to contacts
+      InputValuesGenerator.relevanceToContacts(user, article),
 
-        // 4. Relevance to current employer
-        InputValuesGenerator.relevanceToCurrentEmployer(user, article),
+      // 3. Company / organization entities being followed.
+      InputValuesGenerator.relevanceToCompanyEntities(user, article),
 
-        // 5. Relevance to companies the user wants to work at
-        InputValuesGenerator.relevanceToCompaniesTheUserWantsToWorkAt(user, article),
+      // 4. Relevance to startup vector for people with that intent.
+      InputValuesGenerator.relevanceToStartupIntent(user, article),
 
-        // 6. Relevance to current role
-        InputValuesGenerator.relevanceToCurrentRole(user, article),
+      // 5. Relevance to acquisitions.
+      InputValuesGenerator.relevanceToAcquisitions(user, article),
 
-        // 7. Past employers
-        InputValuesGenerator.relevanceToPastEmployers(user, article),
+      // 6. Relevance to launches.
+      InputValuesGenerator.relevanceToLaunches(user, article),
 
-        // 8. Article text quality
-        InputValuesGenerator.articleTextQualityScore(article),
+      // 7. Relevance to start-up fundraising rounds.
+      InputValuesGenerator.relevanceToFundraising(user, article),
 
-        // 9. Relevance to startup vector for people with that intent
-        InputValuesGenerator.relevanceToStartupIntent(user, article),
-
-        // 10. Relevance to acquisitions
-        InputValuesGenerator.relevanceToAcquisitions(user, article),
-
-        // 11. Relevance to launches
-        InputValuesGenerator.relevanceToLaunches(user, article),
-
-        // 12. Relevance to fundraising
-        InputValuesGenerator.relevanceToFundraising(user, article),
-
-        // 13. Pop culture score.
-        InputValuesGenerator.relevanceToPopCulture(article)
+      // 8. Pop culture score.
+      InputValuesGenerator.relevanceToPopCulture(article)
     };
   }
 
   /**
-   * generate an nodes array with all indexes = 0 except for the specified
-   * index 
-   * @param i
-   * @return
+   * Generate an nodes array with all indexes = 0 except for the specified
+   * index.
    */
   static double[] generateIsolatedInputNodes(int enabledIndex) {
     double[] inputs = new double[INPUT_NODES_COUNT];
@@ -90,10 +78,10 @@ public final class NeuralNetworkScorer extends Scorer {
     return inputs;
   }
 
-  // V1 has a general rank - one neural network for all intents. No mixing.
-  // Slow architecture. Makes too many server calls
   @Override
   public double getScore(User user, Article article) {
+    Asserts.assertNotNull(user, "user", NullPointerException.class);
+    Asserts.assertNotNull(article, "article", NullPointerException.class);
     neuralNetwork.setInput(generateInputNodes(user, article));
     neuralNetwork.calculate();
     return neuralNetwork.getOutput()[0];

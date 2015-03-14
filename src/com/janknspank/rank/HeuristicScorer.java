@@ -29,20 +29,8 @@ public class HeuristicScorer extends Scorer {
     // 3. Relevance to contacts
     score += 0.3 * InputValuesGenerator.relevanceToContacts(user, article);
 
-    // 4. Relevance to current employer
-    score += 0.2 * InputValuesGenerator.relevanceToCurrentEmployer(user, article);
-
-    // 5. Relevance to companies the user wants to work at
-    score += 0.2 * InputValuesGenerator.relevanceToCompaniesTheUserWantsToWorkAt(user, article);
-
-    // 6. Relevance to current role
-    score += 0.1 * InputValuesGenerator.relevanceToCurrentRole(user, article);
-
-    // 7. Past employers
-    score += 0.1 * InputValuesGenerator.relevanceToPastEmployers(user, article);
-
-    // 8. Article text quality
-    score += 0.1 * InputValuesGenerator.articleTextQualityScore(article);
+    // 4. Past employers
+    score += 0.1 * InputValuesGenerator.relevanceToCompanyEntities(user, article);
 
     return score;
   }
