@@ -55,8 +55,8 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
    * good images vs. bad images, so we just make sure the first article has an
    * image (if possible).
    */
-  private Iterable<Article> putImageArticleFirst(Iterable<Article> articles) {
-    Article firstImageArticle = Iterables.find(articles, new Predicate<Article>() {
+  private Iterable<Article> putImageArticleFirst(final Iterable<Article> articles) {
+    final Article firstImageArticle = Iterables.find(articles, new Predicate<Article>() {
       @Override
       public boolean apply(Article article) {
         return (article.hasImageUrl());
