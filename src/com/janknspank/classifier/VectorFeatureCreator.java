@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -231,7 +233,7 @@ public class VectorFeatureCreator {
    */
   public static void main(String args[]) throws Exception {
     // 1. Figure out which features to regenerate from args.
-    Set<FeatureId> featuresToRegenerate = new HashSet<>();
+    List<FeatureId> featuresToRegenerate = Lists.newArrayList();
     if (args.length > 0) {
       if (args[0].equals("all")) {
         Iterables.addAll(featuresToRegenerate, VectorFeature.getDefinedFeatureIds());
@@ -248,6 +250,12 @@ public class VectorFeatureCreator {
         }
       }
     }
+    Collections.sort(featuresToRegenerate, new Comparator<FeatureId>() {
+      @Override
+      public int compare(FeatureId featureId1, FeatureId featureId2) {
+        return Integer.compare(featureId1.getId(), featureId2.getId());
+      }
+    });
 
     // 2. Regenerate vector and distribution files for the specified features.
     for (FeatureId featureId : featuresToRegenerate) {

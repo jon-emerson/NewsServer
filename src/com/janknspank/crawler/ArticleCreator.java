@@ -67,7 +67,7 @@ class ArticleCreator {
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+([A-Z][A-Za-z]+\\.com)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|—)\\s+[A-Z][A-Za-z\\s'']{2,25}$")};
-  private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
+  private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s|\\xA0)+");
 
   // It's a neat trick that stems of 4 characters are actually better than stems
   // closer to full-word lengths.  Do note, that stems of 5 or 6 characters are
@@ -485,7 +485,8 @@ class ArticleCreator {
     return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
   }
 
-  private static Set<String> getDedupingStems(String articleTitle) {
+  @VisibleForTesting
+  static Set<String> getDedupingStems(String articleTitle) {
     Set<String> stems = Sets.newHashSet();
     for (String word : Splitter.on(WHITESPACE_PATTERN).split(articleTitle)) {
       String stemWord = KeywordUtils.cleanKeyword(word).toLowerCase();

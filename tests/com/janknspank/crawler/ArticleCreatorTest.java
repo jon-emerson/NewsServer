@@ -8,11 +8,12 @@ import java.io.FileReader;
 import java.io.StringReader;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Set;
 
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableSet;
 import com.janknspank.common.DateParserTest;
-import com.janknspank.crawler.ArticleCreator;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.ArticleProto.Article;
@@ -27,9 +28,22 @@ public class ArticleCreatorTest {
       .setDiscoveryTime(500L)
       .build();
 
-  public void testCleanTitle() {
-    assertEquals("Basketball, Startups, and Life",
-        ArticleCreator.cleanTitle("Basketball, Startups, and Life – AVC"));
+//  @Test
+//  public void testCleanTitle() {
+//    assertEquals("Basketball, Startups, and Life",
+//        ArticleCreator.cleanTitle("Basketball, Startups, and Life – AVC"));
+//  }
+
+  @Test
+  public void test() {
+    Set<String> dedupingStems = ImmutableSet.copyOf(
+        ArticleCreator.getDedupingStems(
+            "Facebook acquires its way into e-commerce by buying TheFind"));
+    assertTrue("Expected stem: face", dedupingStems.contains("face"));
+    assertTrue("Expected stem: acqu", dedupingStems.contains("acqu"));
+    assertTrue("Expected stem: e-co", dedupingStems.contains("e-co"));
+    assertTrue("Expected stem: buyi", dedupingStems.contains("buyi"));
+    assertTrue("Expected stem: thef", dedupingStems.contains("thef"));
   }
 
   /**

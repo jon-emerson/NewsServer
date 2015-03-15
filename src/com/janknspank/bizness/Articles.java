@@ -103,16 +103,7 @@ public class Articles {
     return bestArticles;
   }
 
-  /**
-   * This is the best method for getting articles relevant to the current user!!
-   * This is probably what you're looking for! :)
-   */
-  public static Iterable<Article> getRankedArticles(User user, Scorer scorer, int limit)
-      throws DatabaseSchemaException, BiznessException {
-    return getRankedArticlesAndScores(user, scorer, limit);
-  }
-
-  public static TopList<Article, Double> getRankedArticlesAndScores(
+  public static TopList<Article, Double> getRankedArticles(
       User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
     Set<String> urls = Sets.newHashSet();

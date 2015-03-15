@@ -36,7 +36,7 @@ public class ViewFeedServlet extends StandardServlet {
       // Uncomment to play with profile data
 
       final TopList<Article, Double> rankedArticlesAndScores =
-          Articles.getRankedArticlesAndScores(user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
+          Articles.getRankedArticles(user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
       return new SoyMapData(
           "sessionKey", this.getSession(req).getSessionKey(),
           "articles", ArticleSoy.toSoyListData(
