@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.Articles;
@@ -25,6 +28,14 @@ import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 
 public abstract class AbstractArticlesServlet extends StandardServlet {
+  private static final Set<Integer> SHOW_IMAGE_OFFSETS = ImmutableSet.of(
+      1, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+      73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149,
+      151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227,
+      229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307,
+      311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389,
+      397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467,
+      479, 487, 491, 499);
   protected abstract Iterable<Article> getArticles(HttpServletRequest req)
       throws BiznessException, DatabaseSchemaException, DatabaseRequestException, RequestException;
 
@@ -38,15 +49,38 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     return article.getUrl().startsWith("http://www.t");
   }
 
+  /**
+   * Transforms the passed Article iterable so that the first article tends to
+   * have a good image associated with it.  For now, we don't know much about
+   * good images vs. bad images, so we just make sure the first article has an
+   * image (if possible).
+   */
+  private Iterable<Article> putImageArticleFirst(Iterable<Article> articles) {
+    Article firstImageArticle = Iterables.find(articles, new Predicate<Article>() {
+      @Override
+      public boolean apply(Article article) {
+        return (article.hasImageUrl());
+      }
+    });
+    return Iterables.concat(ImmutableList.of(firstImageArticle),
+        Iterables.filter(articles, new Predicate<Article>() {
+      @Override
+      public boolean apply(Article article) {
+        return article != firstImageArticle;
+      }
+    }));
+  }
+
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, DatabaseRequestException, RequestException, BiznessException {
     JSONObject response = createSuccessResponse();
 
-    Iterable<Article> articles = getArticles(req);
+    Iterable<Article> articles = putImageArticleFirst(getArticles(req));
     JSONArray articlesJson = new JSONArray();
+    int i = 1;
     for (Article article : articles) {
-      articlesJson.put(serialize(article, getUserKeywordSet(getUser(req))));
+      articlesJson.put(serialize(article, getUserKeywordSet(getUser(req)), i++));
     }
     response.put("articles", articlesJson);
     return response;
@@ -62,7 +96,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     return userKeywordSet;
   }
 
-  private JSONObject serialize(Article article, Set<String> userKeywordSet) {
+  private JSONObject serialize(Article article, Set<String> userKeywordSet, int offset) {
     JSONObject articleJson = Serializer.toJSON(article);
     List<String> paragraphs = article.getParagraphList();
     articleJson.put("first_paragraphs", toJsonArray(
@@ -71,6 +105,9 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
         paragraphs.subList(0, Math.min(3, paragraphs.size()))));
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));
     articleJson.put("keyword", Serializer.toJSON(getArticleKeywords(article, userKeywordSet)));
+    if (SHOW_IMAGE_OFFSETS.contains(offset)) {
+      articleJson.put("show_image", true);
+    }
 
     // Replace the published time with the crawl time, since people often just
     // give a date for a publish time, so without this, the clients are showing
