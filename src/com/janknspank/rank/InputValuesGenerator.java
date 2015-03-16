@@ -16,8 +16,10 @@ import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleFeature.Type;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
 
 /**
@@ -52,18 +54,37 @@ public class InputValuesGenerator {
   public static double relevanceToContacts(User user, Article article) {
     Set<String> contactsKeywords = Sets.newHashSet();
     for (Interest interest : UserInterests.getInterests(user)) {
-      if (interest.getType() == InterestType.ENTITY &&
-          EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.PERSON)) {
+      if (interest.getType() == InterestType.ENTITY
+          && EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.PERSON)) {
         contactsKeywords.add(interest.getEntity().getKeyword());
       }
-    }
-    int count = 0;
-    for (ArticleKeyword keyword : article.getKeywordList()) {
-      if (contactsKeywords.contains(keyword.getKeyword())) {
-        count++;
+      if (interest.getType() == InterestType.ADDRESS_BOOK_CONTACTS) {
+        for (AddressBookContact contact : user.getAddressBookContactList()) {
+          contactsKeywords.add(contact.getName());
+        }
+      }
+      if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
+        for (LinkedInContact contact : user.getLinkedInContactList()) {
+          contactsKeywords.add(contact.getName());
+        }
       }
     }
-    return count;
+    double value = 0;
+    for (String keyword : contactsKeywords) {
+      if (article.getTitle().contains(keyword)) {
+        value += 0.1;
+      }
+      if (article.getParagraph(0).contains(keyword)) {
+        value += 0.05;
+      }
+      for (ArticleKeyword articleKeyword : article.getKeywordList()) {
+        if (articleKeyword.getKeyword().contains(keyword) ||
+            keyword.contains(articleKeyword.getKeyword())) {
+          value += 0.1;
+        }
+      }
+    }
+    return Math.min(1, value);
   }
 
   public static double relevanceToCompanyEntities(User user, Article article) {
