@@ -31,7 +31,9 @@
     <div class="article-card">
       <div class="article-left">
         <div class="image-container">
-          <img src="{$article.image_url}"/>
+          {if isNonnull($article.image_url)}
+            <img src="{$article.image_url}"/>
+          {/if}
           <div class="tag-container">
             {if isNonnull($article.number)}
               <div class="circle">{$article.number}</div>

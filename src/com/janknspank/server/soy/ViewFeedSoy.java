@@ -42,11 +42,15 @@ public class ViewFeedSoy {
           "url", article.getUrl(),
           "urlId", article.getUrlId(),
           "description", article.getDescription(),
-          "image_url", article.getImageUrl(),
           "score", scoreFunction.apply(article),
           "inputNodes", getInputNodesString(user, article),
           "keywords", getKeywordsString(article),
           "features", getFeaturesString(article));
+
+      // Image url.
+      if (article.hasImageUrl()) {
+        articleSoyMapData.put("image_url", article.getImageUrl());
+      }
 
       // Article number.
       if (++i <= 10) {
@@ -96,11 +100,19 @@ public class ViewFeedSoy {
   }
 
   private static String getFeaturesString(Article article) {
+    List<ArticleFeature> features = Lists.newArrayList(article.getFeatureList());
+    features.sort(new Comparator<ArticleFeature>() {
+      @Override
+      public int compare(ArticleFeature feature1, ArticleFeature feature2) {
+        return -Double.compare(feature1.getSimilarity(), feature2.getSimilarity());
+      }
+    });
+
     StringBuilder sb = new StringBuilder();
     sb.append("Features = [");
     int i = 0;
-    for (ArticleFeature articleFeature : article.getFeatureList()) {
-      if (i++ == 0) {
+    for (ArticleFeature articleFeature : features) {
+      if (i++ != 0) {
         sb.append(", ");
       }
       JSONObject o = new JSONObject();
@@ -128,8 +140,8 @@ public class ViewFeedSoy {
     sb.append("keywords = [");
     int i = 0;
     for (ArticleKeyword keyword : keywords) {
-      if (i++ == 0) {
-        sb.append(",");
+      if (i++ != 0) {
+        sb.append(", ");
       }
       sb.append(Serializer.toJSON(keyword).toString(2));
     }
