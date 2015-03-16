@@ -1,3 +1,149 @@
-.articleImg {
-  max-width: 200px;
+
+body, td {
+  background-color: #666;
+  color: #444;
+  font-family: 'Istok Web', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.4em;
+  margin: 0;
+}
+
+.image-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  width: 480px;
+}
+
+.image-container img {
+  display: block;
+  width: 100%;
+}
+
+.article-card {
+  left: 40px;
+  position: relative;
+}
+
+.article-left {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  width: 480px;
+}
+
+.article-right {
+  color: #aaa;
+  left: 480px;
+  max-height: 400px;
+  padding: 10px 0 0;
+  position: absolute;
+  top: 0;
+  width: calc(100% - 630px);
+}
+
+.article-title a {
+  color: #444;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-body {
+  margin: 0.5em 1em;
+}
+
+.tag-container {
+  position: absolute;
+  left: 1em;
+  top: 1em;
+}
+
+.circle {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  line-height: 26px;
+
+  -moz-border-radius: 24px; /* or 50% */
+  border-radius: 24px; /* or 50% */
+
+  background-color: #7ce;
+  color: white;
+  text-align: center;
+  font-size: 13px;
+  margin-right: 8px;
+}
+
+.tag {
+  display: inline-block;
+  height: 24px;
+  line-height: 26px;
+
+  -moz-border-radius: 24px; /* or 50% */
+  border-radius: 24px; /* or 50% */
+
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  font-size: 13px;
+  margin-right: 8px;
+  padding: 0 12px;
+  border: 1px solid #aaa;
+}
+
+.tag.highlighted {
+  background-color: #ff3f32;
+  color: #fff;
+  border: 0;
+}
+
+.attribution {
+  color: #aaa;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+.tab-bar {
+  padding: 0 40px;
+  position: absolute;
+  z-index: 200;
+}
+
+.tab-bar .tab {
+  background-color: #666;
+  color: #ccc;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 1px;
+  padding: 0 10px;
+}
+
+.tab-bar .tab.selected {
+  background-color: #ccc;
+  border-radius: 20px;
+  color: #000;
+  cursor: default;
+}
+
+.article-details {
+  width: 100%;
+  height: 300px;
+  overflow: auto;
+  border: 5px dotted #aaa;
+  border-radius: 20px;
+  margin: 8px 10px 0;
+  padding: 15px 20px;
+  color: #ccc;
+  display: none;
+}
+
+.article-details.features {
+  display: block;
 }

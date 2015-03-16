@@ -17,7 +17,7 @@ import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.server.soy.ArticleSoy;
+import com.janknspank.server.soy.ViewFeedSoy;
 
 @ServletMapping(urlPattern = "/news/*")
 public class FeatureArticlesServlet extends StandardServlet {
@@ -85,8 +85,9 @@ public class FeatureArticlesServlet extends StandardServlet {
       }
     });
     return new SoyMapData(
-        "articles", ArticleSoy.toSoyListData(
+        "articles", ViewFeedSoy.toSoyListData(
             articles,
+            getUser(req),
             new Function<Article, Double>() {
               @Override
               public Double apply(Article article) {

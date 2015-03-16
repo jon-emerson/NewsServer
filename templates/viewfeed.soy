@@ -7,6 +7,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="resources/css/viewfeed.css">
     <script src="resources/jquery-1.11.2.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Istok+Web:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <script src="resources/viewfeed.js"></script>
@@ -22,20 +23,56 @@
 {/template}
 
 /**
- * Renders the feed
+ * Renders the feed.
  * @param articles
  */
 {template .streamViewer}
   {foreach $article in $articles}
-    <div class="articleCard">
-      <img class="articleImg" src="{$article.image_url}" alt="{$article.title}">
-      <h1>{$article.title}</h1>
-      <a href={$article.url}>{$article.url}</a>
-      <p>{$article.description}</p>
-      <p>Score: {$article.score}</p>
-      <p>Features: <pre>{$article.features}</pre></p>
-      <p>Facebook score: {$article.fb_score}, likes: {$article.fb_likes},
-          shares: {$article.fb_shares}, comments: {$article.fb_comments}</p>
+    <div class="article-card">
+      <div class="article-left">
+        <div class="image-container">
+          <img src="{$article.image_url}"/>
+          <div class="tag-container">
+            {if isNonnull($article.number)}
+              <div class="circle">{$article.number}</div>
+            {/if}
+            {foreach $highlightedTag in $article.highlightedTags}
+              <div class="tag highlighted">{$highlightedTag}</div>
+            {/foreach}
+            {foreach $unhighlightedTag in $article.unhighlightedTags}
+              <div class="tag">{$unhighlightedTag}</div>
+            {/foreach}
+          </div>
+        </div>
+        <div class="article-body">
+          <h1 class="article-title"><a href="{$article.url}" target="_blank">{$article.title}</a></h1>
+          <p>{$article.description}</p>
+          <div class="attribution">{$article.attribution}</div>
+        </div>
+      </div>
+      <div class="article-right">
+        <div class="tab-bar">
+          <div class="tab selected" tab_id="features" url_id="{$article.urlId}">Features</div>
+          <div class="tab" tab_id="inputNodes" url_id="{$article.urlId}">Input Nodes</div>
+          <div class="tab" tab_id="keywords" url_id="{$article.urlId}">Keywords</div>
+          <div class="tab" tab_id="rawArticle" url_id="{$article.urlId}">Raw Article</div>
+        </div>
+        <div class="article-details features" url_id="{$article.urlId}">
+          Score: {$article.score}<br/>
+          Facebook score: {$article.fb_score}, likes: {$article.fb_likes},
+              shares: {$article.fb_shares}, comments: {$article.fb_comments}<br/>
+          <pre>{$article.features}</pre>
+        </div>
+        <div class="article-details inputNodes" url_id="{$article.urlId}">
+          <pre>{$article.inputNodes}</pre>
+        </div>
+        <div class="article-details keywords" url_id="{$article.urlId}">
+          <pre>{$article.keywords}</pre>
+        </div>
+        <div class="article-details rawArticle" url_id="{$article.urlId}">
+          <pre>{$article.rawArticle}</pre>
+        </div>
+      </div>
     </div>
   {/foreach}
 {/template}

@@ -22,6 +22,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.CoreProto.Entity;
@@ -260,6 +261,27 @@ public class Articles {
     return getArticlesForInterests(user,
         ImmutableList.of(Interest.newBuilder().setType(contactType).build()),
         limit);
+  }
+
+  /**
+   * Returns the top 2 keywords for an article, as tuned to the current user.
+   */
+  public static Iterable<ArticleKeyword> getBestKeywords(
+      Article article, Set<String> userKeywordSet) {
+    TopList<ArticleKeyword, Integer> topUserKeywords = new TopList<>(2);
+    TopList<ArticleKeyword, Integer> topNonUserKeyword = new TopList<>(1);
+    for (ArticleKeyword keyword : article.getKeywordList()) {
+      if (userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
+        topUserKeywords.add(keyword, keyword.getStrength());
+      } else if (keyword.getKeyword().length() < 15
+          && !EntityType.fromValue(keyword.getType()).isA(EntityType.PERSON)
+          && !EntityType.fromValue(keyword.getType()).isA(EntityType.PLACE)) {
+        // Only include small-ish keywords because the super long ones are often
+        // crap.
+        topNonUserKeyword.add(keyword, keyword.getStrength());
+      }
+    }
+    return Iterables.limit(Iterables.concat(topUserKeywords, topNonUserKeyword), 2);
   }
 
   /** Helper method for creating the Article table. */

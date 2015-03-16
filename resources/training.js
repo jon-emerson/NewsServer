@@ -16,12 +16,12 @@ function updateRangeLabel(newVal){
 
 $(document).ready(function() {
   updateRangeLabel(50);
-  
+
   $("#form").submit(function(event) {
     event.preventDefault();
-    
+
     $("#submit").prop("disabled", true);
-    
+
     var dataToPost = $("#form").serialize()
     //alert(dataToPost);
     $.post('training', dataToPost, function(data) {

@@ -18,6 +18,7 @@ import org.neuroph.util.TransferFunctionType;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.DatabaseSchemaException;
@@ -92,7 +93,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
       for (String goodUrl : persona.getGoodUrlList()) {
         if (urlArticleMap.containsKey(goodUrl)) {
-          double[] input = NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(goodUrl));
+          double[] input = Doubles.toArray(
+              NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(goodUrl)).values());
           double[] output = new double[] { 1.0 };
           trainingSet.addRow(new DataSetRow(input, output));
         }
@@ -100,7 +102,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
       for (String badUrl : persona.getBadUrlList()) {
         if (urlArticleMap.containsKey(badUrl)) {
-          double[] input = NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(badUrl));
+          double[] input = Doubles.toArray(
+              NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(badUrl)).values());
           double[] output = new double[] { 0.0 };
           trainingSet.addRow(new DataSetRow(input, output));
         }
