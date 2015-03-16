@@ -30,8 +30,8 @@ import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.common.StringHelper;
+import com.janknspank.crawler.ParagraphFinder;
 import com.janknspank.crawler.RequiredFieldException;
-import com.janknspank.crawler.SiteParser;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Validator;
@@ -123,7 +123,7 @@ public class KeywordFinder {
     // Use natural language processing to find keywords in the article text.
     // Only look at the top 2/3rds of the article, since sites tend to put
     // click-bait words in their articles towards the end.
-    Iterable<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
+    Iterable<Node> articleNodes = ParagraphFinder.getParagraphNodes(documentNode);
     articleNodes = Iterables.limit(articleNodes,
         (int) Math.ceil(((double) Iterables.size(articleNodes)) * 2 / 3)); 
     Iterables.addAll(keywords, findParagraphKeywords(urlId, Iterables.transform(articleNodes,
@@ -237,7 +237,7 @@ public class KeywordFinder {
    */
   private Set<String> getWordsInArticle(DocumentNode documentNode)
       throws RequiredFieldException {
-    Iterable<Node> articleNodes = SiteParser.getParagraphNodes(documentNode);
+    Iterable<Node> articleNodes = ParagraphFinder.getParagraphNodes(documentNode);
     articleNodes = Iterables.limit(articleNodes,
         (int) Math.ceil(((double) Iterables.size(articleNodes)) * 2 / 3)); 
     Set<String> wordsInArticle = Sets.newHashSet();
@@ -322,7 +322,7 @@ public class KeywordFinder {
     // this method would return the <a> node only.
     Iterable<Node> childlessChildNodes = Iterables.concat(
         Iterables.transform(
-            SiteParser.getParagraphNodes(documentNode),
+            ParagraphFinder.getParagraphNodes(documentNode),
             new Function<Node, Iterable<Node>>() {
               @Override
               public Iterable<Node> apply(Node paragraph) {

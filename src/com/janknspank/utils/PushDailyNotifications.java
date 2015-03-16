@@ -34,5 +34,6 @@ public class PushDailyNotifications {
         e.printStackTrace();
       }
     }
+    System.exit(0);
   }
 }

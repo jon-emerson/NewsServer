@@ -80,8 +80,16 @@ message SiteManifest {
   }
   repeated PathBlacklist path_blacklist = 5;
 
+  // Any DocumentNode children for articles from this website that match this
+  // CSS-style element selector are considered paragraphs.
   repeated string paragraph_selector = 6 [
     (required) = YES,
+    (string_length) = 767
+  ];
+
+  // For all Nodes that match paragraph_selector, if they or any of their
+  // children also match this this selector, they are excluded as paragraphs.
+  repeated string paragraph_blacklist_selector = 14 [
     (string_length) = 767
   ];
 

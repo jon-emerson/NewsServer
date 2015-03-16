@@ -11,11 +11,13 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 public class Node {
+  private static final String TEXT_LINES_LINE_BREAK_MARKER = "<%-- LINE_BREAK --%>";
   private final Node parent;
   private final ArrayList<Object> children = new ArrayList<>();
   private final Multimap<String, String> attributes = ArrayListMultimap.create();
@@ -232,6 +234,43 @@ public class Node {
         if (!child.getTagName().equalsIgnoreCase("script") &&
             !child.getTagName().equalsIgnoreCase("style")) {
           child.getFlattenedText(sb);
+        }
+      }
+    }
+  }
+
+  /**
+   * Returns a list of all the paragraph-like strings in this list.  Basically,
+   * this is .getFlattenedText, but <br/>-aware too.
+   */
+  public List<String> getTextLines() {
+    StringBuilder sb = new StringBuilder();
+    buildTextLinesStringBuffer(sb);
+
+    ImmutableList.Builder<String> textLinesBuilder = ImmutableList.builder();
+    for (String rawLine : Splitter.on(TEXT_LINES_LINE_BREAK_MARKER).split(sb)) {
+      String line = rawLine.trim();
+      if (line.length() > 0) {
+        textLinesBuilder.add(line);
+      }
+    }
+    return textLinesBuilder.build();
+  }
+
+  private void buildTextLinesStringBuffer(StringBuilder sb) {
+    for (int i = 0; i < getChildCount(); i++) {
+      if (isChildTextNode(i)) {
+        sb.append(getChildText(i));
+      } else {
+        // Ignore scripts and styles - We only want text for humans.
+        Node child = getChildNode(i);
+        String tagName = child.getTagName();
+        if (tagName.equalsIgnoreCase("script") || tagName.equalsIgnoreCase("style")) {
+          // Ignore.
+        } else if (tagName.equalsIgnoreCase("br") || tagName.equalsIgnoreCase("p")) {
+          sb.append(TEXT_LINES_LINE_BREAK_MARKER);
+        } else {
+          child.buildTextLinesStringBuffer(sb);
         }
       }
     }

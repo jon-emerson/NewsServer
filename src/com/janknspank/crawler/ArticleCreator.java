@@ -2,9 +2,7 @@ package com.janknspank.crawler;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +22,6 @@ import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.FeatureClassifier;
 import com.janknspank.classifier.Vector;
 import com.janknspank.common.DateParser;
-import com.janknspank.common.Logger;
 import com.janknspank.common.StringHelper;
 import com.janknspank.crawler.facebook.FacebookData;
 import com.janknspank.crawler.facebook.FacebookException;
@@ -48,12 +45,8 @@ import com.janknspank.proto.CrawlerProto.SiteManifest;
  * classification features, plus Facebook / other social engagement scores.
  */
 class ArticleCreator {
-  private static final Logger LOG = new Logger(ArticleCreator.class);
-  private static final ParagraphCache PARAGRAPH_CACHE = new ParagraphCache();
   private static final int MAX_TITLE_LENGTH =
       Database.getStringLength(Article.class, "title");
-  private static final int MAX_PARAGRAPH_LENGTH =
-      Database.getStringLength(Article.class, "paragraph");
   private static final int MAX_DESCRIPTION_LENGTH =
       Database.getStringLength(Article.class, "description");
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
@@ -74,53 +67,6 @@ class ArticleCreator {
   // generally worse.  You either want this value to be 4 or 10+.
   private static final int MAX_STEM_LENGTH = 4;
 
-  /**
-   * A thread-specific cache of the paragraphs for a specific news article. This
-   * fixes the concurrency and memory performance problems we were having with a
-   * concurrent hash map that spanned our crawler threads by keeping the caches
-   * local to a thread, such that eviction doesn't adversely affect other
-   * threads and other threads aren't blocked by writes.  As a consequence of
-   * the former, we can reduce the cache size to something that doesn't take
-   * a whole bunch of memory.
-   */
-  private static class ParagraphCache
-      extends ThreadLocal<LinkedHashMap<String, Iterable<String>>> {
-    private static final int CACHE_SIZE_PER_THREAD = 5;
-
-    @Override
-    protected LinkedHashMap<String, Iterable<String>> initialValue() {
-      return new LinkedHashMap<String, Iterable<String>>() {
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<String, Iterable<String>> eldest) {
-          return size() > CACHE_SIZE_PER_THREAD;
-        }
-      };
-    }
-
-    public Iterable<String> getParagraphs(final DocumentNode documentNode)
-        throws RequiredFieldException {
-      if (this.get().containsKey(documentNode.getUrl())) {
-        return this.get().get(documentNode.getUrl());
-      }
-
-      List<String> paragraphs = Lists.newArrayList();
-      for (Node paragraphNode : SiteParser.getParagraphNodes(documentNode)) {
-        String text = StringHelper.unescape(paragraphNode.getFlattenedText()).trim();
-        if (text.length() > MAX_PARAGRAPH_LENGTH) {
-          LOG.warning("Trimming paragraph text on " + documentNode.getUrl());
-          text = text.substring(0, MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
-        }
-        if (text.length() > 0) {
-          paragraphs.add(text);
-        }
-      }
-      if (Iterables.isEmpty(paragraphs)) {
-        throw new RequiredFieldException("No paragraphs found in " + documentNode.getUrl());
-      }
-      this.get().put(documentNode.getUrl(), paragraphs);
-      return paragraphs;
-    }
-  };
 
   public static Article create(Url url, DocumentNode documentNode)
       throws RequiredFieldException {
@@ -129,7 +75,7 @@ class ArticleCreator {
     articleBuilder.setUrl(documentNode.getUrl());
 
     // Paragraphs (required).
-    articleBuilder.addAllParagraph(PARAGRAPH_CACHE.getParagraphs(documentNode));
+    articleBuilder.addAllParagraph(ParagraphFinder.getParagraphs(documentNode));
 
     // Author.
     String author = getAuthor(documentNode);
@@ -248,7 +194,7 @@ class ArticleCreator {
     }
     if (Strings.isNullOrEmpty(description)) {
       // Fall back to the first significant paragraph.
-      Iterable<String> paragraphs = PARAGRAPH_CACHE.getParagraphs(documentNode);
+      Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
       description = Iterables.getFirst(paragraphs, null);
       for (String paragraph : paragraphs) {
         if (paragraph.length() >= 50) {
@@ -363,7 +309,7 @@ class ArticleCreator {
   public static int getWordCount(final DocumentNode documentNode) throws RequiredFieldException {
     Pattern pattern = Pattern.compile("[\\s]+");
     int words = 0;
-    for (String paragraph : PARAGRAPH_CACHE.getParagraphs(documentNode)) {
+    for (String paragraph : ParagraphFinder.getParagraphs(documentNode)) {
       Matcher matcher = pattern.matcher(paragraph);
       while (matcher.find()) {
         words++;

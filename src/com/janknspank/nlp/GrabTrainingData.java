@@ -11,7 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.base.Joiner;
-import com.janknspank.crawler.SiteParser;
+import com.janknspank.crawler.ParagraphFinder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
@@ -68,7 +68,8 @@ public class GrabTrainingData {
 
     for (String url : URLS) {
       // Get all the paragraphs.
-      List<Node> paragraphs = SiteParser.getParagraphNodes(grabTrainingData.getDocumentNode(url));
+      List<Node> paragraphs =
+          ParagraphFinder.getParagraphNodes(grabTrainingData.getDocumentNode(url));
 
       // Open a file for writing all the paragraphs and sentences.
       String filename = url;

@@ -29,7 +29,7 @@ import com.janknspank.proto.CoreProto.Url;
  * to remove crawl data from any articles we've pruned above.
  */
 public class PruneMongoDatabase {
-  private static final long MAX_ARTICLE_COUNT = 30000;
+  private static final long MAX_ARTICLE_COUNT = 25000;
 
   /**
    * Deletes any passed URLs that do not have Articles associated with them in
