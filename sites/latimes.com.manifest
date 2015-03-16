@@ -57,6 +57,8 @@ test_instructions {
     article_url: "http://www.latimes.com/local/lanow/la-me-ln-measles-outbreak-hits-marin-county-20150130-story.html"
     article_url: "http://www.latimes.com/news/politics/la-na-rove14aug14,1,1728147.story"
     article_url: "http://www.latimes.com/sports/sportsnow/la-sp-sn-nhl-all-star-zemgus-girgensons20141230-story.html"
+    article_url: "http://www.latimes.com/entertainment/arts/la-et-cm-ca-heatherwick-provocations-hammer-review-20150301-column.html"
+    article_url: "http://www.latimes.com/entertainment/arts/la-et-cm-essential-arts-html-20150315-htmlstory.html"
     non_article_url: "http://latimesblogs.latimes.com/alltherage/"
     non_article_url: "http://www.latimes.com/aboutus"
     non_article_url: "http://www.latimes.com/business/personalfinance/"
@@ -65,7 +67,35 @@ test_instructions {
   }
 }
 feature_boost_pattern {
+  path_regex: "^\\/local\\/"
+  boost: -5
+}
+feature_boost_pattern {
+  path_regex: "^\\/sports\\/"
+  boost: -2
+}
+feature_boost_pattern {
   feature_id: 10520 # Automotive
   path_regex: "^\\/business\\/autos\\/"
-  boost: 10
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 40000 # Sports
+  path_regex: "^\\/sports\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 40002 # Politics
+  path_regex: "^\\/nation\\/politics\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10556 # Restaurants
+  path_regex: "^\\/food\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  path_regex: "^\\/entertainment\\/arts\\/"
+  boost: 3
 }

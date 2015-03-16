@@ -1,0 +1,69 @@
+# Matt is an American Canadian architect living in Vancouver.
+name: "Matt Emerson"
+email: "emerson1899@gmail.com"
+good_url: "http://cleantechnica.com/2014/04/15/californias-net-zero-energy-building-will-reshape-us-construction-industry/"
+good_url: "http://www.bbc.co.uk/news/technology-31364441"
+good_url: "http://cleantechnica.com/2015/03/13/100-renewable-energy-goal-looks-likely-hawaii/"
+good_url: "http://www.skyscrapernews.com/news.php?ref=3520"
+good_url: "http://www.archpaper.com/news/articles.asp?id=7904"
+good_url: "http://www.latimes.com/entertainment/arts/la-et-cm-ca-heatherwick-provocations-hammer-review-20150301-column.html"
+good_url: "http://www.latimes.com/entertainment/arts/la-et-cm-artic-train-station-review-20141225-column.html"
+good_url: "http://www.motherearthnews.com/green-homes/passive-house-zm0z11zphe.aspx"
+bad_url: "http://recode.net/2015/02/19/social-marketing-company-livefyre-announces-47-million-in-funding/"
+bad_url: "https://gigaom.com/2015/02/19/googles-inbox-lands-on-tablets-works-in-firefox-and-safari-too/"
+bad_url: "http://takingnote.blogs.nytimes.com/2015/02/19/putting-a-price-on-privacy-29/"
+bad_url: "http://mashable.com/2015/02/18/yahoo-mobile-developers/"
+bad_url: "http://techcrunch.com/2015/02/19/entrepreneur-first-hatches-latest-startups-partners-with-media-power-players/"
+bad_url: "http://www.forbes.com/sites/bryanstolle/2015/02/04/ready-aim-fire-part-1-how-to-execute-successfully-every-time/"
+bad_url: "http://www.forbes.com/sites/bryanstolle/2015/02/23/ready-aim-fire-how-to-execute-successfully-every-time-part-2/"
+bad_url: "http://techcrunch.com/2015/02/25/apple-watch-this-space/"
+bad_url: "https://gigaom.com/2015/03/04/ibm-acquires-deep-learning-startup-alchemyapi/"
+bad_url: "https://gigaom.com/2015/03/04/product-hunt-is-using-its-megaphone-to-tackle-startup-depression/"
+bad_url: "http://firstround.com/article/Evernotes-CTO-on-Your-Biggest-Security-Worries-From-Three-Employees-to-300"
+bad_url: "http://www.popphoto.com/how-to/2015/02/10-tips-using-darkness-your-photography"
+bad_url: "http://www.popphoto.com/gear/2015/02/hands-tamron-15-30mm-f28-di-vc-wide-angle-zoom-lens"
+bad_url: "http://www.popphoto.com/how-to/2015/02/how-to-using-drone-dramatic-nature-photos"
+bad_url: "http://www.popphoto.com/how-to/2015/02/mark-seligers-oscar-portraits-fanciest-photo-booth-setup-around"
+bad_url: "http://www.popphoto.com/gear/2015/02/open-post-looking-back-25-years-photoshop"
+bad_url: "http://www.popphoto.com/gear/2015/02/kickstarter-beehive-picture-hangers-designed-to-combat-crooked-frames"
+bad_url: "http://www.popphoto.com/gear/2015/02/nikon-releases-d750-dslr-filmmaker-s-kit-4000"
+bad_url: "http://www.popphoto.com/gear/2015/02/new-gear-nikon-d810a-first-full-frame-astrophotography-camera"
+bad_url: "http://www.popphoto.com/how-to/2015/02/behind-scenes-photographing-benedict-cumberbatch-vanity-fair"
+bad_url: "http://www.popphoto.com/how-to/2015/02/how-to-using-drone-dramatic-nature-photos"
+bad_url: "http://www.medicalnewstoday.com/releases/290616.php"
+bad_url: "http://www.medicalnewstoday.com/releases/290615.php"
+bad_url: "http://www.medicalnewstoday.com/releases/290614.php"
+bad_url: "http://www.medicalnewstoday.com/releases/290613.php"
+bad_url: "http://www.medicalnewstoday.com/releases/290612.php"
+bad_url: "http://www.businessinsider.com/world-war-i-soldiers-played-soccer-on-christmas-2014-12"
+bad_url: "http://www.businessinsider.com/landon-donovan-retiring-2014-8"
+bad_url: "http://www.businessinsider.com/the-full-time-jobs-of-san-marino-national-team-2014-10"
+bad_url: "http://www.businessinsider.com/chart-chinese-soccer-ball-exporters-and-the-world-cup-2014-7"
+bad_url: "http://www.businessinsider.com/why-americans-call-it-soccer-2014-6"
+bad_url: "http://mashable.com/2015/02/24/marshawn-lynch-trademark-catchphrase/"
+bad_url: "http://bdnews24.com/cricket/2015/02/25/gayle-answers-critics-in-canberra-carnage"
+bad_url: "http://www.washingtonpost.com/blogs/early-lead/wp/2015/02/25/lebron-james-sets-all-time-assist-record-for-nba-forwards/"
+bad_url: "http://www.abc.net.au/news/2015-02-25/cricket-world-cup3a-what-we-learned-in-week-two/6261458"
+bad_url: "http://www.washingtonpost.com/blogs/wizards-insider/wp/2015/02/25/marcin-gortat-sits-during-fourth-quarter-against-the-warriors/"
+bad_url: "http://www.cnn.com/2015/02/07/entertainment/rosie-odonnell-leaving-the-view/index.html"
+bad_url: "http://www.cnn.com/2015/02/05/entertainment/bobbi-kristina-brown-players-who-is-who/index.html"
+bad_url: "http://www.cnn.com/2015/02/04/entertainment/feat-magic-mike-xxl-poster-trailer/index.html"
+bad_url: "http://www.cnn.com/2015/02/03/entertainment/china-katy-perry-celebrity-nicknames/index.html"
+bad_url: "http://www.cnn.com/2015/01/25/entertainment/feat-sag-awards-2015-wrap/index.html"
+bad_url: "http://www.cnn.com/2015/01/25/entertainment/feat-sag-awards-andy-samberg-rashida-jones-speech/index.html"
+bad_url: "http://mashable.com/2015/02/25/the-voice-season-8/"
+bad_url: "http://www.washingtonpost.com/blogs/style-blog/wp/2015/02/25/parks-and-recreation-series-finale-the-wildly-optimistic-show-stays-true-to-its-roots/"
+interest {
+  id: "55036fcfe4b05c7065a87735"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426288591472
+  industry_code: 10545 # Environment
+}
+interest {
+  id: "55036fcfe4b05c7065a87736"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426288591472
+  industry_code: 10517 # Architecture and Planning
+}

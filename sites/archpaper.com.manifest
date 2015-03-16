@@ -1,0 +1,48 @@
+root_domain: "archpaper.com"
+start_url: "http://www.archpaper.com/"
+start_url: "http://www.archpaper.com/news/"
+subdomain_blacklist: "awards.archpaper.com"
+path_blacklist {
+  needle: "/competitions/"
+}
+path_blacklist {
+  needle: "/diary/"
+}
+paragraph_selector: "#post_body p"
+paragraph_selector: ".article_wrapper .content p"
+article_url_pattern {
+  path_regex: "^\\/news\\/articles\\.asp"
+  query_regex: "id=[0-9]+"
+}
+article_url_pattern {
+  path_regex: "^\\/e-board_rev\\.asp"
+  query_regex: "News_ID=[0-9]+"
+}
+article_url_pattern {
+  subdomain: "blog.archpaper.com"
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/"
+}
+whitelisted_query_parameter: "id"
+whitelisted_query_parameter: "News_ID"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://blog.archpaper.com/2015/03/yayoi-kusama-enlisted-a-pint-sized-army-to-create-this-dotty-hallucinatory-world/"
+    article_url: "http://archpaper.com/news/articles.asp?id=7909"
+    article_url: "http://archpaper.com/news/articles.asp?id=7898"
+    article_url: "http://blog.archpaper.com/2015/03/product-star-lights-six-shining-luminaires/"
+    article_url: "http://www.archpaper.com/e-board_rev.asp?News_ID=7909"
+    article_url: "http://www.archpaper.com/e-board_rev.asp?News_ID=7905"
+    non_article_url: "http://blog.archpaper.com/category/city-terrain/"
+    non_article_url: "http://blog.archpaper.com/category/type/spec-sheet/"
+    non_article_url: "http://www.archpaper.com/archives/issues.asp?id=385"
+    non_article_url: "http://blog.archpaper.com/newsletters/city-terrain-october-10-2013/"
+    non_article_url: "http://archpaper.com/contact/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 5
+}

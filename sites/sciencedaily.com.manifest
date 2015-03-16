@@ -27,7 +27,7 @@ test_instructions {
   }
 }
 feature_boost_pattern {
-  boost: -20 # This is not a general consumption web site.
+  boost: -10 # This is not a general consumption web site.
 }
 feature_boost_pattern {
   feature_id: 10521 # Chemistry

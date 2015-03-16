@@ -1,0 +1,100 @@
+root_domain: "motherearthnews.com"
+start_url: "http://www.motherearthnews.com/"
+start_url: "http://www.motherearthnews.com/green-homes.aspx"
+rss_url: "http://thenextweb.com/feed/"
+path_blacklist {
+  needle: "-videos-"
+  location: CONTAINS
+}
+paragraph_selector: ".ArticleContent p"
+paragraph_selector: ".Body p"
+paragraph_selector: ".EmptyPageControl p"
+article_url_pattern {
+  path_regex: "-z[a-z0-9]+\\.aspx$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.motherearthnews.com/diy/self-watering-container-ze0z11zhir.aspx"
+    article_url: "http://www.motherearthnews.com/green-homes/passive-house-zm0z11zphe.aspx"
+    article_url: "http://www.motherearthnews.com/green-transportation/electric-cars-zm0z11zsto.aspx"
+    article_url: "http://www.motherearthnews.com/homesteading-and-livestock/chicken-hatchlings-tracking-spreadsheet-zbwz1503zkin.aspx"
+    article_url: "http://www.motherearthnews.com/homesteading-and-livestock/homesteading-remotely-would-we-do-it-again-zbcz1503.aspx"
+    article_url: "http://www.motherearthnews.com/natural-health/natural-allergy-remedies-zmaz06aszraw.aspx"
+    article_url: "http://www.motherearthnews.com/natural-health/first-aid-tips-farmers-gardeners-zm0z15amzkin.aspx"
+    article_url: "http://www.motherearthnews.com/nature-and-environment/the-birds-are-coming-zbcz1503.aspx"
+    article_url: "http://www.motherearthnews.com/organic-gardening/starting-seeds-indoors-zm0z12djzsor.aspx"
+    article_url: "http://www.motherearthnews.com/real-food/how-to-grow-and-cook-asparagus-zm0z15amzmat.aspx"
+    article_url: "http://www.motherearthnews.com/real-food/certified-naturally-grown-zmgz15amzsto.aspx"
+    article_url: "http://www.motherearthnews.com/self-reliance/fierce-farming-women-part-1-zbcz1503.aspx"
+    non_article_url: "http://www.motherearthnews.com/blogs/natural-health.aspx"
+    non_article_url: "http://www.motherearthnews.com/green-homes.aspx"
+    non_article_url: "http://www.motherearthnews.com/homesteading-and-livestock.aspx"
+    non_article_url: "http://www.motherearthnews.com/organic-gardening.aspx"
+    non_article_url: "http://www.motherearthnews.com/real-food.aspx"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10522 # Dairy
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10556 # Restaurants
+  boost: -1
+}
+
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "^\\/nature-and-environment\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "^\\/green-homes\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "^\\/green-transportation\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  path_regex: "^\\/organic-gardening\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  path_regex: "^\\/homesteading-and-livestock\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10522 # Dairy
+  path_regex: "^\\/homesteading-and-livestock\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  path_regex: "^\\/natural-health\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10556 # Restaurants
+  path_regex: "^\\/real-food\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  path_regex: "^\\/green-homes\\/"
+  boost: 2
+}

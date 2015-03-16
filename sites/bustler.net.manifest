@@ -1,0 +1,44 @@
+root_domain: "bustler.net"
+start_url: "http://www.bustler.net"
+start_url: "http://www.bustler.net/index.php/news/"
+path_blacklist {
+  needle: "/competition/"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/competitions/"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/event/"
+  location: CONTAINS
+}
+path_blacklist {
+  needle: "/events/"
+  location: CONTAINS
+}
+paragraph_selector: ".TextBodyFull p"
+article_url_pattern {
+  path_regex: "^\\/index.php\\/article\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.bustler.net/index.php/article/ny_transportation_landmarks_50th_anniversary_exhibition_to_open_on_march_14/"
+    article_url: "http://www.bustler.net/index.php/article/winners_of_the_l.a._conservancy_2015_preservation_awards/"
+    article_url: "http://www.bustler.net/index.php/article/just_a_few_days_left_to_give_feedback_on_the_shortlisted_nz_canterbury_memo/"
+    article_url: "http://www.bustler.net/index.php/article/adept_to_design_new_flensburg_city_gate_in_german-danish_border/"
+    article_url: "http://www.bustler.net/index.php/article/your_bamiyan_cultural_centre_proposals_are_now_up_on_archinect/"
+    non_article_url: "http://www.bustler.net/index.php/about/"
+    non_article_url: "http://www.bustler.net/index.php/subscribe/"
+    non_article_url: "http://www.bustler.net/index.php/news/P12/"
+    non_article_url: "http://www.bustler.net/index.php/v2/search_news/ac426cc32df5e584a63a5e4246b25754/"
+    non_article_url: "http://www.bustler.net/index.php/submit/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 5
+}

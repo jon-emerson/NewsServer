@@ -1,0 +1,30 @@
+root_domain: "ribaj.com"
+start_url: "http://www.ribaj.com"
+start_url: "http://www.ribaj.com/buildings"
+paragraph_selector: ".article-content p"
+article_url_pattern {
+  path_regex: "^\\/(buildings|culture|intelligence|products)\\/[^\\/]+"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.ribaj.com/culture/the-women-changing-the-design-of-our-cities-today"
+    article_url: "http://www.ribaj.com/culture/jan-kaplicky-drawings-at-the-aa"
+    article_url: "http://www.ribaj.com/products/housing-retrofit-and-unintended-consequences"
+    article_url: "http://www.ribaj.com/buildings/civic-trust-awards-2015-hugh-pearman-judges"
+    article_url: "http://www.ribaj.com/intelligence/home-quality-mark-aims-to-plug-certification-gap"
+    article_url: "http://www.ribaj.com/products/the-top-ten-dos-and-don-ts-of-rolled-lead-sheet"
+    article_url: "http://www.ribaj.com/culture/connection-point"
+    non_article_url: "http://www.ribaj.com/advertise-with-us"
+    non_article_url: "http://www.ribaj.com/archive"
+    non_article_url: "http://www.ribaj.com/buildings"
+    non_article_url: "http://www.ribaj.com/intelligence"
+    non_article_url: "http://www.ribaj.com/products"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 5
+}
