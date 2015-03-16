@@ -1,0 +1,43 @@
+root_domain: "uxmag.com"
+start_url: "http://uxmag.com/"
+start_url: "https://uxmag.com/most-popular"
+path_blacklist {
+  needle: "/events/"
+}
+paragraph_selector: ".field-items p"
+article_url_pattern {
+  path_regex: "^\\/articles\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://uxmag.com/articles/making-mountains-of-data-rewarding-to-roam"
+    article_url: "http://uxmag.com/articles/the-impossible-bloomberg-makeover"
+    article_url: "http://uxmag.com/articles/adapting-ui-to-ios-7-the-side-menu"
+    article_url: "http://uxmag.com/articles/the-psychologists-view-of-ux-design"
+    article_url: "http://uxmag.com/articles/if-you-replace-all-the-planks-is-it-still-the-same-ship-a-review-of-%E2%80%9C7-best-text-effects-in"
+    non_article_url: "https://uxmag.com/contributors/jonathan-anderson-ux-magazine"
+    non_article_url: "https://uxmag.com/most-popular"
+    non_article_url: "https://uxmag.com/search/topics/customer-experience"
+    non_article_url: "https://uxmag.com/search/topics/customer-experience/type/event"
+    non_article_url: "https://uxmag.com/reviews"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10513 # Media (UX)
+  boost: 1
+}

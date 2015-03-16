@@ -41,6 +41,7 @@ public class DateParserTest {
     assertSameTime("20150102232200", "2015-01-03T07:22Z"); // Channelnewsasia.com.
     assertSameTime("20150104000000", "Sun, 4 Jan 2015"); // LATimes.com RSS.
     assertSameTime("20150106224300", "January 6, 2015, 10:43 PM"); // Cbsnews.com.
+    assertSameTime("20150227000000", "27 February 2015"); // Ribaj.com.
   }
 
   @Test

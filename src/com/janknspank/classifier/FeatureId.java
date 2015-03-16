@@ -23,7 +23,7 @@ public enum FeatureId {
   CONSUMER_GOODS(10510, FeatureType.INDUSTRY, "Consumer Goods"),
   LEISURE_TRAVEL_AND_TOURISM(10511, FeatureType.INDUSTRY, "Leisure, Travel and Tourism"),
   SPORTS(10512, FeatureType.INDUSTRY, "Sports"),
-  MEDIA(10513, FeatureType.INDUSTRY, "Media"),
+  MEDIA(10513, FeatureType.INDUSTRY, "Media"), // Some UXers use this.
   FINANCIAL_SERVICES(10514, FeatureType.INDUSTRY, "Financial Services"),
   ACCOUNTING(10515, FeatureType.INDUSTRY, "Accounting"),
   CONSTRUCTION(10516, FeatureType.INDUSTRY, "Construction"),

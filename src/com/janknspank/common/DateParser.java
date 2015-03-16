@@ -35,7 +35,8 @@ public class DateParser {
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z"), // Boston.com.
       new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss"), // Boston.com
       new SimpleDateFormat("EEE, d MMM yyyy"), // LATimes.com RSS.
-      new SimpleDateFormat("MM.dd.yyyy") // Advice.careerbuilder.com, in content body.
+      new SimpleDateFormat("MM.dd.yyyy"), // Advice.careerbuilder.com, in content body.
+      new SimpleDateFormat("dd MMMM yyyy") // Ribaj.com, in <date> tag.
   };
   private static final DateFormat MONTH_IN_URL_DATE_FORMAT =
       new SimpleDateFormat("/yyyy/MM/");

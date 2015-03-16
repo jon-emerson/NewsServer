@@ -23,7 +23,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10545 # Environment
-  boost: 3
+  boost: 2
 }
 feature_boost_pattern {
   feature_id: 10538 # Oil & Energy

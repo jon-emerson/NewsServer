@@ -1,0 +1,45 @@
+root_domain: "usertesting.com"
+start_url: "http://www.usertesting.com/blog/"
+path_blacklist {
+  needle: "/services"
+}
+path_blacklist {
+  needle: "/product/"
+}
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "^\\/blog\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.usertesting.com/blog/2015/03/05/mobile-recorder-test-ideas/"
+    article_url: "http://www.usertesting.com/blog/2015/03/10/yelp-on-the-go/"
+    article_url: "http://www.usertesting.com/blog/2011/02/04/website-usability-blooper-target/"
+    article_url: "http://www.usertesting.com/blog/2015/03/04/who-owns-customer-experience/"
+    article_url: "http://www.usertesting.com/blog/2015/02/24/happn-dating-app/"
+    non_article_url: "http://www.usertesting.com/about-us/contact-us"
+    non_article_url: "http://www.usertesting.com/about-us/executive-team"
+    non_article_url: "http://www.usertesting.com/blog/category/marketing/"
+    non_article_url: "http://www.usertesting.com/blog/category/usability-study/"
+    non_article_url: "http://www.usertesting.com/blog/page/36/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10513 # Media (UX)
+  boost: 1
+}

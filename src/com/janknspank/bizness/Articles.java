@@ -129,9 +129,10 @@ public class Articles {
    * a minimum of 15 hours.
    */
   private static double getHoursSincePublished(Article article) {
-    return Math.max(18,
+    double hoursSincePublished = Math.max(18,
         ((double) System.currentTimeMillis() - getPublishedTime(article))
             / TimeUnit.HOURS.toMillis(1)) - 15;
+    return hoursSincePublished;
   }
 
   /**

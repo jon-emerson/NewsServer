@@ -212,9 +212,9 @@ class ArticleCreator {
     return description.trim();
   }
 
-  private static String resolveImageUrl(DocumentNode documentNode, Node metaNode) {
+  private static String resolveImageUrl(DocumentNode documentNode, String relativeUrl) {
     try {
-      return new URL(new URL(documentNode.getUrl()), metaNode.getAttributeValue("content")).toString();
+      return new URL(new URL(documentNode.getUrl()), relativeUrl).toString();
     } catch (MalformedURLException e) {
       return "";
     }
@@ -229,7 +229,7 @@ class ArticleCreator {
    * - Below 0: Not a valid URL.
    */
   private static int getImageUrlRank(DocumentNode documentNode, Node metaNode) {
-    String imageUrl = resolveImageUrl(documentNode, metaNode);
+    String imageUrl = resolveImageUrl(documentNode, metaNode.getAttributeValue("content"));
 
     // Disallow empty and blacklisted URLs.
     if (imageUrl.isEmpty() ||
@@ -288,8 +288,17 @@ class ArticleCreator {
         "html > head meta[itemprop=\"thumbnailUrl\"]"))) {
       int rank = getImageUrlRank(documentNode, metaNode);
       if (rank > bestUrlRank) {
-        bestUrl = resolveImageUrl(documentNode, metaNode);
+        bestUrl = resolveImageUrl(documentNode, metaNode.getAttributeValue("content"));
         bestUrlRank = rank;
+      }
+    }
+
+    if (bestUrl.isEmpty()) {
+      // TODO(jonemerson): Probably surface this through .manifest files.
+      // This is probably specific to ribaj.com.
+      Node maybeImageNode = documentNode.findFirst(".article-content figure img");
+      if (maybeImageNode != null) {
+        bestUrl = resolveImageUrl(documentNode, maybeImageNode.getAttributeValue("src"));
       }
     }
     return bestUrl.isEmpty() ? null : bestUrl;
@@ -342,6 +351,18 @@ class ArticleCreator {
       return DateParser.parseDateTime(metaNode.getAttributeValue("content"));
     } else if (metaNode != null && metaNode.hasAttribute("value")) {
       return DateParser.parseDateTime(metaNode.getAttributeValue("value"));
+    }
+
+    // Some sites (e.g. ribaj.com) bury a <date> tag into their HTML bodies.
+    // E.g.
+    // <time pubdate="pubdate" datetime="Fri Feb 27 2015 17:30:00 GMT+0000 (UTC)">
+    //     27 February 2015</time>
+    Node timeNode = documentNode.findFirst("time");
+    if (timeNode != null) {
+      Long maybeDate = DateParser.parseDateTime(timeNode.getFlattenedText());
+      if (maybeDate != null) {
+        return maybeDate;
+      }
     }
 
     // See if we can parse a date out of the URL.
