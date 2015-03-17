@@ -261,5 +261,7 @@ public class VectorFeatureCreator {
     for (FeatureId featureId : featuresToRegenerate) {
       new VectorFeatureCreator(featureId).createVectorAndDistribution();
     }
+
+    System.exit(0);
   }
 }

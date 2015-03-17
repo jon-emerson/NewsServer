@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.json.JSONObject;
 
 import com.google.api.client.util.Lists;
+import com.google.api.client.util.Sets;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.template.soy.data.SoyListData;
@@ -23,6 +24,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.NeuralNetworkScorer;
 import com.janknspank.server.AbstractArticlesServlet;
@@ -45,7 +47,7 @@ public class ViewFeedSoy {
           "score", scoreFunction.apply(article),
           "inputNodes", getInputNodesString(user, article),
           "keywords", getKeywordsString(article),
-          "features", getFeaturesString(article));
+          "features", getFeaturesString(user, article));
 
       // Image url.
       if (article.hasImageUrl()) {
@@ -99,7 +101,7 @@ public class ViewFeedSoy {
         NeuralNetworkScorer.generateInputNodes(user, article));
   }
 
-  private static String getFeaturesString(Article article) {
+  private static String getFeaturesString(User user, Article article) {
     List<ArticleFeature> features = Lists.newArrayList(article.getFeatureList());
     features.sort(new Comparator<ArticleFeature>() {
       @Override
@@ -107,9 +109,15 @@ public class ViewFeedSoy {
         return -Double.compare(feature1.getSimilarity(), feature2.getSimilarity());
       }
     });
+    Set<Integer> userFeatureIds = Sets.newHashSet();
+    for (Interest interest : user.getInterestList()) {
+      if (interest.hasIndustryCode()) {
+        userFeatureIds.add(interest.getIndustryCode());
+      }
+    }
 
     StringBuilder sb = new StringBuilder();
-    sb.append("Features = [");
+    sb.append("features = [");
     int i = 0;
     for (ArticleFeature articleFeature : features) {
       if (i++ != 0) {
@@ -117,6 +125,9 @@ public class ViewFeedSoy {
       }
       JSONObject o = new JSONObject();
       o.put("id", articleFeature.getFeatureId());
+      if (userFeatureIds.contains(articleFeature.getFeatureId())) {
+        o.put("isUserInterest", true);
+      }
       FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
       o.put("description", featureId != null
           ? (featureId.getFeatureType().name() + ": " + featureId.getTitle())

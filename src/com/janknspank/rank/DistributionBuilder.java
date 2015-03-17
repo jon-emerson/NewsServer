@@ -137,6 +137,7 @@ public class DistributionBuilder {
       throw new IllegalStateException("Distribution cannot be built: No values set.");
     }
     Distribution.Builder builder = Distribution.newBuilder();
+    System.out.println("Building distribution...");
     for (double percentile : new double[] { 0, 1, 5, 10, 25, 37, 50, 63, 75, 90, 95, 99, 100 }) {
       double value = getPercentileValue(percentile);
       builder.addPercentile(Distribution.Percentile.newBuilder()
@@ -144,6 +145,7 @@ public class DistributionBuilder {
           .setValue(value)
           .setDataPointCount(getCountOfValuesAtMost(value))
           .build());
+      System.out.println("Value at " + percentile + "%: " + value);
     }
     return builder.build();
   }

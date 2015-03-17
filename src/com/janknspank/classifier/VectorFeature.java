@@ -60,7 +60,7 @@ public final class VectorFeature extends Feature {
   static double rawScore(
       FeatureId featureId, Vector featureVector, ArticleOrBuilder article, Vector articleVector)
       throws ClassifierException {
-    double boost = (0.075 * Feature.getBoost(featureId, article));
+    double boost = (0.03 * Feature.getBoost(featureId, article));
     return boost + featureVector.getCosineSimilarity(UniverseVector.getInstance(), articleVector);
   }
 
