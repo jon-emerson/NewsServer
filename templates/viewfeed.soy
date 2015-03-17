@@ -55,7 +55,7 @@
       <div class="article-right">
         <div class="tab-bar">
           <div class="tab selected" tab_id="features" url_id="{$article.urlId}">Features</div>
-          <div class="tab" tab_id="inputNodes" url_id="{$article.urlId}">Input Nodes</div>
+          <div class="tab" tab_id="neuralNetwork" url_id="{$article.urlId}">Neural Network</div>
           <div class="tab" tab_id="keywords" url_id="{$article.urlId}">Keywords</div>
           <div class="tab" tab_id="rawArticle" url_id="{$article.urlId}">Raw Article</div>
         </div>
@@ -65,8 +65,8 @@
               shares: {$article.fb_shares}, comments: {$article.fb_comments}<br/>
           <pre>{$article.features}</pre>
         </div>
-        <div class="article-details inputNodes" url_id="{$article.urlId}">
-          <pre>{$article.inputNodes}</pre>
+        <div class="article-details neuralNetwork" url_id="{$article.urlId}">
+          <pre>{$article.neuralNetwork}</pre>
         </div>
         <div class="article-details keywords" url_id="{$article.urlId}">
           <pre>{$article.keywords}</pre>

@@ -3,6 +3,7 @@ package com.janknspank.server.soy;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -45,7 +46,7 @@ public class ViewFeedSoy {
           "urlId", article.getUrlId(),
           "description", article.getDescription(),
           "score", scoreFunction.apply(article),
-          "inputNodes", getInputNodesString(user, article),
+          "neuralNetwork", getNeuralNetworkString(user, article),
           "keywords", getKeywordsString(article),
           "features", getFeaturesString(user, article));
 
@@ -96,9 +97,12 @@ public class ViewFeedSoy {
     return new SoyListData(articleSoyMapDataList);
   }
 
-  private static String getInputNodesString(User user, Article article) {
-    return Joiner.on("\n").withKeyValueSeparator("=").join(
-        NeuralNetworkScorer.generateInputNodes(user, article));
+  private static String getNeuralNetworkString(User user, Article article) {
+    LinkedHashMap<String, Double> neuralNetworkInputNodes =
+        NeuralNetworkScorer.generateInputNodes(user, article);
+    double score = NeuralNetworkScorer.getScore(neuralNetworkInputNodes);
+    return Joiner.on("\n").withKeyValueSeparator(" = ").join(neuralNetworkInputNodes)
+        + "\n\noutput -> " + score;
   }
 
   private static String getFeaturesString(User user, Article article) {

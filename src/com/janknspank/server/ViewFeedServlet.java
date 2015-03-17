@@ -16,7 +16,7 @@ import com.janknspank.server.soy.ViewFeedSoy;
 @AuthenticationRequired
 @ServletMapping(urlPattern = "/viewFeed")
 public class ViewFeedServlet extends StandardServlet {
-  private static final int NUM_RESULTS = 25;
+  private static final int NUM_RESULTS = 50;
 
   /**
    * Returns any Soy data necessary for rendering the .main template for this

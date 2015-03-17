@@ -88,8 +88,13 @@ public final class NeuralNetworkScorer extends Scorer {
   public double getScore(User user, Article article) {
     Asserts.assertNotNull(user, "user", NullPointerException.class);
     Asserts.assertNotNull(article, "article", NullPointerException.class);
-    neuralNetwork.setInput(Doubles.toArray(generateInputNodes(user, article).values()));
-    neuralNetwork.calculate();
-    return neuralNetwork.getOutput()[0];
+    return getScore(generateInputNodes(user, article));
+  }
+
+  public static double getScore(LinkedHashMap<String, Double> inputNodes) {
+    NeuralNetworkScorer scorer = getInstance();
+    scorer.neuralNetwork.setInput(Doubles.toArray(inputNodes.values()));
+    scorer.neuralNetwork.calculate();
+    return scorer.neuralNetwork.getOutput()[0];
   }
 }
