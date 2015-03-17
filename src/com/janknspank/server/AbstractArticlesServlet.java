@@ -51,6 +51,9 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
    * image (if possible).
    */
   private Iterable<Article> putImageArticleFirst(final Iterable<Article> articles) {
+    if (Iterables.isEmpty(articles)) {
+      return Collections.emptyList();
+    }
     final Article firstImageArticle = Iterables.find(articles, new Predicate<Article>() {
       @Override
       public boolean apply(Article article) {
@@ -58,7 +61,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
       }
     });
     if (firstImageArticle == null) {
-      return Collections.emptyList();
+      return articles;
     }
     return Iterables.concat(ImmutableList.of(firstImageArticle),
         Iterables.filter(articles, new Predicate<Article>() {
