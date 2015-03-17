@@ -274,7 +274,11 @@ public class ArticleCrawler implements Callable<Void> {
         Database.insert(CRAWL_HISTORY_BUILDER.build());
 
         while (true) {
-          Thread.sleep(TimeUnit.MINUTES.toMillis(1));
+          try {
+            Thread.sleep(TimeUnit.MINUTES.toMillis(1));
+          } catch (InterruptedException e) {
+            return; // Totally expected!
+          }
           updateCrawlHistoryInDatabase();
         }
       } catch (Throwable e) {
@@ -304,7 +308,8 @@ public class ArticleCrawler implements Callable<Void> {
     }
 
     // Record crawl history on a regular basis.
-    new CommitCrawlHistoryThread().start();
+    CommitCrawlHistoryThread commitCrawlHistoryThread = new CommitCrawlHistoryThread();
+    commitCrawlHistoryThread.start();
 
     // Randomly create crawlers, which will be execution poll throttled to
     // THREAD_COUNT threads, for each website in our corpus.
@@ -338,6 +343,7 @@ public class ArticleCrawler implements Callable<Void> {
       // over.  (Note: Heroku's scheduling isn't that reliable, so we can't
       // keep this at 20 minutes - Tasks start to overlap.)
       executor.awaitTermination(TimeUnit.MINUTES.toMillis(18), TimeUnit.MILLISECONDS);
+      commitCrawlHistoryThread.interrupt();
     } catch (InterruptedException e) {}
     System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
 
