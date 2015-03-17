@@ -1,5 +1,6 @@
 package com.janknspank.server;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -56,6 +57,9 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
         return (article.hasImageUrl());
       }
     });
+    if (firstImageArticle == null) {
+      return Collections.emptyList();
+    }
     return Iterables.concat(ImmutableList.of(firstImageArticle),
         Iterables.filter(articles, new Predicate<Article>() {
       @Override
