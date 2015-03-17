@@ -283,30 +283,6 @@ public class ArticleCrawler implements Callable<Void> {
     }
   }
 
-  private static class PoisonPillThread extends Thread {
-    @Override
-    public void run() {
-      try {
-        // Kill the process after 18 minutes, then let the next crawler take
-        // over.  (Note: Heroku's scheduling isn't that reliable, so we can't
-        // keep this at 20 minutes - Tasks start to overlap.)
-        Thread.sleep(TimeUnit.MINUTES.toMillis(18));
-
-        // Record what's happening.
-        CRAWL_HISTORY_BUILDER
-            .setWasInterrupted(true)
-            .setEndTime(System.currentTimeMillis());
-        updateCrawlHistoryInDatabase();
-
-        System.out.println("KILLING PROCESS - TIMEOUT REACHED - See " + this.getClass().getName());
-        System.exit(-1);
-      } catch (InterruptedException | DatabaseRequestException | DatabaseSchemaException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    }
-  }
-
   public static void main(String args[]) throws Exception {
     long startTime = System.currentTimeMillis();
 
@@ -327,51 +303,48 @@ public class ArticleCrawler implements Callable<Void> {
       System.out.println("Restricting crawl to: " + Joiner.on(", ").join(rootDomainMap.keySet()));
     }
 
-    try {
-      // Record crawl history on a regular basis.
-      new CommitCrawlHistoryThread().start();
+    // Record crawl history on a regular basis.
+    new CommitCrawlHistoryThread().start();
 
-      // Make sure we die in a reasonable amount of time.
-      new PoisonPillThread().start();
+    // Randomly create crawlers, which will be execution poll throttled to
+    // THREAD_COUNT threads, for each website in our corpus.
+    List<SiteManifest> allManifests = Lists.newArrayList(SiteManifests.getList());
+    Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
 
-      // Randomly create crawlers, which will be execution poll throttled to
-      // THREAD_COUNT threads, for each website in our corpus.
-      List<SiteManifest> allManifests = Lists.newArrayList(SiteManifests.getList());
-      Collections.shuffle(allManifests, new Random(System.currentTimeMillis()));
-
-      // Create Callables (which will become threads once they're invoked) for
-      // every site that we're instructed to crawl.
-      List<Callable<Void>> crawlers = Lists.newArrayList();
-      for (SiteManifest manifest : allManifests) {
-        String rootDomain = manifest.getRootDomain();
-        if (rootDomainMap.isEmpty()) {
-          crawlers.add(new ArticleCrawler(manifest));
-        } else if (rootDomainMap.containsKey(rootDomain)) {
-          crawlers.add(new ArticleCrawler(manifest));
-          rootDomainMap.put(manifest.getRootDomain(), true);
-        }
+    // Create Callables (which will become threads once they're invoked) for
+    // every site that we're instructed to crawl.
+    List<Callable<Void>> crawlers = Lists.newArrayList();
+    for (SiteManifest manifest : allManifests) {
+      String rootDomain = manifest.getRootDomain();
+      if (rootDomainMap.isEmpty()) {
+        crawlers.add(new ArticleCrawler(manifest));
+      } else if (rootDomainMap.containsKey(rootDomain)) {
+        crawlers.add(new ArticleCrawler(manifest));
+        rootDomainMap.put(manifest.getRootDomain(), true);
       }
-      for (Map.Entry<String, Boolean> rootDomainMapEntry : rootDomainMap.entrySet()) {
-        if (!rootDomainMapEntry.getValue()) {
-          throw new Error("Could not find manifest for domain " + rootDomainMapEntry.getKey());
-        }
-      }
-
-      // Start the threads!
-      ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
-      executor.invokeAll(crawlers);
-      executor.shutdown();
-      System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
-
-      // Record that we finished.
-      CRAWL_HISTORY_BUILDER
-          .setWasInterrupted(false)
-          .setEndTime(System.currentTimeMillis());
-      updateCrawlHistoryInDatabase();
-
-    } finally {
-      // Hard quit because CommitCrawlHistoryThread and PoisonPillThread are still running.
-      System.exit(0);
     }
+    for (Map.Entry<String, Boolean> rootDomainMapEntry : rootDomainMap.entrySet()) {
+      if (!rootDomainMapEntry.getValue()) {
+        throw new Error("Could not find manifest for domain " + rootDomainMapEntry.getKey());
+      }
+    }
+
+    // Start the threads!
+    ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+    executor.invokeAll(crawlers);
+    executor.shutdown();
+    try {
+      // Kill the process after 18 minutes, then let the next crawler take
+      // over.  (Note: Heroku's scheduling isn't that reliable, so we can't
+      // keep this at 20 minutes - Tasks start to overlap.)
+      executor.awaitTermination(TimeUnit.MINUTES.toMillis(18), TimeUnit.MILLISECONDS);
+    } catch (InterruptedException e) {}
+    System.out.println("Finished crawl in " + (System.currentTimeMillis() - startTime) + "ms");
+
+    // Record that we finished.
+    CRAWL_HISTORY_BUILDER
+        .setWasInterrupted(false)
+        .setEndTime(System.currentTimeMillis());
+    updateCrawlHistoryInDatabase();
   }
 }

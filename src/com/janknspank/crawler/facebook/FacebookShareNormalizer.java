@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.protobuf.TextFormat;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.common.Logger;
@@ -78,8 +79,9 @@ public class FacebookShareNormalizer {
         break;
       }
     }
-    return DistributionBuilder.projectQuantile(distribution,
-        getNormalizedShareCount(url, shareCount));
+    long normalizedShareCount = getNormalizedShareCount(url, shareCount);
+    double shareScore = DistributionBuilder.projectQuantile(distribution, normalizedShareCount);
+    return shareScore;
   }
 
   private static class ShareCount {
@@ -238,6 +240,16 @@ public class FacebookShareNormalizer {
   public static void main(String args[]) throws Exception {
     if (args.length > 0 && args[0].equals("test")) {
       test();
+      return;
+    } else if (args.length > 0 && args[0].equals("print")) {
+      InputStream inputStream = null;
+      try {
+        inputStream = new GZIPInputStream(new FileInputStream(FILENAME));
+        ShareNormalizationData data = ShareNormalizationData.parseFrom(inputStream);
+        TextFormat.print(data, System.out);
+      } finally {
+        IOUtils.closeQuietly(inputStream);
+      }
       return;
     }
 

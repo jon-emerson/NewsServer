@@ -224,6 +224,10 @@
               <mainClass>com.janknspank.utils.PushDailyNotifications</mainClass>
               <name>PushDailyNotifications</name>
             </program>
+            <program>
+              <mainClass>UpdateSocialEngagements</mainClass>
+              <name>UpdateSocialEngagements</name>
+            </program>
           </programs>
         </configuration>
         <executions>

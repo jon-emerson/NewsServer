@@ -93,6 +93,7 @@ public class DistributionBuilder {
   /**
    * Returns a projected normalized value for the given value based on the
    * historical distribution of that value, as provided by {@code distribution}.
+   * The returned value will be between 0 and 1.
    */
   public static double projectQuantile(Distribution distribution, double value) {
     if (distribution.getPercentileCount() == 0) {

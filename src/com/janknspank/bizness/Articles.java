@@ -22,9 +22,10 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
+import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
@@ -143,8 +144,10 @@ public class Articles {
    * post- or pre-date their publish times... But, if we discover an article
    * well after it was published, we honor its older publish date.
    */
-  public static long getPublishedTime(Article article) {
-    return (article.getCrawlTime() - TimeUnit.HOURS.toMillis(36) > article.getPublishedTime())
+  public static long getPublishedTime(ArticleOrBuilder article) {
+    return
+        article.hasCrawlTime()
+            && article.getCrawlTime() - TimeUnit.HOURS.toMillis(36) > article.getPublishedTime()
         ? article.getPublishedTime()
         : article.getCrawlTime();
   }

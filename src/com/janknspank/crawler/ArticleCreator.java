@@ -232,9 +232,10 @@ class ArticleCreator {
     String imageUrl = resolveImageUrl(documentNode, metaNode.getAttributeValue("content"));
 
     // Disallow empty and blacklisted URLs.
-    if (imageUrl.isEmpty() ||
-        metaNode.getAttributeValue("content").trim().isEmpty() ||
-        IMAGE_URL_BLACKLIST.contains(imageUrl)) {
+    if (imageUrl.isEmpty()
+        || metaNode.getAttributeValue("content").trim().isEmpty()
+        || IMAGE_URL_BLACKLIST.contains(imageUrl)
+        || imageUrl.contains("/bhorowitz/sites/1/meta_images/original/logo.png")) {
       return -1;
     }
 

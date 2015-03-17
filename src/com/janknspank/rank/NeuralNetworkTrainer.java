@@ -28,8 +28,12 @@ import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
   private static int MAX_ITERATIONS = 50000;
-  private Double[] lowestErrorNetworkWeights;
+  private Double[] lastNetworkWeights;
   private double lowestError = 1.0;
+
+  @SuppressWarnings("unused")
+  private Double[] lowestErrorNetworkWeights;
+  @SuppressWarnings("unused")
   private double lowestErrorIteration = 0;
 
   private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
@@ -49,9 +53,14 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     neuralNetwork.learn(trainingSet);
     System.out.println("Trained");
 
-    // Return the network with the lowest error.
-    System.out.println("Lowest error: " + lowestError + " at iteration " + lowestErrorIteration);
-    neuralNetwork.setWeights(ArrayUtils.toPrimitive(lowestErrorNetworkWeights));
+    // NOTE(jonemerson): We used to do this, but I found that about 30% of the
+    // time, the neural network would come out ranking crappy articles highly.
+    // I'm experimenting for now to see if taking the longest iteration has a
+    // higher propensity to generate a high-quality stream.
+    // // Return the network with the lowest error.
+    // System.out.println("Lowest error: " + lowestError + " at iteration " + lowestErrorIteration);
+    // neuralNetwork.setWeights(ArrayUtils.toPrimitive(lowestErrorNetworkWeights));
+    neuralNetwork.setWeights(ArrayUtils.toPrimitive(lastNetworkWeights));
 
     // Print correlation of each input node to the output.
     for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
@@ -121,6 +130,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     if (bp.getCurrentIteration() % 1000 == 0) {
       System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
     }
+    lastNetworkWeights = bp.getNeuralNetwork().getWeights();
 
     if (error < lowestError) {
       lowestError = error;

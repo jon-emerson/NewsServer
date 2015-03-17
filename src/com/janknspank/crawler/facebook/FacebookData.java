@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 
+import com.janknspank.bizness.Articles;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.common.Logger;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
@@ -65,8 +66,7 @@ public class FacebookData {
             .setShareScore(FacebookShareNormalizer.getInstance().getShareScore(
                 url,
                 shareCount,
-                Math.max(0, System.currentTimeMillis() - article.getPublishedTime())
-                    /* ageInMillis */))
+                System.currentTimeMillis() - Articles.getPublishedTime(article) /* ageInMillis */))
             .setCommentCount(commentCount)
             .setCreateTime(System.currentTimeMillis())
             .build();

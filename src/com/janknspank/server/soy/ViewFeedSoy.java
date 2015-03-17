@@ -80,7 +80,7 @@ public class ViewFeedSoy {
       if (engagement == null) {
         engagement = SocialEngagement.getDefaultInstance();
       }
-      articleSoyMapData.put("fb_score", (int) engagement.getShareScore());
+      articleSoyMapData.put("fb_score", engagement.getShareScore());
       articleSoyMapData.put("fb_likes", (int) engagement.getLikeCount());
       articleSoyMapData.put("fb_shares", (int) engagement.getShareCount());
       articleSoyMapData.put("fb_comments" , (int) engagement.getCommentCount());
