@@ -1,13 +1,11 @@
 package com.janknspank.bizness;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.api.client.util.Lists;
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
@@ -19,65 +17,48 @@ public class UserInterests {
    * Filters out TOMBSTONEd interests
    */
   public static List<Interest> getInterests(User user) {
-    Map<InterestType, List<Interest>> tombstoneInterestMap = Maps.asMap(
-        ImmutableSet.copyOf(InterestType.values()),
-        new Function<InterestType, List<Interest>>() {
-          @Override
-          public List<Interest> apply(InterestType interestType) {
-            return Lists.newArrayList();
-          }
-        });
+    // There's a method behind this madness: Interests can come from anywhere.
+    // A user can follow Tumblr, then go work for Tumblr (which we should pick
+    // up and automatically add as an interest), then quit Tumblr... In which
+    // case, he should keep following Tumblr, because he followed it before we
+    // picked it up from LinkedIn.  But, if at any point the user stopped
+    // following Tumblr, we should store a TOMBSTONE deletion marker of this
+    // interest, which will win over interests whether they're implicit or
+    // explicit.
+    // NOTE(jonemerson): Yes, this is O(N^2), but N is <<< 100, so whatev.
+    List<Interest> activeInterests = Lists.newArrayList();
+    final List<Interest> tombstoneInterests = Lists.newArrayList();
     for (Interest interest : user.getInterestList()) {
       if (interest.getSource() == InterestSource.TOMBSTONE) {
-        tombstoneInterestMap.get(interest.getType()).add(interest);
+        if (!equivalentExists(tombstoneInterests, interest)) {
+          tombstoneInterests.add(interest);
+        }
+      } else {
+        if (!equivalentExists(activeInterests, interest)) {
+          activeInterests.add(interest);
+        }
       }
     }
-
-    List<Interest> cleanInterests = Lists.newArrayList();
-    for (Interest interest : user.getInterestList()) {
-      if (interest.getSource() == InterestSource.TOMBSTONE) {
-        continue;
+    return ImmutableList.copyOf(Iterables.filter(activeInterests, new Predicate<Interest>() {
+      @Override
+      public boolean apply(Interest interest) {
+        return !equivalentExists(tombstoneInterests, interest);
       }
-      switch (interest.getType()) {
-        case ENTITY:
-          for (Interest tombstoneInterest : tombstoneInterestMap.get(interest.getType())) {
-            // NOTE(jonemerson): Maybe we want to check entity type too?
-            // I'm being conservative here and killing any string matches.
-            if (tombstoneInterest.getEntity().getKeyword().equals(interest.getEntity().getKeyword())) {
-              break;
-            }
-          }
-          cleanInterests.add(interest);
-          break;
-
-        case INDUSTRY:
-          for (Interest tombstoneInterest : tombstoneInterestMap.get(interest.getType())) {
-            if (tombstoneInterest.getIndustryCode() == interest.getIndustryCode()) {
-              break;
-            }
-          }
-          cleanInterests.add(interest);
-          break;
-
-        default:
-          cleanInterests.add(interest);
-          break;
-      }
-    }
-    return cleanInterests;
+    }));
   }
 
   /**
-   * Returns only interests from a specific source.
+   * Returns true if the specified {@code interest} is equivalent to any
+   * Interest in {@code interestList}.
    */
-  public static List<Interest> getInterestsBySource(User user, InterestSource source) {
-    List<Interest> matchingInterests = new ArrayList<>();
-    for (Interest interest : user.getInterestList()) {
-      if (interest.getSource() == source) {
-        matchingInterests.add(interest);
+  private static boolean equivalentExists(
+      final Iterable<Interest> interestList, final Interest interest) {
+    return Iterables.any(interestList, new Predicate<Interest>() {
+      @Override
+      public boolean apply(Interest interestListInterest) {
+        return equivalent(interestListInterest, interest);
       }
-    }
-    return matchingInterests;
+    });
   }
 
   /**
