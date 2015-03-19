@@ -6,8 +6,9 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.janknspank.common.Logger;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
@@ -34,7 +35,7 @@ public class UrlFinder {
    * Retrieves the passed URL by making a request to the respective website,
    * and then interprets the returned results.
    */
-  public static List<String> findUrls(String url)
+  public static Set<String> findUrls(String url)
       throws FetchException, ParserException, RequiredFieldException {
 
     FetchResponse response = FETCHER.fetch(url);
@@ -45,7 +46,7 @@ public class UrlFinder {
    * Returns all the URLs from the passed document.  Note: There is no filtering
    * done!!  It's ALL THE URLs!!  We do not want to crawl them all!
    */
-  public static List<String> findUrls(DocumentNode documentNode) {
+  public static Set<String> findUrls(DocumentNode documentNode) {
     List<Node> linkNodes = documentNode.findAll("html > body a[href]");
     if (linkNodes.isEmpty()) {
       // Some sites (like archrecord.construction.com) don't have <html> outer
@@ -54,7 +55,7 @@ public class UrlFinder {
       linkNodes = bodyNode.findAll("a[href]");
     }
 
-    List<String> urlList = Lists.newArrayList();
+    Set<String> urlSet = Sets.newHashSet();
     for (Node linkNode : linkNodes) {
       String href = linkNode.getAttributeValue("href");
       String hrefToLowerCase = href.toLowerCase();
@@ -66,14 +67,14 @@ public class UrlFinder {
           // To save on space, only save links to articles.  Without this,
           // 80% of our data is links to general category pages and the like.
           if (ArticleUrlDetector.isArticle(resolvedUrl)) {
-            urlList.add(resolvedUrl);
+            urlSet.add(resolvedUrl);
           }
         } catch (MalformedURLException e) {
           LOG.info("Bad relative URL: " + linkNode.getAttributeValue("href"));
         }
       }
     }
-    return urlList;
+    return urlSet;
   }
 
   /**

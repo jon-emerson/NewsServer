@@ -29,7 +29,12 @@ public enum EntityType {
   NEWSPAPER("newsp", PERIODICAL_LITERATURE, "http://dbpedia.org/ontology/Newspaper"),
   POEM("poem", WRITTEN_WORK, "http://dbpedia.org/ontology/Poem"),
   PLAY("play", WRITTEN_WORK, "http://dbpedia.org/ontology/Play"),
-  SOFTWARE("sw", WORK, "http://dbpedia.org/ontology/Software"),
+
+  // Note: This is different than the "official" DBPedia ontology tree.  But it
+  // is the right difference for us: We want people to follow YouTube, Skype,
+  // WhatsApp, etc, as independent companies/organizations.
+  SOFTWARE("sw", ORGANIZATION, "http://dbpedia.org/ontology/Software"),
+
   WEBSITE("web", WORK, "http://dbpedia.org/ontology/Website"),
   SPORTS_TEAM("steam", ORGANIZATION, "http://dbpedia.org/ontology/SportsTeam"),
   TELEVISION_SHOW("ts", WORK, "http://dbpedia.org/ontology/TelevisionShow"),

@@ -55,4 +55,12 @@ public class Interpreter {
         .addAllUrl(UrlFinder.findUrls(documentNode))
         .build();
   }
+
+  public static void main(String args[])
+      throws FetchException, ParserException, RequiredFieldException {
+    if (args.length != 1 || !args[0].startsWith("http")) {
+      System.out.println("Tell us what URL to interpret please... and only 1!");
+    }
+    System.out.println(Interpreter.interpret(Url.newBuilder().setUrl(args[0]).build()));
+  }
 }

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -135,7 +137,7 @@ public class ArticleCrawler implements Callable<Void> {
     }
 
     @SuppressWarnings("unused")
-    List<String> urls;
+    Set<String> urls;
 
     Article article = null;
     if (ArticleUrlDetector.isArticle(url.getUrl())) {
@@ -159,7 +161,7 @@ public class ArticleCrawler implements Callable<Void> {
         // Try again!
         Database.insert(article);
       }
-      urls = interpretedData.getUrlList();
+      urls = ImmutableSet.copyOf(interpretedData.getUrlList());
     } else {
       urls = UrlFinder.findUrls(url.getUrl());
     }

@@ -123,6 +123,11 @@ message Entity {
     (string_length) = 100
   ];
 
+  optional string short_name = 11 [
+    (storage_method) = PULL_OUT,
+    (string_length) = 30
+  ];
+
   optional string type = 3 [
     (required) = YES,
     (storage_method) = PULL_OUT,
@@ -512,5 +517,58 @@ message PushNotification {
   optional string text = 9 [
     (required) = YES,
     (string_length) = 1024
+  ];
+}
+
+message KeywordToEntityId {
+  option (database_collection) = "MySQL.KeywordToEntity";
+
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional string keyword = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 100
+  ];
+
+  optional string type = 3 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 5,
+    (string_charset) = LATIN1
+  ];
+
+  optional string entity_id = 4 [
+    (string_length) = 24,
+    (string_charset) = LATIN1,
+    (storage_method) = PULL_OUT
+  ];
+
+  // What industries this entity tends to be talked about in reference to.  The
+  // list of the top 3 industry codes (actually feature IDs) are given, so that
+  // we make double-check that entity references are valid and topical.
+  optional int32 top_industry_id_1 = 5 [
+    (storage_method) = PULL_OUT
+  ];
+  optional int32 top_industry_id_2 = 6 [
+    (storage_method) = PULL_OUT
+  ];
+  optional int32 top_industry_id_3 = 7 [
+    (storage_method) = PULL_OUT
+  ];
+
+  // Number of times we saw this keyword when generating the table.
+  optional int32 count = 8 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+
+  optional bool reviewed = 9 [
+    (storage_method) = PULL_OUT
   ];
 }

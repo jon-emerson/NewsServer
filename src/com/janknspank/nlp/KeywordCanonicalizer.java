@@ -1,8 +1,12 @@
 package com.janknspank.nlp;
 
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.api.client.util.Lists;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
@@ -12,31 +16,18 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
+import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
-import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
 import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.KeywordToEntityId;
 
 public class KeywordCanonicalizer {
   private static final Set<String> PERSON_TITLES = Sets.newHashSet(
       "dr", "mr", "ms", "mrs", "miss", "prof", "rev");
-
-  /**
-   * Returns a score for how much we like the passed keyword's type.
-   */
-  private static int getArticleKeywordScore(ArticleKeyword keyword) {
-    EntityType type = EntityType.fromValue(keyword.getType());
-    if (type != null) {
-      if (type.isA(EntityType.PLACE)) {
-        return 20;
-      } else if (type.isA(EntityType.ORGANIZATION)) {
-        return 30;
-      } else if (type.isA(EntityType.PERSON)) {
-        return 29;
-      }
-    }
-    return keyword.getSource() == Source.META_TAG ? 5 : 10;
-  }
+  private static Map<String, KeywordToEntityId> __keywordToEntityIdMap = null;
+  private static Map<String, Entity> __entityIdToEntityMap = null;
 
   /**
    * Figures out which of the passed keyword strings are better.  Longer
@@ -71,9 +62,14 @@ public class KeywordCanonicalizer {
    * higher.
    */
   private static ArticleKeyword merge(ArticleKeyword keyword1, ArticleKeyword keyword2) {
+    boolean keyword1IsBetter = keyword1.hasParagraphNumber();
+    if (keyword2.hasParagraphNumber()) {
+      keyword1IsBetter = keyword1.getParagraphNumber() > keyword2.getParagraphNumber()
+          || (keyword1.getParagraphNumber() == keyword2.getParagraphNumber()
+              && keyword1.getStrength() > keyword2.getStrength());
+    }
     ArticleKeyword.Builder keywordBuilder =
-        (getArticleKeywordScore(keyword1) > getArticleKeywordScore(keyword2))
-            ? keyword1.toBuilder() : keyword2.toBuilder();
+        keyword1IsBetter ? keyword1.toBuilder() : keyword2.toBuilder();
     keywordBuilder.setKeyword(getBestKeywordStr(keyword1.getKeyword(), keyword2.getKeyword()));
     keywordBuilder.setStrength(
         Math.max(keyword1.getStrength(), keyword2.getStrength()) + 1);
@@ -118,7 +114,7 @@ public class KeywordCanonicalizer {
     });
 
     // Create a map of unique keyword names, merging any dupes as we find them.
-    Map<String, ArticleKeyword> keywordMap = Maps.newHashMap();
+    LinkedHashMap<String, ArticleKeyword> keywordMap = Maps.newLinkedHashMap();
     for (ArticleKeyword keyword : keywords) {
       String keywordStr = keyword.getKeyword().trim();
       if (keywordMap.containsKey(keywordStr)) {
@@ -167,6 +163,92 @@ public class KeywordCanonicalizer {
       }
     }
 
-    return keywordMap.values();
+    // Further canonicalize remaining keywords to a set of Entities, if we can.
+    List<ArticleKeyword> finalKeywords = Lists.newArrayList();
+    Set<String> entityIdsSoFar = Sets.newHashSet();
+    Map<String, KeywordToEntityId> keywordToEntityIdMap = getKeywordToEntityIdMap();
+    Map<String, Entity> entityIdToEntityMap = getEntityIdToEntityMap();
+
+    // Make sure we're dealing with keywords in paragraph-order.  These keywords
+    // should already be in proper order, but it doesn't hurt to do it again.
+    // (And prevents against future bugs.)
+    List<ArticleKeyword> keywordList = Lists.newArrayList(keywordMap.values());
+    keywordList.sort(new Comparator<ArticleKeyword>() {
+      @Override
+      public int compare(ArticleKeyword articleKeyword1, ArticleKeyword articleKeyword2) {
+        return Integer.compare(
+            articleKeyword1.getParagraphNumber(), articleKeyword2.getParagraphNumber());
+      }
+    });
+    for (ArticleKeyword keyword : keywordList) {
+      KeywordToEntityId keywordToEntityId =
+          keywordToEntityIdMap.get(keyword.getKeyword().toLowerCase());
+      if (keywordToEntityId != null) {
+        // Prevent dupes: If we already have canonicalized this keyword to an
+        // Entity, we're good... We can stop now :).
+        if (entityIdsSoFar.contains(keywordToEntityId.getEntityId())) {
+          continue;
+        }
+        entityIdsSoFar.add(keywordToEntityId.getEntityId());
+
+        // Now you can see why keeping the keywords in paragraph order is
+        // important: If we didn't, keywords found at the bottom of the article
+        // could prevent title and/or first-paragraph keywords from being
+        // properly scored.
+        int strengthAddition = 0;
+        if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 0) {
+          // Title match.
+          strengthAddition += 150;
+        } else if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 1) {
+          strengthAddition += 100;
+        }
+
+        Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
+        finalKeywords.add(keyword.toBuilder()
+            .setEntity(entity)
+            .setKeyword(entity.hasShortName() ? entity.getShortName() : entity.getKeyword())
+            .setStrength(keyword.getStrength() + strengthAddition)
+            .build());
+      } else {
+        finalKeywords.add(keyword);
+      }
+    }
+    return finalKeywords;
+  }
+
+  private static synchronized Map<String, KeywordToEntityId> getKeywordToEntityIdMap() {
+    if (__keywordToEntityIdMap == null) {
+      __keywordToEntityIdMap = Maps.newHashMap();
+      try {
+        for (KeywordToEntityId keywordToEntityId : Database.with(KeywordToEntityId.class).get(
+            new QueryOption.WhereNotNull("entity_id"))) {
+          __keywordToEntityIdMap.put(keywordToEntityId.getKeyword(), keywordToEntityId);
+        }
+      } catch (DatabaseSchemaException e) {
+        throw new Error(e);
+      }
+    }
+    return __keywordToEntityIdMap;
+  }
+
+  private static synchronized Map<String, Entity> getEntityIdToEntityMap() {
+    if (__entityIdToEntityMap == null) {
+      Map<String, KeywordToEntityId> keywordToEntityIdMap = getKeywordToEntityIdMap();
+      Set<String> entityIds = Sets.newHashSet();
+      for (KeywordToEntityId keywordToEntityId : keywordToEntityIdMap.values()) {
+        entityIds.add(keywordToEntityId.getEntityId());
+      }
+      try {
+        __entityIdToEntityMap = Maps.newHashMap();
+        for (Entity entity : Database.with(Entity.class).get(entityIds)) {
+          __entityIdToEntityMap.put(entity.getId(), entity.toBuilder()
+              .clearTopic() // These are pretty big and we don't need them here.
+              .build());
+        }
+      } catch (DatabaseSchemaException e) {
+        throw new Error(e);
+      }
+    }
+    return __entityIdToEntityMap;
   }
 }

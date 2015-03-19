@@ -59,7 +59,8 @@ public class KeywordFinderTest {
             + "on wikipedia."
             + "</p></div>"
             + "</body</html>"));
-    Iterable<ArticleKeyword> keywords = KEYWORD_FINDER.findKeywords("urlId", documentNode);
+    Iterable<ArticleKeyword> keywords =
+        KEYWORD_FINDER.findKeywords("urlId", "Article title", documentNode);
 
     // While these are in the <meta> tag, they do not exist in the document,
     // so we filter them.

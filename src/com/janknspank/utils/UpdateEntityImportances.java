@@ -10,17 +10,22 @@ import org.apache.commons.io.IOUtils;
 
 import com.google.api.client.util.Lists;
 import com.google.common.base.Joiner;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.janknspank.common.CsvReader;
 import com.janknspank.database.Database;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.KeywordToEntityId;
 
 /**
- * Uses the Fortune 500, NYSE, and Nasdaq data to give importance to entities
- * so that larger companies auto-complete first when searching for companies.
+ * Uses the canonical entity frequency (basically, how often entities we're
+ * tracking occur in the news), Fortune 500, NYSE, Nasdaq data to give
+ * importance to entities so that newsier and larger companies auto-complete
+ * first when searching for companies.
  */
 public class UpdateEntityImportances {
   private static Map<String, Integer> getFortune500Map() {
@@ -93,7 +98,7 @@ public class UpdateEntityImportances {
     return companyNames;
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main2(String args[]) throws Exception {
     // Start with the Fortune 500.  The top company gets 550 importance points.
     // The bottom company gets 50.
     Map<String, Integer> companyScoreMap = getFortune500Map();
@@ -141,6 +146,32 @@ public class UpdateEntityImportances {
       Database.update(entitiesToUpdate);
       entitiesToUpdate.clear();
     }
-    System.out.println("Entities updated: " + count);
+    System.out.println("Entities updated: " + count + ". Starting pass 2.");
+
+    // Use the frequency of articles about each entity to boost their
+    // importances.
+    // NOTE(jonemerson): Having KeywordToEntityId be fresh is key to this
+    // working well.
+    Multiset<String> entityIdCount = HashMultiset.create();
+    for (KeywordToEntityId keywordToEntityId : Database.with(KeywordToEntityId.class).get()) {
+      if (keywordToEntityId.hasEntityId()) {
+        entityIdCount.add(keywordToEntityId.getEntityId(), keywordToEntityId.getCount());
+      }
+    }
+    List<Entity> entitiesToUpdate = Lists.newArrayList();
+    for (Entity entity : Database.with(Entity.class).get(entityIdCount.elementSet())) {
+      if (!entityIdCount.contains(entity.getId())) {
+        continue;
+      }
+      entitiesToUpdate.add(entity.toBuilder()
+          .setImportance(entity.getImportance() + (entityIdCount.count(entity.getId()) / 2) + 25)
+          .build());
+      if (entitiesToUpdate.size() > 100) {
+        System.out.print("x");
+        Database.update(entitiesToUpdate);
+        entitiesToUpdate.clear();
+      }
+    }
+    Database.update(entitiesToUpdate);
   }
 }

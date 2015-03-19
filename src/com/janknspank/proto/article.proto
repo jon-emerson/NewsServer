@@ -1,6 +1,7 @@
 // Article object definition for NewsServer.
 
 import "com/janknspank/database/extensions.proto";
+import "com/janknspank/proto/core.proto";
 
 option java_package = "com.janknspank.proto";
 option java_outer_classname = "ArticleProto";
@@ -139,6 +140,12 @@ message ArticleKeyword {
   optional Source source = 4 [
     default = UNKNOWN
   ];
+
+  // TODO(jonemerson): Make (required) = YES.
+  optional int32 paragraph_number = 5;
+
+  // Canonicalized entity that we've determined this keyword represents.
+  optional Entity entity = 6;
 }
 
 message SocialEngagement {

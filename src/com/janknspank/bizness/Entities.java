@@ -1,12 +1,9 @@
 package com.janknspank.bizness;
 
 import java.util.List;
-import java.util.Set;
 
-import com.google.common.base.Predicates;
 import com.google.common.cache.CacheLoader;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.janknspank.database.Database;
@@ -31,18 +28,12 @@ public class Entities extends CacheLoader<String, Entity> {
 
   public static Iterable<Entity> getEntitiesByKeyword(Iterable<String> keywords)
       throws DatabaseSchemaException {
-    List<Entity> entities = Lists.newArrayList();
-    Set<String> keywordsToFetch = ImmutableSet.copyOf(keywords);
-    for (Entity entity : Database.with(Entity.class).get(
-        new QueryOption.WhereEquals("keyword", keywordsToFetch))) {
-      // Make sure the keyword we got matches the case of what we're looking
-      // for.  This guards against "FloRida" the musical artist being matched
-      // when an article is actually about "Florida" the state.
-      if (keywordsToFetch.contains(entity.getKeyword())) {
-        entities.add(entity);
-      }
-    }
-    return Iterables.filter(entities, Predicates.not(Predicates.isNull()));
+    return Database.with(Entity.class).get(
+        new QueryOption.WhereEquals("keyword", keywords),
+        new QueryOption.WhereNotEqualsNumber("source",
+            Entity.Source.DBPEDIA_LONG_ABSTRACT.getNumber()),
+        new QueryOption.DescendingSort("importance"),
+        new QueryOption.AscendingSort("source"));
   }
 
   /**

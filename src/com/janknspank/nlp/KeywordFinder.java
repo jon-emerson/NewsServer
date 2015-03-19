@@ -19,7 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -105,7 +104,8 @@ public class KeywordFinder {
    * in the article body, meta tags, wherever!
    * @throws RequiredFieldException 
    */
-  public Iterable<ArticleKeyword> findKeywords(String urlId, DocumentNode documentNode)
+  public Iterable<ArticleKeyword> findKeywords(
+      String urlId, String title, DocumentNode documentNode)
       throws RequiredFieldException {
     List<ArticleKeyword> keywords = new ArrayList<ArticleKeyword>() {
       @Override
@@ -126,28 +126,65 @@ public class KeywordFinder {
     Iterable<Node> articleNodes = ParagraphFinder.getParagraphNodes(documentNode);
     articleNodes = Iterables.limit(articleNodes,
         (int) Math.ceil(((double) Iterables.size(articleNodes)) * 2 / 3)); 
-    Iterables.addAll(keywords, findParagraphKeywords(urlId, Iterables.transform(articleNodes,
-        new Function<Node, String>() {
-          @Override
-          public String apply(Node articleNode) {
-            return articleNode.getFlattenedText();
-          }
-        })));
+    Iterables.addAll(keywords, findParagraphKeywords(
+        urlId,
+        title,
+        Iterables.transform(articleNodes,
+            new Function<Node, String>() {
+              @Override
+              public String apply(Node articleNode) {
+                return articleNode.getFlattenedText();
+              }
+            })));
 
     return KeywordCanonicalizer.canonicalize(keywords);
   }
 
   public synchronized Iterable<ArticleKeyword> findParagraphKeywords(
-      String urlId, Iterable<String> paragraphs) {
+      String urlId, String title, Iterable<String> paragraphs) {
     List<ArticleKeyword> keywords = Lists.newArrayList();
 
-    for (String paragraph : paragraphs) {
+    // Go through each paragraph, find keywords with the natural language
+    // processor, then insert them into keywords.  While doing so, remember
+    // which paragraph we're looking at.
+    // NOTE: The natural language processor is a piece of crap and often
+    // misses keywords in one paragraph only to find them later.  Considering
+    // paragraph number is very important, we need to remember where we've
+    // seen various tokens so we can fix-up paragraph numbers once keywords
+    // are finally detected.
+    Map<String, Integer> tokenToFirstParagraph = Maps.newHashMap();
+    int paragraphNumber = 0;
+    for (String paragraph : Iterables.concat(ImmutableList.of(title + "."), paragraphs)) {
       for (String sentence : SENTENCE_DETECTOR_ME.sentDetect(paragraph)) {
         String[] tokens = TOKENIZER.tokenize(sentence);
-        Iterables.addAll(keywords, findPeople(urlId, tokens));
-        Iterables.addAll(keywords, findOrganizations(urlId, tokens));
-        Iterables.addAll(keywords, findLocations(urlId, tokens));
+        for (ArticleKeyword keyword : Iterables.concat(
+            findPeople(urlId, tokens, paragraphNumber),
+            findOrganizations(urlId, tokens, paragraphNumber),
+            findLocations(urlId, tokens, paragraphNumber))) {
+          if (tokenToFirstParagraph.containsKey(keyword.getKeyword().toLowerCase())) {
+            keywords.add(keyword.toBuilder()
+                .setParagraphNumber(tokenToFirstParagraph.get(keyword.getKeyword().toLowerCase()))
+                .build());
+          } else {
+            // The NLP engine is also stupid about tokenizing company names with concatenated
+            // words into multiple tokens.  E.g. LinkedIn -> linked in, HotWheels -> hot wheels.
+            String whitespacelessKeyword = keyword.getKeyword().toLowerCase().replaceAll("(\\s|\u00A0)", "");
+            if (tokenToFirstParagraph.containsKey(whitespacelessKeyword)) {
+              keywords.add(keyword.toBuilder()
+                  .setParagraphNumber(tokenToFirstParagraph.get(whitespacelessKeyword))
+                  .build());
+            } else {
+              keywords.add(keyword);
+            }
+          }
+        }
+        for (String token : tokens) {
+          if (!tokenToFirstParagraph.containsKey(token)) {
+            tokenToFirstParagraph.put(token.toLowerCase(), paragraphNumber);
+          }
+        }
       }
+      paragraphNumber++;
     }
     for (NameFinderME personFinderMe : PERSON_FINDER_LIST) {
       personFinderMe.clearAdaptiveData();
@@ -165,6 +202,7 @@ public class KeywordFinder {
   private synchronized Iterable<ArticleKeyword> findKeywords(
       String urlId,
       String[] tokens,
+      int paragraphNumber,
       List<NameFinderME> finders,
       EntityType type,
       int strengthMultiplier,
@@ -181,9 +219,10 @@ public class KeywordFinder {
           } else {
             keywordMap.put(keywordStr, ArticleKeyword.newBuilder()
                 .setKeyword(keywordStr)
-                .setStrength(strengthMultiplier)
+                .setStrength(Math.max(1, strengthMultiplier - paragraphNumber))
                 .setType(type.toString())
-                .setSource(Source.NLP));
+                .setSource(Source.NLP)
+                .setParagraphNumber(paragraphNumber));
           }
         }
       }
@@ -197,30 +236,36 @@ public class KeywordFinder {
         });
   }
 
-  private synchronized Iterable<ArticleKeyword> findPeople(String urlId, String[] tokens) {
+  private synchronized Iterable<ArticleKeyword> findPeople(
+      String urlId, String[] tokens, int paragraphNumber) {
     return findKeywords(
         urlId,
         tokens,
+        paragraphNumber,
         PERSON_FINDER_LIST,
         EntityType.PERSON,
         5 /* strengthMultiplier */,
         20 /* maxStrength */);
   }
 
-  private synchronized Iterable<ArticleKeyword> findOrganizations(String urlId, String[] tokens) {
+  private synchronized Iterable<ArticleKeyword> findOrganizations(
+      String urlId, String[] tokens, int paragraphNumber) {
     return findKeywords(
         urlId,
         tokens,
+        paragraphNumber,
         ORGANIZATION_FINDER_LIST,
         EntityType.ORGANIZATION,
         5 /* strengthMultiplier */,
         20 /* maxStrength */);
   }
 
-  private synchronized Iterable<ArticleKeyword> findLocations(String urlId, String[] tokens) {
+  private synchronized Iterable<ArticleKeyword> findLocations(
+      String urlId, String[] tokens, int paragraphNumber) {
     return findKeywords(
         urlId,
         tokens,
+        paragraphNumber,
         LOCATION_FINDER_LIST,
         EntityType.PLACE,
         3 /* strengthMultiplier */,
@@ -320,24 +365,21 @@ public class KeywordFinder {
     // Find all the Nodes inside paragraphs that do not have any children.
     // E.g. if we had <p><a href="#">Michael Douglass</a> is awesome</p>,
     // this method would return the <a> node only.
-    Iterable<Node> childlessChildNodes = Iterables.concat(
-        Iterables.transform(
-            ParagraphFinder.getParagraphNodes(documentNode),
-            new Function<Node, Iterable<Node>>() {
-              @Override
-              public Iterable<Node> apply(Node paragraph) {
-                return Iterables.filter(paragraph.findAll("*"),
-                    new Predicate<Node>() {
-                      @Override
-                      public boolean apply(Node child) {
-                        return !child.hasChildNodes();
-                      }
-                    });
-              }
-            }));
+    List<Node> childlessChildNodes = Lists.newArrayList();
+    Map<Node, Integer> nodeParagraphNumberMap = Maps.newHashMap();
+    int paragraphNumber = 0;
+    for (Node paragraphNode : ParagraphFinder.getParagraphNodes(documentNode)) {
+      paragraphNumber++;
+      for (Node node : paragraphNode.findAll("*")) {
+        if (!node.hasChildNodes()) {
+          childlessChildNodes.add(node);
+          nodeParagraphNumberMap.put(node, paragraphNumber);
+        }
+      }
+    }
 
     // Find text that looks like keywords in all the childless nodes.
-    Set<String> keywords = Sets.newHashSet();
+    Map<String, Integer> keywords = Maps.newHashMap();
     for (Node childlessChildNode : childlessChildNodes) {
       String possibleKeyword = childlessChildNode.getFlattenedText();
 
@@ -347,21 +389,22 @@ public class KeywordFinder {
           possibleKeyword.equals(WordUtils.capitalizeFully(possibleKeyword)) &&
           !possibleKeyword.equals(possibleKeyword.toUpperCase()) &&
           StringUtils.countMatches(possibleKeyword, " ") < 5) {
-        keywords.add(possibleKeyword);
+        keywords.put(possibleKeyword, nodeParagraphNumberMap.get(childlessChildNode));
       }
     }
 
     // Create a bunch of objects for the keywords we found.
-    return Iterables.transform(keywords,
-        new Function<String, ArticleKeyword>() {
+    return Iterables.transform(keywords.entrySet(),
+        new Function<Map.Entry<String, Integer>, ArticleKeyword>() {
           @Override
-          public ArticleKeyword apply(String keyword) {
+          public ArticleKeyword apply(Map.Entry<String, Integer> entry) {
             return ArticleKeyword.newBuilder()
-              .setKeyword(keyword)
-              .setStrength(4)
-              .setSource(Source.HYPERLINK)
-              .setType(EntityType.THING.toString())
-              .build();
+                .setKeyword(entry.getKey())
+                .setStrength(1)
+                .setSource(Source.HYPERLINK)
+                .setType(EntityType.THING.toString())
+                .setParagraphNumber(entry.getValue())
+                .build();
           }
         });
   }

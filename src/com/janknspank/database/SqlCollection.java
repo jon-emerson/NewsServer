@@ -63,8 +63,12 @@ public class SqlCollection<T extends Message> extends Collection<T> {
   }
 
   protected Connection getConnection() throws DatabaseSchemaException {
-    if (__connection == null) {
-      __connection = SqlConnection.getConnection();
+    try {
+      if (__connection == null || __connection.isClosed()) {
+        __connection = SqlConnection.getConnection();
+      }
+    } catch (SQLException e) {
+      throw new DatabaseSchemaException("Could not use connection", e);
     }
     return __connection;
   }

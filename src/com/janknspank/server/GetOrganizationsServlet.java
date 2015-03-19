@@ -28,7 +28,8 @@ public class GetOrganizationsServlet extends StandardServlet {
     // for non-unique keys once you go to 10 or more options.
     Iterable<String> organizationTypes = ImmutableList.of(
         EntityType.ORGANIZATION.toString(),
-        EntityType.COMPANY.toString());
+        EntityType.COMPANY.toString(),
+        EntityType.SOFTWARE.toString());
     if (searchString != null) {
       orgs = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", searchString + "%"),

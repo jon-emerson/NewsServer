@@ -75,8 +75,8 @@ public class GetKeywordsFromDbpediaAbstracts {
     // Find words that look like keywords, using NLP.  This helps find entities
     // that might not be in Wikipedia - Which is probably quite a few!
     List<Entity> entities = Lists.newArrayList();
-    for (ArticleKeyword articleKeyword :
-        KEYWORD_FINDER.findParagraphKeywords("" /* urlId */, ImmutableList.of(text))) {
+    for (ArticleKeyword articleKeyword : KEYWORD_FINDER.findParagraphKeywords(
+        "" /* urlId */, "" /* articleTitle */, ImmutableList.of(text))) {
       if (!articleKeyword.getKeyword().contains(".")) {
         entities.add(Entity.newBuilder()
             .setKeyword(articleKeyword.getKeyword())

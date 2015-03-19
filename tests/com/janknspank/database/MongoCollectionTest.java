@@ -18,7 +18,14 @@ public class MongoCollectionTest {
         Database.getDefaultInstance(Article.class).getDescriptorForType();
     Set<String> indexes =
         Sets.newHashSet(MongoCollection.getIndexes(articleDescriptor.getFields()));
-    assertEquals(ImmutableSet.of("feature.feature_id", "keyword.keyword", "published_time"),
+
+    // Kinda B.S. that we need "keyword.entity.keyword" here.  Wish there was
+    // a way to say "index if we're in this table but not in other tables".
+    // Maybe indexes should be specified at the table level rather than on the
+    // fields?
+    assertEquals(
+        ImmutableSet.of(
+            "feature.feature_id", "keyword.entity.keyword", "keyword.keyword", "published_time"),
         indexes);
   }
 }

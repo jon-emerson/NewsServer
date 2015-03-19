@@ -2864,6 +2864,21 @@ public final class CoreProto {
     com.google.protobuf.ByteString
         getKeywordBytes();
 
+    // optional string short_name = 11;
+    /**
+     * <code>optional string short_name = 11;</code>
+     */
+    boolean hasShortName();
+    /**
+     * <code>optional string short_name = 11;</code>
+     */
+    java.lang.String getShortName();
+    /**
+     * <code>optional string short_name = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getShortNameBytes();
+
     // optional string type = 3;
     /**
      * <code>optional string type = 3;</code>
@@ -3091,7 +3106,7 @@ public final class CoreProto {
               break;
             }
             case 26: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               type_ = input.readBytes();
               break;
             }
@@ -3101,42 +3116,47 @@ public final class CoreProto {
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000008;
+                bitField0_ |= 0x00000010;
                 source_ = value;
               }
               break;
             }
             case 42: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               canonicalId_ = input.readBytes();
               break;
             }
             case 50: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 topic_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.Entity.EntityTopic>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000040;
               }
               topic_.add(input.readMessage(com.janknspank.proto.CoreProto.Entity.EntityTopic.PARSER, extensionRegistry));
               break;
             }
             case 58: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               oldId_ = input.readBytes();
               break;
             }
             case 64: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               angelListId_ = input.readInt64();
               break;
             }
             case 72: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               importance_ = input.readInt32();
               break;
             }
             case 82: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               tickerSymbol_ = input.readBytes();
+              break;
+            }
+            case 90: {
+              bitField0_ |= 0x00000004;
+              shortName_ = input.readBytes();
               break;
             }
           }
@@ -3147,7 +3167,7 @@ public final class CoreProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           topic_ = java.util.Collections.unmodifiableList(topic_);
         }
         this.unknownFields = unknownFields.build();
@@ -4545,6 +4565,49 @@ public final class CoreProto {
       }
     }
 
+    // optional string short_name = 11;
+    public static final int SHORT_NAME_FIELD_NUMBER = 11;
+    private java.lang.Object shortName_;
+    /**
+     * <code>optional string short_name = 11;</code>
+     */
+    public boolean hasShortName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string short_name = 11;</code>
+     */
+    public java.lang.String getShortName() {
+      java.lang.Object ref = shortName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          shortName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string short_name = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getShortNameBytes() {
+      java.lang.Object ref = shortName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        shortName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional string type = 3;
     public static final int TYPE_FIELD_NUMBER = 3;
     private java.lang.Object type_;
@@ -4552,7 +4615,7 @@ public final class CoreProto {
      * <code>optional string type = 3;</code>
      */
     public boolean hasType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional string type = 3;</code>
@@ -4595,7 +4658,7 @@ public final class CoreProto {
      * <code>optional .Entity.Source source = 4;</code>
      */
     public boolean hasSource() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional .Entity.Source source = 4;</code>
@@ -4619,7 +4682,7 @@ public final class CoreProto {
      * </pre>
      */
     public boolean hasCanonicalId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional string canonical_id = 5;</code>
@@ -4720,7 +4783,7 @@ public final class CoreProto {
      * </pre>
      */
     public boolean hasOldId() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional string old_id = 7;</code>
@@ -4779,7 +4842,7 @@ public final class CoreProto {
      * </pre>
      */
     public boolean hasAngelListId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional int64 angel_list_id = 8;</code>
@@ -4799,7 +4862,7 @@ public final class CoreProto {
      * <code>optional int32 importance = 9;</code>
      */
     public boolean hasImportance() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional int32 importance = 9;</code>
@@ -4815,7 +4878,7 @@ public final class CoreProto {
      * <code>optional string ticker_symbol = 10;</code>
      */
     public boolean hasTickerSymbol() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional string ticker_symbol = 10;</code>
@@ -4854,6 +4917,7 @@ public final class CoreProto {
     private void initFields() {
       id_ = "";
       keyword_ = "";
+      shortName_ = "";
       type_ = "";
       source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
       canonicalId_ = "";
@@ -4881,29 +4945,32 @@ public final class CoreProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getKeywordBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(3, getTypeBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeEnum(4, source_.getNumber());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(5, getCanonicalIdBytes());
       }
       for (int i = 0; i < topic_.size(); i++) {
         output.writeMessage(6, topic_.get(i));
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(7, getOldIdBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt64(8, angelListId_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeInt32(9, importance_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(10, getTickerSymbolBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(11, getShortNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4922,15 +4989,15 @@ public final class CoreProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getKeywordBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getTypeBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, source_.getNumber());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getCanonicalIdBytes());
       }
@@ -4938,21 +5005,25 @@ public final class CoreProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, topic_.get(i));
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getOldIdBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(8, angelListId_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, importance_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(10, getTickerSymbolBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(11, getShortNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5075,26 +5146,28 @@ public final class CoreProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         keyword_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        type_ = "";
+        shortName_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
+        type_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        canonicalId_ = "";
+        source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000010);
+        canonicalId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         if (topicBuilder_ == null) {
           topic_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           topicBuilder_.clear();
         }
         oldId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
-        angelListId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
-        importance_ = 0;
+        angelListId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000100);
-        tickerSymbol_ = "";
+        importance_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
+        tickerSymbol_ = "";
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -5134,38 +5207,42 @@ public final class CoreProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.type_ = type_;
+        result.shortName_ = shortName_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.source_ = source_;
+        result.type_ = type_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
+        result.source_ = source_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
         result.canonicalId_ = canonicalId_;
         if (topicBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             topic_ = java.util.Collections.unmodifiableList(topic_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.topic_ = topic_;
         } else {
           result.topic_ = topicBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.oldId_ = oldId_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.angelListId_ = angelListId_;
+        result.oldId_ = oldId_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.importance_ = importance_;
+        result.angelListId_ = angelListId_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000100;
+        }
+        result.importance_ = importance_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000200;
         }
         result.tickerSymbol_ = tickerSymbol_;
         result.bitField0_ = to_bitField0_;
@@ -5194,8 +5271,13 @@ public final class CoreProto {
           keyword_ = other.keyword_;
           onChanged();
         }
-        if (other.hasType()) {
+        if (other.hasShortName()) {
           bitField0_ |= 0x00000004;
+          shortName_ = other.shortName_;
+          onChanged();
+        }
+        if (other.hasType()) {
+          bitField0_ |= 0x00000008;
           type_ = other.type_;
           onChanged();
         }
@@ -5203,7 +5285,7 @@ public final class CoreProto {
           setSource(other.getSource());
         }
         if (other.hasCanonicalId()) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
           canonicalId_ = other.canonicalId_;
           onChanged();
         }
@@ -5211,7 +5293,7 @@ public final class CoreProto {
           if (!other.topic_.isEmpty()) {
             if (topic_.isEmpty()) {
               topic_ = other.topic_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureTopicIsMutable();
               topic_.addAll(other.topic_);
@@ -5224,7 +5306,7 @@ public final class CoreProto {
               topicBuilder_.dispose();
               topicBuilder_ = null;
               topic_ = other.topic_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
               topicBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTopicFieldBuilder() : null;
@@ -5234,7 +5316,7 @@ public final class CoreProto {
           }
         }
         if (other.hasOldId()) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
           oldId_ = other.oldId_;
           onChanged();
         }
@@ -5245,7 +5327,7 @@ public final class CoreProto {
           setImportance(other.getImportance());
         }
         if (other.hasTickerSymbol()) {
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000400;
           tickerSymbol_ = other.tickerSymbol_;
           onChanged();
         }
@@ -5424,13 +5506,87 @@ public final class CoreProto {
         return this;
       }
 
+      // optional string short_name = 11;
+      private java.lang.Object shortName_ = "";
+      /**
+       * <code>optional string short_name = 11;</code>
+       */
+      public boolean hasShortName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string short_name = 11;</code>
+       */
+      public java.lang.String getShortName() {
+        java.lang.Object ref = shortName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          shortName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string short_name = 11;</code>
+       */
+      public com.google.protobuf.ByteString
+          getShortNameBytes() {
+        java.lang.Object ref = shortName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          shortName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string short_name = 11;</code>
+       */
+      public Builder setShortName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        shortName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string short_name = 11;</code>
+       */
+      public Builder clearShortName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        shortName_ = getDefaultInstance().getShortName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string short_name = 11;</code>
+       */
+      public Builder setShortNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        shortName_ = value;
+        onChanged();
+        return this;
+      }
+
       // optional string type = 3;
       private java.lang.Object type_ = "";
       /**
        * <code>optional string type = 3;</code>
        */
       public boolean hasType() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional string type = 3;</code>
@@ -5470,7 +5626,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         type_ = value;
         onChanged();
         return this;
@@ -5479,7 +5635,7 @@ public final class CoreProto {
        * <code>optional string type = 3;</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         type_ = getDefaultInstance().getType();
         onChanged();
         return this;
@@ -5492,7 +5648,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         type_ = value;
         onChanged();
         return this;
@@ -5504,7 +5660,7 @@ public final class CoreProto {
        * <code>optional .Entity.Source source = 4;</code>
        */
       public boolean hasSource() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional .Entity.Source source = 4;</code>
@@ -5519,7 +5675,7 @@ public final class CoreProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         source_ = value;
         onChanged();
         return this;
@@ -5528,7 +5684,7 @@ public final class CoreProto {
        * <code>optional .Entity.Source source = 4;</code>
        */
       public Builder clearSource() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         source_ = com.janknspank.proto.CoreProto.Entity.Source.UNKNOWN;
         onChanged();
         return this;
@@ -5548,7 +5704,7 @@ public final class CoreProto {
        * </pre>
        */
       public boolean hasCanonicalId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional string canonical_id = 5;</code>
@@ -5612,7 +5768,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         canonicalId_ = value;
         onChanged();
         return this;
@@ -5629,7 +5785,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder clearCanonicalId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         canonicalId_ = getDefaultInstance().getCanonicalId();
         onChanged();
         return this;
@@ -5650,7 +5806,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         canonicalId_ = value;
         onChanged();
         return this;
@@ -5660,9 +5816,9 @@ public final class CoreProto {
       private java.util.List<com.janknspank.proto.CoreProto.Entity.EntityTopic> topic_ =
         java.util.Collections.emptyList();
       private void ensureTopicIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           topic_ = new java.util.ArrayList<com.janknspank.proto.CoreProto.Entity.EntityTopic>(topic_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -5811,7 +5967,7 @@ public final class CoreProto {
       public Builder clearTopic() {
         if (topicBuilder_ == null) {
           topic_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           topicBuilder_.clear();
@@ -5888,7 +6044,7 @@ public final class CoreProto {
           topicBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.CoreProto.Entity.EntityTopic, com.janknspank.proto.CoreProto.Entity.EntityTopic.Builder, com.janknspank.proto.CoreProto.Entity.EntityTopicOrBuilder>(
                   topic_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           topic_ = null;
@@ -5908,7 +6064,7 @@ public final class CoreProto {
        * </pre>
        */
       public boolean hasOldId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional string old_id = 7;</code>
@@ -5966,7 +6122,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         oldId_ = value;
         onChanged();
         return this;
@@ -5981,7 +6137,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder clearOldId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         oldId_ = getDefaultInstance().getOldId();
         onChanged();
         return this;
@@ -6000,7 +6156,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         oldId_ = value;
         onChanged();
         return this;
@@ -6016,7 +6172,7 @@ public final class CoreProto {
        * </pre>
        */
       public boolean hasAngelListId() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional int64 angel_list_id = 8;</code>
@@ -6036,7 +6192,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder setAngelListId(long value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         angelListId_ = value;
         onChanged();
         return this;
@@ -6049,7 +6205,7 @@ public final class CoreProto {
        * </pre>
        */
       public Builder clearAngelListId() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         angelListId_ = 0L;
         onChanged();
         return this;
@@ -6061,7 +6217,7 @@ public final class CoreProto {
        * <code>optional int32 importance = 9;</code>
        */
       public boolean hasImportance() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional int32 importance = 9;</code>
@@ -6073,7 +6229,7 @@ public final class CoreProto {
        * <code>optional int32 importance = 9;</code>
        */
       public Builder setImportance(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         importance_ = value;
         onChanged();
         return this;
@@ -6082,7 +6238,7 @@ public final class CoreProto {
        * <code>optional int32 importance = 9;</code>
        */
       public Builder clearImportance() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         importance_ = 0;
         onChanged();
         return this;
@@ -6094,7 +6250,7 @@ public final class CoreProto {
        * <code>optional string ticker_symbol = 10;</code>
        */
       public boolean hasTickerSymbol() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional string ticker_symbol = 10;</code>
@@ -6134,7 +6290,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000400;
         tickerSymbol_ = value;
         onChanged();
         return this;
@@ -6143,7 +6299,7 @@ public final class CoreProto {
        * <code>optional string ticker_symbol = 10;</code>
        */
       public Builder clearTickerSymbol() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         tickerSymbol_ = getDefaultInstance().getTickerSymbol();
         onChanged();
         return this;
@@ -6156,7 +6312,7 @@ public final class CoreProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000400;
         tickerSymbol_ = value;
         onChanged();
         return this;
@@ -17201,6 +17357,1430 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:PushNotification)
   }
 
+  public interface KeywordToEntityIdOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string id = 1;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional string keyword = 2;
+    /**
+     * <code>optional string keyword = 2;</code>
+     */
+    boolean hasKeyword();
+    /**
+     * <code>optional string keyword = 2;</code>
+     */
+    java.lang.String getKeyword();
+    /**
+     * <code>optional string keyword = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeywordBytes();
+
+    // optional string type = 3;
+    /**
+     * <code>optional string type = 3;</code>
+     */
+    boolean hasType();
+    /**
+     * <code>optional string type = 3;</code>
+     */
+    java.lang.String getType();
+    /**
+     * <code>optional string type = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getTypeBytes();
+
+    // optional string entity_id = 4;
+    /**
+     * <code>optional string entity_id = 4;</code>
+     */
+    boolean hasEntityId();
+    /**
+     * <code>optional string entity_id = 4;</code>
+     */
+    java.lang.String getEntityId();
+    /**
+     * <code>optional string entity_id = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getEntityIdBytes();
+
+    // optional int32 top_industry_id_1 = 5;
+    /**
+     * <code>optional int32 top_industry_id_1 = 5;</code>
+     *
+     * <pre>
+     * What industries this entity tends to be talked about in reference to.  The
+     * list of the top 3 industry codes (actually feature IDs) are given, so that
+     * we make double-check that entity references are valid and topical.
+     * </pre>
+     */
+    boolean hasTopIndustryId1();
+    /**
+     * <code>optional int32 top_industry_id_1 = 5;</code>
+     *
+     * <pre>
+     * What industries this entity tends to be talked about in reference to.  The
+     * list of the top 3 industry codes (actually feature IDs) are given, so that
+     * we make double-check that entity references are valid and topical.
+     * </pre>
+     */
+    int getTopIndustryId1();
+
+    // optional int32 top_industry_id_2 = 6;
+    /**
+     * <code>optional int32 top_industry_id_2 = 6;</code>
+     */
+    boolean hasTopIndustryId2();
+    /**
+     * <code>optional int32 top_industry_id_2 = 6;</code>
+     */
+    int getTopIndustryId2();
+
+    // optional int32 top_industry_id_3 = 7;
+    /**
+     * <code>optional int32 top_industry_id_3 = 7;</code>
+     */
+    boolean hasTopIndustryId3();
+    /**
+     * <code>optional int32 top_industry_id_3 = 7;</code>
+     */
+    int getTopIndustryId3();
+
+    // optional int32 count = 8;
+    /**
+     * <code>optional int32 count = 8;</code>
+     *
+     * <pre>
+     * Number of times we saw this keyword when generating the table.
+     * </pre>
+     */
+    boolean hasCount();
+    /**
+     * <code>optional int32 count = 8;</code>
+     *
+     * <pre>
+     * Number of times we saw this keyword when generating the table.
+     * </pre>
+     */
+    int getCount();
+
+    // optional bool reviewed = 9;
+    /**
+     * <code>optional bool reviewed = 9;</code>
+     */
+    boolean hasReviewed();
+    /**
+     * <code>optional bool reviewed = 9;</code>
+     */
+    boolean getReviewed();
+  }
+  /**
+   * Protobuf type {@code KeywordToEntityId}
+   */
+  public static final class KeywordToEntityId extends
+      com.google.protobuf.GeneratedMessage
+      implements KeywordToEntityIdOrBuilder {
+    // Use KeywordToEntityId.newBuilder() to construct.
+    private KeywordToEntityId(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private KeywordToEntityId(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final KeywordToEntityId defaultInstance;
+    public static KeywordToEntityId getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public KeywordToEntityId getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private KeywordToEntityId(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              keyword_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              type_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              entityId_ = input.readBytes();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              topIndustryId1_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              topIndustryId2_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              topIndustryId3_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              count_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              reviewed_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_KeywordToEntityId_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_KeywordToEntityId_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.KeywordToEntityId.class, com.janknspank.proto.CoreProto.KeywordToEntityId.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<KeywordToEntityId> PARSER =
+        new com.google.protobuf.AbstractParser<KeywordToEntityId>() {
+      public KeywordToEntityId parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new KeywordToEntityId(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<KeywordToEntityId> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string keyword = 2;
+    public static final int KEYWORD_FIELD_NUMBER = 2;
+    private java.lang.Object keyword_;
+    /**
+     * <code>optional string keyword = 2;</code>
+     */
+    public boolean hasKeyword() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string keyword = 2;</code>
+     */
+    public java.lang.String getKeyword() {
+      java.lang.Object ref = keyword_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          keyword_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string keyword = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeywordBytes() {
+      java.lang.Object ref = keyword_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        keyword_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string type = 3;
+    public static final int TYPE_FIELD_NUMBER = 3;
+    private java.lang.Object type_;
+    /**
+     * <code>optional string type = 3;</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string type = 3;</code>
+     */
+    public java.lang.String getType() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          type_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string type = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTypeBytes() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        type_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string entity_id = 4;
+    public static final int ENTITY_ID_FIELD_NUMBER = 4;
+    private java.lang.Object entityId_;
+    /**
+     * <code>optional string entity_id = 4;</code>
+     */
+    public boolean hasEntityId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string entity_id = 4;</code>
+     */
+    public java.lang.String getEntityId() {
+      java.lang.Object ref = entityId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          entityId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string entity_id = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEntityIdBytes() {
+      java.lang.Object ref = entityId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        entityId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 top_industry_id_1 = 5;
+    public static final int TOP_INDUSTRY_ID_1_FIELD_NUMBER = 5;
+    private int topIndustryId1_;
+    /**
+     * <code>optional int32 top_industry_id_1 = 5;</code>
+     *
+     * <pre>
+     * What industries this entity tends to be talked about in reference to.  The
+     * list of the top 3 industry codes (actually feature IDs) are given, so that
+     * we make double-check that entity references are valid and topical.
+     * </pre>
+     */
+    public boolean hasTopIndustryId1() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 top_industry_id_1 = 5;</code>
+     *
+     * <pre>
+     * What industries this entity tends to be talked about in reference to.  The
+     * list of the top 3 industry codes (actually feature IDs) are given, so that
+     * we make double-check that entity references are valid and topical.
+     * </pre>
+     */
+    public int getTopIndustryId1() {
+      return topIndustryId1_;
+    }
+
+    // optional int32 top_industry_id_2 = 6;
+    public static final int TOP_INDUSTRY_ID_2_FIELD_NUMBER = 6;
+    private int topIndustryId2_;
+    /**
+     * <code>optional int32 top_industry_id_2 = 6;</code>
+     */
+    public boolean hasTopIndustryId2() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 top_industry_id_2 = 6;</code>
+     */
+    public int getTopIndustryId2() {
+      return topIndustryId2_;
+    }
+
+    // optional int32 top_industry_id_3 = 7;
+    public static final int TOP_INDUSTRY_ID_3_FIELD_NUMBER = 7;
+    private int topIndustryId3_;
+    /**
+     * <code>optional int32 top_industry_id_3 = 7;</code>
+     */
+    public boolean hasTopIndustryId3() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 top_industry_id_3 = 7;</code>
+     */
+    public int getTopIndustryId3() {
+      return topIndustryId3_;
+    }
+
+    // optional int32 count = 8;
+    public static final int COUNT_FIELD_NUMBER = 8;
+    private int count_;
+    /**
+     * <code>optional int32 count = 8;</code>
+     *
+     * <pre>
+     * Number of times we saw this keyword when generating the table.
+     * </pre>
+     */
+    public boolean hasCount() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 count = 8;</code>
+     *
+     * <pre>
+     * Number of times we saw this keyword when generating the table.
+     * </pre>
+     */
+    public int getCount() {
+      return count_;
+    }
+
+    // optional bool reviewed = 9;
+    public static final int REVIEWED_FIELD_NUMBER = 9;
+    private boolean reviewed_;
+    /**
+     * <code>optional bool reviewed = 9;</code>
+     */
+    public boolean hasReviewed() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional bool reviewed = 9;</code>
+     */
+    public boolean getReviewed() {
+      return reviewed_;
+    }
+
+    private void initFields() {
+      id_ = "";
+      keyword_ = "";
+      type_ = "";
+      entityId_ = "";
+      topIndustryId1_ = 0;
+      topIndustryId2_ = 0;
+      topIndustryId3_ = 0;
+      count_ = 0;
+      reviewed_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getKeywordBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getTypeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getEntityIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, topIndustryId1_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, topIndustryId2_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, topIndustryId3_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, count_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBool(9, reviewed_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getKeywordBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getTypeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getEntityIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, topIndustryId1_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, topIndustryId2_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, topIndustryId3_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, count_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(9, reviewed_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.KeywordToEntityId parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.KeywordToEntityId prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code KeywordToEntityId}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.KeywordToEntityIdOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_KeywordToEntityId_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_KeywordToEntityId_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.KeywordToEntityId.class, com.janknspank.proto.CoreProto.KeywordToEntityId.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.KeywordToEntityId.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        keyword_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        type_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        entityId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        topIndustryId1_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        topIndustryId2_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        topIndustryId3_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        count_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        reviewed_ = false;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_KeywordToEntityId_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.KeywordToEntityId getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.KeywordToEntityId.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.KeywordToEntityId build() {
+        com.janknspank.proto.CoreProto.KeywordToEntityId result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.KeywordToEntityId buildPartial() {
+        com.janknspank.proto.CoreProto.KeywordToEntityId result = new com.janknspank.proto.CoreProto.KeywordToEntityId(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.keyword_ = keyword_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.entityId_ = entityId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.topIndustryId1_ = topIndustryId1_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.topIndustryId2_ = topIndustryId2_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.topIndustryId3_ = topIndustryId3_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.count_ = count_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.reviewed_ = reviewed_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.KeywordToEntityId) {
+          return mergeFrom((com.janknspank.proto.CoreProto.KeywordToEntityId)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.KeywordToEntityId other) {
+        if (other == com.janknspank.proto.CoreProto.KeywordToEntityId.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasKeyword()) {
+          bitField0_ |= 0x00000002;
+          keyword_ = other.keyword_;
+          onChanged();
+        }
+        if (other.hasType()) {
+          bitField0_ |= 0x00000004;
+          type_ = other.type_;
+          onChanged();
+        }
+        if (other.hasEntityId()) {
+          bitField0_ |= 0x00000008;
+          entityId_ = other.entityId_;
+          onChanged();
+        }
+        if (other.hasTopIndustryId1()) {
+          setTopIndustryId1(other.getTopIndustryId1());
+        }
+        if (other.hasTopIndustryId2()) {
+          setTopIndustryId2(other.getTopIndustryId2());
+        }
+        if (other.hasTopIndustryId3()) {
+          setTopIndustryId3(other.getTopIndustryId3());
+        }
+        if (other.hasCount()) {
+          setCount(other.getCount());
+        }
+        if (other.hasReviewed()) {
+          setReviewed(other.getReviewed());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.KeywordToEntityId parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.KeywordToEntityId) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string keyword = 2;
+      private java.lang.Object keyword_ = "";
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public boolean hasKeyword() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public java.lang.String getKeyword() {
+        java.lang.Object ref = keyword_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          keyword_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeywordBytes() {
+        java.lang.Object ref = keyword_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          keyword_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public Builder setKeyword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        keyword_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public Builder clearKeyword() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        keyword_ = getDefaultInstance().getKeyword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string keyword = 2;</code>
+       */
+      public Builder setKeywordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        keyword_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string type = 3;
+      private java.lang.Object type_ = "";
+      /**
+       * <code>optional string type = 3;</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string type = 3;</code>
+       */
+      public java.lang.String getType() {
+        java.lang.Object ref = type_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          type_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string type = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTypeBytes() {
+        java.lang.Object ref = type_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          type_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string type = 3;</code>
+       */
+      public Builder setType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string type = 3;</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        type_ = getDefaultInstance().getType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string type = 3;</code>
+       */
+      public Builder setTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string entity_id = 4;
+      private java.lang.Object entityId_ = "";
+      /**
+       * <code>optional string entity_id = 4;</code>
+       */
+      public boolean hasEntityId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string entity_id = 4;</code>
+       */
+      public java.lang.String getEntityId() {
+        java.lang.Object ref = entityId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          entityId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string entity_id = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEntityIdBytes() {
+        java.lang.Object ref = entityId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          entityId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string entity_id = 4;</code>
+       */
+      public Builder setEntityId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        entityId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string entity_id = 4;</code>
+       */
+      public Builder clearEntityId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        entityId_ = getDefaultInstance().getEntityId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string entity_id = 4;</code>
+       */
+      public Builder setEntityIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        entityId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 top_industry_id_1 = 5;
+      private int topIndustryId1_ ;
+      /**
+       * <code>optional int32 top_industry_id_1 = 5;</code>
+       *
+       * <pre>
+       * What industries this entity tends to be talked about in reference to.  The
+       * list of the top 3 industry codes (actually feature IDs) are given, so that
+       * we make double-check that entity references are valid and topical.
+       * </pre>
+       */
+      public boolean hasTopIndustryId1() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 top_industry_id_1 = 5;</code>
+       *
+       * <pre>
+       * What industries this entity tends to be talked about in reference to.  The
+       * list of the top 3 industry codes (actually feature IDs) are given, so that
+       * we make double-check that entity references are valid and topical.
+       * </pre>
+       */
+      public int getTopIndustryId1() {
+        return topIndustryId1_;
+      }
+      /**
+       * <code>optional int32 top_industry_id_1 = 5;</code>
+       *
+       * <pre>
+       * What industries this entity tends to be talked about in reference to.  The
+       * list of the top 3 industry codes (actually feature IDs) are given, so that
+       * we make double-check that entity references are valid and topical.
+       * </pre>
+       */
+      public Builder setTopIndustryId1(int value) {
+        bitField0_ |= 0x00000010;
+        topIndustryId1_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 top_industry_id_1 = 5;</code>
+       *
+       * <pre>
+       * What industries this entity tends to be talked about in reference to.  The
+       * list of the top 3 industry codes (actually feature IDs) are given, so that
+       * we make double-check that entity references are valid and topical.
+       * </pre>
+       */
+      public Builder clearTopIndustryId1() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        topIndustryId1_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 top_industry_id_2 = 6;
+      private int topIndustryId2_ ;
+      /**
+       * <code>optional int32 top_industry_id_2 = 6;</code>
+       */
+      public boolean hasTopIndustryId2() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 top_industry_id_2 = 6;</code>
+       */
+      public int getTopIndustryId2() {
+        return topIndustryId2_;
+      }
+      /**
+       * <code>optional int32 top_industry_id_2 = 6;</code>
+       */
+      public Builder setTopIndustryId2(int value) {
+        bitField0_ |= 0x00000020;
+        topIndustryId2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 top_industry_id_2 = 6;</code>
+       */
+      public Builder clearTopIndustryId2() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        topIndustryId2_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 top_industry_id_3 = 7;
+      private int topIndustryId3_ ;
+      /**
+       * <code>optional int32 top_industry_id_3 = 7;</code>
+       */
+      public boolean hasTopIndustryId3() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 top_industry_id_3 = 7;</code>
+       */
+      public int getTopIndustryId3() {
+        return topIndustryId3_;
+      }
+      /**
+       * <code>optional int32 top_industry_id_3 = 7;</code>
+       */
+      public Builder setTopIndustryId3(int value) {
+        bitField0_ |= 0x00000040;
+        topIndustryId3_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 top_industry_id_3 = 7;</code>
+       */
+      public Builder clearTopIndustryId3() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        topIndustryId3_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 count = 8;
+      private int count_ ;
+      /**
+       * <code>optional int32 count = 8;</code>
+       *
+       * <pre>
+       * Number of times we saw this keyword when generating the table.
+       * </pre>
+       */
+      public boolean hasCount() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 count = 8;</code>
+       *
+       * <pre>
+       * Number of times we saw this keyword when generating the table.
+       * </pre>
+       */
+      public int getCount() {
+        return count_;
+      }
+      /**
+       * <code>optional int32 count = 8;</code>
+       *
+       * <pre>
+       * Number of times we saw this keyword when generating the table.
+       * </pre>
+       */
+      public Builder setCount(int value) {
+        bitField0_ |= 0x00000080;
+        count_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 count = 8;</code>
+       *
+       * <pre>
+       * Number of times we saw this keyword when generating the table.
+       * </pre>
+       */
+      public Builder clearCount() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        count_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional bool reviewed = 9;
+      private boolean reviewed_ ;
+      /**
+       * <code>optional bool reviewed = 9;</code>
+       */
+      public boolean hasReviewed() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional bool reviewed = 9;</code>
+       */
+      public boolean getReviewed() {
+        return reviewed_;
+      }
+      /**
+       * <code>optional bool reviewed = 9;</code>
+       */
+      public Builder setReviewed(boolean value) {
+        bitField0_ |= 0x00000100;
+        reviewed_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool reviewed = 9;</code>
+       */
+      public Builder clearReviewed() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        reviewed_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:KeywordToEntityId)
+    }
+
+    static {
+      defaultInstance = new KeywordToEntityId(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:KeywordToEntityId)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -17286,6 +18866,11 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PushNotification_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_KeywordToEntityId_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_KeywordToEntityId_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -17311,77 +18896,86 @@ public final class CoreProto {
       "l\"\200\001\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001" +
       "\220\246\035\004\230\246\035\200\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017Mon" +
-      "goDB.Session\"\235\006\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
+      "goDB.Session\"\273\006\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
       "\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003" +
-      "\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006" +
-      "source\030\004 \001(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"",
-      "\n\014canonical_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022(\n\005to" +
-      "pic\030\006 \003(\0132\023.Entity.EntityTopicB\004\240\246\035\003\022 \n\006" +
-      "old_id\030\007 \001(\tB\020\220\246\035\005\230\246\035\030\250\246\035\001\240\246\035\003\022\033\n\rangel_" +
-      "list_id\030\010 \001(\003B\004\240\246\035\003\022\034\n\nimportance\030\t \001(\005B" +
-      "\010\220\246\035\005\240\246\035\003\022\'\n\rticker_symbol\030\n \001(\tB\020\220\246\035\005\230\246" +
-      "\035\n\250\246\035\001\240\246\035\003\032\277\002\n\013EntityTopic\022\033\n\tentity_id\030" +
-      "\001 \001(\tB\010\230\246\035\030\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246" +
-      "\035d\022\026\n\004type\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004" +
-      " \001(\005B\004\210\246\035\001\0225\n\007context\030\005 \001(\0162\033.Entity.Ent" +
-      "ityTopic.Context:\007UNKNOWN\"\220\001\n\007Context\022\013\n",
-      "\007UNKNOWN\020\000\022\027\n\023ANGELLIST_WORKED_AT\020\001\022\025\n\021A" +
-      "NGELLIST_FOUNDED\020\002\022\031\n\025ANGELLIST_INVESTED" +
-      "_IN\020\003\022\025\n\021ANGELLIST_ADVISED\020\004\022\026\n\022WIKIPEDI" +
-      "A_SUBTOPIC\020\005\"d\n\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025D" +
-      "BPEDIA_INSTANCE_TYPE\020\001\022\031\n\025DBPEDIA_LONG_A" +
-      "BSTRACT\020\002\022\r\n\tANGELLIST\020\003\022\010\n\004USER\020\004:\020\212\265\030\014" +
-      "MySQL.Entity\"\347\001\n\nVectorData\022\034\n\016document_" +
-      "count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 \003(" +
-      "\0132\031.VectorData.WordFrequency\022#\n\014distribu" +
-      "tion\030\003 \001(\0132\r.Distribution\032c\n\rWordFrequen",
-      "cy\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency\030" +
-      "\002 \001(\005B\004\210\246\035\001\022!\n\023document_occurences\030\003 \001(\005" +
-      "B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndustry\022 \n\006url" +
-      "_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_" +
-      "code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_" +
-      "id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB." +
-      "TrainedArticleIndustry\"\347\001\n\034TrainedArticl" +
-      "eClassification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035" +
-      "\003\230\246\035\030\250\246\035\001\0225\n\033article_classification_code" +
-      "\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(",
-      "\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246" +
-      "\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArtic" +
-      "leClassification\"\207\001\n\014Distribution\022,\n\nper" +
-      "centile\030\001 \003(\0132\030.Distribution.Percentile\032" +
-      "I\n\nPercentile\022\022\n\npercentile\030\001 \001(\005\022\r\n\005val" +
-      "ue\030\002 \001(\001\022\030\n\020data_point_count\030\003 \001(\003\"\226\003\n\026S" +
-      "hareNormalizationData\022T\n\027time_range_dist" +
-      "ribution\030\002 \003(\0132-.ShareNormalizationData." +
-      "TimeRangeDistributionB\004\210\246\035\001\022J\n\022domain_sh" +
-      "are_count\030\003 \003(\0132(.ShareNormalizationData",
-      ".DomainShareCountB\004\210\246\035\001\032x\n\025TimeRangeDist" +
-      "ribution\022\032\n\014start_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\n" +
-      "end_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014distribution\030\003" +
-      " \001(\0132\r.DistributionB\004\210\246\035\001\032`\n\020DomainShare" +
-      "Count\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_c" +
-      "ount\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_count\030\003 \001(\003B\004\210" +
-      "\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230" +
-      "\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d" +
-      "\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001" +
-      "\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_tim",
-      "e\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRati" +
-      "ng\"\331\001\n\022DeviceRegistration\022\034\n\002id\030\001 \001(\tB\020\210" +
-      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246" +
-      "\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.Device" +
-      "TypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250" +
-      "\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032Mong" +
-      "oDB.DeviceRegistration\"\274\002\n\020PushNotificat" +
-      "ion\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\031\n" +
-      "\013create_time\030\002 \001(\003B\004\210\246\035\001\022\022\n\nclick_time\030\003" +
-      " \001(\003\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022",
-      "\034\n\006url_id\030\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_" +
-      "type\030\006 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_" +
-      "id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246" +
-      "\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030Mon" +
-      "goDB.PushNotification*/\n\nDeviceType\022\013\n\007U" +
-      "NKNOWN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.ja" +
-      "nknspank.protoB\tCoreProto"
+      "\230\246\035d\022\034\n\nshort_name\030\013 \001(\tB\010\220\246\035\005\230\246\035\036\022\036\n\004ty" +
+      "pe\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001",
+      "(\0162\016.Entity.SourceB\010\210\246\035\001\220\246\035\005\022\"\n\014canonica" +
+      "l_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022(\n\005topic\030\006 \003(\0132" +
+      "\023.Entity.EntityTopicB\004\240\246\035\003\022 \n\006old_id\030\007 \001" +
+      "(\tB\020\220\246\035\005\230\246\035\030\250\246\035\001\240\246\035\003\022\033\n\rangel_list_id\030\010 " +
+      "\001(\003B\004\240\246\035\003\022\034\n\nimportance\030\t \001(\005B\010\220\246\035\005\240\246\035\003\022" +
+      "\'\n\rticker_symbol\030\n \001(\tB\020\220\246\035\005\230\246\035\n\250\246\035\001\240\246\035\003" +
+      "\032\277\002\n\013EntityTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035" +
+      "\030\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type" +
+      "\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001" +
+      "\0225\n\007context\030\005 \001(\0162\033.Entity.EntityTopic.C",
+      "ontext:\007UNKNOWN\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000" +
+      "\022\027\n\023ANGELLIST_WORKED_AT\020\001\022\025\n\021ANGELLIST_F" +
+      "OUNDED\020\002\022\031\n\025ANGELLIST_INVESTED_IN\020\003\022\025\n\021A" +
+      "NGELLIST_ADVISED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC" +
+      "\020\005\"d\n\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INS" +
+      "TANCE_TYPE\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022" +
+      "\r\n\tANGELLIST\020\003\022\010\n\004USER\020\004:\020\212\265\030\014MySQL.Enti" +
+      "ty\"\347\001\n\nVectorData\022\034\n\016document_count\030\001 \001(" +
+      "\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 \003(\0132\031.Vector" +
+      "Data.WordFrequency\022#\n\014distribution\030\003 \001(\013",
+      "2\r.Distribution\032c\n\rWordFrequency\022\026\n\004word" +
+      "\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency\030\002 \001(\005B\004\210\246\035" +
+      "\001\022!\n\023document_occurences\030\003 \001(\005B\004\210\246\035\001\"\255\001\n" +
+      "\026TrainedArticleIndustry\022 \n\006url_id\030\001 \001(\tB" +
+      "\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry_code_id\030\002 " +
+      "\001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\003 \001(\tB\020" +
+      "\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB.TrainedArt" +
+      "icleIndustry\"\347\001\n\034TrainedArticleClassific" +
+      "ation\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022" +
+      "5\n\033article_classification_code\030\002 \001(\tB\020\210\246",
+      "\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035" +
+      "\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
+      "\250\246\035\001:(\212\265\030$MongoDB.TrainedArticleClassifi" +
+      "cation\"\207\001\n\014Distribution\022,\n\npercentile\030\001 " +
+      "\003(\0132\030.Distribution.Percentile\032I\n\nPercent" +
+      "ile\022\022\n\npercentile\030\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030" +
+      "\n\020data_point_count\030\003 \001(\003\"\226\003\n\026ShareNormal" +
+      "izationData\022T\n\027time_range_distribution\030\002" +
+      " \003(\0132-.ShareNormalizationData.TimeRangeD" +
+      "istributionB\004\210\246\035\001\022J\n\022domain_share_count\030",
+      "\003 \003(\0132(.ShareNormalizationData.DomainSha" +
+      "reCountB\004\210\246\035\001\032x\n\025TimeRangeDistribution\022\032" +
+      "\n\014start_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis" +
+      "\030\002 \001(\003B\004\210\246\035\001\022)\n\014distribution\030\003 \001(\0132\r.Dis" +
+      "tributionB\004\210\246\035\001\032`\n\020DomainShareCount\022\024\n\006d" +
+      "omain\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 \001(\003" +
+      "B\004\210\246\035\001\022\031\n\013share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUr" +
+      "lRating\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035" +
+      "\003\022#\n\005email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036" +
+      "\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating",
+      "\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210" +
+      "\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRating\"\331\001\n\022Dev" +
+      "iceRegistration\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035" +
+      "\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001" +
+      "\022&\n\013device_type\030\003 \001(\0162\013.DeviceTypeB\004\210\246\035\001" +
+      "\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013cre" +
+      "ate_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032MongoDB.Device" +
+      "Registration\"\274\002\n\020PushNotification\022 \n\002id\030" +
+      "\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\031\n\013create_ti" +
+      "me\030\002 \001(\003B\004\210\246\035\001\022\022\n\nclick_time\030\003 \001(\003\022!\n\007us",
+      "er_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\034\n\006url_id\030" +
+      "\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\006 \001(\016" +
+      "2\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\007 \001(\tB\014" +
+      "\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004" +
+      "text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030MongoDB.PushN" +
+      "otification\"\300\002\n\021KeywordToEntityId\022\034\n\002id\030" +
+      "\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\t" +
+      "B\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246" +
+      "\035\005\250\246\035\001\022\037\n\tentity_id\030\004 \001(\tB\014\230\246\035\030\250\246\035\001\220\246\035\005\022" +
+      "\037\n\021top_industry_id_1\030\005 \001(\005B\004\220\246\035\005\022\037\n\021top_",
+      "industry_id_2\030\006 \001(\005B\004\220\246\035\005\022\037\n\021top_industr" +
+      "y_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005count\030\010 \001(\005B\010\210\246\035\001\220" +
+      "\246\035\005\022\026\n\010reviewed\030\t \001(\010B\004\220\246\035\005:\031\212\265\030\025MySQL.K" +
+      "eywordToEntity*/\n\nDeviceType\022\013\n\007UNKNOWN\020" +
+      "\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.janknspan" +
+      "k.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -17411,7 +19005,7 @@ public final class CoreProto {
           internal_static_Entity_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Entity_descriptor,
-              new java.lang.String[] { "Id", "Keyword", "Type", "Source", "CanonicalId", "Topic", "OldId", "AngelListId", "Importance", "TickerSymbol", });
+              new java.lang.String[] { "Id", "Keyword", "ShortName", "Type", "Source", "CanonicalId", "Topic", "OldId", "AngelListId", "Importance", "TickerSymbol", });
           internal_static_Entity_EntityTopic_descriptor =
             internal_static_Entity_descriptor.getNestedTypes().get(0);
           internal_static_Entity_EntityTopic_fieldAccessorTable = new
@@ -17490,6 +19084,12 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PushNotification_descriptor,
               new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Host", "Text", });
+          internal_static_KeywordToEntityId_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+          internal_static_KeywordToEntityId_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_KeywordToEntityId_descriptor,
+              new java.lang.String[] { "Id", "Keyword", "Type", "EntityId", "TopIndustryId1", "TopIndustryId2", "TopIndustryId3", "Count", "Reviewed", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -17539,6 +19139,8 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
@@ -17662,6 +19264,27 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           return registry;
         }
