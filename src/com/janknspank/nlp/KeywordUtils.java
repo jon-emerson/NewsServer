@@ -128,11 +128,9 @@ public class KeywordUtils {
   }
 
   /**
-   * Removes possessives and other dirt from strings our parser found (since we
-   * trained our parser to include them, so instead of ignoring them as false
-   * negatives).
+   * Removes cruft/dirt from keywords.  Doesn't attempt to do anything more.
    */
-  public static String cleanKeyword(String keyword) {
+  public static String scrubKeyword(String keyword) {
     keyword = keyword.trim();
     while (keyword.startsWith("‘") || keyword.startsWith("'") ||
         keyword.startsWith("“") || keyword.startsWith("\"") ||
@@ -166,6 +164,16 @@ public class KeywordUtils {
     if (keyword.endsWith("-based")) {
       keyword = keyword.substring(0, keyword.length() - "-based".length()).trim();
     }
+    return keyword;
+  }
+
+  /**
+   * Removes possessives and other dirt from strings our parser found (since we
+   * trained our parser to include them, so instead of ignoring them as false
+   * negatives).
+   */
+  public static String cleanKeyword(String keyword) {
+    keyword = scrubKeyword(keyword);
 
     // Since we want to canonicalize as much as we can, and have nice short
     // keywords, for now convert possessive objects to only their posessive

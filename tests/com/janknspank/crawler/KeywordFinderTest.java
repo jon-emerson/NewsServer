@@ -76,6 +76,6 @@ public class KeywordFinderTest {
     assertContainsKeyword("Brangelina", Source.META_TAG, keywords);
     assertContainsKeyword("Wikipedia", Source.META_TAG, keywords);
     assertContainsKeyword("Brad Pitt", Source.NLP, keywords);
-    assertContainsKeyword("Angelina Jolie", Source.HYPERLINK, keywords);
+    assertContainsKeyword("Angelina Jolie", Source.TITLE, keywords);
   }
 }

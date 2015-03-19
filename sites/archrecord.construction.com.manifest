@@ -4,6 +4,7 @@ start_url: "http://archrecord.construction.com/features/critique/"
 start_url: "http://archrecord.construction.com/news/daily/default.aspx"
 paragraph_selector: "#articleBodyText p"
 paragraph_selector: "#article > p"
+paragraph_selector: "#projectInfo > h3"
 path_blacklist {
   needle: "/Search/"
 }

@@ -240,7 +240,7 @@ public class KeywordCanonicalizer {
     if (keywordToEntityId != null) {
       Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
       return ImmutableList.of(ArticleKeyword.newBuilder()
-          .setKeyword(entity.getKeyword())
+          .setKeyword(entity.hasShortName() ? entity.getShortName() : entity.getKeyword())
           .setStrength(paragraphNumber == 0
               ? STRENGTH_FOR_TITLE_MATCH : STRENGTH_FOR_FIRST_PARAGRAPH_MATCH) // Title match.
           .setType(entity.getType())
@@ -276,7 +276,7 @@ public class KeywordCanonicalizer {
       if (word.isEmpty()) {
         // OK... nothing to do!
       } else if (Character.isUpperCase(word.charAt(0))) {
-        blockBuilder.add(word);
+        blockBuilder.add(KeywordUtils.scrubKeyword(word));
       } else {
         if (blockBuilder.size() > 0) {
           blocks.add(Joiner.on(" ").join(blockBuilder));
