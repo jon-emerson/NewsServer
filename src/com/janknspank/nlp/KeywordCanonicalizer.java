@@ -1,5 +1,6 @@
 package com.janknspank.nlp;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -8,8 +9,10 @@ import java.util.Set;
 
 import com.google.api.client.util.Lists;
 import com.google.common.base.CharMatcher;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -64,7 +67,7 @@ public class KeywordCanonicalizer {
   private static ArticleKeyword merge(ArticleKeyword keyword1, ArticleKeyword keyword2) {
     boolean keyword1IsBetter = keyword1.hasParagraphNumber();
     if (keyword2.hasParagraphNumber()) {
-      keyword1IsBetter = keyword1.getParagraphNumber() > keyword2.getParagraphNumber()
+      keyword1IsBetter = keyword1.getParagraphNumber() < keyword2.getParagraphNumber()
           || (keyword1.getParagraphNumber() == keyword2.getParagraphNumber()
               && keyword1.getStrength() > keyword2.getStrength());
     }
@@ -214,6 +217,78 @@ public class KeywordCanonicalizer {
       }
     }
     return finalKeywords;
+  }
+
+  /**
+   * If the passed block represents an entity, it is returned.  Else, the left
+   * side and the right side of the block are recursively checked, to see what
+   * entities we can possibly find anywhere in the block.
+   * NOTE(jonemerson): Yaaa this is expensive, which is why we only do it for
+   * titles!! :)
+   */
+  public static Iterable<ArticleKeyword> getArticleKeywordsFromTitleInternal(
+      String block,
+      Map<String, KeywordToEntityId> keywordToEntityIdMap,
+      Map<String, Entity> entityIdToEntityMap) {
+    KeywordToEntityId keywordToEntityId = keywordToEntityIdMap.get(block.toLowerCase());
+    if (keywordToEntityId != null) {
+      Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
+      return ImmutableList.of(ArticleKeyword.newBuilder()
+          .setKeyword(entity.getKeyword())
+          .setStrength(150) // Title match.
+          .setType(entity.getType())
+          .setSource(ArticleKeyword.Source.TITLE)
+          .setEntity(entity)
+          .setParagraphNumber(0)
+          .build());
+    } else if (block.contains(" ")) {
+      return Iterables.concat(
+          getArticleKeywordsFromTitleInternal(block.substring(0, block.lastIndexOf(" ")),
+              keywordToEntityIdMap, entityIdToEntityMap),
+          getArticleKeywordsFromTitleInternal(block.substring(block.indexOf(" ") + 1),
+          keywordToEntityIdMap, entityIdToEntityMap));
+    } else {
+      return Collections.emptyList();
+    }
+  }
+
+  /**
+   * Does a brute force search through all our keyword entities to try to find
+   * keywords.
+   */
+  public static List<ArticleKeyword> getArticleKeywordsFromTitle(String title) {
+    Map<String, KeywordToEntityId> keywordToEntityIdMap = getKeywordToEntityIdMap();
+    Map<String, Entity> entityIdToEntityMap = getEntityIdToEntityMap();
+
+    // Find consecutive capitalized words blocks.  E.g. "Senator Barbara Boxer
+    // goes to Google" would create [ "Senator Barbara Boxer", "Google" ].
+    List<String> blocks = Lists.newArrayList();
+    List<String> blockBuilder = Lists.newArrayList();
+    for (String word : title.split("(\\s|\u00A0)")) {
+      if (Character.isUpperCase(word.charAt(0))) {
+        blockBuilder.add(word);
+      } else {
+        if (blockBuilder.size() > 0) {
+          blocks.add(Joiner.on(" ").join(blockBuilder));
+          blockBuilder.clear();
+        }
+      }
+    }
+    if (blockBuilder.size() > 0) {
+      blocks.add(Joiner.on(" ").join(blockBuilder));
+      blockBuilder.clear();
+    }
+
+    Map<String, ArticleKeyword> entityIdToKeywordMap = Maps.newHashMap();
+    for (String block : blocks) {
+      for (ArticleKeyword keyword : getArticleKeywordsFromTitleInternal(
+          block, keywordToEntityIdMap, entityIdToEntityMap)) {
+        if (!entityIdToKeywordMap.containsKey(keyword.getEntity().getId())) {
+          entityIdToKeywordMap.put(keyword.getEntity().getId(), keyword);
+        }
+      }
+    }
+    return ImmutableList.copyOf(entityIdToKeywordMap.values());
   }
 
   private static synchronized Map<String, KeywordToEntityId> getKeywordToEntityIdMap() {

@@ -4072,6 +4072,10 @@ public final class ArticleProto {
        * <code>META_TAG = 3;</code>
        */
       META_TAG(3, 3),
+      /**
+       * <code>TITLE = 4;</code>
+       */
+      TITLE(4, 4),
       ;
 
       /**
@@ -4090,6 +4094,10 @@ public final class ArticleProto {
        * <code>META_TAG = 3;</code>
        */
       public static final int META_TAG_VALUE = 3;
+      /**
+       * <code>TITLE = 4;</code>
+       */
+      public static final int TITLE_VALUE = 4;
 
 
       public final int getNumber() { return value; }
@@ -4100,6 +4108,7 @@ public final class ArticleProto {
           case 1: return NLP;
           case 2: return HYPERLINK;
           case 3: return META_TAG;
+          case 4: return TITLE;
           default: return null;
         }
       }
@@ -7614,28 +7623,28 @@ public final class ArticleProto {
       "\004\240\246\035\003\022\024\n\006retain\030\022 \001(\010B\004\240\246\035\003\022%\n\006reason\030\023 " +
       "\001(\0162\017.Article.ReasonB\004\220\246\035\006\"<\n\006Reason\022\013\n\007" +
       "UNKNOWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006PERSON\020\002\022\013\n\007C" +
-      "OMPANY\020\003:\023\212\265\030\017MongoDB.Article\"\210\002\n\016Articl",
+      "OMPANY\020\003:\023\212\265\030\017MongoDB.Article\"\223\002\n\016Articl",
       "eKeyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022" +
       "\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210" +
       "\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.Articl" +
       "eKeyword.Source:\007UNKNOWN\022\030\n\020paragraph_nu" +
-      "mber\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\";\n\006S" +
+      "mber\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\"F\n\006S" +
       "ource\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK" +
-      "\020\002\022\014\n\010META_TAG\020\003\"\347\001\n\020SocialEngagement\022-\n" +
-      "\004site\030\001 \001(\0162\026.SocialEngagement.Site:\007UNK" +
-      "NOWN\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share" +
-      "_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025",
-      "\n\rcomment_count\030\005 \001(\003\022\023\n\013create_time\030\006 \001" +
-      "(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n" +
-      "\007TWITTER\020\002\"\323\001\n\016ArticleFeature\022\034\n\nfeature" +
-      "_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004type\030\004 \001(\0162\024.Arti" +
-      "cleFeature.Type:\007UNKNOWN\022\022\n\nsimilarity\030\002" +
-      " \001(\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTE" +
-      "NT\020\001\022\022\n\016ABOUT_INDUSTRY\020\002\022\022\n\016IMPROVES_SKI" +
-      "LL\020\003\022\022\n\016TEXT_CHARACTER\020\004\"9\n\017InterpretedD" +
-      "ata\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 " +
-      "\003(\tB$\n\024com.janknspank.protoB\014ArticleProt",
-      "o"
+      "\020\002\022\014\n\010META_TAG\020\003\022\t\n\005TITLE\020\004\"\347\001\n\020SocialEn" +
+      "gagement\022-\n\004site\030\001 \001(\0162\026.SocialEngagemen" +
+      "t.Site:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003B\004\210\246" +
+      "\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_co",
+      "unt\030\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013crea" +
+      "te_time\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FA" +
+      "CEBOOK\020\001\022\013\n\007TWITTER\020\002\"\323\001\n\016ArticleFeature" +
+      "\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022+\n\004type\030\004" +
+      " \001(\0162\024.ArticleFeature.Type:\007UNKNOWN\022\022\n\ns" +
+      "imilarity\030\002 \001(\001\"b\n\004Type\022\013\n\007UNKNOWN\020\000\022\021\n\r" +
+      "SERVES_INTENT\020\001\022\022\n\016ABOUT_INDUSTRY\020\002\022\022\n\016I" +
+      "MPROVES_SKILL\020\003\022\022\n\016TEXT_CHARACTER\020\004\"9\n\017I" +
+      "nterpretedData\022\031\n\007article\030\001 \001(\0132\010.Articl" +
+      "e\022\013\n\003url\030\002 \003(\tB$\n\024com.janknspank.protoB\014",
+      "ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

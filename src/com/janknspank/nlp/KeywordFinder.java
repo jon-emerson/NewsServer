@@ -119,6 +119,7 @@ public class KeywordFinder {
     };
     Iterables.addAll(keywords, findKeywordsInMetaTags(urlId, documentNode));
     Iterables.addAll(keywords, findKeywordsFromHypertext(urlId, documentNode));
+    Iterables.addAll(keywords, KeywordCanonicalizer.getArticleKeywordsFromTitle(title));
 
     // Use natural language processing to find keywords in the article text.
     // Only look at the top 2/3rds of the article, since sites tend to put

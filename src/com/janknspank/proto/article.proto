@@ -136,6 +136,7 @@ message ArticleKeyword {
     NLP = 1;
     HYPERLINK = 2;
     META_TAG = 3;
+    TITLE = 4;
   }
   optional Source source = 4 [
     default = UNKNOWN
