@@ -1,0 +1,129 @@
+root_domain: "spectrum.ieee.org"
+start_url: "http://spectrum.ieee.org/"
+subdomain_blacklist: "m.spectrum.ieee.org"
+path_blacklist {
+  needle: "/multimedia/"
+}
+path_blacklist {
+  needle: "/podcast/"
+}
+path_blacklist {
+  needle: "/static/"
+}
+path_blacklist {
+  needle: "/webinar/"
+}
+path_blacklist {
+  needle: "/searchContent"
+  location: EQUALS
+}
+paragraph_selector: ".articleBody p"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[^\\/]+\\/.+[^\\/]$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://spectrum.ieee.org/automaton/robotics/aerial-robots/quadrotor-with-wheels-can-drive-straight-up-walls"
+    article_url: "http://spectrum.ieee.org/automaton/robotics/industrial-robots/sawyer-rethink-robotics-new-robot"
+    article_url: "http://spectrum.ieee.org/automaton/robotics/industrial-robots/universal-robots-ur3-robotic-arm"
+    article_url: "http://spectrum.ieee.org/cars-that-think/transportation/self-driving/selfdriving-car-aims-for-first-crosscountry-road-trip"
+    article_url: "http://spectrum.ieee.org/cars-that-think/transportation/self-driving/who-might-not-be-looking-forward-to-selfdriving-cars"
+    article_url: "http://spectrum.ieee.org/energy/policy/a-pumped-hydro-energystorage-renaissance"
+    article_url: "http://spectrum.ieee.org/energy/renewables/moores-curse"
+    article_url: "http://spectrum.ieee.org/energywise/energy/fossil-fuels/co2-supersucker-for-carbon-capture"
+    article_url: "http://spectrum.ieee.org/energywise/green-tech/fuel-cells/spider-silk-smooths-path-to-better-batteries"
+    article_url: "http://spectrum.ieee.org/energywise/green-tech/solar/japan-demoes-wireless-power-transmission-for-spacebased-solar-farms"
+    article_url: "http://spectrum.ieee.org/energywise/green-tech/solar/new-trick-promises-perovskite-solar-films-for-windows-and-walls"
+    article_url: "http://spectrum.ieee.org/energywise/green-tech/solar/solar-could-exceed-californias-demand-5-times"
+    article_url: "http://spectrum.ieee.org/geek-life/profiles/eben-upton-the-raspberry-pi-pioneer"
+    article_url: "http://spectrum.ieee.org/geek-life/profiles/topher-white-repurposing-cellphones-to-defend-the-rain-forest"
+    article_url: "http://spectrum.ieee.org/nanoclast/semiconductors/materials/another-report-laments-the-status-of-carbon-nanotube-development"
+    article_url: "http://spectrum.ieee.org/nanoclast/semiconductors/materials/graphene-promises-a-millionfold-increase-in-data-storage-capacity"
+    article_url: "http://spectrum.ieee.org/tech-talk/aerospace/aviation/nasas-newest-xplane-will-fly-with-18-electric-motors"
+    article_url: "http://spectrum.ieee.org/tech-talk/aerospace/military/laser-bug-zapper-inches-to-market-"
+    article_url: "http://spectrum.ieee.org/tech-talk/aerospace/robotic-exploration/google-lunar-xprize-deadline-extended-to-2016"
+    article_url: "http://spectrum.ieee.org/tech-talk/at-work/innovation/liquid-3d-printing"
+    article_url: "http://spectrum.ieee.org/tech-talk/at-work/tech-careers/why-international-engineering-and-science-students-stay-or-go"
+    article_url: "http://spectrum.ieee.org/tech-talk/biomedical/bionics/a-braincomputing-interface-that-lasts-for-weeks"
+    article_url: "http://spectrum.ieee.org/tech-talk/biomedical/diagnostics/your-body-is-a-race-car-mclaren-wants-to-optimize-its-performance-"
+    article_url: "http://spectrum.ieee.org/tech-talk/semiconductors/optoelectronics/creating-a-laser-in-the-sky"
+    article_url: "http://spectrum.ieee.org/tech-talk/telecom/internet/rand-paul-woos-the-tech-crowd-at-sxsw-interactive"
+    article_url: "http://spectrum.ieee.org/telecom/internet/net-neutrality-is-like-a-delivery-truck-flowing-through-a-pipe-with-tollbooths"
+    article_url: "http://spectrum.ieee.org/transportation/advanced-cars/your-inevitable-robocar-future"
+    article_url: "http://spectrum.ieee.org/transportation/self-driving/selfparking"
+    article_url: "http://spectrum.ieee.org/view-from-the-valley/at-work/tech-careers/is-apple-poaching-or-just-hiring-as-it-staffs-up-for-electric-cars"
+    non_article_url: "http://spectrum.ieee.org/biomedical"
+    non_article_url: "http://spectrum.ieee.org/geek-life"
+    non_article_url: "http://spectrum.ieee.org/aerospace/robotic-exploration"
+    non_article_url: "http://spectrum.ieee.org/tag/Google+Lunar+XPrize/"
+    non_article_url: "http://spectrum.ieee.org/robotics/artificial-intelligence"
+    non_article_url: "http://spectrum.ieee.org/blog/energywise"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10559 # Electrical Engineering
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer Electronics
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  path_regex: "\\/biomedical\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "^\\/energywise\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10519 # Aviation
+  path_regex: "\\/aerospace\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10519 # Aviation
+  path_regex: "\\/aviation\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10520 # Automotive
+  path_regex: "\\/transportation\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  path_regex: "\\/software\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  path_regex: "\\/internet\\/"
+  boost: 1
+}

@@ -29,7 +29,6 @@ public class UpdateSocialEngagements {
 
     @Override
     public Void call() throws Exception {
-      long start = System.currentTimeMillis();
       SocialEngagement socialEngagement = FacebookData.getEngagementForURL(article);
       Database.set(article, "social_engagement", ImmutableList.of((Object) socialEngagement));
       return null;

@@ -68,6 +68,7 @@ public enum FeatureId {
   MARKETING_AND_ADVERTISING(10557, FeatureType.INDUSTRY, "Marketing and Advertising"),
   VENTURE_CAPITAL_AND_PRIVATE_EQUITY(10558, FeatureType.INDUSTRY,
       "Venture Capital and Private Equity"),
+  ELECTRICAL_ENGINEERING(10559, FeatureType.INDUSTRY, "Electrical Engineering"),
   STARTUP_TECH(20000, FeatureType.SERVES_INTENT, "Related to tech startups"),
   STARTUP_TRADITIONAL(20001, FeatureType.SERVES_INTENT,
       "Related to traditional brick and mortar startups"),

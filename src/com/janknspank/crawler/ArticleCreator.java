@@ -354,6 +354,14 @@ class ArticleCreator {
       return DateParser.parseDateTime(metaNode.getAttributeValue("value"));
     }
 
+    // Special handling for spectrum.ieee.org.
+    if (url.getUrl().startsWith("http://spectrum.ieee.org/")) {
+      Node dateTimeNode = documentNode.findFirst(".metadata label[datetime]");
+      if (dateTimeNode != null) {
+        return DateParser.parseDateTime(dateTimeNode.getFlattenedText());
+      }
+    }
+
     // Some sites (e.g. ribaj.com) bury a <date> tag into their HTML bodies.
     // E.g.
     // <time pubdate="pubdate" datetime="Fri Feb 27 2015 17:30:00 GMT+0000 (UTC)">

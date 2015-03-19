@@ -1,0 +1,37 @@
+root_domain: "eetimes.com"
+start_url: "http://www.eetimes.com/"
+path_blacklist {
+  needle: "/video.asp"
+  location: EQUALS
+}
+paragraph_selector: ".bigsmall p"
+article_url_pattern {
+  path_regex: "\\/(document|author)\\.asp$"
+  query_regex: "doc_id=[0-9]+"
+}
+whitelisted_query_parameter: "doc_id"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.eetimes.com/document.asp?doc_id=1326078"
+    article_url: "http://www.eetimes.com/document.asp?doc_id=1326080"
+    article_url: "http://www.eetimes.com/document.asp?doc_id=1326058"
+    article_url: "http://www.eetimes.com/document.asp?doc_id=1326069"
+    article_url: "http://www.eetimes.com/document.asp?doc_id=1326074"
+    article_url: "http://www.eetimes.com/document.asp?doc_id=1326063"
+    article_url: "http://www.eetimes.com/document.asp?doc_id=1326059"
+    article_url: "http://www.eetimes.com/document.asp?doc_id=1326066"
+    article_url: "http://www.eetimes.com/author.asp?section_id=36&doc_id=1325554"
+    non_article_url: "http://www.eetimes.com/archives.asp"
+    non_article_url: "http://www.eetimes.com/android-designline.asp"
+    non_article_url: "http://www.eetimes.com/internet-of-things-designline.asp"
+    non_article_url: "http://www.eetimes.com/pcb-designline.asp"
+    non_article_url: "http://www.eetimes.com/wireless-and-networking-designline.asp"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10559 # Electrical Engineering
+  boost: 5
+}
