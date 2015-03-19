@@ -5,9 +5,13 @@ paragraph_selector: "._Content__ p"
 article_url_pattern {
   path_regex: "^\\/article\\/[^\\/]+$"
 }
+article_url_pattern {
+  path_regex: "^\\/review\\/[^\\/]+\\/$"
+}
 rss_url: "http://feeds.feedburner.com/firstround/TbEd?format=xml"
 test_instructions {
   article_url_detector_checks {
+    article_url: "http://firstround.com/review/Make-Engineering-Interns-Truly-Effective-with-This-Startups-Program/"
     article_url: "http://firstround.com/article/The-Arc-of-Company-Life-and-How-to-Prolong-It"
     article_url: "http://firstround.com/article/This-Founder-Turned-a-Slow-Burn-Rate-into-a-Big-Exit"
     article_url: "http://firstround.com/article/To-Build-An-Amazing-Sales-Team-Start-Here-First"

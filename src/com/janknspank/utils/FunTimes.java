@@ -1,32 +1,27 @@
 package com.janknspank.utils;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.google.api.client.util.Lists;
-import com.google.api.client.util.Maps;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Multiset;
-import com.google.common.collect.Multiset.Entry;
-import com.janknspank.bizness.Entities;
-import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.GuidFactory;
-import com.janknspank.classifier.FeatureId;
-import com.janknspank.classifier.FeatureType;
+import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
+import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleFeature;
-import com.janknspank.proto.ArticleProto.ArticleKeyword;
-import com.janknspank.proto.CoreProto.Entity;
-import com.janknspank.proto.CoreProto.KeywordToEntityId;
+import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
+import com.janknspank.proto.RankProto.Persona;
+import com.janknspank.rank.Personas;
 
 public class FunTimes {
   public static void main(String args[]) throws Exception {
-    
+    for (Persona persona : Personas.getPersonaMap().values()) {
+      TopList<String, Double> goodUrlTopList = new TopList<>(20);
+      for (Article article : Database.with(Article.class).get(
+          new QueryOption.WhereEquals("url", persona.getBadUrlList()))) {
+        goodUrlTopList.add(article.getUrl(),
+            SocialEngagements.getForArticle(article, Site.FACEBOOK).getShareScore());
+      }
+      System.out.println(persona.getEmail() + ":");
+      for (String goodUrl : goodUrlTopList) {
+        System.out.println((goodUrlTopList.getValue(goodUrl)) + ": " + goodUrl);
+      }
+    }
   }
 }
