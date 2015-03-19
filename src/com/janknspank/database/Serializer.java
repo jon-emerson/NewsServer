@@ -83,6 +83,10 @@ public class Serializer {
               jsonArray.put(toJSON((Message) message.getRepeatedField(fieldDescriptor, i)));
               break;
 
+            case BOOLEAN:
+              jsonArray.put((boolean) message.getRepeatedField(fieldDescriptor, i));
+              break;
+
             default:
               throw new RuntimeException("Unsupported type: " + fieldDescriptor.getJavaType().name());
           }
@@ -121,6 +125,10 @@ public class Serializer {
 
           case MESSAGE:
             o.put(fieldName, toJSON((Message) message.getField(fieldDescriptor)));
+            break;
+
+          case BOOLEAN:
+            o.put(fieldName, (boolean) message.getField(fieldDescriptor));
             break;
 
           default:

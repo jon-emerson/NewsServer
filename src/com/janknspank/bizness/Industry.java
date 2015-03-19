@@ -233,7 +233,7 @@ public enum Industry {
       "Events Services"),
   ARTS_AND_CRAFTS(111, FeatureId.ARTS, "art med rec",
       "Arts and Crafts"),
-  ELECTRICAL_ELECTRONIC_MANUFACTURING(112, FeatureId.COMPUTER_HARDWARE,
+  ELECTRICAL_ELECTRONIC_MANUFACTURING(112, FeatureId.ELECTRICAL_ENGINEERING,
       "good man", "Electrical/Electronic Manufacturing"),
   ONLINE_MEDIA(113, FeatureId.MEDIA, "med",
       "Online Media"),

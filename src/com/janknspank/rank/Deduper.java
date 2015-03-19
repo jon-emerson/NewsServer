@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -42,6 +40,10 @@ public class Deduper {
     private final Set<String> stems = Sets.newHashSet();
     private final Set<Integer> top3Industries = Sets.newHashSet();
 
+    // Marks Articles that have been responsible for the killing of a duplicate.
+    // E.g. this is true if this article has won against a similar article.
+    private boolean killedADupe = false;
+
     public ArticleExtraction(Article article) {
       publishTime = article.getPublishedTime();
       stems.addAll(article.getDedupingStemsList());
@@ -70,6 +72,14 @@ public class Deduper {
       return stemIntersectionCount >= STEM_INTERSECTION_COUNT_MINIMUM
           && industryIntersectionCount >= 1;
     }
+    
+    public void markHasKilledDupe() {
+      killedADupe = true;
+    }
+    
+    public boolean hasKilledADupe() {
+      return killedADupe;
+    }
   }
 
   public static boolean isDupe(Article article1, Article article2) {
@@ -82,7 +92,7 @@ public class Deduper {
    * than computing duplicates from scratch using cosine similarity. This
    * method should be used during getArticles, not the "dedupe" method below.
    */
-  public static Iterable<Article> filterOutDupes(Iterable<Article> articles) {
+  public static List<Article> filterOutDupes(Iterable<Article> articles) {
     // This cache saves us about 500ms when de-duping 100 articles.
     final Map<ArticleExtraction, Article> extractionMap = Maps.newHashMap();
     for (Article article : articles) {
@@ -105,7 +115,10 @@ public class Deduper {
               || (engagement != null
                   && engagement.getShareScore() > nonDupeEngagement.getShareScore())) {
             // The new article is more socially valuable, use it instead.
+            extraction.markHasKilledDupe();
             nonDupeExtractions.set(i, extraction);
+          } else {
+            nonDupeExtraction.markHasKilledDupe();
           }
           foundDupe = true;
           break;
@@ -117,11 +130,17 @@ public class Deduper {
     }
     System.out.println("Duplicates calculated in "
         + (System.currentTimeMillis() - startMillis) + "ms");
-    return Iterables.transform(nonDupeExtractions, new Function<ArticleExtraction, Article>() {
-      @Override
-      public Article apply(ArticleExtraction extraction) {
-        return extractionMap.get(extraction);
+
+    List<Article> dedupedArticles = Lists.newArrayList();
+    for (ArticleExtraction extraction : nonDupeExtractions) {
+      if (extraction.hasKilledADupe()) {
+        dedupedArticles.add(extractionMap.get(extraction).toBuilder()
+            .setHot(true)
+            .build());
+      } else {
+        dedupedArticles.add(extractionMap.get(extraction));
       }
-    });
+    }
+    return dedupedArticles;
   }
 }

@@ -108,6 +108,7 @@ public class Articles {
 
   public static TopList<Article, Double> getRankedArticles(
       User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
+    Map<String, Double> scores = Maps.newHashMap();
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
     Set<String> urls = Sets.newHashSet();
     for (Article article :
@@ -117,12 +118,14 @@ public class Articles {
       }
       urls.add(article.getUrl());
 
-      goodArticles.add(article, scorer.getScore(user, article) /
-          Math.sqrt(getHoursSincePublished(article)));
+      double score = scorer.getScore(user, article) / Math.sqrt(getHoursSincePublished(article));
+      goodArticles.add(article, score);
+      scores.put(article.getUrl(), score);
     }
     TopList<Article, Double> bestArticles = new TopList<>(limit);
-    for (Article article : Deduper.filterOutDupes(goodArticles)) {
-      bestArticles.add(article, goodArticles.getValue(article));
+    List<Article> dedupedArticles = Deduper.filterOutDupes(goodArticles);
+    for (Article article : dedupedArticles) {
+      bestArticles.add(article, scores.get(article.getUrl()));
     }
     return bestArticles;
   }

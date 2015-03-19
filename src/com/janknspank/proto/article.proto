@@ -107,6 +107,12 @@ message Article {
   optional Reason reason = 19 [
     (storage_method) = DO_NOT_STORE
   ];
+
+  // Enables the hot icon on the client-side.  Currently triggered by dupe
+  // merges in Deduper.
+  optional bool hot = 20 [
+    (storage_method) = DO_NOT_STORE
+  ];
 }
 
 message ArticleKeyword {
