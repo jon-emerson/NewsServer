@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
+import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.LinkedInLoginHandler;
 import com.janknspank.bizness.Sessions;
@@ -24,6 +25,7 @@ import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.rank.NeuralNetworkScorer;
 
 @ServletMapping(urlPattern = "/v1/login")
 public class LoginServlet extends StandardServlet {
@@ -134,6 +136,14 @@ public class LoginServlet extends StandardServlet {
     JSONObject response = this.createSuccessResponse();
     response.put("user", new UserHelper(user).getUserJson());
     response.put("session", Serializer.toJSON(session));
+
+    // To help with client latency, return the articles for the user's home
+    // screen in this response.
+    response.put("articles", Serializer.toJSON(Articles.getRankedArticles(
+        user,
+        NeuralNetworkScorer.getInstance(),
+        GetArticlesServlet.NUM_RESULTS)));
+
     return response;
   }
 

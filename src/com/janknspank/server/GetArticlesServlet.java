@@ -35,7 +35,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
   // a better way to do asynchronous calls to Mongo DB - Hopefully via Futures.
   private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(10);
 
-  private static final int NUM_RESULTS = 50;
+  static final int NUM_RESULTS = 50;
 
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
