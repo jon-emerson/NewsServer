@@ -128,8 +128,7 @@ class ArticleCreator {
         KeywordFinder.getInstance().findKeywords(url.getId(), title, documentNode));
 
     // Since many sites double-escape their HTML entities (why anyone would
-    // do this is beyond me), do another escape pass on everything before we
-    // start telling people about this article.
+    // do this is beyond me), do another escape pass on everything.
     if (articleBuilder.hasDescription()) {
       articleBuilder.setDescription(StringHelper.unescape(articleBuilder.getDescription()).trim());
     }
@@ -403,6 +402,7 @@ class ArticleCreator {
    */
   @VisibleForTesting
   static String cleanTitle(String title) {
+    title = StringHelper.unescape(title);
     for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLES) {
       Matcher matcher = pattern.matcher(title);
       if (matcher.find()) {
