@@ -29,6 +29,9 @@ import com.janknspank.proto.CoreProto.KeywordToEntityId;
 public class KeywordCanonicalizer {
   private static final Set<String> PERSON_TITLES = Sets.newHashSet(
       "dr", "mr", "ms", "mrs", "miss", "prof", "rev");
+  public static final int STRENGTH_FOR_TITLE_MATCH = 150;
+  public static final int STRENGTH_FOR_FIRST_PARAGRAPH_MATCH = 100;
+
   private static Map<String, KeywordToEntityId> __keywordToEntityIdMap = null;
   private static Map<String, Entity> __entityIdToEntityMap = null;
 
@@ -73,7 +76,9 @@ public class KeywordCanonicalizer {
     }
     ArticleKeyword.Builder keywordBuilder =
         keyword1IsBetter ? keyword1.toBuilder() : keyword2.toBuilder();
-    keywordBuilder.setKeyword(getBestKeywordStr(keyword1.getKeyword(), keyword2.getKeyword()));
+    if (!keywordBuilder.hasEntity()) {
+      keywordBuilder.setKeyword(getBestKeywordStr(keyword1.getKeyword(), keyword2.getKeyword()));
+    }
     keywordBuilder.setStrength(
         Math.max(keyword1.getStrength(), keyword2.getStrength()) + 1);
     keywordBuilder.setType(
@@ -201,9 +206,9 @@ public class KeywordCanonicalizer {
         int strengthAddition = 0;
         if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 0) {
           // Title match.
-          strengthAddition += 150;
+          strengthAddition += STRENGTH_FOR_TITLE_MATCH;
         } else if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 1) {
-          strengthAddition += 100;
+          strengthAddition += STRENGTH_FOR_FIRST_PARAGRAPH_MATCH;
         }
 
         Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
@@ -226,8 +231,9 @@ public class KeywordCanonicalizer {
    * NOTE(jonemerson): Yaaa this is expensive, which is why we only do it for
    * titles!! :)
    */
-  public static Iterable<ArticleKeyword> getArticleKeywordsFromTitleInternal(
+  public static Iterable<ArticleKeyword> getArticleKeywordsFromParagraphInternal(
       String block,
+      int paragraphNumber,
       Map<String, KeywordToEntityId> keywordToEntityIdMap,
       Map<String, Entity> entityIdToEntityMap) {
     KeywordToEntityId keywordToEntityId = keywordToEntityIdMap.get(block.toLowerCase());
@@ -235,18 +241,19 @@ public class KeywordCanonicalizer {
       Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
       return ImmutableList.of(ArticleKeyword.newBuilder()
           .setKeyword(entity.getKeyword())
-          .setStrength(150) // Title match.
+          .setStrength(paragraphNumber == 0
+              ? STRENGTH_FOR_TITLE_MATCH : STRENGTH_FOR_FIRST_PARAGRAPH_MATCH) // Title match.
           .setType(entity.getType())
           .setSource(ArticleKeyword.Source.TITLE)
           .setEntity(entity)
-          .setParagraphNumber(0)
+          .setParagraphNumber(paragraphNumber)
           .build());
     } else if (block.contains(" ")) {
       return Iterables.concat(
-          getArticleKeywordsFromTitleInternal(block.substring(0, block.lastIndexOf(" ")),
-              keywordToEntityIdMap, entityIdToEntityMap),
-          getArticleKeywordsFromTitleInternal(block.substring(block.indexOf(" ") + 1),
-          keywordToEntityIdMap, entityIdToEntityMap));
+          getArticleKeywordsFromParagraphInternal(block.substring(0, block.lastIndexOf(" ")),
+              paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap),
+              getArticleKeywordsFromParagraphInternal(block.substring(block.indexOf(" ") + 1),
+              paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap));
     } else {
       return Collections.emptyList();
     }
@@ -256,7 +263,8 @@ public class KeywordCanonicalizer {
    * Does a brute force search through all our keyword entities to try to find
    * keywords.
    */
-  public static List<ArticleKeyword> getArticleKeywordsFromTitle(String title) {
+  public static List<ArticleKeyword> getArticleKeywordsFromText(
+      String text, int paragraphNumber) {
     Map<String, KeywordToEntityId> keywordToEntityIdMap = getKeywordToEntityIdMap();
     Map<String, Entity> entityIdToEntityMap = getEntityIdToEntityMap();
 
@@ -264,8 +272,10 @@ public class KeywordCanonicalizer {
     // goes to Google" would create [ "Senator Barbara Boxer", "Google" ].
     List<String> blocks = Lists.newArrayList();
     List<String> blockBuilder = Lists.newArrayList();
-    for (String word : title.split("(\\s|\u00A0)")) {
-      if (Character.isUpperCase(word.charAt(0))) {
+    for (String word : text.split("(\\s|\u00A0)")) {
+      if (word.isEmpty()) {
+        // OK... nothing to do!
+      } else if (Character.isUpperCase(word.charAt(0))) {
         blockBuilder.add(word);
       } else {
         if (blockBuilder.size() > 0) {
@@ -281,8 +291,8 @@ public class KeywordCanonicalizer {
 
     Map<String, ArticleKeyword> entityIdToKeywordMap = Maps.newHashMap();
     for (String block : blocks) {
-      for (ArticleKeyword keyword : getArticleKeywordsFromTitleInternal(
-          block, keywordToEntityIdMap, entityIdToEntityMap)) {
+      for (ArticleKeyword keyword : getArticleKeywordsFromParagraphInternal(
+          block, paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap)) {
         if (!entityIdToKeywordMap.containsKey(keyword.getEntity().getId())) {
           entityIdToKeywordMap.put(keyword.getEntity().getId(), keyword);
         }

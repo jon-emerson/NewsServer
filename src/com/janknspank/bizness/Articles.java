@@ -21,6 +21,7 @@ import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
+import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
@@ -274,6 +275,9 @@ public class Articles {
     TopList<ArticleKeyword, Integer> topUserKeywords = new TopList<>(2);
     TopList<ArticleKeyword, Integer> topNonUserKeyword = new TopList<>(1);
     for (ArticleKeyword keyword : article.getKeywordList()) {
+      if (keyword.getStrength() < KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH) {
+        continue;
+      }
       if (userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
         topUserKeywords.add(keyword, keyword.getStrength());
       } else if (keyword.getKeyword().length() < 15

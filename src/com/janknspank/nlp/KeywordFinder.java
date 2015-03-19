@@ -119,24 +119,22 @@ public class KeywordFinder {
     };
     Iterables.addAll(keywords, findKeywordsInMetaTags(urlId, documentNode));
     Iterables.addAll(keywords, findKeywordsFromHypertext(urlId, documentNode));
-    Iterables.addAll(keywords, KeywordCanonicalizer.getArticleKeywordsFromTitle(title));
+    Iterables.addAll(keywords, KeywordCanonicalizer.getArticleKeywordsFromText(title, 0));
 
-    // Use natural language processing to find keywords in the article text.
-    // Only look at the top 2/3rds of the article, since sites tend to put
-    // click-bait words in their articles towards the end.
-    Iterable<Node> articleNodes = ParagraphFinder.getParagraphNodes(documentNode);
-    articleNodes = Iterables.limit(articleNodes,
-        (int) Math.ceil(((double) Iterables.size(articleNodes)) * 2 / 3)); 
-    Iterables.addAll(keywords, findParagraphKeywords(
-        urlId,
-        title,
-        Iterables.transform(articleNodes,
-            new Function<Node, String>() {
-              @Override
-              public String apply(Node articleNode) {
-                return articleNode.getFlattenedText();
-              }
-            })));
+    // Special handling for the first paragraph: Brute force search for
+    // important keywords.
+    Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
+    if (!Iterables.isEmpty(paragraphs)) {
+      Iterables.addAll(keywords, KeywordCanonicalizer.getArticleKeywordsFromText(
+          Iterables.getFirst(paragraphs, null), 1));
+    }
+
+    // Use natural language processing to find more keywords.  Only look at the
+    // top 2/3rds of the article, since sites tend to put click-bait words in
+    // their articles towards the end.
+    paragraphs = Iterables.limit(paragraphs,
+        (int) Math.ceil(((double) Iterables.size(paragraphs)) * 2 / 3)); 
+    Iterables.addAll(keywords, findParagraphKeywords(urlId, title, paragraphs));
 
     return KeywordCanonicalizer.canonicalize(keywords);
   }

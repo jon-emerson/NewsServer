@@ -11,6 +11,7 @@ import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.StartupFeatureHelper;
+import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleFeature.Type;
@@ -94,15 +95,24 @@ public class InputValuesGenerator {
           && EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.ORGANIZATION)) {
         String keyword = interest.getEntity().getKeyword();
         if (article.getTitle().contains(keyword)) {
-          value += 0.1;
-        }
-        if (article.getParagraph(0).contains(keyword)) {
           value += 0.05;
         }
+        if (article.getParagraph(0).contains(keyword)) {
+          value += 0.025;
+        }
         for (ArticleKeyword articleKeyword : article.getKeywordList()) {
-          if (articleKeyword.getKeyword().contains(keyword) ||
-              keyword.contains(articleKeyword.getKeyword())) {
-            value += 0.1;
+          if (articleKeyword.getKeyword().equals(keyword)) {
+            if (articleKeyword.getStrength()
+                  >= KeywordCanonicalizer.STRENGTH_FOR_TITLE_MATCH) {
+              value += 0.1;
+            } else if (articleKeyword.getStrength()
+                  >= KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH) {
+              value += 0.75;
+            }
+          } else if (articleKeyword.getParagraphNumber() <= 2
+              && (articleKeyword.getKeyword().contains(keyword)
+                  || keyword.contains(articleKeyword.getKeyword()))) {
+            value += 0.025;
           }
         }
       }

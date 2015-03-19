@@ -269,6 +269,7 @@ public class Node {
           // Ignore.
         } else if (tagName.equalsIgnoreCase("br") || tagName.equalsIgnoreCase("p")) {
           sb.append(TEXT_LINES_LINE_BREAK_MARKER);
+          child.buildTextLinesStringBuffer(sb);
         } else {
           child.buildTextLinesStringBuffer(sb);
         }
