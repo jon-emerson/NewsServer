@@ -11,10 +11,12 @@ import org.apache.commons.io.IOUtils;
 
 import com.janknspank.bizness.Articles;
 import com.janknspank.classifier.ClassifierException;
+import com.janknspank.common.DateParser;
 import com.janknspank.common.Logger;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
+import com.janknspank.proto.CoreProto.Url;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -27,17 +29,36 @@ public class FacebookData {
   private static final Logger LOG = new Logger(FacebookData.class);
   private static FacebookClient __facebookClient = null;
 
+  private static String encodeUrl(String url) {
+    // Example urlObject: http://goo.gl/JVf3tt
+    try {
+      return URLEncoder.encode(url, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      LOG.warning("Can't encode url: " + url);
+      return url;
+    }
+  }
+
+  public static Long getPublishTime(Url url) throws FacebookException {
+    String encodedURL = encodeUrl(url.getUrl());
+    JsonObject urlObject = getFacebookClient().fetchObject(encodedURL, JsonObject.class);
+    if (urlObject != null
+        && urlObject.has("og_object")
+        && urlObject.getJsonObject("og_object").has("id")) {
+      String objectId = urlObject.getJsonObject("og_object").getString("id");
+      JsonObject object = getFacebookClient().fetchObject(objectId, JsonObject.class);
+      if (object != null
+          && object.has("created_time")) {
+        return DateParser.parseDateTime(object.getString("created_time"));
+      }
+    }
+    return null;
+  }
+
   public static SocialEngagement getEngagementForURL(ArticleOrBuilder article) throws FacebookException {
     String url = article.getUrl();
     try {
-      // Example urlObject: http://goo.gl/JVf3tt
-      String encodedURL;
-      try {
-        encodedURL = URLEncoder.encode(url, "UTF-8");
-      } catch (UnsupportedEncodingException e) {
-        LOG.warning("Can't encode url: " + url);
-        encodedURL = url;
-      }
+      String encodedURL = encodeUrl(url);
       JsonObject urlObject = getFacebookClient().fetchObject(encodedURL, JsonObject.class);
 
       // Get shares and comments
@@ -50,10 +71,8 @@ public class FacebookData {
         int commentCount = shareObject.getInt("comment_count");
 
         // Get likes
-        String objectId = urlObject.getJsonObject("og_object")
-            .getString("id");
-        JsonObject likesObject = getFacebookClient().fetchObject(objectId,
-            JsonObject.class,
+        String objectId = urlObject.getJsonObject("og_object").getString("id");
+        JsonObject likesObject = getFacebookClient().fetchObject(objectId, JsonObject.class,
             Parameter.with("fields", "likes.summary(true)"));
         int likeCount = likesObject.getJsonObject("likes")
             .getJsonObject("summary")
@@ -107,5 +126,12 @@ public class FacebookData {
     } finally {
       IOUtils.closeQuietly(inputStream);
     }
+  }
+
+  public static void main(String args[]) throws Exception {
+    System.out.println(getPublishTime(Url.newBuilder()
+        .setUrl("http://firstround.com/review/Top-Hacks-from-a-PM-Behind-Two-of"
+            + "-Techs-Hottest-Products/")
+        .build()));
   }
 }

@@ -24,6 +24,10 @@ feature_boost_pattern {
   boost: -10 # This is not a general consumption web site.
 }
 feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 3
+}
+feature_boost_pattern {
   feature_id: 20000 # Related to tech startups
   boost: 0
 }
@@ -38,8 +42,4 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10513 # Media
   boost: -1
-}
-feature_boost_pattern {
-  feature_id: 10560 # User Experience
-  boost: 3
 }
