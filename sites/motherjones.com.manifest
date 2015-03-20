@@ -1,0 +1,50 @@
+root_domain: "motherjones.com"
+start_url: "http://www.motherjones.com/"
+paragraph_selector: ".content p"
+article_url_pattern {
+  path_regex: "^\\/[a-z0-9_-]+\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.motherjones.com/environment/2015/03/bark-pine-beetles-climate-change-diana-six"
+    article_url: "http://www.motherjones.com/politics/2015/02/robert-okin-silent-voices-homeless-san-francisco"
+    article_url: "http://www.motherjones.com/mojo/2015/03/facebook-being-sued-gender-and-racial-discrimination"
+    article_url: "http://www.motherjones.com/mojo/2015/03/martese-johnson-uva"
+    article_url: "http://www.motherjones.com/media/2015/03/great-government-gifs"
+    article_url: "http://www.motherjones.com/mixed-media/2015/03/evans-the-death-expect-delays"
+    article_url: "http://www.motherjones.com/environment/2015/03/brian-wansink-cornell-junk-food-health"
+    article_url: "http://www.motherjones.com/politics/2015/03/warren-obama-student-debt-loans"
+    article_url: "http://www.motherjones.com/mojo/2015/03/income-inequality-chart-wall-street-bonuses-minimum-wage"
+    article_url: "http://www.motherjones.com/kevin-drum/2015/03/thursday-hummingbird-blogging-19-march-2015"
+    article_url: "http://www.motherjones.com/mixed-media/2015/03/baby-frog-screaming"
+    article_url: "http://www.motherjones.com/mixed-media/2015/03/ashley-judd-twitter-harassment-march-madness%20"
+    article_url: "http://www.motherjones.com/tom-philpott/2015/03/little-mustard-grease-burn"
+    article_url: "http://www.motherjones.com/blue-marble/2015/03/want-some-metal-mac-n-cheese"
+    non_article_url: "http://www.motherjones.com/topics/climate-desk"
+    non_article_url: "http://www.motherjones.com/media"
+    non_article_url: "http://www.motherjones.com/topics/econundrums"
+    non_article_url: "http://www.motherjones.com/about/support"
+    non_article_url: "http://www.motherjones.com/about/support/matching-gift"
+  }
+}
+feature_boost_pattern {
+  boost: -2 # Kind of a weak site... mostly interesting for environmental issues.
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "^\\/(environment|blue-marble)\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10556 # Restaurants
+  path_regex: "^\\/tom-philpott\\/"
+  boost: 1
+}

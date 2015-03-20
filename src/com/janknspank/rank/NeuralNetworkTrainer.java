@@ -60,7 +60,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     // // Return the network with the lowest error.
     // System.out.println("Lowest error: " + lowestError + " at iteration " + lowestErrorIteration);
     // neuralNetwork.setWeights(ArrayUtils.toPrimitive(lowestErrorNetworkWeights));
-    neuralNetwork.setWeights(ArrayUtils.toPrimitive(lastNetworkWeights));
+    neuralNetwork.setWeights(ArrayUtils.toPrimitive(lowestErrorNetworkWeights));
 
     // Print correlation of each input node to the output.
     for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {

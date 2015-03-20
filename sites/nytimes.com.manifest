@@ -199,3 +199,17 @@ feature_boost_pattern {
   path_regex: "\\/business\\/"
   boost: 3
 }
+feature_boost_pattern {
+  feature_id: 10512 # Sports
+  boost: -5
+}
+feature_boost_pattern {
+  feature_id: 10512 # Sports
+  path_regex: "\\/sports\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 40000 # Sports
+  path_regex: "\\/sports\\/"
+  boost: 0
+}

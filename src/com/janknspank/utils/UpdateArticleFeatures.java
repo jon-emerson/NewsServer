@@ -8,6 +8,7 @@ import com.janknspank.classifier.FeatureClassifier;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 
 /**
@@ -20,7 +21,8 @@ public class UpdateArticleFeatures {
     List<Article> articlesToUpdate = Lists.newArrayList();
     int i = 0;
     long numArticles = Database.with(Article.class).getSize();
-    for (Article article : Database.with(Article.class).get()) {
+    for (Article article : Database.with(Article.class).get(
+        new QueryOption.DescendingSort("published_time"))) {
       articlesToUpdate.add(article.toBuilder()
           .clearFeature()
           .addAllFeature(FeatureClassifier.classify(article))

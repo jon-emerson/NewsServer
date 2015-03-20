@@ -66,5 +66,5 @@ test_instructions {
   }
 }
 feature_boost_pattern {
-  boost: -2 # Lower quality site.
+  boost: -3 # Lower quality site.
 }
