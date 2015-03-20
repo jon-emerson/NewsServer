@@ -122,13 +122,20 @@ public class ParagraphFinder {
 
     // HACK(jonemerson): We should find a more extensible way of removing
     // By-lines and other crap we pick up. This may do for now.
-    String text = node.getFlattenedText();
+    String text = node.getFlattenedText().toLowerCase();
     if (offset == 0
         && text.length() >= 3
-        && text.substring(0, 3).equalsIgnoreCase("By ")
+        && text.substring(0, 3).equals("by ")
         && text.length() < 100) {
       return false;
     }
+
+    // HACK(jonemerson): Unfortunately we have to do this...
+    if ((text.contains("facebook") || text.contains("twitter"))
+        && (text.contains("like") || text.contains("follow"))) {
+      return false;
+    }
+
     return true;
   }
 
