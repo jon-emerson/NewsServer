@@ -37,6 +37,7 @@ import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.JdkFutureAdapters;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -336,12 +337,33 @@ public class LinkedInLoginHandler {
   }
 
   /**
-   * Returns an Interest representing the current Industry specified in the passed
+   * Returns an FeatureId representing the current Industry specified in the passed
    * LinkedIn profile.
    */
-  private Industry getLinkedInProfileIndustry(DocumentNode linkedInProfileDocument) {
-    String industryDescription = linkedInProfileDocument.findFirst("industry").getFlattenedText();
-    return Industry.fromDescription(industryDescription);
+  private FeatureId getLinkedInIndustryFeature(DocumentNode linkedInProfileDocument) {
+    Node headlineNode = linkedInProfileDocument.findFirst("headline");
+    if (headlineNode != null) {
+      String headline = headlineNode.getFlattenedText().toLowerCase();
+      if (headline.startsWith("ux ")
+          || headline.contains(" ux ")
+          || (headline.contains("ux") && headline.contains("design"))
+          || headline.contains("user experience")
+          || headline.contains("visual design")
+          || headline.contains("ui design")
+          || headline.contains("design director")
+          || headline.contains("product design")) {
+        return FeatureId.USER_EXPERIENCE;
+      }
+      if (headline.contains("electric") && headline.contains("engineer")) {
+        return FeatureId.ELECTRICAL_ENGINEERING;
+      }
+    }
+    Node industryNode = linkedInProfileDocument.findFirst("industry");
+    if (industryNode != null) {
+      return Industry.fromDescription(industryNode.getFlattenedText()).getFeatureId();
+    }
+    // Ehh what the hell, let's do this, who doesn't love the Internet? :)
+    return FeatureId.INTERNET;
   }
 
   /**
@@ -373,12 +395,12 @@ public class LinkedInLoginHandler {
           .setCreateTime(System.currentTimeMillis())
           .build());
     }
-    Industry industry = getLinkedInProfileIndustry(linkedInProfileDocument);
-    if (industry != null) {
+    FeatureId industryFeatureId = getLinkedInIndustryFeature(linkedInProfileDocument);
+    if (industryFeatureId != null) {
       interests.add(Interest.newBuilder()
               .setId(GuidFactory.generate())
               .setType(InterestType.INDUSTRY)
-              .setIndustryCode(industry.getFeatureId().getId())
+              .setIndustryCode(industryFeatureId.getId())
               .setSource(InterestSource.LINKED_IN_PROFILE)
               .setCreateTime(System.currentTimeMillis())
               .build());

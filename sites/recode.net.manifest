@@ -65,6 +65,10 @@ feature_boost_pattern {
   boost: 0
 }
 feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}
+feature_boost_pattern {
   feature_id: 20001 # Related to traditional brick and mortar startups
   boost: -3
 }

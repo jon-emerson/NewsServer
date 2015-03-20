@@ -30,5 +30,8 @@ feature_boost_pattern {
   feature_id: 10525 # Arts
   boost: 1
 }
-
+feature_boost_pattern {
+  feature_id: 10513 # Media
+  boost: 0
+}
 

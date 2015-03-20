@@ -28,3 +28,6 @@ test_instructions {
     non_article_url: "http://www.huffingtonpost.com/news/hollywood-buzz/"
   }
 }
+feature_boost_pattern {
+  boost: -1 # Pop-culture clickbait punishment.
+}

@@ -72,3 +72,7 @@ feature_boost_pattern {
   path_regex: "^\\/architecture\\/"
   boost: 10
 }
+feature_boost_pattern {
+  feature_id: 10513 # Media
+  boost: 0
+}
