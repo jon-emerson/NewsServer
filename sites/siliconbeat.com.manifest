@@ -40,6 +40,10 @@ feature_boost_pattern {
   boost: -2 # This site kinda sucks.
 }
 feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: -5
+}
+feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
   boost: -5
 }
