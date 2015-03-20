@@ -46,6 +46,15 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     return article.getUrl().startsWith("http://www.t");
   }
 
+  private Article getFirstImageArticle(final Iterable<Article> articles) {
+    for (Article article : articles) {
+      if (article.hasImageUrl()) {
+        return article;
+      }
+    }
+    return null;
+  }
+
   /**
    * Transforms the passed Article iterable so that the first article tends to
    * have a good image associated with it.  For now, we don't know much about
@@ -56,12 +65,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     if (Iterables.isEmpty(articles)) {
       return Collections.emptyList();
     }
-    final Article firstImageArticle = Iterables.find(articles, new Predicate<Article>() {
-      @Override
-      public boolean apply(Article article) {
-        return (article.hasImageUrl());
-      }
-    });
+    final Article firstImageArticle = getFirstImageArticle(articles);
     if (firstImageArticle == null) {
       return articles;
     }
