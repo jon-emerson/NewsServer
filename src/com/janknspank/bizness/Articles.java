@@ -278,14 +278,15 @@ public class Articles {
     TopList<ArticleKeyword, Integer> topUserKeywords = new TopList<>(2);
     TopList<ArticleKeyword, Integer> topNonUserKeyword = new TopList<>(1);
     for (ArticleKeyword keyword : article.getKeywordList()) {
-      if (keyword.getStrength() < KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH) {
-        continue;
-      }
+      EntityType entityType = EntityType.fromValue(keyword.getType());
       if (userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
-        topUserKeywords.add(keyword, keyword.getStrength());
+        if (keyword.getStrength() >= KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH
+            || entityType.isA(EntityType.PERSON)) {
+          topUserKeywords.add(keyword, keyword.getStrength());
+        }
       } else if (keyword.getKeyword().length() < 25
-          && !EntityType.fromValue(keyword.getType()).isA(EntityType.PERSON)
-          && !EntityType.fromValue(keyword.getType()).isA(EntityType.PLACE)) {
+          && keyword.getStrength() >= KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH
+          && !entityType.isA(EntityType.PLACE)) {
         // Only include small-ish keywords because the super long ones are often
         // crap.
         topNonUserKeyword.add(keyword, keyword.getStrength());

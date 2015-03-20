@@ -1,14 +1,18 @@
 package com.janknspank.bizness;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.api.client.util.Lists;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
+import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
 
 public class UserInterests {
@@ -85,5 +89,37 @@ public class UserInterests {
       }
     }
     return false;
+  }
+
+  /**
+   * Returns a lower-cased Set of all the strings for entities the user's
+   * following.
+   */
+  public static Set<String> getUserKeywordSet(User user, Set<InterestType> forcedInterests) {
+    Set<String> userKeywordSet = Sets.newHashSet();
+    boolean includeLinkedInContacts =
+        forcedInterests.contains(InterestType.LINKED_IN_CONTACTS);
+    boolean includeAddressBookContacts =
+        forcedInterests.contains(InterestType.ADDRESS_BOOK_CONTACTS);
+    for (Interest interest : getInterests(user)) {
+      if (interest.getType() == InterestType.ENTITY) {
+        userKeywordSet.add(interest.getEntity().getKeyword().toLowerCase());
+      } else if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
+        includeLinkedInContacts = true;
+      } else if (interest.getType() == InterestType.ADDRESS_BOOK_CONTACTS) {
+        includeAddressBookContacts = true;
+      }
+    }
+    if (includeLinkedInContacts) {
+      for (LinkedInContact contact : user.getLinkedInContactList()) {
+        userKeywordSet.add(contact.getName().toLowerCase());
+      }
+    }
+    if (includeAddressBookContacts) {
+      for (AddressBookContact contact : user.getAddressBookContactList()) {
+        userKeywordSet.add(contact.getName().toLowerCase());
+      }
+    }
+    return userKeywordSet;
   }
 }

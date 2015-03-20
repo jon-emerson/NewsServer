@@ -28,11 +28,13 @@ import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
   private static int MAX_ITERATIONS = 50000;
-  private Double[] lastNetworkWeights;
+
   private double lowestError = 1.0;
+  private Double[] lowestErrorNetworkWeights;
 
   @SuppressWarnings("unused")
-  private Double[] lowestErrorNetworkWeights;
+  private Double[] lastNetworkWeights;
+
   @SuppressWarnings("unused")
   private double lowestErrorIteration = 0;
 

@@ -14,11 +14,12 @@ import com.google.api.client.util.Lists;
 import com.google.api.client.util.Sets;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableSet;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
-import com.janknspank.bizness.Users;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
@@ -26,6 +27,7 @@ import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.NeuralNetworkScorer;
 import com.janknspank.server.AbstractArticlesServlet;
@@ -35,7 +37,8 @@ public class ViewFeedSoy {
       final Iterable<Article> articles,
       final User user,
       final Function<Article, Double> scoreFunction) {
-    Set<String> userKeywordSet = Users.getUserKeywordSet(user);
+    Set<String> userKeywordSet =
+        UserInterests.getUserKeywordSet(user, ImmutableSet.<InterestType>of());
 
     List<SoyMapData> articleSoyMapDataList = Lists.newArrayList();
     int i = 0;

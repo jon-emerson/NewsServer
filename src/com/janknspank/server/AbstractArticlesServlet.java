@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.api.client.util.Sets;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.Users;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 
 public abstract class AbstractArticlesServlet extends StandardServlet {
   private static final Set<Integer> SHOW_IMAGE_OFFSETS = ImmutableSet.of(
@@ -81,7 +83,15 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     JSONArray articlesJson = new JSONArray();
     int i = 1;
     for (Article article : articles) {
-      articlesJson.put(serialize(article, Users.getUserKeywordSet(getUser(req)), i++));
+      Set<InterestType> forcedInterests = Sets.newHashSet();
+      if ("linked_in".equals(getParameter(req, "contacts"))) {
+        forcedInterests.add(InterestType.LINKED_IN_CONTACTS);
+      }
+      if ("address_book".equals(getParameter(req, "contacts"))) {
+        forcedInterests.add(InterestType.ADDRESS_BOOK_CONTACTS);
+      }
+      articlesJson.put(serialize(article,
+          UserInterests.getUserKeywordSet(getUser(req), forcedInterests), i++));
     }
     response.put("articles", articlesJson);
     return response;
