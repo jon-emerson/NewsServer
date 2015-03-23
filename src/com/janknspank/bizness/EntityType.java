@@ -35,7 +35,11 @@ public enum EntityType {
   // WhatsApp, etc, as independent companies/organizations.
   SOFTWARE("sw", ORGANIZATION, "http://dbpedia.org/ontology/Software"),
 
-  WEBSITE("web", WORK, "http://dbpedia.org/ontology/Website"),
+  // Note: This is different than the "official" DBPedia ontology tree.  But it
+  // is the right difference for us: We want people to follow Zillow, TechCrunch,
+  // etc, as independent companies/organizations.
+  WEBSITE("web", ORGANIZATION, "http://dbpedia.org/ontology/Website"),
+
   SPORTS_TEAM("steam", ORGANIZATION, "http://dbpedia.org/ontology/SportsTeam"),
   TELEVISION_SHOW("ts", WORK, "http://dbpedia.org/ontology/TelevisionShow"),
   VIDEO_GAME("vgame", SOFTWARE, "http://dbpedia.org/ontology/VideoGame"),
