@@ -29,6 +29,14 @@ import com.janknspank.proto.CoreProto.KeywordToEntityId;
 public class KeywordCanonicalizer {
   private static final Set<String> PERSON_TITLES = Sets.newHashSet(
       "dr", "mr", "ms", "mrs", "miss", "prof", "rev");
+
+  // This is a Set of keywords folks like to put in their articles as an SEO
+  // tactic.  For these, we only count them as keywords if they exist in the
+  // title of the article.  The thinking goes, if the article's actually about
+  // these companies/entities, then they'd put it in the title.
+  private static final Set<String> KEYWORD_BAIT_ENTITY_KEYWORDS = Sets.newHashSet(
+      "facebook", "google", "twitter", "tumblr");
+
   public static final int STRENGTH_FOR_TITLE_MATCH = 150;
   public static final int STRENGTH_FOR_FIRST_PARAGRAPH_MATCH = 100;
 
@@ -231,12 +239,21 @@ public class KeywordCanonicalizer {
    * NOTE(jonemerson): Yaaa this is expensive, which is why we only do it for
    * titles!! :)
    */
-  public static Iterable<ArticleKeyword> getArticleKeywordsFromParagraphInternal(
+  public static Iterable<ArticleKeyword> getArticleKeywordsFromTextInternal(
       String block,
       int paragraphNumber,
       Map<String, KeywordToEntityId> keywordToEntityIdMap,
       Map<String, Entity> entityIdToEntityMap) {
-    KeywordToEntityId keywordToEntityId = keywordToEntityIdMap.get(block.toLowerCase());
+    String blockLowerCase = block.toLowerCase();
+
+    // Prevent click-bait: Only allow known clickbait entities through if the
+    // keyword if they're in the article's title.
+    if (KEYWORD_BAIT_ENTITY_KEYWORDS.contains(blockLowerCase)
+        && paragraphNumber != 0) {
+      return Collections.emptyList();
+    }
+
+    KeywordToEntityId keywordToEntityId = keywordToEntityIdMap.get(blockLowerCase);
     if (keywordToEntityId != null) {
       Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
       return ImmutableList.of(ArticleKeyword.newBuilder()
@@ -250,9 +267,9 @@ public class KeywordCanonicalizer {
           .build());
     } else if (block.contains(" ")) {
       return Iterables.concat(
-          getArticleKeywordsFromParagraphInternal(block.substring(0, block.lastIndexOf(" ")),
+          getArticleKeywordsFromTextInternal(block.substring(0, block.lastIndexOf(" ")),
               paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap),
-              getArticleKeywordsFromParagraphInternal(block.substring(block.indexOf(" ") + 1),
+              getArticleKeywordsFromTextInternal(block.substring(block.indexOf(" ") + 1),
               paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap));
     } else {
       return Collections.emptyList();
@@ -291,7 +308,7 @@ public class KeywordCanonicalizer {
 
     Map<String, ArticleKeyword> entityIdToKeywordMap = Maps.newHashMap();
     for (String block : blocks) {
-      for (ArticleKeyword keyword : getArticleKeywordsFromParagraphInternal(
+      for (ArticleKeyword keyword : getArticleKeywordsFromTextInternal(
           block, paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap)) {
         if (!entityIdToKeywordMap.containsKey(keyword.getEntity().getId())) {
           entityIdToKeywordMap.put(keyword.getEntity().getId(), keyword);
