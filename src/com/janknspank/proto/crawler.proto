@@ -89,9 +89,16 @@ message SiteManifest {
 
   // For all Nodes that match paragraph_selector, if they or any of their
   // children also match this this selector, they are excluded as paragraphs.
-  repeated string paragraph_blacklist_selector = 14 [
-    (string_length) = 767
-  ];
+  message ParagraphBlacklist {
+    optional string selector = 1 [
+      (string_length) = 767
+    ];
+
+    optional string text_regex = 2 [
+      (string_length) = 767
+    ];
+  }
+  repeated ParagraphBlacklist paragraph_blacklist = 14;
 
   // A collection of regular expressions that together identify all article URLs
   // on this site.  If any Pattern matches, the URL is determined to be an

@@ -6,7 +6,9 @@ path_blacklist {
   needle: "/answers/"
 }
 paragraph_selector: "article p"
-paragraph_blacklist_selector: "article p > em"
+paragraph_blacklist {
+  selector: "article p > em"
+}
 article_url_pattern {
   path_regex: ",[0-9]{3,7}\\.html$"
 }

@@ -14,8 +14,41 @@ path_blacklist {
   location: CONTAINS
 }
 paragraph_selector: ".body .text"
-paragraph_blacklist_selector: "p em strong"
-paragraph_blacklist_selector: "ul li"
+
+# Prevent paragraphs like this:
+# "This question originally appeared on Quora, the best answer to any question.
+# Ask a question, get a great answer. Learn from experts and access insider
+# knowledge. You can follow Quora on Twitter, Facebook, and Google Plus."
+paragraph_blacklist {
+  selector: "p em"
+  text_regex: "(Facebook|Twitter).*(Facebook|Twitter)"
+}
+
+# Prevent by-lines from being the first paragraph.
+paragraph_blacklist {
+  selector: "p strong"
+  text_regex: "^Answer by "
+}
+
+# Prevent sections like this:
+# "More questions on Quora:
+# <ul>
+# <li>History of Europe: What was the real reason that so many people were
+#     tortured and executed for the crime of being a witch during the sixteenth
+#     and seventeenth centuries?
+# <li>Roman Empire: Assuming they were geographically close, who would win in a
+#     war between the peak armies of the Roman Empire and the Han Dynasty of
+#     China?
+# <li>Ancient History: What is the most epic historical battle ever?
+# </ul>"
+paragraph_blacklist {
+  selector: "p em"
+  text_regex: "^More questions on"
+}
+paragraph_blacklist {
+  selector: "p ul li"
+}
+
 article_url_pattern {
   path_regex: "^\\/(articles|blogs)\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/.*\\.html$"
 }

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
@@ -18,6 +19,7 @@ import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.Selector;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist;
 
 public class ParagraphFinder {
   private static final int MAX_PARAGRAPH_LENGTH =
@@ -112,11 +114,28 @@ public class ParagraphFinder {
     return paragraphs;
   }
 
+  private static boolean nodeMatchesTextRegex(Node node, String textRegex) {
+    Pattern pattern = Pattern.compile(textRegex);
+    String text = node.getFlattenedText();
+    return pattern.matcher(text).find();
+  }
+
   public static boolean isParagraphNodeOkay(Node node, SiteManifest site, int offset) {
-    for (String blacklistSelector : site.getParagraphBlacklistSelectorList()) {
-      if (new Selector(blacklistSelector).matches(node)
-          || node.findFirst(blacklistSelector) != null) {
-        return false;
+    for (ParagraphBlacklist paragraphBlacklist : site.getParagraphBlacklistList()) {
+      // If there's a blacklist paragraph selector, make sure it doesn't match
+      // this node or any of its children.
+      if (paragraphBlacklist.hasSelector()) {
+        if ((!paragraphBlacklist.hasTextRegex()
+                || nodeMatchesTextRegex(node, paragraphBlacklist.getTextRegex()))
+            && (new Selector(paragraphBlacklist.getSelector()).matches(node)    // This node.
+                || node.findFirst(paragraphBlacklist.getSelector()) != null)) { // Children.
+          return false;
+        }
+      } else if (paragraphBlacklist.hasTextRegex()) {
+        return nodeMatchesTextRegex(node, paragraphBlacklist.getTextRegex());
+      } else {
+        throw new IllegalStateException(
+            "ParagraphBlacklist has neither a selector nor a text_regex");
       }
     }
 

@@ -35,7 +35,7 @@ public class KeywordCanonicalizer {
   // title of the article.  The thinking goes, if the article's actually about
   // these companies/entities, then they'd put it in the title.
   private static final Set<String> KEYWORD_BAIT_ENTITY_KEYWORDS = Sets.newHashSet(
-      "facebook", "google", "twitter", "tumblr");
+      "facebook", "google", "twitter", "tumblr", "quora");
 
   public static final int STRENGTH_FOR_TITLE_MATCH = 150;
   public static final int STRENGTH_FOR_FIRST_PARAGRAPH_MATCH = 100;
