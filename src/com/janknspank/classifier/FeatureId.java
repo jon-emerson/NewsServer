@@ -12,8 +12,8 @@ import java.util.List;
  */
 public enum FeatureId {
   INTERNET(10501, FeatureType.INDUSTRY, "Internet"),
-  COMPUTER_SOFTWARE(10502, FeatureType.INDUSTRY, "Computer Software"),
-  COMPUTER_HARDWARE(10503, FeatureType.INDUSTRY, "Computer Hardware"),
+  SOFTWARE(10502, FeatureType.INDUSTRY, "Software"),
+  HARDWARE_AND_ELECTRONICS(10503, FeatureType.INDUSTRY, "Hardware and Electronics"),
   BIOTECHNOLOGY(10504, FeatureType.INDUSTRY, "Biotechnology"),
   VETERINARY(10505, FeatureType.INDUSTRY, "Veterinary"),
   APPAREL_AND_FASHION(10506, FeatureType.INDUSTRY, "Apparel and Fashion"),

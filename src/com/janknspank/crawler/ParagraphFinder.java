@@ -131,10 +131,15 @@ public class ParagraphFinder {
     }
 
     // HACK(jonemerson): Unfortunately we have to do this...
-    if ((text.contains("facebook") || text.contains("twitter"))
-        && (text.contains("like") || text.contains("follow"))) {
-      return false;
-    }
+    // Actually, this was a bad idea.  Witness:
+    // - "But WhatsApp has been able to hold its weight against messaging
+    //     heavyweights like Twitter."
+    // - "Like Instagram, WhatsApp will function as an autonomous unit within
+    //     Facebook."
+    // if ((text.contains("facebook") || text.contains("twitter"))
+    //     && (text.contains("like") || text.contains("follow"))) {
+    //   return false;
+    // }
 
     return true;
   }

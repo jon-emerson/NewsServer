@@ -1,0 +1,62 @@
+root_domain: "vogue.com"
+start_url: "http://www.vogue.com/"
+start_url: "http://www.vogue.com/beauty/"
+start_url: "http://www.vogue.com/culture/"
+start_url: "http://www.vogue.com/fashion/"
+start_url: "http://www.vogue.com/city-directory/"
+path_blacklist {
+  needle: "/slideshow/"
+}
+paragraph_selector: ".article-copy p"
+article_url_pattern {
+  path_regex: "^\\/[0-9]{7,10}\\/[^\\/]+\\/$"
+}
+article_url_pattern {
+  path_regex: "^\\/(city-directory|fashion-week|itinerary)\\/[0-9]{7,10}\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.vogue.com/12843419/cinema-society-serena-jennifer-lawrence-bradley-cooper/"
+    article_url: "http://www.vogue.com/12136234/serena-williams-best-on-off-court-looks/"
+    article_url: "http://www.vogue.com/12721965/rihanna-style-camouflage-fall-trend/"
+    article_url: "http://www.vogue.com/fashion-week/12048099/celine-fall-2015-rtw/"
+    article_url: "http://www.vogue.com/city-directory/8876013/thibault-sury-personal-trainer-paris/"
+    article_url: "http://www.vogue.com/12766034/foodporn-avocado-toast-instagram/"
+    article_url: "http://www.vogue.com/12769181/best-pedicure-places-new-york-city-los-angeles/"
+    article_url: "http://www.vogue.com/itinerary/12048885/paris-travel-guide-fashion-week/"
+    non_article_url: "http://www.vogue.com/tag/celebrity/grace-coddington/"
+    non_article_url: "http://www.vogue.com/fashion/celebrity-style/"
+    non_article_url: "http://www.vogue.com/tag/celebrity/rihanna/"
+    non_article_url: "http://www.vogue.com/fashion/fashion-week/"
+    non_article_url: "http://www.vogue.com/culture/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and fashion
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and fashion
+  path_regex: "^\\/city-directory\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10511 # Leisure, Travel and Tourism
+  path_regex: "^\\/city-directory\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography
+  boost: -2
+}

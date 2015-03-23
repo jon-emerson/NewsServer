@@ -30,6 +30,7 @@ public class Fetcher {
       .build();
   private CloseableHttpClient httpclient = HttpClients.custom()
       .setDefaultRequestConfig(requestConfig)
+      .setUserAgent("Mozilla/5.0 (compatible; Spotterbot/1.0; +http://spotternews.com/)")
       .build();
 
   public Fetcher() {

@@ -16,8 +16,8 @@ public class StartupFeatureHelper {
   private static final Map<FeatureId, Set<FeatureId>> RELATED_INDUSTRIES_MAP =
       ImmutableMap.<FeatureId, Set<FeatureId>>builder()
           .put(FeatureId.STARTUP_TECH, ImmutableSet.of(
-              FeatureId.COMPUTER_HARDWARE,
-              FeatureId.COMPUTER_SOFTWARE,
+              FeatureId.HARDWARE_AND_ELECTRONICS,
+              FeatureId.SOFTWARE,
               FeatureId.INTERNET,
               FeatureId.BIOTECHNOLOGY,  // Probably can improve this.
               FeatureId.CONSUMER_ELECTRONICS,

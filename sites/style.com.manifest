@@ -1,0 +1,37 @@
+root_domain: "style.com"
+start_url: "http://www.style.com/"
+start_url: "http://www.style.com/news"
+paragraph_selector: ".story p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[^\\/]+\\/20[0-9]{2}\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.style.com/trends/fashion/2015/paris-fashion-week-style-dot-com-weekend-catch-up"
+    article_url: "http://www.style.com/trends/industry/2015/irina-liss-is-pitch-perfect"
+    article_url: "http://www.style.com/trends/industry/2015/marc-by-marc-jacobs-history"
+    article_url: "http://www.style.com/beauty/backstage/2015/best-beauty-moments-paris-fall-2015"
+    article_url: "http://www.style.com/beauty/people/2015/smashbox-studios-davis-factor"
+    article_url: "http://www.style.com/trends/fashion/2015/street-style-nautical-lace-up-details"
+    non_article_url: "http://www.style.com/trends"
+    non_article_url: "http://www.style.com/newsletter"
+    non_article_url: "http://www.style.com/fashion-shows/fall-2015-ready-to-wear/babyghost"
+    non_article_url: "http://www.style.com/contributors/emily-farra"
+    non_article_url: "http://www.style.com/fashion-shows/tokyo-fall-2015/yasutoshi-ezumi"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and fashion
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: -1
+}

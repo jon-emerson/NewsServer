@@ -1,0 +1,45 @@
+root_domain: "fibre2fashion.com"
+start_url: "http://www.fibre2fashion.com/"
+start_url: "http://news.fibre2fashion.com/"
+path_blacklist {
+  needle: "/slideshow/"
+}
+paragraph_selector: ".newscontent"
+article_url_pattern {
+  path_regex: "\\/newsdetails\\.aspx$"
+  query_regex: "news_id=[0-9]+"
+}
+whitelisted_query_parameter: "news_id"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.fibre2fashion.com/news/world-fashion-designers-news/newsdetails.aspx?news_id=171304"
+    article_url: "http://www.fibre2fashion.com/news/textile-news/newsdetails.aspx?news_id=171331"
+    article_url: "http://www.fibre2fashion.com/news/apparel-news/newsdetails.aspx?news_id=171323"
+    article_url: "http://www.fibre2fashion.com/news/Association-news/tea/newsdetails.aspx?news_id=171241"
+    article_url: "http://www.fibre2fashion.com/news/fashion-news/newsdetails.aspx?news_id=171305"
+    non_article_url: "http://www.fibre2fashion.com/news/textiles-technology-news/"
+    non_article_url: "http://www.fibre2fashion.com/news/company-news/"
+    non_article_url: "http://www.fibre2fashion.com/news/company-news/li-and-fung/"
+    non_article_url: "http://www.fibre2fashion.com/services-new/cpp/"
+    non_article_url: "http://www.fibre2fashion.com/services/promotion/mergers-and-acquisitions/"
+    non_article_url: "http://www.fibre2fashion.com/industry-article/paidArticles/5361.asp"
+    non_article_url: "http://www.fibre2fashion.com/news/association-news/"
+    non_article_url: "http://www.fibre2fashion.com/news/Association-news/tea/aboutus.aspx"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and fashion
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and fashion
+  path_regex: "\\/(apparel-news|fashion-news|world-fashion-designers-news)\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods
+  boost: -1
+}

@@ -1,0 +1,46 @@
+root_domain: "elle.com"
+start_url: "http://www.elle.com/"
+start_url: "http://www.elle.com/fashion/news/"
+path_blacklist {
+  needle: "/horoscopes/"
+}
+paragraph_selector: ".article-body p"
+paragraph_selector: ".gallery h2"
+article_url_pattern {
+  path_regex: "\\/(a|g)[0-9]{4,6}\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.elle.com/beauty/hair/news/g26002/hair-inspiration-for-all-those-weddings-youll-be-attending/"
+    article_url: "http://www.elle.com/beauty/health-fitness/news/a19832/the-8-step-plan-to-crushing-crazy-girl-cravings/"
+    article_url: "http://www.elle.com/beauty/health-fitness/a27371/can-you-love-your-body-but-want-to-change-it/"
+    article_url: "http://www.elle.com/beauty/makeup-skin-care/tips/g8919/how-to-cure-brittle-nails/"
+    article_url: "http://www.elle.com/beauty/news/a19936/best-selling-fragrances-2014/?mag=elm&click=yr"
+    article_url: "http://www.elle.com/culture/celebrities/news/a25368/brooklyn-beckham-model-reserved/"
+    article_url: "http://www.elle.com/culture/movies-tv/a27391/caitriona-balfe-outlander-interview/"
+    article_url: "http://www.elle.com/culture/news/a27410/taylor-swift-blank-space-girl-scouts/"
+    article_url: "http://www.elle.com/culture/news/a27412/praying-hands-emojis/"
+    article_url: "http://www.elle.com/culture/news/a27414/kerry-washington-glaad-awards/"
+    article_url: "http://www.elle.com/fashion/celebrity-style/news/a27393/we-want-to-party-with-rihannas-latest-outfit/"
+    article_url: "http://www.elle.com/fashion/news/g26018/tokyo-fashion-week/"
+    article_url: "http://www.elle.com/fashion/personal-style/advice/a27321/ask-danielle-sweaters-in-spring/"
+    article_url: "http://www.elle.com/life-love/sex-relationships/a27402/the-importance-of-read-receipts/"
+    non_article_url: "http://www.elle.com/author/4189/nora-crotty/"
+    non_article_url: "http://www.elle.com/culture/"
+    non_article_url: "http://www.elle.com/fashion/"
+    non_article_url: "http://www.elle.com/life-love/"
+    non_article_url: "http://www.elle.com/people/brooklyn-beckham/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and fashion
+  boost: -1 # Still pretty crappy
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and fashion
+  path_regex: "^\\/culture\\/news\\/"
+  boost: 1 # OK this part is generally relevant.
+}
