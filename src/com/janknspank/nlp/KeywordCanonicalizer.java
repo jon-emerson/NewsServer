@@ -35,7 +35,7 @@ public class KeywordCanonicalizer {
   // title of the article.  The thinking goes, if the article's actually about
   // these companies/entities, then they'd put it in the title.
   private static final Set<String> KEYWORD_BAIT_ENTITY_KEYWORDS = Sets.newHashSet(
-      "facebook", "google", "twitter", "tumblr", "quora");
+      "facebook", "google", "twitter", "tumblr", "quora", "apple", "microsoft");
 
   public static final int STRENGTH_FOR_TITLE_MATCH = 150;
   public static final int STRENGTH_FOR_FIRST_PARAGRAPH_MATCH = 100;
@@ -211,19 +211,21 @@ public class KeywordCanonicalizer {
         // important: If we didn't, keywords found at the bottom of the article
         // could prevent title and/or first-paragraph keywords from being
         // properly scored.
-        int strengthAddition = 0;
-        if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 0) {
-          // Title match.
-          strengthAddition += STRENGTH_FOR_TITLE_MATCH;
-        } else if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 1) {
-          strengthAddition += STRENGTH_FOR_FIRST_PARAGRAPH_MATCH;
-        }
+        // NOTE(jonemerson): Commented because .getArticleKeywordsFromText
+        // already does these promotions through brute-force checks.
+        // int strengthAddition = 0;
+        // if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 0) {
+        //   // Title match.
+        //   strengthAddition += STRENGTH_FOR_TITLE_MATCH;
+        // } else if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 1) {
+        //   strengthAddition += STRENGTH_FOR_FIRST_PARAGRAPH_MATCH;
+        // }
 
         Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
         finalKeywords.add(keyword.toBuilder()
             .setEntity(entity)
             .setKeyword(entity.hasShortName() ? entity.getShortName() : entity.getKeyword())
-            .setStrength(keyword.getStrength() + strengthAddition)
+            // .setStrength(keyword.getStrength() + strengthAddition)
             .build());
       } else {
         finalKeywords.add(keyword);
