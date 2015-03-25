@@ -8910,10 +8910,18 @@ public final class UserProto {
       UNKNONWN(0, 0),
       /**
        * <code>FAVORITE = 1;</code>
+       *
+       * <pre>
+       * aka Bookmark
+       * </pre>
        */
       FAVORITE(1, 1),
       /**
        * <code>X_OUT = 2;</code>
+       *
+       * <pre>
+       * Swipe to dismiss
+       * </pre>
        */
       X_OUT(2, 2),
       /**
@@ -8934,12 +8942,20 @@ public final class UserProto {
       READ_ARTICLE(5, 5),
       /**
        * <code>VOTE_UP = 6;</code>
+       *
+       * <pre>
+       * Swipe right "Good to know"
+       * </pre>
        */
       VOTE_UP(6, 6),
       /**
        * <code>UNVOTE_UP = 7;</code>
        */
       UNVOTE_UP(7, 7),
+      /**
+       * <code>SCROLL_PAST = 8;</code>
+       */
+      SCROLL_PAST(8, 8),
       ;
 
       /**
@@ -8948,10 +8964,18 @@ public final class UserProto {
       public static final int UNKNONWN_VALUE = 0;
       /**
        * <code>FAVORITE = 1;</code>
+       *
+       * <pre>
+       * aka Bookmark
+       * </pre>
        */
       public static final int FAVORITE_VALUE = 1;
       /**
        * <code>X_OUT = 2;</code>
+       *
+       * <pre>
+       * Swipe to dismiss
+       * </pre>
        */
       public static final int X_OUT_VALUE = 2;
       /**
@@ -8972,12 +8996,20 @@ public final class UserProto {
       public static final int READ_ARTICLE_VALUE = 5;
       /**
        * <code>VOTE_UP = 6;</code>
+       *
+       * <pre>
+       * Swipe right "Good to know"
+       * </pre>
        */
       public static final int VOTE_UP_VALUE = 6;
       /**
        * <code>UNVOTE_UP = 7;</code>
        */
       public static final int UNVOTE_UP_VALUE = 7;
+      /**
+       * <code>SCROLL_PAST = 8;</code>
+       */
+      public static final int SCROLL_PAST_VALUE = 8;
 
 
       public final int getNumber() { return value; }
@@ -8992,6 +9024,7 @@ public final class UserProto {
           case 5: return READ_ARTICLE;
           case 6: return VOTE_UP;
           case 7: return UNVOTE_UP;
+          case 8: return SCROLL_PAST;
           default: return null;
         }
       }
@@ -11530,7 +11563,7 @@ public final class UserProto {
       "\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n" +
       "\025ADDRESS_BOOK_CONTACTS\020\004\022\n\n\006INTENT\020\005\"M\n\016" +
       "InterestSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n" +
-      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\327\004\n\n",
+      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\350\004\n\n",
       "UserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
       "\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\0221\n\013actio" +
       "n_type\030\003 \001(\0162\026.UserAction.ActionTypeB\004\210\246" +
@@ -11542,11 +11575,12 @@ public final class UserProto {
       "ok_contact\030\n \003(\0132\023.AddressBookContactB\004\240" +
       "\246\035\003\022!\n\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)",
       "\n\026on_stream_for_interest\030\014 \001(\0132\t.Interes" +
-      "t\"\201\001\n\nActionType\022\014\n\010UNKNONWN\020\000\022\014\n\010FAVORI" +
+      "t\"\222\001\n\nActionType\022\014\n\010UNKNONWN\020\000\022\014\n\010FAVORI" +
       "TE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005" +
       "SHARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r" +
-      "\n\tUNVOTE_UP\020\007:\026\212\265\030\022MongoDB.UserActionB!\n" +
-      "\024com.janknspank.protoB\tUserProto"
+      "\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010:\026\212\265\030\022Mong" +
+      "oDB.UserActionB!\n\024com.janknspank.protoB\t" +
+      "UserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
