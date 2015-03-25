@@ -213,13 +213,14 @@ message UserAction {
 
   enum ActionType {
     UNKNONWN = 0;
-    FAVORITE = 1;
-    X_OUT = 2;
+    FAVORITE = 1; // aka Bookmark
+    X_OUT = 2; // Swipe to dismiss
     TAP_FROM_STREAM = 3; // User tapped the article cell to view the full article from the stream
     SHARE = 4;
     READ_ARTICLE = 5;
-    VOTE_UP = 6;
+    VOTE_UP = 6; // Swipe right "Good to know"
     UNVOTE_UP = 7;
+    SCROLL_PAST = 8;
   }
   optional ActionType action_type = 3 [
     (required) = YES
