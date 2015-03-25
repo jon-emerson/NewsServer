@@ -1,6 +1,11 @@
+@font-face {
+  font-family: Frutiger;
+  src: url('/resources/css/FrutigerLTStd-Roman.otf');
+}
+
 body {
     line-height: 1.5em;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Frutiger', 'Myriad Web Pro', sans-serif;
     color: #45504c;
     font-size: 18px;
 }
@@ -13,6 +18,16 @@ html,body {
 
 p {
     font-weight: 100;
+    margin-top: 24px;
+}
+
+a {
+  font-weight: bold;
+  color: white;
+}
+
+a:hover {
+  color: white;
 }
 
 pre {
@@ -87,19 +102,19 @@ a.btn-primary,
 }
 
 .jumbotron {
+    background: -webkit-linear-gradient(top, #5A5B67 0%,#3C3E47 50%,#202127 100%);
     background: linear-gradient(4deg,
-        rgba(80,177,255,0) 0,
-        rgba(80,177,255,0) 50%,
-        rgba(80,177,255,.6) 90%,
-        #438FCB 100%),
-        #326B98;
-    height: 460px;
-    margin-top: 68px;
+        #5A5B67 0%,
+        #3C3E47 50%,
+        #202127 100%),
+        #202127;
+    height: 500px;
+    margin-top: 0px;
     background-position: 50% 50%;
     background-size: 100% 100%;
-    background-image: url("/public/images/background2@2x.png");
+    background-image: url("/resources/img/leading-section-background2@2x.png");
     text-align: center;
-    padding-top: 26px;
+    padding-top: 54px;
 }
 
 .jumbotron h1 {
@@ -110,174 +125,150 @@ a.btn-primary,
 
 .jumbotron h2 {
     margin-top: 24px;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: lighter;
     color: #fff;
 }
 
-.demo-container {
-    height: 420px;
-    padding-top: 16px;
-    width: 210px;
-    margin: 0 auto;
-    position: relative;
+#leading-screenshot {
+  width: 280px;
+  height: 446px;
 }
 
-.demo-mobile {
-    background: url(/public/images/iphoneFrame@2x.png) no-repeat;
-    background-size: 210px 370px;
-    width: 210px;
-    height: 370px;
-    float: left;
+#app-icon {
+  width: 120px;
+  height: 120px;
+  margin-top: 78px;
 }
 
-.demo-mobile h3 {
-    margin: 0px 0px 4px 0px;
-    color: #fff;
-    font-weight: 100;
+#jumbotron-footer {
+  background-color: rgba(255,255,255,0.2);
+  margin-top: -86px; 
+  height: 86px;
 }
 
-.demo-mobile p {
-    font-size: 14px;
-    color: #fff;
-    margin: 0px 0px 8px 0px;
+.get-the-app-float-left {
+  display: inline;
+  float: left;
+  margin: 32px 10px 0px 4px;
+  color: white;
+  font-size: 16px;
 }
 
-.demo-hyperlink {
-    text-decoration: underline;
-    color: #fff;
+#apple-logo {
+  display: inline;
+  float: left;
+  width: 24px;
+  height: 30px;
+  margin: 26px 8px 0px -8px;
 }
 
-#demo-mobile-1 {
-    margin-right: 80px;
+.linkTexting_oq3j39q0 {
+  display: inline;
+  float: left;
+  width: 320px;
+  margin: 26px 0;
 }
 
-.mobile-window {
-    width: 168px;
-    height: 244px;
-    margin: 63px 21px;
+.linkTextingInner_oq3j39q0 {
+  width: 320px;
 }
 
-.mobile-window-header {
-    padding: 12px 20px 2px 20px;
-    margin: 68px 0px 2px 0px;
+.linkTextingButton_oq3j39q0 {
+  width: 84px;
+  background-color: #FF3F32;
 }
 
-.mobile-window-post {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 16px 8px 1px 8px;
-    margin: 1px;
+.linkTextingButton_oq3j39q0:hover {
+  background-color: #930711;
 }
 
-.demo-back-bar {
-    height: 40px;
-    background-color: #50B1FF;
-    color: #fff;
-    width: 100%;
-    vertical-align: middle;
-    outline: 7px solid #FFE150;
+#section-1 {
+  background-image: url("/resources/img/more-below@2x.png");
+  background-size: 75px 13px;
+  background-repeat: no-repeat;
+  background-position: 50% 3%;
 }
 
-.demo-back-button {
-    background: url(/public/images/back.png) center center no-repeat;
-    background-size: 12px 20px;
-    float: left;
-    width: 20px;
-    margin-left: 8px;
-    height: 100%;
+#section-1-img {
+    width: 307px;
+    height: 495px;
 }
 
-.demo-back-bar-title {
-    float: left;
-    padding: 8px 0px 0px 8px;
-    font-weight: 100;
-    font-size: 14px;
+#section-2 {
+  background-color: #4971FF;
+  color: white;
 }
 
-.demo-mobile-arrow {
-    background-size: 150px 57px;
-    width: 150px;
-    height: 57px;
-    position: absolute;
-    z-index: 2;
+.section-2-wrapper {
+  padding: 84px 0px 0px 0px;
 }
 
-.demo-mobile-arrow-right {
-    background: url(/public/images/rightCurvedArrow.png) no-repeat;
-    background-size: 150px 57px;
-    left: 166px;
-    top: 160px;
+#section-2-img {
+  width: 298px;
+  height: 475px;
 }
 
-.demo-mobile-arrow-left {
-    background: url(/public/images/leftCurvedArrow.png) no-repeat;
-    background-size: 150px 57px;
-    left: 172px;
-    top: 26px;
+#section-3-img {
+  width: 307px;
+  height: 495px;
 }
 
-#mobile-demo-img {
-    width: 100%;
-    max-width: 280px;
-    margin-top: 20px;
+#section-4 {
+  background-color: #41BAFF;
+  color: white;
 }
 
-.mobile-screen-img {
-    width: 168px;
-    height: 204px;
+#section-4-wrapper {
+  padding: 0px 0px 84px 0px;
 }
 
-#retention-img {
-    width: 244px;
-    height: 178px;
+#section-4-img {
+  width: 298px;
+  height: 508px;
 }
 
-#integration-img {
-    width: 218px;
-    height: 177px;
+#section-5 {
+  text-align: center
 }
 
-#customize-img {
-    width: 412px;
+#section-5-img {
+  width: 180px;
+  height: 207px;
 }
 
-.integration-section,
-.explanation-section,
-.social-section {
-    background-color: #F7F7F7;
+#section-6 {
+  background-color: #FE3852;
+  color: white;
 }
 
-.usecases-section {
-    text-align: center;
-    background-color: #F7F7F7;
+#section-6-wrapper {
+  margin: 84px 0px 30px 0px;
 }
 
-.usecases-img {
-    width: 144px;
+#section-6-logo {
+  width: 35px;
+  height: 89px;
+  margin-bottom: 32px;
 }
 
-.explanation-img {
-    width: 264px;
-    height: 110px;
-    margin-top: 70px;
+#section-7 {
+  background-color: #991000;
+  color: white;
 }
 
-.inline-btn {
-    padding-top: 6px;
-    margin-top: 14px;
-    padding-bottom: 6px;
-    margin-bottom: 20px;
-    margin-left: 0px;
-    line-height: 28px;
-    margin-right: 20px;
+#bottom-link-texting {
+  display: inline;
 }
 
-.social-section {
-    text-align: center;
+#bottom-link-texting-label {
+  display: inline;
+  float: left;
+  margin-top: 30px;
 }
 
-.code-snippet {
-    text-align: left;
+#section-8 {
+  text-align: center;
 }
 
 @media (min-width: 992px) {
@@ -290,11 +281,13 @@ a.btn-primary,
     }
 
     h3 {
-        margin-top: 60px;
+        margin-top: 180px;
     }
 
     h4 {
-        margin: 0px 0px 30px 0px;
+        margin: 40px 0px 30px 0px;
+        font-weight: bold;
+        font-size: 22px;
     }
 
     .code-snippet {
