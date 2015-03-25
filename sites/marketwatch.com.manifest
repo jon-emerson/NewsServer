@@ -1,0 +1,38 @@
+root_domain: "marketwatch.com"
+start_url: "http://www.marketwatch.com/"
+start_url: "http://www.marketwatch.com/newsviewer"
+paragraph_selector: "#article-body p"
+article_url_pattern {
+  path_regex: "^\\/story\\/[^\\/]+\\-20[0-9]{2}\\-[01][0-9]\\-[0-3][0-9]$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.marketwatch.com/story/oil-futures-choppy-ahead-of-us-crude-stockpile-data-2015-03-25"
+    article_url: "http://www.marketwatch.com/story/dow-transports-are-calling-bull-on-the-stock-markets-rise-2015-03-25"
+    article_url: "http://www.marketwatch.com/story/golds-winning-streak-could-be-about-to-end-2015-03-25"
+    article_url: "http://www.marketwatch.com/story/scary-parallels-and-how-to-time-the-next-crash-2015-03-25"
+    article_url: "http://www.marketwatch.com/story/credit-suisse-sees-years-of-painful-transition-ahead-for-ibm-2015-03-25"
+    article_url: "http://www.marketwatch.com/story/how-not-to-talk-about-money-at-social-events-2015-03-23"
+    non_article_url: "http://www.marketwatch.com/investing/currencies"
+    non_article_url: "http://www.marketwatch.com/column/movers-and-shakers"
+    non_article_url: "http://www.marketwatch.com/trading-deck"
+    non_article_url: "http://www.marketwatch.com/the-moneyologist"
+    non_article_url: "http://www.marketwatch.com/markets"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10534 # Foreign Exchange.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: 3
+} 
+

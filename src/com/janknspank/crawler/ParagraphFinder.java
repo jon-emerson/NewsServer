@@ -150,11 +150,10 @@ public class ParagraphFinder {
                 || node.findFirst(paragraphBlacklist.getSelector()) != null)) { // Children.
           return false;
         }
-      } else if (paragraphBlacklist.hasTextRegex()) {
-        if (textMatchesRegex(node.getFlattenedText(), paragraphBlacklist.getTextRegex())) {
-          return false;
-        }
-      } else {
+      } else if (!paragraphBlacklist.hasTextRegex()) {
+        // NOTE: The case of !selector && !!textRegex is handled inside
+        // getParagraphsInternal, after the paragraphs have been broken on their
+        // <br>s, etc.
         throw new IllegalStateException(
             "ParagraphBlacklist has neither a selector nor a text_regex");
       }

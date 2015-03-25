@@ -1,0 +1,38 @@
+root_domain: "dailyfx.com"
+start_url: "http://www.dailyfx.com/"
+subdomain_blacklist: "plus.dailyfx.com"
+paragraph_selector: ".story_paragraph p"
+article_url_pattern {
+  path_regex: "^\\/forex\\/.*\\/20[0-9]{2}\\/[01][0-9]\\/.*\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.dailyfx.com/forex/fundamental/forecast/weekly/gbp/2015/03/20/British-Pound-Faces-Critical-Test-in-Important-Week-Ahead.html"
+    article_url: "http://www.dailyfx.com/forex/fundamental/daily_briefing/session_briefing/euro_open/2015/03/20/Commodity-Dollars-Rise-as-Yen-Gains-Amid-Firming-Risk-Appetite.html"
+    article_url: "http://www.dailyfx.com/forex/fundamental/daily_briefing/daily_pieces/top_fx_headlines/2015/03/25/Important-Few-Days-Ahead-as-USD-Eyes-Key-Technical-Levels.html"
+    article_url: "http://www.dailyfx.com/forex/fundamental/daily_briefing/daily_pieces/commodities/2014/12/18/Crude-Recovery-May-Be-Limited-Natural-Gas-Braces-For-Storage-Data.html"
+    article_url: "http://www.dailyfx.com/forex/fundamental/us_dollar_index/daily_dollar/2015/03/25/USD-JPY-Fails-to-Hold-Post-FOMC-Low--118.20-Up-Next.html"
+    article_url: "http://www.dailyfx.com/forex/technical/home/analysis/us_dollar_index/2015/03/20/dailyclassics_us_dollar_index.html"
+    non_article_url: "http://www.dailyfx.com/how_to_trade_forex/forex_trading_courses"
+    non_article_url: "http://www.dailyfx.com/analyst_picks"
+    non_article_url: "http://www.dailyfx.com/gbp-usd"
+    non_article_url: "http://www.dailyfx.com/technical_analysis/candlesticks?candlestick=GBP/USD"
+    non_article_url: "http://www.dailyfx.com/forex_market_news/forecasts"
+    non_article_url: "http://www.dailyfx.com/real_time_news"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10534 # Foreign Exchange.
+  boost: 4
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: -2
+}

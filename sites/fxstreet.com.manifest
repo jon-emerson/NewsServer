@@ -1,0 +1,54 @@
+root_domain: "fxstreet.com"
+start_url: "http://www.fxstreet.com/news/"
+path_blacklist {
+  needle: "/education/"
+}
+subdomain_blacklist: "about.fxstreet.com"
+subdomain_blacklist: "mediaserver.fxstreet.com"
+paragraph_selector: ".article-text"
+paragraph_blacklist {
+  text_regex: "^[A-Z]{3}\\/[A-Z]{3} Current"
+}
+paragraph_blacklist {
+  text_regex: "^View Live Chart"
+}
+article_url_pattern {
+  path_regex: "^\\/analysis\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/$"
+}
+article_url_pattern {
+  path_regex: "^\\/news\\/forex-news\\/article.aspx$"
+}
+whitelisted_query_parameter: "storyid"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.fxstreet.com/analysis/big-apple-pips/2015/03/25/"
+    article_url: "http://www.fxstreet.com/analysis/currency-majors-technical-perspective/2015/03/25/"
+    article_url: "http://www.fxstreet.com/analysis/daily-pfennig/2015/03/25/"
+    article_url: "http://www.fxstreet.com/analysis/daily-world-market-update/2015/03/25/"
+    article_url: "http://www.fxstreet.com/news/forex-news/article.aspx?storyid=54d5b863-3147-4566-9fad-c6f09cc05b99"
+    article_url: "http://www.fxstreet.com/news/forex-news/article.aspx?storyid=7ea1ede9-6aac-4fa4-89fb-a0d711a0777b"
+    article_url: "http://www.fxstreet.com/news/forex-news/article.aspx?storyid=9a408f2d-d707-4673-be55-42608e291c7f"
+    non_article_url: "http://www.fxstreet.com/analysis/"
+    non_article_url: "http://www.fxstreet.com/analysis/european-preopen-comments/"
+    non_article_url: "http://www.fxstreet.com/search/tags/?id=centralbanks"
+    non_article_url: "http://www.fxstreet.com/search/contributors/authors/author.aspx?id=00ba1ac5-21c3-4d42-9397-ec68cc09e983"
+    non_article_url: "http://www.fxstreet.com/technical-studies/currencies/heat-map/"
+    non_article_url: "http://www.fxstreet.com/webinars/sessions/"
+    non_article_url: "http://www.fxstreet.com/webinars/sessions/the-one-key-trading-technique-that-is-preventing-you-from-being-profitable-20150326/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10534 # Foreign Exchange.
+  boost: 4
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: -2
+}

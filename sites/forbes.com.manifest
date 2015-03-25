@@ -24,6 +24,9 @@ paragraph_selector: ".article-body p"
 paragraph_selector: ".article-content-body p"
 paragraph_selector: ".article .body p"
 
+# E.g. http://www.forbes.com/newsletters/validea-hot-list/2015/01/30/hot-list-portfolio-bouncing-back-in-early-2015/
+paragraph_selector: ".body-text > p"
+
 # E.g. http://www.forbes.com/sites/maribellopez/2015/03/02/hp-rides-arubas-wave-into-contextual-networking/
 paragraph_selector: ".body .body_inner span"
 
@@ -60,7 +63,15 @@ test_instructions {
   }
 }
 feature_boost_pattern {
-  feature_id: 10514 # Financial Services
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10534 # Foreign Exchange.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
   boost: 5
 }
 feature_boost_pattern {

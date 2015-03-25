@@ -33,7 +33,3 @@ feature_boost_pattern {
   feature_id: 20001 # Related to traditional brick and mortar startups
   boost: 3
 }
-feature_boost_pattern {
-  feature_id: 10514 # Financial Services
-  boost: 1
-}

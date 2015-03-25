@@ -1,0 +1,44 @@
+root_domain: "thestreet.com"
+start_url: "http://www.thestreet.com/"
+subdomain_blacklist: "business-news.thestreet.com"
+subdomain_blacklist: "contributor.thestreet.com"
+subdomain_blacklist: "corporate.thestreet.com"
+subdomain_blacklist: "realmoney.thestreet.com"
+subdomain_blacklist: "secure2.thestreet.com"
+path_blacklist {
+  needle: "/quote/"
+}
+paragraph_selector: "#storyBody p"
+article_url_pattern {
+  path_regex: "^\\/story\\/[0-9]{6,10}\\/1\\/.*\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.thestreet.com/story/13091096/1/kimberly-clark--bull-chart-of-the-day-comes-with-a-big-caveat.html"
+    article_url: "http://www.thestreet.com/story/13089285/1/6-high-yield-dividend-stocks-in-industries-consumers-love-to-hate.html"
+    article_url: "http://www.thestreet.com/story/13054877/1/jim-cramers-mad-money-recap-where-are-the-market-leaders.html"
+    article_url: "http://www.thestreet.com/story/13089548/1/sell-in-may-then-go-away-often-works-and-could-be-wise-to-consider-early-this-year.html"
+    article_url: "http://www.thestreet.com/story/13089449/1/twitter-twtr-stock-is-up-on-heavy-trading-volume-today.html"
+    non_article_url: "http://www.thestreet.com/investment-research/index.html"
+    non_article_url: "http://www.thestreet.com/headlines-and-perspectives/biotech/index.html"
+    non_article_url: "http://www.thestreet.com/staticFull/special-offers.html"
+    non_article_url: "http://www.thestreet.com/event-calendar/index.html"
+    non_article_url: "http://www.thestreet.com/topic/43441/gold-price.html"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10534 # Foreign exchange.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: 3
+} 
+

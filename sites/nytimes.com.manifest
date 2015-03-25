@@ -146,15 +146,35 @@ feature_boost_pattern {
   boost: 10
 }
 feature_boost_pattern {
-  feature_id: 10514 # Financial Services
+  feature_id: 10514 # Mergers and Acquisitions.
   path_regex: "\\/business\\/"
-  boost: 5
+  boost: 2
 }
 feature_boost_pattern {
-  feature_id: 10514 # Financial Services
+  feature_id: 10534 # Foreign Exchange.
+  path_regex: "\\/business\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  path_regex: "\\/business\\/"
+  boost: 2
+} 
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  subdomain: "dealbook.nytimes.com"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10534 # Foreign Exchange.
+  subdomain: "dealbook.nytimes.com"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
   subdomain: "dealbook.nytimes.com"
   boost: 5
-}
+} 
 feature_boost_pattern {
   feature_id: 10511 # Leisure, Travel and Tourism
   path_regex: "^\\/travel\\/"

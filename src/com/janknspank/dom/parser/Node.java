@@ -267,7 +267,11 @@ public class Node {
         String tagName = child.getTagName();
         if (tagName.equalsIgnoreCase("script") || tagName.equalsIgnoreCase("style")) {
           // Ignore.
-        } else if (tagName.equalsIgnoreCase("br") || tagName.equalsIgnoreCase("p")) {
+        } else if (tagName.equalsIgnoreCase("br")
+            || tagName.equalsIgnoreCase("p")
+            || tagName.equalsIgnoreCase("h1")
+            || tagName.equalsIgnoreCase("h2")
+            || tagName.equalsIgnoreCase("h3")) {
           sb.append(TEXT_LINES_LINE_BREAK_MARKER);
           child.buildTextLinesStringBuffer(sb);
         } else {

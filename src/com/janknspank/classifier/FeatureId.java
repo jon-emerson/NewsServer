@@ -24,7 +24,7 @@ public enum FeatureId {
   LEISURE_TRAVEL_AND_TOURISM(10511, FeatureType.INDUSTRY, "Leisure, Travel and Tourism"),
   SPORTS(10512, FeatureType.INDUSTRY, "Sports"),
   VIDEO_PRODUCTION(10513, FeatureType.INDUSTRY, "Video Production"),
-  FINANCIAL_SERVICES(10514, FeatureType.INDUSTRY, "Financial Services"),
+  MERGERS_AND_ACQUISITIONS(10514, FeatureType.INDUSTRY, "Mergers and Acquisitions"), ////////////
   ACCOUNTING(10515, FeatureType.INDUSTRY, "Accounting"),
   CONSTRUCTION(10516, FeatureType.INDUSTRY, "Construction"),
   ARCHITECTURE_AND_PLANNING(10517, FeatureType.INDUSTRY, "Architecture and Planning"),
@@ -44,6 +44,8 @@ public enum FeatureId {
   DEFENSE_AND_SPACE(10531, FeatureType.INDUSTRY, "Defense and Space"),
   LAW_PRACTICE(10532, FeatureType.INDUSTRY, "Law Practice"),
   MEDICINE(10533, FeatureType.INDUSTRY, "Medicine"),
+  FOREIGN_EXCHANGE(10534, FeatureType.INDUSTRY, "Foreign Exchange"), ////////////
+  EQUITY_INVESTING(10535, FeatureType.INDUSTRY, "Equity Investing"), ////////////
   REAL_ESTATE(10536, FeatureType.INDUSTRY, "Real Estate"),
   MINING_AND_METALS(10537, FeatureType.INDUSTRY, "Mining and Metals"),
   OIL_AND_ENERGY(10538, FeatureType.INDUSTRY, "Oil and Energy"),

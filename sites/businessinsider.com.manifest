@@ -36,6 +36,14 @@ feature_boost_pattern {
   boost: -2 # Have had some complaints that article quality here isn't as good as other sites.
 }
 feature_boost_pattern {
-  feature_id: 10514 # Financial Services
-  boost: 1
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10534 # Foreign Exchange.
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: -1
 }

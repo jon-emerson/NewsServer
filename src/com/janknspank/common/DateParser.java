@@ -41,7 +41,9 @@ public class DateParser {
       new SimpleDateFormat("dd MMM yyyy '|' HH:mm z"), // Spectrum.ieee.org.
       new SimpleDateFormat("hh:mm a z  MMMM dd, yyyy"),
       new SimpleDateFormat("EEE MMM d, yyyy   h:mm a"),
-      new SimpleDateFormat("MMM d yyyy")
+      new SimpleDateFormat("MMM d yyyy"),
+      new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"), // Dailyfx.com.
+      new SimpleDateFormat("EEE, MMM dd yyyy, HH:mm z") // Fxstreet.com.
   };
   private static final DateFormat MONTH_IN_URL_DATE_FORMAT =
       new SimpleDateFormat("/yyyy/MM/");
