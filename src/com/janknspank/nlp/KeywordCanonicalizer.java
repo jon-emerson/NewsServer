@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.api.client.util.Lists;
 import com.google.common.base.CharMatcher;
@@ -29,6 +31,14 @@ import com.janknspank.proto.CoreProto.KeywordToEntityId;
 public class KeywordCanonicalizer {
   private static final Set<String> PERSON_TITLES = Sets.newHashSet(
       "dr", "mr", "ms", "mrs", "miss", "prof", "rev");
+
+  // This is a Pattern of keywords folks like to put in their articles as an SEO
+  // tactic.  For these, we only count them as keywords if they exist in the
+  // title of the article.  The thinking goes, if the article's actually about
+  // these companies/entities, then they'd put it in the title.
+  private static final Pattern KEYWORD_BAIT_ENTITY_PATTERN =
+      Pattern.compile("(facebook|google|twitter|tumbr|quora|apple)");
+
   public static final int STRENGTH_FOR_TITLE_MATCH = 150;
   public static final int STRENGTH_FOR_FIRST_PARAGRAPH_MATCH = 100;
 
@@ -203,19 +213,21 @@ public class KeywordCanonicalizer {
         // important: If we didn't, keywords found at the bottom of the article
         // could prevent title and/or first-paragraph keywords from being
         // properly scored.
-        int strengthAddition = 0;
-        if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 0) {
-          // Title match.
-          strengthAddition += STRENGTH_FOR_TITLE_MATCH;
-        } else if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 1) {
-          strengthAddition += STRENGTH_FOR_FIRST_PARAGRAPH_MATCH;
-        }
+        // NOTE(jonemerson): Commented because .getArticleKeywordsFromText
+        // already does these promotions through brute-force checks.
+        // int strengthAddition = 0;
+        // if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 0) {
+        //   // Title match.
+        //   strengthAddition += STRENGTH_FOR_TITLE_MATCH;
+        // } else if (keyword.hasParagraphNumber() && keyword.getParagraphNumber() == 1) {
+        //   strengthAddition += STRENGTH_FOR_FIRST_PARAGRAPH_MATCH;
+        // }
 
         Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
         finalKeywords.add(keyword.toBuilder()
             .setEntity(entity)
             .setKeyword(entity.hasShortName() ? entity.getShortName() : entity.getKeyword())
-            .setStrength(keyword.getStrength() + strengthAddition)
+            // .setStrength(keyword.getStrength() + strengthAddition)
             .build());
       } else {
         finalKeywords.add(keyword);
@@ -231,7 +243,7 @@ public class KeywordCanonicalizer {
    * NOTE(jonemerson): Yaaa this is expensive, which is why we only do it for
    * titles!! :)
    */
-  public static Iterable<ArticleKeyword> getArticleKeywordsFromParagraphInternal(
+  public static Iterable<ArticleKeyword> getArticleKeywordsFromTextInternal(
       String block,
       int paragraphNumber,
       Map<String, KeywordToEntityId> keywordToEntityIdMap,
@@ -239,10 +251,23 @@ public class KeywordCanonicalizer {
     KeywordToEntityId keywordToEntityId = keywordToEntityIdMap.get(block.toLowerCase());
     if (keywordToEntityId != null) {
       Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
+      String entityKeyword = entity.hasShortName() ? entity.getShortName() : entity.getKeyword();
+
+      // Prevent click-bait: Only allow known clickbait entities through if the
+      // keyword if they're in the article's title.
+      Matcher clickbaitMatcher = KEYWORD_BAIT_ENTITY_PATTERN.matcher(entityKeyword.toLowerCase());
+      if (clickbaitMatcher.matches() && paragraphNumber != 0) {
+        return Collections.emptyList();
+      }
+
+      int strength = 5;
+      if (!clickbaitMatcher.find()) {
+        strength = (paragraphNumber == 0)
+            ? STRENGTH_FOR_TITLE_MATCH : STRENGTH_FOR_FIRST_PARAGRAPH_MATCH;
+      }
       return ImmutableList.of(ArticleKeyword.newBuilder()
-          .setKeyword(entity.hasShortName() ? entity.getShortName() : entity.getKeyword())
-          .setStrength(paragraphNumber == 0
-              ? STRENGTH_FOR_TITLE_MATCH : STRENGTH_FOR_FIRST_PARAGRAPH_MATCH) // Title match.
+          .setKeyword(entityKeyword)
+          .setStrength(strength) // Title match.
           .setType(entity.getType())
           .setSource(ArticleKeyword.Source.TITLE)
           .setEntity(entity)
@@ -250,9 +275,9 @@ public class KeywordCanonicalizer {
           .build());
     } else if (block.contains(" ")) {
       return Iterables.concat(
-          getArticleKeywordsFromParagraphInternal(block.substring(0, block.lastIndexOf(" ")),
+          getArticleKeywordsFromTextInternal(block.substring(0, block.lastIndexOf(" ")),
               paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap),
-              getArticleKeywordsFromParagraphInternal(block.substring(block.indexOf(" ") + 1),
+              getArticleKeywordsFromTextInternal(block.substring(block.indexOf(" ") + 1),
               paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap));
     } else {
       return Collections.emptyList();
@@ -291,7 +316,7 @@ public class KeywordCanonicalizer {
 
     Map<String, ArticleKeyword> entityIdToKeywordMap = Maps.newHashMap();
     for (String block : blocks) {
-      for (ArticleKeyword keyword : getArticleKeywordsFromParagraphInternal(
+      for (ArticleKeyword keyword : getArticleKeywordsFromTextInternal(
           block, paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap)) {
         if (!entityIdToKeywordMap.containsKey(keyword.getEntity().getId())) {
           entityIdToKeywordMap.put(keyword.getEntity().getId(), keyword);

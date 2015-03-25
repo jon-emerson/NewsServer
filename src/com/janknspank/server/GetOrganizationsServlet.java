@@ -29,7 +29,8 @@ public class GetOrganizationsServlet extends StandardServlet {
     Iterable<String> organizationTypes = ImmutableList.of(
         EntityType.ORGANIZATION.toString(),
         EntityType.COMPANY.toString(),
-        EntityType.SOFTWARE.toString());
+        EntityType.SOFTWARE.toString(),
+        EntityType.WEBSITE.toString());
     if (searchString != null) {
       orgs = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", searchString + "%"),

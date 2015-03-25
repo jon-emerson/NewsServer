@@ -75,7 +75,7 @@ public class KeywordFinderTest {
     assertEquals(4, Iterables.size(keywords));
     assertContainsKeyword("Brangelina", Source.META_TAG, keywords);
     assertContainsKeyword("Wikipedia", Source.META_TAG, keywords);
-    assertContainsKeyword("Brad Pitt", Source.NLP, keywords);
+    assertContainsKeyword("Brad Pitt", Source.TITLE, keywords);
     assertContainsKeyword("Angelina Jolie", Source.TITLE, keywords);
   }
 }

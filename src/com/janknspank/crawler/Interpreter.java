@@ -28,7 +28,6 @@ public class Interpreter {
    */
   public static InterpretedData interpret(Url url)
       throws FetchException, ParserException, RequiredFieldException {
-
     FetchResponse response = null;
     Reader reader = null;
     try {

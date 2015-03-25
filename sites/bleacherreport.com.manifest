@@ -1,0 +1,37 @@
+root_domain: "bleacherreport.com"
+start_url: "http://bleacherreport.com/"
+start_url: "http://bleacherreport.com/nfl"
+start_url: "http://bleacherreport.com/trending"
+start_url: "http://bleacherreport.com/nba"
+start_url: "http://bleacherreport.com/mlb"
+start_url: "http://bleacherreport.com/world-football"
+paragraph_selector: ".article_body p"
+article_url_pattern {
+  path_regex: "^\\/articles\\/[0-9]{6,9}\\-[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://bleacherreport.com/articles/2392960-hector-olivera-to-dodgers-latest-contract-details-comments-reaction"
+    article_url: "http://bleacherreport.com/articles/2407871-dodgers-625m-hector-olivera-splash-proves-they-heard-padres-footsteps"
+    article_url: "http://bleacherreport.com/articles/2399980-nl-west-2015-preview-sleepers-x-factors-and-predictions"
+    article_url: "http://bleacherreport.com/articles/2406860-injury-prone-dodgers-pitcher-brett-anderson-hopes-to-be-effective"
+    article_url: "http://bleacherreport.com/articles/2406927-exclusive-pele-on-son-neymar-lionel-messi-and-complicated-2022-world-cup"
+    article_url: "http://bleacherreport.com/articles/2406400-ranking-the-top-25-european-clubs-after-weekend-of-march-21-22"
+    article_url: "http://bleacherreport.com/articles/2406890-spain-rebuild-slowly-but-surely-after-world-cup-blowout"
+    non_article_url: "http://bleacherreport.com/world-football"
+    non_article_url: "http://bleacherreport.com/trending"
+    non_article_url: "http://bleacherreport.com/sports-lists"
+    non_article_url: "http://bleacherreport.com/college-football"
+    non_article_url: "http://bleacherreport.com/users/1032391-ben-axelrod"
+    non_article_url: "http://bleacherreport.com/big-10-football"
+    non_article_url: "http://bleacherreport.com/users/302882-elliott-pohnl"
+    non_article_url: "http://bleacherreport.com/boston-bruins"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10512 # Sports
+  boost: 10
+}

@@ -30,7 +30,9 @@ path_blacklist {
 }
 paragraph_selector: "div#storytext h2"
 paragraph_selector: "div#storytext p"
-paragraph_blacklist_selector: ".inStoryHeading"
+paragraph_blacklist {
+  selector: ".inStoryHeading"
+}
 article_url_pattern {
   path_regex: "\\/20[0-9]{2}\\/([A-Z]+\\/([A-Za-z]+\\/)?)?[01][0-9]\\/[0-3][0-9]\\/"
 }

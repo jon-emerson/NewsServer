@@ -43,6 +43,7 @@ public class DateParserTest {
     assertSameTime("20150106224300", "January 6, 2015, 10:43 PM"); // Cbsnews.com.
     assertSameTime("20150227000000", "27 February 2015"); // Ribaj.com.
     assertSameTime("20141119020000", "Wednesday 19 November 2014 at 2am PST");
+    assertSameTime("20150320051100", "8:11 AM EDT  March 20, 2015");
   }
 
   @Test

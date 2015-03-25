@@ -81,6 +81,8 @@ bad_url: "http://www.bustler.net/index.php/article/finalists_for_the_uli_hines_c
 bad_url: "http://www.eetimes.com/document.asp?doc_id=1326042"
 bad_url: "http://www.dwell.com/rooms-we-love/article/tying-it-all-together-7-rugs-make-rooms"
 bad_url: "http://www.abc.net.au/news/2015-03-20/utas-campuses-in-launceston-and-burnie-under-threat/6334888"
+bad_url: "http://www.theverge.com/2015/3/20/8263561/mercedes-benz-f-015-self-driving-video"
+bad_url: "http://www.huffingtonpost.com/2015/03/20/louie-gohmert-iran_n_6909112.html"
 interest {
   id: "55036fcfe4b05c7064a87735"
   type: INDUSTRY

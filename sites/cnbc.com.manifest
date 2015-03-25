@@ -11,7 +11,9 @@ path_blacklist {
   needle: "/live-tv/"
 }
 paragraph_selector: "#article_body p"
-paragraph_blacklist_selector: ".label-read-more"
+paragraph_blacklist {
+  selector: ".label-read-more"
+}
 article_url_pattern {
   path_regex: "^\\/id\\/[0-9]{9,11}(\\/[^\\/]*)?$"
 }

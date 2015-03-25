@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.api.client.util.Sets;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.Users;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 
 public abstract class AbstractArticlesServlet extends StandardServlet {
   private static final Set<Integer> SHOW_IMAGE_OFFSETS = ImmutableSet.of(
@@ -44,6 +46,15 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     return article.getUrl().startsWith("http://www.t");
   }
 
+  private Article getFirstImageArticle(final Iterable<Article> articles) {
+    for (Article article : articles) {
+      if (article.hasImageUrl()) {
+        return article;
+      }
+    }
+    return null;
+  }
+
   /**
    * Transforms the passed Article iterable so that the first article tends to
    * have a good image associated with it.  For now, we don't know much about
@@ -54,12 +65,7 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     if (Iterables.isEmpty(articles)) {
       return Collections.emptyList();
     }
-    final Article firstImageArticle = Iterables.find(articles, new Predicate<Article>() {
-      @Override
-      public boolean apply(Article article) {
-        return (article.hasImageUrl());
-      }
-    });
+    final Article firstImageArticle = getFirstImageArticle(articles);
     if (firstImageArticle == null) {
       return articles;
     }
@@ -80,8 +86,17 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     Iterable<Article> articles = putImageArticleFirst(getArticles(req));
     JSONArray articlesJson = new JSONArray();
     int i = 1;
+    String contactsParameter = getParameter(req, "contacts");
     for (Article article : articles) {
-      articlesJson.put(serialize(article, Users.getUserKeywordSet(getUser(req)), i++));
+      Set<InterestType> forcedInterests = Sets.newHashSet();
+      if ("linked_in".equals(contactsParameter)) {
+        forcedInterests.add(InterestType.LINKED_IN_CONTACTS);
+      }
+      if ("address_book".equals(contactsParameter)) {
+        forcedInterests.add(InterestType.ADDRESS_BOOK_CONTACTS);
+      }
+      articlesJson.put(serialize(article,
+          UserInterests.getUserKeywordSet(getUser(req), forcedInterests), i++));
     }
     response.put("articles", articlesJson);
     return response;

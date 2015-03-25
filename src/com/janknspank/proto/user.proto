@@ -218,6 +218,8 @@ message UserAction {
     TAP_FROM_STREAM = 3; // User tapped the article cell to view the full article from the stream
     SHARE = 4;
     READ_ARTICLE = 5;
+    VOTE_UP = 6;
+    UNVOTE_UP = 7;
   }
   optional ActionType action_type = 3 [
     (required) = YES
@@ -253,7 +255,13 @@ message UserAction {
     (client_serialization) = EXCLUDE
   ];
 
+  // The current user's interests, regardless of whether they were used
+  // specifically in the stream the user was acting in.
   repeated Interest interest = 11 [
     (client_serialization) = EXCLUDE
   ];
+
+  // If the user was viewing an interest stream, this object describes
+  // the entity / keyword / etc that they were viewing.
+  optional Interest on_stream_for_interest = 12;
 }

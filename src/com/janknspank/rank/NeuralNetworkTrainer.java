@@ -21,18 +21,22 @@ import com.google.common.collect.Maps;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.crawler.ArticleCrawler;
+import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
   private static int MAX_ITERATIONS = 50000;
-  private Double[] lastNetworkWeights;
+
   private double lowestError = 1.0;
+  private Double[] lowestErrorNetworkWeights;
 
   @SuppressWarnings("unused")
-  private Double[] lowestErrorNetworkWeights;
+  private Double[] lastNetworkWeights;
+
   @SuppressWarnings("unused")
   private double lowestErrorIteration = 0;
 
@@ -87,6 +91,18 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     for (Persona persona : Personas.getPersonaMap().values()) {
       System.out.println("Grabbing URLs for " + persona.getEmail() + " ...");
       User user = Personas.convertToUser(persona);
+
+      // HACK(jonemerson): Temporarily, we're deleting all articles so they'll
+      // be recrawled with the latest and greatest entity handling.
+//      if (persona.getEmail().equals("tom.charytoniuk@gmail.com")) {
+        System.out.println("DELETING CACHED ARTICLES");
+        int count = Database.with(Article.class).delete(
+            new QueryOption.WhereEquals("url", persona.getGoodUrlList()));
+        count += Database.with(Article.class).delete(
+            new QueryOption.WhereEquals("url", persona.getBadUrlList()));
+        System.out.println(count + " articles uncached!!!!");
+//      }
+
       Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(
           Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList()), true /* retain */);
 

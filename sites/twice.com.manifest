@@ -1,0 +1,46 @@
+root_domain: "twice.com"
+start_url: "http://www.twice.com/"
+paragraph_selector: ".content .even p"
+article_url_pattern {
+  path_regex: "^\\/news\\/.*\\/[0-9]{5,7}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.twice.com/news/retail/premium-majap-chain-pirch-continues-national-expansion/56496"
+    article_url: "http://www.twice.com/news/home-automation/icontrol-expands-security-automation-escs-security-dealers/56500"
+    article_url: "http://www.twice.com/news/distributors/med-alliance-plans-charter-meeting/56495"
+    article_url: "http://www.twice.com/news/people/sharp-group-sharpens-home-center-focus/56494"
+    article_url: "http://www.twice.com/news/trade-groups/deg-cea-team-4k-uhd-tv-event/56493"
+    article_url: "http://www.twice.com/news/distributors/dh-kicks-2015-show-sked-california/56440"
+    article_url: "http://www.twice.com/news/distributors/almo-acquires-af-lighting/56347"
+    article_url: "http://www.twice.com/news/distributors/tech-data-realigns-business-groups/56179"
+    article_url: "http://www.twice.com/news/distributors/dsi-adds-philips-av-line/56080"
+    article_url: "http://www.twice.com/news/distributors/adi-opens-103rd-sales-branch/55952"
+    article_url: "http://www.twice.com/news/distributors/powerhouse-members-set-q1-training-sked/55891"
+    article_url: "http://www.twice.com/news/distributors/dh-ups-connected-home-ante/55821"
+    article_url: "http://www.twice.com/news/retail/radioshack-saga-enters-final-round/56484"
+    article_url: "http://www.twice.com/news/retail/amazon-grows-prime-now-1-hour-delivery-service/56477"
+    article_url: "http://www.twice.com/news/retail/stereo-exchange-readies-headphones-event/56472"
+    article_url: "http://www.twice.com/news/retail/sunbrite-joins-best-buy-s-outdoor-assortment/56449"
+    article_url: "http://www.twice.com/news/retail/radioshack-our-stock-worthless/56389"
+    article_url: "http://www.twice.com/news/retail/sony-phasing-out-its-retail-stores/56291"
+    article_url: "http://www.twice.com/news/retail/target-investing-2b-growth-initiatives/56286"
+    article_url: "http://www.twice.com/news/retail/best-buy-fueling-across-board-initiatives/56281"
+    non_article_url: "http://www.twice.com/news/retails"
+    non_article_url: "http://www.twice.com/news/trade-groups"
+    non_article_url: "http://www.twice.com/comments"
+    non_article_url: "http://www.twice.com/content/contact-us/74"
+    non_article_url: "http://www.twice.com/content/twice-most-respected-brand-consumer-electronics-wireless-and-major-appliance-industries/77"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer electronics
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods
+  boost: 0
+}

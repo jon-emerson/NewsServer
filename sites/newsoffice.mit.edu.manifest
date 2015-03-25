@@ -1,0 +1,26 @@
+root_domain: "newsoffice.mit.edu"
+start_url: "http://newsoffice.mit.edu/"
+paragraph_selector: "#article-body-main .even p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[^\\/]+-[0-9]{4,5}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://newsoffice.mit.edu/2015/satellite-imagery-aid-development-projects-0323"
+    article_url: "http://newsoffice.mit.edu/2015/two-school-foundings-link-mit-advances-brazilian-education-0319"
+    article_url: "http://newsoffice.mit.edu/2015/temple-grandin-talk-0318"
+    article_url: "http://newsoffice.mit.edu/2015/gong-named-ncaa-division-iii-track-athlete-of-the-year-0320"
+    article_url: "http://newsoffice.mit.edu/2015/cancer-drug-prices-rise-10-percent-annually-0318"
+    article_url: "http://newsoffice.mit.edu/2015/mit-new-cybersecurity-initiatives-0313"
+    article_url: "https://newsoffice.mit.edu/2015/faculty-highlight-krystyn-van-vliet-0318"
+    non_article_url: "http://newsoffice.mit.edu/about"
+    non_article_url: "http://newsoffice.mit.edu/press"
+    non_article_url: "https://newsoffice.mit.edu/contact"
+    non_article_url: "https://newsoffice.mit.edu/user/login?destination=user/campus-news/submit"
+    non_article_url: "http://newsoffice.mit.edu/topic/public-service-center-psc"
+    non_article_url: "http://newsoffice.mit.edu/topic/open-style-lab"
+  }
+}
+feature_boost_pattern {
+  boost: -3 # This is kinda a weird site... Not sure why I bothered creating this manifest.
+}

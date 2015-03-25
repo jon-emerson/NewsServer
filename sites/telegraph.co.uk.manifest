@@ -51,6 +51,7 @@ path_blacklist {
 paragraph_selector: "article > p"
 paragraph_selector: "article > div > p"
 paragraph_selector: "#mainBodyArea p"
+paragraph_selector: "#mainImage .caption p"
 article_url_pattern {
   path_regex: "\\/1[0-9]{7}\\/"
 }
@@ -67,4 +68,18 @@ test_instructions {
     non_article_url: "http://www.telegraph.co.uk/technology/video-games/"
     non_article_url: "http://www.telegraph.co.uk/topics/about-us/style-book/"
   }
+}
+feature_boost_pattern {
+  path_regex: "\\/islamic-state\\/"
+  boost: -3
+}
+feature_boost_pattern {
+  feature_id: 10542 # Military
+  path_regex: "\\/islamic-state\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "\\/islamic-state\\/"
+  boost: 0
 }

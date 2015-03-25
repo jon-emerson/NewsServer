@@ -1,0 +1,60 @@
+root_domain: "extremetech.com"
+start_url: "http://www.extremetech.com/"
+start_url: "http://www.extremetech.com/category/internet"
+paragraph_selector: ".content p"
+article_url_pattern {
+  path_regex: "^\\/[a-z]+\\/[0-9]{5,8}-[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.extremetech.com/computing/201064-which-ssds-are-the-most-reliable-massive-study-sheds-some-light"
+    article_url: "http://www.extremetech.com/computing/201698-mri-scans-of-the-brain-show-why-we-ignore-security-warnings"
+    article_url: "http://www.extremetech.com/gaming/201568-amd-backed-freesync-monitors-finally-shipping"
+    article_url: "http://www.extremetech.com/extreme/201195-can-the-vr-craze-and-new-display-technologies-save-3d-tv"
+    article_url: "http://www.extremetech.com/extreme/199502-nasa-spacecraft-nears-orbit-with-ceres-mysterious-bright-spots"
+    article_url: "http://www.extremetech.com/extreme/201722-linuxs-worst-case-scenario-microsoft-makes-secure-boot-mandatory-locks-out-other-operating-systems"
+    article_url: "http://www.extremetech.com/extreme/201542-weapons-of-world-war-iii-how-new-technology-will-affect-the-next-great-conflict"
+    article_url: "http://www.extremetech.com/mobile/201513-google-exec-heres-where-glass-went-wrong"
+    article_url: "http://www.extremetech.com/mobile/201625-diy-healthcare-using-todays-technology-to-revolutionize-health-services"
+    non_article_url: "http://www.extremetech.com/category/computing"
+    non_article_url: "http://www.extremetech.com/tag/nasa"
+    non_article_url: "http://www.extremetech.com/about"
+    non_article_url: "http://www.extremetech.com/author/dcardinal"
+    non_article_url: "http://www.extremetech.com/tag/quantum"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer Electronics
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: -1
+}

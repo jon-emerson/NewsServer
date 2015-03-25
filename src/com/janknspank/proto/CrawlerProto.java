@@ -246,45 +246,30 @@ public final class CrawlerProto {
     com.google.protobuf.ByteString
         getParagraphSelectorBytes(int index);
 
-    // repeated string paragraph_blacklist_selector = 14;
+    // repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;
     /**
-     * <code>repeated string paragraph_blacklist_selector = 14;</code>
-     *
-     * <pre>
-     * For all Nodes that match paragraph_selector, if they or any of their
-     * children also match this this selector, they are excluded as paragraphs.
-     * </pre>
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
      */
-    java.util.List<java.lang.String>
-    getParagraphBlacklistSelectorList();
+    java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist> 
+        getParagraphBlacklistList();
     /**
-     * <code>repeated string paragraph_blacklist_selector = 14;</code>
-     *
-     * <pre>
-     * For all Nodes that match paragraph_selector, if they or any of their
-     * children also match this this selector, they are excluded as paragraphs.
-     * </pre>
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
      */
-    int getParagraphBlacklistSelectorCount();
+    com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist getParagraphBlacklist(int index);
     /**
-     * <code>repeated string paragraph_blacklist_selector = 14;</code>
-     *
-     * <pre>
-     * For all Nodes that match paragraph_selector, if they or any of their
-     * children also match this this selector, they are excluded as paragraphs.
-     * </pre>
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
      */
-    java.lang.String getParagraphBlacklistSelector(int index);
+    int getParagraphBlacklistCount();
     /**
-     * <code>repeated string paragraph_blacklist_selector = 14;</code>
-     *
-     * <pre>
-     * For all Nodes that match paragraph_selector, if they or any of their
-     * children also match this this selector, they are excluded as paragraphs.
-     * </pre>
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
      */
-    com.google.protobuf.ByteString
-        getParagraphBlacklistSelectorBytes(int index);
+    java.util.List<? extends com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder> 
+        getParagraphBlacklistOrBuilderList();
+    /**
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+     */
+    com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder getParagraphBlacklistOrBuilder(
+        int index);
 
     // repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;
     /**
@@ -640,10 +625,10 @@ public final class CrawlerProto {
             }
             case 114: {
               if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                paragraphBlacklistSelector_ = new com.google.protobuf.LazyStringArrayList();
+                paragraphBlacklist_ = new java.util.ArrayList<com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist>();
                 mutable_bitField0_ |= 0x00000040;
               }
-              paragraphBlacklistSelector_.add(input.readBytes());
+              paragraphBlacklist_.add(input.readMessage(com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.PARSER, extensionRegistry));
               break;
             }
           }
@@ -685,7 +670,7 @@ public final class CrawlerProto {
           featureBoostPattern_ = java.util.Collections.unmodifiableList(featureBoostPattern_);
         }
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          paragraphBlacklistSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(paragraphBlacklistSelector_);
+          paragraphBlacklist_ = java.util.Collections.unmodifiableList(paragraphBlacklist_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1505,6 +1490,643 @@ public final class CrawlerProto {
       }
 
       // @@protoc_insertion_point(class_scope:SiteManifest.PathBlacklist)
+    }
+
+    public interface ParagraphBlacklistOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // optional string selector = 1;
+      /**
+       * <code>optional string selector = 1;</code>
+       */
+      boolean hasSelector();
+      /**
+       * <code>optional string selector = 1;</code>
+       */
+      java.lang.String getSelector();
+      /**
+       * <code>optional string selector = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getSelectorBytes();
+
+      // optional string text_regex = 2;
+      /**
+       * <code>optional string text_regex = 2;</code>
+       */
+      boolean hasTextRegex();
+      /**
+       * <code>optional string text_regex = 2;</code>
+       */
+      java.lang.String getTextRegex();
+      /**
+       * <code>optional string text_regex = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getTextRegexBytes();
+    }
+    /**
+     * Protobuf type {@code SiteManifest.ParagraphBlacklist}
+     *
+     * <pre>
+     * For all Nodes that match paragraph_selector, if they or any of their
+     * children also match this this selector, they are excluded as paragraphs.
+     * </pre>
+     */
+    public static final class ParagraphBlacklist extends
+        com.google.protobuf.GeneratedMessage
+        implements ParagraphBlacklistOrBuilder {
+      // Use ParagraphBlacklist.newBuilder() to construct.
+      private ParagraphBlacklist(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private ParagraphBlacklist(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final ParagraphBlacklist defaultInstance;
+      public static ParagraphBlacklist getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public ParagraphBlacklist getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private ParagraphBlacklist(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                selector_ = input.readBytes();
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000002;
+                textRegex_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_ParagraphBlacklist_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_ParagraphBlacklist_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.class, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<ParagraphBlacklist> PARSER =
+          new com.google.protobuf.AbstractParser<ParagraphBlacklist>() {
+        public ParagraphBlacklist parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ParagraphBlacklist(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<ParagraphBlacklist> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // optional string selector = 1;
+      public static final int SELECTOR_FIELD_NUMBER = 1;
+      private java.lang.Object selector_;
+      /**
+       * <code>optional string selector = 1;</code>
+       */
+      public boolean hasSelector() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string selector = 1;</code>
+       */
+      public java.lang.String getSelector() {
+        java.lang.Object ref = selector_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            selector_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string selector = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSelectorBytes() {
+        java.lang.Object ref = selector_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          selector_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // optional string text_regex = 2;
+      public static final int TEXT_REGEX_FIELD_NUMBER = 2;
+      private java.lang.Object textRegex_;
+      /**
+       * <code>optional string text_regex = 2;</code>
+       */
+      public boolean hasTextRegex() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string text_regex = 2;</code>
+       */
+      public java.lang.String getTextRegex() {
+        java.lang.Object ref = textRegex_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            textRegex_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string text_regex = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTextRegexBytes() {
+        java.lang.Object ref = textRegex_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          textRegex_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      private void initFields() {
+        selector_ = "";
+        textRegex_ = "";
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getSelectorBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, getTextRegexBytes());
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getSelectorBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, getTextRegexBytes());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code SiteManifest.ParagraphBlacklist}
+       *
+       * <pre>
+       * For all Nodes that match paragraph_selector, if they or any of their
+       * children also match this this selector, they are excluded as paragraphs.
+       * </pre>
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_ParagraphBlacklist_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_ParagraphBlacklist_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.class, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder.class);
+        }
+
+        // Construct using com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          selector_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          textRegex_ = "";
+          bitField0_ = (bitField0_ & ~0x00000002);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.janknspank.proto.CrawlerProto.internal_static_SiteManifest_ParagraphBlacklist_descriptor;
+        }
+
+        public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist getDefaultInstanceForType() {
+          return com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.getDefaultInstance();
+        }
+
+        public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist build() {
+          com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist buildPartial() {
+          com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist result = new com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.selector_ = selector_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.textRegex_ = textRegex_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist) {
+            return mergeFrom((com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist other) {
+          if (other == com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.getDefaultInstance()) return this;
+          if (other.hasSelector()) {
+            bitField0_ |= 0x00000001;
+            selector_ = other.selector_;
+            onChanged();
+          }
+          if (other.hasTextRegex()) {
+            bitField0_ |= 0x00000002;
+            textRegex_ = other.textRegex_;
+            onChanged();
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // optional string selector = 1;
+        private java.lang.Object selector_ = "";
+        /**
+         * <code>optional string selector = 1;</code>
+         */
+        public boolean hasSelector() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional string selector = 1;</code>
+         */
+        public java.lang.String getSelector() {
+          java.lang.Object ref = selector_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            selector_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string selector = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getSelectorBytes() {
+          java.lang.Object ref = selector_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            selector_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string selector = 1;</code>
+         */
+        public Builder setSelector(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          selector_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string selector = 1;</code>
+         */
+        public Builder clearSelector() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          selector_ = getDefaultInstance().getSelector();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string selector = 1;</code>
+         */
+        public Builder setSelectorBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          selector_ = value;
+          onChanged();
+          return this;
+        }
+
+        // optional string text_regex = 2;
+        private java.lang.Object textRegex_ = "";
+        /**
+         * <code>optional string text_regex = 2;</code>
+         */
+        public boolean hasTextRegex() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional string text_regex = 2;</code>
+         */
+        public java.lang.String getTextRegex() {
+          java.lang.Object ref = textRegex_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            textRegex_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string text_regex = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getTextRegexBytes() {
+          java.lang.Object ref = textRegex_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            textRegex_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string text_regex = 2;</code>
+         */
+        public Builder setTextRegex(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          textRegex_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string text_regex = 2;</code>
+         */
+        public Builder clearTextRegex() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          textRegex_ = getDefaultInstance().getTextRegex();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string text_regex = 2;</code>
+         */
+        public Builder setTextRegexBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          textRegex_ = value;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:SiteManifest.ParagraphBlacklist)
+      }
+
+      static {
+        defaultInstance = new ParagraphBlacklist(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:SiteManifest.ParagraphBlacklist)
     }
 
     public interface ArticleUrlPatternOrBuilder
@@ -3948,54 +4570,40 @@ public final class CrawlerProto {
       return paragraphSelector_.getByteString(index);
     }
 
-    // repeated string paragraph_blacklist_selector = 14;
-    public static final int PARAGRAPH_BLACKLIST_SELECTOR_FIELD_NUMBER = 14;
-    private com.google.protobuf.LazyStringList paragraphBlacklistSelector_;
+    // repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;
+    public static final int PARAGRAPH_BLACKLIST_FIELD_NUMBER = 14;
+    private java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist> paragraphBlacklist_;
     /**
-     * <code>repeated string paragraph_blacklist_selector = 14;</code>
-     *
-     * <pre>
-     * For all Nodes that match paragraph_selector, if they or any of their
-     * children also match this this selector, they are excluded as paragraphs.
-     * </pre>
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
      */
-    public java.util.List<java.lang.String>
-        getParagraphBlacklistSelectorList() {
-      return paragraphBlacklistSelector_;
+    public java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist> getParagraphBlacklistList() {
+      return paragraphBlacklist_;
     }
     /**
-     * <code>repeated string paragraph_blacklist_selector = 14;</code>
-     *
-     * <pre>
-     * For all Nodes that match paragraph_selector, if they or any of their
-     * children also match this this selector, they are excluded as paragraphs.
-     * </pre>
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
      */
-    public int getParagraphBlacklistSelectorCount() {
-      return paragraphBlacklistSelector_.size();
+    public java.util.List<? extends com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder> 
+        getParagraphBlacklistOrBuilderList() {
+      return paragraphBlacklist_;
     }
     /**
-     * <code>repeated string paragraph_blacklist_selector = 14;</code>
-     *
-     * <pre>
-     * For all Nodes that match paragraph_selector, if they or any of their
-     * children also match this this selector, they are excluded as paragraphs.
-     * </pre>
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
      */
-    public java.lang.String getParagraphBlacklistSelector(int index) {
-      return paragraphBlacklistSelector_.get(index);
+    public int getParagraphBlacklistCount() {
+      return paragraphBlacklist_.size();
     }
     /**
-     * <code>repeated string paragraph_blacklist_selector = 14;</code>
-     *
-     * <pre>
-     * For all Nodes that match paragraph_selector, if they or any of their
-     * children also match this this selector, they are excluded as paragraphs.
-     * </pre>
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
      */
-    public com.google.protobuf.ByteString
-        getParagraphBlacklistSelectorBytes(int index) {
-      return paragraphBlacklistSelector_.getByteString(index);
+    public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist getParagraphBlacklist(int index) {
+      return paragraphBlacklist_.get(index);
+    }
+    /**
+     * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+     */
+    public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder getParagraphBlacklistOrBuilder(
+        int index) {
+      return paragraphBlacklist_.get(index);
     }
 
     // repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;
@@ -4269,7 +4877,7 @@ public final class CrawlerProto {
       subdomainBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       pathBlacklist_ = java.util.Collections.emptyList();
       paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      paragraphBlacklistSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      paragraphBlacklist_ = java.util.Collections.emptyList();
       articleUrlPattern_ = java.util.Collections.emptyList();
       whitelistedQueryParameter_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -4329,8 +4937,8 @@ public final class CrawlerProto {
       for (int i = 0; i < featureBoostPattern_.size(); i++) {
         output.writeMessage(13, featureBoostPattern_.get(i));
       }
-      for (int i = 0; i < paragraphBlacklistSelector_.size(); i++) {
-        output.writeBytes(14, paragraphBlacklistSelector_.getByteString(i));
+      for (int i = 0; i < paragraphBlacklist_.size(); i++) {
+        output.writeMessage(14, paragraphBlacklist_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -4428,14 +5036,9 @@ public final class CrawlerProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(13, featureBoostPattern_.get(i));
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < paragraphBlacklistSelector_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(paragraphBlacklistSelector_.getByteString(i));
-        }
-        size += dataSize;
-        size += 1 * getParagraphBlacklistSelectorList().size();
+      for (int i = 0; i < paragraphBlacklist_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(14, paragraphBlacklist_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4546,6 +5149,7 @@ public final class CrawlerProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getPathBlacklistFieldBuilder();
+          getParagraphBlacklistFieldBuilder();
           getArticleUrlPatternFieldBuilder();
           getTestInstructionsFieldBuilder();
           getFeatureBoostPatternFieldBuilder();
@@ -4573,8 +5177,12 @@ public final class CrawlerProto {
         }
         paragraphSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000020);
-        paragraphBlacklistSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        if (paragraphBlacklistBuilder_ == null) {
+          paragraphBlacklist_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+        } else {
+          paragraphBlacklistBuilder_.clear();
+        }
         if (articleUrlPatternBuilder_ == null) {
           articleUrlPattern_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000080);
@@ -4666,12 +5274,15 @@ public final class CrawlerProto {
           bitField0_ = (bitField0_ & ~0x00000020);
         }
         result.paragraphSelector_ = paragraphSelector_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          paragraphBlacklistSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              paragraphBlacklistSelector_);
-          bitField0_ = (bitField0_ & ~0x00000040);
+        if (paragraphBlacklistBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            paragraphBlacklist_ = java.util.Collections.unmodifiableList(paragraphBlacklist_);
+            bitField0_ = (bitField0_ & ~0x00000040);
+          }
+          result.paragraphBlacklist_ = paragraphBlacklist_;
+        } else {
+          result.paragraphBlacklist_ = paragraphBlacklistBuilder_.build();
         }
-        result.paragraphBlacklistSelector_ = paragraphBlacklistSelector_;
         if (articleUrlPatternBuilder_ == null) {
           if (((bitField0_ & 0x00000080) == 0x00000080)) {
             articleUrlPattern_ = java.util.Collections.unmodifiableList(articleUrlPattern_);
@@ -4807,15 +5418,31 @@ public final class CrawlerProto {
           }
           onChanged();
         }
-        if (!other.paragraphBlacklistSelector_.isEmpty()) {
-          if (paragraphBlacklistSelector_.isEmpty()) {
-            paragraphBlacklistSelector_ = other.paragraphBlacklistSelector_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-          } else {
-            ensureParagraphBlacklistSelectorIsMutable();
-            paragraphBlacklistSelector_.addAll(other.paragraphBlacklistSelector_);
+        if (paragraphBlacklistBuilder_ == null) {
+          if (!other.paragraphBlacklist_.isEmpty()) {
+            if (paragraphBlacklist_.isEmpty()) {
+              paragraphBlacklist_ = other.paragraphBlacklist_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+            } else {
+              ensureParagraphBlacklistIsMutable();
+              paragraphBlacklist_.addAll(other.paragraphBlacklist_);
+            }
+            onChanged();
           }
-          onChanged();
+        } else {
+          if (!other.paragraphBlacklist_.isEmpty()) {
+            if (paragraphBlacklistBuilder_.isEmpty()) {
+              paragraphBlacklistBuilder_.dispose();
+              paragraphBlacklistBuilder_ = null;
+              paragraphBlacklist_ = other.paragraphBlacklist_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+              paragraphBlacklistBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getParagraphBlacklistFieldBuilder() : null;
+            } else {
+              paragraphBlacklistBuilder_.addAllMessages(other.paragraphBlacklist_);
+            }
+          }
         }
         if (articleUrlPatternBuilder_ == null) {
           if (!other.articleUrlPattern_.isEmpty()) {
@@ -5873,142 +6500,244 @@ public final class CrawlerProto {
         return this;
       }
 
-      // repeated string paragraph_blacklist_selector = 14;
-      private com.google.protobuf.LazyStringList paragraphBlacklistSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureParagraphBlacklistSelectorIsMutable() {
+      // repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;
+      private java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist> paragraphBlacklist_ =
+        java.util.Collections.emptyList();
+      private void ensureParagraphBlacklistIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          paragraphBlacklistSelector_ = new com.google.protobuf.LazyStringArrayList(paragraphBlacklistSelector_);
+          paragraphBlacklist_ = new java.util.ArrayList<com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist>(paragraphBlacklist_);
           bitField0_ |= 0x00000040;
          }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder> paragraphBlacklistBuilder_;
+
       /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
        */
-      public java.util.List<java.lang.String>
-          getParagraphBlacklistSelectorList() {
-        return java.util.Collections.unmodifiableList(paragraphBlacklistSelector_);
+      public java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist> getParagraphBlacklistList() {
+        if (paragraphBlacklistBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(paragraphBlacklist_);
+        } else {
+          return paragraphBlacklistBuilder_.getMessageList();
+        }
       }
       /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
        */
-      public int getParagraphBlacklistSelectorCount() {
-        return paragraphBlacklistSelector_.size();
+      public int getParagraphBlacklistCount() {
+        if (paragraphBlacklistBuilder_ == null) {
+          return paragraphBlacklist_.size();
+        } else {
+          return paragraphBlacklistBuilder_.getCount();
+        }
       }
       /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
        */
-      public java.lang.String getParagraphBlacklistSelector(int index) {
-        return paragraphBlacklistSelector_.get(index);
+      public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist getParagraphBlacklist(int index) {
+        if (paragraphBlacklistBuilder_ == null) {
+          return paragraphBlacklist_.get(index);
+        } else {
+          return paragraphBlacklistBuilder_.getMessage(index);
+        }
       }
       /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
        */
-      public com.google.protobuf.ByteString
-          getParagraphBlacklistSelectorBytes(int index) {
-        return paragraphBlacklistSelector_.getByteString(index);
-      }
-      /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
-       */
-      public Builder setParagraphBlacklistSelector(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureParagraphBlacklistSelectorIsMutable();
-        paragraphBlacklistSelector_.set(index, value);
-        onChanged();
+      public Builder setParagraphBlacklist(
+          int index, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist value) {
+        if (paragraphBlacklistBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParagraphBlacklistIsMutable();
+          paragraphBlacklist_.set(index, value);
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.setMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
        */
-      public Builder addParagraphBlacklistSelector(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureParagraphBlacklistSelectorIsMutable();
-        paragraphBlacklistSelector_.add(value);
-        onChanged();
+      public Builder setParagraphBlacklist(
+          int index, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder builderForValue) {
+        if (paragraphBlacklistBuilder_ == null) {
+          ensureParagraphBlacklistIsMutable();
+          paragraphBlacklist_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
       }
       /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
        */
-      public Builder addAllParagraphBlacklistSelector(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureParagraphBlacklistSelectorIsMutable();
-        super.addAll(values, paragraphBlacklistSelector_);
-        onChanged();
+      public Builder addParagraphBlacklist(com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist value) {
+        if (paragraphBlacklistBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParagraphBlacklistIsMutable();
+          paragraphBlacklist_.add(value);
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.addMessage(value);
+        }
         return this;
       }
       /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
        */
-      public Builder clearParagraphBlacklistSelector() {
-        paragraphBlacklistSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
+      public Builder addParagraphBlacklist(
+          int index, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist value) {
+        if (paragraphBlacklistBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParagraphBlacklistIsMutable();
+          paragraphBlacklist_.add(index, value);
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.addMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>repeated string paragraph_blacklist_selector = 14;</code>
-       *
-       * <pre>
-       * For all Nodes that match paragraph_selector, if they or any of their
-       * children also match this this selector, they are excluded as paragraphs.
-       * </pre>
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
        */
-      public Builder addParagraphBlacklistSelectorBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureParagraphBlacklistSelectorIsMutable();
-        paragraphBlacklistSelector_.add(value);
-        onChanged();
+      public Builder addParagraphBlacklist(
+          com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder builderForValue) {
+        if (paragraphBlacklistBuilder_ == null) {
+          ensureParagraphBlacklistIsMutable();
+          paragraphBlacklist_.add(builderForValue.build());
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.addMessage(builderForValue.build());
+        }
         return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public Builder addParagraphBlacklist(
+          int index, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder builderForValue) {
+        if (paragraphBlacklistBuilder_ == null) {
+          ensureParagraphBlacklistIsMutable();
+          paragraphBlacklist_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public Builder addAllParagraphBlacklist(
+          java.lang.Iterable<? extends com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist> values) {
+        if (paragraphBlacklistBuilder_ == null) {
+          ensureParagraphBlacklistIsMutable();
+          super.addAll(values, paragraphBlacklist_);
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public Builder clearParagraphBlacklist() {
+        if (paragraphBlacklistBuilder_ == null) {
+          paragraphBlacklist_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public Builder removeParagraphBlacklist(int index) {
+        if (paragraphBlacklistBuilder_ == null) {
+          ensureParagraphBlacklistIsMutable();
+          paragraphBlacklist_.remove(index);
+          onChanged();
+        } else {
+          paragraphBlacklistBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder getParagraphBlacklistBuilder(
+          int index) {
+        return getParagraphBlacklistFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder getParagraphBlacklistOrBuilder(
+          int index) {
+        if (paragraphBlacklistBuilder_ == null) {
+          return paragraphBlacklist_.get(index);  } else {
+          return paragraphBlacklistBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public java.util.List<? extends com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder> 
+           getParagraphBlacklistOrBuilderList() {
+        if (paragraphBlacklistBuilder_ != null) {
+          return paragraphBlacklistBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(paragraphBlacklist_);
+        }
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder addParagraphBlacklistBuilder() {
+        return getParagraphBlacklistFieldBuilder().addBuilder(
+            com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder addParagraphBlacklistBuilder(
+          int index) {
+        return getParagraphBlacklistFieldBuilder().addBuilder(
+            index, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .SiteManifest.ParagraphBlacklist paragraph_blacklist = 14;</code>
+       */
+      public java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder> 
+           getParagraphBlacklistBuilderList() {
+        return getParagraphBlacklistFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder> 
+          getParagraphBlacklistFieldBuilder() {
+        if (paragraphBlacklistBuilder_ == null) {
+          paragraphBlacklistBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.Builder, com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklistOrBuilder>(
+                  paragraphBlacklist_,
+                  ((bitField0_ & 0x00000040) == 0x00000040),
+                  getParentForChildren(),
+                  isClean());
+          paragraphBlacklist_ = null;
+        }
+        return paragraphBlacklistBuilder_;
       }
 
       // repeated .SiteManifest.ArticleUrlPattern article_url_pattern = 7;
@@ -11345,6 +12074,11 @@ public final class CrawlerProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SiteManifest_PathBlacklist_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_SiteManifest_ParagraphBlacklist_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SiteManifest_ParagraphBlacklist_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_SiteManifest_ArticleUrlPattern_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -11389,52 +12123,54 @@ public final class CrawlerProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/crawler.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\223" +
+      "m/janknspank/database/extensions.proto\"\357" +
       "\010\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
       "\035\001\230\246\035\377\005\022\036\n\017aka_root_domain\030\002 \003(\tB\005\230\246\035\377\005\022" +
       "\034\n\tstart_url\030\003 \003(\tB\t\210\246\035\001\230\246\035\377\005\022\"\n\023subdoma" +
       "in_blacklist\030\004 \003(\tB\005\230\246\035\377\005\0223\n\016path_blackl" +
       "ist\030\005 \003(\0132\033.SiteManifest.PathBlacklist\022%" +
-      "\n\022paragraph_selector\030\006 \003(\tB\t\210\246\035\001\230\246\035\377\005\022+\n" +
-      "\034paragraph_blacklist_selector\030\016 \003(\tB\005\230\246\035" +
-      "\377\005\022<\n\023article_url_pattern\030\007 \003(\0132\037.SiteMa",
-      "nifest.ArticleUrlPattern\022*\n\033whitelisted_" +
-      "query_parameter\030\010 \003(\tB\005\230\246\035\377\005\022\026\n\007rss_url\030" +
-      "\t \003(\tB\005\230\246\035\377\005\0222\n\021test_instructions\030\n \001(\0132" +
-      "\021.TestInstructionsB\004\210\246\035\001\022\020\n\010is_https\030\013 \001" +
-      "(\010\022\035\n\016title_selector\030\014 \003(\tB\005\230\246\035\377\005\022@\n\025fea" +
-      "ture_boost_pattern\030\r \003(\0132!.SiteManifest." +
-      "FeatureBoostPattern\032\326\001\n\rPathBlacklist\022\031\n" +
-      "\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022C\n\010location\030\004 \001" +
-      "(\0162$.SiteManifest.PathBlacklist.Location" +
-      ":\013STARTS_WITH\"e\n\010Location\022\n\n\006EQUALS\020\001\022\017\n",
-      "\013STARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n\010CONTAIN" +
-      "S\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MATCH\020\006\032d\n\021" +
-      "ArticleUrlPattern\022\030\n\tsubdomain\030\001 \001(\tB\005\230\246" +
-      "\035\377\005\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query_" +
-      "regex\030\003 \001(\tB\005\230\246\035\377\005\032\217\001\n\023FeatureBoostPatte" +
-      "rn\022\030\n\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_reg" +
-      "ex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query_regex\030\003 \001(\tB\005\230\246" +
-      "\035\377\005\022\022\n\nfeature_id\030\004 \001(\005\022\023\n\005boost\030\005 \001(\005B\004" +
-      "\210\246\035\001\"\314\002\n\020TestInstructions\022B\n\024url_whiteli" +
-      "st_checks\030\001 \001(\0132$.TestInstructions.UrlWh",
-      "itelistChecks\022U\n\033article_url_detector_ch" +
-      "ecks\030\002 \001(\0132*.TestInstructions.ArticleUrl" +
-      "DetectorChecksB\004\210\246\035\001\032E\n\022UrlWhitelistChec" +
-      "ks\022\027\n\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\002" +
-      " \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUrlDetectorChecks\022" +
-      "\032\n\013article_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_artic" +
-      "le_url\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHistory\022\"\n\010" +
-      "crawl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004host" +
-      "\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132\022.CrawlH" +
-      "istory.Site\022\030\n\nstart_time\030\004 \001(\003B\004\210\246\035\001\022\020\n",
-      "\010end_time\030\005 \001(\003\022\016\n\006millis\030\006 \001(\003\022\027\n\017was_i" +
-      "nterrupted\030\007 \001(\010\032\202\001\n\004Site\022\036\n\013root_domain" +
-      "\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nstart_time\030\002 \001(\003B\004\210" +
-      "\246\035\001\022\020\n\010end_time\030\003 \001(\003\022\016\n\006millis\030\004 \001(\003\022\036\n" +
-      "\020articles_crawled\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024Mongo" +
-      "DB.CrawlHistoryB$\n\024com.janknspank.protoB" +
-      "\014CrawlerProto"
+      "\n\022paragraph_selector\030\006 \003(\tB\t\210\246\035\001\230\246\035\377\005\022=\n" +
+      "\023paragraph_blacklist\030\016 \003(\0132 .SiteManifes" +
+      "t.ParagraphBlacklist\022<\n\023article_url_patt",
+      "ern\030\007 \003(\0132\037.SiteManifest.ArticleUrlPatte" +
+      "rn\022*\n\033whitelisted_query_parameter\030\010 \003(\tB" +
+      "\005\230\246\035\377\005\022\026\n\007rss_url\030\t \003(\tB\005\230\246\035\377\005\0222\n\021test_i" +
+      "nstructions\030\n \001(\0132\021.TestInstructionsB\004\210\246" +
+      "\035\001\022\020\n\010is_https\030\013 \001(\010\022\035\n\016title_selector\030\014" +
+      " \003(\tB\005\230\246\035\377\005\022@\n\025feature_boost_pattern\030\r \003" +
+      "(\0132!.SiteManifest.FeatureBoostPattern\032\326\001" +
+      "\n\rPathBlacklist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035" +
+      "\377\005\022C\n\010location\030\004 \001(\0162$.SiteManifest.Path" +
+      "Blacklist.Location:\013STARTS_WITH\"e\n\010Locat",
+      "ion\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS" +
+      "_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n" +
+      "\013REGEX_MATCH\020\006\032H\n\022ParagraphBlacklist\022\027\n\010" +
+      "selector\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\ntext_regex\030\002 \001(" +
+      "\tB\005\230\246\035\377\005\032d\n\021ArticleUrlPattern\022\030\n\tsubdoma" +
+      "in\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035" +
+      "\377\005\022\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\032\217\001\n\023Featu" +
+      "reBoostPattern\022\030\n\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005" +
+      "\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query_reg" +
+      "ex\030\003 \001(\tB\005\230\246\035\377\005\022\022\n\nfeature_id\030\004 \001(\005\022\023\n\005b",
+      "oost\030\005 \001(\005B\004\210\246\035\001\"\314\002\n\020TestInstructions\022B\n" +
+      "\024url_whitelist_checks\030\001 \001(\0132$.TestInstru" +
+      "ctions.UrlWhitelistChecks\022U\n\033article_url" +
+      "_detector_checks\030\002 \001(\0132*.TestInstruction" +
+      "s.ArticleUrlDetectorChecksB\004\210\246\035\001\032E\n\022UrlW" +
+      "hitelistChecks\022\027\n\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022" +
+      "\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUrlDet" +
+      "ectorChecks\022\032\n\013article_url\030\001 \003(\tB\005\230\246\035\377\005\022" +
+      "\036\n\017non_article_url\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014Craw" +
+      "lHistory\022\"\n\010crawl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030",
+      "\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 " +
+      "\003(\0132\022.CrawlHistory.Site\022\030\n\nstart_time\030\004 " +
+      "\001(\003B\004\210\246\035\001\022\020\n\010end_time\030\005 \001(\003\022\016\n\006millis\030\006 " +
+      "\001(\003\022\027\n\017was_interrupted\030\007 \001(\010\032\202\001\n\004Site\022\036\n" +
+      "\013root_domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nstart_t" +
+      "ime\030\002 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\003 \001(\003\022\016\n\006mil" +
+      "lis\030\004 \001(\003\022\036\n\020articles_crawled\030\005 \001(\005B\004\210\246\035" +
+      "\001:\030\212\265\030\024MongoDB.CrawlHistoryB$\n\024com.jankn" +
+      "spank.protoB\014CrawlerProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11446,21 +12182,27 @@ public final class CrawlerProto {
           internal_static_SiteManifest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ParagraphBlacklistSelector", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", "TitleSelector", "FeatureBoostPattern", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ParagraphBlacklist", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", "TitleSelector", "FeatureBoostPattern", });
           internal_static_SiteManifest_PathBlacklist_descriptor =
             internal_static_SiteManifest_descriptor.getNestedTypes().get(0);
           internal_static_SiteManifest_PathBlacklist_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_PathBlacklist_descriptor,
               new java.lang.String[] { "Needle", "Location", });
-          internal_static_SiteManifest_ArticleUrlPattern_descriptor =
+          internal_static_SiteManifest_ParagraphBlacklist_descriptor =
             internal_static_SiteManifest_descriptor.getNestedTypes().get(1);
+          internal_static_SiteManifest_ParagraphBlacklist_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_SiteManifest_ParagraphBlacklist_descriptor,
+              new java.lang.String[] { "Selector", "TextRegex", });
+          internal_static_SiteManifest_ArticleUrlPattern_descriptor =
+            internal_static_SiteManifest_descriptor.getNestedTypes().get(2);
           internal_static_SiteManifest_ArticleUrlPattern_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_ArticleUrlPattern_descriptor,
               new java.lang.String[] { "Subdomain", "PathRegex", "QueryRegex", });
           internal_static_SiteManifest_FeatureBoostPattern_descriptor =
-            internal_static_SiteManifest_descriptor.getNestedTypes().get(2);
+            internal_static_SiteManifest_descriptor.getNestedTypes().get(3);
           internal_static_SiteManifest_FeatureBoostPattern_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_FeatureBoostPattern_descriptor,
@@ -11507,10 +12249,11 @@ public final class CrawlerProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

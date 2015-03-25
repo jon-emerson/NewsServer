@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
@@ -18,6 +19,7 @@ import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.Selector;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
+import com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist;
 
 public class ParagraphFinder {
   private static final int MAX_PARAGRAPH_LENGTH =
@@ -83,10 +85,30 @@ public class ParagraphFinder {
 
   private static Iterable<String> getParagraphsInternal(final DocumentNode documentNode)
       throws RequiredFieldException {
+    SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
     List<String> paragraphs = Lists.newArrayList();
     for (Node paragraphNode : getParagraphNodes(documentNode)) {
       for (String paragraph : paragraphNode.getTextLines()) {
         paragraph = StringHelper.unescape(paragraph).trim();
+
+        boolean badParagraph = false;
+        for (ParagraphBlacklist paragraphBlacklist : site.getParagraphBlacklistList()) {
+          // .getTextLines() uncovers additional paragraphs that the paragraph
+          // Node objects don't individually address: Namely, <br/>s are used
+          // to split paragraphs.  Because of this, we must now re-run our
+          // paragraph blacklists (but just the text regex ones!) against all
+          // the now-unraveled paragraphs.  If anything's blacklisted, skip it.
+          if (!paragraphBlacklist.hasSelector()
+              && paragraphBlacklist.hasTextRegex()
+              && textMatchesRegex(paragraph, paragraphBlacklist.getTextRegex())) {
+            badParagraph = true;
+            break;
+          }
+        }
+        if (badParagraph) {
+          continue;
+        }
+
         if (paragraph.length() > MAX_PARAGRAPH_LENGTH) {
           LOG.warning("Trimming paragraph text on " + documentNode.getUrl());
           paragraph = paragraph.substring(0, MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
@@ -112,23 +134,53 @@ public class ParagraphFinder {
     return paragraphs;
   }
 
+  private static boolean textMatchesRegex(String text, String textRegex) {
+    Pattern pattern = Pattern.compile(textRegex);
+    return pattern.matcher(text).find();
+  }
+
   public static boolean isParagraphNodeOkay(Node node, SiteManifest site, int offset) {
-    for (String blacklistSelector : site.getParagraphBlacklistSelectorList()) {
-      if (new Selector(blacklistSelector).matches(node)
-          || node.findFirst(blacklistSelector) != null) {
-        return false;
+    for (ParagraphBlacklist paragraphBlacklist : site.getParagraphBlacklistList()) {
+      // If there's a blacklist paragraph selector, make sure it doesn't match
+      // this node or any of its children.
+      if (paragraphBlacklist.hasSelector()) {
+        if ((!paragraphBlacklist.hasTextRegex()
+                || textMatchesRegex(node.getFlattenedText(), paragraphBlacklist.getTextRegex()))
+            && (new Selector(paragraphBlacklist.getSelector()).matches(node)    // This node.
+                || node.findFirst(paragraphBlacklist.getSelector()) != null)) { // Children.
+          return false;
+        }
+      } else if (paragraphBlacklist.hasTextRegex()) {
+        if (textMatchesRegex(node.getFlattenedText(), paragraphBlacklist.getTextRegex())) {
+          return false;
+        }
+      } else {
+        throw new IllegalStateException(
+            "ParagraphBlacklist has neither a selector nor a text_regex");
       }
     }
 
     // HACK(jonemerson): We should find a more extensible way of removing
     // By-lines and other crap we pick up. This may do for now.
-    String text = node.getFlattenedText();
+    String text = node.getFlattenedText().toLowerCase();
     if (offset == 0
         && text.length() >= 3
-        && text.substring(0, 3).equalsIgnoreCase("By ")
+        && text.substring(0, 3).equals("by ")
         && text.length() < 100) {
       return false;
     }
+
+    // HACK(jonemerson): Unfortunately we have to do this...
+    // Actually, this was a bad idea.  Witness:
+    // - "But WhatsApp has been able to hold its weight against messaging
+    //     heavyweights like Twitter."
+    // - "Like Instagram, WhatsApp will function as an autonomous unit within
+    //     Facebook."
+    // if ((text.contains("facebook") || text.contains("twitter"))
+    //     && (text.contains("like") || text.contains("follow"))) {
+    //   return false;
+    // }
+
     return true;
   }
 

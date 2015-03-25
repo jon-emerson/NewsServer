@@ -1,0 +1,63 @@
+# Try again someday: Their router didn't like that we were using the Java
+# user-agent, and temporarily blocked our IP.
+root_domain: "tomshardware.com"
+start_url: "http://www.tomshardware.com"
+path_blacklist {
+  needle: "/answers/"
+}
+paragraph_selector: "article p"
+paragraph_blacklist {
+  selector: "article p > em"
+}
+article_url_pattern {
+  path_regex: ",[0-9]{3,7}\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.tomshardware.com/news/icon-q-q5.5-travel-smartphone,28799.html"
+    article_url: "http://www.tomshardware.com/news/trendnet-ac-3200-tew-828dru-router,28771.html"
+    article_url: "http://www.tomshardware.com/news/htc-uh-oh-protection-program,28774.html"
+    article_url: "http://www.tomshardware.com/news/windows-10-rom-xiaomi-mi4,28777.html"
+    article_url: "http://www.tomshardware.com/reviews/gaming-cpu-review-overclock,3106.html"
+    non_article_url: "http://www.tomshardware.com/t/cases/"
+    non_article_url: "http://www.tomshardware.com/t/cooling/"
+    non_article_url: "http://www.tomshardware.com/t/cooler-master/"
+    non_article_url: "http://www.tomshardware.com/contact.html"
+    non_article_url: "http://www.tomshardware.com/articles/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer Electronics
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: -1
+}

@@ -8641,27 +8641,81 @@ public final class UserProto {
     // repeated .Interest interest = 11;
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     java.util.List<com.janknspank.proto.UserProto.Interest> 
         getInterestList();
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     com.janknspank.proto.UserProto.Interest getInterest(int index);
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     int getInterestCount();
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
         getInterestOrBuilderList();
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
         int index);
+
+    // optional .Interest on_stream_for_interest = 12;
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    boolean hasOnStreamForInterest();
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    com.janknspank.proto.UserProto.Interest getOnStreamForInterest();
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    com.janknspank.proto.UserProto.InterestOrBuilder getOnStreamForInterestOrBuilder();
   }
   /**
    * Protobuf type {@code UserAction}
@@ -8784,6 +8838,19 @@ public final class UserProto {
               interest_.add(input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry));
               break;
             }
+            case 98: {
+              com.janknspank.proto.UserProto.Interest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000100) == 0x00000100)) {
+                subBuilder = onStreamForInterest_.toBuilder();
+              }
+              onStreamForInterest_ = input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(onStreamForInterest_);
+                onStreamForInterest_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000100;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -8865,6 +8932,14 @@ public final class UserProto {
        * <code>READ_ARTICLE = 5;</code>
        */
       READ_ARTICLE(5, 5),
+      /**
+       * <code>VOTE_UP = 6;</code>
+       */
+      VOTE_UP(6, 6),
+      /**
+       * <code>UNVOTE_UP = 7;</code>
+       */
+      UNVOTE_UP(7, 7),
       ;
 
       /**
@@ -8895,6 +8970,14 @@ public final class UserProto {
        * <code>READ_ARTICLE = 5;</code>
        */
       public static final int READ_ARTICLE_VALUE = 5;
+      /**
+       * <code>VOTE_UP = 6;</code>
+       */
+      public static final int VOTE_UP_VALUE = 6;
+      /**
+       * <code>UNVOTE_UP = 7;</code>
+       */
+      public static final int UNVOTE_UP_VALUE = 7;
 
 
       public final int getNumber() { return value; }
@@ -8907,6 +8990,8 @@ public final class UserProto {
           case 3: return TAP_FROM_STREAM;
           case 4: return SHARE;
           case 5: return READ_ARTICLE;
+          case 6: return VOTE_UP;
+          case 7: return UNVOTE_UP;
           default: return null;
         }
       }
@@ -9288,12 +9373,22 @@ public final class UserProto {
     private java.util.List<com.janknspank.proto.UserProto.Interest> interest_;
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     public java.util.List<com.janknspank.proto.UserProto.Interest> getInterestList() {
       return interest_;
     }
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     public java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
         getInterestOrBuilderList() {
@@ -9301,22 +9396,74 @@ public final class UserProto {
     }
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     public int getInterestCount() {
       return interest_.size();
     }
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     public com.janknspank.proto.UserProto.Interest getInterest(int index) {
       return interest_.get(index);
     }
     /**
      * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
      */
     public com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
         int index) {
       return interest_.get(index);
+    }
+
+    // optional .Interest on_stream_for_interest = 12;
+    public static final int ON_STREAM_FOR_INTEREST_FIELD_NUMBER = 12;
+    private com.janknspank.proto.UserProto.Interest onStreamForInterest_;
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    public boolean hasOnStreamForInterest() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    public com.janknspank.proto.UserProto.Interest getOnStreamForInterest() {
+      return onStreamForInterest_;
+    }
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    public com.janknspank.proto.UserProto.InterestOrBuilder getOnStreamForInterestOrBuilder() {
+      return onStreamForInterest_;
     }
 
     private void initFields() {
@@ -9331,6 +9478,7 @@ public final class UserProto {
       linkedInContact_ = java.util.Collections.emptyList();
       addressBookContact_ = java.util.Collections.emptyList();
       interest_ = java.util.Collections.emptyList();
+      onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9376,6 +9524,9 @@ public final class UserProto {
       }
       for (int i = 0; i < interest_.size(); i++) {
         output.writeMessage(11, interest_.get(i));
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeMessage(12, onStreamForInterest_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -9429,6 +9580,10 @@ public final class UserProto {
       for (int i = 0; i < interest_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(11, interest_.get(i));
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, onStreamForInterest_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9541,6 +9696,7 @@ public final class UserProto {
           getLinkedInContactFieldBuilder();
           getAddressBookContactFieldBuilder();
           getInterestFieldBuilder();
+          getOnStreamForInterestFieldBuilder();
         }
       }
       private static Builder create() {
@@ -9583,6 +9739,12 @@ public final class UserProto {
         } else {
           interestBuilder_.clear();
         }
+        if (onStreamForInterestBuilder_ == null) {
+          onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
+        } else {
+          onStreamForInterestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -9669,6 +9831,14 @@ public final class UserProto {
           result.interest_ = interest_;
         } else {
           result.interest_ = interestBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        if (onStreamForInterestBuilder_ == null) {
+          result.onStreamForInterest_ = onStreamForInterest_;
+        } else {
+          result.onStreamForInterest_ = onStreamForInterestBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -9795,6 +9965,9 @@ public final class UserProto {
               interestBuilder_.addAllMessages(other.interest_);
             }
           }
+        }
+        if (other.hasOnStreamForInterest()) {
+          mergeOnStreamForInterest(other.getOnStreamForInterest());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -10781,6 +10954,11 @@ public final class UserProto {
 
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public java.util.List<com.janknspank.proto.UserProto.Interest> getInterestList() {
         if (interestBuilder_ == null) {
@@ -10791,6 +10969,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public int getInterestCount() {
         if (interestBuilder_ == null) {
@@ -10801,6 +10984,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public com.janknspank.proto.UserProto.Interest getInterest(int index) {
         if (interestBuilder_ == null) {
@@ -10811,6 +10999,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder setInterest(
           int index, com.janknspank.proto.UserProto.Interest value) {
@@ -10828,6 +11021,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder setInterest(
           int index, com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
@@ -10842,6 +11040,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder addInterest(com.janknspank.proto.UserProto.Interest value) {
         if (interestBuilder_ == null) {
@@ -10858,6 +11061,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder addInterest(
           int index, com.janknspank.proto.UserProto.Interest value) {
@@ -10875,6 +11083,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder addInterest(
           com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
@@ -10889,6 +11102,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder addInterest(
           int index, com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
@@ -10903,6 +11121,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder addAllInterest(
           java.lang.Iterable<? extends com.janknspank.proto.UserProto.Interest> values) {
@@ -10917,6 +11140,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder clearInterest() {
         if (interestBuilder_ == null) {
@@ -10930,6 +11158,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public Builder removeInterest(int index) {
         if (interestBuilder_ == null) {
@@ -10943,6 +11176,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public com.janknspank.proto.UserProto.Interest.Builder getInterestBuilder(
           int index) {
@@ -10950,6 +11188,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
           int index) {
@@ -10960,6 +11203,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
            getInterestOrBuilderList() {
@@ -10971,6 +11219,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public com.janknspank.proto.UserProto.Interest.Builder addInterestBuilder() {
         return getInterestFieldBuilder().addBuilder(
@@ -10978,6 +11231,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public com.janknspank.proto.UserProto.Interest.Builder addInterestBuilder(
           int index) {
@@ -10986,6 +11244,11 @@ public final class UserProto {
       }
       /**
        * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
        */
       public java.util.List<com.janknspank.proto.UserProto.Interest.Builder> 
            getInterestBuilderList() {
@@ -11004,6 +11267,168 @@ public final class UserProto {
           interest_ = null;
         }
         return interestBuilder_;
+      }
+
+      // optional .Interest on_stream_for_interest = 12;
+      private com.janknspank.proto.UserProto.Interest onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder> onStreamForInterestBuilder_;
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public boolean hasOnStreamForInterest() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.Interest getOnStreamForInterest() {
+        if (onStreamForInterestBuilder_ == null) {
+          return onStreamForInterest_;
+        } else {
+          return onStreamForInterestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public Builder setOnStreamForInterest(com.janknspank.proto.UserProto.Interest value) {
+        if (onStreamForInterestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          onStreamForInterest_ = value;
+          onChanged();
+        } else {
+          onStreamForInterestBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public Builder setOnStreamForInterest(
+          com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
+        if (onStreamForInterestBuilder_ == null) {
+          onStreamForInterest_ = builderForValue.build();
+          onChanged();
+        } else {
+          onStreamForInterestBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public Builder mergeOnStreamForInterest(com.janknspank.proto.UserProto.Interest value) {
+        if (onStreamForInterestBuilder_ == null) {
+          if (((bitField0_ & 0x00000800) == 0x00000800) &&
+              onStreamForInterest_ != com.janknspank.proto.UserProto.Interest.getDefaultInstance()) {
+            onStreamForInterest_ =
+              com.janknspank.proto.UserProto.Interest.newBuilder(onStreamForInterest_).mergeFrom(value).buildPartial();
+          } else {
+            onStreamForInterest_ = value;
+          }
+          onChanged();
+        } else {
+          onStreamForInterestBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public Builder clearOnStreamForInterest() {
+        if (onStreamForInterestBuilder_ == null) {
+          onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
+          onChanged();
+        } else {
+          onStreamForInterestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000800);
+        return this;
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.Interest.Builder getOnStreamForInterestBuilder() {
+        bitField0_ |= 0x00000800;
+        onChanged();
+        return getOnStreamForInterestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.InterestOrBuilder getOnStreamForInterestOrBuilder() {
+        if (onStreamForInterestBuilder_ != null) {
+          return onStreamForInterestBuilder_.getMessageOrBuilder();
+        } else {
+          return onStreamForInterest_;
+        }
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder> 
+          getOnStreamForInterestFieldBuilder() {
+        if (onStreamForInterestBuilder_ == null) {
+          onStreamForInterestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder>(
+                  onStreamForInterest_,
+                  getParentForChildren(),
+                  isClean());
+          onStreamForInterest_ = null;
+        }
+        return onStreamForInterestBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:UserAction)
@@ -11105,7 +11530,7 @@ public final class UserProto {
       "\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n" +
       "\025ADDRESS_BOOK_CONTACTS\020\004\022\n\n\006INTENT\020\005\"M\n\016" +
       "InterestSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n" +
-      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\217\004\n\n",
+      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\327\004\n\n",
       "UserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
       "\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\0221\n\013actio" +
       "n_type\030\003 \001(\0162\026.UserAction.ActionTypeB\004\210\246" +
@@ -11115,11 +11540,13 @@ public final class UserProto {
       "_end_time\030\010 \001(\003\0221\n\021linked_in_contact\030\t \003" +
       "(\0132\020.LinkedInContactB\004\240\246\035\003\0227\n\024address_bo" +
       "ok_contact\030\n \003(\0132\023.AddressBookContactB\004\240" +
-      "\246\035\003\022!\n\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\"e",
-      "\n\nActionType\022\014\n\010UNKNONWN\020\000\022\014\n\010FAVORITE\020\001" +
-      "\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005SHAR" +
-      "E\020\004\022\020\n\014READ_ARTICLE\020\005:\026\212\265\030\022MongoDB.UserA" +
-      "ctionB!\n\024com.janknspank.protoB\tUserProto"
+      "\246\035\003\022!\n\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)",
+      "\n\026on_stream_for_interest\030\014 \001(\0132\t.Interes" +
+      "t\"\201\001\n\nActionType\022\014\n\010UNKNONWN\020\000\022\014\n\010FAVORI" +
+      "TE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005" +
+      "SHARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r" +
+      "\n\tUNVOTE_UP\020\007:\026\212\265\030\022MongoDB.UserActionB!\n" +
+      "\024com.janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11173,7 +11600,7 @@ public final class UserProto {
           internal_static_UserAction_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UserAction_descriptor,
-              new java.lang.String[] { "Id", "UserId", "ActionType", "UrlId", "Url", "CreateTime", "ReadStartTime", "ReadEndTime", "LinkedInContact", "AddressBookContact", "Interest", });
+              new java.lang.String[] { "Id", "UserId", "ActionType", "UrlId", "Url", "CreateTime", "ReadStartTime", "ReadEndTime", "LinkedInContact", "AddressBookContact", "Interest", "OnStreamForInterest", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);

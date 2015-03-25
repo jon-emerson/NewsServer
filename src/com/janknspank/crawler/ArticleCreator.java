@@ -68,7 +68,6 @@ class ArticleCreator {
   // generally worse.  You either want this value to be 4 or 10+.
   private static final int MAX_STEM_LENGTH = 4;
 
-
   public static Article create(Url url, DocumentNode documentNode)
       throws RequiredFieldException {
     Article.Builder articleBuilder = Article.newBuilder();
@@ -393,8 +392,16 @@ class ArticleCreator {
       }
     }
 
-    // If no published time was found in the article body,
-    // default to the time that the article was created in the system
+    // Geez, they're making it hard on us.  Why doesn't everyone just tell us
+    // when their articles are published??  OK, let's ask Facebook...
+    try {
+      Long facebookPublishTime = FacebookData.getPublishTime(url);
+      if (facebookPublishTime != null) {
+        return facebookPublishTime;
+      }
+    } catch (FacebookException e) {}
+
+    // Alright, fine.  You win.  You get our discovery date.
     return url.getDiscoveryTime();
   }
 

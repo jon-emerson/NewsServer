@@ -237,6 +237,15 @@ public class VectorFeatureCreator {
     if (args.length > 0) {
       if (args[0].equals("all")) {
         Iterables.addAll(featuresToRegenerate, VectorFeature.getDefinedFeatureIds());
+      } else if (args[0].endsWith("+")) {
+        // Allow folks to do "10512+", which regens everything from 10512 and
+        // beyond.
+        int featureIdId = Integer.parseInt(args[0].substring(0, args[0].length() - 1));
+        for (FeatureId featureId : VectorFeature.getDefinedFeatureIds()) {
+          if (featureId.getId() >= featureIdId) {
+            featuresToRegenerate.add(featureId);
+          }
+        }
       } else {
         for (String featureIdStr : args) {
           int id = NumberUtils.toInt(featureIdStr, -1);

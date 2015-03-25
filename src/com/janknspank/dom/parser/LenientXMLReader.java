@@ -3,7 +3,6 @@ package com.janknspank.dom.parser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -273,8 +272,8 @@ public class LenientXMLReader implements XMLReader {
             if ("script".equalsIgnoreCase(tagName) || "style".equalsIgnoreCase(tagName)) {
               StringBuilder scriptBuilder = new StringBuilder();
               characterInt = reader.read();
-              char[] scriptEndTrigger = ("</" + tagName).toCharArray();
-              char[] scriptEndHelperBuffer = new char[scriptEndTrigger.length];
+              String scriptEndTrigger = ("</" + tagName);
+              char[] scriptEndHelperBuffer = new char[scriptEndTrigger.length()];
               while (characterInt >= 0) {
                 scriptBuilder.append((char) characterInt);
                 scriptBuilder.getChars(
@@ -283,7 +282,7 @@ public class LenientXMLReader implements XMLReader {
                     /* srcEnd */ scriptBuilder.length(),
                     /* dst */ scriptEndHelperBuffer,
                     /* dstBegin */ 0);
-                if (Arrays.equals(scriptEndTrigger, scriptEndHelperBuffer)) {
+                if (scriptEndTrigger.equalsIgnoreCase(new String(scriptEndHelperBuffer))) {
                   // We're at the end.  Remove "</script", send everything we got to
                   // characters(), send an endElement() for the script, and move the
                   // reader's cursor past the > from the </script>.

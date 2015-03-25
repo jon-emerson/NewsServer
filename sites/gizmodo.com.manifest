@@ -48,3 +48,7 @@ feature_boost_pattern {
   feature_id: 10502 # Computer Software
   boost: -2
 }
+feature_boost_pattern {
+  subdomain: "sploid.gizmodo.com/"
+  boost: -10 # Sploid is crap.
+}

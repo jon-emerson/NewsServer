@@ -1,0 +1,45 @@
+root_domain: "screendaily.com"
+start_url: "http://www.screendaily.com/news/"
+subdomain_blacklist: "jobs.screendaily.com"
+subdomain_blacklist: "subscribe.screendaily.com"
+path_blacklist {
+  needle: "/my-account/"
+}
+paragraph_selector: ".section_column1 p"
+article_url_pattern {
+  path_regex: "\\/[0-9]{6,9}\\.article$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.screendaily.com/news/beyond-clueless-director-to-make-horror-cinema-doc/5085621.article"
+    article_url: "http://www.screendaily.com/news/john-woo-to-direct-manhunt-remake/5085414.article"
+    article_url: "http://www.screendaily.com/news/uk-boosts-film-tv-incentives-in-pre-election-budget/5084362.article"
+    article_url: "http://www.screendaily.com/territories/europe/cph-pix-mourns-thure-munkholm/5085538.article"
+    article_url: "http://www.screendaily.com/news/asif-kapadias-amy-winehouse-doc-set-for-summer-release/5084344.article"
+    article_url: "http://www.screendaily.com/home/blogs/first-trailer-for-pixels-lands/5084325.article"
+    article_url: "http://www.screendaily.com/features/ed-perkins-the-lost-gold-of-the-highlands/5084311.article"
+    article_url: "http://www.screendaily.com/news/lionsgate-takes-eddie-the-eagle-for-uk/5084274.article"
+    article_url: "http://www.screendaily.com/festivals/filmart/mike-tyson-joins-ip-man-3/5085655.article"
+    article_url: "http://www.screendaily.com/infernal-affairs-leads-hong-kong-film-award-nominations/4012309.article"
+    non_article_url: "http://www.screendaily.com/news/production/"
+    non_article_url: "http://www.screendaily.com/liz-shackleton/89.bio"
+    non_article_url: "http://www.screendaily.com/abu-dhabi-media-summit/11511.subject"
+    non_article_url: "http://www.screendaily.com/publication-index/march-13-2015/1100608.issue"
+    non_article_url: "http://www.screendaily.com/reviews"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10512 # Video production.
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts.
+  boost: -2
+}

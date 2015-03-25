@@ -12,8 +12,8 @@ import java.util.List;
  */
 public enum FeatureId {
   INTERNET(10501, FeatureType.INDUSTRY, "Internet"),
-  COMPUTER_SOFTWARE(10502, FeatureType.INDUSTRY, "Computer Software"),
-  COMPUTER_HARDWARE(10503, FeatureType.INDUSTRY, "Computer Hardware"),
+  SOFTWARE(10502, FeatureType.INDUSTRY, "Software"),
+  HARDWARE_AND_ELECTRONICS(10503, FeatureType.INDUSTRY, "Hardware and Electronics"),
   BIOTECHNOLOGY(10504, FeatureType.INDUSTRY, "Biotechnology"),
   VETERINARY(10505, FeatureType.INDUSTRY, "Veterinary"),
   APPAREL_AND_FASHION(10506, FeatureType.INDUSTRY, "Apparel and Fashion"),
@@ -23,7 +23,7 @@ public enum FeatureId {
   CONSUMER_GOODS(10510, FeatureType.INDUSTRY, "Consumer Goods"),
   LEISURE_TRAVEL_AND_TOURISM(10511, FeatureType.INDUSTRY, "Leisure, Travel and Tourism"),
   SPORTS(10512, FeatureType.INDUSTRY, "Sports"),
-  MEDIA(10513, FeatureType.INDUSTRY, "Media"), // Some UXers use this.
+  VIDEO_PRODUCTION(10513, FeatureType.INDUSTRY, "Video Production"),
   FINANCIAL_SERVICES(10514, FeatureType.INDUSTRY, "Financial Services"),
   ACCOUNTING(10515, FeatureType.INDUSTRY, "Accounting"),
   CONSTRUCTION(10516, FeatureType.INDUSTRY, "Construction"),
