@@ -86,12 +86,13 @@ public abstract class AbstractArticlesServlet extends StandardServlet {
     Iterable<Article> articles = putImageArticleFirst(getArticles(req));
     JSONArray articlesJson = new JSONArray();
     int i = 1;
+    String contactsParameter = getParameter(req, "contacts");
     for (Article article : articles) {
       Set<InterestType> forcedInterests = Sets.newHashSet();
-      if ("linked_in".equals(getParameter(req, "contacts"))) {
+      if ("linked_in".equals(contactsParameter)) {
         forcedInterests.add(InterestType.LINKED_IN_CONTACTS);
       }
-      if ("address_book".equals(getParameter(req, "contacts"))) {
+      if ("address_book".equals(contactsParameter)) {
         forcedInterests.add(InterestType.ADDRESS_BOOK_CONTACTS);
       }
       articlesJson.put(serialize(article,

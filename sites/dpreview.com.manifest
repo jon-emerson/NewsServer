@@ -1,0 +1,76 @@
+root_domain: "dpreview.com"
+start_url: "http://www.dpreview.com/"
+start_url: "http://connect.dpreview.com/news"
+subdomain_blacklist: "gearshop.dpreview.com"
+path_blacklist {
+  needle: "/forums/"
+}
+path_blacklist {
+  needle: "/galleries/"
+}
+path_blacklist {
+  needle: "/videos"
+  location: EQUALS
+}
+paragraph_selector: ".articleBody p"
+paragraph_selector: ".postDetailContent p"
+article_url_pattern {
+  path_regex: "^\\/articles\\/[0-9]{9,12}\\/[^\\/]+$"
+}
+article_url_pattern {
+  subdomain: "connect.dpreview.com"
+  path_regex: "^\\/post\\/[0-9]{9,12}\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.dpreview.com/articles/8939058598/dpreview-recommends-best-interchangeable-lens-cameras-for-under-1000"
+    article_url: "http://www.dpreview.com/articles/4462100300/b-grip-launches-uno-holster-for-compact-system-cameras"
+    article_url: "http://www.dpreview.com/articles/1806464330/defrozo-online-photography-marketing-platform-launches-on-kickstarter"
+    article_url: "http://connect.dpreview.com/post/0959244423/google-nexus-6-dxomark-mobile-report"
+    article_url: "http://connect.dpreview.com/post/0602079825/perfectly-clear-ios-android-version-4"
+    non_article_url: "http://www.dpreview.com/products/cameras"
+    non_article_url: "http://www.dpreview.com/printerreviews/"
+    non_article_url: "http://www.dpreview.com/challenges/ChallengesAnnounced.aspx"
+    non_article_url: "http://www.dpreview.com/challenges/Challenge.aspx"
+    non_article_url: "http://www.dpreview.com/tag/camera-news"
+    non_article_url: "http://www.dpreview.com/reviews/sony-alpha-7-s/"
+    non_article_url: "http://www.dpreview.com/products/pentax/cameras"
+    non_article_url: "http://www.dpreview.com/products/compacts/statistics"
+    non_article_url: "http://www.dpreview.com/products/panasonic/compacts/panasonic_dmclx100"
+    non_article_url: "http://connect.dpreview.com/members/lars"
+    non_article_url: "http://connect.dpreview.com/products/xiaomi/mobilephones"
+    non_article_url: "http://connect.dpreview.com/products/autodesk/mobileapps"
+    non_article_url: "http://connect.dpreview.com/tablet-features"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10512 # Video production.
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer electronics.
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10502 # Software.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10503 # Hardware and Electronics.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts.
+  boost: -2
+}
