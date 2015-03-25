@@ -85,10 +85,30 @@ public class ParagraphFinder {
 
   private static Iterable<String> getParagraphsInternal(final DocumentNode documentNode)
       throws RequiredFieldException {
+    SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
     List<String> paragraphs = Lists.newArrayList();
     for (Node paragraphNode : getParagraphNodes(documentNode)) {
       for (String paragraph : paragraphNode.getTextLines()) {
         paragraph = StringHelper.unescape(paragraph).trim();
+
+        boolean badParagraph = false;
+        for (ParagraphBlacklist paragraphBlacklist : site.getParagraphBlacklistList()) {
+          // .getTextLines() uncovers additional paragraphs that the paragraph
+          // Node objects don't individually address: Namely, <br/>s are used
+          // to split paragraphs.  Because of this, we must now re-run our
+          // paragraph blacklists (but just the text regex ones!) against all
+          // the now-unraveled paragraphs.  If anything's blacklisted, skip it.
+          if (!paragraphBlacklist.hasSelector()
+              && paragraphBlacklist.hasTextRegex()
+              && textMatchesRegex(paragraph, paragraphBlacklist.getTextRegex())) {
+            badParagraph = true;
+            break;
+          }
+        }
+        if (badParagraph) {
+          continue;
+        }
+
         if (paragraph.length() > MAX_PARAGRAPH_LENGTH) {
           LOG.warning("Trimming paragraph text on " + documentNode.getUrl());
           paragraph = paragraph.substring(0, MAX_PARAGRAPH_LENGTH - 1) + "\u2026";
@@ -114,9 +134,8 @@ public class ParagraphFinder {
     return paragraphs;
   }
 
-  private static boolean nodeMatchesTextRegex(Node node, String textRegex) {
+  private static boolean textMatchesRegex(String text, String textRegex) {
     Pattern pattern = Pattern.compile(textRegex);
-    String text = node.getFlattenedText();
     return pattern.matcher(text).find();
   }
 
@@ -126,13 +145,15 @@ public class ParagraphFinder {
       // this node or any of its children.
       if (paragraphBlacklist.hasSelector()) {
         if ((!paragraphBlacklist.hasTextRegex()
-                || nodeMatchesTextRegex(node, paragraphBlacklist.getTextRegex()))
+                || textMatchesRegex(node.getFlattenedText(), paragraphBlacklist.getTextRegex()))
             && (new Selector(paragraphBlacklist.getSelector()).matches(node)    // This node.
                 || node.findFirst(paragraphBlacklist.getSelector()) != null)) { // Children.
           return false;
         }
       } else if (paragraphBlacklist.hasTextRegex()) {
-        return nodeMatchesTextRegex(node, paragraphBlacklist.getTextRegex());
+        if (textMatchesRegex(node.getFlattenedText(), paragraphBlacklist.getTextRegex())) {
+          return false;
+        }
       } else {
         throw new IllegalStateException(
             "ParagraphBlacklist has neither a selector nor a text_regex");

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.janknspank.common.Logger;
 import com.janknspank.dom.parser.DocumentNode;
@@ -74,7 +76,7 @@ public class UrlFinder {
         }
       }
     }
-    return urlSet;
+    return ImmutableSet.copyOf(Iterables.transform(urlSet, UrlCleaner.TRANSFORM_FUNCTION));
   }
 
   /**

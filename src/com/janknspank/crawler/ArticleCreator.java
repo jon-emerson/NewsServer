@@ -68,7 +68,6 @@ class ArticleCreator {
   // generally worse.  You either want this value to be 4 or 10+.
   private static final int MAX_STEM_LENGTH = 4;
 
-
   public static Article create(Url url, DocumentNode documentNode)
       throws RequiredFieldException {
     Article.Builder articleBuilder = Article.newBuilder();

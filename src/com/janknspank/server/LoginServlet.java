@@ -110,7 +110,7 @@ public class LoginServlet extends StandardServlet {
           .setPath("/uas/oauth2/authorization")
           .addParameter("response_type", "code")
           .addParameter("client_id", LINKED_IN_API_KEY)
-          .addParameter("scope", "r_fullprofile r_emailaddress r_network")
+          .addParameter("scope", "r_basicprofile r_emailaddress r_network")
           .addParameter("state", getLinkedInOAuthState())
           .addParameter("redirect_uri", getRedirectUrl(req))
           .build().toString());

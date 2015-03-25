@@ -40,7 +40,8 @@ public class DateParser {
       new SimpleDateFormat("EEE dd MMM yyyy 'at' hha z"),
       new SimpleDateFormat("dd MMM yyyy '|' HH:mm z"), // Spectrum.ieee.org.
       new SimpleDateFormat("hh:mm a z  MMMM dd, yyyy"),
-      new SimpleDateFormat("EEE MMM d, yyyy   h:mm a")
+      new SimpleDateFormat("EEE MMM d, yyyy   h:mm a"),
+      new SimpleDateFormat("MMM d yyyy")
   };
   private static final DateFormat MONTH_IN_URL_DATE_FORMAT =
       new SimpleDateFormat("/yyyy/MM/");

@@ -55,31 +55,31 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 20000 # Related to tech startups
-  boost: 5
+  boost: 3
 }
 feature_boost_pattern {
   feature_id: 10501 # Internet
-  boost: 2
-}
-feature_boost_pattern {
-  feature_id: 10560 # User Experience
   boost: 1
 }
 feature_boost_pattern {
   feature_id: 10502 # Computer Software
-  boost: 1
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10503 # Computer Hardware
-  boost: 1
+  boost: 0
 }
 feature_boost_pattern {
-  feature_id: 10560 # User Experience
-  boost: 1
+  feature_id: 10509 # Consumer electronics
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
   boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods
+  boost: -3
 }
 feature_boost_pattern {
   feature_id: 20001 # Related to traditional brick and mortar startups
