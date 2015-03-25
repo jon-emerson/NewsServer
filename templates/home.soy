@@ -1,0 +1,273 @@
+{namespace news.home autoescape="strict"}
+
+/**
+ * Main page layout.
+ * @param title
+ */
+{template .main}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{$title}</title>
+    <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
+    <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/animate.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//d3q6uu7asevdsg.cloudfront.net/1.2/css/link_texting.min.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
+  </head>
+  <body>
+    <script src="resources/js/home.js"></script>
+    <div style="width:100%; margin:0;">
+    <!--{call .navbar data="all" /}-->
+    {call .body data="all" /}
+    {call .footer data="all" /}
+    </div>
+  <body>
+{/template}
+
+/**
+ * Renders the nav bar
+ */
+{template .navbar}
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/about" class="btn btn-default">About</a></li>
+                <li><a href="/contact" class="btn btn-default">Contact</a></li>
+                <li><a href="/download" class="btn btn-primary">Get the App!</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+{/template}
+
+/**
+ * Renders the main content
+ */
+{template .body}
+<main>
+  <section role="introduction">
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-2">
+            <div class="peaking-up-screenshot">
+              <img id="leading-screenshot" src="resources/img/spotter-industry-news-stream-screenshot@2x.png">
+            </div>
+          </div>
+          <div class="col-md-4 col-md-offset-1">
+            <div>
+              <img id="app-icon" src="resources/img/app-icon@2x.png">
+              <h1>Spotter</h1>
+              <h2>The most relevant news for your career</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="jumbotron-footer">
+        <div class="container">
+          <div class="row" id="get-the-app-row">
+            <div class="col-md-6 col-md-offset-6">
+              <img id="apple-logo" src="resources/img/apple-logo@2x.png">
+              <div class="get-the-app-float-left">Get the app!</div>
+              <div class="linkTexting_oq3j39q0">
+                <div class="linkTextingInner_oq3j39q0">
+                  <input class="linkTextingInput_oq3j39q0" type="tel" id="numberToText_linkTexting_oq3j39q0_3997396a-9558-4200-b632-b105384e939e-link1"></input>
+                  <button class="linkTextingButton_oq3j39q0" type="button" onclick="sendLink_linkTexting_oq3j39q0('3997396a-9558-4200-b632-b105384e939e', '-link1')" id="sendButton_linkTexting_oq3j39q0_3997396a-9558-4200-b632-b105384e939e">Text link</button>
+                  <div class="linkTextingError_oq3j39q0" id="linkTextingError_oq3j39q0_3997396a-9558-4200-b632-b105384e939e-link1" style="display:none;"></div>
+                </div>
+              </div>
+              <script type="text/javascript" src="//d3q6uu7asevdsg.cloudfront.net/1.2/js/link_texting_multi.min.js"></script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section role="section-1-intro" id="section-1">
+    <div class="container">
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-md-5 col-md-offset-2">
+            <h3>Your personal news cheat sheet</h3>
+            <p>Spotter analyzes over 20,000 articles every day and ranks the most important ones for you.</p>
+          </div>
+          <div class="col-md-3 col">
+            <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
+              <img id="section-1-img" class="padded-img" src="resources/img/section-1-screenshot@2x.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section role="section-2-follow" id="section-2">
+    <div class="container">
+      <div class="section-2-wrapper">
+        <div class="row">
+          <div class="col-md-3 col-md-offset-2">
+            <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
+              <img id="section-2-img" class="padded-img" src="resources/img/section-2-screenshot@2x.png">
+            </div>
+          </div>
+          <div class="col-md-6 col-md-offset-1">
+            <h3>Follow people, companies, and industries</h3>
+            <p>Use Spotter to stay on top of your company, competitors, and colleagues.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section role="section-3-">
+    <div class="container">
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-md-5 col-md-offset-2">
+            <h3>Teach Spotter what you like</h3>
+            <p>Swipe left or right on articles to train Spotter, just like you would train a pet.</p>
+          </div>
+          <div class="col-md-3">
+            <div class="text-center wow fadeInRight" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
+              <img id="section-3-img" class="padded-img" src="resources/img/section-3-screenshot@2x.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section role="section-4-commute" id="section-4">
+    <div class="container">
+      <div class="wrapper" id="section-4-wrapper">
+        <div class="row">
+          <div class="col-md-3 col-md-offset-2">
+            <div class="text-center wow fadeInLeft" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
+              <img id="section-4-img" class="padded-img" src="resources/img/section-4-screenshot@2x.png">
+            </div>
+          </div>
+          <div class="col-md-5 col-md-offset-1">
+            <h3>Use Spotter on your commute</h3>
+            <p>Spotter was designed for one-handed use on the busy train. The most important features are within thumbs reach.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section role="section-5-punchline" id="section-5">
+    <div class="container">
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center wow fadeIn" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
+              <img id="section-5-img" class="padded-img" src="resources/img/section-5-welcome-visual@2x.png">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Be more informed, in less time</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section role="section-6-get-app" id="section-6">
+    <div class="container">
+      <div id="section-6-wrapper">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
+              <img id="section-6-logo" class="padded-img" src="resources/img/spotter-white-logo@2x.png">
+              <h4>Get Spotter</h4>
+              <p>Go to <a href="http://spotternews.com/download">spotternews.com/download</a> on your iPhone</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section role="section-7-text-link" id="section-7">
+    <div class="container">
+      <div class="thin-wrapper">
+        <div class="row" id="bottom-text-link-row">
+          <div class="col-md-1 col-md-offset-4">
+            <div id="bottom-link-texting-label">or</div>
+          </div>
+          <div class="col-md-3">
+            <div class="linkTexting_oq3j39q0" id="bottom-link-texting">
+              <div class="linkTextingInner_oq3j39q0">
+                <input class="linkTextingInput_oq3j39q0" type="tel" id="numberToText_linkTexting_oq3j39q0_3997396a-9558-4200-b632-b105384e939e-link2"></input>
+                <button class="linkTextingButton_oq3j39q0" type="button" onclick="sendLink_linkTexting_oq3j39q0('3997396a-9558-4200-b632-b105384e939e', '-link2)" id="sendButton_linkTexting_oq3j39q0_3997396a-9558-4200-b632-b105384e939e">Text link</button>
+                <div class="linkTextingError_oq3j39q0" id="linkTextingError_oq3j39q0_3997396a-9558-4200-b632-b105384e939e-link2" style="display:none;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section role="section-8-social" id="section-8">
+    <div class="container">
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Spread the word</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <p><div class="fb-like" data-href="http://smrt.link/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></p>
+          </div>
+          <div class="col-xs-4">
+            <p><a href="https://twitter.com/share" class="twitter-share-button" data-via="Spotter" data-related="Spotter" data-hashtags="Spotter" data-dnt="true">Tweet</a>
+            <script>!function(d,s,id){lb}var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){lb}js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);{rb}{rb}(document, 'script', 'twitter-wjs');</script></p>
+          </div>
+          <div class="col-xs-4">
+            <p class="linkedin-btn"><script src="//platform.linkedin.com/in.js" type="text/javascript">
+                            lang: en_US
+                            </script>
+            <script type="IN/Share" data-url="http://spotternews.com" data-counter="right"></script></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{/template}
+
+/**
+ * Footer
+ */
+{template .footer}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {lb}
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=536242509797330&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+{rb}(document, 'script', 'facebook-jssdk'));</script>
+
+<script src="resources/bower_components/WOW/dist/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>
+{/template}
