@@ -1,0 +1,39 @@
+root_domain: "specialevents.com"
+start_url: "http://www.specialevents.com/"
+start_url: "http://specialevents.com/blog/special-events-blog"
+path_blacklist {
+  needle: "/photo-galleries/"
+}
+paragraph_selector: ".article-body h3"
+paragraph_selector: ".article-body p"
+paragraph_selector: ".blog-body h3"
+paragraph_selector: ".blog-body p"
+paragraph_selector: ".overlay-inner p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+(-[^\\/]+)?\\/[^\\/]+-[^\\/]+-[^\\/]+-[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://specialevents.com/weddings/wild-bunch-wedding-floral-breaks-rules"
+    article_url: "http://specialevents.com/weddings/four-big-trends-watch-2015-weddings"
+    article_url: "http://specialevents.com/catering/wedding-flavors-top-trends-wedding-reception-menus-2015"
+    article_url: "http://specialevents.com/rental/food-love-winning-wedding-reception-menus"
+    article_url: "http://specialevents.com/corporate-events/using-emotion-move-clients-practical-applications"
+    article_url: "http://specialevents.com/corporate-events/real-vs-perceived-emotional-experiences-events"
+    article_url: "http://specialevents.com/blog/protecting-your-event-growing-trend-insurance"
+    article_url: "http://specialevents.com/blog/2015-destination-wedding-trends"
+    non_article_url: "http://specialevents.com/event-tools/floral"
+    non_article_url: "http://specialevents.com/event-types/fairsfestivals"
+    non_article_url: "http://specialevents.com/decor/themed-events"
+    non_article_url: "http://specialevents.com/blogger/daryle-stafford"
+    non_article_url: "http://specialevents.com/catering"
+    non_article_url: "http://specialevents.com/decor"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10548 # Event Planning.
+  boost: 4
+}

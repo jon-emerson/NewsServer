@@ -1,0 +1,49 @@
+root_domain: "blog.samaltman.com"
+start_url: "http://blog.samaltman.com/"
+paragraph_selector: ".post-body p"
+article_url_pattern {
+  path_regex: "^\\/.{5}.*"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://blog.samaltman.com/employee-equity"
+    article_url: "http://blog.samaltman.com/china"
+    article_url: "http://blog.samaltman.com/machine-intelligence-part-2"
+    article_url: "http://blog.samaltman.com/party-rounds"
+    article_url: "http://blog.samaltman.com/technology-predictions"
+    article_url: "http://blog.samaltman.com/bubble-talk"
+    # Turns out there truly are no non-articles on Sam's site.
+    non_article_url: "http://blog.samaltman.com/axxx"
+    non_article_url: "http://blog.samaltman.com/bxxx"
+    non_article_url: "http://blog.samaltman.com/cxxx"
+    non_article_url: "http://blog.samaltman.com/dxxx"
+    non_article_url: "http://blog.samaltman.com/exxx"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 20001 # Related to traditional brick and mortar startups
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 1
+}

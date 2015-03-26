@@ -58,7 +58,7 @@ public enum FeatureId {
   ENVIRONMENT(10545, FeatureType.INDUSTRY, "Environment"),
   SOCIAL_GOOD(10546, FeatureType.INDUSTRY, "Social Good"),
   STAFFING_AND_RECRUITING(10547, FeatureType.INDUSTRY, "Staffing and Recruiting"),
-  EVENTS_SERVICES(10548, FeatureType.INDUSTRY, "Events Services"),
+  EVENT_PLANNING(10548, FeatureType.INDUSTRY, "Event Planning"),
   MUSIC(10549, FeatureType.INDUSTRY, "Music"),
   LOGISTICS(10550, FeatureType.INDUSTRY, "Logistics"),
   PLASTICS(10551, FeatureType.INDUSTRY, "Plastics"),

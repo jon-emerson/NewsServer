@@ -1,0 +1,44 @@
+root_domain: "mineweb.com"
+start_url: "http://www.mineweb.com/"
+start_url: "http://www.mineweb.com/category/news/"
+article_url_pattern {
+  path_regex: "^\\/(archive|news|news-fast-news|regions|uncategorized)\\/.*\\/$"
+}
+paragraph_selector: ".article-body p"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.mineweb.com/archive/chinas-9bn-deal-of-the-century-with-the-drc-a-critical-review/"
+    article_url: "http://www.mineweb.com/news/diamonds-and-gems/diamond-jewellery-sales-to-grow-at-modest-pace/"
+    article_url: "http://www.mineweb.com/news/energy/australian-coal-prices-fall-to-pre-2008-crisis-levels/"
+    article_url: "http://www.mineweb.com/news/gold/fixing-the-gold-fix-with-or-without-the-chinese-banks/"
+    article_url: "http://www.mineweb.com/news/gold/china-gold-demand-ups-when-price-dips/"
+    article_url: "http://www.mineweb.com/news/platinum-group-metals/how-bad-is-it-for-south-african-platinum-stocks/"
+    article_url: "http://www.mineweb.com/news-fast-news/zijin-mining-to-acquire-stake-in-friedlands-ivanhoe-mines/"
+    article_url: "http://www.mineweb.com/news-fast-news/investors-fear-for-mongolias-finances/"
+    article_url: "http://www.mineweb.com/news-fast-news/vale-executives-get-nearly-20-pay-rise-in-2014/"
+    article_url: "http://www.mineweb.com/news-fast-news/mayor-of-small-peru-mining-town-assassinated/"
+    article_url: "http://www.mineweb.com/regions/africa/miners-offer-clinics-bull-rings-as-protests-tie-up-25bn/"
+    article_url: "http://www.mineweb.com/regions/africa/why-we-still-like-anglo/"
+    article_url: "http://www.mineweb.com/regions/canada/damned-dividend/"
+    article_url: "http://www.mineweb.com/regions/usa/a-simple-test-to-see-if-gold-is-at-a-bottom/"
+    article_url: "http://www.mineweb.com/regions/usa/how-to-position-your-portfolio-for-coming-gold-upturn/"
+    article_url: "http://www.mineweb.com/regions/usa/why-goldman-is-wrong-about-commodity-prices/"
+    article_url: "http://www.mineweb.com/uncategorized/metso-introduces-nordberg-gp7-gyratory-crusher/"
+    non_article_url: "http://www.mineweb.com/category/analysis/mining-finance-and-investment-analysis/"
+    non_article_url: "http://www.mineweb.com/category/mining-indaba-analysis/"
+    non_article_url: "http://www.mineweb.com/category/news/diamonds-and-gems/"
+    non_article_url: "http://www.mineweb.com/category/news/technology/"
+    non_article_url: "http://www.mineweb.com/category/regions/australasia/"
+    non_article_url: "http://www.mineweb.com/category/regions/former-soviet-union/"
+    non_article_url: "http://www.mineweb.com/conference/conference-mines-money-hong-kong-2015/"
+    non_article_url: "http://www.mineweb.com/premium-company-listings/"
+    non_article_url: "http://www.mineweb.com/supplier/mdm-engineering/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10537 # Mining and metals.
+  boost: 4
+}

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileReader;
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import com.google.common.collect.ImmutableList;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 public class ParagraphFinderTest {
   private static final String CNN_MONEY_PARAGRAPH_0 = "In a play to dominate messaging on "
@@ -220,7 +222,7 @@ public class ParagraphFinderTest {
       DocumentNode documentNode = DocumentBuilder.build(
           "http://abcnews.go.com/blogs/politics/2015/01/sunday-on-this-week/", reader);
       List<Node> paragraphNodes = ParagraphFinder.getParagraphNodes(documentNode);
-  
+
       // Yea, you're right, the first two paragraphs shouldn't be here.  But we're
       // basically checking for regressions in parsing here, not absolute
       // correctness.
@@ -235,5 +237,35 @@ public class ParagraphFinderTest {
     } finally {
       IOUtils.closeQuietly(reader);
     }
+  }
+
+  @Test
+  public void testNestedParagraphs() throws Exception {
+    // This appeared as an issue when parsing:
+    // http://www.bizbash.com/march-25-2015-boston-seeks-vote-on-olympics-bid-
+    //     major-convention-threatens-to-move-over-indiana-bill-southwest-kicks-
+    //     man/toronto/story/30210
+    // The paragraphs were all included twice due to the initial empty <p>.
+    Reader reader = new StringReader(
+        "<html><body>"
+            + "<p>"
+            + "<p>Paragraph 1"
+            + "<p>"
+            + "<p>Paragraph 2"
+            + "<p>"
+            + "<p>Paragraph 3"
+            + "</body></html>");
+    SiteManifests.addSiteManifest(SiteManifest.newBuilder()
+        .setRootDomain("testsite.com")
+        .addParagraphSelector("p")
+        .build());
+    DocumentNode documentNode = DocumentBuilder.build(
+        "http://testsite.com/article", reader);
+    List<Node> paragraphNodes = ParagraphFinder.getParagraphNodes(documentNode);
+
+    assertEquals(3, paragraphNodes.size());
+    assertEquals("Paragraph 1", paragraphNodes.get(0).getFlattenedText());
+    assertEquals("Paragraph 2", paragraphNodes.get(1).getFlattenedText());
+    assertEquals("Paragraph 3", paragraphNodes.get(2).getFlattenedText());
   }
 }

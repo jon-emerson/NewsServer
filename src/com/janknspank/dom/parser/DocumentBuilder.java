@@ -86,6 +86,18 @@ public class DocumentBuilder {
         String qName,
         Attributes attrs)
         throws SAXException {
+      // <p>s and <li>s self-end themselves.
+      // NOTE(jonemerson): There's probably an argument to be made that we
+      // should search up the tree for any <p> or <li> to close.  And there's
+      // probably some better logic to use also, because you can totally nest
+      // self-ending tags, in which case, if a new tag starts, we might need
+      // to close multiple nested tags.  But, until we have bugs that require
+      // this logic, it's probably not worth spending time on.
+      if (("p".equalsIgnoreCase(qName) || "li".equalsIgnoreCase(qName))
+          && qName.equalsIgnoreCase(currentNode.getTagName())) {
+        endElement(namespaceURI, localName, qName);
+      }
+
       currentNode = new Node(currentNode, qName, locator.getStartingOffset());
       currentNode.getParent().addChildNode(currentNode);
       for (int i = 0; i < attrs.getLength(); i++) {

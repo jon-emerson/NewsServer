@@ -229,7 +229,7 @@ public enum Industry {
       "Translation and Localization"),
   COMPUTER_GAMES(109, FeatureId.COMPUTER_GAMES, "med rec",
       "Computer Games"),
-  EVENTS_SERVICES(110, FeatureId.EVENTS_SERVICES, "corp rec serv",
+  EVENTS_SERVICES(110, FeatureId.EVENT_PLANNING, "corp rec serv",
       "Events Services"),
   ARTS_AND_CRAFTS(111, FeatureId.ARTS, "art med rec",
       "Arts and Crafts"),

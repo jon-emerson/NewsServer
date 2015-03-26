@@ -12,9 +12,10 @@ import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.net.InternetDomainName;
 import com.google.protobuf.TextFormat;
@@ -32,13 +33,13 @@ import com.janknspank.proto.CrawlerProto.TestInstructions.ArticleUrlDetectorChec
  */
 public class SiteManifests {
   private static final Logger LOG = new Logger(SiteManifests.class);
-  private static Map<String, SiteManifest> CONTENT_SITE_MAP = null;
-  private static List<SiteManifest> CONTENT_SITE_LIST = null;
+  private static Map<String, SiteManifest> SITE_MANIFEST_MAP = null;
+  private static List<SiteManifest> SITE_MANIFEST_LIST = null;
 
   /**
    * Validates that the passed-in domain is indeed part of the root domain or an
-   * aka root domain in the specified content site.  This is used for validation
-   * of blacklist subdomains and test instructions.
+   * aka root domain in the specified site.  This is used for validation of
+   * blacklist subdomains and test instructions.
    */
   private static void validateDomainInSiteManifest(final String domain, SiteManifest site)
       throws SiteManifestException {
@@ -58,8 +59,8 @@ public class SiteManifests {
   }
 
   /**
-   * Validates that the passed-in URL does indeed belong to the passed content
-   * site.  This is used for validation of test instructions.
+   * Validates that the passed-in URL does indeed belong to the passed site.
+   * This is used for validation of test instructions.
    */
   private static void validateUrlInSiteManifest(String url, SiteManifest site)
       throws SiteManifestException {
@@ -75,7 +76,7 @@ public class SiteManifests {
     // We're kind of overloading the meaning of (required) and other Database
     // annotations here, so unfortunately Validator throws Database exceptions,
     // even though the Database isn't involved.  Therefore just catch the
-    // exceptions and rethrow them as new ContentSiteManifestExceptions.
+    // exceptions and rethrow them as new SiteManifestExceptions.
     String errorPrefix = "Error in site manifest " + manifestFile.getAbsolutePath() + ": ";
     try {
       Validator.assertValid(site);
@@ -166,26 +167,26 @@ public class SiteManifests {
    * the .manifest files located in /sites/.
    */
   private static synchronized Map<String, SiteManifest> getSiteManifestMap() {
-    if (CONTENT_SITE_MAP == null) {
-      CONTENT_SITE_MAP = Maps.newHashMap();
+    if (SITE_MANIFEST_MAP == null) {
+      SITE_MANIFEST_MAP = Maps.newHashMap();
       for (File manifestFile : new File("sites/").listFiles()) {
         if (!manifestFile.getName().endsWith(".manifest")) {
           continue;
         }
-        SiteManifest.Builder contentSiteBuilder = SiteManifest.newBuilder();
+        SiteManifest.Builder siteManifestBuilder = SiteManifest.newBuilder();
         Reader reader = null;
         try {
           reader = new FileReader(manifestFile);
           try {
-            TextFormat.merge(reader, contentSiteBuilder);
+            TextFormat.merge(reader, siteManifestBuilder);
           } catch (TextFormat.ParseException e) {
             throw new SiteManifestException(
                 "Error in site manifest " + manifestFile.getAbsolutePath() + ": " + e.getMessage(),
                 e);
           }
-          SiteManifest contentSite = contentSiteBuilder.build();
-          validateSiteManifest(manifestFile, contentSite);
-          CONTENT_SITE_MAP.put(contentSite.getRootDomain(), contentSite);
+          SiteManifest siteManifest = siteManifestBuilder.build();
+          validateSiteManifest(manifestFile, siteManifest);
+          SITE_MANIFEST_MAP.put(siteManifest.getRootDomain(), siteManifest);
         } catch (IOException e) {
           LOG.error("Could not read site manifest: " + manifestFile.getAbsolutePath(), e);
           throw new Error(e);
@@ -196,9 +197,9 @@ public class SiteManifests {
           IOUtils.closeQuietly(reader);
         }
       }
-      CONTENT_SITE_LIST = ImmutableList.copyOf(CONTENT_SITE_MAP.values());
+      SITE_MANIFEST_LIST = Lists.newArrayList(SITE_MANIFEST_MAP.values());
     }
-    return CONTENT_SITE_MAP;
+    return SITE_MANIFEST_MAP;
   }
 
   /**
@@ -206,7 +207,7 @@ public class SiteManifests {
    */
   public static List<SiteManifest> getList() {
     getSiteManifestMap();
-    return CONTENT_SITE_LIST;
+    return SITE_MANIFEST_LIST;
   }
 
   public static SiteManifest getForUrl(String url) {
@@ -241,4 +242,13 @@ public class SiteManifests {
     return null;
   }
 
+  /**
+   * For testing only: Puts a site manifest into the system programmatically.
+   */
+  @VisibleForTesting
+  public static void addSiteManifest(SiteManifest site) {
+    getSiteManifestMap(); // Warm cache.
+    SITE_MANIFEST_MAP.put(site.getRootDomain(), site);
+    SITE_MANIFEST_LIST.add(site);
+  }
 }

@@ -140,6 +140,10 @@ public class ParagraphFinder {
   }
 
   public static boolean isParagraphNodeOkay(Node node, SiteManifest site, int offset) {
+    if (node.getChildCount() == 0) {
+      return false;
+    }
+
     for (ParagraphBlacklist paragraphBlacklist : site.getParagraphBlacklistList()) {
       // If there's a blacklist paragraph selector, make sure it doesn't match
       // this node or any of its children.
@@ -190,6 +194,10 @@ public class ParagraphFinder {
     }
 
     SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
+    if (site == null) {
+      throw new IllegalStateException("Site not supported for URL " + documentNode.getUrl());
+    }
+
     List<Node> paragraphs = new ArrayList<>();
     for (String paragraphSelector : site.getParagraphSelectorList()) {
       paragraphs.addAll(documentNode.findAll(paragraphSelector));

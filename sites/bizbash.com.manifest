@@ -1,0 +1,49 @@
+root_domain: "bizbash.com"
+start_url: "http://www.bizbash.com/"
+paragraph_selector: ".article-copy p"
+paragraph_blacklist {
+  text_regex: "^YOUR NEWS:"
+}
+paragraph_blacklist {
+  text_regex: "^JOB BOARD:"
+}
+paragraph_blacklist {
+  text_regex: "^With contributions from"
+}
+paragraph_blacklist {
+  text_regex: "^BizBash Daily is"
+}
+paragraph_blacklist {
+  text_regex: "^Feed the Sheet"
+}
+paragraph_blacklist {
+  text_regex: "^Subscribe"
+}
+paragraph_blacklist {
+  text_regex: "^Advertise"
+}
+article_url_pattern {
+  path_regex: "\\/story\\/[0-9]{3,7}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.bizbash.com/why-this-cocktail-party-had-a-tennis-court/san-francisco/story/30203"
+    article_url: "http://www.bizbash.com/ted-conference-photos-18-steal-worthy-ideas-to-inspire-attendees/san-francisco/story/30196"
+    article_url: "http://www.bizbash.com/how-niche-marketing-helped-this-event-draw-record-crowds/san-francisco/story/30207"
+    article_url: "http://www.bizbash.com/the-top-design-trends-from-diffa-dining-by-design-new-york/san-francisco/story/30199"
+    article_url: "http://www.bizbash.com/get-organized-10-must-have-checklists-for-event-pros/toronto/story/30195"
+    article_url: "http://www.bizbash.com/25_best_ideas_from_social_events/toronto/story/22316"
+    non_article_url: "http://www.bizbash.com/music-festivals"
+    non_article_url: "http://www.bizbash.com/supplier-directory/"
+    non_article_url: "http://www.bizbash.com/bizbash-daily/west"
+    non_article_url: "http://www.bizbash.com/ted"
+    non_article_url: "http://www.bizbash.com/archives/pr-marketing/9412"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10548 # Event Planning.
+  boost: 4
+}
