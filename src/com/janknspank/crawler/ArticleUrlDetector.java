@@ -25,6 +25,10 @@ public class ArticleUrlDetector {
   private static final PatternCache PATTERN_CACHE = new PatternCache();
 
   public static boolean isArticle(String urlString) {
+    if (!UrlWhitelist.isOkay(urlString)) {
+      return false;
+    }
+
     URL url;
     try {
       url = new URL(urlString);

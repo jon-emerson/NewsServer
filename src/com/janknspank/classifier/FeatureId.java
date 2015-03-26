@@ -41,7 +41,7 @@ public enum FeatureId {
   PHOTOGRAPHY(10528, FeatureType.INDUSTRY, "Photography"),
   BUSINESS_SUPPLIES_AND_EQUIPMENT(10529, FeatureType.INDUSTRY, "Business Supplies and Equipment"),
   WINE_AND_SPIRITS(10530, FeatureType.INDUSTRY, "Wine and Spirits"),
-  DEFENSE_AND_SPACE(10531, FeatureType.INDUSTRY, "Defense and Space"),
+  SPACE_EXPLORATION(10531, FeatureType.INDUSTRY, "Space Exploration"),
   LAW_PRACTICE(10532, FeatureType.INDUSTRY, "Law Practice"),
   MEDICINE(10533, FeatureType.INDUSTRY, "Medicine"),
   FOREIGN_EXCHANGE(10534, FeatureType.INDUSTRY, "Foreign Exchange"), ////////////

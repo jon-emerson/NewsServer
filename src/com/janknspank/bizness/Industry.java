@@ -12,7 +12,7 @@ import com.janknspank.classifier.FeatureId;
  * article classifications.
  */
 public enum Industry {
-  DEFENSE_AND_SPACE(1, FeatureId.DEFENSE_AND_SPACE, "gov tech",
+  DEFENSE_AND_SPACE(1, FeatureId.SPACE_EXPLORATION, "gov tech",
       "Defense & Space"),
   COMPUTER_HARDWARE(3, FeatureId.HARDWARE_AND_ELECTRONICS, "tech",
       "Computer Hardware"),

@@ -1,0 +1,67 @@
+root_domain: "space.com"
+start_url: "http://www.space.com"
+subdomain_blacklist: "store.space.com"
+path_blacklist {
+  needle: "-animation.html"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "-infographic.html"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "-video.html"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "-wallpaper.html"
+  location: ENDS_WITH
+}
+paragraph_selector: ".article_info p"
+paragraph_selector: ".left_content .content"
+paragraph_blacklist {
+  selector: "em"
+  text_regex: "Facebook"
+}
+paragraph_blacklist {
+  selector: "em"
+  text_regex: "originally published"
+}
+paragraph_blacklist {
+  selector: "em"
+  text_regex: "does not work for.*own shares in or receive"
+}
+article_url_pattern {
+  path_regex: "\\/[0-9]{4,7}-[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.space.com/28911-opportunity-mars-rover-memory-fix.html"
+    article_url: "http://www.space.com/16149-night-sky.html"
+    article_url: "http://www.space.com/15693-telescopes-beginners-telescope-reviews-buying-guide.html"
+    article_url: "http://www.space.com/28889-extrasolar-planets-are-almost-everywhere.html"
+    article_url: "http://www.space.com/25642-habitable-exoplanets-are-bad-news-for-humanity-op-ed.html"
+    article_url: "http://www.space.com/28878-rocket-science-gh-roller-big-wheel.html"
+    non_article_url: "http://www.space.com/contact_author.php?a=VFdsclpTQlhZV3hzS20xM1lXeHNLakU9"
+    non_article_url: "http://www.space.com/spaceflight/"
+    non_article_url: "http://www.space.com/search-for-life/"
+    non_article_url: "http://www.space.com/science-astronomy/"
+    non_article_url: "http://www.space.com/skywatching/"
+    non_article_url: "http://www.space.com/28914-one-year-space-station-mission-huge-step-to-mars-video.html"
+    non_article_url: "http://www.space.com/28917-first-mission-to-solar-systems-third-zone-kuiper-belt-video.html"
+    non_article_url: "http://www.space.com/28903-living-on-triton-neptune-moon-infographic.html"
+    non_article_url: "http://www.space.com/25247-nasa-to-pick-boulder-off-an-asteroid-conceptual-animation.html"
+    non_article_url: "http://www.space.com/28616-light-rays-over-paranal-observatory-space-wallpaper.html"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10542 # Military
+  boost: -2
+}

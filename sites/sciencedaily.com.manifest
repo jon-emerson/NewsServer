@@ -50,6 +50,10 @@ feature_boost_pattern {
   boost: 1
 }
 feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: 0
+}
+feature_boost_pattern {
   feature_id: 10540 # Farming
   boost: -5
 }

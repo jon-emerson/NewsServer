@@ -213,23 +213,6 @@ public class ParagraphFinder {
     }
     paragraphs = okayParagraphs;
 
-    // Remove trailing lines.  E.g. the "Have something to add to this story?
-    // Share it in the comments." <em> text on mashable.com, or "Chat with me
-    // on Twitter @peard33" <strong> text on latimes.com.
-    while (paragraphs.size() > 0) {
-      // Do allow <em>s and <strong>s if sufficiently embedded inside the
-      // paragraph.  (Ya... some sites do use them fairly.)
-      long paragraphOffset = paragraphs.get(paragraphs.size() - 1).getStartingOffset();
-      Node firstEm = Iterables.getLast(paragraphs, null).findFirst("em");
-      Node firstStrong = Iterables.getLast(paragraphs, null).findFirst("strong");
-      if ((firstEm != null && (firstEm.getStartingOffset() - paragraphOffset < 10)) ||
-          (firstStrong != null && (firstStrong.getStartingOffset() - paragraphOffset < 10))) {
-        paragraphs.remove(paragraphs.size() - 1);
-      } else {
-        break;
-      }
-    }
-
     PARAGRAPH_NODE_CACHE.get().put(documentNode.getUrl(), paragraphs);
     return paragraphs;
   }

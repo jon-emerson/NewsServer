@@ -1,0 +1,44 @@
+root_domain: "military.com"
+start_url: "http://www.military.com/daily-news/"
+
+# For some reason, these subdomains don't like the HTTP headers we're sending.
+# It's not a user-agent thing.  We must be missing something... Maybe it's worth
+# debugging someday.
+subdomain_blacklist: "kitup.military.com"
+subdomain_blacklist: "militaryadvantage.military.com"
+
+paragraph_selector: ".article .body1 p"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "\\/daily-news\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\.html$"
+}
+article_url_pattern {
+  subdomain: "militaryadvantage.military.com"
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$"
+}
+article_url_pattern {
+  subdomain: "kitup.military.com"
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.military.com/daily-news/2015/03/25/dod-doesnt-have-to-say-how-it-would-execute-alleged-uss-cole.html"
+    article_url: "http://www.military.com/daily-news/2015/03/20/army-and-marine-corps-still-disagree-over-m16-m4-bullet.html"
+    article_url: "http://www.military.com/daily-news/2015/03/18/navy-strategic-air-wing-commander-fired.html"
+    article_url: "http://www.military.com/daily-news/2015/03/25/concerns-over-easing-transgender-ban-in-military.html"
+    article_url: "http://www.military.com/daily-news/2015/03/25/army-charges-bergdahl-with-desertion-could-receive-life-sentence.html"
+    non_article_url: "http://www.military.com/equipment/ddg-51-arleigh-burke-class-destroyer"
+    non_article_url: "http://www.military.com/equipment/ships-and-submarines"
+    non_article_url: "http://www.military.com/Community/Home/1,14700,MARINE,00.html"
+    non_article_url: "http://www.military.com/discounts"
+    non_article_url: "http://www.military.com/join-armed-forces"
+    non_article_url: "http://www.military.com/benefits/military-pay/basic-allowance-for-housing"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10542 # Military
+  boost: 0
+}
