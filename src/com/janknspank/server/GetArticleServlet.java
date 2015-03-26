@@ -26,10 +26,10 @@ public class GetArticleServlet extends StandardServlet {
     JSONObject articleJson = Serializer.toJSON(article);
 
     // If we're allowed, add full article text to the response.
-    boolean nativeReaderEnabled = GetArticlesServlet.isNativeReaderEnabled(article);
+    boolean nativeReaderEnabled = ArticleSerializer.isNativeReaderEnabled(article);
     articleJson.put("native_reader_enabled", nativeReaderEnabled);
     if (nativeReaderEnabled) {
-      articleJson.put("paragraphs", AbstractArticlesServlet.toJsonArray(
+      articleJson.put("paragraphs", ArticleSerializer.toJsonArray(
           article.getParagraphList()));
     }
 

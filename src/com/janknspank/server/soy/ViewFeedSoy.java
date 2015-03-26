@@ -30,7 +30,7 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.NeuralNetworkScorer;
-import com.janknspank.server.AbstractArticlesServlet;
+import com.janknspank.server.ArticleSerializer;
 
 public class ViewFeedSoy {
   public static SoyListData toSoyListData(
@@ -66,7 +66,7 @@ public class ViewFeedSoy {
       // Tags.
       List<String> highlightedTags = Lists.newArrayList();
       List<String> unhighlightedTags = Lists.newArrayList();
-      for (ArticleKeyword keyword : Articles.getBestKeywords(article, userKeywordSet)) {
+      for (ArticleKeyword keyword : ArticleSerializer.getBestKeywords(article, userKeywordSet)) {
         String keywordStr = keyword.getKeyword();
         if (userKeywordSet.contains(keywordStr.toLowerCase())) {
           highlightedTags.add(keywordStr);
@@ -93,7 +93,7 @@ public class ViewFeedSoy {
 
       // Attribution.
       articleSoyMapData.put("rawArticle", "article = "
-          + AbstractArticlesServlet.serialize(article, userKeywordSet, i).toString(2));
+          + ArticleSerializer.serialize(article, userKeywordSet, i).toString(2));
 
       articleSoyMapDataList.add(articleSoyMapData);
     }

@@ -21,11 +21,9 @@ import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
-import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.UserProto.AddressBookContact;
@@ -106,6 +104,13 @@ public class Articles {
     return bestArticles;
   }
 
+  /**
+   * Returns the best articles for the current user given the current scorer.
+   * NOTE(jonemerson): If you're calling this from a Servlet, be careful!  The
+   * default serialization of Articles does not include their keywords.  Instead
+   * use {@code ArticleSerializer#serialize(Iterable, User, boolean, boolean)
+   * with the results of this method.
+   */
   public static TopList<Article, Double> getRankedArticles(
       User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
     Map<String, Double> scores = Maps.newHashMap();
@@ -268,31 +273,6 @@ public class Articles {
     return getArticlesForInterests(user,
         ImmutableList.of(Interest.newBuilder().setType(contactType).build()),
         limit);
-  }
-
-  /**
-   * Returns the top 2 keywords for an article, as tuned to the current user.
-   */
-  public static Iterable<ArticleKeyword> getBestKeywords(
-      Article article, Set<String> userKeywordSet) {
-    TopList<ArticleKeyword, Integer> topUserKeywords = new TopList<>(2);
-    TopList<ArticleKeyword, Integer> topNonUserKeyword = new TopList<>(1);
-    for (ArticleKeyword keyword : article.getKeywordList()) {
-      EntityType entityType = EntityType.fromValue(keyword.getType());
-      if (userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
-        if (keyword.getStrength() >= KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH
-            || entityType.isA(EntityType.PERSON)) {
-          topUserKeywords.add(keyword, keyword.getStrength());
-        }
-      } else if (keyword.getKeyword().length() < 25
-          && keyword.getStrength() >= KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH
-          && !entityType.isA(EntityType.PLACE)) {
-        // Only include small-ish keywords because the super long ones are often
-        // crap.
-        topNonUserKeyword.add(keyword, keyword.getStrength());
-      }
-    }
-    return Iterables.limit(Iterables.concat(topUserKeywords, topNonUserKeyword), 2);
   }
 
   /** Helper method for creating the Article table. */

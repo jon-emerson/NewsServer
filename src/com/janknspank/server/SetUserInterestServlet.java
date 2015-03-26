@@ -21,7 +21,7 @@ import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.Serializer;
+import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
@@ -145,10 +145,12 @@ public class SetUserInterestServlet extends StandardServlet {
 
     // To help with client latency, return the articles for the user's home
     // screen in this response.
-    response.put("articles", Serializer.toJSON(Articles.getRankedArticles(
+    Iterable<Article> articles = Articles.getRankedArticles(
         user,
         NeuralNetworkScorer.getInstance(),
-        GetArticlesServlet.NUM_RESULTS)));
+        GetArticlesServlet.NUM_RESULTS);
+    response.put("articles", ArticleSerializer.serialize(articles, user,
+        false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
 
     return response;
   }
