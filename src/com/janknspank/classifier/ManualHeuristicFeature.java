@@ -73,23 +73,25 @@ public class ManualHeuristicFeature extends Feature {
           .build();
   private static final Map<String, Double> FUNDRAISING_TITLE_SCORES =
       ImmutableMap.<String, Double>builder()
-          .put("raises", 1.0)
-          .put("series a", 1.0)
-          .put("series b", 1.0)
-          .put("series c", 1.0)
-          .put("series d", 1.0)
-          .put("series e", 1.0)
+          .put("series a ", 1.0)
+          .put("series b ", 1.0)
+          .put("series c ", 1.0)
+          .put("series d ", 1.0)
+          .put("series e ", 1.0)
           .put("angel round", 1.0)
-          .put("valuation", 1.0)
           .build();
   private static final Map<String, Double> FUNDRAISING_BODY_SCORES =
       ImmutableMap.<String, Double>builder()
-          .put("raises", 0.9)
-          .put("series a", 0.9)
-          .put("series b", 0.9)
-          .put("series c", 0.9)
-          .put("series d", 0.9)
-          .put("series e", 0.9)
+          .put("series a.", 0.9)
+          .put("series a ", 0.9)
+          .put("series b.", 0.9)
+          .put("series b ", 0.9)
+          .put("series c.", 0.9)
+          .put("series c ", 0.9)
+          .put("series d.", 0.9)
+          .put("series d ", 0.9)
+          .put("series e.", 0.9)
+          .put("series e ", 0.9)
           .put("angel round", 0.9)
           .build();
   private static final Map<String, Double> MILITARY_SCORES =

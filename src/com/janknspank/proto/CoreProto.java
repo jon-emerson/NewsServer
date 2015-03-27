@@ -17480,15 +17480,27 @@ public final class CoreProto {
      */
     int getCount();
 
-    // optional bool reviewed = 9;
+    // optional bool removed = 9;
     /**
-     * <code>optional bool reviewed = 9;</code>
+     * <code>optional bool removed = 9;</code>
+     *
+     * <pre>
+     * Whether this Keyword has been reviewed, and instead of associating it with
+     * an entity, we decided it's too ambiguous or not meaningful enough to assign
+     * to an entity.
+     * </pre>
      */
-    boolean hasReviewed();
+    boolean hasRemoved();
     /**
-     * <code>optional bool reviewed = 9;</code>
+     * <code>optional bool removed = 9;</code>
+     *
+     * <pre>
+     * Whether this Keyword has been reviewed, and instead of associating it with
+     * an entity, we decided it's too ambiguous or not meaningful enough to assign
+     * to an entity.
+     * </pre>
      */
-    boolean getReviewed();
+    boolean getRemoved();
   }
   /**
    * Protobuf type {@code KeywordToEntityId}
@@ -17583,7 +17595,7 @@ public final class CoreProto {
             }
             case 72: {
               bitField0_ |= 0x00000100;
-              reviewed_ = input.readBool();
+              removed_ = input.readBool();
               break;
             }
           }
@@ -17882,20 +17894,32 @@ public final class CoreProto {
       return count_;
     }
 
-    // optional bool reviewed = 9;
-    public static final int REVIEWED_FIELD_NUMBER = 9;
-    private boolean reviewed_;
+    // optional bool removed = 9;
+    public static final int REMOVED_FIELD_NUMBER = 9;
+    private boolean removed_;
     /**
-     * <code>optional bool reviewed = 9;</code>
+     * <code>optional bool removed = 9;</code>
+     *
+     * <pre>
+     * Whether this Keyword has been reviewed, and instead of associating it with
+     * an entity, we decided it's too ambiguous or not meaningful enough to assign
+     * to an entity.
+     * </pre>
      */
-    public boolean hasReviewed() {
+    public boolean hasRemoved() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional bool reviewed = 9;</code>
+     * <code>optional bool removed = 9;</code>
+     *
+     * <pre>
+     * Whether this Keyword has been reviewed, and instead of associating it with
+     * an entity, we decided it's too ambiguous or not meaningful enough to assign
+     * to an entity.
+     * </pre>
      */
-    public boolean getReviewed() {
-      return reviewed_;
+    public boolean getRemoved() {
+      return removed_;
     }
 
     private void initFields() {
@@ -17907,7 +17931,7 @@ public final class CoreProto {
       topIndustryId2_ = 0;
       topIndustryId3_ = 0;
       count_ = 0;
-      reviewed_ = false;
+      removed_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -17946,7 +17970,7 @@ public final class CoreProto {
         output.writeInt32(8, count_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBool(9, reviewed_);
+        output.writeBool(9, removed_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -17991,7 +18015,7 @@ public final class CoreProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(9, reviewed_);
+          .computeBoolSize(9, removed_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -18125,7 +18149,7 @@ public final class CoreProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         count_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
-        reviewed_ = false;
+        removed_ = false;
         bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
@@ -18190,7 +18214,7 @@ public final class CoreProto {
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.reviewed_ = reviewed_;
+        result.removed_ = removed_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -18239,8 +18263,8 @@ public final class CoreProto {
         if (other.hasCount()) {
           setCount(other.getCount());
         }
-        if (other.hasReviewed()) {
-          setReviewed(other.getReviewed());
+        if (other.hasRemoved()) {
+          setRemoved(other.getRemoved());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -18737,35 +18761,59 @@ public final class CoreProto {
         return this;
       }
 
-      // optional bool reviewed = 9;
-      private boolean reviewed_ ;
+      // optional bool removed = 9;
+      private boolean removed_ ;
       /**
-       * <code>optional bool reviewed = 9;</code>
+       * <code>optional bool removed = 9;</code>
+       *
+       * <pre>
+       * Whether this Keyword has been reviewed, and instead of associating it with
+       * an entity, we decided it's too ambiguous or not meaningful enough to assign
+       * to an entity.
+       * </pre>
        */
-      public boolean hasReviewed() {
+      public boolean hasRemoved() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional bool reviewed = 9;</code>
+       * <code>optional bool removed = 9;</code>
+       *
+       * <pre>
+       * Whether this Keyword has been reviewed, and instead of associating it with
+       * an entity, we decided it's too ambiguous or not meaningful enough to assign
+       * to an entity.
+       * </pre>
        */
-      public boolean getReviewed() {
-        return reviewed_;
+      public boolean getRemoved() {
+        return removed_;
       }
       /**
-       * <code>optional bool reviewed = 9;</code>
+       * <code>optional bool removed = 9;</code>
+       *
+       * <pre>
+       * Whether this Keyword has been reviewed, and instead of associating it with
+       * an entity, we decided it's too ambiguous or not meaningful enough to assign
+       * to an entity.
+       * </pre>
        */
-      public Builder setReviewed(boolean value) {
+      public Builder setRemoved(boolean value) {
         bitField0_ |= 0x00000100;
-        reviewed_ = value;
+        removed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool reviewed = 9;</code>
+       * <code>optional bool removed = 9;</code>
+       *
+       * <pre>
+       * Whether this Keyword has been reviewed, and instead of associating it with
+       * an entity, we decided it's too ambiguous or not meaningful enough to assign
+       * to an entity.
+       * </pre>
        */
-      public Builder clearReviewed() {
+      public Builder clearRemoved() {
         bitField0_ = (bitField0_ & ~0x00000100);
-        reviewed_ = false;
+        removed_ = false;
         onChanged();
         return this;
       }
@@ -18965,17 +19013,17 @@ public final class CoreProto {
       "2\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\007 \001(\tB\014" +
       "\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004" +
       "text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030MongoDB.PushN" +
-      "otification\"\300\002\n\021KeywordToEntityId\022\034\n\002id\030" +
+      "otification\"\277\002\n\021KeywordToEntityId\022\034\n\002id\030" +
       "\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\t" +
       "B\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246" +
       "\035\005\250\246\035\001\022\037\n\tentity_id\030\004 \001(\tB\014\230\246\035\030\250\246\035\001\220\246\035\005\022" +
       "\037\n\021top_industry_id_1\030\005 \001(\005B\004\220\246\035\005\022\037\n\021top_",
       "industry_id_2\030\006 \001(\005B\004\220\246\035\005\022\037\n\021top_industr" +
       "y_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005count\030\010 \001(\005B\010\210\246\035\001\220" +
-      "\246\035\005\022\026\n\010reviewed\030\t \001(\010B\004\220\246\035\005:\031\212\265\030\025MySQL.K" +
-      "eywordToEntity*/\n\nDeviceType\022\013\n\007UNKNOWN\020" +
-      "\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.janknspan" +
-      "k.protoB\tCoreProto"
+      "\246\035\005\022\025\n\007removed\030\t \001(\010B\004\220\246\035\005:\031\212\265\030\025MySQL.Ke" +
+      "ywordToEntity*/\n\nDeviceType\022\013\n\007UNKNOWN\020\000" +
+      "\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.janknspank" +
+      ".protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19089,7 +19137,7 @@ public final class CoreProto {
           internal_static_KeywordToEntityId_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_KeywordToEntityId_descriptor,
-              new java.lang.String[] { "Id", "Keyword", "Type", "EntityId", "TopIndustryId1", "TopIndustryId2", "TopIndustryId3", "Count", "Reviewed", });
+              new java.lang.String[] { "Id", "Keyword", "Type", "EntityId", "TopIndustryId1", "TopIndustryId2", "TopIndustryId3", "Count", "Removed", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);

@@ -51,7 +51,7 @@ public class ClassifyKeywordsServlet extends StandardServlet {
     List<SoyMapData> articleSoyMapDataList = Lists.newArrayList();
     for (KeywordToEntityId keywordToEntityId : Database.with(KeywordToEntityId.class).get(
         new QueryOption.WhereNull("entity_id"),
-        new QueryOption.WhereNotTrue("reviewed"),
+        new QueryOption.WhereNotTrue("removed"),
         new QueryOption.DescendingSort("count"),
         query == null
             ? new QueryOption.WhereNotNull("id") // No-op.
@@ -74,7 +74,13 @@ public class ClassifyKeywordsServlet extends StandardServlet {
     for (Map.Entry<String, String[]> entry : req.getParameterMap().entrySet()) {
       String key = entry.getKey();
       if (key.startsWith("delete-")) {
-        Database.with(KeywordToEntityId.class).delete(key.substring("delete-".length()));
+        String keywordToEntityIdId = key.substring("delete-".length());
+        Database.update(
+            Database.with(KeywordToEntityId.class)
+                .getFirst(new QueryOption.WhereEquals("id", keywordToEntityIdId))
+                .toBuilder()
+                .setRemoved(true)
+                .build());
       } else {
         String keywordToEntityIdId = key;
         String entityId = entry.getValue().length > 0 ? entry.getValue()[0] : "";

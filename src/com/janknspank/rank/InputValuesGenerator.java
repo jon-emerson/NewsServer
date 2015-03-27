@@ -5,7 +5,6 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.Intent;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
@@ -121,14 +120,9 @@ public class InputValuesGenerator {
   }
 
   public static double relevanceToStartupIntent(User user, Article article) {
-    boolean foundStartupIntent = false;
-    for (Interest interest : user.getInterestList()) {
-      foundStartupIntent |= (interest.getType() == InterestType.INTENT
-          && interest.getIntentCode().equals(Intent.START_COMPANY.getCode()));
-    }
-    if (!foundStartupIntent) {
-      return 0;
-    }
+    // TODO(jonemerson): Figure out what we're doing here.  For now, since we
+    // like startup articles, include the relevance to startups as an input
+    // to the neural network for everyone.
     for (ArticleFeature articleFeature : article.getFeatureList()) {
       FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
       if (StartupFeatureHelper.isStartupFeature(featureId) &&

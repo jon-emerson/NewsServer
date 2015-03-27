@@ -568,7 +568,10 @@ message KeywordToEntityId {
     (storage_method) = PULL_OUT
   ];
 
-  optional bool reviewed = 9 [
+  // Whether this Keyword has been reviewed, and instead of associating it with
+  // an entity, we decided it's too ambiguous or not meaningful enough to assign
+  // to an entity.
+  optional bool removed = 9 [
     (storage_method) = PULL_OUT
   ];
 }
