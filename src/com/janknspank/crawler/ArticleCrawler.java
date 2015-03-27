@@ -25,7 +25,6 @@ import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Links;
 import com.janknspank.bizness.Urls;
 import com.janknspank.common.Host;
-import com.janknspank.common.Logger;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -44,7 +43,6 @@ import com.janknspank.proto.CrawlerProto.SiteManifest;
  * those article documents, then stores the results to the database.
  */
 public class ArticleCrawler implements Callable<Void> {
-  private static final Logger LOG = new Logger(ArticleCrawler.class);
   public static final int THREAD_COUNT = 50;
 
   private final SiteManifest manifest;
@@ -154,12 +152,16 @@ public class ArticleCrawler implements Callable<Void> {
         // It could be that some other process decided to steal this article
         // and process it first (mainly due to human error).  If so, delete
         // everything and store it again.
-        LOG.severe("Handling human error: " + url.getUrl());
+        System.out.println("Handling human error: " + url.getUrl());
+        e.printStackTrace();
         Database.with(Article.class).delete(url.getId());
         Links.deleteFromOriginUrlId(ImmutableList.of(url.getId()));
 
         // Try again!
         Database.insert(article);
+      } catch (Throwable e) {
+        e.printStackTrace();
+        throw e;
       }
       urls = ImmutableSet.copyOf(interpretedData.getUrlList());
     } else {

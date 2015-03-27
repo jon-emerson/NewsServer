@@ -1,19 +1,11 @@
 package com.janknspank.utils;
 
-import java.util.List;
-import java.util.Set;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.MongoConnection;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.CoreProto.Url;
 
 /**
  * Reduces the size of our Mongo DB database so that we can stay within our
@@ -31,64 +23,64 @@ import com.janknspank.proto.CoreProto.Url;
 public class PruneMongoDatabase {
   private static final long MAX_ARTICLE_COUNT = 25000;
 
-  /**
-   * Deletes any passed URLs that do not have Articles associated with them in
-   * the database.
-   */
-  private static int fixUrls(List<Url> urls)
-      throws DatabaseSchemaException, DatabaseRequestException {
-    final Set<String> existingArticleUrlIds = Sets.newHashSet();
-    for (Article article : Database.with(Article.class).get(
-        new QueryOption.WhereEquals("url",
-            Iterables.transform(urls, new Function<Url, String>() {
-              @Override
-              public String apply(Url url) {
-                return url.getUrl();
-              }
-            })))) {
-      existingArticleUrlIds.add(article.getUrlId());
-    }
-    List<Url> urlsToUpdate = Lists.newArrayList();
-    for (Url url : urls) {
-      if (!existingArticleUrlIds.contains(url.getId())
-          && (url.hasLastCrawlStartTime() || url.hasLastCrawlFinishTime())) {
-        urlsToUpdate.add(url.toBuilder()
-            .clearLastCrawlFinishTime()
-            .clearLastCrawlStartTime()
-            .build());
-      }
-    }
-    Database.update(urlsToUpdate);
-    return urlsToUpdate.size();
-  }
-
-  /**
-   * Updates any URLs that don't have Articles associated with them to not have
-   * crawl data, so that they may someday be crawled again.
-   */
-  private static void fixUrls() throws DatabaseSchemaException, DatabaseRequestException {
-    long startTime = System.currentTimeMillis();
-    System.out.println("Retrieving URLs ...");
-
-    Iterable<Url> urls = Database.with(Url.class).get();
-    System.out.println("Received " + Iterables.size(urls) + " URLs to evaluate in "
-        + (System.currentTimeMillis() - startTime) + "ms");
-
-    System.out.print("Fixing ..");
-    List<Url> urlsToCheck = Lists.newArrayList();
-    int numDeleted = 0;
-    for (Url url : urls) {
-      urlsToCheck.add(url);
-      if (urlsToCheck.size() > 250) {
-        numDeleted += fixUrls(urlsToCheck);
-        urlsToCheck.clear();
-        System.out.print(".");
-      }
-    }
-    numDeleted += fixUrls(urlsToCheck);
-    System.out.println(numDeleted + " URLs fixed in "
-        + (System.currentTimeMillis() - startTime) + "ms!");
-  }
+//  /**
+//   * Deletes any passed URLs that do not have Articles associated with them in
+//   * the database.
+//   */
+//  private static int fixUrls(List<Url> urls)
+//      throws DatabaseSchemaException, DatabaseRequestException {
+//    final Set<String> existingArticleUrlIds = Sets.newHashSet();
+//    for (Article article : Database.with(Article.class).get(
+//        new QueryOption.WhereEquals("url",
+//            Iterables.transform(urls, new Function<Url, String>() {
+//              @Override
+//              public String apply(Url url) {
+//                return url.getUrl();
+//              }
+//            })))) {
+//      existingArticleUrlIds.add(article.getUrlId());
+//    }
+//    List<Url> urlsToUpdate = Lists.newArrayList();
+//    for (Url url : urls) {
+//      if (!existingArticleUrlIds.contains(url.getId())
+//          && (url.hasLastCrawlStartTime() || url.hasLastCrawlFinishTime())) {
+//        urlsToUpdate.add(url.toBuilder()
+//            .clearLastCrawlFinishTime()
+//            .clearLastCrawlStartTime()
+//            .build());
+//      }
+//    }
+//    Database.update(urlsToUpdate);
+//    return urlsToUpdate.size();
+//  }
+//
+//  /**
+//   * Updates any URLs that don't have Articles associated with them to not have
+//   * crawl data, so that they may someday be crawled again.
+//   */
+//  private static void fixUrls() throws DatabaseSchemaException, DatabaseRequestException {
+//    long startTime = System.currentTimeMillis();
+//    System.out.println("Retrieving URLs ...");
+//
+//    Iterable<Url> urls = Database.with(Url.class).get();
+//    System.out.println("Received " + Iterables.size(urls) + " URLs to evaluate in "
+//        + (System.currentTimeMillis() - startTime) + "ms");
+//
+//    System.out.print("Fixing ..");
+//    List<Url> urlsToCheck = Lists.newArrayList();
+//    int numDeleted = 0;
+//    for (Url url : urls) {
+//      urlsToCheck.add(url);
+//      if (urlsToCheck.size() > 250) {
+//        numDeleted += fixUrls(urlsToCheck);
+//        urlsToCheck.clear();
+//        System.out.print(".");
+//      }
+//    }
+//    numDeleted += fixUrls(urlsToCheck);
+//    System.out.println(numDeleted + " URLs fixed in "
+//        + (System.currentTimeMillis() - startTime) + "ms!");
+//  }
 
   /**
    * Gets the # of articles in the system reasonably close to MAX_ARTICLE_COUNT
@@ -132,8 +124,8 @@ public class PruneMongoDatabase {
 
   public static void main(String args[]) throws DatabaseSchemaException, DatabaseRequestException {
     pruneArticles();
-    fixUrls();
     repairDatabase();
+    // fixUrls();
     System.out.println("Database pruned successfully.");
   }
 }

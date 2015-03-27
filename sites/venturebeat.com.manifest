@@ -25,3 +25,9 @@ test_instructions {
     non_article_url: "http://venturebeat.com/sign-up/"
   }
 }
+feature_boost_pattern {
+  # E.g. http://venturebeat.com/2015/03/25/funding-daily-todays-tech-funding-news-in-one-place-94/
+  # As Tom says, we don't want to be an aggregator of aggregators...
+  path_regex: "\\/funding-daily-"
+  boost: -5
+}

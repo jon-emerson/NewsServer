@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A list of all features we support or plan to support.
+ * A list of all features we support.
  * @see Feature
- *
- * TODO(jonemerson): May want to delete Title from here and allow Feature
- * class implementations to handle them internally.
  */
 public enum FeatureId {
   INTERNET(10501, FeatureType.INDUSTRY, "Internet"),
@@ -27,7 +24,7 @@ public enum FeatureId {
   MERGERS_AND_ACQUISITIONS(10514, FeatureType.INDUSTRY, "Mergers and Acquisitions"), ////////////
   ACCOUNTING(10515, FeatureType.INDUSTRY, "Accounting"),
   CONSTRUCTION(10516, FeatureType.INDUSTRY, "Construction"),
-  ARCHITECTURE_AND_PLANNING(10517, FeatureType.INDUSTRY, "Architecture and Planning"),
+  ARCHITECTURE_AND_PLANNING(10517, FeatureType.INDUSTRY, "Architecture"),
   CIVIL_ENGINEERING(10518, FeatureType.INDUSTRY, "Civil Engineering"),
   AVIATION(10519, FeatureType.INDUSTRY, "Aviation"),
   AUTOMOTIVE(10520, FeatureType.INDUSTRY, "Automotive"),

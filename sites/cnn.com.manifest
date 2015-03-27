@@ -56,7 +56,7 @@ paragraph_selector: ".cnnContentContainer p" # E.g. http://www.cnn.com/2008/LIVI
 paragraph_selector: "#cnnArticleContent p" # E.g. http://www.cnn.com/2006/BUSINESS/08/17/tobacco.ruling/
 paragraph_selector: ".content .field-item > p" # E.g. http://travel.cnn.com/16-incredible-rooftop-bars-485531
 article_url_pattern {
-  path_regex: "\\/20[0-9]{2}\\/([A-Z]+\\/([A-Za-z]+\\/)?)?[01][0-9]\\/[0-3][0-9]\\/"
+  path_regex: "\\/20[0-9]{2}\\/([A-Z]+\\/([A-Za-z\\.]+\\/)?)?[01][0-9]\\/[0-3][0-9]\\/"
 }
 article_url_pattern {
   path_regex: "\\/SPECIALS\\/.*\\/index.html?$"
@@ -85,6 +85,7 @@ test_instructions {
     article_url: "http://tech.fortune.cnn.com/2010/10/04/verizons-refund-is-just-the-start-of-a-shakeup-in-wireless/"
     article_url: "http://travel.cnn.com/face-face-portraits-human-spirit-046291"
     article_url: "http://www.cnn.com/2003/HEALTH/02/16/false.memory.ap/index.html"
+    article_url: "http://www.cnn.com/2008/HEALTH/diet.fitness/11/11/Healthmag.healthiest.grocery.stores/index.html"
     article_url: "http://www.cnn.com/2005/TECH/science/05/12/new.species.ap/index.html"
     article_url: "http://www.cnn.com/2011/11/09/studentnews/black-in-america-silicon-valley-educator-parent-guide/index.html"
     article_url: "http://www.cnn.com/2011/SHOWBIZ/Music/02/16/grace.potter.soundcheck"

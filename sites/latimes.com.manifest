@@ -36,7 +36,7 @@ paragraph_blacklist {
   text_regex: "^Follow "
 }
 article_url_pattern {
-  path_regex: "20[0-9]{2}[01][0-9][0-3][0-9]\\-(column|htmlstory|story|storygallery)\\.html$"
+  path_regex: "\\-(column|htmlstory|story|storygallery)\\.html$"
 }
 article_url_pattern {
   path_regex: ",[0-9]{6,10}\\.(column|htmlstory|story|storygallery)$"
@@ -54,7 +54,7 @@ test_instructions {
     article_url: "http://www.latimes.com/food/dailydish/la-dd-recipes-for-santa-or-yourself-on-christmas-eve-20141222-storygallery.html"
     article_url: "http://www.latimes.com/la-california-20141016-htmlstory.html"
     article_url: "http://www.latimes.com/la-me-aqueduct-comments-20131028,0,3652614.story"
-    article_url: "http://www.latimes.com/local/crime/la-me-lapd-trust-20140828-story.html#page=1"
+    article_url: "http://www.latimes.com/local/crime/la-me-lapd-trust-20140828-story.html"
     article_url: "http://www.latimes.com/local/la-me-c1-aqueduct-bomber-20131030-dto,0,7855162.htmlstory"
     article_url: "http://www.latimes.com/local/lanow/la-me-ln-fire-homeless-20140504,0,756604.story"
     article_url: "http://www.latimes.com/local/lanow/la-me-ln-lightning-rain-storms-southern-california-20150130-story.html"
@@ -63,6 +63,7 @@ test_instructions {
     article_url: "http://www.latimes.com/sports/sportsnow/la-sp-sn-nhl-all-star-zemgus-girgensons20141230-story.html"
     article_url: "http://www.latimes.com/entertainment/arts/la-et-cm-ca-heatherwick-provocations-hammer-review-20150301-column.html"
     article_url: "http://www.latimes.com/entertainment/arts/la-et-cm-essential-arts-html-20150315-htmlstory.html"
+    article_url: "http://www.latimes.com/la-app-mexico-part-1-story.html"
     non_article_url: "http://latimesblogs.latimes.com/alltherage/"
     non_article_url: "http://www.latimes.com/aboutus"
     non_article_url: "http://www.latimes.com/business/personalfinance/"

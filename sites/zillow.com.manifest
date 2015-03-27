@@ -1,0 +1,32 @@
+root_domain: "zillow.com"
+start_url: "http://www.zillow.com/blog/"
+path_blacklist {
+  needle: "/homedetails/"
+}
+paragraph_selector: "article p"
+article_url_pattern {
+  path_regex: "^\\/blog\\/[^\\/]+-[0-9]{5,8}\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.zillow.com/blog/10-mid-century-modern-listings-172290/"
+    article_url: "http://www.zillow.com/blog/bill-koch-asks-100m-aspen-172644/"
+    article_url: "http://www.zillow.com/blog/jonah-hill-unloading-soho-loft-172616/"
+    article_url: "http://www.zillow.com/blog/newcomers-outpace-new-housing-172547/"
+    article_url: "http://www.zillow.com/blog/sarah-jessica-parker-relists-home-159224/"
+    article_url: "http://www.zillow.com/blog/styling-bar-carts-4-looks-172182/"
+    article_url: "http://www.zillow.com/blog/subway-tile-creative-track-172456/"
+    non_article_url: "http://www.zillow.com/blog/author/avvo/"
+    non_article_url: "http://www.zillow.com/blog/category/celebrity-real-estate/"
+    non_article_url: "http://www.zillow.com/blog/category/celebrity-real-estate/page/2/"
+    non_article_url: "http://www.zillow.com/blog/category/market-trends/"
+    non_article_url: "http://www.zillow.com/blog/category/unique-homes/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real estate.
+  boost: 2
+}

@@ -45,9 +45,9 @@ test_instructions {
 }
 feature_boost_pattern {
   feature_id: 10536 # Real Estate
-  boost: 3
+  boost: 1
 }
 feature_boost_pattern {
   feature_id: 10517 # Architecture & Planning
-  boost: 2
+  boost: 1
 }

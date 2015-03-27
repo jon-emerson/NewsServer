@@ -1,0 +1,34 @@
+root_domain: "realtytimes.com"
+start_url: "http://realtytimes.com/"
+path_blacklist {
+  needle: "/listings1/"
+}
+paragraph_selector: ".itemFullText p"
+article_url_pattern {
+  path_regex: "\\/item\\/[0-9]{4,7}\\-"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://realtytimes.com/consumeradvice/sellersadvice1/item/33875-20150327-sellers-ramp-up-your-curb-appeal"
+    article_url: "http://realtytimes.com/consumeradvice/buyersadvice1/item/33598-20150318-market-madness-bracket-2015"
+    article_url: "http://realtytimes.com/consumeradvice/buyersadvice1/item/33767-20150324-delightful-dazzling-and-dignified-in-big-d-what-you-get-for-100-million"
+    article_url: "http://realtytimes.com/consumeradvice/homeownersadvice1/item/33802-20150325-whats-a-housing-code"
+    article_url: "http://realtytimes.com/agentnews/agentadvice1/item/33226-20150303-agents-may-sue-other-agents-over-commission-sharing-disputes"
+    article_url: "http://jcao.realtytimes.com/advicefromagents1/item/33880-applications-for-mortgages-go-up-by-9-5-for-the-last-week-of-march-2015"
+    article_url: "http://ravichauhanweb.realtytimes.com/announcements1/item/33888-boom-time-in-ghaziabad-what-makes-ghaziabad-properties-a-wise-investment"
+    article_url: "http://joshfeinberg.realtytimes.com/marketoutlook/item/33670-with-inventory-low-bidding-wars-are-back-in-phoenix-s-housing-market-baby"
+    article_url: "http://grafkristine.realtytimes.com/advicefromagents1/item/33853-documents-to-prepare-in-selling-inherited-property"
+    non_article_url: "http://realtytimes.com/consumeradvice/buyersadvice1"
+    non_article_url: "http://realtytimes.com/agentnews/agentadvice1"
+    non_article_url: "http://joshfeinberg.realtytimes.com/realtytimessearch"
+    non_article_url: "http://joshfeinberg.realtytimes.com/archives/itemlist/user/709"
+    non_article_url: "http://joshfeinberg.realtytimes.com/index.php/decoratinganddesign1/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real estate.
+  boost: 2
+}

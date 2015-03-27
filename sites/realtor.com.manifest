@@ -1,0 +1,42 @@
+root_domain: "realtor.com"
+start_url: "http://www.realtor.com/news/"
+start_url: "http://www.realtor.com/advice/"
+path_blacklist {
+  needle: "/homedetails/"
+}
+path_blacklist {
+  needle: "/news/real-estate-news/"
+  location: EQUALS
+}
+paragraph_selector: ".entry-content p"
+paragraph_selector: ".entry-content h2"
+article_url_pattern {
+  path_regex: "^\\/(advice|news)\\/[^\\/]+\\-[^\\/]+\\-[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.realtor.com/advice/6-simple-rules-for-refinance/"
+    article_url: "http://www.realtor.com/advice/9-step-guide-to-finding-a-dream-rental/"
+    article_url: "http://www.realtor.com/advice/is-spring-best-time-to-sell-a-house/"
+    article_url: "http://www.realtor.com/advice/is-spring-the-best-time-to-buy-a-home/"
+    article_url: "http://www.realtor.com/news/the-reading-room-326/"
+    article_url: "http://www.realtor.com/news/brad-pitt-prefab-house/"
+    article_url: "http://www.realtor.com/news/new-home-sales-up-data-report-fhfa/"
+    article_url: "http://www.realtor.com/news/georgias-most-expensive-house/"
+    article_url: "http://www.realtor.com/news/march-madness-real-estate-bracket/"
+    article_url: "http://www.realtor.com/news/songs-for-housing-trends/"
+    non_article_url: "http://www.realtor.com/advice/for-pros/"
+    non_article_url: "http://www.realtor.com/news/author/rdcblogeditor/"
+    non_article_url: "http://www.realtor.com/news/tag/jonathan-smoke/"
+    non_article_url: "http://www.realtor.com/news/tag/new-home-sales/"
+    non_article_url: "http://www.realtor.com/news/tag/2015-housing-trends/"
+    non_article_url: "http://www.realtor.com/news/unique-homes/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real estate.
+  boost: 2
+}

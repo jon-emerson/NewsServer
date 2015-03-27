@@ -27,7 +27,16 @@ import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.KeywordToEntityId;
 
-public class FunTimes {
+/**
+ * Finds all ArticleKeywords that haven't yet been associated with EntityIds
+ * in the KeywordToEntityId table, and either increases their count by the
+ * number of articles we currently have, or inserts a new KeywordToEntity with
+ * just the existing count.
+ *
+ * We should run this somewhat regularly so that we're sure that keywords that
+ * are referenced frequently have entities associated with them.
+ */
+public class PopulateKeywordToEntityIdTable {
   public static class KeywordSet {
     private final Multiset<String> keywordCounts = HashMultiset.create();
     private final Map<String, Multiset<FeatureId>> keywordIndustryFeatures = Maps.newHashMap();

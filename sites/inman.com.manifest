@@ -1,0 +1,33 @@
+root_domain: "inman.com"
+start_url: "http://www.inman.com/"
+subdomain_blacklist: "jobs.inman.com"
+paragraph_selector: ".entry-content p"
+paragraph_blacklist {
+  selector: "em"
+}
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.inman.com/2015/03/27/homebuyers-crave-title-insurance-information-early-in-purchasing-process-but-who-will-provide-it/"
+    article_url: "http://www.inman.com/2015/03/27/zillows-new-agent-finder-misses-the-mark-for-consumers/"
+    article_url: "http://www.inman.com/2015/03/27/todd-carpenter-anything-thats-happening-in-the-real-estate-industry-will-show-up-on-twitter/"
+    article_url: "http://www.inman.com/2015/03/23/mortgage-servicer-out-of-compliance-with-stock-exchange-listing-rules/"
+    article_url: "http://www.inman.com/2015/03/19/freddie-mac-taps-capital-one-vp-to-lead-affordable-mortgage-lending-efforts/"
+    article_url: "http://www.inman.com/2015/03/27/fewer-consumers-plan-to-move-this-year/"
+    non_article_url: "http://www.inman.com/inmannext/"
+    non_article_url: "http://www.inman.com/category/mortgage/"
+    non_article_url: "http://www.inman.com/author/amy-swinderman/"
+    non_article_url: "http://www.inman.com/advertise-with-us/"
+    non_article_url: "https://www.inman.com/select/"
+    non_article_url: "http://www.inman.com/submit-tip/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real estate.
+  boost: 3
+}
