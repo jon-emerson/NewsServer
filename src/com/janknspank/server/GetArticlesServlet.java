@@ -43,6 +43,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
     String featureId = this.getParameter(req, "feature_id");
     String industryCodeId = this.getParameter(req, "industry_code");
     String contacts = this.getParameter(req, "contacts");
+    String entityId = this.getParameter(req, "entity_id");
     String entityKeyword = this.getParameter(req, "entity_keyword");
     String entityType = this.getParameter(req, "entity_type");
     String intentCode = this.getParameter(req, "intent_code");
@@ -60,9 +61,6 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
       return Articles.getArticlesForFeature(
           FeatureId.fromId(Integer.parseInt(featureId)),
           NUM_RESULTS);
-    } else if (entityKeyword != null) {
-      Entity entity = Entity.newBuilder().setKeyword(entityKeyword).setType(entityType).build();
-      return Articles.getArticlesForEntity(entity, NUM_RESULTS);
     } else if (Intent.START_COMPANY.getCode().equals(intentCode)) {
       // TODO: fix this so its the right feature for the user's industries
       return Articles.getArticlesForFeature(FeatureId.fromId(20000), NUM_RESULTS);
@@ -80,6 +78,25 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
               .build(),
           NeuralNetworkScorer.getInstance(),
           NUM_RESULTS);
+    } else if (entityId != null) {
+      return Articles.getRankedArticles(
+          user.toBuilder()
+              .clearInterest()
+              .addInterest(Interest.newBuilder()
+                  .setType(InterestType.ENTITY)
+                  .setEntity(Entity.newBuilder()
+                      .setId(entityId)
+                      .setType(entityType)
+                      .setKeyword(entityKeyword))
+                  .build())
+              .build(),
+          NeuralNetworkScorer.getInstance(),
+          NUM_RESULTS);
+    } else if (entityKeyword != null) {
+      // This codepath is probably not used anymore (since the client only shows
+      // entities with entity IDs).  And anyway, its results are really awful!!
+      // So if it does get used again someday, we should make it wayy better!
+      return Articles.getArticlesForKeyword(entityKeyword, entityType, NUM_RESULTS);
     } else if ("linked_in".equals(contacts)) {
       return Articles.getArticlesForContacts(user, InterestType.LINKED_IN_CONTACTS, NUM_RESULTS);
     } else if ("address_book".equals(contacts)) {

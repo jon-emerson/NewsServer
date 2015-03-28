@@ -28,4 +28,23 @@ public class MongoCollectionTest {
             "feature.feature_id", "keyword.entity.keyword", "keyword.keyword", "published_time"),
         indexes);
   }
+
+  /**
+   * Tests that protos with primary key fields have their QueryOption.Where
+   * clauses properly converted to _ids when they're addressing said primary
+   * key fields.
+   */
+  @Test
+  public void testGetFieldName() throws Exception {
+    MongoCollection<Article> articleCollection =
+        (MongoCollection<Article>) Database.with(Article.class);
+    assertEquals("url", articleCollection.getFieldName(new QueryOption.WhereNotNull("url")));
+    assertEquals("_id", articleCollection.getFieldName(new QueryOption.WhereNotNull("url_id")));
+    assertEquals("feature.feature_id", articleCollection.getFieldName(
+        new QueryOption.WhereNotNull("feature.feature_id")));
+    assertEquals("keyword.entity.keyword", articleCollection.getFieldName(
+        new QueryOption.WhereNotNull("keyword.entity.keyword")));
+    assertEquals("keyword.entity._id", articleCollection.getFieldName(
+        new QueryOption.WhereNotNull("keyword.entity.id")));
+  }
 }

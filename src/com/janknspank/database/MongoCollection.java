@@ -1,6 +1,7 @@
 package com.janknspank.database;
 
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
@@ -8,12 +9,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 
 import com.google.api.client.util.Lists;
+import com.google.api.client.util.Sets;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
+import com.janknspank.common.Asserts;
 import com.janknspank.common.Logger;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
 import com.janknspank.database.QueryOption.LimitWithOffset;
@@ -48,11 +51,13 @@ import com.mongodb.MongoClient;
  */
 public class MongoCollection<T extends Message> extends Collection<T> {
   private static final Logger LOG = new Logger(MongoCollection.class);
+  private final Set<String> primaryKeyFields;
   private MongoClient __clientInternal = null; // DO NOT USE DIRECTLY!!
   private DB __database = null; // DO NOT USE DIRECTLY!!
 
-  protected MongoCollection(Class<T> clazz) {
+  protected MongoCollection(Class<T> clazz) throws DatabaseSchemaException {
     super(clazz);
+    primaryKeyFields = getPrimaryKeyFields(storageMethodMap.keySet());
   }
 
   protected MongoClient getClient() throws DatabaseSchemaException {
@@ -98,6 +103,27 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     return indexes;
   }
 
+  @VisibleForTesting
+  static Set<String> getPrimaryKeyFields(Iterable<FieldDescriptor> fields)
+      throws DatabaseSchemaException {
+    Set<String> primaryKeyFields = Sets.newHashSet();
+    for (FieldDescriptor field : fields) {
+      StorageMethod storageMethod = field.getOptions().getExtension(ExtensionsProto.storageMethod);
+      if (storageMethod == StorageMethod.PRIMARY_KEY) {
+        Asserts.assertTrue(field.getJavaType() == JavaType.STRING,
+            "Primary keys must be of type string", DatabaseSchemaException.class);
+        primaryKeyFields.add(field.getName());
+      }
+      if (field.getJavaType() == JavaType.MESSAGE) {
+        for (String nestedPrimaryKeyField :
+            getPrimaryKeyFields(field.getMessageType().getFields())) {
+          primaryKeyFields.add(field.getName() + "." + nestedPrimaryKeyField);
+        }
+      }
+    }
+    return primaryKeyFields;
+  }
+
   @Override
   public void createTable() throws DatabaseSchemaException {
     DBCollection collection = getDatabase().getCollection(getTableName());
@@ -113,7 +139,8 @@ public class MongoCollection<T extends Message> extends Collection<T> {
    * Returns a primary key-adjusted field name for the specified query
    * option.
    */
-  private String getFieldName(QueryOption option) {
+  @VisibleForTesting
+  String getFieldName(QueryOption option) {
     String fieldName;
     if (option instanceof WhereOption) {
       fieldName = ((WhereOption) option).getFieldName();
@@ -122,7 +149,14 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     } else {
       throw new IllegalStateException("QueryOption has no field name");
     }
-    return (fieldName.equals(this.primaryKeyField)) ? "_id" : fieldName;
+
+    if (primaryKeyFields.contains(fieldName)) {
+      if (fieldName.contains(".")) {
+        return fieldName.substring(0, fieldName.lastIndexOf(".") + 1) + "_id";
+      }
+      return "_id";
+    }
+    return fieldName;
   }
 
   /**
@@ -160,7 +194,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
         } else {
           throw new IllegalStateException();
         }
-        if ("_id".equals(fieldName)) {
+        if (fieldName.equals("_id") || fieldName.endsWith("._id")) {
           value = new ObjectId((String) value);
         }
         if (whereEquals instanceof WhereEqualsIgnoreCase) {

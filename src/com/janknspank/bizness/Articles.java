@@ -25,7 +25,6 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
-import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
@@ -72,6 +71,20 @@ public class Articles {
         Database.with(Article.class).getFuture(
             new QueryOption.DescendingSort("published_time"),
             new QueryOption.WhereEquals("keyword.keyword", keywords),
+            new QueryOption.Limit(limit)),
+        getFunctionToGiveArticlesReason(reason));
+  }
+
+  /**
+   * Gets articles that contain a set of entity IDs.
+   */
+  public static ListenableFuture<Iterable<Article>> getArticlesForEntityIdsFuture(
+      Iterable<String> entityIds, final Article.Reason reason, int limit)
+      throws DatabaseSchemaException {
+    return Futures.transform(
+        Database.with(Article.class).getFuture(
+            new QueryOption.DescendingSort("published_time"),
+            new QueryOption.WhereEquals("keyword.entity.id", entityIds),
             new QueryOption.Limit(limit)),
         getFunctionToGiveArticlesReason(reason));
   }
@@ -169,6 +182,7 @@ public class Articles {
       User user, Iterable<Interest> interests, int limitPerType)
       throws DatabaseSchemaException, BiznessException {
     List<FeatureId> featureIds = Lists.newArrayList();
+    List<String> entityIds = Lists.newArrayList();
     List<String> companyNames = Lists.newArrayList();
     List<String> personNames = Lists.newArrayList();
     for (Interest interest : interests) {
@@ -194,7 +208,11 @@ public class Articles {
           break;
 
         case ENTITY:
-          companyNames.add(interest.getEntity().getKeyword());
+          if (interest.getEntity().hasId()) {
+            entityIds.add(interest.getEntity().getId());
+          } else {
+            companyNames.add(interest.getEntity().getKeyword());
+          }
           break;
 
         case UNKNONWN:
@@ -203,6 +221,7 @@ public class Articles {
     }
 
     List<ListenableFuture<Iterable<Article>>> articlesFutures = ImmutableList.of(
+        getArticlesForEntityIdsFuture(entityIds, Article.Reason.COMPANY, limitPerType),
         getArticlesForKeywordsFuture(personNames, Article.Reason.PERSON, limitPerType / 4),
         getArticlesForKeywordsFuture(companyNames, Article.Reason.COMPANY, limitPerType),
         getArticlesByFeatureIdFuture(featureIds, limitPerType));
@@ -224,12 +243,13 @@ public class Articles {
   /**
    * Gets articles containing a specific entity (person, organization, or place)
    */
-  public static Iterable<Article> getArticlesForEntity(Entity entity, int limitPerType) 
+  public static Iterable<Article> getArticlesForKeyword(
+      String keyword, String entityType, int limitPerType) 
       throws DatabaseSchemaException, BiznessException {
     try {
       return Deduper.filterOutDupes(
           getArticlesForKeywordsFuture(
-              ImmutableList.of(entity.getKeyword()), Reason.COMPANY, limitPerType).get());
+              ImmutableList.of(keyword), Reason.COMPANY, limitPerType).get());
     } catch (InterruptedException | ExecutionException e) {
       throw new BiznessException("Async exception: " + e.getMessage(), e);
     }

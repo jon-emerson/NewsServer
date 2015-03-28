@@ -3,7 +3,20 @@ start_url: "http://www.zillow.com/blog/"
 path_blacklist {
   needle: "/homedetails/"
 }
-paragraph_selector: "article p"
+paragraph_selector: "[itemprop=\"articleBody\"] p"
+paragraph_selector: "[itemprop=\"articleBody\"] h3"
+paragraph_blacklist {
+  text_regex: "^Source: "
+}
+paragraph_blacklist {
+  text_regex: "^Check out more "
+}
+paragraph_blacklist {
+  text_regex: "^Related:$"
+}
+paragraph_blacklist {
+  text_regex: "^Note: The views and opinions"
+}
 article_url_pattern {
   path_regex: "^\\/blog\\/[^\\/]+-[0-9]{5,8}\\/$"
 }
