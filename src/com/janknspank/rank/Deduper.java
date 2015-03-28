@@ -69,14 +69,21 @@ public class Deduper {
       int stemIntersectionCount = Sets.intersection(stems, extraction2.stems).size();
       int industryIntersectionCount =
           Sets.intersection(top3Industries, extraction2.top3Industries).size();
+
+      // Some articles just aren't about enough stuff to be assigned to an
+      // industry.  In which case, they're probably relatively weak, and we
+      // can just assume their industries intersect.
+      boolean bothHaveIndustries =
+          top3Industries.size() > 0 && extraction2.top3Industries.size() > 0;
+
       return stemIntersectionCount >= STEM_INTERSECTION_COUNT_MINIMUM
-          && industryIntersectionCount >= 1;
+          && (industryIntersectionCount >= 1 || !bothHaveIndustries);
     }
-    
+
     public void markHasKilledDupe() {
       killedADupe = true;
     }
-    
+
     public boolean hasKilledADupe() {
       return killedADupe;
     }
