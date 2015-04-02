@@ -63,38 +63,67 @@ public class ArticleCrawler implements Callable<Void> {
         .setArticlesCrawled(0);
     CRAWL_HISTORY_SITES.put(manifest.getRootDomain(), crawlHistorySiteBuilder);
 
-    Iterable<Url> urls;
+    // For this site, figure out what URLs are mentioned on its home page, other
+    // start URLs, and RSS feeds.  Then figure out whether we already know the
+    // URLs and whether we've created articles for them already.
+    Iterable<String> articleUrls;
+    Map<String, Url> existingArticleUrls = Maps.newHashMap();
+    Map<String, Article> existingArticles = Maps.newHashMap();
     try {
-      urls = new UrlCrawler().findArticleUrls(manifest);
-    } catch (DatabaseSchemaException | DatabaseRequestException e) {
+      articleUrls = new UrlCrawler().findArticleUrls(manifest);
+      for (Url url : Database.with(Url.class).get(
+          new QueryOption.WhereEquals("url", articleUrls))) {
+        existingArticleUrls.put(url.getUrl(), url);
+      }
+      for (Article article : Database.with(Article.class).get(
+          new QueryOption.WhereEquals("url", articleUrls))) {
+        existingArticles.put(article.getUrl(), article);
+      }
+    } catch (DatabaseSchemaException e) {
       System.out.println("ERROR parsing site: " + manifest.getRootDomain());
       e.printStackTrace();
       return null;
     }
 
-    for (Url url : urls) {
-      // In the new design, we get a list of all the URLs on a site's homepage
-      // and RSS pages, and in many cases, we've crawled them before.  If so,
-      // skip the crawling, but do refresh the article's social score if it
-      // hasn't recently been updated.
-      if (url.hasLastCrawlStartTime()) {
-        // TODO(jonemerson): Update social score.
+    for (String articleUrl : articleUrls) {
+      if (existingArticles.containsKey(articleUrl)) {
+        // Already crawled.
         continue;
       }
 
-      try {
-        url = Urls.markCrawlStart(url);
-        if (url == null) {
-          // Some other thread has likely claimed this URL - Move along.
+      // Get a URL object for the article.  If one exists, use it.  If one
+      // doesn't, insert one.  If one exists and we've tried to crawl it
+      // previously, make sure we're not trying again too soon.
+      Url url;
+      if (existingArticleUrls.containsKey(articleUrl)) {
+        url = existingArticleUrls.get(articleUrl);
+        if (url.hasLastCrawlStartTime()
+            && url.getLastCrawlStartTime() > (System.currentTimeMillis() - TimeUnit.HOURS.toMillis(4))) {
+          // Since the last crawl time has already been marked, we know we've
+          // we've tried to crawl this article before.  So unless we tried at
+          // least 4 hours ago, don't try again.  (But do try again after 4
+          // hours, because the Internet is unreliable and 4 hours is a
+          // reasonable amount of time to give folks to fix things...)
           continue;
         }
-      } catch (BiznessException | DatabaseSchemaException e) {
-        throw new RuntimeException("Could not read URL to crawl");
+      } else {
+        url = Urls.put(articleUrl, manifest.getStartUrl(0));
+      }
+
+      // Mark the crawl start time.
+      try {
+        url = url.toBuilder()
+            .setLastCrawlStartTime(System.currentTimeMillis())
+            .build();
+        Database.update(url);
+      } catch (DatabaseRequestException | DatabaseSchemaException e) {
+        e.printStackTrace();
+        continue;
       }
 
       // Save this article and its keywords.
       try {
-        crawl(url, false /* markCrawlStart */, false /* retain */);
+        crawl(url, false /* retain */);
         crawlHistorySiteBuilder.setArticlesCrawled(
             crawlHistorySiteBuilder.getArticlesCrawled() + 1);
 
@@ -125,14 +154,10 @@ public class ArticleCrawler implements Callable<Void> {
    *     processes, so that we don't have to re-download them whenever we want
    *     to retrain our vectors or neural network.
    */
-  public static Article crawl(Url url, boolean markCrawlStart, boolean retain)
+  public static Article crawl(Url url, boolean retain)
       throws FetchException, ParserException, RequiredFieldException, DatabaseSchemaException,
           DatabaseRequestException, BiznessException {
     System.err.println("Crawling: " + url.getUrl());
-
-    if (markCrawlStart) {
-      Urls.markCrawlStart(url);
-    }
 
     @SuppressWarnings("unused")
     Set<String> urls;
@@ -215,7 +240,7 @@ public class ArticleCrawler implements Callable<Void> {
     Iterable<Url> urls = Urls.put(urlStrings, "");
     List<Article> articles = Lists.newArrayList();
     for (Url url : urls) {
-      Article article = crawl(url, true /* markCrawlStart */, retain);
+      Article article = crawl(url, retain);
       if (article == null) {
         throw new BiznessException("URL is not an Article: " + url.getUrl());
       }

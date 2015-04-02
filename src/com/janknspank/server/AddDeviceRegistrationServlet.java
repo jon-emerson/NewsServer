@@ -9,8 +9,8 @@ import com.janknspank.bizness.GuidFactory;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.CoreProto.DeviceRegistration;
-import com.janknspank.proto.CoreProto.DeviceType;
+import com.janknspank.proto.PushNotificationProto.DeviceRegistration;
+import com.janknspank.proto.PushNotificationProto.DeviceType;
 import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")

@@ -12,7 +12,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 9;
+  static final int INPUT_NODES_COUNT = 10;
   static final int OUTPUT_NODES_COUNT = 1;
   static final int HIDDEN_NODES_COUNT = 9;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_" +
@@ -68,6 +68,9 @@ public final class NeuralNetworkScorer extends Scorer {
 
     // 8. Pop culture score.
     linkedHashMap.put("pop_culture", InputValuesGenerator.relevanceToPopCulture(article));
+
+    // 9. Murder Crime War score.
+    linkedHashMap.put("murder_crime_war", InputValuesGenerator.relevanceToMurderCrimeWar(article));
 
     return linkedHashMap;
   }

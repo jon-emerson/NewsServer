@@ -92,15 +92,19 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       System.out.println("Grabbing URLs for " + persona.getEmail() + " ...");
       User user = Personas.convertToUser(persona);
 
-      // HACK(jonemerson): Temporarily, we're deleting all articles so they'll
-      // be recrawled with the latest and greatest entity handling.
-//      if (persona.getEmail().equals("tom.charytoniuk@gmail.com")) {
-        System.out.println("DELETING CACHED ARTICLES");
-        int count = Database.with(Article.class).delete(
-            new QueryOption.WhereEquals("url", persona.getGoodUrlList()));
-        count += Database.with(Article.class).delete(
-            new QueryOption.WhereEquals("url", persona.getBadUrlList()));
-        System.out.println(count + " articles uncached!!!!");
+//      // HACK(jonemerson): Temporarily, we're deleting all articles so they'll
+//      // be recrawled with the latest and greatest entity handling.
+//      if (!persona.getEmail().equals("darrend@google.com")
+//          && !persona.getEmail().equals("jimbob_the_farmer@gmail.com")
+//          && !persona.getEmail().equals("panaceaa@gmail.com")
+//          && !persona.getEmail().equals("emerson1899@gmail.com")
+//          && !persona.getEmail().equals("tom.charytoniuk@gmail.com")) {
+//        System.out.println("DELETING CACHED ARTICLES");
+//        int count = Database.with(Article.class).delete(
+//            new QueryOption.WhereEquals("url", persona.getGoodUrlList()));
+//        count += Database.with(Article.class).delete(
+//            new QueryOption.WhereEquals("url", persona.getBadUrlList()));
+//        System.out.println(count + " articles uncached!!!!");
 //      }
 
       Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(

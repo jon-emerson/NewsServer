@@ -119,33 +119,6 @@ public class Urls {
   }
 
   /**
-   * Marks the passed URL as "has started being crawled".
-   * @return Url object with an updated last crawl start time, or null, if the
-   *     given Url has already been crawled by another thread
-   */
-  public static Url markCrawlStart(Url url) throws BiznessException, DatabaseSchemaException {
-    if (url == null) {
-      // Nothing to do!
-      return null;
-    }
-
-    url = url.toBuilder()
-        .setLastCrawlStartTime(System.currentTimeMillis())
-        .build();
-    try {
-      // Only update the URL if last_crawl_start_time hasn't yet been claimed
-      // by another crawling thread.
-      if (Database.update(url, new QueryOption.WhereNull("last_crawl_start_time"))) {
-        return url;
-      } else {
-        return null;
-      }
-    } catch (DatabaseRequestException e) {
-      throw new BiznessException("Error updating last crawl start time: " + e.getMessage(), e);
-    }
-  }
-
-  /**
    * Marks the passed URL as "has finished being crawled".
    * @return Url object with an updated last crawl finish time
    */

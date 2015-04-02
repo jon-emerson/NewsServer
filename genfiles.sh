@@ -11,6 +11,7 @@ protoc \
     src/com/janknspank/proto/enums.proto \
     src/com/janknspank/proto/interpreter.proto \
     src/com/janknspank/proto/local.proto \
+    src/com/janknspank/proto/pushnotification.proto \
     src/com/janknspank/proto/rank.proto \
     src/com/janknspank/proto/user.proto \
     -Isrc/ \

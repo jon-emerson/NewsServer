@@ -178,6 +178,14 @@ public class InputValuesGenerator {
     return score;
   }
 
+  public static double relevanceToMurderCrimeWar(Article article) {
+    ArticleFeature murderCrimeWarFeature =
+        ArticleFeatures.getFeature(article, FeatureId.TOPIC_MURDER_CRIME_WAR);
+    // Only value relevance greater than 66.7%.
+    return (murderCrimeWarFeature == null) ? 0 :
+        Math.max(0, murderCrimeWarFeature.getSimilarity() * 3 - 2);
+  }
+
   // Normalize any value to [0,1]
   // private static double sigmoid(double x) {
   //   return 1 / (1 + Math.exp(-x));

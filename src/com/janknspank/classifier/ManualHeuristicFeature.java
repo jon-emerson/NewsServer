@@ -170,7 +170,7 @@ public class ManualHeuristicFeature extends Feature {
     }
     double score = 0;
     Matcher matcher = pattern.matcher(text);
-    while (matcher.find()) {
+    while (matcher.find() && scoreRules.containsKey(matcher.group(1))) {
       score = Math.max(score, scoreRules.get(matcher.group(1)));
     }
     return score;

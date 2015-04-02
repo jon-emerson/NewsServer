@@ -41,8 +41,8 @@ public enum FeatureId {
   SPACE_EXPLORATION(10531, FeatureType.INDUSTRY, "Space Exploration"),
   LAW_PRACTICE(10532, FeatureType.INDUSTRY, "Law Practice"),
   MEDICINE(10533, FeatureType.INDUSTRY, "Medicine"),
-  FOREIGN_EXCHANGE(10534, FeatureType.INDUSTRY, "Foreign Exchange"), ////////////
-  EQUITY_INVESTING(10535, FeatureType.INDUSTRY, "Equity Investing"), ////////////
+  FOREIGN_EXCHANGE(10534, FeatureType.INDUSTRY, "Foreign Exchange"),
+  EQUITY_INVESTING(10535, FeatureType.INDUSTRY, "Equity Investing"),
   REAL_ESTATE(10536, FeatureType.INDUSTRY, "Real Estate"),
   MINING_AND_METALS(10537, FeatureType.INDUSTRY, "Mining and Metals"),
   OIL_AND_ENERGY(10538, FeatureType.INDUSTRY, "Oil and Energy"),
@@ -83,7 +83,9 @@ public enum FeatureId {
   TOPIC_ENTERTAINMENT(40001, FeatureType.TOPIC,
       "Entertainment: Movies, music, TV shows, Broadway, etc."),
   TOPIC_POLITICS(40002, FeatureType.TOPIC,
-      "Politics, both local, national and international.");
+      "Politics, both local, national and international."),
+  TOPIC_MURDER_CRIME_WAR(40003, FeatureType.TOPIC,
+      "Gross stuff: Crimes being committed, people hurt, people killed...");
 
   private final int id;
   private final FeatureType featureType;

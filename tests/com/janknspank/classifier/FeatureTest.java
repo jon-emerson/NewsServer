@@ -20,11 +20,19 @@ public class FeatureTest {
 
   @Test
   public void testArchitectureAndPlanning() throws Exception {
-    assertEquals(10, Feature.getBoost(
+    assertEquals(4, Feature.getBoost(
         FeatureId.ARCHITECTURE_AND_PLANNING,
         Article.newBuilder().setUrl("http://www.designboom.com/architecture/"
             + "francine-houben-mecanoo-interview-12-17-2014/")));
-    assertEquals(2, Feature.getBoost(
+    assertEquals(4, Feature.getBoost(
+        FeatureId.ARTS,
+        Article.newBuilder().setUrl("http://www.designboom.com/art/"
+            + "urban-shapes-sebastian-weiss-03-06-2015/")));
+    assertEquals(1, Feature.getBoost(
+        FeatureId.ARTS,
+        Article.newBuilder().setUrl("http://www.designboom.com/architecture/"
+            + "francine-houben-mecanoo-interview-12-17-2014/")));
+    assertEquals(0, Feature.getBoost(
         FeatureId.ARCHITECTURE_AND_PLANNING,
         Article.newBuilder().setUrl("http://www.designboom.com/art/"
             + "urban-shapes-sebastian-weiss-03-06-2015/")));

@@ -7,8 +7,6 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
-import com.janknspank.proto.CoreProto.Distribution;
-import com.janknspank.rank.DistributionBuilder;
 
 /**
  * Abstract Feature that judges articles' relevance to topics by using TF-IDF
@@ -27,13 +25,13 @@ public final class VectorFeature extends Feature {
           .build();
 
   private final Vector vector;
-  private final Distribution distribution;
+  private final IndustryVectorNormalizer normalizer;
 
   public VectorFeature(FeatureId featureId) throws ClassifierException {
     super(featureId);
 
     vector = Vector.fromFile(getVectorFile(featureId));
-    distribution = DistributionBuilder.fromFile(getDistributionFile(featureId));
+    normalizer = IndustryVectorNormalizer.fromFile(getNormalizerFile(featureId));
   }
 
   /**
@@ -42,8 +40,7 @@ public final class VectorFeature extends Feature {
    */
   @Override
   public double score(ArticleOrBuilder article) throws ClassifierException {
-    return DistributionBuilder.projectQuantile(
-        distribution,
+    return normalizer.getNormalizedScore(
         rawScore(this.featureId, vector, article, Vector.fromArticle(article)));
   }
 
@@ -68,8 +65,8 @@ public final class VectorFeature extends Feature {
     return new File(getVectorDirectory(featureId), "/feature.vector");
   }
 
-  static File getDistributionFile(FeatureId featureId) throws ClassifierException {
-    return new File(getVectorDirectory(featureId), "/feature.distribution");
+  static File getNormalizerFile(FeatureId featureId) throws ClassifierException {
+    return new File(getVectorDirectory(featureId), "/feature.normalizationdata");
   }
 
   /**
