@@ -24,7 +24,7 @@ import com.janknspank.rank.NeuralNetworkScorer;
 
 @AuthenticationRequired(requestMethod = "POST")
 @ServletMapping(urlPattern = "/v1/follow_linked_in_contacts")
-public class FollowLinkedInContacts extends StandardServlet {
+public class FollowLinkedInContactsServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws RequestException, DatabaseSchemaException, DatabaseRequestException, JSONException,

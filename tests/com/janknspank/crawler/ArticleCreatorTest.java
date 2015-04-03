@@ -144,6 +144,9 @@ public class ArticleCreatorTest {
     assertEquals("Study: Oil Price Downturn Creates Need for 'Cost Culture' in Industry",
         ArticleCreator.getTitle(getDocumentWithTitle(
             "RIGZONE - Study: Oil Price Downturn Creates Need for 'Cost Culture' in Industry")));
+    assertEquals("Candy Crush Offices by Adolfsson & Partners, Stockholm",
+        ArticleCreator.getTitle(getDocumentWithTitle(
+            "Candy Crush Offices by Adolfsson & Partners, Stockholm | urdesign magazine")));
   }
 
   @Test

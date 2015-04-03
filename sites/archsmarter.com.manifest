@@ -1,0 +1,28 @@
+root_domain: "archsmarter.com"
+start_url: "http://archsmarter.com/"
+paragraph_selector: ".entry-content > p"
+paragraph_selector: ".entry-content > h2"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+-[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://archsmarter.com/learn-to-code-resources/"
+    article_url: "http://archsmarter.com/manage-project-data/"
+    article_url: "http://archsmarter.com/which-architectural-software/"
+    article_url: "http://archsmarter.com/excel-for-architects-part1/"
+    article_url: "http://archsmarter.com/revit-macros/"
+    non_article_url: "http://archsmarter.com/category/tools/"
+    non_article_url: "http://archsmarter.com/author/michaelk/"
+    non_article_url: "http://archsmarter.com/tag/revit/"
+    non_article_url: "http://archsmarter.com/tag/revit/page/2/"
+    non_article_url: "http://archsmarter.com/page/2/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 0
+}
