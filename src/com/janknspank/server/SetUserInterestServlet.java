@@ -134,7 +134,7 @@ public class SetUserInterestServlet extends StandardServlet {
 
     // Write the filtered list plus a new Interest that represents the
     // parameters received from the client.
-    Database.with(User.class).set(user, "interest",
+    user = Database.with(User.class).set(user, "interest",
         Iterables.concat(
             existingInterests,
             ImmutableList.of(newInterest)));

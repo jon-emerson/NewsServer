@@ -1,5 +1,8 @@
 package com.janknspank.dom.parser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.ext.Attributes2Impl;
@@ -10,6 +13,9 @@ import org.xml.sax.ext.Attributes2Impl;
  * attributes.
  */
 class LenientElementInterpreter {
+  private static final Pattern ATTRIBUTE_ASSIGNMENT_PATTERN =
+      Pattern.compile("(\\s|\\n|\\r|\\xA0)+=(\\s|\\n|\\r|\\xA0)*");
+
   private String tag = null;
   private boolean selfClosing = false;
   private Attributes2Impl attributes = new Attributes2Impl();
@@ -68,6 +74,21 @@ class LenientElementInterpreter {
             state = InterpreterState.ENIGMATIC_VOID;
             break;
           case ATTRIBUTE_NAME:
+            // NOTE(jonemerson): This is a hack to support sites that illegally
+            // put spaces around their attribute name -> attribute value equal
+            // signs.  If we notice that someone's doing this, just eat the
+            // equal sign and put the finite state machine directly into the
+            // attribute value state.
+            Matcher attributeAssignmentMatcher =
+                ATTRIBUTE_ASSIGNMENT_PATTERN.matcher(element.substring(i));
+            if (attributeAssignmentMatcher.find()) {
+              currentAttributeName = b.toString();
+              b.setLength(0);
+              state = InterpreterState.ATTRIBUTE_VALUE;
+              i += (attributeAssignmentMatcher.group(0).length()) - 1;
+              break;
+            }
+
             String attributeName = b.toString();
             attributes.addAttribute(
                 /* uri */ "",
@@ -100,6 +121,12 @@ class LenientElementInterpreter {
         currentAttributeName = b.toString();
         b.setLength(0);
         state = InterpreterState.ATTRIBUTE_VALUE;
+        // Ignore any whitespace after the = and before the actual attribute
+        // value.
+        while (i < (element.length() - 1)
+            && Character.isWhitespace(element.charAt(i + 1))) {
+          i++;
+        }
       } else if (c == '"' && b.length() == 0 && state == InterpreterState.ATTRIBUTE_VALUE) {
         state = InterpreterState.ATTRIBUTE_VALUE_INSIDE_DOUBLE_QUOTE;
       } else if (c == '"' && state == InterpreterState.ATTRIBUTE_VALUE_INSIDE_DOUBLE_QUOTE) {

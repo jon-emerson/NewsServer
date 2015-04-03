@@ -1,0 +1,20 @@
+root_domain: "yourstory.com"
+start_url: "http://yourstory.com/"
+paragraph_selector: ".entry-content > p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://yourstory.com/2015/04/app-fridays-yelo/"
+    article_url: "http://yourstory.com/2015/04/tips-for-corporates-to-engage-startups/"
+    article_url: "http://yourstory.com/2015/04/standard-essential-patents/"
+    article_url: "http://yourstory.com/2015/03/validate-demand-business/"
+    article_url: "http://yourstory.com/2015/03/green-business-2015/"
+    non_article_url: "http://yourstory.com/ys-startup-advice/"
+    non_article_url: "http://yourstory.com/author/guest-author/"
+    non_article_url: "http://yourstory.com/tag/social-information-processing/"
+    non_article_url: "http://yourstory.com/team-ys/"
+    non_article_url: "http://yourstory.com/ys-in-depth/ys-research/"
+  }
+}
