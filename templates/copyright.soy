@@ -14,18 +14,47 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/legal.css">
     <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
   <body>
     <div style="width:100%; margin:0;">
-    {call .copyright data="all" /}
+      {call .navbar data="all" /}
+      {call .policy data="all" /}
     </div>
   <body>
 {/template}
 
 /**
+ * Renders the nav bar
+ */
+{template .navbar}
+<div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Spotter</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/terms" class="btn btn-default">About Us</a></li>
+        <li><a href="/contact" class="btn btn-default">Contact</a></li>
+        <li><a href="/terms" class="btn btn-default">Terms</a></li>
+        <li><a href="/privacy" class="btn btn-default">Privacy</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+{/template}
+
+/**
  * Renders body of the copyright policy
  */
-{template .copyright}
+{template .policy}
 <main>
   <section role="policy">
     <div class="container">

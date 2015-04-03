@@ -28,3 +28,9 @@ a {
   text-decoration: underline;
   color: #45504c;
 }
+
+@media (max-width: 767px) {
+  main section {
+    text-align: left;
+  }
+}

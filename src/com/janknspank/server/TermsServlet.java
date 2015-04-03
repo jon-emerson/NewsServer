@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.database.DatabaseSchemaException;
 
-@ServletMapping(urlPattern = "/v1/terms")
+@ServletMapping(urlPattern = "/terms")
 public class TermsServlet extends StandardServlet {
   /**
    * Returns any Soy data necessary for rendering the .main template for this

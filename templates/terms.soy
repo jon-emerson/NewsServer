@@ -14,18 +14,47 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/legal.css">
     <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
   <body>
     <div style="width:100%; margin:0;">
-    {call .terms data="all" /}
+      {call .navbar data="all" /}
+      {call .policy data="all" /}
     </div>
   <body>
 {/template}
 
 /**
+ * Renders the nav bar
+ */
+{template .navbar}
+<div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Spotter</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/terms" class="btn btn-default">About Us</a></li>
+        <li><a href="/contact" class="btn btn-default">Contact</a></li>
+        <li><a href="/privacy" class="btn btn-default">Privacy</a></li>
+        <li><a href="/copyright" class="btn btn-default">Copyright</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+{/template}
+
+/**
  * Renders body of the terms
  */
-{template .terms}
+{template .policy}
 <main>
   <section role="policy">
     <div class="container">
@@ -76,7 +105,7 @@
   own or control. We don’t endorse or assume responsibility for those things, either.</p>
 
   <h2>Privacy</h2>
-  <p>Our <a href="/v1/privacy">Privacy Policy</a> explains our collection and use of information 
+  <p>Our <a href="/privacy">Privacy Policy</a> explains our collection and use of information 
   on the service, including information you may consider personal. You consent to the information 
   practices described in that policy as it may be updated from time to time.</p>
   
@@ -96,7 +125,7 @@
   <h2>Copyright</h2>
   Spotter complies with the Digital Millennium Copyright Act. We respond to takedown notices and 
   have a policy of terminating repeat infringers when appropriate. For more information, 
-  see our <a href="/v1/copyright">Copyright Policy.</a>
+  see our <a href="/copyright">Copyright Policy.</a>
   
   <h2>Changes to Our Service</h2>
   <p>Spotter is a dynamic product that is always being improved. As a result, we may change,
@@ -144,7 +173,7 @@
   personal jurisdiction in those courts.</p>
   
   <h2>Entire Agreement</h2>
-  <p>These Terms and our <a href="/v1/privacy">Privacy Policy</a> constitute the entire agreement 
+  <p>These Terms and our <a href="/privacy">Privacy Policy</a> constitute the entire agreement 
   between you and Spotter. If any provision of these Terms is found to be unenforceable, 
   the remaining provisions will continue to be in full force and effect.</p>
   

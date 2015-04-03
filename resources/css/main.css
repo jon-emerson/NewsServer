@@ -1,24 +1,24 @@
 @font-face {
-  font-family: Frutiger;
-  src: url('/resources/css/FrutigerLTStd-Roman.otf');
+  font-family: Overlock;
+  src: url('/resources/css/Overlock-Bold.ttf');
 }
 
 body {
-    line-height: 1.5em;
-    font-family: 'Frutiger', 'Myriad Web Pro', sans-serif;
-    color: #45504c;
-    font-size: 18px;
+ line-height: 1.5em;
+  font-family: 'PT Sans', sans-serif;
+  color: #45504c;
+  font-size: 18px;
 }
 
 html,body {
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
 p {
-    font-weight: 100;
-    margin-top: 24px;
+  font-weight: 100;
+  margin-top: 24px;
 }
 
 a {
@@ -27,93 +27,90 @@ a {
 }
 
 a:hover {
-  color: white;
+  color: #FF5352;
 }
 
 pre {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 /* Nav */
-.navbar-brand {
-    background: url("/public/images/logo.png") 0 0 no-repeat;
-    background-size: 190px 37px;
-    width: 190px;
-    height: 68px;
-    padding-top: 20px;
-    margin-left: 18px;
-    background-position: center;
+.navbar-default .navbar-brand {
+  background: url("/resources/img/app-icon2@2x.png") left center no-repeat;
+  background-size: 54px 54px;
+  width: 190px;
+  height: 68px;
+  padding: 22px 0px 0px 64px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #111;
+  font-family: 'Overlock', 'Myriad Web Pro', sans-serif;
+  text-decoration: none;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #FF5352
+}
+
+.navbar {
+  border: 0px;
+  border-radius: 0px;
 }
 
 .navbar-default {
-    background-color: rgba(255,255,255,.90);
-    border-color:  #e7e7e7;
-    font-size: 14px;
+  background-color: rgba(255,255,255,.90);
+  border-bottom: 1px solid #e7e7e7;
+  font-size: 14px;
 }
 
 .navbar-nav > li > a {
-    padding-top: 6px;
-    margin-top: 14px;
-    padding-bottom: 6px;
-    margin-bottom: 14px;
-    margin-left: 18px;
-    line-height: 28px;
-    border-width: 0px;
-    background-color: transparent;
+  padding-top: 6px;
+  margin-top: 14px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  margin-left: 18px;
+  line-height: 28px;
+  border-width: 0px;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: #FF5352;
 }
 
 .navbar-toggle {
-    margin-top: 16px;
+  margin-top: 16px;
 }
 
 a.btn-primary,
 .navbar-nav > li > a.btn-primary {
-    color: #fff;
-    background-color: #2098F6;
-    font-weight: 100;
-    border-width: 0px;
-    padding-right: 40px;
-    background-image: url("/public/images/right_arrow_white.png");
-    background-position: 93% 50%;
-    background-repeat: no-repeat;
-    background-size: 12px 20px;
+  color: #fff;
+  background-color: #2098F6;
+  font-weight: 100;
+  border-width: 0px;
+  padding-right: 40px;
+  background-image: url("/public/images/right_arrow_white.png");
+  background-position: 93% 50%;
+  background-repeat: no-repeat;
+  background-size: 12px 20px;
 }
 
 .navbar-nav > li > a.btn-primary:hover,
 .navbar-nav > li > a.btn-primary:focus,
 .navbar-nav > li > a.btn-primary:active,
 .navbar-nav > li > a.btn-primary.active {
-    color: #fff;
-    background-color: #3D8DDE;
-    border-width: 0px;
-}
-
-@media (max-width: 767px) {
-  .navbar-nav > li > a.btn-primary,
-      .navbar-nav > li > a.btn {
-    padding: 5px 15px 5px 25px;
-    margin-right: 18px;
-    display: -webkit-box;
-  }
-  .navbar-nav > li > a {
-      text-align: center;
-      background-color: #fff;
-  }
+  color: #fff;
+  background-color: #3D8DDE;
+  border-width: 0px;
 }
 
 .jumbotron {
-    /* background: -webkit-linear-gradient(top, #5A5B67 0%,#3C3E47 50%,#202127 100%);
-    background: linear-gradient(4deg,
-        #5A5B67 0%,
-        #3C3E47 50%,
-        #202127 100%),
-        #202127; */
   height: 100%;
   max-height: 780px;
   margin: 0px;
   padding: 0px;
-  /* background-position: 50% 50%; */
-  /* background-size: 100% 100%; */
   background: url("/resources/img/perspective-iphone6plus2.png") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -130,16 +127,17 @@ a.btn-primary,
 }
 
 .jumbotron h1 {
-    font-size: 36px;
-    font-weight: 500;
-    color: #111;
+  font-size: 36px;
+  font-weight: 500;
+  color: #111;
+  font-family: 'Overlock', 'Myriad Web Pro', sans-serif;
 }
 
 .jumbotron h2 {
-    margin-top: 18px;
-    font-size: 18px;
-    font-weight: lighter;
-    color: #111;
+  margin-top: 18px;
+  font-size: 16px;
+  font-weight: lighter;
+  color: #111;
 }
 
 #leading-screenshot {
@@ -150,7 +148,8 @@ a.btn-primary,
 #app-icon {
   width: 120px;
   height: 120px;
-  margin-top: 38px;
+  margin-top: 12px;
+  margin-right: 12px;
   float: left;
 }
 
@@ -159,10 +158,9 @@ a.btn-primary,
 }
 
 .logo-wrapper {
-  float: left;
   display: inline;
   margin-top: 38px;
-  margin-left: 16px;
+  margin-left: 14px;
 }
 
 .get-the-app-wrapper {
@@ -202,7 +200,7 @@ a.btn-primary,
   display: block;
   width: 100%;
   text-align: right;
-  margin-top: 32px;
+  margin-top: 16px;
   font-size: 14px;
 }
 
@@ -268,12 +266,8 @@ a.btn-primary,
 }
 
 #section-1-img {
-    width: 312px;
-    height: 517px;
-}
-
-#section-2 {
-  
+  width: 312px;
+  height: 517px;
 }
 
 #section-2-img {
@@ -318,7 +312,6 @@ a.btn-primary,
 
 #section-5-img {
   width: 180px;
-  height: 207px;
 }
 
 #section-5-title {
@@ -369,283 +362,21 @@ a.btn-primary,
   text-align: center;
 }
 
-@media (min-width: 992px) {
-    main section .wrapper {
-        padding: 84px 0px;
-    }
-
-    main section .wrapper-small {
-        padding: 84px 0px 24px 0px;
-    }
-
-    h3 {
-        margin-top: 180px;
-    }
-
-    #section-3-title {
-      margin-top: 50px;
-    }
-
-    h4 {
-        margin: 40px 0px 30px 0px;
-        font-weight: bold;
-        font-size: 32px;
-    }
-
-    .code-snippet {
-        margin-top: 50px;
-    }
-    
-    #section-3-img {
-      width: 550px;
-      height: 480px;
-    }
+.footer-p {
+  padding: 0px 0px 48px 0px;
+  float: left;
+  font-size: 18px;
+  max-width: 340px;
+  margin: 6px 0px 12px 0px;
 }
 
-@media (max-width:767px) {
-    main section {
-      text-align: center;
-    }
-  
-    main section .wrapper {
-        padding: 24px 10px;
-        text-align: center;
-        margin-top: 10%;
-    }
-
-    .padded-img {
-        margin: 20px 0px 0px 0px;
-    }
-    
-    #section-1-img {
-      margin: 20px 0px 0px -80px;
-    }
-
-    h4 {
-        margin: 10px 0px 30px 0px;
-        font-size: 28px;
-    }
-
-    .container-fluid>.navbar-header {
-        margin-left: 0px;
-    }
-
-    .navbar-nav {
-        margin: 0px;
-    }
-
-    p {
-      font-size: 14px;
-    }
-
-    .section-2-wrapper {
-      padding: 32px 0px 0px 0px;
-    }
-    
-    .section-3-wrapper {
-      padding: 32px 0px 0px 0px;
-    }
-    
-    .link-texting-explanation-label {
-      display: none;
-    }
-    
-    .link-texting-wrapper-right {
-      display: none;
-    }
-    
-    .brand-wrapper {
-      margin: 12px auto 0px auto;
-      width: 260px;
-      height: 85%;
-    }
-    
-    #app-icon {
-      width: 60px;
-      height: 60px;
-      margin-top: 16px;
-    }
-    
-    .logo-wrapper {
-      margin-top: 16px;
-    }
-    
-    .bottom-aligner {
-      display: none;
-    }
-    
-    .get-the-app-wrapper {
-      display: block;
-      margin: 0px auto 0px auto;
-      width: 135px;
-    }
-    
-    .jumbotron h1 {
-        font-size: 36px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-    
-    .jumbotron h2 {
-        margin-top: 0px;
-    }
-
-    .inline-btn {
-        margin-top: 0px;
-    }
-    
-    #section-3-img {
-      margin-bottom: 28px;
-      width: 550px;
-      max-width: 96%;
-    }
-    
-    #section-4-wrapper {
-       background-color:rgba(0, 0, 0, 0.87);
-       padding: 0px;
-       margin: 28px 0px 300px 0px;
-    }
-    
-    #section-4 {
-      background-image: url("/resources/img/realistic-commute-narrow1.jpg");
-    }
-    
-    #bottom-text-link-row {
-      display: none;
-    }
-    
-    #get-spotter-paragraph {
-      display: none;
-    }
+.footer-p small {
+  font-size: 12px;
+  opacity: 0.5;
 }
 
-@media (min-width: 992px) and (max-width:1200px) {
-  #section-4-wrapper {
-    padding: 0px 0px 254px 0px;
-  }
-}
-
-@media (min-width:768px) and (max-width: 991px) {
-    main section .wrapper {
-        padding: 32px 10px 36px;
-    }
-
-    main section .wrapper-small {
-        padding: 24px 10px 24px;
-        text-align: center;
-    }
-
-    .padded-img {
-        margin: 20px 0px 0px 0px;
-    }
-
-    h3 {
-        margin-top: 180px;
-    }
-
-    h4 {
-        margin: 10px 0px 30px 0px;
-    }
-
-    .container {
-        width: 766px;
-    }
-
-    .brand-wrapper {
-      margin-top: 0px;
-    }
-
-    #section-3-img {
-      width: 550px;
-      height: 480px;
-    }
-    
-    #section-3-title {
-      margin-top: 24px;
-    }
-    
-    #section-4-wrapper {
-      padding: 0px 0px 184px 0px;
-    }
-}
-
-.content-block {
-    padding: 60px 0px;
-    height: 100%;
-}
-
-.content-primary {
-    background: linear-gradient(169deg,#175587,#5fc6fc);
-    background-color: #175587;
-}
-
-.form-container {
-    border-radius: 5px;
-    -webkit-box-shadow: 0 2px 3px rgba(0,0,0,.3);
-    box-shadow: 0 2px 3px rgba(0,0,0,.3);
-    background: #FFF;
-    margin-bottom: 40px;
-}
-
-.form-container header {
-    padding: 20px 20px 0;
-}
-
-.form header .logo {
-    margin: 0 auto 20px;
-    height: 37px;
-    width: 139px;
-}
-
-.form header .logo a {
-    background: url("/public/images/logo.png") 0 0 no-repeat;
-    background-size: 139px 37px;
-    display: block;
-    text-indent: -3000px;
-    overflow: hidden;
-    text-decoration: none;
-    height: 37px;
-    width: 139px;
-}
-
-.form ul {
-    margin: 0;
-    padding: 0 30px 0px;
-    list-style-type: none;
-}
-
-.form ul li {
-    margin-bottom: 20px;
-}
-
-.form ul li label {
-    display: block;
-    font-size: 14px;
-    color: #7b8488;
-    font-weight: 100;
-}
-
-.form-container footer {
-    background: #f7f7f7;
-    border-radius: 0 0 3px 3px;
-    padding: 14px 30px 10px 30px;
-    height: 60px;
-}
-
-.text-small {
-    font-size: 15px;
-}
-
-.text-translucent {
-    opacity: 0.5;
-}
-
-.text-light {
-    color: #FFF;
-}
-
-.bold {
-    font-weight: normal;
+.mobile-brand-wrapper {
+  display: none;
 }
 
 .nav-footer {
@@ -653,18 +384,6 @@ a.btn-primary,
     background-color: #333333;
     color: #FFF;
     margin: 0px;
-}
-
-.footer-p {
-    padding: 12px 0px 36px 0px;
-    float: left;
-    font-size: 18px;
-    max-width: 340px;
-}
-
-.footer-p small {
-    font-size: 12px;
-    opacity: 0.5;
 }
 
 .fb-like {
@@ -675,30 +394,242 @@ a.btn-primary,
     position:relative;
 }
 
-.btn-transparent {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.4);
+@media (min-width: 992px) {
+  main section .wrapper {
+    padding: 84px 0px;
+  }
+
+  main section .wrapper-small {
+    padding: 84px 0px 24px 0px;
+  }
+
+  h3 {
+    margin-top: 180px;
+  }
+
+  #section-3-title {
+    margin-top: 50px;
+  }
+
+  h4 {
+    margin: 40px 0px 30px 0px;
+    font-weight: bold;
+    font-size: 32px;
+  }
+
+  .code-snippet {
+    margin-top: 50px;
+  }
+
+  #section-3-img {
+    width: 550px;
+    height: 480px;
+  }
 }
 
-.btn-transparent:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #fff;
+@media (max-width:767px) {
+  .navbar-default .navbar-brand {
+    margin-left: 16px;
+  }
+  
+  main section {
+    text-align: center;
+  }
+
+  main section .wrapper {
+    padding: 24px 10px;
+    text-align: center;
+    margin-top: 10%;
+  }
+
+  .navbar-nav > li > a.btn-primary,
+  .navbar-nav > li > a.btn {
+    padding: 5px 15px 5px 25px;
+    margin-right: 18px;
+    display: -webkit-box;
+  }
+
+  .navbar-nav > li > a {
+    text-align: center;
+  }
+
+  .padded-img {
+    margin: 20px 0px 0px 0px;
+  }
+
+  #section-1-img {
+    margin: 20px 0px 0px -80px;
+  }
+
+  h4 {
+    margin: 10px 0px 30px 0px;
+    font-size: 28px;
+  }
+
+  .container-fluid>.navbar-header {
+    margin-left: 0px;
+  }
+
+  .navbar-nav {
+    margin: 0px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .section-2-wrapper {
+    padding: 32px 0px 0px 0px;
+  }
+
+  .section-3-wrapper {
+    padding: 32px 0px 0px 0px;
+  }
+
+  .link-texting-explanation-label {
+    display: none;
+  }
+
+  .link-texting-wrapper-right {
+    display: none;
+  }
+
+  .mobile-brand-wrapper {
+    display: block;
+    width: 100%;
+    height: 85%;
+    text-align: center;
+  }
+
+  .mobile-brand-top-line {
+    width: 212px;
+    height: 60px;
+    margin: 0 auto;
+  }
+
+  .mobile-description {
+    margin-top: 8px;
+  }
+
+  .brand-wrapper {
+    display: none;
+    margin: 12px auto 0px auto;
+    width: 92%;
+    height: 85%;
+  }
+
+  #app-icon {
+    width: 60px;
+    height: 60px;
+    margin-top: 8px;
+    display: inline;
+  }
+
+  .logo-wrapper {
+    margin-top: 16px;
+  }
+
+  .bottom-aligner {
+    display: none;
+  }
+
+  .get-the-app-wrapper {
+    display: block;
+    margin: 0px auto 0px auto;
+    width: 135px;
+  }
+
+  .jumbotron h1 {
+    font-size: 36px;
+    margin-top: 16px;
+    margin-bottom: 0px;
+    float: left;
+  }
+
+  .jumbotron h2 {
+    margin-top: 0px;
+  }
+
+  .inline-btn {
+    margin-top: 0px;
+  }
+
+  #section-3-img {
+    margin-bottom: 28px;
+    width: 550px;
+    max-width: 96%;
+  }
+
+  #section-4-wrapper {
+     background-color:rgba(0, 0, 0, 0.87);
+     padding: 0px;
+     margin: 28px 0px 300px 0px;
+  }
+
+  #section-4 {
+    background-image: url("/resources/img/realistic-commute-narrow1.jpg");
+  }
+
+  #bottom-text-link-row {
+    display: none;
+  }
+
+  #get-spotter-paragraph {
+    display: none;
+  }
+
+  .footer-p {
+    text-align: center;
+    width: 100%;
+  }
 }
 
-.try-it-button {
-    background-color: #FFBB34;
-    padding: 10px;
-    border-radius: 3px;
+@media (min-width: 992px) and (max-width:1200px) {
+  #section-4-wrapper {
+    padding: 0px 0px 254px 0px;
+  }
 }
 
-.try-it-button:hover {
-    text-decoration: underline;
-    color: #fff;
-    opacity: 0.9;
-}
+@media (min-width:768px) and (max-width: 991px) {
+  main section .wrapper {
+    padding: 32px 10px 36px;
+  }
 
-.divider {
-    height: 2px;
-    background-color: #EEEEEE;
-    margin-top: 34px;
+  main section .wrapper-small {
+    padding: 24px 10px 24px;
+    text-align: center;
+  }
+
+  .padded-img {
+    margin: 20px 0px 0px 0px;
+  }
+
+  h3 {
+    margin-top: 180px;
+  }
+
+  h4 {
+    margin: 10px 0px 30px 0px;
+  }
+
+  .container {
+    width: 766px;
+  }
+
+  .brand-wrapper {
+    margin-top: 0px;
+  }
+
+  #section-3-img {
+    width: 550px;
+    height: 480px;
+  }
+
+  #section-3-title {
+    margin-top: 24px;
+  }
+
+  #section-4-wrapper {
+    padding: 0px 0px 184px 0px;
+  }
 }

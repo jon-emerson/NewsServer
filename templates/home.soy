@@ -9,6 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>{$title}</title>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
     <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/resources/css/animate.css" rel="stylesheet" type="text/css">
@@ -62,18 +63,29 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <div class="brand-wrapper">
-              <img id="app-icon" src="resources/img/app-icon@2x.png">
-              <div class="logo-wrapper">
-                <h1>Spotter</h1>
-                <h2>News for your career</h2>
+            <div class="mobile-brand-wrapper">
+              <div class="mobile-brand-top-line">
+                <img id="app-icon" src="resources/img/app-icon2@2x.png">
+                <h1 id="spotter-logo">Spotter</h1>
               </div>
+              <div class="mobile-description">
+                Business news, personalized
+              </div>
+            </div>
+            <div class="brand-wrapper">
+              <img id="app-icon" src="resources/img/app-icon2@2x.png">
+              <div class="logo-wrapper">
+                <h1 id="spotter-logo">Spotter</h1>
+                <h2>Stay on top of <b>companies, people</b>, and <b>industries</b> that matter to you</h2>
+              </div>
+            </div>
+            <div class="description-wrapper">
             </div>
           </div>
           <div class="col-sm-6">
               <div class="bottom-aligner"></div>
               <div class="get-the-app-wrapper">
-                <a href="TODO: app store link">
+                <a href="http://itunes.apple.com/app/id966430113">
                   <div class="get-the-app-button">
                     <img class="app-store-badge" src="resources/img/Download_on_the_App_Store_Badge_US-UK_135x40.svg">
                   </div>
@@ -121,8 +133,8 @@
       <div class="section-2-wrapper">
         <div class="row">
           <div class="col-md-6 col-md-offset-1 col-sm-6">
-            <h3>Follow companies, people, and industries</h3>
-            <p>Spotter will let you know when they make the news.</p>
+            <h3>Follow companies, people, and&nbsp;industries</h3>
+            <p>Spotter understand's when things you care about make the news.</p>
           </div>
           <div class="col-md-3 col-sm-3">
             <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
@@ -171,13 +183,13 @@
         <div class="row">
           <div class="col-md-12">
             <div class="text-center wow fadeIn" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
-              <img id="section-5-img" class="padded-img" src="resources/img/section-5-welcome-visual@2x.png">
+              <img id="section-5-img" class="padded-img" src="resources/img/app-icon2@2x.png">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <h4 id="section-5-title">Be more informed,<br /> in less time</h4>
+            <h4 id="section-5-title">Be better informed,<br /> in less time</h4>
           </div>
         </div>
       </div>
@@ -191,7 +203,7 @@
           <div class="col-md-12">
             <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
               <h4>Get Spotter</h4>
-              <a href="TODO: app store link">
+              <a href="http://itunes.apple.com/app/id966430113">
                 <div class="get-the-app-button-centered">
                   <img class="app-store-badge" src="resources/img/Download_on_the_App_Store_Badge_US-UK_135x40.svg">
                 </div>
@@ -249,6 +261,29 @@
  * Footer
  */
 {template .footer}
+<footer class="nav-footer navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/about" class="footer-link">About</a></li>
+                        <li><a href="/contact" class="footer-link">Contact</a></li>
+                        <li><a href="/privacy" class="footer-link">Privacy policy</a></li>
+                        <li><a href="/terms" class="footer-link">Terms</a></li>
+                    </ul>
+                    <p class="footer-p">
+                        Business news, personalized
+                        <br>
+                        <small>© 2015 Spotter Technologies Inc.</small>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {lb}
   var js, fjs = d.getElementsByTagName(s)[0];
