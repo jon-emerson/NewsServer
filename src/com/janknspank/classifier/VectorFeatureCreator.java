@@ -147,7 +147,8 @@ public class VectorFeatureCreator {
     for (Map.Entry<Article, Vector> articleVectorEntry : getArticleVectorMap().entrySet()) {
       Article article = articleVectorEntry.getKey();
       Vector articleVector = articleVectorEntry.getValue();
-      double score = VectorFeature.rawScore(this.featureId, vector, article, articleVector);
+      double boost = 0.05 * Feature.getBoost(featureId, article);
+      double score = VectorFeature.rawScore(this.featureId, vector, boost, articleVector);
       builder.add(score);
     }
     return builder;

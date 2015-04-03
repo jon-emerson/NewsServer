@@ -58,6 +58,31 @@ public class Sessions {
   }
 
   /**
+   * Officially sanctioned method for getting a user session from a Facebook
+   * profile response.
+   */
+  public static Session createFromFacebookUser(User user, com.restfb.types.User fbUser)
+      throws BiznessException, DatabaseSchemaException {
+    // Validate the data looks decent.
+    if (!user.getFacebookId().equals(fbUser.getId())) {
+      throw new BiznessException("User doesn't match Facebook User");
+    }
+
+    // Insert a new Session object and return it.
+    try {
+      Session session = Session.newBuilder()
+          .setSessionKey(createSessionKey(user))
+          .setUserId(user.getId())
+          .setCreateTime(System.currentTimeMillis())
+          .build();
+      Database.insert(session);
+      return session;
+    } catch (DatabaseRequestException e) {
+      throw new BiznessException("Could not insert session object", e);
+    }
+  }
+
+  /**
    * Officially sanctioned method for getting a user session from a logged-in
    * session key.
    * @throws RequestException if the session doesn't exist or is invalid

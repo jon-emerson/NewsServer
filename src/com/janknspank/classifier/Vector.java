@@ -94,13 +94,11 @@ public class Vector {
    * A map of this document Vector's TF-IDF versus a specific universe Vector.
    * Typically there will only be 1 universe.
    */
-  private final Map<Vector, Map<String, Double>> tfIdfAgainstUniverseMap =
-      Maps.newHashMap();
+  private final Map<Vector, Map<String, Double>> tfIdfAgainstUniverseMap = Maps.newHashMap();
 
   public Vector(VectorData data) {
     documentCount = data.hasDocumentCount() ? data.getDocumentCount() : 1;
-    for (int i = 0; i < data.getWordFrequencyCount(); i++) {
-      WordFrequency w = data.getWordFrequency(i);
+    for (WordFrequency w : data.getWordFrequencyList()) {
       wordFrequencyMap.add(w.getWord(), w.getFrequency());
       numDocumentOccurencesMap.add(w.getWord(), w.getDocumentOccurences());
     }

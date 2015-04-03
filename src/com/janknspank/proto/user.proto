@@ -25,8 +25,7 @@ message User {
   ];
 
   optional string email = 4 [
-    (required) = YES,
-    (storage_method) = UNIQUE_INDEX,
+    (storage_method) = INDEX,
     (string_length) = 100
   ];
 
@@ -35,7 +34,13 @@ message User {
   ];
 
   optional string facebook_id = 6 [
+    (storage_method) = INDEX,
     (string_length) = 25
+  ];
+
+  optional string facebook_access_token = 19 [
+    (string_length) = 500,
+    (client_serialization) = EXCLUDE
   ];
 
   optional int64 create_time = 7 [
@@ -45,8 +50,6 @@ message User {
   optional int64 last_login_time = 8;
 
   optional string linked_in_access_token = 9 [
-    (required) = YES,
-    (storage_method) = PULL_OUT,
     (string_length) = 500,
     (client_serialization) = EXCLUDE
   ];
@@ -83,6 +86,8 @@ message User {
     // from the response.
     (client_serialization) = EXCLUDE
   ];
+
+  // Next ID: 20.
 }
 
 message AddressBookContact {
@@ -168,6 +173,7 @@ message Interest {
     UNKNOWN = 0;
     USER = 1;
     LINKED_IN_PROFILE = 2; // Derived from LinkedIn Profile response.
+    FACEBOOK_PROFILE = 4; // Derived from Facebook profile response.
 
     // Tombstone, represents an interest the user explicitly DELETED.
     // This enables the user to follow his LinkedIn contacts but then delete
