@@ -9,7 +9,6 @@ import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -19,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
-import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.repackaged.com.google.common.base.Throwables;
 import com.google.api.client.util.Lists;
@@ -30,7 +27,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.io.ByteStreams;
 import com.google.common.util.concurrent.AsyncFunction;
@@ -49,7 +45,6 @@ import com.janknspank.proto.CoreProto.Entity.Source;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
-import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.LinkedInProfile;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
 import com.janknspank.proto.UserProto.User;
@@ -63,19 +58,16 @@ public class LinkedInLoginHandler {
       + Joiner.on(",").join(ImmutableList.of("id", "email-address", "first-name", "last-name",
           "industry", "positions", "picture-url"))
       + ")";
-  private static final String CONNECTIONS_URL = "https://api.linkedin.com/v1/people/~/connections";
 
-  private final HttpTransport transport = new NetHttpTransport();
-  private final HttpRequestFactory httpRequestFactory = transport.createRequestFactory();
   private final String linkedInAccessToken;
   private final Future<DocumentNode> linkedInProfileDocumentFuture;
-  private final Future<DocumentNode> linkedInConnectionsDocumentFuture;
+  private final LinkedInContactsFetcher linkedInContactsFetcher;
   private User updatedUser = null;
 
   public LinkedInLoginHandler(String linkedInAccessToken) {
     this.linkedInAccessToken = linkedInAccessToken;
     linkedInProfileDocumentFuture = getDocumentFuture(PROFILE_URL, linkedInAccessToken);
-    linkedInConnectionsDocumentFuture = getDocumentFuture(CONNECTIONS_URL, linkedInAccessToken);
+    linkedInContactsFetcher = new LinkedInContactsFetcher(linkedInAccessToken);
   }
 
   /**
@@ -162,9 +154,8 @@ public class LinkedInLoginHandler {
 
       // Update LinkedInConnections field on User object.
       stepStartTime = System.currentTimeMillis();
-      DocumentNode linkedInConnectionsDocument = linkedInConnectionsDocumentFuture.get();
       userBuilder.clearLinkedInContact();
-      userBuilder.addAllLinkedInContact(getLinkedInContacts(linkedInConnectionsDocument));
+      userBuilder.addAllLinkedInContact(linkedInContactsFetcher.getLinkedInContacts());
       System.out.println("addAllLinkedInContact: " + (System.currentTimeMillis() - stepStartTime)
           + "ms");
 
@@ -409,31 +400,6 @@ public class LinkedInLoginHandler {
   }
 
   /**
-   * Returns LinkedInContact objects for each person in the user's linked in
-   * connections.
-   */
-  private Iterable<LinkedInContact> getLinkedInContacts(DocumentNode linkedInConnectionsDocument) {
-    Map<String, LinkedInContact> linkedInContactsMap = Maps.newHashMap();
-    for (Node personNode : linkedInConnectionsDocument.findAll("person")) {
-      StringBuilder nameBuilder = new StringBuilder();
-      Node firstNameNode = personNode.findFirst("first-name");
-      if (firstNameNode != null) {
-        nameBuilder.append(firstNameNode.getFlattenedText());
-      }
-      Node lastNameNode = personNode.findFirst("last-name");
-      if (lastNameNode != null) {
-        if (firstNameNode != null) {
-          nameBuilder.append(" ");
-        }
-        nameBuilder.append(lastNameNode.getFlattenedText());
-      }
-      String name = nameBuilder.toString();
-      linkedInContactsMap.put(name, LinkedInContact.newBuilder().setName(name).build());
-    }
-    return linkedInContactsMap.values();
-  }
-
-  /**
    * Parses a Linked In API-style date format to a an epoch time Long.
    */
   private static Long makeDate(Node year, Node month) {
@@ -448,11 +414,12 @@ public class LinkedInLoginHandler {
     return calendar.getTimeInMillis();
   }
 
-  private Future<DocumentNode> getDocumentFuture(
+  static Future<DocumentNode> getDocumentFuture(
       final String url, final String linkedInAccessToken) {
     try {
       final long startTime = System.currentTimeMillis();
-      HttpRequest request = httpRequestFactory.buildGetRequest(new GenericUrl(url));
+      HttpRequest request =
+          new NetHttpTransport().createRequestFactory().buildGetRequest(new GenericUrl(url));
       HttpHeaders headers = new HttpHeaders();
       headers.setAuthorization("Bearer " + linkedInAccessToken);
       request.setHeaders(headers);

@@ -101,6 +101,21 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getFacebookIdBytes();
 
+    // optional string facebook_access_token = 19;
+    /**
+     * <code>optional string facebook_access_token = 19;</code>
+     */
+    boolean hasFacebookAccessToken();
+    /**
+     * <code>optional string facebook_access_token = 19;</code>
+     */
+    java.lang.String getFacebookAccessToken();
+    /**
+     * <code>optional string facebook_access_token = 19;</code>
+     */
+    com.google.protobuf.ByteString
+        getFacebookAccessTokenBytes();
+
     // optional int64 create_time = 7;
     /**
      * <code>optional int64 create_time = 7;</code>
@@ -347,23 +362,23 @@ public final class UserProto {
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               createTime_ = input.readInt64();
               break;
             }
             case 64: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               lastLoginTime_ = input.readInt64();
               break;
             }
             case 74: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               linkedInAccessToken_ = input.readBytes();
               break;
             }
             case 82: {
               com.janknspank.proto.UserProto.LinkedInProfile.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000200) == 0x00000200)) {
+              if (((bitField0_ & 0x00000400) == 0x00000400)) {
                 subBuilder = linkedInProfile_.toBuilder();
               }
               linkedInProfile_ = input.readMessage(com.janknspank.proto.UserProto.LinkedInProfile.PARSER, extensionRegistry);
@@ -371,44 +386,49 @@ public final class UserProto {
                 subBuilder.mergeFrom(linkedInProfile_);
                 linkedInProfile_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000400;
               break;
             }
             case 90: {
-              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
                 linkedInContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.LinkedInContact>();
-                mutable_bitField0_ |= 0x00000400;
+                mutable_bitField0_ |= 0x00000800;
               }
               linkedInContact_.add(input.readMessage(com.janknspank.proto.UserProto.LinkedInContact.PARSER, extensionRegistry));
               break;
             }
             case 98: {
-              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
                 addressBookContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.AddressBookContact>();
-                mutable_bitField0_ |= 0x00001000;
+                mutable_bitField0_ |= 0x00002000;
               }
               addressBookContact_.add(input.readMessage(com.janknspank.proto.UserProto.AddressBookContact.PARSER, extensionRegistry));
               break;
             }
             case 114: {
-              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
                 urlFavorite_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlFavorite>();
-                mutable_bitField0_ |= 0x00002000;
+                mutable_bitField0_ |= 0x00004000;
               }
               urlFavorite_.add(input.readMessage(com.janknspank.proto.UserProto.UrlFavorite.PARSER, extensionRegistry));
               break;
             }
             case 122: {
-              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
                 interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>();
-                mutable_bitField0_ |= 0x00004000;
+                mutable_bitField0_ |= 0x00008000;
               }
               interest_.add(input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry));
               break;
             }
             case 146: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000800;
               linkedInProfilePhotoUrl_ = input.readBytes();
+              break;
+            }
+            case 154: {
+              bitField0_ |= 0x00000040;
+              facebookAccessToken_ = input.readBytes();
               break;
             }
           }
@@ -419,16 +439,16 @@ public final class UserProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
           linkedInContact_ = java.util.Collections.unmodifiableList(linkedInContact_);
         }
-        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
           addressBookContact_ = java.util.Collections.unmodifiableList(addressBookContact_);
         }
-        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
           urlFavorite_ = java.util.Collections.unmodifiableList(urlFavorite_);
         }
-        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
           interest_ = java.util.Collections.unmodifiableList(interest_);
         }
         this.unknownFields = unknownFields.build();
@@ -721,6 +741,49 @@ public final class UserProto {
       }
     }
 
+    // optional string facebook_access_token = 19;
+    public static final int FACEBOOK_ACCESS_TOKEN_FIELD_NUMBER = 19;
+    private java.lang.Object facebookAccessToken_;
+    /**
+     * <code>optional string facebook_access_token = 19;</code>
+     */
+    public boolean hasFacebookAccessToken() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string facebook_access_token = 19;</code>
+     */
+    public java.lang.String getFacebookAccessToken() {
+      java.lang.Object ref = facebookAccessToken_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          facebookAccessToken_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string facebook_access_token = 19;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFacebookAccessTokenBytes() {
+      java.lang.Object ref = facebookAccessToken_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        facebookAccessToken_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional int64 create_time = 7;
     public static final int CREATE_TIME_FIELD_NUMBER = 7;
     private long createTime_;
@@ -728,7 +791,7 @@ public final class UserProto {
      * <code>optional int64 create_time = 7;</code>
      */
     public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional int64 create_time = 7;</code>
@@ -744,7 +807,7 @@ public final class UserProto {
      * <code>optional int64 last_login_time = 8;</code>
      */
     public boolean hasLastLoginTime() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional int64 last_login_time = 8;</code>
@@ -760,7 +823,7 @@ public final class UserProto {
      * <code>optional string linked_in_access_token = 9;</code>
      */
     public boolean hasLinkedInAccessToken() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional string linked_in_access_token = 9;</code>
@@ -803,7 +866,7 @@ public final class UserProto {
      * <code>optional .LinkedInProfile linked_in_profile = 10;</code>
      */
     public boolean hasLinkedInProfile() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
      * <code>optional .LinkedInProfile linked_in_profile = 10;</code>
@@ -861,7 +924,7 @@ public final class UserProto {
      * <code>optional string linked_in_profile_photo_url = 18;</code>
      */
     public boolean hasLinkedInProfilePhotoUrl() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
      * <code>optional string linked_in_profile_photo_url = 18;</code>
@@ -1012,6 +1075,7 @@ public final class UserProto {
       email_ = "";
       linkedInId_ = "";
       facebookId_ = "";
+      facebookAccessToken_ = "";
       createTime_ = 0L;
       lastLoginTime_ = 0L;
       linkedInAccessToken_ = "";
@@ -1052,16 +1116,16 @@ public final class UserProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getFacebookIdBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt64(7, createTime_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeInt64(8, lastLoginTime_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(9, getLinkedInAccessTokenBytes());
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeMessage(10, linkedInProfile_);
       }
       for (int i = 0; i < linkedInContact_.size(); i++) {
@@ -1076,8 +1140,11 @@ public final class UserProto {
       for (int i = 0; i < interest_.size(); i++) {
         output.writeMessage(15, interest_.get(i));
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeBytes(18, getLinkedInProfilePhotoUrlBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(19, getFacebookAccessTokenBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1112,19 +1179,19 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getFacebookIdBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(7, createTime_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(8, lastLoginTime_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getLinkedInAccessTokenBytes());
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, linkedInProfile_);
       }
@@ -1144,9 +1211,13 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(15, interest_.get(i));
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(18, getLinkedInProfilePhotoUrlBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(19, getFacebookAccessTokenBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1281,41 +1352,43 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         facebookId_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        createTime_ = 0L;
+        facebookAccessToken_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
-        lastLoginTime_ = 0L;
+        createTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
-        linkedInAccessToken_ = "";
+        lastLoginTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000100);
+        linkedInAccessToken_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         if (linkedInProfileBuilder_ == null) {
           linkedInProfile_ = com.janknspank.proto.UserProto.LinkedInProfile.getDefaultInstance();
         } else {
           linkedInProfileBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         if (linkedInContactBuilder_ == null) {
           linkedInContact_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000800);
         } else {
           linkedInContactBuilder_.clear();
         }
         linkedInProfilePhotoUrl_ = "";
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         if (addressBookContactBuilder_ == null) {
           addressBookContact_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00002000);
         } else {
           addressBookContactBuilder_.clear();
         }
         if (urlFavoriteBuilder_ == null) {
           urlFavorite_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
         } else {
           urlFavoriteBuilder_.clear();
         }
         if (interestBuilder_ == null) {
           interest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           interestBuilder_.clear();
         }
@@ -1374,17 +1447,21 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.createTime_ = createTime_;
+        result.facebookAccessToken_ = facebookAccessToken_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.lastLoginTime_ = lastLoginTime_;
+        result.createTime_ = createTime_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.linkedInAccessToken_ = linkedInAccessToken_;
+        result.lastLoginTime_ = lastLoginTime_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
+        }
+        result.linkedInAccessToken_ = linkedInAccessToken_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
         }
         if (linkedInProfileBuilder_ == null) {
           result.linkedInProfile_ = linkedInProfile_;
@@ -1392,40 +1469,40 @@ public final class UserProto {
           result.linkedInProfile_ = linkedInProfileBuilder_.build();
         }
         if (linkedInContactBuilder_ == null) {
-          if (((bitField0_ & 0x00000400) == 0x00000400)) {
+          if (((bitField0_ & 0x00000800) == 0x00000800)) {
             linkedInContact_ = java.util.Collections.unmodifiableList(linkedInContact_);
-            bitField0_ = (bitField0_ & ~0x00000400);
+            bitField0_ = (bitField0_ & ~0x00000800);
           }
           result.linkedInContact_ = linkedInContact_;
         } else {
           result.linkedInContact_ = linkedInContactBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000400;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000800;
         }
         result.linkedInProfilePhotoUrl_ = linkedInProfilePhotoUrl_;
         if (addressBookContactBuilder_ == null) {
-          if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          if (((bitField0_ & 0x00002000) == 0x00002000)) {
             addressBookContact_ = java.util.Collections.unmodifiableList(addressBookContact_);
-            bitField0_ = (bitField0_ & ~0x00001000);
+            bitField0_ = (bitField0_ & ~0x00002000);
           }
           result.addressBookContact_ = addressBookContact_;
         } else {
           result.addressBookContact_ = addressBookContactBuilder_.build();
         }
         if (urlFavoriteBuilder_ == null) {
-          if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          if (((bitField0_ & 0x00004000) == 0x00004000)) {
             urlFavorite_ = java.util.Collections.unmodifiableList(urlFavorite_);
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00004000);
           }
           result.urlFavorite_ = urlFavorite_;
         } else {
           result.urlFavorite_ = urlFavoriteBuilder_.build();
         }
         if (interestBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
             interest_ = java.util.Collections.unmodifiableList(interest_);
-            bitField0_ = (bitField0_ & ~0x00004000);
+            bitField0_ = (bitField0_ & ~0x00008000);
           }
           result.interest_ = interest_;
         } else {
@@ -1477,6 +1554,11 @@ public final class UserProto {
           facebookId_ = other.facebookId_;
           onChanged();
         }
+        if (other.hasFacebookAccessToken()) {
+          bitField0_ |= 0x00000040;
+          facebookAccessToken_ = other.facebookAccessToken_;
+          onChanged();
+        }
         if (other.hasCreateTime()) {
           setCreateTime(other.getCreateTime());
         }
@@ -1484,7 +1566,7 @@ public final class UserProto {
           setLastLoginTime(other.getLastLoginTime());
         }
         if (other.hasLinkedInAccessToken()) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
           linkedInAccessToken_ = other.linkedInAccessToken_;
           onChanged();
         }
@@ -1495,7 +1577,7 @@ public final class UserProto {
           if (!other.linkedInContact_.isEmpty()) {
             if (linkedInContact_.isEmpty()) {
               linkedInContact_ = other.linkedInContact_;
-              bitField0_ = (bitField0_ & ~0x00000400);
+              bitField0_ = (bitField0_ & ~0x00000800);
             } else {
               ensureLinkedInContactIsMutable();
               linkedInContact_.addAll(other.linkedInContact_);
@@ -1508,7 +1590,7 @@ public final class UserProto {
               linkedInContactBuilder_.dispose();
               linkedInContactBuilder_ = null;
               linkedInContact_ = other.linkedInContact_;
-              bitField0_ = (bitField0_ & ~0x00000400);
+              bitField0_ = (bitField0_ & ~0x00000800);
               linkedInContactBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getLinkedInContactFieldBuilder() : null;
@@ -1518,7 +1600,7 @@ public final class UserProto {
           }
         }
         if (other.hasLinkedInProfilePhotoUrl()) {
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00001000;
           linkedInProfilePhotoUrl_ = other.linkedInProfilePhotoUrl_;
           onChanged();
         }
@@ -1526,7 +1608,7 @@ public final class UserProto {
           if (!other.addressBookContact_.isEmpty()) {
             if (addressBookContact_.isEmpty()) {
               addressBookContact_ = other.addressBookContact_;
-              bitField0_ = (bitField0_ & ~0x00001000);
+              bitField0_ = (bitField0_ & ~0x00002000);
             } else {
               ensureAddressBookContactIsMutable();
               addressBookContact_.addAll(other.addressBookContact_);
@@ -1539,7 +1621,7 @@ public final class UserProto {
               addressBookContactBuilder_.dispose();
               addressBookContactBuilder_ = null;
               addressBookContact_ = other.addressBookContact_;
-              bitField0_ = (bitField0_ & ~0x00001000);
+              bitField0_ = (bitField0_ & ~0x00002000);
               addressBookContactBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getAddressBookContactFieldBuilder() : null;
@@ -1552,7 +1634,7 @@ public final class UserProto {
           if (!other.urlFavorite_.isEmpty()) {
             if (urlFavorite_.isEmpty()) {
               urlFavorite_ = other.urlFavorite_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
             } else {
               ensureUrlFavoriteIsMutable();
               urlFavorite_.addAll(other.urlFavorite_);
@@ -1565,7 +1647,7 @@ public final class UserProto {
               urlFavoriteBuilder_.dispose();
               urlFavoriteBuilder_ = null;
               urlFavorite_ = other.urlFavorite_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
               urlFavoriteBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUrlFavoriteFieldBuilder() : null;
@@ -1578,7 +1660,7 @@ public final class UserProto {
           if (!other.interest_.isEmpty()) {
             if (interest_.isEmpty()) {
               interest_ = other.interest_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             } else {
               ensureInterestIsMutable();
               interest_.addAll(other.interest_);
@@ -1591,7 +1673,7 @@ public final class UserProto {
               interestBuilder_.dispose();
               interestBuilder_ = null;
               interest_ = other.interest_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
               interestBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getInterestFieldBuilder() : null;
@@ -2071,13 +2153,87 @@ public final class UserProto {
         return this;
       }
 
+      // optional string facebook_access_token = 19;
+      private java.lang.Object facebookAccessToken_ = "";
+      /**
+       * <code>optional string facebook_access_token = 19;</code>
+       */
+      public boolean hasFacebookAccessToken() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string facebook_access_token = 19;</code>
+       */
+      public java.lang.String getFacebookAccessToken() {
+        java.lang.Object ref = facebookAccessToken_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          facebookAccessToken_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string facebook_access_token = 19;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFacebookAccessTokenBytes() {
+        java.lang.Object ref = facebookAccessToken_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          facebookAccessToken_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string facebook_access_token = 19;</code>
+       */
+      public Builder setFacebookAccessToken(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        facebookAccessToken_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string facebook_access_token = 19;</code>
+       */
+      public Builder clearFacebookAccessToken() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        facebookAccessToken_ = getDefaultInstance().getFacebookAccessToken();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string facebook_access_token = 19;</code>
+       */
+      public Builder setFacebookAccessTokenBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        facebookAccessToken_ = value;
+        onChanged();
+        return this;
+      }
+
       // optional int64 create_time = 7;
       private long createTime_ ;
       /**
        * <code>optional int64 create_time = 7;</code>
        */
       public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional int64 create_time = 7;</code>
@@ -2089,7 +2245,7 @@ public final class UserProto {
        * <code>optional int64 create_time = 7;</code>
        */
       public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         createTime_ = value;
         onChanged();
         return this;
@@ -2098,7 +2254,7 @@ public final class UserProto {
        * <code>optional int64 create_time = 7;</code>
        */
       public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         createTime_ = 0L;
         onChanged();
         return this;
@@ -2110,7 +2266,7 @@ public final class UserProto {
        * <code>optional int64 last_login_time = 8;</code>
        */
       public boolean hasLastLoginTime() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional int64 last_login_time = 8;</code>
@@ -2122,7 +2278,7 @@ public final class UserProto {
        * <code>optional int64 last_login_time = 8;</code>
        */
       public Builder setLastLoginTime(long value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         lastLoginTime_ = value;
         onChanged();
         return this;
@@ -2131,7 +2287,7 @@ public final class UserProto {
        * <code>optional int64 last_login_time = 8;</code>
        */
       public Builder clearLastLoginTime() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         lastLoginTime_ = 0L;
         onChanged();
         return this;
@@ -2143,7 +2299,7 @@ public final class UserProto {
        * <code>optional string linked_in_access_token = 9;</code>
        */
       public boolean hasLinkedInAccessToken() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional string linked_in_access_token = 9;</code>
@@ -2183,7 +2339,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         linkedInAccessToken_ = value;
         onChanged();
         return this;
@@ -2192,7 +2348,7 @@ public final class UserProto {
        * <code>optional string linked_in_access_token = 9;</code>
        */
       public Builder clearLinkedInAccessToken() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         linkedInAccessToken_ = getDefaultInstance().getLinkedInAccessToken();
         onChanged();
         return this;
@@ -2205,7 +2361,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         linkedInAccessToken_ = value;
         onChanged();
         return this;
@@ -2219,7 +2375,7 @@ public final class UserProto {
        * <code>optional .LinkedInProfile linked_in_profile = 10;</code>
        */
       public boolean hasLinkedInProfile() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional .LinkedInProfile linked_in_profile = 10;</code>
@@ -2244,7 +2400,7 @@ public final class UserProto {
         } else {
           linkedInProfileBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         return this;
       }
       /**
@@ -2258,7 +2414,7 @@ public final class UserProto {
         } else {
           linkedInProfileBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         return this;
       }
       /**
@@ -2266,7 +2422,7 @@ public final class UserProto {
        */
       public Builder mergeLinkedInProfile(com.janknspank.proto.UserProto.LinkedInProfile value) {
         if (linkedInProfileBuilder_ == null) {
-          if (((bitField0_ & 0x00000200) == 0x00000200) &&
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
               linkedInProfile_ != com.janknspank.proto.UserProto.LinkedInProfile.getDefaultInstance()) {
             linkedInProfile_ =
               com.janknspank.proto.UserProto.LinkedInProfile.newBuilder(linkedInProfile_).mergeFrom(value).buildPartial();
@@ -2277,7 +2433,7 @@ public final class UserProto {
         } else {
           linkedInProfileBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         return this;
       }
       /**
@@ -2290,14 +2446,14 @@ public final class UserProto {
         } else {
           linkedInProfileBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
       /**
        * <code>optional .LinkedInProfile linked_in_profile = 10;</code>
        */
       public com.janknspank.proto.UserProto.LinkedInProfile.Builder getLinkedInProfileBuilder() {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         onChanged();
         return getLinkedInProfileFieldBuilder().getBuilder();
       }
@@ -2332,9 +2488,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.LinkedInContact> linkedInContact_ =
         java.util.Collections.emptyList();
       private void ensureLinkedInContactIsMutable() {
-        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
           linkedInContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.LinkedInContact>(linkedInContact_);
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000800;
          }
       }
 
@@ -2483,7 +2639,7 @@ public final class UserProto {
       public Builder clearLinkedInContact() {
         if (linkedInContactBuilder_ == null) {
           linkedInContact_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000800);
           onChanged();
         } else {
           linkedInContactBuilder_.clear();
@@ -2560,7 +2716,7 @@ public final class UserProto {
           linkedInContactBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.LinkedInContact, com.janknspank.proto.UserProto.LinkedInContact.Builder, com.janknspank.proto.UserProto.LinkedInContactOrBuilder>(
                   linkedInContact_,
-                  ((bitField0_ & 0x00000400) == 0x00000400),
+                  ((bitField0_ & 0x00000800) == 0x00000800),
                   getParentForChildren(),
                   isClean());
           linkedInContact_ = null;
@@ -2574,7 +2730,7 @@ public final class UserProto {
        * <code>optional string linked_in_profile_photo_url = 18;</code>
        */
       public boolean hasLinkedInProfilePhotoUrl() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
        * <code>optional string linked_in_profile_photo_url = 18;</code>
@@ -2614,7 +2770,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00001000;
         linkedInProfilePhotoUrl_ = value;
         onChanged();
         return this;
@@ -2623,7 +2779,7 @@ public final class UserProto {
        * <code>optional string linked_in_profile_photo_url = 18;</code>
        */
       public Builder clearLinkedInProfilePhotoUrl() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         linkedInProfilePhotoUrl_ = getDefaultInstance().getLinkedInProfilePhotoUrl();
         onChanged();
         return this;
@@ -2636,7 +2792,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00001000;
         linkedInProfilePhotoUrl_ = value;
         onChanged();
         return this;
@@ -2646,9 +2802,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.AddressBookContact> addressBookContact_ =
         java.util.Collections.emptyList();
       private void ensureAddressBookContactIsMutable() {
-        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
           addressBookContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.AddressBookContact>(addressBookContact_);
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00002000;
          }
       }
 
@@ -2797,7 +2953,7 @@ public final class UserProto {
       public Builder clearAddressBookContact() {
         if (addressBookContactBuilder_ == null) {
           addressBookContact_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00002000);
           onChanged();
         } else {
           addressBookContactBuilder_.clear();
@@ -2874,7 +3030,7 @@ public final class UserProto {
           addressBookContactBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.AddressBookContact, com.janknspank.proto.UserProto.AddressBookContact.Builder, com.janknspank.proto.UserProto.AddressBookContactOrBuilder>(
                   addressBookContact_,
-                  ((bitField0_ & 0x00001000) == 0x00001000),
+                  ((bitField0_ & 0x00002000) == 0x00002000),
                   getParentForChildren(),
                   isClean());
           addressBookContact_ = null;
@@ -2886,9 +3042,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.UrlFavorite> urlFavorite_ =
         java.util.Collections.emptyList();
       private void ensureUrlFavoriteIsMutable() {
-        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
           urlFavorite_ = new java.util.ArrayList<com.janknspank.proto.UserProto.UrlFavorite>(urlFavorite_);
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00004000;
          }
       }
 
@@ -3037,7 +3193,7 @@ public final class UserProto {
       public Builder clearUrlFavorite() {
         if (urlFavoriteBuilder_ == null) {
           urlFavorite_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           onChanged();
         } else {
           urlFavoriteBuilder_.clear();
@@ -3114,7 +3270,7 @@ public final class UserProto {
           urlFavoriteBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.UrlFavorite, com.janknspank.proto.UserProto.UrlFavorite.Builder, com.janknspank.proto.UserProto.UrlFavoriteOrBuilder>(
                   urlFavorite_,
-                  ((bitField0_ & 0x00002000) == 0x00002000),
+                  ((bitField0_ & 0x00004000) == 0x00004000),
                   getParentForChildren(),
                   isClean());
           urlFavorite_ = null;
@@ -3126,9 +3282,9 @@ public final class UserProto {
       private java.util.List<com.janknspank.proto.UserProto.Interest> interest_ =
         java.util.Collections.emptyList();
       private void ensureInterestIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
           interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>(interest_);
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
          }
       }
 
@@ -3277,7 +3433,7 @@ public final class UserProto {
       public Builder clearInterest() {
         if (interestBuilder_ == null) {
           interest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           onChanged();
         } else {
           interestBuilder_.clear();
@@ -3354,7 +3510,7 @@ public final class UserProto {
           interestBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder>(
                   interest_,
-                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  ((bitField0_ & 0x00008000) == 0x00008000),
                   getParentForChildren(),
                   isClean());
           interest_ = null;
@@ -7334,6 +7490,14 @@ public final class UserProto {
        */
       LINKED_IN_PROFILE(2, 2),
       /**
+       * <code>FACEBOOK_PROFILE = 4;</code>
+       *
+       * <pre>
+       * Derived from Facebook profile response.
+       * </pre>
+       */
+      FACEBOOK_PROFILE(3, 4),
+      /**
        * <code>TOMBSTONE = 3;</code>
        *
        * <pre>
@@ -7342,7 +7506,7 @@ public final class UserProto {
        * Chris Messina (or whoever).
        * </pre>
        */
-      TOMBSTONE(3, 3),
+      TOMBSTONE(4, 3),
       ;
 
       /**
@@ -7362,6 +7526,14 @@ public final class UserProto {
        */
       public static final int LINKED_IN_PROFILE_VALUE = 2;
       /**
+       * <code>FACEBOOK_PROFILE = 4;</code>
+       *
+       * <pre>
+       * Derived from Facebook profile response.
+       * </pre>
+       */
+      public static final int FACEBOOK_PROFILE_VALUE = 4;
+      /**
        * <code>TOMBSTONE = 3;</code>
        *
        * <pre>
@@ -7380,6 +7552,7 @@ public final class UserProto {
           case 0: return UNKNOWN;
           case 1: return USER;
           case 2: return LINKED_IN_PROFILE;
+          case 4: return FACEBOOK_PROFILE;
           case 3: return TOMBSTONE;
           default: return null;
         }
@@ -11526,61 +11699,62 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/user.proto\032(com/j" +
       "anknspank/database/extensions.proto\032\037com" +
-      "/janknspank/proto/core.proto\"\274\004\n\004User\022\034\n" +
+      "/janknspank/proto/core.proto\"\336\004\n\004User\022\034\n" +
       "\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\nfirst_nam" +
-      "e\030\002 \001(\tB\004\230\246\035d\022\027\n\tlast_name\030\003 \001(\tB\004\230\246\035d\022\033" +
-      "\n\005email\030\004 \001(\tB\014\210\246\035\001\220\246\035\004\230\246\035d\022\032\n\014linked_in" +
-      "_id\030\005 \001(\tB\004\230\246\035\031\022\031\n\013facebook_id\030\006 \001(\tB\004\230\246" +
-      "\035\031\022\031\n\013create_time\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_lo" +
-      "gin_time\030\010 \001(\003\0221\n\026linked_in_access_token" +
-      "\030\t \001(\tB\021\210\246\035\001\220\246\035\005\230\246\035\364\003\240\246\035\003\0221\n\021linked_in_p",
-      "rofile\030\n \001(\0132\020.LinkedInProfileB\004\240\246\035\003\0221\n\021" +
-      "linked_in_contact\030\013 \003(\0132\020.LinkedInContac" +
-      "tB\004\240\246\035\003\022*\n\033linked_in_profile_photo_url\030\022" +
-      " \001(\tB\005\230\246\035\310\001\0227\n\024address_book_contact\030\014 \003(" +
-      "\0132\023.AddressBookContactB\004\240\246\035\003\022(\n\014url_favo" +
-      "rite\030\016 \003(\0132\014.UrlFavoriteB\004\240\246\035\003\022!\n\010intere" +
-      "st\030\017 \003(\0132\t.InterestB\004\240\246\035\003:\020\212\265\030\014MongoDB.U" +
-      "ser\",\n\022AddressBookContact\022\026\n\004name\030\002 \001(\tB" +
-      "\010\210\246\035\001\230\246\035d\"J\n\013UrlFavorite\022 \n\006url_id\030\001 \001(\t" +
-      "B\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B",
-      "\004\210\246\035\001\"\255\002\n\017LinkedInProfile\0223\n\020current_emp" +
-      "loyer\030\001 \001(\0132\031.LinkedInProfile.Employer\0220" +
-      "\n\rpast_employer\030\002 \003(\0132\031.LinkedInProfile." +
-      "Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\035\n\013cr" +
-      "eate_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\032z\n\010Employer\022\026\n" +
-      "\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246" +
-      "\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart" +
-      "_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\")\n\017LinkedI" +
-      "nContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\270\003\n\010Int" +
-      "erest\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022",
-      "*\n\004type\030\002 \001(\0162\026.Interest.InterestTypeB\004\210" +
-      "\246\035\001\022.\n\006source\030\003 \001(\0162\030.Interest.InterestS" +
-      "ourceB\004\210\246\035\001\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246" +
-      "\035\003\022\025\n\rindustry_code\030\005 \001(\005\022\027\n\006entity\030\006 \001(" +
-      "\0132\007.Entity\022\031\n\013intent_code\030\007 \001(\tB\004\230\246\035\005\"u\n" +
-      "\014InterestType\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUSTRY\020" +
-      "\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n" +
-      "\025ADDRESS_BOOK_CONTACTS\020\004\022\n\n\006INTENT\020\005\"M\n\016" +
-      "InterestSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n" +
-      "\021LINKED_IN_PROFILE\020\002\022\r\n\tTOMBSTONE\020\003\"\350\004\n\n",
-      "UserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
-      "\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\0221\n\013actio" +
-      "n_type\030\003 \001(\0162\026.UserAction.ActionTypeB\004\210\246" +
-      "\035\001\022\034\n\006url_id\030\004 \001(\tB\014\210\246\035\001\230\246\035\030\250\246\035\001\022\032\n\003url\030" +
-      "\005 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\031\n\013create_time\030\006 \001(" +
-      "\003B\004\210\246\035\001\022\027\n\017read_start_time\030\007 \001(\003\022\025\n\rread" +
-      "_end_time\030\010 \001(\003\0221\n\021linked_in_contact\030\t \003" +
-      "(\0132\020.LinkedInContactB\004\240\246\035\003\0227\n\024address_bo" +
-      "ok_contact\030\n \003(\0132\023.AddressBookContactB\004\240" +
-      "\246\035\003\022!\n\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)",
-      "\n\026on_stream_for_interest\030\014 \001(\0132\t.Interes" +
-      "t\"\222\001\n\nActionType\022\014\n\010UNKNONWN\020\000\022\014\n\010FAVORI" +
-      "TE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005" +
-      "SHARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r" +
-      "\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010:\026\212\265\030\022Mong" +
-      "oDB.UserActionB!\n\024com.janknspank.protoB\t" +
-      "UserProto"
+      "e\030\002 \001(\tB\004\230\246\035d\022\027\n\tlast_name\030\003 \001(\tB\004\230\246\035d\022\027" +
+      "\n\005email\030\004 \001(\tB\010\220\246\035\003\230\246\035d\022\032\n\014linked_in_id\030" +
+      "\005 \001(\tB\004\230\246\035\031\022\035\n\013facebook_id\030\006 \001(\tB\010\220\246\035\003\230\246" +
+      "\035\031\022(\n\025facebook_access_token\030\023 \001(\tB\t\230\246\035\364\003" +
+      "\240\246\035\003\022\031\n\013create_time\030\007 \001(\003B\004\210\246\035\001\022\027\n\017last_" +
+      "login_time\030\010 \001(\003\022)\n\026linked_in_access_tok",
+      "en\030\t \001(\tB\t\230\246\035\364\003\240\246\035\003\0221\n\021linked_in_profile" +
+      "\030\n \001(\0132\020.LinkedInProfileB\004\240\246\035\003\0221\n\021linked" +
+      "_in_contact\030\013 \003(\0132\020.LinkedInContactB\004\240\246\035" +
+      "\003\022*\n\033linked_in_profile_photo_url\030\022 \001(\tB\005" +
+      "\230\246\035\310\001\0227\n\024address_book_contact\030\014 \003(\0132\023.Ad" +
+      "dressBookContactB\004\240\246\035\003\022(\n\014url_favorite\030\016" +
+      " \003(\0132\014.UrlFavoriteB\004\240\246\035\003\022!\n\010interest\030\017 \003" +
+      "(\0132\t.InterestB\004\240\246\035\003:\020\212\265\030\014MongoDB.User\",\n" +
+      "\022AddressBookContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230" +
+      "\246\035d\"J\n\013UrlFavorite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001",
+      "\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"" +
+      "\255\002\n\017LinkedInProfile\0223\n\020current_employer\030" +
+      "\001 \001(\0132\031.LinkedInProfile.Employer\0220\n\rpast" +
+      "_employer\030\002 \003(\0132\031.LinkedInProfile.Employ" +
+      "er\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\035\n\013create_t" +
+      "ime\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\032z\n\010Employer\022\026\n\004name\030" +
+      "\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d" +
+      "\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030" +
+      "\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\")\n\017LinkedInConta" +
+      "ct\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\316\003\n\010Interest\022",
+      " \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022*\n\004typ" +
+      "e\030\002 \001(\0162\026.Interest.InterestTypeB\004\210\246\035\001\022.\n" +
+      "\006source\030\003 \001(\0162\030.Interest.InterestSourceB" +
+      "\004\210\246\035\001\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\025\n\r" +
+      "industry_code\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.En" +
+      "tity\022\031\n\013intent_code\030\007 \001(\tB\004\230\246\035\005\"u\n\014Inter" +
+      "estType\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006E" +
+      "NTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n\025ADDRE" +
+      "SS_BOOK_CONTACTS\020\004\022\n\n\006INTENT\020\005\"c\n\016Intere" +
+      "stSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKE",
+      "D_IN_PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\r\n\t" +
+      "TOMBSTONE\020\003\"\350\004\n\nUserAction\022\034\n\002id\030\001 \001(\tB\020" +
+      "\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\230" +
+      "\246\035\030\250\246\035\001\0221\n\013action_type\030\003 \001(\0162\026.UserActio" +
+      "n.ActionTypeB\004\210\246\035\001\022\034\n\006url_id\030\004 \001(\tB\014\210\246\035\001" +
+      "\230\246\035\030\250\246\035\001\022\032\n\003url\030\005 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\031\n\013" +
+      "create_time\030\006 \001(\003B\004\210\246\035\001\022\027\n\017read_start_ti" +
+      "me\030\007 \001(\003\022\025\n\rread_end_time\030\010 \001(\003\0221\n\021linke" +
+      "d_in_contact\030\t \003(\0132\020.LinkedInContactB\004\240\246" +
+      "\035\003\0227\n\024address_book_contact\030\n \003(\0132\023.Addre",
+      "ssBookContactB\004\240\246\035\003\022!\n\010interest\030\013 \003(\0132\t." +
+      "InterestB\004\240\246\035\003\022)\n\026on_stream_for_interest" +
+      "\030\014 \001(\0132\t.Interest\"\222\001\n\nActionType\022\014\n\010UNKN" +
+      "ONWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_F" +
+      "ROM_STREAM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_ARTICLE\020" +
+      "\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_" +
+      "PAST\020\010:\026\212\265\030\022MongoDB.UserActionB!\n\024com.ja" +
+      "nknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11592,7 +11766,7 @@ public final class UserProto {
           internal_static_User_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_User_descriptor,
-              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", });
+              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", });
           internal_static_AddressBookContact_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_AddressBookContact_fieldAccessorTable = new
@@ -11643,14 +11817,14 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);

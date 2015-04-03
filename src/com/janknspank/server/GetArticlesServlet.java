@@ -22,9 +22,9 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Entity;
-import com.janknspank.proto.CoreProto.PushNotification;
-import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.PushNotificationProto.PushNotification;
 import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.NeuralNetworkScorer;
 

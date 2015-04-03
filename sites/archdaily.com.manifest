@@ -36,5 +36,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10517 # Architecture & Planning
-  boost: 5
+  boost: 3
 }

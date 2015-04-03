@@ -24,6 +24,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.crawler.UrlCleaner;
@@ -33,6 +34,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.CoreProto.IndustryVectorNormalizationData;
 import com.janknspank.rank.DistributionBuilder;
 
 /**
@@ -61,7 +63,9 @@ public class VectorFeatureCreator {
   private static synchronized Map<Article, Vector> getArticleVectorMap()
       throws DatabaseSchemaException {
     if (__ARTICLE_VECTOR_MAP.isEmpty()) {
-      for (Article article : Database.with(Article.class).get(new QueryOption.Limit(15000))) {
+      for (Article article : Database.with(Article.class).get(
+          new QueryOption.Limit(20000),
+          new QueryOption.DescendingSort("published_time"))) {
         __ARTICLE_VECTOR_MAP.put(article, Vector.fromArticle(article));
       }
     }
@@ -98,27 +102,43 @@ public class VectorFeatureCreator {
         words.add(seed);
       }
     }
-    Iterable<Article> articles;
+    Iterable<Article> seedArticles;
     try {
-      articles = Iterables.concat(
+      seedArticles = Iterables.concat(
           ArticleCrawler.getArticles(urls, true /* retain */).values(),
           Articles.getArticlesForKeywordsFuture(words, Article.Reason.INDUSTRY, 1000).get());
     } catch (InterruptedException | ExecutionException e) {
       throw new ClassifierException("Async error: " + e.getMessage(), e);
     }
-    System.out.println(Iterables.size(articles) + " articles found");
+    System.out.println(Iterables.size(seedArticles) + " articles found");
 
     // 2.5 Output # articles / seed word - make it easy to prune out
     // empty seed words, or find gaps in the corpus
-    printSeedWordOccurrenceCounts(seeds, articles);
+    printSeedWordOccurrenceCounts(seeds, seedArticles);
 
     // 3. Convert them into the industry vector
     System.out.println("Calculating vector...");
-    Vector vector = new Vector(articles, getBlacklist());
+    Vector vector = new Vector(seedArticles, getBlacklist());
 
-    // 4. Write the industry vector and its effective distribution to disk.
+    // 4. Write the industry vector.
     vector.writeToFile(VectorFeature.getVectorFile(featureId));
-    generateDistributionForVector(vector).writeToFile(VectorFeature.getDistributionFile(featureId));
+
+    // 5. Create and write the normalizer.
+    IndustryVectorNormalizationData.Builder normalizationDataBuilder =
+        IndustryVectorNormalizationData.newBuilder();
+    normalizationDataBuilder.setDistribution(generateDistributionForVector(vector).build());
+    normalizationDataBuilder.setSimilarityThreshold10Percent(
+        getSimilarityThreshold(vector, seedArticles, 0.1));
+    normalizationDataBuilder.setRatioOfArticlesAboveThreshold10Percent(
+        getRatioOfArticlesAboveThreshold(
+            vector, normalizationDataBuilder.getSimilarityThreshold10Percent()));
+    normalizationDataBuilder.setSimilarityThreshold50Percent(
+        getSimilarityThreshold(vector, seedArticles, 0.5));
+    normalizationDataBuilder.setRatioOfArticlesAboveThreshold50Percent(
+        getRatioOfArticlesAboveThreshold(
+            vector, normalizationDataBuilder.getSimilarityThreshold50Percent()));
+    IndustryVectorNormalizer.writeToFile(
+        normalizationDataBuilder.build(), VectorFeature.getNormalizerFile(featureId));
   }
 
   private DistributionBuilder generateDistributionForVector(Vector vector)
@@ -127,10 +147,50 @@ public class VectorFeatureCreator {
     for (Map.Entry<Article, Vector> articleVectorEntry : getArticleVectorMap().entrySet()) {
       Article article = articleVectorEntry.getKey();
       Vector articleVector = articleVectorEntry.getValue();
-      double score = VectorFeature.rawScore(this.featureId, vector, article, articleVector);
+      double boost = 0.05 * Feature.getBoost(featureId, article);
+      double score = VectorFeature.rawScore(this.featureId, vector, boost, articleVector);
       builder.add(score);
     }
     return builder;
+  }
+
+  private double getSimilarityThreshold(
+      Vector vector, Iterable<Article> seedArticles, double percentile)
+      throws ClassifierException {
+    DistributionBuilder seedArticleDistributionBuilder = new DistributionBuilder();
+    Vector universeVector = UniverseVector.getInstance();
+    TopList<String, Double> bestArticles = new TopList<String, Double>(10);
+    TopList<String, Double> worstArticles = new TopList<String, Double>(10);
+    for (Article article : seedArticles) {
+      Double cosineSimilarity =
+          vector.getCosineSimilarity(universeVector, Vector.fromArticle(article));
+      seedArticleDistributionBuilder.add(cosineSimilarity);
+      bestArticles.add(article.getUrl(), cosineSimilarity);
+      worstArticles.add(article.getUrl(), 1 - cosineSimilarity);
+    }
+    System.out.println("Seed articles most similar to vector:");
+    for (String url : bestArticles) {
+      System.out.println(bestArticles.getValue(url) + ": " + url);
+    }
+    System.out.println("Seed articles least similar to vector:");
+    for (String url : worstArticles) {
+      System.out.println((1 - worstArticles.getValue(url)) + ": " + url);
+    }
+    return DistributionBuilder.getValueAtPercentile(
+        seedArticleDistributionBuilder.build(), percentile);
+  }
+
+  private double getRatioOfArticlesAboveThreshold(Vector vector, double similarityThreshold)
+      throws DatabaseSchemaException, ClassifierException {
+    Vector universeVector = UniverseVector.getInstance();
+    Map<Article, Vector> articleVectorMap = getArticleVectorMap();
+    int numArticlesAboveThreshold = 0;
+    for (Vector articleVector : articleVectorMap.values()) {
+      if (vector.getCosineSimilarity(universeVector, articleVector) >= similarityThreshold) {
+        numArticlesAboveThreshold++;
+      }
+    }
+    return ((double) numArticlesAboveThreshold) / articleVectorMap.size();
   }
 
 //  /**

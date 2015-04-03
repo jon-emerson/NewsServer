@@ -1,7 +1,9 @@
 package com.janknspank.rank;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
@@ -15,9 +17,12 @@ import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
+import com.google.api.client.util.Lists;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.crawler.ArticleCrawler;
@@ -27,6 +32,8 @@ import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.UserAction;
+import com.janknspank.proto.UserProto.UserAction.ActionType;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
   private static int MAX_ITERATIONS = 50000;
@@ -42,7 +49,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
   private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
     NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(
-        TransferFunctionType.SIGMOID,
+        TransferFunctionType.SIGMOID, // TODO(jonemerson): Should this be LINEAR?
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.HIDDEN_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
@@ -79,6 +86,115 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   }
 
   /**
+   * Returns the users we trust to give us good training data via UserActions.
+   */
+  private static Map<String, User> getUserActionTrustedUsers() throws DatabaseSchemaException {
+    Map<String, User> users = Maps.newHashMap();
+    for (User user : Database.with(User.class).get(
+        new QueryOption.WhereEquals("email", ImmutableList.of(
+            "dvoytenko@yahoo.com",
+            "panaceaa@gmail.com",
+            "virendesai87@gmail.com")))) {
+      users.put(user.getId(), user);
+    }
+    return users;
+  }
+
+  /**
+   * Returns a list of DataSetRows derived from VOTE_UP user actions from users
+   * we trust.
+   */
+  private static List<DataSetRow> getUserActionVoteUpDataSetRows()
+      throws DatabaseSchemaException, BiznessException {
+    Map<String, User> users = getUserActionTrustedUsers();
+
+    // These are URLs the users happened to "unvote".  For convenience, we
+    // just blacklist any vote up actions against these URLs.
+    Set<String> urlIdsToIgnore = Sets.newHashSet();
+    for (UserAction userAction : Database.with(UserAction.class).get(
+        new QueryOption.WhereEquals("user_id", users.keySet()),
+        new QueryOption.WhereEqualsEnum("action_type", ActionType.UNVOTE_UP))) {
+      urlIdsToIgnore.add(userAction.getUrlId());
+    }
+
+    // Figure out data set rows for each of the unblacklisted vote up actions.
+    List<DataSetRow> dataSetRows = Lists.newArrayList();
+    for (User user : users.values()) {
+      Iterable<UserAction> userActions = Database.with(UserAction.class).get(
+          new QueryOption.WhereEquals("user_id", user.getId()),
+          new QueryOption.WhereEqualsEnum("action_type", ActionType.VOTE_UP));
+      System.out.println("For " + user.getEmail() + ", " + Iterables.size(userActions)
+          + " VOTE_UP user actions found");
+      Set<String> urlsToCrawl = Sets.newHashSet();
+      for (UserAction userAction : userActions) {
+        if (!urlIdsToIgnore.contains(userAction.getUrlId())) {
+          urlsToCrawl.add(userAction.getUrl());
+        }
+      }
+      Map<String, Article> articleMap =
+          ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
+      for (UserAction userAction : userActions) {
+        if (userAction.hasOnStreamForInterest()) {
+          // Ignore these for now.  They're from substreams, e.g. the user is
+          // viewing a specific entity or topic, not their main stream.
+          continue;
+        }
+        if (articleMap.containsKey(userAction.getUrl())) {
+          User modifiedUser = user.toBuilder()
+              .clearInterest()
+              .addAllInterest(userAction.getInterestList())
+              .build();
+          double[] input = Doubles.toArray(
+              NeuralNetworkScorer.generateInputNodes(
+                  modifiedUser, articleMap.get(userAction.getUrl())).values());
+          double[] output = new double[] { 1.0 };
+          dataSetRows.add(new DataSetRow(input, output));
+        }
+      }
+    }
+    return dataSetRows;
+  }
+
+  /**
+   * Returns a list of DataSetRows derived from X_OUT user actions from
+   * users we trust.
+   */
+  private static List<DataSetRow> getUserActionXOutDataSetRows()
+      throws DatabaseSchemaException, BiznessException {
+    Map<String, User> users = getUserActionTrustedUsers();
+
+    // Figure out data set rows for each of the unblacklisted vote up actions.
+    List<DataSetRow> dataSetRows = Lists.newArrayList();
+    for (User user : users.values()) {
+      Iterable<UserAction> userActions = Database.with(UserAction.class).get(
+          new QueryOption.WhereEquals("user_id", user.getId()),
+          new QueryOption.WhereEqualsEnum("action_type", ActionType.X_OUT));
+      System.out.println("For " + user.getEmail() + ", " + Iterables.size(userActions)
+          + " X_OUT user actions found");
+      Set<String> urlsToCrawl = Sets.newHashSet();
+      for (UserAction userAction : userActions) {
+        urlsToCrawl.add(userAction.getUrl());
+      }
+      Map<String, Article> articleMap =
+          ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
+      for (UserAction userAction : userActions) {
+        if (articleMap.containsKey(userAction.getUrl())) {
+          User modifiedUser = user.toBuilder()
+              .clearInterest()
+              .addAllInterest(userAction.getInterestList())
+              .build();
+          double[] input = Doubles.toArray(
+              NeuralNetworkScorer.generateInputNodes(
+                  modifiedUser, articleMap.get(userAction.getUrl())).values());
+          double[] output = new double[] { 0.2 };
+          dataSetRows.add(new DataSetRow(input, output));
+        }
+      }
+    }
+    return dataSetRows;
+  }
+
+  /**
    * Creates a complete training data set given good URLs and bad URLs defined
    * in the user /personas/*.persona files.
    */
@@ -94,14 +210,18 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
       // HACK(jonemerson): Temporarily, we're deleting all articles so they'll
       // be recrawled with the latest and greatest entity handling.
-//      if (persona.getEmail().equals("tom.charytoniuk@gmail.com")) {
+      if (!persona.getEmail().equals("darrend@google.com")
+          && !persona.getEmail().equals("jimbob_the_farmer@gmail.com")
+          && !persona.getEmail().equals("panaceaa@gmail.com")
+          && !persona.getEmail().equals("emerson1899@gmail.com")
+          && !persona.getEmail().equals("tom.charytoniuk@gmail.com")) {
         System.out.println("DELETING CACHED ARTICLES");
         int count = Database.with(Article.class).delete(
             new QueryOption.WhereEquals("url", persona.getGoodUrlList()));
         count += Database.with(Article.class).delete(
             new QueryOption.WhereEquals("url", persona.getBadUrlList()));
         System.out.println(count + " articles uncached!!!!");
-//      }
+      }
 
       Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(
           Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList()), true /* retain */);
@@ -133,6 +253,14 @@ public class NeuralNetworkTrainer implements LearningEventListener {
           trainingSet.addRow(new DataSetRow(input, output));
         }
       }
+    }
+
+    for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
+      trainingSet.addRow(dataSetRow);
+    }
+
+    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
+      trainingSet.addRow(dataSetRow);
     }
 
     System.out.println("Training set compiled.");

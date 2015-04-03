@@ -1,0 +1,31 @@
+{namespace news.facebooklogin autoescape="strict"}
+
+/**
+ * Renders the Facebook login page.
+ */
+{template .main}
+  <head>
+    <title>Facebook Login JavaScript Example</title>
+    <meta charset="UTF-8"/>
+    <script src="/resources/js/facebooklogin.js"></script>
+  </head>
+  <body>
+    <form id="facebook_post" method="post" action="/v1/facebook_login">
+      <input type="hidden" name="fb_access_token"/>
+      <input type="hidden" name="fb_user_id"/>
+    </form>
+
+    <!--
+      Below we include the Login Button social plugin. This button uses
+      the JavaScript SDK to present a graphical Login button that triggers
+      the FB.login() function when clicked.
+    -->
+
+    <fb:login-button
+        scope="public_profile,email,user_education_history,user_location,user_work_history,user_about_me"
+        onlogin="checkLoginState();">
+    </fb:login-button>
+
+    <div id="status"></div>
+  </body>
+{/template}

@@ -1,0 +1,107 @@
+// Data structures related to mobile device push notifications.
+
+import "com/janknspank/database/extensions.proto";
+
+option java_package = "com.janknspank.proto";
+option java_outer_classname = "PushNotificationProto";
+
+enum DeviceType {
+  UNKNOWN = 0;
+  ANDROID = 1;
+  IOS = 2;
+}
+
+message DeviceRegistration {
+  option (database_collection) = "MongoDB.DeviceRegistration";
+
+  // Unique ID for the user ID + device registration ID pair.
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional string user_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional DeviceType device_type = 3 [
+    (required) = YES
+  ];
+
+  // Opaque device type-specific identifier for the phone / tablet / whatever
+  // we should send notifications to.  iOS calls this a device ID, Android calls
+  // it a registration ID.
+  optional string device_id = 4 [
+    (required) = YES,
+    (string_length) = 100,
+    (string_charset) = LATIN1
+  ];
+
+  optional int64 create_time = 5 [
+    (required) = YES
+  ];
+}
+
+// Historical record of what notifications we've sent and to whom.
+message PushNotification {
+  option (database_collection) = "MongoDB.PushNotification";
+
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1,
+    (client_serialization) = EXCLUDE
+  ];
+
+  optional int64 create_time = 2 [
+    (required) = YES
+  ];
+
+  // If the user clicked on the notification, and the app opened and sent us
+  // a ping, this is the time that happened.
+  optional int64 click_time = 3;
+
+  // The user who we sent the notification to.
+  optional string user_id = 4 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  // Optional: If we mentioned a specific article, this is the URL ID of that
+  // article.
+  optional string url_id = 5 [
+    (storage_method) = INDEX,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional DeviceType device_type = 6 [
+    (required) = YES
+  ];
+
+  optional string device_id = 7 [
+    (required) = YES,
+    (string_length) = 100,
+    (string_charset) = LATIN1
+  ];
+
+  // Identifier for the computer who initiated this notification.
+  optional string host = 8 [
+    (string_length) = 100,
+    (string_charset) = LATIN1
+  ];
+
+  // The actual text that we sent to the user.
+  optional string text = 9 [
+    (required) = YES,
+    (string_length) = 1024
+  ];
+}

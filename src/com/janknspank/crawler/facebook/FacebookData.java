@@ -27,6 +27,7 @@ import com.restfb.json.JsonObject;
 
 public class FacebookData {
   private static final Logger LOG = new Logger(FacebookData.class);
+  private static String __facebookAppSecret = null;
   private static FacebookClient __facebookClient = null;
 
   private static String encodeUrl(String url) {
@@ -103,7 +104,7 @@ public class FacebookData {
     }
   }
 
-  private static FacebookClient getFacebookClient() throws FacebookException {
+  private static synchronized FacebookClient getFacebookClient() throws FacebookException {
     if (__facebookClient == null) {
       Properties properties = getFacebookProperties();
       String appSecret = properties.getProperty("appSecret");
@@ -112,6 +113,14 @@ public class FacebookData {
           new DefaultFacebookClient(appId + "|" + appSecret, appSecret, Version.VERSION_2_2);
     }
     return __facebookClient;
+  }
+
+  public static synchronized String getFacebookAppSecret() throws FacebookException {
+    if (__facebookAppSecret == null) {
+      Properties properties = getFacebookProperties();
+      __facebookAppSecret = properties.getProperty("appSecret");
+    }
+    return __facebookAppSecret;
   }
 
   private static Properties getFacebookProperties() throws FacebookException {

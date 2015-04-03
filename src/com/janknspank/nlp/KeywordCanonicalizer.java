@@ -361,4 +361,9 @@ public class KeywordCanonicalizer {
     }
     return __entityIdToEntityMap;
   }
+
+  public static Entity getEntityForKeyword(String keyword) {
+    KeywordToEntityId keywordToEntityId = getKeywordToEntityIdMap().get(keyword.toLowerCase());
+    return (keywordToEntityId == null) ? null : getEntityIdToEntityMap().get(keywordToEntityId.getEntityId());
+  }
 }

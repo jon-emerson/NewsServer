@@ -1,0 +1,26 @@
+root_domain: "thebolditalic.com"
+start_url: "http://www.thebolditalic.com"
+paragraph_selector: ".copy p"
+paragraph_selector: "p.p1"
+article_url_pattern {
+  path_regex: "\\/articles\\/[0-9]+\\-[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.thebolditalic.com/articles/7063-new-documentary-slams-yelp-for-being-a-bully"
+    article_url: "http://www.thebolditalic.com/articles/7172-heres-what-you-need-to-know-about-the-ellen-pao-case-rocking-silicon-valley"
+    article_url: "http://www.thebolditalic.com/articles/7167-mcdonalds-prob-just-killed-the-junk-food-fashion-trend-but-i-aint-even-mad"
+    article_url: "http://www.thebolditalic.com/articles/6835-beach-painting-art-demo-rescheduled-for-this-sun"
+    article_url: "http://www.thebolditalic.com/articles/7121-alton-brown-you-can-improve-upon-your-questionable-taste-in-sf-bloody-marys-"
+    non_article_url: "http://www.thebolditalic.com/articles"
+    non_article_url: "http://www.thebolditalic.com/users/Wendy_Steiner"
+    non_article_url: "http://www.thebolditalic.com/search"
+    non_article_url: "http://www.thebolditalic.com/categories/The%20Tenderloin"
+    non_article_url: "http://www.thebolditalic.com/categories/Food%20&%20Drink"
+    non_article_url: "http://www.thebolditalic.com/users/MollySanchez"
+    non_article_url: "http://www.thebolditalic.com/categories/Housing%20&%20Development"
+  }
+}
+feature_boost_pattern {
+  boost: -2 # Kind of a weak site... mostly interesting for San Francisco issues.
+}

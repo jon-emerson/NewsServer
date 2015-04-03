@@ -7,8 +7,6 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
-import com.janknspank.proto.CoreProto.Distribution;
-import com.janknspank.rank.DistributionBuilder;
 
 /**
  * Abstract Feature that judges articles' relevance to topics by using TF-IDF
@@ -25,15 +23,23 @@ public final class VectorFeature extends Feature {
           .put(FeatureType.SERVES_INTENT, new File("classifier/serves-intent"))
           .put(FeatureType.TOPIC, new File("classifier/topic"))
           .build();
+  private static final Vector UNIVERSE_VECTOR;
+  static {
+    try {
+      UNIVERSE_VECTOR = UniverseVector.getInstance();
+    } catch (ClassifierException e) {
+      throw new Error("Could not load universe vector: " + e.getMessage(), e);
+    }
+  }
 
-  private final Vector vector;
-  private final Distribution distribution;
+  private final Vector featureVector;
+  private final IndustryVectorNormalizer normalizer;
 
   public VectorFeature(FeatureId featureId) throws ClassifierException {
     super(featureId);
 
-    vector = Vector.fromFile(getVectorFile(featureId));
-    distribution = DistributionBuilder.fromFile(getDistributionFile(featureId));
+    featureVector = Vector.fromFile(getVectorFile(featureId));
+    normalizer = IndustryVectorNormalizer.fromFile(getNormalizerFile(featureId));
   }
 
   /**
@@ -41,10 +47,14 @@ public final class VectorFeature extends Feature {
    * this vector's feature.
    */
   @Override
-  public double score(ArticleOrBuilder article) throws ClassifierException {
-    return DistributionBuilder.projectQuantile(
-        distribution,
-        rawScore(this.featureId, vector, article, Vector.fromArticle(article)));
+  public double score(ArticleOrBuilder article) {
+    double boost = 0.05 * Feature.getBoost(featureId, article);
+    return score(Vector.fromArticle(article), boost);
+  }
+
+  public double score(Vector articleVector, double boost) {
+    return normalizer.getNormalizedScore(
+        rawScore(this.featureId, featureVector, boost, articleVector));
   }
 
   /**
@@ -54,22 +64,21 @@ public final class VectorFeature extends Feature {
    * latter is responsible for building the distribution histogram.
    * @param featureId identifier for the feature we're scoring against
    * @param fectureVector the pre-generated vector for the specified feature ID
-   * @param article the article being scored
+   * @param boost a boost to give this article based on what site it's from,
+   *     what URL path it lives on, etc
    * @param articleVector the pre-generated vector for the specified article
    */
   static double rawScore(
-      FeatureId featureId, Vector featureVector, ArticleOrBuilder article, Vector articleVector)
-      throws ClassifierException {
-    double boost = 0.05 * Feature.getBoost(featureId, article);
-    return boost + featureVector.getCosineSimilarity(UniverseVector.getInstance(), articleVector);
+      FeatureId featureId, Vector featureVector, double boost, Vector articleVector) {
+    return boost + featureVector.getCosineSimilarity(UNIVERSE_VECTOR, articleVector);
   }
 
   static File getVectorFile(FeatureId featureId) throws ClassifierException {
     return new File(getVectorDirectory(featureId), "/feature.vector");
   }
 
-  static File getDistributionFile(FeatureId featureId) throws ClassifierException {
-    return new File(getVectorDirectory(featureId), "/feature.distribution");
+  static File getNormalizerFile(FeatureId featureId) throws ClassifierException {
+    return new File(getVectorDirectory(featureId), "/feature.normalizationdata");
   }
 
   /**

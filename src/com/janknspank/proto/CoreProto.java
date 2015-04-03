@@ -8,97 +8,6 @@ public final class CoreProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  /**
-   * Protobuf enum {@code DeviceType}
-   */
-  public enum DeviceType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>UNKNOWN = 0;</code>
-     */
-    UNKNOWN(0, 0),
-    /**
-     * <code>ANDROID = 1;</code>
-     */
-    ANDROID(1, 1),
-    /**
-     * <code>IOS = 2;</code>
-     */
-    IOS(2, 2),
-    ;
-
-    /**
-     * <code>UNKNOWN = 0;</code>
-     */
-    public static final int UNKNOWN_VALUE = 0;
-    /**
-     * <code>ANDROID = 1;</code>
-     */
-    public static final int ANDROID_VALUE = 1;
-    /**
-     * <code>IOS = 2;</code>
-     */
-    public static final int IOS_VALUE = 2;
-
-
-    public final int getNumber() { return value; }
-
-    public static DeviceType valueOf(int value) {
-      switch (value) {
-        case 0: return UNKNOWN;
-        case 1: return ANDROID;
-        case 2: return IOS;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<DeviceType>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<DeviceType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<DeviceType>() {
-            public DeviceType findValueByNumber(int number) {
-              return DeviceType.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.janknspank.proto.CoreProto.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final DeviceType[] VALUES = values();
-
-    public static DeviceType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private DeviceType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:DeviceType)
-  }
-
   public interface LinkOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -11204,8 +11113,9 @@ public final class CoreProto {
    * Protobuf type {@code ShareNormalizationData}
    *
    * <pre>
-   * Stores share aggregate counts for various time lengths, so that we can
-   * normalize social engagement for an article versus its peers.
+   * Data for normalizing Facebook share counts vs. a time range and vs. a
+   * a specific domain.  Stores share aggregate counts for various time lengths,
+   * so that we can normalize social engagement for an article versus its peers.
    * </pre>
    */
   public static final class ShareNormalizationData extends
@@ -12852,8 +12762,9 @@ public final class CoreProto {
      * Protobuf type {@code ShareNormalizationData}
      *
      * <pre>
-     * Stores share aggregate counts for various time lengths, so that we can
-     * normalize social engagement for an article versus its peers.
+     * Data for normalizing Facebook share counts vs. a time range and vs. a
+     * a specific domain.  Stores share aggregate counts for various time lengths,
+     * so that we can normalize social engagement for an article versus its peers.
      * </pre>
      */
     public static final class Builder extends
@@ -14528,2835 +14439,6 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:UrlRating)
   }
 
-  public interface DeviceRegistrationOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional string id = 1;
-    /**
-     * <code>optional string id = 1;</code>
-     *
-     * <pre>
-     * Unique ID for the user ID + device registration ID pair.
-     * </pre>
-     */
-    boolean hasId();
-    /**
-     * <code>optional string id = 1;</code>
-     *
-     * <pre>
-     * Unique ID for the user ID + device registration ID pair.
-     * </pre>
-     */
-    java.lang.String getId();
-    /**
-     * <code>optional string id = 1;</code>
-     *
-     * <pre>
-     * Unique ID for the user ID + device registration ID pair.
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getIdBytes();
-
-    // optional string user_id = 2;
-    /**
-     * <code>optional string user_id = 2;</code>
-     */
-    boolean hasUserId();
-    /**
-     * <code>optional string user_id = 2;</code>
-     */
-    java.lang.String getUserId();
-    /**
-     * <code>optional string user_id = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getUserIdBytes();
-
-    // optional .DeviceType device_type = 3;
-    /**
-     * <code>optional .DeviceType device_type = 3;</code>
-     */
-    boolean hasDeviceType();
-    /**
-     * <code>optional .DeviceType device_type = 3;</code>
-     */
-    com.janknspank.proto.CoreProto.DeviceType getDeviceType();
-
-    // optional string device_id = 4;
-    /**
-     * <code>optional string device_id = 4;</code>
-     *
-     * <pre>
-     * Opaque device type-specific identifier for the phone / tablet / whatever
-     * we should send notifications to.  iOS calls this a device ID, Android calls
-     * it a registration ID.
-     * </pre>
-     */
-    boolean hasDeviceId();
-    /**
-     * <code>optional string device_id = 4;</code>
-     *
-     * <pre>
-     * Opaque device type-specific identifier for the phone / tablet / whatever
-     * we should send notifications to.  iOS calls this a device ID, Android calls
-     * it a registration ID.
-     * </pre>
-     */
-    java.lang.String getDeviceId();
-    /**
-     * <code>optional string device_id = 4;</code>
-     *
-     * <pre>
-     * Opaque device type-specific identifier for the phone / tablet / whatever
-     * we should send notifications to.  iOS calls this a device ID, Android calls
-     * it a registration ID.
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getDeviceIdBytes();
-
-    // optional int64 create_time = 5;
-    /**
-     * <code>optional int64 create_time = 5;</code>
-     */
-    boolean hasCreateTime();
-    /**
-     * <code>optional int64 create_time = 5;</code>
-     */
-    long getCreateTime();
-  }
-  /**
-   * Protobuf type {@code DeviceRegistration}
-   */
-  public static final class DeviceRegistration extends
-      com.google.protobuf.GeneratedMessage
-      implements DeviceRegistrationOrBuilder {
-    // Use DeviceRegistration.newBuilder() to construct.
-    private DeviceRegistration(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private DeviceRegistration(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final DeviceRegistration defaultInstance;
-    public static DeviceRegistration getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public DeviceRegistration getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private DeviceRegistration(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              id_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              userId_ = input.readBytes();
-              break;
-            }
-            case 24: {
-              int rawValue = input.readEnum();
-              com.janknspank.proto.CoreProto.DeviceType value = com.janknspank.proto.CoreProto.DeviceType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
-              } else {
-                bitField0_ |= 0x00000004;
-                deviceType_ = value;
-              }
-              break;
-            }
-            case 34: {
-              bitField0_ |= 0x00000008;
-              deviceId_ = input.readBytes();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              createTime_ = input.readInt64();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.janknspank.proto.CoreProto.internal_static_DeviceRegistration_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.janknspank.proto.CoreProto.internal_static_DeviceRegistration_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.CoreProto.DeviceRegistration.class, com.janknspank.proto.CoreProto.DeviceRegistration.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<DeviceRegistration> PARSER =
-        new com.google.protobuf.AbstractParser<DeviceRegistration>() {
-      public DeviceRegistration parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new DeviceRegistration(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<DeviceRegistration> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    // optional string id = 1;
-    public static final int ID_FIELD_NUMBER = 1;
-    private java.lang.Object id_;
-    /**
-     * <code>optional string id = 1;</code>
-     *
-     * <pre>
-     * Unique ID for the user ID + device registration ID pair.
-     * </pre>
-     */
-    public boolean hasId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string id = 1;</code>
-     *
-     * <pre>
-     * Unique ID for the user ID + device registration ID pair.
-     * </pre>
-     */
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          id_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string id = 1;</code>
-     *
-     * <pre>
-     * Unique ID for the user ID + device registration ID pair.
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional string user_id = 2;
-    public static final int USER_ID_FIELD_NUMBER = 2;
-    private java.lang.Object userId_;
-    /**
-     * <code>optional string user_id = 2;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string user_id = 2;</code>
-     */
-    public java.lang.String getUserId() {
-      java.lang.Object ref = userId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string user_id = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUserIdBytes() {
-      java.lang.Object ref = userId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional .DeviceType device_type = 3;
-    public static final int DEVICE_TYPE_FIELD_NUMBER = 3;
-    private com.janknspank.proto.CoreProto.DeviceType deviceType_;
-    /**
-     * <code>optional .DeviceType device_type = 3;</code>
-     */
-    public boolean hasDeviceType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .DeviceType device_type = 3;</code>
-     */
-    public com.janknspank.proto.CoreProto.DeviceType getDeviceType() {
-      return deviceType_;
-    }
-
-    // optional string device_id = 4;
-    public static final int DEVICE_ID_FIELD_NUMBER = 4;
-    private java.lang.Object deviceId_;
-    /**
-     * <code>optional string device_id = 4;</code>
-     *
-     * <pre>
-     * Opaque device type-specific identifier for the phone / tablet / whatever
-     * we should send notifications to.  iOS calls this a device ID, Android calls
-     * it a registration ID.
-     * </pre>
-     */
-    public boolean hasDeviceId() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional string device_id = 4;</code>
-     *
-     * <pre>
-     * Opaque device type-specific identifier for the phone / tablet / whatever
-     * we should send notifications to.  iOS calls this a device ID, Android calls
-     * it a registration ID.
-     * </pre>
-     */
-    public java.lang.String getDeviceId() {
-      java.lang.Object ref = deviceId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          deviceId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string device_id = 4;</code>
-     *
-     * <pre>
-     * Opaque device type-specific identifier for the phone / tablet / whatever
-     * we should send notifications to.  iOS calls this a device ID, Android calls
-     * it a registration ID.
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getDeviceIdBytes() {
-      java.lang.Object ref = deviceId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deviceId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional int64 create_time = 5;
-    public static final int CREATE_TIME_FIELD_NUMBER = 5;
-    private long createTime_;
-    /**
-     * <code>optional int64 create_time = 5;</code>
-     */
-    public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int64 create_time = 5;</code>
-     */
-    public long getCreateTime() {
-      return createTime_;
-    }
-
-    private void initFields() {
-      id_ = "";
-      userId_ = "";
-      deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
-      deviceId_ = "";
-      createTime_ = 0L;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getUserIdBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, deviceType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getDeviceIdBytes());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, createTime_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getUserIdBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, deviceType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getDeviceIdBytes());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, createTime_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.DeviceRegistration parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.CoreProto.DeviceRegistration prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code DeviceRegistration}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.CoreProto.DeviceRegistrationOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.janknspank.proto.CoreProto.internal_static_DeviceRegistration_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CoreProto.internal_static_DeviceRegistration_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CoreProto.DeviceRegistration.class, com.janknspank.proto.CoreProto.DeviceRegistration.Builder.class);
-      }
-
-      // Construct using com.janknspank.proto.CoreProto.DeviceRegistration.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        id_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        deviceId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
-        createTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.janknspank.proto.CoreProto.internal_static_DeviceRegistration_descriptor;
-      }
-
-      public com.janknspank.proto.CoreProto.DeviceRegistration getDefaultInstanceForType() {
-        return com.janknspank.proto.CoreProto.DeviceRegistration.getDefaultInstance();
-      }
-
-      public com.janknspank.proto.CoreProto.DeviceRegistration build() {
-        com.janknspank.proto.CoreProto.DeviceRegistration result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.janknspank.proto.CoreProto.DeviceRegistration buildPartial() {
-        com.janknspank.proto.CoreProto.DeviceRegistration result = new com.janknspank.proto.CoreProto.DeviceRegistration(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.id_ = id_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.deviceType_ = deviceType_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.deviceId_ = deviceId_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.createTime_ = createTime_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.CoreProto.DeviceRegistration) {
-          return mergeFrom((com.janknspank.proto.CoreProto.DeviceRegistration)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.janknspank.proto.CoreProto.DeviceRegistration other) {
-        if (other == com.janknspank.proto.CoreProto.DeviceRegistration.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          bitField0_ |= 0x00000001;
-          id_ = other.id_;
-          onChanged();
-        }
-        if (other.hasUserId()) {
-          bitField0_ |= 0x00000002;
-          userId_ = other.userId_;
-          onChanged();
-        }
-        if (other.hasDeviceType()) {
-          setDeviceType(other.getDeviceType());
-        }
-        if (other.hasDeviceId()) {
-          bitField0_ |= 0x00000008;
-          deviceId_ = other.deviceId_;
-          onChanged();
-        }
-        if (other.hasCreateTime()) {
-          setCreateTime(other.getCreateTime());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.janknspank.proto.CoreProto.DeviceRegistration parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.CoreProto.DeviceRegistration) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // optional string id = 1;
-      private java.lang.Object id_ = "";
-      /**
-       * <code>optional string id = 1;</code>
-       *
-       * <pre>
-       * Unique ID for the user ID + device registration ID pair.
-       * </pre>
-       */
-      public boolean hasId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       *
-       * <pre>
-       * Unique ID for the user ID + device registration ID pair.
-       * </pre>
-       */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          id_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       *
-       * <pre>
-       * Unique ID for the user ID + device registration ID pair.
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       *
-       * <pre>
-       * Unique ID for the user ID + device registration ID pair.
-       * </pre>
-       */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       *
-       * <pre>
-       * Unique ID for the user ID + device registration ID pair.
-       * </pre>
-       */
-      public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       *
-       * <pre>
-       * Unique ID for the user ID + device registration ID pair.
-       * </pre>
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        id_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional string user_id = 2;
-      private java.lang.Object userId_ = "";
-      /**
-       * <code>optional string user_id = 2;</code>
-       */
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string user_id = 2;</code>
-       */
-      public java.lang.String getUserId() {
-        java.lang.Object ref = userId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string user_id = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUserIdBytes() {
-        java.lang.Object ref = userId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string user_id = 2;</code>
-       */
-      public Builder setUserId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        userId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string user_id = 2;</code>
-       */
-      public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        userId_ = getDefaultInstance().getUserId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string user_id = 2;</code>
-       */
-      public Builder setUserIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        userId_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional .DeviceType device_type = 3;
-      private com.janknspank.proto.CoreProto.DeviceType deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
-      /**
-       * <code>optional .DeviceType device_type = 3;</code>
-       */
-      public boolean hasDeviceType() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .DeviceType device_type = 3;</code>
-       */
-      public com.janknspank.proto.CoreProto.DeviceType getDeviceType() {
-        return deviceType_;
-      }
-      /**
-       * <code>optional .DeviceType device_type = 3;</code>
-       */
-      public Builder setDeviceType(com.janknspank.proto.CoreProto.DeviceType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000004;
-        deviceType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .DeviceType device_type = 3;</code>
-       */
-      public Builder clearDeviceType() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
-        onChanged();
-        return this;
-      }
-
-      // optional string device_id = 4;
-      private java.lang.Object deviceId_ = "";
-      /**
-       * <code>optional string device_id = 4;</code>
-       *
-       * <pre>
-       * Opaque device type-specific identifier for the phone / tablet / whatever
-       * we should send notifications to.  iOS calls this a device ID, Android calls
-       * it a registration ID.
-       * </pre>
-       */
-      public boolean hasDeviceId() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional string device_id = 4;</code>
-       *
-       * <pre>
-       * Opaque device type-specific identifier for the phone / tablet / whatever
-       * we should send notifications to.  iOS calls this a device ID, Android calls
-       * it a registration ID.
-       * </pre>
-       */
-      public java.lang.String getDeviceId() {
-        java.lang.Object ref = deviceId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          deviceId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string device_id = 4;</code>
-       *
-       * <pre>
-       * Opaque device type-specific identifier for the phone / tablet / whatever
-       * we should send notifications to.  iOS calls this a device ID, Android calls
-       * it a registration ID.
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getDeviceIdBytes() {
-        java.lang.Object ref = deviceId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deviceId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string device_id = 4;</code>
-       *
-       * <pre>
-       * Opaque device type-specific identifier for the phone / tablet / whatever
-       * we should send notifications to.  iOS calls this a device ID, Android calls
-       * it a registration ID.
-       * </pre>
-       */
-      public Builder setDeviceId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        deviceId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string device_id = 4;</code>
-       *
-       * <pre>
-       * Opaque device type-specific identifier for the phone / tablet / whatever
-       * we should send notifications to.  iOS calls this a device ID, Android calls
-       * it a registration ID.
-       * </pre>
-       */
-      public Builder clearDeviceId() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        deviceId_ = getDefaultInstance().getDeviceId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string device_id = 4;</code>
-       *
-       * <pre>
-       * Opaque device type-specific identifier for the phone / tablet / whatever
-       * we should send notifications to.  iOS calls this a device ID, Android calls
-       * it a registration ID.
-       * </pre>
-       */
-      public Builder setDeviceIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        deviceId_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional int64 create_time = 5;
-      private long createTime_ ;
-      /**
-       * <code>optional int64 create_time = 5;</code>
-       */
-      public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int64 create_time = 5;</code>
-       */
-      public long getCreateTime() {
-        return createTime_;
-      }
-      /**
-       * <code>optional int64 create_time = 5;</code>
-       */
-      public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000010;
-        createTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 create_time = 5;</code>
-       */
-      public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        createTime_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:DeviceRegistration)
-    }
-
-    static {
-      defaultInstance = new DeviceRegistration(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:DeviceRegistration)
-  }
-
-  public interface PushNotificationOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional string id = 1;
-    /**
-     * <code>optional string id = 1;</code>
-     */
-    boolean hasId();
-    /**
-     * <code>optional string id = 1;</code>
-     */
-    java.lang.String getId();
-    /**
-     * <code>optional string id = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getIdBytes();
-
-    // optional int64 create_time = 2;
-    /**
-     * <code>optional int64 create_time = 2;</code>
-     */
-    boolean hasCreateTime();
-    /**
-     * <code>optional int64 create_time = 2;</code>
-     */
-    long getCreateTime();
-
-    // optional int64 click_time = 3;
-    /**
-     * <code>optional int64 click_time = 3;</code>
-     *
-     * <pre>
-     * If the user clicked on the notification, and the app opened and sent us
-     * a ping, this is the time that happened.
-     * </pre>
-     */
-    boolean hasClickTime();
-    /**
-     * <code>optional int64 click_time = 3;</code>
-     *
-     * <pre>
-     * If the user clicked on the notification, and the app opened and sent us
-     * a ping, this is the time that happened.
-     * </pre>
-     */
-    long getClickTime();
-
-    // optional string user_id = 4;
-    /**
-     * <code>optional string user_id = 4;</code>
-     *
-     * <pre>
-     * The user who we sent the notification to.
-     * </pre>
-     */
-    boolean hasUserId();
-    /**
-     * <code>optional string user_id = 4;</code>
-     *
-     * <pre>
-     * The user who we sent the notification to.
-     * </pre>
-     */
-    java.lang.String getUserId();
-    /**
-     * <code>optional string user_id = 4;</code>
-     *
-     * <pre>
-     * The user who we sent the notification to.
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getUserIdBytes();
-
-    // optional string url_id = 5;
-    /**
-     * <code>optional string url_id = 5;</code>
-     *
-     * <pre>
-     * Optional: If we mentioned a specific article, this is the URL ID of that
-     * article.
-     * </pre>
-     */
-    boolean hasUrlId();
-    /**
-     * <code>optional string url_id = 5;</code>
-     *
-     * <pre>
-     * Optional: If we mentioned a specific article, this is the URL ID of that
-     * article.
-     * </pre>
-     */
-    java.lang.String getUrlId();
-    /**
-     * <code>optional string url_id = 5;</code>
-     *
-     * <pre>
-     * Optional: If we mentioned a specific article, this is the URL ID of that
-     * article.
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getUrlIdBytes();
-
-    // optional .DeviceType device_type = 6;
-    /**
-     * <code>optional .DeviceType device_type = 6;</code>
-     */
-    boolean hasDeviceType();
-    /**
-     * <code>optional .DeviceType device_type = 6;</code>
-     */
-    com.janknspank.proto.CoreProto.DeviceType getDeviceType();
-
-    // optional string device_id = 7;
-    /**
-     * <code>optional string device_id = 7;</code>
-     */
-    boolean hasDeviceId();
-    /**
-     * <code>optional string device_id = 7;</code>
-     */
-    java.lang.String getDeviceId();
-    /**
-     * <code>optional string device_id = 7;</code>
-     */
-    com.google.protobuf.ByteString
-        getDeviceIdBytes();
-
-    // optional string host = 8;
-    /**
-     * <code>optional string host = 8;</code>
-     *
-     * <pre>
-     * Identifier for the computer who initiated this notification.
-     * </pre>
-     */
-    boolean hasHost();
-    /**
-     * <code>optional string host = 8;</code>
-     *
-     * <pre>
-     * Identifier for the computer who initiated this notification.
-     * </pre>
-     */
-    java.lang.String getHost();
-    /**
-     * <code>optional string host = 8;</code>
-     *
-     * <pre>
-     * Identifier for the computer who initiated this notification.
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getHostBytes();
-
-    // optional string text = 9;
-    /**
-     * <code>optional string text = 9;</code>
-     *
-     * <pre>
-     * The actual text that we sent to the user.
-     * </pre>
-     */
-    boolean hasText();
-    /**
-     * <code>optional string text = 9;</code>
-     *
-     * <pre>
-     * The actual text that we sent to the user.
-     * </pre>
-     */
-    java.lang.String getText();
-    /**
-     * <code>optional string text = 9;</code>
-     *
-     * <pre>
-     * The actual text that we sent to the user.
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getTextBytes();
-  }
-  /**
-   * Protobuf type {@code PushNotification}
-   *
-   * <pre>
-   * Historical record of what notifications we've sent and to whom.
-   * </pre>
-   */
-  public static final class PushNotification extends
-      com.google.protobuf.GeneratedMessage
-      implements PushNotificationOrBuilder {
-    // Use PushNotification.newBuilder() to construct.
-    private PushNotification(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private PushNotification(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final PushNotification defaultInstance;
-    public static PushNotification getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public PushNotification getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PushNotification(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              id_ = input.readBytes();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              createTime_ = input.readInt64();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              clickTime_ = input.readInt64();
-              break;
-            }
-            case 34: {
-              bitField0_ |= 0x00000008;
-              userId_ = input.readBytes();
-              break;
-            }
-            case 42: {
-              bitField0_ |= 0x00000010;
-              urlId_ = input.readBytes();
-              break;
-            }
-            case 48: {
-              int rawValue = input.readEnum();
-              com.janknspank.proto.CoreProto.DeviceType value = com.janknspank.proto.CoreProto.DeviceType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(6, rawValue);
-              } else {
-                bitField0_ |= 0x00000020;
-                deviceType_ = value;
-              }
-              break;
-            }
-            case 58: {
-              bitField0_ |= 0x00000040;
-              deviceId_ = input.readBytes();
-              break;
-            }
-            case 66: {
-              bitField0_ |= 0x00000080;
-              host_ = input.readBytes();
-              break;
-            }
-            case 74: {
-              bitField0_ |= 0x00000100;
-              text_ = input.readBytes();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.janknspank.proto.CoreProto.internal_static_PushNotification_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.janknspank.proto.CoreProto.internal_static_PushNotification_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.janknspank.proto.CoreProto.PushNotification.class, com.janknspank.proto.CoreProto.PushNotification.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<PushNotification> PARSER =
-        new com.google.protobuf.AbstractParser<PushNotification>() {
-      public PushNotification parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PushNotification(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<PushNotification> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    // optional string id = 1;
-    public static final int ID_FIELD_NUMBER = 1;
-    private java.lang.Object id_;
-    /**
-     * <code>optional string id = 1;</code>
-     */
-    public boolean hasId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string id = 1;</code>
-     */
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          id_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string id = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional int64 create_time = 2;
-    public static final int CREATE_TIME_FIELD_NUMBER = 2;
-    private long createTime_;
-    /**
-     * <code>optional int64 create_time = 2;</code>
-     */
-    public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int64 create_time = 2;</code>
-     */
-    public long getCreateTime() {
-      return createTime_;
-    }
-
-    // optional int64 click_time = 3;
-    public static final int CLICK_TIME_FIELD_NUMBER = 3;
-    private long clickTime_;
-    /**
-     * <code>optional int64 click_time = 3;</code>
-     *
-     * <pre>
-     * If the user clicked on the notification, and the app opened and sent us
-     * a ping, this is the time that happened.
-     * </pre>
-     */
-    public boolean hasClickTime() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int64 click_time = 3;</code>
-     *
-     * <pre>
-     * If the user clicked on the notification, and the app opened and sent us
-     * a ping, this is the time that happened.
-     * </pre>
-     */
-    public long getClickTime() {
-      return clickTime_;
-    }
-
-    // optional string user_id = 4;
-    public static final int USER_ID_FIELD_NUMBER = 4;
-    private java.lang.Object userId_;
-    /**
-     * <code>optional string user_id = 4;</code>
-     *
-     * <pre>
-     * The user who we sent the notification to.
-     * </pre>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional string user_id = 4;</code>
-     *
-     * <pre>
-     * The user who we sent the notification to.
-     * </pre>
-     */
-    public java.lang.String getUserId() {
-      java.lang.Object ref = userId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string user_id = 4;</code>
-     *
-     * <pre>
-     * The user who we sent the notification to.
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getUserIdBytes() {
-      java.lang.Object ref = userId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional string url_id = 5;
-    public static final int URL_ID_FIELD_NUMBER = 5;
-    private java.lang.Object urlId_;
-    /**
-     * <code>optional string url_id = 5;</code>
-     *
-     * <pre>
-     * Optional: If we mentioned a specific article, this is the URL ID of that
-     * article.
-     * </pre>
-     */
-    public boolean hasUrlId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional string url_id = 5;</code>
-     *
-     * <pre>
-     * Optional: If we mentioned a specific article, this is the URL ID of that
-     * article.
-     * </pre>
-     */
-    public java.lang.String getUrlId() {
-      java.lang.Object ref = urlId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          urlId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string url_id = 5;</code>
-     *
-     * <pre>
-     * Optional: If we mentioned a specific article, this is the URL ID of that
-     * article.
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getUrlIdBytes() {
-      java.lang.Object ref = urlId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        urlId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional .DeviceType device_type = 6;
-    public static final int DEVICE_TYPE_FIELD_NUMBER = 6;
-    private com.janknspank.proto.CoreProto.DeviceType deviceType_;
-    /**
-     * <code>optional .DeviceType device_type = 6;</code>
-     */
-    public boolean hasDeviceType() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional .DeviceType device_type = 6;</code>
-     */
-    public com.janknspank.proto.CoreProto.DeviceType getDeviceType() {
-      return deviceType_;
-    }
-
-    // optional string device_id = 7;
-    public static final int DEVICE_ID_FIELD_NUMBER = 7;
-    private java.lang.Object deviceId_;
-    /**
-     * <code>optional string device_id = 7;</code>
-     */
-    public boolean hasDeviceId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string device_id = 7;</code>
-     */
-    public java.lang.String getDeviceId() {
-      java.lang.Object ref = deviceId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          deviceId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string device_id = 7;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDeviceIdBytes() {
-      java.lang.Object ref = deviceId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deviceId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional string host = 8;
-    public static final int HOST_FIELD_NUMBER = 8;
-    private java.lang.Object host_;
-    /**
-     * <code>optional string host = 8;</code>
-     *
-     * <pre>
-     * Identifier for the computer who initiated this notification.
-     * </pre>
-     */
-    public boolean hasHost() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional string host = 8;</code>
-     *
-     * <pre>
-     * Identifier for the computer who initiated this notification.
-     * </pre>
-     */
-    public java.lang.String getHost() {
-      java.lang.Object ref = host_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          host_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string host = 8;</code>
-     *
-     * <pre>
-     * Identifier for the computer who initiated this notification.
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getHostBytes() {
-      java.lang.Object ref = host_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        host_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional string text = 9;
-    public static final int TEXT_FIELD_NUMBER = 9;
-    private java.lang.Object text_;
-    /**
-     * <code>optional string text = 9;</code>
-     *
-     * <pre>
-     * The actual text that we sent to the user.
-     * </pre>
-     */
-    public boolean hasText() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional string text = 9;</code>
-     *
-     * <pre>
-     * The actual text that we sent to the user.
-     * </pre>
-     */
-    public java.lang.String getText() {
-      java.lang.Object ref = text_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          text_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string text = 9;</code>
-     *
-     * <pre>
-     * The actual text that we sent to the user.
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getTextBytes() {
-      java.lang.Object ref = text_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        text_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private void initFields() {
-      id_ = "";
-      createTime_ = 0L;
-      clickTime_ = 0L;
-      userId_ = "";
-      urlId_ = "";
-      deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
-      deviceId_ = "";
-      host_ = "";
-      text_ = "";
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, createTime_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, clickTime_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getUserIdBytes());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, getUrlIdBytes());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeEnum(6, deviceType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(7, getDeviceIdBytes());
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(8, getHostBytes());
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(9, getTextBytes());
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, createTime_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, clickTime_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getUserIdBytes());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getUrlIdBytes());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, deviceType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, getDeviceIdBytes());
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, getHostBytes());
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, getTextBytes());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.janknspank.proto.CoreProto.PushNotification parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.janknspank.proto.CoreProto.PushNotification prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code PushNotification}
-     *
-     * <pre>
-     * Historical record of what notifications we've sent and to whom.
-     * </pre>
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.CoreProto.PushNotificationOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.janknspank.proto.CoreProto.internal_static_PushNotification_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.janknspank.proto.CoreProto.internal_static_PushNotification_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.janknspank.proto.CoreProto.PushNotification.class, com.janknspank.proto.CoreProto.PushNotification.Builder.class);
-      }
-
-      // Construct using com.janknspank.proto.CoreProto.PushNotification.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        id_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        createTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        clickTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        userId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
-        urlId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
-        deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        deviceId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
-        host_ = "";
-        bitField0_ = (bitField0_ & ~0x00000080);
-        text_ = "";
-        bitField0_ = (bitField0_ & ~0x00000100);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.janknspank.proto.CoreProto.internal_static_PushNotification_descriptor;
-      }
-
-      public com.janknspank.proto.CoreProto.PushNotification getDefaultInstanceForType() {
-        return com.janknspank.proto.CoreProto.PushNotification.getDefaultInstance();
-      }
-
-      public com.janknspank.proto.CoreProto.PushNotification build() {
-        com.janknspank.proto.CoreProto.PushNotification result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.janknspank.proto.CoreProto.PushNotification buildPartial() {
-        com.janknspank.proto.CoreProto.PushNotification result = new com.janknspank.proto.CoreProto.PushNotification(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.id_ = id_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.createTime_ = createTime_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.clickTime_ = clickTime_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.urlId_ = urlId_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.deviceType_ = deviceType_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.deviceId_ = deviceId_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.host_ = host_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.text_ = text_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.janknspank.proto.CoreProto.PushNotification) {
-          return mergeFrom((com.janknspank.proto.CoreProto.PushNotification)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.janknspank.proto.CoreProto.PushNotification other) {
-        if (other == com.janknspank.proto.CoreProto.PushNotification.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          bitField0_ |= 0x00000001;
-          id_ = other.id_;
-          onChanged();
-        }
-        if (other.hasCreateTime()) {
-          setCreateTime(other.getCreateTime());
-        }
-        if (other.hasClickTime()) {
-          setClickTime(other.getClickTime());
-        }
-        if (other.hasUserId()) {
-          bitField0_ |= 0x00000008;
-          userId_ = other.userId_;
-          onChanged();
-        }
-        if (other.hasUrlId()) {
-          bitField0_ |= 0x00000010;
-          urlId_ = other.urlId_;
-          onChanged();
-        }
-        if (other.hasDeviceType()) {
-          setDeviceType(other.getDeviceType());
-        }
-        if (other.hasDeviceId()) {
-          bitField0_ |= 0x00000040;
-          deviceId_ = other.deviceId_;
-          onChanged();
-        }
-        if (other.hasHost()) {
-          bitField0_ |= 0x00000080;
-          host_ = other.host_;
-          onChanged();
-        }
-        if (other.hasText()) {
-          bitField0_ |= 0x00000100;
-          text_ = other.text_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.janknspank.proto.CoreProto.PushNotification parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.janknspank.proto.CoreProto.PushNotification) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // optional string id = 1;
-      private java.lang.Object id_ = "";
-      /**
-       * <code>optional string id = 1;</code>
-       */
-      public boolean hasId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          id_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       */
-      public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string id = 1;</code>
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        id_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional int64 create_time = 2;
-      private long createTime_ ;
-      /**
-       * <code>optional int64 create_time = 2;</code>
-       */
-      public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int64 create_time = 2;</code>
-       */
-      public long getCreateTime() {
-        return createTime_;
-      }
-      /**
-       * <code>optional int64 create_time = 2;</code>
-       */
-      public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000002;
-        createTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 create_time = 2;</code>
-       */
-      public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        createTime_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // optional int64 click_time = 3;
-      private long clickTime_ ;
-      /**
-       * <code>optional int64 click_time = 3;</code>
-       *
-       * <pre>
-       * If the user clicked on the notification, and the app opened and sent us
-       * a ping, this is the time that happened.
-       * </pre>
-       */
-      public boolean hasClickTime() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int64 click_time = 3;</code>
-       *
-       * <pre>
-       * If the user clicked on the notification, and the app opened and sent us
-       * a ping, this is the time that happened.
-       * </pre>
-       */
-      public long getClickTime() {
-        return clickTime_;
-      }
-      /**
-       * <code>optional int64 click_time = 3;</code>
-       *
-       * <pre>
-       * If the user clicked on the notification, and the app opened and sent us
-       * a ping, this is the time that happened.
-       * </pre>
-       */
-      public Builder setClickTime(long value) {
-        bitField0_ |= 0x00000004;
-        clickTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 click_time = 3;</code>
-       *
-       * <pre>
-       * If the user clicked on the notification, and the app opened and sent us
-       * a ping, this is the time that happened.
-       * </pre>
-       */
-      public Builder clearClickTime() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        clickTime_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // optional string user_id = 4;
-      private java.lang.Object userId_ = "";
-      /**
-       * <code>optional string user_id = 4;</code>
-       *
-       * <pre>
-       * The user who we sent the notification to.
-       * </pre>
-       */
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional string user_id = 4;</code>
-       *
-       * <pre>
-       * The user who we sent the notification to.
-       * </pre>
-       */
-      public java.lang.String getUserId() {
-        java.lang.Object ref = userId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string user_id = 4;</code>
-       *
-       * <pre>
-       * The user who we sent the notification to.
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getUserIdBytes() {
-        java.lang.Object ref = userId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string user_id = 4;</code>
-       *
-       * <pre>
-       * The user who we sent the notification to.
-       * </pre>
-       */
-      public Builder setUserId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        userId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string user_id = 4;</code>
-       *
-       * <pre>
-       * The user who we sent the notification to.
-       * </pre>
-       */
-      public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        userId_ = getDefaultInstance().getUserId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string user_id = 4;</code>
-       *
-       * <pre>
-       * The user who we sent the notification to.
-       * </pre>
-       */
-      public Builder setUserIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        userId_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional string url_id = 5;
-      private java.lang.Object urlId_ = "";
-      /**
-       * <code>optional string url_id = 5;</code>
-       *
-       * <pre>
-       * Optional: If we mentioned a specific article, this is the URL ID of that
-       * article.
-       * </pre>
-       */
-      public boolean hasUrlId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional string url_id = 5;</code>
-       *
-       * <pre>
-       * Optional: If we mentioned a specific article, this is the URL ID of that
-       * article.
-       * </pre>
-       */
-      public java.lang.String getUrlId() {
-        java.lang.Object ref = urlId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          urlId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string url_id = 5;</code>
-       *
-       * <pre>
-       * Optional: If we mentioned a specific article, this is the URL ID of that
-       * article.
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getUrlIdBytes() {
-        java.lang.Object ref = urlId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          urlId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string url_id = 5;</code>
-       *
-       * <pre>
-       * Optional: If we mentioned a specific article, this is the URL ID of that
-       * article.
-       * </pre>
-       */
-      public Builder setUrlId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
-        urlId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string url_id = 5;</code>
-       *
-       * <pre>
-       * Optional: If we mentioned a specific article, this is the URL ID of that
-       * article.
-       * </pre>
-       */
-      public Builder clearUrlId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        urlId_ = getDefaultInstance().getUrlId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string url_id = 5;</code>
-       *
-       * <pre>
-       * Optional: If we mentioned a specific article, this is the URL ID of that
-       * article.
-       * </pre>
-       */
-      public Builder setUrlIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
-        urlId_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional .DeviceType device_type = 6;
-      private com.janknspank.proto.CoreProto.DeviceType deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
-      /**
-       * <code>optional .DeviceType device_type = 6;</code>
-       */
-      public boolean hasDeviceType() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional .DeviceType device_type = 6;</code>
-       */
-      public com.janknspank.proto.CoreProto.DeviceType getDeviceType() {
-        return deviceType_;
-      }
-      /**
-       * <code>optional .DeviceType device_type = 6;</code>
-       */
-      public Builder setDeviceType(com.janknspank.proto.CoreProto.DeviceType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000020;
-        deviceType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .DeviceType device_type = 6;</code>
-       */
-      public Builder clearDeviceType() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        deviceType_ = com.janknspank.proto.CoreProto.DeviceType.UNKNOWN;
-        onChanged();
-        return this;
-      }
-
-      // optional string device_id = 7;
-      private java.lang.Object deviceId_ = "";
-      /**
-       * <code>optional string device_id = 7;</code>
-       */
-      public boolean hasDeviceId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional string device_id = 7;</code>
-       */
-      public java.lang.String getDeviceId() {
-        java.lang.Object ref = deviceId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          deviceId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string device_id = 7;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDeviceIdBytes() {
-        java.lang.Object ref = deviceId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deviceId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string device_id = 7;</code>
-       */
-      public Builder setDeviceId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        deviceId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string device_id = 7;</code>
-       */
-      public Builder clearDeviceId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        deviceId_ = getDefaultInstance().getDeviceId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string device_id = 7;</code>
-       */
-      public Builder setDeviceIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        deviceId_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional string host = 8;
-      private java.lang.Object host_ = "";
-      /**
-       * <code>optional string host = 8;</code>
-       *
-       * <pre>
-       * Identifier for the computer who initiated this notification.
-       * </pre>
-       */
-      public boolean hasHost() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional string host = 8;</code>
-       *
-       * <pre>
-       * Identifier for the computer who initiated this notification.
-       * </pre>
-       */
-      public java.lang.String getHost() {
-        java.lang.Object ref = host_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          host_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string host = 8;</code>
-       *
-       * <pre>
-       * Identifier for the computer who initiated this notification.
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getHostBytes() {
-        java.lang.Object ref = host_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          host_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string host = 8;</code>
-       *
-       * <pre>
-       * Identifier for the computer who initiated this notification.
-       * </pre>
-       */
-      public Builder setHost(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-        host_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string host = 8;</code>
-       *
-       * <pre>
-       * Identifier for the computer who initiated this notification.
-       * </pre>
-       */
-      public Builder clearHost() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        host_ = getDefaultInstance().getHost();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string host = 8;</code>
-       *
-       * <pre>
-       * Identifier for the computer who initiated this notification.
-       * </pre>
-       */
-      public Builder setHostBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-        host_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional string text = 9;
-      private java.lang.Object text_ = "";
-      /**
-       * <code>optional string text = 9;</code>
-       *
-       * <pre>
-       * The actual text that we sent to the user.
-       * </pre>
-       */
-      public boolean hasText() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional string text = 9;</code>
-       *
-       * <pre>
-       * The actual text that we sent to the user.
-       * </pre>
-       */
-      public java.lang.String getText() {
-        java.lang.Object ref = text_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          text_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string text = 9;</code>
-       *
-       * <pre>
-       * The actual text that we sent to the user.
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getTextBytes() {
-        java.lang.Object ref = text_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          text_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string text = 9;</code>
-       *
-       * <pre>
-       * The actual text that we sent to the user.
-       * </pre>
-       */
-      public Builder setText(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000100;
-        text_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string text = 9;</code>
-       *
-       * <pre>
-       * The actual text that we sent to the user.
-       * </pre>
-       */
-      public Builder clearText() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        text_ = getDefaultInstance().getText();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string text = 9;</code>
-       *
-       * <pre>
-       * The actual text that we sent to the user.
-       * </pre>
-       */
-      public Builder setTextBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000100;
-        text_ = value;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:PushNotification)
-    }
-
-    static {
-      defaultInstance = new PushNotification(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:PushNotification)
-  }
-
   public interface KeywordToEntityIdOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -18829,6 +15911,981 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:KeywordToEntityId)
   }
 
+  public interface IndustryVectorNormalizationDataOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional .Distribution distribution = 1;
+    /**
+     * <code>optional .Distribution distribution = 1;</code>
+     */
+    boolean hasDistribution();
+    /**
+     * <code>optional .Distribution distribution = 1;</code>
+     */
+    com.janknspank.proto.CoreProto.Distribution getDistribution();
+    /**
+     * <code>optional .Distribution distribution = 1;</code>
+     */
+    com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder();
+
+    // optional double similarity_threshold_10_percent = 2;
+    /**
+     * <code>optional double similarity_threshold_10_percent = 2;</code>
+     *
+     * <pre>
+     * This is the non-normalized similarity score for a seed-word article at the
+     * bottom 10% of similarities.  This basically gives us a lower-bound for
+     * similarity scores, where scores less than this would tend to indicate
+     * little relevancy to this vector, while scores above this would tend to have
+     * greater relevancy.  We must do this because different industries tend to
+     * have wide differences in their publishing rates.  Tech sites are very
+     * prolific, supermarket articles are rare.  By using this threshold we're
+     * able to make sure articles from different industries receive similar
+     * similarity scores independently form their verbosity.
+     * </pre>
+     */
+    boolean hasSimilarityThreshold10Percent();
+    /**
+     * <code>optional double similarity_threshold_10_percent = 2;</code>
+     *
+     * <pre>
+     * This is the non-normalized similarity score for a seed-word article at the
+     * bottom 10% of similarities.  This basically gives us a lower-bound for
+     * similarity scores, where scores less than this would tend to indicate
+     * little relevancy to this vector, while scores above this would tend to have
+     * greater relevancy.  We must do this because different industries tend to
+     * have wide differences in their publishing rates.  Tech sites are very
+     * prolific, supermarket articles are rare.  By using this threshold we're
+     * able to make sure articles from different industries receive similar
+     * similarity scores independently form their verbosity.
+     * </pre>
+     */
+    double getSimilarityThreshold10Percent();
+
+    // optional double similarity_threshold_50_percent = 3;
+    /**
+     * <code>optional double similarity_threshold_50_percent = 3;</code>
+     */
+    boolean hasSimilarityThreshold50Percent();
+    /**
+     * <code>optional double similarity_threshold_50_percent = 3;</code>
+     */
+    double getSimilarityThreshold50Percent();
+
+    // optional double ratio_of_articles_above_threshold_10_percent = 4;
+    /**
+     * <code>optional double ratio_of_articles_above_threshold_10_percent = 4;</code>
+     *
+     * <pre>
+     * What percentage of the article corpus scores higher than 
+     * similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+     * should have scores around 0.05.
+     * </pre>
+     */
+    boolean hasRatioOfArticlesAboveThreshold10Percent();
+    /**
+     * <code>optional double ratio_of_articles_above_threshold_10_percent = 4;</code>
+     *
+     * <pre>
+     * What percentage of the article corpus scores higher than 
+     * similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+     * should have scores around 0.05.
+     * </pre>
+     */
+    double getRatioOfArticlesAboveThreshold10Percent();
+
+    // optional double ratio_of_articles_above_threshold_50_percent = 5;
+    /**
+     * <code>optional double ratio_of_articles_above_threshold_50_percent = 5;</code>
+     */
+    boolean hasRatioOfArticlesAboveThreshold50Percent();
+    /**
+     * <code>optional double ratio_of_articles_above_threshold_50_percent = 5;</code>
+     */
+    double getRatioOfArticlesAboveThreshold50Percent();
+  }
+  /**
+   * Protobuf type {@code IndustryVectorNormalizationData}
+   */
+  public static final class IndustryVectorNormalizationData extends
+      com.google.protobuf.GeneratedMessage
+      implements IndustryVectorNormalizationDataOrBuilder {
+    // Use IndustryVectorNormalizationData.newBuilder() to construct.
+    private IndustryVectorNormalizationData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IndustryVectorNormalizationData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final IndustryVectorNormalizationData defaultInstance;
+    public static IndustryVectorNormalizationData getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IndustryVectorNormalizationData getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private IndustryVectorNormalizationData(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.janknspank.proto.CoreProto.Distribution.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = distribution_.toBuilder();
+              }
+              distribution_ = input.readMessage(com.janknspank.proto.CoreProto.Distribution.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(distribution_);
+                distribution_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 17: {
+              bitField0_ |= 0x00000002;
+              similarityThreshold10Percent_ = input.readDouble();
+              break;
+            }
+            case 25: {
+              bitField0_ |= 0x00000004;
+              similarityThreshold50Percent_ = input.readDouble();
+              break;
+            }
+            case 33: {
+              bitField0_ |= 0x00000008;
+              ratioOfArticlesAboveThreshold10Percent_ = input.readDouble();
+              break;
+            }
+            case 41: {
+              bitField0_ |= 0x00000010;
+              ratioOfArticlesAboveThreshold50Percent_ = input.readDouble();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_IndustryVectorNormalizationData_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_IndustryVectorNormalizationData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.IndustryVectorNormalizationData.class, com.janknspank.proto.CoreProto.IndustryVectorNormalizationData.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<IndustryVectorNormalizationData> PARSER =
+        new com.google.protobuf.AbstractParser<IndustryVectorNormalizationData>() {
+      public IndustryVectorNormalizationData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IndustryVectorNormalizationData(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IndustryVectorNormalizationData> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional .Distribution distribution = 1;
+    public static final int DISTRIBUTION_FIELD_NUMBER = 1;
+    private com.janknspank.proto.CoreProto.Distribution distribution_;
+    /**
+     * <code>optional .Distribution distribution = 1;</code>
+     */
+    public boolean hasDistribution() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .Distribution distribution = 1;</code>
+     */
+    public com.janknspank.proto.CoreProto.Distribution getDistribution() {
+      return distribution_;
+    }
+    /**
+     * <code>optional .Distribution distribution = 1;</code>
+     */
+    public com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder() {
+      return distribution_;
+    }
+
+    // optional double similarity_threshold_10_percent = 2;
+    public static final int SIMILARITY_THRESHOLD_10_PERCENT_FIELD_NUMBER = 2;
+    private double similarityThreshold10Percent_;
+    /**
+     * <code>optional double similarity_threshold_10_percent = 2;</code>
+     *
+     * <pre>
+     * This is the non-normalized similarity score for a seed-word article at the
+     * bottom 10% of similarities.  This basically gives us a lower-bound for
+     * similarity scores, where scores less than this would tend to indicate
+     * little relevancy to this vector, while scores above this would tend to have
+     * greater relevancy.  We must do this because different industries tend to
+     * have wide differences in their publishing rates.  Tech sites are very
+     * prolific, supermarket articles are rare.  By using this threshold we're
+     * able to make sure articles from different industries receive similar
+     * similarity scores independently form their verbosity.
+     * </pre>
+     */
+    public boolean hasSimilarityThreshold10Percent() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional double similarity_threshold_10_percent = 2;</code>
+     *
+     * <pre>
+     * This is the non-normalized similarity score for a seed-word article at the
+     * bottom 10% of similarities.  This basically gives us a lower-bound for
+     * similarity scores, where scores less than this would tend to indicate
+     * little relevancy to this vector, while scores above this would tend to have
+     * greater relevancy.  We must do this because different industries tend to
+     * have wide differences in their publishing rates.  Tech sites are very
+     * prolific, supermarket articles are rare.  By using this threshold we're
+     * able to make sure articles from different industries receive similar
+     * similarity scores independently form their verbosity.
+     * </pre>
+     */
+    public double getSimilarityThreshold10Percent() {
+      return similarityThreshold10Percent_;
+    }
+
+    // optional double similarity_threshold_50_percent = 3;
+    public static final int SIMILARITY_THRESHOLD_50_PERCENT_FIELD_NUMBER = 3;
+    private double similarityThreshold50Percent_;
+    /**
+     * <code>optional double similarity_threshold_50_percent = 3;</code>
+     */
+    public boolean hasSimilarityThreshold50Percent() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional double similarity_threshold_50_percent = 3;</code>
+     */
+    public double getSimilarityThreshold50Percent() {
+      return similarityThreshold50Percent_;
+    }
+
+    // optional double ratio_of_articles_above_threshold_10_percent = 4;
+    public static final int RATIO_OF_ARTICLES_ABOVE_THRESHOLD_10_PERCENT_FIELD_NUMBER = 4;
+    private double ratioOfArticlesAboveThreshold10Percent_;
+    /**
+     * <code>optional double ratio_of_articles_above_threshold_10_percent = 4;</code>
+     *
+     * <pre>
+     * What percentage of the article corpus scores higher than 
+     * similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+     * should have scores around 0.05.
+     * </pre>
+     */
+    public boolean hasRatioOfArticlesAboveThreshold10Percent() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional double ratio_of_articles_above_threshold_10_percent = 4;</code>
+     *
+     * <pre>
+     * What percentage of the article corpus scores higher than 
+     * similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+     * should have scores around 0.05.
+     * </pre>
+     */
+    public double getRatioOfArticlesAboveThreshold10Percent() {
+      return ratioOfArticlesAboveThreshold10Percent_;
+    }
+
+    // optional double ratio_of_articles_above_threshold_50_percent = 5;
+    public static final int RATIO_OF_ARTICLES_ABOVE_THRESHOLD_50_PERCENT_FIELD_NUMBER = 5;
+    private double ratioOfArticlesAboveThreshold50Percent_;
+    /**
+     * <code>optional double ratio_of_articles_above_threshold_50_percent = 5;</code>
+     */
+    public boolean hasRatioOfArticlesAboveThreshold50Percent() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional double ratio_of_articles_above_threshold_50_percent = 5;</code>
+     */
+    public double getRatioOfArticlesAboveThreshold50Percent() {
+      return ratioOfArticlesAboveThreshold50Percent_;
+    }
+
+    private void initFields() {
+      distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+      similarityThreshold10Percent_ = 0D;
+      similarityThreshold50Percent_ = 0D;
+      ratioOfArticlesAboveThreshold10Percent_ = 0D;
+      ratioOfArticlesAboveThreshold50Percent_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, distribution_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeDouble(2, similarityThreshold10Percent_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeDouble(3, similarityThreshold50Percent_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, ratioOfArticlesAboveThreshold10Percent_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeDouble(5, ratioOfArticlesAboveThreshold50Percent_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, distribution_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, similarityThreshold10Percent_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(3, similarityThreshold50Percent_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, ratioOfArticlesAboveThreshold10Percent_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(5, ratioOfArticlesAboveThreshold50Percent_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.IndustryVectorNormalizationData prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code IndustryVectorNormalizationData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.IndustryVectorNormalizationDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_IndustryVectorNormalizationData_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_IndustryVectorNormalizationData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.IndustryVectorNormalizationData.class, com.janknspank.proto.CoreProto.IndustryVectorNormalizationData.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.IndustryVectorNormalizationData.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getDistributionFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (distributionBuilder_ == null) {
+          distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+        } else {
+          distributionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        similarityThreshold10Percent_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        similarityThreshold50Percent_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        ratioOfArticlesAboveThreshold10Percent_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        ratioOfArticlesAboveThreshold50Percent_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_IndustryVectorNormalizationData_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.IndustryVectorNormalizationData getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.IndustryVectorNormalizationData.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.IndustryVectorNormalizationData build() {
+        com.janknspank.proto.CoreProto.IndustryVectorNormalizationData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.IndustryVectorNormalizationData buildPartial() {
+        com.janknspank.proto.CoreProto.IndustryVectorNormalizationData result = new com.janknspank.proto.CoreProto.IndustryVectorNormalizationData(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (distributionBuilder_ == null) {
+          result.distribution_ = distribution_;
+        } else {
+          result.distribution_ = distributionBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.similarityThreshold10Percent_ = similarityThreshold10Percent_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.similarityThreshold50Percent_ = similarityThreshold50Percent_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.ratioOfArticlesAboveThreshold10Percent_ = ratioOfArticlesAboveThreshold10Percent_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.ratioOfArticlesAboveThreshold50Percent_ = ratioOfArticlesAboveThreshold50Percent_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.IndustryVectorNormalizationData) {
+          return mergeFrom((com.janknspank.proto.CoreProto.IndustryVectorNormalizationData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.IndustryVectorNormalizationData other) {
+        if (other == com.janknspank.proto.CoreProto.IndustryVectorNormalizationData.getDefaultInstance()) return this;
+        if (other.hasDistribution()) {
+          mergeDistribution(other.getDistribution());
+        }
+        if (other.hasSimilarityThreshold10Percent()) {
+          setSimilarityThreshold10Percent(other.getSimilarityThreshold10Percent());
+        }
+        if (other.hasSimilarityThreshold50Percent()) {
+          setSimilarityThreshold50Percent(other.getSimilarityThreshold50Percent());
+        }
+        if (other.hasRatioOfArticlesAboveThreshold10Percent()) {
+          setRatioOfArticlesAboveThreshold10Percent(other.getRatioOfArticlesAboveThreshold10Percent());
+        }
+        if (other.hasRatioOfArticlesAboveThreshold50Percent()) {
+          setRatioOfArticlesAboveThreshold50Percent(other.getRatioOfArticlesAboveThreshold50Percent());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.IndustryVectorNormalizationData parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.IndustryVectorNormalizationData) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional .Distribution distribution = 1;
+      private com.janknspank.proto.CoreProto.Distribution distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder> distributionBuilder_;
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      public boolean hasDistribution() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.Distribution getDistribution() {
+        if (distributionBuilder_ == null) {
+          return distribution_;
+        } else {
+          return distributionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      public Builder setDistribution(com.janknspank.proto.CoreProto.Distribution value) {
+        if (distributionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          distribution_ = value;
+          onChanged();
+        } else {
+          distributionBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      public Builder setDistribution(
+          com.janknspank.proto.CoreProto.Distribution.Builder builderForValue) {
+        if (distributionBuilder_ == null) {
+          distribution_ = builderForValue.build();
+          onChanged();
+        } else {
+          distributionBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      public Builder mergeDistribution(com.janknspank.proto.CoreProto.Distribution value) {
+        if (distributionBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              distribution_ != com.janknspank.proto.CoreProto.Distribution.getDefaultInstance()) {
+            distribution_ =
+              com.janknspank.proto.CoreProto.Distribution.newBuilder(distribution_).mergeFrom(value).buildPartial();
+          } else {
+            distribution_ = value;
+          }
+          onChanged();
+        } else {
+          distributionBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      public Builder clearDistribution() {
+        if (distributionBuilder_ == null) {
+          distribution_ = com.janknspank.proto.CoreProto.Distribution.getDefaultInstance();
+          onChanged();
+        } else {
+          distributionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.Distribution.Builder getDistributionBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getDistributionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      public com.janknspank.proto.CoreProto.DistributionOrBuilder getDistributionOrBuilder() {
+        if (distributionBuilder_ != null) {
+          return distributionBuilder_.getMessageOrBuilder();
+        } else {
+          return distribution_;
+        }
+      }
+      /**
+       * <code>optional .Distribution distribution = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder> 
+          getDistributionFieldBuilder() {
+        if (distributionBuilder_ == null) {
+          distributionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.CoreProto.Distribution, com.janknspank.proto.CoreProto.Distribution.Builder, com.janknspank.proto.CoreProto.DistributionOrBuilder>(
+                  distribution_,
+                  getParentForChildren(),
+                  isClean());
+          distribution_ = null;
+        }
+        return distributionBuilder_;
+      }
+
+      // optional double similarity_threshold_10_percent = 2;
+      private double similarityThreshold10Percent_ ;
+      /**
+       * <code>optional double similarity_threshold_10_percent = 2;</code>
+       *
+       * <pre>
+       * This is the non-normalized similarity score for a seed-word article at the
+       * bottom 10% of similarities.  This basically gives us a lower-bound for
+       * similarity scores, where scores less than this would tend to indicate
+       * little relevancy to this vector, while scores above this would tend to have
+       * greater relevancy.  We must do this because different industries tend to
+       * have wide differences in their publishing rates.  Tech sites are very
+       * prolific, supermarket articles are rare.  By using this threshold we're
+       * able to make sure articles from different industries receive similar
+       * similarity scores independently form their verbosity.
+       * </pre>
+       */
+      public boolean hasSimilarityThreshold10Percent() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional double similarity_threshold_10_percent = 2;</code>
+       *
+       * <pre>
+       * This is the non-normalized similarity score for a seed-word article at the
+       * bottom 10% of similarities.  This basically gives us a lower-bound for
+       * similarity scores, where scores less than this would tend to indicate
+       * little relevancy to this vector, while scores above this would tend to have
+       * greater relevancy.  We must do this because different industries tend to
+       * have wide differences in their publishing rates.  Tech sites are very
+       * prolific, supermarket articles are rare.  By using this threshold we're
+       * able to make sure articles from different industries receive similar
+       * similarity scores independently form their verbosity.
+       * </pre>
+       */
+      public double getSimilarityThreshold10Percent() {
+        return similarityThreshold10Percent_;
+      }
+      /**
+       * <code>optional double similarity_threshold_10_percent = 2;</code>
+       *
+       * <pre>
+       * This is the non-normalized similarity score for a seed-word article at the
+       * bottom 10% of similarities.  This basically gives us a lower-bound for
+       * similarity scores, where scores less than this would tend to indicate
+       * little relevancy to this vector, while scores above this would tend to have
+       * greater relevancy.  We must do this because different industries tend to
+       * have wide differences in their publishing rates.  Tech sites are very
+       * prolific, supermarket articles are rare.  By using this threshold we're
+       * able to make sure articles from different industries receive similar
+       * similarity scores independently form their verbosity.
+       * </pre>
+       */
+      public Builder setSimilarityThreshold10Percent(double value) {
+        bitField0_ |= 0x00000002;
+        similarityThreshold10Percent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double similarity_threshold_10_percent = 2;</code>
+       *
+       * <pre>
+       * This is the non-normalized similarity score for a seed-word article at the
+       * bottom 10% of similarities.  This basically gives us a lower-bound for
+       * similarity scores, where scores less than this would tend to indicate
+       * little relevancy to this vector, while scores above this would tend to have
+       * greater relevancy.  We must do this because different industries tend to
+       * have wide differences in their publishing rates.  Tech sites are very
+       * prolific, supermarket articles are rare.  By using this threshold we're
+       * able to make sure articles from different industries receive similar
+       * similarity scores independently form their verbosity.
+       * </pre>
+       */
+      public Builder clearSimilarityThreshold10Percent() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        similarityThreshold10Percent_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional double similarity_threshold_50_percent = 3;
+      private double similarityThreshold50Percent_ ;
+      /**
+       * <code>optional double similarity_threshold_50_percent = 3;</code>
+       */
+      public boolean hasSimilarityThreshold50Percent() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional double similarity_threshold_50_percent = 3;</code>
+       */
+      public double getSimilarityThreshold50Percent() {
+        return similarityThreshold50Percent_;
+      }
+      /**
+       * <code>optional double similarity_threshold_50_percent = 3;</code>
+       */
+      public Builder setSimilarityThreshold50Percent(double value) {
+        bitField0_ |= 0x00000004;
+        similarityThreshold50Percent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double similarity_threshold_50_percent = 3;</code>
+       */
+      public Builder clearSimilarityThreshold50Percent() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        similarityThreshold50Percent_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional double ratio_of_articles_above_threshold_10_percent = 4;
+      private double ratioOfArticlesAboveThreshold10Percent_ ;
+      /**
+       * <code>optional double ratio_of_articles_above_threshold_10_percent = 4;</code>
+       *
+       * <pre>
+       * What percentage of the article corpus scores higher than 
+       * similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+       * should have scores around 0.05.
+       * </pre>
+       */
+      public boolean hasRatioOfArticlesAboveThreshold10Percent() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional double ratio_of_articles_above_threshold_10_percent = 4;</code>
+       *
+       * <pre>
+       * What percentage of the article corpus scores higher than 
+       * similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+       * should have scores around 0.05.
+       * </pre>
+       */
+      public double getRatioOfArticlesAboveThreshold10Percent() {
+        return ratioOfArticlesAboveThreshold10Percent_;
+      }
+      /**
+       * <code>optional double ratio_of_articles_above_threshold_10_percent = 4;</code>
+       *
+       * <pre>
+       * What percentage of the article corpus scores higher than 
+       * similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+       * should have scores around 0.05.
+       * </pre>
+       */
+      public Builder setRatioOfArticlesAboveThreshold10Percent(double value) {
+        bitField0_ |= 0x00000008;
+        ratioOfArticlesAboveThreshold10Percent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double ratio_of_articles_above_threshold_10_percent = 4;</code>
+       *
+       * <pre>
+       * What percentage of the article corpus scores higher than 
+       * similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+       * should have scores around 0.05.
+       * </pre>
+       */
+      public Builder clearRatioOfArticlesAboveThreshold10Percent() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        ratioOfArticlesAboveThreshold10Percent_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional double ratio_of_articles_above_threshold_50_percent = 5;
+      private double ratioOfArticlesAboveThreshold50Percent_ ;
+      /**
+       * <code>optional double ratio_of_articles_above_threshold_50_percent = 5;</code>
+       */
+      public boolean hasRatioOfArticlesAboveThreshold50Percent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional double ratio_of_articles_above_threshold_50_percent = 5;</code>
+       */
+      public double getRatioOfArticlesAboveThreshold50Percent() {
+        return ratioOfArticlesAboveThreshold50Percent_;
+      }
+      /**
+       * <code>optional double ratio_of_articles_above_threshold_50_percent = 5;</code>
+       */
+      public Builder setRatioOfArticlesAboveThreshold50Percent(double value) {
+        bitField0_ |= 0x00000010;
+        ratioOfArticlesAboveThreshold50Percent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double ratio_of_articles_above_threshold_50_percent = 5;</code>
+       */
+      public Builder clearRatioOfArticlesAboveThreshold50Percent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        ratioOfArticlesAboveThreshold50Percent_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IndustryVectorNormalizationData)
+    }
+
+    static {
+      defaultInstance = new IndustryVectorNormalizationData(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IndustryVectorNormalizationData)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -18905,20 +16962,15 @@ public final class CoreProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_UrlRating_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_DeviceRegistration_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_DeviceRegistration_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_PushNotification_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_PushNotification_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_KeywordToEntityId_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_KeywordToEntityId_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_IndustryVectorNormalizationData_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_IndustryVectorNormalizationData_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -18981,49 +17033,42 @@ public final class CoreProto {
       "\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035" +
       "\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001:(\212\265\030$MongoDB.TrainedArticleClassifi" +
-      "cation\"\207\001\n\014Distribution\022,\n\npercentile\030\001 " +
-      "\003(\0132\030.Distribution.Percentile\032I\n\nPercent" +
-      "ile\022\022\n\npercentile\030\001 \001(\005\022\r\n\005value\030\002 \001(\001\022\030" +
-      "\n\020data_point_count\030\003 \001(\003\"\226\003\n\026ShareNormal" +
-      "izationData\022T\n\027time_range_distribution\030\002" +
-      " \003(\0132-.ShareNormalizationData.TimeRangeD" +
-      "istributionB\004\210\246\035\001\022J\n\022domain_share_count\030",
-      "\003 \003(\0132(.ShareNormalizationData.DomainSha" +
-      "reCountB\004\210\246\035\001\032x\n\025TimeRangeDistribution\022\032" +
-      "\n\014start_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis" +
-      "\030\002 \001(\003B\004\210\246\035\001\022)\n\014distribution\030\003 \001(\0132\r.Dis" +
-      "tributionB\004\210\246\035\001\032`\n\020DomainShareCount\022\024\n\006d" +
-      "omain\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 \001(\003" +
-      "B\004\210\246\035\001\022\031\n\013share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUr" +
-      "lRating\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035" +
-      "\003\022#\n\005email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036" +
-      "\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating",
-      "\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210" +
-      "\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRating\"\331\001\n\022Dev" +
-      "iceRegistration\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035" +
-      "\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001" +
-      "\022&\n\013device_type\030\003 \001(\0162\013.DeviceTypeB\004\210\246\035\001" +
-      "\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\031\n\013cre" +
-      "ate_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032MongoDB.Device" +
-      "Registration\"\274\002\n\020PushNotification\022 \n\002id\030" +
-      "\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\031\n\013create_ti" +
-      "me\030\002 \001(\003B\004\210\246\035\001\022\022\n\nclick_time\030\003 \001(\003\022!\n\007us",
-      "er_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\034\n\006url_id\030" +
-      "\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\006 \001(\016" +
-      "2\013.DeviceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\007 \001(\tB\014" +
-      "\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004" +
-      "text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265\030\030MongoDB.PushN" +
-      "otification\"\277\002\n\021KeywordToEntityId\022\034\n\002id\030" +
-      "\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\t" +
-      "B\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246" +
-      "\035\005\250\246\035\001\022\037\n\tentity_id\030\004 \001(\tB\014\230\246\035\030\250\246\035\001\220\246\035\005\022" +
-      "\037\n\021top_industry_id_1\030\005 \001(\005B\004\220\246\035\005\022\037\n\021top_",
-      "industry_id_2\030\006 \001(\005B\004\220\246\035\005\022\037\n\021top_industr" +
-      "y_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005count\030\010 \001(\005B\010\210\246\035\001\220" +
-      "\246\035\005\022\025\n\007removed\030\t \001(\010B\004\220\246\035\005:\031\212\265\030\025MySQL.Ke" +
-      "ywordToEntity*/\n\nDeviceType\022\013\n\007UNKNOWN\020\000" +
-      "\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B!\n\024com.janknspank" +
-      ".protoB\tCoreProto"
+      "cation\"\231\001\n\014Distribution\0222\n\npercentile\030\001 " +
+      "\003(\0132\030.Distribution.PercentileB\004\210\246\035\001\032U\n\nP" +
+      "ercentile\022\030\n\npercentile\030\001 \001(\005B\004\210\246\035\001\022\023\n\005v" +
+      "alue\030\002 \001(\001B\004\210\246\035\001\022\030\n\020data_point_count\030\003 \001" +
+      "(\003\"\226\003\n\026ShareNormalizationData\022T\n\027time_ra" +
+      "nge_distribution\030\002 \003(\0132-.ShareNormalizat" +
+      "ionData.TimeRangeDistributionB\004\210\246\035\001\022J\n\022d",
+      "omain_share_count\030\003 \003(\0132(.ShareNormaliza" +
+      "tionData.DomainShareCountB\004\210\246\035\001\032x\n\025TimeR" +
+      "angeDistribution\022\032\n\014start_millis\030\001 \001(\003B\004" +
+      "\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014distri" +
+      "bution\030\003 \001(\0132\r.DistributionB\004\210\246\035\001\032`\n\020Dom" +
+      "ainShareCount\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022\033\n\ra" +
+      "rticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_count\030" +
+      "\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001 \001(\tB\024\210" +
+      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB\024\210\246\035\001" +
+      "\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230",
+      "\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013cr" +
+      "eate_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL" +
+      ".UrlRating\"\277\002\n\021KeywordToEntityId\022\034\n\002id\030\001" +
+      " \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB" +
+      "\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035" +
+      "\005\250\246\035\001\022\037\n\tentity_id\030\004 \001(\tB\014\230\246\035\030\250\246\035\001\220\246\035\005\022\037" +
+      "\n\021top_industry_id_1\030\005 \001(\005B\004\220\246\035\005\022\037\n\021top_i" +
+      "ndustry_id_2\030\006 \001(\005B\004\220\246\035\005\022\037\n\021top_industry" +
+      "_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005count\030\010 \001(\005B\010\210\246\035\001\220\246" +
+      "\035\005\022\025\n\007removed\030\t \001(\010B\004\220\246\035\005:\031\212\265\030\025MySQL.Key",
+      "wordToEntity\"\242\002\n\037IndustryVectorNormaliza" +
+      "tionData\022)\n\014distribution\030\001 \001(\0132\r.Distrib" +
+      "utionB\004\210\246\035\001\022-\n\037similarity_threshold_10_p" +
+      "ercent\030\002 \001(\001B\004\210\246\035\001\022-\n\037similarity_thresho" +
+      "ld_50_percent\030\003 \001(\001B\004\210\246\035\001\022:\n,ratio_of_ar" +
+      "ticles_above_threshold_10_percent\030\004 \001(\001B" +
+      "\004\210\246\035\001\022:\n,ratio_of_articles_above_thresho" +
+      "ld_50_percent\030\005 \001(\001B\004\210\246\035\001B!\n\024com.janknsp" +
+      "ank.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19120,24 +17165,18 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UrlRating_descriptor,
               new java.lang.String[] { "Id", "Email", "Url", "Rating", "CreateTime", });
-          internal_static_DeviceRegistration_descriptor =
-            getDescriptor().getMessageTypes().get(10);
-          internal_static_DeviceRegistration_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_DeviceRegistration_descriptor,
-              new java.lang.String[] { "Id", "UserId", "DeviceType", "DeviceId", "CreateTime", });
-          internal_static_PushNotification_descriptor =
-            getDescriptor().getMessageTypes().get(11);
-          internal_static_PushNotification_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_PushNotification_descriptor,
-              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Host", "Text", });
           internal_static_KeywordToEntityId_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_KeywordToEntityId_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_KeywordToEntityId_descriptor,
               new java.lang.String[] { "Id", "Keyword", "Type", "EntityId", "TopIndustryId1", "TopIndustryId2", "TopIndustryId3", "Count", "Removed", });
+          internal_static_IndustryVectorNormalizationData_descriptor =
+            getDescriptor().getMessageTypes().get(11);
+          internal_static_IndustryVectorNormalizationData_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_IndustryVectorNormalizationData_descriptor,
+              new java.lang.String[] { "Distribution", "SimilarityThreshold10Percent", "SimilarityThreshold50Percent", "RatioOfArticlesAboveThreshold10Percent", "RatioOfArticlesAboveThreshold50Percent", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -19258,6 +17297,9 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
@@ -19284,42 +17326,6 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
@@ -19334,6 +17340,11 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           return registry;
         }
       };

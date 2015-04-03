@@ -52,7 +52,9 @@ public class Deduper {
       // when considering dupe matches (10 points), false positives (dupes that
       // are not really dupes, -2 points), and false negatives (undetected
       // dupes, -5 points).
-      TopList<Integer, Double> topIndustryFeatures = new TopList<>(3);
+      // NOTE(jonemerson): Trying 1-in-4 now because it seems like it's
+      // performing better now that our vectors are better defined.
+      TopList<Integer, Double> topIndustryFeatures = new TopList<>(4);
       for (ArticleFeature feature : article.getFeatureList()) {
         FeatureId featureId = FeatureId.fromId(feature.getFeatureId());
         if (featureId != null && featureId.getFeatureType() == FeatureType.INDUSTRY) {

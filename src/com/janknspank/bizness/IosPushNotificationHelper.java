@@ -24,9 +24,9 @@ import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.CoreProto.DeviceRegistration;
-import com.janknspank.proto.CoreProto.DeviceType;
-import com.janknspank.proto.CoreProto.PushNotification;
+import com.janknspank.proto.PushNotificationProto.DeviceRegistration;
+import com.janknspank.proto.PushNotificationProto.DeviceType;
+import com.janknspank.proto.PushNotificationProto.PushNotification;
 import com.janknspank.proto.UserProto.User;
 
 /**

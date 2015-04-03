@@ -328,23 +328,30 @@ message Distribution {
   message Percentile {
     // A number, between 1 and 100, for which percentile of data this set
     // contains.
-    optional int32 percentile = 1;
+    optional int32 percentile = 1 [
+      (required) = YES
+    ];
 
     // This is a representative value for the top of this percentile.  E.g. if
     // the distribution is values [-10, 0, 0, 4, 6], and the percentile is 80,
     // then the value would be 4, since it's the top-most value in the 80th
     // percentile.
-    optional double value = 2;
+    optional double value = 2 [
+      (required) = YES
+    ];
 
     // The total number of data points included in this percentile, from 0 to
     // {@code percentile}.  This is the SUM of everything so far!!
     optional int64 data_point_count = 3;
   }
-  repeated Percentile percentile = 1;
+  repeated Percentile percentile = 1 [
+    (required) = YES
+  ];
 }
 
-// Stores share aggregate counts for various time lengths, so that we can
-// normalize social engagement for an article versus its peers.
+// Data for normalizing Facebook share counts vs. a time range and vs. a
+// a specific domain.  Stores share aggregate counts for various time lengths,
+// so that we can normalize social engagement for an article versus its peers.
 message ShareNormalizationData {
   message TimeRangeDistribution {
     // The beginning of the range, in milliseconds since the article was
@@ -419,107 +426,6 @@ message UrlRating {
   ];
 }
 
-enum DeviceType {
-  UNKNOWN = 0;
-  ANDROID = 1;
-  IOS = 2;
-}
-
-message DeviceRegistration {
-  option (database_collection) = "MongoDB.DeviceRegistration";
-
-  // Unique ID for the user ID + device registration ID pair.
-  optional string id = 1 [
-    (required) = YES,
-    (storage_method) = PRIMARY_KEY,
-    (string_length) = 24,
-    (string_charset) = LATIN1
-  ];
-
-  optional string user_id = 2 [
-    (required) = YES,
-    (storage_method) = INDEX,
-    (string_length) = 24,
-    (string_charset) = LATIN1
-  ];
-
-  optional DeviceType device_type = 3 [
-    (required) = YES
-  ];
-
-  // Opaque device type-specific identifier for the phone / tablet / whatever
-  // we should send notifications to.  iOS calls this a device ID, Android calls
-  // it a registration ID.
-  optional string device_id = 4 [
-    (required) = YES,
-    (string_length) = 100,
-    (string_charset) = LATIN1
-  ];
-
-  optional int64 create_time = 5 [
-    (required) = YES
-  ];
-}
-
-// Historical record of what notifications we've sent and to whom.
-message PushNotification {
-  option (database_collection) = "MongoDB.PushNotification";
-
-  optional string id = 1 [
-    (required) = YES,
-    (storage_method) = PRIMARY_KEY,
-    (string_length) = 24,
-    (string_charset) = LATIN1,
-    (client_serialization) = EXCLUDE
-  ];
-
-  optional int64 create_time = 2 [
-    (required) = YES
-  ];
-
-  // If the user clicked on the notification, and the app opened and sent us
-  // a ping, this is the time that happened.
-  optional int64 click_time = 3;
-
-  // The user who we sent the notification to.
-  optional string user_id = 4 [
-    (required) = YES,
-    (storage_method) = INDEX,
-    (string_length) = 24,
-    (string_charset) = LATIN1
-  ];
-
-  // Optional: If we mentioned a specific article, this is the URL ID of that
-  // article.
-  optional string url_id = 5 [
-    (storage_method) = INDEX,
-    (string_length) = 24,
-    (string_charset) = LATIN1
-  ];
-
-  optional DeviceType device_type = 6 [
-    (required) = YES
-  ];
-
-  optional string device_id = 7 [
-    (required) = YES,
-    (string_length) = 100,
-    (string_charset) = LATIN1
-  ];
-
-  // Identifier for the computer who initiated this notification.
-  optional string host = 8 [
-    (string_length) = 100,
-    (string_charset) = LATIN1
-  ];
-
-  // The actual text that we sent to the user.
-  optional string text = 9 [
-    (required) = YES,
-    (string_length) = 1024
-  ];
-}
-
 message KeywordToEntityId {
   option (database_collection) = "MySQL.KeywordToEntity";
 
@@ -573,5 +479,39 @@ message KeywordToEntityId {
   // to an entity.
   optional bool removed = 9 [
     (storage_method) = PULL_OUT
+  ];
+}
+
+message IndustryVectorNormalizationData {
+  optional Distribution distribution = 1 [
+    (required) = YES
+  ];
+
+  // This is the non-normalized similarity score for a seed-word article at the
+  // bottom 10% of similarities.  This basically gives us a lower-bound for
+  // similarity scores, where scores less than this would tend to indicate
+  // little relevancy to this vector, while scores above this would tend to have
+  // greater relevancy.  We must do this because different industries tend to
+  // have wide differences in their publishing rates.  Tech sites are very
+  // prolific, supermarket articles are rare.  By using this threshold we're
+  // able to make sure articles from different industries receive similar
+  // similarity scores independently form their verbosity.
+  optional double similarity_threshold_10_percent = 2 [
+    (required) = YES
+  ];
+
+  optional double similarity_threshold_50_percent = 3 [
+    (required) = YES
+  ];
+
+  // What percentage of the article corpus scores higher than 
+  // similarity_threshold for this vector?  Values are 0 to 1.  Most vectors
+  // should have scores around 0.05.
+  optional double ratio_of_articles_above_threshold_10_percent = 4 [
+    (required) = YES
+  ];
+
+  optional double ratio_of_articles_above_threshold_50_percent = 5 [
+    (required) = YES
   ];
 }

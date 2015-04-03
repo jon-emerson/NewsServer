@@ -1,0 +1,40 @@
+root_domain: "artnet.com"
+is_https: true
+start_url: "https://news.artnet.com/"
+path_blacklist {
+  needle: "/auctions/"
+}
+paragraph_selector: "p[itemprop=\"articleBody\"]"
+paragraph_blacklist {
+  text_regex: "^Follow"
+}
+article_url_pattern {
+  path_regex: "\\-[0-9]{5,8}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://news.artnet.com/art-world/matthew-barney-bjork-custody-battle-284441"
+    article_url: "https://news.artnet.com/art-world/brooklyn-dealer-stolen-antiquities-284466"
+    article_url: "https://news.artnet.com/art-world/speed-read-the-top-10-art-news-stories-for-september-29-october-3-123331"
+    article_url: "https://news.artnet.com/art-world/must-see-art-guide-dallas-284323"
+    article_url: "https://news.artnet.com/in-brief/first-sothebys-ebay-sales-283483"
+    article_url: "https://news.artnet.com/art-world/dale-chihuly-marlborough-gallery-279964"
+    article_url: "https://news.artnet.com/people/worker-dies-gagosian-mansion-282202"
+    non_article_url: "https://news.artnet.com/market/"
+    non_article_url: "https://news.artnet.com/videos/"
+    non_article_url: "http://www.artnet.com/about/press-releases.aspx"
+    non_article_url: "http://www.artnet.com/aboutus/contact_us.aspx"
+    non_article_url: "https://news.artnet.com/people/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: -1
+}

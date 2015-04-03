@@ -1,23 +1,21 @@
 package com.janknspank.crawler;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.Urls;
 import com.janknspank.common.Logger;
-import com.janknspank.database.DatabaseRequestException;
-import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
 import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
-import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 /**
@@ -66,10 +64,14 @@ class UrlCrawler {
     return null;
   }
 
-  private Iterable<Url> parseRss(String rssUrl)
-      throws DatabaseSchemaException, DatabaseRequestException, BiznessException {
+  /**
+   * Returns all <entry> and <item> site links from the passed RSS (or Atom)
+   * page URL.  The returned URLs are not cleaned, validated, or checked for
+   * Article-ness.
+   */
+  private Iterable<String> getUrlsFromRss(String rssUrl) throws BiznessException {
     FetchResponse fetchResponse;
-    List<String> urlsToInsert = Lists.newArrayList();
+    List<String> urls = Lists.newArrayList();
     try {
       fetchResponse = fetcher.fetch(rssUrl);
       if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
@@ -78,48 +80,48 @@ class UrlCrawler {
             documentNode.findAll("item"),
             documentNode.findAll("entry"))) {
           String articleUrl = getArticleUrl(itemNode);
-          if (ArticleUrlDetector.isArticle(articleUrl)) {
-            urlsToInsert.add(articleUrl);
+          if (articleUrl != null) {
+            urls.add(articleUrl);
           }
         }
       }
     } catch (FetchException | ParserException e) {
       e.printStackTrace();
     }
-    return Urls.put(urlsToInsert, rssUrl);
+    return urls;
   }
 
   /**
    * Returns a set of all the articles on a site's home page and other start
    * URLs, regardless of whether we've indexed them before or not.
-   * @throws BiznessException 
    */
-  public Iterable<Url> findArticleUrls(SiteManifest manifest)
-      throws DatabaseSchemaException, DatabaseRequestException, BiznessException {
+  public Iterable<String> findArticleUrls(SiteManifest manifest) throws BiznessException {
     LOG.info("WEBSITE: " + manifest.getRootDomain());
 
-    // Find all the URLs on the page, filter them to only have the article
-    // URLs, and then clean those before trying to put them into the database.
-    List<Url> siteUrls = Lists.newArrayList();
+    // Find all the URLs.
+    List<String> rawUrls = Lists.newArrayList();
     for (final String startUrl : manifest.getStartUrlList()) {
-      Iterable<String> urlStrings;
       try {
-        urlStrings = Iterables.transform(
-            Iterables.filter(
-                Iterables.filter(UrlFinder.findUrls(startUrl), ArticleUrlDetector.PREDICATE),
-                UrlWhitelist.PREDICATE),
-            UrlCleaner.TRANSFORM_FUNCTION);
+        rawUrls.addAll(UrlFinder.findUrls(startUrl));
       } catch (FetchException | ParserException | RequiredFieldException e) {
         System.out.println("ERROR: Could not parse " + startUrl);
         e.printStackTrace();
         continue;
       }
-      Iterables.addAll(siteUrls, Urls.put(urlStrings, startUrl));
     }
     for (String rssUrl : manifest.getRssUrlList()) {
       LOG.info("RSS FILE: " + rssUrl);
-      Iterables.addAll(siteUrls, parseRss(rssUrl));
+      Iterables.addAll(rawUrls, getUrlsFromRss(rssUrl));
     }
-    return siteUrls;
+
+    // Now that we have all the URLs, keep only the good ones.
+    Set<String> articleUrls = Sets.newHashSet();
+    Iterables.addAll(articleUrls, Iterables.transform(
+        Iterables.filter(
+            Iterables.filter(rawUrls, ArticleUrlDetector.PREDICATE),
+            UrlWhitelist.PREDICATE),
+        UrlCleaner.TRANSFORM_FUNCTION));
+
+    return articleUrls;
   }
 }

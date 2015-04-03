@@ -1,22 +1,12 @@
 package com.janknspank.rank;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 
 import com.google.api.client.util.Lists;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.primitives.Doubles;
-import com.janknspank.classifier.ClassifierException;
 import com.janknspank.proto.CoreProto.Distribution;
 
 public class DistributionBuilder {
@@ -149,29 +139,5 @@ public class DistributionBuilder {
       System.out.println("Value at " + percentile + "%: " + value);
     }
     return builder.build();
-  }
-
-  public void writeToFile(File distributionFile) throws ClassifierException {
-    OutputStream outputStream = null;
-    try {
-      outputStream = new GZIPOutputStream(new FileOutputStream(distributionFile));
-      build().writeTo(outputStream);
-    } catch (IOException e) {
-      throw new ClassifierException("Could not write file: " + e.getMessage(), e);
-    } finally {
-      IOUtils.closeQuietly(outputStream);
-    }
-  }
-
-  public static Distribution fromFile(File distributionFile) throws ClassifierException {
-    InputStream inputStream = null;
-    try {
-      inputStream = new GZIPInputStream(new FileInputStream(distributionFile));
-      return Distribution.parseFrom(inputStream);
-    } catch (IOException e) {
-      throw new ClassifierException("Could not read file: " + e.getMessage(), e);
-    } finally {
-      IOUtils.closeQuietly(inputStream);
-    }
   }
 }

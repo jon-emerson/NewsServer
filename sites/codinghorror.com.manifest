@@ -1,0 +1,38 @@
+root_domain: "codinghorror.com"
+start_url: "http://blog.codinghorror.com/"
+paragraph_selector: ".post-content p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://blog.codinghorror.com/toward-a-better-markdown-tutorial/"
+    article_url: "http://blog.codinghorror.com/invisible-formatting-tags-are-evil/"
+    article_url: "http://blog.codinghorror.com/deadlocked/"
+    article_url: "http://blog.codinghorror.com/developers3/"
+    article_url: "http://blog.codinghorror.com/wwwwwdd/"
+    article_url: "http://blog.codinghorror.com/recommended-reading-for-developers/"
+    article_url: "http://blog.codinghorror.com/a-scripter-at-heart/"
+    article_url: "http://blog.codinghorror.com/the-case-for-case-insensitivity/"
+    article_url: "http://blog.codinghorror.com/five-things-you-didnt-know-about-me-and-my-office/"
+    article_url: "http://blog.codinghorror.com/users-dont-care-about-you/"
+    article_url: "http://blog.codinghorror.com/the-god-login/"
+    non_article_url: "http://blog.codinghorror.com////#there really is nothing"
+    non_article_url: "http://blog.codinghorror.com////#there really is nothing2"
+    non_article_url: "http://blog.codinghorror.com////#there really is nothing3"
+    non_article_url: "http://blog.codinghorror.com////#there really is nothing4"
+    non_article_url: "http://blog.codinghorror.com////#there really is nothing5"
+    non_article_url: "http://blog.codinghorror.com////#there really is nothing6"
+  }
+}
+feature_boost_pattern {
+  boost: -8 # Not generally interesting to most people.
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet.
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Software.
+  boost: 2
+}

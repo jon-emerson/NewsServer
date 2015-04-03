@@ -301,8 +301,8 @@ public class FacebookShareNormalizer {
       LOG.info("Building range " + timeRangeDistributionBuilder.getStartMillis()
           + " - " + timeRangeDistributionBuilder.getEndMillis() + " ...");
       shareNormalizationDataBuilder.addTimeRangeDistribution(
-          timeRangeDistributionBuilder
-              .setDistribution(distributionBuilders.get(timeRangeDistributionBuilder).build()));
+          timeRangeDistributionBuilder.setDistribution(
+              distributionBuilders.get(timeRangeDistributionBuilder).build()));
     }
     for (Map.Entry<String, ShareCount> entry : shareMap.entrySet()) {
       shareNormalizationDataBuilder.addDomainShareCount(DomainShareCount.newBuilder()

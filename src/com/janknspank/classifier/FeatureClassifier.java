@@ -34,7 +34,7 @@ public class FeatureClassifier {
     for (Feature feature : Feature.getAllFeatures()) {
       ArticleFeature articleFeature = classifyForFeature(article, feature);
       if (feature.getFeatureId().getFeatureType() == FeatureType.INDUSTRY) {
-        if (articleFeature.getSimilarity() >= 0.72) {
+        if (articleFeature.getSimilarity() >= 0.75) {
           topIndustryArticleFeatures.add(articleFeature, articleFeature.getSimilarity());
         }
       } else {

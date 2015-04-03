@@ -1,0 +1,31 @@
+root_domain: "artdaily.com"
+start_url: "http://artdaily.com/"
+paragraph_selector: ".KonaBody.noticia"
+article_url_pattern {
+  path_regex: "^\\/news\\/[0-9]+\\/[^\\/]+"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://artdaily.com/news/77578/Italy-s-Egyptian-museum-in-Turin-reopens-after--pharaonic--five-year-renovation"
+    article_url: "http://artdaily.com/news/77579/Andrew-Getty--one-of-the-heirs-to-the-Getty-oil-fortune--dies-in-Los-Angeles--reports"
+    article_url: "http://artdaily.com/news/77525/-Mike-Solomon--Sea-of-Light--opens-at-Alfstad--Contemporary-"
+    article_url: "http://artdaily.com/news/77580/-Francis-Al-yuml-s--A-Story-of-Negotiation--on-view-at-Museo-Tamayo-in-Mexico-City"
+    article_url: "http://artdaily.com/news/77349/Anish-Kapoor-presents-a-series-of-giant-and-wildly-expressive-resin-and-silicon-works"
+    non_article_url: "http://artdaily.com/index.asp?int_sec=4"
+    non_article_url: "http://artdaily.com/games"
+    non_article_url: "http://artdaily.com/index.asp?int_sec=100"
+    non_article_url: "http://artdaily.com/index.asp?int_sec=203"
+    non_article_url: "http://artdaily.com/index.asp?int_sec=204"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 0
+}
