@@ -1,6 +1,8 @@
 package com.janknspank.rank;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
@@ -26,6 +28,60 @@ import com.janknspank.proto.UserProto.User;
  * Helper class to generate input node values for the Scorer.
  */
 public class InputValuesGenerator {
+  private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s|\\xA0)+");
+  private static final ContactsKeywordsCache CONTACTS_KEYWORDS_CACHE = new ContactsKeywordsCache();
+
+  private static class ContactsKeywordsCacheItem {
+    private String userId = null;
+    private long lastUpdatedMillis = 0;
+    private Set<String> contactsKeywords;
+  }
+
+  /**
+   * Poor-mans @RequestScoped cache for a user's contact keywords.  Really wish
+   * I had Guice for this instead.  This allows us to calculate keywords for the
+   * current user's contacts only once per /get_articles (etc.) request.
+   */
+  private static class ContactsKeywordsCache extends ThreadLocal<ContactsKeywordsCacheItem> {
+    @Override
+    protected ContactsKeywordsCacheItem initialValue() {
+      return null;
+    }
+
+    public Set<String> getContactsKeywords(User user) {
+      ContactsKeywordsCacheItem cacheItem = get();
+      if (cacheItem != null && user.getId().equals(cacheItem.userId)
+          && (System.currentTimeMillis() - cacheItem.lastUpdatedMillis)
+              < TimeUnit.MINUTES.toMillis(1)) {
+        return get().contactsKeywords;
+      }
+
+      cacheItem = new ContactsKeywordsCacheItem();
+      cacheItem.userId = user.getId();
+      cacheItem.lastUpdatedMillis = System.currentTimeMillis();
+      Set<String> contactsKeywords = Sets.newHashSet();
+      for (Interest interest : UserInterests.getInterests(user)) {
+        if (interest.getType() == InterestType.ENTITY
+            && EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.PERSON)) {
+          contactsKeywords.add(interest.getEntity().getKeyword());
+        }
+        if (interest.getType() == InterestType.ADDRESS_BOOK_CONTACTS) {
+          for (AddressBookContact contact : user.getAddressBookContactList()) {
+            contactsKeywords.add(contact.getName());
+          }
+        }
+        if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
+          for (LinkedInContact contact : user.getLinkedInContactList()) {
+            contactsKeywords.add(contact.getName());
+          }
+        }
+      }
+      cacheItem.contactsKeywords = contactsKeywords;
+      this.set(cacheItem);
+      return contactsKeywords;
+    }
+  };
+
   public static double relevanceToUserIndustries(User user, Article article) {
     double highestRelevance = 0;
     for (ArticleFeature feature : article.getFeatureList()) {
@@ -52,24 +108,8 @@ public class InputValuesGenerator {
   }
 
   public static double relevanceToContacts(User user, Article article) {
-    Set<String> contactsKeywords = Sets.newHashSet();
-    for (Interest interest : UserInterests.getInterests(user)) {
-      if (interest.getType() == InterestType.ENTITY
-          && EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.PERSON)) {
-        contactsKeywords.add(interest.getEntity().getKeyword());
-      }
-      if (interest.getType() == InterestType.ADDRESS_BOOK_CONTACTS) {
-        for (AddressBookContact contact : user.getAddressBookContactList()) {
-          contactsKeywords.add(contact.getName());
-        }
-      }
-      if (interest.getType() == InterestType.LINKED_IN_CONTACTS) {
-        for (LinkedInContact contact : user.getLinkedInContactList()) {
-          contactsKeywords.add(contact.getName());
-        }
-      }
-    }
     double value = 0;
+    Set<String> contactsKeywords = CONTACTS_KEYWORDS_CACHE.getContactsKeywords(user);
     for (String keyword : contactsKeywords) {
       if (article.getTitle().contains(keyword)) {
         value += 0.1;
@@ -78,9 +118,12 @@ public class InputValuesGenerator {
         value += 0.05;
       }
       for (ArticleKeyword articleKeyword : article.getKeywordList()) {
-        if (articleKeyword.getKeyword().contains(keyword) ||
-            keyword.contains(articleKeyword.getKeyword())) {
+        if (articleKeyword.getKeyword().equals(keyword)) {
           value += 0.1;
+        } else if (WHITESPACE_PATTERN.matcher(articleKeyword.getKeyword()).find()
+            && (articleKeyword.getKeyword().contains(keyword)
+                || keyword.contains(articleKeyword.getKeyword()))) {
+          value += 0.05;
         }
       }
     }

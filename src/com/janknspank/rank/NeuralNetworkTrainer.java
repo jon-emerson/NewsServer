@@ -134,6 +134,11 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       Map<String, Article> articleMap =
           ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
       for (UserAction userAction : userActions) {
+        if (userAction.hasOnStreamForInterest()) {
+          // Ignore these for now.  They're from substreams, e.g. the user is
+          // viewing a specific entity or topic, not their main stream.
+          continue;
+        }
         if (articleMap.containsKey(userAction.getUrl())) {
           User modifiedUser = user.toBuilder()
               .clearInterest()
