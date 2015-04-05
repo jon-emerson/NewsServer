@@ -15,7 +15,7 @@ public class HomeServlet extends StandardServlet {
   protected SoyMapData getSoyMapData(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException {
     return new SoyMapData(
-        "title", "Spotter - News for Your Career App",
+        "title", "Spotter - Business News, Personalized",
         "tab", 0);
   }
 }
