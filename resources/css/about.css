@@ -1,0 +1,24 @@
+/* About Us */
+#history-section {
+  margin-top: 32px;
+}
+
+.profile-photo {
+  width: 242px;
+  height: 242px;
+  border-radius: 121px;
+}
+
+.role-header {
+  margin-top: 16px;
+}
+
+.small-wrapper {
+  padding-top: 32px;
+}
+
+@media (max-width: 767px) {
+  main section {
+    text-align: left;
+  }
+}

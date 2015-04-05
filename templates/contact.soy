@@ -1,0 +1,70 @@
+{namespace news.contact autoescape="strict"}
+
+/**
+ * Main page layout.
+ * @param title
+ */
+{template .main}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{$title}</title>
+    <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
+    <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/contact.css">
+    <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div style="width:100%; margin:0;">
+      {call .navbar data="all" /}
+      {call .body data="all" /}
+    </div>
+  <body>
+{/template}
+
+/**
+ * Renders the nav bar
+ */
+{template .navbar}
+<div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Spotter</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/about" class="btn btn-default">About Us</a></li>
+        <li><a href="/privacy" class="btn btn-default">Privacy</a></li>
+        <li><a href="/terms" class="btn btn-default">Terms</a></li>
+        <li><a href="/copyright" class="btn btn-default">Copyright</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+{/template}
+
+/**
+ * Renders body of the about us page
+ */
+{template .body}
+<main>
+<section role="contact">
+<div class="container">
+  <h1>Contact Us</h1>
+  <h2>For product support and suggestions:</h2>
+  <p><a href="mailto:support@spotternews.com">support@spotternews.com</a></p>
+  <h2>To connect with the founders:</h2>
+  <p><a href="mailto:jon@spotternews.com">jon@spotternews.com</a></p>
+  <p><a href="mailto:tom@spotternews.com">tom@spotternews.com</a></p>
+</div>
+</section>
+</main>
+{/template}
