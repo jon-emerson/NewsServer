@@ -43,6 +43,27 @@ public class LenientSaxParserTest {
     assertEquals("Monster! S&P", interpreter.getAttributes().getValue("title"));
     assertTrue(interpreter.isSelfClosing());
 
+    // Special case from http://yourstory.com/2015/04/tips-for-corporates-to-engage-startups/,
+    // which had literally <div class = 'post_content entry-content'> as the
+    // outer article div.  Check all weird cases...
+    for (String weirdDiv : new String[] {
+        "<div class='post_content entry-content'>",
+        "<div class = 'post_content entry-content'>",
+        "<div class= 'post_content entry-content'>",
+        "<div class=\n\t 'post_content entry-content'>",
+        "<div class    \n\n\n=\n\t 'post_content entry-content'>",
+        "<div class ='post_content entry-content'>"}) {
+      interpreter = new LenientElementInterpreter(weirdDiv);
+      assertEquals("Error processing \"" + weirdDiv + "\"",
+          "div", interpreter.getTag());
+      assertEquals("Error processing \"" + weirdDiv + "\"",
+          1, interpreter.getAttributes().getLength());
+      assertEquals("Error processing \"" + weirdDiv + "\"",
+          "post_content entry-content", interpreter.getAttributes().getValue("class"));
+      assertFalse("Error processing \"" + weirdDiv + "\"",
+          interpreter.isSelfClosing());
+    }
+
     // This is a weird case... Let's just make sure we do something reasonable.
     interpreter = new LenientElementInterpreter("<span clas\"/>");
     assertEquals("span", interpreter.getTag());

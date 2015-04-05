@@ -1,0 +1,18 @@
+{namespace news.followlinkedincontacts autoescape="strict"}
+
+/**
+ * Renders the follow LinkedIn contacts page.
+ */
+{template .main}
+  <h1>Follow LinkedIn contacts</h1>
+
+  <form method="POST" action="/v1/follow_linked_in_contacts">
+    Session key:<br>
+    <input type="text" name="session_key"><br>
+    <br>
+    LinkedIn access token:<br>
+    <input type="text" name="linked_in_access_token"><br>
+    <br>
+    <input type="submit" value="Follow"><br>
+  </form>
+{/template}

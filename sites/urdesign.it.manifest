@@ -1,0 +1,43 @@
+root_domain: "urdesign.it"
+start_url: "http://www.urdesign.it/"
+paragraph_selector: ".post_excerpt > p"
+article_url_pattern {
+  path_regex: "^\\/index\\.php\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.urdesign.it/index.php/2013/07/18/courtesy-of-nature-by-johan-selbing-and-anouk-vogel-at-2013-international-garden-festival/"
+    article_url: "http://www.urdesign.it/index.php/2015/03/16/25-green-luciano-pia-designs-air-and-noise-pullution-proof-treehouse-in-turin/"
+    article_url: "http://www.urdesign.it/index.php/2014/09/19/adidas-originals-pharrell-williams/"
+    article_url: "http://www.urdesign.it/index.php/2015/03/16/audi-unveils-first-sport-racing-bike-made-of-carbon/"
+    article_url: "http://www.urdesign.it/index.php/2015/03/31/candy-crush-offices-by-adolfsson-partners-stockholm/"
+    non_article_url: "http://www.urdesign.it/index.php/tag/2013-international-garden-festival/"
+    non_article_url: "http://www.urdesign.it/index.php/category/technology-2/"
+    non_article_url: "http://www.urdesign.it/index.php/category/houses-2/"
+    non_article_url: "http://www.urdesign.it/index.php/tag/2015-geneva-international-motor-show/"
+    non_article_url: "http://www.urdesign.it/index.php/tag/2015-geneva-international-motor-show/page/2/"
+  }
+}
+feature_boost_pattern {
+  boost: -5 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10513 # Media
+  boost: 0
+}

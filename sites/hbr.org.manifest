@@ -1,0 +1,22 @@
+root_domain: "hbr.org"
+start_url: "http://hbr.org/"
+paragraph_selector: ".article p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://hbr.org/2002/08/creativity-under-the-gun"
+    article_url: "https://hbr.org/2015/04/what-great-managers-do-to-engage-employees"
+    article_url: "https://hbr.org/2014/07/in-china-political-ties-are-keeping-poorly-performing-firms-afloat"
+    article_url: "https://hbr.org/2015/04/how-to-overcome-burnout-and-stay-motivated"
+    article_url: "https://hbr.org/2015/04/high-pressure-jobs-and-mental-illness"
+    non_article_url: "https://hbr.org/strategy-innovation"
+    non_article_url: "https://hbr.org/topic/managing-uncertainty"
+    non_article_url: "https://hbr.org/topics"
+    non_article_url: "https://hbr.org/topic/human-resource-management"
+    non_article_url: "https://hbr.org/search?term=james+harter"
+    non_article_url: "https://hbr.org/email-newsletters"
+    non_article_url: "https://hbr.org/booksellers-retailers"
+  }
+}
