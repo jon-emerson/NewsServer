@@ -7,7 +7,7 @@
 /dbpedia
 /dist
 /lib
-/newrelic/logs
+/newrelic/logs/**
 /rawdata/angellist
 /target
 /.eclipsebin

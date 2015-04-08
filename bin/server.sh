@@ -9,6 +9,7 @@ if [ $? -eq 0 ]; then
       -Dcom.sun.media.imageio.disableCodecLib=true \
       -Dnewrelic.environment=development \
       -javaagent:newrelic/newrelic.jar \
+      -Dnewrelic.config.file=newrelic.yml \
       com.janknspank.server.NewsServer
 else
   echo "Build failed"
