@@ -1,0 +1,31 @@
+Apr 8, 2015 10:50:37 -0700 [9505 1] com.newrelic INFO: Writing to New Relic log file: /Users/jon/Code/NewsServer/newrelic/logs/newrelic_agent.log
+Apr 8, 2015 10:50:37 -0700 [9505 1] com.newrelic INFO: JRE vendor Oracle Corporation version 1.8.0_31
+Apr 8, 2015 10:50:37 -0700 [9505 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 25.31-b07
+Apr 8, 2015 10:50:37 -0700 [9505 1] com.newrelic INFO: OS Mac OS X version 10.10.1 arch x86_64
+Apr 8, 2015 10:50:37 -0700 [9505 1] com.newrelic INFO: Agent Host: Jonathans-MBP.att.net IP: 192.168.1.107
+Apr 8, 2015 10:50:37 -0700 [9505 1] com.newrelic INFO: New Relic Agent v3.15.0 is initializing...
+Apr 8, 2015 10:50:43 -0700 [9505 1] com.newrelic.instrumentation.grails-async-2.3 INFO: Disabled instrumentation "com.newrelic.instrumentation.grails-async-2.3"
+Apr 8, 2015 10:50:45 -0700 [9505 1] com.newrelic.instrumentation.servlet-user INFO: Disabled instrumentation "com.newrelic.instrumentation.servlet-user"
+Apr 8, 2015 10:50:53 -0700 [9505 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+Apr 8, 2015 10:50:53 -0700 [9505 1] com.newrelic INFO: Setting audit_mode to false
+Apr 8, 2015 10:50:53 -0700 [9505 1] com.newrelic INFO: Setting protocol to "https"
+Apr 8, 2015 10:50:55 -0700 [9505 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /Users/jon/Code/NewsServer/newrelic/./newrelic.yml
+Apr 8, 2015 10:50:55 -0700 [9505 1] com.newrelic INFO: New Relic Agent v3.15.0 has started
+Apr 8, 2015 10:50:55 -0700 [9505 1] com.newrelic INFO: Agent class loader: sun.misc.Launcher$AppClassLoader@58644d46
+Apr 8, 2015 10:51:00 -0700 [9505 10] com.newrelic INFO: Display host name is Jonathans-MBP.att.net for application NewsServer (Development)
+Apr 8, 2015 10:51:01 -0700 [9505 10] com.newrelic INFO: Collector redirection to collector-131.newrelic.com:443
+Apr 8, 2015 10:51:02 -0700 [9505 10] com.newrelic INFO: Agent run id: 24113651527208473
+Apr 8, 2015 10:51:02 -0700 [9505 10] com.newrelic INFO: Agent 9505@Jonathans-MBP.att.net/NewsServer (Development) connected to collector.newrelic.com:443
+Apr 8, 2015 10:51:02 -0700 [9505 10] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/952286/applications/5614395
+Apr 8, 2015 10:51:02 -0700 [9505 10] com.newrelic INFO: Using RUM version 632 for application "NewsServer (Development)"
+Apr 8, 2015 10:51:02 -0700 [9505 10] com.newrelic INFO: Real user monitoring is enabled with auto instrumentation for application "NewsServer (Development)"
+Apr 8, 2015 10:52:33 -0700 [9505 28] com.newrelic INFO: Received a ForceRestartException: com.newrelic.agent.ForceRestartException: ***Restart agent on stale config (account) launch=2015-04-08 17:50:59 config=2015-04-08 17:51:00
+Apr 8, 2015 10:52:33 -0700 [9505 28] com.newrelic INFO: Display host name is Jonathans-MBP.att.net for application NewsServer (Development)
+Apr 8, 2015 10:52:34 -0700 [9505 28] com.newrelic INFO: Collector redirection to collector-131.newrelic.com:443
+Apr 8, 2015 10:52:36 -0700 [9505 28] com.newrelic INFO: Agent run id: 24113651527213948
+Apr 8, 2015 10:52:36 -0700 [9505 28] com.newrelic INFO: Agent 9505@Jonathans-MBP.att.net/NewsServer (Development) connected to collector.newrelic.com:443
+Apr 8, 2015 10:52:36 -0700 [9505 28] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/952286/applications/5614395
+Apr 8, 2015 10:52:36 -0700 [9505 28] com.newrelic INFO: Using RUM version 632 for application "NewsServer (Development)"
+Apr 8, 2015 10:52:36 -0700 [9505 28] com.newrelic INFO: Real user monitoring is enabled with auto instrumentation for application "NewsServer (Development)"
+Apr 8, 2015 10:53:32 -0700 [9505 25] com.newrelic.instrumentation.mongodb-2.12 WARN: com/mongodb/DB in com.newrelic.instrumentation.mongodb-2.12 contains a class constructor (static initializer).  This code will be discarded.
+Apr 8, 2015 10:53:32 -0700 [9505 25] com.newrelic.instrumentation.mongodb-2.12 WARN: com/mongodb/DBCollectionImpl in com.newrelic.instrumentation.mongodb-2.12 contains a class constructor (static initializer).  This code will be discarded.

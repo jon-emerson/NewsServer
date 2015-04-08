@@ -31,6 +31,13 @@
       <version>1.0.3</version>
     </dependency>
     <dependency>
+      <groupId>com.newrelic.agent.java</groupId>
+      <artifactId>newrelic-java</artifactId>
+      <version>3.15.0</version>
+      <scope>provided</scope>
+      <type>zip</type>
+    </dependency>
+    <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
       <version>1.10</version>
@@ -236,6 +243,34 @@
             <goals>
               <goal>assemble</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>unpack-zip</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.newrelic.agent.java</groupId>
+                  <artifactId>newrelic-java</artifactId>
+                  <version>3.15.0</version>
+                  <type>zip</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>target</outputDirectory>
+                  <destFileName>newrelic</destFileName>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>/Location/to/unzip</outputDirectory>
+            </configuration>
           </execution>
         </executions>
       </plugin>

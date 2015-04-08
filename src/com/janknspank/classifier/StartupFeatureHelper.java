@@ -22,7 +22,7 @@ public class StartupFeatureHelper {
               FeatureId.BIOTECHNOLOGY,  // Probably can improve this.
               FeatureId.CONSUMER_ELECTRONICS,
               FeatureId.COMPUTER_GAMES,
-              FeatureId.COMPUTER_AND_NETWORK_SECURITY))
+              FeatureId.NETWORK_SECURITY))
           .put(FeatureId.STARTUP_TRADITIONAL, ImmutableSet.of(
               FeatureId.CONSUMER_GOODS,
               FeatureId.AUTOMOTIVE))
