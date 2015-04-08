@@ -32,7 +32,6 @@ import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
 import com.janknspank.rank.Scorer;
-import com.newrelic.api.agent.NewRelic;
 
 /**
  * Helper class that manages storing and retrieving Article objects from the
@@ -127,12 +126,8 @@ public class Articles {
    */
   public static TopList<Article, Double> getRankedArticles(
       User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
-    long startTime = System.currentTimeMillis();
     Iterable<Article> articlesForInterests =
         getArticlesForInterests(user, UserInterests.getInterests(user), limit * 5);
-
-    // Also track only the Java computation aspects of this method.
-    long startTimeJvm = System.currentTimeMillis();
 
     Map<String, Double> scores = Maps.newHashMap();
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
@@ -147,8 +142,6 @@ public class Articles {
       goodArticles.add(article, score);
       scores.put(article.getUrl(), score);
     }
-    NewRelic.recordMetric("Custom/Articles#getRankedArticles!!!JVM-SCORING-ONLY",
-        System.currentTimeMillis() - startTimeJvm);
 
     TopList<Article, Double> bestArticles = new TopList<>(limit);
     List<Article> dedupedArticles = Deduper.filterOutDupes(goodArticles);
@@ -156,10 +149,6 @@ public class Articles {
       bestArticles.add(article, scores.get(article.getUrl()));
     }
 
-    NewRelic.recordMetric("Custom/Articles#getRankedArticles",
-        System.currentTimeMillis() - startTime);
-    NewRelic.recordMetric("Custom/Articles#getRankedArticles!!!JVM-ONLY",
-        System.currentTimeMillis() - startTimeJvm);
     return bestArticles;
   }
 
@@ -196,7 +185,6 @@ public class Articles {
   public static Iterable<Article> getArticlesForInterests(
       User user, Iterable<Interest> interests, int limitPerType)
       throws DatabaseSchemaException, BiznessException {
-    long startTime = System.currentTimeMillis();
     List<FeatureId> featureIds = Lists.newArrayList();
     List<String> entityIds = Lists.newArrayList();
     List<String> companyNames = Lists.newArrayList();
@@ -253,8 +241,6 @@ public class Articles {
         throw new BiznessException("Async error: " + e.getMessage(), e);
       }
     }
-    NewRelic.recordMetric("Custom/Articles#getArticlesForInterests",
-        System.currentTimeMillis() - startTime);
     return dedupingArticleMap.values();
   }
 

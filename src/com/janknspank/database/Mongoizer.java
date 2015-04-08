@@ -18,7 +18,6 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.newrelic.api.agent.NewRelic;
 
 /**
  * Converts protocol buffer objects to MongoDB documents, and vice versa.
@@ -26,30 +25,25 @@ import com.newrelic.api.agent.NewRelic;
 public class Mongoizer {
   public static <T extends Message> List<T> fromDBList(BasicBSONList list, Class<T> clazz)
       throws DatabaseSchemaException {
-    long startTime = System.currentTimeMillis();
     List<T> messageList = Lists.newArrayList();
     for (int i = 0; i < list.size(); i++) {
       messageList.add(fromDBObject((BasicBSONObject) list.get(i), clazz));
     }
-    NewRelic.recordMetric("Custom/Mongoizer#fromDBList", System.currentTimeMillis() - startTime);
     return messageList;
   }
 
   public static <T extends Message> List<T> fromCursor(DBCursor cursor, Class<T> clazz)
       throws DatabaseSchemaException {
-    long startTime = System.currentTimeMillis();
     List<T> messageList = Lists.newArrayList();
     while (cursor.hasNext()) {
       messageList.add(fromDBObject((BasicBSONObject) cursor.next(), clazz));
     }
-    NewRelic.recordMetric("Custom/Mongoizer#fromCursor", System.currentTimeMillis() - startTime);
     return messageList;
   }
 
   @SuppressWarnings("unchecked")
   public static <T extends Message> T fromDBObject(BasicBSONObject object, Class<T> clazz)
       throws DatabaseSchemaException {
-    long startTime = System.currentTimeMillis();
     T defaultInstance = (T) Database.getDefaultInstance(clazz);
     T.Builder messageBuilder = defaultInstance.newBuilderForType();
     for (FieldDescriptor fieldDescriptor : defaultInstance.getDescriptorForType().getFields()) {
@@ -171,25 +165,20 @@ public class Mongoizer {
         }
       }
     }
-    NewRelic.recordMetric("Custom/Mongoizer#fromDBObject", System.currentTimeMillis() - startTime);
     return (T) messageBuilder.build();
   }
 
   public static <T extends Message> List<DBObject> toDBObjectList(Iterable<T> messages)
       throws DatabaseSchemaException, DatabaseRequestException {
-    long startTime = System.currentTimeMillis();
     List<DBObject> list = Lists.newArrayList();
     for (Message message : messages) {
       Validator.assertValid(message);
       list.add(toDBObject(message));
     }
-    NewRelic.recordMetric("Custom/Mongoizer#toDBObjectList",
-        System.currentTimeMillis() - startTime);
     return list;
   }
 
   public static BasicDBObject toDBObject(Message message) throws DatabaseSchemaException {
-    long startTime = System.currentTimeMillis();
     BasicDBObject object = new BasicDBObject();
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
       StorageMethod storageMethod =
@@ -264,13 +253,11 @@ public class Mongoizer {
         }
       }
     }
-    NewRelic.recordMetric("Custom/Mongoizer#toDBObject", System.currentTimeMillis() - startTime);
     return object;
   }
 
   public static <U extends Object> BasicDBList toDBList(Iterable<U> list)
       throws DatabaseSchemaException {
-    long startTime = System.currentTimeMillis();
     BasicDBList dbList = new BasicDBList();
     for (Object value : list) {
       if (value instanceof Message) {
@@ -279,7 +266,6 @@ public class Mongoizer {
         dbList.add(value);
       }
     }
-    NewRelic.recordMetric("Custom/Mongoizer#toDBList", System.currentTimeMillis() - startTime);
     return dbList;
   }
 }

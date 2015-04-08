@@ -8,7 +8,6 @@ import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
 import com.janknspank.database.ExtensionsProto.ClientSerialization;
-import com.newrelic.api.agent.NewRelic;
 
 /**
  * Converts a protocol buffer object to JSON by using the ClientSerialization
@@ -24,7 +23,6 @@ public class Serializer {
   }
 
   public static JSONObject toJSON(Message message) {
-    long startTime = System.currentTimeMillis();
     JSONObject o = new JSONObject();
     for (FieldDescriptor fieldDescriptor : message.getDescriptorForType().getFields()) {
       ClientSerialization serialization =
@@ -138,7 +136,6 @@ public class Serializer {
         }
       }
     }
-    NewRelic.recordMetric("Custom/Serializer#toJSON", System.currentTimeMillis() - startTime);
     return o;
   }
 }

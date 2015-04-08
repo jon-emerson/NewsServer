@@ -10,7 +10,6 @@ import com.google.common.primitives.Doubles;
 import com.janknspank.common.Asserts;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
-import com.newrelic.api.agent.NewRelic;
 
 public final class NeuralNetworkScorer extends Scorer {
   static final int INPUT_NODES_COUNT = 10;
@@ -90,13 +89,9 @@ public final class NeuralNetworkScorer extends Scorer {
 
   @Override
   public double getScore(User user, Article article) {
-    long startTime = System.currentTimeMillis();
     Asserts.assertNotNull(user, "user", NullPointerException.class);
     Asserts.assertNotNull(article, "article", NullPointerException.class);
-    double score = getScore(generateInputNodes(user, article));
-    NewRelic.recordMetric("Custom/NeuralNetworkScorer#getScore",
-        System.currentTimeMillis() - startTime);
-    return score;
+    return getScore(generateInputNodes(user, article));
   }
 
   public static double getScore(LinkedHashMap<String, Double> inputNodes) {

@@ -16,7 +16,6 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
-import com.newrelic.api.agent.NewRelic;
 
 public class Deduper {
   // This is the number of matched stems we need to consider an article to be
@@ -103,8 +102,6 @@ public class Deduper {
    * method should be used during getArticles, not the "dedupe" method below.
    */
   public static List<Article> filterOutDupes(Iterable<Article> articles) {
-    long startTime = System.currentTimeMillis();
-
     // This cache saves us about 500ms when de-duping 100 articles.
     final Map<ArticleExtraction, Article> extractionMap = Maps.newHashMap();
     for (Article article : articles) {
@@ -153,7 +150,6 @@ public class Deduper {
         dedupedArticles.add(extractionMap.get(extraction));
       }
     }
-    NewRelic.recordMetric("Custom/Deduper#filterOutDupes", System.currentTimeMillis() - startTime);
     return dedupedArticles;
   }
 }
