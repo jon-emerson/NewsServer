@@ -8,7 +8,6 @@ protoc \
     src/com/janknspank/proto/article.proto \
     src/com/janknspank/proto/core.proto \
     src/com/janknspank/proto/crawler.proto \
-    src/com/janknspank/proto/enums.proto \
     src/com/janknspank/proto/interpreter.proto \
     src/com/janknspank/proto/local.proto \
     src/com/janknspank/proto/pushnotification.proto \

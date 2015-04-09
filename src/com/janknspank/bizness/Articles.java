@@ -126,11 +126,13 @@ public class Articles {
    */
   public static TopList<Article, Double> getRankedArticles(
       User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
+    Iterable<Article> articlesForInterests =
+        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 5);
+
     Map<String, Double> scores = Maps.newHashMap();
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
     Set<String> urls = Sets.newHashSet();
-    for (Article article :
-        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 5)) {
+    for (Article article : articlesForInterests) {
       if (urls.contains(article.getUrl())) {
         continue;
       }
@@ -140,11 +142,13 @@ public class Articles {
       goodArticles.add(article, score);
       scores.put(article.getUrl(), score);
     }
+
     TopList<Article, Double> bestArticles = new TopList<>(limit);
     List<Article> dedupedArticles = Deduper.filterOutDupes(goodArticles);
     for (Article article : dedupedArticles) {
       bestArticles.add(article, scores.get(article.getUrl()));
     }
+
     return bestArticles;
   }
 
@@ -201,10 +205,6 @@ public class Articles {
           for (LinkedInContact contact : user.getLinkedInContactList()) {
             personNames.add(contact.getName());
           }
-          break;
-
-        case INTENT:
-          // INTENT interests are just used for ranking.
           break;
 
         case ENTITY:

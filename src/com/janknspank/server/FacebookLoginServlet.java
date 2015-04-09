@@ -9,7 +9,7 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.FacebookLoginHandler;
 import com.janknspank.bizness.Sessions;
-import com.janknspank.crawler.facebook.FacebookException;
+import com.janknspank.crawler.social.SocialException;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
@@ -31,7 +31,7 @@ public class FacebookLoginServlet extends StandardServlet {
     try {
       fbUser = FacebookLoginHandler.getFacebookUser(fbAccessToken, fbUserId);
       user = FacebookLoginHandler.login(fbUser, fbAccessToken);
-    } catch (FacebookException e) {
+    } catch (SocialException e) {
       throw new BiznessException("Could not read Facebook properties file", e);
     }
 

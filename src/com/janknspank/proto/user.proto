@@ -148,6 +148,8 @@ message LinkedInContact {
 }
 
 message Interest {
+  extensions 7; // Deprecated IDs.
+
   optional string id = 1 [
     (required) = YES,
     (storage_method) = PRIMARY_KEY,
@@ -162,7 +164,7 @@ message Interest {
     ENTITY = 2; // People, companies, etc.
     LINKED_IN_CONTACTS = 3;
     ADDRESS_BOOK_CONTACTS = 4;
-    INTENT = 5;
+    // Next ID: 6. (5 was INTENT.)
   }
   optional InterestType type = 2 [
     (required) = YES
@@ -194,14 +196,10 @@ message Interest {
 
   // Set if IFF interest.type == InterestType.ENTITY.
   optional Entity entity = 6;
-
-  // Set if IFF interest.type == InterestType.INTENT.
-  optional string intent_code = 7 [
-    (string_length) = 5
-  ];
 }
 
-message UserAction {
+// Back in the day, when we stored this in Mongo!!
+message OldUserAction {
   option (database_collection) = "MongoDB.UserAction";
 
   optional string id = 1 [
@@ -214,11 +212,12 @@ message UserAction {
   optional string user_id = 2 [
     (required) = YES,
     (string_length) = 24,
-    (string_charset) = LATIN1
+    (string_charset) = LATIN1,
+    (storage_method) = PULL_OUT
   ];
 
   enum ActionType {
-    UNKNONWN = 0;
+    UNKNOWN = 0;
     FAVORITE = 1; // aka Bookmark
     X_OUT = 2; // Swipe to dismiss
     TAP_FROM_STREAM = 3; // User tapped the article cell to view the full article from the stream
@@ -229,23 +228,27 @@ message UserAction {
     SCROLL_PAST = 8;
   }
   optional ActionType action_type = 3 [
-    (required) = YES
+    (required) = YES,
+    (storage_method) = PULL_OUT
   ];
 
   optional string url_id = 4 [
     (required) = YES,
     (string_length) = 24,
-    (string_charset) = LATIN1
+    (string_charset) = LATIN1,
+    (storage_method) = PULL_OUT
   ];
 
   optional string url = 5 [
     (required) = YES,
     (string_length) = 767,
-    (string_charset) = LATIN1
+    (string_charset) = LATIN1,
+    (storage_method) = PULL_OUT
   ];
 
   optional int64 create_time = 6 [
-    (required) = YES
+    (required) = YES,
+    (storage_method) = PULL_OUT
   ];
 
   // IFF ActionType == READ_ARTICLE
@@ -254,13 +257,74 @@ message UserAction {
   // IFF ActionType == READ_ARTICLE
   optional int64 read_end_time = 8;
 
-  repeated LinkedInContact linked_in_contact = 9 [
+  // The current user's interests, regardless of whether they were used
+  // specifically in the stream the user was acting in.
+  repeated Interest interest = 11 [
     (client_serialization) = EXCLUDE
   ];
 
-  repeated AddressBookContact address_book_contact = 10 [
-    (client_serialization) = EXCLUDE
+  // If the user was viewing an interest stream, this object describes
+  // the entity / keyword / etc that they were viewing.
+  optional Interest on_stream_for_interest = 12;
+}
+
+message UserAction {
+  option (database_collection) = "MySQL.UserAction";
+
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
   ];
+
+  optional string user_id = 2 [
+    (required) = YES,
+    (string_length) = 24,
+    (string_charset) = LATIN1,
+    (storage_method) = INDEX
+  ];
+
+  enum ActionType {
+    UNKNOWN = 0;
+    FAVORITE = 1; // aka Bookmark
+    X_OUT = 2; // Swipe to dismiss
+    TAP_FROM_STREAM = 3; // User tapped the article cell to view the full article from the stream
+    SHARE = 4;
+    READ_ARTICLE = 5;
+    VOTE_UP = 6; // Swipe right "Good to know"
+    UNVOTE_UP = 7;
+    SCROLL_PAST = 8;
+  }
+  optional ActionType action_type = 3 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+
+  optional string url_id = 4 [
+    (required) = YES,
+    (string_length) = 24,
+    (string_charset) = LATIN1,
+    (storage_method) = PULL_OUT
+  ];
+
+  optional string url = 5 [
+    (required) = YES,
+    (string_length) = 767,
+    (string_charset) = LATIN1,
+    (storage_method) = PULL_OUT
+  ];
+
+  optional int64 create_time = 6 [
+    (required) = YES,
+    (storage_method) = INDEX
+  ];
+
+  // IFF ActionType == READ_ARTICLE
+  optional int64 read_start_time = 7;
+
+  // IFF ActionType == READ_ARTICLE
+  optional int64 read_end_time = 8;
 
   // The current user's interests, regardless of whether they were used
   // specifically in the stream the user was acting in.

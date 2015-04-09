@@ -427,7 +427,7 @@ message UrlRating {
 }
 
 message KeywordToEntityId {
-  option (database_collection) = "MySQL.KeywordToEntity";
+  option (database_collection) = "MySQL.KeywordToEntityId";
 
   optional string id = 1 [
     (required) = YES,

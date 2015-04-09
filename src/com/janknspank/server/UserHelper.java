@@ -16,7 +16,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.UrlRatings;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
@@ -155,7 +154,6 @@ public class UserHelper {
     userJson.put("favorites", getFavoritesJsonArray());
     userJson.put("interests", getInterestsJsonArray());
     userJson.put("linked_in_contacts", Serializer.toJSON(linkedInContacts));
-    userJson.put("ratings", Serializer.toJSON(UrlRatings.getForUser(user)));
     return userJson;
   }
 }

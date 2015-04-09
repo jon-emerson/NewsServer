@@ -594,6 +594,12 @@ public final class RankProto {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      for (int i = 0; i < getInterestCount(); i++) {
+        if (!getInterest(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -980,6 +986,12 @@ public final class RankProto {
       }
 
       public final boolean isInitialized() {
+        for (int i = 0; i < getInterestCount(); i++) {
+          if (!getInterest(i).isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 

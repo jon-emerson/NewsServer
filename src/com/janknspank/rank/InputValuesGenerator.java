@@ -11,7 +11,6 @@ import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
-import com.janknspank.classifier.StartupFeatureHelper;
 import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
@@ -101,9 +100,15 @@ public class InputValuesGenerator {
         : Math.max(0, userRelevance - 0.1);
   }
 
-  public static double relevanceToSocialMedia(User user, Article article) {
+  public static double relevanceOnFacebook(User user, Article article) {
     SocialEngagement engagement = SocialEngagements.getForArticle(
         article, SocialEngagement.Site.FACEBOOK);
+    return (engagement == null) ? 0 : engagement.getShareScore();
+  }
+
+  public static double relevanceOnTwitter(User user, Article article) {
+    SocialEngagement engagement = SocialEngagements.getForArticle(
+        article, SocialEngagement.Site.TWITTER);
     return (engagement == null) ? 0 : engagement.getShareScore();
   }
 
@@ -162,19 +167,10 @@ public class InputValuesGenerator {
     return Math.min(1, value);
   }
 
-  public static double relevanceToStartupIntent(User user, Article article) {
-    // TODO(jonemerson): Figure out what we're doing here.  For now, since we
-    // like startup articles, include the relevance to startups as an input
-    // to the neural network for everyone.
-    for (ArticleFeature articleFeature : article.getFeatureList()) {
-      FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
-      if (StartupFeatureHelper.isStartupFeature(featureId) &&
-          StartupFeatureHelper.isRelatedToIndustries(
-              featureId, UserIndustries.getIndustryFeatureIds(user))) {
-        return articleFeature.getSimilarity();
-      }
-    }
-    return 0;
+  public static double relevanceToStartups(User user, Article article) {
+    ArticleFeature startupFeature =
+        ArticleFeatures.getFeature(article, FeatureId.STARTUPS);
+    return (startupFeature == null) ? 0 : startupFeature.getSimilarity();
   }
 
   public static double relevanceToAcquisitions(User user, Article article) {

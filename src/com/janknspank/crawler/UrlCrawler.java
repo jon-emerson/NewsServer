@@ -85,7 +85,7 @@ class UrlCrawler {
           }
         }
       }
-    } catch (FetchException | ParserException e) {
+    } catch (FetchException e) {
       e.printStackTrace();
     }
     return urls;

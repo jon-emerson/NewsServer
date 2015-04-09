@@ -16,7 +16,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.Intent;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -46,7 +45,6 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
     String entityId = this.getParameter(req, "entity_id");
     String entityKeyword = this.getParameter(req, "entity_keyword");
     String entityType = this.getParameter(req, "entity_type");
-    String intentCode = this.getParameter(req, "intent_code");
 
     // This is sent on requests that were initiated from a user's engagement
     // with an iOS push notification.  They contain an encoded notification ID
@@ -61,9 +59,6 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
       return Articles.getArticlesForFeature(
           FeatureId.fromId(Integer.parseInt(featureId)),
           NUM_RESULTS);
-    } else if (Intent.START_COMPANY.getCode().equals(intentCode)) {
-      // TODO: fix this so its the right feature for the user's industries
-      return Articles.getArticlesForFeature(FeatureId.fromId(20000), NUM_RESULTS);
     }
 
     User user = getUser(req);

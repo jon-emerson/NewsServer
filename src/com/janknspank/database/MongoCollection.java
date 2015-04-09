@@ -339,6 +339,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
       }
       if (!queryOptionList.isEmpty()) {
         cursor.limit(queryOptionList.get(0).getLimit());
+
         if (queryOptionList.get(0) instanceof LimitWithOffset) {
           cursor.skip(((LimitWithOffset) queryOptionList.get(0)).getOffset());
         }

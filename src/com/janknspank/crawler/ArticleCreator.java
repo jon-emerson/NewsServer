@@ -23,8 +23,9 @@ import com.janknspank.classifier.FeatureClassifier;
 import com.janknspank.classifier.Vector;
 import com.janknspank.common.DateParser;
 import com.janknspank.common.StringHelper;
-import com.janknspank.crawler.facebook.FacebookData;
-import com.janknspank.crawler.facebook.FacebookException;
+import com.janknspank.crawler.social.FacebookData;
+import com.janknspank.crawler.social.SocialException;
+import com.janknspank.crawler.social.TwitterData;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -152,11 +153,19 @@ class ArticleCreator {
 
     // Social Engagement
     try {
-      SocialEngagement engagement = FacebookData.getEngagementForURL(articleBuilder);
+      SocialEngagement engagement = FacebookData.getEngagementForArticle(articleBuilder);
       if (engagement != null) {
         articleBuilder.addSocialEngagement(engagement);
       }
-    } catch (FacebookException e) {
+    } catch (SocialException e) {
+      e.printStackTrace();
+    }
+    try {
+      SocialEngagement engagement = TwitterData.getEngagementForArticle(articleBuilder);
+      if (engagement != null) {
+        articleBuilder.addSocialEngagement(engagement);
+      }
+    } catch (SocialException e) {
       e.printStackTrace();
     }
 
@@ -400,7 +409,7 @@ class ArticleCreator {
       if (facebookPublishTime != null) {
         return facebookPublishTime;
       }
-    } catch (FacebookException e) {}
+    } catch (SocialException e) {}
 
     // Alright, fine.  You win.  You get our discovery date.
     return url.getDiscoveryTime();

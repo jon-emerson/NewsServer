@@ -24,7 +24,7 @@ public class HeuristicScorer extends Scorer {
     score += 0.4 * InputValuesGenerator.relevanceToUserIndustries(user, article);
 
     // 2. Relevance to social media
-    score += 0.3 * InputValuesGenerator.relevanceToSocialMedia(user, article);
+    score += 0.3 * InputValuesGenerator.relevanceOnFacebook(user, article);
 
     // 3. Relevance to contacts
     score += 0.3 * InputValuesGenerator.relevanceToContacts(user, article);

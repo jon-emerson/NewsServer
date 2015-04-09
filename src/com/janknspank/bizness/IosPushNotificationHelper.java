@@ -66,7 +66,8 @@ public class IosPushNotificationHelper {
     // Load the keystore and key manager factory.
     FileInputStream keyFileInputStream = null;
     try {
-      File keyFile = new File("WEB-INF/newsserver_production.p12");
+      // Production app is "WEB-INF/newsserver_production.p12"
+      File keyFile = new File("WEB-INF/demo_newsserver_production.p12");
       if (!keyFile.exists()) {
         throw new RuntimeException("Could not find key file");
       }
@@ -197,6 +198,7 @@ public class IosPushNotificationHelper {
     aps.put("alert", alertInner);
     aps.put("badge", 1);
     aps.put("sound", "default");
+    aps.put("content-available", 1);
 
     // Create the top-level JSON.
     JSONObject jsonObject = new JSONObject();
@@ -233,7 +235,7 @@ public class IosPushNotificationHelper {
       throws DatabaseSchemaException, DatabaseRequestException {
     int count = 0;
     for (DeviceRegistration registration
-        : getDeviceRegistrations(Users.getByEmail("panaceaa@gmail.com"))) {
+        : getDeviceRegistrations(Users.getByEmail("tom.charytoniuk@gmail.com"))) {
       ++count;
       Article article = Database.with(Article.class).getFirst();
       PushNotification pushNotification = createPushNotification(registration, article);

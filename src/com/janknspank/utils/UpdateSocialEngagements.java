@@ -1,14 +1,17 @@
 package com.janknspank.utils;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.google.common.collect.ImmutableList;
+import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
+import com.google.protobuf.Message;
 import com.janknspank.bizness.SocialEngagements;
-import com.janknspank.crawler.facebook.FacebookData;
+import com.janknspank.crawler.social.FacebookData;
+import com.janknspank.crawler.social.TwitterData;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption.WhereOption;
@@ -29,8 +32,26 @@ public class UpdateSocialEngagements {
 
     @Override
     public Void call() throws Exception {
-      SocialEngagement socialEngagement = FacebookData.getEngagementForURL(article);
-      Database.set(article, "social_engagement", ImmutableList.of((Object) socialEngagement));
+      List<Message> engagements = Lists.newArrayList();
+      try {
+        SocialEngagement engagement = FacebookData.getEngagementForArticle(article);
+        if (engagement != null) {
+          engagements.add(engagement);
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      try {
+        SocialEngagement engagement = TwitterData.getEngagementForArticle(article);
+        if (engagement != null) {
+          engagements.add(engagement);
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      if (engagements.size() > 0) {
+        Database.push(article, "social_engagement", engagements);
+      }
       return null;
     }
   }

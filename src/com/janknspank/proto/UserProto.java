@@ -1091,6 +1091,12 @@ public final class UserProto {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      for (int i = 0; i < getInterestCount(); i++) {
+        if (!getInterest(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1687,6 +1693,12 @@ public final class UserProto {
       }
 
       public final boolean isInitialized() {
+        for (int i = 0; i < getInterestCount(); i++) {
+          if (!getInterest(i).isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -7074,8 +7086,9 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:LinkedInContact)
   }
 
-  public interface InterestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface InterestOrBuilder extends
+      com.google.protobuf.GeneratedMessage.
+          ExtendableMessageOrBuilder<Interest> {
 
     // optional string id = 1;
     /**
@@ -7165,42 +7178,15 @@ public final class UserProto {
      * </pre>
      */
     com.janknspank.proto.CoreProto.EntityOrBuilder getEntityOrBuilder();
-
-    // optional string intent_code = 7;
-    /**
-     * <code>optional string intent_code = 7;</code>
-     *
-     * <pre>
-     * Set if IFF interest.type == InterestType.INTENT.
-     * </pre>
-     */
-    boolean hasIntentCode();
-    /**
-     * <code>optional string intent_code = 7;</code>
-     *
-     * <pre>
-     * Set if IFF interest.type == InterestType.INTENT.
-     * </pre>
-     */
-    java.lang.String getIntentCode();
-    /**
-     * <code>optional string intent_code = 7;</code>
-     *
-     * <pre>
-     * Set if IFF interest.type == InterestType.INTENT.
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getIntentCodeBytes();
   }
   /**
    * Protobuf type {@code Interest}
    */
   public static final class Interest extends
-      com.google.protobuf.GeneratedMessage
-      implements InterestOrBuilder {
+      com.google.protobuf.GeneratedMessage.ExtendableMessage<
+        Interest> implements InterestOrBuilder {
     // Use Interest.newBuilder() to construct.
-    private Interest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private Interest(com.google.protobuf.GeneratedMessage.ExtendableBuilder<com.janknspank.proto.UserProto.Interest, ?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
@@ -7294,11 +7280,6 @@ public final class UserProto {
               bitField0_ |= 0x00000020;
               break;
             }
-            case 58: {
-              bitField0_ |= 0x00000040;
-              intentCode_ = input.readBytes();
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -7365,12 +7346,12 @@ public final class UserProto {
       LINKED_IN_CONTACTS(3, 3),
       /**
        * <code>ADDRESS_BOOK_CONTACTS = 4;</code>
+       *
+       * <pre>
+       * Next ID: 6. (5 was INTENT.)
+       * </pre>
        */
       ADDRESS_BOOK_CONTACTS(4, 4),
-      /**
-       * <code>INTENT = 5;</code>
-       */
-      INTENT(5, 5),
       ;
 
       /**
@@ -7395,12 +7376,12 @@ public final class UserProto {
       public static final int LINKED_IN_CONTACTS_VALUE = 3;
       /**
        * <code>ADDRESS_BOOK_CONTACTS = 4;</code>
+       *
+       * <pre>
+       * Next ID: 6. (5 was INTENT.)
+       * </pre>
        */
       public static final int ADDRESS_BOOK_CONTACTS_VALUE = 4;
-      /**
-       * <code>INTENT = 5;</code>
-       */
-      public static final int INTENT_VALUE = 5;
 
 
       public final int getNumber() { return value; }
@@ -7412,7 +7393,6 @@ public final class UserProto {
           case 2: return ENTITY;
           case 3: return LINKED_IN_CONTACTS;
           case 4: return ADDRESS_BOOK_CONTACTS;
-          case 5: return INTENT;
           default: return null;
         }
       }
@@ -7755,61 +7735,6 @@ public final class UserProto {
       return entity_;
     }
 
-    // optional string intent_code = 7;
-    public static final int INTENT_CODE_FIELD_NUMBER = 7;
-    private java.lang.Object intentCode_;
-    /**
-     * <code>optional string intent_code = 7;</code>
-     *
-     * <pre>
-     * Set if IFF interest.type == InterestType.INTENT.
-     * </pre>
-     */
-    public boolean hasIntentCode() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string intent_code = 7;</code>
-     *
-     * <pre>
-     * Set if IFF interest.type == InterestType.INTENT.
-     * </pre>
-     */
-    public java.lang.String getIntentCode() {
-      java.lang.Object ref = intentCode_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          intentCode_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string intent_code = 7;</code>
-     *
-     * <pre>
-     * Set if IFF interest.type == InterestType.INTENT.
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getIntentCodeBytes() {
-      java.lang.Object ref = intentCode_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        intentCode_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private void initFields() {
       id_ = "";
       type_ = com.janknspank.proto.UserProto.Interest.InterestType.UNKNONWN;
@@ -7817,13 +7742,16 @@ public final class UserProto {
       createTime_ = 0L;
       industryCode_ = 0;
       entity_ = com.janknspank.proto.CoreProto.Entity.getDefaultInstance();
-      intentCode_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!extensionsAreInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -7831,6 +7759,9 @@ public final class UserProto {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      com.google.protobuf.GeneratedMessage
+        .ExtendableMessage<com.janknspank.proto.UserProto.Interest>.ExtensionWriter extensionWriter =
+          newExtensionWriter();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getIdBytes());
       }
@@ -7849,9 +7780,7 @@ public final class UserProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeMessage(6, entity_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(7, getIntentCodeBytes());
-      }
+      extensionWriter.writeUntil(8, output);
       getUnknownFields().writeTo(output);
     }
 
@@ -7885,10 +7814,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, entity_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, getIntentCodeBytes());
-      }
+      size += extensionsSerializedSize();
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -7971,8 +7897,8 @@ public final class UserProto {
      * Protobuf type {@code Interest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.janknspank.proto.UserProto.InterestOrBuilder {
+        com.google.protobuf.GeneratedMessage.ExtendableBuilder<
+          com.janknspank.proto.UserProto.Interest, Builder> implements com.janknspank.proto.UserProto.InterestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.janknspank.proto.UserProto.internal_static_Interest_descriptor;
@@ -8022,8 +7948,6 @@ public final class UserProto {
           entityBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
-        intentCode_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -8080,10 +8004,6 @@ public final class UserProto {
         } else {
           result.entity_ = entityBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.intentCode_ = intentCode_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8120,16 +8040,16 @@ public final class UserProto {
         if (other.hasEntity()) {
           mergeEntity(other.getEntity());
         }
-        if (other.hasIntentCode()) {
-          bitField0_ |= 0x00000040;
-          intentCode_ = other.intentCode_;
-          onChanged();
-        }
+        this.mergeExtensionFields(other);
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!extensionsAreInitialized()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -8533,104 +8453,6 @@ public final class UserProto {
         return entityBuilder_;
       }
 
-      // optional string intent_code = 7;
-      private java.lang.Object intentCode_ = "";
-      /**
-       * <code>optional string intent_code = 7;</code>
-       *
-       * <pre>
-       * Set if IFF interest.type == InterestType.INTENT.
-       * </pre>
-       */
-      public boolean hasIntentCode() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional string intent_code = 7;</code>
-       *
-       * <pre>
-       * Set if IFF interest.type == InterestType.INTENT.
-       * </pre>
-       */
-      public java.lang.String getIntentCode() {
-        java.lang.Object ref = intentCode_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          intentCode_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string intent_code = 7;</code>
-       *
-       * <pre>
-       * Set if IFF interest.type == InterestType.INTENT.
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getIntentCodeBytes() {
-        java.lang.Object ref = intentCode_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          intentCode_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string intent_code = 7;</code>
-       *
-       * <pre>
-       * Set if IFF interest.type == InterestType.INTENT.
-       * </pre>
-       */
-      public Builder setIntentCode(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        intentCode_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string intent_code = 7;</code>
-       *
-       * <pre>
-       * Set if IFF interest.type == InterestType.INTENT.
-       * </pre>
-       */
-      public Builder clearIntentCode() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        intentCode_ = getDefaultInstance().getIntentCode();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string intent_code = 7;</code>
-       *
-       * <pre>
-       * Set if IFF interest.type == InterestType.INTENT.
-       * </pre>
-       */
-      public Builder setIntentCodeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        intentCode_ = value;
-        onChanged();
-        return this;
-      }
-
       // @@protoc_insertion_point(builder_scope:Interest)
     }
 
@@ -8640,6 +8462,2320 @@ public final class UserProto {
     }
 
     // @@protoc_insertion_point(class_scope:Interest)
+  }
+
+  public interface OldUserActionOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string id = 1;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional string user_id = 2;
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    // optional .OldUserAction.ActionType action_type = 3;
+    /**
+     * <code>optional .OldUserAction.ActionType action_type = 3;</code>
+     */
+    boolean hasActionType();
+    /**
+     * <code>optional .OldUserAction.ActionType action_type = 3;</code>
+     */
+    com.janknspank.proto.UserProto.OldUserAction.ActionType getActionType();
+
+    // optional string url_id = 4;
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    boolean hasUrlId();
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    java.lang.String getUrlId();
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getUrlIdBytes();
+
+    // optional string url = 5;
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    boolean hasUrl();
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    java.lang.String getUrl();
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes();
+
+    // optional int64 create_time = 6;
+    /**
+     * <code>optional int64 create_time = 6;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 create_time = 6;</code>
+     */
+    long getCreateTime();
+
+    // optional int64 read_start_time = 7;
+    /**
+     * <code>optional int64 read_start_time = 7;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    boolean hasReadStartTime();
+    /**
+     * <code>optional int64 read_start_time = 7;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    long getReadStartTime();
+
+    // optional int64 read_end_time = 8;
+    /**
+     * <code>optional int64 read_end_time = 8;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    boolean hasReadEndTime();
+    /**
+     * <code>optional int64 read_end_time = 8;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    long getReadEndTime();
+
+    // repeated .Interest interest = 11;
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    java.util.List<com.janknspank.proto.UserProto.Interest> 
+        getInterestList();
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    com.janknspank.proto.UserProto.Interest getInterest(int index);
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    int getInterestCount();
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
+        getInterestOrBuilderList();
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
+        int index);
+
+    // optional .Interest on_stream_for_interest = 12;
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    boolean hasOnStreamForInterest();
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    com.janknspank.proto.UserProto.Interest getOnStreamForInterest();
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    com.janknspank.proto.UserProto.InterestOrBuilder getOnStreamForInterestOrBuilder();
+  }
+  /**
+   * Protobuf type {@code OldUserAction}
+   *
+   * <pre>
+   * Back in the day, when we stored this in Mongo!!
+   * </pre>
+   */
+  public static final class OldUserAction extends
+      com.google.protobuf.GeneratedMessage
+      implements OldUserActionOrBuilder {
+    // Use OldUserAction.newBuilder() to construct.
+    private OldUserAction(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private OldUserAction(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final OldUserAction defaultInstance;
+    public static OldUserAction getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public OldUserAction getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private OldUserAction(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.UserProto.OldUserAction.ActionType value = com.janknspank.proto.UserProto.OldUserAction.ActionType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                actionType_ = value;
+              }
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              urlId_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              url_ = input.readBytes();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              createTime_ = input.readInt64();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              readStartTime_ = input.readInt64();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              readEndTime_ = input.readInt64();
+              break;
+            }
+            case 90: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              interest_.add(input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry));
+              break;
+            }
+            case 98: {
+              com.janknspank.proto.UserProto.Interest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000100) == 0x00000100)) {
+                subBuilder = onStreamForInterest_.toBuilder();
+              }
+              onStreamForInterest_ = input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(onStreamForInterest_);
+                onStreamForInterest_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000100;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          interest_ = java.util.Collections.unmodifiableList(interest_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.UserProto.internal_static_OldUserAction_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.UserProto.internal_static_OldUserAction_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.UserProto.OldUserAction.class, com.janknspank.proto.UserProto.OldUserAction.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<OldUserAction> PARSER =
+        new com.google.protobuf.AbstractParser<OldUserAction>() {
+      public OldUserAction parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OldUserAction(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<OldUserAction> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code OldUserAction.ActionType}
+     */
+    public enum ActionType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>FAVORITE = 1;</code>
+       *
+       * <pre>
+       * aka Bookmark
+       * </pre>
+       */
+      FAVORITE(1, 1),
+      /**
+       * <code>X_OUT = 2;</code>
+       *
+       * <pre>
+       * Swipe to dismiss
+       * </pre>
+       */
+      X_OUT(2, 2),
+      /**
+       * <code>TAP_FROM_STREAM = 3;</code>
+       *
+       * <pre>
+       * User tapped the article cell to view the full article from the stream
+       * </pre>
+       */
+      TAP_FROM_STREAM(3, 3),
+      /**
+       * <code>SHARE = 4;</code>
+       */
+      SHARE(4, 4),
+      /**
+       * <code>READ_ARTICLE = 5;</code>
+       */
+      READ_ARTICLE(5, 5),
+      /**
+       * <code>VOTE_UP = 6;</code>
+       *
+       * <pre>
+       * Swipe right "Good to know"
+       * </pre>
+       */
+      VOTE_UP(6, 6),
+      /**
+       * <code>UNVOTE_UP = 7;</code>
+       */
+      UNVOTE_UP(7, 7),
+      /**
+       * <code>SCROLL_PAST = 8;</code>
+       */
+      SCROLL_PAST(8, 8),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>FAVORITE = 1;</code>
+       *
+       * <pre>
+       * aka Bookmark
+       * </pre>
+       */
+      public static final int FAVORITE_VALUE = 1;
+      /**
+       * <code>X_OUT = 2;</code>
+       *
+       * <pre>
+       * Swipe to dismiss
+       * </pre>
+       */
+      public static final int X_OUT_VALUE = 2;
+      /**
+       * <code>TAP_FROM_STREAM = 3;</code>
+       *
+       * <pre>
+       * User tapped the article cell to view the full article from the stream
+       * </pre>
+       */
+      public static final int TAP_FROM_STREAM_VALUE = 3;
+      /**
+       * <code>SHARE = 4;</code>
+       */
+      public static final int SHARE_VALUE = 4;
+      /**
+       * <code>READ_ARTICLE = 5;</code>
+       */
+      public static final int READ_ARTICLE_VALUE = 5;
+      /**
+       * <code>VOTE_UP = 6;</code>
+       *
+       * <pre>
+       * Swipe right "Good to know"
+       * </pre>
+       */
+      public static final int VOTE_UP_VALUE = 6;
+      /**
+       * <code>UNVOTE_UP = 7;</code>
+       */
+      public static final int UNVOTE_UP_VALUE = 7;
+      /**
+       * <code>SCROLL_PAST = 8;</code>
+       */
+      public static final int SCROLL_PAST_VALUE = 8;
+
+
+      public final int getNumber() { return value; }
+
+      public static ActionType valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return FAVORITE;
+          case 2: return X_OUT;
+          case 3: return TAP_FROM_STREAM;
+          case 4: return SHARE;
+          case 5: return READ_ARTICLE;
+          case 6: return VOTE_UP;
+          case 7: return UNVOTE_UP;
+          case 8: return SCROLL_PAST;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<ActionType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<ActionType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ActionType>() {
+              public ActionType findValueByNumber(int number) {
+                return ActionType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.UserProto.OldUserAction.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final ActionType[] VALUES = values();
+
+      public static ActionType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private ActionType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:OldUserAction.ActionType)
+    }
+
+    private int bitField0_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string user_id = 2;
+    public static final int USER_ID_FIELD_NUMBER = 2;
+    private java.lang.Object userId_;
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string user_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional .OldUserAction.ActionType action_type = 3;
+    public static final int ACTION_TYPE_FIELD_NUMBER = 3;
+    private com.janknspank.proto.UserProto.OldUserAction.ActionType actionType_;
+    /**
+     * <code>optional .OldUserAction.ActionType action_type = 3;</code>
+     */
+    public boolean hasActionType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .OldUserAction.ActionType action_type = 3;</code>
+     */
+    public com.janknspank.proto.UserProto.OldUserAction.ActionType getActionType() {
+      return actionType_;
+    }
+
+    // optional string url_id = 4;
+    public static final int URL_ID_FIELD_NUMBER = 4;
+    private java.lang.Object urlId_;
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    public boolean hasUrlId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    public java.lang.String getUrlId() {
+      java.lang.Object ref = urlId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          urlId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url_id = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUrlIdBytes() {
+      java.lang.Object ref = urlId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        urlId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string url = 5;
+    public static final int URL_FIELD_NUMBER = 5;
+    private java.lang.Object url_;
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    public boolean hasUrl() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          url_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 create_time = 6;
+    public static final int CREATE_TIME_FIELD_NUMBER = 6;
+    private long createTime_;
+    /**
+     * <code>optional int64 create_time = 6;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int64 create_time = 6;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    // optional int64 read_start_time = 7;
+    public static final int READ_START_TIME_FIELD_NUMBER = 7;
+    private long readStartTime_;
+    /**
+     * <code>optional int64 read_start_time = 7;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    public boolean hasReadStartTime() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int64 read_start_time = 7;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    public long getReadStartTime() {
+      return readStartTime_;
+    }
+
+    // optional int64 read_end_time = 8;
+    public static final int READ_END_TIME_FIELD_NUMBER = 8;
+    private long readEndTime_;
+    /**
+     * <code>optional int64 read_end_time = 8;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    public boolean hasReadEndTime() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int64 read_end_time = 8;</code>
+     *
+     * <pre>
+     * IFF ActionType == READ_ARTICLE
+     * </pre>
+     */
+    public long getReadEndTime() {
+      return readEndTime_;
+    }
+
+    // repeated .Interest interest = 11;
+    public static final int INTEREST_FIELD_NUMBER = 11;
+    private java.util.List<com.janknspank.proto.UserProto.Interest> interest_;
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    public java.util.List<com.janknspank.proto.UserProto.Interest> getInterestList() {
+      return interest_;
+    }
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    public java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
+        getInterestOrBuilderList() {
+      return interest_;
+    }
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    public int getInterestCount() {
+      return interest_.size();
+    }
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    public com.janknspank.proto.UserProto.Interest getInterest(int index) {
+      return interest_.get(index);
+    }
+    /**
+     * <code>repeated .Interest interest = 11;</code>
+     *
+     * <pre>
+     * The current user's interests, regardless of whether they were used
+     * specifically in the stream the user was acting in.
+     * </pre>
+     */
+    public com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
+        int index) {
+      return interest_.get(index);
+    }
+
+    // optional .Interest on_stream_for_interest = 12;
+    public static final int ON_STREAM_FOR_INTEREST_FIELD_NUMBER = 12;
+    private com.janknspank.proto.UserProto.Interest onStreamForInterest_;
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    public boolean hasOnStreamForInterest() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    public com.janknspank.proto.UserProto.Interest getOnStreamForInterest() {
+      return onStreamForInterest_;
+    }
+    /**
+     * <code>optional .Interest on_stream_for_interest = 12;</code>
+     *
+     * <pre>
+     * If the user was viewing an interest stream, this object describes
+     * the entity / keyword / etc that they were viewing.
+     * </pre>
+     */
+    public com.janknspank.proto.UserProto.InterestOrBuilder getOnStreamForInterestOrBuilder() {
+      return onStreamForInterest_;
+    }
+
+    private void initFields() {
+      id_ = "";
+      userId_ = "";
+      actionType_ = com.janknspank.proto.UserProto.OldUserAction.ActionType.UNKNOWN;
+      urlId_ = "";
+      url_ = "";
+      createTime_ = 0L;
+      readStartTime_ = 0L;
+      readEndTime_ = 0L;
+      interest_ = java.util.Collections.emptyList();
+      onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      for (int i = 0; i < getInterestCount(); i++) {
+        if (!getInterest(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasOnStreamForInterest()) {
+        if (!getOnStreamForInterest().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, actionType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getUrlIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, createTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(7, readStartTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt64(8, readEndTime_);
+      }
+      for (int i = 0; i < interest_.size(); i++) {
+        output.writeMessage(11, interest_.get(i));
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeMessage(12, onStreamForInterest_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, actionType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getUrlIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, createTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, readStartTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(8, readEndTime_);
+      }
+      for (int i = 0; i < interest_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, interest_.get(i));
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, onStreamForInterest_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.UserProto.OldUserAction parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.UserProto.OldUserAction parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.UserProto.OldUserAction prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code OldUserAction}
+     *
+     * <pre>
+     * Back in the day, when we stored this in Mongo!!
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.UserProto.OldUserActionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.UserProto.internal_static_OldUserAction_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.UserProto.internal_static_OldUserAction_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.UserProto.OldUserAction.class, com.janknspank.proto.UserProto.OldUserAction.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.UserProto.OldUserAction.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getInterestFieldBuilder();
+          getOnStreamForInterestFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        actionType_ = com.janknspank.proto.UserProto.OldUserAction.ActionType.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        urlId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        url_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        readStartTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        readEndTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        if (interestBuilder_ == null) {
+          interest_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          interestBuilder_.clear();
+        }
+        if (onStreamForInterestBuilder_ == null) {
+          onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
+        } else {
+          onStreamForInterestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.UserProto.internal_static_OldUserAction_descriptor;
+      }
+
+      public com.janknspank.proto.UserProto.OldUserAction getDefaultInstanceForType() {
+        return com.janknspank.proto.UserProto.OldUserAction.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.UserProto.OldUserAction build() {
+        com.janknspank.proto.UserProto.OldUserAction result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.UserProto.OldUserAction buildPartial() {
+        com.janknspank.proto.UserProto.OldUserAction result = new com.janknspank.proto.UserProto.OldUserAction(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.actionType_ = actionType_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.urlId_ = urlId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.url_ = url_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.createTime_ = createTime_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.readStartTime_ = readStartTime_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.readEndTime_ = readEndTime_;
+        if (interestBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            interest_ = java.util.Collections.unmodifiableList(interest_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.interest_ = interest_;
+        } else {
+          result.interest_ = interestBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        if (onStreamForInterestBuilder_ == null) {
+          result.onStreamForInterest_ = onStreamForInterest_;
+        } else {
+          result.onStreamForInterest_ = onStreamForInterestBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.UserProto.OldUserAction) {
+          return mergeFrom((com.janknspank.proto.UserProto.OldUserAction)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.UserProto.OldUserAction other) {
+        if (other == com.janknspank.proto.UserProto.OldUserAction.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000002;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasActionType()) {
+          setActionType(other.getActionType());
+        }
+        if (other.hasUrlId()) {
+          bitField0_ |= 0x00000008;
+          urlId_ = other.urlId_;
+          onChanged();
+        }
+        if (other.hasUrl()) {
+          bitField0_ |= 0x00000010;
+          url_ = other.url_;
+          onChanged();
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
+        }
+        if (other.hasReadStartTime()) {
+          setReadStartTime(other.getReadStartTime());
+        }
+        if (other.hasReadEndTime()) {
+          setReadEndTime(other.getReadEndTime());
+        }
+        if (interestBuilder_ == null) {
+          if (!other.interest_.isEmpty()) {
+            if (interest_.isEmpty()) {
+              interest_ = other.interest_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureInterestIsMutable();
+              interest_.addAll(other.interest_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.interest_.isEmpty()) {
+            if (interestBuilder_.isEmpty()) {
+              interestBuilder_.dispose();
+              interestBuilder_ = null;
+              interest_ = other.interest_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              interestBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getInterestFieldBuilder() : null;
+            } else {
+              interestBuilder_.addAllMessages(other.interest_);
+            }
+          }
+        }
+        if (other.hasOnStreamForInterest()) {
+          mergeOnStreamForInterest(other.getOnStreamForInterest());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getInterestCount(); i++) {
+          if (!getInterest(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasOnStreamForInterest()) {
+          if (!getOnStreamForInterest().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.UserProto.OldUserAction parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.UserProto.OldUserAction) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string user_id = 2;
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user_id = 2;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional .OldUserAction.ActionType action_type = 3;
+      private com.janknspank.proto.UserProto.OldUserAction.ActionType actionType_ = com.janknspank.proto.UserProto.OldUserAction.ActionType.UNKNOWN;
+      /**
+       * <code>optional .OldUserAction.ActionType action_type = 3;</code>
+       */
+      public boolean hasActionType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .OldUserAction.ActionType action_type = 3;</code>
+       */
+      public com.janknspank.proto.UserProto.OldUserAction.ActionType getActionType() {
+        return actionType_;
+      }
+      /**
+       * <code>optional .OldUserAction.ActionType action_type = 3;</code>
+       */
+      public Builder setActionType(com.janknspank.proto.UserProto.OldUserAction.ActionType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        actionType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .OldUserAction.ActionType action_type = 3;</code>
+       */
+      public Builder clearActionType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        actionType_ = com.janknspank.proto.UserProto.OldUserAction.ActionType.UNKNOWN;
+        onChanged();
+        return this;
+      }
+
+      // optional string url_id = 4;
+      private java.lang.Object urlId_ = "";
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public boolean hasUrlId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public java.lang.String getUrlId() {
+        java.lang.Object ref = urlId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          urlId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUrlIdBytes() {
+        java.lang.Object ref = urlId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          urlId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public Builder setUrlId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        urlId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public Builder clearUrlId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        urlId_ = getDefaultInstance().getUrlId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url_id = 4;</code>
+       */
+      public Builder setUrlIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        urlId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string url = 5;
+      private java.lang.Object url_ = "";
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public boolean hasUrl() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          url_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public Builder setUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public Builder clearUrl() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 5;</code>
+       */
+      public Builder setUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 create_time = 6;
+      private long createTime_ ;
+      /**
+       * <code>optional int64 create_time = 6;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int64 create_time = 6;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 create_time = 6;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000020;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 create_time = 6;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 read_start_time = 7;
+      private long readStartTime_ ;
+      /**
+       * <code>optional int64 read_start_time = 7;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public boolean hasReadStartTime() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int64 read_start_time = 7;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public long getReadStartTime() {
+        return readStartTime_;
+      }
+      /**
+       * <code>optional int64 read_start_time = 7;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public Builder setReadStartTime(long value) {
+        bitField0_ |= 0x00000040;
+        readStartTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 read_start_time = 7;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public Builder clearReadStartTime() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        readStartTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 read_end_time = 8;
+      private long readEndTime_ ;
+      /**
+       * <code>optional int64 read_end_time = 8;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public boolean hasReadEndTime() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int64 read_end_time = 8;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public long getReadEndTime() {
+        return readEndTime_;
+      }
+      /**
+       * <code>optional int64 read_end_time = 8;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public Builder setReadEndTime(long value) {
+        bitField0_ |= 0x00000080;
+        readEndTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 read_end_time = 8;</code>
+       *
+       * <pre>
+       * IFF ActionType == READ_ARTICLE
+       * </pre>
+       */
+      public Builder clearReadEndTime() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        readEndTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // repeated .Interest interest = 11;
+      private java.util.List<com.janknspank.proto.UserProto.Interest> interest_ =
+        java.util.Collections.emptyList();
+      private void ensureInterestIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>(interest_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder> interestBuilder_;
+
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.Interest> getInterestList() {
+        if (interestBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(interest_);
+        } else {
+          return interestBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public int getInterestCount() {
+        if (interestBuilder_ == null) {
+          return interest_.size();
+        } else {
+          return interestBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.Interest getInterest(int index) {
+        if (interestBuilder_ == null) {
+          return interest_.get(index);
+        } else {
+          return interestBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder setInterest(
+          int index, com.janknspank.proto.UserProto.Interest value) {
+        if (interestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInterestIsMutable();
+          interest_.set(index, value);
+          onChanged();
+        } else {
+          interestBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder setInterest(
+          int index, com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          interest_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          interestBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder addInterest(com.janknspank.proto.UserProto.Interest value) {
+        if (interestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInterestIsMutable();
+          interest_.add(value);
+          onChanged();
+        } else {
+          interestBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder addInterest(
+          int index, com.janknspank.proto.UserProto.Interest value) {
+        if (interestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInterestIsMutable();
+          interest_.add(index, value);
+          onChanged();
+        } else {
+          interestBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder addInterest(
+          com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          interest_.add(builderForValue.build());
+          onChanged();
+        } else {
+          interestBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder addInterest(
+          int index, com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          interest_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          interestBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder addAllInterest(
+          java.lang.Iterable<? extends com.janknspank.proto.UserProto.Interest> values) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          super.addAll(values, interest_);
+          onChanged();
+        } else {
+          interestBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder clearInterest() {
+        if (interestBuilder_ == null) {
+          interest_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          interestBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public Builder removeInterest(int index) {
+        if (interestBuilder_ == null) {
+          ensureInterestIsMutable();
+          interest_.remove(index);
+          onChanged();
+        } else {
+          interestBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.Interest.Builder getInterestBuilder(
+          int index) {
+        return getInterestFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.InterestOrBuilder getInterestOrBuilder(
+          int index) {
+        if (interestBuilder_ == null) {
+          return interest_.get(index);  } else {
+          return interestBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public java.util.List<? extends com.janknspank.proto.UserProto.InterestOrBuilder> 
+           getInterestOrBuilderList() {
+        if (interestBuilder_ != null) {
+          return interestBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(interest_);
+        }
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.Interest.Builder addInterestBuilder() {
+        return getInterestFieldBuilder().addBuilder(
+            com.janknspank.proto.UserProto.Interest.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.Interest.Builder addInterestBuilder(
+          int index) {
+        return getInterestFieldBuilder().addBuilder(
+            index, com.janknspank.proto.UserProto.Interest.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Interest interest = 11;</code>
+       *
+       * <pre>
+       * The current user's interests, regardless of whether they were used
+       * specifically in the stream the user was acting in.
+       * </pre>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.Interest.Builder> 
+           getInterestBuilderList() {
+        return getInterestFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder> 
+          getInterestFieldBuilder() {
+        if (interestBuilder_ == null) {
+          interestBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder>(
+                  interest_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          interest_ = null;
+        }
+        return interestBuilder_;
+      }
+
+      // optional .Interest on_stream_for_interest = 12;
+      private com.janknspank.proto.UserProto.Interest onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder> onStreamForInterestBuilder_;
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public boolean hasOnStreamForInterest() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.Interest getOnStreamForInterest() {
+        if (onStreamForInterestBuilder_ == null) {
+          return onStreamForInterest_;
+        } else {
+          return onStreamForInterestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public Builder setOnStreamForInterest(com.janknspank.proto.UserProto.Interest value) {
+        if (onStreamForInterestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          onStreamForInterest_ = value;
+          onChanged();
+        } else {
+          onStreamForInterestBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public Builder setOnStreamForInterest(
+          com.janknspank.proto.UserProto.Interest.Builder builderForValue) {
+        if (onStreamForInterestBuilder_ == null) {
+          onStreamForInterest_ = builderForValue.build();
+          onChanged();
+        } else {
+          onStreamForInterestBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public Builder mergeOnStreamForInterest(com.janknspank.proto.UserProto.Interest value) {
+        if (onStreamForInterestBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200) &&
+              onStreamForInterest_ != com.janknspank.proto.UserProto.Interest.getDefaultInstance()) {
+            onStreamForInterest_ =
+              com.janknspank.proto.UserProto.Interest.newBuilder(onStreamForInterest_).mergeFrom(value).buildPartial();
+          } else {
+            onStreamForInterest_ = value;
+          }
+          onChanged();
+        } else {
+          onStreamForInterestBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public Builder clearOnStreamForInterest() {
+        if (onStreamForInterestBuilder_ == null) {
+          onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
+          onChanged();
+        } else {
+          onStreamForInterestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.Interest.Builder getOnStreamForInterestBuilder() {
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return getOnStreamForInterestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      public com.janknspank.proto.UserProto.InterestOrBuilder getOnStreamForInterestOrBuilder() {
+        if (onStreamForInterestBuilder_ != null) {
+          return onStreamForInterestBuilder_.getMessageOrBuilder();
+        } else {
+          return onStreamForInterest_;
+        }
+      }
+      /**
+       * <code>optional .Interest on_stream_for_interest = 12;</code>
+       *
+       * <pre>
+       * If the user was viewing an interest stream, this object describes
+       * the entity / keyword / etc that they were viewing.
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder> 
+          getOnStreamForInterestFieldBuilder() {
+        if (onStreamForInterestBuilder_ == null) {
+          onStreamForInterestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder>(
+                  onStreamForInterest_,
+                  getParentForChildren(),
+                  isClean());
+          onStreamForInterest_ = null;
+        }
+        return onStreamForInterestBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OldUserAction)
+    }
+
+    static {
+      defaultInstance = new OldUserAction(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:OldUserAction)
   }
 
   public interface UserActionOrBuilder
@@ -8760,56 +10896,6 @@ public final class UserProto {
      * </pre>
      */
     long getReadEndTime();
-
-    // repeated .LinkedInContact linked_in_contact = 9;
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    java.util.List<com.janknspank.proto.UserProto.LinkedInContact> 
-        getLinkedInContactList();
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    com.janknspank.proto.UserProto.LinkedInContact getLinkedInContact(int index);
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    int getLinkedInContactCount();
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    java.util.List<? extends com.janknspank.proto.UserProto.LinkedInContactOrBuilder> 
-        getLinkedInContactOrBuilderList();
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    com.janknspank.proto.UserProto.LinkedInContactOrBuilder getLinkedInContactOrBuilder(
-        int index);
-
-    // repeated .AddressBookContact address_book_contact = 10;
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    java.util.List<com.janknspank.proto.UserProto.AddressBookContact> 
-        getAddressBookContactList();
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    com.janknspank.proto.UserProto.AddressBookContact getAddressBookContact(int index);
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    int getAddressBookContactCount();
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    java.util.List<? extends com.janknspank.proto.UserProto.AddressBookContactOrBuilder> 
-        getAddressBookContactOrBuilderList();
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    com.janknspank.proto.UserProto.AddressBookContactOrBuilder getAddressBookContactOrBuilder(
-        int index);
 
     // repeated .Interest interest = 11;
     /**
@@ -8987,26 +11073,10 @@ public final class UserProto {
               readEndTime_ = input.readInt64();
               break;
             }
-            case 74: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-                linkedInContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.LinkedInContact>();
-                mutable_bitField0_ |= 0x00000100;
-              }
-              linkedInContact_.add(input.readMessage(com.janknspank.proto.UserProto.LinkedInContact.PARSER, extensionRegistry));
-              break;
-            }
-            case 82: {
-              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
-                addressBookContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.AddressBookContact>();
-                mutable_bitField0_ |= 0x00000200;
-              }
-              addressBookContact_.add(input.readMessage(com.janknspank.proto.UserProto.AddressBookContact.PARSER, extensionRegistry));
-              break;
-            }
             case 90: {
-              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>();
-                mutable_bitField0_ |= 0x00000400;
+                mutable_bitField0_ |= 0x00000100;
               }
               interest_.add(input.readMessage(com.janknspank.proto.UserProto.Interest.PARSER, extensionRegistry));
               break;
@@ -9033,12 +11103,6 @@ public final class UserProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-          linkedInContact_ = java.util.Collections.unmodifiableList(linkedInContact_);
-        }
-        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
-          addressBookContact_ = java.util.Collections.unmodifiableList(addressBookContact_);
-        }
-        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
           interest_ = java.util.Collections.unmodifiableList(interest_);
         }
         this.unknownFields = unknownFields.build();
@@ -9078,9 +11142,9 @@ public final class UserProto {
     public enum ActionType
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>UNKNONWN = 0;</code>
+       * <code>UNKNOWN = 0;</code>
        */
-      UNKNONWN(0, 0),
+      UNKNOWN(0, 0),
       /**
        * <code>FAVORITE = 1;</code>
        *
@@ -9132,9 +11196,9 @@ public final class UserProto {
       ;
 
       /**
-       * <code>UNKNONWN = 0;</code>
+       * <code>UNKNOWN = 0;</code>
        */
-      public static final int UNKNONWN_VALUE = 0;
+      public static final int UNKNOWN_VALUE = 0;
       /**
        * <code>FAVORITE = 1;</code>
        *
@@ -9189,7 +11253,7 @@ public final class UserProto {
 
       public static ActionType valueOf(int value) {
         switch (value) {
-          case 0: return UNKNONWN;
+          case 0: return UNKNOWN;
           case 1: return FAVORITE;
           case 2: return X_OUT;
           case 3: return TAP_FROM_STREAM;
@@ -9502,78 +11566,6 @@ public final class UserProto {
       return readEndTime_;
     }
 
-    // repeated .LinkedInContact linked_in_contact = 9;
-    public static final int LINKED_IN_CONTACT_FIELD_NUMBER = 9;
-    private java.util.List<com.janknspank.proto.UserProto.LinkedInContact> linkedInContact_;
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    public java.util.List<com.janknspank.proto.UserProto.LinkedInContact> getLinkedInContactList() {
-      return linkedInContact_;
-    }
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    public java.util.List<? extends com.janknspank.proto.UserProto.LinkedInContactOrBuilder> 
-        getLinkedInContactOrBuilderList() {
-      return linkedInContact_;
-    }
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    public int getLinkedInContactCount() {
-      return linkedInContact_.size();
-    }
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    public com.janknspank.proto.UserProto.LinkedInContact getLinkedInContact(int index) {
-      return linkedInContact_.get(index);
-    }
-    /**
-     * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-     */
-    public com.janknspank.proto.UserProto.LinkedInContactOrBuilder getLinkedInContactOrBuilder(
-        int index) {
-      return linkedInContact_.get(index);
-    }
-
-    // repeated .AddressBookContact address_book_contact = 10;
-    public static final int ADDRESS_BOOK_CONTACT_FIELD_NUMBER = 10;
-    private java.util.List<com.janknspank.proto.UserProto.AddressBookContact> addressBookContact_;
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    public java.util.List<com.janknspank.proto.UserProto.AddressBookContact> getAddressBookContactList() {
-      return addressBookContact_;
-    }
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    public java.util.List<? extends com.janknspank.proto.UserProto.AddressBookContactOrBuilder> 
-        getAddressBookContactOrBuilderList() {
-      return addressBookContact_;
-    }
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    public int getAddressBookContactCount() {
-      return addressBookContact_.size();
-    }
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    public com.janknspank.proto.UserProto.AddressBookContact getAddressBookContact(int index) {
-      return addressBookContact_.get(index);
-    }
-    /**
-     * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-     */
-    public com.janknspank.proto.UserProto.AddressBookContactOrBuilder getAddressBookContactOrBuilder(
-        int index) {
-      return addressBookContact_.get(index);
-    }
-
     // repeated .Interest interest = 11;
     public static final int INTEREST_FIELD_NUMBER = 11;
     private java.util.List<com.janknspank.proto.UserProto.Interest> interest_;
@@ -9675,14 +11667,12 @@ public final class UserProto {
     private void initFields() {
       id_ = "";
       userId_ = "";
-      actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNONWN;
+      actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNOWN;
       urlId_ = "";
       url_ = "";
       createTime_ = 0L;
       readStartTime_ = 0L;
       readEndTime_ = 0L;
-      linkedInContact_ = java.util.Collections.emptyList();
-      addressBookContact_ = java.util.Collections.emptyList();
       interest_ = java.util.Collections.emptyList();
       onStreamForInterest_ = com.janknspank.proto.UserProto.Interest.getDefaultInstance();
     }
@@ -9691,6 +11681,18 @@ public final class UserProto {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      for (int i = 0; i < getInterestCount(); i++) {
+        if (!getInterest(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasOnStreamForInterest()) {
+        if (!getOnStreamForInterest().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -9721,12 +11723,6 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt64(8, readEndTime_);
-      }
-      for (int i = 0; i < linkedInContact_.size(); i++) {
-        output.writeMessage(9, linkedInContact_.get(i));
-      }
-      for (int i = 0; i < addressBookContact_.size(); i++) {
-        output.writeMessage(10, addressBookContact_.get(i));
       }
       for (int i = 0; i < interest_.size(); i++) {
         output.writeMessage(11, interest_.get(i));
@@ -9774,14 +11770,6 @@ public final class UserProto {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(8, readEndTime_);
-      }
-      for (int i = 0; i < linkedInContact_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, linkedInContact_.get(i));
-      }
-      for (int i = 0; i < addressBookContact_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, addressBookContact_.get(i));
       }
       for (int i = 0; i < interest_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -9899,8 +11887,6 @@ public final class UserProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getLinkedInContactFieldBuilder();
-          getAddressBookContactFieldBuilder();
           getInterestFieldBuilder();
           getOnStreamForInterestFieldBuilder();
         }
@@ -9915,7 +11901,7 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         userId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNONWN;
+        actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000004);
         urlId_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -9927,21 +11913,9 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         readEndTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
-        if (linkedInContactBuilder_ == null) {
-          linkedInContact_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000100);
-        } else {
-          linkedInContactBuilder_.clear();
-        }
-        if (addressBookContactBuilder_ == null) {
-          addressBookContact_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000200);
-        } else {
-          addressBookContactBuilder_.clear();
-        }
         if (interestBuilder_ == null) {
           interest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000100);
         } else {
           interestBuilder_.clear();
         }
@@ -9950,7 +11924,7 @@ public final class UserProto {
         } else {
           onStreamForInterestBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -10011,34 +11985,16 @@ public final class UserProto {
           to_bitField0_ |= 0x00000080;
         }
         result.readEndTime_ = readEndTime_;
-        if (linkedInContactBuilder_ == null) {
-          if (((bitField0_ & 0x00000100) == 0x00000100)) {
-            linkedInContact_ = java.util.Collections.unmodifiableList(linkedInContact_);
-            bitField0_ = (bitField0_ & ~0x00000100);
-          }
-          result.linkedInContact_ = linkedInContact_;
-        } else {
-          result.linkedInContact_ = linkedInContactBuilder_.build();
-        }
-        if (addressBookContactBuilder_ == null) {
-          if (((bitField0_ & 0x00000200) == 0x00000200)) {
-            addressBookContact_ = java.util.Collections.unmodifiableList(addressBookContact_);
-            bitField0_ = (bitField0_ & ~0x00000200);
-          }
-          result.addressBookContact_ = addressBookContact_;
-        } else {
-          result.addressBookContact_ = addressBookContactBuilder_.build();
-        }
         if (interestBuilder_ == null) {
-          if (((bitField0_ & 0x00000400) == 0x00000400)) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
             interest_ = java.util.Collections.unmodifiableList(interest_);
-            bitField0_ = (bitField0_ & ~0x00000400);
+            bitField0_ = (bitField0_ & ~0x00000100);
           }
           result.interest_ = interest_;
         } else {
           result.interest_ = interestBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000100;
         }
         if (onStreamForInterestBuilder_ == null) {
@@ -10094,63 +12050,11 @@ public final class UserProto {
         if (other.hasReadEndTime()) {
           setReadEndTime(other.getReadEndTime());
         }
-        if (linkedInContactBuilder_ == null) {
-          if (!other.linkedInContact_.isEmpty()) {
-            if (linkedInContact_.isEmpty()) {
-              linkedInContact_ = other.linkedInContact_;
-              bitField0_ = (bitField0_ & ~0x00000100);
-            } else {
-              ensureLinkedInContactIsMutable();
-              linkedInContact_.addAll(other.linkedInContact_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.linkedInContact_.isEmpty()) {
-            if (linkedInContactBuilder_.isEmpty()) {
-              linkedInContactBuilder_.dispose();
-              linkedInContactBuilder_ = null;
-              linkedInContact_ = other.linkedInContact_;
-              bitField0_ = (bitField0_ & ~0x00000100);
-              linkedInContactBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getLinkedInContactFieldBuilder() : null;
-            } else {
-              linkedInContactBuilder_.addAllMessages(other.linkedInContact_);
-            }
-          }
-        }
-        if (addressBookContactBuilder_ == null) {
-          if (!other.addressBookContact_.isEmpty()) {
-            if (addressBookContact_.isEmpty()) {
-              addressBookContact_ = other.addressBookContact_;
-              bitField0_ = (bitField0_ & ~0x00000200);
-            } else {
-              ensureAddressBookContactIsMutable();
-              addressBookContact_.addAll(other.addressBookContact_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.addressBookContact_.isEmpty()) {
-            if (addressBookContactBuilder_.isEmpty()) {
-              addressBookContactBuilder_.dispose();
-              addressBookContactBuilder_ = null;
-              addressBookContact_ = other.addressBookContact_;
-              bitField0_ = (bitField0_ & ~0x00000200);
-              addressBookContactBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getAddressBookContactFieldBuilder() : null;
-            } else {
-              addressBookContactBuilder_.addAllMessages(other.addressBookContact_);
-            }
-          }
-        }
         if (interestBuilder_ == null) {
           if (!other.interest_.isEmpty()) {
             if (interest_.isEmpty()) {
               interest_ = other.interest_;
-              bitField0_ = (bitField0_ & ~0x00000400);
+              bitField0_ = (bitField0_ & ~0x00000100);
             } else {
               ensureInterestIsMutable();
               interest_.addAll(other.interest_);
@@ -10163,7 +12067,7 @@ public final class UserProto {
               interestBuilder_.dispose();
               interestBuilder_ = null;
               interest_ = other.interest_;
-              bitField0_ = (bitField0_ & ~0x00000400);
+              bitField0_ = (bitField0_ & ~0x00000100);
               interestBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getInterestFieldBuilder() : null;
@@ -10180,6 +12084,18 @@ public final class UserProto {
       }
 
       public final boolean isInitialized() {
+        for (int i = 0; i < getInterestCount(); i++) {
+          if (!getInterest(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasOnStreamForInterest()) {
+          if (!getOnStreamForInterest().isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -10351,7 +12267,7 @@ public final class UserProto {
       }
 
       // optional .UserAction.ActionType action_type = 3;
-      private com.janknspank.proto.UserProto.UserAction.ActionType actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNONWN;
+      private com.janknspank.proto.UserProto.UserAction.ActionType actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNOWN;
       /**
        * <code>optional .UserAction.ActionType action_type = 3;</code>
        */
@@ -10381,7 +12297,7 @@ public final class UserProto {
        */
       public Builder clearActionType() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNONWN;
+        actionType_ = com.janknspank.proto.UserProto.UserAction.ActionType.UNKNOWN;
         onChanged();
         return this;
       }
@@ -10665,493 +12581,13 @@ public final class UserProto {
         return this;
       }
 
-      // repeated .LinkedInContact linked_in_contact = 9;
-      private java.util.List<com.janknspank.proto.UserProto.LinkedInContact> linkedInContact_ =
-        java.util.Collections.emptyList();
-      private void ensureLinkedInContactIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
-          linkedInContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.LinkedInContact>(linkedInContact_);
-          bitField0_ |= 0x00000100;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.UserProto.LinkedInContact, com.janknspank.proto.UserProto.LinkedInContact.Builder, com.janknspank.proto.UserProto.LinkedInContactOrBuilder> linkedInContactBuilder_;
-
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public java.util.List<com.janknspank.proto.UserProto.LinkedInContact> getLinkedInContactList() {
-        if (linkedInContactBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(linkedInContact_);
-        } else {
-          return linkedInContactBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public int getLinkedInContactCount() {
-        if (linkedInContactBuilder_ == null) {
-          return linkedInContact_.size();
-        } else {
-          return linkedInContactBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public com.janknspank.proto.UserProto.LinkedInContact getLinkedInContact(int index) {
-        if (linkedInContactBuilder_ == null) {
-          return linkedInContact_.get(index);
-        } else {
-          return linkedInContactBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder setLinkedInContact(
-          int index, com.janknspank.proto.UserProto.LinkedInContact value) {
-        if (linkedInContactBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureLinkedInContactIsMutable();
-          linkedInContact_.set(index, value);
-          onChanged();
-        } else {
-          linkedInContactBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder setLinkedInContact(
-          int index, com.janknspank.proto.UserProto.LinkedInContact.Builder builderForValue) {
-        if (linkedInContactBuilder_ == null) {
-          ensureLinkedInContactIsMutable();
-          linkedInContact_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          linkedInContactBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder addLinkedInContact(com.janknspank.proto.UserProto.LinkedInContact value) {
-        if (linkedInContactBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureLinkedInContactIsMutable();
-          linkedInContact_.add(value);
-          onChanged();
-        } else {
-          linkedInContactBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder addLinkedInContact(
-          int index, com.janknspank.proto.UserProto.LinkedInContact value) {
-        if (linkedInContactBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureLinkedInContactIsMutable();
-          linkedInContact_.add(index, value);
-          onChanged();
-        } else {
-          linkedInContactBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder addLinkedInContact(
-          com.janknspank.proto.UserProto.LinkedInContact.Builder builderForValue) {
-        if (linkedInContactBuilder_ == null) {
-          ensureLinkedInContactIsMutable();
-          linkedInContact_.add(builderForValue.build());
-          onChanged();
-        } else {
-          linkedInContactBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder addLinkedInContact(
-          int index, com.janknspank.proto.UserProto.LinkedInContact.Builder builderForValue) {
-        if (linkedInContactBuilder_ == null) {
-          ensureLinkedInContactIsMutable();
-          linkedInContact_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          linkedInContactBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder addAllLinkedInContact(
-          java.lang.Iterable<? extends com.janknspank.proto.UserProto.LinkedInContact> values) {
-        if (linkedInContactBuilder_ == null) {
-          ensureLinkedInContactIsMutable();
-          super.addAll(values, linkedInContact_);
-          onChanged();
-        } else {
-          linkedInContactBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder clearLinkedInContact() {
-        if (linkedInContactBuilder_ == null) {
-          linkedInContact_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000100);
-          onChanged();
-        } else {
-          linkedInContactBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public Builder removeLinkedInContact(int index) {
-        if (linkedInContactBuilder_ == null) {
-          ensureLinkedInContactIsMutable();
-          linkedInContact_.remove(index);
-          onChanged();
-        } else {
-          linkedInContactBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public com.janknspank.proto.UserProto.LinkedInContact.Builder getLinkedInContactBuilder(
-          int index) {
-        return getLinkedInContactFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public com.janknspank.proto.UserProto.LinkedInContactOrBuilder getLinkedInContactOrBuilder(
-          int index) {
-        if (linkedInContactBuilder_ == null) {
-          return linkedInContact_.get(index);  } else {
-          return linkedInContactBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public java.util.List<? extends com.janknspank.proto.UserProto.LinkedInContactOrBuilder> 
-           getLinkedInContactOrBuilderList() {
-        if (linkedInContactBuilder_ != null) {
-          return linkedInContactBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(linkedInContact_);
-        }
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public com.janknspank.proto.UserProto.LinkedInContact.Builder addLinkedInContactBuilder() {
-        return getLinkedInContactFieldBuilder().addBuilder(
-            com.janknspank.proto.UserProto.LinkedInContact.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public com.janknspank.proto.UserProto.LinkedInContact.Builder addLinkedInContactBuilder(
-          int index) {
-        return getLinkedInContactFieldBuilder().addBuilder(
-            index, com.janknspank.proto.UserProto.LinkedInContact.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .LinkedInContact linked_in_contact = 9;</code>
-       */
-      public java.util.List<com.janknspank.proto.UserProto.LinkedInContact.Builder> 
-           getLinkedInContactBuilderList() {
-        return getLinkedInContactFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.UserProto.LinkedInContact, com.janknspank.proto.UserProto.LinkedInContact.Builder, com.janknspank.proto.UserProto.LinkedInContactOrBuilder> 
-          getLinkedInContactFieldBuilder() {
-        if (linkedInContactBuilder_ == null) {
-          linkedInContactBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.janknspank.proto.UserProto.LinkedInContact, com.janknspank.proto.UserProto.LinkedInContact.Builder, com.janknspank.proto.UserProto.LinkedInContactOrBuilder>(
-                  linkedInContact_,
-                  ((bitField0_ & 0x00000100) == 0x00000100),
-                  getParentForChildren(),
-                  isClean());
-          linkedInContact_ = null;
-        }
-        return linkedInContactBuilder_;
-      }
-
-      // repeated .AddressBookContact address_book_contact = 10;
-      private java.util.List<com.janknspank.proto.UserProto.AddressBookContact> addressBookContact_ =
-        java.util.Collections.emptyList();
-      private void ensureAddressBookContactIsMutable() {
-        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
-          addressBookContact_ = new java.util.ArrayList<com.janknspank.proto.UserProto.AddressBookContact>(addressBookContact_);
-          bitField0_ |= 0x00000200;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.UserProto.AddressBookContact, com.janknspank.proto.UserProto.AddressBookContact.Builder, com.janknspank.proto.UserProto.AddressBookContactOrBuilder> addressBookContactBuilder_;
-
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public java.util.List<com.janknspank.proto.UserProto.AddressBookContact> getAddressBookContactList() {
-        if (addressBookContactBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(addressBookContact_);
-        } else {
-          return addressBookContactBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public int getAddressBookContactCount() {
-        if (addressBookContactBuilder_ == null) {
-          return addressBookContact_.size();
-        } else {
-          return addressBookContactBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public com.janknspank.proto.UserProto.AddressBookContact getAddressBookContact(int index) {
-        if (addressBookContactBuilder_ == null) {
-          return addressBookContact_.get(index);
-        } else {
-          return addressBookContactBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder setAddressBookContact(
-          int index, com.janknspank.proto.UserProto.AddressBookContact value) {
-        if (addressBookContactBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureAddressBookContactIsMutable();
-          addressBookContact_.set(index, value);
-          onChanged();
-        } else {
-          addressBookContactBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder setAddressBookContact(
-          int index, com.janknspank.proto.UserProto.AddressBookContact.Builder builderForValue) {
-        if (addressBookContactBuilder_ == null) {
-          ensureAddressBookContactIsMutable();
-          addressBookContact_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          addressBookContactBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder addAddressBookContact(com.janknspank.proto.UserProto.AddressBookContact value) {
-        if (addressBookContactBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureAddressBookContactIsMutable();
-          addressBookContact_.add(value);
-          onChanged();
-        } else {
-          addressBookContactBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder addAddressBookContact(
-          int index, com.janknspank.proto.UserProto.AddressBookContact value) {
-        if (addressBookContactBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureAddressBookContactIsMutable();
-          addressBookContact_.add(index, value);
-          onChanged();
-        } else {
-          addressBookContactBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder addAddressBookContact(
-          com.janknspank.proto.UserProto.AddressBookContact.Builder builderForValue) {
-        if (addressBookContactBuilder_ == null) {
-          ensureAddressBookContactIsMutable();
-          addressBookContact_.add(builderForValue.build());
-          onChanged();
-        } else {
-          addressBookContactBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder addAddressBookContact(
-          int index, com.janknspank.proto.UserProto.AddressBookContact.Builder builderForValue) {
-        if (addressBookContactBuilder_ == null) {
-          ensureAddressBookContactIsMutable();
-          addressBookContact_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          addressBookContactBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder addAllAddressBookContact(
-          java.lang.Iterable<? extends com.janknspank.proto.UserProto.AddressBookContact> values) {
-        if (addressBookContactBuilder_ == null) {
-          ensureAddressBookContactIsMutable();
-          super.addAll(values, addressBookContact_);
-          onChanged();
-        } else {
-          addressBookContactBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder clearAddressBookContact() {
-        if (addressBookContactBuilder_ == null) {
-          addressBookContact_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000200);
-          onChanged();
-        } else {
-          addressBookContactBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public Builder removeAddressBookContact(int index) {
-        if (addressBookContactBuilder_ == null) {
-          ensureAddressBookContactIsMutable();
-          addressBookContact_.remove(index);
-          onChanged();
-        } else {
-          addressBookContactBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public com.janknspank.proto.UserProto.AddressBookContact.Builder getAddressBookContactBuilder(
-          int index) {
-        return getAddressBookContactFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public com.janknspank.proto.UserProto.AddressBookContactOrBuilder getAddressBookContactOrBuilder(
-          int index) {
-        if (addressBookContactBuilder_ == null) {
-          return addressBookContact_.get(index);  } else {
-          return addressBookContactBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public java.util.List<? extends com.janknspank.proto.UserProto.AddressBookContactOrBuilder> 
-           getAddressBookContactOrBuilderList() {
-        if (addressBookContactBuilder_ != null) {
-          return addressBookContactBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(addressBookContact_);
-        }
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public com.janknspank.proto.UserProto.AddressBookContact.Builder addAddressBookContactBuilder() {
-        return getAddressBookContactFieldBuilder().addBuilder(
-            com.janknspank.proto.UserProto.AddressBookContact.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public com.janknspank.proto.UserProto.AddressBookContact.Builder addAddressBookContactBuilder(
-          int index) {
-        return getAddressBookContactFieldBuilder().addBuilder(
-            index, com.janknspank.proto.UserProto.AddressBookContact.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .AddressBookContact address_book_contact = 10;</code>
-       */
-      public java.util.List<com.janknspank.proto.UserProto.AddressBookContact.Builder> 
-           getAddressBookContactBuilderList() {
-        return getAddressBookContactFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.janknspank.proto.UserProto.AddressBookContact, com.janknspank.proto.UserProto.AddressBookContact.Builder, com.janknspank.proto.UserProto.AddressBookContactOrBuilder> 
-          getAddressBookContactFieldBuilder() {
-        if (addressBookContactBuilder_ == null) {
-          addressBookContactBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.janknspank.proto.UserProto.AddressBookContact, com.janknspank.proto.UserProto.AddressBookContact.Builder, com.janknspank.proto.UserProto.AddressBookContactOrBuilder>(
-                  addressBookContact_,
-                  ((bitField0_ & 0x00000200) == 0x00000200),
-                  getParentForChildren(),
-                  isClean());
-          addressBookContact_ = null;
-        }
-        return addressBookContactBuilder_;
-      }
-
       // repeated .Interest interest = 11;
       private java.util.List<com.janknspank.proto.UserProto.Interest> interest_ =
         java.util.Collections.emptyList();
       private void ensureInterestIsMutable() {
-        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
           interest_ = new java.util.ArrayList<com.janknspank.proto.UserProto.Interest>(interest_);
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000100;
          }
       }
 
@@ -11355,7 +12791,7 @@ public final class UserProto {
       public Builder clearInterest() {
         if (interestBuilder_ == null) {
           interest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000100);
           onChanged();
         } else {
           interestBuilder_.clear();
@@ -11467,7 +12903,7 @@ public final class UserProto {
           interestBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.UserProto.Interest, com.janknspank.proto.UserProto.Interest.Builder, com.janknspank.proto.UserProto.InterestOrBuilder>(
                   interest_,
-                  ((bitField0_ & 0x00000400) == 0x00000400),
+                  ((bitField0_ & 0x00000100) == 0x00000100),
                   getParentForChildren(),
                   isClean());
           interest_ = null;
@@ -11488,7 +12924,7 @@ public final class UserProto {
        * </pre>
        */
       public boolean hasOnStreamForInterest() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional .Interest on_stream_for_interest = 12;</code>
@@ -11523,7 +12959,7 @@ public final class UserProto {
         } else {
           onStreamForInterestBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000200;
         return this;
       }
       /**
@@ -11542,7 +12978,7 @@ public final class UserProto {
         } else {
           onStreamForInterestBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000200;
         return this;
       }
       /**
@@ -11555,7 +12991,7 @@ public final class UserProto {
        */
       public Builder mergeOnStreamForInterest(com.janknspank.proto.UserProto.Interest value) {
         if (onStreamForInterestBuilder_ == null) {
-          if (((bitField0_ & 0x00000800) == 0x00000800) &&
+          if (((bitField0_ & 0x00000200) == 0x00000200) &&
               onStreamForInterest_ != com.janknspank.proto.UserProto.Interest.getDefaultInstance()) {
             onStreamForInterest_ =
               com.janknspank.proto.UserProto.Interest.newBuilder(onStreamForInterest_).mergeFrom(value).buildPartial();
@@ -11566,7 +13002,7 @@ public final class UserProto {
         } else {
           onStreamForInterestBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000200;
         return this;
       }
       /**
@@ -11584,7 +13020,7 @@ public final class UserProto {
         } else {
           onStreamForInterestBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
       /**
@@ -11596,7 +13032,7 @@ public final class UserProto {
        * </pre>
        */
       public com.janknspank.proto.UserProto.Interest.Builder getOnStreamForInterestBuilder() {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000200;
         onChanged();
         return getOnStreamForInterestFieldBuilder().getBuilder();
       }
@@ -11684,6 +13120,11 @@ public final class UserProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Interest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OldUserAction_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OldUserAction_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_UserAction_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -11726,35 +13167,45 @@ public final class UserProto {
       "\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d" +
       "\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030" +
       "\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\")\n\017LinkedInConta" +
-      "ct\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\316\003\n\010Interest\022",
+      "ct\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\255\003\n\010Interest\022",
       " \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022*\n\004typ" +
       "e\030\002 \001(\0162\026.Interest.InterestTypeB\004\210\246\035\001\022.\n" +
       "\006source\030\003 \001(\0162\030.Interest.InterestSourceB" +
       "\004\210\246\035\001\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\025\n\r" +
       "industry_code\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.En" +
-      "tity\022\031\n\013intent_code\030\007 \001(\tB\004\230\246\035\005\"u\n\014Inter" +
-      "estType\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006E" +
-      "NTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n\025ADDRE" +
-      "SS_BOOK_CONTACTS\020\004\022\n\n\006INTENT\020\005\"c\n\016Intere" +
-      "stSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKE",
-      "D_IN_PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\r\n\t" +
-      "TOMBSTONE\020\003\"\350\004\n\nUserAction\022\034\n\002id\030\001 \001(\tB\020" +
-      "\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007user_id\030\002 \001(\tB\014\210\246\035\001\230" +
-      "\246\035\030\250\246\035\001\0221\n\013action_type\030\003 \001(\0162\026.UserActio" +
-      "n.ActionTypeB\004\210\246\035\001\022\034\n\006url_id\030\004 \001(\tB\014\210\246\035\001" +
-      "\230\246\035\030\250\246\035\001\022\032\n\003url\030\005 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\031\n\013" +
-      "create_time\030\006 \001(\003B\004\210\246\035\001\022\027\n\017read_start_ti" +
-      "me\030\007 \001(\003\022\025\n\rread_end_time\030\010 \001(\003\0221\n\021linke" +
-      "d_in_contact\030\t \003(\0132\020.LinkedInContactB\004\240\246" +
-      "\035\003\0227\n\024address_book_contact\030\n \003(\0132\023.Addre",
-      "ssBookContactB\004\240\246\035\003\022!\n\010interest\030\013 \003(\0132\t." +
-      "InterestB\004\240\246\035\003\022)\n\026on_stream_for_interest" +
-      "\030\014 \001(\0132\t.Interest\"\222\001\n\nActionType\022\014\n\010UNKN" +
-      "ONWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_F" +
-      "ROM_STREAM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_ARTICLE\020" +
-      "\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_" +
-      "PAST\020\010:\026\212\265\030\022MongoDB.UserActionB!\n\024com.ja" +
-      "nknspank.protoB\tUserProto"
+      "tity\"i\n\014InterestType\022\014\n\010UNKNONWN\020\000\022\014\n\010IN" +
+      "DUSTRY\020\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTAC" +
+      "TS\020\003\022\031\n\025ADDRESS_BOOK_CONTACTS\020\004\"c\n\016Inter" +
+      "estSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINK" +
+      "ED_IN_PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\r\n",
+      "\tTOMBSTONE\020\003*\004\010\007\020\010\"\225\004\n\rOldUserAction\022\034\n\002" +
+      "id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 " +
+      "\001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\005\0228\n\013action_type\030\003 \001" +
+      "(\0162\031.OldUserAction.ActionTypeB\010\210\246\035\001\220\246\035\005\022" +
+      " \n\006url_id\030\004 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\005\022\036\n\003url" +
+      "\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035\n\013create_time" +
+      "\030\006 \001(\003B\010\210\246\035\001\220\246\035\005\022\027\n\017read_start_time\030\007 \001(" +
+      "\003\022\025\n\rread_end_time\030\010 \001(\003\022!\n\010interest\030\013 \003" +
+      "(\0132\t.InterestB\004\240\246\035\003\022)\n\026on_stream_for_int" +
+      "erest\030\014 \001(\0132\t.Interest\"\221\001\n\nActionType\022\013\n",
+      "\007UNKNOWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017T" +
+      "AP_FROM_STREAM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_ARTI" +
+      "CLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017\n\013SCR" +
+      "OLL_PAST\020\010:\026\212\265\030\022MongoDB.UserAction\"\215\004\n\nU" +
+      "serAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022" +
+      "!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\003\0225\n\013ac" +
+      "tion_type\030\003 \001(\0162\026.UserAction.ActionTypeB" +
+      "\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220" +
+      "\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035\n\013c" +
+      "reate_time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017read_start",
+      "_time\030\007 \001(\003\022\025\n\rread_end_time\030\010 \001(\003\022!\n\010in" +
+      "terest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)\n\026on_stre" +
+      "am_for_interest\030\014 \001(\0132\t.Interest\"\221\001\n\nAct" +
+      "ionType\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005X_" +
+      "OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005SHARE\020\004\022\020\n" +
+      "\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOTE_U" +
+      "P\020\007\022\017\n\013SCROLL_PAST\020\010:\024\212\265\030\020MySQL.UserActi" +
+      "onB!\n\024com.janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11802,13 +13253,19 @@ public final class UserProto {
           internal_static_Interest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Interest_descriptor,
-              new java.lang.String[] { "Id", "Type", "Source", "CreateTime", "IndustryCode", "Entity", "IntentCode", });
-          internal_static_UserAction_descriptor =
+              new java.lang.String[] { "Id", "Type", "Source", "CreateTime", "IndustryCode", "Entity", });
+          internal_static_OldUserAction_descriptor =
             getDescriptor().getMessageTypes().get(6);
+          internal_static_OldUserAction_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OldUserAction_descriptor,
+              new java.lang.String[] { "Id", "UserId", "ActionType", "UrlId", "Url", "CreateTime", "ReadStartTime", "ReadEndTime", "Interest", "OnStreamForInterest", });
+          internal_static_UserAction_descriptor =
+            getDescriptor().getMessageTypes().get(7);
           internal_static_UserAction_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_UserAction_descriptor,
-              new java.lang.String[] { "Id", "UserId", "ActionType", "UrlId", "Url", "CreateTime", "ReadStartTime", "ReadEndTime", "LinkedInContact", "AddressBookContact", "Interest", "OnStreamForInterest", });
+              new java.lang.String[] { "Id", "UserId", "ActionType", "UrlId", "Url", "CreateTime", "ReadStartTime", "ReadEndTime", "Interest", "OnStreamForInterest", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -11861,24 +13318,48 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
-          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           return registry;
