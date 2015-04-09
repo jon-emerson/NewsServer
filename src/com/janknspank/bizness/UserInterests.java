@@ -84,8 +84,6 @@ public class UserInterests {
                 || entityType2.isA(entityType1));
       } else if (interest1.getType() == InterestType.INDUSTRY) {
         return interest1.getIndustryCode() == interest2.getIndustryCode();
-      } else if (interest1.getType() == InterestType.INTENT) {
-        return interest1.getIntentCode().equals(interest2.getIntentCode());
       }
     }
     return false;

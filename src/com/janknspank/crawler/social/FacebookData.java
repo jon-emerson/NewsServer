@@ -1,4 +1,4 @@
-package com.janknspank.crawler.facebook;
+package com.janknspank.crawler.social;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class FacebookData {
     }
   }
 
-  public static Long getPublishTime(Url url) throws FacebookException {
+  public static Long getPublishTime(Url url) throws SocialException {
     String encodedURL = encodeUrl(url.getUrl());
     JsonObject urlObject = getFacebookClient().fetchObject(encodedURL, JsonObject.class);
     if (urlObject != null
@@ -56,7 +56,8 @@ public class FacebookData {
     return null;
   }
 
-  public static SocialEngagement getEngagementForURL(ArticleOrBuilder article) throws FacebookException {
+  public static SocialEngagement getEngagementForArticle(ArticleOrBuilder article)
+      throws SocialException {
     String url = article.getUrl();
     try {
       String encodedURL = encodeUrl(url);
@@ -83,7 +84,7 @@ public class FacebookData {
             .setSite(Site.FACEBOOK)
             .setLikeCount(likeCount)
             .setShareCount(shareCount)
-            .setShareScore(FacebookShareNormalizer.getInstance().getShareScore(
+            .setShareScore(ShareNormalizer.getInstance(Site.FACEBOOK).getShareScore(
                 url,
                 shareCount,
                 System.currentTimeMillis() - Articles.getPublishedTime(article) /* ageInMillis */))
@@ -96,15 +97,15 @@ public class FacebookData {
       throw new IllegalStateException(e);
     } catch (FacebookOAuthException e) {
       e.printStackTrace();
-      throw new FacebookException("Can't get FB engagement for url "
+      throw new SocialException("Can't get FB engagement for url "
           + url + ": " + e.getMessage(), e);
     } catch (JsonException e) {
       e.printStackTrace();
-      throw new FacebookException("Can't parse Facebook JSON: " + e.getMessage(), e);
+      throw new SocialException("Can't parse Facebook JSON: " + e.getMessage(), e);
     }
   }
 
-  private static synchronized FacebookClient getFacebookClient() throws FacebookException {
+  private static synchronized FacebookClient getFacebookClient() throws SocialException {
     if (__facebookClient == null) {
       Properties properties = getFacebookProperties();
       String appSecret = properties.getProperty("appSecret");
@@ -115,7 +116,7 @@ public class FacebookData {
     return __facebookClient;
   }
 
-  public static synchronized String getFacebookAppSecret() throws FacebookException {
+  public static synchronized String getFacebookAppSecret() throws SocialException {
     if (__facebookAppSecret == null) {
       Properties properties = getFacebookProperties();
       __facebookAppSecret = properties.getProperty("appSecret");
@@ -123,7 +124,7 @@ public class FacebookData {
     return __facebookAppSecret;
   }
 
-  private static Properties getFacebookProperties() throws FacebookException {
+  private static Properties getFacebookProperties() throws SocialException {
     Properties properties = new Properties();
     InputStream inputStream = null;
     try {
@@ -131,7 +132,7 @@ public class FacebookData {
       properties.load(inputStream);
       return properties;
     } catch (IOException e) {
-      throw new FacebookException("Could not read facebook.properties: " + e.getMessage(), e);
+      throw new SocialException("Could not read facebook.properties: " + e.getMessage(), e);
     } finally {
       IOUtils.closeQuietly(inputStream);
     }

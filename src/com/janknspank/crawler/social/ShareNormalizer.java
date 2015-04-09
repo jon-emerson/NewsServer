@@ -1,4 +1,4 @@
-package com.janknspank.crawler.facebook;
+package com.janknspank.crawler.social;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -38,20 +38,22 @@ import com.janknspank.proto.CoreProto.ShareNormalizationData.TimeRangeDistributi
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.rank.DistributionBuilder;
 
-public class FacebookShareNormalizer {
-  private static final Logger LOG = new Logger(FacebookShareNormalizer.class);
-  private static final String FILENAME = "classifier/shares/facebooksharenormalizer.bin";
+public class ShareNormalizer {
+  private static final Logger LOG = new Logger(ShareNormalizer.class);
+  private static final Map<Site, String> FILENAME_MAP = ImmutableMap.of(
+      Site.FACEBOOK, "classifier/shares/facebooksharenormalizer.bin",
+      Site.TWITTER, "classifier/shares/facebooksharenormalizer.bin");
 
-  private static FacebookShareNormalizer instance = null;
+  private static Map<Site, ShareNormalizer> instanceMap = Maps.newHashMap();
   private final ShareNormalizationData data;
   private final Map<String, ShareCount> shareMap;
   private final long totalArticleCount;
   private final long totalShareCount;
 
-  private FacebookShareNormalizer() throws ClassifierException {
+  private ShareNormalizer(Site site) throws ClassifierException {
     InputStream inputStream = null;
     try {
-      inputStream = new GZIPInputStream(new FileInputStream(FILENAME));
+      inputStream = new GZIPInputStream(new FileInputStream(FILENAME_MAP.get(site)));
       data = ShareNormalizationData.parseFrom(inputStream);
       shareMap = createShareMap(data);
       totalArticleCount = getTotalArticleCount(shareMap);
@@ -63,11 +65,11 @@ public class FacebookShareNormalizer {
     }
   }
 
-  public static synchronized FacebookShareNormalizer getInstance() throws ClassifierException {
-    if (instance == null) {
-      instance = new FacebookShareNormalizer();
+  public static synchronized ShareNormalizer getInstance(Site site) throws ClassifierException {
+    if (!instanceMap.containsKey(site)) {
+      instanceMap.put(site, new ShareNormalizer(site));
     }
-    return instance;
+    return instanceMap.get(site);
   }
 
   public double getShareScore(String url, long shareCount, long ageInMillis) {
@@ -175,11 +177,11 @@ public class FacebookShareNormalizer {
     return timeRangeDistributionBuilders.build();
   }
 
-  private static void test() throws DatabaseSchemaException, ClassifierException {
+  private static void test(Site site) throws DatabaseSchemaException, ClassifierException {
     for (Article article : Database.with(Article.class).get(new QueryOption.Limit(50))) {
-      SocialEngagement engagement = SocialEngagements.getForArticle(article, Site.FACEBOOK);
+      SocialEngagement engagement = SocialEngagements.getForArticle(article, site);
       if (engagement != null) {
-        LOG.info(getInstance().getShareScore(
+        LOG.info(getInstance(site).getShareScore(
             article.getUrl(),
             engagement.getShareCount(),
             Math.max(0, engagement.getCreateTime() - article.getPublishedTime()))
@@ -199,7 +201,8 @@ public class FacebookShareNormalizer {
     return builder.build();
   }
 
-  private static final Map<String, ShareCount> createShareMap(Iterable<Article> articles) {
+  private static final Map<String, ShareCount> createShareMap(
+      Iterable<Article> articles, Site site) {
     ImmutableMap.Builder<String, ShareCount> mapBuilder = ImmutableMap.<String, ShareCount>builder();
     for (SiteManifest siteManifest : SiteManifests.getList()) {
       mapBuilder.put(siteManifest.getRootDomain(), new ShareCount());
@@ -224,7 +227,7 @@ public class FacebookShareNormalizer {
         domain = domain.substring(domain.indexOf(".") + 1);
       }
       if (count != null) {
-        SocialEngagement engagement = SocialEngagements.getForArticle(article, Site.FACEBOOK);
+        SocialEngagement engagement = SocialEngagements.getForArticle(article, site);
         if (engagement != null) {
           count.numArticles++;
           count.numShares += engagement.getShareCount();
@@ -234,27 +237,9 @@ public class FacebookShareNormalizer {
     return map;
   }
 
-  /**
-   * Rebuilds the share normalization proto on disk.
-   */
-  public static void main(String args[]) throws Exception {
-    if (args.length > 0 && args[0].equals("test")) {
-      test();
-      return;
-    } else if (args.length > 0 && args[0].equals("print")) {
-      InputStream inputStream = null;
-      try {
-        inputStream = new GZIPInputStream(new FileInputStream(FILENAME));
-        ShareNormalizationData data = ShareNormalizationData.parseFrom(inputStream);
-        TextFormat.print(data, System.out);
-      } finally {
-        IOUtils.closeQuietly(inputStream);
-      }
-      return;
-    }
-
-    Iterable<Article> articles = Database.with(Article.class).get();
-    Map<String, ShareCount> shareMap = createShareMap(articles);
+  private static void createShareNormalizationFile(Iterable<Article> articles, Site site)
+      throws ClassifierException {
+    Map<String, ShareCount> shareMap = createShareMap(articles, site);
     long totalArticleCount = getTotalArticleCount(shareMap);
     long totalShareCount = getTotalShareCount(shareMap);
 
@@ -277,8 +262,7 @@ public class FacebookShareNormalizer {
         System.out.print(".");
       }
 
-      SocialEngagement latestEngagement =
-          SocialEngagements.getForArticle(article, Site.FACEBOOK);
+      SocialEngagement latestEngagement = SocialEngagements.getForArticle(article, site);
       if (latestEngagement != null) {
         long ageInMillis = Math.max(0,
             latestEngagement.getCreateTime() - article.getPublishedTime());
@@ -313,12 +297,36 @@ public class FacebookShareNormalizer {
 
     OutputStream outputStream = null;
     try {
-      outputStream = new GZIPOutputStream(new FileOutputStream(FILENAME));
+      outputStream = new GZIPOutputStream(new FileOutputStream(FILENAME_MAP.get(site)));
       shareNormalizationDataBuilder.build().writeTo(outputStream);
     } catch (IOException e) {
       throw new ClassifierException("Could not write file: " + e.getMessage(), e);
     } finally {
       IOUtils.closeQuietly(outputStream);
     }
+  }
+
+  /**
+   * Rebuilds the share normalization proto on disk.
+   */
+  public static void main(String args[]) throws Exception {
+    if (args.length > 0 && args[0].equals("test")) {
+      test(Site.FACEBOOK);
+      return;
+    } else if (args.length > 0 && args[0].equals("print")) {
+      InputStream inputStream = null;
+      try {
+        inputStream = new GZIPInputStream(new FileInputStream(FILENAME_MAP.get(Site.FACEBOOK)));
+        ShareNormalizationData data = ShareNormalizationData.parseFrom(inputStream);
+        TextFormat.print(data, System.out);
+      } finally {
+        IOUtils.closeQuietly(inputStream);
+      }
+      return;
+    }
+
+    Iterable<Article> articles = Database.with(Article.class).get();
+    createShareNormalizationFile(articles, Site.FACEBOOK);
+    createShareNormalizationFile(articles, Site.TWITTER);
   }
 }

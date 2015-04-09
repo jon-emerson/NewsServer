@@ -21,8 +21,8 @@ import com.janknspank.classifier.FeatureType;
 import com.janknspank.classifier.Vector;
 import com.janknspank.classifier.VectorFeature;
 import com.janknspank.common.TopList;
-import com.janknspank.crawler.facebook.FacebookData;
-import com.janknspank.crawler.facebook.FacebookException;
+import com.janknspank.crawler.social.FacebookData;
+import com.janknspank.crawler.social.SocialException;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -56,7 +56,7 @@ public class FacebookLoginHandler {
   private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s|\\n|\\r|\\xA0)+");
 
   public static com.restfb.types.User getFacebookUser(String fbAccessToken, String fbUserId)
-      throws FacebookException, RequestException {
+      throws SocialException, RequestException {
     FacebookClient facebookClient = new DefaultFacebookClient(
         fbAccessToken, FacebookData.getFacebookAppSecret(), Version.VERSION_2_2);
     com.restfb.types.User fbUser =
@@ -280,7 +280,7 @@ public class FacebookLoginHandler {
   }
 
   public static User login(com.restfb.types.User fbUser, String fbAccessToken)
-      throws RequestException, FacebookException, DatabaseSchemaException,
+      throws RequestException, SocialException, DatabaseSchemaException,
       DatabaseRequestException {
     User user;
     User existingUser = getExistingUser(fbUser, fbAccessToken);

@@ -45,7 +45,6 @@ public class SetUserInterestServlet extends StandardServlet {
     String interestEntityKeywordParam = getParameter(req, "interest[entity][keyword]");
     String interestEntityIdParam = getParameter(req, "interest[entity][id]");
     String interestIndustryCodeParam = getParameter(req, "interest[industry_code]");
-    String interestIntentCodeParam = getParameter(req, "interest[intent_code]");
     boolean followParam = "true".equals(getRequiredParameter(req, "follow"));
 
     // Parameter validation.
@@ -111,13 +110,6 @@ public class SetUserInterestServlet extends StandardServlet {
 
       case INDUSTRY:
         interestBuilder.setIndustryCode(Integer.parseInt(interestIndustryCodeParam));
-        break;
-
-      case INTENT:
-        if (Strings.isNullOrEmpty(interestIntentCodeParam)) {
-          throw new RequestException("Parameter 'interest[intent_code]' is missing");
-        }
-        interestBuilder.setIntentCode(interestIntentCodeParam);
         break;
     }
 

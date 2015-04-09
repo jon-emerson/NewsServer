@@ -167,7 +167,7 @@ public class SqlCollection<T extends Message> extends Collection<T> {
    * Given a protocol buffer message, returns a List of MySQL statements for
    * creating indexes on the requested fields.
    */
-  private List<String> getCreateIndexesSql(Class<T> clazz) {
+  private List<String> getCreateIndexesSql(Class<T> clazz) throws DatabaseSchemaException {
     List<String> statements = Lists.newArrayList();
     for (FieldDescriptor field : storageMethodMap.keySet()) {
       StorageMethod storageMethod = storageMethodMap.get(field);
@@ -687,13 +687,6 @@ public class SqlCollection<T extends Message> extends Collection<T> {
       sum += array[i];
     }
     return sum;
-  }
-
-  /**
-   * Returns the MySQL table name that this collection should be stored in.
-   */
-  public String getTableName() {
-    return clazz.getSimpleName();
   }
 
   /**

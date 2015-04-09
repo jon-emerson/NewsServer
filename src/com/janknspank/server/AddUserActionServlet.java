@@ -1,7 +1,5 @@
 package com.janknspank.server;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +16,7 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
+import com.janknspank.proto.UserProto.UserAction.ActionType;
 
 @AuthenticationRequired(requestMethod = "POST")
 @ServletMapping(urlPattern = "/v1/add_user_action")
@@ -35,15 +34,21 @@ public class AddUserActionServlet extends StandardServlet {
     // If the user action happened on an interest stream (not home).
     String interestTypeParam = getParameter(req, "on_stream_for_interest[type]");
     String interestEntityTypeParam = getParameter(req, "on_stream_for_interest[entity][type]");
-    String interestEntityKeywordParam = getParameter(req, "on_stream_for_interest[entity][keyword]");
+    String interestEntityKeywordParam =
+        getParameter(req, "on_stream_for_interest[entity][keyword]");
     String interestEntityIdParam = getParameter(req, "on_stream_for_interest[entity][id]");
     String interestIndustryCodeParam = getParameter(req, "on_stream_for_interest[industry_code]");
-    String interestIntentCodeParam = getParameter(req, "on_stream_for_interest[intent_code]");
 
-    // parameter validation
+    // Parameter validation.
     UserAction.ActionType actionType = UserAction.ActionType.valueOf(actionTypeParam);
     if (actionType == null) {
       throw new RequestException("Parameter 'type' is invalid");
+    }
+
+    // Don't save SCROLL_PAST actions - They happen too much, and we don't
+    // currently use them for anything.
+    if (actionType == ActionType.SCROLL_PAST) {
+      return this.createSuccessResponse();
     }
 
     UserAction.Builder actionBuilder = UserAction.newBuilder()
@@ -54,25 +59,26 @@ public class AddUserActionServlet extends StandardServlet {
         .setUrlId(urlIdParam)
         .setCreateTime(System.currentTimeMillis());
 
-    // Save user model components to the user action. If they change later
-    // then we won't lose the context for the neural network
-    // Note: getInterests returns only non-tombstoned interests
-    List<Interest> userInterests = UserInterests.getInterests(user);
-    actionBuilder.addAllInterest(userInterests);
-    for (Interest userInterest : userInterests) {
-      if (userInterest.getType() == InterestType.ADDRESS_BOOK_CONTACTS) {
-        actionBuilder.addAllAddressBookContact(user.getAddressBookContactList());
-      } else if (userInterest.getType() == InterestType.LINKED_IN_CONTACTS) {
-        actionBuilder.addAllLinkedInContact(user.getLinkedInContactList());
-      }
+    // If the user performed an action that would be useful for neural network
+    // training purposes, save his interests model to the user action.
+    // Note: getInterests returns only non-tombstoned interests.
+    if (actionType == ActionType.VOTE_UP
+        || actionType == ActionType.X_OUT) {
+      actionBuilder.addAllInterest(UserInterests.getInterests(user));
     }
 
     // If the user was viewing a different stream than home, record everything
     // we know about it.  Let's not bother validating anything here: Let's grab
     // what we can, and remember everything we can.  We can do validation later.
     if (interestTypeParam != null) {
-      Interest.Builder interestBuilder = Interest.newBuilder()
-          .setType(InterestType.valueOf(interestTypeParam));
+      Interest.Builder interestBuilder = Interest.newBuilder();
+
+      InterestType interestType = InterestType.valueOf(interestTypeParam);
+      if (interestType == null) {
+        throw new RequestException("Parameter 'on_stream_for_interest[type]' is invalid");
+      }
+      interestBuilder.setType(interestType);
+
       if (interestEntityKeywordParam != null
           && interestEntityIdParam != null
           && interestEntityTypeParam != null) {
@@ -83,9 +89,6 @@ public class AddUserActionServlet extends StandardServlet {
       }
       if (interestIndustryCodeParam != null) {
         interestBuilder.setIndustryCode(Integer.parseInt(interestIndustryCodeParam));
-      }
-      if (interestIntentCodeParam != null) {
-        interestBuilder.setIntentCode(interestIntentCodeParam);
       }
       actionBuilder.setOnStreamForInterest(interestBuilder);
     }

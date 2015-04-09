@@ -28,7 +28,7 @@ public class Fetcher {
       .setConnectTimeout(10000)
       .setSocketTimeout(10000)
       .build();
-  private CloseableHttpClient httpclient = HttpClients.custom()
+  private CloseableHttpClient httpClient = HttpClients.custom()
       .setDefaultRequestConfig(requestConfig)
       .setUserAgent("Mozilla/5.0 (compatible; Spotterbot/1.0; +http://spotternews.com/)")
       .build();
@@ -36,20 +36,22 @@ public class Fetcher {
   public Fetcher() {
   }
 
-  public FetchResponse fetch(Url url) throws FetchException, ParserException {
+  public FetchResponse fetch(Url url) throws FetchException {
     return fetch(url.getUrl());
   }
 
-  public FetchResponse fetch(String urlString) throws FetchException, ParserException {
+  public FetchResponse fetch(String urlString) throws FetchException {
     CloseableHttpResponse response = null;
     Reader reader = null;
     try {
-      response = httpclient.execute(new HttpGet(urlString));
+      response = httpClient.execute(new HttpGet(urlString));
       reader = new CharsetDetectingReader(response.getEntity().getContent());
       return new FetchResponse(response.getStatusLine().getStatusCode(),
           DocumentBuilder.build(urlString, reader));
     } catch (IOException e) {
-      throw new FetchException("Error fetching " + urlString, e);
+      throw new FetchException("Error fetching " + urlString + ": " + e.getMessage(), e);
+    } catch (ParserException e) {
+      throw new FetchException("Error parsing URL " + urlString + ": " + e.getMessage(), e);
     } finally {
       IOUtils.closeQuietly(response);
       IOUtils.closeQuietly(reader);
@@ -61,7 +63,7 @@ public class Fetcher {
     Reader reader = null;
     StringWriter sw = null;
     try {
-      response = httpclient.execute(new HttpGet(urlString));
+      response = httpClient.execute(new HttpGet(urlString));
       if (response.getStatusLine().getStatusCode() != HttpServletResponse.SC_OK) {
         throw new FetchException("Error fetching " + urlString + ": "
             + response.getStatusLine().getStatusCode());

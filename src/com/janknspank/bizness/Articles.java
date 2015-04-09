@@ -207,10 +207,6 @@ public class Articles {
           }
           break;
 
-        case INTENT:
-          // INTENT interests are just used for ranking.
-          break;
-
         case ENTITY:
           if (interest.getEntity().hasId()) {
             entityIds.add(interest.getEntity().getId());
