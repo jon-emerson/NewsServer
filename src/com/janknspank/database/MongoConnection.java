@@ -3,13 +3,14 @@ package com.janknspank.database;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 
+import com.google.common.collect.ImmutableList;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 
 public class MongoConnection {
-  private static final String MONGO_DATABASE = "newsserver";
+  private static final String MONGO_DATABASE = "newsserver-shared";
   private static final String MONGO_USER;
   private static final String MONGO_PASSWORD;
   static {
@@ -30,7 +31,10 @@ public class MongoConnection {
       try {
         MongoCredential credential = MongoCredential.createMongoCRCredential(
             MONGO_USER, MONGO_DATABASE, MONGO_PASSWORD.toCharArray());
-        CLIENT = new MongoClient(new ServerAddress("ds039431.mongolab.com", 39431),
+        CLIENT = new MongoClient(
+            ImmutableList.of(
+                new ServerAddress("ds063291-a0.mongolab.com", 63291),
+                new ServerAddress("ds063291-a1.mongolab.com", 63291)),
             Arrays.asList(credential));
       } catch (UnknownHostException e) {
         throw new DatabaseSchemaException("Could not connect to MongoDB: " + e.getMessage(), e);
