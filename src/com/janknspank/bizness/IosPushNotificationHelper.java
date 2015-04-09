@@ -198,6 +198,7 @@ public class IosPushNotificationHelper {
     aps.put("alert", alertInner);
     aps.put("badge", 1);
     aps.put("sound", "default");
+    aps.put("content-available", 1);
 
     // Create the top-level JSON.
     JSONObject jsonObject = new JSONObject();
@@ -234,7 +235,7 @@ public class IosPushNotificationHelper {
       throws DatabaseSchemaException, DatabaseRequestException {
     int count = 0;
     for (DeviceRegistration registration
-        : getDeviceRegistrations(Users.getByEmail("panaceaa@gmail.com"))) {
+        : getDeviceRegistrations(Users.getByEmail("tom.charytoniuk@gmail.com"))) {
       ++count;
       Article article = Database.with(Article.class).getFirst();
       PushNotification pushNotification = createPushNotification(registration, article);
