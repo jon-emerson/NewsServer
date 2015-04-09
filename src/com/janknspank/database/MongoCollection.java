@@ -339,6 +339,12 @@ public class MongoCollection<T extends Message> extends Collection<T> {
       }
       if (!queryOptionList.isEmpty()) {
         cursor.limit(queryOptionList.get(0).getLimit());
+
+        // Tell Mongo to return all the documents requested... Since we'll be
+        // pulling them all anyway, it makes sense to not do batches/paging.
+        // @see http://api.mongodb.org/java/2.6/com/mongodb/DBCursor.html#batchSize(int)
+        cursor.batchSize(-1 * queryOptionList.get(0).getLimit());
+
         if (queryOptionList.get(0) instanceof LimitWithOffset) {
           cursor.skip(((LimitWithOffset) queryOptionList.get(0)).getOffset());
         }
