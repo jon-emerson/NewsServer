@@ -17052,23 +17052,23 @@ public final class CoreProto {
       "\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230",
       "\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013cr" +
       "eate_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL" +
-      ".UrlRating\"\277\002\n\021KeywordToEntityId\022\034\n\002id\030\001" +
+      ".UrlRating\"\301\002\n\021KeywordToEntityId\022\034\n\002id\030\001" +
       " \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB" +
       "\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035" +
       "\005\250\246\035\001\022\037\n\tentity_id\030\004 \001(\tB\014\230\246\035\030\250\246\035\001\220\246\035\005\022\037" +
       "\n\021top_industry_id_1\030\005 \001(\005B\004\220\246\035\005\022\037\n\021top_i" +
       "ndustry_id_2\030\006 \001(\005B\004\220\246\035\005\022\037\n\021top_industry" +
       "_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005count\030\010 \001(\005B\010\210\246\035\001\220\246" +
-      "\035\005\022\025\n\007removed\030\t \001(\010B\004\220\246\035\005:\031\212\265\030\025MySQL.Key",
-      "wordToEntity\"\242\002\n\037IndustryVectorNormaliza" +
-      "tionData\022)\n\014distribution\030\001 \001(\0132\r.Distrib" +
-      "utionB\004\210\246\035\001\022-\n\037similarity_threshold_10_p" +
-      "ercent\030\002 \001(\001B\004\210\246\035\001\022-\n\037similarity_thresho" +
-      "ld_50_percent\030\003 \001(\001B\004\210\246\035\001\022:\n,ratio_of_ar" +
-      "ticles_above_threshold_10_percent\030\004 \001(\001B" +
-      "\004\210\246\035\001\022:\n,ratio_of_articles_above_thresho" +
-      "ld_50_percent\030\005 \001(\001B\004\210\246\035\001B!\n\024com.janknsp" +
-      "ank.protoB\tCoreProto"
+      "\035\005\022\025\n\007removed\030\t \001(\010B\004\220\246\035\005:\033\212\265\030\027MySQL.Key",
+      "wordToEntityId\"\242\002\n\037IndustryVectorNormali" +
+      "zationData\022)\n\014distribution\030\001 \001(\0132\r.Distr" +
+      "ibutionB\004\210\246\035\001\022-\n\037similarity_threshold_10" +
+      "_percent\030\002 \001(\001B\004\210\246\035\001\022-\n\037similarity_thres" +
+      "hold_50_percent\030\003 \001(\001B\004\210\246\035\001\022:\n,ratio_of_" +
+      "articles_above_threshold_10_percent\030\004 \001(" +
+      "\001B\004\210\246\035\001\022:\n,ratio_of_articles_above_thres" +
+      "hold_50_percent\030\005 \001(\001B\004\210\246\035\001B!\n\024com.jankn" +
+      "spank.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

@@ -9,6 +9,6 @@ public class DownloadServlet extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse resp) {
     resp.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-    resp.setHeader("Location", arg1);
+    resp.setHeader("Location", "http://itunes.apple.com/app/id966430113");
   }
 }
