@@ -1,0 +1,37 @@
+root_domain: "spoon-tamago.com"
+start_url: "http://www.spoon-tamago.com/"
+subdomain_blacklist: "shop.spoon-tamago.com"
+paragraph_selector: ".post-content h2"
+paragraph_selector: ".post-content p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.spoon-tamago.com/2015/04/10/musubi-a-modern-twist-on-a-traditional-furoshiki-store-in-harajuku/"
+    article_url: "http://www.spoon-tamago.com/2012/12/13/optical-glass-house-hiroshi-nakamura/"
+    article_url: "http://www.spoon-tamago.com/2007/10/09/album-cover-for-mister-children%E2%80%99s-home-by-chie-morimoto/"
+    article_url: "http://www.spoon-tamago.com/2015/03/24/an-immersive-interactive-garden-of-2300-floating-flowers-inspired-by-a-zen-koan/"
+    article_url: "http://www.spoon-tamago.com/2015/03/23/the-4-seasons-and-the-japanese-traditions-associated-with-them/"
+    article_url: "http://www.spoon-tamago.com/2014/07/01/summer-eats-cold-somen-noodles/"
+    article_url: "http://www.spoon-tamago.com/2015/03/20/sculptures-of-decomposing-body-parts-by-yuichi-ikehata/"
+    article_url: "http://www.spoon-tamago.com/2015/01/22/celebrating-the-analog-shonan-t-site-now-open/"
+    non_article_url: "http://www.spoon-tamago.com/about/"
+    non_article_url: "http://www.spoon-tamago.com/tag/chie-morimoto/"
+    non_article_url: "http://www.spoon-tamago.com/author/admin/"
+    non_article_url: "http://www.spoon-tamago.com/tokyoguide/"
+    non_article_url: "http://www.spoon-tamago.com/category/architecture/"
+    non_article_url: "http://www.spoon-tamago.com/2015/03/"
+  }
+}
+feature_boost_pattern {
+  boost: -5 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 0
+}

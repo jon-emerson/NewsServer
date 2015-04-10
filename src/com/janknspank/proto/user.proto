@@ -164,7 +164,6 @@ message Interest {
     ENTITY = 2; // People, companies, etc.
     LINKED_IN_CONTACTS = 3;
     ADDRESS_BOOK_CONTACTS = 4;
-    INTENT = 5;  // deprecated. todo: clean up from user table.
   }
   optional InterestType type = 2 [
     (required) = YES

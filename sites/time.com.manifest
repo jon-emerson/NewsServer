@@ -1,0 +1,38 @@
+root_domain: "time.com"
+start_url: "http://www.time.com/"
+paragraph_selector: ".article-body p"
+paragraph_blacklist {
+  selector: ".contributor-authors"
+}
+paragraph_blacklist {
+  selector: ".subscribe"
+}
+paragraph_blacklist {
+  selector: "em"
+}
+paragraph_blacklist {
+  text_regex: "^TO READ "
+}
+paragraph_blacklist {
+  text_regex: "@time\\.com"
+}
+article_url_pattern {
+  path_regex: "^\\/[0-9]+\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://time.com/3814970/in-the-line-of-fire-2/"
+    article_url: "http://time.com/3814979/bye-bye-great-satan/"
+    article_url: "http://time.com/3774585/hillary-clintons-main-obstacle-her-own-inevitability/"
+    article_url: "http://time.com/3817244/hillary-clinton-iowa/"
+    article_url: "http://time.com/3772504/how-hillary-clinton-will-handle-populist-critics/"
+    article_url: "http://time.com/3817023/basketball-lauren-hill-brain-cancer/"
+    article_url: "http://time.com/3817803/cancel-cable-house-fire/"
+    article_url: "http://time.com/3816628/star-wars-digital-release-first-time-watch/"
+    non_article_url: "http://time.com/business/"
+    non_article_url: "http://time.com/author/entrepreneur-2/"
+    non_article_url: "http://time.com/tag/careers-workplace/"
+    non_article_url: "http://time.com/author/startupcollective/"
+    non_article_url: "http://time.com/tag/hillary-clinton/"
+  }
+}

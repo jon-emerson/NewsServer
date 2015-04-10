@@ -1,0 +1,58 @@
+root_domain: "theatlantic.com"
+start_url: "http://www.theatlantic.com"
+paragraph_selector: ".article-content p"
+paragraph_selector: ".article-body p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/[0-9]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.theatlantic.com/business/archive/2015/04/where-the-white-people-live/390153/"
+    article_url: "http://www.theatlantic.com/education/archive/2015/04/how-education-policy-went-astray/390210/"
+    article_url: "http://www.theatlantic.com/education/archive/2015/04/stanfords-tuition-giveaway-is-not-good-news/390090/"
+    article_url: "http://www.theatlantic.com/education/archive/2015/04/what-happens-when-students-boycott-a-standardized-test/390087/"
+    article_url: "http://www.theatlantic.com/entertainment/archive/2015/04/the-culture-wars-come-to-sci-fi/390012/"
+    article_url: "http://www.theatlantic.com/entertainment/archive/2015/04/the-inevitability-of-hologram-selena/390186/"
+    article_url: "http://www.theatlantic.com/entertainment/archive/2015/04/to-early-reviewers-the-great-gatsby-was-not-so-great/390252/"
+    article_url: "http://www.theatlantic.com/international/archive/2015/04/irans-incremental-revolution/390183/"
+    article_url: "http://www.theatlantic.com/politics/archive/2015/04/why-congress-cant-be-silenced-on-iran/390189/"
+    article_url: "http://www.theatlantic.com/technology/archive/2015/04/be-careful-what-you-google/390207/"
+    article_url: "http://www.theatlantic.com/technology/archive/2015/04/the-trouble-with-unpublishing-the-news/390282/"
+    non_article_url: "http://www.theatlantic.com/entertainment/"
+    non_article_url: "http://www.theatlantic.com/ebooks/"
+    non_article_url: "http://www.theatlantic.com/david-a-graham/"
+    non_article_url: "http://www.theatlantic.com/david-a-graham/page/2/"
+    non_article_url: "http://www.theatlantic.com/technology/"
+  }
+}
+feature_boost_pattern {
+  path_regex: "^\\/entertainment\\/"
+  boost: -3
+}
+feature_boost_pattern {
+  path_regex: "^\\/politics\\/"
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10511 # Leisure, Travel and Tourism
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10512 # Sports
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  path_regex: "^\\/business\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  path_regex: "^\\/technology\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10541 # Education
+  path_regex: "^\\/education\\/"
+  boost: 5
+}
