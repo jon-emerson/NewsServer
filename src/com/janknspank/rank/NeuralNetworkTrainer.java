@@ -2,7 +2,6 @@ package com.janknspank.rank;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -18,7 +17,6 @@ import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
 import com.google.api.client.util.Lists;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -93,6 +91,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     for (User user : Database.with(User.class).get(
         new QueryOption.WhereEquals("email", ImmutableList.of(
             "dvoytenko@yahoo.com",
+            "jon@jonemerson.net",
             "panaceaa@gmail.com",
             "virendesai87@gmail.com")))) {
       users.put(user.getId(), user);
@@ -205,36 +204,21 @@ public class NeuralNetworkTrainer implements LearningEventListener {
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
 
     for (Persona persona : Personas.getPersonaMap().values()) {
-      System.out.println("Grabbing URLs for " + persona.getEmail() + " ...");
+      System.out.println("Grabbing articles for " + persona.getEmail() + " ...");
       User user = Personas.convertToUser(persona);
-
-      // HACK(jonemerson): Temporarily, we're deleting all articles so they'll
-      // be recrawled with the latest and greatest entity handling.
-      if (!persona.getEmail().equals("darrend@google.com")
-          && !persona.getEmail().equals("jimbob_the_farmer@gmail.com")
-          && !persona.getEmail().equals("panaceaa@gmail.com")
-          && !persona.getEmail().equals("emerson1899@gmail.com")
-          && !persona.getEmail().equals("tom.charytoniuk@gmail.com")) {
-        System.out.println("DELETING CACHED ARTICLES");
-        int count = Database.with(Article.class).delete(
-            new QueryOption.WhereEquals("url", persona.getGoodUrlList()));
-        count += Database.with(Article.class).delete(
-            new QueryOption.WhereEquals("url", persona.getBadUrlList()));
-        System.out.println(count + " articles uncached!!!!");
-      }
 
       Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(
           Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList()), true /* retain */);
 
       // Hold back ~20% of the training articles so we can later gauge our
       // ranking performance against the articles the trainer didn't see.
-      urlArticleMap = Maps.filterEntries(urlArticleMap,
-          new Predicate<Map.Entry<String, Article>>() {
-            @Override
-            public boolean apply(Entry<String, Article> entry) {
-              return !isInTrainingHoldback(entry.getValue());
-            }
-          });
+//      urlArticleMap = Maps.filterEntries(urlArticleMap,
+//          new Predicate<Map.Entry<String, Article>>() {
+//            @Override
+//            public boolean apply(Entry<String, Article> entry) {
+//              return !isInTrainingHoldback(entry.getValue());
+//            }
+//          });
 
       for (String goodUrl : persona.getGoodUrlList()) {
         if (urlArticleMap.containsKey(goodUrl)) {

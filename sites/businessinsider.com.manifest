@@ -1,6 +1,9 @@
 root_domain: "businessinsider.com"
 start_url: "http://www.businessinsider.com"
 path_blacklist {
+  needle: "/10-things-in-tech-"
+}
+path_blacklist {
   needle: "/best-colleges-in-the-us-"
 }
 path_blacklist {

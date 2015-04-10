@@ -19,6 +19,7 @@ import com.google.common.collect.ObjectArrays;
 import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
+import com.google.protobuf.ProtocolMessageEnum;
 import com.janknspank.common.Asserts;
 import com.janknspank.common.Logger;
 import com.janknspank.database.ExtensionsProto.Required;
@@ -568,10 +569,10 @@ public class SqlCollection<T extends Message> extends Collection<T> {
         Iterables.addAll(values, ((WhereEquals) whereEquals).getValues());
       } else if (whereEquals instanceof WhereEqualsEnum) {
         Iterables.addAll(values, Iterables.transform(((WhereEqualsEnum) whereEquals).getValues(),
-            new Function<Enum<?>, String>() {
+            new Function<ProtocolMessageEnum, Integer>() {
               @Override
-              public String apply(Enum<?> e) {
-                return e.name();
+              public Integer apply(ProtocolMessageEnum e) {
+                return e.getNumber();
               }
             }));
       } else if (whereEquals instanceof WhereEqualsNumber) {

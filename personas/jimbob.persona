@@ -106,13 +106,6 @@ bad_url: "http://www.medicalnewstoday.com/releases/290614.php"
 bad_url: "http://www.medicalnewstoday.com/releases/290613.php"
 bad_url: "http://www.medicalnewstoday.com/releases/290612.php"
 interest {
-  id: "54fe4f60e4b08410bdd85058"
-  type: INTENT
-  source: USER
-  create_time: 1425952608749
-  intent_code: "indst"
-}
-interest {
   id: "55035cf0e4b097661cf660c9"
   type: LINKED_IN_CONTACTS
   source: USER

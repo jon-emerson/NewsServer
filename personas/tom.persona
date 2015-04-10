@@ -404,13 +404,6 @@ linked_in_contact_name: "Francis Ma"
 linked_in_contact_name: "Megan Weeks"
 linked_in_contact_name: "Randall Sarafa"
 interest {
-  id: "55025af6e4b03f5c20db7c2e"
-  type: INTENT
-  source: USER
-  create_time: 1426217718587
-  intent_code: "indst"
-}
-interest {
   id: "55034c01e4b097661cf660b0"
   type: ENTITY
   source: USER
@@ -434,11 +427,4 @@ interest {
   type: LINKED_IN_CONTACTS
   source: USER
   create_time: 1426280319575
-}
-interest {
-  id: "55034f80e4b097661cf660ba"
-  type: INTENT
-  source: USER
-  create_time: 1426280320547
-  intent_code: "start"
 }

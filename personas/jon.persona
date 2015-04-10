@@ -1,5 +1,11 @@
 name: "Jon Emerson"
 email: "panaceaa@gmail.com"
+good_url: "http://bits.blogs.nytimes.com/2015/04/09/amazon-to-sell-predictions-in-cloud-race-against-google-and-microsoft/"
+good_url: "http://www.technologyreview.com/view/536621/how-a-troll-spotting-algorithm-learned-its-anti-antisocial-trade/"
+good_url: "http://www.technologyreview.com/view/536586/machine-learning-algorithm-mines-16-billion-e-mails/"
+good_url: "http://thenextweb.com/facebook/2015/04/09/just-hours-after-launching-facebooks-web-based-messenger-is-down/"
+good_url: "http://recode.net/2015/04/09/product-hunt-launches-second-version-of-ios-app-now-with-collections/"
+good_url: "http://techcrunch.com/2015/04/09/aws-wants-to-put-machine-learning-in-reach-of-any-developer/"
 good_url: "http://www.thebolditalic.com/articles/7229-about-the-bold-italic"
 good_url: "http://techcrunch.com/2015/04/09/linkedin-to-buy-online-education-site-lynda-com-for-1-5-billion/"
 good_url: "http://techcrunch.com/2015/04/01/signal-seed/"
@@ -94,6 +100,9 @@ good_url: "http://techcrunch.com/2015/03/25/facebook-launches-messenger-platform
 good_url: "http://www.nytimes.com/2015/03/27/business/media/hbo-will-introduce-a-daily-vice-newscast.html"
 good_url: "http://techcrunch.com/2015/03/27/secret-plans/"
 good_url: "http://www.thebolditalic.com/articles/7063-new-documentary-slams-yelp-for-being-a-bully"
+bad_url: "https://hbr.org/2015/04/why-the-gettysburg-address-is-still-a-great-case-study-in-persuasion"
+bad_url: "https://hbr.org/2015/04/can-you-really-not-afford-to-change-jobs"
+bad_url: "http://www.engadget.com/2015/04/09/windows-10-store-apps-music-video/"
 bad_url: "http://www.accountingtoday.com/accounting-technology/news/armanino-releases-forecast-management-tool-for-crm-74030-1.html"
 bad_url: "http://www.accountingtoday.com/news/tax-practice/eu-seeks-to-stamp-out-tax-loopholes-so-firms-pay-fair-share-74028-1.html"
 bad_url: "http://uxmag.com/articles/paving-the-road-to-smart-tv-innovation-with-standardization"
@@ -435,6 +444,23 @@ bad_url: "http://www.huffingtonpost.com/2015/04/02/hbo-now-on-demand_n_6988816.h
 bad_url: "http://www.forbes.com/sites/micahsolomon/2015/04/03/leadership-for-customer-service-is-a-daily-sort-of-thing-the-power-of-the-10-minute-lineup/"
 bad_url: "http://www.telegraph.co.uk/news/general-election-2015/politics-blog/11513422/Leaders-debate-2015-How-well-did-each-of-the-party-leaders-do.html"
 bad_url: "http://tmagazine.blogs.nytimes.com/2015/04/02/monaco-alain-ducasse-restaurant-makeover/"
+bad_url: "http://www.pcmag.com/article2/0,2817,2478042,00.asp"
+bad_url: "http://www.huffingtonpost.com/2015/04/09/jennifer-lopez-google-images_n_7033130.html"
+bad_url: "http://www.technologyreview.com/view/536486/recommended-from-around-the-web-week-ending-april-11-2015/"
+bad_url: "http://www.bbc.co.uk/news/uk-england-32223106"
+bad_url: "http://www.theverge.com/2015/4/9/8375613/lg-g4-specs-16-megapixel-camera"
+bad_url: "http://www.engadget.com/2015/04/09/cricket-wireless-phone-payment-rent-to-own/"
+bad_url: "http://www.telegraph.co.uk/news/worldnews/centralamericaandthecaribbean/cuba/11526668/US-and-Cuba-hold-highest-level-meeting-in-more-than-50-years.html"
+bad_url: "http://www.technologyreview.com/questionoftheweek/536451/when-will-graphene-be-commonly-used/"
+bad_url: "http://www.mercurynews.com/business/ci_27881798/apple-watch-options-54-combinations-case-band-size"
+bad_url: "http://www.ign.com/articles/2015/04/09/report-says-android-wear-close-to-iphone-compatibility"
+bad_url: "http://venturebeat.com/2015/04/09/spacex-launch-footage-is-even-better-in-4k/"
+bad_url: "http://www.telegraph.co.uk/news/worldnews/hillary-clinton/11526669/Hillary-Clinton-expected-to-announce-presidential-run-this-weekend.html"
+bad_url: "http://www.slate.com/blogs/browbeat/2015/04/09/movie_directors_wear_blank_baseball_caps_a_brief_history_of_filmmaker_s.single.html"
+bad_url: "http://www.theverge.com/2015/4/9/8375479/hillary-clinton-google-exec-chief-technology-officer-stephanie-hannon"
+bad_url: "http://thenextweb.com/apple/2015/04/10/you-can-now-pre-order-your-very-own-apple-watch/"
+bad_url: "http://bits.blogs.nytimes.com/2015/04/09/education-technology-investors-converge-on-scottsdale/"
+bad_url: "http://www.telegraph.co.uk/news/worldnews/centralamericaandthecaribbean/cuba/11526668/US-and-Cuba-hold-highest-level-meeting-in-more-than-50-years.html"
 linked_in_contact_name: "Thomas Arend Ph.D."
 linked_in_contact_name: "Mark Striebeck"
 linked_in_contact_name: "Tom Charytoniuk"
@@ -653,13 +679,6 @@ address_book_contact_name: "Will Browne"
 address_book_contact_name: "Xander Mahoney"
 address_book_contact_name: "Zhenya Nyden"
 interest {
-  id: "54fe4f60e4b08410bdd85058"
-  type: INTENT
-  source: USER
-  create_time: 1425952608749
-  intent_code: "indst"
-}
-interest {
   id: "55035cf0e4b097661cf660c9"
   type: LINKED_IN_CONTACTS
   source: USER
@@ -699,13 +718,6 @@ interest {
   industry_code: 10501
 }
 interest {
-  id: "55036fe3e4b05c7064a87737"
-  type: INTENT
-  source: USER
-  create_time: 1426288611300
-  intent_code: "start"
-}
-interest {
   id: "55036fede4b05c7064a87738"
   type: ENTITY
   source: USER
@@ -743,5 +755,18 @@ interest {
     type: "c"
     source: DBPEDIA_INSTANCE_TYPE
     importance: 20
+  }
+}
+interest {
+  id: "54fd1a51d4c6c665e22958f2"
+  type: ENTITY
+  source: USER
+  create_time: 1426288688925
+  entity {
+    id: "54fd1a51d4c6c665e22958f1"
+    keyword: "LinkedIn"
+    type: "c"
+    source: DBPEDIA_INSTANCE_TYPE
+    importance: 150
   }
 }
