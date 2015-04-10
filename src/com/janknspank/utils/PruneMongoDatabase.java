@@ -1,11 +1,14 @@
 package com.janknspank.utils;
 
+import java.util.concurrent.TimeUnit;
+
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.MongoConnection;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CrawlerProto.CrawlHistory;
 
 /**
  * Reduces the size of our Mongo DB database so that we can stay within our
@@ -114,6 +117,16 @@ public class PruneMongoDatabase {
         + Database.with(Article.class).getSize());
   }
 
+  /**
+   * Delete crawl histories older than one week.
+   */
+  private static void pruneCrawlHistory() throws DatabaseSchemaException {
+    Iterable<CrawlHistory> oldCrawlHistories = Database.with(CrawlHistory.class).get(
+        new QueryOption.WhereLessThan("start_time",
+            System.currentTimeMillis() - TimeUnit.DAYS.toMillis(7)));
+    Database.delete(oldCrawlHistories);
+  }
+
   private static void repairDatabase() throws DatabaseSchemaException {
     long startTime = System.currentTimeMillis();
     System.out.println("Repairing database to free up quota from deleted items ...");
@@ -123,8 +136,9 @@ public class PruneMongoDatabase {
   }
 
   public static void main(String args[]) throws DatabaseSchemaException, DatabaseRequestException {
-    pruneArticles();
-    repairDatabase();
+    // pruneArticles();
+    pruneCrawlHistory();
+    //repairDatabase();
     // fixUrls();
     System.out.println("Database pruned successfully.");
   }

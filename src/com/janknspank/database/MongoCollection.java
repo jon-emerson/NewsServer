@@ -16,6 +16,7 @@ import com.google.common.collect.Iterables;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.Message;
+import com.google.protobuf.ProtocolMessageEnum;
 import com.janknspank.common.Asserts;
 import com.janknspank.common.Logger;
 import com.janknspank.database.ExtensionsProto.StorageMethod;
@@ -187,8 +188,8 @@ public class MongoCollection<T extends Message> extends Collection<T> {
         if (whereEquals instanceof WhereEquals) {
           value = Iterables.getFirst(((WhereEquals) whereEquals).getValues(), null);
         } else if (whereEquals instanceof WhereEqualsEnum) {
-          Enum<?> e = Iterables.getFirst(((WhereEqualsEnum) whereEquals).getValues(), null);
-          value = e.name();
+          ProtocolMessageEnum e = Iterables.getFirst(((WhereEqualsEnum) whereEquals).getValues(), null);
+          value = e.getValueDescriptor().getName();
         } else if (whereEquals instanceof WhereEqualsNumber) {
           value = Iterables.getFirst(((WhereEqualsNumber) whereEquals).getValues(), null);
         } else {
@@ -221,13 +222,13 @@ public class MongoCollection<T extends Message> extends Collection<T> {
           }
         } else if (whereEquals instanceof WhereEqualsEnum) {
           if (whereEquals instanceof WhereNotEqualsEnum) {
-            for (Enum<?> value : ((WhereNotEqualsEnum) whereEquals).getValues()) {
-              dbObject.put(fieldName, new BasicDBObject("$ne", value.name()));
+            for (ProtocolMessageEnum value : ((WhereNotEqualsEnum) whereEquals).getValues()) {
+              dbObject.put(fieldName, new BasicDBObject("$ne", value.getValueDescriptor().getName()));
             }
           } else {
             BasicDBList or = new BasicDBList();
-            for (Enum<?> value : ((WhereEqualsEnum) whereEquals).getValues()) {
-              or.add(new BasicDBObject(fieldName, value.name()));
+            for (ProtocolMessageEnum value : ((WhereEqualsEnum) whereEquals).getValues()) {
+              or.add(new BasicDBObject(fieldName, value.getValueDescriptor().getName()));
             }
             dbObject.put("$or", or);
           }
@@ -358,15 +359,15 @@ public class MongoCollection<T extends Message> extends Collection<T> {
       return 0;
     }
 
-    List<QueryOption.Limit> queryOptionList = QueryOption.getList(options, QueryOption.Limit.class);
-    if (queryOptionList.size() > 1) {
+    List<QueryOption.Limit> limitOptions = QueryOption.getList(options, QueryOption.Limit.class);
+    if (limitOptions.size() > 1) {
       throw new IllegalStateException("Duplicate definitions of QueryOption.Limit not allowed");
     }
-    int rows = 0;
-    if (!queryOptionList.isEmpty()) {
+    if (!limitOptions.isEmpty()) {
       // This is fugly but it (hopefully) does the job.  A more MongoDB-
       // native implementation would probably be better long-term, but
       // do note that Mongo doesn't have the best Java API for removes.
+      int rows = 0;
       for (T t : get(options)) {
         try {
           rows += getDatabase().getCollection(this.getTableName())
@@ -376,12 +377,13 @@ public class MongoCollection<T extends Message> extends Collection<T> {
           LOG.warning(e.getMessage());
         }
       }
+      return rows;
     } else {
-      rows += getDatabase().getCollection(this.getTableName())
-          .remove(getQueryObject(options))
+      BasicDBObject queryObject = getQueryObject(options);
+      return getDatabase().getCollection(this.getTableName())
+          .remove(queryObject)
           .getN();
     }
-    return rows;
   }
 
   @Override

@@ -18,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.protobuf.TextFormat;
 import com.janknspank.bizness.SocialEngagements;
@@ -42,7 +43,7 @@ public class ShareNormalizer {
   private static final Logger LOG = new Logger(ShareNormalizer.class);
   private static final Map<Site, String> FILENAME_MAP = ImmutableMap.of(
       Site.FACEBOOK, "classifier/shares/facebooksharenormalizer.bin",
-      Site.TWITTER, "classifier/shares/facebooksharenormalizer.bin");
+      Site.TWITTER, "classifier/shares/twittersharenormalizer.bin");
 
   private static Map<Site, ShareNormalizer> instanceMap = Maps.newHashMap();
   private final ShareNormalizationData data;
@@ -255,7 +256,6 @@ public class ShareNormalizer {
               }
             });
 
-    LOG.info("Reading all articles...");
     for (Article article : articles) {
       int i = 0;
       if (++i % 100 == 0) {
@@ -325,8 +325,13 @@ public class ShareNormalizer {
       return;
     }
 
+    System.out.println("Reading all articles...");
     Iterable<Article> articles = Database.with(Article.class).get();
+    System.out.println(Iterables.size(articles) + " articles received.");
+    System.out.println("Calculating Facebook share normalization table...");
     createShareNormalizationFile(articles, Site.FACEBOOK);
+    System.out.println("Calculating Twitter share normalization table...");
     createShareNormalizationFile(articles, Site.TWITTER);
+    System.out.println("Done!");
   }
 }

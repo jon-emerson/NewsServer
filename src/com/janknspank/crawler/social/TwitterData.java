@@ -48,6 +48,9 @@ public class TwitterData {
       String url = article.getUrl();
       String responseBody = FETCHER.getResponseBody(getTwitterEngagementUrl(url));
       JSONObject responseObject = new JSONObject(responseBody);
+      if (!responseObject.has("count")) {
+        return null;
+      }
       int shareCount = responseObject.getInt("count");
       return SocialEngagement.newBuilder()
           .setSite(Site.TWITTER)
@@ -58,7 +61,7 @@ public class TwitterData {
               System.currentTimeMillis() - Articles.getPublishedTime(article) /* ageInMillis */))
           .setCreateTime(System.currentTimeMillis())
           .build();
-    } catch (FetchException|ClassifierException e) {
+    } catch (FetchException | ClassifierException e) {
       throw new SocialException("Error reading share count from Twitter: " + e.getMessage(), e);
     }
   }
@@ -78,7 +81,9 @@ public class TwitterData {
     @Override
     public Void call() throws Exception {
       SocialEngagement socialEngagement = getEngagementForArticle(article);
-      Database.push(article, "social_engagement", ImmutableList.of((Message) socialEngagement));
+      if (socialEngagement != null) {
+        Database.push(article, "social_engagement", ImmutableList.of((Message) socialEngagement));
+      }
       int count = getCount();
       if (count % 500 == 0) {
         System.out.println(count);
@@ -91,11 +96,11 @@ public class TwitterData {
     Iterable<Article> articles = Database.with(Article.class).get();
     System.out.println(Iterables.size(articles) + " articles retrieved");
 
-    ExecutorService executor = Executors.newFixedThreadPool(30);
+    ExecutorService executor = Executors.newFixedThreadPool(50);
     for (Article article : articles) {
-      if (SocialEngagements.getForArticle(article, Site.TWITTER) == null) {
+      // if (SocialEngagements.getForArticle(article, Site.TWITTER) == null) {
         executor.submit(new Updater(article));
-      }
+      // }
     }
     executor.shutdown();
     try {

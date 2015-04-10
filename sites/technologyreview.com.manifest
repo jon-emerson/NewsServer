@@ -48,6 +48,10 @@ path_blacklist {
 path_blacklist {
   needle: "/videos/"
 }
+path_blacklist {
+  needle: "/recommended-from-around-the-web-"
+  location: CONTAINS
+}
 paragraph_selector: "section.body p"
 article_url_pattern {
   path_regex: "\\/[a-z]+\\/[0-9]{5,7}\\/"

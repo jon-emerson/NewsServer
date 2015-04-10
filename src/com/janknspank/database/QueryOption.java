@@ -6,6 +6,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.protobuf.ProtocolMessageEnum;
 
 public class QueryOption {
   public static class Limit extends QueryOption {
@@ -127,19 +128,19 @@ public class QueryOption {
   public static class WhereEqualsEnum extends WhereOption {
     private final Iterable<?> values;
 
-    public WhereEqualsEnum(String fieldName, Enum<?> value) {
+    public WhereEqualsEnum(String fieldName, ProtocolMessageEnum value) {
       super(fieldName);
       this.values = ImmutableList.of(value);
     }
 
-    public WhereEqualsEnum(String fieldName, Iterable<Enum<?>> values) {
+    public WhereEqualsEnum(String fieldName, Iterable<ProtocolMessageEnum> values) {
       super(fieldName);
       this.values = values;
     }
 
     @SuppressWarnings("unchecked")
-    public Iterable<Enum<?>> getValues() {
-      return (Iterable<Enum<?>>) values;
+    public Iterable<ProtocolMessageEnum> getValues() {
+      return (Iterable<ProtocolMessageEnum>) values;
     }
 
     public int getFieldCount() {
@@ -148,11 +149,11 @@ public class QueryOption {
   }
 
   public final static class WhereNotEqualsEnum extends WhereEqualsEnum {
-    public WhereNotEqualsEnum(String fieldName, Enum<?> value) {
+    public WhereNotEqualsEnum(String fieldName, ProtocolMessageEnum value) {
       super(fieldName, value);
     }
 
-    public WhereNotEqualsEnum(String fieldName, Iterable<Enum<?>> values) {
+    public WhereNotEqualsEnum(String fieldName, Iterable<ProtocolMessageEnum> values) {
       super(fieldName, values);
     }
   }
