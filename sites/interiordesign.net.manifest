@@ -1,0 +1,45 @@
+root_domain: "interiordesign.net"
+start_url: "http://www.interiordesign.net/"
+subdomain_blacklist: "library.interiordesign.net"
+subdomain_blacklist: "productfind.interiordesign.net"
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/products/"
+}
+paragraph_selector: ".article p"
+paragraph_selector: ".article div.text-wrap"
+paragraph_blacklist {
+  selector: ".article_info"
+}
+paragraph_blacklist {
+  text_regex: "^>>See more "
+}
+article_url_pattern {
+  path_regex: "^\\/(articles|projects)\\/detail\\/[0-9]{3,7}\\-"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.interiordesign.net/articles/detail/36703-10-questions-with-matthew-hufft/"
+    article_url: "http://www.interiordesign.net/articles/detail/36781-boffi-and-de-padova-reveal-plans-to-merge/"
+    article_url: "http://www.interiordesign.net/articles/detail/34837-wright-makes-right-copeland-furniture-recreates-frank-lloyd-wrights-iconic-designs/"
+    article_url: "http://www.interiordesign.net/articles/detail/36780-kari-pei-joins-interface-as-product-designer/"
+    article_url: "http://www.interiordesign.net/articles/detail/36775-iida-nys-sustainable-quilt-auction-benefits-be-original-americas/"
+    article_url: "http://www.interiordesign.net/projects/detail/2609-big-ideas-get-smart-about-learning/"
+    article_url: "http://www.interiordesign.net/projects/detail/2590-making-hay-convention-center-showcases-growing-spanish-talents/"
+    article_url: "http://www.interiordesign.net/projects/detail/2562-desk-job-studiosc-applies-local-vernacular-to-brooklyn-desks//"
+    non_article_url: "http://www.interiordesign.net/industry/people/"
+    non_article_url: "http://www.interiordesign.net/events/upcoming/"
+    non_article_url: "http://www.interiordesign.net/newsletters/"
+    non_article_url: "http://www.interiordesign.net/projects/category/9-kitchen-bath/"
+    non_article_url: "http://www.interiordesign.net/page/2-about-us/"
+  }
+}
+feature_boost_pattern {
+  boost: -5 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 1
+}

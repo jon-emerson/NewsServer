@@ -1,0 +1,35 @@
+root_domain: "archinect.com"
+start_url: "http://archinect.com/"
+paragraph_selector: ".Intro p"
+paragraph_selector: ".Text p"
+article_url_pattern {
+  path_regex: "^\\/news\\/article\\/[0-9]+\\/[^\\/]+$"
+}
+article_url_pattern {
+  path_regex: "^\\/firms\\/release\\/[0-9]+\\/[^\\/]+\\/[0-9]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://archinect.com/news/article/124972074/visionary-cities-project-applies-urbanist-archetypes-to-damien-hirst-s-blank-development-site"
+    article_url: "http://archinect.com/news/article/124972883/ten-top-images-on-archinect-s-stairs-pinterest-board"
+    article_url: "http://archinect.com/news/article/124970457/frank-lloyd-wright-house-causes-controversy-in-wealthy-phoenix-neighborhood"
+    article_url: "http://archinect.com/news/article/123739069/archinect-s-employer-of-the-day-weekly-round-up-62"
+    article_url: "http://archinect.com/news/article/124744662/seattle-s-massive-bertha-tunnel-drill-is-up-for-repair-but-still-faces-a-shaky-outlook"
+    article_url: "http://archinect.com/news/article/124892558/without-housing-reform-is-a-tower-of-david-coming-to-your-city"
+    article_url: "http://archinect.com/news/article/124302971/the-erection-the-inkblot-and-the-rfra-riff-raff-morphosis-vals-tower-zumthor-s-lacma-and-hoosier-hospitality-confronts-rfra-on-archinect-sessions-episode-23"
+    article_url: "http://archinect.com/firms/release/6259264/aedas-clinches-seven-hkia-cross-strait-architectural-design-awards/124151057"
+    article_url: "http://archinect.com/firms/release/124376917/bello-giardino-won-2014-consumers-choices-award/124378527"
+    non_article_url: "http://archinect.com/alex"
+    non_article_url: "http://archinect.com/alex/status"
+    non_article_url: "http://archinect.com/jobs/entry/124975291/experienced-residential-architect"
+    non_article_url: "http://archinect.com/bellogiardino"
+    non_article_url: "http://archinect.com/forum/thread/121438233/what-are-certain-architecture-schools-known-for"
+  }
+}
+feature_boost_pattern {
+  boost: -5 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 2
+}

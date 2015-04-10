@@ -1,0 +1,55 @@
+root_domain: "placesjournal.org"
+start_url: "http://placesjournal.org/"
+path_blacklist {
+  needle: "/reading-list/"
+}
+paragraph_selector: "[itemprop=\"articleBody\"] p"
+paragraph_blacklist {
+  selector: ".flex-caption"
+}
+paragraph_blacklist {
+  selector: ".photocaption"
+}
+article_url_pattern {
+  path_regex: "^\\/article\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://placesjournal.org/article/fairy-tale-architecture-st-ides-parked-cars-and-other-peoples-homes/"
+    article_url: "https://placesjournal.org/article/the-fight-for-san-francisco/"
+    article_url: "https://placesjournal.org/article/women-architecture-and-the-politics-of-family-leave/"
+    article_url: "https://placesjournal.org/article/tracks-a-walk-in-the-arctic/"
+    article_url: "https://placesjournal.org/article/from-the-american-west-to-west-berlin/"
+    article_url: "https://placesjournal.org/article/fabrications/"
+    article_url: "https://placesjournal.org/article/what-i-learned-from-architect-barbie/"
+    non_article_url: "https://placesjournal.org/explore-places/photography/"
+    non_article_url: "https://placesjournal.org/author/ralph-stern/"
+    non_article_url: "https://placesjournal.org/academic-partners/"
+    non_article_url: "https://placesjournal.org/about-places-journal/"
+    non_article_url: "https://placesjournal.org/explore-places/?filter=columnists"
+    non_article_url: "https://placesjournal.org/author/despina-stratigakos/"
+  }
+}
+feature_boost_pattern {
+  boost: -5 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10513 # Media
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: -1
+}

@@ -2,17 +2,18 @@ root_domain: "architectmagazine.com"
 start_url: "http://www.architectmagazine.com/"
 paragraph_selector: "h3[itemprop=\"alternativeHeadline\"]"
 paragraph_selector: ".articlepage p"
+paragraph_selector: "article.pg-project-description p"
 path_blacklist {
   needle: "/continuing-education/"
-}
-path_blacklist {
-  needle: "/projects/"
 }
 path_blacklist {
   needle: "/search-result/"
 }
 article_url_pattern {
   path_regex: "\\-.+\\-.+_o\\.aspx$"
+}
+article_url_pattern {
+  path_regex: "^\\/project-gallery\\/[^\\/]+$"
 }
 test_instructions {
   article_url_detector_checks {
@@ -21,6 +22,7 @@ test_instructions {
     article_url: "http://www.architectmagazine.com/technology/award-exo-structural-tower_o.aspx"
     article_url: "http://www.architectmagazine.com/business/bls-releases-january-2015-job-growth-for-architects_o.aspx"
     article_url: "http://www.architectmagazine.com/competitions/19-awesome-photos-from-the-2015-sony-world-photography-awards-shortlist_o.aspx"
+    article_url: "http://www.architectmagazine.com/project-gallery/further-lane-house"
     non_article_url: "http://www.architectmagazine.com/products/mind-and-matter-blog/"
     non_article_url: "http://www.architectmagazine.com/contact.aspx"
     non_article_url: "http://www.architectmagazine.com/table-of-contents/the-magazine.aspx"
@@ -33,5 +35,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10517 # Architecture & Planning
-  boost: 10
+  boost: 5
 }

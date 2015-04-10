@@ -1,0 +1,67 @@
+root_domain: "residentialarchitect.com"
+start_url: "http://www.residentialarchitect.com/"
+paragraph_selector: ".article-body p"
+paragraph_selector: "article.pg-project-description p"
+paragraph_blacklist {
+  text_regex: "^Text by "
+}
+paragraph_blacklist {
+  text_regex: "^Project Credits"
+}
+paragraph_blacklist {
+  text_regex: "^Read more at "
+}
+paragraph_blacklist {
+  text_regex: "^Read more from "
+}
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/([^\\/]+\\/)?[^\\/]+_[a-z]$"
+}
+article_url_pattern {
+  path_regex: "^\\/project-gallery\\/[^\\/]+\\-[0-9]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.residentialarchitect.com/article/5-trends-shaping-the-future-of-architecture_t"
+    article_url: "http://www.residentialarchitect.com/article/a-collection-of-projects-from-2015-pritzker-prize-winner-frei-otto_o"
+    article_url: "http://www.residentialarchitect.com/article/frei-otto-wins-2015-pritzker-architecture-prize_o"
+    article_url: "http://www.residentialarchitect.com/article/new-poll-finds-bipartisan-support-for-usgbcs-leed-system_o"
+    article_url: "http://www.residentialarchitect.com/article/q-a-aaron-betsky-and-a-new-era-for-the-frank-lloyd-wright-school-of-architecture_o"
+    article_url: "http://www.residentialarchitect.com/article/q-a-sekou-cooke-and-the-era-of-hip-hop-architecture_o"
+    article_url: "http://www.residentialarchitect.com/article/twitter-reacts-to-2015-pritzker-architecture-prize-announcement_o"
+    article_url: "http://www.residentialarchitect.com/design/buildings/36sml-beach-house-designed-by-levenbetts_o"
+    article_url: "http://www.residentialarchitect.com/design/buildings/house-1014-designed-by-h-arquitectes_o"
+    article_url: "http://www.residentialarchitect.com/newsletter/a-spacious-master-bath-in-a-compact-austin-infill_s"
+    article_url: "http://www.residentialarchitect.com/newsletter/adp-ticks-up-in-march_s"
+    article_url: "http://www.residentialarchitect.com/newsletter/elegantly-modular_s"
+    article_url: "http://www.residentialarchitect.com/newsletter/february-architecture-billings-index-is-up_s"
+    article_url: "http://www.residentialarchitect.com/newsletter/natural-harmony_s"
+    article_url: "http://www.residentialarchitect.com/newsletter/the-path-to-designing-ecomod-an-affordable-and-energy-efficient-housing-module_s"
+    article_url: "http://www.residentialarchitect.com/newsletter/tadao-ando-reveals-designs-for-his-first-new-york-building_s"
+    article_url: "http://www.residentialarchitect.com/newsletter/tower-house-encourages-community_s"
+    article_url: "http://www.residentialarchitect.com/practice/call-for-entries-architects-ninth-annual-r-d-awards_o"
+    article_url: "http://www.residentialarchitect.com/practice/firm-profiles/design-community-remembers-michael-graves_o"
+    article_url: "http://www.residentialarchitect.com/projects/hadaway-house-designed-by-patkau-architects_o"
+    article_url: "http://www.residentialarchitect.com/practice/michael-graves-dead-at-80_o"
+    article_url: "http://www.residentialarchitect.com/practice/workspace-gray-organschi-architecture_o"
+    article_url: "http://www.residentialarchitect.com/project-gallery/delft-train-station-6673"
+    article_url: "http://www.residentialarchitect.com/project-gallery/songpa-micro-housing-6712"
+    article_url: "http://www.residentialarchitect.com/project-gallery/two-hulls-house-6535"
+    article_url: "http://www.residentialarchitect.com/technology/kitchen-bath/aia-survey-reveals-whats-trending-in-kitchen-and-bath-design_o"
+    article_url: "http://www.residentialarchitect.com/technology/products/the-industrial-design-of-michael-graves_o"
+    non_article_url: "http://www.residentialarchitect.com/author/deane-madsen"
+    non_article_url: "http://www.residentialarchitect.com/project-gallery/?sc=Renovation%2FRemodel"
+    non_article_url: "http://www.residentialarchitect.com/project-gallery/?sc=Renovation%2FRemodel&sp=Living%20Room#results"
+    non_article_url: "http://www.residentialarchitect.com/firms/"
+    non_article_url: "http://www.residentialarchitect.com/firms/klopf-architecture"
+    non_article_url: "http://www.residentialarchitect.com/firms/paul-e-casseb-jr-aia-inc"
+    non_article_url: "http://www.residentialarchitect.com/residential-architect-latest-stories"
+  }
+}
+feature_boost_pattern {
+  boost: -5 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 2
+}
