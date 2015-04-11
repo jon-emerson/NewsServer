@@ -27,6 +27,14 @@ good_url: "https://placesjournal.org/article/women-architecture-and-the-politics
 good_url: "http://archinect.com/news/article/118906207/architects-get-ready-for-the-holographic-design-process-microsoft-just-unveiled-its-hololens-headset"
 good_url: "http://www.archdaily.com/444493/redefining-context-with-tatiana-bilbao/"
 good_url: "http://www.archdaily.com/41517/the-universe-house-tatiana-bilbao-by-iwan-baan/"
+good_url: "http://mashable.com/2015/04/10/basics-managing-up/"
+bad_url: "http://www.bbc.co.uk/news/world-latin-america-32263503"
+bad_url: "http://www.bbc.co.uk/news/world-latin-america-32246115"
+bad_url: "http://www.forbes.com/sites/andersonantunes/2015/04/11/mark-zuckerberg-meets-with-brazils-president-at-the-7th-summit-of-the-americas-in-panama/"
+bad_url: "http://www.theatlantic.com/technology/archive/2015/04/how-to-say-yes-by-not-saying-yes/390129/"
+bad_url: "http://www.bbc.co.uk/news/world-us-canada-32252374"
+bad_url: "http://www.theatlantic.com/international/archive/2015/04/more-than-a-handshake/390246/"
+bad_url: "http://www.telegraph.co.uk/news/worldnews/centralamericaandthecaribbean/cuba/11526668/US-and-Cuba-hold-highest-level-meeting-in-more-than-50-years.html"
 bad_url: "http://techcrunch.com/2015/04/10/some-apple-watch-pre-orders-slip-to-june-shipping/"
 bad_url: "http://techcrunch.com/2015/04/10/godaddy-acquires-elto-marketplace-for-web-pros/"
 bad_url: "http://techcrunch.com/2015/04/10/amazon-quietly-acquired-shoefitr-to-improve-how-it-sells-footwear-online/"
@@ -79,10 +87,19 @@ bad_url: "http://mashable.com/2015/04/09/new-emoji-celebrities/"
 bad_url: "http://mashable.com/2015/04/09/dwayne-rock-johnson-diet/"
 bad_url: "http://mashable.com/2015/04/09/deer-trapped-in-suburbia/"
 bad_url: "http://mashable.com/2015/04/09/mom-gender-reveal/"
+address_book_contact_name: "Matthew Hufft"
+address_book_contact_name: "Tatiana Bilbao"
+address_book_contact_name: "Emily Pilloton"
 interest {
   id: "55036fcfe4b05c7065a87736"
   type: INDUSTRY
   source: USER
   create_time: 1426288591472
   industry_code: 10517 # Architecture and Planning
+}
+interest {
+  id: "55035cf0e4b097661cf660ca"
+  type: ADDRESS_BOOK_CONTACTS
+  source: USER
+  create_time: 1426283760539
 }

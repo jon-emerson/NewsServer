@@ -127,7 +127,7 @@ public class Articles {
   public static TopList<Article, Double> getRankedArticles(
       User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
     Iterable<Article> articlesForInterests =
-        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 5);
+        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10);
 
     Map<String, Double> scores = Maps.newHashMap();
     TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
@@ -224,7 +224,7 @@ public class Articles {
         getArticlesForEntityIdsFuture(entityIds, Article.Reason.COMPANY, limitPerType),
         getArticlesForKeywordsFuture(personNames, Article.Reason.PERSON, limitPerType / 4),
         getArticlesForKeywordsFuture(companyNames, Article.Reason.COMPANY, limitPerType),
-        getArticlesByFeatureIdFuture(featureIds, limitPerType));
+        getArticlesByFeatureIdFuture(featureIds, limitPerType / 2));
     Map<String, Article> dedupingArticleMap = Maps.newHashMap();
     for (ListenableFuture<Iterable<Article>> articlesFuture : articlesFutures) {
       try {

@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.protobuf.TextFormat;
+import com.janknspank.bizness.GuidFactory;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.LinkedInContact;
@@ -93,6 +94,7 @@ public class Personas {
 
     // OK let's go.
     return User.newBuilder()
+        .setId(GuidFactory.generate())
         .setFirstName(firstName)
         .setLastName(persona.getName().substring(firstName.length()).trim())
         .addAllInterest(persona.getInterestList())

@@ -161,6 +161,15 @@ public class MongoCollection<T extends Message> extends Collection<T> {
   }
 
   /**
+   * Returns true if the passed field name represents an ObjectId-typed field.
+   */
+  private boolean isObjectIdFieldName(String fieldName) {
+    // This may be a gross simplification!!  But it seems to work for us in all
+    // cases right now...
+    return fieldName.equals("_id") || fieldName.endsWith("._id");
+  }
+
+  /**
    * TODO(jonemerson): This should throw DatabaseRequestExceptions if any
    * options don't match up to the schema.
    */
@@ -195,7 +204,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
         } else {
           throw new IllegalStateException();
         }
-        if (fieldName.equals("_id") || fieldName.endsWith("._id")) {
+        if (isObjectIdFieldName(fieldName)) {
           value = new ObjectId((String) value);
         }
         if (whereEquals instanceof WhereEqualsIgnoreCase) {
@@ -235,14 +244,14 @@ public class MongoCollection<T extends Message> extends Collection<T> {
         } else if (whereEquals instanceof WhereNotEquals) {
           for (String value : ((WhereNotEquals) whereEquals).getValues()) {
             dbObject.put(fieldName, new BasicDBObject("$ne",
-                ("_id".equals(fieldName)) ? new ObjectId((String) value) : value));
+                isObjectIdFieldName(fieldName) ? new ObjectId((String) value) : value));
           }
         } else {
           BasicDBList or = new BasicDBList();
           for (String value : ((WhereEquals) whereEquals).getValues()) {
             if (whereEquals instanceof WhereEqualsIgnoreCase) {
               or.add(new BasicDBObject(fieldName, Pattern.compile(value, Pattern.CASE_INSENSITIVE)));
-            } else if ("_id".equals(fieldName)) {
+            } else if (isObjectIdFieldName(fieldName)) {
               or.add(new BasicDBObject(fieldName, new ObjectId((String) value)));
             } else {
               or.add(new BasicDBObject(fieldName, value));
