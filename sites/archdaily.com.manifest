@@ -12,7 +12,7 @@ paragraph_blacklist {
   selector: "p.specs"
 }
 article_url_pattern {
-  path_regex: "^\\/[0-9]{6,8}\\/[^\\/]+\\/$"
+  path_regex: "^\\/[0-9]{5,8}\\/[^\\/]+\\/$"
 }
 rss_url: "http://america.aljazeera.com/content/ajam/articles.rss"
 test_instructions {
@@ -24,6 +24,7 @@ test_instructions {
     article_url: "http://www.archdaily.com/607362/summer-house-in-syros-sotiris-tsergas/"
     article_url: "http://www.archdaily.com/571585/university-of-los-andes-public-space-and-integrated-care-center-daniel-bonilla-arquitectos/"
     article_url: "http://www.archdaily.com/607912/mei-and-felixx-selected-to-redevelop-postwar-residential-area-in-munich/"
+    article_url: "http://www.archdaily.com/51664/handmade-school-anna-heringer-eike-roswag/"
     non_article_url: "http://www.archdaily.com/category/selected/"
     non_article_url: "http://www.archdaily.com/category/architecture-news/"
     non_article_url: "http://www.archdaily.com/tag/venice-biennale-2014/"
