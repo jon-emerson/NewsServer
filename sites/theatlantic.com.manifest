@@ -18,6 +18,7 @@ test_instructions {
     article_url: "http://www.theatlantic.com/politics/archive/2015/04/why-congress-cant-be-silenced-on-iran/390189/"
     article_url: "http://www.theatlantic.com/technology/archive/2015/04/be-careful-what-you-google/390207/"
     article_url: "http://www.theatlantic.com/technology/archive/2015/04/the-trouble-with-unpublishing-the-news/390282/"
+    article_url: "http://www.theatlantic.com/magazine/archive/2012/11/hacking-the-presidents-dna/309147/"
     non_article_url: "http://www.theatlantic.com/entertainment/"
     non_article_url: "http://www.theatlantic.com/ebooks/"
     non_article_url: "http://www.theatlantic.com/david-a-graham/"
