@@ -19,5 +19,5 @@ test_instructions {
   }
 }
 feature_boost_pattern {
-  boost: -1 # General punishment.
+  boost: -2 # General punishment.
 }
