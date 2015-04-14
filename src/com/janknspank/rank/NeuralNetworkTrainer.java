@@ -28,6 +28,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
@@ -129,6 +130,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
           urlsToCrawl.add(userAction.getUrl());
         }
       }
+      Database.with(Url.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
+      Database.with(Article.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
       Map<String, Article> articleMap =
           ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
       for (UserAction userAction : userActions) {
@@ -173,6 +176,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       for (UserAction userAction : userActions) {
         urlsToCrawl.add(userAction.getUrl());
       }
+      Database.with(Url.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
+      Database.with(Article.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
       Map<String, Article> articleMap =
           ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
       for (UserAction userAction : userActions) {
@@ -238,13 +243,13 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       }
     }
 
-//    for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
-//      trainingSet.addRow(dataSetRow);
-//    }
-//
-//    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
-//      trainingSet.addRow(dataSetRow);
-//    }
+    for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
+      trainingSet.addRow(dataSetRow);
+    }
+
+    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
+      trainingSet.addRow(dataSetRow);
+    }
 
     System.out.println("Training set compiled.");
     return trainingSet;

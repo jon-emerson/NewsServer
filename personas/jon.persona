@@ -760,6 +760,13 @@ interest {
   industry_code: 10501
 }
 interest {
+  id: "55036fd2e4b05c7064a82736"
+  type: INDUSTRY
+  source: USER
+  create_time: 1429288594964
+  industry_code: 10560
+}
+interest {
   id: "55036fede4b05c7064a87738"
   type: ENTITY
   source: USER
