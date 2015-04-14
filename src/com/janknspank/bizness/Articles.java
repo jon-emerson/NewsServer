@@ -126,6 +126,7 @@ public class Articles {
    */
   public static TopList<Article, Double> getRankedArticles(
       User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
+    long startTime = System.currentTimeMillis();
     Iterable<Article> articlesForInterests =
         getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10);
 
@@ -149,6 +150,8 @@ public class Articles {
       bestArticles.add(article, scores.get(article.getUrl()));
     }
 
+    System.out.println("getRankedArticles completed in "
+        + (System.currentTimeMillis() - startTime) + "ms");
     return bestArticles;
   }
 

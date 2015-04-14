@@ -274,7 +274,9 @@ public class FacebookLoginHandler {
           .setSource(InterestSource.FACEBOOK_PROFILE)
           .setCreateTime(System.currentTimeMillis());
       if (companyEntityMap.containsKey(companyName.toLowerCase())) {
-        companyInterestBuilder.setEntity(companyEntityMap.get(companyName.toLowerCase()));
+        companyInterestBuilder.setEntity(companyEntityMap.get(companyName.toLowerCase())
+            .toBuilder()
+            .clearTopic());
       } else {
         companyInterestBuilder.setEntity(Entity.newBuilder()
             .setId(GuidFactory.generate())
