@@ -28,7 +28,6 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
