@@ -34,6 +34,7 @@ import com.janknspank.dom.parser.Node;
 import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.nlp.KeywordUtils;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
@@ -125,9 +126,19 @@ class ArticleCreator {
     // Word count (required).
     articleBuilder.setWordCount(getWordCount(documentNode));
 
+    // Features
+    Iterable<ArticleFeature> articleFeatures;
+    try {
+      articleFeatures = FeatureClassifier.classify(articleBuilder);
+      articleBuilder.addAllFeature(articleFeatures);
+    } catch (ClassifierException e) {
+      e.printStackTrace();
+      articleFeatures = ImmutableList.of();
+    }
+
     // Keywords.
-    articleBuilder.addAllKeyword(
-        KeywordFinder.getInstance().findKeywords(url.getId(), title, documentNode));
+    articleBuilder.addAllKeyword(KeywordFinder.getInstance().findKeywords(
+        url.getId(), title, documentNode, articleFeatures));
 
     // Since many sites double-escape their HTML entities (why anyone would
     // do this is beyond me), do another escape pass on everything.
@@ -142,13 +153,6 @@ class ArticleCreator {
     }
     if (articleBuilder.hasImageUrl()) {
       articleBuilder.setImageUrl(StringHelper.unescape(articleBuilder.getImageUrl()));
-    }
-
-    // Features
-    try {
-      articleBuilder.addAllFeature(FeatureClassifier.classify(articleBuilder));
-    } catch (ClassifierException e) {
-      e.printStackTrace();
     }
 
     // Social Engagement

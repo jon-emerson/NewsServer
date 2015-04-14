@@ -1,5 +1,5 @@
 root_domain: "cruzine.com"
-start_url: "https://www.cruzine.com/"
+start_url: "http://www.cruzine.com/"
 paragraph_selector: ".post .inner h3"
 paragraph_selector: ".post .inner p"
 article_url_pattern {

@@ -223,6 +223,13 @@ public class FacebookLoginHandler {
           && feature instanceof VectorFeature) {
         double score = ((VectorFeature) feature).score(facebookUserVector, 0 /* boost */);
 
+        // Slightly punish Aviation since it tends to score well against
+        // locations from people's profiles, since airports are usually
+        // in those locations too.
+        if (feature.getFeatureId() == FeatureId.AVIATION) {
+          score -= 0.05;
+        }
+
         // Manual testing showed us that scores < 0.8 tended to be false
         // positives, even if they were the highest scores.
         if (score > 0.8) {

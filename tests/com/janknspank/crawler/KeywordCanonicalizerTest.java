@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.nlp.KeywordCanonicalizer;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 
 public class KeywordCanonicalizerTest {
@@ -43,7 +44,8 @@ public class KeywordCanonicalizerTest {
             .setStrength(1)
             .setType(EntityType.ORGANIZATION.toString())
             .build());
-    Iterable<ArticleKeyword> canonicalizedKeywords = KeywordCanonicalizer.canonicalize(keywords);
+    Iterable<ArticleKeyword> canonicalizedKeywords =
+        KeywordCanonicalizer.canonicalize(keywords, ImmutableList.<ArticleFeature>of());
     assertEquals(2, Iterables.size(canonicalizedKeywords));
 
     Map<String, ArticleKeyword> keywordMap = Maps.newHashMap();

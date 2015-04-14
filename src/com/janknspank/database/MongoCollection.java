@@ -45,6 +45,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.WriteResult;
 
 /**
  * An implementation of the Collection abstract class that enables gets,
@@ -389,9 +390,8 @@ public class MongoCollection<T extends Message> extends Collection<T> {
       return rows;
     } else {
       BasicDBObject queryObject = getQueryObject(options);
-      return getDatabase().getCollection(this.getTableName())
-          .remove(queryObject)
-          .getN();
+      WriteResult result = getDatabase().getCollection(this.getTableName()).remove(queryObject);
+      return result.getN();
     }
   }
 

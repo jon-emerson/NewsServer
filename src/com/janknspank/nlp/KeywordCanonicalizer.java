@@ -21,9 +21,11 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.Entities;
 import com.janknspank.bizness.EntityType;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.KeywordToEntityId;
@@ -114,6 +116,22 @@ public class KeywordCanonicalizer {
   }
 
   /**
+   * Returns true if the passed features indicate that the article in question
+   * is related to the Internet or Software.  In which case, we let clickbait
+   * articles (Facebook, Twitter, etc) through.
+   * NOTE(jonemerson): We probably want to build this logic to be smarter once
+   * we learn of clickbait keywords that are non-tech related.
+   */
+  private static boolean isInternetArticle(Iterable<ArticleFeature> features) {
+    for (ArticleFeature feature : features) {
+      if (FeatureId.fromId(feature.getFeatureId()) == FeatureId.INTERNET
+          || FeatureId.fromId(feature.getFeatureId()) == FeatureId.SOFTWARE) {
+        return true;
+      }
+    }
+    return false;
+  }
+  /**
    * Removes what are essentially dupes in the passed list of ArticleKeywords,
    * by making shorter versions of keywords count as instances of their longer
    * version, then removing said shorter versions.
@@ -122,12 +140,30 @@ public class KeywordCanonicalizer {
    * would return only "Jorge Smith" and "I.B.M.", with the strengths adjusted
    * accordingly.
    */
-  public static Iterable<ArticleKeyword> canonicalize(Iterable<ArticleKeyword> keywords) {
-    // Filter illegal keywords.
+  public static Iterable<ArticleKeyword> canonicalize(
+      Iterable<ArticleKeyword> keywords,
+      Iterable<ArticleFeature> articleFeatures) {
+    final boolean isInternetArticle = isInternetArticle(articleFeatures);
+
+    // Filter illegal + clickbait keywords.
     keywords = Iterables.filter(keywords, new Predicate<ArticleKeyword>() {
       @Override
       public boolean apply(ArticleKeyword keyword) {
-        return KeywordUtils.isValidKeyword(keyword.getKeyword());
+        if (!KeywordUtils.isValidKeyword(keyword.getKeyword())) {
+          return false;
+        }
+
+        // Prevent click-bait: Only allow known clickbait entities through if
+        // the keyword if they're in the article's title or first paragraph and
+        // the article is topically relevant to their industry.
+        Matcher clickbaitMatcher =
+            KEYWORD_BAIT_ENTITY_PATTERN.matcher(keyword.getKeyword().toLowerCase());
+        if (clickbaitMatcher.matches()
+            && (keyword.getParagraphNumber() > 1 || !isInternetArticle)) {
+          return false;
+        }
+
+        return true;
       }
     });
 
@@ -241,7 +277,7 @@ public class KeywordCanonicalizer {
    * side and the right side of the block are recursively checked, to see what
    * entities we can possibly find anywhere in the block.
    * NOTE(jonemerson): Yaaa this is expensive, which is why we only do it for
-   * titles!! :)
+   * titles and the first paragraph!! :)
    */
   public static Iterable<ArticleKeyword> getArticleKeywordsFromTextInternal(
       String block,
@@ -253,21 +289,10 @@ public class KeywordCanonicalizer {
       Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
       String entityKeyword = entity.hasShortName() ? entity.getShortName() : entity.getKeyword();
 
-      // Prevent click-bait: Only allow known clickbait entities through if the
-      // keyword if they're in the article's title.
-      Matcher clickbaitMatcher = KEYWORD_BAIT_ENTITY_PATTERN.matcher(entityKeyword.toLowerCase());
-      if (clickbaitMatcher.matches() && paragraphNumber != 0) {
-        return Collections.emptyList();
-      }
-
-      int strength = 5;
-      if (!clickbaitMatcher.find()) {
-        strength = (paragraphNumber == 0)
-            ? STRENGTH_FOR_TITLE_MATCH : STRENGTH_FOR_FIRST_PARAGRAPH_MATCH;
-      }
       return ImmutableList.of(ArticleKeyword.newBuilder()
           .setKeyword(entityKeyword)
-          .setStrength(strength) // Title match.
+          .setStrength((paragraphNumber == 0)
+              ? STRENGTH_FOR_TITLE_MATCH : STRENGTH_FOR_FIRST_PARAGRAPH_MATCH)
           .setType(entity.getType())
           .setSource(ArticleKeyword.Source.TITLE)
           .setEntity(entity)

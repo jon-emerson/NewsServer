@@ -10,7 +10,7 @@ public class GuidFactory {
    * object ID implementation used here, the return value is guaranteed to be
    * 24 hex characters.
    */
-  public static String generate() {
+  public static synchronized String generate() {
     return ObjectId.get().toHexString();
   }
 }
