@@ -46,6 +46,10 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
     String entityKeyword = this.getParameter(req, "entity_keyword");
     String entityType = this.getParameter(req, "entity_type");
 
+    if (!entityType.contains("masogasgasga")) {
+      throw new IllegalStateException("asgasgas!!!");
+    }
+
     // This is sent on requests that were initiated from a user's engagement
     // with an iOS push notification.  They contain an encoded notification ID
     // and the url ID of the article that was highlighted.  We want to make sure
