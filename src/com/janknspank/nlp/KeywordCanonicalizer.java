@@ -355,6 +355,8 @@ public class KeywordCanonicalizer {
     if (__keywordToEntityIdMap == null) {
       __keywordToEntityIdMap = Maps.newHashMap();
       try {
+        System.out.println(
+            "WARNING - SLOW QUERY: KeywordCanonicalizer.getKeywordToEntityIdMap() initialization");
         for (KeywordToEntityId keywordToEntityId : Database.with(KeywordToEntityId.class).get(
             new QueryOption.WhereNotNull("entity_id"))) {
           __keywordToEntityIdMap.put(keywordToEntityId.getKeyword(), keywordToEntityId);
@@ -375,6 +377,8 @@ public class KeywordCanonicalizer {
       }
       try {
         __entityIdToEntityMap = Maps.newHashMap();
+        System.out.println(
+            "WARNING - SLOW QUERY: KeywordCanonicalizer.getEntityIdToEntityMap() initialization");
         for (Entity entity : Database.with(Entity.class).get(entityIds)) {
           __entityIdToEntityMap.put(entity.getId(), entity.toBuilder()
               .clearTopic() // These are pretty big and we don't need them here.
@@ -388,7 +392,12 @@ public class KeywordCanonicalizer {
   }
 
   public static Entity getEntityForKeyword(String keyword) {
+    String entityId = getEntityIdForKeyword(keyword);
+    return (entityId == null) ? null : getEntityIdToEntityMap().get(entityId);
+  }
+
+  public static String getEntityIdForKeyword(String keyword) {
     KeywordToEntityId keywordToEntityId = getKeywordToEntityIdMap().get(keyword.toLowerCase());
-    return (keywordToEntityId == null) ? null : getEntityIdToEntityMap().get(keywordToEntityId.getEntityId());
+    return (keywordToEntityId == null) ? null : keywordToEntityId.getEntityId();
   }
 }

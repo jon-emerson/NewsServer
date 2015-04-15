@@ -258,20 +258,20 @@ public class FacebookLoginHandler {
     Set<String> companyNames = getCompanyNames(fbUser);
     System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 0: "
         + (System.currentTimeMillis() - startTime) + "ms");
-    Map<String, Entity> companyEntityMap = Maps.newHashMap();
+    Map<String, String> companyEntityIdMap = Maps.newHashMap();
     for (String companyName : companyNames) {
-      Entity entity = KeywordCanonicalizer.getEntityForKeyword(companyName);
-      if (entity != null) {
-        companyEntityMap.put(companyName.toLowerCase(), entity);
+      String entityId = KeywordCanonicalizer.getEntityIdForKeyword(companyName);
+      if (entityId != null) {
+        companyEntityIdMap.put(companyName.toLowerCase(), entityId);
       }
     }
     System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 1: "
         + (System.currentTimeMillis() - startTime) + "ms");
     for (Entity entity : Entities.getEntitiesByKeyword(
-        Sets.difference(companyNames, ImmutableSet.copyOf(companyEntityMap.keySet())))) {
+        Sets.difference(companyNames, ImmutableSet.copyOf(companyEntityIdMap.keySet())))) {
       // Here we're fetching Entities for any companies for which there weren't
       // KeywordToEntityId table rows for.
-      companyEntityMap.put(entity.getKeyword().toLowerCase(), entity);
+      companyEntityIdMap.put(entity.getKeyword().toLowerCase(), entity.getId());
     }
     System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 2: "
         + (System.currentTimeMillis() - startTime) + "ms");
@@ -283,19 +283,15 @@ public class FacebookLoginHandler {
           .setId(GuidFactory.generate())
           .setType(InterestType.ENTITY)
           .setSource(InterestSource.FACEBOOK_PROFILE)
-          .setCreateTime(System.currentTimeMillis());
-      if (companyEntityMap.containsKey(companyName.toLowerCase())) {
-        companyInterestBuilder.setEntity(companyEntityMap.get(companyName.toLowerCase())
-            .toBuilder()
-            .clearTopic());
-      } else {
-        companyInterestBuilder.setEntity(Entity.newBuilder()
-            .setId(GuidFactory.generate())
-            .setKeyword(companyName)
-            .setType(EntityType.COMPANY.toString())
-            .setSource(Source.USER)
-            .build());
-      }
+          .setCreateTime(System.currentTimeMillis())
+          .setEntity(Entity.newBuilder()
+              .setId(companyEntityIdMap.containsKey(companyName.toLowerCase())
+                  ? companyEntityIdMap.get(companyName.toLowerCase()) : GuidFactory.generate())
+              .setKeyword(companyName)
+              .setType(EntityType.COMPANY.toString())
+              .setSource(companyEntityIdMap.containsKey(companyName.toLowerCase())
+                  ? Source.DBPEDIA_INSTANCE_TYPE : Source.USER)
+              .build());
       interests.add(companyInterestBuilder.build());
     }
     System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 3: "

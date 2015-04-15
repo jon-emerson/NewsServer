@@ -25,6 +25,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
+import com.janknspank.proto.CoreProto.Entity.Source;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
@@ -211,7 +212,7 @@ public class Articles {
           break;
 
         case ENTITY:
-          if (interest.getEntity().hasId()) {
+          if (interest.getEntity().hasId() && interest.getEntity().getSource() != Source.USER) {
             entityIds.add(interest.getEntity().getId());
           } else {
             companyNames.add(interest.getEntity().getKeyword());
