@@ -92,6 +92,7 @@ public class FacebookLoginHandler {
   private static User getExistingUser(
       com.restfb.types.User fbUser, String fbAccessToken)
       throws DatabaseSchemaException {
+    long startTime = System.currentTimeMillis();
     ListenableFuture<Iterable<User>> userByFacebookIdFuture =
         Database.with(User.class).getFuture(
             new QueryOption.WhereEquals("facebook_id", fbUser.getId()));
@@ -106,6 +107,8 @@ public class FacebookLoginHandler {
     } catch (InterruptedException | ExecutionException e) {
       e.printStackTrace();
     }
+    System.out.println("FacebookLoginHandler.getExistingUser: "
+        + (System.currentTimeMillis() - startTime) + "ms");
     return null;
   }
 
@@ -305,7 +308,11 @@ public class FacebookLoginHandler {
     long startTime = System.currentTimeMillis();
     User user;
     User existingUser = getExistingUser(fbUser, fbAccessToken);
+    System.out.println("FacebookLoginHandler.login, checkpoint 0: "
+        + (System.currentTimeMillis() - startTime) + "ms");
     Iterable<Interest> facebookProfileInterests = getFacebookProfileInterests(fbUser);
+    System.out.println("FacebookLoginHandler.login, checkpoint 1: "
+        + (System.currentTimeMillis() - startTime) + "ms");
     if (existingUser != null) {
       Iterable<Interest> existingInterestsToRetain = Iterables.filter(
           existingUser.getInterestList(),
@@ -319,6 +326,8 @@ public class FacebookLoginHandler {
                   && interest.getSource() != InterestSource.LINKED_IN_PROFILE;
             }
           });
+      System.out.println("FacebookLoginHandler.login, checkpoint 2: "
+          + (System.currentTimeMillis() - startTime) + "ms");
       user = existingUser.toBuilder()
           .clearInterest()
           .addAllInterest(existingInterestsToRetain)
@@ -330,7 +339,11 @@ public class FacebookLoginHandler {
               ? fbUser.getEmail()
               : existingUser.getEmail())
           .build();
+      System.out.println("FacebookLoginHandler.login, checkpoint 3: "
+          + (System.currentTimeMillis() - startTime) + "ms");
       Database.update(user);
+      System.out.println("FacebookLoginHandler.login, checkpoint 4: "
+          + (System.currentTimeMillis() - startTime) + "ms");
     } else {
       user = getNewUserBuilder(fbUser, fbAccessToken)
           .addAllInterest(facebookProfileInterests)
