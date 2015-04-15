@@ -7,10 +7,12 @@ import java.io.StringReader;
 
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.nlp.KeywordFinder;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
 
@@ -60,7 +62,8 @@ public class KeywordFinderTest {
             + "</p></div>"
             + "</body</html>"));
     Iterable<ArticleKeyword> keywords =
-        KEYWORD_FINDER.findKeywords("urlId", "Article title", documentNode);
+        KEYWORD_FINDER.findKeywords(
+            "urlId", "Article title", documentNode, ImmutableList.<ArticleFeature>of());
 
     // While these are in the <meta> tag, they do not exist in the document,
     // so we filter them.

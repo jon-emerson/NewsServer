@@ -16,7 +16,6 @@ import org.apache.http.impl.client.HttpClients;
 import com.google.common.io.CharStreams;
 import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.ParserException;
-import com.janknspank.proto.CoreProto.Url;
 
 /**
  * Central point for fetching Readers of URLs.
@@ -34,10 +33,6 @@ public class Fetcher {
       .build();
 
   public Fetcher() {
-  }
-
-  public FetchResponse fetch(Url url) throws FetchException {
-    return fetch(url.getUrl());
   }
 
   public FetchResponse fetch(String urlString) throws FetchException {

@@ -34,16 +34,14 @@ import com.janknspank.proto.UserProto.UserAction;
 import com.janknspank.proto.UserProto.UserAction.ActionType;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private static int MAX_ITERATIONS = 50000;
+  private static int MAX_ITERATIONS = 40000;
 
   private double lowestError = 1.0;
   private Double[] lowestErrorNetworkWeights;
+  private int lowestErrorIteration = 0;
 
   @SuppressWarnings("unused")
   private Double[] lastNetworkWeights;
-
-  @SuppressWarnings("unused")
-  private double lowestErrorIteration = 0;
 
   private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
     NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(
@@ -60,7 +58,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     System.out.println("Training neural network...");
     neuralNetwork.learn(trainingSet);
-    System.out.println("Trained");
+    System.out.println("Trained - iteration " + lowestErrorIteration + " used w/ "
+        + lowestError + " error rate");
 
     // NOTE(jonemerson): We used to do this, but I found that about 30% of the
     // time, the neural network would come out ranking crappy articles highly.
@@ -73,7 +72,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     // Print correlation of each input node to the output.
     for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
-      double [] isolatedInput = NeuralNetworkScorer.generateIsolatedInputNodes(i);
+      double[] isolatedInput = NeuralNetworkScorer.generateIsolatedInputNodes(i);
       neuralNetwork.setInput(isolatedInput);
       neuralNetwork.calculate();
       System.out.println("Input node " + i + " correlation to output: " 
@@ -185,7 +184,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
           double[] input = Doubles.toArray(
               NeuralNetworkScorer.generateInputNodes(
                   modifiedUser, articleMap.get(userAction.getUrl())).values());
-          double[] output = new double[] { 0.2 };
+          double[] output = new double[] { 0.0 };
           dataSetRows.add(new DataSetRow(input, output));
         }
       }
@@ -260,7 +259,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
     lastNetworkWeights = bp.getNeuralNetwork().getWeights();
 
-    if (error < lowestError) {
+    if (error < lowestError && bp.getCurrentIteration() > 5000) {
       lowestError = error;
       lowestErrorIteration = bp.getCurrentIteration();
       lowestErrorNetworkWeights = bp.getNeuralNetwork().getWeights();

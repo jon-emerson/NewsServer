@@ -23,24 +23,36 @@ public class FacebookLoginServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws BiznessException, RequestException, DatabaseSchemaException, DatabaseRequestException {
+    long startTime = System.currentTimeMillis();
     String fbAccessToken = getRequiredParameter(req, "fb_access_token");
     String fbUserId = getRequiredParameter(req, "fb_user_id");
 
     com.restfb.types.User fbUser;
     User user;
     try {
-      fbUser = FacebookLoginHandler.getFacebookUser(fbAccessToken, fbUserId);
+      fbUser = FacebookLoginHandler.getFacebookUser(fbAccessToken);
+      if (!fbUser.getId().equals(fbUserId)) {
+        throw new RequestException("fb_access_token is not for fb_user_id");
+      }
+      System.out.println("FacebookLoginServlet.doPostInternal, checkpoint 1: "
+          + (System.currentTimeMillis() - startTime) + "ms so far");
       user = FacebookLoginHandler.login(fbUser, fbAccessToken);
     } catch (SocialException e) {
       throw new BiznessException("Could not read Facebook properties file", e);
     }
+    System.out.println("FacebookLoginServlet.doPostInternal, checkpoint 2: "
+        + (System.currentTimeMillis() - startTime) + "ms so far");
 
     Session session = Sessions.createFromFacebookUser(user, fbUser);
+    System.out.println("FacebookLoginServlet.doPostInternal, checkpoint 3: "
+        + (System.currentTimeMillis() - startTime) + "ms so far");
 
     // Create the response.
     JSONObject response = this.createSuccessResponse();
     response.put("user", new UserHelper(user).getUserJson());
     response.put("session", Serializer.toJSON(session));
+    System.out.println("FacebookLoginServlet.doPostInternal, checkpoint 4: "
+        + (System.currentTimeMillis() - startTime) + "ms so far");
 
     // To help with client latency, return the articles for the user's home
     // screen in this response.
@@ -50,6 +62,8 @@ public class FacebookLoginServlet extends StandardServlet {
         GetArticlesServlet.NUM_RESULTS);
     response.put("articles", ArticleSerializer.serialize(articles, user,
         false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
+    System.out.println("FacebookLoginServlet.doPostInternal, checkpoint 5: "
+        + (System.currentTimeMillis() - startTime) + "ms so far");
 
     return response;
   }

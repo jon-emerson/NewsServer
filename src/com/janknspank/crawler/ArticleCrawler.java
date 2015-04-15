@@ -1,5 +1,6 @@
 package com.janknspank.crawler;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,14 +10,17 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -87,8 +91,14 @@ public class ArticleCrawler implements Callable<Void> {
 
     for (String articleUrl : articleUrls) {
       if (existingArticles.containsKey(articleUrl)) {
-        // Already crawled.
-        continue;
+        if (!existingArticleUrls.containsKey(articleUrl)) {
+          // Clean-up: If the URL was deleted, then delete the article too so it
+          // can be recrawled below.
+          Database.delete(existingArticles.get(articleUrl));
+        } else {
+          // Already crawled, everything looks good.  Let's go to the next URL.
+          continue;
+        }
       }
 
       // Get a URL object for the article.  If one exists, use it.  If one
@@ -234,19 +244,36 @@ public class ArticleCrawler implements Callable<Void> {
    * URLs, putting the resulting Urls and Articles into the database.  The
    * retrieved Articles are returned, mapped to their original URLs.
    */
-  private static Map<String, Article> getNewArticles(Iterable<String> urlStrings, boolean retain)
+  private static Map<String, Article> getNewArticles(
+      final Iterable<String> urlStrings, final boolean retain)
       throws DatabaseRequestException, DatabaseSchemaException, FetchException, ParserException,
           RequiredFieldException, BiznessException {
     Iterable<Url> urls = Urls.put(urlStrings, "");
-    List<Article> articles = Lists.newArrayList();
-    for (Url url : urls) {
-      Article article = crawl(url, retain);
-      if (article == null) {
-        throw new BiznessException("URL is not an Article: " + url.getUrl());
-      }
-      articles.add(article);
+    final ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+    final Map<String, Future<Article>> articleFutures = Maps.newHashMap();
+    for (final Url url : urls) {
+      Callable<Article> articleCallable = new Callable<Article>() {
+        @Override
+        public Article call() throws Exception {
+          Article article = crawl(url, retain);
+          if (article == null) {
+            throw new BiznessException("URL is not an Article: " + url.getUrl());
+          }
+          return article;
+        }
+      };
+      articleFutures.put(url.getUrl(), executor.submit(articleCallable));
     }
-    return createArticleMap(articles);
+    executor.shutdown();
+    final Map<String, Article> articleMap = Maps.newHashMap();
+    for (Map.Entry<String, Future<Article>> entry : articleFutures.entrySet()) {
+      try {
+        articleMap.put(entry.getKey(), entry.getValue().get());
+      } catch (InterruptedException | ExecutionException e) {
+        throw new BiznessException("Error fetching Article: " + e.getMessage(), e);
+      }
+    }
+    return articleMap;
   }
 
   /**

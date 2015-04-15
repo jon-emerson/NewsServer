@@ -9,17 +9,14 @@ good_url: "http://www.archdaily.com/139540/practice-2-0-dear-architectureschool-
 good_url: "http://www.archdaily.com/613896/5-reasons-architects-should-learn-to-code/"
 good_url: "http://archsmarter.com/learn-to-code-resources/"
 good_url: "http://www.archdaily.com/200761/reframing-the-stats-about-architecture/"
-good_url: "http://www.archdaily.com/tag/practice-2-0/"
+good_url: "http://www.archdaily.com/244251/practice-2-0-the-elephant-in-the-room/"
 good_url: "http://www.urdesign.it/index.php/2013/07/18/courtesy-of-nature-by-johan-selbing-and-anouk-vogel-at-2013-international-garden-festival/"
 good_url: "http://www.archdaily.com/32441/national-tourist-route-trollstigen-rra/"
 good_url: "http://www.spoon-tamago.com/2012/12/13/optical-glass-house-hiroshi-nakamura/"
-good_url: "http://www.dwell.com/outdoor/slideshow/powell-st-parklet"
-good_url: "http://www.archdaily.com/tag/alberto-kalach/"
-good_url: "http://www.designboom.com/architecture/tatiana-bilbao-studio-visit-interview/"
-good_url: "http://www.archdaily.com/tag/tatiana-bilbao/"
+good_url: "http://www.archdaily.com/583526/tower-41-alberto-kalach/"
+good_url: "http://www.archdaily.com/578245/the-mexican-moment-the-rise-of-architecture-s-latest-design-capital/"
 good_url: "http://www.huffingtonpost.com/patricia-zohn/culturezohn-off-the-chuff-with-tatiana-bilbao-at-the-landmark-latin-american-architecture-show-at-moma_b_6993138.html"
-good_url: "http://www.archdaily.com/444493/redefining-context-with-tatiana-bilbao/526ef143e8e44ee8e1000650_redefining-context-with-tatiana-bilbao_iwanbaan-jpg/"
-good_url: "http://www.dwell.com/interviews/slideshow/architect-matthew-hufft"
+good_url: "http://www.dwell.com/interviews/article/architect-matthew-hufft"
 good_url: "http://www.residentialarchitect.com/practice/firm-profiles/15-young-firms-to-watch-hufft-projects-kansas-city-mo_o"
 good_url: "http://www.interiordesign.net/articles/detail/36703-10-questions-with-matthew-hufft/"
 good_url: "http://www.archdaily.com/51664/handmade-school-anna-heringer-eike-roswag/"
@@ -28,6 +25,16 @@ good_url: "http://www.slate.com/blogs/the_eye/2014/01/24/camp_h_emily_pilloton_s
 good_url: "http://www.nytimes.com/2015/01/18/opinion/sunday/why-some-teams-are-smarter-than-others.html?_r=1"
 good_url: "https://placesjournal.org/article/women-architecture-and-the-politics-of-family-leave/"
 good_url: "http://archinect.com/news/article/118906207/architects-get-ready-for-the-holographic-design-process-microsoft-just-unveiled-its-hololens-headset"
+good_url: "http://www.archdaily.com/444493/redefining-context-with-tatiana-bilbao/"
+good_url: "http://www.archdaily.com/41517/the-universe-house-tatiana-bilbao-by-iwan-baan/"
+good_url: "http://mashable.com/2015/04/10/basics-managing-up/"
+bad_url: "http://www.bbc.co.uk/news/world-latin-america-32263503"
+bad_url: "http://www.bbc.co.uk/news/world-latin-america-32246115"
+bad_url: "http://www.forbes.com/sites/andersonantunes/2015/04/11/mark-zuckerberg-meets-with-brazils-president-at-the-7th-summit-of-the-americas-in-panama/"
+bad_url: "http://www.theatlantic.com/technology/archive/2015/04/how-to-say-yes-by-not-saying-yes/390129/"
+bad_url: "http://www.bbc.co.uk/news/world-us-canada-32252374"
+bad_url: "http://www.theatlantic.com/international/archive/2015/04/more-than-a-handshake/390246/"
+bad_url: "http://www.telegraph.co.uk/news/worldnews/centralamericaandthecaribbean/cuba/11526668/US-and-Cuba-hold-highest-level-meeting-in-more-than-50-years.html"
 bad_url: "http://techcrunch.com/2015/04/10/some-apple-watch-pre-orders-slip-to-june-shipping/"
 bad_url: "http://techcrunch.com/2015/04/10/godaddy-acquires-elto-marketplace-for-web-pros/"
 bad_url: "http://techcrunch.com/2015/04/10/amazon-quietly-acquired-shoefitr-to-improve-how-it-sells-footwear-online/"
@@ -80,10 +87,19 @@ bad_url: "http://mashable.com/2015/04/09/new-emoji-celebrities/"
 bad_url: "http://mashable.com/2015/04/09/dwayne-rock-johnson-diet/"
 bad_url: "http://mashable.com/2015/04/09/deer-trapped-in-suburbia/"
 bad_url: "http://mashable.com/2015/04/09/mom-gender-reveal/"
+address_book_contact_name: "Matthew Hufft"
+address_book_contact_name: "Tatiana Bilbao"
+address_book_contact_name: "Emily Pilloton"
 interest {
   id: "55036fcfe4b05c7065a87736"
   type: INDUSTRY
   source: USER
   create_time: 1426288591472
   industry_code: 10517 # Architecture and Planning
+}
+interest {
+  id: "55035cf0e4b097661cf660ca"
+  type: ADDRESS_BOOK_CONTACTS
+  source: USER
+  create_time: 1426283760539
 }

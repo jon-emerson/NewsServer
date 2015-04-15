@@ -1,14 +1,20 @@
 package com.janknspank.rank;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.nnet.learning.BackPropagation;
 
 import com.google.api.client.util.Maps;
 import com.google.common.primitives.Doubles;
+import com.janknspank.bizness.Urls;
+import com.janknspank.bizness.Users;
 import com.janknspank.common.Asserts;
+import com.janknspank.crawler.Interpreter;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.InterpretedData;
+import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
@@ -102,5 +108,30 @@ public final class NeuralNetworkScorer extends Scorer {
     scorer.neuralNetwork.setInput(Doubles.toArray(inputNodes.values()));
     scorer.neuralNetwork.calculate();
     return scorer.neuralNetwork.getOutput()[0];
+  }
+
+  /**
+   * Usage:
+   * bin/score.sh jon@jonemerson.net http://path/to/article
+   */
+  public static void main(String args[]) throws Exception {
+    User user = Users.getByEmail(args[0]);
+    if (user == null) {
+      throw new RuntimeException("User not found: " + args[0]);
+    }
+
+    String urlString = args[1];
+    Url url = Urls.getByUrl(urlString);
+    if (url == null) {
+      url = Urls.put(urlString, "");
+    }
+    InterpretedData data = Interpreter.interpret(url);
+    System.out.println(data.getArticle());
+
+    LinkedHashMap<String, Double> inputNodes = generateInputNodes(user, data.getArticle());
+    for (Map.Entry<String, Double> entry : inputNodes.entrySet()) {
+      System.out.println("Node " + entry.getKey() + ": " + entry.getValue());
+    }
+    System.out.println("Score: " + getScore(inputNodes));
   }
 }
