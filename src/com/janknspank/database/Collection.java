@@ -259,10 +259,10 @@ public abstract class Collection<T extends Message> {
         Iterable<T> result = get(options);
         String s = "(unknown)";
         if (Collection.this instanceof MongoCollection) {
-          try {
+       //   try {
             s = Collection.this.getTableName() + ": "
                 + ((MongoCollection<T>) Collection.this).getQueryObject(options).toString();
-          } catch (Throwable e) {}
+      //    } catch (Throwable e) {}
         }
         System.out.println("Query " + queryId + " completed in "
             + (System.currentTimeMillis() - startTime) + ": " + s);
