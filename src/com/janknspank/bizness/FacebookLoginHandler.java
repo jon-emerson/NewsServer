@@ -250,10 +250,14 @@ public class FacebookLoginHandler {
    */
   private static Iterable<Interest> getFacebookProfileInterests(com.restfb.types.User fbUser)
       throws DatabaseSchemaException {
+    long startTime = System.currentTimeMillis();
+
     // Create a Map of company name to existing Entity objects, using either
     // our very-helpful-fuzzy-logic-friendly KeywordToEntityId table, or by
     // hoping the user happened to type an Entity we know exactly about.
     Set<String> companyNames = getCompanyNames(fbUser);
+    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 0: "
+        + (System.currentTimeMillis() - startTime) + "ms");
     Map<String, Entity> companyEntityMap = Maps.newHashMap();
     for (String companyName : companyNames) {
       Entity entity = KeywordCanonicalizer.getEntityForKeyword(companyName);
@@ -261,12 +265,16 @@ public class FacebookLoginHandler {
         companyEntityMap.put(companyName.toLowerCase(), entity);
       }
     }
+    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 1: "
+        + (System.currentTimeMillis() - startTime) + "ms");
     for (Entity entity : Entities.getEntitiesByKeyword(
         Sets.difference(companyNames, ImmutableSet.copyOf(companyEntityMap.keySet())))) {
       // Here we're fetching Entities for any companies for which there weren't
       // KeywordToEntityId table rows for.
       companyEntityMap.put(entity.getKeyword().toLowerCase(), entity);
     }
+    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 2: "
+        + (System.currentTimeMillis() - startTime) + "ms");
 
     // Start building interests.
     List<Interest> interests = Lists.newArrayList();
@@ -290,6 +298,8 @@ public class FacebookLoginHandler {
       }
       interests.add(companyInterestBuilder.build());
     }
+    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 3: "
+        + (System.currentTimeMillis() - startTime) + "ms");
     for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
       interests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
@@ -299,6 +309,8 @@ public class FacebookLoginHandler {
           .setCreateTime(System.currentTimeMillis())
           .build());
     }
+    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 4: "
+        + (System.currentTimeMillis() - startTime) + "ms");
     return interests;
   }
 
