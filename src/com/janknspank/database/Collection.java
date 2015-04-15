@@ -265,7 +265,7 @@ public abstract class Collection<T extends Message> {
           } catch (Throwable e) {}
         }
         System.out.println("Query " + queryId + " completed in "
-            + (System.currentTimeMillis() - startTime) + ": " + s);
+            + (System.currentTimeMillis() - startTime) + "ms: " + s);
         return result;
       }
     });

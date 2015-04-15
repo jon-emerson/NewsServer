@@ -302,6 +302,7 @@ public class FacebookLoginHandler {
   public static User login(com.restfb.types.User fbUser, String fbAccessToken)
       throws RequestException, SocialException, DatabaseSchemaException,
       DatabaseRequestException {
+    long startTime = System.currentTimeMillis();
     User user;
     User existingUser = getExistingUser(fbUser, fbAccessToken);
     Iterable<Interest> facebookProfileInterests = getFacebookProfileInterests(fbUser);
@@ -337,6 +338,8 @@ public class FacebookLoginHandler {
       Database.insert(user);
     }
 
+    System.out.println("FacebookLoginHandler.login completed in "
+        + (System.currentTimeMillis() - startTime) + "ms");
     return user;
   }
 
