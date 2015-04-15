@@ -1,0 +1,74 @@
+root_domain: "nrn.com"
+start_url: "http://nrn.com/news"
+start_url: "http://nrn.com/segments-0"
+paragraph_selector: ".article-body p"
+paragraph_selector: ".blog-body p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[^\\/]+$"
+}
+path_blacklist {
+  needle: "/operations/"
+}
+path_blacklist {
+  needle: "/news/"
+}
+path_blacklist {
+  needle: "/segments/"
+}
+path_blacklist {
+  needle: "/menu/"
+}
+path_blacklist {
+  needle: "/marketing/"
+}
+path_blacklist {
+  needle: "/finance/"
+}
+path_blacklist {
+  needle: "/category/"
+}
+path_blacklist {
+  needle: "/industry-data/"
+}
+path_blacklist {
+  needle: "/education/"
+}
+path_blacklist {
+  needle: "/blogger/"
+}
+path_blacklist {
+  needle: "/device/"
+}
+path_blacklist {
+  needle: "/user/"
+}
+path_blacklist {
+  needle: "/nrn-device/mobile"
+  location: EQUALS
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://nrn.com/international/johnny-rockets-open-100-units-china"
+    article_url: "http://nrn.com/casual-dining/ruby-tuesday-emphasizing-value-variety-families"
+    article_url: "http://nrn.com/back-office-solutions/labor-management-all-about-labor-optimization"
+    article_url: "http://nrn.com/corporate-news/ruby-tuesday-reduces-loss-3q"
+    article_url: "http://nrn.com/technology/papa-john-s-rolls-out-digital-tool-split-bills"
+    article_url: "http://nrn.com/blog/can-mcdonalds-go-premium"
+    article_url: "http://nrn.com/technology/dunkin-donuts-debuts-mobile-payment-google-wallet"
+    article_url: "http://nrn.com/people/potbelly-names-michael-coyne-cfo"
+    article_url: "http://nrn.com/corporate-news/habit-burger-expects-1q-sales-rise-126"
+    non_article_url: "http://nrn.com/segments-0"
+    non_article_url: "http://nrn.com/news"
+    non_article_url: "http://nrn.com/menu"
+    non_article_url: "http://nrn.com/menu/food-trends"
+    non_article_url: "http://nrn.com/menu/nrn-device/mobile"
+    non_article_url: "http://nrn.com/segments/quick-service"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10556 # Restaurants
+  boost: 10
+}
