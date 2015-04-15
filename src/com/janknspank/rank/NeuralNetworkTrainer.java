@@ -34,7 +34,8 @@ import com.janknspank.proto.UserProto.UserAction;
 import com.janknspank.proto.UserProto.UserAction.ActionType;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private static int MAX_ITERATIONS = 40000;
+  private static final int MAX_ITERATIONS = 40000;
+  private static final boolean IN_DELETE_MODE = false;
 
   private double lowestError = 1.0;
   private Double[] lowestErrorNetworkWeights;
@@ -124,10 +125,15 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       System.out.println("For " + user.getEmail() + ", " + Iterables.size(userActions)
           + " VOTE_UP user actions found");
       Set<String> urlsToCrawl = Sets.newHashSet();
+
       for (UserAction userAction : userActions) {
         if (!urlIdsToIgnore.contains(userAction.getUrlId())) {
           urlsToCrawl.add(userAction.getUrl());
         }
+      }
+      if (IN_DELETE_MODE) {
+        Database.with(Article.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
+        continue;
       }
       Map<String, Article> articleMap =
           ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
@@ -173,6 +179,10 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       for (UserAction userAction : userActions) {
         urlsToCrawl.add(userAction.getUrl());
       }
+      if (IN_DELETE_MODE) {
+        Database.with(Article.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
+        continue;
+      }
       Map<String, Article> articleMap =
           ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
       for (UserAction userAction : userActions) {
@@ -206,6 +216,11 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       System.out.println("Grabbing articles for " + persona.getEmail() + " ...");
       User user = Personas.convertToUser(persona);
 
+      if (IN_DELETE_MODE) {
+        Database.with(Article.class).delete(new QueryOption.WhereEquals("url",
+            Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList())));
+        continue;
+      }
       Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(
           Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList()), true /* retain */);
 

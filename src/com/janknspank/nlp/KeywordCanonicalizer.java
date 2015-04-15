@@ -154,12 +154,12 @@ public class KeywordCanonicalizer {
         }
 
         // Prevent click-bait: Only allow known clickbait entities through if
-        // the keyword if they're in the article's title or first paragraph and
-        // the article is topically relevant to their industry.
+        // the keyword if they're in the article's title and the article is
+        // topically relevant to their industry.
         Matcher clickbaitMatcher =
             KEYWORD_BAIT_ENTITY_PATTERN.matcher(keyword.getKeyword().toLowerCase());
         if (clickbaitMatcher.matches()
-            && (keyword.getParagraphNumber() > 1 || !isInternetArticle)) {
+            && (keyword.getParagraphNumber() != 0 || !isInternetArticle)) {
           return false;
         }
 
