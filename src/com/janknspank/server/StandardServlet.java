@@ -13,7 +13,6 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.Asserts;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.proto.UserProto.User;
 
 @AuthenticationRequired(requestMethod = "POST")
 public abstract class StandardServlet extends NewsServlet {
@@ -36,16 +35,6 @@ public abstract class StandardServlet extends NewsServlet {
   @Override
   protected final void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    try {
-      User user = getUser(req);
-      if (user != null && "jon@jonemerson.net".equals(user.getEmail())) {
-        throw new IllegalStateException("Foo!");
-      }
-    } catch (DatabaseSchemaException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
-    }
-
     try {
       JSONObject response = doGetInternal(req, resp);
       if (response == null) {
