@@ -272,6 +272,10 @@ public class Vector {
     return documentCount;
   }
 
+  public int getUniqueWordCount() {
+    return wordFrequencyMap.size();
+  }
+
   public int getWordFrequency(String word) {
     return wordFrequencyMap.count(word);
   }

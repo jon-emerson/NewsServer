@@ -212,7 +212,13 @@ public class FacebookLoginHandler {
 
   private static TopList<FeatureId, Double> getIndustryFeatureIds(com.restfb.types.User fbUser) {
     Vector facebookUserVector = getFacebookUserVector(fbUser);
+
+    // If we have nothing to go off of, let the user choose for himself instead.
     TopList<FeatureId, Double> topIndustryFeatureIds = new TopList<>(5);
+    if (facebookUserVector.getUniqueWordCount() < 5) {
+      return topIndustryFeatureIds;
+    }
+
     for (Feature feature : Feature.getAllFeatures()) {
       if (feature.getFeatureId() == FeatureId.SPORTS
           || feature.getFeatureId() == FeatureId.LEISURE_TRAVEL_AND_TOURISM) {
