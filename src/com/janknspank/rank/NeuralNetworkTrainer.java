@@ -92,8 +92,9 @@ public class NeuralNetworkTrainer implements LearningEventListener {
         new QueryOption.WhereEquals("email", ImmutableList.of(
             "dvoytenko@yahoo.com",
             "jon@jonemerson.net",
-            "panaceaa@gmail.com",
-            "virendesai87@gmail.com")))) {
+            "panaceaa@gmail.com"
+            // "virendesai87@gmail.com"
+            )))) {
       users.put(user.getId(), user);
     }
     return users;
@@ -163,6 +164,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
    * Returns a list of DataSetRows derived from X_OUT user actions from
    * users we trust.
    */
+  @SuppressWarnings("unused")
   private static List<DataSetRow> getUserActionXOutDataSetRows()
       throws DatabaseSchemaException, BiznessException {
     Map<String, User> users = getUserActionTrustedUsers();
@@ -208,6 +210,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
    */
   private static DataSet generateTrainingDataSet()
       throws DatabaseSchemaException, BiznessException {
+    int goodUrlCount = 0;
+    int badUrlCount = 0;
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
@@ -234,12 +238,15 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 //            }
 //          });
 
-      for (String goodUrl : persona.getGoodUrlList()) {
-        if (urlArticleMap.containsKey(goodUrl)) {
-          double[] input = Doubles.toArray(
-              NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(goodUrl)).values());
-          double[] output = new double[] { 1.0 };
-          trainingSet.addRow(new DataSetRow(input, output));
+      for (int i = 0; i < 2; i++) {
+        for (String goodUrl : persona.getGoodUrlList()) {
+          if (urlArticleMap.containsKey(goodUrl)) {
+            double[] input = Doubles.toArray(
+                NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(goodUrl)).values());
+            double[] output = new double[] { 1.0 };
+            trainingSet.addRow(new DataSetRow(input, output));
+            goodUrlCount++;
+          }
         }
       }
 
@@ -249,19 +256,22 @@ public class NeuralNetworkTrainer implements LearningEventListener {
               NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(badUrl)).values());
           double[] output = new double[] { 0.0 };
           trainingSet.addRow(new DataSetRow(input, output));
+          badUrlCount++;
         }
       }
     }
 
-//    for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
-//      trainingSet.addRow(dataSetRow);
-//    }
-//
+    for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
+      trainingSet.addRow(dataSetRow);
+      goodUrlCount++;
+    }
+
 //    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
 //      trainingSet.addRow(dataSetRow);
+//      badUrlCount++;
 //    }
 
-    System.out.println("Training set compiled.");
+    System.out.println("Training set compiled. good=" + goodUrlCount + ", bad=" + badUrlCount);
     return trainingSet;
   }
 
@@ -274,7 +284,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
     lastNetworkWeights = bp.getNeuralNetwork().getWeights();
 
-    if (error < lowestError && bp.getCurrentIteration() > 5000) {
+    if (error < lowestError) {
       lowestError = error;
       lowestErrorIteration = bp.getCurrentIteration();
       lowestErrorNetworkWeights = bp.getNeuralNetwork().getWeights();
