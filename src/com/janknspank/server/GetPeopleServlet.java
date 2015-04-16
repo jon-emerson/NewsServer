@@ -26,9 +26,12 @@ public class GetPeopleServlet extends StandardServlet {
       people = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", searchString + "%"),
           new QueryOption.WhereEquals("type", "p"),
+          new QueryOption.DescendingSort("importance"),
           new QueryOption.Limit(20));
     } else {
-      people = Database.with(Entity.class).get(new QueryOption.WhereEquals("type", "p"), 
+      people = Database.with(Entity.class).get(
+          new QueryOption.WhereEquals("type", "p"),
+          new QueryOption.DescendingSort("importance"),
           new QueryOption.Limit(20));
     }
 
