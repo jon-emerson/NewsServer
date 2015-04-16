@@ -23,38 +23,11 @@
   <body>
     <script src="resources/js/home.js"></script>
     <div style="width:100%; margin:0;">
-    <!--{call .navbar data="all" /}-->
     {call .body data="all" /}
     {call .footer data="all" /}
     {call .gatracking /}
     </div>
   <body>
-{/template}
-
-/**
- * Renders the nav bar
- */
-{template .navbar}
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"></a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/about" class="btn btn-default">About</a></li>
-        <li><a href="/contact" class="btn btn-default">Contact</a></li>
-        <li><a href="/download" class="btn btn-primary">Get the App!</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
 {/template}
 
 /**
@@ -69,19 +42,15 @@
           <div class="col-sm-6 col-md-5">
             <div class="mobile-brand-wrapper">
               <div class="mobile-brand-top-line">
-                <img id="app-icon" src="resources/img/app-icon2@2x.png">
-                <h1 id="spotter-logo">Spotter</h1>
-              </div>
-              <div class="mobile-description">
-                Business news, personalized
+                <img id="mobile-app-icon" alt="Spotter Logo - Business news, personalized" src="resources/img/mobileSpotterLogo1@2x.png">
+                <br />
+                <h1 id="spotter-logo">Business news, personalized</h1>
               </div>
             </div>
             <div class="brand-wrapper">
-              <img id="app-icon" src="resources/img/app-icon2@2x.png">
-              <div class="logo-wrapper">
-                <h1 id="spotter-logo">Spotter</h1>
-                <h2>Stay on top of <b>companies, people</b>, and <b>industries</b> that matter to you</h2>
-              </div>
+              <img id="app-icon" alt="Spotter Logo - Business news, personalized" src="resources/img/spotterLogo1@2x.png">
+              <br />
+              <h1 class="tagline">Business news <span class="tagline-bottom-line">personalized</span></h1>
             </div>
             <div class="description-wrapper">
             </div>
@@ -120,7 +89,7 @@
         <div class="row">
           <div class="col-md-5 col-md-push-6 col-sm-6 col-sm-push-6">
             <h3>The fastest way to stay informed</h3>
-            <p>Spotter analyses over 20,000 articles published every day to find you the needles in the haystack.</p>
+            <p>Spotter analyses hundreds of sites every day to find you the needles in the haystack.</p>
           </div>
           <div class="col-md-3 col-md-pull-4 col-sm-3 col-sm-pull-7">
             <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
@@ -169,12 +138,12 @@
   </section>
 
   <section role="section-4-commute" id="section-4">
-    <div class="container">
+    <div class="container" id="section-4-container">
       <div class="wrapper" id="section-4-wrapper">
-        <div class="row">
+        <div class="row" id="section-4-row">
           <div class="col-md-5 col-md-offset-1 col-sm-6">
             <h3>Use Spotter on your commute</h3>
-            <p>Spotter was designed for one-handed use on the busy train. The most important features are within thumbs reach.</p>
+            <p id="section-4-p">Spotter was designed for one-handed use on the busy train. The most important features are within thumbs reach.</p>
           </div>
         </div>
       </div>
@@ -187,13 +156,13 @@
         <div class="row">
           <div class="col-md-12">
             <div class="text-center wow fadeIn" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
-              <img id="section-5-img" class="padded-img" alt="Spotter logo, be more informed in less time" src="resources/img/app-icon2@2x.png">
+              <img id="section-5-img" class="padded-img" alt="Spotter logo, be more informed in less time" src="resources/img/app-icon3@2x.png">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <h4 id="section-5-title">Be better informed,<br /> in less time</h4>
+            <h4 id="section-5-title">Be more informed,<br /> in less time</h4>
           </div>
         </div>
       </div>

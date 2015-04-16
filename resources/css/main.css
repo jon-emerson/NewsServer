@@ -35,17 +35,9 @@ pre {
 }
 
 /* Nav */
-.navbar-default .navbar-brand {
-  background: url("/resources/img/app-icon2@2x.png") left center no-repeat;
-  background-size: 54px 54px;
-  width: 190px;
-  height: 68px;
-  padding: 22px 0px 0px 64px;
-  font-size: 24px;
-  font-weight: 500;
-  color: #111;
-  font-family: 'Overlock', 'Myriad Web Pro', sans-serif;
-  text-decoration: none;
+
+#navbar-logo {
+  height: 44px;
 }
 
 .navbar-default .navbar-brand:hover {
@@ -127,10 +119,10 @@ a.btn-primary,
 }
 
 .jumbotron h1 {
-  font-size: 36px;
+  font-size: 21.5px;
   font-weight: 500;
   color: #111;
-  font-family: 'Overlock', 'Myriad Web Pro', sans-serif;
+  font-family: 'PT Sans', sans-serif;
 }
 
 .jumbotron h2 {
@@ -146,21 +138,24 @@ a.btn-primary,
 }
 
 #app-icon {
-  width: 120px;
-  height: 120px;
+  width: 136px;
   margin-top: 12px;
   margin-right: 12px;
-  float: left;
 }
 
 .brand-wrapper {
   margin-top: 32px;
 }
 
-.logo-wrapper {
-  display: inline;
-  margin-top: 38px;
-  margin-left: 14px;
+.tagline {
+  float: left;
+  margin-top: 8px;
+  text-align: center;
+  width: 136px;
+}
+
+.tagline-bottom-line {
+  font-size: 24.5px;
 }
 
 .get-the-app-wrapper {
@@ -312,6 +307,7 @@ a.btn-primary,
 
 #section-5-img {
   width: 180px;
+  margin-bottom: 32px;
 }
 
 #section-5-title {
@@ -429,9 +425,17 @@ a.btn-primary,
 
 @media (max-width:767px) {
   .navbar-default .navbar-brand {
-    margin-left: 16px;
+    padding: 8px 15px;
   }
-  
+
+  .navbar-toggle {
+    margin-top: 8px;
+  }
+
+  #navbar-logo {
+    height: 36px;
+  }
+
   main section {
     text-align: center;
   }
@@ -444,7 +448,7 @@ a.btn-primary,
 
   .navbar-nav > li > a.btn-primary,
   .navbar-nav > li > a.btn {
-    padding: 5px 15px 5px 25px;
+    padding: 5px 15px 5px 0px;
     margin-right: 18px;
     display: -webkit-box;
   }
@@ -502,13 +506,7 @@ a.btn-primary,
   }
 
   .mobile-brand-top-line {
-    width: 212px;
-    height: 60px;
     margin: 0 auto;
-  }
-
-  .mobile-description {
-    margin-top: 8px;
   }
 
   .brand-wrapper {
@@ -524,6 +522,11 @@ a.btn-primary,
     margin-top: 8px;
     display: inline;
   }
+  
+  #mobile-app-icon {
+    width: 240px;
+    margin-top: 16px;
+  }
 
   .logo-wrapper {
     margin-top: 16px;
@@ -535,15 +538,14 @@ a.btn-primary,
 
   .get-the-app-wrapper {
     display: block;
-    margin: 0px auto 0px auto;
+    margin: 16px auto 0px auto;
     width: 135px;
   }
 
   .jumbotron h1 {
-    font-size: 36px;
+    font-size: 20px;
     margin-top: 16px;
     margin-bottom: 0px;
-    float: left;
   }
 
   .jumbotron h2 {
@@ -560,14 +562,26 @@ a.btn-primary,
     max-width: 96%;
   }
 
+  #section-4-container {
+    padding: 0px;
+  }
+
   #section-4-wrapper {
      background-color:rgba(0, 0, 0, 0.87);
      padding: 0px;
-     margin: 28px 0px 300px 0px;
+     margin: 0px 0px 360px 0px;
   }
 
   #section-4 {
     background-image: url("/resources/img/realistic-commute-narrow1.jpg");
+  }
+
+  #section-4-row {
+    margin-right: 0px;
+  }
+
+  #section-4-p {
+    padding-left: 15px;
   }
 
   #bottom-text-link-row {
@@ -581,6 +595,7 @@ a.btn-primary,
   .footer-p {
     text-align: center;
     width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -617,7 +632,7 @@ a.btn-primary,
   }
 
   .brand-wrapper {
-    margin-top: 0px;
+    margin-top: 32px;
   }
 
   #section-3-img {
