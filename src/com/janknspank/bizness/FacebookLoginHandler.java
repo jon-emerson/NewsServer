@@ -92,7 +92,6 @@ public class FacebookLoginHandler {
   private static User getExistingUser(
       com.restfb.types.User fbUser, String fbAccessToken)
       throws DatabaseSchemaException {
-    long startTime = System.currentTimeMillis();
     ListenableFuture<Iterable<User>> userByFacebookIdFuture =
         Database.with(User.class).getFuture(
             new QueryOption.WhereEquals("facebook_id", fbUser.getId()));
@@ -107,8 +106,6 @@ public class FacebookLoginHandler {
     } catch (InterruptedException | ExecutionException e) {
       e.printStackTrace();
     }
-    System.out.println("FacebookLoginHandler.getExistingUser: "
-        + (System.currentTimeMillis() - startTime) + "ms");
     return null;
   }
 
@@ -250,14 +247,10 @@ public class FacebookLoginHandler {
    */
   private static Iterable<Interest> getFacebookProfileInterests(com.restfb.types.User fbUser)
       throws DatabaseSchemaException {
-    long startTime = System.currentTimeMillis();
-
     // Create a Map of company name to existing Entity objects, using either
     // our very-helpful-fuzzy-logic-friendly KeywordToEntityId table, or by
     // hoping the user happened to type an Entity we know exactly about.
     Set<String> companyNames = getCompanyNames(fbUser);
-    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 0: "
-        + (System.currentTimeMillis() - startTime) + "ms");
     Map<String, String> companyEntityIdMap = Maps.newHashMap();
     for (String companyName : companyNames) {
       String entityId = KeywordCanonicalizer.getEntityIdForKeyword(companyName);
@@ -265,16 +258,12 @@ public class FacebookLoginHandler {
         companyEntityIdMap.put(companyName.toLowerCase(), entityId);
       }
     }
-    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 1: "
-        + (System.currentTimeMillis() - startTime) + "ms");
     for (Entity entity : Entities.getEntitiesByKeyword(
         Sets.difference(companyNames, ImmutableSet.copyOf(companyEntityIdMap.keySet())))) {
       // Here we're fetching Entities for any companies for which there weren't
       // KeywordToEntityId table rows for.
       companyEntityIdMap.put(entity.getKeyword().toLowerCase(), entity.getId());
     }
-    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 2: "
-        + (System.currentTimeMillis() - startTime) + "ms");
 
     // Start building interests.
     List<Interest> interests = Lists.newArrayList();
@@ -294,8 +283,6 @@ public class FacebookLoginHandler {
               .build());
       interests.add(companyInterestBuilder.build());
     }
-    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 3: "
-        + (System.currentTimeMillis() - startTime) + "ms");
     for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
       interests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
@@ -305,22 +292,15 @@ public class FacebookLoginHandler {
           .setCreateTime(System.currentTimeMillis())
           .build());
     }
-    System.out.println("FacebookLoginHandler.getFacebookProfileInterests, checkpoint 4: "
-        + (System.currentTimeMillis() - startTime) + "ms");
     return interests;
   }
 
   public static User login(com.restfb.types.User fbUser, String fbAccessToken)
       throws RequestException, SocialException, DatabaseSchemaException,
       DatabaseRequestException {
-    long startTime = System.currentTimeMillis();
     User user;
     User existingUser = getExistingUser(fbUser, fbAccessToken);
-    System.out.println("FacebookLoginHandler.login, checkpoint 0: "
-        + (System.currentTimeMillis() - startTime) + "ms");
     Iterable<Interest> facebookProfileInterests = getFacebookProfileInterests(fbUser);
-    System.out.println("FacebookLoginHandler.login, checkpoint 1: "
-        + (System.currentTimeMillis() - startTime) + "ms");
     if (existingUser != null) {
       Iterable<Interest> existingInterestsToRetain = Iterables.filter(
           existingUser.getInterestList(),
@@ -334,8 +314,6 @@ public class FacebookLoginHandler {
                   && interest.getSource() != InterestSource.LINKED_IN_PROFILE;
             }
           });
-      System.out.println("FacebookLoginHandler.login, checkpoint 2: "
-          + (System.currentTimeMillis() - startTime) + "ms");
       user = existingUser.toBuilder()
           .clearInterest()
           .addAllInterest(existingInterestsToRetain)
@@ -347,11 +325,7 @@ public class FacebookLoginHandler {
               ? fbUser.getEmail()
               : existingUser.getEmail())
           .build();
-      System.out.println("FacebookLoginHandler.login, checkpoint 3: "
-          + (System.currentTimeMillis() - startTime) + "ms");
       Database.update(user);
-      System.out.println("FacebookLoginHandler.login, checkpoint 4: "
-          + (System.currentTimeMillis() - startTime) + "ms");
     } else {
       user = getNewUserBuilder(fbUser, fbAccessToken)
           .addAllInterest(facebookProfileInterests)
@@ -359,8 +333,6 @@ public class FacebookLoginHandler {
       Database.insert(user);
     }
 
-    System.out.println("FacebookLoginHandler.login completed in "
-        + (System.currentTimeMillis() - startTime) + "ms");
     return user;
   }
 
