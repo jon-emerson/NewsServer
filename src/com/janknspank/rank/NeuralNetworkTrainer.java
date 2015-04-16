@@ -22,12 +22,16 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Doubles;
+import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.classifier.FeatureId;
+import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
@@ -215,6 +219,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
+    TopList<Article, Double> topPopCulture = new TopList<>(25);
 
     for (Persona persona : Personas.getPersonaMap().values()) {
       System.out.println("Grabbing articles for " + persona.getEmail() + " ...");
@@ -241,8 +246,10 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       for (int i = 0; i < 2; i++) {
         for (String goodUrl : persona.getGoodUrlList()) {
           if (urlArticleMap.containsKey(goodUrl)) {
+            Article article = urlArticleMap.get(goodUrl);
+            topPopCulture.add(article, InputValuesGenerator.relevanceToPopCulture(article));
             double[] input = Doubles.toArray(
-                NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(goodUrl)).values());
+                NeuralNetworkScorer.generateInputNodes(user, article).values());
             double[] output = new double[] { 1.0 };
             trainingSet.addRow(new DataSetRow(input, output));
             goodUrlCount++;
@@ -272,6 +279,20 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 //    }
 
     System.out.println("Training set compiled. good=" + goodUrlCount + ", bad=" + badUrlCount);
+
+    System.out.println("Top pop culture articles in Good Url list:");
+    for (Article article : topPopCulture) {
+      System.out.println(article.getUrl() + " (" + topPopCulture.getValue(article) + ")");
+      for (ArticleFeature feature : new ArticleFeature[] {
+          ArticleFeatures.getFeature(article, FeatureId.TOPIC_ENTERTAINMENT),
+          ArticleFeatures.getFeature(article, FeatureId.TOPIC_SPORTS),
+          ArticleFeatures.getFeature(article, FeatureId.TOPIC_POLITICS)
+      }) {
+        System.out.println("- " + FeatureId.fromId(feature.getFeatureId()).getTitle() + ": "
+            + feature.getSimilarity());
+      }
+    }
+
     return trainingSet;
   }
 
