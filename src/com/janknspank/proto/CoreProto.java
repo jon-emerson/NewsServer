@@ -16886,6 +16886,1715 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:IndustryVectorNormalizationData)
   }
 
+  public interface LocationOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string country_code = 1;
+    /**
+     * <code>optional string country_code = 1;</code>
+     *
+     * <pre>
+     * ISO county code.  E.g. 'US'.
+     * </pre>
+     */
+    boolean hasCountryCode();
+    /**
+     * <code>optional string country_code = 1;</code>
+     *
+     * <pre>
+     * ISO county code.  E.g. 'US'.
+     * </pre>
+     */
+    java.lang.String getCountryCode();
+    /**
+     * <code>optional string country_code = 1;</code>
+     *
+     * <pre>
+     * ISO county code.  E.g. 'US'.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getCountryCodeBytes();
+
+    // optional string country_name = 2;
+    /**
+     * <code>optional string country_name = 2;</code>
+     *
+     * <pre>
+     * English country name.  E.g. 'United States'.
+     * </pre>
+     */
+    boolean hasCountryName();
+    /**
+     * <code>optional string country_name = 2;</code>
+     *
+     * <pre>
+     * English country name.  E.g. 'United States'.
+     * </pre>
+     */
+    java.lang.String getCountryName();
+    /**
+     * <code>optional string country_name = 2;</code>
+     *
+     * <pre>
+     * English country name.  E.g. 'United States'.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getCountryNameBytes();
+
+    // optional string state_code = 3;
+    /**
+     * <code>optional string state_code = 3;</code>
+     *
+     * <pre>
+     * ISO state/subdivision code.  E.g. 'CA', for California.
+     * </pre>
+     */
+    boolean hasStateCode();
+    /**
+     * <code>optional string state_code = 3;</code>
+     *
+     * <pre>
+     * ISO state/subdivision code.  E.g. 'CA', for California.
+     * </pre>
+     */
+    java.lang.String getStateCode();
+    /**
+     * <code>optional string state_code = 3;</code>
+     *
+     * <pre>
+     * ISO state/subdivision code.  E.g. 'CA', for California.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getStateCodeBytes();
+
+    // optional string state_name = 4;
+    /**
+     * <code>optional string state_name = 4;</code>
+     *
+     * <pre>
+     * English state/subdivision name.  E.g. 'California'.
+     * </pre>
+     */
+    boolean hasStateName();
+    /**
+     * <code>optional string state_name = 4;</code>
+     *
+     * <pre>
+     * English state/subdivision name.  E.g. 'California'.
+     * </pre>
+     */
+    java.lang.String getStateName();
+    /**
+     * <code>optional string state_name = 4;</code>
+     *
+     * <pre>
+     * English state/subdivision name.  E.g. 'California'.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getStateNameBytes();
+
+    // optional string city_name = 5;
+    /**
+     * <code>optional string city_name = 5;</code>
+     *
+     * <pre>
+     * E.g. 'San Francisco'.
+     * </pre>
+     */
+    boolean hasCityName();
+    /**
+     * <code>optional string city_name = 5;</code>
+     *
+     * <pre>
+     * E.g. 'San Francisco'.
+     * </pre>
+     */
+    java.lang.String getCityName();
+    /**
+     * <code>optional string city_name = 5;</code>
+     *
+     * <pre>
+     * E.g. 'San Francisco'.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getCityNameBytes();
+
+    // optional string postal_code = 6;
+    /**
+     * <code>optional string postal_code = 6;</code>
+     *
+     * <pre>
+     * E.g. '94114', or "PO16 7GZ" for British addresses.
+     * </pre>
+     */
+    boolean hasPostalCode();
+    /**
+     * <code>optional string postal_code = 6;</code>
+     *
+     * <pre>
+     * E.g. '94114', or "PO16 7GZ" for British addresses.
+     * </pre>
+     */
+    java.lang.String getPostalCode();
+    /**
+     * <code>optional string postal_code = 6;</code>
+     *
+     * <pre>
+     * E.g. '94114', or "PO16 7GZ" for British addresses.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getPostalCodeBytes();
+
+    // optional double latitude = 7;
+    /**
+     * <code>optional double latitude = 7;</code>
+     */
+    boolean hasLatitude();
+    /**
+     * <code>optional double latitude = 7;</code>
+     */
+    double getLatitude();
+
+    // optional double longitude = 8;
+    /**
+     * <code>optional double longitude = 8;</code>
+     */
+    boolean hasLongitude();
+    /**
+     * <code>optional double longitude = 8;</code>
+     */
+    double getLongitude();
+  }
+  /**
+   * Protobuf type {@code Location}
+   *
+   * <pre>
+   * Generic object for locations - people locations, article locales, etc.
+   * </pre>
+   */
+  public static final class Location extends
+      com.google.protobuf.GeneratedMessage
+      implements LocationOrBuilder {
+    // Use Location.newBuilder() to construct.
+    private Location(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Location(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Location defaultInstance;
+    public static Location getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Location getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Location(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              countryCode_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              countryName_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              stateCode_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              stateName_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              cityName_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              postalCode_ = input.readBytes();
+              break;
+            }
+            case 57: {
+              bitField0_ |= 0x00000040;
+              latitude_ = input.readDouble();
+              break;
+            }
+            case 65: {
+              bitField0_ |= 0x00000080;
+              longitude_ = input.readDouble();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_Location_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_Location_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.Location.class, com.janknspank.proto.CoreProto.Location.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Location> PARSER =
+        new com.google.protobuf.AbstractParser<Location>() {
+      public Location parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Location(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Location> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string country_code = 1;
+    public static final int COUNTRY_CODE_FIELD_NUMBER = 1;
+    private java.lang.Object countryCode_;
+    /**
+     * <code>optional string country_code = 1;</code>
+     *
+     * <pre>
+     * ISO county code.  E.g. 'US'.
+     * </pre>
+     */
+    public boolean hasCountryCode() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string country_code = 1;</code>
+     *
+     * <pre>
+     * ISO county code.  E.g. 'US'.
+     * </pre>
+     */
+    public java.lang.String getCountryCode() {
+      java.lang.Object ref = countryCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          countryCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string country_code = 1;</code>
+     *
+     * <pre>
+     * ISO county code.  E.g. 'US'.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getCountryCodeBytes() {
+      java.lang.Object ref = countryCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        countryCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string country_name = 2;
+    public static final int COUNTRY_NAME_FIELD_NUMBER = 2;
+    private java.lang.Object countryName_;
+    /**
+     * <code>optional string country_name = 2;</code>
+     *
+     * <pre>
+     * English country name.  E.g. 'United States'.
+     * </pre>
+     */
+    public boolean hasCountryName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string country_name = 2;</code>
+     *
+     * <pre>
+     * English country name.  E.g. 'United States'.
+     * </pre>
+     */
+    public java.lang.String getCountryName() {
+      java.lang.Object ref = countryName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          countryName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string country_name = 2;</code>
+     *
+     * <pre>
+     * English country name.  E.g. 'United States'.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getCountryNameBytes() {
+      java.lang.Object ref = countryName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        countryName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string state_code = 3;
+    public static final int STATE_CODE_FIELD_NUMBER = 3;
+    private java.lang.Object stateCode_;
+    /**
+     * <code>optional string state_code = 3;</code>
+     *
+     * <pre>
+     * ISO state/subdivision code.  E.g. 'CA', for California.
+     * </pre>
+     */
+    public boolean hasStateCode() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string state_code = 3;</code>
+     *
+     * <pre>
+     * ISO state/subdivision code.  E.g. 'CA', for California.
+     * </pre>
+     */
+    public java.lang.String getStateCode() {
+      java.lang.Object ref = stateCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          stateCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string state_code = 3;</code>
+     *
+     * <pre>
+     * ISO state/subdivision code.  E.g. 'CA', for California.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getStateCodeBytes() {
+      java.lang.Object ref = stateCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        stateCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string state_name = 4;
+    public static final int STATE_NAME_FIELD_NUMBER = 4;
+    private java.lang.Object stateName_;
+    /**
+     * <code>optional string state_name = 4;</code>
+     *
+     * <pre>
+     * English state/subdivision name.  E.g. 'California'.
+     * </pre>
+     */
+    public boolean hasStateName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string state_name = 4;</code>
+     *
+     * <pre>
+     * English state/subdivision name.  E.g. 'California'.
+     * </pre>
+     */
+    public java.lang.String getStateName() {
+      java.lang.Object ref = stateName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          stateName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string state_name = 4;</code>
+     *
+     * <pre>
+     * English state/subdivision name.  E.g. 'California'.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getStateNameBytes() {
+      java.lang.Object ref = stateName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        stateName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string city_name = 5;
+    public static final int CITY_NAME_FIELD_NUMBER = 5;
+    private java.lang.Object cityName_;
+    /**
+     * <code>optional string city_name = 5;</code>
+     *
+     * <pre>
+     * E.g. 'San Francisco'.
+     * </pre>
+     */
+    public boolean hasCityName() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string city_name = 5;</code>
+     *
+     * <pre>
+     * E.g. 'San Francisco'.
+     * </pre>
+     */
+    public java.lang.String getCityName() {
+      java.lang.Object ref = cityName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cityName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string city_name = 5;</code>
+     *
+     * <pre>
+     * E.g. 'San Francisco'.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getCityNameBytes() {
+      java.lang.Object ref = cityName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cityName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string postal_code = 6;
+    public static final int POSTAL_CODE_FIELD_NUMBER = 6;
+    private java.lang.Object postalCode_;
+    /**
+     * <code>optional string postal_code = 6;</code>
+     *
+     * <pre>
+     * E.g. '94114', or "PO16 7GZ" for British addresses.
+     * </pre>
+     */
+    public boolean hasPostalCode() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string postal_code = 6;</code>
+     *
+     * <pre>
+     * E.g. '94114', or "PO16 7GZ" for British addresses.
+     * </pre>
+     */
+    public java.lang.String getPostalCode() {
+      java.lang.Object ref = postalCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          postalCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string postal_code = 6;</code>
+     *
+     * <pre>
+     * E.g. '94114', or "PO16 7GZ" for British addresses.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getPostalCodeBytes() {
+      java.lang.Object ref = postalCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        postalCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional double latitude = 7;
+    public static final int LATITUDE_FIELD_NUMBER = 7;
+    private double latitude_;
+    /**
+     * <code>optional double latitude = 7;</code>
+     */
+    public boolean hasLatitude() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional double latitude = 7;</code>
+     */
+    public double getLatitude() {
+      return latitude_;
+    }
+
+    // optional double longitude = 8;
+    public static final int LONGITUDE_FIELD_NUMBER = 8;
+    private double longitude_;
+    /**
+     * <code>optional double longitude = 8;</code>
+     */
+    public boolean hasLongitude() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional double longitude = 8;</code>
+     */
+    public double getLongitude() {
+      return longitude_;
+    }
+
+    private void initFields() {
+      countryCode_ = "";
+      countryName_ = "";
+      stateCode_ = "";
+      stateName_ = "";
+      cityName_ = "";
+      postalCode_ = "";
+      latitude_ = 0D;
+      longitude_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getCountryCodeBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getCountryNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getStateCodeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getStateNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getCityNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getPostalCodeBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeDouble(7, latitude_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeDouble(8, longitude_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getCountryCodeBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getCountryNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getStateCodeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getStateNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getCityNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getPostalCodeBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(7, latitude_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(8, longitude_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.Location parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.Location parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.Location prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Location}
+     *
+     * <pre>
+     * Generic object for locations - people locations, article locales, etc.
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.LocationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_Location_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_Location_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.Location.class, com.janknspank.proto.CoreProto.Location.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.Location.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        countryCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        countryName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        stateCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        stateName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        cityName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        postalCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        latitude_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        longitude_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_Location_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.Location getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.Location.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.Location build() {
+        com.janknspank.proto.CoreProto.Location result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.Location buildPartial() {
+        com.janknspank.proto.CoreProto.Location result = new com.janknspank.proto.CoreProto.Location(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.countryCode_ = countryCode_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.countryName_ = countryName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.stateCode_ = stateCode_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.stateName_ = stateName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.cityName_ = cityName_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.postalCode_ = postalCode_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.latitude_ = latitude_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.longitude_ = longitude_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.Location) {
+          return mergeFrom((com.janknspank.proto.CoreProto.Location)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.Location other) {
+        if (other == com.janknspank.proto.CoreProto.Location.getDefaultInstance()) return this;
+        if (other.hasCountryCode()) {
+          bitField0_ |= 0x00000001;
+          countryCode_ = other.countryCode_;
+          onChanged();
+        }
+        if (other.hasCountryName()) {
+          bitField0_ |= 0x00000002;
+          countryName_ = other.countryName_;
+          onChanged();
+        }
+        if (other.hasStateCode()) {
+          bitField0_ |= 0x00000004;
+          stateCode_ = other.stateCode_;
+          onChanged();
+        }
+        if (other.hasStateName()) {
+          bitField0_ |= 0x00000008;
+          stateName_ = other.stateName_;
+          onChanged();
+        }
+        if (other.hasCityName()) {
+          bitField0_ |= 0x00000010;
+          cityName_ = other.cityName_;
+          onChanged();
+        }
+        if (other.hasPostalCode()) {
+          bitField0_ |= 0x00000020;
+          postalCode_ = other.postalCode_;
+          onChanged();
+        }
+        if (other.hasLatitude()) {
+          setLatitude(other.getLatitude());
+        }
+        if (other.hasLongitude()) {
+          setLongitude(other.getLongitude());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.Location parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.Location) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string country_code = 1;
+      private java.lang.Object countryCode_ = "";
+      /**
+       * <code>optional string country_code = 1;</code>
+       *
+       * <pre>
+       * ISO county code.  E.g. 'US'.
+       * </pre>
+       */
+      public boolean hasCountryCode() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string country_code = 1;</code>
+       *
+       * <pre>
+       * ISO county code.  E.g. 'US'.
+       * </pre>
+       */
+      public java.lang.String getCountryCode() {
+        java.lang.Object ref = countryCode_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          countryCode_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string country_code = 1;</code>
+       *
+       * <pre>
+       * ISO county code.  E.g. 'US'.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getCountryCodeBytes() {
+        java.lang.Object ref = countryCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          countryCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string country_code = 1;</code>
+       *
+       * <pre>
+       * ISO county code.  E.g. 'US'.
+       * </pre>
+       */
+      public Builder setCountryCode(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        countryCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country_code = 1;</code>
+       *
+       * <pre>
+       * ISO county code.  E.g. 'US'.
+       * </pre>
+       */
+      public Builder clearCountryCode() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        countryCode_ = getDefaultInstance().getCountryCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country_code = 1;</code>
+       *
+       * <pre>
+       * ISO county code.  E.g. 'US'.
+       * </pre>
+       */
+      public Builder setCountryCodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        countryCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string country_name = 2;
+      private java.lang.Object countryName_ = "";
+      /**
+       * <code>optional string country_name = 2;</code>
+       *
+       * <pre>
+       * English country name.  E.g. 'United States'.
+       * </pre>
+       */
+      public boolean hasCountryName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string country_name = 2;</code>
+       *
+       * <pre>
+       * English country name.  E.g. 'United States'.
+       * </pre>
+       */
+      public java.lang.String getCountryName() {
+        java.lang.Object ref = countryName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          countryName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string country_name = 2;</code>
+       *
+       * <pre>
+       * English country name.  E.g. 'United States'.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getCountryNameBytes() {
+        java.lang.Object ref = countryName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          countryName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string country_name = 2;</code>
+       *
+       * <pre>
+       * English country name.  E.g. 'United States'.
+       * </pre>
+       */
+      public Builder setCountryName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        countryName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country_name = 2;</code>
+       *
+       * <pre>
+       * English country name.  E.g. 'United States'.
+       * </pre>
+       */
+      public Builder clearCountryName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        countryName_ = getDefaultInstance().getCountryName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country_name = 2;</code>
+       *
+       * <pre>
+       * English country name.  E.g. 'United States'.
+       * </pre>
+       */
+      public Builder setCountryNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        countryName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string state_code = 3;
+      private java.lang.Object stateCode_ = "";
+      /**
+       * <code>optional string state_code = 3;</code>
+       *
+       * <pre>
+       * ISO state/subdivision code.  E.g. 'CA', for California.
+       * </pre>
+       */
+      public boolean hasStateCode() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string state_code = 3;</code>
+       *
+       * <pre>
+       * ISO state/subdivision code.  E.g. 'CA', for California.
+       * </pre>
+       */
+      public java.lang.String getStateCode() {
+        java.lang.Object ref = stateCode_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          stateCode_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string state_code = 3;</code>
+       *
+       * <pre>
+       * ISO state/subdivision code.  E.g. 'CA', for California.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getStateCodeBytes() {
+        java.lang.Object ref = stateCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          stateCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string state_code = 3;</code>
+       *
+       * <pre>
+       * ISO state/subdivision code.  E.g. 'CA', for California.
+       * </pre>
+       */
+      public Builder setStateCode(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        stateCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string state_code = 3;</code>
+       *
+       * <pre>
+       * ISO state/subdivision code.  E.g. 'CA', for California.
+       * </pre>
+       */
+      public Builder clearStateCode() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        stateCode_ = getDefaultInstance().getStateCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string state_code = 3;</code>
+       *
+       * <pre>
+       * ISO state/subdivision code.  E.g. 'CA', for California.
+       * </pre>
+       */
+      public Builder setStateCodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        stateCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string state_name = 4;
+      private java.lang.Object stateName_ = "";
+      /**
+       * <code>optional string state_name = 4;</code>
+       *
+       * <pre>
+       * English state/subdivision name.  E.g. 'California'.
+       * </pre>
+       */
+      public boolean hasStateName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string state_name = 4;</code>
+       *
+       * <pre>
+       * English state/subdivision name.  E.g. 'California'.
+       * </pre>
+       */
+      public java.lang.String getStateName() {
+        java.lang.Object ref = stateName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          stateName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string state_name = 4;</code>
+       *
+       * <pre>
+       * English state/subdivision name.  E.g. 'California'.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getStateNameBytes() {
+        java.lang.Object ref = stateName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          stateName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string state_name = 4;</code>
+       *
+       * <pre>
+       * English state/subdivision name.  E.g. 'California'.
+       * </pre>
+       */
+      public Builder setStateName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        stateName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string state_name = 4;</code>
+       *
+       * <pre>
+       * English state/subdivision name.  E.g. 'California'.
+       * </pre>
+       */
+      public Builder clearStateName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        stateName_ = getDefaultInstance().getStateName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string state_name = 4;</code>
+       *
+       * <pre>
+       * English state/subdivision name.  E.g. 'California'.
+       * </pre>
+       */
+      public Builder setStateNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        stateName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string city_name = 5;
+      private java.lang.Object cityName_ = "";
+      /**
+       * <code>optional string city_name = 5;</code>
+       *
+       * <pre>
+       * E.g. 'San Francisco'.
+       * </pre>
+       */
+      public boolean hasCityName() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string city_name = 5;</code>
+       *
+       * <pre>
+       * E.g. 'San Francisco'.
+       * </pre>
+       */
+      public java.lang.String getCityName() {
+        java.lang.Object ref = cityName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cityName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string city_name = 5;</code>
+       *
+       * <pre>
+       * E.g. 'San Francisco'.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getCityNameBytes() {
+        java.lang.Object ref = cityName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cityName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string city_name = 5;</code>
+       *
+       * <pre>
+       * E.g. 'San Francisco'.
+       * </pre>
+       */
+      public Builder setCityName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        cityName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string city_name = 5;</code>
+       *
+       * <pre>
+       * E.g. 'San Francisco'.
+       * </pre>
+       */
+      public Builder clearCityName() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        cityName_ = getDefaultInstance().getCityName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string city_name = 5;</code>
+       *
+       * <pre>
+       * E.g. 'San Francisco'.
+       * </pre>
+       */
+      public Builder setCityNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        cityName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string postal_code = 6;
+      private java.lang.Object postalCode_ = "";
+      /**
+       * <code>optional string postal_code = 6;</code>
+       *
+       * <pre>
+       * E.g. '94114', or "PO16 7GZ" for British addresses.
+       * </pre>
+       */
+      public boolean hasPostalCode() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string postal_code = 6;</code>
+       *
+       * <pre>
+       * E.g. '94114', or "PO16 7GZ" for British addresses.
+       * </pre>
+       */
+      public java.lang.String getPostalCode() {
+        java.lang.Object ref = postalCode_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          postalCode_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string postal_code = 6;</code>
+       *
+       * <pre>
+       * E.g. '94114', or "PO16 7GZ" for British addresses.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getPostalCodeBytes() {
+        java.lang.Object ref = postalCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          postalCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string postal_code = 6;</code>
+       *
+       * <pre>
+       * E.g. '94114', or "PO16 7GZ" for British addresses.
+       * </pre>
+       */
+      public Builder setPostalCode(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        postalCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string postal_code = 6;</code>
+       *
+       * <pre>
+       * E.g. '94114', or "PO16 7GZ" for British addresses.
+       * </pre>
+       */
+      public Builder clearPostalCode() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        postalCode_ = getDefaultInstance().getPostalCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string postal_code = 6;</code>
+       *
+       * <pre>
+       * E.g. '94114', or "PO16 7GZ" for British addresses.
+       * </pre>
+       */
+      public Builder setPostalCodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        postalCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional double latitude = 7;
+      private double latitude_ ;
+      /**
+       * <code>optional double latitude = 7;</code>
+       */
+      public boolean hasLatitude() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional double latitude = 7;</code>
+       */
+      public double getLatitude() {
+        return latitude_;
+      }
+      /**
+       * <code>optional double latitude = 7;</code>
+       */
+      public Builder setLatitude(double value) {
+        bitField0_ |= 0x00000040;
+        latitude_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double latitude = 7;</code>
+       */
+      public Builder clearLatitude() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        latitude_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional double longitude = 8;
+      private double longitude_ ;
+      /**
+       * <code>optional double longitude = 8;</code>
+       */
+      public boolean hasLongitude() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional double longitude = 8;</code>
+       */
+      public double getLongitude() {
+        return longitude_;
+      }
+      /**
+       * <code>optional double longitude = 8;</code>
+       */
+      public Builder setLongitude(double value) {
+        bitField0_ |= 0x00000080;
+        longitude_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double longitude = 8;</code>
+       */
+      public Builder clearLongitude() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        longitude_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:Location)
+    }
+
+    static {
+      defaultInstance = new Location(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:Location)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -16971,6 +18680,11 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_IndustryVectorNormalizationData_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_Location_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Location_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -17067,8 +18781,13 @@ public final class CoreProto {
       "hold_50_percent\030\003 \001(\001B\004\210\246\035\001\022:\n,ratio_of_" +
       "articles_above_threshold_10_percent\030\004 \001(" +
       "\001B\004\210\246\035\001\022:\n,ratio_of_articles_above_thres" +
-      "hold_50_percent\030\005 \001(\001B\004\210\246\035\001B!\n\024com.jankn" +
-      "spank.protoB\tCoreProto"
+      "hold_50_percent\030\005 \001(\001B\004\210\246\035\001\"\323\001\n\010Location" +
+      "\022\036\n\014country_code\030\001 \001(\tB\010\210\246\035\001\230\246\035\005\022\032\n\014coun" +
+      "try_name\030\002 \001(\tB\004\230\246\0352\022\030\n\nstate_code\030\003 \001(\t",
+      "B\004\230\246\035\005\022\030\n\nstate_name\030\004 \001(\tB\004\230\246\0352\022\027\n\tcity" +
+      "_name\030\005 \001(\tB\004\230\246\0352\022\031\n\013postal_code\030\006 \001(\tB\004" +
+      "\230\246\035\n\022\020\n\010latitude\030\007 \001(\001\022\021\n\tlongitude\030\010 \001(" +
+      "\001B!\n\024com.janknspank.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -17177,6 +18896,12 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_IndustryVectorNormalizationData_descriptor,
               new java.lang.String[] { "Distribution", "SimilarityThreshold10Percent", "SimilarityThreshold50Percent", "RatioOfArticlesAboveThreshold10Percent", "RatioOfArticlesAboveThreshold50Percent", });
+          internal_static_Location_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+          internal_static_Location_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_Location_descriptor,
+              new java.lang.String[] { "CountryCode", "CountryName", "StateCode", "StateName", "CityName", "PostalCode", "Latitude", "Longitude", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -17345,6 +19070,13 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           return registry;
         }
       };

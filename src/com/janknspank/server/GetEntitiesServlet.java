@@ -48,6 +48,7 @@ public class GetEntitiesServlet extends StandardServlet {
     // Create response.
     JSONObject response = createSuccessResponse();
     response.put("entities", Serializer.toJSON(entities));
+    response.put("query", query);
     return response;
   }
 }

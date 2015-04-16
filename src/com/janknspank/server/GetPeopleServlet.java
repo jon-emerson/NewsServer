@@ -19,7 +19,11 @@ public class GetPeopleServlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException {
+    // TODO(jonemerson): Remove "contains" a week/two after 4/16/2015.
     String searchString = getParameter(req, "contains");
+    if (searchString == null) {
+      searchString = getParameter(req, "query");
+    }
     Iterable<Entity> people; 
 
     if (searchString != null) {
@@ -40,6 +44,7 @@ public class GetPeopleServlet extends StandardServlet {
     // Create response.
     JSONObject response = createSuccessResponse();
     response.put("results", peopleJson);
+    response.put("query", searchString);
     return response;
   }
 }

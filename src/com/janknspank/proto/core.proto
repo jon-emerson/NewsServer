@@ -515,3 +515,40 @@ message IndustryVectorNormalizationData {
     (required) = YES
   ];
 }
+
+// Generic object for locations - people locations, article locales, etc.
+message Location {
+  // ISO county code.  E.g. 'US'.
+  optional string country_code = 1 [
+    (required) = YES,
+    (string_length) = 5
+  ];
+
+  // English country name.  E.g. 'United States'.
+  optional string country_name = 2 [
+    (string_length) = 50
+  ];
+
+  // ISO state/subdivision code.  E.g. 'CA', for California.
+  optional string state_code = 3 [
+    (string_length) = 5
+  ];
+
+  // English state/subdivision name.  E.g. 'California'.
+  optional string state_name = 4 [
+    (string_length) = 50
+  ];
+
+  // E.g. 'San Francisco'.
+  optional string city_name = 5 [
+    (string_length) = 50
+  ];
+
+  // E.g. '94114', or "PO16 7GZ" for British addresses.
+  optional string postal_code = 6 [
+    (string_length) = 10
+  ];
+
+  optional double latitude = 7;
+  optional double longitude = 8;
+}
