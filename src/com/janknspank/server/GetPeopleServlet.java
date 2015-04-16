@@ -27,15 +27,13 @@ public class GetPeopleServlet extends StandardServlet {
           new QueryOption.WhereLike("keyword", searchString + "%"),
           new QueryOption.WhereEquals("type", "p"),
           new QueryOption.DescendingSort("importance"),
-          new QueryOption.Limit(20));
+          new QueryOption.Limit(30));
     } else {
       people = Database.with(Entity.class).get(
           new QueryOption.WhereEquals("type", "p"),
           new QueryOption.DescendingSort("importance"),
-          new QueryOption.Limit(20));
+          new QueryOption.Limit(30));
     }
-
-    // TODO: add some kind of sorting for relevance
 
     JSONArray peopleJson = Serializer.toJSON(people);
 
