@@ -28,6 +28,7 @@ import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.CoreProto.Entity.Source;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
@@ -189,6 +190,8 @@ public class Articles {
   public static Iterable<Article> getArticlesForInterests(
       User user, Iterable<Interest> interests, int limitPerType)
       throws DatabaseSchemaException, BiznessException {
+    Set<String> tombstones = UserInterests.getTombstones(user);
+
     List<FeatureId> featureIds = Lists.newArrayList();
     List<String> entityIds = Lists.newArrayList();
     List<String> companyNames = Lists.newArrayList();
@@ -197,7 +200,9 @@ public class Articles {
       switch (interest.getType()) {
         case ADDRESS_BOOK_CONTACTS:
           for (AddressBookContact contact : user.getAddressBookContactList()) {
-            personNames.add(contact.getName());
+            if (!tombstones.contains(contact.getName())) {
+              personNames.add(contact.getName());
+            }
           }
           break;
 
@@ -207,7 +212,9 @@ public class Articles {
 
         case LINKED_IN_CONTACTS:
           for (LinkedInContact contact : user.getLinkedInContactList()) {
-            personNames.add(contact.getName());
+            if (!tombstones.contains(contact.getName())) {
+              personNames.add(contact.getName());
+            }
           }
           break;
 
