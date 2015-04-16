@@ -39,9 +39,9 @@ public abstract class StandardServlet extends NewsServlet {
     try {
       User user = getUser(req);
       if (user != null && "jon@jonemerson.net".equals(user.getEmail())) {
-        Thread.sleep(40000);
+        throw new IllegalStateException("Foo!");
       }
-    } catch (DatabaseSchemaException | InterruptedException e1) {
+    } catch (DatabaseSchemaException e1) {
       // TODO Auto-generated catch block
       e1.printStackTrace();
     }
