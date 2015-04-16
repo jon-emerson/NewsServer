@@ -25,6 +25,9 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
+import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
+import com.janknspank.proto.CoreProto.Entity.Source;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
@@ -130,8 +133,9 @@ public class Articles {
     Iterable<Article> articlesForInterests =
         getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10);
 
+    // Find the top 150 articles based on neural network rank + time punishment.
     Map<String, Double> scores = Maps.newHashMap();
-    TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
+    TopList<Article, Double> goodArticles = new TopList<>(limit * 3);
     Set<String> urls = Sets.newHashSet();
     for (Article article : articlesForInterests) {
       if (urls.contains(article.getUrl())) {
@@ -144,15 +148,27 @@ public class Articles {
       scores.put(article.getUrl(), score);
     }
 
-    TopList<Article, Double> bestArticles = new TopList<>(limit);
+    // Dedupe them - This will knock us down about 10 - 20%.
     List<Article> dedupedArticles = Deduper.filterOutDupes(goodArticles);
+
+    // Keep around only the top 50.  Make decisions based on the score and its
+    // social relevance.
+    TopList<Article, Double> bestArticles = new TopList<>(limit);
     for (Article article : dedupedArticles) {
-      bestArticles.add(article, scores.get(article.getUrl()));
+      SocialEngagement engagement = SocialEngagements.getForArticle(article, Site.TWITTER);
+      bestArticles.add(article, scores.get(article.getUrl()) * (1 + engagement.getShareScore()));
+    }
+
+    // Now that we know which articles to keep, sort them how we've historically
+    // done: Based on score - time punishment only.
+    TopList<Article, Double> sortedArticles = new TopList<>(limit);
+    for (Article article : bestArticles) {
+      sortedArticles.add(article, scores.get(article.getUrl()));
     }
 
     System.out.println("getRankedArticles completed in "
         + (System.currentTimeMillis() - startTime) + "ms");
-    return bestArticles;
+    return sortedArticles;
   }
 
   /**
@@ -188,6 +204,8 @@ public class Articles {
   public static Iterable<Article> getArticlesForInterests(
       User user, Iterable<Interest> interests, int limitPerType)
       throws DatabaseSchemaException, BiznessException {
+    Set<String> tombstones = UserInterests.getTombstones(user);
+
     List<FeatureId> featureIds = Lists.newArrayList();
     List<String> entityIds = Lists.newArrayList();
     List<String> companyNames = Lists.newArrayList();
@@ -196,7 +214,9 @@ public class Articles {
       switch (interest.getType()) {
         case ADDRESS_BOOK_CONTACTS:
           for (AddressBookContact contact : user.getAddressBookContactList()) {
-            personNames.add(contact.getName());
+            if (!tombstones.contains(contact.getName())) {
+              personNames.add(contact.getName());
+            }
           }
           break;
 
@@ -206,12 +226,14 @@ public class Articles {
 
         case LINKED_IN_CONTACTS:
           for (LinkedInContact contact : user.getLinkedInContactList()) {
-            personNames.add(contact.getName());
+            if (!tombstones.contains(contact.getName())) {
+              personNames.add(contact.getName());
+            }
           }
           break;
 
         case ENTITY:
-          if (interest.getEntity().hasId()) {
+          if (interest.getEntity().hasId() && interest.getEntity().getSource() != Source.USER) {
             entityIds.add(interest.getEntity().getId());
           } else {
             companyNames.add(interest.getEntity().getKeyword());

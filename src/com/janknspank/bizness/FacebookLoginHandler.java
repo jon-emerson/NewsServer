@@ -212,7 +212,13 @@ public class FacebookLoginHandler {
 
   private static TopList<FeatureId, Double> getIndustryFeatureIds(com.restfb.types.User fbUser) {
     Vector facebookUserVector = getFacebookUserVector(fbUser);
+
+    // If we have nothing to go off of, let the user choose for himself instead.
     TopList<FeatureId, Double> topIndustryFeatureIds = new TopList<>(5);
+    if (facebookUserVector.getUniqueWordCount() < 5) {
+      return topIndustryFeatureIds;
+    }
+
     for (Feature feature : Feature.getAllFeatures()) {
       if (feature.getFeatureId() == FeatureId.SPORTS
           || feature.getFeatureId() == FeatureId.LEISURE_TRAVEL_AND_TOURISM) {
@@ -251,18 +257,18 @@ public class FacebookLoginHandler {
     // our very-helpful-fuzzy-logic-friendly KeywordToEntityId table, or by
     // hoping the user happened to type an Entity we know exactly about.
     Set<String> companyNames = getCompanyNames(fbUser);
-    Map<String, Entity> companyEntityMap = Maps.newHashMap();
+    Map<String, String> companyEntityIdMap = Maps.newHashMap();
     for (String companyName : companyNames) {
-      Entity entity = KeywordCanonicalizer.getEntityForKeyword(companyName);
-      if (entity != null) {
-        companyEntityMap.put(companyName.toLowerCase(), entity);
+      String entityId = KeywordCanonicalizer.getEntityIdForKeyword(companyName);
+      if (entityId != null) {
+        companyEntityIdMap.put(companyName.toLowerCase(), entityId);
       }
     }
     for (Entity entity : Entities.getEntitiesByKeyword(
-        Sets.difference(companyNames, ImmutableSet.copyOf(companyEntityMap.keySet())))) {
+        Sets.difference(companyNames, ImmutableSet.copyOf(companyEntityIdMap.keySet())))) {
       // Here we're fetching Entities for any companies for which there weren't
       // KeywordToEntityId table rows for.
-      companyEntityMap.put(entity.getKeyword().toLowerCase(), entity);
+      companyEntityIdMap.put(entity.getKeyword().toLowerCase(), entity.getId());
     }
 
     // Start building interests.
@@ -272,19 +278,15 @@ public class FacebookLoginHandler {
           .setId(GuidFactory.generate())
           .setType(InterestType.ENTITY)
           .setSource(InterestSource.FACEBOOK_PROFILE)
-          .setCreateTime(System.currentTimeMillis());
-      if (companyEntityMap.containsKey(companyName.toLowerCase())) {
-        companyInterestBuilder.setEntity(companyEntityMap.get(companyName.toLowerCase())
-            .toBuilder()
-            .clearTopic());
-      } else {
-        companyInterestBuilder.setEntity(Entity.newBuilder()
-            .setId(GuidFactory.generate())
-            .setKeyword(companyName)
-            .setType(EntityType.COMPANY.toString())
-            .setSource(Source.USER)
-            .build());
-      }
+          .setCreateTime(System.currentTimeMillis())
+          .setEntity(Entity.newBuilder()
+              .setId(companyEntityIdMap.containsKey(companyName.toLowerCase())
+                  ? companyEntityIdMap.get(companyName.toLowerCase()) : GuidFactory.generate())
+              .setKeyword(companyName)
+              .setType(EntityType.COMPANY.toString())
+              .setSource(companyEntityIdMap.containsKey(companyName.toLowerCase())
+                  ? Source.DBPEDIA_INSTANCE_TYPE : Source.USER)
+              .build());
       interests.add(companyInterestBuilder.build());
     }
     for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
@@ -302,7 +304,6 @@ public class FacebookLoginHandler {
   public static User login(com.restfb.types.User fbUser, String fbAccessToken)
       throws RequestException, SocialException, DatabaseSchemaException,
       DatabaseRequestException {
-    long startTime = System.currentTimeMillis();
     User user;
     User existingUser = getExistingUser(fbUser, fbAccessToken);
     Iterable<Interest> facebookProfileInterests = getFacebookProfileInterests(fbUser);
@@ -338,8 +339,6 @@ public class FacebookLoginHandler {
       Database.insert(user);
     }
 
-    System.out.println("FacebookLoginHandler.login completed in "
-        + (System.currentTimeMillis() - startTime) + "ms");
     return user;
   }
 

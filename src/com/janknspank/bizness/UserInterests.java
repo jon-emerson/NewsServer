@@ -120,4 +120,21 @@ public class UserInterests {
     }
     return userKeywordSet;
   }
+
+  /**
+   * Returns a Set of all the keywords the user has unfollowed.
+   */
+  public static Set<String> getTombstones(User user) {
+    Set<String> tombstones = Sets.newHashSet();
+    for (Interest interest : user.getInterestList()) {
+      // TODO(jonemerson): Differentiate people tombstones from company
+      // tombstones.  But right now the client doesn't tell us which is
+      // which either, so it's actually a bit of work...
+      if (interest.getType() == InterestType.ENTITY
+          && interest.getSource() == InterestSource.TOMBSTONE) {
+        tombstones.add(interest.getEntity().getKeyword());
+      }
+    }
+    return tombstones;
+  }
 }
