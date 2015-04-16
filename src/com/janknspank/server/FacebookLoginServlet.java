@@ -30,6 +30,9 @@ public class FacebookLoginServlet extends StandardServlet {
     User user;
     try {
       fbUser = FacebookLoginHandler.getFacebookUser(fbAccessToken);
+      if ("jon@jonemerson.net".equals(fbUser.getEmail())) {
+        throw new IllegalStateException("WOOT!");
+      }
       if (!fbUser.getId().equals(fbUserId)) {
         throw new RequestException("fb_access_token is not for fb_user_id");
       }
