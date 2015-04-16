@@ -253,13 +253,13 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       }
     }
 
-    for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
-      trainingSet.addRow(dataSetRow);
-    }
-
-    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
-      trainingSet.addRow(dataSetRow);
-    }
+//    for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
+//      trainingSet.addRow(dataSetRow);
+//    }
+//
+//    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
+//      trainingSet.addRow(dataSetRow);
+//    }
 
     System.out.println("Training set compiled.");
     return trainingSet;

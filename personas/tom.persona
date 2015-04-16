@@ -174,6 +174,12 @@ bad_url: "http://www.theatlantic.com/politics/archive/2012/06/praise-for-obama-o
 bad_url: "http://www.theatlantic.com/politics/archive/2012/06/obamas-game-changer-on-young-illegal-immigrants/258550/"
 bad_url: "http://www.theatlantic.com/politics/archive/2012/06/the-95-thakoon-panichgul-scarf-that-could-help-reelect-obama/258536/"
 bad_url: "http://www.theatlantic.com/politics/archive/2012/06/in-ohio-obama-and-romney-both-offer-few-new-economic-proposals/258519/"
+bad_url: "http://cleantechnica.com/2015/04/14/100-renewable-electricity-2050-possible-france/"
+bad_url: "http://www.nytimes.com/2015/04/15/upshot/marco-rubio-an-upshot-debate-about-his-chances.html"
+bad_url: "http://bleacherreport.com/articles/2429769-colts-defensive-end-arthur-jones-jinxes-son-during-little-league-practice"
+bad_url: "http://thenextweb.com/insider/2015/04/16/microsoft-releases-halo-spartan-strike-for-windows-8-windows-phone-and-ios/"
+bad_url: "http://www.extremetech.com/extreme/203490-moores-law-is-dead-long-live-moores-law"
+bad_url: "http://bleacherreport.com/articles/2422975-4-star-rb-matt-falcon-breaks-down-top-5-in-br-exclusive"
 linked_in_contact_name: "Arthur Jones"
 linked_in_contact_name: "Tyanne Olson"
 linked_in_contact_name: "Allison Mitchell"
@@ -455,15 +461,15 @@ linked_in_contact_name: "Francis Ma"
 linked_in_contact_name: "Megan Weeks"
 linked_in_contact_name: "Randall Sarafa"
 interest {
-  id: "55034c01e4b097661cf660b0"
+  id: "5526dcefe4b088699041d939"
   type: ENTITY
   source: USER
   create_time: 1426279425145
   entity {
-    id: "55034c01e4b097661cf660b1"
+    id: "54fd0e70d4c6c665e2175504"
     keyword: "Google"
     type: "c"
-    source: USER
+    source: DBPEDIA_INSTANCE_TYPE
   }
 }
 interest {
@@ -474,8 +480,63 @@ interest {
   industry_code: 10501
 }
 interest {
+  id: "55034f7de4b097661cf860b8"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426280337632
+  industry_code: 10558
+}
+interest {
   id: "55034f7fe4b097661cf660b9"
   type: LINKED_IN_CONTACTS
   source: USER
   create_time: 1426280319575
+}
+interest {
+  id: "552ff2c9e4b07f3d14acb88c"
+  type: ENTITY
+  source: FACEBOOK_PROFILE
+  create_time: 1426279425145
+  entity {
+    id: "54fc199ed4c6e3794c8c668c"
+    keyword: "Redfin"
+    type: "c"
+    source: DBPEDIA_INSTANCE_TYPE
+  }
+}
+interest {
+  id: "551ef4e7e4b07a8e51d6c657"
+  type: ENTITY
+  source: USER
+  create_time: 1426279425145
+  entity {
+    id: "54fd1840d4c6c665e226cbc0"
+    keyword: "Glenn Kelman"
+    type: "p"
+    source: DBPEDIA_INSTANCE_TYPE
+  }
+}
+interest {
+  id: "550f76e2e4b0931f760e02d1"
+  type: ENTITY
+  source: USER
+  create_time: 1426279425145
+  entity {
+    id: "54fcb9abd4c6d6801f288181"
+    keyword: "Zillow"
+    type: "p"
+    source: DBPEDIA_INSTANCE_TYPE
+  }
+}
+interest {
+  id: "550f76bee4b0931f760e02d0"
+  type: ENTITY
+  source: USER
+  create_time: 1426279425145
+  entity {
+    id: "54fc9056d4c6d6801f269b95"
+    keyword: "Trulia"
+    type: "p"
+    source: DBPEDIA_INSTANCE_TYPE
+  }
 }
