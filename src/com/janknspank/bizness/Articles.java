@@ -151,10 +151,9 @@ public class Articles {
     // Dedupe them - This will knock us down about 10 - 20%.
     List<Article> dedupedArticles = Deduper.filterOutDupes(goodArticles);
 
-    // Knock things down to 75 based on some combination of social relevance
-    // and their overall score.  This basically just cuts out anything that
-    // hasn't been shared at least a little bit... which actually helps a lot.
-    TopList<Article, Double> bestArticles = new TopList<>((int) (limit * 1.5));
+    // Keep around only the top 50.  Make decisions based on the score and its
+    // social relevance.
+    TopList<Article, Double> bestArticles = new TopList<>(limit);
     for (Article article : dedupedArticles) {
       SocialEngagement engagement = SocialEngagements.getForArticle(article, Site.TWITTER);
       bestArticles.add(article, scores.get(article.getUrl()) * (1 + engagement.getShareScore()));
