@@ -245,11 +245,28 @@ public abstract class Collection<T extends Message> {
    */
   public abstract Iterable<T> get(QueryOption... options) throws DatabaseSchemaException;
 
+  private static int queryIdCounter = 0;
   public ListenableFuture<Iterable<T>> getFuture(final QueryOption... options) {
+    final int queryId;
+    synchronized(this) {
+      queryId = ++queryIdCounter;
+    }
     return EXECUTOR_SERVICE.submit(new Callable<Iterable<T>>() {
       @Override
       public Iterable<T> call() throws DatabaseSchemaException {
-        return get(options);
+        long startTime = System.currentTimeMillis();
+        System.out.println("Query " + queryId + " started");
+        Iterable<T> result = get(options);
+        String s = "(unknown)";
+        if (Collection.this instanceof MongoCollection) {
+          try {
+            s = Collection.this.getTableName() + ": "
+                + ((MongoCollection<T>) Collection.this).getQueryObject(options).toString();
+          } catch (Throwable e) {}
+        }
+        System.out.println("Query " + queryId + " completed in "
+            + (System.currentTimeMillis() - startTime) + "ms: " + s);
+        return result;
       }
     });
   }

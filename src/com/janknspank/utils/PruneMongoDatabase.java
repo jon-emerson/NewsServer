@@ -136,10 +136,9 @@ public class PruneMongoDatabase {
   }
 
   public static void main(String args[]) throws DatabaseSchemaException, DatabaseRequestException {
-    // pruneArticles();
+    pruneArticles();
     pruneCrawlHistory();
-    //repairDatabase();
-    // fixUrls();
+    repairDatabase();
     System.out.println("Database pruned successfully.");
   }
 }
