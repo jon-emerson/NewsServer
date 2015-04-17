@@ -328,27 +328,66 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     return false;
   }
 
+  private static class Averager {
+    private int count = 0;
+    private double sum = 0;
+
+    public void add(Number number) {
+      count++;
+      sum += number.doubleValue();
+    }
+
+    public double get() {
+      return sum / count;
+    }
+  }
+
+  /**
+   * Definitely not-so-efficient hack for getting a list of input name labels,
+   * e.g. "industries", "facebook", "acquisitions", etc.
+   */
+  private static List<String> getInputNodeKeys() throws DatabaseSchemaException {
+    return ImmutableList.copyOf(NeuralNetworkScorer.getInstance().generateInputNodes(
+        Database.with(User.class).getFirst(),
+        Database.with(Article.class).getFirst()).keySet());
+  }
+
   /** 
    * Helper method for triggering a train. 
    * run ./trainneuralnet.sh to execute
    * */
   public static void main(String args[]) throws Exception {
+    List<String> inputNodeKeys = getInputNodeKeys();
     DataSet dataSet = generateTrainingDataSet();
 
     // Calculate average input values, for debugging/optimization purposes.
-    double[] averageInputValues = new double[NeuralNetworkScorer.INPUT_NODES_COUNT];
+    Averager[] averageInputValues = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
+    Averager[] averageInputValuesPositive = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
+    Averager[] averageInputValuesNegative = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
+    for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
+      averageInputValues[i] = new Averager();
+      averageInputValuesPositive[i] = new Averager();
+      averageInputValuesNegative[i] = new Averager();
+    }
     for (DataSetRow row : dataSet.getRows()) {
       double[] inputs = row.getInput();
       for (int i = 0; i < inputs.length; i++) {
-        averageInputValues[i] += inputs[i];
+        averageInputValues[i].add(inputs[i]);
+        if (row.getDesiredOutput()[0] > 0.5) {
+          averageInputValuesPositive[i].add(inputs[i]);
+        }
+        if (row.getDesiredOutput()[0] < 0.5) {
+          averageInputValuesNegative[i].add(inputs[i]);
+        }
       }
     }
 
-    int numRows = dataSet.size();
     System.out.println("Average input values:");
     for (int i = 0; i < averageInputValues.length; i++) {
-      averageInputValues[i] = averageInputValues[i] / numRows;
-      System.out.println("  [" + i + "] = " + averageInputValues[i]);
+      System.out.println("  [" + inputNodeKeys.get(i) + "] = " + averageInputValues[i].get()
+          + " \t(goodUrls=" + averageInputValuesPositive[i].get() + ", \t"
+          + "badUrls=" + averageInputValuesNegative[i].get() + ", \t"
+          + "diff=" + Math.abs(averageInputValuesPositive[i].get() - averageInputValuesNegative[i].get()) + ")");
     }
 
     NeuralNetwork<BackPropagation> neuralNetwork =
