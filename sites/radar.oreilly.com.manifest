@@ -1,0 +1,74 @@
+root_domain: "radar.oreilly.com"
+start_url: "http://radar.oreilly.com/"
+use_first_paragraph_as_description: true
+paragraph_selector: ".entry-content > p"
+paragraph_blacklist {
+  text_regex: "^Subscribe to "
+}
+paragraph_blacklist {
+  text_regex: "^The Solid Podcast is hosted "
+}
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/\\.]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://radar.oreilly.com/2015/04/rebooting-a-1970s-satellite-with-modern-software-and-hardware.html"
+    article_url: "http://radar.oreilly.com/2015/04/6-best-practices-for-giving-a-product-critique.html"
+    article_url: "http://radar.oreilly.com/2015/04/experience-design-gives-you-the-competitive-edge.html"
+    article_url: "http://radar.oreilly.com/2015/04/zeta-architecture-hexagon-is-the-new-circle.html"
+    article_url: "http://radar.oreilly.com/2015/04/beyond-bitcoin-and-the-blockchain-to-booming-business.html"
+    non_article_url: "http://radar.oreilly.com/justind"
+    non_article_url: "http://radar.oreilly.com/tag/bitcoin-the-blockchain-radar-summit"
+    non_article_url: "http://radar.oreilly.com/tag/blockchain"
+    non_article_url: "http://radar.oreilly.com/about/"
+    non_article_url: "http://radar.oreilly.com/radar-contributors/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10559 # Electrical Engineering
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer Electronics
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10520 # Automotive
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
