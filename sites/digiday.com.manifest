@@ -1,0 +1,82 @@
+root_domain: "digiday.com"
+start_url: "http://digiday.com/"
+start_url: "http://digiday.com/category/publishers/"
+start_url: "http://digiday.com/category/agencies/"
+start_url: "http://digiday.com/category/brands/"
+start_url: "http://digiday.com/category/platforms/"
+paragraph_selector: ".cs-content p"
+paragraph_selector: ".entry-content p"
+paragraph_blacklist {
+  selector: ".advertisement"
+}
+path_blacklist {
+  needle: "/event/"
+}
+path_blacklist {
+  needle: "/jobs/"
+}
+path_blacklist {
+  needle: "/sponsored/"
+}
+article_url_pattern {
+  path_regex: "^\\/(agencies|awards|brands|content-studio|platforms|publishers)\\/[^\\/]+\\-[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://digiday.com/agencies/dispatches-european-war-ad-fraud/"
+    article_url: "http://digiday.com/agencies/ask-millennial-can-agencies-retain-young-talent/"
+    article_url: "http://digiday.com/awards/content-marketing-awards-2015-finalists/"
+    article_url: "http://digiday.com/brands/dude-perfect/"
+    article_url: "http://digiday.com/brands/emojification-brand-advertising/"
+    article_url: "http://digiday.com/brands/neiman-marcus-goes-vintage-counter-apple-watch/"
+    article_url: "http://digiday.com/brands/old-navys-winning-youtube/"
+    article_url: "http://digiday.com/brands/rating-brand-hillary-social-media/"
+    article_url: "http://digiday.com/content-studio/play-game-join-army-market-like-military/"
+    article_url: "http://digiday.com/platforms/amazons-twitch-gaining-ground-ad-platform/"
+    article_url: "http://digiday.com/publishers/gawkers-bullshit-free-approach-video/"
+    article_url: "http://digiday.com/publishers/hearsts-new-platform-approach-get-right-start/"
+    article_url: "http://digiday.com/publishers/micropayments-news-schemes-struggle-take-off/"
+    article_url: "http://digiday.com/publishers/thought-catalog-tip-toes-commerce/"
+    article_url: "http://digiday.com/publishers/time-inc-s-joe-ripp-coming-back-towards-content-valuable/"
+    non_article_url: "http://digiday.com/author/ericblattberg/"
+    non_article_url: "http://digiday.com/author/ericblattberg/page/3/"
+    non_article_url: "http://digiday.com/category/publishers/"
+    non_article_url: "http://digiday.com/category/agencies/"
+    non_article_url: "http://digiday.com/category/brands/"
+    non_article_url: "http://digiday.com/category/platforms/"
+    non_article_url: "http://digiday.com/series/digiday-cannes-2/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10544 # Publishing
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10544 # Publishing
+  path_regex: "^\\/publishers\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  path_regex: "^\\/(agencies|brands)\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods.
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and Fashion
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10513 # Video production
+  boost: -2
+}
