@@ -1,8 +1,14 @@
 root_domain: "nrn.com"
 start_url: "http://nrn.com/news"
 start_url: "http://nrn.com/segments-0"
-paragraph_selector: ".article-body p"
-paragraph_selector: ".blog-body p"
+paragraph_selector: ".article-body > p"
+paragraph_selector: ".blog-body > p"
+paragraph_blacklist {
+  text_regex: "^Contact "
+}
+paragraph_blacklist {
+  text_regex: "^Follow "
+}
 article_url_pattern {
   path_regex: "^\\/[^\\/]+\\/[^\\/]+$"
 }
@@ -70,5 +76,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10556 # Restaurants
-  boost: 10
+  boost: 5
 }

@@ -1,6 +1,6 @@
 root_domain: "restaurantnews.com"
 start_url: "http://www.restaurantnews.com/"
-paragraph_selector: ".post-content p"
+paragraph_selector: ".postcontent p"
 article_url_pattern {
   path_regex: "^\\/[^\\/]+\\/$"
 }
@@ -49,5 +49,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10556 # Restaurants
-  boost: 10
+  boost: 5
 }
