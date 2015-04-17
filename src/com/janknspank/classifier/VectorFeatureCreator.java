@@ -168,14 +168,6 @@ public class VectorFeatureCreator {
       bestArticles.add(article.getUrl(), cosineSimilarity);
       worstArticles.add(article.getUrl(), 1 - cosineSimilarity);
     }
-    System.out.println("Seed articles most similar to vector:");
-    for (String url : bestArticles) {
-      System.out.println(bestArticles.getValue(url) + ": " + url);
-    }
-    System.out.println("Seed articles least similar to vector:");
-    for (String url : worstArticles) {
-      System.out.println((1 - worstArticles.getValue(url)) + ": " + url);
-    }
     return DistributionBuilder.getValueAtPercentile(
         seedArticleDistributionBuilder.build(), percentile);
   }

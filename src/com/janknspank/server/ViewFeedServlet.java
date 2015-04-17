@@ -9,7 +9,9 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.TopList;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.rank.NeuralNetworkScorer;
 import com.janknspank.server.soy.ViewFeedSoy;
 
@@ -26,12 +28,17 @@ public class ViewFeedServlet extends StandardServlet {
   protected SoyMapData getSoyMapData(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException, BiznessException {
     User user = getUser(req);
-    // Debugging for Linkedinprofile document
-//    LinkedInProfile profile = user.getLinkedInProfile();
-//    DocumentNode linkedInProfileDocument = DocumentBuilder.build(null, 
-//        new StringReader(profile.getData()));
-//    UserInterests.updateInterests(user, linkedInProfileDocument, null);
-    // Uncomment to play with profile data
+
+    String industryCodeId = this.getParameter(req, "industry_code");
+    if (industryCodeId != null) {
+      user = user.toBuilder()
+          .clearInterest()
+          .addInterest(Interest.newBuilder()
+              .setType(InterestType.INDUSTRY)
+              .setIndustryCode(Integer.parseInt(industryCodeId))
+              .build())
+          .build();
+    }
 
     final TopList<Article, Double> rankedArticlesAndScores =
         Articles.getRankedArticles(user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);

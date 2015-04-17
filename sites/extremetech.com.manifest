@@ -28,15 +28,19 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10509 # Consumer Electronics
-  boost: 3
+  boost: 2
 }
 feature_boost_pattern {
   feature_id: 10503 # Computer Hardware
-  boost: 3
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: 2
 }
 feature_boost_pattern {
   feature_id: 10502 # Computer Software
-  boost: 1
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 20000 # Related to tech startups

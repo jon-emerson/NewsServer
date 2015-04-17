@@ -19,26 +19,32 @@ public class GetPeopleServlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException {
+    // TODO(jonemerson): Remove "contains" a week/two after 4/16/2015.
     String searchString = getParameter(req, "contains");
+    if (searchString == null) {
+      searchString = getParameter(req, "query");
+    }
     Iterable<Entity> people; 
 
     if (searchString != null) {
       people = Database.with(Entity.class).get(
           new QueryOption.WhereLike("keyword", searchString + "%"),
           new QueryOption.WhereEquals("type", "p"),
-          new QueryOption.Limit(20));
+          new QueryOption.DescendingSort("importance"),
+          new QueryOption.Limit(30));
     } else {
-      people = Database.with(Entity.class).get(new QueryOption.WhereEquals("type", "p"), 
-          new QueryOption.Limit(20));
+      people = Database.with(Entity.class).get(
+          new QueryOption.WhereEquals("type", "p"),
+          new QueryOption.DescendingSort("importance"),
+          new QueryOption.Limit(30));
     }
-
-    // TODO: add some kind of sorting for relevance
 
     JSONArray peopleJson = Serializer.toJSON(people);
 
     // Create response.
     JSONObject response = createSuccessResponse();
     response.put("results", peopleJson);
+    response.put("query", searchString);
     return response;
   }
 }

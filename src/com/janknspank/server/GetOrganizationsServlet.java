@@ -21,7 +21,11 @@ public class GetOrganizationsServlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException {
-    String searchString  = getParameter(req, "contains");
+    // TODO(jonemerson): Remove "contains" a week/two after 4/16/2015.
+    String searchString = getParameter(req, "contains");
+    if (searchString == null) {
+      searchString = getParameter(req, "query");
+    }
     Iterable<Entity> orgs; 
 
     // DON'T list more than 9 types here!!  MySQL doesn't use indexes anymore
@@ -56,6 +60,7 @@ public class GetOrganizationsServlet extends StandardServlet {
     // Create response.
     JSONObject response = createSuccessResponse();
     response.put("results", orgsJson);
+    response.put("query", searchString);
     return response;
   }
 }

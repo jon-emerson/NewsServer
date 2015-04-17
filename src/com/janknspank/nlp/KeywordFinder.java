@@ -36,6 +36,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Validator;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.dom.parser.Node;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
 
@@ -105,7 +106,10 @@ public class KeywordFinder {
    * @throws RequiredFieldException 
    */
   public Iterable<ArticleKeyword> findKeywords(
-      String urlId, String title, DocumentNode documentNode)
+      String urlId,
+      String title,
+      DocumentNode documentNode,
+      Iterable<ArticleFeature> articleFeatures)
       throws RequiredFieldException {
     List<ArticleKeyword> keywords = new ArrayList<ArticleKeyword>() {
       @Override
@@ -136,10 +140,10 @@ public class KeywordFinder {
         (int) Math.ceil(((double) Iterables.size(paragraphs)) * 2 / 3)); 
     Iterables.addAll(keywords, findParagraphKeywords(urlId, title, paragraphs));
 
-    return KeywordCanonicalizer.canonicalize(keywords);
+    return KeywordCanonicalizer.canonicalize(keywords, articleFeatures);
   }
 
-  public synchronized Iterable<ArticleKeyword> findParagraphKeywords(
+  private synchronized Iterable<ArticleKeyword> findParagraphKeywords(
       String urlId, String title, Iterable<String> paragraphs) {
     List<ArticleKeyword> keywords = Lists.newArrayList();
 
@@ -195,7 +199,7 @@ public class KeywordFinder {
       locationFinderMe.clearAdaptiveData();
     }
 
-    return KeywordCanonicalizer.canonicalize(keywords);
+    return keywords;
   }
 
   private synchronized Iterable<ArticleKeyword> findKeywords(

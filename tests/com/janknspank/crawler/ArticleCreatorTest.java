@@ -18,6 +18,7 @@ import com.janknspank.dom.parser.DocumentBuilder;
 import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 @SuppressWarnings("resource")
 public class ArticleCreatorTest {
@@ -79,74 +80,77 @@ public class ArticleCreatorTest {
 
   @Test
   public void testGetTitle() throws Exception {
+    SiteManifest site = SiteManifest.getDefaultInstance();
     assertEquals("National Society of Film Critics goes for Godard",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "&#8203;National Society of Film Critics goes for Godard - CBS News")));
+            "&#8203;National Society of Film Critics goes for Godard - CBS News"), site));
     assertEquals("Cops turn backs on deBlasio at officer's funeral",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Cops turn backs on deBlasio at officer's funeral | Al Jazeera America")));
+            "Cops turn backs on deBlasio at officer's funeral | Al Jazeera America"), site));
     assertEquals("Ten years on: Oxfam digests lessons from 2004 Indian Ocean tsunami",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Ten years on: Oxfam digests lessons from 2004 Indian Ocean tsunami - CNN.com")));
+            "Ten years on: Oxfam digests lessons from 2004 Indian Ocean tsunami - CNN.com"), site));
     assertEquals("People don’t work as hard on hot days – or on a warming planet",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "People don’t work as hard on hot days – or on a warming planet")));
+            "People don’t work as hard on hot days – or on a warming planet"), site));
     assertEquals("3-Bed, 2.5-Bath in Washington West Gets $50K Price Bump",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "3-Bed, 2.5-Bath in Washington West Gets $50K Price Bump")));
+            "3-Bed, 2.5-Bath in Washington West Gets $50K Price Bump"), site));
     assertEquals("From the Funeral Home to East Boston, Parlor is Custom Skiing to the Core",
         ArticleCreator.getTitle(getDocumentWithTitle(
             "From the Funeral Home to East Boston, Parlor is Custom Skiing to the "
-            + "Core - Eric Wilbur's Sports Blog - Boston.com")));
+            + "Core - Eric Wilbur's Sports Blog - Boston.com"), site));
     assertEquals("Happy New Year.",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Happy New Year. - Love Letters - Boston.com")));
+            "Happy New Year. - Love Letters - Boston.com"), site));
     assertEquals("Sydney hostage-taker called himself a cleric -- and had a criminal record",
         ArticleCreator.getTitle(getDocumentWithTitle(
             "Sydney hostage-taker called himself a cleric -- and had a criminal "
-            + "record - CNN.com")));
+            + "record - CNN.com"), site));
     assertEquals("Good Times From Texas to North Dakota May Turn Bad on Oil-Price Drop",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Good Times From Texas to North Dakota May Turn Bad on Oil-Price Drop")));
+            "Good Times From Texas to North Dakota May Turn Bad on Oil-Price Drop"), site));
     assertEquals("Why didn’t Rolling Stone tell readers about U-Va. denial?",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Why didn’t Rolling Stone tell readers about U-Va. denial?")));
+            "Why didn’t Rolling Stone tell readers about U-Va. denial?"), site));
     assertEquals("The gorgeously-situated weather radar that’s out of this world",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "The gorgeously-situated weather radar that’s out of this world (VIDEO)")));
+            "The gorgeously-situated weather radar that’s out of this world (VIDEO)"), site));
     assertEquals("Terry's Talkin' about Cleveland Browns, Justin Gilbert and the draft",
         ArticleCreator.getTitle(getDocumentWithTitle(
             "Terry's Talkin' about Cleveland Browns, Justin Gilbert and the "
-            + "draft -- Terry Pluto (video)")));
+            + "draft -- Terry Pluto (video)"), site));
     assertEquals("Bloomberg Best: From Our Bureaus Worldwide – August 14",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Bloomberg Best: From Our Bureaus Worldwide – August 14 (Audio)")));
+            "Bloomberg Best: From Our Bureaus Worldwide – August 14 (Audio)"), site));
     assertEquals("Cleveland Browns' 2014: Mike Pettine's season was \"solid\"",
         ArticleCreator.getTitle(getDocumentWithTitle(
             "Cleveland Browns' 2014: Mike Pettine's season was "
-            + "\"solid\" -- Bud Shaw's Sports Spin (videos)")));
+            + "\"solid\" -- Bud Shaw's Sports Spin (videos)"), site));
     assertEquals("The legitimacy of Israel’s nation-state bill (II): diplomatic considerations",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "The legitimacy of Israel’s nation-state bill (II): diplomatic considerations")));
+            "The legitimacy of Israel’s nation-state bill (II): diplomatic considerations"), site));
     assertEquals("Gogo plane Wi-Fi blocks YouTube (and can read your email)",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Gogo plane Wi-Fi blocks YouTube (and can read your email)")));
+            "Gogo plane Wi-Fi blocks YouTube (and can read your email)"), site));
     assertEquals("Defenseman Mike Green (upper-body) missing Tampa Bay trip",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Defenseman Mike Green (upper-body) missing Tampa Bay trip")));
+            "Defenseman Mike Green (upper-body) missing Tampa Bay trip"), site));
     assertEquals("Why Brad Paisley’s self-deprecating ‘black-ish’/’white-ish’ joke at the "
             + "CMAs was a bad idea. (But not racist.)",
         ArticleCreator.getTitle(getDocumentWithTitle(
             "Why Brad Paisley’s self-deprecating ‘black-ish’/’white-ish’ joke at the "
-            + "CMAs was a bad idea. (But not racist.)")));
+            + "CMAs was a bad idea. (But not racist.)"), site));
     assertEquals("Why I Did Not Go To Jail",
-        ArticleCreator.getTitle(getDocumentWithTitle("Why I Did Not Go To Jail - Ben's Blog")));
+        ArticleCreator.getTitle(getDocumentWithTitle("Why I Did Not Go To Jail - Ben's Blog"),
+        site));
     assertEquals("Study: Oil Price Downturn Creates Need for 'Cost Culture' in Industry",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "RIGZONE - Study: Oil Price Downturn Creates Need for 'Cost Culture' in Industry")));
+            "RIGZONE - Study: Oil Price Downturn Creates Need for 'Cost Culture' in Industry"),
+        site));
     assertEquals("Candy Crush Offices by Adolfsson & Partners, Stockholm",
         ArticleCreator.getTitle(getDocumentWithTitle(
-            "Candy Crush Offices by Adolfsson & Partners, Stockholm | urdesign magazine")));
+            "Candy Crush Offices by Adolfsson & Partners, Stockholm | urdesign magazine"), site));
   }
 
   @Test

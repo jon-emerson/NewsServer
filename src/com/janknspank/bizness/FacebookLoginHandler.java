@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
-import java.util.regex.Pattern;
 
 import com.google.api.client.util.Lists;
 import com.google.common.base.Predicate;
-import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -53,9 +52,7 @@ import com.restfb.types.User.Work;
  * latest and greatest Facebook profile.
  */
 public class FacebookLoginHandler {
-  private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s|\\n|\\r|\\xA0)+");
-
-  public static com.restfb.types.User getFacebookUser(String fbAccessToken, String fbUserId)
+  public static com.restfb.types.User getFacebookUser(String fbAccessToken)
       throws SocialException, RequestException {
     FacebookClient facebookClient = new DefaultFacebookClient(
         fbAccessToken, FacebookData.getFacebookAppSecret(), Version.VERSION_2_2);
@@ -63,8 +60,6 @@ public class FacebookLoginHandler {
         facebookClient.fetchObject("/me", com.restfb.types.User.class);
     if (fbUser == null) {
       throw new RequestException("Could not retrieve user from Facebook");
-    } else if (!fbUser.getId().equals(fbUserId)) {
-      throw new RequestException("fb_access_token is not for fb_user_id");
     }
     return fbUser;
   }
@@ -125,6 +120,20 @@ public class FacebookLoginHandler {
     return companyNames;
   }
 
+  private static Iterable<String> split(String text) {
+    ImmutableList.Builder<String> builder = ImmutableList.builder();
+    if (!Strings.isNullOrEmpty(text)) {
+      for (String sentence : KeywordFinder.getInstance().getSentences(text)) {
+        for (String token : KeywordFinder.getInstance().getTokens(sentence)) {
+          if (!Strings.isNullOrEmpty(token)) {
+            builder.add(KeywordUtils.cleanKeyword(token));
+          }
+        }
+      }
+    }
+    return builder.build();
+  }
+
   /**
    * Puts all the human-readable-text we have about the current user, at least
    * as far as professional interests go, into a Vector that we can use to
@@ -133,7 +142,7 @@ public class FacebookLoginHandler {
   private static Vector getFacebookUserVector(com.restfb.types.User fbUser) {
     VectorData.Builder builder = VectorData.newBuilder();
     for (String companyName : getCompanyNames(fbUser)) {
-      for (String word : Splitter.on(WHITESPACE_PATTERN).split(companyName)) {
+      for (String word : split(companyName)) {
         builder.addWordFrequency(WordFrequency.newBuilder()
             .setWord(word)
             .setFrequency(10));
@@ -141,85 +150,100 @@ public class FacebookLoginHandler {
     }
     for (Work work : fbUser.getWork()) {
       if (work.getPosition() != null) {
-        for (String word : Splitter.on(WHITESPACE_PATTERN).split(work.getPosition().getName())) {
+        for (String word : split(work.getPosition().getName())) {
           builder.addWordFrequency(WordFrequency.newBuilder()
               .setWord(word)
               .setFrequency(10));
         }
       }
-      if (!Strings.isNullOrEmpty(work.getDescription())) {
-        for (String sentence : KeywordFinder.getInstance().getSentences(work.getDescription())) {
-          for (String token : KeywordFinder.getInstance().getTokens(sentence)) {
-            builder.addWordFrequency(WordFrequency.newBuilder()
-                .setWord(KeywordUtils.cleanKeyword(token))
-                .setFrequency(5));
-          }
+      for (String token : split(work.getDescription())) {
+        builder.addWordFrequency(WordFrequency.newBuilder()
+            .setWord(token)
+            .setFrequency(8));
+      }
+      if (work.getLocation() != null) {
+        for (String token : split(work.getLocation().getName())) {
+          builder.addWordFrequency(WordFrequency.newBuilder()
+              .setWord(token)
+              .setFrequency(1));
         }
       }
     }
     for (Education education : fbUser.getEducation()) {
       for (NamedFacebookType concentration : education.getConcentration()) {
-        if (!Strings.isNullOrEmpty(concentration.getName())) {
-          for (String word : Splitter.on(WHITESPACE_PATTERN).split(concentration.getName())) {
-            builder.addWordFrequency(WordFrequency.newBuilder()
-                .setWord(word)
-                .setFrequency(5));
-          }
+        for (String word : split(concentration.getName())) {
+          builder.addWordFrequency(WordFrequency.newBuilder()
+              .setWord(word)
+              .setFrequency(5));
         }
       }
       NamedFacebookType school = education.getSchool();
-      if (school != null && !Strings.isNullOrEmpty(school.getName())) {
-        for (String word : Splitter.on(WHITESPACE_PATTERN).split(school.getName())) {
+      if (school != null) {
+        for (String word : split(school.getName())) {
           builder.addWordFrequency(WordFrequency.newBuilder()
               .setWord(word)
               .setFrequency(1));
         }
       }
       for (EducationClass educationClass : education.getClasses()) {
-        if (!Strings.isNullOrEmpty(educationClass.getName())) {
-          for (String word : Splitter.on(WHITESPACE_PATTERN).split(educationClass.getName())) {
-            builder.addWordFrequency(WordFrequency.newBuilder()
-                .setWord(word)
-                .setFrequency(1));
-          }
-        }
-      }
-    }
-    NamedFacebookType location = fbUser.getLocation();
-    if (location != null) {
-      String locationName = location.getName();
-      if (!Strings.isNullOrEmpty(locationName)) {
-        for (String word : Splitter.on(WHITESPACE_PATTERN).split(locationName)) {
+        for (String word : split(educationClass.getName())) {
           builder.addWordFrequency(WordFrequency.newBuilder()
               .setWord(word)
               .setFrequency(1));
         }
       }
     }
-    String about = fbUser.getAbout();
-    if (!Strings.isNullOrEmpty(about)) {
-      for (String sentence : KeywordFinder.getInstance().getSentences(about)) {
-        for (String token : KeywordFinder.getInstance().getTokens(sentence)) {
-          builder.addWordFrequency(WordFrequency.newBuilder()
-              .setWord(KeywordUtils.cleanKeyword(token))
-              .setFrequency(1));
-        }
+    NamedFacebookType location = fbUser.getLocation();
+    if (location != null) {
+      String locationName = location.getName();
+      for (String word : split(locationName)) {
+        builder.addWordFrequency(WordFrequency.newBuilder()
+            .setWord(word)
+            .setFrequency(1));
       }
+    }
+    for (String aboutToken : split(fbUser.getAbout())) {
+      builder.addWordFrequency(WordFrequency.newBuilder()
+          .setWord(aboutToken)
+          .setFrequency(1));
     }
     return new Vector(builder.build());
   }
 
-  private static Iterable<FeatureId> getTop3IndustryFeatureIds(com.restfb.types.User fbUser) {
+  private static TopList<FeatureId, Double> getIndustryFeatureIds(com.restfb.types.User fbUser) {
     Vector facebookUserVector = getFacebookUserVector(fbUser);
-    TopList<FeatureId, Double> top3IndustryFeatureIds = new TopList<>(3);
+
+    // If we have nothing to go off of, let the user choose for himself instead.
+    TopList<FeatureId, Double> topIndustryFeatureIds = new TopList<>(5);
+    if (facebookUserVector.getUniqueWordCount() < 5) {
+      return topIndustryFeatureIds;
+    }
+
     for (Feature feature : Feature.getAllFeatures()) {
+      if (feature.getFeatureId() == FeatureId.SPORTS
+          || feature.getFeatureId() == FeatureId.LEISURE_TRAVEL_AND_TOURISM) {
+        continue; // Ya, um, let's not... :)
+      }
+
       if (feature.getFeatureId().getFeatureType() == FeatureType.INDUSTRY
           && feature instanceof VectorFeature) {
-        top3IndustryFeatureIds.add(feature.getFeatureId(),
-            ((VectorFeature) feature).score(facebookUserVector, 0 /* boost */));
+        double score = ((VectorFeature) feature).score(facebookUserVector, 0 /* boost */);
+
+        // Slightly punish Aviation since it tends to score well against
+        // locations from people's profiles, since airports are usually
+        // in those locations too.
+        if (feature.getFeatureId() == FeatureId.AVIATION) {
+          score -= 0.05;
+        }
+
+        // Manual testing showed us that scores < 0.8 tended to be false
+        // positives, even if they were the highest scores.
+        if (score > 0.8) {
+          topIndustryFeatureIds.add(feature.getFeatureId(), score);
+        }
       }
     }
-    return top3IndustryFeatureIds.getKeys();
+    return topIndustryFeatureIds;
   }
 
   /**
@@ -233,18 +257,18 @@ public class FacebookLoginHandler {
     // our very-helpful-fuzzy-logic-friendly KeywordToEntityId table, or by
     // hoping the user happened to type an Entity we know exactly about.
     Set<String> companyNames = getCompanyNames(fbUser);
-    Map<String, Entity> companyEntityMap = Maps.newHashMap();
+    Map<String, String> companyEntityIdMap = Maps.newHashMap();
     for (String companyName : companyNames) {
-      Entity entity = KeywordCanonicalizer.getEntityForKeyword(companyName);
-      if (entity != null) {
-        companyEntityMap.put(companyName.toLowerCase(), entity);
+      String entityId = KeywordCanonicalizer.getEntityIdForKeyword(companyName);
+      if (entityId != null) {
+        companyEntityIdMap.put(companyName.toLowerCase(), entityId);
       }
     }
     for (Entity entity : Entities.getEntitiesByKeyword(
-        Sets.difference(companyNames, ImmutableSet.copyOf(companyEntityMap.keySet())))) {
+        Sets.difference(companyNames, ImmutableSet.copyOf(companyEntityIdMap.keySet())))) {
       // Here we're fetching Entities for any companies for which there weren't
       // KeywordToEntityId table rows for.
-      companyEntityMap.put(entity.getKeyword().toLowerCase(), entity);
+      companyEntityIdMap.put(entity.getKeyword().toLowerCase(), entity.getId());
     }
 
     // Start building interests.
@@ -254,20 +278,18 @@ public class FacebookLoginHandler {
           .setId(GuidFactory.generate())
           .setType(InterestType.ENTITY)
           .setSource(InterestSource.FACEBOOK_PROFILE)
-          .setCreateTime(System.currentTimeMillis());
-      if (companyEntityMap.containsKey(companyName.toLowerCase())) {
-        companyInterestBuilder.setEntity(companyEntityMap.get(companyName.toLowerCase()));
-      } else {
-        companyInterestBuilder.setEntity(Entity.newBuilder()
-            .setId(GuidFactory.generate())
-            .setKeyword(companyName)
-            .setType(EntityType.COMPANY.toString())
-            .setSource(Source.USER)
-            .build());
-      }
+          .setCreateTime(System.currentTimeMillis())
+          .setEntity(Entity.newBuilder()
+              .setId(companyEntityIdMap.containsKey(companyName.toLowerCase())
+                  ? companyEntityIdMap.get(companyName.toLowerCase()) : GuidFactory.generate())
+              .setKeyword(companyName)
+              .setType(EntityType.COMPANY.toString())
+              .setSource(companyEntityIdMap.containsKey(companyName.toLowerCase())
+                  ? Source.DBPEDIA_INSTANCE_TYPE : Source.USER)
+              .build());
       interests.add(companyInterestBuilder.build());
     }
-    for (FeatureId industryFeatureId : getTop3IndustryFeatureIds(fbUser)) {
+    for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
       interests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
           .setType(InterestType.INDUSTRY)
@@ -318,5 +340,22 @@ public class FacebookLoginHandler {
     }
 
     return user;
+  }
+
+  public static void main(String args[]) throws Exception {
+    String fbAccessToken;
+    String param = args[0];
+    if (param.contains("@")) {
+      fbAccessToken = Users.getByEmail(param).getFacebookAccessToken();
+    } else {
+      fbAccessToken = param;
+    }
+
+    com.restfb.types.User fbUser = FacebookLoginHandler.getFacebookUser(fbAccessToken);
+    TopList<FeatureId, Double> featureIdTopList = getIndustryFeatureIds(fbUser);
+    for (FeatureId featureId : featureIdTopList) {
+      System.out.println(featureId.getId() + ": " + featureId.getTitle()
+          + " (" + featureIdTopList.getValue(featureId) + ")");
+    }
   }
 }

@@ -1,5 +1,10 @@
 name: "Tom Charytoniuk"
 email: "tom.charytoniuk@gmail.com"
+good_url: "http://www.engadget.com/2015/04/16/etsy-ipo/"
+good_url: "http://techcrunch.com/2015/04/15/sources-yahoo-in-talks-to-buy-foursquare/"
+good_url: "http://techcrunch.com/2015/04/15/google-shopping-so-android-probe/"
+good_url: "https://medium.com/@davemcclure/bubble-my-ass-some-unicorns-might-be-overvalued-but-all-dinosaurs-gonna-die-fb0ce311a7bd"
+good_url: "http://fortune.com/2015/04/10/brainstorming-with-marc-andreessen/"
 good_url: "http://thenextweb.com/facebook/2015/04/03/facebook-might-be-shutting-down-access-to-hashtags-in-its-api/"
 good_url: "http://www.theverge.com/2015/4/3/8339197/android-apps-on-windows-mac-linux-chrome-os"
 good_url: "http://www.inc.com/john-rampton/zendesk-s-mikkel-svane-takes-readers-behind-the-scenes-of-founding-a-startup.html"
@@ -20,14 +25,12 @@ good_url: "http://techcrunch.com/2015/02/10/thirty-labs-2m/"
 good_url: "http://bits.blogs.nytimes.com/2015/02/10/yelp-buys-eat24-an-online-food-ordering-service-for-134-million/"
 good_url: "http://mashable.com/2015/02/12/linkedin-closed-api/"
 good_url: "http://bits.blogs.nytimes.com/2015/02/09/sidecar-a-ride-hailing-start-up-pushes-into-package-delivery/"
-good_url: "http://www.washingtonpost.com/blogs/the-switch/wp/2015/02/12/whos-going-to-sue-the-fcc-over-net-neutrality-probably-the-cable-lobby/"
 good_url: "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/"
 good_url: "http://techcrunch.com/2015/02/04/microsoft-sunrise/"
 good_url: "http://techcrunch.com/2014/09/09/announces-mobile-payments-solution-called-apple-pay/"
 good_url: "http://techcrunch.com/2015/02/11/google-launches-open-source-cross-cloud-benchmarking-tool/"
 good_url: "http://bits.blogs.nytimes.com/2015/02/11/microsoft-continues-mobile-push-with-sunrise-acquisition/"
 good_url: "http://www.engadget.com/2015/02/11/lutz-driverless-car-uk"
-good_url: "http://www.latimes.com/business/la-fi-hy-apple-charging-into-electric-car-market-20150213-story.html"
 good_url: "http://techcrunch.com/2015/02/02/googles-u-s-search-ex-mobiles-drops-below-75-as-yahoo-makes-more-firefox-gains/"
 good_url: "http://bits.blogs.nytimes.com/2015/02/02/uber-to-open-center-for-research-on-self-driving-cars/"
 good_url: "http://recode.net/2015/02/04/tweets-now-coming-to-your-google-search-results/"
@@ -38,7 +41,6 @@ good_url: "http://thenextweb.com/insider/2015/02/20/kevin-roses-photo-video-shar
 good_url: "http://www.engadget.com/2015/02/20/google-mobile-search-carousel/"
 good_url: "http://www.bbc.co.uk/news/technology-31552029"
 good_url: "https://gigaom.com/2015/02/20/smart-devices-can-make-the-insurance-biz-proactive-not-reactive/"
-good_url: "http://bits.blogs.nytimes.com/2015/02/20/internet-taxes-another-window-into-the-net-neutrality-debate/"
 good_url: "http://techcrunch.com/2015/02/20/apple-said-to-be-planning-os-x-like-public-beta-seed-program-for-ios-too/"
 good_url: "http://techcrunch.com/2015/02/20/grabble-closes-1-8m-angel-round-for-its-tinder-like-fashion-shopping-app/"
 good_url: "http://recode.net/2015/02/23/google-strikes-deal-with-big-wireless-carriers-buys-softcard-technology/"
@@ -50,7 +52,6 @@ good_url: "http://www.bbc.co.uk/news/technology-31611292"
 good_url: "https://gigaom.com/2015/02/24/the-19-billion-question-is-snapchat-the-new-television/"
 good_url: "http://www.inc.com/drew-hendricks/how-to-manage-equity-in-your-startup.html"
 good_url: "http://www.bbc.com/news/technology-31640539"
-good_url: "http://gizmodo.com/fcc-passes-strongest-net-neutrality-rules-in-americas-h-1688204371"
 good_url: "https://gigaom.com/2015/02/26/google-solarcity-partner-on-750m-fund-for-rooftop-solar/"
 good_url: "http://www.forbes.com/sites/frankbi/2015/02/26/drone-maker-3d-robotics-raises-50-million-in-latest-round/"
 good_url: "http://www.inc.com/minda-zetlin/why-the-smartest-entrepreneurs-have-multiple-mentors.html"
@@ -96,14 +97,31 @@ good_url: "http://recode.net/2015/03/25/august-locks-down-38-million-in-series-b
 good_url: "http://techcrunch.com/2015/03/24/keywee-gets-9-1m-from-eric-schmidt-ny-times-for-its-ai-approach-to-content-marketing/?ncid=rss"
 good_url: "http://www.nytimes.com/2015/03/20/business/elon-musk-says-self-driving-tesla-cars-will-be-in-the-us-by-summer.html?_r=0"
 good_url: "http://techcrunch.com/2015/03/18/battle-for-the-building-blocks/"
+bad_url: "http://www.bbc.co.uk/news/world-latin-america-32263503"
 bad_url: "http://www.washingtonpost.com/blogs/the-switch/wp/2015/02/12/facebook-will-now-let-you-manage-what-happens-to-your-account-after-you-die/"
 bad_url: "http://www.cbsnews.com/news/whos-the-better-investor-men-or-women/"
 bad_url: "http://recode.net/2015/02/09/tech-titans-look-back-and-ahead-at-detroit/"
+bad_url: "http://www.huffingtonpost.com/2015/04/10/us-man-arrested-bomb-fort-riley_n_7041960.html"
+bad_url: "http://www.bbc.co.uk/news/uk-england-norfolk-32256720"
+bad_url: "http://www.businessinsider.com/what-is-kukukube-2015-4"
+bad_url: "http://www.telegraph.co.uk/finance/newsbysector/mediatechnologyandtelecoms/electronics/11529530/Are-you-playing-with-your-hair-or-sending-a-text-message.html"
+bad_url: "http://www.businessinsider.com/the-most-important-stories-in-advertising-april-10-2015-4"
+bad_url: "http://www.telegraph.co.uk/travel/hotels/11527608/Luxury-hotels-for-less.html"
+bad_url: "http://www.cbsnews.com/news/teens-drug-overdose-story-goes-viral-online/"
+bad_url: "http://www.businessinsider.com/three-models-must-watch-facebook-video-sketchshe-2015-4"
+bad_url: "http://www.huffingtonpost.com/jonathan-kim/rethink-review-ex-machina_b_7039410.html"
+bad_url: "http://www.bbc.co.uk/news/world-latin-america-32245532"
+bad_url: "http://www.huffingtonpost.com/2015/04/10/hamburger-bun-history_n_7029310.html"
+bad_url: "http://www.theatlantic.com/business/archive/2015/04/what-would-a-world-without-language-barriers-look-like/390081/"
+bad_url: "http://www.huffingtonpost.com/rebecca-bratspies/to-the-strangers-who-performed-cpr-on-my-partner_b_7028066.html"
+bad_url: "http://www.businessinsider.com/best-websites-for-cheap-flight-tickets-2015-4"
 bad_url: "http://www.theverge.com/2015/2/9/8004117/dell-venue-8-7000-tablet-review"
 bad_url: "http://www.theverge.com/2015/2/12/8025729/twitter-ads-every-twenty-tweets-dick-costolo"
 bad_url: "http://www.nytimes.com/2015/02/01/magazine/black-mirror-and-the-horrors-and-delights-of-technology.html"
 bad_url: "http://mashable.com/2015/02/12/choir-300-android-smartphones/"
 bad_url: "http://sf.curbed.com/archives/2015/02/09/perks_of_no_parking.php"
+bad_url: "http://www.bbc.co.uk/news/world-us-canada-32252374"
+bad_url: "http://www.bbc.co.uk/news/world-latin-america-32246115"
 bad_url: "http://arstechnica.com/security/2014/04/vicious-heartbleed-bug-bites-millions-of-android-phones-other-devices/"
 bad_url: "http://www.theverge.com/2015/2/11/8022411/how-many-vaccine-deniers-silicon-valley"
 bad_url: "http://www.cnn.com/2014/12/16/tech/web/google-year-in-search-2014/index.html"
@@ -157,6 +175,43 @@ bad_url: "http://www.bbc.com/culture/story/20150326-anne-frank-the-cult-of-the-d
 bad_url: "http://www.theguardian.com/commentisfree/2015/apr/03/bad-language-bugs-me"
 bad_url: "http://www.huffingtonpost.com/ken-solin/how-to-spring-clean-your-online-dating-profile_b_6947954.html"
 bad_url: "http://mashable.com/2015/04/03/police-killing-stats/"
+bad_url: "http://www.theatlantic.com/technology/archive/2015/04/how-to-say-yes-by-not-saying-yes/390129/"
+bad_url: "http://www.bbc.co.uk/news/world-us-canada-32252374"
+bad_url: "http://www.theatlantic.com/international/archive/2015/04/more-than-a-handshake/390246/"
+bad_url: "http://www.telegraph.co.uk/news/worldnews/centralamericaandthecaribbean/cuba/11526668/US-and-Cuba-hold-highest-level-meeting-in-more-than-50-years.html"
+bad_url: "http://www.forbes.com/sites/andersonantunes/2015/04/11/mark-zuckerberg-meets-with-brazils-president-at-the-7th-summit-of-the-americas-in-panama/"
+bad_url: "http://www.cnn.com/2015/04/10/politics/joe-biden-pacifier-bloomberg-grandson/"
+bad_url: "http://www.bbc.co.uk/news/world-latin-america-32246115"
+bad_url: "http://www.telegraph.co.uk/culture/film/film-news/11545499/Grimsby-what-have-the-Sony-leaks-revealed-about-Sacha-Baron-Cohens-new-movie.html"
+bad_url: "http://www.theatlantic.com/politics/archive/2015/04/10-questions-about-the-hillary-clinton-campaign/390225/"
+bad_url: "http://www.theatlantic.com/politics/archive/2015/04/rand-paul-media-darling/390180/"
+bad_url: "http://www.theatlantic.com/politics/archive/2015/04/end-of-day-wrap-up-south-carolina-shooting-witness-steps-forward/390150/"
+bad_url: "http://www.theatlantic.com/politics/archive/2015/04/the-civil-war-isnt-over/389847/"
+bad_url: "http://www.theatlantic.com/politics/archive/2015/04/democrats-dont-vote/389898/"
+bad_url: "http://www.theatlantic.com/politics/archive/2015/04/southern-baptists-wrestle-with-the-sin-of-racism/389808/"
+bad_url: "http://www.theatlantic.com/politics/archive/2015/04/why-couldnt-the-left-unseat-rahm-emanuel/389354/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/10/a-brief-history-of-political-halloween-costumes/264120/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/10/if-mitt-romney-loses-blame-all-the-time-the-gop-wasted-this-cycle/264089/"
+bad_url: "http://www.theatlantic.com/magazine/archive/2012/11/hacking-the-presidents-dna/309147/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/10/the-real-libya-story-there-is-no-story/264081/"
+bad_url: "http://www.theatlantic.com/politics/archive/2013/09/obama-calls-congresss-bluff-with-strict-new-coal-emission-rules/279852/"
+bad_url: "http://www.theatlantic.com/technology/archive/2013/09/on-this-day-in-1984-president-gerald-ford-was-temporarily-trapped-in-an-elevator/279836/"
+bad_url: "http://www.theatlantic.com/politics/archive/2013/09/the-sequester-is-a-disaster-and-congresss-next-move-may-be-worse/279819/"
+bad_url: "http://www.theatlantic.com/magazine/archive/2013/08/the-cultural-meaning-of-the-kennedys/309498/"
+bad_url: "http://www.theatlantic.com/magazine/archive/2013/08/how-could-vietnam-happen/309485/"
+bad_url: "http://www.theatlantic.com/magazine/archive/2013/08/baleful_influence_of_gambling/309479/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/06/the-real-reason-eric-holder-should-resign-as-attorney-general/258602/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/06/will-text-message-fundraising-revolutionize-the-political-cash-game/258612/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/06/praise-for-obama-on-immigration-from-the-religious-right/258584/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/06/obamas-game-changer-on-young-illegal-immigrants/258550/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/06/the-95-thakoon-panichgul-scarf-that-could-help-reelect-obama/258536/"
+bad_url: "http://www.theatlantic.com/politics/archive/2012/06/in-ohio-obama-and-romney-both-offer-few-new-economic-proposals/258519/"
+bad_url: "http://cleantechnica.com/2015/04/14/100-renewable-electricity-2050-possible-france/"
+bad_url: "http://www.nytimes.com/2015/04/15/upshot/marco-rubio-an-upshot-debate-about-his-chances.html"
+bad_url: "http://bleacherreport.com/articles/2429769-colts-defensive-end-arthur-jones-jinxes-son-during-little-league-practice"
+bad_url: "http://thenextweb.com/insider/2015/04/16/microsoft-releases-halo-spartan-strike-for-windows-8-windows-phone-and-ios/"
+bad_url: "http://www.extremetech.com/extreme/203490-moores-law-is-dead-long-live-moores-law"
+bad_url: "http://bleacherreport.com/articles/2422975-4-star-rb-matt-falcon-breaks-down-top-5-in-br-exclusive"
 linked_in_contact_name: "Arthur Jones"
 linked_in_contact_name: "Tyanne Olson"
 linked_in_contact_name: "Allison Mitchell"
@@ -438,15 +493,15 @@ linked_in_contact_name: "Francis Ma"
 linked_in_contact_name: "Megan Weeks"
 linked_in_contact_name: "Randall Sarafa"
 interest {
-  id: "55034c01e4b097661cf660b0"
+  id: "5526dcefe4b088699041d939"
   type: ENTITY
   source: USER
   create_time: 1426279425145
   entity {
-    id: "55034c01e4b097661cf660b1"
+    id: "54fd0e70d4c6c665e2175504"
     keyword: "Google"
     type: "c"
-    source: USER
+    source: DBPEDIA_INSTANCE_TYPE
   }
 }
 interest {
@@ -457,8 +512,63 @@ interest {
   industry_code: 10501
 }
 interest {
+  id: "55034f7de4b097661cf860b8"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426280337632
+  industry_code: 10558
+}
+interest {
   id: "55034f7fe4b097661cf660b9"
   type: LINKED_IN_CONTACTS
   source: USER
   create_time: 1426280319575
+}
+interest {
+  id: "552ff2c9e4b07f3d14acb88c"
+  type: ENTITY
+  source: FACEBOOK_PROFILE
+  create_time: 1426279425145
+  entity {
+    id: "54fc199ed4c6e3794c8c668c"
+    keyword: "Redfin"
+    type: "c"
+    source: DBPEDIA_INSTANCE_TYPE
+  }
+}
+interest {
+  id: "551ef4e7e4b07a8e51d6c657"
+  type: ENTITY
+  source: USER
+  create_time: 1426279425145
+  entity {
+    id: "54fd1840d4c6c665e226cbc0"
+    keyword: "Glenn Kelman"
+    type: "p"
+    source: DBPEDIA_INSTANCE_TYPE
+  }
+}
+interest {
+  id: "550f76e2e4b0931f760e02d1"
+  type: ENTITY
+  source: USER
+  create_time: 1426279425145
+  entity {
+    id: "54fcb9abd4c6d6801f288181"
+    keyword: "Zillow"
+    type: "p"
+    source: DBPEDIA_INSTANCE_TYPE
+  }
+}
+interest {
+  id: "550f76bee4b0931f760e02d0"
+  type: ENTITY
+  source: USER
+  create_time: 1426279425145
+  entity {
+    id: "54fc9056d4c6d6801f269b95"
+    keyword: "Trulia"
+    type: "p"
+    source: DBPEDIA_INSTANCE_TYPE
+  }
 }

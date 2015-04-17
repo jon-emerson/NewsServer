@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 
@@ -25,12 +26,13 @@ public class ManualHeuristicFeature extends Feature {
       };
     }
 
+    /** Actually just returns the first 2 paragraphs. */
     public String getBody(final ArticleOrBuilder article) {
       if (this.get().containsKey(article)) {
         return this.get().get(article);
       }
       StringBuilder bodyBuilder = new StringBuilder();
-      for (String paragraph : article.getParagraphList()) {
+      for (String paragraph : Iterables.limit(article.getParagraphList(), 2)) {
         bodyBuilder.append(paragraph.toLowerCase());
         bodyBuilder.append(" ");
       }
@@ -109,6 +111,7 @@ public class ManualHeuristicFeature extends Feature {
           .put("afghanistan", 1.0)
           .put("attack", 1.0)
           .put("attacks", 1.0)
+          .put("crimea", 1.0)
           .put("gaza", 1.0)
           .put("injured", 1.0)
           .put("iran", 1.0)

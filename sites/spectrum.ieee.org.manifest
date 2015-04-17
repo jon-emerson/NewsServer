@@ -89,6 +89,10 @@ feature_boost_pattern {
   boost: 0
 }
 feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: 0
+}
+feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
   boost: -1
 }

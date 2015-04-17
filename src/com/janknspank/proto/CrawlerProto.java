@@ -404,6 +404,26 @@ public final class CrawlerProto {
      */
     boolean getIsHttps();
 
+    // optional bool use_first_paragraph_as_description = 15;
+    /**
+     * <code>optional bool use_first_paragraph_as_description = 15;</code>
+     *
+     * <pre>
+     * Some sites have very very crappy &lt;meta&gt; descriptions.  Use this to
+     * have us pick up the article's first paragraph instead.
+     * </pre>
+     */
+    boolean hasUseFirstParagraphAsDescription();
+    /**
+     * <code>optional bool use_first_paragraph_as_description = 15;</code>
+     *
+     * <pre>
+     * Some sites have very very crappy &lt;meta&gt; descriptions.  Use this to
+     * have us pick up the article's first paragraph instead.
+     * </pre>
+     */
+    boolean getUseFirstParagraphAsDescription();
+
     // repeated string title_selector = 12;
     /**
      * <code>repeated string title_selector = 12;</code>
@@ -608,17 +628,17 @@ public final class CrawlerProto {
               break;
             }
             case 98: {
-              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
                 titleSelector_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00001000;
+                mutable_bitField0_ |= 0x00002000;
               }
               titleSelector_.add(input.readBytes());
               break;
             }
             case 106: {
-              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
                 featureBoostPattern_ = new java.util.ArrayList<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern>();
-                mutable_bitField0_ |= 0x00002000;
+                mutable_bitField0_ |= 0x00004000;
               }
               featureBoostPattern_.add(input.readMessage(com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.PARSER, extensionRegistry));
               break;
@@ -629,6 +649,11 @@ public final class CrawlerProto {
                 mutable_bitField0_ |= 0x00000040;
               }
               paragraphBlacklist_.add(input.readMessage(com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist.PARSER, extensionRegistry));
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00000008;
+              useFirstParagraphAsDescription_ = input.readBool();
               break;
             }
           }
@@ -663,10 +688,10 @@ public final class CrawlerProto {
         if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           rssUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(rssUrl_);
         }
-        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
           titleSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(titleSelector_);
         }
-        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
           featureBoostPattern_ = java.util.Collections.unmodifiableList(featureBoostPattern_);
         }
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
@@ -4784,6 +4809,32 @@ public final class CrawlerProto {
       return isHttps_;
     }
 
+    // optional bool use_first_paragraph_as_description = 15;
+    public static final int USE_FIRST_PARAGRAPH_AS_DESCRIPTION_FIELD_NUMBER = 15;
+    private boolean useFirstParagraphAsDescription_;
+    /**
+     * <code>optional bool use_first_paragraph_as_description = 15;</code>
+     *
+     * <pre>
+     * Some sites have very very crappy &lt;meta&gt; descriptions.  Use this to
+     * have us pick up the article's first paragraph instead.
+     * </pre>
+     */
+    public boolean hasUseFirstParagraphAsDescription() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bool use_first_paragraph_as_description = 15;</code>
+     *
+     * <pre>
+     * Some sites have very very crappy &lt;meta&gt; descriptions.  Use this to
+     * have us pick up the article's first paragraph instead.
+     * </pre>
+     */
+    public boolean getUseFirstParagraphAsDescription() {
+      return useFirstParagraphAsDescription_;
+    }
+
     // repeated string title_selector = 12;
     public static final int TITLE_SELECTOR_FIELD_NUMBER = 12;
     private com.google.protobuf.LazyStringList titleSelector_;
@@ -4883,6 +4934,7 @@ public final class CrawlerProto {
       rssUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       testInstructions_ = com.janknspank.proto.CrawlerProto.TestInstructions.getDefaultInstance();
       isHttps_ = false;
+      useFirstParagraphAsDescription_ = false;
       titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       featureBoostPattern_ = java.util.Collections.emptyList();
     }
@@ -4939,6 +4991,9 @@ public final class CrawlerProto {
       }
       for (int i = 0; i < paragraphBlacklist_.size(); i++) {
         output.writeMessage(14, paragraphBlacklist_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBool(15, useFirstParagraphAsDescription_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5039,6 +5094,10 @@ public final class CrawlerProto {
       for (int i = 0; i < paragraphBlacklist_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(14, paragraphBlacklist_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(15, useFirstParagraphAsDescription_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5201,11 +5260,13 @@ public final class CrawlerProto {
         bitField0_ = (bitField0_ & ~0x00000400);
         isHttps_ = false;
         bitField0_ = (bitField0_ & ~0x00000800);
-        titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        useFirstParagraphAsDescription_ = false;
         bitField0_ = (bitField0_ & ~0x00001000);
+        titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00002000);
         if (featureBoostPatternBuilder_ == null) {
           featureBoostPattern_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
         } else {
           featureBoostPatternBuilder_.clear();
         }
@@ -5316,16 +5377,20 @@ public final class CrawlerProto {
           to_bitField0_ |= 0x00000004;
         }
         result.isHttps_ = isHttps_;
-        if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.useFirstParagraphAsDescription_ = useFirstParagraphAsDescription_;
+        if (((bitField0_ & 0x00002000) == 0x00002000)) {
           titleSelector_ = new com.google.protobuf.UnmodifiableLazyStringList(
               titleSelector_);
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00002000);
         }
         result.titleSelector_ = titleSelector_;
         if (featureBoostPatternBuilder_ == null) {
-          if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          if (((bitField0_ & 0x00004000) == 0x00004000)) {
             featureBoostPattern_ = java.util.Collections.unmodifiableList(featureBoostPattern_);
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00004000);
           }
           result.featureBoostPattern_ = featureBoostPattern_;
         } else {
@@ -5496,10 +5561,13 @@ public final class CrawlerProto {
         if (other.hasIsHttps()) {
           setIsHttps(other.getIsHttps());
         }
+        if (other.hasUseFirstParagraphAsDescription()) {
+          setUseFirstParagraphAsDescription(other.getUseFirstParagraphAsDescription());
+        }
         if (!other.titleSelector_.isEmpty()) {
           if (titleSelector_.isEmpty()) {
             titleSelector_ = other.titleSelector_;
-            bitField0_ = (bitField0_ & ~0x00001000);
+            bitField0_ = (bitField0_ & ~0x00002000);
           } else {
             ensureTitleSelectorIsMutable();
             titleSelector_.addAll(other.titleSelector_);
@@ -5510,7 +5578,7 @@ public final class CrawlerProto {
           if (!other.featureBoostPattern_.isEmpty()) {
             if (featureBoostPattern_.isEmpty()) {
               featureBoostPattern_ = other.featureBoostPattern_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
             } else {
               ensureFeatureBoostPatternIsMutable();
               featureBoostPattern_.addAll(other.featureBoostPattern_);
@@ -5523,7 +5591,7 @@ public final class CrawlerProto {
               featureBoostPatternBuilder_.dispose();
               featureBoostPatternBuilder_ = null;
               featureBoostPattern_ = other.featureBoostPattern_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
               featureBoostPatternBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getFeatureBoostPatternFieldBuilder() : null;
@@ -7415,12 +7483,65 @@ public final class CrawlerProto {
         return this;
       }
 
+      // optional bool use_first_paragraph_as_description = 15;
+      private boolean useFirstParagraphAsDescription_ ;
+      /**
+       * <code>optional bool use_first_paragraph_as_description = 15;</code>
+       *
+       * <pre>
+       * Some sites have very very crappy &lt;meta&gt; descriptions.  Use this to
+       * have us pick up the article's first paragraph instead.
+       * </pre>
+       */
+      public boolean hasUseFirstParagraphAsDescription() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional bool use_first_paragraph_as_description = 15;</code>
+       *
+       * <pre>
+       * Some sites have very very crappy &lt;meta&gt; descriptions.  Use this to
+       * have us pick up the article's first paragraph instead.
+       * </pre>
+       */
+      public boolean getUseFirstParagraphAsDescription() {
+        return useFirstParagraphAsDescription_;
+      }
+      /**
+       * <code>optional bool use_first_paragraph_as_description = 15;</code>
+       *
+       * <pre>
+       * Some sites have very very crappy &lt;meta&gt; descriptions.  Use this to
+       * have us pick up the article's first paragraph instead.
+       * </pre>
+       */
+      public Builder setUseFirstParagraphAsDescription(boolean value) {
+        bitField0_ |= 0x00001000;
+        useFirstParagraphAsDescription_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool use_first_paragraph_as_description = 15;</code>
+       *
+       * <pre>
+       * Some sites have very very crappy &lt;meta&gt; descriptions.  Use this to
+       * have us pick up the article's first paragraph instead.
+       * </pre>
+       */
+      public Builder clearUseFirstParagraphAsDescription() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        useFirstParagraphAsDescription_ = false;
+        onChanged();
+        return this;
+      }
+
       // repeated string title_selector = 12;
       private com.google.protobuf.LazyStringList titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureTitleSelectorIsMutable() {
-        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
           titleSelector_ = new com.google.protobuf.LazyStringArrayList(titleSelector_);
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00002000;
          }
       }
       /**
@@ -7530,7 +7651,7 @@ public final class CrawlerProto {
        */
       public Builder clearTitleSelector() {
         titleSelector_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         onChanged();
         return this;
       }
@@ -7557,9 +7678,9 @@ public final class CrawlerProto {
       private java.util.List<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern> featureBoostPattern_ =
         java.util.Collections.emptyList();
       private void ensureFeatureBoostPatternIsMutable() {
-        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
           featureBoostPattern_ = new java.util.ArrayList<com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern>(featureBoostPattern_);
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00004000;
          }
       }
 
@@ -7708,7 +7829,7 @@ public final class CrawlerProto {
       public Builder clearFeatureBoostPattern() {
         if (featureBoostPatternBuilder_ == null) {
           featureBoostPattern_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           onChanged();
         } else {
           featureBoostPatternBuilder_.clear();
@@ -7785,7 +7906,7 @@ public final class CrawlerProto {
           featureBoostPatternBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPattern.Builder, com.janknspank.proto.CrawlerProto.SiteManifest.FeatureBoostPatternOrBuilder>(
                   featureBoostPattern_,
-                  ((bitField0_ & 0x00002000) == 0x00002000),
+                  ((bitField0_ & 0x00004000) == 0x00004000),
                   getParentForChildren(),
                   isClean());
           featureBoostPattern_ = null;
@@ -12123,8 +12244,8 @@ public final class CrawlerProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/crawler.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\357" +
-      "\010\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
+      "m/janknspank/database/extensions.proto\"\233" +
+      "\t\n\014SiteManifest\022\036\n\013root_domain\030\001 \001(\tB\t\210\246" +
       "\035\001\230\246\035\377\005\022\036\n\017aka_root_domain\030\002 \003(\tB\005\230\246\035\377\005\022" +
       "\034\n\tstart_url\030\003 \003(\tB\t\210\246\035\001\230\246\035\377\005\022\"\n\023subdoma" +
       "in_blacklist\030\004 \003(\tB\005\230\246\035\377\005\0223\n\016path_blackl" +
@@ -12136,41 +12257,42 @@ public final class CrawlerProto {
       "rn\022*\n\033whitelisted_query_parameter\030\010 \003(\tB" +
       "\005\230\246\035\377\005\022\026\n\007rss_url\030\t \003(\tB\005\230\246\035\377\005\0222\n\021test_i" +
       "nstructions\030\n \001(\0132\021.TestInstructionsB\004\210\246" +
-      "\035\001\022\020\n\010is_https\030\013 \001(\010\022\035\n\016title_selector\030\014" +
-      " \003(\tB\005\230\246\035\377\005\022@\n\025feature_boost_pattern\030\r \003" +
-      "(\0132!.SiteManifest.FeatureBoostPattern\032\326\001" +
-      "\n\rPathBlacklist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035" +
-      "\377\005\022C\n\010location\030\004 \001(\0162$.SiteManifest.Path" +
-      "Blacklist.Location:\013STARTS_WITH\"e\n\010Locat",
-      "ion\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS" +
-      "_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n" +
-      "\013REGEX_MATCH\020\006\032H\n\022ParagraphBlacklist\022\027\n\010" +
-      "selector\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\ntext_regex\030\002 \001(" +
-      "\tB\005\230\246\035\377\005\032d\n\021ArticleUrlPattern\022\030\n\tsubdoma" +
-      "in\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035" +
-      "\377\005\022\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\032\217\001\n\023Featu" +
-      "reBoostPattern\022\030\n\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005" +
-      "\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query_reg" +
-      "ex\030\003 \001(\tB\005\230\246\035\377\005\022\022\n\nfeature_id\030\004 \001(\005\022\023\n\005b",
-      "oost\030\005 \001(\005B\004\210\246\035\001\"\314\002\n\020TestInstructions\022B\n" +
-      "\024url_whitelist_checks\030\001 \001(\0132$.TestInstru" +
-      "ctions.UrlWhitelistChecks\022U\n\033article_url" +
-      "_detector_checks\030\002 \001(\0132*.TestInstruction" +
-      "s.ArticleUrlDetectorChecksB\004\210\246\035\001\032E\n\022UrlW" +
-      "hitelistChecks\022\027\n\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022" +
-      "\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUrlDet" +
-      "ectorChecks\022\032\n\013article_url\030\001 \003(\tB\005\230\246\035\377\005\022" +
-      "\036\n\017non_article_url\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014Craw" +
-      "lHistory\022\"\n\010crawl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030",
-      "\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 " +
-      "\003(\0132\022.CrawlHistory.Site\022\030\n\nstart_time\030\004 " +
-      "\001(\003B\004\210\246\035\001\022\020\n\010end_time\030\005 \001(\003\022\016\n\006millis\030\006 " +
-      "\001(\003\022\027\n\017was_interrupted\030\007 \001(\010\032\202\001\n\004Site\022\036\n" +
-      "\013root_domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nstart_t" +
-      "ime\030\002 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\003 \001(\003\022\016\n\006mil" +
-      "lis\030\004 \001(\003\022\036\n\020articles_crawled\030\005 \001(\005B\004\210\246\035" +
-      "\001:\030\212\265\030\024MongoDB.CrawlHistoryB$\n\024com.jankn" +
-      "spank.protoB\014CrawlerProto"
+      "\035\001\022\020\n\010is_https\030\013 \001(\010\022*\n\"use_first_paragr" +
+      "aph_as_description\030\017 \001(\010\022\035\n\016title_select" +
+      "or\030\014 \003(\tB\005\230\246\035\377\005\022@\n\025feature_boost_pattern" +
+      "\030\r \003(\0132!.SiteManifest.FeatureBoostPatter" +
+      "n\032\326\001\n\rPathBlacklist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035" +
+      "\001\230\246\035\377\005\022C\n\010location\030\004 \001(\0162$.SiteManifest.",
+      "PathBlacklist.Location:\013STARTS_WITH\"e\n\010L" +
+      "ocation\022\n\n\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\t" +
+      "ENDS_WITH\020\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020" +
+      "\005\022\017\n\013REGEX_MATCH\020\006\032H\n\022ParagraphBlacklist" +
+      "\022\027\n\010selector\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\ntext_regex\030" +
+      "\002 \001(\tB\005\230\246\035\377\005\032d\n\021ArticleUrlPattern\022\030\n\tsub" +
+      "domain\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(\tB" +
+      "\005\230\246\035\377\005\022\032\n\013query_regex\030\003 \001(\tB\005\230\246\035\377\005\032\217\001\n\023F" +
+      "eatureBoostPattern\022\030\n\tsubdomain\030\001 \001(\tB\005\230" +
+      "\246\035\377\005\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query",
+      "_regex\030\003 \001(\tB\005\230\246\035\377\005\022\022\n\nfeature_id\030\004 \001(\005\022" +
+      "\023\n\005boost\030\005 \001(\005B\004\210\246\035\001\"\314\002\n\020TestInstruction" +
+      "s\022B\n\024url_whitelist_checks\030\001 \001(\0132$.TestIn" +
+      "structions.UrlWhitelistChecks\022U\n\033article" +
+      "_url_detector_checks\030\002 \001(\0132*.TestInstruc" +
+      "tions.ArticleUrlDetectorChecksB\004\210\246\035\001\032E\n\022" +
+      "UrlWhitelistChecks\022\027\n\010good_url\030\001 \003(\tB\005\230\246" +
+      "\035\377\005\022\026\n\007bad_url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUr" +
+      "lDetectorChecks\022\032\n\013article_url\030\001 \003(\tB\005\230\246" +
+      "\035\377\005\022\036\n\017non_article_url\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014",
+      "CrawlHistory\022\"\n\010crawl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002" +
+      "\230\246\035\030\250\246\035\001\022\027\n\004host\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004sit" +
+      "e\030\003 \003(\0132\022.CrawlHistory.Site\022\030\n\nstart_tim" +
+      "e\030\004 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\005 \001(\003\022\016\n\006milli" +
+      "s\030\006 \001(\003\022\027\n\017was_interrupted\030\007 \001(\010\032\202\001\n\004Sit" +
+      "e\022\036\n\013root_domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nsta" +
+      "rt_time\030\002 \001(\003B\004\210\246\035\001\022\020\n\010end_time\030\003 \001(\003\022\016\n" +
+      "\006millis\030\004 \001(\003\022\036\n\020articles_crawled\030\005 \001(\005B" +
+      "\004\210\246\035\001:\030\212\265\030\024MongoDB.CrawlHistoryB$\n\024com.j" +
+      "anknspank.protoB\014CrawlerProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12182,7 +12304,7 @@ public final class CrawlerProto {
           internal_static_SiteManifest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SiteManifest_descriptor,
-              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ParagraphBlacklist", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", "TitleSelector", "FeatureBoostPattern", });
+              new java.lang.String[] { "RootDomain", "AkaRootDomain", "StartUrl", "SubdomainBlacklist", "PathBlacklist", "ParagraphSelector", "ParagraphBlacklist", "ArticleUrlPattern", "WhitelistedQueryParameter", "RssUrl", "TestInstructions", "IsHttps", "UseFirstParagraphAsDescription", "TitleSelector", "FeatureBoostPattern", });
           internal_static_SiteManifest_PathBlacklist_descriptor =
             internal_static_SiteManifest_descriptor.getNestedTypes().get(0);
           internal_static_SiteManifest_PathBlacklist_fieldAccessorTable = new

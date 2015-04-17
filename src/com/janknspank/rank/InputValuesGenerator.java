@@ -48,8 +48,12 @@ public class InputValuesGenerator {
     }
 
     public Set<String> getContactsKeywords(User user) {
+      if (!user.hasId()) {
+        throw new IllegalStateException("User ID cannot be null");
+      }
       ContactsKeywordsCacheItem cacheItem = get();
-      if (cacheItem != null && user.getId().equals(cacheItem.userId)
+      if (cacheItem != null
+          && user.getId().equals(cacheItem.userId)
           && (System.currentTimeMillis() - cacheItem.lastUpdatedMillis)
               < TimeUnit.MINUTES.toMillis(1)) {
         return get().contactsKeywords;
@@ -145,10 +149,14 @@ public class InputValuesGenerator {
           value += 0.05;
         }
         if (article.getParagraph(0).contains(keyword)) {
-          value += 0.025;
+          // There can be lots of false positives here, since we're just looking
+          // for the keyword string anywhere within the paragraph, regardless of
+          // tokenization / industry matches.
+          value += 0.01;
         }
         for (ArticleKeyword articleKeyword : article.getKeywordList()) {
-          if (articleKeyword.getKeyword().equals(keyword)) {
+          if (articleKeyword.getKeyword().equals(keyword)
+              || interest.getEntity().getId().equals(articleKeyword.getEntity().getId())) {
             if (articleKeyword.getStrength()
                   >= KeywordCanonicalizer.STRENGTH_FOR_TITLE_MATCH) {
               value += 0.1;

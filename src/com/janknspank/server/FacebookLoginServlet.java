@@ -29,7 +29,10 @@ public class FacebookLoginServlet extends StandardServlet {
     com.restfb.types.User fbUser;
     User user;
     try {
-      fbUser = FacebookLoginHandler.getFacebookUser(fbAccessToken, fbUserId);
+      fbUser = FacebookLoginHandler.getFacebookUser(fbAccessToken);
+      if (!fbUser.getId().equals(fbUserId)) {
+        throw new RequestException("fb_access_token is not for fb_user_id");
+      }
       user = FacebookLoginHandler.login(fbUser, fbAccessToken);
     } catch (SocialException e) {
       throw new BiznessException("Could not read Facebook properties file", e);

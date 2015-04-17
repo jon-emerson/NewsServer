@@ -173,16 +173,18 @@ public class ParagraphFinder {
       return false;
     }
 
-    // HACK(jonemerson): Unfortunately we have to do this...
-    // Actually, this was a bad idea.  Witness:
+    // HACK(jonemerson): If people are glaringly touting that people should
+    // follow them on Facebook and/or Twitter, don't include it in our indexing.
+    // NOTE TO FUTURE SELVES: BE CAREFUL HERE.  Many sentences use the word
+    // "like" in completely fair ways.  Don't filter on the word "like".  E.g.:
     // - "But WhatsApp has been able to hold its weight against messaging
     //     heavyweights like Twitter."
     // - "Like Instagram, WhatsApp will function as an autonomous unit within
     //     Facebook."
-    // if ((text.contains("facebook") || text.contains("twitter"))
-    //     && (text.contains("like") || text.contains("follow"))) {
-    //   return false;
-    // }
+    if ((text.contains("facebook") || text.contains("twitter"))
+         && text.contains("follow")) {
+       return false;
+    }
 
     return true;
   }

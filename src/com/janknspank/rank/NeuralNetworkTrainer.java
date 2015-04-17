@@ -22,28 +22,31 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Doubles;
+import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.classifier.FeatureId;
+import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
 import com.janknspank.proto.UserProto.UserAction.ActionType;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private static int MAX_ITERATIONS = 50000;
+  private static final int MAX_ITERATIONS = 40000;
+  private static final boolean IN_DELETE_MODE = false;
 
   private double lowestError = 1.0;
   private Double[] lowestErrorNetworkWeights;
+  private int lowestErrorIteration = 0;
 
   @SuppressWarnings("unused")
   private Double[] lastNetworkWeights;
-
-  @SuppressWarnings("unused")
-  private double lowestErrorIteration = 0;
 
   private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
     NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(
@@ -60,7 +63,8 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     System.out.println("Training neural network...");
     neuralNetwork.learn(trainingSet);
-    System.out.println("Trained");
+    System.out.println("Trained - iteration " + lowestErrorIteration + " used w/ "
+        + lowestError + " error rate");
 
     // NOTE(jonemerson): We used to do this, but I found that about 30% of the
     // time, the neural network would come out ranking crappy articles highly.
@@ -73,7 +77,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     // Print correlation of each input node to the output.
     for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
-      double [] isolatedInput = NeuralNetworkScorer.generateIsolatedInputNodes(i);
+      double[] isolatedInput = NeuralNetworkScorer.generateIsolatedInputNodes(i);
       neuralNetwork.setInput(isolatedInput);
       neuralNetwork.calculate();
       System.out.println("Input node " + i + " correlation to output: " 
@@ -92,8 +96,9 @@ public class NeuralNetworkTrainer implements LearningEventListener {
         new QueryOption.WhereEquals("email", ImmutableList.of(
             "dvoytenko@yahoo.com",
             "jon@jonemerson.net",
-            "panaceaa@gmail.com",
-            "virendesai87@gmail.com")))) {
+            "panaceaa@gmail.com"
+            // "virendesai87@gmail.com"
+            )))) {
       users.put(user.getId(), user);
     }
     return users;
@@ -125,10 +130,15 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       System.out.println("For " + user.getEmail() + ", " + Iterables.size(userActions)
           + " VOTE_UP user actions found");
       Set<String> urlsToCrawl = Sets.newHashSet();
+
       for (UserAction userAction : userActions) {
         if (!urlIdsToIgnore.contains(userAction.getUrlId())) {
           urlsToCrawl.add(userAction.getUrl());
         }
+      }
+      if (IN_DELETE_MODE) {
+        Database.with(Article.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
+        continue;
       }
       Map<String, Article> articleMap =
           ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
@@ -158,6 +168,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
    * Returns a list of DataSetRows derived from X_OUT user actions from
    * users we trust.
    */
+  @SuppressWarnings("unused")
   private static List<DataSetRow> getUserActionXOutDataSetRows()
       throws DatabaseSchemaException, BiznessException {
     Map<String, User> users = getUserActionTrustedUsers();
@@ -174,6 +185,10 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       for (UserAction userAction : userActions) {
         urlsToCrawl.add(userAction.getUrl());
       }
+      if (IN_DELETE_MODE) {
+        Database.with(Article.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
+        continue;
+      }
       Map<String, Article> articleMap =
           ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
       for (UserAction userAction : userActions) {
@@ -185,7 +200,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
           double[] input = Doubles.toArray(
               NeuralNetworkScorer.generateInputNodes(
                   modifiedUser, articleMap.get(userAction.getUrl())).values());
-          double[] output = new double[] { 0.2 };
+          double[] output = new double[] { 0.0 };
           dataSetRows.add(new DataSetRow(input, output));
         }
       }
@@ -199,14 +214,22 @@ public class NeuralNetworkTrainer implements LearningEventListener {
    */
   private static DataSet generateTrainingDataSet()
       throws DatabaseSchemaException, BiznessException {
+    int goodUrlCount = 0;
+    int badUrlCount = 0;
     DataSet trainingSet = new DataSet(
         NeuralNetworkScorer.INPUT_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
+    TopList<Article, Double> topPopCulture = new TopList<>(25);
 
     for (Persona persona : Personas.getPersonaMap().values()) {
       System.out.println("Grabbing articles for " + persona.getEmail() + " ...");
       User user = Personas.convertToUser(persona);
 
+      if (IN_DELETE_MODE) {
+        Database.with(Article.class).delete(new QueryOption.WhereEquals("url",
+            Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList())));
+        continue;
+      }
       Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(
           Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList()), true /* retain */);
 
@@ -220,12 +243,17 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 //            }
 //          });
 
-      for (String goodUrl : persona.getGoodUrlList()) {
-        if (urlArticleMap.containsKey(goodUrl)) {
-          double[] input = Doubles.toArray(
-              NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(goodUrl)).values());
-          double[] output = new double[] { 1.0 };
-          trainingSet.addRow(new DataSetRow(input, output));
+      for (int i = 0; i < 2; i++) {
+        for (String goodUrl : persona.getGoodUrlList()) {
+          if (urlArticleMap.containsKey(goodUrl)) {
+            Article article = urlArticleMap.get(goodUrl);
+            topPopCulture.add(article, InputValuesGenerator.relevanceToPopCulture(article));
+            double[] input = Doubles.toArray(
+                NeuralNetworkScorer.generateInputNodes(user, article).values());
+            double[] output = new double[] { 1.0 };
+            trainingSet.addRow(new DataSetRow(input, output));
+            goodUrlCount++;
+          }
         }
       }
 
@@ -235,19 +263,36 @@ public class NeuralNetworkTrainer implements LearningEventListener {
               NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(badUrl)).values());
           double[] output = new double[] { 0.0 };
           trainingSet.addRow(new DataSetRow(input, output));
+          badUrlCount++;
         }
       }
     }
 
     for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
       trainingSet.addRow(dataSetRow);
+      goodUrlCount++;
     }
 
-    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
-      trainingSet.addRow(dataSetRow);
+//    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
+//      trainingSet.addRow(dataSetRow);
+//      badUrlCount++;
+//    }
+
+    System.out.println("Training set compiled. good=" + goodUrlCount + ", bad=" + badUrlCount);
+
+    System.out.println("Top pop culture articles in Good Url list:");
+    for (Article article : topPopCulture) {
+      System.out.println(article.getUrl() + " (" + topPopCulture.getValue(article) + ")");
+      for (ArticleFeature feature : new ArticleFeature[] {
+          ArticleFeatures.getFeature(article, FeatureId.TOPIC_ENTERTAINMENT),
+          ArticleFeatures.getFeature(article, FeatureId.TOPIC_SPORTS),
+          ArticleFeatures.getFeature(article, FeatureId.TOPIC_POLITICS)
+      }) {
+        System.out.println("- " + FeatureId.fromId(feature.getFeatureId()).getTitle() + ": "
+            + feature.getSimilarity());
+      }
     }
 
-    System.out.println("Training set compiled.");
     return trainingSet;
   }
 
@@ -283,27 +328,66 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     return false;
   }
 
+  private static class Averager {
+    private int count = 0;
+    private double sum = 0;
+
+    public void add(Number number) {
+      count++;
+      sum += number.doubleValue();
+    }
+
+    public double get() {
+      return sum / count;
+    }
+  }
+
+  /**
+   * Definitely not-so-efficient hack for getting a list of input name labels,
+   * e.g. "industries", "facebook", "acquisitions", etc.
+   */
+  private static List<String> getInputNodeKeys() throws DatabaseSchemaException {
+    return ImmutableList.copyOf(NeuralNetworkScorer.generateInputNodes(
+        Database.with(User.class).getFirst(),
+        Database.with(Article.class).getFirst()).keySet());
+  }
+
   /** 
    * Helper method for triggering a train. 
    * run ./trainneuralnet.sh to execute
    * */
   public static void main(String args[]) throws Exception {
+    List<String> inputNodeKeys = getInputNodeKeys();
     DataSet dataSet = generateTrainingDataSet();
 
     // Calculate average input values, for debugging/optimization purposes.
-    double[] averageInputValues = new double[NeuralNetworkScorer.INPUT_NODES_COUNT];
+    Averager[] averageInputValues = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
+    Averager[] averageInputValuesPositive = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
+    Averager[] averageInputValuesNegative = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
+    for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
+      averageInputValues[i] = new Averager();
+      averageInputValuesPositive[i] = new Averager();
+      averageInputValuesNegative[i] = new Averager();
+    }
     for (DataSetRow row : dataSet.getRows()) {
       double[] inputs = row.getInput();
       for (int i = 0; i < inputs.length; i++) {
-        averageInputValues[i] += inputs[i];
+        averageInputValues[i].add(inputs[i]);
+        if (row.getDesiredOutput()[0] > 0.5) {
+          averageInputValuesPositive[i].add(inputs[i]);
+        }
+        if (row.getDesiredOutput()[0] < 0.5) {
+          averageInputValuesNegative[i].add(inputs[i]);
+        }
       }
     }
 
-    int numRows = dataSet.size();
     System.out.println("Average input values:");
     for (int i = 0; i < averageInputValues.length; i++) {
-      averageInputValues[i] = averageInputValues[i] / numRows;
-      System.out.println("  [" + i + "] = " + averageInputValues[i]);
+      System.out.println("  [" + inputNodeKeys.get(i) + "] = " + averageInputValues[i].get()
+          + " \t(goodUrls=" + averageInputValuesPositive[i].get() + ", \t"
+          + "badUrls=" + averageInputValuesNegative[i].get() + ", \t"
+          + "diff=" + Math.abs(averageInputValuesPositive[i].get() - averageInputValuesNegative[i].get()) + ")");
     }
 
     NeuralNetwork<BackPropagation> neuralNetwork =
