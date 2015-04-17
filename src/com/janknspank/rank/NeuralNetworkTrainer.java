@@ -347,7 +347,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
    * e.g. "industries", "facebook", "acquisitions", etc.
    */
   private static List<String> getInputNodeKeys() throws DatabaseSchemaException {
-    return ImmutableList.copyOf(NeuralNetworkScorer.getInstance().generateInputNodes(
+    return ImmutableList.copyOf(NeuralNetworkScorer.generateInputNodes(
         Database.with(User.class).getFirst(),
         Database.with(Article.class).getFirst()).keySet());
   }
