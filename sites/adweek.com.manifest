@@ -1,0 +1,82 @@
+root_domain: "adweek.com"
+start_url: "http://adweek.com/"
+path_blacklist {
+  needle: "/sa-article/" # Sponsored.
+}
+paragraph_selector: "p.google_elide"
+article_url_pattern {
+  path_regex: "^\\/(adfreak|news)\\/.*\\-[0-9]{5,9}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.adweek.com/news/advertising-branding/coca-cola-brings-back-personalized-bottles-four-times-many-name-options-164076"
+    article_url: "http://www.adweek.com/news/advertising-branding/empire-state-development-seeks-agencies-promote-new-york-164064"
+    article_url: "http://www.adweek.com/news/advertising-branding/it-s-family-affair-website-maker-williamsburg-163992"
+    article_url: "http://www.adweek.com/news/advertising-branding/jwt-new-york-finds-its-new-head-planning-164097"
+    article_url: "http://www.adweek.com/news/advertising-branding/visas-global-media-review-comes-amid-turnover-marketing-164113"
+    article_url: "http://www.adweek.com/news/advertising-branding/why-older-women-are-new-it-girls-fashion-163871"
+    article_url: "http://www.adweek.com/news/press/after-removing-article-critical-dove-buzzfeed-says-it-wants-avoid-publishing-hot-takes-164001"
+    article_url: "http://www.adweek.com/news/press/here-are-hearst-magazines-editorial-award-winners-164107"
+    article_url: "http://www.adweek.com/news/press/organic-life-editor-james-oseland-launching-magazine-and-growing-punk-164010"
+    article_url: "http://www.adweek.com/news/technology/adweek-currently-seeking-product-designer-164095"
+    article_url: "http://www.adweek.com/news/technology/foursquare-finally-unleashes-location-data-cross-mobile-ad-targeting-164069"
+    article_url: "http://www.adweek.com/news/technology/heres-how-europe-stifling-ad-business-google-facebook-and-others-164103"
+    article_url: "http://www.adweek.com/news/technology/instagram-takes-another-step-toward-e-commerce-164024"
+    article_url: "http://www.adweek.com/news/technology/jawbone-partnership-amex-offers-another-nifty-payment-option-164110"
+    article_url: "http://www.adweek.com/news/technology/quiznos-playful-parody-ad-comically-mashes-star-wars-and-entourage-164100"
+    article_url: "http://www.adweek.com/news/technology/pandora-increases-programmatic-offerings-allows-demographic-targeting-164116"
+    article_url: "http://www.adweek.com/news/television/abc-family-doubles-down-original-programming-reach-young-women-164058"
+    article_url: "http://www.adweek.com/news/television/crackle-taps-dennis-quaid-bryan-cranston-new-shows-164060"
+    article_url: "http://www.adweek.com/news/television/game-thrones-fans-take-seat-courtesy-uber-164108"
+    article_url: "http://www.adweek.com/news/television/guide-2015-newfronts-and-upfronts-164062"
+    article_url: "http://www.adweek.com/news/television/not-fan-name-fear-walking-dead-heres-creators-best-explanation-164075"
+    article_url: "http://www.adweek.com/news/television/queen-instagram-gayle-king-spills-her-tv-guilty-pleasures-164017"
+    article_url: "http://www.adweek.com/news/television/tv-one-announces-spate-new-original-programming-it-continues-grow-164072"
+    article_url: "http://www.adweek.com/adfreak/tourists-give-jason-sudeikis-some-directions-atts-tribeca-film-festival-ad-164118"
+    non_article_url: "http://www.adweek.com/press"
+    non_article_url: "http://www.adweek.com/television"
+    non_article_url: "http://www.adweek.com/technology"
+    non_article_url: "http://www.adweek.com/contributor/garett-sloane"
+    non_article_url: "http://www.adweek.com/contributor/garett-sloane?page=3"
+    non_article_url: "http://www.adweek.com/files/uploads/2015-Editorial-Calendar-032715.pdf"
+    non_article_url: "http://www.adweek.com/custom-content"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10544 # Publishing
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10544 # Publishing
+  path_regex: "^\\/press\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10544 # Publishing
+  path_regex: "^\\/television\\/"
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  path_regex: "^\\/advertising-branding\\/"
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods.
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and Fashion
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10513 # Video production
+  boost: -2
+}

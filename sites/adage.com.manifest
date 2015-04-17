@@ -1,0 +1,65 @@
+root_domain: "adage.com"
+start_url: "http://adage.com/"
+paragraph_selector: ".entry > p"
+paragraph_selector: ".entry > .primary > p"
+article_url_pattern {
+  path_regex: "^\\/article\\/.*\\/[0-9]{5,9}\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://adage.com/article/advertising/chrysler-cadillac/298058/"
+    article_url: "http://adage.com/article/agency-news/barilla-a-agency/298098/"
+    article_url: "http://adage.com/article/agency-news/visa-start-global-media-agency-review/298080/"
+    article_url: "http://adage.com/article/agency-news/bacardi-shifts-creative-media-bbdo-omd/298077/"
+    article_url: "http://adage.com/article/btob/marshalls-launches-b-b-effort-focusing-installer-pride/298076/"
+    article_url: "http://adage.com/article/btob/survey-small-businesses-marketing-automation-software/298071/"
+    article_url: "http://adage.com/article/cmo-strategy/ketchup-powerhouse-heinz-turns-focus-mustard/298084/"
+    article_url: "http://adage.com/article/cmo-strategy/april-20-coming-brand-pot-references/298086/"
+    article_url: "http://adage.com/article/cmo-strategy/clothing-company-apologizes-don-henley-fans-shirt-ad/298073/"
+    article_url: "http://adage.com/article/cmo-strategy/mcdonald-s-franchisees-turnaround-plan-a-farce/298069/"
+    article_url: "http://adage.com/article/cmo-strategy/lawyers-recommend-slew-ad-regulation/298068/"
+    article_url: "http://adage.com/article/datadriven-marketing/merkle-a-hole-burning-pocket-acquisitions/298074/"
+    article_url: "http://adage.com/article/digital/yahoo-microsoft-renew-loosen-search-alliance/298089/"
+    article_url: "http://adage.com/article/digital/snapchat-tweaking-story-ad-sales-strategy/298082/"
+    article_url: "http://adage.com/article/digital/spotify-playlists-gauge-moods-ad-targeting/298066/"
+    article_url: "http://adage.com/article/media/asme-dramatically-overhauls-guidelines-advertising/298053/"
+    article_url: "http://adage.com/article/media/chevy-print-ads-esquire-popular-mechanics-include-video/298085/"
+    article_url: "http://adage.com/article/media/cmo-s-guide-top-tv/298013/"
+    article_url: "http://adage.com/article/media/discover-card-touts-easy-freeze-unfreeze/298088/"
+    article_url: "http://adage.com/article/media/national-geographic-channel-sets-sail-mayflower-mini/298087/"
+    article_url: "http://adage.com/article/media/tidal-teases-exclusive-rihanna-vid/298075/"
+    article_url: "http://adage.com/article/news/a-youtube-celeb-pulls/298015/"
+    article_url: "http://adage.com/article/people-players/people-move-pereira-o-dell-hires-chris-wilcox/298051/"
+    article_url: "http://adage.com/article/see-the-spot/star-wars-teaser-throwback-thursday/298096/"
+    article_url: "http://adage.com/article/special-report-digital-conference/aadigital-cmos-protect-consumer-experience/298083/"
+    article_url: "http://adage.com/article/special-report-digital-conference/emarketer-study-mobile-ad-spending-lags-long/298081/"
+    article_url: "http://adage.com/article/special-report-digital-conference/rosario-dawson-video-aadigital-ads-fans/298063/"
+    article_url: "http://adage.com/article/special-report-mad-men/media-director-model-burnett-nixes-awards-mad-men-headlines/298094/"
+    article_url: "http://adage.com/article/special-report-mad-men/real-mad-men-diaries-mary-wells-hire-don-draper/297645/"
+    non_article_url: "http://adage.com/author/michelle-dopp/6362"
+    non_article_url: "http://adage.com/section/btob/976"
+    non_article_url: "http://adage.com/channel/media/1"
+    non_article_url: "http://adage.com/author/jack-neff/58"
+    non_article_url: "http://adage.com/datacenter/marketertrees2014update/"
+  }
+}
+feature_boost_pattern {
+  boost: -3 # General discouragement, but this is actually a pretty good site!!
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods.
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10544 # Publishing
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet.
+  path_regex: "^\\/article\\/digital\\/"
+  boost: 0
+}
