@@ -141,6 +141,10 @@ message SiteManifest {
 
   optional bool is_https = 11;
 
+  // Some sites have very very crappy <meta> descriptions.  Use this to
+  // have us pick up the article's first paragraph instead.
+  optional bool use_first_paragraph_as_description = 15;
+
   // If a site has a special place in the DOM to put a clean non-cluttered-up-
   // with-annotations title, this lets manifests explain where that is!
   repeated string title_selector = 12 [

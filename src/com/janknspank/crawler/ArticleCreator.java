@@ -73,6 +73,8 @@ class ArticleCreator {
 
   public static Article create(Url url, DocumentNode documentNode)
       throws RequiredFieldException {
+    SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
+
     Article.Builder articleBuilder = Article.newBuilder();
     articleBuilder.setUrlId(url.getId());
     articleBuilder.setUrl(documentNode.getUrl());
@@ -93,7 +95,7 @@ class ArticleCreator {
     }
 
     // Description (required).
-    articleBuilder.setDescription(getDescription(documentNode));
+    articleBuilder.setDescription(getDescription(documentNode, site));
 
     // Image url.
     String imageUrl = getImageUrl(documentNode);
@@ -112,7 +114,7 @@ class ArticleCreator {
         Math.min(System.currentTimeMillis(), getPublishedTime(documentNode, url)));
 
     // Title.
-    String title = getTitle(documentNode);
+    String title = getTitle(documentNode, site);
     if (title != null) {
       articleBuilder.setTitle(title);
     }
@@ -193,7 +195,23 @@ class ArticleCreator {
     return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
   }
 
-  public static String getDescription(DocumentNode documentNode) throws RequiredFieldException {
+  private static String getFirstSignificantParagraphText(DocumentNode documentNode)
+      throws RequiredFieldException {
+    Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
+    for (String paragraph : paragraphs) {
+      if (paragraph.length() >= 50) {
+        return paragraph;
+      }
+    }
+    return Iterables.getFirst(paragraphs, "");
+  }
+
+  public static String getDescription(DocumentNode documentNode, SiteManifest site)
+      throws RequiredFieldException {
+    if (site.getUseFirstParagraphAsDescription()) {
+      return getFirstSignificantParagraphText(documentNode);
+    }
+
     Node metaNode = documentNode.findFirst(ImmutableList.of(
         "html > head meta[name=\"sailthru.description\"]", // Best, at least on techcrunch.com.
         "html > head meta[name=\"description\"]",
@@ -207,14 +225,7 @@ class ArticleCreator {
     }
     if (Strings.isNullOrEmpty(description)) {
       // Fall back to the first significant paragraph.
-      Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
-      description = Iterables.getFirst(paragraphs, null);
-      for (String paragraph : paragraphs) {
-        if (paragraph.length() >= 50) {
-          description = paragraph;
-          break;
-        }
-      }
+      description = getFirstSignificantParagraphText(documentNode);
     }
 
     if (description.length() > MAX_DESCRIPTION_LENGTH) {
@@ -440,10 +451,9 @@ class ArticleCreator {
     return title.trim();
   }
 
-  public static String getTitle(DocumentNode documentNode)
+  public static String getTitle(DocumentNode documentNode, SiteManifest site)
       throws RequiredFieldException {
     // First, see if the manifest tells us a specific place to check.
-    SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
     if (site != null && site.getTitleSelectorCount() > 0) {
       Node titleNode = documentNode.findFirst(site.getTitleSelectorList());
       if (titleNode != null) {
