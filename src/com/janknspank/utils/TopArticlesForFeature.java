@@ -11,23 +11,35 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 
 public class TopArticlesForFeature {
+  /**
+   * Called by toparticlesforfeature.sh.
+   * @param args an array of feature Ids (ex. 30001 for Launches) to query for
+   */
   public static void main(String args[]) throws DatabaseSchemaException {
-    TopList<Article, Double> topRankingArticles = new TopList<>(100);
-
-    for (Article article : Database.with(Article.class).get(
-        new QueryOption.DescendingSort("published_time"),
-        new QueryOption.Limit(5000))) {
-      ArticleFeature launchFeature =
-          ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_LAUNCHES);
-      topRankingArticles.add(article, launchFeature.getSimilarity());
+ // Args are the industries code ids to benchmark
+    if (args.length == 0) {
+      System.out.println("ERROR: You must pass feature IDs as parameters.");
+      System.out.println("Example: ./toparticlesforfeature.sh 30001");
+      System.exit(-1);
     }
+    for (String arg : args) {
+      TopList<Article, Double> topRankingArticles = new TopList<>(100);
 
-    for (Article article : topRankingArticles.getKeys()) {
-      System.out.println("\"" + article.getTitle() + "\" (" + topRankingArticles.getValue(article) + ")");
-      System.out.println(article.getUrl());
-      System.out.println("First paragraph: \""
-          + Iterables.getFirst(article.getParagraphList(), "") + "\"");
-      System.out.println();
+      for (Article article : Database.with(Article.class).get(
+          new QueryOption.DescendingSort("published_time"),
+          new QueryOption.Limit(10000))) {
+        ArticleFeature launchFeature =
+            ArticleFeatures.getFeature(article, FeatureId.fromId(Integer.parseInt(arg)));
+        topRankingArticles.add(article, launchFeature.getSimilarity());
+      }
+
+      for (Article article : topRankingArticles.getKeys()) {
+        System.out.println("\"" + article.getTitle() + "\" (" + topRankingArticles.getValue(article) + ")");
+        System.out.println(article.getUrl());
+        System.out.println("First paragraph: \""
+            + Iterables.getFirst(article.getParagraphList(), "") + "\"");
+        System.out.println();
+      }
     }
   }
 }

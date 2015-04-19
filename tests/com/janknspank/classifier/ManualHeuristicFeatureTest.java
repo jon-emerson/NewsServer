@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
+import com.janknspank.bizness.BiznessException;
 import com.janknspank.proto.ArticleProto.Article;
 
 public class ManualHeuristicFeatureTest {
@@ -34,7 +35,9 @@ public class ManualHeuristicFeatureTest {
   }
 
   @Test
-  public void testScore() {
+  public void testScore() throws BiznessException {
+    ManualHeuristicFeatureBenchmarks.benchmark(30001);
+
     ManualHeuristicFeature feature =
         new ManualHeuristicFeature(FeatureId.MANUAL_HEURISTIC_LAUNCHES);
     assertEquals(1.0, feature.score(Article.newBuilder()

@@ -28,8 +28,8 @@ public class Personas {
   private static Map<String, Persona> PERSONA_MAP = null;
 
   /**
-   * Builds a Map of SiteManifest object definitions, keyed by root URL, from
-   * the .manifest files located in /sites/.
+   * Builds a Map of Persona object definitions, keyed by persona email address, from
+   * the .persona files located in /personas/.
    */
   public static synchronized Map<String, Persona> getPersonaMap() {
     if (PERSONA_MAP == null) {
