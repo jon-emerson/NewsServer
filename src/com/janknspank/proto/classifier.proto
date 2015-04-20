@@ -1,0 +1,26 @@
+// Objects to help with article feature classification
+
+import "com/janknspank/database/extensions.proto";
+import "com/janknspank/proto/user.proto";
+
+option java_package = "com.janknspank.proto";
+option java_outer_classname = "ClassifierProto";
+
+// Defines a feature benchmark for feature quality purposes. Specifies
+// which articles should be classified with for a specific feature and
+// which should not
+
+message FeatureBenchmark {
+  optional int64 feature_id = 1 [
+    (required) = YES
+  ];
+
+  repeated string good_url = 3 [
+    (string_length) = 767
+  ];
+
+  repeated string bad_url = 4 [
+    (string_length) = 767
+  ];
+
+}

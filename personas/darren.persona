@@ -32,6 +32,7 @@ good_url: "http://www.usertesting.com/blog/2015/03/04/who-owns-customer-experien
 good_url: "http://www.usertesting.com/blog/2015/02/24/happn-dating-app/"
 good_url: "http://uxmag.com/articles/a-spark-of-inspiration-creates-the-foundation-for-an-innovative-experience"
 good_url: "http://mashable.com/2015/03/19/magic-leap-gaming/"
+good_url: "http://techcrunch.com/2015/04/15/99desgins-series-b/"
 bad_url: "http://www.huffingtonpost.com/2015/03/19/alecsandra-raluca-dragoi_n_6895626.html"
 bad_url: "http://www.huffingtonpost.com/2015/03/19/disable-birthday-notifications_n_6905356.html"
 bad_url: "http://www.huffingtonpost.com/2015/03/18/ashley-madekwe-style-star_n_6858024.html"
@@ -81,6 +82,8 @@ bad_url: "http://www.dwell.com/rooms-we-love/article/tying-it-all-together-7-rug
 bad_url: "http://www.abc.net.au/news/2015-03-20/utas-campuses-in-launceston-and-burnie-under-threat/6334888"
 bad_url: "http://www.theverge.com/2015/3/20/8263561/mercedes-benz-f-015-self-driving-video"
 bad_url: "http://www.huffingtonpost.com/2015/03/20/louie-gohmert-iran_n_6909112.html"
+bad_url: "http://www.businessinsider.com/r-rolls-royce-wins-92-billion-engine-order-from-emirates-for-a380s-2015-4"
+bad_url: "http://www.marketwatch.com/story/omeicos-therapeutics-raises-eur-62-million-in-series-a-to-advance-lead-candidate-in-atrial-fibrillation-2015-04-15"
 interest {
   id: "55036fcfe4b05c7064a87735"
   type: INDUSTRY

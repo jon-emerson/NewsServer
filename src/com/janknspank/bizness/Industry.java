@@ -221,7 +221,7 @@ public enum Industry {
       "Staffing and Recruiting"),
   PROFESSIONAL_TRAINING_AND_COACHING(105, FeatureId.MANAGEMENT, "corp",
       "Professional Training & Coaching"),
-  VENTURE_CAPITAL_AND_PRIVATE_EQUITY(106, FeatureId.VENTURE_CAPITAL_AND_PRIVATE_EQUITY, "fin tech",
+  VENTURE_CAPITAL_AND_PRIVATE_EQUITY(106, FeatureId.VENTURE_CAPITAL, "fin tech",
       "Venture Capital and Private Equity"),
   POLITICAL_ORGANIZATION(107, FeatureId.GOVERNMENT, "gov org",
       "Political Organization"),

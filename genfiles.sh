@@ -6,6 +6,7 @@
 protoc \
     src/com/janknspank/database/extensions.proto \
     src/com/janknspank/proto/article.proto \
+    src/com/janknspank/proto/classifier.proto \
     src/com/janknspank/proto/core.proto \
     src/com/janknspank/proto/crawler.proto \
     src/com/janknspank/proto/interpreter.proto \
