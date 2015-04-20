@@ -91,6 +91,13 @@ public class ManualHeuristicFeature extends Feature {
           Pattern.compile("lawsuit"),
           Pattern.compile("vinyl"),
           Pattern.compile("investigation"),
+          Pattern.compile("election"),
+          Pattern.compile("anniversary celebrations"),
+          Pattern.compile("awards"),
+          Pattern.compile("releases report"),
+          Pattern.compile("releases .*white paper"),
+          Pattern.compile("lawyer"),
+          Pattern.compile("USD/"),
           Pattern.compile("criminal"));
   private static final Map<Pattern, Double> LAUNCH_BODY_SCORES =
       ImmutableMap.<Pattern, Double>builder()
@@ -131,7 +138,7 @@ public class ManualHeuristicFeature extends Feature {
           .put(Pattern.compile("million of funding"), 1.0)
           .build();
   private static final Iterable<Pattern> FUNDRAISING_TITLE_BLACKLIST =
-      Arrays.asList(Pattern.compile("declares dividends"));
+      Arrays.asList(Pattern.compile("declares .*dividend"));
   private static final Map<Pattern, Double> FUNDRAISING_BODY_SCORES =
       ImmutableMap.<Pattern, Double>builder()
           .put(Pattern.compile("series a\\."), 0.9)
