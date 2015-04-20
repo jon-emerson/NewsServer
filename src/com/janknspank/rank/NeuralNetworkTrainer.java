@@ -16,29 +16,27 @@ import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
-import com.google.api.client.util.Lists;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Doubles;
-import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
 import com.janknspank.proto.UserProto.UserAction.ActionType;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private static final int MAX_ITERATIONS = 40000;
+  private static final int MAX_ITERATIONS = 20000;
   private static final boolean IN_DELETE_MODE = false;
 
   private double lowestError = 1.0;
@@ -52,7 +50,6 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(
         TransferFunctionType.SIGMOID, // TODO(jonemerson): Should this be LINEAR?
         NeuralNetworkScorer.INPUT_NODES_COUNT,
-        NeuralNetworkScorer.HIDDEN_NODES_COUNT,
         NeuralNetworkScorer.OUTPUT_NODES_COUNT);
 
     neuralNetwork.setLearningRule(new MomentumBackpropagation());
@@ -235,13 +232,13 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
       // Hold back ~20% of the training articles so we can later gauge our
       // ranking performance against the articles the trainer didn't see.
-//      urlArticleMap = Maps.filterEntries(urlArticleMap,
-//          new Predicate<Map.Entry<String, Article>>() {
-//            @Override
-//            public boolean apply(Entry<String, Article> entry) {
-//              return !isInTrainingHoldback(entry.getValue());
-//            }
-//          });
+      urlArticleMap = Maps.filterEntries(urlArticleMap,
+          new Predicate<Map.Entry<String, Article>>() {
+            @Override
+            public boolean apply(Map.Entry<String, Article> entry) {
+              return !isInTrainingHoldback(entry.getValue());
+            }
+          });
 
       for (int i = 0; i < 2; i++) {
         for (String goodUrl : persona.getGoodUrlList()) {
@@ -280,19 +277,6 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     System.out.println("Training set compiled. good=" + goodUrlCount + ", bad=" + badUrlCount);
 
-    System.out.println("Top pop culture articles in Good Url list:");
-    for (Article article : topPopCulture) {
-      System.out.println(article.getUrl() + " (" + topPopCulture.getValue(article) + ")");
-      for (ArticleFeature feature : new ArticleFeature[] {
-          ArticleFeatures.getFeature(article, FeatureId.TOPIC_ENTERTAINMENT),
-          ArticleFeatures.getFeature(article, FeatureId.TOPIC_SPORTS),
-          ArticleFeatures.getFeature(article, FeatureId.TOPIC_POLITICS)
-      }) {
-        System.out.println("- " + FeatureId.fromId(feature.getFeatureId()).getTitle() + ": "
-            + feature.getSimilarity());
-      }
-    }
-
     return trainingSet;
   }
 
@@ -300,7 +284,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   public void handleLearningEvent(LearningEvent event) {
     BackPropagation bp = (BackPropagation) event.getSource();
     double error = bp.getTotalNetworkError();
-    if (bp.getCurrentIteration() % 1000 == 0) {
+    if (bp.getCurrentIteration() == 1 || bp.getCurrentIteration() % 1000 == 0) {
       System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
     }
     lastNetworkWeights = bp.getNeuralNetwork().getWeights();

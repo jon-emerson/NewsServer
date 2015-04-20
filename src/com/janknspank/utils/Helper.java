@@ -12,16 +12,16 @@ import com.janknspank.proto.ArticleProto.ArticleFeature;
 public class Helper {
   public static void main(String args[]) throws DatabaseSchemaException {
     for (Article article : Database.with(Article.class).get(
-        new QueryOption.DescendingSort("published_time"),
-        new QueryOption.Limit(20000))) {
+        new QueryOption.AscendingSort("published_time"),
+        new QueryOption.Limit(10000))) {
       ArticleFeature launchFeature =
-          ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_FUNDRAISING);
+          ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_ACQUISITIONS);
       if (launchFeature.getSimilarity() > 0.1) {
-        System.out.println("\"" + article.getTitle() + "\" (" + launchFeature.getSimilarity() + ")");
+//        System.out.println("\"" + article.getTitle() + "\" (" + launchFeature.getSimilarity() + ")");
         System.out.println(article.getUrl());
-        System.out.println("First paragraph: \""
-            + Iterables.getFirst(article.getParagraphList(), "") + "\"");
-        System.out.println();
+//        System.out.println("First paragraph: \""
+//            + Iterables.getFirst(article.getParagraphList(), "") + "\"");
+//        System.out.println();
       }
     }
   }

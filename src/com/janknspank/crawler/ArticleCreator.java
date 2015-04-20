@@ -59,10 +59,10 @@ class ArticleCreator {
       "http://static01.nyt.com/images/icons/t_logo_291_black.png",
       "http://www.inc.com/images/incthumb250.png");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
-      Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|—)\\s"),
+      Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\u2014)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
-      Pattern.compile("\\s*(\\||\\-\\-|\\-)\\s+([A-Z][A-Za-z]+\\.com)$"),
-      Pattern.compile("\\s*(\\||\\-\\-|\\-)\\s+[A-Z][A-Za-z\\s'']{2,25}$"),
+      Pattern.compile("\\s*(\\||\\-\\-|\\-|\u2014)\\s+([A-Z][A-Za-z]+\\.com)$"),
+      Pattern.compile("\\s*(\\||\\-\\-|\\-|\u2014)\\s+[A-Z][A-Za-z\\s'']{2,25}$"),
       Pattern.compile("\\s+(\\||\\|\\|)\\s+[A-Za-z\\s'']{2,25}$")};
   private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s|\\xA0)+");
 

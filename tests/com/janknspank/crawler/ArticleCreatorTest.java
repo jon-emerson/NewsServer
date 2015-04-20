@@ -151,6 +151,9 @@ public class ArticleCreatorTest {
     assertEquals("Candy Crush Offices by Adolfsson & Partners, Stockholm",
         ArticleCreator.getTitle(createDocumentWithTitle(
             "Candy Crush Offices by Adolfsson & Partners, Stockholm | urdesign magazine"), site));
+    assertEquals("Slack confirms $160m funding round",
+        ArticleCreator.getTitle(createDocumentWithTitle(
+            "Slack confirms $160m funding round \u2014 Red Herring"), site));
   }
 
   @Test

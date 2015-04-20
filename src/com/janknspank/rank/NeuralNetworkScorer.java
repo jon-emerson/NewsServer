@@ -18,12 +18,10 @@ import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 11;
+  static final int INPUT_NODES_COUNT = 12;
   static final int OUTPUT_NODES_COUNT = 1;
-  static final int HIDDEN_NODES_COUNT = 9;
-  static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_" +
-      INPUT_NODES_COUNT + "in-" + HIDDEN_NODES_COUNT + "hidden-" +
-      OUTPUT_NODES_COUNT + "out.nnet";
+ //  static final int HIDDEN_NODES_COUNT = 9;
+  static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_out.nnet";
   private static NeuralNetworkScorer instance = null;
   private NeuralNetwork<BackPropagation> neuralNetwork;
 
@@ -48,37 +46,43 @@ public final class NeuralNetworkScorer extends Scorer {
     Asserts.assertNotNull(article, "article", NullPointerException.class);
     LinkedHashMap<String, Double> linkedHashMap = Maps.newLinkedHashMap();
 
-    // 0. Relevance to user's industries.
-    linkedHashMap.put("industries", InputValuesGenerator.relevanceToUserIndustries(user, article));
+    // 0. Relevant to user's industries?
+    double relevance = InputValuesGenerator.relevanceToUserIndustries(user, article);
+    linkedHashMap.put("industries", (relevance > 0.5) ? ((relevance > 0.9) ? 1 : 0.5) : 0.0);
 
-    // 1. Relevance on Facebook.
+    // 1. Nearby industry count.  Value relative to the number of industries
+    // this article is about that the user is not explicitly interested in.
+    linkedHashMap.put("industry-specific",
+        InputValuesGenerator.relevanceToNonUserIndustries(user, article));
+
+    // 2. Relevance on Facebook.
     linkedHashMap.put("facebook", InputValuesGenerator.relevanceOnFacebook(user, article));
 
-    // 2. Relevance on Twitter.
+    // 3. Relevance on Twitter.
     linkedHashMap.put("twitter", InputValuesGenerator.relevanceOnTwitter(user, article));
 
-    // 3. Relevance to contacts.
+    // 4. Relevance to contacts.
     linkedHashMap.put("contacts", InputValuesGenerator.relevanceToContacts(user, article));
 
-    // 4. Company / organization entities being followed.
+    // 5. Company / organization entities being followed.
     linkedHashMap.put("companies", InputValuesGenerator.relevanceToCompanyEntities(user, article));
 
-    // 5. Relevance to startup vector.
+    // 6. Relevance to startup vector.
     linkedHashMap.put("startup", InputValuesGenerator.relevanceToStartups(user, article));
 
-    // 6. Relevance to acquisitions.
-    linkedHashMap.put("acquisitions", InputValuesGenerator.relevanceToAcquisitions(user, article));
+    // 7. Relevance to acquisitions.
+    linkedHashMap.put("acquisitions", 0.0); // InputValuesGenerator.relevanceToAcquisitions(user, article));
 
-    // 7. Relevance to launches.
-    linkedHashMap.put("launches", InputValuesGenerator.relevanceToLaunches(user, article));
+    // 8. Relevance to launches.
+    linkedHashMap.put("launches", 0.0); // , InputValuesGenerator.relevanceToLaunches(user, article));
 
-    // 8. Relevance to start-up fundraising rounds.
-    linkedHashMap.put("fundraising", InputValuesGenerator.relevanceToFundraising(user, article));
+    // 9. Relevance to start-up fundraising rounds.
+    linkedHashMap.put("fundraising", 0.0); // , InputValuesGenerator.relevanceToFundraising(user, article));
 
-    // 9. Pop culture score.
+    // 10. Pop culture score.
     linkedHashMap.put("pop_culture", InputValuesGenerator.relevanceToPopCulture(article));
 
-    // 10. Murder Crime War score.
+    // 11. Murder Crime War score.
     linkedHashMap.put("murder_crime_war", InputValuesGenerator.relevanceToMurderCrimeWar(article));
 
     return linkedHashMap;

@@ -1,9 +1,11 @@
 package com.janknspank.rank;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.EntityType;
@@ -11,10 +13,10 @@ import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
+import com.janknspank.classifier.FeatureType;
 import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
-import com.janknspank.proto.ArticleProto.ArticleFeature.Type;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.AddressBookContact;
@@ -86,22 +88,31 @@ public class InputValuesGenerator {
   };
 
   public static double relevanceToUserIndustries(User user, Article article) {
-    double highestRelevance = 0;
-    for (ArticleFeature feature : article.getFeatureList()) {
-      if (feature.getType() == Type.ABOUT_INDUSTRY) {
-        highestRelevance = Math.max(highestRelevance, feature.getSimilarity());
-      }
-    }
+    Map<FeatureId, Double> articleIndustryMap = getArticleIndustryMap(article);
     double userRelevance = 0;
     for (FeatureId industryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
-      userRelevance = Math.max(userRelevance, getSimilarityToIndustry(article, industryFeatureId));
+      if (articleIndustryMap.containsKey(industryFeatureId)) {
+        userRelevance = Math.max(userRelevance, articleIndustryMap.get(industryFeatureId));
+      }
     }
-    // If this article's relevance to the user corresponds to the article's
-    // strongest industry relevance, reward it (by not decrementing it).
-    // This helps punish articles-about-everything.
-    return (Math.abs(highestRelevance - userRelevance) < 0.05)
-        ? userRelevance
-        : Math.max(0, userRelevance - 0.1);
+    return userRelevance;
+  }
+
+  /**
+   * Basically calculates the irrelevance of this article, as valued by the
+   * number of industries this article is more about than industries the user
+   * cares about.
+   */
+  public static double relevanceToNonUserIndustries(User user, Article article) {
+    int numIndustriesMoreRelevant = 0;
+    double relevanceToUserIndustries = relevanceToUserIndustries(user, article);
+    for (ArticleFeature feature : article.getFeatureList()) {
+      if (feature.getSimilarity() >= relevanceToUserIndustries
+          && FeatureId.fromId(feature.getFeatureId()).getFeatureType() == FeatureType.INDUSTRY) {
+        numIndustriesMoreRelevant++;
+      }
+    }
+    return Math.min(1, (numIndustriesMoreRelevant * 0.1));
   }
 
   public static double relevanceOnFacebook(User user, Article article) {
@@ -199,12 +210,13 @@ public class InputValuesGenerator {
     return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
   }
 
-  public static double getSimilarityToIndustry(Article article, FeatureId industryFeatureId) {
-    ArticleFeature industryFeature =
-        ArticleFeatures.getFeature(article, industryFeatureId);
-    // Only value relevance greater than 66.7%.
-    return (industryFeature == null) ? 0 :
-        Math.max(0, industryFeature.getSimilarity() * 3 - 2);
+  private static Map<FeatureId, Double> getArticleIndustryMap(Article article) {
+    Map<FeatureId, Double> articleIndustryMap = Maps.newHashMap();
+    for (ArticleFeature articleFeature : article.getFeatureList()) {
+      articleIndustryMap.put(
+          FeatureId.fromId(articleFeature.getFeatureId()), articleFeature.getSimilarity());
+    }
+    return articleIndustryMap;
   }
 
   /**

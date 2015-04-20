@@ -6280,16 +6280,6 @@ public final class ArticleProto {
      */
     int getFeatureId();
 
-    // optional .ArticleFeature.Type type = 4 [default = UNKNOWN];
-    /**
-     * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
-     */
-    boolean hasType();
-    /**
-     * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
-     */
-    com.janknspank.proto.ArticleProto.ArticleFeature.Type getType();
-
     // optional double similarity = 2;
     /**
      * <code>optional double similarity = 2;</code>
@@ -6371,19 +6361,8 @@ public final class ArticleProto {
               break;
             }
             case 17: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               similarity_ = input.readDouble();
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.janknspank.proto.ArticleProto.ArticleFeature.Type value = com.janknspank.proto.ArticleProto.ArticleFeature.Type.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                type_ = value;
-              }
               break;
             }
           }
@@ -6425,115 +6404,6 @@ public final class ArticleProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code ArticleFeature.Type}
-     */
-    public enum Type
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>UNKNOWN = 0;</code>
-       */
-      UNKNOWN(0, 0),
-      /**
-       * <code>SERVES_INTENT = 1;</code>
-       */
-      SERVES_INTENT(1, 1),
-      /**
-       * <code>ABOUT_INDUSTRY = 2;</code>
-       */
-      ABOUT_INDUSTRY(2, 2),
-      /**
-       * <code>IMPROVES_SKILL = 3;</code>
-       */
-      IMPROVES_SKILL(3, 3),
-      /**
-       * <code>TEXT_CHARACTER = 4;</code>
-       */
-      TEXT_CHARACTER(4, 4),
-      ;
-
-      /**
-       * <code>UNKNOWN = 0;</code>
-       */
-      public static final int UNKNOWN_VALUE = 0;
-      /**
-       * <code>SERVES_INTENT = 1;</code>
-       */
-      public static final int SERVES_INTENT_VALUE = 1;
-      /**
-       * <code>ABOUT_INDUSTRY = 2;</code>
-       */
-      public static final int ABOUT_INDUSTRY_VALUE = 2;
-      /**
-       * <code>IMPROVES_SKILL = 3;</code>
-       */
-      public static final int IMPROVES_SKILL_VALUE = 3;
-      /**
-       * <code>TEXT_CHARACTER = 4;</code>
-       */
-      public static final int TEXT_CHARACTER_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static Type valueOf(int value) {
-        switch (value) {
-          case 0: return UNKNOWN;
-          case 1: return SERVES_INTENT;
-          case 2: return ABOUT_INDUSTRY;
-          case 3: return IMPROVES_SKILL;
-          case 4: return TEXT_CHARACTER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<Type>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<Type>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<Type>() {
-              public Type findValueByNumber(int number) {
-                return Type.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.janknspank.proto.ArticleProto.ArticleFeature.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final Type[] VALUES = values();
-
-      public static Type valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private Type(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:ArticleFeature.Type)
-    }
-
     private int bitField0_;
     // optional int32 feature_id = 1;
     public static final int FEATURE_ID_FIELD_NUMBER = 1;
@@ -6551,22 +6421,6 @@ public final class ArticleProto {
       return featureId_;
     }
 
-    // optional .ArticleFeature.Type type = 4 [default = UNKNOWN];
-    public static final int TYPE_FIELD_NUMBER = 4;
-    private com.janknspank.proto.ArticleProto.ArticleFeature.Type type_;
-    /**
-     * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
-     */
-    public boolean hasType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
-     */
-    public com.janknspank.proto.ArticleProto.ArticleFeature.Type getType() {
-      return type_;
-    }
-
     // optional double similarity = 2;
     public static final int SIMILARITY_FIELD_NUMBER = 2;
     private double similarity_;
@@ -6581,7 +6435,7 @@ public final class ArticleProto {
      * </pre>
      */
     public boolean hasSimilarity() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional double similarity = 2;</code>
@@ -6599,7 +6453,6 @@ public final class ArticleProto {
 
     private void initFields() {
       featureId_ = 0;
-      type_ = com.janknspank.proto.ArticleProto.ArticleFeature.Type.UNKNOWN;
       similarity_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
@@ -6617,11 +6470,8 @@ public final class ArticleProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, featureId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeDouble(2, similarity_);
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(4, type_.getNumber());
+        output.writeDouble(2, similarity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6636,13 +6486,9 @@ public final class ArticleProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, featureId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, similarity_);
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, type_.getNumber());
+          .computeDoubleSize(2, similarity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6762,10 +6608,8 @@ public final class ArticleProto {
         super.clear();
         featureId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        type_ = com.janknspank.proto.ArticleProto.ArticleFeature.Type.UNKNOWN;
-        bitField0_ = (bitField0_ & ~0x00000002);
         similarity_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -6801,10 +6645,6 @@ public final class ArticleProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.type_ = type_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         result.similarity_ = similarity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -6824,9 +6664,6 @@ public final class ArticleProto {
         if (other == com.janknspank.proto.ArticleProto.ArticleFeature.getDefaultInstance()) return this;
         if (other.hasFeatureId()) {
           setFeatureId(other.getFeatureId());
-        }
-        if (other.hasType()) {
-          setType(other.getType());
         }
         if (other.hasSimilarity()) {
           setSimilarity(other.getSimilarity());
@@ -6891,42 +6728,6 @@ public final class ArticleProto {
         return this;
       }
 
-      // optional .ArticleFeature.Type type = 4 [default = UNKNOWN];
-      private com.janknspank.proto.ArticleProto.ArticleFeature.Type type_ = com.janknspank.proto.ArticleProto.ArticleFeature.Type.UNKNOWN;
-      /**
-       * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
-       */
-      public boolean hasType() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
-       */
-      public com.janknspank.proto.ArticleProto.ArticleFeature.Type getType() {
-        return type_;
-      }
-      /**
-       * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
-       */
-      public Builder setType(com.janknspank.proto.ArticleProto.ArticleFeature.Type value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000002;
-        type_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .ArticleFeature.Type type = 4 [default = UNKNOWN];</code>
-       */
-      public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        type_ = com.janknspank.proto.ArticleProto.ArticleFeature.Type.UNKNOWN;
-        onChanged();
-        return this;
-      }
-
       // optional double similarity = 2;
       private double similarity_ ;
       /**
@@ -6940,7 +6741,7 @@ public final class ArticleProto {
        * </pre>
        */
       public boolean hasSimilarity() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <code>optional double similarity = 2;</code>
@@ -6966,7 +6767,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder setSimilarity(double value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         similarity_ = value;
         onChanged();
         return this;
@@ -6982,7 +6783,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder clearSimilarity() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         similarity_ = 0D;
         onChanged();
         return this;
@@ -7758,14 +7559,11 @@ public final class ArticleProto {
       "(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_" +
       "count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site" +
       "\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002" +
-      "\"\323\001\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001(\005B" +
-      "\010\210\246\035\001\220\246\035\003\022+\n\004type\030\004 \001(\0162\024.ArticleFeature" +
-      ".Type:\007UNKNOWN\022\022\n\nsimilarity\030\002 \001(\001\"b\n\004Ty" +
-      "pe\022\013\n\007UNKNOWN\020\000\022\021\n\rSERVES_INTENT\020\001\022\022\n\016AB" +
-      "OUT_INDUSTRY\020\002\022\022\n\016IMPROVES_SKILL\020\003\022\022\n\016TE" +
-      "XT_CHARACTER\020\004\"9\n\017InterpretedData\022\031\n\007art" +
-      "icle\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024com",
-      ".janknspank.protoB\014ArticleProto"
+      "\"B\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010" +
+      "\210\246\035\001\220\246\035\003\022\022\n\nsimilarity\030\002 \001(\001\"9\n\017Interpre" +
+      "tedData\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003ur" +
+      "l\030\002 \003(\tB$\n\024com.janknspank.protoB\014Article" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7795,7 +7593,7 @@ public final class ArticleProto {
           internal_static_ArticleFeature_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleFeature_descriptor,
-              new java.lang.String[] { "FeatureId", "Type", "Similarity", });
+              new java.lang.String[] { "FeatureId", "Similarity", });
           internal_static_InterpretedData_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_InterpretedData_fieldAccessorTable = new
