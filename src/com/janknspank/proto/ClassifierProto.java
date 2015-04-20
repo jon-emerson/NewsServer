@@ -14,39 +14,12 @@ public final class ClassifierProto {
     // optional int64 feature_id = 1;
     /**
      * <code>optional int64 feature_id = 1;</code>
-     *
-     * <pre>
-     * A name for this person.  Not really used for much of anything now,
-     * but helpful to keep in mind who our different personas are so we can
-     * talk about them.
-     * </pre>
      */
     boolean hasFeatureId();
     /**
      * <code>optional int64 feature_id = 1;</code>
-     *
-     * <pre>
-     * A name for this person.  Not really used for much of anything now,
-     * but helpful to keep in mind who our different personas are so we can
-     * talk about them.
-     * </pre>
      */
     long getFeatureId();
-
-    // optional string email = 2;
-    /**
-     * <code>optional string email = 2;</code>
-     */
-    boolean hasEmail();
-    /**
-     * <code>optional string email = 2;</code>
-     */
-    java.lang.String getEmail();
-    /**
-     * <code>optional string email = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getEmailBytes();
 
     // repeated string good_url = 3;
     /**
@@ -144,23 +117,18 @@ public final class ClassifierProto {
               featureId_ = input.readInt64();
               break;
             }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              email_ = input.readBytes();
-              break;
-            }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 goodUrl_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               goodUrl_.add(input.readBytes());
               break;
             }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 badUrl_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000004;
               }
               badUrl_.add(input.readBytes());
               break;
@@ -173,10 +141,10 @@ public final class ClassifierProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           goodUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(goodUrl_);
         }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           badUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(badUrl_);
         }
         this.unknownFields = unknownFields.build();
@@ -216,70 +184,15 @@ public final class ClassifierProto {
     private long featureId_;
     /**
      * <code>optional int64 feature_id = 1;</code>
-     *
-     * <pre>
-     * A name for this person.  Not really used for much of anything now,
-     * but helpful to keep in mind who our different personas are so we can
-     * talk about them.
-     * </pre>
      */
     public boolean hasFeatureId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional int64 feature_id = 1;</code>
-     *
-     * <pre>
-     * A name for this person.  Not really used for much of anything now,
-     * but helpful to keep in mind who our different personas are so we can
-     * talk about them.
-     * </pre>
      */
     public long getFeatureId() {
       return featureId_;
-    }
-
-    // optional string email = 2;
-    public static final int EMAIL_FIELD_NUMBER = 2;
-    private java.lang.Object email_;
-    /**
-     * <code>optional string email = 2;</code>
-     */
-    public boolean hasEmail() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string email = 2;</code>
-     */
-    public java.lang.String getEmail() {
-      java.lang.Object ref = email_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          email_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string email = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getEmailBytes() {
-      java.lang.Object ref = email_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        email_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
     }
 
     // repeated string good_url = 3;
@@ -344,7 +257,6 @@ public final class ClassifierProto {
 
     private void initFields() {
       featureId_ = 0L;
-      email_ = "";
       goodUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       badUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -362,9 +274,6 @@ public final class ClassifierProto {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(1, featureId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getEmailBytes());
       }
       for (int i = 0; i < goodUrl_.size(); i++) {
         output.writeBytes(3, goodUrl_.getByteString(i));
@@ -384,10 +293,6 @@ public final class ClassifierProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, featureId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getEmailBytes());
       }
       {
         int dataSize = 0;
@@ -525,12 +430,10 @@ public final class ClassifierProto {
         super.clear();
         featureId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
-        email_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
         goodUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         badUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -563,20 +466,16 @@ public final class ClassifierProto {
           to_bitField0_ |= 0x00000001;
         }
         result.featureId_ = featureId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.email_ = email_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
           goodUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(
               goodUrl_);
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.goodUrl_ = goodUrl_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
           badUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(
               badUrl_);
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.badUrl_ = badUrl_;
         result.bitField0_ = to_bitField0_;
@@ -598,15 +497,10 @@ public final class ClassifierProto {
         if (other.hasFeatureId()) {
           setFeatureId(other.getFeatureId());
         }
-        if (other.hasEmail()) {
-          bitField0_ |= 0x00000002;
-          email_ = other.email_;
-          onChanged();
-        }
         if (!other.goodUrl_.isEmpty()) {
           if (goodUrl_.isEmpty()) {
             goodUrl_ = other.goodUrl_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureGoodUrlIsMutable();
             goodUrl_.addAll(other.goodUrl_);
@@ -616,7 +510,7 @@ public final class ClassifierProto {
         if (!other.badUrl_.isEmpty()) {
           if (badUrl_.isEmpty()) {
             badUrl_ = other.badUrl_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             ensureBadUrlIsMutable();
             badUrl_.addAll(other.badUrl_);
@@ -654,36 +548,18 @@ public final class ClassifierProto {
       private long featureId_ ;
       /**
        * <code>optional int64 feature_id = 1;</code>
-       *
-       * <pre>
-       * A name for this person.  Not really used for much of anything now,
-       * but helpful to keep in mind who our different personas are so we can
-       * talk about them.
-       * </pre>
        */
       public boolean hasFeatureId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional int64 feature_id = 1;</code>
-       *
-       * <pre>
-       * A name for this person.  Not really used for much of anything now,
-       * but helpful to keep in mind who our different personas are so we can
-       * talk about them.
-       * </pre>
        */
       public long getFeatureId() {
         return featureId_;
       }
       /**
        * <code>optional int64 feature_id = 1;</code>
-       *
-       * <pre>
-       * A name for this person.  Not really used for much of anything now,
-       * but helpful to keep in mind who our different personas are so we can
-       * talk about them.
-       * </pre>
        */
       public Builder setFeatureId(long value) {
         bitField0_ |= 0x00000001;
@@ -693,12 +569,6 @@ public final class ClassifierProto {
       }
       /**
        * <code>optional int64 feature_id = 1;</code>
-       *
-       * <pre>
-       * A name for this person.  Not really used for much of anything now,
-       * but helpful to keep in mind who our different personas are so we can
-       * talk about them.
-       * </pre>
        */
       public Builder clearFeatureId() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -707,86 +577,12 @@ public final class ClassifierProto {
         return this;
       }
 
-      // optional string email = 2;
-      private java.lang.Object email_ = "";
-      /**
-       * <code>optional string email = 2;</code>
-       */
-      public boolean hasEmail() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string email = 2;</code>
-       */
-      public java.lang.String getEmail() {
-        java.lang.Object ref = email_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          email_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string email = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getEmailBytes() {
-        java.lang.Object ref = email_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          email_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string email = 2;</code>
-       */
-      public Builder setEmail(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        email_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string email = 2;</code>
-       */
-      public Builder clearEmail() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        email_ = getDefaultInstance().getEmail();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string email = 2;</code>
-       */
-      public Builder setEmailBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        email_ = value;
-        onChanged();
-        return this;
-      }
-
       // repeated string good_url = 3;
       private com.google.protobuf.LazyStringList goodUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureGoodUrlIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           goodUrl_ = new com.google.protobuf.LazyStringArrayList(goodUrl_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
       /**
@@ -856,7 +652,7 @@ public final class ClassifierProto {
        */
       public Builder clearGoodUrl() {
         goodUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -877,9 +673,9 @@ public final class ClassifierProto {
       // repeated string bad_url = 4;
       private com.google.protobuf.LazyStringList badUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureBadUrlIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           badUrl_ = new com.google.protobuf.LazyStringArrayList(badUrl_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
          }
       }
       /**
@@ -949,7 +745,7 @@ public final class ClassifierProto {
        */
       public Builder clearBadUrl() {
         badUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -994,11 +790,11 @@ public final class ClassifierProto {
     java.lang.String[] descriptorData = {
       "\n%com/janknspank/proto/classifier.proto\032" +
       "(com/janknspank/database/extensions.prot" +
-      "o\032\037com/janknspank/proto/user.proto\"w\n\020Fe" +
+      "o\032\037com/janknspank/proto/user.proto\"]\n\020Fe" +
       "atureBenchmark\022\030\n\nfeature_id\030\001 \001(\003B\004\210\246\035\001" +
-      "\022\030\n\005email\030\002 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\027\n\010good_url\030\003" +
-      " \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\004 \003(\tB\005\230\246\035\377\005B\'\n\024c" +
-      "om.janknspank.protoB\017ClassifierProto"
+      "\022\027\n\010good_url\030\003 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url\030\004 \003" +
+      "(\tB\005\230\246\035\377\005B\'\n\024com.janknspank.protoB\017Class" +
+      "ifierProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1010,12 +806,10 @@ public final class ClassifierProto {
           internal_static_FeatureBenchmark_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FeatureBenchmark_descriptor,
-              new java.lang.String[] { "FeatureId", "Email", "GoodUrl", "BadUrl", });
+              new java.lang.String[] { "FeatureId", "GoodUrl", "BadUrl", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
-          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           return registry;

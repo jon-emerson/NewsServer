@@ -1,6 +1,7 @@
 package com.janknspank.classifier;
 
-import static org.junit.Assert.assertEquals;
+import com.janknspank.common.AssertionException;
+import com.janknspank.common.Asserts;
 
 import java.io.File;
 import java.io.FileReader;
@@ -52,7 +53,8 @@ public class ManualHeuristicFeatureBenchmarks {
             throw new Error(
                 "Error in benchmark " + benchmarkFile.getAbsolutePath() + ": " + e.getMessage(), e);
           }
-          benchmarkListBuilder.put(FeatureId.fromId((int) benchmarkBuilder.getFeatureId()), benchmarkBuilder.build());
+          benchmarkListBuilder.put(FeatureId.fromId((int) benchmarkBuilder.getFeatureId()), 
+              benchmarkBuilder.build());
         } catch (IOException e) {
           throw new Error(e);
         } finally {
@@ -74,8 +76,7 @@ public class ManualHeuristicFeatureBenchmarks {
    * success rate of classification
    */
   @VisibleForTesting
-  public static void benchmark(int rawFeatureId) throws BiznessException {
-    FeatureId featureId = FeatureId.fromId(rawFeatureId);
+  public static void benchmark(FeatureId featureId) throws BiznessException, AssertionException {
     ManualHeuristicFeature feature = new ManualHeuristicFeature(featureId);
     Map<Article, Double> goodArticleScores = new HashMap<>();
     Map<Article, Double> badArticleScores = new HashMap<>();
@@ -93,7 +94,6 @@ public class ManualHeuristicFeatureBenchmarks {
             + Iterables.getFirst(article.getParagraphList(), "") + "\"");
         System.out.println();
       }
-      assertEquals(1.0, score, 0.5 /* epsilon */);
     }
 
     Collection<Article> badArticles =
@@ -101,14 +101,13 @@ public class ManualHeuristicFeatureBenchmarks {
     for (Article article : badArticles) {
       double score = feature.score(article);
       badArticleScores.put(article, score);
-      if (score > 0.4) {
+      if (score > 0.3) {
         System.out.println("False positive: \"" + article.getTitle() + "\" (" + score + ")");
         System.out.println(article.getUrl());
         System.out.println("First paragraph: \""
             + Iterables.getFirst(article.getParagraphList(), "") + "\"");
         System.out.println();
       }
-      assertEquals(0.0, score, 0.4 /* epsilon */);
     }
   }
   
@@ -124,7 +123,7 @@ public class ManualHeuristicFeatureBenchmarks {
       System.exit(-1);
     }
     for (String arg : args) {
-      benchmark(Integer.parseInt(arg));
+      benchmark(FeatureId.fromId(Integer.parseInt(arg)));
     }
   }
 }

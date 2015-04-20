@@ -10,7 +10,6 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 
@@ -50,102 +49,136 @@ public class ManualHeuristicFeature extends Feature {
   // Acquisition keywords.
   // NOTE: Do not use the word "Acquisition".  It matches articles like this:
   // http://www.channelnewsasia.com/news/singapore/parliament-passes-changes/1714406.html
-  private static final Map<String, Double> ACQUISITION_TITLE_SCORES =
-      ImmutableMap.<String, Double>builder()
-          .put("acquires", 1.0)
-          .put("is acquiring", 1.0)
-          .put("buys", 0.9)
-          .put("is buying", 0.8)
+  private static final Map<Pattern, Double> ACQUISITION_TITLE_SCORES =
+      ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("acquires"), 1.0)
+          .put(Pattern.compile("is acquiring"), 1.0)
+          .put(Pattern.compile("buys"), 0.9)
+          .put(Pattern.compile("is buying"), 0.8)
+          .put(Pattern.compile("buying .+ for"), 1.0)
+          .put(Pattern.compile("to acquire .+illion"), 1.0)
           .build();
-  private static final Iterable<String> ACQUISITION_TITLE_BLACKLIST =
-      Arrays.asList("for buying", "buying a", "home-buying", "-buying", "buying for", 
-          "buying experience", "worth buying", "buying?", "is buying what's");
-  private static final Map<String, Double> ACQUISITION_BODY_SCORES =
-      ImmutableMap.<String, Double>builder()
-          .put("acquires", 0.8)
-          .put("is acquiring", 0.8)
+  private static final Iterable<Pattern> ACQUISITION_TITLE_BLACKLIST =
+      Arrays.asList(Pattern.compile("for buying"), 
+          Pattern.compile("home-buying"), 
+          Pattern.compile("-buying"), 
+          Pattern.compile("buying for"), 
+          Pattern.compile("buying experience"),
+          Pattern.compile("worth buying"),
+          Pattern.compile("buying\\?"),
+          Pattern.compile("buying opportunity"),
+          Pattern.compile("biggest buys"),
+          Pattern.compile("who buys"),
+          Pattern.compile("is buying what's"));
+  private static final Map<Pattern, Double> ACQUISITION_BODY_SCORES =
+      ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("acquires"), 0.8)
+          .put(Pattern.compile("is acquiring"), 0.8)
           .build();
-  private static final Iterable<String> ACQUISITION_BODY_BLACKLIST =
+  private static final Iterable<Pattern> ACQUISITION_BODY_BLACKLIST =
       Arrays.asList();
-  private static final Map<String, Double> LAUNCH_TITLE_SCORES =
-      ImmutableMap.<String, Double>builder()
-          .put("launches", 1.0)
-          .put("launched", 0.9)
-          .put("to launch", 0.9)
-          .put("releases", 0.9)
+  private static final Map<Pattern, Double> LAUNCH_TITLE_SCORES =
+      ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("launches"), 1.0)
+          .put(Pattern.compile("launched"), 0.9)
+          .put(Pattern.compile("to launch"), 0.9)
+          .put(Pattern.compile("releases"), 0.9)
           .build();
-  private static final Iterable<String> LAUNCH_TITLE_BLACKLIST =
-      Arrays.asList("manifesto", "report", "ago", "court", "lawsuit", "vinyl", "investigation", "criminal");
-  private static final Map<String, Double> LAUNCH_BODY_SCORES =
-      ImmutableMap.<String, Double>builder()
-          .put("launches", 0.6)
-          .put("releases", 0.4)
+  private static final Iterable<Pattern> LAUNCH_TITLE_BLACKLIST =
+      Arrays.asList(Pattern.compile("manifesto"),
+          Pattern.compile("report"),
+          Pattern.compile("ago"),
+          Pattern.compile("court"),
+          Pattern.compile("lawsuit"),
+          Pattern.compile("vinyl"),
+          Pattern.compile("investigation"),
+          Pattern.compile("criminal"));
+  private static final Map<Pattern, Double> LAUNCH_BODY_SCORES =
+      ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("launches"), 0.6)
           .build();
-  private static final Iterable<String> LAUNCH_BODY_BLACKLIST =
-      Arrays.asList("manifesto", "report", "ago", "was launched", "social media campaign", 
-          "fell", "rose", "as it launches", "were launched", "which launches");
-  private static final Map<String, Double> FUNDRAISING_TITLE_SCORES =
-      ImmutableMap.<String, Double>builder()
-          .put("series a ", 1.0)
-          .put("series a,", 1.0)
-          .put("series b ", 1.0)
-          .put("series b,", 1.0)
-          .put("series c ", 1.0)
-          .put("series c,", 1.0)
-          .put("series d ", 1.0)
-          .put("series d,", 1.0)
-          .put("series e ", 1.0)
-          .put("series e,", 1.0)
-          .put("angel round", 1.0)
+  private static final Iterable<Pattern> LAUNCH_BODY_BLACKLIST =
+      Arrays.asList(Pattern.compile("manifesto"),
+          Pattern.compile("report"),
+          Pattern.compile("ago"),
+          Pattern.compile("was launched"),
+          Pattern.compile("social media campaign"), 
+          Pattern.compile("fell"),
+          Pattern.compile("rose"),
+          Pattern.compile("as it launches"),
+          Pattern.compile("were launched"),
+          Pattern.compile("which launches"));
+  private static final Map<Pattern, Double> FUNDRAISING_TITLE_SCORES =
+      ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("series a "), 1.0)
+          .put(Pattern.compile("series a$"), 1.0)
+          .put(Pattern.compile("series a,"), 1.0)
+          .put(Pattern.compile("series b "), 1.0)
+          .put(Pattern.compile("series b$"), 1.0)
+          .put(Pattern.compile("series b,"), 1.0)
+          .put(Pattern.compile("series c "), 1.0)
+          .put(Pattern.compile("series c$"), 1.0)
+          .put(Pattern.compile("series c,"), 1.0)
+          .put(Pattern.compile("series d "), 1.0)
+          .put(Pattern.compile("series d$"), 1.0)
+          .put(Pattern.compile("series d,"), 1.0)
+          .put(Pattern.compile("series e "), 1.0)
+          .put(Pattern.compile("series e$"), 1.0)
+          .put(Pattern.compile("series e,"), 1.0)
+          .put(Pattern.compile("angel round"), 1.0)
+          .put(Pattern.compile("funding round"), 1.0)
+          .put(Pattern.compile("raises \\$.+m funding"), 1.0)
+          .put(Pattern.compile("raises \\$.+ million"), 1.0)
+          .put(Pattern.compile("million of funding"), 1.0)
           .build();
-  private static final Iterable<String> FUNDRAISING_TITLE_BLACKLIST =
-      Arrays.asList("declares dividends");
-  private static final Map<String, Double> FUNDRAISING_BODY_SCORES =
-      ImmutableMap.<String, Double>builder()
-          .put("series a\\.", 0.9)
-          .put("series a ", 0.9)
-          .put("series a,", 0.9)
-          .put("series b\\.", 0.9)
-          .put("series b ", 0.9)
-          .put("series b,", 0.9)
-          .put("series c\\.", 0.9)
-          .put("series c ", 0.9)
-          .put("series c,", 0.9)
-          .put("series d\\.", 0.9)
-          .put("series d ", 0.9)
-          .put("series d,", 0.9)
-          .put("series e\\.", 0.9)
-          .put("series e ", 0.9)
-          .put("series e,", 0.9)
-          .put("angel round", 0.9)
+  private static final Iterable<Pattern> FUNDRAISING_TITLE_BLACKLIST =
+      Arrays.asList(Pattern.compile("declares dividends"));
+  private static final Map<Pattern, Double> FUNDRAISING_BODY_SCORES =
+      ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("series a\\."), 0.9)
+          .put(Pattern.compile("series a "), 0.9)
+          .put(Pattern.compile("series a,"), 0.9)
+          .put(Pattern.compile("series b\\."), 0.9)
+          .put(Pattern.compile("series b "), 0.9)
+          .put(Pattern.compile("series b,"), 0.9)
+          .put(Pattern.compile("series c\\."), 0.9)
+          .put(Pattern.compile("series c "), 0.9)
+          .put(Pattern.compile("series c,"), 0.9)
+          .put(Pattern.compile("series d\\."), 0.9)
+          .put(Pattern.compile("series d "), 0.9)
+          .put(Pattern.compile("series d,"), 0.9)
+          .put(Pattern.compile("series e\\."), 0.9)
+          .put(Pattern.compile("series e "), 0.9)
+          .put(Pattern.compile("series e,"), 0.9)
+          .put(Pattern.compile("angel round"), 0.9)
           .build();
-  private static final Iterable<String> FUNDRAISING_BODY_BLACKLIST =
+  private static final Iterable<Pattern> FUNDRAISING_BODY_BLACKLIST =
       Arrays.asList();
-  private static final Map<String, Double> MILITARY_SCORES =
-      ImmutableMap.<String, Double>builder()
-          .put("afghanistan", 1.0)
-          .put("attack", 1.0)
-          .put("attacks", 1.0)
-          .put("crimea", 1.0)
-          .put("gaza", 1.0)
-          .put("injured", 1.0)
-          .put("iran", 1.0)
-          .put("iraq", 1.0)
-          .put("isil", 1.0)
-          .put("isis", 1.0)
-          .put("killed", 1.0)
-          .put("lebanon", 1.0)
-          .put("militant", 1.0)
-          .put("militants", 1.0)
-          .put("military", 1.0)
-          .put("mortar", 1.0)
-          .put("mortars", 1.0)
-          .put("nasa", 1.0)
-          .put("north korea", 1.0)
-          .put("pakistan", 1.0)
-          .put("paramilitary", 1.0)
-          .put("rocket", 1.0)
-          .put("wounded", 1.0)
+  private static final Map<Pattern, Double> MILITARY_SCORES =
+      ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("afghanistan"), 1.0)
+          .put(Pattern.compile("attack"), 1.0)
+          .put(Pattern.compile("attacks"), 1.0)
+          .put(Pattern.compile("crimea"), 1.0)
+          .put(Pattern.compile("gaza"), 1.0)
+          .put(Pattern.compile("injured"), 1.0)
+          .put(Pattern.compile("iran"), 1.0)
+          .put(Pattern.compile("iraq"), 1.0)
+          .put(Pattern.compile("isil"), 1.0)
+          .put(Pattern.compile("isis"), 1.0)
+          .put(Pattern.compile("killed"), 1.0)
+          .put(Pattern.compile("lebanon"), 1.0)
+          .put(Pattern.compile("militant"), 1.0)
+          .put(Pattern.compile("militants"), 1.0)
+          .put(Pattern.compile("military"), 1.0)
+          .put(Pattern.compile("mortar"), 1.0)
+          .put(Pattern.compile("mortars"), 1.0)
+          .put(Pattern.compile("nasa"), 1.0)
+          .put(Pattern.compile("north korea"), 1.0)
+          .put(Pattern.compile("pakistan"), 1.0)
+          .put(Pattern.compile("paramilitary"), 1.0)
+          .put(Pattern.compile("rocket"), 1.0)
+          .put(Pattern.compile("wounded"), 1.0)
           .build();
 
   public ManualHeuristicFeature(FeatureId featureId) {
@@ -172,70 +205,29 @@ public class ManualHeuristicFeature extends Feature {
   }
 
   @VisibleForTesting
-  static double getScore(String text, Map<String, Double> scoreRules) {
-    Pattern pattern;
-    synchronized (PATTERN_CACHE) {
-      if (PATTERN_CACHE.containsKey(scoreRules)) {
-        pattern = PATTERN_CACHE.get(scoreRules);
-      } else {
-        pattern = Pattern.compile(new StringBuilder()
-            .append("(")
-            .append(Joiner.on("|").join(scoreRules.keySet()))
-            .append(")")
-            .toString());
-        PATTERN_CACHE.put(scoreRules, pattern);
-      }
-    }
+  static double getScore(String text, Map<Pattern, Double> scoreRules) {
     double score = 0;
-    Matcher matcher = pattern.matcher(text);
-    while (matcher.find() && scoreRules.containsKey(matcher.group(1))) {
-      score = Math.max(score, scoreRules.get(matcher.group(1)));
+    for (Pattern pattern : scoreRules.keySet()) {
+      Matcher matcher = pattern.matcher(text);
+      if (matcher.find()) {
+        score = Math.max(score, scoreRules.get(pattern));
+      }
     }
     return score;
   }
-  
+
   @VisibleForTesting
-  static double getScore(String text, Map<String, Double> scoreRules, Iterable<String> blacklist) {
-    Pattern pattern;
-    Pattern blacklistPattern;
-
-    synchronized (PATTERN_CACHE) {
-      if (PATTERN_CACHE.containsKey(blacklist)) {
-        blacklistPattern = PATTERN_CACHE.get(blacklist);
-      } else {
-        blacklistPattern = Pattern.compile(new StringBuilder()
-            .append("(")
-            .append(Joiner.on("|").join(blacklist))
-            .append(")")
-            .toString());
-        PATTERN_CACHE.put(blacklist, blacklistPattern);
+  static double getScore(String text, Map<Pattern, Double> scoreRules, Iterable<Pattern> blacklist) {
+    if (Iterables.size(blacklist) > 0) {
+      for (Pattern blacklistPattern : blacklist) {
+        Matcher blacklistMatcher = blacklistPattern.matcher(text);
+        if (blacklistMatcher.find()) {
+          return -1;
+        }
       }
     }
 
-    Matcher blacklistMatcher = blacklistPattern.matcher(text);
-    if (blacklistMatcher.find()) {
-      return -1;
-    }
-
-    synchronized (PATTERN_CACHE) {
-      if (PATTERN_CACHE.containsKey(scoreRules)) {
-        pattern = PATTERN_CACHE.get(scoreRules);
-      } else {
-        pattern = Pattern.compile(new StringBuilder()
-            .append("(")
-            .append(Joiner.on("|").join(scoreRules.keySet()))
-            .append(")")
-            .toString());
-        PATTERN_CACHE.put(scoreRules, pattern);
-      }
-    }
-    double score = 0;
-    Matcher matcher = pattern.matcher(text);
-    while (matcher.find() && scoreRules.containsKey(matcher.group(1))) {
-      score = Math.max(score, scoreRules.get(matcher.group(1)));
-    }
-    
-    return score;
+    return getScore(text, scoreRules);
   }
 
   private static boolean isAboutMilitary(ArticleOrBuilder article) {
@@ -245,65 +237,58 @@ public class ManualHeuristicFeature extends Feature {
   }
 
   public static double relevanceToAcquisitions(ArticleOrBuilder article) {
-    double titleScore = getScore(article.getTitle().toLowerCase(), ACQUISITION_TITLE_SCORES, ACQUISITION_TITLE_BLACKLIST);
+    double titleScore = getScore(article.getTitle().toLowerCase(), 
+        ACQUISITION_TITLE_SCORES, ACQUISITION_TITLE_BLACKLIST);
     if (titleScore < 0) {
       // A blacklist word was found
       return 0;
     }
 
-    String firstParagraph = "";
-    if (article.getParagraphCount() > 0) {
-      firstParagraph = article.getParagraph(0).toLowerCase();
-    }
-
-    double bodyScore = getScore(firstParagraph, ACQUISITION_BODY_SCORES, ACQUISITION_BODY_BLACKLIST);
-    if (bodyScore < 0) {
+    String firstParagraph = Iterables.getFirst(article.getParagraphList(), "").toLowerCase();
+    double firstParagraphScore = getScore(firstParagraph, ACQUISITION_BODY_SCORES, 
+        ACQUISITION_BODY_BLACKLIST);
+    if (firstParagraphScore < 0) {
       // A blacklist word was found
       return 0;
     }
 
-    return Math.max(titleScore, bodyScore);
+    return Math.max(titleScore, firstParagraphScore);
   }
 
   public static double relevanceToLaunches(ArticleOrBuilder article) {
-    double titleScore = getScore(article.getTitle().toLowerCase(), LAUNCH_TITLE_SCORES, LAUNCH_TITLE_BLACKLIST);
+    double titleScore = getScore(article.getTitle().toLowerCase(), 
+        LAUNCH_TITLE_SCORES, LAUNCH_TITLE_BLACKLIST);
     if (titleScore < 0) {
       // A blacklist word was found
       return 0;
     }
 
-    String firstParagraph = "";
-    if (article.getParagraphCount() > 0) {
-      firstParagraph = article.getParagraph(0).toLowerCase();
-    }
-
-    double bodyScore = getScore(firstParagraph, LAUNCH_BODY_SCORES, LAUNCH_BODY_BLACKLIST);
-    if (bodyScore < 0) {
+    String firstParagraph = Iterables.getFirst(article.getParagraphList(), "").toLowerCase();
+    double firstParagraphScore = getScore(firstParagraph, LAUNCH_BODY_SCORES, LAUNCH_BODY_BLACKLIST);
+    if (firstParagraphScore < 0) {
       // A blacklist word was found
       return 0;
     }
 
-    return Math.max(titleScore, bodyScore);
+    return Math.max(titleScore, firstParagraphScore);
   }
 
   public static double relevanceToFundraising(ArticleOrBuilder article) {
-    double titleScore = getScore(article.getTitle().toLowerCase(), FUNDRAISING_TITLE_SCORES, FUNDRAISING_TITLE_BLACKLIST);
+    double titleScore = getScore(article.getTitle().toLowerCase(), 
+        FUNDRAISING_TITLE_SCORES, FUNDRAISING_TITLE_BLACKLIST);
     if (titleScore < 0) {
       // A blacklist word was found
       return 0;
     }
 
-    String firstParagraph = "";
-    if (article.getParagraphCount() > 0) {
-      firstParagraph = article.getParagraph(0).toLowerCase();
-    }
-
-    double bodyScore = getScore(firstParagraph, FUNDRAISING_BODY_SCORES, FUNDRAISING_BODY_BLACKLIST);
-    if (bodyScore < 0) {
+    String firstParagraph = Iterables.getFirst(article.getParagraphList(), "").toLowerCase();
+    double firstParagraphScore = getScore(firstParagraph, FUNDRAISING_BODY_SCORES, 
+        FUNDRAISING_BODY_BLACKLIST);
+    if (firstParagraphScore < 0) {
       // A blacklist word was found
       return 0;
     }
 
-    return Math.max(titleScore, bodyScore);
+    return Math.max(titleScore, firstParagraphScore);
   }
 }
