@@ -93,7 +93,7 @@ public class ManualHeuristicFeatureTest {
   }
 
   @Test
-  public void testScore() throws BiznessException, AssertionException {
+  public void testManualHeuristicsAgainstBenchmarks() throws BiznessException, AssertionException {
     for (FeatureId featureId : getFeatureBenchmarkMap().keySet()) {
       testAgainstBenchmark(featureId);
     }
@@ -103,7 +103,7 @@ public class ManualHeuristicFeatureTest {
    * Scores the articles found within .benchmark files
    * for a manual heuristic feature
    */
-  public static void testAgainstBenchmark(FeatureId featureId) 
+  private void testAgainstBenchmark(FeatureId featureId) 
       throws BiznessException, AssertionException {
     ManualHeuristicFeature feature = new ManualHeuristicFeature(featureId);
     Map<Article, Double> goodArticleScores = new HashMap<>();
@@ -122,8 +122,6 @@ public class ManualHeuristicFeatureTest {
             + Iterables.getFirst(article.getParagraphList(), "") + "\"");
         System.out.println();
       }
-//      Asserts.assertTrue(score > 0.5, "Good url scored bad: " 
-//          + article.getTitle() + "\" (" + score + ")");
       assertEquals(1.0, score, 0.5 /* epsilon */);
     }
 
@@ -139,8 +137,6 @@ public class ManualHeuristicFeatureTest {
             + Iterables.getFirst(article.getParagraphList(), "") + "\"");
         System.out.println();
       }
-//      Asserts.assertTrue(score < 0.3, "Bad url scored good: " 
-//          + article.getTitle() + "\" (" + score + ")");
       assertEquals(0.0, score, 0.3 /* epsilon */);
     }
   }

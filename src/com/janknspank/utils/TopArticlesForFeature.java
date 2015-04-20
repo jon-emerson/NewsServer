@@ -31,9 +31,9 @@ public class TopArticlesForFeature {
       TopList<Article, Double> topRankingArticles = new TopList<>(100);
 
       for (Article article : articles) {
-        ArticleFeature launchFeature =
+        ArticleFeature articleFeature =
             ArticleFeatures.getFeature(article, FeatureId.fromId(Integer.parseInt(arg)));
-        topRankingArticles.add(article, launchFeature.getSimilarity());
+        topRankingArticles.add(article, articleFeature.getSimilarity());
       }
 
       for (Article article : topRankingArticles.getKeys()) {
