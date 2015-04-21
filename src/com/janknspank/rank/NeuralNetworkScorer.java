@@ -76,13 +76,13 @@ public final class NeuralNetworkScorer extends Scorer {
     linkedHashMap.put("startup", InputValuesGenerator.relevanceToStartups(user, article));
 
     // 7. Relevance to acquisitions.
-    linkedHashMap.put("acquisitions", 0.0); // InputValuesGenerator.relevanceToAcquisitions(user, article));
+    linkedHashMap.put("acquisitions", InputValuesGenerator.relevanceToAcquisitions(user, article));
 
     // 8. Relevance to launches.
-    linkedHashMap.put("launches", 0.0); // , InputValuesGenerator.relevanceToLaunches(user, article));
+    linkedHashMap.put("launches", InputValuesGenerator.relevanceToLaunches(user, article));
 
     // 9. Relevance to start-up fundraising rounds.
-    linkedHashMap.put("fundraising", 0.0); // , InputValuesGenerator.relevanceToFundraising(user, article));
+    linkedHashMap.put("fundraising", InputValuesGenerator.relevanceToFundraising(user, article));
 
     // 10. Pop culture score.
     linkedHashMap.put("pop_culture", InputValuesGenerator.relevanceToPopCulture(article));
