@@ -10,6 +10,7 @@ import com.google.api.client.util.Maps;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.Urls;
 import com.janknspank.bizness.Users;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.Asserts;
 import com.janknspank.crawler.Interpreter;
 import com.janknspank.proto.ArticleProto.Article;
@@ -81,11 +82,15 @@ public final class NeuralNetworkScorer extends Scorer {
     // 9. Relevance to start-up fundraising rounds.
     linkedHashMap.put("fundraising", InputValuesGenerator.relevanceToFundraising(user, article));
 
-    // 10. Pop culture score.
-    linkedHashMap.put("pop_culture", InputValuesGenerator.relevanceToPopCulture(article));
-
-    // 11. Murder Crime War score.
-    linkedHashMap.put("murder_crime_war", InputValuesGenerator.relevanceToMurderCrimeWar(article));
+    // 10. Topic scores.
+    linkedHashMap.put("entertainment",
+        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_ENTERTAINMENT));
+    linkedHashMap.put("sports",
+        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_SPORTS));
+    linkedHashMap.put("politics",
+        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_POLITICS));
+    linkedHashMap.put("murder_crime_war",
+        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
 
     return linkedHashMap;
   }

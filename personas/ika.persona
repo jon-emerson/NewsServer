@@ -1,0 +1,85 @@
+# Ika works with the National Institutes of Health in Washington, D.C., helping
+# to improve health conditions in developing countries, especially Africa and
+# Asia.  Most of these articles are from Morning Consult Health, which is her
+# source for news articles about health care policy.
+name: "Ika Ono"
+email: "ika.ono@nih.gov" # Not real.
+good_url: "http://blogs.wsj.com/pharmalot/2015/04/21/actavis-wins-a-product-hopping-case-as-namenda-battle-rages-on/"
+good_url: "http://jama.jamanetwork.com/article.aspx?articleid=2275444"
+good_url: "http://jama.jamanetwork.com/article.aspx?articleid=2278025"
+# good_url: "http://morningconsult.com/2015/03/as-sgr-repeal-debuts-senate-dems-stick-on-chip/"
+# good_url: "http://morningconsult.com/2015/03/as-sgr-repeal-debuts-senate-dems-stick-on-chip/"
+# good_url: "http://morningconsult.com/2015/03/doc-fix-discord-for-gop-doctors-caucus/"
+# good_url: "http://morningconsult.com/2015/03/gop-legislators-stomach-sgr-repeals-200bn-price-tag/"
+# good_url: "http://morningconsult.com/2015/04/cms-actuary-permanent-doc-fix-would-eventually-need-its-own-fix/"
+# good_url: "http://morningconsult.com/2015/04/fda-bill-could-get-hearing-next-week/"
+# good_url: "http://morningconsult.com/2015/04/fda-bill-could-get-hearing-next-week/"
+# good_url: "http://morningconsult.com/2015/04/medicare-doc-fix-could-become-budget-battle/"
+# good_url: "http://morningconsult.com/2015/04/political-pressure-could-stifle-amendments-to-sgr-repeal/"
+# good_url: "http://morningconsult.com/2015/04/the-first-100-days-of-congress-health/"
+# good_url: "http://morningconsult.com/opinions/helping-employees-drive-high-value-healthcare/"
+# good_url: "http://morningconsult.com/opinions/helping-employees-drive-high-value-healthcare/"
+# good_url: "http://qz.com/387937/pharma-companies-cant-stop-buying-each-other-this-year/"
+# good_url: "http://thehill.com/policy/healthcare/233536-overnight-healthcare-another-backup-plan-for-king-v-burwell"
+# good_url: "http://thehill.com/policy/healthcare/233623-obamacare-has-saved-15b-in-drug-costs"
+# good_url: "http://thehill.com/policy/healthcare/233633-hhs-watchdog-to-investigate-obamacare-subsidies-security"
+# good_url: "http://thehill.com/policy/healthcare/233968-study-premiums-could-rise-as-much-as-400-percent-if-court-rules-against"
+# good_url: "http://thehill.com/policy/healthcare/239519-planned-parenthood-says-dems-held-the-line-on-abortion-fight"
+# good_url: "http://thehill.com/policy/healthcare/239558-gop-senator-unveils-new-obamacare-back-up-plan"
+good_url: "http://www.bloomberg.com/news/articles/2015-02-24/fbi-is-close-to-finding-hackers-in-anthem-health-care-data-theft"
+good_url: "http://www.bloomberg.com/news/articles/2015-04-21/amgen-profit-tops-analyst-estimates-as-drugmaker-raises-forecast"
+good_url: "http://www.bloomberg.com/news/articles/2015-04-21/teva-makes-40-1-billion-unsolicited-takeover-offer-for-mylan"
+good_url: "http://www.bloomberg.com/news/articles/2015-04-22/u-s-stock-index-futures-fall-as-chipotle-drops-on-supply-woes"
+good_url: "http://www.forbes.com/sites/bernardmarr/2015/04/21/how-big-data-is-changing-healthcare/"
+good_url: "http://www.huffingtonpost.com/2015/02/24/north-south-divide-obamacare-states_n_6737866.html"
+# good_url: "http://www.nationaljournal.com/2016-elections/explaining-hillary-clinton-s-trip-to-the-health-policy-twilight-zone-20150421"
+# good_url: "http://www.nationaljournal.com/budget/house-and-senate-gop-budgets-are-miles-apart-20150318"
+# good_url: "http://www.nationaljournal.com/congress/david-vitter-wants-to-subpoena-obamacare-documents-do-republicans-have-his-back-20150421"
+# good_url: "http://www.nationaljournal.com/health-care/deficit-hawks-plot-senate-fight-over-medicare-reform-bill-20150407"
+# good_url: "http://www.nationaljournal.com/health-care/deficit-hawks-plot-senate-fight-over-medicare-reform-bill-20150407"
+# good_url: "http://www.nationaljournal.com/health-care/everybody-hates-the-doc-fix-and-they-want-it-to-die-20150318"
+# good_url: "http://www.nationaljournal.com/health-care/outside-groups-fume-that-medicare-cuts-may-pay-for-trade-bill-20150421"
+# good_url: "http://www.nationaljournal.com/health-care/outside-groups-fume-that-medicare-cuts-may-pay-for-trade-bill-20150421"
+# good_url: "http://www.nationaljournal.com/health-care/this-is-the-end-for-washington-s-most-frenzied-lobbying-extravaganza-20150406"
+# good_url: "http://www.npr.org/blogs/health/2015/02/26/389085619/attention-shoppers-prices-for-70-health-care-procedures-now-online"
+good_url: "http://www.nytimes.com/2015/03/17/us/politics/house-republican-budget-overhauls-medicare-and-repeals-the-health-law.html"
+good_url: "http://www.nytimes.com/2015/04/07/upshot/alcoholics-anonymous-and-the-challenge-of-evidence-based-medicine.html"
+good_url: "http://www.nytimes.com/aponline/2015/04/21/us/politics/ap-us-obama-medicare.html"
+# good_url: "http://www.politico.com/story/2015/03/medicare-doctors-john-boehner-nancy-pelosi-116097.html"
+# good_url: "http://www.politico.com/story/2015/04/gop-budget-2016-mike-crapo-jeff-sessions-117181.html"
+# good_url: "http://www.poughkeepsiejournal.com/story/news/local/2015/03/14/study-medicare-gaps-cost-retirees/24771097/"
+good_url: "http://www.reuters.com/article/2015/02/23/us-usa-superbug-idUSKBN0LR25U20150223"
+good_url: "http://www.reuters.com/article/2015/02/24/us-heart-attack-nsaid-dangers-idUSKBN0LS24S20150224"
+good_url: "http://www.reuters.com/article/2015/02/25/us-health-biosimilars-europe-idUSKBN0LT0NP20150225"
+good_url: "http://www.reuters.com/article/2015/02/25/us-science-emulsifiers-idUSKBN0LT26S20150225"
+good_url: "http://www.reuters.com/article/2015/04/21/us-astrazeneca-cancer-idUSKBN0NC1H520150421"
+good_url: "http://www.reuters.com/article/2015/04/21/us-lgbt-healthcare-lists-idUSKBN0NC2HE20150421"
+good_url: "http://www.theatlantic.com/health/archive/2015/03/for-those-that-hate-obamacare-do-you-know-why/387913/"
+# good_url: "http://www.vox.com/2014/6/24/5837832/is-america-better-than-europe-at-treating-cancer"
+# good_url: "http://www.vox.com/2015/2/23/8082769/obamacare-democrats-priorities"
+good_url: "http://www.washingtonpost.com/blogs/the-switch/wp/2015/02/23/ftc-fines-marketers-of-two-apps-that-claim-to-detect-melanoma/"
+good_url: "http://www.washingtonpost.com/blogs/wonkblog/wp/2015/03/13/how-expensive-medications-are-increasingly-out-of-reach/"
+good_url: "http://www.washingtonpost.com/blogs/wonkblog/wp/2015/04/07/the-coming-revolution-in-how-employers-provide-health-insurance/"
+good_url: "http://www.washingtonpost.com/blogs/wonkblog/wp/2015/04/09/two-maps-explain-how-much-the-supreme-court-could-damage-obamacare/"
+good_url: "http://www.washingtonpost.com/news/to-your-health/wp/2015/04/21/maker-of-controversial-als-drug-hasnt-filed-formal-application-for-fda-approval/"
+interest {
+  id: "55034f7de4b097661cf260b2"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426280317432
+  industry_code: 10533 # Medicine
+}
+interest {
+  id: "55034f7de4b097661cf260b8"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426280317432
+  industry_code: 10543 # Government
+}
+interest {
+  id: "55034f7de4b097661cfa60ba"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426280337632
+  industry_code: 10552 # Health and Fitness
+}

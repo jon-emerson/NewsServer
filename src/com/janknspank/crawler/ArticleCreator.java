@@ -57,7 +57,8 @@ class ArticleCreator {
       "http://images.forbes.com/media/assets/forbes_1200x1200.jpg",
       "http://images.rigzone.com/images/rz-facebook.jpg",
       "http://static01.nyt.com/images/icons/t_logo_291_black.png",
-      "http://www.inc.com/images/incthumb250.png");
+      "http://www.inc.com/images/incthumb250.png",
+      "http://fm.cnbc.com/applications/cnbc.com/staticcontent/img/cnbc_logo.gif");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\u2014)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),

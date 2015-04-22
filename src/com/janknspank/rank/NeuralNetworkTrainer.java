@@ -231,17 +231,17 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     int bestHiddenNodeCount = -1;
 
     // For curiousity, figure out how well each topology works.
-    int maxHiddenNodeCount = 8;
+    int maxHiddenNodeCount = 15;
     double[] bestGradePerHiddenNodeCount = new double[maxHiddenNodeCount];
     for (int i = 0; i < maxHiddenNodeCount; i++) {
       bestGradePerHiddenNodeCount[i] = Double.MIN_VALUE;
     }
 
     NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
-    for (int hiddenNodeCount = 0; hiddenNodeCount < maxHiddenNodeCount; hiddenNodeCount++) {
-      for (int tries = 0; tries < 10; tries++) {
+    for (int hiddenNodeCount : new int[] { 0, 2, 6, 7, 8, 9 }) {
+      for (int tries = 0; tries < 15; tries++) {
         System.out.println("ATTEMPTING " + hiddenNodeCount + " HIDDEN NODES "
-            + "(try " + (tries + 1) + " of 10)...");
+            + "(try " + (tries + 1) + " of 15)...");
         NeuralNetwork<BackPropagation> neuralNetwork =
             neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
         double grade = Benchmark.grade(new NeuralNetworkScorer(neuralNetwork));
@@ -262,7 +262,9 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     System.out.println("Performances of different topologies:");
     for (int i = 0; i < maxHiddenNodeCount; i++) {
-      System.out.println(i + " hidden nodes: " + bestGradePerHiddenNodeCount[i]);
+      System.out.println(i + " hidden nodes: " +
+          (bestGradePerHiddenNodeCount[i] == Double.MIN_VALUE
+              ? "N/A" : bestGradePerHiddenNodeCount[i]));
     }
     System.out.println();
 

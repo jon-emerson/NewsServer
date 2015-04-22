@@ -1,0 +1,23 @@
+root_domain: "jama.jamanetwork.com"
+start_url: "http://jama.jamanetwork.com/journal.aspx"
+paragraph_selector: ".contentBody p"
+paragraph_selector: "p.para"
+article_url_pattern {
+  path_regex: "^\\/article\\.aspx$"
+  query_regex: "articleid="
+}
+whitelisted_query_parameter: "articleid"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://jama.jamanetwork.com/article.aspx?articleid=2275446"
+    article_url: "http://jama.jamanetwork.com/article.aspx?articleid=2275447"
+    article_url: "http://jama.jamanetwork.com/article.aspx?articleid=2278595"
+    article_url: "http://jama.jamanetwork.com/article.aspx?articleid=2275455"
+    article_url: "http://jama.jamanetwork.com/article.aspx?articleid=2275452"
+    non_article_url: "http://jama.jamanetwork.com/onlineFirst.aspx"
+    non_article_url: "http://jama.jamanetwork.com/collections.aspx"
+    non_article_url: "http://jama.jamanetwork.com/public/forauthors.aspx"
+    non_article_url: "http://jama.jamanetwork.com/multimediaPlayer.aspx?mediaid=8297539"
+    non_article_url: "http://jama.jamanetwork.com/Solr/advancedSearch.aspx"
+  }
+}

@@ -1,0 +1,26 @@
+root_domain: "tomtunguz.com"
+start_url: "http://tomtunguz.com/"
+paragraph_selector: ".post p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://tomtunguz.com/best-books-saas-sales/"
+    article_url: "http://tomtunguz.com/content-marketing-traffic-drivers/"
+    article_url: "http://tomtunguz.com/thinking-through-valuations/"
+    article_url: "http://tomtunguz.com/private-market-public-market-disparity/"
+    article_url: "http://tomtunguz.com/mailchimp/"
+    article_url: "http://tomtunguz.com/professional_services/"
+    article_url: "http://tomtunguz.com/postmortems/"
+    non_article_url: "http://tomtunguz.com/categories/benchmarks/"
+    non_article_url: "http://tomtunguz.com/categories/content-marketing/"
+    non_article_url: "http://tomtunguz.com/categories/product/"
+    non_article_url: "http://tomtunguz.com/categories/startups/"
+    non_article_url: "http://tomtunguz.com/categories/compensation/"
+  }
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
