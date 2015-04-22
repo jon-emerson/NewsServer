@@ -18,9 +18,6 @@ import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 12;
-  static final int OUTPUT_NODES_COUNT = 1;
-  static final int HIDDEN_NODES_COUNT = 2;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_out.nnet";
   private static NeuralNetworkScorer instance = null;
   private NeuralNetwork<BackPropagation> neuralNetwork;
@@ -93,18 +90,6 @@ public final class NeuralNetworkScorer extends Scorer {
     return linkedHashMap;
   }
 
-  /**
-   * Generate an nodes array with all indexes = 0 except for the specified
-   * index.
-   */
-  static double[] generateIsolatedInputNodes(int enabledIndex) {
-    double[] inputs = new double[INPUT_NODES_COUNT];
-    for (int i = 0; i < INPUT_NODES_COUNT; i++) {
-      inputs[i] = (i == enabledIndex) ? 1.0 : 0.0;
-    }
-    return inputs;
-  }
-
   @Override
   public double getScore(User user, Article article) {
     Asserts.assertNotNull(user, "user", NullPointerException.class);
@@ -112,11 +97,10 @@ public final class NeuralNetworkScorer extends Scorer {
     return getScore(generateInputNodes(user, article));
   }
 
-  public static double getScore(LinkedHashMap<String, Double> inputNodes) {
-    NeuralNetworkScorer scorer = getInstance();
-    scorer.neuralNetwork.setInput(Doubles.toArray(inputNodes.values()));
-    scorer.neuralNetwork.calculate();
-    return scorer.neuralNetwork.getOutput()[0];
+  public double getScore(LinkedHashMap<String, Double> inputNodes) {
+    neuralNetwork.setInput(Doubles.toArray(inputNodes.values()));
+    neuralNetwork.calculate();
+    return neuralNetwork.getOutput()[0];
   }
 
   /**
@@ -141,6 +125,6 @@ public final class NeuralNetworkScorer extends Scorer {
     for (Map.Entry<String, Double> entry : inputNodes.entrySet()) {
       System.out.println("Node " + entry.getKey() + ": " + entry.getValue());
     }
-    System.out.println("Score: " + getScore(inputNodes));
+    System.out.println("Score: " + getInstance().getScore(inputNodes));
   }
 }

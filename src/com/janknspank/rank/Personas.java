@@ -77,9 +77,9 @@ public class Personas {
    * ends up to be missing, we should handle it by improving personas!
    */
   public synchronized static User convertToUser(Persona persona) {
-//    if (PERSONA_TO_USER_MAP.containsKey(persona)) {
-//      return PERSONA_TO_USER_MAP.get(persona);
-//    }
+    if (PERSONA_TO_USER_MAP.containsKey(persona)) {
+      return PERSONA_TO_USER_MAP.get(persona);
+    }
 
     // First name.
     String firstName =

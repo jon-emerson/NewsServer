@@ -1,5 +1,6 @@
 package com.janknspank.rank;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -15,6 +16,7 @@ import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -22,7 +24,10 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private static final int MAX_ITERATIONS = 20000;
+  private static final int MAX_ITERATIONS = 10000;
+
+  // Helper object that gives us human readable names for each input node.
+  private static List<String> INPUT_NODE_KEYS = null;
 
   private double lowestError = 1.0;
   private Double[] lowestErrorNetworkWeights;
@@ -31,12 +36,28 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   @SuppressWarnings("unused")
   private Double[] lastNetworkWeights;
 
-  private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
-    NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(
-        TransferFunctionType.SIGMOID, // TODO(jonemerson): Should this be LINEAR?
-        NeuralNetworkScorer.INPUT_NODES_COUNT,
-        // NeuralNetworkScorer.HIDDEN_NODES_COUNT,
-        NeuralNetworkScorer.OUTPUT_NODES_COUNT);
+  private NeuralNetwork<BackPropagation> generateTrainedNetwork(
+      DataSet trainingSet, int hiddenNodeCount) throws DatabaseSchemaException {
+    NeuralNetwork<BackPropagation> neuralNetwork;
+    List<String> inputNodeKeys = getInputNodeKeys();
+    int inputNodesCount = inputNodeKeys.size();
+    if (hiddenNodeCount == 0) {
+      neuralNetwork = new MultiLayerPerceptron(
+          TransferFunctionType.SIGMOID, // TODO(jonemerson): Should this be LINEAR?
+          inputNodesCount,
+          1 /* output nodes count */);
+    } else if (hiddenNodeCount == 0) {
+      neuralNetwork = new MultiLayerPerceptron(
+          TransferFunctionType.LINEAR, // Trying this out vs. SIGMOID...
+          inputNodesCount,
+          1 /* output nodes count */);
+    } else {
+      neuralNetwork = new MultiLayerPerceptron(
+          TransferFunctionType.SIGMOID, // TODO(jonemerson): Should this be LINEAR?
+          inputNodesCount,
+          hiddenNodeCount,
+          1 /* output nodes count */);
+    }
     neuralNetwork.setLearningRule(new MomentumBackpropagation());
 
     // Set learning parameters.
@@ -58,15 +79,28 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     neuralNetwork.setWeights(ArrayUtils.toPrimitive(lowestErrorNetworkWeights));
 
     // Print correlation of each input node to the output.
-    for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
-      double[] isolatedInput = NeuralNetworkScorer.generateIsolatedInputNodes(i);
+    for (int i = 0; i < inputNodesCount; i++) {
+      double[] isolatedInput = generateIsolatedInputNodes(i);
       neuralNetwork.setInput(isolatedInput);
       neuralNetwork.calculate();
-      System.out.println("Input node " + i + " correlation to output: " 
+      System.out.println("Input node '" + inputNodeKeys.get(i) + "' correlation to output: " 
           + neuralNetwork.getOutput()[0]);
     }
 
     return neuralNetwork;
+  }
+
+  /**
+   * Generate an nodes array with all indexes = 0 except for the specified
+   * index.
+   * @throws DatabaseSchemaException 
+   */
+  static double[] generateIsolatedInputNodes(int enabledIndex) throws DatabaseSchemaException {
+    double[] inputs = new double[getInputNodeKeys().size()];
+    for (int i = 0; i < inputs.length; i++) {
+      inputs[i] = (i == enabledIndex) ? 1.0 : 0.0;
+    }
+    return inputs;
   }
 
   /**
@@ -76,10 +110,9 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   private DataSet generateTrainingDataSet() throws DatabaseSchemaException, BiznessException {
     int goodUrlCount = 0;
     int badUrlCount = 0;
-    DataSet trainingSet = new DataSet(
-        NeuralNetworkScorer.INPUT_NODES_COUNT, NeuralNetworkScorer.OUTPUT_NODES_COUNT);
+    List<DataSetRow> dataSetRows = Lists.newArrayList();
     for (TrainingArticle trainingArticle : TrainingArticles.getTrainingArticles()) {
-      trainingSet.addRow(trainingArticle.getDataSetRow());
+      dataSetRows.add(trainingArticle.getDataSetRow());
       if (trainingArticle.getScore() > 0.5) {
         goodUrlCount++;
       } else {
@@ -87,6 +120,17 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       }
     }
     System.out.println("Training set compiled. good=" + goodUrlCount + ", bad=" + badUrlCount);
+
+    // UNBELIEVABLE!!  Neuroph comes up with far different results depending on
+    // the order of the data set rows.  To combat this, and to allow us to try
+    // different configurations to hopefully find an optimal, randomize the
+    // rows.
+    Collections.shuffle(dataSetRows);
+
+    DataSet trainingSet = new DataSet(getInputNodeKeys().size(), 1 /* output nodes count */);
+    for (DataSetRow dataSetRow : dataSetRows) {
+      trainingSet.addRow(dataSetRow);
+    }
     return trainingSet;
   }
 
@@ -94,7 +138,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   public void handleLearningEvent(LearningEvent event) {
     BackPropagation bp = (BackPropagation) event.getSource();
     double error = bp.getTotalNetworkError();
-    if (bp.getCurrentIteration() == 1 || bp.getCurrentIteration() % 1000 == 0) {
+    if (bp.getCurrentIteration() % 1000 == 1) {
       System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
     }
     lastNetworkWeights = bp.getNeuralNetwork().getWeights();
@@ -131,18 +175,22 @@ public class NeuralNetworkTrainer implements LearningEventListener {
    * Definitely not-so-efficient hack for getting a list of input name labels,
    * e.g. "industries", "facebook", "acquisitions", etc.
    */
-  private static List<String> getInputNodeKeys() throws DatabaseSchemaException {
-    return ImmutableList.copyOf(NeuralNetworkScorer.generateInputNodes(
-        Database.with(User.class).getFirst(),
-        Database.with(Article.class).getFirst()).keySet());
+  private static synchronized List<String> getInputNodeKeys() throws DatabaseSchemaException {
+    if (INPUT_NODE_KEYS == null) {
+      INPUT_NODE_KEYS = ImmutableList.copyOf(NeuralNetworkScorer.generateInputNodes(
+          Database.with(User.class).getFirst(),
+          Database.with(Article.class).getFirst()).keySet());
+    }
+    return INPUT_NODE_KEYS;
   }
 
   private static void printAverageInputValues(DataSet dataSet) throws DatabaseSchemaException {
     // Calculate average input values, for debugging/optimization purposes.
-    Averager[] averageInputValues = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
-    Averager[] averageInputValuesPositive = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
-    Averager[] averageInputValuesNegative = new Averager[NeuralNetworkScorer.INPUT_NODES_COUNT];
-    for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
+    int inputNodesCount = getInputNodeKeys().size();
+    Averager[] averageInputValues = new Averager[inputNodesCount];
+    Averager[] averageInputValuesPositive = new Averager[inputNodesCount];
+    Averager[] averageInputValuesNegative = new Averager[inputNodesCount];
+    for (int i = 0; i < inputNodesCount; i++) {
       averageInputValues[i] = new Averager();
       averageInputValuesPositive[i] = new Averager();
       averageInputValuesNegative[i] = new Averager();
@@ -179,9 +227,47 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     DataSet dataSet = neuralNetworkTrainer.generateTrainingDataSet();
     printAverageInputValues(dataSet);
 
-    NeuralNetwork<BackPropagation> neuralNetwork =
-        neuralNetworkTrainer.generateTrainedNetwork(dataSet);
-    // Benchmark.
-    neuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
+    double bestGrade = Double.MIN_VALUE;
+    int bestHiddenNodeCount = -1;
+
+    // For curiousity, figure out how well each topology works.
+    int maxHiddenNodeCount = 8;
+    double[] bestGradePerHiddenNodeCount = new double[maxHiddenNodeCount];
+    for (int i = 0; i < maxHiddenNodeCount; i++) {
+      bestGradePerHiddenNodeCount[i] = Double.MIN_VALUE;
+    }
+
+    NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
+    for (int hiddenNodeCount = 0; hiddenNodeCount < maxHiddenNodeCount; hiddenNodeCount++) {
+      for (int tries = 0; tries < 10; tries++) {
+        System.out.println("ATTEMPTING " + hiddenNodeCount + " HIDDEN NODES "
+            + "(try " + (tries + 1) + " of 10)...");
+        NeuralNetwork<BackPropagation> neuralNetwork =
+            neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
+        double grade = Benchmark.grade(new NeuralNetworkScorer(neuralNetwork));
+        if (grade > bestGrade) {
+          bestGrade = grade;
+          bestHiddenNodeCount = hiddenNodeCount;
+          bestNeuralNetwork = neuralNetwork;
+          System.out.println("***");
+          System.out.println("NEW BEST FOUND: " + hiddenNodeCount + " hidden nodes");
+          System.out.println("***");
+        }
+        if (grade > bestGradePerHiddenNodeCount[hiddenNodeCount]) {
+          bestGradePerHiddenNodeCount[hiddenNodeCount] = grade;
+        }
+      }
+    }
+    System.out.println();
+
+    System.out.println("Performances of different topologies:");
+    for (int i = 0; i < maxHiddenNodeCount; i++) {
+      System.out.println(i + " hidden nodes: " + bestGradePerHiddenNodeCount[i]);
+    }
+    System.out.println();
+
+    System.out.println("Saving best neural network "
+        + "(btw it has " + bestHiddenNodeCount + " hidden nodes)");
+    bestNeuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
   }
 }

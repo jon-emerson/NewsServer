@@ -103,7 +103,7 @@ public class ViewFeedSoy {
   private static String getNeuralNetworkString(User user, Article article) {
     LinkedHashMap<String, Double> neuralNetworkInputNodes =
         NeuralNetworkScorer.generateInputNodes(user, article);
-    double score = NeuralNetworkScorer.getScore(neuralNetworkInputNodes);
+    double score = NeuralNetworkScorer.getInstance().getScore(neuralNetworkInputNodes);
     return Joiner.on("\n").withKeyValueSeparator(" = ").join(neuralNetworkInputNodes)
         + "\n\noutput -> " + score;
   }
