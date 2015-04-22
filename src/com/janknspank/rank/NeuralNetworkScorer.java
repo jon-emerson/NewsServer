@@ -18,7 +18,7 @@ import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 12;
+  static final int INPUT_NODES_COUNT = 14;
   static final int OUTPUT_NODES_COUNT = 1;
  //  static final int HIDDEN_NODES_COUNT = 9;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_out.nnet";
@@ -89,6 +89,13 @@ public final class NeuralNetworkScorer extends Scorer {
 
     // 11. Murder Crime War score.
     linkedHashMap.put("murder_crime_war", InputValuesGenerator.relevanceToMurderCrimeWar(article));
+
+    // 12. Relevance to big money
+    linkedHashMap.put("big_money", InputValuesGenerator.relevanceToBigMoney(user, article));
+
+    // 13. Relevance to quarterly earnings
+    linkedHashMap.put("quarterly_earnings", 
+        InputValuesGenerator.relevanceToQuarterlyEarnings(user, article));
 
     return linkedHashMap;
   }

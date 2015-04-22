@@ -1,0 +1,75 @@
+# Viren is an Oil and Gas investment banker interested in equities
+name: "Viren Desai"
+email: "virendesai87@gmail.com"
+good_url: "http://www.bloomberg.com/news/articles/2015-04-21/fed-plays-down-liftoff-timing-as-it-emphasizes-gradual-rate-pace"
+good_url: "http://www.bloomberg.com/news/articles/2015-04-21/netflix-s-pursuit-of-tv-domination-has-a-new-step-ownership"
+good_url: "http://www.bloomberg.com/news/articles/2015-04-20/senator-plans-bill-this-year-to-to-lift-u-s-oil-export-ban"
+good_url: "http://www.bloomberg.com/news/articles/2015-03-23/analyst-predicts-apple-will-hit-a-1-trillion-market-cap"
+good_url: "http://www.forbes.com/sites/investor/2015/03/23/meet-the-five-stocks-in-the-dow-that-set-new-highs-during-fridays-rally/"
+good_url: "http://www.bloomberg.com/news/articles/2015-03-24/bitcoin-getting-serious-as-nasdaq-nyse-step-into-digital-craze"
+good_url: "http://www.bloomberg.com/news/articles/2015-03-24/new-york-fed-forms-team-focused-on-cybersecurity-threats"
+good_url: "http://www.reuters.com/article/2015/03/30/japan-economy-output-idUSL3N0WR23E20150330"
+good_url: "http://www.zerohedge.com/news/2015-03-29/australia-start-taxing-bank-deposits"
+good_url: "http://www.reuters.com/article/2015/03/30/us-china-stocks-funds-idUSKBN0MQ03E20150330"
+good_url: "http://www.zerohedge.com/news/2015-04-20/china-easing-combat-darkest-period-2015"
+good_url: "http://www.fool.com/investing/general/2015/04/19/my-505845-netflix-mistake.aspx"
+good_url: "http://seekingalpha.com/news/2439896-exxon-ceo-sees-low-oil-prices-for-next-few-years"
+good_url: "http://www.reuters.com/article/2015/04/19/sabic-results-ceo-idUSL5N0XG03E20150419"
+good_url: "http://www.forbes.com/sites/antoinegara/2015/04/20/morgan-stanley-profits-surge-60-on-trading-and-wealth-management-performance/"
+good_url: "http://www.businessinsider.com/morgan-stanley-q1-earnings-2015-4"
+good_url: "http://seekingalpha.com/article/3092086-u-s-oil-production-has-started-its-decline"
+good_url: "http://seekingalpha.com/news/2444836-facebooks-q1-ad-sales-hurt-by-strong-dollar-maus-up-to-1_44b"
+good_url: "http://seekingalpha.com/article/3048646-oils-plunge-cause-for-concern-or-celebration"
+good_url: "http://seekingalpha.com/article/3091146-netflix-virtuous-cycle-is-intact-but-stock-is-fully-valued"
+good_url: "http://seekingalpha.com/news/2445066-alliance-fiber-up-6_5-percent-on-q1-beat-strong-q2-guidance"
+good_url: "http://www.thestreet.com/story/13121562/1/coca-cola-ko-stock-advancing-today-on-earnings-beat.html"
+good_url: "http://seekingalpha.com/article/3088296-chipotle-beats-estimates-yet-is-down-5-percent-after-hours-a-chance-to-buy"
+good_url: "http://www.worldoil.com/news/2015/1/21/kinder-morgan-buys-hamm-s-hiland-partners-to-gain-bakken-footprint"
+good_url: "http://techcrunch.com/2015/04/16/etsy-stock-surges-86-percent-at-close-of-first-day-of-trading-to-30-per-share/"
+good_url: "http://techcrunch.com/2014/01/26/google-deepmind/"
+good_url: "http://money.cnn.com/2014/02/19/technology/social/facebook-whatsapp/"
+bad_url: "http://www.sfgate.com/technology/businessinsider/article/Sergey-Brin-once-asked-a-lawyer-he-wanted-to-hire-5073120.php"
+bad_url: "http://recode.net/2015/02/04/tweets-now-coming-to-your-google-search-results/"
+bad_url: "http://techcrunch.com/2015/02/20/apple-said-to-be-planning-os-x-like-public-beta-seed-program-for-ios-too/"
+bad_url: "http://recode.net/2015/02/24/magic-leap-might-replace-your-smartphone-ceo-says/"
+
+interest {
+  id: "550085b9e4b02da05c56c75b"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426097593397
+  industry_code: 10538
+}
+interest {
+  id: "5518bcfde4b0095b8ace388a"
+  type: INDUSTRY
+  source: USER
+  create_time: 1427684605398
+  industry_code: 10535
+}
+interest {
+  id: "552aabfce4b05452292e916d"
+  type: ENTITY
+  source: USER",
+  create_time: 1428859900979
+  entity: {
+    id: "54fd0d2ed4c6c665e2149a64"
+    keyword: "Jefferies Group"
+    type: "c"
+    source: DBPEDIA_INSTANCE_TYPE
+    importance: 0
+  }
+}
+interest {
+  id: "552aac10e4b05452292e9170"
+  type: ENTITY
+  source: USER
+  create_time: 1428859920086
+  entity: {
+    id: "54fc62e4d4c6d6801f242d3f"
+    keyword: "Morgan Stanley"
+    type: "c"
+    source: DBPEDIA_INSTANCE_TYPE
+    importance: 519
+  }
+}

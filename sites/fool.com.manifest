@@ -1,0 +1,36 @@
+root_domain: "fool.com"
+start_url: "http://www.fool.com"
+paragraph_selector: ".entry-content > p"
+paragraph_selector: ".entry-content > ol > li"
+article_url_pattern {
+  path_regex: "^\\/[a-z\\-\\_]+\\/[a-z\\-\\_]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\.aspx"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.fool.com/investing/general/2015/04/18/this-is-still-the-worst-major-airline-for-customer.aspx"
+    article_url: "http://www.fool.com/investing/general/2015/04/19/my-505845-netflix-mistake.aspx"
+    article_url: "http://www.fool.com/investing/general/2015/04/18/opecs-war-on-oil-prices-isnt-just-about-shale.aspx"
+    article_url: "http://www.fool.com/investing/general/2015/04/19/mcdonalds-corps-turnaround-plans-are-leaving-behin.aspx"
+    article_url: "http://www.fool.com/investing/general/2015/04/20/5-stocks-warren-buffett-would-never-buy.aspx"
+    non_article_url: "http://www.fool.com/how-to-invest/index.aspx"
+    non_article_url: "http://www.fool.com/investing/beginning/how-do-i-invest.aspx"
+    non_article_url: "http://www.fool.com/investing/beginning/whens-the-right-time-to-invest.aspx"
+    non_article_url: "http://wiki.fool.com/Market_capitalization"
+    non_article_url: "http://www.fool.com/press/about-the-motley-fool.aspx"
+  }
+}
+feature_boost_pattern {
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -1
+}

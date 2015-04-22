@@ -11,6 +11,11 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
+import com.janknspank.classifier.manual.ManualFeatureAcquisitions;
+import com.janknspank.classifier.manual.ManualFeatureBigMoney;
+import com.janknspank.classifier.manual.ManualFeatureFundraising;
+import com.janknspank.classifier.manual.ManualFeatureLaunches;
+import com.janknspank.classifier.manual.ManualFeatureQuarterlyEarnings;
 import com.janknspank.common.PatternCache;
 import com.janknspank.crawler.SiteManifests;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
@@ -42,7 +47,20 @@ public abstract class Feature {
       // logic is supposed to go!  But for now, we can assume the only things
       // around are vector features.
       if (featureId.getFeatureType() == FeatureType.MANUAL_HEURISTIC) {
-        return new ManualHeuristicFeature(featureId);
+        switch (featureId) {
+          case MANUAL_HEURISTIC_ACQUISITIONS:
+            return new ManualFeatureAcquisitions(featureId);
+          case MANUAL_HEURISTIC_BIG_MONEY:
+            return new ManualFeatureBigMoney(featureId);
+          case MANUAL_HEURISTIC_FUNDRAISING:
+            return new ManualFeatureFundraising(featureId);
+          case MANUAL_HEURISTIC_LAUNCHES:
+            return new ManualFeatureLaunches(featureId);
+          case MANUAL_HEURISTIC_QUARTERLY_EARNINGS:
+            return new ManualFeatureQuarterlyEarnings(featureId);
+          default:
+            throw new ClassifierException("No ManualHeuristicFeature for featureId: " + featureId);
+        }
       } else {
         return new VectorFeature(featureId);
       }
@@ -53,11 +71,10 @@ public abstract class Feature {
    * Returns an implementation of the requested feature, constructing one from
    * vectors on disk (or wherever) as necessary.
    */
-  public static Feature getFeature(FeatureId featureId) throws ClassifierException {
+  public static Feature getFeature(FeatureId featureId) {
     try {
       return FEATURE_CACHE.get(featureId);
     } catch (ExecutionException e) {
-      Throwables.propagateIfInstanceOf(e.getCause(), ClassifierException.class);
       throw new RuntimeException(e);
     }
   }
