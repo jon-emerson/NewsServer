@@ -1,47 +1,24 @@
 package com.janknspank.rank;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import com.google.api.client.repackaged.com.google.common.base.Joiner;
-import com.google.api.client.util.Lists;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.common.Asserts;
-import com.janknspank.crawler.ArticleCrawler;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.RankProto.Persona;
-import com.janknspank.proto.UserProto.User;
 
 public class Benchmark {
-  // TODO(jonemerson): This should just take a set of Articles that are pre-
-  // filtered as holdback articles.  It's pretty slow to grab all the Articles
-  // before getting here when only 20% of them are going to be used.
-  public static Map<Article, Double> getScores(
-      User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
-    Map<Article, Double> scoreMap = Maps.newHashMap();
-    Collection<Article> articles =
-        ArticleCrawler.getArticles(urlStrings, true /* retain */).values();
-    for (Article article : articles) {
-      // Use the holdback for the benchmark. The other 80% are used
-      // to train the neural network.
-      if (NeuralNetworkTrainer.isInTrainingHoldback(article)) {
-        scoreMap.put(article, scorer.getScore(user, article));
-      }
-    }
-    return scoreMap;
-  }
-
   /**
    * Prints out a performance score (aka a "grade") for how well the Scorer did
    * at creating scores for the passed Article -> Score maps.
    */
-  public static void grade(Map<Article, Double> goodScoreMap, Map<Article, Double> badScoreMap) {
+  public static double grade(Map<Article, Double> goodScoreMap, Map<Article, Double> badScoreMap) {
     int positives = 0;
     int falseNegatives = 0;
     List<String> falseNegativesTitles = new ArrayList<>();
@@ -77,6 +54,9 @@ public class Benchmark {
     for (int i = 0; i < falseNegativesTitles.size(); i++) {
       System.out.println("  " + falseNegativesTitles.get(i));
     }
+
+    // Return a quality score.
+    return ((double) positives + negatives) / (goodScoreMap.size() + badScoreMap.size());
   }
 
   /**
@@ -115,38 +95,31 @@ public class Benchmark {
         + createStars(goodHistogram.count(-100), badHistogram.count(-100)));
   }
 
-  public static void main(String args[]) throws Exception {
-    List<Persona> personas = Lists.newArrayList();
-    if (args.length > 0) {
-      for (String arg : args) {
-        Persona persona = null;
-        if ("jon".equals(arg)) {
-          persona = Personas.getByEmail("panaceaa@gmail.com");
-        } else if ("tom".equals(arg)) {
-          persona = Personas.getByEmail("tom.charytoniuk@gmail.com");
-        } else {
-          persona = Personas.getByEmail(arg);
-        }
-        Asserts.assertNotNull(persona, "Could not read persona: " + arg);
-        personas.add(persona);
-      }
-    } else {
-      personas.addAll(Personas.getPersonaMap().values());
-    }
-
+  public static double printBenchmark() throws DatabaseSchemaException, BiznessException {
     Map<Article, Double> goodScores = Maps.newHashMap();
     Map<Article, Double> badScores = Maps.newHashMap();
-    for (Persona persona : personas) {
-      User user = Personas.convertToUser(persona);
-      goodScores.putAll(
-          getScores(user, persona.getGoodUrlList(), NeuralNetworkScorer.getInstance()));
-      badScores.putAll(
-          getScores(user, persona.getBadUrlList(), NeuralNetworkScorer.getInstance()));
+    for (TrainingArticle trainingArticle : TrainingArticles.getHoldbackArticles()) {
+      if (trainingArticle.getScore() >= 0.5) {
+        // This article should be scored as good.
+        goodScores.put(trainingArticle.getArticle(),
+            NeuralNetworkScorer.getInstance().getScore(
+                trainingArticle.getUser(), trainingArticle.getArticle()));
+      } else {
+        // This article should be scored as bad.
+        badScores.put(trainingArticle.getArticle(),
+            NeuralNetworkScorer.getInstance().getScore(
+                trainingArticle.getUser(), trainingArticle.getArticle()));
+      }
     }
     System.out.println("\nNEURAL NETWORK SCORER:");
     printHistogram(goodScores, badScores);
-    grade(goodScores, badScores);
+    double grade = grade(goodScores, badScores);
 
     System.out.println("\n");
+    return grade;
+  }
+
+  public static void main(String args[]) throws Exception {
+    printBenchmark();
   }
 }

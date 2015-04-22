@@ -107,7 +107,7 @@ public class InputValuesGenerator {
     int numIndustriesMoreRelevant = 0;
     double relevanceToUserIndustries = relevanceToUserIndustries(user, article);
     for (ArticleFeature feature : article.getFeatureList()) {
-      if (feature.getSimilarity() >= relevanceToUserIndustries
+      if (feature.getSimilarity() > (relevanceToUserIndustries + 0.001)
           && FeatureId.fromId(feature.getFeatureId()).getFeatureType() == FeatureType.INDUSTRY) {
         numIndustriesMoreRelevant++;
       }

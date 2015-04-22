@@ -57,5 +57,6 @@
 	<classpathentry kind="lib" path="target/dependency/newrelic-api-3.15.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/maxmind-db-1.0.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/geoip2-2.1.0.jar"/>
+	<classpathentry kind="lib" path="target/dependency/commons-dbcp-1.4.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

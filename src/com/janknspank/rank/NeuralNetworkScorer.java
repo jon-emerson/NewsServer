@@ -20,13 +20,18 @@ import com.janknspank.proto.UserProto.User;
 public final class NeuralNetworkScorer extends Scorer {
   static final int INPUT_NODES_COUNT = 12;
   static final int OUTPUT_NODES_COUNT = 1;
- //  static final int HIDDEN_NODES_COUNT = 9;
+  static final int HIDDEN_NODES_COUNT = 2;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_out.nnet";
   private static NeuralNetworkScorer instance = null;
   private NeuralNetwork<BackPropagation> neuralNetwork;
 
+  @SuppressWarnings("unchecked")
   private NeuralNetworkScorer() {
-    setFile(DEFAULT_NEURAL_NETWORK_FILE);
+    neuralNetwork = NeuralNetwork.createFromFile(DEFAULT_NEURAL_NETWORK_FILE);
+  }
+
+  public NeuralNetworkScorer(NeuralNetwork<BackPropagation> neuralNetwork) {
+    this.neuralNetwork = neuralNetwork;
   }
 
   public static synchronized NeuralNetworkScorer getInstance() {
@@ -34,11 +39,6 @@ public final class NeuralNetworkScorer extends Scorer {
       instance = new NeuralNetworkScorer();
     }
     return instance;
-  }
-
-  @SuppressWarnings("unchecked")
-  public void setFile(String nnetFile) {
-    neuralNetwork = NeuralNetwork.createFromFile(nnetFile);
   }
 
   public static LinkedHashMap<String, Double> generateInputNodes(User user, Article article) {

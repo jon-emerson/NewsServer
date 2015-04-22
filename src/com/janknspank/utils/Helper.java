@@ -17,11 +17,11 @@ public class Helper {
       ArticleFeature launchFeature =
           ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_ACQUISITIONS);
       if (launchFeature.getSimilarity() > 0.1) {
-//        System.out.println("\"" + article.getTitle() + "\" (" + launchFeature.getSimilarity() + ")");
+        System.out.println("\"" + article.getTitle() + "\" (" + launchFeature.getSimilarity() + ")");
         System.out.println(article.getUrl());
-//        System.out.println("First paragraph: \""
-//            + Iterables.getFirst(article.getParagraphList(), "") + "\"");
-//        System.out.println();
+        System.out.println("First paragraph: \""
+            + Iterables.getFirst(article.getParagraphList(), "") + "\"");
+        System.out.println();
       }
     }
   }

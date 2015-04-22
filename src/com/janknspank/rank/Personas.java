@@ -11,6 +11,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.protobuf.TextFormat;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.proto.RankProto.Persona;
@@ -26,6 +27,8 @@ public class Personas {
    * Map from email address to Persona object.
    */
   private static Map<String, Persona> PERSONA_MAP = null;
+
+  private static Map<Persona, User> PERSONA_TO_USER_MAP = Maps.newHashMap();
 
   /**
    * Builds a Map of Persona object definitions, keyed by persona email address, from
@@ -73,7 +76,11 @@ public class Personas {
    * with these stub User objects without error or special casing.  If something
    * ends up to be missing, we should handle it by improving personas!
    */
-  public static User convertToUser(Persona persona) {
+  public synchronized static User convertToUser(Persona persona) {
+//    if (PERSONA_TO_USER_MAP.containsKey(persona)) {
+//      return PERSONA_TO_USER_MAP.get(persona);
+//    }
+
     // First name.
     String firstName =
         persona.getName().substring(0, persona.getName().indexOf(" ") + 1).trim();
@@ -93,7 +100,7 @@ public class Personas {
     }
 
     // OK let's go.
-    return User.newBuilder()
+    User user = User.newBuilder()
         .setId(GuidFactory.generate())
         .setFirstName(firstName)
         .setLastName(persona.getName().substring(firstName.length()).trim())
@@ -102,5 +109,7 @@ public class Personas {
         .addAllAddressBookContact(addressBookContacts)
         .setEmail(persona.getEmail())
         .build();
+    PERSONA_TO_USER_MAP.put(persona, user);
+    return user;
   }
 }

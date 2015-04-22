@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 
 public class ManualHeuristicFeature extends Feature {
@@ -42,8 +41,6 @@ public class ManualHeuristicFeature extends Feature {
     };
   }
   private static final BodyCache BODY_CACHE = new BodyCache();
-
-  private static final Map<Object, Pattern> PATTERN_CACHE = Maps.newHashMap();
 
   // Acquisition keywords.
   // NOTE: Do not use the word "Acquisition".  It matches articles like this:
