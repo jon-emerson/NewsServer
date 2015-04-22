@@ -437,6 +437,10 @@ class ArticleCreator {
   @VisibleForTesting
   static String cleanTitle(String title) {
     title = StringHelper.unescape(title);
+
+    // Remove duplicative spaces.
+    title = title.replaceAll("(\\s|\\xA0){2,100}", " ");
+
     for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLES) {
       Matcher matcher = pattern.matcher(title);
       if (matcher.find()) {
