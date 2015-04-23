@@ -1,127 +1,86 @@
-// Early Stage VCs
-Andreessen Horowitz
-Khosla Ventures
-SV Angel
-Accel Partners
-New Enterprise Associates
-Sequoia Capital
-Venrock
-First Round Capital
-Spark Capital
-Triangle Peak Partners
-Frankline Square Capital Partners
-Kleiner Perkins Caufield & Byers
-KPCB
-Google Ventures
-Founders Fund
-ARCH Venture Partners
-Bezos Expeditions
-Lightspeed Venture Partners
-Thrive Capital
-General Catalyst Partners
-Redpoint Ventures
-Atlas Venture
-QED Investors
-Greylock Partners
-Formation 8
-Bain Capital Ventures
-Iridium Communications
-Lerer Hippeau Ventures
-Collaborative Fund
-Bessemer Venture Partners
-Flagship Ventures
-OrbiMed Advisors
-SherpaVentures
-Insight Venture Partners
-Institutional Venture Partners
-True Ventures
-Greycroft Partners
-Menlo Ventures
-Intel Capital
-Battery Ventures
-Tiger Global Management
-Deerfield Management
-Charles River Ventures
-WRF Capital
-Benchmark Capital
-FirstMark Capital
-CrunchFund
-Canaan Partners
-Polaris Partners
-Sofinnova Ventures
-InterWest Partners
-Crestline Investors
-Third Rock Ventures
-Slow Ventures
-VegasTechFund
-ComcastVentures
-Felicis Ventures
-Draper Fisher Jurvetson
-DFJ
-ff Venture Capital
-Norwest Venture Partners
-Silicon Valley Bank
-5AM Ventures
-Rock Springs Capital
-GGV Capital
-Social+Capital Partnership
-Correlation Ventures
-Qualcomm Ventures
-AME Cloud Ventures
-DCM
-Madrona Venture Group
-MPM Capital
-Harrison Metal Capital
-500 Startups
-RRE Ventures
-Shasta Ventures
-Alexandria Venture Investments
-The Data Collective
-
-// Incubators
-Y Combinator
-TechStars
-AngelPad
-Launchpad LA
-MuckerLab
-AlphaLab
-Capital Innovators
-Tech Wildcatters
-Surge Accelerator
-The Brandery
-Betaspring
-BoomStartup
-Entrepreneurs Roundtable Accelerator
-JumpStart Foundry
-
-// Angel Investors
-Alexis Ohanian
-Max Levchin
-Garry Tan
-Marc Benioff
-David Tisch
-Paul Buchheit
-Naval Ravikant
-Scott Banister
-Aaron Levie
-Tim Ferriss
-Sam Altman
-Jerry Yang
-Paige Craig
-Joshua Schachter
-Harj Taggar
-Geoff Ralston
-Eric Ries
-Gil Penchina
-Jason Calacanis
-Esther Dyson
-Gary Vaynerchuk
-Bob Pittman
-Matt Mullenweg
-Jack Dorsey
-Paige Craig
-Kal Vepuri
-Elad Gil
-Dharmesh Shah
-
-// Startups : get from angellist dump
+http://freddestin.com/2014/10/cytokinesis-atlas-venture.html
+http://freddestin.com/2014/05/zoopla-focus-speed.html
+http://freddestin.com/2014/04/the-boston-surprise.html
+http://freddestin.com/2014/03/raising-series-hardest.html
+http://freddestin.com/2014/03/rata-rights-ugly.html
+http://www.bhorowitz.com/learning_from_my_mistakes
+http://www.bhorowitz.com/why_i_will_give_100_of_my_book_earnings_to_women_in_the_struggle
+http://www.bhorowitz.com/one_management_concept_from_how_to_manage_startups
+http://www.bhorowitz.com/making_any_web_app_mobile_the_capriza
+http://www.bhorowitz.com/the_prophets_of_rage
+http://www.bhorowitz.com/little_things
+http://a16z.com/2015/02/12/slack-1-year-later/
+http://a16z.com/2015/01/27/a16z-podcast-vr-goes-pro/
+http://a16z.com/2015/02/09/third-mobile-os-3/
+http://a16z.com/2015/02/06/third-mobile-os-2/
+http://a16z.com/2015/02/03/a16z-podcast-crisis-time-what-to-do-when-things-go-sideways/
+http://a16z.com/2015/04/13/corp-dev-for-startups/
+http://a16z.com/2015/04/10/whats-holding-tech-ma-back/
+http://a16z.com/2015/04/08/aggregation-is-the-new-virtualization-how-microservices-are-taming-distributed-computing/
+http://avc.com/2015/02/basketball-startups-and-life/
+http://avc.com/2015/02/can-mobile-banking-improve-the-lives-of-the-poor/
+http://avc.com/2015/02/video-of-the-week-the-obama-recode-interview/
+http://avc.com/2015/02/the-mobile-phone-addiction/
+http://avc.com/2015/02/scripted-summer-internships/
+http://ben-evans.com/benedictevans/2014/10/30/apple-pay-partnerships-and-software-as-disruption
+http://ben-evans.com/benedictevans/2015/2/7/in-search-of-objects
+http://ben-evans.com/benedictevans/2015/1/28/privacy-security-and-identity
+http://ben-evans.com/benedictevans/2015/1/30/podcast-apple-and-mobile
+http://ben-evans.com/benedictevans/2015/1/11/home-and-the-mobile-supply-chain
+http://ben-evans.com/benedictevans/2015/3/24/the-state-of-messaging
+http://www.bothsidesofthetable.com/2015/02/10/its-sofa-king-more-effective-to-pick-up-the-phone/
+http://www.bothsidesofthetable.com/2015/02/12/why-we-really-need-to-take-our-hats-off-to-shervin/
+http://www.bothsidesofthetable.com/2015/02/08/why-most-online-video-companies-will-fail/
+http://www.bothsidesofthetable.com/2015/02/03/one-weird-trick-to-build-a-vc-brand/
+http://www.bothsidesofthetable.com/2015/02/01/you-cant-rely-on-a-vc-for-your-hardest-decisions/
+http://cdixon.org/2015/02/01/the-ai-startup-idea-maze/
+http://cdixon.org/2015/01/31/come-for-the-tool-stay-for-the-network/
+http://cdixon.org/2015/01/24/virtual-reality-a-new-creative-medium-where-the-default-state-is-belief/
+http://cdixon.org/2015/01/20/a16z-invests-in-stack-exchange/
+http://cdixon.org/2015/01/15/skydio/
+http://www.feld.com/archives/2015/04/board-operating-system.html
+http://www.feld.com/archives/2015/01/kauffman-thoughtbook-2015.html
+http://www.feld.com/archives/2015/03/book-sum-forty-tales-afterlives.html
+http://www.feld.com/archives/2015/03/2430-denmark-garland-texas.html
+http://www.feld.com/archives/2015/03/boulder-startup-community-members-help-fund-code-america-fellowship.html
+http://hunterwalk.com/2015/04/21/shyp-raises-50m-some-inside-baseball-notes/
+http://hunterwalk.com/2015/04/20/your-total-addressable-market-stat-is-probably-a-lie/
+http://hunterwalk.com/2015/04/06/five-questions-charlie-odonnell-asked-me-to-answer/
+http://hunterwalk.com/2015/04/09/five-questions-with-douglas-mcgray-editor-in-chief-of-california-sunday-magazine/
+http://hunterwalk.com/2015/04/11/a-good-marketplace-looks-like-a-saas-business/
+http://hunterwalk.com/2007/12/22/why-i-joined-path-101/
+http://hunterwalk.com/2015/04/15/referral-programs-power-the-on-demand-economy/
+http://pando.com/2015/04/17/dont-fear-the-down-round-what-hbos-silicon-valley-gets-right-and-wrong-about-negotiating-a-lower-valuation/
+http://pando.com/2015/04/16/the-time-100-which-celebrates-mass-murderers-dictators-and-the-occasional-tech-founder-needs-to-be-stopped/
+http://tomtunguz.com/best-books-saas-sales/
+http://tomtunguz.com/content-marketing-traffic-drivers/
+http://tomtunguz.com/thinking-through-valuations/
+http://tomtunguz.com/private-market-public-market-disparity/
+http://tomtunguz.com/mailchimp/
+http://tomtunguz.com/professional_services/
+http://tomtunguz.com/postmortems/
+http://venturebeat.com/2015/01/30/google-ventures-releases-new-diy-guide-to-help-startups-design-better-products/
+http://venturebeat.com/2015/02/14/a-new-app-called-sparkstarter-offers-a-fresh-twist-on-online-dating-matchmaking/
+http://techcrunch.com/2015/04/23/the-future-of-marketing-automation/
+http://techcrunch.com/2015/04/23/brazils-samba-ads-raises-r3-million-to-take-premium-video-advertising-off-youtube/
+http://techcrunch.com/2015/04/22/whos-afraid-of-superhumanity/
+http://techcrunch.com/2015/04/22/the-coming-food-bubble/
+http://techcrunch.com/2015/04/22/makerbots-saddest-hour/
+http://techcrunch.com/2015/04/21/notifications-are-the-next-platform/
+http://techcrunch.com/2015/04/21/u-k-govt-funded-startup-skills-courses-get-12000-early-sign-ups/
+http://techcrunch.com/2015/04/20/yc-backed-rickshaw-is-an-api-for-local-deliveries/
+http://techcrunch.com/2015/04/20/oscar-145m/
+http://techcrunch.com/2015/04/20/cloud-customer-service-startup-freshdesk-reels-in-50m-round/
+http://techcrunch.com/2015/04/19/fanbase-co-founders-discuss-their-pivot-to-nextdoor/
+http://techcrunch.com/2015/04/19/heal-wants-to-be-the-uber-for-doctors-making-house-calls/
+http://techcrunch.com/2015/04/19/online-jobs-marketplace-freelancer-com-moves-into-home-and-local-services/
+http://techcrunch.com/2015/04/19/fintech-startups-navigate-legal-gray-areas-to-build-billion-dollar-companies/
+http://techcrunch.com/2015/04/19/we-need-to-get-the-internet-of-things-right/
+http://techcrunch.com/2015/04/19/the-year-of-mobile-payments/
+http://techcrunch.com/2015/04/18/the-unbundling-of-everything/
+http://firstround.com/review/Make-Engineering-Interns-Truly-Effective-with-This-Startups-Program/
+http://firstround.com/article/The-Arc-of-Company-Life-and-How-to-Prolong-It
+http://firstround.com/article/This-Founder-Turned-a-Slow-Burn-Rate-into-a-Big-Exit
+http://firstround.com/article/To-Build-An-Amazing-Sales-Team-Start-Here-First
+http://firstround.com/article/From-0-to-1B-Slacks-Founder-Shares-Their-Epic-Launch-Strategy
+http://firstround.com/article/Execute-Like-a-Rookie-Lead-Like-a-Multiplier
