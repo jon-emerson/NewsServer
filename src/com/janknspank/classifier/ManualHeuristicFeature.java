@@ -7,10 +7,12 @@ import java.util.regex.Pattern;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.UserIndustries;
+
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.UserProto.User;
 
 public abstract class ManualHeuristicFeature extends Feature {
+
   public ManualHeuristicFeature(FeatureId featureId) {
     super(featureId);
     if (featureId.getFeatureType() != FeatureType.MANUAL_HEURISTIC) {

@@ -10,6 +10,7 @@ import com.google.api.client.util.Maps;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.Urls;
 import com.janknspank.bizness.Users;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.Asserts;
 import com.janknspank.crawler.Interpreter;
 import com.janknspank.proto.ArticleProto.Article;
@@ -18,15 +19,17 @@ import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
-  static final int INPUT_NODES_COUNT = 14;
-  static final int OUTPUT_NODES_COUNT = 1;
- //  static final int HIDDEN_NODES_COUNT = 9;
   static final String DEFAULT_NEURAL_NETWORK_FILE = "neuralnet/backpropagation_out.nnet";
   private static NeuralNetworkScorer instance = null;
   private NeuralNetwork<BackPropagation> neuralNetwork;
 
+  @SuppressWarnings("unchecked")
   private NeuralNetworkScorer() {
-    setFile(DEFAULT_NEURAL_NETWORK_FILE);
+    neuralNetwork = NeuralNetwork.createFromFile(DEFAULT_NEURAL_NETWORK_FILE);
+  }
+
+  public NeuralNetworkScorer(NeuralNetwork<BackPropagation> neuralNetwork) {
+    this.neuralNetwork = neuralNetwork;
   }
 
   public static synchronized NeuralNetworkScorer getInstance() {
@@ -34,11 +37,6 @@ public final class NeuralNetworkScorer extends Scorer {
       instance = new NeuralNetworkScorer();
     }
     return instance;
-  }
-
-  @SuppressWarnings("unchecked")
-  public void setFile(String nnetFile) {
-    neuralNetwork = NeuralNetwork.createFromFile(nnetFile);
   }
 
   public static LinkedHashMap<String, Double> generateInputNodes(User user, Article article) {
@@ -84,11 +82,15 @@ public final class NeuralNetworkScorer extends Scorer {
     // 9. Relevance to start-up fundraising rounds.
     linkedHashMap.put("fundraising", InputValuesGenerator.relevanceToFundraising(user, article));
 
-    // 10. Pop culture score.
-    linkedHashMap.put("pop_culture", InputValuesGenerator.relevanceToPopCulture(article));
-
-    // 11. Murder Crime War score.
-    linkedHashMap.put("murder_crime_war", InputValuesGenerator.relevanceToMurderCrimeWar(article));
+    // 10. Topic scores.
+    linkedHashMap.put("entertainment",
+        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_ENTERTAINMENT));
+    linkedHashMap.put("sports",
+        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_SPORTS));
+    linkedHashMap.put("politics",
+        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_POLITICS));
+    linkedHashMap.put("murder_crime_war",
+        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
 
     // 12. Relevance to big money
     linkedHashMap.put("big_money", InputValuesGenerator.relevanceToBigMoney(user, article));
@@ -100,18 +102,6 @@ public final class NeuralNetworkScorer extends Scorer {
     return linkedHashMap;
   }
 
-  /**
-   * Generate an nodes array with all indexes = 0 except for the specified
-   * index.
-   */
-  static double[] generateIsolatedInputNodes(int enabledIndex) {
-    double[] inputs = new double[INPUT_NODES_COUNT];
-    for (int i = 0; i < INPUT_NODES_COUNT; i++) {
-      inputs[i] = (i == enabledIndex) ? 1.0 : 0.0;
-    }
-    return inputs;
-  }
-
   @Override
   public double getScore(User user, Article article) {
     Asserts.assertNotNull(user, "user", NullPointerException.class);
@@ -119,11 +109,10 @@ public final class NeuralNetworkScorer extends Scorer {
     return getScore(generateInputNodes(user, article));
   }
 
-  public static double getScore(LinkedHashMap<String, Double> inputNodes) {
-    NeuralNetworkScorer scorer = getInstance();
-    scorer.neuralNetwork.setInput(Doubles.toArray(inputNodes.values()));
-    scorer.neuralNetwork.calculate();
-    return scorer.neuralNetwork.getOutput()[0];
+  public double getScore(LinkedHashMap<String, Double> inputNodes) {
+    neuralNetwork.setInput(Doubles.toArray(inputNodes.values()));
+    neuralNetwork.calculate();
+    return neuralNetwork.getOutput()[0];
   }
 
   /**
@@ -148,6 +137,6 @@ public final class NeuralNetworkScorer extends Scorer {
     for (Map.Entry<String, Double> entry : inputNodes.entrySet()) {
       System.out.println("Node " + entry.getKey() + ": " + entry.getValue());
     }
-    System.out.println("Score: " + getScore(inputNodes));
+    System.out.println("Score: " + getInstance().getScore(inputNodes));
   }
 }

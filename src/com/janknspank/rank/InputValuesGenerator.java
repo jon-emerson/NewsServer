@@ -110,7 +110,7 @@ public class InputValuesGenerator {
     int numIndustriesMoreRelevant = 0;
     double relevanceToUserIndustries = relevanceToUserIndustries(user, article);
     for (ArticleFeature feature : article.getFeatureList()) {
-      if (feature.getSimilarity() >= relevanceToUserIndustries
+      if (feature.getSimilarity() > (relevanceToUserIndustries + 0.001)
           && FeatureId.fromId(feature.getFeatureId()).getFeatureType() == FeatureType.INDUSTRY) {
         numIndustriesMoreRelevant++;
       }
@@ -241,33 +241,15 @@ public class InputValuesGenerator {
   }
 
   /**
-   * Returns a score for how related this article is to sports, entertainment,
-   * or popular politics.
+   * Returns an adjusted value for an article's score against a given feature
+   * ID.  The value is adjusted such that scores less than 0.6667 receive 0s,
+   * then scores in the remaining [0.6667, 1.0] range receive scores between
+   * [0, 1], on a linear scale.
    */
-  public static double relevanceToPopCulture(Article article) {
-    double score = 0;
-    for (ArticleFeature feature : new ArticleFeature[] {
-        ArticleFeatures.getFeature(article, FeatureId.TOPIC_ENTERTAINMENT),
-        ArticleFeatures.getFeature(article, FeatureId.TOPIC_SPORTS),
-        ArticleFeatures.getFeature(article, FeatureId.TOPIC_POLITICS)
-    }) {
-      if (feature != null) {
-        score = Math.max(score, feature.getSimilarity());
-      }
-    }
-    return score;
-  }
-
-  public static double relevanceToMurderCrimeWar(Article article) {
+  public static double getOptimizedFeatureValue(Article article, FeatureId featureId) {
     ArticleFeature murderCrimeWarFeature =
-        ArticleFeatures.getFeature(article, FeatureId.TOPIC_MURDER_CRIME_WAR);
-    // Only value relevance greater than 66.7%.
+        ArticleFeatures.getFeature(article, featureId);
     return (murderCrimeWarFeature == null) ? 0 :
         Math.max(0, murderCrimeWarFeature.getSimilarity() * 3 - 2);
   }
-
-  // Normalize any value to [0,1]
-  // private static double sigmoid(double x) {
-  //   return 1 / (1 + Math.exp(-x));
-  // }
 }
