@@ -1,0 +1,39 @@
+root_domain: "investors.com"
+start_url: "http://www.investors.com/default.htm"
+paragraph_selector: "#article-content > p"
+paragraph_selector: "#article-content > P"
+article_url_pattern {
+  path_regex: "^\\/commentary\\/[0-9]+\\/[\\w-]+$"
+}
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[0-9]{6}-[0-9]{6}-[\\w-]+\\.htm"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://news.investors.com/business/042215-749042-oil-stockpiles-hit-record-cushing-growth-slows.htm"
+    article_url: "http://news.investors.com/technology/042215-749127-facebook-earnings-beat-revenue-misses-costs-soar.htm"
+    article_url: "http://news.investors.com/investing-the-income-investor/042215-749100-five-top-dividend-stocks-beat-market.htm"
+    article_url: "http://news.investors.com/technology/042215-749106-ebay-paypal-soars-but-marketplaces-declines.htm"
+    article_url: "http://news.investors.com/business/042215-749041-china-to-open-bank-card-market.htm"
+    non_article_url: "http://www.investors.com/offer/splash.aspx?id=lbsummit&src=A462CHL"
+    non_article_url: "http://www.investors.com/stockresearch/quotes/nasdaq-echo-global-logistics-echo.htm"
+    non_article_url: "http://research.investors.com/screen-center/?ref=2MSOTD"
+    non_article_url: "http://www.investors.com/store/"
+    non_article_url: "http://education.investors.com/courselandingpage.aspx?id=735730&nav=IBDUCourse1"
+  }
+}
+feature_boost_pattern {
+  boost: -10
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 0
+}

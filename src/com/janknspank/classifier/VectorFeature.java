@@ -36,7 +36,6 @@ public final class VectorFeature extends Feature {
 
   public VectorFeature(FeatureId featureId) throws ClassifierException {
     super(featureId);
-
     featureVector = Vector.fromFile(getVectorFile(featureId));
     normalizer = IndustryVectorNormalizer.fromFile(getNormalizerFile(featureId));
   }
