@@ -21,6 +21,3 @@ test_instructions {
     non_article_url: "http://www.usatoday.com/opinion/"
   }
 }
-feature_boost_pattern {
-  boost: 0
-}

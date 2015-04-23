@@ -3,7 +3,7 @@ start_url: "http://www.fool.com"
 paragraph_selector: ".entry-content > p"
 paragraph_selector: ".entry-content > ol > li"
 article_url_pattern {
-  path_regex: "^\\/[a-z\\-\\_]+\\/[a-z\\-\\_]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\.aspx"
+  path_regex: "^\\/investing\\/general\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*\\.aspx"
 }
 test_instructions {
   article_url_detector_checks {
@@ -20,7 +20,7 @@ test_instructions {
   }
 }
 feature_boost_pattern {
-  boost: -2
+  boost: -10
 }
 feature_boost_pattern {
   feature_id: 10514 # Mergers and Acquisitions.
@@ -28,7 +28,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10535 # Equity Investing.
-  boost: 5
+  boost: 2
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity

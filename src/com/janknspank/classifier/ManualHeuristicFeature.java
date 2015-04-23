@@ -1,13 +1,13 @@
 package com.janknspank.classifier;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.UserIndustries;
-
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.UserProto.User;
 
@@ -82,10 +82,10 @@ public abstract class ManualHeuristicFeature extends Feature {
     return getScore(text, scoreRules);
   }
 
-  protected static boolean isRelevantToUser(User user, Map<FeatureId, Double> relevantIndustries) {
+  protected static boolean isRelevantToUser(User user, Set<FeatureId> relevantIndustries) {
     Iterable<FeatureId> userIndustries = UserIndustries.getIndustryFeatureIds(user);
     for (FeatureId feature : userIndustries) {
-      if (relevantIndustries.containsKey(feature)) {
+      if (relevantIndustries.contains(feature)) {
         return true;
       }
     }

@@ -2,9 +2,11 @@ package com.janknspank.classifier.manual;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.ManualHeuristicFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
@@ -57,15 +59,14 @@ public class ManualFeatureFundraising extends ManualHeuristicFeature {
           .build();
   private static final Iterable<Pattern> BODY_BLACKLIST =
       Arrays.asList();
-  private static final Map<FeatureId, Double> RELEVANT_TO_INDUSTRIES =
-      ImmutableMap.<FeatureId, Double>builder()
-          .put(FeatureId.BIOTECHNOLOGY, 1.0)
-          .put(FeatureId.HARDWARE_AND_ELECTRONICS, 1.0)
-          .put(FeatureId.INTERNET, 1.0)
-          .put(FeatureId.OIL_AND_ENERGY, 1.0)
-          .put(FeatureId.VENTURE_CAPITAL, 1.0)
-          .put(FeatureId.UTILITIES, 1.0)
-          .build();
+  private static final Set<FeatureId> RELEVANT_TO_INDUSTRIES =
+      ImmutableSet.of(
+          FeatureId.BIOTECHNOLOGY,
+          FeatureId.HARDWARE_AND_ELECTRONICS,
+          FeatureId.INTERNET,
+          FeatureId.OIL_AND_ENERGY,
+          FeatureId.VENTURE_CAPITAL,
+          FeatureId.UTILITIES);
 
   public ManualFeatureFundraising(FeatureId featureId) {
     super(featureId);

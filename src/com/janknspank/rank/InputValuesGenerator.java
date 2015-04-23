@@ -223,7 +223,7 @@ public class InputValuesGenerator {
         ArticleFeatures.getFeature(article, featureId);
     if (articleFeature != null) {
       ManualHeuristicFeature feature = 
-          (ManualHeuristicFeature)Feature.getFeature(featureId);
+          (ManualHeuristicFeature) Feature.getFeature(featureId);
       if (feature.isRelevantToUser(user)) {
         return articleFeature.getSimilarity();
       }

@@ -2,10 +2,11 @@ package com.janknspank.classifier.manual;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableMap;
-import com.janknspank.bizness.UserIndustries;
+import com.google.common.collect.ImmutableSet;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.ManualHeuristicFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
@@ -47,19 +48,18 @@ public class ManualFeatureBigMoney extends ManualHeuristicFeature {
   private static final Map<Pattern, Double> BODY_SCORES = TITLE_SCORES;
   private static final Iterable<Pattern> BODY_BLACKLIST =
       Arrays.asList();
-  private static final Map<FeatureId, Double> RELEVANT_TO_INDUSTRIES =
-      ImmutableMap.<FeatureId, Double>builder()
-          .put(FeatureId.EQUITY_INVESTING, 1.0)
-          .put(FeatureId.AUTOMOTIVE, 1.0)
-          .put(FeatureId.AVIATION, 1.0)
-          .put(FeatureId.BIOTECHNOLOGY, 1.0)
-          .put(FeatureId.INTERNET, 1.0)
-          .put(FeatureId.MERGERS_AND_ACQUISITIONS, 1.0)
-          .put(FeatureId.MINING_AND_METALS, 1.0)
-          .put(FeatureId.OIL_AND_ENERGY, 1.0)
-          .put(FeatureId.UTILITIES, 1.0)
-          .put(FeatureId.VENTURE_CAPITAL, 1.0)
-          .build();
+  private static final Set<FeatureId> RELEVANT_TO_INDUSTRIES =
+      ImmutableSet.of(
+          FeatureId.EQUITY_INVESTING,
+          FeatureId.AUTOMOTIVE,
+          FeatureId.AVIATION,
+          FeatureId.BIOTECHNOLOGY,
+          FeatureId.INTERNET,
+          FeatureId.MERGERS_AND_ACQUISITIONS,
+          FeatureId.MINING_AND_METALS,
+          FeatureId.OIL_AND_ENERGY,
+          FeatureId.UTILITIES,
+          FeatureId.VENTURE_CAPITAL);
 
   public ManualFeatureBigMoney(FeatureId featureId) {
     super(featureId);

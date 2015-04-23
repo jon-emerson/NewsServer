@@ -2,9 +2,11 @@ package com.janknspank.classifier.manual;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.ManualHeuristicFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
@@ -105,20 +107,16 @@ public class ManualFeatureLaunches extends ManualHeuristicFeature {
           Pattern.compile("paramilitary"),
           Pattern.compile("rocket"),
           Pattern.compile("wounded"));
-  private static final Map<FeatureId, Double> RELEVANT_TO_INDUSTRIES =
-      ImmutableMap.<FeatureId, Double>builder()
-          .put(FeatureId.APPAREL_AND_FASHION, 1.0)
-          .put(FeatureId.AUTOMOTIVE, 1.0)
-          .put(FeatureId.AVIATION, 1.0)
-          .put(FeatureId.BIOTECHNOLOGY, 1.0)
-          .put(FeatureId.COMPUTER_GAMES, 1.0)
-          .put(FeatureId.CONSUMER_ELECTRONICS, 1.0)
-          .put(FeatureId.HARDWARE_AND_ELECTRONICS, 1.0)
-          .put(FeatureId.INTERNET, 1.0)
-          .put(FeatureId.SOFTWARE, 1.0)
-          .put(FeatureId.USER_EXPERIENCE, 1.0)
-          .put(FeatureId.VENTURE_CAPITAL, 1.0)
-          .build();
+  private static final Set<FeatureId> RELEVANT_TO_INDUSTRIES =
+      ImmutableSet.of(
+          FeatureId.BIOTECHNOLOGY,
+          FeatureId.COMPUTER_GAMES,
+          FeatureId.CONSUMER_ELECTRONICS,
+          FeatureId.HARDWARE_AND_ELECTRONICS,
+          FeatureId.INTERNET,
+          FeatureId.SOFTWARE,
+          FeatureId.USER_EXPERIENCE,
+          FeatureId.VENTURE_CAPITAL);
 
   public ManualFeatureLaunches(FeatureId featureId) {
     super(featureId);

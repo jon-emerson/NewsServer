@@ -1,0 +1,54 @@
+root_domain: "scientificamerican.com"
+start_url: "http://www.scientificamerican.com/"
+paragraph_selector: ".article-content > p"
+paragraph_blacklist {
+  text_regex: "^This article is reproduced with"
+}
+article_url_pattern {
+  path_regex: "^\\/article\\/[\\w-]+\\/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.scientificamerican.com/article/scientists-turn-to-drones-for-closer-look-at-arctic-sea-ice/"
+    article_url: "http://www.scientificamerican.com/article/it-s-time-to-go-to-europa/"
+    article_url: "http://www.scientificamerican.com/article/what-are-you-doing-i-m-saving-earth-video/"
+    article_url: "http://www.scientificamerican.com/article/program-with-paper-a-maze-your-friends-with-a-hand-written-computer-program/"
+    article_url: "http://www.scientificamerican.com/article/beyond-shy-why-some-kids-clam-up-in-school/"
+    non_article_url: "http://www.scientificamerican.com/section/lateststories/"
+    non_article_url: "http://www.scientificamerican.com/section/ask-the-experts/"
+    non_article_url: "http://www.scientificamerican.com/topics/"
+    non_article_url: "http://www.scientificamerican.com/topic/environmental-policy/"
+    non_article_url: "http://www.scientificamerican.com/mediakit/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10521 # Chemistry
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10505 # Veterinary
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  boost: -5
+}

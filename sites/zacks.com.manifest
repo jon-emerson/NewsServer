@@ -22,7 +22,7 @@ test_instructions {
   }
 }
 feature_boost_pattern {
-  boost: -2
+  boost: -10
 }
 feature_boost_pattern {
   feature_id: 10514 # Mergers and Acquisitions.
@@ -30,7 +30,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10535 # Equity Investing.
-  boost: 4
+  boost: 3
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
