@@ -50,5 +50,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10540 # Farming
-  boost: -5
+  boost: -2
 }
