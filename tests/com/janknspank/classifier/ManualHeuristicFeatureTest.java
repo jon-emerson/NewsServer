@@ -93,19 +93,25 @@ public class ManualHeuristicFeatureTest {
   }
 
   @Test
-  public void testManualHeuristicsAgainstBenchmarks() throws BiznessException, AssertionException {
+  public void testManualHeuristicsAgainstBenchmarks() 
+      throws BiznessException, AssertionException, ClassifierException {
     for (FeatureId featureId : getFeatureBenchmarkMap().keySet()) {
       testAgainstBenchmark(featureId);
     }
   }
 
   /**
-   * Scores the articles found within .benchmark files
-   * for a manual heuristic feature
+   * See if articles found within .benchmark files
+   * for manual heuristic features are correctly classified
    */
   private void testAgainstBenchmark(FeatureId featureId) 
-      throws BiznessException, AssertionException {
-    ManualHeuristicFeature feature = new ManualHeuristicFeature(featureId);
+      throws BiznessException, AssertionException, ClassifierException {
+    if (featureId.getFeatureType() != FeatureType.MANUAL_HEURISTIC) {
+      throw new IllegalStateException("The specified feature ID is not a manual heuristic");
+    }
+
+    System.out.println("Testing feature: " + featureId.getId());
+    ManualHeuristicFeature feature = (ManualHeuristicFeature) Feature.getFeature(featureId);
     Map<Article, Double> goodArticleScores = new HashMap<>();
     Map<Article, Double> badArticleScores = new HashMap<>();
     FeatureBenchmark benchmark = getByFeatureId(featureId);

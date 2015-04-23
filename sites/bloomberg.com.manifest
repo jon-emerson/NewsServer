@@ -126,3 +126,7 @@ feature_boost_pattern {
   feature_id: 10536 # Real Estate
   boost: 1
 }
+feature_boost_pattern {
+  feature_id: 10538 # Oil and Energy
+  boost: 0
+}
