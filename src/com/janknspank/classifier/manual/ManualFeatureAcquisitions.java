@@ -2,16 +2,16 @@ package com.janknspank.classifier.manual;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableMap;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.ManualHeuristicFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
-import com.janknspank.proto.UserProto.User;
 
 public class ManualFeatureAcquisitions extends ManualHeuristicFeature {
-  //Acquisition keywords.
+  // Acquisition keywords.
   // NOTE: Do not use the word "Acquisition".  It matches articles like this:
   // http://www.channelnewsasia.com/news/singapore/parliament-passes-changes/1714406.html
   private static final Map<Pattern, Double> TITLE_SCORES =
@@ -45,8 +45,7 @@ public class ManualFeatureAcquisitions extends ManualHeuristicFeature {
           .put(Pattern.compile("acquires"), 0.8)
           .put(Pattern.compile("is acquiring"), 0.8)
           .build();
-  private static final Iterable<Pattern> BODY_BLACKLIST =
-      Arrays.asList();
+  private static final Iterable<Pattern> BODY_BLACKLIST = Arrays.asList();
 
   public ManualFeatureAcquisitions(FeatureId featureId) {
     super(featureId);
@@ -54,11 +53,10 @@ public class ManualFeatureAcquisitions extends ManualHeuristicFeature {
 
   @Override
   public double score(ArticleOrBuilder article) {
-    return relevanceToRegexs(article, TITLE_SCORES, TITLE_BLACKLIST,
-        BODY_SCORES, BODY_BLACKLIST);
+    return relevanceToRegexs(article, TITLE_SCORES, TITLE_BLACKLIST, BODY_SCORES, BODY_BLACKLIST);
   }
-  
-  public boolean isRelevantToUser(User user) {
+
+  public static boolean isRelevantToUser(Set<FeatureId> userIndustryFeatureIds) {
     return true;
   }
 }
