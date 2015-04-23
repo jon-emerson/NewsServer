@@ -28,11 +28,21 @@ good_url: "http://www.worldoil.com/news/2015/1/21/kinder-morgan-buys-hamm-s-hila
 good_url: "http://techcrunch.com/2015/04/16/etsy-stock-surges-86-percent-at-close-of-first-day-of-trading-to-30-per-share/"
 good_url: "http://techcrunch.com/2014/01/26/google-deepmind/"
 good_url: "http://money.cnn.com/2014/02/19/technology/social/facebook-whatsapp/"
+good_url: "http://news.investors.com/technology/042215-749127-facebook-earnings-beat-revenue-misses-costs-soar.htm"
+good_url: "http://news.investors.com/business/042215-749042-oil-stockpiles-hit-record-cushing-growth-slows.htm"
+good_url: "http://news.investors.com/technology/042215-749127-facebook-earnings-beat-revenue-misses-costs-soar.htm"
+good_url: "http://news.investors.com/technology/042215-749106-ebay-paypal-soars-but-marketplaces-declines.htm"
 bad_url: "http://www.sfgate.com/technology/businessinsider/article/Sergey-Brin-once-asked-a-lawyer-he-wanted-to-hire-5073120.php"
 bad_url: "http://recode.net/2015/02/04/tweets-now-coming-to-your-google-search-results/"
 bad_url: "http://techcrunch.com/2015/02/20/apple-said-to-be-planning-os-x-like-public-beta-seed-program-for-ios-too/"
 bad_url: "http://recode.net/2015/02/24/magic-leap-might-replace-your-smartphone-ceo-says/"
-
+bad_url: "http://www.huffingtonpost.com/2015/04/22/hillary-clinton-grassroots_n_7117884.html"
+bad_url: "http://www.bbc.co.uk/news/election-2015-32427852"
+bad_url: "http://www.abc.net.au/news/2015-04-22/tasmanian-government-launces-audit-of-redundancy-packages/6412148"
+bad_url: "http://www.marketwatch.com/story/fluke-biomedical-launches-online-training-center-bringing-accessible-training-to-the-biomedical-engineering-community-2015-04-23"
+bad_url: "http://www.reuters.com/article/2015/04/22/novonordisk-saxenda-idUSL5N0XJ3MU20150422"
+bad_url: "http://www.marketwatch.com/story/world-143-launches-campaign-partnerships-with-john-stamos-and-shaun-t-2015-04-23"
+bad_url: "http://www.cnbc.com/id/102611258"
 interest {
   id: "550085b9e4b02da05c56c75b"
   type: INDUSTRY
@@ -50,7 +60,7 @@ interest {
 interest {
   id: "552aabfce4b05452292e916d"
   type: ENTITY
-  source: USER",
+  source: USER
   create_time: 1428859900979
   entity: {
     id: "54fd0d2ed4c6c665e2149a64"

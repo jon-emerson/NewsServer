@@ -1,0 +1,32 @@
+root_domain: "usnews.com"
+start_url: "http://www.usnews.com/"
+paragraph_selector: "article > .block > p"
+paragraph_blacklist {
+  text_regex: "^\\[MORE: "
+}
+paragraph_blacklist {
+  text_regex: "^\\[ALSO: "
+}
+paragraph_blacklist {
+  text_regex: "^\\[READ: "
+}
+article_url_pattern {
+  path_regex: "^(\\/[^\\/]+){1,3}\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[\\w-]+"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.usnews.com/news/articles/2015/04/22/mcdonalds-earnings-slide-could-be-function-of-economics"
+    article_url: "http://money.usnews.com/money/careers/articles/2015/04/22/what-to-consider-before-returning-to-your-former-company"
+    article_url: "http://www.usnews.com/news/articles/2015/04/17/only-251-hospitals-score-five-stars-in-medicares-new-ratings"
+    article_url: "http://www.usnews.com/news/articles/2015/04/22/index-highlights-southern-congressional-districts-socioeconomic-inequality"
+    article_url: "http://www.usnews.com/news/blogs/data-mine/2015/04/22/amid-obamacare-changes-doctor-pay-still-confusing-unequal?int=a14709"
+    non_article_url: "http://www.usnews.com/opinion"
+    non_article_url: "http://www.usnews.com/national-issues/education"
+    non_article_url: "http://www.usnews.com/national-issues/national-security"
+    non_article_url: "http://www.usnews.com/news/special-reports"
+    non_article_url: "http://www.usnews.com/news/college-of-tomorrow"
+  }
+}
+feature_boost_pattern {
+  boost: 0
+}

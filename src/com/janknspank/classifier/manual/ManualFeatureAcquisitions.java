@@ -34,7 +34,12 @@ public class ManualFeatureAcquisitions extends ManualHeuristicFeature {
           Pattern.compile("buying opportunity"),
           Pattern.compile("biggest buys"),
           Pattern.compile("who buys"),
-          Pattern.compile("is buying what's"));
+          Pattern.compile("is buying what's"),
+          Pattern.compile(" buying of "),
+          Pattern.compile("buys.*apartment"),
+          Pattern.compile("it buys "),
+          Pattern.compile(" bond buys"),
+          Pattern.compile("acquires.*for 20[0-9]{2}"));
   private static final Map<Pattern, Double> BODY_SCORES =
       ImmutableMap.<Pattern, Double>builder()
           .put(Pattern.compile("acquires"), 0.8)

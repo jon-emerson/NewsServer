@@ -16,7 +16,7 @@ public class ManualFeatureLaunches extends ManualHeuristicFeature {
           .put(Pattern.compile("launches"), 1.0)
           .put(Pattern.compile("launched"), 0.9)
           .put(Pattern.compile("to launch"), 0.9)
-          .put(Pattern.compile("releases"), 0.9)
+          .put(Pattern.compile("releases"), 0.8)
           .build();
   private static final Iterable<Pattern> TITLE_BLACKLIST =
       Arrays.asList(Pattern.compile("manifesto"),
@@ -31,6 +31,14 @@ public class ManualFeatureLaunches extends ManualHeuristicFeature {
           Pattern.compile("awards"),
           Pattern.compile("releases report"),
           Pattern.compile("releases .*white paper"),
+          Pattern.compile("launches proxy "),
+          Pattern.compile("campaign launches"),
+          Pattern.compile("launches audit"),
+          Pattern.compile("releases apology"),
+          Pattern.compile("releases suggest"),
+          Pattern.compile("releases study"),
+          Pattern.compile("releases video"),
+          Pattern.compile("that launched"),
           Pattern.compile("lawyer"),
           Pattern.compile("USD/"),
           Pattern.compile("criminal"),
@@ -72,6 +80,7 @@ public class ManualFeatureLaunches extends ManualHeuristicFeature {
           Pattern.compile("as it launches"),
           Pattern.compile("were launched"),
           Pattern.compile("which launches"),
+          Pattern.compile("launches into"),
           Pattern.compile("criminal"),
           Pattern.compile("afghanistan"),
           Pattern.compile("attack"),

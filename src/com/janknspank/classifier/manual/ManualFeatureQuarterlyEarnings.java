@@ -19,6 +19,7 @@ public class ManualFeatureQuarterlyEarnings extends ManualHeuristicFeature {
           .put(Pattern.compile("quarterly earnings"), 0.9)
           .put(Pattern.compile("earnings.*quarterly"), 0.9)
           .put(Pattern.compile("smashes earnings estimates"), 0.9)
+          .put(Pattern.compile(" earnings beat "), 0.9)
           .build();
   private static final Iterable<Pattern> TITLE_BLACKLIST =
       Arrays.asList(Pattern.compile("earning preview"),
