@@ -9,6 +9,7 @@ import org.neuroph.nnet.learning.BackPropagation;
 import com.google.api.client.util.Maps;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.Urls;
+import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.Asserts;
@@ -82,15 +83,18 @@ public final class NeuralNetworkScorer extends Scorer {
     // 9. Relevance to start-up fundraising rounds.
     linkedHashMap.put("fundraising", InputValuesGenerator.relevanceToFundraising(user, article));
 
-    // 10. Topic scores.
+    // 10. Topic scores.  If the user's actually interested in any of these
+    // things, then we null out the scores (because otherwise the neural
+    // network just learns that some folks like Sports + Politics + etc, without
+    // knowing why, which is a really bad thing for overall quality.)
     linkedHashMap.put("entertainment",
         InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_ENTERTAINMENT));
-    linkedHashMap.put("sports",
-        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_SPORTS));
-    linkedHashMap.put("politics",
-        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_POLITICS));
-    linkedHashMap.put("murder_crime_war",
-        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
+    linkedHashMap.put("sports", UserIndustries.hasFeatureId(user, FeatureId.SPORTS)
+        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_SPORTS));
+    linkedHashMap.put("politics", UserIndustries.hasFeatureId(user, FeatureId.GOVERNMENT)
+        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_POLITICS));
+    linkedHashMap.put("murder_crime_war", UserIndustries.hasFeatureId(user, FeatureId.MILITARY)
+        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
 
     return linkedHashMap;
   }

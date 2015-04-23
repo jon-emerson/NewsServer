@@ -1,0 +1,61 @@
+root_domain: "nationaljournal.com"
+start_url: "http://www.nationaljournal.com/"
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/pictures-video/"
+}
+path_blacklist {
+  needle: "/sponsored-content/"
+}
+path_blacklist {
+  needle: "/nj/"
+}
+paragraph_selector: "#articleBodyContent p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[^\\/]+\\-20[0-9]{2}[01][0-9][0-3][0-9]$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.nationaljournal.com/2016-elections/hillary-clinton-clinton-foundation-ron-fournier-20150422"
+    article_url: "http://www.nationaljournal.com/2016-elections/what-happens-when-the-training-wheels-come-off-hillary-clinton-s-campaign-20150420"
+    article_url: "http://www.nationaljournal.com/congress/amtrak-obama-promise-bullet-trains-new-bridge-20150420"
+    article_url: "http://www.nationaljournal.com/congress/david-vitter-wants-to-subpoena-obamacare-documents-do-republicans-have-his-back-20150421"
+    article_url: "http://www.nationaljournal.com/congress/mcconnell-s-patriot-act-bill-unleashes-long-simmering-debate-over-nsa-spying-20150422"
+    article_url: "http://www.nationaljournal.com/congress/trafficking-backup-finally-clears-20150421"
+    article_url: "http://www.nationaljournal.com/defense/nsa-chief-rules-of-war-apply-to-cyberwar-too-20150421"
+    article_url: "http://www.nationaljournal.com/energy/in-nod-to-rick-scott-obama-says-climate-change-cannot-be-omitted-20150422"
+    article_url: "http://www.nationaljournal.com/energy/obama-heads-to-marco-rubio-s-backyard-to-promote-climate-change-20150418"
+    article_url: "http://www.nationaljournal.com/magazine/amtrak-acela-high-speed-trains-20150417"
+    article_url: "http://www.nationaljournal.com/political-connections/hillary-clinton-2016-presidential-election-problems-20150417"
+    article_url: "http://www.nationaljournal.com/tech/mcconnell-introduces-bill-to-reauthorize-patriot-act-until-2020-20150421"
+    article_url: "http://www.nationaljournal.com/tech/trafficking-amendment-chills-innovation-online-wyden-says-20150422"
+    non_article_url: "http://www.nationaljournal.com/tech"
+    non_article_url: "http://www.nationaljournal.com/white-house"
+    non_article_url: "http://www.nationaljournal.com/reporters/bio/222"
+    non_article_url: "http://www.nationaljournal.com/nj/contact-us-20131001"
+    non_article_url: "http://www.nationaljournal.com/membership/implementation-guidance"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10532 # Law Practice
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10542 # Military
+  path_regex: "^\\/defense\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "^\\/energy\\/"
+  boost: 1
+}

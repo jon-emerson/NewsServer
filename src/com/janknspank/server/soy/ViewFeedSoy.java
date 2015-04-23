@@ -117,7 +117,7 @@ public class ViewFeedSoy {
       }
     });
     Set<Integer> userFeatureIds = Sets.newHashSet();
-    for (Interest interest : user.getInterestList()) {
+    for (Interest interest : UserInterests.getInterests(user)) {
       if (interest.hasIndustryCode()) {
         userFeatureIds.add(interest.getIndustryCode());
       }

@@ -48,6 +48,10 @@ feature_boost_pattern {
   boost: 0
 }
 feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
+  boost: 0
+}
+feature_boost_pattern {
   feature_id: 10556 # Restaurants
   boost: -1
 }

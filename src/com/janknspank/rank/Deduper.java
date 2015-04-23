@@ -9,11 +9,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.SocialEngagements;
-import com.janknspank.classifier.FeatureId;
-import com.janknspank.classifier.FeatureType;
-import com.janknspank.common.TopList;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 
@@ -38,7 +34,6 @@ public class Deduper {
   private static class ArticleExtraction {
     private final long publishTime;
     private final Set<String> stems = Sets.newHashSet();
-    private final Set<Integer> top3Industries = Sets.newHashSet();
 
     // Marks Articles that have been responsible for the killing of a duplicate.
     // E.g. this is true if this article has won against a similar article.
@@ -47,39 +42,13 @@ public class Deduper {
     public ArticleExtraction(Article article) {
       publishTime = article.getPublishedTime();
       stems.addAll(article.getDedupingStemsList());
-
-      // Finding a 1-in-3 match out-performed 1-in-2, 1-in-4, 1-in-5, and 2-in-5
-      // when considering dupe matches (10 points), false positives (dupes that
-      // are not really dupes, -2 points), and false negatives (undetected
-      // dupes, -5 points).
-      // NOTE(jonemerson): Trying 1-in-4 now because it seems like it's
-      // performing better now that our vectors are better defined.
-      TopList<Integer, Double> topIndustryFeatures = new TopList<>(4);
-      for (ArticleFeature feature : article.getFeatureList()) {
-        FeatureId featureId = FeatureId.fromId(feature.getFeatureId());
-        if (featureId != null && featureId.getFeatureType() == FeatureType.INDUSTRY) {
-          topIndustryFeatures.add(feature.getFeatureId(), feature.getSimilarity());
-        }
-      }
-      top3Industries.addAll(topIndustryFeatures.getKeys());
     }
 
     public boolean isDuplicate(ArticleExtraction extraction2) {
       if (Math.abs(extraction2.publishTime - publishTime) > STEM_INTERSECTION_PUBLISH_DATE_RANGE) {
         return false;
       }
-      int stemIntersectionCount = Sets.intersection(stems, extraction2.stems).size();
-      int industryIntersectionCount =
-          Sets.intersection(top3Industries, extraction2.top3Industries).size();
-
-      // Some articles just aren't about enough stuff to be assigned to an
-      // industry.  In which case, they're probably relatively weak, and we
-      // can just assume their industries intersect.
-      boolean bothHaveIndustries =
-          top3Industries.size() > 0 && extraction2.top3Industries.size() > 0;
-
-      return stemIntersectionCount >= STEM_INTERSECTION_COUNT_MINIMUM
-          && (industryIntersectionCount >= 1 || !bothHaveIndustries);
+      return Sets.intersection(stems, extraction2.stems).size() >= STEM_INTERSECTION_COUNT_MINIMUM;
     }
 
     public void markHasKilledDupe() {

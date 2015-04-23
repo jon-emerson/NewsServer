@@ -1,0 +1,105 @@
+root_domain: "thehill.com"
+start_url: "http://thehill.com/"
+paragraph_selector: ".field-item.even p"
+article_url_pattern {
+  path_regex: "\\/[0-9][0-9]+\\-[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://thehill.com/blogs/ballot-box/presidential-races/239724-bush-accuses-clinton-of-flip-flopping-on-trade"
+    article_url: "http://thehill.com/blogs/blog-briefing-room/239691-boehner-calls-for-clinton-to-actually-cooperate-with-benghazi-probe"
+    article_url: "http://thehill.com/blogs/blog-briefing-room/239710-obama-turns-to-his-base-for-trade-support"
+    article_url: "http://thehill.com/blogs/blog-briefing-room/239731-police-investigating-suspicious-substance-at-capitol"
+    article_url: "http://thehill.com/blogs/blog-briefing-room/news/239749-avengers-director-slams-lawmakers-skeptical-of-climate-change"
+    article_url: "http://thehill.com/blogs/floor-action/house/239756-house-passes-cybersecurity-bill"
+    article_url: "http://thehill.com/blogs/floor-action/house/239799-house-panel-to-hold-hearing-on-gyrocopter-incident"
+    article_url: "http://thehill.com/business-a-lobbying/business-a-lobbying/239707-former-dem-senator-joins-top-lobby-firm"
+    article_url: "http://thehill.com/homenews/administration/239743-michelle-obama-my-brother-is-better-than-potus-at-basketball"
+    article_url: "http://thehill.com/homenews/senate/239649-mitch-mcconnell-builds-case-for-2016"
+    article_url: "http://thehill.com/policy/defense/239741-gop-lawmaker-white-house-in-denial-over-irans-role-in-yemen"
+    article_url: "http://thehill.com/policy/defense/overnights/239803-overnight-defense-cyber-russia-get-new-focus-in-defense-policy-bill"
+    article_url: "http://thehill.com/policy/energy-environment/239742-obama-on-climate-change-this-is-a-problem-now"
+    article_url: "http://thehill.com/policy/energy-environment/overnights/239786-overnight-energy-obama-confront-climate-skeptics"
+    article_url: "http://thehill.com/policy/finance/239745-ex-treasury-official-warns-iran-funds-going-to-terror-groups"
+    article_url: "http://thehill.com/policy/finance/239748-house-gop-releases-2016-spending-figures-signals-fight-with-wh"
+    article_url: "http://thehill.com/policy/finance/239791-financial-industry-slow-down-on-financial-adviser-rules"
+    article_url: "http://thehill.com/policy/healthcare/239703-bill-to-repeal-health-insurance-tax-hits-majority-in-house"
+    article_url: "http://thehill.com/policy/healthcare/239713-anti-abortion-advocates-demand-vote-on-house-abortion-bill"
+    article_url: "http://thehill.com/policy/healthcare/239733-biden-takes-shot-at-senate-at-surgeon-general-swearing-in"
+    article_url: "http://thehill.com/policy/healthcare/overnights/239764-overnight-healthcare-senate-unanimously-approves-anti-trafficking-bill"
+    article_url: "http://thehill.com/policy/technology/239716-house-subcommittee-approves-demand-letter-bill"
+    article_url: "http://thehill.com/policy/technology/overnights/239781-overnight-tech-specter-of-clean-patriot-act-sends-reformers-to"
+    article_url: "http://thehill.com/policy/transportation/239772-gop-search-for-road-funding-fix-hits-home-stretch"
+    article_url: "http://thehill.com/regulation/court-battles/239771-justices-slam-raisin-regulation-in-federal-rebuke"
+    article_url: "http://thehill.com/regulation/239752-bill-would-block-courts-on-gay-marriage"
+    non_article_url: "http://thehill.com/regulation/energy-environment"
+    non_article_url: "http://thehill.com/blogs/ballot-box"
+    non_article_url: "http://thehill.com/blogs/congress-blog"
+    non_article_url: "http://thehill.com/regulation/court-battles"
+    non_article_url: "http://thehill.com/author/david-mccabe"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10542 # Military
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10532 # Law Practice
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10542 # Military
+  path_regex: "^\\/policy\\/defense\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "^\\/policy\\/energy-environment\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10532 # Law Practice
+  path_regex: "^\\/regulation\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10550 # Logistics
+  path_regex: "^\\/policy\\/transportation\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  path_regex: "^\\/policy\\/technology\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Software
+  path_regex: "^\\/policy\\/technology\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
+  path_regex: "^\\/policy\\/healthcare\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  path_regex: "^\\/policy\\/healthcare\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  path_regex: "^\\/policy\\/healthcare\\/"
+  boost: -1
+}

@@ -1,0 +1,50 @@
+root_domain: "politico.com"
+start_url: "http://www.politico.com/"
+path_blacklist {
+  needle: "/magazine/gallery/"
+}
+paragraph_selector: ".story-text p"
+article_url_pattern {
+  path_regex: "^\\/(magazine\\/)?story\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\-[0-9]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.politico.com/magazine/story/2015/04/hillary-clinton-cant-run-for-president-117209.html"
+    article_url: "http://www.politico.com/story/2015/03/medicare-doctors-john-boehner-nancy-pelosi-116097.html"
+    article_url: "http://www.politico.com/story/2015/04/hillary-clinton-foreign-cash-media-coverage-117273.html"
+    article_url: "http://www.politico.com/story/2015/04/hillary-clinton-trans-pacific-partnership-trade-deal-117249.html"
+    article_url: "http://www.politico.com/story/2015/04/kevin-spacey-will-make-kate-anderson-browers-bestselling-white-house-book-the-residence-into-tv-series-117264.html"
+    article_url: "http://www.politico.com/story/2015/04/koch-brothers-2016-election-memo-117238.html"
+    article_url: "http://www.politico.com/story/2015/04/marco-rubio-takes-lead-in-sheldon-adelson-primary-117268.html"
+    article_url: "http://www.politico.com/story/2015/04/obama-trade-deal-trade-promotion-authority-117232.html?"
+    article_url: "http://www.politico.com/story/2015/04/rep-rogers-tries-for-delicate-balance-on-spending-117248.html"
+    article_url: "http://www.politico.com/story/2015/04/the-little-pipeline-agency-that-couldnt-117147.html"
+    non_article_url: "http://www.politico.com/reporters/KateGlassmanBennett.html"
+    non_article_url: "http://www.politico.com/reporters/AdamBLerner.html"
+    non_article_url: "http://www.politico.com/magazine/"
+    non_article_url: "http://www.politico.com/magazine/what-works/"
+    non_article_url: "http://www.politico.com/magazine/index.html"
+    non_article_url: "http://www.politico.com/2014-election/results/map/senate/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10532 # Law Practice
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10542 # Military
+  path_regex: "^\\/defense\\/"
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "^\\/energy\\/"
+  boost: -1
+}

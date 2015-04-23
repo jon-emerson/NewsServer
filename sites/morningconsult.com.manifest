@@ -1,0 +1,72 @@
+root_domain: "morningconsult.com"
+start_url: "http://morningconsult.com/"
+paragraph_selector: ".entry-content .container p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$"
+}
+article_url_pattern {
+  path_regex: "^\\/(opinions|polls)\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://morningconsult.com/2015/04/ripple-effects-of-charging-banks-give-prosecutors-pause/"
+    article_url: "http://morningconsult.com/2015/04/if-elizabeth-warren-gives-a-speech-in-washington-and-no-senate-democrats-are-around-to-hear-it-does-it-make-a-difference/"
+    article_url: "http://morningconsult.com/2015/04/volcker-plan-not-high-on-banking-committees-agenda/"
+    article_url: "http://morningconsult.com/2015/04/fda-bill-could-get-hearing-next-week/"
+    article_url: "http://morningconsult.com/2015/04/despite-digital-currency-developments-bitcoin-market-awareness-lags/"
+    article_url: "http://morningconsult.com/2015/03/doc-fix-discord-for-gop-doctors-caucus/"
+    article_url: "http://morningconsult.com/opinions/dont-sunset-cybersecurity/"
+    article_url: "http://morningconsult.com/opinions/helping-employees-drive-high-value-healthcare/"
+    article_url: "http://morningconsult.com/opinions/something-to-talk-about-a-conversation-starter-for-your-himss-experience/"
+    article_url: "http://morningconsult.com/opinions/3639/"
+    article_url: "http://morningconsult.com/opinions/the-carrot-and-the-stick-learning-from-the-tax-season-to-get-more-americans-covered/"
+    article_url: "http://morningconsult.com/opinions/columns-markets-republican-congress/"
+    article_url: "http://morningconsult.com/polls/voters-dont-realize-keystone-is-owned-by-a-canadian-company/"
+    article_url: "http://morningconsult.com/polls/seniors-weigh-in-on-sgr-and-medicare-cuts/"
+    article_url: "http://morningconsult.com/polls/early-presidential-candidates-trail-with-seniors/"
+    article_url: "http://morningconsult.com/polls/national-seniors-poll-medicare-plan-satisfaction/"
+    article_url: "http://morningconsult.com/polls/tech-104/"
+    non_article_url: "http://morningconsult.com/health/"
+    non_article_url: "http://morningconsult.com/polling-center/"
+    non_article_url: "http://morningconsult.com/finance/"
+    non_article_url: "http://morningconsult.com/author/shawn-martin/"
+    non_article_url: "http://morningconsult.com/opinions/category/finance/"
+    non_article_url: "http://morningconsult.com/about/"
+    non_article_url: "http://morningconsult.com/subscribe/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10554 # Human Resources
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10526 # Network Security
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10534 # Foreign Exchange
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Software
+  boost: -2
+}

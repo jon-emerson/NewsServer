@@ -1,0 +1,44 @@
+root_domain: "qz.com"
+start_url: "http://qz.com/"
+paragraph_selector: ".item-body p"
+paragraph_selector: ".item-body h2"
+article_url_pattern {
+  path_regex: "^\\/[0-9]+\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://qz.com/388749/the-eu-has-charged-russias-gazprom-with-abusing-its-energy-dominance/"
+    article_url: "http://qz.com/386347/the-markets-sure-had-a-wild-and-crazy-week/"
+    article_url: "http://qz.com/388660/rahul-gandhi-indias-most-internet-unsavvy-politician-is-now-crusading-for-net-neutrality/"
+    article_url: "http://qz.com/388696/narendra-modis-terrible-luck-with-the-weather-continues/"
+    article_url: "http://qz.com/386166/how-successful-people-work-less-and-get-more-done/"
+    article_url: "http://qz.com/388324/twelve-inventions-that-could-change-the-world/"
+    article_url: "http://qz.com/383485/the-internet-should-have-killed-the-cookbook-but-instead-it-reinvented-it/"
+    non_article_url: "http://qz.com/re/markets/"
+    non_article_url: "http://qz.com/india"
+    non_article_url: "http://qz.com/about"
+    non_article_url: "http://qz.com/about/ethicsandadvertisingguidelines"
+    non_article_url: "http://qz.com/re/ideas/"
+    non_article_url: "http://qz.com/author/false"
+    non_article_url: "http://qz.com/author/levinesteve/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10501 # Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Internet
+  boost: -2
+}

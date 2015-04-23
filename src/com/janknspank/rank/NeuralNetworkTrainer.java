@@ -148,7 +148,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       lowestErrorIteration = bp.getCurrentIteration();
       lowestErrorNetworkWeights = bp.getNeuralNetwork().getWeights();
 //    }
-    if (bp.getCurrentIteration() > MAX_ITERATIONS) {
+    if (bp.getCurrentIteration() >= MAX_ITERATIONS) {
       bp.stopLearning();
     }
   }
