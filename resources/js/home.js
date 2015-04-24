@@ -11,3 +11,9 @@ $(document).ready(function() {
   }
 });
 
+var scrollToElement = function(el, ms){
+  var speed = (ms) ? ms : 300;
+  $('html,body').animate({
+      scrollTop: $(el).offset().top
+  }, speed);
+}
