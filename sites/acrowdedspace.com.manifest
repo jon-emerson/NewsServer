@@ -1,0 +1,56 @@
+short_name: "acrowdedspace.com"
+root_domain: "acrowdedspace.com"
+start_url: "http://acrowdedspace.com/"
+path_blacklist {
+  needle: "/about/"
+}
+paragraph_selector: ".post-view > p"
+article_url_pattern {
+  path_regex: "^\\/post\\/[0-9]+\\/[^\\/]+$"
+}
+rss_url: "http://acrowdedspace.com/rss"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://acrowdedspace.com/post/116567620957/vertical-or-horizontal"
+    article_url: "http://acrowdedspace.com/post/114709896217/option-value-and-false-hopes"
+    article_url: "http://acrowdedspace.com/post/111584505762/underspending-on-paid-advertising"
+    article_url: "http://acrowdedspace.com/post/107327727407/an-idea-for-amazon-to-spread-more-joy"
+    article_url: "http://acrowdedspace.com/post/104694314042/top-9-misaligned-marketplace-incentives"
+    non_article_url: "http://acrowdedspace.com/archive"
+    non_article_url: "http://acrowdedspace.com/feed/"
+    non_article_url: "http://acrowdedspace.com/XYZ111/"
+    non_article_url: "http://acrowdedspace.com/XYZ222/"
+    non_article_url: "http://acrowdedspace.com/XYZ333/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}

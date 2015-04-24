@@ -8,18 +8,19 @@ paragraph_selector: ".entry-content > p"
 article_url_pattern {
   path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
 }
+rss_url: "http://bubba.vc/feed/"
 test_instructions {
   article_url_detector_checks {
     article_url: "http://bubba.vc/2015/04/22/part-2-of-2-should-you-build-for-the-apple-watch-platform/"
     article_url: "http://bubba.vc/2015/03/18/twin-prime/"
     article_url: "http://bubba.vc/2015/03/06/part-1-of-2-should-you-build-for-the-apple-watch-platform/"
     article_url: "http://bubba.vc/2014/12/08/the-three-skills-of-a-great-pm/"
-    article_url: "http://continuations.com/post/114038444190/not-too-late-obama-should-shut-down-gitmo"
-    non_article_url: "http://continuations.com/archive"
-    non_article_url: "http://continuations.com/tagged/tech-tuesday"
-    non_article_url: "http://continuations.com/about"
-    non_article_url: "http://continuations.com/page/3"
-    non_article_url: "http://continuations.com/page/2"
+    article_url: "http://bubba.vc/2014/09/03/3-types-of-notifications/"
+    non_article_url: "http://bubba.vc/about/"
+    non_article_url: "http://bubba.vc/feed/"
+    non_article_url: "http://bubba.vc/XYZ111/"
+    non_article_url: "http://bubba.vc/XYZ222/"
+    non_article_url: "http://bubba.vc/XYZ333/"
   }
 }
 feature_boost_pattern {
@@ -27,7 +28,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
-  boost: 9
+  boost: 10
 }
 feature_boost_pattern {
   feature_id: 20000 # Related to tech startups
