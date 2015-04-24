@@ -154,6 +154,11 @@ public class ArticleCreatorTest {
     assertEquals("Slack confirms $160m funding round",
         ArticleCreator.getTitle(createDocumentWithTitle(
             "Slack confirms $160m funding round \u2014 Red Herring"), site));
+    assertEquals("The Rich Get Richer",
+        ArticleCreator.getTitle(createDocumentWithTitle("The Rich Get Richer – AVC"), site));
+    assertEquals("Ready! Aim! Fire!: How To Execute Successfully Every Time (Part 2)",
+        ArticleCreator.getTitle(createDocumentWithTitle(
+            "Ready! Aim! Fire!: How To Execute Successfully Every Time (Part 2)"), site));
   }
 
   @Test

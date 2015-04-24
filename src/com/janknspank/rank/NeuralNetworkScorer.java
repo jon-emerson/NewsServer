@@ -102,12 +102,12 @@ public final class NeuralNetworkScorer extends Scorer {
     // knowing why, which is a really bad thing for overall quality.)
     linkedHashMap.put("entertainment",
         InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_ENTERTAINMENT));
-    linkedHashMap.put("sports",
-        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_SPORTS));
-    linkedHashMap.put("politics",
-        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_POLITICS));
-    linkedHashMap.put("murder_crime_war",
-        InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
+    linkedHashMap.put("sports", UserIndustries.hasFeatureId(user, FeatureId.SPORTS)
+        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_SPORTS));
+    linkedHashMap.put("politics", UserIndustries.hasFeatureId(user, FeatureId.GOVERNMENT)
+        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_POLITICS));
+    linkedHashMap.put("murder_crime_war", UserIndustries.hasFeatureId(user, FeatureId.MILITARY)
+        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
 
     // 12. Relevance to big money
     linkedHashMap.put("big_money",

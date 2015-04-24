@@ -33,11 +33,11 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10502 # Software
-  boost: 3
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10526 # Network Security
-  boost: 2
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10503 # Computer Hardware
