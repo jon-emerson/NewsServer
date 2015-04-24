@@ -42,6 +42,7 @@ public class ManualFeatureQuarterlyEarnings extends ManualHeuristicFeature {
           );
   private static final Map<Pattern, Double> BODY_SCORES =
       ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("announced its (first|second|third|fourth)-quarter numbers"), 0.9)
           .put(Pattern.compile("quarterly revenue"), 0.6)
           .build();
   private static final Iterable<Pattern> BODY_BLACKLIST =
