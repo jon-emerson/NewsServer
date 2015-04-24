@@ -1,0 +1,55 @@
+short_name: "continuations.com"
+root_domain: "continuations.com"
+start_url: "http://continuations.com/"
+path_blacklist {
+  needle: "/about/"
+}
+paragraph_selector: ".hentry > p"
+article_url_pattern {
+  path_regex: "^\\/post\\/[0-9]+\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://continuations.com/post/116589514330/etsy-goes-public"
+    article_url: "http://continuations.com/post/115967621975/the-0-take-rate-marketplace-valuation-conundrum"
+    article_url: "http://continuations.com/post/115682945630/video-hack-day-may-9th"
+    article_url: "http://continuations.com/post/115380288290/where-are-we"
+    article_url: "http://continuations.com/post/114038444190/not-too-late-obama-should-shut-down-gitmo"
+    non_article_url: "http://continuations.com/archive"
+    non_article_url: "http://continuations.com/tagged/tech-tuesday"
+    non_article_url: "http://continuations.com/about"
+    non_article_url: "http://continuations.com/page/3"
+    non_article_url: "http://continuations.com/page/2"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 9
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}

@@ -1,3 +1,4 @@
+short_name: "ScienceAlert"
 root_domain: "sciencealert.com"
 start_url: "http://www.sciencealert.com/"
 paragraph_selector: ".article-fulltext > p"
