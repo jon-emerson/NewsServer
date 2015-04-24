@@ -363,6 +363,34 @@ public final class ArticleProto {
      * </pre>
      */
     boolean getHot();
+
+    // optional int64 oldest_hot_duplicate_time = 21;
+    /**
+     * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
+     *
+     * <pre>
+     * Track various aspects of the de-duper, for ranking purposes.
+     * </pre>
+     */
+    boolean hasOldestHotDuplicateTime();
+    /**
+     * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
+     *
+     * <pre>
+     * Track various aspects of the de-duper, for ranking purposes.
+     * </pre>
+     */
+    long getOldestHotDuplicateTime();
+
+    // optional int32 hot_count = 22;
+    /**
+     * <code>optional int32 hot_count = 22;</code>
+     */
+    boolean hasHotCount();
+    /**
+     * <code>optional int32 hot_count = 22;</code>
+     */
+    int getHotCount();
   }
   /**
    * Protobuf type {@code Article}
@@ -534,6 +562,16 @@ public final class ArticleProto {
             case 160: {
               bitField0_ |= 0x00004000;
               hot_ = input.readBool();
+              break;
+            }
+            case 168: {
+              bitField0_ |= 0x00008000;
+              oldestHotDuplicateTime_ = input.readInt64();
+              break;
+            }
+            case 176: {
+              bitField0_ |= 0x00010000;
+              hotCount_ = input.readInt32();
               break;
             }
           }
@@ -1368,6 +1406,46 @@ public final class ArticleProto {
       return hot_;
     }
 
+    // optional int64 oldest_hot_duplicate_time = 21;
+    public static final int OLDEST_HOT_DUPLICATE_TIME_FIELD_NUMBER = 21;
+    private long oldestHotDuplicateTime_;
+    /**
+     * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
+     *
+     * <pre>
+     * Track various aspects of the de-duper, for ranking purposes.
+     * </pre>
+     */
+    public boolean hasOldestHotDuplicateTime() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
+     *
+     * <pre>
+     * Track various aspects of the de-duper, for ranking purposes.
+     * </pre>
+     */
+    public long getOldestHotDuplicateTime() {
+      return oldestHotDuplicateTime_;
+    }
+
+    // optional int32 hot_count = 22;
+    public static final int HOT_COUNT_FIELD_NUMBER = 22;
+    private int hotCount_;
+    /**
+     * <code>optional int32 hot_count = 22;</code>
+     */
+    public boolean hasHotCount() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    /**
+     * <code>optional int32 hot_count = 22;</code>
+     */
+    public int getHotCount() {
+      return hotCount_;
+    }
+
     private void initFields() {
       urlId_ = "";
       url_ = "";
@@ -1389,6 +1467,8 @@ public final class ArticleProto {
       retain_ = false;
       reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
       hot_ = false;
+      oldestHotDuplicateTime_ = 0L;
+      hotCount_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1461,6 +1541,12 @@ public final class ArticleProto {
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeBool(20, hot_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeInt64(21, oldestHotDuplicateTime_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeInt32(22, hotCount_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1560,6 +1646,14 @@ public final class ArticleProto {
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(20, hot_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(21, oldestHotDuplicateTime_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(22, hotCount_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1732,6 +1826,10 @@ public final class ArticleProto {
         bitField0_ = (bitField0_ & ~0x00040000);
         hot_ = false;
         bitField0_ = (bitField0_ & ~0x00080000);
+        oldestHotDuplicateTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00100000);
+        hotCount_ = 0;
+        bitField0_ = (bitField0_ & ~0x00200000);
         return this;
       }
 
@@ -1859,6 +1957,14 @@ public final class ArticleProto {
           to_bitField0_ |= 0x00004000;
         }
         result.hot_ = hot_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.oldestHotDuplicateTime_ = oldestHotDuplicateTime_;
+        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+          to_bitField0_ |= 0x00010000;
+        }
+        result.hotCount_ = hotCount_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2033,6 +2139,12 @@ public final class ArticleProto {
         }
         if (other.hasHot()) {
           setHot(other.getHot());
+        }
+        if (other.hasOldestHotDuplicateTime()) {
+          setOldestHotDuplicateTime(other.getOldestHotDuplicateTime());
+        }
+        if (other.hasHotCount()) {
+          setHotCount(other.getHotCount());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3891,6 +4003,88 @@ public final class ArticleProto {
       public Builder clearHot() {
         bitField0_ = (bitField0_ & ~0x00080000);
         hot_ = false;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 oldest_hot_duplicate_time = 21;
+      private long oldestHotDuplicateTime_ ;
+      /**
+       * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
+       *
+       * <pre>
+       * Track various aspects of the de-duper, for ranking purposes.
+       * </pre>
+       */
+      public boolean hasOldestHotDuplicateTime() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
+       *
+       * <pre>
+       * Track various aspects of the de-duper, for ranking purposes.
+       * </pre>
+       */
+      public long getOldestHotDuplicateTime() {
+        return oldestHotDuplicateTime_;
+      }
+      /**
+       * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
+       *
+       * <pre>
+       * Track various aspects of the de-duper, for ranking purposes.
+       * </pre>
+       */
+      public Builder setOldestHotDuplicateTime(long value) {
+        bitField0_ |= 0x00100000;
+        oldestHotDuplicateTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
+       *
+       * <pre>
+       * Track various aspects of the de-duper, for ranking purposes.
+       * </pre>
+       */
+      public Builder clearOldestHotDuplicateTime() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        oldestHotDuplicateTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 hot_count = 22;
+      private int hotCount_ ;
+      /**
+       * <code>optional int32 hot_count = 22;</code>
+       */
+      public boolean hasHotCount() {
+        return ((bitField0_ & 0x00200000) == 0x00200000);
+      }
+      /**
+       * <code>optional int32 hot_count = 22;</code>
+       */
+      public int getHotCount() {
+        return hotCount_;
+      }
+      /**
+       * <code>optional int32 hot_count = 22;</code>
+       */
+      public Builder setHotCount(int value) {
+        bitField0_ |= 0x00200000;
+        hotCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 hot_count = 22;</code>
+       */
+      public Builder clearHotCount() {
+        bitField0_ = (bitField0_ & ~0x00200000);
+        hotCount_ = 0;
         onChanged();
         return this;
       }
@@ -7528,7 +7722,7 @@ public final class ArticleProto {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
       "m/janknspank/database/extensions.proto\032\037" +
-      "com/janknspank/proto/core.proto\"\266\005\n\007Arti" +
+      "com/janknspank/proto/core.proto\"\200\006\n\007Arti" +
       "cle\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\032\n" +
       "\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005title\030\003 \001(\t" +
       "B\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\031\022\025\n\006a" +
@@ -7544,26 +7738,27 @@ public final class ArticleProto {
       "atureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003(\tB\010\230\246\035" +
       "\004\240\246\035\003\022\024\n\006retain\030\022 \001(\010B\004\240\246\035\003\022%\n\006reason\030\023 " +
       "\001(\0162\017.Article.ReasonB\004\220\246\035\006\022\021\n\003hot\030\024 \001(\010B" +
-      "\004\220\246\035\006\"<\n\006Reason\022\013\n\007UNKNOWN\020\000\022\014\n\010INDUSTRY" +
-      "\020\001\022\n\n\006PERSON\020\002\022\013\n\007COMPANY\020\003:\023\212\265\030\017MongoDB",
-      ".Article\"\223\002\n\016ArticleKeyword\022\035\n\007keyword\030\001" +
-      " \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246" +
-      "\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006so" +
-      "urce\030\004 \001(\0162\026.ArticleKeyword.Source:\007UNKN" +
-      "OWN\022\030\n\020paragraph_number\030\005 \001(\005\022\027\n\006entity\030" +
-      "\006 \001(\0132\007.Entity\"F\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n" +
-      "\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\022\t\n\005T" +
-      "ITLE\020\004\"\347\001\n\020SocialEngagement\022-\n\004site\030\001 \001(" +
-      "\0162\026.SocialEngagement.Site:\007UNKNOWN\022\031\n\013sh" +
-      "are_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_score\030\003 \001",
-      "(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_" +
-      "count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site" +
-      "\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002" +
-      "\"B\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010" +
-      "\210\246\035\001\220\246\035\003\022\022\n\nsimilarity\030\002 \001(\001\"9\n\017Interpre" +
-      "tedData\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003ur" +
-      "l\030\002 \003(\tB$\n\024com.janknspank.protoB\014Article" +
-      "Proto"
+      "\004\220\246\035\006\022+\n\031oldest_hot_duplicate_time\030\025 \001(\003" +
+      "B\010\240\246\035\003\220\246\035\006\022\033\n\thot_count\030\026 \001(\005B\010\240\246\035\003\220\246\035\006\"",
+      "<\n\006Reason\022\013\n\007UNKNOWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006" +
+      "PERSON\020\002\022\013\n\007COMPANY\020\003:\023\212\265\030\017MongoDB.Artic" +
+      "le\"\223\002\n\016ArticleKeyword\022\035\n\007keyword\030\001 \001(\tB\014" +
+      "\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004" +
+      "type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004" +
+      " \001(\0162\026.ArticleKeyword.Source:\007UNKNOWN\022\030\n" +
+      "\020paragraph_number\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132" +
+      "\007.Entity\"F\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001" +
+      "\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\022\t\n\005TITLE\020\004" +
+      "\"\347\001\n\020SocialEngagement\022-\n\004site\030\001 \001(\0162\026.So",
+      "cialEngagement.Site:\007UNKNOWN\022\031\n\013share_co" +
+      "unt\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246" +
+      "\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_count\030" +
+      "\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site\022\013\n\007UN" +
+      "KNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"B\n\016Ar" +
+      "ticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246" +
+      "\035\003\022\022\n\nsimilarity\030\002 \001(\001\"9\n\017InterpretedDat" +
+      "a\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(" +
+      "\tB$\n\024com.janknspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7575,7 +7770,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", "Hot", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", "Hot", "OldestHotDuplicateTime", "HotCount", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -7632,6 +7827,10 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

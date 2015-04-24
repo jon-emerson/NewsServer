@@ -113,6 +113,16 @@ message Article {
   optional bool hot = 20 [
     (storage_method) = DO_NOT_STORE
   ];
+
+  // Track various aspects of the de-duper, for ranking purposes.
+  optional int64 oldest_hot_duplicate_time = 21 [
+    (client_serialization) = EXCLUDE,
+    (storage_method) = DO_NOT_STORE
+  ];
+  optional int32 hot_count = 22 [
+    (client_serialization) = EXCLUDE,
+    (storage_method) = DO_NOT_STORE
+  ];
 }
 
 message ArticleKeyword {

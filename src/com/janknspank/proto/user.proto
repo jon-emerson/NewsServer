@@ -87,7 +87,15 @@ message User {
     (client_serialization) = EXCLUDE
   ];
 
-  // Next ID: 20.
+  // Stores the last five times the user's used the app, as spaced at least one
+  // hour apart.  Times are in milliseconds.  They're at least an hour apart
+  // for various business logic reasons, and to keep down on writes in read
+  // flows.
+  repeated int64 last_5_app_use_time = 20 [
+    (client_serialization) = EXCLUDE
+  ];
+
+  // Next ID: 21.
 }
 
 message AddressBookContact {
@@ -195,76 +203,6 @@ message Interest {
 
   // Set if IFF interest.type == InterestType.ENTITY.
   optional Entity entity = 6;
-}
-
-// Back in the day, when we stored this in Mongo!!
-message OldUserAction {
-  option (database_collection) = "MongoDB.UserAction";
-
-  optional string id = 1 [
-    (required) = YES,
-    (storage_method) = PRIMARY_KEY,
-    (string_length) = 24,
-    (string_charset) = LATIN1
-  ];
-
-  optional string user_id = 2 [
-    (required) = YES,
-    (string_length) = 24,
-    (string_charset) = LATIN1,
-    (storage_method) = PULL_OUT
-  ];
-
-  enum ActionType {
-    UNKNOWN = 0;
-    FAVORITE = 1; // aka Bookmark
-    X_OUT = 2; // Swipe to dismiss
-    TAP_FROM_STREAM = 3; // User tapped the article cell to view the full article from the stream
-    SHARE = 4;
-    READ_ARTICLE = 5;
-    VOTE_UP = 6; // Swipe right "Good to know"
-    UNVOTE_UP = 7;
-    SCROLL_PAST = 8;
-  }
-  optional ActionType action_type = 3 [
-    (required) = YES,
-    (storage_method) = PULL_OUT
-  ];
-
-  optional string url_id = 4 [
-    (required) = YES,
-    (string_length) = 24,
-    (string_charset) = LATIN1,
-    (storage_method) = PULL_OUT
-  ];
-
-  optional string url = 5 [
-    (required) = YES,
-    (string_length) = 767,
-    (string_charset) = LATIN1,
-    (storage_method) = PULL_OUT
-  ];
-
-  optional int64 create_time = 6 [
-    (required) = YES,
-    (storage_method) = PULL_OUT
-  ];
-
-  // IFF ActionType == READ_ARTICLE
-  optional int64 read_start_time = 7;
-
-  // IFF ActionType == READ_ARTICLE
-  optional int64 read_end_time = 8;
-
-  // The current user's interests, regardless of whether they were used
-  // specifically in the stream the user was acting in.
-  repeated Interest interest = 11 [
-    (client_serialization) = EXCLUDE
-  ];
-
-  // If the user was viewing an interest stream, this object describes
-  // the entity / keyword / etc that they were viewing.
-  optional Interest on_stream_for_interest = 12;
 }
 
 message UserAction {
