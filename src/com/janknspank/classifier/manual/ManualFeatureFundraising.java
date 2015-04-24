@@ -34,6 +34,7 @@ public class ManualFeatureFundraising extends ManualHeuristicFeature {
           .put(Pattern.compile("funding round"), 1.0)
           .put(Pattern.compile("raises \\$.+m funding"), 1.0)
           .put(Pattern.compile("raises \\$.+ million"), 1.0)
+          .put(Pattern.compile("\\$.* million round"), 1.0)
           .put(Pattern.compile("million of funding"), 1.0)
           .build();
   private static final Iterable<Pattern> TITLE_BLACKLIST =
