@@ -1,3 +1,4 @@
+short_name: "Places"
 root_domain: "placesjournal.org"
 start_url: "http://placesjournal.org/"
 path_blacklist {

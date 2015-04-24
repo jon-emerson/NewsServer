@@ -1,3 +1,4 @@
+short_name: "Dwell"
 root_domain: "dwell.com"
 start_url: "http://www.dwell.com/"
 subdomain_blacklist: "store.dwell.com"

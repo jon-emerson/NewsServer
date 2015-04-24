@@ -1,3 +1,4 @@
+short_name: "EIA"
 root_domain: "eia.gov"
 start_url: "http://www.eia.gov/"
 start_url: "http://www.eia.gov/pressroom/"

@@ -1,3 +1,4 @@
+short_name: "CBS News"
 root_domain: "cbsnews.com"
 start_url: "http://www.cbsnews.com"
 subdomain_blacklist: "cbsn.cbsnews.com"

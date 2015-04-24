@@ -1,3 +1,4 @@
+short_name: "Skyscraper News"
 root_domain: "skyscrapernews.com"
 start_url: "http://www.skyscrapernews.com"
 start_url: "http://www.skyscrapernews.com/skynews.php"

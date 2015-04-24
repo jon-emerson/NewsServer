@@ -1,3 +1,4 @@
+short_name: "Mercury News"
 root_domain: "mercurynews.com"
 start_url: "http://www.mercurynews.com"
 subdomain_blacklist: "mylocal.mercurynews.com"

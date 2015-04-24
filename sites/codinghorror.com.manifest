@@ -1,3 +1,4 @@
+short_name: "Coding Horror"
 root_domain: "codinghorror.com"
 start_url: "http://blog.codinghorror.com/"
 paragraph_selector: ".post-content p"

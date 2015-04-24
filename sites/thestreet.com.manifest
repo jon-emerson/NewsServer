@@ -1,3 +1,4 @@
+short_name: "TheStreet"
 root_domain: "thestreet.com"
 start_url: "http://www.thestreet.com/"
 subdomain_blacklist: "business-news.thestreet.com"

@@ -1,3 +1,4 @@
+short_name: "Mother Jones"
 root_domain: "motherjones.com"
 start_url: "http://www.motherjones.com/"
 paragraph_selector: ".content p"

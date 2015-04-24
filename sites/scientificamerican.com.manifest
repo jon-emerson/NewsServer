@@ -1,3 +1,4 @@
+short_name: "Scientific American"
 root_domain: "scientificamerican.com"
 start_url: "http://www.scientificamerican.com/"
 paragraph_selector: ".article-content > p"

@@ -1,3 +1,4 @@
+short_name: "HBR"
 root_domain: "hbr.org"
 start_url: "http://hbr.org/"
 paragraph_selector: ".article p"

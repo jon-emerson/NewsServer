@@ -1,3 +1,4 @@
+short_name: "Daily FX"
 root_domain: "dailyfx.com"
 start_url: "http://www.dailyfx.com/"
 subdomain_blacklist: "plus.dailyfx.com"

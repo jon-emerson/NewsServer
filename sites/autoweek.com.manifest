@@ -1,3 +1,4 @@
+short_name: "AutoWeek"
 root_domain: "autoweek.com"
 start_url: "http://autoweek.com"
 subdomain_blacklist: "home.autoweek.com"

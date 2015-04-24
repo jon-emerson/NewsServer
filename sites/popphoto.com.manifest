@@ -1,3 +1,4 @@
+short_name: "Popular Photography"
 root_domain: "popphoto.com"
 start_url: "http://www.popphoto.com"
 subdomain_blacklist: "forums.popphoto.com"

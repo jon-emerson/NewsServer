@@ -1,3 +1,4 @@
+short_name: "Clean Technica"
 root_domain: "cleantechnica.com"
 start_url: "http://www.cleantechnica.com"
 paragraph_selector: "article p"

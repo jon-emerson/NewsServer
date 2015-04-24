@@ -1,3 +1,4 @@
+short_name: "ProgrammableWeb"
 root_domain: "programmableweb.com"
 start_url: "http://www.programmableweb.com/"
 path_blacklist {

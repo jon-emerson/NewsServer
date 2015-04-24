@@ -1,3 +1,4 @@
+short_name: "MarketWatch"
 root_domain: "marketwatch.com"
 start_url: "http://www.marketwatch.com/"
 start_url: "http://www.marketwatch.com/newsviewer"

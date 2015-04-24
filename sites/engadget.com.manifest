@@ -1,3 +1,4 @@
+short_name: "Engadget"
 root_domain: "engadget.com"
 start_url: "http://www.engadget.com"
 path_blacklist {

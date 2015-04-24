@@ -1,3 +1,4 @@
+short_name: "Restaurant News"
 root_domain: "restaurantnews.com"
 start_url: "http://www.restaurantnews.com/"
 paragraph_selector: ".postcontent p"

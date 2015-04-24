@@ -1,3 +1,4 @@
+short_name: "WSJ"
 root_domain: "blogs.wsj.com"
 start_url: "http://blogs.wsj.com/"
 paragraph_selector: ".articlePage p"

@@ -1,3 +1,4 @@
+short_name: "Art News"
 root_domain: "artnews.com"
 start_url: "http://www.artnews.com/"
 paragraph_selector: ".main-content p"

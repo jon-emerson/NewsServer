@@ -1,3 +1,4 @@
+short_name: "Ben Horowitz"
 root_domain: "bhorowitz.com"
 start_url: "http://www.bhorowitz.com/"
 subdomain_blacklist: "hardthings.bhorowitz.com"

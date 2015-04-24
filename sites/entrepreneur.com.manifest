@@ -1,3 +1,4 @@
+short_name: "Entrepreneur"
 root_domain: "entrepreneur.com"
 start_url: "http://www.entrepreneur.com/"
 paragraph_selector: ".content-block p"

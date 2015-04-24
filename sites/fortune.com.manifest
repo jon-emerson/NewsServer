@@ -1,3 +1,4 @@
+short_name: "Fortune"
 root_domain: "fortune.com"
 start_url: "http://fortune.com"
 subdomain_blacklist: "backissues.fortune.com"

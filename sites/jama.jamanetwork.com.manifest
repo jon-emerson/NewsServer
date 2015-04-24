@@ -1,3 +1,4 @@
+short_name: "JAMA"
 root_domain: "jama.jamanetwork.com"
 start_url: "http://jama.jamanetwork.com/journal.aspx"
 paragraph_selector: ".contentBody p"

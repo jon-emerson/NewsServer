@@ -1,3 +1,4 @@
+short_name: "Boston Globe"
 root_domain: "boston.com"
 start_url: "http://www.boston.com"
 subdomain_blacklist: "blogcabin.boston.com"

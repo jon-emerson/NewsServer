@@ -1,3 +1,4 @@
+short_name: "Daily Finance"
 root_domain: "dailyfinance.com"
 start_url: "http://www.dailyfinance.com/"
 paragraph_selector: "div[itemprop=\"articleBody\"]"

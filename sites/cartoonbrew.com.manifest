@@ -1,3 +1,4 @@
+short_name: "Cartoon Brew"
 root_domain: "cartoonbrew.com"
 start_url: "http://www.cartoonbrew.com"
 paragraph_selector: ".entry-content p"

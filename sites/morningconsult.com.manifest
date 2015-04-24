@@ -1,3 +1,4 @@
+short_name: "Morning Consult"
 root_domain: "morningconsult.com"
 start_url: "http://morningconsult.com/"
 paragraph_selector: ".entry-content .container p"

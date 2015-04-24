@@ -1,3 +1,4 @@
+short_name: "MIT"
 root_domain: "newsoffice.mit.edu"
 start_url: "http://newsoffice.mit.edu/"
 paragraph_selector: "#article-body-main .even p"

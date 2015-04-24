@@ -1,3 +1,4 @@
+short_name: "US News"
 root_domain: "usnews.com"
 start_url: "http://www.usnews.com/"
 paragraph_selector: "article > .block > p"

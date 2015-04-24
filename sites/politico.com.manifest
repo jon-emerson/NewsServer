@@ -1,3 +1,4 @@
+short_name: "Politico"
 root_domain: "politico.com"
 start_url: "http://www.politico.com/"
 path_blacklist {

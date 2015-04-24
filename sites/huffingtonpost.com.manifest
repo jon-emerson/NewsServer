@@ -1,3 +1,4 @@
+short_name: "Huffington Post"
 root_domain: "huffingtonpost.com"
 start_url: "http://www.huffingtonpost.com/"
 subdomain_blacklist: "live.huffingtonpost.com"

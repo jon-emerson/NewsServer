@@ -1,3 +1,4 @@
+short_name: "O'Reilly"
 root_domain: "radar.oreilly.com"
 start_url: "http://radar.oreilly.com/"
 use_first_paragraph_as_description: true

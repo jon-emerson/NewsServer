@@ -1,3 +1,4 @@
+short_name: "Farms.com"
 root_domain: "farms.com"
 start_url: "http://www.farms.com/news/"
 path_blacklist {

@@ -1,3 +1,4 @@
+short_name: "BBC"
 root_domain: "bbc.co.uk"
 aka_root_domain: "bbc.com"
 start_url: "http://www.bbc.co.uk"

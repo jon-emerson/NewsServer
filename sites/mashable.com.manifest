@@ -1,3 +1,4 @@
+short_name: "Mashable"
 root_domain: "mashable.com"
 start_url: "http://www.mashable.com"
 subdomain_blacklist: "events.mashable.com"

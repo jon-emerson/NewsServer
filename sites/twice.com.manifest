@@ -1,3 +1,4 @@
+short_name: "Twice"
 root_domain: "twice.com"
 start_url: "http://www.twice.com/"
 paragraph_selector: ".content .even p"

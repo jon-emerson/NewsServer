@@ -1,3 +1,4 @@
+short_name: "USA Today"
 root_domain: "usatoday.com"
 start_url: "http://www.usatoday.com/"
 paragraph_selector: "div[itemprop=\"articleBody\"] > p"

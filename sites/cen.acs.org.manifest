@@ -1,3 +1,4 @@
+short_name: "ACS"
 root_domain: "cen.acs.org"
 start_url: "http://cen.acs.org/news.html"
 paragraph_selector: "#article_text .section p"

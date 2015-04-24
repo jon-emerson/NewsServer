@@ -1,3 +1,4 @@
+short_name: "Ben Evans"
 root_domain: "ben-evans.com"
 start_url: "http://ben-evans.com/benedictevans/"
 paragraph_selector: ".post p"

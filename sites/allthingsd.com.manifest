@@ -1,3 +1,4 @@
+short_name: "AllThingsD"
 root_domain: "allthingsd.com"
 start_url: "http://www.allthingsd.com"
 subdomain_blacklist: "interview.allthingsd.com"

@@ -1,3 +1,4 @@
+short_name: "Inman"
 root_domain: "inman.com"
 start_url: "http://www.inman.com/"
 subdomain_blacklist: "jobs.inman.com"

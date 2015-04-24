@@ -1,3 +1,4 @@
+short_name: "CNN Money"
 root_domain: "money.cnn.com"
 start_url: "http://money.cnn.com"
 subdomain_blacklist: "cgi.money.cnn.com"

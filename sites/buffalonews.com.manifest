@@ -1,3 +1,4 @@
+short_name: "Buffalo News"
 root_domain: "buffalonews.com"
 start_url: "http://www.buffalonews.com"
 subdomain_blacklist: "cars.buffalonews.com"

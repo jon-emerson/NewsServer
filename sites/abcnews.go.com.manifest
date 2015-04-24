@@ -1,3 +1,4 @@
+short_name: "ABC News"
 root_domain: "abcnews.go.com"
 start_url: "http://www.abcnews.go.com"
 subdomain_blacklist: "forums.abcnews.go.com"

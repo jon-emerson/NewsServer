@@ -1,3 +1,4 @@
+short_name: "Vox"
 root_domain: "vox.com"
 start_url: "http://www.vox.com/"
 path_blacklist {

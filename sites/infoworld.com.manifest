@@ -1,3 +1,4 @@
+short_name: "InfoWorld"
 root_domain: "infoworld.com"
 subdomain_blacklist: "resources.infoworld.com"
 start_url: "http://www.infoworld.com/"

@@ -1,3 +1,4 @@
+short_name: "Tom Tunguz"
 root_domain: "tomtunguz.com"
 start_url: "http://tomtunguz.com/"
 paragraph_selector: ".post p"

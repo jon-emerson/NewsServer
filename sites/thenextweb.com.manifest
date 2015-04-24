@@ -1,3 +1,4 @@
+short_name: "TNW"
 root_domain: "thenextweb.com"
 start_url: "http://thenextweb.com"
 subdomain_blacklist: "deals.thenextweb.com"
