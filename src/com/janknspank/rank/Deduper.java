@@ -36,31 +36,42 @@ public class Deduper {
    * helpful for determining dupes.
    */
   private static class ArticleExtraction {
-    private final long publishTime;
+    private final long publishedTime;
     private final Set<String> stems = Sets.newHashSet();
 
     // Marks Articles that have been responsible for the killing of a duplicate.
     // E.g. this is true if this article has won against a similar article.
-    private boolean killedADupe = false;
+    private int dupeKilledCount = 0;
+    private long oldestHotDuplicateTime = 0;
 
     public ArticleExtraction(Article article) {
-      publishTime = article.getPublishedTime();
+      publishedTime = article.getPublishedTime();
+      oldestHotDuplicateTime = article.getPublishedTime();
       stems.addAll(article.getDedupingStemsList());
     }
 
     public boolean isDuplicate(ArticleExtraction extraction2) {
-      if (Math.abs(extraction2.publishTime - publishTime) > STEM_INTERSECTION_PUBLISH_DATE_RANGE) {
+      if (Math.abs(extraction2.publishedTime - publishedTime) > STEM_INTERSECTION_PUBLISH_DATE_RANGE) {
         return false;
       }
       return Sets.intersection(stems, extraction2.stems).size() >= STEM_INTERSECTION_COUNT_MINIMUM;
     }
 
-    public void markHasKilledDupe() {
-      killedADupe = true;
+    public void markHasKilledDupe(long publishTime) {
+      ++dupeKilledCount;
+      oldestHotDuplicateTime = Math.min(oldestHotDuplicateTime, publishTime);
     }
 
-    public boolean hasKilledADupe() {
-      return killedADupe;
+    public long getPublishedTime() {
+      return publishedTime;
+    }
+
+    public int getDupeKilledCount() {
+      return dupeKilledCount;
+    }
+
+    public long getOldestHotDuplicateTime() {
+      return oldestHotDuplicateTime;
     }
   }
 
@@ -97,10 +108,10 @@ public class Deduper {
               || (engagement != null
                   && engagement.getShareScore() > nonDupeEngagement.getShareScore())) {
             // The new article is more socially valuable, use it instead.
-            extraction.markHasKilledDupe();
+            extraction.markHasKilledDupe(nonDupeExtraction.getPublishedTime());
             nonDupeExtractions.set(i, extraction);
           } else {
-            nonDupeExtraction.markHasKilledDupe();
+            nonDupeExtraction.markHasKilledDupe(extraction.getPublishedTime());
           }
           foundDupe = true;
           break;
@@ -115,9 +126,11 @@ public class Deduper {
 
     List<Article> dedupedArticles = Lists.newArrayList();
     for (ArticleExtraction extraction : nonDupeExtractions) {
-      if (extraction.hasKilledADupe()) {
+      if (extraction.getDupeKilledCount() > 0) {
         dedupedArticles.add(extractionMap.get(extraction).toBuilder()
             .setHot(true)
+            .setHotCount(extraction.getDupeKilledCount() + 1)
+            .setOldestHotDuplicateTime(extraction.getOldestHotDuplicateTime())
             .build());
       } else {
         dedupedArticles.add(extractionMap.get(extraction));

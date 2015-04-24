@@ -304,6 +304,16 @@ public abstract class Collection<T extends Message> {
   public abstract T set(T message, String fieldName, Object value)
       throws DatabaseSchemaException, DatabaseRequestException;
 
+  public ListenableFuture<T> setFuture(
+      final T message, final String fieldName, final Object value) {
+    return EXECUTOR_SERVICE.submit(new Callable<T>() {
+      @Override
+      public T call() throws DatabaseSchemaException, DatabaseRequestException {
+        return set(message, fieldName, value);
+      }
+    });
+  }
+
   /**
    * Pushes values into an embedded array within the passed message, with the 
    * array field specifed by {@code fieldName}.

@@ -1,5 +1,8 @@
 package com.janknspank.server;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +11,7 @@ import org.json.JSONObject;
 import com.google.common.base.Strings;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.bizness.Users;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -30,6 +34,9 @@ public class AddUserActionServlet extends StandardServlet {
     String readStartTimeParam = getParameter(req, "read_start_time");
     String readEndTimeParam = getParameter(req, "read_end_time");
     User user = getUser(req);
+
+    // Mark that the user's using the app.
+    Future<User> updateLast5AppUseTimesFuture = Users.updateLast5AppUseTimes(user);
 
     // If the user action happened on an interest stream (not home).
     String interestTypeParam = getParameter(req, "on_stream_for_interest[type]");
@@ -119,6 +126,13 @@ public class AddUserActionServlet extends StandardServlet {
 
     UserAction userAction = actionBuilder.build();
     Database.insert(userAction);
+
+    // Make sure this update finished.
+    try {
+      updateLast5AppUseTimesFuture.get();
+    } catch (InterruptedException | ExecutionException e) {
+      e.printStackTrace();
+    }
 
     return createSuccessResponse();
   }

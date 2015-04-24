@@ -7,7 +7,7 @@ if [ $? -eq 0 ]; then
       -Xdebug \
       -Xrunjdwp:transport=dt_socket,address=8009,server=y,suspend=n \
       -Dcom.sun.media.imageio.disableCodecLib=true \
-      com.janknspank.bizness.IosPushNotificationHelper $@
+      com.janknspank.utils.PushDailyNotifications $@
 else
   echo "Build failed"
 fi
