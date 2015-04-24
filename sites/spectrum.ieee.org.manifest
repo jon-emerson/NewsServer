@@ -1,3 +1,4 @@
+short_name: "IEEE Spectrum"
 root_domain: "spectrum.ieee.org"
 start_url: "http://spectrum.ieee.org/"
 subdomain_blacklist: "m.spectrum.ieee.org"

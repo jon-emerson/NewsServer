@@ -1,3 +1,4 @@
+short_name: "Business Insider"
 root_domain: "businessinsider.com"
 start_url: "http://www.businessinsider.com"
 path_blacklist {

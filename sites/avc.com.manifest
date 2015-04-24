@@ -1,3 +1,4 @@
+short_name: "avc.com"
 root_domain: "avc.com"
 start_url: "http://avc.com"
 path_blacklist {

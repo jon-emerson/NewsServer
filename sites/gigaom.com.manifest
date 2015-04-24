@@ -1,3 +1,4 @@
+short_name: "Gigaom"
 root_domain: "gigaom.com"
 is_https: true
 start_url: "https://gigaom.com/"

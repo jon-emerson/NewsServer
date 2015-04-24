@@ -1,3 +1,4 @@
+short_name: "Car and Driver"
 root_domain: "caranddriver.com"
 start_url: "http://www.caranddriver.com"
 subdomain_blacklist: "backfires.caranddriver.com"

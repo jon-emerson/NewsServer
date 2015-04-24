@@ -1,3 +1,4 @@
+short_name: "Archinect"
 root_domain: "archinect.com"
 start_url: "http://archinect.com/"
 paragraph_selector: ".Intro p"

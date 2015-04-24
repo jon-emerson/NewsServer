@@ -1,3 +1,4 @@
+short_name: "Realty Times"
 root_domain: "realtytimes.com"
 start_url: "http://realtytimes.com/"
 path_blacklist {

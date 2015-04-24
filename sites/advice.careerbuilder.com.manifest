@@ -1,3 +1,4 @@
+short_name: "CareerBuilder"
 root_domain: "advice.careerbuilder.com"
 start_url: "http://advice.careerbuilder.com"
 paragraph_selector: ".post-body > p"

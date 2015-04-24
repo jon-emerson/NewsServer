@@ -1,3 +1,4 @@
+short_name: "The Verge"
 root_domain: "theverge.com"
 start_url: "http://www.theverge.com"
 path_blacklist {

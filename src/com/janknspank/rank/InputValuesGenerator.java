@@ -12,11 +12,13 @@ import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
-import com.janknspank.classifier.ClassifierException;
-import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.FeatureType;
-import com.janknspank.classifier.ManualHeuristicFeature;
+import com.janknspank.classifier.manual.ManualFeatureAcquisitions;
+import com.janknspank.classifier.manual.ManualFeatureBigMoney;
+import com.janknspank.classifier.manual.ManualFeatureFundraising;
+import com.janknspank.classifier.manual.ManualFeatureLaunches;
+import com.janknspank.classifier.manual.ManualFeatureQuarterlyEarnings;
 import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
@@ -190,45 +192,38 @@ public class InputValuesGenerator {
   }
 
   public static double relevanceToStartups(User user, Article article) {
-    ArticleFeature startupFeature =
-        ArticleFeatures.getFeature(article, FeatureId.STARTUPS);
-    return (startupFeature == null) ? 0 : startupFeature.getSimilarity();
+    return ArticleFeatures.getFeatureSimilarity(article, FeatureId.STARTUPS);
   }
 
-  public static double relevanceToAcquisitions(User user, Article article) {
-    return relevanceToManualHeuristicFeature(
-        FeatureId.MANUAL_HEURISTIC_ACQUISITIONS, user, article);
+  public static double relevanceToAcquisitions(Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureAcquisitions.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_ACQUISITIONS)
+        : 0;
   }
 
-  public static double relevanceToLaunches(User user, Article article) {
-    return relevanceToManualHeuristicFeature(FeatureId.MANUAL_HEURISTIC_LAUNCHES, user, article);
+  public static double relevanceToLaunches(Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureLaunches.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_LAUNCHES)
+        : 0;
   }
 
-  public static double relevanceToFundraising(User user, Article article) {
-    return relevanceToManualHeuristicFeature(FeatureId.MANUAL_HEURISTIC_FUNDRAISING, user, article);
+  public static double relevanceToFundraising(Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureFundraising.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_FUNDRAISING)
+        : 0;
   }
 
-  public static double relevanceToBigMoney(User user, Article article) {
-    return relevanceToManualHeuristicFeature(FeatureId.MANUAL_HEURISTIC_BIG_MONEY, user, article);
+  public static double relevanceToBigMoney(Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureBigMoney.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_BIG_MONEY)
+        : 0;
   }
 
-  public static double relevanceToQuarterlyEarnings(User user, Article article) {
-    return relevanceToManualHeuristicFeature(
-        FeatureId.MANUAL_HEURISTIC_QUARTERLY_EARNINGS, user, article);
-  }
-
-  private static double relevanceToManualHeuristicFeature(FeatureId featureId, 
-      User user, Article article) {
-    ArticleFeature articleFeature =
-        ArticleFeatures.getFeature(article, featureId);
-    if (articleFeature != null) {
-      ManualHeuristicFeature feature = 
-          (ManualHeuristicFeature) Feature.getFeature(featureId);
-      if (feature.isRelevantToUser(user)) {
-        return articleFeature.getSimilarity();
-      }
-    }
-    return 0;
+  public static double relevanceToQuarterlyEarnings(
+      Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureQuarterlyEarnings.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_QUARTERLY_EARNINGS)
+        : 0;
   }
 
   private static Map<FeatureId, Double> getArticleIndustryMap(Article article) {
@@ -247,9 +242,6 @@ public class InputValuesGenerator {
    * [0, 1], on a linear scale.
    */
   public static double getOptimizedFeatureValue(Article article, FeatureId featureId) {
-    ArticleFeature murderCrimeWarFeature =
-        ArticleFeatures.getFeature(article, featureId);
-    return (murderCrimeWarFeature == null) ? 0 :
-        Math.max(0, murderCrimeWarFeature.getSimilarity() * 3 - 2);
+    return Math.max(0, ArticleFeatures.getFeatureSimilarity(article, featureId) * 3 - 2);
   }
 }

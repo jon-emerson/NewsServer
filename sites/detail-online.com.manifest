@@ -1,3 +1,4 @@
+short_name: "DETAIL"
 root_domain: "detail-online.com"
 start_url: "http://www.detail-online.com/"
 paragraph_selector: ".content-element p" # http://www.detail-online.com/architecture/news/

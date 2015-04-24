@@ -1,3 +1,4 @@
+short_name: "URDesign"
 root_domain: "urdesign.it"
 start_url: "http://www.urdesign.it/"
 paragraph_selector: ".post_excerpt > p"

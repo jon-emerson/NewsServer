@@ -1,3 +1,4 @@
+short_name: "Startup Workout"
 root_domain: "startupworkout.com"
 start_url: "http://startupworkout.com"
 paragraph_selector: ".entry-content p"

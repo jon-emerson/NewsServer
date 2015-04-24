@@ -1,3 +1,4 @@
+short_name: "Cruzine"
 root_domain: "cruzine.com"
 start_url: "http://www.cruzine.com/"
 paragraph_selector: ".post .inner h3"

@@ -1,3 +1,4 @@
+short_name: "Skift"
 root_domain: "skift.com"
 start_url: "http://skift.com/"
 paragraph_selector: "#post-copy > p"

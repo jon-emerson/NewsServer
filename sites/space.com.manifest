@@ -1,3 +1,4 @@
+short_name: "Space.com"
 root_domain: "space.com"
 start_url: "http://www.space.com"
 subdomain_blacklist: "store.space.com"

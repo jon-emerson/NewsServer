@@ -1,3 +1,4 @@
+short_name: "Science Daily"
 root_domain: "sciencedaily.com"
 start_url: "http://www.sciencedaily.com"
 start_url: "http://www.sciencedaily.com/news/health_medicine/"

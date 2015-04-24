@@ -2,14 +2,21 @@ package com.janknspank.rank;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.nnet.learning.BackPropagation;
 
-import com.google.api.client.util.Maps;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.Urls;
 import com.janknspank.bizness.UserIndustries;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.Asserts;
@@ -17,6 +24,8 @@ import com.janknspank.crawler.Interpreter;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
@@ -75,13 +84,17 @@ public final class NeuralNetworkScorer extends Scorer {
     linkedHashMap.put("startup", InputValuesGenerator.relevanceToStartups(user, article));
 
     // 7. Relevance to acquisitions.
-    linkedHashMap.put("acquisitions", InputValuesGenerator.relevanceToAcquisitions(user, article));
+    Set<FeatureId> userIndustryFeatureIds = getUserIndustryFeatureIds(user);
+    linkedHashMap.put("acquisitions",
+        InputValuesGenerator.relevanceToAcquisitions(userIndustryFeatureIds, article));
 
     // 8. Relevance to launches.
-    linkedHashMap.put("launches", InputValuesGenerator.relevanceToLaunches(user, article));
+    linkedHashMap.put("launches",
+        InputValuesGenerator.relevanceToLaunches(userIndustryFeatureIds, article));
 
     // 9. Relevance to start-up fundraising rounds.
-    linkedHashMap.put("fundraising", InputValuesGenerator.relevanceToFundraising(user, article));
+    linkedHashMap.put("fundraising",
+        InputValuesGenerator.relevanceToFundraising(userIndustryFeatureIds, article));
 
     // 10. Topic scores.  If the user's actually interested in any of these
     // things, then we null out the scores (because otherwise the neural
@@ -97,13 +110,38 @@ public final class NeuralNetworkScorer extends Scorer {
         ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
 
     // 12. Relevance to big money
-    linkedHashMap.put("big_money", InputValuesGenerator.relevanceToBigMoney(user, article));
+    linkedHashMap.put("big_money",
+        InputValuesGenerator.relevanceToBigMoney(userIndustryFeatureIds, article));
 
     // 13. Relevance to quarterly earnings
     linkedHashMap.put("quarterly_earnings", 
-        InputValuesGenerator.relevanceToQuarterlyEarnings(user, article));
+        InputValuesGenerator.relevanceToQuarterlyEarnings(userIndustryFeatureIds, article));
 
     return linkedHashMap;
+  }
+
+  /**
+   * Returns a Set of all the industries the passed user is following, as
+   * FeatureId objects.
+   */
+  @VisibleForTesting
+  static Set<FeatureId> getUserIndustryFeatureIds(User user) {
+    return ImmutableSet.copyOf(
+        Iterables.transform(
+            Iterables.filter(
+                UserInterests.getInterests(user),
+                new Predicate<Interest>() {
+                  @Override
+                  public boolean apply(Interest interest) {
+                    return interest.getType() == InterestType.INDUSTRY;
+                  }
+                }),
+            new Function<Interest, FeatureId>() {
+              @Override
+              public FeatureId apply(Interest interest) {
+                return FeatureId.fromId(interest.getIndustryCode());
+              }
+            }));
   }
 
   @Override

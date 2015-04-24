@@ -1,3 +1,4 @@
+short_name: "ArtNet"
 root_domain: "artnet.com"
 is_https: true
 start_url: "https://news.artnet.com/"

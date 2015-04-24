@@ -1,3 +1,4 @@
+short_name: "The Telegraph"
 root_domain: "telegraph.co.uk"
 start_url: "http://www.telegraph.co.uk"
 subdomain_blacklist: "advertising.telegraph.co.uk"

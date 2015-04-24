@@ -1,3 +1,4 @@
+short_name: "Breitbart"
 root_domain: "breitbart.com"
 start_url: "http://www.breitbart.com"
 path_blacklist {

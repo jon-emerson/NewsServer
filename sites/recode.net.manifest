@@ -1,3 +1,4 @@
+short_name: "Re/code"
 root_domain: "recode.net"
 start_url: "http://recode.net"
 subdomain_blacklist: "on.recode.net"

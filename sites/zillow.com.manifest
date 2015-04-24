@@ -1,3 +1,4 @@
+short_name: "Zillow"
 root_domain: "zillow.com"
 start_url: "http://www.zillow.com/blog/"
 path_blacklist {

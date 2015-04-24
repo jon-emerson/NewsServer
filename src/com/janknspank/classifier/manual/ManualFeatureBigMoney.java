@@ -1,6 +1,7 @@
 package com.janknspank.classifier.manual;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -10,7 +11,6 @@ import com.google.common.collect.ImmutableSet;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.ManualHeuristicFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
-import com.janknspank.proto.UserProto.User;
 
 public class ManualFeatureBigMoney extends ManualHeuristicFeature {
   private static final Map<Pattern, Double> TITLE_SCORES =
@@ -66,7 +66,7 @@ public class ManualFeatureBigMoney extends ManualHeuristicFeature {
         BODY_SCORES, BODY_BLACKLIST);
   }
 
-  public boolean isRelevantToUser(User user) {
-    return isRelevantToUser(user, RELEVANT_TO_INDUSTRIES);
+  public static boolean isRelevantToUser(Set<FeatureId> userIndustryFeatureIds) {
+    return !Collections.disjoint(RELEVANT_TO_INDUSTRIES, userIndustryFeatureIds);
   }
 }

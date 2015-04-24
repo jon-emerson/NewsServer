@@ -1,3 +1,4 @@
+short_name: "Inman"
 root_domain: "inman.com"
 start_url: "http://www.inman.com/"
 use_first_paragraph_as_description: true

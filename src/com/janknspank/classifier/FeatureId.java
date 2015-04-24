@@ -85,7 +85,7 @@ public enum FeatureId {
       "Hard-coded search term checks if an article has to do with an S1 Filing"),
   MANUAL_HEURISTIC_BIG_SWING_IN_STOCK_PRICE(30007, FeatureType.MANUAL_HEURISTIC,
       "Hard-coded search term checks if an article has to do with big stock price change"),
-  MANUAL_HEURISTIC_IS_LIST(30006, FeatureType.MANUAL_HEURISTIC,
+  MANUAL_HEURISTIC_IS_LIST(30008, FeatureType.MANUAL_HEURISTIC,
       "Hard-coded search term checks for if an article is a buzz-feed like list of things"),
   TOPIC_SPORTS(40000, FeatureType.TOPIC,
       "Sports"),

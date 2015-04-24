@@ -1,3 +1,4 @@
+short_name: "Slate"
 root_domain: "slate.com"
 start_url: "http://www.slate.com"
 subdomain_blacklist: "innovate.slate.com"

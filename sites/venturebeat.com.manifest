@@ -1,3 +1,4 @@
+short_name: "VentureBeat"
 root_domain: "venturebeat.com"
 start_url: "http://venturebeat.com"
 subdomain_blacklist: "events.venturebeat.com"

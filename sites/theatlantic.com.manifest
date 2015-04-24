@@ -1,3 +1,4 @@
+short_name: "The Atlantic"
 root_domain: "theatlantic.com"
 start_url: "http://www.theatlantic.com"
 paragraph_selector: ".article-content p"

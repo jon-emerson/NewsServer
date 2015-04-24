@@ -1,3 +1,4 @@
+short_name: "SiliconBeat"
 root_domain: "siliconbeat.com"
 start_url: "http://www.siliconbeat.com"
 paragraph_selector: ".post-content > p"

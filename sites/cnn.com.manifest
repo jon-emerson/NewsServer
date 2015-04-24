@@ -1,3 +1,4 @@
+short_name: "CNN"
 root_domain: "cnn.com"
 start_url: "http://www.cnn.com"
 subdomain_blacklist: "arabic.cnn.com"

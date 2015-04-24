@@ -1,3 +1,4 @@
+short_name: "Aljazeera"
 root_domain: "america.aljazeera.com"
 start_url: "http://america.aljazeera.com"
 paragraph_selector: ".text > p"

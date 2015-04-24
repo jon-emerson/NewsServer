@@ -1,3 +1,4 @@
+short_name: "FX Street"
 root_domain: "fxstreet.com"
 start_url: "http://www.fxstreet.com/news/"
 path_blacklist {

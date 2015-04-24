@@ -1,3 +1,4 @@
+short_name: "Rigzone"
 root_domain: "rigzone.com"
 start_url: "http://www.rigzone.com/"
 path_blacklist {

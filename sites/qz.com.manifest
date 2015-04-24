@@ -1,3 +1,4 @@
+short_name: "Quartz"
 root_domain: "qz.com"
 start_url: "http://qz.com/"
 paragraph_selector: ".item-body p"

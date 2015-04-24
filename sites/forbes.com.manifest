@@ -1,3 +1,4 @@
+short_name: "Forbes"
 root_domain: "forbes.com"
 start_url: "http://www.forbes.com"
 subdomain_blacklist: "blogs.forbes.com" # This is their account management site.

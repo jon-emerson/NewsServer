@@ -1,3 +1,4 @@
+short_name: "National Journal"
 root_domain: "nationaljournal.com"
 start_url: "http://www.nationaljournal.com/"
 path_blacklist {

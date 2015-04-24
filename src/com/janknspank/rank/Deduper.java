@@ -5,10 +5,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.SocialEngagements;
+import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
@@ -120,5 +124,18 @@ public class Deduper {
       }
     }
     return dedupedArticles;
+  }
+
+  public static void main(String args[]) throws Exception {
+    String url1 = args[0];
+    String url2 = args[1];
+    Map<String, Article> articles = ArticleCrawler.getArticles(ImmutableList.of(url1, url2), false);
+    Article article1 = Iterables.get(articles.values(), 0);
+    Article article2 = Iterables.get(articles.values(), 1);
+    System.out.println("Article 1 deduping stems: \""
+        + Joiner.on("\", \"").join(article1.getDedupingStemsList()) + "\"");
+    System.out.println("Article 2 deduping stems: \""
+        + Joiner.on("\", \"").join(article2.getDedupingStemsList()) + "\"");
+    System.out.println("Is dupe? " + isDupe(article1, article2));
   }
 }

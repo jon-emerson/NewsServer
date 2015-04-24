@@ -1,3 +1,4 @@
+short_name: "Thrillist"
 root_domain: "thrillist.com"
 start_url: "http://www.thrillist.com/food-and-drink"
 paragraph_selector: ".node-body p"

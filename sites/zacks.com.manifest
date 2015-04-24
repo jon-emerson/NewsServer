@@ -1,3 +1,4 @@
+short_name: "Zacks"
 root_domain: "zacks.com"
 start_url: "http://www.zacks.com/"
 paragraph_selector: ".commentary_body > p"

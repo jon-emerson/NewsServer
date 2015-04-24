@@ -1,3 +1,4 @@
+short_name: "Medium"
 root_domain: "medium.com"
 is_https: true
 start_url: "https://medium.com"

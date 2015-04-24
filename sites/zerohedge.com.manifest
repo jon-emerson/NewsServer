@@ -1,3 +1,4 @@
+short_name: "Zero Hedge"
 root_domain: "zerohedge.com"
 start_url: "http://www.zerohedge.com/"
 path_blacklist {

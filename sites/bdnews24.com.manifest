@@ -1,3 +1,4 @@
+short_name: "BDNews24"
 root_domain: "bdnews24.com"
 start_url: "http://bdnews24.com"
 subdomain_blacklist: "ads.bdnews24.com"

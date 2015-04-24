@@ -1,3 +1,4 @@
+short_name: "CityLab"
 root_domain: "citylab.com"
 start_url: "http://citylab.com/"
 paragraph_selector: "#article-body p"

@@ -1,3 +1,4 @@
+short_name: "Investors.com"
 root_domain: "investors.com"
 start_url: "http://www.investors.com/default.htm"
 paragraph_selector: "#article-content > p"

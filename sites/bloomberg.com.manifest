@@ -1,3 +1,4 @@
+short_name: "Bloomberg"
 root_domain: "bloomberg.com"
 start_url: "http://www.bloomberg.com"
 subdomain_blacklist: "bdn-ak.bloomberg.com"

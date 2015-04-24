@@ -1,3 +1,4 @@
+short_name: "FeldThoughts"
 root_domain: "feld.com"
 start_url: "http://www.feld.com/"
 paragraph_selector: ".entry-content p"

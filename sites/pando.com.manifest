@@ -1,3 +1,4 @@
+short_name: "Pando Daily"
 root_domain: "pando.com"
 subdomain_blacklist: "sponsored.pando.com"
 start_url: "http://pando.com/"

@@ -1,3 +1,4 @@
+short_name: "User Testing"
 root_domain: "usertesting.com"
 start_url: "http://www.usertesting.com/blog/"
 path_blacklist {

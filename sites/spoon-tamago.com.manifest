@@ -1,3 +1,4 @@
+short_name: "Spoon and Tamago"
 root_domain: "spoon-tamago.com"
 start_url: "http://www.spoon-tamago.com/"
 subdomain_blacklist: "shop.spoon-tamago.com"

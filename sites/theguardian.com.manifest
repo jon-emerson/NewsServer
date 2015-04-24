@@ -1,3 +1,4 @@
+short_name: "The Guardian"
 root_domain: "theguardian.com"
 start_url: "http://www.theguardian.com"
 subdomain_blacklist: "discussion.theguardian.com"

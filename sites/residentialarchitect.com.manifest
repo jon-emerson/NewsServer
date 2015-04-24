@@ -1,3 +1,4 @@
+short_name: "residentialarchitect"
 root_domain: "residentialarchitect.com"
 start_url: "http://www.residentialarchitect.com/"
 paragraph_selector: ".article-body p"

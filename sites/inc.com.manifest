@@ -1,3 +1,4 @@
+short_name: "Inc"
 root_domain: "inc.com"
 start_url: "http://www.inc.com/sitemaps"
 paragraph_selector: ".article-body p"
