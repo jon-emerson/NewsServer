@@ -3,6 +3,7 @@ package com.janknspank.utils;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.ArticleFeatures;
@@ -11,8 +12,10 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.IosPushNotificationHelper;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
+import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -128,7 +131,8 @@ public class PushDailyNotifications {
     // Don't consider articles older than the last time the user used the app or
     // the last time we sent him/her a notification.
     long lastNotificationTime = getLastNotificationTime(user);
-    long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime);
+    long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime)
+        - TimeUnit.MINUTES.toMillis(30);
 
     // Get the user's stream.
     TopList<Article, Double> rankedArticles =
@@ -139,7 +143,7 @@ public class PushDailyNotifications {
     int bestArticleScore = -1;
     for (Article article : rankedArticles) {
       // Don't consider articles that are older than the time cutoff.
-      if (article.getPublishedTime() < timeCutoff
+      if (Articles.getPublishedTime(article) < timeCutoff
           || (article.hasOldestHotDuplicateTime()
               && article.getOldestHotDuplicateTime() < timeCutoff)) {
         continue;
@@ -159,11 +163,58 @@ public class PushDailyNotifications {
     // notifications so that eventually we'll send a notification, and usually
     // it'll be an important one.
     int hoursSinceNotification = (int) (lastNotificationTime / TimeUnit.HOURS.toMillis(1));
-    int scoreNecessaryToTriggerNotification = 300 - (10 * hoursSinceNotification);
+    int scoreNecessaryToTriggerNotification = 300 - (7 * hoursSinceNotification);
     if (bestArticleScore >= scoreNecessaryToTriggerNotification) {
       return bestArticle; // This may be null - that's OK.
     }
     return null;
+  }
+
+  public static void testMain(String args[]) throws Exception {
+    User user = Users.getByEmail("jon@jonemerson.net");
+    Article article = Iterables.getFirst(ArticleCrawler.getArticles(
+        ImmutableList.of("http://www.telegraph.co.uk/news/worldnews/asia/"
+            + "nepal/11563157/Google-person-finder-tool-deployed-to-help-"
+            + "relatives-find-loved-ones-in-Nepal.html"), true /* retain */).values(), null);
+    describeArticleUser(article, user);
+
+    TopList<Article, Double> rankedArticles =
+        Articles.getRankedArticles(user, NeuralNetworkScorer.getInstance(), 40);
+    long lastNotificationTime = getLastNotificationTime(user);
+    long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime);
+    int i = 0;
+    for (Article rankedArticle : rankedArticles) {
+      if (rankedArticle.getCrawlTime() < timeCutoff) {
+        continue;
+      }
+      if (i++ >= 10) {
+        continue;
+      }
+      describeArticleUser(rankedArticle, user);
+    }
+  }
+
+  private static void describeArticleUser(Article article, User user) {
+    System.out.println("\"" + article.getTitle() + "\"");
+    System.out.println(article.getUrl());
+    Set<String> followedEntityIds = getFollowedEntityIds(user);
+    System.out.println("isAboutEvent = " + isArticleAboutEvent(article));
+    System.out.println("isAboutFollowedCompany = " + isArticleAboutFollowedCompany(article, followedEntityIds));
+    System.out.println("isAboutCompany = " + isArticleAboutCompany(article));
+    double neuralNetworkScore = NeuralNetworkScorer.getInstance().getScore(user, article);
+
+    int hotScore = 0;
+    if (article.getHotCount() > 2) {
+      hotScore += 100;
+    } else if (isArticleAboutEvent(article) || article.getHotCount() == 2) {
+      hotScore += 75;
+    }
+    System.out.println("hotScore = " + hotScore);
+
+    System.out.println("neuralNetworkScore = " + neuralNetworkScore);
+    System.out.println("score = "
+        + getArticleNotificationScore(article, followedEntityIds, neuralNetworkScore));
+    System.out.println();
   }
 
   public static void main(String args[]) throws Exception {
