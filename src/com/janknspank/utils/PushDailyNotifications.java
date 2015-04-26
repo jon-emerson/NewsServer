@@ -162,7 +162,8 @@ public class PushDailyNotifications {
     // possible notification score.  So we have a time fall-off between
     // notifications so that eventually we'll send a notification, and usually
     // it'll be an important one.
-    int hoursSinceNotification = (int) (lastNotificationTime / TimeUnit.HOURS.toMillis(1));
+    int hoursSinceNotification =
+        (int) ((System.currentTimeMillis() - lastNotificationTime) / TimeUnit.HOURS.toMillis(1));
     int scoreNecessaryToTriggerNotification = 300 - (7 * hoursSinceNotification);
     if (bestArticle != null
         && bestArticleScore >= scoreNecessaryToTriggerNotification) {
