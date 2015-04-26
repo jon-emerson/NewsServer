@@ -164,8 +164,12 @@ public class PushDailyNotifications {
     // it'll be an important one.
     int hoursSinceNotification = (int) (lastNotificationTime / TimeUnit.HOURS.toMillis(1));
     int scoreNecessaryToTriggerNotification = 300 - (7 * hoursSinceNotification);
-    if (bestArticleScore >= scoreNecessaryToTriggerNotification) {
-      return bestArticle; // This may be null - that's OK.
+    if (bestArticle != null
+        && bestArticleScore >= scoreNecessaryToTriggerNotification) {
+      return bestArticle.toBuilder()
+          .setTitle(bestArticleScore + "/" + scoreNecessaryToTriggerNotification + " "
+              + bestArticle.getTitle())
+          .build();
     }
     return null;
   }
