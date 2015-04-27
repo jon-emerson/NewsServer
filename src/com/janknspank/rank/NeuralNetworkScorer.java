@@ -54,14 +54,8 @@ public final class NeuralNetworkScorer extends Scorer {
     Asserts.assertNotNull(article, "article", NullPointerException.class);
     LinkedHashMap<String, Double> linkedHashMap = Maps.newLinkedHashMap();
 
-    // 0. Relevant to user's industries?
-    // NOTE(jonemerson): This used to be a raw signal of the highest similarity
-    // score that matched a user's industries.  Turns out, the neural network
-    // does a lot better if we're more explicit about it... to the tune of 3%
-    // improvement on error rates (!!!).  Therefore, we return in buckets of 0,
-    // 0.5, and 1.0, instead of a true double.
-    double relevance = InputValuesGenerator.relevanceToUserIndustries(user, article);
-    linkedHashMap.put("industries", (relevance > 0.5) ? ((relevance > 0.9) ? 1 : 0.5) : 0.0);
+    // 0. Relevance to user's industries.
+    linkedHashMap.put("industries", InputValuesGenerator.relevanceToUserIndustries(user, article));
 
     // 1. Nearby industry count.  Value relative to the number of industries
     // this article is about that the user is not explicitly interested in.
