@@ -111,6 +111,10 @@ public final class NeuralNetworkScorer extends Scorer {
     linkedHashMap.put("quarterly_earnings", 
         InputValuesGenerator.relevanceToQuarterlyEarnings(userIndustryFeatureIds, article));
 
+    // 14. Is it a list of things
+//    linkedHashMap.put("is_list", 
+//        InputValuesGenerator.relevanceToList(userIndustryFeatureIds, article));
+
     return linkedHashMap;
   }
 

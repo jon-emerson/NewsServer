@@ -15,11 +15,6 @@ import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 public class ManualFeatureBigMoney extends ManualHeuristicFeature {
   private static final Map<Pattern, Double> TITLE_SCORES =
       ImmutableMap.<Pattern, Double>builder()
-          // Trillion
-          .put(Pattern.compile("[\\$€][0-9]+(\\.\\d+)?t"), 1.0)
-          .put(Pattern.compile("[\\$€][0-9]+(\\.\\d+)? trillion"), 1.0)
-          .put(Pattern.compile("[0-9]+(\\.\\d+)?t (dollars|euros|swiss franc)"), 1.0)
-          .put(Pattern.compile("[0-9]+(\\.\\d+)? trillion (dollars|euros|swiss franc)"), 1.0)
           // Billion
           .put(Pattern.compile("[\\$€][0-9]+(\\.\\d+)?b"), 1.0)
           .put(Pattern.compile("[\\$€][0-9]+(\\.\\d+)? billion"), 1.0)

@@ -1,0 +1,58 @@
+short_name: "abovethecrowd.com"
+root_domain: "abovethecrowd.com"
+start_url: "http://abovethecrowd.com/"
+path_blacklist {
+  needle: "/about/"
+}
+paragraph_selector: ".post-content > p"
+paragraph_blacklist {
+  text_regex: "^\\[An edited"
+}
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://abovethecrowd.com/2015/02/25/investors-beware/"
+    article_url: "http://abovethecrowd.com/2015/01/30/ubers-new-bhag-uberpool/"
+    article_url: "http://abovethecrowd.com/2014/07/23/meet-benchmarks-new-partner-eric-vishria/"
+    article_url: "http://abovethecrowd.com/2014/07/11/how-to-miss-by-a-mile-an-alternative-look-at-ubers-potential-market-size/"
+    article_url: "http://abovethecrowd.com/2014/06/24/welcoming-jason-kilar-richard-tom-and-the-vessel-team-to-the-benchmark-family/"
+    non_article_url: "http://abovethecrowd.com/about/"
+    non_article_url: "http://abovethecrowd.com/archives/"
+    non_article_url: "http://abovethecrowd.com/XYZ111/"
+    non_article_url: "http://abovethecrowd.com/XYZ222/"
+    non_article_url: "http://abovethecrowd.com/XYZ333/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}

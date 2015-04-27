@@ -51,10 +51,6 @@ feature_boost_pattern {
   boost: 5
 }
 feature_boost_pattern {
-  feature_id: 20001 # Related to traditional brick and mortar startups
-  boost: 2
-}
-feature_boost_pattern {
   feature_id: 10501 # Internet
   boost: 1
 }
