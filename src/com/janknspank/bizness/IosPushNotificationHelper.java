@@ -174,8 +174,8 @@ public class IosPushNotificationHelper {
   private static String getText(Article article) {
     SiteManifest site = SiteManifests.getForUrl(article.getUrl());
     String text = (site == null ? "" : site.getShortName() + ": ") + article.getTitle();
-    if (text.length() > 100) {
-      text = text.substring(0, 97) + "...";
+    if (text.length() > 110) {
+      text = text.substring(0, 107) + "...";
     }
     return text;
   }
@@ -201,7 +201,11 @@ public class IosPushNotificationHelper {
     aps.put("alert", alertInner);
     aps.put("badge", 1);
     aps.put("sound", "default");
-    aps.put("content-available", 1);
+
+    // In client v1.1, start doing this again: The client needs to be updated to
+    // do a local notification in response to these "silent" notifications in
+    // order to keep notifications in the tray.
+    // aps.put("content-available", 1);
 
     // Create the top-level JSON.
     JSONObject jsonObject = new JSONObject();
