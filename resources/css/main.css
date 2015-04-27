@@ -1,8 +1,3 @@
-@font-face {
-  font-family: Overlock;
-  src: url('/resources/css/Overlock-Bold.ttf');
-}
-
 body {
  line-height: 1.5em;
   font-family: 'PT Sans', sans-serif;
@@ -107,15 +102,15 @@ a.btn-primary,
   max-height: 780px;
   margin: 0px;
   padding: 0px;
-  background: url("/resources/img/perspective-iphone6plus4.png") no-repeat center center;
+  background: url("/resources/img/perspective-iphone6plus4.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   text-align: left;
   padding-top: 0px;
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
-  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/resources/img/perspective-iphone6plus4.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/resources/img/perspective-iphone6plus4.jpg', sizingMethod='scale')";
 }
 
 .jumbotron .container {
@@ -256,7 +251,7 @@ a.btn-primary,
 }
 
 #section-1 {
-  background: url("/resources/img/leading-section-background6flat@2x.png")  no-repeat center center;
+  background: url("/resources/img/leading-section-background6flat@2x.jpg")  no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -275,7 +270,7 @@ a.btn-primary,
 }
 
 #section-3 {
-  background: url("/resources/img/leading-section-background5flat@2x.png")  no-repeat center center;
+  background: url("/resources/img/leading-section-background5flat@2x.jpg")  no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -284,7 +279,7 @@ a.btn-primary,
 }
 
 #section-4 {
-  background-image: url("/resources/img/realistic-commute2.jpg");
+  background-image: url("/resources/img/realistic-commute3.jpg");
   background-repeat: no-repeat;
   background-position:  0% 100%;
   -webkit-background-size: cover;
@@ -321,7 +316,7 @@ a.btn-primary,
 
 #section-6 {
   background-color: #FE3852;
-  background: url("/resources/img/section-background-blue1flat@2x.png")  no-repeat center center;
+  background: url("/resources/img/section-background-blue1flat@2x.jpg")  no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -577,7 +572,7 @@ a.btn-primary,
   }
 
   #section-4 {
-    background-image: url("/resources/img/realistic-commute-narrow1.jpg");
+    background-image: url("/resources/img/realistic-commute-narrow2.jpg");
   }
 
   #section-4-row {
