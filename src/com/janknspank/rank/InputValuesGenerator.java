@@ -92,15 +92,39 @@ public class InputValuesGenerator {
     }
   };
 
+  /**
+   * Returns a score for how relevant the passed article is to industries that
+   * the user is following.  The scores go as follow:
+   *  0 - No match
+   *  0.5 - Match on something, but not a strong match
+   *  0.8 - Strong match on 1 industry
+   *  0.9 - Strong match on 2 industries
+   *  1.0 - Strong match on 3 or more industries
+   */
   public static double relevanceToUserIndustries(User user, Article article) {
+    boolean matched = false;
+    int numAbove90Percentile = 0;
+
     Map<FeatureId, Double> articleIndustryMap = getArticleIndustryMap(article);
-    double userRelevance = 0;
     for (FeatureId industryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
       if (articleIndustryMap.containsKey(industryFeatureId)) {
-        userRelevance = Math.max(userRelevance, articleIndustryMap.get(industryFeatureId));
+        matched = true;
+        if (articleIndustryMap.get(industryFeatureId) > 0.9) {
+          numAbove90Percentile++;
+        }
       }
     }
-    return userRelevance;
+    switch (numAbove90Percentile) {
+      case 0:
+        return matched ? 0.5 : 0.0;
+      case 1:
+        return 0.8;
+      case 2:
+        return 0.9;
+      default:
+        // 3 or more matched industries.
+        return 1.0;
+    }
   }
 
   /**

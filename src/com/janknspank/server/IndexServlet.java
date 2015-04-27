@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.IPLocationFinder;
 
-@ServletMapping(urlPattern = "/")
 public class IndexServlet extends NewsServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)

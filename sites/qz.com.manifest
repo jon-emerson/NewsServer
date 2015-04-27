@@ -37,7 +37,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10501 # Software
-  boost: 0
+  boost: -1
 }
 feature_boost_pattern {
   feature_id: 10502 # Internet

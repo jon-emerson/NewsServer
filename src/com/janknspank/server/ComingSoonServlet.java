@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.database.DatabaseSchemaException;
 
-@ServletMapping(urlPattern = "/secret")
-public class HomeServlet extends StandardServlet {
+@ServletMapping(urlPattern = "/")
+public class ComingSoonServlet extends StandardServlet {
   /**
    * Returns any Soy data necessary for rendering the .main template for this
    * servlet's Soy page.

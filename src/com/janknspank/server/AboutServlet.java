@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.database.DatabaseSchemaException;
 
-@ServletMapping(urlPattern = "/secret")
-public class HomeServlet extends StandardServlet {
+@ServletMapping(urlPattern = "/about")
+public class AboutServlet extends StandardServlet {
   /**
    * Returns any Soy data necessary for rendering the .main template for this
    * servlet's Soy page.
@@ -15,7 +15,6 @@ public class HomeServlet extends StandardServlet {
   protected SoyMapData getSoyMapData(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException {
     return new SoyMapData(
-        "title", "Spotter - Business news, personalized",
-        "tab", 0);
+        "title", "Spotter - About Us");
   }
 }
