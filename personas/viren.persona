@@ -61,6 +61,9 @@ bad_url: "http://www.elle.com/fashion/accessories/news/a27722/alessandra-ambrosi
 bad_url: "http://www.marketwatch.com/story/capsule-introduces-healthcares-first-analytics-solution-to-utilize-data-across-all-connected-medical-devices-2015-04-12"
 bad_url: "http://www.accountingtoday.com/news/firm-profession/kpmg-elects-lynne-doughtie-as-ceo-74354-1.html"
 bad_url: "http://www.accountingtoday.com/news/audit-accounting/financial-restatements-by-big-companies-increased-last-year-74364-1.html"
+bad_url: "http://www.forbes.com/sites/ewanspence/2015/04/25/htc-one-m9-review-has-htc-unlocked-the-secret-of-smartphone-success/"
+bad_url: "http://www.bloomberg.com/news/articles/2015-04-25/islamic-state-fighters-kill-general-and-127-soldiers-seize-dam"
+bad_url: "http://www.bloomberg.com/news/articles/2015-04-25/u-k-labour-pledges-rent-caps-to-protect-generation-rent-"
 interest {
   id: "550085b9e4b02da05c56c75b"
   type: INDUSTRY
