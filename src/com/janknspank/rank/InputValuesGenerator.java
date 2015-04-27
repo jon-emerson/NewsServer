@@ -17,6 +17,7 @@ import com.janknspank.classifier.FeatureType;
 import com.janknspank.classifier.manual.ManualFeatureAcquisitions;
 import com.janknspank.classifier.manual.ManualFeatureBigMoney;
 import com.janknspank.classifier.manual.ManualFeatureFundraising;
+import com.janknspank.classifier.manual.ManualFeatureIsList;
 import com.janknspank.classifier.manual.ManualFeatureLaunches;
 import com.janknspank.classifier.manual.ManualFeatureQuarterlyEarnings;
 import com.janknspank.nlp.KeywordCanonicalizer;
@@ -247,6 +248,13 @@ public class InputValuesGenerator {
       Set<FeatureId> userIndustryFeatureIds, Article article) {
     return ManualFeatureQuarterlyEarnings.isRelevantToUser(userIndustryFeatureIds)
         ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_QUARTERLY_EARNINGS)
+        : 0;
+  }
+
+  public static double relevanceToList(
+      Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureIsList.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_IS_LIST)
         : 0;
   }
 
