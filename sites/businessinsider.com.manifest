@@ -1,3 +1,4 @@
+short_name: "Business Insider"
 root_domain: "businessinsider.com"
 start_url: "http://www.businessinsider.com"
 path_blacklist {
@@ -15,6 +16,9 @@ path_blacklist {
 }
 paragraph_selector: ".post-content p"
 paragraph_selector: ".intro-content p"
+paragraph_blacklist {
+  selector: "span.caption"
+}
 article_url_pattern {
   path_regex: "^\\/(?!category\\/).*\\-.*\\-"
 }

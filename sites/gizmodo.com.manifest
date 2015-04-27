@@ -1,3 +1,4 @@
+short_name: "Gizmodo"
 root_domain: "gizmodo.com"
 start_url: "http://www.gizmodo.com"
 paragraph_selector: "article > p"

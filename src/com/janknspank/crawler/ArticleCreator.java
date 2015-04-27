@@ -57,12 +57,13 @@ class ArticleCreator {
       "http://images.forbes.com/media/assets/forbes_1200x1200.jpg",
       "http://images.rigzone.com/images/rz-facebook.jpg",
       "http://static01.nyt.com/images/icons/t_logo_291_black.png",
-      "http://www.inc.com/images/incthumb250.png");
+      "http://www.inc.com/images/incthumb250.png",
+      "http://fm.cnbc.com/applications/cnbc.com/staticcontent/img/cnbc_logo.gif");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
-      Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|—)\\s"),
+      Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\\–|\u2014)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
-      Pattern.compile("\\s*(\\||\\-\\-|\\-)\\s+([A-Z][A-Za-z]+\\.com)$"),
-      Pattern.compile("\\s*(\\||\\-\\-|\\-)\\s+[A-Z][A-Za-z\\s'']{2,25}$"),
+      Pattern.compile("\\s*(\\||\\-\\-|\\-|\\–|\u2014)\\s+([A-Z][A-Za-z]+\\.com)$"),
+      Pattern.compile("\\s*(\\||\\-\\-|\\-|\\–|\u2014)\\s+[A-Z][A-Za-z\\s'']{2,25}$"),
       Pattern.compile("\\s+(\\||\\|\\|)\\s+[A-Za-z\\s'']{2,25}$")};
   private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s|\\xA0)+");
 
@@ -73,6 +74,8 @@ class ArticleCreator {
 
   public static Article create(Url url, DocumentNode documentNode)
       throws RequiredFieldException {
+    SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
+
     Article.Builder articleBuilder = Article.newBuilder();
     articleBuilder.setUrlId(url.getId());
     articleBuilder.setUrl(documentNode.getUrl());
@@ -93,7 +96,7 @@ class ArticleCreator {
     }
 
     // Description (required).
-    articleBuilder.setDescription(getDescription(documentNode));
+    articleBuilder.setDescription(getDescription(documentNode, site));
 
     // Image url.
     String imageUrl = getImageUrl(documentNode);
@@ -112,7 +115,7 @@ class ArticleCreator {
         Math.min(System.currentTimeMillis(), getPublishedTime(documentNode, url)));
 
     // Title.
-    String title = getTitle(documentNode);
+    String title = getTitle(documentNode, site);
     if (title != null) {
       articleBuilder.setTitle(title);
     }
@@ -193,7 +196,23 @@ class ArticleCreator {
     return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
   }
 
-  public static String getDescription(DocumentNode documentNode) throws RequiredFieldException {
+  private static String getFirstSignificantParagraphText(DocumentNode documentNode)
+      throws RequiredFieldException {
+    Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
+    for (String paragraph : paragraphs) {
+      if (paragraph.length() >= 50) {
+        return paragraph;
+      }
+    }
+    return Iterables.getFirst(paragraphs, "");
+  }
+
+  public static String getDescription(DocumentNode documentNode, SiteManifest site)
+      throws RequiredFieldException {
+    if (site.getUseFirstParagraphAsDescription()) {
+      return getFirstSignificantParagraphText(documentNode);
+    }
+
     Node metaNode = documentNode.findFirst(ImmutableList.of(
         "html > head meta[name=\"sailthru.description\"]", // Best, at least on techcrunch.com.
         "html > head meta[name=\"description\"]",
@@ -207,14 +226,7 @@ class ArticleCreator {
     }
     if (Strings.isNullOrEmpty(description)) {
       // Fall back to the first significant paragraph.
-      Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
-      description = Iterables.getFirst(paragraphs, null);
-      for (String paragraph : paragraphs) {
-        if (paragraph.length() >= 50) {
-          description = paragraph;
-          break;
-        }
-      }
+      description = getFirstSignificantParagraphText(documentNode);
     }
 
     if (description.length() > MAX_DESCRIPTION_LENGTH) {
@@ -425,6 +437,10 @@ class ArticleCreator {
   @VisibleForTesting
   static String cleanTitle(String title) {
     title = StringHelper.unescape(title);
+
+    // Remove duplicative spaces.
+    title = title.replaceAll("(\\s|\\xA0){2,100}", " ");
+
     for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLES) {
       Matcher matcher = pattern.matcher(title);
       if (matcher.find()) {
@@ -440,10 +456,9 @@ class ArticleCreator {
     return title.trim();
   }
 
-  public static String getTitle(DocumentNode documentNode)
+  public static String getTitle(DocumentNode documentNode, SiteManifest site)
       throws RequiredFieldException {
     // First, see if the manifest tells us a specific place to check.
-    SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
     if (site != null && site.getTitleSelectorCount() > 0) {
       Node titleNode = documentNode.findFirst(site.getTitleSelectorList());
       if (titleNode != null) {

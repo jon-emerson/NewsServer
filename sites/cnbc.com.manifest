@@ -1,3 +1,4 @@
+short_name: "CNBC"
 root_domain: "cnbc.com"
 start_url: "http://www.cnbc.com"
 subdomain_blacklist: "data.cnbc.com"

@@ -1,0 +1,27 @@
+short_name: "FeldThoughts"
+root_domain: "feld.com"
+start_url: "http://www.feld.com/"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "^\\/archives\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.feld.com/archives/2015/04/board-operating-system.html"
+    article_url: "http://www.feld.com/archives/2015/01/kauffman-thoughtbook-2015.html"
+    article_url: "http://www.feld.com/archives/2015/03/book-sum-forty-tales-afterlives.html"
+    article_url: "http://www.feld.com/archives/2015/03/2430-denmark-garland-texas.html"
+    article_url: "http://www.feld.com/archives/2015/03/boulder-startup-community-members-help-fund-code-america-fellowship.html"
+    non_article_url: "http://www.feld.com/archives/category/entrepreneurship"
+    non_article_url: "http://www.feld.com/marathons"
+    non_article_url: "http://www.feld.com/archives/tag/change"
+    non_article_url: "http://www.feld.com/legal"
+    non_article_url: "http://www.feld.com/archives/tag/startup-communities"
+    non_article_url: "http://www.feld.com/archives/category/books"
+    non_article_url: "http://www.feld.com/archives/category/books/page/83"
+  }
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}

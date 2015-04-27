@@ -1,3 +1,4 @@
+short_name: "Architect"
 root_domain: "architectmagazine.com"
 start_url: "http://www.architectmagazine.com/"
 paragraph_selector: "h3[itemprop=\"alternativeHeadline\"]"

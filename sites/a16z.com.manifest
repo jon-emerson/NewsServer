@@ -1,3 +1,4 @@
+short_name: "a16z.com"
 root_domain: "a16z.com"
 start_url: "http://a16z.com/"
 path_blacklist {

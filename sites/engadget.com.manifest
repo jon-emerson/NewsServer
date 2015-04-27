@@ -1,3 +1,4 @@
+short_name: "Engadget"
 root_domain: "engadget.com"
 start_url: "http://www.engadget.com"
 path_blacklist {
@@ -66,6 +67,10 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
   boost: 0
 }
 feature_boost_pattern {

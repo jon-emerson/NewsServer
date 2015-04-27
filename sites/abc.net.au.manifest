@@ -1,3 +1,4 @@
+short_name: "abc.net.au"
 root_domain: "abc.net.au"
 start_url: "http://www.abc.net.au/"
 subdomain_blacklist: "about.abc.net.au"

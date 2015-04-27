@@ -19,11 +19,13 @@ import org.json.JSONObject;
 
 import com.google.common.collect.Maps;
 import com.janknspank.common.Host;
+import com.janknspank.crawler.SiteManifests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.proto.PushNotificationProto.DeviceRegistration;
 import com.janknspank.proto.PushNotificationProto.DeviceType;
 import com.janknspank.proto.PushNotificationProto.PushNotification;
@@ -170,9 +172,10 @@ public class IosPushNotificationHelper {
    * Returns the text we should use for a notification about the passed article.
    */
   private static String getText(Article article) {
-    String text = article.getTitle();
-    if (text.length() > 100) {
-      text = text.substring(0, 97) + "...";
+    SiteManifest site = SiteManifests.getForUrl(article.getUrl());
+    String text = (site == null ? "" : site.getShortName() + ": ") + article.getTitle();
+    if (text.length() > 110) {
+      text = text.substring(0, 107) + "...";
     }
     return text;
   }
@@ -198,7 +201,11 @@ public class IosPushNotificationHelper {
     aps.put("alert", alertInner);
     aps.put("badge", 1);
     aps.put("sound", "default");
-    aps.put("content-available", 1);
+
+    // In client v1.1, start doing this again: The client needs to be updated to
+    // do a local notification in response to these "silent" notifications in
+    // order to keep notifications in the tray.
+    // aps.put("content-available", 1);
 
     // Create the top-level JSON.
     JSONObject jsonObject = new JSONObject();

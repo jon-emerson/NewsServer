@@ -1,3 +1,4 @@
+short_name: "Gigaom"
 root_domain: "gigaom.com"
 is_https: true
 start_url: "https://gigaom.com/"
@@ -40,6 +41,10 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
   boost: 0
 }
 feature_boost_pattern {

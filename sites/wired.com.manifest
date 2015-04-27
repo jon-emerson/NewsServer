@@ -1,3 +1,4 @@
+short_name: "Wired"
 root_domain: "wired.com"
 start_url: "http://www.wired.com"
 subdomain_blacklist: "jobs.wired.com"

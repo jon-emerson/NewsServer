@@ -1,0 +1,54 @@
+short_name: "Restaurant News"
+root_domain: "restaurantnews.com"
+start_url: "http://www.restaurantnews.com/"
+paragraph_selector: ".postcontent p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/$"
+}
+path_blacklist {
+  needle: "/about/"
+}
+path_blacklist {
+  needle: "/subscribe/"
+}
+path_blacklist {
+  needle: "/press-release/"
+}
+path_blacklist {
+  needle: "/advertising/"
+}
+path_blacklist {
+  needle: "/restaurant-franchise-special/"
+}
+path_blacklist {
+  needle: "/contact/"
+}
+path_blacklist {
+  needle: "/privacy-policy/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.restaurantnews.com/national-superhero-day-celebrate-your-super-powers-at-krispy-kreme/"
+    article_url: "http://www.restaurantnews.com/restaurant-marketing-ideas-for-april-2015/"
+    article_url: "http://www.restaurantnews.com/paula-deens-family-kitchen-to-open-april-27/"
+    article_url: "http://www.restaurantnews.com/cowboy-chicken-development-is-on-fire-in-2015/"
+    article_url: "http://www.restaurantnews.com/first-watch-bullish-on-phoenix/"
+    article_url: "http://www.restaurantnews.com/2015-restaurant-neighbor-award-winner-unsukay-community-of-businesses/"
+    article_url: "http://www.restaurantnews.com/blaze-fast-fired-pizza-adding-two-new-southern-california-locations-soon/"
+    article_url: "http://www.restaurantnews.com/buffalo-wings-rings-hits-a-homerun-with-launch-of-ballpark-themed-limited-time-menu/"
+    article_url: "http://www.restaurantnews.com/dunkin-donuts-announces-plans-for-10-new-restaurants-in-minneapolis-minnesota-with-new-franchise-group-legacy-concepts-llc/"
+    non_article_url: "http://www.restaurantnews.com/about/"
+    non_article_url: "http://www.restaurantnews.com/subscribe/"
+    non_article_url: "http://www.restaurantnews.com/press-release/"
+    non_article_url: "http://www.restaurantnews.com/advertising/"
+    non_article_url: "http://www.restaurantnews.com/restaurant-franchise-special/"
+    non_article_url: "http://www.restaurantnews.com/privacy-policy/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10556 # Restaurants
+  boost: 5
+}

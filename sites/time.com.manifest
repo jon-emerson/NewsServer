@@ -1,3 +1,4 @@
+short_name: "Time"
 root_domain: "time.com"
 start_url: "http://www.time.com/"
 paragraph_selector: ".article-body p"

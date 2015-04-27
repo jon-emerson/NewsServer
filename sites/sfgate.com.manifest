@@ -1,3 +1,4 @@
+short_name: "SFGate"
 root_domain: "sfgate.com"
 start_url: "http://www.sfgate.com"
 subdomain_blacklist: "cars.sfgate.com"

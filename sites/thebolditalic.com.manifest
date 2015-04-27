@@ -1,3 +1,4 @@
+short_name: "The Bold Italic"
 root_domain: "thebolditalic.com"
 start_url: "http://www.thebolditalic.com"
 paragraph_selector: ".copy p"

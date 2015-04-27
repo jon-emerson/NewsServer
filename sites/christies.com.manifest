@@ -1,3 +1,4 @@
+short_name: "Christies"
 root_domain: "christies.com"
 start_url: "http://www.christies.com/features/"
 paragraph_selector: "#vahub-article-cont h2"

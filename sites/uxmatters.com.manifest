@@ -1,3 +1,4 @@
+short_name: "UX Matters"
 root_domain: "uxmatters.com"
 start_url: "http://www.uxmatters.com/"
 paragraph_selector: "#content p"

@@ -1,0 +1,75 @@
+short_name: "InfoWorld"
+root_domain: "infoworld.com"
+subdomain_blacklist: "resources.infoworld.com"
+start_url: "http://www.infoworld.com/"
+paragraph_selector: ".body p"
+paragraph_selector: "#drr-container p"
+article_url_pattern {
+  path_regex: "^\\/article\\/[0-9]+\\/.*\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.infoworld.com/article/2904348/application-development/first-look-microsoft-azure-app-services-cloud-development.html"
+    article_url: "http://www.infoworld.com/article/2909898/big-data/review-storms-real-time-processing-comes-at-a-price.html"
+    article_url: "http://www.infoworld.com/article/2905309/cringely/washington-launches-a-war-of-words-on-cyber-security.html"
+    article_url: "http://www.infoworld.com/article/2912416/data-visualization/review-tableau-makes-sophisticated-analysis-a-snap.html"
+    article_url: "http://www.infoworld.com/article/2611374/federal-regulations/aaron-s-law-would-revamp-computer-fraud-penalties.html"
+    article_url: "http://www.infoworld.com/article/2613105/federal-regulations/swartz-suicide-shines-light-on-federal-anti-hacking-law.html"
+    article_url: "http://www.infoworld.com/article/2910558/flash-storage/pure-storage-ceo-promises-huge-savings-with-flash.html"
+    article_url: "http://www.infoworld.com/article/2907274/government/h-1b-cap-is-reached-with-high-number-of-visa-requests.html"
+    article_url: "http://www.infoworld.com/article/2913994/government/privacy-concerns-remain-as-us-house-approves-cyber-threat-sharing-bill.html"
+    article_url: "http://www.infoworld.com/article/2912449/it-careers/locked-out-server-room-key-quest.html"
+    article_url: "http://www.infoworld.com/article/2889205/mobile-development/the-8-trends-mobile-developers-care-about-most.html"
+    article_url: "http://www.infoworld.com/article/2912430/mobile-technology/9-tips-for-speeding-up-your-business-wi-fi.html"
+    article_url: "http://www.infoworld.com/article/2904082/network-security/review-portnox-extreme-lead-nac-pack.html"
+    article_url: "http://www.infoworld.com/article/2906645/nas/nas-shoot-out-qnap-vs-synology.html"
+    article_url: "http://www.infoworld.com/article/2907656/office-software/review-adobe-acrobat-dc-polishes-its-act.html"
+    article_url: "http://www.infoworld.com/article/2906362/data-center/dawn-of-the-data-center-operating-system.html"
+    non_article_url: "http://www.infoworld.com/category/data-center/"
+    non_article_url: "http://www.infoworld.com/category/internet-of-things/"
+    non_article_url: "http://www.infoworld.com/author/Robert-X.-Cringely/"
+    non_article_url: "http://www.infoworld.com/blog/notes-from-the-field/"
+    non_article_url: "http://www.infoworld.com/category/it-careers/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10502 # Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10526 # Network Security
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -1
+}
+feature_boost_pattern {
+  path_regex: "^\\/government\\/"
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "^\\/government\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  path_regex: "^\\/federal-regulations\\/"
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "^\\/federal-regulations\\/"
+  boost: 2
+}

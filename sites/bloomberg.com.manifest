@@ -1,3 +1,4 @@
+short_name: "Bloomberg"
 root_domain: "bloomberg.com"
 start_url: "http://www.bloomberg.com"
 subdomain_blacklist: "bdn-ak.bloomberg.com"
@@ -125,4 +126,8 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10536 # Real Estate
   boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10538 # Oil and Energy
+  boost: 0
 }

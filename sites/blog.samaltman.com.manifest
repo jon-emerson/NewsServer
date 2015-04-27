@@ -1,3 +1,4 @@
+short_name: "Sam Altman"
 root_domain: "blog.samaltman.com"
 start_url: "http://blog.samaltman.com/"
 paragraph_selector: ".post-body p"

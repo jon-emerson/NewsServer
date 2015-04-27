@@ -1,3 +1,4 @@
+short_name: "Screen Daily"
 root_domain: "screendaily.com"
 start_url: "http://www.screendaily.com/news/"
 subdomain_blacklist: "jobs.screendaily.com"

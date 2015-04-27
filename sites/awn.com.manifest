@@ -1,3 +1,4 @@
+short_name: "awn.com"
 root_domain: "awn.com"
 start_url: "http://www.awn.com"
 subdomain_blacklist: "jobs.awn.com"

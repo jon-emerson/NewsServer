@@ -1,3 +1,4 @@
+short_name: "Mashable"
 root_domain: "mashable.com"
 start_url: "http://www.mashable.com"
 subdomain_blacklist: "events.mashable.com"
@@ -68,6 +69,10 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10560 # User Experience
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
   boost: 0
 }
 feature_boost_pattern {

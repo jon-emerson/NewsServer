@@ -1,3 +1,4 @@
+short_name: "Ars Technica"
 root_domain: "arstechnica.com"
 start_url: "http://arstechnica.com"
 subdomain_blacklist: "demiurge.arstechnica.com"

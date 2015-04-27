@@ -1,3 +1,4 @@
+short_name: "Art Daily"
 root_domain: "artdaily.com"
 start_url: "http://artdaily.com/"
 paragraph_selector: ".KonaBody.noticia"

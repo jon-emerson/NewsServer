@@ -12,6 +12,21 @@ import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.UserOrBuilder;
 
 public class UserIndustries {
+  public static boolean hasFeatureId(UserOrBuilder user, FeatureId featureId) {
+    int featureIdId = featureId.getId();
+    boolean found = false;
+    for (Interest interest : user.getInterestList()) {
+      if (interest.getIndustryCode() == featureIdId) {
+        if (interest.getSource() == InterestSource.TOMBSTONE) {
+          return false;
+        } else {
+          found = true;
+        }
+      }
+    }
+    return found;
+  }
+
   /**
    * Returns a user's industry interests, accounting for tombstones and dupes.
    */
@@ -30,8 +45,8 @@ public class UserIndustries {
     featureIds.removeAll(tombstonedFeatureIds);
     return Iterables.transform(featureIds, new Function<Integer, FeatureId>() {
       @Override
-      public FeatureId apply(Integer industryFeatureId) {
-        return FeatureId.fromId(industryFeatureId);
+      public FeatureId apply(Integer featureId) {
+        return FeatureId.fromId(featureId);
       }
     });
   }

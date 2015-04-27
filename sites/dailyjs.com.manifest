@@ -1,3 +1,4 @@
+short_name: "DailyJS"
 root_domain: "dailyjs.com"
 start_url: "http://dailyjs.com/"
 subdomain_blacklist: "contact.dailyjs.com"

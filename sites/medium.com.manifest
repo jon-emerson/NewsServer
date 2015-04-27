@@ -1,4 +1,6 @@
+short_name: "Medium"
 root_domain: "medium.com"
+is_https: true
 start_url: "https://medium.com"
 start_url: "https://medium.com/top-stories"
 start_url: "https://medium.com/top-100/"
@@ -7,11 +9,12 @@ path_blacklist {
 }
 paragraph_selector: ".section-content p"
 article_url_pattern {
-  path_regex: "[\\/-][0-9a-f]{12}$"
+  path_regex: "[\\/-][0-9a-f]{10,16}$"
 }
 test_instructions {
   article_url_detector_checks {
     article_url: "https://medium.com/@chrismessina/thoughts-on-google-8883844a9ca4"
+    article_url: "https://medium.com/@joshanon/how-to-fail-at-raising-money-admist-a-bubble-bbe940a6cb5"
     article_url: "https://medium.com/foreword/everybodys-taking-aim-e61603f34845"
     article_url: "https://medium.com/life-hacks-for-business/the-x-factor-that-every-professional-needs-13f4ef0d3e37"
     article_url: "https://medium.com/p/3e7ffc93b5f3"

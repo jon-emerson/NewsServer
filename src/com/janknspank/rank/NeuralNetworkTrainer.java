@@ -1,8 +1,7 @@
 package com.janknspank.rank;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
@@ -16,30 +15,19 @@ import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
-import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.common.primitives.Doubles;
-import com.janknspank.bizness.ArticleFeatures;
+import com.google.common.collect.Lists;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.classifier.FeatureId;
-import com.janknspank.common.TopList;
-import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleFeature;
-import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserAction;
-import com.janknspank.proto.UserProto.UserAction.ActionType;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private static final int MAX_ITERATIONS = 40000;
-  private static final boolean IN_DELETE_MODE = false;
+  private static final int MAX_ITERATIONS = 10000;
+
+  // Helper object that gives us human readable names for each input node.
+  private static List<String> INPUT_NODE_KEYS = null;
 
   private double lowestError = 1.0;
   private Double[] lowestErrorNetworkWeights;
@@ -48,13 +36,28 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   @SuppressWarnings("unused")
   private Double[] lastNetworkWeights;
 
-  private NeuralNetwork<BackPropagation> generateTrainedNetwork(DataSet trainingSet) {
-    NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(
-        TransferFunctionType.SIGMOID, // TODO(jonemerson): Should this be LINEAR?
-        NeuralNetworkScorer.INPUT_NODES_COUNT,
-        NeuralNetworkScorer.HIDDEN_NODES_COUNT,
-        NeuralNetworkScorer.OUTPUT_NODES_COUNT);
-
+  private NeuralNetwork<BackPropagation> generateTrainedNetwork(
+      DataSet trainingSet, int hiddenNodeCount) throws DatabaseSchemaException {
+    NeuralNetwork<BackPropagation> neuralNetwork;
+    List<String> inputNodeKeys = getInputNodeKeys();
+    int inputNodesCount = inputNodeKeys.size();
+    if (hiddenNodeCount == 0) {
+      neuralNetwork = new MultiLayerPerceptron(
+          TransferFunctionType.SIGMOID, // TODO(jonemerson): Should this be LINEAR?
+          inputNodesCount,
+          1 /* output nodes count */);
+    } else if (hiddenNodeCount == 0) {
+      neuralNetwork = new MultiLayerPerceptron(
+          TransferFunctionType.LINEAR, // Trying this out vs. SIGMOID...
+          inputNodesCount,
+          1 /* output nodes count */);
+    } else {
+      neuralNetwork = new MultiLayerPerceptron(
+          TransferFunctionType.SIGMOID, // TODO(jonemerson): Should this be LINEAR?
+          inputNodesCount,
+          hiddenNodeCount,
+          1 /* output nodes count */);
+    }
     neuralNetwork.setLearningRule(new MomentumBackpropagation());
 
     // Set learning parameters.
@@ -76,11 +79,11 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     neuralNetwork.setWeights(ArrayUtils.toPrimitive(lowestErrorNetworkWeights));
 
     // Print correlation of each input node to the output.
-    for (int i = 0; i < NeuralNetworkScorer.INPUT_NODES_COUNT; i++) {
-      double[] isolatedInput = NeuralNetworkScorer.generateIsolatedInputNodes(i);
+    for (int i = 0; i < inputNodesCount; i++) {
+      double[] isolatedInput = generateIsolatedInputNodes(i);
       neuralNetwork.setInput(isolatedInput);
       neuralNetwork.calculate();
-      System.out.println("Input node " + i + " correlation to output: " 
+      System.out.println("Input node '" + inputNodeKeys.get(i) + "' correlation to output: " 
           + neuralNetwork.getOutput()[0]);
     }
 
@@ -88,211 +91,46 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   }
 
   /**
-   * Returns the users we trust to give us good training data via UserActions.
+   * Generate an nodes array with all indexes = 0 except for the specified
+   * index.
+   * @throws DatabaseSchemaException 
    */
-  private static Map<String, User> getUserActionTrustedUsers() throws DatabaseSchemaException {
-    Map<String, User> users = Maps.newHashMap();
-    for (User user : Database.with(User.class).get(
-        new QueryOption.WhereEquals("email", ImmutableList.of(
-            "dvoytenko@yahoo.com",
-            "jon@jonemerson.net",
-            "panaceaa@gmail.com"
-            // "virendesai87@gmail.com"
-            )))) {
-      users.put(user.getId(), user);
+  static double[] generateIsolatedInputNodes(int enabledIndex) throws DatabaseSchemaException {
+    double[] inputs = new double[getInputNodeKeys().size()];
+    for (int i = 0; i < inputs.length; i++) {
+      inputs[i] = (i == enabledIndex) ? 1.0 : 0.0;
     }
-    return users;
-  }
-
-  /**
-   * Returns a list of DataSetRows derived from VOTE_UP user actions from users
-   * we trust.
-   */
-  private static List<DataSetRow> getUserActionVoteUpDataSetRows()
-      throws DatabaseSchemaException, BiznessException {
-    Map<String, User> users = getUserActionTrustedUsers();
-
-    // These are URLs the users happened to "unvote".  For convenience, we
-    // just blacklist any vote up actions against these URLs.
-    Set<String> urlIdsToIgnore = Sets.newHashSet();
-    for (UserAction userAction : Database.with(UserAction.class).get(
-        new QueryOption.WhereEquals("user_id", users.keySet()),
-        new QueryOption.WhereEqualsEnum("action_type", ActionType.UNVOTE_UP))) {
-      urlIdsToIgnore.add(userAction.getUrlId());
-    }
-
-    // Figure out data set rows for each of the unblacklisted vote up actions.
-    List<DataSetRow> dataSetRows = Lists.newArrayList();
-    for (User user : users.values()) {
-      Iterable<UserAction> userActions = Database.with(UserAction.class).get(
-          new QueryOption.WhereEquals("user_id", user.getId()),
-          new QueryOption.WhereEqualsEnum("action_type", ActionType.VOTE_UP));
-      System.out.println("For " + user.getEmail() + ", " + Iterables.size(userActions)
-          + " VOTE_UP user actions found");
-      Set<String> urlsToCrawl = Sets.newHashSet();
-
-      for (UserAction userAction : userActions) {
-        if (!urlIdsToIgnore.contains(userAction.getUrlId())) {
-          urlsToCrawl.add(userAction.getUrl());
-        }
-      }
-      if (IN_DELETE_MODE) {
-        Database.with(Article.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
-        continue;
-      }
-      Map<String, Article> articleMap =
-          ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
-      for (UserAction userAction : userActions) {
-        if (userAction.hasOnStreamForInterest()) {
-          // Ignore these for now.  They're from substreams, e.g. the user is
-          // viewing a specific entity or topic, not their main stream.
-          continue;
-        }
-        if (articleMap.containsKey(userAction.getUrl())) {
-          User modifiedUser = user.toBuilder()
-              .clearInterest()
-              .addAllInterest(userAction.getInterestList())
-              .build();
-          double[] input = Doubles.toArray(
-              NeuralNetworkScorer.generateInputNodes(
-                  modifiedUser, articleMap.get(userAction.getUrl())).values());
-          double[] output = new double[] { 1.0 };
-          dataSetRows.add(new DataSetRow(input, output));
-        }
-      }
-    }
-    return dataSetRows;
-  }
-
-  /**
-   * Returns a list of DataSetRows derived from X_OUT user actions from
-   * users we trust.
-   */
-  @SuppressWarnings("unused")
-  private static List<DataSetRow> getUserActionXOutDataSetRows()
-      throws DatabaseSchemaException, BiznessException {
-    Map<String, User> users = getUserActionTrustedUsers();
-
-    // Figure out data set rows for each of the unblacklisted vote up actions.
-    List<DataSetRow> dataSetRows = Lists.newArrayList();
-    for (User user : users.values()) {
-      Iterable<UserAction> userActions = Database.with(UserAction.class).get(
-          new QueryOption.WhereEquals("user_id", user.getId()),
-          new QueryOption.WhereEqualsEnum("action_type", ActionType.X_OUT));
-      System.out.println("For " + user.getEmail() + ", " + Iterables.size(userActions)
-          + " X_OUT user actions found");
-      Set<String> urlsToCrawl = Sets.newHashSet();
-      for (UserAction userAction : userActions) {
-        urlsToCrawl.add(userAction.getUrl());
-      }
-      if (IN_DELETE_MODE) {
-        Database.with(Article.class).delete(new QueryOption.WhereEquals("url", urlsToCrawl));
-        continue;
-      }
-      Map<String, Article> articleMap =
-          ArticleCrawler.getArticles(urlsToCrawl, true /* retain */);
-      for (UserAction userAction : userActions) {
-        if (articleMap.containsKey(userAction.getUrl())) {
-          User modifiedUser = user.toBuilder()
-              .clearInterest()
-              .addAllInterest(userAction.getInterestList())
-              .build();
-          double[] input = Doubles.toArray(
-              NeuralNetworkScorer.generateInputNodes(
-                  modifiedUser, articleMap.get(userAction.getUrl())).values());
-          double[] output = new double[] { 0.0 };
-          dataSetRows.add(new DataSetRow(input, output));
-        }
-      }
-    }
-    return dataSetRows;
+    return inputs;
   }
 
   /**
    * Creates a complete training data set given good URLs and bad URLs defined
    * in the user /personas/*.persona files.
    */
-  private static DataSet generateTrainingDataSet()
-      throws DatabaseSchemaException, BiznessException {
+  private DataSet generateTrainingDataSet() throws DatabaseSchemaException, BiznessException {
     int goodUrlCount = 0;
     int badUrlCount = 0;
-    DataSet trainingSet = new DataSet(
-        NeuralNetworkScorer.INPUT_NODES_COUNT,
-        NeuralNetworkScorer.OUTPUT_NODES_COUNT);
-    TopList<Article, Double> topPopCulture = new TopList<>(25);
-
-    for (Persona persona : Personas.getPersonaMap().values()) {
-      System.out.println("Grabbing articles for " + persona.getEmail() + " ...");
-      User user = Personas.convertToUser(persona);
-
-      if (IN_DELETE_MODE) {
-        Database.with(Article.class).delete(new QueryOption.WhereEquals("url",
-            Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList())));
-        continue;
-      }
-      Map<String, Article> urlArticleMap = ArticleCrawler.getArticles(
-          Iterables.concat(persona.getGoodUrlList(), persona.getBadUrlList()), true /* retain */);
-
-      // Hold back ~20% of the training articles so we can later gauge our
-      // ranking performance against the articles the trainer didn't see.
-//      urlArticleMap = Maps.filterEntries(urlArticleMap,
-//          new Predicate<Map.Entry<String, Article>>() {
-//            @Override
-//            public boolean apply(Entry<String, Article> entry) {
-//              return !isInTrainingHoldback(entry.getValue());
-//            }
-//          });
-
-      for (int i = 0; i < 2; i++) {
-        for (String goodUrl : persona.getGoodUrlList()) {
-          if (urlArticleMap.containsKey(goodUrl)) {
-            Article article = urlArticleMap.get(goodUrl);
-            topPopCulture.add(article, InputValuesGenerator.relevanceToPopCulture(article));
-            double[] input = Doubles.toArray(
-                NeuralNetworkScorer.generateInputNodes(user, article).values());
-            double[] output = new double[] { 1.0 };
-            trainingSet.addRow(new DataSetRow(input, output));
-            goodUrlCount++;
-          }
-        }
-      }
-
-      for (String badUrl : persona.getBadUrlList()) {
-        if (urlArticleMap.containsKey(badUrl)) {
-          double[] input = Doubles.toArray(
-              NeuralNetworkScorer.generateInputNodes(user, urlArticleMap.get(badUrl)).values());
-          double[] output = new double[] { 0.0 };
-          trainingSet.addRow(new DataSetRow(input, output));
-          badUrlCount++;
-        }
+    List<DataSetRow> dataSetRows = Lists.newArrayList();
+    for (TrainingArticle trainingArticle : TrainingArticles.getTrainingArticles()) {
+      dataSetRows.add(trainingArticle.getDataSetRow());
+      if (trainingArticle.getScore() > 0.5) {
+        goodUrlCount++;
+      } else {
+        badUrlCount++;
       }
     }
-
-    for (DataSetRow dataSetRow : getUserActionVoteUpDataSetRows()) {
-      trainingSet.addRow(dataSetRow);
-      goodUrlCount++;
-    }
-
-//    for (DataSetRow dataSetRow : getUserActionXOutDataSetRows()) {
-//      trainingSet.addRow(dataSetRow);
-//      badUrlCount++;
-//    }
-
     System.out.println("Training set compiled. good=" + goodUrlCount + ", bad=" + badUrlCount);
 
-    System.out.println("Top pop culture articles in Good Url list:");
-    for (Article article : topPopCulture) {
-      System.out.println(article.getUrl() + " (" + topPopCulture.getValue(article) + ")");
-      for (ArticleFeature feature : new ArticleFeature[] {
-          ArticleFeatures.getFeature(article, FeatureId.TOPIC_ENTERTAINMENT),
-          ArticleFeatures.getFeature(article, FeatureId.TOPIC_SPORTS),
-          ArticleFeatures.getFeature(article, FeatureId.TOPIC_POLITICS)
-      }) {
-        System.out.println("- " + FeatureId.fromId(feature.getFeatureId()).getTitle() + ": "
-            + feature.getSimilarity());
-      }
-    }
+    // UNBELIEVABLE!!  Neuroph comes up with far different results depending on
+    // the order of the data set rows.  To combat this, and to allow us to try
+    // different configurations to hopefully find an optimal, randomize the
+    // rows.
+    Collections.shuffle(dataSetRows);
 
+    DataSet trainingSet = new DataSet(getInputNodeKeys().size(), 1 /* output nodes count */);
+    for (DataSetRow dataSetRow : dataSetRows) {
+      trainingSet.addRow(dataSetRow);
+    }
     return trainingSet;
   }
 
@@ -300,59 +138,138 @@ public class NeuralNetworkTrainer implements LearningEventListener {
   public void handleLearningEvent(LearningEvent event) {
     BackPropagation bp = (BackPropagation) event.getSource();
     double error = bp.getTotalNetworkError();
-    if (bp.getCurrentIteration() % 1000 == 0) {
+    if (bp.getCurrentIteration() % 1000 == 1) {
       System.out.println(bp.getCurrentIteration() + ". iteration : "+ error);
     }
     lastNetworkWeights = bp.getNeuralNetwork().getWeights();
 
-    if (error < lowestError) {
+//    if (error < lowestError) {
       lowestError = error;
       lowestErrorIteration = bp.getCurrentIteration();
       lowestErrorNetworkWeights = bp.getNeuralNetwork().getWeights();
-    }
-    if (bp.getCurrentIteration() > MAX_ITERATIONS) {
+//    }
+    if (bp.getCurrentIteration() >= MAX_ITERATIONS) {
       bp.stopLearning();
     }
   }
 
   /**
-   * Returns if an article should be excluded from use in
-   * training the neural network. Articles are excluded so
-   * they can be used as a benchmark to determine the quality of the scorer.
-   * @return true if should be excluded from training
+   * Helper class for collecting the average of a progressively received set of
+   * numbers.
    */
-  static boolean isInTrainingHoldback(Article article) {
-    if (article.getUrl().hashCode() % 5 == 0) {
-      return true;
+  private static class Averager {
+    private int count = 0;
+    private double sum = 0;
+
+    public void add(Number number) {
+      count++;
+      sum += number.doubleValue();
     }
-    return false;
+
+    public double get() {
+      return sum / count;
+    }
   }
 
-  /** 
+  /**
+   * Definitely not-so-efficient hack for getting a list of input name labels,
+   * e.g. "industries", "facebook", "acquisitions", etc.
+   */
+  private static synchronized List<String> getInputNodeKeys() throws DatabaseSchemaException {
+    if (INPUT_NODE_KEYS == null) {
+      INPUT_NODE_KEYS = ImmutableList.copyOf(NeuralNetworkScorer.generateInputNodes(
+          Database.with(User.class).getFirst(),
+          Database.with(Article.class).getFirst()).keySet());
+    }
+    return INPUT_NODE_KEYS;
+  }
+
+  private static void printAverageInputValues(DataSet dataSet) throws DatabaseSchemaException {
+    // Calculate average input values, for debugging/optimization purposes.
+    int inputNodesCount = getInputNodeKeys().size();
+    Averager[] averageInputValues = new Averager[inputNodesCount];
+    Averager[] averageInputValuesPositive = new Averager[inputNodesCount];
+    Averager[] averageInputValuesNegative = new Averager[inputNodesCount];
+    for (int i = 0; i < inputNodesCount; i++) {
+      averageInputValues[i] = new Averager();
+      averageInputValuesPositive[i] = new Averager();
+      averageInputValuesNegative[i] = new Averager();
+    }
+    for (DataSetRow row : dataSet.getRows()) {
+      double[] inputs = row.getInput();
+      for (int i = 0; i < inputs.length; i++) {
+        averageInputValues[i].add(inputs[i]);
+        if (row.getDesiredOutput()[0] > 0.5) {
+          averageInputValuesPositive[i].add(inputs[i]);
+        }
+        if (row.getDesiredOutput()[0] < 0.5) {
+          averageInputValuesNegative[i].add(inputs[i]);
+        }
+      }
+    }
+
+    System.out.println("Average input values:");
+    List<String> inputNodeKeys = getInputNodeKeys();
+    for (int i = 0; i < averageInputValues.length; i++) {
+      System.out.println("  [" + inputNodeKeys.get(i) + "] = " + averageInputValues[i].get()
+          + " \t(goodUrls=" + averageInputValuesPositive[i].get() + ", \t"
+          + "badUrls=" + averageInputValuesNegative[i].get() + ", \t"
+          + "diff=" + Math.abs(averageInputValuesPositive[i].get() - averageInputValuesNegative[i].get()) + ")");
+    }
+  }
+
+  /**
    * Helper method for triggering a train. 
    * run ./trainneuralnet.sh to execute
    * */
   public static void main(String args[]) throws Exception {
-    DataSet dataSet = generateTrainingDataSet();
+    NeuralNetworkTrainer neuralNetworkTrainer = new NeuralNetworkTrainer();
+    DataSet dataSet = neuralNetworkTrainer.generateTrainingDataSet();
+    printAverageInputValues(dataSet);
 
-    // Calculate average input values, for debugging/optimization purposes.
-    double[] averageInputValues = new double[NeuralNetworkScorer.INPUT_NODES_COUNT];
-    for (DataSetRow row : dataSet.getRows()) {
-      double[] inputs = row.getInput();
-      for (int i = 0; i < inputs.length; i++) {
-        averageInputValues[i] += inputs[i];
+    double bestGrade = Double.MIN_VALUE;
+    int bestHiddenNodeCount = -1;
+
+    // For curiousity, figure out how well each topology works.
+    int maxHiddenNodeCount = 15;
+    double[] bestGradePerHiddenNodeCount = new double[maxHiddenNodeCount];
+    for (int i = 0; i < maxHiddenNodeCount; i++) {
+      bestGradePerHiddenNodeCount[i] = Double.MIN_VALUE;
+    }
+
+    NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
+    for (int hiddenNodeCount : new int[] { 0, 2, 6, 7, 8, 9 }) {
+      for (int tries = 0; tries < 15; tries++) {
+        System.out.println("ATTEMPTING " + hiddenNodeCount + " HIDDEN NODES "
+            + "(try " + (tries + 1) + " of 15)...");
+        NeuralNetwork<BackPropagation> neuralNetwork =
+            neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
+        double grade = Benchmark.grade(new NeuralNetworkScorer(neuralNetwork));
+        if (grade > bestGrade) {
+          bestGrade = grade;
+          bestHiddenNodeCount = hiddenNodeCount;
+          bestNeuralNetwork = neuralNetwork;
+          System.out.println("***");
+          System.out.println("NEW BEST FOUND: " + hiddenNodeCount + " hidden nodes");
+          System.out.println("***");
+        }
+        if (grade > bestGradePerHiddenNodeCount[hiddenNodeCount]) {
+          bestGradePerHiddenNodeCount[hiddenNodeCount] = grade;
+        }
       }
     }
+    System.out.println();
 
-    int numRows = dataSet.size();
-    System.out.println("Average input values:");
-    for (int i = 0; i < averageInputValues.length; i++) {
-      averageInputValues[i] = averageInputValues[i] / numRows;
-      System.out.println("  [" + i + "] = " + averageInputValues[i]);
+    System.out.println("Performances of different topologies:");
+    for (int i = 0; i < maxHiddenNodeCount; i++) {
+      System.out.println(i + " hidden nodes: " +
+          (bestGradePerHiddenNodeCount[i] == Double.MIN_VALUE
+              ? "N/A" : bestGradePerHiddenNodeCount[i]));
     }
+    System.out.println();
 
-    NeuralNetwork<BackPropagation> neuralNetwork =
-        new NeuralNetworkTrainer().generateTrainedNetwork(dataSet);
-    neuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
+    System.out.println("Saving best neural network "
+        + "(btw it has " + bestHiddenNodeCount + " hidden nodes)");
+    bestNeuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
   }
 }

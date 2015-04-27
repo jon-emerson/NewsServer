@@ -1,3 +1,4 @@
+short_name: "Washington Post"
 root_domain: "washingtonpost.com"
 start_url: "http://www.washingtonpost.com"
 subdomain_blacklist: "account.washingtonpost.com"

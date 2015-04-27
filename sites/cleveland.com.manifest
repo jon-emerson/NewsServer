@@ -1,3 +1,4 @@
+short_name: "Cleveland.com"
 root_domain: "cleveland.com"
 start_url: "http://www.cleveland.com"
 subdomain_blacklist: "autos.cleveland.com"

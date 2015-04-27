@@ -19,6 +19,13 @@ option java_outer_classname = "CrawlerProto";
 // debugging and explaining what's being blacklisted.
 
 message SiteManifest {
+  // Human-readable capitalized name for this site, to be used in the UI
+  // (in notification for now, in other places later).
+  optional string short_name = 16 [
+    (required) = YES,
+    (string_length) = 20
+  ];
+
   // Primary identifier for this site.  DO NOT INCLUDE "www.".
   // E.g. "nytimes.com".
   optional string root_domain = 1 [
@@ -140,6 +147,10 @@ message SiteManifest {
   ];
 
   optional bool is_https = 11;
+
+  // Some sites have very very crappy <meta> descriptions.  Use this to
+  // have us pick up the article's first paragraph instead.
+  optional bool use_first_paragraph_as_description = 15;
 
   // If a site has a special place in the DOM to put a clean non-cluttered-up-
   // with-annotations title, this lets manifests explain where that is!

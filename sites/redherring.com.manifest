@@ -1,3 +1,4 @@
+short_name: "Red Herring"
 root_domain: "redherring.com"
 start_url: "http://www.redherring.com"
 path_blacklist {

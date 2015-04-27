@@ -1,3 +1,4 @@
+short_name: "AdWeek"
 root_domain: "adweek.com"
 start_url: "http://adweek.com/"
 path_blacklist {

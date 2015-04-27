@@ -1,0 +1,43 @@
+short_name: "WSJ"
+root_domain: "blogs.wsj.com"
+start_url: "http://blogs.wsj.com/"
+paragraph_selector: ".articlePage p"
+
+# From http://blogs.wsj.com/pharmalot/2015/04/21/actavis-wins-a-product-hopping-case-as-namenda-battle-rages-on/
+paragraph_selector: ".post-content p"
+
+article_url_pattern {
+  path_regex: "\\/[a-z]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://blogs.wsj.com/accelerators/2015/04/22/matt-maloney-why-failure-is-an-option/"
+    article_url: "http://blogs.wsj.com/atwork/2015/04/22/a-strong-salary-outlook-for-new-graduates/"
+    article_url: "http://blogs.wsj.com/atwork/2015/04/22/how-a-ceo-makes-time-for-triathlon-training/"
+    article_url: "http://blogs.wsj.com/bankruptcy/2015/04/22/long-island-banana-king-charged-with-pension-looting/"
+    article_url: "http://blogs.wsj.com/canadarealtime/2015/04/22/big-deficit-still-dogs-province-of-ontario/"
+    article_url: "http://blogs.wsj.com/cfo/2015/04/22/national-oilwell-cfo-to-become-ceo-of-transocean/"
+    article_url: "http://blogs.wsj.com/chinarealtime/2015/04/22/true-love-iron-brother-xis-pakistan-visit-prompts-waves-of-laudatory-prose/"
+    article_url: "http://blogs.wsj.com/cio/2015/04/22/emc-ceo-says-it-in-midst-of-biggest-secular-shift-in-history/"
+    article_url: "http://blogs.wsj.com/dailyfix/2015/04/22/daily-mlb-fantasy-picks-april-22/"
+    article_url: "http://blogs.wsj.com/dailyfix/2015/04/22/nfl-hardy/"
+    article_url: "http://blogs.wsj.com/digits/2015/04/22/facebooks-first-quarter-earnings-and-analyst-call-live-blog/"
+    article_url: "http://blogs.wsj.com/riskandcompliance/2015/04/22/corruption-currents-u-s-lets-in-slave-caught-thai-seafood/"
+    article_url: "http://blogs.wsj.com/speakeasy/2015/04/22/dc-comics-unveils-superhero-universe-for-girls/"
+    article_url: "http://blogs.wsj.com/speakeasy/2015/04/22/grateful-dead-reunion-shows-to-air-on-pay-per-view/"
+    article_url: "http://blogs.wsj.com/washwire/2015/04/22/obama-visits-everglades-to-press-climate-change-agenda/"
+    article_url: "http://blogs.wsj.com/washwire/2015/04/22/two-harry-reid-allies-to-face-off-in-nevada-house-primary/"
+    non_article_url: "http://blogs.wsj.com/accelerators/"
+    non_article_url: "http://blogs.wsj.com/accelerators/category/culture/"
+    non_article_url: "http://blogs.wsj.com/accelerators/category/raising-capital-2/"
+    non_article_url: "http://blogs.wsj.com/atwork/"
+    non_article_url: "http://blogs.wsj.com/atwork/tag/distraction/"
+    non_article_url: "http://blogs.wsj.com/atwork/page/2/"
+    non_article_url: "http://blogs.wsj.com/bankruptcy/"
+    non_article_url: "http://blogs.wsj.com/canadarealtime/"
+  }
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 1
+}

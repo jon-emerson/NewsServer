@@ -1,3 +1,4 @@
+short_name: "MIT Tech Review"
 root_domain: "technologyreview.com"
 start_url: "http://www.technologyreview.com"
 path_blacklist {

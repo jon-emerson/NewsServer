@@ -1,0 +1,75 @@
+short_name: "CityLab"
+root_domain: "citylab.com"
+start_url: "http://citylab.com/"
+paragraph_selector: "#article-body p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/[0-9]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.citylab.com/cityfixer/2015/01/india-plans-to-roll-out-public-touch-screen-kiosks-for-sexual-assault-complaints/384341/"
+    article_url: "http://www.citylab.com/cityfixer/2015/04/3-cities-using-open-data-in-creative-ways-to-solve-problems/391035/"
+    article_url: "http://www.citylab.com/commute/2015/04/8-critical-rail-projects-that-amtrak-cant-afford/391038/"
+    article_url: "http://www.citylab.com/commute/2014/07/if-an-electric-bike-is-ever-going-to-hit-it-big-in-the-us-its-this-one/375167/"
+    article_url: "http://www.citylab.com/commute/2015/04/swedens-other-congestion-pricing-program-is-also-a-big-success/390933/"
+    article_url: "http://www.citylab.com/commute/2015/04/the-latest-sign-of-bike-shares-social-equity-problem/391095/"
+    article_url: "http://www.citylab.com/commute/2015/04/the-sad-ubiquity-of-sexual-harassment-on-public-transit/390804/"
+    article_url: "http://www.citylab.com/crime/2015/04/a-marathon-through-the-shadows/390984/"
+    article_url: "http://www.citylab.com/crime/2015/04/meet-east-africas-new-motorcycle-gangs/390828/"
+    article_url: "http://www.citylab.com/design/2015/04/a-japanese-architect-has-turned-old-ethernet-cables-into-restaurant-decor/391152/"
+    article_url: "http://www.citylab.com/design/2015/04/an-archive-of-the-worlds-freshest-satellite-images/390714/"
+    article_url: "http://www.citylab.com/design/2015/04/imagining-the-chilling-landscape-of-unchecked-global-development/390591/"
+    article_url: "http://www.citylab.com/design/2015/04/isolated-from-the-world-for-60-years/390696/"
+    article_url: "http://www.citylab.com/design/2015/04/we-need-more-street-furniture-shaped-like-tulips/390648/"
+    article_url: "http://www.citylab.com/housing/2015/04/a-startling-map-of-how-much-whiter-san-francisco-will-be-in-2040/391200/"
+    article_url: "http://www.citylab.com/housing/2015/04/how-urban-planners-see-americas-growing-housing-affordability-crisis/391167/"
+    article_url: "http://www.citylab.com/housing/2015/04/why-city-noise-is-a-serious-health-hazard/391194/"
+    article_url: "http://www.citylab.com/navigator/2015/04/a-better-way-to-store-wet-umbrellas/390918/"
+    article_url: "http://www.citylab.com/navigator/2015/04/a-book-that-celebrates-50-years-of-saving-new-yorks-places/391125/"
+    article_url: "http://www.citylab.com/navigator/2015/04/new-city-allergies/390855/"
+    article_url: "http://www.citylab.com/politics/2015/04/debunking-5-myths-about-texas-high-speed-rail/390903/"
+    article_url: "http://www.citylab.com/politics/2015/04/how-earth-day-changed-the-way-we-view-cities/391014/"
+    article_url: "http://www.citylab.com/politics/2015/04/life-on-sealand-best-cityreads-of-the-week/390840/"
+    article_url: "http://www.citylab.com/tech/2015/04/how-livable-will-your-neighborhood-be-as-you-age/390972/"
+    article_url: "http://www.citylab.com/tech/2015/04/the-breathtaking-elevator-ride-to-the-top-of-one-world-trade-center-sweeps-through-515-years-of-history/390909/"
+    article_url: "http://www.citylab.com/weather/2015/04/theres-a-place-thats-nearly-perfect-for-growing-food-its-not-california/390966/"
+    article_url: "http://www.citylab.com/weather/2015/04/watch-a-years-worth-of-carbon-dioxide-billow-around-the-globe/390915/"
+    article_url: "http://www.citylab.com/work/2015/04/americas-leading-creative-class-cities-in-2015/390852/"
+    article_url: "http://www.citylab.com/work/2015/04/cities-dont-need-smoking-bans-to-be-smoke-free/391185/"
+    non_article_url: "http://www.citylab.com/cityfixer/"
+    non_article_url: "http://www.citylab.com/housing/"
+    non_article_url: "http://www.citylab.com/authors/john-metcalfe/"
+    non_article_url: "http://www.citylab.com/masthead/"
+    non_article_url: "http://www.citylab.com/search/?q=nii"
+  }
+}
+feature_boost_pattern {
+  boost: -5 # This is not a super-general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "^\\/politics\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10517 # Architecture & Planning
+  path_regex: "^\\/design\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10554 # Human Resources
+  path_regex: "^\\/work\\/"
+  boost: 1
+}

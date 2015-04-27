@@ -1,3 +1,4 @@
+short_name: "EE Times"
 root_domain: "eetimes.com"
 start_url: "http://www.eetimes.com/"
 path_blacklist {

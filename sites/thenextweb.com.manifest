@@ -1,3 +1,4 @@
+short_name: "TNW"
 root_domain: "thenextweb.com"
 start_url: "http://thenextweb.com"
 subdomain_blacklist: "deals.thenextweb.com"
@@ -76,6 +77,10 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10560 # User Experience
   boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: -1
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity

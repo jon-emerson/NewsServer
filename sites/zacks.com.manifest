@@ -1,0 +1,39 @@
+short_name: "Zacks"
+root_domain: "zacks.com"
+start_url: "http://www.zacks.com/"
+paragraph_selector: ".commentary_body > p"
+article_url_pattern {
+  path_regex: "^\\/commentary\\/[0-9]+\\/[\\w-]+$"
+}
+article_url_pattern {
+  path_regex: "^\\/stock\\/news\\/[0-9]+\\/[\\w-]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.zacks.com/stock/news/171844/facebook-atampt-post-lukewarm-earnings"
+    article_url: "http://www.zacks.com/stock/news/171640/green-etfs-amp-stocks-for-earth-day"
+    article_url: "http://www.zacks.com/stock/news/171800/best-performing-american-funds-mutual-funds-of-q1-2015"
+    article_url: "http://www.zacks.com/stock/news/171587/buy-cheap-highquality-winning-stocks-via-these-etfs"
+    article_url: "http://www.zacks.com/commentary/43622/are-weak-earnings-here-to-stay"
+    non_article_url: "http://www.zacks.com/ahead-of-wall-street"
+    non_article_url: "http://www.zacks.com/investment-newsletter.php?arc=20150422"
+    non_article_url: "http://www.zacks.com/stocks/"
+    non_article_url: "http://www.zacks.com/funds/"
+    non_article_url: "http://www.zacks.com/registration_info.php"
+  }
+}
+feature_boost_pattern {
+  boost: -10
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 0
+}

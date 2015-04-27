@@ -1,0 +1,72 @@
+short_name: "NPR"
+root_domain: "npr.org"
+start_url: "http://www.nytimes.com"
+paragraph_selector: "#storytext p"
+article_url_pattern {
+  path_regex: "\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[0-9][0-9]+\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.npr.org/2015/04/22/401223454/bruce-jenners-long-history-of-clearing-hurdles"
+    article_url: "http://www.npr.org/2015/04/21/401238481/after-20-years-on-the-job-nyc-police-officer-tells-his-intense-stories"
+    article_url: "http://www.npr.org/2015/04/22/401536290/comcast-time-warner-push-for-merger-approval-amid-opposition"
+    article_url: "http://www.npr.org/blogs/codeswitch/2015/04/22/401427275/ben-affleck-kinda-apologizes-for-asking-pbs-program-to-hide-slave-owning-ancesto"
+    article_url: "http://www.npr.org/blogs/deceptivecadence/2015/04/22/399609489/get-out-and-hear-some-new-music-this-summer"
+    article_url: "http://www.npr.org/blogs/ed/2015/04/22/396672571/could-it-be-researchers-find-a-hiring-bias-that-favors-women"
+    article_url: "http://www.npr.org/blogs/goatsandsoda/2015/04/21/400393756/how-modern-life-depletes-our-gut-microbes"
+    article_url: "http://www.npr.org/blogs/goatsandsoda/2015/04/22/401530296/a-young-mothers-death-raises-questions-without-answers"
+    article_url: "http://www.npr.org/blogs/health/2015/04/22/401470785/can-a-person-with-dementia-consent-to-sex"
+    article_url: "http://www.npr.org/blogs/itsallpolitics/2015/04/22/401521322/obama-says-elizabeth-warren-is-wrong-on-trade"
+    article_url: "http://www.npr.org/blogs/itsallpolitics/2015/04/22/401532715/man-who-shot-reagan-seeks-release-from-mental-hospital"
+    article_url: "http://www.npr.org/blogs/itsallpolitics/2015/04/22/401576009/visiting-the-everglades-obama-takes-swipe-at-climate-change-deniers"
+    article_url: "http://www.npr.org/blogs/monkeysee/2015/04/17/400157297/pop-culture-happy-hour-daredevil-and-credulity"
+    article_url: "http://www.npr.org/blogs/parallels/2015/04/22/401508242/turks-and-armenians-prepare-for-dueling-anniversaries-on-friday"
+    article_url: "http://www.npr.org/blogs/thetwo-way/2015/04/22/401517726/site-of-capsized-migrant-boat-was-like-a-floating-cemetery"
+    article_url: "http://www.npr.org/blogs/thetwo-way/2015/04/22/401526104/google-announces-foray-into-the-wireless-business"
+    article_url: "http://www.npr.org/blogs/thetwo-way/2015/04/22/401544641/new-orleans-bans-smoking-in-bars-restaurants"
+    article_url: "http://www.npr.org/blogs/thetwo-way/2015/04/22/401545898/nfl-settlement-over-concussions-is-given-final-approval-by-judge"
+    article_url: "http://www.npr.org/blogs/thetwo-way/2015/04/22/401548310/senate-oks-human-trafficking-bill-paving-way-for-attorney-general-vote"
+    article_url: "http://www.npr.org/blogs/thetwo-way/2015/04/22/401555301/court-throws-out-slugger-barry-bonds-conviction"
+    article_url: "http://www.npr.org/blogs/thetwo-way/2015/04/22/401589220/defense-presents-full-video-of-tsarnaev-giving-camera-the-middle-finger"
+    article_url: "http://www.npr.org/blogs/thetwo-way/2015/04/23/401714713/u-s-operations-killed-two-hostages-held-by-al-qaida-including-american"
+    non_article_url: "http://www.npr.org/blogs/itsallpolitics/129890870/follow-the-money/"
+    non_article_url: "http://www.npr.org/blogs/itsallpolitics/130215202/power-centers/"
+    non_article_url: "http://www.npr.org/sections/science/"
+    non_article_url: "http://www.npr.org/blogs/thetwo-way/127602855/america/"
+    non_article_url: "http://www.npr.org/people/348770153/krishnadev-calamur"
+    non_article_url: "http://www.npr.org/blogs/monkeysee/"
+    non_article_url: "http://www.npr.org/people/93702353/linda-holmes"
+  }
+}
+feature_boost_pattern {
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  path_regex: "^\\/health\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
+  path_regex: "^\\/health\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10549 # Music
+  path_regex: "^\\/deceptivecadence\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "^\\/itsallpolitics\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "^\\/itsallpolitics\\/"
+  boost: 2
+}

@@ -1,0 +1,42 @@
+short_name: "Seeking Alpha"
+root_domain: "seekingalpha.com"
+start_url: "http://seekingalpha.com/"
+use_first_paragraph_as_description: true
+paragraph_selector: "#article_body > p"
+paragraph_selector: "#article_body > h2"
+paragraph_selector: ".mc_article_body > ul > li"
+article_url_pattern {
+  path_regex: "^\\/article\\/[0-9]{2,}-[\\w-]+$"
+}
+article_url_pattern {
+  path_regex: "^\\/news\\/[0-9]{2,}-[\\w-]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://seekingalpha.com/article/3088076-dont-buy-procter-and-gamble-buy-microsoft-instead"
+    article_url: "http://seekingalpha.com/news/2440646-s-and-p-dow-drop-on-mixed-earnings-biotechs-boost-nasdaq-to-gains"
+    article_url: "http://seekingalpha.com/article/3087676-micron-dram-share-a-rumor-of-war"
+    article_url: "http://seekingalpha.com/article/3088356-yahoo-yhoo-marissa-ann-mayer-on-q1-2015-results-earnings-call-transcript"
+    article_url: "http://seekingalpha.com/news/2440216-chipotle-mexican-grill-beats-by-0_22-misses-on-revenue"
+    non_article_url: "http://seekingalpha.com/earnings_center"
+    non_article_url: "http://seekingalpha.com/symbol/cmg"
+    non_article_url: "http://seekingalpha.com/author/sa-editor-mohit-manghnani"
+    non_article_url: "http://seekingalpha.com/stocktalks/all"
+    non_article_url: "http://seekingalpha.com/real-time-alerts"
+  }
+}
+feature_boost_pattern {
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 0
+}

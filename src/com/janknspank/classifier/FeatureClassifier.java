@@ -37,6 +37,11 @@ public class FeatureClassifier {
         if (articleFeature.getSimilarity() >= 0.75) {
           topIndustryArticleFeatures.add(articleFeature, articleFeature.getSimilarity());
         }
+      } else if (feature.getFeatureId().getFeatureType() == FeatureType.MANUAL_HEURISTIC) {
+        // For manual heuristic features, only remember them if they're non-zero.
+        if (articleFeature.getSimilarity() > 0.00001) {
+          articleFeatures.add(articleFeature);
+        }
       } else {
         articleFeatures.add(articleFeature);
       }

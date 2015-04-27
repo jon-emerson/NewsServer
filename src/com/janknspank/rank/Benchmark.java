@@ -1,47 +1,62 @@
 package com.janknspank.rank;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import com.google.api.client.repackaged.com.google.common.base.Joiner;
-import com.google.api.client.util.Lists;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.common.Asserts;
-import com.janknspank.crawler.ArticleCrawler;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.RankProto.Persona;
-import com.janknspank.proto.UserProto.User;
 
 public class Benchmark {
-  // TODO(jonemerson): This should just take a set of Articles that are pre-
-  // filtered as holdback articles.  It's pretty slow to grab all the Articles
-  // before getting here when only 20% of them are going to be used.
-  public static Map<Article, Double> getScores(
-      User user, Iterable<String> urlStrings, Scorer scorer) throws BiznessException {
-    Map<Article, Double> scoreMap = Maps.newHashMap();
-    Collection<Article> articles =
-        ArticleCrawler.getArticles(urlStrings, true /* retain */).values();
-    for (Article article : articles) {
-      // Use the holdback for the benchmark. The other 80% are used
-      // to train the neural network.
-      if (NeuralNetworkTrainer.isInTrainingHoldback(article)) {
-        scoreMap.put(article, scorer.getScore(user, article));
+  /**
+   * Creates an Article -> Scorer's Score map for all articles that are
+   * both "good" (aka training score >= 0.5) and in the holdback set.
+   */
+  private static Map<Article, Double> getGoodScoreMap(
+      Scorer scorer, Iterable<TrainingArticle> goodTrainingArticles)
+      throws DatabaseSchemaException, BiznessException {
+    Map<Article, Double> goodScores = Maps.newHashMap();
+    for (TrainingArticle trainingArticle : TrainingArticles.getHoldbackArticles()) {
+      if (trainingArticle.getScore() >= 0.5) {
+        // This article should be scored as good.
+        goodScores.put(trainingArticle.getArticle(),
+            scorer.getScore(trainingArticle.getUser(), trainingArticle.getArticle()));
       }
     }
-    return scoreMap;
+    return goodScores;
   }
 
   /**
-   * Prints out a performance score (aka a "grade") for how well the Scorer did
-   * at creating scores for the passed Article -> Score maps.
+   * Creates an Article -> Scorer's Score map for all articles that are
+   * both "bad" (aka training score < 0.5) and in the holdback set.
    */
-  public static void grade(Map<Article, Double> goodScoreMap, Map<Article, Double> badScoreMap) {
+  private static Map<Article, Double> getBadScoreMap(
+      Scorer scorer, Iterable<TrainingArticle> badTrainingArticles)
+      throws DatabaseSchemaException, BiznessException {
+    Map<Article, Double> goodScores = Maps.newHashMap();
+    for (TrainingArticle trainingArticle : TrainingArticles.getHoldbackArticles()) {
+      if (trainingArticle.getScore() < 0.5) {
+        // This article should be scored as bad.
+        goodScores.put(trainingArticle.getArticle(),
+            scorer.getScore(trainingArticle.getUser(), trainingArticle.getArticle()));
+      }
+    }
+    return goodScores;
+  }
+
+  /**
+   * Prints out a performance evaluation for how well the passed Scorer does at
+   * creating scores for the passed Article -> Score maps.
+   */
+  public static double grade(Scorer scorer) throws DatabaseSchemaException, BiznessException {
+    Map<Article, Double> goodScoreMap = getGoodScoreMap(scorer, TrainingArticles.getHoldbackArticles());
+    Map<Article, Double> badScoreMap = getBadScoreMap(scorer, TrainingArticles.getHoldbackArticles());
     int positives = 0;
     int falseNegatives = 0;
     List<String> falseNegativesTitles = new ArrayList<>();
@@ -71,12 +86,15 @@ public class Benchmark {
     System.out.println("Negatives: " + negatives
         + " (" + (int) ((double) 100 * negatives / badScoreMap.size()) + "% correct)");
     System.out.println("Percent correct: " +
-        (int) (100 * (((double) positives + negatives)
+        (100 * (((double) positives + negatives)
             / (goodScoreMap.size() + badScoreMap.size()))) + "%");
     System.out.println("False negative titles:");
     for (int i = 0; i < falseNegativesTitles.size(); i++) {
       System.out.println("  " + falseNegativesTitles.get(i));
     }
+
+    // Return a quality score.
+    return ((double) positives + negatives) / (goodScoreMap.size() + badScoreMap.size());
   }
 
   /**
@@ -101,10 +119,15 @@ public class Benchmark {
         Joiner.on("").join(Iterables.limit(Iterables.cycle("B"), bad));
   }
 
-  private static void printHistogram(
-      Map<Article, Double> goodScores, Map<Article, Double> badScores) {
-    Multiset<Integer> goodHistogram = getHistogram(goodScores.values());
-    Multiset<Integer> badHistogram = getHistogram(badScores.values());
+  /**
+   * Prints (to console) a histogram, showing the actual scores for articles
+   * considered good vs. bad in the training holdback.
+   */
+  private static void printHistogram(Scorer scorer) throws DatabaseSchemaException, BiznessException {
+    Multiset<Integer> goodHistogram = getHistogram(
+        getGoodScoreMap(scorer, TrainingArticles.getHoldbackArticles()).values());
+    Multiset<Integer> badHistogram = getHistogram(
+        getBadScoreMap(scorer, TrainingArticles.getHoldbackArticles()).values());
     for (int i = 9; i >= 0; i--) {
       String start = "0." + i;
       String end = (i == 9) ? "1.0" : "0." + (i + 1);
@@ -115,38 +138,16 @@ public class Benchmark {
         + createStars(goodHistogram.count(-100), badHistogram.count(-100)));
   }
 
-  public static void main(String args[]) throws Exception {
-    List<Persona> personas = Lists.newArrayList();
-    if (args.length > 0) {
-      for (String arg : args) {
-        Persona persona = null;
-        if ("jon".equals(arg)) {
-          persona = Personas.getByEmail("panaceaa@gmail.com");
-        } else if ("tom".equals(arg)) {
-          persona = Personas.getByEmail("tom.charytoniuk@gmail.com");
-        } else {
-          persona = Personas.getByEmail(arg);
-        }
-        Asserts.assertNotNull(persona, "Could not read persona: " + arg);
-        personas.add(persona);
-      }
-    } else {
-      personas.addAll(Personas.getPersonaMap().values());
-    }
-
-    Map<Article, Double> goodScores = Maps.newHashMap();
-    Map<Article, Double> badScores = Maps.newHashMap();
-    for (Persona persona : personas) {
-      User user = Personas.convertToUser(persona);
-      goodScores.putAll(
-          getScores(user, persona.getGoodUrlList(), NeuralNetworkScorer.getInstance()));
-      badScores.putAll(
-          getScores(user, persona.getBadUrlList(), NeuralNetworkScorer.getInstance()));
-    }
-    System.out.println("\nNEURAL NETWORK SCORER:");
-    printHistogram(goodScores, badScores);
-    grade(goodScores, badScores);
+  public static double printBenchmark(Scorer scorer) throws DatabaseSchemaException, BiznessException {
+    System.out.println("\nBENCHMARK:");
+    printHistogram(scorer);
+    double grade = grade(scorer);
 
     System.out.println("\n");
+    return grade;
+  }
+
+  public static void main(String args[]) throws Exception {
+    printBenchmark(NeuralNetworkScorer.getInstance());
   }
 }

@@ -1,3 +1,4 @@
+short_name: "Fast Company"
 root_domain: "fastcompany.com"
 start_url: "http://www.fastcompany.com"
 subdomain_blacklist: "magazine.fastcompany.com"

@@ -1,3 +1,4 @@
+short_name: "AccountingToday"
 root_domain: "accountingtoday.com"
 start_url: "http://www.accountingtoday.com"
 subdomain_blacklist: "digital.accountingtoday.com"

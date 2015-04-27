@@ -1,3 +1,4 @@
+short_name: "Fred Destin"
 root_domain: "freddestin.com"
 start_url: "http://freddestin.com/"
 paragraph_selector: ".entry-content p"

@@ -1,0 +1,37 @@
+short_name: "Thrillist"
+root_domain: "thrillist.com"
+start_url: "http://www.thrillist.com/food-and-drink"
+paragraph_selector: ".node-body p"
+paragraph_selector: ".caption"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[^\\/]+\\/[^\\/]+$"
+}
+path_blacklist {
+  needle: "/sales/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.thrillist.com/drink/nation/bartender-tricks-bartending-secrets"
+    article_url: "http://www.thrillist.com/drink/nation/oldest-liquor-in-the-world"
+    article_url: "http://www.thrillist.com/drink/nation/worst-people-at-the-after-party"
+    article_url: "http://www.thrillist.com/eat/nation/mexico-city-food-scene-tacos-in-mexico-city"
+    article_url: "http://www.thrillist.com/travel/nation/definitive-food-and-drink-destinations-west-side-market-la-kiva-and-more"
+    article_url: "http://www.thrillist.com/eat/nation/medieval-times-review"
+    article_url: "http://www.thrillist.com/eat/san-francisco/oldest-restaurants-in-san-francisco"
+    article_url: "http://www.thrillist.com/eat/san-francisco/california-water-shortage-food-calculator"
+    article_url: "http://www.thrillist.com/eat/san-francisco/best-bacon-dishes-in-san-francisco"
+    non_article_url: "http://www.thrillist.com/authors/lauren-sloss"
+    non_article_url: "http://www.thrillist.com/san-francisco"
+    non_article_url: "http://www.thrillist.com/food-and-drink"
+    non_article_url: "http://www.thrillist.com/about"
+    non_article_url: "http://www.thrillist.com/contact"
+    non_article_url: "http://www.thrillist.com/return_policy"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10556 # Restaurants
+  boost: 5
+}

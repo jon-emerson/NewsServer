@@ -1,3 +1,4 @@
+short_name: "Jason Ball"
 root_domain: "jasonball.com"
 start_url: "http://jasonball.com/"
 path_blacklist {

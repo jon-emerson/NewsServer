@@ -1,3 +1,4 @@
+short_name: "Science Daily"
 root_domain: "sciencedaily.com"
 start_url: "http://www.sciencedaily.com"
 start_url: "http://www.sciencedaily.com/news/health_medicine/"
@@ -55,5 +56,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10540 # Farming
-  boost: -5
+  boost: -2
 }

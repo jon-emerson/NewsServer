@@ -5,15 +5,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
-import com.janknspank.classifier.FeatureId;
-import com.janknspank.classifier.FeatureType;
-import com.janknspank.common.TopList;
+import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 
@@ -36,58 +37,42 @@ public class Deduper {
    * helpful for determining dupes.
    */
   private static class ArticleExtraction {
-    private final long publishTime;
+    private final long publishedTime;
     private final Set<String> stems = Sets.newHashSet();
-    private final Set<Integer> top3Industries = Sets.newHashSet();
 
     // Marks Articles that have been responsible for the killing of a duplicate.
     // E.g. this is true if this article has won against a similar article.
-    private boolean killedADupe = false;
+    private int dupeKilledCount = 0;
+    private long oldestHotDuplicateTime = 0;
 
     public ArticleExtraction(Article article) {
-      publishTime = article.getPublishedTime();
+      publishedTime = Articles.getPublishedTime(article);
+      oldestHotDuplicateTime = article.getPublishedTime();
       stems.addAll(article.getDedupingStemsList());
-
-      // Finding a 1-in-3 match out-performed 1-in-2, 1-in-4, 1-in-5, and 2-in-5
-      // when considering dupe matches (10 points), false positives (dupes that
-      // are not really dupes, -2 points), and false negatives (undetected
-      // dupes, -5 points).
-      // NOTE(jonemerson): Trying 1-in-4 now because it seems like it's
-      // performing better now that our vectors are better defined.
-      TopList<Integer, Double> topIndustryFeatures = new TopList<>(4);
-      for (ArticleFeature feature : article.getFeatureList()) {
-        FeatureId featureId = FeatureId.fromId(feature.getFeatureId());
-        if (featureId != null && featureId.getFeatureType() == FeatureType.INDUSTRY) {
-          topIndustryFeatures.add(feature.getFeatureId(), feature.getSimilarity());
-        }
-      }
-      top3Industries.addAll(topIndustryFeatures.getKeys());
     }
 
     public boolean isDuplicate(ArticleExtraction extraction2) {
-      if (Math.abs(extraction2.publishTime - publishTime) > STEM_INTERSECTION_PUBLISH_DATE_RANGE) {
+      if (Math.abs(extraction2.publishedTime - publishedTime) > STEM_INTERSECTION_PUBLISH_DATE_RANGE) {
         return false;
       }
-      int stemIntersectionCount = Sets.intersection(stems, extraction2.stems).size();
-      int industryIntersectionCount =
-          Sets.intersection(top3Industries, extraction2.top3Industries).size();
-
-      // Some articles just aren't about enough stuff to be assigned to an
-      // industry.  In which case, they're probably relatively weak, and we
-      // can just assume their industries intersect.
-      boolean bothHaveIndustries =
-          top3Industries.size() > 0 && extraction2.top3Industries.size() > 0;
-
-      return stemIntersectionCount >= STEM_INTERSECTION_COUNT_MINIMUM
-          && (industryIntersectionCount >= 1 || !bothHaveIndustries);
+      return Sets.intersection(stems, extraction2.stems).size() >= STEM_INTERSECTION_COUNT_MINIMUM;
     }
 
-    public void markHasKilledDupe() {
-      killedADupe = true;
+    public void markHasKilledDupe(long publishedTime) {
+      ++dupeKilledCount;
+      oldestHotDuplicateTime = Math.min(oldestHotDuplicateTime, publishedTime);
     }
 
-    public boolean hasKilledADupe() {
-      return killedADupe;
+    public long getPublishedTime() {
+      return publishedTime;
+    }
+
+    public int getDupeKilledCount() {
+      return dupeKilledCount;
+    }
+
+    public long getOldestHotDuplicateTime() {
+      return oldestHotDuplicateTime;
     }
   }
 
@@ -124,10 +109,10 @@ public class Deduper {
               || (engagement != null
                   && engagement.getShareScore() > nonDupeEngagement.getShareScore())) {
             // The new article is more socially valuable, use it instead.
-            extraction.markHasKilledDupe();
+            extraction.markHasKilledDupe(nonDupeExtraction.getPublishedTime());
             nonDupeExtractions.set(i, extraction);
           } else {
-            nonDupeExtraction.markHasKilledDupe();
+            nonDupeExtraction.markHasKilledDupe(extraction.getPublishedTime());
           }
           foundDupe = true;
           break;
@@ -142,14 +127,29 @@ public class Deduper {
 
     List<Article> dedupedArticles = Lists.newArrayList();
     for (ArticleExtraction extraction : nonDupeExtractions) {
-      if (extraction.hasKilledADupe()) {
+      if (extraction.getDupeKilledCount() > 0) {
         dedupedArticles.add(extractionMap.get(extraction).toBuilder()
             .setHot(true)
+            .setHotCount(extraction.getDupeKilledCount() + 1)
+            .setOldestHotDuplicateTime(extraction.getOldestHotDuplicateTime())
             .build());
       } else {
         dedupedArticles.add(extractionMap.get(extraction));
       }
     }
     return dedupedArticles;
+  }
+
+  public static void main(String args[]) throws Exception {
+    String url1 = args[0];
+    String url2 = args[1];
+    Map<String, Article> articles = ArticleCrawler.getArticles(ImmutableList.of(url1, url2), false);
+    Article article1 = Iterables.get(articles.values(), 0);
+    Article article2 = Iterables.get(articles.values(), 1);
+    System.out.println("Article 1 deduping stems: \""
+        + Joiner.on("\", \"").join(article1.getDedupingStemsList()) + "\"");
+    System.out.println("Article 2 deduping stems: \""
+        + Joiner.on("\", \"").join(article2.getDedupingStemsList()) + "\"");
+    System.out.println("Is dupe? " + isDupe(article1, article2));
   }
 }

@@ -1,3 +1,4 @@
+short_name: "Decanter"
 root_domain: "decanter.com"
 start_url: "http://www.decanter.com/news"
 paragraph_selector: "#content p.teaser"

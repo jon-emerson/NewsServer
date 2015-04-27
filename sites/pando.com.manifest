@@ -1,0 +1,59 @@
+short_name: "Pando Daily"
+root_domain: "pando.com"
+subdomain_blacklist: "sponsored.pando.com"
+start_url: "http://pando.com/"
+path_blacklist {
+  needle: "/events/"
+}
+paragraph_selector: ".post-content > p"
+paragraph_blacklist {
+  selector: ".byline"
+}
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://pando.com/2015/04/17/dont-fear-the-down-round-what-hbos-silicon-valley-gets-right-and-wrong-about-negotiating-a-lower-valuation/"
+    article_url: "http://pando.com/2015/04/17/zuckerberg-its-better-to-have-free-internet-access-than-to-have-a-free-internet/"
+    article_url: "http://pando.com/2015/04/17/instagram-takes-a-smarter-stance-on-the-female-body-but-it-still-has-work-to-do/"
+    article_url: "http://pando.com/2015/04/17/uberpool-is-better-for-the-environment-than-ubers-normal-service/"
+    article_url: "http://pando.com/2015/04/16/the-time-100-which-celebrates-mass-murderers-dictators-and-the-occasional-tech-founder-needs-to-be-stopped/"
+    non_article_url: "http://pando.com/about"
+    non_article_url: "http://pando.com/events/"
+    non_article_url: "https://sponsored.pando.com/podcast/pandolive/"
+    non_article_url: "http://pando.com/events/dave-goldberg/"
+    non_article_url: "http://pando.com/events/jason-hirschhorn/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer electronics
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods
+  boost: -3
+}

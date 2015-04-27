@@ -113,6 +113,16 @@ message Article {
   optional bool hot = 20 [
     (storage_method) = DO_NOT_STORE
   ];
+
+  // Track various aspects of the de-duper, for ranking purposes.
+  optional int64 oldest_hot_duplicate_time = 21 [
+    (client_serialization) = EXCLUDE,
+    (storage_method) = DO_NOT_STORE
+  ];
+  optional int32 hot_count = 22 [
+    (client_serialization) = EXCLUDE,
+    (storage_method) = DO_NOT_STORE
+  ];
 }
 
 message ArticleKeyword {
@@ -185,17 +195,6 @@ message ArticleFeature {
   optional int32 feature_id = 1 [
     (required) = YES,
     (storage_method) = INDEX
-  ];
-
-  enum Type {
-    UNKNOWN = 0;
-    SERVES_INTENT = 1;
-    ABOUT_INDUSTRY = 2;
-    IMPROVES_SKILL = 3;
-    TEXT_CHARACTER = 4;
-  }
-  optional Type type = 4 [
-    default = UNKNOWN
   ];
 
   // Normalized similarity score for this article's relevance against the

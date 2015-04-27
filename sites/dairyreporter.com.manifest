@@ -1,3 +1,4 @@
+short_name: "DairyReporter"
 root_domain: "dairyreporter.com"
 start_url: "http://www.dairyreporter.com"
 paragraph_selector: "[itemprop=\"articleBody\"] p"

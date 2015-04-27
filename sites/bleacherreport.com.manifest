@@ -1,3 +1,4 @@
+short_name: "Bleacher Report"
 root_domain: "bleacherreport.com"
 start_url: "http://bleacherreport.com/"
 start_url: "http://bleacherreport.com/nfl"

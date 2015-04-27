@@ -1,3 +1,4 @@
+short_name: "IEEE Spectrum"
 root_domain: "spectrum.ieee.org"
 start_url: "http://spectrum.ieee.org/"
 subdomain_blacklist: "m.spectrum.ieee.org"
@@ -86,6 +87,10 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
   boost: 0
 }
 feature_boost_pattern {

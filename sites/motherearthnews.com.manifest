@@ -1,3 +1,4 @@
+short_name: "Mother Earth"
 root_domain: "motherearthnews.com"
 start_url: "http://www.motherearthnews.com/"
 start_url: "http://www.motherearthnews.com/green-homes.aspx"
@@ -45,6 +46,10 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10522 # Dairy
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
   boost: 0
 }
 feature_boost_pattern {

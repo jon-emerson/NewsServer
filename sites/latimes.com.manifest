@@ -1,3 +1,4 @@
+short_name: "LA Times"
 root_domain: "latimes.com"
 start_url: "http://www.latimes.com"
 subdomain_blacklist: "advertise.latimes.com"

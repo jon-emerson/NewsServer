@@ -1,0 +1,27 @@
+short_name: "Hunter Walk"
+root_domain: "hunterwalk.com"
+start_url: "http://hunterwalk.com/"
+paragraph_selector: ".entry-content p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://hunterwalk.com/2015/04/21/shyp-raises-50m-some-inside-baseball-notes/"
+    article_url: "http://hunterwalk.com/2015/04/20/your-total-addressable-market-stat-is-probably-a-lie/"
+    article_url: "http://hunterwalk.com/2015/04/06/five-questions-charlie-odonnell-asked-me-to-answer/"
+    article_url: "http://hunterwalk.com/2015/04/09/five-questions-with-douglas-mcgray-editor-in-chief-of-california-sunday-magazine/"
+    article_url: "http://hunterwalk.com/2015/04/11/a-good-marketplace-looks-like-a-saas-business/"
+    article_url: "http://hunterwalk.com/2007/12/22/why-i-joined-path-101/"
+    article_url: "http://hunterwalk.com/2015/04/15/referral-programs-power-the-on-demand-economy/"
+    non_article_url: "http://hunterwalk.com/author/hunterwalk/"
+    non_article_url: "http://hunterwalk.com/about/"
+    non_article_url: "http://hunterwalk.com/2009/03/"
+    non_article_url: "http://hunterwalk.com/category/uncategorized/"
+    non_article_url: "http://hunterwalk.com/category/path101/"
+  }
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}

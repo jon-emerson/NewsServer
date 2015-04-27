@@ -16,6 +16,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -52,55 +53,74 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
     // we mark the notification as engaged and we put the mentioned article at
     // the top of the response.
     String notificationBlob = this.getParameter(req, "blob");
-
     if (notificationBlob != null) {
       return getArticlesForNotification(req, notificationBlob);
-    } else if (featureId != null) {
-      return Articles.getArticlesForFeature(
-          FeatureId.fromId(Integer.parseInt(featureId)),
-          NUM_RESULTS);
     }
 
+    // Mark that the user's using the app, as long as it's from a real user
+    // action.  Occasions when we have robots hitting our system:
+    // * New Relic monitoring
+    // * Client pre-caching of the main stream when it receives a notification
     User user = getUser(req);
-    if (industryCodeId != null) {
-      return Articles.getRankedArticles(
-          user.toBuilder()
-              .clearInterest()
-              .addInterest(Interest.newBuilder()
-                  .setType(InterestType.INDUSTRY)
-                  .setIndustryCode(Integer.parseInt(industryCodeId))
-                  .build())
-              .build(),
-          NeuralNetworkScorer.getInstance(),
-          NUM_RESULTS);
-    } else if (entityId != null) {
-      return Articles.getRankedArticles(
-          user.toBuilder()
-              .clearInterest()
-              .addInterest(Interest.newBuilder()
-                  .setType(InterestType.ENTITY)
-                  .setEntity(Entity.newBuilder()
-                      .setId(entityId)
-                      .setType(entityType)
-                      .setKeyword(entityKeyword))
-                  .build())
-              .build(),
-          NeuralNetworkScorer.getInstance(),
-          NUM_RESULTS);
-    } else if (entityKeyword != null) {
-      // This codepath is probably not used anymore (since the client only shows
-      // entities with entity IDs).  And anyway, its results are really awful!!
-      // So if it does get used again someday, we should make it wayy better!
-      return Articles.getArticlesForKeyword(entityKeyword, entityType, NUM_RESULTS);
-    } else if ("linked_in".equals(contacts)) {
-      return Articles.getArticlesForContacts(user, InterestType.LINKED_IN_CONTACTS, NUM_RESULTS);
-    } else if ("address_book".equals(contacts)) {
-      return Articles.getArticlesForContacts(user, InterestType.ADDRESS_BOOK_CONTACTS, NUM_RESULTS);
-    } else {
-      return Articles.getRankedArticles(
-          user,
-          NeuralNetworkScorer.getInstance(),
-          NUM_RESULTS);
+    boolean isRequestFromRobotUser =
+        (this.getParameter(req, "blob") != null) || (this.getParameter(req, "newrelic") != null);
+    Future<User> updateLast5AppUseTimesFuture =
+        isRequestFromRobotUser
+            ? Futures.immediateFuture(user)
+            : Users.updateLast5AppUseTimes(user);
+
+    // Based on the user's query, return articles that match.
+    try {
+      if (featureId != null) {
+        return Articles.getArticlesForFeature(
+            FeatureId.fromId(Integer.parseInt(featureId)),
+            NUM_RESULTS);
+      } else if (industryCodeId != null) {
+        return Articles.getRankedArticles(
+            user.toBuilder()
+                .clearInterest()
+                .addInterest(Interest.newBuilder()
+                    .setType(InterestType.INDUSTRY)
+                    .setIndustryCode(Integer.parseInt(industryCodeId))
+                    .build())
+                .build(),
+            NeuralNetworkScorer.getInstance(),
+            NUM_RESULTS);
+      } else if (entityId != null) {
+        return Articles.getRankedArticles(
+            user.toBuilder()
+                .clearInterest()
+                .addInterest(Interest.newBuilder()
+                    .setType(InterestType.ENTITY)
+                    .setEntity(Entity.newBuilder()
+                        .setId(entityId)
+                        .setType(entityType)
+                        .setKeyword(entityKeyword))
+                    .build())
+                .build(),
+            NeuralNetworkScorer.getInstance(),
+            NUM_RESULTS);
+      } else if (entityKeyword != null) {
+        // This codepath is probably not used anymore (since the client only shows
+        // entities with entity IDs).  And anyway, its results are really awful!!
+        // So if it does get used again someday, we should make it wayy better!
+        return Articles.getArticlesForKeyword(entityKeyword, entityType, NUM_RESULTS);
+      } else if ("linked_in".equals(contacts)) {
+        return Articles.getArticlesForContacts(user, InterestType.LINKED_IN_CONTACTS, NUM_RESULTS);
+      } else if ("address_book".equals(contacts)) {
+        return Articles.getArticlesForContacts(user, InterestType.ADDRESS_BOOK_CONTACTS, NUM_RESULTS);
+      } else {
+        return Articles.getRankedArticles(
+            user,
+            NeuralNetworkScorer.getInstance(),
+            NUM_RESULTS);
+      }
+    } finally {
+      try {
+        updateLast5AppUseTimesFuture.get();
+      } catch (InterruptedException | ExecutionException e) {
+        e.printStackTrace();
+      }
     }
   }
 

@@ -2,6 +2,7 @@
 # We're only gathering articles for reuters.com/finance, then tagging them as
 # being finance related.  If we want to start grabbing articles form Reuters
 # without this classification, we'd need to do a fair amount of work.
+short_name: "Reuters"
 root_domain: "reuters.com"
 start_url: "http://www.reuters.com/finance"
 start_url: "http://www.reuters.com/finance/deals"

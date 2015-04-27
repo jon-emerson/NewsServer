@@ -1,3 +1,4 @@
+short_name: "PCMag"
 root_domain: "pcmag.com"
 start_url: "http://www.pcmag.com"
 path_blacklist {

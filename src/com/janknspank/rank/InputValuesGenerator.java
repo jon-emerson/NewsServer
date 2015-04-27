@@ -1,9 +1,11 @@
 package com.janknspank.rank;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.EntityType;
@@ -11,10 +13,15 @@ import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserIndustries;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
+import com.janknspank.classifier.FeatureType;
+import com.janknspank.classifier.manual.ManualFeatureAcquisitions;
+import com.janknspank.classifier.manual.ManualFeatureBigMoney;
+import com.janknspank.classifier.manual.ManualFeatureFundraising;
+import com.janknspank.classifier.manual.ManualFeatureLaunches;
+import com.janknspank.classifier.manual.ManualFeatureQuarterlyEarnings;
 import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
-import com.janknspank.proto.ArticleProto.ArticleFeature.Type;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.UserProto.AddressBookContact;
@@ -86,22 +93,31 @@ public class InputValuesGenerator {
   };
 
   public static double relevanceToUserIndustries(User user, Article article) {
-    double highestRelevance = 0;
-    for (ArticleFeature feature : article.getFeatureList()) {
-      if (feature.getType() == Type.ABOUT_INDUSTRY) {
-        highestRelevance = Math.max(highestRelevance, feature.getSimilarity());
-      }
-    }
+    Map<FeatureId, Double> articleIndustryMap = getArticleIndustryMap(article);
     double userRelevance = 0;
     for (FeatureId industryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
-      userRelevance = Math.max(userRelevance, getSimilarityToIndustry(article, industryFeatureId));
+      if (articleIndustryMap.containsKey(industryFeatureId)) {
+        userRelevance = Math.max(userRelevance, articleIndustryMap.get(industryFeatureId));
+      }
     }
-    // If this article's relevance to the user corresponds to the article's
-    // strongest industry relevance, reward it (by not decrementing it).
-    // This helps punish articles-about-everything.
-    return (Math.abs(highestRelevance - userRelevance) < 0.05)
-        ? userRelevance
-        : Math.max(0, userRelevance - 0.1);
+    return userRelevance;
+  }
+
+  /**
+   * Basically calculates the irrelevance of this article, as valued by the
+   * number of industries this article is more about than industries the user
+   * cares about.
+   */
+  public static double relevanceToNonUserIndustries(User user, Article article) {
+    int numIndustriesMoreRelevant = 0;
+    double relevanceToUserIndustries = relevanceToUserIndustries(user, article);
+    for (ArticleFeature feature : article.getFeatureList()) {
+      if (feature.getSimilarity() > (relevanceToUserIndustries + 0.001)
+          && FeatureId.fromId(feature.getFeatureId()).getFeatureType() == FeatureType.INDUSTRY) {
+        numIndustriesMoreRelevant++;
+      }
+    }
+    return Math.min(1, (numIndustriesMoreRelevant * 0.1));
   }
 
   public static double relevanceOnFacebook(User user, Article article) {
@@ -176,65 +192,56 @@ public class InputValuesGenerator {
   }
 
   public static double relevanceToStartups(User user, Article article) {
-    ArticleFeature startupFeature =
-        ArticleFeatures.getFeature(article, FeatureId.STARTUPS);
-    return (startupFeature == null) ? 0 : startupFeature.getSimilarity();
+    return ArticleFeatures.getFeatureSimilarity(article, FeatureId.STARTUPS);
   }
 
-  public static double relevanceToAcquisitions(User user, Article article) {
-    ArticleFeature acquisitionFeature =
-        ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_ACQUISITIONS);
-    return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
+  public static double relevanceToAcquisitions(Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureAcquisitions.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_ACQUISITIONS)
+        : 0;
   }
 
-  public static double relevanceToLaunches(User user, Article article) {
-    ArticleFeature acquisitionFeature =
-        ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_LAUNCHES);
-    return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
+  public static double relevanceToLaunches(Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureLaunches.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_LAUNCHES)
+        : 0;
   }
 
-  public static double relevanceToFundraising(User user, Article article) {
-    ArticleFeature acquisitionFeature =
-        ArticleFeatures.getFeature(article, FeatureId.MANUAL_HEURISTIC_FUNDRAISING);
-    return (acquisitionFeature == null) ? 0 : acquisitionFeature.getSimilarity();
+  public static double relevanceToFundraising(Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureFundraising.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_FUNDRAISING)
+        : 0;
   }
 
-  public static double getSimilarityToIndustry(Article article, FeatureId industryFeatureId) {
-    ArticleFeature industryFeature =
-        ArticleFeatures.getFeature(article, industryFeatureId);
-    // Only value relevance greater than 66.7%.
-    return (industryFeature == null) ? 0 :
-        Math.max(0, industryFeature.getSimilarity() * 3 - 2);
+  public static double relevanceToBigMoney(Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureBigMoney.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_BIG_MONEY)
+        : 0;
+  }
+
+  public static double relevanceToQuarterlyEarnings(
+      Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return ManualFeatureQuarterlyEarnings.isRelevantToUser(userIndustryFeatureIds)
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_QUARTERLY_EARNINGS)
+        : 0;
+  }
+
+  private static Map<FeatureId, Double> getArticleIndustryMap(Article article) {
+    Map<FeatureId, Double> articleIndustryMap = Maps.newHashMap();
+    for (ArticleFeature articleFeature : article.getFeatureList()) {
+      articleIndustryMap.put(
+          FeatureId.fromId(articleFeature.getFeatureId()), articleFeature.getSimilarity());
+    }
+    return articleIndustryMap;
   }
 
   /**
-   * Returns a score for how related this article is to sports, entertainment,
-   * or popular politics.
+   * Returns an adjusted value for an article's score against a given feature
+   * ID.  The value is adjusted such that scores less than 0.6667 receive 0s,
+   * then scores in the remaining [0.6667, 1.0] range receive scores between
+   * [0, 1], on a linear scale.
    */
-  public static double relevanceToPopCulture(Article article) {
-    double score = 0;
-    for (ArticleFeature feature : new ArticleFeature[] {
-        ArticleFeatures.getFeature(article, FeatureId.TOPIC_ENTERTAINMENT),
-        ArticleFeatures.getFeature(article, FeatureId.TOPIC_SPORTS),
-        ArticleFeatures.getFeature(article, FeatureId.TOPIC_POLITICS)
-    }) {
-      if (feature != null) {
-        score = Math.max(score, feature.getSimilarity());
-      }
-    }
-    return score;
+  public static double getOptimizedFeatureValue(Article article, FeatureId featureId) {
+    return Math.max(0, ArticleFeatures.getFeatureSimilarity(article, featureId) * 3 - 2);
   }
-
-  public static double relevanceToMurderCrimeWar(Article article) {
-    ArticleFeature murderCrimeWarFeature =
-        ArticleFeatures.getFeature(article, FeatureId.TOPIC_MURDER_CRIME_WAR);
-    // Only value relevance greater than 66.7%.
-    return (murderCrimeWarFeature == null) ? 0 :
-        Math.max(0, murderCrimeWarFeature.getSimilarity() * 3 - 2);
-  }
-
-  // Normalize any value to [0,1]
-  // private static double sigmoid(double x) {
-  //   return 1 / (1 + Math.exp(-x));
-  // }
 }
