@@ -24,6 +24,7 @@ paragraph_selector: ".article_body p"
 paragraph_selector: ".article-body p"
 paragraph_selector: ".article-content-body p"
 paragraph_selector: ".article .body p"
+paragraph_selector: "body_inner > p"
 
 # E.g. http://www.forbes.com/newsletters/validea-hot-list/2015/01/30/hot-list-portfolio-bouncing-back-in-early-2015/
 paragraph_selector: ".body-text > p"
