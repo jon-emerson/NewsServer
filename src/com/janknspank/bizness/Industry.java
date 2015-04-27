@@ -217,7 +217,7 @@ public enum Industry {
       "Program Development"),
   WRITING_AND_EDITING(103, FeatureId.PUBLISHING, "art med rec",
       "Writing and Editing"),
-  STAFFING_AND_RECRUITING(104, FeatureId.STAFFING_AND_RECRUITING, "corp",
+  STAFFING_AND_RECRUITING(104, FeatureId.HUMAN_RESOURCES, "corp",
       "Staffing and Recruiting"),
   PROFESSIONAL_TRAINING_AND_COACHING(105, FeatureId.MANAGEMENT, "corp",
       "Professional Training & Coaching"),
