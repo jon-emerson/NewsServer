@@ -1,6 +1,6 @@
 # Some random veterinarian.
-# Note: Vets don't need human medical news.  The point of this persona is to
-# help promote a differentiation between industries here.
+# Note: Vets don't need human medical news.  This persona helps differentiate
+# veterinarian news from medical news.
 name: "Dogs and Cats Galore"
 email: "dogs.and.cats.galore@gmail.com"
 good_url: "http://www.medicalnewstoday.com/releases/293018.php"
