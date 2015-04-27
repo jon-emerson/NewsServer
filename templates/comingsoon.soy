@@ -1,0 +1,72 @@
+{namespace news.comingsoon autoescape="strict"}
+
+/**
+ * Main page layout.
+ * @param title
+ */
+{template .main}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Spotter is the fastest way to stay on top of companies, people, and industries that matter to you.">
+    <meta name="keywords" content="reader,news,spotter,career,tech,rss,company,business,startup,job,funding,alerts,trending,magazine">
+    <meta name="author" content="Spotter Technologies, Inc.">
+    <title>{$title}</title>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
+    <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/animate.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/comingsoon.css">
+    <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
+  </head>
+  <body>
+    <script src="resources/js/home.js"></script>
+    <div style="width:100%; margin:0;">
+    {call .body data="all" /}
+    {call .gatracking /}
+    </div>
+  <body>
+{/template}
+
+/**
+ * Renders the main content
+ */
+{template .body}
+<main>
+  <section role="introduction" id="section-0">
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 coming-soon-col">
+            <div class="coming-soon-wrapper">
+              <img id="app-icon" alt="Spotter Logo - Business news, personalized" src="resources/img/spotterLogo2@2x.png">
+              <br />
+              <h1>Coming soon</h1>
+            </div>
+            <div class="description-wrapper">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{/template}
+
+
+/**
+ * Google Analytics tracking code
+ */
+{template .gatracking}
+<script>
+  (function(i,s,o,g,r,a,m){lb}i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){lb}
+  (i[r].q=i[r].q||[]).push(arguments){rb},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  {rb})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59699619-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+{/template}
