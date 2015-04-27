@@ -164,7 +164,7 @@ public class PushDailyNotifications {
     // it'll be an important one.
     int hoursSinceNotification =
         (int) ((System.currentTimeMillis() - lastNotificationTime) / TimeUnit.HOURS.toMillis(1));
-    int scoreNecessaryToTriggerNotification = 300 - (7 * hoursSinceNotification);
+    int scoreNecessaryToTriggerNotification = 300 - (10 * hoursSinceNotification);
     if (bestArticle != null
         && bestArticleScore >= scoreNecessaryToTriggerNotification) {
       return bestArticle.toBuilder()
