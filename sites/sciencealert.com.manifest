@@ -1,0 +1,96 @@
+short_name: "ScienceAlert"
+root_domain: "sciencealert.com"
+start_url: "http://www.sciencealert.com/"
+paragraph_selector: ".article-fulltext > p"
+article_url_pattern {
+  path_regex: "^\\/[\\w-]+$"
+}
+path_blacklist {
+  needle: "/news"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "/video"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "/video"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "/our-team"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "/contact-us"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "/advertise-with-us"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "/privacy-policy"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "/terms-and-conditions"
+  location: ENDS_WITH
+}
+path_blacklist {
+  needle: "/google-search-results.html"
+}
+rss_url: "http://feeds.feedburner.com/sciencealert-latestnews"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.sciencealert.com/welcome-to-the-future-4d-printing-is-officially-here"
+    article_url: "http://www.sciencealert.com/world-s-most-powerful-telescope-set-to-launch-in-2018"
+    article_url: "http://www.sciencealert.com/chinese-scientists-just-admitted-to-tweaking-the-genes-of-human-embryos"
+    article_url: "http://www.sciencealert.com/two-enormous-floating-solar-power-plants-have-just-opened-in-japan"
+    article_url: "http://www.sciencealert.com/brain-region-that-causes-anxiety-during-nicotine-withdrawal-has-been-identified"
+    non_article_url: "http://www.sciencealert.com/google-search-results.html?q=solar"
+    non_article_url: "http://www.sciencealert.com/news"
+    non_article_url: "http://www.sciencealert.com/video"
+    non_article_url: "http://www.sciencealert.com/our-team"
+    non_article_url: "http://www.sciencealert.com/contact-us"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10503 # Hardware and electronics
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10505 # Veterinary
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10521 # Chemistry
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10538 # Oil and Energy
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 2
+}

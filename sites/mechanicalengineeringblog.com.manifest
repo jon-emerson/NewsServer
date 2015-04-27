@@ -1,0 +1,29 @@
+short_name: "MechEBlog.com"
+root_domain: "mechanicalengineeringblog.com"
+start_url: "http://www.mechanicalengineeringblog.com/"
+paragraph_selector: ".entry > p"
+article_url_pattern {
+  path_regex: "^\\/[0-9]+-[^\\/]+\\/$"
+}
+rss_url: "http://feeds.feedburner.com/MechEnggblog"
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.mechanicalengineeringblog.com/4499-composites-manufacturing-methods-thermoset-fabrication-process-thermoplastic-manufacturing-process/"
+    article_url: "http://www.mechanicalengineeringblog.com/4473-composite-materials-introduction-basics-of-composite-materials/"
+    article_url: "http://www.mechanicalengineeringblog.com/4465-manufacturing-and-design-defects-manufacturing-defect-examples/"
+    article_url: "http://www.mechanicalengineeringblog.com/4429-an-introduction-to-3d-drafting-solid-modelling-autocad-3d-modelling-tools/"
+    article_url: "http://www.mechanicalengineeringblog.com/4421-funny-t-shirt-quotes-for-men-coolest-t-shirts-humour-t-shirts/"
+    non_article_url: "http://www.mechanicalengineeringblog.com/date/2010/12/"
+    non_article_url: "http://www.mechanicalengineeringblog.com/mechanical-testing/"
+    non_article_url: "http://www.mechanicalengineeringblog.com/category/latest-automobile-technology/"
+    non_article_url: "http://www.mechanicalengineeringblog.com/category/autocad/"
+    non_article_url: "http://www.mechanicalengineeringblog.com/category/latest-interview-questions-answers/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10553 # Mechanical and Industrial Engineering
+  boost: 5
+}

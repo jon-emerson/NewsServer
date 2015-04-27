@@ -13,6 +13,7 @@ import com.google.common.collect.ImmutableList;
 import com.janknspank.classifier.manual.ManualFeatureAcquisitions;
 import com.janknspank.classifier.manual.ManualFeatureBigMoney;
 import com.janknspank.classifier.manual.ManualFeatureFundraising;
+import com.janknspank.classifier.manual.ManualFeatureIsList;
 import com.janknspank.classifier.manual.ManualFeatureLaunches;
 import com.janknspank.classifier.manual.ManualFeatureQuarterlyEarnings;
 import com.janknspank.common.PatternCache;
@@ -57,6 +58,8 @@ public abstract class Feature {
             return new ManualFeatureLaunches(featureId);
           case MANUAL_HEURISTIC_QUARTERLY_EARNINGS:
             return new ManualFeatureQuarterlyEarnings(featureId);
+          case MANUAL_HEURISTIC_IS_LIST:
+            return new ManualFeatureIsList(featureId);
           default:
             throw new ClassifierException("No ManualHeuristicFeature for featureId: " + featureId);
         }
