@@ -57,11 +57,17 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
       return getArticlesForNotification(req, notificationBlob);
     }
 
-    // Mark that the user's using the app, as long as it's not from a cache
-    // request (as handled above in the "blob" handling).  We don't count cached
-    // requests because they're not from an active user.
+    // Mark that the user's using the app, as long as it's from a real user
+    // action.  Occasions when we have robots hitting our system:
+    // * New Relic monitoring
+    // * Client pre-caching of the main stream when it receives a notification
     User user = getUser(req);
-    Future<User> updateLast5AppUseTimesFuture = Users.updateLast5AppUseTimes(user);
+    boolean isRequestFromRobotUser =
+        (this.getParameter(req, "blob") != null) || (this.getParameter(req, "newrelic") != null);
+    Future<User> updateLast5AppUseTimesFuture =
+        isRequestFromRobotUser
+            ? Futures.immediateFuture(user)
+            : Users.updateLast5AppUseTimes(user);
 
     // Based on the user's query, return articles that match.
     try {

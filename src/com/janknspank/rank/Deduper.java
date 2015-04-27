@@ -11,6 +11,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.proto.ArticleProto.Article;
@@ -45,7 +46,7 @@ public class Deduper {
     private long oldestHotDuplicateTime = 0;
 
     public ArticleExtraction(Article article) {
-      publishedTime = article.getPublishedTime();
+      publishedTime = Articles.getPublishedTime(article);
       oldestHotDuplicateTime = article.getPublishedTime();
       stems.addAll(article.getDedupingStemsList());
     }
@@ -57,9 +58,9 @@ public class Deduper {
       return Sets.intersection(stems, extraction2.stems).size() >= STEM_INTERSECTION_COUNT_MINIMUM;
     }
 
-    public void markHasKilledDupe(long publishTime) {
+    public void markHasKilledDupe(long publishedTime) {
       ++dupeKilledCount;
-      oldestHotDuplicateTime = Math.min(oldestHotDuplicateTime, publishTime);
+      oldestHotDuplicateTime = Math.min(oldestHotDuplicateTime, publishedTime);
     }
 
     public long getPublishedTime() {
