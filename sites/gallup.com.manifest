@@ -1,4 +1,4 @@
-short_name: "Gallup Blog"
+short_name: "Gallup"
 root_domain: "gallup.com"
 start_url: "http://www.gallup.com/topic/blog_tgb.aspx"
 paragraph_selector: ".articlecontent > p"
