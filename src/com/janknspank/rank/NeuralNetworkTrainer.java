@@ -238,7 +238,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
 
     NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
-    for (int hiddenNodeCount : new int[] { 0, 2, 6, 7, 8, 9 }) {
+    for (int hiddenNodeCount : new int[] { 0, 2, 5, 6, 7, 8 }) {
       for (int tries = 0; tries < 15; tries++) {
         System.out.println("ATTEMPTING " + hiddenNodeCount + " HIDDEN NODES "
             + "(try " + (tries + 1) + " of 15)...");

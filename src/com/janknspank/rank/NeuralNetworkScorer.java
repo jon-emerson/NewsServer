@@ -7,11 +7,6 @@ import java.util.Set;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.nnet.learning.BackPropagation;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.Urls;
@@ -24,8 +19,6 @@ import com.janknspank.crawler.Interpreter;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.InterpretedData;
 import com.janknspank.proto.CoreProto.Url;
-import com.janknspank.proto.UserProto.Interest;
-import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 
 public final class NeuralNetworkScorer extends Scorer {
@@ -78,7 +71,7 @@ public final class NeuralNetworkScorer extends Scorer {
     linkedHashMap.put("startup", InputValuesGenerator.relevanceToStartups(user, article));
 
     // 7. Relevance to acquisitions.
-    Set<FeatureId> userIndustryFeatureIds = getUserIndustryFeatureIds(user);
+    Set<FeatureId> userIndustryFeatureIds = UserInterests.getUserIndustryFeatureIds(user);
     linkedHashMap.put("acquisitions",
         InputValuesGenerator.relevanceToAcquisitions(userIndustryFeatureIds, article));
 
@@ -116,30 +109,6 @@ public final class NeuralNetworkScorer extends Scorer {
         InputValuesGenerator.relevanceToList(userIndustryFeatureIds, article));
 
     return linkedHashMap;
-  }
-
-  /**
-   * Returns a Set of all the industries the passed user is following, as
-   * FeatureId objects.
-   */
-  @VisibleForTesting
-  static Set<FeatureId> getUserIndustryFeatureIds(User user) {
-    return ImmutableSet.copyOf(
-        Iterables.transform(
-            Iterables.filter(
-                UserInterests.getInterests(user),
-                new Predicate<Interest>() {
-                  @Override
-                  public boolean apply(Interest interest) {
-                    return interest.getType() == InterestType.INDUSTRY;
-                  }
-                }),
-            new Function<Interest, FeatureId>() {
-              @Override
-              public FeatureId apply(Interest interest) {
-                return FeatureId.fromId(interest.getIndustryCode());
-              }
-            }));
   }
 
   @Override

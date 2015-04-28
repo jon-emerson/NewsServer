@@ -158,6 +158,13 @@ public class InputValuesGenerator {
   }
 
   public static double relevanceToContacts(User user, Article article) {
+    // If the article isn't relevant to the user's industries, then if there's
+    // any contact name keyword string matches, they're probably false
+    // positives.  As such, just score them as 0.
+    if (relevanceToUserIndustries(user, article) < 0.1) {
+      return 0;
+    }
+
     double value = 0;
     Set<String> contactsKeywords = CONTACTS_KEYWORDS_CACHE.getContactsKeywords(user);
     for (String keyword : contactsKeywords) {

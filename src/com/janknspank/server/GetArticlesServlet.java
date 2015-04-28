@@ -17,7 +17,6 @@ import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Users;
-import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
@@ -40,7 +39,6 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
       throws DatabaseSchemaException, NumberFormatException, BiznessException {
-    String featureId = this.getParameter(req, "feature_id");
     String industryCodeId = this.getParameter(req, "industry_code");
     String contacts = this.getParameter(req, "contacts");
     String entityId = this.getParameter(req, "entity_id");
@@ -71,11 +69,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
 
     // Based on the user's query, return articles that match.
     try {
-      if (featureId != null) {
-        return Articles.getArticlesForFeature(
-            FeatureId.fromId(Integer.parseInt(featureId)),
-            NUM_RESULTS);
-      } else if (industryCodeId != null) {
+      if (industryCodeId != null) {
         return Articles.getRankedArticles(
             user.toBuilder()
                 .clearInterest()
@@ -100,15 +94,10 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
                 .build(),
             NeuralNetworkScorer.getInstance(),
             NUM_RESULTS);
-      } else if (entityKeyword != null) {
-        // This codepath is probably not used anymore (since the client only shows
-        // entities with entity IDs).  And anyway, its results are really awful!!
-        // So if it does get used again someday, we should make it wayy better!
-        return Articles.getArticlesForKeyword(entityKeyword, entityType, NUM_RESULTS);
       } else if ("linked_in".equals(contacts)) {
-        return Articles.getArticlesForContacts(user, InterestType.LINKED_IN_CONTACTS, NUM_RESULTS);
+        return Articles.getArticlesForLinkedInContacts(user, NUM_RESULTS);
       } else if ("address_book".equals(contacts)) {
-        return Articles.getArticlesForContacts(user, InterestType.ADDRESS_BOOK_CONTACTS, NUM_RESULTS);
+        return Articles.getArticlesForAddressBookContacts(user, NUM_RESULTS);
       } else {
         return Articles.getRankedArticles(
             user,

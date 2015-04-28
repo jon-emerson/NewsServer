@@ -6,8 +6,10 @@ import java.util.Set;
 import com.google.api.client.util.Lists;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
@@ -136,5 +138,30 @@ public class UserInterests {
       }
     }
     return tombstones;
+  }
+
+  /**
+   * Returns a Set of all the industries the passed user is following, as
+   * FeatureId objects.
+   */
+  public static Set<FeatureId> getUserIndustryFeatureIds(User user) {
+    ImmutableSet.Builder<FeatureId> setBuilder = ImmutableSet.builder();
+    for (Interest interest : UserInterests.getInterests(user)) {
+      if (interest.getType() == InterestType.INDUSTRY) {
+        FeatureId featureId = FeatureId.fromId(interest.getIndustryCode());
+        if (featureId != null) {
+          setBuilder.add(featureId);
+        }
+      }
+    }
+    return setBuilder.build();
+  }
+
+  public static Set<Integer> getUserIndustryFeatureIdIds(User user) {
+    ImmutableSet.Builder<Integer> setBuilder = ImmutableSet.builder();
+    for (FeatureId featureId : getUserIndustryFeatureIds(user)) {
+      setBuilder.add(featureId.getId());
+    }
+    return setBuilder.build();
   }
 }
