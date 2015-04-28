@@ -23,17 +23,16 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.Article.Reason;
-import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.CoreProto.Entity.Source;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
-import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
+import com.janknspank.rank.NeuralNetworkScorer;
 import com.janknspank.rank.Scorer;
 
 /**
@@ -67,7 +66,7 @@ public class Articles {
   /**
    * Gets articles that contain a set of keywords.
    */
-  public static ListenableFuture<Iterable<Article>> getArticlesForKeywordsFuture(
+  private static ListenableFuture<Iterable<Article>> getArticlesForKeywordsFuture(
       Iterable<String> keywords, final Article.Reason reason, int limit)
       throws DatabaseSchemaException {
     return Futures.transform(
@@ -81,7 +80,7 @@ public class Articles {
   /**
    * Gets articles that contain a set of entity IDs.
    */
-  public static ListenableFuture<Iterable<Article>> getArticlesForEntityIdsFuture(
+  private static ListenableFuture<Iterable<Article>> getArticlesForEntityIdsFuture(
       Iterable<String> entityIds, final Article.Reason reason, int limit)
       throws DatabaseSchemaException {
     return Futures.transform(
@@ -90,34 +89,6 @@ public class Articles {
             new QueryOption.WhereEquals("keyword.entity.id", entityIds),
             new QueryOption.Limit(limit)),
         getFunctionToGiveArticlesReason(reason));
-  }
-
-  /**
-   * NOTE(jonemerson): This function is crap and shouldn't be used in production.
-   */
-  public static TopList<Article, Double> getArticlesForFeature(FeatureId featureId, int limit)
-      throws DatabaseSchemaException {
-    TopList<Article, Double> goodArticles = new TopList<>(limit * 2);
-    for (Article article : Database.with(Article.class).get(
-        new QueryOption.DescendingSort("published_time"),
-        new QueryOption.WhereEqualsNumber("feature.feature_id", featureId.getId()),
-        new QueryOption.Limit(limit * 20))) {
-      double similarity = 0;
-      for (ArticleFeature feature : article.getFeatureList()) {
-        if (feature.getFeatureId() == featureId.getId()) {
-          similarity = feature.getSimilarity();
-          break;
-        }
-      }
-      goodArticles.add(article, similarity);
-    }
-    TopList<Article, Double> bestArticles = new TopList<>(limit);
-    for (Article article : Deduper.filterOutDupes(goodArticles)) {
-      // Include the social score in the ranking here, since we're not using a
-      // neural network for ranking, so otherwise it wouldn't be considered.
-      bestArticles.add(article, goodArticles.getValue(article));
-    }
-    return bestArticles;
   }
 
   /**
@@ -130,14 +101,27 @@ public class Articles {
   public static TopList<Article, Double> getRankedArticles(
       User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
     long startTime = System.currentTimeMillis();
-    Iterable<Article> articlesForInterests =
-        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10);
+    TopList<Article, Double> rankedArticles = getRankedArticles(
+        user, scorer, limit, getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10));
+    System.out.println("getRankedArticles completed in "
+        + (System.currentTimeMillis() - startTime) + "ms");
+    return rankedArticles;
+  }
+
+  /**
+   * Helper method for boiling down a set of unranked articles to their best
+   * {@code limit} articles, deduped, and prioritized according to the user's
+   * interests.  Supports the main stream and the contacts streams.
+   */
+  private static TopList<Article, Double> getRankedArticles(
+      User user, Scorer scorer, int limit, Iterable<Article> unrankedArticles)
+          throws DatabaseSchemaException, BiznessException {
 
     // Find the top 150 articles based on neural network rank + time punishment.
     Map<String, Double> scores = Maps.newHashMap();
     TopList<Article, Double> goodArticles = new TopList<>(limit * 3);
     Set<String> urls = Sets.newHashSet();
-    for (Article article : articlesForInterests) {
+    for (Article article : unrankedArticles) {
       if (urls.contains(article.getUrl())) {
         continue;
       }
@@ -166,9 +150,6 @@ public class Articles {
     for (Article article : bestArticles) {
       sortedArticles.add(article, scores.get(article.getUrl()));
     }
-
-    System.out.println("getRankedArticles completed in "
-        + (System.currentTimeMillis() - startTime) + "ms");
     return sortedArticles;
   }
 
@@ -213,6 +194,26 @@ public class Articles {
         : article.getCrawlTime();
   }
 
+  private static List<String> getLinkedInContactNames(User user, Set<String> tombstones) {
+    List<String> personNames = Lists.newArrayList();
+    for (LinkedInContact contact : user.getLinkedInContactList()) {
+      if (!tombstones.contains(contact.getName())) {
+        personNames.add(contact.getName());
+      }
+    }
+    return personNames;
+  }
+
+  private static List<String> getAddressBookContactNames(User user, Set<String> tombstones) {
+    List<String> personNames = Lists.newArrayList();
+    for (AddressBookContact contact : user.getAddressBookContactList()) {
+      if (!tombstones.contains(contact.getName())) {
+        personNames.add(contact.getName());
+      }
+    }
+    return personNames;
+  }
+
   /**
    * Gets a list of articles tailored specifically to the current user's
    * interests.
@@ -229,11 +230,7 @@ public class Articles {
     for (Interest interest : interests) {
       switch (interest.getType()) {
         case ADDRESS_BOOK_CONTACTS:
-          for (AddressBookContact contact : user.getAddressBookContactList()) {
-            if (!tombstones.contains(contact.getName())) {
-              personNames.add(contact.getName());
-            }
-          }
+          personNames.addAll(getAddressBookContactNames(user, tombstones));
           break;
 
         case INDUSTRY:
@@ -241,11 +238,7 @@ public class Articles {
           break;
 
         case LINKED_IN_CONTACTS:
-          for (LinkedInContact contact : user.getLinkedInContactList()) {
-            if (!tombstones.contains(contact.getName())) {
-              personNames.add(contact.getName());
-            }
-          }
+          personNames.addAll(getLinkedInContactNames(user, tombstones));
           break;
 
         case ENTITY:
@@ -282,21 +275,6 @@ public class Articles {
   }
 
   /**
-   * Gets articles containing a specific entity (person, organization, or place)
-   */
-  public static Iterable<Article> getArticlesForKeyword(
-      String keyword, String entityType, int limitPerType) 
-      throws DatabaseSchemaException, BiznessException {
-    try {
-      return Deduper.filterOutDupes(
-          getArticlesForKeywordsFuture(
-              ImmutableList.of(keyword), Reason.COMPANY, limitPerType).get());
-    } catch (InterruptedException | ExecutionException e) {
-      throw new BiznessException("Async exception: " + e.getMessage(), e);
-    }
-  }
-
-  /**
    * Gets a list of articles tailored specifically to the specified
    * industries.
    */
@@ -320,20 +298,30 @@ public class Articles {
         getFunctionToGiveArticlesReason(Reason.INDUSTRY));
   }
 
-  /**
-   * Returns a random article.
-   */
-  public static Article getRandomArticle() throws DatabaseSchemaException {
-    return Database.with(Article.class).getFirst(new QueryOption.AscendingSort("rand()"));
+  public static Iterable<Article> getArticlesForLinkedInContacts(
+      User user, int limit) throws DatabaseSchemaException, BiznessException {
+    return getArticlesForContacts(user,
+        getLinkedInContactNames(user, UserInterests.getTombstones(user)), limit);
   }
 
-  public static Iterable<Article> getArticlesForContacts(
-      User user, InterestType contactType, int limit)
-          throws DatabaseSchemaException, BiznessException {
-    // Kinda hacky but it works and re-uses code.
-    return getArticlesForInterests(user,
-        ImmutableList.of(Interest.newBuilder().setType(contactType).build()),
-        limit);
+  public static Iterable<Article> getArticlesForAddressBookContacts(
+      User user, int limit) throws DatabaseSchemaException, BiznessException {
+    return getArticlesForContacts(user,
+        getAddressBookContactNames(user, UserInterests.getTombstones(user)), limit);
+  }
+
+  private static Iterable<Article> getArticlesForContacts(
+      User user, List<String> contactNames, int limit) throws DatabaseSchemaException, BiznessException {
+    List<Number> featureIdIds = Lists.newArrayList();
+    featureIdIds.addAll(UserInterests.getUserIndustryFeatureIdIds(user));
+    return getRankedArticles(user,
+        NeuralNetworkScorer.getInstance(),
+        limit,
+        Database.with(Article.class).get(
+            new QueryOption.WhereEquals("keyword.keyword", contactNames),
+            new QueryOption.WhereEqualsNumber("feature.feature_id", featureIdIds),
+            new QueryOption.DescendingSort("published_time"),
+            new QueryOption.Limit(limit * 3)));
   }
 
   /** Helper method for creating the Article table. */

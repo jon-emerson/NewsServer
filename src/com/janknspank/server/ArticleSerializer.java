@@ -19,9 +19,10 @@ import com.janknspank.common.TopList;
 import com.janknspank.database.Serializer;
 import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
-import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.User;
 
 public class ArticleSerializer {
   private static final Set<Integer> SHOW_IMAGE_OFFSETS = ImmutableSet.of(
@@ -35,6 +36,32 @@ public class ArticleSerializer {
 
   public static JSONArray serialize(Iterable<Article> articles,
       User user, boolean includeLinkedInContacts, boolean includeAddressBookContacts) {
+    articles = putImageArticleFirst(articles);
+    JSONArray articlesJson = new JSONArray();
+    int i = 1;
+    for (Article article : articles) {
+      articlesJson.put(serialize(
+          article,
+          getUserKeywordSet(user, includeLinkedInContacts, includeAddressBookContacts),
+          UserInterests.getUserIndustryFeatureIdIds(user),
+          i++));
+    }
+    return articlesJson;
+  }
+
+  /**
+   * @param user current user
+   * @param includeLinkedInContacts whether linked in contacts should be FORCED
+   *     ON because the user clicked "LinkedIn Contacts" in the UI, to
+   *     specifically see articles about them, even though he might have
+   *     LinkedIn contacts disabled on his account
+   * @param includeAddressBookContacts whether address book contacts should be
+   *     FORCED ON(!!!), just like LinkedIn contacts above
+   * @return a string set for the names of people that should be considered
+   *     contacts for the purpose of this request
+   */
+  private static Set<String> getUserKeywordSet(
+      User user, boolean includeLinkedInContacts, boolean includeAddressBookContacts) {
     Set<InterestType> forcedInterests = Sets.newHashSet();
     if (includeLinkedInContacts) {
       forcedInterests.add(InterestType.LINKED_IN_CONTACTS);
@@ -42,25 +69,21 @@ public class ArticleSerializer {
     if (includeAddressBookContacts) {
       forcedInterests.add(InterestType.ADDRESS_BOOK_CONTACTS);
     }
-
-    articles = putImageArticleFirst(articles);
-    JSONArray articlesJson = new JSONArray();
-    int i = 1;
-    for (Article article : articles) {
-      articlesJson.put(serialize(article,
-          UserInterests.getUserKeywordSet(user, forcedInterests), i++));
-    }
-    return articlesJson;
+    return UserInterests.getUserKeywordSet(user, forcedInterests);
   }
 
-  public static JSONObject serialize(Article article, Set<String> userKeywordSet, int offset) {
+  public static JSONObject serialize(
+      Article article,
+      Set<String> userKeywordSet,
+      Set<Integer> userIndustryFeatureIdIds,
+      int offset) {
     JSONObject articleJson = Serializer.toJSON(article);
     List<String> paragraphs = article.getParagraphList();
     articleJson.put("first_paragraphs", toJsonArray(
         paragraphs.subList(0, Math.min(1, paragraphs.size()))));
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));
     articleJson.put("keyword",
-        Serializer.toJSON(getBestKeywords(article, userKeywordSet)));
+        Serializer.toJSON(getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)));
     if (SHOW_IMAGE_OFFSETS.contains(offset)) {
       articleJson.put("show_image", true);
     }
@@ -123,18 +146,32 @@ public class ArticleSerializer {
     return null;
   }
 
+  private static Set<Integer> getFeatureIdsForArticle(Article article) {
+    ImmutableSet.Builder<Integer> setBuilder = ImmutableSet.builder();
+    for (ArticleFeature articleFeature : article.getFeatureList()) {
+      setBuilder.add(articleFeature.getFeatureId());
+    }
+    return setBuilder.build();
+  }
+
   /**
    * Returns the top 2 keywords for an article, as tuned to the current user.
    */
   public static Iterable<ArticleKeyword> getBestKeywords(
-      Article article, Set<String> userKeywordSet) {
+      Article article, Set<String> userKeywordSet, Set<Integer> userIndustryFeatureIdIds) {
+    // Denotes whether this article matches up with any of the user's industries.
+    // If it does, we should include people matches.  If it doesn't, we shouldn't
+    // include people because they're probably false matches.
+    boolean isIndustryMatch =
+        !Collections.disjoint(userIndustryFeatureIdIds, getFeatureIdsForArticle(article));
+
     TopList<ArticleKeyword, Integer> topUserKeywords = new TopList<>(2);
     TopList<ArticleKeyword, Integer> topNonUserKeyword = new TopList<>(1);
     for (ArticleKeyword keyword : article.getKeywordList()) {
       EntityType entityType = EntityType.fromValue(keyword.getType());
-      if (userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
+      if (isIndustryMatch && userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
         if (keyword.getStrength() >= KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH
-            || entityType.isA(EntityType.PERSON)) {
+            || entityType.isA(EntityType.PERSON) || entityType == EntityType.THING) {
           topUserKeywords.add(keyword, keyword.getStrength());
         }
       } else if (keyword.getKeyword().length() < 25

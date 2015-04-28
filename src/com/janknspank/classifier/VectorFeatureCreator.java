@@ -6,23 +6,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.api.client.util.Lists;
-import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
-import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
@@ -33,7 +28,6 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.CoreProto.IndustryVectorNormalizationData;
 import com.janknspank.rank.DistributionBuilder;
 
@@ -80,41 +74,29 @@ public class VectorFeatureCreator {
   public void createVectorAndDistribution()
       throws ClassifierException, DatabaseSchemaException, BiznessException {
     // 1. Get seed words for industryCode.id
-    System.out.println("Reading keywords and URLs for " + featureId.getId() + ", \""
+    System.out.println("Reading URLs for " + featureId.getId() + ", \""
         + featureId.getTitle() + "\"...");
-    Set<String> seeds = getSeeds();
-    System.out.println(seeds.size() + " words/URLs found");
+    Set<String> uncleanedUrls = getUrls();
+    System.out.println(uncleanedUrls.size() + " URLs found");
 
-    // 2. Get all documents that contain the seed word
+    // 2. Get all articles.
     System.out.println("Reading articles...");
-    List<String> words = Lists.newArrayList();
     List<String> urls = Lists.newArrayList();
-    for (String seed : seeds) {
-      if (seed.startsWith("http://") || seed.startsWith("https://")) {
-        if (!UrlWhitelist.isOkay(seed)) {
-          System.out.println("Warning: Skipping URL which is not whitelisted: " + seed);
-        } else if (!ArticleUrlDetector.isArticle(seed)) {
-          System.out.println("Warning: Skipping URL which is not an article: " + seed);
+    for (String uncleanedUrl : uncleanedUrls) {
+      if (uncleanedUrl.startsWith("http://") || uncleanedUrl.startsWith("https://")) {
+        if (!UrlWhitelist.isOkay(uncleanedUrl)) {
+          System.out.println("Warning: Skipping URL which is not whitelisted: " + uncleanedUrl);
+        } else if (!ArticleUrlDetector.isArticle(uncleanedUrl)) {
+          System.out.println("Warning: Skipping URL which is not an article: " + uncleanedUrl);
         } else {
-          urls.add(UrlCleaner.clean(seed));
+          urls.add(UrlCleaner.clean(uncleanedUrl));
         }
       } else {
-        words.add(seed);
+        throw new RuntimeException("Seed words are not supported: " + uncleanedUrl);
       }
     }
-    Iterable<Article> seedArticles;
-    try {
-      seedArticles = Iterables.concat(
-          ArticleCrawler.getArticles(urls, true /* retain */).values(),
-          Articles.getArticlesForKeywordsFuture(words, Article.Reason.INDUSTRY, 1000).get());
-    } catch (InterruptedException | ExecutionException e) {
-      throw new ClassifierException("Async error: " + e.getMessage(), e);
-    }
+    Iterable<Article> seedArticles = ArticleCrawler.getArticles(urls, true /* retain */).values();
     System.out.println(Iterables.size(seedArticles) + " articles found");
-
-    // 2.5 Output # articles / seed word - make it easy to prune out
-    // empty seed words, or find gaps in the corpus
-    printSeedWordOccurrenceCounts(seeds, seedArticles);
 
     // 3. Convert them into the industry vector
     System.out.println("Calculating vector...");
@@ -205,10 +187,10 @@ public class VectorFeatureCreator {
 //  }
 
   /**
-   * Returns a Set of words and URLs that should be used for the creation of
+   * Returns a Set of URLs that should be used for the creation of
    * this feature vector.
    */
-  private Set<String> getSeeds() throws ClassifierException {
+  private Set<String> getUrls() throws ClassifierException {
     File seedWordFile = new File(VectorFeature.getVectorDirectory(featureId), "/seed.list");
     if (!seedWordFile.exists()) {
       throw new ClassifierException(
@@ -217,7 +199,7 @@ public class VectorFeatureCreator {
     try {
       return readWords(seedWordFile);
     } catch (IOException e) {
-      throw new ClassifierException("Couldn't get seed words from file: " + e.getMessage(), e);
+      throw new ClassifierException("Couldn't get URLs from file: " + e.getMessage(), e);
     }
   }
 
@@ -252,30 +234,6 @@ public class VectorFeatureCreator {
       return readWords(blacklistFile);
     } catch (IOException e) {
       throw new ClassifierException("Couldn't get blacklist words from file: " + e.getMessage(), e);
-    }
-  }
-
-  /**
-   * For debugging: Writes out the number of Articles each word in seed.list
-   * matched.
-   */
-  private static void printSeedWordOccurrenceCounts(Set<String> seeds,
-      Iterable<Article> articles) {
-    Multiset<String> seedOccurrenceCounts = HashMultiset.create();
-    for (Article article : articles) {
-      Set<String> keywords = new HashSet<>();
-      for (ArticleKeyword articleKeyword : article.getKeywordList()) {
-        keywords.add(articleKeyword.getKeyword());
-      }
-      for (String seed : seeds) {
-        if (keywords.contains(seed)) {
-          seedOccurrenceCounts.add(seed);
-        }
-      }
-    }
-    System.out.println("Seed word occurrences in corpus:");
-    for (String seed : seeds) {
-      System.out.println("  " + seed + ": " + seedOccurrenceCounts.count(seed));
     }
   }
 

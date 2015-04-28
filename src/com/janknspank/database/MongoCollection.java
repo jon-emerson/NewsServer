@@ -176,6 +176,11 @@ public class MongoCollection<T extends Message> extends Collection<T> {
    */
   BasicDBObject getQueryObject(QueryOption... options) {
     BasicDBObject dbObject = new BasicDBObject();
+
+    // And together any $or's or other complex queries, so that they don't
+    // overwrite each other.
+    List<DBObject> orQueriesToAndTogether = Lists.newArrayList();
+
     for (WhereOption whereEquals :
         Iterables.concat(
             QueryOption.getList(options, WhereEquals.class),
@@ -228,7 +233,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
             for (Number value : ((WhereEqualsNumber) whereEquals).getValues()) {
               or.add(new BasicDBObject(fieldName, value));
             }
-            dbObject.put("$or", or);
+            orQueriesToAndTogether.add(or);
           }
         } else if (whereEquals instanceof WhereEqualsEnum) {
           if (whereEquals instanceof WhereNotEqualsEnum) {
@@ -240,7 +245,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
             for (ProtocolMessageEnum value : ((WhereEqualsEnum) whereEquals).getValues()) {
               or.add(new BasicDBObject(fieldName, value.getValueDescriptor().getName()));
             }
-            dbObject.put("$or", or);
+            orQueriesToAndTogether.add(or);
           }
         } else if (whereEquals instanceof WhereNotEquals) {
           for (String value : ((WhereNotEquals) whereEquals).getValues()) {
@@ -258,10 +263,27 @@ public class MongoCollection<T extends Message> extends Collection<T> {
               or.add(new BasicDBObject(fieldName, value));
             }
           }
-          dbObject.put("$or", or);
+          orQueriesToAndTogether.add(or);
         }
       }
     }
+
+    // Merge all the $or's into an $and with multiple $or children, or just put
+    // a single $or onto the query, if that's all we got.
+    if (orQueriesToAndTogether.size() == 0) {
+      // Do nothing.
+    } else if (orQueriesToAndTogether.size() == 1) {
+      dbObject.put("$or", orQueriesToAndTogether.get(0));
+    } else {
+      List<DBObject> and = Lists.newArrayList();
+      for (DBObject or : orQueriesToAndTogether) {
+        BasicDBObject innerDbObject = new BasicDBObject();
+        innerDbObject.put("$or", or);
+        and.add(innerDbObject);
+      }
+      dbObject.put("$and", and);
+    }
+
     for (WhereLike whereLike :
         QueryOption.getList(options, WhereLike.class)) {
       int flags =
