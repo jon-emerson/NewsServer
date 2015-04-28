@@ -1,0 +1,43 @@
+short_name: "LinkedIn Pulse"
+root_domain: "linkedin.com"
+start_url: "https://www.linkedin.com/today/"
+paragraph_selector: ".article-body > p"
+article_url_pattern {
+  path_regex: "\\/pulse\\/[^\\/]+$"
+}
+path_blacklist {
+  needle: "/pulse/discover"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://www.linkedin.com/pulse/4-things-employees-want-boss-stop-doing-jeff-haden"
+    article_url: "https://www.linkedin.com/pulse/top-5-reasons-employees-love-boss-how-more-loved-bernard-marr"
+    article_url: "https://www.linkedin.com/pulse/problems-keeps-both-ceo-deloitte-box-awake-night-caroline-fairchild"
+    article_url: "https://www.linkedin.com/pulse/bored-out-your-mind-work-rita-j-king?trk=pulse-det-nav_art"
+    article_url: "https://www.linkedin.com/pulse/xiaomis-latest-investor-ratan-tata-your-top-india-monday-venugopal"
+    non_article_url: "http://www.linkedin.com/static?key=what_is_linkedin&trk=hb_what"
+    non_article_url: "https://www.linkedin.com/reg/join?trk=hb_join"
+    non_article_url: "https://www.linkedin.com/pulse/channel/leadership_and_management"
+    non_article_url: "https://www.linkedin.com/pulse/channel/big_ideas_and_innovation"
+    non_article_url: "https://www.linkedin.com/pulse/discover"
+  }
+}
+feature_boost_pattern {
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10554 # Human Resources
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  boost: 0
+}

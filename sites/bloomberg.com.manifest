@@ -1,6 +1,8 @@
 short_name: "Bloomberg"
 root_domain: "bloomberg.com"
 start_url: "http://www.bloomberg.com"
+start_url: "http://www.bloomberg.com/bw/blogs/the-management-blog"
+start_url: "http://www.bloomberg.com/businessweek"
 subdomain_blacklist: "bdn-ak.bloomberg.com"
 subdomain_blacklist: "bdns.bloomberg.com"
 subdomain_blacklist: "connect.bloomberg.com"
@@ -121,7 +123,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
-  boost: 2
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10536 # Real Estate
@@ -130,4 +132,8 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10538 # Oil and Energy
   boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 2
 }

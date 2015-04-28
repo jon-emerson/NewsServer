@@ -1,0 +1,38 @@
+short_name: "Gallup"
+root_domain: "gallup.com"
+start_url: "http://www.gallup.com/topic/blog_tgb.aspx"
+paragraph_selector: ".articlecontent > p"
+article_url_pattern {
+  path_regex: "\\/[0-9]+\\/[^\\/]+\\.aspx"
+}
+path_blacklist {
+  needle: "/products/"
+}
+path_blacklist {
+  needle: "/services/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.gallup.com/opinion/gallup/182813/bank-customers-trade-personal-banking-digital-banking.aspx"
+    article_url: "http://www.gallup.com/opinion/gallup/182879/tale-two-presidents-obama-putin.aspx"
+    article_url: "http://www.gallup.com/opinion/gallup/182801/rating-world-leaders-china-russia-germany.aspx"
+    article_url: "http://www.gallup.com/opinion/gallup/182867/america-no-confidence-vote-college-grads-work-readiness.aspx"
+    article_url: "http://www.gallup.com/opinion/gallup/182531/managing-employees-remotely-ways-work.aspx"
+    non_article_url: "http://www.gallup.com/home.aspx"
+    non_article_url: "http://www.gallup.com/topic/blog_tgb.aspx"
+    non_article_url: "http://www.gallup.com/topic/americas.aspx"
+    non_article_url: "http://www.gallup.com/services/169328/q12-employee-engagement.aspx"
+    non_article_url: "http://www.gallup.com/products/170957/clifton-strengthsfinder.aspx"
+  }
+}
+feature_boost_pattern {
+  boost: -5
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  boost: 2
+}

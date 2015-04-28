@@ -1,0 +1,38 @@
+short_name: "Tanveer Naseer"
+root_domain: "tanveernaseer.com"
+start_url: "http://www.tanveernaseer.com/"
+paragraph_selector: ".post > p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/$"
+}
+path_blacklist {
+  needle: "/about/"
+}
+path_blacklist {
+  needle: "/coaching/"
+}
+path_blacklist {
+  needle: "/speaking/"
+}
+path_blacklist {
+  needle: "/contact/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.tanveernaseer.com/3-leadership-lessons-from-the-world-of-jazz/"
+    article_url: "http://www.tanveernaseer.com/how-successful-leaders-promote-organizational-growth/"
+    article_url: "http://www.tanveernaseer.com/time-to-simplify-the-way-we-work/"
+    article_url: "http://www.tanveernaseer.com/empowering-collaborations-by-establishing-trust-astronaunt-ron-garan/"
+    article_url: "http://www.tanveernaseer.com/seizing-the-opportunity-to-achieve-greatness/"
+    non_article_url: "http://www.tanveernaseer.com/about/"
+    non_article_url: "http://www.tanveernaseer.com/coaching/"
+    non_article_url: "http://www.tanveernaseer.com/speaking/"
+    non_article_url: "http://www.tanveernaseer.com/contact/"
+    non_article_url: "http://www.tanveernaseer.com/about/XYZ111/"
+  }
+}
+
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 5
+}
