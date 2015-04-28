@@ -177,6 +177,11 @@ bad_url: "http://seekingalpha.com/article/3105046-juniper-may-be-optimistic-but-
 bad_url: "http://www.nytimes.com/2015/04/29/sports/expectations-for-mayweather-pacquiao-are-high-boxings-future-is-murkier.html"
 bad_url: "http://www.bloomberg.com/news/articles/2015-04-28/the-oil-rally-looks-doomed-in-five-charts"
 bad_url: "http://www.bloomberg.com/news/articles/2015-04-28/dispute-over-korean-sex-slaves-complicates-obama-s-asia-strategy"
+bad_url: "http://www.huffingtonpost.com/shelbie-thilmony/im-getting-married-at-22-_b_7151670.html"
+bad_url: "http://www.forbes.com/sites/gurufocus/2015/04/28/exxonmobil-staying-strong-despite-oils-drop/"
+bad_url: "http://www.breitbart.com/big-government/2015/04/28/dhs-sec-disappointed-that-not-more-people-using-program-to-fly-central-americans-to-u-s-need-to-promote-it-better/"
+bad_url: "http://seekingalpha.com/article/3110986-why-markets-are-manic-the-fed-is-addicted-to-the-easy-button"
+bad_url: "http://blogs.wsj.com/moneybeat/2015/04/28/hedge-funds-lead-shift-in-dollar-sentiment/"
 interest {
   id: "55034f7de4b097661cf860b8"
   type: INDUSTRY
