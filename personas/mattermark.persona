@@ -149,6 +149,7 @@ bad_url: "http://www.nytimes.com/2015/04/22/travel/the-new-flygirl-blog-focuses-
 bad_url: "http://www.nytimes.com/2015/04/21/travel/artisans-and-crafts-in-london.html"
 bad_url: "http://www.nytimes.com/2015/04/20/travel/heading-to-seattle-whats-new-in-washingtons-seaside-city.html"
 bad_url: "http://www.nytimes.com/2015/04/19/travel/whats-new-in-milan-paris-and-manchester-england.html"
+bad_url: "http://www.entrepreneur.com/article/245518"
 interest {
   id: "55034f7de4b097661cf860b8"
   type: INDUSTRY

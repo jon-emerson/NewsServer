@@ -33,7 +33,9 @@ public class TopArticlesForFeature {
       for (Article article : articles) {
         ArticleFeature articleFeature =
             ArticleFeatures.getFeature(article, FeatureId.fromId(Integer.parseInt(arg)));
-        topRankingArticles.add(article, articleFeature.getSimilarity());
+        if (articleFeature != null) {
+          topRankingArticles.add(article, articleFeature.getSimilarity());
+        }
       }
 
       for (Article article : topRankingArticles.getKeys()) {
