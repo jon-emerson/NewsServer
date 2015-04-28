@@ -44,17 +44,14 @@ public class NewsServlet extends HttpServlet {
   public String getParameter(HttpServletRequest request, String key) {
     String value = request.getParameter(key);
     if (value != null) {
-      System.out.println("Parameter " + key + "=" + value);
       return value;
     } else {
       for (NameValuePair pair : (List<NameValuePair>) request.getAttribute(PARAMS_ATTRIBUTE_KEY)) {
         if (key.equals(pair.getName())) {
-          System.out.println("Parameter " + key + "=" + pair.getValue());
           return pair.getValue();
         }
       }
     }
-    System.out.println("Parameter " + key + "=" + null);
     return null;
   }
 
@@ -282,5 +279,18 @@ public class NewsServlet extends HttpServlet {
     JSONObject response = new JSONObject();
     response.put("success", true);
     return response;
+  }
+
+  public static String getRemoteAddr(HttpServletRequest request) {
+    String remoteAddr = request.getRemoteAddr();
+    String xForwardedForHeader = request.getHeader("X-FORWARDED-FOR");
+    if (xForwardedForHeader != null) {
+      remoteAddr = xForwardedForHeader;
+      int idx = remoteAddr.indexOf(',');
+      if (idx > -1) {
+        remoteAddr = remoteAddr.substring(0, idx);
+      }
+    }
+    return remoteAddr;
   }
 }

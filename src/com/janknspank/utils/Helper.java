@@ -16,7 +16,7 @@ import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.rank.Personas;
 
 public class Helper {
-  public static void main(String args[]) throws Exception {
+  public static void main2(String args[]) throws Exception {
     for (String email : new String[] { "tom.charytoniuk@gmail.com" }) {
       Persona persona = Personas.getByEmail(email);
       Map<String, Article> goodArticles = ArticleCrawler.getArticles(persona.getGoodUrlList(), true);
@@ -33,14 +33,14 @@ public class Helper {
     }
   }
 
-  public static void main2(String args[]) throws DatabaseSchemaException {
+  public static void main(String args[]) throws DatabaseSchemaException {
     for (Article article : Database.with(Article.class).get(
         new QueryOption.DescendingSort("published_time"),
-        new QueryOption.Limit(5000))) {
+        new QueryOption.Limit(10000))) {
       double featureSimilarity =
-          ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_QUARTERLY_EARNINGS);
-      if (ArticleFeatures.getFeatureSimilarity(article, FeatureId.SOFTWARE) > 0
-          && featureSimilarity > 0.1) {
+          ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_IS_LIST);
+      if (featureSimilarity > 0.1
+          && ArticleFeatures.getFeatureSimilarity(article, FeatureId.ARCHITECTURE_AND_PLANNING) > 0.8) {
         System.out.println("\"" + article.getTitle() + "\" (" + featureSimilarity + ")");
         System.out.println(article.getUrl());
         System.out.println("First paragraph: \""

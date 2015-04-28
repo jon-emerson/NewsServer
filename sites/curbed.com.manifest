@@ -51,10 +51,13 @@ test_instructions {
   }
 }
 feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
   feature_id: 10536 # Real Estate
   boost: 1
 }
 feature_boost_pattern {
   feature_id: 10517 # Architecture & Planning
-  boost: 1
+  boost: 0
 }

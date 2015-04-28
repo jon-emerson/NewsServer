@@ -67,7 +67,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
     Future<User> updateLast5AppUseTimesFuture =
         isRequestFromRobotUser
             ? Futures.immediateFuture(user)
-            : Users.updateLast5AppUseTimes(user);
+            : Users.updateLast5AppUseTimes(user, getRemoteAddr(req));
 
     // Based on the user's query, return articles that match.
     try {

@@ -58,7 +58,16 @@ class ArticleCreator {
       "http://images.rigzone.com/images/rz-facebook.jpg",
       "http://static01.nyt.com/images/icons/t_logo_291_black.png",
       "http://www.inc.com/images/incthumb250.png",
-      "http://fm.cnbc.com/applications/cnbc.com/staticcontent/img/cnbc_logo.gif");
+      "http://fm.cnbc.com/applications/cnbc.com/staticcontent/img/cnbc_logo.gif",
+      "http://static.cdn-seekingalpha.com/uploads/2013/8/19/social_sa_logo.png",
+      "http://idge.staticworld.net/ifw/IFW_logo_social_300x300.png",
+      "http://www.scientificamerican.com/sciam/includes/themes/sciam/images/logo400x400.jpg",
+      "http://mw1.wsj.net/MW5/content/images/logos/mw-social-logo.jpg",
+      "http://www1.ibdcd.com/images/IBDicon_309171.png",
+      "http://cdn.fxstreet.com/img/facebook/*/FXstreet-90x90.png",
+      "http://cdn.fxstreet.com/img/facebook/usdjpy/usdjpy.png",
+      "http://cdn.fxstreet.com/img/facebook/eurusd/eurusd02.png",
+      "http://cdn.fxstreet.com/img/facebook/usdchf/usdchf02.png");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\\–|\u2014)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),

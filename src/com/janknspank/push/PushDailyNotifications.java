@@ -1,4 +1,4 @@
-package com.janknspank.utils;
+package com.janknspank.push;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +10,6 @@ import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.IosPushNotificationHelper;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
@@ -84,6 +83,14 @@ public class PushDailyNotifications {
     // 0 out of 100 possible for ranking score.
     int score = (int) (neuralNetworkScore * 100);
 
+    // Slight punishment for older articles, so that we tend to notify about
+    // newly published topics as opposed to things the user might have seen
+    // on other news aggregators recently.
+    if (((System.currentTimeMillis() - Articles.getPublishedTime(article))
+        / TimeUnit.HOURS.toMillis(1)) >= 3) {
+      score -= 20;
+    }
+
     // 0, 75, or 100 depending on whether the article's about a company, and
     // whether the user's following that company.
     if (isArticleAboutFollowedCompany(article, followedEntityIds)) {
@@ -126,6 +133,12 @@ public class PushDailyNotifications {
 
   private static Article getArticleToNotifyAbout(User user)
       throws DatabaseSchemaException, BiznessException {
+    UserTimezone userTimezone = UserTimezone.getForUser(user);
+    if (userTimezone.isNight()) {
+      // Don't even risk sending anything at night...
+      return null;
+    }
+
     Set<String> followedEntityIds = getFollowedEntityIds(user);
 
     // Don't consider articles older than the last time the user used the app or
@@ -157,14 +170,22 @@ public class PushDailyNotifications {
       }
     }
 
-    // Depending on how important we find this article, return it, or null to
-    // indicate that no notification should be sent.  FYI 300 = the highest
-    // possible notification score.  So we have a time fall-off between
-    // notifications so that eventually we'll send a notification, and usually
-    // it'll be an important one.
+    // Depending on how important we find this article and what time of day it
+    // is, return it, or null to indicate that no notification should be sent.
+    // FYI 300 = the highest possible notification score.  So we have a time
+    // fall-off between notifications so that eventually we'll send a
+    // notification, and usually it'll be an important one.
     int hoursSinceNotification =
         (int) ((System.currentTimeMillis() - lastNotificationTime) / TimeUnit.HOURS.toMillis(1));
-    int scoreNecessaryToTriggerNotification = 300 - (7 * hoursSinceNotification);
+    int scoreNecessaryToTriggerNotification = 250 - (10 * hoursSinceNotification);
+    if (userTimezone.isMorning()) {
+      // Encourage more notifications in the morning.
+      scoreNecessaryToTriggerNotification -= 50;
+    }
+    if (userTimezone.isWeekend()) {
+      // Only notify people on weekends if it's important.
+      scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 200);
+    }
     if (bestArticle != null
         && bestArticleScore >= scoreNecessaryToTriggerNotification) {
       return bestArticle.toBuilder()
