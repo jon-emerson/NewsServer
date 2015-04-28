@@ -95,6 +95,18 @@ message User {
     (client_serialization) = EXCLUDE
   ];
 
+  // Timezone handling: As last_5_app_use_time is updated, also remember the
+  // user's IP address.  Then, periodically, go fetch the user's predicted
+  // timezone as part of the push notification process, so that we can try
+  // not to send notifications when people are sleeping.
+  optional string last_ip_address = 21 [
+    (string_length) = 20
+  ];
+  optional string timezone_estimate = 22 [
+    (string_length) = 10
+  ];
+  optional int64 last_timezone_estimate_update = 23;
+
   // Next ID: 21.
 }
 

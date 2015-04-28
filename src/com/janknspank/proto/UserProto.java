@@ -314,6 +314,67 @@ public final class UserProto {
      * </pre>
      */
     long getLast5AppUseTime(int index);
+
+    // optional string last_ip_address = 21;
+    /**
+     * <code>optional string last_ip_address = 21;</code>
+     *
+     * <pre>
+     * Timezone handling: As last_5_app_use_time is updated, also remember the
+     * user's IP address.  Then, periodically, go fetch the user's predicted
+     * timezone as part of the push notification process, so that we can try
+     * not to send notifications when people are sleeping.
+     * </pre>
+     */
+    boolean hasLastIpAddress();
+    /**
+     * <code>optional string last_ip_address = 21;</code>
+     *
+     * <pre>
+     * Timezone handling: As last_5_app_use_time is updated, also remember the
+     * user's IP address.  Then, periodically, go fetch the user's predicted
+     * timezone as part of the push notification process, so that we can try
+     * not to send notifications when people are sleeping.
+     * </pre>
+     */
+    java.lang.String getLastIpAddress();
+    /**
+     * <code>optional string last_ip_address = 21;</code>
+     *
+     * <pre>
+     * Timezone handling: As last_5_app_use_time is updated, also remember the
+     * user's IP address.  Then, periodically, go fetch the user's predicted
+     * timezone as part of the push notification process, so that we can try
+     * not to send notifications when people are sleeping.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getLastIpAddressBytes();
+
+    // optional string timezone_estimate = 22;
+    /**
+     * <code>optional string timezone_estimate = 22;</code>
+     */
+    boolean hasTimezoneEstimate();
+    /**
+     * <code>optional string timezone_estimate = 22;</code>
+     */
+    java.lang.String getTimezoneEstimate();
+    /**
+     * <code>optional string timezone_estimate = 22;</code>
+     */
+    com.google.protobuf.ByteString
+        getTimezoneEstimateBytes();
+
+    // optional int64 last_timezone_estimate_update = 23;
+    /**
+     * <code>optional int64 last_timezone_estimate_update = 23;</code>
+     */
+    boolean hasLastTimezoneEstimateUpdate();
+    /**
+     * <code>optional int64 last_timezone_estimate_update = 23;</code>
+     */
+    long getLastTimezoneEstimateUpdate();
   }
   /**
    * Protobuf type {@code User}
@@ -485,6 +546,21 @@ public final class UserProto {
                 last5AppUseTime_.add(input.readInt64());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 170: {
+              bitField0_ |= 0x00001000;
+              lastIpAddress_ = input.readBytes();
+              break;
+            }
+            case 178: {
+              bitField0_ |= 0x00002000;
+              timezoneEstimate_ = input.readBytes();
+              break;
+            }
+            case 184: {
+              bitField0_ |= 0x00004000;
+              lastTimezoneEstimateUpdate_ = input.readInt64();
               break;
             }
           }
@@ -1171,6 +1247,129 @@ public final class UserProto {
       return last5AppUseTime_.get(index);
     }
 
+    // optional string last_ip_address = 21;
+    public static final int LAST_IP_ADDRESS_FIELD_NUMBER = 21;
+    private java.lang.Object lastIpAddress_;
+    /**
+     * <code>optional string last_ip_address = 21;</code>
+     *
+     * <pre>
+     * Timezone handling: As last_5_app_use_time is updated, also remember the
+     * user's IP address.  Then, periodically, go fetch the user's predicted
+     * timezone as part of the push notification process, so that we can try
+     * not to send notifications when people are sleeping.
+     * </pre>
+     */
+    public boolean hasLastIpAddress() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional string last_ip_address = 21;</code>
+     *
+     * <pre>
+     * Timezone handling: As last_5_app_use_time is updated, also remember the
+     * user's IP address.  Then, periodically, go fetch the user's predicted
+     * timezone as part of the push notification process, so that we can try
+     * not to send notifications when people are sleeping.
+     * </pre>
+     */
+    public java.lang.String getLastIpAddress() {
+      java.lang.Object ref = lastIpAddress_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          lastIpAddress_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string last_ip_address = 21;</code>
+     *
+     * <pre>
+     * Timezone handling: As last_5_app_use_time is updated, also remember the
+     * user's IP address.  Then, periodically, go fetch the user's predicted
+     * timezone as part of the push notification process, so that we can try
+     * not to send notifications when people are sleeping.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getLastIpAddressBytes() {
+      java.lang.Object ref = lastIpAddress_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        lastIpAddress_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string timezone_estimate = 22;
+    public static final int TIMEZONE_ESTIMATE_FIELD_NUMBER = 22;
+    private java.lang.Object timezoneEstimate_;
+    /**
+     * <code>optional string timezone_estimate = 22;</code>
+     */
+    public boolean hasTimezoneEstimate() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>optional string timezone_estimate = 22;</code>
+     */
+    public java.lang.String getTimezoneEstimate() {
+      java.lang.Object ref = timezoneEstimate_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          timezoneEstimate_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string timezone_estimate = 22;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTimezoneEstimateBytes() {
+      java.lang.Object ref = timezoneEstimate_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        timezoneEstimate_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 last_timezone_estimate_update = 23;
+    public static final int LAST_TIMEZONE_ESTIMATE_UPDATE_FIELD_NUMBER = 23;
+    private long lastTimezoneEstimateUpdate_;
+    /**
+     * <code>optional int64 last_timezone_estimate_update = 23;</code>
+     */
+    public boolean hasLastTimezoneEstimateUpdate() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>optional int64 last_timezone_estimate_update = 23;</code>
+     */
+    public long getLastTimezoneEstimateUpdate() {
+      return lastTimezoneEstimateUpdate_;
+    }
+
     private void initFields() {
       id_ = "";
       firstName_ = "";
@@ -1189,6 +1388,9 @@ public final class UserProto {
       urlFavorite_ = java.util.Collections.emptyList();
       interest_ = java.util.Collections.emptyList();
       last5AppUseTime_ = java.util.Collections.emptyList();
+      lastIpAddress_ = "";
+      timezoneEstimate_ = "";
+      lastTimezoneEstimateUpdate_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1258,6 +1460,15 @@ public final class UserProto {
       }
       for (int i = 0; i < last5AppUseTime_.size(); i++) {
         output.writeInt64(20, last5AppUseTime_.get(i));
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeBytes(21, getLastIpAddressBytes());
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeBytes(22, getTimezoneEstimateBytes());
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeInt64(23, lastTimezoneEstimateUpdate_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1340,6 +1551,18 @@ public final class UserProto {
         }
         size += dataSize;
         size += 2 * getLast5AppUseTimeList().size();
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(21, getLastIpAddressBytes());
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(22, getTimezoneEstimateBytes());
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(23, lastTimezoneEstimateUpdate_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1516,6 +1739,12 @@ public final class UserProto {
         }
         last5AppUseTime_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00010000);
+        lastIpAddress_ = "";
+        bitField0_ = (bitField0_ & ~0x00020000);
+        timezoneEstimate_ = "";
+        bitField0_ = (bitField0_ & ~0x00040000);
+        lastTimezoneEstimateUpdate_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00080000);
         return this;
       }
 
@@ -1637,6 +1866,18 @@ public final class UserProto {
           bitField0_ = (bitField0_ & ~0x00010000);
         }
         result.last5AppUseTime_ = last5AppUseTime_;
+        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.lastIpAddress_ = lastIpAddress_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.timezoneEstimate_ = timezoneEstimate_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.lastTimezoneEstimateUpdate_ = lastTimezoneEstimateUpdate_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1820,6 +2061,19 @@ public final class UserProto {
             last5AppUseTime_.addAll(other.last5AppUseTime_);
           }
           onChanged();
+        }
+        if (other.hasLastIpAddress()) {
+          bitField0_ |= 0x00020000;
+          lastIpAddress_ = other.lastIpAddress_;
+          onChanged();
+        }
+        if (other.hasTimezoneEstimate()) {
+          bitField0_ |= 0x00040000;
+          timezoneEstimate_ = other.timezoneEstimate_;
+          onChanged();
+        }
+        if (other.hasLastTimezoneEstimateUpdate()) {
+          setLastTimezoneEstimateUpdate(other.getLastTimezoneEstimateUpdate());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3774,6 +4028,229 @@ public final class UserProto {
       public Builder clearLast5AppUseTime() {
         last5AppUseTime_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00010000);
+        onChanged();
+        return this;
+      }
+
+      // optional string last_ip_address = 21;
+      private java.lang.Object lastIpAddress_ = "";
+      /**
+       * <code>optional string last_ip_address = 21;</code>
+       *
+       * <pre>
+       * Timezone handling: As last_5_app_use_time is updated, also remember the
+       * user's IP address.  Then, periodically, go fetch the user's predicted
+       * timezone as part of the push notification process, so that we can try
+       * not to send notifications when people are sleeping.
+       * </pre>
+       */
+      public boolean hasLastIpAddress() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      /**
+       * <code>optional string last_ip_address = 21;</code>
+       *
+       * <pre>
+       * Timezone handling: As last_5_app_use_time is updated, also remember the
+       * user's IP address.  Then, periodically, go fetch the user's predicted
+       * timezone as part of the push notification process, so that we can try
+       * not to send notifications when people are sleeping.
+       * </pre>
+       */
+      public java.lang.String getLastIpAddress() {
+        java.lang.Object ref = lastIpAddress_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          lastIpAddress_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string last_ip_address = 21;</code>
+       *
+       * <pre>
+       * Timezone handling: As last_5_app_use_time is updated, also remember the
+       * user's IP address.  Then, periodically, go fetch the user's predicted
+       * timezone as part of the push notification process, so that we can try
+       * not to send notifications when people are sleeping.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getLastIpAddressBytes() {
+        java.lang.Object ref = lastIpAddress_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          lastIpAddress_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string last_ip_address = 21;</code>
+       *
+       * <pre>
+       * Timezone handling: As last_5_app_use_time is updated, also remember the
+       * user's IP address.  Then, periodically, go fetch the user's predicted
+       * timezone as part of the push notification process, so that we can try
+       * not to send notifications when people are sleeping.
+       * </pre>
+       */
+      public Builder setLastIpAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00020000;
+        lastIpAddress_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string last_ip_address = 21;</code>
+       *
+       * <pre>
+       * Timezone handling: As last_5_app_use_time is updated, also remember the
+       * user's IP address.  Then, periodically, go fetch the user's predicted
+       * timezone as part of the push notification process, so that we can try
+       * not to send notifications when people are sleeping.
+       * </pre>
+       */
+      public Builder clearLastIpAddress() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        lastIpAddress_ = getDefaultInstance().getLastIpAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string last_ip_address = 21;</code>
+       *
+       * <pre>
+       * Timezone handling: As last_5_app_use_time is updated, also remember the
+       * user's IP address.  Then, periodically, go fetch the user's predicted
+       * timezone as part of the push notification process, so that we can try
+       * not to send notifications when people are sleeping.
+       * </pre>
+       */
+      public Builder setLastIpAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00020000;
+        lastIpAddress_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string timezone_estimate = 22;
+      private java.lang.Object timezoneEstimate_ = "";
+      /**
+       * <code>optional string timezone_estimate = 22;</code>
+       */
+      public boolean hasTimezoneEstimate() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      /**
+       * <code>optional string timezone_estimate = 22;</code>
+       */
+      public java.lang.String getTimezoneEstimate() {
+        java.lang.Object ref = timezoneEstimate_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          timezoneEstimate_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string timezone_estimate = 22;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTimezoneEstimateBytes() {
+        java.lang.Object ref = timezoneEstimate_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          timezoneEstimate_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string timezone_estimate = 22;</code>
+       */
+      public Builder setTimezoneEstimate(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00040000;
+        timezoneEstimate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string timezone_estimate = 22;</code>
+       */
+      public Builder clearTimezoneEstimate() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        timezoneEstimate_ = getDefaultInstance().getTimezoneEstimate();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string timezone_estimate = 22;</code>
+       */
+      public Builder setTimezoneEstimateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00040000;
+        timezoneEstimate_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 last_timezone_estimate_update = 23;
+      private long lastTimezoneEstimateUpdate_ ;
+      /**
+       * <code>optional int64 last_timezone_estimate_update = 23;</code>
+       */
+      public boolean hasLastTimezoneEstimateUpdate() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      /**
+       * <code>optional int64 last_timezone_estimate_update = 23;</code>
+       */
+      public long getLastTimezoneEstimateUpdate() {
+        return lastTimezoneEstimateUpdate_;
+      }
+      /**
+       * <code>optional int64 last_timezone_estimate_update = 23;</code>
+       */
+      public Builder setLastTimezoneEstimateUpdate(long value) {
+        bitField0_ |= 0x00080000;
+        lastTimezoneEstimateUpdate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 last_timezone_estimate_update = 23;</code>
+       */
+      public Builder clearLastTimezoneEstimateUpdate() {
+        bitField0_ = (bitField0_ & ~0x00080000);
+        lastTimezoneEstimateUpdate_ = 0L;
         onChanged();
         return this;
       }
@@ -11061,7 +11538,7 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/user.proto\032(com/j" +
       "anknspank/database/extensions.proto\032\037com" +
-      "/janknspank/proto/core.proto\"\201\005\n\004User\022\034\n" +
+      "/janknspank/proto/core.proto\"\350\005\n\004User\022\034\n" +
       "\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\nfirst_nam" +
       "e\030\002 \001(\tB\004\230\246\035d\022\027\n\tlast_name\030\003 \001(\tB\004\230\246\035d\022\027" +
       "\n\005email\030\004 \001(\tB\010\220\246\035\003\230\246\035d\022\032\n\014linked_in_id\030" +
@@ -11077,44 +11554,46 @@ public final class UserProto {
       "dressBookContactB\004\240\246\035\003\022(\n\014url_favorite\030\016" +
       " \003(\0132\014.UrlFavoriteB\004\240\246\035\003\022!\n\010interest\030\017 \003" +
       "(\0132\t.InterestB\004\240\246\035\003\022!\n\023last_5_app_use_ti" +
-      "me\030\024 \003(\003B\004\240\246\035\003:\020\212\265\030\014MongoDB.User\",\n\022Addr" +
-      "essBookContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"J",
-      "\n\013UrlFavorite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\030\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"\255\002\n\017L" +
-      "inkedInProfile\0223\n\020current_employer\030\001 \001(\013" +
-      "2\031.LinkedInProfile.Employer\0220\n\rpast_empl" +
-      "oyer\030\002 \003(\0132\031.LinkedInProfile.Employer\022\030\n" +
-      "\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\035\n\013create_time\030\004" +
-      " \001(\003B\010\210\246\035\001\240\246\035\003\032z\n\010Employer\022\026\n\004name\030\001 \001(\t" +
-      "B\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\te" +
-      "ntity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003" +
-      "\022\020\n\010end_time\030\005 \001(\003\")\n\017LinkedInContact\022\026\n",
-      "\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\255\003\n\010Interest\022 \n\002id" +
-      "\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022*\n\004type\030\002 \001" +
-      "(\0162\026.Interest.InterestTypeB\004\210\246\035\001\022.\n\006sour" +
-      "ce\030\003 \001(\0162\030.Interest.InterestSourceB\004\210\246\035\001" +
-      "\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\025\n\rindus" +
-      "try_code\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\"" +
-      "i\n\014InterestType\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUSTR" +
-      "Y\020\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022" +
-      "\031\n\025ADDRESS_BOOK_CONTACTS\020\004\"c\n\016InterestSo" +
-      "urce\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKED_IN",
-      "_PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\r\n\tTOMB" +
-      "STONE\020\003*\004\010\007\020\010\"\215\004\n\nUserAction\022\034\n\002id\030\001 \001(\t" +
-      "B\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035" +
-      "\001\230\246\035\030\250\246\035\001\220\246\035\003\0225\n\013action_type\030\003 \001(\0162\026.Use" +
-      "rAction.ActionTypeB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004" +
-      " \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035" +
-      "\001\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035\n\013create_time\030\006 \001(\003B\010\210\246\035" +
-      "\001\220\246\035\003\022\027\n\017read_start_time\030\007 \001(\003\022\025\n\rread_e" +
-      "nd_time\030\010 \001(\003\022!\n\010interest\030\013 \003(\0132\t.Intere" +
-      "stB\004\240\246\035\003\022)\n\026on_stream_for_interest\030\014 \001(\013",
-      "2\t.Interest\"\221\001\n\nActionType\022\013\n\007UNKNOWN\020\000\022" +
-      "\014\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STR" +
-      "EAM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VO" +
-      "TE_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010:" +
-      "\024\212\265\030\020MySQL.UserActionB!\n\024com.janknspank." +
-      "protoB\tUserProto"
+      "me\030\024 \003(\003B\004\240\246\035\003\022\035\n\017last_ip_address\030\025 \001(\tB" +
+      "\004\230\246\035\024\022\037\n\021timezone_estimate\030\026 \001(\tB\004\230\246\035\n\022%",
+      "\n\035last_timezone_estimate_update\030\027 \001(\003:\020\212" +
+      "\265\030\014MongoDB.User\",\n\022AddressBookContact\022\026\n" +
+      "\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"J\n\013UrlFavorite\022 \n\006" +
+      "url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create" +
+      "_time\030\002 \001(\003B\004\210\246\035\001\"\255\002\n\017LinkedInProfile\0223\n" +
+      "\020current_employer\030\001 \001(\0132\031.LinkedInProfil" +
+      "e.Employer\0220\n\rpast_employer\030\002 \003(\0132\031.Link" +
+      "edInProfile.Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001" +
+      "\230\246\035\200\240\006\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\032z\n" +
+      "\010Employer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005tit",
+      "le\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230" +
+      "\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(" +
+      "\003\")\n\017LinkedInContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001" +
+      "\230\246\035d\"\255\003\n\010Interest\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230" +
+      "\246\035\030\250\246\035\001\240\246\035\003\022*\n\004type\030\002 \001(\0162\026.Interest.Int" +
+      "erestTypeB\004\210\246\035\001\022.\n\006source\030\003 \001(\0162\030.Intere" +
+      "st.InterestSourceB\004\210\246\035\001\022\035\n\013create_time\030\004" +
+      " \001(\003B\010\210\246\035\001\240\246\035\003\022\025\n\rindustry_code\030\005 \001(\005\022\027\n" +
+      "\006entity\030\006 \001(\0132\007.Entity\"i\n\014InterestType\022\014" +
+      "\n\010UNKNONWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006ENTITY\020\002\022\026",
+      "\n\022LINKED_IN_CONTACTS\020\003\022\031\n\025ADDRESS_BOOK_C" +
+      "ONTACTS\020\004\"c\n\016InterestSource\022\013\n\007UNKNOWN\020\000" +
+      "\022\010\n\004USER\020\001\022\025\n\021LINKED_IN_PROFILE\020\002\022\024\n\020FAC" +
+      "EBOOK_PROFILE\020\004\022\r\n\tTOMBSTONE\020\003*\004\010\007\020\010\"\215\004\n" +
+      "\nUserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035" +
+      "\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\003\0225\n\013" +
+      "action_type\030\003 \001(\0162\026.UserAction.ActionTyp" +
+      "eB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035" +
+      "\001\220\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035\n" +
+      "\013create_time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017read_sta",
+      "rt_time\030\007 \001(\003\022\025\n\rread_end_time\030\010 \001(\003\022!\n\010" +
+      "interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)\n\026on_st" +
+      "ream_for_interest\030\014 \001(\0132\t.Interest\"\221\001\n\nA" +
+      "ctionType\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005" +
+      "X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005SHARE\020\004\022" +
+      "\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOTE" +
+      "_UP\020\007\022\017\n\013SCROLL_PAST\020\010:\024\212\265\030\020MySQL.UserAc" +
+      "tionB!\n\024com.janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11126,7 +11605,7 @@ public final class UserProto {
           internal_static_User_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_User_descriptor,
-              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", "Last5AppUseTime", });
+              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", "Last5AppUseTime", "LastIpAddress", "TimezoneEstimate", "LastTimezoneEstimateUpdate", });
           internal_static_AddressBookContact_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_AddressBookContact_fieldAccessorTable = new
@@ -11194,6 +11673,8 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

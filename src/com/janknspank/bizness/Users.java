@@ -4,7 +4,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.collect.Iterables;
+import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -32,7 +34,8 @@ public class Users {
    * Asynchronously updates the record of the last 5 times the user's used the
    * app, which we use for notifications and ranking purposes.
    */
-  public static Future<User> updateLast5AppUseTimes(User user) throws DatabaseSchemaException {
+  public static Future<User> updateLast5AppUseTimes(User user, String ipAddress)
+      throws DatabaseSchemaException {
     TopList<Long, Long> top = new TopList<>(5);
     for (long time : user.getLast5AppUseTimeList()) {
       top.add(time, time);
@@ -40,10 +43,31 @@ public class Users {
     long now = System.currentTimeMillis();
     if ((long) Iterables.getFirst(top, new Long(0)) < (now - TimeUnit.HOURS.toMillis(1))) {
       top.add(now, now);
-      return Database.with(User.class).setFuture(user, "last_5_app_use_time", top);
+      return updateLastIpAddress(
+          Database.with(User.class).setFuture(user, "last_5_app_use_time", top), ipAddress);
     } else {
       return Futures.immediateFuture(user);
     }
+  }
+
+  /**
+   * Helper async function for updating the user's IP address stored in MongoDB,
+   * if necessary.
+   * NOTE(jonemerson): Yep, it'd be cool if we could do multiple setFuture()s in
+   * one call rather than doing serial chaining... We can dream, can't we?
+   */
+  private static Future<User> updateLastIpAddress(
+      ListenableFuture<User> userFuture, final String ipAddress) {
+    return Futures.transform(userFuture, new AsyncFunction<User, User>() {
+      @Override
+      public ListenableFuture<User> apply(User user) throws Exception {
+        if (!ipAddress.equals(user.getLastIpAddress())) {
+          return Database.with(User.class).setFuture(user, "last_ip_address", ipAddress);
+        } else {
+          return Futures.immediateFuture(user);
+        }
+      }
+    });
   }
 
   /** Helper method for creating the User table. */

@@ -280,4 +280,17 @@ public class NewsServlet extends HttpServlet {
     response.put("success", true);
     return response;
   }
+
+  public static String getRemoteAddr(HttpServletRequest request) {
+    String remoteAddr = request.getRemoteAddr();
+    String xForwardedForHeader = request.getHeader("X-FORWARDED-FOR");
+    if (xForwardedForHeader != null) {
+      remoteAddr = xForwardedForHeader;
+      int idx = remoteAddr.indexOf(',');
+      if (idx > -1) {
+        remoteAddr = remoteAddr.substring(0, idx);
+      }
+    }
+    return remoteAddr;
+  }
 }

@@ -36,7 +36,8 @@ public class AddUserActionServlet extends StandardServlet {
     User user = getUser(req);
 
     // Mark that the user's using the app.
-    Future<User> updateLast5AppUseTimesFuture = Users.updateLast5AppUseTimes(user);
+    Future<User> updateLast5AppUseTimesFuture =
+        Users.updateLast5AppUseTimes(user, getRemoteAddr(req));
 
     // If the user action happened on an interest stream (not home).
     String interestTypeParam = getParameter(req, "on_stream_for_interest[type]");

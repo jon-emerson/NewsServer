@@ -1,4 +1,4 @@
-package com.janknspank.bizness;
+package com.janknspank.push;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,6 +18,8 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 import com.google.common.collect.Maps;
+import com.janknspank.bizness.GuidFactory;
+import com.janknspank.bizness.Users;
 import com.janknspank.common.Host;
 import com.janknspank.crawler.SiteManifests;
 import com.janknspank.database.Database;
