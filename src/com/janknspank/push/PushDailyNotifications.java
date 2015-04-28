@@ -83,6 +83,14 @@ public class PushDailyNotifications {
     // 0 out of 100 possible for ranking score.
     int score = (int) (neuralNetworkScore * 100);
 
+    // Slight punishment for older articles, so that we tend to notify about
+    // newly published topics as opposed to things the user might have seen
+    // on other news aggregators recently.
+    if (((System.currentTimeMillis() - Articles.getPublishedTime(article))
+        / TimeUnit.HOURS.toMillis(1)) >= 3) {
+      score -= 20;
+    }
+
     // 0, 75, or 100 depending on whether the article's about a company, and
     // whether the user's following that company.
     if (isArticleAboutFollowedCompany(article, followedEntityIds)) {
