@@ -169,7 +169,7 @@ public class PushDailyNotifications {
     // notification, and usually it'll be an important one.
     int hoursSinceNotification =
         (int) ((System.currentTimeMillis() - lastNotificationTime) / TimeUnit.HOURS.toMillis(1));
-    int scoreNecessaryToTriggerNotification = 300 - (10 * hoursSinceNotification);
+    int scoreNecessaryToTriggerNotification = 250 - (10 * hoursSinceNotification);
     if (userTimezone.isMorning()) {
       // Encourage more notifications in the morning.
       scoreNecessaryToTriggerNotification -= 50;
