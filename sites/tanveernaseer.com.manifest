@@ -28,7 +28,7 @@ test_instructions {
     non_article_url: "http://www.tanveernaseer.com/coaching/"
     non_article_url: "http://www.tanveernaseer.com/speaking/"
     non_article_url: "http://www.tanveernaseer.com/contact/"
-    non_article_url: "http://www.tanveernaseer.com/XYZ111/"
+    non_article_url: "http://www.tanveernaseer.com/about/XYZ111/"
   }
 }
 

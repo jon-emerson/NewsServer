@@ -5,6 +5,9 @@ paragraph_selector: ".article-body > p"
 article_url_pattern {
   path_regex: "\\/pulse\\/[^\\/]+$"
 }
+path_blacklist {
+  needle: "/pulse/discover"
+}
 test_instructions {
   article_url_detector_checks {
     article_url: "https://www.linkedin.com/pulse/4-things-employees-want-boss-stop-doing-jeff-haden"

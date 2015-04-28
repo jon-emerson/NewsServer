@@ -8,6 +8,9 @@ article_url_pattern {
 path_blacklist {
   needle: "/products/"
 }
+path_blacklist {
+  needle: "/services/"
+}
 test_instructions {
   article_url_detector_checks {
     article_url: "http://www.gallup.com/opinion/gallup/182813/bank-customers-trade-personal-banking-digital-banking.aspx"
