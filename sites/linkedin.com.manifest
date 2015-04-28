@@ -2,6 +2,7 @@ short_name: "LinkedIn Pulse"
 root_domain: "linkedin.com"
 start_url: "https://www.linkedin.com/today/"
 paragraph_selector: ".article-body > p"
+paragraph_selector: ".article-body > h3"
 article_url_pattern {
   path_regex: "\\/pulse\\/[^\\/]+$"
 }
