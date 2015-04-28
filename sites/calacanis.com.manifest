@@ -1,0 +1,45 @@
+short_name: "Calacanis"
+root_domain: "calacanis.com"
+start_url: "http://calacanis.com/"
+paragraph_selector: ".entry-content > p"
+paragraph_selector: ".entry-content > h5"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://calacanis.com/2015/04/13/professional-skateboarder-tony-hawk-investor-chris-sacca-on-this-week-in-startups/"
+    article_url: "http://calacanis.com/2015/04/24/warning-avoid-the-apply-to-present-angel-pitch-contest-event-scams/"
+    article_url: "http://calacanis.com/2015/04/23/gary-vaynerchuck-ceo-cofounder-of-vaynermedia-on-this-week-in-startups/"
+    article_url: "http://calacanis.com/2015/04/17/do-the-work-skip-the-party/"
+    article_url: "http://calacanis.com/2015/04/08/the-startup-martian-can-you-get-there-on-what-you-got/"
+    non_article_url: "http://calacanis.com/2015/04/"
+    non_article_url: "http://calacanis.com/2015/03/"
+    non_article_url: "http://calacanis.com/2015/02/"
+    non_article_url: "http://calacanis.com/2015/01/"
+    non_article_url: "http://calacanis.com/2014/12/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 9
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}

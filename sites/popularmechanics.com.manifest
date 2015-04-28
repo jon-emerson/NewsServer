@@ -1,0 +1,52 @@
+short_name: "PopularMechanics"
+root_domain: "popularmechanics.com"
+start_url: "http://www.popularmechanics.com/"
+paragraph_selector: ".article-body--text > p"
+article_url_pattern {
+  path_regex: "\\/a[0-9]+\\/[^\\/]+\\/$"
+}
+path_blacklist {
+  needle: "/culture/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.popularmechanics.com/cars/hybrid-electric/a15271/audi-synthesizes-diesel-from-carbon-dioxide-and-water/"
+    article_url: "http://www.popularmechanics.com/space/a15270/from-spy-satellite-to-dark-matter-scourer/"
+    article_url: "http://www.popularmechanics.com/cars/a15186/mercedes-amg-gt-s/"
+    article_url: "http://www.popularmechanics.com/cars/a15184/problem-of-led-headlights/"
+    article_url: "http://www.popularmechanics.com/space/deep-space/a15264/astronaut-scott-kelly-gravity-one-year-mission/"
+    non_article_url: "http://www.popularmechanics.com/culture/movies/news/a15266/model-x-wing-space-star-wars/"
+    non_article_url: "http://www.popularmechanics.com/culture/movies/a15265/ex-machina-artificial-intelligence-google-theories/"
+    non_article_url: "http://www.popularmechanics.com/space/g1953/the-sounds-of-space/"
+    non_article_url: "http://www.popularmechanics.com/culture/movies/a15216/best-summer-movies-2015/"
+    non_article_url: "http://www.popularmechanics.com/culture/movies/a15236/netflix-movies-expiring-may-1/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10553 # Mechanical and Industrial Engineering
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Hardware and electronics
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10520 # Automotive
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10559 # Electrical Engineering
+  boost: 0
+}
