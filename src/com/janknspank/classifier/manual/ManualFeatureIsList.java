@@ -13,8 +13,8 @@ import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 public class ManualFeatureIsList extends ManualHeuristicFeature {
   private static final Map<Pattern, Double> TITLE_SCORES =
       ImmutableMap.<Pattern, Double>builder()
-          .put(Pattern.compile("[0-9]{1,2}.* (awesome|photos|apps|that|ways|tips|things|numbers|reasons|strategies|you|should)"), 1.0)
-          .put(Pattern.compile("^(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve) .* (awesome|photos|apps|that|ways|tips|things|numbers|reasons|strategies|you|should)"), 0.9)
+          .put(Pattern.compile("[0-9]{1,2}.* (awesome|photos|apps|that|ways|tips|things|tactics|numbers|reasons|strategies|you|should)"), 1.0)
+          .put(Pattern.compile("^(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve) .* (awesome|photos|apps|that|ways|tips|things|tactics|numbers|reasons|strategies|you|should)"), 0.9)
           .put(Pattern.compile(" this week:"), 0.9)
           .build();
   private static final Iterable<Pattern> TITLE_BLACKLIST =
