@@ -62,6 +62,9 @@ public class UrlCleaner {
     if (host.equals("www.abcnews.go.com")) {
       host = "abcnews.go.com";
     }
+    if (host.equals("www.archaeology.org")) {
+      host = "archaeology.org";
+    }
     if (host.endsWith(".businessinsider.com") || host.equals("businessinsider.com")) {
       int slash = path.indexOf("/", 1); // Find first slash after initial starting /.
       if (slash > 0) {
