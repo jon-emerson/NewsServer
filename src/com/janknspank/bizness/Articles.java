@@ -143,7 +143,8 @@ public class Articles {
       }
       urls.add(article.getUrl());
 
-      double score = scorer.getScore(user, article) / Math.sqrt(getHoursSincePublished(article));
+      double score = scorer.getScore(user, article)
+          / Math.sqrt(getEffectiveHoursSincePublished(article, user));
       goodArticles.add(article, score);
       scores.put(article.getUrl(), score);
     }
@@ -172,13 +173,28 @@ public class Articles {
   }
 
   /**
-   * Returns the number of hours since the passed article was published, with
-   * a minimum of 15 hours.
+   * Returns the number of hours since the passed article was published, but
+   * give all articles since the user's last app usage the same # of hours.
+   * Caveats:
+   *  - 18 hours is the biggest we'll consider the user's last app usage,
+   *      otherwise we just show really old articles.
+   *  - We only consider app usages at least 1 hour ago, because otherwise
+   *      the app becomes unpredictable in terms of what stream it shows
    */
-  private static double getHoursSincePublished(Article article) {
-    double hoursSincePublished = Math.max(18,
+  private static double getEffectiveHoursSincePublished(Article article, User user) {
+    long lastAppUsageAtLeastOneHourAgo = 0;
+    for (long last5AppUseTime : user.getLast5AppUseTimeList()) {
+      if (last5AppUseTime < (System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1))
+          && last5AppUseTime > lastAppUsageAtLeastOneHourAgo) {
+        lastAppUsageAtLeastOneHourAgo = last5AppUseTime;
+      }
+    }
+    long lastAppUsageInHoursAgo = (System.currentTimeMillis() - lastAppUsageAtLeastOneHourAgo)
+        / TimeUnit.HOURS.toMillis(1);
+    long minHoursSincePublished = Math.min(18, lastAppUsageInHoursAgo);
+    double hoursSincePublished = Math.max(minHoursSincePublished,
         ((double) System.currentTimeMillis() - getPublishedTime(article))
-            / TimeUnit.HOURS.toMillis(1)) - 15;
+            / TimeUnit.HOURS.toMillis(1));
     return hoursSincePublished;
   }
 

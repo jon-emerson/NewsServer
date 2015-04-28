@@ -11,9 +11,6 @@ import com.janknspank.classifier.ManualHeuristicFeature;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 
 public class ManualFeatureIsList extends ManualHeuristicFeature {
-  // Acquisition keywords.
-  // NOTE: Do not use the word "Acquisition".  It matches articles like this:
-  // http://www.channelnewsasia.com/news/singapore/parliament-passes-changes/1714406.html
   private static final Map<Pattern, Double> TITLE_SCORES =
       ImmutableMap.<Pattern, Double>builder()
           .put(Pattern.compile("[0-9]{1,2} ways"), 1.0)
