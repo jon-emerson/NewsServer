@@ -60,6 +60,10 @@ test_instructions {
     article_url: "http://www.latimes.com/local/lanow/la-me-ln-fire-homeless-20140504,0,756604.story"
     article_url: "http://www.latimes.com/local/lanow/la-me-ln-lightning-rain-storms-southern-california-20150130-story.html"
     article_url: "http://www.latimes.com/local/lanow/la-me-ln-measles-outbreak-hits-marin-county-20150130-story.html"
+    article_url: "http://www.latimes.com/nation/la-na-baltimore-riots-tuesday-20150428-story.html"
+    article_url: "http://www.latimes.com/nation/la-na-freddie-gray-funeral-baltimore-20150427-story.html"
+    article_url: "http://www.latimes.com/nation/la-na-james-holmes-notebook-20150428-story.html"
+    article_url: "http://www.latimes.com/nation/la-na-army-deserters-20150428-story.html"
     article_url: "http://www.latimes.com/news/politics/la-na-rove14aug14,1,1728147.story"
     article_url: "http://www.latimes.com/sports/sportsnow/la-sp-sn-nhl-all-star-zemgus-girgensons20141230-story.html"
     article_url: "http://www.latimes.com/entertainment/arts/la-et-cm-ca-heatherwick-provocations-hammer-review-20150301-column.html"
@@ -86,12 +90,12 @@ feature_boost_pattern {
   boost: 5
 }
 feature_boost_pattern {
-  feature_id: 40000 # Sports
+  feature_id: 10512 # Sports
   path_regex: "^\\/sports\\/"
   boost: 5
 }
 feature_boost_pattern {
-  feature_id: 40002 # Politics
+  feature_id: 10543 # Government
   path_regex: "^\\/nation\\/politics\\/"
   boost: 3
 }

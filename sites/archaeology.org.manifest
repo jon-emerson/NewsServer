@@ -1,0 +1,40 @@
+short_name: "Archaeology"
+root_domain: "archaeology.org"
+start_url: "http://www.archaeology.org/issues"
+start_url: "http://www.archaeology.org/news"
+path_blacklist {
+  needle: "/exclusives"
+}
+path_blacklist {
+  needle: "/slideshow/"
+}
+paragraph_selector: ".article_content p"
+article_url_pattern {
+  path_regex: "^\\/issues\\/[0-9]+-[0-9]+\\/[^\\/]+\\/[0-9]+[^\\/]+$"
+}
+article_url_pattern {
+  path_regex: "^\\/news\\/[0-9]+-[0-9]+-[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://archaeology.org/issues/174-1505/features/3145-crete-minoans-gournia-excavations"
+    article_url: "http://archaeology.org/issues/175-1505/trenches/3166-trenches-italy-herculaneum-papyri-scanned"
+    article_url: "http://archaeology.org/issues/174-1505/features/3146-sudan-nubia-dangeil-cult-of-amun-ra"
+    article_url: "http://archaeology.org/issues/177-1505/letter-from/3144-letter-from-hawaii-kauai-caves"
+    article_url: "http://archaeology.org/issues/112-1311/letter-from/1406-wari-bateshwar-ptolemy-sounagoura-indo-pacific-beads"
+    article_url: "http://archaeology.org/news/3234-150424-india-african-elephant"
+    article_url: "http://archaeology.org/news/3242-150428-egypt-king-sahure"
+    non_article_url: "http://archaeology.org/issues/176-1505/world"
+    non_article_url: "http://archaeology.org/issues/160-1501"
+    non_article_url: "http://archaeology.org/marketplace/"
+    non_article_url: "http://archaeology.org/writer-s-guidelines"
+    non_article_url: "http://archaeology.org/about-us"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10561 # Archaeology
+  boost: 3
+}

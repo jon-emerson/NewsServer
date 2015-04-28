@@ -86,7 +86,7 @@ public class SiteManifests {
 
     // Make sure this .manifest file defines a SiteManifest for the right domain.
     Asserts.assertTrue(manifestFile.getName().equals(site.getRootDomain() + ".manifest"),
-        errorPrefix + " File does not specify root_url "
+        errorPrefix + " File does not specify root_domain "
             + manifestFile.getName().substring(0, manifestFile.getName().lastIndexOf(".")),
         SiteManifestException.class);
     Asserts.assertTrue(InternetDomainName.isValid(site.getRootDomain()),

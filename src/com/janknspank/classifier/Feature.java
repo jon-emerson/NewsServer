@@ -132,6 +132,13 @@ public abstract class Feature {
    * feature given its domain, subdomain, path, query, etc.
    */
   protected static int getBoost(FeatureId featureId, ArticleOrBuilder article) {
+    // We only do boosts for industry features and the Startups feature.
+    // This enables us to score politics, murder/war, etc, correctly across
+    // sites without worrying about it explicitly in the manifests.
+    if (featureId.getFeatureType() != FeatureType.INDUSTRY && featureId != FeatureId.STARTUPS) {
+      return 0;
+    }
+
     URL url;
     try {
       url = new URL(article.getUrl());
