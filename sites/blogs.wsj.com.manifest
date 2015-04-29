@@ -37,7 +37,3 @@ test_instructions {
     non_article_url: "http://blogs.wsj.com/canadarealtime/"
   }
 }
-feature_boost_pattern {
-  feature_id: 10523 # Management
-  boost: 1
-}

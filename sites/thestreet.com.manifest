@@ -32,7 +32,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10514 # Mergers and Acquisitions.
-  boost: 3
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10534 # Foreign exchange.

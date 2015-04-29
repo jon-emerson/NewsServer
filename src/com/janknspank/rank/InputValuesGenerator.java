@@ -265,6 +265,36 @@ public class InputValuesGenerator {
         : 0;
   }
 
+  /**
+   * If the user is following M&A, return the article similarity for that feature
+   */
+  public static double relevanceToMergersAndAcquisitions(
+      Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return (userIndustryFeatureIds.contains(FeatureId.MERGERS_AND_ACQUISITIONS))
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.MERGERS_AND_ACQUISITIONS)
+        : 0;
+  }
+
+  /**
+   * If the user is following Equity Investing, return the article similarity
+   */
+  public static double relevanceToEquityInvesting(
+      Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return (userIndustryFeatureIds.contains(FeatureId.EQUITY_INVESTING))
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.EQUITY_INVESTING)
+        : 0;
+  }
+  
+  /**
+   * If the user is following Venture Capital, return the article similarity
+   */
+  public static double relevanceToVentureCapital(
+      Set<FeatureId> userIndustryFeatureIds, Article article) {
+    return (userIndustryFeatureIds.contains(FeatureId.VENTURE_CAPITAL))
+        ? ArticleFeatures.getFeatureSimilarity(article, FeatureId.VENTURE_CAPITAL)
+        : 0;
+  }
+
   private static Map<FeatureId, Double> getArticleIndustryMap(Article article) {
     Map<FeatureId, Double> articleIndustryMap = Maps.newHashMap();
     for (ArticleFeature articleFeature : article.getFeatureList()) {

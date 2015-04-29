@@ -33,7 +33,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10523 # Management
-  boost: 1
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10501 # Software

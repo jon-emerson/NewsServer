@@ -195,6 +195,9 @@ bad_url: "http://www.entrepreneur.com/article/245450"
 bad_url: "http://www.entrepreneur.com/article/245438"
 bad_url: "http://www.entrepreneur.com/article/245490"
 bad_url: "http://www.forbes.com/sites/benkepes/2015/04/28/hds-introduces-vertical-big-data-offerings/"
+bad_url: "http://www.entrepreneur.com/article/245608"
+bad_url: "http://www.bbc.co.uk/news/business-32508897"
+bad_url: "http://www.usatoday.com/story/sports/mlb/2015/04/28/orioles-rays-camden-yards-tropicana-field-series-moved/26542037/"
 interest {
   id: "55034f7de4b097661cf860b8"
   type: INDUSTRY

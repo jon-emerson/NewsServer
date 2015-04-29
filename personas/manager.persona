@@ -81,6 +81,16 @@ bad_url: "http://www.forbes.com/sites/matthewherper/2015/04/28/how-big-can-merck
 bad_url: "http://www.forbes.com/sites/jerrybarca/2015/04/28/gurus-brain-typing-and-all-that-goes-into-training-quarterbacks/"
 bad_url: "http://blogs.wsj.com/privateequity/2015/04/28/the-morning-leverage-carlyle-heads-to-the-hospital-in-brazil/"
 bad_url: "http://www.forbes.com/sites/mergermarket/2015/04/28/oil-supermajor-ceos-talk-down-big-ma/"
+bad_url: "http://blogs.wsj.com/chinarealtime/2015/04/29/obama-on-the-beijing-led-aiib-all-just-a-misunderstanding/"
+bad_url: "http://www.nytimes.com/2015/04/29/us/politics/jeb-bush-visits-puerto-rico-in-hopes-of-reconnecting-with-hispanic-voters.html"
+bad_url: "http://www.forbes.com/sites/robertglatter/2015/04/29/otc-dietary-supplements-sold-to-minors-in-many-health-food-stores-despite-warnings/"
+bad_url: "http://blogs.wsj.com/chinarealtime/2015/04/29/benefits-of-breathing-beijings-olympic-babies-born-heavier-study-finds/"
+bad_url: "http://www.nytimes.com/2015/04/29/business/takeda-agrees-to-pay-2-4-billion-to-settle-suits-over-cancer-risk-of-actos.html"
+bad_url: "http://www.nytimes.com/2015/04/29/nyregion/call-it-coincidence-or-corruption.html"
+bad_url: "http://www.nytimes.com/2015/04/29/sports/football/nfls-league-office-to-drop-its-tax-exempt-status.html"
+bad_url: "http://www.nytimes.com/2015/04/29/business/us-officials-expect-bird-flu-to-return-in-the-fall.html"
+bad_url: "http://bits.blogs.nytimes.com/2015/04/28/gambling-comes-to-esports-with-unikrn/"
+bad_url: "http://www.nytimes.com/2015/04/29/world/africa/african-leaders-are-mute-even-as-their-people-die-at-sea.html"
 interest {
   id: "553fdc80e4b0a1bd53141200"
   type: INDUSTRY
