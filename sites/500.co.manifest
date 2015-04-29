@@ -6,6 +6,9 @@ article_url_pattern {
   path_regex: "^\\/[^\\/]+\\/$"
 }
 path_blacklist {
+  needle: "/blog/"
+}
+path_blacklist {
   needle: "/startups/"
 }
 path_blacklist {

@@ -25,7 +25,7 @@ import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
   private static final int MAX_ITERATIONS = 10000;
-
+  private static final int TRAINING_TRIES_PER_CONFIGURATION = 6;
   // Helper object that gives us human readable names for each input node.
   private static List<String> INPUT_NODE_KEYS = null;
 
@@ -238,10 +238,11 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
 
     NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
-    for (int hiddenNodeCount : new int[] { 0, 2, 5, 6, 7, 8 }) {
-      for (int tries = 0; tries < 15; tries++) {
+    //for (int hiddenNodeCount : new int[] { 0, 2, 5, 6, 7, 8 }) {
+    for (int hiddenNodeCount : new int[] { 6, 7 }) {
+      for (int tries = 0; tries < TRAINING_TRIES_PER_CONFIGURATION; tries++) {
         System.out.println("ATTEMPTING " + hiddenNodeCount + " HIDDEN NODES "
-            + "(try " + (tries + 1) + " of 15)...");
+            + "(try " + (tries + 1) + " of " + TRAINING_TRIES_PER_CONFIGURATION + ")...");
         NeuralNetwork<BackPropagation> neuralNetwork =
             neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
         double grade = Benchmark.grade(new NeuralNetworkScorer(neuralNetwork));

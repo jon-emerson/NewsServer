@@ -44,6 +44,7 @@ public class ManualFeatureQuarterlyEarnings extends ManualHeuristicFeature {
       ImmutableMap.<Pattern, Double>builder()
           .put(Pattern.compile("announced its (first|second|third|fourth)-quarter numbers"), 0.9)
           .put(Pattern.compile("quarterly revenue"), 0.6)
+          .put(Pattern.compile("beat analysts' estimates"), 0.8)
           .build();
   private static final Iterable<Pattern> BODY_BLACKLIST =
       Arrays.asList(Pattern.compile("federal reserve"));

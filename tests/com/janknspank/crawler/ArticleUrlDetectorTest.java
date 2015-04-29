@@ -16,7 +16,7 @@ public class ArticleUrlDetectorTest {
     for (SiteManifest site : SiteManifests.getList()) {
       ArticleUrlDetectorChecks checks = site.getTestInstructions().getArticleUrlDetectorChecks();
       for (String startUrl : site.getStartUrlList()) {
-        assertFalse("Start URLs cannot be articles", ArticleUrlDetector.isArticle(startUrl));
+        assertFalse("Start URLs cannot be articles: (" + startUrl + ")", ArticleUrlDetector.isArticle(startUrl));
       }
 
       for (String articleUrl : checks.getArticleUrlList()) {
