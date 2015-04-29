@@ -50,7 +50,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 20000 # Related to tech startups
-  boost: 10
+  boost: 5
 }
 feature_boost_pattern {
   feature_id: 10501 # Internet
