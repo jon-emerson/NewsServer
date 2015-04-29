@@ -1,4 +1,4 @@
-short_name: "Jonathan Libov@USV"
+short_name: "Jonathan Libov"
 root_domain: "whoo.ps"
 start_url: "http://whoo.ps/"
 paragraph_selector: "#blog_post_content > p"
