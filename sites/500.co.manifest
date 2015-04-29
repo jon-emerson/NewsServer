@@ -1,0 +1,70 @@
+short_name: "500 Startups"
+root_domain: "500.co"
+start_url: "http://www.500.co/blog/"
+paragraph_selector: ".post-content > p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/$"
+}
+path_blacklist {
+  needle: "/startups/"
+}
+path_blacklist {
+  needle: "/accelerator/"
+}
+path_blacklist {
+  needle: "/team/"
+}
+path_blacklist {
+  needle: "/mentors/"
+}
+path_blacklist {
+  needle: "/partners/"
+}
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/invest/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.500.co/job-fair-batch-13/"
+    article_url: "http://www.500.co/mobile-growth-engine-branch/"
+    article_url: "http://www.500.co/video-growth-marketing-startups/"
+    article_url: "http://www.500.co/silicon-valley-etiquette/"
+    article_url: "http://www.500.co/startup-growth-hong-kong-taipei/"
+    non_article_url: "http://www.500.co/startups/"
+    non_article_url: "http://www.500.co/startup/roost/"
+    non_article_url: "http://www.500.co/accelerator/"
+    non_article_url: "http://www.500.co/team/"
+    non_article_url: "http://www.500.co/mentors/"
+  }
+}
+
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 9
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10523 # Management
+  boost: 0
+}

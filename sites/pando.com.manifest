@@ -54,6 +54,10 @@ feature_boost_pattern {
   boost: -2
 }
 feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions
+  boost: 0
+}
+feature_boost_pattern {
   feature_id: 10510 # Consumer goods
   boost: -3
 }

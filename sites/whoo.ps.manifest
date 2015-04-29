@@ -1,0 +1,66 @@
+short_name: "Jonathan Libov@USV"
+root_domain: "whoo.ps"
+start_url: "http://whoo.ps/"
+paragraph_selector: "#blog_post_content > p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+$"
+}
+path_blacklist {
+  needle: "/startups/"
+}
+path_blacklist {
+  needle: "/accelerator/"
+}
+path_blacklist {
+  needle: "/team/"
+}
+path_blacklist {
+  needle: "/mentors/"
+}
+path_blacklist {
+  needle: "/partners/"
+}
+path_blacklist {
+  needle: "/events/"
+}
+path_blacklist {
+  needle: "/invest/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://whoo.ps/2015/04/24/destination-everywhere"
+    article_url: "http://whoo.ps/2015/04/17/a-blockchain-company-is-a-promise-enforced"
+    article_url: "http://whoo.ps/2015/04/07/make-art-not-gloss"
+    article_url: "http://whoo.ps/2015/03/31/a-case-of-mistaken-incumbency"
+    article_url: "http://whoo.ps/2015/03/20/network-accessories"
+    non_article_url: "http://whoo.ps/about"
+    non_article_url: "http://whoo.ps/posts?page=2"
+    non_article_url: "http://whoo.ps/XYZ112"
+    non_article_url: "http://whoo.ps/XYZ113"
+    non_article_url: "http://whoo.ps/XYZ114"
+  }
+}
+
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}
