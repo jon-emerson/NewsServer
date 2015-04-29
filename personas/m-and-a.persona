@@ -56,9 +56,9 @@ bad_url: "http://www.entrepreneur.com/article/244592"
 bad_url: "http://www.entrepreneur.com/article/245398"
 bad_url: "http://www.reuters.com/article/2015/04/29/markets-precious-idUSL4N0XQ1JA20150429"
 interest {
-  id: "553fdc80e4b0a1bd53141200"
+  id: "55407e1ae4b026fb1df36b80"
   type: INDUSTRY
   source: USER
   create_time: 1426288591472
-  industry_code: 10523 # Management
+  industry_code: 10514 # Mergers and Acquisitions
 }
