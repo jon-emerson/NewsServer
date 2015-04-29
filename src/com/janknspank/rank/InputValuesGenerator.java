@@ -266,7 +266,7 @@ public class InputValuesGenerator {
   }
 
   /**
-   * If the user is following M&A (10514), return the article similarity for that feature
+   * If the user is following M&A, return the article similarity for that feature
    */
   public static double relevanceToMergersAndAcquisitions(
       Set<FeatureId> userIndustryFeatureIds, Article article) {
@@ -276,7 +276,7 @@ public class InputValuesGenerator {
   }
 
   /**
-   * If the user is following Equity Investing (10535), return the article similarity
+   * If the user is following Equity Investing, return the article similarity
    */
   public static double relevanceToEquityInvesting(
       Set<FeatureId> userIndustryFeatureIds, Article article) {
@@ -286,7 +286,7 @@ public class InputValuesGenerator {
   }
   
   /**
-   * If the user is following Equity Investing (10535), return the article similarity
+   * If the user is following Venture Capital, return the article similarity
    */
   public static double relevanceToVentureCapital(
       Set<FeatureId> userIndustryFeatureIds, Article article) {
