@@ -8,7 +8,7 @@ import com.janknspank.proto.ArticleProto.Article;
 public class FeatureTest {
   @Test
   public void testOilAndEnergy() throws Exception {
-    assertEquals(10, Feature.getBoost(
+    assertEquals(2, Feature.getBoost(
         FeatureId.OIL_AND_ENERGY,
         Article.newBuilder().setUrl("http://www.rigzone.com/news/oil_gas/a/137267"
             + "/Study_Oil_Price_Downturn_Creates_Need_for_Cost_Culture_in_Industry/")));
