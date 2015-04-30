@@ -25,6 +25,7 @@ import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
   private static final int MAX_ITERATIONS = 10000;
+
   // Helper object that gives us human readable names for each input node.
   private static List<String> INPUT_NODE_KEYS = null;
 
