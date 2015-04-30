@@ -114,6 +114,10 @@ feature_boost_pattern {
   boost: -2
 }
 feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: 2
+}
+feature_boost_pattern {
   feature_id: 10514 # Mergers and Acquisitions.
   boost: 2
 }
@@ -122,22 +126,18 @@ feature_boost_pattern {
   boost: 2
 }
 feature_boost_pattern {
-  feature_id: 10535 # Equity Investing.
+  feature_id: 10523 # Management
   boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
   boost: 0
 }
 feature_boost_pattern {
-  feature_id: 10536 # Real Estate
-  boost: 1
-}
-feature_boost_pattern {
   feature_id: 10538 # Oil and Energy
   boost: 0
-}
-feature_boost_pattern {
-  feature_id: 10523 # Management
-  boost: 2
 }

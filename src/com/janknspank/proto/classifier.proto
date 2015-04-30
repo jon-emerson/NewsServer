@@ -22,5 +22,4 @@ message FeatureBenchmark {
   repeated string bad_url = 4 [
     (string_length) = 767
   ];
-
 }
