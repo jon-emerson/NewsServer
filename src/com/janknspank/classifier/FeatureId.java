@@ -11,7 +11,7 @@ public enum FeatureId {
   INTERNET(10501, FeatureType.INDUSTRY, "Internet"),
   SOFTWARE(10502, FeatureType.INDUSTRY, "Software"),
   HARDWARE_AND_ELECTRONICS(10503, FeatureType.INDUSTRY, "Hardware and Electronics"),
-  BIOTECHNOLOGY(10504, FeatureType.INDUSTRY, "Biotechnology"),
+  BIOTECHNOLOGY(10504, FeatureType.INDUSTRY, "Life Sciences"),
   VETERINARY(10505, FeatureType.INDUSTRY, "Veterinary"),
   APPAREL_AND_FASHION(10506, FeatureType.INDUSTRY, "Apparel and Fashion"),
   TOBACCO(10507, FeatureType.INDUSTRY, "Tobacco"),
@@ -21,7 +21,7 @@ public enum FeatureId {
   LEISURE_TRAVEL_AND_TOURISM(10511, FeatureType.INDUSTRY, "Leisure, Travel and Tourism"),
   SPORTS(10512, FeatureType.INDUSTRY, "Sports"),
   VIDEO_PRODUCTION(10513, FeatureType.INDUSTRY, "Video Production"),
-  MERGERS_AND_ACQUISITIONS(10514, FeatureType.INDUSTRY, "Mergers and Acquisitions"), ////////////
+  MERGERS_AND_ACQUISITIONS(10514, FeatureType.INDUSTRY, "Mergers and Acquisitions"),
   ACCOUNTING(10515, FeatureType.INDUSTRY, "Accounting"),
   CONSTRUCTION(10516, FeatureType.INDUSTRY, "Construction"),
   ARCHITECTURE_AND_PLANNING(10517, FeatureType.INDUSTRY, "Architecture"),

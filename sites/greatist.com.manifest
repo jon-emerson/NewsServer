@@ -1,0 +1,33 @@
+short_name: "Greatist"
+root_domain: "greatist.com"
+start_url: "http://greatist.com/"
+paragraph_selector: ".article-body-content > p"
+paragraph_selector: ".slide-body > p"
+article_url_pattern {
+  path_regex: "^\\/\\w+\\/[^\\/]+$"
+}
+path_blacklist {
+  needle: "{{"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://greatist.com/grow/body-positive-mantras"
+    article_url: "http://greatist.com/eat/flexitarian-diet"
+    article_url: "http://greatist.com/health/easy-superfood-healthy-recipes"
+    article_url: "http://greatist.com/move/indoor-cycling-for-beginners"
+    article_url: "http://greatist.com/move/common-yoga-poses"
+    article_url: "http://greatist.com/gwod/042915"
+    non_article_url: "http://greatist.com/about"
+    non_article_url: "http://greatist.com/shop"
+    non_article_url: "http://greatist.com/newsletter"
+    non_article_url: "http://greatist.com/eat"
+    non_article_url: "http://greatist.com/move"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
+  boost: 1
+}

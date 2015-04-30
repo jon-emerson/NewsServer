@@ -109,12 +109,12 @@ public final class NeuralNetworkScorer extends Scorer {
         InputValuesGenerator.relevanceToList(userIndustryFeatureIds, article));
 
     // 15 Is M&A
-    linkedHashMap.put("is_mergers_and_acquisitions", 
-        InputValuesGenerator.relevanceToMergersAndAcquisitions(userIndustryFeatureIds, article));
-
-    // 16 Is Equity Investing
-    linkedHashMap.put("is_equity_investing", 
-        InputValuesGenerator.relevanceToEquityInvesting(userIndustryFeatureIds, article));
+//    linkedHashMap.put("is_mergers_and_acquisitions", 
+//        InputValuesGenerator.relevanceToMergersAndAcquisitions(userIndustryFeatureIds, article));
+//
+//    // 16 Is Equity Investing
+//    linkedHashMap.put("is_equity_investing", 
+//        InputValuesGenerator.relevanceToEquityInvesting(userIndustryFeatureIds, article));
 
     // 17 Is Venture Capital
     linkedHashMap.put("is_venture_capital", 
