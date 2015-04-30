@@ -62,11 +62,11 @@ public class ManualHeuristicFeatureTest {
     }
     return FEATURE_BENCHMARK_MAP;
   }
-  
+
   public static FeatureBenchmark getByFeatureId(FeatureId featureId) {
     return getFeatureBenchmarkMap().get(featureId);
   }
-  
+
   @Test
   public void testGetScore() {
     assertEquals(50.0,
@@ -128,7 +128,8 @@ public class ManualHeuristicFeatureTest {
             + Iterables.getFirst(article.getParagraphList(), "") + "\"");
         System.out.println();
       }
-      assertEquals(1.0, score, 0.5 /* epsilon */);
+      assertEquals("For " + featureId.name() + " (" + featureId.getId() + "), " + article.getUrl(),
+          1.0, score, 0.5 /* epsilon */);
     }
 
     Collection<Article> badArticles =
@@ -143,7 +144,8 @@ public class ManualHeuristicFeatureTest {
             + Iterables.getFirst(article.getParagraphList(), "") + "\"");
         System.out.println();
       }
-      assertEquals(0.0, score, 0.3 /* epsilon */);
+      assertEquals("For " + featureId.name() + " (" + featureId.getId() + "), " + article.getUrl(),
+          0.0, score, 0.3 /* epsilon */);
     }
   }
 }

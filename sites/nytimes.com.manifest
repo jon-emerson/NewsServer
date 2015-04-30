@@ -59,7 +59,7 @@ paragraph_selector: "p.story-body-text"
 paragraph_selector: "#mod-a-body-first-para > p"
 paragraph_selector: "#mod-a-body-after-first-para > p"
 article_url_pattern {
-  path_regex: "^\\/(aponline\\/)?(19|20)[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*(\\/|\\.html)$"
+  path_regex: "^\\/(aponline\\/|reuters\\/)?(19|20)[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/.*(\\/|\\.html)$"
 }
 rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/Business.xml"
 rss_url: "http://rss.nytimes.com/services/xml/rss/nyt/Economy.xml"
@@ -105,6 +105,8 @@ test_instructions {
     bad_url: "http://www.nytimes.com/subscriptions/Multiproduct/lp5558.html"
   }
   article_url_detector_checks {
+    article_url: "http://www.nytimes.com/aponline/2014/05/22/us/politics/ap-us-congress-spending.html"
+    article_url: "http://www.nytimes.com/reuters/2014/12/17/business/17reuters-insurance-regulations.html"
     article_url: "http://bits.blogs.nytimes.com/2014/04/24/vic-gundotra-google-plus-lead-departing/"
     article_url: "http://bits.blogs.nytimes.com/2014/12/31/qwant-wants-to-be-alternative-to-google/"
     article_url: "http://bits.blogs.nytimes.com/2015/01/30/verizon-wireless-to-allow-complete-opt-out-of-mobile-supercookies/"

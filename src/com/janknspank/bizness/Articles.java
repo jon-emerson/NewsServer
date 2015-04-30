@@ -16,6 +16,8 @@ import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
+import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
@@ -40,6 +42,11 @@ import com.janknspank.rank.Scorer;
  * database.
  */
 public class Articles {
+  /**
+   * The number of results to return in user streams.
+   */
+  public static final int NUM_RESULTS = 50;
+
   /**
    * Returns a function that gives an iterable of articles a specific reason for
    * existing, such as being about companies, people, or industries.
@@ -92,6 +99,28 @@ public class Articles {
   }
 
   /**
+   * Returns the primary (main, default, whatever) stream for the given user.
+   * These are the articles we should show in the initial stream.
+   */
+  public static TopList<Article, Double> getMainStream(User user)
+      throws DatabaseSchemaException, BiznessException {
+    return Articles.getRankedArticles(
+        user,
+        NeuralNetworkScorer.getInstance(),
+        new MainStreamStrategy(),
+        NUM_RESULTS);
+  }
+
+  public static TopList<Article, Double> getStream(User user, TimeRankingStrategy strategy)
+      throws DatabaseSchemaException, BiznessException {
+    return Articles.getRankedArticles(
+        user,
+        NeuralNetworkScorer.getInstance(),
+        strategy,
+        NUM_RESULTS);
+  }
+
+  /**
    * Returns the best articles for the current user given the current scorer.
    * NOTE(jonemerson): If you're calling this from a Servlet, be careful!  The
    * default serialization of Articles does not include their keywords.  Instead
@@ -99,10 +128,12 @@ public class Articles {
    * with the results of this method.
    */
   public static TopList<Article, Double> getRankedArticles(
-      User user, Scorer scorer, int limit) throws DatabaseSchemaException, BiznessException {
+      User user, Scorer scorer, TimeRankingStrategy strategy, int limit)
+      throws DatabaseSchemaException, BiznessException {
     long startTime = System.currentTimeMillis();
     TopList<Article, Double> rankedArticles = getRankedArticles(
-        user, scorer, limit, getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10));
+        user, scorer, strategy, limit,
+        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10));
     System.out.println("getRankedArticles completed in "
         + (System.currentTimeMillis() - startTime) + "ms");
     return rankedArticles;
@@ -114,8 +145,11 @@ public class Articles {
    * interests.  Supports the main stream and the contacts streams.
    */
   private static TopList<Article, Double> getRankedArticles(
-      User user, Scorer scorer, int limit, Iterable<Article> unrankedArticles)
-          throws DatabaseSchemaException, BiznessException {
+      User user, Scorer scorer,
+      TimeRankingStrategy strategy,
+      int limit,
+      Iterable<Article> unrankedArticles)
+      throws DatabaseSchemaException, BiznessException {
 
     // Find the top 150 articles based on neural network rank + time punishment.
     Map<String, Double> scores = Maps.newHashMap();
@@ -127,8 +161,7 @@ public class Articles {
       }
       urls.add(article.getUrl());
 
-      double score = scorer.getScore(user, article)
-          / Math.sqrt(getEffectiveHoursSincePublished(article, user));
+      double score = scorer.getScore(user, article) * strategy.getTimeRank(article, user);
       goodArticles.add(article, score);
       scores.put(article.getUrl(), score);
     }
@@ -151,32 +184,6 @@ public class Articles {
       sortedArticles.add(article, scores.get(article.getUrl()));
     }
     return sortedArticles;
-  }
-
-  /**
-   * Returns the number of hours since the passed article was published, but
-   * give all articles since the user's last app usage the same # of hours.
-   * Caveats:
-   *  - 18 hours is the biggest we'll consider the user's last app usage,
-   *      otherwise we just show really old articles.
-   *  - We only consider app usages at least 1 hour ago, because otherwise
-   *      the app becomes unpredictable in terms of what stream it shows
-   */
-  private static double getEffectiveHoursSincePublished(Article article, User user) {
-    long lastAppUsageAtLeastOneHourAgo = 0;
-    for (long last5AppUseTime : user.getLast5AppUseTimeList()) {
-      if (last5AppUseTime < (System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1))
-          && last5AppUseTime > lastAppUsageAtLeastOneHourAgo) {
-        lastAppUsageAtLeastOneHourAgo = last5AppUseTime;
-      }
-    }
-    long lastAppUsageInHoursAgo = (System.currentTimeMillis() - lastAppUsageAtLeastOneHourAgo)
-        / TimeUnit.HOURS.toMillis(1);
-    long minHoursSincePublished = Math.min(18, lastAppUsageInHoursAgo);
-    double hoursSincePublished = Math.max(minHoursSincePublished,
-        ((double) System.currentTimeMillis() - getPublishedTime(article))
-            / TimeUnit.HOURS.toMillis(1));
-    return hoursSincePublished;
   }
 
   /**
@@ -316,6 +323,7 @@ public class Articles {
     featureIdIds.addAll(UserInterests.getUserIndustryFeatureIdIds(user));
     return getRankedArticles(user,
         NeuralNetworkScorer.getInstance(),
+        new AncillaryStreamStrategy(),
         limit,
         Database.with(Article.class).get(
             new QueryOption.WhereEquals("keyword.keyword", contactNames),

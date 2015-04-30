@@ -16,6 +16,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
 import com.janknspank.bizness.Users;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -25,7 +26,6 @@ import com.janknspank.proto.PushNotificationProto.PushNotification;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.rank.NeuralNetworkScorer;
 
 @AuthenticationRequired
 @ServletMapping(urlPattern = "/v1/get_articles")
@@ -33,8 +33,6 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
   // TODO(jonemerson): Make a global threadpool for this.  Or figure out
   // a better way to do asynchronous calls to Mongo DB - Hopefully via Futures.
   private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(10);
-
-  static final int NUM_RESULTS = 50;
 
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
@@ -70,7 +68,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
     // Based on the user's query, return articles that match.
     try {
       if (industryCodeId != null) {
-        return Articles.getRankedArticles(
+        return Articles.getStream(
             user.toBuilder()
                 .clearInterest()
                 .addInterest(Interest.newBuilder()
@@ -78,10 +76,9 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
                     .setIndustryCode(Integer.parseInt(industryCodeId))
                     .build())
                 .build(),
-            NeuralNetworkScorer.getInstance(),
-            NUM_RESULTS);
+            new AncillaryStreamStrategy());
       } else if (entityId != null) {
-        return Articles.getRankedArticles(
+        return Articles.getStream(
             user.toBuilder()
                 .clearInterest()
                 .addInterest(Interest.newBuilder()
@@ -92,17 +89,13 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
                         .setKeyword(entityKeyword))
                     .build())
                 .build(),
-            NeuralNetworkScorer.getInstance(),
-            NUM_RESULTS);
+            new AncillaryStreamStrategy());
       } else if ("linked_in".equals(contacts)) {
-        return Articles.getArticlesForLinkedInContacts(user, NUM_RESULTS);
+        return Articles.getArticlesForLinkedInContacts(user, Articles.NUM_RESULTS);
       } else if ("address_book".equals(contacts)) {
-        return Articles.getArticlesForAddressBookContacts(user, NUM_RESULTS);
+        return Articles.getArticlesForAddressBookContacts(user, Articles.NUM_RESULTS);
       } else {
-        return Articles.getRankedArticles(
-            user,
-            NeuralNetworkScorer.getInstance(),
-            NUM_RESULTS);
+        return Articles.getMainStream(user);
       }
     } finally {
       try {
@@ -190,8 +183,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
 
     // Now get the standard /getArticles stream.
     User user = getUser(req);
-    Iterable<Article> rankedArticles = Articles.getRankedArticles(
-        user, NeuralNetworkScorer.getInstance(), NUM_RESULTS);
+    Iterable<Article> rankedArticles = Articles.getMainStream(user);
 
     // OK, now collate the notification's article into the stream!
     try {

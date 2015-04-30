@@ -19,7 +19,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.crawler.UrlCleaner;
@@ -66,13 +65,7 @@ public class VectorFeatureCreator {
     return __ARTICLE_VECTOR_MAP;
   }
 
-  /**
-   * Reads from seed.list and black.list to create a word distribution vector,
-   * and then writes said vector and its calculated distribution to
-   * feature.vector and feature.distribution.
-   */
-  public void createVectorAndDistribution()
-      throws ClassifierException, DatabaseSchemaException, BiznessException {
+  public Iterable<Article> getSeedArticles() throws BiznessException, ClassifierException {
     // 1. Get seed words for industryCode.id
     System.out.println("Reading URLs for " + featureId.getId() + ", \""
         + featureId.getTitle() + "\"...");
@@ -91,15 +84,26 @@ public class VectorFeatureCreator {
         } else {
           urls.add(UrlCleaner.clean(uncleanedUrl));
         }
-      } else {
+      } else if (uncleanedUrl.trim().length() > 0) {
         throw new RuntimeException("Seed words are not supported: " + uncleanedUrl);
       }
     }
     Iterable<Article> seedArticles = ArticleCrawler.getArticles(urls, true /* retain */).values();
     System.out.println(Iterables.size(seedArticles) + " articles found");
+    return seedArticles;
+  }
+
+  /**
+   * Reads from seed.list and black.list to create a word distribution vector,
+   * and then writes said vector and its calculated distribution to
+   * feature.vector and feature.distribution.
+   */
+  public void createVectorAndDistribution()
+      throws ClassifierException, DatabaseSchemaException, BiznessException {
 
     // 3. Convert them into the industry vector
     System.out.println("Calculating vector...");
+    Iterable<Article> seedArticles = getSeedArticles();
     Vector vector = new Vector(seedArticles, getBlacklist());
 
     // 4. Write the industry vector.
@@ -141,14 +145,21 @@ public class VectorFeatureCreator {
       throws ClassifierException {
     DistributionBuilder seedArticleDistributionBuilder = new DistributionBuilder();
     Vector universeVector = UniverseVector.getInstance();
-    TopList<String, Double> bestArticles = new TopList<String, Double>(10);
-    TopList<String, Double> worstArticles = new TopList<String, Double>(10);
     for (Article article : seedArticles) {
       Double cosineSimilarity =
           vector.getCosineSimilarity(universeVector, Vector.fromArticle(article));
-      seedArticleDistributionBuilder.add(cosineSimilarity);
-      bestArticles.add(article.getUrl(), cosineSimilarity);
-      worstArticles.add(article.getUrl(), 1 - cosineSimilarity);
+
+      // I'm not even 50% sure that boosts should be considered here.  But
+      // we're seeing very lenient vector similarity scores for articles about
+      // industries with large boosts, and conceptually it makes sense that
+      // the thresholds being too small would cause that.  So, let's try this
+      // out (April 29, 2015).
+      // Note #2: Ya, considering that the scores going into the normalizer
+      // at crawl time are boosted (since {@code VectorFeature#score} calls
+      // {@code #rawScore with a boost value), the similarities here should
+      // also be boosted while we're building the normalizer.
+      double boost = 0.05 * Feature.getBoost(featureId, article);
+      seedArticleDistributionBuilder.add(boost + cosineSimilarity);
     }
     return DistributionBuilder.getValueAtPercentile(
         seedArticleDistributionBuilder.build(), percentile);

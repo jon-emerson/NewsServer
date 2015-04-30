@@ -198,6 +198,14 @@ bad_url: "http://www.forbes.com/sites/benkepes/2015/04/28/hds-introduces-vertica
 bad_url: "http://www.entrepreneur.com/article/245608"
 bad_url: "http://www.bbc.co.uk/news/business-32508897"
 bad_url: "http://www.usatoday.com/story/sports/mlb/2015/04/28/orioles-rays-camden-yards-tropicana-field-series-moved/26542037/"
+bad_url: "http://www.nytimes.com/2015/04/30/sports/football/mock-nfl-drafts-are-often-accompanied-by-an-oops.html"
+bad_url: "http://www.nytimes.com/2015/04/30/style/when-the-cyberbully-is-you.html"
+bad_url: "http://www.nytimes.com/2015/05/03/arts/television/david-letterman-reflects-on-33-years-in-late-night-television.html"
+bad_url: "http://entertainthis.usatoday.com/2015/04/29/true-detective-parody-torn-natalie-imbruglia/"
+bad_url: "http://time.com/3840165/ariana-grande-my-everything-strategy/"
+bad_url: "http://www.nytimes.com/2015/05/03/movies/anna-kendrick-on-pitch-perfect-2-and-not-trying-too-hard.html"
+bad_url: "http://www.entrepreneur.com/article/245654"
+bad_url: "http://www.entrepreneur.com/article/233688"
 interest {
   id: "55034f7de4b097661cf860b8"
   type: INDUSTRY
