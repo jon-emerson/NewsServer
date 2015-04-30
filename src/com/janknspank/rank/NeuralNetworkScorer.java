@@ -95,6 +95,8 @@ public final class NeuralNetworkScorer extends Scorer {
         ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_POLITICS));
     linkedHashMap.put("murder_crime_war", UserIndustries.hasFeatureId(user, FeatureId.MILITARY)
         ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
+    linkedHashMap.put("equity", UserIndustries.hasFeatureId(user, FeatureId.EQUITY_INVESTING)
+        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.EQUITY_INVESTING));
 
     // 12. Relevance to big money
     linkedHashMap.put("big_money",
@@ -107,18 +109,6 @@ public final class NeuralNetworkScorer extends Scorer {
     // 14. Is it a list of things
     linkedHashMap.put("is_list", 
         InputValuesGenerator.relevanceToList(userIndustryFeatureIds, article));
-
-    // 15 Is M&A
-//    linkedHashMap.put("is_mergers_and_acquisitions", 
-//        InputValuesGenerator.relevanceToMergersAndAcquisitions(userIndustryFeatureIds, article));
-//
-//    // 16 Is Equity Investing
-//    linkedHashMap.put("is_equity_investing", 
-//        InputValuesGenerator.relevanceToEquityInvesting(userIndustryFeatureIds, article));
-
-    // 17 Is Venture Capital
-    linkedHashMap.put("is_venture_capital", 
-        InputValuesGenerator.relevanceToVentureCapital(userIndustryFeatureIds, article));
 
     return linkedHashMap;
   }

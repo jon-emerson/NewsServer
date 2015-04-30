@@ -20,7 +20,6 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.rank.NeuralNetworkScorer;
 
 @AuthenticationRequired(requestMethod = "POST")
 @ServletMapping(urlPattern = "/v1/follow_linked_in_contacts")
@@ -65,10 +64,7 @@ public class FollowLinkedInContactsServlet extends StandardServlet {
 
     // To help with client latency, return the articles for the user's home
     // screen in this response.
-    Iterable<Article> articles = Articles.getRankedArticles(
-        user,
-        NeuralNetworkScorer.getInstance(),
-        GetArticlesServlet.NUM_RESULTS);
+    Iterable<Article> articles = Articles.getMainStream(user);
     response.put("articles", ArticleSerializer.serialize(articles, user,
         false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
 

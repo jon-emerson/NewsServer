@@ -10,6 +10,7 @@ import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
+import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
@@ -148,8 +149,8 @@ public class PushDailyNotifications {
         - TimeUnit.MINUTES.toMillis(30);
 
     // Get the user's stream.
-    TopList<Article, Double> rankedArticles =
-        Articles.getRankedArticles(user, NeuralNetworkScorer.getInstance(), 40);
+    TopList<Article, Double> rankedArticles = Articles.getRankedArticles(
+        user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
 
     // Find the best article in the user's stream, for notification purposes.
     Article bestArticle = null;
@@ -204,8 +205,8 @@ public class PushDailyNotifications {
             + "relatives-find-loved-ones-in-Nepal.html"), true /* retain */).values(), null);
     describeArticleUser(article, user);
 
-    TopList<Article, Double> rankedArticles =
-        Articles.getRankedArticles(user, NeuralNetworkScorer.getInstance(), 40);
+    TopList<Article, Double> rankedArticles = Articles.getRankedArticles(
+        user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
     long lastNotificationTime = getLastNotificationTime(user);
     long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime);
     int i = 0;

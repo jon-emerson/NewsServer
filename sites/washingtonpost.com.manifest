@@ -18,19 +18,10 @@ subdomain_blacklist: "ssl.washingtonpost.com"
 subdomain_blacklist: "subscribe.washingtonpost.com"
 subdomain_blacklist: "yellowpages.washingtonpost.com"
 path_blacklist {
-  needle: "/blogs/dc-sports-bog/" # Yes, it's actually "bog".
-}
-path_blacklist {
-  needle: "/blogs/football-insider/"
-}
-path_blacklist {
   needle: "/capitalweathergang/"
 }
 path_blacklist {
   needle: "/newssearch/"
-}
-path_blacklist {
-  needle: "/sports/"
 }
 path_blacklist {
   needle: "/wp-dyn/"
@@ -89,4 +80,14 @@ test_instructions {
     non_article_url: "http://www.washingtonpost.com/blogs/capital-weather-gang/page/2/"
     non_article_url: "http://www.washingtonpost.com/niraj-chokshi/2014/06/10/6b40abf2-f0cb-11e3-9ebc-2ee6f81ed217_page.html"
   }
+}
+feature_boost_pattern {
+  # Yes, it's actually "bog".
+  path_regex: "\\/(sports|blogs\\/dc-sports-bog|blogs\\/football-insider)\\/"
+  boost: -10
+}
+feature_boost_pattern {
+  feature_id: 10512 # Sports
+  path_regex: "\\/(sports|blogs\\/dc-sports-bog|blogs\\/football-insider)\\/"
+  boost: 0
 }

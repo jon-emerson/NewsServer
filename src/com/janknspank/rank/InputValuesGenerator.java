@@ -134,11 +134,20 @@ public class InputValuesGenerator {
    * cares about.
    */
   public static double relevanceToNonUserIndustries(User user, Article article) {
+    double highestSimilarityScoreThatMatchesUser = 0;
+    Map<FeatureId, Double> articleIndustryMap = getArticleIndustryMap(article);
+    for (FeatureId userIndustryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
+      if (articleIndustryMap.containsKey(userIndustryFeatureId)) {
+        highestSimilarityScoreThatMatchesUser = Math.max(highestSimilarityScoreThatMatchesUser,
+            articleIndustryMap.get(userIndustryFeatureId));
+      }
+    }
     int numIndustriesMoreRelevant = 0;
-    double relevanceToUserIndustries = relevanceToUserIndustries(user, article);
     for (ArticleFeature feature : article.getFeatureList()) {
-      if (feature.getSimilarity() > (relevanceToUserIndustries + 0.001)
-          && FeatureId.fromId(feature.getFeatureId()).getFeatureType() == FeatureType.INDUSTRY) {
+      FeatureId articleFeatureId = FeatureId.fromId(feature.getFeatureId());
+      if (articleFeatureId != null
+          && articleFeatureId.getFeatureType() == FeatureType.INDUSTRY
+          && feature.getSimilarity() > (highestSimilarityScoreThatMatchesUser + 0.001)) {
         numIndustriesMoreRelevant++;
       }
     }

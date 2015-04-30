@@ -16,7 +16,6 @@ import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.rank.NeuralNetworkScorer;
 
 @ServletMapping(urlPattern = "/v1/facebook_login")
 public class FacebookLoginServlet extends StandardServlet {
@@ -47,10 +46,7 @@ public class FacebookLoginServlet extends StandardServlet {
 
     // To help with client latency, return the articles for the user's home
     // screen in this response.
-    Iterable<Article> articles = Articles.getRankedArticles(
-        user,
-        NeuralNetworkScorer.getInstance(),
-        GetArticlesServlet.NUM_RESULTS);
+    Iterable<Article> articles = Articles.getMainStream(user);
     response.put("articles", ArticleSerializer.serialize(articles, user,
         false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
 

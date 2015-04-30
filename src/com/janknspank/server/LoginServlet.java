@@ -26,7 +26,6 @@ import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.rank.NeuralNetworkScorer;
 
 @ServletMapping(urlPattern = "/v1/login")
 public class LoginServlet extends StandardServlet {
@@ -140,10 +139,7 @@ public class LoginServlet extends StandardServlet {
 
     // To help with client latency, return the articles for the user's home
     // screen in this response.
-    Iterable<Article> articles = Articles.getRankedArticles(
-        user,
-        NeuralNetworkScorer.getInstance(),
-        GetArticlesServlet.NUM_RESULTS);
+    Iterable<Article> articles = Articles.getMainStream(user);
     response.put("articles", ArticleSerializer.serialize(articles, user,
         false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
 
