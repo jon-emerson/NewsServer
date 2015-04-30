@@ -60,10 +60,14 @@ feature_boost_pattern {
   boost: 0
 }
 feature_boost_pattern {
-  feature_id: 10540 # Farming
-  boost: -2
+  feature_id: 10516 # Construction
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10518 # Civil Engineering
   boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10540 # Farming
+  boost: -2
 }
