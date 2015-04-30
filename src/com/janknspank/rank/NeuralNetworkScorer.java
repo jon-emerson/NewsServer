@@ -95,8 +95,8 @@ public final class NeuralNetworkScorer extends Scorer {
         ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_POLITICS));
     linkedHashMap.put("murder_crime_war", UserIndustries.hasFeatureId(user, FeatureId.MILITARY)
         ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.TOPIC_MURDER_CRIME_WAR));
-//    linkedHashMap.put("equity", UserIndustries.hasFeatureId(user, FeatureId.EQUITY_INVESTING)
-//        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.EQUITY_INVESTING));
+    linkedHashMap.put("equity", UserIndustries.hasFeatureId(user, FeatureId.EQUITY_INVESTING)
+        ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.EQUITY_INVESTING));
 
     // 12. Relevance to big money
     linkedHashMap.put("big_money",
