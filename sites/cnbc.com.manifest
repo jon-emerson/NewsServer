@@ -42,7 +42,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10514 # Mergers and Acquisitions.
-  boost: 2
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10534 # Foreign Exchange.
@@ -50,6 +50,6 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10535 # Equity Investing.
-  boost: 2
+  boost: 1
 } 
 

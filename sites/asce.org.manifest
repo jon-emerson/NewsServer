@@ -1,0 +1,40 @@
+short_name: "ASCE"
+root_domain: "asce.org"
+start_url: "http://blogs.asce.org/"
+subdomain_blacklist: "www.asce.org"
+paragraph_selector: ".single-content > p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/$"
+}
+path_blacklist {
+  needle: "/about-asce/"
+}
+path_blacklist {
+  needle: "/all-authors/"
+}
+path_blacklist {
+  needle: "/category/"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://blogs.asce.org/2015-ocea-winner-the-halley-vi-antarctic-research-station/"
+    article_url: "http://blogs.asce.org/be-apart-of-infrastructure-week/"
+    article_url: "http://blogs.asce.org/another-packed-week-in-washington/"
+    article_url: "http://blogs.asce.org/making-value-instead-of-making-things-important-lessons-for-america/"
+    article_url: "http://blogs.asce.org/university-of-florida-wins-2015-asce-sustainable-development-award-at-epa-p3-competition/"
+    article_url: "http://blogs.asce.org/education-bill-on-the-move/"
+    non_article_url: "http://blogs.asce.org/about-asce/"
+    non_article_url: "http://blogs.asce.org/all-authors/"
+    non_article_url: "http://blogs.asce.org/category/asce-news/"
+    non_article_url: "http://blogs.asce.org/author/gregory/"
+    non_article_url: "http://blogs.asce.org/category/promote-the-profession/"
+    non_article_url: "http://blogs.asce.org/page/2/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10518 # Civil Engineering
+  boost: 10
+}
