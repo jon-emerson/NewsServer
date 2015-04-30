@@ -144,22 +144,17 @@ public class VectorFeatureCreator {
       Vector vector, Iterable<Article> seedArticles, double percentile)
       throws ClassifierException {
     DistributionBuilder seedArticleDistributionBuilder = new DistributionBuilder();
-    Vector universeVector = UniverseVector.getInstance();
     for (Article article : seedArticles) {
-      Double cosineSimilarity =
-          vector.getCosineSimilarity(universeVector, Vector.fromArticle(article));
-
-      // I'm not even 50% sure that boosts should be considered here.  But
-      // we're seeing very lenient vector similarity scores for articles about
-      // industries with large boosts, and conceptually it makes sense that
-      // the thresholds being too small would cause that.  So, let's try this
-      // out (April 29, 2015).
-      // Note #2: Ya, considering that the scores going into the normalizer
-      // at crawl time are boosted (since {@code VectorFeature#score} calls
-      // {@code #rawScore with a boost value), the similarities here should
-      // also be boosted while we're building the normalizer.
+      // Note: Because the scores going into the normalizer at crawl time are
+      // boosted (because {@code VectorFeature#score} calls {@code #rawScore
+      // with a boost value), the similarities here should also be boosted.
+      // Otherwise, we're not comparing apples to apples at crawl time, and
+      // consequently industries with high boost stores receive inappropriate
+      // numbers of articles with inappropriately high vector similarity scores.
       double boost = 0.05 * Feature.getBoost(featureId, article);
-      seedArticleDistributionBuilder.add(boost + cosineSimilarity);
+      double score = VectorFeature.rawScore(
+          this.featureId, vector, boost, Vector.fromArticle(article));
+      seedArticleDistributionBuilder.add(score);
     }
     return DistributionBuilder.getValueAtPercentile(
         seedArticleDistributionBuilder.build(), percentile);
