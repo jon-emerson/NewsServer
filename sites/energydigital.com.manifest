@@ -1,0 +1,44 @@
+short_name: "EnergyDigital"
+root_domain: "energydigital.com"
+start_url: "http://www.energydigital.com/"
+paragraph_selector: ".posts > p"
+paragraph_selector: ".content > p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[0-9]+\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.energydigital.com/greentech/3819/Gov-Brown-sets-ambitious-emissions-target-for-California-amid-worsening-drought"
+    article_url: "http://www.energydigital.com/greentech/3818/INFOGRAPHIC-Why-the-Hyperloop-is-the-answer-to-a-lot-of-our-problems"
+    article_url: "http://www.energydigital.com/renewables/3817/INFOGRAPHIC-The-role-geothermal-could-play-in-the-worlds-energy-mix"
+    article_url: "http://www.energydigital.com/greentech/3580/INFOGRAPHIC:-Inside-Teslas-Gigafactory"
+    article_url: "http://www.energydigital.com/greentech/3810/Origami-and-More:-Incredible-Solar-Panel-and-Wind-Turbine-Design"
+    article_url: "http://www.energydigital.com/greentech/3805/INFOGRAPHIC-EPAs-Top-25-Cities-with-Energy-Star-Buildings"
+    non_article_url: "http://www.energydigital.com/renewables"
+    non_article_url: "http://www.energydigital.com/greentech"
+    non_article_url: "http://www.energydigital.com/videos"
+    non_article_url: "http://www.energydigital.com/company_listings"
+    non_article_url: "http://www.energydigital.com/video/58/Building-Careers-in-Solar"
+    non_article_url: "http://www.energydigital.com/company/8/AMEC"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10518 # Civil Engineering
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10518 # Civil Engineering
+  path_regex: "^\\/wastemanagement\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10538 # Oil and Energy
+  boost: 2
+}

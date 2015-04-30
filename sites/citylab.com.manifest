@@ -59,9 +59,29 @@ feature_boost_pattern {
   boost: 0
 }
 feature_boost_pattern {
+  feature_id: 10518 # Civil Engineering
+  path_regex: "^\\/(?!(crime|politics))\\/"
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "^\\/commute\\/"
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  path_regex: "^\\/housing\\/"
+  boost: 3
+}
+feature_boost_pattern {
   feature_id: 10543 # Government
   path_regex: "^\\/politics\\/"
   boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10518 # Civil Engineering
+  path_regex: "^\\/politics\\/"
+  boost: -5
 }
 feature_boost_pattern {
   feature_id: 10517 # Architecture & Planning

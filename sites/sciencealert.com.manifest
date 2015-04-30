@@ -84,7 +84,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10538 # Oil and Energy
-  boost: 2
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10540 # Farming

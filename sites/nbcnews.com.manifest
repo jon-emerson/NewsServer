@@ -95,5 +95,5 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10538 # Oil and Energy
   path_regex: "\\/energy\\/"
-  boost: 0
+  boost: 2
 }

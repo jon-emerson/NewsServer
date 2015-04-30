@@ -1,0 +1,31 @@
+short_name: "CENews"
+root_domain: "cenews.com"
+start_url: "http://cenews.com/"
+paragraph_selector: ".posts > p"
+paragraph_selector: ".content > p"
+article_url_pattern {
+  path_regex: "^\\/(post|article)\\/[0-9]+\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://cenews.com/post/7140/ten-gai-employees-graduate-from-onsite-mba-program"
+    article_url: "http://cenews.com/post/7139/golder-associates-names-new-president-and-ceo"
+    article_url: "http://cenews.com/post/7138/university-of-utah-team-chosen-for-geothermal-research"
+    article_url: "http://cenews.com/post/7137/lan-celebrates-earth-day-with-nationwide-volunteer-efforts"
+    article_url: "http://cenews.com/post/7136/jmc-steel-group-invests-in-vectorbloc"
+    article_url: "http://cenews.com/article/10041/successful-sustainable-infrastructure"
+    non_article_url: "http://cenews.com/civil"
+    non_article_url: "http://cenews.com/structural"
+    non_article_url: "http://cenews.com/toc"
+    non_article_url: "http://cenews.com/continuingeducation/"
+    non_article_url: "http://cenews.com/casestudy/whitepaper"
+    non_article_url: "http://cenews.com/products/services"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10518 # Civil Engineering
+  boost: 10
+}

@@ -55,6 +55,31 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10536 # Real Estate
+  subdomain: "sf.curbed.com"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  subdomain: "la.curbed.com"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  subdomain: "ny.curbed.com"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  subdomain: "miami.curbed.com"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
+  subdomain: "chicago.curbed.com"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10536 # Real Estate
   boost: 1
 }
 feature_boost_pattern {

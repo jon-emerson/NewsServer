@@ -63,3 +63,7 @@ feature_boost_pattern {
   feature_id: 10540 # Farming
   boost: -2
 }
+feature_boost_pattern {
+  feature_id: 10518 # Civil Engineering
+  boost: 0
+}
