@@ -1,0 +1,39 @@
+short_name: "ABAJournal"
+root_domain: "abajournal.com"
+start_url: "http://www.abajournal.com/news"
+paragraph_selector: "#story_page_body > p"
+paragraph_blacklist {
+  text_regex: "^Posted"
+}
+paragraph_blacklist {
+  text_regex: "^Related coverage:"
+}
+paragraph_blacklist {
+  text_regex: "^Associated Press:"
+}
+article_url_pattern {
+  path_regex: "\\/article\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.abajournal.com/news/article/negligent_hiker_injured_on_trail_must_pay_9.2k_rescue_bill_top_state_court"
+    article_url: "http://www.abajournal.com/news/article/suit_claimed_freddie_gray_suffered_from_lead_paint_exposure_as_a_child"
+    article_url: "http://www.abajournal.com/news/article/attorney_indicted"
+    article_url: "http://www.abajournal.com/news/article/scotus_justices_are_unusually_antagonistic_in_arguments_on_lethal_injection"
+    article_url: "http://www.abajournal.com/news/article/students_at_one_baltimore_law_school_may_take_exams_at_home"
+    article_url: "http://www.abajournal.com/news/article/2_lawyers_charged_after_courthouse_deposition_erupts_into_fistfight"
+    non_article_url: "http://www.abajournal.com/blawgs/"
+    non_article_url: "http://www.abajournal.com/news"
+    non_article_url: "http://www.abajournal.com/legalrebels"
+    non_article_url: "http://www.abajournal.com/lawbythenumbers/"
+    non_article_url: "http://www.abajournal.com/contests/"
+    non_article_url: "http://www.abajournal.com/featured/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10532 # Law Practice
+  boost: 2
+}

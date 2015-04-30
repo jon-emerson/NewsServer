@@ -1,0 +1,31 @@
+short_name: "Networkworld"
+root_domain: "networkworld.com"
+start_url: "http://www.networkworld.com/category/security"
+start_url: "http://www.networkworld.com/category/cloud-security/"
+paragraph_selector: "div[itemprop=\"articleBody\"] > p"
+article_url_pattern {
+  path_regex: "^\\/article\\/[0-9]+\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.networkworld.com/article/2917454/house-committee-approves-bill-to-end-nsa-phone-records-program.html"
+    article_url: "http://www.networkworld.com/article/2917233/wordpress-ecommerce-plugin-puts-over-5000-websites-at-risk.html"
+    article_url: "http://www.networkworld.com/article/2917113/google-develops-new-defense-against-phishing.html"
+    article_url: "http://www.networkworld.com/article/2917013/rsa-president-questions-governments-role-in-cybersecurity.html"
+    article_url: "http://www.networkworld.com/article/2916632/uc-voip/scalability-matters.html"
+    article_url: "http://www.networkworld.com/article/2916914/lawmakers-criticize-fbis-request-for-encryption-back-doors.html"
+    article_url: "http://www.networkworld.com/article/2916873/secret-an-app-for-anonymous-posts-shuts-down.html"
+    non_article_url: "http://www.networkworld.com/category/access-control/"
+    non_article_url: "http://www.networkworld.com/category/ethernet-switch/"
+    non_article_url: "http://www.networkworld.com/category/cloud-security/"
+    non_article_url: "http://www.networkworld.com/category/4g/"
+    non_article_url: "http://www.networkworld.com/category/business-continuity/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10526 # Network Security
+  boost: 3
+}

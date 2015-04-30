@@ -1,0 +1,41 @@
+short_name: "ChemWeek"
+root_domain: "chemweek.com"
+start_url: "http://www.chemweek.com/home/"
+start_url: "http://www.chemweek.com/chem_ideas/"
+paragraph_selector: "#storyBody > div"
+paragraph_blacklist {
+  text_regex: "^ $"
+}
+article_url_pattern {
+  path_regex: "\\/[^\\/]+_[0-9]{4,}\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.chemweek.com/home/top_of_the_news/BASF-reports-first-quarter-earnings-decline-on-higher-sales-confirms-2015-outlook_69958.html"
+    article_url: "http://www.chemweek.com/home/top_of_the_news/DuPont-Kolon-settle-Kevlar-trade-secrets-case_70001.html"
+    article_url: "http://www.chemweek.com/home/top_of_the_news/Bayers-first-quarter-buoyed-by-life-sciences-MaterialScience-flotation-on-schedule_69960.html"
+    article_url: "http://www.chemweek.com/home/top_of_the_news/Air-Products-net-income-up-2-percent-as-stronger-materials-and-Asia-results-offset-currency-impact_69976.html"
+    article_url: "http://www.chemweek.com/home/top_of_the_news/Linde-increases-profit-on-currency-effects-confirms-2015-outlook_69961.html"
+    article_url: "http://www.chemweek.com/sections/cover_story/Distribution-Riding-out-volatility_69748.html"
+    non_article_url: "http://www.chemweek.com/newsletters/cbd/"
+    non_article_url: "http://www.chemweek.com/events"
+    non_article_url: "http://www.chemweek.com/eventcalendar"
+    non_article_url: "http://www.chemweek.com/webcasts"
+    non_article_url: "http://www.chemweek.com/customercare"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10521 # Chemicals
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10533 # Medicine
+  boost: 0
+}

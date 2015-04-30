@@ -1,0 +1,30 @@
+short_name: "InfoSecurity"
+root_domain: "infosecurity-magazine.com"
+start_url: "http://www.infosecurity-magazine.com/news/"
+paragraph_selector: "div[itemprop=\"articleBody\"] > p"
+article_url_pattern {
+  path_regex: "^\\/news\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.infosecurity-magazine.com/news/ad-fraudsters-get-political-with/"
+    article_url: "http://www.infosecurity-magazine.com/news/major-flaw-could-let-remote/"
+    article_url: "http://www.infosecurity-magazine.com/news/uk-firms-plan-windows-server-2003/"
+    article_url: "http://www.infosecurity-magazine.com/news/jpmorgan-chase-insider-thief/"
+    article_url: "http://www.infosecurity-magazine.com/news/c-level-tech-execs-most/"
+    article_url: "http://www.infosecurity-magazine.com/news/google-aims-at-phishing-with/"
+    article_url: "http://www.infosecurity-magazine.com/news/secunia-unpatched-oses-on-the-rise/"
+    non_article_url: "http://www.infosecurity-magazine.com/news/"
+    non_article_url: "http://www.infosecurity-magazine.com/nav/topics/"
+    non_article_url: "http://www.infosecurity-magazine.com/nav/features/"
+    non_article_url: "http://www.infosecurity-magazine.com/webinars/"
+    non_article_url: "http://www.infosecurity-magazine.com/white-papers/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10526 # Network Security
+  boost: 3
+}
