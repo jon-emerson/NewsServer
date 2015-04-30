@@ -1,0 +1,42 @@
+short_name: "JofA"
+root_domain: "journalofaccountancy.com"
+start_url: "http://journalofaccountancy.com/"
+paragraph_blacklist {
+  text_regex: "^—"
+}
+paragraph_blacklist {
+  text_regex: "^©"
+}
+paragraph_blacklist {
+  text_regex: "^Reliable. Resourceful. Respected."
+}
+paragraph_selector: ".parbase > p"
+article_url_pattern {
+  path_regex: "^\\/news\\/(19|20)[0-9]{2}\\/[^\\/]+\\/[^\\/]+-[0-9]+\\.html$"
+}
+article_url_pattern {
+  path_regex: "^\\/issues/(19|20)[0-9]{2}\\/[^\\/]+\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://journalofaccountancy.com/news/2015/apr/sec-executive-compensation-rules-201512243.html"
+    article_url: "http://journalofaccountancy.com/news/2015/apr/fasb-proposes-revenue-recognition-delay-201512240.html"
+    article_url: "http://journalofaccountancy.com/news/2015/apr/financial-planning-standards-201512041.html"
+    article_url: "http://journalofaccountancy.com/news/2015/apr/college-financing-options-20152226.html"
+    article_url: "http://journalofaccountancy.com/news/2015/apr/tax-refunds-of-foreign-withholding-201512233.html"
+    article_url: "http://journalofaccountancy.com/issues/2015/apr/financial-reporting-auditing-complexity.html"
+    non_article_url: "http://journalofaccountancy.com/topics/technology.html"
+    non_article_url: "http://journalofaccountancy.com/topics/practice-management.html"
+    non_article_url: "http://journalofaccountancy.com/topics/financial-reporting/ifrs-compliance-reporting.html"
+    non_article_url: "http://journalofaccountancy.com/topics/auditing/performing-an-audit.html"
+    non_article_url: "http://journalofaccountancy.com/topics/management-accounting/accounting-and-reporting.html"
+    non_article_url: "http://journalofaccountancy.com/info/subscribe.html"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10515 # Accounting
+  boost: 10
+}

@@ -1,0 +1,31 @@
+short_name: "AccountingWeb"
+root_domain: "accountingweb.com"
+start_url: "http://www.accountingweb.com/"
+paragraph_selector: ".field-item > p"
+paragraph_selector: ".field-item > ul > li"
+article_url_pattern {
+  path_regex: "^\\/article\\/[^\\/]+\\/[0-9]{5,}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.accountingweb.com/article/tax-credit-impacted-refunds-many-obamacare-customers-hr-block-says/224666"
+    article_url: "http://www.accountingweb.com/article/best-quickbooks-tricks-no-one-ever-told-you-about/224660"
+    article_url: "http://www.accountingweb.com/article/receipt-bank-launches-apple-watch-bookkeeping-app/224659"
+    article_url: "http://www.accountingweb.com/article/gasb-look-disclosures-going-concern-and-debt-governments/224655"
+    article_url: "http://www.accountingweb.com/article/bramwell%E2%80%99s-lunch-beat-ceo-clinton-foundation-admits-tax-form-errors/224657"
+    article_url: "http://www.accountingweb.com/article/aicpa-identifies-8-issues-are-critical-small-business-tax-reform/224656"
+    non_article_url: "http://www.accountingweb.com/tax"
+    non_article_url: "http://www.accountingweb.com/technology"
+    non_article_url: "http://www.accountingweb.com/highimpactexcel"
+    non_article_url: "http://www.accountingweb.com/states"
+    non_article_url: "http://www.accountingweb.com/advisory-board"
+    non_article_url: "http://www.accountingweb.com/aa"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10515 # Accounting
+  boost: 10
+}

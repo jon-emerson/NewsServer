@@ -2,6 +2,7 @@ short_name: "NY Times"
 root_domain: "nytimes.com"
 start_url: "http://www.nytimes.com"
 start_url: "http://opinionator.blogs.nytimes.com/"
+start_url: "http://topics.nytimes.com/top/news/business/small-business/accounting/index.html"
 subdomain_blacklist: "jobmarket.nytimes.com"
 subdomain_blacklist: "homedelivery.nytimes.com"
 subdomain_blacklist: "mobile.nytimes.com"
@@ -182,6 +183,11 @@ feature_boost_pattern {
   boost: 10
 }
 feature_boost_pattern {
+  feature_id: 10515 # Accounting
+  subdomain: "dealbook.nytimes.com"
+  boost: 0
+}
+feature_boost_pattern {
   feature_id: 10511 # Leisure, Travel and Tourism
   path_regex: "^\\/travel\\/"
   boost: 5
@@ -238,6 +244,11 @@ feature_boost_pattern {
   feature_id: 10523 # Management
   path_regex: "\\/business\\/"
   boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10515 # Accounting
+  path_regex: "\\/business\\/"
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10512 # Sports
