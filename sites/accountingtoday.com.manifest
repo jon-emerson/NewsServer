@@ -1,6 +1,7 @@
 short_name: "AccountingToday"
 root_domain: "accountingtoday.com"
 start_url: "http://www.accountingtoday.com"
+start_url: "http://www.accountingtoday.com/news/"
 subdomain_blacklist: "digital.accountingtoday.com"
 path_blacklist {
   needle: "/60-seconds-smarter/"
@@ -66,8 +67,6 @@ paragraph_selector: ".entry-content p"
 article_url_pattern {
   path_regex: "[\\-\\/][0-9]{5,7}\\-1\\.html"
 }
-rss_url: "http://www.theverge.com/mobile/rss/index.xml"
-rss_url: "http://www.theverge.com/rss/index.xml"
 test_instructions {
   article_url_detector_checks {
     article_url: "http://www.accountingtoday.com/blogs/accounting-tomorrow/thomson-reuters-checkpoint-releases-report-presidents-2016-budget-73704-1.html"
@@ -85,7 +84,7 @@ test_instructions {
   }
 }
 feature_boost_pattern {
-  boost: -20 # This is not a general consumption web site.
+  boost: -10 # This is not a general consumption web site.
 }
 feature_boost_pattern {
   feature_id: 10515 # Accounting

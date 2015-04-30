@@ -57,5 +57,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10538 # Oil & Energy
-  boost: 10
+  boost: 2
 }

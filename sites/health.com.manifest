@@ -1,0 +1,51 @@
+short_name: "Health.com"
+root_domain: "health.com"
+start_url: "http://www.health.com/health/"
+start_url: "http://www.health.com/health/diet-fitness/"
+start_url: "http://news.health.com/"
+paragraph_selector: ".blog-post-single-content > p"
+paragraph_selector: ".blog-post-single-content > h3"
+paragraph_selector: "h2.dek"
+paragraph_selector: "#article-content"
+paragraph_blacklist {
+  text_regex: "^RELATED:"
+}
+paragraph_blacklist {
+  text_regex: "^Related:"
+}
+paragraph_blacklist {
+  text_regex: "^Watch the video:"
+}
+paragraph_blacklist {
+  text_regex: "^Next Page:"
+}
+path_blacklist {
+  needle: "/gallery/"
+}
+article_url_pattern {
+  path_regex: "^\\/(19|20)[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+article_url_pattern {
+  path_regex: "^\\/health\\/article\\/[0-9,]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://news.health.com/2015/04/27/heres-how-5-health-experts-spend-their-mornings/"
+    article_url: "http://www.health.com/health/article/0,,20911737,00.html"
+    article_url: "http://news.health.com/2015/04/27/the-beach-body-ads-sparking-controversy/"
+    article_url: "http://news.health.com/2015/04/27/maria-menounos-everyday-routine-for-a-flat-belly/"
+    article_url: "http://news.health.com/2015/04/22/the-inspirational-man-who-finished-in-last-place-at-the-boston-marathon/"
+    non_article_url: "http://www.health.com/health/gallery/0,,20841202,00.html"
+    non_article_url: "http://www.health.com/health/gallery/0,,20807507,00.html"
+    non_article_url: "http://www.health.com/health/gallery/0,,20735338,00.html"
+    non_article_url: "http://www.health.com/health/gallery/0,,20531849,00.html"
+    non_article_url: "http://www.health.com/health/gallery/0,,20743007,00.html"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
+  boost: 1
+}

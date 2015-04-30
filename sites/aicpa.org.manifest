@@ -1,0 +1,33 @@
+short_name: "AICPA Insights"
+root_domain: "aicpa.org"
+start_url: "http://blog.aicpa.org/"
+paragraph_selector: ".entry-body > p"
+paragraph_selector: ".entry-body > ul > li"
+paragraph_selector: ".entry-more > p"
+paragraph_selector: ".entry-more > ul > li"
+article_url_pattern {
+  path_regex: "^\\/(19|20)[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://blog.aicpa.org/2015/04/5-steps-to-help-you-manage-up.html"
+    article_url: "http://blog.aicpa.org/2015/04/aicpa-celebrates-25-years-of-top-technologies-for-cpas.html"
+    article_url: "http://blog.aicpa.org/2015/04/help-us-improve-the-service-in-the-internal-revenue-service-.html"
+    article_url: "http://blog.aicpa.org/2015/04/the-importance-of-financial-literacy-month.html"
+    article_url: "http://blog.aicpa.org/2015/04/mine-client-tax-returns-for-financial-planning-opportunities.html"
+    article_url: "http://blog.aicpa.org/2015/04/medicare-blind-men-and-an-elephant.html"
+    non_article_url: "http://blog.aicpa.org/our-bloggers.html"
+    non_article_url: "http://blog.aicpa.org/archives.html"
+    non_article_url: "http://blog.aicpa.org/categories.html"
+    non_article_url: "http://blog.aicpa.org/want-to-be-a-guest-blogger.html"
+    non_article_url: "http://blog.aicpa.org/accounting-and-financial-reporting/"
+    non_article_url: "http://blog.aicpa.org/accounting-education/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10515 # Accounting
+  boost: 10
+}

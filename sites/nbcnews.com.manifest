@@ -1,0 +1,99 @@
+short_name: "NBC News"
+root_domain: "nbcnews.com"
+start_url: "http://www.nbcnews.com/"
+start_url: "http://www.nbcnews.com/health/diet-fitness"
+path_blacklist {
+  needle: "/pop-culture/"
+}
+paragraph_selector: "p.ember-view"
+article_url_pattern {
+  path_regex: "\\/[\\w-]+[0-9]{6}$"
+}
+rss_url: "http://feeds.nbcnews.com/feeds/topstories" # Top.
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.nbcnews.com/health/health-news/doctors-print-4-d-airway-save-three-babies-n350411"
+    article_url: "http://www.nbcnews.com/health/health-news/add-less-fluoride-water-us-feds-say-n349036"
+    article_url: "http://www.nbcnews.com/health/health-news/new-diet-proposals-eat-your-veggies-have-some-coffee-n309026"
+    article_url: "http://www.nbcnews.com/health/diet-fitness/fda-approves-new-appetite-pacemaker-device-n286166"
+    article_url: "http://www.nbcnews.com/health/diet-fitness/can-new-milk-brand-buoy-dairy-industry-n339586"
+    non_article_url: "http://www.nbcnews.com/news/investigations"
+    non_article_url: "http://www.nbcnews.com/pop-culture"
+    non_article_url: "http://www.nbcnews.com/pop-culture/celebrity/suzanne-crough-youngest-partridge-family-star-dies-n349811"
+    non_article_url: "http://www.nbcnews.com/storyline/lethal-injection"
+    non_article_url: "http://www.nbcnews.com/storyline/baltimore-unrest"
+  }
+}
+feature_boost_pattern {
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
+  path_regex: "\\/health\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  path_regex: "\\/tech\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Software
+  path_regex: "\\/tech\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Hardware and Electronics
+  path_regex: "\\/tech\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer Electronics
+  path_regex: "\\/tech\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10526 # Network Security
+  path_regex: "\\/tech\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "\\/us-news\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10543 # Government
+  path_regex: "\\/politics\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  path_regex: "\\/science\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "\\/science\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer Goods
+  path_regex: "\\/consumer\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10520 # Automotive
+  path_regex: "\\/autos\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10511 # Leisure, Travel and Tourism
+  path_regex: "\\/travel\\/"
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10538 # Oil and Energy
+  path_regex: "\\/energy\\/"
+  boost: 2
+}
