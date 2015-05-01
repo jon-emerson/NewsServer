@@ -375,6 +375,24 @@ public final class UserProto {
      * <code>optional int64 last_timezone_estimate_update = 23;</code>
      */
     long getLastTimezoneEstimateUpdate();
+
+    // optional int64 welcome_email_sent_time = 24;
+    /**
+     * <code>optional int64 welcome_email_sent_time = 24;</code>
+     *
+     * <pre>
+     * The time, in milliseconds, when we sent this user a welcome email.
+     * </pre>
+     */
+    boolean hasWelcomeEmailSentTime();
+    /**
+     * <code>optional int64 welcome_email_sent_time = 24;</code>
+     *
+     * <pre>
+     * The time, in milliseconds, when we sent this user a welcome email.
+     * </pre>
+     */
+    long getWelcomeEmailSentTime();
   }
   /**
    * Protobuf type {@code User}
@@ -561,6 +579,11 @@ public final class UserProto {
             case 184: {
               bitField0_ |= 0x00004000;
               lastTimezoneEstimateUpdate_ = input.readInt64();
+              break;
+            }
+            case 192: {
+              bitField0_ |= 0x00008000;
+              welcomeEmailSentTime_ = input.readInt64();
               break;
             }
           }
@@ -1370,6 +1393,30 @@ public final class UserProto {
       return lastTimezoneEstimateUpdate_;
     }
 
+    // optional int64 welcome_email_sent_time = 24;
+    public static final int WELCOME_EMAIL_SENT_TIME_FIELD_NUMBER = 24;
+    private long welcomeEmailSentTime_;
+    /**
+     * <code>optional int64 welcome_email_sent_time = 24;</code>
+     *
+     * <pre>
+     * The time, in milliseconds, when we sent this user a welcome email.
+     * </pre>
+     */
+    public boolean hasWelcomeEmailSentTime() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>optional int64 welcome_email_sent_time = 24;</code>
+     *
+     * <pre>
+     * The time, in milliseconds, when we sent this user a welcome email.
+     * </pre>
+     */
+    public long getWelcomeEmailSentTime() {
+      return welcomeEmailSentTime_;
+    }
+
     private void initFields() {
       id_ = "";
       firstName_ = "";
@@ -1391,6 +1438,7 @@ public final class UserProto {
       lastIpAddress_ = "";
       timezoneEstimate_ = "";
       lastTimezoneEstimateUpdate_ = 0L;
+      welcomeEmailSentTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1469,6 +1517,9 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeInt64(23, lastTimezoneEstimateUpdate_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeInt64(24, welcomeEmailSentTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1563,6 +1614,10 @@ public final class UserProto {
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(23, lastTimezoneEstimateUpdate_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(24, welcomeEmailSentTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1745,6 +1800,8 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00040000);
         lastTimezoneEstimateUpdate_ = 0L;
         bitField0_ = (bitField0_ & ~0x00080000);
+        welcomeEmailSentTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00100000);
         return this;
       }
 
@@ -1878,6 +1935,10 @@ public final class UserProto {
           to_bitField0_ |= 0x00004000;
         }
         result.lastTimezoneEstimateUpdate_ = lastTimezoneEstimateUpdate_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.welcomeEmailSentTime_ = welcomeEmailSentTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2074,6 +2135,9 @@ public final class UserProto {
         }
         if (other.hasLastTimezoneEstimateUpdate()) {
           setLastTimezoneEstimateUpdate(other.getLastTimezoneEstimateUpdate());
+        }
+        if (other.hasWelcomeEmailSentTime()) {
+          setWelcomeEmailSentTime(other.getWelcomeEmailSentTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4251,6 +4315,55 @@ public final class UserProto {
       public Builder clearLastTimezoneEstimateUpdate() {
         bitField0_ = (bitField0_ & ~0x00080000);
         lastTimezoneEstimateUpdate_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 welcome_email_sent_time = 24;
+      private long welcomeEmailSentTime_ ;
+      /**
+       * <code>optional int64 welcome_email_sent_time = 24;</code>
+       *
+       * <pre>
+       * The time, in milliseconds, when we sent this user a welcome email.
+       * </pre>
+       */
+      public boolean hasWelcomeEmailSentTime() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional int64 welcome_email_sent_time = 24;</code>
+       *
+       * <pre>
+       * The time, in milliseconds, when we sent this user a welcome email.
+       * </pre>
+       */
+      public long getWelcomeEmailSentTime() {
+        return welcomeEmailSentTime_;
+      }
+      /**
+       * <code>optional int64 welcome_email_sent_time = 24;</code>
+       *
+       * <pre>
+       * The time, in milliseconds, when we sent this user a welcome email.
+       * </pre>
+       */
+      public Builder setWelcomeEmailSentTime(long value) {
+        bitField0_ |= 0x00100000;
+        welcomeEmailSentTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 welcome_email_sent_time = 24;</code>
+       *
+       * <pre>
+       * The time, in milliseconds, when we sent this user a welcome email.
+       * </pre>
+       */
+      public Builder clearWelcomeEmailSentTime() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        welcomeEmailSentTime_ = 0L;
         onChanged();
         return this;
       }
@@ -11538,7 +11651,7 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/user.proto\032(com/j" +
       "anknspank/database/extensions.proto\032\037com" +
-      "/janknspank/proto/core.proto\"\350\005\n\004User\022\034\n" +
+      "/janknspank/proto/core.proto\"\211\006\n\004User\022\034\n" +
       "\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\nfirst_nam" +
       "e\030\002 \001(\tB\004\230\246\035d\022\027\n\tlast_name\030\003 \001(\tB\004\230\246\035d\022\027" +
       "\n\005email\030\004 \001(\tB\010\220\246\035\003\230\246\035d\022\032\n\014linked_in_id\030" +
@@ -11556,44 +11669,45 @@ public final class UserProto {
       "(\0132\t.InterestB\004\240\246\035\003\022!\n\023last_5_app_use_ti" +
       "me\030\024 \003(\003B\004\240\246\035\003\022\035\n\017last_ip_address\030\025 \001(\tB" +
       "\004\230\246\035\024\022\037\n\021timezone_estimate\030\026 \001(\tB\004\230\246\035\n\022%",
-      "\n\035last_timezone_estimate_update\030\027 \001(\003:\020\212" +
-      "\265\030\014MongoDB.User\",\n\022AddressBookContact\022\026\n" +
-      "\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"J\n\013UrlFavorite\022 \n\006" +
-      "url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create" +
-      "_time\030\002 \001(\003B\004\210\246\035\001\"\255\002\n\017LinkedInProfile\0223\n" +
-      "\020current_employer\030\001 \001(\0132\031.LinkedInProfil" +
-      "e.Employer\0220\n\rpast_employer\030\002 \003(\0132\031.Link" +
-      "edInProfile.Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001" +
-      "\230\246\035\200\240\006\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\032z\n" +
-      "\010Employer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005tit",
-      "le\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230" +
-      "\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(" +
-      "\003\")\n\017LinkedInContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001" +
-      "\230\246\035d\"\255\003\n\010Interest\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230" +
-      "\246\035\030\250\246\035\001\240\246\035\003\022*\n\004type\030\002 \001(\0162\026.Interest.Int" +
-      "erestTypeB\004\210\246\035\001\022.\n\006source\030\003 \001(\0162\030.Intere" +
-      "st.InterestSourceB\004\210\246\035\001\022\035\n\013create_time\030\004" +
-      " \001(\003B\010\210\246\035\001\240\246\035\003\022\025\n\rindustry_code\030\005 \001(\005\022\027\n" +
-      "\006entity\030\006 \001(\0132\007.Entity\"i\n\014InterestType\022\014" +
-      "\n\010UNKNONWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006ENTITY\020\002\022\026",
-      "\n\022LINKED_IN_CONTACTS\020\003\022\031\n\025ADDRESS_BOOK_C" +
-      "ONTACTS\020\004\"c\n\016InterestSource\022\013\n\007UNKNOWN\020\000" +
-      "\022\010\n\004USER\020\001\022\025\n\021LINKED_IN_PROFILE\020\002\022\024\n\020FAC" +
-      "EBOOK_PROFILE\020\004\022\r\n\tTOMBSTONE\020\003*\004\010\007\020\010\"\215\004\n" +
-      "\nUserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035" +
-      "\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\003\0225\n\013" +
-      "action_type\030\003 \001(\0162\026.UserAction.ActionTyp" +
-      "eB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035" +
-      "\001\220\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035\n" +
-      "\013create_time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017read_sta",
-      "rt_time\030\007 \001(\003\022\025\n\rread_end_time\030\010 \001(\003\022!\n\010" +
-      "interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)\n\026on_st" +
-      "ream_for_interest\030\014 \001(\0132\t.Interest\"\221\001\n\nA" +
-      "ctionType\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005" +
-      "X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005SHARE\020\004\022" +
-      "\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOTE" +
-      "_UP\020\007\022\017\n\013SCROLL_PAST\020\010:\024\212\265\030\020MySQL.UserAc" +
-      "tionB!\n\024com.janknspank.protoB\tUserProto"
+      "\n\035last_timezone_estimate_update\030\027 \001(\003\022\037\n" +
+      "\027welcome_email_sent_time\030\030 \001(\003:\020\212\265\030\014Mong" +
+      "oDB.User\",\n\022AddressBookContact\022\026\n\004name\030\002" +
+      " \001(\tB\010\210\246\035\001\230\246\035d\"J\n\013UrlFavorite\022 \n\006url_id\030" +
+      "\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create_time\030\002" +
+      " \001(\003B\004\210\246\035\001\"\255\002\n\017LinkedInProfile\0223\n\020curren" +
+      "t_employer\030\001 \001(\0132\031.LinkedInProfile.Emplo" +
+      "yer\0220\n\rpast_employer\030\002 \003(\0132\031.LinkedInPro" +
+      "file.Employer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022" +
+      "\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\032z\n\010Employ",
+      "er\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(" +
+      "\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\n" +
+      "start_time\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\")\n\017Li" +
+      "nkedInContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\255\003" +
+      "\n\010Interest\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
+      "\240\246\035\003\022*\n\004type\030\002 \001(\0162\026.Interest.InterestTy" +
+      "peB\004\210\246\035\001\022.\n\006source\030\003 \001(\0162\030.Interest.Inte" +
+      "restSourceB\004\210\246\035\001\022\035\n\013create_time\030\004 \001(\003B\010\210" +
+      "\246\035\001\240\246\035\003\022\025\n\rindustry_code\030\005 \001(\005\022\027\n\006entity" +
+      "\030\006 \001(\0132\007.Entity\"i\n\014InterestType\022\014\n\010UNKNO",
+      "NWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKE" +
+      "D_IN_CONTACTS\020\003\022\031\n\025ADDRESS_BOOK_CONTACTS" +
+      "\020\004\"c\n\016InterestSource\022\013\n\007UNKNOWN\020\000\022\010\n\004USE" +
+      "R\020\001\022\025\n\021LINKED_IN_PROFILE\020\002\022\024\n\020FACEBOOK_P" +
+      "ROFILE\020\004\022\r\n\tTOMBSTONE\020\003*\004\010\007\020\010\"\215\004\n\nUserAc" +
+      "tion\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007us" +
+      "er_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\003\0225\n\013action_" +
+      "type\030\003 \001(\0162\026.UserAction.ActionTypeB\010\210\246\035\001" +
+      "\220\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\005\022\036" +
+      "\n\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035\n\013create",
+      "_time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017read_start_time" +
+      "\030\007 \001(\003\022\025\n\rread_end_time\030\010 \001(\003\022!\n\010interes" +
+      "t\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)\n\026on_stream_fo" +
+      "r_interest\030\014 \001(\0132\t.Interest\"\221\001\n\nActionTy" +
+      "pe\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002" +
+      "\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ" +
+      "_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017" +
+      "\n\013SCROLL_PAST\020\010:\024\212\265\030\020MySQL.UserActionB!\n" +
+      "\024com.janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11605,7 +11719,7 @@ public final class UserProto {
           internal_static_User_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_User_descriptor,
-              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", "Last5AppUseTime", "LastIpAddress", "TimezoneEstimate", "LastTimezoneEstimateUpdate", });
+              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", "Last5AppUseTime", "LastIpAddress", "TimezoneEstimate", "LastTimezoneEstimateUpdate", "WelcomeEmailSentTime", });
           internal_static_AddressBookContact_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_AddressBookContact_fieldAccessorTable = new

@@ -107,7 +107,8 @@ message User {
   ];
   optional int64 last_timezone_estimate_update = 23;
 
-  // Next ID: 21.
+  // The time, in milliseconds, when we sent this user a welcome email.
+  optional int64 welcome_email_sent_time = 24;
 }
 
 message AddressBookContact {

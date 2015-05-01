@@ -227,7 +227,7 @@ public class NewsServlet extends HttpServlet {
    * Returns a Tofu renderer for soy related to this Servlet class, preconfigured
    * to use namespace "cookout." plus the servlet's name.  E.g. "cookout.index".
    */
-  protected SoyTofu getTofu() {
+  public static SoyTofu getTofu(String resourceName) {
     SoyFileSet.Builder sfsBuilder = new SoyFileSet.Builder();
     for (File soyFile : new File("templates/").listFiles()) {
       if (soyFile.getName().endsWith(".soy")) {
@@ -235,7 +235,7 @@ public class NewsServlet extends HttpServlet {
       }
     }
     SoyFileSet sfs = sfsBuilder.build();
-    SoyTofu tofu = sfs.compileToTofu().forNamespace("news." + getResourceName());
+    SoyTofu tofu = sfs.compileToTofu().forNamespace("news." + resourceName);
     return tofu;
   }
 
@@ -250,7 +250,7 @@ public class NewsServlet extends HttpServlet {
       throws IOException {
     resp.setContentType("text/html; charset=utf-8");
 
-    Renderer renderer = getTofu().newRenderer(template);
+    Renderer renderer = getTofu(getResourceName()).newRenderer(template);
     if (data != null) {
       renderer.setData(data);
     }

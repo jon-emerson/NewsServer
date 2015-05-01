@@ -1,12 +1,25 @@
 package com.janknspank.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.google.common.collect.ImmutableList;
+import com.google.template.soy.data.SoyMapData;
+import com.google.template.soy.tofu.SoyTofu;
+import com.google.template.soy.tofu.SoyTofu.Renderer;
+import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
+import com.janknspank.proto.UserProto.User;
+import com.janknspank.server.NewsServlet;
 
 public class SendWelcomeEmails {
   private static final String SMTP_USERNAME;
@@ -22,17 +35,7 @@ public class SendWelcomeEmails {
     }
   }
 
-  // Replace with your "From" address. This address must be verified.
-  static final String FROM = "support@spotternews.com";
-
-  // Replace with a "To" address. If your account is still in the
-  // sandbox, this address must be verified.
-  static final String TO = "panaceaa@gmail.com";
-
-  static final String BODY =
-      "This email was sent through the Amazon SES SMTP interface by using Java.";
-  static final String SUBJECT =
-      "Amazon SES test (SMTP interface accessed using Java)";
+  static final String SUBJECT = "Welcome to Spotter!";
 
   // Amazon SES SMTP host name. Note: We can talk to us-east-2, us-west-2, etc.
   // But we verified our emails through us-east-1, and we run our servers out
@@ -43,8 +46,26 @@ public class SendWelcomeEmails {
   // port 25 because we will use STARTTLS to encrypt the connection.
   static final int PORT = 587; // 25;
 
-  public static void main(String[] args) throws Exception {
+  private static String getHtml() {
+    SoyTofu soyTofu = NewsServlet.getTofu("welcomeemail");
+    Renderer renderer = soyTofu.newRenderer(".main");
+    renderer.setData(new SoyMapData(
+        "title", "Spotter - Business news, personalized"));
+    return renderer.render();
+  }
 
+  private static MimeMessage getMessage(Session session, User user)
+      throws UnsupportedEncodingException, MessagingException {
+    MimeMessage message = new MimeMessage(session);
+    message.setFrom(new InternetAddress("support@spotternews.com", "Spotter News"));
+    message.setRecipient(Message.RecipientType.TO,
+        new InternetAddress(user.getEmail(), user.getFirstName() + " " + user.getLastName()));
+    message.setSubject(SUBJECT);
+    message.setContent(getHtml(), "text/html; charset=utf-8");
+    return message;
+  }
+
+  public static void main(String[] args) throws DatabaseSchemaException {
     // Create a Properties object to contain connection configuration information.
     Properties props = System.getProperties();
     props.put("mail.transport.protocol", "smtp");
@@ -60,32 +81,48 @@ public class SendWelcomeEmails {
     // Create a Session object to represent a mail session with the specified properties. 
     Session session = Session.getDefaultInstance(props);
 
-    // Create a message with the specified information. 
-    MimeMessage msg = new MimeMessage(session);
-    msg.setFrom(new InternetAddress(FROM, "Spotter News"));
-    msg.setRecipient(Message.RecipientType.TO, new InternetAddress(TO, "Crazy Person"));
-    msg.setSubject(SUBJECT);
-    msg.setContent(BODY,"text/plain");
-
-    // Create a transport.
-    Transport transport = session.getTransport();
-
-    // Send the message.
+    Transport transport = null;
     try {
-      System.out.println("Attempting to send an email through the Amazon SES SMTP interface...");
-
       // Connect to Amazon SES using the SMTP username and password you specified above.
+      System.out.println("Attempting to send an email through the Amazon SES SMTP interface...");
+      transport = session.getTransport();
       transport.connect(HOST, SMTP_USERNAME, SMTP_PASSWORD);
 
-      // Send the email.
-      transport.sendMessage(msg, msg.getAllRecipients());
-      System.out.println("Email sent!");
-    } catch (Exception e) {
-      System.out.println("The email was not sent.");
-      System.out.println("Error message: " + e.getMessage());
+      // For every user with an email address for whom we have not sent a welcome
+      // email, send them a welcome email now.
+      // HACK(jonemerson): Right now, only send to Tom.
+      Iterable<User> users = Database.with(User.class).get(
+          new QueryOption.WhereEquals("email", ImmutableList.of(
+              "tom.charytoniuk@gmail.com")));
+      // TODO(jonemerson): Switch back to this.
+      // Iterable<User> users = Database.with(User.class).get(
+      //     new QueryOption.WhereNotNull("email"),
+      //     new QueryOption.WhereNull("welcome_email_sent_time"));
+      for (User user : users) {
+        // Mark that we're sending him/her a welcome email.
+        try {
+          Database.update(user.toBuilder()
+              .setWelcomeEmailSentTime(System.currentTimeMillis())
+              .build());
+        } catch (DatabaseRequestException e) {
+          e.printStackTrace();
+          continue;
+        }
+
+        // Send the email.
+        Message message = getMessage(session, user);
+        transport.sendMessage(message, message.getAllRecipients());
+        System.out.println("Email sent to " + user.getEmail());
+      }
+    } catch (MessagingException | UnsupportedEncodingException e) {
+      e.printStackTrace();
     } finally {
       // Close and terminate the connection.
-      transport.close();
+      if (transport != null) {
+        try {
+          transport.close();
+        } catch (MessagingException e) {}
+      }
     }
   }
 }
