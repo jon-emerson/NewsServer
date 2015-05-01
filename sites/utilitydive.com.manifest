@@ -5,6 +5,7 @@ use_first_paragraph_as_description: true
 paragraph_selector: ".brief-article p"
 paragraph_selector: ".brief-article ul > li"
 paragraph_selector: ".brief-article h3"
+paragraph_selector: "#feature-body p"
 paragraph_blacklist {
   text_regex: "^Dive Brief:"
 }
