@@ -22,7 +22,7 @@ import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.rank.Personas;
 
 public class Helper {
-  public static void main4(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     int[] bucket = new int[100];
     for (int i = 0; i < bucket.length; i++) {
       bucket[i] = 0;
@@ -32,7 +32,8 @@ public class Helper {
         new QueryOption.DescendingSort("published_time"),
         new QueryOption.Limit(10000))) {
       for (ArticleFeature articleFeature : article.getFeatureList()) {
-        if (FeatureId.fromId(articleFeature.getFeatureId()).getFeatureType() == FeatureType.INDUSTRY) {
+        FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
+        if (featureId != null && featureId.getFeatureType() == FeatureType.INDUSTRY) {
           count++;
           double similarity = articleFeature.getSimilarity();
           int bucketNum = (int) (similarity * 100);
@@ -49,7 +50,7 @@ public class Helper {
     }
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main4(String args[]) throws Exception {
     Iterable<Article> seedArticles =
         new VectorFeatureCreator(FeatureId.VENTURE_CAPITAL).getSeedArticles();
     VectorFeature ventureCapitalFeature = (VectorFeature) Feature.getFeature(FeatureId.VENTURE_CAPITAL);
