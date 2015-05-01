@@ -2,6 +2,11 @@ package com.janknspank.rank;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
@@ -15,6 +20,7 @@ import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
+import com.google.api.client.util.Maps;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.janknspank.bizness.BiznessException;
@@ -24,7 +30,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
 
 public class NeuralNetworkTrainer implements LearningEventListener {
-  private static final int MAX_ITERATIONS = 10000;
+  private static final int MAX_ITERATIONS = 20000;
 
   // Helper object that gives us human readable names for each input node.
   private static List<String> INPUT_NODE_KEYS = null;
@@ -107,7 +113,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
    * Creates a complete training data set given good URLs and bad URLs defined
    * in the user /personas/*.persona files.
    */
-  private DataSet generateTrainingDataSet() throws DatabaseSchemaException, BiznessException {
+  private static DataSet generateTrainingDataSet() throws DatabaseSchemaException, BiznessException {
     int goodUrlCount = 0;
     int badUrlCount = 0;
     List<DataSetRow> dataSetRows = Lists.newArrayList();
@@ -218,56 +224,75 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     }
   }
 
-  /**
-   * Helper method for triggering a train. 
-   * run ./trainneuralnet.sh to execute
-   * */
-  public static void main(String args[]) throws Exception {
-    NeuralNetworkTrainer neuralNetworkTrainer = new NeuralNetworkTrainer();
-    DataSet dataSet = neuralNetworkTrainer.generateTrainingDataSet();
-    printAverageInputValues(dataSet);
+  public static class NeuralNetworkFinder implements Callable<NeuralNetwork<BackPropagation>> {
+    private final int hiddenNodeCount;
+    private final DataSet dataSet;
+    private double grade = Double.MIN_VALUE;
 
-    double bestGrade = Double.MIN_VALUE;
-    int bestHiddenNodeCount = -1;
-
-    // For curiousity, figure out how well each topology works.
-    int maxHiddenNodeCount = 15;
-    double[] bestGradePerHiddenNodeCount = new double[maxHiddenNodeCount];
-    for (int i = 0; i < maxHiddenNodeCount; i++) {
-      bestGradePerHiddenNodeCount[i] = Double.MIN_VALUE;
+    public NeuralNetworkFinder(DataSet dataSet, int hiddenNodeCount) {
+      this.dataSet = dataSet;
+      this.hiddenNodeCount = hiddenNodeCount;
     }
 
-    NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
-    for (int hiddenNodeCount : new int[] { 0, 2, 4, 5, 6, 7 }) {
+    @Override
+    public NeuralNetwork<BackPropagation> call() throws Exception {
+      NeuralNetworkTrainer neuralNetworkTrainer = new NeuralNetworkTrainer();
+      NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
       for (int tries = 0; tries < 15; tries++) {
         System.out.println("ATTEMPTING " + hiddenNodeCount + " HIDDEN NODES "
             + "(try " + (tries + 1) + " of 15)...");
         NeuralNetwork<BackPropagation> neuralNetwork =
             neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
         double grade = Benchmark.grade(new NeuralNetworkScorer(neuralNetwork));
-        if (grade > bestGrade) {
-          bestGrade = grade;
-          bestHiddenNodeCount = hiddenNodeCount;
+        if (grade > this.grade) {
+          this.grade = grade;
           bestNeuralNetwork = neuralNetwork;
-          System.out.println("***");
-          System.out.println("NEW BEST FOUND: " + hiddenNodeCount + " hidden nodes");
-          System.out.println("***");
         }
-        if (grade > bestGradePerHiddenNodeCount[hiddenNodeCount]) {
-          bestGradePerHiddenNodeCount[hiddenNodeCount] = grade;
-        }
+      }
+      return bestNeuralNetwork;
+    }
+  }
+
+  /**
+   * Helper method for triggering a train. 
+   * run ./trainneuralnet.sh to execute
+   * */
+  public static void main(String args[]) throws Exception {
+    DataSet dataSet = generateTrainingDataSet();
+    printAverageInputValues(dataSet);
+
+    // Create a threads to general neural networks for each of our
+    // desired hidden node counts.
+    ExecutorService executor = Executors.newFixedThreadPool(20);
+    Map<Integer, NeuralNetworkFinder> neuralNetworkFinderMap = Maps.newHashMap();
+    Map<Integer, Future<NeuralNetwork<BackPropagation>>> neuralNetworkFutureMap = Maps.newHashMap();
+    for (int hiddenNodeCount : new int[] { 0, 2, 3, 4, 5, 6, 7, 8 }) {
+      NeuralNetworkFinder neuralNetworkFinder = new NeuralNetworkFinder(dataSet, hiddenNodeCount);
+      neuralNetworkFinderMap.put(hiddenNodeCount, neuralNetworkFinder);
+      neuralNetworkFutureMap.put(hiddenNodeCount, executor.submit(neuralNetworkFinder));
+    }
+    // executor.invokeAll(neuralNetworkFinderMap.values());
+    executor.shutdown();
+
+    // Evaluate the outcomes from each thread.
+    System.out.println("Performances of different topologies:");
+    int bestHiddenNodeCount = Integer.MIN_VALUE;
+    double bestNeuralNetworkGrade = Double.MIN_VALUE;
+    NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
+    for (Integer hiddenNodeCount : neuralNetworkFinderMap.keySet()) {
+      NeuralNetwork<BackPropagation> neuralNetwork =
+          neuralNetworkFutureMap.get(hiddenNodeCount).get();
+      double grade = neuralNetworkFinderMap.get(hiddenNodeCount).grade;
+      System.out.println(hiddenNodeCount + " hidden nodes: " + grade);
+      if (grade > bestNeuralNetworkGrade) {
+        bestNeuralNetworkGrade = grade;
+        bestNeuralNetwork = neuralNetwork;
+        bestHiddenNodeCount = hiddenNodeCount;
       }
     }
     System.out.println();
 
-    System.out.println("Performances of different topologies:");
-    for (int i = 0; i < maxHiddenNodeCount; i++) {
-      System.out.println(i + " hidden nodes: " +
-          (bestGradePerHiddenNodeCount[i] == Double.MIN_VALUE
-              ? "N/A" : bestGradePerHiddenNodeCount[i]));
-    }
-    System.out.println();
-
+    // Save the best one.
     System.out.println("Saving best neural network "
         + "(btw it has " + bestHiddenNodeCount + " hidden nodes)");
     bestNeuralNetwork.save(NeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);

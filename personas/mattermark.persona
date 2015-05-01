@@ -248,6 +248,11 @@ bad_url: "http://www.bloomberg.com/news/articles/2015-04-30/george-soros-s-tax-b
 bad_url: "http://www.entrepreneur.com/article/245683"
 bad_url: "http://news.investors.com/technology/043015-750327-teva-nvo-shpg-celg-report-q1-results.htm"
 bad_url: "http://news.investors.com/politics-andrew-malcolm/043015-750301-hillary-clinton-first-policy-speech-columbia.htm"
+bad_url: "http://www.telegraph.co.uk/news/politics/ed-miliband/11572239/Ed-Miliband-savaged-for-severe-limitations-and-strategic-weaknesses-by-Bible-of-the-Left.html"
+bad_url: "http://www.telegraph.co.uk/sport/football/teams/liverpool/11570292/Who-could-be-Liverpools-marquee-summer-signing.html"
+bad_url: "http://www.bloomberg.com/news/articles/2015-04-30/why-david-cameron-might-lose-next-week-s-election"
+bad_url: "http://www.bloomberg.com/news/articles/2015-05-01/chinese-consumers-cling-to-saving-suppressing-spending"
+bad_url: "http://www.forbes.com/sites/johnwasik/2015/04/29/how-to-nail-down-a-great-college-financial-aid-package/"
 interest {
   id: "55034f7de4b097661cf860b8"
   type: INDUSTRY
