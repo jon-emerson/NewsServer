@@ -2,7 +2,11 @@ short_name: "ChemWeek"
 root_domain: "chemweek.com"
 start_url: "http://www.chemweek.com/home/"
 start_url: "http://www.chemweek.com/chem_ideas/"
+path_blacklist {
+  needle: "/Pharmafine-chemicals"
+}
 paragraph_selector: "#storyBody > div"
+paragraph_selector: "#storyBody > p"
 paragraph_blacklist {
   text_regex: "^ $"
 }

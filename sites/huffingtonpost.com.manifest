@@ -1,5 +1,6 @@
 short_name: "Huffington Post"
 root_domain: "huffingtonpost.com"
+aka_root_domain: "huffingtonpost.ca"
 start_url: "http://www.huffingtonpost.com/"
 subdomain_blacklist: "live.huffingtonpost.com"
 path_blacklist {
@@ -22,6 +23,7 @@ test_instructions {
     article_url: "http://www.huffingtonpost.com/robert-wilson/climate-change-the-need-f_1_b_6838258.html"
     article_url: "http://www.huffingtonpost.com/kristen-taylor/invisibleobama-fully-visi_b_1845445.html"
     article_url: "http://www.huffingtonpost.com/2015/03/10/my-wife-is-a-cheater-fire-painted-wall-home_n_6839358.html"
+    article_url: "http://www.huffingtonpost.ca/2015/04/20/benefits-of-running_n_7101136.html"
     non_article_url: "http://www.huffingtonpost.com/green/the-blog/"
     non_article_url: "http://www.huffingtonpost.com/news/offthebus/"
     non_article_url: "http://www.huffingtonpost.com/news/2012-gop-convention/"
