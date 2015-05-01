@@ -1,0 +1,28 @@
+short_name: "ELP"
+root_domain: "elp.com"
+start_url: "http://www.elp.com/index.html"
+paragraph_selector: "#ContentBody > p"
+article_url_pattern {
+  path_regex: "\\/articles\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.elp.com/content/elp/en/articles/2015/05/location-chosen-for-entergy-s-pilot-solar-power-project-in-desoto.html"
+    article_url: "http://www.elp.com/content/elp/en/articles/2015/05/avista-utilities-replaces-legacy-customer-system-with-oracle-utility-solution.html"
+    article_url: "http://www.elp.com/content/elp/en/articles/2015/05/regulators-approve-dte-energy-s-third-nuclear-power-plant.html"
+    article_url: "http://www.elp.com/content/elp/en/articles/2015/05/siemens-completes-three-power-plant-units-in-south-korea.html"
+    article_url: "http://www.elp.com/content/elp/en/articles/2015/05/new-mexico-lobbying-to-be-storage-site-for-nuclear-waste.html"
+    non_article_url: "http://www.elp.com/content/elp/en/generation.html"
+    non_article_url: "http://www.elp.com/content/elp/en/metering.html"
+    non_article_url: "http://www.elp.com/content/elp/en/index/about-us.html"
+    non_article_url: "http://www.elp.com/content/elp/en/index/advertise.html"
+    non_article_url: "http://www.elp.com/content/elp/en/renewable-energy/hydro.html"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10539 # Utilities
+  boost: 2
+}

@@ -44,3 +44,8 @@ feature_boost_pattern {
   feature_id: 10538 # Oil and Energy
   boost: 2
 }
+feature_boost_pattern {
+  feature_id: 10539 # Utilities
+  path_regex: "^\\/utilities\\/"
+  boost: 2
+}

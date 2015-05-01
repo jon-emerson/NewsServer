@@ -38,3 +38,11 @@ feature_boost_pattern {
   feature_id: 10520 # Automotive
   boost: 0
 }
+feature_boost_pattern {
+  feature_id: 10539 # Utilities
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 0
+}
