@@ -23,7 +23,7 @@ public class SendWelcomeEmails {
   }
 
   // Replace with your "From" address. This address must be verified.
-  static final String FROM = "SENDER@EXAMPLE.COM";
+  static final String FROM = "support@spotternews.com";
 
   // Replace with a "To" address. If your account is still in the
   // sandbox, this address must be verified.
@@ -34,12 +34,14 @@ public class SendWelcomeEmails {
   static final String SUBJECT =
       "Amazon SES test (SMTP interface accessed using Java)";
 
-  // Amazon SES SMTP host name. This example uses the us-west-2 region.
-  static final String HOST = "email-smtp.us-west-2.amazonaws.com";
+  // Amazon SES SMTP host name. Note: We can talk to us-east-2, us-west-2, etc.
+  // But we verified our emails through us-east-1, and we run our servers out
+  // of us-east-1, so we're doing us-east-1 here too.
+  static final String HOST = "email-smtp.us-east-1.amazonaws.com";
 
   // Port we will connect to on the Amazon SES SMTP endpoint. We are choosing
   // port 25 because we will use STARTTLS to encrypt the connection.
-  static final int PORT = 25;
+  static final int PORT = 587; // 25;
 
   public static void main(String[] args) throws Exception {
 
@@ -60,8 +62,8 @@ public class SendWelcomeEmails {
 
     // Create a message with the specified information. 
     MimeMessage msg = new MimeMessage(session);
-    msg.setFrom(new InternetAddress(FROM));
-    msg.setRecipient(Message.RecipientType.TO, new InternetAddress(TO));
+    msg.setFrom(new InternetAddress(FROM, "Spotter News"));
+    msg.setRecipient(Message.RecipientType.TO, new InternetAddress(TO, "Crazy Person"));
     msg.setSubject(SUBJECT);
     msg.setContent(BODY,"text/plain");
 
