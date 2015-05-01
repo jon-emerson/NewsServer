@@ -241,7 +241,10 @@ public class Articles {
           break;
 
         case INDUSTRY:
-          featureIds.add(FeatureId.fromId(interest.getIndustryCode()));
+          FeatureId featureId = FeatureId.fromId(interest.getIndustryCode());
+          if (featureId != null) {
+            featureIds.add(featureId);
+          }
           break;
 
         case LINKED_IN_CONTACTS:

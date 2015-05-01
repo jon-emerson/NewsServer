@@ -34,6 +34,14 @@ public class IndustryVectorNormalizer {
     return data.getDistribution();
   }
 
+  double getSimilarityThreshold10Percent() {
+    return data.getSimilarityThreshold10Percent();
+  }
+
+  double getSimilarityThreshold50Percent() {
+    return data.getSimilarityThreshold50Percent();
+  }
+
   /**
    * This normalizes an article's score against its industry, accounting for
    * both overall distribution and overall rarity of articles to be about a

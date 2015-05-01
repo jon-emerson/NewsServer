@@ -75,6 +75,11 @@ public class UserTimezone {
     return (currentHour >= 9 && currentHour <= 12); // Ya, OK, we let noon/lunch sneak in :).
   }
 
+  public boolean isDaytime() {
+    int currentHour = getCurrentHour();
+    return (currentHour >= 8 && currentHour <= 19);
+  }
+
   public boolean isWeekend() {
     Instant instant = Instant.ofEpochMilli(getCurrentTime());
     DayOfWeek dayOfWeek = ZonedDateTime.ofInstant(instant,

@@ -55,6 +55,11 @@ public final class VectorFeature extends Feature {
         rawScore(this.featureId, featureVector, boost, articleVector));
   }
 
+  public double rawScore(ArticleOrBuilder article) {
+    double boost = 0.05 * Feature.getBoost(featureId, article);
+    return rawScore(this.featureId, featureVector, boost, Vector.fromArticle(article));
+  }
+
   /**
    * Returns the raw, un-distribution-adjusted score for this article versus
    * this vector.  Used by both {@link #score(ArticleOrBuilder)} and
@@ -113,5 +118,13 @@ public final class VectorFeature extends Feature {
       }
     }
     throw new ClassifierException("Could not find vector directory, vector ID=" + id);
+  }
+
+  public double getSimilarityThreshold10Percent() {
+    return normalizer.getSimilarityThreshold10Percent();
+  }
+
+  public double getSimilarityThreshold50Percent() {
+    return normalizer.getSimilarityThreshold50Percent();
   }
 }

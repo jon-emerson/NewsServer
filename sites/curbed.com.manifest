@@ -86,3 +86,7 @@ feature_boost_pattern {
   feature_id: 10517 # Architecture & Planning
   boost: 0
 }
+feature_boost_pattern {
+  feature_id: 10516 # Construction
+  boost: 0
+}

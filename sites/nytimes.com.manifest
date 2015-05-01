@@ -261,3 +261,8 @@ feature_boost_pattern {
   path_regex: "\\/sports\\/"
   boost: 3
 }
+feature_boost_pattern {
+  feature_id: 10552 # Health and Fitness
+  subdomain: "well.blogs.nytimes.com"
+  boost: 2
+}

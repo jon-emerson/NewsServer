@@ -178,10 +178,13 @@ public class PushDailyNotifications {
     // notification, and usually it'll be an important one.
     int hoursSinceNotification =
         (int) ((System.currentTimeMillis() - lastNotificationTime) / TimeUnit.HOURS.toMillis(1));
-    int scoreNecessaryToTriggerNotification = 250 - (10 * hoursSinceNotification);
+    int scoreNecessaryToTriggerNotification = 200 - (10 * hoursSinceNotification);
     if (userTimezone.isMorning()) {
       // Encourage more notifications in the morning.
       scoreNecessaryToTriggerNotification -= 50;
+    } else if (userTimezone.isDaytime()) {
+      // And some encouragement in the afternoon, too, but not as much...
+      scoreNecessaryToTriggerNotification -= 25;
     }
     if (userTimezone.isWeekend()) {
       // Only notify people on weekends if it's important.

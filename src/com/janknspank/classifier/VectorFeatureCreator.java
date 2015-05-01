@@ -19,6 +19,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.crawler.UrlCleaner;
@@ -143,7 +144,8 @@ public class VectorFeatureCreator {
   private double getSimilarityThreshold(
       Vector vector, Iterable<Article> seedArticles, double percentile)
       throws ClassifierException {
-    DistributionBuilder seedArticleDistributionBuilder = new DistributionBuilder();
+    TopList<Double, Double> topList =
+        new TopList<>((int) (Iterables.size(seedArticles) * (1 - percentile)));
     for (Article article : seedArticles) {
       // Note: Because the scores going into the normalizer at crawl time are
       // boosted (because {@code VectorFeature#score} calls {@code #rawScore
@@ -154,10 +156,9 @@ public class VectorFeatureCreator {
       double boost = 0.05 * Feature.getBoost(featureId, article);
       double score = VectorFeature.rawScore(
           this.featureId, vector, boost, Vector.fromArticle(article));
-      seedArticleDistributionBuilder.add(score);
+      topList.add(score, score);
     }
-    return DistributionBuilder.getValueAtPercentile(
-        seedArticleDistributionBuilder.build(), percentile);
+    return Iterables.getLast(topList);
   }
 
   private double getRatioOfArticlesAboveThreshold(Vector vector, double similarityThreshold)

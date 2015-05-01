@@ -487,7 +487,7 @@ message IndustryVectorNormalizationData {
     (required) = YES
   ];
 
-  // This is the non-normalized similarity score for a seed-word article at the
+  // This is the similarity score + boost for a seed-word article at the
   // bottom 10% of similarities.  This basically gives us a lower-bound for
   // similarity scores, where scores less than this would tend to indicate
   // little relevancy to this vector, while scores above this would tend to have
