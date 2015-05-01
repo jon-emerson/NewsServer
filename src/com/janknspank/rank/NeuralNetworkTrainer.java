@@ -239,6 +239,7 @@ public class NeuralNetworkTrainer implements LearningEventListener {
       NeuralNetworkTrainer neuralNetworkTrainer = new NeuralNetworkTrainer();
       NeuralNetwork<BackPropagation> neuralNetwork =
           neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
+      System.out.println("** SCORE FOR " + hiddenNodeCount + " HIDDEN NODES...");
       grade = Benchmark.grade(new NeuralNetworkScorer(neuralNetwork));
       return neuralNetwork;
     }
@@ -265,7 +266,6 @@ public class NeuralNetworkTrainer implements LearningEventListener {
         neuralNetworkFutureMap.put(neuralNetworkFinder, executor.submit(neuralNetworkFinder));
       }
     }
-    // executor.invokeAll(neuralNetworkFinderMap.values());
     executor.shutdown();
 
     // Evaluate the outcomes from each thread.

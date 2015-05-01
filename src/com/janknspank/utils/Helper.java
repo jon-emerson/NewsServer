@@ -71,9 +71,8 @@ public class Helper {
       Persona persona = Personas.getByEmail(email);
       Map<String, Article> goodArticles = ArticleCrawler.getArticles(persona.getGoodUrlList(), true);
       for (Article article : goodArticles.values()) {
-        double equity = ArticleFeatures.getFeatureSimilarity(article, FeatureId.EQUITY_INVESTING);
-        double earnings = ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_QUARTERLY_EARNINGS);
-        if (equity > 0.1 && earnings <= 0.0) {
+        double internet = ArticleFeatures.getFeatureSimilarity(article, FeatureId.INTERNET);
+        if (internet > 0.95) {
           System.out.println(article.getUrl());
         }
       }
