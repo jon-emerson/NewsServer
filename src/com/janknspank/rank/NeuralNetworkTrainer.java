@@ -237,19 +237,10 @@ public class NeuralNetworkTrainer implements LearningEventListener {
     @Override
     public NeuralNetwork<BackPropagation> call() throws Exception {
       NeuralNetworkTrainer neuralNetworkTrainer = new NeuralNetworkTrainer();
-      NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
-      for (int tries = 0; tries < 15; tries++) {
-        System.out.println("ATTEMPTING " + hiddenNodeCount + " HIDDEN NODES "
-            + "(try " + (tries + 1) + " of 15)...");
-        NeuralNetwork<BackPropagation> neuralNetwork =
-            neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
-        double grade = Benchmark.grade(new NeuralNetworkScorer(neuralNetwork));
-        if (grade > this.grade) {
-          this.grade = grade;
-          bestNeuralNetwork = neuralNetwork;
-        }
-      }
-      return bestNeuralNetwork;
+      NeuralNetwork<BackPropagation> neuralNetwork =
+          neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
+      grade = Benchmark.grade(new NeuralNetworkScorer(neuralNetwork));
+      return neuralNetwork;
     }
   }
 
@@ -263,34 +254,51 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 
     // Create a threads to general neural networks for each of our
     // desired hidden node counts.
-    ExecutorService executor = Executors.newFixedThreadPool(20);
-    Map<Integer, NeuralNetworkFinder> neuralNetworkFinderMap = Maps.newHashMap();
-    Map<Integer, Future<NeuralNetwork<BackPropagation>>> neuralNetworkFutureMap = Maps.newHashMap();
+    ExecutorService executor = Executors.newFixedThreadPool(8);
+    List<NeuralNetworkFinder> neuralNetworkFinderList = Lists.newArrayList();
+    Map<NeuralNetworkFinder, Future<NeuralNetwork<BackPropagation>>> neuralNetworkFutureMap =
+        Maps.newHashMap();
     for (int hiddenNodeCount : new int[] { 0, 2, 3, 4, 5, 6, 7, 8 }) {
-      NeuralNetworkFinder neuralNetworkFinder = new NeuralNetworkFinder(dataSet, hiddenNodeCount);
-      neuralNetworkFinderMap.put(hiddenNodeCount, neuralNetworkFinder);
-      neuralNetworkFutureMap.put(hiddenNodeCount, executor.submit(neuralNetworkFinder));
+      for (int tries = 0; tries < 15; tries++) {
+        NeuralNetworkFinder neuralNetworkFinder = new NeuralNetworkFinder(dataSet, hiddenNodeCount);
+        neuralNetworkFinderList.add(neuralNetworkFinder);
+        neuralNetworkFutureMap.put(neuralNetworkFinder, executor.submit(neuralNetworkFinder));
+      }
     }
     // executor.invokeAll(neuralNetworkFinderMap.values());
     executor.shutdown();
 
     // Evaluate the outcomes from each thread.
-    System.out.println("Performances of different topologies:");
     int bestHiddenNodeCount = Integer.MIN_VALUE;
     double bestNeuralNetworkGrade = Double.MIN_VALUE;
+    Map<Integer, Double> bestGradePerTopology = Maps.newHashMap();
     NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
-    for (Integer hiddenNodeCount : neuralNetworkFinderMap.keySet()) {
+    for (NeuralNetworkFinder neuralNetworkFinder : neuralNetworkFinderList) {
+      int hiddenNodeCount = neuralNetworkFinder.hiddenNodeCount;
       NeuralNetwork<BackPropagation> neuralNetwork =
-          neuralNetworkFutureMap.get(hiddenNodeCount).get();
-      double grade = neuralNetworkFinderMap.get(hiddenNodeCount).grade;
-      System.out.println(hiddenNodeCount + " hidden nodes: " + grade);
+          neuralNetworkFutureMap.get(neuralNetworkFinder).get();
+      double grade = neuralNetworkFinder.grade;
       if (grade > bestNeuralNetworkGrade) {
         bestNeuralNetworkGrade = grade;
         bestNeuralNetwork = neuralNetwork;
         bestHiddenNodeCount = hiddenNodeCount;
       }
+      if (bestGradePerTopology.containsKey(hiddenNodeCount)) {
+        bestGradePerTopology.put(hiddenNodeCount,
+            Math.max(grade, bestGradePerTopology.get(hiddenNodeCount)));
+      } else {
+        bestGradePerTopology.put(hiddenNodeCount, grade);
+      }
     }
+
+    // Display the outcomes per hidden node count.
     System.out.println();
+    System.out.println("Performances of different topologies:");
+    for (int i = 0; i < 100; i++) {
+      if (bestGradePerTopology.containsKey(i)) {
+        System.out.println(i + " hidden nodes: " + bestGradePerTopology.get(i));
+      }
+    }
 
     // Save the best one.
     System.out.println("Saving best neural network "
