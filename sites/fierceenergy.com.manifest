@@ -1,0 +1,38 @@
+short_name: "FierceEnergy"
+root_domain: "fierceenergy.com"
+start_url: "http://www.fierceenergy.com/news"
+paragraph_selector: ".maincolumn > p"
+paragraph_blacklist {
+  text_regex: "^Dive Brief:"
+}
+paragraph_blacklist {
+  text_regex: "^Dive Insight:"
+}
+article_url_pattern {
+  path_regex: "^\\/story\\/[^\\/]+\\/20[0-9]{2}-[01][0-9]-[0-3][0-9]$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.fierceenergy.com/story/utilities-helping-universities-go-renewable/2015-04-29"
+    article_url: "http://www.fierceenergy.com/story/microgrid-fully-powers-largest-office-building-kansas/2015-05-01"
+    article_url: "http://www.fierceenergy.com/story/will-lcps-save-nuclear-illinois/2015-05-01"
+    article_url: "http://www.fierceenergy.com/story/sce-emails-cpuc-prove-no-wrongdoing/2015-05-01"
+    article_url: "http://www.fierceenergy.com/story/eei-edison-award-finalists-set-series-firsts/2015-05-01"
+    non_article_url: "http://www.fierceenergy.com/news"
+    non_article_url: "http://www.fierceenergy.com/topics/analytics"
+    non_article_url: "http://www.fierceenergy.com/library/ebooks"
+    non_article_url: "http://www.fierceenergy.com/library/webinars"
+    non_article_url: "http://www.fierceenergy.com/events"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10539 # Utilities
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10538 # Oil and Energy
+  boost: 0
+}

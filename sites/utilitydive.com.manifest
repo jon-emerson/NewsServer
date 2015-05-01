@@ -1,0 +1,37 @@
+short_name: "UtilityDive"
+root_domain: "utilitydive.com"
+start_url: "http://www.utilitydive.com/"
+use_first_paragraph_as_description: true
+paragraph_selector: ".brief-article p"
+paragraph_selector: ".brief-article ul > li"
+paragraph_selector: ".brief-article h3"
+paragraph_blacklist {
+  text_regex: "^Dive Brief:"
+}
+paragraph_blacklist {
+  text_regex: "^Dive Insight:"
+}
+article_url_pattern {
+  path_regex: "^\\/news\\/[^\\/]+\\/[0-9]{5,}\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.utilitydive.com/news/hawaii-lawmakers-agree-on-100-renewables-by-2045-mandate/392533/"
+    article_url: "http://www.utilitydive.com/news/is-a-carbon-price-the-best-way-to-implement-the-epas-clean-power-plan/392504/"
+    article_url: "http://www.utilitydive.com/news/why-community-shared-solar-is-ready-to-be-the-great-equalizer/392045/"
+    article_url: "http://www.utilitydive.com/news/oklahoma-lawmakers-pass-bill-to-challenge-federal-carbon-regulation/392639/"
+    article_url: "http://www.utilitydive.com/news/edison-earnings-rise-but-comparisons-not-meaningful-until-rate-case-deci/392642/"
+    non_article_url: "http://www.utilitydive.com/topic/Generation/"
+    non_article_url: "http://www.utilitydive.com/features/"
+    non_article_url: "http://www.utilitydive.com/events/"
+    non_article_url: "http://www.utilitydive.com/jobs/"
+    non_article_url: "http://www.utilitydive.com/library/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10539 # Utilities
+  boost: 3
+}

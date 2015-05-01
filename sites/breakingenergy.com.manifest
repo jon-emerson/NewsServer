@@ -31,3 +31,11 @@ feature_boost_pattern {
   feature_id: 10538 # Oil & Energy
   boost: 2
 }
+feature_boost_pattern {
+  feature_id: 10539 # Utilities
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 0
+}

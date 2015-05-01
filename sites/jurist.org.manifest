@@ -1,0 +1,30 @@
+short_name: "Jurist"
+root_domain: "jurist.org"
+start_url: "http://jurist.org/"
+paragraph_selector: ".entry-content > p"
+article_url_pattern {
+  path_regex: "\\/(19|20)[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.php$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://jurist.org/paperchase/2015/04/reports-north-korea-leader-sentenced-15-officials-to-death-in-2015.php"
+    article_url: "http://jurist.org/paperchase/2015/04/pakistan-court-jails-10-for-life-for-malala-yousafzai-attack.php"
+    article_url: "http://jurist.org/paperchase/2015/04/supreme-court-hears-arguments-on-oklahoma-lethal-injection-procedure.php"
+    article_url: "http://jurist.org/paperchase/2015/04/supreme-court-rules-on-eeoc-conciliation-duty.php"
+    article_url: "http://jurist.org/paperchase/2015/04/supreme-court-rules-judicial-candidates-can-be-prohibited-from-soliciting-campaign-funds.php"
+    article_url: "http://jurist.org/paperchase/2015/04/egypt-court-sentences-69-muslim-brotherhood-supporters.php"
+    non_article_url: "http://jurist.org/feature"
+    non_article_url: "http://jurist.org/paperchase/"
+    non_article_url: "http://jurist.org/commentary_index.php"
+    non_article_url: "http://jurist.org/podcast"
+    non_article_url: "http://jurist.org/supportjurist/index.php"
+    non_article_url: "http://jurist.org/faq/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10532 # Law Practice
+  boost: 2
+}

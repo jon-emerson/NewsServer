@@ -35,7 +35,7 @@ feature_boost_pattern {
   boost: 1
 }
 feature_boost_pattern {
-  feature_id: 10521 # Chemistry
+  feature_id: 10521 # Chemicals
   boost: 1
 }
 feature_boost_pattern {

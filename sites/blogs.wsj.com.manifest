@@ -1,6 +1,9 @@
 short_name: "WSJ"
 root_domain: "blogs.wsj.com"
 start_url: "http://blogs.wsj.com/"
+start_url: "http://blogs.wsj.com/law/"
+start_url: "http://blogs.wsj.com/bankruptcy/"
+start_url: "http://www.wsj.com/news/risk-compliance-journal"
 paragraph_selector: ".articlePage p"
 
 # From http://blogs.wsj.com/pharmalot/2015/04/21/actavis-wins-a-product-hopping-case-as-namenda-battle-rages-on/
@@ -36,4 +39,9 @@ test_instructions {
     non_article_url: "http://blogs.wsj.com/bankruptcy/"
     non_article_url: "http://blogs.wsj.com/canadarealtime/"
   }
+}
+feature_boost_pattern {
+  feature_id: 10532 # Law Practice
+  path_regex: "^\\/(law|bankruptcy|riskandcompliance)\\/"
+  boost: 2
 }
