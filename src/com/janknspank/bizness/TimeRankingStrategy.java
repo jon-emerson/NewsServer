@@ -56,9 +56,9 @@ public abstract class TimeRankingStrategy {
 
       // OK, here's what we're going to do.  If
       // hoursSinceLastAppUsage == 0: Return 1.
-      // hoursSinceLastAppUsage == 24: Return 0.5.
-      // hoursSinceLastAppUsage == 48: Return 0.25.
-      double denominator = (hoursSinceLastAppUsage / 24) + 1;
+      // hoursSinceLastAppUsage == 12: Return 0.5.
+      // hoursSinceLastAppUsage == 24: Return 0.25.
+      double denominator = (hoursSinceLastAppUsage / 12) + 1;
       return 1 / denominator;
     }
   }
@@ -77,9 +77,9 @@ public abstract class TimeRankingStrategy {
 
       // OK, here's what we're going to do.  If
       // articleAgeInHours <= 18: Return 1.
-      // articleAgeInHours == 18 + 24: Return 0.5.
-      // articleAgeInHours == 18 + 48: Return 0.25.
-      double denominator = (Math.max(0, articleAgeInHours - 18) / 24) + 1;
+      // articleAgeInHours == 18 + 12: Return 0.5.
+      // articleAgeInHours == 18 + 24: Return 0.25.
+      double denominator = (Math.max(0, articleAgeInHours - 18) / 12) + 1;
       return 1 / denominator;
     }
   }
