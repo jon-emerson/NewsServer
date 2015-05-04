@@ -12,11 +12,11 @@ test_instructions {
     article_url: "http://beardedbrownman.com/on-theory-turing-and-the-diminishing-stability-of-the-status-quo"
     article_url: "http://beardedbrownman.com/technology-and-its-implications"
     article_url: "http://beardedbrownman.com/reflections-on-the-current-movements-in-the-bitcoin-ecosystem-1"
-    non_article_url: "http://beardedbrownman.com/axxx"
-    non_article_url: "http://beardedbrownman.com/bxxx"
-    non_article_url: "http://beardedbrownman.com/cxxx"
-    non_article_url: "http://beardedbrownman.com/dxxx"
-    non_article_url: "http://beardedbrownman.com/exxx"
+    non_article_url: "http://beardedbrownman.com/1/axxx"
+    non_article_url: "http://beardedbrownman.com/1/bxxx"
+    non_article_url: "http://beardedbrownman.com/1/cxxx"
+    non_article_url: "http://beardedbrownman.com/1/dxxx"
+    non_article_url: "http://beardedbrownman.com/1/exxx"
   }
 }
 
