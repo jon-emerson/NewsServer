@@ -1,0 +1,42 @@
+short_name: "Cankut Durgun, VC"
+root_domain: "cdurgun.com"
+start_url: "http://cdurgun.com/"
+paragraph_selector: ".entry-content > p"
+paragraph_selector: ".entry-content > ul > li"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://cdurgun.com/2015/05/tesla-energy.html"
+    article_url: "http://cdurgun.com/2015/05/unsolicited-emails.html"
+    article_url: "http://cdurgun.com/2015/05/availability-capital.html"
+    article_url: "http://cdurgun.com/2015/04/liquidation-preferences.html"
+    article_url: "http://cdurgun.com/2015/04/project-fi.html"
+    non_article_url: "http://cdurgun.com/2015/05"
+    non_article_url: "http://cdurgun.com/about"
+    non_article_url: "http://cdurgun.com/2015/04"
+    non_article_url: "http://cdurgun.com/2015/03"
+    non_article_url: "http://cdurgun.com/2015/02"
+  }
+}
+
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}

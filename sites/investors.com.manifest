@@ -36,5 +36,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
-  boost: 0
+  boost: -1
 }

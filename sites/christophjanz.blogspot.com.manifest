@@ -1,0 +1,42 @@
+short_name: "Christoph Janz, VC"
+root_domain: "christophjanz.blogspot.com"
+start_url: "http://christophjanz.blogspot.com/"
+paragraph_selector: ".post > div"
+paragraph_selector: ".post > ul > li"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://christophjanz.blogspot.com/2015/05/6-things-to-pre-empt-90-of-due-diligence.html"
+    article_url: "http://christophjanz.blogspot.com/2015/04/key-revenue-metrics-for-saas-companies.html"
+    article_url: "http://christophjanz.blogspot.com/2015/03/hyper-growth-in-saas.html"
+    article_url: "http://christophjanz.blogspot.com/2015/03/in-god-we-trust-all-others-bring.html"
+    article_url: "http://christophjanz.blogspot.com/2015/03/how-fast-is-fast-enough.html"
+    non_article_url: "http://christophjanz.blogspot.com/search/label/angel%20investing"
+    non_article_url: "http://christophjanz.blogspot.com/search/label/geckoboard"
+    non_article_url: "http://christophjanz.blogspot.com/search/label/saas"
+    non_article_url: "http://christophjanz.blogspot.com/search/label/startups"
+    non_article_url: "http://christophjanz.blogspot.com/search/label/venture%20capital"
+  }
+}
+
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
