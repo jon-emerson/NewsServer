@@ -3,7 +3,7 @@ root_domain: "foundersatwork.posthaven.com"
 start_url: "http://foundersatwork.posthaven.com/"
 paragraph_selector: ".post-body p"
 article_url_pattern {
-  path_regex: "^\\/.*"
+  path_regex: "^\\/[^\\/]+$"
 }
 path_blacklist {
   needle: "/archive"
@@ -19,9 +19,9 @@ test_instructions {
     # Turns out there truly are no non-articles on Sam's site.
     non_article_url: "http://foundersatwork.posthaven.com/archive"
     non_article_url: "http://foundersatwork.posthaven.com/?page=2"
-    non_article_url: "http://foundersatwork.posthaven.com/cxxx"
-    non_article_url: "http://foundersatwork.posthaven.com/dxxx"
-    non_article_url: "http://foundersatwork.posthaven.com/exxx"
+    non_article_url: "http://foundersatwork.posthaven.com/1/cxxx"
+    non_article_url: "http://foundersatwork.posthaven.com/1/dxxx"
+    non_article_url: "http://foundersatwork.posthaven.com/1/exxx"
   }
 }
 feature_boost_pattern {
