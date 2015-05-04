@@ -20,6 +20,9 @@ paragraph_blacklist {
 article_url_pattern {
   path_regex: "^\\/[0-9]+\\/[^\\/]+\\/$"
 }
+article_url_pattern {
+  path_regex: "^\\/money\\/[0-9]+\\/[^\\/]+\\/$"
+}
 test_instructions {
   article_url_detector_checks {
     article_url: "http://time.com/3814970/in-the-line-of-fire-2/"
@@ -30,6 +33,7 @@ test_instructions {
     article_url: "http://time.com/3817023/basketball-lauren-hill-brain-cancer/"
     article_url: "http://time.com/3817803/cancel-cable-house-fire/"
     article_url: "http://time.com/3816628/star-wars-digital-release-first-time-watch/"
+    article_url: "http://time.com/money/3845654/taco-bell-free-breakfast-cinco-de-mayo/"
     non_article_url: "http://time.com/business/"
     non_article_url: "http://time.com/author/entrepreneur-2/"
     non_article_url: "http://time.com/tag/careers-workplace/"
