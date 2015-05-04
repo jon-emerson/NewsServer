@@ -4,6 +4,7 @@ start_url: "http://blogs.wsj.com/"
 start_url: "http://blogs.wsj.com/law/"
 start_url: "http://blogs.wsj.com/bankruptcy/"
 start_url: "http://www.wsj.com/news/risk-compliance-journal"
+start_url: "http://blogs.wsj.com/accelerators/"
 path_blacklist {
   needle: "/briefly/"
 }
@@ -47,4 +48,14 @@ feature_boost_pattern {
   feature_id: 10532 # Law Practice
   path_regex: "^\\/(law|bankruptcy|riskandcompliance)\\/"
   boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital
+  path_regex: "^\\/accelerators\\/"
+  boost: 8
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  path_regex: "^\\/accelerators\\/"
+  boost: 1
 }

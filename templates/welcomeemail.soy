@@ -3,6 +3,7 @@
 /**
  * Main page layout.
  * @param title
+ * @param isInBrowser
  */
 {template .main}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -565,11 +566,11 @@
                                             <td valign="top" class="preheaderContent" style="padding-top:10px; padding-right:20px; padding-bottom:10px; padding-left:20px;" mc:edit="preheader_content00">
                                                 Use this area to offer a short teaser of your email's content. Text here will show in the preview area of some email clients.
                                             </td>
-                                            <!-- *|IFNOT:ARCHIVE_PAGE|* -->
+                                            {if $isInBrowser == 0}
                                             <td valign="top" width="180" class="preheaderContent" style="padding-top:10px; padding-right:20px; padding-bottom:10px; padding-left:0;" mc:edit="preheader_content01">
-                                                Email not displaying correctly?<br /><a href="http://spotternews.com/welcome_email" target="_blank">View it in your browser</a>.
+                                                Not displaying correctly?<br /><a href="http://spotternews.com/welcome_email" target="_blank">View it here</a>.
                                             </td>
-                                            <!-- *|END:IF|* -->
+                                            {/if}
                                         </tr>
                                     </table>
                                     <!--  END PREHEADER -->
@@ -594,14 +595,12 @@
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
                                         <tr>
                                             <td valign="top" class="bodyContent" mc:edit="body_content">
-                                                <h1>Designing Your Template</h1>
-                                                <h3>Creating a good-looking email is simple</h3>
-                                                Customize your template by clicking on the style editor tabs up above. Set your fonts, colors, and styles. After setting your styling is all done you can click here in this area, delete the text, and start adding your own awesome content.
+                                                <h1>Welcome to Spotter</h1>
+                                                Use Spotter to stay on top of companies, people, and industries that matter to you.
                                                 <br />
                                                 <br />
-                                                <h2>Styling Your Content</h2>
-                                                <h4>Make your email easy to read</h4>
-                                                After you enter your content, highlight the text you want to style and select the options you set in the style editor in the "<em>styles</em>" drop down box. Want to <a href="http://www.mailchimp.com/kb/article/im-using-the-style-designer-and-i-cant-get-my-formatting-to-change" target="_blank">get rid of styling on a bit of text</a>, but having trouble doing it? Just use the "<em>remove formatting</em>" button to strip the text of any formatting and reset your style. 
+                                                <h2>Make Spotter work for you</h2>
+                                                Your Spotter experience is 100% unique to you and your interests. Use the gear icon to follow your interests.
                                             </td>
                                         </tr>
                                     </table>

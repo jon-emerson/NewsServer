@@ -4,6 +4,14 @@ is_https: true
 start_url: "https://medium.com"
 start_url: "https://medium.com/top-stories"
 start_url: "https://medium.com/top-100/"
+start_url: "https://medium.com/@LDahg"
+start_url: "https://medium.com/tag/venture-capital"
+start_url: "https://medium.com/tag/startup"
+start_url: "https://medium.com/tag/marketing"
+start_url: "https://medium.com/evergreen-business-weekly"
+start_url: "https://medium.com/hyde-park-angels"
+start_url: "https://medium.com/tag/tech"
+start_url: "https://medium.com/tag/vc"
 path_blacklist {
   needle: "/@Medium/"
 }
@@ -33,4 +41,19 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10560 # User Experience
   boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital
+  path_regex: "^\\/hyde-park-angels\\/"
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital
+  path_regex: "^\\/evergreen-business-weekly\\/"
+  boost: 6
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital
+  path_regex: "^\\/@piotrwilam\\/"
+  boost: 6
 }

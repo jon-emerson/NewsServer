@@ -26,7 +26,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
-  boost: 10
+  boost: 8
 }
 feature_boost_pattern {
   feature_id: 20000 # Related to tech startups
