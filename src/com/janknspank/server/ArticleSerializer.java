@@ -12,9 +12,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Serializer;
 import com.janknspank.nlp.KeywordCanonicalizer;
@@ -84,7 +86,7 @@ public class ArticleSerializer {
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));
     articleJson.put("keyword",
         Serializer.toJSON(getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)));
-    if (SHOW_IMAGE_OFFSETS.contains(offset)) {
+    if (SHOW_IMAGE_OFFSETS.contains(offset) || showImageBecauseOfFeature(article)) {
       articleJson.put("show_image", true);
     }
 
@@ -94,6 +96,11 @@ public class ArticleSerializer {
     articleJson.put("published_time", Long.toString(Articles.getPublishedTime(article)));
 
     return articleJson;
+  }
+
+  static boolean showImageBecauseOfFeature(Article article) {
+    return (ArticleFeatures.getFeatureSimilarity(article, FeatureId.ARTS) > 0.9 ||
+        ArticleFeatures.getFeatureSimilarity(article, FeatureId.ARCHITECTURE_AND_PLANNING) > 0.9);
   }
 
   /**
