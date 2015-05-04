@@ -1,0 +1,41 @@
+short_name: "Zavain Dar, VC"
+root_domain: "beardedbrownman.com"
+start_url: "http://beardedbrownman.com/"
+paragraph_selector: "article > p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://beardedbrownman.com/announcing-our-investment-in-clarifai"
+    article_url: "http://beardedbrownman.com/20-bullets-on-ai"
+    article_url: "http://beardedbrownman.com/on-theory-turing-and-the-diminishing-stability-of-the-status-quo"
+    article_url: "http://beardedbrownman.com/technology-and-its-implications"
+    article_url: "http://beardedbrownman.com/reflections-on-the-current-movements-in-the-bitcoin-ecosystem-1"
+    non_article_url: "http://beardedbrownman.com/axxx"
+    non_article_url: "http://beardedbrownman.com/bxxx"
+    non_article_url: "http://beardedbrownman.com/cxxx"
+    non_article_url: "http://beardedbrownman.com/dxxx"
+    non_article_url: "http://beardedbrownman.com/exxx"
+  }
+}
+
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}

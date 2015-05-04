@@ -15,7 +15,7 @@ public class WelcomeEmailServlet extends StandardServlet {
   protected SoyMapData getSoyMapData(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException {
     return new SoyMapData(
-        "title", "Spotter - Business news, personalized",
-        "tab", 0);
+        "title", "Welcome to Spotter",
+        "isInBrowser", 1);
   }
 }

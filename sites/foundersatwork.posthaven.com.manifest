@@ -1,0 +1,53 @@
+short_name: "Founders at Work"
+root_domain: "foundersatwork.posthaven.com"
+start_url: "http://foundersatwork.posthaven.com/"
+paragraph_selector: ".post-body p"
+article_url_pattern {
+  path_regex: "^\\/.*"
+}
+path_blacklist {
+  needle: "/archive"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://foundersatwork.posthaven.com/subtle-mid-stage-pitfalls"
+    article_url: "http://foundersatwork.posthaven.com/my-interviews-with-airbnb-dropbox-posterous-reddit-weebly-and-wufoo-circa-2010"
+    article_url: "http://foundersatwork.posthaven.com/the-social-radar-what-i-did-at-y-combinator"
+    article_url: "http://foundersatwork.posthaven.com/791587"
+    article_url: "http://foundersatwork.posthaven.com/why-i-love-startup-school"
+    article_url: "http://foundersatwork.posthaven.com/what-twitter-followers-tell-us"
+    # Turns out there truly are no non-articles on Sam's site.
+    non_article_url: "http://foundersatwork.posthaven.com/archive"
+    non_article_url: "http://foundersatwork.posthaven.com/?page=2"
+    non_article_url: "http://foundersatwork.posthaven.com/cxxx"
+    non_article_url: "http://foundersatwork.posthaven.com/dxxx"
+    non_article_url: "http://foundersatwork.posthaven.com/exxx"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 20001 # Related to traditional brick and mortar startups
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}

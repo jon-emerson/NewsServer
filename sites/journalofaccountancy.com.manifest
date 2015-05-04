@@ -38,5 +38,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10515 # Accounting
-  boost: 10
+  boost: 3
 }
