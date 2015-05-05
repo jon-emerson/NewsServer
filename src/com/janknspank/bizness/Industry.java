@@ -167,7 +167,7 @@ public enum Industry {
       "Law Enforcement"),
   PUBLIC_SAFETY(78, FeatureId.SOCIAL_GOOD, "gov",
       "Public Safety"),
-  PUBLIC_POLICY(79, FeatureId.SOCIAL_GOOD, "gov",
+  PUBLIC_POLICY(79, FeatureId.GOVERNMENT, "gov",
       "Public Policy"),
   MARKETING_AND_ADVERTISING(80, FeatureId.MARKETING_AND_ADVERTISING, "corp med",
       "Marketing and Advertising"),
