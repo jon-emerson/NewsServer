@@ -35,10 +35,6 @@ h3 {
 
 /* Nav */
 
-#navbar-logo {
-  height: 42px;
-}
-
 .navbar-default .navbar-brand:hover {
   color: #FF5352
 }
@@ -132,13 +128,9 @@ a.btn-primary,
   color: #111;
 }
 
-#leading-screenshot {
-  width: 280px;
-  height: 446px;
-}
-
 #app-icon {
   width: 136px;
+  height: 129px;
   margin-top: 12px;
   margin-right: 12px;
 }
@@ -179,13 +171,6 @@ a.btn-primary,
   height: 50px;
   margin: 0px auto 0px auto;
   display: block;
-}
-
-#apple-logo {
-  float: left;
-  width: 24px;
-  height: 30px;
-  margin: 8px 8px 0px 16px;
 }
 
 .link-texting-explanation-label {
@@ -259,16 +244,6 @@ a.btn-primary,
   color: white;
 }
 
-#section-1-img {
-  width: 312px;
-  height: 517px;
-}
-
-#section-2-img {
-  width: 298px;
-  height: 475px;
-}
-
 #section-3 {
   background: url("/resources/img/leading-section-background5flat@2x.jpg")  no-repeat center center;
   -webkit-background-size: cover;
@@ -295,17 +270,11 @@ a.btn-primary,
   text-shadow: 0px 0px 30px #000000;
 }
 
-#section-4-img {
-  width: 298px;
-  height: 508px;
-}
-
 #section-5 {
   text-align: center
 }
 
 #section-5-img {
-  width: 180px;
   margin-bottom: 32px;
 }
 
@@ -326,12 +295,6 @@ a.btn-primary,
 
 #section-6-wrapper {
   margin: 84px 0px 84px 0px;
-}
-
-#section-6-logo {
-  width: 35px;
-  height: 89px;
-  margin-bottom: 32px;
 }
 
 #section-7 {
@@ -523,7 +486,6 @@ a.btn-primary,
   }
 
   #mobile-app-icon {
-    width: 220px;
     margin-top: 16px;
   }
 
