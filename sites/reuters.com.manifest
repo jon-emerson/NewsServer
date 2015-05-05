@@ -42,5 +42,4 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10535 # Equity Investing.
   boost: 3
-} 
-
+}
