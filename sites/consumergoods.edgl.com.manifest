@@ -1,0 +1,29 @@
+short_name: "CGT"
+root_domain: "consumergoods.edgl.com"
+start_url: "http://consumergoods.edgl.com/home"
+start_url: "http://consumergoods.edgl.com/news"
+paragraph_selector: "article > p"
+article_url_pattern {
+  path_regex: "^\\/news\\/[^\\/]+[0-9]{5,}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://consumergoods.edgl.com/news/Kellogg-Company-Appoints-New-President,-North-America99899"
+    article_url: "http://consumergoods.edgl.com/news/Frito-Lay-Goes-From-Reactive-to-Proactive-with-Data99887"
+    article_url: "http://consumergoods.edgl.com/news/Weight-Watchers-International-Founder-Dies-at-9199862"
+    article_url: "http://consumergoods.edgl.com/news/AFS-Technologies-Appoints-Bellini-as-New-CEO-99861"
+    article_url: "http://consumergoods.edgl.com/news/Social-Data-Revolution-in-Retail-and-CG99854"
+    non_article_url: "http://consumergoods.edgl.com/events"
+    non_article_url: "http://consumergoods.edgl.com/white-papers"
+    non_article_url: "http://consumergoods.edgl.com/insight-centers"
+    non_article_url: "http://consumergoods.edgl.com/columns"
+    non_article_url: "http://consumergoods.edgl.com/video"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods.
+  boost: 2
+}

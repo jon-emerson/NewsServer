@@ -1,0 +1,40 @@
+short_name: "TheMiddleMarket"
+root_domain: "themiddlemarket.com"
+start_url: "http://www.themiddlemarket.com/"
+paragraph_selector: "#articleContent > p"
+paragraph_selector: "#articleContent > h4"
+paragraph_blacklist {
+  text_regex: "^For more information on"
+}
+article_url_pattern {
+  path_regex: "^\\/news\\/.+\\-[0-9]+\\-[0-9]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.themiddlemarket.com/news/strategic_m_a/the-buyside-buyers-wake-up-to-anesthesiology-255976-1.html"
+    article_url: "http://www.themiddlemarket.com/news/people_moves/people-moves-of-the-week-citigroup-paul-hastings-carlyle-256107-1.html"
+    article_url: "http://www.themiddlemarket.com/news/energy/enable-midstream-grabs-oil-assets-amid-continued-volatility-256106-1.html"
+    article_url: "http://www.themiddlemarket.com/news/tech_telecom/as-software-sparks-deals-ciena-buys-cyan-256104-1.html"
+    article_url: "http://www.themiddlemarket.com/news/financial_services/guo-guangchangs-fosun-to-buy-ironshore-expanding-in-insurance-256097-1.html"
+    non_article_url: "http://www.themiddlemarket.com/industry/aerospace.html"
+    non_article_url: "http://www.themiddlemarket.com/section/strategic-buyers.html"
+    non_article_url: "http://www.themiddlemarket.com/section/private-equity.html"
+    non_article_url: "http://www.themiddlemarket.com/section/lender_news.html"
+    non_article_url: "http://www.themiddlemarket.com/section/investment_banking.html"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10535 # Equity Investing.
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods.
+  boost: 0
+}

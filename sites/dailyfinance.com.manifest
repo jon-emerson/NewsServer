@@ -51,7 +51,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10510 # Consumer goods.
-  boost: 0
+  boost: 1
 }
 feature_boost_pattern {
   feature_id: 10511 # Leisure, travel and tourism.

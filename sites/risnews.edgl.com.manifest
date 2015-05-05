@@ -1,0 +1,29 @@
+short_name: "RIS News"
+root_domain: "risnews.edgl.com"
+start_url: "http://risnews.edgl.com/home"
+start_url: "http://risnews.edgl.com/retail-news"
+paragraph_selector: "article > p"
+article_url_pattern {
+  path_regex: "[^\\/]+[0-9]{5,}$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://risnews.edgl.com/news/Walmart-Makes-U-S--Management-Changes99917"
+    article_url: "http://risnews.edgl.com/retail-news/Retail-s-10-Most-Influential99346"
+    article_url: "http://risnews.edgl.com/retail-news/Top-Retailers-Race-to-Launch-Apple-Watch-Apps99866"
+    article_url: "http://risnews.edgl.com/retail-news/True-Religion-Expands-Epicor-Partnership-Bolstering-Omnichannel-Retailing-99855"
+    article_url: "http://risnews.edgl.com/retail-news/Retailers-Enter-New-Era-of-Mobile-Focused-Consumer-Engagement99847"
+    non_article_url: "http://risnews.edgl.com/retail-blogs"
+    non_article_url: "http://risnews.edgl.com/retail-research"
+    non_article_url: "http://risnews.edgl.com/reports"
+    non_article_url: "http://risnews.edgl.com/events"
+    non_article_url: "http://risnews.edgl.com/magazine"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods.
+  boost: 2
+}
