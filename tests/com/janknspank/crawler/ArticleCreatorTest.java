@@ -159,6 +159,9 @@ public class ArticleCreatorTest {
     assertEquals("Ready! Aim! Fire!: How To Execute Successfully Every Time (Part 2)",
         ArticleCreator.getTitle(createDocumentWithTitle(
             "Ready! Aim! Fire!: How To Execute Successfully Every Time (Part 2)"), site));
+    assertEquals("Sonus Faber Casts Wider Net",
+        ArticleCreator.getTitle(createDocumentWithTitle(
+            "Sonus Faber Casts Wider Net | http://www.twice.com"), site));
   }
 
   @Test

@@ -15933,7 +15933,7 @@ public final class CoreProto {
      * <code>optional double similarity_threshold_10_percent = 2;</code>
      *
      * <pre>
-     * This is the non-normalized similarity score for a seed-word article at the
+     * This is the similarity score + boost for a seed-word article at the
      * bottom 10% of similarities.  This basically gives us a lower-bound for
      * similarity scores, where scores less than this would tend to indicate
      * little relevancy to this vector, while scores above this would tend to have
@@ -15949,7 +15949,7 @@ public final class CoreProto {
      * <code>optional double similarity_threshold_10_percent = 2;</code>
      *
      * <pre>
-     * This is the non-normalized similarity score for a seed-word article at the
+     * This is the similarity score + boost for a seed-word article at the
      * bottom 10% of similarities.  This basically gives us a lower-bound for
      * similarity scores, where scores less than this would tend to indicate
      * little relevancy to this vector, while scores above this would tend to have
@@ -16157,7 +16157,7 @@ public final class CoreProto {
      * <code>optional double similarity_threshold_10_percent = 2;</code>
      *
      * <pre>
-     * This is the non-normalized similarity score for a seed-word article at the
+     * This is the similarity score + boost for a seed-word article at the
      * bottom 10% of similarities.  This basically gives us a lower-bound for
      * similarity scores, where scores less than this would tend to indicate
      * little relevancy to this vector, while scores above this would tend to have
@@ -16175,7 +16175,7 @@ public final class CoreProto {
      * <code>optional double similarity_threshold_10_percent = 2;</code>
      *
      * <pre>
-     * This is the non-normalized similarity score for a seed-word article at the
+     * This is the similarity score + boost for a seed-word article at the
      * bottom 10% of similarities.  This basically gives us a lower-bound for
      * similarity scores, where scores less than this would tend to indicate
      * little relevancy to this vector, while scores above this would tend to have
@@ -16677,7 +16677,7 @@ public final class CoreProto {
        * <code>optional double similarity_threshold_10_percent = 2;</code>
        *
        * <pre>
-       * This is the non-normalized similarity score for a seed-word article at the
+       * This is the similarity score + boost for a seed-word article at the
        * bottom 10% of similarities.  This basically gives us a lower-bound for
        * similarity scores, where scores less than this would tend to indicate
        * little relevancy to this vector, while scores above this would tend to have
@@ -16695,7 +16695,7 @@ public final class CoreProto {
        * <code>optional double similarity_threshold_10_percent = 2;</code>
        *
        * <pre>
-       * This is the non-normalized similarity score for a seed-word article at the
+       * This is the similarity score + boost for a seed-word article at the
        * bottom 10% of similarities.  This basically gives us a lower-bound for
        * similarity scores, where scores less than this would tend to indicate
        * little relevancy to this vector, while scores above this would tend to have
@@ -16713,7 +16713,7 @@ public final class CoreProto {
        * <code>optional double similarity_threshold_10_percent = 2;</code>
        *
        * <pre>
-       * This is the non-normalized similarity score for a seed-word article at the
+       * This is the similarity score + boost for a seed-word article at the
        * bottom 10% of similarities.  This basically gives us a lower-bound for
        * similarity scores, where scores less than this would tend to indicate
        * little relevancy to this vector, while scores above this would tend to have
@@ -16734,7 +16734,7 @@ public final class CoreProto {
        * <code>optional double similarity_threshold_10_percent = 2;</code>
        *
        * <pre>
-       * This is the non-normalized similarity score for a seed-word article at the
+       * This is the similarity score + boost for a seed-word article at the
        * bottom 10% of similarities.  This basically gives us a lower-bound for
        * similarity scores, where scores less than this would tend to indicate
        * little relevancy to this vector, while scores above this would tend to have

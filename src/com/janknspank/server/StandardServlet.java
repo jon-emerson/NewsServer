@@ -62,7 +62,7 @@ public abstract class StandardServlet extends NewsServlet {
 
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, DatabaseRequestException, RequestException,
-          NotFoundException, BiznessException, RequestException {
+          NotFoundException, BiznessException, RedirectException {
     throw new UnsupportedOperationException();
   }
 
@@ -74,6 +74,9 @@ public abstract class StandardServlet extends NewsServlet {
       Asserts.assertTrue(response.getBoolean("success"), "success in response",
           BiznessException.class);
       writeJson(req, resp, response);
+    } catch (RedirectException e) {
+      resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+      resp.setHeader("Location", e.getNextUrl());
     } catch (UnsupportedOperationException e) {
       resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
       writeJson(req, resp, getErrorJson(e.getMessage()));

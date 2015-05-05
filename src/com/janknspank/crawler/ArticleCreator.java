@@ -73,7 +73,8 @@ class ArticleCreator {
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|\\–|\u2014)\\s+([A-Z][A-Za-z]+\\.com)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|\\–|\u2014)\\s+[A-Z][A-Za-z\\s'']{2,25}$"),
-      Pattern.compile("\\s+(\\||\\|\\|)\\s+[A-Za-z\\s'']{2,25}$")};
+      Pattern.compile("\\s+(\\||\\|\\|)\\s+[A-Za-z\\s'']{2,25}$"),
+      Pattern.compile("\\s+(\\||\\|\\|)\\s+http:\\/\\/[A-Za-z\\.]+$")};
   private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s|\\xA0)+");
 
   // It's a neat trick that stems of 4 characters are actually better than stems
