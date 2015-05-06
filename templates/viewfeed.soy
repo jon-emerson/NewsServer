@@ -5,18 +5,15 @@
  */
 {template .main}
   <head>
-    <link rel="stylesheet" type="text/css" href="resources/css/viewfeed.css">
-    <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Istok+Web:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/resources/css/viewfeed.css">
+    <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Istok+Web:400,700" rel="stylesheet" type="text/css">
   </head>
   <body>
     <script src="/resources/js/viewfeed.js"></script>
     <div style="width:100%; margin:0;">
       <div class="leftColumn">
        {call .streamViewer data="all" /}
-      </div>
-      <div class="rightColumn">
-        {call .userPicker data="all" /}
       </div>
     </div>
   <body>
@@ -77,12 +74,4 @@
       </div>
     </div>
   {/foreach}
-{/template}
-
-/**
- * List info about the current user
- * and let admin switch
- */
-{template .userPicker}
-  
 {/template}

@@ -1,59 +1,21 @@
 {namespace news.terms autoescape="strict"}
 
 /**
- * Main page layout.
- * @param title
+ * Page layout.
  */
 {template .main}
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="description" content="Spotter is the fastest way to stay on top of companies, people, and industries that matter to you.">
-    <meta name="keywords" content="reader,news,spotter,career,tech,rss,company,business,startup,job,funding,alerts,trending,magazine">
-    <meta name="author" content="Spotter Technologies, Inc.">
-    <title>{$title}</title>
-    <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
-    <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/legal.css">
-    <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  </head>
+  {call news.common.head data="all"}
+    {param title kind="text"}Terms of Use{/param}
+    {param extraHeaders kind="html"}
+      <link rel="stylesheet" type="text/css" href="/resources/css/legal.css">
+    {/param}
+  {/call}
   <body>
-    <div style="width:100%; margin:0;">
-      {call .navbar data="all" /}
-      {call .policy data="all" /}
-    </div>
-    {call news.home.gatracking data="all" /}
+    {call news.common.navbar data="all" /}
+    {call .policy data="all" /}
+    {call news.common.footer data="all" /}
+    {call news.common.gatracking data="all" /}
   <body>
-{/template}
-
-/**
- * Renders the nav bar
- */
-{template .navbar}
-<div class="navbar navbar-default" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">
-        <img id="navbar-logo" width="169px" height="42px" alt="Spotter Logo - Business news, personalized" src="resources/img/mobileSpotterLogo1@2x.png">
-      </a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/terms" class="btn btn-default">About Us</a></li>
-        <li><a href="/contact" class="btn btn-default">Contact</a></li>
-        <li><a href="/privacy" class="btn btn-default">Privacy</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
 {/template}
 
 /**
@@ -64,7 +26,7 @@
   <section role="policy">
     <div class="container">
       <h1>Spotter Terms of Use</h1>
-      <h4>March 25, 2015</h4>
+      <h4>April 12, 2015</h4>
       <p>Welcome to Spotter! We hope you'll enjoy being more informed, faster with Spotter. These Terms of Use (“Terms”) 
         apply to your use of Spotter’s websites, products and services. Please read these Terms carefully; 
         by using Spotter, you agree to be bound by them.</p>

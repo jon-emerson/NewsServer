@@ -1,89 +1,50 @@
 {namespace news.subscribe autoescape="strict"}
 
 /**
- * Main page layout.
+ * Page layout.
  * @param confirmed
  * @param subscribeLink
  */
 {template .main}
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="description" content="Spotter is the fastest way to stay on top of companies, people, and industries that matter to you.">
-    <meta name="keywords" content="reader,news,spotter,career,tech,rss,company,business,startup,job,funding,alerts,trending,magazine">
-    <meta name="author" content="Spotter Technologies, Inc.">
-    <title>Unsubscribe</title>
-    <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
-    <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/about.css">
-    <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  </head>
+  {call news.common.head data="all"}
+    {param title kind="text"}Unsubscribe{/param}
+  {/call}
   <body>
-    <div style="width:100%; margin:0;">
-      {call .navbar data="all" /}
-      {call .body data="all" /}
-      {call news.home.gatracking data="all" /}
-    </div>
+    {call news.common.navbar data="all" /}
+    {call .body data="all" /}
+    {call news.common.footer data="all" /}
+    {call news.common.gatracking data="all" /}
   <body>
 {/template}
 
 /**
- * Renders the nav bar
- */
-{template .navbar}
-<div class="navbar navbar-default" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Spotter</a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/contact" class="btn btn-default">Contact Us</a></li>
-        <li><a href="/privacy" class="btn btn-default">Privacy</a></li>
-        <li><a href="/terms" class="btn btn-default">Terms</a></li>
-        <li><a href="/copyright" class="btn btn-default">Copyright</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
-{/template}
-
-/**
- * Renders body of the unsubscribe page
+ * Renders body of the unsubscribe page.
  * @param confirmed
  * @param subscribeLink
  */
 {template .body}
-<main>
-  <section role="question">
-    <div class="container">
-      {if $confirmed}
-        <p>You will receive Spotter emails again.  Enjoy!</p>
-        <p>
-        <form method="get" action="/" style="display: inline-block">
-        <input type="submit" value="Go to home page"/>
-        </form>
-        </p>
-      {else}
-        <p>You previously unsubscribed from Spotter emails.  Would you like to start receiving them again?</p>
-        <p>
-        <form method="post" action="{$subscribeLink}&subscribe=true" style="display: inline-block; margin-right: 20px">
-        <input type="submit" value="Yes, subscribe again!"/>
-        </form>
-        <form method="get" action="/" style="display: inline-block">
-        <input type="submit" value="No, I'm good"/>
-        </form>
-        </p>
-      {/if}
-    </div>
-  </section>
- </main>
+  <main>
+    <section role="question">
+      <div class="container">
+        {if $confirmed}
+          <p>You will receive Spotter emails again.  Enjoy!</p>
+          <p>
+          <form method="get" action="/" style="display: inline-block">
+          <input type="submit" value="Go to home page"/>
+          </form>
+          </p>
+        {else}
+          <p>You previously unsubscribed from Spotter emails.  Would you like to start receiving them again?</p>
+          <p>
+          <form method="post" action="{$subscribeLink}&subscribe=true" style="display: inline-block; margin-right: 20px">
+          <input type="submit" value="Yes, subscribe again!"/>
+          </form>
+          <form method="get" action="/" style="display: inline-block">
+          <input type="submit" value="No, I'm good"/>
+          </form>
+          </p>
+        {/if}
+      </div>
+    </section>
+   </main>
 {/template}

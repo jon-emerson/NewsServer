@@ -1,12 +1,12 @@
 {namespace news.classifykeywords autoescape="strict"}
 
 /**
- * Main page layout.
+ * Page layout.
  */
 {template .main}
   <head>
-    <link rel="stylesheet" type="text/css" href="resources/css/classifykeywords.css">
-    <script src="resources/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/resources/css/classifykeywords.css">
+    <script src="/resources/jquery-1.11.2.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Istok+Web:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
@@ -20,17 +20,17 @@
  */
 {template .keywordsTable}
   <form method="post" action="/classifyKeywords">
-  <table>
-    {foreach $keywordToEntityId in $keywordToEntityIds}
-      <tr>
-      <td>{$keywordToEntityId.keyword}</td>
-      <td>{$keywordToEntityId.count}</td>
-      <td>{$keywordToEntityId.industry}</td>
-      <td><input type="text" name="{$keywordToEntityId.id}"/></td>
-      <td><input type="checkbox" name="delete-{$keywordToEntityId.id}"/> Delete</td>
-      </tr>
-    {/foreach}
-  </table>
-  <input type="submit">
+    <table>
+      {foreach $keywordToEntityId in $keywordToEntityIds}
+        <tr>
+        <td>{$keywordToEntityId.keyword}</td>
+        <td>{$keywordToEntityId.count}</td>
+        <td>{$keywordToEntityId.industry}</td>
+        <td><input type="text" name="{$keywordToEntityId.id}"/></td>
+        <td><input type="checkbox" name="delete-{$keywordToEntityId.id}"/> Delete</td>
+        </tr>
+      {/foreach}
+    </table>
+    <input type="submit">
   </form>
 {/template}

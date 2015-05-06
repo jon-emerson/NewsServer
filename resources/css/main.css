@@ -36,7 +36,7 @@ h3 {
 /* Nav */
 
 .navbar-default .navbar-brand:hover {
-  color: #FF5352
+  color: #FF5352;
 }
 
 .navbar {
@@ -45,7 +45,7 @@ h3 {
 }
 
 .navbar-default {
-  background-color: rgba(255,255,255,.90);
+  background-color: white;
   border-bottom: 1px solid #e7e7e7;
   font-size: 14px;
 }
@@ -58,17 +58,27 @@ h3 {
   margin-left: 18px;
   line-height: 28px;
   border-width: 0px;
-  background-color: transparent;
   text-decoration: none;
 }
-
 
 .navbar-default .navbar-nav>li>a:hover {
   color: #FF5352;
 }
 
+footer.navbar-default .navbar-nav>li>a:hover {
+  color: #888;
+}
+
+main {
+  min-height: 200px;
+}
+
 .navbar-toggle {
   margin-top: 16px;
+}
+
+.navbar-collapse {
+  margin-right: -15px !important;
 }
 
 a.btn-primary,
@@ -338,10 +348,10 @@ a.btn-primary,
 }
 
 .nav-footer {
-    padding: 60px 0 0px 0;
-    background-color: #333333;
-    color: #FFF;
-    margin: 0px;
+  padding: 60px 0 0px 0;
+  background-color: #333333;
+  color: #FFF;
+  margin: 30px 0 0;
 }
 
 .fb-like {

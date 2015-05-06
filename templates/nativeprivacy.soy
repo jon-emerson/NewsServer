@@ -1,14 +1,13 @@
 {namespace news.nativeprivacy autoescape="strict"}
 
 /**
- * Main page layout.
- * @param title
+ * Page layout.
  */
 {template .main}
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>{$title}</title>
+    <title>Spotter &mdash; Privacy Policy</title>
     <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
     <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
@@ -17,7 +16,7 @@
   </head>
   <body>
     <div style="width:100%; margin:0;">
-    {call news.privacy.policy data="all" /}
+      {call news.privacy.policy data="all" /}
     </div>
   <body>
 {/template}

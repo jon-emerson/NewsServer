@@ -1,161 +1,119 @@
 {namespace news.copyright autoescape="strict"}
 
 /**
- * Main page layout.
- * @param title
+ * Page layout.
  */
 {template .main}
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="description" content="Spotter copyright policy. Spotter is the fastest way to stay on top of companies, people, and industries that matter to you.">
-    <meta name="keywords" content="reader,news,spotter,career,tech,rss,company,business,startup,job,funding,alerts,trending,magazine">
-    <meta name="author" content="Spotter Technologies, Inc.">
-    <title>{$title}</title>
-    <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
-    <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/legal.css">
-    <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  </head>
+  {call news.common.head data="all"}
+    {param title kind="text"}Copyright and DMCA Policy{/param}
+  {/call}
   <body>
-    <div style="width:100%; margin:0;">
-      {call .navbar data="all" /}
-      {call .policy data="all" /}
-    </div>
-    {call news.home.gatracking data="all" /}
+    {call news.common.navbar data="all" /}
+    {call .policy data="all" /}
+    {call news.common.footer data="all" /}
+    {call news.common.gatracking data="all" /}
   <body>
 {/template}
 
 /**
- * Renders the nav bar
- */
-{template .navbar}
-<div class="navbar navbar-default" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Spotter</a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/terms" class="btn btn-default">About Us</a></li>
-        <li><a href="/contact" class="btn btn-default">Contact</a></li>
-        <li><a href="/terms" class="btn btn-default">Terms</a></li>
-        <li><a href="/privacy" class="btn btn-default">Privacy</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
-{/template}
-
-/**
- * Renders body of the copyright policy
+ * Renders body of the copyright policy.
  */
 {template .policy}
-<main>
-<section role="policy">
-<div class="container">
+  <main>
+  <section role="policy">
+  <div class="container">
+    <h1>Spotter Copyright and DMCA Policy</h1>
+    <h4>March 25, 2015</h4>
+    <p>This policy explains how Spotter responds to claims of the unauthorized use of copyrighted
+    text, images or links to allegedly infringing materials under the Digital Millennium
+    Copyright Act (“DMCA”).</p>
 
-  <h1>Spotter Copyright and DMCA Policy</h1>
-  <h4>March 25, 2015</h4>
-  <p>This policy explains how Spotter responds to claims of the unauthorized use of copyrighted 
-  text, images or links to allegedly infringing materials under the Digital Millennium 
-  Copyright Act (“DMCA”).</p>
+    <h2>The Digital Millennium Copyright Act</h2>
+    <p><a href="http://www.copyright.gov/title17/92chap5.html#512">Section 512</a> of the DMCA lays
+    out the legal requirements to formally report copyright infringement to a service provider
+    like Spotter. It also explains how the person who posted the content at issue can oppose a
+    notice of alleged infringement by submitting a counter-notice.</p>
 
-  <h2>The Digital Millennium Copyright Act</h2>
-  <p><a href="http://www.copyright.gov/title17/92chap5.html#512">Section 512</a> of the DMCA lays 
-  out the legal requirements to formally report copyright infringement to a service provider 
-  like Spotter. It also explains how the person who posted the content at issue can oppose a 
-  notice of alleged infringement by submitting a counter-notice.</p>
+    <h2>Make sure you have rights in a copyrighted work</h2>
+    <p>Sending a copyright notice or counter-notice is serious business. The DMCA imposes legal
+    and financial penalties for making fraudulent or bad-faith claims. Make sure you’re the actual
+    copyright holder or that you’ve been authorized to act on a rights holder’s behalf before
+    submitting a takedown notice.</p>
 
-  <h2>Make sure you have rights in a copyrighted work</h2>
-  <p>Sending a copyright notice or counter-notice is serious business. The DMCA imposes legal 
-  and financial penalties for making fraudulent or bad-faith claims. Make sure you’re the actual 
-  copyright holder or that you’ve been authorized to act on a rights holder’s behalf before 
-  submitting a takedown notice.</p>
-  
-  <h2>How to submit a copyright notice</h2>
-  <p>To send us a notice concerning copyright infringement, you’ll need to provide us 
-  the following information:</p>
-  <ol>
-    <li>A physical or electronic signature of the copyright owner or a person authorized 
-    to act on their behalf (typing your full name will do);</li>
-    <li>Identification of the copyrighted work claimed to have been infringed (e.g., a copy of or 
-    link to your original work or clear description of the materials allegedly being infringed);</li>
-    <li>Identification of the infringing material and information reasonably sufficient to 
-    permit Spotter to locate the material on our services (e.g., a link to the infringing article);</li>
-    <li>Your contact information, including your address, telephone number and an email address;</li>
-    <li>A statement that you have a good-faith belief that the use of the material in the manner 
-    asserted is not authorized by the copyright owner, its agent or the law; and</li>
-    <li>A statement that the information in the notification is accurate, and, under penalty of 
-    perjury, that you are authorized to act on behalf of the copyright owner.</li>
-  </ol>
-  <p>You can report alleged copyright infringement by emailing the above information 
-  to support@spotter.com.</p>
-  <p>You can also mail a copyright notice to:</p>
-  <p>Designated Copyright Agent
-  Spotter<br>
-  283 States St<br>
-  San Francisco, CA 94114</p>
-  
-  <h2>How Spotter responds to copyright claims</h2>
-  <p>Spotter’s response to notices of alleged copyright infringement may include removing or 
-  restricting access to allegedly infringing material. If we remove or restrict access to content 
-  in response to a copyright notice, we’ll make a good-faith effort to get in touch with the 
-  affected account holder to provide information about the situation.</p>
-  
-  <h2>When you receive word of a DMCA notice</h2>
-  <p>If you receive a message from us saying that content you’ve posted has been removed from 
-  Spotter, please read it carefully as it may contain information about your options and the 
-  nature of the takedown notice we received.</p>
-  
-  <h2>How to file a counter-notice</h2>
-  <p>If you receive a DMCA notification about material you’ve posted and you believe that 
-  material was misidentified or removed in error, you can file a counter-notice by following 
-  the instructions below.</p>
-  <p>To submit a counter-notice, please send us the following information:</p>
-  <ol>
-    <li>A physical or electronic signature (typing your full name will do);</li>
-    <li>Identification of the material that has been removed or to which access has been disabled 
-    and the location at which the material appeared before it was removed or access to it was 
-    disabled (the description from the DMCA notice is enough);</li>
-    <li>A statement under penalty of perjury that you have a good-faith belief that the material 
-    was removed or disabled as a result of mistake or misidentification of the material to be 
-    removed or disabled; and</li>
-    <li>Your name, address and telephone number, and a statement that you consent to the 
-    jurisdiction of the federal district court for the judicial district in which your address 
-    is located, or if your address is outside of the United States, for any judicial district 
-    in which Spotter may be found, and that you will accept service of process from the person 
-    who provided the copyright notification or an agent of such person.</li>
-  </ol>
-  <p>To submit a counter-notice, please respond to our original email letting you know about the 
-  removal, and include the above information in the body of your reply.</p>
-  <p>Note: If you re-post material removed in response to a DMCA notification, we may permanently 
-  suspend your account. If you believe content was removed in error, please consider filing a 
-  counter-notice instead of re-posting the material.</p>
-  
-  <h2>After you submit a counter-notice</h2>
-  <p>When we receive a valid counter-notice, we’ll promptly forward a copy to the person who sent 
-  us the copyright notice. If we aren’t told within 10 business days that the original reporter is 
-  seeking a court order to prevent further infringement of the material, we may replace or cease 
-  disabling access to the material that was removed.</p>
-  
-  <h2>Repeate Infringer Policy</h2>
-  <p>Spotter has a policy that provides for the termination in appropriate circumstances of 
-  account holders who are repeat infringers. In general, we consider a “repeat infringer” to be
-  a user that has uploaded content to Spotter and for whom Spotter has received more than two 
-  takedown notices that are compliant with applicable law with respect to such content. 
-  Additionally, we reserve the right to terminate account holders who infringe on a single 
-  occasion if the circumstances warrant.</p>
+    <h2>How to submit a copyright notice</h2>
+    <p>To send us a notice concerning copyright infringement, you’ll need to provide us
+    the following information:</p>
+    <ol>
+      <li>A physical or electronic signature of the copyright owner or a person authorized
+      to act on their behalf (typing your full name will do);</li>
+      <li>Identification of the copyrighted work claimed to have been infringed (e.g., a copy of or
+      link to your original work or clear description of the materials allegedly being infringed);</li>
+      <li>Identification of the infringing material and information reasonably sufficient to
+      permit Spotter to locate the material on our services (e.g., a link to the infringing article);</li>
+      <li>Your contact information, including your address, telephone number and an email address;</li>
+      <li>A statement that you have a good-faith belief that the use of the material in the manner
+      asserted is not authorized by the copyright owner, its agent or the law; and</li>
+      <li>A statement that the information in the notification is accurate, and, under penalty of
+      perjury, that you are authorized to act on behalf of the copyright owner.</li>
+    </ol>
+    <p>You can report alleged copyright infringement by emailing the above information
+    to support@spotter.com.</p>
+    <p>You can also mail a copyright notice to:</p>
+    <p>Designated Copyright Agent
+    Spotter<br>
+    283 States St<br>
+    San Francisco, CA 94114</p>
 
-</div>
-</section>
-</main>
+    <h2>How Spotter responds to copyright claims</h2>
+    <p>Spotter’s response to notices of alleged copyright infringement may include removing or
+    restricting access to allegedly infringing material. If we remove or restrict access to content
+    in response to a copyright notice, we’ll make a good-faith effort to get in touch with the
+    affected account holder to provide information about the situation.</p>
+
+    <h2>When you receive word of a DMCA notice</h2>
+    <p>If you receive a message from us saying that content you’ve posted has been removed from
+    Spotter, please read it carefully as it may contain information about your options and the
+    nature of the takedown notice we received.</p>
+
+    <h2>How to file a counter-notice</h2>
+    <p>If you receive a DMCA notification about material you’ve posted and you believe that
+    material was misidentified or removed in error, you can file a counter-notice by following
+    the instructions below.</p>
+    <p>To submit a counter-notice, please send us the following information:</p>
+    <ol>
+      <li>A physical or electronic signature (typing your full name will do);</li>
+      <li>Identification of the material that has been removed or to which access has been disabled
+      and the location at which the material appeared before it was removed or access to it was
+      disabled (the description from the DMCA notice is enough);</li>
+      <li>A statement under penalty of perjury that you have a good-faith belief that the material
+      was removed or disabled as a result of mistake or misidentification of the material to be
+      removed or disabled; and</li>
+      <li>Your name, address and telephone number, and a statement that you consent to the
+      jurisdiction of the federal district court for the judicial district in which your address
+      is located, or if your address is outside of the United States, for any judicial district
+      in which Spotter may be found, and that you will accept service of process from the person
+      who provided the copyright notification or an agent of such person.</li>
+    </ol>
+    <p>To submit a counter-notice, please respond to our original email letting you know about the
+    removal, and include the above information in the body of your reply.</p>
+    <p>Note: If you re-post material removed in response to a DMCA notification, we may permanently
+    suspend your account. If you believe content was removed in error, please consider filing a
+    counter-notice instead of re-posting the material.</p>
+
+    <h2>After you submit a counter-notice</h2>
+    <p>When we receive a valid counter-notice, we’ll promptly forward a copy to the person who sent
+    us the copyright notice. If we aren’t told within 10 business days that the original reporter is
+    seeking a court order to prevent further infringement of the material, we may replace or cease
+    disabling access to the material that was removed.</p>
+
+    <h2>Repeate Infringer Policy</h2>
+    <p>Spotter has a policy that provides for the termination in appropriate circumstances of
+    account holders who are repeat infringers. In general, we consider a “repeat infringer” to be
+    a user that has uploaded content to Spotter and for whom Spotter has received more than two
+    takedown notices that are compliant with applicable law with respect to such content.
+    Additionally, we reserve the right to terminate account holders who infringe on a single
+    occasion if the circumstances warrant.</p>
+  </div>
+  </section>
+  </main>
 {/template}
