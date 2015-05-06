@@ -30,6 +30,7 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
 import com.janknspank.rank.NeuralNetworkScorer;
+import com.janknspank.utils.SendWelcomeEmails;
 
 /**
  * Sends every user who's enabled iOS push notifications a notification about
@@ -292,6 +293,10 @@ public class PushDailyNotifications {
   }
 
   public static void main(String args[]) throws Exception {
+    // As part of this process, also send welcome emails.
+    SendWelcomeEmails.sendWelcomeEmails();
+
+    // OK, now send push notifications.
     for (User user : Database.with(User.class).get()) {
       try {
         Iterable<DeviceRegistration> registrations =
