@@ -1,6 +1,10 @@
 /* About Us */
+p {
+  font-size: 15px;
+}
+
 #history-section {
-  margin-top: 32px;
+  margin-top: 20px;
 }
 
 #mission-statement {
@@ -17,6 +21,11 @@
 
 .small-wrapper {
   padding-top: 32px;
+  margin-bottom: 32px;
+}
+
+li {
+  font-size: 15px;
 }
 
 @media (max-width: 767px) {
@@ -30,6 +39,7 @@
 
   .small-wrapper {
     padding-top: 8px;
+    margin-bottom: 16px;
   }
 
   h1 {

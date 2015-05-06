@@ -1,6 +1,7 @@
 short_name: "Tom Tunguz"
 root_domain: "tomtunguz.com"
 start_url: "http://tomtunguz.com/"
+use_first_paragraph_as_description: true
 paragraph_selector: ".post p"
 article_url_pattern {
   path_regex: "^\\/[^\\/]+\\/$"
