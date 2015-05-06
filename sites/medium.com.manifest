@@ -12,6 +12,7 @@ start_url: "https://medium.com/evergreen-business-weekly"
 start_url: "https://medium.com/hyde-park-angels"
 start_url: "https://medium.com/tag/tech"
 start_url: "https://medium.com/tag/vc"
+start_url: "https://medium.com/gv-notes"
 path_blacklist {
   needle: "/@Medium/"
 }
@@ -56,4 +57,9 @@ feature_boost_pattern {
   feature_id: 10558 # Venture Capital
   path_regex: "^\\/@piotrwilam\\/"
   boost: 6
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital
+  path_regex: "^\\/gv-notes\\/"
+  boost: 10
 }
