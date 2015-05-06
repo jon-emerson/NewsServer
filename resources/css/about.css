@@ -3,6 +3,10 @@
   margin-top: 32px;
 }
 
+#mission-statement {
+  font-style: italic;
+}
+
 .profile-photo {
   border-radius: 110px;
 }
@@ -17,6 +21,37 @@
 
 @media (max-width: 767px) {
   main section {
+    text-align: center;
+  }
+
+  #history-section {
+    margin-top: 8px;
+  }
+
+  .small-wrapper {
+    padding-top: 8px;
+  }
+
+  h1 {
+    font-size: 26px;
+    margin-top: 16px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
     text-align: left;
+    margin-top: 18px;
+  }
+
+  li {
+    text-align: left;
+    font-size: 14px;
   }
 }

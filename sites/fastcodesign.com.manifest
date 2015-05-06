@@ -1,0 +1,37 @@
+short_name: "Fastco Design"
+root_domain: "fastcodesign.com"
+start_url: "http://www.fastcodesign.com/"
+paragraph_selector: ".prose > p"
+article_url_pattern {
+  path_regex: "\\/3[0-9]{6}\\/.*"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.fastcodesign.com/3045891/15-ideas-that-will-make-you-reconsider-virtual-reality"
+    article_url: "http://www.fastcodesign.com/3045627/wears/i-want-my-3-d-printed-shoes"
+    article_url: "http://www.fastcodesign.com/3045828/the-internets-cool-kid-ryder-ripps-on-design-dont-listen-to-anyone-everybody-is-scared"
+    article_url: "http://www.fastcodesign.com/3045908/amazons-echo-takes-a-step-closer-to-becoming-the-heart-of-the-smart-home"
+    article_url: "http://www.fastcodesign.com/3042355/innovation-by-design/enter-the-2015-innovation-by-design-awards"
+    non_article_url: "http://www.fastcodesign.com/newsletters"
+    non_article_url: "http://www.fastcodesign.com/xyz111"
+    non_article_url: "http://www.fastcodesign.com/xyz112"
+    non_article_url: "http://www.fastcodesign.com/xyz113"
+    non_article_url: "http://www.fastcodesign.com/xyz114"
+  }
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10510 # Consumer goods
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer electronics
+  boost: 1
+}
