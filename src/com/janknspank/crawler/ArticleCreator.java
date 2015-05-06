@@ -67,7 +67,8 @@ class ArticleCreator {
       "http://cdn.fxstreet.com/img/facebook/*/FXstreet-90x90.png",
       "http://cdn.fxstreet.com/img/facebook/usdjpy/usdjpy.png",
       "http://cdn.fxstreet.com/img/facebook/eurusd/eurusd02.png",
-      "http://cdn.fxstreet.com/img/facebook/usdchf/usdchf02.png");
+      "http://cdn.fxstreet.com/img/facebook/usdchf/usdchf02.png",
+      "https://s0.wp.com/i/blank.jpg");
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\\–|\u2014)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
