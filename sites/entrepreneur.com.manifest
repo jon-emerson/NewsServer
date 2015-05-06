@@ -48,3 +48,7 @@ feature_boost_pattern {
   feature_id: 10523 # Management
   boost: 0
 }
+feature_boost_pattern {
+  feature_id: 10546 # Social Good
+  boost: 0
+}

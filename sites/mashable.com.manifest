@@ -79,3 +79,7 @@ feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
   boost: -1
 }
+feature_boost_pattern {
+  feature_id: 10546 # Social Good
+  boost: 0
+}
