@@ -36,7 +36,7 @@ public class ArticleCreatorTest {
 //  }
 
   @Test
-  public void test() {
+  public void testDedupingStems() {
     Set<String> dedupingStems = ImmutableSet.copyOf(
         ArticleCreator.getDedupingStems(
             "Facebook acquires its way into e-commerce by buying TheFind"));
@@ -45,6 +45,43 @@ public class ArticleCreatorTest {
     assertTrue("Expected stem: e-co", dedupingStems.contains("e-co"));
     assertTrue("Expected stem: buyi", dedupingStems.contains("buyi"));
     assertTrue("Expected stem: thef", dedupingStems.contains("thef"));
+  }
+
+  @Test
+  public void testIsValidImageUrl() {
+    assertTrue(ArticleCreator.isValidImageUrl(
+        "http://media.caranddriver.com/images/15q1/654922/2016-audi-r8-prototype-"
+            + "poked-and-prodded-review-car-and-driver-photo-656539-s-original.jpg"));
+    assertTrue(ArticleCreator.isValidImageUrl(
+        "http://www.cartoonbrew.com/wp-content/uploads/2015/03/nicklogo_getschooled.jpg"));
+    assertTrue(ArticleCreator.isValidImageUrl(
+        "http://cdnassets.hw.net/14/21/fe864abb4c1c9db428e0fe50635e/"
+        + "01ar-archschoice-hero-tcm20-2185243.jpg"));
+    assertTrue(ArticleCreator.isValidImageUrl(
+        "http://rack.1.mshcdn.com/media/"
+        + "ZgkyMDE1LzAzLzE5LzI5L0FQNjc4NjkwMTEyLmVjNzJmLmpwZwpwCXRodW1iCTk1MHg1MzQjCmUJanBn/"
+        + "7f11573a/eca/AP67869011203.jpg"));
+    assertTrue(ArticleCreator.isValidImageUrl(
+        "http://static2.businessinsider.com/image/54d8f29d6bb3f7073489ad86/"
+        + "the-google-backlash-is-growing.jpg"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+        "http://media.cleveland.com/design/alpha/img/logo_cleve.gif"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+        "http://www.sfgate.com/img/pages/article/opengraph_default.png"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+        "http://images.forbes.com/media/assets/forbes_1200x1200.jpg"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+        "http://images.rigzone.com/images/rz-facebook.jpg"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+         "http://static01.nyt.com/images/icons/t_logo_291_black.png"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+         "http://cdn.fxstreet.com/img/facebook/*/FXstreet-90x90.png"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+        "http://d3n8a8pro7vhmx.cloudfront.net/bhorowitz/sites/1/meta_images/original/"
+        + "logo.png?1383577601"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+        "http://cdn.gotraffic.net/politics/20150107201907/public/images/logos/"
+        + "FB-Sharing.73b07052.png"));
   }
 
   /**

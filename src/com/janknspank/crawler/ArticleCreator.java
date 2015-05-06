@@ -56,7 +56,6 @@ class ArticleCreator {
       "http://www.sfgate.com/img/pages/article/opengraph_default.png",
       "http://images.forbes.com/media/assets/forbes_1200x1200.jpg",
       "http://images.rigzone.com/images/rz-facebook.jpg",
-      "http://static01.nyt.com/images/icons/t_logo_291_black.png",
       "http://www.inc.com/images/incthumb250.png",
       "http://fm.cnbc.com/applications/cnbc.com/staticcontent/img/cnbc_logo.gif",
       "http://static.cdn-seekingalpha.com/uploads/2013/8/19/social_sa_logo.png",
@@ -64,11 +63,20 @@ class ArticleCreator {
       "http://www.scientificamerican.com/sciam/includes/themes/sciam/images/logo400x400.jpg",
       "http://mw1.wsj.net/MW5/content/images/logos/mw-social-logo.jpg",
       "http://www1.ibdcd.com/images/IBDicon_309171.png",
-      "http://cdn.fxstreet.com/img/facebook/*/FXstreet-90x90.png",
-      "http://cdn.fxstreet.com/img/facebook/usdjpy/usdjpy.png",
-      "http://cdn.fxstreet.com/img/facebook/eurusd/eurusd02.png",
-      "http://cdn.fxstreet.com/img/facebook/usdchf/usdchf02.png",
       "https://s0.wp.com/i/blank.jpg");
+  private static final Set<Pattern> IMAGE_URL_BLACKLIST_PATTERNS = ImmutableSet.of(
+      // A black "T", representing the NYTimes.
+      // E.g. http://static01.nyt.com/images/icons/t_logo_291_black.png
+      Pattern.compile("^http.*nyt[^\\/]*\\.com\\/.*_black\\.png$"),
+      // Typically weird 3D renderings of currency conversion ticker symbols.
+      // E.g. http://cdn.fxstreet.com/img/facebook/*/FXstreet-90x90.png
+      Pattern.compile("^http:\\/\\/cdn\\.fxstreet\\.com\\/"),
+      // Andreesen Horowitz logo.
+      // E.g. http://d3n8a8pro7vhmx.cloudfront.net/bhorowitz/sites/1/meta_images/original/logo.png?1383577601
+      Pattern.compile("\\/bhorowitz\\/sites\\/1\\/meta_images\\/original/logo.png(\\?.*)?$"),
+      // Bloomberg logo.
+      // E.g. http://cdn.gotraffic.net/politics/20150107201907/public/images/logos/FB-Sharing.73b07052.png
+      Pattern.compile("\\/\\/cdn\\.gotraffic\\.net\\/.*FB-Sharing"));
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\\–|\u2014)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
@@ -250,10 +258,25 @@ class ArticleCreator {
 
   private static String resolveImageUrl(DocumentNode documentNode, String relativeUrl) {
     try {
-      return new URL(new URL(documentNode.getUrl()), relativeUrl).toString();
+      return new URL(
+          new URL(documentNode.getUrl()), Strings.nullToEmpty(relativeUrl).trim()).toString();
     } catch (MalformedURLException e) {
       return "";
     }
+  }
+
+  @VisibleForTesting
+  static boolean isValidImageUrl(String imageUrl) {
+    if (imageUrl.isEmpty()
+        || IMAGE_URL_BLACKLIST.contains(imageUrl)) {
+      return false;
+    }
+    for (Pattern pattern : IMAGE_URL_BLACKLIST_PATTERNS) {
+      if (pattern.matcher(imageUrl).find()) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -268,29 +291,16 @@ class ArticleCreator {
     String imageUrl = resolveImageUrl(documentNode, metaNode.getAttributeValue("content"));
 
     // Disallow empty and blacklisted URLs.
-    if (imageUrl.isEmpty()
-        || metaNode.getAttributeValue("content").trim().isEmpty()
-        || IMAGE_URL_BLACKLIST.contains(imageUrl)
-        || imageUrl.contains("/bhorowitz/sites/1/meta_images/original/logo.png")) {
-      return -1;
-    }
-
-    // Disallow these URLs, e.g.
-    // http://cdn.gotraffic.net/politics/20150107201907/public/images/logos/
-    //     FB-Sharing.73b07052.png
-    // Which was found on http://www.bloomberg.com/politics/articles/2014-12-30/
-    //     the-new-york-times-joins-the-nypd-funeral-protest-backlash
-    // And is a text image.
-    if (imageUrl.contains("//cdn.gotraffic.net/") && imageUrl.contains("FB-Sharing")) {
+    if (!isValidImageUrl(imageUrl)) {
       return -1;
     }
 
     String documentUrl = documentNode.getUrl();
     if (documentUrl.contains(".nytimes.com/")) {
-      if (imageUrl.contains("-facebookJumbo-")) {
+      if (imageUrl.contains("-facebookJumbo")) {
         return 1000;
       }
-      if (imageUrl.contains("-thumbLarge-")) {
+      if (imageUrl.contains("-thumbLarge")) {
         return 200;
       }
     }
