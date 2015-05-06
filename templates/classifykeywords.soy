@@ -20,17 +20,17 @@
  */
 {template .keywordsTable}
   <form method="post" action="/classifyKeywords">
-  <table>
-    {foreach $keywordToEntityId in $keywordToEntityIds}
-      <tr>
-      <td>{$keywordToEntityId.keyword}</td>
-      <td>{$keywordToEntityId.count}</td>
-      <td>{$keywordToEntityId.industry}</td>
-      <td><input type="text" name="{$keywordToEntityId.id}"/></td>
-      <td><input type="checkbox" name="delete-{$keywordToEntityId.id}"/> Delete</td>
-      </tr>
-    {/foreach}
-  </table>
-  <input type="submit">
+    <table>
+      {foreach $keywordToEntityId in $keywordToEntityIds}
+        <tr>
+        <td>{$keywordToEntityId.keyword}</td>
+        <td>{$keywordToEntityId.count}</td>
+        <td>{$keywordToEntityId.industry}</td>
+        <td><input type="text" name="{$keywordToEntityId.id}"/></td>
+        <td><input type="checkbox" name="delete-{$keywordToEntityId.id}"/> Delete</td>
+        </tr>
+      {/foreach}
+    </table>
+    <input type="submit">
   </form>
 {/template}

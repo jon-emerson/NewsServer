@@ -69,6 +69,10 @@ footer.navbar-default .navbar-nav>li>a:hover {
   color: #888;
 }
 
+main {
+  min-height: 200px;
+}
+
 .navbar-toggle {
   margin-top: 16px;
 }
