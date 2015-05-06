@@ -125,7 +125,7 @@ a.btn-primary,
 
 .jumbotron h1 {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
   color: #111;
   font-family: 'PT Sans', sans-serif;
   line-height: 1.3;
@@ -133,7 +133,7 @@ a.btn-primary,
 
 .jumbotron h2 {
   margin-top: 18px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: lighter;
   color: #111;
 }
@@ -141,7 +141,6 @@ a.btn-primary,
 #app-icon {
   width: 136px;
   height: 129px;
-  margin-top: 12px;
   margin-right: 12px;
 }
 
@@ -406,6 +405,7 @@ a.btn-primary,
 
   #navbar-logo {
     height: 36px;
+    width: 145px;
   }
 
   main section {
@@ -549,6 +549,7 @@ a.btn-primary,
 
   #section-4-row {
     margin-right: 0px;
+    padding-bottom: 12px;
   }
 
   #section-4-p {
