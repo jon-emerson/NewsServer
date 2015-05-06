@@ -18,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 import com.google.common.collect.Maps;
+import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.Users;
 import com.janknspank.common.Host;
@@ -237,6 +238,8 @@ public class IosPushNotificationHelper {
         .setDeviceType(registration.getDeviceType())
         .setHost(Host.get())
         .setUserId(registration.getUserId())
+        .setArticlePublishedTime(Articles.getPublishedTime(article))
+        .addAllDedupingStems(article.getDedupingStemsList())
         .build();
   }
 

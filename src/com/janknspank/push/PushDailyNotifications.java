@@ -1,8 +1,11 @@
 package com.janknspank.push;
 
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -25,6 +28,7 @@ import com.janknspank.proto.PushNotificationProto.DeviceRegistration;
 import com.janknspank.proto.PushNotificationProto.PushNotification;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.rank.Deduper;
 import com.janknspank.rank.NeuralNetworkScorer;
 
 /**
@@ -33,6 +37,45 @@ import com.janknspank.rank.NeuralNetworkScorer;
  * to help with re-engagement.
  */
 public class PushDailyNotifications {
+  private static class PreviousUserNotifications {
+    private final Future<Iterable<PushNotification>> recentNotificationsFuture;
+
+    public PreviousUserNotifications(User user) throws DatabaseSchemaException {
+      recentNotificationsFuture = Database.with(PushNotification.class).getFuture(
+          new QueryOption.WhereEquals("user_id", user.getId()),
+          new QueryOption.DescendingSort("create_time"),
+          new QueryOption.Limit(5));
+    }
+
+    private long getLastNotificationTime() throws DatabaseSchemaException {
+      try {
+        PushNotification lastNotification = Iterables.getFirst(recentNotificationsFuture.get(), null);
+        if (lastNotification != null) {
+          return lastNotification.getCreateTime();
+        }
+      } catch (InterruptedException | ExecutionException e) {
+        Throwables.propagateIfInstanceOf(e.getCause(), DatabaseSchemaException.class);
+      }
+      return 0;
+    }
+
+    private boolean isDupe(Article article) throws DatabaseSchemaException {
+      Deduper.ArticleExtraction articleExtraction = new Deduper.ArticleExtraction(article);
+      try {
+        for (PushNotification pushNotification : recentNotificationsFuture.get()) {
+          Deduper.ArticleExtraction pushExtraction = new Deduper.ArticleExtraction(
+              pushNotification.getArticlePublishedTime(), pushNotification.getDedupingStemsList());
+          if (pushExtraction.isDuplicate(articleExtraction)) {
+            return true;
+          }
+        }
+      } catch (InterruptedException | ExecutionException e) {
+        Throwables.propagateIfInstanceOf(e.getCause(), DatabaseSchemaException.class);
+      }
+      return false;
+    }
+  }
+
   private static Set<String> getFollowedEntityIds(User user) {
     ImmutableSet.Builder<String> followedEntityIdSetBuilder = ImmutableSet.builder();
     for (Interest interest : UserInterests.getInterests(user)) {
@@ -92,10 +135,10 @@ public class PushDailyNotifications {
       score -= 20;
     }
 
-    // 0, 75, or 100 depending on whether the article's about a company, and
+    // 0, 25, or 50 depending on whether the article's about a company, and
     // whether the user's following that company.
     if (isArticleAboutFollowedCompany(article, followedEntityIds)) {
-      score += 100;
+      score += 50;
     } else if (isArticleAboutCompany(article)) {
       // Don't make this too high.  In many industries, companies are far less
       // interesting than ideas... E.g. architecture, where when this value was
@@ -104,12 +147,15 @@ public class PushDailyNotifications {
       score += 25;
     }
 
-    // 0, 75, or 100 depending on whether there's dupes or this article seems
+    // 0 out of 150 depending on whether there's dupes or this article seems
     // event-like.
+    if (isArticleAboutEvent(article)) {
+      score += 50;
+    }
     if (article.getHotCount() > 2) {
       score += 100;
-    } else if (isArticleAboutEvent(article) || article.getHotCount() == 2) {
-      score += 75;
+    } else if (article.getHotCount() == 2) {
+      score += 50;
     }
     return score;
   }
@@ -125,15 +171,10 @@ public class PushDailyNotifications {
     return lastAppUseTime;
   }
 
-  private static long getLastNotificationTime(User user) throws DatabaseSchemaException {
-    PushNotification lastNotification = Database.with(PushNotification.class).getFirst(
-        new QueryOption.WhereEquals("user_id", user.getId()),
-        new QueryOption.DescendingSort("create_time"));
-    return (lastNotification == null) ? 0 : lastNotification.getCreateTime();
-  }
-
   private static Article getArticleToNotifyAbout(User user)
       throws DatabaseSchemaException, BiznessException {
+    PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
+
     UserTimezone userTimezone = UserTimezone.getForUser(user);
     if (userTimezone.isNight()) {
       // Don't even risk sending anything at night...
@@ -142,24 +183,26 @@ public class PushDailyNotifications {
 
     Set<String> followedEntityIds = getFollowedEntityIds(user);
 
-    // Don't consider articles older than the last time the user used the app or
-    // the last time we sent him/her a notification.
-    long lastNotificationTime = getLastNotificationTime(user);
-    long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime)
-        - TimeUnit.MINUTES.toMillis(30);
-
     // Get the user's stream.
     TopList<Article, Double> rankedArticles = Articles.getRankedArticles(
         user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
+
+    // Don't consider articles older than the last time the user used the app or
+    // the last time we sent him/her a notification.
+    long lastNotificationTime = previousUserNotifications.getLastNotificationTime();
+    long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime)
+        - TimeUnit.MINUTES.toMillis(30);
 
     // Find the best article in the user's stream, for notification purposes.
     Article bestArticle = null;
     int bestArticleScore = -1;
     for (Article article : rankedArticles) {
-      // Don't consider articles that are older than the time cutoff.
+      // Don't consider articles that are older than the time cutoff or articles
+      // that are duplicates of notifications we previously sent.
       if (Articles.getPublishedTime(article) < timeCutoff
           || (article.hasOldestHotDuplicateTime()
-              && article.getOldestHotDuplicateTime() < timeCutoff)) {
+              && article.getOldestHotDuplicateTime() < timeCutoff)
+          || previousUserNotifications.isDupe(article)) {
         continue;
       }
 
@@ -181,10 +224,10 @@ public class PushDailyNotifications {
     int scoreNecessaryToTriggerNotification = 200 - (10 * hoursSinceNotification);
     if (userTimezone.isMorning()) {
       // Encourage more notifications in the morning.
-      scoreNecessaryToTriggerNotification -= 50;
+      scoreNecessaryToTriggerNotification -= 35;
     } else if (userTimezone.isDaytime()) {
       // And some encouragement in the afternoon, too, but not as much...
-      scoreNecessaryToTriggerNotification -= 25;
+      scoreNecessaryToTriggerNotification -= 20;
     }
     if (userTimezone.isWeekend()) {
       // Only notify people on weekends if it's important.
@@ -210,7 +253,8 @@ public class PushDailyNotifications {
 
     TopList<Article, Double> rankedArticles = Articles.getRankedArticles(
         user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
-    long lastNotificationTime = getLastNotificationTime(user);
+    PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
+    long lastNotificationTime = previousUserNotifications.getLastNotificationTime();
     long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime);
     int i = 0;
     for (Article rankedArticle : rankedArticles) {
