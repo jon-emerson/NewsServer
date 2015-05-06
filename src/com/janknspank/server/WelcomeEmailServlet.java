@@ -28,7 +28,6 @@ public class WelcomeEmailServlet extends StandardServlet {
     User user =
         getValidatedUser(getRequiredParameter(req, "email"), getRequiredParameter(req, "schmutz"));
     return new SoyMapData(
-        "title", "Welcome to Spotter",
         "isInBrowser", true,
         "mobileSpotterLogo1ImgSrc", "/resources/img/mobileSpotterLogo1@2x.png",
         "settingsZoomImgSrc", "/resources/img/settingsZoom@2x.png",

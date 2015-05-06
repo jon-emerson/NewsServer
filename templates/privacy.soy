@@ -1,162 +1,120 @@
 {namespace news.privacy autoescape="strict"}
 
 /**
- * Main page layout.
- * @param title
+ * Page layout.
  */
 {template .main}
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="description" content="Spotter is the fastest way to stay on top of companies, people, and industries that matter to you.">
-    <meta name="keywords" content="reader,news,spotter,career,tech,rss,company,business,startup,job,funding,alerts,trending,magazine">
-    <meta name="author" content="Spotter Technologies, Inc.">
-    <title>{$title}</title>
-    <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
-    <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/legal.css">
-    <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  </head>
+  {call news.common.head data="all"}
+    {param title kind="text"}Privacy Policy{/param}
+  {/call}
   <body>
-    <div style="width:100%; margin:0;">
-      {call .navbar data="all" /}
-      {call .policy data="all" /}
-    </div>
-    {call news.home.gatracking data="all" /}
+    {call news.common.navbar data="all" /}
+    {call .policy data="all" /}
+    {call news.common.footer data="all" /}
+    {call news.common.gatracking data="all" /}
   <body>
 {/template}
 
 /**
- * Renders the nav bar
- */
-{template .navbar}
-<div class="navbar navbar-default" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Spotter</a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/terms" class="btn btn-default">About Us</a></li>
-        <li><a href="/contact" class="btn btn-default">Contact</a></li>
-        <li><a href="/terms" class="btn btn-default">Terms</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
-{/template}
-
-/**
- * Renders body of the privacy policy
+ * Renders body of the privacy policy.
  */
 {template .policy}
-<main>
-<section role="policy">
-<div class="container">
+  <main>
+  <section role="policy">
+  <div class="container">
+    <h1>Spotter Privacy Policy</h1>
+    <h4>April 12, 2015</h4>
+    <p>This document explains in simple terms what information we collect about you, what we use
+    it for, and the few situations in which we share it with others.</p>
+    <p>Please read this privacy policy carefully. It applies to all interactions you have with
+    Spotter’s products and services.</p>
 
-  <h1>Spotter Privacy Policy</h1>
-  <h4>March 25, 2015</h4>
-  <p>This document explains in simple terms what information we collect about you, what we use 
-  it for, and the few situations in which we share it with others.</p>
-  <p>Please read this privacy policy carefully. It applies to all interactions you have with 
-  Spotter’s products and services.</p>
+    <h2>The information we collect</h2>
+    <p>When you create an account with Spotter, you give us access to your basic profile information
+    on LinkedIn which includes your full name and email address, current workplace, and industry.</p>
+    <p>Your user account helps you get personalized news recommendations.<p>
+    <p>We receive some other information automatically when you use Spotter. This includes data
+    about your device, software, operating system, operating system- provided device or
+    user-specific advertising IDs for advertisement tracking (“Advertising IDs”), your IP address
+    and the date and time of each request you make to Spotter.</p>
+    <p>So that we can make your Spotter experience better, we collect information about how you
+    view, and interact with content and advertisements through Spotter and on third-party sites
+    with Spotter widgets.</p>
+    <p>If you want to email something you see through Spotter to a friend who isn’t already a Spotter
+    account holder, we may keep their email address for the purpose of sending such email and
+    improving our services. Recipients may contact us at privacy@spotternews.com to request that
+    we remove this information from our database.</p>
 
-  <h2>The information we collect</h2>
-  <p>When you create an account with Spotter, you give us access to your basic profile information 
-  on LinkedIn which includes your full name and email address, current workplace, and industry.</p>
-  <p>Your user account helps you get personalized news recommendations.<p>
-  <p>We receive some other information automatically when you use Spotter. This includes data 
-  about your device, software, operating system, operating system- provided device or
-  user-specific advertising IDs for advertisement tracking (“Advertising IDs”), your IP address 
-  and the date and time of each request you make to Spotter.</p>
-  <p>So that we can make your Spotter experience better, we collect information about how you 
-  view, and interact with content and advertisements through Spotter and on third-party sites 
-  with Spotter widgets.</p>
-  <p>If you want to email something you see through Spotter to a friend who isn’t already a Spotter
-  account holder, we may keep their email address for the purpose of sending such email and 
-  improving our services. Recipients may contact us at privacy@spotternews.com to request that
-  we remove this information from our database.</p>
-  
-  <h2>How we use and disclose your information</h2>
-  <p>We use your information to keep Spotter running, better understand how you use our service, 
-  customize your experience (including the content, marketing materials, and advertisements
-  you see), prevent abuse and improve Spotter.</p>
-  <p>We share your personally identifiable information only under these circumstances:</p>
-  <ul>
-    <li>With your consent, after letting you know what information will be shared, and with whom.</li>
-    <li>If we believe it’s reasonably necessary to comply with a law, regulation or legal process. 
-    If we’re going to release your information, our policy is to provide you with reasonable 
-    advance notice under the circumstances unless we’re prohibited from doing so by law or 
-    court order (e.g., an order under 18 U.S.C. § 2705(b)). We may disclose your information 
-    without giving you prior notice if we believe it’s necessary to prevent imminent and serious 
-    bodily harm to a person. Nothing in this privacy policy is intended to limit any legal 
-    objections or defenses you might have to efforts by third parties to compel disclosure of your 
-    information, including legal orders from the government.</li>
-    <li>To third parties helping us offer and improve our service, such as those providing 
-    Spotter certain technical tools and analytics services (including marketing partners) that 
-    help us understand how people use Spotter so we can make it better. We require those companies 
-    to observe the limitations in this privacy policy.</li>
-    <li>If we sell, transfer or otherwise share some or all of our assets, including the 
-    information identified in this privacy policy, in connection with a merger, acquisition, 
-    reorganization or sale of assets in the event of a bankruptcy. We may also share non-personally 
-    identifiable, non-aggregate information (for example, anonymized Advertising IDs) with 
-    companies that help us improve our products and services, including advertising (such as 
-    research companies and analytics providers). As with your personally identifiable information, 
-    we require that such companies observe the limitations in this privacy policy.</li>
-  </ul>
-  <p>We may disclose aggregate information about how our users use Spotter in a manner doesn’t 
-  identify you individually.</p>
-  
-  <h2>Web storage and tracking policy</h2>
-  <p>Cookies and HTML5 local storage are ways to keep information about your use of Internet 
-  services on your own mobile device or computer.</p>
-  <p>We use cookies and HTML5 local storage to help us create your session, know when you’re 
-  logged in and help us remember certain information about how you interact with Spotter.</p>
-  <p>If you’d rather not use cookies or HTML5 local storage, most browsers give you the option 
-  to turn them off, or require your approval before using them to keep information. If you choose 
-  not to keep information in cookies or HTML5 local storage, though, portions of Spotter may 
-  not work as intended.</p>
-  <p>Spotter also uses web beacons in advertisements to allow Spotter and its advertising 
-  partners to see how users view and engage with advertisements. Depending on your advertising 
-  preferences set in your operating system, Spotter may share your Advertising ID with 
-  advertising partners in an anonymous fashion that is not tied to your name or email address.</p>
-  <p>Some publishers or other third-party services that we partner with may use cookies, 
-  web beacons or other technologies to keep track of your Internet activity. Please note that 
-  this privacy policy explains Spotters’s policies only, and doesn’t cover the practices of 
-  other services.</p>
-  <p>Some browsers make it possible for you to signal that you don’t want your Internet 
-  browsing activity to be tracked. The Internet community hasn’t reached a consensus on how to 
-  best honor these signals, so we don’t respond to Do-Not-Track requests at this time.</p>
-  
-  
-  <h2>Data deletion</h2>
-  <p>If you’d like to delete your account, please send an email to support@spotternews.com with your
-  full name and the email address associated with your account. If we delete your account, 
-  your user profile will no longer be visible on our service, though we may still keep some log 
-  information in non-personally identifiable form and any other information you have made 
-  publicly available through Spotter (comments to content, for example).</p>
-  
-  <h2>Changes to this privacy policy</h2>
-  <p>As Spotter continues to develop, we may decide to revise this privacy policy from time to time. 
-  The most current version will govern our use of your information and will always be at 
-  &nbsp<a href="https://spotternews.com/privacy">https://spotternews.com/privacy</a>, and older 
-  versions are available upon request. If we make changes that we think will substantially 
-  alter your rights, we will notify you by posting a notice on our website. You agree to accept 
-  any changes or revisions to this privacy policy by continuing to use Spotter.</p>
-  
-  <h2>Contact</h2>
-  <p>We’d love to hear your questions, concerns and feedback about this privacy policy. If you 
-  have suggestions for us, let us know at support@spotternews.com.</p>
+    <h2>How we use and disclose your information</h2>
+    <p>We use your information to keep Spotter running, better understand how you use our service,
+    customize your experience (including the content, marketing materials, and advertisements
+    you see), prevent abuse and improve Spotter.</p>
+    <p>We share your personally identifiable information only under these circumstances:</p>
+    <ul>
+      <li>With your consent, after letting you know what information will be shared, and with whom.</li>
+      <li>If we believe it’s reasonably necessary to comply with a law, regulation or legal process.
+      If we’re going to release your information, our policy is to provide you with reasonable
+      advance notice under the circumstances unless we’re prohibited from doing so by law or
+      court order (e.g., an order under 18 U.S.C. § 2705(b)). We may disclose your information
+      without giving you prior notice if we believe it’s necessary to prevent imminent and serious
+      bodily harm to a person. Nothing in this privacy policy is intended to limit any legal
+      objections or defenses you might have to efforts by third parties to compel disclosure of your
+      information, including legal orders from the government.</li>
+      <li>To third parties helping us offer and improve our service, such as those providing
+      Spotter certain technical tools and analytics services (including marketing partners) that
+      help us understand how people use Spotter so we can make it better. We require those companies
+      to observe the limitations in this privacy policy.</li>
+      <li>If we sell, transfer or otherwise share some or all of our assets, including the
+      information identified in this privacy policy, in connection with a merger, acquisition,
+      reorganization or sale of assets in the event of a bankruptcy. We may also share non-personally
+      identifiable, non-aggregate information (for example, anonymized Advertising IDs) with
+      companies that help us improve our products and services, including advertising (such as
+      research companies and analytics providers). As with your personally identifiable information,
+      we require that such companies observe the limitations in this privacy policy.</li>
+    </ul>
+    <p>We may disclose aggregate information about how our users use Spotter in a manner doesn’t
+    identify you individually.</p>
 
-</div>
-</section>
-</main>
+    <h2>Web storage and tracking policy</h2>
+    <p>Cookies and HTML5 local storage are ways to keep information about your use of Internet
+    services on your own mobile device or computer.</p>
+    <p>We use cookies and HTML5 local storage to help us create your session, know when you’re
+    logged in and help us remember certain information about how you interact with Spotter.</p>
+    <p>If you’d rather not use cookies or HTML5 local storage, most browsers give you the option
+    to turn them off, or require your approval before using them to keep information. If you choose
+    not to keep information in cookies or HTML5 local storage, though, portions of Spotter may
+    not work as intended.</p>
+    <p>Spotter also uses web beacons in advertisements to allow Spotter and its advertising
+    partners to see how users view and engage with advertisements. Depending on your advertising
+    preferences set in your operating system, Spotter may share your Advertising ID with
+    advertising partners in an anonymous fashion that is not tied to your name or email address.</p>
+    <p>Some publishers or other third-party services that we partner with may use cookies,
+    web beacons or other technologies to keep track of your Internet activity. Please note that
+    this privacy policy explains Spotters’s policies only, and doesn’t cover the practices of
+    other services.</p>
+    <p>Some browsers make it possible for you to signal that you don’t want your Internet
+    browsing activity to be tracked. The Internet community hasn’t reached a consensus on how to
+    best honor these signals, so we don’t respond to Do-Not-Track requests at this time.</p>
+
+    <h2>Data deletion</h2>
+    <p>If you’d like to delete your account, please send an email to support@spotternews.com with your
+    full name and the email address associated with your account. If we delete your account,
+    your user profile will no longer be visible on our service, though we may still keep some log
+    information in non-personally identifiable form and any other information you have made
+    publicly available through Spotter (comments to content, for example).</p>
+
+    <h2>Changes to this privacy policy</h2>
+    <p>As Spotter continues to develop, we may decide to revise this privacy policy from time to time.
+    The most current version will govern our use of your information and will always be at
+    &nbsp<a href="https://spotternews.com/privacy">https://spotternews.com/privacy</a>, and older
+    versions are available upon request. If we make changes that we think will substantially
+    alter your rights, we will notify you by posting a notice on our website. You agree to accept
+    any changes or revisions to this privacy policy by continuing to use Spotter.</p>
+
+    <h2>Contact</h2>
+    <p>We’d love to hear your questions, concerns and feedback about this privacy policy. If you
+    have suggestions for us, let us know at support@spotternews.com.</p>
+  </div>
+  </section>
+  </main>
 {/template}

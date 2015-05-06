@@ -1,8 +1,7 @@
 {namespace news.comingsoon autoescape="strict"}
 
 /**
- * Main page layout.
- * @param title
+ * Page layout.
  */
 {template .main}
   <head>
@@ -11,7 +10,7 @@
     <meta name="description" content="Spotter is the fastest way to stay on top of companies, people, and industries that matter to you.">
     <meta name="keywords" content="reader,news,spotter,career,tech,rss,company,business,startup,job,funding,alerts,trending,magazine">
     <meta name="author" content="Spotter Technologies, Inc.">
-    <title>{$title}</title>
+    <title>Spotter &mdash; Coming Soon</title>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <link rel="icon" type="image/png" href="/resource/img/favicon.ico">
     <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -21,7 +20,7 @@
     <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
   </head>
   <body>
-    <script src="resources/js/home.js"></script>
+    <script src="/resources/js/home.js"></script>
     <div style="width:100%; margin:0;">
     {call .body data="all" /}
     {call .gatracking /}
@@ -30,7 +29,7 @@
 {/template}
 
 /**
- * Renders the main content
+ * Renders the "Coming soon" content.
  */
 {template .body}
 <main>
@@ -40,7 +39,7 @@
         <div class="row">
           <div class="col-xs-12 coming-soon-col">
             <div class="coming-soon-wrapper">
-              <img id="app-icon" alt="Spotter Logo - Business news, personalized" src="resources/img/spotterLogo3@2x.jpg">
+              <img id="app-icon" alt="Spotter Logo - Business news, personalized." src="/resources/img/spotterLogo3@2x.jpg">
               <br />
               <h1>Coming soon</h1>
             </div>

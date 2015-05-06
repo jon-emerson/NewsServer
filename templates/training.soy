@@ -1,16 +1,16 @@
 {namespace news.training autoescape="strict"}
 
 /**
- * Main page layout.
+ * Page layout.
  */
 {template .main}
   <head>
-    <link rel="stylesheet" type="text/css" href="resources/css/training.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/training.css">
     <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/resources/js/list.min.js"></script>
   </head>
   <body>
-    <script src="resources/training.js"></script>
+    <script src="/resources/training.js"></script>
     <div style="width:100%; margin:0;">
       <div class="leftColumn">
        {call .articleViewer data="all" /}
