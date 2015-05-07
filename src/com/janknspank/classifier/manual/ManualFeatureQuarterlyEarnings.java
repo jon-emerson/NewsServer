@@ -58,8 +58,8 @@ public class ManualFeatureQuarterlyEarnings extends ManualHeuristicFeature {
           FeatureId.OIL_AND_ENERGY,
           FeatureId.UTILITIES);
 
-  public ManualFeatureQuarterlyEarnings(FeatureId featureId) {
-    super(featureId);
+  public ManualFeatureQuarterlyEarnings() {
+    super(FeatureId.MANUAL_HEURISTIC_QUARTERLY_EARNINGS);
   }
 
   @Override

@@ -56,8 +56,8 @@ public class ManualFeatureBigMoney extends ManualHeuristicFeature {
           FeatureId.UTILITIES,
           FeatureId.VENTURE_CAPITAL);
 
-  public ManualFeatureBigMoney(FeatureId featureId) {
-    super(featureId);
+  public ManualFeatureBigMoney() {
+    super(FeatureId.MANUAL_HEURISTIC_BIG_MONEY);
   }
 
   @Override

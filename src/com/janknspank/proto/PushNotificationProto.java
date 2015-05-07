@@ -1356,6 +1356,36 @@ public final class PushNotificationProto {
      */
     com.google.protobuf.ByteString
         getTextBytes();
+
+    // optional int64 article_published_time = 10;
+    /**
+     * <code>optional int64 article_published_time = 10;</code>
+     */
+    boolean hasArticlePublishedTime();
+    /**
+     * <code>optional int64 article_published_time = 10;</code>
+     */
+    long getArticlePublishedTime();
+
+    // repeated string deduping_stems = 11;
+    /**
+     * <code>repeated string deduping_stems = 11;</code>
+     */
+    java.util.List<java.lang.String>
+    getDedupingStemsList();
+    /**
+     * <code>repeated string deduping_stems = 11;</code>
+     */
+    int getDedupingStemsCount();
+    /**
+     * <code>repeated string deduping_stems = 11;</code>
+     */
+    java.lang.String getDedupingStems(int index);
+    /**
+     * <code>repeated string deduping_stems = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getDedupingStemsBytes(int index);
   }
   /**
    * Protobuf type {@code PushNotification}
@@ -1463,6 +1493,19 @@ public final class PushNotificationProto {
               text_ = input.readBytes();
               break;
             }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              articlePublishedTime_ = input.readInt64();
+              break;
+            }
+            case 90: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                dedupingStems_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000400;
+              }
+              dedupingStems_.add(input.readBytes());
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1471,6 +1514,9 @@ public final class PushNotificationProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+          dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(dedupingStems_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -1870,6 +1916,52 @@ public final class PushNotificationProto {
       }
     }
 
+    // optional int64 article_published_time = 10;
+    public static final int ARTICLE_PUBLISHED_TIME_FIELD_NUMBER = 10;
+    private long articlePublishedTime_;
+    /**
+     * <code>optional int64 article_published_time = 10;</code>
+     */
+    public boolean hasArticlePublishedTime() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int64 article_published_time = 10;</code>
+     */
+    public long getArticlePublishedTime() {
+      return articlePublishedTime_;
+    }
+
+    // repeated string deduping_stems = 11;
+    public static final int DEDUPING_STEMS_FIELD_NUMBER = 11;
+    private com.google.protobuf.LazyStringList dedupingStems_;
+    /**
+     * <code>repeated string deduping_stems = 11;</code>
+     */
+    public java.util.List<java.lang.String>
+        getDedupingStemsList() {
+      return dedupingStems_;
+    }
+    /**
+     * <code>repeated string deduping_stems = 11;</code>
+     */
+    public int getDedupingStemsCount() {
+      return dedupingStems_.size();
+    }
+    /**
+     * <code>repeated string deduping_stems = 11;</code>
+     */
+    public java.lang.String getDedupingStems(int index) {
+      return dedupingStems_.get(index);
+    }
+    /**
+     * <code>repeated string deduping_stems = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDedupingStemsBytes(int index) {
+      return dedupingStems_.getByteString(index);
+    }
+
     private void initFields() {
       id_ = "";
       createTime_ = 0L;
@@ -1880,6 +1972,8 @@ public final class PushNotificationProto {
       deviceId_ = "";
       host_ = "";
       text_ = "";
+      articlePublishedTime_ = 0L;
+      dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1919,6 +2013,12 @@ public final class PushNotificationProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(9, getTextBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt64(10, articlePublishedTime_);
+      }
+      for (int i = 0; i < dedupingStems_.size(); i++) {
+        output.writeBytes(11, dedupingStems_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1964,6 +2064,19 @@ public final class PushNotificationProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getTextBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(10, articlePublishedTime_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < dedupingStems_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(dedupingStems_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getDedupingStemsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2103,6 +2216,10 @@ public final class PushNotificationProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         text_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
+        articlePublishedTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -2167,6 +2284,16 @@ public final class PushNotificationProto {
           to_bitField0_ |= 0x00000100;
         }
         result.text_ = text_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.articlePublishedTime_ = articlePublishedTime_;
+        if (((bitField0_ & 0x00000400) == 0x00000400)) {
+          dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              dedupingStems_);
+          bitField0_ = (bitField0_ & ~0x00000400);
+        }
+        result.dedupingStems_ = dedupingStems_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2220,6 +2347,19 @@ public final class PushNotificationProto {
         if (other.hasText()) {
           bitField0_ |= 0x00000100;
           text_ = other.text_;
+          onChanged();
+        }
+        if (other.hasArticlePublishedTime()) {
+          setArticlePublishedTime(other.getArticlePublishedTime());
+        }
+        if (!other.dedupingStems_.isEmpty()) {
+          if (dedupingStems_.isEmpty()) {
+            dedupingStems_ = other.dedupingStems_;
+            bitField0_ = (bitField0_ & ~0x00000400);
+          } else {
+            ensureDedupingStemsIsMutable();
+            dedupingStems_.addAll(other.dedupingStems_);
+          }
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -2917,6 +3057,132 @@ public final class PushNotificationProto {
         return this;
       }
 
+      // optional int64 article_published_time = 10;
+      private long articlePublishedTime_ ;
+      /**
+       * <code>optional int64 article_published_time = 10;</code>
+       */
+      public boolean hasArticlePublishedTime() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int64 article_published_time = 10;</code>
+       */
+      public long getArticlePublishedTime() {
+        return articlePublishedTime_;
+      }
+      /**
+       * <code>optional int64 article_published_time = 10;</code>
+       */
+      public Builder setArticlePublishedTime(long value) {
+        bitField0_ |= 0x00000200;
+        articlePublishedTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 article_published_time = 10;</code>
+       */
+      public Builder clearArticlePublishedTime() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        articlePublishedTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // repeated string deduping_stems = 11;
+      private com.google.protobuf.LazyStringList dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureDedupingStemsIsMutable() {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+          dedupingStems_ = new com.google.protobuf.LazyStringArrayList(dedupingStems_);
+          bitField0_ |= 0x00000400;
+         }
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public java.util.List<java.lang.String>
+          getDedupingStemsList() {
+        return java.util.Collections.unmodifiableList(dedupingStems_);
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public int getDedupingStemsCount() {
+        return dedupingStems_.size();
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public java.lang.String getDedupingStems(int index) {
+        return dedupingStems_.get(index);
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDedupingStemsBytes(int index) {
+        return dedupingStems_.getByteString(index);
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public Builder setDedupingStems(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDedupingStemsIsMutable();
+        dedupingStems_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public Builder addDedupingStems(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDedupingStemsIsMutable();
+        dedupingStems_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public Builder addAllDedupingStems(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureDedupingStemsIsMutable();
+        super.addAll(values, dedupingStems_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public Builder clearDedupingStems() {
+        dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deduping_stems = 11;</code>
+       */
+      public Builder addDedupingStemsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDedupingStemsIsMutable();
+        dedupingStems_.add(value);
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:PushNotification)
     }
 
@@ -2954,18 +3220,19 @@ public final class PushNotificationProto {
       "\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.D" +
       "eviceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001" +
       "\230\246\035d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030" +
-      "\032MongoDB.DeviceRegistration\"\274\002\n\020PushNoti" +
+      "\032MongoDB.DeviceRegistration\"\200\003\n\020PushNoti" +
       "fication\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246" +
       "\035\003\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\022\022\n\nclick_t",
       "ime\030\003 \001(\003\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013de" +
       "vice_type\030\006 \001(\0162\013.DeviceTypeB\004\210\246\035\001\022\037\n\tde" +
       "vice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(" +
-      "\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010:\034\212\265" +
-      "\030\030MongoDB.PushNotification*/\n\nDeviceType" +
-      "\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B-\n\024c" +
-      "om.janknspank.protoB\025PushNotificationPro" +
-      "to"
+      "\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010\022$\n\026" +
+      "article_published_time\030\n \001(\003B\004\210\246\035\001\022\034\n\016de" +
+      "duping_stems\030\013 \003(\tB\004\230\246\035\004:\034\212\265\030\030MongoDB.Pu" +
+      "shNotification*/\n\nDeviceType\022\013\n\007UNKNOWN\020" +
+      "\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002B-\n\024com.janknspan" +
+      "k.protoB\025PushNotificationProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2983,7 +3250,7 @@ public final class PushNotificationProto {
           internal_static_PushNotification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PushNotification_descriptor,
-              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Host", "Text", });
+              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -3019,6 +3286,8 @@ public final class PushNotificationProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);

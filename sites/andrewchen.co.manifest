@@ -1,0 +1,46 @@
+short_name: "Andrew Chen"
+root_domain: "andrewchen.co"
+subdomain_blacklist: "talk.andrewchen.co"
+start_url: "http://andrewchen.co/recent/"
+paragraph_selector: ".main p"
+article_url_pattern {
+  path_regex: "^\\/(?!(recent|list-of-essays|about|author))[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://andrewchen.co/why-we-should-aim-to-build-a-forever-company-not-just-a-unicorn/"
+    article_url: "http://andrewchen.co/how-i-first-met-eric-ries-and-also-why-ive-ordered-his-new-kickstarter-exclusive-book-the-leaders-guide/"
+    article_url: "http://andrewchen.co/my-top-essays-in-2014-about-mobile-growth-and-tech/"
+    article_url: "http://andrewchen.co/why-people-are-turning-off-push/"
+    article_url: "http://andrewchen.co/how-to-solve-the-cold-start-problem-for-social-products/"
+    article_url: "http://andrewchen.co/congrats-to-my-sis-ada-chen-whos-joining-surveymonkey-as-vp-marketing/"
+    non_article_url: "http://andrewchen.co/recent/"
+    non_article_url: "http://andrewchen.co/recent/page/2/"
+    non_article_url: "http://andrewchen.co/list-of-essays/"
+    non_article_url: "http://andrewchen.co/about/"
+    non_article_url: "http://andrewchen.co/author/andrew_null/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 9
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}

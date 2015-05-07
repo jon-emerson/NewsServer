@@ -49,17 +49,17 @@ public abstract class Feature {
       if (featureId.getFeatureType() == FeatureType.MANUAL_HEURISTIC) {
         switch (featureId) {
           case MANUAL_HEURISTIC_ACQUISITIONS:
-            return new ManualFeatureAcquisitions(featureId);
+            return new ManualFeatureAcquisitions();
           case MANUAL_HEURISTIC_BIG_MONEY:
-            return new ManualFeatureBigMoney(featureId);
+            return new ManualFeatureBigMoney();
           case MANUAL_HEURISTIC_FUNDRAISING:
-            return new ManualFeatureFundraising(featureId);
+            return new ManualFeatureFundraising();
           case MANUAL_HEURISTIC_LAUNCHES:
-            return new ManualFeatureLaunches(featureId);
+            return new ManualFeatureLaunches();
           case MANUAL_HEURISTIC_QUARTERLY_EARNINGS:
-            return new ManualFeatureQuarterlyEarnings(featureId);
+            return new ManualFeatureQuarterlyEarnings();
           case MANUAL_HEURISTIC_IS_LIST:
-            return new ManualFeatureIsList(featureId);
+            return new ManualFeatureIsList();
           default:
             throw new ClassifierException("No ManualHeuristicFeature for featureId: " + featureId);
         }

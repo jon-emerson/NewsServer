@@ -104,4 +104,12 @@ message PushNotification {
     (required) = YES,
     (string_length) = 1024
   ];
+
+  optional int64 article_published_time = 10 [
+    (required) = YES
+  ];
+
+  repeated string deduping_stems = 11 [
+    (string_length) = 4
+  ];
 }

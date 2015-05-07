@@ -11,7 +11,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
-import com.google.common.collect.ImmutableList;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
@@ -112,7 +111,7 @@ public class SendWelcomeEmails {
     return message;
   }
 
-  public static void main(String[] args) throws DatabaseSchemaException {
+  public static void sendWelcomeEmails() throws DatabaseSchemaException {
     // Create a Properties object to contain connection configuration information.
     Properties props = System.getProperties();
     props.put("mail.transport.protocol", "smtp");
@@ -137,14 +136,10 @@ public class SendWelcomeEmails {
 
       // For every user with an email address for whom we have not sent a welcome
       // email, send them a welcome email now.
-      // HACK(jonemerson): Right now, only send to Tom.
       Iterable<User> users = Database.with(User.class).get(
-          new QueryOption.WhereEquals("email", ImmutableList.of(
-              "panaceaa@gmail.com")));
-      // TODO(jonemerson): Switch back to this.
-      // Iterable<User> users = Database.with(User.class).get(
-      //     new QueryOption.WhereNotNull("email"),
-      //     new QueryOption.WhereNull("welcome_email_sent_time"));
+          new QueryOption.WhereNotNull("email"),
+          new QueryOption.WhereNotTrue("opt_out_email"),
+          new QueryOption.WhereNull("welcome_email_sent_time"));
       for (User user : users) {
         // Mark that we're sending him/her a welcome email.
         try {
@@ -171,5 +166,9 @@ public class SendWelcomeEmails {
         } catch (MessagingException e) {}
       }
     }
+  }
+
+  public static void main(String[] args) throws DatabaseSchemaException {
+    sendWelcomeEmails();
   }
 }

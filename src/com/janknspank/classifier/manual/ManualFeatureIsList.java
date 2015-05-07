@@ -28,8 +28,8 @@ public class ManualFeatureIsList extends ManualHeuristicFeature {
           .build();
   private static final Iterable<Pattern> BODY_BLACKLIST = Arrays.asList();
 
-  public ManualFeatureIsList(FeatureId featureId) {
-    super(featureId);
+  public ManualFeatureIsList() {
+    super(FeatureId.MANUAL_HEURISTIC_IS_LIST);
   }
 
   @Override

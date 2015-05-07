@@ -83,9 +83,10 @@ public class ParagraphFinder {
     }
   };
 
-  private static Iterable<String> getParagraphsInternal(final DocumentNode documentNode)
+  private static Iterable<String> getParagraphsInternal(DocumentNode documentNode)
       throws RequiredFieldException {
     SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
+
     List<String> paragraphs = Lists.newArrayList();
     for (Node paragraphNode : getParagraphNodes(documentNode)) {
       for (String paragraph : paragraphNode.getTextLines()) {

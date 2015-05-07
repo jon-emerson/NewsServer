@@ -36,7 +36,7 @@ public class Deduper {
    * Helper class that contains extracted values from an article that are
    * helpful for determining dupes.
    */
-  private static class ArticleExtraction {
+  public static class ArticleExtraction {
     private final long publishedTime;
     private final Set<String> stems = Sets.newHashSet();
 
@@ -46,9 +46,13 @@ public class Deduper {
     private long oldestHotDuplicateTime = 0;
 
     public ArticleExtraction(Article article) {
-      publishedTime = Articles.getPublishedTime(article);
-      oldestHotDuplicateTime = article.getPublishedTime();
-      stems.addAll(article.getDedupingStemsList());
+      this(Articles.getPublishedTime(article), article.getDedupingStemsList());
+    }
+
+    public ArticleExtraction(long publishedTime, Iterable<String> stems) {
+      this.publishedTime = publishedTime;
+      oldestHotDuplicateTime = publishedTime;
+      Iterables.addAll(this.stems, stems);
     }
 
     public boolean isDuplicate(ArticleExtraction extraction2) {
