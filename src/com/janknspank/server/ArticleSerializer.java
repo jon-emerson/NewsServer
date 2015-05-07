@@ -100,7 +100,8 @@ public class ArticleSerializer {
 
   static boolean showImageBecauseOfFeature(Article article) {
     return (ArticleFeatures.getFeatureSimilarity(article, FeatureId.ARTS) > 0.9 ||
-        ArticleFeatures.getFeatureSimilarity(article, FeatureId.ARCHITECTURE_AND_PLANNING) > 0.9);
+        ArticleFeatures.getFeatureSimilarity(article, FeatureId.ARCHITECTURE_AND_PLANNING) > 0.9 ||
+        ArticleFeatures.getFeatureSimilarity(article, FeatureId.APPAREL_AND_FASHION) > 0.9);
   }
 
   /**

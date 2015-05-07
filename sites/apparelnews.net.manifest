@@ -1,0 +1,28 @@
+short_name: "ApparelNews"
+root_domain: "apparelnews.net"
+start_url: "https://www.apparelnews.net/"
+paragraph_selector: ".story_body > p"
+article_url_pattern {
+  path_regex: "\\/news\\/20[0-9]{2}\\/[^\\/]+\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://www.apparelnews.net/news/2015/apr/30/made-la-mezon-travels-tie-dye-route/"
+    article_url: "https://www.apparelnews.net/news/2015/apr/30/lawsuit-claims-hedge-fund-benefits-if-american-app/"
+    article_url: "https://www.apparelnews.net/news/2015/apr/30/investigators-raise-tally-140-million-fashion-dist/"
+    article_url: "https://www.apparelnews.net/news/2015/apr/30/port-truckers-strike-better-wages-and-full-time-em/"
+    article_url: "https://www.apparelnews.net/news/2015/apr/30/raj-make-womens-swim-oakley/"
+    non_article_url: "https://www.apparelnews.net/photos/galleries/2015/apr/30/oscar-de-la-renta-colleagues/"
+    non_article_url: "https://www.apparelnews.net/news/swim-surf/"
+    non_article_url: "https://www.apparelnews.net/events/"
+    non_article_url: "http://www.apparelnews.net/classifieds"
+    non_article_url: "https://www.apparelnews.net/accounts/login/?next=/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10506 # Apparel and fashion
+  boost: 3
+}
