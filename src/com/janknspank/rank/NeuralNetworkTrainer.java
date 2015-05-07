@@ -24,6 +24,7 @@ import com.google.api.client.util.Maps;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.common.Averager;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
@@ -156,24 +157,6 @@ public class NeuralNetworkTrainer implements LearningEventListener {
 //    }
     if (bp.getCurrentIteration() >= MAX_ITERATIONS) {
       bp.stopLearning();
-    }
-  }
-
-  /**
-   * Helper class for collecting the average of a progressively received set of
-   * numbers.
-   */
-  private static class Averager {
-    private int count = 0;
-    private double sum = 0;
-
-    public void add(Number number) {
-      count++;
-      sum += number.doubleValue();
-    }
-
-    public double get() {
-      return sum / count;
     }
   }
 

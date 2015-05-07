@@ -38,6 +38,9 @@ import com.janknspank.utils.SendWelcomeEmails;
  * to help with re-engagement.
  */
 public class PushDailyNotifications {
+  private static final Set<String> USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS =
+      ImmutableSet.of("jon@jonemerson.net", "panaceaa@gmail.com", "tom.charytoniuk@gmail.com");
+
   private static class PreviousUserNotifications {
     private final Future<Iterable<PushNotification>> recentNotificationsFuture;
 
@@ -232,14 +235,18 @@ public class PushDailyNotifications {
     }
     if (userTimezone.isWeekend()) {
       // Only notify people on weekends if it's important.
-      scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 200);
+      scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 160);
     }
     if (bestArticle != null
         && bestArticleScore >= scoreNecessaryToTriggerNotification) {
-      return bestArticle.toBuilder()
-          .setTitle(bestArticleScore + "/" + scoreNecessaryToTriggerNotification + " "
-              + bestArticle.getTitle())
-          .build();
+      if (USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
+        return bestArticle.toBuilder()
+            .setTitle(bestArticleScore + "/" + scoreNecessaryToTriggerNotification + " "
+                + bestArticle.getTitle())
+            .build();
+      } else {
+        return bestArticle;
+      }
     }
     return null;
   }

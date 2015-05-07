@@ -1,6 +1,8 @@
 short_name: "Mashable"
 root_domain: "mashable.com"
-start_url: "http://www.mashable.com"
+start_url: "http://mashable.com"
+start_url: "http://mashable.com/tech/"
+start_url: "http://mashable.com/search/?utf8=%E2%9C%93&q=launches&commit=Search"
 subdomain_blacklist: "events.mashable.com"
 subdomain_blacklist: "findjobs.mashable.com"
 path_blacklist {

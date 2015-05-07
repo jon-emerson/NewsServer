@@ -1,0 +1,61 @@
+short_name: "ReadWrite"
+root_domain: "readwrite.com"
+start_url: "http://readwrite.com/"
+path_blacklist {
+  needle: "-sponsored"
+  location: ENDS_WITH
+}
+paragraph_selector: "p" # Note this is a very special site with a fake document node!
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://readwrite.com/2015/05/06/apple-tv-touch-pad-trackpad-yuck"
+    article_url: "http://readwrite.com/2015/05/05/lumia-windows-10-phones-look-awesome"
+    article_url: "http://readwrite.com/2015/04/29/robot-fetch-freight-automate-e-commerce-warehouse"
+    article_url: "http://readwrite.com/2015/04/14/google-enterprise-security-duo-karim-faris"
+    article_url: "http://readwrite.com/2015/04/30/apple-watch-fitness-no-good"
+    non_article_url: "http://readwrite.com/mobile"
+    non_article_url: "http://readwrite.com/wear"
+    non_article_url: "http://readwrite.com/start"
+    non_article_url: "http://readwrite.com/hack"
+    non_article_url: "http://readwrite.com/author/richard-procter"
+    non_article_url: "http://readwrite.com/tag/app-developers"
+  }
+}
+feature_boost_pattern {
+  boost: -3 # This is not a super general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer Electronics
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10531 # Space Exploration
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: -1
+}

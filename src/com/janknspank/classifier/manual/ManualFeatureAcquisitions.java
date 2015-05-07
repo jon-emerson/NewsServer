@@ -47,8 +47,8 @@ public class ManualFeatureAcquisitions extends ManualHeuristicFeature {
           .build();
   private static final Iterable<Pattern> BODY_BLACKLIST = Arrays.asList();
 
-  public ManualFeatureAcquisitions(FeatureId featureId) {
-    super(featureId);
+  public ManualFeatureAcquisitions() {
+    super(FeatureId.MANUAL_HEURISTIC_ACQUISITIONS);
   }
 
   @Override

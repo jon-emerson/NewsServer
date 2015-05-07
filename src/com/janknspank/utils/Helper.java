@@ -1,14 +1,19 @@
 package com.janknspank.utils;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
+import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.FeatureType;
 import com.janknspank.classifier.VectorFeature;
 import com.janknspank.classifier.VectorFeatureCreator;
+import com.janknspank.common.Averager;
 import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
@@ -16,10 +21,75 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
+import com.janknspank.proto.ArticleProto.SocialEngagement;
+import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.rank.Personas;
 
 public class Helper {
+  public static void main(String args[]) throws Exception {
+    Averager launchFacebookAverager = new Averager();
+    Averager launchTwitterAverager = new Averager();
+    Averager notLaunchFacebookAverager = new Averager();
+    Averager notLaunchTwitterAverager = new Averager();
+
+    Set<String> launchArticleUrls = Sets.newHashSet();
+//    launchArticleUrls.addAll(
+//        UrlFinder.findUrls("http://mashable.com/category/launch/"));
+//    launchArticleUrls.addAll(
+//        UrlFinder.findUrls("http://mashable.com/category/apps-and-software/"));
+//    launchArticleUrls.addAll(
+//        UrlFinder.findUrls("http://mashable.com/category/startups/"));
+    Map<String, Article> launchArticles = Maps.newHashMap(
+        ArticleCrawler.getArticles(launchArticleUrls, true /* retain */));
+    for (Article article : Database.with(Article.class).get(
+        //new QueryOption.WhereEqualsNumber("feature.feature_id", FeatureId.INTERNET.getId()),
+        new QueryOption.WhereLike("url", "http://readwrite.*"))) {
+      launchArticles.put(article.getUrl(), article);
+    }
+
+    for (Article article : launchArticles.values()) {
+      boolean isLaunch =
+          article.getUrl().contains("launch")
+          || ArticleFeatures.getFeatureSimilarity(article, FeatureId.MANUAL_HEURISTIC_LAUNCHES) > 0.1;
+      if (isLaunch) {
+        System.out.println(article.getUrl());
+      }
+      SocialEngagement twitterEngagement =
+          SocialEngagements.getForArticle(article, Site.TWITTER);
+      if (twitterEngagement != null) {
+        if (isLaunch) {
+          launchTwitterAverager.add(twitterEngagement.getShareCount());
+        } else {
+          notLaunchTwitterAverager.add(twitterEngagement.getShareCount());
+        }
+      }
+      SocialEngagement facebookEngagement =
+          SocialEngagements.getForArticle(article, Site.FACEBOOK);
+      if (facebookEngagement != null) {
+        if (isLaunch) {
+          launchFacebookAverager.add(facebookEngagement.getShareCount());
+        } else {
+          notLaunchFacebookAverager.add(facebookEngagement.getShareCount());
+        }
+      }
+    }
+    System.out.println();
+    System.out.println("launchFacebookAverager = " + launchFacebookAverager.get()
+        + " from " + launchFacebookAverager.getCount() + " data points");
+    System.out.println("notLaunchFacebookAverager = " + notLaunchFacebookAverager.get()
+        + " from " + notLaunchFacebookAverager.getCount() + " data points");
+    System.out.println("Facebook difference: "
+        + launchFacebookAverager.get() / notLaunchFacebookAverager.get());
+    System.out.println();
+    System.out.println("launchTwitterAverager = " + launchTwitterAverager.get()
+        + " from " + launchTwitterAverager.getCount() + " data points");
+    System.out.println("notLaunchTwitterAverager = " + notLaunchTwitterAverager.get()
+        + " from " + notLaunchTwitterAverager.getCount() + " data points");
+    System.out.println("Twitter difference: "
+        + launchTwitterAverager.get() / notLaunchTwitterAverager.get());
+  }
+
   public static void main5(String args[]) throws Exception {
     int[] bucket = new int[100];
     for (int i = 0; i < bucket.length; i++) {
@@ -66,7 +136,7 @@ public class Helper {
     System.out.println("50% quantile: " + ventureCapitalFeature.getSimilarityThreshold50Percent());
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main2(String args[]) throws Exception {
     for (String email : new String[] { "panaceaa@gmail.com" }) {
       Persona persona = Personas.getByEmail(email);
       Map<String, Article> goodArticles = ArticleCrawler.getArticles(persona.getGoodUrlList(), true);

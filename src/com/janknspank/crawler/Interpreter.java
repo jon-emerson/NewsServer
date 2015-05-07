@@ -36,7 +36,11 @@ public class Interpreter {
         throw new FetchException(
             "URL not found (" + response.getStatusCode() + "): " + url.getUrl());
       }
-      return interpret(url, response.getDocumentNode());
+      DocumentNode documentNode = response.getDocumentNode();
+      if (ReadWriteArticleHandler.isReadWriteArticle(documentNode)) {
+        documentNode = ReadWriteArticleHandler.getRealDocumentNode(documentNode);
+      }
+      return interpret(url, documentNode);
     } finally {
       IOUtils.closeQuietly(reader);
     }

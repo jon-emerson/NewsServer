@@ -118,8 +118,8 @@ public class ManualFeatureLaunches extends ManualHeuristicFeature {
           FeatureId.USER_EXPERIENCE,
           FeatureId.VENTURE_CAPITAL);
 
-  public ManualFeatureLaunches(FeatureId featureId) {
-    super(featureId);
+  public ManualFeatureLaunches() {
+    super(FeatureId.MANUAL_HEURISTIC_LAUNCHES);
   }
 
   @Override
