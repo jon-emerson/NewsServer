@@ -89,3 +89,8 @@ feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
   boost: 0
 }
+feature_boost_pattern {
+  feature_id: 10538 # Oil and Energy
+  path_regex: "^\\/kensilverstein\\/"
+  boost: 2
+}

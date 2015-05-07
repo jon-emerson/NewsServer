@@ -1,6 +1,7 @@
 short_name: "Rigzone"
 root_domain: "rigzone.com"
 start_url: "http://www.rigzone.com/"
+start_url: "http://www.rigzone.com/news/oil_gas/c/1/Industry_Headlines"
 path_blacklist {
   needle: "/data/"
 }
@@ -29,7 +30,7 @@ paragraph_selector: "#articleText p"
 article_url_pattern {
   path_regex: "^\\/news\\/.*\\/[0-9]{5,8}\\/.+(?!\\.asp)$"
 }
-whitelisted_query_parameter: "c_id"
+whitelisted_query_parameter: "a_id"
 test_instructions {
   article_url_detector_checks {
     article_url: "http://www.rigzone.com/news/oil_gas/a/137629/Explosion_Kills_3_Workers_At_Parsley_Energy_Texas_Oil_Rig"

@@ -91,3 +91,13 @@ feature_boost_pattern {
   path_regex: "\\/(sports|blogs\\/dc-sports-bog|blogs\\/football-insider)\\/"
   boost: 0
 }
+feature_boost_pattern {
+  feature_id: 10538 # Oil and Energy
+  path_regex: "\\/energy-environment\\/"
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  path_regex: "\\/energy-environment\\/"
+  boost: 1
+}
