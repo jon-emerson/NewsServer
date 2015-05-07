@@ -1,0 +1,25 @@
+short_name: "Paul Bennetts, VC"
+root_domain: "paulbennetts.co"
+start_url: "http://paulbennetts.co/"
+paragraph_selector: ".entry-content > p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://paulbennetts.co/yahoos-journey-through-the-dotcom-bubble/"
+    article_url: "http://paulbennetts.co/insights-from-etsys-s-1-filing/"
+    article_url: "http://paulbennetts.co/one-data-point-on-gocatch-vs-uber/"
+    article_url: "http://paulbennetts.co/private-market-public-market-disparity/"
+    article_url: "http://paulbennetts.co/mailchimp/"
+    non_article_url: "http://paulbennetts.co/xyz/111"
+    non_article_url: "http://paulbennetts.co/xyz/112"
+    non_article_url: "http://paulbennetts.co/xyz/113"
+    non_article_url: "http://paulbennetts.co/xyz/114"
+    non_article_url: "http://paulbennetts.co/xyz/115"
+  }
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}

@@ -1,51 +1,24 @@
-# Viren is an Oil and Gas investment banker interested in equities
+# Viren is an Oil and Gas investment banker
 name: "Viren Desai"
 email: "virendesai87@gmail.com"
-good_url: "http://www.bloomberg.com/news/articles/2015-04-21/fed-plays-down-liftoff-timing-as-it-emphasizes-gradual-rate-pace"
-good_url: "http://www.bloomberg.com/news/articles/2015-04-21/netflix-s-pursuit-of-tv-domination-has-a-new-step-ownership"
 good_url: "http://www.bloomberg.com/news/articles/2015-04-20/senator-plans-bill-this-year-to-to-lift-u-s-oil-export-ban"
-good_url: "http://www.bloomberg.com/news/articles/2015-03-23/analyst-predicts-apple-will-hit-a-1-trillion-market-cap"
-good_url: "http://www.forbes.com/sites/investor/2015/03/23/meet-the-five-stocks-in-the-dow-that-set-new-highs-during-fridays-rally/"
-good_url: "http://www.bloomberg.com/news/articles/2015-03-24/bitcoin-getting-serious-as-nasdaq-nyse-step-into-digital-craze"
-good_url: "http://www.bloomberg.com/news/articles/2015-03-24/new-york-fed-forms-team-focused-on-cybersecurity-threats"
-good_url: "http://www.reuters.com/article/2015/03/30/japan-economy-output-idUSL3N0WR23E20150330"
-good_url: "http://www.zerohedge.com/news/2015-03-29/australia-start-taxing-bank-deposits"
-good_url: "http://www.reuters.com/article/2015/03/30/us-china-stocks-funds-idUSKBN0MQ03E20150330"
-good_url: "http://www.zerohedge.com/news/2015-04-20/china-easing-combat-darkest-period-2015"
-good_url: "http://www.fool.com/investing/general/2015/04/19/my-505845-netflix-mistake.aspx"
 good_url: "http://seekingalpha.com/news/2439896-exxon-ceo-sees-low-oil-prices-for-next-few-years"
 good_url: "http://www.reuters.com/article/2015/04/19/sabic-results-ceo-idUSL5N0XG03E20150419"
-good_url: "http://www.forbes.com/sites/antoinegara/2015/04/20/morgan-stanley-profits-surge-60-on-trading-and-wealth-management-performance/"
-good_url: "http://www.businessinsider.com/morgan-stanley-q1-earnings-2015-4"
 good_url: "http://seekingalpha.com/article/3092086-u-s-oil-production-has-started-its-decline"
-good_url: "http://seekingalpha.com/news/2444836-facebooks-q1-ad-sales-hurt-by-strong-dollar-maus-up-to-1_44b"
 good_url: "http://seekingalpha.com/article/3048646-oils-plunge-cause-for-concern-or-celebration"
-good_url: "http://seekingalpha.com/article/3091146-netflix-virtuous-cycle-is-intact-but-stock-is-fully-valued"
-good_url: "http://seekingalpha.com/news/2445066-alliance-fiber-up-6_5-percent-on-q1-beat-strong-q2-guidance"
-good_url: "http://www.thestreet.com/story/13121562/1/coca-cola-ko-stock-advancing-today-on-earnings-beat.html"
-good_url: "http://seekingalpha.com/article/3088296-chipotle-beats-estimates-yet-is-down-5-percent-after-hours-a-chance-to-buy"
 good_url: "http://www.worldoil.com/news/2015/1/21/kinder-morgan-buys-hamm-s-hiland-partners-to-gain-bakken-footprint"
-good_url: "http://techcrunch.com/2015/04/16/etsy-stock-surges-86-percent-at-close-of-first-day-of-trading-to-30-per-share/"
-good_url: "http://techcrunch.com/2014/01/26/google-deepmind/"
-good_url: "http://money.cnn.com/2014/02/19/technology/social/facebook-whatsapp/"
-good_url: "http://news.investors.com/technology/042215-749127-facebook-earnings-beat-revenue-misses-costs-soar.htm"
 good_url: "http://news.investors.com/business/042215-749042-oil-stockpiles-hit-record-cushing-growth-slows.htm"
-good_url: "http://news.investors.com/technology/042215-749127-facebook-earnings-beat-revenue-misses-costs-soar.htm"
-good_url: "http://news.investors.com/technology/042215-749106-ebay-paypal-soars-but-marketplaces-declines.htm"
 good_url: "http://www.rigzone.com/news/oil_gas/a/137889/Beach_Ups_Contingent_Resources_of_Nappamerri_Trough_Project_Chevron_Quits"
-good_url: "http://www.marketwatch.com/story/gsams-fourth-annual-insurance-survey-finds-the-most-pessimism-among-insurers-in-four-years-2015-04-21"
-good_url: "http://www.marketwatch.com/story/we-asked-4-robo-advisers-4-human-advisers-for-portfolios-for-the-same-investor-2015-04-21"
 good_url: "http://www.zerohedge.com/news/2015-04-21/oil-drops-after-api-inventories-show-builds-accelerating-again"
-good_url: "http://www.marketwatch.com/story/rate-for-30-year-mortgage-declines-to-365-2015-04-23"
-good_url: "http://www.bloomberg.com/news/articles/2015-04-23/spain-rejects-u-s-extradition-of-banker-in-london-whale-case"
-bad_url: "http://recode.net/2015/02/04/tweets-now-coming-to-your-google-search-results/"
-bad_url: "http://techcrunch.com/2015/02/20/apple-said-to-be-planning-os-x-like-public-beta-seed-program-for-ios-too/"
-bad_url: "http://recode.net/2015/02/24/magic-leap-might-replace-your-smartphone-ceo-says/"
-bad_url: "http://www.huffingtonpost.com/2015/04/22/hillary-clinton-grassroots_n_7117884.html"
-bad_url: "http://www.bbc.co.uk/news/election-2015-32427852"
-bad_url: "http://www.abc.net.au/news/2015-04-22/tasmanian-government-launces-audit-of-redundancy-packages/6412148"
-bad_url: "http://www.marketwatch.com/story/fluke-biomedical-launches-online-training-center-bringing-accessible-training-to-the-biomedical-engineering-community-2015-04-23"
-bad_url: "http://www.reuters.com/article/2015/04/22/novonordisk-saxenda-idUSL5N0XJ3MU20150422"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137618/Palestine_Power_Firm_Cancels_Deal_to_Buy_Leviathan_Natural_Gas"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137612/Key_Petroleum_Prepares_for_Dunnart2_Well_Testing_Program_in_Perth_Basin"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137610/Cue_Energy_Takes_Full_Ownership_of_Kutei_Basins_Mahakam_Hilir_PSC"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137617/NGE_Completes_Sale_of_a_50_Stake_in_PPL_269_in_Papua_New_Guinea_to_Santos"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137550/Its_Time_to_Remove_the_Prohibition_to_Export_Crude_Oil"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137568/Nabors_Industries_Cuts_Workforce_by_12"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137542/Genel_Expects_Regular_Payments_from_Iraqi_Kurdistan_During_2015"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137566/Progress_Challenges_Seen_in_Implementing_Digital_Oilfield_Technology"
+good_url: "http://www.rigzone.com/news/oil_gas/a/137217/Statoil_Gives_GoAhead_For_29B_Oil_Project"
 bad_url: "http://www.marketwatch.com/story/world-143-launches-campaign-partnerships-with-john-stamos-and-shaun-t-2015-04-23"
 bad_url: "http://www.cnbc.com/id/102611258"
 bad_url: "http://www.sfgate.com/technology/businessinsider/article/Sergey-Brin-once-asked-a-lawyer-he-wanted-to-hire-5073120.php"
@@ -55,7 +28,6 @@ bad_url: "http://www.bloomberg.com/news/articles/2015-03-24/here-s-how-top-femal
 bad_url: "http://www.huffingtonpost.com/2015/03/24/arab-leaders-netanyahu-apology_n_6931466.html"
 bad_url: "http://www.slate.com/articles/news_and_politics/politics/2015/03/loretta_lynch_confirmation_mitch_mcconnell_and_the_gop_have_delayed_it_but.single.html"
 bad_url: "http://wordplay.blogs.nytimes.com/2015/03/29/no-net-ensnares-me/"
-bad_url: "http://www.rigzone.com/news/oil_gas/a/137888/New_Zealand_Opens_Block_Offer_2015_for_Exploration_Permits"
 bad_url: "http://mashable.com/2015/04/08/alien-emoji-faq/"
 bad_url: "http://www.elle.com/fashion/accessories/news/a27722/alessandra-ambrosio-on-toe-rings-crop-tops-and-what-to-wear-to-coachella/"
 bad_url: "http://www.marketwatch.com/story/capsule-introduces-healthcares-first-analytics-solution-to-utilize-data-across-all-connected-medical-devices-2015-04-12"
@@ -70,13 +42,6 @@ interest {
   source: USER
   create_time: 1426097593397
   industry_code: 10538
-}
-interest {
-  id: "5518bcfde4b0095b8ace388a"
-  type: INDUSTRY
-  source: USER
-  create_time: 1427684605398
-  industry_code: 10535
 }
 interest {
   id: "552aabfce4b05452292e916d"

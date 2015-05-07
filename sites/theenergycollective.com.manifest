@@ -1,0 +1,40 @@
+short_name: "Energy Collective"
+root_domain: "theenergycollective.com"
+start_url: "http://theenergycollective.com/"
+paragraph_selector: ".paragraph"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/[0-9]{6,}\\/[^\\/]+$"
+}
+path_blacklist {
+  needle: "/podcast-"
+  location: CONTAINS
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://theenergycollective.com/noahdeich/2224586/how-today-s-low-carbon-investors-are-charting-course-financing-tomorrow-s-negative"
+    article_url: "http://theenergycollective.com/eric-wesoff/2223526/tesla-battery-bottom-line-3500-10-kilowatt-hour-system"
+    article_url: "http://theenergycollective.com/energyatmit/2224726/mitei-releases-report-future-solar-energy"
+    article_url: "http://theenergycollective.com/peterlehner/2222701/three-reasons-why-new-flood-protection-standards-are-good-idea"
+    article_url: "http://theenergycollective.com/edfenergyex/2223656/fossil-fuels-havent-lost-race-yet-heres-full-story"
+    non_article_url: "http://theenergycollective.com/energydeborah/2224061/podcast-energy247-no-fuel-costs-sexy-seduction-renewables"
+    non_article_url: "http://theenergycollective.com/about"
+    non_article_url: "http://theenergycollective.com/full-spectrum"
+    non_article_url: "http://theenergycollective.com/all/4788"
+    non_article_url: "http://theenergycollective.com/all/13047"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10538 # Oil & Energy
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10539 # Utilities
+  boost: -1
+}
+feature_boost_pattern {
+  feature_id: 10545 # Environment
+  boost: 1
+}

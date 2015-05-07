@@ -122,4 +122,8 @@ public class UrlCleaner {
     }
     return b.toString();
   }
+
+  public static void main(String args[]) {
+    System.out.println(clean("http://www.rigzone.com/news/article.asp?hpf=1&a_id=138404"));
+  }
 }

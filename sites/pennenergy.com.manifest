@@ -8,7 +8,7 @@ path_blacklist {
 paragraph_selector: "#ContentBody p"
 paragraph_selector: ".entrytext p"
 article_url_pattern {
-  path_regex: "^\\/articles\\/pennenergy\\/20[0-9]{2}\\/[0-1][0-9]\\/[^\\/]+\\.html$"
+  path_regex: "^\\/articles\\/[^\\/]+\\/20[0-9]{2}\\/[0-1][0-9]\\/[^\\/]+\\.html$"
 }
 article_url_pattern {
   path_regex: "^\\/index\\/blogs\\/[^\\/]+\\/20[0-9]{2}\\/[0-1][0-9]\\/[^\\/]+\\.html$"

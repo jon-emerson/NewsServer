@@ -28,7 +28,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10538 # Oil & Energy
-  boost: 0
+  boost: -1
 }
 feature_boost_pattern {
   feature_id: 10514 # Mergers and Acquisitions.
