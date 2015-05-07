@@ -30,9 +30,6 @@ paragraph_selector: "#articleText p"
 article_url_pattern {
   path_regex: "^\\/news\\/.*\\/[0-9]{5,8}\\/.+(?!\\.asp)$"
 }
-article_url_pattern {
-  path_regex: "^\\/news\\/article\\.asp"
-}
 whitelisted_query_parameter: "a_id"
 test_instructions {
   article_url_detector_checks {
