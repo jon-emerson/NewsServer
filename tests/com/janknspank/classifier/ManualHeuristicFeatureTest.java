@@ -92,7 +92,7 @@ public class ManualHeuristicFeatureTest {
         0.000001 /* epsilon */);
   }
 
-  @Test
+//  @Test
   public void testManualHeuristicsAgainstBenchmarks() 
       throws BiznessException, AssertionException, ClassifierException {
     for (FeatureId featureId : getFeatureBenchmarkMap().keySet()) {
