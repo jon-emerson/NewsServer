@@ -19,6 +19,7 @@ public class ManualFeatureIsList extends ManualHeuristicFeature {
           .build();
   private static final Iterable<Pattern> TITLE_BLACKLIST =
       Arrays.asList(Pattern.compile("[0-9]{1,2} in [0-9]{1,2}"),
+          Pattern.compile("[0-9]{1,2} (dead|injured)"),
           Pattern.compile("\\/[0-9][0-9] numbers")
           );
   private static final Map<Pattern, Double> BODY_SCORES =

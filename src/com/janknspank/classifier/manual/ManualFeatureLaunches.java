@@ -16,9 +16,14 @@ public class ManualFeatureLaunches extends ManualHeuristicFeature {
   private static final Map<Pattern, Double> TITLE_SCORES =
       ImmutableMap.<Pattern, Double>builder()
           .put(Pattern.compile("launches"), 1.0)
+          .put(Pattern.compile(" is launching"), 1.0)
           .put(Pattern.compile("launched"), 0.9)
           .put(Pattern.compile("to launch"), 0.9)
           .put(Pattern.compile("releases"), 0.8)
+          .put(Pattern.compile(" will launch "), 0.8)
+          .put(Pattern.compile(" launch: "), 0.8)
+          .put(Pattern.compile(" on launch day:"), 0.8)
+          .put(Pattern.compile(" with launch of "), 0.8)
           .build();
   private static final Iterable<Pattern> TITLE_BLACKLIST =
       Arrays.asList(Pattern.compile("manifesto"),
@@ -69,12 +74,14 @@ public class ManualFeatureLaunches extends ManualHeuristicFeature {
           Pattern.compile("wounded"));
   private static final Map<Pattern, Double> BODY_SCORES =
       ImmutableMap.<Pattern, Double>builder()
+          .put(Pattern.compile("announced they will launch "), 0.8)
+          .put(Pattern.compile(" has launched "), 0.8)
           .put(Pattern.compile("launches"), 0.6)
           .build();
   private static final Iterable<Pattern> BODY_BLACKLIST =
       Arrays.asList(Pattern.compile("manifesto"),
           Pattern.compile("report"),
-          Pattern.compile("ago"),
+          Pattern.compile(" ago"),
           Pattern.compile("was launched"),
           Pattern.compile("social media campaign"), 
           Pattern.compile("fell"),
