@@ -28,7 +28,7 @@ feature_boost_pattern {
 
 feature_boost_pattern {
   feature_id: 10504 # Biotechnology
-  boost: 0
+  boost: -1
 }
 feature_boost_pattern {
   feature_id: 10553 # Mechanical and Industrial Engineering

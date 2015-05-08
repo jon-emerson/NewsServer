@@ -6,6 +6,9 @@
 {template .main}
   {call news.common.head data="all"}
     {param title kind="text"}Copyright and DMCA Policy{/param}
+    {param extraHeaders kind="html"}
+      <link rel="stylesheet" type="text/css" href="/resources/css/legal.css">
+    {/param}
   {/call}
   <body>
     {call news.common.navbar data="all" /}
