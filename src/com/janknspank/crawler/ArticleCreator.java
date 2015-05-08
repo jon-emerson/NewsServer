@@ -56,6 +56,7 @@ class ArticleCreator {
       "http://www.sfgate.com/img/pages/article/opengraph_default.png",
       "http://www.telegraph.co.uk/template/ver1-0/i/telegraphFacebook.jpg",
       "http://thehill.com/sites/default/files/thehill_logo_200.jpg",
+      "http://www.nationaljournal.com/nationaljournal-fb.png",
       "http://www.buffalonews.com/images/BNSocialShareLG.jpg",
       "http://www.abc.net.au/news/linkableblob/6072216/data/abc-news.jpg?2",
       "http://images.forbes.com/media/assets/forbes_1200x1200.jpg",

@@ -41,5 +41,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10542 # Military
-  boost: 0
+  boost: 2
 }

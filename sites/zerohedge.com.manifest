@@ -36,7 +36,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10534 # Foreign Exchange.
-  boost: 3
+  boost: 2
 }
 feature_boost_pattern {
   feature_id: 10535 # Equity Investing.
