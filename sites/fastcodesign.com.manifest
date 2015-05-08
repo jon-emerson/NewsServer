@@ -20,6 +20,9 @@ test_instructions {
   }
 }
 feature_boost_pattern {
+  boost: -5  # Not a super generally relevant site.
+}
+feature_boost_pattern {
   feature_id: 10560 # User Experience
   boost: 1
 }
@@ -35,3 +38,8 @@ feature_boost_pattern {
   feature_id: 10509 # Consumer electronics
   boost: 1
 }
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and advertising
+  boost: 1
+}
+

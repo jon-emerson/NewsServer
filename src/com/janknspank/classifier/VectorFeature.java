@@ -46,18 +46,17 @@ public final class VectorFeature extends Feature {
    */
   @Override
   public double score(ArticleOrBuilder article) {
-    double boost = 0.05 * Feature.getBoost(featureId, article);
+    int boost = Feature.getBoost(featureId, article);
     return score(Vector.fromArticle(article), boost);
   }
 
-  public double score(Vector articleVector, double boost) {
+  public double score(Vector articleVector, int boost) {
     return normalizer.getNormalizedScore(
-        rawScore(this.featureId, featureVector, boost, articleVector));
+        rawScore(this.featureId, featureVector, articleVector), boost);
   }
 
   public double rawScore(ArticleOrBuilder article) {
-    double boost = 0.05 * Feature.getBoost(featureId, article);
-    return rawScore(this.featureId, featureVector, boost, Vector.fromArticle(article));
+    return rawScore(this.featureId, featureVector, Vector.fromArticle(article));
   }
 
   /**
@@ -67,13 +66,10 @@ public final class VectorFeature extends Feature {
    * latter is responsible for building the distribution histogram.
    * @param featureId identifier for the feature we're scoring against
    * @param fectureVector the pre-generated vector for the specified feature ID
-   * @param boost a boost to give this article based on what site it's from,
-   *     what URL path it lives on, etc
    * @param articleVector the pre-generated vector for the specified article
    */
-  static double rawScore(
-      FeatureId featureId, Vector featureVector, double boost, Vector articleVector) {
-    return boost + featureVector.getCosineSimilarity(UNIVERSE_VECTOR, articleVector);
+  static double rawScore(FeatureId featureId, Vector featureVector, Vector articleVector) {
+    return featureVector.getCosineSimilarity(UNIVERSE_VECTOR, articleVector);
   }
 
   static File getVectorFile(FeatureId featureId) throws ClassifierException {

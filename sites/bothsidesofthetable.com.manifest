@@ -51,8 +51,4 @@ feature_boost_pattern {
   feature_id: 10504 # Biotechnology
   boost: 0
 }
-feature_boost_pattern {
-  feature_id: 10560 # User Experience
-  boost: 0
-}
 

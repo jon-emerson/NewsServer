@@ -12,11 +12,11 @@ import com.janknspank.proto.CrawlerProto.CrawlHistory;
 
 /**
  * Reduces the size of our Mongo DB database so that we can stay within our
- * self-imposed quota: ~1gb.
+ * self-imposed quota: ~2gb.
  *
  * Steps performed:
- * - Keep Article count under 50,000 by removing the oldest articles.  (This
- *     keeps the Article collection at around 600 megabytes.)
+ * - Keep Article count under 100,000 by removing the oldest articles.  (This
+ *     keeps the Article collection at around 1.1 gigabytes.)
  * - Repair the database to reclaim the space we created.
  *
  * URLs are NOT pruned - We need them so that we know which articles we've seen
@@ -24,7 +24,7 @@ import com.janknspank.proto.CrawlerProto.CrawlHistory;
  * to remove crawl data from any articles we've pruned above.
  */
 public class PruneMongoDatabase {
-  private static final long MAX_ARTICLE_COUNT = 50000;
+  private static final long MAX_ARTICLE_COUNT = 100000;
 
 //  /**
 //   * Deletes any passed URLs that do not have Articles associated with them in

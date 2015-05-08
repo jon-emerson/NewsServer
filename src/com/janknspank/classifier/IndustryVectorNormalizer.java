@@ -51,8 +51,12 @@ public class IndustryVectorNormalizer {
    * articles are given scores between 0 and 0.8, depending on their relative
    * cosine similarities with the respective industry.
    */
-  public double getNormalizedScore(double rawScore) {
+  public double getNormalizedScore(double rawScore, int boost) {
     double quantile = DistributionBuilder.projectQuantile(getDistribution(), rawScore);
+
+    // THIS SHOULD BE THE ONLY PLACE WHERE BOOSTS ARE CONSIDERED!!!
+    quantile = Math.max(0, Math.min(1, quantile + (boost / 100.0)));
+
     if (quantile < quantileFor10PercentSeed) {
       // This is the range, between 0 and 1, that the given quantile lives
       // between [0, quantileFor10PercentSeed].
@@ -61,29 +65,35 @@ public class IndustryVectorNormalizer {
               ? 0
               : quantile / quantileFor10PercentSeed;
 
-      // Now, we normalize scores in this range to be in [0, 0.8].
-      return 0.8 * positionBetween0And10PercentSeed;
+      // Now, we normalize scores in this range to be in [0, 0.875].
+      return 0.875 * positionBetween0And10PercentSeed;
     } else if (quantile < quantileFor50PercentSeed) {
       // This is the range, between 0 and 1, that the given quantile lives
       // between [quantileFor10PercentSeed, quantileFor50PercentSeed].
-      double positionBetween10And50PercentSeed =
-          (quantileFor50PercentSeed == 0)
-              ? 0
-              : (quantile - quantileFor10PercentSeed)
-                  / (quantileFor50PercentSeed - quantileFor10PercentSeed);
+      double positionBetween10And50PercentSeed;
+      if ((quantile - quantileFor10PercentSeed) >= (quantileFor50PercentSeed - quantileFor10PercentSeed)) {
+        positionBetween10And50PercentSeed = 1;
+      } else if (quantile <= quantileFor10PercentSeed) {
+        positionBetween10And50PercentSeed = 0;
+      } else {
+        positionBetween10And50PercentSeed = (quantile - quantileFor10PercentSeed)
+            / (quantileFor50PercentSeed - quantileFor10PercentSeed);
+      }
 
-      // Now, we normalize scores in this range to be in [0.8, 0.9].
-      return 0.8 + 0.1 * positionBetween10And50PercentSeed;
+      // Now, we normalize scores in this range to be in [0.875, 0.95].
+      return 0.875 + 0.075 * positionBetween10And50PercentSeed;
     }
 
     // OK, we're in the "Top 50%" bracket.  This score is really good!
-    // Find a value, between 0 and 1, that represents this score's overall
-    // position in [quantileFor50PercentSeed, 1].
-    double positionBetween50PercentSeedAnd1 =
-        (quantile - quantileFor50PercentSeed) / (1 - quantileFor50PercentSeed);
-
-    // Now, we normalize scores in this range to be in [0.9, 1].
-    return 0.9 + 0.1 * positionBetween50PercentSeedAnd1;
+    // We normalize scores in this range to be in [0.95, 1].
+    double positionBetween50PercentSeedAnd1;
+    if (quantileFor50PercentSeed == 1) {
+      positionBetween50PercentSeedAnd1 = 1;
+    } else {
+      positionBetween50PercentSeedAnd1 =
+          (quantile - quantileFor50PercentSeed) / (1 - quantileFor50PercentSeed);
+    }
+    return 0.95 + 0.05 * positionBetween50PercentSeedAnd1;
   }
 
   public static IndustryVectorNormalizer fromFile(File normalizerFile)

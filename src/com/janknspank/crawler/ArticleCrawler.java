@@ -16,9 +16,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -293,6 +295,26 @@ public class ArticleCrawler implements Callable<Void> {
         | ParserException | RequiredFieldException e) {
       throw new BiznessException("Could not get articles: " + e.getMessage(), e);
     }
+
+    if (retain) {
+      // Mark any non-retain articles as retain now, so that we never have to
+      // crawl them again.  (Previously, newly crawled articles would make it
+      // into the vectors, only to be pruned later, and then we'd run into
+      // errors (timeouts, 404s, etc) when trying to crawl them after the prune.)
+      Iterable<Article> nonRetainArticles = Iterables.filter(articles.values(),
+          new Predicate<Article>() {
+            @Override
+            public boolean apply(Article article) {
+              return !article.getRetain();
+            }
+          });
+      for (Article nonRetainArticle : nonRetainArticles) {
+        try {
+          Database.set(nonRetainArticle, "retain", true);
+        } catch (DatabaseRequestException | DatabaseSchemaException e) {}
+      }
+    }
+
     return articles;
   }
 

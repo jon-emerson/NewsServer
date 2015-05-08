@@ -32,14 +32,10 @@ feature_boost_pattern {
   boost: 0
 }
 feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}
+feature_boost_pattern {
   feature_id: 10501 # Internet
   boost: -1
-}
-feature_boost_pattern {
-  feature_id: 10560 # User Experience
-  boost: -1
-}
-feature_boost_pattern {
-  feature_id: 10513 # Media (UX)
-  boost: -2
 }

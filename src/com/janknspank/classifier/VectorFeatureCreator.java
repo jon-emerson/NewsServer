@@ -90,6 +90,7 @@ public class VectorFeatureCreator {
       }
     }
     Iterable<Article> seedArticles = ArticleCrawler.getArticles(urls, true /* retain */).values();
+
     System.out.println(Iterables.size(seedArticles) + " articles found");
     return seedArticles;
   }
@@ -132,10 +133,8 @@ public class VectorFeatureCreator {
       throws ClassifierException, DatabaseSchemaException {
     DistributionBuilder builder = new DistributionBuilder();
     for (Map.Entry<Article, Vector> articleVectorEntry : getArticleVectorMap().entrySet()) {
-      Article article = articleVectorEntry.getKey();
       Vector articleVector = articleVectorEntry.getValue();
-      double boost = 0.05 * Feature.getBoost(featureId, article);
-      double score = VectorFeature.rawScore(this.featureId, vector, boost, articleVector);
+      double score = VectorFeature.rawScore(this.featureId, vector, articleVector);
       builder.add(score);
     }
     return builder;
@@ -147,15 +146,7 @@ public class VectorFeatureCreator {
     TopList<Double, Double> topList =
         new TopList<>((int) (Iterables.size(seedArticles) * (1 - percentile)));
     for (Article article : seedArticles) {
-      // Note: Because the scores going into the normalizer at crawl time are
-      // boosted (because {@code VectorFeature#score} calls {@code #rawScore
-      // with a boost value), the similarities here should also be boosted.
-      // Otherwise, we're not comparing apples to apples at crawl time, and
-      // consequently industries with high boost stores receive inappropriate
-      // numbers of articles with inappropriately high vector similarity scores.
-      double boost = 0.05 * Feature.getBoost(featureId, article);
-      double score = VectorFeature.rawScore(
-          this.featureId, vector, boost, Vector.fromArticle(article));
+      double score = VectorFeature.rawScore(this.featureId, vector, Vector.fromArticle(article));
       topList.add(score, score);
     }
     return Iterables.getLast(topList);

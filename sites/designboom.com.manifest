@@ -89,8 +89,8 @@ feature_boost_pattern {
   boost: 2
 }
 feature_boost_pattern {
-  feature_id: 10513 # Media
-  boost: 0
+  feature_id: 10513 # Video production
+  boost: -2
 }
 feature_boost_pattern {
   feature_id: 10517 # Architecture & Planning
