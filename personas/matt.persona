@@ -54,7 +54,6 @@ bad_url: "http://time.com/3815869/10-outdoor-plants-wont-wilt/"
 bad_url: "http://www.breitbart.com/big-government/2015/04/26/11-explosive-clinton-cash-facts-mainstream-media-confirm-are-accurate/"
 bad_url: "http://www.nytimes.com/2015/04/27/nyregion/six-pen-members-decline-gala-after-award-for-charlie-hebdo.html"
 bad_url: "http://www.washingtonpost.com/national/five-missing-after-storm-strikes-alabama-regatta/2015/04/26/95680ada-ec4a-11e4-8666-a1d756d0218e_story.html"
-bad_url: "http://www.forbes.com/sites/kristintablang/2015/04/26/7-jaw-dropping-homes-in-new-york-city-packing-private-pools/"
 interest {
   id: "55036fcfe4b05c7065a87735"
   type: INDUSTRY

@@ -1,15 +1,11 @@
 package com.janknspank.utils;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.Feature;

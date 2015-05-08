@@ -14,7 +14,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.api.client.util.Lists;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -26,7 +25,6 @@ import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.crawler.UrlCleaner;
 import com.janknspank.crawler.UrlWhitelist;
 import com.janknspank.database.Database;
-import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
@@ -92,22 +90,6 @@ public class VectorFeatureCreator {
       }
     }
     Iterable<Article> seedArticles = ArticleCrawler.getArticles(urls, true /* retain */).values();
-
-    // Mark any non-retain articles as retain now, so that we never have to
-    // crawl them again.  (Previously, newly crawled articles would make it
-    // into the vectors, only to be pruned later, and then we'd run into
-    // errors (timeouts, 404s, etc) when trying to crawl them after the prune.)
-    Iterable<Article> nonRetainArticles = Iterables.filter(seedArticles, new Predicate<Article>() {
-      @Override
-      public boolean apply(Article article) {
-        return !article.getRetain();
-      }
-    });
-    for (Article nonRetainArticle : nonRetainArticles) {
-      try {
-        Database.set(nonRetainArticle, "retain", true);
-      } catch (DatabaseRequestException | DatabaseSchemaException e) {}
-    }
 
     System.out.println(Iterables.size(seedArticles) + " articles found");
     return seedArticles;
