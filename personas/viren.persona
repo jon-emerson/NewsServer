@@ -36,6 +36,10 @@ bad_url: "http://www.accountingtoday.com/news/audit-accounting/financial-restate
 bad_url: "http://www.forbes.com/sites/ewanspence/2015/04/25/htc-one-m9-review-has-htc-unlocked-the-secret-of-smartphone-success/"
 bad_url: "http://www.bloomberg.com/news/articles/2015-04-25/islamic-state-fighters-kill-general-and-127-soldiers-seize-dam"
 bad_url: "http://www.bloomberg.com/news/articles/2015-04-25/u-k-labour-pledges-rent-caps-to-protect-generation-rent-"
+bad_url: "http://money.cnn.com/2015/05/08/investing/coke-coca-cola-keurig-green-mountain-monster-beverage/"
+bad_url: "http://seekingalpha.com/article/3159386-portfolio-recovery-associates-q1-results-beat-on-eps-but-miss-on-revenue"
+bad_url: "http://www.marketwatch.com/story/memorial-day-set-to-see-the-most-travelers-in-a-decade-says-aaa-2015-05-08"
+bad_url: "http://www.telegraph.co.uk/news/science/space/11591247/Russias-Progress-cargo-spacecraft-burns-up-over-Pacific.html"
 interest {
   id: "550085b9e4b02da05c56c75b"
   type: INDUSTRY

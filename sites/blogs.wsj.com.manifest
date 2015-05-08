@@ -59,3 +59,8 @@ feature_boost_pattern {
   path_regex: "^\\/accelerators\\/"
   boost: 1
 }
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions
+  path_regex: "^\\/privateequity\\/"
+  boost: 2
+}

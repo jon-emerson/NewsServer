@@ -90,7 +90,7 @@ public class Helper {
         + launchTwitterAverager.get() / notLaunchTwitterAverager.get());
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main5(String args[]) throws Exception {
     int[] bucket = new int[100];
     for (int i = 0; i < bucket.length; i++) {
       bucket[i] = 0;
@@ -118,11 +118,11 @@ public class Helper {
     }
   }
 
-  public static void main5(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     Iterable<Article> seedArticles =
-        new VectorFeatureCreator(FeatureId.VIDEO_PRODUCTION).getSeedArticles();
+        new VectorFeatureCreator(FeatureId.USER_EXPERIENCE).getSeedArticles();
     VectorFeature ventureCapitalFeature =
-        (VectorFeature) Feature.getFeature(FeatureId.VIDEO_PRODUCTION);
+        (VectorFeature) Feature.getFeature(FeatureId.USER_EXPERIENCE);
     TopList<Article, Double> topArticles = new TopList<Article, Double>(2000);
     for (Article seedArticle : seedArticles) {
       topArticles.add(seedArticle, ventureCapitalFeature.rawScore(seedArticle));
@@ -130,10 +130,8 @@ public class Helper {
     System.out.println("Articles:");
     int i = 0;
     for (Article article : topArticles) {
-      if (article.getUrl().equals("http://bits.blogs.nytimes.com/2014/10/28/youtube-weighing-new-subscription-service/")) {
       System.out.println(++i + ". " + topArticles.getValue(article) + ": " + article.getUrl()
           + " -> " + ventureCapitalFeature.score(article));
-      }
     }
 
     System.out.println("10% quantile: " + ventureCapitalFeature.getSimilarityThreshold10Percent());

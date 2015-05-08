@@ -11,6 +11,10 @@ path_blacklist {
   location: CONTAINS
 }
 path_blacklist {
+  needle: "/browbeat/"
+  location: CONTAINS
+}
+path_blacklist {
   needle: "/video/"
   location: CONTAINS
 }
