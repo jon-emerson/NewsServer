@@ -218,6 +218,9 @@ public class FacebookLoginHandler {
       return topIndustryFeatureIds;
     }
 
+    // Always have at least one...
+    TopList<FeatureId, Double> topmostIndustryFeatureIdTracker = new TopList<>(1);
+
     for (Feature feature : Feature.getAllFeatures()) {
       if (feature.getFeatureId() == FeatureId.SPORTS
           || feature.getFeatureId() == FeatureId.LEISURE_TRAVEL_AND_TOURISM) {
@@ -237,11 +240,15 @@ public class FacebookLoginHandler {
 
         // Manual testing showed us that scores < 0.8 tended to be false
         // positives, even if they were the highest scores.
-        if (score > 0.8) {
+        topmostIndustryFeatureIdTracker.add(feature.getFeatureId(), score);
+        if (score > 0.7) {
           topIndustryFeatureIds.add(feature.getFeatureId(), score);
         }
       }
     }
+    FeatureId topmostIndustryFeatureId = Iterables.getFirst(topmostIndustryFeatureIdTracker, null);
+    topIndustryFeatureIds.add(topmostIndustryFeatureId,
+        topmostIndustryFeatureIdTracker.getValue(topmostIndustryFeatureId));
     return topIndustryFeatureIds;
   }
 

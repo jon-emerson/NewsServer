@@ -55,13 +55,18 @@ public class UpdateArticleFeatures {
     }
   }
 
-  public static void main(String args[]) throws Exception {
-    System.out.println("Reading all articles...");
+  private static void update(boolean retain) throws Exception {
+    numUpdated = 0;
+    System.out.println("\nReading " + (retain ? "training" : "non-training") + " articles...");
     List<Article> articles = ImmutableList.copyOf(
         Database.with(Article.class).get(
+            retain
+                ? new QueryOption.WhereTrue("retain")
+                : new QueryOption.WhereNotTrue("retain"),
             new QueryOption.DescendingSort("published_time")));
     int totalArticleCount = articles.size();
-    System.out.println(totalArticleCount + " articles received.  Starting update...");
+    System.out.println(totalArticleCount + " articles received.  "
+        + "Starting " + (retain ? "training" : "non-training") + " update...");
 
     List<Updater> updaters = Lists.newArrayList();
     for (List<Article> sublist : Lists.partition(articles, 100)) {
@@ -72,5 +77,12 @@ public class UpdateArticleFeatures {
     ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
     executor.invokeAll(updaters);
     executor.shutdown();
+  }
+
+  public static void main(String args[]) throws Exception {
+    // Update the training articles first so we can start regenerating the
+    // neural network when this updater's still only half-way.
+    update(true);
+    update(false);
   }
 }
