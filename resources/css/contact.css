@@ -1,4 +1,9 @@
 a {
   color: #FF3F32;
   font-weight: normal;
+  font-size: 15px;
+}
+
+#contact-section {
+  padding-bottom: 32px;
 }
