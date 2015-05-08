@@ -42,7 +42,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10560 # User Experience
-  boost: 1
+  boost: 0
 }
 feature_boost_pattern {
   feature_id: 10558 # Venture Capital

@@ -43,3 +43,7 @@ feature_boost_pattern {
   feature_id: 10502 # Internet
   boost: -2
 }
+feature_boost_pattern {
+  feature_id: 10514 # Mergers and Acquisitions.
+  boost: 0
+}

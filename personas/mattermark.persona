@@ -260,6 +260,7 @@ bad_url: "http://www.ign.com/articles/2015/04/30/invasion-mode-isnt-coming-back-
 bad_url: "http://sploid.gizmodo.com/fast-and-furious-7-ending-scene-recreated-in-gta-v-1701332224/+alissawalker"
 bad_url: "http://news.investors.com/investing/050115-750660-can-these-five-hot-stocks-keep-rising.htm"
 bad_url: "http://news.investors.com/technology-click/050115-750613-brcm-nxpi-sndk-stm-idti-adi-mu-chips-found-in-apple-watch.htm"
+bad_url: "http://www.forbes.com/sites/tomcoughlin/2015/05/08/emc-cloud-storage-flash-memory-and-beyond/"
 interest {
   id: "55034f7de4b097661cf860b8"
   type: INDUSTRY
