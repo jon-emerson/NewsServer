@@ -26,7 +26,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10506 # Apparel and fashion
-  boost: 10
+  boost: 5
 }
 feature_boost_pattern {
   feature_id: 10510 # Consumer goods

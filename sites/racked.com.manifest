@@ -32,7 +32,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10506 # Apparel and fashion
-  boost: 2
+  boost: 4
 }
 feature_boost_pattern {
   feature_id: 10510 # Consumer goods
