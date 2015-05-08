@@ -54,6 +54,10 @@ class ArticleCreator {
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.sfgate.com/img/pages/article/opengraph_default.png",
+      "http://www.telegraph.co.uk/template/ver1-0/i/telegraphFacebook.jpg",
+      "http://thehill.com/sites/default/files/thehill_logo_200.jpg",
+      "http://www.buffalonews.com/images/BNSocialShareLG.jpg",
+      "http://www.abc.net.au/news/linkableblob/6072216/data/abc-news.jpg?2",
       "http://images.forbes.com/media/assets/forbes_1200x1200.jpg",
       "http://images.rigzone.com/images/rz-facebook.jpg",
       "http://www.inc.com/images/incthumb250.png",
@@ -76,7 +80,9 @@ class ArticleCreator {
       Pattern.compile("\\/bhorowitz\\/sites\\/1\\/meta_images\\/original/logo.png(\\?.*)?$"),
       // Bloomberg logo.
       // E.g. http://cdn.gotraffic.net/politics/20150107201907/public/images/logos/FB-Sharing.73b07052.png
-      Pattern.compile("\\/\\/cdn\\.gotraffic\\.net\\/.*FB-Sharing"));
+      Pattern.compile("\\/\\/cdn\\.gotraffic\\.net\\/.*FB-Sharing"),
+      // E.g. http://www.abc.net.au/news/linkableblob/6072216/data/abc-news.jpg
+      Pattern.compile("\\/\\/www\\.abc\\.net\\.au\\/.*\\/data\\/abc-news\\.jpg.*"));
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\\–|\u2014)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),

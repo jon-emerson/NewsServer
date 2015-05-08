@@ -64,6 +64,8 @@ public class ArticleCreatorTest {
     assertTrue(ArticleCreator.isValidImageUrl(
         "http://static2.businessinsider.com/image/54d8f29d6bb3f7073489ad86/"
         + "the-google-backlash-is-growing.jpg"));
+    assertTrue(ArticleCreator.isValidImageUrl(
+        "http://www.abc.net.au/news/image/6363278-3x2-340x227.jpg"));
     assertFalse(ArticleCreator.isValidImageUrl(
         "http://media.cleveland.com/design/alpha/img/logo_cleve.gif"));
     assertFalse(ArticleCreator.isValidImageUrl(
@@ -82,6 +84,8 @@ public class ArticleCreatorTest {
     assertFalse(ArticleCreator.isValidImageUrl(
         "http://cdn.gotraffic.net/politics/20150107201907/public/images/logos/"
         + "FB-Sharing.73b07052.png"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+        "http://www.abc.net.au/news/linkableblob/6072216/data/abc-news.jpg"));
   }
 
   /**

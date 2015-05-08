@@ -2,6 +2,7 @@ package com.janknspank.utils;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -90,7 +91,7 @@ public class Helper {
         + launchTwitterAverager.get() / notLaunchTwitterAverager.get());
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main6(String args[]) throws Exception {
     int[] bucket = new int[100];
     for (int i = 0; i < bucket.length; i++) {
       bucket[i] = 0;
@@ -167,6 +168,19 @@ public class Helper {
             + Iterables.getFirst(article.getParagraphList(), "") + "\"");
         System.out.println();
       }
+    }
+  }
+
+  public static void main(String args[]) throws Exception {
+    for (Article article : Database.with(Article.class).get(
+        new QueryOption.WhereLike("url", "http://uxmag.com/*"),
+        new QueryOption.DescendingSort("published_time"))) {
+      int ageInHours = (int) ((System.currentTimeMillis() - article.getPublishedTime())
+          / TimeUnit.HOURS.toMillis(1));
+      System.out.println(
+          ArticleFeatures.getFeatureSimilarity(article, FeatureId.USER_EXPERIENCE)
+          + " " + ageInHours + "h"
+          + " " + article.getUrl());
     }
   }
 }

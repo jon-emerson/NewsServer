@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.client.util.Lists;
-import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -218,9 +217,6 @@ public class FacebookLoginHandler {
       return topIndustryFeatureIds;
     }
 
-    // Always have at least one...
-    TopList<FeatureId, Double> topmostIndustryFeatureIdTracker = new TopList<>(1);
-
     for (Feature feature : Feature.getAllFeatures()) {
       if (feature.getFeatureId() == FeatureId.SPORTS
           || feature.getFeatureId() == FeatureId.LEISURE_TRAVEL_AND_TOURISM) {
@@ -240,15 +236,11 @@ public class FacebookLoginHandler {
 
         // Manual testing showed us that scores < 0.8 tended to be false
         // positives, even if they were the highest scores.
-        topmostIndustryFeatureIdTracker.add(feature.getFeatureId(), score);
         if (score > 0.7) {
           topIndustryFeatureIds.add(feature.getFeatureId(), score);
         }
       }
     }
-    FeatureId topmostIndustryFeatureId = Iterables.getFirst(topmostIndustryFeatureIdTracker, null);
-    topIndustryFeatureIds.add(topmostIndustryFeatureId,
-        topmostIndustryFeatureIdTracker.getValue(topmostIndustryFeatureId));
     return topIndustryFeatureIds;
   }
 
@@ -312,24 +304,8 @@ public class FacebookLoginHandler {
       DatabaseRequestException {
     User user;
     User existingUser = getExistingUser(fbUser);
-    Iterable<Interest> facebookProfileInterests = getFacebookProfileInterests(fbUser);
     if (existingUser != null) {
-      Iterable<Interest> existingInterestsToRetain = Iterables.filter(
-          existingUser.getInterestList(),
-          new Predicate<Interest>() {
-            @Override
-            public boolean apply(Interest interest) {
-              // Clear out historical LinkedIn implicit interests while we're
-              // here.  NOTE(jonemerson): I think it's a good idea to do this,
-              // for our beta testers.  But maybe it's not.  We'll see.
-              return interest.getSource() != InterestSource.FACEBOOK_PROFILE
-                  && interest.getSource() != InterestSource.LINKED_IN_PROFILE;
-            }
-          });
       user = existingUser.toBuilder()
-          .clearInterest()
-          .addAllInterest(existingInterestsToRetain)
-          .addAllInterest(facebookProfileInterests)
           .setFacebookId(fbUser.getId())
           .setFacebookAccessToken(fbAccessToken)
           .setLastLoginTime(System.currentTimeMillis())
@@ -340,11 +316,10 @@ public class FacebookLoginHandler {
       Database.update(user);
     } else {
       user = getNewUserBuilder(fbUser, fbAccessToken)
-          .addAllInterest(facebookProfileInterests)
+          .addAllInterest(getFacebookProfileInterests(fbUser))
           .build();
       Database.insert(user);
     }
-
     return user;
   }
 

@@ -1,0 +1,26 @@
+# An HR professional.
+name: "Laszlo Bock"
+email: "laszloftw@gmail.com"
+good_url: "http://thenextweb.com/insider/2015/04/28/the-problem-with-human-resources/"
+good_url: "http://www.shrm.org/hrdisciplines/staffingmanagement/articles/pages/labor-market-first-quarter-bls.aspx"
+good_url: "http://www.cnbc.com/id/102662777"
+good_url: "http://www.forbes.com/sites/optum/2015/05/08/saving-for-retirement-your-hsa-can-help/"
+good_url: "http://abcnews.go.com/Business/wireStory/us-employers-add-223000-jobs-rate-falls-54-30897559"
+good_url: "http://www.businessinsider.com/zappos-employees-take-buyouts-new-self-management-structure-2015-5"
+good_url: "http://www.shrm.org/hrdisciplines/staffingmanagement/articles/pages/work-life-balance-working-mothers.aspx
+"
+good_url: "http://www.forbes.com/sites/jacobmorgan/2015/05/08/inside-the-offices-of-linkedin/"
+good_url: "http://www.cbsnews.com/news/zappos-does-away-with-bosses-and-not-everyone-likes-it/"
+good_url: "http://www.shrm.org/hrdisciplines/staffingmanagement/articles/pages/google-age-bias-hiring.aspx"
+good_url: "http://www.hrmorning.com/female-managers-outpace-males-in-the-fight-for-employee-engagement/"
+good_url: "http://blogs.wsj.com/atwork/2015/05/08/helping-the-job-candidates-who-dont-get-hired/"
+good_url: "http://www.bbc.com/news/blogs-ouch-32613957"
+good_url: "http://mashable.com/2015/05/08/zen-payroll-culture/"
+good_url: "http://www.breitbart.com/big-government/2015/05/08/all-net-employment-gains-among-women-went-to-foreign-born-since-recession/"
+interest {
+  id: "55036fcfe4b05c7065a87362"
+  type: INDUSTRY
+  source: USER
+  create_time: 1426288595472
+  industry_code: 10554 # Human Resources
+}
