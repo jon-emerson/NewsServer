@@ -1,0 +1,48 @@
+short_name: "StartupLJackson"
+root_domain: "startupljackson.com"
+start_url: "http://startupljackson.com/"
+paragraph_selector: ".copy > p"
+article_url_pattern {
+  path_regex: "^\\/post\\/[0-9]{10,}\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://startupljackson.com/post/118338084025/secret-financing"
+    article_url: "http://startupljackson.com/post/114347589480/open-letter-to-yc-founders-on-fundraising"
+    article_url: "http://startupljackson.com/post/102141918295/the-counterintuitive-thing-about-counterintuitive"
+    article_url: "http://startupljackson.com/post/87407435460/what-would-you-say-you-do-here-hachette"
+    article_url: "http://startupljackson.com/post/83244692828/html-first"
+    non_article_url: "http://startupljackson.com/ask"
+    non_article_url: "http://startupljackson.com/submit"
+    non_article_url: "http://startupljackson.com/rss"
+    non_article_url: "http://startupljackson.com/random"
+    non_article_url: "http://startupljackson.com/archive"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}

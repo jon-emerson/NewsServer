@@ -67,7 +67,9 @@ class ArticleCreator {
       "http://www.scientificamerican.com/sciam/includes/themes/sciam/images/logo400x400.jpg",
       "http://mw1.wsj.net/MW5/content/images/logos/mw-social-logo.jpg",
       "http://www1.ibdcd.com/images/IBDicon_309171.png",
-      "https://s0.wp.com/i/blank.jpg");
+      "https://s0.wp.com/i/blank.jpg",
+      "http://local.mercurynews.com/common/dfm/assets/logos/1200x627/mercurynews.png",
+      "http://www.buffalonews.com/images/BNSocialShareLG.jpg");
   private static final Set<Pattern> IMAGE_URL_BLACKLIST_PATTERNS = ImmutableSet.of(
       // A black "T", representing the NYTimes.
       // E.g. http://static01.nyt.com/images/icons/t_logo_291_black.png

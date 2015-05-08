@@ -1,0 +1,37 @@
+short_name: "NiemanLab"
+root_domain: "niemanlab.org"
+start_url: "http://www.niemanlab.org/"
+paragraph_selector: ".simple-body p"
+paragraph_blacklist {
+  text_regex: "^RELATED ARTICLE"
+}
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.niemanlab.org/2015/05/newsonomics-tribune-publishing-wraps-its-arms-around-san-diego-and-all-of-southern-california/"
+    article_url: "http://www.niemanlab.org/2015/05/elise-goes-east-how-nprs-new-seoul-bureau-chief-is-using-tumblr-to-complement-her-reporting/"
+    article_url: "http://www.niemanlab.org/2015/05/when-disgusting-goes-viral-strong-negative-emotions-can-push-social-sharing-through-the-roof/"
+    article_url: "http://www.niemanlab.org/2015/05/deciphering-what-the-next-generation-of-public-radio-listeners-wants-through-npr-one/"
+    article_url: "http://www.niemanlab.org/2015/05/the-upshot-uses-geolocation-to-push-readers-deeper-into-data/"
+    article_url: "http://www.niemanlab.org/2015/04/in-earthquake-ravaged-nepal-the-bbc-is-using-messaging-app-viber-to-share-information-and-safety-tips/"
+    non_article_url: "http://www.niemanlab.org/collection/predictions-2015/"
+    non_article_url: "http://www.niemanlab.org/hubs/aggregation-discovery/"
+    non_article_url: "http://www.niemanlab.org/hubs/audience-social/"
+    non_article_url: "http://www.niemanlab.org/hubs/mobile-apps/"
+    non_article_url: "http://www.niemanlab.org/about/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general-consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10557 # Marketing and Advertising
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10544 # Publishing
+  boost: 5
+} 
+

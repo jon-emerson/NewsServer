@@ -1,0 +1,49 @@
+short_name: "aweissman.com"
+root_domain: "aweissman.com"
+start_url: "http://blog.aweissman.com/"
+paragraph_selector: ".post-body div"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[^\\/]+\\.html$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://blog.aweissman.com/2015/05/no-stack-startups.html"
+    article_url: "http://blog.aweissman.com/2015/04/changing-metaphors.html"
+    article_url: "http://blog.aweissman.com/2015/02/the-chaos-theory-of-startups.html"
+    article_url: "http://blog.aweissman.com/2014/11/looking-more-closely.html"
+    article_url: "http://blog.aweissman.com/2014/08/experience.html"
+    non_article_url: "http://blog.aweissman.com/feeds/posts/default"
+    non_article_url: "http://blog.aweissman.com/search?updated-max=2013-10-14T10:49:00-04:00&max-results=15"
+    non_article_url: "http://blog.aweissman.com/xyz111"
+    non_article_url: "http://blog.aweissman.com/xyz112"
+    non_article_url: "http://blog.aweissman.com/xyz113"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital and Private Equity
+  boost: 10
+}
+feature_boost_pattern {
+  feature_id: 20000 # Related to tech startups
+  boost: 5
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10502 # Computer Software
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10503 # Computer Hardware
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 0
+}
+

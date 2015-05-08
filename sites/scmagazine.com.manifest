@@ -1,0 +1,28 @@
+short_name: "SCMagazine"
+root_domain: "scmagazine.com"
+start_url: "http://www.scmagazine.com/"
+paragraph_selector: "article > p"
+article_url_pattern {
+  path_regex: "\\/article\\/[0-9]{5,}\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.scmagazine.com/ioactive-researcher-reveals-lock-flaws-prompts-attorney-response/article/413310/"
+    article_url: "http://www.scmagazine.com/onapsis-release-sap-systems-study/article/413304/"
+    article_url: "http://www.scmagazine.com/mobile-threats-more-than-triple-in-q1-2015-from-q4-2014/article/413301/"
+    article_url: "http://www.scmagazine.com/ec-strategy-would-improve-consumer-access-to-digital-services/article/413294/"
+    article_url: "http://www.scmagazine.com/cisco-writes-up-new-malware-campaign/article/413068/"
+    non_article_url: "http://www.scmagazine.com/solarwinds-log--event-manager/review/4387/"
+    non_article_url: "http://www.scmagazine.com/reviews/section/107/"
+    non_article_url: "http://www.scmagazine.com/resources/section/3179/"
+    non_article_url: "http://www.scmagazine.com/sc-magazine-video/section/2828/"
+    non_article_url: "http://www.scmagazine.com/events/section/109/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10526 # Network Security
+  boost: 3
+}

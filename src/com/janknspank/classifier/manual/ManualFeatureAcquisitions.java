@@ -22,6 +22,12 @@ public class ManualFeatureAcquisitions extends ManualHeuristicFeature {
           .put(Pattern.compile("is buying"), 0.8)
           .put(Pattern.compile("buying .+ for"), 1.0)
           .put(Pattern.compile("to acquire .+illion"), 1.0)
+          .put(Pattern.compile("merger agreement"), 1.0)
+          .put(Pattern.compile("acquisition of"), 0.9)
+          .put(Pattern.compile("possible takeover"), 0.7)
+          .put(Pattern.compile("exploring a sale"), 0.8)
+          .put(Pattern.compile(" buyout"), 0.7)
+          .put(Pattern.compile("merger"), 0.7)
           .build();
   private static final Iterable<Pattern> TITLE_BLACKLIST =
       Arrays.asList(Pattern.compile("for buying"), 
@@ -44,6 +50,9 @@ public class ManualFeatureAcquisitions extends ManualHeuristicFeature {
       ImmutableMap.<Pattern, Double>builder()
           .put(Pattern.compile("acquires"), 0.8)
           .put(Pattern.compile("is acquiring"), 0.8)
+          .put(Pattern.compile("intends to buy"), 0.8)
+          .put(Pattern.compile("acquisition is"), 0.8)
+          .put(Pattern.compile(" put itself on the block"), 0.8)
           .build();
   private static final Iterable<Pattern> BODY_BLACKLIST = Arrays.asList();
 
