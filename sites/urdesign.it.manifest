@@ -38,7 +38,3 @@ feature_boost_pattern {
   feature_id: 10528 # Photography
   boost: 0
 }
-feature_boost_pattern {
-  feature_id: 10513 # Media
-  boost: 0
-}

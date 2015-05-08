@@ -14,6 +14,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.api.client.util.Lists;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -25,6 +26,7 @@ import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.crawler.UrlCleaner;
 import com.janknspank.crawler.UrlWhitelist;
 import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
@@ -90,6 +92,23 @@ public class VectorFeatureCreator {
       }
     }
     Iterable<Article> seedArticles = ArticleCrawler.getArticles(urls, true /* retain */).values();
+
+    // Mark any non-retain articles as retain now, so that we never have to
+    // crawl them again.  (Previously, newly crawled articles would make it
+    // into the vectors, only to be pruned later, and then we'd run into
+    // errors (timeouts, 404s, etc) when trying to crawl them after the prune.)
+    Iterable<Article> nonRetainArticles = Iterables.filter(seedArticles, new Predicate<Article>() {
+      @Override
+      public boolean apply(Article article) {
+        return !article.getRetain();
+      }
+    });
+    for (Article nonRetainArticle : nonRetainArticles) {
+      try {
+        Database.set(nonRetainArticle, "retain", true);
+      } catch (DatabaseRequestException | DatabaseSchemaException e) {}
+    }
+
     System.out.println(Iterables.size(seedArticles) + " articles found");
     return seedArticles;
   }
@@ -132,10 +151,8 @@ public class VectorFeatureCreator {
       throws ClassifierException, DatabaseSchemaException {
     DistributionBuilder builder = new DistributionBuilder();
     for (Map.Entry<Article, Vector> articleVectorEntry : getArticleVectorMap().entrySet()) {
-      Article article = articleVectorEntry.getKey();
       Vector articleVector = articleVectorEntry.getValue();
-      double boost = 0.05 * Feature.getBoost(featureId, article);
-      double score = VectorFeature.rawScore(this.featureId, vector, boost, articleVector);
+      double score = VectorFeature.rawScore(this.featureId, vector, articleVector);
       builder.add(score);
     }
     return builder;
@@ -147,15 +164,7 @@ public class VectorFeatureCreator {
     TopList<Double, Double> topList =
         new TopList<>((int) (Iterables.size(seedArticles) * (1 - percentile)));
     for (Article article : seedArticles) {
-      // Note: Because the scores going into the normalizer at crawl time are
-      // boosted (because {@code VectorFeature#score} calls {@code #rawScore
-      // with a boost value), the similarities here should also be boosted.
-      // Otherwise, we're not comparing apples to apples at crawl time, and
-      // consequently industries with high boost stores receive inappropriate
-      // numbers of articles with inappropriately high vector similarity scores.
-      double boost = 0.05 * Feature.getBoost(featureId, article);
-      double score = VectorFeature.rawScore(
-          this.featureId, vector, boost, Vector.fromArticle(article));
+      double score = VectorFeature.rawScore(this.featureId, vector, Vector.fromArticle(article));
       topList.add(score, score);
     }
     return Iterables.getLast(topList);

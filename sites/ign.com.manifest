@@ -45,7 +45,3 @@ feature_boost_pattern {
   feature_id: 10502 # Computer Software
   boost: -1
 }
-feature_boost_pattern {
-  feature_id: 10513 # Media
-  boost: 0
-}

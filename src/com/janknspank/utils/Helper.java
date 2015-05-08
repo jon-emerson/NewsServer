@@ -1,11 +1,15 @@
 package com.janknspank.utils;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.Feature;
@@ -27,7 +31,7 @@ import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.rank.Personas;
 
 public class Helper {
-  public static void main(String args[]) throws Exception {
+  public static void main4(String args[]) throws Exception {
     Averager launchFacebookAverager = new Averager();
     Averager launchTwitterAverager = new Averager();
     Averager notLaunchFacebookAverager = new Averager();
@@ -118,18 +122,22 @@ public class Helper {
     }
   }
 
-  public static void main4(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     Iterable<Article> seedArticles =
-        new VectorFeatureCreator(FeatureId.VENTURE_CAPITAL).getSeedArticles();
-    VectorFeature ventureCapitalFeature = (VectorFeature) Feature.getFeature(FeatureId.VENTURE_CAPITAL);
-    TopList<String, Double> topArticles = new TopList<String, Double>(2000);
+        new VectorFeatureCreator(FeatureId.VIDEO_PRODUCTION).getSeedArticles();
+    VectorFeature ventureCapitalFeature =
+        (VectorFeature) Feature.getFeature(FeatureId.VIDEO_PRODUCTION);
+    TopList<Article, Double> topArticles = new TopList<Article, Double>(2000);
     for (Article seedArticle : seedArticles) {
-      topArticles.add(seedArticle.getUrl(), ventureCapitalFeature.rawScore(seedArticle));
+      topArticles.add(seedArticle, ventureCapitalFeature.rawScore(seedArticle));
     }
     System.out.println("Articles:");
     int i = 0;
-    for (String article : topArticles) {
-      System.out.println(++i + ". " + topArticles.getValue(article) + ": " + article);
+    for (Article article : topArticles) {
+      if (article.getUrl().equals("http://bits.blogs.nytimes.com/2014/10/28/youtube-weighing-new-subscription-service/")) {
+      System.out.println(++i + ". " + topArticles.getValue(article) + ": " + article.getUrl()
+          + " -> " + ventureCapitalFeature.score(article));
+      }
     }
 
     System.out.println("10% quantile: " + ventureCapitalFeature.getSimilarityThreshold10Percent());

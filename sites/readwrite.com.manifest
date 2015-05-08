@@ -28,6 +28,10 @@ feature_boost_pattern {
   boost: -3 # This is not a super general consumption web site.
 }
 feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  boost: 1
+}
+feature_boost_pattern {
   feature_id: 10509 # Consumer Electronics
   boost: 0
 }
@@ -45,10 +49,6 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10501 # Internet
-  boost: 0
-}
-feature_boost_pattern {
-  feature_id: 10560 # User Experience
   boost: 0
 }
 feature_boost_pattern {

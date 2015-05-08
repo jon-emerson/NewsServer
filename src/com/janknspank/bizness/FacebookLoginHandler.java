@@ -89,8 +89,7 @@ public class FacebookLoginHandler {
    * object, if we've already created a user object for the Facebook user
    * before.
    */
-  private static User getExistingUser(
-      com.restfb.types.User fbUser, String fbAccessToken)
+  private static User getExistingUser(com.restfb.types.User fbUser)
       throws DatabaseSchemaException {
     ListenableFuture<Iterable<User>> userByFacebookIdFuture =
         Database.with(User.class).getFuture(
@@ -305,7 +304,7 @@ public class FacebookLoginHandler {
       throws RequestException, SocialException, DatabaseSchemaException,
       DatabaseRequestException {
     User user;
-    User existingUser = getExistingUser(fbUser, fbAccessToken);
+    User existingUser = getExistingUser(fbUser);
     Iterable<Interest> facebookProfileInterests = getFacebookProfileInterests(fbUser);
     if (existingUser != null) {
       Iterable<Interest> existingInterestsToRetain = Iterables.filter(
@@ -343,19 +342,20 @@ public class FacebookLoginHandler {
   }
 
   public static void main(String args[]) throws Exception {
-    String fbAccessToken;
-    String param = args[0];
-    if (param.contains("@")) {
-      fbAccessToken = Users.getByEmail(param).getFacebookAccessToken();
-    } else {
-      fbAccessToken = param;
-    }
-
-    com.restfb.types.User fbUser = FacebookLoginHandler.getFacebookUser(fbAccessToken);
-    TopList<FeatureId, Double> featureIdTopList = getIndustryFeatureIds(fbUser);
-    for (FeatureId featureId : featureIdTopList) {
-      System.out.println(featureId.getId() + ": " + featureId.getTitle()
-          + " (" + featureIdTopList.getValue(featureId) + ")");
+    for (User user : Database.with(User.class).get(
+        new QueryOption.WhereNotNull("facebook_access_token"))) {
+      System.out.println("\n" + user.getEmail() + ":");
+      try {
+        com.restfb.types.User fbUser =
+            FacebookLoginHandler.getFacebookUser(user.getFacebookAccessToken());
+        TopList<FeatureId, Double> featureIdTopList = getIndustryFeatureIds(fbUser);
+        for (FeatureId featureId : featureIdTopList) {
+          System.out.println(featureId.getId() + ": " + featureId.getTitle()
+              + " (" + featureIdTopList.getValue(featureId) + ")");
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
   }
 }

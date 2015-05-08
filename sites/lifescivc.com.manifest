@@ -24,6 +24,10 @@ feature_boost_pattern {
   boost: -10 # This is not a general consumption web site.
 }
 feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 10
+}
+feature_boost_pattern {
   feature_id: 10558 # Venture Capital and Private Equity
   boost: 10
 }
@@ -41,13 +45,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10503 # Computer Hardware
-  boost: 0
-}
-feature_boost_pattern {
-  feature_id: 10504 # Biotechnology
-  boost: 10
-}
-feature_boost_pattern {
-  feature_id: 10560 # User Experience
   boost: 0
 }

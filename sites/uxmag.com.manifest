@@ -28,7 +28,7 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10560 # User Experience
-  boost: 3
+  boost: 10
 }
 feature_boost_pattern {
   feature_id: 20000 # Related to tech startups
@@ -41,8 +41,4 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10502 # Computer Software
   boost: 1
-}
-feature_boost_pattern {
-  feature_id: 10513 # Media
-  boost: -1
 }

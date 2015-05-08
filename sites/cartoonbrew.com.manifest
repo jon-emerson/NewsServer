@@ -32,7 +32,7 @@ feature_boost_pattern {
   boost: 1
 }
 feature_boost_pattern {
-  feature_id: 10513 # Media
+  feature_id: 10513 # Video production
   boost: 0
 }
 

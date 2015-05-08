@@ -328,7 +328,7 @@ message Distribution {
   message Percentile {
     // A number, between 1 and 100, for which percentile of data this set
     // contains.
-    optional int32 percentile = 1 [
+    optional double percentile_double = 4 [
       (required) = YES
     ];
 

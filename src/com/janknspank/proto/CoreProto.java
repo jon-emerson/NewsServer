@@ -9820,25 +9820,25 @@ public final class CoreProto {
     public interface PercentileOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
-      // optional int32 percentile = 1;
+      // optional double percentile_double = 4;
       /**
-       * <code>optional int32 percentile = 1;</code>
+       * <code>optional double percentile_double = 4;</code>
        *
        * <pre>
        * A number, between 1 and 100, for which percentile of data this set
        * contains.
        * </pre>
        */
-      boolean hasPercentile();
+      boolean hasPercentileDouble();
       /**
-       * <code>optional int32 percentile = 1;</code>
+       * <code>optional double percentile_double = 4;</code>
        *
        * <pre>
        * A number, between 1 and 100, for which percentile of data this set
        * contains.
        * </pre>
        */
-      int getPercentile();
+      double getPercentileDouble();
 
       // optional double value = 2;
       /**
@@ -9935,11 +9935,6 @@ public final class CoreProto {
                 }
                 break;
               }
-              case 8: {
-                bitField0_ |= 0x00000001;
-                percentile_ = input.readInt32();
-                break;
-              }
               case 17: {
                 bitField0_ |= 0x00000002;
                 value_ = input.readDouble();
@@ -9948,6 +9943,11 @@ public final class CoreProto {
               case 24: {
                 bitField0_ |= 0x00000004;
                 dataPointCount_ = input.readInt64();
+                break;
+              }
+              case 33: {
+                bitField0_ |= 0x00000001;
+                percentileDouble_ = input.readDouble();
                 break;
               }
             }
@@ -9990,30 +9990,30 @@ public final class CoreProto {
       }
 
       private int bitField0_;
-      // optional int32 percentile = 1;
-      public static final int PERCENTILE_FIELD_NUMBER = 1;
-      private int percentile_;
+      // optional double percentile_double = 4;
+      public static final int PERCENTILE_DOUBLE_FIELD_NUMBER = 4;
+      private double percentileDouble_;
       /**
-       * <code>optional int32 percentile = 1;</code>
+       * <code>optional double percentile_double = 4;</code>
        *
        * <pre>
        * A number, between 1 and 100, for which percentile of data this set
        * contains.
        * </pre>
        */
-      public boolean hasPercentile() {
+      public boolean hasPercentileDouble() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 percentile = 1;</code>
+       * <code>optional double percentile_double = 4;</code>
        *
        * <pre>
        * A number, between 1 and 100, for which percentile of data this set
        * contains.
        * </pre>
        */
-      public int getPercentile() {
-        return percentile_;
+      public double getPercentileDouble() {
+        return percentileDouble_;
       }
 
       // optional double value = 2;
@@ -10073,7 +10073,7 @@ public final class CoreProto {
       }
 
       private void initFields() {
-        percentile_ = 0;
+        percentileDouble_ = 0D;
         value_ = 0D;
         dataPointCount_ = 0L;
       }
@@ -10089,14 +10089,14 @@ public final class CoreProto {
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         getSerializedSize();
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeInt32(1, percentile_);
-        }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           output.writeDouble(2, value_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           output.writeInt64(3, dataPointCount_);
+        }
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeDouble(4, percentileDouble_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -10107,10 +10107,6 @@ public final class CoreProto {
         if (size != -1) return size;
 
         size = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, percentile_);
-        }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
             .computeDoubleSize(2, value_);
@@ -10118,6 +10114,10 @@ public final class CoreProto {
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt64Size(3, dataPointCount_);
+        }
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeDoubleSize(4, percentileDouble_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -10235,7 +10235,7 @@ public final class CoreProto {
 
         public Builder clear() {
           super.clear();
-          percentile_ = 0;
+          percentileDouble_ = 0D;
           bitField0_ = (bitField0_ & ~0x00000001);
           value_ = 0D;
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -10272,7 +10272,7 @@ public final class CoreProto {
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
             to_bitField0_ |= 0x00000001;
           }
-          result.percentile_ = percentile_;
+          result.percentileDouble_ = percentileDouble_;
           if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
             to_bitField0_ |= 0x00000002;
           }
@@ -10297,8 +10297,8 @@ public final class CoreProto {
 
         public Builder mergeFrom(com.janknspank.proto.CoreProto.Distribution.Percentile other) {
           if (other == com.janknspank.proto.CoreProto.Distribution.Percentile.getDefaultInstance()) return this;
-          if (other.hasPercentile()) {
-            setPercentile(other.getPercentile());
+          if (other.hasPercentileDouble()) {
+            setPercentileDouble(other.getPercentileDouble());
           }
           if (other.hasValue()) {
             setValue(other.getValue());
@@ -10333,55 +10333,55 @@ public final class CoreProto {
         }
         private int bitField0_;
 
-        // optional int32 percentile = 1;
-        private int percentile_ ;
+        // optional double percentile_double = 4;
+        private double percentileDouble_ ;
         /**
-         * <code>optional int32 percentile = 1;</code>
+         * <code>optional double percentile_double = 4;</code>
          *
          * <pre>
          * A number, between 1 and 100, for which percentile of data this set
          * contains.
          * </pre>
          */
-        public boolean hasPercentile() {
+        public boolean hasPercentileDouble() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional int32 percentile = 1;</code>
+         * <code>optional double percentile_double = 4;</code>
          *
          * <pre>
          * A number, between 1 and 100, for which percentile of data this set
          * contains.
          * </pre>
          */
-        public int getPercentile() {
-          return percentile_;
+        public double getPercentileDouble() {
+          return percentileDouble_;
         }
         /**
-         * <code>optional int32 percentile = 1;</code>
+         * <code>optional double percentile_double = 4;</code>
          *
          * <pre>
          * A number, between 1 and 100, for which percentile of data this set
          * contains.
          * </pre>
          */
-        public Builder setPercentile(int value) {
+        public Builder setPercentileDouble(double value) {
           bitField0_ |= 0x00000001;
-          percentile_ = value;
+          percentileDouble_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional int32 percentile = 1;</code>
+         * <code>optional double percentile_double = 4;</code>
          *
          * <pre>
          * A number, between 1 and 100, for which percentile of data this set
          * contains.
          * </pre>
          */
-        public Builder clearPercentile() {
+        public Builder clearPercentileDouble() {
           bitField0_ = (bitField0_ & ~0x00000001);
-          percentile_ = 0;
+          percentileDouble_ = 0D;
           onChanged();
           return this;
         }
@@ -18747,47 +18747,48 @@ public final class CoreProto {
       "\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001(\010B\010\210\246\035\001\220\246\035" +
       "\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001:(\212\265\030$MongoDB.TrainedArticleClassifi" +
-      "cation\"\231\001\n\014Distribution\0222\n\npercentile\030\001 " +
-      "\003(\0132\030.Distribution.PercentileB\004\210\246\035\001\032U\n\nP" +
-      "ercentile\022\030\n\npercentile\030\001 \001(\005B\004\210\246\035\001\022\023\n\005v" +
-      "alue\030\002 \001(\001B\004\210\246\035\001\022\030\n\020data_point_count\030\003 \001" +
-      "(\003\"\226\003\n\026ShareNormalizationData\022T\n\027time_ra" +
-      "nge_distribution\030\002 \003(\0132-.ShareNormalizat" +
-      "ionData.TimeRangeDistributionB\004\210\246\035\001\022J\n\022d",
-      "omain_share_count\030\003 \003(\0132(.ShareNormaliza" +
-      "tionData.DomainShareCountB\004\210\246\035\001\032x\n\025TimeR" +
-      "angeDistribution\022\032\n\014start_millis\030\001 \001(\003B\004" +
-      "\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246\035\001\022)\n\014distri" +
-      "bution\030\003 \001(\0132\r.DistributionB\004\210\246\035\001\032`\n\020Dom" +
-      "ainShareCount\022\024\n\006domain\030\001 \001(\tB\004\210\246\035\001\022\033\n\ra" +
-      "rticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_count\030" +
-      "\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001 \001(\tB\024\210" +
-      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(\tB\024\210\246\035\001" +
-      "\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230",
-      "\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013cr" +
-      "eate_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL" +
-      ".UrlRating\"\301\002\n\021KeywordToEntityId\022\034\n\002id\030\001" +
-      " \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB" +
-      "\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035" +
-      "\005\250\246\035\001\022\037\n\tentity_id\030\004 \001(\tB\014\230\246\035\030\250\246\035\001\220\246\035\005\022\037" +
-      "\n\021top_industry_id_1\030\005 \001(\005B\004\220\246\035\005\022\037\n\021top_i" +
-      "ndustry_id_2\030\006 \001(\005B\004\220\246\035\005\022\037\n\021top_industry" +
-      "_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005count\030\010 \001(\005B\010\210\246\035\001\220\246" +
-      "\035\005\022\025\n\007removed\030\t \001(\010B\004\220\246\035\005:\033\212\265\030\027MySQL.Key",
-      "wordToEntityId\"\242\002\n\037IndustryVectorNormali" +
-      "zationData\022)\n\014distribution\030\001 \001(\0132\r.Distr" +
-      "ibutionB\004\210\246\035\001\022-\n\037similarity_threshold_10" +
-      "_percent\030\002 \001(\001B\004\210\246\035\001\022-\n\037similarity_thres" +
-      "hold_50_percent\030\003 \001(\001B\004\210\246\035\001\022:\n,ratio_of_" +
-      "articles_above_threshold_10_percent\030\004 \001(" +
-      "\001B\004\210\246\035\001\022:\n,ratio_of_articles_above_thres" +
-      "hold_50_percent\030\005 \001(\001B\004\210\246\035\001\"\323\001\n\010Location" +
-      "\022\036\n\014country_code\030\001 \001(\tB\010\210\246\035\001\230\246\035\005\022\032\n\014coun" +
-      "try_name\030\002 \001(\tB\004\230\246\0352\022\030\n\nstate_code\030\003 \001(\t",
-      "B\004\230\246\035\005\022\030\n\nstate_name\030\004 \001(\tB\004\230\246\0352\022\027\n\tcity" +
-      "_name\030\005 \001(\tB\004\230\246\0352\022\031\n\013postal_code\030\006 \001(\tB\004" +
-      "\230\246\035\n\022\020\n\010latitude\030\007 \001(\001\022\021\n\tlongitude\030\010 \001(" +
-      "\001B!\n\024com.janknspank.protoB\tCoreProto"
+      "cation\"\240\001\n\014Distribution\0222\n\npercentile\030\001 " +
+      "\003(\0132\030.Distribution.PercentileB\004\210\246\035\001\032\\\n\nP" +
+      "ercentile\022\037\n\021percentile_double\030\004 \001(\001B\004\210\246" +
+      "\035\001\022\023\n\005value\030\002 \001(\001B\004\210\246\035\001\022\030\n\020data_point_co" +
+      "unt\030\003 \001(\003\"\226\003\n\026ShareNormalizationData\022T\n\027" +
+      "time_range_distribution\030\002 \003(\0132-.ShareNor" +
+      "malizationData.TimeRangeDistributionB\004\210\246",
+      "\035\001\022J\n\022domain_share_count\030\003 \003(\0132(.ShareNo" +
+      "rmalizationData.DomainShareCountB\004\210\246\035\001\032x" +
+      "\n\025TimeRangeDistribution\022\032\n\014start_millis\030" +
+      "\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001(\003B\004\210\246\035\001\022)\n" +
+      "\014distribution\030\003 \001(\0132\r.DistributionB\004\210\246\035\001" +
+      "\032`\n\020DomainShareCount\022\024\n\006domain\030\001 \001(\tB\004\210\246" +
+      "\035\001\022\033\n\rarticle_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share" +
+      "_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRating\022 \n\002id\030\001" +
+      " \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n\005email\030\002 \001(" +
+      "\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003url\030\003 \001(\tB\021\210\246",
+      "\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001(\001B\010\210\246\035\001\220\246\035" +
+      "\005\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240\246\035\003\220\246\035\005:\023\212\265" +
+      "\030\017MySQL.UrlRating\"\301\002\n\021KeywordToEntityId\022" +
+      "\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword" +
+      "\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001" +
+      "\220\246\035\005\230\246\035\005\250\246\035\001\022\037\n\tentity_id\030\004 \001(\tB\014\230\246\035\030\250\246\035" +
+      "\001\220\246\035\005\022\037\n\021top_industry_id_1\030\005 \001(\005B\004\220\246\035\005\022\037" +
+      "\n\021top_industry_id_2\030\006 \001(\005B\004\220\246\035\005\022\037\n\021top_i" +
+      "ndustry_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005count\030\010 \001(\005B" +
+      "\010\210\246\035\001\220\246\035\005\022\025\n\007removed\030\t \001(\010B\004\220\246\035\005:\033\212\265\030\027My",
+      "SQL.KeywordToEntityId\"\242\002\n\037IndustryVector" +
+      "NormalizationData\022)\n\014distribution\030\001 \001(\0132" +
+      "\r.DistributionB\004\210\246\035\001\022-\n\037similarity_thres" +
+      "hold_10_percent\030\002 \001(\001B\004\210\246\035\001\022-\n\037similarit" +
+      "y_threshold_50_percent\030\003 \001(\001B\004\210\246\035\001\022:\n,ra" +
+      "tio_of_articles_above_threshold_10_perce" +
+      "nt\030\004 \001(\001B\004\210\246\035\001\022:\n,ratio_of_articles_abov" +
+      "e_threshold_50_percent\030\005 \001(\001B\004\210\246\035\001\"\323\001\n\010L" +
+      "ocation\022\036\n\014country_code\030\001 \001(\tB\010\210\246\035\001\230\246\035\005\022" +
+      "\032\n\014country_name\030\002 \001(\tB\004\230\246\0352\022\030\n\nstate_cod",
+      "e\030\003 \001(\tB\004\230\246\035\005\022\030\n\nstate_name\030\004 \001(\tB\004\230\246\0352\022" +
+      "\027\n\tcity_name\030\005 \001(\tB\004\230\246\0352\022\031\n\013postal_code\030" +
+      "\006 \001(\tB\004\230\246\035\n\022\020\n\010latitude\030\007 \001(\001\022\021\n\tlongitu" +
+      "de\030\010 \001(\001B!\n\024com.janknspank.protoB\tCorePr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18859,7 +18860,7 @@ public final class CoreProto {
           internal_static_Distribution_Percentile_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Distribution_Percentile_descriptor,
-              new java.lang.String[] { "Percentile", "Value", "DataPointCount", });
+              new java.lang.String[] { "PercentileDouble", "Value", "DataPointCount", });
           internal_static_ShareNormalizationData_descriptor =
             getDescriptor().getMessageTypes().get(8);
           internal_static_ShareNormalizationData_fieldAccessorTable = new
