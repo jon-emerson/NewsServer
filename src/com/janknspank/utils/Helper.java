@@ -191,7 +191,7 @@ public class Helper {
     }
   }
 
-  public static void main6(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     for (String email : Personas.getPersonaMap().keySet()) {
       System.out.println(email + ":");
       Persona persona = Personas.getByEmail(email);
@@ -210,7 +210,7 @@ public class Helper {
     }
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main6(String args[]) throws Exception {
     List<ListenableFuture<Article>> futures = Lists.newArrayList();
     for (Article article : Database.with(Article.class).get()) {
       List<SocialEngagement> updatedEngagements = Lists.newArrayList();
