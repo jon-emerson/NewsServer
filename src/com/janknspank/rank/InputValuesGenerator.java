@@ -103,21 +103,24 @@ public class InputValuesGenerator {
    *  1.0 - Strong match on 3 or more industries
    */
   public static double relevanceToUserIndustries(User user, Article article) {
-    boolean matched = false;
-    int numAbove90Percentile = 0;
+    boolean matchedAbove80 = false;
+    int numAbove85Percentile = 0;
 
     Map<FeatureId, Double> articleIndustryMap = getArticleIndustryMap(article);
     for (FeatureId industryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
       if (articleIndustryMap.containsKey(industryFeatureId)) {
-        matched = true;
-        if (articleIndustryMap.get(industryFeatureId) > 0.9) {
-          numAbove90Percentile++;
+        double similarity = articleIndustryMap.get(industryFeatureId);
+        if (similarity > 0.8) {
+          matchedAbove80 = true;
+        }
+        if (similarity > 0.85) {
+          numAbove85Percentile++;
         }
       }
     }
-    switch (numAbove90Percentile) {
+    switch (numAbove85Percentile) {
       case 0:
-        return matched ? 0.5 : 0.0;
+        return matchedAbove80 ? 0.5 : 0.0;
       case 1:
         return 0.8;
       case 2:
