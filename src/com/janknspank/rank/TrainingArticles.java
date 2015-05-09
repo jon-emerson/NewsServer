@@ -2,24 +2,17 @@ package com.janknspank.rank;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.crawler.ArticleCrawler;
-import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserAction;
-import com.janknspank.proto.UserProto.UserAction.ActionType;
 
 /**
  * Helper class for generating a set of Articles to train the neural network
@@ -63,82 +56,6 @@ public class TrainingArticles {
     return articleMap;
   }
 
-  /**
-   * Returns the users we trust to give us good training data via UserActions.
-   */
-  private static Map<String, User> getUserActionTrustedUsers() throws DatabaseSchemaException {
-    Map<String, User> users = Maps.newHashMap();
-    for (User user : Database.with(User.class).get(
-        new QueryOption.WhereEquals("email", ImmutableList.of(
-            "dvoytenko@yahoo.com",
-            "jon@jonemerson.net",
-            "panaceaa@gmail.com"
-            // "virendesai87@gmail.com"
-            )))) {
-      users.put(user.getId(), user);
-    }
-    return users;
-  }
-
-  /**
-   * Returns a list of TrainingArticles derived from VOTE_UP or X_OUT user
-   * actions from users we trust to be of higher quality.
-   */
-  private static List<TrainingArticle> getUserActionTrainingArticles(ActionType actionType)
-      throws DatabaseSchemaException, BiznessException {
-    Map<String, User> users = getUserActionTrustedUsers();
-
-    // For ActionType.VOTE_UP, ignore any URLs that were later unvoted up.  For
-    // convenience, we have a global blacklist here.  To be 100% correct, we'd
-    // have individual backlists per-user... but this is easier and probably 99%
-    // accurate.
-    Set<String> urlIdsToIgnore = Sets.newHashSet();
-    if (actionType == ActionType.VOTE_UP) {
-      for (UserAction userAction : Database.with(UserAction.class).get(
-          new QueryOption.WhereEquals("user_id", users.keySet()),
-          new QueryOption.WhereEqualsEnum("action_type", ActionType.UNVOTE_UP))) {
-        urlIdsToIgnore.add(userAction.getUrlId());
-      }
-    }
-
-    // Figure out training articles for each of the unblacklisted vote up
-    // actions.
-    List<TrainingArticle> trainingArticles = Lists.newArrayList();
-    for (User user : users.values()) {
-      Iterable<UserAction> userActions = Database.with(UserAction.class).get(
-          new QueryOption.WhereEquals("user_id", user.getId()),
-          new QueryOption.WhereEqualsEnum("action_type", actionType));
-      System.out.println("For " + user.getEmail() + ", " + Iterables.size(userActions)
-          + " " + actionType.name() + " user actions found");
-
-      Set<String> urlsToCrawl = Sets.newHashSet();
-      for (UserAction userAction : userActions) {
-        if (!urlIdsToIgnore.contains(userAction.getUrlId())) {
-          urlsToCrawl.add(userAction.getUrl());
-        }
-      }
-
-      Map<String, Article> articleMap = getArticles(urlsToCrawl);
-      for (UserAction userAction : userActions) {
-        if (userAction.hasOnStreamForInterest()) {
-          // Ignore these for now.  They're from substreams, e.g. the user is
-          // viewing a specific entity or topic, not their main stream.
-          continue;
-        }
-        if (articleMap.containsKey(userAction.getUrl())) {
-          User modifiedUser = user.toBuilder()
-              .clearInterest()
-              .addAllInterest(userAction.getInterestList())
-              .build();
-          trainingArticles.add(
-              new TrainingArticle(articleMap.get(userAction.getUrl()), modifiedUser,
-                  actionType == ActionType.VOTE_UP ? 1.0 : 0.0));
-        }
-      }
-    }
-    return trainingArticles;
-  }
-
   private static List<TrainingArticle> getPersonaTrainingArticles() throws BiznessException {
     List<TrainingArticle> trainingArticles = Lists.newArrayList();
     for (Persona persona : Personas.getPersonaMap().values()) {
@@ -171,9 +88,7 @@ public class TrainingArticles {
   public static synchronized Iterable<TrainingArticle> getTrainingArticles()
       throws DatabaseSchemaException, BiznessException {
     if (ALL_TRAINING_ARTICLES == null) {
-      ALL_TRAINING_ARTICLES = Iterables.concat(
-          getPersonaTrainingArticles(),
-          getUserActionTrainingArticles(ActionType.VOTE_UP));
+      ALL_TRAINING_ARTICLES = getPersonaTrainingArticles();
     }
     return Iterables.filter(ALL_TRAINING_ARTICLES, new Predicate<TrainingArticle>() {
       @Override
