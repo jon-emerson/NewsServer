@@ -104,7 +104,7 @@ public class InputValuesGenerator {
    */
   public static double relevanceToUserIndustries(User user, Article article) {
     boolean matchedAbove80 = false;
-    int numAbove85Percentile = 0;
+    int numAbove90Percentile = 0;
 
     Map<FeatureId, Double> articleIndustryMap = getArticleIndustryMap(article);
     for (FeatureId industryFeatureId : UserIndustries.getIndustryFeatureIds(user)) {
@@ -113,12 +113,12 @@ public class InputValuesGenerator {
         if (similarity > 0.8) {
           matchedAbove80 = true;
         }
-        if (similarity > 0.85) {
-          numAbove85Percentile++;
+        if (similarity > 0.9) {
+          numAbove90Percentile++;
         }
       }
     }
-    switch (numAbove85Percentile) {
+    switch (numAbove90Percentile) {
       case 0:
         return matchedAbove80 ? 0.5 : 0.0;
       case 1:
