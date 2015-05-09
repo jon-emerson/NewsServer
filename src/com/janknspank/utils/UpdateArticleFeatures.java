@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -55,7 +56,8 @@ public class UpdateArticleFeatures {
     }
   }
 
-  private static void update(boolean retain) throws Exception {
+  private static void update(boolean retain, long publishTimeStart, long publishTimeEnd)
+      throws Exception {
     numUpdated = 0;
     System.out.println("\nReading " + (retain ? "training" : "non-training") + " articles...");
     List<Article> articles = ImmutableList.copyOf(
@@ -63,6 +65,8 @@ public class UpdateArticleFeatures {
             retain
                 ? new QueryOption.WhereTrue("retain")
                 : new QueryOption.WhereNotTrue("retain"),
+            new QueryOption.WhereGreaterThanOrEquals("published_time", publishTimeStart),
+            new QueryOption.WhereLessThanOrEquals("published_time", publishTimeEnd),
             new QueryOption.DescendingSort("published_time")));
     int totalArticleCount = articles.size();
     System.out.println(totalArticleCount + " articles received.  "
@@ -82,7 +86,18 @@ public class UpdateArticleFeatures {
   public static void main(String args[]) throws Exception {
     // Update the training articles first so we can start regenerating the
     // neural network when this updater's still only half-way.
-    update(true);
-    update(false);
+    update(true, 0, Long.MAX_VALUE);
+
+    // Now, go in date order, newest first.
+    int numDays = 7;
+    for (int daysAgo = 1; daysAgo <= numDays; daysAgo++) {
+      long publishTimeStart = (daysAgo == numDays)
+          ? 0
+          : System.currentTimeMillis() - TimeUnit.DAYS.toMillis(daysAgo);
+      long publishTimeEnd = (daysAgo == 1)
+          ? Long.MAX_VALUE
+          : System.currentTimeMillis() - TimeUnit.DAYS.toMillis(daysAgo - 1);
+      update(false, publishTimeStart, publishTimeEnd);
+    }
   }
 }

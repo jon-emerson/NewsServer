@@ -38,7 +38,7 @@ public abstract class TimeRankingStrategy {
 
   private static boolean isWeekend(User user) {
     try {
-      UserTimezone userTimezone = UserTimezone.getForUser(user);
+      UserTimezone userTimezone = UserTimezone.getForUser(user, false /* update */);
       return userTimezone.isWeekend();
     } catch (Exception e) {}
     return false;

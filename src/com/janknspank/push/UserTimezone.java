@@ -30,9 +30,10 @@ public class UserTimezone {
     return System.currentTimeMillis();
   }
 
-  public static UserTimezone getForUser(User user)
+  public static UserTimezone getForUser(User user, boolean update)
       throws DatabaseSchemaException {
-    if (user.hasLastIpAddress()
+    if (update
+        && user.hasLastIpAddress()
         && (!user.hasTimezoneEstimate()
             || (System.currentTimeMillis() - user.getLastTimezoneEstimateUpdate()
                 > TimeUnit.DAYS.toMillis(7)))) {
