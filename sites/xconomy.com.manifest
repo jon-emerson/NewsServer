@@ -1,0 +1,50 @@
+short_name: "Xconomy"
+root_domain: "xconomy.com"
+start_url: "http://www.xconomy.com/"
+paragraph_selector: ".entry p"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+paragraph_blacklist {
+  text_regex: "^Submit to Hacker"
+}
+paragraph_blacklist {
+  text_regex: "^Follow @"
+}
+paragraph_blacklist {
+  text_regex: "^By posting a comment,"
+}
+paragraph_blacklist {
+  text_regex: "^How To you get cash with"
+}
+paragraph_blacklist {
+  text_regex: "SEE MORE INFO"
+}
+paragraph_blacklist {
+  text_regex: "@xconomy.com"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://www.xconomy.com/new-york/2015/05/08/east-coast-biotech-roundup-ny-bio-synageva-kadmon-more/"
+    article_url: "http://www.xconomy.com/san-francisco/2015/05/07/fitbits-fitness-open-to-scrutiny-with-ipo-filing/"
+    article_url: "http://www.xconomy.com/san-francisco/2015/05/07/big-bay-area-funding-week-banjo-altschool-twilio-robinhood/"
+    article_url: "http://www.xconomy.com/seattle/2015/05/07/seahawks-players-tech-ceos-trade-ideas-at-madrona-gathering/"
+    article_url: "http://www.xconomy.com/detroit/2015/05/07/manuliths-makeros-faster-cheaper-3d-printing-services-from-detroit/"
+    non_article_url: "http://www.xconomy.com/xperience"
+    non_article_url: "http://www.xconomy.com/boston"
+    non_article_url: "http://www.xconomy.com/boulder-denver/"
+    non_article_url: "http://www.xconomy.com/about/#The%20Xconomists"
+    non_article_url: "http://www.xconomy.com/events"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10503 # Hardware and electronics
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10504 # Biotechnology
+  boost: 1
+}
