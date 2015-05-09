@@ -94,3 +94,8 @@ feature_boost_pattern {
   path_regex: "^\\/kensilverstein\\/"
   boost: 2
 }
+feature_boost_pattern {
+  feature_id: 10560 # User Experience
+  path_regex: "\\/houzz\\/"
+  boost: -4
+}

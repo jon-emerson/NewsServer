@@ -7,6 +7,7 @@ root_domain: "reuters.com"
 start_url: "http://www.reuters.com/finance"
 start_url: "http://www.reuters.com/finance/deals"
 start_url: "http://www.reuters.com/finance/markets"
+start_url: "http://www.reuters.com/finance/deals/mergers"
 path_blacklist {
   needle: "/video/"
 }
