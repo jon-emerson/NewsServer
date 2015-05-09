@@ -179,7 +179,7 @@ public class PushDailyNotifications {
       throws DatabaseSchemaException, BiznessException {
     PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
 
-    UserTimezone userTimezone = UserTimezone.getForUser(user);
+    UserTimezone userTimezone = UserTimezone.getForUser(user, true /* update */);
     if (userTimezone.isNight()) {
       // Don't even risk sending anything at night...
       return null;
