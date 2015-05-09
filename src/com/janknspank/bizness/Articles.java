@@ -268,7 +268,7 @@ public class Articles {
         getArticlesForEntityIdsFuture(entityIds, Article.Reason.COMPANY, limitPerType),
         getArticlesForKeywordsFuture(personNames, Article.Reason.PERSON, limitPerType / 4),
         getArticlesForKeywordsFuture(companyNames, Article.Reason.COMPANY, limitPerType),
-        getArticlesByFeatureIdFuture(featureIds, limitPerType / 2));
+        getArticlesByFeatureIdFuture(featureIds, limitPerType));
     Map<String, Article> dedupingArticleMap = Maps.newHashMap();
     for (ListenableFuture<Iterable<Article>> articlesFuture : articlesFutures) {
       try {

@@ -1,6 +1,6 @@
 # A stock trader
 name: "Equity McInvesting"
-email: "equityinvesting@gmail.com"
+email: "stocks@gmail.com"
 good_url: "http://www.forbes.com/sites/greatspeculations/2015/02/13/credit-suisse-shares-rally-after-q4-earnings-beat/"
 good_url: "http://www.forbes.com/sites/alexkonrad/2015/01/20/big-bloody-ibm-stock-drops-after-q4-revenues-miss-despite-major-earnings-beat/"
 good_url: "http://www.forbes.com/sites/samanthasharf/2014/08/19/dicks-sporting-goods-follows-the-trends-to-earnings-beat/"
@@ -13,7 +13,6 @@ good_url: "http://www.forbes.com/sites/moneybuilder/2014/03/25/momentum-stocks-l
 good_url: "http://www.forbes.com/sites/zacks/2012/09/27/beginning-of-big-move-end-of-correction-for-alpha-and-omega-semi/"
 good_url: "http://www.forbes.com/sites/investor/2012/08/08/stock-market-alpha-hiding-in-plain-sight/"
 good_url: "http://www.forbes.com/sites/johndobosz/2013/09/25/10-ratios-to-make-you-money-in-stocks/"
-good_url: "http://www.forbes.com/sites/greatspeculations/2011/02/18/look-closer-at-the-peg-ratio-and-apple-isnt-such-a-bargain/"
 good_url: "http://www.forbes.com/sites/bruceupbin/2013/12/30/tech-stocks-to-buy-in-2014-for-growth-and-value-investors/"
 good_url: "http://www.fool.com/investing/general/2015/04/19/my-505845-netflix-mistake.aspx"
 good_url: "http://seekingalpha.com/article/3087436-best-performing-no-load-mutual-funds-of-q1-2015"
@@ -33,7 +32,6 @@ good_url: "http://www.fool.com/investing/general/2015/04/29/express-scripts-issu
 good_url: "http://www.fool.com/investing/general/2015/04/29/timesensitive-vertex-pharmaceuticals-incorporated.aspx"
 good_url: "http://www.fool.com/investing/general/2015/04/29/why-shares-of-microstrategy-inc-jumped-today.aspx"
 good_url: "http://recode.net/2015/04/29/twitters-earnings-sucked-so-what-happens-next/"
-good_url: "http://techcrunch.com/2008/07/17/microsoft-q4-results-32-increase-in-earnings-per-share/"
 good_url: "http://techcrunch.com/2014/02/06/aol-q4-earnings-2/"
 good_url: "http://techcrunch.com/2013/08/07/aol-q2-earnings/"
 good_url: "http://techcrunch.com/2012/07/18/ibm-reports-revenues-of-25-7-billion-down-3-but-beats-estimates-for-earnings-per-share/"
