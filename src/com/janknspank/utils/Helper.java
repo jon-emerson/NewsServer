@@ -1,13 +1,17 @@
 package com.janknspank.utils;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.bizness.ArticleFeatures;
+import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
@@ -17,6 +21,7 @@ import com.janknspank.classifier.VectorFeatureCreator;
 import com.janknspank.common.Averager;
 import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
+import com.janknspank.crawler.social.ShareNormalizer;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
@@ -25,6 +30,8 @@ import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.RankProto.Persona;
+import com.janknspank.proto.UserProto.User;
+import com.janknspank.rank.InputValuesGenerator;
 import com.janknspank.rank.Personas;
 
 public class Helper {
@@ -91,7 +98,7 @@ public class Helper {
         + launchTwitterAverager.get() / notLaunchTwitterAverager.get());
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main8(String args[]) throws Exception {
     int[] bucket = new int[100];
     for (int i = 0; i < bucket.length; i++) {
       bucket[i] = 0;
@@ -181,6 +188,46 @@ public class Helper {
           ArticleFeatures.getFeatureSimilarity(article, FeatureId.USER_EXPERIENCE)
           + " " + ageInHours + "h"
           + " " + article.getUrl());
+    }
+  }
+
+  public static void main6(String args[]) throws Exception {
+    for (String email : Personas.getPersonaMap().keySet()) {
+      System.out.println(email + ":");
+      Persona persona = Personas.getByEmail(email);
+      User user = Personas.convertToUser(persona);
+      Map<String, Article> goodArticles = ArticleCrawler.getArticles(persona.getGoodUrlList(), true);
+      for (Article article : goodArticles.values()) {
+        if (SocialEngagements.getForArticle(article, Site.FACEBOOK).getShareScore() < 0.05
+            && SocialEngagements.getForArticle(article, Site.TWITTER).getShareScore() < 0.05) {
+          System.out.println(" s " + article.getUrl());
+        }
+        if (InputValuesGenerator.relevanceToUserIndustries(user, article) == 0.5
+            && InputValuesGenerator.relevanceToNonUserIndustries(user, article) > 0) {
+          System.out.println(" i " + article.getUrl());
+        }
+      }
+    }
+  }
+
+  public static void main(String args[]) throws Exception {
+    List<ListenableFuture<Article>> futures = Lists.newArrayList();
+    for (Article article : Database.with(Article.class).get()) {
+      List<SocialEngagement> updatedEngagements = Lists.newArrayList();
+      for (SocialEngagement engagement : article.getSocialEngagementList()) {
+        Site site = engagement.getSite();
+        updatedEngagements.add(engagement.toBuilder()
+            .setShareScore(ShareNormalizer.getInstance(site).getShareScore(
+                article.getUrl(),
+                engagement.getShareCount(),
+                engagement.getCreateTime() - Articles.getPublishedTime(article) /* ageInMillis */))
+            .build());
+      }
+      futures.add(Database.with(Article.class).setFuture(
+          article, "social_engagement", updatedEngagements));
+    }
+    for (ListenableFuture<Article> future : futures) {
+      future.get();
     }
   }
 }

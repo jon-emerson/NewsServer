@@ -67,23 +67,20 @@ public final class NeuralNetworkScorer extends Scorer {
     // 5. Company / organization entities being followed.
     linkedHashMap.put("companies", InputValuesGenerator.relevanceToCompanyEntities(user, article));
 
-    // 6. Relevance to startup vector.
-    linkedHashMap.put("startup", InputValuesGenerator.relevanceToStartups(user, article));
-
-    // 7. Relevance to acquisitions.
+    // 6. Relevance to acquisitions.
     Set<FeatureId> userIndustryFeatureIds = UserInterests.getUserIndustryFeatureIds(user);
     linkedHashMap.put("acquisitions",
         InputValuesGenerator.relevanceToAcquisitions(userIndustryFeatureIds, article));
 
-    // 8. Relevance to launches.
+    // 7. Relevance to launches.
     linkedHashMap.put("launches",
         InputValuesGenerator.relevanceToLaunches(userIndustryFeatureIds, article));
 
-    // 9. Relevance to start-up fundraising rounds.
+    // 8. Relevance to start-up fundraising rounds.
     linkedHashMap.put("fundraising",
         InputValuesGenerator.relevanceToFundraising(userIndustryFeatureIds, article));
 
-    // 10. Topic scores.  If the user's actually interested in any of these
+    // 9. Topic scores.  If the user's actually interested in any of these
     // things, then we null out the scores (because otherwise the neural
     // network just learns that some folks like Sports + Politics + etc, without
     // knowing why, which is a really bad thing for overall quality.)
@@ -98,15 +95,15 @@ public final class NeuralNetworkScorer extends Scorer {
     linkedHashMap.put("equity", UserIndustries.hasFeatureId(user, FeatureId.EQUITY_INVESTING)
         ? 0 : InputValuesGenerator.getOptimizedFeatureValue(article, FeatureId.EQUITY_INVESTING));
 
-    // 12. Relevance to big money
+    // 10. Relevance to big money
     linkedHashMap.put("big_money",
         InputValuesGenerator.relevanceToBigMoney(userIndustryFeatureIds, article));
 
-    // 13. Relevance to quarterly earnings
+    // 11. Relevance to quarterly earnings
     linkedHashMap.put("quarterly_earnings", 
         InputValuesGenerator.relevanceToQuarterlyEarnings(userIndustryFeatureIds, article));
 
-    // 14. Is it a list of things
+    // 12. Is it a list of things
     linkedHashMap.put("is_list", 
         InputValuesGenerator.relevanceToList(userIndustryFeatureIds, article));
 
