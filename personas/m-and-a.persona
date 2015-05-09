@@ -20,7 +20,6 @@ good_url: "http://www.reuters.com/article/2015/05/08/us-syngenta-m-a-monsanto-id
 good_url: "http://www.entrepreneur.com/article/246022"
 good_url: "http://fortune.com/2015/05/08/microsoft-salesforce-sale/"
 good_url: "http://www.marketwatch.com/story/holcim-moves-a-step-closer-to-lafarge-merger-2015-05-08"
-good_url: "http://www.themiddlemarket.com/news/weekly_wrap/the-weekly-wrap-gravity4-xpo-logistics-google-256199-1.html"
 bad_url: "http://www.marketwatch.com/story/millennial-parents-have-it-much-tougher-than-their-parents-did-2015-04-29"
 bad_url: "http://www.nytimes.com/2015/04/29/business/takeda-agrees-to-pay-2-4-billion-to-settle-suits-over-cancer-risk-of-actos.html"
 bad_url: "http://www.nytimes.com/2015/04/29/business/contamination-causes-loss-of-2-5-million-in-ice-cream.html"
@@ -65,7 +64,6 @@ bad_url: "http://www.entrepreneur.com/article/244592"
 bad_url: "http://www.entrepreneur.com/article/245398"
 bad_url: "http://www.reuters.com/article/2015/04/29/markets-precious-idUSL4N0XQ1JA20150429"
 bad_url: "http://www.marketwatch.com/story/taiwan-excellence-program-continues-to-cultivate-innovative-products-2015-05-08"
-bad_url: "http://www.marketwatch.com/story/technical-data-on-leisure-products-stocks---mattel-hasbro-smith-and-wesson-holding-leapfrog-enterprises-and-polaris-industries-2015-05-08"
 interest {
   id: "55407e1ae4b026fb1df36b80"
   type: INDUSTRY

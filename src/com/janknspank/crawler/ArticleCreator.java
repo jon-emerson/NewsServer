@@ -71,7 +71,8 @@ class ArticleCreator {
       "http://www1.ibdcd.com/images/IBDicon_309171.png",
       "https://s0.wp.com/i/blank.jpg",
       "http://local.mercurynews.com/common/dfm/assets/logos/1200x627/mercurynews.png",
-      "http://www.buffalonews.com/images/BNSocialShareLG.jpg");
+      "http://www.buffalonews.com/images/BNSocialShareLG.jpg",
+      "http://www.accountingtoday.com/media/newspics/AT_180x180.jpg");
   private static final Set<Pattern> IMAGE_URL_BLACKLIST_PATTERNS = ImmutableSet.of(
       // A black "T", representing the NYTimes.
       // E.g. http://static01.nyt.com/images/icons/t_logo_291_black.png
