@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.push.UserTimezone;
 
 /**
  * Strategies for ranking articles differently depending on how old they are
@@ -35,6 +36,14 @@ public abstract class TimeRankingStrategy {
         / TimeUnit.MINUTES.toMillis(1);
   }
 
+  private static boolean isWeekend(User user) {
+    try {
+      UserTimezone userTimezone = UserTimezone.getForUser(user);
+      return userTimezone.isWeekend();
+    } catch (Exception e) {}
+    return false;
+  }
+
   /**
    * This is the time ranking strategy (aka how we punish articles for being
    * older) for the main stream.
@@ -43,8 +52,11 @@ public abstract class TimeRankingStrategy {
     @Override
     public double getTimeRank(Article article, User user) {
       // How many hours ago did the user last use the app?  Don't let this
-      // get bigger than 18, otherwise the stream gets really dated.
-      double lastAppUsageInHoursAgo = Math.min(18.0, getLastAppUsageInMinutes(user) / 60.0);
+      // get bigger than 18 (or 42 on weekends), otherwise the stream gets
+      // really dated.
+      double lastAppUsageInHoursAgo = Math.min(
+          isWeekend(user) ? 42 : 18,
+          getLastAppUsageInMinutes(user) / 60.0);
 
       // How many hours ago was the article published?
       double articleAgeInHours =
@@ -75,11 +87,15 @@ public abstract class TimeRankingStrategy {
           ((double) System.currentTimeMillis() - Articles.getPublishedTime(article))
               / (double) TimeUnit.HOURS.toMillis(1);
 
+      // This is when the time punishment starts.  It is bigger on weekends
+      // because there's less news on weekends.
+      int cliff = isWeekend(user) ? 42 : 18;
+
       // OK, here's what we're going to do.  If
-      // articleAgeInHours <= 18: Return 1.
-      // articleAgeInHours == 18 + 24: Return 0.5.
-      // articleAgeInHours == 18 + 48: Return 0.25.
-      double denominator = (Math.max(0, articleAgeInHours - 18) / 24) + 1;
+      // articleAgeInHours <= cliff: Return 1.
+      // articleAgeInHours == cliff + 24: Return 0.5.
+      // articleAgeInHours == cliff + 48: Return 0.25.
+      double denominator = (Math.max(0, articleAgeInHours - cliff) / 24) + 1;
       return 1 / denominator;
     }
   }
