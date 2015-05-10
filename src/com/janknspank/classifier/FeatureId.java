@@ -27,7 +27,7 @@ public enum FeatureId {
   CIVIL_ENGINEERING(10518, FeatureType.INDUSTRY, "Civil Engineering"),
   AVIATION(10519, FeatureType.INDUSTRY, "Aviation"),
   AUTOMOTIVE(10520, FeatureType.INDUSTRY, "Automotive"),
-  CHEMICALS(10521, FeatureType.INDUSTRY, "Chemistry"),
+  CHEMICALS(10521, FeatureType.INDUSTRY, "Chemicals"),
   DAIRY(10522, FeatureType.INDUSTRY, "Dairy"),
   MANAGEMENT(10523, FeatureType.INDUSTRY, "Management"),
   COMPUTER_GAMES(10524, FeatureType.INDUSTRY, "Computer Games"),
