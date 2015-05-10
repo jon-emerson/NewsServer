@@ -72,7 +72,12 @@ class ArticleCreator {
       "https://s0.wp.com/i/blank.jpg",
       "http://local.mercurynews.com/common/dfm/assets/logos/1200x627/mercurynews.png",
       "http://www.buffalonews.com/images/BNSocialShareLG.jpg",
-      "http://www.accountingtoday.com/media/newspics/AT_180x180.jpg");
+      "http://www.accountingtoday.com/media/newspics/AT_180x180.jpg",
+      "http://assets.fiercemarkets.net/public/opengraphimages/updated/opengraph_fierceenergy.jpg",
+      "https://s0.wp.com/wp-content/themes/vip/recode/img/_default/default-thumbnail-post.png",
+      "http://media.scmagazine.com/images/2013/02/19/sc_logo_21413_345884.png",
+      "http://idge.staticworld.net/nww/nww_logo_300x300.png",
+      "http://oystatic.ignimgs.com/src/core/img/widgets/global/page/ign-logo-100x100.jpg");
   private static final Set<Pattern> IMAGE_URL_BLACKLIST_PATTERNS = ImmutableSet.of(
       // A black "T", representing the NYTimes.
       // E.g. http://static01.nyt.com/images/icons/t_logo_291_black.png

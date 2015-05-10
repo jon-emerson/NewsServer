@@ -34,5 +34,5 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10525 # Arts
-  boost: -1
+  boost: -3
 }

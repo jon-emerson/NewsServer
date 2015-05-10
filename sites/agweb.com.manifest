@@ -2,6 +2,7 @@ short_name: "AgWeb"
 root_domain: "agweb.com"
 start_url: "http://www.agweb.com"
 subdomain_blacklist: "discussions.agweb.com"
+use_first_paragraph_as_description: true
 path_blacklist {
   needle: "/agday/"
 }

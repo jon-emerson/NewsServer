@@ -2,6 +2,7 @@ short_name: "ASCE"
 root_domain: "asce.org"
 start_url: "http://blogs.asce.org/"
 subdomain_blacklist: "www.asce.org"
+use_first_paragraph_as_description: true
 paragraph_selector: ".single-content > p"
 article_url_pattern {
   path_regex: "^\\/[^\\/]+\\/$"

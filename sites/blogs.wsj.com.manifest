@@ -64,3 +64,8 @@ feature_boost_pattern {
   path_regex: "^\\/privateequity\\/"
   boost: 2
 }
+feature_boost_pattern {
+  feature_id: 10558 # Venture Capital
+  path_regex: "^\\/venturecapital\\/"
+  boost: 3
+}

@@ -45,3 +45,7 @@ feature_boost_pattern {
   feature_id: 10512 # Sports
   boost: 5
 }
+feature_boost_pattern {
+  path_regex: "^\\/jim-jaillet\\/"
+  boost: -10
+}
