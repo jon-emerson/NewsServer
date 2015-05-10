@@ -1,14 +1,15 @@
-// Data structures related to mobile device push notifications.
+// Data structures related to email and push notifications.
 
 import "com/janknspank/database/extensions.proto";
 
 option java_package = "com.janknspank.proto";
-option java_outer_classname = "PushNotificationProto";
+option java_outer_classname = "NotificationsProto";
 
 enum DeviceType {
   UNKNOWN = 0;
   ANDROID = 1;
   IOS = 2;
+  EMAIL = 3;
 }
 
 message DeviceRegistration {
@@ -48,8 +49,8 @@ message DeviceRegistration {
 }
 
 // Historical record of what notifications we've sent and to whom.
-message PushNotification {
-  option (database_collection) = "MongoDB.PushNotification";
+message Notification {
+  option (database_collection) = "MySQL.PushNotification";
 
   optional string id = 1 [
     (required) = YES,
@@ -60,12 +61,15 @@ message PushNotification {
   ];
 
   optional int64 create_time = 2 [
-    (required) = YES
+    (required) = YES,
+    (storage_method) = INDEX
   ];
 
   // If the user clicked on the notification, and the app opened and sent us
   // a ping, this is the time that happened.
-  optional int64 click_time = 3;
+  optional int64 click_time = 3 [
+    (storage_method) = PULL_OUT
+  ];
 
   // The user who we sent the notification to.
   optional string user_id = 4 [
@@ -78,13 +82,14 @@ message PushNotification {
   // Optional: If we mentioned a specific article, this is the URL ID of that
   // article.
   optional string url_id = 5 [
-    (storage_method) = INDEX,
+    (storage_method) = PULL_OUT,
     (string_length) = 24,
     (string_charset) = LATIN1
   ];
 
   optional DeviceType device_type = 6 [
-    (required) = YES
+    (required) = YES,
+    (storage_method) = PULL_OUT
   ];
 
   optional string device_id = 7 [
@@ -105,9 +110,7 @@ message PushNotification {
     (string_length) = 1024
   ];
 
-  optional int64 article_published_time = 10 [
-    (required) = YES
-  ];
+  optional int64 article_published_time = 10;
 
   repeated string deduping_stems = 11 [
     (string_length) = 4

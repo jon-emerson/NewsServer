@@ -22,7 +22,7 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Entity;
-import com.janknspank.proto.PushNotificationProto.PushNotification;
+import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
@@ -132,7 +132,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
 
     @Override
     public Void call() throws Exception {
-      PushNotification pushNotification = Database.with(PushNotification.class).get(notificationId);
+      Notification pushNotification = Database.with(Notification.class).get(notificationId);
       if (pushNotification != null) {
         Database.update(pushNotification.toBuilder()
             .setClickTime(System.currentTimeMillis())

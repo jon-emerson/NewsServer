@@ -248,6 +248,7 @@ message UserAction {
     VOTE_UP = 6; // Swipe right "Good to know"
     UNVOTE_UP = 7;
     SCROLL_PAST = 8;
+    EMAIL_CLICK = 9;
   }
   optional ActionType action_type = 3 [
     (required) = YES,

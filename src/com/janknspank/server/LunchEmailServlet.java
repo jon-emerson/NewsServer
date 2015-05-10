@@ -23,7 +23,7 @@ public class LunchEmailServlet extends StandardServlet {
     Iterable<Article> articles = SendLunchEmails.getArticles(user);
     return new SoyMapData(
         "title", SendLunchEmails.getTitle(articles, user),
-        "articles", SendLunchEmails.getArticleSoyList(user, articles),
+        "articles", SendLunchEmails.getArticleSoyList(user, articles, null /* notificationId */),
         "date", SendLunchEmails.getDate(),
         "spotterAtLunchImgSrc", "/resources/img/spotterAtLunch2@2x.png",
         "spotterEmailRedTagLeftImgSrc", "/resources/img/spotterEmailRedTagLeft@2x.png",

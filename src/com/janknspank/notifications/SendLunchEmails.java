@@ -1,6 +1,7 @@
 package com.janknspank.notifications;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -15,6 +17,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
+
+import org.apache.http.client.utils.URIBuilder;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -26,13 +30,19 @@ import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.common.Asserts;
+import com.janknspank.common.Host;
 import com.janknspank.common.TopList;
 import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.NotificationsProto.DeviceType;
+import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.server.ArticleSerializer;
@@ -128,7 +138,23 @@ public class SendLunchEmails {
     return list;
   }
 
-  public static SoyListData getArticleSoyList(User user, Iterable<Article> articles)
+  public static String getNotificationUrl(User user, Article article, String notificationId) {
+    Asserts.assertNotNull(notificationId, "notificationId cannot be null",
+        IllegalStateException.class);
+    try {
+      URIBuilder builder = new URIBuilder("http://www.spotternews.com/clickthrough");
+      builder.addParameter("url", article.getUrl());
+      builder.addParameter("uid", user.getId());
+      builder.addParameter("nid", notificationId);
+      return builder.toString();
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+      return article.getUrl();
+    }
+  }
+
+  public static SoyListData getArticleSoyList(User user, Iterable<Article> articles,
+      @Nullable String notificationId)
       throws DatabaseSchemaException, BiznessException {
     SoyListData list = new SoyListData();
     Set<String> userKeywordSet = UserInterests.getUserKeywordSet(
@@ -138,7 +164,9 @@ public class SendLunchEmails {
       list.add(new SoyMapData(
           "title", article.getTitle(),
           "description", article.getDescription(),
-          "url", article.getUrl(),
+          "url", (notificationId == null)
+              ? article.getUrl()
+              : getNotificationUrl(user, article, notificationId),
           "tags", getTags(article, userKeywordSet, userIndustryFeatureIdIds),
           "time", ViewFeedSoy.getTime(article),
           "site", ViewFeedSoy.getDomain(article)));
@@ -146,7 +174,8 @@ public class SendLunchEmails {
     return list;
   }
 
-  private static String getHtml(Iterable<Article> articles, User user)
+  private static String getHtml(
+      Iterable<Article> articles, User user, @Nullable String notificationId)
       throws DatabaseSchemaException, BiznessException {
     SoyTofu soyTofu = NewsServlet.getTofu("lunchemail");
     Renderer renderer = soyTofu.newRenderer(".main");
@@ -158,7 +187,7 @@ public class SendLunchEmails {
     renderer.setData(
         new SoyMapData(
             "title", getTitle(articles, user),
-            "articles", getArticleSoyList(user, articles),
+            "articles", getArticleSoyList(user, articles, notificationId),
             "date", getDate(),
             "spotterAtLunchImgSrc", spotterAtLunchImgSrcPlaceholder,
             "spotterEmailRedTagLeftImgSrc", spotterEmailRedTagLeftImgSrcPlaceholder,
@@ -197,8 +226,28 @@ public class SendLunchEmails {
     return Iterables.limit(Articles.getMainStream(user), 6);
   }
 
+  /**
+   * Stores a row in the MySQL database indicating that we've sent the user
+   * an email notification.
+   */
+  private static Notification createNotification(User user)
+      throws DatabaseRequestException, DatabaseSchemaException {
+    Notification notification = Notification.newBuilder()
+        .setId(GuidFactory.generate())
+        .setCreateTime(System.currentTimeMillis())
+        .setText("lunch")
+        .setDeviceId(user.getEmail())
+        .setDeviceType(DeviceType.EMAIL)
+        .setHost(Host.get())
+        .setUserId(user.getId())
+        .build();
+    Database.insert(notification);
+    return notification;
+  }
+
   private static Message getMessage(Session session, User user)
-      throws MessagingException, IOException, DatabaseSchemaException, BiznessException {
+      throws MessagingException, IOException, DatabaseSchemaException, BiznessException,
+          DatabaseRequestException {
     Iterable<Article> articles = getArticles(user);
 
     SMTPMessage message = new SMTPMessage(session);
@@ -211,7 +260,8 @@ public class SendLunchEmails {
 
     // HTML version.
     MimeBodyPart mainPart = new MimeBodyPart();
-    String html = getHtml(articles, user);
+    Notification notification = createNotification(user);
+    String html = getHtml(articles, user, notification.getId());
     mainPart.setContent(html, "text/html; charset=utf-8");
     content.addBodyPart(mainPart);
 
@@ -259,7 +309,7 @@ public class SendLunchEmails {
           System.out.println("Error while sending email to " + user.getEmail());
           e.printStackTrace();
         }
-      } catch (MessagingException | IOException e) {
+      } catch (MessagingException | DatabaseRequestException | IOException e) {
         e.printStackTrace();
       } finally {
         // Close and terminate the transport.

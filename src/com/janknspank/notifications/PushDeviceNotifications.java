@@ -24,8 +24,9 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
-import com.janknspank.proto.PushNotificationProto.DeviceRegistration;
-import com.janknspank.proto.PushNotificationProto.PushNotification;
+import com.janknspank.proto.NotificationsProto.DeviceRegistration;
+import com.janknspank.proto.NotificationsProto.DeviceType;
+import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
@@ -41,18 +42,19 @@ public class PushDeviceNotifications {
       ImmutableSet.of("jon@jonemerson.net", "panaceaa@gmail.com", "tom.charytoniuk@gmail.com");
 
   private static class PreviousUserNotifications {
-    private final Future<Iterable<PushNotification>> recentNotificationsFuture;
+    private final Future<Iterable<Notification>> recentNotificationsFuture;
 
     public PreviousUserNotifications(User user) throws DatabaseSchemaException {
-      recentNotificationsFuture = Database.with(PushNotification.class).getFuture(
+      recentNotificationsFuture = Database.with(Notification.class).getFuture(
           new QueryOption.WhereEquals("user_id", user.getId()),
+          new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
           new QueryOption.DescendingSort("create_time"),
           new QueryOption.Limit(5));
     }
 
     private long getLastNotificationTime() throws DatabaseSchemaException {
       try {
-        PushNotification lastNotification = Iterables.getFirst(recentNotificationsFuture.get(), null);
+        Notification lastNotification = Iterables.getFirst(recentNotificationsFuture.get(), null);
         if (lastNotification != null) {
           return lastNotification.getCreateTime();
         }
@@ -65,7 +67,7 @@ public class PushDeviceNotifications {
     private boolean isDupe(Article article) throws DatabaseSchemaException {
       Deduper.ArticleExtraction articleExtraction = new Deduper.ArticleExtraction(article);
       try {
-        for (PushNotification pushNotification : recentNotificationsFuture.get()) {
+        for (Notification pushNotification : recentNotificationsFuture.get()) {
           Deduper.ArticleExtraction pushExtraction = new Deduper.ArticleExtraction(
               pushNotification.getArticlePublishedTime(), pushNotification.getDedupingStemsList());
           if (pushExtraction.isDuplicate(articleExtraction)) {
@@ -313,7 +315,7 @@ public class PushDeviceNotifications {
           if (bestArticle != null) {
             System.out.println("Sending \"" + bestArticle.getTitle() + "\" to " + user.getEmail());
             for (DeviceRegistration registration : registrations) {
-              PushNotification pushNotification =
+              Notification pushNotification =
                   IosPushNotificationHelper.createPushNotification(registration, bestArticle);
               IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
             }

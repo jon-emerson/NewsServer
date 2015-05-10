@@ -29,9 +29,9 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
-import com.janknspank.proto.PushNotificationProto.DeviceRegistration;
-import com.janknspank.proto.PushNotificationProto.DeviceType;
-import com.janknspank.proto.PushNotificationProto.PushNotification;
+import com.janknspank.proto.NotificationsProto.DeviceRegistration;
+import com.janknspank.proto.NotificationsProto.DeviceType;
+import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.User;
 
 /**
@@ -97,7 +97,7 @@ public class IosPushNotificationHelper {
    * reversed engineered by someone, so I haven't seen the documentation for
    * it.  But it's widely used and translated into many languages! :)
    */
-  private static byte[] getRequestBody(PushNotification notification)
+  private static byte[] getRequestBody(Notification notification)
       throws IOException {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     baos.write(0); // The command.
@@ -126,9 +126,9 @@ public class IosPushNotificationHelper {
     return uniqueDeviceIds.values();
   }
 
-  public void sendPushNotification(PushNotification pushNotification)
+  public void sendPushNotification(Notification notification)
       throws DatabaseRequestException, DatabaseSchemaException {
-    Database.insert(pushNotification);
+    Database.insert(notification);
 
     SSLSocket socket = null;
     try {
@@ -144,7 +144,7 @@ public class IosPushNotificationHelper {
 
       // Send the request.
       OutputStream out = socket.getOutputStream();
-      out.write(getRequestBody(pushNotification));
+      out.write(getRequestBody(notification));
       out.flush();
 
       // Read the response.
@@ -189,7 +189,7 @@ public class IosPushNotificationHelper {
    * the IDs of the devices to contact and a data explaining the new sound that
    * was sent.
    */
-  private static JSONObject getPayload(PushNotification notification) {
+  private static JSONObject getPayload(Notification notification) {
     // Create JSON object to describe the notification.
     // NOTE(jonemerson): We only have 256 characters to send to APNS, so
     // we can't stuff the whole sound serialization into the request.
@@ -227,9 +227,9 @@ public class IosPushNotificationHelper {
     return data;
   }
 
-  public static PushNotification createPushNotification(
+  public static Notification createPushNotification(
       DeviceRegistration registration, Article article) {
-    return PushNotification.newBuilder()
+    return Notification.newBuilder()
         .setId(GuidFactory.generate())
         .setCreateTime(System.currentTimeMillis())
         .setText(getText(article))
@@ -250,7 +250,7 @@ public class IosPushNotificationHelper {
         : getDeviceRegistrations(Users.getByEmail("tom.charytoniuk@gmail.com"))) {
       ++count;
       Article article = Database.with(Article.class).getFirst();
-      PushNotification pushNotification = createPushNotification(registration, article);
+      Notification pushNotification = createPushNotification(registration, article);
       IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
     }
     System.out.println(count + " notifications sent");

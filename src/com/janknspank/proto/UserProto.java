@@ -9822,6 +9822,10 @@ public final class UserProto {
        * <code>SCROLL_PAST = 8;</code>
        */
       SCROLL_PAST(8, 8),
+      /**
+       * <code>EMAIL_CLICK = 9;</code>
+       */
+      EMAIL_CLICK(9, 9),
       ;
 
       /**
@@ -9876,6 +9880,10 @@ public final class UserProto {
        * <code>SCROLL_PAST = 8;</code>
        */
       public static final int SCROLL_PAST_VALUE = 8;
+      /**
+       * <code>EMAIL_CLICK = 9;</code>
+       */
+      public static final int EMAIL_CLICK_VALUE = 9;
 
 
       public final int getNumber() { return value; }
@@ -9891,6 +9899,7 @@ public final class UserProto {
           case 6: return VOTE_UP;
           case 7: return UNVOTE_UP;
           case 8: return SCROLL_PAST;
+          case 9: return EMAIL_CLICK;
           default: return null;
         }
       }
@@ -11807,7 +11816,7 @@ public final class UserProto {
       "\n\025ADDRESS_BOOK_CONTACTS\020\004\"c\n\016InterestSou" +
       "rce\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKED_IN_" +
       "PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\r\n\tTOMBS" +
-      "TONE\020\003*\004\010\007\020\010\"\215\004\n\nUserAction\022\034\n\002id\030\001 \001(\tB" +
+      "TONE\020\003*\004\010\007\020\010\"\236\004\n\nUserAction\022\034\n\002id\030\001 \001(\tB" +
       "\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001" +
       "\230\246\035\030\250\246\035\001\220\246\035\003\0225\n\013action_type\030\003 \001(\0162\026.User" +
       "Action.ActionTypeB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 " +
@@ -11816,12 +11825,12 @@ public final class UserProto {
       "\220\246\035\003\022\027\n\017read_start_time\030\007 \001(\003\022\025\n\rread_en" +
       "d_time\030\010 \001(\003\022!\n\010interest\030\013 \003(\0132\t.Interes" +
       "tB\004\240\246\035\003\022)\n\026on_stream_for_interest\030\014 \001(\0132" +
-      "\t.Interest\"\221\001\n\nActionType\022\013\n\007UNKNOWN\020\000\022\014" +
+      "\t.Interest\"\242\001\n\nActionType\022\013\n\007UNKNOWN\020\000\022\014" +
       "\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STRE" +
       "AM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOT" +
-      "E_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010:\024" +
-      "\212\265\030\020MySQL.UserActionB!\n\024com.janknspank.p" +
-      "rotoB\tUserProto"
+      "E_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010\022\017" +
+      "\n\013EMAIL_CLICK\020\t:\024\212\265\030\020MySQL.UserActionB!\n" +
+      "\024com.janknspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
