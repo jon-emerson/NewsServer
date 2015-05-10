@@ -299,8 +299,9 @@ public class PushDeviceNotifications {
   }
 
   public static void main(String args[]) throws Exception {
-    // As part of this process, also send welcome emails.
+    // As part of this process, also send emails.
     SendWelcomeEmails.sendWelcomeEmails();
+    SendLunchEmails.sendLunchEmails();
 
     // OK, now send push notifications.
     for (User user : Database.with(User.class).get()) {
