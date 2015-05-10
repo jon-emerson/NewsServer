@@ -94,6 +94,7 @@ class ArticleCreator {
       // E.g. http://www.abc.net.au/news/linkableblob/6072216/data/abc-news.jpg
       Pattern.compile("\\/\\/www\\.abc\\.net\\.au\\/.*\\/data\\/abc-news\\.jpg.*"));
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
+      Pattern.compile("<\\/?(i|b|em|strong)>"),
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\\–|\u2014)\\s"),
       Pattern.compile("\\s\\([A-Za-z]{2,15}(\\s[A-Za-z]{2,15})?\\)$"),
       Pattern.compile("\\s*(\\||\\-\\-|\\-|\\–|\u2014)\\s+([A-Z][A-Za-z]+\\.com)$"),
@@ -480,8 +481,9 @@ class ArticleCreator {
 
     for (Pattern pattern : TEXT_TO_REMOVE_FROM_TITLES) {
       Matcher matcher = pattern.matcher(title);
-      if (matcher.find()) {
+      while (matcher.find()) {
         title = title.substring(0, matcher.start()) + title.substring(matcher.end());
+        matcher = pattern.matcher(title);
       }
     }
     if (title.length() > MAX_TITLE_LENGTH) {

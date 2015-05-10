@@ -203,6 +203,13 @@ public class ArticleCreatorTest {
     assertEquals("Sonus Faber Casts Wider Net",
         ArticleCreator.getTitle(createDocumentWithTitle(
             "Sonus Faber Casts Wider Net | http://www.twice.com"), site));
+    assertEquals("Valentino, Patti Smith, and More Celebrate New York City Ballet\342\200\231s "
+        + "Spring Gala and Mel Gibson, Charlize Theron, and Other Stars Come Out for the Mad "
+        + "Max: Fury Road Premiere",
+        ArticleCreator.getTitle(createDocumentWithTitle(
+            "Valentino, Patti Smith, and More Celebrate New York City Ballet\342\200\231s "
+            + "Spring Gala and Mel Gibson, Charlize Theron, and Other Stars Come Out for the "
+            + "<i>Mad Max: Fury Road</i> Premiere"), site));
   }
 
   @Test
