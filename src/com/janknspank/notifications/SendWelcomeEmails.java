@@ -1,7 +1,6 @@
-package com.janknspank.utils;
+package com.janknspank.notifications;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -27,29 +26,7 @@ public class SendWelcomeEmails {
   private static final String MOBILE_SPOTTER_LOGO_1_CID = "mobileSpotterLogo1@spotternews.com";
   private static final String SETTINGS_ZOOM_CID = "settingsZoom@spotternews.com";
 
-  private static final String SMTP_USERNAME;
-  private static final String SMTP_PASSWORD;
-  static {
-    SMTP_USERNAME = System.getenv("SMTP_USERNAME");
-    if (SMTP_USERNAME == null) {
-      throw new Error("$SMTP_USERNAME is undefined");
-    }
-    SMTP_PASSWORD = System.getenv("SMTP_PASSWORD");
-    if (SMTP_PASSWORD == null) {
-      throw new Error("$SMTP_PASSWORD is undefined");
-    }
-  }
-
   static final String SUBJECT = "Welcome to Spotter!";
-
-  // Amazon SES SMTP host name. Note: We can talk to us-east-2, us-west-2, etc.
-  // But we verified our emails through us-east-1, and we run our servers out
-  // of us-east-1, so we're doing us-east-1 here too.
-  static final String HOST = "email-smtp.us-east-1.amazonaws.com";
-
-  // Port we will connect to on the Amazon SES SMTP endpoint. We are choosing
-  // port 25 because we will use STARTTLS to encrypt the connection.
-  static final int PORT = 587; // 25;
 
   private static String getHtml(User user) {
     SoyTofu soyTofu = NewsServlet.getTofu("welcomeemail");
@@ -58,7 +35,6 @@ public class SendWelcomeEmails {
     String settingsZoomImgSrcPlaceholder = "////settingsZoomImgSrc////";
     renderer.setData(
         new SoyMapData(
-            "title", "Welcome to Spotter",
             "isInBrowser", false,
             "mobileSpotterLogo1ImgSrc", mobileSpotterLogo1ImgSrcPlaceholder,
             "settingsZoomImgSrc", settingsZoomImgSrcPlaceholder,
@@ -91,7 +67,6 @@ public class SendWelcomeEmails {
     String html = getHtml(user);
     mainPart.setContent(html, "text/html; charset=utf-8");
     content.addBodyPart(mainPart);
-    System.out.println(html);
 
     // Image attachments.
     MimeBodyPart imagePart = new MimeBodyPart();
@@ -112,27 +87,11 @@ public class SendWelcomeEmails {
   }
 
   public static void sendWelcomeEmails() throws DatabaseSchemaException {
-    // Create a Properties object to contain connection configuration information.
-    Properties props = System.getProperties();
-    props.put("mail.transport.protocol", "smtp");
-    props.put("mail.smtp.port", PORT);
-
-    // Set properties indicating that we want to use STARTTLS to encrypt the connection.
-    // The SMTP session will begin on an unencrypted connection, and then the client
-    // will issue a STARTTLS command to upgrade to an encrypted connection.
-    props.put("mail.smtp.auth", "true");
-    props.put("mail.smtp.starttls.enable", "true");
-    props.put("mail.smtp.starttls.required", "true");
-
-    // Create a Session object to represent a mail session with the specified properties. 
-    Session session = Session.getDefaultInstance(props);
-
     Transport transport = null;
+
     try {
-      // Connect to Amazon SES using the SMTP username and password you specified above.
-      System.out.println("Attempting to send an email through the Amazon SES SMTP interface...");
-      transport = session.getTransport();
-      transport.connect(HOST, SMTP_USERNAME, SMTP_PASSWORD);
+      Session session = EmailTransportProvider.getSession();
+      transport = EmailTransportProvider.getTransport(session);
 
       // For every user with an email address for whom we have not sent a welcome
       // email, send them a welcome email now.

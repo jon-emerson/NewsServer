@@ -1,4 +1,4 @@
-package com.janknspank.push;
+package com.janknspank.notifications;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

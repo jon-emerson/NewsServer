@@ -148,6 +148,7 @@ bad_url: "http://time.com/3851843/twins-complications/"
 bad_url: "http://www.inc.com/carey-smith/the-chicken-and-the-egg-goes-crowdfunded.html"
 bad_url: "http://www.businessinsider.com/rachel-zoe-best-business-decision-2015-5"
 bad_url: "http://www.siliconbeat.com/2015/05/08/facebook-study-political-echo-chamber-is-users-fault-not-facebooks/"
+bad_url: "http://www.forbes.com/sites/davidshaywitz/2015/05/06/why-digital-health-has-not-yet-transformed-pharmaceutical-drug-development/"
 interest {
   id: "55036fcfe4b05c7064a87735"
   type: INDUSTRY

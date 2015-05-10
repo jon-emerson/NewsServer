@@ -2,9 +2,9 @@ package com.janknspank.bizness;
 
 import java.util.concurrent.TimeUnit;
 
+import com.janknspank.notifications.UserTimezone;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.push.UserTimezone;
 
 /**
  * Strategies for ranking articles differently depending on how old they are

@@ -30,15 +30,14 @@
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
       <center>
       <table class="body" cellspacing="1" cellpadding="0" style="margin: 10px; background-color: #bbb">
-        <tr>
-          <td valign="top" style="color: #666; font-size: 12px; padding: 10px 20px; background-color: #f4f4f4; border-top: 1px solid #f8f8f8">
-            Use this area to offer a short teaser of your email's content. Text here will show in the preview area of some email clients.
-
-            {if not $isInBrowser}
-              {sp} Not displaying correctly? View this email as a web page <a href="{$welcomeEmailLink}" target="_blank" style="color: #444">here</a>.
-            {/if}
-          </td>
-        </tr>
+        {if not $isInBrowser}
+          <tr>
+            <td valign="top" style="color: #666; font-size: 12px; padding: 10px 20px; background-color: #f4f4f4; border-top: 1px solid #f8f8f8">
+              Welcome to Spotter. {sp}
+              Not displaying correctly? View this email as a web page <a href="{$welcomeEmailLink}" target="_blank" style="color: #444">here</a>.
+            </td>
+          </tr>
+        {/if}
         <tr>
           <td align="left" valign="top"
               style="background-color: #fff; padding: 10px 20px; width: 600px;">

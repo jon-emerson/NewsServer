@@ -1,0 +1,132 @@
+{namespace news.lunchemail autoescape="strict"}
+
+/**
+ * Tag rendering.
+ * @param tag
+ * @param spotterEmailRedTagLeftImgSrc
+ * @param spotterEmailRedTagRightImgSrc
+ * @param spotterEmailWhiteTagLeftImgSrc
+ * @param spotterEmailWhiteTagRightImgSrc
+ */
+{template .tag}
+  <div style="display: inline-block; margin-top: 10px">
+    {if $tag.selected}
+      <img style="display: inline-block" src="{$spotterEmailRedTagLeftImgSrc}" width="14" height="28" />
+      <div style="display: inline-block; vertical-align: top; font-size: 12px; line-height: 28px; color: white; background-color: #ff4134;">
+        {$tag.keyword}
+      </div>
+      <img style="display: inline-block; margin-right: 10px" src="{$spotterEmailRedTagRightImgSrc}" width="14" height="28" />
+    {else}
+      <img style="display: inline-block" src="{$spotterEmailWhiteTagLeftImgSrc}" width="14" height="28" />
+      <div style="display: inline-block; vertical-align: top; font-size: 12px; line-height: 26px; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;">
+        {$tag.keyword}
+      </div>
+      <img style="display: inline-block; margin-right: 10px" src="{$spotterEmailWhiteTagRightImgSrc}" width="14" height="28" />
+    {/if}
+  </div>
+{/template}
+
+/**
+ * Renders an article table row.
+ * @param article
+ */
+{template .article}
+  <tr>
+    <td align="left" valign="top"
+        style="background-color: #fff; padding: 8px 20px 2px; width: 600px;">
+      <a href="{$article.url}" target="_blank" style="color: #000; text-decoration: none">
+        <div>
+          {foreach $tag in $article.tags}
+            {call .tag data="all"}
+              {param tag: $tag /}
+            {/call}
+          {/foreach}
+        </div>
+        <h2 style="font-size: 18px; margin-top: 0; padding: 10px 0; color: #000">
+          {$article.title}
+        </h2>
+        <div style="margin: 5px 0 15px 0">
+          {$article.description}
+        </div>
+        <div style="margin-bottom: 15px; font-size: 13px; color: #888">
+          <b>{$article.time}</b> - {$article.site}
+        </div>
+      </a>
+    </td>
+  </tr>
+{/template}
+
+/**
+ * Page layout.
+ * @param title
+ * @param articles
+ * @param date
+ * @param spotterAtLunchImgSrc
+ * @param spotterEmailRedTagLeftImgSrc
+ * @param spotterEmailRedTagRightImgSrc
+ * @param spotterEmailWhiteTagLeftImgSrc
+ * @param spotterEmailWhiteTagRightImgSrc
+ * @param unsubscribeLink
+ */
+{template .main}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>{$title}</title>
+      <style type="text/css">
+        body {lb}
+          background-color: #eee;
+        {rb}
+
+        body, td {lb}
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: 16px;
+          margin: 0;
+          padding: 0;
+        {rb}
+      </style>
+    </head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+      <center>
+      <table class="body" cellspacing="1" cellpadding="0" style="margin: 10px; background-color: #bbb">
+        <tr>
+          <td align="left" valign="top"
+              style="background-color: #fff; padding: 6px 20px 2px; width: 600px;">
+            <div>
+              <a href="http://www.spotternews.com/">
+                <img align="middle" style="padding: 10px 0; display: inline-block" src="{$spotterAtLunchImgSrc}" width="307" height="37">
+              </a>
+              <div style="display: inline-block; float: right; line-height: 20px; margin: 16px 0 0">
+                {$date}
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: #f4f4f4; border-top: 1px solid #f8f8f8; color: #666; font-size: 12px; padding: 10px 20px; width: 600px">
+            Spotter@Lunch is a daily 6-pack of news specifically chosen for you.
+            <div style="margin-top: 5px">
+              Not seeing what you want?
+              Use the <a style="color: #222" href="http://itunes.apple.com/app/id966430113">Spotter app</a> to change your interests.
+            </div>
+          </td>
+        </tr>
+        {foreach $article in $articles}
+          {call .article data="all"}
+            {param article: $article /}
+          {/call}
+        {/foreach}
+         <tr>
+          <td style="background-color: #f4f4f4; border-top: 1px solid #f8f8f8; color: #666; font-size: 12px; padding: 4px 20px 10px">
+            <div style="margin-top: 5px">
+              &copy; Spotter Technologies, 2015. Click <a href="{$unsubscribeLink}" style="color: #444">here</a> {sp}
+              to unsubscribe from future emails.
+            </div>
+          </td>
+        </tr>
+      </table>
+      </center>
+    </body>
+  </html>
+{/template}

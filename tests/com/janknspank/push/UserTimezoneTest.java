@@ -8,6 +8,8 @@ import java.time.ZonedDateTime;
 
 import org.junit.Test;
 
+import com.janknspank.notifications.UserTimezone;
+
 public class UserTimezoneTest {
   @Test
   public void testMorningInSanFrancisco() throws Exception {

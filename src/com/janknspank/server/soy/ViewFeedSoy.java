@@ -91,7 +91,7 @@ public class ViewFeedSoy {
       articleSoyMapData.put("fb_comments" , (int) engagement.getCommentCount());
 
       // Attribution.
-      articleSoyMapData.put("attribution" , getAttribution(article));
+      articleSoyMapData.put("attribution" , getTime(article) + " - " + getDomain(article));
 
       // Attribution.
       articleSoyMapData.put("rawArticle", "article = "
@@ -170,7 +170,7 @@ public class ViewFeedSoy {
     return sb.toString();
   }
 
-  private static String getAttribution(Article article) {
+  public static String getTime(Article article) {
     String time;
     long age = System.currentTimeMillis() - Articles.getPublishedTime(article);
     if (age < TimeUnit.MINUTES.toMillis(60)) {
@@ -180,12 +180,13 @@ public class ViewFeedSoy {
     } else {
       time = Long.toString(TimeUnit.DAYS.convert(age, TimeUnit.MILLISECONDS)) + "d";
     }
+    return time;
+  }
 
-    String domain = "";
+  public static String getDomain(Article article) {
     try {
-      domain = new URL(article.getUrl()).getHost().replaceAll("^www\\.", "");
+      return new URL(article.getUrl()).getHost().replaceAll("^www\\.", "");
     } catch (MalformedURLException e) {}
-
-    return time + " ago - " + domain;
+    return "";
   }
 }

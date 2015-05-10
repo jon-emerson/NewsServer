@@ -253,11 +253,11 @@
               <name>PruneMongoDatabase</name>
             </program>
             <program>
-              <mainClass>com.janknspank.push.PushDailyNotifications</mainClass>
+              <mainClass>com.janknspank.notifications.PushDeviceNotifications</mainClass>
               <name>PushDailyNotifications</name>
             </program>
             <program>
-              <mainClass>UpdateSocialEngagements</mainClass>
+              <mainClass>com.janknspank.utils.UpdateSocialEngagements</mainClass>
               <name>UpdateSocialEngagements</name>
             </program>
           </programs>

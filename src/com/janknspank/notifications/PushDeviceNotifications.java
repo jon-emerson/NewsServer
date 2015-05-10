@@ -1,4 +1,4 @@
-package com.janknspank.push;
+package com.janknspank.notifications;
 
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -30,14 +30,13 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
 import com.janknspank.rank.NeuralNetworkScorer;
-import com.janknspank.utils.SendWelcomeEmails;
 
 /**
  * Sends every user who's enabled iOS push notifications a notification about
  * the top article in their stream.  We'll run this once daily in the morning
  * to help with re-engagement.
  */
-public class PushDailyNotifications {
+public class PushDeviceNotifications {
   private static final Set<String> USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS =
       ImmutableSet.of("jon@jonemerson.net", "panaceaa@gmail.com", "tom.charytoniuk@gmail.com");
 

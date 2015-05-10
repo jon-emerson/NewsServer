@@ -1,4 +1,4 @@
-package com.janknspank.push;
+package com.janknspank.notifications;
 
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -66,6 +66,11 @@ public class UserTimezone {
         ZoneOffset.ofHoursMinutes(hourOffset, minuteOffset)).getHour();
   }
 
+  private int getCurrentMinute() {
+    Instant instant = Instant.ofEpochMilli(getCurrentTime());
+    return ZonedDateTime.ofInstant(instant,
+        ZoneOffset.ofHoursMinutes(hourOffset, minuteOffset)).getMinute();
+  }
   public boolean isNight() {
     int currentHour = getCurrentHour();
     return (currentHour < 8 || currentHour >= 22);
@@ -79,6 +84,13 @@ public class UserTimezone {
   public boolean isDaytime() {
     int currentHour = getCurrentHour();
     return (currentHour >= 8 && currentHour <= 19);
+  }
+
+  public boolean isAroundNoon() {
+    int currentHour = getCurrentHour();
+    int currentMinute = getCurrentMinute();
+    return (currentHour == 11 && currentMinute > 45)
+        || (currentHour == 12 && currentMinute <= 45);
   }
 
   public boolean isWeekend() {
