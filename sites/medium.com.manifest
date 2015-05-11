@@ -19,6 +19,7 @@ start_url: "https://medium.com/tag/ux/latest"
 start_url: "https://medium.com/tag/design/latest"
 start_url: "https://medium.com/tag/design-process/latest"
 start_url: "https://medium.com/tag/design-tools/latest"
+start_url: "https://medium.com/backchannel"
 path_blacklist {
   needle: "/@Medium/"
 }
@@ -73,4 +74,9 @@ feature_boost_pattern {
   feature_id: 10558 # Venture Capital
   path_regex: "^\\/gv-notes\\/"
   boost: 10
+}
+feature_boost_pattern {
+  feature_id: 10501 # Internet
+  path_regex: "^\\/backchannel\\/"
+  boost: 4
 }
