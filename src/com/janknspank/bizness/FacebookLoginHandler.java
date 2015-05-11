@@ -352,7 +352,7 @@ public class FacebookLoginHandler {
       try {
         com.restfb.types.User fbUser =
             FacebookLoginHandler.getFacebookUser(user.getFacebookAccessToken());
-        TopList<FeatureId, Double> featureIdTopList = getIndustryFeatureIds(fbUser);
+        TopList<FeatureId, Double> featureIdTopList = new TopList<FeatureId, Double>(1); // getIndustryFeatureIds(fbUser);
         for (FeatureId featureId : featureIdTopList) {
           System.out.println(featureId.getId() + ": " + featureId.getTitle()
               + " (" + featureIdTopList.getValue(featureId) + ")");
