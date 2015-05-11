@@ -147,7 +147,7 @@ public class FacebookLoginHandler {
             .setFrequency(companyScore));
       }
       // Decrease company scores as they get further in the user's past.
-      companyScore = Math.max(10, companyScore - 10);
+      companyScore = Math.max(10, companyScore - 18);
     }
     for (Work work : fbUser.getWork()) {
       if (work.getPosition() != null) {
