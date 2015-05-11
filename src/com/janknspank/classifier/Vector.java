@@ -20,6 +20,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.google.api.client.util.Maps;
 import com.google.api.client.util.Throwables;
+import com.google.common.base.Strings;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -156,7 +157,7 @@ public class Vector {
         for (String sentence : ObjectArrays.concat(
             KEYWORD_FINDER.getSentences(paragraph), additionalPhrases, String.class)) {
           for (String word : KEYWORD_FINDER.getTokens(sentence)) {
-            if (word != null && !stopWords.contains(word)) {
+            if (!Strings.isNullOrEmpty(word) && !stopWords.contains(word)) {
               word = KeywordUtils.cleanKeyword(word);
               if (word.length() > 2 && KeywordUtils.isValidKeyword(word)) {
                 words.add(word);

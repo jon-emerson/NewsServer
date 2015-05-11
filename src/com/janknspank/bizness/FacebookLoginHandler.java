@@ -138,30 +138,33 @@ public class FacebookLoginHandler {
    * compare against industries.
    */
   private static Vector getFacebookUserVector(com.restfb.types.User fbUser) {
-    VectorData.Builder builder = VectorData.newBuilder();
+    List<WordFrequency.Builder> rawList = Lists.newArrayList();
+    int companyScore = 50;
     for (String companyName : getCompanyNames(fbUser)) {
       for (String word : split(companyName)) {
-        builder.addWordFrequency(WordFrequency.newBuilder()
+        rawList.add(WordFrequency.newBuilder()
             .setWord(word)
-            .setFrequency(10));
+            .setFrequency(companyScore));
       }
+      // Decrease company scores as they get further in the user's past.
+      companyScore = Math.max(10, companyScore - 10);
     }
     for (Work work : fbUser.getWork()) {
       if (work.getPosition() != null) {
         for (String word : split(work.getPosition().getName())) {
-          builder.addWordFrequency(WordFrequency.newBuilder()
+          rawList.add(WordFrequency.newBuilder()
               .setWord(word)
               .setFrequency(10));
         }
       }
       for (String token : split(work.getDescription())) {
-        builder.addWordFrequency(WordFrequency.newBuilder()
+        rawList.add(WordFrequency.newBuilder()
             .setWord(token)
             .setFrequency(8));
       }
       if (work.getLocation() != null) {
         for (String token : split(work.getLocation().getName())) {
-          builder.addWordFrequency(WordFrequency.newBuilder()
+          rawList.add(WordFrequency.newBuilder()
               .setWord(token)
               .setFrequency(1));
         }
@@ -170,7 +173,7 @@ public class FacebookLoginHandler {
     for (Education education : fbUser.getEducation()) {
       for (NamedFacebookType concentration : education.getConcentration()) {
         for (String word : split(concentration.getName())) {
-          builder.addWordFrequency(WordFrequency.newBuilder()
+          rawList.add(WordFrequency.newBuilder()
               .setWord(word)
               .setFrequency(5));
         }
@@ -178,14 +181,14 @@ public class FacebookLoginHandler {
       NamedFacebookType school = education.getSchool();
       if (school != null) {
         for (String word : split(school.getName())) {
-          builder.addWordFrequency(WordFrequency.newBuilder()
+          rawList.add(WordFrequency.newBuilder()
               .setWord(word)
               .setFrequency(1));
         }
       }
       for (EducationClass educationClass : education.getClasses()) {
         for (String word : split(educationClass.getName())) {
-          builder.addWordFrequency(WordFrequency.newBuilder()
+          rawList.add(WordFrequency.newBuilder()
               .setWord(word)
               .setFrequency(1));
         }
@@ -195,30 +198,41 @@ public class FacebookLoginHandler {
     if (location != null) {
       String locationName = location.getName();
       for (String word : split(locationName)) {
-        builder.addWordFrequency(WordFrequency.newBuilder()
+        rawList.add(WordFrequency.newBuilder()
             .setWord(word)
             .setFrequency(1));
       }
     }
     for (String aboutToken : split(fbUser.getAbout())) {
-      builder.addWordFrequency(WordFrequency.newBuilder()
+      rawList.add(WordFrequency.newBuilder()
           .setWord(aboutToken)
           .setFrequency(1));
+    }
+    VectorData.Builder builder = VectorData.newBuilder();
+    for (WordFrequency.Builder wordFrequencyBuilder : rawList) {
+      wordFrequencyBuilder.setWord(KeywordUtils.cleanKeyword(wordFrequencyBuilder.getWord()));
+      if (!Strings.isNullOrEmpty(wordFrequencyBuilder.getWord())) {
+        builder.addWordFrequency(wordFrequencyBuilder);
+      }
     }
     return new Vector(builder.build());
   }
 
   private static TopList<FeatureId, Double> getIndustryFeatureIds(com.restfb.types.User fbUser) {
     Vector facebookUserVector = getFacebookUserVector(fbUser);
+    // for (WordFrequency wordFrequency : facebookUserVector.toVectorData().getWordFrequencyList()) {
+    //   System.out.println(wordFrequency.getWord() + " x " + wordFrequency.getFrequency());
+    // }
 
     // If we have nothing to go off of, let the user choose for himself instead.
-    TopList<FeatureId, Double> topIndustryFeatureIds = new TopList<>(5);
+    TopList<FeatureId, Double> topIndustryFeatureIds = new TopList<>(4);
     if (facebookUserVector.getUniqueWordCount() < 5) {
       return topIndustryFeatureIds;
     }
 
     for (Feature feature : Feature.getAllFeatures()) {
       if (feature.getFeatureId() == FeatureId.SPORTS
+          || feature.getFeatureId() == FeatureId.SUPERMARKETS
           || feature.getFeatureId() == FeatureId.LEISURE_TRAVEL_AND_TOURISM) {
         continue; // Ya, um, let's not... :)
       }
@@ -234,9 +248,17 @@ public class FacebookLoginHandler {
           score -= 0.05;
         }
 
+        // Punish Education since it matches people's universities, which do
+        // help associate a user with an industry (e.g. Stanford -> tech), but
+        // don't strongly correlate to whether the user's doing teaching for a
+        // living.
+        if (feature.getFeatureId() == FeatureId.EDUCATION) {
+          score -= 0.1;
+        }
+
         // Manual testing showed us that scores < 0.8 tended to be false
         // positives, even if they were the highest scores.
-        if (score > 0.7) {
+        if (score > 0.675) {
           topIndustryFeatureIds.add(feature.getFeatureId(), score);
         }
       }

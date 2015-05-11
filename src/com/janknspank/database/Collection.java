@@ -29,9 +29,8 @@ import com.janknspank.database.ExtensionsProto.StorageMethod;
  * @see Collection#get(QueryOption...)
  */
 public abstract class Collection<T extends Message> {
-  // TODO(jonemerson): Think about how many threads we should really have here.
   ListeningExecutorService EXECUTOR_SERVICE =
-      MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(10));
+      MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(100));
 
   protected final Class<T> clazz;
   protected final ImmutableMap<FieldDescriptor, StorageMethod> storageMethodMap;
