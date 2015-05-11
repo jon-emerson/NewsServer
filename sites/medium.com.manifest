@@ -78,5 +78,5 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10501 # Internet
   path_regex: "^\\/backchannel\\/"
-  boost: 4
+  boost: 2
 }
