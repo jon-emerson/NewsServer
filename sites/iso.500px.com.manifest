@@ -1,0 +1,55 @@
+short_name: "500ISO"
+root_domain: "iso.500px.com"
+is_https: true
+start_url: "https://iso.500px.com/"
+path_blacklist {
+  needle: "/category/"
+}
+path_blacklist {
+  needle: "/contact/"
+}
+path_blacklist {
+  needle: "/contests/"
+}
+paragraph_selector: ".post-content > p"
+paragraph_selector: ".post-content > blockquote"
+article_url_pattern {
+  path_regex: "^\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://iso.500px.com/canon-reveals-all-new-sturdier-nifty-fifty-50mm-f1-8-lens/"
+    article_url: "https://iso.500px.com/tanner-stewarts-captivating-landscapes-are-helping-end-modern-day-slavery/"
+    article_url: "https://iso.500px.com/tutorial-learn-how-to-create-a-surreal-seascape-using-your-imagination-and-photoshop/"
+    article_url: "https://iso.500px.com/this-gorgeous-time-lapse-tour-of-the-us-sends-an-important-conservation-message/"
+    article_url: "https://iso.500px.com/top-500px-photographers-share-the-most-important-lessons-they-learned-from-their-moms/"
+    non_article_url: "https://iso.500px.com/category/creative/a-day-in-the-life/"
+    non_article_url: "https://iso.500px.com/category/craft/"
+    non_article_url: "https://iso.500px.com/category/craft/tips-tricks-diy/"
+    non_article_url: "https://iso.500px.com/category/news-and-reviews/photo-news/"
+    non_article_url: "https://iso.500px.com/category/contests/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10513 # Video production.
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer electronics.
+  boost: 0
+}
+feature_boost_pattern {
+  feature_id: 10503 # Hardware and Electronics.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts.
+  boost: -2
+}
