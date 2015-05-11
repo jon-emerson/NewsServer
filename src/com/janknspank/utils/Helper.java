@@ -128,9 +128,9 @@ public class Helper {
 
   public static void main5(String args[]) throws Exception {
     Iterable<Article> seedArticles =
-        new VectorFeatureCreator(FeatureId.VIDEO_PRODUCTION).getSeedArticles();
+        new VectorFeatureCreator(FeatureId.ARTS).getSeedArticles();
     VectorFeature ventureCapitalFeature =
-        (VectorFeature) Feature.getFeature(FeatureId.VIDEO_PRODUCTION);
+        (VectorFeature) Feature.getFeature(FeatureId.ARTS);
     TopList<Article, Double> topArticles = new TopList<Article, Double>(2000);
     for (Article seedArticle : seedArticles) {
       topArticles.add(seedArticle, ventureCapitalFeature.rawScore(seedArticle));
