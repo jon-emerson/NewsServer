@@ -77,6 +77,9 @@ public class SetUserInterestServlet extends StandardServlet {
             if (entity == null) {
               throw new RequestException("Parameter 'interest[entity][id]' is invalid");
             }
+            entity = entity.toBuilder()
+                .clearTopic() // We don't need to remember these on the user objects.
+                .build();
           } else {
             if (interestEntityKeywordParam == null) {
               throw new RequestException("Parameter 'interest[entity][keyword]' is missing");
