@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
 import javax.mail.Message;
@@ -219,11 +220,22 @@ public class SendLunchEmails {
    */
   public static Iterable<Article> getArticles(User user)
       throws DatabaseSchemaException, BiznessException {
-    //return Database.with(Article.class).get(
-     //   new QueryOption.DescendingSort("published_time"),
-       // new QueryOption.Limit(6));
-// TODO(jonemerson): Do the right query...
-    return Iterables.limit(Articles.getMainStream(user), 6);
+    TopList<Article, Double> mainStream = Articles.getMainStream(user);
+    TopList<Article, Double> top6LastDay = new TopList<>(6);
+    long dateInMillisOneDayAgo = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1);
+    long dateInMillis12HoursAgo = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(12);
+    for (Article article : mainStream) {
+      long publishedTime = Articles.getPublishedTime(article);
+      if (publishedTime > dateInMillisOneDayAgo) {
+        // Punish articles from yesterday.  The email should try to be mostly
+        // about articles published that day, before noon.
+        boolean fromYesterday = publishedTime > dateInMillis12HoursAgo;
+        top6LastDay.add(article, fromYesterday
+            ? mainStream.getValue(article) - 0.1
+            : mainStream.getValue(article));
+      }
+    }
+    return top6LastDay;
   }
 
   /**
@@ -245,11 +257,9 @@ public class SendLunchEmails {
     return notification;
   }
 
-  private static Message getMessage(Session session, User user)
+  private static Message getMessage(Session session, User user, Iterable<Article> articles)
       throws MessagingException, IOException, DatabaseSchemaException, BiznessException,
           DatabaseRequestException {
-    Iterable<Article> articles = getArticles(user);
-
     SMTPMessage message = new SMTPMessage(session);
     message.setFrom(new InternetAddress("support@spotternews.com", "Spotter News"));
     message.setRecipient(Message.RecipientType.TO,
@@ -272,11 +282,15 @@ public class SendLunchEmails {
         "spotterEmailRedTagRight@2x.png", SPOTTER_RED_TAG_RIGHT_CID,
         "spotterEmailWhiteTagLeft@2x.png", SPOTTER_WHITE_TAG_LEFT_CID,
         "spotterEmailWhiteTagRight@2x.png", SPOTTER_WHITE_TAG_RIGHT_CID).entrySet()) {
-      MimeBodyPart imagePart = new MimeBodyPart();
-      imagePart.attachFile("resources/img/" + imageAttributes.getKey());
-      imagePart.setContentID("<" + imageAttributes.getValue() + ">");
-      imagePart.setDisposition(MimeBodyPart.INLINE);
-      content.addBodyPart(imagePart);
+      // Only attach images if they're referenced in the email.  Otherwise, if
+      // they're unreferenced, they show up as independent attachments.
+      if (html.contains("\"cid:" + imageAttributes.getValue() + "\"")) {
+        MimeBodyPart imagePart = new MimeBodyPart();
+        imagePart.attachFile("resources/img/" + imageAttributes.getKey());
+        imagePart.setContentID("<" + imageAttributes.getValue() + ">");
+        imagePart.setDisposition(MimeBodyPart.INLINE);
+        content.addBodyPart(imagePart);
+      }
     }
 
     // Let's go!
@@ -295,16 +309,19 @@ public class SendLunchEmails {
       try {
         // Make sure it's lunchtime.
         UserTimezone userTimezone = UserTimezone.getForUser(user, true /* update */);
-        if (!userTimezone.isAroundNoon()) {
+        if (!userTimezone.isAroundNoon() || userTimezone.isWeekend()) {
           continue;
         }
 
         // Send the email.
         try {
-          Message message = getMessage(session, user);
-          transport = EmailTransportProvider.getTransport(session);
-          transport.sendMessage(message, message.getAllRecipients());
-          System.out.println("Email sent to " + user.getEmail());
+          Iterable<Article> articles = getArticles(user);
+          if (Iterables.size(articles) > 2) {
+            Message message = getMessage(session, user, articles);
+            transport = EmailTransportProvider.getTransport(session);
+            transport.sendMessage(message, message.getAllRecipients());
+            System.out.println("Email sent to " + user.getEmail());
+          }
         } catch (BiznessException e) {
           System.out.println("Error while sending email to " + user.getEmail());
           e.printStackTrace();
