@@ -56,7 +56,6 @@ public abstract class StandardServlet extends NewsServlet {
       writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (AuthenticationRequiredException e) {
       handleAuthenticationError(req, resp, "User not found");
-      writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (RequestException e) {
       resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       writeJson(req, resp, getErrorJson(e.getMessage()));
@@ -89,6 +88,8 @@ public abstract class StandardServlet extends NewsServlet {
     } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       writeJson(req, resp, getErrorJson(e.getMessage()));
+    } catch (AuthenticationRequiredException e) {
+      handleAuthenticationError(req, resp, "User not found");
     } catch (RequestException e) {
       resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       writeJson(req, resp, getErrorJson(e.getMessage()));
