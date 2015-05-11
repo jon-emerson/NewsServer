@@ -309,15 +309,15 @@ public class FacebookLoginHandler {
               .build());
       interests.add(companyInterestBuilder.build());
     }
-    for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
-      interests.add(Interest.newBuilder()
-          .setId(GuidFactory.generate())
-          .setType(InterestType.INDUSTRY)
-          .setIndustryCode(industryFeatureId.getId())
-          .setSource(InterestSource.FACEBOOK_PROFILE)
-          .setCreateTime(System.currentTimeMillis())
-          .build());
-    }
+//    for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
+//      interests.add(Interest.newBuilder()
+//          .setId(GuidFactory.generate())
+//          .setType(InterestType.INDUSTRY)
+//          .setIndustryCode(industryFeatureId.getId())
+//          .setSource(InterestSource.FACEBOOK_PROFILE)
+//          .setCreateTime(System.currentTimeMillis())
+//          .build());
+//    }
     return interests;
   }
 
@@ -352,7 +352,7 @@ public class FacebookLoginHandler {
       try {
         com.restfb.types.User fbUser =
             FacebookLoginHandler.getFacebookUser(user.getFacebookAccessToken());
-        TopList<FeatureId, Double> featureIdTopList = new TopList<FeatureId, Double>(1); // getIndustryFeatureIds(fbUser);
+        TopList<FeatureId, Double> featureIdTopList = getIndustryFeatureIds(fbUser);
         for (FeatureId featureId : featureIdTopList) {
           System.out.println(featureId.getId() + ": " + featureId.getTitle()
               + " (" + featureIdTopList.getValue(featureId) + ")");
