@@ -71,8 +71,8 @@ public class IosPushNotificationHelper {
     // Load the keystore and key manager factory.
     FileInputStream keyFileInputStream = null;
     try {
-      // Production app is "WEB-INF/newsserver_production.p12"
-      File keyFile = new File("WEB-INF/demo_newsserver_production.p12");
+      //File keyFile = new File("WEB-INF/demo_newsserver_production.p12");
+      File keyFile = new File("WEB-INF/newsserver_production.p12");
       if (!keyFile.exists()) {
         throw new RuntimeException("Could not find key file");
       }
