@@ -16,7 +16,7 @@ import com.janknspank.proto.UserProto.User;
 public class DeleteUserServlet extends StandardServlet {
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
-      throws DatabaseSchemaException, DatabaseRequestException {
+      throws DatabaseSchemaException, DatabaseRequestException, RequestException {
     User user = getUser(req);
     Sessions.deleteAllFromUser(user);
     Database.delete(user);

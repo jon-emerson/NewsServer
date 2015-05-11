@@ -36,7 +36,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
 
   @Override
   protected Iterable<Article> getArticles(HttpServletRequest req)
-      throws DatabaseSchemaException, NumberFormatException, BiznessException {
+      throws DatabaseSchemaException, NumberFormatException, BiznessException, RequestException {
     String industryCodeId = this.getParameter(req, "industry_code");
     String contacts = this.getParameter(req, "contacts");
     String entityId = this.getParameter(req, "entity_id");
@@ -167,7 +167,7 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
    */
   private Iterable<Article> getArticlesForNotification(
       HttpServletRequest req, String notificationBlob)
-      throws DatabaseSchemaException, BiznessException {
+      throws DatabaseSchemaException, BiznessException, RequestException {
     // Asynchronously start updating the notification and retrieving the
     // specific article we need to show.
     // NOTE(jonemerson): Notification blob is currently in the form:

@@ -71,10 +71,14 @@ public class NewsServlet extends HttpServlet {
     return (Session) request.getAttribute(SESSION_ATTRIBUTE_KEY);
   }
 
-  public User getUser(HttpServletRequest request) throws DatabaseSchemaException {
+  public User getUser(HttpServletRequest request)
+      throws DatabaseSchemaException, AuthenticationRequiredException {
     User user = (User) request.getAttribute(USER_ATTRIBUTE_KEY);
     if (user == null) {
       user = Database.with(User.class).get(getSession(request).getUserId());
+      if (user == null) {
+        throw new AuthenticationRequiredException("No user found");
+      }
       request.setAttribute(USER_ATTRIBUTE_KEY, user);
     }
     return user;
@@ -155,7 +159,7 @@ public class NewsServlet extends HttpServlet {
     return null;
   }
 
-  private void handleAuthenticationError(HttpServletRequest request,
+  protected void handleAuthenticationError(HttpServletRequest request,
       HttpServletResponse response, String message)
       throws ServletException, IOException {
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
