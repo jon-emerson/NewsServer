@@ -9,7 +9,6 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.FacebookLoginHandler;
 import com.janknspank.bizness.Sessions;
-import com.janknspank.bizness.UserInterests;
 import com.janknspank.crawler.social.SocialException;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -20,21 +19,6 @@ import com.janknspank.proto.UserProto.User;
 
 @ServletMapping(urlPattern = "/v1/facebook_login")
 public class FacebookLoginServlet extends StandardServlet {
-  /**
-   * There's a weird client bug where if the user gets company interests but
-   * not industry interests, they get both a pop-up and the industry chooser.
-   * And the app crashes if they try to get out of it.  To fix this, don't
-   * send company interests if there's no industry interests.
-   * @param user
-   * @return
-   */
-  private static User ftueClearInterestsHack(User user) {
-    if (UserInterests.getUserIndustryFeatureIds(user).isEmpty()) {
-      return user.toBuilder().clearInterest().build();
-    }
-    return user;
-  }
-
   @Override
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws BiznessException, RequestException, DatabaseSchemaException, DatabaseRequestException {
@@ -57,7 +41,7 @@ public class FacebookLoginServlet extends StandardServlet {
 
     // Create the response.
     JSONObject response = this.createSuccessResponse();
-    response.put("user", new UserHelper(ftueClearInterestsHack(user)).getUserJson());
+    response.put("user", new UserHelper(user).getUserJson());
     response.put("session", Serializer.toJSON(session));
 
     // To help with client latency, return the articles for the user's home

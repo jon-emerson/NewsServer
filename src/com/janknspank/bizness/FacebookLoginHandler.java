@@ -309,15 +309,15 @@ public class FacebookLoginHandler {
               .build());
       interests.add(companyInterestBuilder.build());
     }
-//    for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
-//      interests.add(Interest.newBuilder()
-//          .setId(GuidFactory.generate())
-//          .setType(InterestType.INDUSTRY)
-//          .setIndustryCode(industryFeatureId.getId())
-//          .setSource(InterestSource.FACEBOOK_PROFILE)
-//          .setCreateTime(System.currentTimeMillis())
-//          .build());
-//    }
+    for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
+      interests.add(Interest.newBuilder()
+          .setId(GuidFactory.generate())
+          .setType(InterestType.INDUSTRY)
+          .setIndustryCode(industryFeatureId.getId())
+          .setSource(InterestSource.FACEBOOK_PROFILE)
+          .setCreateTime(System.currentTimeMillis())
+          .build());
+    }
     return interests;
   }
 
