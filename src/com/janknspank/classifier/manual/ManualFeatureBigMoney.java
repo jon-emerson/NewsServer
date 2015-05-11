@@ -45,11 +45,11 @@ public class ManualFeatureBigMoney extends ManualHeuristicFeature {
       Arrays.asList();
   private static final Set<FeatureId> RELEVANT_TO_INDUSTRIES =
       ImmutableSet.of(
-          FeatureId.EQUITY_INVESTING,
           FeatureId.AUTOMOTIVE,
           FeatureId.AVIATION,
-          FeatureId.BIOTECHNOLOGY,
+          FeatureId.EQUITY_INVESTING,
           FeatureId.INTERNET,
+          FeatureId.LIFE_SCIENCES,
           FeatureId.MERGERS_AND_ACQUISITIONS,
           FeatureId.MINING_AND_METALS,
           FeatureId.OIL_AND_ENERGY,

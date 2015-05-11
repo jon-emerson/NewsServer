@@ -11,7 +11,7 @@ public enum FeatureId {
   INTERNET(10501, FeatureType.INDUSTRY, "Internet"),
   SOFTWARE(10502, FeatureType.INDUSTRY, "Software"),
   HARDWARE_AND_ELECTRONICS(10503, FeatureType.INDUSTRY, "Hardware and Electronics"),
-  BIOTECHNOLOGY(10504, FeatureType.INDUSTRY, "Life Sciences"),
+  LIFE_SCIENCES(10504, FeatureType.INDUSTRY, "Life Sciences"),
   VETERINARY(10505, FeatureType.INDUSTRY, "Veterinary"),
   APPAREL_AND_FASHION(10506, FeatureType.INDUSTRY, "Apparel and Fashion"),
   SUPERMARKETS(10508, FeatureType.INDUSTRY, "Supermarkets"),

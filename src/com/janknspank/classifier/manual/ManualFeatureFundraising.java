@@ -62,12 +62,12 @@ public class ManualFeatureFundraising extends ManualHeuristicFeature {
       Arrays.asList();
   private static final Set<FeatureId> RELEVANT_TO_INDUSTRIES =
       ImmutableSet.of(
-          FeatureId.BIOTECHNOLOGY,
           FeatureId.HARDWARE_AND_ELECTRONICS,
           FeatureId.INTERNET,
+          FeatureId.LIFE_SCIENCES,
           FeatureId.OIL_AND_ENERGY,
-          FeatureId.VENTURE_CAPITAL,
-          FeatureId.UTILITIES);
+          FeatureId.UTILITIES,
+          FeatureId.VENTURE_CAPITAL);
 
   public ManualFeatureFundraising() {
     super(FeatureId.MANUAL_HEURISTIC_FUNDRAISING);

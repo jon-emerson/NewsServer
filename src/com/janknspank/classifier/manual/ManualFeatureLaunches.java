@@ -116,11 +116,11 @@ public class ManualFeatureLaunches extends ManualHeuristicFeature {
           Pattern.compile("wounded"));
   private static final Set<FeatureId> RELEVANT_TO_INDUSTRIES =
       ImmutableSet.of(
-          FeatureId.BIOTECHNOLOGY,
           FeatureId.COMPUTER_GAMES,
           FeatureId.CONSUMER_ELECTRONICS,
           FeatureId.HARDWARE_AND_ELECTRONICS,
           FeatureId.INTERNET,
+          FeatureId.LIFE_SCIENCES,
           FeatureId.SOFTWARE,
           FeatureId.USER_EXPERIENCE,
           FeatureId.VENTURE_CAPITAL);
