@@ -205,23 +205,23 @@ a.btn-primary,
   margin-bottom: 24px;
 }
 
-.linkTexting_oq3j39q0 {
+.linkTextingWidget {
   display: inline;
   width: 320px;
   margin: 26px 0;
 }
 
-.linkTextingInner_oq3j39q0 {
+.linkTextingInner {
   width: 320px;
   text-align: right;
 }
 
-.linkTextingButton_oq3j39q0 {
+.linkTextingButton {
   width: 84px;
   background-color: #FF3F32;
 }
 
-.linkTextingButton_oq3j39q0:hover {
+.linkTextingButton:hover {
   background-color: #930711;
 }
 
