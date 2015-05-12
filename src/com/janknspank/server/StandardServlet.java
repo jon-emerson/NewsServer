@@ -71,7 +71,7 @@ public abstract class StandardServlet extends NewsServlet {
   @Override
   protected final void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    Exception ex = null;
+    Throwable ex = null;
     try {
       JSONObject response = doPostInternal(req, resp);
       Asserts.assertTrue(response.getBoolean("success"), "success in response",
@@ -98,6 +98,9 @@ public abstract class StandardServlet extends NewsServlet {
       ex = e;
       resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       writeJson(req, resp, getErrorJson(e.getMessage()));
+    } catch (Throwable e) {
+      ex = e;
+      throw e;
     } finally {
       if (ex != null) {
         ex.printStackTrace();

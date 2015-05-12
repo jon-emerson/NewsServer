@@ -17,16 +17,4 @@
     <servlet-name>ResourcesServlet</servlet-name>
     <url-pattern>resources/*</url-pattern>
   </servlet-mapping>
-
-  <!-- Application servlets. -->
-  <!-- NOTE: Usually just define these with a @ServletMapping annotation on the
-       HttpServlet classes themselves, in /server/. -->
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.janknspank.server.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping>
 </web-app>

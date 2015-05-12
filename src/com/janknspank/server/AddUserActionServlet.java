@@ -17,6 +17,7 @@ import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserAction;
@@ -81,6 +82,7 @@ public class AddUserActionServlet extends StandardServlet {
     if (interestTypeParam != null) {
       Interest.Builder interestBuilder = Interest.newBuilder();
       interestBuilder.setId(GuidFactory.generate());
+      interestBuilder.setSource(InterestSource.UNKNOWN);
 
       InterestType interestType = InterestType.valueOf(interestTypeParam);
       if (interestType == null) {

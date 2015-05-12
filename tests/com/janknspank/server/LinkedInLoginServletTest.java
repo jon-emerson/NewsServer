@@ -5,14 +5,14 @@ import static org.junit.Assert.fail;
 
 import com.janknspank.bizness.BiznessException;
 
-public class LoginServletTest {
+public class LinkedInLoginServletTest {
   @Test
   public void testLinkedInOAuthState() throws Exception {
-    String oAuthState = LoginServlet.getLinkedInOAuthState();
-    LoginServlet.verifyLinkedInOAuthState(oAuthState);
+    String oAuthState = LinkedInLoginServlet.getLinkedInOAuthState();
+    LinkedInLoginServlet.verifyLinkedInOAuthState(oAuthState);
 
     try {
-      LoginServlet.verifyLinkedInOAuthState("suck it trebek");
+      LinkedInLoginServlet.verifyLinkedInOAuthState("suck it trebek");
     } catch (BiznessException e) {
       return; // Success!
     }

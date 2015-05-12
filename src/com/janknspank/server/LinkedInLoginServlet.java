@@ -27,8 +27,8 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.UserProto.User;
 
-@ServletMapping(urlPattern = "/v1/login")
-public class LoginServlet extends StandardServlet {
+@ServletMapping(urlPattern = "/v1/linked_in_login")
+public class LinkedInLoginServlet extends StandardServlet {
   private final Fetcher fetcher = new Fetcher();
   private static final String OAUTH_STATE_SALT = "this is my very fancy salt today";
   static final String LINKED_IN_API_KEY;
@@ -80,8 +80,8 @@ public class LoginServlet extends StandardServlet {
           .addParameter("grant_type", "authorization_code")
           .addParameter("code", authorizationCode)
           .addParameter("redirect_uri", getRedirectUrl(req))
-          .addParameter("client_id", LoginServlet.LINKED_IN_API_KEY)
-          .addParameter("client_secret", LoginServlet.LINKED_IN_SECRET_KEY)
+          .addParameter("client_id", LinkedInLoginServlet.LINKED_IN_API_KEY)
+          .addParameter("client_secret", LinkedInLoginServlet.LINKED_IN_SECRET_KEY)
           .build().toString();
       System.out.println("Fetching " + url);
       response = fetcher.getResponseBody(url);
