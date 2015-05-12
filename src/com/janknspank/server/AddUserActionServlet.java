@@ -80,6 +80,7 @@ public class AddUserActionServlet extends StandardServlet {
     // what we can, and remember everything we can.  We can do validation later.
     if (interestTypeParam != null) {
       Interest.Builder interestBuilder = Interest.newBuilder();
+      interestBuilder.setId(GuidFactory.generate());
 
       InterestType interestType = InterestType.valueOf(interestTypeParam);
       if (interestType == null) {
@@ -90,10 +91,11 @@ public class AddUserActionServlet extends StandardServlet {
       if (interestEntityKeywordParam != null
           && interestEntityIdParam != null
           && interestEntityTypeParam != null) {
-        interestBuilder.setEntity(Entity.newBuilder()
-            .setKeyword(interestEntityKeywordParam)
-            .setId(interestEntityIdParam)
-            .setType(interestEntityTypeParam));
+        interestBuilder.setEntity(
+            Entity.newBuilder()
+                .setKeyword(interestEntityKeywordParam)
+                .setId(interestEntityIdParam)
+                .setType(interestEntityTypeParam));
       }
       if (interestIndustryCodeParam != null) {
         interestBuilder.setIndustryCode(Integer.parseInt(interestIndustryCodeParam));
