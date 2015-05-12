@@ -71,6 +71,7 @@ public abstract class StandardServlet extends NewsServlet {
   @Override
   protected final void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+    Exception ex = null;
     try {
       JSONObject response = doPostInternal(req, resp);
       Asserts.assertTrue(response.getBoolean("success"), "success in response",
@@ -80,19 +81,27 @@ public abstract class StandardServlet extends NewsServlet {
       resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
       resp.setHeader("Location", e.getNextUrl());
     } catch (UnsupportedOperationException e) {
+      ex = e;
       resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
       writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (NotFoundException e) {
+      ex = e;
       resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
       writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
+      ex = e;
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       writeJson(req, resp, getErrorJson(e.getMessage()));
     } catch (AuthenticationRequiredException e) {
       handleAuthenticationError(req, resp, "User not found");
     } catch (RequestException e) {
+      ex = e;
       resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       writeJson(req, resp, getErrorJson(e.getMessage()));
+    } finally {
+      if (ex != null) {
+        ex.printStackTrace();
+      }
     }
   }
 }
