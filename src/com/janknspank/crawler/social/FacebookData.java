@@ -1,7 +1,13 @@
 package com.janknspank.crawler.social;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Properties;
+
+import org.apache.commons.io.IOUtils;
 
 import com.janknspank.bizness.Articles;
 import com.janknspank.classifier.ClassifierException;
@@ -21,12 +27,8 @@ import com.restfb.json.JsonObject;
 
 public class FacebookData {
   private static final Logger LOG = new Logger(FacebookData.class);
-  private static final String CRAWLER_APP_ID = "6897962850";
-  private static final String CRAWLER_APP_SECRET = "42d651b1aa4cf747e343fde5f7c33ad7";
-  private static FacebookClient __crawlerClient = null;
-  private static final String FRONTENT_APP_ID = "317027871839276";
-  private static final String FRONTENT_APP_SECRET = "4324edc68cb6fd1ff4753b3b9ff54fdd";
-  private static FacebookClient __frontendClient = null;
+  private static String __facebookAppSecret = null;
+  private static FacebookClient __facebookClient = null;
 
   private static String encodeUrl(String url) {
     // Example urlObject: http://goo.gl/JVf3tt
@@ -38,14 +40,14 @@ public class FacebookData {
     }
   }
 
-  public static Long getPublishTime(Url url) throws SocialException {
+  public static Long getXXPublishTime(Url url) throws SocialException {
     String encodedURL = encodeUrl(url.getUrl());
-    JsonObject urlObject = getCrawlerClient().fetchObject(encodedURL, JsonObject.class);
+    JsonObject urlObject = getFacebookClient().fetchObject(encodedURL, JsonObject.class);
     if (urlObject != null
         && urlObject.has("og_object")
         && urlObject.getJsonObject("og_object").has("id")) {
       String objectId = urlObject.getJsonObject("og_object").getString("id");
-      JsonObject object = getCrawlerClient().fetchObject(objectId, JsonObject.class);
+      JsonObject object = getFacebookClient().fetchObject(objectId, JsonObject.class);
       if (object != null
           && object.has("created_time")) {
         return DateParser.parseDateTime(object.getString("created_time"));
@@ -56,10 +58,13 @@ public class FacebookData {
 
   public static SocialEngagement getEngagementForArticle(ArticleOrBuilder article)
       throws SocialException {
+    // hack!!!
+    if (true) { return null; }
+
     String url = article.getUrl();
     try {
       String encodedURL = encodeUrl(url);
-      JsonObject urlObject = getCrawlerClient().fetchObject(encodedURL, JsonObject.class);
+      JsonObject urlObject = getFacebookClient().fetchObject(encodedURL, JsonObject.class);
 
       // Get shares and comments
       if (!urlObject.has("share")) {
@@ -72,7 +77,7 @@ public class FacebookData {
 
         // Get likes
         String objectId = urlObject.getJsonObject("og_object").getString("id");
-        JsonObject likesObject = getCrawlerClient().fetchObject(objectId, JsonObject.class,
+        JsonObject likesObject = getFacebookClient().fetchObject(objectId, JsonObject.class,
             Parameter.with("fields", "likes.summary(true)"));
         int likeCount = likesObject.getJsonObject("likes")
             .getJsonObject("summary")
@@ -103,26 +108,41 @@ public class FacebookData {
     }
   }
 
-  private static synchronized FacebookClient getCrawlerClient() throws SocialException {
-    if (__crawlerClient == null) {
-      __crawlerClient =
-          new DefaultFacebookClient(CRAWLER_APP_ID + "|" + CRAWLER_APP_SECRET,
-              CRAWLER_APP_SECRET, Version.VERSION_2_2);
+  private static synchronized FacebookClient getFacebookClient() throws SocialException {
+    if (__facebookClient == null) {
+      Properties properties = getFacebookProperties();
+      String appSecret = properties.getProperty("appSecret");
+      String appId = properties.getProperty("appId");
+      __facebookClient =
+          new DefaultFacebookClient(appId + "|" + appSecret, appSecret, Version.VERSION_2_2);
     }
-    return __crawlerClient;
+    return __facebookClient;
   }
 
-  public static synchronized FacebookClient getFrontendClient() throws SocialException {
-    if (__frontendClient == null) {
-      __frontendClient =
-          new DefaultFacebookClient(FRONTENT_APP_ID + "|" + FRONTENT_APP_SECRET,
-              FRONTENT_APP_SECRET, Version.VERSION_2_2);
+  public static synchronized String getFacebookAppSecret() throws SocialException {
+    if (__facebookAppSecret == null) {
+      Properties properties = getFacebookProperties();
+      __facebookAppSecret = properties.getProperty("appSecret");
     }
-    return __frontendClient;
+    return __facebookAppSecret;
+  }
+
+  private static Properties getFacebookProperties() throws SocialException {
+    Properties properties = new Properties();
+    InputStream inputStream = null;
+    try {
+      inputStream = new FileInputStream("facebook.properties");
+      properties.load(inputStream);
+      return properties;
+    } catch (IOException e) {
+      throw new SocialException("Could not read facebook.properties: " + e.getMessage(), e);
+    } finally {
+      IOUtils.closeQuietly(inputStream);
+    }
   }
 
   public static void main(String args[]) throws Exception {
-    System.out.println(getPublishTime(Url.newBuilder()
+    System.out.println(getXXPublishTime(Url.newBuilder()
         .setUrl("http://firstround.com/review/Top-Hacks-from-a-PM-Behind-Two-of"
             + "-Techs-Hottest-Products/")
         .build()));

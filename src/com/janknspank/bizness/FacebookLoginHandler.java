@@ -38,7 +38,9 @@ import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.server.RequestException;
+import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.Version;
 import com.restfb.types.NamedFacebookType;
 import com.restfb.types.User.Education;
 import com.restfb.types.User.EducationClass;
@@ -53,7 +55,8 @@ public class FacebookLoginHandler {
   public static com.restfb.types.User getFacebookUser(String fbAccessToken)
       throws SocialException, RequestException {
     long startTime = System.currentTimeMillis();
-    FacebookClient facebookClient = FacebookData.getFrontendClient();
+    FacebookClient facebookClient = new DefaultFacebookClient(fbAccessToken,
+        FacebookData.getFacebookAppSecret(), Version.VERSION_2_2);
     com.restfb.types.User fbUser = facebookClient.fetchObject("/me",
         com.restfb.types.User.class);
     if (fbUser == null) {

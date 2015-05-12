@@ -458,12 +458,12 @@ class ArticleCreator {
 
     // Geez, they're making it hard on us.  Why doesn't everyone just tell us
     // when their articles are published??  OK, let's ask Facebook...
-    try {
-      Long facebookPublishTime = FacebookData.getPublishTime(url);
-      if (facebookPublishTime != null) {
-        return facebookPublishTime;
-      }
-    } catch (SocialException e) {}
+//    try {
+//      Long facebookPublishTime = FacebookData.getPublishTime(url);
+//      if (facebookPublishTime != null) {
+//        return facebookPublishTime;
+//      }
+//    } catch (SocialException e) {}
 
     // Alright, fine.  You win.  You get our discovery date.
     return url.getDiscoveryTime();
