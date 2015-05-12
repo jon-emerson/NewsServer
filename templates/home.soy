@@ -53,11 +53,12 @@
                   </a>
                   <div class="link-texting-explanation-label">or text app store link to:</div>
                   <div class="link-texting-wrapper-right">
-                    <div class="linkTexting_oq3j39q0">
-                      <div class="linkTextingInner_oq3j39q0">
-                        <input class="linkTextingInput_oq3j39q0" type="tel" id="numberToText_linkTexting_oq3j39q0_3997396a-9558-4200-b632-b105384e939e-link1"></input>
-                        <button class="linkTextingButton_oq3j39q0" type="button" onclick="sendLink_linkTexting_oq3j39q0('3997396a-9558-4200-b632-b105384e939e', '-link1')" id="sendButton_linkTexting_oq3j39q0_3997396a-9558-4200-b632-b105384e939e">Text link</button>
-                        <div class="linkTextingError_oq3j39q0" id="linkTextingError_oq3j39q0_3997396a-9558-4200-b632-b105384e939e-link1" style="display:none;"></div>
+                    <div class="linkTextingWidget">
+                      <div class="linkTextingInner">
+                        <input type="hidden" class="linkID" value="10877c50-bdfc-456d-9b61-edbbf0fe4523">
+                        <input class="linkTextingInput" type="tel" id="numberToText_linkTexting"></input>
+                        <button class="linkTextingButton" type="button" id="sendButton_linkTexting">Text link</button>
+                        <div class="linkTextingError" id="linkTextingError" style="display:none;"></div>
                       </div>
                     </div>
                   </div>
@@ -177,14 +178,20 @@
           </div>
           <div class="row" id="bottom-text-link-row">
             <div class="col-xs-12">
-              <div class="linkTexting_oq3j39q0" id="bottom-link-texting">
-                <div class="linkTextingInner_oq3j39q0">
-                  <input class="linkTextingInput_oq3j39q0" type="tel" id="numberToText_linkTexting_oq3j39q0_3997396a-9558-4200-b632-b105384e939e-link2"></input>
-                  <button class="linkTextingButton_oq3j39q0" type="button" onclick="sendLink_linkTexting_oq3j39q0('3997396a-9558-4200-b632-b105384e939e', '-link2)" id="sendButton_linkTexting_oq3j39q0_3997396a-9558-4200-b632-b105384e939e">Text link</button>
-                  <div class="linkTextingError_oq3j39q0" id="linkTextingError_oq3j39q0_3997396a-9558-4200-b632-b105384e939e-link2" style="display:none;"></div>
+              <div class="linkTextingWidget" id="bottom-link-texting">
+                <div class="linkTextingInner">
+                  <input type="hidden" class="linkID" value="3997396a-9558-4200-b632-b105384e939e">
+                  <input class="linkTextingInput" type="tel" id="numberToText_linkTexting"></input>
+                  <button class="linkTextingButton" type="button" id="sendButton_linkTexting">Text link</button>
+                  <div class="linkTextingError" id="linkTextingError" style="display:none;"></div>
                 </div>
               </div>
-              <script type="text/javascript" src="//d3q6uu7asevdsg.cloudfront.net/1.2/js/link_texting_multi.min.js"></script>
+              <script type="text/javascript">
+                var linkTextingDefaultCountry = "us";
+                var linkTextingPreferredCountries = ["us", “ca”];
+                var linkTextingOnlyCountries = ["us", “ca”];
+              </script>
+              <script type="text/javascript" src="//d3q6uu7asevdsg.cloudfront.net/1.3/js/link_texting.min.js"></script>
             </div>
           </div>
         </div>
