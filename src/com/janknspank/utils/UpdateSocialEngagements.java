@@ -67,22 +67,31 @@ public class UpdateSocialEngagements {
             : (double) (System.currentTimeMillis() - socialEngagement.getCreateTime())
                   / TimeUnit.HOURS.toMillis(1);
 
-    // For articles between 0 and 8 hours old, update social engagements if we
-    // haven't updated them in at least 3 hours.
-    if (articleAgeInHours < 8) {
-      return socialEngagementAgeInHours > 3;
-    }
+    // NOTE: WE USED TO BE SUPER AGGRESSIVE HERE BUT FACEBOOK STARTED THROTTLING
+    // OUR REQUESTS!!  This was especially bad because we shared our Facebook app
+    // ID across both frontend and crawling, which broke facebook authentication
+    // for end users.  To fix this, we switched to a secondary app ID, so that
+    // the two quotas are isolated - but this means we'll have a small quota for
+    // the crawler for the foreseeable future.  Someday we might want to switch
+    // back to the frontend app ID / secret so that we can get higher QPS quotas
+    // (since query quota seems to be associated with # of users an app has).
 
-    // For articles between 8 and 24 hours old, update social engagements if we
+    // For articles between 0 and 8 hours old, update social engagements if we
     // haven't updated them in at least 6 hours.
-    if (articleAgeInHours < 24) {
+    if (articleAgeInHours < 8) {
       return socialEngagementAgeInHours > 6;
     }
 
-    // For articles between 24 hours and 2 1/2 days old, update social
-    // engagements if we haven't updated them in at least 12 hours.
-    if (articleAgeInHours < (24 + 24 + 12)) {
+    // For articles between 8 and 24 hours old, update social engagements if we
+    // haven't updated them in at least 12 hours.
+    if (articleAgeInHours < 24) {
       return socialEngagementAgeInHours > 12;
+    }
+
+    // For articles between 24 hours and 2 1/2 days old, update social
+    // engagements if we haven't updated them in at least 24 hours.
+    if (articleAgeInHours < (24 + 24 + 12)) {
+      return socialEngagementAgeInHours > 24;
     }
 
     return false;
