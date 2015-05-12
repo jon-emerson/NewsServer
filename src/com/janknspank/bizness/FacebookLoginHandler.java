@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
@@ -94,9 +95,14 @@ public class FacebookLoginHandler {
     ListenableFuture<Iterable<User>> userByFacebookIdFuture = Database.with(
         User.class).getFuture(
         new QueryOption.WhereEquals("facebook_id", fbUser.getId()));
-    ListenableFuture<Iterable<User>> userByEmailFuture = Database.with(
-        User.class).getFuture(
-        new QueryOption.WhereEquals("email", fbUser.getEmail()));
+
+    ListenableFuture<Iterable<User>> userByEmailFuture;
+    if (Strings.isNullOrEmpty(fbUser.getEmail())) {
+      userByEmailFuture = Futures.immediateFuture(null);
+    } else {
+      userByEmailFuture = Database.with(User.class).getFuture(
+          new QueryOption.WhereEquals("email", fbUser.getEmail()));
+    }
     try {
       User existingUser = Iterables
           .getFirst(userByFacebookIdFuture.get(), null);
