@@ -37,7 +37,10 @@ public class FacebookLoginServlet extends StandardServlet {
       throw new BiznessException("Could not read Facebook properties file", e);
     }
 
+    long startTime = System.currentTimeMillis();
     Session session = Sessions.createFromFacebookUser(user, fbUser);
+    System.out.println("Sessions.createFromFacebookUser(User, User), time = "
+        + (System.currentTimeMillis() - startTime) + "ms");
 
     // Create the response.
     JSONObject response = this.createSuccessResponse();
@@ -46,9 +49,12 @@ public class FacebookLoginServlet extends StandardServlet {
 
     // To help with client latency, return the articles for the user's home
     // screen in this response.
+    startTime = System.currentTimeMillis();
     Iterable<Article> articles = Articles.getMainStream(user);
     response.put("articles", ArticleSerializer.serialize(articles, user,
         false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
+    System.out.println("FacebookLoginServlet.doPostInternal, main stream calculation, time = "
+        + (System.currentTimeMillis() - startTime) + "ms");
 
     return response;
   }
