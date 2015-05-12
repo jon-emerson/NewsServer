@@ -351,7 +351,7 @@ public class KeywordCanonicalizer {
     return ImmutableList.copyOf(entityIdToKeywordMap.values());
   }
 
-  private static synchronized Map<String, KeywordToEntityId> getKeywordToEntityIdMap() {
+  public static synchronized Map<String, KeywordToEntityId> getKeywordToEntityIdMap() {
     if (__keywordToEntityIdMap == null) {
       __keywordToEntityIdMap = Maps.newHashMap();
       try {
@@ -368,7 +368,7 @@ public class KeywordCanonicalizer {
     return __keywordToEntityIdMap;
   }
 
-  private static synchronized Map<String, Entity> getEntityIdToEntityMap() {
+  public static synchronized Map<String, Entity> getEntityIdToEntityMap() {
     if (__entityIdToEntityMap == null) {
       Map<String, KeywordToEntityId> keywordToEntityIdMap = getKeywordToEntityIdMap();
       Set<String> entityIds = Sets.newHashSet();

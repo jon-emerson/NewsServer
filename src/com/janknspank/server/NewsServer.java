@@ -9,10 +9,21 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.reflections.Reflections;
 
 import com.google.common.collect.Sets;
+import com.janknspank.nlp.KeywordCanonicalizer;
 
 public class NewsServer {
+  /**
+   * Do slow things before we open a socket and Heroku thinks we're live.
+   */
+  private static void initialize() {
+    KeywordCanonicalizer.getKeywordToEntityIdMap();
+    KeywordCanonicalizer.getEntityIdToEntityMap();
+  }
+
   @SuppressWarnings("unchecked")
   public static void main(String[] args) throws Exception {
+    initialize();
+
     int port = (System.getenv("PORT") == null) ? 5000 : Integer.valueOf(System.getenv("PORT"));
     Server server = new Server(port);
 
