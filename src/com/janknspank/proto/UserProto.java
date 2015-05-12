@@ -8421,6 +8421,14 @@ public final class UserProto {
        */
       FACEBOOK_PROFILE(3, 4),
       /**
+       * <code>DEFAULT_TO_PREVENT_CRASH = 5;</code>
+       *
+       * <pre>
+       * Added to prevent crashes in V1.0 app.
+       * </pre>
+       */
+      DEFAULT_TO_PREVENT_CRASH(4, 5),
+      /**
        * <code>TOMBSTONE = 3;</code>
        *
        * <pre>
@@ -8429,7 +8437,7 @@ public final class UserProto {
        * Chris Messina (or whoever).
        * </pre>
        */
-      TOMBSTONE(4, 3),
+      TOMBSTONE(5, 3),
       ;
 
       /**
@@ -8457,6 +8465,14 @@ public final class UserProto {
        */
       public static final int FACEBOOK_PROFILE_VALUE = 4;
       /**
+       * <code>DEFAULT_TO_PREVENT_CRASH = 5;</code>
+       *
+       * <pre>
+       * Added to prevent crashes in V1.0 app.
+       * </pre>
+       */
+      public static final int DEFAULT_TO_PREVENT_CRASH_VALUE = 5;
+      /**
        * <code>TOMBSTONE = 3;</code>
        *
        * <pre>
@@ -8476,6 +8492,7 @@ public final class UserProto {
           case 1: return USER;
           case 2: return LINKED_IN_PROFILE;
           case 4: return FACEBOOK_PROFILE;
+          case 5: return DEFAULT_TO_PREVENT_CRASH;
           case 3: return TOMBSTONE;
           default: return null;
         }
@@ -11805,7 +11822,7 @@ public final class UserProto {
       "\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\ten" +
       "tity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022" +
       "\020\n\010end_time\030\005 \001(\003\")\n\017LinkedInContact\022\026\n\004" +
-      "name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\255\003\n\010Interest\022 \n\002id\030" +
+      "name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\314\003\n\010Interest\022 \n\002id\030" +
       "\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022*\n\004type\030\002 \001(" +
       "\0162\026.Interest.InterestTypeB\004\210\246\035\001\022.\n\006sourc" +
       "e\030\003 \001(\0162\030.Interest.InterestSourceB\004\210\246\035\001\022" +
@@ -11813,24 +11830,25 @@ public final class UserProto {
       "ry_code\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\"i",
       "\n\014InterestType\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUSTRY" +
       "\020\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031" +
-      "\n\025ADDRESS_BOOK_CONTACTS\020\004\"c\n\016InterestSou" +
-      "rce\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKED_IN_" +
-      "PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\r\n\tTOMBS" +
-      "TONE\020\003*\004\010\007\020\010\"\236\004\n\nUserAction\022\034\n\002id\030\001 \001(\tB" +
-      "\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001" +
-      "\230\246\035\030\250\246\035\001\220\246\035\003\0225\n\013action_type\030\003 \001(\0162\026.User" +
-      "Action.ActionTypeB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 " +
-      "\001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035\001",
-      "\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035\n\013create_time\030\006 \001(\003B\010\210\246\035\001" +
-      "\220\246\035\003\022\027\n\017read_start_time\030\007 \001(\003\022\025\n\rread_en" +
-      "d_time\030\010 \001(\003\022!\n\010interest\030\013 \003(\0132\t.Interes" +
-      "tB\004\240\246\035\003\022)\n\026on_stream_for_interest\030\014 \001(\0132" +
-      "\t.Interest\"\242\001\n\nActionType\022\013\n\007UNKNOWN\020\000\022\014" +
-      "\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STRE" +
-      "AM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOT" +
-      "E_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010\022\017" +
-      "\n\013EMAIL_CLICK\020\t:\024\212\265\030\020MySQL.UserActionB!\n" +
-      "\024com.janknspank.protoB\tUserProto"
+      "\n\025ADDRESS_BOOK_CONTACTS\020\004\"\201\001\n\016InterestSo" +
+      "urce\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKED_IN" +
+      "_PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\034\n\030DEFA" +
+      "ULT_TO_PREVENT_CRASH\020\005\022\r\n\tTOMBSTONE\020\003*\004\010" +
+      "\007\020\010\"\236\004\n\nUserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002" +
+      "\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220" +
+      "\246\035\003\0225\n\013action_type\030\003 \001(\0162\026.UserAction.Ac" +
+      "tionTypeB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035\001",
+      "\230\246\035\030\250\246\035\001\220\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001" +
+      "\220\246\035\005\022\035\n\013create_time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017r" +
+      "ead_start_time\030\007 \001(\003\022\025\n\rread_end_time\030\010 " +
+      "\001(\003\022!\n\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)" +
+      "\n\026on_stream_for_interest\030\014 \001(\0132\t.Interes" +
+      "t\"\242\001\n\nActionType\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORIT" +
+      "E\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005S" +
+      "HARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n" +
+      "\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010\022\017\n\013EMAIL_C" +
+      "LICK\020\t:\024\212\265\030\020MySQL.UserActionB!\n\024com.jank",
+      "nspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

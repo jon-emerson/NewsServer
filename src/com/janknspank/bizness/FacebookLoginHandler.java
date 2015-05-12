@@ -309,14 +309,36 @@ public class FacebookLoginHandler {
               .build());
       interests.add(companyInterestBuilder.build());
     }
-    for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
+    TopList<FeatureId, Double> industryFeatureIds = getIndustryFeatureIds(fbUser);
+    if (Iterables.isEmpty(industryFeatureIds)) {
+      // This is to prevent a crash bug in v1.0.0, where if the user has no
+      // initial industries, UI comes up to ask them about their industry
+      // behind a FTUE, and if the FTUE is then dismissed, there's an exception.
+      // To fix it, we just add some general-purpose industries, for now.
       interests.add(Interest.newBuilder()
           .setId(GuidFactory.generate())
           .setType(InterestType.INDUSTRY)
-          .setIndustryCode(industryFeatureId.getId())
-          .setSource(InterestSource.FACEBOOK_PROFILE)
+          .setIndustryCode(FeatureId.MANAGEMENT.getId())
+          .setSource(InterestSource.DEFAULT_TO_PREVENT_CRASH)
           .setCreateTime(System.currentTimeMillis())
           .build());
+      interests.add(Interest.newBuilder()
+          .setId(GuidFactory.generate())
+          .setType(InterestType.INDUSTRY)
+          .setIndustryCode(FeatureId.INTERNET.getId())
+          .setSource(InterestSource.DEFAULT_TO_PREVENT_CRASH)
+          .setCreateTime(System.currentTimeMillis())
+          .build());
+    } else {
+      for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
+        interests.add(Interest.newBuilder()
+            .setId(GuidFactory.generate())
+            .setType(InterestType.INDUSTRY)
+            .setIndustryCode(industryFeatureId.getId())
+            .setSource(InterestSource.FACEBOOK_PROFILE)
+            .setCreateTime(System.currentTimeMillis())
+            .build());
+      }
     }
     return interests;
   }

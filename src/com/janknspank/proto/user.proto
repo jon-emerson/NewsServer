@@ -199,6 +199,7 @@ message Interest {
     USER = 1;
     LINKED_IN_PROFILE = 2; // Derived from LinkedIn Profile response.
     FACEBOOK_PROFILE = 4; // Derived from Facebook profile response.
+    DEFAULT_TO_PREVENT_CRASH = 5; // Added to prevent crashes in V1.0 app.
 
     // Tombstone, represents an interest the user explicitly DELETED.
     // This enables the user to follow his LinkedIn contacts but then delete
