@@ -61,13 +61,11 @@ public class LinkedInLoginHandler {
 
   private final String linkedInAccessToken;
   private final Future<DocumentNode> linkedInProfileDocumentFuture;
-  private final LinkedInContactsFetcher linkedInContactsFetcher;
   private User updatedUser = null;
 
   public LinkedInLoginHandler(String linkedInAccessToken) {
     this.linkedInAccessToken = linkedInAccessToken;
     linkedInProfileDocumentFuture = getDocumentFuture(PROFILE_URL, linkedInAccessToken);
-    linkedInContactsFetcher = new LinkedInContactsFetcher(linkedInAccessToken);
   }
 
   /**
@@ -150,13 +148,6 @@ public class LinkedInLoginHandler {
       long stepStartTime = System.currentTimeMillis();
       userBuilder.setLinkedInProfile(createLinkedInProfile(linkedInProfileDocument));
       System.out.println("setLinkedInProfile: " + (System.currentTimeMillis() - stepStartTime)
-          + "ms");
-
-      // Update LinkedInConnections field on User object.
-      stepStartTime = System.currentTimeMillis();
-      userBuilder.clearLinkedInContact();
-      userBuilder.addAllLinkedInContact(linkedInContactsFetcher.getLinkedInContacts());
-      System.out.println("addAllLinkedInContact: " + (System.currentTimeMillis() - stepStartTime)
           + "ms");
 
       // Update Interests.

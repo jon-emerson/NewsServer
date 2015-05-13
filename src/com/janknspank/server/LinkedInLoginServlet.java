@@ -49,7 +49,7 @@ public class LinkedInLoginServlet extends StandardServlet {
       URIBuilder builder = new URIBuilder()
           .setScheme(req.getScheme())
           .setHost(req.getServerName())
-          .setPath("/v1/login");
+          .setPath("/v1/linked_in_login");
       int port = req.getServerPort();
       if (!(port == 0 ||
             port == 80 && "http".equals(req.getScheme()) ||
@@ -110,7 +110,7 @@ public class LinkedInLoginServlet extends StandardServlet {
           .setPath("/uas/oauth2/authorization")
           .addParameter("response_type", "code")
           .addParameter("client_id", LINKED_IN_API_KEY)
-          .addParameter("scope", "r_basicprofile r_emailaddress r_network")
+          .addParameter("scope", "r_basicprofile r_emailaddress")
           .addParameter("state", getLinkedInOAuthState())
           .addParameter("redirect_uri", getRedirectUrl(req))
           .build().toString());
