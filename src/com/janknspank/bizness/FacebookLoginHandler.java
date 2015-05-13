@@ -20,7 +20,6 @@ import com.janknspank.classifier.FeatureType;
 import com.janknspank.classifier.Vector;
 import com.janknspank.classifier.VectorFeature;
 import com.janknspank.common.TopList;
-import com.janknspank.crawler.social.FacebookData;
 import com.janknspank.crawler.social.SocialException;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
@@ -52,11 +51,13 @@ import com.restfb.types.User.Work;
  * latest and greatest Facebook profile.
  */
 public class FacebookLoginHandler {
+  private static final String FRONTEND_APP_SECRET = "4324edc68cb6fd1ff4753b3b9ff54fdd";
+
   public static com.restfb.types.User getFacebookUser(String fbAccessToken)
       throws SocialException, RequestException {
     long startTime = System.currentTimeMillis();
     FacebookClient facebookClient = new DefaultFacebookClient(fbAccessToken,
-        FacebookData.getFacebookAppSecret(), Version.VERSION_2_2);
+        FRONTEND_APP_SECRET, Version.VERSION_2_2);
     com.restfb.types.User fbUser = facebookClient.fetchObject("/me",
         com.restfb.types.User.class);
     if (fbUser == null) {
