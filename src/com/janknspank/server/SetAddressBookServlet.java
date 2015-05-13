@@ -25,7 +25,7 @@ public class SetAddressBookServlet extends StandardServlet {
   protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
       throws BiznessException, DatabaseSchemaException, DatabaseRequestException, RequestException {
     Session session = getSession(req);
-    User user = Database.with(User.class).get(session.getUserId());
+    User user = getUser(req);
 
     List<AddressBookContact> addressBookContacts = Lists.newArrayList();
     JSONArray addressBookJson = new JSONArray(getRequiredParameter(req, "data"));
