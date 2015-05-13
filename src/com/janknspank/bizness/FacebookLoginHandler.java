@@ -104,10 +104,14 @@ public class FacebookLoginHandler {
           new QueryOption.WhereEquals("email", fbUser.getEmail()));
     }
     try {
-      User existingUser = Iterables
-          .getFirst(userByFacebookIdFuture.get(), null);
-      return (existingUser != null) ? existingUser : Iterables.getFirst(
-          userByEmailFuture.get(), null);
+      User existingUser = Iterables.getFirst(userByFacebookIdFuture.get(), null);
+      if (existingUser != null) {
+        return existingUser;
+      }
+      Iterable<User> maybeUserByEmailList = userByEmailFuture.get();
+      if (maybeUserByEmailList != null && !Iterables.isEmpty(maybeUserByEmailList)) {
+        return Iterables.getFirst(maybeUserByEmailList, null);
+      }
     } catch (InterruptedException | ExecutionException e) {
       e.printStackTrace();
     }
