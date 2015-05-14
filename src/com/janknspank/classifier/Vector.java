@@ -75,8 +75,6 @@ public class Vector {
     }
   }
 
-  private static final KeywordFinder KEYWORD_FINDER = KeywordFinder.getInstance();
-
   private final int documentCount;
 
   /**
@@ -154,9 +152,10 @@ public class Vector {
             article.getDescription(),
             article.getAuthor()
         };
+        KeywordFinder keywordFinder = KeywordFinder.getInstance();
         for (String sentence : ObjectArrays.concat(
-            KEYWORD_FINDER.getSentences(paragraph), additionalPhrases, String.class)) {
-          for (String word : KEYWORD_FINDER.getTokens(sentence)) {
+            keywordFinder.getSentences(paragraph), additionalPhrases, String.class)) {
+          for (String word : keywordFinder.getTokens(sentence)) {
             if (!Strings.isNullOrEmpty(word) && !stopWords.contains(word)) {
               word = KeywordUtils.cleanKeyword(word);
               if (word.length() > 2 && KeywordUtils.isValidKeyword(word)) {

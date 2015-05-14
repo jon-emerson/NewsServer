@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Pattern;
 
 import com.google.api.client.util.Lists;
+import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -20,13 +22,11 @@ import com.janknspank.classifier.FeatureType;
 import com.janknspank.classifier.Vector;
 import com.janknspank.classifier.VectorFeature;
 import com.janknspank.common.TopList;
-import com.janknspank.crawler.social.SocialException;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.nlp.KeywordCanonicalizer;
-import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.nlp.KeywordUtils;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.Entity.Source;
@@ -52,9 +52,10 @@ import com.restfb.types.User.Work;
  */
 public class FacebookLoginHandler {
   private static final String FRONTEND_APP_SECRET = "4324edc68cb6fd1ff4753b3b9ff54fdd";
+  private static final Pattern NON_WORD_PATTERN = Pattern.compile("[^\\w'-]");
 
   public static com.restfb.types.User getFacebookUser(String fbAccessToken)
-      throws SocialException, RequestException {
+      throws RequestException {
     long startTime = System.currentTimeMillis();
     FacebookClient facebookClient = new DefaultFacebookClient(fbAccessToken,
         FRONTEND_APP_SECRET, Version.VERSION_2_2);
@@ -105,12 +106,14 @@ public class FacebookLoginHandler {
           new QueryOption.WhereEquals("email", fbUser.getEmail()));
     }
     try {
-      User existingUser = Iterables.getFirst(userByFacebookIdFuture.get(), null);
+      User existingUser = Iterables
+          .getFirst(userByFacebookIdFuture.get(), null);
       if (existingUser != null) {
         return existingUser;
       }
       Iterable<User> maybeUserByEmailList = userByEmailFuture.get();
-      if (maybeUserByEmailList != null && !Iterables.isEmpty(maybeUserByEmailList)) {
+      if (maybeUserByEmailList != null
+          && !Iterables.isEmpty(maybeUserByEmailList)) {
         return Iterables.getFirst(maybeUserByEmailList, null);
       }
     } catch (InterruptedException | ExecutionException e) {
@@ -133,11 +136,9 @@ public class FacebookLoginHandler {
   private static Iterable<String> split(String text) {
     ImmutableList.Builder<String> builder = ImmutableList.builder();
     if (!Strings.isNullOrEmpty(text)) {
-      for (String sentence : KeywordFinder.getInstance().getSentences(text)) {
-        for (String token : KeywordFinder.getInstance().getTokens(sentence)) {
-          if (!Strings.isNullOrEmpty(token)) {
-            builder.add(KeywordUtils.cleanKeyword(token));
-          }
+      for (String token : Splitter.on(NON_WORD_PATTERN).split(text)) {
+        if (!Strings.isNullOrEmpty(token)) {
+          builder.add(KeywordUtils.cleanKeyword(token));
         }
       }
     }
@@ -346,7 +347,7 @@ public class FacebookLoginHandler {
   }
 
   public static User login(com.restfb.types.User fbUser, String fbAccessToken)
-      throws RequestException, SocialException, DatabaseSchemaException,
+      throws RequestException, DatabaseSchemaException,
       DatabaseRequestException {
     long startTime = System.currentTimeMillis();
     User user;
@@ -372,8 +373,10 @@ public class FacebookLoginHandler {
   }
 
   public static void main(String args[]) throws Exception {
-    for (User user : Database.with(User.class).get(
-        new QueryOption.WhereNotNull("facebook_access_token"))) {
+    for (User user : Database.with(User.class)
+        .get(new QueryOption.WhereNotNull("facebook_access_token"),
+            new QueryOption.Limit(50),
+            new QueryOption.AscendingSort("create_time"))) {
       System.out.println("\n" + user.getEmail() + ":");
       try {
         com.restfb.types.User fbUser = FacebookLoginHandler
