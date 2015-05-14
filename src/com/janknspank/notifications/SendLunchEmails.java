@@ -28,6 +28,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.tofu.SoyTofu;
@@ -350,16 +351,29 @@ public class SendLunchEmails {
   public static void sendLunchEmails() throws DatabaseSchemaException {
     Session session = EmailTransportProvider.getSession();
 
-    Iterable<User> users = Database.with(User.class).get(
-        new QueryOption.WhereNotNull("email"),
-        new QueryOption.WhereNotEquals("email", ""),
-        new QueryOption.WhereNotTrue("opt_out_email"));
+    // Figure out who's received a lunch email in the last 18 hours, so we
+    // don't send them another lunch email on the same day.  We do 18 hours
+    // rather than 24 to account for both small adjustments in this task's
+    // start time, and to allow for the user to change timezones.
+    Set<String> userIdsToSkip = Sets.newHashSet();
+    for (Notification notification : Database.with(Notification.class).get(
+        new QueryOption.WhereEqualsEnum("device_type", DeviceType.EMAIL),
+        new QueryOption.WhereGreaterThan("create_time",
+            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(18)))) {
+      userIdsToSkip.add(notification.getUserId());
+    }
+
     // Amazon SES gave us a quota of 14 emails/second.  Getting a user's stream
     // and processing it tends to take around 500ms, so to stay well within quota,
     // we need this to be pretty small.
     ExecutorService executor = Executors.newFixedThreadPool(6);
-    for (User user : users) {
-      executor.submit(new LunchEmailCallable(session, user));
+    for (User user : Database.with(User.class).get(
+        new QueryOption.WhereNotNull("email"),
+        new QueryOption.WhereNotEquals("email", ""),
+        new QueryOption.WhereNotTrue("opt_out_email"))) {
+      if (!userIdsToSkip.contains(user.getId())) {
+        executor.submit(new LunchEmailCallable(session, user));
+      }
     }
     executor.shutdown();
   }
