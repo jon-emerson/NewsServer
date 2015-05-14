@@ -24,6 +24,7 @@ import javax.mail.internet.MimeMultipart;
 
 import org.apache.http.client.utils.URIBuilder;
 
+import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -348,7 +349,7 @@ public class SendLunchEmails {
     }
   }
 
-  public static void sendLunchEmails() throws DatabaseSchemaException {
+  public static void sendLunchEmails() throws DatabaseSchemaException, InterruptedException {
     Session session = EmailTransportProvider.getSession();
 
     // Figure out who's received a lunch email in the last 18 hours, so we
@@ -367,18 +368,20 @@ public class SendLunchEmails {
     // and processing it tends to take around 500ms, so to stay well within quota,
     // we need this to be pretty small.
     ExecutorService executor = Executors.newFixedThreadPool(6);
+    List<Callable<Void>> callables = Lists.newArrayList();
     for (User user : Database.with(User.class).get(
         new QueryOption.WhereNotNull("email"),
         new QueryOption.WhereNotEquals("email", ""),
         new QueryOption.WhereNotTrue("opt_out_email"))) {
       if (!userIdsToSkip.contains(user.getId())) {
-        executor.submit(new LunchEmailCallable(session, user));
+        callables.add(new LunchEmailCallable(session, user));
       }
     }
+    executor.invokeAll(callables);
     executor.shutdown();
   }
 
-  public static void main(String[] args) throws DatabaseSchemaException {
+  public static void main(String[] args) throws Exception {
     sendLunchEmails();
     System.exit(0);
   }

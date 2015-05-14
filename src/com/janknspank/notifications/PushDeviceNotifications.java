@@ -1,5 +1,6 @@
 package com.janknspank.notifications;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -8,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import com.google.api.client.util.Lists;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -340,9 +342,11 @@ public class PushDeviceNotifications {
 
     // OK, now send push notifications.
     ExecutorService executor = Executors.newFixedThreadPool(20);
+    List<Callable<Void>> callables = Lists.newArrayList();
     for (User user : Database.with(User.class).get()) {
-      executor.submit(new NotificationCallable(user));
+      callables.add(new NotificationCallable(user));
     }
+    executor.invokeAll(callables);
     executor.shutdown();
 
     System.exit(0);
