@@ -18,7 +18,7 @@ public class NewsServer {
    */
   private static void initialize() {
     KeywordCanonicalizer.getKeywordToEntityIdMap();
-    KeywordCanonicalizer.getEntityIdToEntityMap();
+    //KeywordCanonicalizer.getEntityIdToEntityMap();
     Feature.getAllFeatures();
   }
 
