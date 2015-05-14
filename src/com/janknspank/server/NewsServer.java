@@ -23,7 +23,7 @@ public class NewsServer {
   }
 
   @SuppressWarnings("unchecked")
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     initialize();
 
     int port = (System.getenv("PORT") == null) ? 5000 : Integer.valueOf(System.getenv("PORT"));
@@ -54,7 +54,11 @@ public class NewsServer {
     server.setHandler(root);
 
     // Start server.
-    server.start();
-    server.join();
+    try {
+      server.start();
+      server.join();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
