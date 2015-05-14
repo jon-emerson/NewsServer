@@ -4,4 +4,3 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <Set name="maxFormContentSize">5000000</Set>
 </Configure>
-

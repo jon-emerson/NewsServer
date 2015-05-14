@@ -34,6 +34,7 @@ public class NewsServer {
     root.setDescriptor("WEB-INF/web.xml");
     root.setResourceBase("");
     root.setParentLoaderPriority(true);
+    root.setMaxFormContentSize(5 * 1000 * 1000);
 
     Set<String> urlPatternSet = Sets.newHashSet();
     for (Class<?> servletClass :

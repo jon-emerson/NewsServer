@@ -1,7 +1,10 @@
 package com.janknspank.notifications;
 
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -300,13 +303,15 @@ public class PushDeviceNotifications {
     System.out.println();
   }
 
-  public static void main(String args[]) throws Exception {
-    // As part of this process, also send emails.
-    SendWelcomeEmails.sendWelcomeEmails();
-    SendLunchEmails.sendLunchEmails();
+  private static class NotificationCallable implements Callable<Void> {
+    private final User user;
 
-    // OK, now send push notifications.
-    for (User user : Database.with(User.class).get()) {
+    private NotificationCallable(User user) {
+      this.user = user;
+    }
+
+    @Override
+    public Void call() {
       try {
         Iterable<DeviceRegistration> registrations =
             IosPushNotificationHelper.getDeviceRegistrations(user);
@@ -324,7 +329,22 @@ public class PushDeviceNotifications {
       } catch (Exception e) {
         e.printStackTrace();
       }
+      return null;
     }
+  }
+
+  public static void main(String args[]) throws Exception {
+    // As part of this process, also send emails.
+    SendWelcomeEmails.sendWelcomeEmails();
+    SendLunchEmails.sendLunchEmails();
+
+    // OK, now send push notifications.
+    ExecutorService executor = Executors.newFixedThreadPool(20);
+    for (User user : Database.with(User.class).get()) {
+      executor.submit(new NotificationCallable(user));
+    }
+    executor.shutdown();
+
     System.exit(0);
   }
 }

@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
@@ -298,19 +301,23 @@ public class SendLunchEmails {
     return message;
   }
 
-  public static void sendLunchEmails() throws DatabaseSchemaException {
-    Session session = EmailTransportProvider.getSession();
+  private static class LunchEmailCallable implements Callable<Void> {
+    private final Session session;
+    private final User user;
 
-    Iterable<User> users = Database.with(User.class).get(
-        new QueryOption.WhereNotNull("email"),
-        new QueryOption.WhereNotTrue("opt_out_email"));
-    for (User user : users) {
+    private LunchEmailCallable(Session session, User user) {
+      this.session = session;
+      this.user = user;
+    }
+
+    @Override
+    public Void call() throws Exception {
       Transport transport = null;
       try {
         // Make sure it's lunchtime.
         UserTimezone userTimezone = UserTimezone.getForUser(user, true /* update */);
         if (!userTimezone.isAroundNoon() || userTimezone.isWeekend()) {
-          continue;
+          return null;
         }
 
         // Send the email.
@@ -336,7 +343,24 @@ public class SendLunchEmails {
           } catch (MessagingException e) {}
         }
       }
+      return null;
     }
+  }
+
+  public static void sendLunchEmails() throws DatabaseSchemaException {
+    Session session = EmailTransportProvider.getSession();
+
+    Iterable<User> users = Database.with(User.class).get(
+        new QueryOption.WhereNotNull("email"),
+        new QueryOption.WhereNotTrue("opt_out_email"));
+    // Amazon SES gave us a quota of 14 emails/second.  Getting a user's stream
+    // and processing it tends to take around 500ms, so to stay well within quota,
+    // we need this to be pretty small.
+    ExecutorService executor = Executors.newFixedThreadPool(6);
+    for (User user : users) {
+      executor.submit(new LunchEmailCallable(session, user));
+    }
+    executor.shutdown();
   }
 
   public static void main(String[] args) throws DatabaseSchemaException {
