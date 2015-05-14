@@ -80,9 +80,10 @@ public class AddUserActionServlet extends StandardServlet {
     // we know about it.  Let's not bother validating anything here: Let's grab
     // what we can, and remember everything we can.  We can do validation later.
     if (interestTypeParam != null) {
-      Interest.Builder interestBuilder = Interest.newBuilder();
-      interestBuilder.setId(GuidFactory.generate());
-      interestBuilder.setSource(InterestSource.UNKNOWN);
+      Interest.Builder interestBuilder = Interest.newBuilder()
+          .setId(GuidFactory.generate())
+          .setSource(InterestSource.UNKNOWN)
+          .setCreateTime(0);
 
       InterestType interestType = InterestType.valueOf(interestTypeParam);
       if (interestType == null) {
