@@ -9,6 +9,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.reflections.Reflections;
 
 import com.google.common.collect.Sets;
+import com.janknspank.classifier.Feature;
 import com.janknspank.nlp.KeywordCanonicalizer;
 
 public class NewsServer {
@@ -18,6 +19,7 @@ public class NewsServer {
   private static void initialize() {
     KeywordCanonicalizer.getKeywordToEntityIdMap();
     KeywordCanonicalizer.getEntityIdToEntityMap();
+    Feature.getAllFeatures();
   }
 
   @SuppressWarnings("unchecked")
