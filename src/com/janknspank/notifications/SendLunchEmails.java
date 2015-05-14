@@ -352,6 +352,7 @@ public class SendLunchEmails {
 
     Iterable<User> users = Database.with(User.class).get(
         new QueryOption.WhereNotNull("email"),
+        new QueryOption.WhereNotEquals("email", ""),
         new QueryOption.WhereNotTrue("opt_out_email"));
     // Amazon SES gave us a quota of 14 emails/second.  Getting a user's stream
     // and processing it tends to take around 500ms, so to stay well within quota,

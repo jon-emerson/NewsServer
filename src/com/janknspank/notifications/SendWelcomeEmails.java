@@ -97,6 +97,7 @@ public class SendWelcomeEmails {
       // email, send them a welcome email now.
       Iterable<User> users = Database.with(User.class).get(
           new QueryOption.WhereNotNull("email"),
+          new QueryOption.WhereNotEquals("email", ""),
           new QueryOption.WhereNotTrue("opt_out_email"),
           new QueryOption.WhereNull("welcome_email_sent_time"));
       for (User user : users) {

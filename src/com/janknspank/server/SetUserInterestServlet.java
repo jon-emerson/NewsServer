@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.Entities;
+import com.janknspank.bizness.EntityCache;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.UserInterests;
@@ -73,7 +74,7 @@ public class SetUserInterestServlet extends StandardServlet {
         Entity entity;
         if (followParam) {
           if (!Strings.isNullOrEmpty(interestEntityIdParam)) {
-            entity = Entities.getEntityById(interestEntityIdParam);
+            entity = EntityCache.getEntity(interestEntityIdParam);
             if (entity == null) {
               throw new RequestException("Parameter 'interest[entity][id]' is invalid");
             }

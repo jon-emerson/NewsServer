@@ -77,7 +77,8 @@ class ArticleCreator {
       "https://s0.wp.com/wp-content/themes/vip/recode/img/_default/default-thumbnail-post.png",
       "http://media.scmagazine.com/images/2013/02/19/sc_logo_21413_345884.png",
       "http://idge.staticworld.net/nww/nww_logo_300x300.png",
-      "http://oystatic.ignimgs.com/src/core/img/widgets/global/page/ign-logo-100x100.jpg");
+      "http://oystatic.ignimgs.com/src/core/img/widgets/global/page/ign-logo-100x100.jpg",
+      "https://s0.wp.com/wp-content/themes/vip/time2014/img/time-logo-og.png");
   private static final Set<Pattern> IMAGE_URL_BLACKLIST_PATTERNS = ImmutableSet.of(
       // A black "T", representing the NYTimes.
       // E.g. http://static01.nyt.com/images/icons/t_logo_291_black.png
