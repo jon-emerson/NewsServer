@@ -327,6 +327,9 @@ public class PushDeviceNotifications {
                       .setIsFollowedCompany(isArticleAboutFollowedCompany(
                           bestArticle, followedEntityIds))
                       .setHotCount(bestArticle.getHotCount())
+                      .setScore(bestArticle.getScore())
+                      .setNotificationScore(getArticleNotificationScore(
+                          bestArticle, followedEntityIds, bestArticle.getScore()))
                       .build();
               IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
             }

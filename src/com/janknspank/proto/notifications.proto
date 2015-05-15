@@ -130,4 +130,10 @@ message Notification {
   optional int32 hot_count = 15 [
     (storage_method) = PULL_OUT
   ];
+  optional double score = 16 [
+    (storage_method) = PULL_OUT
+  ];
+  optional int32 notification_score = 17 [
+    (storage_method) = PULL_OUT
+  ];
 }

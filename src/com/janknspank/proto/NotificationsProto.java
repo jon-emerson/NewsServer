@@ -1445,6 +1445,26 @@ public final class NotificationsProto {
      * <code>optional int32 hot_count = 15;</code>
      */
     int getHotCount();
+
+    // optional double score = 16;
+    /**
+     * <code>optional double score = 16;</code>
+     */
+    boolean hasScore();
+    /**
+     * <code>optional double score = 16;</code>
+     */
+    double getScore();
+
+    // optional int32 notification_score = 17;
+    /**
+     * <code>optional int32 notification_score = 17;</code>
+     */
+    boolean hasNotificationScore();
+    /**
+     * <code>optional int32 notification_score = 17;</code>
+     */
+    int getNotificationScore();
   }
   /**
    * Protobuf type {@code Notification}
@@ -1583,6 +1603,16 @@ public final class NotificationsProto {
             case 120: {
               bitField0_ |= 0x00002000;
               hotCount_ = input.readInt32();
+              break;
+            }
+            case 129: {
+              bitField0_ |= 0x00004000;
+              score_ = input.readDouble();
+              break;
+            }
+            case 136: {
+              bitField0_ |= 0x00008000;
+              notificationScore_ = input.readInt32();
               break;
             }
           }
@@ -2115,6 +2145,38 @@ public final class NotificationsProto {
       return hotCount_;
     }
 
+    // optional double score = 16;
+    public static final int SCORE_FIELD_NUMBER = 16;
+    private double score_;
+    /**
+     * <code>optional double score = 16;</code>
+     */
+    public boolean hasScore() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>optional double score = 16;</code>
+     */
+    public double getScore() {
+      return score_;
+    }
+
+    // optional int32 notification_score = 17;
+    public static final int NOTIFICATION_SCORE_FIELD_NUMBER = 17;
+    private int notificationScore_;
+    /**
+     * <code>optional int32 notification_score = 17;</code>
+     */
+    public boolean hasNotificationScore() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>optional int32 notification_score = 17;</code>
+     */
+    public int getNotificationScore() {
+      return notificationScore_;
+    }
+
     private void initFields() {
       id_ = "";
       createTime_ = 0L;
@@ -2131,6 +2193,8 @@ public final class NotificationsProto {
       isCompany_ = false;
       isEvent_ = false;
       hotCount_ = 0;
+      score_ = 0D;
+      notificationScore_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2188,6 +2252,12 @@ public final class NotificationsProto {
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeInt32(15, hotCount_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeDouble(16, score_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeInt32(17, notificationScore_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2262,6 +2332,14 @@ public final class NotificationsProto {
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(15, hotCount_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(16, score_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(17, notificationScore_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2413,6 +2491,10 @@ public final class NotificationsProto {
         bitField0_ = (bitField0_ & ~0x00002000);
         hotCount_ = 0;
         bitField0_ = (bitField0_ & ~0x00004000);
+        score_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00008000);
+        notificationScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00010000);
         return this;
       }
 
@@ -2503,6 +2585,14 @@ public final class NotificationsProto {
           to_bitField0_ |= 0x00002000;
         }
         result.hotCount_ = hotCount_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.score_ = score_;
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.notificationScore_ = notificationScore_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2582,6 +2672,12 @@ public final class NotificationsProto {
         }
         if (other.hasHotCount()) {
           setHotCount(other.getHotCount());
+        }
+        if (other.hasScore()) {
+          setScore(other.getScore());
+        }
+        if (other.hasNotificationScore()) {
+          setNotificationScore(other.getNotificationScore());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3556,6 +3652,72 @@ public final class NotificationsProto {
         return this;
       }
 
+      // optional double score = 16;
+      private double score_ ;
+      /**
+       * <code>optional double score = 16;</code>
+       */
+      public boolean hasScore() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      /**
+       * <code>optional double score = 16;</code>
+       */
+      public double getScore() {
+        return score_;
+      }
+      /**
+       * <code>optional double score = 16;</code>
+       */
+      public Builder setScore(double value) {
+        bitField0_ |= 0x00008000;
+        score_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double score = 16;</code>
+       */
+      public Builder clearScore() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        score_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 notification_score = 17;
+      private int notificationScore_ ;
+      /**
+       * <code>optional int32 notification_score = 17;</code>
+       */
+      public boolean hasNotificationScore() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      /**
+       * <code>optional int32 notification_score = 17;</code>
+       */
+      public int getNotificationScore() {
+        return notificationScore_;
+      }
+      /**
+       * <code>optional int32 notification_score = 17;</code>
+       */
+      public Builder setNotificationScore(int value) {
+        bitField0_ |= 0x00010000;
+        notificationScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 notification_score = 17;</code>
+       */
+      public Builder clearNotificationScore() {
+        bitField0_ = (bitField0_ & ~0x00010000);
+        notificationScore_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:Notification)
     }
 
@@ -3593,7 +3755,7 @@ public final class NotificationsProto {
       "\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.Devi" +
       "ceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035" +
       "d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032Mo" +
-      "ngoDB.DeviceRegistration\"\360\003\n\014Notificatio" +
+      "ngoDB.DeviceRegistration\"\247\004\n\014Notificatio" +
       "n\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\035\n\013c" +
       "reate_time\030\002 \001(\003B\010\210\246\035\001\220\246\035\003\022\030\n\nclick_time",
       "\030\003 \001(\003B\004\220\246\035\005\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
@@ -3605,10 +3767,12 @@ public final class NotificationsProto {
       "eduping_stems\030\013 \003(\tB\004\230\246\035\004\022!\n\023is_followed" +
       "_company\030\014 \001(\010B\004\220\246\035\005\022\030\n\nis_company\030\r \001(\010" +
       "B\004\220\246\035\005\022\026\n\010is_event\030\016 \001(\010B\004\220\246\035\005\022\027\n\thot_co" +
-      "unt\030\017 \001(\005B\004\220\246\035\005:\032\212\265\030\026MySQL.PushNotificat",
-      "ion*:\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROI" +
-      "D\020\001\022\007\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*\n\024com.janknspan" +
-      "k.protoB\022NotificationsProto"
+      "unt\030\017 \001(\005B\004\220\246\035\005\022\023\n\005score\030\020 \001(\001B\004\220\246\035\005\022 \n\022",
+      "notification_score\030\021 \001(\005B\004\220\246\035\005:\032\212\265\030\026MySQ" +
+      "L.PushNotification*:\n\nDeviceType\022\013\n\007UNKN" +
+      "OWN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*" +
+      "\n\024com.janknspank.protoB\022NotificationsPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3626,7 +3790,7 @@ public final class NotificationsProto {
           internal_static_Notification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Notification_descriptor,
-              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", "IsFollowedCompany", "IsCompany", "IsEvent", "HotCount", });
+              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", "IsFollowedCompany", "IsCompany", "IsEvent", "HotCount", "Score", "NotificationScore", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -3668,6 +3832,8 @@ public final class NotificationsProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
