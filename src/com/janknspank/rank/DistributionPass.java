@@ -42,7 +42,7 @@ public class DistributionPass {
       TopList<FeatureId, Double> topFeatureIds = new TopList<>(3);
       for (ArticleFeature articleFeature : article.getFeatureList()) {
         FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
-        if (featureId.getFeatureType() == FeatureType.INDUSTRY) {
+        if (featureId != null && featureId.getFeatureType() == FeatureType.INDUSTRY) {
           topFeatureIds.add(featureId, articleFeature.getSimilarity());
         }
       }

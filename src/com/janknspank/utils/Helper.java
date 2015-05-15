@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.bizness.ArticleFeatures;
@@ -38,6 +39,8 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.UserAction;
+import com.janknspank.proto.UserProto.UserAction.ActionType;
 import com.janknspank.rank.InputValuesGenerator;
 import com.janknspank.rank.Personas;
 
@@ -238,7 +241,7 @@ public class Helper {
     }
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main10(String args[]) throws Exception {
     Multiset<String> facebookInterests = HashMultiset.create();
     Multiset<String> userInterests = HashMultiset.create();
     for (User user : Database.with(User.class).get()) {
@@ -264,6 +267,29 @@ public class Helper {
     for (String userInterest : topUserInterests) {
       System.out.println(userInterest + ": " + topUserInterests.getValue(userInterest) + " vs "
           + facebookInterests.count(userInterest) + " from Facebook login");
+    }
+  }
+
+  public static void main(String args[]) throws Exception {
+    Multiset<String> xOutUrls = HashMultiset.create();
+    for (UserAction userAction : Database.with(UserAction.class).get(
+        new QueryOption.WhereEqualsEnum("action_type", ActionType.X_OUT))) {
+      boolean doContinue = false;
+      for (Interest interest : userAction.getInterestList()) {
+        if (interest.getSource() == InterestSource.DEFAULT_TO_PREVENT_CRASH) {
+          doContinue = true;
+          break;
+        }
+      }
+      if (doContinue) {
+        continue;
+      }
+      xOutUrls.add(userAction.getUrl());
+    }
+    for (String xOutUrl : Multisets.copyHighestCountFirst(xOutUrls).elementSet()) {
+      if (xOutUrls.count(xOutUrl) >= 3) {
+        System.out.println(xOutUrl + ": " + xOutUrls.count(xOutUrl));
+      }
     }
   }
 }

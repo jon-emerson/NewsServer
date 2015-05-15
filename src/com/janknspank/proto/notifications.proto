@@ -115,4 +115,19 @@ message Notification {
   repeated string deduping_stems = 11 [
     (string_length) = 4
   ];
+
+  // Track attributes we use to prioritize events, so that we can check which
+  // of these actually correlate with click-through.
+  optional bool is_followed_company = 12 [
+    (storage_method) = PULL_OUT
+  ];
+  optional bool is_company = 13 [
+    (storage_method) = PULL_OUT
+  ];
+  optional bool is_event = 14 [
+    (storage_method) = PULL_OUT
+  ];
+  optional int32 hot_count = 15 [
+    (storage_method) = PULL_OUT
+  ];
 }

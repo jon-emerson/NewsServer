@@ -180,7 +180,7 @@ public class PushDeviceNotifications {
     return lastAppUseTime;
   }
 
-  private static Article getArticleToNotifyAbout(User user)
+  private static Article getArticleToNotifyAbout(User user, Set<String> followedEntityIds)
       throws DatabaseSchemaException, BiznessException {
     PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
 
@@ -189,8 +189,6 @@ public class PushDeviceNotifications {
       // Don't even risk sending anything at night...
       return null;
     }
-
-    Set<String> followedEntityIds = getFollowedEntityIds(user);
 
     // Get the user's stream.
     Iterable<Article> rankedArticles = Articles.getRankedArticles(
@@ -316,12 +314,20 @@ public class PushDeviceNotifications {
         Iterable<DeviceRegistration> registrations =
             IosPushNotificationHelper.getDeviceRegistrations(user);
         if (!Iterables.isEmpty(registrations)) {
-          Article bestArticle = getArticleToNotifyAbout(user);
+          Set<String> followedEntityIds = getFollowedEntityIds(user);
+          Article bestArticle = getArticleToNotifyAbout(user, followedEntityIds);
           if (bestArticle != null) {
             System.out.println("Sending \"" + bestArticle.getTitle() + "\" to " + user.getEmail());
             for (DeviceRegistration registration : registrations) {
               Notification pushNotification =
-                  IosPushNotificationHelper.createPushNotification(registration, bestArticle);
+                  IosPushNotificationHelper.createPushNotification(registration, bestArticle)
+                      .toBuilder()
+                      .setIsEvent(isArticleAboutEvent(bestArticle))
+                      .setIsCompany(isArticleAboutCompany(bestArticle))
+                      .setIsFollowedCompany(isArticleAboutFollowedCompany(
+                          bestArticle, followedEntityIds))
+                      .setHotCount(bestArticle.getHotCount())
+                      .build();
               IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
             }
           }
