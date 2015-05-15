@@ -34,6 +34,7 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
+import com.janknspank.rank.DistributionPass;
 import com.janknspank.rank.NeuralNetworkScorer;
 import com.janknspank.rank.Scorer;
 
@@ -102,22 +103,22 @@ public class Articles {
    * Returns the primary (main, default, whatever) stream for the given user.
    * These are the articles we should show in the initial stream.
    */
-  public static TopList<Article, Double> getMainStream(User user)
+  public static Iterable<Article> getMainStream(User user)
       throws DatabaseSchemaException, BiznessException {
-    return Articles.getRankedArticles(
+    return new DistributionPass(Articles.getRankedArticles(
         user,
         NeuralNetworkScorer.getInstance(),
         new MainStreamStrategy(),
-        NUM_RESULTS);
+        NUM_RESULTS)).getList();
   }
 
-  public static TopList<Article, Double> getStream(User user, TimeRankingStrategy strategy)
+  public static Iterable<Article> getStream(User user, TimeRankingStrategy strategy)
       throws DatabaseSchemaException, BiznessException {
-    return Articles.getRankedArticles(
+    return new DistributionPass(Articles.getRankedArticles(
         user,
         NeuralNetworkScorer.getInstance(),
         strategy,
-        NUM_RESULTS);
+        NUM_RESULTS)).getList();
   }
 
   /**
@@ -127,13 +128,12 @@ public class Articles {
    * use {@code ArticleSerializer#serialize(Iterable, User, boolean, boolean)
    * with the results of this method.
    */
-  public static TopList<Article, Double> getRankedArticles(
+  public static Iterable<Article> getRankedArticles(
       User user, Scorer scorer, TimeRankingStrategy strategy, int limit)
       throws DatabaseSchemaException, BiznessException {
-    TopList<Article, Double> rankedArticles = getRankedArticles(
+    return getRankedArticles(
         user, scorer, strategy, limit,
         getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10));
-    return rankedArticles;
   }
 
   /**
@@ -141,7 +141,7 @@ public class Articles {
    * {@code limit} articles, deduped, and prioritized according to the user's
    * interests.  Supports the main stream and the contacts streams.
    */
-  private static TopList<Article, Double> getRankedArticles(
+  private static Iterable<Article> getRankedArticles(
       User user, Scorer scorer,
       TimeRankingStrategy strategy,
       int limit,
@@ -149,7 +149,6 @@ public class Articles {
       throws DatabaseSchemaException, BiznessException {
 
     // Find the top 150 articles based on neural network rank + time punishment.
-    Map<String, Double> scores = Maps.newHashMap();
     TopList<Article, Double> goodArticles = new TopList<>(limit * 3);
     Set<String> urls = Sets.newHashSet();
     for (Article article : unrankedArticles) {
@@ -159,28 +158,30 @@ public class Articles {
       urls.add(article.getUrl());
 
       double score = scorer.getScore(user, article) * strategy.getTimeRank(article, user);
-      goodArticles.add(article, score);
-      scores.put(article.getUrl(), score);
+      goodArticles.add(article.toBuilder().setScore(score).build(), score);
     }
 
     // Dedupe them - This will knock us down about 10 - 20%.
     List<Article> dedupedArticles = Deduper.filterOutDupes(goodArticles);
 
-    // Keep around only the top 50.  Make decisions based on the score and its
+    // Keep around only the top 55.  Make decisions based on the score and its
     // social relevance.
-    TopList<Article, Double> bestArticles = new TopList<>(limit);
+    TopList<Article, Double> bestArticles = new TopList<>(limit + 5);
     for (Article article : dedupedArticles) {
       SocialEngagement engagement = SocialEngagements.getForArticle(article, Site.TWITTER);
-      bestArticles.add(article, scores.get(article.getUrl()) * (1 + engagement.getShareScore()));
+      bestArticles.add(article, article.getScore() * (1 + engagement.getShareScore()));
     }
 
     // Now that we know which articles to keep, sort them how we've historically
     // done: Based on score - time punishment only.
-    TopList<Article, Double> sortedArticles = new TopList<>(limit);
+    TopList<Article, Double> sortedArticles = new TopList<>(limit + 5);
     for (Article article : bestArticles) {
-      sortedArticles.add(article, scores.get(article.getUrl()));
+      sortedArticles.add(article, article.getScore());
     }
-    return sortedArticles;
+
+    // Distribute them, letting the least-different articles to fall off the
+    // bottom.
+    return Iterables.limit(new DistributionPass(sortedArticles).getList(), limit);
   }
 
   /**

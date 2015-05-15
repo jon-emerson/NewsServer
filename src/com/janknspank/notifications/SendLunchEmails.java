@@ -225,7 +225,7 @@ public class SendLunchEmails {
    */
   public static Iterable<Article> getArticles(User user)
       throws DatabaseSchemaException, BiznessException {
-    TopList<Article, Double> mainStream = Articles.getMainStream(user);
+    Iterable<Article> mainStream = Articles.getMainStream(user);
     TopList<Article, Double> top6LastDay = new TopList<>(6);
     long dateInMillisOneDayAgo = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1);
     long dateInMillis12HoursAgo = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(12);
@@ -235,9 +235,7 @@ public class SendLunchEmails {
         // Punish articles from yesterday.  The email should try to be mostly
         // about articles published that day, before noon.
         boolean fromYesterday = publishedTime > dateInMillis12HoursAgo;
-        top6LastDay.add(article, fromYesterday
-            ? mainStream.getValue(article) - 0.1
-            : mainStream.getValue(article));
+        top6LastDay.add(article, fromYesterday ? article.getScore() - 0.1 : article.getScore());
       }
     }
     return top6LastDay;

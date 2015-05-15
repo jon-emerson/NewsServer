@@ -22,7 +22,6 @@ import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
-import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -194,7 +193,7 @@ public class PushDeviceNotifications {
     Set<String> followedEntityIds = getFollowedEntityIds(user);
 
     // Get the user's stream.
-    TopList<Article, Double> rankedArticles = Articles.getRankedArticles(
+    Iterable<Article> rankedArticles = Articles.getRankedArticles(
         user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
 
     // Don't consider articles older than the last time the user used the app or
@@ -216,8 +215,7 @@ public class PushDeviceNotifications {
         continue;
       }
 
-      int score = getArticleNotificationScore(
-          article, followedEntityIds, rankedArticles.getValue(article));
+      int score = getArticleNotificationScore(article, followedEntityIds, article.getScore());
       if (score > bestArticleScore) {
         bestArticleScore = score;
         bestArticle = article;
@@ -265,7 +263,7 @@ public class PushDeviceNotifications {
             + "relatives-find-loved-ones-in-Nepal.html"), true /* retain */).values(), null);
     describeArticleUser(article, user);
 
-    TopList<Article, Double> rankedArticles = Articles.getRankedArticles(
+    Iterable<Article> rankedArticles = Articles.getRankedArticles(
         user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
     PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
     long lastNotificationTime = previousUserNotifications.getLastNotificationTime();

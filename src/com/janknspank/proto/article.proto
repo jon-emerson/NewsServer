@@ -123,6 +123,12 @@ message Article {
     (client_serialization) = EXCLUDE,
     (storage_method) = DO_NOT_STORE
   ];
+
+  // Used for ViewFeed.
+  optional double score = 23 [
+    (client_serialization) = EXCLUDE,
+    (storage_method) = DO_NOT_STORE
+  ];
 }
 
 message ArticleKeyword {

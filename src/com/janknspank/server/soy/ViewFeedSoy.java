@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import com.google.api.client.util.Lists;
 import com.google.api.client.util.Sets;
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableSet;
 import com.google.template.soy.data.SoyListData;
@@ -35,8 +34,7 @@ import com.janknspank.server.ArticleSerializer;
 public class ViewFeedSoy {
   public static SoyListData toSoyListData(
       final Iterable<Article> articles,
-      final User user,
-      final Function<Article, Double> scoreFunction) {
+      final User user) {
     Set<String> userKeywordSet =
         UserInterests.getUserKeywordSet(user, ImmutableSet.<InterestType>of());
 
@@ -48,7 +46,7 @@ public class ViewFeedSoy {
           "url", article.getUrl(),
           "urlId", article.getUrlId(),
           "description", article.getDescription(),
-          "score", scoreFunction.apply(article),
+          "score", article.getScore(),
           "neuralNetwork", getNeuralNetworkString(user, article),
           "keywords", getKeywordsString(article),
           "features", getFeaturesString(user, article));
