@@ -45,10 +45,8 @@ public class SerializerTest {
     JSONObject o = Serializer.toJSON(article);
     assertFalse(o.has("author"));
     assertFalse(o.has("word_count"));
-    assertEquals(COPYRIGHT, o.getString("copyright"));
     assertEquals(DESCRIPTION, o.getString("description"));
     assertEquals(IMAGE_URL, o.getString("image_url"));
-    assertEquals(MODIFIED_TIME, o.getLong("modified_time"));
     assertEquals(PUBLISHED_TIME, o.getLong("published_time"));
     assertEquals(TITLE, o.getString("title"));
     assertEquals(TYPE, o.getString("type"));
@@ -59,5 +57,7 @@ public class SerializerTest {
     // only.
     assertFalse(o.has("articleBody"));
     assertFalse(o.has("article_body"));
+    assertFalse(o.has("copyright"));
+    assertFalse(o.has("modified_time"));
   }
 }

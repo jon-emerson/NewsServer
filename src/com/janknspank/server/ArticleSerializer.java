@@ -3,6 +3,7 @@ package com.janknspank.server;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,6 +26,7 @@ import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.server.soy.ViewFeedSoy;
 
 public class ArticleSerializer {
   private static final Set<Integer> SHOW_IMAGE_OFFSETS = ImmutableSet.of(
@@ -86,6 +88,10 @@ public class ArticleSerializer {
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));
     articleJson.put("keyword",
         Serializer.toJSON(getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)));
+    articleJson.put("client_date", getClientDate(article));
+    if (!articleJson.has("origin")) {
+      articleJson.put("origin", ViewFeedSoy.getDomain(article));
+    }
     if (SHOW_IMAGE_OFFSETS.contains(offset) || showImageBecauseOfFeature(article)) {
       articleJson.put("show_image", true);
     }
@@ -192,5 +198,18 @@ public class ArticleSerializer {
       }
     }
     return Iterables.limit(Iterables.concat(topUserKeywords, topNonUserKeyword), 2);
+  }
+
+  public static String getClientDate(Article article) {
+    String time;
+    long age = System.currentTimeMillis() - Articles.getPublishedTime(article);
+    if (age < TimeUnit.MINUTES.toMillis(60)) {
+      time = Long.toString(TimeUnit.MINUTES.convert(age, TimeUnit.MILLISECONDS)) + "m";
+    } else if (age < TimeUnit.HOURS.toMillis(24)) {
+      time = Long.toString(TimeUnit.HOURS.convert(age, TimeUnit.MILLISECONDS)) + "h";
+    } else {
+      time = Long.toString(TimeUnit.DAYS.convert(age, TimeUnit.MILLISECONDS)) + "d";
+    }
+    return time;
   }
 }

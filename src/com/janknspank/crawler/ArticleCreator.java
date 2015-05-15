@@ -51,6 +51,8 @@ class ArticleCreator {
       Database.getStringLength(Article.class, "title");
   private static final int MAX_DESCRIPTION_LENGTH =
       Database.getStringLength(Article.class, "description");
+  private static final int MAX_ORIGIN_LENGTH =
+      Database.getStringLength(Article.class, "origin");
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.sfgate.com/img/pages/article/opengraph_default.png",
@@ -129,6 +131,11 @@ class ArticleCreator {
       articleBuilder.setAuthor(author);
     }
 
+    // Origin.
+    String origin = getOrigin(site, author);
+    if (origin != null) {
+      articleBuilder.setOrigin(origin);
+    }
     // Copyright.
     String copyright = getCopyright(documentNode);
     if (copyright != null) {
@@ -229,6 +236,12 @@ class ArticleCreator {
   public static String getAuthor(DocumentNode documentNode) {
     Node metaNode = documentNode.findFirst("html > head meta[name=\"author\"]");
     return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
+  }
+
+  public static String getOrigin(SiteManifest site, String author) {
+    return ("medium.com".equals(site.getRootDomain()))
+        ? author.length() > MAX_ORIGIN_LENGTH ? author.substring(0, MAX_ORIGIN_LENGTH) : author
+        : site.getShortName();
   }
 
   public static String getCopyright(DocumentNode documentNode) {

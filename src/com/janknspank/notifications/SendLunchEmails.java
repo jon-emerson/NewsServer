@@ -174,7 +174,7 @@ public class SendLunchEmails {
               ? article.getUrl()
               : getNotificationUrl(user, article, notificationId),
           "tags", getTags(article, userKeywordSet, userIndustryFeatureIdIds),
-          "time", ViewFeedSoy.getTime(article),
+          "time", ArticleSerializer.getClientDate(article),
           "site", ViewFeedSoy.getDomain(article)));
     }
     return list;

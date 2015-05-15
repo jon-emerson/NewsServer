@@ -33,11 +33,20 @@ message Article {
   ];
 
   optional string author = 5 [
-    (string_length) = 256
+    (string_length) = 256,
+    (client_serialization) = EXCLUDE
+  ];
+
+  // This is the client-visible "origin" of this article.  It's usually the
+  // short name of the article's web site, but it can also be the author
+  // name on Medium blog posts, etc.
+  optional string origin = 24 [
+    (string_length) = 50
   ];
 
   optional string copyright = 6 [
-    (string_length) = 256
+    (string_length) = 256,
+    (client_serialization) = EXCLUDE
   ];
 
   optional string description = 7 [
@@ -56,12 +65,17 @@ message Article {
   ];
 
   optional int64 published_time = 10 [
+    // Used in the V1 client.
     (required) = YES,
     (storage_method) = INDEX
   ];
 
-  optional int64 modified_time = 11;
-  optional int64 crawl_time = 12;
+  optional int64 modified_time = 11 [
+    (client_serialization) = EXCLUDE
+  ];
+  optional int64 crawl_time = 12 [
+    (client_serialization) = EXCLUDE
+  ];
 
   optional int64 word_count = 13 [
     (required) = YES,
