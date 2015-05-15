@@ -34,7 +34,7 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
-import com.janknspank.rank.DistributionPass;
+import com.janknspank.rank.DiversificationPass;
 import com.janknspank.rank.NeuralNetworkScorer;
 import com.janknspank.rank.Scorer;
 
@@ -105,20 +105,23 @@ public class Articles {
    */
   public static Iterable<Article> getMainStream(User user)
       throws DatabaseSchemaException, BiznessException {
-    return new DistributionPass(Articles.getRankedArticles(
+    return Articles.getRankedArticles(
         user,
         NeuralNetworkScorer.getInstance(),
         new MainStreamStrategy(),
-        NUM_RESULTS)).getList();
+        new DiversificationPass.MainStreamPass(),
+        NUM_RESULTS);
   }
 
-  public static Iterable<Article> getStream(User user, TimeRankingStrategy strategy)
+  public static Iterable<Article> getStream(
+      User user, TimeRankingStrategy strategy, DiversificationPass diversificationPass)
       throws DatabaseSchemaException, BiznessException {
-    return new DistributionPass(Articles.getRankedArticles(
+    return Articles.getRankedArticles(
         user,
         NeuralNetworkScorer.getInstance(),
         strategy,
-        NUM_RESULTS)).getList();
+        diversificationPass,
+        NUM_RESULTS);
   }
 
   /**
@@ -129,10 +132,11 @@ public class Articles {
    * with the results of this method.
    */
   public static Iterable<Article> getRankedArticles(
-      User user, Scorer scorer, TimeRankingStrategy strategy, int limit)
+      User user, Scorer scorer, TimeRankingStrategy strategy,
+      DiversificationPass diversificationPass, int limit)
       throws DatabaseSchemaException, BiznessException {
     return getRankedArticles(
-        user, scorer, strategy, limit,
+        user, scorer, strategy, diversificationPass, limit,
         getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10));
   }
 
@@ -144,6 +148,7 @@ public class Articles {
   private static Iterable<Article> getRankedArticles(
       User user, Scorer scorer,
       TimeRankingStrategy strategy,
+      DiversificationPass diversificationPass,
       int limit,
       Iterable<Article> unrankedArticles)
       throws DatabaseSchemaException, BiznessException {
@@ -181,7 +186,7 @@ public class Articles {
 
     // Distribute them, letting the least-different articles to fall off the
     // bottom.
-    return Iterables.limit(new DistributionPass(sortedArticles).getList(), limit);
+    return Iterables.limit(diversificationPass.diversify(sortedArticles), limit);
   }
 
   /**
@@ -325,6 +330,7 @@ public class Articles {
     return getRankedArticles(user,
         NeuralNetworkScorer.getInstance(),
         new AncillaryStreamStrategy(),
+        new DiversificationPass.MainStreamPass(),
         limit,
         Database.with(Article.class).get(
             new QueryOption.WhereEquals("keyword.keyword", contactNames),

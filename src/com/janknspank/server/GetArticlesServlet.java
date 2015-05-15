@@ -26,6 +26,7 @@ import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.rank.DiversificationPass;
 
 @AuthenticationRequired
 @ServletMapping(urlPattern = "/v1/get_articles")
@@ -76,7 +77,8 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
                     .setIndustryCode(Integer.parseInt(industryCodeId))
                     .build())
                 .build(),
-            new AncillaryStreamStrategy());
+            new AncillaryStreamStrategy(),
+            new DiversificationPass.IndustryStreamPass());
       } else if (entityId != null) {
         return Articles.getStream(
             user.toBuilder()
@@ -89,7 +91,8 @@ public class GetArticlesServlet extends AbstractArticlesServlet {
                         .setKeyword(entityKeyword))
                     .build())
                 .build(),
-            new AncillaryStreamStrategy());
+            new AncillaryStreamStrategy(),
+            new DiversificationPass.NoOpPass());
       } else if ("linked_in".equals(contacts)) {
         return Articles.getArticlesForLinkedInContacts(user, Articles.NUM_RESULTS);
       } else if ("address_book".equals(contacts)) {

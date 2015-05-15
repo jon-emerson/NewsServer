@@ -70,6 +70,22 @@ public class Users {
     });
   }
 
+  /**
+   * Returns the number of minutes ago that the user last used the app,
+   * excluding any usages in the last hour.
+   */
+  public static long getLastAppUsageInMinutes(User user) {
+    long lastAppUsageAtLeastOneHourAgo = 0;
+    for (long last5AppUseTime : user.getLast5AppUseTimeList()) {
+      if (last5AppUseTime < (System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1))
+          && last5AppUseTime > lastAppUsageAtLeastOneHourAgo) {
+        lastAppUsageAtLeastOneHourAgo = last5AppUseTime;
+      }
+    }
+    return (System.currentTimeMillis() - lastAppUsageAtLeastOneHourAgo)
+        / TimeUnit.MINUTES.toMillis(1);
+  }
+
   /** Helper method for creating the User table. */
   public static void main(String args[]) throws Exception {
     Database.with(User.class).createTable();

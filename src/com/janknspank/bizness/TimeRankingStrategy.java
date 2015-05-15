@@ -20,22 +20,6 @@ public abstract class TimeRankingStrategy {
    */
   public abstract double getTimeRank(Article article, User user);
 
-  /**
-   * Returns the number of minutes ago that the user last used the app,
-   * excluding any usages in the last hour.
-   */
-  private static long getLastAppUsageInMinutes(User user) {
-    long lastAppUsageAtLeastOneHourAgo = 0;
-    for (long last5AppUseTime : user.getLast5AppUseTimeList()) {
-      if (last5AppUseTime < (System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1))
-          && last5AppUseTime > lastAppUsageAtLeastOneHourAgo) {
-        lastAppUsageAtLeastOneHourAgo = last5AppUseTime;
-      }
-    }
-    return (System.currentTimeMillis() - lastAppUsageAtLeastOneHourAgo)
-        / TimeUnit.MINUTES.toMillis(1);
-  }
-
   private static boolean isWeekend(User user) {
     try {
       UserTimezone userTimezone = UserTimezone.getForUser(user, false /* update */);
@@ -56,7 +40,7 @@ public abstract class TimeRankingStrategy {
       // really dated.
       double lastAppUsageInHoursAgo = Math.min(
           isWeekend(user) ? 42 : 18,
-          getLastAppUsageInMinutes(user) / 60.0);
+          Users.getLastAppUsageInMinutes(user) / 60.0);
 
       // How many hours ago was the article published?
       double articleAgeInHours =

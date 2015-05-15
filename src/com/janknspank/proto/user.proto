@@ -188,6 +188,8 @@ message Interest {
     ENTITY = 2; // People, companies, etc.
     LINKED_IN_CONTACTS = 3;
     ADDRESS_BOOK_CONTACTS = 4;
+    EXPRESSION_YES = 5;
+    EXPRESSION_NO = 6;
   }
   optional InterestType type = 2 [
     (required) = YES

@@ -78,7 +78,8 @@ class ArticleCreator {
       "http://media.scmagazine.com/images/2013/02/19/sc_logo_21413_345884.png",
       "http://idge.staticworld.net/nww/nww_logo_300x300.png",
       "http://oystatic.ignimgs.com/src/core/img/widgets/global/page/ign-logo-100x100.jpg",
-      "https://s0.wp.com/wp-content/themes/vip/time2014/img/time-logo-og.png");
+      "https://s0.wp.com/wp-content/themes/vip/time2014/img/time-logo-og.png",
+      "http://www.usertesting.com/blog/wp-content/uploads/2014/05/Poll-FeaturedImage.png");
   private static final Set<Pattern> IMAGE_URL_BLACKLIST_PATTERNS = ImmutableSet.of(
       // A black "T", representing the NYTimes.
       // E.g. http://static01.nyt.com/images/icons/t_logo_291_black.png
@@ -93,7 +94,9 @@ class ArticleCreator {
       // E.g. http://cdn.gotraffic.net/politics/20150107201907/public/images/logos/FB-Sharing.73b07052.png
       Pattern.compile("\\/\\/cdn\\.gotraffic\\.net\\/.*FB-Sharing"),
       // E.g. http://www.abc.net.au/news/linkableblob/6072216/data/abc-news.jpg
-      Pattern.compile("\\/\\/www\\.abc\\.net\\.au\\/.*\\/data\\/abc-news\\.jpg.*"));
+      Pattern.compile("\\/\\/www\\.abc\\.net\\.au\\/.*\\/data\\/abc-news\\.jpg.*"),
+      // E.g. https://dnqgz544uhbo8.cloudfront.net/_/fp/img/default-preview-image.IsBK38jFAJBlWifMLO4z9g.png
+      Pattern.compile("\\/\\/[\\w]+\\.cloudfront\\.net\\/_\\/fp\\/img\\/default-preview-image\\."));
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
       Pattern.compile("<\\/?(i|b|em|strong)>"),
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\\–|\u2014)\\s"),

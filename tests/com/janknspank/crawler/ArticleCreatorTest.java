@@ -86,6 +86,9 @@ public class ArticleCreatorTest {
         + "FB-Sharing.73b07052.png"));
     assertFalse(ArticleCreator.isValidImageUrl(
         "http://www.abc.net.au/news/linkableblob/6072216/data/abc-news.jpg"));
+    assertFalse(ArticleCreator.isValidImageUrl(
+        "https://dnqgz544uhbo8.cloudfront.net/_/fp/img/"
+        + "default-preview-image.IsBK38jFAJBlWifMLO4z9g.png"));
   }
 
   /**

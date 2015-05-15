@@ -11,13 +11,13 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.bizness.Users;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.FeatureType;
@@ -39,8 +39,6 @@ import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
-import com.janknspank.proto.UserProto.UserAction;
-import com.janknspank.proto.UserProto.UserAction.ActionType;
 import com.janknspank.rank.InputValuesGenerator;
 import com.janknspank.rank.Personas;
 
@@ -271,25 +269,17 @@ public class Helper {
   }
 
   public static void main(String args[]) throws Exception {
-    Multiset<String> xOutUrls = HashMultiset.create();
-    for (UserAction userAction : Database.with(UserAction.class).get(
-        new QueryOption.WhereEqualsEnum("action_type", ActionType.X_OUT))) {
-      boolean doContinue = false;
-      for (Interest interest : userAction.getInterestList()) {
-        if (interest.getSource() == InterestSource.DEFAULT_TO_PREVENT_CRASH) {
-          doContinue = true;
-          break;
-        }
+    Multiset<String> timezones = HashMultiset.create();
+    int count = 0;
+    for (User user : Database.with(User.class).get()) {
+      if (Users.getLastAppUsageInMinutes(user) < 60 * 24) {
+        ++count;
+        timezones.add(user.getTimezoneEstimate());
       }
-      if (doContinue) {
-        continue;
-      }
-      xOutUrls.add(userAction.getUrl());
     }
-    for (String xOutUrl : Multisets.copyHighestCountFirst(xOutUrls).elementSet()) {
-      if (xOutUrls.count(xOutUrl) >= 3) {
-        System.out.println(xOutUrl + ": " + xOutUrls.count(xOutUrl));
-      }
+    for (String timezone : timezones.elementSet()) {
+      System.out.println(timezone + ": " + timezones.count(timezone) + " ("
+          + (timezones.count(timezone) * 100 / count) + "%)");
     }
   }
 }

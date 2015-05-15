@@ -18,7 +18,6 @@ import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
@@ -144,26 +143,33 @@ public class PushDeviceNotifications {
       score -= 20;
     }
 
-    // 0, 25, or 50 depending on whether the article's about a company, and
+    // -25 to 100 depending on whether the article's about a company, and
     // whether the user's following that company.
     if (isArticleAboutFollowedCompany(article, followedEntityIds)) {
-      score += 50;
+      // Users click on these notifications 57% more than average.
+      score += 100;
     } else if (isArticleAboutCompany(article)) {
-      // Don't make this too high.  In many industries, companies are far less
-      // interesting than ideas... E.g. architecture, where when this value was
-      // to high, we sent articles about airlines to folks because those
-      // articles mentioned a company while design articles didn't.
-      score += 25;
+      // Counter-intuitively, this is a negative signal: If an article's about
+      // a company, and the user hasn't specified an interest in that company,
+      // he's less likely than average to be interested in it.  In fact, click-
+      // through on notifications about companies the user isn't following are
+      // 27% lower than average.
+      score -= 25;
     }
 
-    // 0 out of 150 depending on whether there's dupes or this article seems
+    // 0 out of 100 depending on whether there's dupes or this article seems
     // event-like.
     if (isArticleAboutEvent(article)) {
-      score += 50;
+      // We actually have not noticed much correlation between this attribute
+      // and click-through.  Let's re-evaluate in the future.
+      score += 5;
     }
-    if (article.getHotCount() > 2) {
-      score += 100;
-    } else if (article.getHotCount() == 2) {
+    if (article.getHotCount() > 3) {
+      // Articles with dupe scores of 2 actually have no correlation to
+      // engagement.  So we only reward very highly duped articles, which
+      // can get engagement up to 2x normal.
+      score += 95;
+    } else if (article.getHotCount() == 3) {
       score += 50;
     }
     return score;
@@ -191,8 +197,7 @@ public class PushDeviceNotifications {
     }
 
     // Get the user's stream.
-    Iterable<Article> rankedArticles = Articles.getRankedArticles(
-        user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
+    Iterable<Article> rankedArticles = Articles.getMainStream(user);
 
     // Don't consider articles older than the last time the user used the app or
     // the last time we sent him/her a notification.
@@ -261,8 +266,7 @@ public class PushDeviceNotifications {
             + "relatives-find-loved-ones-in-Nepal.html"), true /* retain */).values(), null);
     describeArticleUser(article, user);
 
-    Iterable<Article> rankedArticles = Articles.getRankedArticles(
-        user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
+    Iterable<Article> rankedArticles = Articles.getMainStream(user);
     PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
     long lastNotificationTime = previousUserNotifications.getLastNotificationTime();
     long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime);

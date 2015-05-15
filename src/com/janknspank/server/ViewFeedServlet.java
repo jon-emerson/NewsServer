@@ -11,6 +11,7 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.rank.DiversificationPass;
 import com.janknspank.server.soy.ViewFeedSoy;
 
 @AuthenticationRequired
@@ -39,7 +40,8 @@ public class ViewFeedServlet extends StandardServlet {
               .setIndustryCode(Integer.parseInt(industryCodeId))
               .build())
           .build();
-      articles = Articles.getStream(user, new AncillaryStreamStrategy());
+      articles = Articles.getStream(
+          user, new AncillaryStreamStrategy(), new DiversificationPass.IndustryStreamPass());
     } else {
       articles = Articles.getMainStream(user);
     }
