@@ -28,3 +28,6 @@ test_instructions {
     non_article_url: "http://www.breitbart.com/newsletter-signup/"
   }
 }
+feature_boost_pattern {
+  boost: -5 # Sensationalist conservative news.
+}

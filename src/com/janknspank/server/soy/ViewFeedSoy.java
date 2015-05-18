@@ -6,18 +6,15 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.json.JSONObject;
 
 import com.google.api.client.util.Lists;
 import com.google.api.client.util.Sets;
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableSet;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
-import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
@@ -35,8 +32,7 @@ import com.janknspank.server.ArticleSerializer;
 public class ViewFeedSoy {
   public static SoyListData toSoyListData(
       final Iterable<Article> articles,
-      final User user,
-      final Function<Article, Double> scoreFunction) {
+      final User user) {
     Set<String> userKeywordSet =
         UserInterests.getUserKeywordSet(user, ImmutableSet.<InterestType>of());
 
@@ -48,7 +44,7 @@ public class ViewFeedSoy {
           "url", article.getUrl(),
           "urlId", article.getUrlId(),
           "description", article.getDescription(),
-          "score", scoreFunction.apply(article),
+          "score", article.getScore(),
           "neuralNetwork", getNeuralNetworkString(user, article),
           "keywords", getKeywordsString(article),
           "features", getFeaturesString(user, article));
@@ -91,7 +87,8 @@ public class ViewFeedSoy {
       articleSoyMapData.put("fb_comments" , (int) engagement.getCommentCount());
 
       // Attribution.
-      articleSoyMapData.put("attribution" , getTime(article) + " - " + getDomain(article));
+      articleSoyMapData.put("attribution" ,
+          ArticleSerializer.getClientDate(article) + " - " + getDomain(article));
 
       // Attribution.
       articleSoyMapData.put("rawArticle", "article = "
@@ -168,19 +165,6 @@ public class ViewFeedSoy {
     }
     sb.append("]");
     return sb.toString();
-  }
-
-  public static String getTime(Article article) {
-    String time;
-    long age = System.currentTimeMillis() - Articles.getPublishedTime(article);
-    if (age < TimeUnit.MINUTES.toMillis(60)) {
-      time = Long.toString(TimeUnit.MINUTES.convert(age, TimeUnit.MILLISECONDS)) + "m";
-    } else if (age < TimeUnit.HOURS.toMillis(24)) {
-      time = Long.toString(TimeUnit.HOURS.convert(age, TimeUnit.MILLISECONDS)) + "h";
-    } else {
-      time = Long.toString(TimeUnit.DAYS.convert(age, TimeUnit.MILLISECONDS)) + "d";
-    }
-    return time;
   }
 
   public static String getDomain(Article article) {

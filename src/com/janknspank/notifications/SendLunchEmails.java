@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
@@ -21,10 +24,12 @@ import javax.mail.internet.MimeMultipart;
 
 import org.apache.http.client.utils.URIBuilder;
 
+import com.google.api.client.util.Lists;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.tofu.SoyTofu;
@@ -169,7 +174,7 @@ public class SendLunchEmails {
               ? article.getUrl()
               : getNotificationUrl(user, article, notificationId),
           "tags", getTags(article, userKeywordSet, userIndustryFeatureIdIds),
-          "time", ViewFeedSoy.getTime(article),
+          "time", ArticleSerializer.getClientDate(article),
           "site", ViewFeedSoy.getDomain(article)));
     }
     return list;
@@ -220,7 +225,7 @@ public class SendLunchEmails {
    */
   public static Iterable<Article> getArticles(User user)
       throws DatabaseSchemaException, BiznessException {
-    TopList<Article, Double> mainStream = Articles.getMainStream(user);
+    Iterable<Article> mainStream = Articles.getMainStream(user);
     TopList<Article, Double> top6LastDay = new TopList<>(6);
     long dateInMillisOneDayAgo = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1);
     long dateInMillis12HoursAgo = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(12);
@@ -230,9 +235,7 @@ public class SendLunchEmails {
         // Punish articles from yesterday.  The email should try to be mostly
         // about articles published that day, before noon.
         boolean fromYesterday = publishedTime > dateInMillis12HoursAgo;
-        top6LastDay.add(article, fromYesterday
-            ? mainStream.getValue(article) - 0.1
-            : mainStream.getValue(article));
+        top6LastDay.add(article, fromYesterday ? article.getScore() - 0.1 : article.getScore());
       }
     }
     return top6LastDay;
@@ -298,19 +301,23 @@ public class SendLunchEmails {
     return message;
   }
 
-  public static void sendLunchEmails() throws DatabaseSchemaException {
-    Session session = EmailTransportProvider.getSession();
+  private static class LunchEmailCallable implements Callable<Void> {
+    private final Session session;
+    private final User user;
 
-    Iterable<User> users = Database.with(User.class).get(
-        new QueryOption.WhereNotNull("email"),
-        new QueryOption.WhereNotTrue("opt_out_email"));
-    for (User user : users) {
+    private LunchEmailCallable(Session session, User user) {
+      this.session = session;
+      this.user = user;
+    }
+
+    @Override
+    public Void call() throws Exception {
       Transport transport = null;
       try {
         // Make sure it's lunchtime.
         UserTimezone userTimezone = UserTimezone.getForUser(user, true /* update */);
         if (!userTimezone.isAroundNoon() || userTimezone.isWeekend()) {
-          continue;
+          return null;
         }
 
         // Send the email.
@@ -336,10 +343,43 @@ public class SendLunchEmails {
           } catch (MessagingException e) {}
         }
       }
+      return null;
     }
   }
 
-  public static void main(String[] args) throws DatabaseSchemaException {
+  public static void sendLunchEmails() throws DatabaseSchemaException, InterruptedException {
+    Session session = EmailTransportProvider.getSession();
+
+    // Figure out who's received a lunch email in the last 18 hours, so we
+    // don't send them another lunch email on the same day.  We do 18 hours
+    // rather than 24 to account for both small adjustments in this task's
+    // start time, and to allow for the user to change timezones.
+    Set<String> userIdsToSkip = Sets.newHashSet();
+    for (Notification notification : Database.with(Notification.class).get(
+        new QueryOption.WhereEqualsEnum("device_type", DeviceType.EMAIL),
+        new QueryOption.WhereGreaterThan("create_time",
+            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(18)))) {
+      userIdsToSkip.add(notification.getUserId());
+    }
+
+    // Amazon SES gave us a quota of 14 emails/second.  Getting a user's stream
+    // and processing it tends to take around 500ms, so to stay well within quota,
+    // we need this to be pretty small.
+    ExecutorService executor = Executors.newFixedThreadPool(6);
+    List<Callable<Void>> callables = Lists.newArrayList();
+    for (User user : Database.with(User.class).get(
+        new QueryOption.WhereNotNull("email"),
+        new QueryOption.WhereNotEquals("email", ""),
+        new QueryOption.WhereNotTrue("opt_out_email"))) {
+      if (!userIdsToSkip.contains(user.getId())) {
+        callables.add(new LunchEmailCallable(session, user));
+      }
+    }
+    executor.invokeAll(callables);
+    executor.shutdown();
+  }
+
+  public static void main(String[] args) throws Exception {
     sendLunchEmails();
     System.exit(0);
   }

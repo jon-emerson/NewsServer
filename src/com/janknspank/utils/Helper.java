@@ -6,13 +6,17 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.google.api.client.util.Lists;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.FeatureType;
@@ -30,6 +34,9 @@ import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.RankProto.Persona;
+import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestSource;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.InputValuesGenerator;
 import com.janknspank.rank.Personas;
@@ -191,7 +198,7 @@ public class Helper {
     }
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main9(String args[]) throws Exception {
     for (String email : Personas.getPersonaMap().keySet()) {
       System.out.println(email + ":");
       Persona persona = Personas.getByEmail(email);
@@ -229,5 +236,66 @@ public class Helper {
     for (ListenableFuture<Article> future : futures) {
       future.get();
     }
+  }
+
+  public static void main10(String args[]) throws Exception {
+    Multiset<String> facebookInterests = HashMultiset.create();
+    Multiset<String> userInterests = HashMultiset.create();
+    for (User user : Database.with(User.class).get()) {
+      ImmutableSet<FeatureId> enabledFeatureIds =
+          ImmutableSet.copyOf(UserInterests.getUserIndustryFeatureIds(user));
+      for (Interest interest : user.getInterestList()) {
+        if (interest.getType() == InterestType.INDUSTRY) {
+          FeatureId featureId = FeatureId.fromId(interest.getIndustryCode());
+          if (featureId != null && enabledFeatureIds.contains(featureId)) {
+            if (interest.getSource() == InterestSource.USER) {
+              userInterests.add(featureId.getTitle());
+            } else if (interest.getSource() == InterestSource.FACEBOOK_PROFILE) {
+              facebookInterests.add(featureId.getTitle());
+            }
+          }
+        }
+      }
+    }
+    TopList<String, Integer> topUserInterests = new TopList<>(100);
+    for (String userInterest : userInterests) {
+      topUserInterests.add(userInterest, userInterests.count(userInterest));
+    }
+    for (String userInterest : topUserInterests) {
+      System.out.println(userInterest + ": " + topUserInterests.getValue(userInterest) + " vs "
+          + facebookInterests.count(userInterest) + " from Facebook login");
+    }
+  }
+
+  public static void main(String args[]) throws Exception {
+    int numConfigured = 0;
+    int numGoofOff = 0;
+    for (User user : Database.with(User.class).get()) {
+      boolean configured = false;
+      for (Interest interest : UserInterests.getInterests(user)) {
+        if (interest.getSource() == InterestSource.USER) {
+          configured = true;
+        }
+      }
+      boolean goofOff = false;
+      for (FeatureId featureId : UserInterests.getUserIndustryFeatureIds(user)) {
+        switch (featureId) {
+          case SPORTS:
+          case ARTS:
+          case COMPUTER_GAMES:
+          case ANIMATION:
+            goofOff = true;
+        }
+      }
+      if (configured) {
+        ++numConfigured;
+        if (goofOff) {
+          ++numGoofOff;
+        }
+      }
+    }
+    System.out.println("Configured = " + numConfigured);
+    System.out.println("Goof offs = " + numGoofOff);
+    System.out.println("Percent goof off = " + ((double) numGoofOff * 100) / numConfigured);
   }
 }

@@ -22,6 +22,7 @@ import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.repackaged.com.google.common.base.Throwables;
 import com.google.api.client.util.Lists;
+import com.google.api.client.util.Strings;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
@@ -88,12 +89,15 @@ public class LinkedInLoginHandler {
    * address.
    */
   private User.Builder getNewUserBuilder(String email) {
-    return User.newBuilder()
+    User.Builder builder = User.newBuilder()
         .setId(GuidFactory.generate())
-        .setEmail(email)
         .setLinkedInAccessToken(linkedInAccessToken)
         .setCreateTime(System.currentTimeMillis())
         .setLastLoginTime(System.currentTimeMillis());
+    if (!Strings.isNullOrEmpty(email)) {
+      builder.setEmail(email);
+    }
+    return builder;
   }
 
   public synchronized User getUser()

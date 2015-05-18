@@ -9,6 +9,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.reflections.Reflections;
 
 import com.google.common.collect.Sets;
+import com.janknspank.classifier.Feature;
 import com.janknspank.nlp.KeywordCanonicalizer;
 
 public class NewsServer {
@@ -17,11 +18,11 @@ public class NewsServer {
    */
   private static void initialize() {
     KeywordCanonicalizer.getKeywordToEntityIdMap();
-    KeywordCanonicalizer.getEntityIdToEntityMap();
+    Feature.getAllFeatures();
   }
 
   @SuppressWarnings("unchecked")
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     initialize();
 
     int port = (System.getenv("PORT") == null) ? 5000 : Integer.valueOf(System.getenv("PORT"));
@@ -32,6 +33,7 @@ public class NewsServer {
     root.setDescriptor("WEB-INF/web.xml");
     root.setResourceBase("");
     root.setParentLoaderPriority(true);
+    root.setMaxFormContentSize(5 * 1000 * 1000);
 
     Set<String> urlPatternSet = Sets.newHashSet();
     for (Class<?> servletClass :
@@ -52,7 +54,11 @@ public class NewsServer {
     server.setHandler(root);
 
     // Start server.
-    server.start();
-    server.join();
+    try {
+      server.start();
+      server.join();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

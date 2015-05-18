@@ -20,6 +20,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.Entities;
+import com.janknspank.bizness.EntityCache;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
@@ -45,7 +46,6 @@ public class KeywordCanonicalizer {
   public static final int STRENGTH_FOR_FIRST_PARAGRAPH_MATCH = 100;
 
   private static Map<String, KeywordToEntityId> __keywordToEntityIdMap = null;
-  private static Map<String, Entity> __entityIdToEntityMap = null;
 
   /**
    * Figures out which of the passed keyword strings are better.  Longer
@@ -221,7 +221,6 @@ public class KeywordCanonicalizer {
     List<ArticleKeyword> finalKeywords = Lists.newArrayList();
     Set<String> entityIdsSoFar = Sets.newHashSet();
     Map<String, KeywordToEntityId> keywordToEntityIdMap = getKeywordToEntityIdMap();
-    Map<String, Entity> entityIdToEntityMap = getEntityIdToEntityMap();
 
     // Make sure we're dealing with keywords in paragraph-order.  These keywords
     // should already be in proper order, but it doesn't hurt to do it again.
@@ -259,12 +258,13 @@ public class KeywordCanonicalizer {
         //   strengthAddition += STRENGTH_FOR_FIRST_PARAGRAPH_MATCH;
         // }
 
-        Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
-        finalKeywords.add(keyword.toBuilder()
-            .setEntity(entity)
-            .setKeyword(entity.hasShortName() ? entity.getShortName() : entity.getKeyword())
-            // .setStrength(keyword.getStrength() + strengthAddition)
-            .build());
+        Entity entity = EntityCache.getEntity(keywordToEntityId.getEntityId());
+        if (entity != null) {
+          finalKeywords.add(keyword.toBuilder()
+              .setEntity(entity)
+              .setKeyword(entity.hasShortName() ? entity.getShortName() : entity.getKeyword())
+              .build());
+        }
       } else {
         finalKeywords.add(keyword);
       }
@@ -282,11 +282,10 @@ public class KeywordCanonicalizer {
   public static Iterable<ArticleKeyword> getArticleKeywordsFromTextInternal(
       String block,
       int paragraphNumber,
-      Map<String, KeywordToEntityId> keywordToEntityIdMap,
-      Map<String, Entity> entityIdToEntityMap) {
+      Map<String, KeywordToEntityId> keywordToEntityIdMap) {
     KeywordToEntityId keywordToEntityId = keywordToEntityIdMap.get(block.toLowerCase());
     if (keywordToEntityId != null) {
-      Entity entity = entityIdToEntityMap.get(keywordToEntityId.getEntityId());
+      Entity entity = EntityCache.getEntity(keywordToEntityId.getEntityId());
       String entityKeyword = entity.hasShortName() ? entity.getShortName() : entity.getKeyword();
 
       return ImmutableList.of(ArticleKeyword.newBuilder()
@@ -301,9 +300,9 @@ public class KeywordCanonicalizer {
     } else if (block.contains(" ")) {
       return Iterables.concat(
           getArticleKeywordsFromTextInternal(block.substring(0, block.lastIndexOf(" ")),
-              paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap),
+              paragraphNumber, keywordToEntityIdMap),
               getArticleKeywordsFromTextInternal(block.substring(block.indexOf(" ") + 1),
-              paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap));
+              paragraphNumber, keywordToEntityIdMap));
     } else {
       return Collections.emptyList();
     }
@@ -316,7 +315,6 @@ public class KeywordCanonicalizer {
   public static List<ArticleKeyword> getArticleKeywordsFromText(
       String text, int paragraphNumber) {
     Map<String, KeywordToEntityId> keywordToEntityIdMap = getKeywordToEntityIdMap();
-    Map<String, Entity> entityIdToEntityMap = getEntityIdToEntityMap();
 
     // Find consecutive capitalized words blocks.  E.g. "Senator Barbara Boxer
     // goes to Google" would create [ "Senator Barbara Boxer", "Google" ].
@@ -342,7 +340,7 @@ public class KeywordCanonicalizer {
     Map<String, ArticleKeyword> entityIdToKeywordMap = Maps.newHashMap();
     for (String block : blocks) {
       for (ArticleKeyword keyword : getArticleKeywordsFromTextInternal(
-          block, paragraphNumber, keywordToEntityIdMap, entityIdToEntityMap)) {
+          block, paragraphNumber, keywordToEntityIdMap)) {
         if (!entityIdToKeywordMap.containsKey(keyword.getEntity().getId())) {
           entityIdToKeywordMap.put(keyword.getEntity().getId(), keyword);
         }
@@ -368,32 +366,9 @@ public class KeywordCanonicalizer {
     return __keywordToEntityIdMap;
   }
 
-  public static synchronized Map<String, Entity> getEntityIdToEntityMap() {
-    if (__entityIdToEntityMap == null) {
-      Map<String, KeywordToEntityId> keywordToEntityIdMap = getKeywordToEntityIdMap();
-      Set<String> entityIds = Sets.newHashSet();
-      for (KeywordToEntityId keywordToEntityId : keywordToEntityIdMap.values()) {
-        entityIds.add(keywordToEntityId.getEntityId());
-      }
-      try {
-        __entityIdToEntityMap = Maps.newHashMap();
-        System.out.println(
-            "WARNING - SLOW QUERY: KeywordCanonicalizer.getEntityIdToEntityMap() initialization");
-        for (Entity entity : Database.with(Entity.class).get(entityIds)) {
-          __entityIdToEntityMap.put(entity.getId(), entity.toBuilder()
-              .clearTopic() // These are pretty big and we don't need them here.
-              .build());
-        }
-      } catch (DatabaseSchemaException e) {
-        throw new Error(e);
-      }
-    }
-    return __entityIdToEntityMap;
-  }
-
   public static Entity getEntityForKeyword(String keyword) {
     String entityId = getEntityIdForKeyword(keyword);
-    return (entityId == null) ? null : getEntityIdToEntityMap().get(entityId);
+    return (entityId == null) ? null : EntityCache.getEntity(entityId);
   }
 
   public static String getEntityIdForKeyword(String keyword) {

@@ -98,7 +98,6 @@ public class Deduper {
     }
 
     List<ArticleExtraction> nonDupeExtractions = Lists.newArrayList();
-    long startMillis = System.currentTimeMillis();
     for (ArticleExtraction extraction : extractionMap.keySet()) {
       boolean foundDupe = false;
       for (int i = 0; i < nonDupeExtractions.size(); i++) {
@@ -126,8 +125,6 @@ public class Deduper {
         nonDupeExtractions.add(extraction);
       }
     }
-    System.out.println("Duplicates calculated in "
-        + (System.currentTimeMillis() - startMillis) + "ms");
 
     List<Article> dedupedArticles = Lists.newArrayList();
     for (ArticleExtraction extraction : nonDupeExtractions) {

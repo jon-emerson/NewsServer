@@ -1,10 +1,15 @@
 package com.janknspank.notifications;
 
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import com.google.api.client.util.Lists;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -13,11 +18,9 @@ import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
-import com.janknspank.common.TopList;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -140,26 +143,33 @@ public class PushDeviceNotifications {
       score -= 20;
     }
 
-    // 0, 25, or 50 depending on whether the article's about a company, and
+    // -25 to 100 depending on whether the article's about a company, and
     // whether the user's following that company.
     if (isArticleAboutFollowedCompany(article, followedEntityIds)) {
-      score += 50;
+      // Users click on these notifications 57% more than average.
+      score += 100;
     } else if (isArticleAboutCompany(article)) {
-      // Don't make this too high.  In many industries, companies are far less
-      // interesting than ideas... E.g. architecture, where when this value was
-      // to high, we sent articles about airlines to folks because those
-      // articles mentioned a company while design articles didn't.
-      score += 25;
+      // Counter-intuitively, this is a negative signal: If an article's about
+      // a company, and the user hasn't specified an interest in that company,
+      // he's less likely than average to be interested in it.  In fact, click-
+      // through on notifications about companies the user isn't following are
+      // 27% lower than average.
+      score -= 25;
     }
 
-    // 0 out of 150 depending on whether there's dupes or this article seems
+    // 0 out of 100 depending on whether there's dupes or this article seems
     // event-like.
     if (isArticleAboutEvent(article)) {
-      score += 50;
+      // We actually have not noticed much correlation between this attribute
+      // and click-through.  Let's re-evaluate in the future.
+      score += 5;
     }
-    if (article.getHotCount() > 2) {
-      score += 100;
-    } else if (article.getHotCount() == 2) {
+    if (article.getHotCount() > 3) {
+      // Articles with dupe scores of 2 actually have no correlation to
+      // engagement.  So we only reward very highly duped articles, which
+      // can get engagement up to 2x normal.
+      score += 95;
+    } else if (article.getHotCount() == 3) {
       score += 50;
     }
     return score;
@@ -176,7 +186,7 @@ public class PushDeviceNotifications {
     return lastAppUseTime;
   }
 
-  private static Article getArticleToNotifyAbout(User user)
+  private static Article getArticleToNotifyAbout(User user, Set<String> followedEntityIds)
       throws DatabaseSchemaException, BiznessException {
     PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
 
@@ -186,11 +196,8 @@ public class PushDeviceNotifications {
       return null;
     }
 
-    Set<String> followedEntityIds = getFollowedEntityIds(user);
-
     // Get the user's stream.
-    TopList<Article, Double> rankedArticles = Articles.getRankedArticles(
-        user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
+    Iterable<Article> rankedArticles = Articles.getMainStream(user);
 
     // Don't consider articles older than the last time the user used the app or
     // the last time we sent him/her a notification.
@@ -211,8 +218,7 @@ public class PushDeviceNotifications {
         continue;
       }
 
-      int score = getArticleNotificationScore(
-          article, followedEntityIds, rankedArticles.getValue(article));
+      int score = getArticleNotificationScore(article, followedEntityIds, article.getScore());
       if (score > bestArticleScore) {
         bestArticleScore = score;
         bestArticle = article;
@@ -260,8 +266,7 @@ public class PushDeviceNotifications {
             + "relatives-find-loved-ones-in-Nepal.html"), true /* retain */).values(), null);
     describeArticleUser(article, user);
 
-    TopList<Article, Double> rankedArticles = Articles.getRankedArticles(
-        user, NeuralNetworkScorer.getInstance(), new MainStreamStrategy(), 40);
+    Iterable<Article> rankedArticles = Articles.getMainStream(user);
     PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
     long lastNotificationTime = previousUserNotifications.getLastNotificationTime();
     long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime);
@@ -300,23 +305,36 @@ public class PushDeviceNotifications {
     System.out.println();
   }
 
-  public static void main(String args[]) throws Exception {
-    // As part of this process, also send emails.
-    SendWelcomeEmails.sendWelcomeEmails();
-    SendLunchEmails.sendLunchEmails();
+  private static class NotificationCallable implements Callable<Void> {
+    private final User user;
 
-    // OK, now send push notifications.
-    for (User user : Database.with(User.class).get()) {
+    private NotificationCallable(User user) {
+      this.user = user;
+    }
+
+    @Override
+    public Void call() {
       try {
         Iterable<DeviceRegistration> registrations =
             IosPushNotificationHelper.getDeviceRegistrations(user);
         if (!Iterables.isEmpty(registrations)) {
-          Article bestArticle = getArticleToNotifyAbout(user);
+          Set<String> followedEntityIds = getFollowedEntityIds(user);
+          Article bestArticle = getArticleToNotifyAbout(user, followedEntityIds);
           if (bestArticle != null) {
             System.out.println("Sending \"" + bestArticle.getTitle() + "\" to " + user.getEmail());
             for (DeviceRegistration registration : registrations) {
               Notification pushNotification =
-                  IosPushNotificationHelper.createPushNotification(registration, bestArticle);
+                  IosPushNotificationHelper.createPushNotification(registration, bestArticle)
+                      .toBuilder()
+                      .setIsEvent(isArticleAboutEvent(bestArticle))
+                      .setIsCompany(isArticleAboutCompany(bestArticle))
+                      .setIsFollowedCompany(isArticleAboutFollowedCompany(
+                          bestArticle, followedEntityIds))
+                      .setHotCount(bestArticle.getHotCount())
+                      .setScore(bestArticle.getScore())
+                      .setNotificationScore(getArticleNotificationScore(
+                          bestArticle, followedEntityIds, bestArticle.getScore()))
+                      .build();
               IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
             }
           }
@@ -324,7 +342,24 @@ public class PushDeviceNotifications {
       } catch (Exception e) {
         e.printStackTrace();
       }
+      return null;
     }
+  }
+
+  public static void main(String args[]) throws Exception {
+    // As part of this process, also send emails.
+    SendWelcomeEmails.sendWelcomeEmails();
+    SendLunchEmails.sendLunchEmails();
+
+    // OK, now send push notifications.
+    ExecutorService executor = Executors.newFixedThreadPool(20);
+    List<Callable<Void>> callables = Lists.newArrayList();
+    for (User user : Database.with(User.class).get()) {
+      callables.add(new NotificationCallable(user));
+    }
+    executor.invokeAll(callables);
+    executor.shutdown();
+
     System.exit(0);
   }
 }

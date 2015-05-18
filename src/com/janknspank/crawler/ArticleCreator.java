@@ -51,6 +51,8 @@ class ArticleCreator {
       Database.getStringLength(Article.class, "title");
   private static final int MAX_DESCRIPTION_LENGTH =
       Database.getStringLength(Article.class, "description");
+  private static final int MAX_ORIGIN_LENGTH =
+      Database.getStringLength(Article.class, "origin");
   private static final Set<String> IMAGE_URL_BLACKLIST = ImmutableSet.of(
       "http://media.cleveland.com/design/alpha/img/logo_cleve.gif",
       "http://www.sfgate.com/img/pages/article/opengraph_default.png",
@@ -77,7 +79,9 @@ class ArticleCreator {
       "https://s0.wp.com/wp-content/themes/vip/recode/img/_default/default-thumbnail-post.png",
       "http://media.scmagazine.com/images/2013/02/19/sc_logo_21413_345884.png",
       "http://idge.staticworld.net/nww/nww_logo_300x300.png",
-      "http://oystatic.ignimgs.com/src/core/img/widgets/global/page/ign-logo-100x100.jpg");
+      "http://oystatic.ignimgs.com/src/core/img/widgets/global/page/ign-logo-100x100.jpg",
+      "https://s0.wp.com/wp-content/themes/vip/time2014/img/time-logo-og.png",
+      "http://www.usertesting.com/blog/wp-content/uploads/2014/05/Poll-FeaturedImage.png");
   private static final Set<Pattern> IMAGE_URL_BLACKLIST_PATTERNS = ImmutableSet.of(
       // A black "T", representing the NYTimes.
       // E.g. http://static01.nyt.com/images/icons/t_logo_291_black.png
@@ -92,7 +96,9 @@ class ArticleCreator {
       // E.g. http://cdn.gotraffic.net/politics/20150107201907/public/images/logos/FB-Sharing.73b07052.png
       Pattern.compile("\\/\\/cdn\\.gotraffic\\.net\\/.*FB-Sharing"),
       // E.g. http://www.abc.net.au/news/linkableblob/6072216/data/abc-news.jpg
-      Pattern.compile("\\/\\/www\\.abc\\.net\\.au\\/.*\\/data\\/abc-news\\.jpg.*"));
+      Pattern.compile("\\/\\/www\\.abc\\.net\\.au\\/.*\\/data\\/abc-news\\.jpg.*"),
+      // E.g. https://dnqgz544uhbo8.cloudfront.net/_/fp/img/default-preview-image.IsBK38jFAJBlWifMLO4z9g.png
+      Pattern.compile("\\/\\/[\\w]+\\.cloudfront\\.net\\/_\\/fp\\/img\\/default-preview-image\\."));
   private static final Pattern TEXT_TO_REMOVE_FROM_TITLES[] = new Pattern[] {
       Pattern.compile("<\\/?(i|b|em|strong)>"),
       Pattern.compile("^[a-zA-Z\\.]{3,15}\\s(\\||\\-\\-|\\-|\\–|\u2014)\\s"),
@@ -125,6 +131,11 @@ class ArticleCreator {
       articleBuilder.setAuthor(author);
     }
 
+    // Origin.
+    String origin = getOrigin(site, author);
+    if (origin != null) {
+      articleBuilder.setOrigin(origin);
+    }
     // Copyright.
     String copyright = getCopyright(documentNode);
     if (copyright != null) {
@@ -225,6 +236,12 @@ class ArticleCreator {
   public static String getAuthor(DocumentNode documentNode) {
     Node metaNode = documentNode.findFirst("html > head meta[name=\"author\"]");
     return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
+  }
+
+  public static String getOrigin(SiteManifest site, String author) {
+    return ("medium.com".equals(site.getRootDomain()))
+        ? author.length() > MAX_ORIGIN_LENGTH ? author.substring(0, MAX_ORIGIN_LENGTH) : author
+        : site.getShortName();
   }
 
   public static String getCopyright(DocumentNode documentNode) {

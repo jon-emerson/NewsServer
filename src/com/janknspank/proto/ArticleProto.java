@@ -86,6 +86,39 @@ public final class ArticleProto {
     com.google.protobuf.ByteString
         getAuthorBytes();
 
+    // optional string origin = 24;
+    /**
+     * <code>optional string origin = 24;</code>
+     *
+     * <pre>
+     * This is the client-visible "origin" of this article.  It's usually the
+     * short name of the article's web site, but it can also be the author
+     * name on Medium blog posts, etc.
+     * </pre>
+     */
+    boolean hasOrigin();
+    /**
+     * <code>optional string origin = 24;</code>
+     *
+     * <pre>
+     * This is the client-visible "origin" of this article.  It's usually the
+     * short name of the article's web site, but it can also be the author
+     * name on Medium blog posts, etc.
+     * </pre>
+     */
+    java.lang.String getOrigin();
+    /**
+     * <code>optional string origin = 24;</code>
+     *
+     * <pre>
+     * This is the client-visible "origin" of this article.  It's usually the
+     * short name of the article's web site, but it can also be the author
+     * name on Medium blog posts, etc.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getOriginBytes();
+
     // optional string copyright = 6;
     /**
      * <code>optional string copyright = 6;</code>
@@ -391,6 +424,24 @@ public final class ArticleProto {
      * <code>optional int32 hot_count = 22;</code>
      */
     int getHotCount();
+
+    // optional double score = 23;
+    /**
+     * <code>optional double score = 23;</code>
+     *
+     * <pre>
+     * Used for ViewFeed.
+     * </pre>
+     */
+    boolean hasScore();
+    /**
+     * <code>optional double score = 23;</code>
+     *
+     * <pre>
+     * Used for ViewFeed.
+     * </pre>
+     */
+    double getScore();
   }
   /**
    * Protobuf type {@code Article}
@@ -469,82 +520,82 @@ public final class ArticleProto {
               break;
             }
             case 50: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               copyright_ = input.readBytes();
               break;
             }
             case 58: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               description_ = input.readBytes();
               break;
             }
             case 66: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               imageUrl_ = input.readBytes();
               break;
             }
             case 74: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
                 paragraph_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000200;
               }
               paragraph_.add(input.readBytes());
               break;
             }
             case 80: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               publishedTime_ = input.readInt64();
               break;
             }
             case 88: {
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000400;
               modifiedTime_ = input.readInt64();
               break;
             }
             case 96: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000800;
               crawlTime_ = input.readInt64();
               break;
             }
             case 104: {
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00001000;
               wordCount_ = input.readInt64();
               break;
             }
             case 114: {
-              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
                 keyword_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleKeyword>();
-                mutable_bitField0_ |= 0x00002000;
+                mutable_bitField0_ |= 0x00004000;
               }
               keyword_.add(input.readMessage(com.janknspank.proto.ArticleProto.ArticleKeyword.PARSER, extensionRegistry));
               break;
             }
             case 122: {
-              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
                 socialEngagement_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.SocialEngagement>();
-                mutable_bitField0_ |= 0x00004000;
+                mutable_bitField0_ |= 0x00008000;
               }
               socialEngagement_.add(input.readMessage(com.janknspank.proto.ArticleProto.SocialEngagement.PARSER, extensionRegistry));
               break;
             }
             case 130: {
-              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+              if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
                 feature_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleFeature>();
-                mutable_bitField0_ |= 0x00008000;
+                mutable_bitField0_ |= 0x00010000;
               }
               feature_.add(input.readMessage(com.janknspank.proto.ArticleProto.ArticleFeature.PARSER, extensionRegistry));
               break;
             }
             case 138: {
-              if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
+              if (!((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
                 dedupingStems_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00010000;
+                mutable_bitField0_ |= 0x00020000;
               }
               dedupingStems_.add(input.readBytes());
               break;
             }
             case 144: {
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00002000;
               retain_ = input.readBool();
               break;
             }
@@ -554,24 +605,34 @@ public final class ArticleProto {
               if (value == null) {
                 unknownFields.mergeVarintField(19, rawValue);
               } else {
-                bitField0_ |= 0x00002000;
+                bitField0_ |= 0x00004000;
                 reason_ = value;
               }
               break;
             }
             case 160: {
-              bitField0_ |= 0x00004000;
+              bitField0_ |= 0x00008000;
               hot_ = input.readBool();
               break;
             }
             case 168: {
-              bitField0_ |= 0x00008000;
+              bitField0_ |= 0x00010000;
               oldestHotDuplicateTime_ = input.readInt64();
               break;
             }
             case 176: {
-              bitField0_ |= 0x00010000;
+              bitField0_ |= 0x00020000;
               hotCount_ = input.readInt32();
+              break;
+            }
+            case 185: {
+              bitField0_ |= 0x00040000;
+              score_ = input.readDouble();
+              break;
+            }
+            case 194: {
+              bitField0_ |= 0x00000020;
+              origin_ = input.readBytes();
               break;
             }
           }
@@ -582,19 +643,19 @@ public final class ArticleProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           paragraph_ = new com.google.protobuf.UnmodifiableLazyStringList(paragraph_);
         }
-        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
           keyword_ = java.util.Collections.unmodifiableList(keyword_);
         }
-        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
           socialEngagement_ = java.util.Collections.unmodifiableList(socialEngagement_);
         }
-        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+        if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
           feature_ = java.util.Collections.unmodifiableList(feature_);
         }
-        if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
+        if (((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
           dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(dedupingStems_);
         }
         this.unknownFields = unknownFields.build();
@@ -949,6 +1010,67 @@ public final class ArticleProto {
       }
     }
 
+    // optional string origin = 24;
+    public static final int ORIGIN_FIELD_NUMBER = 24;
+    private java.lang.Object origin_;
+    /**
+     * <code>optional string origin = 24;</code>
+     *
+     * <pre>
+     * This is the client-visible "origin" of this article.  It's usually the
+     * short name of the article's web site, but it can also be the author
+     * name on Medium blog posts, etc.
+     * </pre>
+     */
+    public boolean hasOrigin() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string origin = 24;</code>
+     *
+     * <pre>
+     * This is the client-visible "origin" of this article.  It's usually the
+     * short name of the article's web site, but it can also be the author
+     * name on Medium blog posts, etc.
+     * </pre>
+     */
+    public java.lang.String getOrigin() {
+      java.lang.Object ref = origin_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          origin_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string origin = 24;</code>
+     *
+     * <pre>
+     * This is the client-visible "origin" of this article.  It's usually the
+     * short name of the article's web site, but it can also be the author
+     * name on Medium blog posts, etc.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getOriginBytes() {
+      java.lang.Object ref = origin_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        origin_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional string copyright = 6;
     public static final int COPYRIGHT_FIELD_NUMBER = 6;
     private java.lang.Object copyright_;
@@ -956,7 +1078,7 @@ public final class ArticleProto {
      * <code>optional string copyright = 6;</code>
      */
     public boolean hasCopyright() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional string copyright = 6;</code>
@@ -999,7 +1121,7 @@ public final class ArticleProto {
      * <code>optional string description = 7;</code>
      */
     public boolean hasDescription() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional string description = 7;</code>
@@ -1042,7 +1164,7 @@ public final class ArticleProto {
      * <code>optional string image_url = 8;</code>
      */
     public boolean hasImageUrl() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional string image_url = 8;</code>
@@ -1115,7 +1237,7 @@ public final class ArticleProto {
      * <code>optional int64 published_time = 10;</code>
      */
     public boolean hasPublishedTime() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional int64 published_time = 10;</code>
@@ -1131,7 +1253,7 @@ public final class ArticleProto {
      * <code>optional int64 modified_time = 11;</code>
      */
     public boolean hasModifiedTime() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
      * <code>optional int64 modified_time = 11;</code>
@@ -1147,7 +1269,7 @@ public final class ArticleProto {
      * <code>optional int64 crawl_time = 12;</code>
      */
     public boolean hasCrawlTime() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
      * <code>optional int64 crawl_time = 12;</code>
@@ -1163,7 +1285,7 @@ public final class ArticleProto {
      * <code>optional int64 word_count = 13;</code>
      */
     public boolean hasWordCount() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     /**
      * <code>optional int64 word_count = 13;</code>
@@ -1348,7 +1470,7 @@ public final class ArticleProto {
      * </pre>
      */
     public boolean hasRetain() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     /**
      * <code>optional bool retain = 18;</code>
@@ -1371,7 +1493,7 @@ public final class ArticleProto {
      * <code>optional .Article.Reason reason = 19;</code>
      */
     public boolean hasReason() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     /**
      * <code>optional .Article.Reason reason = 19;</code>
@@ -1392,7 +1514,7 @@ public final class ArticleProto {
      * </pre>
      */
     public boolean hasHot() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     /**
      * <code>optional bool hot = 20;</code>
@@ -1417,7 +1539,7 @@ public final class ArticleProto {
      * </pre>
      */
     public boolean hasOldestHotDuplicateTime() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     /**
      * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
@@ -1437,7 +1559,7 @@ public final class ArticleProto {
      * <code>optional int32 hot_count = 22;</code>
      */
     public boolean hasHotCount() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     /**
      * <code>optional int32 hot_count = 22;</code>
@@ -1446,12 +1568,37 @@ public final class ArticleProto {
       return hotCount_;
     }
 
+    // optional double score = 23;
+    public static final int SCORE_FIELD_NUMBER = 23;
+    private double score_;
+    /**
+     * <code>optional double score = 23;</code>
+     *
+     * <pre>
+     * Used for ViewFeed.
+     * </pre>
+     */
+    public boolean hasScore() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
+    }
+    /**
+     * <code>optional double score = 23;</code>
+     *
+     * <pre>
+     * Used for ViewFeed.
+     * </pre>
+     */
+    public double getScore() {
+      return score_;
+    }
+
     private void initFields() {
       urlId_ = "";
       url_ = "";
       title_ = "";
       type_ = "";
       author_ = "";
+      origin_ = "";
       copyright_ = "";
       description_ = "";
       imageUrl_ = "";
@@ -1469,6 +1616,7 @@ public final class ArticleProto {
       hot_ = false;
       oldestHotDuplicateTime_ = 0L;
       hotCount_ = 0;
+      score_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1497,28 +1645,28 @@ public final class ArticleProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getAuthorBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(6, getCopyrightBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(7, getDescriptionBytes());
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(8, getImageUrlBytes());
       }
       for (int i = 0; i < paragraph_.size(); i++) {
         output.writeBytes(9, paragraph_.getByteString(i));
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt64(10, publishedTime_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt64(11, modifiedTime_);
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeInt64(12, crawlTime_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeInt64(13, wordCount_);
       }
       for (int i = 0; i < keyword_.size(); i++) {
@@ -1533,20 +1681,26 @@ public final class ArticleProto {
       for (int i = 0; i < dedupingStems_.size(); i++) {
         output.writeBytes(17, dedupingStems_.getByteString(i));
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeBool(18, retain_);
       }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeEnum(19, reason_.getNumber());
       }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeBool(20, hot_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeInt64(21, oldestHotDuplicateTime_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         output.writeInt32(22, hotCount_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeDouble(23, score_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(24, getOriginBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1577,15 +1731,15 @@ public final class ArticleProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getAuthorBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getCopyrightBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getDescriptionBytes());
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(8, getImageUrlBytes());
       }
@@ -1598,19 +1752,19 @@ public final class ArticleProto {
         size += dataSize;
         size += 1 * getParagraphList().size();
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(10, publishedTime_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(11, modifiedTime_);
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(12, crawlTime_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(13, wordCount_);
       }
@@ -1635,25 +1789,33 @@ public final class ArticleProto {
         size += dataSize;
         size += 2 * getDedupingStemsList().size();
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(18, retain_);
       }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(19, reason_.getNumber());
       }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(20, hot_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(21, oldestHotDuplicateTime_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(22, hotCount_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(23, score_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(24, getOriginBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1784,52 +1946,56 @@ public final class ArticleProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         author_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        copyright_ = "";
+        origin_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        description_ = "";
+        copyright_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
-        imageUrl_ = "";
+        description_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
-        paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        imageUrl_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
-        publishedTime_ = 0L;
+        paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000200);
-        modifiedTime_ = 0L;
+        publishedTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000400);
-        crawlTime_ = 0L;
+        modifiedTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000800);
-        wordCount_ = 0L;
+        crawlTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00001000);
+        wordCount_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00002000);
         if (keywordBuilder_ == null) {
           keyword_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
         } else {
           keywordBuilder_.clear();
         }
         if (socialEngagementBuilder_ == null) {
           socialEngagement_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           socialEngagementBuilder_.clear();
         }
         if (featureBuilder_ == null) {
           feature_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
         } else {
           featureBuilder_.clear();
         }
         dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00010000);
-        retain_ = false;
         bitField0_ = (bitField0_ & ~0x00020000);
-        reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
+        retain_ = false;
         bitField0_ = (bitField0_ & ~0x00040000);
-        hot_ = false;
+        reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00080000);
-        oldestHotDuplicateTime_ = 0L;
+        hot_ = false;
         bitField0_ = (bitField0_ & ~0x00100000);
-        hotCount_ = 0;
+        oldestHotDuplicateTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00200000);
+        hotCount_ = 0;
+        bitField0_ = (bitField0_ & ~0x00400000);
+        score_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00800000);
         return this;
       }
 
@@ -1881,90 +2047,98 @@ public final class ArticleProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.copyright_ = copyright_;
+        result.origin_ = origin_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.description_ = description_;
+        result.copyright_ = copyright_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.imageUrl_ = imageUrl_;
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
-          paragraph_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              paragraph_);
-          bitField0_ = (bitField0_ & ~0x00000100);
-        }
-        result.paragraph_ = paragraph_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+        result.description_ = description_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.publishedTime_ = publishedTime_;
+        result.imageUrl_ = imageUrl_;
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          paragraph_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              paragraph_);
+          bitField0_ = (bitField0_ & ~0x00000200);
+        }
+        result.paragraph_ = paragraph_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.modifiedTime_ = modifiedTime_;
+        result.publishedTime_ = publishedTime_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.crawlTime_ = crawlTime_;
+        result.modifiedTime_ = modifiedTime_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00000800;
         }
+        result.crawlTime_ = crawlTime_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00001000;
+        }
         result.wordCount_ = wordCount_;
         if (keywordBuilder_ == null) {
-          if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          if (((bitField0_ & 0x00004000) == 0x00004000)) {
             keyword_ = java.util.Collections.unmodifiableList(keyword_);
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00004000);
           }
           result.keyword_ = keyword_;
         } else {
           result.keyword_ = keywordBuilder_.build();
         }
         if (socialEngagementBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
             socialEngagement_ = java.util.Collections.unmodifiableList(socialEngagement_);
-            bitField0_ = (bitField0_ & ~0x00004000);
+            bitField0_ = (bitField0_ & ~0x00008000);
           }
           result.socialEngagement_ = socialEngagement_;
         } else {
           result.socialEngagement_ = socialEngagementBuilder_.build();
         }
         if (featureBuilder_ == null) {
-          if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          if (((bitField0_ & 0x00010000) == 0x00010000)) {
             feature_ = java.util.Collections.unmodifiableList(feature_);
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00010000);
           }
           result.feature_ = feature_;
         } else {
           result.feature_ = featureBuilder_.build();
         }
-        if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        if (((bitField0_ & 0x00020000) == 0x00020000)) {
           dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(
               dedupingStems_);
-          bitField0_ = (bitField0_ & ~0x00010000);
+          bitField0_ = (bitField0_ & ~0x00020000);
         }
         result.dedupingStems_ = dedupingStems_;
-        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
-          to_bitField0_ |= 0x00001000;
-        }
-        result.retain_ = retain_;
         if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.reason_ = reason_;
+        result.retain_ = retain_;
         if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.hot_ = hot_;
+        result.reason_ = reason_;
         if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.oldestHotDuplicateTime_ = oldestHotDuplicateTime_;
+        result.hot_ = hot_;
         if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
           to_bitField0_ |= 0x00010000;
         }
+        result.oldestHotDuplicateTime_ = oldestHotDuplicateTime_;
+        if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
+          to_bitField0_ |= 0x00020000;
+        }
         result.hotCount_ = hotCount_;
+        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.score_ = score_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2006,25 +2180,30 @@ public final class ArticleProto {
           author_ = other.author_;
           onChanged();
         }
-        if (other.hasCopyright()) {
+        if (other.hasOrigin()) {
           bitField0_ |= 0x00000020;
+          origin_ = other.origin_;
+          onChanged();
+        }
+        if (other.hasCopyright()) {
+          bitField0_ |= 0x00000040;
           copyright_ = other.copyright_;
           onChanged();
         }
         if (other.hasDescription()) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
           description_ = other.description_;
           onChanged();
         }
         if (other.hasImageUrl()) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
           imageUrl_ = other.imageUrl_;
           onChanged();
         }
         if (!other.paragraph_.isEmpty()) {
           if (paragraph_.isEmpty()) {
             paragraph_ = other.paragraph_;
-            bitField0_ = (bitField0_ & ~0x00000100);
+            bitField0_ = (bitField0_ & ~0x00000200);
           } else {
             ensureParagraphIsMutable();
             paragraph_.addAll(other.paragraph_);
@@ -2047,7 +2226,7 @@ public final class ArticleProto {
           if (!other.keyword_.isEmpty()) {
             if (keyword_.isEmpty()) {
               keyword_ = other.keyword_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
             } else {
               ensureKeywordIsMutable();
               keyword_.addAll(other.keyword_);
@@ -2060,7 +2239,7 @@ public final class ArticleProto {
               keywordBuilder_.dispose();
               keywordBuilder_ = null;
               keyword_ = other.keyword_;
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00004000);
               keywordBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getKeywordFieldBuilder() : null;
@@ -2073,7 +2252,7 @@ public final class ArticleProto {
           if (!other.socialEngagement_.isEmpty()) {
             if (socialEngagement_.isEmpty()) {
               socialEngagement_ = other.socialEngagement_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             } else {
               ensureSocialEngagementIsMutable();
               socialEngagement_.addAll(other.socialEngagement_);
@@ -2086,7 +2265,7 @@ public final class ArticleProto {
               socialEngagementBuilder_.dispose();
               socialEngagementBuilder_ = null;
               socialEngagement_ = other.socialEngagement_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
               socialEngagementBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getSocialEngagementFieldBuilder() : null;
@@ -2099,7 +2278,7 @@ public final class ArticleProto {
           if (!other.feature_.isEmpty()) {
             if (feature_.isEmpty()) {
               feature_ = other.feature_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
             } else {
               ensureFeatureIsMutable();
               feature_.addAll(other.feature_);
@@ -2112,7 +2291,7 @@ public final class ArticleProto {
               featureBuilder_.dispose();
               featureBuilder_ = null;
               feature_ = other.feature_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
               featureBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getFeatureFieldBuilder() : null;
@@ -2124,7 +2303,7 @@ public final class ArticleProto {
         if (!other.dedupingStems_.isEmpty()) {
           if (dedupingStems_.isEmpty()) {
             dedupingStems_ = other.dedupingStems_;
-            bitField0_ = (bitField0_ & ~0x00010000);
+            bitField0_ = (bitField0_ & ~0x00020000);
           } else {
             ensureDedupingStemsIsMutable();
             dedupingStems_.addAll(other.dedupingStems_);
@@ -2145,6 +2324,9 @@ public final class ArticleProto {
         }
         if (other.hasHotCount()) {
           setHotCount(other.getHotCount());
+        }
+        if (other.hasScore()) {
+          setScore(other.getScore());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2543,13 +2725,123 @@ public final class ArticleProto {
         return this;
       }
 
+      // optional string origin = 24;
+      private java.lang.Object origin_ = "";
+      /**
+       * <code>optional string origin = 24;</code>
+       *
+       * <pre>
+       * This is the client-visible "origin" of this article.  It's usually the
+       * short name of the article's web site, but it can also be the author
+       * name on Medium blog posts, etc.
+       * </pre>
+       */
+      public boolean hasOrigin() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string origin = 24;</code>
+       *
+       * <pre>
+       * This is the client-visible "origin" of this article.  It's usually the
+       * short name of the article's web site, but it can also be the author
+       * name on Medium blog posts, etc.
+       * </pre>
+       */
+      public java.lang.String getOrigin() {
+        java.lang.Object ref = origin_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          origin_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string origin = 24;</code>
+       *
+       * <pre>
+       * This is the client-visible "origin" of this article.  It's usually the
+       * short name of the article's web site, but it can also be the author
+       * name on Medium blog posts, etc.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getOriginBytes() {
+        java.lang.Object ref = origin_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          origin_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string origin = 24;</code>
+       *
+       * <pre>
+       * This is the client-visible "origin" of this article.  It's usually the
+       * short name of the article's web site, but it can also be the author
+       * name on Medium blog posts, etc.
+       * </pre>
+       */
+      public Builder setOrigin(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        origin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string origin = 24;</code>
+       *
+       * <pre>
+       * This is the client-visible "origin" of this article.  It's usually the
+       * short name of the article's web site, but it can also be the author
+       * name on Medium blog posts, etc.
+       * </pre>
+       */
+      public Builder clearOrigin() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        origin_ = getDefaultInstance().getOrigin();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string origin = 24;</code>
+       *
+       * <pre>
+       * This is the client-visible "origin" of this article.  It's usually the
+       * short name of the article's web site, but it can also be the author
+       * name on Medium blog posts, etc.
+       * </pre>
+       */
+      public Builder setOriginBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        origin_ = value;
+        onChanged();
+        return this;
+      }
+
       // optional string copyright = 6;
       private java.lang.Object copyright_ = "";
       /**
        * <code>optional string copyright = 6;</code>
        */
       public boolean hasCopyright() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional string copyright = 6;</code>
@@ -2589,7 +2881,7 @@ public final class ArticleProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         copyright_ = value;
         onChanged();
         return this;
@@ -2598,7 +2890,7 @@ public final class ArticleProto {
        * <code>optional string copyright = 6;</code>
        */
       public Builder clearCopyright() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         copyright_ = getDefaultInstance().getCopyright();
         onChanged();
         return this;
@@ -2611,7 +2903,7 @@ public final class ArticleProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         copyright_ = value;
         onChanged();
         return this;
@@ -2623,7 +2915,7 @@ public final class ArticleProto {
        * <code>optional string description = 7;</code>
        */
       public boolean hasDescription() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional string description = 7;</code>
@@ -2663,7 +2955,7 @@ public final class ArticleProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         description_ = value;
         onChanged();
         return this;
@@ -2672,7 +2964,7 @@ public final class ArticleProto {
        * <code>optional string description = 7;</code>
        */
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
@@ -2685,7 +2977,7 @@ public final class ArticleProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         description_ = value;
         onChanged();
         return this;
@@ -2697,7 +2989,7 @@ public final class ArticleProto {
        * <code>optional string image_url = 8;</code>
        */
       public boolean hasImageUrl() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional string image_url = 8;</code>
@@ -2737,7 +3029,7 @@ public final class ArticleProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         imageUrl_ = value;
         onChanged();
         return this;
@@ -2746,7 +3038,7 @@ public final class ArticleProto {
        * <code>optional string image_url = 8;</code>
        */
       public Builder clearImageUrl() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         imageUrl_ = getDefaultInstance().getImageUrl();
         onChanged();
         return this;
@@ -2759,7 +3051,7 @@ public final class ArticleProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         imageUrl_ = value;
         onChanged();
         return this;
@@ -2768,9 +3060,9 @@ public final class ArticleProto {
       // repeated string paragraph = 9;
       private com.google.protobuf.LazyStringList paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureParagraphIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
           paragraph_ = new com.google.protobuf.LazyStringArrayList(paragraph_);
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
          }
       }
       /**
@@ -2840,7 +3132,7 @@ public final class ArticleProto {
        */
       public Builder clearParagraph() {
         paragraph_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
@@ -2864,7 +3156,7 @@ public final class ArticleProto {
        * <code>optional int64 published_time = 10;</code>
        */
       public boolean hasPublishedTime() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional int64 published_time = 10;</code>
@@ -2876,7 +3168,7 @@ public final class ArticleProto {
        * <code>optional int64 published_time = 10;</code>
        */
       public Builder setPublishedTime(long value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         publishedTime_ = value;
         onChanged();
         return this;
@@ -2885,7 +3177,7 @@ public final class ArticleProto {
        * <code>optional int64 published_time = 10;</code>
        */
       public Builder clearPublishedTime() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         publishedTime_ = 0L;
         onChanged();
         return this;
@@ -2897,7 +3189,7 @@ public final class ArticleProto {
        * <code>optional int64 modified_time = 11;</code>
        */
       public boolean hasModifiedTime() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional int64 modified_time = 11;</code>
@@ -2909,7 +3201,7 @@ public final class ArticleProto {
        * <code>optional int64 modified_time = 11;</code>
        */
       public Builder setModifiedTime(long value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         modifiedTime_ = value;
         onChanged();
         return this;
@@ -2918,7 +3210,7 @@ public final class ArticleProto {
        * <code>optional int64 modified_time = 11;</code>
        */
       public Builder clearModifiedTime() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         modifiedTime_ = 0L;
         onChanged();
         return this;
@@ -2930,7 +3222,7 @@ public final class ArticleProto {
        * <code>optional int64 crawl_time = 12;</code>
        */
       public boolean hasCrawlTime() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
        * <code>optional int64 crawl_time = 12;</code>
@@ -2942,7 +3234,7 @@ public final class ArticleProto {
        * <code>optional int64 crawl_time = 12;</code>
        */
       public Builder setCrawlTime(long value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00001000;
         crawlTime_ = value;
         onChanged();
         return this;
@@ -2951,7 +3243,7 @@ public final class ArticleProto {
        * <code>optional int64 crawl_time = 12;</code>
        */
       public Builder clearCrawlTime() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         crawlTime_ = 0L;
         onChanged();
         return this;
@@ -2963,7 +3255,7 @@ public final class ArticleProto {
        * <code>optional int64 word_count = 13;</code>
        */
       public boolean hasWordCount() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
        * <code>optional int64 word_count = 13;</code>
@@ -2975,7 +3267,7 @@ public final class ArticleProto {
        * <code>optional int64 word_count = 13;</code>
        */
       public Builder setWordCount(long value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00002000;
         wordCount_ = value;
         onChanged();
         return this;
@@ -2984,7 +3276,7 @@ public final class ArticleProto {
        * <code>optional int64 word_count = 13;</code>
        */
       public Builder clearWordCount() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         wordCount_ = 0L;
         onChanged();
         return this;
@@ -2994,9 +3286,9 @@ public final class ArticleProto {
       private java.util.List<com.janknspank.proto.ArticleProto.ArticleKeyword> keyword_ =
         java.util.Collections.emptyList();
       private void ensureKeywordIsMutable() {
-        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
           keyword_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleKeyword>(keyword_);
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00004000;
          }
       }
 
@@ -3145,7 +3437,7 @@ public final class ArticleProto {
       public Builder clearKeyword() {
         if (keywordBuilder_ == null) {
           keyword_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           onChanged();
         } else {
           keywordBuilder_.clear();
@@ -3222,7 +3514,7 @@ public final class ArticleProto {
           keywordBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.ArticleProto.ArticleKeyword, com.janknspank.proto.ArticleProto.ArticleKeyword.Builder, com.janknspank.proto.ArticleProto.ArticleKeywordOrBuilder>(
                   keyword_,
-                  ((bitField0_ & 0x00002000) == 0x00002000),
+                  ((bitField0_ & 0x00004000) == 0x00004000),
                   getParentForChildren(),
                   isClean());
           keyword_ = null;
@@ -3234,9 +3526,9 @@ public final class ArticleProto {
       private java.util.List<com.janknspank.proto.ArticleProto.SocialEngagement> socialEngagement_ =
         java.util.Collections.emptyList();
       private void ensureSocialEngagementIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
           socialEngagement_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.SocialEngagement>(socialEngagement_);
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
          }
       }
 
@@ -3385,7 +3677,7 @@ public final class ArticleProto {
       public Builder clearSocialEngagement() {
         if (socialEngagementBuilder_ == null) {
           socialEngagement_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           onChanged();
         } else {
           socialEngagementBuilder_.clear();
@@ -3462,7 +3754,7 @@ public final class ArticleProto {
           socialEngagementBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.ArticleProto.SocialEngagement, com.janknspank.proto.ArticleProto.SocialEngagement.Builder, com.janknspank.proto.ArticleProto.SocialEngagementOrBuilder>(
                   socialEngagement_,
-                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  ((bitField0_ & 0x00008000) == 0x00008000),
                   getParentForChildren(),
                   isClean());
           socialEngagement_ = null;
@@ -3474,9 +3766,9 @@ public final class ArticleProto {
       private java.util.List<com.janknspank.proto.ArticleProto.ArticleFeature> feature_ =
         java.util.Collections.emptyList();
       private void ensureFeatureIsMutable() {
-        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
           feature_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.ArticleFeature>(feature_);
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00010000;
          }
       }
 
@@ -3625,7 +3917,7 @@ public final class ArticleProto {
       public Builder clearFeature() {
         if (featureBuilder_ == null) {
           feature_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
           onChanged();
         } else {
           featureBuilder_.clear();
@@ -3702,7 +3994,7 @@ public final class ArticleProto {
           featureBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.janknspank.proto.ArticleProto.ArticleFeature, com.janknspank.proto.ArticleProto.ArticleFeature.Builder, com.janknspank.proto.ArticleProto.ArticleFeatureOrBuilder>(
                   feature_,
-                  ((bitField0_ & 0x00008000) == 0x00008000),
+                  ((bitField0_ & 0x00010000) == 0x00010000),
                   getParentForChildren(),
                   isClean());
           feature_ = null;
@@ -3713,9 +4005,9 @@ public final class ArticleProto {
       // repeated string deduping_stems = 17;
       private com.google.protobuf.LazyStringList dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureDedupingStemsIsMutable() {
-        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
+        if (!((bitField0_ & 0x00020000) == 0x00020000)) {
           dedupingStems_ = new com.google.protobuf.LazyStringArrayList(dedupingStems_);
-          bitField0_ |= 0x00010000;
+          bitField0_ |= 0x00020000;
          }
       }
       /**
@@ -3833,7 +4125,7 @@ public final class ArticleProto {
        */
       public Builder clearDedupingStems() {
         dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         onChanged();
         return this;
       }
@@ -3870,7 +4162,7 @@ public final class ArticleProto {
        * </pre>
        */
       public boolean hasRetain() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
+        return ((bitField0_ & 0x00040000) == 0x00040000);
       }
       /**
        * <code>optional bool retain = 18;</code>
@@ -3896,7 +4188,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder setRetain(boolean value) {
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00040000;
         retain_ = value;
         onChanged();
         return this;
@@ -3912,7 +4204,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder clearRetain() {
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         retain_ = false;
         onChanged();
         return this;
@@ -3924,7 +4216,7 @@ public final class ArticleProto {
        * <code>optional .Article.Reason reason = 19;</code>
        */
       public boolean hasReason() {
-        return ((bitField0_ & 0x00040000) == 0x00040000);
+        return ((bitField0_ & 0x00080000) == 0x00080000);
       }
       /**
        * <code>optional .Article.Reason reason = 19;</code>
@@ -3939,7 +4231,7 @@ public final class ArticleProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00040000;
+        bitField0_ |= 0x00080000;
         reason_ = value;
         onChanged();
         return this;
@@ -3948,7 +4240,7 @@ public final class ArticleProto {
        * <code>optional .Article.Reason reason = 19;</code>
        */
       public Builder clearReason() {
-        bitField0_ = (bitField0_ & ~0x00040000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
         onChanged();
         return this;
@@ -3965,7 +4257,7 @@ public final class ArticleProto {
        * </pre>
        */
       public boolean hasHot() {
-        return ((bitField0_ & 0x00080000) == 0x00080000);
+        return ((bitField0_ & 0x00100000) == 0x00100000);
       }
       /**
        * <code>optional bool hot = 20;</code>
@@ -3987,7 +4279,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder setHot(boolean value) {
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00100000;
         hot_ = value;
         onChanged();
         return this;
@@ -4001,7 +4293,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder clearHot() {
-        bitField0_ = (bitField0_ & ~0x00080000);
+        bitField0_ = (bitField0_ & ~0x00100000);
         hot_ = false;
         onChanged();
         return this;
@@ -4017,7 +4309,7 @@ public final class ArticleProto {
        * </pre>
        */
       public boolean hasOldestHotDuplicateTime() {
-        return ((bitField0_ & 0x00100000) == 0x00100000);
+        return ((bitField0_ & 0x00200000) == 0x00200000);
       }
       /**
        * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
@@ -4037,7 +4329,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder setOldestHotDuplicateTime(long value) {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00200000;
         oldestHotDuplicateTime_ = value;
         onChanged();
         return this;
@@ -4050,7 +4342,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder clearOldestHotDuplicateTime() {
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00200000);
         oldestHotDuplicateTime_ = 0L;
         onChanged();
         return this;
@@ -4062,7 +4354,7 @@ public final class ArticleProto {
        * <code>optional int32 hot_count = 22;</code>
        */
       public boolean hasHotCount() {
-        return ((bitField0_ & 0x00200000) == 0x00200000);
+        return ((bitField0_ & 0x00400000) == 0x00400000);
       }
       /**
        * <code>optional int32 hot_count = 22;</code>
@@ -4074,7 +4366,7 @@ public final class ArticleProto {
        * <code>optional int32 hot_count = 22;</code>
        */
       public Builder setHotCount(int value) {
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00400000;
         hotCount_ = value;
         onChanged();
         return this;
@@ -4083,8 +4375,57 @@ public final class ArticleProto {
        * <code>optional int32 hot_count = 22;</code>
        */
       public Builder clearHotCount() {
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00400000);
         hotCount_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional double score = 23;
+      private double score_ ;
+      /**
+       * <code>optional double score = 23;</code>
+       *
+       * <pre>
+       * Used for ViewFeed.
+       * </pre>
+       */
+      public boolean hasScore() {
+        return ((bitField0_ & 0x00800000) == 0x00800000);
+      }
+      /**
+       * <code>optional double score = 23;</code>
+       *
+       * <pre>
+       * Used for ViewFeed.
+       * </pre>
+       */
+      public double getScore() {
+        return score_;
+      }
+      /**
+       * <code>optional double score = 23;</code>
+       *
+       * <pre>
+       * Used for ViewFeed.
+       * </pre>
+       */
+      public Builder setScore(double value) {
+        bitField0_ |= 0x00800000;
+        score_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double score = 23;</code>
+       *
+       * <pre>
+       * Used for ViewFeed.
+       * </pre>
+       */
+      public Builder clearScore() {
+        bitField0_ = (bitField0_ & ~0x00800000);
+        score_ = 0D;
         onChanged();
         return this;
       }
@@ -7722,43 +8063,45 @@ public final class ArticleProto {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
       "m/janknspank/database/extensions.proto\032\037" +
-      "com/janknspank/proto/core.proto\"\200\006\n\007Arti" +
+      "com/janknspank/proto/core.proto\"\303\006\n\007Arti" +
       "cle\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\032\n" +
       "\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005title\030\003 \001(\t" +
-      "B\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\031\022\025\n\006a" +
-      "uthor\030\005 \001(\tB\005\230\246\035\200\002\022\030\n\tcopyright\030\006 \001(\tB\005\230" +
-      "\246\035\200\002\022\036\n\013description\030\007 \001(\tB\t\210\246\035\001\230\246\035\200\020\022\030\n\t" +
-      "image_url\030\010 \001(\tB\005\230\246\035\200\020\022\034\n\tparagraph\030\t \003(" +
-      "\tB\t\240\246\035\003\230\246\035\200P\022 \n\016published_time\030\n \001(\003B\010\210\246",
-      "\035\001\220\246\035\003\022\025\n\rmodified_time\030\013 \001(\003\022\022\n\ncrawl_t" +
-      "ime\030\014 \001(\003\022\034\n\nword_count\030\r \001(\003B\010\210\246\035\001\240\246\035\003\022" +
-      "&\n\007keyword\030\016 \003(\0132\017.ArticleKeywordB\004\240\246\035\003\022" +
-      "2\n\021social_engagement\030\017 \003(\0132\021.SocialEngag" +
-      "ementB\004\240\246\035\003\022&\n\007feature\030\020 \003(\0132\017.ArticleFe" +
-      "atureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003(\tB\010\230\246\035" +
-      "\004\240\246\035\003\022\024\n\006retain\030\022 \001(\010B\004\240\246\035\003\022%\n\006reason\030\023 " +
-      "\001(\0162\017.Article.ReasonB\004\220\246\035\006\022\021\n\003hot\030\024 \001(\010B" +
-      "\004\220\246\035\006\022+\n\031oldest_hot_duplicate_time\030\025 \001(\003" +
-      "B\010\240\246\035\003\220\246\035\006\022\033\n\thot_count\030\026 \001(\005B\010\240\246\035\003\220\246\035\006\"",
-      "<\n\006Reason\022\013\n\007UNKNOWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006" +
-      "PERSON\020\002\022\013\n\007COMPANY\020\003:\023\212\265\030\017MongoDB.Artic" +
-      "le\"\223\002\n\016ArticleKeyword\022\035\n\007keyword\030\001 \001(\tB\014" +
-      "\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004" +
-      "type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004" +
-      " \001(\0162\026.ArticleKeyword.Source:\007UNKNOWN\022\030\n" +
-      "\020paragraph_number\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132" +
-      "\007.Entity\"F\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001" +
-      "\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\022\t\n\005TITLE\020\004" +
-      "\"\347\001\n\020SocialEngagement\022-\n\004site\030\001 \001(\0162\026.So",
-      "cialEngagement.Site:\007UNKNOWN\022\031\n\013share_co" +
-      "unt\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246" +
-      "\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_count\030" +
-      "\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site\022\013\n\007UN" +
-      "KNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002\"B\n\016Ar" +
-      "ticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246" +
-      "\035\003\022\022\n\nsimilarity\030\002 \001(\001\"9\n\017InterpretedDat" +
-      "a\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(" +
-      "\tB$\n\024com.janknspank.protoB\014ArticleProto"
+      "B\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\031\022\031\n\006a" +
+      "uthor\030\005 \001(\tB\t\230\246\035\200\002\240\246\035\003\022\024\n\006origin\030\030 \001(\tB\004" +
+      "\230\246\0352\022\034\n\tcopyright\030\006 \001(\tB\t\230\246\035\200\002\240\246\035\003\022\036\n\013de" +
+      "scription\030\007 \001(\tB\t\210\246\035\001\230\246\035\200\020\022\030\n\timage_url\030" +
+      "\010 \001(\tB\005\230\246\035\200\020\022\034\n\tparagraph\030\t \003(\tB\t\240\246\035\003\230\246\035",
+      "\200P\022 \n\016published_time\030\n \001(\003B\010\210\246\035\001\220\246\035\003\022\033\n\r" +
+      "modified_time\030\013 \001(\003B\004\240\246\035\003\022\030\n\ncrawl_time\030" +
+      "\014 \001(\003B\004\240\246\035\003\022\034\n\nword_count\030\r \001(\003B\010\210\246\035\001\240\246\035" +
+      "\003\022&\n\007keyword\030\016 \003(\0132\017.ArticleKeywordB\004\240\246\035" +
+      "\003\0222\n\021social_engagement\030\017 \003(\0132\021.SocialEng" +
+      "agementB\004\240\246\035\003\022&\n\007feature\030\020 \003(\0132\017.Article" +
+      "FeatureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003(\tB\010\230" +
+      "\246\035\004\240\246\035\003\022\024\n\006retain\030\022 \001(\010B\004\240\246\035\003\022%\n\006reason\030" +
+      "\023 \001(\0162\017.Article.ReasonB\004\220\246\035\006\022\021\n\003hot\030\024 \001(" +
+      "\010B\004\220\246\035\006\022+\n\031oldest_hot_duplicate_time\030\025 \001",
+      "(\003B\010\240\246\035\003\220\246\035\006\022\033\n\thot_count\030\026 \001(\005B\010\240\246\035\003\220\246\035" +
+      "\006\022\027\n\005score\030\027 \001(\001B\010\240\246\035\003\220\246\035\006\"<\n\006Reason\022\013\n\007" +
+      "UNKNOWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006PERSON\020\002\022\013\n\007C" +
+      "OMPANY\020\003:\023\212\265\030\017MongoDB.Article\"\223\002\n\016Articl" +
+      "eKeyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022" +
+      "\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210" +
+      "\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.Articl" +
+      "eKeyword.Source:\007UNKNOWN\022\030\n\020paragraph_nu" +
+      "mber\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\"F\n\006S" +
+      "ource\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK",
+      "\020\002\022\014\n\010META_TAG\020\003\022\t\n\005TITLE\020\004\"\347\001\n\020SocialEn" +
+      "gagement\022-\n\004site\030\001 \001(\0162\026.SocialEngagemen" +
+      "t.Site:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003B\004\210\246" +
+      "\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_co" +
+      "unt\030\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013crea" +
+      "te_time\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FA" +
+      "CEBOOK\020\001\022\013\n\007TWITTER\020\002\"B\n\016ArticleFeature\022" +
+      "\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022\022\n\nsimilar" +
+      "ity\030\002 \001(\001\"9\n\017InterpretedData\022\031\n\007article\030" +
+      "\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024com.jank",
+      "nspank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7770,7 +8113,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", "Hot", "OldestHotDuplicateTime", "HotCount", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Origin", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", "Hot", "OldestHotDuplicateTime", "HotCount", "Score", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -7809,7 +8152,10 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
@@ -7817,6 +8163,8 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
@@ -7827,6 +8175,8 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

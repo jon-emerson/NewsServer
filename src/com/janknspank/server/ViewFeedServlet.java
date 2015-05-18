@@ -2,17 +2,16 @@ package com.janknspank.server;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.google.common.base.Function;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
-import com.janknspank.common.TopList;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.rank.DiversificationPass;
 import com.janknspank.server.soy.ViewFeedSoy;
 
 @AuthenticationRequired
@@ -27,7 +26,7 @@ public class ViewFeedServlet extends StandardServlet {
       throws DatabaseSchemaException, RequestException, BiznessException {
     User user = getUser(req);
 
-    final TopList<Article, Double> rankedArticlesAndScores;
+    final Iterable<Article> articles;
     String industryCodeId = this.getParameter(req, "industry_code");
     if (industryCodeId != null) {
       // It's important to override the user, because inside ViewFeedSoy, this
@@ -41,21 +40,14 @@ public class ViewFeedServlet extends StandardServlet {
               .setIndustryCode(Integer.parseInt(industryCodeId))
               .build())
           .build();
-      rankedArticlesAndScores = Articles.getStream(user, new AncillaryStreamStrategy());
+      articles = Articles.getStream(
+          user, new AncillaryStreamStrategy(), new DiversificationPass.IndustryStreamPass());
     } else {
-      rankedArticlesAndScores = Articles.getMainStream(user);
+      articles = Articles.getMainStream(user);
     }
 
     return new SoyMapData(
         "sessionKey", this.getSession(req).getSessionKey(),
-        "articles", ViewFeedSoy.toSoyListData(
-            rankedArticlesAndScores,
-            user,
-            new Function<Article, Double>() {
-              @Override
-              public Double apply(Article article) {
-                return rankedArticlesAndScores.getValue(article);
-              }
-            }));
+        "articles", ViewFeedSoy.toSoyListData(articles, user));
   }
 }
