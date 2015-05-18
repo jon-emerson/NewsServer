@@ -17,7 +17,6 @@ import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.UserInterests;
-import com.janknspank.bizness.Users;
 import com.janknspank.classifier.Feature;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.classifier.FeatureType;
@@ -269,17 +268,34 @@ public class Helper {
   }
 
   public static void main(String args[]) throws Exception {
-    Multiset<String> timezones = HashMultiset.create();
-    int count = 0;
+    int numConfigured = 0;
+    int numGoofOff = 0;
     for (User user : Database.with(User.class).get()) {
-      if (Users.getLastAppUsageInMinutes(user) < 60 * 24) {
-        ++count;
-        timezones.add(user.getTimezoneEstimate());
+      boolean configured = false;
+      for (Interest interest : UserInterests.getInterests(user)) {
+        if (interest.getSource() == InterestSource.USER) {
+          configured = true;
+        }
+      }
+      boolean goofOff = false;
+      for (FeatureId featureId : UserInterests.getUserIndustryFeatureIds(user)) {
+        switch (featureId) {
+          case SPORTS:
+          case ARTS:
+          case COMPUTER_GAMES:
+          case ANIMATION:
+            goofOff = true;
+        }
+      }
+      if (configured) {
+        ++numConfigured;
+        if (goofOff) {
+          ++numGoofOff;
+        }
       }
     }
-    for (String timezone : timezones.elementSet()) {
-      System.out.println(timezone + ": " + timezones.count(timezone) + " ("
-          + (timezones.count(timezone) * 100 / count) + "%)");
-    }
+    System.out.println("Configured = " + numConfigured);
+    System.out.println("Goof offs = " + numGoofOff);
+    System.out.println("Percent goof off = " + ((double) numGoofOff * 100) / numConfigured);
   }
 }
