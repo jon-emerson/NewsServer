@@ -5,6 +5,7 @@ path_blacklist {
   needle: "/about/"
 }
 paragraph_selector: ".post-view > p"
+paragraph_selector: ".post-view > div"
 article_url_pattern {
   path_regex: "^\\/post\\/[0-9]+\\/[^\\/]+$"
 }

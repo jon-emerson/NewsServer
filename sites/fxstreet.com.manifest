@@ -1,6 +1,7 @@
 short_name: "FX Street"
 root_domain: "fxstreet.com"
 start_url: "http://www.fxstreet.com/news/"
+use_first_paragraph_as_description: true
 path_blacklist {
   needle: "/education/"
 }
