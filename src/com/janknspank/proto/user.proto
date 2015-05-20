@@ -129,9 +129,7 @@ message User {
     LINKED_IN = 2;
     ANONYMOUS = 3;
   }
-  optional AuthenticationService original_authentication_service = 27 [
-    (client_serialization) = EXCLUDE
-  ];
+  optional AuthenticationService original_authentication_service = 27;
 }
 
 message AddressBookContact {

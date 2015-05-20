@@ -40,7 +40,7 @@ public class KeywordCanonicalizer {
   // title of the article.  The thinking goes, if the article's actually about
   // these companies/entities, then they'd put it in the title.
   private static final Pattern KEYWORD_BAIT_ENTITY_PATTERN =
-      Pattern.compile("(facebook|google|twitter|tumbr|quora|apple|netflix)");
+      Pattern.compile("(facebook|google|twitter|tumbr|quora|apple|netflix|yahoo)");
 
   public static final int STRENGTH_FOR_TITLE_MATCH = 150;
   public static final int STRENGTH_FOR_FIRST_PARAGRAPH_MATCH = 100;
