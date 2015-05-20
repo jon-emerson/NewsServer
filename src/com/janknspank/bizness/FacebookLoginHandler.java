@@ -22,6 +22,7 @@ import com.janknspank.classifier.FeatureType;
 import com.janknspank.classifier.Vector;
 import com.janknspank.classifier.VectorFeature;
 import com.janknspank.common.TopList;
+import com.janknspank.common.Version;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -35,12 +36,11 @@ import com.janknspank.proto.CoreProto.VectorData.WordFrequency;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
-import com.janknspank.proto.UserProto.User.AuthenticationService;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.User.AuthenticationService;
 import com.janknspank.server.RequestException;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import com.restfb.Version;
 import com.restfb.types.NamedFacebookType;
 import com.restfb.types.User.Education;
 import com.restfb.types.User.EducationClass;
@@ -54,12 +54,13 @@ import com.restfb.types.User.Work;
 public class FacebookLoginHandler {
   private static final String FRONTEND_APP_SECRET = "4324edc68cb6fd1ff4753b3b9ff54fdd";
   private static final Pattern NON_WORD_PATTERN = Pattern.compile("[^\\w'-]");
+  private static final Version NO_MORE_DEFAULT_INDUSTRIES_VERSION = new Version("0.5.6");
 
   public static com.restfb.types.User getFacebookUser(String fbAccessToken)
       throws RequestException {
     long startTime = System.currentTimeMillis();
     FacebookClient facebookClient = new DefaultFacebookClient(fbAccessToken,
-        FRONTEND_APP_SECRET, Version.VERSION_2_2);
+        FRONTEND_APP_SECRET, com.restfb.Version.VERSION_2_2);
     com.restfb.types.User fbUser = facebookClient.fetchObject("/me",
         com.restfb.types.User.class);
     if (fbUser == null) {
@@ -279,7 +280,7 @@ public class FacebookLoginHandler {
    * have a Source of FACEBOOK_PROFILE.
    */
   private static Iterable<Interest> getFacebookProfileInterests(
-      com.restfb.types.User fbUser) throws DatabaseSchemaException {
+      com.restfb.types.User fbUser, Version clientVersion) throws DatabaseSchemaException {
     // Create a Map of company name to existing Entity objects, using either
     // our very-helpful-fuzzy-logic-friendly KeywordToEntityId table, or by
     // hoping the user happened to type an Entity we know exactly about.
@@ -323,8 +324,7 @@ public class FacebookLoginHandler {
     }
     TopList<FeatureId, Double> industryFeatureIds = getIndustryFeatureIds(fbUser);
     if (Iterables.isEmpty(industryFeatureIds)
-        && !"Emersontestfoo".equals(fbUser.getLastName())
-        && !"panaceaa@gmail.com".equals(fbUser.getEmail())) {
+        && clientVersion.isLessThan(NO_MORE_DEFAULT_INDUSTRIES_VERSION)) {
       // This is to prevent a crash bug in v1.0.0, where if the user has no
       // initial industries, UI comes up to ask them about their industry
       // behind a FTUE, and if the FTUE is then dismissed, there's an exception.
@@ -351,9 +351,9 @@ public class FacebookLoginHandler {
     return interests;
   }
 
-  public static User login(com.restfb.types.User fbUser, String fbAccessToken)
-      throws RequestException, DatabaseSchemaException,
-      DatabaseRequestException {
+  public static User login(
+      com.restfb.types.User fbUser, String fbAccessToken, Version clientVersion)
+      throws RequestException, DatabaseSchemaException, DatabaseRequestException {
     long startTime = System.currentTimeMillis();
     User user;
     User existingUser = getExistingUser(fbUser);
@@ -369,7 +369,7 @@ public class FacebookLoginHandler {
       Database.update(user);
     } else {
       user = getNewUserBuilder(fbUser, fbAccessToken).addAllInterest(
-          getFacebookProfileInterests(fbUser)).build();
+          getFacebookProfileInterests(fbUser, clientVersion)).build();
       Database.insert(user);
     }
     System.out.println("FacebookLoginHandler.login(User, String), time = "

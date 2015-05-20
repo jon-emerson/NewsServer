@@ -19,7 +19,6 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.classifier.FeatureId;
-import com.janknspank.common.VersionStringComparator;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
@@ -99,8 +98,7 @@ public abstract class GetArticlesV2Servlet extends StandardServlet {
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, DatabaseRequestException, RequestException, BiznessException {
-    boolean isSnippetVersion =
-        new VersionStringComparator().compare(getParameter(req, "v"), "0.5.5") >= 0;
+    boolean isSnippetVersion = getClientVersion(req).atLeast("0.5.7");
     ListenableFuture<Iterable<Expression>> expressionsFuture = isSnippetVersion
         ? this.getExpressionsFuture(req)
         : Futures.immediateFuture((Iterable<Expression>) ImmutableList.<Expression>of());

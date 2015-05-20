@@ -28,7 +28,7 @@ public class FacebookLoginServlet extends StandardServlet {
     if (!fbUser.getId().equals(fbUserId)) {
       throw new RequestException("fb_access_token is not for fb_user_id");
     }
-    User user = FacebookLoginHandler.login(fbUser, fbAccessToken);
+    User user = FacebookLoginHandler.login(fbUser, fbAccessToken, getClientVersion(req));
 
     long startTime = System.currentTimeMillis();
     Session session = Sessions.createForUser(user);

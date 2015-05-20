@@ -23,6 +23,7 @@ import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
 import com.janknspank.bizness.Sessions;
 import com.janknspank.common.Asserts;
+import com.janknspank.common.Version;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.CoreProto.Session;
@@ -301,5 +302,9 @@ public class NewsServlet extends HttpServlet {
       }
     }
     return remoteAddr;
+  }
+
+  public Version getClientVersion(HttpServletRequest request) {
+    return hasParameter(request, "v") ? new Version(getParameter(request, "v")) : null;
   }
 }
