@@ -31,7 +31,11 @@ path_blacklist {
 path_blacklist {
   needle: "/shopping/"
 }
+path_blacklist {
+  needle: "/about/"
+}
 paragraph_selector: ".trb_article_page > p"
+paragraph_selector: ".trb_article_page_body > p"
 paragraph_blacklist {
   selector: "strong"
   text_regex: "^Follow "

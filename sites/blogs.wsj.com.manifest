@@ -13,6 +13,14 @@ paragraph_selector: ".articlePage p"
 # From http://blogs.wsj.com/pharmalot/2015/04/21/actavis-wins-a-product-hopping-case-as-namenda-battle-rages-on/
 paragraph_selector: ".post-content p"
 
+# From http://blogs.wsj.com/briefly/2015/05/15/readers-weigh-in-on-potential-of-smartwatches-at-a-glance/
+paragraph_selector: ".djs-d-intro > p"
+paragraph_selector: ".djs-d-textstyle > p"
+
+# From http://blogs.wsj.com/briefly/2015/05/19/5-things-about-hillary-clintons-email-archive/
+paragraph_selector: ".djs-5t-textstyle > p"
+paragraph_selector: ".djs-5t-headtxt"
+
 article_url_pattern {
   path_regex: "\\/[a-z]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
 }

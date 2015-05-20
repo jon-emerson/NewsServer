@@ -9,6 +9,10 @@ path_blacklist {
   needle: "/slideshow/"
 }
 paragraph_selector: ".article-copy p"
+paragraph_selector: ".article-copy--container"
+paragraph_blacklist {
+  text_regex: "^Expand$"
+}
 article_url_pattern {
   path_regex: "^\\/[0-9]{7,10}\\/[^\\/]+\\/$"
 }

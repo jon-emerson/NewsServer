@@ -6,6 +6,7 @@ subdomain_blacklist: "jobs.wired.com"
 # Be careful here!  Wired puts its image gallery captions inside the articleBody
 # element, inside a "gallery-wrap" div.
 paragraph_selector: "span[itemprop=\"articleBody\"] > p"
+paragraph_selector: ".section p"
 
 # E.g. http://www.wired.com/2015/03/internet-anything-shortcut-drone-license/
 paragraph_selector: "section.post-container p"

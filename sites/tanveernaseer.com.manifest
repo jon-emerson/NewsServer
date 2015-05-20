@@ -2,6 +2,7 @@ short_name: "Tanveer Naseer"
 root_domain: "tanveernaseer.com"
 start_url: "http://www.tanveernaseer.com/"
 paragraph_selector: ".post > p"
+paragraph_selector: ".post > ul > li"
 article_url_pattern {
   path_regex: "^\\/[^\\/]+\\/$"
 }
@@ -16,6 +17,9 @@ path_blacklist {
 }
 path_blacklist {
   needle: "/contact/"
+}
+path_blacklist {
+  needle: "/leadership-vertigo"
 }
 test_instructions {
   article_url_detector_checks {
