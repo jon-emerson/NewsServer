@@ -25,22 +25,23 @@ paragraph_selector: ".article-body p"
 paragraph_selector: ".article-content-body p"
 paragraph_selector: ".article .body p"
 
+# E.g. http://www.forbes.com/newsletters/validea-hot-list/2015/01/30/hot-list-portfolio-bouncing-back-in-early-2015/
+paragraph_selector: ".body-text > p"
+
 paragraph_blacklist {
   text_regex: "^Forbes Premium Income Report"
 }
 paragraph_blacklist {
   text_regex: "^Make money selling options"
 }
-# E.g. http://www.forbes.com/newsletters/validea-hot-list/2015/01/30/hot-list-portfolio-bouncing-back-in-early-2015/
-paragraph_selector: ".body-text > p"
 
-# E.g. http://www.forbes.com/sites/maribellopez/2015/03/02/hp-rides-arubas-wave-into-contextual-networking/
-paragraph_selector: ".body .body_inner span"
-
-# Should already be handled by ".article_body p", but for some reason it doesn't
-# work for
-# http://www.forbes.com/sites/francescoppola/2015/04/15/deutsche-banks-latest-fine-shows-it-is-too-big-to-manage/
-paragraph_selector: ".body_inner p"
+# To remove headers, which unfortunately get picked up as the first paragraph.
+# In a perfect world, we'd keep these, but just note that they're not paragraphs
+# but instead headers.  But we only have paragraphs right now, so we do what we
+# can.  See: http://www.forbes.com/sites/stevendelco/2015/05/20/at-high-market-valuations-long-only-strategies-may-carry-more-risk/
+paragraph_blacklist {
+  selector: "strong"
+}
 
 article_url_pattern {
   path_regex: "^\\/sites\\/[^\\/]+\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/"

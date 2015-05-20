@@ -1,8 +1,7 @@
 short_name: "TheMiddleMarket"
 root_domain: "themiddlemarket.com"
 start_url: "http://www.themiddlemarket.com/"
-paragraph_selector: "#articleContent > p"
-paragraph_selector: "#articleContent > h4"
+paragraph_selector: "#articleContent p"
 paragraph_blacklist {
   text_regex: "^For more information on"
 }

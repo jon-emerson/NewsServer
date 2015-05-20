@@ -5,6 +5,7 @@ start_url: "http://www.nbcnews.com/health/diet-fitness"
 path_blacklist {
   needle: "/pop-culture/"
 }
+paragraph_selector: ".article-body p"
 paragraph_selector: ".stack-dropcap > p"
 article_url_pattern {
   path_regex: "\\/[\\w-]+[0-9]{6}$"

@@ -19,6 +19,10 @@ paragraph_selector: ".article-body > p"
 paragraph_selector: ".articleContent p"
 paragraph_selector: ".articleContent.articleTruncate div"
 paragraph_selector: "#CT_ContentBlock_0_pnlPostDetails p"
+
+# E.g. http://www.agweb.com/soybean-planting-map/
+paragraph_selector: ".ModuleContents h4"
+
 article_url_pattern {
   path_regex: "^\\/article\\/[^\\/]+\\/"
 }

@@ -3,7 +3,7 @@ root_domain: "infosecurity-magazine.com"
 start_url: "http://www.infosecurity-magazine.com/news/"
 paragraph_selector: "div[itemprop=\"articleBody\"] > p"
 article_url_pattern {
-  path_regex: "^\\/news\\/[^\\/]+\\/$"
+  path_regex: "^\\/news\\/(?!page-[0-9]+)[^\\/]+\\/$"
 }
 test_instructions {
   article_url_detector_checks {
@@ -19,6 +19,7 @@ test_instructions {
     non_article_url: "http://www.infosecurity-magazine.com/nav/features/"
     non_article_url: "http://www.infosecurity-magazine.com/webinars/"
     non_article_url: "http://www.infosecurity-magazine.com/white-papers/"
+    non_article_url: "http://www.infosecurity-magazine.com/news/page-3/"
   }
 }
 feature_boost_pattern {

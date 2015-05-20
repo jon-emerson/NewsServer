@@ -1,7 +1,13 @@
 short_name: "The Hill"
 root_domain: "thehill.com"
 start_url: "http://thehill.com/"
+paragraph_selector: ".field-item.even div"
 paragraph_selector: ".field-item.even p"
+
+paragraph_blacklist {
+  text_regex: "^ADVERTISEMENT"
+}
+
 article_url_pattern {
   path_regex: "\\/[0-9][0-9]+\\-[^\\/]+$"
 }
