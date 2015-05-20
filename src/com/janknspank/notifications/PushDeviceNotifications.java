@@ -20,6 +20,7 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
+import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.crawler.ArticleCrawler;
 import com.janknspank.database.Database;
@@ -33,6 +34,7 @@ import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
+import com.janknspank.rank.DiversificationPass;
 import com.janknspank.rank.NeuralNetworkScorer;
 
 /**
@@ -197,7 +199,12 @@ public class PushDeviceNotifications {
     }
 
     // Get the user's stream.
-    Iterable<Article> rankedArticles = Articles.getMainStream(user);
+    Iterable<Article> rankedArticles = Articles.getRankedArticles(
+        user,
+        NeuralNetworkScorer.getInstance(),
+        new MainStreamStrategy(),
+        new DiversificationPass.MainStreamPass(),
+        25 /* results */);
 
     // Don't consider articles older than the last time the user used the app or
     // the last time we sent him/her a notification.

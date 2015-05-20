@@ -29,6 +29,7 @@ import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.UrlFavorite;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.User.Experiment;
 
 /**
  * Helper class containing the user's favorite and rated articles.
@@ -134,6 +135,14 @@ public class UserHelper {
     return favoritesJsonArray;
   }
 
+  private JSONArray getExperimentsJsonArray() {
+    JSONArray experimentsJsonArray = new JSONArray();
+    for (Experiment experiment : user.getExperimentList()) {
+      experimentsJsonArray.put(experiment.name());
+    }
+    return experimentsJsonArray;
+  }
+
   private JSONArray getInterestsJsonArray() {
     JSONArray jsonArray = new JSONArray();
     for (Interest interest : UserInterests.getInterests(user)) {
@@ -154,6 +163,9 @@ public class UserHelper {
     userJson.put("favorites", getFavoritesJsonArray());
     userJson.put("interests", getInterestsJsonArray());
     userJson.put("linked_in_contacts", Serializer.toJSON(linkedInContacts));
+    if (user.getExperimentCount() > 0) {
+      userJson.put("experiments", getExperimentsJsonArray());
+    }
     return userJson;
   }
 }

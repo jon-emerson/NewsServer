@@ -83,6 +83,7 @@ public class ArticleSerializer {
       int offset) {
     JSONObject articleJson = Serializer.toJSON(article);
     List<String> paragraphs = article.getParagraphList();
+    articleJson.put("type", "article");
     articleJson.put("first_paragraphs", toJsonArray(
         paragraphs.subList(0, Math.min(1, paragraphs.size()))));
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));

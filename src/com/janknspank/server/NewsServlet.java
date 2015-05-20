@@ -75,11 +75,16 @@ public class NewsServlet extends HttpServlet {
       throws DatabaseSchemaException, AuthenticationRequiredException {
     User user = (User) request.getAttribute(USER_ATTRIBUTE_KEY);
     if (user == null) {
-      user = Database.with(User.class).get(getSession(request).getUserId());
-      if (user == null) {
-        throw new AuthenticationRequiredException("No user found");
+      synchronized (this) {
+        user = (User) request.getAttribute(USER_ATTRIBUTE_KEY);
+        if (user == null) {
+          user = Database.with(User.class).get(getSession(request).getUserId());
+          if (user == null) {
+            throw new AuthenticationRequiredException("No user found");
+          }
+          request.setAttribute(USER_ATTRIBUTE_KEY, user);
+        }
       }
-      request.setAttribute(USER_ATTRIBUTE_KEY, user);
     }
     return user;
   }

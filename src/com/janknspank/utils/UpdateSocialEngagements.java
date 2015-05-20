@@ -104,13 +104,15 @@ public class UpdateSocialEngagements {
     System.out.println(Iterables.size(articles) + " articles found");
 
     ExecutorService executor = Executors.newFixedThreadPool(20);
+    List<Updater> callables = Lists.newArrayList();
     for (Article article : articles) {
       if (needsUpdate(article)) {
-        executor.submit(new Updater(article));
+        callables.add(new Updater(article));
       }
     }
-    executor.shutdown();
     try {
+      executor.invokeAll(callables);
+      executor.shutdown();
       executor.awaitTermination(TimeUnit.MINUTES.toMillis(20), TimeUnit.MILLISECONDS);
     } catch (InterruptedException e) {}
   }

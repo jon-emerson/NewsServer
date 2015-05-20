@@ -268,34 +268,21 @@ public class Helper {
   }
 
   public static void main(String args[]) throws Exception {
-    int numConfigured = 0;
-    int numGoofOff = 0;
-    for (User user : Database.with(User.class).get()) {
+    for (User user : Database.with(User.class).get(new QueryOption.AscendingSort("create_time"))) {
       boolean configured = false;
       for (Interest interest : UserInterests.getInterests(user)) {
         if (interest.getSource() == InterestSource.USER) {
           configured = true;
         }
       }
-      boolean goofOff = false;
-      for (FeatureId featureId : UserInterests.getUserIndustryFeatureIds(user)) {
-        switch (featureId) {
-          case SPORTS:
-          case ARTS:
-          case COMPUTER_GAMES:
-          case ANIMATION:
-            goofOff = true;
-        }
-      }
       if (configured) {
-        ++numConfigured;
-        if (goofOff) {
-          ++numGoofOff;
+        Set<FeatureId> featureIdSet =
+            ImmutableSet.copyOf(UserInterests.getUserIndustryFeatureIds(user));
+        if (featureIdSet.contains(FeatureId.LEISURE_TRAVEL_AND_TOURISM)
+            && (featureIdSet.contains(FeatureId.SOFTWARE) || featureIdSet.contains(FeatureId.INTERNET))) {
+          System.out.println(user.getEmail());
         }
       }
     }
-    System.out.println("Configured = " + numConfigured);
-    System.out.println("Goof offs = " + numGoofOff);
-    System.out.println("Percent goof off = " + ((double) numGoofOff * 100) / numConfigured);
   }
 }

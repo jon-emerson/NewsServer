@@ -7,6 +7,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Predicate;
@@ -19,6 +22,7 @@ import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
 import com.janknspank.bizness.Users;
 import com.janknspank.database.Database;
+import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Entity;
@@ -30,13 +34,25 @@ import com.janknspank.rank.DiversificationPass;
 
 @AuthenticationRequired
 @ServletMapping(urlPattern = "/v1/get_articles")
-public class GetArticlesServlet extends AbstractArticlesServlet {
+public class GetArticlesServlet extends StandardServlet {
   // TODO(jonemerson): Make a global threadpool for this.  Or figure out
   // a better way to do asynchronous calls to Mongo DB - Hopefully via Futures.
   private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(10);
 
   @Override
-  protected Iterable<Article> getArticles(HttpServletRequest req)
+  protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
+      throws DatabaseSchemaException, DatabaseRequestException, RequestException, BiznessException {
+    JSONObject response = createSuccessResponse();
+
+    String contactsParameter = getParameter(req, "contacts");
+    boolean includeLinkedInContacts = "linked_in".equals(contactsParameter);
+    boolean includeAddressBookContacts = "address_book".equals(contactsParameter);
+    response.put("articles", ArticleSerializer.serialize(
+        getArticles(req), getUser(req), includeLinkedInContacts, includeAddressBookContacts));
+    return response;
+  }
+
+  private Iterable<Article> getArticles(HttpServletRequest req)
       throws DatabaseSchemaException, NumberFormatException, BiznessException, RequestException {
     String industryCodeId = this.getParameter(req, "industry_code");
     String contacts = this.getParameter(req, "contacts");

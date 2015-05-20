@@ -311,7 +311,7 @@ public class LinkedInLoginHandler {
                   return false;
                 } else if (interest.getType() == InterestType.ENTITY) {
                   for (Interest tombstonedInterest : tombstonedEntityInterests) {
-                    if (UserInterests.equivalent(tombstonedInterest, interest)) {
+                    if (UserInterests.isConflict(tombstonedInterest, interest)) {
                       return false;
                     }
                   }

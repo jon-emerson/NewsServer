@@ -62,16 +62,16 @@ public class UserInterests {
     return Iterables.any(interestList, new Predicate<Interest>() {
       @Override
       public boolean apply(Interest interestListInterest) {
-        return equivalent(interestListInterest, interest);
+        return isConflict(interestListInterest, interest);
       }
     });
   }
 
   /**
-   * Returns if the two interests are about the same thing, but not if they are from
-   * the same source.
+   * Returns if the two interests are about the same thing, but not if they are
+   * from the same source.
    */
-  public static boolean equivalent(Interest interest1, Interest interest2) {
+  public static boolean isConflict(Interest interest1, Interest interest2) {
     if (interest1.getType() == interest2.getType()) {
       if (interest1.getType() == InterestType.ADDRESS_BOOK_CONTACTS ||
           interest1.getType() == InterestType.LINKED_IN_CONTACTS) {
@@ -88,6 +88,17 @@ public class UserInterests {
         return interest1.getIndustryCode() == interest2.getIndustryCode();
       }
     }
+
+    // Expressions where there's a YES and a NO intersect each other.
+    Set<InterestType> expressionInterestTypeSet = ImmutableSet.of(
+        InterestType.EXPRESSION_YES,
+        InterestType.EXPRESSION_NO);
+    if (expressionInterestTypeSet.contains(interest1.getType())
+        && expressionInterestTypeSet.contains(interest2.getType())
+        && interest1.getExpressionId().equals(interest2.getExpressionId())) {
+      return true;
+    }
+
     return false;
   }
 

@@ -1,0 +1,129 @@
+// Expression object definition for NewsServer.
+
+import "com/janknspank/database/extensions.proto";
+import "com/janknspank/proto/core.proto";
+import "com/janknspank/proto/article.proto";
+
+option java_package = "com.janknspank.proto";
+option java_outer_classname = "ExpressionProto";
+
+message Expression {
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  // This is the string we place into the user's interests.
+  optional string short_string = 2 [
+    (required) = YES,
+    (string_length) = 150
+  ];
+
+  // This is the string we place into the stream.
+  optional string long_string = 3 [
+    (required) = YES,
+    (string_length) = 150
+  ];
+
+  // This is a longer description of the expression that we show in a pop-up if
+  // the user taps on the short string.
+  optional string description = 4 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 767
+  ];
+
+  // This expression should only be shown to users with an interest that matches
+  // one in this set.
+  repeated int32 relevant_to_feature_id = 5 [
+    (client_serialization) = EXCLUDE
+  ];
+}
+
+// These are the URLs that we'll show to people if they've agreed to this
+// expression.
+message ExpressionList {
+  // Raw URLs.
+  repeated string url = 6 [
+    (required) = YES,
+    (string_length) = 767,
+    (string_charset) = LATIN1
+  ];
+
+  // 1:1 mapping of the above expression URLs to their article url IDs as stored
+  // in MongoDB.
+  repeated string id = 1 [
+    (required) = YES,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+}
+
+// These messages denote that the user was shown an expression on a specific
+// date/time.  These expressions will remain showing in the user's stream for
+// 24 hours, unless the user clicks "yes" or "no" first.
+message ExpressionShown {
+  option (database_collection) = "MySQL.ExpressionShown";
+
+  optional string user_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  repeated string expression_id = 2 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  // The time, in milliseconds, when we started showing this expression.
+  optional int64 presentation_time = 3 [
+    (storage_method) = PULL_OUT
+  ];
+}
+
+// These messages denote that the user was shown an article addressing a
+// specific expression starting at a specific time.
+message ExpressionArticleShown {
+  option (database_collection) = "MySQL.ExpressionArticleShown";
+
+  optional string user_id = 1 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  repeated string url_id = 2 [
+    (required) = YES,
+    (storage_method) = PULL_OUT,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  // The time, in milliseconds, when we started showing this expression article.
+  optional int64 presentation_time = 3 [
+    (storage_method) = PULL_OUT
+  ];
+}
+
+// To be used in the ranking pipeline: An association of an expression article
+// to its expression and what time it was added to the user's stream.
+message ExpressionArticle {
+  optional Article article = 1 [
+    (required) = YES
+  ];
+
+  optional string expression_id = 2 [
+    (required) = YES
+  ];
+
+  optional int64 presentation_time = 3 [
+    (required) = YES
+  ];
+}

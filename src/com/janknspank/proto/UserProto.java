@@ -411,6 +411,20 @@ public final class UserProto {
      * </pre>
      */
     boolean getOptOutEmail();
+
+    // repeated .User.Experiment experiment = 26;
+    /**
+     * <code>repeated .User.Experiment experiment = 26;</code>
+     */
+    java.util.List<com.janknspank.proto.UserProto.User.Experiment> getExperimentList();
+    /**
+     * <code>repeated .User.Experiment experiment = 26;</code>
+     */
+    int getExperimentCount();
+    /**
+     * <code>repeated .User.Experiment experiment = 26;</code>
+     */
+    com.janknspank.proto.UserProto.User.Experiment getExperiment(int index);
   }
   /**
    * Protobuf type {@code User}
@@ -609,6 +623,39 @@ public final class UserProto {
               optOutEmail_ = input.readBool();
               break;
             }
+            case 208: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.UserProto.User.Experiment value = com.janknspank.proto.UserProto.User.Experiment.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(26, rawValue);
+              } else {
+                if (!((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+                  experiment_ = new java.util.ArrayList<com.janknspank.proto.UserProto.User.Experiment>();
+                  mutable_bitField0_ |= 0x00400000;
+                }
+                experiment_.add(value);
+              }
+              break;
+            }
+            case 210: {
+              int length = input.readRawVarint32();
+              int oldLimit = input.pushLimit(length);
+              while(input.getBytesUntilLimit() > 0) {
+                int rawValue = input.readEnum();
+                com.janknspank.proto.UserProto.User.Experiment value = com.janknspank.proto.UserProto.User.Experiment.valueOf(rawValue);
+                if (value == null) {
+                  unknownFields.mergeVarintField(26, rawValue);
+                } else {
+                  if (!((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+                    experiment_ = new java.util.ArrayList<com.janknspank.proto.UserProto.User.Experiment>();
+                    mutable_bitField0_ |= 0x00400000;
+                  }
+                  experiment_.add(value);
+                }
+              }
+              input.popLimit(oldLimit);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -631,6 +678,9 @@ public final class UserProto {
         }
         if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
           last5AppUseTime_ = java.util.Collections.unmodifiableList(last5AppUseTime_);
+        }
+        if (((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+          experiment_ = java.util.Collections.unmodifiableList(experiment_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -661,6 +711,92 @@ public final class UserProto {
     @java.lang.Override
     public com.google.protobuf.Parser<User> getParserForType() {
       return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code User.Experiment}
+     *
+     * <pre>
+     * Per-user experiments.
+     * </pre>
+     */
+    public enum Experiment
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>EXPRESSIONS = 1;</code>
+       */
+      EXPRESSIONS(1, 1),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>EXPRESSIONS = 1;</code>
+       */
+      public static final int EXPRESSIONS_VALUE = 1;
+
+
+      public final int getNumber() { return value; }
+
+      public static Experiment valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return EXPRESSIONS;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Experiment>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Experiment>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Experiment>() {
+              public Experiment findValueByNumber(int number) {
+                return Experiment.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.UserProto.User.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Experiment[] VALUES = values();
+
+      public static Experiment valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Experiment(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:User.Experiment)
     }
 
     private int bitField0_;
@@ -1464,6 +1600,28 @@ public final class UserProto {
       return optOutEmail_;
     }
 
+    // repeated .User.Experiment experiment = 26;
+    public static final int EXPERIMENT_FIELD_NUMBER = 26;
+    private java.util.List<com.janknspank.proto.UserProto.User.Experiment> experiment_;
+    /**
+     * <code>repeated .User.Experiment experiment = 26;</code>
+     */
+    public java.util.List<com.janknspank.proto.UserProto.User.Experiment> getExperimentList() {
+      return experiment_;
+    }
+    /**
+     * <code>repeated .User.Experiment experiment = 26;</code>
+     */
+    public int getExperimentCount() {
+      return experiment_.size();
+    }
+    /**
+     * <code>repeated .User.Experiment experiment = 26;</code>
+     */
+    public com.janknspank.proto.UserProto.User.Experiment getExperiment(int index) {
+      return experiment_.get(index);
+    }
+
     private void initFields() {
       id_ = "";
       firstName_ = "";
@@ -1487,6 +1645,7 @@ public final class UserProto {
       lastTimezoneEstimateUpdate_ = 0L;
       welcomeEmailSentTime_ = 0L;
       optOutEmail_ = false;
+      experiment_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1571,6 +1730,9 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeBool(25, optOutEmail_);
+      }
+      for (int i = 0; i < experiment_.size(); i++) {
+        output.writeEnum(26, experiment_.get(i).getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1673,6 +1835,15 @@ public final class UserProto {
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(25, optOutEmail_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < experiment_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeEnumSizeNoTag(experiment_.get(i).getNumber());
+        }
+        size += dataSize;
+        size += 2 * experiment_.size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1859,6 +2030,8 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00100000);
         optOutEmail_ = false;
         bitField0_ = (bitField0_ & ~0x00200000);
+        experiment_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00400000);
         return this;
       }
 
@@ -2000,6 +2173,11 @@ public final class UserProto {
           to_bitField0_ |= 0x00010000;
         }
         result.optOutEmail_ = optOutEmail_;
+        if (((bitField0_ & 0x00400000) == 0x00400000)) {
+          experiment_ = java.util.Collections.unmodifiableList(experiment_);
+          bitField0_ = (bitField0_ & ~0x00400000);
+        }
+        result.experiment_ = experiment_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2202,6 +2380,16 @@ public final class UserProto {
         }
         if (other.hasOptOutEmail()) {
           setOptOutEmail(other.getOptOutEmail());
+        }
+        if (!other.experiment_.isEmpty()) {
+          if (experiment_.isEmpty()) {
+            experiment_ = other.experiment_;
+            bitField0_ = (bitField0_ & ~0x00400000);
+          } else {
+            ensureExperimentIsMutable();
+            experiment_.addAll(other.experiment_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4477,6 +4665,78 @@ public final class UserProto {
       public Builder clearOptOutEmail() {
         bitField0_ = (bitField0_ & ~0x00200000);
         optOutEmail_ = false;
+        onChanged();
+        return this;
+      }
+
+      // repeated .User.Experiment experiment = 26;
+      private java.util.List<com.janknspank.proto.UserProto.User.Experiment> experiment_ =
+        java.util.Collections.emptyList();
+      private void ensureExperimentIsMutable() {
+        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
+          experiment_ = new java.util.ArrayList<com.janknspank.proto.UserProto.User.Experiment>(experiment_);
+          bitField0_ |= 0x00400000;
+        }
+      }
+      /**
+       * <code>repeated .User.Experiment experiment = 26;</code>
+       */
+      public java.util.List<com.janknspank.proto.UserProto.User.Experiment> getExperimentList() {
+        return java.util.Collections.unmodifiableList(experiment_);
+      }
+      /**
+       * <code>repeated .User.Experiment experiment = 26;</code>
+       */
+      public int getExperimentCount() {
+        return experiment_.size();
+      }
+      /**
+       * <code>repeated .User.Experiment experiment = 26;</code>
+       */
+      public com.janknspank.proto.UserProto.User.Experiment getExperiment(int index) {
+        return experiment_.get(index);
+      }
+      /**
+       * <code>repeated .User.Experiment experiment = 26;</code>
+       */
+      public Builder setExperiment(
+          int index, com.janknspank.proto.UserProto.User.Experiment value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureExperimentIsMutable();
+        experiment_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .User.Experiment experiment = 26;</code>
+       */
+      public Builder addExperiment(com.janknspank.proto.UserProto.User.Experiment value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureExperimentIsMutable();
+        experiment_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .User.Experiment experiment = 26;</code>
+       */
+      public Builder addAllExperiment(
+          java.lang.Iterable<? extends com.janknspank.proto.UserProto.User.Experiment> values) {
+        ensureExperimentIsMutable();
+        super.addAll(values, experiment_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .User.Experiment experiment = 26;</code>
+       */
+      public Builder clearExperiment() {
+        experiment_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00400000);
         onChanged();
         return this;
       }
@@ -8129,6 +8389,36 @@ public final class UserProto {
      * </pre>
      */
     com.janknspank.proto.CoreProto.EntityOrBuilder getEntityOrBuilder();
+
+    // optional string expression_id = 8;
+    /**
+     * <code>optional string expression_id = 8;</code>
+     *
+     * <pre>
+     * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+     * interest.type == InterestType.EXPRESSION_NO.
+     * </pre>
+     */
+    boolean hasExpressionId();
+    /**
+     * <code>optional string expression_id = 8;</code>
+     *
+     * <pre>
+     * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+     * interest.type == InterestType.EXPRESSION_NO.
+     * </pre>
+     */
+    java.lang.String getExpressionId();
+    /**
+     * <code>optional string expression_id = 8;</code>
+     *
+     * <pre>
+     * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+     * interest.type == InterestType.EXPRESSION_NO.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getExpressionIdBytes();
   }
   /**
    * Protobuf type {@code Interest}
@@ -8229,6 +8519,11 @@ public final class UserProto {
                 entity_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000020;
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000040;
+              expressionId_ = input.readBytes();
               break;
             }
           }
@@ -8713,6 +9008,64 @@ public final class UserProto {
       return entity_;
     }
 
+    // optional string expression_id = 8;
+    public static final int EXPRESSION_ID_FIELD_NUMBER = 8;
+    private java.lang.Object expressionId_;
+    /**
+     * <code>optional string expression_id = 8;</code>
+     *
+     * <pre>
+     * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+     * interest.type == InterestType.EXPRESSION_NO.
+     * </pre>
+     */
+    public boolean hasExpressionId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string expression_id = 8;</code>
+     *
+     * <pre>
+     * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+     * interest.type == InterestType.EXPRESSION_NO.
+     * </pre>
+     */
+    public java.lang.String getExpressionId() {
+      java.lang.Object ref = expressionId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          expressionId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string expression_id = 8;</code>
+     *
+     * <pre>
+     * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+     * interest.type == InterestType.EXPRESSION_NO.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getExpressionIdBytes() {
+      java.lang.Object ref = expressionId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        expressionId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       id_ = "";
       type_ = com.janknspank.proto.UserProto.Interest.InterestType.UNKNONWN;
@@ -8720,6 +9073,7 @@ public final class UserProto {
       createTime_ = 0L;
       industryCode_ = 0;
       entity_ = com.janknspank.proto.CoreProto.Entity.getDefaultInstance();
+      expressionId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8759,6 +9113,9 @@ public final class UserProto {
         output.writeMessage(6, entity_);
       }
       extensionWriter.writeUntil(8, output);
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(8, getExpressionIdBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -8791,6 +9148,10 @@ public final class UserProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, entity_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getExpressionIdBytes());
       }
       size += extensionsSerializedSize();
       size += getUnknownFields().getSerializedSize();
@@ -8926,6 +9287,8 @@ public final class UserProto {
           entityBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
+        expressionId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -8982,6 +9345,10 @@ public final class UserProto {
         } else {
           result.entity_ = entityBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.expressionId_ = expressionId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9017,6 +9384,11 @@ public final class UserProto {
         }
         if (other.hasEntity()) {
           mergeEntity(other.getEntity());
+        }
+        if (other.hasExpressionId()) {
+          bitField0_ |= 0x00000040;
+          expressionId_ = other.expressionId_;
+          onChanged();
         }
         this.mergeExtensionFields(other);
         this.mergeUnknownFields(other.getUnknownFields());
@@ -9429,6 +9801,110 @@ public final class UserProto {
           entity_ = null;
         }
         return entityBuilder_;
+      }
+
+      // optional string expression_id = 8;
+      private java.lang.Object expressionId_ = "";
+      /**
+       * <code>optional string expression_id = 8;</code>
+       *
+       * <pre>
+       * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+       * interest.type == InterestType.EXPRESSION_NO.
+       * </pre>
+       */
+      public boolean hasExpressionId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string expression_id = 8;</code>
+       *
+       * <pre>
+       * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+       * interest.type == InterestType.EXPRESSION_NO.
+       * </pre>
+       */
+      public java.lang.String getExpressionId() {
+        java.lang.Object ref = expressionId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          expressionId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string expression_id = 8;</code>
+       *
+       * <pre>
+       * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+       * interest.type == InterestType.EXPRESSION_NO.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getExpressionIdBytes() {
+        java.lang.Object ref = expressionId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          expressionId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string expression_id = 8;</code>
+       *
+       * <pre>
+       * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+       * interest.type == InterestType.EXPRESSION_NO.
+       * </pre>
+       */
+      public Builder setExpressionId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        expressionId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string expression_id = 8;</code>
+       *
+       * <pre>
+       * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+       * interest.type == InterestType.EXPRESSION_NO.
+       * </pre>
+       */
+      public Builder clearExpressionId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        expressionId_ = getDefaultInstance().getExpressionId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string expression_id = 8;</code>
+       *
+       * <pre>
+       * Set if IFF interest.type == InterestType.EXPRESSION_YES or
+       * interest.type == InterestType.EXPRESSION_NO.
+       * </pre>
+       */
+      public Builder setExpressionIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        expressionId_ = value;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:Interest)
@@ -11808,7 +12284,7 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/user.proto\032(com/j" +
       "anknspank/database/extensions.proto\032\037com" +
-      "/janknspank/proto/core.proto\"\240\006\n\004User\022\034\n" +
+      "/janknspank/proto/core.proto\"\370\006\n\004User\022\034\n" +
       "\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\nfirst_nam" +
       "e\030\002 \001(\tB\004\230\246\035d\022\027\n\tlast_name\030\003 \001(\tB\004\230\246\035d\022\027" +
       "\n\005email\030\004 \001(\tB\010\220\246\035\003\230\246\035d\022\032\n\014linked_in_id\030" +
@@ -11828,46 +12304,49 @@ public final class UserProto {
       "\004\230\246\035\024\022\037\n\021timezone_estimate\030\026 \001(\tB\004\230\246\035\n\022%",
       "\n\035last_timezone_estimate_update\030\027 \001(\003\022\037\n" +
       "\027welcome_email_sent_time\030\030 \001(\003\022\025\n\ropt_ou" +
-      "t_email\030\031 \001(\010:\020\212\265\030\014MongoDB.User\",\n\022Addre" +
-      "ssBookContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"J\n" +
-      "\013UrlFavorite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246" +
-      "\035\030\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"\255\002\n\017Li" +
-      "nkedInProfile\0223\n\020current_employer\030\001 \001(\0132" +
-      "\031.LinkedInProfile.Employer\0220\n\rpast_emplo" +
-      "yer\030\002 \003(\0132\031.LinkedInProfile.Employer\022\030\n\004" +
-      "data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\035\n\013create_time\030\004 ",
-      "\001(\003B\010\210\246\035\001\240\246\035\003\032z\n\010Employer\022\026\n\004name\030\001 \001(\tB" +
-      "\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\ten" +
-      "tity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022" +
-      "\020\n\010end_time\030\005 \001(\003\")\n\017LinkedInContact\022\026\n\004" +
-      "name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\364\003\n\010Interest\022 \n\002id\030" +
-      "\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022*\n\004type\030\002 \001(" +
-      "\0162\026.Interest.InterestTypeB\004\210\246\035\001\022.\n\006sourc" +
-      "e\030\003 \001(\0162\030.Interest.InterestSourceB\004\210\246\035\001\022" +
-      "\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\025\n\rindust" +
-      "ry_code\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\"\220",
-      "\001\n\014InterestType\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUSTR" +
-      "Y\020\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022" +
-      "\031\n\025ADDRESS_BOOK_CONTACTS\020\004\022\022\n\016EXPRESSION" +
-      "_YES\020\005\022\021\n\rEXPRESSION_NO\020\006\"\201\001\n\016InterestSo" +
-      "urce\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKED_IN" +
-      "_PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\034\n\030DEFA" +
-      "ULT_TO_PREVENT_CRASH\020\005\022\r\n\tTOMBSTONE\020\003*\004\010" +
-      "\007\020\010\"\236\004\n\nUserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002" +
-      "\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220" +
-      "\246\035\003\0225\n\013action_type\030\003 \001(\0162\026.UserAction.Ac",
-      "tionTypeB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035\001" +
-      "\230\246\035\030\250\246\035\001\220\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001" +
-      "\220\246\035\005\022\035\n\013create_time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017r" +
-      "ead_start_time\030\007 \001(\003\022\025\n\rread_end_time\030\010 " +
-      "\001(\003\022!\n\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)" +
-      "\n\026on_stream_for_interest\030\014 \001(\0132\t.Interes" +
-      "t\"\242\001\n\nActionType\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORIT" +
-      "E\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005S" +
-      "HARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n" +
-      "\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010\022\017\n\013EMAIL_C",
-      "LICK\020\t:\024\212\265\030\020MySQL.UserActionB!\n\024com.jank" +
-      "nspank.protoB\tUserProto"
+      "t_email\030\031 \001(\010\022*\n\nexperiment\030\032 \003(\0162\020.User" +
+      ".ExperimentB\004\240\246\035\003\"*\n\nExperiment\022\013\n\007UNKNO" +
+      "WN\020\000\022\017\n\013EXPRESSIONS\020\001:\020\212\265\030\014MongoDB.User\"" +
+      ",\n\022AddressBookContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035" +
+      "\001\230\246\035d\"J\n\013UrlFavorite\022 \n\006url_id\030\001 \001(\tB\020\210\246" +
+      "\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035" +
+      "\001\"\255\002\n\017LinkedInProfile\0223\n\020current_employe" +
+      "r\030\001 \001(\0132\031.LinkedInProfile.Employer\0220\n\rpa",
+      "st_employer\030\002 \003(\0132\031.LinkedInProfile.Empl" +
+      "oyer\022\030\n\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\035\n\013create" +
+      "_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\032z\n\010Employer\022\026\n\004nam" +
+      "e\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246" +
+      "\035d\022\027\n\tentity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_tim" +
+      "e\030\004 \001(\003\022\020\n\010end_time\030\005 \001(\003\")\n\017LinkedInCon" +
+      "tact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\225\004\n\010Interes" +
+      "t\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022*\n\004t" +
+      "ype\030\002 \001(\0162\026.Interest.InterestTypeB\004\210\246\035\001\022" +
+      ".\n\006source\030\003 \001(\0162\030.Interest.InterestSourc",
+      "eB\004\210\246\035\001\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\025" +
+      "\n\rindustry_code\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007." +
+      "Entity\022\037\n\rexpression_id\030\010 \001(\tB\010\230\246\035\030\250\246\035\001\"" +
+      "\220\001\n\014InterestType\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUST" +
+      "RY\020\001\022\n\n\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003" +
+      "\022\031\n\025ADDRESS_BOOK_CONTACTS\020\004\022\022\n\016EXPRESSIO" +
+      "N_YES\020\005\022\021\n\rEXPRESSION_NO\020\006\"\201\001\n\016InterestS" +
+      "ource\022\013\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKED_I" +
+      "N_PROFILE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\034\n\030DEF" +
+      "AULT_TO_PREVENT_CRASH\020\005\022\r\n\tTOMBSTONE\020\003*\004",
+      "\010\007\020\010\"\236\004\n\nUserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035" +
+      "\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001" +
+      "\220\246\035\003\0225\n\013action_type\030\003 \001(\0162\026.UserAction.A" +
+      "ctionTypeB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035" +
+      "\001\230\246\035\030\250\246\035\001\220\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035" +
+      "\001\220\246\035\005\022\035\n\013create_time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017" +
+      "read_start_time\030\007 \001(\003\022\025\n\rread_end_time\030\010" +
+      " \001(\003\022!\n\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022" +
+      ")\n\026on_stream_for_interest\030\014 \001(\0132\t.Intere" +
+      "st\"\242\001\n\nActionType\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORI",
+      "TE\020\001\022\t\n\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005" +
+      "SHARE\020\004\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r" +
+      "\n\tUNVOTE_UP\020\007\022\017\n\013SCROLL_PAST\020\010\022\017\n\013EMAIL_" +
+      "CLICK\020\t:\024\212\265\030\020MySQL.UserActionB!\n\024com.jan" +
+      "knspank.protoB\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11879,7 +12358,7 @@ public final class UserProto {
           internal_static_User_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_User_descriptor,
-              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", "Last5AppUseTime", "LastIpAddress", "TimezoneEstimate", "LastTimezoneEstimateUpdate", "WelcomeEmailSentTime", "OptOutEmail", });
+              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", "Last5AppUseTime", "LastIpAddress", "TimezoneEstimate", "LastTimezoneEstimateUpdate", "WelcomeEmailSentTime", "OptOutEmail", "Experiment", });
           internal_static_AddressBookContact_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_AddressBookContact_fieldAccessorTable = new
@@ -11915,7 +12394,7 @@ public final class UserProto {
           internal_static_Interest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Interest_descriptor,
-              new java.lang.String[] { "Id", "Type", "Source", "CreateTime", "IndustryCode", "Entity", });
+              new java.lang.String[] { "Id", "Type", "Source", "CreateTime", "IndustryCode", "Entity", "ExpressionId", });
           internal_static_UserAction_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_UserAction_fieldAccessorTable = new
@@ -11949,6 +12428,7 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
@@ -11977,6 +12457,8 @@ public final class UserProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

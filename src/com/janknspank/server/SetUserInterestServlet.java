@@ -45,6 +45,7 @@ public class SetUserInterestServlet extends StandardServlet {
     String interestEntityKeywordParam = getParameter(req, "interest[entity][keyword]");
     String interestEntityIdParam = getParameter(req, "interest[entity][id]");
     String interestIndustryCodeParam = getParameter(req, "interest[industry_code]");
+    String interestExpressionIdParam = getParameter(req, "interest[expression_id]");
     boolean followParam = "true".equals(getRequiredParameter(req, "follow"));
 
     // Parameter validation.
@@ -114,15 +115,20 @@ public class SetUserInterestServlet extends StandardServlet {
       case INDUSTRY:
         interestBuilder.setIndustryCode(Integer.parseInt(interestIndustryCodeParam));
         break;
+
+      case EXPRESSION_YES:
+      case EXPRESSION_NO:
+        interestBuilder.setExpressionId(interestExpressionIdParam);
+        break;
     }
 
     Interest newInterest = interestBuilder.build();
 
-    // Find all interests that are not equivalent to the specified user
+    // Find all interests that are not conflicting with the specified user
     // interest.
     List<Interest> existingInterests = Lists.newArrayList();
     for (Interest interest : user.getInterestList()) {
-      if (!UserInterests.equivalent(interest, newInterest)) {
+      if (!UserInterests.isConflict(interest, newInterest)) {
         existingInterests.add(interest);
       }
     }
@@ -130,9 +136,7 @@ public class SetUserInterestServlet extends StandardServlet {
     // Write the filtered list plus a new Interest that represents the
     // parameters received from the client.
     user = Database.with(User.class).set(user, "interest",
-        Iterables.concat(
-            existingInterests,
-            ImmutableList.of(newInterest)));
+        Iterables.concat(existingInterests, ImmutableList.of(newInterest)));
 
     // Create the response.
     JSONObject response = this.createSuccessResponse();

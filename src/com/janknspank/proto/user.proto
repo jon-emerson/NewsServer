@@ -112,6 +112,15 @@ message User {
 
   // Whether the user has opted-out of emails.
   optional bool opt_out_email = 25;
+
+  // Per-user experiments.
+  enum Experiment {
+    UNKNOWN = 0;
+    EXPRESSIONS = 1;
+  }
+  repeated Experiment experiment = 26 [
+    (client_serialization) = EXCLUDE
+  ];
 }
 
 message AddressBookContact {
@@ -222,6 +231,13 @@ message Interest {
 
   // Set if IFF interest.type == InterestType.ENTITY.
   optional Entity entity = 6;
+
+  // Set if IFF interest.type == InterestType.EXPRESSION_YES or
+  // interest.type == InterestType.EXPRESSION_NO.
+  optional string expression_id = 8 [
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
 }
 
 message UserAction {

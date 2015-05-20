@@ -9,6 +9,7 @@ protoc \
     src/com/janknspank/proto/classifier.proto \
     src/com/janknspank/proto/core.proto \
     src/com/janknspank/proto/crawler.proto \
+    src/com/janknspank/proto/expressions.proto \
     src/com/janknspank/proto/interpreter.proto \
     src/com/janknspank/proto/local.proto \
     src/com/janknspank/proto/notifications.proto \
