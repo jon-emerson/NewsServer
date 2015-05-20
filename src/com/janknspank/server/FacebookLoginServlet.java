@@ -31,8 +31,8 @@ public class FacebookLoginServlet extends StandardServlet {
     User user = FacebookLoginHandler.login(fbUser, fbAccessToken);
 
     long startTime = System.currentTimeMillis();
-    Session session = Sessions.createFromFacebookUser(user, fbUser);
-    System.out.println("Sessions.createFromFacebookUser(User, User), time = "
+    Session session = Sessions.createForUser(user);
+    System.out.println("Sessions.createForUser(User, User), time = "
         + (System.currentTimeMillis() - startTime) + "ms");
 
     // Create the response.

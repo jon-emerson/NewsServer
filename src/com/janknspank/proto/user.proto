@@ -121,6 +121,17 @@ message User {
   repeated Experiment experiment = 26 [
     (client_serialization) = EXCLUDE
   ];
+
+  // Tracks what service the user logged in with first.
+  enum AuthenticationService {
+    UNKNONWN = 0;
+    FACEBOOK = 1;
+    LINKED_IN = 2;
+    ANONYMOUS = 3;
+  }
+  optional AuthenticationService original_authentication_service = 27 [
+    (client_serialization) = EXCLUDE
+  ];
 }
 
 message AddressBookContact {

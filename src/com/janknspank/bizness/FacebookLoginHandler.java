@@ -35,6 +35,7 @@ import com.janknspank.proto.CoreProto.VectorData.WordFrequency;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.User.AuthenticationService;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.server.RequestException;
 import com.restfb.DefaultFacebookClient;
@@ -80,7 +81,9 @@ public class FacebookLoginHandler {
         .setLastName(fbUser.getLastName()).setFacebookId(fbUser.getId())
         .setFacebookAccessToken(fbAccessToken)
         .setCreateTime(System.currentTimeMillis())
-        .setLastLoginTime(System.currentTimeMillis());
+        .setLastLoginTime(System.currentTimeMillis())
+        .addLast5AppUseTime(System.currentTimeMillis())
+        .setOriginalAuthenticationService(AuthenticationService.FACEBOOK);
     if (!Strings.isNullOrEmpty(fbUser.getEmail())) {
       newUserBuilder.setEmail(fbUser.getEmail());
     }

@@ -48,6 +48,7 @@ import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.LinkedInProfile;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
+import com.janknspank.proto.UserProto.User.AuthenticationService;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.proto.UserProto.UserOrBuilder;
 import com.janknspank.server.RequestException;
@@ -93,7 +94,9 @@ public class LinkedInLoginHandler {
         .setId(GuidFactory.generate())
         .setLinkedInAccessToken(linkedInAccessToken)
         .setCreateTime(System.currentTimeMillis())
-        .setLastLoginTime(System.currentTimeMillis());
+        .setLastLoginTime(System.currentTimeMillis())
+        .addLast5AppUseTime(System.currentTimeMillis())
+        .setOriginalAuthenticationService(AuthenticationService.LINKED_IN);
     if (!Strings.isNullOrEmpty(email)) {
       builder.setEmail(email);
     }

@@ -58,16 +58,10 @@ public class Sessions {
   }
 
   /**
-   * Officially sanctioned method for getting a user session from a Facebook
-   * profile response.
+   * Officially sanctioned method for getting a user session.
    */
-  public static Session createFromFacebookUser(User user, com.restfb.types.User fbUser)
+  public static Session createForUser(User user)
       throws BiznessException, DatabaseSchemaException {
-    // Validate the data looks decent.
-    if (!user.getFacebookId().equals(fbUser.getId())) {
-      throw new BiznessException("User doesn't match Facebook User");
-    }
-
     // Insert a new Session object and return it.
     try {
       Session session = Session.newBuilder()
