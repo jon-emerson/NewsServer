@@ -7,6 +7,12 @@ path_blacklist {
   needle: "/my-account/"
 }
 paragraph_selector: ".section_column1 p"
+
+# E.g. "You must sign in to make a comment."
+paragraph_blacklist {
+  text_regex: "^You must sign in "
+}
+
 article_url_pattern {
   path_regex: "\\/[0-9]{6,9}\\.article$"
 }

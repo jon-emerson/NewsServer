@@ -1,7 +1,17 @@
 short_name: "Energy Collective"
 root_domain: "theenergycollective.com"
 start_url: "http://theenergycollective.com/"
-paragraph_selector: ".paragraph"
+
+# E.g. http://theenergycollective.com/roman-kilisek/2230026/japan-s-unholy-trinity-nuclear-power-must-join-renewables-move-emissions-reduc
+paragraph_selector: ".articlebody p"
+
+paragraph_blacklist {
+  text_regex: "^Source: "
+}
+paragraph_blacklist {
+  text_regex: "^Photo credit: "
+}
+
 article_url_pattern {
   path_regex: "^\\/[^\\/]+\\/[0-9]{6,}\\/[^\\/]+$"
 }
