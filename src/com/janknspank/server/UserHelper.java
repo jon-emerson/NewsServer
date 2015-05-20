@@ -135,12 +135,12 @@ public class UserHelper {
     return favoritesJsonArray;
   }
 
-  private JSONArray getExperimentsJsonArray() {
-    JSONArray experimentsJsonArray = new JSONArray();
+  private JSONObject getExperimentsJsonObject() {
+    JSONObject experimentsJsonObject = new JSONObject();
     for (Experiment experiment : user.getExperimentList()) {
-      experimentsJsonArray.put(experiment.name());
+      experimentsJsonObject.put(experiment.name().toLowerCase(), "true");
     }
-    return experimentsJsonArray;
+    return experimentsJsonObject;
   }
 
   private JSONArray getInterestsJsonArray() {
@@ -164,7 +164,7 @@ public class UserHelper {
     userJson.put("interests", getInterestsJsonArray());
     userJson.put("linked_in_contacts", Serializer.toJSON(linkedInContacts));
     if (user.getExperimentCount() > 0) {
-      userJson.put("experiments", getExperimentsJsonArray());
+      userJson.put("experiments", getExperimentsJsonObject());
     }
     return userJson;
   }
