@@ -2,6 +2,7 @@ short_name: "BizBash"
 root_domain: "bizbash.com"
 start_url: "http://www.bizbash.com/"
 paragraph_selector: ".article-copy p"
+paragraph_selector: ".p1"
 paragraph_blacklist {
   text_regex: "^YOUR NEWS:"
 }

@@ -2,6 +2,7 @@ short_name: "Founders at Work"
 root_domain: "foundersatwork.posthaven.com"
 start_url: "http://foundersatwork.posthaven.com/"
 paragraph_selector: ".post-body p"
+paragraph_selector: ".gmail_quote"
 article_url_pattern {
   path_regex: "^\\/[^\\/]+$"
 }

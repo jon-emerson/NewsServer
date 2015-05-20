@@ -4,6 +4,7 @@ start_url: "http://www.architectmagazine.com/"
 paragraph_selector: "h3[itemprop=\"alternativeHeadline\"]"
 paragraph_selector: ".articlepage p"
 paragraph_selector: "article.pg-project-description p"
+paragraph_selector: ".project-description > div"
 path_blacklist {
   needle: "/continuing-education/"
 }
