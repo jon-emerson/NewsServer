@@ -291,7 +291,8 @@ public class SendLunchEmails {
         MimeBodyPart imagePart = new MimeBodyPart();
         imagePart.attachFile("resources/img/" + imageAttributes.getKey());
         imagePart.setContentID("<" + imageAttributes.getValue() + ">");
-        imagePart.setDisposition(MimeBodyPart.INLINE);
+        imagePart.setHeader("Content-Type", "image/png; name=\"" + imageAttributes.getKey() + "\"");
+        imagePart.setHeader("Content-Disposition", "INLINE");
         content.addBodyPart(imagePart);
       }
     }
