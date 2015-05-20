@@ -83,7 +83,7 @@ public class FacebookLoginHandler {
         .setCreateTime(System.currentTimeMillis())
         .setLastLoginTime(System.currentTimeMillis())
         .addLast5AppUseTime(System.currentTimeMillis())
-        .setOriginalAuthenticationService(AuthenticationService.FACEBOOK);
+        .setAuthenticationService(AuthenticationService.FACEBOOK);
     if (!Strings.isNullOrEmpty(fbUser.getEmail())) {
       newUserBuilder.setEmail(fbUser.getEmail());
     }

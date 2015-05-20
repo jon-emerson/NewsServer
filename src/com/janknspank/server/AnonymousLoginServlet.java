@@ -31,7 +31,7 @@ public class AnonymousLoginServlet extends StandardServlet {
         .setCreateTime(System.currentTimeMillis())
         .setLastLoginTime(System.currentTimeMillis())
         .addLast5AppUseTime(System.currentTimeMillis())
-        .setOriginalAuthenticationService(AuthenticationService.ANONYMOUS)
+        .setAuthenticationService(AuthenticationService.ANONYMOUS)
         .build();
     Database.insert(user);
     return user;

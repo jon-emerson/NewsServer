@@ -96,7 +96,7 @@ public class LinkedInLoginHandler {
         .setCreateTime(System.currentTimeMillis())
         .setLastLoginTime(System.currentTimeMillis())
         .addLast5AppUseTime(System.currentTimeMillis())
-        .setOriginalAuthenticationService(AuthenticationService.LINKED_IN);
+        .setAuthenticationService(AuthenticationService.LINKED_IN);
     if (!Strings.isNullOrEmpty(email)) {
       builder.setEmail(email);
     }

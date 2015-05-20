@@ -122,14 +122,16 @@ message User {
     (client_serialization) = EXCLUDE
   ];
 
-  // Tracks what service the user logged in with first.
+  // Tracks what service the user logged in with.  For now, we only set this on
+  // the user's first login.  In the future, it'd be nice to update this if the
+  // user changes services.
   enum AuthenticationService {
     UNKNONWN = 0;
     FACEBOOK = 1;
     LINKED_IN = 2;
     ANONYMOUS = 3;
   }
-  optional AuthenticationService original_authentication_service = 27;
+  optional AuthenticationService authentication_service = 27;
 }
 
 message AddressBookContact {

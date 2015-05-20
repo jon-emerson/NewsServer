@@ -426,15 +426,15 @@ public final class UserProto {
      */
     com.janknspank.proto.UserProto.User.Experiment getExperiment(int index);
 
-    // optional .User.AuthenticationService original_authentication_service = 27;
+    // optional .User.AuthenticationService authentication_service = 27;
     /**
-     * <code>optional .User.AuthenticationService original_authentication_service = 27;</code>
+     * <code>optional .User.AuthenticationService authentication_service = 27;</code>
      */
-    boolean hasOriginalAuthenticationService();
+    boolean hasAuthenticationService();
     /**
-     * <code>optional .User.AuthenticationService original_authentication_service = 27;</code>
+     * <code>optional .User.AuthenticationService authentication_service = 27;</code>
      */
-    com.janknspank.proto.UserProto.User.AuthenticationService getOriginalAuthenticationService();
+    com.janknspank.proto.UserProto.User.AuthenticationService getAuthenticationService();
   }
   /**
    * Protobuf type {@code User}
@@ -673,7 +673,7 @@ public final class UserProto {
                 unknownFields.mergeVarintField(27, rawValue);
               } else {
                 bitField0_ |= 0x00020000;
-                originalAuthenticationService_ = value;
+                authenticationService_ = value;
               }
               break;
             }
@@ -824,7 +824,9 @@ public final class UserProto {
      * Protobuf enum {@code User.AuthenticationService}
      *
      * <pre>
-     * Tracks what service the user logged in with first.
+     * Tracks what service the user logged in with.  For now, we only set this on
+     * the user's first login.  In the future, it'd be nice to update this if the
+     * user changes services.
      * </pre>
      */
     public enum AuthenticationService
@@ -1747,20 +1749,20 @@ public final class UserProto {
       return experiment_.get(index);
     }
 
-    // optional .User.AuthenticationService original_authentication_service = 27;
-    public static final int ORIGINAL_AUTHENTICATION_SERVICE_FIELD_NUMBER = 27;
-    private com.janknspank.proto.UserProto.User.AuthenticationService originalAuthenticationService_;
+    // optional .User.AuthenticationService authentication_service = 27;
+    public static final int AUTHENTICATION_SERVICE_FIELD_NUMBER = 27;
+    private com.janknspank.proto.UserProto.User.AuthenticationService authenticationService_;
     /**
-     * <code>optional .User.AuthenticationService original_authentication_service = 27;</code>
+     * <code>optional .User.AuthenticationService authentication_service = 27;</code>
      */
-    public boolean hasOriginalAuthenticationService() {
+    public boolean hasAuthenticationService() {
       return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     /**
-     * <code>optional .User.AuthenticationService original_authentication_service = 27;</code>
+     * <code>optional .User.AuthenticationService authentication_service = 27;</code>
      */
-    public com.janknspank.proto.UserProto.User.AuthenticationService getOriginalAuthenticationService() {
-      return originalAuthenticationService_;
+    public com.janknspank.proto.UserProto.User.AuthenticationService getAuthenticationService() {
+      return authenticationService_;
     }
 
     private void initFields() {
@@ -1787,7 +1789,7 @@ public final class UserProto {
       welcomeEmailSentTime_ = 0L;
       optOutEmail_ = false;
       experiment_ = java.util.Collections.emptyList();
-      originalAuthenticationService_ = com.janknspank.proto.UserProto.User.AuthenticationService.UNKNONWN;
+      authenticationService_ = com.janknspank.proto.UserProto.User.AuthenticationService.UNKNONWN;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1877,7 +1879,7 @@ public final class UserProto {
         output.writeEnum(26, experiment_.get(i).getNumber());
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        output.writeEnum(27, originalAuthenticationService_.getNumber());
+        output.writeEnum(27, authenticationService_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1992,7 +1994,7 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(27, originalAuthenticationService_.getNumber());
+          .computeEnumSize(27, authenticationService_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2181,7 +2183,7 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00200000);
         experiment_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00400000);
-        originalAuthenticationService_ = com.janknspank.proto.UserProto.User.AuthenticationService.UNKNONWN;
+        authenticationService_ = com.janknspank.proto.UserProto.User.AuthenticationService.UNKNONWN;
         bitField0_ = (bitField0_ & ~0x00800000);
         return this;
       }
@@ -2332,7 +2334,7 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
           to_bitField0_ |= 0x00020000;
         }
-        result.originalAuthenticationService_ = originalAuthenticationService_;
+        result.authenticationService_ = authenticationService_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2546,8 +2548,8 @@ public final class UserProto {
           }
           onChanged();
         }
-        if (other.hasOriginalAuthenticationService()) {
-          setOriginalAuthenticationService(other.getOriginalAuthenticationService());
+        if (other.hasAuthenticationService()) {
+          setAuthenticationService(other.getAuthenticationService());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4899,38 +4901,38 @@ public final class UserProto {
         return this;
       }
 
-      // optional .User.AuthenticationService original_authentication_service = 27;
-      private com.janknspank.proto.UserProto.User.AuthenticationService originalAuthenticationService_ = com.janknspank.proto.UserProto.User.AuthenticationService.UNKNONWN;
+      // optional .User.AuthenticationService authentication_service = 27;
+      private com.janknspank.proto.UserProto.User.AuthenticationService authenticationService_ = com.janknspank.proto.UserProto.User.AuthenticationService.UNKNONWN;
       /**
-       * <code>optional .User.AuthenticationService original_authentication_service = 27;</code>
+       * <code>optional .User.AuthenticationService authentication_service = 27;</code>
        */
-      public boolean hasOriginalAuthenticationService() {
+      public boolean hasAuthenticationService() {
         return ((bitField0_ & 0x00800000) == 0x00800000);
       }
       /**
-       * <code>optional .User.AuthenticationService original_authentication_service = 27;</code>
+       * <code>optional .User.AuthenticationService authentication_service = 27;</code>
        */
-      public com.janknspank.proto.UserProto.User.AuthenticationService getOriginalAuthenticationService() {
-        return originalAuthenticationService_;
+      public com.janknspank.proto.UserProto.User.AuthenticationService getAuthenticationService() {
+        return authenticationService_;
       }
       /**
-       * <code>optional .User.AuthenticationService original_authentication_service = 27;</code>
+       * <code>optional .User.AuthenticationService authentication_service = 27;</code>
        */
-      public Builder setOriginalAuthenticationService(com.janknspank.proto.UserProto.User.AuthenticationService value) {
+      public Builder setAuthenticationService(com.janknspank.proto.UserProto.User.AuthenticationService value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00800000;
-        originalAuthenticationService_ = value;
+        authenticationService_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .User.AuthenticationService original_authentication_service = 27;</code>
+       * <code>optional .User.AuthenticationService authentication_service = 27;</code>
        */
-      public Builder clearOriginalAuthenticationService() {
+      public Builder clearAuthenticationService() {
         bitField0_ = (bitField0_ & ~0x00800000);
-        originalAuthenticationService_ = com.janknspank.proto.UserProto.User.AuthenticationService.UNKNONWN;
+        authenticationService_ = com.janknspank.proto.UserProto.User.AuthenticationService.UNKNONWN;
         onChanged();
         return this;
       }
@@ -12478,7 +12480,7 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\037com/janknspank/proto/user.proto\032(com/j" +
       "anknspank/database/extensions.proto\032\037com" +
-      "/janknspank/proto/core.proto\"\221\010\n\004User\022\034\n" +
+      "/janknspank/proto/core.proto\"\210\010\n\004User\022\034\n" +
       "\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\030\n\nfirst_nam" +
       "e\030\002 \001(\tB\004\230\246\035d\022\027\n\tlast_name\030\003 \001(\tB\004\230\246\035d\022\027" +
       "\n\005email\030\004 \001(\tB\010\220\246\035\003\230\246\035d\022\032\n\014linked_in_id\030" +
@@ -12499,52 +12501,52 @@ public final class UserProto {
       "\n\035last_timezone_estimate_update\030\027 \001(\003\022\037\n" +
       "\027welcome_email_sent_time\030\030 \001(\003\022\025\n\ropt_ou" +
       "t_email\030\031 \001(\010\022*\n\nexperiment\030\032 \003(\0162\020.User" +
-      ".ExperimentB\004\240\246\035\003\022D\n\037original_authentica" +
-      "tion_service\030\033 \001(\0162\033.User.Authentication" +
-      "Service\"*\n\nExperiment\022\013\n\007UNKNOWN\020\000\022\017\n\013EX" +
-      "PRESSIONS\020\001\"Q\n\025AuthenticationService\022\014\n\010" +
-      "UNKNONWN\020\000\022\014\n\010FACEBOOK\020\001\022\r\n\tLINKED_IN\020\002\022" +
-      "\r\n\tANONYMOUS\020\003:\020\212\265\030\014MongoDB.User\",\n\022Addr" +
-      "essBookContact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"J",
-      "\n\013UrlFavorite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\030\250\246\035\001\022\031\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"\255\002\n\017L" +
-      "inkedInProfile\0223\n\020current_employer\030\001 \001(\013" +
-      "2\031.LinkedInProfile.Employer\0220\n\rpast_empl" +
-      "oyer\030\002 \003(\0132\031.LinkedInProfile.Employer\022\030\n" +
-      "\004data\030\003 \001(\tB\n\210\246\035\001\230\246\035\200\240\006\022\035\n\013create_time\030\004" +
-      " \001(\003B\010\210\246\035\001\240\246\035\003\032z\n\010Employer\022\026\n\004name\030\001 \001(\t" +
-      "B\010\210\246\035\001\230\246\035d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\te" +
-      "ntity_id\030\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003" +
-      "\022\020\n\010end_time\030\005 \001(\003\")\n\017LinkedInContact\022\026\n",
-      "\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"\225\004\n\010Interest\022 \n\002id" +
-      "\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022*\n\004type\030\002 \001" +
-      "(\0162\026.Interest.InterestTypeB\004\210\246\035\001\022.\n\006sour" +
-      "ce\030\003 \001(\0162\030.Interest.InterestSourceB\004\210\246\035\001" +
-      "\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\025\n\rindus" +
-      "try_code\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\022" +
-      "\037\n\rexpression_id\030\010 \001(\tB\010\230\246\035\030\250\246\035\001\"\220\001\n\014Int" +
-      "erestType\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n" +
-      "\006ENTITY\020\002\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n\025ADD" +
-      "RESS_BOOK_CONTACTS\020\004\022\022\n\016EXPRESSION_YES\020\005",
-      "\022\021\n\rEXPRESSION_NO\020\006\"\201\001\n\016InterestSource\022\013" +
-      "\n\007UNKNOWN\020\000\022\010\n\004USER\020\001\022\025\n\021LINKED_IN_PROFI" +
-      "LE\020\002\022\024\n\020FACEBOOK_PROFILE\020\004\022\034\n\030DEFAULT_TO" +
-      "_PREVENT_CRASH\020\005\022\r\n\tTOMBSTONE\020\003*\004\010\007\020\010\"\236\004" +
-      "\n\nUserAction\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246" +
-      "\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\003\0225\n" +
-      "\013action_type\030\003 \001(\0162\026.UserAction.ActionTy" +
-      "peB\010\210\246\035\001\220\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035\001\230\246\035\030\250\246" +
-      "\035\001\220\246\035\005\022\036\n\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035" +
-      "\n\013create_time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017read_st",
-      "art_time\030\007 \001(\003\022\025\n\rread_end_time\030\010 \001(\003\022!\n" +
-      "\010interest\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)\n\026on_s" +
-      "tream_for_interest\030\014 \001(\0132\t.Interest\"\242\001\n\n" +
-      "ActionType\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n" +
-      "\005X_OUT\020\002\022\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005SHARE\020\004" +
-      "\022\020\n\014READ_ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOT" +
-      "E_UP\020\007\022\017\n\013SCROLL_PAST\020\010\022\017\n\013EMAIL_CLICK\020\t" +
-      ":\024\212\265\030\020MySQL.UserActionB!\n\024com.janknspank" +
-      ".protoB\tUserProto"
+      ".ExperimentB\004\240\246\035\003\022;\n\026authentication_serv" +
+      "ice\030\033 \001(\0162\033.User.AuthenticationService\"*" +
+      "\n\nExperiment\022\013\n\007UNKNOWN\020\000\022\017\n\013EXPRESSIONS" +
+      "\020\001\"Q\n\025AuthenticationService\022\014\n\010UNKNONWN\020" +
+      "\000\022\014\n\010FACEBOOK\020\001\022\r\n\tLINKED_IN\020\002\022\r\n\tANONYM" +
+      "OUS\020\003:\020\212\265\030\014MongoDB.User\",\n\022AddressBookCo" +
+      "ntact\022\026\n\004name\030\002 \001(\tB\010\210\246\035\001\230\246\035d\"J\n\013UrlFavo",
+      "rite\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\031" +
+      "\n\013create_time\030\002 \001(\003B\004\210\246\035\001\"\255\002\n\017LinkedInPr" +
+      "ofile\0223\n\020current_employer\030\001 \001(\0132\031.Linked" +
+      "InProfile.Employer\0220\n\rpast_employer\030\002 \003(" +
+      "\0132\031.LinkedInProfile.Employer\022\030\n\004data\030\003 \001" +
+      "(\tB\n\210\246\035\001\230\246\035\200\240\006\022\035\n\013create_time\030\004 \001(\003B\010\210\246\035" +
+      "\001\240\246\035\003\032z\n\010Employer\022\026\n\004name\030\001 \001(\tB\010\210\246\035\001\230\246\035" +
+      "d\022\027\n\005title\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\027\n\tentity_id\030" +
+      "\003 \001(\tB\004\230\246\035\030\022\022\n\nstart_time\030\004 \001(\003\022\020\n\010end_t" +
+      "ime\030\005 \001(\003\")\n\017LinkedInContact\022\026\n\004name\030\002 \001",
+      "(\tB\010\210\246\035\001\230\246\035d\"\225\004\n\010Interest\022 \n\002id\030\001 \001(\tB\024\210" +
+      "\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022*\n\004type\030\002 \001(\0162\026.Inte" +
+      "rest.InterestTypeB\004\210\246\035\001\022.\n\006source\030\003 \001(\0162" +
+      "\030.Interest.InterestSourceB\004\210\246\035\001\022\035\n\013creat" +
+      "e_time\030\004 \001(\003B\010\210\246\035\001\240\246\035\003\022\025\n\rindustry_code\030" +
+      "\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\022\037\n\rexpres" +
+      "sion_id\030\010 \001(\tB\010\230\246\035\030\250\246\035\001\"\220\001\n\014InterestType" +
+      "\022\014\n\010UNKNONWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006ENTITY\020\002" +
+      "\022\026\n\022LINKED_IN_CONTACTS\020\003\022\031\n\025ADDRESS_BOOK" +
+      "_CONTACTS\020\004\022\022\n\016EXPRESSION_YES\020\005\022\021\n\rEXPRE",
+      "SSION_NO\020\006\"\201\001\n\016InterestSource\022\013\n\007UNKNOWN" +
+      "\020\000\022\010\n\004USER\020\001\022\025\n\021LINKED_IN_PROFILE\020\002\022\024\n\020F" +
+      "ACEBOOK_PROFILE\020\004\022\034\n\030DEFAULT_TO_PREVENT_" +
+      "CRASH\020\005\022\r\n\tTOMBSTONE\020\003*\004\010\007\020\010\"\236\004\n\nUserAct" +
+      "ion\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007use" +
+      "r_id\030\002 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\003\0225\n\013action_t" +
+      "ype\030\003 \001(\0162\026.UserAction.ActionTypeB\010\210\246\035\001\220" +
+      "\246\035\005\022 \n\006url_id\030\004 \001(\tB\020\210\246\035\001\230\246\035\030\250\246\035\001\220\246\035\005\022\036\n" +
+      "\003url\030\005 \001(\tB\021\210\246\035\001\230\246\035\377\005\250\246\035\001\220\246\035\005\022\035\n\013create_" +
+      "time\030\006 \001(\003B\010\210\246\035\001\220\246\035\003\022\027\n\017read_start_time\030",
+      "\007 \001(\003\022\025\n\rread_end_time\030\010 \001(\003\022!\n\010interest" +
+      "\030\013 \003(\0132\t.InterestB\004\240\246\035\003\022)\n\026on_stream_for" +
+      "_interest\030\014 \001(\0132\t.Interest\"\242\001\n\nActionTyp" +
+      "e\022\013\n\007UNKNOWN\020\000\022\014\n\010FAVORITE\020\001\022\t\n\005X_OUT\020\002\022" +
+      "\023\n\017TAP_FROM_STREAM\020\003\022\t\n\005SHARE\020\004\022\020\n\014READ_" +
+      "ARTICLE\020\005\022\013\n\007VOTE_UP\020\006\022\r\n\tUNVOTE_UP\020\007\022\017\n" +
+      "\013SCROLL_PAST\020\010\022\017\n\013EMAIL_CLICK\020\t:\024\212\265\030\020MyS" +
+      "QL.UserActionB!\n\024com.janknspank.protoB\tU" +
+      "serProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12556,7 +12558,7 @@ public final class UserProto {
           internal_static_User_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_User_descriptor,
-              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", "Last5AppUseTime", "LastIpAddress", "TimezoneEstimate", "LastTimezoneEstimateUpdate", "WelcomeEmailSentTime", "OptOutEmail", "Experiment", "OriginalAuthenticationService", });
+              new java.lang.String[] { "Id", "FirstName", "LastName", "Email", "LinkedInId", "FacebookId", "FacebookAccessToken", "CreateTime", "LastLoginTime", "LinkedInAccessToken", "LinkedInProfile", "LinkedInContact", "LinkedInProfilePhotoUrl", "AddressBookContact", "UrlFavorite", "Interest", "Last5AppUseTime", "LastIpAddress", "TimezoneEstimate", "LastTimezoneEstimateUpdate", "WelcomeEmailSentTime", "OptOutEmail", "Experiment", "AuthenticationService", });
           internal_static_AddressBookContact_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_AddressBookContact_fieldAccessorTable = new

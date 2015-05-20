@@ -104,9 +104,11 @@ public class Mongoizer {
               break;
 
             case ENUM:
-              // TODO(jonemerson): Add error handling, in case no value is found.
-              messageBuilder.addRepeatedField(fieldDescriptor,
-                  fieldDescriptor.getEnumType().findValueByName(object.getString(fieldName)));
+              EnumValueDescriptor value =
+                  fieldDescriptor.getEnumType().findValueByName((String) list.get(i));
+              if (value != null) {
+                messageBuilder.addRepeatedField(fieldDescriptor, value);
+              }
               break;
 
             case BOOLEAN:

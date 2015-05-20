@@ -15,7 +15,7 @@ public class Experiments {
   }
 
   public static void main(String args[]) throws Exception {
-    Database.update(Users.getByEmail("tom.charytoniuk@gmail.com").toBuilder()
+    Database.update(Users.getByEmail("jon@jonemerson.net").toBuilder()
         .addExperiment(Experiment.EXPRESSIONS)
         .build());
   }
