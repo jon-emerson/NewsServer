@@ -323,6 +323,7 @@ public class FacebookLoginHandler {
     }
     TopList<FeatureId, Double> industryFeatureIds = getIndustryFeatureIds(fbUser);
     if (Iterables.isEmpty(industryFeatureIds)
+        && !"Emersontestfoo".equals(fbUser.getLastName())
         && !"panaceaa@gmail.com".equals(fbUser.getEmail())) {
       // This is to prevent a crash bug in v1.0.0, where if the user has no
       // initial industries, UI comes up to ask them about their industry
