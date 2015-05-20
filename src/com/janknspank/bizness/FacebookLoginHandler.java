@@ -322,7 +322,8 @@ public class FacebookLoginHandler {
       interests.add(companyInterestBuilder.build());
     }
     TopList<FeatureId, Double> industryFeatureIds = getIndustryFeatureIds(fbUser);
-    if (Iterables.isEmpty(industryFeatureIds)) {
+    if (Iterables.isEmpty(industryFeatureIds)
+        && !"panaceaa@gmail.com".equals(fbUser.getEmail())) {
       // This is to prevent a crash bug in v1.0.0, where if the user has no
       // initial industries, UI comes up to ask them about their industry
       // behind a FTUE, and if the FTUE is then dismissed, there's an exception.
@@ -338,7 +339,7 @@ public class FacebookLoginHandler {
           .setSource(InterestSource.DEFAULT_TO_PREVENT_CRASH)
           .setCreateTime(System.currentTimeMillis()).build());
     } else {
-      for (FeatureId industryFeatureId : getIndustryFeatureIds(fbUser)) {
+      for (FeatureId industryFeatureId : industryFeatureIds) {
         interests.add(Interest.newBuilder().setId(GuidFactory.generate())
             .setType(InterestType.INDUSTRY)
             .setIndustryCode(industryFeatureId.getId())
