@@ -21,6 +21,8 @@ path_blacklist {
 }
 paragraph_selector: "#storyText p"
 paragraph_selector: "#innerbody p"
+paragraph_selector: "p[itemprop=\"articleBody\"]"
+paragraph_selector: ".listItemHeader"
 article_url_pattern {
   path_regex: "\\/story$"
 }

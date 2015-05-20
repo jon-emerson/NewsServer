@@ -3,6 +3,7 @@ root_domain: "archinect.com"
 start_url: "http://archinect.com/"
 paragraph_selector: ".Intro p"
 paragraph_selector: ".Text p"
+paragraph_selector: ".Quote p"
 article_url_pattern {
   path_regex: "^\\/news\\/article\\/[0-9]+\\/[^\\/]+$"
 }

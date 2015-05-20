@@ -2,6 +2,7 @@ short_name: "Entrepreneur"
 root_domain: "entrepreneur.com"
 start_url: "http://www.entrepreneur.com/"
 paragraph_selector: ".content-block p"
+paragraph_selector: ".bodycopy p"
 article_url_pattern {
   path_regex: "^\\/article\\/[0-9]{5,8}$"
 }

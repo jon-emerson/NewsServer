@@ -5,6 +5,7 @@ path_blacklist {
   needle: "/listings1/"
 }
 paragraph_selector: ".itemFullText p"
+paragraph_selector: ".itemFullText P"
 article_url_pattern {
   path_regex: "\\/item\\/[0-9]{4,7}\\-"
 }

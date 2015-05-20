@@ -2,6 +2,8 @@ short_name: "NRN"
 root_domain: "nrn.com"
 start_url: "http://nrn.com/news"
 start_url: "http://nrn.com/segments-0"
+start_url: "http://nrn.com/blog/reporters-notebook"
+start_url: "http://nrn.com/blog/food-writers-diary"
 paragraph_selector: ".article-body > p"
 paragraph_selector: ".blog-body > p"
 paragraph_blacklist {
@@ -48,6 +50,12 @@ path_blacklist {
 }
 path_blacklist {
   needle: "/user/"
+}
+path_blacklist {
+  needle: "/blog/reporters-notebook"
+}
+path_blacklist {
+  needle: "/blog/food-writers-diary"
 }
 path_blacklist {
   needle: "/nrn-device/mobile"

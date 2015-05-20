@@ -3,6 +3,26 @@ root_domain: "accountingweb.com"
 start_url: "http://www.accountingweb.com/"
 paragraph_selector: ".field-item > p"
 paragraph_selector: ".field-item > ul > li"
+paragraph_selector: ".content p"
+paragraph_selector: ".content ul > li"
+paragraph_blacklist {
+  text_regex: "^Want to continue reading"
+}
+paragraph_blacklist {
+  text_regex: "^If you've already registered"
+}
+paragraph_blacklist {
+  text_regex: "^If you've already registered"
+}
+paragraph_blacklist {
+  text_regex: "^Create new account"
+}
+paragraph_blacklist {
+  text_regex: "^Request new password"
+}
+paragraph_blacklist {
+  text_regex: "^View the discussion thread"
+}
 article_url_pattern {
   path_regex: "^\\/article\\/[^\\/]+\\/[0-9]{5,}$"
 }

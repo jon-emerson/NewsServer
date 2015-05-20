@@ -2,6 +2,8 @@ short_name: "ABAJournal"
 root_domain: "abajournal.com"
 start_url: "http://www.abajournal.com/news"
 paragraph_selector: "#story_page_body > p"
+paragraph_selector: ".article > p"
+paragraph_selector: ".article > h4"
 paragraph_blacklist {
   text_regex: "^Posted"
 }

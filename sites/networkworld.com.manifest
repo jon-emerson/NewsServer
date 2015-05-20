@@ -3,6 +3,7 @@ root_domain: "networkworld.com"
 start_url: "http://www.networkworld.com/category/security"
 start_url: "http://www.networkworld.com/category/cloud-security/"
 paragraph_selector: "div[itemprop=\"articleBody\"] > p"
+paragraph_selector: ".body > p"
 article_url_pattern {
   path_regex: "^\\/article\\/[0-9]+(\\/[^\\/]+)+\\.html$"
 }

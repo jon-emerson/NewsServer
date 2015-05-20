@@ -2,6 +2,7 @@ short_name: "SCMagazine"
 root_domain: "scmagazine.com"
 start_url: "http://www.scmagazine.com/"
 paragraph_selector: "article > p"
+paragraph_selector: ".pageWrapper p"
 article_url_pattern {
   path_regex: "\\/article\\/[0-9]{5,}\\/$"
 }
