@@ -6,6 +6,10 @@
 {template .main}
   {call news.common.head data="all"}
     {param title kind="text"}Business news, personalized.{/param}
+    {param extraHeaders kind="html"}
+      /** For Pinterest domain verification. **/
+      <meta name="p:domain_verify" content="69b8a7d3ffc4767b0f3a25e523541bf8"/>
+    {/param}
   {/call}
   <body>
     <script src="/resources/js/home.js"></script>

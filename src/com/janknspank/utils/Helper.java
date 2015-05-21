@@ -35,8 +35,10 @@ import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.UserAction;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
+import com.janknspank.proto.UserProto.UserAction.ActionType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.InputValuesGenerator;
 import com.janknspank.rank.Personas;
@@ -268,21 +270,29 @@ public class Helper {
   }
 
   public static void main(String args[]) throws Exception {
+    TopList<User, Long> topUsers = new TopList<>(50);
     for (User user : Database.with(User.class).get(new QueryOption.AscendingSort("create_time"))) {
-      boolean configured = false;
+      if (user.getLast5AppUseTimeCount() >= 5) {
+        long readCount = Database.with(UserAction.class).getSize(
+            new QueryOption.WhereEquals("user_id", user.getId()),
+            new QueryOption.WhereEqualsEnum("action_type", ActionType.READ_ARTICLE));
+        topUsers.add(user, readCount);
+      }
+    }
+    for (User user : topUsers) {
+      System.out.println(user.getFirstName() + " " + user.getLastName()
+          + " (" + user.getEmail() + ") - " + topUsers.getValue(user) + " read articles");
+      for (FeatureId industryFeatureId : UserInterests.getUserIndustryFeatureIds(user)) {
+        System.out.println("  following " + industryFeatureId.getTitle());
+      }
+      int i = 0;
       for (Interest interest : UserInterests.getInterests(user)) {
-        if (interest.getSource() == InterestSource.USER) {
-          configured = true;
+        if (interest.getType() == InterestType.ENTITY) {
+          i++;
         }
       }
-      if (configured) {
-        Set<FeatureId> featureIdSet =
-            ImmutableSet.copyOf(UserInterests.getUserIndustryFeatureIds(user));
-        if (featureIdSet.contains(FeatureId.LEISURE_TRAVEL_AND_TOURISM)
-            && (featureIdSet.contains(FeatureId.SOFTWARE) || featureIdSet.contains(FeatureId.INTERNET))) {
-          System.out.println(user.getEmail());
-        }
-      }
+      System.out.println("  and " + i + " companies");
+      System.out.println();
     }
   }
 }

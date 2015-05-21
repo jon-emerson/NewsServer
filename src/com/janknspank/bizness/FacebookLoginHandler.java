@@ -378,22 +378,17 @@ public class FacebookLoginHandler {
   }
 
   public static void main(String args[]) throws Exception {
-    for (User user : Database.with(User.class)
-        .get(new QueryOption.WhereNotNull("facebook_access_token"),
-            new QueryOption.Limit(50),
-            new QueryOption.AscendingSort("create_time"))) {
-      System.out.println("\n" + user.getEmail() + ":");
-      try {
-        com.restfb.types.User fbUser = FacebookLoginHandler
-            .getFacebookUser(user.getFacebookAccessToken());
-        TopList<FeatureId, Double> featureIdTopList = getIndustryFeatureIds(fbUser);
-        for (FeatureId featureId : featureIdTopList) {
-          System.out.println(featureId.getId() + ": " + featureId.getTitle()
-              + " (" + featureIdTopList.getValue(featureId) + ")");
-        }
-      } catch (Exception e) {
-        e.printStackTrace();
+    User user = Users.getByUserId("555cf181e4b01d2e335e3ed6");
+    try {
+      com.restfb.types.User fbUser = FacebookLoginHandler
+          .getFacebookUser(user.getFacebookAccessToken());
+      TopList<FeatureId, Double> featureIdTopList = getIndustryFeatureIds(fbUser);
+      for (FeatureId featureId : featureIdTopList) {
+        System.out.println(featureId.getId() + ": " + featureId.getTitle()
+            + " (" + featureIdTopList.getValue(featureId) + ")");
       }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 }
