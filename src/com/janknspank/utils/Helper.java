@@ -12,7 +12,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
@@ -220,7 +219,7 @@ public class Helper {
   }
 
   public static void main(String args[]) throws Exception {
-    List<ListenableFuture<Article>> futures = Lists.newArrayList();
+    int i = 0;
     for (Article article : Database.with(Article.class).get(
         new QueryOption.DescendingSort("published_time"),
         new QueryOption.Limit(50000))) {
@@ -234,11 +233,14 @@ public class Helper {
                 engagement.getCreateTime() - Articles.getPublishedTime(article) /* ageInMillis */))
             .build());
       }
-      futures.add(Database.with(Article.class).setFuture(
-          article, "social_engagement", updatedEngagements));
-    }
-    for (ListenableFuture<Article> future : futures) {
-      future.get();
+      Database.update(article
+          .toBuilder()
+          .clearSocialEngagement()
+          .addAllSocialEngagement(updatedEngagements)
+          .build());
+      if (++i % 1000 == 0) {
+        System.out.println(i);
+      }
     }
   }
 
