@@ -305,6 +305,6 @@ public class NewsServlet extends HttpServlet {
   }
 
   public Version getClientVersion(HttpServletRequest request) {
-    return hasParameter(request, "v") ? new Version(getParameter(request, "v")) : null;
+    return hasParameter(request, "v") ? new Version(getParameter(request, "v")) : new Version("0");
   }
 }

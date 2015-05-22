@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.Users;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
@@ -77,6 +78,27 @@ public class UnsubscribeServlet extends StandardServlet {
               .toString());
     } catch (URISyntaxException e) {
       throw new BiznessException("Error forming URI", e);
+    }
+  }
+
+  public static void main(String args[]) throws DatabaseRequestException, DatabaseSchemaException {
+    if (args.length == 0) {
+      System.out.println("Specify email address please!");
+      return;
+    }
+    User user = Users.getByEmail(args[0]);
+    if (user == null) {
+      System.out.println("User not found: \"" + args[0] + "\"");
+      return;
+    }
+    if (user.getOptOutEmail()) {
+      System.out.println("User has already opted out.");
+      return;
+    }
+    if (Database.update(user.toBuilder().setOptOutEmail(true).build())) {
+      System.out.println("Success");
+    } else {
+      System.out.println("Failure");
     }
   }
 }

@@ -38,10 +38,20 @@ public class UserTimezone {
             || (System.currentTimeMillis() - user.getLastTimezoneEstimateUpdate()
                 > TimeUnit.DAYS.toMillis(7)))) {
       try {
+        String ipAddress = user.getLastIpAddress();
+
+        // Clean IP address, since apparently some clients put some extra stuff
+        // at the ends of them, and if we don't do this, we end up with these
+        // errors:
+        // java.lang.IllegalArgumentException: Illegal character in query at
+        // index 122: http://api.ipinfodb.com/v3/ip-city/?key=bfd6cdfcebd81c7b53
+        // ddd6f14adcc2444f79cad942ee09b4f78fd4499b8aff02&ip=220.255.70.192
+        ipAddress = ipAddress.replaceAll("[^0-9\\.]", "");
+
         String response = new Fetcher().getResponseBody(
             "http://api.ipinfodb.com/v3/ip-city/?"
             + "key=bfd6cdfcebd81c7b53ddd6f14adcc2444f79cad942ee09b4f78fd4499b8aff02&"
-            + "ip=" + user.getLastIpAddress());
+            + "ip=" + ipAddress);
         if (response.startsWith("OK;")) {
           String[] components = response.split(";");
           String timezone = components[components.length - 1];

@@ -222,7 +222,7 @@ public class Helper {
     int i = 0;
     for (Article article : Database.with(Article.class).get(
         new QueryOption.DescendingSort("published_time"),
-        new QueryOption.Limit(50000))) {
+        new QueryOption.Limit(15000))) {
       List<SocialEngagement> updatedEngagements = Lists.newArrayList();
       for (SocialEngagement engagement : article.getSocialEngagementList()) {
         Site site = engagement.getSite();
