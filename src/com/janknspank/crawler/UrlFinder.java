@@ -52,7 +52,7 @@ public class UrlFinder {
       return findReadWriteUrls();
     }
 
-    FetchResponse response = FETCHER.fetch(url);
+    FetchResponse response = FETCHER.get(url);
     return findUrls(response.getDocumentNode());
   }
 

@@ -73,7 +73,7 @@ class UrlCrawler {
     FetchResponse fetchResponse;
     List<String> urls = Lists.newArrayList();
     try {
-      fetchResponse = fetcher.fetch(rssUrl);
+      fetchResponse = fetcher.get(rssUrl);
       if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
         DocumentNode documentNode = fetchResponse.getDocumentNode();
         for (Node itemNode : Iterables.concat(

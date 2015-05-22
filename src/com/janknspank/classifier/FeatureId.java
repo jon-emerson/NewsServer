@@ -126,6 +126,15 @@ public enum FeatureId {
     return null;
   }
 
+  public static FeatureId fromTitle(String title) {
+    for (FeatureId featureId : FeatureId.values()) {
+      if (title.equals(featureId.getTitle())) {
+        return featureId;
+      }
+    }
+    return null;
+  }
+
   public static Iterable<FeatureId> getByType(FeatureType type) {
     List<FeatureId> features = new ArrayList<>();
     for (FeatureId featureId : FeatureId.values()) {

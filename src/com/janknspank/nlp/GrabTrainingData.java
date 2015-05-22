@@ -50,7 +50,7 @@ public class GrabTrainingData {
   }
 
   private DocumentNode getDocumentNode(String url) throws FetchException {
-    FetchResponse fetchResponse = FETCHER.fetch(url);
+    FetchResponse fetchResponse = FETCHER.get(url);
     if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
       return fetchResponse.getDocumentNode();
     } else {

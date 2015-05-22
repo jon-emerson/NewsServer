@@ -249,6 +249,10 @@
               <name>ArticleCrawler</name>
             </program>
             <program>
+              <mainClass>com.janknspank.pinterest.PinterestPinner</mainClass>
+              <name>PinterestPinner</name>
+            </program>
+            <program>
               <mainClass>com.janknspank.utils.PruneMongoDatabase</mainClass>
               <name>PruneMongoDatabase</name>
             </program>

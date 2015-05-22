@@ -1,15 +1,21 @@
 package com.janknspank.bizness;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.CoreProto.Entity;
 
 public class EntityCache {
-  private static final HashMap<String, Entity> ENTITY_CACHE_MAP = Maps.newHashMap();
+  private static final LinkedHashMap<String, Entity> ENTITY_CACHE_MAP =
+      new LinkedHashMap<String, Entity>() {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, Entity> eldest) {
+          return size() > 5000;
+        }
+      };
   private static final Object SYNCHRONIZE_HELPER = new Object();
 
   private static Entity getEntityById(String id) throws DatabaseSchemaException {
