@@ -36,9 +36,4 @@ public class SocialEngagements {
     }
     return latest;
   }
-
-  /** Helper method for creating the SocialEngagement table. */
-  public static void main(String args[]) throws Exception {
-    Database.with(SocialEngagement.class).createTable();
-  }
 }

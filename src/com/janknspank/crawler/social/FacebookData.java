@@ -67,7 +67,7 @@ public class FacebookData {
         int shareCount = shareObject.getInt("share_count");
         int commentCount = shareObject.getInt("comment_count");
 
-        // Get likes
+        // Get likes.
         String objectId = urlObject.getJsonObject("og_object").getString("id");
         JsonObject likesObject = getCrawlerClient().fetchObject(objectId, JsonObject.class,
             Parameter.with("fields", "likes.summary(true)"));

@@ -106,9 +106,9 @@ public class UpdateSocialEngagements {
     ExecutorService executor = Executors.newFixedThreadPool(20);
     List<Updater> callables = Lists.newArrayList();
     for (Article article : articles) {
-      if (needsUpdate(article)) {
+  //    if (needsUpdate(article)) {
         callables.add(new Updater(article));
-      }
+  //    }
     }
     try {
       executor.invokeAll(callables);

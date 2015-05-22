@@ -35,11 +35,11 @@ import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.Interest;
-import com.janknspank.proto.UserProto.UserAction;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
-import com.janknspank.proto.UserProto.UserAction.ActionType;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.UserAction;
+import com.janknspank.proto.UserProto.UserAction.ActionType;
 import com.janknspank.rank.InputValuesGenerator;
 import com.janknspank.rank.Personas;
 
@@ -219,9 +219,11 @@ public class Helper {
     }
   }
 
-  public static void main6(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     List<ListenableFuture<Article>> futures = Lists.newArrayList();
-    for (Article article : Database.with(Article.class).get()) {
+    for (Article article : Database.with(Article.class).get(
+        new QueryOption.DescendingSort("published_time"),
+        new QueryOption.Limit(50000))) {
       List<SocialEngagement> updatedEngagements = Lists.newArrayList();
       for (SocialEngagement engagement : article.getSocialEngagementList()) {
         Site site = engagement.getSite();
@@ -269,7 +271,7 @@ public class Helper {
     }
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main11(String args[]) throws Exception {
     TopList<User, Long> topUsers = new TopList<>(50);
     for (User user : Database.with(User.class).get(new QueryOption.AscendingSort("create_time"))) {
       if (user.getLast5AppUseTimeCount() >= 5) {

@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -113,7 +114,7 @@ public class ShareNormalizer {
         shareCount);
   }
 
-    /**
+  /**
    * Normalizes the share count in the passed {@code engagement} so that it
    * matches the general intensity of shares from all sites in our corpus.
    * (Basically, domains that are over-shared are brought into line, domains
@@ -138,7 +139,9 @@ public class ShareNormalizer {
     if (count == null) {
       return shareCount;
     } else {
-      double domainShareCount = ((double) count.numShares) / count.numArticles;
+      // Lower floor at 30 shares/article so that articles from sites with few
+      // shares don't look like absolute monsters when they get a little action.
+      double domainShareCount = Math.max(30.0, ((double) count.numShares) / count.numArticles);
       double averageShareCount = ((double) totalShareCount) / totalArticleCount;
       return (long) (shareCount * averageShareCount / domainShareCount);
     }
@@ -325,8 +328,14 @@ public class ShareNormalizer {
       return;
     }
 
-    System.out.println("Reading all articles...");
-    Iterable<Article> articles = Database.with(Article.class).get();
+    System.out.println("Reading 60k articles...");
+    Future<Iterable<Article>> newArticles = Database.with(Article.class).getFuture(
+        new QueryOption.Limit(45000),
+        new QueryOption.DescendingSort("published_time"));
+    Future<Iterable<Article>> oldArticles = Database.with(Article.class).getFuture(
+        new QueryOption.Limit(15000),
+        new QueryOption.AscendingSort("published_time"));
+    Iterable<Article> articles = Iterables.concat(oldArticles.get(), newArticles.get());
     System.out.println(Iterables.size(articles) + " articles received.");
     System.out.println("Calculating Facebook share normalization table...");
     createShareNormalizationFile(articles, Site.FACEBOOK);
