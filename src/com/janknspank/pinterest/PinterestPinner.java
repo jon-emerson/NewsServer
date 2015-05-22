@@ -319,7 +319,7 @@ public class PinterestPinner {
     return boards;
   }
 
-  public static void main2(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     PinterestPinner pinner = new PinterestPinner();
     pinner.setUsername("spotternews");
     pinner.setPassword("HotSpot1");
