@@ -43,6 +43,16 @@ public class GetArticlesServlet extends StandardServlet {
   // a better way to do asynchronous calls to Mongo DB - Hopefully via Futures.
   private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(10);
 
+  /**
+   * Use this if your form parameter get relatively large, e.g. with
+   * exclude_url_ids.
+   */
+  @Override
+  protected JSONObject doPostInternal(HttpServletRequest req, HttpServletResponse resp)
+      throws DatabaseSchemaException, DatabaseRequestException, RequestException, BiznessException {
+    return doGetInternal(req, resp);
+  }
+
   @Override
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, DatabaseRequestException, RequestException, BiznessException {

@@ -16,7 +16,6 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.classifier.FeatureClassifier;
@@ -252,12 +251,16 @@ class ArticleCreator {
   private static String getFirstSignificantParagraphText(DocumentNode documentNode)
       throws RequiredFieldException {
     Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
+    String bestBaragraph = "";
     for (String paragraph : paragraphs) {
       if (paragraph.length() >= 50) {
-        return paragraph;
+        bestBaragraph = paragraph;
+        break;
       }
     }
-    return Iterables.getFirst(paragraphs, "");
+    return bestBaragraph.length() > MAX_DESCRIPTION_LENGTH
+        ? bestBaragraph.substring(0, MAX_DESCRIPTION_LENGTH - 3) + "..."
+        : bestBaragraph;
   }
 
   public static String getDescription(DocumentNode documentNode, SiteManifest site)
