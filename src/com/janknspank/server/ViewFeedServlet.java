@@ -2,6 +2,7 @@ package com.janknspank.server;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
@@ -40,8 +41,8 @@ public class ViewFeedServlet extends StandardServlet {
               .setIndustryCode(Integer.parseInt(industryCodeId))
               .build())
           .build();
-      articles = Articles.getStream(
-          user, new AncillaryStreamStrategy(), new DiversificationPass.IndustryStreamPass());
+      articles = Articles.getStream(user, new AncillaryStreamStrategy(),
+          new DiversificationPass.IndustryStreamPass(), ImmutableSet.<String>of());
     } else {
       articles = Articles.getMainStream(user);
     }

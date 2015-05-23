@@ -3,6 +3,7 @@ package com.janknspank.utils;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import com.google.api.client.util.Lists;
@@ -220,28 +221,40 @@ public class Helper {
 
   public static void main(String args[]) throws Exception {
     int i = 0;
-    for (Article article : Database.with(Article.class).get(
-        new QueryOption.DescendingSort("published_time"),
-        new QueryOption.Limit(15000))) {
+    System.out.println("Reading 75k articles...");
+    Future<Iterable<Article>> newArticles = Database.with(Article.class).getFuture(
+        new QueryOption.Limit(50000),
+        new QueryOption.DescendingSort("published_time"));
+    Future<Iterable<Article>> oldArticles = Database.with(Article.class).getFuture(
+        new QueryOption.Limit(25000),
+        new QueryOption.AscendingSort("published_time"));
+    Iterable<Article> articles = Iterables.concat(oldArticles.get(), newArticles.get());
+
+    System.out.println("Let's go...");
+    List<Future<Article>> articleFutures = Lists.newArrayList();
+    for (Article article : articles) {
       List<SocialEngagement> updatedEngagements = Lists.newArrayList();
       for (SocialEngagement engagement : article.getSocialEngagementList()) {
-        Site site = engagement.getSite();
+        double shareScore = ShareNormalizer.getInstance(engagement.getSite()).getShareScore(
+            article.getUrl(),
+            engagement.getShareCount(),
+            engagement.getCreateTime() - Articles.getPublishedTime(article) /* ageInMillis */);
         updatedEngagements.add(engagement.toBuilder()
-            .setShareScore(ShareNormalizer.getInstance(site).getShareScore(
-                article.getUrl(),
-                engagement.getShareCount(),
-                engagement.getCreateTime() - Articles.getPublishedTime(article) /* ageInMillis */))
+            .setShareScore(shareScore)
             .build());
       }
-      Database.update(article
-          .toBuilder()
-          .clearSocialEngagement()
-          .addAllSocialEngagement(updatedEngagements)
-          .build());
+      if (!updatedEngagements.isEmpty()) {
+        articleFutures.add(
+            Database.with(Article.class).setFuture(article, "social_engagement", updatedEngagements));
+      }
+    }
+    for (Future<Article> articleFuture : articleFutures) {
+      articleFuture.get();
       if (++i % 1000 == 0) {
         System.out.println(i);
       }
     }
+    System.exit(0);
   }
 
   public static void main10(String args[]) throws Exception {

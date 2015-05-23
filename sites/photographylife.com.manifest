@@ -1,0 +1,61 @@
+short_name: "Photography Life"
+root_domain: "photographylife.com"
+is_https: true
+start_url: "https://photographylife.com/"
+use_first_paragraph_as_description: true
+paragraph_selector: ".entry-content > p"
+article_url_pattern {
+  path_regex: "^\\/(?!photography-tips-for-beginners)[^\\/]+-[^\\/]+-[^\\/]+"
+}
+article_url_pattern {
+  path_regex: "^\\/reviews\\/[^\\/]+"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://photographylife.com/what-is-reciprocal-rule-in-photography"
+    article_url: "https://photographylife.com/what-is-a-dslr"
+    article_url: "https://photographylife.com/tips-on-photographing-hand-held-with-telephoto-lenses"
+    article_url: "https://photographylife.com/how-to-blend-multiple-exposures-of-cityscapes"
+    article_url: "https://photographylife.com/reviews/sony-a7r"
+    article_url: "https://photographylife.com/death-valley-in-infrared"
+    article_url: "https://photographylife.com/till-june-in-jordan"
+    article_url: "https://photographylife.com/balance-in-photography"
+    article_url: "https://photographylife.com/using-dxo-smart-lighting"
+    article_url: "https://photographylife.com/reviews/nikon-d7200"
+    non_article_url: "https://photographylife.com/photography-tips-for-beginners"
+    non_article_url: "https://photographylife.com/category/color-management-and-printing"
+    non_article_url: "https://photographylife.com/author/roman"
+    non_article_url: "https://photographylife.com/lenses"
+    non_article_url: "https://photographylife.com/lenses/brand/bower"
+    non_article_url: "https://photographylife.com/lenses/bower-24mm-f1-4"
+    non_article_url: "https://photographylife.com/lenses/focus/manual-focus"
+    non_article_url: "https://photographylife.com/gear-guide"
+    non_article_url: "https://photographylife.com/about-us"
+    non_article_url: "https://photographylife.com/current-deals"
+    non_article_url: "https://photographylife.com/subscribe"
+    non_article_url: "https://photographylife.com/shop"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10513 # Video production.
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer electronics.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10503 # Hardware and Electronics.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts.
+  boost: -1
+}

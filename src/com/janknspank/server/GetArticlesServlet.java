@@ -1,5 +1,6 @@
 package com.janknspank.server;
 
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -11,14 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.google.api.client.util.Strings;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.ExploreTopics;
 import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
 import com.janknspank.bizness.Users;
 import com.janknspank.database.Database;
@@ -47,9 +51,21 @@ public class GetArticlesServlet extends StandardServlet {
     String contactsParameter = getParameter(req, "contacts");
     boolean includeLinkedInContacts = "linked_in".equals(contactsParameter);
     boolean includeAddressBookContacts = "address_book".equals(contactsParameter);
+    Iterable<Article> articles = getArticles(req);
+    User user = getUser(req);
     response.put("articles", ArticleSerializer.serialize(
-        getArticles(req), getUser(req), includeLinkedInContacts, includeAddressBookContacts));
+        articles, user, includeLinkedInContacts, includeAddressBookContacts));
+    response.put("explore_topics", ExploreTopics.get(articles, user));
     return response;
+  }
+
+  private Set<String> getExcludeUrlIdSet(HttpServletRequest req) {
+    String excludeUrlIdsParameter = this.getParameter(req, "exclude_url_ids");
+    if (!Strings.isNullOrEmpty(excludeUrlIdsParameter)) {
+      return ImmutableSet.copyOf(Splitter.on(",").split(excludeUrlIdsParameter));
+    } else {
+      return ImmutableSet.<String>of();
+    }
   }
 
   private Iterable<Article> getArticles(HttpServletRequest req)
@@ -59,6 +75,7 @@ public class GetArticlesServlet extends StandardServlet {
     String entityId = this.getParameter(req, "entity_id");
     String entityKeyword = this.getParameter(req, "entity_keyword");
     String entityType = this.getParameter(req, "entity_type");
+    Set<String> excludeUrlIdSet = getExcludeUrlIdSet(req);
 
     // This is sent on requests that were initiated from a user's engagement
     // with an iOS push notification.  They contain an encoded notification ID
@@ -94,7 +111,8 @@ public class GetArticlesServlet extends StandardServlet {
                     .build())
                 .build(),
             new AncillaryStreamStrategy(),
-            new DiversificationPass.IndustryStreamPass());
+            new DiversificationPass.IndustryStreamPass(),
+            excludeUrlIdSet);
       } else if (entityId != null) {
         return Articles.getStream(
             user.toBuilder()
@@ -108,13 +126,16 @@ public class GetArticlesServlet extends StandardServlet {
                     .build())
                 .build(),
             new AncillaryStreamStrategy(),
-            new DiversificationPass.NoOpPass());
+            new DiversificationPass.NoOpPass(),
+            excludeUrlIdSet);
       } else if ("linked_in".equals(contacts)) {
-        return Articles.getArticlesForLinkedInContacts(user, Articles.NUM_RESULTS);
+        return Articles.getArticlesForLinkedInContacts(
+            user, Articles.NUM_RESULTS, excludeUrlIdSet);
       } else if ("address_book".equals(contacts)) {
-        return Articles.getArticlesForAddressBookContacts(user, Articles.NUM_RESULTS);
+        return Articles.getArticlesForAddressBookContacts(
+            user, Articles.NUM_RESULTS, excludeUrlIdSet);
       } else {
-        return Articles.getMainStream(user);
+        return Articles.getMainStream(user, excludeUrlIdSet);
       }
     } finally {
       try {

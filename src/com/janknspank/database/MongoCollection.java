@@ -187,15 +187,15 @@ public class MongoCollection<T extends Message> extends Collection<T> {
             QueryOption.getList(options, WhereEqualsEnum.class),
             QueryOption.getList(options, WhereEqualsNumber.class))) {
       int size = whereEquals.getFieldCount();
-      if (size == 0 &&
-          (whereEquals instanceof WhereEquals || whereEquals instanceof WhereEqualsNumber)) {
-        throw new IllegalStateException("Where clause contains no values - "
-            + "This should have been caught earlier.");
-      }
-      if (size == 0 &&
-          (whereEquals instanceof WhereNotEquals || whereEquals instanceof WhereNotEqualsNumber)) {
+      if (size == 0
+          && (whereEquals instanceof WhereNotEquals || whereEquals instanceof WhereNotEqualsNumber)) {
         // OK, don't write anything - Everything doesn't equal nothing.
         continue;
+      }
+      if (size == 0
+          && (whereEquals instanceof WhereEquals || whereEquals instanceof WhereEqualsNumber)) {
+        throw new IllegalStateException("Where clause contains no values - "
+            + "This should have been caught earlier.");
       }
       String fieldName = getFieldName(whereEquals);
       if (size == 1) {

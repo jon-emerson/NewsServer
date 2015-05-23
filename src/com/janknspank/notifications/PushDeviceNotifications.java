@@ -204,7 +204,8 @@ public class PushDeviceNotifications {
         NeuralNetworkScorer.getInstance(),
         new MainStreamStrategy(),
         new DiversificationPass.MainStreamPass(),
-        25 /* results */);
+        25 /* results */,
+        ImmutableSet.<String>of());
 
     // Don't consider articles older than the last time the user used the app or
     // the last time we sent him/her a notification.

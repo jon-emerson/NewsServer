@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import com.google.api.client.util.Maps;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -75,12 +76,14 @@ public class Articles {
    * Gets articles that contain a set of keywords.
    */
   private static ListenableFuture<Iterable<Article>> getArticlesForKeywordsFuture(
-      Iterable<String> keywords, final Article.Reason reason, int limit)
+      Iterable<String> keywords, final Article.Reason reason, int limit,
+      Set<String> excludeUrlIds)
       throws DatabaseSchemaException {
     return Futures.transform(
         Database.with(Article.class).getFuture(
             new QueryOption.DescendingSort("published_time"),
             new QueryOption.WhereEquals("keyword.keyword", keywords),
+            new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
             new QueryOption.Limit(limit)),
         getFunctionToGiveArticlesReason(reason));
   }
@@ -89,12 +92,14 @@ public class Articles {
    * Gets articles that contain a set of entity IDs.
    */
   private static ListenableFuture<Iterable<Article>> getArticlesForEntityIdsFuture(
-      Iterable<String> entityIds, final Article.Reason reason, int limit)
+      Iterable<String> entityIds, final Article.Reason reason, int limit,
+      Set<String> excludeUrlIds)
       throws DatabaseSchemaException {
     return Futures.transform(
         Database.with(Article.class).getFuture(
             new QueryOption.DescendingSort("published_time"),
             new QueryOption.WhereEquals("keyword.entity.id", entityIds),
+            new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
             new QueryOption.Limit(limit)),
         getFunctionToGiveArticlesReason(reason));
   }
@@ -105,23 +110,31 @@ public class Articles {
    */
   public static Iterable<Article> getMainStream(User user)
       throws DatabaseSchemaException, BiznessException {
+    return getMainStream(user, ImmutableSet.<String>of());
+  }
+
+  public static Iterable<Article> getMainStream(User user, Set<String> excludeUrlIds)
+      throws DatabaseSchemaException, BiznessException {
     return Articles.getRankedArticles(
         user,
         NeuralNetworkScorer.getInstance(),
         new MainStreamStrategy(),
         new DiversificationPass.MainStreamPass(),
-        NUM_RESULTS);
+        NUM_RESULTS,
+        excludeUrlIds);
   }
 
   public static Iterable<Article> getStream(
-      User user, TimeRankingStrategy strategy, DiversificationPass diversificationPass)
+      User user, TimeRankingStrategy strategy, DiversificationPass diversificationPass,
+      Set<String> excludeUrlIds)
       throws DatabaseSchemaException, BiznessException {
     return Articles.getRankedArticles(
         user,
         NeuralNetworkScorer.getInstance(),
         strategy,
         diversificationPass,
-        NUM_RESULTS);
+        NUM_RESULTS,
+        excludeUrlIds);
   }
 
   /**
@@ -133,11 +146,11 @@ public class Articles {
    */
   public static Iterable<Article> getRankedArticles(
       User user, Scorer scorer, TimeRankingStrategy strategy,
-      DiversificationPass diversificationPass, int limit)
+      DiversificationPass diversificationPass, int limit, Set<String> excludeUrlIds)
       throws DatabaseSchemaException, BiznessException {
     return getRankedArticles(
         user, scorer, strategy, diversificationPass, limit,
-        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10));
+        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10, excludeUrlIds));
   }
 
   /**
@@ -229,7 +242,8 @@ public class Articles {
    * interests.
    */
   public static Iterable<Article> getArticlesForInterests(
-      User user, Iterable<Interest> interests, int limitPerType)
+      User user, Iterable<Interest> interests, int limitPerType,
+      Set<String> excludeUrlIds)
       throws DatabaseSchemaException, BiznessException {
     Set<String> tombstones = UserInterests.getTombstones(user);
 
@@ -268,10 +282,13 @@ public class Articles {
     }
 
     List<ListenableFuture<Iterable<Article>>> articlesFutures = ImmutableList.of(
-        getArticlesForEntityIdsFuture(entityIds, Article.Reason.COMPANY, limitPerType),
-        getArticlesForKeywordsFuture(personNames, Article.Reason.PERSON, limitPerType / 4),
-        getArticlesForKeywordsFuture(companyNames, Article.Reason.COMPANY, limitPerType),
-        getArticlesByFeatureIdFuture(featureIds, limitPerType));
+        getArticlesForEntityIdsFuture(
+            entityIds, Article.Reason.COMPANY, limitPerType, excludeUrlIds),
+        getArticlesForKeywordsFuture(
+            personNames, Article.Reason.PERSON, limitPerType / 4, excludeUrlIds),
+        getArticlesForKeywordsFuture(
+            companyNames, Article.Reason.COMPANY, limitPerType, excludeUrlIds),
+        getArticlesByFeatureIdFuture(featureIds, limitPerType, excludeUrlIds));
     Map<String, Article> dedupingArticleMap = Maps.newHashMap();
     for (ListenableFuture<Iterable<Article>> articlesFuture : articlesFutures) {
       try {
@@ -292,7 +309,8 @@ public class Articles {
    * industries.
    */
   public static ListenableFuture<Iterable<Article>> getArticlesByFeatureIdFuture(
-      Iterable<FeatureId> featureIds, int limit) throws DatabaseSchemaException {
+      Iterable<FeatureId> featureIds, int limit, Set<String> excludeUrlIds)
+      throws DatabaseSchemaException {
     if (Iterables.isEmpty(featureIds)) {
       Iterable<Article> emptyIterable = Collections.<Article>emptyList();
       return Futures.immediateFuture(emptyIterable);
@@ -307,24 +325,28 @@ public class Articles {
               }
             })),
             new QueryOption.DescendingSort("published_time"),
+            new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
             new QueryOption.Limit(limit)),
         getFunctionToGiveArticlesReason(Reason.INDUSTRY));
   }
 
   public static Iterable<Article> getArticlesForLinkedInContacts(
-      User user, int limit) throws DatabaseSchemaException, BiznessException {
+      User user, int limit, Set<String> excludeUrlIds)
+      throws DatabaseSchemaException, BiznessException {
     return getArticlesForContacts(user,
-        getLinkedInContactNames(user, UserInterests.getTombstones(user)), limit);
+        getLinkedInContactNames(user, UserInterests.getTombstones(user)), limit, excludeUrlIds);
   }
 
   public static Iterable<Article> getArticlesForAddressBookContacts(
-      User user, int limit) throws DatabaseSchemaException, BiznessException {
+      User user, int limit, Set<String> excludeUrlIds)
+      throws DatabaseSchemaException, BiznessException {
     return getArticlesForContacts(user,
-        getAddressBookContactNames(user, UserInterests.getTombstones(user)), limit);
+        getAddressBookContactNames(user, UserInterests.getTombstones(user)), limit, excludeUrlIds);
   }
 
   private static Iterable<Article> getArticlesForContacts(
-      User user, List<String> contactNames, int limit) throws DatabaseSchemaException, BiznessException {
+      User user, List<String> contactNames, int limit, Set<String> excludeUrlIds)
+      throws DatabaseSchemaException, BiznessException {
     List<Number> featureIdIds = Lists.newArrayList();
     featureIdIds.addAll(UserInterests.getUserIndustryFeatureIdIds(user));
     return getRankedArticles(user,
@@ -336,6 +358,7 @@ public class Articles {
             new QueryOption.WhereEquals("keyword.keyword", contactNames),
             new QueryOption.WhereEqualsNumber("feature.feature_id", featureIdIds),
             new QueryOption.DescendingSort("published_time"),
+            new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
             new QueryOption.Limit(limit * 3)));
   }
 

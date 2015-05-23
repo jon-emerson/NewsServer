@@ -18595,6 +18595,714 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:Location)
   }
 
+  public interface ExploreTopicOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string keyword = 1;
+    /**
+     * <code>optional string keyword = 1;</code>
+     */
+    boolean hasKeyword();
+    /**
+     * <code>optional string keyword = 1;</code>
+     */
+    java.lang.String getKeyword();
+    /**
+     * <code>optional string keyword = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeywordBytes();
+
+    // optional string entity_id = 2;
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    boolean hasEntityId();
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    java.lang.String getEntityId();
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getEntityIdBytes();
+
+    // optional int32 industry_code = 3;
+    /**
+     * <code>optional int32 industry_code = 3;</code>
+     */
+    boolean hasIndustryCode();
+    /**
+     * <code>optional int32 industry_code = 3;</code>
+     */
+    int getIndustryCode();
+  }
+  /**
+   * Protobuf type {@code ExploreTopic}
+   */
+  public static final class ExploreTopic extends
+      com.google.protobuf.GeneratedMessage
+      implements ExploreTopicOrBuilder {
+    // Use ExploreTopic.newBuilder() to construct.
+    private ExploreTopic(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ExploreTopic(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ExploreTopic defaultInstance;
+    public static ExploreTopic getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ExploreTopic getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ExploreTopic(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              keyword_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              entityId_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              industryCode_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_ExploreTopic_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_ExploreTopic_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.ExploreTopic.class, com.janknspank.proto.CoreProto.ExploreTopic.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ExploreTopic> PARSER =
+        new com.google.protobuf.AbstractParser<ExploreTopic>() {
+      public ExploreTopic parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ExploreTopic(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ExploreTopic> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string keyword = 1;
+    public static final int KEYWORD_FIELD_NUMBER = 1;
+    private java.lang.Object keyword_;
+    /**
+     * <code>optional string keyword = 1;</code>
+     */
+    public boolean hasKeyword() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string keyword = 1;</code>
+     */
+    public java.lang.String getKeyword() {
+      java.lang.Object ref = keyword_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          keyword_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string keyword = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeywordBytes() {
+      java.lang.Object ref = keyword_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        keyword_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string entity_id = 2;
+    public static final int ENTITY_ID_FIELD_NUMBER = 2;
+    private java.lang.Object entityId_;
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    public boolean hasEntityId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    public java.lang.String getEntityId() {
+      java.lang.Object ref = entityId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          entityId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEntityIdBytes() {
+      java.lang.Object ref = entityId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        entityId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 industry_code = 3;
+    public static final int INDUSTRY_CODE_FIELD_NUMBER = 3;
+    private int industryCode_;
+    /**
+     * <code>optional int32 industry_code = 3;</code>
+     */
+    public boolean hasIndustryCode() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 industry_code = 3;</code>
+     */
+    public int getIndustryCode() {
+      return industryCode_;
+    }
+
+    private void initFields() {
+      keyword_ = "";
+      entityId_ = "";
+      industryCode_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getKeywordBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getEntityIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, industryCode_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getKeywordBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getEntityIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, industryCode_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ExploreTopic parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.ExploreTopic prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ExploreTopic}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.ExploreTopicOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_ExploreTopic_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_ExploreTopic_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.ExploreTopic.class, com.janknspank.proto.CoreProto.ExploreTopic.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.ExploreTopic.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        keyword_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        entityId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        industryCode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_ExploreTopic_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.ExploreTopic getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.ExploreTopic.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.ExploreTopic build() {
+        com.janknspank.proto.CoreProto.ExploreTopic result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.ExploreTopic buildPartial() {
+        com.janknspank.proto.CoreProto.ExploreTopic result = new com.janknspank.proto.CoreProto.ExploreTopic(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.keyword_ = keyword_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.entityId_ = entityId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.industryCode_ = industryCode_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.ExploreTopic) {
+          return mergeFrom((com.janknspank.proto.CoreProto.ExploreTopic)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.ExploreTopic other) {
+        if (other == com.janknspank.proto.CoreProto.ExploreTopic.getDefaultInstance()) return this;
+        if (other.hasKeyword()) {
+          bitField0_ |= 0x00000001;
+          keyword_ = other.keyword_;
+          onChanged();
+        }
+        if (other.hasEntityId()) {
+          bitField0_ |= 0x00000002;
+          entityId_ = other.entityId_;
+          onChanged();
+        }
+        if (other.hasIndustryCode()) {
+          setIndustryCode(other.getIndustryCode());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.ExploreTopic parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.ExploreTopic) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string keyword = 1;
+      private java.lang.Object keyword_ = "";
+      /**
+       * <code>optional string keyword = 1;</code>
+       */
+      public boolean hasKeyword() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string keyword = 1;</code>
+       */
+      public java.lang.String getKeyword() {
+        java.lang.Object ref = keyword_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          keyword_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string keyword = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeywordBytes() {
+        java.lang.Object ref = keyword_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          keyword_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string keyword = 1;</code>
+       */
+      public Builder setKeyword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        keyword_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string keyword = 1;</code>
+       */
+      public Builder clearKeyword() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        keyword_ = getDefaultInstance().getKeyword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string keyword = 1;</code>
+       */
+      public Builder setKeywordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        keyword_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string entity_id = 2;
+      private java.lang.Object entityId_ = "";
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public boolean hasEntityId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public java.lang.String getEntityId() {
+        java.lang.Object ref = entityId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          entityId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEntityIdBytes() {
+        java.lang.Object ref = entityId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          entityId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public Builder setEntityId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        entityId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public Builder clearEntityId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        entityId_ = getDefaultInstance().getEntityId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public Builder setEntityIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        entityId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 industry_code = 3;
+      private int industryCode_ ;
+      /**
+       * <code>optional int32 industry_code = 3;</code>
+       */
+      public boolean hasIndustryCode() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 industry_code = 3;</code>
+       */
+      public int getIndustryCode() {
+        return industryCode_;
+      }
+      /**
+       * <code>optional int32 industry_code = 3;</code>
+       */
+      public Builder setIndustryCode(int value) {
+        bitField0_ |= 0x00000004;
+        industryCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 industry_code = 3;</code>
+       */
+      public Builder clearIndustryCode() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        industryCode_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ExploreTopic)
+    }
+
+    static {
+      defaultInstance = new ExploreTopic(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ExploreTopic)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -18685,6 +19393,11 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Location_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ExploreTopic_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ExploreTopic_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -18787,8 +19500,10 @@ public final class CoreProto {
       "e\030\003 \001(\tB\004\230\246\035\005\022\030\n\nstate_name\030\004 \001(\tB\004\230\246\0352\022" +
       "\027\n\tcity_name\030\005 \001(\tB\004\230\246\0352\022\031\n\013postal_code\030" +
       "\006 \001(\tB\004\230\246\035\n\022\020\n\010latitude\030\007 \001(\001\022\021\n\tlongitu" +
-      "de\030\010 \001(\001B!\n\024com.janknspank.protoB\tCorePr" +
-      "oto"
+      "de\030\010 \001(\001\"]\n\014ExploreTopic\022\031\n\007keyword\030\001 \001(" +
+      "\tB\010\210\246\035\001\230\246\035d\022\033\n\tentity_id\030\002 \001(\tB\010\230\246\035\030\250\246\035\001" +
+      "\022\025\n\rindustry_code\030\003 \001(\005B!\n\024com.janknspan" +
+      "k.protoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18903,6 +19618,12 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Location_descriptor,
               new java.lang.String[] { "CountryCode", "CountryName", "StateCode", "StateName", "CityName", "PostalCode", "Latitude", "Longitude", });
+          internal_static_ExploreTopic_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+          internal_static_ExploreTopic_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ExploreTopic_descriptor,
+              new java.lang.String[] { "Keyword", "EntityId", "IndustryCode", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -19078,6 +19799,10 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           return registry;
         }
       };

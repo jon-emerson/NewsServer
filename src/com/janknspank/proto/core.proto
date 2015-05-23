@@ -166,7 +166,7 @@ message Entity {
   message EntityTopic {
     optional string entity_id = 1 [
       (string_length) = 24,
-    (string_charset) = LATIN1
+      (string_charset) = LATIN1
     ];
 
     optional string keyword = 2 [
@@ -552,3 +552,19 @@ message Location {
   optional double latitude = 7;
   optional double longitude = 8;
 }
+
+message ExploreTopic {
+  optional string keyword = 1 [
+    (required) = YES,
+    (string_length) = 100
+  ];
+
+  optional string entity_id = 2 [
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional int32 industry_code = 3;
+}
+
+  

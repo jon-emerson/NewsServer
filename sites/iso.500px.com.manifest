@@ -1,4 +1,4 @@
-short_name: "500ISO"
+short_name: "500px ISO"
 root_domain: "iso.500px.com"
 is_https: true
 start_url: "https://iso.500px.com/"

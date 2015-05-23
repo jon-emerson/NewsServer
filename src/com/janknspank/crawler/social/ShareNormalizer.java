@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.protobuf.TextFormat;
+import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.classifier.ClassifierException;
 import com.janknspank.common.Logger;
@@ -75,16 +76,20 @@ public class ShareNormalizer {
   }
 
   public double getShareScore(String url, long shareCount, long ageInMillis) {
-    Distribution distribution = null;
+    ageInMillis = Math.max(0, ageInMillis);
+    Distribution youngestApplicableDistribution = null;
+    long youngestApplicableEndMillis = Long.MAX_VALUE;
     for (TimeRangeDistribution timeRangeDistribution : data.getTimeRangeDistributionList()) {
-      distribution = timeRangeDistribution.getDistribution();
-      if (timeRangeDistribution.getStartMillis() <= ageInMillis &&
-          timeRangeDistribution.getEndMillis() > ageInMillis) {
-        break;
+      if (timeRangeDistribution.getEndMillis() <= youngestApplicableEndMillis
+          && timeRangeDistribution.getStartMillis() <= ageInMillis
+          && timeRangeDistribution.getEndMillis() > ageInMillis) {
+        youngestApplicableDistribution = timeRangeDistribution.getDistribution();
+        youngestApplicableEndMillis = timeRangeDistribution.getEndMillis();
       }
     }
     long normalizedShareCount = getNormalizedShareCount(url, shareCount);
-    double shareScore = DistributionBuilder.projectQuantile(distribution, normalizedShareCount);
+    double shareScore = DistributionBuilder.projectQuantile(
+        youngestApplicableDistribution, normalizedShareCount);
     return shareScore;
   }
 
@@ -139,11 +144,9 @@ public class ShareNormalizer {
     if (count == null) {
       return shareCount;
     } else {
-      // Lower floor at 30 shares/article so that articles from sites with few
-      // shares don't look like absolute monsters when they get a little action.
-      double domainShareCount = Math.max(30.0, ((double) count.numShares) / count.numArticles);
+      double domainShareCount = ((double) count.numShares) / count.numArticles;
       double averageShareCount = ((double) totalShareCount) / totalArticleCount;
-      return (long) (shareCount * averageShareCount / domainShareCount);
+      return (long) Math.min(shareCount, shareCount * averageShareCount / domainShareCount);
     }
   }
 
@@ -154,11 +157,8 @@ public class ShareNormalizer {
   private static List<TimeRangeDistribution.Builder> getTimeRangeDistributionBuilders() {
     ImmutableList.Builder<TimeRangeDistribution.Builder> timeRangeDistributionBuilders =
         ImmutableList.<TimeRangeDistribution.Builder>builder();
-    long lastTimeBreak = 0;
     for (long timeBreak : new long[] {
-        TimeUnit.HOURS.toMillis(1),
-        TimeUnit.HOURS.toMillis(2),
-        TimeUnit.HOURS.toMillis(3),
+        TimeUnit.HOURS.toMillis(4),
         TimeUnit.HOURS.toMillis(6),
         TimeUnit.HOURS.toMillis(12),
         TimeUnit.HOURS.toMillis(18),
@@ -171,12 +171,11 @@ public class ShareNormalizer {
         TimeUnit.DAYS.toMillis(30),
         TimeUnit.DAYS.toMillis(90)}) {
       timeRangeDistributionBuilders.add(TimeRangeDistribution.newBuilder()
-          .setStartMillis(lastTimeBreak)
+          .setStartMillis(0)
           .setEndMillis(timeBreak));
-      lastTimeBreak = timeBreak;
     }
     timeRangeDistributionBuilders.add(TimeRangeDistribution.newBuilder()
-        .setStartMillis(lastTimeBreak)
+        .setStartMillis(0)
         .setEndMillis(Long.MAX_VALUE));
     return timeRangeDistributionBuilders.build();
   }
@@ -265,17 +264,25 @@ public class ShareNormalizer {
         System.out.print(".");
       }
 
-      SocialEngagement latestEngagement = SocialEngagements.getForArticle(article, site);
-      if (latestEngagement != null) {
-        long ageInMillis = Math.max(0,
-            latestEngagement.getCreateTime() - article.getPublishedTime());
-        long normalizedShareCount = getNormalizedShareCount(shareMap, totalArticleCount,
-            totalShareCount, article.getUrl(), latestEngagement.getShareCount());
+      for (SocialEngagement socialEngagement : article.getSocialEngagementList()) {
+        // Exclude engagements with 0 shares because they arbitrarily blow up
+        // the share scores articles get when they receive only 1 or 2 shares,
+        // just based on the size of unpopular websites in our corpous.  Since
+        // we want to measure popularity of content, not popularity of a site,
+        // it makes sense to count all 0s as 0 and then scale up the
+        // distributions starting at 1.
+        if (socialEngagement.getSite() == site
+            && socialEngagement.getShareCount() > 0) {
+          long ageInMillis =
+              Math.max(0, socialEngagement.getCreateTime() - Articles.getPublishedTime(article));
+          long normalizedShareCount = getNormalizedShareCount(shareMap, totalArticleCount,
+              totalShareCount, article.getUrl(), socialEngagement.getShareCount());
 
-        for (TimeRangeDistribution.Builder builder : timeRangeDistributionBuilders) {
-          if (builder.getStartMillis() <= ageInMillis &&
-              builder.getEndMillis() > ageInMillis) {
-            distributionBuilders.get(builder).add(normalizedShareCount);
+          for (TimeRangeDistribution.Builder builder : timeRangeDistributionBuilders) {
+            if (builder.getStartMillis() <= ageInMillis &&
+                builder.getEndMillis() > ageInMillis) {
+              distributionBuilders.get(builder).add(normalizedShareCount);
+            }
           }
         }
       }
@@ -328,12 +335,12 @@ public class ShareNormalizer {
       return;
     }
 
-    System.out.println("Reading 60k articles...");
+    System.out.println("Reading 75k articles...");
     Future<Iterable<Article>> newArticles = Database.with(Article.class).getFuture(
-        new QueryOption.Limit(45000),
+        new QueryOption.Limit(50000),
         new QueryOption.DescendingSort("published_time"));
     Future<Iterable<Article>> oldArticles = Database.with(Article.class).getFuture(
-        new QueryOption.Limit(15000),
+        new QueryOption.Limit(25000),
         new QueryOption.AscendingSort("published_time"));
     Iterable<Article> articles = Iterables.concat(oldArticles.get(), newArticles.get());
     System.out.println(Iterables.size(articles) + " articles received.");
@@ -342,5 +349,6 @@ public class ShareNormalizer {
     System.out.println("Calculating Twitter share normalization table...");
     createShareNormalizationFile(articles, Site.TWITTER);
     System.out.println("Done!");
+    System.exit(0);
   }
 }

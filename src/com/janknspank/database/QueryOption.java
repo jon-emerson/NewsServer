@@ -330,6 +330,7 @@ public class QueryOption {
   static final boolean isWhereClauseEmpty(QueryOption[] options) {
     for (QueryOption option : getList(options, WhereOption.class)) {
       if (option instanceof WhereEquals
+          && !(option instanceof WhereNotEquals)
           && Iterables.isEmpty(((WhereEquals) option).getValues())) {
         return true;
       }

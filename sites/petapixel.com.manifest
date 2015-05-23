@@ -1,0 +1,49 @@
+short_name: "PetaPixel"
+root_domain: "petapixel.com"
+subdomain_blacklist: "store.petapixel.com"
+start_url: "http://petapixel.com/"
+use_first_paragraph_as_description: true
+paragraph_selector: ".entry > p"
+article_url_pattern {
+  path_regex: "^\\/20[0-9]{2}\\/[01][0-9]\\/[0-3][0-9]\\/[^\\/]+\\/$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "http://petapixel.com/2015/03/16/9-photo-composition-tips-as-seen-in-photographs-by-steve-mccurry/"
+    article_url: "http://petapixel.com/2015/05/21/adobe-calling-it-quits-on-photoshop-touch/"
+    article_url: "http://petapixel.com/2015/05/21/richard-prince-selling-other-peoples-instagram-shots-without-permission-for-100k/"
+    article_url: "http://petapixel.com/2015/05/20/psa-beware-the-dangers-of-selfie-sticks/"
+    article_url: "http://petapixel.com/2015/05/21/shooting-son-doong/"
+    article_url: "http://petapixel.com/2015/05/20/achieving-black-backgrounds-in-macro-photos/"
+    article_url: "http://petapixel.com/2015/05/22/a-photographic-journey-with-the-legendary-canon-ef-1200mm-lens/"
+    article_url: "http://petapixel.com/2015/04/28/this-selfie-stick-is-arm-shaped-to-make-you-look-less-like-a-loner/"
+    non_article_url: "http://petapixel.com/topic/news/"
+    non_article_url: "http://petapixel.com/topic/equipment/"
+    non_article_url: "http://petapixel.com/author/michaelczhang/"
+    non_article_url: "http://petapixel.com/contact/"
+    non_article_url: "http://petapixel.com/topic/tutorials/"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10528 # Photography.
+  boost: 3
+}
+feature_boost_pattern {
+  feature_id: 10513 # Video production.
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10509 # Consumer electronics.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10503 # Hardware and Electronics.
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10525 # Arts.
+  boost: 0
+}

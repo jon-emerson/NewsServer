@@ -64,7 +64,7 @@ public class ArticleSerializer {
    * @return a string set for the names of people that should be considered
    *     contacts for the purpose of this request
    */
-  private static Set<String> getUserKeywordSet(
+  public static Set<String> getUserKeywordSet(
       User user, boolean includeLinkedInContacts, boolean includeAddressBookContacts) {
     Set<InterestType> forcedInterests = Sets.newHashSet();
     if (includeLinkedInContacts) {

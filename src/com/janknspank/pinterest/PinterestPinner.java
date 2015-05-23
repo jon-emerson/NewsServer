@@ -17,6 +17,7 @@ import com.google.api.client.util.Maps;
 import com.google.api.client.util.Sets;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
@@ -345,8 +346,12 @@ public class PinterestPinner {
                 .setIndustryCode(featureId.getId())
                 .build())
             .build();
-        for (Article article : Articles.getStream(
-            user, new AncillaryStreamStrategy(), new DiversificationPass.IndustryStreamPass())) {
+        Iterable<Article> articles = Articles.getStream(
+            user,
+            new AncillaryStreamStrategy(),
+            new DiversificationPass.IndustryStreamPass(),
+            ImmutableSet.<String>of());
+        for (Article article : articles) {
           if (existingPinLinks.contains(article.getUrl())) {
             // If we've already posted the best article for this feature, OK
             // great, let's skip posting here.  We'll post again when we have
