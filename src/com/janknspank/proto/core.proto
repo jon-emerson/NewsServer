@@ -566,5 +566,3 @@ message ExploreTopic {
 
   optional int32 industry_code = 3;
 }
-
-  

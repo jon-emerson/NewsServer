@@ -28,6 +28,7 @@ import com.janknspank.bizness.Users;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.NotificationsProto.Notification;
@@ -65,7 +66,7 @@ public class GetArticlesServlet extends StandardServlet {
     User user = getUser(req);
     response.put("articles", ArticleSerializer.serialize(
         articles, user, includeLinkedInContacts, includeAddressBookContacts));
-    response.put("explore_topics", ExploreTopics.get(articles, user));
+    response.put("explore_topics", Serializer.toJSON(ExploreTopics.get(articles, user)));
     return response;
   }
 
