@@ -180,6 +180,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     // And together any $or's or other complex queries, so that they don't
     // overwrite each other.
     List<DBObject> orQueriesToAndTogether = Lists.newArrayList();
+    List<DBObject> andQueriesToAdd = Lists.newArrayList();
 
     for (WhereOption whereEquals :
         Iterables.concat(
@@ -249,8 +250,8 @@ public class MongoCollection<T extends Message> extends Collection<T> {
           }
         } else if (whereEquals instanceof WhereNotEquals) {
           for (String value : ((WhereNotEquals) whereEquals).getValues()) {
-            dbObject.put(fieldName, new BasicDBObject("$ne",
-                isObjectIdFieldName(fieldName) ? new ObjectId((String) value) : value));
+            andQueriesToAdd.add(new BasicDBObject(fieldName, new BasicDBObject("$ne",
+                isObjectIdFieldName(fieldName) ? new ObjectId((String) value) : value)));
           }
         } else {
           BasicDBList or = new BasicDBList();
@@ -270,16 +271,17 @@ public class MongoCollection<T extends Message> extends Collection<T> {
 
     // Merge all the $or's into an $and with multiple $or children, or just put
     // a single $or onto the query, if that's all we got.
-    if (orQueriesToAndTogether.size() == 0) {
+    if (orQueriesToAndTogether.size() == 0 && andQueriesToAdd.size() == 0) {
       // Do nothing.
-    } else if (orQueriesToAndTogether.size() == 1) {
-      dbObject.put("$or", orQueriesToAndTogether.get(0));
     } else {
       List<DBObject> and = Lists.newArrayList();
       for (DBObject or : orQueriesToAndTogether) {
         BasicDBObject innerDbObject = new BasicDBObject();
         innerDbObject.put("$or", or);
         and.add(innerDbObject);
+      }
+      for (DBObject andQueryToAdd : andQueriesToAdd) {
+        and.add(andQueryToAdd);
       }
       dbObject.put("$and", and);
     }
