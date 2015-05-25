@@ -121,6 +121,9 @@ message Article {
   optional Reason reason = 19 [
     (storage_method) = DO_NOT_STORE
   ];
+  optional int32 reason_industry_code = 25 [
+    (storage_method) = DO_NOT_STORE
+  ];
 
   // Enables the hot icon on the client-side.  Currently triggered by dupe
   // merges in Deduper.

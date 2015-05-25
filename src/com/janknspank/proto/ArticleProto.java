@@ -377,6 +377,16 @@ public final class ArticleProto {
      */
     com.janknspank.proto.ArticleProto.Article.Reason getReason();
 
+    // optional int32 reason_industry_code = 25;
+    /**
+     * <code>optional int32 reason_industry_code = 25;</code>
+     */
+    boolean hasReasonIndustryCode();
+    /**
+     * <code>optional int32 reason_industry_code = 25;</code>
+     */
+    int getReasonIndustryCode();
+
     // optional bool hot = 20;
     /**
      * <code>optional bool hot = 20;</code>
@@ -611,28 +621,33 @@ public final class ArticleProto {
               break;
             }
             case 160: {
-              bitField0_ |= 0x00008000;
+              bitField0_ |= 0x00010000;
               hot_ = input.readBool();
               break;
             }
             case 168: {
-              bitField0_ |= 0x00010000;
+              bitField0_ |= 0x00020000;
               oldestHotDuplicateTime_ = input.readInt64();
               break;
             }
             case 176: {
-              bitField0_ |= 0x00020000;
+              bitField0_ |= 0x00040000;
               hotCount_ = input.readInt32();
               break;
             }
             case 185: {
-              bitField0_ |= 0x00040000;
+              bitField0_ |= 0x00080000;
               score_ = input.readDouble();
               break;
             }
             case 194: {
               bitField0_ |= 0x00000020;
               origin_ = input.readBytes();
+              break;
+            }
+            case 200: {
+              bitField0_ |= 0x00008000;
+              reasonIndustryCode_ = input.readInt32();
               break;
             }
           }
@@ -1502,6 +1517,22 @@ public final class ArticleProto {
       return reason_;
     }
 
+    // optional int32 reason_industry_code = 25;
+    public static final int REASON_INDUSTRY_CODE_FIELD_NUMBER = 25;
+    private int reasonIndustryCode_;
+    /**
+     * <code>optional int32 reason_industry_code = 25;</code>
+     */
+    public boolean hasReasonIndustryCode() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>optional int32 reason_industry_code = 25;</code>
+     */
+    public int getReasonIndustryCode() {
+      return reasonIndustryCode_;
+    }
+
     // optional bool hot = 20;
     public static final int HOT_FIELD_NUMBER = 20;
     private boolean hot_;
@@ -1514,7 +1545,7 @@ public final class ArticleProto {
      * </pre>
      */
     public boolean hasHot() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     /**
      * <code>optional bool hot = 20;</code>
@@ -1539,7 +1570,7 @@ public final class ArticleProto {
      * </pre>
      */
     public boolean hasOldestHotDuplicateTime() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     /**
      * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
@@ -1559,7 +1590,7 @@ public final class ArticleProto {
      * <code>optional int32 hot_count = 22;</code>
      */
     public boolean hasHotCount() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
+      return ((bitField0_ & 0x00040000) == 0x00040000);
     }
     /**
      * <code>optional int32 hot_count = 22;</code>
@@ -1579,7 +1610,7 @@ public final class ArticleProto {
      * </pre>
      */
     public boolean hasScore() {
-      return ((bitField0_ & 0x00040000) == 0x00040000);
+      return ((bitField0_ & 0x00080000) == 0x00080000);
     }
     /**
      * <code>optional double score = 23;</code>
@@ -1613,6 +1644,7 @@ public final class ArticleProto {
       dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       retain_ = false;
       reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
+      reasonIndustryCode_ = 0;
       hot_ = false;
       oldestHotDuplicateTime_ = 0L;
       hotCount_ = 0;
@@ -1687,20 +1719,23 @@ public final class ArticleProto {
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeEnum(19, reason_.getNumber());
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeBool(20, hot_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         output.writeInt64(21, oldestHotDuplicateTime_);
       }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
         output.writeInt32(22, hotCount_);
       }
-      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
         output.writeDouble(23, score_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(24, getOriginBytes());
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeInt32(25, reasonIndustryCode_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1797,25 +1832,29 @@ public final class ArticleProto {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(19, reason_.getNumber());
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(20, hot_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(21, oldestHotDuplicateTime_);
       }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(22, hotCount_);
       }
-      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(23, score_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(24, getOriginBytes());
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(25, reasonIndustryCode_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1988,14 +2027,16 @@ public final class ArticleProto {
         bitField0_ = (bitField0_ & ~0x00040000);
         reason_ = com.janknspank.proto.ArticleProto.Article.Reason.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00080000);
-        hot_ = false;
+        reasonIndustryCode_ = 0;
         bitField0_ = (bitField0_ & ~0x00100000);
-        oldestHotDuplicateTime_ = 0L;
+        hot_ = false;
         bitField0_ = (bitField0_ & ~0x00200000);
-        hotCount_ = 0;
+        oldestHotDuplicateTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00400000);
-        score_ = 0D;
+        hotCount_ = 0;
         bitField0_ = (bitField0_ & ~0x00800000);
+        score_ = 0D;
+        bitField0_ = (bitField0_ & ~0x01000000);
         return this;
       }
 
@@ -2126,17 +2167,21 @@ public final class ArticleProto {
         if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.hot_ = hot_;
+        result.reasonIndustryCode_ = reasonIndustryCode_;
         if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
           to_bitField0_ |= 0x00010000;
         }
-        result.oldestHotDuplicateTime_ = oldestHotDuplicateTime_;
+        result.hot_ = hot_;
         if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
           to_bitField0_ |= 0x00020000;
         }
-        result.hotCount_ = hotCount_;
+        result.oldestHotDuplicateTime_ = oldestHotDuplicateTime_;
         if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
           to_bitField0_ |= 0x00040000;
+        }
+        result.hotCount_ = hotCount_;
+        if (((from_bitField0_ & 0x01000000) == 0x01000000)) {
+          to_bitField0_ |= 0x00080000;
         }
         result.score_ = score_;
         result.bitField0_ = to_bitField0_;
@@ -2315,6 +2360,9 @@ public final class ArticleProto {
         }
         if (other.hasReason()) {
           setReason(other.getReason());
+        }
+        if (other.hasReasonIndustryCode()) {
+          setReasonIndustryCode(other.getReasonIndustryCode());
         }
         if (other.hasHot()) {
           setHot(other.getHot());
@@ -4246,6 +4294,39 @@ public final class ArticleProto {
         return this;
       }
 
+      // optional int32 reason_industry_code = 25;
+      private int reasonIndustryCode_ ;
+      /**
+       * <code>optional int32 reason_industry_code = 25;</code>
+       */
+      public boolean hasReasonIndustryCode() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional int32 reason_industry_code = 25;</code>
+       */
+      public int getReasonIndustryCode() {
+        return reasonIndustryCode_;
+      }
+      /**
+       * <code>optional int32 reason_industry_code = 25;</code>
+       */
+      public Builder setReasonIndustryCode(int value) {
+        bitField0_ |= 0x00100000;
+        reasonIndustryCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 reason_industry_code = 25;</code>
+       */
+      public Builder clearReasonIndustryCode() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        reasonIndustryCode_ = 0;
+        onChanged();
+        return this;
+      }
+
       // optional bool hot = 20;
       private boolean hot_ ;
       /**
@@ -4257,7 +4338,7 @@ public final class ArticleProto {
        * </pre>
        */
       public boolean hasHot() {
-        return ((bitField0_ & 0x00100000) == 0x00100000);
+        return ((bitField0_ & 0x00200000) == 0x00200000);
       }
       /**
        * <code>optional bool hot = 20;</code>
@@ -4279,7 +4360,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder setHot(boolean value) {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00200000;
         hot_ = value;
         onChanged();
         return this;
@@ -4293,7 +4374,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder clearHot() {
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00200000);
         hot_ = false;
         onChanged();
         return this;
@@ -4309,7 +4390,7 @@ public final class ArticleProto {
        * </pre>
        */
       public boolean hasOldestHotDuplicateTime() {
-        return ((bitField0_ & 0x00200000) == 0x00200000);
+        return ((bitField0_ & 0x00400000) == 0x00400000);
       }
       /**
        * <code>optional int64 oldest_hot_duplicate_time = 21;</code>
@@ -4329,7 +4410,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder setOldestHotDuplicateTime(long value) {
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00400000;
         oldestHotDuplicateTime_ = value;
         onChanged();
         return this;
@@ -4342,7 +4423,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder clearOldestHotDuplicateTime() {
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00400000);
         oldestHotDuplicateTime_ = 0L;
         onChanged();
         return this;
@@ -4354,7 +4435,7 @@ public final class ArticleProto {
        * <code>optional int32 hot_count = 22;</code>
        */
       public boolean hasHotCount() {
-        return ((bitField0_ & 0x00400000) == 0x00400000);
+        return ((bitField0_ & 0x00800000) == 0x00800000);
       }
       /**
        * <code>optional int32 hot_count = 22;</code>
@@ -4366,7 +4447,7 @@ public final class ArticleProto {
        * <code>optional int32 hot_count = 22;</code>
        */
       public Builder setHotCount(int value) {
-        bitField0_ |= 0x00400000;
+        bitField0_ |= 0x00800000;
         hotCount_ = value;
         onChanged();
         return this;
@@ -4375,7 +4456,7 @@ public final class ArticleProto {
        * <code>optional int32 hot_count = 22;</code>
        */
       public Builder clearHotCount() {
-        bitField0_ = (bitField0_ & ~0x00400000);
+        bitField0_ = (bitField0_ & ~0x00800000);
         hotCount_ = 0;
         onChanged();
         return this;
@@ -4391,7 +4472,7 @@ public final class ArticleProto {
        * </pre>
        */
       public boolean hasScore() {
-        return ((bitField0_ & 0x00800000) == 0x00800000);
+        return ((bitField0_ & 0x01000000) == 0x01000000);
       }
       /**
        * <code>optional double score = 23;</code>
@@ -4411,7 +4492,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder setScore(double value) {
-        bitField0_ |= 0x00800000;
+        bitField0_ |= 0x01000000;
         score_ = value;
         onChanged();
         return this;
@@ -4424,7 +4505,7 @@ public final class ArticleProto {
        * </pre>
        */
       public Builder clearScore() {
-        bitField0_ = (bitField0_ & ~0x00800000);
+        bitField0_ = (bitField0_ & ~0x01000000);
         score_ = 0D;
         onChanged();
         return this;
@@ -8063,7 +8144,7 @@ public final class ArticleProto {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
       "m/janknspank/database/extensions.proto\032\037" +
-      "com/janknspank/proto/core.proto\"\303\006\n\007Arti" +
+      "com/janknspank/proto/core.proto\"\347\006\n\007Arti" +
       "cle\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\032\n" +
       "\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005title\030\003 \001(\t" +
       "B\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\031\022\031\n\006a" +
@@ -8079,29 +8160,30 @@ public final class ArticleProto {
       "agementB\004\240\246\035\003\022&\n\007feature\030\020 \003(\0132\017.Article" +
       "FeatureB\004\240\246\035\003\022 \n\016deduping_stems\030\021 \003(\tB\010\230" +
       "\246\035\004\240\246\035\003\022\024\n\006retain\030\022 \001(\010B\004\240\246\035\003\022%\n\006reason\030" +
-      "\023 \001(\0162\017.Article.ReasonB\004\220\246\035\006\022\021\n\003hot\030\024 \001(" +
-      "\010B\004\220\246\035\006\022+\n\031oldest_hot_duplicate_time\030\025 \001",
-      "(\003B\010\240\246\035\003\220\246\035\006\022\033\n\thot_count\030\026 \001(\005B\010\240\246\035\003\220\246\035" +
-      "\006\022\027\n\005score\030\027 \001(\001B\010\240\246\035\003\220\246\035\006\"<\n\006Reason\022\013\n\007" +
-      "UNKNOWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006PERSON\020\002\022\013\n\007C" +
-      "OMPANY\020\003:\023\212\265\030\017MongoDB.Article\"\223\002\n\016Articl" +
-      "eKeyword\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022" +
-      "\026\n\010strength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210" +
-      "\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.Articl" +
-      "eKeyword.Source:\007UNKNOWN\022\030\n\020paragraph_nu" +
-      "mber\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\"F\n\006S" +
-      "ource\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK",
-      "\020\002\022\014\n\010META_TAG\020\003\022\t\n\005TITLE\020\004\"\347\001\n\020SocialEn" +
-      "gagement\022-\n\004site\030\001 \001(\0162\026.SocialEngagemen" +
-      "t.Site:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003B\004\210\246" +
-      "\035\001\022\031\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_co" +
-      "unt\030\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013crea" +
-      "te_time\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FA" +
-      "CEBOOK\020\001\022\013\n\007TWITTER\020\002\"B\n\016ArticleFeature\022" +
-      "\034\n\nfeature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022\022\n\nsimilar" +
-      "ity\030\002 \001(\001\"9\n\017InterpretedData\022\031\n\007article\030" +
-      "\001 \001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024com.jank",
-      "nspank.protoB\014ArticleProto"
+      "\023 \001(\0162\017.Article.ReasonB\004\220\246\035\006\022\"\n\024reason_i" +
+      "ndustry_code\030\031 \001(\005B\004\220\246\035\006\022\021\n\003hot\030\024 \001(\010B\004\220",
+      "\246\035\006\022+\n\031oldest_hot_duplicate_time\030\025 \001(\003B\010" +
+      "\240\246\035\003\220\246\035\006\022\033\n\thot_count\030\026 \001(\005B\010\240\246\035\003\220\246\035\006\022\027\n" +
+      "\005score\030\027 \001(\001B\010\240\246\035\003\220\246\035\006\"<\n\006Reason\022\013\n\007UNKN" +
+      "OWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006PERSON\020\002\022\013\n\007COMPA" +
+      "NY\020\003:\023\212\265\030\017MongoDB.Article\"\223\002\n\016ArticleKey" +
+      "word\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010s" +
+      "trength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220" +
+      "\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.ArticleKey" +
+      "word.Source:\007UNKNOWN\022\030\n\020paragraph_number" +
+      "\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\"F\n\006Sourc",
+      "e\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014" +
+      "\n\010META_TAG\020\003\022\t\n\005TITLE\020\004\"\347\001\n\020SocialEngage" +
+      "ment\022-\n\004site\030\001 \001(\0162\026.SocialEngagement.Si" +
+      "te:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031" +
+      "\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030" +
+      "\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013create_t" +
+      "ime\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBO" +
+      "OK\020\001\022\013\n\007TWITTER\020\002\"B\n\016ArticleFeature\022\034\n\nf" +
+      "eature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022\022\n\nsimilarity\030" +
+      "\002 \001(\001\"9\n\017InterpretedData\022\031\n\007article\030\001 \001(",
+      "\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024com.janknspa" +
+      "nk.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8113,7 +8195,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Origin", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", "Hot", "OldestHotDuplicateTime", "HotCount", "Score", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Origin", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", "ReasonIndustryCode", "Hot", "OldestHotDuplicateTime", "HotCount", "Score", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -8173,6 +8255,7 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

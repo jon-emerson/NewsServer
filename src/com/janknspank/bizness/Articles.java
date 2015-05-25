@@ -1,15 +1,15 @@
 package com.janknspank.bizness;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nullable;
+
 import com.google.api.client.util.Maps;
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -57,7 +57,9 @@ public class Articles {
    * crap like this... :).
    */
   private static AsyncFunction<Iterable<Article>, Iterable<Article>>
-      getFunctionToGiveArticlesReason(final Article.Reason reason) {
+      getFunctionToGiveArticlesReason(
+          final Article.Reason reason,
+          final @Nullable FeatureId industryFeatureId) {
     return new AsyncFunction<Iterable<Article>, Iterable<Article>>() {
       @Override
       public ListenableFuture<Iterable<Article>> apply(Iterable<Article> articles) {
@@ -65,7 +67,12 @@ public class Articles {
             Iterables.transform(articles, new Function<Article, Article>() {
               @Override
               public Article apply(Article article) {
-                return article.toBuilder().setReason(reason).build();
+                Article.Builder builder = article.toBuilder();
+                builder.setReason(reason);
+                if (industryFeatureId != null) {
+                  builder.setReasonIndustryCode(industryFeatureId.getId());
+                }
+                return builder.build();
               }
             }));
       }
@@ -85,7 +92,7 @@ public class Articles {
             new QueryOption.WhereEquals("keyword.keyword", keywords),
             new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
             new QueryOption.Limit(limit)),
-        getFunctionToGiveArticlesReason(reason));
+        getFunctionToGiveArticlesReason(reason, null));
   }
 
   /**
@@ -101,7 +108,7 @@ public class Articles {
             new QueryOption.WhereEquals("keyword.entity.id", entityIds),
             new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
             new QueryOption.Limit(limit)),
-        getFunctionToGiveArticlesReason(reason));
+        getFunctionToGiveArticlesReason(reason, null));
   }
 
   /**
@@ -150,7 +157,7 @@ public class Articles {
       throws DatabaseSchemaException, BiznessException {
     return getRankedArticles(
         user, scorer, strategy, diversificationPass, limit,
-        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 10, excludeUrlIds));
+        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 3, excludeUrlIds));
   }
 
   /**
@@ -281,14 +288,16 @@ public class Articles {
       }
     }
 
-    List<ListenableFuture<Iterable<Article>>> articlesFutures = ImmutableList.of(
-        getArticlesForEntityIdsFuture(
-            entityIds, Article.Reason.COMPANY, limitPerType, excludeUrlIds),
-        getArticlesForKeywordsFuture(
-            personNames, Article.Reason.PERSON, limitPerType / 4, excludeUrlIds),
-        getArticlesForKeywordsFuture(
-            companyNames, Article.Reason.COMPANY, limitPerType, excludeUrlIds),
-        getArticlesByFeatureIdFuture(featureIds, limitPerType, excludeUrlIds));
+    List<ListenableFuture<Iterable<Article>>> articlesFutures = Lists.newArrayList();
+    articlesFutures.add(getArticlesForEntityIdsFuture(
+        entityIds, Article.Reason.COMPANY, limitPerType, excludeUrlIds));
+    articlesFutures.add(getArticlesForKeywordsFuture(
+        personNames, Article.Reason.PERSON, limitPerType / 4, excludeUrlIds));
+    articlesFutures.add(getArticlesForKeywordsFuture(
+        companyNames, Article.Reason.COMPANY, limitPerType, excludeUrlIds));
+    for (FeatureId featureId : featureIds) {
+      articlesFutures.add(getArticlesByFeatureIdFuture(featureId, limitPerType, excludeUrlIds));
+    }
     Map<String, Article> dedupingArticleMap = Maps.newHashMap();
     for (ListenableFuture<Iterable<Article>> articlesFuture : articlesFutures) {
       try {
@@ -309,25 +318,15 @@ public class Articles {
    * industries.
    */
   public static ListenableFuture<Iterable<Article>> getArticlesByFeatureIdFuture(
-      Iterable<FeatureId> featureIds, int limit, Set<String> excludeUrlIds)
+      FeatureId featureId, int limit, Set<String> excludeUrlIds)
       throws DatabaseSchemaException {
-    if (Iterables.isEmpty(featureIds)) {
-      Iterable<Article> emptyIterable = Collections.<Article>emptyList();
-      return Futures.immediateFuture(emptyIterable);
-    }
     return Futures.transform(
         Database.with(Article.class).getFuture(
-            new QueryOption.WhereEqualsNumber("feature.feature_id", Iterables.transform(featureIds,
-                new Function<FeatureId, Number>() {
-              @Override
-              public Number apply(FeatureId featureId) {
-                return featureId.getId();
-              }
-            })),
+            new QueryOption.WhereEqualsNumber("feature.feature_id", featureId.getId()),
             new QueryOption.DescendingSort("published_time"),
             new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
             new QueryOption.Limit(limit)),
-        getFunctionToGiveArticlesReason(Reason.INDUSTRY));
+        getFunctionToGiveArticlesReason(Reason.INDUSTRY, featureId));
   }
 
   public static Iterable<Article> getArticlesForLinkedInContacts(
