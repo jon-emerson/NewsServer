@@ -1,4 +1,4 @@
-short_name: "NY Times"
+short_name: "New York Times"
 root_domain: "nytimes.com"
 start_url: "http://www.nytimes.com"
 start_url: "http://opinionator.blogs.nytimes.com/"

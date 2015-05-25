@@ -155,7 +155,15 @@ public class ParagraphFinder {
                 || node.findFirst(paragraphBlacklist.getSelector()) != null)) { // Children.
           return false;
         }
-      } else if (!paragraphBlacklist.hasTextRegex()) {
+      } else if (paragraphBlacklist.hasTextRegex()) {
+        // Check textMatchesRegex here, as well as in getParagraphsInternal,
+        // because sometimes callers get the Nodes (e.g. when finding hypertext
+        // keywords), other time callers get the Strings (e.g. when writing to
+        // the database), and both should have bad paragraphs removed.
+        if (textMatchesRegex(node.getFlattenedText(), paragraphBlacklist.getTextRegex())) {
+          return false;
+        }
+      } else {
         // NOTE: The case of !selector && !!textRegex is handled inside
         // getParagraphsInternal, after the paragraphs have been broken on their
         // <br>s, etc.

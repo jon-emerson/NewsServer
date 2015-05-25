@@ -5,6 +5,33 @@ path_blacklist {
   needle: "/users/"
 }
 paragraph_selector: ".content p"
+paragraph_blacklist {
+  text_regex: "^Submitted by "
+}
+paragraph_blacklist {
+  text_regex: "^Contact Information:"
+}
+paragraph_blacklist {
+  text_regex: "\\[ at \\] zerohedge.com$"
+}
+paragraph_blacklist {
+  text_regex: "^Suggested Reading:"
+}
+paragraph_blacklist {
+  text_regex: "^Make sure to read our "
+}
+paragraph_blacklist {
+  text_regex: "^It would be very wise of you to study our "
+}
+paragraph_blacklist {
+  text_regex: "^How to report offensive comments"
+}
+paragraph_blacklist {
+  text_regex: "^Notice on Racial Discrimination."
+}
+paragraph_blacklist {
+  text_regex: "^Copyright .* ZeroHedge.com/ABC Media, LTD"
+}
 article_url_pattern {
   path_regex: "^\\/news\\/20[0-9]{2}-[01][0-9]-[0-3][0-9]\\/"
 }

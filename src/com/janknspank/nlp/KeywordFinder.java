@@ -371,7 +371,8 @@ public class KeywordFinder {
     List<Node> childlessChildNodes = Lists.newArrayList();
     Map<Node, Integer> nodeParagraphNumberMap = Maps.newHashMap();
     int paragraphNumber = 0;
-    for (Node paragraphNode : ParagraphFinder.getParagraphNodes(documentNode)) {
+    List<Node> nodes = ParagraphFinder.getParagraphNodes(documentNode);
+    for (Node paragraphNode : nodes) {
       paragraphNumber++;
       for (Node node : paragraphNode.findAll("*")) {
         if (!node.hasChildNodes()) {
