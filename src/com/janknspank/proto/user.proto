@@ -271,7 +271,7 @@ message UserAction {
   enum ActionType {
     UNKNOWN = 0;
     FAVORITE = 1; // aka Bookmark
-    X_OUT = 2; // Swipe to dismiss
+    X_OUT = 2; // Swipe left to dismiss
     TAP_FROM_STREAM = 3; // User tapped the article cell to view the full article from the stream
     SHARE = 4;
     READ_ARTICLE = 5;

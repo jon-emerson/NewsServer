@@ -26,12 +26,10 @@ public class GetArticleServlet extends StandardServlet {
     JSONObject articleJson = Serializer.toJSON(article);
 
     // If we're allowed, add full article text to the response.
-    boolean nativeReaderEnabled = ArticleSerializer.isNativeReaderEnabled(article);
-    articleJson.put("native_reader_enabled", nativeReaderEnabled);
-    if (nativeReaderEnabled) {
-      articleJson.put("paragraphs", ArticleSerializer.toJsonArray(
-          article.getParagraphList()));
-    }
+    articleJson.put("native_reader_enabled", ArticleSerializer.isNativeReaderEnabled(article));
+    articleJson.put("native_reader_v1.1_enabled", true);
+    articleJson.put("paragraphs", ArticleSerializer.toJsonArray(
+        article.getParagraphList()));
 
     // Replace the published time with the crawl time, since people often just
     // give a date for a publish time, so without this, the clients are showing

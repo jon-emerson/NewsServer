@@ -11,23 +11,18 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.api.client.util.Lists;
 import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.UserInterests;
-import com.janknspank.bizness.Users;
 import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
-import com.janknspank.classifier.FeatureId;
-import com.janknspank.crawler.ArticleCrawler;
+import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
+import com.janknspank.notifications.nnet.ArticleEvaluation;
+import com.janknspank.notifications.nnet.NotificationNeuralNetworkScorer;
 import com.janknspank.proto.ArticleProto.Article;
-import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.NotificationsProto.DeviceRegistration;
 import com.janknspank.proto.NotificationsProto.DeviceType;
 import com.janknspank.proto.NotificationsProto.Notification;
@@ -96,46 +91,20 @@ public class PushDeviceNotifications {
     return followedEntityIdSetBuilder.build();
   }
 
-  private static boolean isArticleAboutEvent(Article article) {
-    return ArticleFeatures.getFeatureSimilarity(article,
-            FeatureId.MANUAL_HEURISTIC_ACQUISITIONS) >= 0.5
-        || ArticleFeatures.getFeatureSimilarity(article,
-            FeatureId.MANUAL_HEURISTIC_FUNDRAISING) >= 0.5
-        || ArticleFeatures.getFeatureSimilarity(article,
-            FeatureId.MANUAL_HEURISTIC_LAUNCHES) >= 0.5
-        || ArticleFeatures.getFeatureSimilarity(article,
-            FeatureId.MANUAL_HEURISTIC_QUARTERLY_EARNINGS) >= 0.5;
-  }
-
-  private static boolean isArticleAboutFollowedCompany(Article article, Set<String> followedEntityIds) {
-    for (ArticleKeyword keyword : article.getKeywordList()) {
-      if (keyword.getStrength() >= 100
-          && keyword.hasEntity()
-          && followedEntityIds.contains(keyword.getEntity().getId())) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private static boolean isArticleAboutCompany(Article article) {
-    for (ArticleKeyword keyword : article.getKeywordList()) {
-      if (keyword.getStrength() >= 100
-          && EntityType.fromValue(keyword.getType()).isA(EntityType.ORGANIZATION)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   /**
    * Returns a score between 0 and 300 indicating how important this article
    * would be for notification-purposes for the given user.
    */
   private static int getArticleNotificationScore(
-      Article article, Set<String> followedEntityIds, double neuralNetworkScore) {
+      User user, Article article, Set<String> followedEntityIds) {
+    // Dogfood the new algorithm.
+    if (USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
+      return (int) (300 * NotificationNeuralNetworkScorer.getInstance().getScore(
+          article, followedEntityIds));
+    }
+
     // 0 out of 100 possible for ranking score.
-    int score = (int) (neuralNetworkScore * 100);
+    int score = (int) (article.getScore() * 100);
 
     // Slight punishment for older articles, so that we tend to notify about
     // newly published topics as opposed to things the user might have seen
@@ -147,10 +116,11 @@ public class PushDeviceNotifications {
 
     // -25 to 100 depending on whether the article's about a company, and
     // whether the user's following that company.
-    if (isArticleAboutFollowedCompany(article, followedEntityIds)) {
+    ArticleEvaluation evaluation = new ArticleEvaluation(article, followedEntityIds);
+    if (evaluation.isFollowedCompany()) {
       // Users click on these notifications 57% more than average.
       score += 100;
-    } else if (isArticleAboutCompany(article)) {
+    } else if (evaluation.isCompany()) {
       // Counter-intuitively, this is a negative signal: If an article's about
       // a company, and the user hasn't specified an interest in that company,
       // he's less likely than average to be interested in it.  In fact, click-
@@ -161,17 +131,17 @@ public class PushDeviceNotifications {
 
     // 0 out of 100 depending on whether there's dupes or this article seems
     // event-like.
-    if (isArticleAboutEvent(article)) {
+    if (evaluation.isEvent()) {
       // We actually have not noticed much correlation between this attribute
       // and click-through.  Let's re-evaluate in the future.
       score += 5;
     }
-    if (article.getHotCount() > 3) {
+    if (evaluation.getHotCount() > 3) {
       // Articles with dupe scores of 2 actually have no correlation to
       // engagement.  So we only reward very highly duped articles, which
       // can get engagement up to 2x normal.
       score += 95;
-    } else if (article.getHotCount() == 3) {
+    } else if (evaluation.getHotCount() == 3) {
       score += 50;
     }
     return score;
@@ -226,7 +196,7 @@ public class PushDeviceNotifications {
         continue;
       }
 
-      int score = getArticleNotificationScore(article, followedEntityIds, article.getScore());
+      int score = getArticleNotificationScore(user, article, followedEntityIds);
       if (score > bestArticleScore) {
         bestArticleScore = score;
         bestArticle = article;
@@ -266,53 +236,6 @@ public class PushDeviceNotifications {
     return null;
   }
 
-  public static void testMain(String args[]) throws Exception {
-    User user = Users.getByEmail("jon@jonemerson.net");
-    Article article = Iterables.getFirst(ArticleCrawler.getArticles(
-        ImmutableList.of("http://www.telegraph.co.uk/news/worldnews/asia/"
-            + "nepal/11563157/Google-person-finder-tool-deployed-to-help-"
-            + "relatives-find-loved-ones-in-Nepal.html"), true /* retain */).values(), null);
-    describeArticleUser(article, user);
-
-    Iterable<Article> rankedArticles = Articles.getMainStream(user);
-    PreviousUserNotifications previousUserNotifications = new PreviousUserNotifications(user);
-    long lastNotificationTime = previousUserNotifications.getLastNotificationTime();
-    long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime);
-    int i = 0;
-    for (Article rankedArticle : rankedArticles) {
-      if (rankedArticle.getCrawlTime() < timeCutoff) {
-        continue;
-      }
-      if (i++ >= 10) {
-        continue;
-      }
-      describeArticleUser(rankedArticle, user);
-    }
-  }
-
-  private static void describeArticleUser(Article article, User user) {
-    System.out.println("\"" + article.getTitle() + "\"");
-    System.out.println(article.getUrl());
-    Set<String> followedEntityIds = getFollowedEntityIds(user);
-    System.out.println("isAboutEvent = " + isArticleAboutEvent(article));
-    System.out.println("isAboutFollowedCompany = " + isArticleAboutFollowedCompany(article, followedEntityIds));
-    System.out.println("isAboutCompany = " + isArticleAboutCompany(article));
-    double neuralNetworkScore = NeuralNetworkScorer.getInstance().getScore(user, article);
-
-    int hotScore = 0;
-    if (article.getHotCount() > 2) {
-      hotScore += 100;
-    } else if (isArticleAboutEvent(article) || article.getHotCount() == 2) {
-      hotScore += 75;
-    }
-    System.out.println("hotScore = " + hotScore);
-
-    System.out.println("neuralNetworkScore = " + neuralNetworkScore);
-    System.out.println("score = "
-        + getArticleNotificationScore(article, followedEntityIds, neuralNetworkScore));
-    System.out.println();
-  }
-
   private static class NotificationCallable implements Callable<Void> {
     private final User user;
 
@@ -330,18 +253,20 @@ public class PushDeviceNotifications {
           Article bestArticle = getArticleToNotifyAbout(user, followedEntityIds);
           if (bestArticle != null) {
             System.out.println("Sending \"" + bestArticle.getTitle() + "\" to " + user.getEmail());
+            ArticleEvaluation evaluation = new ArticleEvaluation(bestArticle, followedEntityIds);
             for (DeviceRegistration registration : registrations) {
               Notification pushNotification =
                   IosPushNotificationHelper.createPushNotification(registration, bestArticle)
                       .toBuilder()
-                      .setIsEvent(isArticleAboutEvent(bestArticle))
-                      .setIsCompany(isArticleAboutCompany(bestArticle))
-                      .setIsFollowedCompany(isArticleAboutFollowedCompany(
-                          bestArticle, followedEntityIds))
+                      .setIsEvent(evaluation.isEvent())
+                      .setIsCompany(evaluation.isCompany())
+                      .setIsFollowedCompany(evaluation.isFollowedCompany())
                       .setHotCount(bestArticle.getHotCount())
                       .setScore(bestArticle.getScore())
                       .setNotificationScore(getArticleNotificationScore(
-                          bestArticle, followedEntityIds, bestArticle.getScore()))
+                          user, bestArticle, followedEntityIds))
+                      .setNnetScore(NotificationNeuralNetworkScorer.getInstance().getScore(
+                          bestArticle, followedEntityIds))
                       .build();
               IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
             }

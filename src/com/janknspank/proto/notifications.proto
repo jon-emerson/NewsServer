@@ -136,4 +136,7 @@ message Notification {
   optional int32 notification_score = 17 [
     (storage_method) = PULL_OUT
   ];
+  optional double nnet_score = 18 [
+    (storage_method) = PULL_OUT
+  ];
 }

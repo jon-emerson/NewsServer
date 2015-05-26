@@ -10493,7 +10493,7 @@ public final class UserProto {
        * <code>X_OUT = 2;</code>
        *
        * <pre>
-       * Swipe to dismiss
+       * Swipe left to dismiss
        * </pre>
        */
       X_OUT(2, 2),
@@ -10551,7 +10551,7 @@ public final class UserProto {
        * <code>X_OUT = 2;</code>
        *
        * <pre>
-       * Swipe to dismiss
+       * Swipe left to dismiss
        * </pre>
        */
       public static final int X_OUT_VALUE = 2;

@@ -87,6 +87,7 @@ public class ArticleSerializer {
     articleJson.put("first_paragraphs", toJsonArray(
         paragraphs.subList(0, Math.min(1, paragraphs.size()))));
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));
+    articleJson.put("native_reader_v1.1_enabled", true);
     articleJson.put("keyword",
         Serializer.toJSON(getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)));
     articleJson.put("client_date", getClientDate(article));
