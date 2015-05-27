@@ -103,7 +103,7 @@ public class PushDeviceNotifications {
     if (USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
       double score = NotificationNeuralNetworkScorer.getInstance()
           .getNormalizedScore(article, followedEntityIds);
-      return (int) (250 * (score * 4 - 3));
+      return Math.max(0, (int) (250 * (score * 3 - 2)));
     }
 
     // 0 out of 100 possible for ranking score.
@@ -200,7 +200,7 @@ public class PushDeviceNotifications {
       }
 
       int score = getArticleNotificationScore(user, article, followedEntityIds);
-      if (score > bestArticleScore) {
+      if (score > 0 && score > bestArticleScore) {
         bestArticleScore = score;
         bestArticle = article;
       }
