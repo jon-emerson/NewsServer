@@ -101,8 +101,9 @@ public class PushDeviceNotifications {
       User user, Article article, Set<String> followedEntityIds) {
     // Dogfood the new algorithm.
     if (USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
-      return (int) (300 * NotificationNeuralNetworkScorer.getInstance().getNormalizedScore(
-          article, followedEntityIds));
+      double score = NotificationNeuralNetworkScorer.getInstance()
+          .getNormalizedScore(article, followedEntityIds);
+      return (int) (300 * (score * 4 - 3));
     }
 
     // 0 out of 100 possible for ranking score.
@@ -268,7 +269,7 @@ public class PushDeviceNotifications {
                       .setNotificationScore(getArticleNotificationScore(
                           user, bestArticle, followedEntityIds))
                       .setNnetScore(NotificationNeuralNetworkScorer.getInstance()
-                          .getScore(bestArticle, followedEntityIds))
+                          .getNormalizedScore(bestArticle, followedEntityIds))
                       .setTwitterScore(SocialEngagements.getForArticle(bestArticle, Site.TWITTER)
                           .getShareScore())
                       .setFacebookScore(SocialEngagements.getForArticle(bestArticle, Site.FACEBOOK)

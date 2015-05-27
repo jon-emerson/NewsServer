@@ -428,5 +428,6 @@ public class ArticleCrawler implements Callable<Void> {
         .setWasInterrupted(false)
         .setEndTime(System.currentTimeMillis());
     updateCrawlHistoryInDatabase();
+    System.exit(0);
   }
 }
