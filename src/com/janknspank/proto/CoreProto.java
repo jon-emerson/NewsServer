@@ -19303,6 +19303,558 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:ExploreTopic)
   }
 
+  public interface ScrollPastsPerSiteOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string root_domain = 1;
+    /**
+     * <code>optional string root_domain = 1;</code>
+     */
+    boolean hasRootDomain();
+    /**
+     * <code>optional string root_domain = 1;</code>
+     */
+    java.lang.String getRootDomain();
+    /**
+     * <code>optional string root_domain = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getRootDomainBytes();
+
+    // optional int64 count = 2;
+    /**
+     * <code>optional int64 count = 2;</code>
+     */
+    boolean hasCount();
+    /**
+     * <code>optional int64 count = 2;</code>
+     */
+    long getCount();
+  }
+  /**
+   * Protobuf type {@code ScrollPastsPerSite}
+   */
+  public static final class ScrollPastsPerSite extends
+      com.google.protobuf.GeneratedMessage
+      implements ScrollPastsPerSiteOrBuilder {
+    // Use ScrollPastsPerSite.newBuilder() to construct.
+    private ScrollPastsPerSite(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ScrollPastsPerSite(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ScrollPastsPerSite defaultInstance;
+    public static ScrollPastsPerSite getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ScrollPastsPerSite getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ScrollPastsPerSite(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              rootDomain_ = input.readBytes();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              count_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_ScrollPastsPerSite_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_ScrollPastsPerSite_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.ScrollPastsPerSite.class, com.janknspank.proto.CoreProto.ScrollPastsPerSite.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ScrollPastsPerSite> PARSER =
+        new com.google.protobuf.AbstractParser<ScrollPastsPerSite>() {
+      public ScrollPastsPerSite parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ScrollPastsPerSite(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ScrollPastsPerSite> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string root_domain = 1;
+    public static final int ROOT_DOMAIN_FIELD_NUMBER = 1;
+    private java.lang.Object rootDomain_;
+    /**
+     * <code>optional string root_domain = 1;</code>
+     */
+    public boolean hasRootDomain() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string root_domain = 1;</code>
+     */
+    public java.lang.String getRootDomain() {
+      java.lang.Object ref = rootDomain_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          rootDomain_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string root_domain = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRootDomainBytes() {
+      java.lang.Object ref = rootDomain_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        rootDomain_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 count = 2;
+    public static final int COUNT_FIELD_NUMBER = 2;
+    private long count_;
+    /**
+     * <code>optional int64 count = 2;</code>
+     */
+    public boolean hasCount() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 count = 2;</code>
+     */
+    public long getCount() {
+      return count_;
+    }
+
+    private void initFields() {
+      rootDomain_ = "";
+      count_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getRootDomainBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, count_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getRootDomainBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, count_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.ScrollPastsPerSite parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.ScrollPastsPerSite prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ScrollPastsPerSite}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.ScrollPastsPerSiteOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_ScrollPastsPerSite_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_ScrollPastsPerSite_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.ScrollPastsPerSite.class, com.janknspank.proto.CoreProto.ScrollPastsPerSite.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.ScrollPastsPerSite.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        rootDomain_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        count_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_ScrollPastsPerSite_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.ScrollPastsPerSite getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.ScrollPastsPerSite.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.ScrollPastsPerSite build() {
+        com.janknspank.proto.CoreProto.ScrollPastsPerSite result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.ScrollPastsPerSite buildPartial() {
+        com.janknspank.proto.CoreProto.ScrollPastsPerSite result = new com.janknspank.proto.CoreProto.ScrollPastsPerSite(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.rootDomain_ = rootDomain_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.count_ = count_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.ScrollPastsPerSite) {
+          return mergeFrom((com.janknspank.proto.CoreProto.ScrollPastsPerSite)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.ScrollPastsPerSite other) {
+        if (other == com.janknspank.proto.CoreProto.ScrollPastsPerSite.getDefaultInstance()) return this;
+        if (other.hasRootDomain()) {
+          bitField0_ |= 0x00000001;
+          rootDomain_ = other.rootDomain_;
+          onChanged();
+        }
+        if (other.hasCount()) {
+          setCount(other.getCount());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.ScrollPastsPerSite parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.ScrollPastsPerSite) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string root_domain = 1;
+      private java.lang.Object rootDomain_ = "";
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public boolean hasRootDomain() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public java.lang.String getRootDomain() {
+        java.lang.Object ref = rootDomain_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          rootDomain_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRootDomainBytes() {
+        java.lang.Object ref = rootDomain_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          rootDomain_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public Builder setRootDomain(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        rootDomain_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public Builder clearRootDomain() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        rootDomain_ = getDefaultInstance().getRootDomain();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string root_domain = 1;</code>
+       */
+      public Builder setRootDomainBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        rootDomain_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 count = 2;
+      private long count_ ;
+      /**
+       * <code>optional int64 count = 2;</code>
+       */
+      public boolean hasCount() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 count = 2;</code>
+       */
+      public long getCount() {
+        return count_;
+      }
+      /**
+       * <code>optional int64 count = 2;</code>
+       */
+      public Builder setCount(long value) {
+        bitField0_ |= 0x00000002;
+        count_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 count = 2;</code>
+       */
+      public Builder clearCount() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        count_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ScrollPastsPerSite)
+    }
+
+    static {
+      defaultInstance = new ScrollPastsPerSite(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ScrollPastsPerSite)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -19398,6 +19950,11 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ExploreTopic_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ScrollPastsPerSite_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ScrollPastsPerSite_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -19502,8 +20059,11 @@ public final class CoreProto {
       "\006 \001(\tB\004\230\246\035\n\022\020\n\010latitude\030\007 \001(\001\022\021\n\tlongitu" +
       "de\030\010 \001(\001\"]\n\014ExploreTopic\022\031\n\007keyword\030\001 \001(" +
       "\tB\010\210\246\035\001\230\246\035d\022\033\n\tentity_id\030\002 \001(\tB\010\230\246\035\030\250\246\035\001" +
-      "\022\025\n\rindustry_code\030\003 \001(\005B!\n\024com.janknspan" +
-      "k.protoB\tCoreProto"
+      "\022\025\n\rindustry_code\030\003 \001(\005\"s\n\022ScrollPastsPe" +
+      "rSite\022&\n\013root_domain\030\001 \001(\tB\021\210\246\035\001\220\246\035\002\230\246\035\377" +
+      "\005\250\246\035\001\022\027\n\005count\030\002 \001(\003B\010\210\246\035\001\220\246\035\005:\034\212\265\030\030MySQ" +
+      "L.ScrollPastsPerSiteB!\n\024com.janknspank.p" +
+      "rotoB\tCoreProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19624,6 +20184,12 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ExploreTopic_descriptor,
               new java.lang.String[] { "Keyword", "EntityId", "IndustryCode", });
+          internal_static_ScrollPastsPerSite_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+          internal_static_ScrollPastsPerSite_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ScrollPastsPerSite_descriptor,
+              new java.lang.String[] { "RootDomain", "Count", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -19803,6 +20369,13 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
           return registry;
         }
       };

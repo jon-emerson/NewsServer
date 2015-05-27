@@ -8,10 +8,13 @@ import org.neuroph.core.data.DataSetRow;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Doubles;
 import com.janknspank.bizness.ArticleFeatures;
+import com.janknspank.bizness.ClicksPerSites;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.classifier.FeatureId;
+import com.janknspank.crawler.SiteManifests;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.proto.NotificationsProto.Notification;
 
 /**
@@ -24,6 +27,7 @@ public class ArticleEvaluation {
   private final boolean isFollowedCompany;
   private final double score;
   private final int hotCount;
+  private final double siteCtrRating;
 
   public ArticleEvaluation(Notification notification) {
     isCompany = notification.getIsCompany();
@@ -31,6 +35,12 @@ public class ArticleEvaluation {
     isFollowedCompany = notification.getIsFollowedCompany();
     score = notification.getScore();
     hotCount = notification.getHotCount();
+
+    SiteManifest site = notification.hasUrl()
+        ? SiteManifests.getForUrl(notification.getUrl())
+        : SiteManifests.getForShortName(
+            notification.getText().substring(0, notification.getText().indexOf(": ")));
+    siteCtrRating = ClicksPerSites.getCtrRating(site);
   }
 
   public ArticleEvaluation(Article article, Set<String> followedEntityIds) {
@@ -39,6 +49,9 @@ public class ArticleEvaluation {
     isFollowedCompany = isArticleAboutFollowedCompany(article, followedEntityIds);
     score = article.getScore();
     hotCount = article.getHotCount();
+
+    SiteManifest site = SiteManifests.getForUrl(article.getUrl());
+    siteCtrRating = ClicksPerSites.getCtrRating(site);
   }
 
   private static boolean isArticleAboutFollowedCompany(Article article, Set<String> followedEntityIds) {
@@ -61,7 +74,6 @@ public class ArticleEvaluation {
     }
     return false;
   }
-
 
   private static boolean isArticleAboutEvent(Article article) {
     return ArticleFeatures.getFeatureSimilarity(article,
@@ -100,7 +112,8 @@ public class ArticleEvaluation {
     linkedHashMap.put("is-event", isEvent ? 1.0 : 0.0);
     linkedHashMap.put("is-followed-company", isFollowedCompany ? 1.0 : 0.0);
     linkedHashMap.put("score", score);
-    linkedHashMap.put("hotCount", Math.min(1.0, ((double) hotCount) / 10));
+    linkedHashMap.put("hot-count", Math.min(1.0, ((double) hotCount) / 10));
+    linkedHashMap.put("site-ctr-rating", siteCtrRating);
     return linkedHashMap;
   }
 

@@ -87,6 +87,14 @@ message Notification {
     (string_charset) = LATIN1
   ];
 
+  // Optional: If we mentioned a specific article, this is the URL of that
+  // article.  This was added in late May 2015, so it doesn't exist on all
+  // articles.
+  optional string url = 21 [
+    (string_length) = 767,
+    (string_charset) = LATIN1
+  ];
+
   optional DeviceType device_type = 6 [
     (required) = YES,
     (storage_method) = PULL_OUT
@@ -137,6 +145,53 @@ message Notification {
     (storage_method) = PULL_OUT
   ];
   optional double nnet_score = 18 [
+    (storage_method) = PULL_OUT
+  ];
+  optional double facebook_score = 19 [
+    (storage_method) = PULL_OUT
+  ];
+  optional double twitter_score = 20 [
+    (storage_method) = PULL_OUT
+  ];
+}
+
+// Historical record of how many clicks we've gotten per site for various
+// content types - push notification, email, in-app.
+message ClicksPerSite {
+  option (database_collection) = "MySQL.ClicksPerSite";
+
+  enum ClickType {
+    UNKNOWN = 0;
+    PUSH = 1;
+    EMAIL = 2;
+    IN_APP = 3;
+  }
+  optional ClickType click_type = 1 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+
+  optional string root_domain = 2 [
+    (required) = YES,
+    (string_length) = 767,
+    (storage_method) = PULL_OUT,
+    (string_charset) = LATIN1
+  ];
+
+  optional int64 click_count = 3 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+
+  // This may not always be known.  E.g. in-app, we don't store how many times
+  // users actually see articles.
+  optional int64 instance_count = 4 [
+    (storage_method) = PULL_OUT
+  ];
+
+  // This is a score, from 0 to 1, that rates this site's CTR versus all other
+  // sites in our corpus.
+  optional double ctr_rating = 5 [
     (storage_method) = PULL_OUT
   ];
 }

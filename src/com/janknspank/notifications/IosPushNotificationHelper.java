@@ -234,6 +234,7 @@ public class IosPushNotificationHelper {
         .setCreateTime(System.currentTimeMillis())
         .setText(getText(article))
         .setUrlId(article.getUrlId())
+        .setUrl(article.getUrl())
         .setDeviceId(registration.getDeviceId())
         .setDeviceType(registration.getDeviceType())
         .setHost(Host.get())

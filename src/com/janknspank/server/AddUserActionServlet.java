@@ -12,10 +12,14 @@ import com.google.common.base.Strings;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
+import com.janknspank.crawler.SiteManifests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
 import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.ScrollPastsPerSite;
+import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
@@ -54,9 +58,9 @@ public class AddUserActionServlet extends StandardServlet {
       throw new RequestException("Parameter 'type' is invalid");
     }
 
-    // Don't save SCROLL_PAST actions - They happen too much, and we don't
-    // currently use them for anything.
+    // Special handling for SCROLL_PAST actions.
     if (actionType == ActionType.SCROLL_PAST) {
+      handleScrollPast(urlParam);
       return this.createSuccessResponse();
     }
 
@@ -141,5 +145,37 @@ public class AddUserActionServlet extends StandardServlet {
     }
 
     return createSuccessResponse();
+  }
+
+  /**
+   * Special handling for SCROLL_PAST events, for which there are many.  We
+   * actually don't want to store these verbatim, but there are aggregates
+   * that are useful to gather.
+   */
+  private void handleScrollPast(String url)
+      throws DatabaseSchemaException, DatabaseRequestException {
+    // One thing we can learn from scroll past events is the relative
+    // distribution of articles that we're showing from various sites.  This
+    // data is useful for normalizing the clicks, vote ups, and vote downs
+    // for articles from their respective sites.
+    SiteManifest site = SiteManifests.getForUrl(url);
+    if (site != null) {
+      ScrollPastsPerSite scrollPasts = Database.with(ScrollPastsPerSite.class).getFirst(
+          new QueryOption.WhereEquals("root_domain", site.getRootDomain()));
+      if (scrollPasts == null) {
+        Database.insert(ScrollPastsPerSite.newBuilder()
+            .setRootDomain(site.getRootDomain())
+            .setCount(1)
+            .build());
+      } else {
+        Database.update(scrollPasts.toBuilder()
+            .setCount(scrollPasts.getCount() + 1)
+            .build());
+      }
+    }
+  }
+
+  public static void main(String args[]) throws Exception {
+    Database.with(ScrollPastsPerSite.class).createTable();
   }
 }

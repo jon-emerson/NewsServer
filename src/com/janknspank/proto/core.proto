@@ -566,3 +566,19 @@ message ExploreTopic {
 
   optional int32 industry_code = 3;
 }
+
+message ScrollPastsPerSite {
+  option (database_collection) = "MySQL.ScrollPastsPerSite";
+
+  optional string root_domain = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 767,
+    (string_charset) = LATIN1
+  ];
+
+  optional int64 count = 2 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+}

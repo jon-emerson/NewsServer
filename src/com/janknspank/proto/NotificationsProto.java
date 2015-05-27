@@ -1287,6 +1287,39 @@ public final class NotificationsProto {
     com.google.protobuf.ByteString
         getUrlIdBytes();
 
+    // optional string url = 21;
+    /**
+     * <code>optional string url = 21;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL of that
+     * article.  This was added in late May 2015, so it doesn't exist on all
+     * articles.
+     * </pre>
+     */
+    boolean hasUrl();
+    /**
+     * <code>optional string url = 21;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL of that
+     * article.  This was added in late May 2015, so it doesn't exist on all
+     * articles.
+     * </pre>
+     */
+    java.lang.String getUrl();
+    /**
+     * <code>optional string url = 21;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL of that
+     * article.  This was added in late May 2015, so it doesn't exist on all
+     * articles.
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes();
+
     // optional .DeviceType device_type = 6;
     /**
      * <code>optional .DeviceType device_type = 6;</code>
@@ -1475,6 +1508,26 @@ public final class NotificationsProto {
      * <code>optional double nnet_score = 18;</code>
      */
     double getNnetScore();
+
+    // optional double facebook_score = 19;
+    /**
+     * <code>optional double facebook_score = 19;</code>
+     */
+    boolean hasFacebookScore();
+    /**
+     * <code>optional double facebook_score = 19;</code>
+     */
+    double getFacebookScore();
+
+    // optional double twitter_score = 20;
+    /**
+     * <code>optional double twitter_score = 20;</code>
+     */
+    boolean hasTwitterScore();
+    /**
+     * <code>optional double twitter_score = 20;</code>
+     */
+    double getTwitterScore();
   }
   /**
    * Protobuf type {@code Notification}
@@ -1562,72 +1615,87 @@ public final class NotificationsProto {
               if (value == null) {
                 unknownFields.mergeVarintField(6, rawValue);
               } else {
-                bitField0_ |= 0x00000020;
+                bitField0_ |= 0x00000040;
                 deviceType_ = value;
               }
               break;
             }
             case 58: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               deviceId_ = input.readBytes();
               break;
             }
             case 66: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               host_ = input.readBytes();
               break;
             }
             case 74: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               text_ = input.readBytes();
               break;
             }
             case 80: {
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000400;
               articlePublishedTime_ = input.readInt64();
               break;
             }
             case 90: {
-              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
                 dedupingStems_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000400;
+                mutable_bitField0_ |= 0x00000800;
               }
               dedupingStems_.add(input.readBytes());
               break;
             }
             case 96: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000800;
               isFollowedCompany_ = input.readBool();
               break;
             }
             case 104: {
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00001000;
               isCompany_ = input.readBool();
               break;
             }
             case 112: {
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00002000;
               isEvent_ = input.readBool();
               break;
             }
             case 120: {
-              bitField0_ |= 0x00002000;
+              bitField0_ |= 0x00004000;
               hotCount_ = input.readInt32();
               break;
             }
             case 129: {
-              bitField0_ |= 0x00004000;
+              bitField0_ |= 0x00008000;
               score_ = input.readDouble();
               break;
             }
             case 136: {
-              bitField0_ |= 0x00008000;
+              bitField0_ |= 0x00010000;
               notificationScore_ = input.readInt32();
               break;
             }
             case 145: {
-              bitField0_ |= 0x00010000;
+              bitField0_ |= 0x00020000;
               nnetScore_ = input.readDouble();
+              break;
+            }
+            case 153: {
+              bitField0_ |= 0x00040000;
+              facebookScore_ = input.readDouble();
+              break;
+            }
+            case 161: {
+              bitField0_ |= 0x00080000;
+              twitterScore_ = input.readDouble();
+              break;
+            }
+            case 170: {
+              bitField0_ |= 0x00000020;
+              url_ = input.readBytes();
               break;
             }
           }
@@ -1638,7 +1706,7 @@ public final class NotificationsProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
           dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(dedupingStems_);
         }
         this.unknownFields = unknownFields.build();
@@ -1871,6 +1939,67 @@ public final class NotificationsProto {
       }
     }
 
+    // optional string url = 21;
+    public static final int URL_FIELD_NUMBER = 21;
+    private java.lang.Object url_;
+    /**
+     * <code>optional string url = 21;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL of that
+     * article.  This was added in late May 2015, so it doesn't exist on all
+     * articles.
+     * </pre>
+     */
+    public boolean hasUrl() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string url = 21;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL of that
+     * article.  This was added in late May 2015, so it doesn't exist on all
+     * articles.
+     * </pre>
+     */
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          url_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url = 21;</code>
+     *
+     * <pre>
+     * Optional: If we mentioned a specific article, this is the URL of that
+     * article.  This was added in late May 2015, so it doesn't exist on all
+     * articles.
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional .DeviceType device_type = 6;
     public static final int DEVICE_TYPE_FIELD_NUMBER = 6;
     private com.janknspank.proto.NotificationsProto.DeviceType deviceType_;
@@ -1878,7 +2007,7 @@ public final class NotificationsProto {
      * <code>optional .DeviceType device_type = 6;</code>
      */
     public boolean hasDeviceType() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional .DeviceType device_type = 6;</code>
@@ -1894,7 +2023,7 @@ public final class NotificationsProto {
      * <code>optional string device_id = 7;</code>
      */
     public boolean hasDeviceId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional string device_id = 7;</code>
@@ -1941,7 +2070,7 @@ public final class NotificationsProto {
      * </pre>
      */
     public boolean hasHost() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional string host = 8;</code>
@@ -1996,7 +2125,7 @@ public final class NotificationsProto {
      * </pre>
      */
     public boolean hasText() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional string text = 9;</code>
@@ -2047,7 +2176,7 @@ public final class NotificationsProto {
      * <code>optional int64 article_published_time = 10;</code>
      */
     public boolean hasArticlePublishedTime() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
      * <code>optional int64 article_published_time = 10;</code>
@@ -2098,7 +2227,7 @@ public final class NotificationsProto {
      * </pre>
      */
     public boolean hasIsFollowedCompany() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
      * <code>optional bool is_followed_company = 12;</code>
@@ -2119,7 +2248,7 @@ public final class NotificationsProto {
      * <code>optional bool is_company = 13;</code>
      */
     public boolean hasIsCompany() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     /**
      * <code>optional bool is_company = 13;</code>
@@ -2135,7 +2264,7 @@ public final class NotificationsProto {
      * <code>optional bool is_event = 14;</code>
      */
     public boolean hasIsEvent() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     /**
      * <code>optional bool is_event = 14;</code>
@@ -2151,7 +2280,7 @@ public final class NotificationsProto {
      * <code>optional int32 hot_count = 15;</code>
      */
     public boolean hasHotCount() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     /**
      * <code>optional int32 hot_count = 15;</code>
@@ -2167,7 +2296,7 @@ public final class NotificationsProto {
      * <code>optional double score = 16;</code>
      */
     public boolean hasScore() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     /**
      * <code>optional double score = 16;</code>
@@ -2183,7 +2312,7 @@ public final class NotificationsProto {
      * <code>optional int32 notification_score = 17;</code>
      */
     public boolean hasNotificationScore() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     /**
      * <code>optional int32 notification_score = 17;</code>
@@ -2199,7 +2328,7 @@ public final class NotificationsProto {
      * <code>optional double nnet_score = 18;</code>
      */
     public boolean hasNnetScore() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     /**
      * <code>optional double nnet_score = 18;</code>
@@ -2208,12 +2337,45 @@ public final class NotificationsProto {
       return nnetScore_;
     }
 
+    // optional double facebook_score = 19;
+    public static final int FACEBOOK_SCORE_FIELD_NUMBER = 19;
+    private double facebookScore_;
+    /**
+     * <code>optional double facebook_score = 19;</code>
+     */
+    public boolean hasFacebookScore() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
+    }
+    /**
+     * <code>optional double facebook_score = 19;</code>
+     */
+    public double getFacebookScore() {
+      return facebookScore_;
+    }
+
+    // optional double twitter_score = 20;
+    public static final int TWITTER_SCORE_FIELD_NUMBER = 20;
+    private double twitterScore_;
+    /**
+     * <code>optional double twitter_score = 20;</code>
+     */
+    public boolean hasTwitterScore() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    /**
+     * <code>optional double twitter_score = 20;</code>
+     */
+    public double getTwitterScore() {
+      return twitterScore_;
+    }
+
     private void initFields() {
       id_ = "";
       createTime_ = 0L;
       clickTime_ = 0L;
       userId_ = "";
       urlId_ = "";
+      url_ = "";
       deviceType_ = com.janknspank.proto.NotificationsProto.DeviceType.UNKNOWN;
       deviceId_ = "";
       host_ = "";
@@ -2227,6 +2389,8 @@ public final class NotificationsProto {
       score_ = 0D;
       notificationScore_ = 0;
       nnetScore_ = 0D;
+      facebookScore_ = 0D;
+      twitterScore_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2255,44 +2419,53 @@ public final class NotificationsProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getUrlIdBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeEnum(6, deviceType_.getNumber());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(7, getDeviceIdBytes());
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(8, getHostBytes());
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(9, getTextBytes());
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt64(10, articlePublishedTime_);
       }
       for (int i = 0; i < dedupingStems_.size(); i++) {
         output.writeBytes(11, dedupingStems_.getByteString(i));
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeBool(12, isFollowedCompany_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeBool(13, isCompany_);
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeBool(14, isEvent_);
       }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeInt32(15, hotCount_);
       }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeDouble(16, score_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeInt32(17, notificationScore_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         output.writeDouble(18, nnetScore_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeDouble(19, facebookScore_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeDouble(20, twitterScore_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(21, getUrlBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2323,23 +2496,23 @@ public final class NotificationsProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getUrlIdBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(6, deviceType_.getNumber());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getDeviceIdBytes());
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(8, getHostBytes());
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getTextBytes());
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(10, articlePublishedTime_);
       }
@@ -2352,33 +2525,45 @@ public final class NotificationsProto {
         size += dataSize;
         size += 1 * getDedupingStemsList().size();
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(12, isFollowedCompany_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(13, isCompany_);
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(14, isEvent_);
       }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(15, hotCount_);
       }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(16, score_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(17, notificationScore_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(18, nnetScore_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(19, facebookScore_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(20, twitterScore_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(21, getUrlBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2510,32 +2695,38 @@ public final class NotificationsProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         urlId_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        deviceType_ = com.janknspank.proto.NotificationsProto.DeviceType.UNKNOWN;
+        url_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        deviceId_ = "";
+        deviceType_ = com.janknspank.proto.NotificationsProto.DeviceType.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000040);
-        host_ = "";
+        deviceId_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
-        text_ = "";
+        host_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
-        articlePublishedTime_ = 0L;
+        text_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
-        dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        articlePublishedTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000400);
-        isFollowedCompany_ = false;
+        dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000800);
-        isCompany_ = false;
+        isFollowedCompany_ = false;
         bitField0_ = (bitField0_ & ~0x00001000);
-        isEvent_ = false;
+        isCompany_ = false;
         bitField0_ = (bitField0_ & ~0x00002000);
-        hotCount_ = 0;
+        isEvent_ = false;
         bitField0_ = (bitField0_ & ~0x00004000);
-        score_ = 0D;
+        hotCount_ = 0;
         bitField0_ = (bitField0_ & ~0x00008000);
-        notificationScore_ = 0;
+        score_ = 0D;
         bitField0_ = (bitField0_ & ~0x00010000);
-        nnetScore_ = 0D;
+        notificationScore_ = 0;
         bitField0_ = (bitField0_ & ~0x00020000);
+        nnetScore_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00040000);
+        facebookScore_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00080000);
+        twitterScore_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00100000);
         return this;
       }
 
@@ -2587,57 +2778,69 @@ public final class NotificationsProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.deviceType_ = deviceType_;
+        result.url_ = url_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.deviceId_ = deviceId_;
+        result.deviceType_ = deviceType_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.host_ = host_;
+        result.deviceId_ = deviceId_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.text_ = text_;
+        result.host_ = host_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.articlePublishedTime_ = articlePublishedTime_;
-        if (((bitField0_ & 0x00000400) == 0x00000400)) {
-          dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              dedupingStems_);
-          bitField0_ = (bitField0_ & ~0x00000400);
-        }
-        result.dedupingStems_ = dedupingStems_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+        result.text_ = text_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.isFollowedCompany_ = isFollowedCompany_;
+        result.articlePublishedTime_ = articlePublishedTime_;
+        if (((bitField0_ & 0x00000800) == 0x00000800)) {
+          dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              dedupingStems_);
+          bitField0_ = (bitField0_ & ~0x00000800);
+        }
+        result.dedupingStems_ = dedupingStems_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.isCompany_ = isCompany_;
+        result.isFollowedCompany_ = isFollowedCompany_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.isEvent_ = isEvent_;
+        result.isCompany_ = isCompany_;
         if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.hotCount_ = hotCount_;
+        result.isEvent_ = isEvent_;
         if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.score_ = score_;
+        result.hotCount_ = hotCount_;
         if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.notificationScore_ = notificationScore_;
+        result.score_ = score_;
         if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00010000;
         }
+        result.notificationScore_ = notificationScore_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00020000;
+        }
         result.nnetScore_ = nnetScore_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.facebookScore_ = facebookScore_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        result.twitterScore_ = twitterScore_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2675,21 +2878,26 @@ public final class NotificationsProto {
           urlId_ = other.urlId_;
           onChanged();
         }
+        if (other.hasUrl()) {
+          bitField0_ |= 0x00000020;
+          url_ = other.url_;
+          onChanged();
+        }
         if (other.hasDeviceType()) {
           setDeviceType(other.getDeviceType());
         }
         if (other.hasDeviceId()) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
           deviceId_ = other.deviceId_;
           onChanged();
         }
         if (other.hasHost()) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
           host_ = other.host_;
           onChanged();
         }
         if (other.hasText()) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
           text_ = other.text_;
           onChanged();
         }
@@ -2699,7 +2907,7 @@ public final class NotificationsProto {
         if (!other.dedupingStems_.isEmpty()) {
           if (dedupingStems_.isEmpty()) {
             dedupingStems_ = other.dedupingStems_;
-            bitField0_ = (bitField0_ & ~0x00000400);
+            bitField0_ = (bitField0_ & ~0x00000800);
           } else {
             ensureDedupingStemsIsMutable();
             dedupingStems_.addAll(other.dedupingStems_);
@@ -2726,6 +2934,12 @@ public final class NotificationsProto {
         }
         if (other.hasNnetScore()) {
           setNnetScore(other.getNnetScore());
+        }
+        if (other.hasFacebookScore()) {
+          setFacebookScore(other.getFacebookScore());
+        }
+        if (other.hasTwitterScore()) {
+          setTwitterScore(other.getTwitterScore());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3116,13 +3330,123 @@ public final class NotificationsProto {
         return this;
       }
 
+      // optional string url = 21;
+      private java.lang.Object url_ = "";
+      /**
+       * <code>optional string url = 21;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL of that
+       * article.  This was added in late May 2015, so it doesn't exist on all
+       * articles.
+       * </pre>
+       */
+      public boolean hasUrl() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string url = 21;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL of that
+       * article.  This was added in late May 2015, so it doesn't exist on all
+       * articles.
+       * </pre>
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          url_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 21;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL of that
+       * article.  This was added in late May 2015, so it doesn't exist on all
+       * articles.
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 21;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL of that
+       * article.  This was added in late May 2015, so it doesn't exist on all
+       * articles.
+       * </pre>
+       */
+      public Builder setUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 21;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL of that
+       * article.  This was added in late May 2015, so it doesn't exist on all
+       * articles.
+       * </pre>
+       */
+      public Builder clearUrl() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 21;</code>
+       *
+       * <pre>
+       * Optional: If we mentioned a specific article, this is the URL of that
+       * article.  This was added in late May 2015, so it doesn't exist on all
+       * articles.
+       * </pre>
+       */
+      public Builder setUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+
       // optional .DeviceType device_type = 6;
       private com.janknspank.proto.NotificationsProto.DeviceType deviceType_ = com.janknspank.proto.NotificationsProto.DeviceType.UNKNOWN;
       /**
        * <code>optional .DeviceType device_type = 6;</code>
        */
       public boolean hasDeviceType() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional .DeviceType device_type = 6;</code>
@@ -3137,7 +3461,7 @@ public final class NotificationsProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         deviceType_ = value;
         onChanged();
         return this;
@@ -3146,7 +3470,7 @@ public final class NotificationsProto {
        * <code>optional .DeviceType device_type = 6;</code>
        */
       public Builder clearDeviceType() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         deviceType_ = com.janknspank.proto.NotificationsProto.DeviceType.UNKNOWN;
         onChanged();
         return this;
@@ -3158,7 +3482,7 @@ public final class NotificationsProto {
        * <code>optional string device_id = 7;</code>
        */
       public boolean hasDeviceId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional string device_id = 7;</code>
@@ -3198,7 +3522,7 @@ public final class NotificationsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         deviceId_ = value;
         onChanged();
         return this;
@@ -3207,7 +3531,7 @@ public final class NotificationsProto {
        * <code>optional string device_id = 7;</code>
        */
       public Builder clearDeviceId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         deviceId_ = getDefaultInstance().getDeviceId();
         onChanged();
         return this;
@@ -3220,7 +3544,7 @@ public final class NotificationsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         deviceId_ = value;
         onChanged();
         return this;
@@ -3236,7 +3560,7 @@ public final class NotificationsProto {
        * </pre>
        */
       public boolean hasHost() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional string host = 8;</code>
@@ -3288,7 +3612,7 @@ public final class NotificationsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         host_ = value;
         onChanged();
         return this;
@@ -3301,7 +3625,7 @@ public final class NotificationsProto {
        * </pre>
        */
       public Builder clearHost() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         host_ = getDefaultInstance().getHost();
         onChanged();
         return this;
@@ -3318,7 +3642,7 @@ public final class NotificationsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         host_ = value;
         onChanged();
         return this;
@@ -3334,7 +3658,7 @@ public final class NotificationsProto {
        * </pre>
        */
       public boolean hasText() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional string text = 9;</code>
@@ -3386,7 +3710,7 @@ public final class NotificationsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         text_ = value;
         onChanged();
         return this;
@@ -3399,7 +3723,7 @@ public final class NotificationsProto {
        * </pre>
        */
       public Builder clearText() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         text_ = getDefaultInstance().getText();
         onChanged();
         return this;
@@ -3416,7 +3740,7 @@ public final class NotificationsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         text_ = value;
         onChanged();
         return this;
@@ -3428,7 +3752,7 @@ public final class NotificationsProto {
        * <code>optional int64 article_published_time = 10;</code>
        */
       public boolean hasArticlePublishedTime() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional int64 article_published_time = 10;</code>
@@ -3440,7 +3764,7 @@ public final class NotificationsProto {
        * <code>optional int64 article_published_time = 10;</code>
        */
       public Builder setArticlePublishedTime(long value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         articlePublishedTime_ = value;
         onChanged();
         return this;
@@ -3449,7 +3773,7 @@ public final class NotificationsProto {
        * <code>optional int64 article_published_time = 10;</code>
        */
       public Builder clearArticlePublishedTime() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         articlePublishedTime_ = 0L;
         onChanged();
         return this;
@@ -3458,9 +3782,9 @@ public final class NotificationsProto {
       // repeated string deduping_stems = 11;
       private com.google.protobuf.LazyStringList dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureDedupingStemsIsMutable() {
-        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
           dedupingStems_ = new com.google.protobuf.LazyStringArrayList(dedupingStems_);
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000800;
          }
       }
       /**
@@ -3530,7 +3854,7 @@ public final class NotificationsProto {
        */
       public Builder clearDedupingStems() {
         dedupingStems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         onChanged();
         return this;
       }
@@ -3559,7 +3883,7 @@ public final class NotificationsProto {
        * </pre>
        */
       public boolean hasIsFollowedCompany() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
        * <code>optional bool is_followed_company = 12;</code>
@@ -3581,7 +3905,7 @@ public final class NotificationsProto {
        * </pre>
        */
       public Builder setIsFollowedCompany(boolean value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00001000;
         isFollowedCompany_ = value;
         onChanged();
         return this;
@@ -3595,7 +3919,7 @@ public final class NotificationsProto {
        * </pre>
        */
       public Builder clearIsFollowedCompany() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         isFollowedCompany_ = false;
         onChanged();
         return this;
@@ -3607,7 +3931,7 @@ public final class NotificationsProto {
        * <code>optional bool is_company = 13;</code>
        */
       public boolean hasIsCompany() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
        * <code>optional bool is_company = 13;</code>
@@ -3619,7 +3943,7 @@ public final class NotificationsProto {
        * <code>optional bool is_company = 13;</code>
        */
       public Builder setIsCompany(boolean value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00002000;
         isCompany_ = value;
         onChanged();
         return this;
@@ -3628,7 +3952,7 @@ public final class NotificationsProto {
        * <code>optional bool is_company = 13;</code>
        */
       public Builder clearIsCompany() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         isCompany_ = false;
         onChanged();
         return this;
@@ -3640,7 +3964,7 @@ public final class NotificationsProto {
        * <code>optional bool is_event = 14;</code>
        */
       public boolean hasIsEvent() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       /**
        * <code>optional bool is_event = 14;</code>
@@ -3652,7 +3976,7 @@ public final class NotificationsProto {
        * <code>optional bool is_event = 14;</code>
        */
       public Builder setIsEvent(boolean value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00004000;
         isEvent_ = value;
         onChanged();
         return this;
@@ -3661,7 +3985,7 @@ public final class NotificationsProto {
        * <code>optional bool is_event = 14;</code>
        */
       public Builder clearIsEvent() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         isEvent_ = false;
         onChanged();
         return this;
@@ -3673,7 +3997,7 @@ public final class NotificationsProto {
        * <code>optional int32 hot_count = 15;</code>
        */
       public boolean hasHotCount() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       /**
        * <code>optional int32 hot_count = 15;</code>
@@ -3685,7 +4009,7 @@ public final class NotificationsProto {
        * <code>optional int32 hot_count = 15;</code>
        */
       public Builder setHotCount(int value) {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         hotCount_ = value;
         onChanged();
         return this;
@@ -3694,7 +4018,7 @@ public final class NotificationsProto {
        * <code>optional int32 hot_count = 15;</code>
        */
       public Builder clearHotCount() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         hotCount_ = 0;
         onChanged();
         return this;
@@ -3706,7 +4030,7 @@ public final class NotificationsProto {
        * <code>optional double score = 16;</code>
        */
       public boolean hasScore() {
-        return ((bitField0_ & 0x00008000) == 0x00008000);
+        return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       /**
        * <code>optional double score = 16;</code>
@@ -3718,7 +4042,7 @@ public final class NotificationsProto {
        * <code>optional double score = 16;</code>
        */
       public Builder setScore(double value) {
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         score_ = value;
         onChanged();
         return this;
@@ -3727,7 +4051,7 @@ public final class NotificationsProto {
        * <code>optional double score = 16;</code>
        */
       public Builder clearScore() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         score_ = 0D;
         onChanged();
         return this;
@@ -3739,7 +4063,7 @@ public final class NotificationsProto {
        * <code>optional int32 notification_score = 17;</code>
        */
       public boolean hasNotificationScore() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
+        return ((bitField0_ & 0x00020000) == 0x00020000);
       }
       /**
        * <code>optional int32 notification_score = 17;</code>
@@ -3751,7 +4075,7 @@ public final class NotificationsProto {
        * <code>optional int32 notification_score = 17;</code>
        */
       public Builder setNotificationScore(int value) {
-        bitField0_ |= 0x00010000;
+        bitField0_ |= 0x00020000;
         notificationScore_ = value;
         onChanged();
         return this;
@@ -3760,7 +4084,7 @@ public final class NotificationsProto {
        * <code>optional int32 notification_score = 17;</code>
        */
       public Builder clearNotificationScore() {
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         notificationScore_ = 0;
         onChanged();
         return this;
@@ -3772,7 +4096,7 @@ public final class NotificationsProto {
        * <code>optional double nnet_score = 18;</code>
        */
       public boolean hasNnetScore() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
+        return ((bitField0_ & 0x00040000) == 0x00040000);
       }
       /**
        * <code>optional double nnet_score = 18;</code>
@@ -3784,7 +4108,7 @@ public final class NotificationsProto {
        * <code>optional double nnet_score = 18;</code>
        */
       public Builder setNnetScore(double value) {
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00040000;
         nnetScore_ = value;
         onChanged();
         return this;
@@ -3793,8 +4117,74 @@ public final class NotificationsProto {
        * <code>optional double nnet_score = 18;</code>
        */
       public Builder clearNnetScore() {
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         nnetScore_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional double facebook_score = 19;
+      private double facebookScore_ ;
+      /**
+       * <code>optional double facebook_score = 19;</code>
+       */
+      public boolean hasFacebookScore() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      /**
+       * <code>optional double facebook_score = 19;</code>
+       */
+      public double getFacebookScore() {
+        return facebookScore_;
+      }
+      /**
+       * <code>optional double facebook_score = 19;</code>
+       */
+      public Builder setFacebookScore(double value) {
+        bitField0_ |= 0x00080000;
+        facebookScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double facebook_score = 19;</code>
+       */
+      public Builder clearFacebookScore() {
+        bitField0_ = (bitField0_ & ~0x00080000);
+        facebookScore_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional double twitter_score = 20;
+      private double twitterScore_ ;
+      /**
+       * <code>optional double twitter_score = 20;</code>
+       */
+      public boolean hasTwitterScore() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional double twitter_score = 20;</code>
+       */
+      public double getTwitterScore() {
+        return twitterScore_;
+      }
+      /**
+       * <code>optional double twitter_score = 20;</code>
+       */
+      public Builder setTwitterScore(double value) {
+        bitField0_ |= 0x00100000;
+        twitterScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double twitter_score = 20;</code>
+       */
+      public Builder clearTwitterScore() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        twitterScore_ = 0D;
         onChanged();
         return this;
       }
@@ -3810,6 +4200,1000 @@ public final class NotificationsProto {
     // @@protoc_insertion_point(class_scope:Notification)
   }
 
+  public interface ClicksPerSiteOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional .ClicksPerSite.ClickType click_type = 1;
+    /**
+     * <code>optional .ClicksPerSite.ClickType click_type = 1;</code>
+     */
+    boolean hasClickType();
+    /**
+     * <code>optional .ClicksPerSite.ClickType click_type = 1;</code>
+     */
+    com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType getClickType();
+
+    // optional string root_domain = 2;
+    /**
+     * <code>optional string root_domain = 2;</code>
+     */
+    boolean hasRootDomain();
+    /**
+     * <code>optional string root_domain = 2;</code>
+     */
+    java.lang.String getRootDomain();
+    /**
+     * <code>optional string root_domain = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getRootDomainBytes();
+
+    // optional int64 click_count = 3;
+    /**
+     * <code>optional int64 click_count = 3;</code>
+     */
+    boolean hasClickCount();
+    /**
+     * <code>optional int64 click_count = 3;</code>
+     */
+    long getClickCount();
+
+    // optional int64 instance_count = 4;
+    /**
+     * <code>optional int64 instance_count = 4;</code>
+     *
+     * <pre>
+     * This may not always be known.  E.g. in-app, we don't store how many times
+     * users actually see articles.
+     * </pre>
+     */
+    boolean hasInstanceCount();
+    /**
+     * <code>optional int64 instance_count = 4;</code>
+     *
+     * <pre>
+     * This may not always be known.  E.g. in-app, we don't store how many times
+     * users actually see articles.
+     * </pre>
+     */
+    long getInstanceCount();
+
+    // optional double ctr_rating = 5;
+    /**
+     * <code>optional double ctr_rating = 5;</code>
+     *
+     * <pre>
+     * This is a score, from 0 to 1, that rates this site's CTR versus all other
+     * sites in our corpus.
+     * </pre>
+     */
+    boolean hasCtrRating();
+    /**
+     * <code>optional double ctr_rating = 5;</code>
+     *
+     * <pre>
+     * This is a score, from 0 to 1, that rates this site's CTR versus all other
+     * sites in our corpus.
+     * </pre>
+     */
+    double getCtrRating();
+  }
+  /**
+   * Protobuf type {@code ClicksPerSite}
+   *
+   * <pre>
+   * Historical record of how many clicks we've gotten per site for various
+   * content types - push notification, email, in-app.
+   * </pre>
+   */
+  public static final class ClicksPerSite extends
+      com.google.protobuf.GeneratedMessage
+      implements ClicksPerSiteOrBuilder {
+    // Use ClicksPerSite.newBuilder() to construct.
+    private ClicksPerSite(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ClicksPerSite(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ClicksPerSite defaultInstance;
+    public static ClicksPerSite getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ClicksPerSite getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ClicksPerSite(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType value = com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                clickType_ = value;
+              }
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              rootDomain_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              clickCount_ = input.readInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              instanceCount_ = input.readInt64();
+              break;
+            }
+            case 41: {
+              bitField0_ |= 0x00000010;
+              ctrRating_ = input.readDouble();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.NotificationsProto.internal_static_ClicksPerSite_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.NotificationsProto.internal_static_ClicksPerSite_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.NotificationsProto.ClicksPerSite.class, com.janknspank.proto.NotificationsProto.ClicksPerSite.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ClicksPerSite> PARSER =
+        new com.google.protobuf.AbstractParser<ClicksPerSite>() {
+      public ClicksPerSite parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ClicksPerSite(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ClicksPerSite> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code ClicksPerSite.ClickType}
+     */
+    public enum ClickType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>PUSH = 1;</code>
+       */
+      PUSH(1, 1),
+      /**
+       * <code>EMAIL = 2;</code>
+       */
+      EMAIL(2, 2),
+      /**
+       * <code>IN_APP = 3;</code>
+       */
+      IN_APP(3, 3),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>PUSH = 1;</code>
+       */
+      public static final int PUSH_VALUE = 1;
+      /**
+       * <code>EMAIL = 2;</code>
+       */
+      public static final int EMAIL_VALUE = 2;
+      /**
+       * <code>IN_APP = 3;</code>
+       */
+      public static final int IN_APP_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static ClickType valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return PUSH;
+          case 2: return EMAIL;
+          case 3: return IN_APP;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<ClickType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<ClickType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ClickType>() {
+              public ClickType findValueByNumber(int number) {
+                return ClickType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.NotificationsProto.ClicksPerSite.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final ClickType[] VALUES = values();
+
+      public static ClickType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private ClickType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:ClicksPerSite.ClickType)
+    }
+
+    private int bitField0_;
+    // optional .ClicksPerSite.ClickType click_type = 1;
+    public static final int CLICK_TYPE_FIELD_NUMBER = 1;
+    private com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType clickType_;
+    /**
+     * <code>optional .ClicksPerSite.ClickType click_type = 1;</code>
+     */
+    public boolean hasClickType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .ClicksPerSite.ClickType click_type = 1;</code>
+     */
+    public com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType getClickType() {
+      return clickType_;
+    }
+
+    // optional string root_domain = 2;
+    public static final int ROOT_DOMAIN_FIELD_NUMBER = 2;
+    private java.lang.Object rootDomain_;
+    /**
+     * <code>optional string root_domain = 2;</code>
+     */
+    public boolean hasRootDomain() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string root_domain = 2;</code>
+     */
+    public java.lang.String getRootDomain() {
+      java.lang.Object ref = rootDomain_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          rootDomain_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string root_domain = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRootDomainBytes() {
+      java.lang.Object ref = rootDomain_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        rootDomain_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 click_count = 3;
+    public static final int CLICK_COUNT_FIELD_NUMBER = 3;
+    private long clickCount_;
+    /**
+     * <code>optional int64 click_count = 3;</code>
+     */
+    public boolean hasClickCount() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 click_count = 3;</code>
+     */
+    public long getClickCount() {
+      return clickCount_;
+    }
+
+    // optional int64 instance_count = 4;
+    public static final int INSTANCE_COUNT_FIELD_NUMBER = 4;
+    private long instanceCount_;
+    /**
+     * <code>optional int64 instance_count = 4;</code>
+     *
+     * <pre>
+     * This may not always be known.  E.g. in-app, we don't store how many times
+     * users actually see articles.
+     * </pre>
+     */
+    public boolean hasInstanceCount() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 instance_count = 4;</code>
+     *
+     * <pre>
+     * This may not always be known.  E.g. in-app, we don't store how many times
+     * users actually see articles.
+     * </pre>
+     */
+    public long getInstanceCount() {
+      return instanceCount_;
+    }
+
+    // optional double ctr_rating = 5;
+    public static final int CTR_RATING_FIELD_NUMBER = 5;
+    private double ctrRating_;
+    /**
+     * <code>optional double ctr_rating = 5;</code>
+     *
+     * <pre>
+     * This is a score, from 0 to 1, that rates this site's CTR versus all other
+     * sites in our corpus.
+     * </pre>
+     */
+    public boolean hasCtrRating() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional double ctr_rating = 5;</code>
+     *
+     * <pre>
+     * This is a score, from 0 to 1, that rates this site's CTR versus all other
+     * sites in our corpus.
+     * </pre>
+     */
+    public double getCtrRating() {
+      return ctrRating_;
+    }
+
+    private void initFields() {
+      clickType_ = com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType.UNKNOWN;
+      rootDomain_ = "";
+      clickCount_ = 0L;
+      instanceCount_ = 0L;
+      ctrRating_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, clickType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getRootDomainBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, clickCount_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, instanceCount_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeDouble(5, ctrRating_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, clickType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getRootDomainBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clickCount_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, instanceCount_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(5, ctrRating_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.NotificationsProto.ClicksPerSite parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.NotificationsProto.ClicksPerSite prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ClicksPerSite}
+     *
+     * <pre>
+     * Historical record of how many clicks we've gotten per site for various
+     * content types - push notification, email, in-app.
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.NotificationsProto.ClicksPerSiteOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.NotificationsProto.internal_static_ClicksPerSite_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.NotificationsProto.internal_static_ClicksPerSite_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.NotificationsProto.ClicksPerSite.class, com.janknspank.proto.NotificationsProto.ClicksPerSite.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.NotificationsProto.ClicksPerSite.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        clickType_ = com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        rootDomain_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clickCount_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        instanceCount_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        ctrRating_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.NotificationsProto.internal_static_ClicksPerSite_descriptor;
+      }
+
+      public com.janknspank.proto.NotificationsProto.ClicksPerSite getDefaultInstanceForType() {
+        return com.janknspank.proto.NotificationsProto.ClicksPerSite.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.NotificationsProto.ClicksPerSite build() {
+        com.janknspank.proto.NotificationsProto.ClicksPerSite result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.NotificationsProto.ClicksPerSite buildPartial() {
+        com.janknspank.proto.NotificationsProto.ClicksPerSite result = new com.janknspank.proto.NotificationsProto.ClicksPerSite(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.clickType_ = clickType_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.rootDomain_ = rootDomain_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clickCount_ = clickCount_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.instanceCount_ = instanceCount_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.ctrRating_ = ctrRating_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.NotificationsProto.ClicksPerSite) {
+          return mergeFrom((com.janknspank.proto.NotificationsProto.ClicksPerSite)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.NotificationsProto.ClicksPerSite other) {
+        if (other == com.janknspank.proto.NotificationsProto.ClicksPerSite.getDefaultInstance()) return this;
+        if (other.hasClickType()) {
+          setClickType(other.getClickType());
+        }
+        if (other.hasRootDomain()) {
+          bitField0_ |= 0x00000002;
+          rootDomain_ = other.rootDomain_;
+          onChanged();
+        }
+        if (other.hasClickCount()) {
+          setClickCount(other.getClickCount());
+        }
+        if (other.hasInstanceCount()) {
+          setInstanceCount(other.getInstanceCount());
+        }
+        if (other.hasCtrRating()) {
+          setCtrRating(other.getCtrRating());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.NotificationsProto.ClicksPerSite parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.NotificationsProto.ClicksPerSite) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional .ClicksPerSite.ClickType click_type = 1;
+      private com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType clickType_ = com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType.UNKNOWN;
+      /**
+       * <code>optional .ClicksPerSite.ClickType click_type = 1;</code>
+       */
+      public boolean hasClickType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .ClicksPerSite.ClickType click_type = 1;</code>
+       */
+      public com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType getClickType() {
+        return clickType_;
+      }
+      /**
+       * <code>optional .ClicksPerSite.ClickType click_type = 1;</code>
+       */
+      public Builder setClickType(com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        clickType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .ClicksPerSite.ClickType click_type = 1;</code>
+       */
+      public Builder clearClickType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clickType_ = com.janknspank.proto.NotificationsProto.ClicksPerSite.ClickType.UNKNOWN;
+        onChanged();
+        return this;
+      }
+
+      // optional string root_domain = 2;
+      private java.lang.Object rootDomain_ = "";
+      /**
+       * <code>optional string root_domain = 2;</code>
+       */
+      public boolean hasRootDomain() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string root_domain = 2;</code>
+       */
+      public java.lang.String getRootDomain() {
+        java.lang.Object ref = rootDomain_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          rootDomain_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string root_domain = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRootDomainBytes() {
+        java.lang.Object ref = rootDomain_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          rootDomain_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string root_domain = 2;</code>
+       */
+      public Builder setRootDomain(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        rootDomain_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string root_domain = 2;</code>
+       */
+      public Builder clearRootDomain() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        rootDomain_ = getDefaultInstance().getRootDomain();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string root_domain = 2;</code>
+       */
+      public Builder setRootDomainBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        rootDomain_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 click_count = 3;
+      private long clickCount_ ;
+      /**
+       * <code>optional int64 click_count = 3;</code>
+       */
+      public boolean hasClickCount() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 click_count = 3;</code>
+       */
+      public long getClickCount() {
+        return clickCount_;
+      }
+      /**
+       * <code>optional int64 click_count = 3;</code>
+       */
+      public Builder setClickCount(long value) {
+        bitField0_ |= 0x00000004;
+        clickCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 click_count = 3;</code>
+       */
+      public Builder clearClickCount() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clickCount_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 instance_count = 4;
+      private long instanceCount_ ;
+      /**
+       * <code>optional int64 instance_count = 4;</code>
+       *
+       * <pre>
+       * This may not always be known.  E.g. in-app, we don't store how many times
+       * users actually see articles.
+       * </pre>
+       */
+      public boolean hasInstanceCount() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 instance_count = 4;</code>
+       *
+       * <pre>
+       * This may not always be known.  E.g. in-app, we don't store how many times
+       * users actually see articles.
+       * </pre>
+       */
+      public long getInstanceCount() {
+        return instanceCount_;
+      }
+      /**
+       * <code>optional int64 instance_count = 4;</code>
+       *
+       * <pre>
+       * This may not always be known.  E.g. in-app, we don't store how many times
+       * users actually see articles.
+       * </pre>
+       */
+      public Builder setInstanceCount(long value) {
+        bitField0_ |= 0x00000008;
+        instanceCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 instance_count = 4;</code>
+       *
+       * <pre>
+       * This may not always be known.  E.g. in-app, we don't store how many times
+       * users actually see articles.
+       * </pre>
+       */
+      public Builder clearInstanceCount() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        instanceCount_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional double ctr_rating = 5;
+      private double ctrRating_ ;
+      /**
+       * <code>optional double ctr_rating = 5;</code>
+       *
+       * <pre>
+       * This is a score, from 0 to 1, that rates this site's CTR versus all other
+       * sites in our corpus.
+       * </pre>
+       */
+      public boolean hasCtrRating() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional double ctr_rating = 5;</code>
+       *
+       * <pre>
+       * This is a score, from 0 to 1, that rates this site's CTR versus all other
+       * sites in our corpus.
+       * </pre>
+       */
+      public double getCtrRating() {
+        return ctrRating_;
+      }
+      /**
+       * <code>optional double ctr_rating = 5;</code>
+       *
+       * <pre>
+       * This is a score, from 0 to 1, that rates this site's CTR versus all other
+       * sites in our corpus.
+       * </pre>
+       */
+      public Builder setCtrRating(double value) {
+        bitField0_ |= 0x00000010;
+        ctrRating_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double ctr_rating = 5;</code>
+       *
+       * <pre>
+       * This is a score, from 0 to 1, that rates this site's CTR versus all other
+       * sites in our corpus.
+       * </pre>
+       */
+      public Builder clearCtrRating() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        ctrRating_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ClicksPerSite)
+    }
+
+    static {
+      defaultInstance = new ClicksPerSite(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ClicksPerSite)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_DeviceRegistration_descriptor;
   private static
@@ -3820,6 +5204,11 @@ public final class NotificationsProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Notification_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ClicksPerSite_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ClicksPerSite_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3836,24 +5225,33 @@ public final class NotificationsProto {
       "\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.Devi" +
       "ceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035" +
       "d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032Mo" +
-      "ngoDB.DeviceRegistration\"\301\004\n\014Notificatio" +
+      "ngoDB.DeviceRegistration\"\224\005\n\014Notificatio" +
       "n\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\035\n\013c" +
       "reate_time\030\002 \001(\003B\010\210\246\035\001\220\246\035\003\022\030\n\nclick_time",
       "\030\003 \001(\003B\004\220\246\035\005\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022*\n" +
-      "\013device_type\030\006 \001(\0162\013.DeviceTypeB\010\210\246\035\001\220\246\035" +
-      "\005\022\037\n\tdevice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004ho" +
-      "st\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246" +
-      "\035\200\010\022\036\n\026article_published_time\030\n \001(\003\022\034\n\016d" +
-      "eduping_stems\030\013 \003(\tB\004\230\246\035\004\022!\n\023is_followed" +
-      "_company\030\014 \001(\010B\004\220\246\035\005\022\030\n\nis_company\030\r \001(\010" +
-      "B\004\220\246\035\005\022\026\n\010is_event\030\016 \001(\010B\004\220\246\035\005\022\027\n\thot_co" +
-      "unt\030\017 \001(\005B\004\220\246\035\005\022\023\n\005score\030\020 \001(\001B\004\220\246\035\005\022 \n\022",
-      "notification_score\030\021 \001(\005B\004\220\246\035\005\022\030\n\nnnet_s" +
-      "core\030\022 \001(\001B\004\220\246\035\005:\032\212\265\030\026MySQL.PushNotifica" +
-      "tion*:\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDRO" +
-      "ID\020\001\022\007\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*\n\024com.janknspa" +
-      "nk.protoB\022NotificationsProto"
+      "\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\026\n" +
+      "\003url\030\025 \001(\tB\t\230\246\035\377\005\250\246\035\001\022*\n\013device_type\030\006 \001" +
+      "(\0162\013.DeviceTypeB\010\210\246\035\001\220\246\035\005\022\037\n\tdevice_id\030\007" +
+      " \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246\035d\250\246" +
+      "\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010\022\036\n\026article_p" +
+      "ublished_time\030\n \001(\003\022\034\n\016deduping_stems\030\013 " +
+      "\003(\tB\004\230\246\035\004\022!\n\023is_followed_company\030\014 \001(\010B\004" +
+      "\220\246\035\005\022\030\n\nis_company\030\r \001(\010B\004\220\246\035\005\022\026\n\010is_eve" +
+      "nt\030\016 \001(\010B\004\220\246\035\005\022\027\n\thot_count\030\017 \001(\005B\004\220\246\035\005\022",
+      "\023\n\005score\030\020 \001(\001B\004\220\246\035\005\022 \n\022notification_sco" +
+      "re\030\021 \001(\005B\004\220\246\035\005\022\030\n\nnnet_score\030\022 \001(\001B\004\220\246\035\005" +
+      "\022\034\n\016facebook_score\030\023 \001(\001B\004\220\246\035\005\022\033\n\rtwitte" +
+      "r_score\030\024 \001(\001B\004\220\246\035\005:\032\212\265\030\026MySQL.PushNotif" +
+      "ication\"\232\002\n\rClicksPerSite\0226\n\nclick_type\030" +
+      "\001 \001(\0162\030.ClicksPerSite.ClickTypeB\010\210\246\035\001\220\246\035" +
+      "\005\022&\n\013root_domain\030\002 \001(\tB\021\210\246\035\001\230\246\035\377\005\220\246\035\005\250\246\035" +
+      "\001\022\035\n\013click_count\030\003 \001(\003B\010\210\246\035\001\220\246\035\005\022\034\n\016inst" +
+      "ance_count\030\004 \001(\003B\004\220\246\035\005\022\030\n\nctr_rating\030\005 \001" +
+      "(\001B\004\220\246\035\005\"9\n\tClickType\022\013\n\007UNKNOWN\020\000\022\010\n\004PU",
+      "SH\020\001\022\t\n\005EMAIL\020\002\022\n\n\006IN_APP\020\003:\027\212\265\030\023MySQL.C" +
+      "licksPerSite*:\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022" +
+      "\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*\n\024com." +
+      "janknspank.protoB\022NotificationsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3871,7 +5269,13 @@ public final class NotificationsProto {
           internal_static_Notification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Notification_descriptor,
-              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", "IsFollowedCompany", "IsCompany", "IsEvent", "HotCount", "Score", "NotificationScore", "NnetScore", });
+              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "Url", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", "IsFollowedCompany", "IsCompany", "IsEvent", "HotCount", "Score", "NotificationScore", "NnetScore", "FacebookScore", "TwitterScore", });
+          internal_static_ClicksPerSite_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_ClicksPerSite_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ClicksPerSite_descriptor,
+              new java.lang.String[] { "ClickType", "RootDomain", "ClickCount", "InstanceCount", "CtrRating", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -3903,6 +5307,8 @@ public final class NotificationsProto {
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -3917,6 +5323,19 @@ public final class NotificationsProto {
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

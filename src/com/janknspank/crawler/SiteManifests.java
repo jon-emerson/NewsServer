@@ -242,6 +242,15 @@ public class SiteManifests {
     return null;
   }
 
+  public static SiteManifest getForShortName(String shortName) {
+    for (SiteManifest site : getList()) {
+      if (site.getShortName().equals(shortName)) {
+        return site;
+      }
+    }
+    return null;
+  }
+
   /**
    * For testing only: Puts a site manifest into the system programmatically.
    */

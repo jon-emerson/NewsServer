@@ -1,5 +1,6 @@
 package com.janknspank.notifications.nnet;
 
+import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -33,6 +34,7 @@ import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
 import com.janknspank.proto.NotificationsProto.DeviceType;
 import com.janknspank.proto.NotificationsProto.Notification;
+import com.janknspank.rank.DistributionBuilder;
 
 public class NotificationNeuralNetworkTrainer implements LearningEventListener {
   private static final int MAX_ITERATIONS = 20000;
@@ -124,14 +126,15 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
    * Also, people might click the first notification but never click another,
    * so we'll ignore the first one too.
    */
-  private static List<Notification> getTrainingNotifications() throws DatabaseSchemaException {
+  public static List<Notification> getApplicableNotifications() throws DatabaseSchemaException {
     Multimap<String, Notification> notificationsPerUserId = HashMultimap.create();
     for (Notification notification : Database.with(Notification.class).get(
-        new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS))) {
+        new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
+        new QueryOption.WhereNotNull("hot_count"))) {
       notificationsPerUserId.put(notification.getUserId(), notification);
     }
 
-    List<Notification> trainingNotifications = Lists.newArrayList();
+    List<Notification> applicableNotifications = Lists.newArrayList();
     for (String userId : notificationsPerUserId.keySet()) {
       // Get each user's notifications, sorted by creation time.
       List<Notification> notificationsPerUser =
@@ -143,33 +146,30 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
         }
       });
 
-      // Remove the first notification we sent, since it's not really a great
-      // predictor of future click through rates.
-      notificationsPerUser.remove(0);
-
       // Now, go through the notifications in time order.  If the user clicked
       // any, add it and any previous notifications to the training
       // notifications list.
       List<Notification> unclickedNotifications = Lists.newArrayList();
       for (Notification notification : notificationsPerUser) {
         if (notification.hasClickTime()) {
-          trainingNotifications.add(notification);
-          trainingNotifications.addAll(unclickedNotifications);
+          applicableNotifications.add(notification);
+          applicableNotifications.addAll(unclickedNotifications);
           unclickedNotifications.clear();
         } else {
           unclickedNotifications.add(notification);
         }
       }
     }
-    return trainingNotifications;
+    System.out.println("Applicable notifications: " + applicableNotifications.size());
+    return applicableNotifications;
   }
 
-  private static DataSet generateTrainingDataSet()
+  private static DataSet generateTrainingDataSet(List<Notification> trainingNotifications)
       throws DatabaseSchemaException, BiznessException {
     int goodNotificationCount = 0;
     int badNotificationCount = 0;
     List<DataSetRow> dataSetRows = Lists.newArrayList();
-    for (Notification trainingNotification : getTrainingNotifications()) {
+    for (Notification trainingNotification : trainingNotifications) {
       ArticleEvaluation evaluation = new ArticleEvaluation(trainingNotification);
       DataSetRow row = evaluation.getDataSetRow(trainingNotification.hasClickTime() /* clicked */);
       dataSetRows.add(row);
@@ -267,7 +267,6 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
   public static class NeuralNetworkFinder implements Callable<NeuralNetwork<BackPropagation>> {
     private final int hiddenNodeCount;
     private final DataSet dataSet;
-    private double errorRate = Double.MAX_VALUE;
 
     public NeuralNetworkFinder(DataSet dataSet, int hiddenNodeCount) {
       this.dataSet = dataSet;
@@ -281,17 +280,62 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
       NeuralNetwork<BackPropagation> neuralNetwork =
           neuralNetworkTrainer.generateTrainedNetwork(dataSet, hiddenNodeCount);
       System.out.println("** SCORE FOR " + hiddenNodeCount + " HIDDEN NODES...");
-      errorRate = neuralNetworkTrainer.lowestError;
       return neuralNetwork;
     }
   }
 
   /**
-   * Helper method for triggering a train. 
-   * run ./trainneuralnet.sh to execute
-   * */
+   * Grades a neural network based on a set of holdback notification.
+   * Higher scores are better.
+   */
+  public static double getScore(NeuralNetwork<BackPropagation> neuralNetwork,
+      List<Notification> holdbackNotifications) {
+    Averager averagePositiveScore = new Averager();
+    Averager averageNegativeScore = new Averager();
+    NotificationNeuralNetworkScorer scorer = new NotificationNeuralNetworkScorer(neuralNetwork);
+    for (Notification holdbackNotification : holdbackNotifications) {
+      double notificationScore = scorer.getScore(new ArticleEvaluation(holdbackNotification));
+      if (holdbackNotification.hasClickTime()) {
+        averagePositiveScore.add(notificationScore);
+      } else {
+        averageNegativeScore.add(notificationScore);
+      }
+    }
+    System.out.println("Average positive: " + averagePositiveScore.get()
+        + ", average negative: " + averageNegativeScore.get());
+
+    // The article's score is the # of true positives * 2 + true negatives - the
+    // falsies, as determined by whether they're over/under a divider.
+    double divider = (averagePositiveScore.get() * 3 + averageNegativeScore.get()) / 4;
+    double score = 0;
+    for (Notification holdbackNotification : holdbackNotifications) {
+      double notificationScore = scorer.getScore(new ArticleEvaluation(holdbackNotification));
+      if (holdbackNotification.hasClickTime()) {
+        score += (notificationScore - divider);
+      } else {
+        score += (divider - notificationScore);
+      }
+    }
+    System.out.println("Divider = " + divider + ", score = " + score);
+    return score;
+  }
+
   public static void main(String args[]) throws Exception {
-    DataSet dataSet = generateTrainingDataSet();
+    // Collect previously sent notifications, for which we've recorded whether
+    // the user engaged with them or not.  Use 75% of them for training, then
+    // hold back 25% for judging which neural network is the best.
+    List<Notification> applicableNotifications = getApplicableNotifications();
+    List<Notification> trainingNotifications = Lists.newArrayList();
+    List<Notification> holdbackNotifications = Lists.newArrayList();
+    for (int i = 0; i < applicableNotifications.size(); i++) {
+      if (i % 4 == 0) {
+        holdbackNotifications.add(applicableNotifications.get(i));
+      } else {
+        trainingNotifications.add(applicableNotifications.get(i));
+      }
+    }
+
+    DataSet dataSet = generateTrainingDataSet(trainingNotifications);
     printAverageInputValues(dataSet);
 
     // Create a threads to general neural networks for each of our
@@ -300,7 +344,7 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
     List<NeuralNetworkFinder> neuralNetworkFinderList = Lists.newArrayList();
     Map<NeuralNetworkFinder, Future<NeuralNetwork<BackPropagation>>> neuralNetworkFutureMap =
         Maps.newHashMap();
-    for (int hiddenNodeCount : new int[] { 0, 2, 3 }) {
+    for (int hiddenNodeCount : new int[] { 4, 5, 6 }) {
       for (int tries = 0; tries < 5; tries++) {
         NeuralNetworkFinder neuralNetworkFinder = new NeuralNetworkFinder(dataSet, hiddenNodeCount);
         neuralNetworkFinderList.add(neuralNetworkFinder);
@@ -311,24 +355,24 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
 
     // Evaluate the outcomes from each thread.
     int bestHiddenNodeCount = Integer.MIN_VALUE;
-    double bestNeuralNetworkErrorRate = Double.MAX_VALUE;
-    Map<Integer, Double> bestErrorRatePerTopology = Maps.newHashMap();
+    double bestNeuralNetworkScore = Double.MIN_VALUE;
+    Map<Integer, Double> bestScorePerTopology = Maps.newHashMap();
     NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
     for (NeuralNetworkFinder neuralNetworkFinder : neuralNetworkFinderList) {
       int hiddenNodeCount = neuralNetworkFinder.hiddenNodeCount;
       NeuralNetwork<BackPropagation> neuralNetwork =
           neuralNetworkFutureMap.get(neuralNetworkFinder).get();
-      double errorRate = neuralNetworkFinder.errorRate;
-      if (errorRate < bestNeuralNetworkErrorRate) {
-        bestNeuralNetworkErrorRate = errorRate;
+      double score = getScore(neuralNetwork, holdbackNotifications);
+      if (score > bestNeuralNetworkScore) {
+        bestNeuralNetworkScore = score;
         bestNeuralNetwork = neuralNetwork;
         bestHiddenNodeCount = hiddenNodeCount;
       }
-      if (bestErrorRatePerTopology.containsKey(hiddenNodeCount)) {
-        bestErrorRatePerTopology.put(hiddenNodeCount,
-            Math.min(errorRate, bestErrorRatePerTopology.get(hiddenNodeCount)));
+      if (bestScorePerTopology.containsKey(hiddenNodeCount)) {
+        bestScorePerTopology.put(hiddenNodeCount,
+            Math.max(score, bestScorePerTopology.get(hiddenNodeCount)));
       } else {
-        bestErrorRatePerTopology.put(hiddenNodeCount, errorRate);
+        bestScorePerTopology.put(hiddenNodeCount, score);
       }
     }
 
@@ -336,8 +380,8 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
     System.out.println();
     System.out.println("Performances of different topologies:");
     for (int i = 0; i < 100; i++) {
-      if (bestErrorRatePerTopology.containsKey(i)) {
-        System.out.println(i + " hidden nodes: " + bestErrorRatePerTopology.get(i));
+      if (bestScorePerTopology.containsKey(i)) {
+        System.out.println(i + " hidden nodes: " + bestScorePerTopology.get(i));
       }
     }
 
@@ -345,5 +389,15 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
     System.out.println("Saving best neural network "
         + "(btw it has " + bestHiddenNodeCount + " hidden nodes)");
     bestNeuralNetwork.save(NotificationNeuralNetworkScorer.DEFAULT_NEURAL_NETWORK_FILE);
+
+    // Save a distribution for the holdback.
+    DistributionBuilder builder = new DistributionBuilder();
+    NotificationNeuralNetworkScorer scorer = new NotificationNeuralNetworkScorer(bestNeuralNetwork);
+    for (Notification holdbackNotification : holdbackNotifications) {
+      builder.add(scorer.getScore(new ArticleEvaluation(holdbackNotification)));
+    }
+    FileOutputStream fos = new FileOutputStream(NotificationNeuralNetworkScorer.DISTRIBUTION_FILE);
+    builder.build().writeTo(fos);
+    fos.close();
   }
 }

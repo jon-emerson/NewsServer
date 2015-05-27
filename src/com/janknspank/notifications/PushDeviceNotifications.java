@@ -15,6 +15,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.SocialEngagements;
 import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
@@ -23,6 +24,7 @@ import com.janknspank.database.QueryOption;
 import com.janknspank.notifications.nnet.ArticleEvaluation;
 import com.janknspank.notifications.nnet.NotificationNeuralNetworkScorer;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.NotificationsProto.DeviceRegistration;
 import com.janknspank.proto.NotificationsProto.DeviceType;
 import com.janknspank.proto.NotificationsProto.Notification;
@@ -99,7 +101,7 @@ public class PushDeviceNotifications {
       User user, Article article, Set<String> followedEntityIds) {
     // Dogfood the new algorithm.
     if (USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
-      return (int) (300 * NotificationNeuralNetworkScorer.getInstance().getScore(
+      return (int) (300 * NotificationNeuralNetworkScorer.getInstance().getNormalizedScore(
           article, followedEntityIds));
     }
 
@@ -265,8 +267,12 @@ public class PushDeviceNotifications {
                       .setScore(bestArticle.getScore())
                       .setNotificationScore(getArticleNotificationScore(
                           user, bestArticle, followedEntityIds))
-                      .setNnetScore(NotificationNeuralNetworkScorer.getInstance().getScore(
-                          bestArticle, followedEntityIds))
+                      .setNnetScore(NotificationNeuralNetworkScorer.getInstance()
+                          .getScore(bestArticle, followedEntityIds))
+                      .setTwitterScore(SocialEngagements.getForArticle(bestArticle, Site.TWITTER)
+                          .getShareScore())
+                      .setFacebookScore(SocialEngagements.getForArticle(bestArticle, Site.FACEBOOK)
+                          .getShareScore())
                       .build();
               IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
             }
