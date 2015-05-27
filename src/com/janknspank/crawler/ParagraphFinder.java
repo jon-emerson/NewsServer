@@ -191,7 +191,7 @@ public class ParagraphFinder {
     // - "Like Instagram, WhatsApp will function as an autonomous unit within
     //     Facebook."
     if ((text.contains("facebook") || text.contains("twitter"))
-         && text.contains("follow")) {
+         && text.contains("follow ")) { // The trailing space is deliberate.
        return false;
     }
 

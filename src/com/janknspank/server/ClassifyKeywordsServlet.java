@@ -26,14 +26,14 @@ import com.janknspank.proto.CoreProto.KeywordToEntityId;
 public class ClassifyKeywordsServlet extends StandardServlet {
   private String getIndustry(KeywordToEntityId keywordToEntityId) {
     List<String> industries = Lists.newArrayList();
-    if (keywordToEntityId.hasTopIndustryId1()) {
-      industries.add(FeatureId.fromId(keywordToEntityId.getTopIndustryId1()).getTitle());
-    }
-    if (keywordToEntityId.hasTopIndustryId2()) {
-      industries.add(FeatureId.fromId(keywordToEntityId.getTopIndustryId2()).getTitle());
-    }
-    if (keywordToEntityId.hasTopIndustryId3()) {
-      industries.add(FeatureId.fromId(keywordToEntityId.getTopIndustryId3()).getTitle());
+    for (int topIndustryId : new int[] {
+        keywordToEntityId.getTopIndustryId1(),
+        keywordToEntityId.getTopIndustryId2(),
+        keywordToEntityId.getTopIndustryId3() }) {
+      FeatureId maybeFeatureId = FeatureId.fromId(topIndustryId);
+      if (maybeFeatureId != null) {
+        industries.add(maybeFeatureId.getTitle());
+      }
     }
     return Joiner.on(", ").join(industries);
   }

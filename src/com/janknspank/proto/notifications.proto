@@ -91,6 +91,7 @@ message Notification {
   // article.  This was added in late May 2015, so it doesn't exist on all
   // articles.
   optional string url = 21 [
+    (storage_method) = PULL_OUT,
     (string_length) = 767,
     (string_charset) = LATIN1
   ];
