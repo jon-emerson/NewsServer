@@ -107,8 +107,10 @@ public class PopulateKeywordToEntityIdTable {
 
   public static void main(String args[]) throws Exception {
     System.out.println("Reading articles...");
-    Iterable<Article> articles = Database.with(Article.class).get();
-    System.out.println(Iterables.size(articles) + " articles found.");
+    Iterable<Article> articles = Database.with(Article.class).get(
+        new QueryOption.DescendingSort("published_time"),
+        new QueryOption.Limit(60000));
+    System.out.println(Iterables.size(articles) + " articles retrieved.");
 
     // Here's where we'll keep all the companies, people, places that we find in
     // articles.

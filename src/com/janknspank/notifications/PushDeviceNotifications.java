@@ -93,14 +93,20 @@ public class PushDeviceNotifications {
     return followedEntityIdSetBuilder.build();
   }
 
+  private static boolean isInTestGroup(User user) {
+    char c = user.getId().charAt(user.getId().length() - 1);
+    return c % 2 == 0;
+  }
+
   /**
    * Returns a score between 0 and 300 indicating how important this article
    * would be for notification-purposes for the given user.
    */
   private static int getArticleNotificationScore(
       User user, Article article, Set<String> followedEntityIds) {
-    // Dogfood the new algorithm.
-    if (USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
+    // A/B test the new algorithm.
+    if (isInTestGroup(user)
+        || USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
       double score = NotificationNeuralNetworkScorer.getInstance()
           .getNormalizedScore(article, followedEntityIds);
       return Math.max(0, (int) (250 * (score * 3 - 2)));

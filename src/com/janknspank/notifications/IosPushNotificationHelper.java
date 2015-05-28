@@ -17,6 +17,7 @@ import javax.net.ssl.SSLSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.GuidFactory;
@@ -176,7 +177,9 @@ public class IosPushNotificationHelper {
    */
   private static String getText(Article article) {
     SiteManifest site = SiteManifests.getForUrl(article.getUrl());
-    String text = (site == null ? "" : site.getShortName() + ": ") + article.getTitle();
+    String origin = article.hasOrigin() ? article.getOrigin()
+        : (site == null ? null : site.getShortName());
+    String text = (Strings.isNullOrEmpty(origin) ? "" : origin + ": ") + article.getTitle();
     if (text.length() > 110) {
       text = text.substring(0, 107) + "...";
     }
