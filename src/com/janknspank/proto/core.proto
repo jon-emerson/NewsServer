@@ -141,6 +141,7 @@ message Entity {
     DBPEDIA_LONG_ABSTRACT = 2;
     ANGELLIST = 3;
     USER = 4;
+    MANUAL = 5;
   }
   optional Source source = 4 [
     (required) = YES,

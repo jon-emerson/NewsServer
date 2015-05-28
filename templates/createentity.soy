@@ -1,0 +1,30 @@
+{namespace news.createentity autoescape="strict"}
+
+/**
+ * Renders the create entity page.
+ * @param types
+ */
+{template .main}
+  <h1>Create Entity</h1>
+
+  <form method="POST" action="/createEntity">
+    Keyword:<br>
+    <input type="text" name="keyword"><br>
+    <br>
+
+    Short name (optional):<br>
+    <input type="text" name="short_name"><br>
+    <br>
+
+    Type:<br>
+    <select name="type">
+      {foreach $type in $types}
+        <option value="{$type.string}">{$type.name}</option>
+      {/foreach}
+    </select>
+    <br>
+
+    <br>
+    <input type="submit" value="Add"><br>
+  </form>
+{/template}

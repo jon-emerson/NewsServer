@@ -312,14 +312,15 @@ public class FacebookLoginHandler {
               Entity
                   .newBuilder()
                   .setId(
-                      companyEntityIdMap.containsKey(companyName.toLowerCase()) ? companyEntityIdMap
-                          .get(companyName.toLowerCase()) : GuidFactory
-                          .generate())
+                      companyEntityIdMap.containsKey(companyName.toLowerCase())
+                          ? companyEntityIdMap.get(companyName.toLowerCase())
+                          : GuidFactory.generate())
                   .setKeyword(companyName)
                   .setType(EntityType.COMPANY.toString())
                   .setSource(
-                      companyEntityIdMap.containsKey(companyName.toLowerCase()) ? Source.DBPEDIA_INSTANCE_TYPE
-                          : Source.USER).build());
+                      companyEntityIdMap.containsKey(companyName.toLowerCase())
+                          ? Source.DBPEDIA_INSTANCE_TYPE : Source.USER)
+                      .build());
       interests.add(companyInterestBuilder.build());
     }
     TopList<FeatureId, Double> industryFeatureIds = getIndustryFeatureIds(fbUser);
