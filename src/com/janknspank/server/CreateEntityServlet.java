@@ -1,6 +1,7 @@
 package com.janknspank.server;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.template.soy.data.SoyListData;
@@ -25,6 +27,12 @@ import com.janknspank.proto.CoreProto.Entity.Source;
 @ServletMapping(urlPattern = "/createEntity")
 public class CreateEntityServlet extends StandardServlet {
 
+  private SoyMapData toSoyMapData(EntityType entityType) {
+    return new SoyMapData(
+        "name", entityType.name(),
+        "string", entityType.toString());
+  }
+
   /**
    * Returns any Soy data necessary for rendering the .main template for this
    * servlet's Soy page.
@@ -33,12 +41,16 @@ public class CreateEntityServlet extends StandardServlet {
   protected SoyMapData getSoyMapData(HttpServletRequest req)
       throws DatabaseSchemaException, RequestException, BiznessException {
     List<SoyMapData> typeList = Lists.newArrayList();
-    for (EntityType entityType : Iterables.concat(
-        GetInterestsServlet.ORGANIZATION_TYPES, GetInterestsServlet.PEOPLE_TYPES)) {
-      SoyMapData soyMapData = new SoyMapData(
-          "name", entityType.name(),
-          "string", entityType.toString());
-      typeList.add(soyMapData);
+    Iterable<EntityType> preferredTypes = Iterables.concat(
+        GetInterestsServlet.ORGANIZATION_TYPES, GetInterestsServlet.PEOPLE_TYPES);
+    for (EntityType entityType : preferredTypes) {
+      typeList.add(toSoyMapData(entityType));
+    }
+    Set<EntityType> preferredTypesSet = ImmutableSet.copyOf(preferredTypes);
+    for (EntityType entityType : EntityType.values()) {
+      if (!preferredTypesSet.contains(entityType)) {
+        typeList.add(toSoyMapData(entityType));
+      }
     }
     return new SoyMapData("types", new SoyListData(typeList));
   }
