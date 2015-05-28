@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.json.JSONObject;
 
 import com.google.common.base.Joiner;
@@ -60,7 +61,7 @@ public class ClassifyKeywordsServlet extends StandardServlet {
       SoyMapData articleSoyMapData = new SoyMapData(
           "id", keywordToEntityId.getId(),
           "count", keywordToEntityId.getCount(),
-          "keyword", keywordToEntityId.getKeyword(),
+          "keyword", WordUtils.capitalizeFully(keywordToEntityId.getKeyword()),
           "industry", getIndustry(keywordToEntityId));
       articleSoyMapDataList.add(articleSoyMapData);
     }

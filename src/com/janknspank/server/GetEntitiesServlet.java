@@ -17,8 +17,11 @@ import com.janknspank.proto.CoreProto.Entity;
 /**
  * Returns entities that match a given search query, as specified by the
  * parameter "query".
+ *
+ * Not used by the client.  Used by Jon to search for entities to associate
+ * with keywords, as part of his manual keyword mapping funtimes.
  */
-@ServletMapping(urlPattern = "/v1/get_entities")
+@ServletMapping(urlPattern = "/getEntities")
 public class GetEntitiesServlet extends StandardServlet {
   protected JSONObject doGetInternal(HttpServletRequest req, HttpServletResponse resp)
       throws DatabaseSchemaException, BiznessException,
