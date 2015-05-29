@@ -24,6 +24,7 @@ import com.janknspank.database.QueryOption;
 import com.janknspank.notifications.nnet.ArticleEvaluation;
 import com.janknspank.notifications.nnet.NotificationNeuralNetworkScorer;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.NotificationsProto.DeviceRegistration;
 import com.janknspank.proto.NotificationsProto.DeviceType;
@@ -264,7 +265,7 @@ public class PushDeviceNotifications {
             System.out.println("Sending \"" + bestArticle.getTitle() + "\" to " + user.getEmail());
             ArticleEvaluation evaluation = new ArticleEvaluation(bestArticle, followedEntityIds);
             for (DeviceRegistration registration : registrations) {
-              Notification pushNotification =
+              Notification.Builder pushNotificationBuilder =
                   IosPushNotificationHelper.createPushNotification(registration, bestArticle)
                       .toBuilder()
                       .setIsEvent(evaluation.isEvent())
@@ -275,13 +276,22 @@ public class PushDeviceNotifications {
                       .setNotificationScore(getArticleNotificationScore(
                           user, bestArticle, followedEntityIds))
                       .setNnetScore(NotificationNeuralNetworkScorer.getInstance()
-                          .getNormalizedScore(bestArticle, followedEntityIds))
-                      .setTwitterScore(SocialEngagements.getForArticle(bestArticle, Site.TWITTER)
-                          .getShareScore())
-                      .setFacebookScore(SocialEngagements.getForArticle(bestArticle, Site.FACEBOOK)
-                          .getShareScore())
-                      .build();
-              IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
+                          .getNormalizedScore(bestArticle, followedEntityIds));
+
+              SocialEngagement twitterEngagement =
+                  SocialEngagements.getForArticle(bestArticle, Site.TWITTER);
+              if (twitterEngagement != null) {
+                pushNotificationBuilder.setTwitterScore(twitterEngagement.getShareScore());
+              }
+
+              SocialEngagement facebookEngagement =
+                  SocialEngagements.getForArticle(bestArticle, Site.FACEBOOK);
+              if (facebookEngagement != null) {
+                pushNotificationBuilder.setTwitterScore(facebookEngagement.getShareScore());
+              }
+
+              IosPushNotificationHelper.getInstance().sendPushNotification(
+                  pushNotificationBuilder.build());
             }
           }
         }

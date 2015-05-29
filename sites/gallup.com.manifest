@@ -6,6 +6,9 @@ article_url_pattern {
   path_regex: "\\/[0-9]+\\/[^\\/]+\\.aspx"
 }
 path_blacklist {
+  needle: "/corporate/"
+}
+path_blacklist {
   needle: "/products/"
 }
 path_blacklist {
