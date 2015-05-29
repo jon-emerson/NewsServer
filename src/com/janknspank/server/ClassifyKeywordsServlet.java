@@ -56,7 +56,7 @@ public class ClassifyKeywordsServlet extends StandardServlet {
         new QueryOption.DescendingSort("count"),
         query == null
             ? new QueryOption.WhereNotNull("id") // No-op.
-            : new QueryOption.WhereLike("keyword", "%" + query + "%"),
+            : new QueryOption.WhereLike("keyword", "%" + query.toLowerCase() + "%"),
         new QueryOption.LimitWithOffset(30, offset))) {
       SoyMapData articleSoyMapData = new SoyMapData(
           "id", keywordToEntityId.getId(),

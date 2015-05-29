@@ -154,6 +154,9 @@ message Notification {
   optional double twitter_score = 20 [
     (storage_method) = PULL_OUT
   ];
+  optional int64 age_in_millis = 22 [
+    (storage_method) = PULL_OUT
+  ];
 }
 
 // Historical record of how many clicks we've gotten per site for various

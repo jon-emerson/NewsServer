@@ -94,8 +94,8 @@ public class PushDeviceNotifications {
     return followedEntityIdSetBuilder.build();
   }
 
-  private static boolean isInTestGroup(User user) {
-    char c = user.getId().charAt(user.getId().length() - 1);
+  public static boolean isInTestGroup(String userId) {
+    char c = userId.charAt(userId.length() - 1);
     return c % 2 == 0;
   }
 
@@ -106,11 +106,12 @@ public class PushDeviceNotifications {
   private static int getArticleNotificationScore(
       User user, Article article, Set<String> followedEntityIds) {
     // A/B test the new algorithm.
-    if (isInTestGroup(user)
+    if (isInTestGroup(user.getId())
+        || "juliencadot@gmail.com".equals(user.getEmail())
         || USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
       double score = NotificationNeuralNetworkScorer.getInstance()
           .getNormalizedScore(article, followedEntityIds);
-      return Math.max(0, (int) (250 * (score * 3 - 2)));
+      return Math.max(0, (int) (230 * (score * 3 - 2)));
     }
 
     // 0 out of 100 possible for ranking score.
@@ -276,7 +277,9 @@ public class PushDeviceNotifications {
                       .setNotificationScore(getArticleNotificationScore(
                           user, bestArticle, followedEntityIds))
                       .setNnetScore(NotificationNeuralNetworkScorer.getInstance()
-                          .getNormalizedScore(bestArticle, followedEntityIds));
+                          .getNormalizedScore(bestArticle, followedEntityIds))
+                      .setAgeInMillis(System.currentTimeMillis()
+                          - Articles.getPublishedTime(bestArticle));
 
               SocialEngagement twitterEngagement =
                   SocialEngagements.getForArticle(bestArticle, Site.TWITTER);

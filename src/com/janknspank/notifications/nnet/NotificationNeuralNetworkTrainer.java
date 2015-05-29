@@ -344,8 +344,8 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
     List<NeuralNetworkFinder> neuralNetworkFinderList = Lists.newArrayList();
     Map<NeuralNetworkFinder, Future<NeuralNetwork<BackPropagation>>> neuralNetworkFutureMap =
         Maps.newHashMap();
-    for (int hiddenNodeCount : new int[] { 4, 5, 6 }) {
-      for (int tries = 0; tries < 5; tries++) {
+    for (int hiddenNodeCount : new int[] { 2, 3, 4, 5, 6 }) {
+      for (int tries = 0; tries < 15; tries++) {
         NeuralNetworkFinder neuralNetworkFinder = new NeuralNetworkFinder(dataSet, hiddenNodeCount);
         neuralNetworkFinderList.add(neuralNetworkFinder);
         neuralNetworkFutureMap.put(neuralNetworkFinder, executor.submit(neuralNetworkFinder));

@@ -29,10 +29,13 @@ import com.janknspank.crawler.social.ShareNormalizer;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
+import com.janknspank.notifications.PushDeviceNotifications;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
+import com.janknspank.proto.NotificationsProto.DeviceType;
+import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
@@ -219,7 +222,7 @@ public class Helper {
     }
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main12(String args[]) throws Exception {
     int i = 0;
     System.out.println("Reading 75k articles...");
     Future<Iterable<Article>> newArticles = Database.with(Article.class).getFuture(
@@ -310,6 +313,48 @@ public class Helper {
       }
       System.out.println("  and " + i + " companies");
       System.out.println();
+    }
+  }
+
+  /**
+   * Find CTR on old algorithm vs. new algorithm.
+   */
+  public static void main13(String args[]) throws Exception {
+    Averager newAverager = new Averager();
+    Averager oldAverager = new Averager();
+    for (Notification notification : Database.with(Notification.class).get(
+        new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
+        new QueryOption.WhereGreaterThan("create_time",
+            System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1)))) {
+      if (PushDeviceNotifications.isInTestGroup(notification.getUserId())) {
+        newAverager.add(notification.hasClickTime() ? 1 : 0);
+      } else {
+        oldAverager.add(notification.hasClickTime() ? 1 : 0);
+      }
+    }
+    System.out.println("Old algorithm: " + (oldAverager.get() * 100) + "% CTR for "
+        + oldAverager.getCount() + " notifications");
+    System.out.println("New algorithm: " + (newAverager.get() * 100) + "% CTR"
+        + newAverager.getCount() + " notifications");
+  }
+
+  public static void main(String args[]) throws Exception {
+    List<Averager> ctrPerHour = Lists.newArrayList();
+    for (int i = 0; i < 50; i++) {
+      ctrPerHour.add(new Averager());
+    }
+    for (Notification notification : Database.with(Notification.class).get(
+        new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
+        new QueryOption.WhereNotNull("age_in_millis"))) {
+      int ageInHours = (int) Math.floor(
+          ((double) notification.getAgeInMillis()) / TimeUnit.HOURS.toMillis(1));
+      if (ageInHours >= 0 && ageInHours < 50) {
+        ctrPerHour.get(ageInHours).add(notification.hasClickTime() ? 1 : 0);
+      }
+    }
+    for (int i = 0; i < 50; i++) {
+      System.out.println("Age " + i + " hours: " + ctrPerHour.get(i).get() * 100 + "% CTR on "
+          + ctrPerHour.get(i).getCount() + " data points");
     }
   }
 }

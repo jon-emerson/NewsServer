@@ -1528,6 +1528,16 @@ public final class NotificationsProto {
      * <code>optional double twitter_score = 20;</code>
      */
     double getTwitterScore();
+
+    // optional int64 age_in_millis = 22;
+    /**
+     * <code>optional int64 age_in_millis = 22;</code>
+     */
+    boolean hasAgeInMillis();
+    /**
+     * <code>optional int64 age_in_millis = 22;</code>
+     */
+    long getAgeInMillis();
   }
   /**
    * Protobuf type {@code Notification}
@@ -1696,6 +1706,11 @@ public final class NotificationsProto {
             case 170: {
               bitField0_ |= 0x00000020;
               url_ = input.readBytes();
+              break;
+            }
+            case 176: {
+              bitField0_ |= 0x00100000;
+              ageInMillis_ = input.readInt64();
               break;
             }
           }
@@ -2369,6 +2384,22 @@ public final class NotificationsProto {
       return twitterScore_;
     }
 
+    // optional int64 age_in_millis = 22;
+    public static final int AGE_IN_MILLIS_FIELD_NUMBER = 22;
+    private long ageInMillis_;
+    /**
+     * <code>optional int64 age_in_millis = 22;</code>
+     */
+    public boolean hasAgeInMillis() {
+      return ((bitField0_ & 0x00100000) == 0x00100000);
+    }
+    /**
+     * <code>optional int64 age_in_millis = 22;</code>
+     */
+    public long getAgeInMillis() {
+      return ageInMillis_;
+    }
+
     private void initFields() {
       id_ = "";
       createTime_ = 0L;
@@ -2391,6 +2422,7 @@ public final class NotificationsProto {
       nnetScore_ = 0D;
       facebookScore_ = 0D;
       twitterScore_ = 0D;
+      ageInMillis_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2466,6 +2498,9 @@ public final class NotificationsProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(21, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        output.writeInt64(22, ageInMillis_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2564,6 +2599,10 @@ public final class NotificationsProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(21, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(22, ageInMillis_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2727,6 +2766,8 @@ public final class NotificationsProto {
         bitField0_ = (bitField0_ & ~0x00080000);
         twitterScore_ = 0D;
         bitField0_ = (bitField0_ & ~0x00100000);
+        ageInMillis_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00200000);
         return this;
       }
 
@@ -2841,6 +2882,10 @@ public final class NotificationsProto {
           to_bitField0_ |= 0x00080000;
         }
         result.twitterScore_ = twitterScore_;
+        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+          to_bitField0_ |= 0x00100000;
+        }
+        result.ageInMillis_ = ageInMillis_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2940,6 +2985,9 @@ public final class NotificationsProto {
         }
         if (other.hasTwitterScore()) {
           setTwitterScore(other.getTwitterScore());
+        }
+        if (other.hasAgeInMillis()) {
+          setAgeInMillis(other.getAgeInMillis());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4189,6 +4237,39 @@ public final class NotificationsProto {
         return this;
       }
 
+      // optional int64 age_in_millis = 22;
+      private long ageInMillis_ ;
+      /**
+       * <code>optional int64 age_in_millis = 22;</code>
+       */
+      public boolean hasAgeInMillis() {
+        return ((bitField0_ & 0x00200000) == 0x00200000);
+      }
+      /**
+       * <code>optional int64 age_in_millis = 22;</code>
+       */
+      public long getAgeInMillis() {
+        return ageInMillis_;
+      }
+      /**
+       * <code>optional int64 age_in_millis = 22;</code>
+       */
+      public Builder setAgeInMillis(long value) {
+        bitField0_ |= 0x00200000;
+        ageInMillis_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 age_in_millis = 22;</code>
+       */
+      public Builder clearAgeInMillis() {
+        bitField0_ = (bitField0_ & ~0x00200000);
+        ageInMillis_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:Notification)
     }
 
@@ -5225,7 +5306,7 @@ public final class NotificationsProto {
       "\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.Devi" +
       "ceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035" +
       "d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032Mo" +
-      "ngoDB.DeviceRegistration\"\230\005\n\014Notificatio" +
+      "ngoDB.DeviceRegistration\"\265\005\n\014Notificatio" +
       "n\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\035\n\013c" +
       "reate_time\030\002 \001(\003B\010\210\246\035\001\220\246\035\003\022\030\n\nclick_time",
       "\030\003 \001(\003B\004\220\246\035\005\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
@@ -5241,17 +5322,18 @@ public final class NotificationsProto {
       "\246\035\005\022\023\n\005score\030\020 \001(\001B\004\220\246\035\005\022 \n\022notification" +
       "_score\030\021 \001(\005B\004\220\246\035\005\022\030\n\nnnet_score\030\022 \001(\001B\004" +
       "\220\246\035\005\022\034\n\016facebook_score\030\023 \001(\001B\004\220\246\035\005\022\033\n\rtw" +
-      "itter_score\030\024 \001(\001B\004\220\246\035\005:\032\212\265\030\026MySQL.PushN" +
-      "otification\"\232\002\n\rClicksPerSite\0226\n\nclick_t" +
-      "ype\030\001 \001(\0162\030.ClicksPerSite.ClickTypeB\010\210\246\035" +
-      "\001\220\246\035\005\022&\n\013root_domain\030\002 \001(\tB\021\210\246\035\001\230\246\035\377\005\220\246\035" +
-      "\005\250\246\035\001\022\035\n\013click_count\030\003 \001(\003B\010\210\246\035\001\220\246\035\005\022\034\n\016" +
-      "instance_count\030\004 \001(\003B\004\220\246\035\005\022\030\n\nctr_rating" +
-      "\030\005 \001(\001B\004\220\246\035\005\"9\n\tClickType\022\013\n\007UNKNOWN\020\000\022\010",
-      "\n\004PUSH\020\001\022\t\n\005EMAIL\020\002\022\n\n\006IN_APP\020\003:\027\212\265\030\023MyS" +
-      "QL.ClicksPerSite*:\n\nDeviceType\022\013\n\007UNKNOW" +
-      "N\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*\n\024" +
-      "com.janknspank.protoB\022NotificationsProto"
+      "itter_score\030\024 \001(\001B\004\220\246\035\005\022\033\n\rage_in_millis" +
+      "\030\026 \001(\003B\004\220\246\035\005:\032\212\265\030\026MySQL.PushNotification" +
+      "\"\232\002\n\rClicksPerSite\0226\n\nclick_type\030\001 \001(\0162\030" +
+      ".ClicksPerSite.ClickTypeB\010\210\246\035\001\220\246\035\005\022&\n\013ro" +
+      "ot_domain\030\002 \001(\tB\021\210\246\035\001\230\246\035\377\005\220\246\035\005\250\246\035\001\022\035\n\013cl" +
+      "ick_count\030\003 \001(\003B\010\210\246\035\001\220\246\035\005\022\034\n\016instance_co" +
+      "unt\030\004 \001(\003B\004\220\246\035\005\022\030\n\nctr_rating\030\005 \001(\001B\004\220\246\035",
+      "\005\"9\n\tClickType\022\013\n\007UNKNOWN\020\000\022\010\n\004PUSH\020\001\022\t\n" +
+      "\005EMAIL\020\002\022\n\n\006IN_APP\020\003:\027\212\265\030\023MySQL.ClicksPe" +
+      "rSite*:\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDR" +
+      "OID\020\001\022\007\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*\n\024com.janknsp" +
+      "ank.protoB\022NotificationsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5269,7 +5351,7 @@ public final class NotificationsProto {
           internal_static_Notification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Notification_descriptor,
-              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "Url", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", "IsFollowedCompany", "IsCompany", "IsEvent", "HotCount", "Score", "NotificationScore", "NnetScore", "FacebookScore", "TwitterScore", });
+              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "Url", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", "IsFollowedCompany", "IsCompany", "IsEvent", "HotCount", "Score", "NotificationScore", "NnetScore", "FacebookScore", "TwitterScore", "AgeInMillis", });
           internal_static_ClicksPerSite_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_ClicksPerSite_fieldAccessorTable = new
@@ -5320,6 +5402,7 @@ public final class NotificationsProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
