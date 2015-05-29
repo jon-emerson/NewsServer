@@ -111,7 +111,7 @@ public class PushDeviceNotifications {
         || USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
       double score = NotificationNeuralNetworkScorer.getInstance()
           .getNormalizedScore(article, followedEntityIds);
-      return Math.max(0, (int) (230 * (score * 3 - 2)));
+      return Math.max(0, (int) (210 * (score * 3 - 2)));
     }
 
     // 0 out of 100 possible for ranking score.
@@ -188,11 +188,12 @@ public class PushDeviceNotifications {
         25 /* results */,
         ImmutableSet.<String>of());
 
-    // Don't consider articles older than the last time the user used the app or
-    // the last time we sent him/her a notification.
+    // Don't consider articles older than the last time the user used the app,
+    // the last time we sent him/her a notification, or 8 hours.
     long lastNotificationTime = previousUserNotifications.getLastNotificationTime();
     long timeCutoff = Math.max(getLastAppUseTime(user), lastNotificationTime)
         - TimeUnit.MINUTES.toMillis(30);
+    timeCutoff = Math.max(timeCutoff, System.currentTimeMillis() - TimeUnit.HOURS.toMillis(8));
 
     // Find the best article in the user's stream, for notification purposes.
     Article bestArticle = null;

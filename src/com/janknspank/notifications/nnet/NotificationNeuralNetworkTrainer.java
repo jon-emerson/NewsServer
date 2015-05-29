@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.neuroph.core.NeuralNetwork;
@@ -135,6 +136,7 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
     }
 
     List<Notification> applicableNotifications = Lists.newArrayList();
+    Long lastClickedNotificationTime = null;
     for (String userId : notificationsPerUserId.keySet()) {
       // Get each user's notifications, sorted by creation time.
       List<Notification> notificationsPerUser =
@@ -152,6 +154,7 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
       List<Notification> unclickedNotifications = Lists.newArrayList();
       for (Notification notification : notificationsPerUser) {
         if (notification.hasClickTime()) {
+          lastClickedNotificationTime = notification.getClickTime();
           applicableNotifications.add(notification);
           applicableNotifications.addAll(unclickedNotifications);
           unclickedNotifications.clear();
@@ -159,7 +162,21 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
           unclickedNotifications.add(notification);
         }
       }
+
+      // Also throw in any notifications 2 days after any click that are at
+      // least 8 hours old.
+      if (lastClickedNotificationTime != null) {
+        for (Notification notification : unclickedNotifications) {
+          if ((Math.abs(notification.getCreateTime() - lastClickedNotificationTime)
+                  < TimeUnit.DAYS.toMillis(2))
+              && (System.currentTimeMillis() - notification.getCreateTime())
+                  < TimeUnit.HOURS.toMillis(8)) {
+            applicableNotifications.add(notification);
+          }
+        }
+      }
     }
+
     System.out.println("Applicable notifications: " + applicableNotifications.size());
     return applicableNotifications;
   }

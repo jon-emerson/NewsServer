@@ -319,13 +319,13 @@ public class Helper {
   /**
    * Find CTR on old algorithm vs. new algorithm.
    */
-  public static void main13(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     Averager newAverager = new Averager();
     Averager oldAverager = new Averager();
     for (Notification notification : Database.with(Notification.class).get(
         new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
         new QueryOption.WhereGreaterThan("create_time",
-            System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1)))) {
+            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(12)))) {
       if (PushDeviceNotifications.isInTestGroup(notification.getUserId())) {
         newAverager.add(notification.hasClickTime() ? 1 : 0);
       } else {
@@ -338,7 +338,7 @@ public class Helper {
         + newAverager.getCount() + " notifications");
   }
 
-  public static void main(String args[]) throws Exception {
+  public static void main13(String args[]) throws Exception {
     List<Averager> ctrPerHour = Lists.newArrayList();
     for (int i = 0; i < 50; i++) {
       ctrPerHour.add(new Averager());
