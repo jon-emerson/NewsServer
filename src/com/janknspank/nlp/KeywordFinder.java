@@ -215,6 +215,7 @@ public class KeywordFinder {
       Span keywordSpans[] = nameFinderMe.find(tokens);
       for (String keywordStr : Span.spansToStrings(keywordSpans, tokens)) {
         keywordStr = KeywordUtils.cleanKeyword(keywordStr);
+        System.out.println("** keyword: " + keywordStr);
         if (KeywordUtils.isValidKeyword(keywordStr)) {
           if (keywordMap.containsKey(keywordStr)) {
             keywordMap.get(keywordStr).setStrength(
@@ -385,7 +386,7 @@ public class KeywordFinder {
     // Find text that looks like keywords in all the childless nodes.
     Map<String, Integer> keywords = Maps.newHashMap();
     for (Node childlessChildNode : childlessChildNodes) {
-      String possibleKeyword = childlessChildNode.getFlattenedText();
+      String possibleKeyword = KeywordUtils.scrubKeyword(childlessChildNode.getFlattenedText());
 
       // This text is capitalized like a proper noun, and has 5 or fewer
       // words in it - let's consider it a keyword!

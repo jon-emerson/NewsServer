@@ -9,7 +9,7 @@ path_blacklist {
 path_blacklist {
   needle: "/search.php/"
 }
-paragraph_selector: ".content p"
+paragraph_selector: "#mainentrycontent p"
 article_url_pattern {
   path_regex: "_[0-9]{7,8}\\.html$"
 }

@@ -9,9 +9,6 @@ paragraph_blacklist {
   selector: ".subscribe"
 }
 paragraph_blacklist {
-  selector: "em"
-}
-paragraph_blacklist {
   text_regex: "^TO READ "
 }
 paragraph_blacklist {

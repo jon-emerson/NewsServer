@@ -15,15 +15,24 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
+import com.janknspank.crawler.Interpreter;
+import com.janknspank.crawler.RequiredFieldException;
+import com.janknspank.database.DatabaseRequestException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
+import com.janknspank.dom.parser.ParserException;
+import com.janknspank.fetch.FetchException;
 import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.server.soy.ViewFeedSoy;
@@ -43,12 +52,11 @@ public class ArticleSerializer {
     articles = putImageArticleFirst(articles);
     JSONArray articlesJson = new JSONArray();
     int i = 1;
+    Set<String> userKeywordSet =
+        getUserKeywordSet(user, includeLinkedInContacts, includeAddressBookContacts);
+    Set<Integer> userIndustryFeatureIdIds = UserInterests.getUserIndustryFeatureIdIds(user);
     for (Article article : articles) {
-      articlesJson.put(serialize(
-          article,
-          getUserKeywordSet(user, includeLinkedInContacts, includeAddressBookContacts),
-          UserInterests.getUserIndustryFeatureIdIds(user),
-          i++));
+      articlesJson.put(serialize(article, userKeywordSet, userIndustryFeatureIdIds, i++));
     }
     return articlesJson;
   }
@@ -213,5 +221,25 @@ public class ArticleSerializer {
       time = Long.toString(TimeUnit.DAYS.convert(age, TimeUnit.MILLISECONDS)) + "d";
     }
     return time;
+  }
+
+  public static void main(String args[])
+      throws DatabaseSchemaException, FetchException, ParserException, RequiredFieldException,
+          DatabaseRequestException, BiznessException {
+    User user = Users.getByEmail(args[0]);
+    User user2 = Users.getByUserId(args[0]);
+    if (user == null) {
+      user = user2;
+    }
+    if (user == null) {
+      System.out.println("User not found: " + args[0]);
+      System.exit(-1);
+    }
+
+    Article article = Interpreter.interpret(Url.newBuilder().setUrl(args[1]).build()).getArticle();
+    Set<String> userKeywordSet = getUserKeywordSet(user, false, false);
+    Set<Integer> userIndustryFeatureIdIds = UserInterests.getUserIndustryFeatureIdIds(user);
+    JSONObject o = serialize(article, userKeywordSet, userIndustryFeatureIdIds, 0);
+    System.out.println(o.toString(2));
   }
 }

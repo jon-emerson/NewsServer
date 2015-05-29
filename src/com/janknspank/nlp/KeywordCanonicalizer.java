@@ -92,7 +92,7 @@ public class KeywordCanonicalizer {
       keywordBuilder.setKeyword(getBestKeywordStr(keyword1.getKeyword(), keyword2.getKeyword()));
     }
     keywordBuilder.setStrength(
-        Math.max(keyword1.getStrength(), keyword2.getStrength()) + 1);
+        Math.max(keyword1.getStrength(), keyword2.getStrength()) + 5);
     keywordBuilder.setType(
         EntityType.fromValue(keyword1.getType()).getDepth()
             > EntityType.fromValue(keyword2.getType()).getDepth()
@@ -170,7 +170,7 @@ public class KeywordCanonicalizer {
     // Create a map of unique keyword names, merging any dupes as we find them.
     LinkedHashMap<String, ArticleKeyword> keywordMap = Maps.newLinkedHashMap();
     for (ArticleKeyword keyword : keywords) {
-      String keywordStr = keyword.getKeyword().trim();
+      String keywordStr = keyword.getKeyword().trim().toLowerCase();
       if (keywordMap.containsKey(keywordStr)) {
         keywordMap.put(keywordStr, merge(keyword, keywordMap.get(keywordStr)));
       } else {
@@ -261,7 +261,7 @@ public class KeywordCanonicalizer {
         Entity entity = EntityCache.getEntity(keywordToEntityId.getEntityId());
         if (entity != null) {
           finalKeywords.add(keyword.toBuilder()
-              .setEntity(entity)
+              .setEntity(entity.toBuilder().clearTopic().build())
               .setKeyword(entity.hasShortName() ? entity.getShortName() : entity.getKeyword())
               .build());
         }
@@ -364,11 +364,6 @@ public class KeywordCanonicalizer {
       }
     }
     return __keywordToEntityIdMap;
-  }
-
-  public static Entity getEntityForKeyword(String keyword) {
-    String entityId = getEntityIdForKeyword(keyword);
-    return (entityId == null) ? null : EntityCache.getEntity(entityId);
   }
 
   public static String getEntityIdForKeyword(String keyword) {

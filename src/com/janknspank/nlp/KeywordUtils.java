@@ -47,6 +47,7 @@ public class KeywordUtils {
         "graduate reviews",
         "hedge funds",
         "hello",
+        "is",
         "internet",
         "inequality",
         "insurance",
