@@ -120,8 +120,8 @@ public class DistributionBuilder {
     Distribution.Builder builder = Distribution.newBuilder();
     System.out.println("Building distribution...");
     for (double percentile : new double[] {
-        0, 0.01, 0.03, 0.05, 0.10, 0.25, 0.37, 0.50, 0.63, 0.75, 0.80, 0.85, 0.90, 0.93, 0.95, 0.97,
-        0.99, 0.995, 0.999, 1.0
+        0, 0.01, 0.02, 0.03, 0.05, 0.10, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.50, 0.55, 0.6,
+        0.65, 0.7, 0.75, 0.80, 0.85, 0.90, 0.93, 0.95, 0.97, 0.98, 0.99, 0.995, 0.999, 1.0
     }) {
       double value = getPercentileValue(percentile);
       builder.addPercentile(Distribution.Percentile.newBuilder()
