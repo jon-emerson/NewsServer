@@ -111,7 +111,7 @@ public class PushDeviceNotifications {
         || USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
       double score = NotificationNeuralNetworkScorer.getInstance()
           .getNormalizedScore(article, followedEntityIds);
-      return Math.max(0, (int) (210 * (score * 3 - 2)));
+      return Math.max(0, (int) (200 * (score * 3 - 2)));
     }
 
     // 0 out of 100 possible for ranking score.
@@ -232,7 +232,7 @@ public class PushDeviceNotifications {
     }
     if (userTimezone.isWeekend()) {
       // Only notify people on weekends if it's important.
-      scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 160);
+      scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 180);
     }
     if (bestArticle != null
         && bestArticleScore >= scoreNecessaryToTriggerNotification) {
