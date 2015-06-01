@@ -1,5 +1,6 @@
 package com.janknspank.server;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -10,8 +11,14 @@ import java.util.concurrent.Future;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.Charsets;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+import com.google.api.client.repackaged.com.google.common.base.Joiner;
 import com.google.api.client.util.Strings;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Predicate;
@@ -19,6 +26,8 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
@@ -69,7 +78,27 @@ public class GetArticlesServlet extends StandardServlet {
         user, includeLinkedInContacts, includeAddressBookContacts));
     response.put("explore_topics", Serializer.toJSON(ExploreTopics.get(articles, user)));
     response.put("has_more", Iterables.size(articles) == Articles.NUM_RESULTS);
+    response.put("next_page", getNextPageParameters(req, articles));
     return response;
+  }
+
+  private String getNextPageParameters(HttpServletRequest req, Iterable<Article> articles) {
+    List<NameValuePair> params = Lists.newArrayList();
+
+    // Add exclude_url_ids.
+    Set<String> urlIds = Sets.newHashSet();
+    for (Article article : Iterables.limit(articles, Articles.NUM_RESULTS - 1)) {
+      urlIds.add(article.getUrlId());
+    }
+    params.add(new BasicNameValuePair("exclude_url_ids", Joiner.on(",").join(urlIds)));
+
+    // Add page number and current time, for future logging / analysis.
+    params.add(new BasicNameValuePair("page_num",
+        Integer.toString(NumberUtils.toInt(getParameter(req, "page_num"), 1) + 1)));
+    params.add(new BasicNameValuePair("time",
+        Long.toString(System.currentTimeMillis())));
+
+    return URLEncodedUtils.format(params, Charsets.UTF_8);
   }
 
   private Set<String> getExcludeUrlIdSet(HttpServletRequest req) {
