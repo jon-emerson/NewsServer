@@ -3,16 +3,20 @@ package com.janknspank.notifications.nnet;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.nnet.learning.BackPropagation;
 
 import com.google.common.primitives.Doubles;
+import com.janknspank.notifications.NotificationScorer;
+import com.janknspank.notifications.UserTimezone;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Distribution;
+import com.janknspank.proto.NotificationsProto.Notification.Algorithm;
 import com.janknspank.rank.DistributionBuilder;
 
-public final class NotificationNeuralNetworkScorer {
+public final class NotificationNeuralNetworkScorer implements NotificationScorer {
   static final String DEFAULT_NEURAL_NETWORK_FILE =
       "neuralnet/notifications_backpropagation_out.nnet";
   static final String DISTRIBUTION_FILE =
@@ -31,6 +35,11 @@ public final class NotificationNeuralNetworkScorer {
     }
   }
 
+  @Override
+  public Algorithm getAlgorithm() {
+    return Algorithm.NNET;
+  }
+
   public NotificationNeuralNetworkScorer(NeuralNetwork<BackPropagation> neuralNetwork) {
     this.neuralNetwork = neuralNetwork;
   }
@@ -42,18 +51,49 @@ public final class NotificationNeuralNetworkScorer {
     return instance;
   }
 
-  public double getScore(Article article, Set<String> followedEntityIds) {
-    return getScore(new ArticleEvaluation(article, followedEntityIds));
+  /**
+   * Returns a score between 0 and 300 indicating how important this article
+   * would be for notification-purposes for the given user.
+   */
+  @Override
+  public int getScore(Article article, Set<String> followedEntityIds) {
+    double normalizedOutput = getNormalizedOutput(article, followedEntityIds);
+    return Math.max(0, (int) (200 * (normalizedOutput * 3 - 2)));
   }
 
-  public double getScore(ArticleEvaluation evaluation) {
+  public double getOutput(ArticleEvaluation evaluation) {
     neuralNetwork.setInput(Doubles.toArray(evaluation.generateInputNodes().values()));
     neuralNetwork.calculate();
     return neuralNetwork.getOutput()[0];
   }
 
-  public double getNormalizedScore(Article article, Set<String> followedEntityIds) {
+  public double getNormalizedOutput(Article article, Set<String> followedEntityIds) {
     return DistributionBuilder.projectQuantile(distribution,
-        getScore(new ArticleEvaluation(article, followedEntityIds)));
+        getOutput(new ArticleEvaluation(article, followedEntityIds)));
+  }
+
+  /**
+   * Depending on how important we find this article and what time of day it
+   * is, return it, or null to indicate that no notification should be sent.
+   * FYI 200 = the highest possible notification score.  So we have a time
+   * fall-off between notifications so that eventually we'll send a
+   * notification, and usually it'll be an important one.
+   */
+  @Override
+  public int getScoreNecessaryToTriggerNotification(
+      long lastNotificationTime, UserTimezone userTimezone) {
+    int hoursSinceNotification =
+        (int) ((System.currentTimeMillis() - lastNotificationTime) / TimeUnit.HOURS.toMillis(1));
+    int scoreNecessaryToTriggerNotification = 200 - (5 * hoursSinceNotification);
+    if (userTimezone.isDaytime()) {
+      scoreNecessaryToTriggerNotification -= 15;
+    }
+    // Only notify people on weekends if it's important.
+    if (userTimezone.isWeekend()) {
+      scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 180);
+    } else {
+      scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 50);
+    }
+    return scoreNecessaryToTriggerNotification;
   }
 }

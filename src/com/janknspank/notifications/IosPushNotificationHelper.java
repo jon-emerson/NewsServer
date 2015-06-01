@@ -201,6 +201,9 @@ public class IosPushNotificationHelper {
     alertInner.put("blob",
         "uid(" + notification.getUrlId() + ")!nid(" + notification.getId() + ")");
     alertInner.put("body", notification.getText());
+    if (notification.hasUrlId()) {
+      alertInner.put("url_id", notification.getUrlId());
+    }
 
     // Create the aps JSON.
     JSONObject aps = new JSONObject();

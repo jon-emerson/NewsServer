@@ -305,17 +305,17 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
    * Grades a neural network based on a set of holdback notification.
    * Higher scores are better.
    */
-  public static double getScore(NeuralNetwork<BackPropagation> neuralNetwork,
+  public static double getOutput(NeuralNetwork<BackPropagation> neuralNetwork,
       List<Notification> holdbackNotifications) {
     Averager averagePositiveScore = new Averager();
     Averager averageNegativeScore = new Averager();
     NotificationNeuralNetworkScorer scorer = new NotificationNeuralNetworkScorer(neuralNetwork);
     for (Notification holdbackNotification : holdbackNotifications) {
-      double notificationScore = scorer.getScore(new ArticleEvaluation(holdbackNotification));
+      double output = scorer.getOutput(new ArticleEvaluation(holdbackNotification));
       if (holdbackNotification.hasClickTime()) {
-        averagePositiveScore.add(notificationScore);
+        averagePositiveScore.add(output);
       } else {
-        averageNegativeScore.add(notificationScore);
+        averageNegativeScore.add(output);
       }
     }
     System.out.println("Average positive: " + averagePositiveScore.get()
@@ -326,11 +326,11 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
     double divider = (averagePositiveScore.get() * 3 + averageNegativeScore.get()) / 4;
     double score = 0;
     for (Notification holdbackNotification : holdbackNotifications) {
-      double notificationScore = scorer.getScore(new ArticleEvaluation(holdbackNotification));
+      double output = scorer.getOutput(new ArticleEvaluation(holdbackNotification));
       if (holdbackNotification.hasClickTime()) {
-        score += (notificationScore - divider);
+        score += (output - divider);
       } else {
-        score += (divider - notificationScore);
+        score += (divider - output);
       }
     }
     System.out.println("Divider = " + divider + ", score = " + score);
@@ -372,24 +372,24 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
 
     // Evaluate the outcomes from each thread.
     int bestHiddenNodeCount = Integer.MIN_VALUE;
-    double bestNeuralNetworkScore = Double.MIN_VALUE;
+    double bestNeuralNetworkOutput = Double.MIN_VALUE;
     Map<Integer, Double> bestScorePerTopology = Maps.newHashMap();
     NeuralNetwork<BackPropagation> bestNeuralNetwork = null;
     for (NeuralNetworkFinder neuralNetworkFinder : neuralNetworkFinderList) {
       int hiddenNodeCount = neuralNetworkFinder.hiddenNodeCount;
       NeuralNetwork<BackPropagation> neuralNetwork =
           neuralNetworkFutureMap.get(neuralNetworkFinder).get();
-      double score = getScore(neuralNetwork, holdbackNotifications);
-      if (score > bestNeuralNetworkScore) {
-        bestNeuralNetworkScore = score;
+      double output = getOutput(neuralNetwork, holdbackNotifications);
+      if (output > bestNeuralNetworkOutput) {
+        bestNeuralNetworkOutput = output;
         bestNeuralNetwork = neuralNetwork;
         bestHiddenNodeCount = hiddenNodeCount;
       }
       if (bestScorePerTopology.containsKey(hiddenNodeCount)) {
         bestScorePerTopology.put(hiddenNodeCount,
-            Math.max(score, bestScorePerTopology.get(hiddenNodeCount)));
+            Math.max(output, bestScorePerTopology.get(hiddenNodeCount)));
       } else {
-        bestScorePerTopology.put(hiddenNodeCount, score);
+        bestScorePerTopology.put(hiddenNodeCount, output);
       }
     }
 
@@ -411,7 +411,7 @@ public class NotificationNeuralNetworkTrainer implements LearningEventListener {
     DistributionBuilder builder = new DistributionBuilder();
     NotificationNeuralNetworkScorer scorer = new NotificationNeuralNetworkScorer(bestNeuralNetwork);
     for (Notification holdbackNotification : holdbackNotifications) {
-      builder.add(scorer.getScore(new ArticleEvaluation(holdbackNotification)));
+      builder.add(scorer.getOutput(new ArticleEvaluation(holdbackNotification)));
     }
     FileOutputStream fos = new FileOutputStream(NotificationNeuralNetworkScorer.DISTRIBUTION_FILE);
     builder.build().writeTo(fos);

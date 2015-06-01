@@ -157,6 +157,16 @@ message Notification {
   optional int64 age_in_millis = 22 [
     (storage_method) = PULL_OUT
   ];
+
+  enum Algorithm {
+    UNKNOWN = 0;
+    HISTORICAL = 1;
+    NNET = 2;
+    BLEND = 3;
+  }
+  optional Algorithm algorithm = 23 [
+    (storage_method) = PULL_OUT
+  ];
 }
 
 // Historical record of how many clicks we've gotten per site for various

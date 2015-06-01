@@ -52,7 +52,7 @@ public class KeywordCanonicalizerTest {
     for (ArticleKeyword keyword : canonicalizedKeywords) {
       keywordMap.put(keyword.getKeyword(), keyword);
     }
-    assertEquals(6, keywordMap.get("Jackson Smith").getStrength());
+    assertEquals(18, keywordMap.get("Jackson Smith").getStrength());
     assertEquals(EntityType.PERSON,
         EntityType.fromValue(keywordMap.get("Jackson Smith").getType()));
     assertEquals(1, keywordMap.get("IBM").getStrength());

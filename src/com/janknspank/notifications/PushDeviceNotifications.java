@@ -94,68 +94,18 @@ public class PushDeviceNotifications {
     return followedEntityIdSetBuilder.build();
   }
 
-  public static boolean isInTestGroup(String userId) {
-    char c = userId.charAt(userId.length() - 1);
-    return c % 2 == 0;
-  }
+  public static NotificationScorer getScorerForUser(User user) {
+    String userId = user.getId();
 
-  /**
-   * Returns a score between 0 and 300 indicating how important this article
-   * would be for notification-purposes for the given user.
-   */
-  private static int getArticleNotificationScore(
-      User user, Article article, Set<String> followedEntityIds) {
-    // A/B test the new algorithm.
-    if (isInTestGroup(user.getId())
+    char c = userId.charAt(userId.length() - 1);
+    if (c % 5 == 0
         || "juliencadot@gmail.com".equals(user.getEmail())
         || USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
-      double score = NotificationNeuralNetworkScorer.getInstance()
-          .getNormalizedScore(article, followedEntityIds);
-      return Math.max(0, (int) (200 * (score * 3 - 2)));
+      return NotificationNeuralNetworkScorer.getInstance();
+    } if (c % 5 == 1) {
+      return new BlendScorer();
     }
-
-    // 0 out of 100 possible for ranking score.
-    int score = (int) (article.getScore() * 100);
-
-    // Slight punishment for older articles, so that we tend to notify about
-    // newly published topics as opposed to things the user might have seen
-    // on other news aggregators recently.
-    if (((System.currentTimeMillis() - Articles.getPublishedTime(article))
-        / TimeUnit.HOURS.toMillis(1)) >= 3) {
-      score -= 20;
-    }
-
-    // -25 to 100 depending on whether the article's about a company, and
-    // whether the user's following that company.
-    ArticleEvaluation evaluation = new ArticleEvaluation(article, followedEntityIds);
-    if (evaluation.isFollowedCompany()) {
-      // Users click on these notifications 57% more than average.
-      score += 100;
-    } else if (evaluation.isCompany()) {
-      // Counter-intuitively, this is a negative signal: If an article's about
-      // a company, and the user hasn't specified an interest in that company,
-      // he's less likely than average to be interested in it.  In fact, click-
-      // through on notifications about companies the user isn't following are
-      // 27% lower than average.
-      score -= 25;
-    }
-
-    // 0 out of 100 depending on whether there's dupes or this article seems
-    // event-like.
-    if (evaluation.isEvent()) {
-      // We actually have not noticed much correlation between this attribute
-      // and click-through.  Let's re-evaluate in the future.
-      score += 5;
-    }
-    if (evaluation.getHotCount() > 3) {
-      // Articles with dupe scores of 2 actually have no correlation to
-      // engagement.  So we only reward very highly duped articles, which
-      // can get engagement up to 2x normal.
-      score += 95;
-    } else if (evaluation.getHotCount() == 3) {
-      score += 50;
-    }
-    return score;
+    return new HistoricalNotificationScorer();
   }
 
   /**
@@ -198,6 +148,7 @@ public class PushDeviceNotifications {
     // Find the best article in the user's stream, for notification purposes.
     Article bestArticle = null;
     int bestArticleScore = -1;
+    NotificationScorer scorer = getScorerForUser(user);
     for (Article article : rankedArticles) {
       // Don't consider articles that are older than the time cutoff or articles
       // that are duplicates of notifications we previously sent.
@@ -208,32 +159,15 @@ public class PushDeviceNotifications {
         continue;
       }
 
-      int score = getArticleNotificationScore(user, article, followedEntityIds);
+      int score = scorer.getScore(article, followedEntityIds);
       if (score > 0 && score > bestArticleScore) {
         bestArticleScore = score;
         bestArticle = article;
       }
     }
 
-    // Depending on how important we find this article and what time of day it
-    // is, return it, or null to indicate that no notification should be sent.
-    // FYI 300 = the highest possible notification score.  So we have a time
-    // fall-off between notifications so that eventually we'll send a
-    // notification, and usually it'll be an important one.
-    int hoursSinceNotification =
-        (int) ((System.currentTimeMillis() - lastNotificationTime) / TimeUnit.HOURS.toMillis(1));
-    int scoreNecessaryToTriggerNotification = 200 - (10 * hoursSinceNotification);
-    if (userTimezone.isMorning()) {
-      // Encourage more notifications in the morning.
-      scoreNecessaryToTriggerNotification -= 35;
-    } else if (userTimezone.isDaytime()) {
-      // And some encouragement in the afternoon, too, but not as much...
-      scoreNecessaryToTriggerNotification -= 20;
-    }
-    if (userTimezone.isWeekend()) {
-      // Only notify people on weekends if it's important.
-      scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 180);
-    }
+    int scoreNecessaryToTriggerNotification = scorer.getScoreNecessaryToTriggerNotification(
+        lastNotificationTime, userTimezone);
     if (bestArticle != null
         && bestArticleScore >= scoreNecessaryToTriggerNotification) {
       if (USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
@@ -275,12 +209,13 @@ public class PushDeviceNotifications {
                       .setIsFollowedCompany(evaluation.isFollowedCompany())
                       .setHotCount(bestArticle.getHotCount())
                       .setScore(bestArticle.getScore())
-                      .setNotificationScore(getArticleNotificationScore(
-                          user, bestArticle, followedEntityIds))
+                      .setNotificationScore(new HistoricalNotificationScorer()
+                          .getScore(bestArticle, followedEntityIds))
                       .setNnetScore(NotificationNeuralNetworkScorer.getInstance()
-                          .getNormalizedScore(bestArticle, followedEntityIds))
+                          .getNormalizedOutput(bestArticle, followedEntityIds))
                       .setAgeInMillis(System.currentTimeMillis()
-                          - Articles.getPublishedTime(bestArticle));
+                          - Articles.getPublishedTime(bestArticle))
+                      .setAlgorithm(getScorerForUser(user).getAlgorithm());
 
               SocialEngagement twitterEngagement =
                   SocialEngagements.getForArticle(bestArticle, Site.TWITTER);

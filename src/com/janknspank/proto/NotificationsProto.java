@@ -1538,6 +1538,16 @@ public final class NotificationsProto {
      * <code>optional int64 age_in_millis = 22;</code>
      */
     long getAgeInMillis();
+
+    // optional .Notification.Algorithm algorithm = 23;
+    /**
+     * <code>optional .Notification.Algorithm algorithm = 23;</code>
+     */
+    boolean hasAlgorithm();
+    /**
+     * <code>optional .Notification.Algorithm algorithm = 23;</code>
+     */
+    com.janknspank.proto.NotificationsProto.Notification.Algorithm getAlgorithm();
   }
   /**
    * Protobuf type {@code Notification}
@@ -1713,6 +1723,17 @@ public final class NotificationsProto {
               ageInMillis_ = input.readInt64();
               break;
             }
+            case 184: {
+              int rawValue = input.readEnum();
+              com.janknspank.proto.NotificationsProto.Notification.Algorithm value = com.janknspank.proto.NotificationsProto.Notification.Algorithm.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(23, rawValue);
+              } else {
+                bitField0_ |= 0x00200000;
+                algorithm_ = value;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1753,6 +1774,106 @@ public final class NotificationsProto {
     @java.lang.Override
     public com.google.protobuf.Parser<Notification> getParserForType() {
       return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code Notification.Algorithm}
+     */
+    public enum Algorithm
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>HISTORICAL = 1;</code>
+       */
+      HISTORICAL(1, 1),
+      /**
+       * <code>NNET = 2;</code>
+       */
+      NNET(2, 2),
+      /**
+       * <code>BLEND = 3;</code>
+       */
+      BLEND(3, 3),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>HISTORICAL = 1;</code>
+       */
+      public static final int HISTORICAL_VALUE = 1;
+      /**
+       * <code>NNET = 2;</code>
+       */
+      public static final int NNET_VALUE = 2;
+      /**
+       * <code>BLEND = 3;</code>
+       */
+      public static final int BLEND_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static Algorithm valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return HISTORICAL;
+          case 2: return NNET;
+          case 3: return BLEND;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Algorithm>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Algorithm>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Algorithm>() {
+              public Algorithm findValueByNumber(int number) {
+                return Algorithm.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.janknspank.proto.NotificationsProto.Notification.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Algorithm[] VALUES = values();
+
+      public static Algorithm valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Algorithm(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:Notification.Algorithm)
     }
 
     private int bitField0_;
@@ -2400,6 +2521,22 @@ public final class NotificationsProto {
       return ageInMillis_;
     }
 
+    // optional .Notification.Algorithm algorithm = 23;
+    public static final int ALGORITHM_FIELD_NUMBER = 23;
+    private com.janknspank.proto.NotificationsProto.Notification.Algorithm algorithm_;
+    /**
+     * <code>optional .Notification.Algorithm algorithm = 23;</code>
+     */
+    public boolean hasAlgorithm() {
+      return ((bitField0_ & 0x00200000) == 0x00200000);
+    }
+    /**
+     * <code>optional .Notification.Algorithm algorithm = 23;</code>
+     */
+    public com.janknspank.proto.NotificationsProto.Notification.Algorithm getAlgorithm() {
+      return algorithm_;
+    }
+
     private void initFields() {
       id_ = "";
       createTime_ = 0L;
@@ -2423,6 +2560,7 @@ public final class NotificationsProto {
       facebookScore_ = 0D;
       twitterScore_ = 0D;
       ageInMillis_ = 0L;
+      algorithm_ = com.janknspank.proto.NotificationsProto.Notification.Algorithm.UNKNOWN;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2501,6 +2639,9 @@ public final class NotificationsProto {
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         output.writeInt64(22, ageInMillis_);
+      }
+      if (((bitField0_ & 0x00200000) == 0x00200000)) {
+        output.writeEnum(23, algorithm_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2603,6 +2744,10 @@ public final class NotificationsProto {
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(22, ageInMillis_);
+      }
+      if (((bitField0_ & 0x00200000) == 0x00200000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(23, algorithm_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2768,6 +2913,8 @@ public final class NotificationsProto {
         bitField0_ = (bitField0_ & ~0x00100000);
         ageInMillis_ = 0L;
         bitField0_ = (bitField0_ & ~0x00200000);
+        algorithm_ = com.janknspank.proto.NotificationsProto.Notification.Algorithm.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00400000);
         return this;
       }
 
@@ -2886,6 +3033,10 @@ public final class NotificationsProto {
           to_bitField0_ |= 0x00100000;
         }
         result.ageInMillis_ = ageInMillis_;
+        if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
+          to_bitField0_ |= 0x00200000;
+        }
+        result.algorithm_ = algorithm_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2988,6 +3139,9 @@ public final class NotificationsProto {
         }
         if (other.hasAgeInMillis()) {
           setAgeInMillis(other.getAgeInMillis());
+        }
+        if (other.hasAlgorithm()) {
+          setAlgorithm(other.getAlgorithm());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4270,6 +4424,42 @@ public final class NotificationsProto {
         return this;
       }
 
+      // optional .Notification.Algorithm algorithm = 23;
+      private com.janknspank.proto.NotificationsProto.Notification.Algorithm algorithm_ = com.janknspank.proto.NotificationsProto.Notification.Algorithm.UNKNOWN;
+      /**
+       * <code>optional .Notification.Algorithm algorithm = 23;</code>
+       */
+      public boolean hasAlgorithm() {
+        return ((bitField0_ & 0x00400000) == 0x00400000);
+      }
+      /**
+       * <code>optional .Notification.Algorithm algorithm = 23;</code>
+       */
+      public com.janknspank.proto.NotificationsProto.Notification.Algorithm getAlgorithm() {
+        return algorithm_;
+      }
+      /**
+       * <code>optional .Notification.Algorithm algorithm = 23;</code>
+       */
+      public Builder setAlgorithm(com.janknspank.proto.NotificationsProto.Notification.Algorithm value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00400000;
+        algorithm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .Notification.Algorithm algorithm = 23;</code>
+       */
+      public Builder clearAlgorithm() {
+        bitField0_ = (bitField0_ & ~0x00400000);
+        algorithm_ = com.janknspank.proto.NotificationsProto.Notification.Algorithm.UNKNOWN;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:Notification)
     }
 
@@ -5306,7 +5496,7 @@ public final class NotificationsProto {
       "\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.Devi" +
       "ceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035" +
       "d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032Mo" +
-      "ngoDB.DeviceRegistration\"\265\005\n\014Notificatio" +
+      "ngoDB.DeviceRegistration\"\246\006\n\014Notificatio" +
       "n\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\035\n\013c" +
       "reate_time\030\002 \001(\003B\010\210\246\035\001\220\246\035\003\022\030\n\nclick_time",
       "\030\003 \001(\003B\004\220\246\035\005\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
@@ -5323,17 +5513,20 @@ public final class NotificationsProto {
       "_score\030\021 \001(\005B\004\220\246\035\005\022\030\n\nnnet_score\030\022 \001(\001B\004" +
       "\220\246\035\005\022\034\n\016facebook_score\030\023 \001(\001B\004\220\246\035\005\022\033\n\rtw" +
       "itter_score\030\024 \001(\001B\004\220\246\035\005\022\033\n\rage_in_millis" +
-      "\030\026 \001(\003B\004\220\246\035\005:\032\212\265\030\026MySQL.PushNotification" +
-      "\"\232\002\n\rClicksPerSite\0226\n\nclick_type\030\001 \001(\0162\030" +
-      ".ClicksPerSite.ClickTypeB\010\210\246\035\001\220\246\035\005\022&\n\013ro" +
-      "ot_domain\030\002 \001(\tB\021\210\246\035\001\230\246\035\377\005\220\246\035\005\250\246\035\001\022\035\n\013cl" +
-      "ick_count\030\003 \001(\003B\010\210\246\035\001\220\246\035\005\022\034\n\016instance_co" +
-      "unt\030\004 \001(\003B\004\220\246\035\005\022\030\n\nctr_rating\030\005 \001(\001B\004\220\246\035",
-      "\005\"9\n\tClickType\022\013\n\007UNKNOWN\020\000\022\010\n\004PUSH\020\001\022\t\n" +
-      "\005EMAIL\020\002\022\n\n\006IN_APP\020\003:\027\212\265\030\023MySQL.ClicksPe" +
-      "rSite*:\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDR" +
-      "OID\020\001\022\007\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*\n\024com.janknsp" +
-      "ank.protoB\022NotificationsProto"
+      "\030\026 \001(\003B\004\220\246\035\005\0220\n\talgorithm\030\027 \001(\0162\027.Notifi" +
+      "cation.AlgorithmB\004\220\246\035\005\"=\n\tAlgorithm\022\013\n\007U" +
+      "NKNOWN\020\000\022\016\n\nHISTORICAL\020\001\022\010\n\004NNET\020\002\022\t\n\005BL" +
+      "END\020\003:\032\212\265\030\026MySQL.PushNotification\"\232\002\n\rCl" +
+      "icksPerSite\0226\n\nclick_type\030\001 \001(\0162\030.Clicks" +
+      "PerSite.ClickTypeB\010\210\246\035\001\220\246\035\005\022&\n\013root_doma",
+      "in\030\002 \001(\tB\021\210\246\035\001\230\246\035\377\005\220\246\035\005\250\246\035\001\022\035\n\013click_cou" +
+      "nt\030\003 \001(\003B\010\210\246\035\001\220\246\035\005\022\034\n\016instance_count\030\004 \001" +
+      "(\003B\004\220\246\035\005\022\030\n\nctr_rating\030\005 \001(\001B\004\220\246\035\005\"9\n\tCl" +
+      "ickType\022\013\n\007UNKNOWN\020\000\022\010\n\004PUSH\020\001\022\t\n\005EMAIL\020" +
+      "\002\022\n\n\006IN_APP\020\003:\027\212\265\030\023MySQL.ClicksPerSite*:" +
+      "\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID\020\001\022\007" +
+      "\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*\n\024com.janknspank.pro" +
+      "toB\022NotificationsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5351,7 +5544,7 @@ public final class NotificationsProto {
           internal_static_Notification_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Notification_descriptor,
-              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "Url", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", "IsFollowedCompany", "IsCompany", "IsEvent", "HotCount", "Score", "NotificationScore", "NnetScore", "FacebookScore", "TwitterScore", "AgeInMillis", });
+              new java.lang.String[] { "Id", "CreateTime", "ClickTime", "UserId", "UrlId", "Url", "DeviceType", "DeviceId", "Host", "Text", "ArticlePublishedTime", "DedupingStems", "IsFollowedCompany", "IsCompany", "IsEvent", "HotCount", "Score", "NotificationScore", "NnetScore", "FacebookScore", "TwitterScore", "AgeInMillis", "Algorithm", });
           internal_static_ClicksPerSite_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_ClicksPerSite_fieldAccessorTable = new
@@ -5402,6 +5595,7 @@ public final class NotificationsProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);

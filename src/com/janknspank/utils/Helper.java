@@ -29,13 +29,13 @@ import com.janknspank.crawler.social.ShareNormalizer;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.notifications.PushDeviceNotifications;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
 import com.janknspank.proto.NotificationsProto.DeviceType;
 import com.janknspank.proto.NotificationsProto.Notification;
+import com.janknspank.proto.NotificationsProto.Notification.Algorithm;
 import com.janknspank.proto.RankProto.Persona;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
@@ -317,25 +317,22 @@ public class Helper {
   }
 
   /**
-   * Find CTR on old algorithm vs. new algorithm.
+   * Find CTR per push algorithm.
    */
-  public static void main(String args[]) throws Exception {
-    Averager newAverager = new Averager();
-    Averager oldAverager = new Averager();
+  public static void mainxx(String args[]) throws Exception {
+    Map<Algorithm, Averager> averageMap = Maps.newHashMap();
+    for (Algorithm algorithm : Algorithm.values()) {
+      averageMap.put(algorithm, new Averager());
+    }
     for (Notification notification : Database.with(Notification.class).get(
         new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
         new QueryOption.WhereGreaterThan("create_time",
-            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(12)))) {
-      if (PushDeviceNotifications.isInTestGroup(notification.getUserId())) {
-        newAverager.add(notification.hasClickTime() ? 1 : 0);
-      } else {
-        oldAverager.add(notification.hasClickTime() ? 1 : 0);
-      }
+            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(100)))) {
+      averageMap.get(notification.getAlgorithm()).add(notification.hasClickTime() ? 1 : 0);
     }
-    System.out.println("Old algorithm: " + (oldAverager.get() * 100) + "% CTR for "
-        + oldAverager.getCount() + " notifications");
-    System.out.println("New algorithm: " + (newAverager.get() * 100) + "% CTR"
-        + newAverager.getCount() + " notifications");
+    for (Algorithm algorithm : Algorithm.values()) {
+      System.out.println(algorithm.name() + ": " + averageMap.get(algorithm).get());
+    }
   }
 
   public static void main13(String args[]) throws Exception {
@@ -355,6 +352,24 @@ public class Helper {
     for (int i = 0; i < 50; i++) {
       System.out.println("Age " + i + " hours: " + ctrPerHour.get(i).get() * 100 + "% CTR on "
           + ctrPerHour.get(i).getCount() + " data points");
+    }
+  }
+
+  public static void main(String args[]) throws Exception {
+    List<Averager> averageCtrs = Lists.newArrayList();
+    for (int i = 0; i < 20; i++) {
+      averageCtrs.add(new Averager());
+    }
+    for (Notification notification : Database.with(Notification.class).get(
+        new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
+        new QueryOption.WhereGreaterThan("create_time",
+            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(100)))) {
+      double nnetScore = notification.getNnetScore();
+      int percentile = Math.max(0, Math.min(19, (int) (nnetScore * 20)));
+      averageCtrs.get(percentile).add(notification.hasClickTime() ? 1 : 0);
+    }
+    for (int i = 0; i < 20; i++) {
+      System.out.println((i * 5) + "%: " + averageCtrs.get(i).get());
     }
   }
 }
