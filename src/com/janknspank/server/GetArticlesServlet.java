@@ -1,6 +1,7 @@
 package com.janknspank.server;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -86,18 +87,41 @@ public class GetArticlesServlet extends StandardServlet {
   private String getNextPageParameters(HttpServletRequest req, Iterable<Article> articles) {
     List<NameValuePair> params = Lists.newArrayList();
 
+    // Add existing parameters, verbatim, so that we can support more filters
+    // in the future without worrying about updating this.  Exclude
+    // authentication and other parameters we'll update more specifically below.
+    Map<String, String[]> parameterMap = req.getParameterMap();
+    Set<String> specialParameters = ImmutableSet.of(
+        "session_key", "exclude_url_ids", "page_num");
+    for (String key : parameterMap.keySet()) {
+      if (!specialParameters.contains(key)) {
+        for (String value : parameterMap.get(key)) {
+          params.add(new BasicNameValuePair(key, value));
+        }
+      }
+    }
+
     // Add exclude_url_ids.
     Set<String> urlIds = Sets.newHashSet();
     for (Article article : Iterables.limit(articles, Articles.NUM_RESULTS - 1)) {
       urlIds.add(article.getUrlId());
+    }
+    if (parameterMap.containsKey("exclude_url_ids")) {
+      for (String parameterValue : parameterMap.get("exclude_url_ids")) {
+        for (String urlId : Splitter.on(",").split(parameterValue)) {
+          urlIds.add(urlId);
+        }
+      }
     }
     params.add(new BasicNameValuePair("exclude_url_ids", Joiner.on(",").join(urlIds)));
 
     // Add page number and current time, for future logging / analysis.
     params.add(new BasicNameValuePair("page_num",
         Integer.toString(NumberUtils.toInt(getParameter(req, "page_num"), 1) + 1)));
-    params.add(new BasicNameValuePair("time",
-        Long.toString(System.currentTimeMillis())));
+    if (!parameterMap.containsKey("first_page_time")) {
+      params.add(new BasicNameValuePair("first_page_time",
+          Long.toString(System.currentTimeMillis())));
+    }
 
     return URLEncodedUtils.format(params, Charsets.UTF_8);
   }
