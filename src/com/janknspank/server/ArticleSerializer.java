@@ -17,7 +17,6 @@ import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.EntityType;
-import com.janknspank.bizness.Industry;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
@@ -107,8 +106,10 @@ public class ArticleSerializer {
       articleJson.put("show_image", true);
     }
     if (article.hasReasonIndustryCode()) {
-      articleJson.put("reason_industry_name",
-          Industry.fromCode(article.getReasonIndustryCode()).getName());
+      FeatureId featureId = FeatureId.fromId(article.getReasonIndustryCode());
+      if (featureId != null) {
+        articleJson.put("reason_industry_name", featureId.getTitle());
+      }
     }
 
     // Replace the published time with the crawl time, since people often just

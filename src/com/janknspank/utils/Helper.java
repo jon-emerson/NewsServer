@@ -390,7 +390,7 @@ public class Helper {
         new QueryOption.WhereNotNull("score"),
         new QueryOption.WhereGreaterThan("create_time",
             System.currentTimeMillis() - TimeUnit.HOURS.toMillis(500)))) {
-      int score = (int) notification.getScore();
+      int score = (int) notification.getNotificationScore();
       int percentile = Math.max(0, Math.min(100, (int) (score / 3)));
       averageCtrs.get(percentile).add(notification.hasClickTime() ? 1 : 0);
     }
