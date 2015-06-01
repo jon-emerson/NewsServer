@@ -107,7 +107,9 @@ public class GetInterestsServlet extends StandardServlet {
 
     JSONArray interestsJson = new JSONArray();
     for (FeatureId featureId : getIndustryFeatureIds(searchString)) {
-      interestsJson.put(Serializer.toJSON(toInterest(featureId)));
+      JSONObject interestJson = Serializer.toJSON(toInterest(featureId));
+      interestJson.put("industry_name", featureId.getTitle());
+      interestsJson.put(interestJson);
     }
 
     Iterable<Entity> entities = getEntities(searchString,

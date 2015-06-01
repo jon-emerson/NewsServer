@@ -65,8 +65,10 @@ public class GetArticlesServlet extends StandardServlet {
     Iterable<Article> articles = getArticles(req);
     User user = getUser(req);
     response.put("articles", ArticleSerializer.serialize(
-        articles, user, includeLinkedInContacts, includeAddressBookContacts));
+        Iterables.limit(articles, Articles.NUM_RESULTS - 1),
+        user, includeLinkedInContacts, includeAddressBookContacts));
     response.put("explore_topics", Serializer.toJSON(ExploreTopics.get(articles, user)));
+    response.put("has_more", Iterables.size(articles) == Articles.NUM_RESULTS);
     return response;
   }
 
@@ -140,11 +142,9 @@ public class GetArticlesServlet extends StandardServlet {
             new DiversificationPass.NoOpPass(),
             excludeUrlIdSet);
       } else if ("linked_in".equals(contacts)) {
-        return Articles.getArticlesForLinkedInContacts(
-            user, Articles.NUM_RESULTS, excludeUrlIdSet);
+        return Articles.getArticlesForLinkedInContacts(user, excludeUrlIdSet);
       } else if ("address_book".equals(contacts)) {
-        return Articles.getArticlesForAddressBookContacts(
-            user, Articles.NUM_RESULTS, excludeUrlIdSet);
+        return Articles.getArticlesForAddressBookContacts(user, excludeUrlIdSet);
       } else {
         return Articles.getMainStream(user, excludeUrlIdSet);
       }

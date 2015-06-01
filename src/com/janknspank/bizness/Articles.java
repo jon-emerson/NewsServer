@@ -45,9 +45,10 @@ import com.janknspank.rank.Scorer;
  */
 public class Articles {
   /**
-   * The number of results to return in user streams.
+   * The number of results to return in user streams.  One more thrown in to
+   * support pagination.
    */
-  public static final int NUM_RESULTS = 50;
+  public static final int NUM_RESULTS = 51;
 
   /**
    * Returns a function that gives an iterable of articles a specific reason for
@@ -330,17 +331,19 @@ public class Articles {
   }
 
   public static Iterable<Article> getArticlesForLinkedInContacts(
-      User user, int limit, Set<String> excludeUrlIds)
+      User user, Set<String> excludeUrlIds)
       throws DatabaseSchemaException, BiznessException {
     return getArticlesForContacts(user,
-        getLinkedInContactNames(user, UserInterests.getTombstones(user)), limit, excludeUrlIds);
+        getLinkedInContactNames(user, UserInterests.getTombstones(user)),
+        NUM_RESULTS, excludeUrlIds);
   }
 
   public static Iterable<Article> getArticlesForAddressBookContacts(
-      User user, int limit, Set<String> excludeUrlIds)
+      User user, Set<String> excludeUrlIds)
       throws DatabaseSchemaException, BiznessException {
     return getArticlesForContacts(user,
-        getAddressBookContactNames(user, UserInterests.getTombstones(user)), limit, excludeUrlIds);
+        getAddressBookContactNames(user, UserInterests.getTombstones(user)),
+        NUM_RESULTS, excludeUrlIds);
   }
 
   private static Iterable<Article> getArticlesForContacts(

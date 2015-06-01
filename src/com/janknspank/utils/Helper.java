@@ -357,11 +357,11 @@ public class Helper {
 
   /**
    * Find the CTRs for notifications based on their notification neural network
-   * scores, put into brackets of 5%s.
+   * scores, put into brackets of 2%s.
    */
-  public static void main14(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     List<Averager> averageCtrs = Lists.newArrayList();
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 100; i++) {
       averageCtrs.add(new Averager());
     }
     for (Notification notification : Database.with(Notification.class).get(
@@ -369,18 +369,18 @@ public class Helper {
         new QueryOption.WhereGreaterThan("create_time",
             System.currentTimeMillis() - TimeUnit.HOURS.toMillis(100)))) {
       double nnetScore = notification.getNnetScore();
-      int percentile = Math.max(0, Math.min(19, (int) (nnetScore * 20)));
+      int percentile = Math.max(0, Math.min(99, (int) (nnetScore * 100)));
       averageCtrs.get(percentile).add(notification.hasClickTime() ? 1 : 0);
     }
-    for (int i = 0; i < 20; i++) {
-      System.out.println((i * 5) + "%: " + averageCtrs.get(i).get());
+    for (int i = 0; i < 100; i++) {
+      System.out.println(i + "%: " + averageCtrs.get(i).get());
     }
   }
 
   /**
    * Find the CTRs for notifications based on their heuristic scores.
    */
-  public static void main(String args[]) throws Exception {
+  public static void main14(String args[]) throws Exception {
     List<Averager> averageCtrs = Lists.newArrayList();
     for (int i = 0; i < 100; i++) {
       averageCtrs.add(new Averager());

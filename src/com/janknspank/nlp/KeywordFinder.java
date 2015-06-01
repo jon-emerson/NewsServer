@@ -215,7 +215,6 @@ public class KeywordFinder {
       Span keywordSpans[] = nameFinderMe.find(tokens);
       for (String keywordStr : Span.spansToStrings(keywordSpans, tokens)) {
         keywordStr = KeywordUtils.cleanKeyword(keywordStr);
-        System.out.println("** keyword: " + keywordStr);
         if (KeywordUtils.isValidKeyword(keywordStr)) {
           if (keywordMap.containsKey(keywordStr)) {
             keywordMap.get(keywordStr).setStrength(
