@@ -355,7 +355,11 @@ public class Helper {
     }
   }
 
-  public static void main(String args[]) throws Exception {
+  /**
+   * Find the CTRs for notifications based on their notification neural network
+   * scores, put into brackets of 5%s.
+   */
+  public static void main14(String args[]) throws Exception {
     List<Averager> averageCtrs = Lists.newArrayList();
     for (int i = 0; i < 20; i++) {
       averageCtrs.add(new Averager());
@@ -370,6 +374,28 @@ public class Helper {
     }
     for (int i = 0; i < 20; i++) {
       System.out.println((i * 5) + "%: " + averageCtrs.get(i).get());
+    }
+  }
+
+  /**
+   * Find the CTRs for notifications based on their heuristic scores.
+   */
+  public static void main(String args[]) throws Exception {
+    List<Averager> averageCtrs = Lists.newArrayList();
+    for (int i = 0; i < 100; i++) {
+      averageCtrs.add(new Averager());
+    }
+    for (Notification notification : Database.with(Notification.class).get(
+        new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
+        new QueryOption.WhereNotNull("score"),
+        new QueryOption.WhereGreaterThan("create_time",
+            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(500)))) {
+      int score = (int) notification.getScore();
+      int percentile = Math.max(0, Math.min(100, (int) (score / 3)));
+      averageCtrs.get(percentile).add(notification.hasClickTime() ? 1 : 0);
+    }
+    for (int i = 0; i < 100; i++) {
+      System.out.println((i * 3) + "%: " + averageCtrs.get(i).get());
     }
   }
 }
