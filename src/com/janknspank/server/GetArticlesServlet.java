@@ -77,8 +77,9 @@ public class GetArticlesServlet extends StandardServlet {
         Iterables.limit(articles, Articles.NUM_RESULTS - 1),
         user, includeLinkedInContacts, includeAddressBookContacts));
     response.put("explore_topics", Serializer.toJSON(ExploreTopics.get(articles, user)));
-    response.put("has_more", Iterables.size(articles) == Articles.NUM_RESULTS);
-    response.put("next_page", getNextPageParameters(req, articles));
+    if (Iterables.size(articles) == Articles.NUM_RESULTS) {
+      response.put("next_page", getNextPageParameters(req, articles));
+    }
     return response;
   }
 
