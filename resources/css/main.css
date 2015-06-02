@@ -108,7 +108,7 @@ a.btn-primary,
   max-height: 780px;
   margin: 0;
   padding: 0;
-  background: url("https://s3.amazonaws.com/spotter-assets/perspective-iphone6plus4-min.jpg") no-repeat center center;
+  background: url("http://s3.amazonaws.com/spotter-assets/perspective-iphone6plus4-min.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -237,7 +237,7 @@ a.btn-primary,
 }
 
 #section-1 {
-  background: url("https://s3.amazonaws.com/spotter-assets/leading-section-background6flat%402x.jpg") no-repeat center center;
+  background: url("http://s3.amazonaws.com/spotter-assets/leading-section-background6flat%402x.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -246,7 +246,7 @@ a.btn-primary,
 }
 
 #section-3 {
-  background: url("https://s3.amazonaws.com/spotter-assets/leading-section-background5flat%402x.jpg") no-repeat center center;
+  background: url("http://s3.amazonaws.com/spotter-assets/leading-section-background5flat%402x.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -255,15 +255,15 @@ a.btn-primary,
 }
 
 #section-4 {
-  background-image: url("https://s3.amazonaws.com/spotter-assets/leading-section-background6flat%402x.jpg");
+  background-image: url("http://s3.amazonaws.com/spotter-assets/realistic-commute3-min.jpg");
   background-repeat: no-repeat;
-  background-position:  0% 100%;
+  background-position: right 0 top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   color: white;
-  background-color: #41BAFF;
+  background-color: #666;
 }
 
 #section-4-wrapper {
@@ -548,7 +548,7 @@ a.btn-primary,
   }
 
   #section-4 {
-    background-image: url("/resources/img/realistic-commute-narrow2.jpg");
+    background-image: url("http://s3.amazonaws.com/spotter-assets/realistic-commute3-min.jpg");
   }
 
   #section-4-row {
