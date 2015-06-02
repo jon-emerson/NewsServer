@@ -108,7 +108,7 @@ a.btn-primary,
   max-height: 780px;
   margin: 0px;
   padding: 0px;
-  background: url("/resources/img/perspective-iphone6plus4-min.jpg") no-repeat center center;
+  background: url("https://s3.amazonaws.com/spotter-assets/perspective-iphone6plus4-min.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -253,7 +253,7 @@ a.btn-primary,
 }
 
 #section-3 {
-  background: url("/resources/img/leading-section-background5flat@2x.jpg")  no-repeat center center;
+  background: url("https://s3.amazonaws.com/spotter-assets/leading-section-background5flat%402x.jpg")  no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -262,7 +262,7 @@ a.btn-primary,
 }
 
 #section-4 {
-  background-image: url("/resources/img/realistic-commute3-min.jpg");
+  background-image: url("https://s3.amazonaws.com/spotter-assets/leading-section-background6flat%402x.jpg");
   background-repeat: no-repeat;
   background-position:  0% 100%;
   -webkit-background-size: cover;
