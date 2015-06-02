@@ -62,7 +62,7 @@ public class MongoCollection<T extends Message> extends Collection<T> {
     primaryKeyFields = getPrimaryKeyFields(storageMethodMap.keySet());
   }
 
-  protected MongoClient getClient() throws DatabaseSchemaException {
+  protected synchronized MongoClient getClient() throws DatabaseSchemaException {
     if (__clientInternal == null) {
       __clientInternal = MongoConnection.getClient();
       __database = MongoConnection.getDatabase();

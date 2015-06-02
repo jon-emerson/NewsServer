@@ -162,7 +162,8 @@ message Notification {
     UNKNOWN = 0;
     HISTORICAL = 1;
     NNET = 2;
-    BLEND = 3;
+    BLEND = 3; // Blend of Historical and Neural Net scorers.
+    FOLLOWED_ENTITIES_ONLY = 4;
   }
   optional Algorithm algorithm = 23 [
     (storage_method) = PULL_OUT

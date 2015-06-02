@@ -2,8 +2,11 @@ package com.janknspank.notifications;
 
 import java.util.Set;
 
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.NotificationsProto.Notification.Algorithm;
+import com.janknspank.proto.UserProto.User;
 
 public interface NotificationScorer {
   public Algorithm getAlgorithm();
@@ -20,4 +23,9 @@ public interface NotificationScorer {
    */
   public int getScoreNecessaryToTriggerNotification(
       long lastNotificationTime, UserTimezone userTimezone);
+
+  /**
+   * Returns the articles that are applicable to this scorer.
+   */
+  public Iterable<Article> getArticles(User user) throws DatabaseSchemaException, BiznessException;
 }

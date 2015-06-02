@@ -8,13 +8,21 @@ import java.util.concurrent.TimeUnit;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.nnet.learning.BackPropagation;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.primitives.Doubles;
+import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.notifications.NotificationScorer;
 import com.janknspank.notifications.UserTimezone;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Distribution;
 import com.janknspank.proto.NotificationsProto.Notification.Algorithm;
+import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.DistributionBuilder;
+import com.janknspank.rank.DiversificationPass;
+import com.janknspank.rank.NeuralNetworkScorer;
 
 public final class NotificationNeuralNetworkScorer implements NotificationScorer {
   static final String DEFAULT_NEURAL_NETWORK_FILE =
@@ -95,5 +103,16 @@ public final class NotificationNeuralNetworkScorer implements NotificationScorer
       scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 50);
     }
     return scoreNecessaryToTriggerNotification;
+  }
+
+  @Override
+  public Iterable<Article> getArticles(User user) throws DatabaseSchemaException, BiznessException {
+    return Articles.getRankedArticles(
+        user,
+        NeuralNetworkScorer.getInstance(),
+        new MainStreamStrategy(),
+        new DiversificationPass.MainStreamPass(),
+        25 /* results */,
+        ImmutableSet.<String>of());
   }
 }

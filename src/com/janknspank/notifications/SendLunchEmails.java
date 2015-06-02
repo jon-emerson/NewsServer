@@ -38,6 +38,7 @@ import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.GuidFactory;
 import com.janknspank.bizness.UserInterests;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.Asserts;
 import com.janknspank.common.Host;
 import com.janknspank.common.TopList;
@@ -134,14 +135,35 @@ public class SendLunchEmails {
    */
   private static SoyListData getTags(Article article, Set<String> userKeywordSet,
       Set<Integer> userIndustryFeatureIdIds) {
-    SoyListData list = new SoyListData();
+    List<SoyMapData> list = Lists.newArrayList();
+    boolean hasSelected = false;
+
+    // Start with followed entities, then secondary entities.
     for (ArticleKeyword keyword :
         ArticleSerializer.getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)) {
+      boolean selected = userKeywordSet.contains(keyword.getKeyword().toLowerCase());
       list.add(new SoyMapData(
-          "selected", userKeywordSet.contains(keyword.getKeyword().toLowerCase()),
+          "selected", selected,
           "keyword", keyword.getKeyword()));
+      hasSelected |= selected;
     }
-    return list;
+
+    // If there are no followed entities, then put the industry.  This way, the
+    // user always knows why we chose to show this article.
+    if (!hasSelected && article.hasReasonIndustryCode()) {
+      FeatureId featureId = FeatureId.fromId(article.getReasonIndustryCode());
+      if (featureId != null) {
+        list.add(0, new SoyMapData(
+            "selected", true,
+            "keyword", featureId.getTitle()));
+      }
+
+      // Show no more than 2 chips.
+      if (list.size() > 2) {
+        list = list.subList(0, 1);
+      }
+    }
+    return new SoyListData(list);
   }
 
   public static String getNotificationUrl(User user, Article article, String notificationId) {
@@ -380,8 +402,14 @@ public class SendLunchEmails {
     executor.shutdown();
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String args[]) throws Exception {
     sendLunchEmails();
     System.exit(0);
   }
+
+//  public static void main(String args[]) throws Exception {
+//    User user = Users.getByEmail("panaceaa@gmail.com");
+//    Session session = EmailTransportProvider.getSession();
+//    new LunchEmailCallable(session, user).call();
+//  }
 }

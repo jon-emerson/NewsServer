@@ -16,7 +16,6 @@ import com.google.common.collect.Iterables;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.SocialEngagements;
-import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
@@ -32,8 +31,6 @@ import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
-import com.janknspank.rank.DiversificationPass;
-import com.janknspank.rank.NeuralNetworkScorer;
 
 /**
  * Sends every user who's enabled iOS push notifications a notification about
@@ -84,7 +81,7 @@ public class PushDeviceNotifications {
     }
   }
 
-  private static Set<String> getFollowedEntityIds(User user) {
+  static Set<String> getFollowedEntityIds(User user) {
     ImmutableSet.Builder<String> followedEntityIdSetBuilder = ImmutableSet.builder();
     for (Interest interest : UserInterests.getInterests(user)) {
       if (interest.hasEntity()) {
@@ -94,7 +91,7 @@ public class PushDeviceNotifications {
     return followedEntityIdSetBuilder.build();
   }
 
-  public static NotificationScorer getScorerForUser(User user) {
+  public static NotificationScorer getScorerForUser(User user, Set<String> followedEntityIds) {
     String userId = user.getId();
 
     char c = userId.charAt(userId.length() - 1);
@@ -104,6 +101,8 @@ public class PushDeviceNotifications {
       return NotificationNeuralNetworkScorer.getInstance();
     } if (c % 5 == 1) {
       return new BlendScorer();
+    } if (c % 5 == 2 && followedEntityIds.size() >= 2) {
+      return new FollowedEntitiesOnlyScorer();
     }
     return new HistoricalNotificationScorer();
   }
@@ -129,15 +128,6 @@ public class PushDeviceNotifications {
       return null;
     }
 
-    // Get the user's stream.
-    Iterable<Article> rankedArticles = Articles.getRankedArticles(
-        user,
-        NeuralNetworkScorer.getInstance(),
-        new MainStreamStrategy(),
-        new DiversificationPass.MainStreamPass(),
-        25 /* results */,
-        ImmutableSet.<String>of());
-
     // Don't consider articles older than the last time the user used the app,
     // the last time we sent him/her a notification, or 8 hours.
     long lastNotificationTime = previousUserNotifications.getLastNotificationTime();
@@ -148,8 +138,8 @@ public class PushDeviceNotifications {
     // Find the best article in the user's stream, for notification purposes.
     Article bestArticle = null;
     int bestArticleScore = -1;
-    NotificationScorer scorer = getScorerForUser(user);
-    for (Article article : rankedArticles) {
+    NotificationScorer scorer = getScorerForUser(user, followedEntityIds);
+    for (Article article : scorer.getArticles(user)) {
       // Don't consider articles that are older than the time cutoff or articles
       // that are duplicates of notifications we previously sent.
       if (Articles.getPublishedTime(article) < timeCutoff
@@ -215,7 +205,7 @@ public class PushDeviceNotifications {
                           .getNormalizedOutput(bestArticle, followedEntityIds))
                       .setAgeInMillis(System.currentTimeMillis()
                           - Articles.getPublishedTime(bestArticle))
-                      .setAlgorithm(getScorerForUser(user).getAlgorithm());
+                      .setAlgorithm(getScorerForUser(user, followedEntityIds).getAlgorithm());
 
               SocialEngagement twitterEngagement =
                   SocialEngagements.getForArticle(bestArticle, Site.TWITTER);

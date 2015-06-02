@@ -129,7 +129,7 @@ public abstract class DiversificationPass {
       int sharedStems = Sets.intersection(
           articleStems.get(article), articleStems.get(article2)).size();
       int domainShared = domainMap.get(article).equals(domainMap.get(article2)) ? 5 : 0;
-      int score = 100 - (sharedKeywords * 15 + sharedStems + domainShared);
+      int score = 100 - (sharedKeywords * 20 + sharedStems + domainShared);
 
       // In the main stream, try to show articles from all the user's industries.
       // In topic streams, don't try to do this.

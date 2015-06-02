@@ -3,10 +3,17 @@ package com.janknspank.notifications;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.collect.ImmutableSet;
 import com.janknspank.bizness.Articles;
+import com.janknspank.bizness.BiznessException;
+import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
+import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.notifications.nnet.ArticleEvaluation;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.NotificationsProto.Notification.Algorithm;
+import com.janknspank.proto.UserProto.User;
+import com.janknspank.rank.DiversificationPass;
+import com.janknspank.rank.NeuralNetworkScorer;
 
 public class HistoricalNotificationScorer implements NotificationScorer {
   @Override
@@ -89,5 +96,16 @@ public class HistoricalNotificationScorer implements NotificationScorer {
       scoreNecessaryToTriggerNotification = Math.max(scoreNecessaryToTriggerNotification, 180);
     }
     return scoreNecessaryToTriggerNotification;
+  }
+
+  @Override
+  public Iterable<Article> getArticles(User user) throws DatabaseSchemaException, BiznessException {
+    return Articles.getRankedArticles(
+        user,
+        NeuralNetworkScorer.getInstance(),
+        new MainStreamStrategy(),
+        new DiversificationPass.MainStreamPass(),
+        25 /* results */,
+        ImmutableSet.<String>of());
   }
 }
