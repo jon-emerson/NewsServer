@@ -108,15 +108,13 @@ a.btn-primary,
   max-height: 780px;
   margin: 0px;
   padding: 0px;
-  background: url("/resources/img/perspective-iphone6plus4.jpg") no-repeat center center;
+  background: url("/resources/img/perspective-iphone6plus4-min.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   text-align: left;
   padding-top: 0px;
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/resources/img/perspective-iphone6plus4.jpg', sizingMethod='scale');
-  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/resources/img/perspective-iphone6plus4.jpg', sizingMethod='scale')";
 }
 
 .jumbotron .container {
@@ -264,7 +262,7 @@ a.btn-primary,
 }
 
 #section-4 {
-  background-image: url("/resources/img/realistic-commute3.jpg");
+  background-image: url("/resources/img/realistic-commute3-min.jpg");
   background-repeat: no-repeat;
   background-position:  0% 100%;
   -webkit-background-size: cover;

@@ -1,4 +1,4 @@
 package com.janknspank.server;
 
-@ServletMapping(urlPattern = "/")
+@ServletMapping(urlPattern = "")
 public class HomeServlet extends StandardServlet {}
