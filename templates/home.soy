@@ -4,6 +4,9 @@
  * Page layout.
  */
 {template .main}
+  <!DOCTYPE html>
+  <html>
+
   {call news.common.head data="all"}
     {param title kind="text"}Business news, personalized.{/param}
     {param extraHeaders kind="html"}
@@ -15,9 +18,10 @@
     <script src="/resources/js/home.js"></script>
     {call .body data="all" /}
     {call news.common.footer data="all" /}
-    {call .footerJavascript data="all" /}
     {call news.common.gatracking /}
-  <body>
+  </body>
+
+  </html>
 {/template}
 
 /**
@@ -25,61 +29,61 @@
  */
 {template .body}
   <main>
-    <section role="introduction" id="section-0">
+    <section id="section-0">
       <div class="jumbotron">
         <div class="container">
           <div class="row">
             <div class="col-sm-6 col-md-5">
               <div class="mobile-brand-wrapper">
                 <div class="mobile-brand-top-line">
-                  <img id="mobile-app-icon" width="220px" height="55px" alt="Spotter Logo - Business news, personalized." src="/resources/img/mobileSpotterLogo1@2x.png">
+                  <img id="mobile-app-icon" width="220" height="55" alt="Spotter Logo - Business news, personalized." src="/resources/img/mobileSpotterLogo1%402x.png">
                   <br />
-                  <h1 id="spotter-tagline">Business news, personalized.</h1>
-                  <h2 id="spotter-logo">Stay on top of companies, people, and industries that matter to you</h2>
+                  <h1>Business news, personalized.</h1>
+                  <h2>Stay on top of companies, people, and industries that matter to you</h2>
                 </div>
               </div>
               <div class="brand-wrapper">
                 <img id="app-icon" alt="Spotter Logo - Business news, personalized." {sp}
                     src="https://s3.amazonaws.com/spotter-assets/spotterLogo3%402x-min.png">
                 <br />
-                <h1 id="spotter-tagline">Business news, personalized.</h1>
-                <h2 id="spotter-logo">Stay on top of companies, <br>people, and industries<br> that matter to you</h2>
+                <h1>Business news, personalized.</h1>
+                <h2>Stay on top of companies, <br>people, and industries<br> that matter to you</h2>
               </div>
               <div class="description-wrapper">
               </div>
             </div>
             <div class="col-sm-6 col-md-offset-2 col-md-5">
-                <div class="bottom-aligner"></div>
-                <div class="get-the-app-wrapper">
-                  <a href="http://itunes.apple.com/app/id966430113">
-                    <div class="get-the-app-button">
-                      <img class="app-store-badge" alt="Download Spotter on the App Store" src="/resources/img/Download_on_the_App_Store_Badge_US-UK_135x40.svg">
-                    </div>
-                  </a>
-                  <div class="link-texting-explanation-label">or text app store link to:</div>
-                  <div class="link-texting-wrapper-right">
-                    <div class="linkTextingWidget">
-                      <div class="linkTextingInner">
-                        <input type="hidden" class="linkID" value="10877c50-bdfc-456d-9b61-edbbf0fe4523">
-                        <input class="linkTextingInput" type="tel" id="numberToText_linkTexting"></input>
-                        <button class="linkTextingButton" type="button" id="sendButton_linkTexting">Text link</button>
-                        <div class="linkTextingError" id="linkTextingError" style="display:none;"></div>
-                      </div>
+              <div class="get-the-app-wrapper">
+                <a href="http://itunes.apple.com/app/id966430113">
+                  <div class="get-the-app-button">
+                    <img class="app-store-badge" alt="Download Spotter on the App Store" src="/resources/img/Download_on_the_App_Store_Badge_US-UK_135x40.svg">
+                  </div>
+                </a>
+                <div class="link-texting-explanation-label">or text app store link to:</div>
+                <div class="link-texting-wrapper-right">
+                  <div class="linkTextingWidget">
+                    <div class="linkTextingInner">
+                      <input type="hidden" class="linkID" value="10877c50-bdfc-456d-9b61-edbbf0fe4523" />
+                      <input class="linkTextingInput" type="tel" />
+                      <button class="linkTextingButton" type="button">Text link</button>
+                      <div class="linkTextingError" style="display: none"></div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
         <a onclick="scrollToElement('#section-1', 300);">
           <div id="jumbotron-footer">
-            <img src="/resources/img/more-below@2x.png" alt="More info about Spotter below" id="more-below-arrow"/>
+            <img src="https://s3.amazonaws.com/spotter-assets/more-below%402x-min.png" {sp}
+                alt="More info about Spotter below" id="more-below-arrow"/>
           </div>
         </a>
       </div>
     </section>
 
-    <section role="section-1-intro" id="section-1">
+    <section id="section-1">
       <div class="container">
         <div class="wrapper">
           <div class="row">
@@ -88,8 +92,8 @@
               <p>Spotter brings you essential business news every day based on your interests. If there's an important event in your industry, you'll be the first to know.</p>
             </div>
             <div class="col-md-3 col-md-pull-4 col-sm-3 col-sm-pull-7">
-              <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
-                <img id="section-1-img" width="312px" height="517px" class="padded-img" alt="Spotter busines news iPhone app stream" {sp}
+              <div class="text-center">
+                <img id="section-1-img" width="312" height="517" class="padded-img" alt="Spotter busines news iPhone app stream" {sp}
                     src="https://s3.amazonaws.com/spotter-assets/perspective-left-stream2flat%402x-min.png">
               </div>
             </div>
@@ -98,7 +102,7 @@
       </div>
     </section>
 
-    <section role="section-2-follow" id="section-2">
+    <section id="section-2">
       <div class="container">
         <div class="section-2-wrapper">
           <div class="row">
@@ -107,8 +111,8 @@
               <p>Spotter understand's when things you care about make the news.</p>
             </div>
             <div class="col-md-3 col-sm-3">
-              <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
-                <img id="section-2-img" width="298px" height="475px" class="padded-img" alt="Follow companies, people, and industries using Spotter" {sp}
+              <div class="text-center">
+                <img id="section-2-img" width="298" height="475" class="padded-img" alt="Follow companies, people, and industries using Spotter" {sp}
                     src="https://s3.amazonaws.com/spotter-assets/section-2-screenshot%402x-min.png">
               </div>
             </div>
@@ -116,8 +120,8 @@
         </div>
       </div>
     </section>
-  
-    <section role="section-3-" id="section-3">
+
+    <section id="section-3">
       <div class="container">
         <div class="section-3-wrapper">
           <div class="row">
@@ -126,7 +130,7 @@
               <p>Swipe left or right on articles to train Spotter</p>
             </div>
             <div class="col-md-3 col-md-pull-4 col-sm-3 col-sm-pull-7">
-              <div class="text-center wow fadeInLeft" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
+              <div class="text-center">
                 <img id="section-3-img" class="padded-img" alt="Teach Spotter about the best news" {sp}
                     src="https://s3.amazonaws.com/spotter-assets/perspective-swipe-iphone-gold4flat-min.png">
               </div>
@@ -136,7 +140,7 @@
       </div>
     </section>
 
-    <section role="section-4-commute" id="section-4">
+    <section id="section-4">
       <div class="container" id="section-4-container">
         <div class="wrapper" id="section-4-wrapper">
           <div class="row" id="section-4-row">
@@ -149,13 +153,13 @@
       </div> 
     </section>
 
-    <section role="section-5-punchline" id="section-5">
+    <section id="section-5">
       <div class="container">
         <div class="wrapper">
           <div class="row">
             <div class="col-md-12">
-              <div class="text-center wow fadeIn" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
-                <img id="section-5-img" width="180px" height="97px" class="padded-img" alt="Spotter logo, be more informed in less time" {sp}
+              <div class="text-center">
+                <img id="section-5-img" width="180" height="97" class="padded-img" alt="Spotter logo, be more informed in less time" {sp}
                     src="https://s3.amazonaws.com/spotter-assets/app-icon4%402x-min.png">
               </div>
             </div>
@@ -168,13 +172,13 @@
         </div>
       </div>
     </section>
-  
-    <section role="section-6-get-app" id="section-6">
+
+    <section id="section-6">
       <div class="container">
         <div id="section-6-wrapper">
           <div class="row">
             <div class="col-md-12">
-              <div class="text-center wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.5s" data-wow-offset="30">
+              <div class="text-center">
                 <h4>Get Spotter</h4>
                 <a href="http://itunes.apple.com/app/id966430113">
                   <div class="get-the-app-button-centered">
@@ -189,17 +193,12 @@
             <div class="col-xs-12">
               <div class="linkTextingWidget" id="bottom-link-texting">
                 <div class="linkTextingInner">
-                  <input type="hidden" class="linkID" value="3997396a-9558-4200-b632-b105384e939e">
-                  <input class="linkTextingInput" type="tel" id="numberToText_linkTexting"></input>
-                  <button class="linkTextingButton" type="button" id="sendButton_linkTexting">Text link</button>
-                  <div class="linkTextingError" id="linkTextingError" style="display:none;"></div>
+                  <input type="hidden" class="linkID" value="3997396a-9558-4200-b632-b105384e939e" />
+                  <input class="linkTextingInput" type="tel" />
+                  <button class="linkTextingButton" type="button">Text link</button>
+                  <div class="linkTextingError" style="display: none"></div>
                 </div>
               </div>
-              <script type="text/javascript">
-                var linkTextingDefaultCountry = "us";
-                var linkTextingPreferredCountries = ["us", “ca”];
-                var linkTextingOnlyCountries = ["us", “ca”];
-              </script>
               <script type="text/javascript" src="//d3q6uu7asevdsg.cloudfront.net/1.3/js/link_texting.min.js"></script>
             </div>
           </div>
@@ -207,7 +206,7 @@
       </div>
     </section>
 
-    <section role="section-9-industries" id="section-9">
+    <section id="section-9">
       <div class="container">
         <div class="wrapper">
           <div class="row">
@@ -241,15 +240,4 @@
       </div>
     </section>
   </main>
-{/template}
-
-/**
- * Loads WOW.js, a library that animates elements into the view as the user
- * scrolls.
- */
-{template .footerJavascript}
-  <script src="/resources/bower_components/WOW/dist/wow.min.js"></script>
-  <script>
-    new WOW().init();
-  </script>
 {/template}

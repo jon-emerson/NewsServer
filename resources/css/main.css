@@ -5,10 +5,10 @@ body {
   font-size: 18px;
 }
 
-html,body {
+html, body {
   height: 100%;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 
 p {
@@ -40,8 +40,8 @@ h3 {
 }
 
 .navbar {
-  border: 0px;
-  border-radius: 0px;
+  border: 0;
+  border-radius: 0;
 }
 
 .navbar-default {
@@ -57,7 +57,7 @@ h3 {
   margin-bottom: 14px;
   margin-left: 18px;
   line-height: 28px;
-  border-width: 0px;
+  border-width: 0;
   text-decoration: none;
 }
 
@@ -86,7 +86,7 @@ a.btn-primary,
   color: #fff;
   background-color: #2098F6;
   font-weight: 100;
-  border-width: 0px;
+  border-width: 0;
   padding-right: 40px;
   background-image: url("/public/images/right_arrow_white.png");
   background-position: 93% 50%;
@@ -100,21 +100,21 @@ a.btn-primary,
 .navbar-nav > li > a.btn-primary.active {
   color: #fff;
   background-color: #3D8DDE;
-  border-width: 0px;
+  border-width: 0;
 }
 
 .jumbotron {
   height: 100%;
   max-height: 780px;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   background: url("https://s3.amazonaws.com/spotter-assets/perspective-iphone6plus4-min.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   text-align: left;
-  padding-top: 0px;
+  padding-top: 0;
 }
 
 .jumbotron .container {
@@ -160,24 +160,17 @@ a.btn-primary,
   display: inline-block;
 }
 
-.bottom-aligner {
-  display: inline-block;
-  height: 100%;
-  vertical-align: bottom;
-  width: 0px;
-}
-
 .get-the-app-button {
-  width: 135px;
-  height: 50px;
-  float: right;
   display: block;
+  float: right;
+  padding-top: 315px;
+  width: 135px;
 }
 
 .get-the-app-button-centered {
   width: 135px;
   height: 50px;
-  margin: 0px auto 0px auto;
+  margin: 0 auto 0 auto;
   display: block;
 }
 
@@ -232,19 +225,19 @@ a.btn-primary,
 #more-below-arrow {
   width: 75px;
   height: 13px;
-  margin: 0px auto 0px auto;
+  margin: 20px 0;
 }
 
 .section-2-wrapper {
-  padding: 48px 0px 0px 0px;
+  padding: 48px 0 0 0;
 }
 
 .section-3-wrapper {
-   padding: 72px 0px 72px 0px;
+   padding: 72px 0 72px 0;
 }
 
 #section-1 {
-  background: url("/resources/img/leading-section-background6flat@2x.jpg")  no-repeat center center;
+  background: url("https://s3.amazonaws.com/spotter-assets/leading-section-background6flat%402x.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -253,7 +246,7 @@ a.btn-primary,
 }
 
 #section-3 {
-  background: url("https://s3.amazonaws.com/spotter-assets/leading-section-background5flat%402x.jpg")  no-repeat center center;
+  background: url("https://s3.amazonaws.com/spotter-assets/leading-section-background5flat%402x.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -274,8 +267,8 @@ a.btn-primary,
 }
 
 #section-4-wrapper {
-  padding: 0px 0px 304px 0px;
-  text-shadow: 0px 0px 30px #000000;
+  padding: 0 0 304px 0;
+  text-shadow: 0 0 30px #000000;
 }
 
 #section-5 {
@@ -293,7 +286,7 @@ a.btn-primary,
 
 #section-6 {
   background-color: #FE3852;
-  background: url("/resources/img/section-background-blue1flat@2x.jpg")  no-repeat center center;
+  background: url("/resources/img/section-background-blue1flat@2x.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -302,7 +295,7 @@ a.btn-primary,
 }
 
 #section-6-wrapper {
-  margin: 84px 0px 84px 0px;
+  margin: 84px 0 84px 0;
 }
 
 #section-7 {
@@ -328,21 +321,17 @@ a.btn-primary,
   text-align: center;
 }
 
-#section-9 {
-  background-color: #F9F9F9;
-}
-
 #industries-header {
   margin-bottom: 24px;
   text-align: center;
 }
 
 .footer-p {
-  padding: 0px 0px 48px 0px;
+  padding: 0 0 48px 0;
   float: left;
   font-size: 18px;
   max-width: 340px;
-  margin: 6px 0px 12px 0px;
+  margin: 6px 0 12px 0;
 }
 
 .footer-p small {
@@ -355,10 +344,10 @@ a.btn-primary,
 }
 
 .nav-footer {
-  padding: 60px 0 0px 0;
+  padding: 60px 0 0 0;
   background-color: #333333;
   color: #FFF;
-  margin: 0px;
+  margin: 20px 0 0 0;
 }
 
 .fb-like {
@@ -371,11 +360,11 @@ a.btn-primary,
 
 @media (min-width: 992px) {
   main section .wrapper {
-    padding: 84px 0px;
+    padding: 84px 0;
   }
 
   main section .wrapper-small {
-    padding: 84px 0px 24px 0px;
+    padding: 84px 0 24px 0;
   }
 
   h3 {
@@ -387,7 +376,7 @@ a.btn-primary,
   }
 
   h4 {
-    margin: 40px 0px 30px 0px;
+    margin: 40px 0 30px 0;
     font-weight: bold;
     font-size: 32px;
   }
@@ -409,6 +398,7 @@ a.btn-primary,
 
   .navbar-toggle {
     margin-top: 8px;
+    display: none; // TODO(jonemerson): Somehow get this working again someday without loads of Javascript.
   }
 
   #navbar-logo {
@@ -423,39 +413,43 @@ a.btn-primary,
   main section .wrapper {
     padding: 24px 10px;
     text-align: center;
-    margin-top: 10%;
   }
 
   .navbar-nav > li > a.btn-primary,
   .navbar-nav > li > a.btn {
-    padding: 5px 15px 5px 0px;
+    padding: 5px 15px 5px 0;
     margin-right: 18px;
     display: -webkit-box;
   }
 
   .navbar-nav > li > a {
     text-align: center;
+    margin-top: -15px;
+  }
+
+  .nav-footer {
+    padding-top: 40px;
   }
 
   .padded-img {
-    margin: 20px 0px 0px 0px;
+    margin: 20px 0 0 0;
   }
 
   #section-1-img {
-    margin: 20px 0px 0px -80px;
+    margin: 20px 0 0 -80px;
   }
 
   h4 {
-    margin: 10px 0px 30px 0px;
+    margin: 10px 0 30px 0;
     font-size: 28px;
   }
 
   .container-fluid>.navbar-header {
-    margin-left: 0px;
+    margin-left: 0;
   }
 
   .navbar-nav {
-    margin: 0px;
+    margin: 0;
   }
 
   p {
@@ -463,11 +457,11 @@ a.btn-primary,
   }
 
   .section-2-wrapper {
-    padding: 32px 0px 0px 0px;
+    padding: 32px 0 0 0;
   }
 
   .section-3-wrapper {
-    padding: 32px 0px 0px 0px;
+    padding: 32px 0 0 0;
   }
 
   .link-texting-explanation-label {
@@ -491,7 +485,7 @@ a.btn-primary,
 
   .brand-wrapper {
     display: none;
-    margin: 12px auto 0px auto;
+    margin: 12px auto 0 auto;
     width: 92%;
     height: 85%;
   }
@@ -513,28 +507,24 @@ a.btn-primary,
     margin-top: 16px;
   }
 
-  .bottom-aligner {
-    display: none;
-  }
-
   .get-the-app-wrapper {
     display: block;
-    margin: 16px auto 0px auto;
+    margin: 16px auto 0 auto;
     width: 135px;
   }
 
   .jumbotron h1 {
     font-size: 16px;
     margin-top: 14px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   .jumbotron h2 {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   .inline-btn {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   #section-3-img {
@@ -544,13 +534,17 @@ a.btn-primary,
   }
 
   #section-4-container {
-    padding: 0px;
+    padding: 0;
+  }
+
+  #section-4 .row {
+    padding: 20px 0;
   }
 
   #section-4-wrapper {
-     background-color:rgba(0, 0, 0, 0.87);
-     padding: 0px;
-     margin: 0px 0px 360px 0px;
+     background-color: rgba(0, 0, 0, 0.87);
+     padding: 0;
+     margin: 0 0 360px 0;
   }
 
   #section-4 {
@@ -558,7 +552,7 @@ a.btn-primary,
   }
 
   #section-4-row {
-    margin-right: 0px;
+    margin-right: 0;
     padding-bottom: 12px;
   }
 
@@ -582,13 +576,19 @@ a.btn-primary,
 
   ul {
     text-align: left;
-    margin-bottom: 0px;
+    margin-bottom: 0;
+    padding-left: 25%;
+  }
+
+  #section-9 .wrapper {
+    margin: 0;
+    padding: 30px 0;
   }
 }
 
 @media (min-width: 992px) and (max-width:1200px) {
   #section-4-wrapper {
-    padding: 0px 0px 254px 0px;
+    padding: 0 0 254px 0;
   }
 }
 
@@ -603,7 +603,7 @@ a.btn-primary,
   }
 
   .padded-img {
-    margin: 20px 0px 0px 0px;
+    margin: 20px 0 0 0;
   }
 
   h3 {
@@ -611,7 +611,7 @@ a.btn-primary,
   }
 
   h4 {
-    margin: 10px 0px 30px 0px;
+    margin: 10px 0 30px 0;
   }
 
   .container {
@@ -632,7 +632,7 @@ a.btn-primary,
   }
 
   #section-4-wrapper {
-    padding: 0px 0px 184px 0px;
+    padding: 0 0 184px 0;
   }
 }
 
