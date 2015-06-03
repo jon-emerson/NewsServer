@@ -1,0 +1,44 @@
+{namespace news.createkeywordtoentityid autoescape="strict"}
+
+/**
+ * Renders a page that associates keywords with existing entities.
+ * @param industries
+ */
+{template .main}
+  <h1>Create Keyword to Entity ID mapping</h1>
+
+  <form method="POST" action="/createKeywordToEntityId">
+    Keyword (please capitalize this nicely):<br>
+    <input type="text" name="keyword"><br>
+    <br>
+
+    Entity ID:<br>
+    <input type="text" name="entity_id"><br>
+    <br>
+
+    Most relevant to industries:
+    <div style="margin: 8px 20px">
+      <select name="top_industry_id_1">
+        <option value="">None</option>
+        {foreach $industry in $industries}
+          <option value="{$industry.id}">{$industry.name}</option>
+        {/foreach}
+      </select><br>
+      <select name="top_industry_id_2">
+        <option value="">None</option>
+        {foreach $industry in $industries}
+          <option value="{$industry.id}">{$industry.name}</option>
+        {/foreach}
+      </select><br>
+      <select name="top_industry_id_3">
+        <option value="">None</option>
+        {foreach $industry in $industries}
+          <option value="{$industry.id}">{$industry.name}</option>
+        {/foreach}
+      </select><br>
+    </div>
+
+    <br>
+    <input type="submit" value="Add"><br>
+  </form>
+{/template}

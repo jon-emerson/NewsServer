@@ -1,0 +1,58 @@
+short_name: "Psychology Today"
+root_domain: "psychologytoday.com"
+subdomain_blacklist: "therapists.psychologytoday.com"
+is_https: true
+start_url: "https://www.psychologytoday.com/"
+path_blacklist {
+  needle: "/basics/"
+}
+path_blacklist {
+  needle: "/experts/"
+}
+path_blacklist {
+  needle: "/subscriptions/"
+}
+paragraph_selector: ".field__item p"
+article_url_pattern {
+  path_regex: "^\\/blog\\/[a-z0-9A-Z\\-]+\\/[0-9]+\\/[^\\/]+$"
+}
+test_instructions {
+  article_url_detector_checks {
+    article_url: "https://www.psychologytoday.com/blog/how-we-do-it/201506/miscarriages-conception-without-birth"
+    article_url: "https://www.psychologytoday.com/blog/the-power-prime/201506/don-t-waste-your-time-it-s-precious"
+    article_url: "https://www.psychologytoday.com/blog/canine-corner/201404/aggression-between-dogs-in-the-same-household"
+    article_url: "https://www.psychologytoday.com/blog/self-promotion-introverts/201506/tame-your-sabotaging-self-talk-part-2"
+
+    # About pets.
+    article_url: "https://www.psychologytoday.com/blog/all-dogs-go-heaven/201505/moving-beyond-the-euthanasia-imperative"
+    article_url: "https://www.psychologytoday.com/blog/animal-emotions/201506/pain-fear-and-death-documented-monkey-breeding-facility"
+    article_url: "https://www.psychologytoday.com/blog/canine-corner/201506/is-there-relationship-between-playfulness-and-trainability"
+    article_url: "https://www.psychologytoday.com/blog/decoding-your-pet/201506/separation-anxiety-the-great-imitator-part-1"
+    article_url: "https://www.psychologytoday.com/blog/dogs-best-friend/201505/more-evidence-dogs-rose-early"
+    article_url: "https://www.psychologytoday.com/blog/through-dog-s-eyes/201505/the-ideal-dog"
+
+    non_article_url: "https://www.psychologytoday.com/topics/cognition"
+    non_article_url: "https://www.psychologytoday.com/experts/francois-grosjean-phd"
+    non_article_url: "https://www.psychologytoday.com/blog/life-bilingual"
+    non_article_url: "https://www.psychologytoday.com/about-psychology-today"
+    non_article_url: "https://www.psychologytoday.com/basics"
+    non_article_url: "https://www.psychologytoday.com/blog/fulfillment-any-age"
+  }
+}
+feature_boost_pattern {
+  boost: -10 # This is not a general consumption web site.
+}
+feature_boost_pattern {
+  feature_id: 10562 # Psychology
+  boost: 2
+}
+feature_boost_pattern {
+  feature_id: 10562 # Psychology
+  path_regex: "^\\/blog\\/(all-dogs-go-to-heaven|animal-emotions|canine-corner|decoding-your-pet|dogs-best-friend|through-dog-s-eyes|pets-and-their-people|decoding-your-pet)\\/"
+  boost: -2
+}
+feature_boost_pattern {
+  feature_id: 10505 # Veterinary
+  path_regex: "^\\/blog\\/(all-dogs-go-to-heaven|animal-emotions|canine-corner|decoding-your-pet|dogs-best-friend|through-dog-s-eyes|pets-and-their-people|decoding-your-pet)\\/"
+  boost: 2
+}

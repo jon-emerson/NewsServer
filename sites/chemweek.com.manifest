@@ -36,11 +36,3 @@ feature_boost_pattern {
   feature_id: 10521 # Chemicals
   boost: 3
 }
-feature_boost_pattern {
-  feature_id: 10504 # Biotechnology
-  boost: 1
-}
-feature_boost_pattern {
-  feature_id: 10533 # Medicine
-  boost: 0
-}

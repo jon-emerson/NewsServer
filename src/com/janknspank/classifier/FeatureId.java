@@ -62,6 +62,7 @@ public enum FeatureId {
   ELECTRICAL_ENGINEERING(10559, FeatureType.INDUSTRY, "Electrical Engineering"),
   USER_EXPERIENCE(10560, FeatureType.INDUSTRY, "User Experience"),
   ARCHAEOLOGY(10561, FeatureType.INDUSTRY, "Archaeology"),
+  PSYCHOLOGY(10562, FeatureType.INDUSTRY, "Psychology"),
   STARTUPS(20000, FeatureType.TOPIC, "Related to tech startups"),
   MANUAL_HEURISTIC_ACQUISITIONS(30000, FeatureType.MANUAL_HEURISTIC,
       "Hard-coded search term checks for whether an article is about an acquisition"),

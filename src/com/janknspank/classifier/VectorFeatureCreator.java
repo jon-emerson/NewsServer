@@ -58,6 +58,7 @@ public class VectorFeatureCreator {
       throws DatabaseSchemaException {
     if (__ARTICLE_VECTOR_MAP.isEmpty()) {
       for (Article article : Database.with(Article.class).get(
+          // Don't go higher than this - we don't have memory for all the document vectors.
           new QueryOption.Limit(20000),
           new QueryOption.DescendingSort("published_time"))) {
         __ARTICLE_VECTOR_MAP.put(article, Vector.fromArticle(article));

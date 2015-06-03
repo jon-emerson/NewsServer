@@ -213,6 +213,9 @@ public class ArticleCreatorTest {
             "Valentino, Patti Smith, and More Celebrate New York City Ballet\342\200\231s "
             + "Spring Gala and Mel Gibson, Charlize Theron, and Other Stars Come Out for the "
             + "<i>Mad Max: Fury Road</i> Premiere"), site));
+    assertEquals("Android Auto puts Google Maps where they belong: Right in your dash",
+        ArticleCreator.getTitle(createDocumentWithTitle(
+            "Android Auto puts Google Maps where they belong: Right in your dash [REVIEW]"), site));
   }
 
   @Test

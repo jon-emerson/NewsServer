@@ -27,10 +27,6 @@ path_blacklist {
   needle: "/content/"
 }
 path_blacklist {
-  needle: "/daily-report-"
-  location: CONTAINS
-}
-path_blacklist {
   needle: "/morning-agenda-"
   location: CONTAINS
 }
@@ -110,6 +106,7 @@ test_instructions {
     article_url: "http://www.nytimes.com/reuters/2014/12/17/business/17reuters-insurance-regulations.html"
     article_url: "http://bits.blogs.nytimes.com/2014/04/24/vic-gundotra-google-plus-lead-departing/"
     article_url: "http://bits.blogs.nytimes.com/2014/12/31/qwant-wants-to-be-alternative-to-google/"
+    article_url: "http://bits.blogs.nytimes.com/2015/03/26/daily-report-facebooks-high-stakes-bet-on-drones-to-deliver-internet-service/"
     article_url: "http://bits.blogs.nytimes.com/2015/01/30/verizon-wireless-to-allow-complete-opt-out-of-mobile-supercookies/"
     article_url: "http://boss.blogs.nytimes.com/2014/12/22/rethinking-the-relationship-between-bosses-and-employees/"
     article_url: "http://dealbook.nytimes.com/2014/02/09/the-new-normal-for-tech-companies-and-others-the-stealth-i-p-o/"

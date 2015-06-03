@@ -1,11 +1,13 @@
 package com.janknspank.nlp;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
@@ -102,6 +104,15 @@ public class KeywordUtils {
       BLACKLIST.add(keyword.toLowerCase());
     }
   }
+  private static final ImmutableMap<Pattern, String> CAPITALIZATION_FIX_PATTERNS =
+      ImmutableMap.<Pattern, String>builder()
+          .put(Pattern.compile("Aol"), "AOL")
+          .put(Pattern.compile("Ios"), "iOS")
+          .put(Pattern.compile("Ipad"), "iPad")
+          .put(Pattern.compile("Iphone"), "iPhone")
+          .put(Pattern.compile("Iwatch"), "iWatch")
+          .put(Pattern.compile("Ipod"), "iPod")
+          .build();
 
   public static boolean isValidKeyword(String keyword) {
     keyword = keyword.trim();
@@ -196,12 +207,9 @@ public class KeywordUtils {
       keyword = sb.toString();
     } else if (keyword.length() > 0 && !Character.isUpperCase(keyword.charAt(0))) {
       keyword = WordUtils.capitalizeFully(keyword);
-      keyword = keyword.replaceAll("Aol", "AOL");
-      keyword = keyword.replaceAll("Ios", "iOS");
-      keyword = keyword.replaceAll("Ipad", "iPad");
-      keyword = keyword.replaceAll("Iphone", "iPhone");
-      keyword = keyword.replaceAll("Iwatch", "iWatch");
-      keyword = keyword.replaceAll("Ipod", "iPod");
+      for (Map.Entry<Pattern, String> capitalizationFixEntry : CAPITALIZATION_FIX_PATTERNS.entrySet()) {
+        keyword = capitalizationFixEntry.getKey().matcher(keyword).replaceAll(capitalizationFixEntry.getValue());
+      }
     } else if (keyword.length() > 4 && keyword.equals(keyword.toUpperCase())) {
       // For non-abbreviations, don't let folks capitalize everything.
       keyword = WordUtils.capitalizeFully(keyword.toLowerCase());

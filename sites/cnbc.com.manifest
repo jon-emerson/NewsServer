@@ -38,7 +38,7 @@ test_instructions {
   }
 }
 feature_boost_pattern {
-  boost: -2
+  boost: -4
 }
 feature_boost_pattern {
   feature_id: 10514 # Mergers and Acquisitions.
@@ -51,5 +51,4 @@ feature_boost_pattern {
 feature_boost_pattern {
   feature_id: 10535 # Equity Investing.
   boost: 1
-} 
-
+}

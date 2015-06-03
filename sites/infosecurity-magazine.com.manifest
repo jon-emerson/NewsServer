@@ -1,6 +1,7 @@
 short_name: "InfoSecurity"
 root_domain: "infosecurity-magazine.com"
 start_url: "http://www.infosecurity-magazine.com/news/"
+use_first_paragraph_as_description: true
 paragraph_selector: "div[itemprop=\"articleBody\"] > p"
 article_url_pattern {
   path_regex: "^\\/news\\/(?!page-[0-9]+)[^\\/]+\\/$"

@@ -98,8 +98,9 @@ public class Vector {
   public Vector(VectorData data) {
     documentCount = data.hasDocumentCount() ? data.getDocumentCount() : 1;
     for (WordFrequency w : data.getWordFrequencyList()) {
-      wordFrequencyMap.add(w.getWord(), w.getFrequency());
-      numDocumentOccurencesMap.add(w.getWord(), w.getDocumentOccurences());
+      String word = w.getWord().intern();
+      wordFrequencyMap.add(word, w.getFrequency());
+      numDocumentOccurencesMap.add(word, w.getDocumentOccurences());
     }
   }
 
@@ -157,7 +158,7 @@ public class Vector {
             keywordFinder.getSentences(paragraph), additionalPhrases, String.class)) {
           for (String word : keywordFinder.getTokens(sentence)) {
             if (!Strings.isNullOrEmpty(word) && !stopWords.contains(word)) {
-              word = KeywordUtils.cleanKeyword(word);
+              word = KeywordUtils.cleanKeyword(word).intern();
               if (word.length() > 2 && KeywordUtils.isValidKeyword(word)) {
                 words.add(word);
                 articleWords.add(word);

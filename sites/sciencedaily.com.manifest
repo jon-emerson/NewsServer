@@ -1,10 +1,10 @@
 short_name: "Science Daily"
 root_domain: "sciencedaily.com"
 start_url: "http://www.sciencedaily.com"
-start_url: "http://www.sciencedaily.com/news/fossils_ruins/archaeology/"
+start_url: "http://www.sciencedaily.com/news/fossils_ruins/"
 start_url: "http://www.sciencedaily.com/news/health_medicine/"
 start_url: "http://www.sciencedaily.com/news/plants_animals/"
-start_url: "http://www.sciencedaily.com/news/plants_animals/veterinary_medicine/"
+start_url: "http://www.sciencedaily.com/news/mind_brain/"
 subdomain_blacklist: "m.sciencedaily.com"
 path_blacklist {
   needle: "/videos/"
@@ -32,10 +32,6 @@ feature_boost_pattern {
   boost: -10 # This is not a general consumption web site.
 }
 feature_boost_pattern {
-  feature_id: 10521 # Chemicals
-  boost: 1
-}
-feature_boost_pattern {
   feature_id: 10504 # Biotechnology
   boost: 2
 }
@@ -49,6 +45,14 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10545 # Environment
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10562 # Psychology
+  boost: 1
+}
+feature_boost_pattern {
+  feature_id: 10521 # Chemicals
   boost: 1
 }
 feature_boost_pattern {
