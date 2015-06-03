@@ -114,7 +114,6 @@ a.btn-primary,
   -o-background-size: cover;
   background-size: cover;
   text-align: left;
-  padding-top: 0;
 }
 
 .jumbotron .container {
@@ -220,12 +219,7 @@ a.btn-primary,
   width: 100%;
   text-align: center;
   height: 7%;
-}
-
-#more-below-arrow {
-  width: 75px;
-  height: 13px;
-  margin: 20px 0;
+  margin: 10px 0 15px;
 }
 
 .section-2-wrapper {
@@ -356,6 +350,22 @@ a.btn-primary,
 
 .linkedin-btn {
     position:relative;
+}
+
+@media (max-width: 992px) {
+  .jumbotron {
+    background: url("http://s3.amazonaws.com/spotter-assets/perspective-iphone6plus4-min.jpg") no-repeat center 40%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+
+@media (min-width: 1100px) {
+  .jumbotron {
+    min-height: 600px
+  }
 }
 
 @media (min-width: 992px) {
@@ -511,6 +521,10 @@ a.btn-primary,
     display: block;
     margin: 16px auto 0 auto;
     width: 135px;
+  }
+
+  .get-the-app-button {
+    padding: 300px 0 10px 0;
   }
 
   .jumbotron h1 {

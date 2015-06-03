@@ -48,7 +48,7 @@ public class IndustryVectorNormalizer {
    * given industry.  Articles that score as well as the top 90% of seed article
    * URLs are given scores 0.8 and above.  Articles that score as well as the
    * top 50% of seed articles are given scores 0.9 and above.  All other
-   * articles are given scores between 0 and 0.8, depending on their relative
+   * articles are given scores between 0 and 0.78, depending on their relative
    * cosine similarities with the respective industry.
    */
   public double getNormalizedScore(double rawScore, int boost) {
@@ -65,8 +65,8 @@ public class IndustryVectorNormalizer {
               ? 0
               : quantile / quantileFor10PercentSeed;
 
-      // Now, we normalize scores in this range to be in [0, 0.8].
-      return 0.8 * positionBetween0And10PercentSeed;
+      // Now, we normalize scores in this range to be in [0, 0.78].
+      return 0.78 * positionBetween0And10PercentSeed;
     } else if (quantile < quantileFor50PercentSeed) {
       // This is the range, between 0 and 1, that the given quantile lives
       // between [quantileFor10PercentSeed, quantileFor50PercentSeed].
@@ -80,8 +80,8 @@ public class IndustryVectorNormalizer {
             / (quantileFor50PercentSeed - quantileFor10PercentSeed);
       }
 
-      // Now, we normalize scores in this range to be in [0.8, 0.925].
-      return 0.8 + 0.125 * positionBetween10And50PercentSeed;
+      // Now, we normalize scores in this range to be in [0.78, 0.925].
+      return 0.78 + 0.145 * positionBetween10And50PercentSeed;
     }
 
     // OK, we're in the "Top 50%" bracket.  This score is really good!

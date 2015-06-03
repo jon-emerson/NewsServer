@@ -44,15 +44,15 @@ feature_boost_pattern {
 }
 feature_boost_pattern {
   feature_id: 10562 # Psychology
-  boost: 2
+  boost: 1
 }
 feature_boost_pattern {
   feature_id: 10562 # Psychology
   path_regex: "^\\/blog\\/(all-dogs-go-to-heaven|animal-emotions|canine-corner|decoding-your-pet|dogs-best-friend|through-dog-s-eyes|pets-and-their-people|decoding-your-pet)\\/"
-  boost: -2
+  boost: -5
 }
 feature_boost_pattern {
   feature_id: 10505 # Veterinary
   path_regex: "^\\/blog\\/(all-dogs-go-to-heaven|animal-emotions|canine-corner|decoding-your-pet|dogs-best-friend|through-dog-s-eyes|pets-and-their-people|decoding-your-pet)\\/"
-  boost: 2
+  boost: 5
 }

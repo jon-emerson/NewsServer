@@ -58,6 +58,9 @@ paragraph_selector: ".article_body > p"
 # See "... Joins the NYPD Funeral Protest Backlash".
 paragraph_selector: ".article-body > p"
 
+# See "Sturgeon Steps Out of Salmond’s Shadow to Galvanize Scotland"
+paragraph_selector: ".article-body-v2__content p"
+
 # Printable pages.
 paragraph_selector: "#story_content > p"
 
