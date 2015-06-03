@@ -319,7 +319,7 @@ public class Helper {
   /**
    * Find CTR per push algorithm.
    */
-  public static void mainxx(String args[]) throws Exception {
+  public static void main(String args[]) throws Exception {
     Map<Algorithm, Averager> averageMap = Maps.newHashMap();
     for (Algorithm algorithm : Algorithm.values()) {
       averageMap.put(algorithm, new Averager());
@@ -327,11 +327,12 @@ public class Helper {
     for (Notification notification : Database.with(Notification.class).get(
         new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
         new QueryOption.WhereGreaterThan("create_time",
-            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(100)))) {
+            System.currentTimeMillis() - TimeUnit.HOURS.toMillis(24)))) {
       averageMap.get(notification.getAlgorithm()).add(notification.hasClickTime() ? 1 : 0);
     }
     for (Algorithm algorithm : Algorithm.values()) {
-      System.out.println(algorithm.name() + ": " + averageMap.get(algorithm).get());
+      System.out.println(algorithm.name() + ": " + averageMap.get(algorithm).get()
+          + " (of " + averageMap.get(algorithm).getCount() + ")");
     }
   }
 
@@ -359,7 +360,7 @@ public class Helper {
    * Find the CTRs for notifications based on their notification neural network
    * scores, put into brackets of 2%s.
    */
-  public static void main(String args[]) throws Exception {
+  public static void mainxx(String args[]) throws Exception {
     List<Averager> averageCtrs = Lists.newArrayList();
     for (int i = 0; i < 100; i++) {
       averageCtrs.add(new Averager());

@@ -30,13 +30,12 @@ public class HistoricalNotificationScorer implements NotificationScorer {
     // 0 out of 100 possible for ranking score.
     int score = (int) (article.getScore() * 100);
 
-    // Slight punishment for older articles, so that we tend to notify about
-    // newly published topics as opposed to things the user might have seen
-    // on other news aggregators recently.
-    if (((System.currentTimeMillis() - Articles.getPublishedTime(article))
-        / TimeUnit.HOURS.toMillis(1)) >= 3) {
-      score -= 20;
-    }
+    // Punishment for older articles, so that we tend to notify about newly
+    // published topics as opposed to things the user might have seen on other
+    // news aggregators recently.
+    double ageInHours = ((double) System.currentTimeMillis() - article.getPublishedTime())
+        / TimeUnit.HOURS.toMillis(1);
+    score -= 8 * ageInHours;
 
     // -25 to 100 depending on whether the article's about a company, and
     // whether the user's following that company.

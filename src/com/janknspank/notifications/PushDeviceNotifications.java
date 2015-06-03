@@ -94,7 +94,7 @@ public class PushDeviceNotifications {
   public static NotificationScorer getScorerForUser(User user, Set<String> followedEntityIds) {
     String userId = user.getId();
 
-    char c = userId.charAt(userId.length() - 1);
+    int c = userId.charAt(userId.length() - 1) + userId.charAt(userId.length() - 2);
     if (c % 5 == 0
         || "juliencadot@gmail.com".equals(user.getEmail())
         || USERS_TO_INCLUDE_SCORES_ON_NOTIFICATIONS.contains(user.getEmail())) {
