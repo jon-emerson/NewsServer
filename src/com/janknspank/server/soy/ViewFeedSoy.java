@@ -64,7 +64,7 @@ public class ViewFeedSoy {
       List<String> unhighlightedTags = Lists.newArrayList();
       Set<Integer> userIndustryFeatureIdIds = UserInterests.getUserIndustryFeatureIdIds(user);
       for (ArticleKeyword keyword
-          : ArticleSerializer.getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)) {
+          : ArticleSerializer.getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds, null)) {
         String keywordStr = keyword.getKeyword();
         if (userKeywordSet.contains(keywordStr.toLowerCase())) {
           highlightedTags.add(keywordStr);
@@ -92,7 +92,7 @@ public class ViewFeedSoy {
 
       // Attribution.
       articleSoyMapData.put("rawArticle", "article = "
-          + ArticleSerializer.serialize(article, userKeywordSet, userIndustryFeatureIdIds, i)
+          + ArticleSerializer.serialize(article, userKeywordSet, userIndustryFeatureIdIds, null, i)
               .toString(2));
 
       articleSoyMapDataList.add(articleSoyMapData);

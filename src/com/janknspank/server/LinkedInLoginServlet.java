@@ -141,7 +141,9 @@ public class LinkedInLoginServlet extends StandardServlet {
     // screen in this response.
     Iterable<Article> articles = Articles.getMainStream(user);
     response.put("articles", ArticleSerializer.serialize(articles, user,
-        false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
+        false /* includeLinkedInContacts */,
+        false /* includeAddressBookContacts */,
+        null /* followedEntity */));
 
     return response;
   }

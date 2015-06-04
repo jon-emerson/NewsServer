@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.template.soy.data.SoyMapData;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
+import com.janknspank.bizness.TimeRankingStrategy.IndustryStreamStrategy;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.UserProto.Interest;
@@ -41,7 +41,7 @@ public class ViewFeedServlet extends StandardServlet {
               .setIndustryCode(Integer.parseInt(industryCodeId))
               .build())
           .build();
-      articles = Articles.getStream(user, new AncillaryStreamStrategy(),
+      articles = Articles.getStream(user, new IndustryStreamStrategy(),
           new DiversificationPass.IndustryStreamPass(), ImmutableSet.<String>of());
     } else {
       articles = Articles.getMainStream(user);

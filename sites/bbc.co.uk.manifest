@@ -117,3 +117,7 @@ feature_boost_pattern {
   path_regex: "^\\/culture\\/"
   boost: 5
 }
+feature_boost_pattern {
+  path_regex: "^\\/news\\/blogs-ouch-"
+  boost: -10
+}

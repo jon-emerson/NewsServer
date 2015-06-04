@@ -30,14 +30,18 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.ExploreTopics;
-import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
+import com.janknspank.bizness.TimeRankingStrategy.EntityStreamStrategy;
+import com.janknspank.bizness.TimeRankingStrategy.IndustryStreamStrategy;
 import com.janknspank.bizness.Users;
+import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Entity;
@@ -69,15 +73,42 @@ public class GetArticlesServlet extends StandardServlet {
       throws DatabaseSchemaException, DatabaseRequestException, RequestException, BiznessException {
     JSONObject response = createSuccessResponse();
 
+    // If the user queried for a specific entity, go get it, so we can make
+    // sure it's included in the serialization of the articles.
+    String entityId = this.getParameter(req, "entity_id");
+    ListenableFuture<Iterable<Entity>> queriedEntityFuture = (entityId != null)
+        ? Database.with(Entity.class).getFuture(
+            new QueryOption.WhereEquals("id", entityId))
+        : null;
+
+    // Get articles.
     String contactsParameter = getParameter(req, "contacts");
     boolean includeLinkedInContacts = "linked_in".equals(contactsParameter);
     boolean includeAddressBookContacts = "address_book".equals(contactsParameter);
     Iterable<Article> articles = getArticles(req);
+
+    // Get the queried entity and industry code.
+    Entity queriedEntity = null;
+    if (queriedEntityFuture != null) {
+      try {
+        queriedEntity = Iterables.getFirst(queriedEntityFuture.get(), null);
+      } catch (InterruptedException | ExecutionException e) {
+        // This shouldn't be a user-visible problem.  But if it happens, we
+        // should find out why, and fix it.
+        e.printStackTrace();
+      }
+    }
+    String queriedIndustryCodeStr = this.getParameter(req, "industry_code");
+    Integer queriedIndustryCode = queriedIndustryCodeStr == null
+        ? null : NumberUtils.toInt(queriedIndustryCodeStr, 0);
+
+    // Let's serialize!
     User user = getUser(req);
     response.put("articles", ArticleSerializer.serialize(
         Iterables.limit(articles, Articles.NUM_RESULTS - 1),
-        user, includeLinkedInContacts, includeAddressBookContacts));
-    response.put("explore_topics", Serializer.toJSON(ExploreTopics.get(articles, user)));
+        user, includeLinkedInContacts, includeAddressBookContacts, queriedEntity));
+    response.put("explore_topics",
+        Serializer.toJSON(ExploreTopics.get(articles, user, queriedEntity, queriedIndustryCode)));
     if (Iterables.size(articles) == Articles.NUM_RESULTS) {
       response.put("next_page", getNextPageParameters(req, articles));
     }
@@ -169,6 +200,10 @@ public class GetArticlesServlet extends StandardServlet {
     // Based on the user's query, return articles that match.
     try {
       if (industryCodeId != null) {
+        int industryCode = NumberUtils.toInt(industryCodeId, 0);
+        if (FeatureId.fromId(industryCode) == null) {
+          throw new RequestException("Unknown industry code: \"" + industryCodeId + "\"");
+        }
         return Articles.getStream(
             user.toBuilder()
                 .clearInterest()
@@ -177,22 +212,28 @@ public class GetArticlesServlet extends StandardServlet {
                     .setIndustryCode(Integer.parseInt(industryCodeId))
                     .build())
                 .build(),
-            new AncillaryStreamStrategy(),
+            new IndustryStreamStrategy(),
             new DiversificationPass.IndustryStreamPass(),
             excludeUrlIdSet);
       } else if (entityId != null) {
+        Entity.Builder entityBuilder = Entity.newBuilder().setId(entityId);
+        Entity entity = null;
+        if (entityType == null || entityKeyword == null) {
+          System.out.println("Warning: "
+              + "Inefficient query - Please include type + keyword for entity queries");
+          entity = Database.with(Entity.class).get(entityId);
+        }
+        entityBuilder.setType(entity != null ? entity.getType() : entityType);
+        entityBuilder.setKeyword(entity != null ? entity.getKeyword() : entityKeyword);
         return Articles.getStream(
             user.toBuilder()
                 .clearInterest()
                 .addInterest(Interest.newBuilder()
                     .setType(InterestType.ENTITY)
-                    .setEntity(Entity.newBuilder()
-                        .setId(entityId)
-                        .setType(entityType)
-                        .setKeyword(entityKeyword))
+                    .setEntity(entityBuilder.build())
                     .build())
                 .build(),
-            new AncillaryStreamStrategy(),
+            new EntityStreamStrategy(),
             new DiversificationPass.NoOpPass(),
             excludeUrlIdSet);
       } else if ("linked_in".equals(contacts)) {

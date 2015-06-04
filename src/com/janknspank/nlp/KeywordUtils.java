@@ -106,12 +106,12 @@ public class KeywordUtils {
   }
   private static final ImmutableMap<Pattern, String> CAPITALIZATION_FIX_PATTERNS =
       ImmutableMap.<Pattern, String>builder()
-          .put(Pattern.compile("Aol"), "AOL")
-          .put(Pattern.compile("Ios"), "iOS")
-          .put(Pattern.compile("Ipad"), "iPad")
-          .put(Pattern.compile("Iphone"), "iPhone")
-          .put(Pattern.compile("Iwatch"), "iWatch")
-          .put(Pattern.compile("Ipod"), "iPod")
+          .put(Pattern.compile("Aol", Pattern.CASE_INSENSITIVE), "AOL")
+          .put(Pattern.compile("Ios", Pattern.CASE_INSENSITIVE), "iOS")
+          .put(Pattern.compile("Ipad", Pattern.CASE_INSENSITIVE), "iPad")
+          .put(Pattern.compile("Iphone", Pattern.CASE_INSENSITIVE), "iPhone")
+          .put(Pattern.compile("Iwatch", Pattern.CASE_INSENSITIVE), "iWatch")
+          .put(Pattern.compile("Ipod", Pattern.CASE_INSENSITIVE), "iPod")
           .build();
 
   public static boolean isValidKeyword(String keyword) {
@@ -205,10 +205,14 @@ public class KeywordUtils {
         sb.append(keyword.charAt(i));
       }
       keyword = sb.toString();
-    } else if (keyword.length() > 0 && !Character.isUpperCase(keyword.charAt(0))) {
-      keyword = WordUtils.capitalizeFully(keyword);
-      for (Map.Entry<Pattern, String> capitalizationFixEntry : CAPITALIZATION_FIX_PATTERNS.entrySet()) {
-        keyword = capitalizationFixEntry.getKey().matcher(keyword).replaceAll(capitalizationFixEntry.getValue());
+    } else if (keyword.length() > 0) {
+      if (!Character.isUpperCase(keyword.charAt(0))) {
+        keyword = WordUtils.capitalizeFully(keyword);
+      }
+      for (Map.Entry<Pattern, String> capitalizationFixEntry
+          : CAPITALIZATION_FIX_PATTERNS.entrySet()) {
+        keyword = capitalizationFixEntry.getKey().matcher(keyword).replaceAll(
+            capitalizationFixEntry.getValue());
       }
     } else if (keyword.length() > 4 && keyword.equals(keyword.toUpperCase())) {
       // For non-abbreviations, don't let folks capitalize everything.

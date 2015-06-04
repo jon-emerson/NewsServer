@@ -66,7 +66,9 @@ public class FollowLinkedInContactsServlet extends StandardServlet {
     // screen in this response.
     Iterable<Article> articles = Articles.getMainStream(user);
     response.put("articles", ArticleSerializer.serialize(articles, user,
-        false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
+        false /* includeLinkedInContacts */,
+        false /* includeAddressBookContacts */,
+        null /* queriedEntity */));
 
     return response;
   }

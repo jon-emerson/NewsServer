@@ -45,7 +45,9 @@ public class FacebookLoginServlet extends StandardServlet {
     startTime = System.currentTimeMillis();
     Iterable<Article> articles = Articles.getMainStream(user);
     response.put("articles", ArticleSerializer.serialize(articles, user,
-        false /* includeLinkedInContacts */, false /* includeAddressBookContacts */));
+        false /* includeLinkedInContacts */,
+        false /* includeAddressBookContacts */,
+        null /* queriedEntity */));
     System.out.println("FacebookLoginServlet.doPostInternal, main stream calculation, time = "
         + (System.currentTimeMillis() - startTime) + "ms");
 

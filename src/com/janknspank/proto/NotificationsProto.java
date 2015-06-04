@@ -205,6 +205,26 @@ public final class NotificationsProto {
      * <code>optional int64 create_time = 5;</code>
      */
     long getCreateTime();
+
+    // optional bool is_beta = 6;
+    /**
+     * <code>optional bool is_beta = 6;</code>
+     *
+     * <pre>
+     * Whether we should use development SSL certs for signing notifications to
+     * this device ID, which we need to do for users on the beta build.
+     * </pre>
+     */
+    boolean hasIsBeta();
+    /**
+     * <code>optional bool is_beta = 6;</code>
+     *
+     * <pre>
+     * Whether we should use development SSL certs for signing notifications to
+     * this device ID, which we need to do for users on the beta build.
+     * </pre>
+     */
+    boolean getIsBeta();
   }
   /**
    * Protobuf type {@code DeviceRegistration}
@@ -286,6 +306,11 @@ public final class NotificationsProto {
             case 40: {
               bitField0_ |= 0x00000010;
               createTime_ = input.readInt64();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              isBeta_ = input.readBool();
               break;
             }
           }
@@ -519,12 +544,39 @@ public final class NotificationsProto {
       return createTime_;
     }
 
+    // optional bool is_beta = 6;
+    public static final int IS_BETA_FIELD_NUMBER = 6;
+    private boolean isBeta_;
+    /**
+     * <code>optional bool is_beta = 6;</code>
+     *
+     * <pre>
+     * Whether we should use development SSL certs for signing notifications to
+     * this device ID, which we need to do for users on the beta build.
+     * </pre>
+     */
+    public boolean hasIsBeta() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional bool is_beta = 6;</code>
+     *
+     * <pre>
+     * Whether we should use development SSL certs for signing notifications to
+     * this device ID, which we need to do for users on the beta build.
+     * </pre>
+     */
+    public boolean getIsBeta() {
+      return isBeta_;
+    }
+
     private void initFields() {
       id_ = "";
       userId_ = "";
       deviceType_ = com.janknspank.proto.NotificationsProto.DeviceType.UNKNOWN;
       deviceId_ = "";
       createTime_ = 0L;
+      isBeta_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -552,6 +604,9 @@ public final class NotificationsProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(5, createTime_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, isBeta_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -581,6 +636,10 @@ public final class NotificationsProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, createTime_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, isBeta_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -708,6 +767,8 @@ public final class NotificationsProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         createTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
+        isBeta_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -756,6 +817,10 @@ public final class NotificationsProto {
           to_bitField0_ |= 0x00000010;
         }
         result.createTime_ = createTime_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.isBeta_ = isBeta_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -792,6 +857,9 @@ public final class NotificationsProto {
         }
         if (other.hasCreateTime()) {
           setCreateTime(other.getCreateTime());
+        }
+        if (other.hasIsBeta()) {
+          setIsBeta(other.getIsBeta());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1167,6 +1235,59 @@ public final class NotificationsProto {
       public Builder clearCreateTime() {
         bitField0_ = (bitField0_ & ~0x00000010);
         createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional bool is_beta = 6;
+      private boolean isBeta_ ;
+      /**
+       * <code>optional bool is_beta = 6;</code>
+       *
+       * <pre>
+       * Whether we should use development SSL certs for signing notifications to
+       * this device ID, which we need to do for users on the beta build.
+       * </pre>
+       */
+      public boolean hasIsBeta() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional bool is_beta = 6;</code>
+       *
+       * <pre>
+       * Whether we should use development SSL certs for signing notifications to
+       * this device ID, which we need to do for users on the beta build.
+       * </pre>
+       */
+      public boolean getIsBeta() {
+        return isBeta_;
+      }
+      /**
+       * <code>optional bool is_beta = 6;</code>
+       *
+       * <pre>
+       * Whether we should use development SSL certs for signing notifications to
+       * this device ID, which we need to do for users on the beta build.
+       * </pre>
+       */
+      public Builder setIsBeta(boolean value) {
+        bitField0_ |= 0x00000020;
+        isBeta_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool is_beta = 6;</code>
+       *
+       * <pre>
+       * Whether we should use development SSL certs for signing notifications to
+       * this device ID, which we need to do for users on the beta build.
+       * </pre>
+       */
+      public Builder clearIsBeta() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        isBeta_ = false;
         onChanged();
         return this;
       }
@@ -5508,43 +5629,43 @@ public final class NotificationsProto {
     java.lang.String[] descriptorData = {
       "\n(com/janknspank/proto/notifications.pro" +
       "to\032(com/janknspank/database/extensions.p" +
-      "roto\"\331\001\n\022DeviceRegistration\022\034\n\002id\030\001 \001(\tB" +
+      "roto\"\352\001\n\022DeviceRegistration\022\034\n\002id\030\001 \001(\tB" +
       "\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001" +
       "\220\246\035\003\230\246\035\030\250\246\035\001\022&\n\013device_type\030\003 \001(\0162\013.Devi" +
       "ceTypeB\004\210\246\035\001\022\037\n\tdevice_id\030\004 \001(\tB\014\210\246\035\001\230\246\035" +
-      "d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001:\036\212\265\030\032Mo" +
-      "ngoDB.DeviceRegistration\"\302\006\n\014Notificatio" +
-      "n\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022\035\n\013c" +
-      "reate_time\030\002 \001(\003B\010\210\246\035\001\220\246\035\003\022\030\n\nclick_time",
-      "\030\003 \001(\003B\004\220\246\035\005\022!\n\007user_id\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230" +
-      "\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\tB\014\220\246\035\005\230\246\035\030\250\246\035\001\022\032\n" +
-      "\003url\030\025 \001(\tB\r\220\246\035\005\230\246\035\377\005\250\246\035\001\022*\n\013device_type" +
-      "\030\006 \001(\0162\013.DeviceTypeB\010\210\246\035\001\220\246\035\005\022\037\n\tdevice_" +
-      "id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022\026\n\004host\030\010 \001(\tB\010\230\246" +
-      "\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210\246\035\001\230\246\035\200\010\022\036\n\026artic" +
-      "le_published_time\030\n \001(\003\022\034\n\016deduping_stem" +
-      "s\030\013 \003(\tB\004\230\246\035\004\022!\n\023is_followed_company\030\014 \001" +
-      "(\010B\004\220\246\035\005\022\030\n\nis_company\030\r \001(\010B\004\220\246\035\005\022\026\n\010is" +
-      "_event\030\016 \001(\010B\004\220\246\035\005\022\027\n\thot_count\030\017 \001(\005B\004\220",
-      "\246\035\005\022\023\n\005score\030\020 \001(\001B\004\220\246\035\005\022 \n\022notification" +
-      "_score\030\021 \001(\005B\004\220\246\035\005\022\030\n\nnnet_score\030\022 \001(\001B\004" +
-      "\220\246\035\005\022\034\n\016facebook_score\030\023 \001(\001B\004\220\246\035\005\022\033\n\rtw" +
-      "itter_score\030\024 \001(\001B\004\220\246\035\005\022\033\n\rage_in_millis" +
-      "\030\026 \001(\003B\004\220\246\035\005\0220\n\talgorithm\030\027 \001(\0162\027.Notifi" +
-      "cation.AlgorithmB\004\220\246\035\005\"Y\n\tAlgorithm\022\013\n\007U" +
-      "NKNOWN\020\000\022\016\n\nHISTORICAL\020\001\022\010\n\004NNET\020\002\022\t\n\005BL" +
-      "END\020\003\022\032\n\026FOLLOWED_ENTITIES_ONLY\020\004:\032\212\265\030\026M" +
-      "ySQL.PushNotification\"\232\002\n\rClicksPerSite\022" +
-      "6\n\nclick_type\030\001 \001(\0162\030.ClicksPerSite.Clic",
-      "kTypeB\010\210\246\035\001\220\246\035\005\022&\n\013root_domain\030\002 \001(\tB\021\210\246" +
-      "\035\001\230\246\035\377\005\220\246\035\005\250\246\035\001\022\035\n\013click_count\030\003 \001(\003B\010\210\246" +
-      "\035\001\220\246\035\005\022\034\n\016instance_count\030\004 \001(\003B\004\220\246\035\005\022\030\n\n" +
-      "ctr_rating\030\005 \001(\001B\004\220\246\035\005\"9\n\tClickType\022\013\n\007U" +
-      "NKNOWN\020\000\022\010\n\004PUSH\020\001\022\t\n\005EMAIL\020\002\022\n\n\006IN_APP\020" +
-      "\003:\027\212\265\030\023MySQL.ClicksPerSite*:\n\nDeviceType" +
-      "\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROID\020\001\022\007\n\003IOS\020\002\022\t\n\005E" +
-      "MAIL\020\003B*\n\024com.janknspank.protoB\022Notifica" +
-      "tionsProto"
+      "d\250\246\035\001\022\031\n\013create_time\030\005 \001(\003B\004\210\246\035\001\022\017\n\007is_b" +
+      "eta\030\006 \001(\010:\036\212\265\030\032MongoDB.DeviceRegistratio" +
+      "n\"\302\006\n\014Notification\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002" +
+      "\230\246\035\030\250\246\035\001\240\246\035\003\022\035\n\013create_time\030\002 \001(\003B\010\210\246\035\001\220",
+      "\246\035\003\022\030\n\nclick_time\030\003 \001(\003B\004\220\246\035\005\022!\n\007user_id" +
+      "\030\004 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\034\n\006url_id\030\005 \001(\t" +
+      "B\014\220\246\035\005\230\246\035\030\250\246\035\001\022\032\n\003url\030\025 \001(\tB\r\220\246\035\005\230\246\035\377\005\250\246" +
+      "\035\001\022*\n\013device_type\030\006 \001(\0162\013.DeviceTypeB\010\210\246" +
+      "\035\001\220\246\035\005\022\037\n\tdevice_id\030\007 \001(\tB\014\210\246\035\001\230\246\035d\250\246\035\001\022" +
+      "\026\n\004host\030\010 \001(\tB\010\230\246\035d\250\246\035\001\022\027\n\004text\030\t \001(\tB\t\210" +
+      "\246\035\001\230\246\035\200\010\022\036\n\026article_published_time\030\n \001(\003" +
+      "\022\034\n\016deduping_stems\030\013 \003(\tB\004\230\246\035\004\022!\n\023is_fol" +
+      "lowed_company\030\014 \001(\010B\004\220\246\035\005\022\030\n\nis_company\030" +
+      "\r \001(\010B\004\220\246\035\005\022\026\n\010is_event\030\016 \001(\010B\004\220\246\035\005\022\027\n\th",
+      "ot_count\030\017 \001(\005B\004\220\246\035\005\022\023\n\005score\030\020 \001(\001B\004\220\246\035" +
+      "\005\022 \n\022notification_score\030\021 \001(\005B\004\220\246\035\005\022\030\n\nn" +
+      "net_score\030\022 \001(\001B\004\220\246\035\005\022\034\n\016facebook_score\030" +
+      "\023 \001(\001B\004\220\246\035\005\022\033\n\rtwitter_score\030\024 \001(\001B\004\220\246\035\005" +
+      "\022\033\n\rage_in_millis\030\026 \001(\003B\004\220\246\035\005\0220\n\talgorit" +
+      "hm\030\027 \001(\0162\027.Notification.AlgorithmB\004\220\246\035\005\"" +
+      "Y\n\tAlgorithm\022\013\n\007UNKNOWN\020\000\022\016\n\nHISTORICAL\020" +
+      "\001\022\010\n\004NNET\020\002\022\t\n\005BLEND\020\003\022\032\n\026FOLLOWED_ENTIT" +
+      "IES_ONLY\020\004:\032\212\265\030\026MySQL.PushNotification\"\232" +
+      "\002\n\rClicksPerSite\0226\n\nclick_type\030\001 \001(\0162\030.C",
+      "licksPerSite.ClickTypeB\010\210\246\035\001\220\246\035\005\022&\n\013root" +
+      "_domain\030\002 \001(\tB\021\210\246\035\001\230\246\035\377\005\220\246\035\005\250\246\035\001\022\035\n\013clic" +
+      "k_count\030\003 \001(\003B\010\210\246\035\001\220\246\035\005\022\034\n\016instance_coun" +
+      "t\030\004 \001(\003B\004\220\246\035\005\022\030\n\nctr_rating\030\005 \001(\001B\004\220\246\035\005\"" +
+      "9\n\tClickType\022\013\n\007UNKNOWN\020\000\022\010\n\004PUSH\020\001\022\t\n\005E" +
+      "MAIL\020\002\022\n\n\006IN_APP\020\003:\027\212\265\030\023MySQL.ClicksPerS" +
+      "ite*:\n\nDeviceType\022\013\n\007UNKNOWN\020\000\022\013\n\007ANDROI" +
+      "D\020\001\022\007\n\003IOS\020\002\022\t\n\005EMAIL\020\003B*\n\024com.janknspan" +
+      "k.protoB\022NotificationsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5556,7 +5677,7 @@ public final class NotificationsProto {
           internal_static_DeviceRegistration_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_DeviceRegistration_descriptor,
-              new java.lang.String[] { "Id", "UserId", "DeviceType", "DeviceId", "CreateTime", });
+              new java.lang.String[] { "Id", "UserId", "DeviceType", "DeviceId", "CreateTime", "IsBeta", });
           internal_static_Notification_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_Notification_fieldAccessorTable = new

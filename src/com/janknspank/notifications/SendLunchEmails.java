@@ -97,8 +97,8 @@ public class SendLunchEmails {
     int articleNumber = 0;
     for (Article article : articles) {
       articleNumber++;
-      for (ArticleKeyword keyword :
-          ArticleSerializer.getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)) {
+      for (ArticleKeyword keyword : ArticleSerializer.getBestKeywords(
+          article, userKeywordSet, userIndustryFeatureIdIds, null)) {
         int additionalValue = Math.max(1, 10 - articleNumber);
         Integer value = followedKeywords.getValue(keyword.getKeyword());
         if (userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
@@ -139,8 +139,8 @@ public class SendLunchEmails {
     boolean hasSelected = false;
 
     // Start with followed entities, then secondary entities.
-    for (ArticleKeyword keyword :
-        ArticleSerializer.getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)) {
+    for (ArticleKeyword keyword : ArticleSerializer.getBestKeywords(
+        article, userKeywordSet, userIndustryFeatureIdIds, null)) {
       boolean selected = userKeywordSet.contains(keyword.getKeyword().toLowerCase());
       list.add(new SoyMapData(
           "selected", selected,

@@ -60,10 +60,9 @@ public abstract class TimeRankingStrategy {
   }
 
   /**
-   * This is a time ranking strategy for non-main-stream streams.  E.g. the user
-   * clicked on a specific industry, or a specific entity.
+   * This is a time ranking strategy for industry streams, e.g. "Internet".
    */
-  public static class AncillaryStreamStrategy extends TimeRankingStrategy {
+  public static class IndustryStreamStrategy extends TimeRankingStrategy {
     @Override
     public double getTimeRank(Article article, User user) {
       // How many hours ago was the article published?
@@ -80,6 +79,30 @@ public abstract class TimeRankingStrategy {
       // articleAgeInHours == cliff + 36: Return 0.5.
       // articleAgeInHours == cliff + 72: Return 0.25.
       double denominator = (Math.max(0, articleAgeInHours - cliff) / 36) + 1;
+      return 1 / denominator;
+    }
+  }
+
+  /**
+   * This is a time ranking strategy for entity streams, e.g. "Larry Page".
+   */
+  public static class EntityStreamStrategy extends TimeRankingStrategy {
+    @Override
+    public double getTimeRank(Article article, User user) {
+      // How many hours ago was the article published?
+      double articleAgeInHours =
+          ((double) System.currentTimeMillis() - Articles.getPublishedTime(article))
+              / (double) TimeUnit.HOURS.toMillis(1);
+
+      // This is when the time punishment starts.  It is bigger on weekends
+      // because there's less news on weekends.
+      int cliff = isWeekend(user) ? 42 : 18;
+
+      // OK, here's what we're going to do.  If
+      // articleAgeInHours <= cliff: Return 1.
+      // articleAgeInHours == cliff + 7 * 24: Return 0.5.
+      // articleAgeInHours == cliff + 14 * 24: Return 0.25.
+      double denominator = (Math.max(0, articleAgeInHours - cliff) / (7 * 24)) + 1;
       return 1 / denominator;
     }
   }

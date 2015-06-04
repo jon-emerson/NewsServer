@@ -220,7 +220,7 @@ public class PushDeviceNotifications {
               }
 
               IosPushNotificationHelper.getInstance().sendPushNotification(
-                  pushNotificationBuilder.build());
+                  registration, pushNotificationBuilder.build());
             }
           }
         }

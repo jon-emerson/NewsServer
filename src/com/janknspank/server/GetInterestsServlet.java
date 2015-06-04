@@ -59,12 +59,14 @@ public class GetInterestsServlet extends StandardServlet {
           new QueryOption.WhereLike("keyword", searchString + "%"),
           new QueryOption.WhereEquals("type", stringTypes),
           new QueryOption.WhereNotEqualsNumber("source", Entity.Source.DBPEDIA_LONG_ABSTRACT_VALUE),
+          new QueryOption.WhereGreaterThanOrEquals("importance", 1),
           new QueryOption.Limit(50),
           new QueryOption.DescendingSort("importance"));
     }
     return Database.with(Entity.class).get(
         new QueryOption.WhereEquals("type", stringTypes),
         new QueryOption.WhereNotEqualsNumber("source", Entity.Source.DBPEDIA_LONG_ABSTRACT_VALUE),
+        new QueryOption.WhereGreaterThanOrEquals("importance", 1),
         new QueryOption.Limit(100),
         new QueryOption.DescendingSort("importance"));
   }

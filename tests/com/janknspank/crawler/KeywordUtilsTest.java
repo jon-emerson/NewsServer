@@ -34,6 +34,7 @@ public class KeywordUtilsTest {
     assertEquals("Twitter", KeywordUtils.cleanKeyword(" twitter,"));
     assertEquals("Wacom", KeywordUtils.cleanKeyword("Wacom’s Intuos"));
     assertEquals("iOS", KeywordUtils.cleanKeyword("iOS"));
-    assertEquals("ios", KeywordUtils.cleanKeyword("iOS"));
+    assertEquals("iOS", KeywordUtils.cleanKeyword("IOS"));
+    assertEquals("iOS", KeywordUtils.cleanKeyword("ios"));
   }
 }

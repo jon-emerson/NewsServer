@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.google.api.client.util.Lists;
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 
 public class Version {
@@ -71,5 +72,10 @@ public class Version {
         index++;
       }
     }
+  }
+
+  @Override
+  public String toString() {
+    return Joiner.on(".").join(partsList);
   }
 }

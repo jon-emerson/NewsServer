@@ -55,3 +55,7 @@ test_instructions {
 feature_boost_pattern {
   boost: -2 # This site is pretty generic mass-market everything-to-everyone.
 }
+feature_boost_pattern {
+  feature_id: 10562 # Psychology
+  boost: -10 # CBS is really not going to offer much insight into psychological studies
+}

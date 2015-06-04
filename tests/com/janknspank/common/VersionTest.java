@@ -46,4 +46,17 @@ public class VersionTest {
     assertEquals(1, comparator.compare(new Version("1"), null));
     assertEquals(-1, comparator.compare(null, new Version("1.0.020.0.1")));
   }
+
+  @Test
+  public void testToString() throws Exception {
+    // Conversion to String must include trailing 0s!  We rely on this for
+    // serving demo versions: Version numbers must stay true to what they
+    // started as.
+    assertEquals("1", new Version("1").toString());
+    assertEquals("1.0", new Version("1.0").toString());
+    assertEquals("1.0.0", new Version("1.0.0").toString());
+    assertEquals("1.0.0.0", new Version("1.0.0.0").toString());
+    assertEquals("1.2.3.4", new Version("1.2.3.4").toString());
+    assertEquals("0.0.3.4", new Version("0.0.3.4").toString());
+  }
 }

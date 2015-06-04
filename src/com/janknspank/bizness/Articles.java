@@ -17,7 +17,7 @@ import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
+import com.janknspank.bizness.TimeRankingStrategy.EntityStreamStrategy;
 import com.janknspank.bizness.TimeRankingStrategy.MainStreamStrategy;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.TopList;
@@ -353,7 +353,7 @@ public class Articles {
     featureIdIds.addAll(UserInterests.getUserIndustryFeatureIdIds(user));
     return getRankedArticles(user,
         NeuralNetworkScorer.getInstance(),
-        new AncillaryStreamStrategy(),
+        new EntityStreamStrategy(),
         new DiversificationPass.MainStreamPass(),
         limit,
         Database.with(Article.class).get(

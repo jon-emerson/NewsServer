@@ -8,6 +8,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.janknspank.common.Version;
 
 public class S3DemoHelper {
   static final String S3_ACCESS_KEY;
@@ -23,7 +24,7 @@ public class S3DemoHelper {
     }
   }
 
-  public static int[] findLatestDemoVersion() {
+  public static Version findLatestDemoVersion() {
     AWSCredentials credentials = new BasicAWSCredentials(S3_ACCESS_KEY, S3_SECRET_KEY);
 
     ClientConfiguration clientConfig = new ClientConfiguration();
@@ -33,7 +34,7 @@ public class S3DemoHelper {
     amazonS3Client.setEndpoint("https://s3-us-west-2.amazonaws.com/");
 
     ObjectListing objects = amazonS3Client.listObjects("spotter-demo");
-    int[] latestVersionComponents = {0, 0, 0};
+    Version latestVersion = new Version("0");
 
     do {
       for (S3ObjectSummary objectSummary : objects.getObjectSummaries()) {
@@ -41,34 +42,12 @@ public class S3DemoHelper {
         // Example file name: Spotter-v1.0.2.ipa
         String fileName = objectSummary.getKey();
         if (fileName.endsWith(".ipa")) {
-          String[] fileNameParts = fileName.split("-v");
+          String[] fileNameParts =
+              fileName.substring(0, fileName.length() - ".ipa".length()).split("-v");
           if (fileNameParts.length > 0) {
-            String fileVersion = fileNameParts[fileNameParts.length - 1];
-            String[] versionComponentStrings = fileVersion.split("\\.");
-            int[] versionComponents = {0, 0, 0};
-            int i = 0;
-            for (String versionComponentString : versionComponentStrings) {
-              if (versionComponentString.equals("ipa")) {
-                break;
-              }
-              versionComponents[i] = Integer.parseInt(versionComponentString);
-              i++;
-            }
-
-            boolean isLatest = false;
-            if (versionComponents[0] > latestVersionComponents[0]) {
-              isLatest = true;
-            } else if (versionComponents[0] == latestVersionComponents[0] 
-                && versionComponents[1] > latestVersionComponents[1]) {
-              isLatest = true;
-            } else if (versionComponents[0] == latestVersionComponents[0] 
-                && versionComponents[1] == latestVersionComponents[1]
-                && versionComponents[2] > latestVersionComponents[2]) {
-              isLatest = true;
-            }
-
-            if (isLatest) {
-              latestVersionComponents = versionComponents;
+            Version version = new Version(fileNameParts[fileNameParts.length - 1]);
+            if (version.atLeast(latestVersion)) {
+              latestVersion = version;
             }
           }
         }
@@ -76,6 +55,6 @@ public class S3DemoHelper {
       objects = amazonS3Client.listNextBatchOfObjects(objects);
     } while (objects.isTruncated());
 
-    return latestVersionComponents;
+    return latestVersion;
   }
 }

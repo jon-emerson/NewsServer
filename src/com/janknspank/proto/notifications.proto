@@ -46,6 +46,10 @@ message DeviceRegistration {
   optional int64 create_time = 5 [
     (required) = YES
   ];
+
+  // Whether we should use development SSL certs for signing notifications to
+  // this device ID, which we need to do for users on the beta build.
+  optional bool is_beta = 6;
 }
 
 // Historical record of what notifications we've sent and to whom.

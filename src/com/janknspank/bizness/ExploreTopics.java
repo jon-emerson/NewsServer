@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import com.google.api.client.util.Maps;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableSet;
@@ -17,6 +19,7 @@ import com.janknspank.classifier.FeatureType;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.ExploreTopic;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.server.ArticleSerializer;
@@ -28,16 +31,24 @@ public class ExploreTopics {
    * user's not following, and the 3 most applicable industries that the user's
    * not following, randomize them, and return 5 of what's left.
    */
-  public static Iterable<ExploreTopic> get(Iterable<Article> articles, User user) {
+  public static Iterable<ExploreTopic> get(
+      Iterable<Article> articles,
+      User user,
+      @Nullable Entity queriedEntity,
+      @Nullable Integer queriedIndustryCode) {
     List<ExploreTopic> exploreTopics = Lists.newArrayList();
 
-    // Get the best entities that the user's not already following.
+    // Get the best entities that the user's not already following and that the
+    // user didn't explicitly query for already (e.g. the "Barack Obama" stream
+    // shouldn't suggest exploring Barack Obama).
     Set<String> userKeywordSet = ArticleSerializer.getUserKeywordSet(user, false, false);
     Map<String, String> keywordToEntityIdMap = Maps.newHashMap();
     Multiset<String> topKeywords = HashMultiset.create();
     for (Article article : articles) {
       for (ArticleKeyword articleKeyword : article.getKeywordList()) {
         if (articleKeyword.hasEntity()
+            && (queriedEntity == null
+                || !queriedEntity.getId().equals(articleKeyword.getEntity().getId()))
             && !userKeywordSet.contains(articleKeyword.getKeyword().toLowerCase())) {
           keywordToEntityIdMap.put(articleKeyword.getKeyword(), articleKeyword.getEntity().getId());
           topKeywords.add(articleKeyword.getKeyword());
@@ -61,6 +72,7 @@ public class ExploreTopics {
         FeatureId featureId = FeatureId.fromId(articleFeature.getFeatureId());
         if (featureId != null
             && featureId.getFeatureType() == FeatureType.INDUSTRY
+            && !new Integer(featureId.getId()).equals(queriedIndustryCode)  // May be null.
             && !userIndustryFeatureIdSet.contains(featureId)) {
           topIndustries.add(featureId);
         }

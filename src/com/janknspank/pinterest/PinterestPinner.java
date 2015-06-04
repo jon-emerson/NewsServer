@@ -22,7 +22,7 @@ import com.google.common.collect.Multimap;
 import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
-import com.janknspank.bizness.TimeRankingStrategy.AncillaryStreamStrategy;
+import com.janknspank.bizness.TimeRankingStrategy.IndustryStreamStrategy;
 import com.janknspank.bizness.Users;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.fetch.FetchException;
@@ -348,7 +348,7 @@ public class PinterestPinner {
             .build();
         Iterable<Article> articles = Articles.getStream(
             user,
-            new AncillaryStreamStrategy(),
+            new IndustryStreamStrategy(),
             new DiversificationPass.IndustryStreamPass(),
             ImmutableSet.<String>of());
         for (Article article : articles) {

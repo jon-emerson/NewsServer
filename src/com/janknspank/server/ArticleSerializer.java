@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nullable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,6 +34,8 @@ import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
+import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
+import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.User;
@@ -48,7 +52,8 @@ public class ArticleSerializer {
       479, 487, 491, 499);
 
   public static JSONArray serialize(Iterable<Article> articles,
-      User user, boolean includeLinkedInContacts, boolean includeAddressBookContacts) {
+      User user, boolean includeLinkedInContacts, boolean includeAddressBookContacts,
+      @Nullable Entity queriedEntity) {
     articles = putImageArticleFirst(articles);
     JSONArray articlesJson = new JSONArray();
     int i = 1;
@@ -56,7 +61,8 @@ public class ArticleSerializer {
         getUserKeywordSet(user, includeLinkedInContacts, includeAddressBookContacts);
     Set<Integer> userIndustryFeatureIdIds = UserInterests.getUserIndustryFeatureIdIds(user);
     for (Article article : articles) {
-      articlesJson.put(serialize(article, userKeywordSet, userIndustryFeatureIdIds, i++));
+      articlesJson.put(
+          serialize(article, userKeywordSet, userIndustryFeatureIdIds, queriedEntity, i++));
     }
     return articlesJson;
   }
@@ -88,6 +94,7 @@ public class ArticleSerializer {
       Article article,
       Set<String> userKeywordSet,
       Set<Integer> userIndustryFeatureIdIds,
+      @Nullable Entity queriedEntity,
       int offset) {
     JSONObject articleJson = Serializer.toJSON(article);
     List<String> paragraphs = article.getParagraphList();
@@ -96,8 +103,8 @@ public class ArticleSerializer {
         paragraphs.subList(0, Math.min(1, paragraphs.size()))));
     articleJson.put("native_reader_enabled", isNativeReaderEnabled(article));
     articleJson.put("native_reader_v1.1_enabled", true);
-    articleJson.put("keyword",
-        Serializer.toJSON(getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds)));
+    articleJson.put("keyword", Serializer.toJSON(
+        getBestKeywords(article, userKeywordSet, userIndustryFeatureIdIds, queriedEntity)));
     articleJson.put("client_date", getClientDate(article));
     if (!articleJson.has("origin")) {
       articleJson.put("origin", ViewFeedSoy.getDomain(article));
@@ -189,7 +196,8 @@ public class ArticleSerializer {
    * Returns the top 2 keywords for an article, as tuned to the current user.
    */
   public static Iterable<ArticleKeyword> getBestKeywords(
-      Article article, Set<String> userKeywordSet, Set<Integer> userIndustryFeatureIdIds) {
+      Article article, Set<String> userKeywordSet, Set<Integer> userIndustryFeatureIdIds,
+      @Nullable Entity queriedEntity) {
     // Denotes whether this article matches up with any of the user's industries.
     // If it does, we should include people matches.  If it doesn't, we shouldn't
     // include people because they're probably false matches.
@@ -198,7 +206,32 @@ public class ArticleSerializer {
 
     TopList<ArticleKeyword, Integer> topUserKeywords = new TopList<>(2);
     TopList<ArticleKeyword, Integer> topNonUserKeyword = new TopList<>(1);
+
+    // If the user queried a specific entity, e.g. "Barack Obama", always
+    // include that entity as an Article Keyword - followed or unfollowed
+    // as appropriate.
+    if (queriedEntity != null) {
+      ArticleKeyword queriedKeyword = ArticleKeyword.newBuilder()
+          .setKeyword(queriedEntity.hasShortName()
+              ? queriedEntity.getShortName() : queriedEntity.getKeyword())
+          .setType(queriedEntity.getType())
+          .setEntity(queriedEntity)
+          .setSource(Source.UNKNOWN)
+          .build();
+      if (userKeywordSet.contains(queriedEntity.getKeyword().toLowerCase())) {
+        topUserKeywords.add(queriedKeyword, 500);
+      } else {
+        topNonUserKeyword.add(queriedKeyword, 500);
+      }
+    }
+
     for (ArticleKeyword keyword : article.getKeywordList()) {
+      // Don't include the same keyword twice.
+      if (queriedEntity != null
+          && queriedEntity.getKeyword().equalsIgnoreCase(keyword.getKeyword())) {
+        continue;
+      }
+
       EntityType entityType = EntityType.fromValue(keyword.getType());
       if (isIndustryMatch && userKeywordSet.contains(keyword.getKeyword().toLowerCase())) {
         if (keyword.getStrength() >= KeywordCanonicalizer.STRENGTH_FOR_FIRST_PARAGRAPH_MATCH
@@ -245,7 +278,9 @@ public class ArticleSerializer {
     Article article = Interpreter.interpret(Url.newBuilder().setUrl(args[1]).build()).getArticle();
     Set<String> userKeywordSet = getUserKeywordSet(user, false, false);
     Set<Integer> userIndustryFeatureIdIds = UserInterests.getUserIndustryFeatureIdIds(user);
-    JSONObject o = serialize(article, userKeywordSet, userIndustryFeatureIdIds, 0);
+    JSONObject o = serialize(article, userKeywordSet, userIndustryFeatureIdIds,
+        null /* queriedEntity */,
+        0 /* offset */);
     System.out.println(o.toString(2));
   }
 }

@@ -58,8 +58,11 @@ public class IosPushNotificationHelper {
     }
   }
 
-  private KeyStore keyStore;
-  private KeyManagerFactory keyManagerFactory;
+  private KeyStore productionKeyStore;
+  private KeyManagerFactory productionKeyManagerFactory;
+
+  private KeyStore betaKeyStore;
+  private KeyManagerFactory betaKeyManagerFactory;
 
   public static synchronized IosPushNotificationHelper getInstance() {
     if (INSTANCE == null) {
@@ -70,25 +73,33 @@ public class IosPushNotificationHelper {
 
   private IosPushNotificationHelper() {
     // Load the keystore and key manager factory.
-    FileInputStream keyFileInputStream = null;
+    FileInputStream productionKeyFileInputStream = null;
+    FileInputStream betaKeyFileInputStream = null;
     try {
-      //File keyFile = new File("WEB-INF/demo_newsserver_production.p12");
-      File keyFile = new File("WEB-INF/newsserver_production.p12");
-      if (!keyFile.exists()) {
-        throw new RuntimeException("Could not find key file");
-      }
+      // Production.
+      productionKeyStore = KeyStore.getInstance("PKCS12");
+      productionKeyFileInputStream =
+          new FileInputStream(new File("WEB-INF/newsserver_production.p12"));
+      productionKeyStore.load(
+          productionKeyFileInputStream, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
 
-      keyStore = KeyStore.getInstance("PKCS12");
-      keyFileInputStream = new FileInputStream(keyFile);
-      keyStore.load(keyFileInputStream, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
+      productionKeyManagerFactory = KeyManagerFactory.getInstance("SunX509");
+      productionKeyManagerFactory.init(productionKeyStore, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
 
-      keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
-      keyManagerFactory.init(keyStore, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
+      // Beta (previously called Demo).
+      betaKeyStore = KeyStore.getInstance("PKCS12");
+      betaKeyFileInputStream = new FileInputStream(
+          new File("WEB-INF/demo_newsserver_production.p12"));
+      productionKeyStore.load(betaKeyFileInputStream, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
+
+      betaKeyManagerFactory = KeyManagerFactory.getInstance("SunX509");
+      betaKeyManagerFactory.init(betaKeyStore, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
 
     } catch (GeneralSecurityException|IOException e) {
       throw new Error("Could not load iOS push notification service certs", e);
     } finally {
-      IOUtils.closeQuietly(keyFileInputStream);
+      IOUtils.closeQuietly(productionKeyFileInputStream);
+      IOUtils.closeQuietly(betaKeyFileInputStream);
     }
   }
 
@@ -127,7 +138,7 @@ public class IosPushNotificationHelper {
     return uniqueDeviceIds.values();
   }
 
-  public void sendPushNotification(Notification notification)
+  public void sendPushNotification(DeviceRegistration registration, Notification notification)
       throws DatabaseRequestException, DatabaseSchemaException {
     Database.insert(notification);
 
@@ -137,7 +148,11 @@ public class IosPushNotificationHelper {
       // openssl s_client -connect gateway.push.apple.com:2195 \
       //     -cert ProductionCert.pem -key ProductionKey.pem
       SSLContext sslContext = SSLContext.getInstance("TLS");
-      sslContext.init(keyManagerFactory.getKeyManagers(), null, null);
+      if (registration.getIsBeta()) {
+        sslContext.init(betaKeyManagerFactory.getKeyManagers(), null, null);
+      } else {
+        sslContext.init(productionKeyManagerFactory.getKeyManagers(), null, null);
+      }
       SSLSocketFactory factory = sslContext.getSocketFactory();
       socket = (SSLSocket) factory.createSocket(SEND_HOSTNAME, SEND_PORT);
       socket.setEnabledCipherSuites(socket.getSupportedCipherSuites());
@@ -258,7 +273,7 @@ public class IosPushNotificationHelper {
       ++count;
       Article article = Database.with(Article.class).getFirst();
       Notification pushNotification = createPushNotification(registration, article);
-      IosPushNotificationHelper.getInstance().sendPushNotification(pushNotification);
+      IosPushNotificationHelper.getInstance().sendPushNotification(registration, pushNotification);
     }
     System.out.println(count + " notifications sent");
   }
