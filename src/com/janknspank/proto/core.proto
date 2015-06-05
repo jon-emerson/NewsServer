@@ -583,3 +583,48 @@ message ScrollPastsPerSite {
     (storage_method) = PULL_OUT
   ];
 }
+
+message EntityIdToIndustryRelevance {
+  option (database_collection) = "MySQL.EntityIdToIndustryRelevance";
+
+  optional string id = 1 [
+    (required) = YES,
+    (storage_method) = PRIMARY_KEY,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional string entity_id = 2 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (string_length) = 24,
+    (string_charset) = LATIN1
+  ];
+
+  optional int32 industry_id = 3 [
+    (required) = YES,
+    (storage_method) = INDEX,
+    (storage_method) = PULL_OUT
+  ];
+
+  // A sum of all the similarity scores for this entity_id against the above
+  // industry_id industry feature ID.
+  optional double sum = 4 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+
+  // A count of the number of times we've seen this entity associated with
+  // this industry_id.
+  optional int64 count = 5 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+
+  // So that we can continue updating this in the future: What is the date of
+  // the latest article used for populating this row?
+  optional int64 updated_through_time = 6 [
+    (required) = YES,
+    (storage_method) = PULL_OUT
+  ];
+}

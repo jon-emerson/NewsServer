@@ -89,8 +89,8 @@ public class IosPushNotificationHelper {
       // Beta (previously called Demo).
       betaKeyStore = KeyStore.getInstance("PKCS12");
       betaKeyFileInputStream = new FileInputStream(
-          new File("WEB-INF/demo_newsserver_production.p12"));
-      productionKeyStore.load(betaKeyFileInputStream, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
+          new File("WEB-INF/beta_newsserver_production.p12"));
+      betaKeyStore.load(betaKeyFileInputStream, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
 
       betaKeyManagerFactory = KeyManagerFactory.getInstance("SunX509");
       betaKeyManagerFactory.init(betaKeyStore, APNS_PRIVATE_KEY_PASSPHRASE.toCharArray());
@@ -269,7 +269,7 @@ public class IosPushNotificationHelper {
       throws DatabaseSchemaException, DatabaseRequestException {
     int count = 0;
     for (DeviceRegistration registration
-        : getDeviceRegistrations(Users.getByEmail("tom.charytoniuk@gmail.com"))) {
+        : getDeviceRegistrations(Users.getByEmail("jon@jonemerson.net"))) {
       ++count;
       Article article = Database.with(Article.class).getFirst();
       Notification pushNotification = createPushNotification(registration, article);
