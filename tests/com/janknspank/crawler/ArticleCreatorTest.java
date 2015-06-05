@@ -216,6 +216,9 @@ public class ArticleCreatorTest {
     assertEquals("Android Auto puts Google Maps where they belong: Right in your dash",
         ArticleCreator.getTitle(createDocumentWithTitle(
             "Android Auto puts Google Maps where they belong: Right in your dash [REVIEW]"), site));
+    assertEquals("Who Are The Suicide Girls?",
+        ArticleCreator.getTitle(createDocumentWithTitle(
+            "Who Are The Suicide Girls? - artnet News"), site));
   }
 
   @Test

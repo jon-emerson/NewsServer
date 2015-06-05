@@ -252,6 +252,10 @@
               <mainClass>com.janknspank.utils.UpdateSocialEngagements</mainClass>
               <name>UpdateSocialEngagements</name>
             </program>
+            <program>
+              <mainClass>com.janknspank.bizness.EntityIdToIndustryRelevances</mainClass>
+              <name>EntityIdToIndustryRelevances</name>
+            </program>
           </programs>
         </configuration>
         <executions>

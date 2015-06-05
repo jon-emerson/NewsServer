@@ -4,4 +4,5 @@ prune:     sh target/bin/PruneMongoDatabase
 pushdaily: sh target/bin/PushDailyNotifications
 pinterest: sh target/bin/PinterestPinner
 updatesocialengagements: sh target/bin/UpdateSocialEngagements
+entityidtoindustryrelevances: sh target/bin/EntityIdToIndustryRelevances
 

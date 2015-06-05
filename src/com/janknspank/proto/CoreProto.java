@@ -2952,6 +2952,24 @@ public final class CoreProto {
      */
     com.google.protobuf.ByteString
         getTickerSymbolBytes();
+
+    // optional bool relevance_pass_complete = 12;
+    /**
+     * <code>optional bool relevance_pass_complete = 12;</code>
+     *
+     * <pre>
+     * Temporary variable while we fill in EntityIdToIndustryRelevance table.
+     * </pre>
+     */
+    boolean hasRelevancePassComplete();
+    /**
+     * <code>optional bool relevance_pass_complete = 12;</code>
+     *
+     * <pre>
+     * Temporary variable while we fill in EntityIdToIndustryRelevance table.
+     * </pre>
+     */
+    boolean getRelevancePassComplete();
   }
   /**
    * Protobuf type {@code Entity}
@@ -3066,6 +3084,11 @@ public final class CoreProto {
             case 90: {
               bitField0_ |= 0x00000004;
               shortName_ = input.readBytes();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000400;
+              relevancePassComplete_ = input.readBool();
               break;
             }
           }
@@ -4832,6 +4855,30 @@ public final class CoreProto {
       }
     }
 
+    // optional bool relevance_pass_complete = 12;
+    public static final int RELEVANCE_PASS_COMPLETE_FIELD_NUMBER = 12;
+    private boolean relevancePassComplete_;
+    /**
+     * <code>optional bool relevance_pass_complete = 12;</code>
+     *
+     * <pre>
+     * Temporary variable while we fill in EntityIdToIndustryRelevance table.
+     * </pre>
+     */
+    public boolean hasRelevancePassComplete() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional bool relevance_pass_complete = 12;</code>
+     *
+     * <pre>
+     * Temporary variable while we fill in EntityIdToIndustryRelevance table.
+     * </pre>
+     */
+    public boolean getRelevancePassComplete() {
+      return relevancePassComplete_;
+    }
+
     private void initFields() {
       id_ = "";
       keyword_ = "";
@@ -4844,6 +4891,7 @@ public final class CoreProto {
       angelListId_ = 0L;
       importance_ = 0;
       tickerSymbol_ = "";
+      relevancePassComplete_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4889,6 +4937,9 @@ public final class CoreProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(11, getShortNameBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBool(12, relevancePassComplete_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4942,6 +4993,10 @@ public final class CoreProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(11, getShortNameBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(12, relevancePassComplete_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5086,6 +5141,8 @@ public final class CoreProto {
         bitField0_ = (bitField0_ & ~0x00000200);
         tickerSymbol_ = "";
         bitField0_ = (bitField0_ & ~0x00000400);
+        relevancePassComplete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -5163,6 +5220,10 @@ public final class CoreProto {
           to_bitField0_ |= 0x00000200;
         }
         result.tickerSymbol_ = tickerSymbol_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.relevancePassComplete_ = relevancePassComplete_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5248,6 +5309,9 @@ public final class CoreProto {
           bitField0_ |= 0x00000400;
           tickerSymbol_ = other.tickerSymbol_;
           onChanged();
+        }
+        if (other.hasRelevancePassComplete()) {
+          setRelevancePassComplete(other.getRelevancePassComplete());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6232,6 +6296,55 @@ public final class CoreProto {
   }
   bitField0_ |= 0x00000400;
         tickerSymbol_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional bool relevance_pass_complete = 12;
+      private boolean relevancePassComplete_ ;
+      /**
+       * <code>optional bool relevance_pass_complete = 12;</code>
+       *
+       * <pre>
+       * Temporary variable while we fill in EntityIdToIndustryRelevance table.
+       * </pre>
+       */
+      public boolean hasRelevancePassComplete() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional bool relevance_pass_complete = 12;</code>
+       *
+       * <pre>
+       * Temporary variable while we fill in EntityIdToIndustryRelevance table.
+       * </pre>
+       */
+      public boolean getRelevancePassComplete() {
+        return relevancePassComplete_;
+      }
+      /**
+       * <code>optional bool relevance_pass_complete = 12;</code>
+       *
+       * <pre>
+       * Temporary variable while we fill in EntityIdToIndustryRelevance table.
+       * </pre>
+       */
+      public Builder setRelevancePassComplete(boolean value) {
+        bitField0_ |= 0x00000800;
+        relevancePassComplete_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool relevance_pass_complete = 12;</code>
+       *
+       * <pre>
+       * Temporary variable while we fill in EntityIdToIndustryRelevance table.
+       * </pre>
+       */
+      public Builder clearRelevancePassComplete() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        relevancePassComplete_ = false;
         onChanged();
         return this;
       }
@@ -19864,6 +19977,1077 @@ public final class CoreProto {
     // @@protoc_insertion_point(class_scope:ScrollPastsPerSite)
   }
 
+  public interface EntityIdToIndustryRelevanceOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string id = 1;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional string entity_id = 2;
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    boolean hasEntityId();
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    java.lang.String getEntityId();
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getEntityIdBytes();
+
+    // optional int32 industry_id = 3;
+    /**
+     * <code>optional int32 industry_id = 3;</code>
+     */
+    boolean hasIndustryId();
+    /**
+     * <code>optional int32 industry_id = 3;</code>
+     */
+    int getIndustryId();
+
+    // optional double sum = 4;
+    /**
+     * <code>optional double sum = 4;</code>
+     *
+     * <pre>
+     * A sum of all the similarity scores for this entity_id against the above
+     * industry_id industry feature ID.
+     * </pre>
+     */
+    boolean hasSum();
+    /**
+     * <code>optional double sum = 4;</code>
+     *
+     * <pre>
+     * A sum of all the similarity scores for this entity_id against the above
+     * industry_id industry feature ID.
+     * </pre>
+     */
+    double getSum();
+
+    // optional int64 count = 5;
+    /**
+     * <code>optional int64 count = 5;</code>
+     *
+     * <pre>
+     * A count of the number of times we've seen this entity associated with
+     * this industry_id.
+     * </pre>
+     */
+    boolean hasCount();
+    /**
+     * <code>optional int64 count = 5;</code>
+     *
+     * <pre>
+     * A count of the number of times we've seen this entity associated with
+     * this industry_id.
+     * </pre>
+     */
+    long getCount();
+
+    // optional int64 updated_through_time = 6;
+    /**
+     * <code>optional int64 updated_through_time = 6;</code>
+     *
+     * <pre>
+     * So that we can continue updating this in the future: What is the date of
+     * the latest article used for populating this row?
+     * </pre>
+     */
+    boolean hasUpdatedThroughTime();
+    /**
+     * <code>optional int64 updated_through_time = 6;</code>
+     *
+     * <pre>
+     * So that we can continue updating this in the future: What is the date of
+     * the latest article used for populating this row?
+     * </pre>
+     */
+    long getUpdatedThroughTime();
+  }
+  /**
+   * Protobuf type {@code EntityIdToIndustryRelevance}
+   */
+  public static final class EntityIdToIndustryRelevance extends
+      com.google.protobuf.GeneratedMessage
+      implements EntityIdToIndustryRelevanceOrBuilder {
+    // Use EntityIdToIndustryRelevance.newBuilder() to construct.
+    private EntityIdToIndustryRelevance(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private EntityIdToIndustryRelevance(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final EntityIdToIndustryRelevance defaultInstance;
+    public static EntityIdToIndustryRelevance getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public EntityIdToIndustryRelevance getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private EntityIdToIndustryRelevance(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              entityId_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              industryId_ = input.readInt32();
+              break;
+            }
+            case 33: {
+              bitField0_ |= 0x00000008;
+              sum_ = input.readDouble();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              count_ = input.readInt64();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              updatedThroughTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.CoreProto.internal_static_EntityIdToIndustryRelevance_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.CoreProto.internal_static_EntityIdToIndustryRelevance_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance.class, com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<EntityIdToIndustryRelevance> PARSER =
+        new com.google.protobuf.AbstractParser<EntityIdToIndustryRelevance>() {
+      public EntityIdToIndustryRelevance parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new EntityIdToIndustryRelevance(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<EntityIdToIndustryRelevance> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private java.lang.Object id_;
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string entity_id = 2;
+    public static final int ENTITY_ID_FIELD_NUMBER = 2;
+    private java.lang.Object entityId_;
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    public boolean hasEntityId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    public java.lang.String getEntityId() {
+      java.lang.Object ref = entityId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          entityId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string entity_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEntityIdBytes() {
+      java.lang.Object ref = entityId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        entityId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 industry_id = 3;
+    public static final int INDUSTRY_ID_FIELD_NUMBER = 3;
+    private int industryId_;
+    /**
+     * <code>optional int32 industry_id = 3;</code>
+     */
+    public boolean hasIndustryId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 industry_id = 3;</code>
+     */
+    public int getIndustryId() {
+      return industryId_;
+    }
+
+    // optional double sum = 4;
+    public static final int SUM_FIELD_NUMBER = 4;
+    private double sum_;
+    /**
+     * <code>optional double sum = 4;</code>
+     *
+     * <pre>
+     * A sum of all the similarity scores for this entity_id against the above
+     * industry_id industry feature ID.
+     * </pre>
+     */
+    public boolean hasSum() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional double sum = 4;</code>
+     *
+     * <pre>
+     * A sum of all the similarity scores for this entity_id against the above
+     * industry_id industry feature ID.
+     * </pre>
+     */
+    public double getSum() {
+      return sum_;
+    }
+
+    // optional int64 count = 5;
+    public static final int COUNT_FIELD_NUMBER = 5;
+    private long count_;
+    /**
+     * <code>optional int64 count = 5;</code>
+     *
+     * <pre>
+     * A count of the number of times we've seen this entity associated with
+     * this industry_id.
+     * </pre>
+     */
+    public boolean hasCount() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 count = 5;</code>
+     *
+     * <pre>
+     * A count of the number of times we've seen this entity associated with
+     * this industry_id.
+     * </pre>
+     */
+    public long getCount() {
+      return count_;
+    }
+
+    // optional int64 updated_through_time = 6;
+    public static final int UPDATED_THROUGH_TIME_FIELD_NUMBER = 6;
+    private long updatedThroughTime_;
+    /**
+     * <code>optional int64 updated_through_time = 6;</code>
+     *
+     * <pre>
+     * So that we can continue updating this in the future: What is the date of
+     * the latest article used for populating this row?
+     * </pre>
+     */
+    public boolean hasUpdatedThroughTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int64 updated_through_time = 6;</code>
+     *
+     * <pre>
+     * So that we can continue updating this in the future: What is the date of
+     * the latest article used for populating this row?
+     * </pre>
+     */
+    public long getUpdatedThroughTime() {
+      return updatedThroughTime_;
+    }
+
+    private void initFields() {
+      id_ = "";
+      entityId_ = "";
+      industryId_ = 0;
+      sum_ = 0D;
+      count_ = 0L;
+      updatedThroughTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getEntityIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, industryId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, sum_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, count_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, updatedThroughTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getEntityIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, industryId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, sum_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, count_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, updatedThroughTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code EntityIdToIndustryRelevance}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.CoreProto.EntityIdToIndustryRelevanceOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.CoreProto.internal_static_EntityIdToIndustryRelevance_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.CoreProto.internal_static_EntityIdToIndustryRelevance_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance.class, com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        entityId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        industryId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        sum_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        count_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        updatedThroughTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.CoreProto.internal_static_EntityIdToIndustryRelevance_descriptor;
+      }
+
+      public com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance getDefaultInstanceForType() {
+        return com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance build() {
+        com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance buildPartial() {
+        com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance result = new com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.entityId_ = entityId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.industryId_ = industryId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.sum_ = sum_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.count_ = count_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.updatedThroughTime_ = updatedThroughTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance) {
+          return mergeFrom((com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance other) {
+        if (other == com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasEntityId()) {
+          bitField0_ |= 0x00000002;
+          entityId_ = other.entityId_;
+          onChanged();
+        }
+        if (other.hasIndustryId()) {
+          setIndustryId(other.getIndustryId());
+        }
+        if (other.hasSum()) {
+          setSum(other.getSum());
+        }
+        if (other.hasCount()) {
+          setCount(other.getCount());
+        }
+        if (other.hasUpdatedThroughTime()) {
+          setUpdatedThroughTime(other.getUpdatedThroughTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string id = 1;
+      private java.lang.Object id_ = "";
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string entity_id = 2;
+      private java.lang.Object entityId_ = "";
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public boolean hasEntityId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public java.lang.String getEntityId() {
+        java.lang.Object ref = entityId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          entityId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEntityIdBytes() {
+        java.lang.Object ref = entityId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          entityId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public Builder setEntityId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        entityId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public Builder clearEntityId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        entityId_ = getDefaultInstance().getEntityId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string entity_id = 2;</code>
+       */
+      public Builder setEntityIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        entityId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 industry_id = 3;
+      private int industryId_ ;
+      /**
+       * <code>optional int32 industry_id = 3;</code>
+       */
+      public boolean hasIndustryId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 industry_id = 3;</code>
+       */
+      public int getIndustryId() {
+        return industryId_;
+      }
+      /**
+       * <code>optional int32 industry_id = 3;</code>
+       */
+      public Builder setIndustryId(int value) {
+        bitField0_ |= 0x00000004;
+        industryId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 industry_id = 3;</code>
+       */
+      public Builder clearIndustryId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        industryId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional double sum = 4;
+      private double sum_ ;
+      /**
+       * <code>optional double sum = 4;</code>
+       *
+       * <pre>
+       * A sum of all the similarity scores for this entity_id against the above
+       * industry_id industry feature ID.
+       * </pre>
+       */
+      public boolean hasSum() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional double sum = 4;</code>
+       *
+       * <pre>
+       * A sum of all the similarity scores for this entity_id against the above
+       * industry_id industry feature ID.
+       * </pre>
+       */
+      public double getSum() {
+        return sum_;
+      }
+      /**
+       * <code>optional double sum = 4;</code>
+       *
+       * <pre>
+       * A sum of all the similarity scores for this entity_id against the above
+       * industry_id industry feature ID.
+       * </pre>
+       */
+      public Builder setSum(double value) {
+        bitField0_ |= 0x00000008;
+        sum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double sum = 4;</code>
+       *
+       * <pre>
+       * A sum of all the similarity scores for this entity_id against the above
+       * industry_id industry feature ID.
+       * </pre>
+       */
+      public Builder clearSum() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        sum_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 count = 5;
+      private long count_ ;
+      /**
+       * <code>optional int64 count = 5;</code>
+       *
+       * <pre>
+       * A count of the number of times we've seen this entity associated with
+       * this industry_id.
+       * </pre>
+       */
+      public boolean hasCount() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 count = 5;</code>
+       *
+       * <pre>
+       * A count of the number of times we've seen this entity associated with
+       * this industry_id.
+       * </pre>
+       */
+      public long getCount() {
+        return count_;
+      }
+      /**
+       * <code>optional int64 count = 5;</code>
+       *
+       * <pre>
+       * A count of the number of times we've seen this entity associated with
+       * this industry_id.
+       * </pre>
+       */
+      public Builder setCount(long value) {
+        bitField0_ |= 0x00000010;
+        count_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 count = 5;</code>
+       *
+       * <pre>
+       * A count of the number of times we've seen this entity associated with
+       * this industry_id.
+       * </pre>
+       */
+      public Builder clearCount() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        count_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 updated_through_time = 6;
+      private long updatedThroughTime_ ;
+      /**
+       * <code>optional int64 updated_through_time = 6;</code>
+       *
+       * <pre>
+       * So that we can continue updating this in the future: What is the date of
+       * the latest article used for populating this row?
+       * </pre>
+       */
+      public boolean hasUpdatedThroughTime() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int64 updated_through_time = 6;</code>
+       *
+       * <pre>
+       * So that we can continue updating this in the future: What is the date of
+       * the latest article used for populating this row?
+       * </pre>
+       */
+      public long getUpdatedThroughTime() {
+        return updatedThroughTime_;
+      }
+      /**
+       * <code>optional int64 updated_through_time = 6;</code>
+       *
+       * <pre>
+       * So that we can continue updating this in the future: What is the date of
+       * the latest article used for populating this row?
+       * </pre>
+       */
+      public Builder setUpdatedThroughTime(long value) {
+        bitField0_ |= 0x00000020;
+        updatedThroughTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 updated_through_time = 6;</code>
+       *
+       * <pre>
+       * So that we can continue updating this in the future: What is the date of
+       * the latest article used for populating this row?
+       * </pre>
+       */
+      public Builder clearUpdatedThroughTime() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        updatedThroughTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:EntityIdToIndustryRelevance)
+    }
+
+    static {
+      defaultInstance = new EntityIdToIndustryRelevance(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:EntityIdToIndustryRelevance)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Link_descriptor;
   private static
@@ -19964,6 +21148,11 @@ public final class CoreProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ScrollPastsPerSite_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_EntityIdToIndustryRelevance_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_EntityIdToIndustryRelevance_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -19989,7 +21178,7 @@ public final class CoreProto {
       "l\"\200\001\n\007Session\022\"\n\013session_key\030\001 \001(\tB\r\210\246\035\001" +
       "\220\246\035\004\230\246\035\200\001\022!\n\007user_id\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030" +
       "\250\246\035\001\022\031\n\013create_time\030\003 \001(\003B\004\210\246\035\001:\023\212\265\030\017Mon" +
-      "goDB.Session\"\307\006\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
+      "goDB.Session\"\356\006\n\006Entity\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
       "\001\220\246\035\002\230\246\035\030\250\246\035\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003" +
       "\230\246\035d\022\034\n\nshort_name\030\013 \001(\tB\010\220\246\035\005\230\246\035\036\022\036\n\004ty" +
       "pe\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022(\n\006source\030\004 \001",
@@ -19999,80 +21188,88 @@ public final class CoreProto {
       "(\tB\020\220\246\035\005\230\246\035\030\250\246\035\001\240\246\035\003\022\033\n\rangel_list_id\030\010 " +
       "\001(\003B\004\240\246\035\003\022\034\n\nimportance\030\t \001(\005B\010\220\246\035\005\240\246\035\003\022" +
       "\'\n\rticker_symbol\030\n \001(\tB\020\220\246\035\005\230\246\035\n\250\246\035\001\240\246\035\003" +
-      "\032\277\002\n\013EntityTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035" +
-      "\030\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type" +
-      "\030\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001" +
-      "\0225\n\007context\030\005 \001(\0162\033.Entity.EntityTopic.C",
-      "ontext:\007UNKNOWN\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000" +
-      "\022\027\n\023ANGELLIST_WORKED_AT\020\001\022\025\n\021ANGELLIST_F" +
-      "OUNDED\020\002\022\031\n\025ANGELLIST_INVESTED_IN\020\003\022\025\n\021A" +
-      "NGELLIST_ADVISED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC" +
-      "\020\005\"p\n\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INS" +
-      "TANCE_TYPE\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022" +
-      "\r\n\tANGELLIST\020\003\022\010\n\004USER\020\004\022\n\n\006MANUAL\020\005:\020\212\265" +
-      "\030\014MySQL.Entity\"\347\001\n\nVectorData\022\034\n\016documen" +
-      "t_count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 " +
-      "\003(\0132\031.VectorData.WordFrequency\022#\n\014distri",
-      "bution\030\003 \001(\0132\r.Distribution\032c\n\rWordFrequ" +
-      "ency\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequenc" +
-      "y\030\002 \001(\005B\004\210\246\035\001\022!\n\023document_occurences\030\003 \001" +
-      "(\005B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndustry\022 \n\006u" +
-      "rl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industr" +
-      "y_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_use" +
-      "r_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoD" +
-      "B.TrainedArticleIndustry\"\347\001\n\034TrainedArti" +
-      "cleClassification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220" +
-      "\246\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classification_co",
-      "de\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 " +
-      "\001(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020" +
-      "\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArt" +
-      "icleClassification\"\240\001\n\014Distribution\0222\n\np" +
-      "ercentile\030\001 \003(\0132\030.Distribution.Percentil" +
-      "eB\004\210\246\035\001\032\\\n\nPercentile\022\037\n\021percentile_doub" +
-      "le\030\004 \001(\001B\004\210\246\035\001\022\023\n\005value\030\002 \001(\001B\004\210\246\035\001\022\030\n\020d" +
-      "ata_point_count\030\003 \001(\003\"\226\003\n\026ShareNormaliza" +
-      "tionData\022T\n\027time_range_distribution\030\002 \003(" +
-      "\0132-.ShareNormalizationData.TimeRangeDist",
-      "ributionB\004\210\246\035\001\022J\n\022domain_share_count\030\003 \003" +
-      "(\0132(.ShareNormalizationData.DomainShareC" +
-      "ountB\004\210\246\035\001\032x\n\025TimeRangeDistribution\022\032\n\014s" +
-      "tart_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 " +
-      "\001(\003B\004\210\246\035\001\022)\n\014distribution\030\003 \001(\0132\r.Distri" +
-      "butionB\004\210\246\035\001\032`\n\020DomainShareCount\022\024\n\006doma" +
-      "in\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 \001(\003B\004\210" +
-      "\246\035\001\022\031\n\013share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRa" +
-      "ting\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#" +
-      "\n\005email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003u",
-      "rl\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 " +
-      "\001(\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001" +
-      "\240\246\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRating\"\301\002\n\021Keywor" +
-      "dToEntityId\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035" +
-      "\001\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type" +
-      "\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022\037\n\tentity_id\030\004 " +
-      "\001(\tB\014\230\246\035\030\250\246\035\001\220\246\035\005\022\037\n\021top_industry_id_1\030\005" +
-      " \001(\005B\004\220\246\035\005\022\037\n\021top_industry_id_2\030\006 \001(\005B\004\220" +
-      "\246\035\005\022\037\n\021top_industry_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005" +
-      "count\030\010 \001(\005B\010\210\246\035\001\220\246\035\005\022\025\n\007removed\030\t \001(\010B\004",
-      "\220\246\035\005:\033\212\265\030\027MySQL.KeywordToEntityId\"\242\002\n\037In" +
-      "dustryVectorNormalizationData\022)\n\014distrib" +
-      "ution\030\001 \001(\0132\r.DistributionB\004\210\246\035\001\022-\n\037simi" +
-      "larity_threshold_10_percent\030\002 \001(\001B\004\210\246\035\001\022" +
-      "-\n\037similarity_threshold_50_percent\030\003 \001(\001" +
-      "B\004\210\246\035\001\022:\n,ratio_of_articles_above_thresh" +
-      "old_10_percent\030\004 \001(\001B\004\210\246\035\001\022:\n,ratio_of_a" +
-      "rticles_above_threshold_50_percent\030\005 \001(\001" +
-      "B\004\210\246\035\001\"\323\001\n\010Location\022\036\n\014country_code\030\001 \001(" +
-      "\tB\010\210\246\035\001\230\246\035\005\022\032\n\014country_name\030\002 \001(\tB\004\230\246\0352\022",
-      "\030\n\nstate_code\030\003 \001(\tB\004\230\246\035\005\022\030\n\nstate_name\030" +
-      "\004 \001(\tB\004\230\246\0352\022\027\n\tcity_name\030\005 \001(\tB\004\230\246\0352\022\031\n\013" +
-      "postal_code\030\006 \001(\tB\004\230\246\035\n\022\020\n\010latitude\030\007 \001(" +
-      "\001\022\021\n\tlongitude\030\010 \001(\001\"]\n\014ExploreTopic\022\031\n\007" +
-      "keyword\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\033\n\tentity_id\030\002 \001" +
-      "(\tB\010\230\246\035\030\250\246\035\001\022\025\n\rindustry_code\030\003 \001(\005\"s\n\022S" +
-      "crollPastsPerSite\022&\n\013root_domain\030\001 \001(\tB\021" +
-      "\210\246\035\001\220\246\035\002\230\246\035\377\005\250\246\035\001\022\027\n\005count\030\002 \001(\003B\010\210\246\035\001\220\246" +
-      "\035\005:\034\212\265\030\030MySQL.ScrollPastsPerSiteB!\n\024com." +
-      "janknspank.protoB\tCoreProto"
+      "\022%\n\027relevance_pass_complete\030\014 \001(\010B\004\220\246\035\005\032" +
+      "\277\002\n\013EntityTopic\022\033\n\tentity_id\030\001 \001(\tB\010\230\246\035\030" +
+      "\250\246\035\001\022\031\n\007keyword\030\002 \001(\tB\010\210\246\035\001\230\246\035d\022\026\n\004type\030" +
+      "\003 \001(\tB\010\230\246\035\005\250\246\035\001\022\026\n\010strength\030\004 \001(\005B\004\210\246\035\001\022",
+      "5\n\007context\030\005 \001(\0162\033.Entity.EntityTopic.Co" +
+      "ntext:\007UNKNOWN\"\220\001\n\007Context\022\013\n\007UNKNOWN\020\000\022" +
+      "\027\n\023ANGELLIST_WORKED_AT\020\001\022\025\n\021ANGELLIST_FO" +
+      "UNDED\020\002\022\031\n\025ANGELLIST_INVESTED_IN\020\003\022\025\n\021AN" +
+      "GELLIST_ADVISED\020\004\022\026\n\022WIKIPEDIA_SUBTOPIC\020" +
+      "\005\"p\n\006Source\022\013\n\007UNKNOWN\020\000\022\031\n\025DBPEDIA_INST" +
+      "ANCE_TYPE\020\001\022\031\n\025DBPEDIA_LONG_ABSTRACT\020\002\022\r" +
+      "\n\tANGELLIST\020\003\022\010\n\004USER\020\004\022\n\n\006MANUAL\020\005:\020\212\265\030" +
+      "\014MySQL.Entity\"\347\001\n\nVectorData\022\034\n\016document" +
+      "_count\030\001 \001(\005B\004\210\246\035\001\0221\n\016word_frequency\030\002 \003",
+      "(\0132\031.VectorData.WordFrequency\022#\n\014distrib" +
+      "ution\030\003 \001(\0132\r.Distribution\032c\n\rWordFreque" +
+      "ncy\022\026\n\004word\030\001 \001(\tB\010\210\246\035\001\230\246\0352\022\027\n\tfrequency" +
+      "\030\002 \001(\005B\004\210\246\035\001\022!\n\023document_occurences\030\003 \001(" +
+      "\005B\004\210\246\035\001\"\255\001\n\026TrainedArticleIndustry\022 \n\006ur" +
+      "l_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001\022\"\n\020industry" +
+      "_code_id\030\002 \001(\005B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user" +
+      "_id\030\003 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:\"\212\265\030\036MongoDB" +
+      ".TrainedArticleIndustry\"\347\001\n\034TrainedArtic" +
+      "leClassification\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246",
+      "\035\003\230\246\035\030\250\246\035\001\0225\n\033article_classification_cod" +
+      "e\030\002 \001(\tB\020\210\246\035\001\220\246\035\003\230\246\035\005\250\246\035\001\022\031\n\007checked\030\003 \001" +
+      "(\010B\010\210\246\035\001\220\246\035\003\022)\n\017trainer_user_id\030\004 \001(\tB\020\210" +
+      "\246\035\001\220\246\035\003\230\246\035\030\250\246\035\001:(\212\265\030$MongoDB.TrainedArti" +
+      "cleClassification\"\240\001\n\014Distribution\0222\n\npe" +
+      "rcentile\030\001 \003(\0132\030.Distribution.Percentile" +
+      "B\004\210\246\035\001\032\\\n\nPercentile\022\037\n\021percentile_doubl" +
+      "e\030\004 \001(\001B\004\210\246\035\001\022\023\n\005value\030\002 \001(\001B\004\210\246\035\001\022\030\n\020da" +
+      "ta_point_count\030\003 \001(\003\"\226\003\n\026ShareNormalizat" +
+      "ionData\022T\n\027time_range_distribution\030\002 \003(\013",
+      "2-.ShareNormalizationData.TimeRangeDistr" +
+      "ibutionB\004\210\246\035\001\022J\n\022domain_share_count\030\003 \003(" +
+      "\0132(.ShareNormalizationData.DomainShareCo" +
+      "untB\004\210\246\035\001\032x\n\025TimeRangeDistribution\022\032\n\014st" +
+      "art_millis\030\001 \001(\003B\004\210\246\035\001\022\030\n\nend_millis\030\002 \001" +
+      "(\003B\004\210\246\035\001\022)\n\014distribution\030\003 \001(\0132\r.Distrib" +
+      "utionB\004\210\246\035\001\032`\n\020DomainShareCount\022\024\n\006domai" +
+      "n\030\001 \001(\tB\004\210\246\035\001\022\033\n\rarticle_count\030\002 \001(\003B\004\210\246" +
+      "\035\001\022\031\n\013share_count\030\003 \001(\003B\004\210\246\035\001\"\304\001\n\tUrlRat" +
+      "ing\022 \n\002id\030\001 \001(\tB\024\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\240\246\035\003\022#\n",
+      "\005email\030\002 \001(\tB\024\210\246\035\001\220\246\035\003\230\246\035d\250\246\035\001\240\246\035\003\022\036\n\003ur" +
+      "l\030\003 \001(\tB\021\210\246\035\001\220\246\035\003\230\246\035\377\005\250\246\035\001\022\030\n\006rating\030\004 \001" +
+      "(\001B\010\210\246\035\001\220\246\035\005\022!\n\013create_time\030\005 \001(\003B\014\210\246\035\001\240" +
+      "\246\035\003\220\246\035\005:\023\212\265\030\017MySQL.UrlRating\"\301\002\n\021Keyword" +
+      "ToEntityId\022\034\n\002id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001" +
+      "\022\035\n\007keyword\030\002 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\035d\022\036\n\004type\030" +
+      "\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022\037\n\tentity_id\030\004 \001" +
+      "(\tB\014\230\246\035\030\250\246\035\001\220\246\035\005\022\037\n\021top_industry_id_1\030\005 " +
+      "\001(\005B\004\220\246\035\005\022\037\n\021top_industry_id_2\030\006 \001(\005B\004\220\246" +
+      "\035\005\022\037\n\021top_industry_id_3\030\007 \001(\005B\004\220\246\035\005\022\027\n\005c",
+      "ount\030\010 \001(\005B\010\210\246\035\001\220\246\035\005\022\025\n\007removed\030\t \001(\010B\004\220" +
+      "\246\035\005:\033\212\265\030\027MySQL.KeywordToEntityId\"\242\002\n\037Ind" +
+      "ustryVectorNormalizationData\022)\n\014distribu" +
+      "tion\030\001 \001(\0132\r.DistributionB\004\210\246\035\001\022-\n\037simil" +
+      "arity_threshold_10_percent\030\002 \001(\001B\004\210\246\035\001\022-" +
+      "\n\037similarity_threshold_50_percent\030\003 \001(\001B" +
+      "\004\210\246\035\001\022:\n,ratio_of_articles_above_thresho" +
+      "ld_10_percent\030\004 \001(\001B\004\210\246\035\001\022:\n,ratio_of_ar" +
+      "ticles_above_threshold_50_percent\030\005 \001(\001B" +
+      "\004\210\246\035\001\"\323\001\n\010Location\022\036\n\014country_code\030\001 \001(\t",
+      "B\010\210\246\035\001\230\246\035\005\022\032\n\014country_name\030\002 \001(\tB\004\230\246\0352\022\030" +
+      "\n\nstate_code\030\003 \001(\tB\004\230\246\035\005\022\030\n\nstate_name\030\004" +
+      " \001(\tB\004\230\246\0352\022\027\n\tcity_name\030\005 \001(\tB\004\230\246\0352\022\031\n\013p" +
+      "ostal_code\030\006 \001(\tB\004\230\246\035\n\022\020\n\010latitude\030\007 \001(\001" +
+      "\022\021\n\tlongitude\030\010 \001(\001\"]\n\014ExploreTopic\022\031\n\007k" +
+      "eyword\030\001 \001(\tB\010\210\246\035\001\230\246\035d\022\033\n\tentity_id\030\002 \001(" +
+      "\tB\010\230\246\035\030\250\246\035\001\022\025\n\rindustry_code\030\003 \001(\005\"s\n\022Sc" +
+      "rollPastsPerSite\022&\n\013root_domain\030\001 \001(\tB\021\210" +
+      "\246\035\001\220\246\035\002\230\246\035\377\005\250\246\035\001\022\027\n\005count\030\002 \001(\003B\010\210\246\035\001\220\246\035" +
+      "\005:\034\212\265\030\030MySQL.ScrollPastsPerSite\"\376\001\n\033Enti",
+      "tyIdToIndustryRelevance\022\034\n\002id\030\001 \001(\tB\020\210\246\035" +
+      "\001\220\246\035\002\230\246\035\030\250\246\035\001\022#\n\tentity_id\030\002 \001(\tB\020\210\246\035\001\220\246" +
+      "\035\003\230\246\035\030\250\246\035\001\022\035\n\013industry_id\030\003 \001(\005B\010\210\246\035\001\220\246\035" +
+      "\003\022\025\n\003sum\030\004 \001(\001B\010\210\246\035\001\220\246\035\005\022\027\n\005count\030\005 \001(\003B" +
+      "\010\210\246\035\001\220\246\035\005\022&\n\024updated_through_time\030\006 \001(\003B" +
+      "\010\210\246\035\001\220\246\035\005:%\212\265\030!MySQL.EntityIdToIndustryR" +
+      "elevanceB!\n\024com.janknspank.protoB\tCorePr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -20102,7 +21299,7 @@ public final class CoreProto {
           internal_static_Entity_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Entity_descriptor,
-              new java.lang.String[] { "Id", "Keyword", "ShortName", "Type", "Source", "CanonicalId", "Topic", "OldId", "AngelListId", "Importance", "TickerSymbol", });
+              new java.lang.String[] { "Id", "Keyword", "ShortName", "Type", "Source", "CanonicalId", "Topic", "OldId", "AngelListId", "Importance", "TickerSymbol", "RelevancePassComplete", });
           internal_static_Entity_EntityTopic_descriptor =
             internal_static_Entity_descriptor.getNestedTypes().get(0);
           internal_static_Entity_EntityTopic_fieldAccessorTable = new
@@ -20199,6 +21396,12 @@ public final class CoreProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ScrollPastsPerSite_descriptor,
               new java.lang.String[] { "RootDomain", "Count", });
+          internal_static_EntityIdToIndustryRelevance_descriptor =
+            getDescriptor().getMessageTypes().get(15);
+          internal_static_EntityIdToIndustryRelevance_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_EntityIdToIndustryRelevance_descriptor,
+              new java.lang.String[] { "Id", "EntityId", "IndustryId", "Sum", "Count", "UpdatedThroughTime", });
           com.google.protobuf.ExtensionRegistry registry =
             com.google.protobuf.ExtensionRegistry.newInstance();
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -20271,6 +21474,7 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.clientSerialization);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.required);
@@ -20382,6 +21586,23 @@ public final class CoreProto {
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.databaseCollection);

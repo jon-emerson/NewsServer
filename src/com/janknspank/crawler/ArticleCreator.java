@@ -107,7 +107,8 @@ class ArticleCreator {
       Pattern.compile("\\s+(\\||\\|\\|)\\s+[A-Za-z\\s'']{2,25}$"),
       Pattern.compile("\\s+(\\||\\|\\|)\\s+http:\\/\\/[A-Za-z\\.]+$"),
       Pattern.compile("\\s+\\[[A-Z]+\\]$"), // E.g. " [REVIEW]".
-      Pattern.compile("^Daily Report: ")}; // NYTimes Bits Blog daily report.
+      Pattern.compile("^Daily Report: "), // NYTimes Bits Blog daily report.
+      Pattern.compile(" - artnet News$")}; // ArtNet articles.
   private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s|\\xA0)+");
 
   // It's a neat trick that stems of 4 characters are actually better than stems

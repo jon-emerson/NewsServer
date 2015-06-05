@@ -228,6 +228,11 @@ message Entity {
     (string_charset) = LATIN1,
     (client_serialization) = EXCLUDE
   ];
+
+  // Temporary variable while we fill in EntityIdToIndustryRelevance table.
+  optional bool relevance_pass_complete = 12 [
+    (storage_method) = PULL_OUT
+  ];
 }
 
 // A word frequency vector - Could be specific to a document, or could represent
@@ -603,8 +608,7 @@ message EntityIdToIndustryRelevance {
 
   optional int32 industry_id = 3 [
     (required) = YES,
-    (storage_method) = INDEX,
-    (storage_method) = PULL_OUT
+    (storage_method) = INDEX
   ];
 
   // A sum of all the similarity scores for this entity_id against the above
