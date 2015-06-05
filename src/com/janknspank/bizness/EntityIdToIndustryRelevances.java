@@ -73,7 +73,7 @@ public class EntityIdToIndustryRelevances {
     while (true) {
       Iterable<Entity> entities = Database.with(Entity.class).get(
           new QueryOption.WhereNotTrue("relevance_pass_complete"),
-          new QueryOption.AscendingSort("importance"),
+          new QueryOption.DescendingSort("importance"),
           new QueryOption.Limit(200));
       if (Iterables.size(entities) == 0) {
         System.exit(0);
