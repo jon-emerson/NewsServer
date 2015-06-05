@@ -1,8 +1,12 @@
 package com.janknspank.bizness;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.janknspank.classifier.FeatureId;
@@ -15,16 +19,15 @@ import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance;
 
 public class EntityIdToIndustryRelevances {
-  public static void main(String args[]) throws Exception {
-    while (true) {
-      Entity entity = Database.with(Entity.class).getFirst(
-          new QueryOption.WhereNotTrue("relevance_pass_complete"),
-          new QueryOption.DescendingSort("importance"),
-          new QueryOption.AscendingSort("source"),
-          new QueryOption.Limit(20));
-      if (entity == null) {
-        break;
-      }
+  private static class EntityCallable implements Callable<Void> {
+    private final Entity entity;
+
+    public EntityCallable(Entity entity) {
+      this.entity = entity;
+    }
+
+    @Override
+    public Void call() throws Exception {
       Map<Integer, EntityIdToIndustryRelevance.Builder> builderMap = Maps.newHashMap();
       for (Article article : Database.with(Article.class).get(
           new QueryOption.WhereEquals("keyword.entity.id", entity.getId()))) {
@@ -61,6 +64,27 @@ public class EntityIdToIndustryRelevances {
           .setRelevancePassComplete(true)
           .build());
       System.out.print(".");
+      return null;
+    }
+  }
+
+  public static void main(String args[]) throws Exception {
+    ExecutorService executor = Executors.newFixedThreadPool(20);
+    while (true) {
+      Iterable<Entity> entities = Database.with(Entity.class).get(
+          new QueryOption.WhereNotTrue("relevance_pass_complete"),
+          new QueryOption.AscendingSort("importance"),
+          new QueryOption.Limit(200));
+      if (Iterables.size(entities) == 0) {
+        System.exit(0);
+      }
+      executor.invokeAll(ImmutableList.copyOf(
+          Iterables.transform(entities, new Function<Entity, Callable<Void>>() {
+            @Override
+            public Callable<Void> apply(Entity entity) {
+              return new EntityCallable(entity);
+            }
+          })));
     }
   }
 }
