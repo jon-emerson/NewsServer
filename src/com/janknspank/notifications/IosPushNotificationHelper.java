@@ -128,9 +128,7 @@ public class IosPushNotificationHelper {
     Map<String, DeviceRegistration> uniqueDeviceIds = Maps.newHashMap();
     for (DeviceRegistration registration : Database.with(DeviceRegistration.class).get(
         new QueryOption.WhereEquals("user_id", user.getId()),
-        new QueryOption.WhereEquals("device_type", DeviceType.IOS.name()),
-        new QueryOption.DescendingSort("create_time"),
-        new QueryOption.Limit(1))) {
+        new QueryOption.WhereEquals("device_type", DeviceType.IOS.name()))) {
       if (!uniqueDeviceIds.containsKey(registration.getDeviceId())) {
         uniqueDeviceIds.put(registration.getDeviceId(), registration);
       }

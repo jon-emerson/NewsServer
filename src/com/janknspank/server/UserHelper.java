@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,13 +17,17 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.bizness.UserInterests;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseSchemaException;
+import com.janknspank.database.QueryOption;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
+import com.janknspank.proto.NotificationsProto.DeviceType;
+import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestSource;
@@ -40,9 +46,20 @@ public class UserHelper {
   private final Map<String, Article> articleMap;
   private final Iterable<LinkedInContact> linkedInContacts;
   private final Iterable<AddressBookContact> addressBookContacts;
+  private final ListenableFuture<Iterable<Notification>> recentUnclickedPushNotificationsFuture;
 
   public UserHelper(User user) throws DatabaseSchemaException {
     this.user = user;
+
+    // The the # of notifications the user hasn't clicked on in the last 24
+    // hours.
+    recentUnclickedPushNotificationsFuture =
+        Database.with(Notification.class).getFuture(
+            new QueryOption.WhereEquals("user_id", user.getId()),
+            new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
+            new QueryOption.WhereNull("click_time"),
+            new QueryOption.WhereGreaterThan("create_time",
+                System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1)));
 
     // Create a map of the favorite articles.
     favoriteArticleIds = getFavoriteArticleIds();
@@ -165,6 +182,13 @@ public class UserHelper {
     userJson.put("linked_in_contacts", Serializer.toJSON(linkedInContacts));
     if (user.getExperimentCount() > 0) {
       userJson.put("experiments", getExperimentsJsonObject());
+    }
+    try {
+      userJson.put("ios_badge_count", 
+          Iterables.size(recentUnclickedPushNotificationsFuture.get()));
+    } catch (ExecutionException | InterruptedException e) {
+      e.printStackTrace();
+      userJson.put("ios_badge_count", 0);
     }
     return userJson;
   }
