@@ -45,6 +45,7 @@ import com.janknspank.database.QueryOption;
 import com.janknspank.database.Serializer;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Entity;
+import com.janknspank.proto.CoreProto.Entity.Source;
 import com.janknspank.proto.NotificationsProto.Notification;
 import com.janknspank.proto.UserProto.Interest;
 import com.janknspank.proto.UserProto.Interest.InterestType;
@@ -231,6 +232,20 @@ public class GetArticlesServlet extends StandardServlet {
                 .addInterest(Interest.newBuilder()
                     .setType(InterestType.ENTITY)
                     .setEntity(entityBuilder.build())
+                    .build())
+                .build(),
+            new EntityStreamStrategy(),
+            new DiversificationPass.NoOpPass(),
+            excludeUrlIdSet);
+      } else if (!Strings.isNullOrEmpty(entityKeyword)) {
+        return Articles.getStream(
+            user.toBuilder()
+                .clearInterest()
+                .addInterest(Interest.newBuilder()
+                    .setType(InterestType.ENTITY)
+                    .setEntity(Entity.newBuilder()
+                        .setSource(Source.USER)
+                        .setKeyword(entityKeyword))
                     .build())
                 .build(),
             new EntityStreamStrategy(),

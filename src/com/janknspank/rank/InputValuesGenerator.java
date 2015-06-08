@@ -202,8 +202,11 @@ public class InputValuesGenerator {
   public static double relevanceToCompanyEntities(User user, Article article) {
     double value = 0;
     for (Interest interest : UserInterests.getInterests(user)) {
-      if (interest.getType() == InterestType.ENTITY
-          && EntityType.fromValue(interest.getEntity().getType()).isA(EntityType.ORGANIZATION)) {
+      if (interest.getType() != InterestType.ENTITY) {
+        continue;
+      }
+      EntityType entityType = EntityType.fromValue(interest.getEntity().getType());
+      if (entityType != null && entityType.isA(EntityType.ORGANIZATION)) {
         String keyword = interest.getEntity().getKeyword();
         if (article.getTitle().contains(keyword)) {
           value += 0.05;
