@@ -38,9 +38,9 @@ public class ExploreTopics {
       @Nullable Integer queriedIndustryCode) {
     List<ExploreTopic> exploreTopics = Lists.newArrayList();
 
-    // Get the best entities that the user's not already following and that the
-    // user didn't explicitly query for already (e.g. the "Barack Obama" stream
-    // shouldn't suggest exploring Barack Obama).
+    // Get the best company and people entities that the user's not already
+    // following and that the user didn't explicitly query for already (e.g.
+    // the "Barack Obama" stream shouldn't suggest exploring Barack Obama).
     Set<String> userKeywordSet = ArticleSerializer.getUserKeywordSet(user, false, false);
     Map<String, String> keywordToEntityIdMap = Maps.newHashMap();
     Multiset<String> topKeywords = HashMultiset.create();
@@ -50,8 +50,15 @@ public class ExploreTopics {
             && (queriedEntity == null
                 || !queriedEntity.getId().equals(articleKeyword.getEntity().getId()))
             && !userKeywordSet.contains(articleKeyword.getKeyword().toLowerCase())) {
-          keywordToEntityIdMap.put(articleKeyword.getKeyword(), articleKeyword.getEntity().getId());
-          topKeywords.add(articleKeyword.getKeyword());
+          EntityType articleKeywordType =
+              EntityType.fromValue(articleKeyword.getEntity().getType());
+          if (articleKeywordType != null
+              && (articleKeywordType.isA(EntityType.ORGANIZATION)
+                  || articleKeywordType.isA(EntityType.PERSON))) {
+            keywordToEntityIdMap.put(
+                articleKeyword.getKeyword(), articleKeyword.getEntity().getId());
+            topKeywords.add(articleKeyword.getKeyword());
+          }
         }
       }
     }
