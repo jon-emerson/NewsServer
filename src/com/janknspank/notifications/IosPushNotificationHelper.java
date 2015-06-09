@@ -109,14 +109,14 @@ public class IosPushNotificationHelper {
    * reversed engineered by someone, so I haven't seen the documentation for
    * it.  But it's widely used and translated into many languages! :)
    */
-  private static byte[] getRequestBody(Notification notification)
+  private static byte[] getRequestBody(Notification notification, int badgeCount)
       throws IOException {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     baos.write(0); // The command.
     baos.write(0); // The first byte of the deviceId length.
     baos.write(32); // The deviceId length.
     baos.write(hexStringToByteArray(notification.getDeviceId()));
-    String payload = getPayload(notification).toString();
+    String payload = getPayload(notification, badgeCount).toString();
     baos.write(0); // First byte of payload length;
     baos.write(payload.length());
     baos.write(payload.getBytes());
@@ -136,7 +136,8 @@ public class IosPushNotificationHelper {
     return uniqueDeviceIds.values();
   }
 
-  public void sendPushNotification(DeviceRegistration registration, Notification notification)
+  public void sendPushNotification(
+      DeviceRegistration registration, Notification notification, int badgeCount)
       throws DatabaseRequestException, DatabaseSchemaException {
     Database.insert(notification);
 
@@ -158,7 +159,7 @@ public class IosPushNotificationHelper {
 
       // Send the request.
       OutputStream out = socket.getOutputStream();
-      out.write(getRequestBody(notification));
+      out.write(getRequestBody(notification, badgeCount));
       out.flush();
 
       // Read the response.
@@ -205,7 +206,7 @@ public class IosPushNotificationHelper {
    * the IDs of the devices to contact and a data explaining the new sound that
    * was sent.
    */
-  private static JSONObject getPayload(Notification notification) {
+  private static JSONObject getPayload(Notification notification, int badgeCount) {
     // Create JSON object to describe the notification.
     // NOTE(jonemerson): We only have 256 characters to send to APNS, so
     // we can't stuff the whole sound serialization into the request.
@@ -221,7 +222,7 @@ public class IosPushNotificationHelper {
     // Create the aps JSON.
     JSONObject aps = new JSONObject();
     aps.put("alert", alertInner);
-    aps.put("badge", 1);
+    aps.put("badge", badgeCount);
     aps.put("sound", "default");
 
     // In client v1.1, start doing this again: The client needs to be updated to
@@ -271,7 +272,8 @@ public class IosPushNotificationHelper {
       ++count;
       Article article = Database.with(Article.class).getFirst();
       Notification pushNotification = createPushNotification(registration, article);
-      IosPushNotificationHelper.getInstance().sendPushNotification(registration, pushNotification);
+      IosPushNotificationHelper.getInstance().sendPushNotification(
+          registration, pushNotification, 1 /* badgeCount */);
     }
     System.out.println(count + " notifications sent");
   }

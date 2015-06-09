@@ -10,9 +10,13 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import com.google.api.client.util.Lists;
+import com.google.common.base.Function;
 import com.google.common.base.Throwables;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multiset;
+import com.google.common.util.concurrent.Futures;
 import com.janknspank.bizness.Articles;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.bizness.SocialEngagements;
@@ -179,12 +183,55 @@ public class PushDeviceNotifications {
       this.user = user;
     }
 
+    private Future<Integer> getBadgeCountFuture() {
+      try {
+        return Futures.transform(Database.with(Notification.class).getFuture(
+                new QueryOption.WhereEquals("user_id", user.getId()),
+                new QueryOption.WhereEqualsEnum("device_type", DeviceType.IOS),
+                new QueryOption.WhereGreaterThan("create_time",
+                    System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1))),
+            new Function<Iterable<Notification>, Integer>() {
+              @Override
+              public Integer apply(Iterable<Notification> notifications) {
+                // Get the user's last app usage.  Also consider notifiation
+                // clicks as app usages, just to be safe (there's actually a
+                // mathematically possibility these will be greater than
+                // lastAppUsage).
+                long lastAppUsage = getLastAppUseTime(user);
+                for (Notification notification : notifications) {
+                  if (notification.hasClickTime()) {
+                    lastAppUsage = Math.max(lastAppUsage, notification.getClickTime());
+                  }
+                }
+
+                // The badge count is the # of notifications we've sent to a
+                // unique device since the user's last app usage.
+                Multiset<String> unclickedNotificationsPerDevice = HashMultiset.create();
+                for (Notification notification : notifications) {
+                  if (notification.getCreateTime() > lastAppUsage) {
+                    unclickedNotificationsPerDevice.add(notification.getDeviceId());
+                  }
+                }
+
+                int badgeCount = 1;
+                for (String deviceId : unclickedNotificationsPerDevice.elementSet()) {
+                  badgeCount = Math.max(badgeCount, unclickedNotificationsPerDevice.count(deviceId));
+                }
+                return badgeCount;
+              }
+            });
+      } catch (DatabaseSchemaException e) {
+        return Futures.immediateFuture(1);
+      }
+    }
+
     @Override
     public Void call() {
       try {
         Iterable<DeviceRegistration> registrations =
             IosPushNotificationHelper.getDeviceRegistrations(user);
         if (!Iterables.isEmpty(registrations)) {
+          Future<Integer> badgeCountFuture = getBadgeCountFuture();
           Set<String> followedEntityIds = getFollowedEntityIds(user);
           Article bestArticle = getArticleToNotifyAbout(user, followedEntityIds);
           if (bestArticle != null) {
@@ -220,7 +267,7 @@ public class PushDeviceNotifications {
               }
 
               IosPushNotificationHelper.getInstance().sendPushNotification(
-                  registration, pushNotificationBuilder.build());
+                  registration, pushNotificationBuilder.build(), badgeCountFuture.get());
             }
           }
         }
