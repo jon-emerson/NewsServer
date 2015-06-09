@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -79,7 +80,7 @@ public class GetInterestsServlet extends StandardServlet {
     List<FeatureId> featureIds = Lists.newArrayList();
     for (FeatureId featureId : FeatureId.getByType(FeatureType.INDUSTRY)) {
       for (String token : featureId.getTitle().split("[^\\w]")) {
-        if (token.startsWith(searchString)) {
+        if (StringUtils.startsWithIgnoreCase(token, searchString)) {
           featureIds.add(featureId);
           continue;
         }

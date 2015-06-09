@@ -231,7 +231,8 @@ message Entity {
 
   // Temporary variable while we fill in EntityIdToIndustryRelevance table.
   optional bool relevance_pass_complete = 12 [
-    (storage_method) = PULL_OUT
+    (storage_method) = PULL_OUT,
+    (client_serialization) = EXCLUDE
   ];
 }
 
