@@ -226,17 +226,7 @@ public class GetArticlesServlet extends StandardServlet {
         }
         entityBuilder.setType(entity != null ? entity.getType() : entityType);
         entityBuilder.setKeyword(entity != null ? entity.getKeyword() : entityKeyword);
-        return Articles.getStream(
-            user.toBuilder()
-                .clearInterest()
-                .addInterest(Interest.newBuilder()
-                    .setType(InterestType.ENTITY)
-                    .setEntity(entityBuilder.build())
-                    .build())
-                .build(),
-            new EntityStreamStrategy(),
-            new DiversificationPass.NoOpPass(),
-            excludeUrlIdSet);
+        return Articles.getEntityStream(entityBuilder.build(), user, excludeUrlIdSet);
       } else if (!Strings.isNullOrEmpty(entityKeyword)) {
         return Articles.getStream(
             user.toBuilder()

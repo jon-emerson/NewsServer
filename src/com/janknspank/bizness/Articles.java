@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 
 import com.google.api.client.util.Maps;
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -29,9 +30,12 @@ import com.janknspank.proto.ArticleProto.Article.Reason;
 import com.janknspank.proto.ArticleProto.ArticleOrBuilder;
 import com.janknspank.proto.ArticleProto.SocialEngagement;
 import com.janknspank.proto.ArticleProto.SocialEngagement.Site;
+import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.Entity.Source;
+import com.janknspank.proto.CoreProto.EntityIdToIndustryRelevance;
 import com.janknspank.proto.UserProto.AddressBookContact;
 import com.janknspank.proto.UserProto.Interest;
+import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.LinkedInContact;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.rank.Deduper;
@@ -133,7 +137,9 @@ public class Articles {
   }
 
   public static Iterable<Article> getStream(
-      User user, TimeRankingStrategy strategy, DiversificationPass diversificationPass,
+      User user,
+      TimeRankingStrategy strategy,
+      DiversificationPass diversificationPass,
       Set<String> excludeUrlIds)
       throws DatabaseSchemaException, BiznessException {
     return Articles.getRankedArticles(
@@ -153,12 +159,61 @@ public class Articles {
    * with the results of this method.
    */
   public static Iterable<Article> getRankedArticles(
-      User user, Scorer scorer, TimeRankingStrategy strategy,
-      DiversificationPass diversificationPass, int limit, Set<String> excludeUrlIds)
+      User user,
+      Scorer scorer,
+      TimeRankingStrategy strategy,
+      DiversificationPass diversificationPass,
+      int limit,
+      Set<String> excludeUrlIds)
       throws DatabaseSchemaException, BiznessException {
     return getRankedArticles(
         user, scorer, strategy, diversificationPass, limit,
         getArticlesForInterests(user, UserInterests.getInterests(user), limit * 3, excludeUrlIds));
+  }
+
+  public static Iterable<Article> getEntityStream(
+      Entity entity, User user, Set<String> excludeUrlIds)
+      throws DatabaseSchemaException, BiznessException {
+    // As a "hack" to encourage on-topic results for entity queries, so that
+    // Barack Obama gets articles mostly about government, find the top
+    // industries per entity and tell the ranker that the user is interested
+    // in those industries.
+    TopList<Integer, Long> topIndustryCodes = new TopList<>(3);
+    for (EntityIdToIndustryRelevance relevance :
+        Database.with(EntityIdToIndustryRelevance.class).get(
+            new QueryOption.WhereEquals("entity_id", entity.getId()))) {
+      topIndustryCodes.add(relevance.getIndustryId(), relevance.getCount());
+    }
+    List<Interest> topIndustryInterests = Lists.newArrayList();
+    for (Integer industryCode : topIndustryCodes) {
+      topIndustryInterests.add(Interest.newBuilder()
+          .setType(InterestType.INDUSTRY)
+          .setIndustryCode(industryCode)
+          .build());
+    }
+
+    try {
+      return getRankedArticles(
+          user.toBuilder()
+              .clearInterest()
+              .addInterest(Interest.newBuilder()
+                  .setType(InterestType.ENTITY)
+                  .setEntity(entity)
+                  .build())
+              .addAllInterest(topIndustryInterests)
+              .build(),
+          NeuralNetworkScorer.getInstance(),
+          new TimeRankingStrategy.EntityStreamStrategy(),
+          new DiversificationPass.NoOpPass(),
+          NUM_RESULTS,
+          getArticlesForEntityIdsFuture(
+              ImmutableList.of(entity.getId()),
+              Reason.COMPANY,
+              NUM_RESULTS * 5,
+              excludeUrlIds).get());
+    } catch (InterruptedException | ExecutionException e) {
+      throw new BiznessException("Async error: " + e.getMessage(), e);
+    }
   }
 
   /**
@@ -167,7 +222,8 @@ public class Articles {
    * interests.  Supports the main stream and the contacts streams.
    */
   private static Iterable<Article> getRankedArticles(
-      User user, Scorer scorer,
+      User user,
+      Scorer scorer,
       TimeRankingStrategy strategy,
       DiversificationPass diversificationPass,
       int limit,
